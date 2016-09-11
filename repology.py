@@ -21,6 +21,7 @@ import os
 import sys
 import subprocess
 import csv
+from pkg_resources import parse_version
 
 class RepositoryProcessor:
     src = None
@@ -102,6 +103,10 @@ class DebianSourcesProcessor(RepositoryProcessor):
         if pos != -1:
             version = version[0:pos]
 
+        pos = version.find(':')
+        if pos != -1:
+            version = version[pos+1:]
+
         return version
 
     def Parse(self):
@@ -144,6 +149,12 @@ def MixRepositories(repositories):
     return packages
 
 def PrintPackageTable(packages, repositories):
+    print("<html>")
+    print("<head>");
+    print("<html><head><title>Repology</title>")
+    print("<link rel=\"stylesheet\" media=\"screen\" href=\"repology.css\">")
+    print("</head>")
+    print("<body>")
     print("<table>")
     print("<tr><th>Package</th>")
     for repository in repositories:
@@ -153,13 +164,29 @@ def PrintPackageTable(packages, repositories):
         package = packages[pkgname]
         print("<tr>")
         print("<td>%s</td>" % (pkgname))
+
+        bestversion = None
+        for subpackage in package.values():
+            if 'version' in subpackage:
+                if bestversion is None:
+                    bestversion = subpackage['version']
+                else:
+                    if bestversion is None or parse_version(subpackage['version']) > parse_version(bestversion):
+                        bestversion = subpackage['version']
+
         for repository in repositories:
             if repository['name'] in package:
-                print("<td>%s</td>" % package[repository['name']]['version'])
+                version = package[repository['name']]['version']
+                if version == bestversion:
+                    print("<td><span class=\"version good\">%s</span></td>" % version)
+                else:
+                    print("<td><span class=\"version bad\">%s</span></td>" % version)
             else:
                 print("<td>-</td>")
         print("</tr>")
     print("</table>")
+    print("</body>")
+    print("</html>")
 
 def Main():
     for repository in REPOSITORIES:

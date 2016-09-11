@@ -1,0 +1,42 @@
+body {
+	font-family: sans-serif;
+	font-size: 12px;
+	color: #333;
+}
+
+table {
+	border: 0px;
+	border-collapse: collapse;
+	margin: 0px auto;
+}
+
+tr:nth-child(even) {
+	background: #f7f5f3;
+}
+
+tr:nth-child(odd) {
+	background: #ffffff;
+}
+
+th {
+	vertical-align: bottom;
+	border-bottom: 2px solid #ddd;
+	padding: 2em 1em 0.5em 1em;
+}
+
+td {
+	padding: 0.5em;
+	border-bottom: 1px solid #ddd;
+}
+
+.version {
+	padding: 0.2em;
+}
+
+.good {
+	background-color: #80ff80;
+}
+
+.bad {
+	background-color: #ff8080;
+}
