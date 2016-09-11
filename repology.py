@@ -18,87 +18,159 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import sys
 import subprocess
 import csv
 
-def SplitPackageNameVersion(pkgname):
-    hyphen_pos = pkgname.rindex('-')
+class RepositoryProcessor:
+    src = None
+    path = None
 
-    name = pkgname[0 : hyphen_pos]
-    version = pkgname[hyphen_pos + 1 : ]
+    def __init__(self, path, src):
+        self.path = path
+        self.src = src
 
-    return name, version
+    def IsUpToDate(self):
+        return True
 
-def SanitizeFreeBSDVersion(version):
-    pos = version.rfind(',')
-    if pos != -1:
-        version = version[0:pos]
+    def Download(self):
+        pass
 
-    pos = version.rfind('_')
-    if pos != -1:
-        version = version[0:pos]
+    def Parse(self):
+        return []
 
-    return version
+class FreeBSDIndexProcessor(RepositoryProcessor):
+    def IsUpToDate(self):
+        return os.path.isfile(self.path)
 
-def SanitizeDebianVersion(version):
-    pos = version.rfind('-')
-    if pos != -1:
-        version = version[0:pos]
+    def Download(self):
+        subprocess.check_call("wget -qO- %s | bunzip2 > %s" % (self.src, self.path), shell = True)
 
-    return version
+    @staticmethod
+    def SplitPackageNameVersion(pkgname):
+        hyphen_pos = pkgname.rindex('-')
 
-def ParseFreeBSD(path):
-    result = []
+        name = pkgname[0 : hyphen_pos]
+        version = pkgname[hyphen_pos + 1 : ]
 
-    with open(path) as file:
-        reader = csv.reader(file, delimiter='|')
-        for row in reader:
-            name, version = SplitPackageNameVersion(row[0])
-            version = SanitizeFreeBSDVersion(version)
-            comment = row[3]
-            maintainer = row[5]
-            category = row[6].split(' ')[0]
+        return name, version
 
-            result.append({
-                'name': name,
-                'version': version,
-                'category': category,
-                'comment': comment,
-                'maintainer' :maintainer
-            })
+    @staticmethod
+    def SanitizeVersion(version):
+        pos = version.rfind(',')
+        if pos != -1:
+            version = version[0:pos]
 
-    return result
+        pos = version.rfind('_')
+        if pos != -1:
+            version = version[0:pos]
 
-def ParseDebian(path):
-    result = []
+        return version
 
-    with open(path) as file:
-        data = {}
-        for line in file:
-            if line == "\n":
-                result.append(data)
-                data = {}
-            elif line.startswith('Package: '):
-                data['name'] = line[9:-1]
-            elif line.startswith('Version: '):
-                data['version'] = SanitizeDebianVersion(line[9:-1])
-            elif line.startswith('Maintainer: '):
-                data['maintainer'] = line[12:-1]
-            elif line.startswith('Section: '):
-                data['category'] = line[9:-1]
-            elif line.startswith('Homepage: '):
-                data['homepage'] = line[10:-1]
+    def Parse(self):
+        result = []
 
-    return result
+        with open(self.path) as file:
+            reader = csv.reader(file, delimiter='|')
+            for row in reader:
+                name, version = self.SplitPackageNameVersion(row[0])
+                version = self.SanitizeVersion(version)
+                comment = row[3]
+                maintainer = row[5]
+                category = row[6].split(' ')[0]
+
+                result.append({
+                    'name': name,
+                    'version': version,
+                    'category': category,
+                    'comment': comment,
+                    'maintainer' :maintainer
+                })
+
+        return result
+
+class DebianSourcesProcessor(RepositoryProcessor):
+    def IsUpToDate(self):
+        return os.path.isfile(self.path)
+
+    def Download(self):
+        subprocess.check_call("wget -qO- %s | gunzip > %s" % (self.src, self.path), shell = True)
+
+    @staticmethod
+    def SanitizeVersion(version):
+        pos = version.rfind('-')
+        if pos != -1:
+            version = version[0:pos]
+
+        return version
+
+    def Parse(self):
+        result = []
+
+        with open(self.path) as file:
+            data = {}
+            for line in file:
+                if line == "\n":
+                    result.append(data)
+                    data = {}
+                elif line.startswith('Package: '):
+                    data['name'] = line[9:-1]
+                elif line.startswith('Version: '):
+                    data['version'] = self.SanitizeVersion(line[9:-1])
+                elif line.startswith('Maintainer: '):
+                    data['maintainer'] = line[12:-1]
+                elif line.startswith('Section: '):
+                    data['category'] = line[9:-1]
+                elif line.startswith('Homepage: '):
+                    data['homepage'] = line[10:-1]
+
+        return result
+
+REPOSITORIES = [
+    { 'name': "FreeBSD Ports", 'processor': FreeBSDIndexProcessor("freebsd.list", "http://www.FreeBSD.org/ports/INDEX-11.bz2") },
+    { 'name': 'Debian Stable', 'processor': DebianSourcesProcessor("debian.list", "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz") },
+]
+
+def MixRepositories(repositories):
+    packages = {}
+
+    for repository in repositories:
+        for package in repository['processor'].Parse():
+            pkgname = package['name']
+            if not pkgname in packages:
+                packages[pkgname] = {}
+            packages[pkgname][repository['name']] = package
+
+    return packages
+
+def PrintPackageTable(packages, repositories):
+    print("<table>")
+    print("<tr><th>Package</th>")
+    for repository in repositories:
+        print("<th>%s</th>" % repository['name'])
+    print("</tr>")
+    for pkgname in sorted(packages.keys()):
+        package = packages[pkgname]
+        print("<tr>")
+        print("<td>%s</td>" % (pkgname))
+        for repository in repositories:
+            if repository['name'] in package:
+                print("<td>%s</td>" % package[repository['name']]['version'])
+            else:
+                print("<td>-</td>")
+        print("</tr>")
+    print("</table>")
 
 def Main():
-    if not os.path.isfile('freebsd.list'):
-        subprocess.check_call("wget -qO- http://www.FreeBSD.org/ports/INDEX-11.bz2 | bunzip2 > freebsd.list", shell = True)
-    if not os.path.isfile('debian.list'):
-        subprocess.check_call("wget -qO- http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz | gunzip > debian.list", shell = True)
+    for repository in REPOSITORIES:
+        print("===> Downloading for %s" % repository['name'], file=sys.stderr)
+        if repository['processor'].IsUpToDate():
+            print("Up to date", file=sys.stderr)
+        else:
+            repository['processor'].Download()
 
-    print(ParseFreeBSD('freebsd.list'))
-    print(ParseDebian('debian.list'))
+    print("===> Processing", file=sys.stderr)
+    PrintPackageTable(MixRepositories(REPOSITORIES), REPOSITORIES)
 
     return 0
 
