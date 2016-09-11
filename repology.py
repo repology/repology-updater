@@ -99,7 +99,7 @@ class DebianSourcesProcessor(RepositoryProcessor):
 
     @staticmethod
     def SanitizeVersion(version):
-        pos = version.rfind('-')
+        pos = version.find('-')
         if pos != -1:
             version = version[0:pos]
 
@@ -133,7 +133,9 @@ class DebianSourcesProcessor(RepositoryProcessor):
 
 REPOSITORIES = [
     { 'name': "FreeBSD Ports", 'processor': FreeBSDIndexProcessor("freebsd.list", "http://www.FreeBSD.org/ports/INDEX-11.bz2") },
-    { 'name': 'Debian Stable', 'processor': DebianSourcesProcessor("debian.list", "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz") },
+    { 'name': 'Debian Stable', 'processor': DebianSourcesProcessor("debian-stable.list", "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz") },
+    { 'name': 'Debian Tesing', 'processor': DebianSourcesProcessor("debian-testing.list", "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz") },
+    { 'name': 'Debian Unstable', 'processor': DebianSourcesProcessor("debian-unstable.list", "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz") },
 ]
 
 def MixRepositories(repositories):
@@ -148,7 +150,15 @@ def MixRepositories(repositories):
 
     return packages
 
+def Trim(str, maxlength):
+    if len(str) <= maxlength:
+        return str
+
+    return "<span title=\"%s\">%s...</span>" % (str, str[0:maxlength])
+
 def PrintPackageTable(packages, repositories):
+    statistics = {}
+
     print("<html>")
     print("<head>");
     print("<html><head><title>Repology</title>")
@@ -159,11 +169,13 @@ def PrintPackageTable(packages, repositories):
     print("<tr><th>Package</th>")
     for repository in repositories:
         print("<th>%s</th>" % repository['name'])
+        statistics[repository['name']] = { 'total' : 0, 'good' : 0, 'bad' : 0 }
     print("</tr>")
-    for pkgname in sorted(packages.keys()):
+
+    for pkgname in sorted(packages.keys(), key=lambda s: s.lower()):
         package = packages[pkgname]
         print("<tr>")
-        print("<td>%s</td>" % (pkgname))
+        print("<td>%s</td>" % (Trim(pkgname, 50)))
 
         bestversion = None
         for subpackage in package.values():
@@ -177,13 +189,28 @@ def PrintPackageTable(packages, repositories):
         for repository in repositories:
             if repository['name'] in package:
                 version = package[repository['name']]['version']
-                if version == bestversion:
-                    print("<td><span class=\"version good\">%s</span></td>" % version)
+                goodversion = version == bestversion
+                print("<td><span class=\"version %s\">%s</span></td>" % ('good' if goodversion else 'bad', Trim(version, 20)))
+
+                statistics[repository['name']]['total']+=1
+                if goodversion:
+                    statistics[repository['name']]['good']+=1
                 else:
-                    print("<td><span class=\"version bad\">%s</span></td>" % version)
+                    statistics[repository['name']]['bad']+=1
             else:
                 print("<td>-</td>")
         print("</tr>")
+
+    print("<tr>")
+    print("<th>%d</th>" % len(packages))
+    for repository in repositories:
+        print("<th>%d + <span class=\"version good\">%d</span> + <span class=\"version bad\">%d</span></th>" % (
+                statistics[repository['name']]['total'],
+                statistics[repository['name']]['good'],
+                statistics[repository['name']]['bad']
+            ))
+    print("</tr>")
+
     print("</table>")
     print("</body>")
     print("</html>")
