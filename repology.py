@@ -67,7 +67,7 @@ def MixRepositories(repositories):
 
     for repository in repositories:
         for package in repository['processor'].Parse():
-            pkgname = package['name']
+            pkgname = package['name'].lower()
             if not pkgname in packages:
                 packages[pkgname] = {}
             packages[pkgname][repository['name']] = package
