@@ -91,18 +91,21 @@ class FreeBSDIndexProcessor(RepositoryProcessor):
         return result
 
 class DebianSourcesProcessor(RepositoryProcessor):
-    src = None
+    sources = []
     path = None
 
-    def __init__(self, path, src):
+    def __init__(self, path, *sources):
         self.path = path
-        self.src = src
+        self.sources = sources
 
     def IsUpToDate(self):
         return os.path.isfile(self.path)
 
     def Download(self):
-        subprocess.check_call("wget -qO- %s | gunzip > %s" % (self.src, self.path), shell = True)
+        if os.path.isfile(self.path):
+            os.remove(self.path)
+        for source in self.sources:
+            subprocess.check_call("wget -qO- %s | gunzip >> %s" % (source, self.path), shell = True)
 
     @staticmethod
     def SanitizeVersion(version):
@@ -139,10 +142,36 @@ class DebianSourcesProcessor(RepositoryProcessor):
         return result
 
 REPOSITORIES = [
-    { 'name': "FreeBSD Ports", 'processor': FreeBSDIndexProcessor("freebsd.list", "http://www.FreeBSD.org/ports/INDEX-11.bz2") },
-    { 'name': 'Debian Stable', 'processor': DebianSourcesProcessor("debian-stable.list", "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz") },
-    { 'name': 'Debian Tesing', 'processor': DebianSourcesProcessor("debian-testing.list", "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz") },
-    { 'name': 'Debian Unstable', 'processor': DebianSourcesProcessor("debian-unstable.list", "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz") },
+    { 'name': "FreeBSD Ports", 'processor': FreeBSDIndexProcessor("freebsd.list",
+        "http://www.FreeBSD.org/ports/INDEX-11.bz2"
+    ) },
+    #{ 'name': 'Debian Stable', 'processor': DebianSourcesProcessor("debian-stable.list",
+    #    "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
+    #    "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
+    #    "http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz"
+    #) },
+    #{ 'name': 'Debian Tesing', 'processor': DebianSourcesProcessor("debian-testing.list",
+    #    "http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz",
+    #    "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
+    #    "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz"
+    #) },
+    { 'name': 'Debian Unstable', 'processor': DebianSourcesProcessor("debian-unstable.list",
+        "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
+        "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
+        "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz"
+    ) },
+    #{ 'name': 'Ubuntu Xenial', 'processor': DebianSourcesProcessor("ubuntu-xenial.list",
+    #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz",
+    #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
+    #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz",
+    #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz"
+    #) },
+    #{ 'name': 'Ubuntu Yakkety', 'processor': DebianSourcesProcessor("ubuntu-yakkety.list",
+    #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/main/source/Sources.gz",
+    #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz",
+    #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
+    #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz"
+    #) },
 ]
 
 def MixRepositories(repositories):
