@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import subprocess
 
 from .common import RepositoryProcessor
@@ -54,6 +55,10 @@ class DebianSourcesProcessor(RepositoryProcessor):
         pos = version.find('~')
         if pos != -1:
             version = version[0:pos]
+
+        match = re.match("(.*[0-9])[^0-9]*dfsg[0-9]*$", version)
+        if not match is None:
+            version = match.group(1)
 
         return version
 
