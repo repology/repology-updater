@@ -313,10 +313,11 @@ def PrintPackageTable(packages, repositories):
     print("<tr>")
     print("<th>%d</th>" % len(packages))
     for repository in repositories:
-        print("<th>%d + <span class=\"version good\">%d</span> + <span class=\"version bad\">%d</span></th>" % (
+        print("<th>%d<br><span class=\"version good\">%d</span><br><span class=\"version bad\">%d (%.2f%%)</span></th>" % (
                 statistics[repository['name']]['total'],
                 statistics[repository['name']]['good'],
-                statistics[repository['name']]['bad']
+                statistics[repository['name']]['bad'],
+                statistics[repository['name']]['bad'] / statistics[repository['name']]['total'] * 100.0
             ))
     print("</tr>")
 
