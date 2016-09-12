@@ -24,13 +24,6 @@ import csv
 from pkg_resources import parse_version
 
 class RepositoryProcessor:
-    src = None
-    path = None
-
-    def __init__(self, path, src):
-        self.path = path
-        self.src = src
-
     def IsUpToDate(self):
         return True
 
@@ -41,6 +34,13 @@ class RepositoryProcessor:
         return []
 
 class FreeBSDIndexProcessor(RepositoryProcessor):
+    src = None
+    path = None
+
+    def __init__(self, path, src):
+        self.path = path
+        self.src = src
+
     def IsUpToDate(self):
         return os.path.isfile(self.path)
 
@@ -91,6 +91,13 @@ class FreeBSDIndexProcessor(RepositoryProcessor):
         return result
 
 class DebianSourcesProcessor(RepositoryProcessor):
+    src = None
+    path = None
+
+    def __init__(self, path, src):
+        self.path = path
+        self.src = src
+
     def IsUpToDate(self):
         return os.path.isfile(self.path)
 
