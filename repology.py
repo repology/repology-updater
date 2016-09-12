@@ -23,6 +23,14 @@ import subprocess
 import csv
 from pkg_resources import parse_version
 
+def SplitPackageNameVersion(pkgname):
+    hyphen_pos = pkgname.rindex('-')
+
+    name = pkgname[0 : hyphen_pos]
+    version = pkgname[hyphen_pos + 1 : ]
+
+    return name, version
+
 class RepositoryProcessor:
     def IsUpToDate(self):
         return True
@@ -48,15 +56,6 @@ class FreeBSDIndexProcessor(RepositoryProcessor):
         subprocess.check_call("wget -qO- %s | bunzip2 > %s" % (self.src, self.path), shell = True)
 
     @staticmethod
-    def SplitPackageNameVersion(pkgname):
-        hyphen_pos = pkgname.rindex('-')
-
-        name = pkgname[0 : hyphen_pos]
-        version = pkgname[hyphen_pos + 1 : ]
-
-        return name, version
-
-    @staticmethod
     def SanitizeVersion(version):
         pos = version.rfind(',')
         if pos != -1:
@@ -74,7 +73,7 @@ class FreeBSDIndexProcessor(RepositoryProcessor):
         with open(self.path) as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
-                name, version = self.SplitPackageNameVersion(row[0])
+                name, version = SplitPackageNameVersion(row[0])
                 version = self.SanitizeVersion(version)
                 comment = row[3]
                 maintainer = row[5]
