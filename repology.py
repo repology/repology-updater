@@ -113,7 +113,7 @@ def PrintPackageTable(packages, repositories):
         for repository in repositories:
             if repository['name'] in package:
                 version = package[repository['name']]['version']
-                goodversion = version == bestversion
+                goodversion = parse_version(version) == parse_version(bestversion)
                 print("<td><span class=\"version %s\">%s</span></td>" % ('good' if goodversion else 'bad', Trim(version, 20)))
 
                 statistics[repository['name']]['total']+=1
