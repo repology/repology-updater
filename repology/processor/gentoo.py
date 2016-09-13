@@ -70,7 +70,7 @@ class GentooGitProcessor(RepositoryProcessor):
 
                     version = ebuild[len(package)+1:-7]
 
-                    if maxversion is None or (version != "9999" and (maxversion == "9999" or parse_version(version) > parse_version(maxversion))):
+                    if maxversion is None or (not version.endswith("9999") and (maxversion.endswith("9999") or parse_version(version) > parse_version(maxversion))):
                         maxversion = version
                         bestebuild = ebuild
 
