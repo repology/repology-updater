@@ -19,9 +19,9 @@
 
 import os
 import sys
-from pkg_resources import parse_version
 
 from repology.processor import *
+from repology.package import *
 
 REPOSITORIES = [
     { 'name': "FreeBSD Ports", 'processor': FreeBSDIndexProcessor("freebsd.list",
@@ -67,10 +67,10 @@ def MixRepositories(repositories):
 
     for repository in repositories:
         for package in repository['processor'].Parse():
-            pkgname = package['name'].lower()
-            if not pkgname in packages:
-                packages[pkgname] = {}
-            packages[pkgname][repository['name']] = package
+            metaname = package.name.lower()
+            if not metaname in packages:
+                packages[metaname] = MetaPackage()
+            packages[metaname].Add(repository['name'], package)
 
     return packages
 
@@ -96,43 +96,42 @@ def PrintPackageTable(packages, repositories):
         statistics[repository['name']] = { 'total' : 0, 'good' : 0, 'bad' : 0 }
     print("</tr>")
 
-    for pkgname in sorted(packages.keys(), key=lambda s: s.lower()):
-        package = packages[pkgname]
+    for pkgname in sorted(packages.keys()):
+        metapackage = packages[pkgname]
+
         print("<tr>")
         print("<td>%s</td>" % (Trim(pkgname, 50)))
 
-        bestversion = None
-        for subpackage in package.values():
-            if 'version' in subpackage:
-                if bestversion is None:
-                    bestversion = subpackage['version']
-                else:
-                    if bestversion is None or parse_version(subpackage['version']) > parse_version(bestversion):
-                        bestversion = subpackage['version']
+        bestversion, _, _ = metapackage.GetMaxVersion()
 
-        for repository in repositories:
-            if repository['name'] in package:
-                version = package[repository['name']]['version']
-                goodversion = parse_version(version) == parse_version(bestversion)
-                print("<td><span class=\"version %s\">%s</span></td>" % ('good' if goodversion else 'bad', Trim(version, 20)))
+        for repo in repositories:
+            reponame = repo['name']
+            package = metapackage.Get(reponame)
 
-                statistics[repository['name']]['total']+=1
-                if goodversion:
-                    statistics[repository['name']]['good']+=1
-                else:
-                    statistics[repository['name']]['bad']+=1
-            else:
+            if package is None:
                 print("<td>-</td>")
+                continue
+
+            goodversion = VersionCompare(package.version, bestversion) == 0
+            print("<td><span class=\"version %s\">%s</span></td>" % ('good' if goodversion else 'bad', Trim(package.version, 20)))
+
+            statistics[reponame]['total'] += 1
+            if goodversion:
+                statistics[reponame]['good'] += 1
+            else:
+                statistics[reponame]['bad'] += 1
+
         print("</tr>")
 
     print("<tr>")
     print("<th>%d</th>" % len(packages))
-    for repository in repositories:
+    for repo in repositories:
+        reponame = repo['name']
         print("<th>%d<br><span class=\"version good\">%d</span><br><span class=\"version bad\">%d (%.2f%%)</span></th>" % (
-                statistics[repository['name']]['total'],
-                statistics[repository['name']]['good'],
-                statistics[repository['name']]['bad'],
-                statistics[repository['name']]['bad'] / statistics[repository['name']]['total'] * 100.0
+                statistics[reponame]['total'],
+                statistics[reponame]['good'],
+                statistics[reponame]['bad'],
+                statistics[reponame]['bad'] / (1 if statistics[reponame]['total'] == 0 else statistics[reponame]['total']) * 100.0
             ))
     print("</tr>")
 

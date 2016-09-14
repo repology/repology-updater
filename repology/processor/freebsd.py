@@ -21,11 +21,21 @@ import subprocess
 
 from .common import RepositoryProcessor
 from ..util import SplitPackageNameVersion
+from ..package import Package
+
+def SanitizeVersion(version):
+    pos = version.rfind(',')
+    if pos != -1:
+        version = version[0:pos]
+
+    pos = version.rfind('_')
+
+    if pos != -1:
+        version = version[0:pos]
+
+    return version
 
 class FreeBSDIndexProcessor(RepositoryProcessor):
-    src = None
-    path = None
-
     def __init__(self, path, src):
         self.path = path
         self.src = src
@@ -36,36 +46,20 @@ class FreeBSDIndexProcessor(RepositoryProcessor):
     def Download(self):
         subprocess.check_call("wget -qO- %s | bunzip2 > %s" % (self.src, self.path), shell = True)
 
-    @staticmethod
-    def SanitizeVersion(version):
-        pos = version.rfind(',')
-        if pos != -1:
-            version = version[0:pos]
-
-        pos = version.rfind('_')
-        if pos != -1:
-            version = version[0:pos]
-
-        return version
-
     def Parse(self):
         result = []
 
         with open(self.path) as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
-                name, version = SplitPackageNameVersion(row[0])
-                version = self.SanitizeVersion(version)
-                comment = row[3]
-                maintainer = row[5]
-                category = row[6].split(' ')[0]
+                pkg = Package()
 
-                result.append({
-                    'name': name,
-                    'version': version,
-                    'category': category,
-                    'comment': comment,
-                    'maintainer' :maintainer
-                })
+                pkg.name, pkg.fullversion = SplitPackageNameVersion(row[0])
+                pkg.version = SanitizeVersion(pkg.fullversion)
+                pkg.comment = row[3]
+                pkg.maintainer = row[5]
+                pkg.category = row[6].split(' ')[0]
+
+                result.append(pkg)
 
         return result

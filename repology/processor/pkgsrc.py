@@ -22,11 +22,16 @@ import sys
 
 from .common import RepositoryProcessor
 from ..util import SplitPackageNameVersion
+from ..package import Package
+
+def SanitizeVersion(version):
+    match = re.match("(.*)nb[0-9]+", version)
+    if not match is None:
+        version = match.group(1)
+
+    return version
 
 class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
-    src = None
-    path = None
-
     def __init__(self, path, src):
         self.path = path
         self.src = src
@@ -37,30 +42,21 @@ class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
     def Download(self):
         subprocess.check_call("wget -qO- %s | bunzip2 > %s" % (self.src, self.path), shell = True)
 
-    @staticmethod
-    def SanitizeVersion(version):
-        match = re.match("(.*)nb[0-9]+", version)
-        if not match is None:
-            version = match.group(1)
-
-        return version
-
     def Parse(self):
         result = []
 
         with open(self.path) as file:
-            data = {}
+            pkg = Package()
             for line in file:
                 pkgname = line[12:-137]
 
                 if pkgname.find('-') == -1:
                     continue
 
-                name, version = SplitPackageNameVersion(pkgname)
+                pkg.name, pkg.fullversion = SplitPackageNameVersion(pkgname)
+                pkg.version = SanitizeVersion(pkg.fullversion)
 
-                result.append({
-                    'name': name,
-                    'version': self.SanitizeVersion(version),
-                })
+                result.append(pkg)
+                pkg = Package()
 
         return result

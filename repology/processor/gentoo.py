@@ -20,11 +20,21 @@ import subprocess
 from pkg_resources import parse_version
 
 from .common import RepositoryProcessor
+from ..util import VersionCompare
+from ..package import Package
+
+def SanitizeVersion(version):
+    pos = version.find('-')
+    if pos != -1:
+        version = version[0:pos]
+
+    pos = version.find('_')
+    if pos != -1:
+        version = version[0:pos]
+
+    return version
 
 class GentooGitProcessor(RepositoryProcessor):
-    src = None
-    path = None
-
     def __init__(self, path, src):
         self.path = path
         self.src = src
@@ -35,19 +45,8 @@ class GentooGitProcessor(RepositoryProcessor):
     def Download(self):
         if os.path.isdir(self.path):
             subprocess.check_call("cd %s && git pull -q" % (self.path), shell = True)
-        subprocess.check_call("git clone -q --depth=1 %s %s" % (self.src, self.path), shell = True)
-
-    @staticmethod
-    def SanitizeVersion(version):
-        pos = version.find('-')
-        if pos != -1:
-            version = version[0:pos]
-
-        pos = version.find('_')
-        if pos != -1:
-            version = version[0:pos]
-
-        return version
+        else:
+            subprocess.check_call("git clone -q --depth=1 %s %s" % (self.src, self.path), shell = True)
 
     def Parse(self):
         result = []
@@ -56,6 +55,9 @@ class GentooGitProcessor(RepositoryProcessor):
             category_path = os.path.join(self.path, category)
             if not os.path.isdir(category_path):
                 continue
+            if category == 'virtual':
+                continue
+
             for package in os.listdir(category_path):
                 package_path = os.path.join(category_path, package)
                 if not os.path.isdir(package_path):
@@ -70,15 +72,17 @@ class GentooGitProcessor(RepositoryProcessor):
 
                     version = ebuild[len(package)+1:-7]
 
-                    if maxversion is None or (not version.endswith("9999") and (maxversion.endswith("9999") or parse_version(version) > parse_version(maxversion))):
+                    if maxversion is None or (not version.endswith("9999") and (maxversion.endswith("9999") or VersionCompare(version, maxversion) > 0)):
                         maxversion = version
                         bestebuild = ebuild
 
                 if not maxversion is None:
-                    result.append({
-                        'name': package,
-                        'version': self.SanitizeVersion(maxversion),
-                        'category': category,
-                    })
+                    pkg = Package()
+                    pkg.name = package
+                    pkg.fullversion = maxversion
+                    pkg.version = SanitizeVersion(pkg.fullversion)
+                    pkg.category = category
+
+                    result.append(pkg)
 
         return result

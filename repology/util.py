@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from pkg_resources import parse_version
+
 def SplitPackageNameVersion(pkgname):
     hyphen_pos = pkgname.rindex('-')
 
@@ -22,3 +24,11 @@ def SplitPackageNameVersion(pkgname):
     version = pkgname[hyphen_pos + 1 : ]
 
     return name, version
+
+def VersionCompare(v1, v2):
+    pv1, pv2 = parse_version(v1), parse_version(v2)
+    if pv1 < pv2:
+        return -1
+    elif pv1 > pv2:
+        return 1
+    return 0
