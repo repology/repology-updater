@@ -26,7 +26,7 @@ from repology.package import *
 from repology.nametransformer import NameTransformer
 
 REPOSITORIES = [
-    { 'name': "FreeBSD Ports", 'processor': FreeBSDIndexProcessor("freebsd.list",
+    { 'name': "FreeBSD", 'processor': FreeBSDIndexProcessor("freebsd.list",
         "http://www.FreeBSD.org/ports/INDEX-11.bz2"
     ) },
     #{ 'name': 'Debian Stable', 'processor': DebianSourcesProcessor("debian-stable.list",
