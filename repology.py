@@ -84,7 +84,7 @@ def Trim(str, maxlength):
 
     return "<span title=\"%s\">%s...</span>" % (str, str[0:maxlength])
 
-def PrintPackageTable(packages, repositories):
+def PrintPackageTable(packages, repositories, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
     statistics = {}
 
     print("<html>")
@@ -102,6 +102,21 @@ def PrintPackageTable(packages, repositories):
 
     for pkgname in sorted(packages.keys()):
         metapackage = packages[pkgname]
+
+        if maintainer is not None and not metapackage.HasMaintainer(maintainer):
+            continue
+
+        if category is not None and not metapackage.HasCategory(category):
+            continue
+
+        if number > 0 and metapackage.GetNumRepos() < number:
+            continue
+
+        if inrepo is not None and not metapackage.HasRepository(inrepo):
+            continue
+
+        if notinrepo is not None and metapackage.HasRepository(notinrepo):
+            continue
 
         print("<tr>")
         print("<td>%s</td>" % (Trim(pkgname, 50)))
@@ -146,7 +161,12 @@ def PrintPackageTable(packages, repositories):
 def Main():
     parser = ArgumentParser()
     parser.add_argument('-U', '--no-update', action='store_true', help='don\'t update databases')
-    parser.add_argument('-r', '--transform-rules', default='rules.yaml', help='path to name transformation rules yaml')
+    parser.add_argument('-t', '--transform-rules', default='rules.yaml', help='path to name transformation rules yaml')
+    parser.add_argument('-m', '--maintainer', help='filter by maintainer')
+    parser.add_argument('-c', '--category', help='filter by category')
+    parser.add_argument('-n', '--number', help='filter by number of repos')
+    parser.add_argument('-r', '--repository', help='filter by presence in repository')
+    parser.add_argument('-R', '--no-repository', help='filter by absence in repository')
     options = parser.parse_args()
 
     for repository in REPOSITORIES:
@@ -159,7 +179,15 @@ def Main():
     nametrans = NameTransformer(options.transform_rules)
 
     print("===> Processing", file=sys.stderr)
-    PrintPackageTable(MixRepositories(REPOSITORIES, nametrans), REPOSITORIES)
+    PrintPackageTable(
+        MixRepositories(REPOSITORIES, nametrans),
+        REPOSITORIES,
+        options.maintainer,
+        options.category,
+        int(options.number) if options.number is not None else 0,
+        options.repository,
+        options.no_repository
+    )
 
     return 0
 

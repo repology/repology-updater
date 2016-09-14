@@ -65,3 +65,23 @@ class MetaPackage:
                 maintainer.append(package.maintainer)
 
         return maintainers
+
+    def HasCategory(self, category):
+        for package in self.packages.values():
+            if package.category == category:
+                return True
+
+        return False
+
+    def HasCategoryLike(self, category):
+        for package in self.packages.values():
+            if package.category is not None and package.category.find(category) != -1:
+                return True
+
+        return False
+
+    def GetNumRepos(self):
+        return len(self.packages)
+
+    def HasRepository(self, reponame):
+        return reponame in self.packages
