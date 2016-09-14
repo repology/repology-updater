@@ -31,7 +31,7 @@ class FreeBSDIndexProcessor(RepositoryProcessor):
         self.src = src
 
     def IsUpToDate(self):
-        return os.path.isfile(self.path)
+        return False
 
     def Download(self):
         subprocess.check_call("wget -qO- %s | bunzip2 > %s" % (self.src, self.path), shell = True)
