@@ -39,7 +39,9 @@ class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
     def IsUpToDate(self):
         return False
 
-    def Download(self):
+    def Download(self, update = True):
+        if os.path.isfile(self.path) and not update:
+            return
         subprocess.check_call("wget -qO- %s | bunzip2 > %s" % (self.src, self.path), shell = True)
 
     def Parse(self):

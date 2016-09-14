@@ -42,11 +42,11 @@ class GentooGitProcessor(RepositoryProcessor):
     def IsUpToDate(self):
         return False
 
-    def Download(self):
-        if os.path.isdir(self.path):
-            subprocess.check_call("cd %s && git pull -q" % (self.path), shell = True)
-        else:
+    def Download(self, update = True):
+        if not os.path.isdir(self.path):
             subprocess.check_call("git clone -q --depth=1 %s %s" % (self.src, self.path), shell = True)
+        elif update:
+            subprocess.check_call("cd %s && git pull -q" % (self.path), shell = True)
 
     def Parse(self):
         result = []

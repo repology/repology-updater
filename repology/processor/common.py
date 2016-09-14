@@ -19,7 +19,7 @@ class RepositoryProcessor:
     def IsUpToDate(self):
         return True
 
-    def Download(self):
+    def Download(self, update = True):
         pass
 
     def Parse(self):

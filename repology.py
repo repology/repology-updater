@@ -19,6 +19,7 @@
 
 import os
 import sys
+from argparse import ArgumentParser
 
 from repology.processor import *
 from repology.package import *
@@ -140,12 +141,16 @@ def PrintPackageTable(packages, repositories):
     print("</html>")
 
 def Main():
+    parser = ArgumentParser()
+    parser.add_argument('-U', '--no-update', action='store_true', help='don\'t update databases')
+    options = parser.parse_args()
+
     for repository in REPOSITORIES:
         print("===> Downloading for %s" % repository['name'], file=sys.stderr)
         if repository['processor'].IsUpToDate():
             print("Up to date", file=sys.stderr)
         else:
-            repository['processor'].Download()
+            repository['processor'].Download(not options.no_update)
 
     print("===> Processing", file=sys.stderr)
     PrintPackageTable(MixRepositories(REPOSITORIES), REPOSITORIES)

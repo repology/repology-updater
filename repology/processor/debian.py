@@ -53,8 +53,10 @@ class DebianSourcesProcessor(RepositoryProcessor):
     def IsUpToDate(self):
         return False
 
-    def Download(self):
+    def Download(self, update = True):
         if os.path.isfile(self.path):
+            if not update:
+                return
             os.remove(self.path)
         for source in self.sources:
             subprocess.check_call("wget -qO- %s | gunzip >> %s" % (source, self.path), shell = True)
