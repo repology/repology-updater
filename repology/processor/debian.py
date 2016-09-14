@@ -65,7 +65,7 @@ class DebianSourcesProcessor(RepositoryProcessor):
     def Parse(self):
         result = []
 
-        with open(self.path) as file:
+        with open(self.path, encoding='utf-8') as file:
             data = {}
             for line in file:
                 if line == "\n":
