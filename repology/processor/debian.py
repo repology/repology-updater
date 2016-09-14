@@ -30,7 +30,7 @@ class DebianSourcesProcessor(RepositoryProcessor):
         self.sources = sources
 
     def IsUpToDate(self):
-        return os.path.isfile(self.path)
+        return False
 
     def Download(self):
         if os.path.isfile(self.path):

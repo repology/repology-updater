@@ -30,7 +30,7 @@ class GentooGitProcessor(RepositoryProcessor):
         self.src = src
 
     def IsUpToDate(self):
-        return os.path.isdir(self.path)
+        return False
 
     def Download(self):
         if os.path.isdir(self.path):
