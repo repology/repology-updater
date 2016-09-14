@@ -40,6 +40,9 @@ class FreeBSDIndexProcessor(RepositoryProcessor):
         self.path = path
         self.src = src
 
+    def GetRepoType(self):
+        return 'freebsd'
+
     def IsUpToDate(self):
         return False
 

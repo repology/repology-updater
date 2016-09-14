@@ -36,6 +36,9 @@ class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
         self.path = path
         self.src = src
 
+    def GetRepoType(self):
+        return 'pkgsrc'
+
     def IsUpToDate(self):
         return False
 

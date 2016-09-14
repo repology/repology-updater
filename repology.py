@@ -23,6 +23,7 @@ from argparse import ArgumentParser
 
 from repology.processor import *
 from repology.package import *
+from repology.nametransformer import NameTransformer
 
 REPOSITORIES = [
     { 'name': "FreeBSD Ports", 'processor': FreeBSDIndexProcessor("freebsd.list",
@@ -63,12 +64,14 @@ REPOSITORIES = [
     ) },
 ]
 
-def MixRepositories(repositories):
+def MixRepositories(repositories, nametrans):
     packages = {}
 
     for repository in repositories:
         for package in repository['processor'].Parse():
-            metaname = package.name.lower()
+            metaname = nametrans.TransformName(package, repository['processor'].GetRepoType())
+            if metaname is None:
+                continue
             if not metaname in packages:
                 packages[metaname] = MetaPackage()
             packages[metaname].Add(repository['name'], package)
@@ -143,6 +146,7 @@ def PrintPackageTable(packages, repositories):
 def Main():
     parser = ArgumentParser()
     parser.add_argument('-U', '--no-update', action='store_true', help='don\'t update databases')
+    parser.add_argument('-r', '--transform-rules', default='rules.yaml', help='path to name transformation rules yaml')
     options = parser.parse_args()
 
     for repository in REPOSITORIES:
@@ -152,8 +156,10 @@ def Main():
         else:
             repository['processor'].Download(not options.no_update)
 
+    nametrans = NameTransformer(options.transform_rules)
+
     print("===> Processing", file=sys.stderr)
-    PrintPackageTable(MixRepositories(REPOSITORIES), REPOSITORIES)
+    PrintPackageTable(MixRepositories(REPOSITORIES, nametrans), REPOSITORIES)
 
     return 0
 

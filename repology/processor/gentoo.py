@@ -39,6 +39,9 @@ class GentooGitProcessor(RepositoryProcessor):
         self.path = path
         self.src = src
 
+    def GetRepoType(self):
+        return 'gentoo'
+
     def IsUpToDate(self):
         return False
 

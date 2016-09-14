@@ -50,6 +50,9 @@ class DebianSourcesProcessor(RepositoryProcessor):
         self.path = path
         self.sources = sources
 
+    def GetRepoType(self):
+        return 'debian'
+
     def IsUpToDate(self):
         return False
 
