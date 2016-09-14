@@ -39,7 +39,7 @@ def SanitizeVersion(version):
     if pos != -1:
         version = version[0:pos]
 
-    match = re.match("(.*[0-9])[^0-9]*dfsg[0-9]*$", version)
+    match = re.match("(.*[0-9])[^0-9]*dfsg\\.?[0-9]*$", version)
     if not match is None:
         version = match.group(1)
 
