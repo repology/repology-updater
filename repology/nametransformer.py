@@ -84,6 +84,9 @@ class NameTransformer:
             else:
                 return MatchResult.match, self.dollar0.sub(package.name, rule['setname'])
 
+        if 'pass' in rule:
+            return MatchResult.match, package.name
+
         return MatchResult.none, None
 
     def TransformName(self, package, repotype):
