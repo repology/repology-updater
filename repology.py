@@ -167,6 +167,7 @@ def Main():
     parser.add_argument('-n', '--number', help='filter by number of repos')
     parser.add_argument('-r', '--repository', help='filter by presence in repository')
     parser.add_argument('-R', '--no-repository', help='filter by absence in repository')
+    parser.add_argument('-x', '--no-output', action='store_true', help='do not output anything')
     options = parser.parse_args()
 
     for repository in REPOSITORIES:
@@ -179,15 +180,19 @@ def Main():
     nametrans = NameTransformer(options.transform_rules)
 
     print("===> Processing", file=sys.stderr)
-    PrintPackageTable(
-        MixRepositories(REPOSITORIES, nametrans),
-        REPOSITORIES,
-        options.maintainer,
-        options.category,
-        int(options.number) if options.number is not None else 0,
-        options.repository,
-        options.no_repository
-    )
+    packages = MixRepositories(REPOSITORIES, nametrans)
+
+    if not options.no_output:
+        print("===> Producing output", file=sys.stderr)
+        PrintPackageTable(
+            packages,
+            REPOSITORIES,
+            options.maintainer,
+            options.category,
+            int(options.number) if options.number is not None else 0,
+            options.repository,
+            options.no_repository
+        )
 
     return 0
 
