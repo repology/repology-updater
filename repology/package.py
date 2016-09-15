@@ -35,7 +35,9 @@ class MetaPackage:
         pass
 
     def Add(self, reponame, package):
-        self.packages[reponame] = package
+        if not reponame in self.packages:
+            self.packages[reponame] = []
+        self.packages[reponame].append(package)
 
     def Get(self, reponame):
         if reponame in self.packages:
@@ -44,39 +46,58 @@ class MetaPackage:
 
     def GetMaxVersion(self):
         bestversion, bestrepo, bestpackage = None, None, None
-        for reponame, package in self.packages.items():
-            if package.version is not None:
-                if bestversion is None or VersionCompare(package.version, bestversion) > 0:
-                    bestversion, bestrepo, bestpackage = package.version, reponame, package
+        for reponame, packagelist in self.packages.items():
+            for package in packagelist:
+                if package.version is not None:
+                    if bestversion is None or VersionCompare(package.version, bestversion) > 0:
+                        bestversion, bestrepo, bestpackage = package.version, reponame, package
 
         return bestversion, bestrepo, bestpackage
 
+    def GetVersionRangeForRepo(self, reponame):
+        if not reponame in self.packages:
+            return None, None
+
+        minversion, maxversion= None, None
+        for package in self.packages[reponame]:
+            if package.version is not None:
+                if maxversion is None or VersionCompare(package.version, maxversion) > 0:
+                    maxversion = package.version
+                if minversion is None or VersionCompare(package.version, minversion) < 0:
+                    minversion = package.version
+
+        return minversion, maxversion
+
     def HasMaintainer(self, maintainer):
-        for package in self.packages.values():
-            if package.maintainer == maintainer:
-                return True
+        for packagelist in self.packages.values():
+            for package in packagelist:
+                if package.maintainer == maintainer:
+                    return True
 
         return False
 
     def GetMaintainers(self):
         maintainers = []
-        for package in self.packages.values():
-            if package.maintainer is not None:
-                maintainer.append(package.maintainer)
+        for packagelist in self.packages.values():
+            for package in packagelist:
+                if package.maintainer is not None:
+                    maintainer.append(package.maintainer)
 
         return maintainers
 
     def HasCategory(self, category):
-        for package in self.packages.values():
-            if package.category == category:
-                return True
+        for packagelist in self.packages.values():
+            for package in packagelist:
+                if package.category == category:
+                    return True
 
         return False
 
     def HasCategoryLike(self, category):
-        for package in self.packages.values():
-            if package.category is not None and package.category.find(category) != -1:
-                return True
+        for packagelist in self.packages.values():
+            for package in packagelist:
+                if package.category is not None and package.category.find(category) != -1:
+                    return True
 
         return False
 

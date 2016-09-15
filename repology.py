@@ -97,7 +97,7 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
     print("<tr><th>Package</th>")
     for repository in repositories:
         print("<th>%s</th>" % repository['name'])
-        statistics[repository['name']] = { 'total' : 0, 'good' : 0, 'bad' : 0 }
+        statistics[repository['name']] = { 'total': 0, 'good': 0, 'multi': 0, 'bad': 0 }
     print("</tr>")
 
     for pkgname in sorted(packages.keys()):
@@ -125,20 +125,31 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
 
         for repo in repositories:
             reponame = repo['name']
-            package = metapackage.Get(reponame)
 
-            if package is None:
+            # packages for this repository
+            repopackages = metapackage.Get(reponame)
+            if repopackages is None:
                 print("<td>-</td>")
                 continue
 
-            goodversion = VersionCompare(package.version, bestversion) == 0
-            print("<td><span class=\"version %s\">%s</span></td>" % ('good' if goodversion else 'bad', Trim(package.version, 20)))
+            # determine versions
+            repominversion, repomaxversion = metapackage.GetVersionRangeForRepo(reponame)
+
+            versionclass = 'bad'
+
+            if VersionCompare(repomaxversion, bestversion) == 0:
+                if VersionCompare(repominversion, bestversion) == 0:
+                    versionclass = 'good'
+                else:
+                    versionclass = 'multi'
+
+            print("<td><span class=\"version %s\">%s</span>" % (versionclass, Trim(repomaxversion, 20)))
+            if (len(repopackages) > 1):
+                print(" (%d)" % len(repopackages));
+            print("</td>");
 
             statistics[reponame]['total'] += 1
-            if goodversion:
-                statistics[reponame]['good'] += 1
-            else:
-                statistics[reponame]['bad'] += 1
+            statistics[reponame][versionclass] += 1
 
         print("</tr>")
 
@@ -146,9 +157,10 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
     print("<th>%d</th>" % len(packages))
     for repo in repositories:
         reponame = repo['name']
-        print("<th>%d<br><span class=\"version good\">%d</span><br><span class=\"version bad\">%d (%.2f%%)</span></th>" % (
+        print("<th>%d<br><span class=\"version good\">%d</span><br><span class=\"version multi\">%d</span><br><span class=\"version bad\">%d (%.2f%%)</span></th>" % (
                 statistics[reponame]['total'],
                 statistics[reponame]['good'],
+                statistics[reponame]['multi'],
                 statistics[reponame]['bad'],
                 statistics[reponame]['bad'] / (1 if statistics[reponame]['total'] == 0 else statistics[reponame]['total']) * 100.0
             ))
