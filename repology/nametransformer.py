@@ -50,18 +50,13 @@ class NameTransformer:
                 return False
 
         # match name patterns
-        if 'pattern' in rule:
-            patmatch = False
-            patterns = rule['pattern']
-            if not isinstance(patterns, list):
-                patterns = [ patterns ]
-            for pattern in patterns:
-                match = re.match(pattern, package.name)
-                if match:
-                    patmatch = True
-                    break
+        if 'name' in rule:
+            if package.name != rule['name']:
+                return False
 
-            if not patmatch:
+        # match name patterns
+        if 'namepat' in rule:
+            if not re.match(rule['namepat'], package.name):
                 return False
 
         return True
@@ -73,14 +68,14 @@ class NameTransformer:
         if 'ignore' in rule:
             return MatchResult.ignore, None
 
-        if 'replace' in rule:
+        if 'setname' in rule:
             match = None
-            if 'pattern' in rule:
-                match = re.match(rule['pattern'], package.name)
+            if 'namepat' in rule:
+                match = re.match(rule['namepat'], package.name)
             if match:
-                return MatchResult.match, re.sub("\$([0-9]+)", lambda x: match.group(int(x.group(1))), rule['replace'])
+                return MatchResult.match, re.sub("\$([0-9]+)", lambda x: match.group(int(x.group(1))), rule['setname'])
             else:
-                return MatchResult.match, re.sub("\$0", package.name, rule['replace'])
+                return MatchResult.match, re.sub("\$0", package.name, rule['setname'])
 
         return MatchResult.none, None
 

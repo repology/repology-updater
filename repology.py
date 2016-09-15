@@ -106,7 +106,7 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
         if maintainer is not None and not metapackage.HasMaintainer(maintainer):
             continue
 
-        if category is not None and not metapackage.HasCategory(category):
+        if category is not None and not metapackage.HasCategoryLike(category):
             continue
 
         if number > 0 and metapackage.GetNumRepos() < number:

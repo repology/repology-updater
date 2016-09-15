@@ -1,214 +1,246 @@
 # FreeBSD: ignore localized categories
 - repo: freebsd
-  pattern:
-    - ar-.*
-    - zh-.*
-    - fr-.*
-    - de-.*
-    - iw-.*
-    - hu-.*
-    - ja-.*
-    - ko-.*
-    - pl-.*
-    - pt-.*
-    - ru-.*
-    - uk-.*
-    - vi-.*
+  namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*"
   ignore: yes
 
 # Perl modules
 - repo:
     - freebsd
     - pkgsrc
-  pattern: "p5-(.*)"
-  replace: "perl:$1"
+  namepat: "p5-(.*)"
+  setname: "perl:$1"
 - repo: debian
-  pattern: "lib(.*)-perl"
-  replace: "perl:$1"
+  namepat: "lib(.*)-perl"
+  setname: "perl:$1"
 - repo: gentoo
   category: dev-perl
-  replace: "perl:$0"
+  setname: "perl:$0"
 
 # Ruby
 - repo: debian
-  pattern: "ruby-(.*)"
-  replace: "ruby:$1"
+  namepat: "ruby-(.*)"
+  setname: "ruby:$1"
 - repo: pkgsrc
-  pattern: "ruby[0-9][0-9]-(.*)"
-  replace: "ruby:$1"
+  namepat: "ruby[0-9][0-9]-(.*)"
+  setname: "ruby:$1"
 - repo: freebsd
-  pattern: "rubygem-(.*)"
-  replace: "ruby:$1"
+  namepat: "rubygem-(.*)"
+  setname: "ruby:$1"
 - repo: freebsd
-  pattern: "ruby[0-9]+-(.*)"
-  replace: "ruby:$1"
+  namepat: "ruby[0-9]+-(.*)"
+  setname: "ruby:$1"
 - repo: gentoo
   category: dev-ruby
-  replace: "ruby:$0"
+  setname: "ruby:$0"
 
 # Tryton (wtf is that); needs to be before python
 - repo: pkgsrc
-  pattern: "py[0-9][0-9]-trytond-(.*)"
-  replace: "tryton:$1"
+  namepat: "py[0-9][0-9]-trytond-(.*)"
+  setname: "tryton:$1"
 - repo: freebsd
-  pattern: "trytond28_(.*)"
-  replace: "tryton:$1"
+  namepat: "trytond28_(.*)"
+  setname: "tryton:$1"
 - repo: debian
-  pattern: "tryton-modules-(.*)"
-  replace: "tryton:$1"
+  namepat: "tryton-modules-(.*)"
+  setname: "tryton:$1"
 
 # Python modules
 - repo:
     - freebsd
     - pkgsrc
-  pattern: "py(?:27|34|35)-(.*)" # may merge modules from different version into single entry, which is good
-  replace: "python:$1"
+  namepat: "py(?:27|34|35)-(.*)" # may merge modules from different version into single entry, which is good
+  setname: "python:$1"
 - repo: debian
-  pattern: "python-(.*)"
-  replace: "python:$1"
+  namepat: "python-(.*)"
+  setname: "python:$1"
 - repo: gentoo
   category: dev-python
-  replace: "python:$0"
+  setname: "python:$0"
 
 # R libs
 - repo: freebsd
-  pattern: "R-cran-(.*)"
-  replace: "r:$1"
+  namepat: "R-cran-(.*)"
+  setname: "r:$1"
 - repo: debian
-  pattern: "r-cran-(.*)"
-  replace: "r:$1"
+  namepat: "r-cran-(.*)"
+  setname: "r:$1"
 - repo: pkgsrc
-  pattern: "R-(.*)"
-  replace: "r:$1"
+  namepat: "R-(.*)"
+  setname: "r:$1"
 
 # ROS
 - repo: gentoo
   category: dev-ros
-  replace: "ros:$0"
+  setname: "ros:$0"
 - repo: debian
-  pattern: "ros-(.*)"
-  replace: "ros:$1"
+  namepat: "ros-(.*)"
+  setname: "ros:$1"
 
 # VDR
 - repo:
     - freebsd
     - debian
-  pattern: "vdr-plugin-(.*)"
-  replace: "vdr:$1"
+  namepat: "vdr-plugin-(.*)"
+  setname: "vdr:$1"
 - repo: gentoo
-  pattern: "vdr-(.*)"
-  replace: "vdr:$1"
+  namepat: "vdr-(.*)"
+  setname: "vdr:$1"
 
 # Haskell
 - repo: debian
-  pattern: "haskell-(.*)"
-  replace: "haskell:$1"
+  namepat: "haskell-(.*)"
+  setname: "haskell:$1"
 - repo:
     - freebsd
     - pkgsrc
-  pattern: "hs-(.*)"
-  replace: "haskell:$1"
+  namepat: "hs-(.*)"
+  setname: "haskell:$1"
 - repo: gentoo
   category: dev-haskell
-  replace: "haskell:$0"
+  setname: "haskell:$0"
 
 # lua
 - repo:
     - freebsd
     - pkgsrc
-  pattern: "lua[0-9][0-9]-(.*)"
-  replace: "lua:$1"
+  namepat: "lua[0-9][0-9]-(.*)"
+  setname: "lua:$1"
 - repo: debian
-  pattern: "lua-(.*)"
-  replace: "lua:$1"
+  namepat: "lua-(.*)"
+  setname: "lua:$1"
 - repo: gentoo
   category: dev-lua
-  replace: "lua:$0"
+  setname: "lua:$0"
 
 # octave
 - repo: freebsd
-  pattern: "octave-forge-(.*)"
-  replace: "octave:$1"
+  namepat: "octave-forge-(.*)"
+  setname: "octave:$1"
 - repo: debian
-  pattern: "octave-(.*)"
-  replace: "octave:$1"
+  namepat: "octave-(.*)"
+  setname: "octave:$1"
 
 # xorg drivers
 - repo:
     - freebsd
     - gentoo
     - pkgsrc
-  pattern: "xf86-((?:input|video)-.*)"
-  replace: "xorg:$1"
+  namepat: "xf86-((?:input|video)-.*)"
+  setname: "xorg:$1"
 - repo: debian
-  pattern: "xserver-xorg-((?:input|video)-.*)"
-  replace: "xorg:$1"
+  namepat: "xserver-xorg-((?:input|video)-.*)"
+  setname: "xorg:$1"
 
 # php
 - repo: gentoo
   category: dev-php
-  pattern: "(?:PEAR-|pecl-|php-)+(.*?)"
-  replace: "php:$1"
+  namepat: "(?:PEAR-|pecl-|php-)+(.*?)"
+  setname: "php:$1"
 - repo: gentoo
   category: dev-php
-  replace: "php:$0"
+  setname: "php:$0"
 - repo: debian
-  pattern: "php-(.*)"
-  replace: "php:$1"
+  namepat: "php-(.*)"
+  setname: "php:$1"
 - repo:
     - freebsd
     - pkgsrc
-  pattern: "(?:pear|pecl)-(.*)"
-  replace: "php:$1"
+  namepat: "(?:pear|pecl)-(.*)"
+  setname: "php:$1"
 - repo:
     - freebsd
     - pkgsrc
-  pattern: "php[0-9]+-(?:pear|pecl)-(.*)"
-  replace: "php:$1"
+  namepat: "php[0-9]+-(?:pear|pecl)-(.*)"
+  setname: "php:$1"
 - repo:
     - freebsd
     - pkgsrc
-  pattern: "php([0-9]*)-(.*)"
-  replace: "php$1:$2"
+  namepat: "php([0-9]*)-(.*)"
+  setname: "php$1:$2"
 
 # gstreamer plugins
 - repo:
     - gentoo
     - debian
-  pattern: "gst-plugins-(.*)"
-  replace: "gstreamer1:$1"
+  namepat: "gst-plugins-(.*)"
+  setname: "gstreamer1:$1"
 - repo: pkgsrc
-  pattern: "gst-plugins0.10-(.*)"
-  replace: "gstreamer0:$1"
+  namepat: "gst-plugins0.10-(.*)"
+  setname: "gstreamer0:$1"
 - repo: pkgsrc
-  pattern: "gst-plugins1-(.*)"
-  replace: "gstreamer1:$1"
+  namepat: "gst-plugins1-(.*)"
+  setname: "gstreamer1:$1"
 - repo: freebsd
-  pattern: "gstreamer-plugins-(.*)"
-  replace: "gstreamer0:$1"
+  namepat: "gstreamer-plugins-(.*)"
+  setname: "gstreamer0:$1"
 - repo: freebsd
-  pattern: "gstreamer1-plugins-(.*)"
-  replace: "gstreamer1:$1"
+  namepat: "gstreamer1-plugins-(.*)"
+  setname: "gstreamer1:$1"
 
 # xfonts (strange version mismatches)
 #- repo: debian
-#  pattern: "xfonts-(.*)"
-#  replace: "xfonts:$1"
+#  namepat: "xfonts-(.*)"
+#  setname: "xfonts:$1"
 #- repo: freebsd
-#  pattern: "xorg-fonts-(.*)"
-#  replace: "xfonts:$1"
+#  namepat: "xorg-fonts-(.*)"
+#  setname: "xfonts:$1"
 
 # smaller merges, no need for prefix
 - repo: freebsd
-  pattern: "(squirrelmail-.*)-plugin"
-  replace: "$1"
+  namepat: "(squirrelmail-.*)-plugin"
+  setname: "$1"
 - repo: freebsd
-  pattern: "virtualbox-ose-(.*)"
-  replace: "virtualbox-$1"
+  namepat: "virtualbox-ose-(.*)"
+  setname: "virtualbox-$1"
 - repo: debian
-  pattern: "x11proto-(.*)"
-  replace: "$1proto"
+  namepat: "x11proto-(.*)"
+  setname: "$1proto"
 
 # TODO
 # - texlive
 # - apache modules
+
+# Simple rules for single packages (XXX: move to the top?)
+- { repo: debian, name: billard-gl, setname: billardgl }
+- { repo: debian, name: blockout2, setname: blockout }
+- { repo: debian, name: extremetuxracer, setname: extreme-tuxracer }
+- { repo: debian, name: gargoyle-free, setname: gargoyle }
+- { repo: debian, name: hannah, setname: help-hannahs-horse } # recheck
+- { repo: debian, name: libphysfs, setname: physfs }
+- { repo: freebsd, name: abuse_sdl, setname: abuse }
+- { repo: freebsd, name: armagetron, setname: armagetronad }
+- { repo: freebsd, name: corsixth, setname: corsix-th }
+- { repo: freebsd, name: el, setname: eternal-lands }
+- { repo: freebsd, name: el-data, setname: eternal-lands-data }
+- { repo: freebsd, name: endgame-singularity, setname: singularity }
+- { repo: freebsd, name: endgame-singularity-music, setname: singularity-music } # for consistency
+- { repo: freebsd, name: etracer, setname: extreme-tuxracer }
+- { repo: freebsd, name: fotaq, setname: flight-of-the-amazon-queen }
+- { repo: freebsd, name: ja2, setname: ja2-stracciatella }
+- { repo: freebsd, name: moonlander, setname: moon-lander }
+- { repo: freebsd, name: osg, setname: openscenegraph }
+- { repo: freebsd, name: slashem-tty, setname: slashem }
+- { repo: freebsd, name: stransball2, setname: supertransball2 }
+- { repo: freebsd, name: supertux, setname: supertux1 } # ???
+- { repo: freebsd, name: supertux2, setname: supertux }
+- { repo: freebsd, name: tetrinet-x, setname: tetrinetx }
+- { repo: gentoo, name: bub-n-bros, setname: bubbros } # XXX: recheck
+- { repo: gentoo, name: fish-fillets, setname: fillets-ng }
+- { repo: gentoo, name: garden, setname: garden-of-coloured-lights } # XXX: recheck
+- { repo: gentoo, name: geki2-KXL, setname: geki2 } # XXX: recheck
+- { repo: gentoo, name: geki3-KXL, setname: geki3 } # XXX: recheck
+- { repo: gentoo, name: gl117, setname: gl-117 }
+- { repo: gentoo, name: sdl-sopwith, setname: sopwith }
+- { repo: gentoo, name: seven-kingdoms, setname: 7kaa }
+- { repo: gentoo, name: spacearyarya-kxl, setname: spacearyarya } # XXX: recheck
+- { repo: gentoo, name: stone-soup, setname: stonesoup }
+- { repo: gentoo, name: tintin, setname: tintin++ }
+- { repo: gentoo, name: trigger, setname: trigger-rally }
+- { repo: gentoo, name: ufo-ai, setname: ufoai }
+- { repo: [ freebsd, gentoo ], name: kiki, setname: kiki-the-nano-bot }
+
+# TODO
+# - crimson vs. crimson-fields
+# - critterding version
+# - pkgsrc: enigma
+#
