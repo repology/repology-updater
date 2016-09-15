@@ -28,14 +28,22 @@ class MatchResult(Enum):
 
 class NameTransformer:
     def __init__(self, rulespath):
+        self.dollar0 = re.compile("\$0")
+        self.dollarN = re.compile("\$([0-9]+)")
+
         with open(rulespath) as file:
             self.rules = yaml.safe_load(file)
 
-        # some fields are always lists
         for rule in self.rules:
-            for field in ('repo', 'category'):
+            # convert some fields to lists
+            for field in ['repo', 'category']:
                 if field in rule and not isinstance(rule[field], list):
                     rule[field] = [ rule[field] ]
+
+            # compile regexps
+            for field in ['namepat']:
+                if field in rule:
+                    rule[field] = re.compile(rule[field])
 
     def IsRuleMatching(self, rule, package):
         # match categories
@@ -56,7 +64,7 @@ class NameTransformer:
 
         # match name patterns
         if 'namepat' in rule:
-            if not re.match(rule['namepat'], package.name):
+            if not rule['namepat'].match(package.name):
                 return False
 
         return True
@@ -71,11 +79,11 @@ class NameTransformer:
         if 'setname' in rule:
             match = None
             if 'namepat' in rule:
-                match = re.match(rule['namepat'], package.name)
+                match = rule['namepat'].match(package.name)
             if match:
-                return MatchResult.match, re.sub("\$([0-9]+)", lambda x: match.group(int(x.group(1))), rule['setname'])
+                return MatchResult.match, self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
             else:
-                return MatchResult.match, re.sub("\$0", package.name, rule['setname'])
+                return MatchResult.match, self.dollar0.sub(package.name, rule['setname'])
 
         return MatchResult.none, None
 
