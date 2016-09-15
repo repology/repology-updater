@@ -240,6 +240,7 @@
 - { repo: [ freebsd, gentoo ], name: kiki, setname: kiki-the-nano-bot }
 
 # TODO
+# - ace vs. ace-of-penguins
 # - crimson vs. crimson-fields
 # - critterding version
 # - pkgsrc: enigma
