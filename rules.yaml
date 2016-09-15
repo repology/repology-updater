@@ -237,6 +237,7 @@
 - { repo: [ freebsd, gentoo ], name: kiki, setname: kiki-the-nano-bot }
 - { repo: [ freebsd, pkgsrc ], name: freetype, setname: freetype1 }
 - { repo: [ freebsd, pkgsrc ], name: freetype2, setname: freetype }
+- { repo: debian, name: atk1.0, setname: atk }
 - { repo: debian, name: billard-gl, setname: billardgl }
 - { repo: debian, name: blockout2, setname: blockout }
 - { repo: debian, name: botan1.10, setname: botan }
@@ -253,10 +254,10 @@
 - { repo: debian, name: fox1.6, setname: fox16 }
 - { repo: debian, name: free42-nologo, setname: free42 }
 - { repo: debian, name: gargoyle-free, setname: gargoyle }
+- { repo: debian, name: gtkmm1.6, setname: atk }
 - { repo: debian, name: hannah, setname: help-hannahs-horse } # recheck
 - { repo: debian, name: libphysfs, setname: physfs }
 - { repo: debian, namepat: "fltk[0-9.]+", setname: fltk }
-- { repo: debian, namepat: "fuel-.*", setname: fuel }
 - { repo: freebsd, name: abuse_sdl, setname: abuse }
 - { repo: freebsd, name: armagetron, setname: armagetronad }
 - { repo: freebsd, name: bicyclerepair-py27, setname: bicyclerepair }
@@ -313,8 +314,9 @@
 - { repo: gentoo, name: tintin, setname: tintin++ }
 - { repo: gentoo, name: trigger, setname: trigger-rally }
 - { repo: gentoo, name: ufo-ai, setname: ufoai }
-- { repo: pkgsrc, name: "freeciv-(?:client|server|share)", setname: freeciv }
+- { repo: gentoo, name: zookeeper-c, setname: zookeeper }
 - { repo: pkgsrc, name: adobeps-win, setname: adobeps } # XXX: recheck
+- { repo: pkgsrc, namepat: "freeciv-(?:client|server|share)", setname: freeciv }
 
 # XXX: continue from gaul
 
