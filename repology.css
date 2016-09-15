@@ -33,6 +33,10 @@ td {
 	padding: 0.2em;
 }
 
+.lonely {
+	background-color: #00e0e0;
+}
+
 .good {
 	background-color: #80ff80;
 }

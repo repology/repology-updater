@@ -286,6 +286,9 @@
 - repo: debian
   namepat: "x11proto-(.*)"
   setname: "$1proto"
+- repo: freebsd
+  namepat: "love[0-9]+" # methe legacy
+  setname: "love"
 
 # TODO
 # - texlive
@@ -300,6 +303,7 @@
 # renaming a package in a repository, take user convenience into
 # consideration (which means more descriptive and less ambigous name
 # should be chosen)
+# XXX: make it so name comes first - more useful for sorting
 - { repo: [ freebsd, gentoo ], name: kiki, setname: kiki-the-nano-bot }
 - { repo: [ freebsd, pkgsrc ], name: freetype, setname: freetype1 }
 - { repo: [ freebsd, pkgsrc ], name: freetype2, setname: freetype }
@@ -315,7 +319,7 @@
 - { repo: debian, name: dgen, setname: dgen-sdl } # recheck
 - { repo: debian, name: eigen3, setname: eigen }
 - { repo: debian, name: exactimage, setname: exact-image }
-- { repo: debian, name: extremetuxracer, setname: extreme-tuxracer }
+- { repo: [ debian, openbsd ], name: extremetuxracer, setname: extreme-tuxracer }
 - { repo: debian, name: farstream-0.2, setname: farstream }
 - { repo: debian, name: fox1.6, setname: fox16 }
 - { repo: debian, name: free42-nologo, setname: free42 }
@@ -346,19 +350,20 @@
 - { repo: freebsd, name: epl.el, setname: epl }
 - { repo: freebsd, name: eric6, setname: eric }
 - { repo: freebsd, name: etracer, setname: extreme-tuxracer }
-- { repo: freebsd, name: falconseye, setname: falcons-eye }
+- { repo: [ freebsd, openbsd ], name: falconseye, setname: falcons-eye }
 - { repo: freebsd, name: focuswriter-qt4, setname: focuswriter }
 - { repo: freebsd, name: fotaq, setname: flight-of-the-amazon-queen }
 - { repo: freebsd, name: fox17, setname: fox }
 - { repo: freebsd, name: freefont-ttf, setname: freefont }
 - { repo: freebsd, name: ja2, setname: ja2-stracciatella }
-- { repo: freebsd, name: moonlander, setname: moon-lander }
+- { repo: [ freebsd, openbsd ], name: moonlander, setname: moon-lander }
 - { repo: freebsd, name: osg, setname: openscenegraph }
 - { repo: freebsd, name: slashem-tty, setname: slashem }
 - { repo: freebsd, name: stransball2, setname: supertransball2 }
 - { repo: freebsd, name: supertux, setname: supertux1 } # ???
 - { repo: freebsd, name: supertux2, setname: supertux }
 - { repo: freebsd, name: tetrinet-x, setname: tetrinetx }
+- { repo: freebsd, name: stepmania-devel, setname: stepmania }
 - { repo: freebsd, name: xpi-adblock_plus, setname: adblock-plus }
 - { repo: freebsd, name: xpi-foxyproxy, setname: foxyproxy }
 - { repo: freebsd, namepat: "celestia-.*", setname: celestia } # merges glut/gnome/gtk, just GUI variants
@@ -368,7 +373,7 @@
 - { repo: gentoo, name: bub-n-bros, setname: bubbros } # XXX: recheck
 - { repo: gentoo, name: entagged-tageditor, setname: entagged }
 - { repo: gentoo, name: fish-fillets, setname: fillets-ng }
-- { repo: gentoo, name: garden, setname: garden-of-coloured-lights } # XXX: recheck
+- { repo: [ gentoo, openbsd ], name: garden, setname: garden-of-coloured-lights } # XXX: recheck
 - { repo: gentoo, name: gaul-devel, setname: gaul }
 - { repo: gentoo, name: geki2-KXL, setname: geki2 } # XXX: recheck
 - { repo: gentoo, name: geki3-KXL, setname: geki3 } # XXX: recheck
@@ -376,13 +381,16 @@
 - { repo: gentoo, name: sdl-sopwith, setname: sopwith }
 - { repo: gentoo, name: seven-kingdoms, setname: 7kaa }
 - { repo: gentoo, name: spacearyarya-kxl, setname: spacearyarya } # XXX: recheck
-- { repo: gentoo, name: stone-soup, setname: stonesoup }
+- { repo: [ gentoo, openbsd ], name: stone-soup, setname: stonesoup }
 - { repo: gentoo, name: tintin, setname: tintin++ }
 - { repo: gentoo, name: trigger, setname: trigger-rally }
 - { repo: gentoo, name: ufo-ai, setname: ufoai }
 - { repo: gentoo, name: zookeeper-c, setname: zookeeper }
+- { repo: openbsd, name: easyrpg, setname: easyrpg-player }
+- { repo: openbsd, name: pacman-arena, setname: pacmanarena }
+- { repo: gentoo, name: speed-dreams, setname: speeddreams }
 - { repo: pkgsrc, name: adobeps-win, setname: adobeps } # XXX: recheck
-- { repo: pkgsrc, namepat: "freeciv-(?:client|server|share)", setname: freeciv }
+- { repo: [ pkgsrc, openbsd ], namepat: "freeciv-(?:client|server|share)", setname: freeciv }
 
 # XXX: continue from gaul
 

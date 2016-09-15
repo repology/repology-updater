@@ -149,6 +149,8 @@ Report is HTML table, columns correspond to repositories and rows
 correspond to packages. Cells hold package versions, highlighted
 as follows:
 
+- ```cyan```: package is only present in a single repo: nothing to
+              compare version to, and may be local artifact
 - ```green```: package up to date
 - ```red```: package outdated (there's newer version in some other repo)
 - ```yellow```: there are multiple packages some of which are up to date
