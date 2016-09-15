@@ -25,7 +25,7 @@ from ..util import SplitPackageNameVersion
 from ..package import Package
 
 def SanitizeVersion(version):
-    match = re.match("(.*)nb[0-9]+", version)
+    match = re.match("(.*)nb[0-9]+$", version)
     if not match is None:
         version = match.group(1)
 
