@@ -1,5 +1,7 @@
 # Repology
 
+![Example report](docs/screenshot.png)
+
 Repology analyzes multiple package repositories and compares versions
 of a packages in them.
 
