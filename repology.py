@@ -39,7 +39,8 @@ REPOSITORIES = [
     #    "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz"
     #) },
-    { 'name': 'Debian Unstable', 'processor': DebianSourcesProcessor("debian-unstable.list",
+    # Debian unstable
+    { 'name': 'Debian', 'processor': DebianSourcesProcessor("debian-unstable.list",
         "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
         "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
         "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz"
