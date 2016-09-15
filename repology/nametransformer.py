@@ -17,11 +17,10 @@
 
 import yaml
 import re
-from enum import Enum
 
 import sys
 
-class MatchResult(Enum):
+class MatchResult:
     none = 0,
     match = 1,
     ignore = 2
