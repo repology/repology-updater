@@ -62,6 +62,9 @@ REPOSITORIES = [
     { 'name': 'pkgsrc', 'processor': PkgSrcPackagesSHA512Processor("pkgsrc.list",
         "https://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/7.0_current/SHA512.bz2"
     ) },
+    { 'name': 'OpenBSD', 'processor': OpenBSDIndexProcessor("openbsd.git",
+        "http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"
+    ) },
 ]
 
 def MixRepositories(repositories, nametrans):

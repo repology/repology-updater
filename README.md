@@ -134,6 +134,15 @@ NetBSD, which only contains:
 
 TODO: Generate and parse INDEX, even if it's done infrequently.
 
+### OpenBSD
+
+Parses INDEX file (format similar to FreeBSD), available data:
+- name
+- version
+- comment
+- maintainer
+- category
+
 ## Reading the report
 
 Report is HTML table, columns correspond to repositories and rows
@@ -158,8 +167,8 @@ of rules. Each rule may contain:
 
 - Matching conditions:
   - ```repo```: only apply rule to repositories of specific type
-    (currently ```freebsd```, ```debian```, ```gentoo``` or ```pkgsrc```;
-     note that these are NOT repository names)
+    (currently ```freebsd```, ```debian```, ```gentoo```, ```pkgsrc```,
+     or ```openbsd``` note that these are NOT repository names)
   - ```name```: apply to package of specified name
   - ```namepat```: apply to package with name matching specified regexp
 
