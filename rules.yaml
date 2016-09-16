@@ -179,7 +179,7 @@
   namepat: "php([0-9]*)-(.*)"
   setname: "php$1:$2"
 - repo: arch
-  namepat: php-(.*)
+  namepat: "php-(.*)"
   setname: "php:$1"
 
 # gstreamer plugins
@@ -283,7 +283,7 @@
   namepat: "tesseract-.*"
   setname: "tesseract-data"
 - repo: arch
-  namepat: "tesseract-data-"
+  namepat: "tesseract-data-.*"
   setname: "tesseract-data"
 - repo:
     - openbsd

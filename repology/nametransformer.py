@@ -42,7 +42,7 @@ class NameTransformer:
             # compile regexps
             for field in ['namepat']:
                 if field in rule:
-                    rule[field] = re.compile(rule[field])
+                    rule[field] = re.compile(rule[field] + "$")
 
     def IsRuleMatching(self, rule, package):
         # match categories
