@@ -158,10 +158,22 @@
 - { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", repos: [ openbsd, arch ] }
 - { namepat: "vim-spell-.*",           setname: "vim-spell", repos: [ openbsd, gentoo, arch ] }
 
-# smaller merges, no need for prefix
+# Smaller merges, no need for prefix
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1", repos: [ freebsd ] }
 - { namepat: "x11proto-(.*)",          setname: "$1proto", repos: [ debian ] }
-- { namepat: "love[0-9]+",             setname: "love", repos: [ freebsd ] } # merge legacy versions into single port
+
+# Version splits/tweaks
+- { name: eigen, verpat: "1\\..*",     setname: eigen1 }
+- { name: eigen, verpat: "2\\..*",     setname: eigen2 }
+- { name: eigen, verpat: "3\\..*",     setname: eigen3 }
+- { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
+- { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
+- { name: csound, verpat: "5\\..*",    setname: csound5 }
+- { name: csound, verpat: "6\\..*",    setname: csound6 }
+- { name: love, verpat: "0\\.10\\..*", setname: love10 }
+- { name: love, verpat: "0\\.9\\..*",  setname: love09 }
+- { name: love, verpat: "0\\.8\\..*",  setname: love08 }
+- { name: love5, setname: love05 }
 
 # TODO
 # - texlive
@@ -260,13 +272,6 @@
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
 
-# Version splits, sometimes necessary
-- { name: eigen, verpat: "1\\..*",     setname: eigen1 }
-- { name: eigen, verpat: "2\\..*",     setname: eigen2 }
-- { name: eigen, verpat: "3\\..*",     setname: eigen3 }
-- { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
-- { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
-
 # XXX: continue from gaul
 
 # gnustep
@@ -326,3 +331,6 @@
 # - fcgi vs. fcgi-devkit
 # - filebeat/filebeat-bin
 # - fira* (font)
+
+# Version ignores
+- { name: cryptcat,                    ver: "20031202",    ignorever: true }
