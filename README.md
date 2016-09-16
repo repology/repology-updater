@@ -114,6 +114,16 @@ Parses Sources.gz, available data:
 TODO: May need to parse *.debian.tar.xz for additional info for
 each package. Heavy?
 
+### Arch
+
+Parses package databases (core, extra, community), available data:
+- name
+- version
+- comment
+- homepage
+- maintainer (packager, actually)
+- license
+
 ### Gentoo
 
 Parses git mirror of portage repository (file tree only, doesn't
