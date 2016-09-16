@@ -90,6 +90,13 @@
 - { namepat: "mod_(.*)",               setname: "apmod:$1", repos: [ freebsd, arch ] }
 - { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1", repos: [ debian ] }
 
+# Erlang
+- { category: dev-erlang,              setname: "erlang:$0", repos: [ gentoo ] }
+- { namepat: "erlang-(.*)",            setname: "erlang:$1" }
+
+# Gentoo, other dev- caregories
+#- { category: dev-XXX,              setname: "XXX:$0", repos: [ gentoo ] }
+
 # fonts
 - { namepat: "font-manager",           pass: true }
 - { namepat: "x?fonts-(.*)",           setname: "fonts:$1", repos: [ debian ] }
