@@ -11,7 +11,7 @@
 # Ruby
 - { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch ] }
 - { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd ] }
-- { namepat: "ruby[0-9]-(.*)",         setname: "ruby:$1", repos: [ freebsd, openbsd, pkgsrc ] }
+- { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", repos: [ freebsd, openbsd, pkgsrc ] }
 - { category: dev-ruby,                setname: "ruby:$0", repos: [ gentoo ] }
 
 # Tryton (wtf is that); needs to be before python
@@ -20,9 +20,13 @@
 - { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", repos: [ debian ] }
 - { namepat: "trytond-module-(.*)",    setname: "tryton:$1", repos: [ openbsd ] }
 
+# Zope; needs to be before python
+- { namepat: "py[0-9][0-9]-zope\\.(.*)", setname: "zope:$1", repos: [ freebsd ] }
+- { namepat: "zope\\.(.*)",              setname: "zope:$1", repos: [ debian ] }
+
 # Python modules
 # some rules may merge modules from different version into single entry, which is good
-- { namepat: "py(?:27|34|35)-(.*)",    setname: "python:$1", repos: [ freebsd, pkgsrc ] }
+- { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", repos: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", repos: [ openbsd ] }
 - { namepat: "python-(.*)",            setname: "python:$1", repos: [ debian ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", repos: [ arch ] }
@@ -47,9 +51,10 @@
 - { category: dev-haskell,             setname: "haskell:$0", repos: [ gentoo ] }
 
 # lua
-- { namepat: "lua[0-9]{2}-(.*)",       setname: "lua:$1", repos: [ freebsd, pkgsrc ] }
+- { namepat: ".*luassert",             setname: "lua:luassert" } # save
+- { namepat: "lua[0-9]{2}-(?:lua)?(.*?)", setname: "lua:$1", repos: [ freebsd, pkgsrc ] }
 - { namepat: "lua-(.*)",               setname: "lua:$1", repos: [ debian ] }
-- { category: dev-lua,                 setname: "lua:$0", repos: [ gentoo ] }
+- { category: dev-lua, namepat: "(?:lua-?)?(.*?)", setname: "lua:$1", repos: [ gentoo ] }
 
 # octave
 - { namepat: "octave-forge-(.*)",      setname: "octave:$1", repos: [ freebsd ] }
@@ -75,15 +80,28 @@
 - { namepat: "gstreamer-plugins-(.*)", setname: "gstreamer0:$1", repos: [ freebsd ] }
 - { namepat: "gstreamer1-plugins-(.*)", setname: "gstreamer1:$1", repos: [ freebsd ] }
 
+# Apache modules
+- { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", repos: [ freebsd, openbsd, pkgsrc ] }
+- { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", repos: [ gentoo ] }
+- { namepat: "mod-(.*)",               setname: "apmod:$1", repos: [ debian ] }
+- { namepat: "mod_(.*)",               setname: "apmod:$1", repos: [ freebsd, arch ] }
+- { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1", repos: [ debian ] }
+
 # fonts
+- { namepat: "font-manager",           pass: true }
 - { namepat: "x?fonts-(.*)",           setname: "fonts:$1", repos: [ debian ] }
 #- repos: [ freebsd ] # strange version mismatches
 #  namepat: "xorg-fonts-(.*)"
 #  setname: "xfonts:$1"
 - { namepat: "(.*)-fonts",             setname: "fonts:$1", repos: [ gentoo ] }
 - { namepat: "(.*)-ttf",               setname: "fonts:$1", repos: [ pkgsrc ] }
+- { namepat: "font-(.*)",              setname: "fonts:$1", repos: [ freebsd, gentoo, pkgsrc, arch ] }
 - { name: cantarell,                   setname: "fonts:cantarell", repos: [ debian ]  }
 - { name: cantarell-fonts,             setname: "fonts:cantarell", repos: [ freebsd, pkgsrc ] }
+
+# fortunes
+- { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1", repos: [ gentoo ] }
+- { namepat: "fortunes-(.*)",          setname: "fortunes:$1", repos: [ debian, pkgsrc ] }
 
 # cursors
 - { namepat: "(.*)-cursor-theme",      setname: "cursors:$1", repos: [ debian ] }
@@ -95,6 +113,7 @@
 - { namepat: "fuse(?:fs)?-(.*)",       setname: "fusefs:$1" }
 
 # misc single-source plugin, i10n, l18n sets
+- { namepat: "archipel-agent-.*",      setname: "archipel-agents", repos: [ debian ] }
 - { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", repos: [ openbsd ] }
 - { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", repos: [ openbsd ] }
 - { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", repos: [ openbsd, arch ] }
@@ -102,28 +121,40 @@
 - { namepat: "eric-qt4-i18n-.*",       setname: "eric-qt4-i18n", repos: [ arch ] }
 - { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n", repos: [ openbsd ] }
 - { namepat: "firefox-i18n-.*",        setname: "firefox-i18n", repos: [ openbsd, arch ] }
+- { namepat: "fpc-.*",                 setname: "fpc-modules", repos: [ freebsd ] }
+- { namepat: "gambas3-gb-.*",          setname: "gambas3-gb-modules", repos: [ arch ] }
+- { namepat: "geany-plugin-.*",        setname: "geany-plugins", repos: [ freebsd ] }
+- { namepat: "gimp-docs-.*",           setname: "gimp-docs", repos: [ pkgsrc ] }
+- { namepat: "gimp-help-.*",           setname: "gimp-help", repos: [ arch ] }
 - { namepat: "kde-i18n-.*",            setname: "kde-i18n", repos: [ openbsd, pkgsrc ] }
-- { namepat: "kde-l10n-.*",            setname: "kde-l10n", repos: [ openbsd ] }
+- { namepat: "kde-l10n-.*",            setname: "kde-l10n", repos: [ openbsd, arch ] }
 - { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", repos: [ pkgsrc ] }
 - { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", repos: [ freebsd ] }
 - { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", repos: [ pkgsrc ] }
+- { namepat: "kompozer-i18n-.*",       setname: "kompozer-i18n", repos: [ arch ] }
+- { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", repos: [ arch ] }
 - { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", repos: [ openbsd ] }
+- { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", repos: [ arch ] }
+- { namepat: "[^-]+-libreoffice",      setname: "libreoffice-i18n", repos: [ freebsd ] }
+- { namepat: "mgltools-.*",            setname: "mgltools", repos: [ debian ] }
 - { namepat: "mozilla-dicts-.*",       setname: "mozilla-dicts", repos: [ openbsd ] }
+- { namepat: "netbeans-.*",            setname: "netbeans", repos: [ gentoo ] }
+- { namepat: "opensmtpd-extras-.*",    setname: "opensmtpd-extras", repos: [ freebsd, openbsd ] }
 - { namepat: "seamonkey-i18n-.*",      setname: "seamonkey-i18n", repos: [ openbsd ] }
+- { namepat: "(squirrelmail-.*)-plugin", setname: "$1", repos: [ freebsd ] }
 - { namepat: "tesseract-.*",           setname: "tesseract-data", repos: [ openbsd, debian ] }
 - { namepat: "tesseract-data-.*",      setname: "tesseract-data", repos: [ arch ] }
+- { namepat: "texlive-documentation-.*", setname: "texlive-documentation", repos: [ gentoo ] }
 - { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", repos: [ openbsd, arch ] }
 - { namepat: "vim-spell-.*",           setname: "vim-spell", repos: [ openbsd, gentoo, arch ] }
 
 # smaller merges, no need for prefix
-- { namepat: "(squirrelmail-.*)-plugin", setname: "$1", repos: [ freebsd ] }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1", repos: [ freebsd ] }
 - { namepat: "x11proto-(.*)",          setname: "$1proto", repos: [ debian ] }
 - { namepat: "love[0-9]+",             setname: "love", repos: [ freebsd ] } # merge legacy versions into single port
 
 # TODO
 # - texlive
-# - apache modules
 
 # Simple rules for single packages
 # XXX: move to the top? because it may be needed to rescue specific
@@ -134,7 +165,6 @@
 # renaming a package in a repository, take user convenience into
 # consideration (which means more descriptive and less ambigous name
 # should be chosen)
-# XXX: make it so name comes first - more useful for sorting
 - { name: abuse_sdl,                   setname: abuse,                    repos: [ freebsd ] }
 - { name: adobeps-win,                 setname: adobeps,                  repos: [ pkgsrc ]  } # XXX: recheck
 - { name: armagetron,                  setname: armagetronad,             repos: [ freebsd ] }
