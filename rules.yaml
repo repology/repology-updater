@@ -260,10 +260,12 @@
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
 
-# split versions
+# Version splits, sometimes necessary
 - { name: eigen, verpat: "1\\..*",     setname: eigen1 }
 - { name: eigen, verpat: "2\\..*",     setname: eigen2 }
 - { name: eigen, verpat: "3\\..*",     setname: eigen3 }
+- { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
+- { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
 
 # XXX: continue from gaul
 
