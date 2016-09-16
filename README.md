@@ -185,6 +185,7 @@ of rules. Each rule may contain:
      or ```openbsd``` note that these are NOT repository names)
   - ```name```: apply to package of specified name
   - ```namepat```: apply to package with name matching specified regexp
+  - ```verpat```: apply to package with version matching specified regexp
 
 - Actions:
   - ```ignore```: completely ignore the package

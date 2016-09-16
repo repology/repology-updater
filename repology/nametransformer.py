@@ -42,7 +42,7 @@ class NameTransformer:
                     rule[field] = [ rule[field] ]
 
             # compile regexps
-            for field in ['namepat']:
+            for field in ['namepat', 'verpat']:
                 if field in rule:
                     rule[field] = re.compile(rule[field] + "$", re.ASCII)
 
@@ -68,6 +68,11 @@ class NameTransformer:
         # match name patterns
         if 'namepat' in rule:
             if not rule['namepat'].match(package.name):
+                return False
+
+        # match version patterns
+        if 'verpat' in rule:
+            if not rule['verpat'].match(package.version):
                 return False
 
         return True

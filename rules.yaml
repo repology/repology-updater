@@ -192,8 +192,6 @@
 - { name: drpython-py27,               setname: drpython,                 repos: [ freebsd ] }
 - { name: dynamips-community,          setname: dynamips,                 repos: [ freebsd ] }
 - { name: easyrpg,                     setname: easyrpg-player,           repos: [ openbsd ] }
-- { name: eigen3,                      ignore: true,                      repos: [ freebsd ] }
-- { name: eigen3,                      setname: eigen,                    repos: [ debian ]  }
 - { name: el,                          setname: eternal-lands,            repos: [ freebsd ] }
 - { name: el-data,                     setname: eternal-lands-data,       repos: [ freebsd ] }
 - { name: endgame-singularity,         setname: singularity,              repos: [ freebsd ] }
@@ -251,6 +249,11 @@
 - { namepat: "enscript-.*",            setname: enscript,                 repos: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
+
+# split versions
+- { name: eigen, verpat: '1\\..*',        setname: eigen1 }
+- { name: eigen, verpat: '2\\..*',        setname: eigen2 }
+- { name: eigen, verpat: '3\\..*',        setname: eigen3 }
 
 # XXX: continue from gaul
 
