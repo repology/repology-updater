@@ -35,7 +35,7 @@ class NameTransformer:
 
         for rule in self.rules:
             # convert some fields to lists
-            for field in ['repo', 'category']:
+            for field in ['category']:
                 if field in rule and not isinstance(rule[field], list):
                     rule[field] = [ rule[field] ]
 
@@ -94,7 +94,7 @@ class NameTransformer:
 
         # apply first matching rule
         for rule in self.rules:
-            if 'repo' in rule and not repotype in rule['repo']:
+            if 'repos' in rule and not repotype in rule['repos']:
                 continue
 
             result, name = self.ApplyRule(rule, package)
