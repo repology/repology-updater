@@ -19,6 +19,8 @@ which packages, and whether packages need updating.
   - Another way to track new releases of software you package
   - Compete with other distros in keeping up to date
   - Find fellow maintainers to resolve packaging problems together
+  - Keep package naming and versioning schemes in sync to other
+    repos for your and your user's convenience
 - **Software authors**:
   - Keep track of how well your project is packaged
   - Keep in touch with your product package maintainers
