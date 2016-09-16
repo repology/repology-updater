@@ -72,7 +72,7 @@ def MixRepositories(repositories, nametrans):
     packages = {}
 
     for repository in repositories:
-        for package in repository['processor'].Parse():
+        for package in repository['packages']:
             metaname = nametrans.TransformName(package, repository['processor'].GetRepoType())
             if metaname is None:
                 continue
@@ -190,13 +190,17 @@ def Main():
     options = parser.parse_args()
 
     for repository in REPOSITORIES:
-        print("===> Downloading for %s" % repository['name'], file=sys.stderr)
+        print("===> Downloading %s" % repository['name'], file=sys.stderr)
         if repository['processor'].IsUpToDate():
             print("Up to date", file=sys.stderr)
         else:
             repository['processor'].Download(not options.no_update)
 
     nametrans = NameTransformer(options.transform_rules)
+
+    for repository in REPOSITORIES:
+        print("===> Parsing %s" % repository['name'], file=sys.stderr)
+        repository['packages'] = repository['processor'].Parse()
 
     print("===> Processing", file=sys.stderr)
     packages = MixRepositories(REPOSITORIES, nametrans)
