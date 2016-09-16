@@ -57,11 +57,6 @@ REPOSITORIES = [
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz"
     #) },
-    { 'name': 'Arch', 'processor': ArchDBProcessor("arch.dir",
-        "http://ftp.u-tx.net/archlinux/core/os/x86_64/core.db.tar.gz",
-        "http://ftp.u-tx.net/archlinux/extra/os/x86_64/extra.db.tar.gz",
-        "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
-    ) },
     { 'name': 'Gentoo', 'processor': GentooGitProcessor("gentoo.git",
         "https://github.com/gentoo/gentoo.git"
     ) },
@@ -70,6 +65,11 @@ REPOSITORIES = [
     ) },
     { 'name': 'OpenBSD', 'processor': OpenBSDIndexProcessor("openbsd.list",
         "http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"
+    ) },
+    { 'name': 'Arch', 'processor': ArchDBProcessor("arch.dir",
+        "http://ftp.u-tx.net/archlinux/core/os/x86_64/core.db.tar.gz",
+        "http://ftp.u-tx.net/archlinux/extra/os/x86_64/extra.db.tar.gz",
+        "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
     ) },
 ]
 
