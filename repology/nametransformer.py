@@ -18,6 +18,7 @@
 import yaml
 import re
 
+import pprint
 import sys
 
 class MatchResult:
@@ -43,6 +44,8 @@ class NameTransformer:
             for field in ['namepat']:
                 if field in rule:
                     rule[field] = re.compile(rule[field] + "$", re.ASCII)
+
+            rule['matches'] = 0
 
     def IsRuleMatching(self, rule, package):
         # match categories
@@ -71,6 +74,8 @@ class NameTransformer:
     def ApplyRule(self, rule, package):
         if not self.IsRuleMatching(rule, package):
             return MatchResult.none, None
+
+        rule['matches'] += 1
 
         if 'ignore' in rule:
             return MatchResult.ignore, None
@@ -105,3 +110,9 @@ class NameTransformer:
 
         # default processing
         return package.name.lower().replace('_', '-')
+
+    def PrintUnmatchedRules(self):
+        # XXX: move outside of this class
+        for rule in self.rules:
+            if rule['matches'] == 0:
+                print(pprint.pformat(rule), file = sys.stderr)

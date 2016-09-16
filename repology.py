@@ -222,6 +222,8 @@ def Main():
             options.no_repository
         )
 
+    nametrans.PrintUnmatchedRules()
+
     return 0
 
 if __name__ == '__main__':
