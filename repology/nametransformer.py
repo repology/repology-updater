@@ -16,10 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import yaml
-import re
-
 import pprint
-import sys
+import re
 
 class MatchResult:
     none = 0,
@@ -34,7 +32,10 @@ class NameTransformer:
         with open(rulespath) as file:
             self.rules = yaml.safe_load(file)
 
+        pp = pprint.PrettyPrinter()
         for rule in self.rules:
+            rule['pretty'] = pp.pformat(rule)
+
             # convert some fields to lists
             for field in ['category']:
                 if field in rule and not isinstance(rule[field], list):
@@ -111,8 +112,11 @@ class NameTransformer:
         # default processing
         return package.name.lower().replace('_', '-')
 
-    def PrintUnmatchedRules(self):
-        # XXX: move outside of this class
+    def GetUnmatchedRules(self):
+        result = []
+
         for rule in self.rules:
             if rule['matches'] == 0:
-                print(pprint.pformat(rule), file = sys.stderr)
+                result.append(rule['pretty'])
+
+        return result

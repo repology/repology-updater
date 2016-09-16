@@ -222,7 +222,12 @@ def Main():
             options.no_repository
         )
 
-    nametrans.PrintUnmatchedRules()
+    unmatched = nametrans.GetUnmatchedRules()
+    if len(unmatched):
+        print("===> Unmatched rules", file=sys.stderr)
+
+        for rule in unmatched:
+            print(rule, file=sys.stderr)
 
     return 0
 
