@@ -60,7 +60,7 @@ REPOSITORIES = [
     { 'name': 'Gentoo', 'processor': GentooGitProcessor("gentoo.git",
         "https://github.com/gentoo/gentoo.git"
     ) },
-    { 'name': 'pkgsrc', 'processor': PkgSrcPackagesSHA512Processor("pkgsrc.list",
+    { 'name': 'NetBSD', 'processor': PkgSrcPackagesSHA512Processor("pkgsrc.list",
         "https://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/amd64/7.0_current/SHA512.bz2"
     ) },
     { 'name': 'OpenBSD', 'processor': OpenBSDIndexProcessor("openbsd.git",
