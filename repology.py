@@ -124,7 +124,7 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
             continue
 
         print("<tr>")
-        print("<td>%s</td>" % (Trim(pkgname, 50)))
+        print("<td>%s</td>" % (Trim(pkgname, 30)))
 
         bestversion, _, _ = metapackage.GetMaxVersion()
 
@@ -149,7 +149,7 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
                 else:
                     versionclass = 'multi'
 
-            print("<td><span class=\"version %s\">%s</span>" % (versionclass, Trim(repomaxversion, 20)))
+            print("<td><span class=\"version %s\">%s</span>" % (versionclass, Trim(repomaxversion, 12)))
             if (len(repopackages) > 1):
                 print(" (%d)" % len(repopackages));
             print("</td>");
