@@ -27,8 +27,8 @@ class MatchResult:
 
 class NameTransformer:
     def __init__(self, rulespath):
-        self.dollar0 = re.compile("\$0")
-        self.dollarN = re.compile("\$([0-9]+)")
+        self.dollar0 = re.compile("\$0", re.ASCII)
+        self.dollarN = re.compile("\$([0-9]+)", re.ASCII)
 
         with open(rulespath) as file:
             self.rules = yaml.safe_load(file)
@@ -42,7 +42,7 @@ class NameTransformer:
             # compile regexps
             for field in ['namepat']:
                 if field in rule:
-                    rule[field] = re.compile(rule[field] + "$")
+                    rule[field] = re.compile(rule[field] + "$", re.ASCII)
 
     def IsRuleMatching(self, rule, package):
         # match categories
