@@ -16,9 +16,12 @@
 - repo: gentoo
   category: dev-perl
   setname: "perl:$0"
+- repo: arch
+  namepat: perl-(.*)
+  setname: "perl:$1"
 
 # Ruby
-- repo: debian
+- repo: [ debian, arch ]
   namepat: "ruby-(.*)"
   setname: "ruby:$1"
 - repo: pkgsrc
@@ -62,6 +65,9 @@
 - repo: debian
   namepat: "python-(.*)"
   setname: "python:$1"
+- repo: arch
+  namepat: "python2?-(.*)"
+  setname: "python:$1"
 - repo: gentoo
   category: dev-python
   setname: "python:$0"
@@ -96,7 +102,9 @@
   setname: "vdr:$1"
 
 # Haskell
-- repo: debian
+- repo:
+    - debian
+    - arch
   namepat: "haskell-(.*)"
   setname: "haskell:$1"
 - repo:
@@ -135,6 +143,7 @@
     - freebsd
     - gentoo
     - pkgsrc
+    - arch
   namepat: "xf86-((?:input|video)-.*)"
   setname: "xorg:$1"
 - repo: debian
@@ -169,6 +178,9 @@
     - openbsd
   namepat: "php([0-9]*)-(.*)"
   setname: "php$1:$2"
+- repo: arch
+  namepat: php-(.*)
+  setname: "php:$1"
 
 # gstreamer plugins
 - repo:
@@ -229,7 +241,7 @@
 - repo: openbsd
   namepat: "mozilla-dicts-.*"
   setname: "mozilla-dicts"
-- repo: openbsd
+- repo: [ openbsd, arch ]
   namepat: "calligra-l10n-.*"
   setname: "calligra-l10n"
 - repo: [ openbsd, pkgsrc ]
@@ -253,10 +265,10 @@
 - repo: openbsd
   namepat: "firefox-esr-i18n-.*"
   setname: "firefox-esr-i18n"
-- repo: openbsd
+- repo: [ openbsd, arch ]
   namepat: "firefox-i18n-.*"
   setname: "firefox-i18n"
-- repo: openbsd
+- repo: [ openbsd, arch ]
   namepat: "thunderbird-i18n-.*"
   setname: "thunderbird-i18n"
 - repo: openbsd
@@ -270,11 +282,21 @@
     - debian
   namepat: "tesseract-.*"
   setname: "tesseract-data"
+- repo: arch
+  namepat: "tesseract-data-"
+  setname: "tesseract-data"
 - repo:
     - openbsd
     - gentoo
+    - arch
   namepat: "vim-spell-.*"
   setname: "vim-spell"
+- repo: arch
+  namepat: "eric-i18n-.*"
+  setname: "eric-i18n"
+- repo: arch
+  namepat: "eric-qt4-i18n-.*"
+  setname: "eric-qt4-i18n"
 
 # smaller merges, no need for prefix
 - repo: freebsd

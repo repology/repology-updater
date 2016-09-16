@@ -20,3 +20,4 @@ from .debian import DebianSourcesProcessor
 from .gentoo import GentooGitProcessor
 from .pkgsrc import PkgSrcPackagesSHA512Processor
 from .openbsd import OpenBSDIndexProcessor
+from .arch import ArchDBProcessor
