@@ -96,8 +96,8 @@
 - { namepat: "(.*)-fonts",             setname: "fonts:$1", repos: [ gentoo ] }
 - { namepat: "(.*)-ttf",               setname: "fonts:$1", repos: [ pkgsrc ] }
 - { namepat: "font-(.*)",              setname: "fonts:$1", repos: [ freebsd, gentoo, pkgsrc, arch ] }
-- { name: cantarell,                   setname: "fonts:cantarell", repos: [ debian ]  }
-- { name: cantarell-fonts,             setname: "fonts:cantarell", repos: [ freebsd, pkgsrc ] }
+- { name: cantarell,                   setname: "fonts:cantarell", repos: [ gentoo ]  }
+- { name: cantarell-fonts,             setname: "fonts:cantarell", repos: [ freebsd, pkgsrc, openbsd, arch ] }
 
 # fortunes
 - { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1", repos: [ gentoo ] }
@@ -219,7 +219,7 @@
 - { name: geki2-KXL,                   setname: geki2,                    repos: [ gentoo ]  } # XXX: recheck
 - { name: geki3-KXL,                   setname: geki3,                    repos: [ gentoo ]  } # XXX: recheck
 - { name: gl117,                       setname: gl-117,                   repos: [ gentoo ]  }
-- { name: gtkmm1.6,                    setname: atk,                      repos: [ debian ]  }
+- { name: atkmm1.6,                    setname: atk,                      repos: [ debian ]  }
 - { name: hannah,                      setname: help-hannahs-horse,       repos: [ debian ]  } # recheck
 - { name: ja2,                         setname: ja2-stracciatella,        repos: [ freebsd ] }
 - { name: kiki,                        setname: kiki-the-nano-bot,        repos: [ freebsd, gentoo ] }
@@ -251,9 +251,9 @@
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
 
 # split versions
-- { name: eigen, verpat: '1\\..*',        setname: eigen1 }
-- { name: eigen, verpat: '2\\..*',        setname: eigen2 }
-- { name: eigen, verpat: '3\\..*',        setname: eigen3 }
+- { name: eigen, verpat: "1\\..*",     setname: eigen1 }
+- { name: eigen, verpat: "2\\..*",     setname: eigen2 }
+- { name: eigen, verpat: "3\\..*",     setname: eigen3 }
 
 # XXX: continue from gaul
 
@@ -271,7 +271,7 @@
 - { name: gtamsanalyzer.app,           setname: gtamsanalyzer,            repos: [ debian ]  }
 - { name: helpviewer.app,              setname: helpviewer,               repos: [ debian ]  }
 - { name: lusernet.app,                setname: lusernet,                 repos: [ debian ]  }
-- { name: mixer-app,                   setname: mixer.app,                repos: [ gentoo ]  }
+- { name: mixer_app,                   setname: mixer.app,                repos: [ gentoo ]  }
 - { name: mpdcon.app,                  setname: mpdcon,                   repos: [ debian ]  }
 - { name: paje.app,                    setname: paje,                     repos: [ debian ]  }
 - { name: plopfolio.app,               setname: plopfolio,                repos: [ debian ]  }
