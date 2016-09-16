@@ -29,6 +29,10 @@ def SanitizeVersion(version):
     if pos != -1:
         version = version[0:pos]
 
+    pos = version.find(':')
+    if pos != -1:
+        version = version[pos+1:]
+
     return version
 
 class ArchDBProcessor(RepositoryProcessor):
