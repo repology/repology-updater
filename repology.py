@@ -107,7 +107,7 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
     print("<tr><th>Package</th>")
     for repository in repositories:
         print("<th>%s</th>" % repository['name'])
-        statistics[repository['name']] = { 'total': 0, 'lonely': 0, 'good': 0, 'multi': 0, 'bad': 0 }
+        statistics[repository['name']] = { 'total': 0, 'lonely': 0, 'good': 0, 'multi': 0, 'bad': 0, 'ignore': 0 }
     print("</tr>")
 
     for pkgname in sorted(packages.keys()):
@@ -148,7 +148,11 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
             versionclass = 'bad'
             if metapackage.GetNumRepos() == 1:
                 versionclass = 'lonely'
-            elif VersionCompare(repomaxversion, bestversion) == 0:
+            elif bestversion is None:
+                versionclass = 'good'
+            elif VersionCompare(repomaxversion, bestversion) > 0: # due to ignore
+                versionclass = 'ignore'
+            elif VersionCompare(repomaxversion, bestversion) >= 0:
                 if VersionCompare(repominversion, bestversion) == 0:
                     versionclass = 'good'
                 else:
@@ -168,13 +172,14 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
     print("<th>%d</th>" % len(packages))
     for repo in repositories:
         reponame = repo['name']
-        print("<th>%d<br><span class=\"version lonely\">%d</span><br><span class=\"version good\">%d</span><br><span class=\"version multi\">%d</span><br><span class=\"version bad\">%d (%.2f%%)</span></th>" % (
+        print("<th>%d<br><span class=\"version lonely\">%d</span><br><span class=\"version good\">%d</span><br><span class=\"version multi\">%d</span><br><span class=\"version bad\">%d (%.2f%%)</span><br><span class=\"version ignore\">%d</span></th>" % (
                 statistics[reponame]['total'],
                 statistics[reponame]['lonely'],
                 statistics[reponame]['good'],
                 statistics[reponame]['multi'],
                 statistics[reponame]['bad'],
-                statistics[reponame]['bad'] / (1 if statistics[reponame]['total'] == 0 else statistics[reponame]['total']) * 100.0
+                statistics[reponame]['bad'] / (1 if statistics[reponame]['total'] == 0 else statistics[reponame]['total']) * 100.0,
+                statistics[reponame]['ignore']
             ))
     print("</tr>")
 

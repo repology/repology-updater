@@ -167,6 +167,8 @@ as follows:
 - ```red```: package outdated (there's newer version in some other repo)
 - ```yellow```: there are multiple packages some of which are up to date
                 and others are outdated
+- ```gray```: version was manually ignored, likely because of broken
+              versioning scheme
 
 Note that there may be multiple packages of a same name in a single repo
 (either naturally, or because of name transformations).

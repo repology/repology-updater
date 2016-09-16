@@ -60,7 +60,7 @@ class NameTransformer:
             if not catmatch:
                 return False
 
-        # match name patterns
+        # match name
         if 'name' in rule:
             if package.name != rule['name']:
                 return False
@@ -68,6 +68,11 @@ class NameTransformer:
         # match name patterns
         if 'namepat' in rule:
             if not rule['namepat'].match(package.name):
+                return False
+
+        # match version
+        if 'ver' in rule:
+            if package.version != rule['ver']:
                 return False
 
         # match version patterns
@@ -85,6 +90,10 @@ class NameTransformer:
 
         if 'ignore' in rule:
             return MatchResult.ignore, None
+
+        # XXX: this should not really be intrusive to package, fix
+        if 'ignorever' in rule:
+            package.ignoreversion = True
 
         if 'setname' in rule:
             match = None

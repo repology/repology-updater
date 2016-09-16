@@ -48,3 +48,7 @@ td {
 .bad {
 	background-color: #ff8080;
 }
+
+.ignore {
+	background-color: #c0c0c0;
+}

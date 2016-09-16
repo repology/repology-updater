@@ -27,6 +27,8 @@ class Package:
         self.comment = None
         self.homepage = None
         self.license = None
+
+        self.ignoreversion = False
         pass
 
 class MetaPackage:
@@ -48,7 +50,7 @@ class MetaPackage:
         bestversion, bestrepo, bestpackage = None, None, None
         for reponame, packagelist in self.packages.items():
             for package in packagelist:
-                if package.version is not None:
+                if package.version is not None and not package.ignoreversion:
                     if bestversion is None or VersionCompare(package.version, bestversion) > 0:
                         bestversion, bestrepo, bestpackage = package.version, reponame, package
 

@@ -3,9 +3,12 @@
 - { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, repos: [ freebsd ] }
 
 # Perl modules
+#
+# Note that Gentoo misvehaves by changing upstream versioning scheme, so
+# we ignore it in comparison
 - { namepat: "p5-(.*)",                setname: "perl:$1", repos: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", repos: [ debian ] }
-- { category: dev-perl,                setname: "perl:$0", repos: [ gentoo ] }
+- { category: dev-perl,                setname: "perl:$0", repos: [ gentoo ], ignorever: true }
 - { namepat: "perl-(.*)",              setname: "perl:$1", repos: [ arch ] }
 
 # Ruby
