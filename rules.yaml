@@ -1,316 +1,125 @@
-# FreeBSD: ignore localized categories
-- repo: freebsd
-  namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*"
-  ignore: yes
+# vim: tabstop=39 expandtab softtabstop=39
+# FreeBSD: ignore localized categories (XXX: remove this, contains useful packages)
+- { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, repo: freebsd }
 
 # Perl modules
-- repo:
-    - freebsd
-    - pkgsrc
-    - openbsd
-  namepat: "p5-(.*)"
-  setname: "perl:$1"
-- repo: debian
-  namepat: "lib(.*)-perl"
-  setname: "perl:$1"
-- repo: gentoo
-  category: dev-perl
-  setname: "perl:$0"
-- repo: arch
-  namepat: perl-(.*)
-  setname: "perl:$1"
+- { namepat: "p5-(.*)",                setname: "perl:$1", repo: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "lib(.*)-perl",           setname: "perl:$1", repo: debian }
+- { category: dev-perl,                setname: "perl:$0", repo: gentoo }
+- { namepat: "perl-(.*)",              setname: "perl:$1", repo: arch }
 
 # Ruby
-- repo: [ debian, arch ]
-  namepat: "ruby-(.*)"
-  setname: "ruby:$1"
-- repo: pkgsrc
-  namepat: "ruby[0-9][0-9]-(.*)"
-  setname: "ruby:$1"
-- repo: freebsd
-  namepat: "rubygem-(.*)"
-  setname: "ruby:$1"
-- repo:
-    - freebsd
-    - openbsd
-  namepat: "ruby[0-9]+-(.*)"
-  setname: "ruby:$1"
-- repo: gentoo
-  category: dev-ruby
-  setname: "ruby:$0"
+- { namepat: "ruby-(.*)",              setname: "ruby:$1", repo: [ debian, arch ] }
+- { namepat: "rubygem-(.*)",           setname: "ruby:$1", repo: freebsd }
+- { namepat: "ruby[0-9]+-(.*)",        setname: "ruby:$1", repo: [ freebsd, openbsd, pkgsrc ] }
+- { category: dev-ruby,                setname: "ruby:$0", repo: gentoo }
 
 # Tryton (wtf is that); needs to be before python
-- repo: pkgsrc
-  namepat: "py[0-9][0-9]-trytond-(.*)"
-  setname: "tryton:$1"
-- repo: freebsd
-  namepat: "trytond28_(.*)"
-  setname: "tryton:$1"
-- repo: debian
-  namepat: "tryton-modules-(.*)"
-  setname: "tryton:$1"
-- repo: openbsd
-  namepat: "trytond-module-(.*)"
-  setname: "tryton:$1"
+- { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$1", repo: pkgsrc }
+- { namepat: "trytond28_(.*)",         setname: "tryton:$1", repo: freebsd }
+- { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", repo: debian }
+- { namepat: "trytond-module-(.*)",    setname: "tryton:$1", repo: openbsd }
 
 # Python modules
-- repo:
-    - freebsd
-    - pkgsrc
-  namepat: "py(?:27|34|35)-(.*)" # may merge modules from different version into single entry, which is good
-  setname: "python:$1"
-- repo: openbsd
-  namepat: "py3?-(.*)" # may merge modules from different version into single entry, which is good
-  setname: "python:$1"
-- repo: debian
-  namepat: "python-(.*)"
-  setname: "python:$1"
-- repo: arch
-  namepat: "python2?-(.*)"
-  setname: "python:$1"
-- repo: gentoo
-  category: dev-python
-  setname: "python:$0"
+# some rules may merge modules from different version into single entry, which is good
+- { namepat: "py(?:27|34|35)-(.*)",    setname: "python:$1", repo: [ freebsd, pkgsrc ] }
+- { namepat: "py3?-(.*)",              setname: "python:$1", repo: openbsd }
+- { namepat: "python-(.*)",            setname: "python:$1", repo: debian }
+- { namepat: "python2?-(.*)",          setname: "python:$1", repo: arch }
+- { category: dev-python,              setname: "python:$0", repo: gentoo }
 
 # R libs
-- repo: freebsd
-  namepat: "R-cran-(.*)"
-  setname: "r:$1"
-- repo: debian
-  namepat: "r-cran-(.*)"
-  setname: "r:$1"
-- repo: pkgsrc
-  namepat: "R-(.*)"
-  setname: "r:$1"
+- { namepat: "R-cran-(.*)",            setname: "r:$1", repo: freebsd }
+- { namepat: "r-cran-(.*)",            setname: "r:$1", repo: debian }
+- { namepat: "R-(.*)",                 setname: "r:$1", repo: pkgsrc }
 
 # ROS
-- repo: gentoo
-  category: dev-ros
-  setname: "ros:$0"
-- repo: debian
-  namepat: "ros-(.*)"
-  setname: "ros:$1"
+- { category: dev-ros,                 setname: "ros:$0", repo: gentoo }
+- { namepat: "ros-(.*)",               setname: "ros:$1", repo: debian }
 
 # VDR
-- repo:
-    - freebsd
-    - debian
-  namepat: "vdr-plugin-(.*)"
-  setname: "vdr:$1"
-- repo: gentoo
-  namepat: "vdr-(.*)"
-  setname: "vdr:$1"
+- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", repo: [ freebsd, debian ] }
+- { namepat: "vdr-(.*)",               setname: "vdr:$1", repo: gentoo }
 
 # Haskell
-- repo:
-    - debian
-    - arch
-  namepat: "haskell-(.*)"
-  setname: "haskell:$1"
-- repo:
-    - freebsd
-    - pkgsrc
-    - openbsd
-  namepat: "hs-(.*)"
-  setname: "haskell:$1"
-- repo: gentoo
-  category: dev-haskell
-  setname: "haskell:$0"
+- { namepat: "haskell-(.*)",           setname: "haskell:$1", repo: [ debian, arch ] }
+- { namepat: "hs-(.*)",                setname: "haskell:$1", repo: [ freebsd, pkgsrc, openbsd ] }
+- { category: dev-haskell,             setname: "haskell:$0", repo: gentoo }
 
 # lua
-- repo:
-    - freebsd
-    - pkgsrc
-  namepat: "lua[0-9][0-9]-(.*)"
-  setname: "lua:$1"
-- repo: debian
-  namepat: "lua-(.*)"
-  setname: "lua:$1"
-- repo: gentoo
-  category: dev-lua
-  setname: "lua:$0"
+- { namepat: "lua[0-9][0-9]-(.*)",     setname: "lua:$1", repo: [ freebsd, pkgsrc ] }
+- { namepat: "lua-(.*)",               setname: "lua:$1", repo: debian }
+- { category: dev-lua,                 setname: "lua:$0", repo: gentoo }
 
 # octave
-- repo: freebsd
-  namepat: "octave-forge-(.*)"
-  setname: "octave:$1"
-- repo: debian
-  namepat: "octave-(.*)"
-  setname: "octave:$1"
+- { namepat: "octave-forge-(.*)",      setname: "octave:$1", repo: freebsd }
+- { namepat: "octave-(.*)",            setname: "octave:$1", repo: debian }
 
 # xorg drivers
-- repo:
-    - freebsd
-    - gentoo
-    - pkgsrc
-    - arch
-  namepat: "xf86-((?:input|video)-.*)"
-  setname: "xorg:$1"
-- repo: debian
-  namepat: "xserver-xorg-((?:input|video)-.*)"
-  setname: "xorg:$1"
+- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", repo: [ freebsd, gentoo, pkgsrc, arch ] }
+- { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", repo: debian }
 
 # php
-- repo: gentoo
-  category: dev-php
-  namepat: "(?:PEAR-|pecl-|php-)+(.*?)"
-  setname: "php:$1"
-- repo: gentoo
-  category: dev-php
-  setname: "php:$0"
-- repo: debian
-  namepat: "php-(.*)"
-  setname: "php:$1"
-- repo:
-    - freebsd
-    - pkgsrc
-    - openbsd
-  namepat: "(?:pear|pecl)-(.*)"
-  setname: "php:$1"
-- repo:
-    - freebsd
-    - pkgsrc
-  namepat: "php[0-9]+-(?:pear|pecl)-(.*)"
-  setname: "php:$1"
-- repo:
-    - freebsd
-    - pkgsrc
-    - openbsd
-  namepat: "php([0-9]*)-(.*)"
-  setname: "php$1:$2"
-- repo: arch
-  namepat: "php-(.*)"
-  setname: "php:$1"
+- { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", repo: gentoo }
+- { category: dev-php,                 setname: "php:$0", repo: gentoo }
+- { namepat: "php-(.*)",               setname: "php:$1", repo: debian }
+- { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", repo: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", repo: [ freebsd, pkgsrc ] }
+- { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", repo: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "php-(.*)",               setname: "php:$1", repo: arch }
 
 # gstreamer plugins
-- repo:
-    - gentoo
-    - debian
-  namepat: "gst-plugins-(.*)"
-  setname: "gstreamer1:$1"
-- repo: pkgsrc
-  namepat: "gst-plugins0.10-(.*)"
-  setname: "gstreamer0:$1"
-- repo: pkgsrc
-  namepat: "gst-plugins1-(.*)"
-  setname: "gstreamer1:$1"
-- repo: freebsd
-  namepat: "gstreamer-plugins-(.*)"
-  setname: "gstreamer0:$1"
-- repo: freebsd
-  namepat: "gstreamer1-plugins-(.*)"
-  setname: "gstreamer1:$1"
+- { namepat: "gst-plugins-(.*)",       setname: "gstreamer1:$1", repo: [ gentoo, debian ] }
+- { namepat: "gst-plugins0.10-(.*)",   setname: "gstreamer0:$1", repo: pkgsrc }
+- { namepat: "gst-plugins1-(.*)",      setname: "gstreamer1:$1", repo: pkgsrc }
+- { namepat: "gstreamer-plugins-(.*)", setname: "gstreamer0:$1", repo: freebsd }
+- { namepat: "gstreamer1-plugins-(.*)", setname: "gstreamer1:$1", repo: freebsd }
 
 # fonts
-- repo: debian
-  namepat: "x?fonts-(.*)"
-  setname: "fonts:$1"
+- { namepat: "x?fonts-(.*)",           setname: "fonts:$1", repo: debian }
 #- repo: freebsd # strange version mismatches
 #  namepat: "xorg-fonts-(.*)"
 #  setname: "xfonts:$1"
-- repo: gentoo
-  namepat: "(.*)-fonts"
-  setname: "fonts:$1"
-- repo: pkgsrc
-  namepat: "(.*)-ttf"
-  setname: "fonts:$1"
-- { repo: debian, name: cantarell, setname: "fonts:cantarell" }
-- { repo: [ freebsd, pkgsrc ], name: cantarell-fonts, setname: "fonts:cantarell" }
+- { namepat: "(.*)-fonts",             setname: "fonts:$1", repo: gentoo }
+- { namepat: "(.*)-ttf",               setname: "fonts:$1", repo: pkgsrc }
+- { name: cantarell,                   setname: "fonts:cantarell", repo: debian  }
+- { name: cantarell-fonts,             setname: "fonts:cantarell", repo: [ freebsd, pkgsrc ] }
 
 # cursors
-- repo: debian
-  namepat: "(.*)-cursor-theme"
-  setname: "cursors:$1"
-- repo: gentoo
-  namepat: "(.*)-xcursors"
-  setname: "cursors:$1"
-- repo: freebsd
-  namepat: "cursor-(.*)"
-  setname: "cursors:$1"
+- { namepat: "(.*)-cursor-theme",      setname: "cursors:$1", repo: debian }
+- { namepat: "(.*)-xcursors",          setname: "cursors:$1", repo: gentoo }
+- { namepat: "cursor-(.*)",            setname: "cursors:$1", repo: freebsd }
 
 # fusefs
-- namepat: "fuse-emulator.*" # protect, has nothing to do with fusefs
-  pass: true
-- namepat: "fuse(?:fs)?-(.*)"
-  setname: "fusefs:$1"
+- { namepat: "fuse-emulator.*",        pass: true } # protect from the next rule, has nothing to do with fusefs
+- { namepat: "fuse(?:fs)?-(.*)",       setname: "fusefs:$1" }
 
 # misc single-source plugin, i10n, l18n sets
-- repo: freebsd
-  namepat: "kipi-plugin-.*"
-  setname: "kipi-plugins"
-- repo: openbsd
-  namepat: "mozilla-dicts-.*"
-  setname: "mozilla-dicts"
-- repo: [ openbsd, arch ]
-  namepat: "calligra-l10n-.*"
-  setname: "calligra-l10n"
-- repo: [ openbsd, pkgsrc ]
-  namepat: "kde-i18n-.*"
-  setname: "kde-i18n"
-- repo: openbsd
-  namepat: "kde-l10n-.*"
-  setname: "kde-l10n"
-- repo: pkgsrc
-  namepat: "kde4-l10n-.*"
-  setname: "kde4-l10n"
-- repo: pkgsrc
-  namepat: "koffice-l10n-.*"
-  setname: "koffice-l10n"
-- repo: openbsd
-  namepat: "libreoffice-i18n-.*"
-  setname: "libreoffice-i18n"
-- repo: openbsd
-  namepat: "seamonkey-i18n-.*"
-  setname: "seamonkey-i18n"
-- repo: openbsd
-  namepat: "firefox-esr-i18n-.*"
-  setname: "firefox-esr-i18n"
-- repo: [ openbsd, arch ]
-  namepat: "firefox-i18n-.*"
-  setname: "firefox-i18n"
-- repo: [ openbsd, arch ]
-  namepat: "thunderbird-i18n-.*"
-  setname: "thunderbird-i18n"
-- repo: openbsd
-  namepat: "asterisk-core-sounds-.*"
-  setname: "asterisk-core-sounds"
-- repo: openbsd
-  namepat: "asterisk-extra-sounds-.*"
-  setname: "asterisk-extra-sounds"
-- repo:
-    - openbsd
-    - debian
-  namepat: "tesseract-.*"
-  setname: "tesseract-data"
-- repo: arch
-  namepat: "tesseract-data-.*"
-  setname: "tesseract-data"
-- repo:
-    - openbsd
-    - gentoo
-    - arch
-  namepat: "vim-spell-.*"
-  setname: "vim-spell"
-- repo: arch
-  namepat: "eric-i18n-.*"
-  setname: "eric-i18n"
-- repo: arch
-  namepat: "eric-qt4-i18n-.*"
-  setname: "eric-qt4-i18n"
+- { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", repo: openbsd }
+- { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", repo: openbsd }
+- { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", repo: [ openbsd, arch ] }
+- { namepat: "eric-i18n-.*",           setname: "eric-i18n", repo: arch }
+- { namepat: "eric-qt4-i18n-.*",       setname: "eric-qt4-i18n", repo: arch }
+- { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n", repo: openbsd }
+- { namepat: "firefox-i18n-.*",        setname: "firefox-i18n", repo: [ openbsd, arch ] }
+- { namepat: "kde-i18n-.*",            setname: "kde-i18n", repo: [ openbsd, pkgsrc ] }
+- { namepat: "kde-l10n-.*",            setname: "kde-l10n", repo: openbsd }
+- { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", repo: pkgsrc }
+- { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", repo: freebsd }
+- { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", repo: pkgsrc }
+- { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", repo: openbsd }
+- { namepat: "mozilla-dicts-.*",       setname: "mozilla-dicts", repo: openbsd }
+- { namepat: "seamonkey-i18n-.*",      setname: "seamonkey-i18n", repo: openbsd }
+- { namepat: "tesseract-.*",           setname: "tesseract-data", repo: [ openbsd, debian ] }
+- { namepat: "tesseract-data-.*",      setname: "tesseract-data", repo: arch }
+- { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", repo: [ openbsd, arch ] }
+- { namepat: "vim-spell-.*",           setname: "vim-spell", repo: [ openbsd, gentoo, arch ] }
 
 # smaller merges, no need for prefix
-- repo: freebsd
-  namepat: "(squirrelmail-.*)-plugin"
-  setname: "$1"
-- repo: freebsd
-  namepat: "virtualbox-ose-(.*)"
-  setname: "virtualbox-$1"
-- repo: debian
-  namepat: "x11proto-(.*)"
-  setname: "$1proto"
-- repo: freebsd
-  namepat: "love[0-9]+" # methe legacy
-  setname: "love"
+- { namepat: "(squirrelmail-.*)-plugin", setname: "$1", repo: freebsd }
+- { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1", repo: freebsd }
+- { namepat: "x11proto-(.*)",          setname: "$1proto", repo: debian }
+- { namepat: "love[0-9]+",             setname: "love", repo: freebsd } # merge legacy versions into single port
 
 # TODO
 # - texlive
