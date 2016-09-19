@@ -177,6 +177,10 @@
 - { name: lua, verpat: "5\\.1\\..*",  setname: lua51 }
 - { name: lua, verpat: "5\\.2\\..*",  setname: lua52 }
 - { name: lua, verpat: "5\\.3\\..*",  setname: lua53 }
+- { name: allegro, verpat: "4\\..*",  setname: allegro4 }
+- { name: allegro, verpat: "5\\..*",  setname: allegro5 }
+- { name: allegro4.4, setname: allegro4 }
+- { name: allegro-devel, setname: allegro5, repos: [ freebsd ] }
 - { namepat: "lua([0-9])\\.([0-9])",  setname: "lua$1$2" }
 - { name: love5, setname: love05 }
 
@@ -255,6 +259,7 @@
 - { name: openastromenace,             setname: astromenace,              repos: [ freebsd ] }
 - { name: osg,                         setname: openscenegraph,           repos: [ freebsd ] }
 - { name: pacman-arena,                setname: pacmanarena,              repos: [ openbsd ] }
+- { name: puzzles,                     setname: sgt-puzzles,              repos: [ pkgsrc, arch, openbsd ] }
 - { name: sdl-sopwith,                 setname: sopwith,                  repos: [ gentoo ]  }
 - { name: seven-kingdoms,              setname: 7kaa,                     repos: [ gentoo ]  }
 - { name: slashem-tty,                 setname: slashem,                  repos: [ freebsd ] }
