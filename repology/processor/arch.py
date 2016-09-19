@@ -36,7 +36,7 @@ def SanitizeVersion(version):
     return version
 
 class ArchDBProcessor(RepositoryProcessor):
-    def __init__(self, path,* sources):
+    def __init__(self, path, *sources):
         self.path = path
         self.sources = sources
 
