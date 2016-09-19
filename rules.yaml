@@ -191,6 +191,7 @@
 #
 # Some of these are to be reversed for less ambiguity, and some
 # are to consider for performing in the actual repos
+- { name: 2048,                        setname: 2048-cli,                 repos: [ pkgsrc ] } # differentiate from 2048-qt
 - { name: abuse_sdl,                   setname: abuse,                    repos: [ freebsd ] }
 - { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }
@@ -224,6 +225,7 @@
 - { name: drpython-py27,               setname: drpython,                 repos: [ freebsd ] }
 - { name: dynamips-community,          setname: dynamips,                 repos: [ freebsd ] }
 - { name: easyrpg,                     setname: easyrpg-player,           repos: [ openbsd ] }
+- { name: einstein-puzzle,             setname: einstein,                 repos: [ pkgsrc ] }
 - { name: el,                          setname: eternal-lands,            repos: [ freebsd ] }
 - { name: el-data,                     setname: eternal-lands-data,       repos: [ freebsd ] }
 - { name: endgame-singularity,         setname: singularity,              repos: [ freebsd ] }
@@ -343,5 +345,6 @@
 # - filebeat/filebeat-bin
 # - fira* (font)
 
-# Version ignores
-- { name: cryptcat,                    ver: "20031202",    ignorever: true }
+# Version ignores, incompatible version mangling in the repos
+- { name: cryptcat,                    ver: "20031202",               ignorever: true }
+- { name: xmahjongg,                   ver: "3.70", repo: [ pkgsrc ], ignorever: true }
