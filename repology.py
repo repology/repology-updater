@@ -19,6 +19,7 @@
 
 import os
 import sys
+import time
 from argparse import ArgumentParser
 
 from repology.processor import *
@@ -184,6 +185,9 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
     print("</tr>")
 
     print("</table>")
+
+    print("<div class=\"gentime\">Page generated: %s</div>" % time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()))
+
     print("</body>")
     print("</html>")
 
