@@ -94,6 +94,10 @@ State of games along all repos, with irrelevant packages filtered out:
 
 ### FreeBSD
 
+Links:
+- [FreshPorts](http://freshports.org)
+- [SVN](https://svnweb.freebsd.org/ports/head)
+
 Parses INDEX-11.bz2 file, available data:
 - name
 - version
@@ -106,6 +110,10 @@ licenses and options.
 
 ### Debian/Ubuntu
 
+Links:
+- [https://www.debian.org/distrib/packages#search_packages](Debian Packages)
+- [http://packages.ubuntu.com/](Ubuntu Packages)
+
 Parses Sources.gz, available data:
 - name
 - version
@@ -113,20 +121,13 @@ Parses Sources.gz, available data:
 - category
 - homepage
 
-TODO: May need to parse *.debian.tar.xz for additional info for
+TODO: May need to parse ```*.debian.tar.xz``` for additional info for
 each package. Heavy?
 
-### Arch
-
-Parses package databases (core, extra, community), available data:
-- name
-- version
-- comment
-- homepage
-- maintainer (packager, actually)
-- license
-
 ### Gentoo
+
+Links:
+- [Gentoo packages](https://packages.gentoo.org/)
 
 Parses git mirror of portage repository (file tree only, doesn't
 look into ebuilds), available data:
@@ -138,15 +139,25 @@ TODO: Parse metadata.xml for maintainer. Parse ebuilds for more info.
 
 ### pkgsrc
 
+Links:
+- [pkgsrc.org](http://pkgsrc.org/)
+- [CVS](http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/)
+- [pkgsrc.se](http://www.pkgsrc.se/)
+
 Is capable of generating INDEX file similar to that of FreeBSD, but
-it takes too much time (hours). For now, we parse package list from
-NetBSD, which only contains:
+it takes too much time (hours). For now, we parse README-all list
+from NetBSD, which only contains:
 - name
 - version
+- category
+- comment
 
 TODO: Generate and parse INDEX, even if it's done infrequently.
 
 ### OpenBSD
+
+- [CVS](http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/)
+- [openports.se](http://openports.se/)
 
 Parses INDEX file (format similar to FreeBSD), available data:
 - name
@@ -154,6 +165,18 @@ Parses INDEX file (format similar to FreeBSD), available data:
 - comment
 - maintainer
 - category
+
+### Arch
+
+- [Package Search](https://www.archlinux.org/packages/)
+
+Parses package databases (core, extra, community), available data:
+- name
+- version
+- comment
+- homepage
+- maintainer (packager, actually)
+- license
 
 ## Reading the report
 
