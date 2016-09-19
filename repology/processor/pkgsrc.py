@@ -51,17 +51,60 @@ class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
         result = []
 
         with open(self.path) as file:
-            pkg = Package()
             for line in file:
                 pkgname = line[12:-137]
 
                 if pkgname.find('-') == -1:
                     continue
 
+                pkg = Package()
+
                 pkg.name, pkg.fullversion = SplitPackageNameVersion(pkgname)
                 pkg.version = SanitizeVersion(pkg.fullversion)
 
                 result.append(pkg)
+
+        return result
+
+class PkgSrcReadmeAllProcessor(RepositoryProcessor):
+    def __init__(self, path, src):
+        self.path = path
+        self.src = src
+
+    def GetRepoType(self):
+        return 'pkgsrc'
+
+    def IsUpToDate(self):
+        return False
+
+    def Download(self, update = True):
+        if os.path.isfile(self.path) and not update:
+            return
+        subprocess.check_call("wget -qO- %s > %s" % (self.src, self.path), shell = True)
+
+    def Parse(self):
+        result = []
+
+        with open(self.path) as file:
+            pkg = Package()
+            for line in file:
+                line = line[:-1]
+
+                if line.find('(for sorting)') == -1:
+                    continue
+
+                parts = re.split("<[^<>]+>", line)
+
+                if len(parts) != 10:
+                    continue
+
                 pkg = Package()
+
+                pkg.name, pkg.fullversion = SplitPackageNameVersion(parts[4])
+                pkg.version = SanitizeVersion(pkg.fullversion)
+                pkg.category = parts[7]
+                pkg.comment = parts[9]
+
+                result.append(pkg)
 
         return result
