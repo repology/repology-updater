@@ -34,7 +34,13 @@ class NameTransformer:
 
         pp = pprint.PrettyPrinter()
         for rule in self.rules:
+            # save pretty-print before all transformations
             rule['pretty'] = pp.pformat(rule)
+
+            # process number-like strings gracefully
+            for field in ['name', 'ver']:
+                if field in rule:
+                    rule[field] = str(rule[field])
 
             # convert some fields to lists
             for field in ['category']:
