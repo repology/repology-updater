@@ -94,22 +94,8 @@ def Trim(str, maxlength):
 
     return "<span title=\"%s\">%s...</span>" % (str, str[0:maxlength])
 
-def PrintPackageTable(packages, repositories, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
-    statistics = {}
-
-    print("<html>")
-    print("<head>");
-    print("<html><head><title>Repology</title>")
-    print("<link rel=\"stylesheet\" media=\"screen\" href=\"repology.css\">")
-    print("</head>")
-    print("<body>")
-    print("<a href=\"https://github.com/AMDmi3/repology\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67\" alt=\"Fork me on GitHub\" data-canonical-src=\"https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png\"></a>");
-    print("<table>")
-    print("<tr><th>Package</th>")
-    for repository in repositories:
-        print("<th>%s</th>" % repository['name'])
-        statistics[repository['name']] = { 'total': 0, 'lonely': 0, 'good': 0, 'multi': 0, 'bad': 0, 'ignore': 0 }
-    print("</tr>")
+def FilterPackages(packages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
+    filtered_packages = {}
 
     for pkgname in sorted(packages.keys()):
         metapackage = packages[pkgname]
@@ -128,6 +114,30 @@ def PrintPackageTable(packages, repositories, maintainer = None, category = None
 
         if notinrepo is not None and metapackage.HasRepository(notinrepo):
             continue
+
+        filtered_packages[pkgname] = metapackage
+
+    return filtered_packages
+
+def PrintPackageTable(packages, repositories):
+    statistics = {}
+
+    print("<html>")
+    print("<head>");
+    print("<html><head><title>Repology</title>")
+    print("<link rel=\"stylesheet\" media=\"screen\" href=\"repology.css\">")
+    print("</head>")
+    print("<body>")
+    print("<a href=\"https://github.com/AMDmi3/repology\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67\" alt=\"Fork me on GitHub\" data-canonical-src=\"https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png\"></a>");
+    print("<table>")
+    print("<tr><th>Package</th>")
+    for repository in repositories:
+        print("<th>%s</th>" % repository['name'])
+        statistics[repository['name']] = { 'total': 0, 'lonely': 0, 'good': 0, 'multi': 0, 'bad': 0, 'ignore': 0 }
+    print("</tr>")
+
+    for pkgname in sorted(packages.keys()):
+        metapackage = packages[pkgname]
 
         print("<tr>")
         print("<td>%s</td>" % (Trim(pkgname, 30)))
@@ -221,14 +231,17 @@ def Main():
 
     if not options.no_output:
         print("===> Producing output", file=sys.stderr)
-        PrintPackageTable(
+        packages = FilterPackages(
             packages,
-            REPOSITORIES,
             options.maintainer,
             options.category,
             int(options.number) if options.number is not None else 0,
             options.repository,
             options.no_repository
+        )
+        PrintPackageTable(
+            packages,
+            REPOSITORIES
         )
 
     unmatched = nametrans.GetUnmatchedRules()
