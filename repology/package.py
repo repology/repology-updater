@@ -106,5 +106,8 @@ class MetaPackage:
     def GetNumRepos(self):
         return len(self.packages)
 
+    def GetRepos(self):
+        return self.packages.keys()
+
     def HasRepository(self, reponame):
         return reponame in self.packages

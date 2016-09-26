@@ -26,6 +26,7 @@ import jinja2
 from repology.processor import *
 from repology.package import *
 from repology.nametransformer import NameTransformer
+from repology.report import ReportProducer
 
 REPOSITORIES = [
     { 'name': "FreeBSD", 'processor': FreeBSDIndexProcessor("freebsd.list",
@@ -89,12 +90,6 @@ def MixRepositories(repositories, nametrans):
 
     return packages
 
-def Trim(str, maxlength):
-    if len(str) <= maxlength:
-        return str
-
-    return "<span title=\"%s\">%s...</span>" % (str, str[0:maxlength])
-
 def FilterPackages(packages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
     filtered_packages = {}
 
@@ -119,78 +114,6 @@ def FilterPackages(packages, maintainer = None, category = None, number = 0, inr
         filtered_packages[pkgname] = metapackage
 
     return filtered_packages
-
-def PrintPackageTable(packages, reponames):
-    env = jinja2.Environment(loader = jinja2.PackageLoader('repology', 'templates'),
-        lstrip_blocks = True,
-        trim_blocks = True
-    )
-    env.filters["spantrim"] = Trim
-    template = env.get_template('table.html')
-
-    template_args = {
-        'reponames': reponames,
-        'repositories': {},
-        'packages': [],
-        'gentime': time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
-    }
-
-    for reponame in reponames:
-        template_args['repositories'][reponame] = {
-            'statistics': {
-                'total': 0,
-                'lonely': 0,
-                'good': 0,
-                'multi': 0,
-                'bad': 0,
-                'ignore': 0
-            }
-        }
-
-    for pkgname in sorted(packages.keys()):
-        metapackage = packages[pkgname]
-
-        bestversion, _, _ = metapackage.GetMaxVersion()
-
-        template_package = {
-            'name': pkgname,
-            'byrepo': {}
-        }
-
-        for reponame in reponames:
-            # packages for this repository
-            repopackages = metapackage.Get(reponame)
-            if repopackages is None:
-                continue
-
-            # determine versions
-            repominversion, repomaxversion = metapackage.GetVersionRangeForRepo(reponame)
-
-            versionclass = 'bad'
-            if metapackage.GetNumRepos() == 1:
-                versionclass = 'lonely'
-            elif bestversion is None:
-                versionclass = 'good'
-            elif VersionCompare(repomaxversion, bestversion) > 0: # due to ignore
-                versionclass = 'ignore'
-            elif VersionCompare(repomaxversion, bestversion) >= 0:
-                if VersionCompare(repominversion, bestversion) == 0:
-                    versionclass = 'good'
-                else:
-                    versionclass = 'multi'
-
-            template_package['byrepo'][reponame] = {
-                'version': repomaxversion,
-                'class': versionclass,
-                'numpackages': len(repopackages)
-            }
-
-            template_args['repositories'][reponame]['statistics']['total'] += 1
-            template_args['repositories'][reponame]['statistics'][versionclass] += 1
-
-        template_args['packages'].append(template_package)
-
-    print(template.render(template_args))
 
 def Main():
     parser = ArgumentParser()
@@ -230,10 +153,8 @@ def Main():
             options.repository,
             options.no_repository
         )
-        PrintPackageTable(
-            packages,
-            [x['name'] for x in REPOSITORIES]
-        )
+        rp = ReportProducer()
+        print(rp.Render('table.html', packages, [x['name'] for x in REPOSITORIES]))
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
