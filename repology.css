@@ -2,12 +2,14 @@ body {
 	font-family: sans-serif;
 	font-size: 12px;
 	color: #333;
+    margin: 0px;
 }
 
 table {
 	border: 0px;
 	border-collapse: collapse;
 	margin: 0px auto;
+    width: 100%;
 }
 
 tr:nth-child(even) {
@@ -83,4 +85,13 @@ ul.pages li a {
 
 ul.pages li a:hover {
     background-color: #ddd;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 110px;
+    display: block;
+    background-color: #f7f5f3;
+    padding: 20px;
+    margin: 0 0 40px 0;
 }
