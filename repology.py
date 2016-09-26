@@ -154,7 +154,7 @@ def Main():
             options.no_repository
         )
         rp = ReportProducer()
-        print(rp.Render('table.html', packages, [x['name'] for x in REPOSITORIES]))
+        rp.RenderFile('table.html', options.path, packages, [x['name'] for x in REPOSITORIES])
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):

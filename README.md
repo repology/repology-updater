@@ -50,12 +50,12 @@ much more useful.
 ### Invocation:
 
 ```
-./repology.py > repology.html
+./repology.py output.html
 ```
 
 Will download data for supported repositories and generate HTML
-report. By default, it includes all packages, so you may need
-some filtering:
+report, writing it into ```output.html```. By default, it includes
+all packages, so you may need some filtering:
 
 - ```-m``` filter by maintainer (e.g. ```amdmi3@FreeBSD.org```)
 - ```-c``` filter by category (e.g. ```games```; note that this
@@ -76,19 +76,19 @@ Packages which likely are needed to be added to pkgsrc (because
 all other repositories have them) and their versions:
 
 ```
-./repology.py -U -R pkgsrc -n 3 > missing-pkgsrc.html
+./repology.py -U -R pkgsrc -n 3 missing-pkgsrc.html
 ```
 
 State of FreeBSD ports maintained by me:
 
 ```
-./repology.py -U -m amdmi3@FreeBSD.org -r FreeBSD > maintainer-amdmi3.html
+./repology.py -U -m amdmi3@FreeBSD.org -r FreeBSD maintainer-amdmi3.html
 ```
 
 State of games along all repos, with irrelevant packages filtered out:
 
 ```
-./repology.py -U -c games -n 2 > games.html
+./repology.py -U -c games -n 2 games.html
 ```
 
 ## Repository support

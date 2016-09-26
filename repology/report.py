@@ -38,7 +38,11 @@ class ReportProducer:
 
         self.env = env
 
-    def Render(self, template, packages, reponames):
+    def RenderFile(self, template, path, packages, reponames, **extradata):
+        with open(path, 'w') as file:
+            file.write(self.Render(template, packages, reponames, **extradata))
+
+    def Render(self, template, packages, reponames, **extradata):
         template = self.env.get_template(template)
 
         template_args = {
@@ -47,6 +51,10 @@ class ReportProducer:
             'packages': [],
             'gentime': time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
         }
+
+        if extradata is not None:
+            for key, value in extradata.items():
+                template_args[key] = value
 
         for reponame in reponames:
             template_args['repositories'][reponame] = {
