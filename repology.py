@@ -125,6 +125,7 @@ def PrintPackageTable(packages, reponames):
         lstrip_blocks = True,
         trim_blocks = True
     )
+    env.filters["spantrim"] = Trim
     template = env.get_template('table.html')
 
     template_args = {
