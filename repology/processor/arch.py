@@ -40,9 +40,6 @@ class ArchDBProcessor(RepositoryProcessor):
         self.path = path
         self.sources = sources
 
-    def GetRepoType(self):
-        return 'arch'
-
     def IsUpToDate(self):
         return False
 

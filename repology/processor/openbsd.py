@@ -49,9 +49,6 @@ class OpenBSDIndexProcessor(RepositoryProcessor):
         self.path = path
         self.src = src
 
-    def GetRepoType(self):
-        return 'openbsd'
-
     def IsUpToDate(self):
         return False
 

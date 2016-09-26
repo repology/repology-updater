@@ -16,9 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 class RepositoryProcessor:
-    def GetRepoType(self):
-        return None
-
     def IsUpToDate(self):
         return True
 

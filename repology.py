@@ -29,47 +29,47 @@ from repology.nametransformer import NameTransformer
 from repology.report import ReportProducer
 
 REPOSITORIES = [
-    { 'name': "FreeBSD", 'processor': FreeBSDIndexProcessor("freebsd.list",
+    { 'name': "FreeBSD", 'repotype': 'freebsd', 'processor': FreeBSDIndexProcessor("freebsd.list",
         "http://www.FreeBSD.org/ports/INDEX-11.bz2"
     ) },
-    #{ 'name': 'Debian Stable', 'processor': DebianSourcesProcessor("debian-stable.list",
+    #{ 'name': 'Debian Stable', 'repotype': 'debian', 'processor': DebianSourcesProcessor("debian-stable.list",
     #    "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz"
     #) },
-    #{ 'name': 'Debian Tesing', 'processor': DebianSourcesProcessor("debian-testing.list",
+    #{ 'name': 'Debian Tesing', 'repotype': 'debian', 'processor': DebianSourcesProcessor("debian-testing.list",
     #    "http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz"
     #) },
     # Debian unstable
-    { 'name': 'Debian', 'processor': DebianSourcesProcessor("debian-unstable.list",
+    { 'name': 'Debian', 'repotype': 'debian', 'processor': DebianSourcesProcessor("debian-unstable.list",
         "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
         "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
         "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz"
     ) },
-    #{ 'name': 'Ubuntu Xenial', 'processor': DebianSourcesProcessor("ubuntu-xenial.list",
+    #{ 'name': 'Ubuntu Xenial', 'repotype': 'debian', 'processor': DebianSourcesProcessor("ubuntu-xenial.list",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz"
     #) },
-    #{ 'name': 'Ubuntu Yakkety', 'processor': DebianSourcesProcessor("ubuntu-yakkety.list",
+    #{ 'name': 'Ubuntu Yakkety', 'repotype': 'debian', 'processor': DebianSourcesProcessor("ubuntu-yakkety.list",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/main/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz"
     #) },
-    { 'name': 'Gentoo', 'processor': GentooGitProcessor("gentoo.git",
+    { 'name': 'Gentoo', 'repotype': 'gentoo', 'processor': GentooGitProcessor("gentoo.git",
         "https://github.com/gentoo/gentoo.git"
     ) },
-    { 'name': 'NetBSD', 'processor': PkgSrcReadmeAllProcessor("pkgsrc.list",
+    { 'name': 'NetBSD', 'repotype': 'pkgsrc', 'processor': PkgSrcReadmeAllProcessor("pkgsrc.list",
         "https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"
     ) },
-    { 'name': 'OpenBSD', 'processor': OpenBSDIndexProcessor("openbsd.list",
+    { 'name': 'OpenBSD', 'repotype': 'openbsd', 'processor': OpenBSDIndexProcessor("openbsd.list",
         "http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"
     ) },
-    { 'name': 'Arch', 'processor': ArchDBProcessor("arch.dir",
+    { 'name': 'Arch', 'repotype': 'arch', 'processor': ArchDBProcessor("arch.dir",
         "http://ftp.u-tx.net/archlinux/core/os/x86_64/core.db.tar.gz",
         "http://ftp.u-tx.net/archlinux/extra/os/x86_64/extra.db.tar.gz",
         "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
@@ -81,7 +81,7 @@ def MixRepositories(repositories, nametrans):
 
     for repository in repositories:
         for package in repository['packages']:
-            metaname = nametrans.TransformName(package, repository['processor'].GetRepoType())
+            metaname = nametrans.TransformName(package, repository['repotype'])
             if metaname is None:
                 continue
             if not metaname in packages:
