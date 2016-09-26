@@ -19,6 +19,8 @@
 
 import time
 import jinja2
+import os
+
 from .util import VersionCompare
 
 def SpanTrim(str, maxlength):
@@ -37,6 +39,29 @@ class ReportProducer:
         env.filters["spantrim"] = SpanTrim
 
         self.env = env
+
+    def RenderFilesPaginated(self, template, path, packages, reponames, perpage, **extradata):
+        keys = sorted(packages.keys())
+
+        numpages = (len(keys) + perpage - 1) // perpage
+
+        for page in range(0, numpages):
+            pagepath = path
+            if pagepath.endswith(".html"):
+                pagepath = "%s%d%s" % (pagepath[0:-5], page, pagepath[-5:])
+            else:
+                pagepath = "%s%d" % (pagepath, page)
+
+            self.RenderFile(
+                template,
+                pagepath,
+                {k:packages[k] for k in keys[page * perpage:page * perpage + perpage]},
+                reponames,
+                page = page,
+                numpages = numpages,
+                basename = os.path.basename(pagepath),
+                **extradata
+            )
 
     def RenderFile(self, template, path, packages, reponames, **extradata):
         with open(path, 'w') as file:

@@ -57,3 +57,30 @@ div.gentime {
     margin: 1em;
     text-align: center;
 }
+
+ul.pages {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pages li {
+    display: inline-block;
+    width: 3em;
+    background-color: #ddd;
+    text-align: center;
+    padding: 5px 0px
+}
+
+ul.pages li a {
+    display: block;
+    background-color: white;
+    padding: 5px 0px;
+    margin: -5px 0px;
+    color: black;
+    text-decoration: none;
+}
+
+ul.pages li a:hover {
+    background-color: #ddd;
+}
