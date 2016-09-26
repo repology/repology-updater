@@ -125,6 +125,7 @@ def Main():
     parser.add_argument('-r', '--repository', help='filter by presence in repository')
     parser.add_argument('-R', '--no-repository', help='filter by absence in repository')
     parser.add_argument('-x', '--no-output', action='store_true', help='do not output anything')
+    parser.add_argument('path', help='path to output file')
     options = parser.parse_args()
 
     for repository in REPOSITORIES:
