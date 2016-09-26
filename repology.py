@@ -21,6 +21,7 @@ import os
 import sys
 import time
 from argparse import ArgumentParser
+import jinja2
 
 from repology.processor import *
 from repology.package import *
@@ -119,38 +120,46 @@ def FilterPackages(packages, maintainer = None, category = None, number = 0, inr
 
     return filtered_packages
 
-def PrintPackageTable(packages, repositories):
-    statistics = {}
+def PrintPackageTable(packages, reponames):
+    env = jinja2.Environment(loader = jinja2.PackageLoader('repology', 'templates'),
+        lstrip_blocks = True,
+        trim_blocks = True
+    )
+    template = env.get_template('table.html')
 
-    print("<html>")
-    print("<head>");
-    print("<html><head><title>Repology</title>")
-    print("<link rel=\"stylesheet\" media=\"screen\" href=\"repology.css\">")
-    print("</head>")
-    print("<body>")
-    print("<a href=\"https://github.com/AMDmi3/repology\"><img style=\"position: absolute; top: 0; right: 0; border: 0;\" src=\"https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67\" alt=\"Fork me on GitHub\" data-canonical-src=\"https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png\"></a>");
-    print("<table>")
-    print("<tr><th>Package</th>")
-    for repository in repositories:
-        print("<th>%s</th>" % repository['name'])
-        statistics[repository['name']] = { 'total': 0, 'lonely': 0, 'good': 0, 'multi': 0, 'bad': 0, 'ignore': 0 }
-    print("</tr>")
+    template_args = {
+        'reponames': reponames,
+        'repositories': {},
+        'packages': [],
+        'gentime': time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
+    }
+
+    for reponame in reponames:
+        template_args['repositories'][reponame] = {
+            'statistics': {
+                'total': 0,
+                'lonely': 0,
+                'good': 0,
+                'multi': 0,
+                'bad': 0,
+                'ignore': 0
+            }
+        }
 
     for pkgname in sorted(packages.keys()):
         metapackage = packages[pkgname]
 
-        print("<tr>")
-        print("<td>%s</td>" % (Trim(pkgname, 30)))
-
         bestversion, _, _ = metapackage.GetMaxVersion()
 
-        for repo in repositories:
-            reponame = repo['name']
+        template_package = {
+            'name': pkgname,
+            'byrepo': {}
+        }
 
+        for reponame in reponames:
             # packages for this repository
             repopackages = metapackage.Get(reponame)
             if repopackages is None:
-                print("<td>-</td>")
                 continue
 
             # determine versions
@@ -169,37 +178,18 @@ def PrintPackageTable(packages, repositories):
                 else:
                     versionclass = 'multi'
 
-            print("<td><span class=\"version %s\">%s</span>" % (versionclass, Trim(repomaxversion, 12)))
-            if (len(repopackages) > 1):
-                print(" (%d)" % len(repopackages));
-            print("</td>");
+            template_package['byrepo'][reponame] = {
+                'version': repomaxversion,
+                'class': versionclass,
+                'numpackages': len(repopackages)
+            }
 
-            statistics[reponame]['total'] += 1
-            statistics[reponame][versionclass] += 1
+            template_args['repositories'][reponame]['statistics']['total'] += 1
+            template_args['repositories'][reponame]['statistics'][versionclass] += 1
 
-        print("</tr>")
+        template_args['packages'].append(template_package)
 
-    print("<tr>")
-    print("<th>%d</th>" % len(packages))
-    for repo in repositories:
-        reponame = repo['name']
-        print("<th>%d<br><span class=\"version lonely\">%d</span><br><span class=\"version good\">%d</span><br><span class=\"version multi\">%d</span><br><span class=\"version bad\">%d (%.2f%%)</span><br><span class=\"version ignore\">%d</span></th>" % (
-                statistics[reponame]['total'],
-                statistics[reponame]['lonely'],
-                statistics[reponame]['good'],
-                statistics[reponame]['multi'],
-                statistics[reponame]['bad'],
-                statistics[reponame]['bad'] / (1 if statistics[reponame]['total'] == 0 else statistics[reponame]['total']) * 100.0,
-                statistics[reponame]['ignore']
-            ))
-    print("</tr>")
-
-    print("</table>")
-
-    print("<div class=\"gentime\">Page generated: %s</div>" % time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()))
-
-    print("</body>")
-    print("</html>")
+    print(template.render(template_args))
 
 def Main():
     parser = ArgumentParser()
@@ -241,7 +231,7 @@ def Main():
         )
         PrintPackageTable(
             packages,
-            REPOSITORIES
+            [x['name'] for x in REPOSITORIES]
         )
 
     unmatched = nametrans.GetUnmatchedRules()

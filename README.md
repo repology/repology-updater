@@ -43,6 +43,7 @@ much more useful.
 - python3
 - pyyaml
 - setuptools
+- jinja2
 - wget (for fetching some repository data)
 - git (for fetching some repository data)
 
