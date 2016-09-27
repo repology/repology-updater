@@ -15,7 +15,7 @@
     </tr>
     {% endif %}
     <tr>
-        <td>{{ package.name|spantrim(30) }}</td>
+        <td>{{ package.name|spantrim(20) }}</td>
         {% for reponame in reponames %}
             {% set subpackage = package.byrepo[reponame] %}
             {% if subpackage is defined %}
