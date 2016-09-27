@@ -60,7 +60,7 @@ class OpenBSDIndexProcessor(RepositoryProcessor):
     def Parse(self):
         result = []
 
-        with open(self.path) as file:
+        with open(self.path, encoding="utf-8") as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
                 pkg = Package()

@@ -44,5 +44,5 @@ class Template:
         return template.render(data)
 
     def RenderToFile(self, template, path, **template_data):
-        with open(path, 'w') as file:
+        with open(path, 'w', encoding="utf-8") as file:
             file.write(self.Render(template, **template_data))

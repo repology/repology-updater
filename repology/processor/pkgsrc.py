@@ -79,7 +79,7 @@ class PkgSrcReadmeAllProcessor(RepositoryProcessor):
     def Parse(self):
         result = []
 
-        with open(self.path) as file:
+        with open(self.path, encoding="utf-8") as file:
             pkg = Package()
             for line in file:
                 line = line[:-1]
