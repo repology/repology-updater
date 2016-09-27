@@ -346,5 +346,5 @@
 # - fira* (font)
 
 # Version ignores, incompatible version mangling in the repos
-- { name: cryptcat,                    ver: "20031202",               ignorever: true }
-- { name: xmahjongg,                   ver: "3.70", repo: [ pkgsrc ], ignorever: true }
+- { name: cryptcat,                    ver: "20031202",                ignorever: true }
+- { name: xmahjongg,                   ver: "3.70", repos: [ pkgsrc ], ignorever: true }
