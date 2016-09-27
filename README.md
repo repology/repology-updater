@@ -3,7 +3,7 @@
 ![Example report](docs/screenshot.png)
 
 Repology analyzes multiple package repositories and compares versions
-of a packages in them.
+of packages in them.
 
 The report it produces shows which repositories contain or lack
 which packages, and whether packages need updating.
