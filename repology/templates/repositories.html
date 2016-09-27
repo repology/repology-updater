@@ -1,0 +1,11 @@
+{% include 'header.html' %}
+
+<ul>
+{% for repository in repositories %}
+    <li>
+        <a href="{{ repository }}.0.html">{{ repository }}</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% include 'footer.html' %}

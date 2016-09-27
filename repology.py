@@ -20,13 +20,17 @@
 import os
 import sys
 import time
+import re
 from argparse import ArgumentParser
 import jinja2
+from xml.sax.saxutils import escape
+import shutil
 
 from repology.processor import *
 from repology.package import *
 from repology.nametransformer import NameTransformer
 from repology.report import ReportProducer
+from repology.template import Template
 
 REPOSITORIES = [
     { 'name': "FreeBSD", 'processor': FreeBSDIndexProcessor("freebsd.list",
@@ -115,6 +119,122 @@ def FilterPackages(packages, maintainer = None, category = None, number = 0, inr
 
     return filtered_packages
 
+def RepologyOrg(path, packages, repositories):
+    if not os.path.isdir(path):
+        os.mkdir(path)
+
+    template = Template()
+    rp = ReportProducer(template, "table.html")
+
+    print("===> Main index", file=sys.stderr)
+    rp.RenderFilesPaginated(
+        os.path.join(path, "index"),
+        packages,
+        repositories,
+        500,
+        site_root = "",
+        subheader = "Package index",
+        subsection = "packages"
+    )
+
+    print("===> Per-maintainer index", file=sys.stderr)
+    maintainers = {}
+    for package in packages.values():
+        for maintainer in package.GetMaintainers():
+            maintainers[maintainer] = re.sub("[^a-zA-Z@.0-9]", "_", maintainer).lower()
+
+    maintainers_path = os.path.join(path, "maintainers")
+    if not os.path.isdir(maintainers_path):
+        os.mkdir(maintainers_path)
+
+    limit = 100
+    for maintainer, sanitized_maintainer in maintainers.items():
+        maint_packages = FilterPackages(packages, maintainer = maintainer)
+
+        rp.RenderFilesPaginated(
+            os.path.join(maintainers_path, sanitized_maintainer),
+            maint_packages,
+            repositories,
+            500,
+            site_root = "../",
+            subheader = "Packages maintained by " + escape(maintainer),
+            subsection = "maintainers"
+        )
+
+        limit -= 1
+        if limit == 10000:
+            break
+
+    template.RenderToFile(
+        'maintainers.html',
+        os.path.join(maintainers_path, "index.html"),
+        site_root = "../",
+        maintainers = [ { "fullname": escape(maintainer), "sanitizedname": maintainers[maintainer] } for maintainer in sorted(maintainers.keys()) ],
+        subheader = "Package maintainers",
+        subsection = "maintainers"
+    )
+
+    print("===> Per-repository pages", file=sys.stderr)
+    inrepo_path = os.path.join(path, "repositories")
+    if not os.path.isdir(inrepo_path):
+        os.mkdir(inrepo_path)
+
+    notinrepo_path = os.path.join(path, "absent")
+    if not os.path.isdir(notinrepo_path):
+        os.mkdir(notinrepo_path)
+
+    for repository in repositories:
+        inrepo_packages = FilterPackages(packages, inrepo = repository)
+        notinrepo_packages = FilterPackages(packages, notinrepo = repository, number = 2)
+
+        rp.RenderFilesPaginated(
+            os.path.join(inrepo_path, repository),
+            inrepo_packages,
+            repositories,
+            500,
+            site_root = "../",
+            subheader = "Packages in " + repository,
+            subsection = "repositories"
+        )
+
+        rp.RenderFilesPaginated(
+            os.path.join(notinrepo_path, repository),
+            notinrepo_packages,
+            repositories,
+            500,
+            site_root = "../",
+            subheader = "Packages absent from " + repository,
+            subsection = "absent"
+        )
+
+    template.RenderToFile(
+        'repositories.html',
+        os.path.join(inrepo_path, "index.html"),
+        site_root = "../",
+        repositories = repositories,
+        subheader = "Repositories",
+        subsection = "repositories",
+        description = '''
+            For each repository, this section only lists packages it contains.
+        '''
+    )
+
+    template.RenderToFile(
+        'repositories.html',
+        os.path.join(notinrepo_path, "index.html"),
+        site_root = "../",
+        repositories = repositories,
+        subheader = "Repositories with absent packages",
+        subsection = "absent",
+        description = '''
+            For each repository, this section lists packages not present in it, but present in two other repositories.
+        '''
+    )
+
+    print("===> Finalizing", file=sys.stderr)
+    shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
+    shutil.copyfile(os.path.join(path, "index.0.html"), os.path.join(path, "index.html"))
+
 def Main():
     parser = ArgumentParser()
     parser.add_argument('-U', '--no-update', action='store_true', help='don\'t update databases')
@@ -125,6 +245,8 @@ def Main():
     parser.add_argument('-r', '--repository', help='filter by presence in repository')
     parser.add_argument('-R', '--no-repository', help='filter by absence in repository')
     parser.add_argument('-x', '--no-output', action='store_true', help='do not output anything')
+    parser.add_argument('-o', '--repology-org', action='store_true', help='repology.org mode, static site generator')
+    parser.add_argument('path', help='target file/dir path')
     options = parser.parse_args()
 
     for repository in REPOSITORIES:
@@ -143,7 +265,10 @@ def Main():
     print("===> Processing", file=sys.stderr)
     packages = MixRepositories(REPOSITORIES, nametrans)
 
-    if not options.no_output:
+    if options.repology_org:
+        print("===> Producing repology.org website", file=sys.stderr)
+        RepologyOrg(options.path, packages, [x['name'] for x in REPOSITORIES])
+    elif not options.no_output:
         print("===> Producing output", file=sys.stderr)
         packages = FilterPackages(
             packages,

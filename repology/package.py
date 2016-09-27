@@ -83,7 +83,7 @@ class MetaPackage:
         for packagelist in self.packages.values():
             for package in packagelist:
                 if package.maintainer is not None:
-                    maintainer.append(package.maintainer)
+                    maintainers.append(package.maintainer)
 
         return maintainers
 

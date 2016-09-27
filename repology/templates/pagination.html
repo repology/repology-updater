@@ -1,0 +1,18 @@
+{% if numpages and numpages > 1 %}
+<nav>
+    Pages:
+    <ul>
+    {% for p in range (0, numpages) -%}
+        <li>
+        {% if p != page %}
+            <a href="{{ basename }}.{{p}}.html">
+        {%- endif -%}
+        {{ p }}
+        {%- if p != page -%}
+            </a>
+        {% endif %}
+        </li>
+    {%- endfor %}
+    </ul>
+</nav>
+{% endif %}

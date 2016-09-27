@@ -18,80 +18,45 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import time
-import jinja2
 import os
 
 from .util import VersionCompare
 
-def SpanTrim(str, maxlength):
-    if len(str) <= maxlength:
-        return str
-
-    return "<span title=\"%s\">%s...</span>" % (str, str[0:maxlength])
-
 class ReportProducer:
-    def __init__(self):
-        env = jinja2.Environment(
-            loader = jinja2.PackageLoader('repology', 'templates'),
-            lstrip_blocks = True,
-            trim_blocks = True,
-        )
-        env.filters["spantrim"] = SpanTrim
+    def __init__(self, template, templatename):
+        self.template = template
+        self.templatename = templatename
 
-        self.env = env
-
-    def RenderFilesPaginated(self, template, path, packages, reponames, perpage, **extradata):
+    def RenderFilesPaginated(self, path, packages, reponames, perpage, **extradata):
         keys = sorted(packages.keys())
 
         numpages = (len(keys) + perpage - 1) // perpage
 
         for page in range(0, numpages):
-            pagepath = path
-            if pagepath.endswith(".html"):
-                pagepath = "%s%d%s" % (pagepath[0:-5], page, pagepath[-5:])
-            else:
-                pagepath = "%s%d" % (pagepath, page)
+            pagepath = "%s.%d.html" % (path, page)
 
-            self.RenderFile(
-                template,
+            self.RenderToFile(
                 pagepath,
                 {k:packages[k] for k in keys[page * perpage:page * perpage + perpage]},
                 reponames,
                 page = page,
                 numpages = numpages,
-                basename = os.path.basename(pagepath),
+                basename = os.path.basename(path),
                 **extradata
             )
 
-    def RenderFile(self, template, path, packages, reponames, **extradata):
-        with open(path, 'w') as file:
-            file.write(self.Render(template, packages, reponames, **extradata))
-
-    def Render(self, template, packages, reponames, **extradata):
-        template = self.env.get_template(template)
-
-        template_args = {
+    def Prepare(self, packages, reponames, **template_data):
+        data = {
             'reponames': reponames,
             'repositories': {},
             'packages': [],
             'gentime': time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
         }
 
-        if extradata is not None:
-            for key, value in extradata.items():
-                template_args[key] = value
+        data.update(template_data)
 
         for reponame in reponames:
-            template_args['repositories'][reponame] = {
-                'statistics': {
-                    'total': 0,
-                    'lonely': 0,
-                    'good': 0,
-                    'multi': 0,
-                    'bad': 0,
-                    'ignore': 0
-                }
-            }
+            data['repositories'][reponame] = {}
 
         for pkgname in sorted(packages.keys()):
             metapackage = packages[pkgname]
@@ -129,9 +94,12 @@ class ReportProducer:
                     'numpackages': len(repopackages)
                 }
 
-                template_args['repositories'][reponame]['statistics']['total'] += 1
-                template_args['repositories'][reponame]['statistics'][versionclass] += 1
+            data['packages'].append(template_package)
 
-            template_args['packages'].append(template_package)
+        return data
 
-        return template.render(template_args)
+    def Render(self, packages, reponames, **template_data):
+        return self.template.Render(self.templatename, **self.Prepare(packages, reponames, **template_data))
+
+    def RenderToFile(self, path, packages, reponames, **template_data):
+        self.template.RenderToFile(self.templatename, path, **self.Prepare(packages, reponames, **template_data))

@@ -1,0 +1,11 @@
+{% include 'header.html' %}
+
+<ul>
+{% for maintainer in maintainers %}
+    <li>
+        <a href="{{ maintainer.sanitizedname }}.0.html">{{ maintainer.fullname }}</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% include 'footer.html' %}

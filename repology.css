@@ -5,6 +5,74 @@ body {
     margin: 0px;
 }
 
+/* headers */
+header {
+    margin: 0 0 20px 0;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 600%;
+    background-color: #dddddd;
+    display: block;
+    padding: 0px 0px 10px 40px;
+    margin: 0;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 200%;
+    display: block;
+    background-color: #f7f5f3;
+    padding: 10px;
+    margin: 0;
+}
+
+/* global */
+a:link, a:visited {
+    color: #808080;
+}
+
+a:hover {
+    color: #000000;
+}
+
+/* blocks */
+nav, article {
+    display: block;
+    padding: 10px;
+    margin: 0;
+}
+
+/* navigation */
+nav a:link, nav a:visited {
+    color: #000000;
+}
+
+nav ul {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    background-color: #ddd;
+    text-align: center;
+    padding: 5px 10px;
+    margin: 5px;
+    color: black;
+}
+
+nav ul li a {
+    display: block;
+    background-color: #f7f5f3;
+    padding: 5px 10px;
+    margin: -5px -10px;
+    text-decoration: none;
+}
+
+/* packages table */
 table {
 	border: 0px;
 	border-collapse: collapse;
@@ -55,43 +123,8 @@ td {
 	background-color: #c0c0c0;
 }
 
+/* misc */
 div.gentime {
     margin: 1em;
     text-align: center;
-}
-
-ul.pages {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-}
-
-ul.pages li {
-    display: inline-block;
-    width: 3em;
-    background-color: #ddd;
-    text-align: center;
-    padding: 5px 0px
-}
-
-ul.pages li a {
-    display: block;
-    background-color: white;
-    padding: 5px 0px;
-    margin: -5px 0px;
-    color: black;
-    text-decoration: none;
-}
-
-ul.pages li a:hover {
-    background-color: #ddd;
-}
-
-h1 {
-    font-weight: bold;
-    font-size: 110px;
-    display: block;
-    background-color: #f7f5f3;
-    padding: 20px;
-    margin: 0 0 40px 0;
 }
