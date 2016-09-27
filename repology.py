@@ -232,6 +232,14 @@ def RepologyOrg(path, packages, repositories):
     )
 
     print("===> Finalizing", file=sys.stderr)
+    template.RenderToFile(
+        'about.html',
+        os.path.join(path, "about.html"),
+        site_root = "",
+        subheader = "About",
+        subsection = "about"
+    )
+
     shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
     shutil.copyfile(os.path.join(path, "index.0.html"), os.path.join(path, "index.html"))
 

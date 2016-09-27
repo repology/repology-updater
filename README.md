@@ -25,16 +25,13 @@ which packages, and whether packages need updating.
   - Keep track of how well your project is packaged
   - Keep in touch with your product package maintainers
 
-## Status
 
-Currently the project is most usable as standalone python script
-which generates HTML reports.
+# Status
 
-There is a prototype [repology.org](repology.org) website running
-which regularly generates a new report (which is several megabytes
-large and may freeze your browser, beware), but running the script
-by hand allows multiple filtering options which make the result
-much more useful.
+Repology is currently in an early phase of development, with a goal
+of creating usable utility in a quick and dirty way. For now, it is
+usable in two modes: as a command line generator of single HTML
+report and a static website generator for [repology.org](repology.org).
 
 ## Howto
 
@@ -64,6 +61,10 @@ all packages, so you may need some filtering:
 - ```-n``` filter only packages present in this many repos
 - ```-r``` matches only packages present in specified repo
 - ```-R``` matches only packages not present in specified repo
+
+Instead of single report generation with filtering, you may
+specify ```-o``` to make repology generate a static website with
+multiple reports.
 
 Additionally, you will likely need
 

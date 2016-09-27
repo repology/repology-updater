@@ -43,6 +43,12 @@
 {% else %}
         <li><a href="{{ site_root }}absent/index.html">Absent packages</a></li>
 {% endif %}
+
+{% if subsection == "about" %}
+        <li>About repology</li>
+{% else %}
+        <li><a href="{{ site_root }}about.html">About</a></li>
+{% endif %}
     </ul>
 </nav>
 
