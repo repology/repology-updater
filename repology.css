@@ -5,25 +5,35 @@ body {
     margin: 0px;
 }
 
+div.bounds {
+    display: block;
+    margin: 0px auto;
+    width: 980px;
+}
+
 /* headers */
 header {
     margin: 0 0 20px 0;
 }
 
-h1 {
+.header1 {
+    background-color: #dddddd;
+}
+
+.header1 h1 {
     font-weight: bold;
     font-size: 600%;
-    background-color: #dddddd;
-    display: block;
-    padding: 0px 0px 10px 40px;
+    padding: 0px 0px 10px 10px;
     margin: 0;
 }
 
-h2 {
+.header2 {
+    background-color: #f7f5f3;
+}
+
+.header2 h2 {
     font-weight: bold;
     font-size: 200%;
-    display: block;
-    background-color: #f7f5f3;
     padding: 10px;
     margin: 0;
 }
@@ -80,7 +90,6 @@ table {
 	border: 0px;
 	border-collapse: collapse;
 	margin: 0px auto;
-    width: 100%;
 }
 
 tr:nth-child(even) {
@@ -94,12 +103,13 @@ tr:nth-child(odd) {
 th {
 	vertical-align: bottom;
 	border-bottom: 2px solid #ddd;
-	padding: 2em 1em 0.5em 1em;
+	padding: 0.5em 1em 0.5em 1em;
 }
 
 td {
 	padding: 0.5em;
 	border-bottom: 1px solid #ddd;
+    white-space: nowrap;
 }
 
 .version {
