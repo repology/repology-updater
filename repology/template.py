@@ -24,7 +24,7 @@ def SpanTrim(str, maxlength):
     if len(str) <= maxlength:
         return str
 
-    return "<span title=\"%s\">%s...</span>" % (str, str[0:maxlength])
+    return "<span title=\"%s\">%s…</span>" % (str, str[0:maxlength])
 
 class Template:
     def __init__(self):
