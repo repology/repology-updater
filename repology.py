@@ -141,18 +141,25 @@ def RepologyOrg(path, packages, repositories):
     maintainers = {}
     for package in packages.values():
         for maintainer in package.GetMaintainers():
-            maintainers[maintainer] = re.sub("[^a-zA-Z@.0-9]", "_", maintainer).lower()
+            if not maintainer in maintainers:
+                maintainers[maintainer] = {
+                    'sanitized_name': re.sub("[^a-zA-Z@.0-9]", "_", maintainer).lower(),
+                    'num_packages': 0,
+                }
+
+            # XXX: doesn't count multiple packages with same name
+            maintainers[maintainer]['num_packages'] += 1
 
     maintainers_path = os.path.join(path, "maintainers")
     if not os.path.isdir(maintainers_path):
         os.mkdir(maintainers_path)
 
     limit = 100
-    for maintainer, sanitized_maintainer in maintainers.items():
+    for maintainer, maintainer_data in maintainers.items():
         maint_packages = FilterPackages(packages, maintainer = maintainer)
 
         rp.RenderFilesPaginated(
-            os.path.join(maintainers_path, sanitized_maintainer),
+            os.path.join(maintainers_path, maintainer_data['sanitized_name']),
             maint_packages,
             repositories,
             500,
@@ -169,7 +176,13 @@ def RepologyOrg(path, packages, repositories):
         'maintainers.html',
         os.path.join(maintainers_path, "index.html"),
         site_root = "../",
-        maintainers = [ { "fullname": escape(maintainer), "sanitizedname": maintainers[maintainer] } for maintainer in sorted(maintainers.keys()) ],
+        maintainers = [
+            {
+                "fullname": escape(maintainer),
+                "sanitizedname": maintainers[maintainer]['sanitized_name'],
+                "num_packages": maintainers[maintainer]['num_packages'],
+            } for maintainer in sorted(maintainers.keys())
+        ],
         subheader = "Package maintainers",
         subsection = "maintainers"
     )

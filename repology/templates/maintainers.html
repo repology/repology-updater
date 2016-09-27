@@ -3,7 +3,7 @@
 <ul>
 {% for maintainer in maintainers %}
     <li>
-        <a href="{{ maintainer.sanitizedname }}.0.html">{{ maintainer.fullname }}</a>
+        <a href="{{ maintainer.sanitizedname }}.0.html">{{ maintainer.fullname }}</a> ({{ maintainer.num_packages }})
     </li>
 {% endfor %}
 </ul>
