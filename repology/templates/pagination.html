@@ -4,13 +4,7 @@
     <ul>
     {% for p in range (0, numpages) -%}
         <li>
-        {% if p != page %}
-            <a href="{{ basename }}.{{p}}.html">
-        {%- endif -%}
-        {{ p }}
-        {%- if p != page -%}
-            </a>
-        {% endif %}
+            <a href="{{ basename }}.{{ p }}.html"{% if p == page %} class="active"{% endif %}>{{ p }}</a>
         </li>
     {%- endfor %}
     </ul>

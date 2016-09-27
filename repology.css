@@ -51,25 +51,28 @@ nav a:link, nav a:visited {
 
 nav ul {
     display: block;
-    padding: 0;
-    margin: 0;
+    padding: 10px;
+    margin: 0px;
 }
 
 nav ul li {
-    display: inline-block;
-    background-color: #ddd;
-    text-align: center;
-    padding: 5px 10px;
-    margin: 5px;
-    color: black;
+    display: inline;
 }
 
 nav ul li a {
-    display: block;
+    display: inline-block;
     background-color: #f7f5f3;
     padding: 5px 10px;
-    margin: -5px -10px;
+    margin: 2px;
     text-decoration: none;
+}
+
+nav ul li a.active {
+    background-color: #dddddd;
+}
+
+nav ul li a:hover {
+    background-color: #dddddd;
 }
 
 /* packages table */
