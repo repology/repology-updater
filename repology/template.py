@@ -39,7 +39,7 @@ class Template:
         template = self.env.get_template(template)
 
         data = template_data.copy()
-        data['gentime'] = time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
+        data['gentime'] = time.strftime("%Y-%m-%d %H:%M %Z", time.gmtime())
 
         return template.render(data)
 
