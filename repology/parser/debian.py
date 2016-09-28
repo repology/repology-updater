@@ -18,7 +18,6 @@
 import os
 import re
 
-from .common import RepositoryProcessor
 from ..package import Package
 
 def SanitizeVersion(version):
@@ -44,7 +43,7 @@ def SanitizeVersion(version):
 
     return version
 
-class DebianSourcesProcessor(RepositoryProcessor):
+class DebianSourcesParser():
     def __init__(self):
         pass
 

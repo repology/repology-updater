@@ -27,7 +27,7 @@ from xml.sax.saxutils import escape
 import shutil
 
 from repology.fetcher import *
-from repology.processor import *
+from repology.parser import *
 
 from repology.package import *
 from repology.nametransformer import NameTransformer
@@ -39,14 +39,14 @@ REPOSITORIES = [
         'name': "FreeBSD",
         'repotype': 'freebsd',
         'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip = True),
-        'processor': FreeBSDIndexProcessor()
+        'parser': FreeBSDIndexParser()
     },
-    #{ 'name': 'Debian Stable', 'repotype': 'debian', 'processor': DebianSourcesProcessor("debian-stable.list",
+    #{ 'name': 'Debian Stable', 'repotype': 'debian', 'parser': DebianSourcesParser("debian-stable.list",
     #    "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz"
     #) },
-    #{ 'name': 'Debian Tesing', 'repotype': 'debian', 'processor': DebianSourcesProcessor("debian-testing.list",
+    #{ 'name': 'Debian Tesing', 'repotype': 'debian', 'parser': DebianSourcesParser("debian-testing.list",
     #    "http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz"
@@ -61,15 +61,15 @@ REPOSITORIES = [
             "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz",
             gunzip = True
         ),
-        'processor': DebianSourcesProcessor()
+        'parser': DebianSourcesParser()
     },
-    #{ 'name': 'Ubuntu Xenial', 'repotype': 'debian', 'processor': DebianSourcesProcessor("ubuntu-xenial.list",
+    #{ 'name': 'Ubuntu Xenial', 'repotype': 'debian', 'parser': DebianSourcesParser("ubuntu-xenial.list",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz"
     #) },
-    #{ 'name': 'Ubuntu Yakkety', 'repotype': 'debian', 'processor': DebianSourcesProcessor("ubuntu-yakkety.list",
+    #{ 'name': 'Ubuntu Yakkety', 'repotype': 'debian', 'parser': DebianSourcesParser("ubuntu-yakkety.list",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/main/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
@@ -79,19 +79,19 @@ REPOSITORIES = [
         'name': 'Gentoo',
         'repotype': 'gentoo',
         'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
-        'processor': GentooGitProcessor()
+        'parser': GentooGitParser()
     },
     {
         'name': 'NetBSD',
         'repotype': 'pkgsrc',
         'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
-        'processor': PkgSrcReadmeAllProcessor()
+        'parser': PkgSrcReadmeAllParser()
     },
     {
         'name': 'OpenBSD',
         'repotype': 'openbsd',
         'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
-        'processor': OpenBSDIndexProcessor()
+        'parser': OpenBSDIndexParser()
     },
     {
         'name': 'Arch',
@@ -101,7 +101,7 @@ REPOSITORIES = [
             "http://ftp.u-tx.net/archlinux/extra/os/x86_64/extra.db.tar.gz",
             "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
         ),
-        'processor': ArchDBProcessor()
+        'parser': ArchDBParser()
     },
 ]
 
@@ -313,7 +313,7 @@ def Main():
 
     for repository in REPOSITORIES:
         print("====> %s" % repository['name'], file=sys.stderr)
-        repository['packages'] = repository['processor'].Parse(os.path.join(options.statedir, repository['name'] + ".state"))
+        repository['packages'] = repository['parser'].Parse(os.path.join(options.statedir, repository['name'] + ".state"))
 
     print("===> Processing package data...", file=sys.stderr)
     packages = MixRepositories(REPOSITORIES, nametrans)

@@ -16,53 +16,36 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import re
 import csv
 
-from .common import RepositoryProcessor
 from ..util import SplitPackageNameVersion
 from ..package import Package
 
 def SanitizeVersion(version):
-    match = re.match("(.*)v[0-9]+$", version)
-    if match is not None:
-        version = match.group(1)
+    pos = version.rfind(',')
+    if pos != -1:
+        version = version[0:pos]
 
-    match = re.match("(.*)p[0-9]+$", version)
-    if match is not None:
-        version = match.group(1)
+    pos = version.rfind('_')
 
-    #pos = version.rfind(',')
-    #if pos != -1:
-        #version = version[0:pos]
-
-    #pos = version.rfind('_')
-
-    #if pos != -1:
-        #version = version[0:pos]
+    if pos != -1:
+        version = version[0:pos]
 
     return version
 
-class OpenBSDIndexProcessor(RepositoryProcessor):
+class FreeBSDIndexParser():
     def __init__(self):
         pass
 
     def Parse(self, path):
         result = []
 
-        with open(path, encoding="utf-8") as file:
+        with open(path) as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
                 pkg = Package()
 
-                pkgname = row[0]
-
-                # cut away string suffixws which come after version
-                match = re.match("(.*?)(-[a-z_]+[0-9]*)+$", pkgname)
-                if match is not None:
-                    pkgname = match.group(1)
-
-                pkg.name, pkg.fullversion = SplitPackageNameVersion(pkgname)
+                pkg.name, pkg.fullversion = SplitPackageNameVersion(row[0])
                 pkg.version = SanitizeVersion(pkg.fullversion)
                 pkg.comment = row[3]
                 pkg.maintainer = row[5]

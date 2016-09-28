@@ -15,12 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-class RepositoryProcessor:
-    def IsUpToDate(self):
-        return True
-
-    def Download(self, update = True):
-        pass
-
-    def Parse(self):
-        return []
+from .freebsd import FreeBSDIndexParser
+from .debian import DebianSourcesParser
+from .gentoo import GentooGitParser
+from .pkgsrc import PkgSrcPackagesSHA512Parser, PkgSrcReadmeAllParser
+from .openbsd import OpenBSDIndexParser
+from .arch import ArchDBParser

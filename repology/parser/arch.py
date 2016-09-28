@@ -18,7 +18,6 @@
 import os
 from pkg_resources import parse_version
 
-from .common import RepositoryProcessor
 from ..util import VersionCompare
 from ..package import Package
 
@@ -33,7 +32,7 @@ def SanitizeVersion(version):
 
     return version
 
-class ArchDBProcessor(RepositoryProcessor):
+class ArchDBParser():
     def __init__(self):
         pass
 

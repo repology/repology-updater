@@ -19,7 +19,6 @@ import os
 import re
 import sys
 
-from .common import RepositoryProcessor
 from ..util import SplitPackageNameVersion
 from ..package import Package
 
@@ -30,7 +29,7 @@ def SanitizeVersion(version):
 
     return version
 
-class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
+class PkgSrcPackagesSHA512Parser():
     def __init__(self):
         pass
 
@@ -53,7 +52,7 @@ class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
 
         return result
 
-class PkgSrcReadmeAllProcessor(RepositoryProcessor):
+class PkgSrcReadmeAllParser():
     def __init__(self):
         pass
 
