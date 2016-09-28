@@ -318,10 +318,10 @@
 - { name: zipper.app,                  setname: zipper,                   repos: [ debian ]  }
 
 # Ambiguous upstream package names, careful!
-- { name: clementine,                  setname: clementine-player                       } # clementine player vs. window manager
+- { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
 - { name: dolphin,                     setname: dolphin-emu,              repos: [ gentoo ]  } # dolphin file namager vs. emulator
 - { name: dragon,                      setname: dragon-scannerparser,     repos: [ freebsd ] }
-- { name: dragon,                      setname: dragon-player                           }
+- { name: dragon,                      setname: dragon-player                                }
 # fuse-emulator vs. fusefs modules - see above
 
 # TODO
