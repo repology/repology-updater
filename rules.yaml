@@ -97,6 +97,7 @@
 - { name: zookeeper-c,                 setname: zookeeper,                repos: [ gentoo ]  }
 - { namepat: "celestia-.*",            setname: celestia,                 repos: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
 - { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              repos: [ freebsd ] }
+- { namepat: "open[gs]fx",             setname: "openttd-$0",             repos: [ freebsd, gentoo ] }
 - { namepat: "enscript-.*",            setname: enscript,                 repos: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
