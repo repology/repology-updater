@@ -67,6 +67,7 @@
 - { name: gaul-devel,                  setname: gaul,                     repos: [ gentoo ]  }
 - { name: geki2-KXL,                   setname: geki2,                    repos: [ gentoo ]  } # XXX: recheck
 - { name: geki3-KXL,                   setname: geki3,                    repos: [ gentoo ]  } # XXX: recheck
+- { name: gitg0,                       setname: gitg,                     repos: [ freebsd ]  }
 - { name: gl117,                       setname: gl-117,                   repos: [ gentoo ]  }
 - { name: hannah,                      setname: help-hannahs-horse,       repos: [ debian ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    repos: [ freebsd ] }
