@@ -1,4 +1,236 @@
 # vim: tabstop=39 expandtab softtabstop=39
+
+################################################################################
+# Single (almost) package rules part
+################################################################################
+
+# Some of these are to be reversed for less ambiguity, and some
+# are to consider for performing in the actual repos
+- { name: 2048,                        setname: 2048-cli,                 repos: [ freebsd ] } # differentiate from 2048-qt
+- { name: abuse_sdl,                   setname: abuse,                    repos: [ freebsd ] }
+- { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd ] }
+- { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }
+- { name: adobeps-win,                 setname: adobeps,                  repos: [ pkgsrc ]  } # XXX: recheck
+- { name: alienarena,                  setname: alien-arena,              repos: [ gentoo, arch ] }
+- { name: armagetron,                  setname: armagetronad,             repos: [ freebsd ] }
+- { name: atk1.0,                      setname: atk,                      repos: [ debian ]  }
+- { name: atkmm1.6,                    setname: atk,                      repos: [ debian ]  }
+- { name: bass,                        setname: beneath-a-steel-sky,      repos: [ freebsd, gentoo, openbsd, arch ] }
+- { name: bicyclerepair-py27,          setname: bicyclerepair,            repos: [ freebsd ] }
+- { name: billard-gl,                  setname: billardgl,                repos: [ debian ]  }
+- { name: blitz,                       setname: blitz++,                  repos: [ gentoo ]  } # XXX: recheck
+- { name: blockout2,                   setname: blockout,                 repos: [ debian ]  }
+- { name: boaconstructor,              setname: boa-constructor,          repos: [ freebsd ] }
+- { name: boost-all,                   setname: boost,                    repos: [ freebsd ] }
+- { name: botan1.10,                   setname: botan,                    repos: [ debian ]  }
+- { name: botan110,                    setname: botan,                    repos: [ freebsd ] }
+- { name: bouncycastle,                setname: bouncycastle14,           repos: [ freebsd ] } # move away
+- { name: bouncycastle15,              setname: bouncycastle,             repos: [ freebsd ] }
+- { name: bub-n-bros,                  setname: bubbros,                  repos: [ gentoo ]  } # XXX: recheck
+- { name: bugzilla44,                  ignore: true,                      repos: [ freebsd ] } # legacy
+- { name: bugzilla50,                  setname: bugzilla,                 repos: [ freebsd ] }
+- { name: byacc-j,                     setname: byaccj,                   repos: [ debian ]  }
+- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       repos: [ debian ]  } # O_o
+- { name: cegui-mk2,                   setname: cegui,                    repos: [ debian ]  }
+- { name: celestia-nonfree,            setname: celestia,                 repos: [ debian ]  }
+- { name: chexedit,                    setname: curses-hexedit,           repos: [ freebsd ] }
+- { name: corsixth,                    setname: corsix-th,                repos: [ freebsd ] }
+- { name: cyphesis-cpp,                setname: cyphesis,                 repos: [ debian ]  }
+- { name: dgen,                        setname: dgen-sdl,                 repos: [ debian ]  } # recheck
+- { name: drpython-py27,               setname: drpython,                 repos: [ freebsd ] }
+- { name: dynamips-community,          setname: dynamips,                 repos: [ freebsd ] }
+- { name: easyrpg,                     setname: easyrpg-player,           repos: [ openbsd ] }
+- { name: einstein-puzzle,             setname: einstein,                 repos: [ pkgsrc ] }
+- { name: el,                          setname: eternal-lands,            repos: [ freebsd ] }
+- { name: el-data,                     setname: eternal-lands-data,       repos: [ freebsd ] }
+- { name: endgame-singularity,         setname: singularity,              repos: [ freebsd ] }
+- { name: endgame-singularity-music,   setname: singularity-music,        repos: [ freebsd ] } # for consistency
+- { name: entagged-tageditor,          setname: entagged,                 repos: [ gentoo ]  }
+- { name: epl.el,                      setname: epl,                      repos: [ freebsd ] }
+- { name: eric6,                       setname: eric,                     repos: [ freebsd ] }
+- { name: etracer,                     setname: extreme-tuxracer,         repos: [ freebsd ] }
+- { name: exactimage,                  setname: exact-image,              repos: [ debian ]  }
+- { name: extremetuxracer,             setname: extreme-tuxracer,         repos: [ debian, openbsd ] }
+- { name: falconseye,                  setname: falcons-eye,              repos: [ freebsd, openbsd ] }
+- { name: farstream-0.2,               setname: farstream,                repos: [ debian ]  }
+- { name: fish-fillets,                setname: fillets-ng,               repos: [ gentoo ]  }
+- { name: focuswriter-qt4,             setname: focuswriter,              repos: [ freebsd ] }
+- { name: fotaq,                       setname: flight-of-the-amazon-queen, repos: [ freebsd, openbsd ] }
+- { name: fox1.6,                      setname: fox16,                    repos: [ debian ]  }
+- { name: fox17,                       setname: fox,                      repos: [ freebsd ] }
+- { name: free42-nologo,               setname: free42,                   repos: [ debian ]  }
+- { name: freefont-ttf,                setname: freefont,                 repos: [ freebsd ] }
+- { name: freetype,                    setname: freetype1,                repos: [ freebsd, pkgsrc ] }
+- { name: freetype2,                   setname: freetype,                 repos: [ freebsd, pkgsrc ] }
+- { name: garden,                      setname: garden-of-coloured-lights, repos: [ gentoo, openbsd ] } # XXX: recheck
+- { name: gargoyle-free,               setname: gargoyle,                 repos: [ debian ]  }
+- { name: gaul-devel,                  setname: gaul,                     repos: [ gentoo ]  }
+- { name: geki2-KXL,                   setname: geki2,                    repos: [ gentoo ]  } # XXX: recheck
+- { name: geki3-KXL,                   setname: geki3,                    repos: [ gentoo ]  } # XXX: recheck
+- { name: gl117,                       setname: gl-117,                   repos: [ gentoo ]  }
+- { name: hannah,                      setname: help-hannahs-horse,       repos: [ debian ]  } # recheck
+- { name: hs-darcs,                    setname: darcs,                    repos: [ freebsd ] }
+- { name: ja2,                         setname: ja2-stracciatella,        repos: [ freebsd ] }
+- { name: kiki,                        setname: kiki-the-nano-bot,        repos: [ freebsd, gentoo ] }
+- { name: libphysfs,                   setname: physfs,                   repos: [ debian ] }
+- { name: moonlander,                  setname: moon-lander,              repos: [ freebsd, openbsd ] }
+- { name: openastromenace,             setname: astromenace,              repos: [ freebsd ] }
+- { name: osg,                         setname: openscenegraph,           repos: [ freebsd ] }
+- { name: pacman-arena,                setname: pacmanarena,              repos: [ openbsd ] }
+- { name: puzzles,                     setname: sgt-puzzles,              repos: [ pkgsrc, arch, openbsd ] }
+- { name: sdl-sopwith,                 setname: sopwith,                  repos: [ gentoo ]  }
+- { name: seven-kingdoms,              setname: 7kaa,                     repos: [ gentoo ]  }
+- { name: slashem-tty,                 setname: slashem,                  repos: [ freebsd ] }
+- { name: spacearyarya-kxl,            setname: spacearyarya,             repos: [ gentoo ]  } # XXX: recheck
+- { name: speed-dreams,                setname: speeddreams,              repos: [ gentoo ]  }
+- { name: stepmania-devel,             setname: stepmania,                repos: [ freebsd ] }
+- { name: stone-soup,                  setname: stonesoup,                repos: [ gentoo, openbsd ] }
+- { name: stransball2,                 setname: supertransball2,          repos: [ freebsd ] }
+- { name: supertux,                    setname: supertux1,                repos: [ freebsd ] } # ???
+- { name: supertux2,                   setname: supertux,                 repos: [ freebsd ] }
+- { name: tetrinet-x,                  setname: tetrinetx,                repos: [ freebsd ] }
+- { name: tintin,                      setname: tintin++,                 repos: [ gentoo ]  }
+- { name: trigger,                     setname: trigger-rally,            repos: [ gentoo ]  }
+- { name: ufo-ai,                      setname: ufoai,                    repos: [ gentoo ]  }
+- { name: xpi-adblock_plus,            setname: adblock-plus,             repos: [ freebsd ] }
+- { name: xpi-foxyproxy,               setname: foxyproxy,                repos: [ freebsd ] }
+- { name: zookeeper-c,                 setname: zookeeper,                repos: [ gentoo ]  }
+- { namepat: "celestia-.*",            setname: celestia,                 repos: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
+- { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              repos: [ freebsd ] }
+- { namepat: "enscript-.*",            setname: enscript,                 repos: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
+- { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
+- { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
+- { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1", repos: [ freebsd ] }
+
+# XXX: continue looking through the list starting from gaul
+
+# GNUstep packages (should be likely the other way around: foo->foo.app)
+- { name: aclock.app,                  setname: aclock,                   repos: [ debian ]  }
+- { name: batmon.app,                  setname: batmon,                   repos: [ debian ]  }
+- { name: camera.app,                  setname: camera,                   repos: [ debian ]  }
+- { name: cenon.app,                   setname: cenon,                    repos: [ debian ]  }
+- { name: charmap.app,                 setname: charmap,                  repos: [ debian ]  }
+- { name: cynthiune.app,               setname: cynthiune,                repos: [ debian ]  }
+- { name: edenmath.app,                setname: edenmath,                 repos: [ debian ]  }
+- { name: gomoku.app,                  setname: gomoku,                   repos: [ debian ]  }
+- { name: gorm.app,                    setname: gorm,                     repos: [ debian ]  }
+- { name: grr.app,                     setname: grr,                      repos: [ debian ]  }
+- { name: gtamsanalyzer.app,           setname: gtamsanalyzer,            repos: [ debian ]  }
+- { name: helpviewer.app,              setname: helpviewer,               repos: [ debian ]  }
+- { name: lusernet.app,                setname: lusernet,                 repos: [ debian ]  }
+- { name: mixer_app,                   setname: mixer.app,                repos: [ gentoo ]  }
+- { name: mpdcon.app,                  setname: mpdcon,                   repos: [ debian ]  }
+- { name: paje.app,                    setname: paje,                     repos: [ debian ]  }
+- { name: plopfolio.app,               setname: plopfolio,                repos: [ debian ]  }
+- { name: poe.app,                     setname: poe,                      repos: [ debian ]  }
+- { name: preview.app,                 setname: preview,                  repos: [ debian ]  }
+- { name: price.app,                   setname: price,                    repos: [ debian ]  }
+- { name: projectcenter.app,           setname: projectcenter,            repos: [ debian ]  }
+- { name: systempreferences.app,       setname: systempreferences,        repos: [ debian ]  }
+- { name: terminal,                    setname: terminal.app,             repos: [ gentoo ]  }
+- { name: textedit.app,                setname: textedit,                 repos: [ debian ]  }
+- { name: timemon.app,                 setname: timemon,                  repos: [ debian ]  }
+- { name: wmppp.app,                   setname: wmppp,                    repos: [ debian ]  }
+- { name: xscreensaver-app,            setname: xscreensaver.app,         repos: [ gentoo ]  }
+- { name: zipper.app,                  setname: zipper,                   repos: [ debian ]  }
+
+# Ambiguous upstream package names, careful!
+- { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
+- { name: dolphin,                     setname: dolphin-emu,              repos: [ gentoo ]  } # dolphin file namager vs. emulator
+- { name: dragon,                      setname: dragon-scannerparser,     repos: [ freebsd ] }
+- { name: dragon,                      setname: dragon-player                                }
+# fuse-emulator vs. fusefs modules - see below
+
+# TODO
+# - flare engine/game vs. flare database; known, but database doesn't seem
+# to be widely packaged (had FreeBSD port which was removed)
+# - elixir vs. elixir-lang (investigate)
+# - emma vs. emma-coverage
+
+# TODO
+# - ace vs. ace-of-penguins
+# - crimson vs. crimson-fields
+# - critterding version
+# - pkgsrc: enigma
+# - empty vs. empty-expect
+# - emotion-generic-players vs. emotion-generic-players-vlc
+# - enblend vs. enblend-enfuse
+# - enemy-territory vs. etqw
+# - engauge vs. engauge-digitizer
+# - fbg vs fbg2
+# - fcgi vs. fcgi-devkit
+# - filebeat/filebeat-bin
+# - fira* (font)
+
+# Version ignores, incompatible version mangling in the repos
+- { name: cryptcat,                    ver: "20031202",                 ignorever: true }
+- { name: xmahjongg,                   ver: "3.70", repos: [ pkgsrc ],  ignorever: true }
+- { name: "perl:readonly",             ver: "2.050", repos: [ debian ], ignorever: true } # needs multiple rule hits
+
+# Version splits/tweaks
+- { name: eigen, verpat: "1\\..*",     setname: eigen1 }
+- { name: eigen, verpat: "2\\..*",     setname: eigen2 }
+- { name: eigen, verpat: "3\\..*",     setname: eigen3 }
+- { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
+- { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
+- { name: csound, verpat: "5\\..*",    setname: csound5 }
+- { name: csound, verpat: "6\\..*",    setname: csound6 }
+- { name: love, verpat: "0\\.10\\..*", setname: love10 }
+- { name: love, verpat: "0\\.9\\..*",  setname: love09 }
+- { name: love, verpat: "0\\.8\\..*",  setname: love08 }
+- { name: lua, verpat: "5\\.1\\..*",  setname: lua51 }
+- { name: lua, verpat: "5\\.2\\..*",  setname: lua52 }
+- { name: lua, verpat: "5\\.3\\..*",  setname: lua53 }
+- { name: allegro, verpat: "4\\..*",  setname: allegro4 }
+- { name: allegro, verpat: "5\\..*",  setname: allegro5 }
+- { name: allegro4.4, setname: allegro4 }
+- { name: allegro-devel, setname: allegro5, repos: [ freebsd ] }
+- { namepat: "lua([0-9])\\.([0-9])",  setname: "lua$1$2" }
+- { name: love5, setname: love05 }
+
+# TODO
+# - texlive
+
+# Merge some single-source plugin, i10n, l18n sets
+- { namepat: "archipel-agent-.*",      setname: "archipel-agents", repos: [ debian ] }
+- { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", repos: [ openbsd ] }
+- { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", repos: [ openbsd ] }
+- { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", repos: [ openbsd, arch ] }
+- { namepat: "eric-i18n-.*",           setname: "eric-i18n", repos: [ arch ] }
+- { namepat: "eric-qt4-i18n-.*",       setname: "eric-qt4-i18n", repos: [ arch ] }
+- { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n", repos: [ openbsd ] }
+- { namepat: "firefox-i18n-.*",        setname: "firefox-i18n", repos: [ openbsd, arch ] }
+- { namepat: "fpc-.*",                 setname: "fpc-modules", repos: [ freebsd ] }
+- { namepat: "gambas3-gb-.*",          setname: "gambas3-gb-modules", repos: [ arch ] }
+- { namepat: "geany-plugin-.*",        setname: "geany-plugins", repos: [ freebsd ] }
+- { namepat: "gimp-docs-.*",           setname: "gimp-docs", repos: [ pkgsrc ] }
+- { namepat: "gimp-help-.*",           setname: "gimp-help", repos: [ arch ] }
+- { namepat: "kde-i18n-.*",            setname: "kde-i18n", repos: [ openbsd, pkgsrc ] }
+- { namepat: "kde-l10n-.*",            setname: "kde-l10n", repos: [ openbsd, arch ] }
+- { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", repos: [ pkgsrc ] }
+- { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", repos: [ freebsd ] }
+- { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", repos: [ pkgsrc ] }
+- { namepat: "kompozer-i18n-.*",       setname: "kompozer-i18n", repos: [ arch ] }
+- { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", repos: [ arch ] }
+- { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", repos: [ openbsd ] }
+- { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", repos: [ arch ] }
+- { namepat: "[^-]+-libreoffice",      setname: "libreoffice-i18n", repos: [ freebsd ] }
+- { namepat: "mgltools-.*",            setname: "mgltools", repos: [ debian ] }
+- { namepat: "mozilla-dicts-.*",       setname: "mozilla-dicts", repos: [ openbsd ] }
+- { namepat: "netbeans-.*",            setname: "netbeans", repos: [ gentoo ] }
+- { namepat: "opensmtpd-extras-.*",    setname: "opensmtpd-extras", repos: [ freebsd, openbsd ] }
+- { namepat: "seamonkey-i18n-.*",      setname: "seamonkey-i18n", repos: [ openbsd ] }
+- { namepat: "(squirrelmail-.*)-plugin", setname: "$1", repos: [ freebsd ] }
+- { namepat: "tesseract-.*",           setname: "tesseract-data", repos: [ openbsd, debian ] }
+- { namepat: "tesseract-data-.*",      setname: "tesseract-data", repos: [ arch ] }
+- { namepat: "texlive-documentation-.*", setname: "texlive-documentation", repos: [ gentoo ] }
+- { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", repos: [ openbsd, arch ] }
+- { namepat: "vim-spell-.*",           setname: "vim-spell", repos: [ openbsd, gentoo, arch ] }
+
+################################################################################
+# Global patterns
+################################################################################
+
 # FreeBSD: ignore localized categories (XXX: remove this, contains useful packages)
 - { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, repos: [ freebsd ] }
 
@@ -28,7 +260,7 @@
 - { namepat: "zope\\.(.*)",              setname: "zope:$1", repos: [ debian ] }
 
 # Python modules
-# some rules may merge modules from different version into single entry, which is good
+# some rules may merge modules for different python version into single entry; this is intended
 - { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", repos: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", repos: [ openbsd ] }
 - { namepat: "python-(.*)",            setname: "python:$1", repos: [ debian ] }
@@ -119,233 +351,9 @@
 - { namepat: "(.*)-xcursors",          setname: "cursors:$1", repos: [ gentoo ] }
 - { namepat: "cursor-(.*)",            setname: "cursors:$1", repos: [ freebsd ] }
 
+# x11 protos
+- { namepat: "x11proto-(.*)",          setname: "$1proto", repos: [ debian ] }
+
 # fusefs
 - { namepat: "fuse-emulator.*",        pass: true } # protect from the next rule, has nothing to do with fusefs
 - { namepat: "fuse(?:fs)?-(.*)",       setname: "fusefs:$1" }
-
-# misc single-source plugin, i10n, l18n sets
-- { namepat: "archipel-agent-.*",      setname: "archipel-agents", repos: [ debian ] }
-- { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", repos: [ openbsd ] }
-- { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", repos: [ openbsd ] }
-- { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", repos: [ openbsd, arch ] }
-- { namepat: "eric-i18n-.*",           setname: "eric-i18n", repos: [ arch ] }
-- { namepat: "eric-qt4-i18n-.*",       setname: "eric-qt4-i18n", repos: [ arch ] }
-- { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n", repos: [ openbsd ] }
-- { namepat: "firefox-i18n-.*",        setname: "firefox-i18n", repos: [ openbsd, arch ] }
-- { namepat: "fpc-.*",                 setname: "fpc-modules", repos: [ freebsd ] }
-- { namepat: "gambas3-gb-.*",          setname: "gambas3-gb-modules", repos: [ arch ] }
-- { namepat: "geany-plugin-.*",        setname: "geany-plugins", repos: [ freebsd ] }
-- { namepat: "gimp-docs-.*",           setname: "gimp-docs", repos: [ pkgsrc ] }
-- { namepat: "gimp-help-.*",           setname: "gimp-help", repos: [ arch ] }
-- { namepat: "kde-i18n-.*",            setname: "kde-i18n", repos: [ openbsd, pkgsrc ] }
-- { namepat: "kde-l10n-.*",            setname: "kde-l10n", repos: [ openbsd, arch ] }
-- { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", repos: [ pkgsrc ] }
-- { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", repos: [ freebsd ] }
-- { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", repos: [ pkgsrc ] }
-- { namepat: "kompozer-i18n-.*",       setname: "kompozer-i18n", repos: [ arch ] }
-- { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", repos: [ arch ] }
-- { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", repos: [ openbsd ] }
-- { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", repos: [ arch ] }
-- { namepat: "[^-]+-libreoffice",      setname: "libreoffice-i18n", repos: [ freebsd ] }
-- { namepat: "mgltools-.*",            setname: "mgltools", repos: [ debian ] }
-- { namepat: "mozilla-dicts-.*",       setname: "mozilla-dicts", repos: [ openbsd ] }
-- { namepat: "netbeans-.*",            setname: "netbeans", repos: [ gentoo ] }
-- { namepat: "opensmtpd-extras-.*",    setname: "opensmtpd-extras", repos: [ freebsd, openbsd ] }
-- { namepat: "seamonkey-i18n-.*",      setname: "seamonkey-i18n", repos: [ openbsd ] }
-- { namepat: "(squirrelmail-.*)-plugin", setname: "$1", repos: [ freebsd ] }
-- { namepat: "tesseract-.*",           setname: "tesseract-data", repos: [ openbsd, debian ] }
-- { namepat: "tesseract-data-.*",      setname: "tesseract-data", repos: [ arch ] }
-- { namepat: "texlive-documentation-.*", setname: "texlive-documentation", repos: [ gentoo ] }
-- { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", repos: [ openbsd, arch ] }
-- { namepat: "vim-spell-.*",           setname: "vim-spell", repos: [ openbsd, gentoo, arch ] }
-
-# Smaller merges, no need for prefix
-- { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1", repos: [ freebsd ] }
-- { namepat: "x11proto-(.*)",          setname: "$1proto", repos: [ debian ] }
-
-# Version splits/tweaks
-- { name: eigen, verpat: "1\\..*",     setname: eigen1 }
-- { name: eigen, verpat: "2\\..*",     setname: eigen2 }
-- { name: eigen, verpat: "3\\..*",     setname: eigen3 }
-- { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
-- { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
-- { name: csound, verpat: "5\\..*",    setname: csound5 }
-- { name: csound, verpat: "6\\..*",    setname: csound6 }
-- { name: love, verpat: "0\\.10\\..*", setname: love10 }
-- { name: love, verpat: "0\\.9\\..*",  setname: love09 }
-- { name: love, verpat: "0\\.8\\..*",  setname: love08 }
-- { name: lua, verpat: "5\\.1\\..*",  setname: lua51 }
-- { name: lua, verpat: "5\\.2\\..*",  setname: lua52 }
-- { name: lua, verpat: "5\\.3\\..*",  setname: lua53 }
-- { name: allegro, verpat: "4\\..*",  setname: allegro4 }
-- { name: allegro, verpat: "5\\..*",  setname: allegro5 }
-- { name: allegro4.4, setname: allegro4 }
-- { name: allegro-devel, setname: allegro5, repos: [ freebsd ] }
-- { namepat: "lua([0-9])\\.([0-9])",  setname: "lua$1$2" }
-- { name: love5, setname: love05 }
-
-# TODO
-# - texlive
-
-# Simple renames
-#
-# Some of these are to be reversed for less ambiguity, and some
-# are to consider for performing in the actual repos
-- { name: 2048,                        setname: 2048-cli,                 repos: [ freebsd ] } # differentiate from 2048-qt
-- { name: abuse_sdl,                   setname: abuse,                    repos: [ freebsd ] }
-- { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd ] }
-- { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }
-- { name: adobeps-win,                 setname: adobeps,                  repos: [ pkgsrc ]  } # XXX: recheck
-- { name: alienarena,                  setname: alien-arena,              repos: [ gentoo, arch ] }
-- { name: armagetron,                  setname: armagetronad,             repos: [ freebsd ] }
-- { name: atk1.0,                      setname: atk,                      repos: [ debian ]  }
-- { name: atkmm1.6,                    setname: atk,                      repos: [ debian ]  }
-- { name: bass,                        setname: beneath-a-steel-sky,      repos: [ freebsd, gentoo, openbsd, arch ] }
-- { name: bicyclerepair-py27,          setname: bicyclerepair,            repos: [ freebsd ] }
-- { name: billard-gl,                  setname: billardgl,                repos: [ debian ]  }
-- { name: blitz,                       setname: blitz++,                  repos: [ gentoo ]  } # XXX: recheck
-- { name: blockout2,                   setname: blockout,                 repos: [ debian ]  }
-- { name: boaconstructor,              setname: boa-constructor,          repos: [ freebsd ] }
-- { name: boost-all,                   setname: boost,                    repos: [ freebsd ] }
-- { name: botan1.10,                   setname: botan,                    repos: [ debian ]  }
-- { name: botan110,                    setname: botan,                    repos: [ freebsd ] }
-- { name: bouncycastle,                setname: bouncycastle14,           repos: [ freebsd ] } # move away
-- { name: bouncycastle15,              setname: bouncycastle,             repos: [ freebsd ] }
-- { name: bub-n-bros,                  setname: bubbros,                  repos: [ gentoo ]  } # XXX: recheck
-- { name: bugzilla44,                  ignore: true,                      repos: [ freebsd ] } # legacy
-- { name: bugzilla50,                  setname: bugzilla,                 repos: [ freebsd ] }
-- { name: byacc-j,                     setname: byaccj,                   repos: [ debian ]  }
-- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       repos: [ debian ]  } # O_o
-- { name: cegui-mk2,                   setname: cegui,                    repos: [ debian ]  }
-- { name: celestia-nonfree,            setname: celestia,                 repos: [ debian ]  }
-- { name: chexedit,                    setname: curses-hexedit,           repos: [ freebsd ] }
-- { name: corsixth,                    setname: corsix-th,                repos: [ freebsd ] }
-- { name: cyphesis-cpp,                setname: cyphesis,                 repos: [ debian ]  }
-- { name: dgen,                        setname: dgen-sdl,                 repos: [ debian ]  } # recheck
-- { name: drpython-py27,               setname: drpython,                 repos: [ freebsd ] }
-- { name: dynamips-community,          setname: dynamips,                 repos: [ freebsd ] }
-- { name: easyrpg,                     setname: easyrpg-player,           repos: [ openbsd ] }
-- { name: einstein-puzzle,             setname: einstein,                 repos: [ pkgsrc ] }
-- { name: el,                          setname: eternal-lands,            repos: [ freebsd ] }
-- { name: el-data,                     setname: eternal-lands-data,       repos: [ freebsd ] }
-- { name: endgame-singularity,         setname: singularity,              repos: [ freebsd ] }
-- { name: endgame-singularity-music,   setname: singularity-music,        repos: [ freebsd ] } # for consistency
-- { name: entagged-tageditor,          setname: entagged,                 repos: [ gentoo ]  }
-- { name: epl.el,                      setname: epl,                      repos: [ freebsd ] }
-- { name: eric6,                       setname: eric,                     repos: [ freebsd ] }
-- { name: etracer,                     setname: extreme-tuxracer,         repos: [ freebsd ] }
-- { name: exactimage,                  setname: exact-image,              repos: [ debian ]  }
-- { name: extremetuxracer,             setname: extreme-tuxracer,         repos: [ debian, openbsd ] }
-- { name: falconseye,                  setname: falcons-eye,              repos: [ freebsd, openbsd ] }
-- { name: farstream-0.2,               setname: farstream,                repos: [ debian ]  }
-- { name: fish-fillets,                setname: fillets-ng,               repos: [ gentoo ]  }
-- { name: focuswriter-qt4,             setname: focuswriter,              repos: [ freebsd ] }
-- { name: fotaq,                       setname: flight-of-the-amazon-queen, repos: [ freebsd, openbsd ] }
-- { name: fox1.6,                      setname: fox16,                    repos: [ debian ]  }
-- { name: fox17,                       setname: fox,                      repos: [ freebsd ] }
-- { name: free42-nologo,               setname: free42,                   repos: [ debian ]  }
-- { name: freefont-ttf,                setname: freefont,                 repos: [ freebsd ] }
-- { name: freetype,                    setname: freetype1,                repos: [ freebsd, pkgsrc ] }
-- { name: freetype2,                   setname: freetype,                 repos: [ freebsd, pkgsrc ] }
-- { name: garden,                      setname: garden-of-coloured-lights, repos: [ gentoo, openbsd ] } # XXX: recheck
-- { name: gargoyle-free,               setname: gargoyle,                 repos: [ debian ]  }
-- { name: gaul-devel,                  setname: gaul,                     repos: [ gentoo ]  }
-- { name: geki2-KXL,                   setname: geki2,                    repos: [ gentoo ]  } # XXX: recheck
-- { name: geki3-KXL,                   setname: geki3,                    repos: [ gentoo ]  } # XXX: recheck
-- { name: gl117,                       setname: gl-117,                   repos: [ gentoo ]  }
-- { name: hannah,                      setname: help-hannahs-horse,       repos: [ debian ]  } # recheck
-- { name: ja2,                         setname: ja2-stracciatella,        repos: [ freebsd ] }
-- { name: kiki,                        setname: kiki-the-nano-bot,        repos: [ freebsd, gentoo ] }
-- { name: libphysfs,                   setname: physfs,                   repos: [ debian ] }
-- { name: moonlander,                  setname: moon-lander,              repos: [ freebsd, openbsd ] }
-- { name: openastromenace,             setname: astromenace,              repos: [ freebsd ] }
-- { name: osg,                         setname: openscenegraph,           repos: [ freebsd ] }
-- { name: pacman-arena,                setname: pacmanarena,              repos: [ openbsd ] }
-- { name: puzzles,                     setname: sgt-puzzles,              repos: [ pkgsrc, arch, openbsd ] }
-- { name: sdl-sopwith,                 setname: sopwith,                  repos: [ gentoo ]  }
-- { name: seven-kingdoms,              setname: 7kaa,                     repos: [ gentoo ]  }
-- { name: slashem-tty,                 setname: slashem,                  repos: [ freebsd ] }
-- { name: spacearyarya-kxl,            setname: spacearyarya,             repos: [ gentoo ]  } # XXX: recheck
-- { name: speed-dreams,                setname: speeddreams,              repos: [ gentoo ]  }
-- { name: stepmania-devel,             setname: stepmania,                repos: [ freebsd ] }
-- { name: stone-soup,                  setname: stonesoup,                repos: [ gentoo, openbsd ] }
-- { name: stransball2,                 setname: supertransball2,          repos: [ freebsd ] }
-- { name: supertux,                    setname: supertux1,                repos: [ freebsd ] } # ???
-- { name: supertux2,                   setname: supertux,                 repos: [ freebsd ] }
-- { name: tetrinet-x,                  setname: tetrinetx,                repos: [ freebsd ] }
-- { name: tintin,                      setname: tintin++,                 repos: [ gentoo ]  }
-- { name: trigger,                     setname: trigger-rally,            repos: [ gentoo ]  }
-- { name: ufo-ai,                      setname: ufoai,                    repos: [ gentoo ]  }
-- { name: xpi-adblock_plus,            setname: adblock-plus,             repos: [ freebsd ] }
-- { name: xpi-foxyproxy,               setname: foxyproxy,                repos: [ freebsd ] }
-- { name: zookeeper-c,                 setname: zookeeper,                repos: [ gentoo ]  }
-- { namepat: "celestia-.*",            setname: celestia,                 repos: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
-- { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              repos: [ freebsd ] }
-- { namepat: "enscript-.*",            setname: enscript,                 repos: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
-- { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
-- { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
-
-# XXX: continue from gaul
-
-# gnustep
-- { name: aclock.app,                  setname: aclock,                   repos: [ debian ]  }
-- { name: batmon.app,                  setname: batmon,                   repos: [ debian ]  }
-- { name: camera.app,                  setname: camera,                   repos: [ debian ]  }
-- { name: cenon.app,                   setname: cenon,                    repos: [ debian ]  }
-- { name: charmap.app,                 setname: charmap,                  repos: [ debian ]  }
-- { name: cynthiune.app,               setname: cynthiune,                repos: [ debian ]  }
-- { name: edenmath.app,                setname: edenmath,                 repos: [ debian ]  }
-- { name: gomoku.app,                  setname: gomoku,                   repos: [ debian ]  }
-- { name: gorm.app,                    setname: gorm,                     repos: [ debian ]  }
-- { name: grr.app,                     setname: grr,                      repos: [ debian ]  }
-- { name: gtamsanalyzer.app,           setname: gtamsanalyzer,            repos: [ debian ]  }
-- { name: helpviewer.app,              setname: helpviewer,               repos: [ debian ]  }
-- { name: lusernet.app,                setname: lusernet,                 repos: [ debian ]  }
-- { name: mixer_app,                   setname: mixer.app,                repos: [ gentoo ]  }
-- { name: mpdcon.app,                  setname: mpdcon,                   repos: [ debian ]  }
-- { name: paje.app,                    setname: paje,                     repos: [ debian ]  }
-- { name: plopfolio.app,               setname: plopfolio,                repos: [ debian ]  }
-- { name: poe.app,                     setname: poe,                      repos: [ debian ]  }
-- { name: preview.app,                 setname: preview,                  repos: [ debian ]  }
-- { name: price.app,                   setname: price,                    repos: [ debian ]  }
-- { name: projectcenter.app,           setname: projectcenter,            repos: [ debian ]  }
-- { name: systempreferences.app,       setname: systempreferences,        repos: [ debian ]  }
-- { name: terminal,                    setname: terminal.app,             repos: [ gentoo ]  }
-- { name: textedit.app,                setname: textedit,                 repos: [ debian ]  }
-- { name: timemon.app,                 setname: timemon,                  repos: [ debian ]  }
-- { name: wmppp.app,                   setname: wmppp,                    repos: [ debian ]  }
-- { name: xscreensaver-app,            setname: xscreensaver.app,         repos: [ gentoo ]  }
-- { name: zipper.app,                  setname: zipper,                   repos: [ debian ]  }
-
-# Ambiguous upstream package names, careful!
-- { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
-- { name: dolphin,                     setname: dolphin-emu,              repos: [ gentoo ]  } # dolphin file namager vs. emulator
-- { name: dragon,                      setname: dragon-scannerparser,     repos: [ freebsd ] }
-- { name: dragon,                      setname: dragon-player                                }
-# fuse-emulator vs. fusefs modules - see above
-
-# TODO
-# - flare engine/game vs. flare database; known, but database doesn't seem
-# to be widely packaged (had FreeBSD port which was removed)
-# - elixir vs. elixir-lang (investigate)
-# - emma vs. emma-coverage
-
-# TODO
-# - ace vs. ace-of-penguins
-# - crimson vs. crimson-fields
-# - critterding version
-# - pkgsrc: enigma
-# - empty vs. empty-expect
-# - emotion-generic-players vs. emotion-generic-players-vlc
-# - enblend vs. enblend-enfuse
-# - enemy-territory vs. etqw
-# - engauge vs. engauge-digitizer
-# - fbg vs fbg2
-# - fcgi vs. fcgi-devkit
-# - filebeat/filebeat-bin
-# - fira* (font)
-
-# Version ignores, incompatible version mangling in the repos
-- { name: cryptcat,                    ver: "20031202",                 ignorever: true }
-- { name: xmahjongg,                   ver: "3.70", repos: [ pkgsrc ],  ignorever: true }
-- { name: "perl:readonly",             ver: "2.050", repos: [ debian ], ignorever: true } # needs multiple rule hits
