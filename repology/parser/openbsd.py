@@ -64,7 +64,8 @@ class OpenBSDIndexParser():
                 pkg.name, pkg.fullversion = SplitPackageNameVersion(pkgname)
                 pkg.version = SanitizeVersion(pkg.fullversion)
                 pkg.comment = row[3]
-                pkg.maintainers.append(row[5])
+                for maintainer in re.split(",", row[5]):
+                    pkg.maintainers.append(maintainer.strip())
                 pkg.category = row[6].split(' ')[0]
 
                 result.append(pkg)
