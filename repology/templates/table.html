@@ -8,7 +8,7 @@
 {% for package in packages %}
     {% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
     <tr>
-        <th>Package</th>
+        <th></th>
         {% for reponame in reponames %}
             <th>{{ reponame }}</th>
         {% endfor %}
