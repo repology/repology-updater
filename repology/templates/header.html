@@ -32,6 +32,7 @@
 
 <div class="bounds">
 
+{% if subsection %}
 <nav>
     Sections:
     <ul>
@@ -42,6 +43,7 @@
         <li><a href="{{ site_root }}about.html"{% if subsection == "about" %} class="active"{% endif %}>About</a></li>
     </ul>
 </nav>
+{% endif %}
 
 {% if description %}
 <article><p>{{ description }}</p></article>
