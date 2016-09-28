@@ -32,6 +32,17 @@ def SanitizeVersion(version):
 
     return version
 
+def IsBetterVersion(version, maxversion):
+    # if we have no best version, take any
+    if maxversion is None:
+        return True
+
+    # prefer version without 9999 to version with 9999
+    if version.endswith("9999") == maxversion.endswith("9999"):
+        return VersionCompare(version, maxversion) > 0
+
+    return not version.endswith("9999")
+
 class GentooGitParser():
     def __init__(self):
         pass
@@ -60,7 +71,7 @@ class GentooGitParser():
 
                     version = ebuild[len(package)+1:-7]
 
-                    if maxversion is None or (not version.endswith("9999") and (maxversion.endswith("9999") or VersionCompare(version, maxversion) > 0)):
+                    if IsBetterVersion(version, maxversion):
                         maxversion = version
                         bestebuild = ebuild
 
