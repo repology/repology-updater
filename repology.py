@@ -103,6 +103,12 @@ REPOSITORIES = [
         ),
         'parser': ArchDBParser()
     },
+#    {
+#        'name': 'Fedora',
+#        'repotype': 'fedora',
+#        'fetcher': FedoraFetcher(),
+#        'parser': SpecParser()
+#    },
 ]
 
 def MixRepositories(repositories, nametrans):
