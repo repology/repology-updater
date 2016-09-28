@@ -64,6 +64,9 @@ class DebianSourcesParser():
                     pkg.version = SanitizeVersion(pkg.fullversion)
                 elif line.startswith('Maintainer: '):
                     pkg.maintainers.append(line[12:])
+                elif line.startswith('Uploaders: '):
+                    for m in re.findall("(?:\"[^\"]*\"|[^,])+", line[11:]):
+                        pkg.maintainers.append(m.strip())
                 elif line.startswith('Section: '):
                     pkg.category = line[9:]
                 elif line.startswith('Homepage: '):
