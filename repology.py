@@ -179,7 +179,6 @@ def RepologyOrg(path, packages, repositories):
     if not os.path.isdir(maintainers_path):
         os.mkdir(maintainers_path)
 
-    limit = 100
     for maintainer, maintainer_data in maintainers.items():
         maint_packages = FilterPackages(packages, maintainer = maintainer)
 
@@ -192,10 +191,6 @@ def RepologyOrg(path, packages, repositories):
             subheader = "Packages maintained by " + escape(maintainer),
             subsection = "maintainers"
         )
-
-        limit -= 1
-        if limit == 10000:
-            break
 
     template.RenderToFile(
         'maintainers.html',
