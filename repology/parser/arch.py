@@ -49,7 +49,7 @@ class ArchDBParser():
 
                 tag = None
                 for line in file:
-                    line = line[:-1]
+                    line = line.strip()
 
                     if line == '':
                         tag = None
@@ -71,7 +71,7 @@ class ArchDBParser():
                             pkg.license = []
                         pkg.license.append(line)
                     elif tag == 'PACKAGER':
-                        pkg.maintainer = line
+                        pkg.maintainers.append(line)
                     elif line.startswith('%') and line.endswith('%'):
                         tag = line[1:-1]
 

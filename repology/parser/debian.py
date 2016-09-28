@@ -53,19 +53,20 @@ class DebianSourcesParser():
         with open(path, encoding='utf-8') as file:
             pkg = Package()
             for line in file:
-                if line == "\n":
+                line = line.strip()
+                if line == "":
                     result.append(pkg)
                     pkg = Package()
                 elif line.startswith('Package: '):
-                    pkg.name = line[9:-1]
+                    pkg.name = line[9:]
                 elif line.startswith('Version: '):
-                    pkg.fullversion = line[9:-1]
+                    pkg.fullversion = line[9:]
                     pkg.version = SanitizeVersion(pkg.fullversion)
                 elif line.startswith('Maintainer: '):
-                    pkg.maintainer = line[12:-1]
+                    pkg.maintainers.append(line[12:])
                 elif line.startswith('Section: '):
-                    pkg.category = line[9:-1]
+                    pkg.category = line[9:]
                 elif line.startswith('Homepage: '):
-                    pkg.homepage = line[10:-1]
+                    pkg.homepage = line[10:]
 
         return result

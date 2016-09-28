@@ -22,7 +22,7 @@ class Package:
         self.name = None
         self.version = None
         self.fullversion = None
-        self.maintainer = None
+        self.maintainers = []
         self.category = None
         self.comment = None
         self.homepage = None
@@ -73,17 +73,17 @@ class MetaPackage:
     def HasMaintainer(self, maintainer):
         for packagelist in self.packages.values():
             for package in packagelist:
-                if package.maintainer == maintainer:
+                if maintainer in package.maintainers:
                     return True
 
         return False
 
     def GetMaintainers(self):
-        maintainers = []
+        maintainers = set()
         for packagelist in self.packages.values():
             for package in packagelist:
-                if package.maintainer is not None:
-                    maintainers.append(package.maintainer)
+                for maintainer in package.maintainers:
+                    maintainers.add(maintainer)
 
         return maintainers
 

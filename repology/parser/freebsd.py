@@ -48,7 +48,7 @@ class FreeBSDIndexParser():
                 pkg.name, pkg.fullversion = SplitPackageNameVersion(row[0])
                 pkg.version = SanitizeVersion(pkg.fullversion)
                 pkg.comment = row[3]
-                pkg.maintainer = row[5]
+                pkg.maintainers.append(row[5])
                 pkg.category = row[6].split(' ')[0]
 
                 result.append(pkg)
