@@ -19,12 +19,20 @@
 
 import time
 import jinja2
+from math import sqrt
 
 def SpanTrim(str, maxlength):
     if len(str) <= maxlength:
         return str
 
     return "<span title=\"%s\">%s…</span>" % (str, str[0:maxlength])
+
+def Clamp(value, lower, upper):
+    if value < lower:
+        return lower
+    if value > upper:
+        return upper
+    return value
 
 class Template:
     def __init__(self):
@@ -34,6 +42,8 @@ class Template:
             trim_blocks = True,
         )
         self.env.filters["spantrim"] = SpanTrim
+        self.env.filters["clamp"] = Clamp
+        self.env.filters["sqrt"] = sqrt
 
     def Render(self, template, **template_data):
         template = self.env.get_template(template)
