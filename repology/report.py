@@ -50,7 +50,6 @@ class ReportProducer:
             'reponames': reponames,
             'repositories': {},
             'packages': [],
-            'gentime': time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())
         }
 
         data.update(template_data)
