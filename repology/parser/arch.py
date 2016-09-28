@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import sys
 from pkg_resources import parse_version
 
 from ..util import VersionCompare
@@ -77,5 +78,7 @@ class ArchDBParser():
 
                 if pkg.name is not None and pkg.version is not None:
                     result.append(pkg)
+                else:
+                    print("WARNING: %s skipped, likely due to parsing problems" % package, file=sys.stderr)
 
         return result
