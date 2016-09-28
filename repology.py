@@ -299,8 +299,9 @@ def Main():
             options.repository,
             options.no_repository
         )
-        rp = ReportProducer()
-        rp.RenderFile('table.html', options.path, packages, [x['name'] for x in REPOSITORIES])
+        template = Template()
+        rp = ReportProducer(template, "table.html")
+        rp.RenderToFile(options.path, packages, [x['name'] for x in REPOSITORIES])
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
