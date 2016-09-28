@@ -17,7 +17,6 @@
 
 import os
 import re
-import subprocess
 
 from .common import RepositoryProcessor
 from ..package import Package
@@ -46,25 +45,13 @@ def SanitizeVersion(version):
     return version
 
 class DebianSourcesProcessor(RepositoryProcessor):
-    def __init__(self, path, *sources):
-        self.path = path
-        self.sources = sources
+    def __init__(self):
+        pass
 
-    def IsUpToDate(self):
-        return False
-
-    def Download(self, update = True):
-        if os.path.isfile(self.path):
-            if not update:
-                return
-            os.remove(self.path)
-        for source in self.sources:
-            subprocess.check_call("wget -qO- %s | gunzip >> %s" % (source, self.path), shell = True)
-
-    def Parse(self):
+    def Parse(self, path):
         result = []
 
-        with open(self.path, encoding='utf-8') as file:
+        with open(path, encoding='utf-8') as file:
             pkg = Package()
             for line in file:
                 if line == "\n":

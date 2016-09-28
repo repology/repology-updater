@@ -26,16 +26,21 @@ import jinja2
 from xml.sax.saxutils import escape
 import shutil
 
+from repology.fetcher import *
 from repology.processor import *
+
 from repology.package import *
 from repology.nametransformer import NameTransformer
 from repology.report import ReportProducer
 from repology.template import Template
 
 REPOSITORIES = [
-    { 'name': "FreeBSD", 'repotype': 'freebsd', 'processor': FreeBSDIndexProcessor("freebsd.list",
-        "http://www.FreeBSD.org/ports/INDEX-11.bz2"
-    ) },
+    {
+        'name': "FreeBSD",
+        'repotype': 'freebsd',
+        'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip = True),
+        'processor': FreeBSDIndexProcessor()
+    },
     #{ 'name': 'Debian Stable', 'repotype': 'debian', 'processor': DebianSourcesProcessor("debian-stable.list",
     #    "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
     #    "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
@@ -47,11 +52,17 @@ REPOSITORIES = [
     #    "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz"
     #) },
     # Debian unstable
-    { 'name': 'Debian', 'repotype': 'debian', 'processor': DebianSourcesProcessor("debian-unstable.list",
-        "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
-        "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
-        "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz"
-    ) },
+    {
+        'name': 'Debian',
+        'repotype': 'debian',
+        'fetcher': FileFetcher(
+            "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
+            "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
+            "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz",
+            gunzip = True
+        ),
+        'processor': DebianSourcesProcessor()
+    },
     #{ 'name': 'Ubuntu Xenial', 'repotype': 'debian', 'processor': DebianSourcesProcessor("ubuntu-xenial.list",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
@@ -64,20 +75,34 @@ REPOSITORIES = [
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
     #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz"
     #) },
-    { 'name': 'Gentoo', 'repotype': 'gentoo', 'processor': GentooGitProcessor("gentoo.git",
-        "https://github.com/gentoo/gentoo.git"
-    ) },
-    { 'name': 'NetBSD', 'repotype': 'pkgsrc', 'processor': PkgSrcReadmeAllProcessor("pkgsrc.list",
-        "https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"
-    ) },
-    { 'name': 'OpenBSD', 'repotype': 'openbsd', 'processor': OpenBSDIndexProcessor("openbsd.list",
-        "http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"
-    ) },
-    { 'name': 'Arch', 'repotype': 'arch', 'processor': ArchDBProcessor("arch.dir",
-        "http://ftp.u-tx.net/archlinux/core/os/x86_64/core.db.tar.gz",
-        "http://ftp.u-tx.net/archlinux/extra/os/x86_64/extra.db.tar.gz",
-        "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
-    ) },
+    {
+        'name': 'Gentoo',
+        'repotype': 'gentoo',
+        'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
+        'processor': GentooGitProcessor()
+    },
+    {
+        'name': 'NetBSD',
+        'repotype': 'pkgsrc',
+        'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
+        'processor': PkgSrcReadmeAllProcessor()
+    },
+    {
+        'name': 'OpenBSD',
+        'repotype': 'openbsd',
+        'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
+        'processor': OpenBSDIndexProcessor()
+    },
+    {
+        'name': 'Arch',
+        'repotype': 'arch',
+        'fetcher': ArchDBFetcher(
+            "http://ftp.u-tx.net/archlinux/core/os/x86_64/core.db.tar.gz",
+            "http://ftp.u-tx.net/archlinux/extra/os/x86_64/extra.db.tar.gz",
+            "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
+        ),
+        'processor': ArchDBProcessor()
+    },
 ]
 
 def MixRepositories(repositories, nametrans):
@@ -267,30 +292,37 @@ def Main():
     parser.add_argument('-R', '--no-repository', help='filter by absence in repository')
     parser.add_argument('-x', '--no-output', action='store_true', help='do not output anything')
     parser.add_argument('-o', '--repology-org', action='store_true', help='repology.org mode, static site generator')
+    parser.add_argument('-s', '--statedir', help='directory to store repository state')
+    parser.add_argument('-v', '--verbose', action='store_true', help='verbose fetching')
     parser.add_argument('path', help='path to output file/dir')
     options = parser.parse_args()
 
-    for repository in REPOSITORIES:
-        print("===> Downloading %s" % repository['name'], file=sys.stderr)
-        if repository['processor'].IsUpToDate():
-            print("Up to date", file=sys.stderr)
-        else:
-            repository['processor'].Download(not options.no_update)
+    if options.statedir is None:
+        raise RuntimeError("please set --statedir")
 
+    print("===> Downloading package data...", file=sys.stderr)
+    if not os.path.isdir(options.statedir):
+        os.mkdir(options.statedir)
+
+    for repository in REPOSITORIES:
+        print("====> %s" % repository['name'], file=sys.stderr)
+        repository['fetcher'].Fetch(os.path.join(options.statedir, repository['name'] + ".state"), update = not options.no_update, verbose = options.verbose)
+
+    print("===> Parsing package data...", file=sys.stderr)
     nametrans = NameTransformer(options.transform_rules)
 
     for repository in REPOSITORIES:
-        print("===> Parsing %s" % repository['name'], file=sys.stderr)
-        repository['packages'] = repository['processor'].Parse()
+        print("====> %s" % repository['name'], file=sys.stderr)
+        repository['packages'] = repository['processor'].Parse(os.path.join(options.statedir, repository['name'] + ".state"))
 
-    print("===> Processing", file=sys.stderr)
+    print("===> Processing package data...", file=sys.stderr)
     packages = MixRepositories(REPOSITORIES, nametrans)
 
     if options.repology_org:
-        print("===> Producing repology.org website", file=sys.stderr)
+        print("===> Producing repology.org website...", file=sys.stderr)
         RepologyOrg(options.path, packages, [x['name'] for x in REPOSITORIES])
     elif not options.no_output:
-        print("===> Producing output", file=sys.stderr)
+        print("===> Producing report...", file=sys.stderr)
         packages = FilterPackages(
             packages,
             options.maintainer,

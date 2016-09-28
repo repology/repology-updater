@@ -16,8 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import subprocess
-import shutil
 from pkg_resources import parse_version
 
 from .common import RepositoryProcessor
@@ -36,26 +34,14 @@ def SanitizeVersion(version):
     return version
 
 class ArchDBProcessor(RepositoryProcessor):
-    def __init__(self, path, *sources):
-        self.path = path
-        self.sources = sources
+    def __init__(self):
+        pass
 
-    def IsUpToDate(self):
-        return False
-
-    def Download(self, update = True):
-        if os.path.isdir(self.path) and update:
-            shutil.rmtree(self.path)
-        if not os.path.isdir(self.path):
-            os.mkdir(self.path)
-            for source in self.sources:
-                subprocess.check_call("wget -qO- %s | tar -xz -f- -C %s" % (source, self.path), shell = True)
-
-    def Parse(self):
+    def Parse(self, path):
         result = []
 
-        for package in os.listdir(self.path):
-            desc_path = os.path.join(self.path, package, "desc")
+        for package in os.listdir(path):
+            desc_path = os.path.join(path, package, "desc")
             if not os.path.isfile(desc_path):
                 continue
 

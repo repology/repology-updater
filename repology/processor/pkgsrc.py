@@ -17,7 +17,6 @@
 
 import os
 import re
-import subprocess
 import sys
 
 from .common import RepositoryProcessor
@@ -32,22 +31,13 @@ def SanitizeVersion(version):
     return version
 
 class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
-    def __init__(self, path, src):
-        self.path = path
-        self.src = src
+    def __init__(self):
+        pass
 
-    def IsUpToDate(self):
-        return False
-
-    def Download(self, update = True):
-        if os.path.isfile(self.path) and not update:
-            return
-        subprocess.check_call("wget -qO- %s | bunzip2 > %s" % (self.src, self.path), shell = True)
-
-    def Parse(self):
+    def Parse(self, path):
         result = []
 
-        with open(self.path) as file:
+        with open(path) as file:
             for line in file:
                 pkgname = line[12:-137]
 
@@ -64,22 +54,13 @@ class PkgSrcPackagesSHA512Processor(RepositoryProcessor):
         return result
 
 class PkgSrcReadmeAllProcessor(RepositoryProcessor):
-    def __init__(self, path, src):
-        self.path = path
-        self.src = src
+    def __init__(self):
+        pass
 
-    def IsUpToDate(self):
-        return False
-
-    def Download(self, update = True):
-        if os.path.isfile(self.path) and not update:
-            return
-        subprocess.check_call("wget -qO- %s > %s" % (self.src, self.path), shell = True)
-
-    def Parse(self):
+    def Parse(self, path):
         result = []
 
-        with open(self.path, encoding="utf-8") as file:
+        with open(path, encoding="utf-8") as file:
             pkg = Package()
             for line in file:
                 line = line[:-1]

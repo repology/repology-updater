@@ -17,7 +17,6 @@
 
 import os
 import csv
-import subprocess
 
 from .common import RepositoryProcessor
 from ..util import SplitPackageNameVersion
@@ -36,22 +35,13 @@ def SanitizeVersion(version):
     return version
 
 class FreeBSDIndexProcessor(RepositoryProcessor):
-    def __init__(self, path, src):
-        self.path = path
-        self.src = src
+    def __init__(self):
+        pass
 
-    def IsUpToDate(self):
-        return False
-
-    def Download(self, update = True):
-        if os.path.isfile(self.path) and not update:
-            return
-        subprocess.check_call("wget -qO- %s | bunzip2 > %s" % (self.src, self.path), shell = True)
-
-    def Parse(self):
+    def Parse(self, path):
         result = []
 
-        with open(self.path) as file:
+        with open(path) as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
                 pkg = Package()

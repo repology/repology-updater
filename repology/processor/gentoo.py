@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import subprocess
 from pkg_resources import parse_version
 
 from .common import RepositoryProcessor
@@ -35,24 +34,14 @@ def SanitizeVersion(version):
     return version
 
 class GentooGitProcessor(RepositoryProcessor):
-    def __init__(self, path, src):
-        self.path = path
-        self.src = src
+    def __init__(self):
+        pass
 
-    def IsUpToDate(self):
-        return False
-
-    def Download(self, update = True):
-        if not os.path.isdir(self.path):
-            subprocess.check_call("git clone -q --depth=1 %s %s" % (self.src, self.path), shell = True)
-        elif update:
-            subprocess.check_call("cd %s && git pull -q" % (self.path), shell = True)
-
-    def Parse(self):
+    def Parse(self, path):
         result = []
 
-        for category in os.listdir(self.path):
-            category_path = os.path.join(self.path, category)
+        for category in os.listdir(path):
+            category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):
                 continue
             if category == 'virtual':
