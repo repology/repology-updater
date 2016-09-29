@@ -74,10 +74,12 @@ nav ul li {
 }
 
 nav ul li a {
+    text-align: center;
+    min-width: 30px;
     display: inline-block;
     background-color: #f7f5f3;
     padding: 4px 8px;
-    margin: 2px;
+    margin: 2px 0px;
     text-decoration: none;
 }
 
