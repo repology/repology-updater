@@ -174,7 +174,7 @@ Links:
 Parses Sources.gz, available data:
 - name
 - version
-- maintainer
+- maintainer (from both ```Maintainer``` and ```Uploader``` fields)
 - category
 - homepage
 
@@ -234,6 +234,23 @@ Parses package databases (core, extra, community), available data:
 - homepage
 - maintainer (packager, actually)
 - license
+
+### Fedora
+
+- [Fedora Package Database](https://admin.fedoraproject.org/pkgdb)
+- [GIT Repositories](http://pkgs.fedoraproject.org/cgit/rpms/)
+
+Gets list of packages from Fedora Package Database API and then
+fetches .spec files from GIT repositories. Runs pretty slow. Doesn't
+download all .spec files (should be OK, since samples I've looked at
+are actually dead packages) and doesn't parse all files (can't process
+substitutions yet). Available data:
+- name
+- version
+- homepage
+- license
+- category
+- comment
 
 ## Reading the report
 
