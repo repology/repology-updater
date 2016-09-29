@@ -90,6 +90,7 @@ table {
 	border: 0px;
 	border-collapse: collapse;
 	margin: 0px auto;
+    width: 100%;
 }
 
 tr:nth-child(even) {
@@ -103,13 +104,21 @@ tr:nth-child(odd) {
 th {
 	vertical-align: bottom;
 	border-bottom: 2px solid #ddd;
-	padding: 0.5em 1em 0.5em 1em;
+	padding: 0.5em 0;
 }
 
 td {
-	padding: 0.5em;
+	padding: 0.5em 0;
 	border-bottom: 1px solid #ddd;
     white-space: nowrap;
+}
+
+td:nth-child(1) {
+    padding-left: 0.5em;
+}
+
+td:nth-last-child(1) {
+    padding-right: 0.5em;
 }
 
 .version {
