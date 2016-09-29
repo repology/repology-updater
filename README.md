@@ -43,6 +43,7 @@ report and a static website generator for [repology.org](repology.org).
 - jinja2
 - wget (for fetching some repository data)
 - git (for fetching some repository data)
+- py-requests
 
 ### Invocation:
 
