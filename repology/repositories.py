@@ -197,7 +197,7 @@ class RepositoryManager:
                     continue
                 if not metaname in packages:
                     packages[metaname] = MetaPackage()
-                    packages[metaname].Add(repository['name'], package)
+                packages[metaname].Add(reponame, package)
 
         return packages
 
