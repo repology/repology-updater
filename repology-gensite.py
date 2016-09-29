@@ -189,52 +189,35 @@ def RepologyOrg(path, packages, repositories):
 
 def Main():
     parser = ArgumentParser()
-    parser.add_argument('-U', '--no-update', action='store_true', help='don\'t update databases')
-    parser.add_argument('-t', '--transform-rules', default='rules.yaml', help='path to name transformation rules yaml')
-    parser.add_argument('-m', '--maintainer', help='filter by maintainer')
-    parser.add_argument('-c', '--category', help='filter by category')
-    parser.add_argument('-n', '--number', help='filter by number of repos')
-    parser.add_argument('-r', '--repository', help='filter by presence in repository')
-    parser.add_argument('-R', '--no-repository', help='filter by absence in repository')
-    parser.add_argument('-x', '--no-output', action='store_true', help='do not output anything')
-    parser.add_argument('-o', '--repology-org', action='store_true', help='repology.org mode, static site generator')
-    parser.add_argument('-s', '--statedir', help='directory to store repository state')
-    parser.add_argument('-v', '--verbose', action='store_true', help='verbose fetching')
-    parser.add_argument('path', help='path to output file/dir')
+    parser.add_argument('-s', '--statedir', help='path to directory with repository state')
+    parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
+    parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+
+    parser.add_argument('-t', '--tag', action='append', help='only process repositories with this tag')
+    parser.add_argument('-r', '--repository', action='append', help='only process repositories with this name')
+
+    parser.add_argument('-o', '--output', help='path to output directory')
     options = parser.parse_args()
 
-    if options.statedir is None:
+    if not options.statedir:
         raise RuntimeError("please set --statedir")
+    if not options.tag and not options.repository:
+        raise RuntimeError("please set --tag or --repository")
 
+    nametrans = NameTransformer(options.rules)
     repoman = RepositoryManager(options.statedir)
+    packages = repoman.Deserialize(
+        NameTransformer(options.rules),
+        verbose = options.verbose,
+        tags = options.tag,
+        repositories = options.repository
+    )
 
-    print("===> Downloading package data...", file=sys.stderr)
-    repoman.Fetch(update = not options.no_update, verbose = options.verbose, tags = ['production'])
-
-    print("===> Parsing package data...", file=sys.stderr)
-    nametrans = NameTransformer(options.transform_rules)
-    packages = repoman.Parse(nametrans, verbose = options.verbose, tags = ['production'])
-
-    if options.repology_org:
-        print("===> Producing repology.org website...", file=sys.stderr)
-        RepologyOrg(options.path, packages, repoman.GetNames())
-    elif not options.no_output:
-        print("===> Producing report...", file=sys.stderr)
-        packages = FilterPackages(
-            packages,
-            options.maintainer,
-            options.category,
-            int(options.number) if options.number is not None else 0,
-            options.repository,
-            options.no_repository
-        )
-        template = Template()
-        rp = ReportProducer(template, "table.html")
-        rp.RenderToFile(options.path, packages, repoman.GetNames())
+    RepologyOrg(options.output, packages, repoman.GetNames(tags = options.tag, repositories = options.repository))
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
-        print("===> Unmatched rules", file=sys.stderr)
+        print("WARNING: Unmatched rules detected:", file=sys.stderr)
 
         for rule in unmatched:
             print(rule, file=sys.stderr)

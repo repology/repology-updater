@@ -25,25 +25,38 @@ from repology.repositories import RepositoryManager
 
 def Main():
     parser = ArgumentParser()
-    parser.add_argument('-s', '--statedir', help='directory to store repository state')
-    parser.add_argument('-U', '--no-update', action='store_true', help='only fetch for the first time, don\'t update')
-    parser.add_argument('-t', '--tag', help='only process repositories with this tag', action='append')
-    parser.add_argument('-v', '--verbose', action='store_true', help='verbose status')
-    parser.add_argument('repository', help='repository to process', nargs='*')
+    parser.add_argument('-s', '--statedir', help='path to directory with repository state')
+    parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+
+    parser.add_argument('-f', '--fetch', action='store_true', help='allow fetching repository data')
+    parser.add_argument('-u', '--update', action='store_true', help='allow updating repository data')
+    parser.add_argument('-p', '--parse', action='store_true', help='parse and serialize repository data')
+
+    parser.add_argument('-t', '--tag', action='append', help='only process repositories with this tag')
+    parser.add_argument('-r', '--repository', action='append', help='only process repositories with this name')
     options = parser.parse_args()
 
-    if options.statedir is None:
+    if not options.statedir:
         raise RuntimeError("please set --statedir")
+    if not options.tag and not options.repository:
+        raise RuntimeError("please set --tag or --repository")
 
     repoman = RepositoryManager(options.statedir)
 
-    print("===> Downloading package data...", file=sys.stderr)
-    repoman.Fetch(
-        update = not options.no_update,
-        verbose = options.verbose,
-        tags = options.tag,
-        names = options.repository if options.repository else None
-    )
+    if options.fetch:
+        repoman.Fetch(
+            update = options.update,
+            verbose = options.verbose,
+            tags = options.tag,
+            repositories = options.repository
+        )
+
+    if options.parse:
+        repoman.ParseAndSerialize(
+            verbose = options.verbose,
+            tags = options.tag,
+            repositories = options.repository
+        )
 
     return 0
 
