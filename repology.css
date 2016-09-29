@@ -91,6 +91,7 @@ table {
 	border-collapse: collapse;
 	margin: 0px auto;
     width: 100%;
+    font-size: inherit;
 }
 
 tr:nth-child(even) {
