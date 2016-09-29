@@ -108,7 +108,7 @@ REPOSITORIES = [
         'tags': [ 'all', 'production', 'fastfetch' ],
     },
     {
-        'name': 'NetBSD',
+        'name': 'pkgsrc',
         'repotype': 'pkgsrc',
         'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
         'parser': PkgSrcReadmeAllParser(),
