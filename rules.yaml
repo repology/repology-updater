@@ -102,7 +102,8 @@
 - { namepat: "enscript-.*",            setname: enscript,                 repos: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
-- { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1", repos: [ freebsd ] }
+- { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          repos: [ freebsd ] }
+- { namepat: "eclipse-plugin-(.*)",    setname: "eclipse-$1",             repos: [ openbsd ] }
 
 # XXX: continue looking through the list starting from gaul
 
