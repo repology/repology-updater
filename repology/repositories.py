@@ -19,6 +19,7 @@
 
 import os
 import sys
+import pickle
 
 from repology.fetcher import *
 from repology.parser import *
@@ -147,9 +148,12 @@ class RepositoryManager:
     def GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
 
-    def ForEach(self, processor, tags = None, names = None):
+    def GetSerializedPath(self, repository):
+        return os.path.join(self.statedir, repository['name'] + ".packages")
+
+    def ForEach(self, processor, tags = None, repositories = None):
         for repository in REPOSITORIES:
-            if names and not repository['name'] in names:
+            if repositories and not repository['name'] in repositories:
                 continue
 
             skip = False
@@ -162,17 +166,17 @@ class RepositoryManager:
             if not skip:
                 processor(repository)
 
-    def GetNames(self, tags = None):
+    def GetNames(self, tags = None, repositories = None):
         names = []
 
         def AppendName(repository):
             names.append(repository['name'])
 
-        self.ForEach(AppendName, tags = tags)
+        self.ForEach(AppendName, tags = tags, repositories = repositories)
 
         return names
 
-    def Fetch(self, update = True, verbose = False, tags = None, names = None):
+    def Fetch(self, update = True, verbose = False, tags = None, repositories = None):
         def Fetcher(repository):
             if verbose: print("Fetching %s" % repository['name'], file = sys.stderr)
             repository['fetcher'].Fetch(self.GetStatePath(repository), update, verbose)
@@ -180,7 +184,7 @@ class RepositoryManager:
         if not os.path.isdir(self.statedir):
                 os.mkdir(self.statedir)
 
-        self.ForEach(Fetcher, tags, names)
+        self.ForEach(Fetcher, tags, repositories)
 
     def Mix(self, packages_by_repo, name_transformer):
         packages = {}
@@ -201,14 +205,36 @@ class RepositoryManager:
 
         return packages
 
-    def Parse(self, name_transformer, verbose = False, tags = None, names = None):
+    def Parse(self, name_transformer, verbose = False, tags = None, repositories = None):
         packages_by_repo = {}
 
         def Parser(repository):
             if verbose: print("Parsing %s" % repository['name'], file = sys.stderr)
             packages_by_repo[repository['name']] = repository['parser'].Parse(self.GetStatePath(repository))
 
-        self.ForEach(Parser, tags, names)
+        self.ForEach(Parser, tags, repositories)
+
+        if verbose: print("Merging data", file = sys.stderr)
+        return self.Mix(packages_by_repo, name_transformer)
+
+    def ParseAndSerialize(self, verbose = False, tags = None, repositories = None):
+        def ParserSerializer(repository):
+            if verbose: print("Parsing and saving %s" % repository['name'], file = sys.stderr)
+            pickle.dump(
+                repository['parser'].Parse(self.GetStatePath(repository)),
+                open(self.GetSerializedPath(repository), "wb")
+            )
+
+        self.ForEach(ParserSerializer, tags, repositories)
+
+    def Deserialize(self, name_transformer, verbose = False, tags = None, repositories = None):
+        packages_by_repo = {}
+
+        def Deserializer(repository):
+            if verbose: print("Loading %s" % repository['name'], file = sys.stderr)
+            packages_by_repo[repository['name']] = pickle.load(open(self.GetSerializedPath(repository), "rb"))
+
+        self.ForEach(Deserializer, tags, repositories)
 
         if verbose: print("Merging data", file = sys.stderr)
         return self.Mix(packages_by_repo, name_transformer)
