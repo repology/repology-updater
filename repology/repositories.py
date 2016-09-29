@@ -33,7 +33,7 @@ REPOSITORIES = [
         'repotype': 'freebsd',
         'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip = True),
         'parser': FreeBSDIndexParser(),
-        'tags': [ 'all', 'production', 'fastfetch' ],
+        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
 
     {
@@ -70,7 +70,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'debian', 'production', 'fastfetch' ],
+        'tags': [ 'all', 'demo', 'debian', 'production', 'fastfetch' ],
     },
 
     {
@@ -97,7 +97,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'production', 'ubuntu', 'fastfetch' ],
+        'tags': [ 'all', 'demo', 'production', 'ubuntu', 'fastfetch' ],
     },
 
     {
@@ -105,21 +105,21 @@ REPOSITORIES = [
         'repotype': 'gentoo',
         'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
         'parser': GentooGitParser(),
-        'tags': [ 'all', 'production', 'fastfetch' ],
+        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
         'name': 'pkgsrc',
         'repotype': 'pkgsrc',
         'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
         'parser': PkgSrcReadmeAllParser(),
-        'tags': [ 'all', 'production', 'fastfetch' ],
+        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
         'name': 'OpenBSD',
         'repotype': 'openbsd',
         'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
         'parser': OpenBSDIndexParser(),
-        'tags': [ 'all', 'production', 'fastfetch' ],
+        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
         'name': 'Arch',
@@ -130,7 +130,7 @@ REPOSITORIES = [
             "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
         ),
         'parser': ArchDBParser(),
-        'tags': [ 'all', 'production', 'fastfetch' ],
+        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
         'name': 'Fedora',

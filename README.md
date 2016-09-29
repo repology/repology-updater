@@ -57,7 +57,7 @@ for these two phases.
 First, you need to fetch repository data with ```repology-update.py``` utility.
 
 ```
-./repology-update.py --statedir repology.state --tag production --verbose --fetch --update --parse
+./repology-update.py --statedir repology.state --tag demo --verbose --fetch --update --parse
 ```
 
 ```--statedir``` is mandatory for all utilities and specifies path
@@ -66,10 +66,18 @@ created by ```repology-update.py``` if it doesn't exist.
 
 ```--tag``` and ```--repository``` specify which repositories to
 update. ```--tag``` is most useful as it allows to quickly pick
-repository groups. Tags include ```all``` to process all supported
-repositories, ```production``` to only process repositories listed
-on [repology.org](repology.org). Multiple tags have AND logic, e.g.
-you get repositories which have ALL the tags you specify.
+repository groups. Tags include:
+
+- ```all``` - all supported repositories
+- ```production``` - repositories available on [repology.org](repology.org)
+- ```fastfetch``` - repositories which take ~minutes to fetch their data
+- ```slowfetch``` - repositories which take long time to fetch
+- ```demo``` - a set of repositories for you to start playing with repology
+               with. These are repositories that just work and don't take
+               too much time to fetch.
+
+Multiple tags have AND logic, e.g. you get repositories which have
+ALL the tags you specify.
 
 ```--verbose``` is useful for tracking progress of utility operation
 
@@ -91,7 +99,7 @@ Next, you need to produce HTML page with report. The following
 command generates complete (huge!) report on a single page:
 
 ```
-./repology-report.py --statedir repology.state --tag production --output full.html
+./repology-report.py --statedir repology.state --tag demo --output full.html
 ```
 
 ```--statedir``` and ```--tag``` have the same meaning as with
@@ -120,19 +128,19 @@ Packages which likely are needed to be added to pkgsrc (because
 all other repositories have them) and their versions:
 
 ```
-./repology-report.py -s repology.state -t production -x pkgsrc -n 3 -o missing-pkgsrc.html
+./repology-report.py -s repology.state -t demo -x pkgsrc -n 3 -o missing-pkgsrc.html
 ```
 
 State of FreeBSD ports maintained by me:
 
 ```
-./repology-report.py -s repology.state -t production -m amdmi3@FreeBSD.org -i FreeBSD -o maintainer-amdmi3.html
+./repology-report.py -s repology.state -t demo -m amdmi3@FreeBSD.org -i FreeBSD -o maintainer-amdmi3.html
 ```
 
 State of games along all repos, with irrelevant packages filtered out:
 
 ```
-./repology-report.py -s repology.state -t production -c games -n 2 -o games.html
+./repology-report.py -s repology.state -t demo -c games -n 2 -o games.html
 ```
 
 #### Generating static website
@@ -141,7 +149,7 @@ Finally, if you want to produce your own instance of
 [repology.org](http://repology.org) website, run
 
 ```
-./repology-gensite.py --statedir repology.state --tag production --output /usr/www/repology.org
+./repology-gensite.py --statedir repology.state --tag demo --output /usr/www/repology.org
 ```
 
 This generates self-contained website in ```/usr/www/repology.org```
