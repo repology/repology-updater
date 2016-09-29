@@ -33,7 +33,7 @@ REPOSITORIES = [
         'repotype': 'freebsd',
         'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip = True),
         'parser': FreeBSDIndexParser(),
-        'tags': [ 'production', 'fastfetch' ],
+        'tags': [ 'all', 'production', 'fastfetch' ],
     },
 
     {
@@ -46,7 +46,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'fastfetch' ],
+        'tags': [ 'all', 'fastfetch' ],
     },
     {
         'name': 'Debian Testing',
@@ -58,7 +58,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'fastfetch' ],
+        'tags': [ 'all', 'fastfetch' ],
     },
     {
         'name': 'Debian', # Unstable
@@ -70,7 +70,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'production', 'fastfetch' ],
+        'tags': [ 'all', 'production', 'fastfetch' ],
     },
 
     {
@@ -84,7 +84,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'fastfetch' ],
+        'tags': [ 'all', 'fastfetch' ],
     },
     {
         'name': 'Ubuntu Yakkety',
@@ -97,7 +97,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'fastfetch' ],
+        'tags': [ 'all', 'fastfetch' ],
     },
 
     {
@@ -105,21 +105,21 @@ REPOSITORIES = [
         'repotype': 'gentoo',
         'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
         'parser': GentooGitParser(),
-        'tags': [ 'production', 'fastfetch' ],
+        'tags': [ 'all', 'production', 'fastfetch' ],
     },
     {
         'name': 'NetBSD',
         'repotype': 'pkgsrc',
         'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
         'parser': PkgSrcReadmeAllParser(),
-        'tags': [ 'production', 'fastfetch' ],
+        'tags': [ 'all', 'production', 'fastfetch' ],
     },
     {
         'name': 'OpenBSD',
         'repotype': 'openbsd',
         'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
         'parser': OpenBSDIndexParser(),
-        'tags': [ 'production', 'fastfetch' ],
+        'tags': [ 'all', 'production', 'fastfetch' ],
     },
     {
         'name': 'Arch',
@@ -130,7 +130,7 @@ REPOSITORIES = [
             "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
         ),
         'parser': ArchDBParser(),
-        'tags': [ 'production', 'fastfetch' ],
+        'tags': [ 'all', 'production', 'fastfetch' ],
     },
     {
         'name': 'Fedora',
