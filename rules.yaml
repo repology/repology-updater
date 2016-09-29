@@ -40,6 +40,7 @@
 - { name: drpython-py27,               setname: drpython,                 repos: [ freebsd ] }
 - { name: dynamips-community,          setname: dynamips,                 repos: [ freebsd ] }
 - { name: easyrpg,                     setname: easyrpg-player,           repos: [ openbsd ] }
+- { name: eclipse-java,                setname: eclipse,                  repos: [ arch ]    }
 - { name: einstein-puzzle,             setname: einstein,                 repos: [ pkgsrc ] }
 - { name: el,                          setname: eternal-lands,            repos: [ freebsd ] }
 - { name: el-data,                     setname: eternal-lands-data,       repos: [ freebsd ] }
@@ -97,13 +98,13 @@
 - { name: xpi-foxyproxy,               setname: foxyproxy,                repos: [ freebsd ] }
 - { name: zookeeper-c,                 setname: zookeeper,                repos: [ gentoo ]  }
 - { namepat: "celestia-.*",            setname: celestia,                 repos: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
+- { namepat: "eclipse-plugin-(.*)",    setname: "eclipse-$1",             repos: [ openbsd ] }
 - { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              repos: [ freebsd ] }
 - { namepat: "open[gs]fx",             setname: "openttd-$0",             repos: [ freebsd, gentoo ] }
 - { namepat: "enscript-.*",            setname: enscript,                 repos: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          repos: [ freebsd ] }
-- { namepat: "eclipse-plugin-(.*)",    setname: "eclipse-$1",             repos: [ openbsd ] }
 
 # XXX: continue looking through the list starting from gaul
 
