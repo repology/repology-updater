@@ -59,6 +59,10 @@ nav a:link, nav a:visited {
     color: #000000;
 }
 
+nav {
+    padding: 0;
+}
+
 nav ul {
     display: block;
     padding: 10px;
