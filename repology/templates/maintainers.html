@@ -2,7 +2,7 @@
 
 <ul>
 {% for maintainer in maintainers %}
-    <li style="font-size: {{ (100 + (maintainer.num_packages | sqrt) * 5) | clamp(100, 300) | round }}%">
+    <li style="font-size: {{ 100 + ((maintainer.num_packages | sqrt) * 5) | clamp(0, 200) | round | int }}%">
         <a href="{{ maintainer.sanitizedname }}.0.html">{{ maintainer.fullname }}</a> ({{ maintainer.num_packages }})
     </li>
 {% endfor %}
