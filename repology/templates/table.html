@@ -20,9 +20,10 @@
             {% set subpackage = package.byrepo[reponame] %}
             {% if subpackage is defined %}
                 <td>
-                    <span class="version {{ package.byrepo[reponame].class }}">{{ subpackage.version|spantrim(12) }}</span>
                     {% if subpackage.numpackages > 1 %}
-                        ({{ subpackage.numpackages }})
+                        <span class="version {{ package.byrepo[reponame].class }}">{{ subpackage.version|spantrim(9) }}</span>({{ subpackage.numpackages }})
+                    {% else %}
+                        <span class="version {{ package.byrepo[reponame].class }}">{{ subpackage.version|spantrim(12) }}</span>
                     {% endif %}
                 </td>
             {% else %}
