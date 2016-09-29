@@ -139,6 +139,11 @@ REPOSITORIES = [
         'parser': SpecParser(),
         'tags': [ 'experimental', 'slowfetch' ],
     },
+    # These parse binary package lists, and produce results not suitable for comparison
+    # with other repos. For instance, for each `libfoo' other repos have these will
+    # have `libfoo-devel', `libfooN` and `libfooN-32bit`. Merging these with rules
+    # is incorrect and errorprone, so switching this to getting and parsing a bunch
+    # of .specs is needed
     {
         'name': 'OpenSUSE Tumbleweed',
         'repotype': 'opensuse',
@@ -147,7 +152,7 @@ REPOSITORIES = [
             "http://download.opensuse.org/tumbleweed/repo/oss/suse/x86_64/"
         ),
         'parser': OpenSUSEPackageListParser(),
-        'tags': [ 'all', 'opensuse', 'fastfetch' ], # candidate for production + demo
+        'tags': [ 'all', 'opensuse', 'fastfetch' ],
     },
     {
         'name': 'OpenSUSE Leap',
