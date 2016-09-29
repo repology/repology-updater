@@ -10,7 +10,7 @@
     <tr>
         <th></th>
         {% for reponame in reponames %}
-            <th>{{ reponame }}</th>
+            <th>{{ reponame | replace(' ', '<br>') }}</th>
         {% endfor %}
     </tr>
     {% endif %}
