@@ -97,7 +97,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'ubuntu', 'fastfetch' ],
+        'tags': [ 'all', 'production', 'ubuntu', 'fastfetch' ],
     },
 
     {
