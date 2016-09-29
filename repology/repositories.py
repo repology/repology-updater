@@ -46,7 +46,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'fastfetch' ],
+        'tags': [ 'all', 'debian', 'fastfetch' ],
     },
     {
         'name': 'Debian Testing',
@@ -58,7 +58,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'fastfetch' ],
+        'tags': [ 'all', 'debian', 'fastfetch' ],
     },
     {
         'name': 'Debian', # Unstable
@@ -70,7 +70,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'production', 'fastfetch' ],
+        'tags': [ 'all', 'debian', 'production', 'fastfetch' ],
     },
 
     {
@@ -84,7 +84,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'fastfetch' ],
+        'tags': [ 'all', 'ubuntu', 'fastfetch' ],
     },
     {
         'name': 'Ubuntu Yakkety',
@@ -97,7 +97,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'fastfetch' ],
+        'tags': [ 'all', 'ubuntu', 'fastfetch' ],
     },
 
     {
