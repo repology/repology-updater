@@ -28,4 +28,4 @@ class GitFetcher():
         if not os.path.isdir(statepath):
             subprocess.check_call("git clone %s --depth=1 \"%s\" \"%s\"" % (quietflag, self.repository, statepath), shell = True)
         elif update:
-            subprocess.check_call("cd \"%s\" && git %s fetch && git reset --hard origin/master" % (statepath, quietflag), shell = True)
+            subprocess.check_call("cd \"%s\" && git fetch %s && git reset %s --hard origin/master" % (statepath, quietflag, quietflag), shell = True)
