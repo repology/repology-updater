@@ -61,7 +61,7 @@ REPOSITORIES = [
         'tags': [ 'all', 'debian', 'fastfetch' ],
     },
     {
-        'name': 'Debian', # Unstable
+        'name': 'Debian Unstable',
         'repotype': 'debian',
         'fetcher': FileFetcher(
             "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
