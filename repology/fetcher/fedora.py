@@ -70,4 +70,9 @@ class FedoraFetcher():
 
         os.mkdir(statepath)
 
-        ParsePackages(statepath, verbose)
+        try:
+            ParsePackages(statepath, verbose)
+        except:
+            # don't leave partial state
+            shutil.rmtree(statepath)
+            raise
