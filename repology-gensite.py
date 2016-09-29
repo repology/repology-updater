@@ -207,7 +207,7 @@ def Main():
     nametrans = NameTransformer(options.rules)
     repoman = RepositoryManager(options.statedir)
     packages = repoman.Deserialize(
-        NameTransformer(options.rules),
+        nametrans,
         verbose = options.verbose,
         tags = options.tag,
         repositories = options.repository
