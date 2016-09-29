@@ -24,7 +24,8 @@ which packages, and whether packages need updating.
 - **Software authors**:
   - Keep track of how well your project is packaged
   - Keep in touch with your product package maintainers
-
+  - If you're not using [semantic versioning](http://semver.org/)
+    yet, see how useful it is
 
 # Status
 
@@ -35,62 +36,116 @@ report and a static website generator for [repology.org](repology.org).
 
 ## Howto
 
-### Dependencies:
+### Dependencies
 
-- python3
-- pyyaml
-- setuptools
-- jinja2
-- wget (for fetching some repository data)
-- git (for fetching some repository data)
+- [python3](https://www.python.org/), with the following modules
+  - [pyyaml](http://pyyaml.org/) YAML parser
+  - [setuptools](https://pypi.python.org/pypi/setuptools)
+  - [jinja2](https://jinja.pocoo.org/) template engine
+  - [requests](http://python-requests.org/) (for fetching some repository data)
+- [wget](https://www.gnu.org/software/wget/) (for fetching some repository data)
+- [git](https://git-scm.com/) (for fetching some repository data)
 
-### Invocation:
+### Usage
+
+Repology operation is split into two distinct steps: repository
+data processing and producing the report. Separate utilities exist
+for these two phases.
+
+#### Fetching data
+
+First, you need to fetch repository data with ```repology-update.py``` utility.
 
 ```
-./repology.py output.html
+./repology-update.py --statedir repology.state --tag production --verbose --fetch --update --parse
 ```
 
-Will download data for supported repositories and generate HTML
-report, writing it into ```output.html```. By default, it includes
-all packages, so you may need some filtering:
+```--statedir``` is mandatory for all utilities and specifies path
+to directory where repository data will be stored. Directory is
+created by ```repology-update.py``` if it doesn't exist.
+
+```--tag``` and ```--repository``` specify which repositories to
+update. ```--tag``` is most useful as it allows to quickly pick
+repository groups. Tags include ```all``` to process all supported
+repositories, ```production``` to only process repositories listed
+on [repology.org](repology.org). Multiple tags have AND logic, e.g.
+you get repositories which have ALL the tags you specify.
+
+```--verbose``` is useful for tracking progress of utility operation
+
+Remaining arguments specify which actions to perform.
+
+```--fetch``` and ```--update``` control whether downloading of
+repository data is allowed. Specify none to disallow downloading,
+specify ```--fetch``` so allow only downloading for repository
+data which hasn't been downloaded yet, or specify both options
+to always download data, e.g. keep all your repository data up
+to date.
+
+```--parse``` enables parsing repositories and processing serialized
+data other utilities may use.
+
+#### Generating HTML reports
+
+Next, you need to produce HTML page with report. The following
+command generates complete (huge!) report on a single page:
+
+```
+./repology-report.py --statedir repology.state --tag production --output full.html
+```
+
+```--statedir``` and ```--tag``` have the same meaning as with
+fetching and should generally match arguments you've specified
+to ```repology-update.py```. But you are free to produce report
+for smaller subset of repositories.
+
+Since the full report is really huge any may hang your browser
+and hard to read, you may use multiple filtering options:
 
 - ```-m``` filter by maintainer (e.g. ```amdmi3@FreeBSD.org```)
 - ```-c``` filter by category (e.g. ```games```; note that this
 	       matches substring, e.g. ```games-action``` from Gentoo
 	       as well)
 - ```-n``` filter only packages present in this many repos
-- ```-r``` matches only packages present in specified repo
-- ```-R``` matches only packages not present in specified repo
+- ```-i``` matches only packages present in specified repo
+- ```-x``` matches only packages not present in specified repo
 
-Instead of single report generation with filtering, you may
-specify ```-o``` to make repology generate a static website with
-multiple reports.
+Note, that generated report uses ```repology.css``` stylesheet,
+so if you want to copy report to another directory, you'll want to
+copy css file along with it.
 
-Additionally, you will likely need
-
-- ```-U``` do not update repository information (saves time on
-            subsequent runs)
-
-### Examples:
+#### Examples
 
 Packages which likely are needed to be added to pkgsrc (because
 all other repositories have them) and their versions:
 
 ```
-./repology.py -U -R pkgsrc -n 3 missing-pkgsrc.html
+./repology-report.py -s repology.state -t production -x pkgsrc -n 3 -o missing-pkgsrc.html
 ```
 
 State of FreeBSD ports maintained by me:
 
 ```
-./repology.py -U -m amdmi3@FreeBSD.org -r FreeBSD maintainer-amdmi3.html
+./repology-report.py -s repology.state -t production -m amdmi3@FreeBSD.org -i FreeBSD -o maintainer-amdmi3.html
 ```
 
 State of games along all repos, with irrelevant packages filtered out:
 
 ```
-./repology.py -U -c games -n 2 games.html
+./repology-report.py -s repology.state -t production -c games -n 2 -o games.html
 ```
+
+#### Generating static website
+
+Finally, if you want to produce your own instance of
+[repology.org](http://repology.org) website, run
+
+```
+./repology-gensite.py --statedir repology.state --tag production --output /usr/www/repology.org
+```
+
+This generates self-contained website in ```/usr/www/repology.org```
+directory which is created if it doesn't exist.
 
 ## Repository support
 
