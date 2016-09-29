@@ -201,10 +201,10 @@ class RepositoryManager:
                 if metaname is None:
                     continue
                 if not metaname in packages:
-                    packages[metaname] = MetaPackage()
+                    packages[metaname] = MetaPackage(metaname)
                 packages[metaname].Add(reponame, package)
 
-        return packages
+        return [ packages[name] for name in sorted(packages.keys()) ]
 
     def Parse(self, name_transformer, verbose = False, tags = None, repositories = None):
         packages_by_repo = {}

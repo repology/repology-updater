@@ -30,12 +30,10 @@ from repology.report import ReportProducer
 from repology.template import Template
 from repology.repositories import RepositoryManager
 
-def FilterPackages(packages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
-    filtered_packages = {}
+def FilterPackages(metapackages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
+    filtered = []
 
-    for pkgname in sorted(packages.keys()):
-        metapackage = packages[pkgname]
-
+    for metapackage in metapackages:
         if maintainer is not None and not metapackage.HasMaintainer(maintainer):
             continue
 
@@ -51,9 +49,9 @@ def FilterPackages(packages, maintainer = None, category = None, number = 0, inr
         if notinrepo is not None and metapackage.HasRepository(notinrepo):
             continue
 
-        filtered_packages[pkgname] = metapackage
+        filtered.append(metapackage)
 
-    return filtered_packages
+    return filtered
 
 def Main():
     parser = ArgumentParser()

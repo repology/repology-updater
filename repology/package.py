@@ -32,9 +32,13 @@ class Package:
         pass
 
 class MetaPackage:
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.packages = {}
         pass
+
+    def GetName(self):
+        return self.name
 
     def Add(self, reponame, package):
         if not reponame in self.packages:

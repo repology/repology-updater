@@ -27,17 +27,15 @@ class ReportProducer:
         self.template = template
         self.templatename = templatename
 
-    def RenderFilesPaginated(self, path, packages, reponames, perpage, **extradata):
-        keys = sorted(packages.keys())
-
-        numpages = (len(keys) + perpage - 1) // perpage
+    def RenderFilesPaginated(self, path, metapackages, reponames, perpage, **extradata):
+        numpages = (len(metapackages) + perpage - 1) // perpage
 
         for page in range(0, numpages):
             pagepath = "%s.%d.html" % (path, page)
 
             self.RenderToFile(
                 pagepath,
-                {k:packages[k] for k in keys[page * perpage:page * perpage + perpage]},
+                metapackages[page * perpage:page * perpage + perpage],
                 reponames,
                 page = page,
                 numpages = numpages,
@@ -45,7 +43,7 @@ class ReportProducer:
                 **extradata
             )
 
-    def Prepare(self, packages, reponames, **template_data):
+    def Prepare(self, metapackages, reponames, **template_data):
         data = {
             'reponames': reponames,
             'repositories': {},
@@ -57,13 +55,11 @@ class ReportProducer:
         for reponame in reponames:
             data['repositories'][reponame] = {}
 
-        for pkgname in sorted(packages.keys()):
-            metapackage = packages[pkgname]
-
+        for metapackage in metapackages:
             bestversion, _, _ = metapackage.GetMaxVersion()
 
             template_package = {
-                'name': pkgname,
+                'name': metapackage.GetName(),
                 'byrepo': {}
             }
 
@@ -97,8 +93,8 @@ class ReportProducer:
 
         return data
 
-    def Render(self, packages, reponames, **template_data):
-        return self.template.Render(self.templatename, **self.Prepare(packages, reponames, **template_data))
+    def Render(self, metapackages, reponames, **template_data):
+        return self.template.Render(self.templatename, **self.Prepare(metapackages, reponames, **template_data))
 
-    def RenderToFile(self, path, packages, reponames, **template_data):
-        self.template.RenderToFile(self.templatename, path, **self.Prepare(packages, reponames, **template_data))
+    def RenderToFile(self, path, metapackages, reponames, **template_data):
+        self.template.RenderToFile(self.templatename, path, **self.Prepare(metapackages, reponames, **template_data))

@@ -30,12 +30,10 @@ from repology.report import ReportProducer
 from repology.template import Template
 from repology.repositories import RepositoryManager
 
-def FilterPackages(packages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
-    filtered_packages = {}
+def FilterPackages(metapackages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
+    filtered = []
 
-    for pkgname in sorted(packages.keys()):
-        metapackage = packages[pkgname]
-
+    for metapackage in metapackages:
         if maintainer is not None and not metapackage.HasMaintainer(maintainer):
             continue
 
@@ -51,11 +49,11 @@ def FilterPackages(packages, maintainer = None, category = None, number = 0, inr
         if notinrepo is not None and metapackage.HasRepository(notinrepo):
             continue
 
-        filtered_packages[pkgname] = metapackage
+        filtered.append(metapackage)
 
-    return filtered_packages
+    return filtered
 
-def RepologyOrg(path, packages, repositories):
+def RepologyOrg(path, metapackages, repositories):
     if not os.path.isdir(path):
         os.mkdir(path)
 
@@ -65,7 +63,7 @@ def RepologyOrg(path, packages, repositories):
     print("===> Main index", file=sys.stderr)
     rp.RenderFilesPaginated(
         os.path.join(path, "index"),
-        packages,
+        metapackages,
         repositories,
         500,
         site_root = "",
@@ -75,8 +73,8 @@ def RepologyOrg(path, packages, repositories):
 
     print("===> Per-maintainer index", file=sys.stderr)
     maintainers = {}
-    for package in packages.values():
-        for maintainer in package.GetMaintainers():
+    for metapackage in metapackages:
+        for maintainer in metapackage.GetMaintainers():
             if not maintainer in maintainers:
                 maintainers[maintainer] = {
                     'sanitized_name': re.sub("[^a-zA-Z@.0-9]", "_", maintainer).lower(),
@@ -91,7 +89,7 @@ def RepologyOrg(path, packages, repositories):
         os.mkdir(maintainers_path)
 
     for maintainer, maintainer_data in maintainers.items():
-        maint_packages = FilterPackages(packages, maintainer = maintainer)
+        maint_packages = FilterPackages(metapackages, maintainer = maintainer)
 
         rp.RenderFilesPaginated(
             os.path.join(maintainers_path, maintainer_data['sanitized_name']),
@@ -128,8 +126,8 @@ def RepologyOrg(path, packages, repositories):
         os.mkdir(notinrepo_path)
 
     for repository in repositories:
-        inrepo_packages = FilterPackages(packages, inrepo = repository)
-        notinrepo_packages = FilterPackages(packages, notinrepo = repository, number = 2)
+        inrepo_packages = FilterPackages(metapackages, inrepo = repository)
+        notinrepo_packages = FilterPackages(metapackages, notinrepo = repository, number = 2)
 
         rp.RenderFilesPaginated(
             os.path.join(inrepo_path, repository),
