@@ -38,9 +38,6 @@ def Main():
     repoman = RepositoryManager(options.statedir)
 
     print("===> Downloading package data...", file=sys.stderr)
-    if not os.path.isdir(options.statedir):
-        os.mkdir(options.statedir)
-
     repoman.Fetch(
         update = not options.no_update,
         verbose = options.verbose,

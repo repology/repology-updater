@@ -177,6 +177,9 @@ class RepositoryManager:
             if verbose: print("Fetching %s" % repository['name'], file = sys.stderr)
             repository['fetcher'].Fetch(self.GetStatePath(repository), update, verbose)
 
+        if not os.path.isdir(self.statedir):
+                os.mkdir(self.statedir)
+
         self.ForEach(Fetcher, tags, names)
 
     def Mix(self, packages_by_repo, name_transformer):
