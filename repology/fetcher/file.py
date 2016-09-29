@@ -35,8 +35,8 @@ class FileFetcher():
 
         for source in self.sources:
             if self.gunzip:
-                subprocess.check_call("wget -%sO- %s | gunzip >> %s" % (quietflag, source, statepath), shell = True)
+                subprocess.check_call("wget -%sO- \"%s\" | gunzip >> \"%s\"" % (quietflag, source, statepath), shell = True)
             elif self.bunzip:
-                subprocess.check_call("wget -%sO- %s | bunzip2 >> %s" % (quietflag, source, statepath), shell = True)
+                subprocess.check_call("wget -%sO- \"%s\" | bunzip2 >> \"%s\"" % (quietflag, source, statepath), shell = True)
             else:
-                subprocess.check_call("wget -%sO- %s >> %s" % (quietflag, source, statepath), shell = True)
+                subprocess.check_call("wget -%sO- \"%s\" >> \"%s\"" % (quietflag, source, statepath), shell = True)

@@ -35,4 +35,4 @@ class ArchDBFetcher():
         quietflag = 'q' if not verbose else ''
 
         for source in self.sources:
-            subprocess.check_call("wget -%sO- %s | tar -xz -f- -C %s" % (quietflag, source, statepath), shell = True)
+            subprocess.check_call("wget -%sO- \"%s\" | tar -xz -f- -C \"%s\"" % (quietflag, source, statepath), shell = True)
