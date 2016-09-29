@@ -213,6 +213,7 @@ TODO: Generate and parse INDEX, even if it's done infrequently.
 
 ### OpenBSD
 
+Links:
 - [CVS](http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/)
 - [openports.se](http://openports.se/)
 
@@ -225,6 +226,7 @@ Parses INDEX file (format similar to FreeBSD), available data:
 
 ### Arch
 
+Links:
 - [Package Search](https://www.archlinux.org/packages/)
 
 Parses package databases (core, extra, community), available data:
@@ -237,6 +239,7 @@ Parses package databases (core, extra, community), available data:
 
 ### Fedora
 
+Links:
 - [Fedora Package Database](https://admin.fedoraproject.org/pkgdb)
 - [GIT Repositories](http://pkgs.fedoraproject.org/cgit/rpms/)
 
