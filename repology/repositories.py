@@ -139,6 +139,26 @@ REPOSITORIES = [
         'parser': SpecParser(),
         'tags': [ 'experimental', 'slowfetch' ],
     },
+    {
+        'name': 'OpenSUSE Tumbleweed',
+        'repotype': 'opensuse',
+        'fetcher': FileFetcher(
+            "http://download.opensuse.org/tumbleweed/repo/oss/suse/noarch/",
+            "http://download.opensuse.org/tumbleweed/repo/oss/suse/x86_64/"
+        ),
+        'parser': OpenSUSEPackageListParser(),
+        'tags': [ 'all', 'opensuse', 'fastfetch' ], # candidate for production + demo
+    },
+    {
+        'name': 'OpenSUSE Leap',
+        'repotype': 'opensuse',
+        'fetcher': FileFetcher(
+            "http://download.opensuse.org/distribution/leap/42.1/repo/oss/suse/noarch/",
+            "http://download.opensuse.org/distribution/leap/42.1/repo/oss/suse/x86_64/"
+        ),
+        'parser': OpenSUSEPackageListParser(),
+        'tags': [ 'all', 'opensuse', 'fastfetch' ],
+    },
 ]
 
 class RepositoryManager:

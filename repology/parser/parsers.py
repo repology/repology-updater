@@ -22,3 +22,4 @@ from .pkgsrc import PkgSrcPackagesSHA512Parser, PkgSrcReadmeAllParser
 from .openbsd import OpenBSDIndexParser
 from .arch import ArchDBParser
 from .spec import SpecParser
+from .opensuse import OpenSUSEPackageListParser

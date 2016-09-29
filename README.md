@@ -263,6 +263,12 @@ substitutions yet). Available data:
 - category
 - comment
 
+### OpenSUSE
+
+Parses rpm package lists. Pretty dumb, only fields available are:
+- name
+- version
+
 ## Reading the report
 
 Report is HTML table, columns correspond to repositories and rows
