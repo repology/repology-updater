@@ -148,8 +148,9 @@ class RepositoryManager:
     def GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
 
-    def GetSerializedPath(self, repository):
-        return os.path.join(self.statedir, repository['name'] + ".packages")
+    def GetSerializedPath(self, repository, tmp = False):
+        tmpext = ".tmp" if tmp else "";
+        return os.path.join(self.statedir, repository['name'] + ".packages" + tmpext)
 
     def ForEach(self, processor, tags = None, repositories = None):
         for repository in REPOSITORIES:
@@ -222,8 +223,9 @@ class RepositoryManager:
             if verbose: print("Parsing and saving %s" % repository['name'], file = sys.stderr)
             pickle.dump(
                 repository['parser'].Parse(self.GetStatePath(repository)),
-                open(self.GetSerializedPath(repository), "wb")
+                open(self.GetSerializedPath(repository, tmp = True), "wb")
             )
+            os.rename(self.GetSerializedPath(repository, tmp = True), self.GetSerializedPath(repository))
 
         self.ForEach(ParserSerializer, tags, repositories)
 
