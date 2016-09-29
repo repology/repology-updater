@@ -19,111 +19,16 @@
 
 import os
 import sys
-import time
 import re
 from argparse import ArgumentParser
-import jinja2
 from xml.sax.saxutils import escape
 import shutil
-
-from repology.fetcher import *
-from repology.parser import *
 
 from repology.package import *
 from repology.nametransformer import NameTransformer
 from repology.report import ReportProducer
 from repology.template import Template
-
-REPOSITORIES = [
-    {
-        'name': "FreeBSD",
-        'repotype': 'freebsd',
-        'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip = True),
-        'parser': FreeBSDIndexParser()
-    },
-    #{ 'name': 'Debian Stable', 'repotype': 'debian', 'parser': DebianSourcesParser("debian-stable.list",
-    #    "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
-    #    "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
-    #    "http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz"
-    #) },
-    #{ 'name': 'Debian Tesing', 'repotype': 'debian', 'parser': DebianSourcesParser("debian-testing.list",
-    #    "http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz",
-    #    "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
-    #    "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz"
-    #) },
-    # Debian unstable
-    {
-        'name': 'Debian',
-        'repotype': 'debian',
-        'fetcher': FileFetcher(
-            "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
-            "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
-            "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz",
-            gunzip = True
-        ),
-        'parser': DebianSourcesParser()
-    },
-    #{ 'name': 'Ubuntu Xenial', 'repotype': 'debian', 'parser': DebianSourcesParser("ubuntu-xenial.list",
-    #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz",
-    #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
-    #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz",
-    #    "http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz"
-    #) },
-    #{ 'name': 'Ubuntu Yakkety', 'repotype': 'debian', 'parser': DebianSourcesParser("ubuntu-yakkety.list",
-    #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/main/source/Sources.gz",
-    #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz",
-    #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
-    #    "http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz"
-    #) },
-    {
-        'name': 'Gentoo',
-        'repotype': 'gentoo',
-        'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
-        'parser': GentooGitParser()
-    },
-    {
-        'name': 'NetBSD',
-        'repotype': 'pkgsrc',
-        'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
-        'parser': PkgSrcReadmeAllParser()
-    },
-    {
-        'name': 'OpenBSD',
-        'repotype': 'openbsd',
-        'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
-        'parser': OpenBSDIndexParser()
-    },
-    {
-        'name': 'Arch',
-        'repotype': 'arch',
-        'fetcher': ArchDBFetcher(
-            "http://ftp.u-tx.net/archlinux/core/os/x86_64/core.db.tar.gz",
-            "http://ftp.u-tx.net/archlinux/extra/os/x86_64/extra.db.tar.gz",
-            "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
-        ),
-        'parser': ArchDBParser()
-    },
-#    {
-#        'name': 'Fedora',
-#        'repotype': 'fedora',
-#        'fetcher': FedoraFetcher(),
-#        'parser': SpecParser()
-#    },
-]
-
-def MixRepositories(repositories, nametrans):
-    packages = {}
-
-    for repository in repositories:
-        for package in repository['packages']:
-            metaname = nametrans.TransformName(package, repository['repotype'])
-            if metaname is None:
-                continue
-            if not metaname in packages:
-                packages[metaname] = MetaPackage()
-            packages[metaname].Add(repository['name'], package)
-
-    return packages
+from repology.repositories import RepositoryManager
 
 def FilterPackages(packages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
     filtered_packages = {}
@@ -301,27 +206,21 @@ def Main():
     if options.statedir is None:
         raise RuntimeError("please set --statedir")
 
+    repoman = RepositoryManager(options.statedir)
+
     print("===> Downloading package data...", file=sys.stderr)
     if not os.path.isdir(options.statedir):
         os.mkdir(options.statedir)
 
-    for repository in REPOSITORIES:
-        print("====> %s" % repository['name'], file=sys.stderr)
-        repository['fetcher'].Fetch(os.path.join(options.statedir, repository['name'] + ".state"), update = not options.no_update, verbose = options.verbose)
+    repoman.Fetch(update = not options.no_update, verbose = options.verbose, tags = ['production'])
 
     print("===> Parsing package data...", file=sys.stderr)
     nametrans = NameTransformer(options.transform_rules)
-
-    for repository in REPOSITORIES:
-        print("====> %s" % repository['name'], file=sys.stderr)
-        repository['packages'] = repository['parser'].Parse(os.path.join(options.statedir, repository['name'] + ".state"))
-
-    print("===> Processing package data...", file=sys.stderr)
-    packages = MixRepositories(REPOSITORIES, nametrans)
+    packages = repoman.Parse(nametrans, verbose = options.verbose, tags = ['production'])
 
     if options.repology_org:
         print("===> Producing repology.org website...", file=sys.stderr)
-        RepologyOrg(options.path, packages, [x['name'] for x in REPOSITORIES])
+        RepologyOrg(options.path, packages, repoman.GetNames())
     elif not options.no_output:
         print("===> Producing report...", file=sys.stderr)
         packages = FilterPackages(
@@ -334,7 +233,7 @@ def Main():
         )
         template = Template()
         rp = ReportProducer(template, "table.html")
-        rp.RenderToFile(options.path, packages, [x['name'] for x in REPOSITORIES])
+        rp.RenderToFile(options.path, packages, repoman.GetNames())
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
