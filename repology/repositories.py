@@ -137,7 +137,7 @@ REPOSITORIES = [
         'repotype': 'fedora',
         'fetcher': FedoraFetcher(),
         'parser': SpecParser(),
-        'tags': [ 'slowfetch' ],
+        'tags': [ 'experimental', 'slowfetch' ],
     },
 ]
 
