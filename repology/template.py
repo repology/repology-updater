@@ -44,14 +44,16 @@ class Template:
         self.env.filters["spantrim"] = SpanTrim
         self.env.filters["clamp"] = Clamp
         self.env.filters["sqrt"] = sqrt
+        self.template_cache = {}
 
     def Render(self, template, **template_data):
-        template = self.env.get_template(template)
+        if not template in self.template_cache:
+            self.template_cache[template] = self.env.get_template(template)
 
         data = template_data.copy()
         data['gentime'] = time.strftime("%Y-%m-%d %H:%M %Z", time.gmtime())
 
-        return template.render(data)
+        return self.template_cache[template].render(data)
 
     def RenderToFile(self, template, path, **template_data):
         with open(path, 'w', encoding="utf-8") as file:
