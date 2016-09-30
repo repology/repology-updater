@@ -117,6 +117,9 @@ class MetaPackage:
     def HasRepository(self, reponame):
         return reponame in self.packages
 
+    def IsOutdatedInRepository(self, reponame):
+        return reponame in self.versions and self.versions[reponame]['class'] == 'bad'
+
     def FillVersionData(self):
         bestversion, _, _ = self.GetMaxVersion()
 

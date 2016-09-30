@@ -30,7 +30,7 @@ from repology.report import ReportProducer
 from repology.template import Template
 from repology.repositories import RepositoryManager
 
-def FilterPackages(metapackages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
+def FilterPackages(metapackages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None, outdatedinrepo = None):
     filtered = []
 
     for metapackage in metapackages:
@@ -47,6 +47,9 @@ def FilterPackages(metapackages, maintainer = None, category = None, number = 0,
             continue
 
         if notinrepo is not None and metapackage.HasRepository(notinrepo):
+            continue
+
+        if outdatedinrepo is not None and not metapackage.IsOutdatedInRepository(outdatedinrepo):
             continue
 
         filtered.append(metapackage)
@@ -67,6 +70,7 @@ def Main():
     parser.add_argument('-n', '--number', help='filter by number of repos')
     parser.add_argument('-i', '--in-repository', help='filter by presence in repository')
     parser.add_argument('-x', '--not-in-repository', help='filter by absence in repository')
+    parser.add_argument('-O', '--outdated-in-repository', help='filter by outdatedness in repository')
 
     parser.add_argument('-o', '--output', help='path to output file')
     options = parser.parse_args()
@@ -91,7 +95,8 @@ def Main():
         options.category,
         int(options.number) if options.number is not None else 0,
         options.in_repository,
-        options.not_in_repository
+        options.not_in_repository,
+        options.outdated_in_repository
     )
 
     template = Template()

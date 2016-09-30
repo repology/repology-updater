@@ -30,7 +30,7 @@ from repology.report import ReportProducer
 from repology.template import Template
 from repology.repositories import RepositoryManager
 
-def FilterPackages(metapackages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None):
+def FilterPackages(metapackages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None, outdatedinrepo = None):
     filtered = []
 
     for metapackage in metapackages:
@@ -49,6 +49,9 @@ def FilterPackages(metapackages, maintainer = None, category = None, number = 0,
         if notinrepo is not None and metapackage.HasRepository(notinrepo):
             continue
 
+        if outdatedinrepo is not None and not metapackage.IsOutdatedInRepository(outdatedinrepo):
+            continue
+
         filtered.append(metapackage)
 
     return filtered
@@ -60,6 +63,17 @@ def RepologyOrg(path, metapackages, repositories):
     template = Template()
     rp = ReportProducer(template, "table.html")
 
+    print("===> Basic stuff", file=sys.stderr)
+    template.RenderToFile(
+        'about.html',
+        os.path.join(path, "about.html"),
+        site_root = "",
+        subheader = "About",
+        subsection = "about"
+    )
+
+    shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
+
     print("===> Main index", file=sys.stderr)
     rp.RenderFilesPaginated(
         os.path.join(path, "index"),
@@ -69,6 +83,89 @@ def RepologyOrg(path, metapackages, repositories):
         site_root = "",
         subheader = "Package index",
         subsection = "packages"
+    )
+
+    shutil.copyfile(os.path.join(path, "index.0.html"), os.path.join(path, "index.html"))
+
+    print("===> Per-repository pages", file=sys.stderr)
+    inrepo_path = os.path.join(path, "repositories")
+    if not os.path.isdir(inrepo_path):
+        os.mkdir(inrepo_path)
+
+    notinrepo_path = os.path.join(path, "absent")
+    if not os.path.isdir(notinrepo_path):
+        os.mkdir(notinrepo_path)
+
+    outdatedinrepo_path = os.path.join(path, "outdated")
+    if not os.path.isdir(outdatedinrepo_path):
+        os.mkdir(outdatedinrepo_path)
+
+    for repository in repositories:
+        inrepo_packages = FilterPackages(metapackages, inrepo = repository)
+        notinrepo_packages = FilterPackages(metapackages, notinrepo = repository, number = 2)
+        outdatedinrepo_packages = FilterPackages(metapackages, outdatedinrepo = repository)
+
+        rp.RenderFilesPaginated(
+            os.path.join(inrepo_path, repository),
+            inrepo_packages,
+            repositories,
+            500,
+            site_root = "../",
+            subheader = "Packages in " + repository,
+            subsection = "repositories"
+        )
+
+        rp.RenderFilesPaginated(
+            os.path.join(notinrepo_path, repository),
+            notinrepo_packages,
+            repositories,
+            500,
+            site_root = "../",
+            subheader = "Packages absent from " + repository,
+            subsection = "absent"
+        )
+
+        rp.RenderFilesPaginated(
+            os.path.join(outdatedinrepo_path, repository),
+            outdatedinrepo_packages,
+            repositories,
+            500,
+            site_root = "../",
+            subheader = "Packages outdated in " + repository,
+            subsection = "outdated"
+        )
+
+    template.RenderToFile(
+        'repositories.html',
+        os.path.join(inrepo_path, "index.html"),
+        site_root = "../",
+        repositories = repositories,
+        subheader = "Repositories",
+        subsection = "repositories",
+        description = '''
+            For each repository, this section only lists packages it contains.
+        '''
+    )
+
+    template.RenderToFile(
+        'repositories.html',
+        os.path.join(notinrepo_path, "index.html"),
+        site_root = "../",
+        repositories = repositories,
+        subheader = "Repositories with absent packages",
+        subsection = "absent",
+        description = '''
+            For each repository, this section lists packages not present in it, but present in two other repositories.
+        '''
+    )
+
+    template.RenderToFile(
+        'repositories.html',
+        os.path.join(outdatedinrepo_path, "index.html"),
+        site_root = "../",
+        repositories = repositories,
+        subheader = "Repositories with outdated packages",
+        subsection = "outdated",
     )
 
     print("===> Per-maintainer index", file=sys.stderr)
@@ -115,75 +212,6 @@ def RepologyOrg(path, metapackages, repositories):
         subheader = "Package maintainers",
         subsection = "maintainers"
     )
-
-    print("===> Per-repository pages", file=sys.stderr)
-    inrepo_path = os.path.join(path, "repositories")
-    if not os.path.isdir(inrepo_path):
-        os.mkdir(inrepo_path)
-
-    notinrepo_path = os.path.join(path, "absent")
-    if not os.path.isdir(notinrepo_path):
-        os.mkdir(notinrepo_path)
-
-    for repository in repositories:
-        inrepo_packages = FilterPackages(metapackages, inrepo = repository)
-        notinrepo_packages = FilterPackages(metapackages, notinrepo = repository, number = 2)
-
-        rp.RenderFilesPaginated(
-            os.path.join(inrepo_path, repository),
-            inrepo_packages,
-            repositories,
-            500,
-            site_root = "../",
-            subheader = "Packages in " + repository,
-            subsection = "repositories"
-        )
-
-        rp.RenderFilesPaginated(
-            os.path.join(notinrepo_path, repository),
-            notinrepo_packages,
-            repositories,
-            500,
-            site_root = "../",
-            subheader = "Packages absent from " + repository,
-            subsection = "absent"
-        )
-
-    template.RenderToFile(
-        'repositories.html',
-        os.path.join(inrepo_path, "index.html"),
-        site_root = "../",
-        repositories = repositories,
-        subheader = "Repositories",
-        subsection = "repositories",
-        description = '''
-            For each repository, this section only lists packages it contains.
-        '''
-    )
-
-    template.RenderToFile(
-        'repositories.html',
-        os.path.join(notinrepo_path, "index.html"),
-        site_root = "../",
-        repositories = repositories,
-        subheader = "Repositories with absent packages",
-        subsection = "absent",
-        description = '''
-            For each repository, this section lists packages not present in it, but present in two other repositories.
-        '''
-    )
-
-    print("===> Finalizing", file=sys.stderr)
-    template.RenderToFile(
-        'about.html',
-        os.path.join(path, "about.html"),
-        site_root = "",
-        subheader = "About",
-        subsection = "about"
-    )
-
-    shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
-    shutil.copyfile(os.path.join(path, "index.0.html"), os.path.join(path, "index.html"))
 
 def Main():
     parser = ArgumentParser()
