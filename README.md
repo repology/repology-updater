@@ -114,7 +114,8 @@ and hard to read, you may use multiple filtering options:
 - ```-c``` filter by category (e.g. ```games```; note that this
 	       matches substring, e.g. ```games-action``` from Gentoo
 	       as well)
-- ```-n``` filter only packages present in this many repos
+- ```-n``` filter only packages present in this many repos or less
+- ```-N``` filter only packages present in this many repos or more
 - ```-i``` matches only packages present in specified repo
 - ```-x``` matches only packages not present in specified repo
 
@@ -128,7 +129,7 @@ Packages which likely are needed to be added to pkgsrc (because
 all other repositories have them) and their versions:
 
 ```
-./repology-report.py -s repology.state -t demo -x pkgsrc -n 3 -o missing-pkgsrc.html
+./repology-report.py -s repology.state -t demo -x pkgsrc -N 3 -o missing-pkgsrc.html
 ```
 
 State of FreeBSD ports maintained by me:

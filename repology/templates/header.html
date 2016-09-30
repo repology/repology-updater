@@ -36,11 +36,13 @@
 <nav>
     Sections:
     <ul>
-        <li><a href="{{ site_root }}index.html"{% if subsection == "packages" %} class="active"{% endif %}>Packages</a></li>
-        <li><a href="{{ site_root }}maintainers/index.html"{% if subsection == "maintainers" %} class="active"{% endif %}>Maintainers</a></li>
-        <li><a href="{{ site_root }}repositories/index.html"{% if subsection == "repositories" %} class="active"{% endif %}>Repositories</a></li>
-        <li><a href="{{ site_root }}outdated/index.html"{% if subsection == "outdated" %} class="outdated"{% endif %}>Outdated packages</a></li>
-        <li><a href="{{ site_root }}absent/index.html"{% if subsection == "absent" %} class="active"{% endif %}>Absent packages</a></li>
+        <li><a href="{{ site_root }}index.html"{% if subsection == "packages" %} class="active"{% endif %}>All packages</a></li>
+        <li><a href="{{ site_root }}maintainers/index.html"{% if subsection == "maintainers" %} class="active"{% endif %}>By maintainer</a></li>
+        <li><a href="{{ site_root }}repositories/index.html"{% if subsection == "repositories" %} class="active"{% endif %}>By repo</a></li>
+        <li><a href="{{ site_root }}outdated/index.html"{% if subsection == "outdated" %} class="outdated"{% endif %}>Outdated by repo</a></li>
+        <li><a href="{{ site_root }}missing/index.html"{% if subsection == "missing" %} class="active"{% endif %}>Missing by repo</a></li>
+        <li><a href="{{ site_root }}widespread/widespread.0.html"{% if subsection == "widespread" %} class="active"{% endif %}>Wide-spread</a></li>
+        <li><a href="{{ site_root }}unique/unique.0.html"{% if subsection == "unique" %} class="active"{% endif %}>Unique</a></li>
         <li><a href="{{ site_root }}about.html"{% if subsection == "about" %} class="active"{% endif %}>About</a></li>
     </ul>
 </nav>
