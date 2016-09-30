@@ -112,6 +112,7 @@ REPOSITORIES = [
         'repotype': 'pkgsrc',
         'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
         'parser': PkgSrcReadmeAllParser(),
+        'incomplete': True,
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
@@ -137,6 +138,7 @@ REPOSITORIES = [
         'repotype': 'fedora',
         'fetcher': FedoraFetcher(),
         'parser': SpecParser(),
+        'incomplete': True,
         'tags': [ 'experimental', 'slowfetch' ],
     },
     # These parse binary package lists, and produce results not suitable for comparison
@@ -153,6 +155,7 @@ REPOSITORIES = [
         ),
         'parser': OpenSUSEPackageListParser(),
         'shadow': True,
+        'incomplete': True,
         'tags': [ 'all', 'opensuse', 'fastfetch' ],
     },
     {
@@ -164,6 +167,7 @@ REPOSITORIES = [
         ),
         'parser': OpenSUSEPackageListParser(),
         'shadow': True,
+        'incomplete': True,
         'tags': [ 'all', 'opensuse', 'fastfetch' ],
     },
 ]
@@ -203,6 +207,11 @@ class RepositoryManager:
         self.ForEach(AppendName, tags = tags, repositories = repositories)
 
         return names
+
+    def GetMetadata(self):
+        return { repository['name']: {
+            'incomplete': repository['incomplete'] if 'incomplete' in repository else False,
+        } for repository in REPOSITORIES }
 
     def Fetch(self, update = True, verbose = False, tags = None, repositories = None):
         def Fetcher(repository):

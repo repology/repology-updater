@@ -10,7 +10,13 @@
     <tr>
         <th></th>
         {% for reponame in reponames %}
-            <th>{{ reponame | replace(' ', '<br>') }}</th>
+            {% if repositories[reponame].incomplete %}
+                <th class="incomplete" title="This repository is not completely supported, not all packages are shown. See GitHub readme for details.">
+            {% else %}
+                <th>
+            {% endif %}
+            {{ reponame | replace(' ', '<br>') }}
+            </th>
         {% endfor %}
     </tr>
     {% endif %}

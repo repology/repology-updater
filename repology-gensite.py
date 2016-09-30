@@ -56,7 +56,7 @@ def FilterPackages(metapackages, maintainer = None, category = None, number = 0,
 
     return filtered
 
-def RepologyOrg(path, metapackages, repositories):
+def RepologyOrg(path, metapackages, repositories, repometadata):
     if not os.path.isdir(path):
         os.mkdir(path)
 
@@ -80,6 +80,7 @@ def RepologyOrg(path, metapackages, repositories):
         metapackages,
         repositories,
         500,
+        repositories = repometadata,
         site_root = "",
         subheader = "Package index",
         subsection = "packages"
@@ -110,6 +111,7 @@ def RepologyOrg(path, metapackages, repositories):
             inrepo_packages,
             repositories,
             500,
+            repositories = repometadata,
             site_root = "../",
             subheader = "Packages in " + repository,
             subsection = "repositories"
@@ -120,6 +122,7 @@ def RepologyOrg(path, metapackages, repositories):
             notinrepo_packages,
             repositories,
             500,
+            repositories = repometadata,
             site_root = "../",
             subheader = "Packages absent from " + repository,
             subsection = "absent"
@@ -130,6 +133,7 @@ def RepologyOrg(path, metapackages, repositories):
             outdatedinrepo_packages,
             repositories,
             500,
+            repositories = repometadata,
             site_root = "../",
             subheader = "Packages outdated in " + repository,
             subsection = "outdated"
@@ -193,6 +197,7 @@ def RepologyOrg(path, metapackages, repositories):
             maint_packages,
             repositories,
             500,
+            repositories = repometadata,
             site_root = "../",
             subheader = "Packages maintained by " + escape(maintainer),
             subsection = "maintainers"
@@ -239,7 +244,7 @@ def Main():
         repositories = options.repository
     )
 
-    RepologyOrg(options.output, packages, repoman.GetNames(tags = options.tag, repositories = options.repository))
+    RepologyOrg(options.output, packages, repoman.GetMetadata(), repoman.GetNames(tags = options.tag, repositories = options.repository))
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):

@@ -101,7 +101,12 @@ def Main():
 
     template = Template()
     rp = ReportProducer(template, "table.html")
-    rp.RenderToFile(options.output, packages, repoman.GetNames(tags = options.tag, repositories = options.repository))
+    rp.RenderToFile(
+        options.output,
+        packages,
+        repoman.GetNames(tags = options.tag, repositories = options.repository),
+        repositories = repoman.GetMetadata()
+    )
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
