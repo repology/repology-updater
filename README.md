@@ -273,6 +273,8 @@ Because these are binary package lists, these are not suitable for
 comparison with other repos. For instance, for each ```libfoo```
 in other repos we'll have ```libfooN``` ```libfoo-devel``` and
 ```libfooN-32bit``` here. Needs to be switched to another source.
+For now, this is enabled in shadow mode, e.g. unique packages in
+this repository are ignored.
 
 ## Reading the report
 
