@@ -152,6 +152,7 @@ REPOSITORIES = [
             "http://download.opensuse.org/tumbleweed/repo/oss/suse/x86_64/"
         ),
         'parser': OpenSUSEPackageListParser(),
+        'shadow': True,
         'tags': [ 'all', 'opensuse', 'fastfetch' ],
     },
     {
@@ -162,6 +163,7 @@ REPOSITORIES = [
             "http://download.opensuse.org/distribution/leap/42.1/repo/oss/suse/x86_64/"
         ),
         'parser': OpenSUSEPackageListParser(),
+        'shadow': True,
         'tags': [ 'all', 'opensuse', 'fastfetch' ],
     },
 ]
@@ -232,7 +234,20 @@ class RepositoryManager:
         for package in packages.values():
             package.FillVersionData()
 
-        return [ packages[name] for name in sorted(packages.keys()) ]
+        # filter out packages which only exist in shadow repositories
+        shadows = set()
+        for repository in REPOSITORIES:
+            if 'shadow' in repository and repository['shadow']:
+                shadows.add(repository['name'])
+
+        def CheckShadows(package):
+            for repo in package.versions.keys():
+                if not repo in shadows:
+                    return True
+
+            return False
+
+        return [ packages[name] for name in sorted(packages.keys()) if CheckShadows(packages[name]) ]
 
     def Parse(self, name_transformer, verbose = False, tags = None, repositories = None):
         packages_by_repo = {}
