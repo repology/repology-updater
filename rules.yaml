@@ -246,10 +246,10 @@
 - { namepat: "p5-(.*)",                setname: "perl:$1", repos: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", repos: [ debian ] }
 - { category: dev-perl,                setname: "perl:$0", repos: [ gentoo ], ignorever: true }
-- { namepat: "perl-(.*)",              setname: "perl:$1", repos: [ arch ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", repos: [ arch, fedora ] }
 
 # Ruby
-- { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch ] }
+- { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch, fedora ] }
 - { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", repos: [ freebsd, openbsd, pkgsrc ] }
 - { category: dev-ruby,                setname: "ruby:$0", repos: [ gentoo ] }
@@ -270,6 +270,7 @@
 - { namepat: "py3?-(.*)",              setname: "python:$1", repos: [ openbsd ] }
 - { namepat: "python-(.*)",            setname: "python:$1", repos: [ debian ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", repos: [ arch ] }
+- { namepat: "python3?-(.*)",          setname: "python:$1", repos: [ fedora ] }
 - { category: dev-python,              setname: "python:$0", repos: [ gentoo ] }
 
 # R libs
@@ -312,7 +313,7 @@
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", repos: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", repos: [ freebsd, pkgsrc ] }
 - { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", repos: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "php-(.*)",               setname: "php:$1", repos: [ arch ] }
+- { namepat: "php-(.*)",               setname: "php:$1", repos: [ arch, fedora ] }
 
 # gstreamer plugins
 - { namepat: "gst-plugins-(.*)",       setname: "gstreamer1:$1", repos: [ gentoo, debian ] }
