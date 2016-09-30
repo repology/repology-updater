@@ -36,6 +36,7 @@ class MetaPackage:
         self.name = name
         self.packages = {}
         self.versions = {}
+        self.maintainers = set()
         pass
 
     def GetName(self):
@@ -76,21 +77,10 @@ class MetaPackage:
         return minversion, maxversion
 
     def HasMaintainer(self, maintainer):
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                if maintainer in package.maintainers:
-                    return True
-
-        return False
+        return maintainer in self.maintainers
 
     def GetMaintainers(self):
-        maintainers = set()
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                for maintainer in package.maintainers:
-                    maintainers.add(maintainer)
-
-        return maintainers
+        return self.maintainers
 
     def HasCategory(self, category):
         for packagelist in self.packages.values():
@@ -121,6 +111,13 @@ class MetaPackage:
         return reponame in self.versions and self.versions[reponame]['class'] == 'bad'
 
     def FillVersionData(self):
+        # fill maintaiers
+        for packagelist in self.packages.values():
+            for package in packagelist:
+                for maintainer in package.maintainers:
+                    self.maintainers.add(maintainer)
+
+        # fill versions
         bestversion, _, _ = self.GetMaxVersion()
 
         for reponame in self.GetRepos():
