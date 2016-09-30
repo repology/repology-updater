@@ -229,6 +229,9 @@ class RepositoryManager:
                     packages[metaname] = MetaPackage(metaname)
                 packages[metaname].Add(reponame, package)
 
+        for package in packages.values():
+            package.FillVersionData()
+
         return [ packages[name] for name in sorted(packages.keys()) ]
 
     def Parse(self, name_transformer, verbose = False, tags = None, repositories = None):

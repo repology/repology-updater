@@ -46,51 +46,9 @@ class ReportProducer:
     def Prepare(self, metapackages, reponames, **template_data):
         data = {
             'reponames': reponames,
-            'repositories': {},
-            'packages': [],
+            'packages': metapackages
         }
-
         data.update(template_data)
-
-        for reponame in reponames:
-            data['repositories'][reponame] = {}
-
-        for metapackage in metapackages:
-            bestversion, _, _ = metapackage.GetMaxVersion()
-
-            template_package = {
-                'name': metapackage.GetName(),
-                'byrepo': {}
-            }
-
-            for reponame in metapackage.GetRepos():
-                # packages for this repository
-                repopackages = metapackage.Get(reponame)
-
-                # determine versions
-                repominversion, repomaxversion = metapackage.GetVersionRangeForRepo(reponame)
-
-                versionclass = 'bad'
-                if metapackage.GetNumRepos() == 1:
-                    versionclass = 'lonely'
-                elif bestversion is None:
-                    versionclass = 'good'
-                elif VersionCompare(repomaxversion, bestversion) > 0: # due to ignore
-                    versionclass = 'ignore'
-                elif VersionCompare(repomaxversion, bestversion) >= 0:
-                    if VersionCompare(repominversion, bestversion) == 0:
-                        versionclass = 'good'
-                    else:
-                        versionclass = 'multi'
-
-                template_package['byrepo'][reponame] = {
-                    'version': repomaxversion,
-                    'class': versionclass,
-                    'numpackages': len(repopackages)
-                }
-
-            data['packages'].append(template_package)
-
         return data
 
     def Render(self, metapackages, reponames, **template_data):

@@ -17,13 +17,13 @@
     <tr>
         <td>{{ package.name|spantrim(20) }}</td>
         {% for reponame in reponames %}
-            {% set subpackage = package.byrepo[reponame] %}
+            {% set subpackage = package.versions[reponame] %}
             {% if subpackage is defined %}
                 <td>
                     {% if subpackage.numpackages > 1 %}
-                        <span class="version {{ package.byrepo[reponame].class }}">{{ subpackage.version|spantrim(9) }}</span>({{ subpackage.numpackages }})
+                        <span class="version {{ subpackage.class }}">{{ subpackage.version|spantrim(9) }}</span>({{ subpackage.numpackages }})
                     {% else %}
-                        <span class="version {{ package.byrepo[reponame].class }}">{{ subpackage.version|spantrim(12) }}</span>
+                        <span class="version {{ subpackage.class }}">{{ subpackage.version|spantrim(12) }}</span>
                     {% endif %}
                 </td>
             {% else %}

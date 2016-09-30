@@ -35,6 +35,7 @@ class MetaPackage:
     def __init__(self, name):
         self.name = name
         self.packages = {}
+        self.versions = {}
         pass
 
     def GetName(self):
@@ -115,3 +116,32 @@ class MetaPackage:
 
     def HasRepository(self, reponame):
         return reponame in self.packages
+
+    def FillVersionData(self):
+        bestversion, _, _ = self.GetMaxVersion()
+
+        for reponame in self.GetRepos():
+            # packages for this repository
+            repopackages = self.Get(reponame)
+
+            # determine versions
+            repominversion, repomaxversion = self.GetVersionRangeForRepo(reponame)
+
+            versionclass = 'bad'
+            if self.GetNumRepos() == 1:
+                versionclass = 'lonely'
+            elif bestversion is None:
+                versionclass = 'good'
+            elif VersionCompare(repomaxversion, bestversion) > 0: # due to ignore
+                versionclass = 'ignore'
+            elif VersionCompare(repomaxversion, bestversion) >= 0:
+                if VersionCompare(repominversion, bestversion) == 0:
+                    versionclass = 'good'
+                else:
+                    versionclass = 'multi'
+
+            self.versions[reponame] = {
+                'version': repomaxversion,
+                'class': versionclass,
+                'numpackages': len(repopackages)
+            }
