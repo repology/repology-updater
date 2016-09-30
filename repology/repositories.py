@@ -139,7 +139,7 @@ REPOSITORIES = [
         'fetcher': FedoraFetcher(),
         'parser': SpecParser(),
         'incomplete': True,
-        'tags': [ 'experimental', 'slowfetch' ],
+        'tags': [ 'all', 'production', 'slowfetch' ],
     },
     # These parse binary package lists, and produce results not suitable for comparison
     # with other repos. For instance, for each `libfoo' other repos have these will
@@ -156,7 +156,7 @@ REPOSITORIES = [
         'parser': OpenSUSEPackageListParser(),
         'shadow': True,
         'incomplete': True,
-        'tags': [ 'all', 'opensuse', 'fastfetch' ],
+        'tags': [ 'all', 'production', 'opensuse', 'fastfetch' ],
     },
     {
         'name': 'OpenSUSE Leap',
