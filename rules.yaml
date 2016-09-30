@@ -10,6 +10,7 @@
 - { name: abuse_sdl,                   setname: abuse,                    repos: [ freebsd ] }
 - { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }
+- { name: adb,                         setname: android-tools,            repos: [ openbsd ] }
 - { name: adobeps-win,                 setname: adobeps,                  repos: [ pkgsrc ]  } # XXX: recheck
 - { name: alienarena,                  setname: alien-arena,              repos: [ gentoo, arch ] }
 - { name: armagetron,                  setname: armagetronad,             repos: [ freebsd ] }
@@ -70,6 +71,9 @@
 - { name: geki3-KXL,                   setname: geki3,                    repos: [ gentoo ]  } # XXX: recheck
 - { name: gitg0,                       setname: gitg,                     repos: [ freebsd ]  }
 - { name: gl117,                       setname: gl-117,                   repos: [ gentoo ]  }
+- { name: google-mock,                 setname: gmock,                    repos: [ debian ]  }
+- { name: googlemock,                  setname: gmock,                    repos: [ freebsd ] }
+- { name: googletest,                  setname: gtest,                    repos: [ freebsd, pkgsrc ] }
 - { name: hannah,                      setname: help-hannahs-horse,       repos: [ debian ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    repos: [ freebsd ] }
 - { name: ja2,                         setname: ja2-stracciatella,        repos: [ freebsd ] }
@@ -97,6 +101,8 @@
 - { name: xpi-adblock_plus,            setname: adblock-plus,             repos: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                repos: [ freebsd ] }
 - { name: zookeeper-c,                 setname: zookeeper,                repos: [ gentoo ]  }
+- { namepat: "android-platform-system-(core|extras)", setname: android-tools, repos: [ debian ] }
+- { namepat: "android-tools-[^-]+",    setname: android-tools,            repos: [ freebsd, pkgsrc ] }
 - { namepat: "celestia-.*",            setname: celestia,                 repos: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
 - { namepat: "eclipse-plugin-(.*)",    setname: "eclipse-$1",             repos: [ openbsd ] }
 - { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              repos: [ freebsd ] }
