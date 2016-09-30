@@ -22,6 +22,10 @@ import jinja2
 from math import sqrt
 
 def SpanTrim(value, maxlength):
+    # support lists as well
+    if type(value) is list:
+        return [ SpanTrim(v, maxlength) for v in value ];
+
     if len(value) <= maxlength:
         return value
 
