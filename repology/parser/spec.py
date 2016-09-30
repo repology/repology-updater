@@ -41,18 +41,18 @@ class SpecParser():
                         if line.find("%") != -1: # substitudes: ignore
                             continue
 
-                        if line.startswith('Name:'):
+                        if line.startswith('Name:') and not pkg.name:
                             pkg.name = line[5:].strip()
-                        elif line.startswith('Version:'):
+                        elif line.startswith('Version:') and not pkg.fullversion:
                             pkg.fullversion = line[8:].strip()
                             pkg.version = pkg.fullversion
-                        elif line.startswith('Url:'):
+                        elif line.startswith('Url:') and not pkg.homepage:
                             pkg.homepage = line[4:].strip()
-                        elif line.startswith('License:'):
+                        elif line.startswith('License:') and not pkg.license:
                             pkg.license = line[8:].strip()
-                        elif line.startswith('Group:'):
+                        elif line.startswith('Group:') and not pkg.category:
                             pkg.category = line[6:].strip().lower()
-                        elif line.startswith('Summary:'):
+                        elif line.startswith('Summary:') and not pkg.comment:
                             pkg.comment = line[8:].strip()
 
                     if pkg.name is not None and pkg.version is not None:
