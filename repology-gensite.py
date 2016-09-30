@@ -30,7 +30,7 @@ from repology.report import ReportProducer
 from repology.template import Template
 from repology.repositories import RepositoryManager
 
-def FilterPackages(metapackages, maintainer = None, category = None, number = 0, inrepo = None, notinrepo = None, outdatedinrepo = None):
+def FilterPackages(metapackages, maintainer = None, category = None, manyrepos = None, littlerepos = None, inrepo = None, notinrepo = None, outdatedinrepo = None):
     filtered = []
 
     for metapackage in metapackages:
@@ -40,7 +40,10 @@ def FilterPackages(metapackages, maintainer = None, category = None, number = 0,
         if category is not None and not metapackage.HasCategoryLike(category):
             continue
 
-        if number > 0 and metapackage.GetNumRepos() < number:
+        if manyrepos is not None and metapackage.GetNumRepos() < manyrepos:
+            continue
+
+        if littlerepos is not None and metapackage.GetNumRepos() > littlerepos:
             continue
 
         if inrepo is not None and not metapackage.HasRepository(inrepo):
@@ -88,12 +91,43 @@ def RepologyOrg(path, metapackages, repositories, repometadata):
 
     shutil.copyfile(os.path.join(path, "index.0.html"), os.path.join(path, "index.html"))
 
+    print("===> Specific sets", file=sys.stderr)
+    widespread_path = os.path.join(path, "widespread")
+    if not os.path.isdir(widespread_path):
+        os.mkdir(widespread_path)
+
+    rp.RenderFilesPaginated(
+        os.path.join(widespread_path, "widespread"),
+        FilterPackages(metapackages, manyrepos = len(repositories)),
+        repositories,
+        500,
+        repositories = repometadata,
+        site_root = "../",
+        subheader = "Most wide-spread packages",
+        subsection = "widespread",
+    )
+
+    unique_path = os.path.join(path, "unique")
+    if not os.path.isdir(unique_path):
+        os.mkdir(unique_path)
+
+    rp.RenderFilesPaginated(
+        os.path.join(unique_path, "unique"),
+        FilterPackages(metapackages, littlerepos = 1),
+        repositories,
+        500,
+        repositories = repometadata,
+        site_root = "../",
+        subheader = "Unique packages",
+        subsection = "unique",
+    )
+
     print("===> Per-repository pages", file=sys.stderr)
     inrepo_path = os.path.join(path, "repositories")
     if not os.path.isdir(inrepo_path):
         os.mkdir(inrepo_path)
 
-    notinrepo_path = os.path.join(path, "absent")
+    notinrepo_path = os.path.join(path, "missing")
     if not os.path.isdir(notinrepo_path):
         os.mkdir(notinrepo_path)
 
@@ -103,7 +137,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata):
 
     for repository in repositories:
         inrepo_packages = FilterPackages(metapackages, inrepo = repository)
-        notinrepo_packages = FilterPackages(metapackages, notinrepo = repository, number = 2)
+        notinrepo_packages = FilterPackages(metapackages, notinrepo = repository, manyrepos = 2)
         outdatedinrepo_packages = FilterPackages(metapackages, outdatedinrepo = repository)
 
         rp.RenderFilesPaginated(
@@ -124,8 +158,8 @@ def RepologyOrg(path, metapackages, repositories, repometadata):
             500,
             repositories = repometadata,
             site_root = "../",
-            subheader = "Packages absent from " + repository,
-            subsection = "absent"
+            subheader = "Packages missing from " + repository,
+            subsection = "missing"
         )
 
         rp.RenderFilesPaginated(
@@ -156,8 +190,8 @@ def RepologyOrg(path, metapackages, repositories, repometadata):
         os.path.join(notinrepo_path, "index.html"),
         site_root = "../",
         repositories = repositories,
-        subheader = "Repositories with absent packages",
-        subsection = "absent",
+        subheader = "Repositories with missing packages",
+        subsection = "missing",
         description = '''
             For each repository, this section lists packages not present in it, but present in two other repositories.
         '''
