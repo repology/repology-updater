@@ -71,6 +71,9 @@
 - { name: geki3-KXL,                   setname: geki3,                    repos: [ gentoo ]  } # XXX: recheck
 - { name: gitg0,                       setname: gitg,                     repos: [ freebsd ]  }
 - { name: gl117,                       setname: gl-117,                   repos: [ gentoo ]  }
+- { name: google-mock,                 setname: gmock,                    repos: [ debian ]  }
+- { name: googlemock,                  setname: gmock,                    repos: [ freebsd ] }
+- { name: googletest,                  setname: gtest,                    repos: [ freebsd, pkgsrc ] }
 - { name: hannah,                      setname: help-hannahs-horse,       repos: [ debian ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    repos: [ freebsd ] }
 - { name: ja2,                         setname: ja2-stracciatella,        repos: [ freebsd ] }
