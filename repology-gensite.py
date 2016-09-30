@@ -244,7 +244,7 @@ def Main():
         repositories = options.repository
     )
 
-    RepologyOrg(options.output, packages, repoman.GetMetadata(), repoman.GetNames(tags = options.tag, repositories = options.repository))
+    RepologyOrg(options.output, packages, repoman.GetNames(tags = options.tag, repositories = options.repository), repoman.GetMetadata())
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
