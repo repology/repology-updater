@@ -21,11 +21,17 @@ import time
 import jinja2
 from math import sqrt
 
-def SpanTrim(str, maxlength):
-    if len(str) <= maxlength:
-        return str
+def SpanTrim(value, maxlength):
+    if len(value) <= maxlength:
+        return value
 
-    return "<span title=\"%s\">%s…</span>" % (str, str[0:maxlength])
+    # no point in leaving dot just before ellipsis
+    trimmed = value[0:maxlength-2]
+    while trimmed.endswith('.'):
+        trimmed = trimmed[0:-1]
+
+    # we assume ellipsis take ~2 char width
+    return "<span title=\"%s\">%s…</span>" % (value, trimmed)
 
 def Clamp(value, lower, upper):
     if value < lower:
