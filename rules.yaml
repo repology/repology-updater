@@ -173,9 +173,10 @@
 # - fira* (font)
 
 # Version ignores, incompatible version mangling in the repos
+- { name: apr,                         verpat: "([0-9]+\\.){5}.*",      ignorever: true } # FreeBSD
 - { name: cryptcat,                    ver: "20031202",                 ignorever: true }
 - { name: xmahjongg,                   ver: "3.70", repos: [ pkgsrc ],  ignorever: true }
-#- { name: "libreadonly-perl",         ver: "2.050", repos: [ debian ], ignorever: true } # needs multiple rule hits
+- { name: "libreadonly-perl",          ver: "2.050", repos: [ debian ], ignorever: true } # needs multiple rule hits
 
 # Version splits/tweaks
 - { name: allegro, verpat: "4\\..*",  setname: allegro4 }
