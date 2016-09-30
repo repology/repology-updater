@@ -40,6 +40,9 @@ def Clamp(value, lower, upper):
         return upper
     return value
 
+def Split(value, sep):
+    return value.split(sep);
+
 class Template:
     def __init__(self):
         self.env = jinja2.Environment(
@@ -50,6 +53,7 @@ class Template:
         self.env.filters["spantrim"] = SpanTrim
         self.env.filters["clamp"] = Clamp
         self.env.filters["sqrt"] = sqrt
+        self.env.filters["split"] = Split
         self.template_cache = {}
 
     def Render(self, template, **template_data):

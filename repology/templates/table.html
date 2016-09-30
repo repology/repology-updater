@@ -15,7 +15,7 @@
             {% else %}
                 <th>
             {% endif %}
-            {{ reponame | replace(' ', '<br>') }}
+            {{ reponame | split(' ') | spantrim(8) | join('<br>') }}
             </th>
         {% endfor %}
     </tr>
