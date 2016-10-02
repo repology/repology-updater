@@ -12,26 +12,33 @@
 - { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }
 - { name: adb,                         setname: android-tools,            repos: [ openbsd ] }
 - { name: adobeps-win,                 setname: adobeps,                  repos: [ pkgsrc ]  } # XXX: recheck
-- { name: alienarena,                  setname: alien-arena,              repos: [ gentoo, arch ] }
-- { name: armagetron,                  setname: armagetronad,             repos: [ freebsd ] }
+- { name: alienarena,                  setname: alien-arena,              repos: [ gentoo, arch, fedora ] }
+- { name: alienarena-data,             setname: alien-arena-data,         repos: [ fedora ] }
+- { name: armagetron,                  setname: armagetronad,             repos: [ freebsd, opensuse ] }
 - { name: atk1.0,                      setname: atk,                      repos: [ debian ]  }
+- { name: atk2mm,                      setname: atkmm,                    repos: [ openbsd ]  }
 - { name: atkmm1.6,                    setname: atk,                      repos: [ debian ]  }
 - { name: bass,                        setname: beneath-a-steel-sky,      repos: [ freebsd, gentoo, openbsd, arch ] }
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            repos: [ freebsd ] }
 - { name: billard-gl,                  setname: billardgl,                repos: [ debian ]  }
-- { name: blitz,                       setname: blitz++,                  repos: [ gentoo ]  } # XXX: recheck
+- { name: blitz,                       setname: blitz++,                  repos: [ gentoo, fedora, opensuse ] } # XXX: recheck
+- { name: blobby2,                     setname: blobby,                   repos: [ fedora ] } # XXX: recheck
 - { name: blockout2,                   setname: blockout,                 repos: [ debian ]  }
+- { name: blockoutii,                  setname: blockout,                 repos: [ fedora ]  } # XXX: recheck
 - { name: boaconstructor,              setname: boa-constructor,          repos: [ freebsd ] }
 - { name: boost-all,                   setname: boost,                    repos: [ freebsd ] }
+- { namepat: "boost1.[0-9]+",          setname: boost,                    repos: [ debian ] }
+- { namepat: "boost-1-[0-9]+",         setname: boost,                    repos: [ opensuse ] }
 - { name: botan1.10,                   setname: botan,                    repos: [ debian ]  }
 - { name: botan110,                    setname: botan,                    repos: [ freebsd ] }
 - { name: bouncycastle,                setname: bouncycastle14,           repos: [ freebsd ] } # move away
 - { name: bouncycastle15,              setname: bouncycastle,             repos: [ freebsd ] }
+- { name: bowtie, verpat: "2.*",       setname: bowtie2,                  repos: [ gentoo ] }
 - { name: bub-n-bros,                  setname: bubbros,                  repos: [ gentoo ]  } # XXX: recheck
 - { name: bugzilla44,                  ignore: true,                      repos: [ freebsd ] } # legacy
 - { name: bugzilla50,                  setname: bugzilla,                 repos: [ freebsd ] }
 - { name: byacc-j,                     setname: byaccj,                   repos: [ debian ]  }
-- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       repos: [ debian ]  } # O_o
+- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       repos: [ debian, arch ] } # O_o
 - { name: cegui-mk2,                   setname: cegui,                    repos: [ debian ]  }
 - { name: celestia-nonfree,            setname: celestia,                 repos: [ debian ]  }
 - { name: chexedit,                    setname: curses-hexedit,           repos: [ freebsd ] }
@@ -183,6 +190,8 @@
 - { name: allegro, verpat: "5\\..*",  setname: allegro5 }
 - { name: allegro4.4, setname: allegro4 }
 - { name: allegro-devel, setname: allegro5, repos: [ freebsd ] }
+- { name: bbpager, verpat: "0\\.3.*",  setname: bbpager03, repos: [ pkgsrc ] }
+- { name: bbpager04, setname: bbpager, repos: [ pkgsrc ] }
 - { name: csound, verpat: "5\\..*",    setname: csound5 }
 - { name: csound, verpat: "6\\..*",    setname: csound6 }
 - { name: eigen, verpat: "1\\..*",     setname: eigen1 }
