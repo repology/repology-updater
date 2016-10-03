@@ -26,19 +26,23 @@ class ArchDBFetcher():
     def __init__(self, *sources):
         self.sources = sources
 
+    def DoFetch(self, statepath, update, logger):
+        for source in self.sources:
+            command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (source, statepath)
+            RunSubprocess(command, logger, shell = True)
+
     def Fetch(self, statepath, update = True, logger = NoopLogger()):
         if os.path.isdir(statepath) and not update:
             return
 
-        if os.path.isdir(statepath):
+        if os.path.exists(statepath):
             shutil.rmtree(statepath)
 
         os.mkdir(statepath)
 
         try:
-            for source in self.sources:
-                command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (source, statepath)
-                RunSubprocess(command, logger, shell = True)
+            self.DoFetch(statepath, update, logger)
         except:
-            shutil.rmtree(statepath)
+            if os.path.exists(statepath):
+                shutil.rmtree(statepath)
             raise

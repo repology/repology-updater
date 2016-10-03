@@ -28,15 +28,7 @@ class ChocolateyFetcher():
     def __init__(self, apiurl):
         self.apiurl = apiurl
 
-    def Fetch(self, statepath, update = True, logger = NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            return
-
-        if os.path.isdir(statepath):
-            shutil.rmtree(statepath)
-
-        os.mkdir(statepath)
-
+    def DoFetch(self, statepath, update, logger):
         numpage = 0
         nextpageurl = self.apiurl + "Packages()?$filter=IsLatestVersion"
         while True:
@@ -59,3 +51,19 @@ class ChocolateyFetcher():
 
             nextpageurl = next_link.attrib['href']
             numpage += 1
+
+    def Fetch(self, statepath, update = True, logger = NoopLogger()):
+        if os.path.isdir(statepath) and not update:
+            return
+
+        if os.path.exists(statepath):
+            shutil.rmtree(statepath)
+
+        os.mkdir(statepath)
+
+        try:
+            self.DoFetch(statepath, update, logger)
+        except:
+            if os.path.exists(statepath):
+                shutil.rmtree(statepath)
+            raise

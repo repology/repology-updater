@@ -28,26 +28,29 @@ class FileFetcher():
         self.gunzip = gunzip
         self.bunzip = bunzip
 
+    def DoFetch(self, statepath, update, logger):
+        with open(statepath, "wb") as statefile:
+            for source in self.sources:
+                logger.Log("fetching " + source)
+                data = Get(source).content
+
+                if self.gunzip:
+                    logger.Log("  decompressing with gzip")
+                    data = gzip.decompress(data)
+                elif self.bunzip:
+                    logger.Log("  decompressing with bz2")
+                    data = bz2.decompress(data)
+
+                logger.Log("  saving")
+                statefile.write(data)
+
     def Fetch(self, statepath, update = True, logger = NoopLogger()):
         if os.path.isfile(statepath) and not update:
             return
 
         try:
-            with open(statepath, "wb") as statefile:
-                for source in self.sources:
-                    logger.Log("fetching " + source)
-                    data = Get(source).content
-
-                    if self.gunzip:
-                        logger.Log("  decompressing with gzip")
-                        data = gzip.decompress(data)
-                    elif self.bunzip:
-                        logger.Log("  decompressing with bz2")
-                        data = bz2.decompress(data)
-
-                    logger.Log("  saving")
-                    statefile.write(data)
-
+            self.DoFetch(statepath, update, logger)
         except:
-            os.remove(statepath)
+            if os.path.exists(statepath):
+                os.remove(statepath)
             raise
