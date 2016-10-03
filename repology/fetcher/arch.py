@@ -35,6 +35,10 @@ class ArchDBFetcher():
 
         os.mkdir(statepath)
 
-        for source in self.sources:
-            command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (source, statepath)
-            RunSubprocess(command, logger, shell = True)
+        try:
+            for source in self.sources:
+                command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (source, statepath)
+                RunSubprocess(command, logger, shell = True)
+        except:
+            shutil.rmtree(statepath)
+            raise
