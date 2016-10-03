@@ -182,8 +182,9 @@ REPOSITORIES = [
 ]
 
 class RepositoryManager:
-    def __init__(self, statedir):
+    def __init__(self, statedir, enable_shadow = True):
         self.statedir = statedir
+        self.enable_shadow = enable_shadow
 
     def GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
@@ -256,11 +257,12 @@ class RepositoryManager:
         for package in packages.values():
             package.FillVersionData()
 
-        # filter out packages which only exist in shadow repositories
         shadows = set()
-        for repository in REPOSITORIES:
-            if 'shadow' in repository and repository['shadow']:
-                shadows.add(repository['name'])
+
+        if self.enable_shadow:
+            for repository in REPOSITORIES:
+                if 'shadow' in repository and repository['shadow']:
+                    shadows.add(repository['name'])
 
         def CheckShadows(package):
             for repo in package.versions.keys():

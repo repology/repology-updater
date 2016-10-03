@@ -67,6 +67,7 @@ def Main():
 
     parser.add_argument('-t', '--tag', action='append', help='only process repositories with this tag')
     parser.add_argument('-r', '--repository', action='append', help='only process repositories with this name')
+    parser.add_argument('-S', '--no-shadow', help='treat shadow repositories as normal')
 
     parser.add_argument('-m', '--maintainer', help='filter by maintainer')
     parser.add_argument('-c', '--category', help='filter by category')
@@ -87,7 +88,7 @@ def Main():
     tags = [ tag.split(',') for tag in options.tag ]
 
     nametrans = NameTransformer(options.rules)
-    repoman = RepositoryManager(options.statedir)
+    repoman = RepositoryManager(options.statedir, enable_shadow = not options.no_shadow)
     packages = repoman.Deserialize(
         nametrans,
         verbose = options.verbose,
