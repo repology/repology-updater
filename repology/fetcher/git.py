@@ -27,6 +27,7 @@ class GitFetcher():
 
     def Fetch(self, statepath, update = True, logger = NoopLogger()):
         if not os.path.isdir(statepath):
-            RunSubprocess("git clone --progress --depth=1 \"{}\" \"{}\"".format(self.repository, statepath), shell = True, logger = logger)
+            RunSubprocess(["git", "clone", "--progress", "--depth=1", self.repository, statepath], logger = logger)
         elif update:
-            RunSubprocess("cd \"{}\" && git fetch --progress && git reset --hard origin/master".format(statepath), shell = True, logger = logger)
+            RunSubprocess(["git", "fetch", "--progress"], cwd = statepath, logger = logger)
+            RunSubprocess(["git", "reset", "--hard", "origin/master"], cwd = statepath, logger = logger)

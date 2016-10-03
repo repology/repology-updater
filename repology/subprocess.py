@@ -19,9 +19,14 @@
 
 import subprocess
 
-def RunSubprocess(command, logger, shell = False):
-    logger.Log("running: " + command)
-    with subprocess.Popen(command, shell = shell, stdout = subprocess.PIPE, stderr = subprocess.STDOUT, universal_newlines = True) as proc:
+def RunSubprocess(command, logger, shell = False, cwd = None):
+    message = "running \"{}\"".format(' '.join(command) if type(command) == list else command)
+    if cwd is not None:
+        message += " in \"{}\"".format(cwd)
+
+    logger.Log(message)
+
+    with subprocess.Popen(command, shell = shell, stdout = subprocess.PIPE, stderr = subprocess.STDOUT, universal_newlines = True, cwd = cwd) as proc:
         for line in proc.stdout:
             logger.Log("    " + line.strip())
         proc.wait()
