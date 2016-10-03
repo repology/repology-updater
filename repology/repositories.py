@@ -126,9 +126,9 @@ REPOSITORIES = [
         'name': 'Arch',
         'repotype': 'arch',
         'fetcher': ArchDBFetcher(
-            "http://ftp.u-tx.net/archlinux/core/os/x86_64/core.db.tar.gz",
-            "http://ftp.u-tx.net/archlinux/extra/os/x86_64/extra.db.tar.gz",
-            "http://ftp.u-tx.net/archlinux/community/os/x86_64/community.db.tar.gz"
+            "http://delta.archlinux.fr/core/os/x86_64/core.db.tar.gz",
+            "http://delta.archlinux.fr/extra/os/x86_64/extra.db.tar.gz",
+            "http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz"
         ),
         'parser': ArchDBParser(),
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
