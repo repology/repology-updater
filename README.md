@@ -1,5 +1,7 @@
 # Repology
 
+[![Build Status](https://travis-ci.org/AMDmi3/repology.svg?branch=master)](https://travis-ci.org/AMDmi3/repology)
+
 ![Example report](docs/screenshot.png)
 
 Repology analyzes multiple package repositories and compares versions
