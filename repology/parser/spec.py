@@ -27,7 +27,7 @@ class SpecParser():
     def Parse(self, path):
         result = []
 
-        for root, dirs, files in os.walk(path):
+        for root, _, files in os.walk(path):
             for filename in files:
                 if not filename.endswith(".spec"):
                     continue

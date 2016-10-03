@@ -15,9 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import yaml
-import pprint
 import re
+import pprint
+
+import yaml
 
 class MatchResult:
     none = 0,
@@ -116,8 +117,6 @@ class NameTransformer:
         return MatchResult.none, None
 
     def TransformName(self, package, repotype):
-        match = False
-
         # apply first matching rule
         for rule in self.rules:
             if 'repos' in rule and not repotype in rule['repos']:

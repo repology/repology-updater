@@ -17,10 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import time
 import os
-
-from .util import VersionCompare
 
 class ReportProducer:
     def __init__(self, template, templatename):

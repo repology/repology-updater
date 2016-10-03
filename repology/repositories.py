@@ -18,9 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
 import pickle
-import fcntl
 
 from repology.fetcher import *
 from repology.parser import *
@@ -32,9 +30,9 @@ REPOSITORIES = [
     {
         'name': "FreeBSD",
         'repotype': 'freebsd',
-        'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip = True),
+        'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip=True),
         'parser': FreeBSDIndexParser(),
-        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
+        'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
 
     {
@@ -44,10 +42,10 @@ REPOSITORIES = [
             "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz",
-            gunzip = True
+            gunzip=True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'debian', 'fastfetch' ],
+        'tags': ['all', 'debian', 'fastfetch'],
     },
     {
         'name': 'Debian Testing',
@@ -56,10 +54,10 @@ REPOSITORIES = [
             "http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz",
-            gunzip = True
+            gunzip=True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'debian', 'fastfetch' ],
+        'tags': ['all', 'debian', 'fastfetch'],
     },
     {
         'name': 'Debian Unstable',
@@ -68,10 +66,10 @@ REPOSITORIES = [
             "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz",
-            gunzip = True
+            gunzip=True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'demo', 'debian', 'production', 'fastfetch' ],
+        'tags': ['all', 'demo', 'debian', 'production', 'fastfetch'],
     },
 
     {
@@ -82,10 +80,10 @@ REPOSITORIES = [
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz",
-            gunzip = True
+            gunzip=True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'ubuntu', 'fastfetch' ],
+        'tags': ['all', 'ubuntu', 'fastfetch'],
     },
     {
         'name': 'Ubuntu Yakkety',
@@ -95,10 +93,10 @@ REPOSITORIES = [
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz",
-            gunzip = True
+            gunzip=True
         ),
         'parser': DebianSourcesParser(),
-        'tags': [ 'all', 'demo', 'production', 'ubuntu', 'fastfetch' ],
+        'tags': ['all', 'demo', 'production', 'ubuntu', 'fastfetch'],
     },
 
     {
@@ -106,7 +104,7 @@ REPOSITORIES = [
         'repotype': 'gentoo',
         'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
         'parser': GentooGitParser(),
-        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
+        'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
         'name': 'pkgsrc',
@@ -114,14 +112,14 @@ REPOSITORIES = [
         'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
         'parser': PkgSrcReadmeAllParser(),
         'incomplete': True,
-        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
+        'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
         'name': 'OpenBSD',
         'repotype': 'openbsd',
         'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
         'parser': OpenBSDIndexParser(),
-        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
+        'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
         'name': 'Arch',
@@ -132,7 +130,7 @@ REPOSITORIES = [
             "http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz"
         ),
         'parser': ArchDBParser(),
-        'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
+        'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
         'name': 'Fedora',
@@ -140,7 +138,7 @@ REPOSITORIES = [
         'fetcher': FedoraFetcher(),
         'parser': SpecParser(),
         'incomplete': True,
-        'tags': [ 'all', 'preproduction', 'slowfetch' ],
+        'tags': ['all', 'preproduction', 'slowfetch'],
     },
     # These parse binary package lists, and produce results not suitable for comparison
     # with other repos. For instance, for each `libfoo' other repos have these will
@@ -157,7 +155,7 @@ REPOSITORIES = [
         'parser': OpenSUSEPackageListParser(),
         'shadow': True,
         'incomplete': True,
-        'tags': [ 'all', 'preproduction', 'opensuse', 'fastfetch' ],
+        'tags': ['all', 'preproduction', 'opensuse', 'fastfetch'],
     },
     {
         'name': 'OpenSUSE Leap',
@@ -169,7 +167,7 @@ REPOSITORIES = [
         'parser': OpenSUSEPackageListParser(),
         'shadow': True,
         'incomplete': True,
-        'tags': [ 'all', 'opensuse', 'fastfetch' ],
+        'tags': ['all', 'opensuse', 'fastfetch'],
     },
 
     {
@@ -178,12 +176,12 @@ REPOSITORIES = [
         'fetcher': ChocolateyFetcher("https://chocolatey.org/api/v2/"),
         'parser': ChocolateyParser(),
         'shadow': True,
-        'tags': [ 'all', 'preproduction', 'slowfetch' ],
+        'tags': ['all', 'preproduction', 'slowfetch'],
     },
 ]
 
 class RepositoryManager:
-    def __init__(self, statedir, enable_shadow = True, logger = NoopLogger()):
+    def __init__(self, statedir, enable_shadow=True, logger=NoopLogger()):
         self.statedir = statedir
         self.enable_shadow = enable_shadow
         self.logger = logger
@@ -191,11 +189,11 @@ class RepositoryManager:
     def GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
 
-    def GetSerializedPath(self, repository, tmp = False):
-        tmpext = ".tmp" if tmp else "";
+    def GetSerializedPath(self, repository, tmp=False):
+        tmpext = ".tmp" if tmp else ""
         return os.path.join(self.statedir, repository['name'] + ".packages" + tmpext)
 
-    def ForEach(self, processor, tags = None, repositories = None):
+    def ForEach(self, processor, tags=None, repositories=None):
         for repository in REPOSITORIES:
             if repositories and not repository['name'] in repositories:
                 continue
@@ -204,7 +202,7 @@ class RepositoryManager:
             if tags:
                 for tagset in tags:
                     skip = True
-                    for tag in tagset if type(tagset) is list else [ tagset ]:
+                    for tag in tagset if type(tagset) is list else [tagset]:
                         if tag in repository['tags']:
                             skip = False
                             break
@@ -214,13 +212,13 @@ class RepositoryManager:
             if not skip:
                 processor(repository)
 
-    def GetNames(self, tags = None, repositories = None):
+    def GetNames(self, tags=None, repositories=None):
         names = []
 
         def AppendName(repository):
             names.append(repository['name'])
 
-        self.ForEach(AppendName, tags = tags, repositories = repositories)
+        self.ForEach(AppendName, tags=tags, repositories=repositories)
 
         return names
 
@@ -229,11 +227,11 @@ class RepositoryManager:
             'incomplete': repository['incomplete'] if 'incomplete' in repository else False,
         } for repository in REPOSITORIES }
 
-    def Fetch(self, update = True, tags = None, repositories = None):
+    def Fetch(self, update=True, tags=None, repositories=None):
         def Fetcher(repository):
             logger = self.logger.GetPrefixed(repository['name'] + ": ")
             logger.Log("fetching started")
-            repository['fetcher'].Fetch(self.GetStatePath(repository), update = update, logger = logger)
+            repository['fetcher'].Fetch(self.GetStatePath(repository), update=update, logger=logger)
             logger.Log("fetching complete")
 
         if not os.path.isdir(self.statedir):
@@ -275,9 +273,9 @@ class RepositoryManager:
 
             return False
 
-        return [ packages[name] for name in sorted(packages.keys()) if CheckShadows(packages[name]) ]
+        return [packages[name] for name in sorted(packages.keys()) if CheckShadows(packages[name])]
 
-    def Parse(self, name_transformer, tags = None, repositories = None):
+    def Parse(self, name_transformer, tags=None, repositories=None):
         packages_by_repo = {}
 
         def Parser(repository):
@@ -293,20 +291,20 @@ class RepositoryManager:
         self.logger.Log("merging complete")
         return packages
 
-    def ParseAndSerialize(self, tags = None, repositories = None):
+    def ParseAndSerialize(self, tags=None, repositories=None):
         def ParserSerializer(repository):
             logger = self.logger.GetPrefixed(repository['name'] + ": ")
             logger.Log("parsing + saving started")
             pickle.dump(
                 repository['parser'].Parse(self.GetStatePath(repository)),
-                open(self.GetSerializedPath(repository, tmp = True), "wb")
+                open(self.GetSerializedPath(repository, tmp=True), "wb")
             )
-            os.rename(self.GetSerializedPath(repository, tmp = True), self.GetSerializedPath(repository))
+            os.rename(self.GetSerializedPath(repository, tmp=True), self.GetSerializedPath(repository))
             logger.Log("parsing + saving complete")
 
         self.ForEach(ParserSerializer, tags, repositories)
 
-    def Deserialize(self, name_transformer, tags = None, repositories = None):
+    def Deserialize(self, name_transformer, tags=None, repositories=None):
         packages_by_repo = {}
 
         def Deserializer(repository):

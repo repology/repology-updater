@@ -62,17 +62,14 @@ class GentooGitParser():
                     continue
 
                 maxversion = None
-                bestebuild = None
                 for ebuild in os.listdir(package_path):
                     if not ebuild.endswith(".ebuild"):
                         continue
-                    ebuild_path = os.path.join(package_path, ebuild)
 
                     version = ebuild[len(package)+1:-7]
 
                     if IsBetterVersion(version, maxversion):
                         maxversion = version
-                        bestebuild = ebuild
 
                 if not maxversion is None:
                     pkg = Package()

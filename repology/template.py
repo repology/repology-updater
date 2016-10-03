@@ -18,13 +18,14 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import time
-import jinja2
 from math import sqrt
+
+import jinja2
 
 def SpanTrim(value, maxlength):
     # support lists as well
     if type(value) is list:
-        return [ SpanTrim(v, maxlength) for v in value ];
+        return [SpanTrim(v, maxlength) for v in value]
 
     if len(value) <= maxlength:
         return value
@@ -45,14 +46,14 @@ def Clamp(value, lower, upper):
     return value
 
 def Split(value, sep):
-    return value.split(sep);
+    return value.split(sep)
 
 class Template:
     def __init__(self):
         self.env = jinja2.Environment(
-            loader = jinja2.PackageLoader('repology', 'templates'),
-            lstrip_blocks = True,
-            trim_blocks = True,
+            loader=jinja2.PackageLoader('repology', 'templates'),
+            lstrip_blocks=True,
+            trim_blocks=True,
         )
         self.env.filters["spantrim"] = SpanTrim
         self.env.filters["clamp"] = Clamp

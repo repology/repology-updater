@@ -18,7 +18,6 @@
 import os
 import sys
 
-from ..util import VersionCompare
 from ..package import Package
 
 def SanitizeVersion(version):

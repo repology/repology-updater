@@ -42,9 +42,6 @@ class ChocolateyFetcher():
             logger.Log("parsing " + nextpageurl);
             root = xml.etree.ElementTree.fromstring(text)
 
-            for entry in root.findall("{http://www.w3.org/2005/Atom}entry"):
-                title = entry.find("{http://www.w3.org/2005/Atom}title")
-
             next_link = root.find("{http://www.w3.org/2005/Atom}link[@rel='next']")
             if next_link is None:
                 break
