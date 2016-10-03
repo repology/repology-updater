@@ -86,6 +86,11 @@ class NameTransformer:
             if not rule['verpat'].match(package.version):
                 return False
 
+        # match number of version components
+        if 'verlonger' in rule:
+            if not len(package.version.split('.')) > rule['verlonger']:
+                return False
+
         return True
 
     def ApplyRule(self, rule, package):
