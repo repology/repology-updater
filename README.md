@@ -76,8 +76,10 @@ repository groups. Tags include:
                with. These are repositories that just work and don't take
                too much time to fetch.
 
-Multiple tags have AND logic, e.g. you get repositories which have
-ALL the tags you specify.
+If you specify multiple tags separated by commas in one ```--tag```
+option, these will be processed with OR logic. Multiple ```--tag```
+options are processed with AND logic. E.g. ```--tag foo,bar --tag baz```
+get you repositories belonging to ```(foo OR bar) AND baz```
 
 ```--verbose``` is useful for tracking progress of utility operation
 

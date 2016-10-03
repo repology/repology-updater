@@ -199,9 +199,13 @@ class RepositoryManager:
 
             skip = False
             if tags:
-                for tag in tags:
-                    if not tag in repository['tags']:
-                        skip = True
+                for tagset in tags:
+                    skip = True
+                    for tag in tagset if type(tagset) is list else [ tagset ]:
+                        if tag in repository['tags']:
+                            skip = False
+                            break
+                    if skip:
                         break
 
             if not skip:

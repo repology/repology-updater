@@ -269,16 +269,18 @@ def Main():
     if not options.tag and not options.repository:
         raise RuntimeError("please set --tag or --repository")
 
+    tags = [ tag.split(',') for tag in options.tag ]
+
     nametrans = NameTransformer(options.rules)
     repoman = RepositoryManager(options.statedir)
     packages = repoman.Deserialize(
         nametrans,
         verbose = options.verbose,
-        tags = options.tag,
+        tags = tags,
         repositories = options.repository
     )
 
-    RepologyOrg(options.output, packages, repoman.GetNames(tags = options.tag, repositories = options.repository), repoman.GetMetadata())
+    RepologyOrg(options.output, packages, repoman.GetNames(tags = tags, repositories = options.repository), repoman.GetMetadata())
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
