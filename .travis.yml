@@ -1,6 +1,10 @@
 language: python
 python:
   - "3.4"
+before_install:
+  - pip install requests
+  - pip install PyYAML
+  - pip install Jinja2
 script:
   # Fetching from travis would be too heavy, so just
   # perform syntax check
