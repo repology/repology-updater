@@ -286,6 +286,10 @@
 - { namepat: "r-cran-(.*)",            setname: "r:$1", repos: [ debian ] }
 - { namepat: "R-(.*)",                 setname: "r:$1", repos: [ pkgsrc ] }
 
+# Nodejs
+- { namepat: "node-(.*)",              setname: "r:$1", repos: [ debian ] }
+- { namepat: "nodejs-(.*)",            setname: "r:$1", repos: [ fedora ] }
+
 # ROS
 - { category: dev-ros,                 setname: "ros:$0", repos: [ gentoo ] }
 - { namepat: "ros-(.*)",               setname: "ros:$1", repos: [ debian ] }
