@@ -17,7 +17,6 @@
 
 import os
 import sys
-from pkg_resources import parse_version
 
 from ..util import VersionCompare
 from ..package import Package
