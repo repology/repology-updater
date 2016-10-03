@@ -1,0 +1,9 @@
+language: python
+python:
+  - "3.4"
+script:
+  # Fetching from travis would be too heavy, so just
+  # perform syntax check
+  - ./repology-update.py --help
+  - ./repology-report.py --help
+  - ./repology-gensite.py --help
