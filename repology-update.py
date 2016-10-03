@@ -22,11 +22,12 @@ import sys
 from argparse import ArgumentParser
 
 from repology.repositories import RepositoryManager
+from repology.logger import *
 
 def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', help='path to directory with repository state')
-    parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+    parser.add_argument('-l', '--logfile', help='path to log file')
 
     parser.add_argument('-f', '--fetch', action='store_true', help='allow fetching repository data')
     parser.add_argument('-u', '--update', action='store_true', help='allow updating repository data')
@@ -41,19 +42,21 @@ def Main():
     if not options.tag and not options.repository:
         raise RuntimeError("please set --tag or --repository")
 
-    repoman = RepositoryManager(options.statedir)
+    logger = StderrLogger()
+    if options.logfile:
+        logger = FileLogger(options.logfile)
+
+    repoman = RepositoryManager(options.statedir, logger = logger)
 
     if options.fetch:
         repoman.Fetch(
             update = options.update,
-            verbose = options.verbose,
             tags = options.tag,
             repositories = options.repository
         )
 
     if options.parse:
         repoman.ParseAndSerialize(
-            verbose = options.verbose,
             tags = options.tag,
             repositories = options.repository
         )

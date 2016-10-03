@@ -29,6 +29,7 @@ from repology.nametransformer import NameTransformer
 from repology.report import ReportProducer
 from repology.template import Template
 from repology.repositories import RepositoryManager
+from repology.logger import *
 
 def FilterPackages(metapackages, maintainer = None, category = None, manyrepos = None, littlerepos = None, inrepo = None, notinrepo = None, outdatedinrepo = None):
     filtered = []
@@ -63,7 +64,7 @@ def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', help='path to directory with repository state')
     parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
-    parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+    parser.add_argument('-l', '--logfile', help='path to log file')
 
     parser.add_argument('-t', '--tag', action='append', help='only process repositories with this tag')
     parser.add_argument('-r', '--repository', action='append', help='only process repositories with this name')
@@ -85,13 +86,16 @@ def Main():
     if not options.tag and not options.repository:
         raise RuntimeError("please set --tag or --repository")
 
+    logger = StderrLogger()
+    if options.logfile:
+        logger = FileLogger(options.logfile)
+
     tags = [ tag.split(',') for tag in options.tag ]
 
     nametrans = NameTransformer(options.rules)
-    repoman = RepositoryManager(options.statedir, enable_shadow = not options.no_shadow)
+    repoman = RepositoryManager(options.statedir, enable_shadow = not options.no_shadow, logger = logger)
     packages = repoman.Deserialize(
         nametrans,
-        verbose = options.verbose,
         tags = tags,
         repositories = options.repository
     )
@@ -118,10 +122,11 @@ def Main():
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
-        print("WARNING: Unmatched rules detected:", file=sys.stderr)
+        wlogger = logger.GetPrefixed("WARNING: ")
+        wlogger.Log("unmatched rules detected!")
 
         for rule in unmatched:
-            print(rule, file=sys.stderr)
+            wlogger.Log(rule)
 
     return 0
 

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+#
 # Copyright (C) 2016 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
@@ -15,26 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import subprocess
-import shutil
 
-from repology.logger import NoopLogger
-from repology.subprocess import RunSubprocess
-
-class ArchDBFetcher():
-    def __init__(self, *sources):
-        self.sources = sources
-
-    def Fetch(self, statepath, update = True, logger = NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            return
-
-        if os.path.isdir(statepath):
-            shutil.rmtree(statepath)
-
-        os.mkdir(statepath)
-
-        for source in self.sources:
-            command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (source, statepath)
-            RunSubprocess(command, logger, shell = True)
+def RunSubprocess(command, logger, shell = False):
+    logger.Log("running: " + command)
+    with subprocess.Popen(command, shell = shell, stdout = subprocess.PIPE, stderr = subprocess.STDOUT, universal_newlines = True) as proc:
+        for line in proc.stdout:
+            logger.Log("    " + line.strip())
+        proc.wait()
+        logger.Log("command finished with code {}".format(proc.returncode))
+        if proc.returncode != 0:
+            raise subprocess.CalledProcessError(cmd = command, returncode = proc.returncode)

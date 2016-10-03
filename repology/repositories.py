@@ -20,12 +20,13 @@
 import os
 import sys
 import pickle
+import fcntl
 
 from repology.fetcher import *
 from repology.parser import *
 
 from repology.package import *
-from repology.nametransformer import NameTransformer
+from repology.logger import *
 
 REPOSITORIES = [
     {
@@ -182,9 +183,10 @@ REPOSITORIES = [
 ]
 
 class RepositoryManager:
-    def __init__(self, statedir, enable_shadow = True):
+    def __init__(self, statedir, enable_shadow = True, logger = NoopLogger()):
         self.statedir = statedir
         self.enable_shadow = enable_shadow
+        self.logger = logger
 
     def GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
@@ -227,13 +229,15 @@ class RepositoryManager:
             'incomplete': repository['incomplete'] if 'incomplete' in repository else False,
         } for repository in REPOSITORIES }
 
-    def Fetch(self, update = True, verbose = False, tags = None, repositories = None):
+    def Fetch(self, update = True, tags = None, repositories = None):
         def Fetcher(repository):
-            if verbose: print("Fetching %s" % repository['name'], file = sys.stderr)
-            repository['fetcher'].Fetch(self.GetStatePath(repository), update, verbose)
+            logger = self.logger.GetPrefixed(repository['name'] + ": ")
+            logger.Log("fetching started")
+            repository['fetcher'].Fetch(self.GetStatePath(repository), update = update, logger = logger)
+            logger.Log("fetching complete")
 
         if not os.path.isdir(self.statedir):
-                os.mkdir(self.statedir)
+            os.mkdir(self.statedir)
 
         self.ForEach(Fetcher, tags, repositories)
 
@@ -273,37 +277,47 @@ class RepositoryManager:
 
         return [ packages[name] for name in sorted(packages.keys()) if CheckShadows(packages[name]) ]
 
-    def Parse(self, name_transformer, verbose = False, tags = None, repositories = None):
+    def Parse(self, name_transformer, tags = None, repositories = None):
         packages_by_repo = {}
 
         def Parser(repository):
-            if verbose: print("Parsing %s" % repository['name'], file = sys.stderr)
+            logger = self.logger.GetPrefixed(repository['name'] + ": ")
+            logger.Log("parsing started")
             packages_by_repo[repository['name']] = repository['parser'].Parse(self.GetStatePath(repository))
+            logger.Log("parsing complete")
 
         self.ForEach(Parser, tags, repositories)
 
-        if verbose: print("Merging data", file = sys.stderr)
-        return self.Mix(packages_by_repo, name_transformer)
+        self.logger.Log("merging started")
+        packages = self.Mix(packages_by_repo, name_transformer)
+        self.logger.Log("merging complete")
+        return packages
 
-    def ParseAndSerialize(self, verbose = False, tags = None, repositories = None):
+    def ParseAndSerialize(self, tags = None, repositories = None):
         def ParserSerializer(repository):
-            if verbose: print("Parsing and saving %s" % repository['name'], file = sys.stderr)
+            logger = self.logger.GetPrefixed(repository['name'] + ": ")
+            logger.Log("parsing + saving started")
             pickle.dump(
                 repository['parser'].Parse(self.GetStatePath(repository)),
                 open(self.GetSerializedPath(repository, tmp = True), "wb")
             )
             os.rename(self.GetSerializedPath(repository, tmp = True), self.GetSerializedPath(repository))
+            logger.Log("parsing + saving complete")
 
         self.ForEach(ParserSerializer, tags, repositories)
 
-    def Deserialize(self, name_transformer, verbose = False, tags = None, repositories = None):
+    def Deserialize(self, name_transformer, tags = None, repositories = None):
         packages_by_repo = {}
 
         def Deserializer(repository):
-            if verbose: print("Loading %s" % repository['name'], file = sys.stderr)
+            logger = self.logger.GetPrefixed(repository['name'] + ": ")
+            logger.Log("loading started")
             packages_by_repo[repository['name']] = pickle.load(open(self.GetSerializedPath(repository), "rb"))
+            logger.Log("loading complete")
 
         self.ForEach(Deserializer, tags, repositories)
 
-        if verbose: print("Merging data", file = sys.stderr)
-        return self.Mix(packages_by_repo, name_transformer)
+        self.logger.Log("merging started")
+        packages = self.Mix(packages_by_repo, name_transformer)
+        self.logger.Log("merging complete")
+        return packages

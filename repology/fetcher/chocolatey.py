@@ -18,8 +18,9 @@
 import os
 import requests
 import xml.etree.ElementTree
-import sys
 import shutil
+
+from repology.logger import NoopLogger
 
 USER_AGENT = "Repology/0"
 
@@ -27,7 +28,7 @@ class ChocolateyFetcher():
     def __init__(self, apiurl):
         self.apiurl = apiurl
 
-    def Fetch(self, statepath, update = True, verbose = False):
+    def Fetch(self, statepath, update = True, logger = NoopLogger()):
         if os.path.isdir(statepath) and not update:
             return
 
@@ -39,7 +40,7 @@ class ChocolateyFetcher():
         numpage = 0
         nextpageurl = self.apiurl + "Packages()?$filter=IsLatestVersion"
         while True:
-            print(nextpageurl, file = sys.stderr)
+            logger.Log("getting " + nextpageurl);
             r = requests.get(nextpageurl, headers = { 'user-agent': USER_AGENT })
             r.raise_for_status()
 
@@ -47,6 +48,7 @@ class ChocolateyFetcher():
                 pagefile.write(r.text)
 
             # parse next page
+            logger.Log("parsing " + nextpageurl);
             root = xml.etree.ElementTree.fromstring(r.text)
 
             for entry in root.findall("{http://www.w3.org/2005/Atom}entry"):

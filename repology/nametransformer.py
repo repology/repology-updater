@@ -32,7 +32,7 @@ class NameTransformer:
         with open(rulespath) as file:
             self.rules = yaml.safe_load(file)
 
-        pp = pprint.PrettyPrinter()
+        pp = pprint.PrettyPrinter(width = 10000)
         for rule in self.rules:
             # save pretty-print before all transformations
             rule['pretty'] = pp.pformat(rule)

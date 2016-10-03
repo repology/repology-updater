@@ -29,6 +29,7 @@ from repology.nametransformer import NameTransformer
 from repology.report import ReportProducer
 from repology.template import Template
 from repology.repositories import RepositoryManager
+from repology.logger import *
 
 def FilterPackages(metapackages, maintainer = None, category = None, manyrepos = None, littlerepos = None, inrepo = None, notinrepo = None, outdatedinrepo = None):
     filtered = []
@@ -59,14 +60,14 @@ def FilterPackages(metapackages, maintainer = None, category = None, manyrepos =
 
     return filtered
 
-def RepologyOrg(path, metapackages, repositories, repometadata):
+def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     if not os.path.isdir(path):
         os.mkdir(path)
 
     template = Template()
     rp = ReportProducer(template, "table.html")
 
-    print("===> Basic stuff", file=sys.stderr)
+    logger.Log("===> Basic stuff")
     template.RenderToFile(
         'about.html',
         os.path.join(path, "about.html"),
@@ -77,7 +78,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata):
 
     shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
 
-    print("===> Main index", file=sys.stderr)
+    logger.Log("===> Main index")
     rp.RenderFilesPaginated(
         os.path.join(path, "index"),
         metapackages,
@@ -91,7 +92,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata):
 
     shutil.copyfile(os.path.join(path, "index.0.html"), os.path.join(path, "index.html"))
 
-    print("===> Specific sets", file=sys.stderr)
+    logger.Log("===> Specific sets")
     widespread_path = os.path.join(path, "widespread")
     if not os.path.isdir(widespread_path):
         os.mkdir(widespread_path)
@@ -122,7 +123,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata):
         subsection = "unique",
     )
 
-    print("===> Per-repository pages", file=sys.stderr)
+    logger.Log("===> Per-repository pages")
     inrepo_path = os.path.join(path, "repositories")
     if not os.path.isdir(inrepo_path):
         os.mkdir(inrepo_path)
@@ -206,7 +207,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata):
         subsection = "outdated",
     )
 
-    print("===> Per-maintainer index", file=sys.stderr)
+    logger.Log("===> Per-maintainer index")
     maintainers = {}
     for metapackage in metapackages:
         for maintainer in metapackage.GetMaintainers():
@@ -256,7 +257,7 @@ def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', help='path to directory with repository state')
     parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
-    parser.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+    parser.add_argument('-l', '--logfile', help='path to log file')
 
     parser.add_argument('-t', '--tag', action='append', help='only process repositories with this tag')
     parser.add_argument('-r', '--repository', action='append', help='only process repositories with this name')
@@ -270,25 +271,29 @@ def Main():
     if not options.tag and not options.repository:
         raise RuntimeError("please set --tag or --repository")
 
+    logger = StderrLogger()
+    if options.logfile:
+        logger = FileLogger(options.logfile)
+
     tags = [ tag.split(',') for tag in options.tag ]
 
     nametrans = NameTransformer(options.rules)
-    repoman = RepositoryManager(options.statedir, enable_shadow = not options.no_shadow)
+    repoman = RepositoryManager(options.statedir, enable_shadow = not options.no_shadow, logger = logger)
     packages = repoman.Deserialize(
         nametrans,
-        verbose = options.verbose,
         tags = tags,
         repositories = options.repository
     )
 
-    RepologyOrg(options.output, packages, repoman.GetNames(tags = tags, repositories = options.repository), repoman.GetMetadata())
+    RepologyOrg(options.output, packages, repoman.GetNames(tags = tags, repositories = options.repository), repoman.GetMetadata(), logger)
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):
-        print("WARNING: Unmatched rules detected:", file=sys.stderr)
+        wlogger = logger.GetPrefixed("WARNING: ")
+        wlogger.Log("unmatched rules detected!")
 
         for rule in unmatched:
-            print(rule, file=sys.stderr)
+            wlogger.Log(rule)
 
     return 0
 

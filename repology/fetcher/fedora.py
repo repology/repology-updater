@@ -18,8 +18,9 @@
 import os
 import requests
 import json
-import sys
 import shutil
+
+from repology.logger import NoopLogger
 
 USER_AGENT = "Repology/0"
 
@@ -28,29 +29,29 @@ def GetJson(url):
     r.raise_for_status()
     return json.loads(r.text)
 
-def LoadSpec(package, statepath, verbose):
-    url = "http://pkgs.fedoraproject.org/cgit/rpms/%s.git/plain/%s.spec" % (package, package)
+def LoadSpec(package, statepath, logger):
+    specurl = "http://pkgs.fedoraproject.org/cgit/rpms/%s.git/plain/%s.spec" % (package, package)
 
-    r = requests.get(url, headers = { 'user-agent': USER_AGENT } )
+    logger.Log("  getting spec from {}".format(specurl))
+
+    r = requests.get(specurl, headers = { 'user-agent': USER_AGENT } )
     if r.status_code != 200:
-        print("        failed", file=sys.stderr)
+        logger.Log("    failed: {}".format(r.status_code)) # XXX: check .dead.package, instead throw
         return
 
     with open(os.path.join(statepath, package + ".spec"), "wb") as file:
         file.write(r.content)
 
-def ParsePackages(statepath, verbose):
+def ParsePackages(statepath, logger):
     page = 1
 
     while True:
-        if verbose:
-            print("Page %d" % page, file=sys.stderr)
-        json = GetJson("https://admin.fedoraproject.org/pkgdb/api/packages/?page=%d" % page)
+        pageurl = "https://admin.fedoraproject.org/pkgdb/api/packages/?page={}".format(page)
+        logger.Log("getting page {} from {}".format(page, pageurl))
+        json = GetJson(pageurl)
 
         for package in json['packages']:
-            if verbose:
-                print("    Package %s" % package['name'], file=sys.stderr)
-            LoadSpec(package['name'], statepath, verbose)
+            LoadSpec(package['name'], statepath, logger)
 
         page += 1
 
@@ -61,7 +62,7 @@ class FedoraFetcher():
     def __init__(self):
         pass
 
-    def Fetch(self, statepath, update = True, verbose = False):
+    def Fetch(self, statepath, update = True, logger = NoopLogger()):
         if os.path.isdir(statepath) and not update:
             return
 
@@ -71,7 +72,7 @@ class FedoraFetcher():
         os.mkdir(statepath)
 
         try:
-            ParsePackages(statepath, verbose)
+            ParsePackages(statepath, logger)
         except:
             # don't leave partial state
             shutil.rmtree(statepath)

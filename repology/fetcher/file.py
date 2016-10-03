@@ -16,7 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import subprocess
+
+from repology.logger import NoopLogger
+from repology.subprocess import RunSubprocess
 
 class FileFetcher():
     def __init__(self, *sources, gunzip = False, bunzip = False):
@@ -24,19 +26,20 @@ class FileFetcher():
         self.gunzip = gunzip
         self.bunzip = bunzip
 
-    def Fetch(self, statepath, update = True, verbose = False):
+    def Fetch(self, statepath, update = True, logger = NoopLogger()):
         if os.path.isfile(statepath) and not update:
             return
 
         if os.path.isfile(statepath):
             os.remove(statepath)
 
-        quietflag = 'q' if not verbose else ''
-
         for source in self.sources:
+            command = None
             if self.gunzip:
-                subprocess.check_call("wget -%sO- \"%s\" | gunzip >> \"%s\"" % (quietflag, source, statepath), shell = True)
+                command = "wget -O- \"%s\" | gunzip >> \"%s\"" % (source, statepath)
             elif self.bunzip:
-                subprocess.check_call("wget -%sO- \"%s\" | bunzip2 >> \"%s\"" % (quietflag, source, statepath), shell = True)
+                command = "wget -O- \"%s\" | bunzip2 >> \"%s\"" % (source, statepath)
             else:
-                subprocess.check_call("wget -%sO- \"%s\" >> \"%s\"" % (quietflag, source, statepath), shell = True)
+                command = "wget -O- \"%s\" >> \"%s\"" % (source, statepath)
+
+            RunSubprocess(command, logger, shell = True)
