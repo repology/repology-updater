@@ -6,7 +6,7 @@
 
 # Some of these are to be reversed for less ambiguity, and some
 # are to consider for performing in the actual repos
-- { name: 2048,                        setname: 2048-cli,                 repos: [ freebsd ] } # differentiate from 2048-qt
+- { name: "2048",                      setname: 2048-cli,                 repos: [ freebsd ] } # differentiate from 2048-qt
 - { name: abuse_sdl,                   setname: abuse,                    repos: [ freebsd ] }
 - { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }

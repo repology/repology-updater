@@ -37,11 +37,6 @@ class NameTransformer:
             # save pretty-print before all transformations
             rule['pretty'] = pp.pformat(rule)
 
-            # process number-like strings gracefully
-            for field in ['name', 'ver']:
-                if field in rule:
-                    rule[field] = str(rule[field])
-
             # convert some fields to lists
             for field in ['category']:
                 if field in rule and not isinstance(rule[field], list):
