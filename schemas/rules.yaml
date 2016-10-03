@@ -1,0 +1,42 @@
+---
+type: seq
+required: yes
+sequence:
+  - type: map
+    required: yes
+    mapping:
+      "name":
+        type: str
+      "namepat":
+        type: str
+      "ver":
+        type: str
+      "verpat":
+        type: str
+      "verlonger":
+        type: int
+      "setname":
+        type: str
+      "category":
+        type: str
+      "ignore":
+        type: bool
+      "ignorever":
+        type: bool
+      "pass":
+        type: bool
+      "repos":
+        type: seq
+        sequence:
+          - type: str
+            unique: yes
+            enum:
+              - arch
+              - chocolatey
+              - debian
+              - fedora
+              - freebsd
+              - gentoo
+              - openbsd
+              - opensuse
+              - pkgsrc

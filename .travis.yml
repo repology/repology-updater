@@ -5,9 +5,11 @@ before_install:
   - pip install requests
   - pip install PyYAML
   - pip install Jinja2
+  - gem install kwalify
 script:
   # Fetching from travis would be too heavy, so just
   # perform syntax check
   - ./repology-update.py --help
   - ./repology-report.py --help
   - ./repology-gensite.py --help
+  - kwalify -lf schemas/rules.yaml rules.yaml
