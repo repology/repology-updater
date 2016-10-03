@@ -23,3 +23,4 @@ from .openbsd import OpenBSDIndexParser
 from .arch import ArchDBParser
 from .spec import SpecParser
 from .opensuse import OpenSUSEPackageListParser
+from .chocolatey import ChocolateyParser

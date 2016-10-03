@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from pkg_resources import parse_version
 
 from ..util import VersionCompare
 from ..package import Package
