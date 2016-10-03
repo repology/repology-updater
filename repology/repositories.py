@@ -170,6 +170,15 @@ REPOSITORIES = [
         'incomplete': True,
         'tags': [ 'all', 'opensuse', 'fastfetch' ],
     },
+
+    {
+        'name': 'Chocolatey',
+        'repotype': 'chocolatey',
+        'fetcher': ChocolateyFetcher("https://chocolatey.org/api/v2/"),
+        'parser': ChocolateyParser(),
+        'shadow': True,
+        'tags': [ 'all', 'production', 'slowfetch' ],
+    },
 ]
 
 class RepositoryManager:

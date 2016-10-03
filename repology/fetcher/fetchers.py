@@ -19,3 +19,4 @@ from .file import FileFetcher
 from .git import GitFetcher
 from .arch import ArchDBFetcher
 from .fedora import FedoraFetcher
+from .chocolatey import ChocolateyFetcher
