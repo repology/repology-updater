@@ -16,25 +16,18 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import requests
 import json
 import shutil
 
 from repology.logger import NoopLogger
-
-USER_AGENT = "Repology/0"
-
-def GetJson(url):
-    r = requests.get(url, headers = { 'user-agent': USER_AGENT })
-    r.raise_for_status()
-    return json.loads(r.text)
+from repology.www import Get
 
 def LoadSpec(package, statepath, logger):
     specurl = "http://pkgs.fedoraproject.org/cgit/rpms/%s.git/plain/%s.spec" % (package, package)
 
     logger.Log("  getting spec from {}".format(specurl))
 
-    r = requests.get(specurl, headers = { 'user-agent': USER_AGENT } )
+    r = Get(specurl, check_status = False)
     if r.status_code != 200:
         logger.Log("    failed: {}".format(r.status_code)) # XXX: check .dead.package, instead throw
         return
@@ -48,14 +41,14 @@ def ParsePackages(statepath, logger):
     while True:
         pageurl = "https://admin.fedoraproject.org/pkgdb/api/packages/?page={}".format(page)
         logger.Log("getting page {} from {}".format(page, pageurl))
-        json = GetJson(pageurl)
+        pagedata = json.loads(Get(pageurl).text)
 
-        for package in json['packages']:
+        for package in pagedata['packages']:
             LoadSpec(package['name'], statepath, logger)
 
         page += 1
 
-        if page > json['page_total']:
+        if page > pagedata['page_total']:
             break
 
 class FedoraFetcher():

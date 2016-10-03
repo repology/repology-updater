@@ -16,11 +16,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import requests
 import xml.etree.ElementTree
 import shutil
 
 from repology.logger import NoopLogger
+from repology.www import Get
 
 USER_AGENT = "Repology/0"
 
@@ -41,15 +41,14 @@ class ChocolateyFetcher():
         nextpageurl = self.apiurl + "Packages()?$filter=IsLatestVersion"
         while True:
             logger.Log("getting " + nextpageurl);
-            r = requests.get(nextpageurl, headers = { 'user-agent': USER_AGENT })
-            r.raise_for_status()
 
+            text = Get(nextpageurl).text
             with open(os.path.join(statepath, "{}.xml".format(numpage)), "w") as pagefile:
-                pagefile.write(r.text)
+                pagefile.write(text)
 
             # parse next page
             logger.Log("parsing " + nextpageurl);
-            root = xml.etree.ElementTree.fromstring(r.text)
+            root = xml.etree.ElementTree.fromstring(text)
 
             for entry in root.findall("{http://www.w3.org/2005/Atom}entry"):
                 title = entry.find("{http://www.w3.org/2005/Atom}title")
