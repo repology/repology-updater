@@ -16,9 +16,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import gzip
+import bz2
 
 from repology.logger import NoopLogger
-from repology.subprocess import RunSubprocess
+from repology.www import Get
 
 class FileFetcher():
     def __init__(self, *sources, gunzip = False, bunzip = False):
@@ -30,16 +32,22 @@ class FileFetcher():
         if os.path.isfile(statepath) and not update:
             return
 
-        if os.path.isfile(statepath):
+        try:
+            with open(statepath, "wb") as statefile:
+                for source in self.sources:
+                    logger.Log("fetching " + source)
+                    data = Get(source).content
+
+                    if self.gunzip:
+                        logger.Log("  decompressing with gzip")
+                        data = gzip.decompress(data)
+                    elif self.bunzip:
+                        logger.Log("  decompressing with bz2")
+                        data = bz2.decompress(data)
+
+                    logger.Log("  saving")
+                    statefile.write(data)
+
+        except:
             os.remove(statepath)
-
-        for source in self.sources:
-            command = None
-            if self.gunzip:
-                command = "wget -O- \"%s\" | gunzip >> \"%s\"" % (source, statepath)
-            elif self.bunzip:
-                command = "wget -O- \"%s\" | bunzip2 >> \"%s\"" % (source, statepath)
-            else:
-                command = "wget -O- \"%s\" >> \"%s\"" % (source, statepath)
-
-            RunSubprocess(command, logger, shell = True)
+            raise
