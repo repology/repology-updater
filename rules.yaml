@@ -185,6 +185,29 @@
 - { name: xmahjongg,                   ver: "3.70", repos: [ pkgsrc ],  ignorever: true }
 - { name: "libreadonly-perl",          ver: "2.050", repos: [ debian ], ignorever: true } # needs multiple rule hits
 
+# Chocolatey is full of garbage, fake version and bad matches
+- { name: 7kaa,                                                      repos: [ chocolatey ], ignorever: true }
+- { name: aacgain,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: ace,                                                       repos: [ chocolatey ], ignore: true }
+- { name: activemq,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: acm,                                                       repos: [ chocolatey ], ignore: true }
+- { name: acr,                                                       repos: [ chocolatey ], ignore: true }
+- { name: argouml,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: aria2,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: autocomplete,                                              repos: [ chocolatey ], ignore: true }
+- { name: awake,                                                     repos: [ chocolatey ], ignore: true }
+- { name: duck,                                                      repos: [ chocolatey ], ignore: true }
+- { name: clover,                                                    repos: [ chocolatey ], ignore: true }
+- { name: axel,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: bacula,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: 0install,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: apache-httpd,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: celestia,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: claws-mail,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: cntlm,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: codelite,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: codelite,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+
 # Version splits/tweaks
 - { name: allegro, verpat: "4\\..*",  setname: allegro4 }
 - { name: allegro, verpat: "5\\..*",  setname: allegro5 }
