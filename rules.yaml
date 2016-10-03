@@ -253,12 +253,13 @@
 - { namepat: "p5-(.*)",                setname: "perl:$1", repos: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", repos: [ debian ] }
 - { category: dev-perl,                setname: "perl:$0", repos: [ gentoo ], ignorever: true }
-- { namepat: "perl-(.*)",              setname: "perl:$1", repos: [ arch, fedora ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", repos: [ arch, fedora, opensuse ] }
 
 # Ruby
 - { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch, fedora ] }
 - { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", repos: [ freebsd, openbsd, pkgsrc ] }
+- { namepat: "ruby[0-9]\\.[0-9]-rubygem-(.*)", setname: "ruby:$1", repos: [ opensuse ] }
 - { category: dev-ruby,                setname: "ruby:$0", repos: [ gentoo ] }
 
 # Tryton (wtf is that); needs to be before python
@@ -277,7 +278,7 @@
 - { namepat: "py3?-(.*)",              setname: "python:$1", repos: [ openbsd ] }
 - { namepat: "python-(.*)",            setname: "python:$1", repos: [ debian ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", repos: [ arch ] }
-- { namepat: "python3?-(.*)",          setname: "python:$1", repos: [ fedora ] }
+- { namepat: "python3?-(.*)",          setname: "python:$1", repos: [ fedora, opensuse ] }
 - { category: dev-python,              setname: "python:$0", repos: [ gentoo ] }
 
 # R libs
@@ -296,6 +297,7 @@
 # Haskell
 - { namepat: "haskell-(.*)",           setname: "haskell:$1", repos: [ debian, arch ] }
 - { namepat: "hs-(.*)",                setname: "haskell:$1", repos: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "ghc-(.*)",               setname: "haskell:$1", repos: [ opensuse ] }
 - { category: dev-haskell,             setname: "haskell:$0", repos: [ gentoo ] }
 
 # lua
@@ -310,7 +312,7 @@
 - { namepat: "octave-(.*)",            setname: "octave:$1", repos: [ debian ] }
 
 # xorg drivers
-- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", repos: [ freebsd, gentoo, pkgsrc, arch ] }
+- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", repos: [ freebsd, gentoo, pkgsrc, arch, opensuse ] }
 - { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", repos: [ debian ] }
 
 # php
