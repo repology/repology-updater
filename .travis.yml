@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 language: python
 python:
   - "3.4"
@@ -7,6 +7,8 @@ before_install:
   - pip install PyYAML
   - pip install Jinja2
   - gem install kwalify
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq librpm-dev
 script:
   # Fetching from travis would be too heavy, so just
   # perform syntax check
