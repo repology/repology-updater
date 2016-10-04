@@ -36,7 +36,7 @@ class SrcListClassicParser():
 
                 pkg.name = fields[0]
                 pkg.version = fields[1]
-                pkg.maintainer = fields[2].strip() # XXX: may have multiple maintainers
+                pkg.maintainers.append(fields[2].strip()) # XXX: may have multiple maintainers
 
                 result.append(pkg)
 
