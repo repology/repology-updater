@@ -163,7 +163,7 @@ directory which is created if it doesn't exist.
 ## Repository support
 
 | Repository    | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License |
-|:-------------:|------|---------|---------|---------------|--------------|----------|---------|
+|---------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:--------|
 | FreeBSD       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | Debian/Ubuntu | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
 | Gentoo        | ✔    | ✔       |         |               | ✔            |          |         |
