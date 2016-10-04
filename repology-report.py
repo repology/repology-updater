@@ -68,7 +68,7 @@ def Main():
 
     parser.add_argument('-t', '--tag', action='append', help='only process repositories with this tag')
     parser.add_argument('-r', '--repository', action='append', help='only process repositories with this name')
-    parser.add_argument('-S', '--no-shadow', help='treat shadow repositories as normal')
+    parser.add_argument('-S', '--no-shadow', action='store_true', help='treat shadow repositories as normal')
 
     parser.add_argument('-m', '--maintainer', help='filter by maintainer')
     parser.add_argument('-c', '--category', help='filter by category')
