@@ -316,7 +316,7 @@
 - { name: redis,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: retroshare,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: RSSOwl,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: rsync,                                                     repos: [ chocolatey ], ignorever: true }
+- { name: rsync,                                                     repos: [ chocolatey ], ignore: true }
 - { name: rust,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: simutrans,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: simutrans-pak128,            verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
