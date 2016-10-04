@@ -187,12 +187,12 @@
 
 # Chocolatey is full of garbage, fake version and bad matches
 - { name: 0install,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: 7kaa,                                                      repos: [ chocolatey ], ignorever: true }
+- { name: 7KAA,                                                      repos: [ chocolatey ], ignorever: true }
 - { name: aacgain,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: ace,                                                       repos: [ chocolatey ], ignore: true }
 - { name: acm,                                                       repos: [ chocolatey ], ignore: true }
 - { name: acr,                                                       repos: [ chocolatey ], ignore: true }
-- { name: activemq,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: ActiveMQ,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: apache-httpd,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: apacheds,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: apm,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
@@ -212,8 +212,8 @@
 - { name: celestia,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: charles,                                                   repos: [ chocolatey ], ignore: true }
 - { name: claws-mail,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: clover,                                                    repos: [ chocolatey ], ignore: true }
-- { name: cntlm,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: Clover,                                                    repos: [ chocolatey ], ignore: true }
+- { name: Cntlm,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: codelite,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: coffeescript,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: composer,                                                  repos: [ chocolatey ], ignore: true }
