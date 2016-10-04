@@ -162,117 +162,93 @@ directory which is created if it doesn't exist.
 
 ## Repository support
 
+| Repository    | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License |
+|:-------------:|------|---------|---------|---------------|--------------|----------|---------|
+| FreeBSD       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
+| Debian/Ubuntu | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
+| Gentoo        | ✔    | ✔       |         |               | ✔            |          |         |
+| pkgsrc        | ✔    | ✔       | ✔       |               | ✔            |          |         |
+| OpenBSD       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
+| Arch          | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
+| Fedora        | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
+| OpenSUSE      | ✔    | ✔       |         |               |              |          |         |
+| Chocolatey    | ✔    | ✔       | ✔       |               |              | ✔        |         |
+
 ### FreeBSD
+
+Parses data from INDEX-11.bz2.
+
+TODO: Parsing port Makefiles may extract additional info such as
+licenses and options.
 
 Links:
 - [FreshPorts](http://freshports.org)
 - [SVN](https://svnweb.freebsd.org/ports/head)
 
-Parses INDEX-11.bz2 file, available data:
-- name
-- version
-- comment
-- maintainer
-- category
-
-TODO: Parsing port Makefiles may extract additional info such as
-licenses and options.
-
 ### Debian/Ubuntu
+
+Parses data from Sources.gz. Maintainers are taken from both ```Maintainer``` and ```Uploader``` fields.
+
+TODO: May need to parse ```*.debian.tar.xz``` for additional info for
+each package. Heavy?
 
 Links:
 - [https://www.debian.org/distrib/packages#search_packages](Debian Packages)
 - [http://packages.ubuntu.com/](Ubuntu Packages)
 
-Parses Sources.gz, available data:
-- name
-- version
-- maintainer (from both ```Maintainer``` and ```Uploader``` fields)
-- category
-- homepage
-
-TODO: May need to parse ```*.debian.tar.xz``` for additional info for
-each package. Heavy?
-
 ### Gentoo
+
+Parses git mirror of portage repository (file tree only, doesn't
+look into ebuilds).
+
+TODO: Parse metadata.xml for maintainer. Parse ebuilds for more info.
 
 Links:
 - [Gentoo packages](https://packages.gentoo.org/)
 
-Parses git mirror of portage repository (file tree only, doesn't
-look into ebuilds), available data:
-- name
-- version
-- category
-
-TODO: Parse metadata.xml for maintainer. Parse ebuilds for more info.
-
 ### pkgsrc
+
+Is capable of generating INDEX file similar to that of FreeBSD, but
+it takes too much time (hours). For now, we parse README-all list
+from NetBSD.
+
+TODO: Generate and parse INDEX, even if it's done infrequently.
 
 Links:
 - [pkgsrc.org](http://pkgsrc.org/)
 - [CVS](http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/)
 - [pkgsrc.se](http://www.pkgsrc.se/)
 
-Is capable of generating INDEX file similar to that of FreeBSD, but
-it takes too much time (hours). For now, we parse README-all list
-from NetBSD, which only contains:
-- name
-- version
-- category
-- comment
-
-TODO: Generate and parse INDEX, even if it's done infrequently.
-
 ### OpenBSD
+
+Parses INDEX file (format similar to FreeBSD).
 
 Links:
 - [CVS](http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/)
 - [openports.se](http://openports.se/)
 
-Parses INDEX file (format similar to FreeBSD), available data:
-- name
-- version
-- comment
-- maintainer
-- category
-
 ### Arch
+
+Parses package databases (core, extra, community).
 
 Links:
 - [Package Search](https://www.archlinux.org/packages/)
 
-Parses package databases (core, extra, community), available data:
-- name
-- version
-- comment
-- homepage
-- maintainer (packager, actually)
-- license
-
 ### Fedora
-
-Links:
-- [Fedora Package Database](https://admin.fedoraproject.org/pkgdb)
-- [GIT Repositories](http://pkgs.fedoraproject.org/cgit/rpms/)
 
 Gets list of packages from Fedora Package Database API and then
 fetches .spec files from GIT repositories. Runs pretty slow. Doesn't
 download all .spec files (should be OK, since samples I've looked at
 are actually dead packages) and doesn't parse all files (can't process
-substitutions yet). Available data:
-- name
-- version
-- homepage
-- license
-- category
-- comment
+substitutions yet).
+
+Links:
+- [Fedora Package Database](https://admin.fedoraproject.org/pkgdb)
+- [GIT Repositories](http://pkgs.fedoraproject.org/cgit/rpms/)
 
 ### OpenSUSE
 
-Parses rpm package lists. Pretty dumb, only fields available are:
-- name
-- version
+Parses rpm package lists which only contain package names and versions.
 
 Because these are binary package lists, these are not suitable for
 comparison with other repos. For instance, for each ```libfoo```
@@ -280,6 +256,10 @@ in other repos we'll have ```libfooN``` ```libfoo-devel``` and
 ```libfooN-32bit``` here. Needs to be switched to another source.
 For now, this is enabled in shadow mode, e.g. unique packages in
 this repository are ignored.
+
+### Chocolatey
+
+Parses XML descriptions of packages from chocolatey API.
 
 ## Reading the report
 
