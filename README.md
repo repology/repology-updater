@@ -210,6 +210,9 @@ Links:
 
 Parses INDEX file (format similar to FreeBSD).
 
+Lacks maintainer for ~24 ports which use OWNER instead because
+OWNER does not get to INDEX.
+
 Links:
 - [pkgsrc.org](http://pkgsrc.org/)
 - [CVS](http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/)

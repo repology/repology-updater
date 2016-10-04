@@ -17,7 +17,6 @@
 
 import re
 import csv
-import sys
 
 from ..util import SplitPackageNameVersion
 from ..package import Package
@@ -46,7 +45,11 @@ class PkgsrcIndexParser():
                 pkg.name, pkg.fullversion = SplitPackageNameVersion(row[0])
                 pkg.version = SanitizeVersion(pkg.fullversion)
                 pkg.comment = row[3]
-                pkg.maintainers.append(row[5])
+
+                # sometimes use OWNER variable in which case there's no MAINTAINER
+                # OWNER doesn't get to INDEX
+                if row[5]:
+                    pkg.maintainers.append(row[5])
                 pkg.category = row[6].split(' ')[0]
 
                 result.append(pkg)
