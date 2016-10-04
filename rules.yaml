@@ -518,7 +518,7 @@
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", repos: [ freebsd, pkgsrc ] }
 - { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", repos: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "php-(.*)",               setname: "php:$1", repos: [ arch, fedora ] }
-- { namepat: "php5-(.*)",              setname: "php56:$1", repos: [ sisyphus ], "ignorever": True }
+- { namepat: "php5-(.*)",              setname: "php56:$1", repos: [ sisyphus ], "ignorever": true }
 - { namepat: "php5-(.*)",              setname: "php56:$1", repos: [ opensuse ] }
 
 # gstreamer plugins
