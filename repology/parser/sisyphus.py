@@ -15,13 +15,28 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from .freebsd import FreeBSDIndexParser
-from .debian import DebianSourcesParser
-from .gentoo import GentooGitParser
-from .pkgsrc import PkgsrcIndexParser
-from .openbsd import OpenBSDIndexParser
-from .arch import ArchDBParser
-from .spec import SpecParser
-from .opensuse import OpenSUSEPackageListParser
-from .chocolatey import ChocolateyParser
-from .sisyphus import SrcListClassicParser
+import os
+import subprocess
+
+from ..package import Package
+
+class SrcListClassicParser():
+    def __init__(self):
+        pass
+
+    def Parse(self, path):
+        result = []
+
+        with subprocess.Popen(["/tmp/pkglist-query", "%{name}|%{version}|%{packager}\\n", path], stdout = subprocess.PIPE, universal_newlines = True) as proc:
+            for line in proc.stdout:
+                fields = line.split('|')
+
+                pkg = Package()
+
+                pkg.name = fields[0]
+                pkg.version = fields[1]
+                pkg.maintainer = fields[2].strip()
+
+                result.append(pkg)
+
+        return result
