@@ -13,4 +13,11 @@ clean:
 	rm cutils/rpmcat
 
 check:
-	kwalify -lf schemas/rules.yaml rules.yaml
+	kwalify -lf schemas/rules.yaml rules.yaml | tee kwalify.log
+	@if grep -q INVALID kwalify.log; then \
+		echo "Validation failed"; \
+		rm -f kwalify.log; \
+		false; \
+	else \
+		rm -f kwalify.log; \
+	fi
