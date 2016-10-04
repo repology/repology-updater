@@ -18,15 +18,17 @@
 import os
 import gzip
 import bz2
+import lzma
 
 from repology.logger import NoopLogger
 from repology.www import Get
 
 class FileFetcher():
-    def __init__(self, *sources, gunzip = False, bunzip = False):
+    def __init__(self, *sources, gz = False, bz2 = False, xz = False):
         self.sources = sources
-        self.gunzip = gunzip
-        self.bunzip = bunzip
+        self.gz = gz
+        self.bz2 = bz2
+        self.xz = xz
 
     def DoFetch(self, statepath, update, logger):
         with open(statepath, "wb") as statefile:
@@ -34,12 +36,15 @@ class FileFetcher():
                 logger.Log("fetching " + source)
                 data = Get(source).content
 
-                if self.gunzip:
+                if self.gz:
                     logger.Log("  decompressing with gzip")
                     data = gzip.decompress(data)
-                elif self.bunzip:
+                elif self.bz2:
                     logger.Log("  decompressing with bz2")
                     data = bz2.decompress(data)
+                elif self.xz:
+                    logger.Log("  decompressing with xz")
+                    data = lzma.LZMADecompressor().decompress(data)
 
                 logger.Log("  saving")
                 statefile.write(data)

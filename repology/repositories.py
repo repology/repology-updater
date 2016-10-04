@@ -32,7 +32,7 @@ REPOSITORIES = [
     {
         'name': "FreeBSD",
         'repotype': 'freebsd',
-        'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip = True),
+        'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bz2 = True),
         'parser': FreeBSDIndexParser(),
         'link': 'http://www.freshports.org/{category}/{name}',
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
@@ -45,7 +45,7 @@ REPOSITORIES = [
             "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz",
-            gunzip = True
+            gz = True
         ),
         'parser': DebianSourcesParser(),
         'link': 'https://packages.debian.org/stable/{name}',
@@ -58,7 +58,7 @@ REPOSITORIES = [
             "http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz",
-            gunzip = True
+            gz = True
         ),
         'parser': DebianSourcesParser(),
         'link': 'https://packages.debian.org/testing/{name}',
@@ -71,7 +71,7 @@ REPOSITORIES = [
             "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz",
-            gunzip = True
+            gz = True
         ),
         'parser': DebianSourcesParser(),
         'link': 'https://packages.debian.org/unstable/{name}',
@@ -86,7 +86,7 @@ REPOSITORIES = [
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz",
-            gunzip = True
+            gz = True
         ),
         'parser': DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/xenial/{name}',
@@ -100,7 +100,7 @@ REPOSITORIES = [
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz",
-            gunzip = True
+            gz = True
         ),
         'parser': DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/yakkety/{name}',
