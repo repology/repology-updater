@@ -1,5 +1,6 @@
-sudo: true
 language: python
+sudo: true
+dist: trusty
 python:
   - "3.4"
 before_install:

@@ -7,7 +7,7 @@ LDFLAGS+=	`pkg-config --libs rpm`
 all: cutils/rpmcat
 
 cutils/rpmcat: cutils/rpmcat.c
-	${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS} -o cutils/rpmcat cutils/rpmcat.c
+	${CC} cutils/rpmcat.c -o cutils/rpmcat ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}
 
 clean:
 	rm cutils/rpmcat
