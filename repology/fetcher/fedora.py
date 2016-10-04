@@ -23,17 +23,24 @@ from repology.logger import NoopLogger
 from repology.www import Get
 
 class FedoraFetcher():
-    def __init__(self):
+    def __init__(self, apiurl, giturl):
+        self.apiurl = apiurl
+        self.giturl = giturl
         pass
 
     def LoadSpec(self, package, statepath, logger):
-        specurl = "http://pkgs.fedoraproject.org/cgit/rpms/%s.git/plain/%s.spec" % (package, package)
+        specurl = self.giturl + "/{0}.git/plain/{0}.spec".format(package)
 
         logger.Log("  getting spec from {}".format(specurl))
 
         r = Get(specurl, check_status = False)
         if r.status_code != 200:
-            logger.Log("    failed: {}".format(r.status_code)) # XXX: check .dead.package, instead throw
+            deadurl = self.giturl + "/{0}.git/plain/dead.package".format(package)
+            dr = Get(deadurl, check_status = False)
+            if dr.status_code == 200:
+                logger.Log("    dead: " + ';'.join(dr.text.split('\n')))
+            else:
+                logger.Log("    failed: {}".format(r.status_code)) # XXX: check .dead.package, instead throw
             return
 
         with open(os.path.join(statepath, package + ".spec"), "wb") as file:
@@ -43,7 +50,7 @@ class FedoraFetcher():
         page = 1
 
         while True:
-            pageurl = "https://admin.fedoraproject.org/pkgdb/api/packages/?page={}".format(page)
+            pageurl = self.apiurl + "packages/?page={}".format(page)
             logger.Log("getting page {} from {}".format(page, pageurl))
             pagedata = json.loads(Get(pageurl).text)
 
