@@ -208,22 +208,22 @@
 - { name: axel,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: bacula,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: beacon,                                                    repos: [ chocolatey ], ignore: true }
-- { name: bing,                                                      repos: [ chocolatey ], ignore: true }
+- { name: Bing,                                                      repos: [ chocolatey ], ignore: true }
 - { name: blat,                                                      repos: [ chocolatey ], ignore: true }
 - { name: blender,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: blobby2,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: brewtarget,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: bzr,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: celestia,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: charles,                                                   repos: [ chocolatey ], ignore: true }
+- { name: Charles,                                                   repos: [ chocolatey ], ignore: true }
 - { name: claws-mail,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: Clover,                                                    repos: [ chocolatey ], ignore: true }
 - { name: Cntlm,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: codelite,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: coffeescript,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: CoffeeScript,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: composer,                                                  repos: [ chocolatey ], ignore: true }
 - { name: copyq,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: coq,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: Coq,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: ctags,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: dfu-util,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: dia,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
@@ -232,14 +232,14 @@
 - { name: duck,                                                      repos: [ chocolatey ], ignore: true }
 - { name: ekiga,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: elinks,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: emacs,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: Emacs,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: emulationstation,            verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: err,                                                       repos: [ chocolatey ], ignore: true }
 - { name: evince,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: expresso,                                                  repos: [ chocolatey ], ignore: true }
-- { name: fbreader,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: FBReader,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: ffe,                                                       repos: [ chocolatey ], ignore: true }
-- { name: flare,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: flare,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: freefilesync,                verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: freenet,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: gajim,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
@@ -247,65 +247,65 @@
 - { name: ganttproject,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: gatling,                                                   repos: [ chocolatey ], ignore: true }
 - { name: getopt,                                                    repos: [ chocolatey ], ignore: true }
-- { name: glassfish,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: Glassfish,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: glfw3,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: gnatsd,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: gsutil,                                                    repos: [ chocolatey ], ignorever: true }
-- { name: gsview,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: gyazo,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: GSView,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: Gyazo,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: handbrake,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: hdparm,                                                    repos: [ chocolatey ], ignore: true }
-- { name: hercules,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: Hercules,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: hexchat,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: hexedit,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: HexEdit,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: hfsexplorer,                 verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: hotswap,                                                   repos: [ chocolatey ], ignore: true }
-- { name: hxd,                                                       repos: [ chocolatey ], ignore: true }
+- { name: HxD,                                                       repos: [ chocolatey ], ignore: true }
 - { name: ironpython,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: jedit,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: jEdit,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: jmol,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: jpegoptim,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: krita,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: launchy,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: leechcraft,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: Leechcraft,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: libjpeg-turbo,               verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: logrotate,                                                 repos: [ chocolatey ], ignore: true }
+- { name: LogRotate,                                                 repos: [ chocolatey ], ignore: true }
 - { name: luckybackup,                 verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: lyx,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: maven,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: mc,                          verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: meshlab,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: MeshLab,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: minetest,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: mucommander,                 verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: munin-node,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: nagstamon,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: nant,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: Nagstamon,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: NAnt,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: nats-streaming-server,       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: nautilus,                                                  repos: [ chocolatey ], ignore: true }
 - { name: nbfc,                                                      repos: [ chocolatey ], ignore: true }
 - { name: ncftp,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: netbeans,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: NetBeans,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: newt,                                                      repos: [ chocolatey ], ignore: true }
 - { name: nextcloud-client,            verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: npm,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: nsis,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: nvu,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: ocaml,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: opencv,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: OpenCV,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: openssh,                                                   repos: [ chocolatey ], ignore: true }
 - { name: openttd,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: optipng,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: OptiPNG,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: pal,                                                       repos: [ chocolatey ], ignore: true }
 - { name: pan,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: pandoc,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: papercut,                                                  repos: [ chocolatey ], ignore: true }
-- { name: passwordsafe,                                              repos: [ chocolatey ], ignore: true }
+- { name: passwordSafe,                                              repos: [ chocolatey ], ignore: true }
 - { name: pcsx2,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: pdfedit,                                                   repos: [ chocolatey ], ignorever: true }
 - { name: pgadmin3,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: pidgin,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: pinta,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: play,                                                      repos: [ chocolatey ], ignorever: true }
+- { name: Pinta,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: Play,                                                      repos: [ chocolatey ], ignorever: true }
 - { name: postgresql93,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: psi,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: pvm,                                                       repos: [ chocolatey ], ignore: true }
@@ -315,7 +315,7 @@
 - { name: qtox,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: redis,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: retroshare,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: rssowl,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: RSSOwl,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: rsync,                                                     repos: [ chocolatey ], ignorever: true }
 - { name: rust,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: simutrans,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
@@ -326,36 +326,36 @@
 - { name: snes9x,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: soapui,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: solfege,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: speedcrunch,                 verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: SpeedCrunch,                 verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: speex,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: spotify,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: sqlitebrowser,               verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: squashfs,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: sumo,                                                      repos: [ chocolatey ], ignore: true }
 - { name: suricata,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: swi-prolog,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: SWI-Prolog,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: sylpheed,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: sysmon,                                                    repos: [ chocolatey ], ignore: true }
 - { name: tcc,                                                       repos: [ chocolatey ], ignore: true }
 - { name: tcptrace,                                                  repos: [ chocolatey ], ignore: true }
-- { name: tcpview,                                                   repos: [ chocolatey ], ignore: true }
+- { name: TcpView,                                                   repos: [ chocolatey ], ignore: true }
 - { name: termite,                                                   repos: [ chocolatey ], ignore: true }
 - { name: tightvnc,                                                  repos: [ chocolatey ], ignorever: true }
 - { name: tiled,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: tipp10,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: tktz,                                                      repos: [ chocolatey ], ignore: true }
 - { name: transgui,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: transmission-qt,             verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: transmission-qt,             verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: truecrypt,                   verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: usbview,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: velocity,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: virt-viewer,                 verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: virtualbox,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: visualboyadvance,            verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: VisualBoyAdvance,            verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: wavesurfer,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: webdeploy,                                                 repos: [ chocolatey ], ignore: true }
-- { name: weka,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: wget,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: Weka,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: Wget,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: which,                                                     repos: [ chocolatey ], ignore: true }
 - { name: whois,                                                     repos: [ chocolatey ], ignore: true }
 - { name: winff,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
