@@ -307,26 +307,28 @@ class RepositoryManager:
         def Parser(repository):
             logger = self.logger.GetPrefixed(repository['name'] + ": ")
             logger.Log("parsing started")
-            packages_by_repo[repository['name']] = repository['parser'].Parse(self.GetStatePath(repository))
-            logger.Log("parsing complete")
+            repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
+            packages_by_repo[repository['name']] = repo_packages
+            logger.Log("parsing complete, {} packages".format(len(repo_packages)))
 
         self.ForEach(Parser, tags, repositories)
 
         self.logger.Log("merging started")
         packages = self.Mix(packages_by_repo, name_transformer)
-        self.logger.Log("merging complete")
+        self.logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages
 
     def ParseAndSerialize(self, tags = None, repositories = None):
         def ParserSerializer(repository):
             logger = self.logger.GetPrefixed(repository['name'] + ": ")
             logger.Log("parsing + saving started")
+            repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
             pickle.dump(
-                repository['parser'].Parse(self.GetStatePath(repository)),
+                repo_packages,
                 open(self.GetSerializedPath(repository, tmp = True), "wb")
             )
             os.rename(self.GetSerializedPath(repository, tmp = True), self.GetSerializedPath(repository))
-            logger.Log("parsing + saving complete")
+            logger.Log("parsing + saving complete, {} packages".format(len(repo_packages)))
 
         self.ForEach(ParserSerializer, tags, repositories)
 
@@ -336,12 +338,13 @@ class RepositoryManager:
         def Deserializer(repository):
             logger = self.logger.GetPrefixed(repository['name'] + ": ")
             logger.Log("loading started")
-            packages_by_repo[repository['name']] = pickle.load(open(self.GetSerializedPath(repository), "rb"))
-            logger.Log("loading complete")
+            repo_packages = pickle.load(open(self.GetSerializedPath(repository), "rb"))
+            packages_by_repo[repository['name']] = repo_packages
+            logger.Log("loading complete, {} packages".format(len(repo_packages)))
 
         self.ForEach(Deserializer, tags, repositories)
 
         self.logger.Log("merging started")
         packages = self.Mix(packages_by_repo, name_transformer)
-        self.logger.Log("merging complete")
+        self.logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages
