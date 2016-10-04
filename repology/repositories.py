@@ -34,6 +34,7 @@ REPOSITORIES = [
         'repotype': 'freebsd',
         'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bunzip = True),
         'parser': FreeBSDIndexParser(),
+        'link': 'http://www.freshports.org/{category}/{name}',
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
 
@@ -47,6 +48,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
+        'link': 'https://packages.debian.org/stable/{name}',
         'tags': [ 'all', 'debian', 'fastfetch' ],
     },
     {
@@ -59,6 +61,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
+        'link': 'https://packages.debian.org/testing/{name}',
         'tags': [ 'all', 'debian', 'fastfetch' ],
     },
     {
@@ -71,6 +74,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
+        'link': 'https://packages.debian.org/unstable/{name}',
         'tags': [ 'all', 'demo', 'debian', 'production', 'fastfetch' ],
     },
 
@@ -85,6 +89,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
+        'link': 'http://packages.ubuntu.com/xenial/{name}',
         'tags': [ 'all', 'ubuntu', 'fastfetch' ],
     },
     {
@@ -98,6 +103,7 @@ REPOSITORIES = [
             gunzip = True
         ),
         'parser': DebianSourcesParser(),
+        'link': 'http://packages.ubuntu.com/yakkety/{name}',
         'tags': [ 'all', 'demo', 'production', 'ubuntu', 'fastfetch' ],
     },
 
@@ -106,6 +112,7 @@ REPOSITORIES = [
         'repotype': 'gentoo',
         'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
         'parser': GentooGitParser(),
+        'link': 'https://packages.gentoo.org/packages/{category}/{name}',
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
@@ -114,6 +121,7 @@ REPOSITORIES = [
         'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
         'parser': PkgSrcReadmeAllParser(),
         'incomplete': True,
+        'link': 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}',
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
@@ -121,6 +129,7 @@ REPOSITORIES = [
         'repotype': 'openbsd',
         'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
         'parser': OpenBSDIndexParser(),
+        'link': 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}',
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
@@ -132,6 +141,7 @@ REPOSITORIES = [
             "http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz"
         ),
         'parser': ArchDBParser(),
+        'link': 'https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}',
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },
     {
@@ -143,6 +153,7 @@ REPOSITORIES = [
         ),
         'parser': SpecParser(),
         'incomplete': True,
+        'link': 'http://pkgs.fedoraproject.org/cgit/rpms/{name}.git/tree/',
         'tags': [ 'all', 'preproduction', 'slowfetch' ],
     },
     # These parse binary package lists, and produce results not suitable for comparison
@@ -181,6 +192,7 @@ REPOSITORIES = [
         'fetcher': ChocolateyFetcher("https://chocolatey.org/api/v2/"),
         'parser': ChocolateyParser(),
         'shadow': True,
+        'link': 'https://chocolatey.org/packages/{name}',
         'tags': [ 'all', 'preproduction', 'slowfetch' ],
     },
 ]
