@@ -29,7 +29,6 @@ class Package:
         self.license = None
 
         self.ignoreversion = False
-        pass
 
 class MetaPackage:
     def __init__(self, name):
@@ -37,7 +36,6 @@ class MetaPackage:
         self.packages = {}
         self.versions = {}
         self.maintainers = set()
-        pass
 
     def GetName(self):
         return self.name
