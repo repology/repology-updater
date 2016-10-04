@@ -47,6 +47,7 @@ report and a static website generator for [repology.org](repology.org).
   - [requests](http://python-requests.org/) (for fetching some repository data)
 - [wget](https://www.gnu.org/software/wget/) (for fetching some repository data)
 - [git](https://git-scm.com/) (for fetching some repository data)
+- [librpm](http://www.rpm.org/) (for parsing some repository data)
 
 ### Usage
 
@@ -172,6 +173,7 @@ directory which is created if it doesn't exist.
 | Arch          | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
 | Fedora        | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
 | OpenSUSE      | ✔    | ✔       |         |               |              |          |         |
+| Sisyphus      | ✔    | ✔       |         | ✔             |              | ✔        |         |
 | Chocolatey    | ✔    | ✔       | ✔       |               |              | ✔        |         |
 
 ### FreeBSD
@@ -255,6 +257,10 @@ in other repos we'll have ```libfooN``` ```libfoo-devel``` and
 ```libfooN-32bit``` here. Needs to be switched to another source.
 For now, this is enabled in shadow mode, e.g. unique packages in
 this repository are ignored.
+
+### Sisyphus
+
+Parses srclist.classic files with custom C utility.
 
 ### Chocolatey
 

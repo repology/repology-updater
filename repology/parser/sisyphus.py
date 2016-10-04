@@ -22,12 +22,13 @@ from ..package import Package
 
 class SrcListClassicParser():
     def __init__(self):
-        pass
+        if not os.path.exists("cutils/rpmcat"):
+            raise RuntimeError("cutils/rpmcat does not exist, please run `make' in project root directory")
 
     def Parse(self, path):
         result = []
 
-        with subprocess.Popen(["/tmp/pkglist-query", "%{name}|%{version}|%{packager}\\n", path], stdout = subprocess.PIPE, universal_newlines = True) as proc:
+        with subprocess.Popen(["cutils/rpmcat", path], stdout = subprocess.PIPE, universal_newlines = True) as proc:
             for line in proc.stdout:
                 fields = line.split('|')
 
@@ -35,7 +36,7 @@ class SrcListClassicParser():
 
                 pkg.name = fields[0]
                 pkg.version = fields[1]
-                pkg.maintainer = fields[2].strip()
+                pkg.maintainer = fields[2].strip() # XXX: may have multiple maintainers
 
                 result.append(pkg)
 
