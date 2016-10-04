@@ -442,10 +442,10 @@
 - { namepat: "p5-(.*)",                setname: "perl:$1", repos: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", repos: [ debian ] }
 - { category: dev-perl,                setname: "perl:$0", repos: [ gentoo ], ignorever: true }
-- { namepat: "perl-(.*)",              setname: "perl:$1", repos: [ arch, fedora, opensuse ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", repos: [ arch, fedora, opensuse, sisyphus ] }
 
 # Ruby
-- { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch, fedora ] }
+- { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch, fedora, sisyphus ] }
 - { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", repos: [ freebsd, openbsd, pkgsrc ] }
 - { namepat: "ruby[0-9]\\.[0-9]-rubygem-(.*)", setname: "ruby:$1", repos: [ opensuse ] }
@@ -466,6 +466,7 @@
 - { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", repos: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", repos: [ openbsd ] }
 - { namepat: "python-(.*)",            setname: "python:$1", repos: [ debian ] }
+- { namepat: "python3?-module-(.*)",   setname: "python:$1", repos: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", repos: [ arch ] }
 - { namepat: "python3?-(.*)",          setname: "python:$1", repos: [ fedora, opensuse ] }
 - { category: dev-python,              setname: "python:$0", repos: [ gentoo ] }
@@ -502,7 +503,7 @@
 
 # octave
 - { namepat: "octave-forge-(.*)",      setname: "octave:$1", repos: [ freebsd ] }
-- { namepat: "octave-(.*)",            setname: "octave:$1", repos: [ debian ] }
+- { namepat: "octave-(.*)",            setname: "octave:$1", repos: [ debian, sisyphus ] }
 
 # xorg drivers
 - { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", repos: [ freebsd, gentoo, pkgsrc, arch, opensuse ] }
@@ -512,10 +513,12 @@
 - { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", repos: [ gentoo ] }
 - { category: dev-php,                 setname: "php:$0", repos: [ gentoo ] }
 - { namepat: "php-(.*)",               setname: "php:$1", repos: [ debian ] }
-- { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", repos: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", repos: [ freebsd, pkgsrc, openbsd, sisyphus ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", repos: [ freebsd, pkgsrc ] }
 - { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", repos: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "php-(.*)",               setname: "php:$1", repos: [ arch, fedora ] }
+- { namepat: "php5-(.*)",              setname: "php56:$1", repos: [ sisyphus ], "ignorever": True }
+- { namepat: "php5-(.*)",              setname: "php56:$1", repos: [ opensuse ] }
 
 # gstreamer plugins
 - { namepat: "gst-plugins-(.*)",       setname: "gstreamer1:$1", repos: [ gentoo, debian ] }
@@ -527,7 +530,7 @@
 # Apache modules
 - { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", repos: [ freebsd, openbsd, pkgsrc ] }
 - { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", repos: [ gentoo ] }
-- { namepat: "mod-(.*)",               setname: "apmod:$1", repos: [ debian ] }
+- { namepat: "mod-(.*)",               setname: "apmod:$1", repos: [ debian, sisyphus ] }
 - { namepat: "mod_(.*)",               setname: "apmod:$1", repos: [ freebsd, arch ] }
 - { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1", repos: [ debian ] }
 
