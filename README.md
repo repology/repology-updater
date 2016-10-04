@@ -48,6 +48,10 @@ report and a static website generator for [repology.org](repology.org).
 - [wget](https://www.gnu.org/software/wget/) (for fetching some repository data)
 - [git](https://git-scm.com/) (for fetching some repository data)
 - [librpm](http://www.rpm.org/) (for parsing some repository data)
+- pkg-config
+
+Repology includes some C utilites, to build them run ```make``` in
+project directory.
 
 ### Usage
 
