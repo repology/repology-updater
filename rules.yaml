@@ -252,6 +252,7 @@
 - { name: gnatsd,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: gsutil,                                                    repos: [ chocolatey ], ignorever: true }
 - { name: GSView,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: graphviz,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: Gyazo,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: handbrake,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: hdparm,                                                    repos: [ chocolatey ], ignore: true }
