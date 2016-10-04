@@ -16,6 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+import csv
+import sys
 
 from ..util import SplitPackageNameVersion
 from ..package import Package
@@ -27,55 +29,25 @@ def SanitizeVersion(version):
 
     return version
 
-class PkgSrcPackagesSHA512Parser():
+class PkgsrcIndexParser():
     def __init__(self):
         pass
 
     def Parse(self, path):
         result = []
+
+        csv.field_size_limit(1024*1024)
 
         with open(path) as file:
-            for line in file:
-                pkgname = line[12:-137]
-
-                if pkgname.find('-') == -1:
-                    continue
-
+            reader = csv.reader(file, delimiter='|')
+            for row in reader:
                 pkg = Package()
 
-                pkg.name, pkg.fullversion = SplitPackageNameVersion(pkgname)
+                pkg.name, pkg.fullversion = SplitPackageNameVersion(row[0])
                 pkg.version = SanitizeVersion(pkg.fullversion)
-
-                result.append(pkg)
-
-        return result
-
-class PkgSrcReadmeAllParser():
-    def __init__(self):
-        pass
-
-    def Parse(self, path):
-        result = []
-
-        with open(path, encoding="utf-8") as file:
-            pkg = Package()
-            for line in file:
-                line = line[:-1]
-
-                if line.find('(for sorting)') == -1:
-                    continue
-
-                parts = re.split("<[^<>]+>", line)
-
-                if len(parts) != 10:
-                    continue
-
-                pkg = Package()
-
-                pkg.name, pkg.fullversion = SplitPackageNameVersion(parts[4])
-                pkg.version = SanitizeVersion(pkg.fullversion)
-                pkg.category = parts[7]
-                pkg.comment = parts[9]
+                pkg.comment = row[3]
+                pkg.maintainers.append(row[5])
+                pkg.category = row[6].split(' ')[0]
 
                 result.append(pkg)
 

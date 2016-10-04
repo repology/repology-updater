@@ -167,7 +167,7 @@ directory which is created if it doesn't exist.
 | FreeBSD       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | Debian/Ubuntu | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
 | Gentoo        | ✔    | ✔       |         |               | ✔            |          |         |
-| pkgsrc        | ✔    | ✔       | ✔       |               | ✔            |          |         |
+| pkgsrc        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | OpenBSD       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | Arch          | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
 | Fedora        | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
@@ -208,11 +208,7 @@ Links:
 
 ### pkgsrc
 
-Is capable of generating INDEX file similar to that of FreeBSD, but
-it takes too much time (hours). For now, we parse README-all list
-from NetBSD.
-
-TODO: Generate and parse INDEX, even if it's done infrequently.
+Parses INDEX file (format similar to FreeBSD).
 
 Links:
 - [pkgsrc.org](http://pkgsrc.org/)

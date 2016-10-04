@@ -118,9 +118,8 @@ REPOSITORIES = [
     {
         'name': 'pkgsrc',
         'repotype': 'pkgsrc',
-        'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/README-all.html"),
-        'parser': PkgSrcReadmeAllParser(),
-        'incomplete': True,
+        'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX"),
+        'parser': PkgsrcIndexParser(),
         'link': 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}',
         'tags': [ 'all', 'demo', 'production', 'fastfetch' ],
     },

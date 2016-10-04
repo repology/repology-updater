@@ -18,7 +18,7 @@
 from .freebsd import FreeBSDIndexParser
 from .debian import DebianSourcesParser
 from .gentoo import GentooGitParser
-from .pkgsrc import PkgSrcPackagesSHA512Parser, PkgSrcReadmeAllParser
+from .pkgsrc import PkgsrcIndexParser
 from .openbsd import OpenBSDIndexParser
 from .arch import ArchDBParser
 from .spec import SpecParser
