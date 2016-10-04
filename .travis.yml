@@ -10,7 +10,8 @@ before_install:
 script:
   # Fetching from travis would be too heavy, so just
   # perform syntax check
+  - make
+  - make check
   - ./repology-update.py --help
   - ./repology-report.py --help
   - ./repology-gensite.py --help
-  - kwalify -lf schemas/rules.yaml rules.yaml

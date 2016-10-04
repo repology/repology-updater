@@ -40,3 +40,4 @@ sequence:
               - openbsd
               - opensuse
               - pkgsrc
+              - sisyphus

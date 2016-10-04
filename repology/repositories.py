@@ -184,7 +184,17 @@ REPOSITORIES = [
         'incomplete': True,
         'tags': [ 'all', 'opensuse', 'fastfetch' ],
     },
-
+    {
+        'name': 'Sisyphus',
+        'repotype': 'sisyphus',
+        'fetcher': FileFetcher(
+            "http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/noarch/base/srclist.classic.xz",
+            "http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/base/srclist.classic.xz",
+            xz = True
+        ),
+        'parser': SrcListClassicParser(),
+        'tags': [ 'all', 'preproduction', 'fastfetch' ],
+    },
     {
         'name': 'Chocolatey',
         'repotype': 'chocolatey',
