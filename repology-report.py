@@ -90,7 +90,7 @@ def Main():
     if options.logfile:
         logger = FileLogger(options.logfile)
 
-    tags = [ tag.split(',') for tag in options.tag ]
+    tags = [tag.split(',') for tag in options.tag] if options.tag else []
 
     nametrans = NameTransformer(options.rules)
     repoman = RepositoryManager(options.statedir, enable_shadow = not options.no_shadow, logger = logger)
