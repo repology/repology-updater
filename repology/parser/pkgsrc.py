@@ -39,7 +39,7 @@ class PkgsrcIndexParser():
 
         csv.field_size_limit(1024*1024)
 
-        with open(path) as file:
+        with open(path, encoding='utf-8') as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
                 pkg = Package()

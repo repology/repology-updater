@@ -34,7 +34,7 @@ class ChocolateyFetcher():
             logger.Log("getting " + nextpageurl)
 
             text = Get(nextpageurl).text
-            with open(os.path.join(statepath, "{}.xml".format(numpage)), "w") as pagefile:
+            with open(os.path.join(statepath, "{}.xml".format(numpage)), "w", encoding="utf-8") as pagefile:
                 pagefile.write(text)
 
             # parse next page
