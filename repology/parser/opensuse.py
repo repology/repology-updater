@@ -15,34 +15,29 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
+import os
+import xml.etree.ElementTree
 
-from ..util import SplitPackageNameVersion
 from ..package import Package
 
 
-class OpenSUSEPackageListParser():
+class OpenSUSERepodataParser():
     def __init__(self):
         pass
 
     def Parse(self, path):
         result = []
 
-        with open(path, encoding="utf-8") as file:
-            for line in file:
-                line = line.strip()
+        root = xml.etree.ElementTree.parse(path)
 
-                if line.find('/icons/rpm.png') == -1:
-                    continue
+        for entry in root.findall("{http://linux.duke.edu/metadata/common}package"):
+            pkg = Package()
 
-                match = re.search("<a href=\"([^\"]+)-[0-9]+\.[0-9]+\.[^.]+\.rpm\">", line)
+            pkg.name = entry.find("{http://linux.duke.edu/metadata/common}name").text
+            pkg.version = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
+            pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
+            pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
 
-                if match:
-                    pkg = Package()
-
-                    pkg.name, pkg.fullversion = SplitPackageNameVersion(match.group(1))
-                    pkg.version = pkg.fullversion
-
-                    result.append(pkg)
+            result.append(pkg)
 
         return result

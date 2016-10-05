@@ -20,3 +20,4 @@ from .git import GitFetcher
 from .arch import ArchDBFetcher
 from .fedora import FedoraFetcher
 from .chocolatey import ChocolateyFetcher
+from .opensuse import OpenSUSERepodataFetcher

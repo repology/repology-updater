@@ -155,34 +155,16 @@ REPOSITORIES = [
         'link': 'http://pkgs.fedoraproject.org/cgit/rpms/{name}.git/tree/',
         'tags': ['all', 'preproduction', 'slowfetch'],
     },
-    # These parse binary package lists, and produce results not suitable for comparison
-    # with other repos. For instance, for each `libfoo' other repos have these will
-    # have `libfoo-devel', `libfooN` and `libfooN-32bit`. Merging these with rules
-    # is incorrect and errorprone, so switching this to getting and parsing a bunch
-    # of .specs is needed
     {
         'name': 'OpenSUSE Tumbleweed',
         'repotype': 'opensuse',
-        'fetcher': FileFetcher(
-            "http://download.opensuse.org/tumbleweed/repo/oss/suse/noarch/",
-            "http://download.opensuse.org/tumbleweed/repo/oss/suse/x86_64/"
+        'fetcher': OpenSUSERepodataFetcher(
+            "http://download.opensuse.org/tumbleweed/repo/src-oss/suse/"
         ),
-        'parser': OpenSUSEPackageListParser(),
+        'parser': OpenSUSERepodataParser(),
         'shadow': True,
         'incomplete': True,
         'tags': ['all', 'preproduction', 'opensuse', 'fastfetch'],
-    },
-    {
-        'name': 'OpenSUSE Leap',
-        'repotype': 'opensuse',
-        'fetcher': FileFetcher(
-            "http://download.opensuse.org/distribution/leap/42.1/repo/oss/suse/noarch/",
-            "http://download.opensuse.org/distribution/leap/42.1/repo/oss/suse/x86_64/"
-        ),
-        'parser': OpenSUSEPackageListParser(),
-        'shadow': True,
-        'incomplete': True,
-        'tags': ['all', 'opensuse', 'fastfetch'],
     },
     {
         'name': 'ALT Sisyphus',
