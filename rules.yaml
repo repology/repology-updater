@@ -26,7 +26,7 @@
 - { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               repos: [ freebsd ]  }
 - { name: adzap,                       setname: adzapper,                 repos: [ freebsd, pkgsrc ] }
 - { name: alienarena,                  setname: alien-arena,              repos: [ gentoo, arch, fedora ] }
-- { name: alienarena-data,             setname: alien-arena-data,         repos: [ fedora ] }
+- { name: alienarena-data,             setname: alien-arena-data,         repos: [ arch ] }
 - { name: armagetron,                  setname: armagetronad,             repos: [ freebsd, opensuse ] }
 - { name: atk1.0,                      setname: atk,                      repos: [ debian ]  }
 - { name: atk2mm,                      setname: atkmm,                    repos: [ openbsd ]  }
@@ -35,13 +35,12 @@
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            repos: [ freebsd ] }
 - { name: billard-gl,                  setname: billardgl,                repos: [ debian ]  }
 - { name: blitz,                       setname: blitz++,                  repos: [ gentoo, fedora, opensuse ] } # XXX: recheck
-- { name: blobby2,                     setname: blobby,                   repos: [ fedora ] } # XXX: recheck
+- { name: blobby2,                     setname: blobby,                   repos: [ arch ] } # XXX: recheck
 - { name: blockout2,                   setname: blockout,                 repos: [ debian ]  }
-- { name: blockoutii,                  setname: blockout,                 repos: [ fedora ]  } # XXX: recheck
+- { name: BlockOutII,                  setname: blockout,                 repos: [ fedora ]  } # XXX: recheck
 - { name: boaconstructor,              setname: boa-constructor,          repos: [ freebsd ] }
 - { name: boost-all,                   setname: boost,                    repos: [ freebsd ] }
 - { namepat: "boost1.[0-9]+",          setname: boost,                    repos: [ debian ] }
-- { namepat: "boost-1-[0-9]+",         setname: boost,                    repos: [ opensuse ] }
 - { name: botan1.10,                   setname: botan,                    repos: [ debian ]  }
 - { name: botan110,                    setname: botan,                    repos: [ freebsd ] }
 - { name: bouncycastle,                setname: bouncycastle14,           repos: [ freebsd ] } # move away
@@ -225,7 +224,7 @@
 - { name: Bing,                                                      repos: [ chocolatey ], ignore: true }
 - { name: blat,                                                      repos: [ chocolatey ], ignore: true }
 - { name: blender,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: blobby2,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: blobby2,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true, setname: "blobby" }
 - { name: brewtarget,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: bzr,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: celestia,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
@@ -266,7 +265,7 @@
 - { name: gnatsd,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: gsutil,                                                    repos: [ chocolatey ], ignorever: true }
 - { name: GSView,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: graphviz,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
+- { name: graphviz,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: Gyazo,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: handbrake,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: hdparm,                                                    repos: [ chocolatey ], ignore: true }
