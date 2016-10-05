@@ -185,7 +185,7 @@ REPOSITORIES = [
         'tags': ['all', 'opensuse', 'fastfetch'],
     },
     {
-        'name': 'Sisyphus',
+        'name': 'ALT Sisyphus',
         'repotype': 'sisyphus',
         'fetcher': FileFetcher(
             "http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/noarch/base/srclist.classic.xz",
