@@ -162,8 +162,6 @@ REPOSITORIES = [
             "http://download.opensuse.org/tumbleweed/repo/src-oss/suse/"
         ),
         'parser': OpenSUSERepodataParser(),
-        'shadow': True,
-        'incomplete': True,
         'tags': ['all', 'preproduction', 'opensuse', 'fastfetch'],
     },
     {
