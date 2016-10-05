@@ -20,10 +20,12 @@ import pprint
 
 import yaml
 
+
 class MatchResult:
     none = 0,
     match = 1,
     ignore = 2
+
 
 class NameTransformer:
     def __init__(self, rulespath):
@@ -33,7 +35,7 @@ class NameTransformer:
         with open(rulespath) as file:
             self.rules = yaml.safe_load(file)
 
-        pp = pprint.PrettyPrinter(width = 10000)
+        pp = pprint.PrettyPrinter(width=10000)
         for rule in self.rules:
             # save pretty-print before all transformations
             rule['pretty'] = pp.pformat(rule)
@@ -41,7 +43,7 @@ class NameTransformer:
             # convert some fields to lists
             for field in ['category']:
                 if field in rule and not isinstance(rule[field], list):
-                    rule[field] = [ rule[field] ]
+                    rule[field] = [rule[field]]
 
             # compile regexps
             for field in ['namepat', 'verpat']:
@@ -107,9 +109,11 @@ class NameTransformer:
             if 'namepat' in rule:
                 match = rule['namepat'].match(package.name)
             if match:
-                return MatchResult.match, self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
+                return MatchResult.match, \
+                       self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
             else:
-                return MatchResult.match, self.dollar0.sub(package.name, rule['setname'])
+                return MatchResult.match, \
+                       self.dollar0.sub(package.name, rule['setname'])
 
         if 'pass' in rule:
             return MatchResult.match, package.name
@@ -119,7 +123,7 @@ class NameTransformer:
     def TransformName(self, package, repotype):
         # apply first matching rule
         for rule in self.rules:
-            if 'repos' in rule and not repotype in rule['repos']:
+            if 'repos' in rule and repotype not in rule['repos']:
                 continue
 
             result, name = self.ApplyRule(rule, package)

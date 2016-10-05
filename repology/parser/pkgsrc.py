@@ -21,12 +21,14 @@ import csv
 from ..util import SplitPackageNameVersion
 from ..package import Package
 
+
 def SanitizeVersion(version):
     match = re.match("(.*)nb[0-9]+$", version)
-    if not match is None:
+    if match is not None:
         version = match.group(1)
 
     return version
+
 
 class PkgsrcIndexParser():
     def __init__(self):

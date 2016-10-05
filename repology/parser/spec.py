@@ -20,6 +20,7 @@ import sys
 
 from ..package import Package
 
+
 class SpecParser():
     def __init__(self):
         pass
@@ -38,7 +39,7 @@ class SpecParser():
                     for line in specfile:
                         line = line.strip()
 
-                        if line.find("%") != -1: # substitudes: ignore
+                        if line.find("%") != -1:  # substitudes: ignore
                             continue
 
                         if line.startswith('Name:') and not pkg.name:

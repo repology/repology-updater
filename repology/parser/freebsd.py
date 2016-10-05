@@ -20,6 +20,7 @@ import csv
 from ..util import SplitPackageNameVersion
 from ..package import Package
 
+
 def SanitizeVersion(version):
     pos = version.rfind(',')
     if pos != -1:
@@ -31,6 +32,7 @@ def SanitizeVersion(version):
         version = version[0:pos]
 
     return version
+
 
 class FreeBSDIndexParser():
     def __init__(self):

@@ -21,6 +21,7 @@ import fcntl
 import time
 import sys
 
+
 class NoopLogger:
     def __init__(self):
         pass
@@ -31,8 +32,9 @@ class NoopLogger:
     def GetPrefixed(self, prefix):
         return NoopLogger()
 
+
 class FileLogger:
-    def __init__(self, path, prefix = None):
+    def __init__(self, path, prefix=None):
         self.path = path
         self.prefix = prefix
         pass
@@ -41,19 +43,23 @@ class FileLogger:
         prefixstr = self.prefix if self.prefix else ""
         with open(self.path, "a") as logfile:
             fcntl.flock(logfile, fcntl.LOCK_EX)
-            print(time.strftime("%b %d %T ") + prefixstr + message, file = logfile)
+            print(time.strftime("%b %d %T ") + prefixstr + message,
+                  file=logfile)
 
     def GetPrefixed(self, prefix):
-        return FileLogger(self.path, self.prefix + prefix if self.prefix else prefix)
+        return FileLogger(self.path,
+                          self.prefix + prefix if self.prefix else prefix)
+
 
 class StderrLogger:
-    def __init__(self, prefix = None):
+    def __init__(self, prefix=None):
         self.prefix = prefix
         pass
 
     def Log(self, message):
         prefixstr = self.prefix if self.prefix else ""
-        print(time.strftime("%b %d %T ") + prefixstr + message, file = sys.stderr)
+        print(time.strftime("%b %d %T ") + prefixstr + message,
+              file=sys.stderr)
 
     def GetPrefixed(self, prefix):
         return StderrLogger(self.prefix + prefix if self.prefix else prefix)

@@ -17,13 +17,15 @@
 
 from pkg_resources import parse_version
 
+
 def SplitPackageNameVersion(pkgname):
     hyphen_pos = pkgname.rindex('-')
 
-    name = pkgname[0 : hyphen_pos]
-    version = pkgname[hyphen_pos + 1 : ]
+    name = pkgname[0:hyphen_pos]
+    version = pkgname[hyphen_pos + 1:]
 
     return name, version
+
 
 def VersionCompare(v1, v2):
     pv1, pv2 = parse_version(v1), parse_version(v2)

@@ -19,17 +19,26 @@
 
 import subprocess
 
-def RunSubprocess(command, logger, shell = False, cwd = None):
-    message = "running \"{}\"".format(' '.join(command) if type(command) == list else command)
+
+def RunSubprocess(command, logger, shell=False, cwd=None):
+    message = "running \"{}\"".format(' '.join(command)
+                                      if isinstance(command, list)
+                                      else command)
     if cwd is not None:
         message += " in \"{}\"".format(cwd)
 
     logger.Log(message)
 
-    with subprocess.Popen(command, shell = shell, stdout = subprocess.PIPE, stderr = subprocess.STDOUT, universal_newlines = True, cwd = cwd) as proc:
+    with subprocess.Popen(command,
+                          shell=shell,
+                          stdout=subprocess.PIPE,
+                          stderr=subprocess.STDOUT,
+                          universal_newlines=True,
+                          cwd=cwd) as proc:
         for line in proc.stdout:
             logger.Log("    " + line.strip())
         proc.wait()
         logger.Log("command finished with code {}".format(proc.returncode))
         if proc.returncode != 0:
-            raise subprocess.CalledProcessError(cmd = command, returncode = proc.returncode)
+            raise subprocess.CalledProcessError(cmd=command,
+                                                returncode=proc.returncode)

@@ -22,6 +22,7 @@ from math import sqrt
 
 import jinja2
 
+
 def SpanTrim(value, maxlength):
     # support lists as well
     if type(value) is list:
@@ -38,6 +39,7 @@ def SpanTrim(value, maxlength):
     # we assume ellipsis take ~2 char width
     return "<span title=\"%s\">%s…</span>" % (value, trimmed)
 
+
 def Clamp(value, lower, upper):
     if value < lower:
         return lower
@@ -45,8 +47,10 @@ def Clamp(value, lower, upper):
         return upper
     return value
 
+
 def Split(value, sep):
     return value.split(sep)
+
 
 class Template:
     def __init__(self):
@@ -62,7 +66,7 @@ class Template:
         self.template_cache = {}
 
     def Render(self, template, **template_data):
-        if not template in self.template_cache:
+        if template not in self.template_cache:
             self.template_cache[template] = self.env.get_template(template)
 
         data = template_data.copy()

@@ -20,6 +20,7 @@ import re
 from ..util import SplitPackageNameVersion
 from ..package import Package
 
+
 class OpenSUSEPackageListParser():
     def __init__(self):
         pass

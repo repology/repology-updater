@@ -20,6 +20,7 @@ import os
 from ..util import VersionCompare
 from ..package import Package
 
+
 def SanitizeVersion(version):
     pos = version.find('-')
     if pos != -1:
@@ -31,6 +32,7 @@ def SanitizeVersion(version):
 
     return version
 
+
 def IsBetterVersion(version, maxversion):
     # if we have no best version, take any
     if maxversion is None:
@@ -41,6 +43,7 @@ def IsBetterVersion(version, maxversion):
         return VersionCompare(version, maxversion) > 0
 
     return not version.endswith("9999")
+
 
 class GentooGitParser():
     def __init__(self):
@@ -71,7 +74,7 @@ class GentooGitParser():
                     if IsBetterVersion(version, maxversion):
                         maxversion = version
 
-                if not maxversion is None:
+                if maxversion is not None:
                     pkg = Package()
                     pkg.name = package
                     pkg.fullversion = maxversion

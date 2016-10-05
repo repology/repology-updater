@@ -20,6 +20,7 @@ import subprocess
 
 from ..package import Package
 
+
 class SrcListClassicParser():
     def __init__(self):
         if not os.path.exists("cutils/rpmcat"):
@@ -28,7 +29,7 @@ class SrcListClassicParser():
     def Parse(self, path):
         result = []
 
-        with subprocess.Popen(["cutils/rpmcat", path], stdout = subprocess.PIPE, universal_newlines = True) as proc:
+        with subprocess.Popen(["cutils/rpmcat", path], stdout=subprocess.PIPE, universal_newlines=True) as proc:
             for line in proc.stdout:
                 fields = line.split('|')
 
@@ -36,7 +37,7 @@ class SrcListClassicParser():
 
                 pkg.name = fields[0]
                 pkg.version = fields[1]
-                pkg.maintainers.append(fields[2].strip()) # XXX: may have multiple maintainers
+                pkg.maintainers.append(fields[2].strip())  # XXX: may have multiple maintainers
 
                 result.append(pkg)
 

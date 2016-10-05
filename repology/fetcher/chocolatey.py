@@ -22,7 +22,6 @@ import shutil
 from repology.logger import NoopLogger
 from repology.www import Get
 
-USER_AGENT = "Repology/0"
 
 class ChocolateyFetcher():
     def __init__(self, apiurl):
@@ -32,14 +31,14 @@ class ChocolateyFetcher():
         numpage = 0
         nextpageurl = self.apiurl + "Packages()?$filter=IsLatestVersion"
         while True:
-            logger.Log("getting " + nextpageurl);
+            logger.Log("getting " + nextpageurl)
 
             text = Get(nextpageurl).text
             with open(os.path.join(statepath, "{}.xml".format(numpage)), "w") as pagefile:
                 pagefile.write(text)
 
             # parse next page
-            logger.Log("parsing " + nextpageurl);
+            logger.Log("parsing " + nextpageurl)
             root = xml.etree.ElementTree.fromstring(text)
 
             next_link = root.find("{http://www.w3.org/2005/Atom}link[@rel='next']")
@@ -49,7 +48,7 @@ class ChocolateyFetcher():
             nextpageurl = next_link.attrib['href']
             numpage += 1
 
-    def Fetch(self, statepath, update = True, logger = NoopLogger()):
+    def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             return
 

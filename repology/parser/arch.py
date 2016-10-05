@@ -20,6 +20,7 @@ import sys
 
 from ..package import Package
 
+
 def SanitizeVersion(version):
     pos = version.find('-')
     if pos != -1:
@@ -30,6 +31,7 @@ def SanitizeVersion(version):
         version = version[pos+1:]
 
     return version
+
 
 class ArchDBParser():
     def __init__(self):

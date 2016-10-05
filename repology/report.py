@@ -19,6 +19,7 @@
 
 import os
 
+
 class ReportProducer:
     def __init__(self, template, templatename):
         self.template = template
@@ -34,9 +35,9 @@ class ReportProducer:
                 pagepath,
                 metapackages[page * perpage:page * perpage + perpage],
                 reponames,
-                page = page,
-                numpages = numpages,
-                basename = os.path.basename(path),
+                page=page,
+                numpages=numpages,
+                basename=os.path.basename(path),
                 **extradata
             )
 

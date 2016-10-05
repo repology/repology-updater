@@ -24,6 +24,7 @@ from argparse import ArgumentParser
 from repology.repositories import RepositoryManager
 from repology.logger import *
 
+
 def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', help='path to directory with repository state')
@@ -46,19 +47,19 @@ def Main():
     if options.logfile:
         logger = FileLogger(options.logfile)
 
-    repoman = RepositoryManager(options.statedir, logger = logger)
+    repoman = RepositoryManager(options.statedir, logger=logger)
 
     if options.fetch:
         repoman.Fetch(
-            update = options.update,
-            tags = options.tag,
-            repositories = options.repository
+            update=options.update,
+            tags=options.tag,
+            repositories=options.repository
         )
 
     if options.parse:
         repoman.ParseAndSerialize(
-            tags = options.tag,
-            repositories = options.repository
+            tags=options.tag,
+            repositories=options.repository
         )
 
     return 0

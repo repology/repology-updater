@@ -22,6 +22,7 @@ import shutil
 from repology.logger import NoopLogger
 from repology.www import Get
 
+
 class FedoraFetcher():
     def __init__(self, apiurl, giturl):
         self.apiurl = apiurl
@@ -33,14 +34,14 @@ class FedoraFetcher():
 
         logger.Log("  getting spec from {}".format(specurl))
 
-        r = Get(specurl, check_status = False)
+        r = Get(specurl, check_status=False)
         if r.status_code != 200:
             deadurl = self.giturl + "/{0}.git/plain/dead.package".format(package)
-            dr = Get(deadurl, check_status = False)
+            dr = Get(deadurl, check_status=False)
             if dr.status_code == 200:
                 logger.Log("    dead: " + ';'.join(dr.text.split('\n')))
             else:
-                logger.Log("    failed: {}".format(r.status_code)) # XXX: check .dead.package, instead throw
+                logger.Log("    failed: {}".format(r.status_code))  # XXX: check .dead.package, instead throw
             return
 
         with open(os.path.join(statepath, package + ".spec"), "wb") as file:
@@ -62,7 +63,7 @@ class FedoraFetcher():
             if page > pagedata['page_total']:
                 break
 
-    def Fetch(self, statepath, update = True, logger = NoopLogger()):
+    def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             return
 

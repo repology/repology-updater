@@ -20,6 +20,7 @@ import xml.etree.ElementTree
 
 from ..package import Package
 
+
 class ChocolateyParser():
     def __init__(self):
         pass

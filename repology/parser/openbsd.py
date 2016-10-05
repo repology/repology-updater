@@ -21,6 +21,7 @@ import csv
 from ..util import SplitPackageNameVersion
 from ..package import Package
 
+
 def SanitizeVersion(version):
     match = re.match("(.*)v[0-9]+$", version)
     if match is not None:
@@ -30,16 +31,8 @@ def SanitizeVersion(version):
     if match is not None:
         version = match.group(1)
 
-    #pos = version.rfind(',')
-    #if pos != -1:
-        #version = version[0:pos]
-
-    #pos = version.rfind('_')
-
-    #if pos != -1:
-        #version = version[0:pos]
-
     return version
+
 
 class OpenBSDIndexParser():
     def __init__(self):

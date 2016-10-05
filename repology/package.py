@@ -17,6 +17,7 @@
 
 from .util import VersionCompare
 
+
 class Package:
     def __init__(self):
         self.name = None
@@ -30,6 +31,7 @@ class Package:
 
         self.ignoreversion = False
 
+
 class MetaPackage:
     def __init__(self, name):
         self.name = name
@@ -41,7 +43,7 @@ class MetaPackage:
         return self.name
 
     def Add(self, reponame, package):
-        if not reponame in self.packages:
+        if reponame not in self.packages:
             self.packages[reponame] = []
         self.packages[reponame].append(package)
 
@@ -61,10 +63,10 @@ class MetaPackage:
         return bestversion, bestrepo, bestpackage
 
     def GetVersionRangeForRepo(self, reponame):
-        if not reponame in self.packages:
+        if reponame not in self.packages:
             return None, None
 
-        minversion, maxversion= None, None
+        minversion, maxversion = None, None
         for package in self.packages[reponame]:
             if package.version is not None:
                 if maxversion is None or VersionCompare(package.version, maxversion) > 0:
@@ -130,7 +132,7 @@ class MetaPackage:
                 versionclass = 'lonely'
             elif bestversion is None:
                 versionclass = 'good'
-            elif VersionCompare(repomaxversion, bestversion) > 0: # due to ignore
+            elif VersionCompare(repomaxversion, bestversion) > 0:  # due to ignore
                 versionclass = 'ignore'
             elif VersionCompare(repomaxversion, bestversion) >= 0:
                 if VersionCompare(repominversion, bestversion) == 0:

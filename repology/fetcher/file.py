@@ -23,8 +23,9 @@ import lzma
 from repology.logger import NoopLogger
 from repology.www import Get
 
+
 class FileFetcher():
-    def __init__(self, *sources, gz = False, bz2 = False, xz = False):
+    def __init__(self, *sources, gz=False, bz2=False, xz=False):
         self.sources = sources
         self.gz = gz
         self.bz2 = bz2
@@ -49,7 +50,7 @@ class FileFetcher():
                 logger.Log("  saving")
                 statefile.write(data)
 
-    def Fetch(self, statepath, update = True, logger = NoopLogger()):
+    def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
             return
 

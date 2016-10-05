@@ -31,7 +31,8 @@ from repology.template import Template
 from repology.repositories import RepositoryManager
 from repology.logger import *
 
-def FilterPackages(metapackages, maintainer = None, category = None, manyrepos = None, littlerepos = None, inrepo = None, notinrepo = None, outdatedinrepo = None):
+
+def FilterPackages(metapackages, maintainer=None, category=None, manyrepos=None, littlerepos=None, inrepo=None, notinrepo=None, outdatedinrepo=None):
     filtered = []
 
     for metapackage in metapackages:
@@ -60,6 +61,7 @@ def FilterPackages(metapackages, maintainer = None, category = None, manyrepos =
 
     return filtered
 
+
 def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     if not os.path.isdir(path):
         os.mkdir(path)
@@ -71,9 +73,9 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     template.RenderToFile(
         'about.html',
         os.path.join(path, "about.html"),
-        site_root = "",
-        subheader = "About",
-        subsection = "about"
+        site_root="",
+        subheader="About",
+        subsection="about"
     )
 
     shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
@@ -84,10 +86,10 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
         metapackages,
         repositories,
         500,
-        repositories = repometadata,
-        site_root = "",
-        subheader = "Package index",
-        subsection = "packages"
+        repositories=repometadata,
+        site_root="",
+        subheader="Package index",
+        subsection="packages"
     )
 
     shutil.copyfile(os.path.join(path, "index.0.html"), os.path.join(path, "index.html"))
@@ -99,13 +101,13 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
 
     rp.RenderFilesPaginated(
         os.path.join(widespread_path, "widespread"),
-        FilterPackages(metapackages, manyrepos = len(repositories)),
+        FilterPackages(metapackages, manyrepos=len(repositories)),
         repositories,
         500,
-        repositories = repometadata,
-        site_root = "../",
-        subheader = "Most wide-spread packages",
-        subsection = "widespread",
+        repositories=repometadata,
+        site_root="../",
+        subheader="Most wide-spread packages",
+        subsection="widespread",
     )
 
     unique_path = os.path.join(path, "unique")
@@ -114,13 +116,13 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
 
     rp.RenderFilesPaginated(
         os.path.join(unique_path, "unique"),
-        FilterPackages(metapackages, littlerepos = 1),
+        FilterPackages(metapackages, littlerepos=1),
         repositories,
         500,
-        repositories = repometadata,
-        site_root = "../",
-        subheader = "Unique packages",
-        subsection = "unique",
+        repositories=repometadata,
+        site_root="../",
+        subheader="Unique packages",
+        subsection="unique",
     )
 
     logger.Log("===> Per-repository pages")
@@ -137,19 +139,19 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
         os.mkdir(outdatedinrepo_path)
 
     for repository in repositories:
-        inrepo_packages = FilterPackages(metapackages, inrepo = repository)
-        notinrepo_packages = FilterPackages(metapackages, notinrepo = repository, manyrepos = 2)
-        outdatedinrepo_packages = FilterPackages(metapackages, outdatedinrepo = repository)
+        inrepo_packages = FilterPackages(metapackages, inrepo=repository)
+        notinrepo_packages = FilterPackages(metapackages, notinrepo=repository, manyrepos=2)
+        outdatedinrepo_packages = FilterPackages(metapackages, outdatedinrepo=repository)
 
         rp.RenderFilesPaginated(
             os.path.join(inrepo_path, repository),
             inrepo_packages,
             repositories,
             500,
-            repositories = repometadata,
-            site_root = "../",
-            subheader = "Packages in " + repository,
-            subsection = "repositories"
+            repositories=repometadata,
+            site_root="../",
+            subheader="Packages in " + repository,
+            subsection="repositories"
         )
 
         rp.RenderFilesPaginated(
@@ -157,10 +159,10 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
             notinrepo_packages,
             repositories,
             500,
-            repositories = repometadata,
-            site_root = "../",
-            subheader = "Packages missing from " + repository,
-            subsection = "missing"
+            repositories=repometadata,
+            site_root="../",
+            subheader="Packages missing from " + repository,
+            subsection="missing"
         )
 
         rp.RenderFilesPaginated(
@@ -168,20 +170,20 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
             outdatedinrepo_packages,
             repositories,
             500,
-            repositories = repometadata,
-            site_root = "../",
-            subheader = "Packages outdated in " + repository,
-            subsection = "outdated"
+            repositories=repometadata,
+            site_root="../",
+            subheader="Packages outdated in " + repository,
+            subsection="outdated"
         )
 
     template.RenderToFile(
         'repositories.html',
         os.path.join(inrepo_path, "index.html"),
-        site_root = "../",
-        repositories = repositories,
-        subheader = "Repositories",
-        subsection = "repositories",
-        description = '''
+        site_root="../",
+        repositories=repositories,
+        subheader="Repositories",
+        subsection="repositories",
+        description='''
             For each repository, this section only lists packages it contains.
         '''
     )
@@ -189,11 +191,11 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     template.RenderToFile(
         'repositories.html',
         os.path.join(notinrepo_path, "index.html"),
-        site_root = "../",
-        repositories = repositories,
-        subheader = "Repositories with missing packages",
-        subsection = "missing",
-        description = '''
+        site_root="../",
+        repositories=repositories,
+        subheader="Repositories with missing packages",
+        subsection="missing",
+        description='''
             For each repository, this section lists packages not present in it, but present in two other repositories.
         '''
     )
@@ -201,17 +203,17 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     template.RenderToFile(
         'repositories.html',
         os.path.join(outdatedinrepo_path, "index.html"),
-        site_root = "../",
-        repositories = repositories,
-        subheader = "Repositories with outdated packages",
-        subsection = "outdated",
+        site_root="../",
+        repositories=repositories,
+        subheader="Repositories with outdated packages",
+        subsection="outdated",
     )
 
     logger.Log("===> Per-maintainer index")
     maintainers = {}
     for metapackage in metapackages:
         for maintainer in metapackage.GetMaintainers():
-            if not maintainer in maintainers:
+            if maintainer not in maintainers:
                 maintainers[maintainer] = {
                     'sanitized_name': re.sub("[^a-zA-Z@.0-9]", "_", maintainer).lower(),
                     'num_packages': 0,
@@ -225,33 +227,34 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
         os.mkdir(maintainers_path)
 
     for maintainer, maintainer_data in maintainers.items():
-        maint_packages = FilterPackages(metapackages, maintainer = maintainer)
+        maint_packages = FilterPackages(metapackages, maintainer=maintainer)
 
         rp.RenderFilesPaginated(
             os.path.join(maintainers_path, maintainer_data['sanitized_name']),
             maint_packages,
             repositories,
             500,
-            repositories = repometadata,
-            site_root = "../",
-            subheader = "Packages maintained by " + escape(maintainer),
-            subsection = "maintainers"
+            repositories=repometadata,
+            site_root="../",
+            subheader="Packages maintained by " + escape(maintainer),
+            subsection="maintainers"
         )
 
     template.RenderToFile(
         'maintainers.html',
         os.path.join(maintainers_path, "index.html"),
-        site_root = "../",
-        maintainers = [
+        site_root="../",
+        maintainers=[
             {
                 "fullname": escape(maintainer),
                 "sanitizedname": maintainers[maintainer]['sanitized_name'],
                 "num_packages": maintainers[maintainer]['num_packages'],
             } for maintainer in sorted(maintainers.keys())
         ],
-        subheader = "Package maintainers",
-        subsection = "maintainers"
+        subheader="Package maintainers",
+        subsection="maintainers"
     )
+
 
 def Main():
     parser = ArgumentParser()
@@ -278,14 +281,14 @@ def Main():
     tags = [tag.split(',') for tag in options.tag] if options.tag else []
 
     nametrans = NameTransformer(options.rules)
-    repoman = RepositoryManager(options.statedir, enable_shadow = not options.no_shadow, logger = logger)
+    repoman = RepositoryManager(options.statedir, enable_shadow=not options.no_shadow, logger=logger)
     packages = repoman.Deserialize(
         nametrans,
-        tags = tags,
-        repositories = options.repository
+        tags=tags,
+        repositories=options.repository
     )
 
-    RepologyOrg(options.output, packages, repoman.GetNames(tags = tags, repositories = options.repository), repoman.GetMetadata(), logger)
+    RepologyOrg(options.output, packages, repoman.GetNames(tags=tags, repositories=options.repository), repoman.GetMetadata(), logger)
 
     unmatched = nametrans.GetUnmatchedRules()
     if len(unmatched):

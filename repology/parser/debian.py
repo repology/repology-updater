@@ -19,6 +19,7 @@ import re
 
 from ..package import Package
 
+
 def SanitizeVersion(version):
     pos = version.find(':')
     if pos != -1:
@@ -37,10 +38,11 @@ def SanitizeVersion(version):
         version = version[0:pos]
 
     match = re.match("(.*[0-9])[^0-9]*dfsg\\.?[0-9]*$", version)
-    if not match is None:
+    if match is not None:
         version = match.group(1)
 
     return version
+
 
 class DebianSourcesParser():
     def __init__(self):

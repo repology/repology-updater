@@ -21,6 +21,7 @@ import shutil
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
+
 class ArchDBFetcher():
     def __init__(self, *sources):
         self.sources = sources
@@ -28,9 +29,9 @@ class ArchDBFetcher():
     def DoFetch(self, statepath, update, logger):
         for source in self.sources:
             command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (source, statepath)
-            RunSubprocess(command, logger, shell = True)
+            RunSubprocess(command, logger, shell=True)
 
-    def Fetch(self, statepath, update = True, logger = NoopLogger()):
+    def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             return
 

@@ -20,13 +20,14 @@ import os
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
+
 class GitFetcher():
     def __init__(self, repository):
         self.repository = repository
 
-    def Fetch(self, statepath, update = True, logger = NoopLogger()):
+    def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
-            RunSubprocess(["git", "clone", "--progress", "--depth=1", self.repository, statepath], logger = logger)
+            RunSubprocess(["git", "clone", "--progress", "--depth=1", self.repository, statepath], logger=logger)
         elif update:
-            RunSubprocess(["git", "fetch", "--progress"], cwd = statepath, logger = logger)
-            RunSubprocess(["git", "reset", "--hard", "origin/master"], cwd = statepath, logger = logger)
+            RunSubprocess(["git", "fetch", "--progress"], cwd=statepath, logger=logger)
+            RunSubprocess(["git", "reset", "--hard", "origin/master"], cwd=statepath, logger=logger)

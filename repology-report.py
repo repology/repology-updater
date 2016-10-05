@@ -31,7 +31,8 @@ from repology.template import Template
 from repology.repositories import RepositoryManager
 from repology.logger import *
 
-def FilterPackages(metapackages, maintainer = None, category = None, manyrepos = None, littlerepos = None, inrepo = None, notinrepo = None, outdatedinrepo = None):
+
+def FilterPackages(metapackages, maintainer=None, category=None, manyrepos=None, littlerepos=None, inrepo=None, notinrepo=None, outdatedinrepo=None):
     filtered = []
 
     for metapackage in metapackages:
@@ -59,6 +60,7 @@ def FilterPackages(metapackages, maintainer = None, category = None, manyrepos =
         filtered.append(metapackage)
 
     return filtered
+
 
 def Main():
     parser = ArgumentParser()
@@ -93,11 +95,11 @@ def Main():
     tags = [tag.split(',') for tag in options.tag] if options.tag else []
 
     nametrans = NameTransformer(options.rules)
-    repoman = RepositoryManager(options.statedir, enable_shadow = not options.no_shadow, logger = logger)
+    repoman = RepositoryManager(options.statedir, enable_shadow=not options.no_shadow, logger=logger)
     packages = repoman.Deserialize(
         nametrans,
-        tags = tags,
-        repositories = options.repository
+        tags=tags,
+        repositories=options.repository
     )
 
     packages = FilterPackages(
@@ -116,8 +118,8 @@ def Main():
     rp.RenderToFile(
         options.output,
         packages,
-        repoman.GetNames(tags = tags, repositories = options.repository),
-        repositories = repoman.GetMetadata()
+        repoman.GetNames(tags=tags, repositories=options.repository),
+        repositories=repoman.GetMetadata()
     )
 
     unmatched = nametrans.GetUnmatchedRules()
