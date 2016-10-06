@@ -198,14 +198,13 @@
 # - fira* (font)
 
 # Version ignores, incompatible version mangling in the repos
-- { name: apr,                         verpat: "([0-9]+\\.){5}.*",      ignorever: true } # FreeBSD
-- { name: cryptcat,                    ver: "20031202",                 ignorever: true }
-- { name: xmahjongg,                   ver: "3.70",                  repos: [ pkgsrc ], ignorever: true }
 - { name: "libreadonly-perl",          ver: "2.050",                 repos: [ debian ], ignorever: true } # needs multiple rule hits
-
-- { name: dia,                         ver: "0.97.4",                repos: [ sisyphus ], ignorever: true }
+- { name: apr,                         verlonger: 3,                                    ignorever: true } # FreeBSD
+- { name: cryptcat,                    ver: "20031202",                                 ignorever: true }
+- { name: dia,                         ver: "0.97.4",                repos: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       repos: [ sisyphus ], ignorever: true }
 - { name: inkscape,                    ver: "0.92",                  repos: [ fedora ], ignorever: true } # prerepease
+- { name: xmahjongg,                   ver: "3.70",                  repos: [ pkgsrc ], ignorever: true }
 
 # Chocolatey is full of garbage, fake version and bad matches
 - { name: 0install,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
@@ -382,6 +381,21 @@
 - { name: yed,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: zoom,                                                      repos: [ chocolatey ], ignore: true }
 
+# Unique ignores which will never appear in other distros
+- { namepat: "alterator-.*",                                         repos: [ sisiphus ], ignore: true } # ALT-specific
+- { namepat: "installer-.*",                                         repos: [ sisiphus ], ignore: true } # ALT-specific
+- { namepat: "altlinux-.*",                                          repos: [ sisiphus ], ignore: true } # ALT-specific
+- { namepat: "appliance-.*",                                         repos: [ sisiphus ], ignore: true } # ALT-specific
+- { namepat: "repocop.*",                                            repos: [ sisiphus ], ignore: true } # ALT-specific
+- { namepat: "livecd-*",                                             repos: [ sisiphus ], ignore: true } # ALT-specific
+- { namepat: "compat[0-9].*",                                        repos: [ freebsd, pkgsrc ], ignore: true } # system libs for older FreeBSD versions
+- { namepat: "netbsd32-compat[0-9].*",                               repos: [ pkgsrc ], ignore: true } # system libs for older FreeBSD versions
+- { name: "eselect.*",                                               repos: [ gentoo ], ignore: true } # Gentoo-specific
+- { namepat: "eselect-.*",                                           repos: [ gentoo ], ignore: true } # Gentoo-specific
+- { namepat: "fedora-.*",                                            repos: [ fedora ], ignore: true } # Fedora-specific
+- { namepat: "linux-(?:c6|f10)-.*",                                  repos: [ freebsd ], ignore: true } # linux binary packages for FreeBSD
+- { namepat: "suse(?:32)?_.*",                                       repos: [ pkgsrc ], ignore: true } # linux binary packages?
+
 # Version splits/tweaks
 - { name: allegro, verpat: "4\\..*",  setname: allegro4 }
 - { name: allegro, verpat: "5\\..*",  setname: allegro5 }
@@ -424,11 +438,13 @@
 - { namepat: "gimp-docs-.*",           setname: "gimp-docs", repos: [ pkgsrc ] }
 - { namepat: "gimp-help-.*",           setname: "gimp-help", repos: [ arch ] }
 - { namepat: "kde-i18n-.*",            setname: "kde-i18n", repos: [ openbsd, pkgsrc ] }
-- { namepat: "kde-l10n-.*",            setname: "kde-l10n", repos: [ openbsd, arch ] }
+- { namepat: "kde-l10n-.*",            setname: "kde-l10n", repos: [ openbsd, arch, debian ] }
 - { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", repos: [ pkgsrc ] }
 - { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", repos: [ freebsd ] }
 - { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", repos: [ pkgsrc ] }
 - { namepat: "kompozer-i18n-.*",       setname: "kompozer-i18n", repos: [ arch ] }
+- { namepat: "language-pack-gnome-.*", setname: "language-pack-gnome", repos: [ debian ] }
+- { namepat: "language-pack-kde-.*",   setname: "language-pack-kde", repos: [ debian ] }
 - { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", repos: [ arch ] }
 - { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", repos: [ openbsd ] }
 - { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", repos: [ arch ] }
@@ -463,7 +479,7 @@
 
 # Ruby
 - { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch, fedora, sisyphus ] }
-- { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd, opensuse] }
+- { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd, opensuse, slackbuilds ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", repos: [ freebsd, openbsd, pkgsrc ] }
 - { category: dev-ruby,                setname: "ruby:$0", repos: [ gentoo ] }
 
@@ -509,6 +525,15 @@
 - { namepat: "hs-(.*)",                setname: "haskell:$1", repos: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "ghc-(.*)",               setname: "haskell:$1", repos: [ opensuse ] }
 - { category: dev-haskell,             setname: "haskell:$0", repos: [ gentoo ] }
+- { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", repos: [ sisyphus ] }
+
+# golang
+- { namepat: "go-(.*)",                setname: "go:$1" }
+- { namepat: "golang-(.*)",            setname: "go:$1" }
+
+# mingw
+- { namepat: "mingw-(.*)",             setname: "mingw:$1", repos: [ fedora ] }
+- { namepat: "mingw32-(.*)",           setname: "mingw:$1", repos: [ sisyphus ] }
 
 # lua
 - { namepat: ".*luassert",             setname: "lua:luassert" } # save
@@ -518,7 +543,7 @@
 - { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", repos: [ gentoo ] }
 
 # octave
-- { namepat: "octave-forge-(.*)",      setname: "octave:$1", repos: [ freebsd ] }
+- { namepat: "octave-forge-(.*)",      setname: "octave:$1", repos: [ freebsd, opensuse ] }
 - { namepat: "octave-(.*)",            setname: "octave:$1", repos: [ debian, sisyphus ] }
 
 # xorg drivers
@@ -545,8 +570,8 @@
 # Apache modules
 - { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", repos: [ freebsd, openbsd, pkgsrc ] }
 - { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", repos: [ gentoo ] }
-- { namepat: "mod-(.*)",               setname: "apmod:$1", repos: [ debian, sisyphus ] }
-- { namepat: "mod_(.*)",               setname: "apmod:$1", repos: [ freebsd, arch ] }
+- { namepat: "mod-(.*)",               setname: "apmod:$1", repos: [ debian ] }
+- { namepat: "mod_(.*)",               setname: "apmod:$1", repos: [ freebsd, arch, sisyphus, slackbuilds, fedora ] }
 - { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1", repos: [ debian ] }
 
 # Erlang
@@ -567,10 +592,11 @@
 - { namepat: "font-(.*)",              setname: "fonts:$1", repos: [ freebsd, gentoo, pkgsrc, arch ] }
 - { name: cantarell,                   setname: "fonts:cantarell", repos: [ gentoo ]  }
 - { name: cantarell-fonts,             setname: "fonts:cantarell", repos: [ freebsd, pkgsrc, openbsd, arch ] }
+- { namepat: "fonts-(.*)",             setname: "fonts:$1", repos: [ sisyphus ] }
 
 # fortunes
 - { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1", repos: [ gentoo ] }
-- { namepat: "fortunes-(.*)",          setname: "fortunes:$1", repos: [ debian, pkgsrc ] }
+- { namepat: "fortunes-(.*)",          setname: "fortunes:$1", repos: [ debian, pkgsrc, sisyphus ] }
 
 # cursors
 - { namepat: "(.*)-cursor-theme",      setname: "cursors:$1", repos: [ debian ] }
