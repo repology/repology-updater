@@ -203,9 +203,9 @@
 - { name: xmahjongg,                   ver: "3.70",                  repos: [ pkgsrc ], ignorever: true }
 - { name: "libreadonly-perl",          ver: "2.050",                 repos: [ debian ], ignorever: true } # needs multiple rule hits
 
-- { name: dia                          ver: "0.97.4",                repos: [ sisyphus ], ignorever: true }
-- { name: dosbox                       verpat: "0\\.74\\.r.*",       repos: [ sisyphus ], ignorever: true }
-- { name: inkscape                     ver: "0.92",                  repos: [ fedora ], ignorever: true } # prerepease
+- { name: dia,                         ver: "0.97.4",                repos: [ sisyphus ], ignorever: true }
+- { name: dosbox,                      verpat: "0\\.74\\.r.*",       repos: [ sisyphus ], ignorever: true }
+- { name: inkscape,                    ver: "0.92",                  repos: [ fedora ], ignorever: true } # prerepease
 
 # Chocolatey is full of garbage, fake version and bad matches
 - { name: 0install,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
