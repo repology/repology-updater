@@ -20,37 +20,32 @@
     </tr>
     <tr><td><b>Percent of all known</b></td>
         {% for reponame in reponames %}
-            <td align="center"><span class="total">{{ (statistics[reponame].total / statistics.total * 100) | round(2) }}%</span></td>
+            <td align="center"><span class="total">{{ (statistics[reponame].total / statistics.total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
     <tr><td><b>Up to date packages</b></td>
         {% for reponame in reponames %}
-            <td align="center"><span class="version good">{{ statistics[reponame].good + statistics[reponame].multi }}</span></td>
+            <td align="center"><span class="version good">{{ statistics[reponame].good }}</span></td>
         {% endfor %}
     </tr>
-    <tr><td><b>Up to date in repo</b></td>
+    <tr><td><b>Up to date among repo </b></td>
         {% for reponame in reponames %}
-            <td align="center"><span class="version good">{{ ((statistics[reponame].good + statistics[reponame].multi) / statistics[reponame].total * 100) | round(2) }}%</span></td>
+            <td align="center"><span class="version good">{{ (statistics[reponame].good / statistics[reponame].total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
-    <tr><td><b>Up to date of total</b></td>
+    <tr><td><b>Up to date among known state </b></td>
         {% for reponame in reponames %}
-            <td align="center"><span class="version good">{{ ((statistics[reponame].good + statistics[reponame].multi) / statistics.total * 100) | round(2) }}%</span></td>
+            <td align="center"><span class="version good">{{ (statistics[reponame].good / statistics[reponame].known * 100) | round(1) }}%</span></td>
+        {% endfor %}
+    </tr>
+    <tr><td><b>Up to date anong all known</b></td>
+        {% for reponame in reponames %}
+            <td align="center"><span class="version good">{{ ((statistics[reponame].good + statistics[reponame].multi) / statistics.total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
     <tr><td><b>Outdated packages</b></td>
         {% for reponame in reponames %}
             <td align="center"><span class="version bad">{{ statistics[reponame].bad }}</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Outdated in repo</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version bad">{{ (statistics[reponame].bad / statistics[reponame].total * 100) | round(2) }}%</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Outdated of all known</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version bad">{{ (statistics[reponame].bad / statistics.total * 100) | round(2) }}%</span></td>
         {% endfor %}
     </tr>
     <tr><td><b>Unique packages</b></td>
@@ -60,12 +55,12 @@
     </tr>
     <tr><td><b>Unique in repo</b></td>
         {% for reponame in reponames %}
-            <td align="center"><span class="version lonely">{{ (statistics[reponame].lonely / statistics[reponame].total * 100) | round(2) }}%</span></td>
+            <td align="center"><span class="version lonely">{{ (statistics[reponame].lonely / statistics[reponame].total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
-    <tr><td><b>Unique of total</b></td>
+    <tr><td><b>Unique of all known</b></td>
         {% for reponame in reponames %}
-            <td align="center"><span class="version lonely">{{ (statistics[reponame].lonely / statistics.total * 100) | round(2) }}%</span></td>
+            <td align="center"><span class="version lonely">{{ (statistics[reponame].lonely / statistics.total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
     <tr><td><b>Ignored packages</b></td>
@@ -75,7 +70,7 @@
     </tr>
     <tr><td><b>Ignored of repo</b></td>
         {% for reponame in reponames %}
-            <td align="center"><span class="version ignore">{{ (statistics[reponame].ignore / statistics[reponame].total * 100) | round(2) }}%</span></td>
+            <td align="center"><span class="version ignore">{{ (statistics[reponame].ignore / statistics[reponame].total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
 </table>
