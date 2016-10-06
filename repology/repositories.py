@@ -262,6 +262,7 @@ class RepositoryManager:
                 continue
 
             for package in packages_by_repo[reponame]:
+                package.repotype = repository['repotype']  # XXX: hack
                 metaname = name_transformer.TransformName(package, repository['repotype'])
 
                 if metaname is None:

@@ -29,6 +29,7 @@ class Package:
         self.homepage = None
         self.license = None
 
+        self.repotype = None
         self.ignoreversion = False
 
 
@@ -104,6 +105,16 @@ class MetaPackage:
     def GetRepos(self):
         return self.packages.keys()
 
+    def GetRepotypes(self):
+        repotypes = set()
+        for packagelist in self.packages.values():
+            for package in packagelist:
+                if package.repotype is not None:
+                    repotypes.add(rackage.repotype)
+                    return True
+
+        return repotypes
+
     def HasRepository(self, reponame):
         return reponame in self.packages
 
@@ -120,6 +131,8 @@ class MetaPackage:
         # fill versions
         bestversion, _, _ = self.GetMaxVersion()
 
+        numrepotypes = len(self.GetRepotypes())
+
         for reponame in self.GetRepos():
             # packages for this repository
             repopackages = self.Get(reponame)
@@ -128,9 +141,7 @@ class MetaPackage:
             repominversion, repomaxversion = self.GetVersionRangeForRepo(reponame)
 
             versionclass = 'bad'
-            if self.GetNumRepos() == 1:
-                versionclass = 'lonely'
-            elif bestversion is None:
+            if bestversion is None:
                 versionclass = 'good'
             elif VersionCompare(repomaxversion, bestversion) > 0:  # due to ignore
                 versionclass = 'ignore'
@@ -139,6 +150,9 @@ class MetaPackage:
                     versionclass = 'good'
                 else:
                     versionclass = 'multi'
+
+            if (versionclass == 'good' or versionclass == 'multi') and numrepotypes == 1:
+                versionclass = 'lonely'
 
             self.versions[reponame] = {
                 'version': repomaxversion,
