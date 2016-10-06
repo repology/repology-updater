@@ -25,3 +25,4 @@ from .spec import SpecParser
 from .opensuse import OpenSUSERepodataParser
 from .chocolatey import ChocolateyParser
 from .sisyphus import SrcListClassicParser
+from .slackbuilds import SlackBuildsParser

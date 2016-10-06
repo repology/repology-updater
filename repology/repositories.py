@@ -184,6 +184,13 @@ REPOSITORIES = [
         'link': 'https://chocolatey.org/packages/{name}',
         'tags': ['all', 'preproduction', 'slowfetch'],
     },
+    {
+        'name': 'SlackBuilds',
+        'repotype': 'slackbuilds',
+        'fetcher': GitFetcher("git://slackbuilds.org/slackbuilds"),
+        'parser': SlackBuildsParser(),
+        'tags': ['all', 'preproduction', 'fastfetch'],
+    },
 ]
 
 
