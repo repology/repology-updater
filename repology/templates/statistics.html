@@ -40,7 +40,7 @@
     </tr>
     <tr><td><b>Up to date anong all known</b></td>
         {% for reponame in reponames %}
-            <td align="center"><span class="version good">{{ ((statistics[reponame].good + statistics[reponame].multi) / statistics.total * 100) | round(1) }}%</span></td>
+            <td align="center"><span class="version good">{{ (statistics[reponame].good / statistics.total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
     <tr><td><b>Outdated packages</b></td>

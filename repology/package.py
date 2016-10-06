@@ -107,11 +107,11 @@ class MetaPackage:
 
     def GetRepotypes(self):
         repotypes = set()
+
         for packagelist in self.packages.values():
             for package in packagelist:
                 if package.repotype is not None:
-                    repotypes.add(rackage.repotype)
-                    return True
+                    repotypes.add(package.repotype)
 
         return repotypes
 
