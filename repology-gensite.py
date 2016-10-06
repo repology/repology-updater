@@ -62,6 +62,33 @@ def FilterPackages(metapackages, maintainer=None, category=None, manyrepos=None,
     return filtered
 
 
+def GenStatistics(metapackages, reponames):
+    statistics = {
+        reponame: {
+            'total': 0,
+            'good': 0,
+            'bad': 0,
+            'orphan': 0,
+            'ignore': 0,
+            'multi': 0,
+            'lonely': 0,
+        } for reponame in reponames}
+
+    for metapackage in metapackages:
+        for reponame, versiondata in metapackage.versions.items():
+            statistics[reponame]['total'] += 1
+            statistics[reponame][versiondata['class']] += 1
+
+    # set totals to 1 to avoid division by zero
+    for repodata in statistics.values():
+        if repodata['total'] == 0:
+            repodata['total'] = 1
+
+    statistics['total'] = len(metapackages) if metapackages else 1
+
+    return statistics
+
+
 def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     if not os.path.isdir(path):
         os.mkdir(path)
@@ -79,6 +106,18 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     )
 
     shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
+
+    logger.Log("===> Statistics")
+    template.RenderToFile(
+        'statistics.html',
+        os.path.join(path, "statistics.html"),
+        site_root="",
+        reponames=repositories,
+        repositories=repometadata,
+        subheader="Statistics",
+        subsection="statistics",
+        statistics=GenStatistics(metapackages, repositories)
+    )
 
     logger.Log("===> Main index")
     rp.RenderFilesPaginated(

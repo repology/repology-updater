@@ -156,6 +156,10 @@ td:nth-last-child(1) {
 	background-color: #c0c0c0;
 }
 
+.total {
+	font-weight: bold;
+}
+
 /* misc */
 div.gentime {
     margin: 1em;
