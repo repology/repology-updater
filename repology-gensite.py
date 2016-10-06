@@ -42,7 +42,7 @@ def FilterPackages(metapackages, maintainer=None, category=None, manyrepos=None,
         if category is not None and not metapackage.HasCategoryLike(category):
             continue
 
-        if manyrepos is not None and metapackage.GetNumRepos() < manyrepos:
+        if manyrepos is not None and len(metapackage.GetRepotypes()) < manyrepos:
             continue
 
         if littlerepos is not None and metapackage.GetNumRepos() > littlerepos:
