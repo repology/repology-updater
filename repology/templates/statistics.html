@@ -23,22 +23,22 @@
             <td align="center"><span class="total">{{ (statistics[reponame].total / statistics.total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
-    <tr><td><b>Up to date packages</b></td>
+    <tr><td><b>Up to date</b></td>
         {% for reponame in reponames %}
             <td align="center"><span class="version good">{{ statistics[reponame].good }}</span></td>
         {% endfor %}
     </tr>
-    <tr><td><b>Up to date among repo </b></td>
+    <tr><td><b>Up to date of repo</b></td>
         {% for reponame in reponames %}
             <td align="center"><span class="version good">{{ (statistics[reponame].good / statistics[reponame].total * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
-    <tr><td><b>Up to date among known state </b></td>
+    <tr><td><b>Up to date of comparable</b></td>
         {% for reponame in reponames %}
             <td align="center"><span class="version good">{{ (statistics[reponame].good / statistics[reponame].known * 100) | round(1) }}%</span></td>
         {% endfor %}
     </tr>
-    <tr><td><b>Up to date anong all known</b></td>
+    <tr><td><b>Up to date of all known</b></td>
         {% for reponame in reponames %}
             <td align="center"><span class="version good">{{ (statistics[reponame].good / statistics.total * 100) | round(1) }}%</span></td>
         {% endfor %}
@@ -53,7 +53,7 @@
             <td align="center"><span class="version lonely">{{ statistics[reponame].lonely }}</span></td>
         {% endfor %}
     </tr>
-    <tr><td><b>Unique in repo</b></td>
+    <tr><td><b>Unique of repo</b></td>
         {% for reponame in reponames %}
             <td align="center"><span class="version lonely">{{ (statistics[reponame].lonely / statistics[reponame].total * 100) | round(1) }}%</span></td>
         {% endfor %}
