@@ -10,10 +10,11 @@
 - { name: 3dchess,                     setname: 3dc,                      repos: [ debian ] }
 - { name: abuse_sdl,                   setname: abuse,                    repos: [ freebsd ] }
 - { name: accounts-qt5,                setname: accounts-qt ,             repos: [ sisyphus ] }
-- { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd ] }
+- { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd, slackbuilds ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }
 - { name: AcetoneISO, verpat: "6.*",   setname: acetoneiso6,              repos: [ fedora ] } # XXX: ???
-- { name: acetoneiso2,                 setname: acetoneiso,               repos: [ arch, sisyphus ] }
+- { name: acetoneiso2,                 setname: acetoneiso,               repos: [ arch ] }
+- { name: AcetoneISO2,                 setname: acetoneiso,               repos: [ sisyphus ] }
 - { name: ack-grep,                    setname: ack,                      repos: [ debian ] }
 - { name: acroread9,                   setname: acroread,                 repos: [ pkgsrc ] }
 - { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     repos: [ pkgsrc ] }
@@ -80,6 +81,7 @@
 - { name: fox1.6,                      setname: fox16,                    repos: [ debian ]  }
 - { name: fox17,                       setname: fox,                      repos: [ freebsd ] }
 - { name: free42-nologo,               setname: free42,                   repos: [ debian ]  }
+- { name: freebsd-uucp,                setname: uucp,                     repos: [ freebsd ] }
 - { name: freefont-ttf,                setname: freefont,                 repos: [ freebsd ] }
 - { name: freetype,                    setname: freetype1,                repos: [ freebsd, pkgsrc ] }
 - { name: freetype2,                   setname: freetype,                 repos: [ freebsd, pkgsrc ] }
@@ -102,10 +104,14 @@
 - { name: openastromenace,             setname: astromenace,              repos: [ freebsd ] }
 - { name: osg,                         setname: openscenegraph,           repos: [ freebsd ] }
 - { name: pacman-arena,                setname: pacmanarena,              repos: [ openbsd ] }
+- { name: postfix-postfwd,             setname: postfwd,                  repos: [ freebsd ] }
+- { namepat: "povray[0-9]+",           setname: povray,                   repos: [ freebsd ] }
+- { name: puppet4,                     setname: puppet,                   repos: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles,              repos: [ pkgsrc, arch, openbsd ] }
 - { name: sdl-sopwith,                 setname: sopwith,                  repos: [ gentoo ]  }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 repos: [ debian ]  }
 - { name: sdlpango,                    setname: sdl-pango,                repos: [ debian ]  }
+- { namepat: "sendmail\\+.*",          setname: sendmail,                 repos: [ freebsd ]  }
 - { name: seven-kingdoms,              setname: 7kaa,                     repos: [ gentoo ]  }
 - { name: slashem-tty,                 setname: slashem,                  repos: [ freebsd ] }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             repos: [ gentoo ]  } # XXX: recheck
@@ -119,6 +125,8 @@
 - { name: tintin,                      setname: tintin++,                 repos: [ gentoo ]  }
 - { name: trigger,                     setname: trigger-rally,            repos: [ gentoo ]  }
 - { name: ufo-ai,                      setname: ufoai,                    repos: [ gentoo ]  }
+- { name: varnish4,                    setname: varnish,                  repos: [ freebsd ]  }
+- { name: vsftpd-ssl,                  setname: vsftpd,                   repos: [ freebsd ]  }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             repos: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                repos: [ freebsd ] }
 - { name: zookeeper-c,                 setname: zookeeper,                repos: [ gentoo ]  }
@@ -421,6 +429,8 @@
 - { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
 - { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
 - { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
+- { name: sogo, verpat: "2\\..*",      setname: sogo2 }
+- { name: sogo, verpat: "3\\..*",      setname: sogo3 }
 
 # TODO
 # - texlive
