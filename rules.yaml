@@ -419,6 +419,8 @@
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 - { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
 - { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
+- { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
+- { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
 
 # TODO
 # - texlive
