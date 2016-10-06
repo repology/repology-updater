@@ -18,7 +18,7 @@
 - { name: acroread9,                   setname: acroread,                 repos: [ pkgsrc ] }
 - { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     repos: [ pkgsrc ] }
 - { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      repos: [ pkgsrc ] }
-- { name: actionaz,                    setname: actiona,                  repos: [ chocolatey ] }
+- { name: Actionaz,                    setname: actiona,                  repos: [ chocolatey ] }
 - { name: activeio,                    setname: activemq-activeio,        repos: [ fedora, sisyphus ] }
 - { name: adb,                         setname: android-tools,            repos: [ openbsd ] }
 - { name: adblockplus-firefox,         setname: adblock-plus,             repos: [ chocolatey ] }
@@ -140,7 +140,7 @@
 
 # GNUstep packages (should be likely the other way around: foo->foo.app)
 - { name: aclock.app,                  setname: aclock,                   repos: [ debian ]  }
-- { name: addresses-for-gnus,          setname: addresses,                repos: [ debian ]  }
+- { name: addresses-for-gnustep,       setname: addresses,                repos: [ debian ]  }
 - { name: batmon.app,                  setname: batmon,                   repos: [ debian ]  }
 - { name: camera.app,                  setname: camera,                   repos: [ debian ]  }
 - { name: cenon.app,                   setname: cenon,                    repos: [ debian ]  }
@@ -269,7 +269,7 @@
 - { name: gnatsd,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: gsutil,                                                    repos: [ chocolatey ], ignorever: true }
 - { name: GSView,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: graphviz,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
+- { name: Graphviz,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: Gyazo,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
 - { name: handbrake,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: hdparm,                                                    repos: [ chocolatey ], ignore: true }
@@ -329,7 +329,6 @@
 - { name: pvm,                                                       repos: [ chocolatey ], ignore: true }
 - { name: pwgen,                                                     repos: [ chocolatey ], ignore: true }
 - { name: python,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: python3,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: qtox,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: redis,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
 - { name: retroshare,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
@@ -464,9 +463,8 @@
 
 # Ruby
 - { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch, fedora, sisyphus ] }
-- { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd ] }
+- { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd, opensuse] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", repos: [ freebsd, openbsd, pkgsrc ] }
-- { namepat: "ruby[0-9]\\.[0-9]-rubygem-(.*)", setname: "ruby:$1", repos: [ opensuse ] }
 - { category: dev-ruby,                setname: "ruby:$0", repos: [ gentoo ] }
 
 # Tryton (wtf is that); needs to be before python
