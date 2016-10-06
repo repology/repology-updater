@@ -12,7 +12,7 @@
 - { name: accounts-qt5,                setname: accounts-qt ,             repos: [ sisyphus ] }
 - { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }
-- { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              repos: [ fedora ] } # XXX: ???
+- { name: AcetoneISO, verpat: "6.*",   setname: acetoneiso6,              repos: [ fedora ] } # XXX: ???
 - { name: acetoneiso2,                 setname: acetoneiso,               repos: [ arch, sisyphus ] }
 - { name: ack-grep,                    setname: ack,                      repos: [ debian ] }
 - { name: acroread9,                   setname: acroread,                 repos: [ pkgsrc ] }
@@ -382,15 +382,15 @@
 - { name: zoom,                                                      repos: [ chocolatey ], ignore: true }
 
 # Unique ignores which will never appear in other distros
-- { namepat: "alterator-.*",                                         repos: [ sisiphus ], ignore: true } # ALT-specific
-- { namepat: "installer-.*",                                         repos: [ sisiphus ], ignore: true } # ALT-specific
-- { namepat: "altlinux-.*",                                          repos: [ sisiphus ], ignore: true } # ALT-specific
-- { namepat: "appliance-.*",                                         repos: [ sisiphus ], ignore: true } # ALT-specific
-- { namepat: "repocop.*",                                            repos: [ sisiphus ], ignore: true } # ALT-specific
-- { namepat: "livecd-*",                                             repos: [ sisiphus ], ignore: true } # ALT-specific
+- { namepat: "alterator-.*",                                         repos: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "installer-.*",                                         repos: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "altlinux-.*",                                          repos: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "appliance-.*",                                         repos: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "repocop.*",                                            repos: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "livecd-*",                                             repos: [ sisyphus ], ignore: true } # ALT-specific
 - { namepat: "compat[0-9].*",                                        repos: [ freebsd, pkgsrc ], ignore: true } # system libs for older FreeBSD versions
-- { namepat: "netbsd32-compat[0-9].*",                               repos: [ pkgsrc ], ignore: true } # system libs for older FreeBSD versions
-- { name: "eselect.*",                                               repos: [ gentoo ], ignore: true } # Gentoo-specific
+- { namepat: "netbsd32_compat[0-9].*",                               repos: [ pkgsrc ], ignore: true } # system libs for older FreeBSD versions
+- { name: "eselect",                                                 repos: [ gentoo ], ignore: true } # Gentoo-specific
 - { namepat: "eselect-.*",                                           repos: [ gentoo ], ignore: true } # Gentoo-specific
 - { namepat: "fedora-.*",                                            repos: [ fedora ], ignore: true } # Fedora-specific
 - { namepat: "linux-(?:c6|f10)-.*",                                  repos: [ freebsd ], ignore: true } # linux binary packages for FreeBSD
@@ -484,7 +484,7 @@
 - { category: dev-ruby,                setname: "ruby:$0", repos: [ gentoo ] }
 
 # Tryton (wtf is that); needs to be before python
-- { namepat: "py[0-9]{2}-trytond-(.*)", setname: "tryton:$1", repos: [ pkgsrc ] }
+- { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$2", repos: [ pkgsrc ] }
 - { namepat: "trytond28_(.*)",         setname: "tryton:$1", repos: [ freebsd ] }
 - { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", repos: [ debian ] }
 - { namepat: "trytond-module-(.*)",    setname: "tryton:$1", repos: [ openbsd ] }
