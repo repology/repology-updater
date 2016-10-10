@@ -50,7 +50,8 @@ def Main():
 
     repoman = RepositoryManager(options.statedir)
 
-    had_error = False
+    total_count = 0
+    success_count = 0
     for reponame in repoman.GetNames(tags=options.tag, repositories=options.repository):
         repo_logger = logger.GetPrefixed(reponame + ": ")
         repo_logger.Log("processing started")
@@ -59,17 +60,24 @@ def Main():
                 repoman.FetchOne(reponame, update=options.update, logger=repo_logger.GetIndented())
             if options.parse:
                 repoman.ParseAndSerializeOne(reponame, logger=repo_logger.GetIndented())
+        except KeyboardInterrupt:
+            logger.Log("processing interrupted")
+            return 1
         except:
             repo_logger.Log("processing failed, exception follows")
             for item in traceback.format_exception(*sys.exc_info()):
                 for line in item.split('\n'):
                     if line:
                         repo_logger.GetIndented().Log(line)
-            had_error = True
         else:
             repo_logger.Log("processing complete")
+            success_count += 1
 
-    return 1 if had_error else 0
+        total_count += 1
+
+    logger.Log("{}/{} repositories processed successfully".format(success_count, total_count))
+
+    return 0 if success_count == total_count else 1
 
 if __name__ == '__main__':
     os.sys.exit(Main())
