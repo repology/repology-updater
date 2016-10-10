@@ -146,6 +146,7 @@
 - { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 repos: [ debian ]  }
 - { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                repos: [ debian ]  }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          repos: [ freebsd ] }
+- { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         repos: [ freebsd ] }
 
 # XXX: continue looking through the list starting from gaul
 
