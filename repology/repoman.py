@@ -71,7 +71,10 @@ class RepositoryManager:
 
     def GetMetadata(self):
         return {repository['name']: {
-            'incomplete': repository['incomplete'] if 'incomplete' in repository else False,
+            'incomplete': repository.get('incomplete', False),
+            'shadow': repository.get('shadow', False),
+            'link': repository.get('link', '#'),
+            'repotype': repository['repotype'],
         } for repository in REPOSITORIES}
 
     def Fetch(self, update=True, tags=None, repositories=None):
