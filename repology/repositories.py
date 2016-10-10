@@ -182,7 +182,7 @@ REPOSITORIES = [
         'parser': ChocolateyParser(),
         'shadow': True,
         'link': 'https://chocolatey.org/packages/{name}',
-        'tags': ['all', 'preproduction', 'slowfetch'],
+        'tags': ['all', 'preproduction', 'fastfetch'],
     },
     {
         'name': 'SlackBuilds',
