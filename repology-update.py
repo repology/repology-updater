@@ -21,7 +21,7 @@ import os
 import sys
 from argparse import ArgumentParser
 
-from repology.repositories import RepositoryManager
+from repology.repoman import RepositoryManager
 from repology.logger import *
 
 

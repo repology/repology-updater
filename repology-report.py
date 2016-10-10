@@ -28,7 +28,7 @@ from repology.package import *
 from repology.nametransformer import NameTransformer
 from repology.report import ReportProducer
 from repology.template import Template
-from repology.repositories import RepositoryManager
+from repology.repoman import RepositoryManager
 from repology.logger import *
 
 
