@@ -28,10 +28,9 @@ from repology.repositories import REPOSITORIES
 
 
 class RepositoryManager:
-    def __init__(self, statedir, enable_shadow=True, logger=NoopLogger()):
+    def __init__(self, statedir, enable_shadow=True):
         self.statedir = statedir
         self.enable_shadow = enable_shadow
-        self.logger = logger
 
     def GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
@@ -40,7 +39,16 @@ class RepositoryManager:
         tmpext = ".tmp" if tmp else ""
         return os.path.join(self.statedir, repository['name'] + ".packages" + tmpext)
 
-    def ForEach(self, processor, tags=None, repositories=None):
+    def GetRepository(self, reponame):
+        for repository in REPOSITORIES:
+            if repository['name'] == reponame:
+                return repository
+
+        raise KeyError('No such repository ' + reponame)
+
+    def GetRepositories(self, tags=None, repositories=None):
+        filtered_repositories = []
+
         for repository in REPOSITORIES:
             if repositories and not repository['name'] in repositories:
                 continue
@@ -57,17 +65,16 @@ class RepositoryManager:
                         break
 
             if not skip:
-                processor(repository)
+                filtered_repositories.append(repository)
+
+        return filtered_repositories
+
+    def ForEach(self, processor, tags=None, repositories=None):
+        for repo in self.GetRepositories(tags, repositories):
+            processor(repo)
 
     def GetNames(self, tags=None, repositories=None):
-        names = []
-
-        def AppendName(repository):
-            names.append(repository['name'])
-
-        self.ForEach(AppendName, tags=tags, repositories=repositories)
-
-        return names
+        return [repo['name'] for repo in self.GetRepositories(tags, repositories)]
 
     def GetMetadata(self):
         return {repository['name']: {
@@ -76,18 +83,6 @@ class RepositoryManager:
             'link': repository.get('link', '#'),
             'repotype': repository['repotype'],
         } for repository in REPOSITORIES}
-
-    def Fetch(self, update=True, tags=None, repositories=None):
-        def Fetcher(repository):
-            logger = self.logger.GetPrefixed(repository['name'] + ": ")
-            logger.Log("fetching started")
-            repository['fetcher'].Fetch(self.GetStatePath(repository), update=update, logger=logger)
-            logger.Log("fetching complete")
-
-        if not os.path.isdir(self.statedir):
-            os.mkdir(self.statedir)
-
-        self.ForEach(Fetcher, tags, repositories)
 
     def Mix(self, packages_by_repo, name_transformer):
         packages = {}
@@ -126,50 +121,72 @@ class RepositoryManager:
 
         return [packages[name] for name in sorted(packages.keys()) if CheckShadows(packages[name])]
 
-    def Parse(self, name_transformer, tags=None, repositories=None):
+    # Single repo methods
+    def FetchOne(self, reponame, update=True, logger=NoopLogger()):
+        repository = self.GetRepository(reponame)
+
+        logger.Log("fetching started")
+        repository['fetcher'].Fetch(self.GetStatePath(repository), update=update, logger=logger.GetIdented())
+        logger.Log("fetching complete")
+
+    def ParseOne(self, reponame, name_transformer, logger=NoopLogger()):
+        repository = self.GetRepository(reponame)
+
+        logger.Log("parsing started")
+        repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
+        logger.Log("parsing complete, {} packages".format(len(repo_packages)))
+        return repo_packages
+
+    def ParseAndSerializeOne(self, reponame, logger=NoopLogger()):
+        repository = self.GetRepository(reponame)
+
+        logger.Log("parsing + saving started")
+        repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
+        pickle.dump(
+            repo_packages,
+            open(self.GetSerializedPath(repository, tmp=True), "wb")
+        )
+        os.rename(self.GetSerializedPath(repository, tmp=True), self.GetSerializedPath(repository))
+        logger.Log("parsing + saving complete, {} packages".format(len(repo_packages)))
+
+    def DeserializeOne(self, reponame, name_transformer, logger=NoopLogger()):
+        repository = self.GetRepository(reponame)
+
+        logger.Log("loading started")
+        repo_packages = pickle.load(open(self.GetSerializedPath(repository), "rb"))
+        logger.Log("loading complete, {} packages".format(len(repo_packages)))
+        return repo_packages
+
+    # Multi repo methods
+    def Fetch(self, update=True, tags=None, repositories=None, logger=NoopLogger()):
+        if not os.path.isdir(self.statedir):
+            os.mkdir(self.statedir)
+
+        for repo in self.GetRepositories(tags, repositories):
+            self.FetchOne(repo['name'], update=update, logger=logger.GetPrefixed(repo['name'] + ": "))
+
+    def Parse(self, name_transformer, tags=None, repositories=None, logger=NoopLogger()):
         packages_by_repo = {}
 
-        def Parser(repository):
-            logger = self.logger.GetPrefixed(repository['name'] + ": ")
-            logger.Log("parsing started")
-            repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
-            packages_by_repo[repository['name']] = repo_packages
-            logger.Log("parsing complete, {} packages".format(len(repo_packages)))
+        for repo in self.GetRepositories(tags, repositories):
+            packages_by_repo[repo['name']] = self.ParseOne(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
 
-        self.ForEach(Parser, tags, repositories)
-
-        self.logger.Log("merging started")
+        logger.Log("merging started")
         packages = self.Mix(packages_by_repo, name_transformer)
-        self.logger.Log("merging complete, {} metapackages".format(len(packages)))
+        logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages
 
-    def ParseAndSerialize(self, tags=None, repositories=None):
-        def ParserSerializer(repository):
-            logger = self.logger.GetPrefixed(repository['name'] + ": ")
-            logger.Log("parsing + saving started")
-            repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
-            pickle.dump(
-                repo_packages,
-                open(self.GetSerializedPath(repository, tmp=True), "wb")
-            )
-            os.rename(self.GetSerializedPath(repository, tmp=True), self.GetSerializedPath(repository))
-            logger.Log("parsing + saving complete, {} packages".format(len(repo_packages)))
+    def ParseAndSerialize(self, tags=None, repositories=None, logger=NoopLogger()):
+        for repo in self.GetRepositories(tags, repositories):
+            self.ParseAndSerializeOne(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
 
-        self.ForEach(ParserSerializer, tags, repositories)
-
-    def Deserialize(self, name_transformer, tags=None, repositories=None):
+    def Deserialize(self, name_transformer, tags=None, repositories=None, logger=NoopLogger()):
         packages_by_repo = {}
 
-        def Deserializer(repository):
-            logger = self.logger.GetPrefixed(repository['name'] + ": ")
-            logger.Log("loading started")
-            repo_packages = pickle.load(open(self.GetSerializedPath(repository), "rb"))
-            packages_by_repo[repository['name']] = repo_packages
-            logger.Log("loading complete, {} packages".format(len(repo_packages)))
+        for repo in self.GetRepositories(tags, repositories):
+            packages_by_repo[repo['name']] = self.DeserializeOne(repo['name'], name_transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
 
-        self.ForEach(Deserializer, tags, repositories)
-
-        self.logger.Log("merging started")
+        logger.Log("merging started")
         packages = self.Mix(packages_by_repo, name_transformer)
-        self.logger.Log("merging complete, {} metapackages".format(len(packages)))
+        logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages

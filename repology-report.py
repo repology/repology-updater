@@ -95,11 +95,12 @@ def Main():
     tags = [tag.split(',') for tag in options.tag] if options.tag else []
 
     nametrans = NameTransformer(options.rules)
-    repoman = RepositoryManager(options.statedir, enable_shadow=not options.no_shadow, logger=logger)
+    repoman = RepositoryManager(options.statedir, enable_shadow=not options.no_shadow)
     packages = repoman.Deserialize(
         nametrans,
         tags=tags,
-        repositories=options.repository
+        repositories=options.repository,
+        logger=logger
     )
 
     packages = FilterPackages(

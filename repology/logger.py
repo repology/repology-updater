@@ -32,8 +32,11 @@ class NoopLogger:
     def GetPrefixed(self, prefix):
         return NoopLogger()
 
+    def GetIdented(self, level = 1):
+        return self.GetPrefixed('  ' * level)
 
-class FileLogger:
+
+class FileLogger(NoopLogger):
     def __init__(self, path, prefix=None):
         self.path = path
         self.prefix = prefix
@@ -51,7 +54,7 @@ class FileLogger:
                           self.prefix + prefix if self.prefix else prefix)
 
 
-class StderrLogger:
+class StderrLogger(NoopLogger):
     def __init__(self, prefix=None):
         self.prefix = prefix
         pass

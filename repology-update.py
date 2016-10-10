@@ -19,6 +19,7 @@
 
 import os
 import sys
+import traceback
 from argparse import ArgumentParser
 
 from repology.repoman import RepositoryManager
@@ -47,22 +48,28 @@ def Main():
     if options.logfile:
         logger = FileLogger(options.logfile)
 
-    repoman = RepositoryManager(options.statedir, logger=logger)
+    repoman = RepositoryManager(options.statedir)
 
-    if options.fetch:
-        repoman.Fetch(
-            update=options.update,
-            tags=options.tag,
-            repositories=options.repository
-        )
+    had_error = False
+    for reponame in repoman.GetNames(tags=options.tag, repositories=options.repository):
+        repo_logger = logger.GetPrefixed(reponame + ": ")
+        repo_logger.Log("processing started")
+        try:
+            if options.fetch:
+                repoman.FetchOne(reponame, update=options.update, logger=repo_logger.GetIdented())
+            if options.parse:
+                repoman.ParseAndSerializeOne(reponame, logger=repo_logger.GetIdented())
+        except:
+            repo_logger.Log("processing failed, exception follows")
+            for item in traceback.format_exception(*sys.exc_info()):
+                for line in item.split('\n'):
+                    if line:
+                        repo_logger.GetIdented().Log(line)
+            had_error = True
+        else:
+            repo_logger.Log("processing complete")
 
-    if options.parse:
-        repoman.ParseAndSerialize(
-            tags=options.tag,
-            repositories=options.repository
-        )
-
-    return 0
+    return 1 if had_error else 0
 
 if __name__ == '__main__':
     os.sys.exit(Main())

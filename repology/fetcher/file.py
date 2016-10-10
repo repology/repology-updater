@@ -38,16 +38,16 @@ class FileFetcher():
                 data = Get(source).content
 
                 if self.gz:
-                    logger.Log("  decompressing with gzip")
+                    logger.GetIdented().Log("decompressing with gzip")
                     data = gzip.decompress(data)
                 elif self.bz2:
-                    logger.Log("  decompressing with bz2")
+                    logger.GetIdented().Log("decompressing with bz2")
                     data = bz2.decompress(data)
                 elif self.xz:
-                    logger.Log("  decompressing with xz")
+                    logger.GetIdented().Log("decompressing with xz")
                     data = lzma.LZMADecompressor().decompress(data)
 
-                logger.Log("  saving")
+                logger.GetIdented().Log("saving")
                 statefile.write(data)
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):

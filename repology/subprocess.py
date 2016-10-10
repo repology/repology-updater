@@ -36,7 +36,7 @@ def RunSubprocess(command, logger, shell=False, cwd=None):
                           universal_newlines=True,
                           cwd=cwd) as proc:
         for line in proc.stdout:
-            logger.Log("    " + line.strip())
+            logger.GetIdented().Log(line.strip())
         proc.wait()
         logger.Log("command finished with code {}".format(proc.returncode))
         if proc.returncode != 0:
