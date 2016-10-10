@@ -133,7 +133,9 @@ td:nth-last-child(1) {
 }
 
 .version {
-	padding: 0.2em;
+	font-size: 12px;
+	border-radius: 3px;
+	padding: 2px 4px;
 }
 
 .lonely {
