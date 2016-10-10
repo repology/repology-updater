@@ -32,7 +32,7 @@ class NoopLogger:
     def GetPrefixed(self, prefix):
         return NoopLogger()
 
-    def GetIdented(self, level = 1):
+    def GetIndented(self, level = 1):
         return self.GetPrefixed('  ' * level)
 
 

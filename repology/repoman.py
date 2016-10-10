@@ -126,7 +126,7 @@ class RepositoryManager:
         repository = self.GetRepository(reponame)
 
         logger.Log("fetching started")
-        repository['fetcher'].Fetch(self.GetStatePath(repository), update=update, logger=logger.GetIdented())
+        repository['fetcher'].Fetch(self.GetStatePath(repository), update=update, logger=logger.GetIndented())
         logger.Log("fetching complete")
 
     def ParseOne(self, reponame, name_transformer, logger=NoopLogger()):

@@ -56,15 +56,15 @@ def Main():
         repo_logger.Log("processing started")
         try:
             if options.fetch:
-                repoman.FetchOne(reponame, update=options.update, logger=repo_logger.GetIdented())
+                repoman.FetchOne(reponame, update=options.update, logger=repo_logger.GetIndented())
             if options.parse:
-                repoman.ParseAndSerializeOne(reponame, logger=repo_logger.GetIdented())
+                repoman.ParseAndSerializeOne(reponame, logger=repo_logger.GetIndented())
         except:
             repo_logger.Log("processing failed, exception follows")
             for item in traceback.format_exception(*sys.exc_info()):
                 for line in item.split('\n'):
                     if line:
-                        repo_logger.GetIdented().Log(line)
+                        repo_logger.GetIndented().Log(line)
             had_error = True
         else:
             repo_logger.Log("processing complete")
