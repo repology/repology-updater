@@ -79,15 +79,13 @@ def GenStatistics(metapackages, reponames):
             statistics[reponame]['total'] += 1
             statistics[reponame][versiondata['class']] += 1
 
-    # set totals to 1 to avoid division by zero
+    # merge multi into good and add known
     for repodata in statistics.values():
-        if repodata['total'] == 0:
-            repodata['total'] = 1
         repodata['good'] = repodata['good'] + repodata['multi']
         del repodata['multi']
         repodata['known'] = repodata['good'] + repodata['bad']
 
-    statistics['total'] = len(metapackages) if metapackages else 1
+    statistics['total'] = len(metapackages)
 
     return statistics
 
