@@ -257,17 +257,19 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
                 maintainers[maintainer] = {
                     'sanitized_name': re.sub("[^a-zA-Z@.0-9]", "_", maintainer).lower(),
                     'num_packages': 0,
+                    'packages': [],
                 }
 
             # XXX: doesn't count multiple packages with same name
             maintainers[maintainer]['num_packages'] += 1
+            maintainers[maintainer]['packages'].append(metapackage)
 
     maintainers_path = os.path.join(path, "maintainers")
     if not os.path.isdir(maintainers_path):
         os.mkdir(maintainers_path)
 
     for maintainer, maintainer_data in maintainers.items():
-        maint_packages = FilterPackages(metapackages, maintainer=maintainer)
+        maint_packages = maintainer_data['packages']
 
         rp.RenderFilesPaginated(
             os.path.join(maintainers_path, maintainer_data['sanitized_name']),
