@@ -52,6 +52,7 @@ class FileFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
+            logger.Log("no update requested, skipping")
             return
 
         try:

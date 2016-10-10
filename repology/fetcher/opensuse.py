@@ -35,6 +35,10 @@ class OpenSUSERepodataFetcher():
         return FileFetcher(location)
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
+        if os.path.isfile(statepath) and not update:
+            logger.Log("no update requested, skipping")
+            return
+
         # Get and parse repomd.xml
         repomd_url = self.repourl + "repodata/repomd.xml"
         logger.Log("fetching metadata from " + repomd_url)

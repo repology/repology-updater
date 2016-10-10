@@ -31,3 +31,5 @@ class GitFetcher():
         elif update:
             RunSubprocess(["git", "fetch", "--progress"], cwd=statepath, logger=logger)
             RunSubprocess(["git", "reset", "--hard", "origin/master"], cwd=statepath, logger=logger)
+        else:
+            logger.Log("no update requested, skipping")

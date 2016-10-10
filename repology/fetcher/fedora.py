@@ -65,6 +65,7 @@ class FedoraFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
+            logger.Log("no update requested, skipping")
             return
 
         if os.path.exists(statepath):
