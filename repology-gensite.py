@@ -106,6 +106,14 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
         subsection="about"
     )
 
+    template.RenderToFile(
+        'news.html',
+        os.path.join(path, "news.html"),
+        site_root="",
+        subheader="News",
+        subsection="news"
+    )
+
     shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
 
     logger.Log("===> Statistics")
@@ -139,9 +147,10 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     if not os.path.isdir(widespread_path):
         os.mkdir(widespread_path)
 
+    manyrepos = len(set([repometadata[repo]['repotype'] for repo in repositories]))
     rp.RenderFilesPaginated(
         os.path.join(widespread_path, "widespread"),
-        FilterPackages(metapackages, manyrepos=len(repositories)),
+        FilterPackages(metapackages, manyrepos=manyrepos),
         repositories,
         500,
         repositories=repometadata,

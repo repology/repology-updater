@@ -5,33 +5,36 @@ body {
     margin: 0px;
 }
 
-div.bounds {
+div.container {
     display: block;
     margin: 0px auto;
     width: 980px;
 }
 
 /* headers */
-header {
-    margin: 0 0 20px 0;
-}
-
-.header1 {
+.header-stripe-1 {
     background-color: #dddddd;
+    overflow: auto;
+    padding: 10px 0px 10px 0px;
 }
 
-.header1 h1 {
+.header-stripe-1 h1 {
     font-weight: bold;
     font-size: 600%;
-    padding: 0px 0px 10px 10px;
-    margin: 0;
 }
 
-.header2 {
-    background-color: #f7f5f3;
+.site-logo {
+    display: block;
+    float: left;
+    margin: 0px 20px 0px 20px;
 }
 
-.header2 h2 {
+.header-stripe-2 {
+    background-color: #eeeeee;
+    margin-bottom: 20px;
+}
+
+.header-stripe-2 h2 {
     font-weight: bold;
     font-size: 200%;
     padding: 10px;
@@ -65,7 +68,7 @@ nav {
 
 nav ul {
     display: block;
-    padding: 10px;
+    padding: 5px;
     margin: 0px;
 }
 
@@ -77,18 +80,19 @@ nav ul li a {
     text-align: center;
     min-width: 30px;
     display: inline-block;
-    background-color: #f7f5f3;
+    background-color: #f0f0f0;
     padding: 4px 8px;
     margin: 2px 0px;
     text-decoration: none;
+    border-radius: 5px;
 }
 
 nav ul li a.active {
-    background-color: #dddddd;
+    background-color: #ffffff;
 }
 
 nav ul li a:hover {
-    background-color: #dddddd;
+    background-color: #ffffff;
 }
 
 /* packages table */

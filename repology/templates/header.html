@@ -13,41 +13,43 @@
     </head>
 <body>
 
+<a href="https://github.com/AMDmi3/repology"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
-<header>
-    <div class="header1">
-        <div class="bounds">
-            <h1>Repology</h1>
-        </div>
-    </div>
-{% if subheader %}
-    <div class="header2">
-        <div class="bounds">
-            <h2>{{ subheader }}</h2>
-        </div>
-    </div>
-{% endif %}
-    <a href="https://github.com/AMDmi3/repology"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-</header>
-
-<div class="bounds">
-
+<div class="header-stripe-1">
+    <div class="container">
+        <nav id="nav-primary">
+            <h1 class="site-logo">Repology</h1>
 {% if subsection %}
-<nav>
-    Sections:
-    <ul>
-        <li><a href="{{ site_root }}index.html"{% if subsection == "packages" %} class="active"{% endif %}>All packages</a></li>
-        <li><a href="{{ site_root }}maintainers/index.html"{% if subsection == "maintainers" %} class="active"{% endif %}>By maintainer</a></li>
-        <li><a href="{{ site_root }}repositories/index.html"{% if subsection == "repositories" %} class="active"{% endif %}>By repo</a></li>
-        <li><a href="{{ site_root }}outdated/index.html"{% if subsection == "outdated" %} class="outdated"{% endif %}>Outdated by repo</a></li>
-        <li><a href="{{ site_root }}missing/index.html"{% if subsection == "missing" %} class="active"{% endif %}>Missing by repo</a></li>
-        <li><a href="{{ site_root }}widespread/widespread.0.html"{% if subsection == "widespread" %} class="active"{% endif %}>Wide-spread</a></li>
-        <li><a href="{{ site_root }}unique/unique.0.html"{% if subsection == "unique" %} class="active"{% endif %}>Unique</a></li>
-        <li><a href="{{ site_root }}statistics.html"{% if subsection == "statistics" %} class="active"{% endif %}>Stats</a></li>
-        <li><a href="{{ site_root }}about.html"{% if subsection == "about" %} class="active"{% endif %}>About</a></li>
-    </ul>
-</nav>
+            <ul>
+                <li><a href="{{ site_root }}news.html"{% if subsection == "news" %} class="active"{% endif %}>News</a></li>
+                <li><a href="{{ site_root }}statistics.html"{% if subsection == "statistics" %} class="active"{% endif %}>Statistics</a></li>
+                <li><a href="{{ site_root }}about.html"{% if subsection == "about" %} class="active"{% endif %}>About</a></li>
+            </ul>
+            <ul>
+                <li><a href="{{ site_root }}index.html"{% if subsection == "packages" %} class="active"{% endif %}>All packages</a></li>
+                <li><a href="{{ site_root }}maintainers/index.html"{% if subsection == "maintainers" %} class="active"{% endif %}>By maintainer</a></li>
+                <li><a href="{{ site_root }}repositories/index.html"{% if subsection == "repositories" %} class="active"{% endif %}>By repo</a></li>
+                <li><a href="{{ site_root }}outdated/index.html"{% if subsection == "outdated" %} class="active"{% endif %}>Outdated by repo</a></li>
+                <li><a href="{{ site_root }}missing/index.html"{% if subsection == "missing" %} class="active"{% endif %}>Missing by repo</a></li>
+                <li><a href="{{ site_root }}widespread/widespread.0.html"{% if subsection == "widespread" %} class="active"{% endif %}>Wide-spread</a></li>
+                <li><a href="{{ site_root }}unique/unique.0.html"{% if subsection == "unique" %} class="active"{% endif %}>Unique</a></li>
+            </ul>
 {% endif %}
+        </nav>
+    </div>
+</div>
+
+{% if subheader %}
+<div class="header-stripe-2">
+    <div class="container">
+        <header>
+            <h2>{{ subheader }}</h2>
+        </heaeder>
+    </div>
+</div>
+{% endif %}
+
+<div class="container">
 
 {% if description %}
 <article><p>{{ description }}</p></article>
