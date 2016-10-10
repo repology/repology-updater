@@ -162,7 +162,7 @@ REPOSITORIES = [
             "http://download.opensuse.org/tumbleweed/repo/src-oss/suse/"
         ),
         'parser': OpenSUSERepodataParser(),
-        'tags': ['all', 'preproduction', 'opensuse', 'fastfetch'],
+        'tags': ['all', 'production', 'opensuse', 'fastfetch'],
     },
     {
         'name': 'ALT Sisyphus',
@@ -173,7 +173,7 @@ REPOSITORIES = [
             xz=True
         ),
         'parser': SrcListClassicParser(),
-        'tags': ['all', 'preproduction', 'fastfetch'],
+        'tags': ['all', 'production', 'fastfetch'],
     },
     {
         'name': 'Chocolatey',
@@ -182,14 +182,14 @@ REPOSITORIES = [
         'parser': ChocolateyParser(),
         'shadow': True,
         'link': 'https://chocolatey.org/packages/{name}',
-        'tags': ['all', 'preproduction', 'fastfetch'],
+        'tags': ['all', 'production', 'fastfetch'],
     },
     {
         'name': 'SlackBuilds',
         'repotype': 'slackbuilds',
         'fetcher': GitFetcher("git://slackbuilds.org/slackbuilds"),
         'parser': SlackBuildsParser(),
-        'tags': ['all', 'preproduction', 'fastfetch'],
+        'tags': ['all', 'production', 'fastfetch'],
     },
 ]
 
