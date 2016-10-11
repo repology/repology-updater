@@ -184,4 +184,12 @@ REPOSITORIES = [
         'parser': SlackBuildsParser(),
         'tags': ['all', 'production', 'fastfetch'],
     },
+    {
+        'name': 'freshcode.club',
+        'repotype': 'freshcode',
+        'fetcher': FreshcodeFetcher("http://freshcode.club/feed/xfer.json"),
+        'parser': FreshcodeParser(),
+        'shadow': True,
+        'tags': ['all', 'preproduction', 'fastfetch'],
+    },
 ]

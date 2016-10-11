@@ -15,10 +15,31 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from .file import FileFetcher
-from .git import GitFetcher
-from .arch import ArchDBFetcher
-from .fedora import FedoraFetcher
-from .chocolatey import ChocolateyFetcher
-from .opensuse import OpenSUSERepodataFetcher
-from .freshcode import FreshcodeFetcher
+import os
+import json
+
+from ..package import Package
+
+
+class FreshcodeParser():
+    def __init__(self):
+        pass
+
+    def Parse(self, path):
+        result = []
+
+        # note that we actually parse database prepared by
+        # fetcher, not the file we've downloaded
+        with open(path, 'r', encoding='utf-8') as jsonfile:
+            for entry in json.load(jsonfile).values():
+                pkg = Package()
+
+                pkg.name = entry['name']
+                pkg.version = entry['version']
+                pkg.fullverson = pkg.version
+                pkg.homepage = entry['homepage']
+                pkg.comment = entry['description']
+
+                result.append(pkg)
+
+        return result
