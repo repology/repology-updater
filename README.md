@@ -167,18 +167,20 @@ directory which is created if it doesn't exist.
 
 ## Repository support
 
-| Repository    | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License |
-|---------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:--------|
-| FreeBSD       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
-| Debian/Ubuntu | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
-| Gentoo        | ✔    | ✔       |         |               | ✔            |          |         |
-| pkgsrc        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
-| OpenBSD       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
-| Arch          | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
-| Fedora        | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
-| OpenSUSE      | ✔    | ✔       |         |               |              |          |         |
-| Sisyphus      | ✔    | ✔       |         | ✔             |              | ✔        |         |
-| Chocolatey    | ✔    | ✔       | ✔       |               |              | ✔        |         |
+| Repository     | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License |
+|----------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:--------|
+| FreeBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
+| Debian/Ubuntu  | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
+| Gentoo         | ✔    | ✔       |         |               | ✔            |          |         |
+| pkgsrc         | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
+| OpenBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
+| Arch           | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
+| Fedora         | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
+| OpenSUSE       | ✔    | ✔       |         |               |              |          |         |
+| Sisyphus       | ✔    | ✔       |         | ✔             |              | ✔        |         |
+| Chocolatey     | ✔    | ✔       | ✔       |               |              | ✔        |         |
+| SlackBuilds    | ✔    | ✔       |         | ✔             |              | ✔        |         |
+| freshcode.club | ✔    | ✔       | ✔       |               |              | ✔        |         |
 
 ### FreeBSD
 
@@ -269,6 +271,14 @@ Parses srclist.classic files with custom C utility.
 ### Chocolatey
 
 Parses XML descriptions of packages from chocolatey API.
+
+### SlackBuilds
+
+Parses .info files from SlackBuilds.
+
+### freshcode.club
+
+Parses feed of version updates from [freshcode.club](http://freshcode.club).
 
 ## Reading the report
 
