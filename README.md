@@ -255,30 +255,41 @@ Links:
 
 ### OpenSUSE
 
-Parses rpm package lists which only contain package names and versions.
+Parses source package lists.
 
-Because these are binary package lists, these are not suitable for
-comparison with other repos. For instance, for each ```libfoo```
-in other repos we'll have ```libfooN``` ```libfoo-devel``` and
-```libfooN-32bit``` here. Needs to be switched to another source.
-For now, this is enabled in shadow mode, e.g. unique packages in
-this repository are ignored.
+Links
+- [Repository](http://download.opensuse.org/tumbleweed/repo/src-oss/suse/)
 
 ### Sisyphus
 
 Parses srclist.classic files with custom C utility.
 
+Links:
+- [Sisyphus repository](http://www.sisyphus.ru/en/)
+
 ### Chocolatey
 
 Parses XML descriptions of packages from chocolatey API.
+
+Links:
+- [Chocolatey packages](https://chocolatey.org/packages)
 
 ### SlackBuilds
 
 Parses .info files from SlackBuilds.
 
+Links:
+- [SlackBuilds.org](https://slackbuilds.org/)
+
 ### freshcode.club
 
-Parses feed of version updates from [freshcode.club](http://freshcode.club).
+Parses feed of version updates from freshcode.club.
+Since feed only contains 100 latest updates, it is accumulated in
+the state file with each update. Entries with highest vesion number
+are preserved.
+
+Links:
+- [freshcode.club](http://freshcode.club/)
 
 ## Reading the report
 
