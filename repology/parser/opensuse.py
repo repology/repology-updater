@@ -34,7 +34,8 @@ class OpenSUSERepodataParser():
             pkg = Package()
 
             pkg.name = entry.find("{http://linux.duke.edu/metadata/common}name").text
-            pkg.version = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
+            pkg.fullversion = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
+            pkg.version = pkg.fullversion
             pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
             pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
 
