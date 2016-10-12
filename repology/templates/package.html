@@ -16,7 +16,13 @@
             {% if package.maintainers|length == 1 %}
                 <li><b>Maintainer:</b> {{ package.maintainers[0]|escape }}</li>
             {% else %}
-                <li><b>Maintainers:</b> {{ package.maintainers|join(', ')|escape }}</li>
+                <li><b>Maintainers:</b>
+                    <ul>
+                        {% for maintainer in package.maintainers %}
+                            <li>{{ maintainer|escape }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
             {% endif %}
         {% endif %}
         {% if package.category %}
