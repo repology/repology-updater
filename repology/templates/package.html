@@ -1,0 +1,35 @@
+{% include 'header.html' %}
+
+{% for repository in metapackage.packages.keys() %}
+<h2>{{ repository }}</h2>
+    {% for package in metapackage.packages[repository] %}
+    <h3>{{ package.name|escape }}-{{ package.version|escape }}
+            {% if package.version != package.fullversion %}
+                ({{ package.fullversion|escape }})
+            {% endif %}
+    </h3>
+    <ul>
+        {% if package.comment %}
+            <li><b>Summary:</b> {{ package.comment|escape }}</li>
+        {% endif %}
+        {% if package.maintainers %}
+            {% if package.maintainers|length == 1 %}
+                <li><b>Maintainer:</b> {{ package.maintainers[0]|escape }}</li>
+            {% else %}
+                <li><b>Maintainers:</b> {{ package.maintainers|join(', ')|escape }}</li>
+            {% endif %}
+        {% endif %}
+        {% if package.category %}
+            <li><b>Category:</b> {{ package.category|escape }}</li>
+        {% endif %}
+        {% if package.homepage %}
+            <li><b>Homepage:</b> <a href="{{ package.homepage|escape }}">{{ package.homepage|escape }}</a></li>
+        {% endif %}
+        {% if package.lincense %}
+            <li><b>Lincese:</b> {{ package.lincese|escape }}</li>
+        {% endif %}
+    </ul>
+    {% endfor %}
+{% endfor %}
+
+{% include 'footer.html' %}

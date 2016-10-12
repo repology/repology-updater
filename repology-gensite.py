@@ -306,6 +306,23 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
         subsection="maintainers"
     )
 
+    logger.Log("===> Per-package pages")
+    packages_path = os.path.join(path, "package")
+    if not os.path.isdir(packages_path):
+        os.mkdir(packages_path)
+
+    for metapackage in metapackages:
+        template.RenderToFile(
+            'package.html',
+            os.path.join(packages_path, metapackage.GetName() + ".html"),
+            site_root="../",
+            repositories=repositories,
+            subheader="Package {}".format(metapackage.GetName()),
+            metapackage=metapackage,
+            subsection="packages",
+        )
+
+    logger.Log("===> Site generation complete")
 
 def Main():
     parser = ArgumentParser()

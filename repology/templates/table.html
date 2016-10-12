@@ -21,7 +21,7 @@
     </tr>
     {% endif %}
     <tr>
-        <td>{{ package.name|spantrim(20) }}</td>
+        <td><a href="{{ site_root }}package/{{ package.name }}.html">{{ package.name|spantrim(20) }}</a></td>
         {% for reponame in reponames %}
             {% set subpackage = package.versions[reponame] %}
             {% if subpackage is defined %}
