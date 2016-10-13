@@ -37,6 +37,8 @@ class FileFetcher():
                 logger.Log("fetching " + source)
                 data = Get(source).content
 
+                logger.GetIndented().Log("size is {} byte(s)".format(len(data)))
+
                 if self.gz:
                     logger.GetIndented().Log("decompressing with gzip")
                     data = gzip.decompress(data)
@@ -46,6 +48,9 @@ class FileFetcher():
                 elif self.xz:
                     logger.GetIndented().Log("decompressing with xz")
                     data = lzma.LZMADecompressor().decompress(data)
+
+                if self.gz or self.bz2 or self.xz:
+                    logger.GetIndented().Log("size after decompression is {} byte(s)".format(len(data)))
 
                 logger.GetIndented().Log("saving")
                 statefile.write(data)
