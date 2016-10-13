@@ -114,7 +114,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
         subsection="news"
     )
 
-    shutil.copyfile("repology.css", os.path.join(path, "repology.css"))
+    shutil.copytree("assets", os.path.join(path, "assets"))
 
     logger.Log("===> Statistics")
     template.RenderToFile(
