@@ -114,6 +114,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
         subsection="news"
     )
 
+    shutil.rmtree(os.path.join(path, "assets"), ignore_errors=True)
     shutil.copytree("assets", os.path.join(path, "assets"))
 
     logger.Log("===> Statistics")
