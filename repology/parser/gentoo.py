@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import xml.etree.ElementTree
 
 from ..util import VersionCompare
 from ..package import Package
@@ -64,6 +65,23 @@ class GentooGitParser():
                 if not os.path.isdir(package_path):
                     continue
 
+                metadata_path = os.path.join(package_path, "metadata.xml")
+
+                pkg = Package()
+
+                if os.path.isfile(metadata_path):
+                    with open(os.path.join(package_path, "metadata.xml"), 'r', encoding='utf-8') as metafile:
+                        meta = xml.etree.ElementTree.parse(metafile)
+
+                        for entry in meta.findall("maintainer"):
+                            name_node = entry.find("name")
+                            email_node = entry.find("email")
+
+                            if name_node is not None and email_node is not None:
+                                pkg.maintainers.append("{} <{}>".format(name_node.text, email_node.text))
+                            elif email_node is not None:
+                                pkg.maintainers.append(email_node.text)
+
                 maxversion = None
                 for ebuild in os.listdir(package_path):
                     if not ebuild.endswith(".ebuild"):
@@ -75,7 +93,6 @@ class GentooGitParser():
                         maxversion = version
 
                 if maxversion is not None:
-                    pkg = Package()
                     pkg.name = package
                     pkg.fullversion = maxversion
                     pkg.version = SanitizeVersion(pkg.fullversion)

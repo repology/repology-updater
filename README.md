@@ -171,7 +171,7 @@ directory which is created if it doesn't exist.
 |----------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:--------|
 | FreeBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | Debian/Ubuntu  | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
-| Gentoo         | ✔    | ✔       |         |               | ✔            |          |         |
+| Gentoo         | ✔    | ✔       |         | ✔             | ✔            |          |         |
 | pkgsrc         | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | OpenBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | Arch           | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
@@ -180,7 +180,7 @@ directory which is created if it doesn't exist.
 | Sisyphus       | ✔    | ✔       |         | ✔             |              | ✔        |         |
 | Chocolatey     | ✔    | ✔       | ✔       |               |              | ✔        |         |
 | SlackBuilds    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
-| freshcode.club | ✔    | ✔       | ✔       |               |              | ✔        |         |
+| freshcode.club | ✔    | ✔       | ✔       | n/a           |              | ✔        |         |
 
 ### FreeBSD
 
@@ -209,7 +209,7 @@ Links:
 Parses git mirror of portage repository (file tree only, doesn't
 look into ebuilds).
 
-TODO: Parse metadata.xml for maintainer. Parse ebuilds for more info.
+TODO: Parse ebuilds for more info.
 
 Links:
 - [Gentoo packages](https://packages.gentoo.org/)
