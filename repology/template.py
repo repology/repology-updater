@@ -52,6 +52,10 @@ def Split(value, sep):
     return value.split(sep)
 
 
+def NewFormat(value, *args, **kwargs):
+    print(value, kwargs)
+    return value.format(**kwargs) if kwargs else value.format(*args)
+
 class Template:
     def __init__(self):
         self.env = jinja2.Environment(
@@ -63,6 +67,7 @@ class Template:
         self.env.filters["clamp"] = Clamp
         self.env.filters["sqrt"] = sqrt
         self.env.filters["split"] = Split
+        self.env.filters["newformat"] = NewFormat
         self.template_cache = {}
 
     def Render(self, template, **template_data):

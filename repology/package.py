@@ -140,6 +140,11 @@ class MetaPackage:
             # determine versions
             repominversion, repomaxversion = self.GetVersionRangeForRepo(reponame)
 
+            bestrepopackage = repopackages[0]
+            for package in repopackages:
+                if package.version == repomaxversion:
+                    bestrepopackage = package
+
             versionclass = 'bad'
             if bestversion is None:
                 versionclass = 'good'
@@ -156,6 +161,7 @@ class MetaPackage:
 
             self.versions[reponame] = {
                 'version': repomaxversion,
+                'subpackage': bestrepopackage,
                 'class': versionclass,
                 'numpackages': len(repopackages)
             }

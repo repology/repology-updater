@@ -27,9 +27,9 @@
             {% if subpackage is defined %}
                 <td>
                     {% if subpackage.numpackages > 1 %}
-						<span class="version {{ subpackage.class }}">{{ subpackage.version|spantrim(8) }}</span><sup>{{ subpackage.numpackages }}</sup>
+                        <span class="version {{ subpackage.class }}"><a href="{{ repositories[reponame].link|newformat(**subpackage.subpackage.__dict__) }}">{{ subpackage.version|spantrim(8) }}</a></span><sup>{{ subpackage.numpackages }}</sup>
                     {% else %}
-                        <span class="version {{ subpackage.class }}">{{ subpackage.version|spantrim(10) }}</span>
+                        <span class="version {{ subpackage.class }}"><a href="{{ repositories[reponame].link|newformat(**subpackage.subpackage.__dict__) }}">{{ subpackage.version|spantrim(10) }}</a></span>
                     {% endif %}
                 </td>
             {% else %}
