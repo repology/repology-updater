@@ -53,8 +53,8 @@ def Split(value, sep):
 
 
 def NewFormat(value, *args, **kwargs):
-    print(value, kwargs)
     return value.format(**kwargs) if kwargs else value.format(*args)
+
 
 class Template:
     def __init__(self):
