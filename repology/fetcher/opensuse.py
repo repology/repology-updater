@@ -46,7 +46,4 @@ class OpenSUSERepodataFetcher():
         repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
 
         repodata_url = self.repourl + repomd_xml.find("{http://linux.duke.edu/metadata/repo}data[@type='primary']/{http://linux.duke.edu/metadata/repo}location").attrib['href']
-        # XXX: this is gzip, but requests decompress it automatically for us
-        # probably due to uncorrect header 'Content-Encoding': 'gzip' from
-        # OpenSUSE server
-        return FileFetcher(repodata_url).Fetch(statepath, update, logger)
+        return FileFetcher(repodata_url, gz=True).Fetch(statepath, update, logger)
