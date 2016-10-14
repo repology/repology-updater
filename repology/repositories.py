@@ -133,7 +133,8 @@ REPOSITORIES = [
             "http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz"
         ),
         'parser': ArchDBParser(),
-        'link': 'https://git.archlinux.org/svntogit/packages.git/tree/trunk?h=packages/{name}',
+        # XXX: 'https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name} add support for `repository'
+        'link': 'https://www.archlinux.org/packages/?sort=&q={name}',
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
