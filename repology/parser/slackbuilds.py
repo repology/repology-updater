@@ -31,6 +31,7 @@ class SlackBuildsParser():
         for category in os.listdir(path):
             if category.startswith("."):
                 continue
+
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):
                 continue
@@ -47,6 +48,8 @@ class SlackBuildsParser():
 
                 with open(info_path, encoding='utf-8', errors='ignore') as infofile:
                     pkg = Package()
+
+                    pkg.category = category
 
                     for line in infofile:
                         line = line.strip()

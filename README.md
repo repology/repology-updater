@@ -179,7 +179,7 @@ directory which is created if it doesn't exist.
 | OpenSUSE       | ✔    | ✔       |         |               |              |          |         |
 | Sisyphus       | ✔    | ✔       |         | ✔             |              | ✔        |         |
 | Chocolatey     | ✔    | ✔       | ✔       |               |              | ✔        |         |
-| SlackBuilds    | ✔    | ✔       |         | ✔             |              | ✔        |         |
+| SlackBuilds    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
 | freshcode.club | ✔    | ✔       | ✔       |               |              | ✔        |         |
 
 ### FreeBSD
