@@ -26,11 +26,22 @@
             {% set subpackage = package.versions[reponame] %}
             {% if subpackage is defined %}
                 <td>
-                    {% if subpackage.numpackages > 1 %}
-                        <span class="version {{ subpackage.class }}"><a href="{{ repositories[reponame].link|newformat(**subpackage.subpackage.__dict__) }}">{{ subpackage.version|spantrim(8) }}</a></span><sup>{{ subpackage.numpackages }}</sup>
-                    {% else %}
-                        <span class="version {{ subpackage.class }}"><a href="{{ repositories[reponame].link|newformat(**subpackage.subpackage.__dict__) }}">{{ subpackage.version|spantrim(10) }}</a></span>
-                    {% endif %}
+                    <span class="version {{ subpackage.class }}">
+                        {%- if repositories[reponame].link -%}
+                            <a href="{{ repositories[reponame].link|newformat(**subpackage.subpackage.__dict__) }}">
+                        {%- endif -%}
+                        {%- if subpackage.numpackages > 1 -%}
+                            {{- subpackage.version|spantrim(8) -}}
+                        {%- else -%}
+                            {{- subpackage.version|spantrim(10) -}}
+                        {%- endif -%}
+                        {%- if repositories[reponame].link -%}
+                            </a>
+                        {%- endif -%}
+                    </span>
+                    {%- if subpackage.numpackages > 1 -%}
+                        <sup>{{- subpackage.numpackages -}}</sup>
+                    {%- endif -%}
                 </td>
             {% else %}
                 <td>-</td>

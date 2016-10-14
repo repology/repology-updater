@@ -80,7 +80,7 @@ class RepositoryManager:
         return {repository['name']: {
             'incomplete': repository.get('incomplete', False),
             'shadow': repository.get('shadow', False),
-            'link': repository.get('link', '#'),
+            'link': repository.get('link'),
             'repotype': repository['repotype'],
         } for repository in REPOSITORIES}
 
