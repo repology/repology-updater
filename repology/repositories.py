@@ -156,6 +156,7 @@ REPOSITORIES = [
             "http://download.opensuse.org/tumbleweed/repo/src-oss/suse/"
         ),
         'parser': OpenSUSERepodataParser(),
+        'link': 'https://software.opensuse.org/package/{name}',
         'tags': ['all', 'production', 'opensuse', 'fastfetch'],
     },
     {
@@ -167,6 +168,7 @@ REPOSITORIES = [
             xz=True
         ),
         'parser': SrcListClassicParser(),
+        'link': 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}',
         'tags': ['all', 'production', 'fastfetch'],
     },
     {
@@ -183,6 +185,7 @@ REPOSITORIES = [
         'repotype': 'slackbuilds',
         'fetcher': GitFetcher("git://slackbuilds.org/slackbuilds"),
         'parser': SlackBuildsParser(),
+        'link': 'https://slackbuilds.org/repository/14.2/{category}/{name}/',
         'tags': ['all', 'production', 'fastfetch'],
     },
     {
@@ -191,6 +194,7 @@ REPOSITORIES = [
         'fetcher': FreshcodeFetcher("http://freshcode.club/feed/xfer.json"),
         'parser': FreshcodeParser(),
         'shadow': True,
+        'link': 'http://freshcode.club/projects/{name}',
         'tags': ['all', 'preproduction', 'fastfetch'],
     },
 ]
