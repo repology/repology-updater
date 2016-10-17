@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 	Header header;
 	while ((header = headerRead(rpmfile, HEADER_MAGIC_YES)) != NULL) {
 		const char *errmsg = "unknown error";
-		char *str = headerFormat(header, "%{name}|%{version}|%{packager}\n", &errmsg);
+		char *str = headerFormat(header, "%{name}|%{version}|%{packager}|%{group}|%{summary}\n", &errmsg);
 
 		if (str != NULL) {
 			fputs(str, stdout);

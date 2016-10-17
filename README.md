@@ -177,7 +177,7 @@ directory which is created if it doesn't exist.
 | Arch           | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
 | Fedora         | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
 | OpenSUSE       | ✔    | ✔       |         |               |              |          |         |
-| Sisyphus       | ✔    | ✔       |         | ✔             |              | ✔        |         |
+| Sisyphus       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | Chocolatey     | ✔    | ✔       | ✔       |               |              | ✔        |         |
 | SlackBuilds    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
 | freshcode.club | ✔    | ✔       | ✔       | n/a           |              | ✔        |         |
