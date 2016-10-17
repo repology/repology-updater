@@ -94,7 +94,7 @@ class MetaPackage:
     def HasCategoryLike(self, category):
         for packagelist in self.packages.values():
             for package in packagelist:
-                if package.category is not None and package.category.find(category) != -1:
+                if package.category is not None and package.category.lower().find(category) != -1:
                     return True
 
         return False
