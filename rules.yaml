@@ -16,6 +16,7 @@
 - { name: acetoneiso2,                 setname: acetoneiso,               repos: [ arch ] }
 - { name: AcetoneISO2,                 setname: acetoneiso,               repos: [ sisyphus ] }
 - { name: ack-grep,                    setname: ack,                      repos: [ debian ] }
+- { namepat: "acpica-(?:tools|unix|utils)", setname: acpica                                 }
 - { name: acroread9,                   setname: acroread,                 repos: [ pkgsrc ] }
 - { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     repos: [ pkgsrc ] }
 - { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      repos: [ pkgsrc ] }
@@ -24,8 +25,10 @@
 - { name: adb,                         setname: android-tools,            repos: [ openbsd ] }
 - { name: adblockplus-firefox,         setname: adblock-plus,             repos: [ chocolatey ] }
 - { name: adobeps-win,                 setname: adobeps,                  repos: [ pkgsrc ]  } # XXX: recheck
+- { name: adodb5,                      setname: adodb,                    repos: [ freebsd ]  }
 - { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               repos: [ freebsd ]  }
 - { name: adzap,                       setname: adzapper,                 repos: [ freebsd, pkgsrc ] }
+- { name: aiksaurus-gtk,               setname: aiksaurus,                repos: [ freebsd ] } # slave port
 - { name: alienarena,                  setname: alien-arena,              repos: [ gentoo, arch, fedora ] }
 - { name: alienarena-data,             setname: alien-arena-data,         repos: [ arch ] }
 - { name: armagetron,                  setname: armagetronad,             repos: [ freebsd, opensuse ] }
