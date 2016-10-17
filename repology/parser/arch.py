@@ -68,9 +68,7 @@ class ArchDBParser():
                     elif tag == 'URL':
                         pkg.homepage = line
                     elif tag == 'LICENSE':
-                        if pkg.license is None:
-                            pkg.license = []
-                        pkg.license.append(line)
+                        pkg.licenses.append(line)
                     elif tag == 'PACKAGER':
                         pkg.maintainers.append(line)
                     elif line.startswith('%') and line.endswith('%'):

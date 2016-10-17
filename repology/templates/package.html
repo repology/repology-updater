@@ -31,8 +31,14 @@
         {% if package.homepage %}
             <li><b>Homepage:</b> <a href="{{ package.homepage|escape }}">{{ package.homepage|escape }}</a></li>
         {% endif %}
-        {% if package.lincense %}
-            <li><b>Lincese:</b> {{ package.lincese|escape }}</li>
+        {% if package.licenses %}
+            <li><b>License(s):</b>
+                <ul>
+                    {% for license in package.licenses %}
+                        <li>{{ license|escape }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
         {% endif %}
     </ul>
     {% endfor %}

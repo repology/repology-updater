@@ -27,7 +27,7 @@ class Package:
         self.category = None
         self.comment = None
         self.homepage = None
-        self.license = None
+        self.licenses = []
 
         self.repotype = None
         self.ignoreversion = False
