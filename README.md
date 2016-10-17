@@ -176,7 +176,7 @@ directory which is created if it doesn't exist.
 | OpenBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | Arch           | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
 | Fedora         | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
-| OpenSUSE       | ✔    | ✔       |         |               |              |          |         |
+| OpenSUSE       | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
 | Sisyphus       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
 | Chocolatey     | ✔    | ✔       | ✔       |               |              | ✔        |         |
 | SlackBuilds    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |

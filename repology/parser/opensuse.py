@@ -38,6 +38,10 @@ class OpenSUSERepodataParser():
             pkg.version = pkg.fullversion
             pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
             pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
+            pkg.category = entry.find("{http://linux.duke.edu/metadata/common}format/"
+                                      "{http://linux.duke.edu/metadata/rpm}group").text
+            pkg.licenses.append(entry.find("{http://linux.duke.edu/metadata/common}format/"
+                                           "{http://linux.duke.edu/metadata/rpm}license").text)
 
             result.append(pkg)
 
