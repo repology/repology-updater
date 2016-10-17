@@ -519,7 +519,7 @@
 # some rules may merge modules for different python version into single entry; this is intended
 - { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", repos: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", repos: [ openbsd ] }
-- { namepat: "python-(.*)",            setname: "python:$1", repos: [ debian ] }
+- { namepat: "python-(.*)",            setname: "python:$1", repos: [ debian, ubuntu ] }
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", repos: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", repos: [ arch ] }
 - { namepat: "python3?-(.*)",          setname: "python:$1", repos: [ fedora, opensuse, slackbuilds ] }
@@ -559,7 +559,7 @@
 
 # lua
 - { namepat: ".*luassert",             setname: "lua:luassert" } # save
-- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", repos: [ freebsd, pkgsrc, openbsd, arch, debian ] }
+- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", repos: [ freebsd, pkgsrc, openbsd, arch, debian, ubuntu ] }
 - { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", repos: [ openbsd ] }
 - { category: dev-lua, name: LuaBitOp, setname: "lua:bitop", repos: [ gentoo ] }
 - { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", repos: [ gentoo ] }
