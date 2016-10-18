@@ -498,6 +498,7 @@
 - { namepat: "p5-(.*)",                setname: "perl:$1", families: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", families: [ debian ] }
 - { category: dev-perl,                setname: "perl:$0", families: [ gentoo ], ignorever: true }
+- { category: perl-core,               setname: "perl:$0", families: [ gentoo ], ignorever: true }
 - { namepat: "perl-(.*)",              setname: "perl:$1", families: [ arch, fedora, opensuse, sisyphus, slackbuilds ] }
 
 # Ruby
