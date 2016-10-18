@@ -221,6 +221,7 @@
 - { name: inkscape,                    ver: "0.92",                  families: [ fedora ], ignorever: true } # prerepease
 - { name: xmahjongg,                   ver: "3.70",                  families: [ pkgsrc ], ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus ], ignorever: true }
+- { name: avinfo,                      ver: "1.0",                   families: [ sisyphus ], ignorever: true }
 
 # Chocolatey is full of garbage, fake version and bad matches
 - { name: 0install,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
