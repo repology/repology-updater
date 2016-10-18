@@ -50,21 +50,20 @@ class RepositoryManager:
         filtered_repositories = []
 
         for repository in REPOSITORIES:
-            if repositories and not repository['name'] in repositories:
-                continue
-
-            skip = False
+            tagskip = True
             if tags:
                 for tagset in tags:
-                    skip = True
+                    tagskip = True
                     for tag in tagset if type(tagset) is list else [tagset]:
                         if tag in repository['tags']:
-                            skip = False
+                            tagskip = False
                             break
-                    if skip:
+                    if tagskip:
                         break
 
-            if not skip:
+            inrepos = repositories and repository['name'] in repositories
+
+            if inrepos or not tagskip:
                 filtered_repositories.append(repository)
 
         return filtered_repositories
