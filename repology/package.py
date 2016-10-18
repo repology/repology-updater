@@ -29,7 +29,7 @@ class Package:
         self.homepage = None
         self.licenses = []
 
-        self.repotype = None
+        self.family = None
         self.ignoreversion = False
 
 
@@ -105,15 +105,15 @@ class MetaPackage:
     def GetRepos(self):
         return self.packages.keys()
 
-    def GetRepotypes(self):
-        repotypes = set()
+    def GetFamilies(self):
+        families = set()
 
         for packagelist in self.packages.values():
             for package in packagelist:
-                if package.repotype is not None:
-                    repotypes.add(package.repotype)
+                if package.family is not None:
+                    families.add(package.family)
 
-        return repotypes
+        return families
 
     def HasRepository(self, reponame):
         return reponame in self.packages
@@ -131,7 +131,7 @@ class MetaPackage:
         # fill versions
         bestversion, _, _ = self.GetMaxVersion()
 
-        numrepotypes = len(self.GetRepotypes())
+        numfamilies = len(self.GetFamilies())
 
         for reponame in self.GetRepos():
             # packages for this repository
@@ -156,7 +156,7 @@ class MetaPackage:
                 else:
                     versionclass = 'multi'
 
-            if (versionclass == 'good' or versionclass == 'multi') and numrepotypes == 1:
+            if (versionclass == 'good' or versionclass == 'multi') and numfamilies == 1:
                 versionclass = 'lonely'
 
             self.versions[reponame] = {

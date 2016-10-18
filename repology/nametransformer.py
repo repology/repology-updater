@@ -120,10 +120,10 @@ class NameTransformer:
 
         return MatchResult.none, None
 
-    def TransformName(self, package, repotype):
+    def TransformName(self, package, family):
         # apply first matching rule
         for rule in self.rules:
-            if 'repos' in rule and repotype not in rule['repos']:
+            if 'families' in rule and family not in rule['families']:
                 continue
 
             result, name = self.ApplyRule(rule, package)

@@ -24,7 +24,7 @@ from repology.parser import *
 REPOSITORIES = [
     {
         'name': "FreeBSD",
-        'repotype': 'freebsd',
+        'family': 'freebsd',
         'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bz2=True),
         'parser': FreeBSDIndexParser(),
         'link': 'http://www.freshports.org/{category}/{name}',
@@ -33,7 +33,7 @@ REPOSITORIES = [
 
     {
         'name': 'Debian Stable',
-        'repotype': 'debian',
+        'family': 'debian',
         'fetcher': FileFetcher(
             "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
@@ -46,7 +46,7 @@ REPOSITORIES = [
     },
     {
         'name': 'Debian Testing',
-        'repotype': 'debian',
+        'family': 'debian',
         'fetcher': FileFetcher(
             "http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
@@ -59,7 +59,7 @@ REPOSITORIES = [
     },
     {
         'name': 'Debian Unstable',
-        'repotype': 'debian',
+        'family': 'debian',
         'fetcher': FileFetcher(
             "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
@@ -73,7 +73,7 @@ REPOSITORIES = [
 
     {
         'name': 'Ubuntu Xenial',
-        'repotype': 'debian',
+        'family': 'debian',
         'fetcher': FileFetcher(
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
@@ -87,7 +87,7 @@ REPOSITORIES = [
     },
     {
         'name': 'Ubuntu Yakkety',
-        'repotype': 'debian',
+        'family': 'debian',
         'fetcher': FileFetcher(
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/main/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz",
@@ -102,7 +102,7 @@ REPOSITORIES = [
 
     {
         'name': 'Gentoo',
-        'repotype': 'gentoo',
+        'family': 'gentoo',
         'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
         'parser': GentooGitParser(),
         'link': 'https://packages.gentoo.org/packages/{category}/{name}',
@@ -110,7 +110,7 @@ REPOSITORIES = [
     },
     {
         'name': 'pkgsrc',
-        'repotype': 'pkgsrc',
+        'family': 'pkgsrc',
         'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX"),
         'parser': PkgsrcIndexParser(),
         'link': 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}',
@@ -118,7 +118,7 @@ REPOSITORIES = [
     },
     {
         'name': 'OpenBSD',
-        'repotype': 'openbsd',
+        'family': 'openbsd',
         'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
         'parser': OpenBSDIndexParser(),
         'link': 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}',
@@ -126,7 +126,7 @@ REPOSITORIES = [
     },
     {
         'name': 'Arch',
-        'repotype': 'arch',
+        'family': 'arch',
         'fetcher': ArchDBFetcher(
             "http://delta.archlinux.fr/core/os/x86_64/core.db.tar.gz",
             "http://delta.archlinux.fr/extra/os/x86_64/extra.db.tar.gz",
@@ -139,7 +139,7 @@ REPOSITORIES = [
     },
     {
         'name': 'Fedora',
-        'repotype': 'fedora',
+        'family': 'fedora',
         'fetcher': FedoraFetcher(
             "https://admin.fedoraproject.org/pkgdb/api/",
             "http://pkgs.fedoraproject.org/cgit/rpms/"
@@ -151,7 +151,7 @@ REPOSITORIES = [
     },
     {
         'name': 'OpenSUSE Tumbleweed',
-        'repotype': 'opensuse',
+        'family': 'opensuse',
         'fetcher': OpenSUSERepodataFetcher(
             "http://download.opensuse.org/tumbleweed/repo/src-oss/suse/"
         ),
@@ -161,7 +161,7 @@ REPOSITORIES = [
     },
     {
         'name': 'ALT Sisyphus',
-        'repotype': 'sisyphus',
+        'family': 'sisyphus',
         'fetcher': FileFetcher(
             "http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/noarch/base/srclist.classic.xz",
             "http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/base/srclist.classic.xz",
@@ -173,7 +173,7 @@ REPOSITORIES = [
     },
     {
         'name': 'Chocolatey',
-        'repotype': 'chocolatey',
+        'family': 'chocolatey',
         'fetcher': ChocolateyFetcher("https://chocolatey.org/api/v2/"),
         'parser': ChocolateyParser(),
         'shadow': True,
@@ -182,7 +182,7 @@ REPOSITORIES = [
     },
     {
         'name': 'SlackBuilds',
-        'repotype': 'slackbuilds',
+        'family': 'slackbuilds',
         'fetcher': GitFetcher("git://slackbuilds.org/slackbuilds"),
         'parser': SlackBuildsParser(),
         'link': 'https://slackbuilds.org/repository/14.2/{category}/{name}/',
@@ -190,7 +190,7 @@ REPOSITORIES = [
     },
     {
         'name': 'freshcode.club',
-        'repotype': 'freshcode',
+        'family': 'freshcode',
         'fetcher': FreshcodeFetcher("http://freshcode.club/feed/xfer.json"),
         'parser': FreshcodeParser(),
         'shadow': True,

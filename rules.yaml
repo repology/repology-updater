@@ -5,189 +5,189 @@
 ################################################################################
 
 # Some of these are to be reversed for less ambiguity, and some
-# are to consider for performing in the actual repos
-- { name: "2048",                      setname: 2048-cli,                 repos: [ freebsd ] } # differentiate from 2048-qt
-- { name: 3dchess,                     setname: 3dc,                      repos: [ debian ] }
-- { name: abuse_sdl,                   setname: abuse,                    repos: [ freebsd ] }
-- { name: accounts-qt5,                setname: accounts-qt ,             repos: [ sisyphus ] }
-- { name: ace,                         setname: ace-of-penguins,          repos: [ openbsd, slackbuilds ] }
-- { name: ace, category: games-board,  setname: ace-of-penguins,          repos: [ gentoo ] }
-- { name: AcetoneISO, verpat: "6.*",   setname: acetoneiso6,              repos: [ fedora ] } # XXX: ???
-- { name: acetoneiso2,                 setname: acetoneiso,               repos: [ arch ] }
-- { name: AcetoneISO2,                 setname: acetoneiso,               repos: [ sisyphus ] }
-- { name: ack-grep,                    setname: ack,                      repos: [ debian ] }
+# are to consider for performing in the actual familiesitories
+- { name: "2048",                      setname: 2048-cli,                 families: [ freebsd ] } # differentiate from 2048-qt
+- { name: 3dchess,                     setname: 3dc,                      families: [ debian ] }
+- { name: abuse_sdl,                   setname: abuse,                    families: [ freebsd ] }
+- { name: accounts-qt5,                setname: accounts-qt ,             families: [ sisyphus ] }
+- { name: ace,                         setname: ace-of-penguins,          families: [ openbsd, slackbuilds ] }
+- { name: ace, category: games-board,  setname: ace-of-penguins,          families: [ gentoo ] }
+- { name: AcetoneISO, verpat: "6.*",   setname: acetoneiso6,              families: [ fedora ] } # XXX: ???
+- { name: acetoneiso2,                 setname: acetoneiso,               families: [ arch ] }
+- { name: AcetoneISO2,                 setname: acetoneiso,               families: [ sisyphus ] }
+- { name: ack-grep,                    setname: ack,                      families: [ debian ] }
 - { namepat: "acpica-(?:tools|unix|utils)", setname: acpica                                 }
-- { name: acroread9,                   setname: acroread,                 repos: [ pkgsrc ] }
-- { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     repos: [ pkgsrc ] }
-- { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      repos: [ pkgsrc ] }
-- { name: Actionaz,                    setname: actiona,                  repos: [ chocolatey ] }
-- { name: activeio,                    setname: activemq-activeio,        repos: [ fedora, sisyphus ] }
-- { name: adb,                         setname: android-tools,            repos: [ openbsd ] }
-- { name: adblockplus-firefox,         setname: adblock-plus,             repos: [ chocolatey ] }
-- { name: adobeps-win,                 setname: adobeps,                  repos: [ pkgsrc ]  } # XXX: recheck
-- { name: adodb5,                      setname: adodb,                    repos: [ freebsd ]  }
-- { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               repos: [ freebsd ]  }
-- { name: adzap,                       setname: adzapper,                 repos: [ freebsd, pkgsrc ] }
-- { name: aiksaurus-gtk,               setname: aiksaurus,                repos: [ freebsd ] } # slave port
-- { name: alienarena,                  setname: alien-arena,              repos: [ gentoo, arch, fedora ] }
-- { name: alienarena-data,             setname: alien-arena-data,         repos: [ arch ] }
-- { name: armagetron,                  setname: armagetronad,             repos: [ freebsd, opensuse ] }
-- { name: atk1.0,                      setname: atk,                      repos: [ debian ]  }
-- { name: atk2mm,                      setname: atkmm,                    repos: [ openbsd ]  }
-- { name: atkmm1.6,                    setname: atk,                      repos: [ debian ]  }
-- { name: argus-sasl,                  setname: argus,                    repos: [ freebsd ]  }
-- { name: bass,                        setname: beneath-a-steel-sky,      repos: [ freebsd, gentoo, openbsd, arch ] }
-- { name: bicyclerepair-py27,          setname: bicyclerepair,            repos: [ freebsd ] }
-- { name: billard-gl,                  setname: billardgl,                repos: [ debian ]  }
-- { name: blitz,                       setname: blitz++,                  repos: [ gentoo, fedora, opensuse ] } # XXX: recheck
-- { name: blobby2,                     setname: blobby,                   repos: [ arch ] } # XXX: recheck
-- { name: blockout2,                   setname: blockout,                 repos: [ debian ]  }
-- { name: BlockOutII,                  setname: blockout,                 repos: [ fedora ]  } # XXX: recheck
-- { name: boaconstructor,              setname: boa-constructor,          repos: [ freebsd ] }
-- { name: boost-all,                   setname: boost,                    repos: [ freebsd ] }
-- { namepat: "boost1.[0-9]+",          setname: boost,                    repos: [ debian ] }
-- { name: botan1.10,                   setname: botan,                    repos: [ debian ]  }
-- { name: botan110,                    setname: botan,                    repos: [ freebsd ] }
-- { name: bouncycastle,                setname: bouncycastle14,           repos: [ freebsd ] } # move away
-- { name: bouncycastle15,              setname: bouncycastle,             repos: [ freebsd ] }
-- { name: bowtie, verpat: "2.*",       setname: bowtie2,                  repos: [ gentoo ] }
-- { name: bub-n-bros,                  setname: bubbros,                  repos: [ gentoo ]  } # XXX: recheck
-- { name: bugzilla44,                  ignore: true,                      repos: [ freebsd ] } # legacy
-- { name: bugzilla50,                  setname: bugzilla,                 repos: [ freebsd ] }
-- { name: byacc-j,                     setname: byaccj,                   repos: [ debian ]  }
-- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       repos: [ debian, arch ] } # O_o
-- { name: cegui-mk2,                   setname: cegui,                    repos: [ debian ]  }
-- { name: celestia-nonfree,            setname: celestia,                 repos: [ debian ]  }
-- { name: chexedit,                    setname: curses-hexedit,           repos: [ freebsd ] }
-- { name: corsixth,                    setname: corsix-th,                repos: [ freebsd ] }
-- { name: cyphesis-cpp,                setname: cyphesis,                 repos: [ debian ]  }
-- { name: dgen,                        setname: dgen-sdl,                 repos: [ debian ]  } # recheck
-- { name: drpython-py27,               setname: drpython,                 repos: [ freebsd ] }
-- { name: dynamips-community,          setname: dynamips,                 repos: [ freebsd ] }
-- { name: easyrpg,                     setname: easyrpg-player,           repos: [ openbsd ] }
-- { name: eclipse-java,                setname: eclipse,                  repos: [ arch ]    }
-- { name: einstein-puzzle,             setname: einstein,                 repos: [ pkgsrc ] }
-- { name: el,                          setname: eternal-lands,            repos: [ freebsd ] }
-- { name: el-data,                     setname: eternal-lands-data,       repos: [ freebsd ] }
-- { name: enblend,                     setname: enblend-enfuse,           repos: [ freebsd ] }
-- { name: endgame-singularity,         setname: singularity,              repos: [ freebsd ] }
-- { name: endgame-singularity-music,   setname: singularity-music,        repos: [ freebsd ] } # for consistency
-- { name: entagged-tageditor,          setname: entagged,                 repos: [ gentoo ]  }
-- { name: epl.el,                      setname: epl,                      repos: [ freebsd ] }
-- { name: eric6,                       setname: eric,                     repos: [ freebsd ] }
-- { name: etracer,                     setname: extreme-tuxracer,         repos: [ freebsd ] }
-- { name: exactimage,                  setname: exact-image,              repos: [ debian ]  }
-- { name: extremetuxracer,             setname: extreme-tuxracer,         repos: [ debian, openbsd ] }
-- { name: falconseye,                  setname: falcons-eye,              repos: [ freebsd, openbsd ] }
-- { name: farstream-0.2,               setname: farstream,                repos: [ debian ]  }
-- { name: fish-fillets,                setname: fillets-ng,               repos: [ gentoo ]  }
-- { name: focuswriter-qt4,             setname: focuswriter,              repos: [ freebsd ] }
-- { name: fotaq,                       setname: flight-of-the-amazon-queen, repos: [ freebsd, openbsd ] }
-- { name: fox1.6,                      setname: fox16,                    repos: [ debian ]  }
-- { name: fox17,                       setname: fox,                      repos: [ freebsd ] }
-- { name: free42-nologo,               setname: free42,                   repos: [ debian ]  }
-- { name: freebsd-uucp,                setname: uucp,                     repos: [ freebsd ] }
-- { name: freefont-ttf,                setname: freefont,                 repos: [ freebsd ] }
-- { name: freetype,                    setname: freetype1,                repos: [ freebsd, pkgsrc ] }
-- { name: freetype2,                   setname: freetype,                 repos: [ freebsd, pkgsrc ] }
-- { name: garden,                      setname: garden-of-coloured-lights, repos: [ gentoo, openbsd ] } # XXX: recheck
-- { name: gargoyle-free,               setname: gargoyle,                 repos: [ debian ]  }
-- { name: gaul-devel,                  setname: gaul,                     repos: [ gentoo ]  }
-- { name: geki2-KXL,                   setname: geki2,                    repos: [ gentoo ]  } # XXX: recheck
-- { name: geki3-KXL,                   setname: geki3,                    repos: [ gentoo ]  } # XXX: recheck
-- { name: gitg0,                       setname: gitg,                     repos: [ freebsd ]  }
-- { name: gl117,                       setname: gl-117,                   repos: [ gentoo ]  }
-- { name: google-mock,                 setname: gmock,                    repos: [ debian ]  }
-- { name: googlemock,                  setname: gmock,                    repos: [ freebsd ] }
-- { name: googletest,                  setname: gtest,                    repos: [ freebsd, pkgsrc ] }
-- { name: hannah,                      setname: help-hannahs-horse,       repos: [ debian ]  } # recheck
-- { name: hs-darcs,                    setname: darcs,                    repos: [ freebsd ] }
-- { name: ja2,                         setname: ja2-stracciatella,        repos: [ freebsd ] }
-- { name: kiki,                        setname: kiki-the-nano-bot,        repos: [ freebsd, gentoo ] }
-- { name: libphysfs,                   setname: physfs,                   repos: [ debian ] }
-- { name: moonlander,                  setname: moon-lander,              repos: [ freebsd, openbsd ] }
-- { name: openastromenace,             setname: astromenace,              repos: [ freebsd ] }
-- { name: osg,                         setname: openscenegraph,           repos: [ freebsd ] }
-- { name: pacman-arena,                setname: pacmanarena,              repos: [ openbsd ] }
-- { name: postfix-postfwd,             setname: postfwd,                  repos: [ freebsd ] }
-- { namepat: "povray[0-9]+",           setname: povray,                   repos: [ freebsd ] }
-- { name: puppet4,                     setname: puppet,                   repos: [ freebsd ] }
-- { name: puzzles,                     setname: sgt-puzzles,              repos: [ pkgsrc, arch, openbsd ] }
-- { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 repos: [ freebsd ] }
-- { name: sdl-sopwith,                 setname: sopwith,                  repos: [ gentoo ]  }
-- { name: sdlgfx,                      setname: sdl2-gfx,                 repos: [ debian ]  }
-- { name: sdlpango,                    setname: sdl-pango,                repos: [ debian ]  }
-- { namepat: "sendmail\\+.*",          setname: sendmail,                 repos: [ freebsd ]  }
-- { name: seven-kingdoms,              setname: 7kaa,                     repos: [ gentoo ]  }
-- { name: slashem-tty,                 setname: slashem,                  repos: [ freebsd ] }
-- { name: spacearyarya-kxl,            setname: spacearyarya,             repos: [ gentoo ]  } # XXX: recheck
-- { name: speed-dreams,                setname: speeddreams,              repos: [ gentoo ]  }
-- { name: stepmania-devel,             setname: stepmania,                repos: [ freebsd ] }
-- { name: stone-soup,                  setname: stonesoup,                repos: [ gentoo, openbsd ] }
-- { name: stransball2,                 setname: supertransball2,          repos: [ freebsd ] }
-- { name: supertux,                    setname: supertux1,                repos: [ freebsd ] } # ???
-- { name: supertux2,                   setname: supertux,                 repos: [ freebsd ] }
-- { name: tetrinet-x,                  setname: tetrinetx,                repos: [ freebsd ] }
-- { name: tintin,                      setname: tintin++,                 repos: [ gentoo ]  }
-- { name: trigger,                     setname: trigger-rally,            repos: [ gentoo ]  }
-- { name: ufo-ai,                      setname: ufoai,                    repos: [ gentoo ]  }
-- { name: varnish4,                    setname: varnish,                  repos: [ freebsd ]  }
-- { name: vsftpd-ssl,                  setname: vsftpd,                   repos: [ freebsd ]  }
-- { name: xpi-adblock_plus,            setname: adblock-plus,             repos: [ freebsd ] }
-- { name: xpi-foxyproxy,               setname: foxyproxy,                repos: [ freebsd ] }
-- { name: zookeeper-c,                 setname: zookeeper,                repos: [ gentoo ]  }
-- { namepat: "android-platform-system-(core|extras)", setname: android-tools, repos: [ debian ] }
-- { namepat: "android-tools-[^-]+",    setname: android-tools,            repos: [ freebsd, pkgsrc ] }
-- { namepat: "celestia-.*",            setname: celestia,                 repos: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
-- { namepat: "eclipse-plugin-(.*)",    setname: "eclipse-$1",             repos: [ openbsd ] }
-- { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              repos: [ freebsd ] }
-- { namepat: "enscript-.*",            setname: enscript,                 repos: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
-- { namepat: "fltk[0-9.]+",            setname: fltk,                     repos: [ debian ]  }
-- { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         repos: [ pkgsrc, openbsd ] }
-- { namepat: "lib(sdl.*)",             setname: "$1",                     repos: [ debian, gentoo ]  }
-- { namepat: "open[gs]fx",             setname: "openttd-$0",             repos: [ freebsd, gentoo ] }
-- { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 repos: [ debian ]  }
-- { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                repos: [ debian ]  }
-- { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          repos: [ freebsd ] }
-- { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         repos: [ freebsd ] }
+- { name: acroread9,                   setname: acroread,                 families: [ pkgsrc ] }
+- { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     families: [ pkgsrc ] }
+- { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      families: [ pkgsrc ] }
+- { name: Actionaz,                    setname: actiona,                  families: [ chocolatey ] }
+- { name: activeio,                    setname: activemq-activeio,        families: [ fedora, sisyphus ] }
+- { name: adb,                         setname: android-tools,            families: [ openbsd ] }
+- { name: adblockplus-firefox,         setname: adblock-plus,             families: [ chocolatey ] }
+- { name: adobeps-win,                 setname: adobeps,                  families: [ pkgsrc ]  } # XXX: recheck
+- { name: adodb5,                      setname: adodb,                    families: [ freebsd ]  }
+- { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               families: [ freebsd ]  }
+- { name: adzap,                       setname: adzapper,                 families: [ freebsd, pkgsrc ] }
+- { name: aiksaurus-gtk,               setname: aiksaurus,                families: [ freebsd ] } # slave port
+- { name: alienarena,                  setname: alien-arena,              families: [ gentoo, arch, fedora ] }
+- { name: alienarena-data,             setname: alien-arena-data,         families: [ arch ] }
+- { name: armagetron,                  setname: armagetronad,             families: [ freebsd, opensuse ] }
+- { name: atk1.0,                      setname: atk,                      families: [ debian ]  }
+- { name: atk2mm,                      setname: atkmm,                    families: [ openbsd ]  }
+- { name: atkmm1.6,                    setname: atk,                      families: [ debian ]  }
+- { name: argus-sasl,                  setname: argus,                    families: [ freebsd ]  }
+- { name: bass,                        setname: beneath-a-steel-sky,      families: [ freebsd, gentoo, openbsd, arch ] }
+- { name: bicyclerepair-py27,          setname: bicyclerepair,            families: [ freebsd ] }
+- { name: billard-gl,                  setname: billardgl,                families: [ debian ]  }
+- { name: blitz,                       setname: blitz++,                  families: [ gentoo, fedora, opensuse ] } # XXX: recheck
+- { name: blobby2,                     setname: blobby,                   families: [ arch ] } # XXX: recheck
+- { name: blockout2,                   setname: blockout,                 families: [ debian ]  }
+- { name: BlockOutII,                  setname: blockout,                 families: [ fedora ]  } # XXX: recheck
+- { name: boaconstructor,              setname: boa-constructor,          families: [ freebsd ] }
+- { name: boost-all,                   setname: boost,                    families: [ freebsd ] }
+- { namepat: "boost1.[0-9]+",          setname: boost,                    families: [ debian ] }
+- { name: botan1.10,                   setname: botan,                    families: [ debian ]  }
+- { name: botan110,                    setname: botan,                    families: [ freebsd ] }
+- { name: bouncycastle,                setname: bouncycastle14,           families: [ freebsd ] } # move away
+- { name: bouncycastle15,              setname: bouncycastle,             families: [ freebsd ] }
+- { name: bowtie, verpat: "2.*",       setname: bowtie2,                  families: [ gentoo ] }
+- { name: bub-n-bros,                  setname: bubbros,                  families: [ gentoo ]  } # XXX: recheck
+- { name: bugzilla44,                  ignore: true,                      families: [ freebsd ] } # legacy
+- { name: bugzilla50,                  setname: bugzilla,                 families: [ freebsd ] }
+- { name: byacc-j,                     setname: byaccj,                   families: [ debian ]  }
+- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       families: [ debian, arch ] } # O_o
+- { name: cegui-mk2,                   setname: cegui,                    families: [ debian ]  }
+- { name: celestia-nonfree,            setname: celestia,                 families: [ debian ]  }
+- { name: chexedit,                    setname: curses-hexedit,           families: [ freebsd ] }
+- { name: corsixth,                    setname: corsix-th,                families: [ freebsd ] }
+- { name: cyphesis-cpp,                setname: cyphesis,                 families: [ debian ]  }
+- { name: dgen,                        setname: dgen-sdl,                 families: [ debian ]  } # recheck
+- { name: drpython-py27,               setname: drpython,                 families: [ freebsd ] }
+- { name: dynamips-community,          setname: dynamips,                 families: [ freebsd ] }
+- { name: easyrpg,                     setname: easyrpg-player,           families: [ openbsd ] }
+- { name: eclipse-java,                setname: eclipse,                  families: [ arch ]    }
+- { name: einstein-puzzle,             setname: einstein,                 families: [ pkgsrc ] }
+- { name: el,                          setname: eternal-lands,            families: [ freebsd ] }
+- { name: el-data,                     setname: eternal-lands-data,       families: [ freebsd ] }
+- { name: enblend,                     setname: enblend-enfuse,           families: [ freebsd ] }
+- { name: endgame-singularity,         setname: singularity,              families: [ freebsd ] }
+- { name: endgame-singularity-music,   setname: singularity-music,        families: [ freebsd ] } # for consistency
+- { name: entagged-tageditor,          setname: entagged,                 families: [ gentoo ]  }
+- { name: epl.el,                      setname: epl,                      families: [ freebsd ] }
+- { name: eric6,                       setname: eric,                     families: [ freebsd ] }
+- { name: etracer,                     setname: extreme-tuxracer,         families: [ freebsd ] }
+- { name: exactimage,                  setname: exact-image,              families: [ debian ]  }
+- { name: extremetuxracer,             setname: extreme-tuxracer,         families: [ debian, openbsd ] }
+- { name: falconseye,                  setname: falcons-eye,              families: [ freebsd, openbsd ] }
+- { name: farstream-0.2,               setname: farstream,                families: [ debian ]  }
+- { name: fish-fillets,                setname: fillets-ng,               families: [ gentoo ]  }
+- { name: focuswriter-qt4,             setname: focuswriter,              families: [ freebsd ] }
+- { name: fotaq,                       setname: flight-of-the-amazon-queen, families: [ freebsd, openbsd ] }
+- { name: fox1.6,                      setname: fox16,                    families: [ debian ]  }
+- { name: fox17,                       setname: fox,                      families: [ freebsd ] }
+- { name: free42-nologo,               setname: free42,                   families: [ debian ]  }
+- { name: freebsd-uucp,                setname: uucp,                     families: [ freebsd ] }
+- { name: freefont-ttf,                setname: freefont,                 families: [ freebsd ] }
+- { name: freetype,                    setname: freetype1,                families: [ freebsd, pkgsrc ] }
+- { name: freetype2,                   setname: freetype,                 families: [ freebsd, pkgsrc ] }
+- { name: garden,                      setname: garden-of-coloured-lights, families: [ gentoo, openbsd ] } # XXX: recheck
+- { name: gargoyle-free,               setname: gargoyle,                 families: [ debian ]  }
+- { name: gaul-devel,                  setname: gaul,                     families: [ gentoo ]  }
+- { name: geki2-KXL,                   setname: geki2,                    families: [ gentoo ]  } # XXX: recheck
+- { name: geki3-KXL,                   setname: geki3,                    families: [ gentoo ]  } # XXX: recheck
+- { name: gitg0,                       setname: gitg,                     families: [ freebsd ]  }
+- { name: gl117,                       setname: gl-117,                   families: [ gentoo ]  }
+- { name: google-mock,                 setname: gmock,                    families: [ debian ]  }
+- { name: googlemock,                  setname: gmock,                    families: [ freebsd ] }
+- { name: googletest,                  setname: gtest,                    families: [ freebsd, pkgsrc ] }
+- { name: hannah,                      setname: help-hannahs-horse,       families: [ debian ]  } # recheck
+- { name: hs-darcs,                    setname: darcs,                    families: [ freebsd ] }
+- { name: ja2,                         setname: ja2-stracciatella,        families: [ freebsd ] }
+- { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
+- { name: libphysfs,                   setname: physfs,                   families: [ debian ] }
+- { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
+- { name: openastromenace,             setname: astromenace,              families: [ freebsd ] }
+- { name: osg,                         setname: openscenegraph,           families: [ freebsd ] }
+- { name: pacman-arena,                setname: pacmanarena,              families: [ openbsd ] }
+- { name: postfix-postfwd,             setname: postfwd,                  families: [ freebsd ] }
+- { namepat: "povray[0-9]+",           setname: povray,                   families: [ freebsd ] }
+- { name: puppet4,                     setname: puppet,                   families: [ freebsd ] }
+- { name: puzzles,                     setname: sgt-puzzles,              families: [ pkgsrc, arch, openbsd ] }
+- { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 families: [ freebsd ] }
+- { name: sdl-sopwith,                 setname: sopwith,                  families: [ gentoo ]  }
+- { name: sdlgfx,                      setname: sdl2-gfx,                 families: [ debian ]  }
+- { name: sdlpango,                    setname: sdl-pango,                families: [ debian ]  }
+- { namepat: "sendmail\\+.*",          setname: sendmail,                 families: [ freebsd ]  }
+- { name: seven-kingdoms,              setname: 7kaa,                     families: [ gentoo ]  }
+- { name: slashem-tty,                 setname: slashem,                  families: [ freebsd ] }
+- { name: spacearyarya-kxl,            setname: spacearyarya,             families: [ gentoo ]  } # XXX: recheck
+- { name: speed-dreams,                setname: speeddreams,              families: [ gentoo ]  }
+- { name: stepmania-devel,             setname: stepmania,                families: [ freebsd ] }
+- { name: stone-soup,                  setname: stonesoup,                families: [ gentoo, openbsd ] }
+- { name: stransball2,                 setname: supertransball2,          families: [ freebsd ] }
+- { name: supertux,                    setname: supertux1,                families: [ freebsd ] } # ???
+- { name: supertux2,                   setname: supertux,                 families: [ freebsd ] }
+- { name: tetrinet-x,                  setname: tetrinetx,                families: [ freebsd ] }
+- { name: tintin,                      setname: tintin++,                 families: [ gentoo ]  }
+- { name: trigger,                     setname: trigger-rally,            families: [ gentoo ]  }
+- { name: ufo-ai,                      setname: ufoai,                    families: [ gentoo ]  }
+- { name: varnish4,                    setname: varnish,                  families: [ freebsd ]  }
+- { name: vsftpd-ssl,                  setname: vsftpd,                   families: [ freebsd ]  }
+- { name: xpi-adblock_plus,            setname: adblock-plus,             families: [ freebsd ] }
+- { name: xpi-foxyproxy,               setname: foxyproxy,                families: [ freebsd ] }
+- { name: zookeeper-c,                 setname: zookeeper,                families: [ gentoo ]  }
+- { namepat: "android-platform-system-(core|extras)", setname: android-tools, families: [ debian ] }
+- { namepat: "android-tools-[^-]+",    setname: android-tools,            families: [ freebsd, pkgsrc ] }
+- { namepat: "celestia-.*",            setname: celestia,                 families: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
+- { namepat: "eclipse-plugin-(.*)",    setname: "eclipse-$1",             families: [ openbsd ] }
+- { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              families: [ freebsd ] }
+- { namepat: "enscript-.*",            setname: enscript,                 families: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
+- { namepat: "fltk[0-9.]+",            setname: fltk,                     families: [ debian ]  }
+- { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         families: [ pkgsrc, openbsd ] }
+- { namepat: "lib(sdl.*)",             setname: "$1",                     families: [ debian, gentoo ]  }
+- { namepat: "open[gs]fx",             setname: "openttd-$0",             families: [ freebsd, gentoo ] }
+- { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 families: [ debian ]  }
+- { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                families: [ debian ]  }
+- { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          families: [ freebsd ] }
+- { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         families: [ freebsd ] }
 
 # XXX: continue looking through the list starting from gaul
 
 # GNUstep packages (should be likely the other way around: foo->foo.app)
-- { name: aclock.app,                  setname: aclock,                   repos: [ debian ]  }
-- { name: addresses-for-gnustep,       setname: addresses,                repos: [ debian ]  }
-- { name: batmon.app,                  setname: batmon,                   repos: [ debian ]  }
-- { name: camera.app,                  setname: camera,                   repos: [ debian ]  }
-- { name: cenon.app,                   setname: cenon,                    repos: [ debian ]  }
-- { name: charmap.app,                 setname: charmap,                  repos: [ debian ]  }
-- { name: cynthiune.app,               setname: cynthiune,                repos: [ debian ]  }
-- { name: edenmath.app,                setname: edenmath,                 repos: [ debian ]  }
-- { name: gomoku.app,                  setname: gomoku,                   repos: [ debian ]  }
-- { name: gorm.app,                    setname: gorm,                     repos: [ debian ]  }
-- { name: grr.app,                     setname: grr,                      repos: [ debian ]  }
-- { name: gtamsanalyzer.app,           setname: gtamsanalyzer,            repos: [ debian ]  }
-- { name: helpviewer.app,              setname: helpviewer,               repos: [ debian ]  }
-- { name: lusernet.app,                setname: lusernet,                 repos: [ debian ]  }
-- { name: mixer_app,                   setname: mixer.app,                repos: [ gentoo ]  }
-- { name: mpdcon.app,                  setname: mpdcon,                   repos: [ debian ]  }
-- { name: paje.app,                    setname: paje,                     repos: [ debian ]  }
-- { name: plopfolio.app,               setname: plopfolio,                repos: [ debian ]  }
-- { name: poe.app,                     setname: poe,                      repos: [ debian ]  }
-- { name: preview.app,                 setname: preview,                  repos: [ debian ]  }
-- { name: price.app,                   setname: price,                    repos: [ debian ]  }
-- { name: projectcenter.app,           setname: projectcenter,            repos: [ debian ]  }
-- { name: systempreferences.app,       setname: systempreferences,        repos: [ debian ]  }
-- { name: terminal,                    setname: terminal.app,             repos: [ gentoo ]  }
-- { name: textedit.app,                setname: textedit,                 repos: [ debian ]  }
-- { name: timemon.app,                 setname: timemon,                  repos: [ debian ]  }
-- { name: wmppp.app,                   setname: wmppp,                    repos: [ debian ]  }
-- { name: xscreensaver-app,            setname: xscreensaver.app,         repos: [ gentoo ]  }
-- { name: zipper.app,                  setname: zipper,                   repos: [ debian ]  }
+- { name: aclock.app,                  setname: aclock,                   families: [ debian ]  }
+- { name: addresses-for-gnustep,       setname: addresses,                families: [ debian ]  }
+- { name: batmon.app,                  setname: batmon,                   families: [ debian ]  }
+- { name: camera.app,                  setname: camera,                   families: [ debian ]  }
+- { name: cenon.app,                   setname: cenon,                    families: [ debian ]  }
+- { name: charmap.app,                 setname: charmap,                  families: [ debian ]  }
+- { name: cynthiune.app,               setname: cynthiune,                families: [ debian ]  }
+- { name: edenmath.app,                setname: edenmath,                 families: [ debian ]  }
+- { name: gomoku.app,                  setname: gomoku,                   families: [ debian ]  }
+- { name: gorm.app,                    setname: gorm,                     families: [ debian ]  }
+- { name: grr.app,                     setname: grr,                      families: [ debian ]  }
+- { name: gtamsanalyzer.app,           setname: gtamsanalyzer,            families: [ debian ]  }
+- { name: helpviewer.app,              setname: helpviewer,               families: [ debian ]  }
+- { name: lusernet.app,                setname: lusernet,                 families: [ debian ]  }
+- { name: mixer_app,                   setname: mixer.app,                families: [ gentoo ]  }
+- { name: mpdcon.app,                  setname: mpdcon,                   families: [ debian ]  }
+- { name: paje.app,                    setname: paje,                     families: [ debian ]  }
+- { name: plopfolio.app,               setname: plopfolio,                families: [ debian ]  }
+- { name: poe.app,                     setname: poe,                      families: [ debian ]  }
+- { name: preview.app,                 setname: preview,                  families: [ debian ]  }
+- { name: price.app,                   setname: price,                    families: [ debian ]  }
+- { name: projectcenter.app,           setname: projectcenter,            families: [ debian ]  }
+- { name: systempreferences.app,       setname: systempreferences,        families: [ debian ]  }
+- { name: terminal,                    setname: terminal.app,             families: [ gentoo ]  }
+- { name: textedit.app,                setname: textedit,                 families: [ debian ]  }
+- { name: timemon.app,                 setname: timemon,                  families: [ debian ]  }
+- { name: wmppp.app,                   setname: wmppp,                    families: [ debian ]  }
+- { name: xscreensaver-app,            setname: xscreensaver.app,         families: [ gentoo ]  }
+- { name: zipper.app,                  setname: zipper,                   families: [ debian ]  }
 
 # Ambiguous upstream package names, careful!
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
-- { name: dolphin,                     setname: dolphin-emu,              repos: [ gentoo ]  } # dolphin file namager vs. emulator
-- { name: dragon,                      setname: dragon-scannerparser,     repos: [ freebsd ] }
+- { name: dolphin,                     setname: dolphin-emu,              families: [ gentoo ]  } # dolphin file namager vs. emulator
+- { name: dragon,                      setname: dragon-scannerparser,     families: [ freebsd ] }
 - { name: dragon,                      setname: dragon-player                                }
 # fuse-emulator vs. fusefs modules - see below
 
@@ -212,213 +212,213 @@
 # - filebeat/filebeat-bin
 # - fira* (font)
 
-# Version ignores, incompatible version mangling in the repos
-- { name: "libreadonly-perl",          ver: "2.050",                 repos: [ debian ], ignorever: true } # needs multiple rule hits
+# Version ignores, incompatible version mangling in the familiesitories
+- { name: "libreadonly-perl",          ver: "2.050",                 families: [ debian ], ignorever: true } # needs multiple rule hits
 - { name: apr,                         verlonger: 3,                                    ignorever: true } # FreeBSD
 - { name: cryptcat,                    ver: "20031202",                                 ignorever: true }
-- { name: dia,                         ver: "0.97.4",                repos: [ sisyphus ], ignorever: true } # no such release
-- { name: dosbox,                      verpat: "0\\.74\\.r.*",       repos: [ sisyphus ], ignorever: true }
-- { name: inkscape,                    ver: "0.92",                  repos: [ fedora ], ignorever: true } # prerepease
-- { name: xmahjongg,                   ver: "3.70",                  repos: [ pkgsrc ], ignorever: true }
-- { name: wordwarvi,                   ver: "1.1",                   repos: [ sisyphus ], ignorever: true }
+- { name: dia,                         ver: "0.97.4",                families: [ sisyphus ], ignorever: true } # no such release
+- { name: dosbox,                      verpat: "0\\.74\\.r.*",       families: [ sisyphus ], ignorever: true }
+- { name: inkscape,                    ver: "0.92",                  families: [ fedora ], ignorever: true } # prerepease
+- { name: xmahjongg,                   ver: "3.70",                  families: [ pkgsrc ], ignorever: true }
+- { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus ], ignorever: true }
 
 # Chocolatey is full of garbage, fake version and bad matches
-- { name: 0install,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: 7KAA,                                                      repos: [ chocolatey ], ignorever: true }
-- { name: aacgain,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: ace,                                                       repos: [ chocolatey ], ignore: true }
-- { name: acm,                                                       repos: [ chocolatey ], ignore: true }
-- { name: acr,                                                       repos: [ chocolatey ], ignore: true }
-- { name: ActiveMQ,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: apache-httpd,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: apacheds,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: apm,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: argouml,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: aria2,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: autocomplete,                                              repos: [ chocolatey ], ignore: true }
-- { name: awake,                                                     repos: [ chocolatey ], ignore: true }
-- { name: axel,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: bacula,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: beacon,                                                    repos: [ chocolatey ], ignore: true }
-- { name: Bing,                                                      repos: [ chocolatey ], ignore: true }
-- { name: blat,                                                      repos: [ chocolatey ], ignore: true }
-- { name: blender,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: blobby2,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true, setname: "blobby" }
-- { name: brewtarget,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: bzr,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: celestia,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: Charles,                                                   repos: [ chocolatey ], ignore: true }
-- { name: claws-mail,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: Clover,                                                    repos: [ chocolatey ], ignore: true }
-- { name: Cntlm,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: codelite,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: CoffeeScript,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: composer,                                                  repos: [ chocolatey ], ignore: true }
-- { name: copyq,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: Coq,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: ctags,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: dfu-util,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: dia,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: diffuse,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: dosbox,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: duck,                                                      repos: [ chocolatey ], ignore: true }
-- { name: ekiga,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: elinks,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: Emacs,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: emulationstation,            verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: err,                                                       repos: [ chocolatey ], ignore: true }
-- { name: evince,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: expresso,                                                  repos: [ chocolatey ], ignore: true }
-- { name: FBReader,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: ffe,                                                       repos: [ chocolatey ], ignore: true }
-- { name: flare,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: freefilesync,                verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: freenet,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: gajim,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: gambit,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: ganttproject,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: gatling,                                                   repos: [ chocolatey ], ignore: true }
-- { name: getopt,                                                    repos: [ chocolatey ], ignore: true }
-- { name: Glassfish,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: glfw3,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: gnatsd,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: gsutil,                                                    repos: [ chocolatey ], ignorever: true }
-- { name: GSView,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: Graphviz,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: Gyazo,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: handbrake,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: hdparm,                                                    repos: [ chocolatey ], ignore: true }
-- { name: Hercules,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: hexchat,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: HexEdit,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: hfsexplorer,                 verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: hotswap,                                                   repos: [ chocolatey ], ignore: true }
-- { name: HxD,                                                       repos: [ chocolatey ], ignore: true }
-- { name: ironpython,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: jEdit,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: jmol,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: jpegoptim,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: krita,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: launchy,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: Leechcraft,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: libjpeg-turbo,               verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: LogRotate,                                                 repos: [ chocolatey ], ignore: true }
-- { name: luckybackup,                 verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: lyx,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: maven,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: mc,                          verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: MeshLab,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: minetest,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: mucommander,                 verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: munin-node,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: Nagstamon,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: NAnt,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: nats-streaming-server,       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: nautilus,                                                  repos: [ chocolatey ], ignore: true }
-- { name: nbfc,                                                      repos: [ chocolatey ], ignore: true }
-- { name: ncftp,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: NetBeans,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: newt,                                                      repos: [ chocolatey ], ignore: true }
-- { name: nextcloud-client,            verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: npm,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: nsis,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: nvu,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: ocaml,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: OpenCV,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: openssh,                                                   repos: [ chocolatey ], ignore: true }
-- { name: openttd,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: OptiPNG,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: pal,                                                       repos: [ chocolatey ], ignore: true }
-- { name: pan,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: pandoc,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: papercut,                                                  repos: [ chocolatey ], ignore: true }
-- { name: passwordSafe,                                              repos: [ chocolatey ], ignore: true }
-- { name: pcsx2,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: pdfedit,                                                   repos: [ chocolatey ], ignorever: true }
-- { name: pgadmin3,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: pidgin,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: Pinta,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: Play,                                                      repos: [ chocolatey ], ignorever: true }
-- { name: postgresql93,                verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: psi,                         verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: pvm,                                                       repos: [ chocolatey ], ignore: true }
-- { name: pwgen,                                                     repos: [ chocolatey ], ignore: true }
-- { name: python,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: qtox,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: redis,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: retroshare,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: RSSOwl,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: rsync,                                                     repos: [ chocolatey ], ignore: true }
-- { name: rust,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: simutrans,                   verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: simutrans-pak128,            verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: simutrans-pak64,             verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: smartmontools,               verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: smplayer,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: snes9x,                      verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: soapui,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: solfege,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: SpeedCrunch,                 verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: speex,                       verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: spotify,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: sqlitebrowser,               verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: squashfs,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: sumo,                                                      repos: [ chocolatey ], ignore: true }
-- { name: suricata,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: SWI-Prolog,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: sylpheed,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: sysmon,                                                    repos: [ chocolatey ], ignore: true }
-- { name: tcc,                                                       repos: [ chocolatey ], ignore: true }
-- { name: tcptrace,                                                  repos: [ chocolatey ], ignore: true }
-- { name: TcpView,                                                   repos: [ chocolatey ], ignore: true }
-- { name: termite,                                                   repos: [ chocolatey ], ignore: true }
-- { name: tightvnc,                                                  repos: [ chocolatey ], ignorever: true }
-- { name: tiled,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: tipp10,                      verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: tktz,                                                      repos: [ chocolatey ], ignore: true }
-- { name: transgui,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: transmission-qt,             verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: truecrypt,                   verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: usbview,                     verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: velocity,                    verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: virt-viewer,                 verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: virtualbox,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: VisualBoyAdvance,            verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: wavesurfer,                  verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: webdeploy,                                                 repos: [ chocolatey ], ignore: true }
-- { name: Weka,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: Wget,                        verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: which,                                                     repos: [ chocolatey ], ignore: true }
-- { name: whois,                                                     repos: [ chocolatey ], ignore: true }
-- { name: winff,                       verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: workrave,                    verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: xbmc,                        verlonger: 2,                 repos: [ chocolatey ], ignorever: true }
-- { name: xdelta3,                     verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: yed,                         verlonger: 3,                 repos: [ chocolatey ], ignorever: true }
-- { name: zoom,                                                      repos: [ chocolatey ], ignore: true }
+- { name: 0install,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: 7KAA,                                                      families: [ chocolatey ], ignorever: true }
+- { name: aacgain,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: ace,                                                       families: [ chocolatey ], ignore: true }
+- { name: acm,                                                       families: [ chocolatey ], ignore: true }
+- { name: acr,                                                       families: [ chocolatey ], ignore: true }
+- { name: ActiveMQ,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: apache-httpd,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: apacheds,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: apm,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: argouml,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: aria2,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: autocomplete,                                              families: [ chocolatey ], ignore: true }
+- { name: awake,                                                     families: [ chocolatey ], ignore: true }
+- { name: axel,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: bacula,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: beacon,                                                    families: [ chocolatey ], ignore: true }
+- { name: Bing,                                                      families: [ chocolatey ], ignore: true }
+- { name: blat,                                                      families: [ chocolatey ], ignore: true }
+- { name: blender,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: blobby2,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true, setname: "blobby" }
+- { name: brewtarget,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: bzr,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: celestia,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: Charles,                                                   families: [ chocolatey ], ignore: true }
+- { name: claws-mail,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: Clover,                                                    families: [ chocolatey ], ignore: true }
+- { name: Cntlm,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: codelite,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: CoffeeScript,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: composer,                                                  families: [ chocolatey ], ignore: true }
+- { name: copyq,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: Coq,                         verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: ctags,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: dfu-util,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: dia,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: diffuse,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: dosbox,                      verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: duck,                                                      families: [ chocolatey ], ignore: true }
+- { name: ekiga,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: elinks,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: Emacs,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: emulationstation,            verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: err,                                                       families: [ chocolatey ], ignore: true }
+- { name: evince,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: expresso,                                                  families: [ chocolatey ], ignore: true }
+- { name: FBReader,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: ffe,                                                       families: [ chocolatey ], ignore: true }
+- { name: flare,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: freefilesync,                verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: freenet,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: gajim,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: gambit,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: ganttproject,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: gatling,                                                   families: [ chocolatey ], ignore: true }
+- { name: getopt,                                                    families: [ chocolatey ], ignore: true }
+- { name: Glassfish,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: glfw3,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: gnatsd,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: gsutil,                                                    families: [ chocolatey ], ignorever: true }
+- { name: GSView,                      verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: Graphviz,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: Gyazo,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: handbrake,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: hdparm,                                                    families: [ chocolatey ], ignore: true }
+- { name: Hercules,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: hexchat,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: HexEdit,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: hfsexplorer,                 verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: hotswap,                                                   families: [ chocolatey ], ignore: true }
+- { name: HxD,                                                       families: [ chocolatey ], ignore: true }
+- { name: ironpython,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: jEdit,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: jmol,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: jpegoptim,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: krita,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: launchy,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: Leechcraft,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: libjpeg-turbo,               verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: LogRotate,                                                 families: [ chocolatey ], ignore: true }
+- { name: luckybackup,                 verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: lyx,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: maven,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: mc,                          verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: MeshLab,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: minetest,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: mucommander,                 verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: munin-node,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: Nagstamon,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: NAnt,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: nats-streaming-server,       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: nautilus,                                                  families: [ chocolatey ], ignore: true }
+- { name: nbfc,                                                      families: [ chocolatey ], ignore: true }
+- { name: ncftp,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: NetBeans,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: newt,                                                      families: [ chocolatey ], ignore: true }
+- { name: nextcloud-client,            verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: npm,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: nsis,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: nvu,                         verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: ocaml,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: OpenCV,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: openssh,                                                   families: [ chocolatey ], ignore: true }
+- { name: openttd,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: OptiPNG,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: pal,                                                       families: [ chocolatey ], ignore: true }
+- { name: pan,                         verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: pandoc,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: papercut,                                                  families: [ chocolatey ], ignore: true }
+- { name: passwordSafe,                                              families: [ chocolatey ], ignore: true }
+- { name: pcsx2,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: pdfedit,                                                   families: [ chocolatey ], ignorever: true }
+- { name: pgadmin3,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: pidgin,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: Pinta,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: Play,                                                      families: [ chocolatey ], ignorever: true }
+- { name: postgresql93,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: psi,                         verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: pvm,                                                       families: [ chocolatey ], ignore: true }
+- { name: pwgen,                                                     families: [ chocolatey ], ignore: true }
+- { name: python,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: qtox,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: redis,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: retroshare,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: RSSOwl,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: rsync,                                                     families: [ chocolatey ], ignore: true }
+- { name: rust,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: simutrans,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: simutrans-pak128,            verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: simutrans-pak64,             verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: smartmontools,               verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: smplayer,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: snes9x,                      verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: soapui,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: solfege,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: SpeedCrunch,                 verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: speex,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: spotify,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: sqlitebrowser,               verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: squashfs,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: sumo,                                                      families: [ chocolatey ], ignore: true }
+- { name: suricata,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: SWI-Prolog,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: sylpheed,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: sysmon,                                                    families: [ chocolatey ], ignore: true }
+- { name: tcc,                                                       families: [ chocolatey ], ignore: true }
+- { name: tcptrace,                                                  families: [ chocolatey ], ignore: true }
+- { name: TcpView,                                                   families: [ chocolatey ], ignore: true }
+- { name: termite,                                                   families: [ chocolatey ], ignore: true }
+- { name: tightvnc,                                                  families: [ chocolatey ], ignorever: true }
+- { name: tiled,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: tipp10,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: tktz,                                                      families: [ chocolatey ], ignore: true }
+- { name: transgui,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: transmission-qt,             verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: truecrypt,                   verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: usbview,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: velocity,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: virt-viewer,                 verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: virtualbox,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: VisualBoyAdvance,            verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: wavesurfer,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: webdeploy,                                                 families: [ chocolatey ], ignore: true }
+- { name: Weka,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: Wget,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: which,                                                     families: [ chocolatey ], ignore: true }
+- { name: whois,                                                     families: [ chocolatey ], ignore: true }
+- { name: winff,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: workrave,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: xbmc,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: xdelta3,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: yed,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: zoom,                                                      families: [ chocolatey ], ignore: true }
 
 # Unique ignores which will never appear in other distros
-- { namepat: "alterator-.*",                                         repos: [ sisyphus ], ignore: true } # ALT-specific
-- { namepat: "installer-.*",                                         repos: [ sisyphus ], ignore: true } # ALT-specific
-- { namepat: "altlinux-.*",                                          repos: [ sisyphus ], ignore: true } # ALT-specific
-- { namepat: "appliance-.*",                                         repos: [ sisyphus ], ignore: true } # ALT-specific
-- { namepat: "repocop.*",                                            repos: [ sisyphus ], ignore: true } # ALT-specific
-- { namepat: "livecd-*",                                             repos: [ sisyphus ], ignore: true } # ALT-specific
-- { namepat: "compat[0-9].*",                                        repos: [ freebsd, pkgsrc ], ignore: true } # system libs for older FreeBSD versions
-- { namepat: "netbsd32_compat[0-9].*",                               repos: [ pkgsrc ], ignore: true } # system libs for older FreeBSD versions
-- { name: "eselect",                                                 repos: [ gentoo ], ignore: true } # Gentoo-specific
-- { namepat: "eselect-.*",                                           repos: [ gentoo ], ignore: true } # Gentoo-specific
-- { namepat: "fedora-.*",                                            repos: [ fedora ], ignore: true } # Fedora-specific
-- { namepat: "linux-(?:c6|f10)-.*",                                  repos: [ freebsd ], ignore: true } # linux binary packages for FreeBSD
-- { namepat: "suse(?:32)?_.*",                                       repos: [ pkgsrc ], ignore: true } # linux binary packages?
+- { namepat: "alterator-.*",                                         families: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "installer-.*",                                         families: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "altlinux-.*",                                          families: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "appliance-.*",                                         families: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "repocop.*",                                            families: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "livecd-*",                                             families: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "compat[0-9].*",                                        families: [ freebsd, pkgsrc ], ignore: true } # system libs for older FreeBSD versions
+- { namepat: "netbsd32_compat[0-9].*",                               families: [ pkgsrc ], ignore: true } # system libs for older FreeBSD versions
+- { name: "eselect",                                                 families: [ gentoo ], ignore: true } # Gentoo-specific
+- { namepat: "eselect-.*",                                           families: [ gentoo ], ignore: true } # Gentoo-specific
+- { namepat: "fedora-.*",                                            families: [ fedora ], ignore: true } # Fedora-specific
+- { namepat: "linux-(?:c6|f10)-.*",                                  families: [ freebsd ], ignore: true } # linux binary packages for FreeBSD
+- { namepat: "suse(?:32)?_.*",                                       families: [ pkgsrc ], ignore: true } # linux binary packages?
 
 # Version splits/tweaks
 - { name: allegro, verpat: "4\\..*",  setname: allegro4 }
 - { name: allegro, verpat: "5\\..*",  setname: allegro5 }
 - { name: allegro4.4, setname: allegro4 }
-- { name: allegro-devel, setname: allegro5, repos: [ freebsd ] }
-- { name: bbpager, verpat: "0\\.3.*",  setname: bbpager03, repos: [ pkgsrc ] }
-- { name: bbpager04, setname: bbpager, repos: [ pkgsrc ] }
+- { name: allegro-devel, setname: allegro5, families: [ freebsd ] }
+- { name: bbpager, verpat: "0\\.3.*",  setname: bbpager03, families: [ pkgsrc ] }
+- { name: bbpager04, setname: bbpager, families: [ pkgsrc ] }
 - { name: csound, verpat: "5\\..*",    setname: csound5 }
 - { name: csound, verpat: "6\\..*",    setname: csound6 }
 - { name: eigen, verpat: "1\\..*",     setname: eigen1 }
@@ -444,190 +444,190 @@
 # - texlive
 
 # Merge some single-source plugin, i10n, l18n sets
-- { namepat: "archipel-agent-.*",      setname: "archipel-agents", repos: [ debian ] }
-- { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", repos: [ openbsd ] }
-- { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", repos: [ openbsd ] }
-- { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", repos: [ openbsd, arch ] }
-- { namepat: "eric-i18n-.*",           setname: "eric-i18n", repos: [ arch ] }
-- { namepat: "eric-qt4-i18n-.*",       setname: "eric-qt4-i18n", repos: [ arch ] }
-- { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n", repos: [ openbsd ] }
-- { namepat: "firefox-i18n-.*",        setname: "firefox-i18n", repos: [ openbsd, arch ] }
-- { namepat: "fpc-.*",                 setname: "fpc-modules", repos: [ freebsd ] }
-- { namepat: "gambas3-gb-.*",          setname: "gambas3-gb-modules", repos: [ arch ] }
-- { namepat: "geany-plugin-.*",        setname: "geany-plugins", repos: [ freebsd ] }
-- { namepat: "gimp-docs-.*",           setname: "gimp-docs", repos: [ pkgsrc ] }
-- { namepat: "gimp-help-.*",           setname: "gimp-help", repos: [ arch ] }
-- { namepat: "kde-i18n-.*",            setname: "kde-i18n", repos: [ openbsd, pkgsrc ] }
-- { namepat: "kde-l10n-.*",            setname: "kde-l10n", repos: [ openbsd, arch, debian ] }
-- { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", repos: [ pkgsrc ] }
-- { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", repos: [ freebsd ] }
-- { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", repos: [ pkgsrc ] }
-- { namepat: "kompozer-i18n-.*",       setname: "kompozer-i18n", repos: [ arch ] }
-- { namepat: "language-pack-gnome-.*", setname: "language-pack-gnome", repos: [ debian ] }
-- { namepat: "language-pack-kde-.*",   setname: "language-pack-kde", repos: [ debian ] }
-- { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", repos: [ arch ] }
-- { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", repos: [ openbsd ] }
-- { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", repos: [ arch ] }
-- { namepat: "[^-]+-libreoffice",      setname: "libreoffice-i18n", repos: [ freebsd ] }
-- { namepat: "mgltools-.*",            setname: "mgltools", repos: [ debian ] }
-- { namepat: "mozilla-dicts-.*",       setname: "mozilla-dicts", repos: [ openbsd ] }
-- { namepat: "netbeans-.*",            setname: "netbeans", repos: [ gentoo ] }
-- { namepat: "opensmtpd-extras-.*",    setname: "opensmtpd-extras", repos: [ freebsd, openbsd ] }
-- { namepat: "seamonkey-i18n-.*",      setname: "seamonkey-i18n", repos: [ openbsd ] }
-- { namepat: "(squirrelmail-.*)-plugin", setname: "$1", repos: [ freebsd ] }
-- { namepat: "tesseract-.*",           setname: "tesseract-data", repos: [ openbsd, debian ] }
-- { namepat: "tesseract-data-.*",      setname: "tesseract-data", repos: [ arch ] }
-- { namepat: "texlive-documentation-.*", setname: "texlive-documentation", repos: [ gentoo ] }
-- { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", repos: [ openbsd, arch ] }
-- { namepat: "vim-spell-.*",           setname: "vim-spell", repos: [ openbsd, gentoo, arch ] }
+- { namepat: "archipel-agent-.*",      setname: "archipel-agents", families: [ debian ] }
+- { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", families: [ openbsd ] }
+- { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", families: [ openbsd ] }
+- { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", families: [ openbsd, arch ] }
+- { namepat: "eric-i18n-.*",           setname: "eric-i18n", families: [ arch ] }
+- { namepat: "eric-qt4-i18n-.*",       setname: "eric-qt4-i18n", families: [ arch ] }
+- { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n", families: [ openbsd ] }
+- { namepat: "firefox-i18n-.*",        setname: "firefox-i18n", families: [ openbsd, arch ] }
+- { namepat: "fpc-.*",                 setname: "fpc-modules", families: [ freebsd ] }
+- { namepat: "gambas3-gb-.*",          setname: "gambas3-gb-modules", families: [ arch ] }
+- { namepat: "geany-plugin-.*",        setname: "geany-plugins", families: [ freebsd ] }
+- { namepat: "gimp-docs-.*",           setname: "gimp-docs", families: [ pkgsrc ] }
+- { namepat: "gimp-help-.*",           setname: "gimp-help", families: [ arch ] }
+- { namepat: "kde-i18n-.*",            setname: "kde-i18n", families: [ openbsd, pkgsrc ] }
+- { namepat: "kde-l10n-.*",            setname: "kde-l10n", families: [ openbsd, arch, debian ] }
+- { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", families: [ pkgsrc ] }
+- { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", families: [ freebsd ] }
+- { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", families: [ pkgsrc ] }
+- { namepat: "kompozer-i18n-.*",       setname: "kompozer-i18n", families: [ arch ] }
+- { namepat: "language-pack-gnome-.*", setname: "language-pack-gnome", families: [ debian ] }
+- { namepat: "language-pack-kde-.*",   setname: "language-pack-kde", families: [ debian ] }
+- { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", families: [ arch ] }
+- { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", families: [ openbsd ] }
+- { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", families: [ arch ] }
+- { namepat: "[^-]+-libreoffice",      setname: "libreoffice-i18n", families: [ freebsd ] }
+- { namepat: "mgltools-.*",            setname: "mgltools", families: [ debian ] }
+- { namepat: "mozilla-dicts-.*",       setname: "mozilla-dicts", families: [ openbsd ] }
+- { namepat: "netbeans-.*",            setname: "netbeans", families: [ gentoo ] }
+- { namepat: "opensmtpd-extras-.*",    setname: "opensmtpd-extras", families: [ freebsd, openbsd ] }
+- { namepat: "seamonkey-i18n-.*",      setname: "seamonkey-i18n", families: [ openbsd ] }
+- { namepat: "(squirrelmail-.*)-plugin", setname: "$1", families: [ freebsd ] }
+- { namepat: "tesseract-.*",           setname: "tesseract-data", families: [ openbsd, debian ] }
+- { namepat: "tesseract-data-.*",      setname: "tesseract-data", families: [ arch ] }
+- { namepat: "texlive-documentation-.*", setname: "texlive-documentation", families: [ gentoo ] }
+- { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", families: [ openbsd, arch ] }
+- { namepat: "vim-spell-.*",           setname: "vim-spell", families: [ openbsd, gentoo, arch ] }
 
 ################################################################################
 # Global patterns
 ################################################################################
 
 # FreeBSD: localized categories (XXX: fix this, contains useful packages)
-- { namepat: "([a-z]{2,3}|de-alt|pt_BR|pt_PT)-aspell", setname: "aspell-$1", repos: [ freebsd ] }
-- { namepat: "([a-z]{2,3}|de-alt|pt_BR|pt_PT)-aspell", setname: "aspell-$1", repos: [ freebsd ] }
-- { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, repos: [ freebsd ] }
+- { namepat: "([a-z]{2,3}|de-alt|pt_BR|pt_PT)-aspell", setname: "aspell-$1", families: [ freebsd ] }
+- { namepat: "([a-z]{2,3}|de-alt|pt_BR|pt_PT)-aspell", setname: "aspell-$1", families: [ freebsd ] }
+- { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, families: [ freebsd ] }
 
 # Perl modules
 #
 # Note that Gentoo misbehaves by changing upstream versioning scheme, so
 # we ignore it in comparison
-- { namepat: "p5-(.*)",                setname: "perl:$1", repos: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "lib(.*)-perl",           setname: "perl:$1", repos: [ debian ] }
-- { category: dev-perl,                setname: "perl:$0", repos: [ gentoo ], ignorever: true }
-- { namepat: "perl-(.*)",              setname: "perl:$1", repos: [ arch, fedora, opensuse, sisyphus, slackbuilds ] }
+- { namepat: "p5-(.*)",                setname: "perl:$1", families: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "lib(.*)-perl",           setname: "perl:$1", families: [ debian ] }
+- { category: dev-perl,                setname: "perl:$0", families: [ gentoo ], ignorever: true }
+- { namepat: "perl-(.*)",              setname: "perl:$1", families: [ arch, fedora, opensuse, sisyphus, slackbuilds ] }
 
 # Ruby
-- { namepat: "ruby-(.*)",              setname: "ruby:$1", repos: [ debian, arch, fedora, sisyphus ] }
-- { namepat: "rubygem-(.*)",           setname: "ruby:$1", repos: [ freebsd, opensuse, slackbuilds ] }
-- { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", repos: [ freebsd, openbsd, pkgsrc ] }
-- { category: dev-ruby,                setname: "ruby:$0", repos: [ gentoo ] }
+- { namepat: "ruby-(.*)",              setname: "ruby:$1", families: [ debian, arch, fedora, sisyphus ] }
+- { namepat: "rubygem-(.*)",           setname: "ruby:$1", families: [ freebsd, opensuse, slackbuilds ] }
+- { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", families: [ freebsd, openbsd, pkgsrc ] }
+- { category: dev-ruby,                setname: "ruby:$0", families: [ gentoo ] }
 
 # Tryton (wtf is that); needs to be before python
-- { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$2", repos: [ pkgsrc ] }
-- { namepat: "trytond28_(.*)",         setname: "tryton:$1", repos: [ freebsd ] }
-- { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", repos: [ debian ] }
-- { namepat: "trytond-module-(.*)",    setname: "tryton:$1", repos: [ openbsd ] }
+- { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$2", families: [ pkgsrc ] }
+- { namepat: "trytond28_(.*)",         setname: "tryton:$1", families: [ freebsd ] }
+- { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", families: [ debian ] }
+- { namepat: "trytond-module-(.*)",    setname: "tryton:$1", families: [ openbsd ] }
 
 # Zope; needs to be before python
-- { namepat: "py[0-9][0-9]-zope\\.(.*)", setname: "zope:$1", repos: [ freebsd ] }
-- { namepat: "zope\\.(.*)",              setname: "zope:$1", repos: [ debian, slackbuilds ] }
+- { namepat: "py[0-9][0-9]-zope\\.(.*)", setname: "zope:$1", families: [ freebsd ] }
+- { namepat: "zope\\.(.*)",              setname: "zope:$1", families: [ debian, slackbuilds ] }
 
 # Python modules
 # some rules may merge modules for different python version into single entry; this is intended
-- { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", repos: [ freebsd, pkgsrc ] }
-- { namepat: "py3?-(.*)",              setname: "python:$1", repos: [ openbsd ] }
-- { namepat: "python-(.*)",            setname: "python:$1", repos: [ debian ] }
-- { namepat: "python3?-module-(.*)",   setname: "python:$1", repos: [ sisyphus ] }
-- { namepat: "python2?-(.*)",          setname: "python:$1", repos: [ arch ] }
-- { namepat: "python3?-(.*)",          setname: "python:$1", repos: [ fedora, opensuse, slackbuilds ] }
-- { category: dev-python,              setname: "python:$0", repos: [ gentoo ] }
+- { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", families: [ freebsd, pkgsrc ] }
+- { namepat: "py3?-(.*)",              setname: "python:$1", families: [ openbsd ] }
+- { namepat: "python-(.*)",            setname: "python:$1", families: [ debian ] }
+- { namepat: "python3?-module-(.*)",   setname: "python:$1", families: [ sisyphus ] }
+- { namepat: "python2?-(.*)",          setname: "python:$1", families: [ arch ] }
+- { namepat: "python3?-(.*)",          setname: "python:$1", families: [ fedora, opensuse, slackbuilds ] }
+- { category: dev-python,              setname: "python:$0", families: [ gentoo ] }
 
 # R libs
-- { namepat: "R-cran-(.*)",            setname: "r:$1", repos: [ freebsd ] }
-- { namepat: "r-cran-(.*)",            setname: "r:$1", repos: [ debian ] }
-- { namepat: "R-(.*)",                 setname: "r:$1", repos: [ pkgsrc ] }
+- { namepat: "R-cran-(.*)",            setname: "r:$1", families: [ freebsd ] }
+- { namepat: "r-cran-(.*)",            setname: "r:$1", families: [ debian ] }
+- { namepat: "R-(.*)",                 setname: "r:$1", families: [ pkgsrc ] }
 
 # Nodejs
-- { namepat: "node-(.*)",              setname: "r:$1", repos: [ debian ] }
-- { namepat: "nodejs-(.*)",            setname: "r:$1", repos: [ fedora ] }
+- { namepat: "node-(.*)",              setname: "r:$1", families: [ debian ] }
+- { namepat: "nodejs-(.*)",            setname: "r:$1", families: [ fedora ] }
 
 # ROS
-- { category: dev-ros,                 setname: "ros:$0", repos: [ gentoo ] }
-- { namepat: "ros-(.*)",               setname: "ros:$1", repos: [ debian ] }
+- { category: dev-ros,                 setname: "ros:$0", families: [ gentoo ] }
+- { namepat: "ros-(.*)",               setname: "ros:$1", families: [ debian ] }
 
 # VDR
-- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", repos: [ freebsd, debian ] }
-- { namepat: "vdr-(.*)",               setname: "vdr:$1", repos: [ gentoo ] }
+- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", families: [ freebsd, debian ] }
+- { namepat: "vdr-(.*)",               setname: "vdr:$1", families: [ gentoo ] }
 
 # Haskell
-- { namepat: "haskell-(.*)",           setname: "haskell:$1", repos: [ debian, arch, slackbuilds ] }
-- { namepat: "hs-(.*)",                setname: "haskell:$1", repos: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "ghc-(.*)",               setname: "haskell:$1", repos: [ opensuse ] }
-- { category: dev-haskell,             setname: "haskell:$0", repos: [ gentoo ] }
-- { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", repos: [ sisyphus ] }
+- { namepat: "haskell-(.*)",           setname: "haskell:$1", families: [ debian, arch, slackbuilds ] }
+- { namepat: "hs-(.*)",                setname: "haskell:$1", families: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "ghc-(.*)",               setname: "haskell:$1", families: [ opensuse ] }
+- { category: dev-haskell,             setname: "haskell:$0", families: [ gentoo ] }
+- { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", families: [ sisyphus ] }
 
 # golang
 - { namepat: "go-(.*)",                setname: "go:$1" }
 - { namepat: "golang-(.*)",            setname: "go:$1" }
 
 # mingw
-- { namepat: "mingw-(.*)",             setname: "mingw:$1", repos: [ fedora ] }
-- { namepat: "mingw32-(.*)",           setname: "mingw:$1", repos: [ sisyphus ] }
+- { namepat: "mingw-(.*)",             setname: "mingw:$1", families: [ fedora ] }
+- { namepat: "mingw32-(.*)",           setname: "mingw:$1", families: [ sisyphus ] }
 
 # lua
 - { namepat: ".*luassert",             setname: "lua:luassert" } # save
-- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", repos: [ freebsd, pkgsrc, openbsd, arch, debian ] }
-- { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", repos: [ openbsd ] }
-- { category: dev-lua, name: LuaBitOp, setname: "lua:bitop", repos: [ gentoo ] }
-- { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", repos: [ gentoo ] }
+- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", families: [ freebsd, pkgsrc, openbsd, arch, debian ] }
+- { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", families: [ openbsd ] }
+- { category: dev-lua, name: LuaBitOp, setname: "lua:bitop", families: [ gentoo ] }
+- { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", families: [ gentoo ] }
 
 # octave
-- { namepat: "octave-forge-(.*)",      setname: "octave:$1", repos: [ freebsd, opensuse ] }
-- { namepat: "octave-(.*)",            setname: "octave:$1", repos: [ debian, sisyphus ] }
+- { namepat: "octave-forge-(.*)",      setname: "octave:$1", families: [ freebsd, opensuse ] }
+- { namepat: "octave-(.*)",            setname: "octave:$1", families: [ debian, sisyphus ] }
 
 # xorg drivers
-- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", repos: [ freebsd, gentoo, pkgsrc, arch, opensuse ] }
-- { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", repos: [ debian ] }
+- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", families: [ freebsd, gentoo, pkgsrc, arch, opensuse ] }
+- { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", families: [ debian ] }
 
 # php
-- { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", repos: [ gentoo ] }
-- { category: dev-php,                 setname: "php:$0", repos: [ gentoo ] }
-- { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", repos: [ freebsd, pkgsrc, openbsd, sisyphus ] }
-- { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", repos: [ freebsd, pkgsrc ] }
-- { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", repos: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "php-(.*)",               setname: "php:$1", repos: [ arch, fedora, debian, slackbuilds ] }
-- { namepat: "php5-(.*)",              setname: "php56:$1", repos: [ sisyphus ], "ignorever": true }
-- { namepat: "php5-(.*)",              setname: "php56:$1", repos: [ opensuse ] }
+- { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", families: [ gentoo ] }
+- { category: dev-php,                 setname: "php:$0", families: [ gentoo ] }
+- { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", families: [ freebsd, pkgsrc, openbsd, sisyphus ] }
+- { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", families: [ freebsd, pkgsrc ] }
+- { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", families: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "php-(.*)",               setname: "php:$1", families: [ arch, fedora, debian, slackbuilds ] }
+- { namepat: "php5-(.*)",              setname: "php56:$1", families: [ sisyphus ], "ignorever": true }
+- { namepat: "php5-(.*)",              setname: "php56:$1", families: [ opensuse ] }
 
 # gstreamer plugins
-- { namepat: "gst-plugins-(.*)",       setname: "gstreamer1:$1", repos: [ gentoo, debian ] }
-- { namepat: "gst-plugins0.10-(.*)",   setname: "gstreamer0:$1", repos: [ pkgsrc ] }
-- { namepat: "gst-plugins1-(.*)",      setname: "gstreamer1:$1", repos: [ pkgsrc ] }
-- { namepat: "gstreamer-plugins-(.*)", setname: "gstreamer0:$1", repos: [ freebsd ] }
-- { namepat: "gstreamer1-plugins-(.*)", setname: "gstreamer1:$1", repos: [ freebsd ] }
+- { namepat: "gst-plugins-(.*)",       setname: "gstreamer1:$1", families: [ gentoo, debian ] }
+- { namepat: "gst-plugins0.10-(.*)",   setname: "gstreamer0:$1", families: [ pkgsrc ] }
+- { namepat: "gst-plugins1-(.*)",      setname: "gstreamer1:$1", families: [ pkgsrc ] }
+- { namepat: "gstreamer-plugins-(.*)", setname: "gstreamer0:$1", families: [ freebsd ] }
+- { namepat: "gstreamer1-plugins-(.*)", setname: "gstreamer1:$1", families: [ freebsd ] }
 
 # Apache modules
-- { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", repos: [ freebsd, openbsd, pkgsrc ] }
-- { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", repos: [ gentoo ] }
-- { namepat: "mod-(.*)",               setname: "apmod:$1", repos: [ debian ] }
-- { namepat: "mod_(.*)",               setname: "apmod:$1", repos: [ freebsd, arch, sisyphus, slackbuilds, fedora ] }
-- { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1", repos: [ debian ] }
+- { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", families: [ freebsd, openbsd, pkgsrc ] }
+- { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", families: [ gentoo ] }
+- { namepat: "mod-(.*)",               setname: "apmod:$1", families: [ debian ] }
+- { namepat: "mod_(.*)",               setname: "apmod:$1", families: [ freebsd, arch, sisyphus, slackbuilds, fedora ] }
+- { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1", families: [ debian ] }
 
 # Erlang
-- { category: dev-erlang,              setname: "erlang:$0", repos: [ gentoo ] }
+- { category: dev-erlang,              setname: "erlang:$0", families: [ gentoo ] }
 - { namepat: "erlang-(.*)",            setname: "erlang:$1" }
 
 # Gentoo global rules
-#- { category: dev-XXX,              setname: "XXX:$0", repos: [ gentoo ] }
-- { "verpat": ".*9999",                                      repos: [ gentoo ], ignorever: true }
+#- { category: dev-XXX,              setname: "XXX:$0", families: [ gentoo ] }
+- { "verpat": ".*9999",                                      families: [ gentoo ], ignorever: true }
 
 # fonts
 - { namepat: "font-manager",           pass: true }
-- { namepat: "x?fonts-(.*)",           setname: "fonts:$1", repos: [ debian ] }
-#- repos: [ freebsd ] # strange version mismatches
+- { namepat: "x?fonts-(.*)",           setname: "fonts:$1", families: [ debian ] }
+#- families: [ freebsd ] # strange version mismatches
 #  namepat: "xorg-fonts-(.*)"
 #  setname: "xfonts:$1"
-- { namepat: "(.*)-fonts",             setname: "fonts:$1", repos: [ gentoo ] }
-- { namepat: "(.*)-ttf",               setname: "fonts:$1", repos: [ pkgsrc ] }
-- { namepat: "font-(.*)",              setname: "fonts:$1", repos: [ freebsd, gentoo, pkgsrc, arch ] }
-- { name: cantarell,                   setname: "fonts:cantarell", repos: [ gentoo ]  }
-- { name: cantarell-fonts,             setname: "fonts:cantarell", repos: [ freebsd, pkgsrc, openbsd, arch ] }
-- { namepat: "fonts-(.*)",             setname: "fonts:$1", repos: [ sisyphus ] }
+- { namepat: "(.*)-fonts",             setname: "fonts:$1", families: [ gentoo ] }
+- { namepat: "(.*)-ttf",               setname: "fonts:$1", families: [ pkgsrc ] }
+- { namepat: "font-(.*)",              setname: "fonts:$1", families: [ freebsd, gentoo, pkgsrc, arch ] }
+- { name: cantarell,                   setname: "fonts:cantarell", families: [ gentoo ]  }
+- { name: cantarell-fonts,             setname: "fonts:cantarell", families: [ freebsd, pkgsrc, openbsd, arch ] }
+- { namepat: "fonts-(.*)",             setname: "fonts:$1", families: [ sisyphus ] }
 
 # fortunes
-- { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1", repos: [ gentoo ] }
-- { namepat: "fortunes-(.*)",          setname: "fortunes:$1", repos: [ debian, pkgsrc, sisyphus ] }
+- { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1", families: [ gentoo ] }
+- { namepat: "fortunes-(.*)",          setname: "fortunes:$1", families: [ debian, pkgsrc, sisyphus ] }
 
 # cursors
-- { namepat: "(.*)-cursor-theme",      setname: "cursors:$1", repos: [ debian ] }
-- { namepat: "(.*)-xcursors",          setname: "cursors:$1", repos: [ gentoo ] }
-- { namepat: "cursor-(.*)",            setname: "cursors:$1", repos: [ freebsd ] }
+- { namepat: "(.*)-cursor-theme",      setname: "cursors:$1", families: [ debian ] }
+- { namepat: "(.*)-xcursors",          setname: "cursors:$1", families: [ gentoo ] }
+- { namepat: "cursor-(.*)",            setname: "cursors:$1", families: [ freebsd ] }
 
 # x11 protos
-- { namepat: "x11proto-(.*)",          setname: "$1proto", repos: [ debian ] }
+- { namepat: "x11proto-(.*)",          setname: "$1proto", families: [ debian ] }
 
 # fusefs
 - { namepat: "fuse-emulator.*",        pass: true } # protect from the next rule, has nothing to do with fusefs

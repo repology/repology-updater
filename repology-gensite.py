@@ -42,7 +42,7 @@ def FilterPackages(metapackages, maintainer=None, category=None, manyrepos=None,
         if category is not None and not metapackage.HasCategoryLike(category):
             continue
 
-        if manyrepos is not None and len(metapackage.GetRepotypes()) < manyrepos:
+        if manyrepos is not None and len(metapackage.GetFamilies()) < manyrepos:
             continue
 
         if littlerepos is not None and metapackage.GetNumRepos() > littlerepos:
@@ -148,7 +148,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     if not os.path.isdir(widespread_path):
         os.mkdir(widespread_path)
 
-    manyrepos = len(set([repometadata[repo]['repotype'] for repo in repositories]))
+    manyrepos = len(set([repometadata[repo]['family'] for repo in repositories]))
     rp.RenderFilesPaginated(
         os.path.join(widespread_path, "widespread"),
         FilterPackages(metapackages, manyrepos=manyrepos),

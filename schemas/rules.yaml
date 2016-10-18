@@ -25,7 +25,7 @@ sequence:
         type: bool
       "pass":
         type: bool
-      "repos":
+      "families":
         type: seq
         sequence:
           - type: str

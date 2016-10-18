@@ -81,7 +81,7 @@ class RepositoryManager:
             'incomplete': repository.get('incomplete', False),
             'shadow': repository.get('shadow', False),
             'link': repository.get('link'),
-            'repotype': repository['repotype'],
+            'family': repository['family'],
         } for repository in REPOSITORIES}
 
     def Mix(self, packages_by_repo, name_transformer):
@@ -93,8 +93,8 @@ class RepositoryManager:
                 continue
 
             for package in packages_by_repo[reponame]:
-                package.repotype = repository['repotype']  # XXX: hack
-                metaname = name_transformer.TransformName(package, repository['repotype'])
+                package.family = repository['family']  # XXX: hack
+                metaname = name_transformer.TransformName(package, repository['family'])
 
                 if metaname is None:
                     continue
