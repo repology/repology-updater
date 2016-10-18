@@ -70,6 +70,19 @@ REPOSITORIES = [
         'link': 'https://packages.debian.org/unstable/{name}',
         'tags': ['all', 'demo', 'debian', 'production', 'fastfetch'],
     },
+    {
+        'name': 'Debian Experimental',
+        'family': 'debian',
+        'fetcher': FileFetcher(
+            "http://ftp.debian.org/debian/dists/experimental/contrib/source/Sources.xz",
+            "http://ftp.debian.org/debian/dists/experimental/main/source/Sources.xz",
+            "http://ftp.debian.org/debian/dists/experimental/non-free/source/Sources.xz",
+            xz=True
+        ),
+        'parser': DebianSourcesParser(),
+        'link': 'https://packages.debian.org/experimental/{name}',
+        'tags': ['all', 'debian', 'fastfetch'],
+    },
 
     {
         'name': 'Ubuntu Xenial',
