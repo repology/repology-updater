@@ -110,6 +110,20 @@ REPOSITORIES = [
         ),
         'parser': DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/yakkety/{name}',
+        'tags': ['all', 'ubuntu', 'fastfetch'],
+    },
+    {
+        'name': 'Ubuntu Zesty',
+        'family': 'debian',
+        'fetcher': FileFetcher(
+            "http://ftp.ubuntu.com/ubuntu/dists/zesty/main/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/zesty/multiverse/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/zesty/restricted/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/zesty/universe/source/Sources.gz",
+            gz=True
+        ),
+        'parser': DebianSourcesParser(),
+        'link': 'http://packages.ubuntu.com/zesty/{name}',
         'tags': ['all', 'demo', 'production', 'ubuntu', 'fastfetch'],
     },
 
