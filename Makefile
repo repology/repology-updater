@@ -12,6 +12,9 @@ cutils/rpmcat: cutils/rpmcat.c
 clean:
 	rm cutils/rpmcat
 
+test::
+	python3 -m unittest discover
+
 check:
 	kwalify -lf schemas/rules.yaml rules.yaml | tee kwalify.log
 	@if grep -q INVALID kwalify.log; then \
