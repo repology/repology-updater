@@ -5,7 +5,7 @@
 ################################################################################
 
 # Some of these are to be reversed for less ambiguity, and some
-# are to consider for performing in the actual familiesitories
+# are to consider for performing in the actual repositories
 - { name: "2048",                      setname: 2048-cli,                 families: [ freebsd ] } # differentiate from 2048-qt
 - { name: 3dchess,                     setname: 3dc,                      families: [ debian ] }
 - { name: abuse_sdl,                   setname: abuse,                    families: [ freebsd ] }
@@ -212,7 +212,7 @@
 # - filebeat/filebeat-bin
 # - fira* (font)
 
-# Version ignores, incompatible version mangling in the familiesitories
+# Version ignores, incompatible version mangling in the repositories
 - { name: "libreadonly-perl",          ver: "2.050",                 families: [ debian ], ignorever: true } # needs multiple rule hits
 - { name: apr,                         verlonger: 3,                                    ignorever: true } # FreeBSD
 - { name: cryptcat,                    ver: "20031202",                                 ignorever: true }
