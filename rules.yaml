@@ -8,7 +8,7 @@
 # are to consider for performing in the actual repositories
 - { name: "2048",                      setname: 2048-cli,                 families: [ freebsd ] } # differentiate from 2048-qt
 - { name: 3dchess,                     setname: 3dc,                      families: [ debian ] }
-- { name: abuse_sdl,                   setname: abuse,                    families: [ freebsd ] }
+- { name: abuse_sdl,                   setname: abuse                     }
 - { name: accounts-qt5,                setname: accounts-qt ,             families: [ sisyphus ] }
 - { name: ace,                         setname: ace-of-penguins,          families: [ openbsd, slackbuilds ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          families: [ gentoo ] }
@@ -29,8 +29,8 @@
 - { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               families: [ freebsd ]  }
 - { name: adzap,                       setname: adzapper,                 families: [ freebsd, pkgsrc ] }
 - { name: aiksaurus-gtk,               setname: aiksaurus,                families: [ freebsd ] } # slave port
-- { name: alienarena,                  setname: alien-arena,              families: [ gentoo, arch, fedora ] }
-- { name: alienarena-data,             setname: alien-arena-data,         families: [ arch ] }
+- { name: alienarena,                  setname: alien-arena               }
+- { name: alienarena-data,             setname: alien-arena-data          }
 - { name: armagetron,                  setname: armagetronad,             families: [ freebsd, opensuse ] }
 - { name: atk1.0,                      setname: atk,                      families: [ debian ]  }
 - { name: atk2mm,                      setname: atkmm,                    families: [ openbsd ]  }
@@ -75,9 +75,9 @@
 - { name: entagged-tageditor,          setname: entagged,                 families: [ gentoo ]  }
 - { name: epl.el,                      setname: epl,                      families: [ freebsd ] }
 - { name: eric6,                       setname: eric,                     families: [ freebsd ] }
-- { name: etracer,                     setname: extreme-tuxracer,         families: [ freebsd ] }
+- { name: etracer,                     setname: extreme-tuxracer          }
 - { name: exactimage,                  setname: exact-image,              families: [ debian ]  }
-- { name: extremetuxracer,             setname: extreme-tuxracer,         families: [ debian, openbsd ] }
+- { name: extremetuxracer,             setname: extreme-tuxracer          }
 - { name: falconseye,                  setname: falcons-eye,              families: [ freebsd, openbsd ] }
 - { name: farstream-0.2,               setname: farstream,                families: [ debian ]  }
 - { name: fish-fillets,                setname: fillets-ng,               families: [ gentoo ]  }
@@ -214,8 +214,8 @@
 
 # Version ignores, incompatible version mangling in the repositories
 - { name: "libreadonly-perl",          ver: "2.050",                 families: [ debian ], ignorever: true } # needs multiple rule hits
-- { name: apr,                         verlonger: 3,                                    ignorever: true } # FreeBSD
-- { name: cryptcat,                    ver: "20031202",                                 ignorever: true }
+- { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
+- { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dia,                         ver: "0.97.4",                families: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       families: [ sisyphus ], ignorever: true }
 - { name: inkscape,                    ver: "0.92",                  families: [ fedora ], ignorever: true } # prerepease
