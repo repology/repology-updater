@@ -110,7 +110,7 @@ REPOSITORIES = [
         ),
         'parser': DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/yakkety/{name}',
-        'tags': ['all', 'ubuntu', 'fastfetch'],
+        'tags': ['all', 'demo', 'production', 'ubuntu', 'fastfetch'],
     },
     {
         'name': 'Ubuntu Zesty',
@@ -124,7 +124,7 @@ REPOSITORIES = [
         ),
         'parser': DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/zesty/{name}',
-        'tags': ['all', 'demo', 'production', 'ubuntu', 'fastfetch'],
+        'tags': ['all', 'ubuntu', 'fastfetch'],
     },
 
     {
