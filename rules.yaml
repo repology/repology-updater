@@ -37,6 +37,7 @@
 - { name: atkmm1.6,                    setname: atk,                      families: [ debian ]  }
 - { name: argus-sasl,                  setname: argus,                    families: [ freebsd ]  }
 - { name: bass,                        setname: beneath-a-steel-sky,      families: [ freebsd, gentoo, openbsd, arch ] }
+- { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            families: [ freebsd ] }
 - { name: billard-gl,                  setname: billardgl,                families: [ debian ]  }
 - { name: blitz,                       setname: blitz++,                  families: [ gentoo, fedora, opensuse ] } # XXX: recheck
@@ -82,7 +83,8 @@
 - { name: farstream-0.2,               setname: farstream,                families: [ debian ]  }
 - { name: fish-fillets,                setname: fillets-ng,               families: [ gentoo ]  }
 - { name: focuswriter-qt4,             setname: focuswriter,              families: [ freebsd ] }
-- { name: fotaq,                       setname: flight-of-the-amazon-queen, families: [ freebsd, openbsd ] }
+- { name: fotaq,                       setname: flight-of-the-amazon-queen }
+- { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
 - { name: fox1.6,                      setname: fox16,                    families: [ debian ]  }
 - { name: fox17,                       setname: fox,                      families: [ freebsd ] }
 - { name: free42-nologo,               setname: free42,                   families: [ debian ]  }
