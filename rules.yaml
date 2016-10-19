@@ -116,10 +116,12 @@
 - { name: puppet4,                     setname: puppet,                   families: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles,              families: [ pkgsrc, arch, openbsd ] }
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 families: [ freebsd ] }
+- { name: "sdl1.2"                     setname: sdl                       }
 - { name: sdl-sopwith,                 setname: sopwith,                  families: [ gentoo ]  }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 families: [ debian ]  }
 - { name: sdlpango,                    setname: sdl-pango,                families: [ debian ]  }
 - { namepat: "sendmail\\+.*",          setname: sendmail,                 families: [ freebsd ]  }
+- { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
 - { name: seven-kingdoms,              setname: 7kaa,                     families: [ gentoo ]  }
 - { name: slashem-tty,                 setname: slashem,                  families: [ freebsd ] }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             families: [ gentoo ]  } # XXX: recheck
