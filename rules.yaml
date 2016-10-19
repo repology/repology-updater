@@ -225,7 +225,7 @@
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       families: [ sisyphus ], ignorever: true }
 - { name: inkscape,                    ver: "0.92",                  families: [ fedora ], ignorever: true } # prerepease
 - { name: xmahjongg,                   ver: "3.70",                  families: [ pkgsrc ], ignorever: true }
-- { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus ], ignorever: true }
+- { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
 - { name: avinfo,                      ver: "1.0",                   families: [ sisyphus ], ignorever: true }
 - { name: openmortal,                  ver: "0.7.1",                 families: [ sisyphus ], ignorever: true }
 
