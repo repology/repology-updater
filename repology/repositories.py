@@ -81,7 +81,7 @@ REPOSITORIES = [
         ),
         'parser': DebianSourcesParser(),
         'link': 'https://packages.debian.org/experimental/{name}',
-        'tags': ['all', 'debian', 'fastfetch'],
+        'tags': ['all', 'preproduction', 'debian', 'fastfetch'],
     },
 
     {
