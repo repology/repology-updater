@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.util import VersionCompare
+from repology.version import VersionCompare
 
 class TestVersionComparison(unittest.TestCase):
     def test_zeroes_at_right(self):

@@ -20,7 +20,7 @@ import json
 
 from repology.logger import NoopLogger
 from repology.www import Get
-from repology.util import VersionCompare
+from repology.version import VersionCompare
 
 
 class FreshcodeFetcher():

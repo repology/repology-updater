@@ -18,8 +18,8 @@
 import os
 import xml.etree.ElementTree
 
-from ..util import VersionCompare
-from ..package import Package
+from repology.version import VersionCompare
+from repology.package import Package
 
 
 def SanitizeVersion(version):
