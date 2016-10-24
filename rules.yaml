@@ -92,7 +92,7 @@
 - { name: freefont-ttf,                setname: freefont,                 families: [ freebsd ] }
 - { name: freetype,                    setname: freetype1,                families: [ freebsd, pkgsrc ] }
 - { name: freetype2,                   setname: freetype,                 families: [ freebsd, pkgsrc ] }
-- { name: garden,                      setname: garden-of-coloured-lights, families: [ gentoo, openbsd ] } # XXX: recheck
+- { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle,                 families: [ debian ]  }
 - { name: gaul-devel,                  setname: gaul,                     families: [ gentoo ]  }
 - { name: geki2-KXL,                   setname: geki2,                    families: [ gentoo ]  } # XXX: recheck
