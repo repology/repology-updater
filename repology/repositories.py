@@ -224,4 +224,13 @@ REPOSITORIES = [
         'link': 'http://freshcode.club/projects/{name}',
         'tags': ['all', 'preproduction', 'fastfetch'],
     },
+    {
+        'name': 'F-Droid',
+        'family': 'fdroid',
+        'fetcher': FileFetcher("https://f-droid.org/repo/index.xml"),
+        'parser': FDroidParser(),
+        'shadow': True,
+        'link': 'http://freshcode.club/projects/{name}',
+        'tags': ['all', 'fastfetch'],
+    },
 ]

@@ -27,3 +27,4 @@ from .chocolatey import ChocolateyParser
 from .sisyphus import SrcListClassicParser
 from .slackbuilds import SlackBuildsParser
 from .freshcode import FreshcodeParser
+from .fdroid import FDroidParser
