@@ -129,7 +129,7 @@
 - { name: spacearyarya-kxl,            setname: spacearyarya,             families: [ gentoo ]  } # XXX: recheck
 - { name: speed-dreams,                setname: speeddreams,              families: [ gentoo ]  }
 - { name: stepmania-devel,             setname: stepmania,                families: [ freebsd ] }
-- { name: stone-soup,                  setname: stonesoup,                families: [ gentoo, openbsd ] }
+- { namepat: "stonesoup(-sdl)",        setname: stone-soup                }
 - { name: stransball2,                 setname: supertransball2,          families: [ freebsd ] }
 - { name: supertux,                    setname: supertux1,                families: [ freebsd ] } # ???
 - { name: supertux2,                   setname: supertux,                 families: [ freebsd ] }
