@@ -127,9 +127,9 @@
 - { name: seven-kingdoms,              setname: 7kaa,                     families: [ gentoo ]  }
 - { name: slashem-tty,                 setname: slashem,                  families: [ freebsd ] }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             families: [ gentoo ]  } # XXX: recheck
-- { name: speed-dreams,                setname: speeddreams,              families: [ gentoo ]  }
+- { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
 - { name: stepmania-devel,             setname: stepmania,                families: [ freebsd ] }
-- { namepat: "stonesoup(-sdl)",        setname: stone-soup                }
+- { namepat: "stonesoup(?:-sdl)?",     setname: stone-soup                }
 - { name: stransball2,                 setname: supertransball2,          families: [ freebsd ] }
 - { name: supertux,                    setname: supertux1,                families: [ freebsd ] } # ???
 - { name: supertux2,                   setname: supertux,                 families: [ freebsd ] }
