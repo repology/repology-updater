@@ -108,6 +108,8 @@
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
 - { name: libphysfs,                   setname: physfs,                   families: [ debian ] }
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
+- { name: ogre3d,                      setname: ogre                      }
+- { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              families: [ freebsd ] }
 - { name: osg,                         setname: openscenegraph,           families: [ freebsd ] }
 - { name: pacman-arena,                setname: pacmanarena,              families: [ openbsd ] }
