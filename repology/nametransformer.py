@@ -52,7 +52,12 @@ class NameTransformer:
 
             rule['matches'] = 0
 
-    def IsRuleMatching(self, rule, pkgname, pkgversion, pkgcategory):
+    def IsRuleMatching(self, rule, pkgname, pkgversion, pkgcategory, pkgfamily):
+        # match families
+        if 'families' in rule:
+            if pkgfamily not in rule['families']:
+                return False
+
         # match categories
         if 'category' in rule:
             catmatch = False
@@ -121,10 +126,7 @@ class NameTransformer:
 
         # apply first matching rule
         for rule in self.rules:
-            if 'families' in rule and package.family not in rule['families']:
-                continue
-
-            if not self.IsRuleMatching(rule, transformed_name, package.version, package.category):
+            if not self.IsRuleMatching(rule, transformed_name, package.version, package.category, package.family):
                 continue
 
             rule['matches'] += 1
