@@ -242,11 +242,13 @@
 - { name: acm,                                                       families: [ chocolatey ], ignore: true }
 - { name: acr,                                                       families: [ chocolatey ], ignore: true }
 - { name: ActiveMQ,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: aegisub,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: apache-httpd,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: apacheds,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: apm,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: argouml,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
 - { name: aria2,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: audacity,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: autocomplete,                                              families: [ chocolatey ], ignore: true }
 - { name: awake,                                                     families: [ chocolatey ], ignore: true }
 - { name: axel,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
@@ -256,10 +258,12 @@
 - { name: blat,                                                      families: [ chocolatey ], ignore: true }
 - { name: blender,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
 - { name: blobby2,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true, setname: "blobby" }
+- { name: bluefish,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: brewtarget,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: bzr,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: celestia,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: Charles,                                                   families: [ chocolatey ], ignore: true }
+- { name: chicken,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: claws-mail,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: Clover,                                                    families: [ chocolatey ], ignore: true }
 - { name: Cntlm,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
