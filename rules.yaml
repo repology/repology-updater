@@ -110,6 +110,7 @@
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
 - { name: libphysfs,                   setname: physfs,                   families: [ debian ] }
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
+- { name: mutt-lite,                   setname: mutt,                     families: [ freebsd ] }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              families: [ freebsd ] }
@@ -163,6 +164,7 @@
 - { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                families: [ debian ]  }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          families: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         families: [ freebsd ] }
+- { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
 
 # XXX: continue looking through the list starting from gaul
 
@@ -519,6 +521,8 @@
 - { name: lua, verpat: "5\\.2\\..*",  setname: lua52 }
 - { name: lua, verpat: "5\\.3\\..*",  setname: lua53 }
 - { namepat: "lua([0-9])\\.([0-9])",  setname: "lua$1$2" }
+
+- { namepat: "msynctool[0-9]+",        setname: msynctool }
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
