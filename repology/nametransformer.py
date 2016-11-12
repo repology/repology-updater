@@ -113,11 +113,9 @@ class NameTransformer:
             if 'namepat' in rule:
                 match = rule['namepat'].match(pkgname)
             if match:
-                return flags, \
-                       self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
+                pkgname = self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
             else:
-                return flags, \
-                       self.dollar0.sub(pkgname, rule['setname'])
+                pkgname = self.dollar0.sub(pkgname, rule['setname'])
 
         return flags, pkgname
 
