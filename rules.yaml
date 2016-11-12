@@ -128,13 +128,18 @@
 - { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
 - { name: seven-kingdoms,              setname: 7kaa,                     families: [ gentoo ]  }
 - { name: slashem-tty,                 setname: slashem,                  families: [ freebsd ] }
+- { name: sni-qt4,                     setname: sni-qt                    }
+- { name: snorenotify-qt5,             setname: snorenotify               }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             families: [ gentoo ]  } # XXX: recheck
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
+- { name: stellarium-qt4,              setname: stellarium                }
 - { name: stepmania-devel,             setname: stepmania,                families: [ freebsd ] }
 - { namepat: "stonesoup(?:-sdl)?",     setname: stone-soup                }
 - { name: stransball2,                 setname: supertransball2,          families: [ freebsd ] }
+- { name: structure-synth,             setname: structuresynth            }
 - { name: supertux,                    setname: supertux1,                families: [ freebsd ] } # ???
 - { name: supertux2,                   setname: supertux,                 families: [ freebsd ] }
+- { name: sweet-home-3d,               setname: sweethome3d               }
 - { name: tetrinet-x,                  setname: tetrinetx,                families: [ freebsd ] }
 - { name: tintin,                      setname: tintin++,                 families: [ gentoo ]  }
 - { name: trigger,                     setname: trigger-rally,            families: [ gentoo ]  }
@@ -532,6 +537,44 @@
 - { name: sogo, verpat: "3\\..*",      setname: sogo3 }
 
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
+
+- { namepat: "shibboleth-sp[0-9]+",    setname: shibboleth-sp }
+
+- { namepat: "sidplay[0-9]+",          setname: sidplay }
+- { name: sidplay, verpat: "1\\..*",   setname: sidplay1 }
+
+- { namepat: "sip[0-9]+",              setname: sip }
+
+- { namepat: "slony1(?:-2|v2)",        setname: slony1 }
+
+- { namepat: "smstools[0-9]+",         setname: smstools }
+
+- { namepat: "socat[0-9]+",            setname: socat }
+- { name: socat, verpat: "1\\..*",     setname: socat1 }
+
+- { namepat: "softhsm[0-9]+",          setname: softhsm }
+- { name: softhsm, verpat: "1\\..*",   setname: softhsm1 }
+
+- { name: sope, verpat: "2\\..*",      setname: sope2 }
+- { name: sope, verpat: "3\\..*",      setname: sope3 }
+
+- { namepat: "spidermonkey[0-9]+",     setname: spidermonkey }
+
+- { namepat: "squid[0-9]+",            setname: squid }
+- { name: squid, verpat: "4\\..*",     setname: squid4 }
+
+- { namepat: "streamtuner[0-9]+",        setname: streamtuner }
+- { name: streamtuner, verpat: "0\\..*", setname: streamtuner0 }
+
+- { namepat: "stringtemplate[0-9]+",        setname: stringtemplate }
+- { name: stringtemplate, verpat: "3\\..*", setname: stringtemplate3 }
+
+- { name: stunnel4,                    setname: stunnel }
+
+- { namepat: "swig[0-9]+",             setname: swig }
+- { name: swig, verpat: "1\\..*",      setname: swig13 }
+- { name: swig, verpat: "2\\..*",      setname: swig2 }
+- { name: swig, verpat: "3\\..*",      setname: swig3 }
 
 # TODO
 # - texlive
