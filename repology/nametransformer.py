@@ -116,12 +116,12 @@ class NameTransformer:
 
         return flags, pkgname
 
-    def TransformName(self, package, family):
+    def TransformName(self, package):
         transformed_name = package.name
 
         # apply first matching rule
         for rule in self.rules:
-            if 'families' in rule and family not in rule['families']:
+            if 'families' in rule and package.family not in rule['families']:
                 continue
 
             if not self.IsRuleMatching(rule, transformed_name, package.version, package.category):

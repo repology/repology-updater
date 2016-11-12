@@ -93,7 +93,7 @@ class RepositoryManager:
 
             for package in packages_by_repo[reponame]:
                 package.family = repository['family']  # XXX: hack
-                metaname = name_transformer.TransformName(package, repository['family'])
+                metaname = name_transformer.TransformName(package)
 
                 if metaname is None:
                     continue
