@@ -445,6 +445,7 @@
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 - { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
 - { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
+- { name: keepass2,                    setname: keepassx }
 - { name: keepassx-devel,              setname: keepassx, families: [ freebsd ] }
 - { name: KeepAssX,                    setname: keepassx }
 - { namepat: "keepassx[0-9]*", verpat: "0\\..*",  setname: keepassx0 }
