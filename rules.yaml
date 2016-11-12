@@ -107,6 +107,7 @@
 - { name: hs-darcs,                    setname: darcs,                    families: [ freebsd ] }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: ja2,                         setname: ja2-stracciatella,        families: [ freebsd ] }
+- { name: jackit,                      setname: jack-audio-connection-kit }
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
 - { name: libphysfs,                   setname: physfs,                   families: [ debian ] }
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
@@ -471,6 +472,10 @@
 
 - { name: insighttoolkit4,             setname: insighttoolkit }
 
+- { namepat: "italc[0-9]+",            setname: italc }
+- { name: italc, verpat: "1\\..*",     setname: italc1 }
+- { name: italc, verpat: "2\\..*",     setname: italc2 }
+
 - { namepat: "itcl[0-9]+",             setname: itcl }
 - { name: itcl, verpat: "3\\..*",      setname: itcl3 }
 
@@ -478,6 +483,15 @@
 - { name: itk, verpat: "3\\..*",       setname: itk3 }
 
 - { name: jabberd2,                    setname: jabberd }
+
+- { namepat: "jdeparser[0-9]+",        setname: jdeparser }
+- { name: jdeparser, verpat: "1\\..*", setname: jdeparser1 }
+
+- { namepat: "jdom[0-9]+",             setname: jdom }
+- { name: jdom, verpat: "1\\..*",      setname: jdom1 }
+
+- { namepat: "jersey[0-9]+",           setname: jersey }
+- { name: jersey, verpat: "1\\..*",    setname: jersey1 }
 
 - { namepat: "libglade[0-9]+",         setname: libglade }
 - { namepat: "libglade[0-9]+-reference", setname: libglade-reference }
