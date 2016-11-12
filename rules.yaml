@@ -445,8 +445,10 @@
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 - { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
 - { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
-- { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
-- { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
+- { name: keepassx-devel,              setname: keepassx, families: [ freebsd ] }
+- { name: KeepAssX,                    setname: keepassx }
+- { namepat: "keepassx[0-9]*", verpat: "0\\..*",  setname: keepassx0 }
+- { namepat: "keepassx[0-9]*", verpat: "2\\..*",  setname: keepassx2 }
 - { name: sogo, verpat: "2\\..*",      setname: sogo2 }
 - { name: sogo, verpat: "3\\..*",      setname: sogo3 }
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
