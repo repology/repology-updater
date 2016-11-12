@@ -427,31 +427,63 @@
 - { name: allegro, verpat: "5\\..*",  setname: allegro5 }
 - { name: allegro4.4, setname: allegro4 }
 - { name: allegro-devel, setname: allegro5, families: [ freebsd ] }
+
 - { name: bbpager, verpat: "0\\.3.*",  setname: bbpager03, families: [ pkgsrc ] }
 - { name: bbpager04, setname: bbpager, families: [ pkgsrc ] }
+
 - { name: csound, verpat: "5\\..*",    setname: csound5 }
 - { name: csound, verpat: "6\\..*",    setname: csound6 }
+
 - { name: eigen, verpat: "1\\..*",     setname: eigen1 }
 - { name: eigen, verpat: "2\\..*",     setname: eigen2 }
 - { name: eigen, verpat: "3\\..*",     setname: eigen3 }
+
+- { namepat: "gmime[0-9]+",            setname: gmime }
+- { name: gmime, verpat: "2\\.2\\..*", setname: gmime22 }
+- { name: gmime, verpat: "2\\.4\\..*", setname: gmime24 }
+- { name: gmime, verpat: "2\\.6\\..*", setname: gmime26 }
+
+- { namepat: "gnats[0-9]+",            setname: gnats }
+
+- { namepat: "gnet[0-9]+",             setname: gnet }
+- { name: gnet, verpat: "1\\..*",      setname: gnet1 }
+
+- { namepat: "gnupg[0-9]+",            setname: gnupg }
+- { name: gnupg, verpat: "1\\..*",     setname: gnupg1 }
+
+- { name: glusterfs3,                  setname: glusterfs }
+
+- { namepat: "libglade[0-9]+",         setname: libglade }
+- { namepat: "libglade[0-9]+-reference", setname: libglade-reference }
+
+- { namepat: "libglademm[0-9.]+",      setname: libglademm }
+
 - { name: love, verpat: "0\\.10\\..*", setname: love10 }
 - { name: love, verpat: "0\\.8\\..*",  setname: love08 }
 - { name: love, verpat: "0\\.9\\..*",  setname: love09 }
 - { name: love5, setname: love05 }
+
 - { name: lua, verpat: "5\\.1\\..*",  setname: lua51 }
 - { name: lua, verpat: "5\\.2\\..*",  setname: lua52 }
 - { name: lua, verpat: "5\\.3\\..*",  setname: lua53 }
 - { namepat: "lua([0-9])\\.([0-9])",  setname: "lua$1$2" }
+
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
+
 - { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
 - { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
+
 - { name: keepass2,                    setname: keepass }
+
 - { name: keepassx-devel,              setname: keepassx, families: [ freebsd ] }
-- { name: KeepAssX,                    setname: keepassx }
-- { namepat: "keepassx[0-9]*", verpat: "0\\..*", setname: keepassx0 }
-- { namepat: "keepassx[0-9]*", verpat: "2\\..*", setname: keepassx2 }
+- { name: KeePassX,                    setname: keepassx }
+- { namepat: "keepassx[0-9]*",         setname: keepassx }
+- { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
+- { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
+
 - { name: sogo, verpat: "2\\..*",      setname: sogo2 }
 - { name: sogo, verpat: "3\\..*",      setname: sogo3 }
+
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
 
 # TODO
