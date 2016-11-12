@@ -52,12 +52,12 @@ class NameTransformer:
 
             rule['matches'] = 0
 
-    def IsRuleMatching(self, rule, package):
+    def IsRuleMatching(self, rule, pkgname, pkgversion, pkgcategory):
         # match categories
         if 'category' in rule:
             catmatch = False
             for category in rule['category']:
-                if category == package.category:
+                if category == pkgcategory:
                     catmatch = True
                     break
 
@@ -66,33 +66,33 @@ class NameTransformer:
 
         # match name
         if 'name' in rule:
-            if package.name != rule['name']:
+            if pkgname != rule['name']:
                 return False
 
         # match name patterns
         if 'namepat' in rule:
-            if not rule['namepat'].match(package.name):
+            if not rule['namepat'].match(pkgname):
                 return False
 
         # match version
         if 'ver' in rule:
-            if package.version != rule['ver']:
+            if pkgversion != rule['ver']:
                 return False
 
         # match version patterns
         if 'verpat' in rule:
-            if not rule['verpat'].match(package.version):
+            if not rule['verpat'].match(pkgversion):
                 return False
 
         # match number of version components
         if 'verlonger' in rule:
-            if not len(package.version.split('.')) > rule['verlonger']:
+            if not len(pkgversion.split('.')) > rule['verlonger']:
                 return False
 
         return True
 
     def ApplyRule(self, rule, package):
-        if not self.IsRuleMatching(rule, package):
+        if not self.IsRuleMatching(rule, package.name, package.version, package.category):
             return MatchResult.none, None
 
         rule['matches'] += 1
