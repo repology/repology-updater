@@ -141,9 +141,7 @@ class NameTransformer:
             if flags & MatchResult.lastrule:
                 break
 
-            break # XXX: remove for multiple rule matcing (issue #13)
-
-        # default processing
+        # common processing
         return transformed_name.lower().replace('_', '-')
 
     def GetUnmatchedRules(self):
