@@ -25,6 +25,8 @@ sequence:
         type: bool
       "pass":
         type: bool
+      "last":
+        type: bool
       "families":
         type: seq
         sequence:

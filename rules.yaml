@@ -616,7 +616,7 @@
 - { "verpat": ".*9999",                                      families: [ gentoo ], ignorever: true }
 
 # fonts
-- { namepat: "font-manager",           pass: true }
+- { namepat: "font-manager",           pass: true, last: true }
 - { namepat: "x?fonts-(.*)",           setname: "fonts:$1", families: [ debian ] }
 #- families: [ freebsd ] # strange version mismatches
 #  namepat: "xorg-fonts-(.*)"
@@ -641,7 +641,7 @@
 - { namepat: "x11proto-(.*)",          setname: "$1proto", families: [ debian ] }
 
 # fusefs
-- { namepat: "fuse-emulator.*",        pass: true } # protect from the next rule, has nothing to do with fusefs
+- { namepat: "fuse-emulator.*",        pass: true, last: true } # protect from the next rule, has nothing to do with fusefs
 - { namepat: "fuse(?:fs)?-(.*)",       setname: "fusefs:$1" }
 - { name: curlftpfs,                   setname: "fusefs:$0" }
 - { name: encfs,                       setname: "fusefs:$0" }
