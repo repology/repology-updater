@@ -82,20 +82,23 @@ class GentooGitParser():
                             elif email_node is not None:
                                 pkg.maintainers.append(email_node.text)
 
+                maxrawversion = None
                 maxversion = None
                 for ebuild in os.listdir(package_path):
                     if not ebuild.endswith(".ebuild"):
                         continue
 
-                    version = ebuild[len(package)+1:-7]
+                    rawversion = ebuild[len(package)+1:-7]
+                    version = SanitizeVersion(rawversion)
 
                     if IsBetterVersion(version, maxversion):
+                        maxrawversion = rawversion
                         maxversion = version
 
                 if maxversion is not None:
                     pkg.name = package
-                    pkg.fullversion = maxversion
-                    pkg.version = SanitizeVersion(pkg.fullversion)
+                    pkg.fullversion = maxrawversion
+                    pkg.version = maxversion
                     pkg.category = category
 
                     result.append(pkg)
