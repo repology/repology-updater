@@ -22,9 +22,9 @@ import yaml
 
 
 class MatchResult:
-    none = 0,
-    match = 1,
-    ignore = 2
+    ignorepackage = 1
+    ignoreversion = 2
+    lastrule = 4
 
 
 class NameTransformer:
@@ -91,49 +91,60 @@ class NameTransformer:
 
         return True
 
-    def ApplyRule(self, rule, package):
-        if not self.IsRuleMatching(rule, package.name, package.version, package.category):
-            return MatchResult.none, None
-
-        rule['matches'] += 1
+    def ApplyRule(self, rule, pkgname, pkgversion):
+        flags = 0
 
         if 'ignore' in rule:
-            return MatchResult.ignore, None
+            flags |= MatchResult.ignorepackage
 
-        # XXX: this should not really be intrusive to package, fix
         if 'ignorever' in rule:
-            package.ignoreversion = True
+            flags |= MatchResult.ignoreversion
+
+        if 'last' in rule:
+            flags |= MatchResult.lastrule
 
         if 'setname' in rule:
             match = None
             if 'namepat' in rule:
-                match = rule['namepat'].match(package.name)
+                match = rule['namepat'].match(pkgname)
             if match:
-                return MatchResult.match, \
+                return flags, \
                        self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
             else:
-                return MatchResult.match, \
-                       self.dollar0.sub(package.name, rule['setname'])
+                return flags, \
+                       self.dollar0.sub(pkgname, rule['setname'])
 
-        if 'pass' in rule:
-            return MatchResult.match, package.name
-
-        return MatchResult.none, None
+        return flags, pkgname
 
     def TransformName(self, package, family):
+        transformed_name = package.name
+
         # apply first matching rule
         for rule in self.rules:
             if 'families' in rule and family not in rule['families']:
                 continue
 
-            result, name = self.ApplyRule(rule, package)
-            if result == MatchResult.ignore:
+            if not self.IsRuleMatching(rule, transformed_name, package.version, package.category):
+                continue
+
+            rule['matches'] += 1
+
+            flags, transformed_name = self.ApplyRule(rule, transformed_name, package.version)
+
+            if flags & MatchResult.ignorepackage:
                 return None
-            elif result == MatchResult.match:
-                return name.lower().replace('_', '-')
+
+            # XXX: this should not really be intrusive to package, fix
+            if flags & MatchResult.ignoreversion:
+                package.ignoreversion = True
+
+            if flags & MatchResult.lastrule:
+                break
+
+            break # XXX: remove for multiple rule matcing (issue #13)
 
         # default processing
-        return package.name.lower().replace('_', '-')
+        return transformed_name.lower().replace('_', '-')
 
     def GetUnmatchedRules(self):
         result = []
