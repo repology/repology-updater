@@ -428,6 +428,12 @@
 - { name: allegro4.4, setname: allegro4 }
 - { name: allegro-devel, setname: allegro5, families: [ freebsd ] }
 
+- { namepat: "automoc[0-9]+",          setname: automoc }
+- { name: automoc, verpat: "0\\..*",   setname: automoc4 }
+
+- { namepat: "bash[0-9]+",             setname: bash }
+- { name: bash, verpat: "3\\..*",      setname: bash3 }
+
 - { name: bbpager, verpat: "0\\.3.*",  setname: bbpager03, families: [ pkgsrc ] }
 - { name: bbpager04, setname: bbpager, families: [ pkgsrc ] }
 
