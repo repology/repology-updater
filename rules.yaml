@@ -107,7 +107,6 @@
 - { name: hs-darcs,                    setname: darcs,                    families: [ freebsd ] }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: ja2,                         setname: ja2-stracciatella,        families: [ freebsd ] }
-- { name: jackit,                      setname: jack-audio-connection-kit }
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
 - { name: libphysfs,                   setname: physfs,                   families: [ debian ] }
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
@@ -487,6 +486,10 @@
 - { name: itk, verpat: "3\\..*",       setname: itk3 }
 
 - { name: jabberd2,                    setname: jabberd }
+
+- { name: jackit,                      setname: jack-audio-connection-kit }
+- { name: jackd2,                      setname: jack2 }
+- { name: jack-audio-connection-kit, verpat: "1\\..*", setname: jack2 }
 
 - { namepat: "jdeparser[0-9]+",        setname: jdeparser }
 - { name: jdeparser, verpat: "1\\..*", setname: jdeparser1 }
