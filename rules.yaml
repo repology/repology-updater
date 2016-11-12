@@ -36,6 +36,7 @@
 - { name: atk2mm,                      setname: atkmm,                    families: [ openbsd ]  }
 - { name: atkmm1.6,                    setname: atk,                      families: [ debian ]  }
 - { name: argus-sasl,                  setname: argus,                    families: [ freebsd ]  }
+- { name: aws-cli,                     setname: awscli                    }
 - { name: bass,                        setname: beneath-a-steel-sky,      families: [ freebsd, gentoo, openbsd, arch ] }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            families: [ freebsd ] }
