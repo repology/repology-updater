@@ -112,7 +112,7 @@
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              families: [ freebsd ] }
-- { name: osg,                         setname: openscenegraph,           families: [ freebsd ] }
+- { namepat: "osg(?:-devel)?",         setname: openscenegraph,           families: [ freebsd ] }
 - { name: pacman-arena,                setname: pacmanarena,              families: [ openbsd ] }
 - { name: postfix-postfwd,             setname: postfwd,                  families: [ freebsd ] }
 - { namepat: "povray[0-9]+",           setname: povray,                   families: [ freebsd ] }
@@ -449,6 +449,7 @@
 - { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
 - { name: sogo, verpat: "2\\..*",      setname: sogo2 }
 - { name: sogo, verpat: "3\\..*",      setname: sogo3 }
+- { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
 
 # TODO
 # - texlive
