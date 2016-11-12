@@ -105,6 +105,7 @@
 - { name: googletest,                  setname: gtest,                    families: [ freebsd, pkgsrc ] }
 - { name: hannah,                      setname: help-hannahs-horse,       families: [ debian ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    families: [ freebsd ] }
+- { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: ja2,                         setname: ja2-stracciatella,        families: [ freebsd ] }
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
 - { name: libphysfs,                   setname: physfs,                   families: [ debian ] }
@@ -458,6 +459,25 @@
 - { name: gnupg, verpat: "1\\..*",     setname: gnupg1 }
 
 - { name: glusterfs3,                  setname: glusterfs }
+
+- { namepat: "ices[0-9]+",             setname: ices }
+- { name: ices, verpat: "0\\..*",      setname: ices0 }
+
+- { namepat: "igal[0-9]+",             setname: igal }
+- { name: igal, verpat: "1\\..*",      setname: igal1 }
+
+- { namepat: "inn[0-9]+",              setname: inn }
+- { name: inn, verpat: "1\\..*",       setname: inn1 }
+
+- { name: insighttoolkit4,             setname: insighttoolkit }
+
+- { namepat: "itcl[0-9]+",             setname: itcl }
+- { name: itcl, verpat: "3\\..*",      setname: itcl3 }
+
+- { namepat: "itk[0-9]+",              setname: itk }
+- { name: itk, verpat: "3\\..*",       setname: itk3 }
+
+- { name: jabberd2,                    setname: jabberd }
 
 - { namepat: "libglade[0-9]+",         setname: libglade }
 - { namepat: "libglade[0-9]+-reference", setname: libglade-reference }
