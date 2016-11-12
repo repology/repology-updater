@@ -617,7 +617,7 @@
 
 # Gentoo global rules
 #- { category: dev-XXX,              setname: "XXX:$0", families: [ gentoo ] }
-- { category: virtual,                 families: [ gentoo ], ignore: true }
+#- { category: virtual,                 families: [ gentoo ], ignore: true } # we don't parse these
 - { "verpat": ".*9999",                                      families: [ gentoo ], ignorever: true }
 
 # fonts
