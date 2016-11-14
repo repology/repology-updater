@@ -41,6 +41,10 @@ def SanitizeVersion(version):
     if match is not None:
         version = match.group(1)
 
+    match = re.match("(.*[0-9])ubuntu[0-9.]+$", version)
+    if match is not None:
+        version = match.group(1)
+
     return version
 
 
