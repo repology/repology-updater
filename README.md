@@ -42,7 +42,6 @@ report and a static website generator for [repology.org](repology.org).
 
 - [python3](https://www.python.org/), with the following modules
   - [pyyaml](http://pyyaml.org/) YAML parser
-  - [setuptools](https://pypi.python.org/pypi/setuptools)
   - [jinja2](https://jinja.pocoo.org/) template engine
   - [requests](http://python-requests.org/) (for fetching some repository data)
 - [wget](https://www.gnu.org/software/wget/) (for fetching some repository data)
