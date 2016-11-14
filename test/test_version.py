@@ -105,6 +105,9 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(VersionCompare("1.0b", "1.0a"), 1)
 
     def test_letter_addendum_special(self):
+        self.assertEqual(VersionCompare("1.0beta1", "1.0.beta1"), 0)
+        self.assertEqual(VersionCompare("1.0beta1", "1.0.b1"), 0)
+
         self.assertEqual(VersionCompare("1.0alpha1", "1.0"), -1)
         self.assertEqual(VersionCompare("1.0", "1.0alpha1"), 1)
 
@@ -138,6 +141,9 @@ class TestVersionComparison(unittest.TestCase):
     def test_miscomparation2(self): # github issue #16
         self.assertEqual(VersionCompare("4.89", "4.90.f"), -1)
         self.assertEqual(VersionCompare("4.90.f", "4.49"), 1)
+
+    def test_non_dot_separator(self):
+        self.assertEqual(VersionCompare("1.0.beta1", "1.0_beta1"), 0)
 
 
 if __name__ == '__main__':
