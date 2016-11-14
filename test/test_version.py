@@ -104,6 +104,19 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(VersionCompare("1.0a", "1.0b"), -1)
         self.assertEqual(VersionCompare("1.0b", "1.0a"), 1)
 
+    def test_letter_addendum_special(self):
+        self.assertEqual(VersionCompare("1.0alpha1", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0alpha1"), 1)
+
+        self.assertEqual(VersionCompare("1.0beta1", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0beta1"), 1)
+
+        self.assertEqual(VersionCompare("1.0pre1", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0pre1"), 1)
+
+        self.assertEqual(VersionCompare("1.0rc1", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0rc1"), 1)
+
     def test_patchlevel(self):
         self.assertEqual(VersionCompare("0a", "0a1"), -1)
         self.assertEqual(VersionCompare("0a1", "0a"), 1)
