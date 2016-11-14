@@ -27,6 +27,7 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(VersionCompare("0a", "0a"), 0)
         self.assertEqual(VersionCompare("0.a", "0.a"), 0)
         self.assertEqual(VersionCompare("1a1", "1a1"), 0)
+        self.assertEqual(VersionCompare("1alpha1", "1alpha1"), 0)
         self.assertEqual(VersionCompare("a", "a"), 0)
         self.assertEqual(VersionCompare("foo", "foo"), 0)
         self.assertEqual(VersionCompare("1.2.3", "1.2.3"), 0)
@@ -84,19 +85,6 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(VersionCompare("9999999999999999", "10000000000000000"), -1)
         self.assertEqual(VersionCompare("10000000000000000", "9999999999999999"), 1)
 
-    def test_letter_component(self):
-        self.assertEqual(VersionCompare("1.0.a", "1.0"), -1)
-        self.assertEqual(VersionCompare("1.0", "1.0.a"), 1)
-
-        self.assertEqual(VersionCompare("1.0.a", "1.0.b"), -1)
-        self.assertEqual(VersionCompare("1.0.b", "1.0.a"), 1)
-
-        self.assertEqual(VersionCompare("1.0.a", "1.0.aa"), -1)
-        self.assertEqual(VersionCompare("1.0.aa", "1.0.a"), 1)
-
-        self.assertEqual(VersionCompare("1.0.a", "1.0.0"), -1)
-        self.assertEqual(VersionCompare("1.0.0", "1.0.a"), 1)
-
     def test_letter_addendum(self):
         self.assertEqual(VersionCompare("1.0", "1.0a"), -1)
         self.assertEqual(VersionCompare("1.0a", "1.0"), 1)
@@ -104,31 +92,15 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(VersionCompare("1.0a", "1.0b"), -1)
         self.assertEqual(VersionCompare("1.0b", "1.0a"), 1)
 
-    def test_letter_addendum_special(self):
-        self.assertEqual(VersionCompare("1.0beta1", "1.0.beta1"), 0)
-        self.assertEqual(VersionCompare("1.0beta1", "1.0.b1"), 0)
+    def test_letter_component(self):
+        self.assertEqual(VersionCompare("1.0.a", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0.a"), 1)
 
-        self.assertEqual(VersionCompare("1.0alpha1", "1.0"), -1)
-        self.assertEqual(VersionCompare("1.0", "1.0alpha1"), 1)
+        self.assertEqual(VersionCompare("1.0.a", "1.0.b"), -1)
+        self.assertEqual(VersionCompare("1.0.b", "1.0.a"), 1)
 
-        self.assertEqual(VersionCompare("1.0beta1", "1.0"), -1)
-        self.assertEqual(VersionCompare("1.0", "1.0beta1"), 1)
-
-        self.assertEqual(VersionCompare("1.0pre1", "1.0"), -1)
-        self.assertEqual(VersionCompare("1.0", "1.0pre1"), 1)
-
-        self.assertEqual(VersionCompare("1.0rc1", "1.0"), -1)
-        self.assertEqual(VersionCompare("1.0", "1.0rc1"), 1)
-
-    def test_patchlevel(self):
-        self.assertEqual(VersionCompare("0a", "0a1"), -1)
-        self.assertEqual(VersionCompare("0a1", "0a"), 1)
-
-        self.assertEqual(VersionCompare("0a1", "0a2"), -1)
-        self.assertEqual(VersionCompare("0a2", "0a1"), 1)
-
-        self.assertEqual(VersionCompare("0a1", "0a10"), -1)
-        self.assertEqual(VersionCompare("0a10", "0a1"), 1)
+        self.assertEqual(VersionCompare("1.0.a", "1.0.0"), -1)
+        self.assertEqual(VersionCompare("1.0.0", "1.0.a"), 1)
 
     def test_letter_vs_number(self):
         self.assertEqual(VersionCompare("a", "0"), -1)
@@ -144,6 +116,43 @@ class TestVersionComparison(unittest.TestCase):
 
     def test_non_dot_separator(self):
         self.assertEqual(VersionCompare("1.0.beta1", "1.0_beta1"), 0)
+
+    def test_prerelease_sequence(self):
+        self.assertEqual(VersionCompare("1.0.alpha1", "1.0.alpha2"), -1)
+        self.assertEqual(VersionCompare("1.0.alpha2", "1.0.beta1"), -1)
+        self.assertEqual(VersionCompare("1.0.beta1", "1.0.beta2"), -1)
+        self.assertEqual(VersionCompare("1.0.beta2", "1.0.rc1"), -1)
+        self.assertEqual(VersionCompare("1.0.beta2", "1.0.pre1"), -1)
+        self.assertEqual(VersionCompare("1.0.rc2", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0.pre2", "1.0"), -1)
+        # XXX: is rc/pre order defined?
+
+        self.assertEqual(VersionCompare("1.0alpha1", "1.0alpha2"), -1)
+        self.assertEqual(VersionCompare("1.0alpha2", "1.0beta1"), -1)
+        self.assertEqual(VersionCompare("1.0beta1", "1.0beta2"), -1)
+        self.assertEqual(VersionCompare("1.0beta2", "1.0rc1"), -1)
+        self.assertEqual(VersionCompare("1.0beta2", "1.0pre1"), -1)
+        self.assertEqual(VersionCompare("1.0rc2", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0pre2", "1.0"), -1)
+
+    # while above tests are rock solid, following may be tuned
+    def test_complex_cases(self):
+        self.assertEqual(VersionCompare("1.0beta1", "1.0.beta1"), 0)
+        self.assertEqual(VersionCompare("1.0beta1", "1.0.b1"), 0)
+        self.assertEqual(VersionCompare("1.0.beta1", "1.0.b1"), 0)
+        self.assertEqual(VersionCompare("1.0.beta1", "1.0.b1"), 0)
+
+        self.assertEqual(VersionCompare("1.0alpha1", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0alpha1"), 1)
+
+        self.assertEqual(VersionCompare("1.0beta1", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0beta1"), 1)
+
+        self.assertEqual(VersionCompare("1.0pre1", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0pre1"), 1)
+
+        self.assertEqual(VersionCompare("1.0rc1", "1.0"), -1)
+        self.assertEqual(VersionCompare("1.0", "1.0rc1"), 1)
 
 
 if __name__ == '__main__':

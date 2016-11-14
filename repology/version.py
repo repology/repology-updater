@@ -25,7 +25,7 @@ def SplitVersionComponents(c):
 
     # version doesn't match pattern, fallback to alphanumeric comparison
     if not m:
-        return 0, c, 0
+        return -1, c, -1
 
     number = -1 if m.group(1) == '' else int(m.group(1))
 
@@ -33,17 +33,17 @@ def SplitVersionComponents(c):
 
     # no alpha part, just number
     if alpha is None:
-        return number, '', 0
+        return number, '', -1
 
     extranumber = -1 if m.group(3) == '' else int(m.group(3))
 
-    # special words
-    if alpha == 'alpha' or alpha == 'beta' or alpha == 'pre' or alpha == 'rc':
-        alpha = alpha[0]
+    # only take first letter into account (alpha = a, beta = b etc.)
+    alpha = alpha[0]
 
-        # special cases, create additional triplet
-        if number != -1:
-            return number, '', 0, -1, alpha[0], extranumber
+    # if there are two numeric parts, assume prerelease (alpha/beta/pre/rc)
+    # and create additional triplet
+    if number != -1 and extranumber != -1:
+        return number, '', -1, -1, alpha, extranumber
 
     return number, alpha, extranumber
 
@@ -61,10 +61,10 @@ def VersionCompare(v1, v2):
 
     # align lengths
     while len(components1) < len(components2):
-        components1.extend((0, '', 0))
+        components1.extend((0, '', -1))
 
     while len(components1) > len(components2):
-        components2.extend((0, '', 0))
+        components2.extend((0, '', -1))
 
     # compare by component
     for pos in range(0, len(components1)):
