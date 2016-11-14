@@ -15,13 +15,80 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from pkg_resources import parse_version
+import re
+
+
+def ParseVersionCompoment(c):
+    # fallback to alphanumeric comparison
+    number = 0
+    alpha = c
+    patchlevel = 0
+
+    # split into number-alpha-patchlevel, as in 123alpha1
+    # each part is optional
+    m = re.match('([0-9]*)(?:([^0-9]+)([0-9]*))?$', c.lower())
+
+    if m:
+        number = m.group(1)
+
+        if number == '':
+            number = -1
+        else:
+            number = int(number)
+
+        alpha = m.group(2)
+
+        if alpha is None:
+            alpha = ''
+        elif alpha != '':
+            patchlevel = m.group(3)
+
+            if patchlevel == '' or patchlevel is None:
+                patchlevel = 0
+            else:
+                patchlevel = int(patchlevel)
+
+    return number, alpha, patchlevel
+
+
+def CompareVersionComponents(c1, c2):
+    n1, a1, p1 = ParseVersionCompoment(c1)
+    n2, a2, p2 = ParseVersionCompoment(c2)
+
+    if n1 < n2:
+        return -1
+    elif n1 > n2:
+        return 1
+
+    if a1 < a2:
+        return -1
+    elif a1 > a2:
+        return 1
+
+    if p1 < p2:
+        return -1
+    elif p1 > p2:
+        return 1
+
+    return 0
 
 
 def VersionCompare(v1, v2):
-    pv1, pv2 = parse_version(v1), parse_version(v2)
-    if pv1 < pv2:
-        return -1
-    elif pv1 > pv2:
-        return 1
+    # split by dot
+    components1 = v1.split('.')
+    components2 = v2.split('.')
+
+    # align lengths
+    while len(components1) < len(components2):
+        components1.append("0")
+
+    while len(components1) > len(components2):
+        components2.append("0")
+
+    # compare by component
+    for pos in range(0, len(components1)):
+        component_res = CompareVersionComponents(components1[pos], components2[pos])
+        if component_res != 0:
+            return component_res
+
     return 0
