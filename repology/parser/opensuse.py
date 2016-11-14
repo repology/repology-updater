@@ -21,6 +21,14 @@ import xml.etree.ElementTree
 from ..package import Package
 
 
+def SanitizeVersion(version):
+    pos = version.find('+')
+    if pos != -1:
+        version = version[pos+1:]
+
+    return version
+
+
 class OpenSUSERepodataParser():
     def __init__(self):
         pass
@@ -35,7 +43,7 @@ class OpenSUSERepodataParser():
 
             pkg.name = entry.find("{http://linux.duke.edu/metadata/common}name").text
             pkg.fullversion = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
-            pkg.version = pkg.fullversion
+            pkg.version = SanitizeVersion(pkg.fullversion)
             pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
             pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
             pkg.category = entry.find("{http://linux.duke.edu/metadata/common}format/"
