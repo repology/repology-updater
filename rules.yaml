@@ -231,6 +231,7 @@
 # Version ignores, incompatible version mangling in the repositories
 - { name: "libreadonly-perl",          ver: "2.050",                 families: [ debian ], ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
+- { name: aalib,                       verlonger: 3,                                       ignorever: true } # 1.4.0.5 @ pkgsrc
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dia,                         ver: "0.97.4",                families: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       families: [ sisyphus ], ignorever: true }
