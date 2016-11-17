@@ -45,6 +45,19 @@ REPOSITORIES = [
         'tags': ['all', 'debian', 'fastfetch'],
     },
     {
+        'name': 'Debian Stable Backports',
+        'family': 'debian',
+        'fetcher': FileFetcher(
+            "http://ftp.debian.org/debian/dists/stable-backports/contrib/source/Sources.gz",
+            "http://ftp.debian.org/debian/dists/stable-backports/main/source/Sources.gz",
+            "http://ftp.debian.org/debian/dists/stable-backports/non-free/source/Sources.gz",
+            gz=True
+        ),
+        'parser': DebianSourcesParser(),
+        'link': 'https://packages.debian.org/stable-backports/{name}',
+        'tags': ['all', 'debian', 'fastfetch'],
+    },
+    {
         'name': 'Debian Testing',
         'family': 'debian',
         'fetcher': FileFetcher(
