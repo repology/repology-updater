@@ -166,20 +166,20 @@ directory which is created if it doesn't exist.
 
 ## Repository support
 
-| Repository     | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License |
-|----------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:--------|
-| FreeBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
-| Debian/Ubuntu  | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
-| Gentoo         | ✔    | ✔       |         | ✔             | ✔            |          |         |
-| pkgsrc         | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
-| OpenBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
-| Arch           | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |
-| Fedora         | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
-| OpenSUSE       | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |
-| Sisyphus       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |
-| Chocolatey     | ✔    | ✔       | ✔       |               |              | ✔        |         |
-| SlackBuilds    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |
-| freshcode.club | ✔    | ✔       | ✔       | n/a           |              | ✔        |         |
+| Repository     | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License | Download |
+|----------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:-------:|:--------:|
+| FreeBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
+| Debian/Ubuntu  | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |          |
+| Gentoo         | ✔    | ✔       |         | ✔             | ✔            |          |         |          |
+| pkgsrc         | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
+| OpenBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
+| Arch           | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |          |
+| Fedora         | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |          |
+| OpenSUSE       | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |          |
+| Sisyphus       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
+| Chocolatey     | ✔    | ✔       | ✔       |               |              | ✔        |         |          |
+| SlackBuilds    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         | ✔        |
+| freshcode.club | ✔    | ✔       | ✔       | n/a           |              | ✔        |         |          |
 
 ### FreeBSD
 

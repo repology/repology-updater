@@ -28,6 +28,7 @@ class Package:
         self.comment = None
         self.homepage = None
         self.licenses = []
+        self.downloads = []
 
         self.family = None
         self.ignoreversion = False

@@ -40,6 +40,15 @@
                 </ul>
             </li>
         {% endif %}
+        {% if package.downloads %}
+            <li><b>Downloads(s):</b>
+                <ul>
+                    {% for download in package.downloads %}
+                        <li><a href="{{ download|escape }}">{{ download|escape }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
     </ul>
     {% endfor %}
 {% endfor %}

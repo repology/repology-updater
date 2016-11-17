@@ -63,6 +63,8 @@ class SlackBuildsParser():
                             pkg.homepage = line[9:].strip('"')
                         elif line.startswith('EMAIL='):
                             pkg.maintainers.append(line[6:].strip('"'))
+                        elif line.startswith('DOWNLOAD='):
+                            pkg.downloads.append(line[9:].strip('"'))
 
                     if pkg.name is not None and pkg.version is not None:
                         result.append(pkg)
