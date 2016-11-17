@@ -29,7 +29,7 @@ def SanitizeVersion(version):
     return version
 
 
-class OpenSUSERepodataParser():
+class RepodataParser():
     def __init__(self):
         pass
 

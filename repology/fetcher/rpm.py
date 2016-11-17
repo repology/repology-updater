@@ -24,7 +24,7 @@ from repology.www import Get
 from repology.fetcher.file import FileFetcher
 
 
-class OpenSUSERepodataFetcher():
+class RepodataFetcher():
     def __init__(self, repourl):
         self.repourl = repourl
         pass

@@ -190,12 +190,32 @@ REPOSITORIES = [
         'tags': ['all', 'preproduction', 'slowfetch'],
     },
     {
+        'name': 'Fedora 25',
+        'family': 'fedora',
+        'fetcher': RepodataFetcher(
+            "https://mirror.yandex.ru/fedora/linux/development/25/Everything/source/tree/",
+        ),
+        'parser': RepodataParser(),
+        'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
+        'tags': ['all', 'fedora', 'fastfetch'],
+    },
+    {
+        'name': 'Fedora Rawhide',
+        'family': 'fedora',
+        'fetcher': RepodataFetcher(
+            "https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/",
+        ),
+        'parser': RepodataParser(),
+        'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
+        'tags': ['all', 'preproduction', 'fedora', 'fastfetch'],
+    },
+    {
         'name': 'OpenSUSE Tumbleweed',
         'family': 'opensuse',
-        'fetcher': OpenSUSERepodataFetcher(
+        'fetcher': RepodataFetcher(
             "http://download.opensuse.org/tumbleweed/repo/src-oss/suse/"
         ),
-        'parser': OpenSUSERepodataParser(),
+        'parser': RepodataParser(),
         'link': 'https://software.opensuse.org/package/{name}',
         'tags': ['all', 'production', 'opensuse', 'fastfetch'],
     },

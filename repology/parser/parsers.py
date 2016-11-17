@@ -22,7 +22,7 @@ from .pkgsrc import PkgsrcIndexParser
 from .openbsd import OpenBSDIndexParser
 from .arch import ArchDBParser
 from .spec import SpecParser
-from .opensuse import OpenSUSERepodataParser
+from .rpm import RepodataParser
 from .chocolatey import ChocolateyParser
 from .sisyphus import SrcListClassicParser
 from .slackbuilds import SlackBuildsParser
