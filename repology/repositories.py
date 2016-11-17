@@ -178,7 +178,7 @@ REPOSITORIES = [
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
-        'name': 'Fedora',
+        'name': 'Fedora (git)',
         'family': 'fedora',
         'fetcher': FedoraFetcher(
             "https://admin.fedoraproject.org/pkgdb/api/",
@@ -207,7 +207,7 @@ REPOSITORIES = [
         ),
         'parser': RepodataParser(),
         'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
-        'tags': ['all', 'preproduction', 'fedora', 'fastfetch'],
+        'tags': ['all', 'demo', 'production', 'fedora', 'fastfetch'],
     },
     {
         'name': 'OpenSUSE Tumbleweed',
@@ -217,7 +217,7 @@ REPOSITORIES = [
         ),
         'parser': RepodataParser(),
         'link': 'https://software.opensuse.org/package/{name}',
-        'tags': ['all', 'production', 'opensuse', 'fastfetch'],
+        'tags': ['all', 'demo', 'production', 'opensuse', 'fastfetch'],
     },
     {
         'name': 'ALT Sisyphus',

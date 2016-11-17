@@ -242,11 +242,14 @@ Links:
 
 ### Fedora
 
-Gets list of packages from Fedora Package Database API and then
-fetches .spec files from GIT repositories. Runs pretty slow. Doesn't
-download all .spec files (should be OK, since samples I've looked at
-are actually dead packages) and doesn't parse all files (can't process
-substitutions yet).
+Parses source package lists.
+
+Links
+- [Repository](https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/)
+
+Another (slower and less reliable) way is to get list of packages
+from Fedora Package Database API and then fetch .spec files from
+GIT repositories.
 
 Links:
 - [Fedora Package Database](https://admin.fedoraproject.org/pkgdb)
