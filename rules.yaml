@@ -66,6 +66,8 @@
 - { name: dgen,                        setname: dgen-sdl,                 families: [ debian ]  } # recheck
 - { name: drpython-py27,               setname: drpython,                 families: [ freebsd ] }
 - { name: dynamips-community,          setname: dynamips,                 families: [ freebsd ] }
+- { name: dwarffortress,               setname: dwarf-fortress            }
+- { name: linux-dwarffortress,         setname: dwarf-fortress            }
 - { name: easyrpg,                     setname: easyrpg-player,           families: [ openbsd ] }
 - { name: eclipse-java,                setname: eclipse,                  families: [ arch ]    }
 - { name: einstein-puzzle,             setname: einstein,                 families: [ pkgsrc ] }
