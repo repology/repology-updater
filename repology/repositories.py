@@ -178,18 +178,6 @@ REPOSITORIES = [
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
-        'name': 'Fedora (git)',
-        'family': 'fedora',
-        'fetcher': FedoraFetcher(
-            "https://admin.fedoraproject.org/pkgdb/api/",
-            "http://pkgs.fedoraproject.org/cgit/rpms/"
-        ),
-        'parser': SpecParser(),
-        'incomplete': True,
-        'link': 'http://pkgs.fedoraproject.org/cgit/rpms/{name}.git/tree/',
-        'tags': ['all', 'preproduction', 'slowfetch'],
-    },
-    {
         'name': 'Fedora 25',
         'family': 'fedora',
         'fetcher': RepodataFetcher(
