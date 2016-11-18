@@ -148,7 +148,7 @@ def RepologyOrg(path, metapackages, repositories, repometadata, logger):
     if not os.path.isdir(widespread_path):
         os.mkdir(widespread_path)
 
-    manyrepos = len(set([repometadata[repo]['family'] for repo in repositories]))
+    manyrepos = len(set([repometadata[repo]['family'] for repo in repositories])) - 2
     rp.RenderFilesPaginated(
         os.path.join(widespread_path, "widespread"),
         FilterPackages(metapackages, manyrepos=manyrepos),
