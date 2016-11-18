@@ -18,32 +18,57 @@
 import os
 import xml.etree.ElementTree
 import shutil
+import gzip
 
 from repology.logger import NoopLogger
 from repology.www import Get
-from repology.fetcher.file import FileFetcher
 
 
 class RepodataFetcher():
-    def __init__(self, repourl):
-        self.repourl = repourl
+    def __init__(self, *repourls):
+        self.repourls = repourls
         pass
 
-    def DoFetch(self, statepath, logger):
-        root = xml.etree.ElementTree.fromstring(Get(self.url + "repodata/repomd.xml", check_status = True).text)
-        location = root.find("{http://linux.duke.edu/metadata/repo}data[@type='primary']/{http://linux.duke.edu/metadata/repo}location")
-        return FileFetcher(location)
+    def DoFetch(self, statepath, update, logger):
+        number = 0
+
+        for repourl in self.repourls:
+            # Get and parse repomd.xml
+            repomd_url = repourl + "repodata/repomd.xml"
+            logger.Log("fetching metadata from " + repomd_url)
+            repomd_content = Get(repomd_url, check_status = True).text
+            repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
+
+            repodata_url = repourl + repomd_xml.find("{http://linux.duke.edu/metadata/repo}data[@type='primary']/{http://linux.duke.edu/metadata/repo}location").attrib['href']
+
+            logger.Log("fetching " + repodata_url)
+            data = Get(repodata_url).content
+
+            logger.GetIndented().Log("size is {} byte(s)".format(len(data)))
+
+            logger.GetIndented().Log("decompressing with gzip")
+            data = gzip.decompress(data)
+
+            logger.GetIndented().Log("size after decompression is {} byte(s)".format(len(data)))
+
+            with open(os.path.join(statepath, "{:05d}.xml".format(number)), "wb") as statefile:
+                statefile.write(data)
+
+            number += 1
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isfile(statepath) and not update:
+        if os.path.isdir(statepath) and not update:
             logger.Log("no update requested, skipping")
             return
 
-        # Get and parse repomd.xml
-        repomd_url = self.repourl + "repodata/repomd.xml"
-        logger.Log("fetching metadata from " + repomd_url)
-        repomd_content = Get(repomd_url, check_status = True).text
-        repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
+        if os.path.exists(statepath):
+            shutil.rmtree(statepath)
 
-        repodata_url = self.repourl + repomd_xml.find("{http://linux.duke.edu/metadata/repo}data[@type='primary']/{http://linux.duke.edu/metadata/repo}location").attrib['href']
-        return FileFetcher(repodata_url, gz=True).Fetch(statepath, update, logger)
+        os.mkdir(statepath)
+
+        try:
+            self.DoFetch(statepath, update, logger)
+        except:
+            if os.path.exists(statepath):
+                shutil.rmtree(statepath)
+            raise
