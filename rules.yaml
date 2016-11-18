@@ -459,6 +459,8 @@
 - { name: eigen, verpat: "2\\..*",     setname: eigen2 }
 - { name: eigen, verpat: "3\\..*",     setname: eigen3 }
 
+- { name: enlightment, verpat: "1\\.0.*",    setname: enlightment16 }
+
 - { namepat: "gmime[0-9]+",            setname: gmime }
 - { name: gmime, verpat: "2\\.2\\..*", setname: gmime22 }
 - { name: gmime, verpat: "2\\.4\\..*", setname: gmime24 }
