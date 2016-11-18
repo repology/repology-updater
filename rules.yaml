@@ -111,17 +111,21 @@
 - { name: ja2,                         setname: ja2-stracciatella,        families: [ freebsd ] }
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
-- { name: libcheck,                    setname: check                     }
-- { name: libphysfs,                   setname: physfs,                   families: [ debian ] }
-- { name: liblqr-1,                    setname: liblqr                    }
+- { name: libcheck,                    setname: check                     } # XXX: reverse?
+- { name: libphysfs,                   setname: physfs,                   } # XXX: reverse?
+- { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
+- { name: liblz4,                      setname: lz4,                      } # XXX: reverse?
+- { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     families: [ freebsd ] }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              families: [ freebsd ] }
+- { name: opencv2,                     setname: opencv                    }
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph,           families: [ freebsd ] }
 - { name: pacman-arena,                setname: pacmanarena,              families: [ openbsd ] }
 - { name: postfix-postfwd,             setname: postfwd,                  families: [ freebsd ] }
+- { name: postgresql-libpqxx,          setname: libpqxx                   }
 - { namepat: "povray[0-9]+",           setname: povray,                   families: [ freebsd ] }
 - { name: puppet4,                     setname: puppet,                   families: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles,              families: [ pkgsrc, arch, openbsd ] }
@@ -149,9 +153,11 @@
 - { name: tetrinet-x,                  setname: tetrinetx,                families: [ freebsd ] }
 - { name: tintin,                      setname: tintin++,                 families: [ gentoo ]  }
 - { name: trigger,                     setname: trigger-rally,            families: [ gentoo ]  }
+- { name: upnp,                        setname: libupnp,                  families: [ freebsd ]  }
 - { name: ufo-ai,                      setname: ufoai,                    families: [ gentoo ]  }
 - { name: varnish4,                    setname: varnish,                  families: [ freebsd ]  }
 - { name: vsftpd-ssl,                  setname: vsftpd,                   families: [ freebsd ]  }
+- { name: webp,                        setname: libwebp,                  families: [ freebsd ]  }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             families: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                families: [ freebsd ] }
 - { name: zookeeper-c,                 setname: zookeeper,                families: [ gentoo ]  }
