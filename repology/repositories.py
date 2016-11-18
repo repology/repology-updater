@@ -258,7 +258,7 @@ REPOSITORIES = [
         ),
         'parser': RepodataParser(),
         'link': 'https://madb.mageia.org/package/show/name/{name}',
-        'tags': ['all', 'preproduction', 'mageia', 'rpm', 'fastfetch'],
+        'tags': ['all', 'production', 'mageia', 'rpm', 'fastfetch'],
     },
     {
         'name': 'OpenSUSE Tumbleweed',
