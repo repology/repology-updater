@@ -641,13 +641,13 @@
 # we ignore it in comparison
 - { namepat: "p5-(.*)",                setname: "perl:$1", families: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", families: [ debian ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", families: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds ] }
 - { category: dev-perl,                setname: "perl:$0", families: [ gentoo ], ignorever: true }
 - { category: perl-core,               setname: "perl:$0", families: [ gentoo ], ignorever: true }
-- { namepat: "perl-(.*)",              setname: "perl:$1", families: [ arch, fedora, opensuse, sisyphus, slackbuilds ] }
 
 # Ruby
-- { namepat: "ruby-(.*)",              setname: "ruby:$1", families: [ debian, arch, fedora, sisyphus ] }
-- { namepat: "rubygem-(.*)",           setname: "ruby:$1", families: [ freebsd, opensuse, slackbuilds ] }
+- { namepat: "ruby-(.*)",              setname: "ruby:$1", families: [ debian, arch, fedora, mageia, sisyphus ] }
+- { namepat: "rubygem-(.*)",           setname: "ruby:$1", families: [ freebsd, fedora, opensuse, slackbuilds ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", families: [ freebsd, openbsd, pkgsrc ] }
 - { category: dev-ruby,                setname: "ruby:$0", families: [ gentoo ] }
 
@@ -665,7 +665,7 @@
 # some rules may merge modules for different python version into single entry; this is intended
 - { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", families: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", families: [ openbsd ] }
-- { namepat: "python-(.*)",            setname: "python:$1", families: [ debian ] }
+- { namepat: "python-(.*)",            setname: "python:$1", families: [ debian, centos, mageia ] }
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", families: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", families: [ arch ] }
 - { namepat: "python3?-(.*)",          setname: "python:$1", families: [ fedora, opensuse, slackbuilds ] }
@@ -674,24 +674,24 @@
 # R libs
 - { namepat: "R-cran-(.*)",            setname: "r:$1", families: [ freebsd ] }
 - { namepat: "r-cran-(.*)",            setname: "r:$1", families: [ debian ] }
-- { namepat: "R-(.*)",                 setname: "r:$1", families: [ pkgsrc ] }
+- { namepat: "R-(.*)",                 setname: "r:$1", families: [ pkgsrc, fedora ] }
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "r:$1", families: [ debian ] }
-- { namepat: "nodejs-(.*)",            setname: "r:$1", families: [ fedora ] }
+- { namepat: "nodejs-(.*)",            setname: "r:$1", families: [ fedora, mageia ] }
 
 # ROS
 - { category: dev-ros,                 setname: "ros:$0", families: [ gentoo ] }
 - { namepat: "ros-(.*)",               setname: "ros:$1", families: [ debian ] }
 
 # VDR
-- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", families: [ freebsd, debian ] }
-- { namepat: "vdr-(.*)",               setname: "vdr:$1", families: [ gentoo ] }
+- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", families: [ freebsd, debian, magaia, opensuse ] }
+- { namepat: "vdr-(.*)",               setname: "vdr:$1", families: [ gentoo, fedora ] }
 
 # Haskell
 - { namepat: "haskell-(.*)",           setname: "haskell:$1", families: [ debian, arch, slackbuilds ] }
 - { namepat: "hs-(.*)",                setname: "haskell:$1", families: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "ghc-(.*)",               setname: "haskell:$1", families: [ opensuse ] }
+- { namepat: "ghc-(.*)",               setname: "haskell:$1", families: [ opensuse, fedora ] }
 - { category: dev-haskell,             setname: "haskell:$0", families: [ gentoo ] }
 - { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", families: [ sisyphus ] }
 
@@ -700,19 +700,19 @@
 - { namepat: "golang-(.*)",            setname: "go:$1" }
 
 # mingw
-- { namepat: "mingw-(.*)",             setname: "mingw:$1", families: [ fedora ] }
+- { namepat: "mingw-(.*)",             setname: "mingw:$1", families: [ fedora, mageia ] }
 - { namepat: "mingw32-(.*)",           setname: "mingw:$1", families: [ sisyphus ] }
 
 # lua
 - { namepat: ".*luassert",             setname: "lua:luassert", last: true } # save
-- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", families: [ freebsd, pkgsrc, openbsd, arch, debian ] }
+- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", families: [ freebsd, pkgsrc, openbsd, arch, debian, fedora, mageia, opensuse ] }
 - { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", families: [ openbsd ] }
 - { category: dev-lua, name: LuaBitOp, setname: "lua:bitop", last: true, families: [ gentoo ] }
 - { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", families: [ gentoo ] }
 
 # octave
 - { namepat: "octave-forge-(.*)",      setname: "octave:$1", families: [ freebsd, opensuse ] }
-- { namepat: "octave-(.*)",            setname: "octave:$1", families: [ debian, sisyphus ] }
+- { namepat: "octave-(.*)",            setname: "octave:$1", families: [ debian, sisyphus, fedora ] }
 
 # xorg drivers
 - { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", families: [ freebsd, gentoo, pkgsrc, arch, opensuse ] }
@@ -722,25 +722,30 @@
 - { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", last: true, families: [ gentoo ] }
 - { category: dev-php,                 setname: "php:$0", families: [ gentoo ] }
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", families: [ freebsd, pkgsrc, openbsd, sisyphus ] }
-- { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", families: [ freebsd, pkgsrc ] }
+- { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", families: [ freebsd, pkgsrc, mageia ] }
 - { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", families: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "php-(.*)",               setname: "php:$1", families: [ arch, fedora, debian, slackbuilds ] }
 - { namepat: "php5-(.*)",              setname: "php56:$1", families: [ sisyphus ], "ignorever": true }
 - { namepat: "php5-(.*)",              setname: "php56:$1", families: [ opensuse ] }
 
 # gstreamer plugins
-- { namepat: "gst-plugins-(.*)",       setname: "gstreamer1:$1", families: [ gentoo, debian ] }
-- { namepat: "gst-plugins0.10-(.*)",   setname: "gstreamer0:$1", families: [ pkgsrc ] }
-- { namepat: "gst-plugins1-(.*)",      setname: "gstreamer1:$1", families: [ pkgsrc ] }
-- { namepat: "gstreamer-plugins-(.*)", setname: "gstreamer0:$1", families: [ freebsd ] }
-- { namepat: "gstreamer1-plugins-(.*)", setname: "gstreamer1:$1", families: [ freebsd ] }
+- { namepat: "gst-plugins-(.*)",       setname: "gstreamer1plugins:$1", families: [ gentoo, debian ] }
+- { namepat: "gst-plugins0.10-(.*)",   setname: "gstreamer0plugins:$1" }
+- { namepat: "gstreamer-?0[_.]10-(?:plugins-)?(.*)", setname: "gstreamer0plugins:$1" }
+- { namepat: "gst-plugins1-(.*)",      setname: "gstreamer1plugins:$1" }
+- { namepat: "gstreamer-plugins-(.*)", setname: "gstreamer0plugins:$1", families: [ freebsd ] }
+- { namepat: "gstreamer1(?:\\.0)?-(?:plugins-)?(.*)", setname: "gstreamer1plugins:$1" }
+- { namepat: "gstreamer-plugins-?(.*)", verpat: "0.*", setname: "gstreamer0plugins:$1", families: [ fedora, centos ] }
+- { namepat: "gstreamer-plugins-?(.*)", verpat: "1.*", setname: "gstreamer1plugins:$1", families: [ opensuse ] }
 
 # Apache modules
 - { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", families: [ freebsd, openbsd, pkgsrc ] }
 - { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", families: [ gentoo ] }
 - { namepat: "mod-(.*)",               setname: "apmod:$1", families: [ debian ] }
-- { namepat: "mod_(.*)",               setname: "apmod:$1", families: [ freebsd, arch, sisyphus, slackbuilds, fedora ] }
+- { namepat: "mod_(.*)",               setname: "apmod:$1", families: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos ] }
 - { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1", families: [ debian ] }
+- { namepat: "apache-mod-(.*)",        setname: "apmod:$1", families: [ mageia ] }
+- { namepat: "apache2-mod_(.*)",       setname: "apmod:$1", families: [ opensuse ] }
 
 # Erlang
 - { category: dev-erlang,              setname: "erlang:$0", families: [ gentoo ] }
@@ -762,6 +767,7 @@
 - { namepat: "font-(.*)",              setname: "fonts:$1", families: [ freebsd, gentoo, pkgsrc, arch ] }
 - { name: cantarell,                   setname: "fonts:cantarell", families: [ gentoo ]  }
 - { name: cantarell-fonts,             setname: "fonts:cantarell", families: [ freebsd, pkgsrc, openbsd, arch ] }
+- { namepat: "fonts-ttf-(.*)",         setname: "fonts:$1", families: [ mageia ] }
 - { namepat: "fonts-(.*)",             setname: "fonts:$1", families: [ sisyphus ] }
 
 # fortunes
