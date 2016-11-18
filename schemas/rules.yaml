@@ -34,11 +34,13 @@ sequence:
             unique: yes
             enum:
               - arch
+              - centos
               - chocolatey
               - debian
               - fedora
               - freebsd
               - gentoo
+              - mageia
               - openbsd
               - opensuse
               - pkgsrc
