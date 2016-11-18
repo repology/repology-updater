@@ -208,17 +208,6 @@ REPOSITORIES = [
         'tags': ['all', 'demo', 'production', 'fedora', 'rpm', 'fastfetch'],
     },
     {
-        'name': 'CentOS 5',
-        'family': 'centos',
-        'fetcher': RepodataFetcher(
-            "http://vault.centos.org/centos/5/os/Source/",
-            "http://vault.centos.org/centos/5/updates/Source/"
-        ),
-        'parser': RepodataParser(),
-        'link': 'http://centos-packages.com/5/package/{name}/',
-        'tags': ['all', 'centos', 'rpm', 'fastfetch'],
-    },
-    {
         'name': 'CentOS 6',
         'family': 'centos',
         'fetcher': RepodataFetcher(
