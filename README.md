@@ -166,20 +166,19 @@ directory which is created if it doesn't exist.
 
 ## Repository support
 
-| Repository     | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License | Download |
-|----------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:-------:|:--------:|
-| FreeBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
-| Debian/Ubuntu  | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |          |
-| Gentoo         | ✔    | ✔       |         | ✔             | ✔            |          |         |          |
-| pkgsrc         | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
-| OpenBSD        | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
-| Arch           | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |          |
-| Fedora         | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |          |
-| OpenSUSE       | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |          |
-| Sisyphus       | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
-| Chocolatey     | ✔    | ✔       | ✔       |               |              | ✔        |         |          |
-| SlackBuilds    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         | ✔        |
-| freshcode.club | ✔    | ✔       | ✔       | n/a           |              | ✔        |         |          |
+| Repository                       | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License | Download |
+|----------------------------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:-------:|:--------:|
+| FreeBSD                          | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
+| Debian/Ubuntu                    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |          |
+| Gentoo                           | ✔    | ✔       |         | ✔             | ✔            |          |         |          |
+| pkgsrc                           | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
+| OpenBSD                          | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
+| Arch                             | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |          |
+| Fedora, CentOS, Mageia, OpenSUSE | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |          |
+| Sisyphus                         | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
+| Chocolatey                       | ✔    | ✔       | ✔       |               |              | ✔        |         |          |
+| SlackBuilds                      | ✔    | ✔       |         | ✔             | ✔            | ✔        |         | ✔        |
+| freshcode.club                   | ✔    | ✔       | ✔       | n/a           |              | ✔        |         |          |
 
 ### FreeBSD
 
@@ -240,27 +239,20 @@ Parses package databases (core, extra, community).
 Links:
 - [Package Search](https://www.archlinux.org/packages/)
 
-### Fedora
+### Fedora, Mageia, CentOS, OpenSUSE
 
 Parses source package lists.
 
 Links
-- [Repository](https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/)
-
-Another (slower and less reliable) way is to get list of packages
-from Fedora Package Database API and then fetch .spec files from
-GIT repositories.
-
-Links:
+- [Fedora Repository](https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/)
 - [Fedora Package Database](https://admin.fedoraproject.org/pkgdb)
-- [GIT Repositories](http://pkgs.fedoraproject.org/cgit/rpms/)
-
-### OpenSUSE
-
-Parses source package lists.
-
-Links
-- [Repository](http://download.opensuse.org/tumbleweed/repo/src-oss/suse/)
+- [Fedora GIT Repositories](http://pkgs.fedoraproject.org/cgit/rpms/)
+- [CentOS Repository](http://vault.centos.org/centos/7/os/Source/)
+- [CentOS Packages](http://centos-packages.com/)
+- [Mageia Repository](https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/core/release/)
+- [Mageia App Db](https://madb.mageia.org/)
+- [OpenSUSE Repository](http://download.opensuse.org/tumbleweed/repo/src-oss/suse/)
+- [OpenSUSE ](https://software.opensuse.org/)
 
 ### Sisyphus
 
