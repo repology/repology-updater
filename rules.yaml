@@ -653,8 +653,10 @@
 - { namepat: "p5-(.*)",                setname: "perl:$1", families: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", families: [ debian ] }
 - { namepat: "perl-(.*)",              setname: "perl:$1", families: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds ] }
-- { category: dev-perl,                setname: "perl:$0", families: [ gentoo ], ignorever: true }
-- { category: perl-core,               setname: "perl:$0", families: [ gentoo ], ignorever: true }
+- { category: dev-perl,                setname: "perl:$0", families: [ gentoo ] }
+- { category: perl-core,               setname: "perl:$0", families: [ gentoo ] }
+  # Gentoo and Mageia shamelessly mangle perl module versions, ignore
+- { namepat: "perl:(.*)",              families: [ gentoo, mageia ], ignorever: true }
 
 # Ruby
 - { namepat: "ruby-(.*)",              setname: "ruby:$1", families: [ debian, arch, fedora, mageia, sisyphus ] }
