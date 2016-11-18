@@ -178,24 +178,87 @@ REPOSITORIES = [
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
-        'name': 'Fedora 25',
+        'name': 'Fedora 24',
         'family': 'fedora',
         'fetcher': RepodataFetcher(
-            "https://mirror.yandex.ru/fedora/linux/development/25/Everything/source/tree/",
+            "https://mirror.yandex.ru/fedora/linux/releases/24/Everything/source/tree/"
         ),
         'parser': RepodataParser(),
         'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
-        'tags': ['all', 'fedora', 'fastfetch'],
+        'tags': ['all', 'fedora', 'rpm', 'fastfetch'],
+    },
+    {
+        'name': 'Fedora 25',
+        'family': 'fedora',
+        'fetcher': RepodataFetcher(
+            "https://mirror.yandex.ru/fedora/linux/development/25/Everything/source/tree/"
+        ),
+        'parser': RepodataParser(),
+        'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
+        'tags': ['all', 'fedora', 'rpm', 'fastfetch'],
     },
     {
         'name': 'Fedora Rawhide',
         'family': 'fedora',
         'fetcher': RepodataFetcher(
-            "https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/",
+            "https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/"
         ),
         'parser': RepodataParser(),
         'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
-        'tags': ['all', 'demo', 'production', 'fedora', 'fastfetch'],
+        'tags': ['all', 'demo', 'production', 'fedora', 'rpm', 'fastfetch'],
+    },
+    {
+        'name': 'CentOS 5',
+        'family': 'centos',
+        'fetcher': RepodataFetcher(
+            "http://vault.centos.org/centos/5/os/Source/",
+            "http://vault.centos.org/centos/5/updates/Source/"
+        ),
+        'parser': RepodataParser(),
+        'link': 'http://centos-packages.com/5/package/{name}/',
+        'tags': ['all', 'centos', 'rpm', 'fastfetch'],
+    },
+    {
+        'name': 'CentOS 6',
+        'family': 'centos',
+        'fetcher': RepodataFetcher(
+            "http://vault.centos.org/centos/6/os/Source/",
+            "http://vault.centos.org/centos/6/updates/Source/"
+        ),
+        'parser': RepodataParser(),
+        'link': 'http://centos-packages.com/6/package/{name}/',
+        'tags': ['all', 'centos', 'rpm', 'fastfetch'],
+    },
+    {
+        'name': 'CentOS 7',
+        'family': 'centos',
+        'fetcher': RepodataFetcher(
+            "http://vault.centos.org/centos/7/os/Source/",
+            "http://vault.centos.org/centos/7/updates/Source/"
+        ),
+        'parser': RepodataParser(),
+        'link': 'http://centos-packages.com/7/package/{name}/',
+        'tags': ['all', 'preproduction', 'centos', 'rpm', 'fastfetch'],
+    },
+    {
+        'name': 'Mageia 6',
+        'family': 'mageia',
+        'fetcher': RepodataFetcher(
+            "https://mirrors.kernel.org/mageia/distrib/6/SRPMS/core/release/"
+        ),
+        'parser': RepodataParser(),
+        'link': 'https://madb.mageia.org/package/show/name/{name}',
+        'tags': ['all', 'mageia', 'rpm', 'fastfetch'],
+    },
+    {
+        'name': 'Mageia Cauldron',
+        'family': 'mageia',
+        'fetcher': RepodataFetcher(
+            "https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/core/release/"
+        ),
+        'parser': RepodataParser(),
+        'link': 'https://madb.mageia.org/package/show/name/{name}',
+        'tags': ['all', 'preproduction', 'mageia', 'rpm', 'fastfetch'],
     },
     {
         'name': 'OpenSUSE Tumbleweed',
@@ -205,7 +268,7 @@ REPOSITORIES = [
         ),
         'parser': RepodataParser(),
         'link': 'https://software.opensuse.org/package/{name}',
-        'tags': ['all', 'demo', 'production', 'opensuse', 'fastfetch'],
+        'tags': ['all', 'demo', 'production', 'opensuse', 'rpm', 'fastfetch'],
     },
     {
         'name': 'ALT Sisyphus',
