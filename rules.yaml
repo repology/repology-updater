@@ -110,6 +110,7 @@
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: ja2,                         setname: ja2-stracciatella,        families: [ freebsd ] }
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
+- { name: libcheck,                    setname: check                     }
 - { name: libphysfs,                   setname: physfs,                   families: [ debian ] }
 - { name: liblqr-1,                    setname: liblqr                    }
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
