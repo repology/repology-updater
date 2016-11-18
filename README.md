@@ -166,19 +166,19 @@ directory which is created if it doesn't exist.
 
 ## Repository support
 
-| Repository                       | Name | Version | Summary | Maintainer(s) | Category(es) | Homepage | License | Download |
-|----------------------------------|:----:|:-------:|:-------:|:-------------:|:------------:|:--------:|:-------:|:--------:|
-| FreeBSD                          | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
-| Debian/Ubuntu                    | ✔    | ✔       |         | ✔             | ✔            | ✔        |         |          |
-| Gentoo                           | ✔    | ✔       |         | ✔             | ✔            |          |         |          |
-| pkgsrc                           | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
-| OpenBSD                          | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
-| Arch                             | ✔    | ✔       | ✔       | ✔             |              | ✔        | ✔       |          |
-| Fedora, CentOS, Mageia, OpenSUSE | ✔    | ✔       | ✔       |               | ✔            | ✔        | ✔       |          |
-| Sisyphus                         | ✔    | ✔       | ✔       | ✔             | ✔            |          |         |          |
-| Chocolatey                       | ✔    | ✔       | ✔       |               |              | ✔        |         |          |
-| SlackBuilds                      | ✔    | ✔       |         | ✔             | ✔            | ✔        |         | ✔        |
-| freshcode.club                   | ✔    | ✔       | ✔       | n/a           |              | ✔        |         |          |
+| Repository                       | Name | Ver | Summary | Maint-r | Categ | WWW | License | Download |
+|----------------------------------|:----:|:---:|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
+| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| Debian/Ubuntu                    | ✔    | ✔   |         | ✔       | ✔     | ✔   |         |          |
+| Gentoo                           | ✔    | ✔   |         | ✔       | ✔     |     |         |          |
+| pkgsrc                           | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| OpenBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| Arch                             | ✔    | ✔   | ✔       | ✔       |       | ✔   | ✔       |          |
+| CentOS, Fedora, Mageia, OpenSUSE | ✔    | ✔   | ✔       |         | ✔     | ✔   | ✔       |          |
+| Sisyphus                         | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| Chocolatey                       | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
+| SlackBuilds                      | ✔    | ✔   |         | ✔       | ✔     | ✔   |         | ✔        |
+| freshcode.club                   | ✔    | ✔   | ✔       | n/a     |       | ✔   |         |          |
 
 ### FreeBSD
 
