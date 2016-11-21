@@ -117,6 +117,7 @@
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
+- { name: midnightcommander,           setname: mc                        }
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     families: [ freebsd ] }
 - { name: ogre3d,                      setname: ogre                      }
