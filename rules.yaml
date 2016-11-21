@@ -113,9 +113,9 @@
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
 - { name: libcheck,                    setname: check                     } # XXX: reverse?
-- { name: libphysfs,                   setname: physfs,                   } # XXX: reverse?
+- { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
-- { name: liblz4,                      setname: lz4,                      } # XXX: reverse?
+- { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     families: [ freebsd ] }
