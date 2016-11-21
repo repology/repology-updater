@@ -258,6 +258,7 @@
 - { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
 - { name: p5-Catalyst-Plugin-Authentication, ver: "0.100230",                                ignorever: true }
 - { name: p5-Device-SerialPort,        ver: "1.040000",                                      ignorever: true }
+- { name: p5-Math-Polygon-Tree,        verpat: "0.0[^89].*",                                 ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
 - { name: perl-Test-Exception,         ver: "0.430000",                                      ignorever: true }
 - { name: perl-Time-Duration,          ver: "1.200000",                                      ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
