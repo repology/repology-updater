@@ -693,11 +693,11 @@
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "r:$1", families: [ debian ] }
-- { namepat: "nodejs-(.*)",            setname: "r:$1", families: [ fedora, mageia ] }
+- { namepat: "nodejs-(.*)",            setname: "r:$1", families: [ fedora, mageia, arch ] }
 
 # ROS
 - { category: dev-ros,                 setname: "ros:$0", families: [ gentoo ] }
-- { namepat: "ros-(.*)",               setname: "ros:$1", families: [ debian ] }
+- { namepat: "ros-(.*)",               setname: "ros:$1", families: [ debian, arch ] }
 
 # VDR
 - { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", families: [ freebsd, debian, mageia, opensuse ] }
@@ -727,7 +727,7 @@
 
 # octave
 - { namepat: "octave-forge-(.*)",      setname: "octave:$1", families: [ freebsd, opensuse ] }
-- { namepat: "octave-(.*)",            setname: "octave:$1", families: [ debian, sisyphus, fedora ] }
+- { namepat: "octave-(.*)",            setname: "octave:$1", families: [ debian, sisyphus, fedora, arch ] }
 
 # xorg drivers
 - { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", families: [ freebsd, gentoo, pkgsrc, arch, opensuse ] }
