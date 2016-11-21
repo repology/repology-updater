@@ -182,6 +182,7 @@ REPOSITORIES = [
         'family': 'arch',
         'fetcher': AURFetcher('https://aur.archlinux.org/'),
         'parser': AURParser(),
+        'link': 'https://aur.archlinux.org/packages/{name}',
         'tags': ['all', 'preproduction', 'fastfetch'],
     },
     {
