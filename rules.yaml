@@ -251,6 +251,8 @@
 - { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
 - { name: avinfo,                      ver: "1.0",                   families: [ sisyphus ], ignorever: true }
 - { name: openmortal,                  ver: "0.7.1",                 families: [ sisyphus ], ignorever: true }
+- { name: opencity,                    ver: "0.0.6.5stable",                                 ignorever: true } # 0.0.6.5; "stable" is not a part of the version
+- { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
 
 # Chocolatey is full of garbage, fake version and bad matches
 - { name: 0install,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
