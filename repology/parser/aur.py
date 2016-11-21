@@ -56,7 +56,7 @@ class AURParser():
                     pkg.name = result["Name"]
 
                     has_badsuffix = False
-                    for badsuffix in ["-cvs", "-svn", "-hg", "-darcs", "-bzr", "-git"]:
+                    for badsuffix in ["-cvs", "-svn", "-hg", "-darcs", "-bzr", "-git", "-bin"]:
                         if pkg.name.endswith(badsuffix):
                             has_badsuffix = True
                             break
