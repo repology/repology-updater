@@ -18,6 +18,7 @@
 from .file import FileFetcher
 from .git import GitFetcher
 from .arch import ArchDBFetcher
+from .aur import AURFetcher
 from .fedora import FedoraFetcher
 from .chocolatey import ChocolateyFetcher
 from .rpm import RepodataFetcher

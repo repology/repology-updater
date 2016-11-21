@@ -21,6 +21,7 @@ from .gentoo import GentooGitParser
 from .pkgsrc import PkgsrcIndexParser
 from .openbsd import OpenBSDIndexParser
 from .arch import ArchDBParser
+from .aur import AURParser
 from .spec import SpecParser
 from .rpm import RepodataParser
 from .chocolatey import ChocolateyParser

@@ -178,6 +178,13 @@ REPOSITORIES = [
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
     {
+        'name': 'AUR',
+        'family': 'arch',
+        'fetcher': AURFetcher('https://aur.archlinux.org/'),
+        'parser': AURParser(),
+        'tags': ['all', 'preproduction', 'fastfetch'],
+    },
+    {
         'name': 'Fedora 24',
         'family': 'fedora',
         'fetcher': RepodataFetcher(
