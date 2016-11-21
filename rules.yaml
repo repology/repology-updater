@@ -246,6 +246,7 @@
 - { name: aalib,                       verlonger: 3,                                         ignorever: true } # 1.4.0.5 @ pkgsrc
 - { name: apr,                         verlonger: 3,                                         ignorever: true } # FreeBSD
 - { name: avinfo,                      ver: "1.0",                   families: [ sisyphus ], ignorever: true }
+- { name: biniax2,                     ver: "2.1.30",                                        ignorever: true } # 2 is not part of the version
 - { name: cryptcat,                    ver: "20031202",                                      ignorever: true }
 - { name: dia,                         ver: "0.97.4",                families: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       families: [ sisyphus ], ignorever: true }
