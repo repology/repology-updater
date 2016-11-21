@@ -107,6 +107,7 @@
 - { name: googletest,                  setname: gtest,                    families: [ freebsd, pkgsrc ] }
 - { name: hannah,                      setname: help-hannahs-horse,       families: [ debian ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    families: [ freebsd ] }
+- { name: icecast2,                    setname: icecast                   }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: ja2,                         setname: ja2-stracciatella,        families: [ freebsd ] }
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
@@ -159,6 +160,7 @@
 - { name: vsftpd-ssl,                  setname: vsftpd,                   families: [ freebsd ]  }
 - { name: webp,                        setname: libwebp,                  families: [ freebsd ]  }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             families: [ freebsd ] }
+- { name: xfce4-dict-plugin,           setname: xfce4-dict,               families: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                families: [ freebsd ] }
 - { name: zookeeper-c,                 setname: zookeeper,                families: [ gentoo ]  }
 - { namepat: "android-platform-system-(core|extras)", setname: android-tools, families: [ debian ] }
