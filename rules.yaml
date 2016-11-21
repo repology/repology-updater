@@ -242,19 +242,23 @@
 # - fira* (font)
 
 # Version ignores, incompatible version mangling in the repositories
-- { name: "libreadonly-perl",          ver: "2.050",                 families: [ debian ], ignorever: true }
-- { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: aalib,                       verlonger: 3,                                       ignorever: true } # 1.4.0.5 @ pkgsrc
+- { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
+- { name: avinfo,                      ver: "1.0",                   families: [ sisyphus ], ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dia,                         ver: "0.97.4",                families: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       families: [ sisyphus ], ignorever: true }
 - { name: inkscape,                    ver: "0.92",                  families: [ fedora ], ignorever: true } # prerepease
-- { name: xmahjongg,                   ver: "3.70",                  families: [ pkgsrc ], ignorever: true }
-- { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
-- { name: avinfo,                      ver: "1.0",                   families: [ sisyphus ], ignorever: true }
-- { name: openmortal,                  ver: "0.7.1",                 families: [ sisyphus ], ignorever: true }
+- { name: libauthen-sasl-perl,         ver: "2.1600",                                      ignorever: true }
+- { name: libreadonly-perl,            ver: "2.050",                                       ignorever: true }
 - { name: opencity,                    ver: "0.0.6.5stable",                                 ignorever: true } # 0.0.6.5; "stable" is not a part of the version
+- { name: openmortal,                  ver: "0.7.1",                 families: [ sisyphus ], ignorever: true }
 - { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
+- { name: p5-Device-SerialPort,        ver: "1.040000",                                    ignorever: true }
+- { name: perl-Test-Exception,         ver: "0.430000",                                    ignorever: true }
+- { name: perl-Time-Duration,          ver: "1.200000",                                    ignorever: true }
+- { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
+- { name: xmahjongg,                   ver: "3.70",                  families: [ pkgsrc ], ignorever: true }
 
 # Chocolatey is full of garbage, fake version and bad matches
 - { name: 0install,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
