@@ -27,7 +27,7 @@ sequence:
         type: bool
       "tolowername":
         type: bool
-      "replacename":
+      "replaceinname":
         type: map
         mapping:
           =:

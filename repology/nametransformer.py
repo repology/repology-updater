@@ -117,8 +117,8 @@ class NameTransformer:
             else:
                 pkgname = self.dollar0.sub(pkgname, rule['setname'])
 
-        if 'replacename' in rule:
-            for pattern, replacement in rule['replacename'].items():
+        if 'replaceinname' in rule:
+            for pattern, replacement in rule['replaceinname'].items():
                 pkgname = pkgname.replace(pattern, replacement)
 
         if 'tolowername' in rule:

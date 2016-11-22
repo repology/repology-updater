@@ -744,7 +744,7 @@
 - { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", families: [ debian ] }
 
 # php
-- { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", tolowername: true, replacename: { "_": "-" }, last: true, families: [ gentoo ] }
+- { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", tolowername: true, replaceinname: { "_": "-" }, last: true, families: [ gentoo ] }
 - { category: dev-php,                 setname: "php:$0", families: [ gentoo ] }
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", families: [ freebsd, pkgsrc, openbsd, sisyphus ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", families: [ freebsd, pkgsrc, mageia ] }
@@ -808,10 +808,10 @@
 - { namepat: "x11proto-(.*)",          setname: "$1proto", families: [ debian ] }
 
 # fusefs
-- { namepat: "fuse-emulator.*",        tolowername: true, replacename: { "_": "-" }, last: true } # protect from the next rule, has nothing to do with fusefs
+- { namepat: "fuse-emulator.*",        tolowername: true, replaceinname: { "_": "-" }, last: true } # protect from the next rule, has nothing to do with fusefs
 - { namepat: "fuse(?:fs)?-(.*)",       setname: "fusefs:$1" }
 - { name: curlftpfs,                   setname: "fusefs:$0" }
 - { name: encfs,                       setname: "fusefs:$0" }
 
 # finalize, catch-all rule
-- { tolowername: true, replacename: { "_": "-" } }
+- { tolowername: true, replaceinname: { "_": "-" } }
