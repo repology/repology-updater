@@ -687,6 +687,7 @@
 - { namepat: "zope\\.(.*)",              setname: "zope:$1", families: [ debian, slackbuilds ] }
 
 # Python modules
+- { families: [ pypi ],                setname: "python:$0" }
 # some rules may merge modules for different python version into single entry; this is intended
 - { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", families: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", families: [ openbsd ] }

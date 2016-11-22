@@ -50,5 +50,6 @@ sequence:
               - openbsd
               - opensuse
               - pkgsrc
+              - pypi
               - sisyphus
               - slackbuilds

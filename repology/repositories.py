@@ -315,6 +315,15 @@ REPOSITORIES = [
         'tags': ['all', 'preproduction', 'fastfetch'],
     },
     {
+        'name': 'PyPi',
+        'family': 'pypi',
+        'fetcher': FileFetcher("https://pypi.python.org/pypi/"),
+        'parser': PyPiHTMLParser(),
+        'shadow': True,
+        'link': 'https://pypi.python.org/pypi/{name}/',
+        'tags': ['all', 'preproduction', 'fastfetch'],
+    },
+    {
         'name': 'F-Droid',
         'family': 'fdroid',
         'fetcher': FileFetcher("https://f-droid.org/repo/index.xml"),
