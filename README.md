@@ -179,6 +179,9 @@ directory which is created if it doesn't exist.
 | Chocolatey                       | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
 | SlackBuilds                      | ✔    | ✔   |         | ✔       | ✔     | ✔   |         | ✔        |
 | freshcode.club                   | ✔    | ✔   | ✔       | n/a     |       | ✔   |         |          |
+| CPAN                             | ✔    | ✔   |         | ✔       |       |     |         |          |
+| PyPi                             | ✔    | ✔   | ✔       |         |       |     |         |          |
+| F-Droid                          | ✔    | ✔   |         |         | ✔     | ✔   | ✔       |          |
 
 ### FreeBSD
 
@@ -284,6 +287,30 @@ are preserved.
 
 Links:
 - [freshcode.club](http://freshcode.club/)
+
+### CPAN
+
+Parses CPAN 02packages.details.txt index.
+
+Links:
+- [CPAN](http://search.cpan.org/)
+
+### PyPi
+
+Parses PyPi HTML index.
+
+Links:
+- [PyPi](https://pypi.python.org/pypi)
+
+### F-Droid
+
+Parses F-Droid package index XML. Is not enabled yet as most packages
+are android-unique, and, even if these are ports of PC software, have
+different versioning schemas. Probably it's best to support F-Droid
+packages on opt-in basis.
+
+Links:
+- [XML index](https://f-droid.org/repo/index.xml)
 
 ## Reading the report
 
