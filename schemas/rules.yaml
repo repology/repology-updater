@@ -23,10 +23,15 @@ sequence:
         type: bool
       "ignorever":
         type: bool
-      "pass":
-        type: bool
       "last":
         type: bool
+      "tolowername":
+        type: bool
+      "replacename":
+        type: map
+        mapping:
+          =:
+            type: str
       "families":
         type: seq
         sequence:
@@ -36,6 +41,7 @@ sequence:
               - arch
               - centos
               - chocolatey
+              - cpan
               - debian
               - fedora
               - freebsd
