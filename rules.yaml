@@ -659,7 +659,7 @@
 - { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, families: [ freebsd ] }
 
 # Perl modules
-#
+- { families: [ cpan ],                setname: "perl:$0", tolowername: true, last: true } # don't replace _ with - !
 # Note that Gentoo misbehaves by changing upstream versioning scheme, so
 # we ignore it in comparison
 - { namepat: "p5-(.*)",                setname: "perl:$1", families: [ freebsd, pkgsrc, openbsd ] }
@@ -667,7 +667,6 @@
 - { namepat: "perl-(.*)",              setname: "perl:$1", families: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds ] }
 - { category: dev-perl,                setname: "perl:$0", families: [ gentoo ] }
 - { category: perl-core,               setname: "perl:$0", families: [ gentoo ] }
-- { families: [ cpan ],                setname: "perl:$0" }
   # Gentoo and Mageia shamelessly mangle perl module versions, ignore
 - { namepat: "perl:(.*)",              families: [ gentoo, mageia ], ignorever: true }
 
@@ -745,7 +744,7 @@
 - { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", families: [ debian ] }
 
 # php
-- { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", last: true, families: [ gentoo ] }
+- { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", tolowername: true, replacename: { "_": "-" }, last: true, families: [ gentoo ] }
 - { category: dev-php,                 setname: "php:$0", families: [ gentoo ] }
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", families: [ freebsd, pkgsrc, openbsd, sisyphus ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", families: [ freebsd, pkgsrc, mageia ] }
@@ -783,7 +782,7 @@
 - { "verpat": ".*9999",                                      families: [ gentoo ], ignorever: true }
 
 # fonts
-- { namepat: "font-manager",           pass: true, last: true }
+- { namepat: "font-manager",           last: true }
 - { namepat: "x?fonts-(.*)",           setname: "fonts:$1", families: [ debian ] }
 #- families: [ freebsd ] # strange version mismatches
 #  namepat: "xorg-fonts-(.*)"
@@ -809,7 +808,10 @@
 - { namepat: "x11proto-(.*)",          setname: "$1proto", families: [ debian ] }
 
 # fusefs
-- { namepat: "fuse-emulator.*",        pass: true, last: true } # protect from the next rule, has nothing to do with fusefs
+- { namepat: "fuse-emulator.*",        tolowername: true, replacename: { "_": "-" }, last: true } # protect from the next rule, has nothing to do with fusefs
 - { namepat: "fuse(?:fs)?-(.*)",       setname: "fusefs:$1" }
 - { name: curlftpfs,                   setname: "fusefs:$0" }
 - { name: encfs,                       setname: "fusefs:$0" }
+
+# finalize, catch-all rule
+- { tolowername: true, replacename: { "_": "-" } }

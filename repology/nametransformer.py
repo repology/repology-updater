@@ -117,6 +117,13 @@ class NameTransformer:
             else:
                 pkgname = self.dollar0.sub(pkgname, rule['setname'])
 
+        if 'replacename' in rule:
+            for pattern, replacement in rule['replacename'].items():
+                pkgname = pkgname.replace(pattern, replacement)
+
+        if 'tolowername' in rule:
+            pkgname = pkgname.lower()
+
         return flags, pkgname
 
     def TransformName(self, package):
@@ -141,8 +148,7 @@ class NameTransformer:
             if flags & MatchResult.lastrule:
                 break
 
-        # common processing
-        return transformed_name.lower().replace('_', '-')
+        return transformed_name
 
     def GetUnmatchedRules(self):
         result = []
