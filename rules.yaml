@@ -667,6 +667,7 @@
 - { namepat: "perl-(.*)",              setname: "perl:$1", families: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds ] }
 - { category: dev-perl,                setname: "perl:$0", families: [ gentoo ] }
 - { category: perl-core,               setname: "perl:$0", families: [ gentoo ] }
+- { families: [ cpan ],                setname: "perl:$0" }
   # Gentoo and Mageia shamelessly mangle perl module versions, ignore
 - { namepat: "perl:(.*)",              families: [ gentoo, mageia ], ignorever: true }
 

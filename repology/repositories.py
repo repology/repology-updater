@@ -306,6 +306,15 @@ REPOSITORIES = [
         'tags': ['all', 'preproduction', 'fastfetch'],
     },
     {
+        'name': 'CPAN',
+        'family': 'cpan',
+        'fetcher': FileFetcher("http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz", gz=True),
+        'parser': CPANPackagesParser(),
+        'shadow': True,
+        'link': 'http://search.cpan.org/dist/{name}',
+        'tags': ['all', 'preproduction', 'fastfetch'],
+    },
+    {
         'name': 'F-Droid',
         'family': 'fdroid',
         'fetcher': FileFetcher("https://f-droid.org/repo/index.xml"),
