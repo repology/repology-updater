@@ -34,6 +34,10 @@ class Package:
         self.family = None
         self.ignoreversion = False
 
+    @property
+    def __dict__(self):
+        return {slot: getattr(self, slot) for slot in self.__slots__}
+
 
 class MetaPackage:
     __slots__ = ['name', 'packages', 'versions', 'maintainers']
