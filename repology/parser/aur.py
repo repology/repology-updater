@@ -74,7 +74,7 @@ class AURParser():
                             pkg.licenses.append(license)
 
                     if "Maintainer" in result and result["Maintainer"]:
-                        pkg.maintainer = result["Maintainer"] + "@aur"
+                        pkg.maintainers.append(result["Maintainer"] + "@aur")
 
                     packages.append(pkg)
 
