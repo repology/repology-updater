@@ -36,7 +36,6 @@ class FreshcodeParser():
 
                 pkg.name = entry['name']
                 pkg.version = entry['version']
-                pkg.fullverson = pkg.version
                 pkg.homepage = entry['homepage']
                 pkg.comment = entry['description']
 
