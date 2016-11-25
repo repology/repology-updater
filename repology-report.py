@@ -68,8 +68,7 @@ def Main():
     parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
     parser.add_argument('-l', '--logfile', help='path to log file')
 
-    parser.add_argument('-t', '--tag', action='append', help='only process repositories with this tag')
-    parser.add_argument('-r', '--repository', action='append', help='only process repositories with this name')
+    parser.add_argument('-r', '--repository', action='append', help='specify repository names or tags to process')
     parser.add_argument('-S', '--no-shadow', action='store_true', help='treat shadow repositories as normal')
 
     parser.add_argument('-m', '--maintainer', help='filter by maintainer')
@@ -85,21 +84,19 @@ def Main():
 
     if not options.statedir:
         raise RuntimeError("please set --statedir")
-    if not options.tag and not options.repository:
-        raise RuntimeError("please set --tag or --repository")
+
+    if not options.repository:
+        options.repository = ["all"]
 
     logger = StderrLogger()
     if options.logfile:
         logger = FileLogger(options.logfile)
 
-    tags = [tag.split(',') for tag in options.tag] if options.tag else []
-
     nametrans = NameTransformer(options.rules)
     repoman = RepositoryManager(options.statedir, enable_shadow=not options.no_shadow)
     packages = repoman.Deserialize(
         nametrans,
-        tags=tags,
-        repositories=options.repository,
+        reponames=options.repository,
         logger=logger
     )
 
@@ -119,7 +116,7 @@ def Main():
     rp.RenderToFile(
         options.output,
         packages,
-        repoman.GetNames(tags=tags, repositories=options.repository),
+        repoman.GetNames(reponames=options.repository),
         repositories=repoman.GetMetadata()
     )
 

@@ -9,7 +9,7 @@
             {% else %}
                 <th>
             {% endif %}
-            {{ reponame | split(' ') | spantrim(8) | join('<br>') }}
+            {{ repositories[reponame].desc | split(' ') | spantrim(8) | join('<br>') }}
             </th>
         {% endfor %}
     </tr>

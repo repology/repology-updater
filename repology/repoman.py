@@ -46,34 +46,31 @@ class RepositoryManager:
 
         raise KeyError('No such repository ' + reponame)
 
-    def GetRepositories(self, tags=None, repositories=None):
+    def GetRepositories(self, reponames=None):
+        if reponames is None:
+            return []
+
         filtered_repositories = []
-
         for repository in REPOSITORIES:
-            tagskip = True
-            if tags:
-                for tagset in tags:
-                    tagskip = True
-                    for tag in tagset if type(tagset) is list else [tagset]:
-                        if tag in repository['tags']:
-                            tagskip = False
-                            break
-                    if tagskip:
-                        break
-
-            inrepos = repositories and repository['name'] in repositories
-
-            if inrepos or not tagskip:
+            match = False
+            for reponame in reponames:
+                if reponame == repository['name']:
+                    match = True
+                    break
+                if reponame in repository['tags']:
+                    match = True
+                    break
+            if match:
                 filtered_repositories.append(repository)
 
         return filtered_repositories
 
-    def ForEach(self, processor, tags=None, repositories=None):
-        for repo in self.GetRepositories(tags, repositories):
+    def ForEach(self, processor, reponames=None):
+        for repo in self.GetRepositories(reponames):
             processor(repo)
 
-    def GetNames(self, tags=None, repositories=None):
-        return [repo['name'] for repo in self.GetRepositories(tags, repositories)]
+    def GetNames(self, reponames=None):
+        return [repo['name'] for repo in self.GetRepositories(reponames)]
 
     def GetMetadata(self):
         return {repository['name']: {
@@ -81,6 +78,7 @@ class RepositoryManager:
             'shadow': repository.get('shadow', False),
             'link': repository.get('link'),
             'family': repository['family'],
+            'desc': repository['desc'],
         } for repository in REPOSITORIES}
 
     def Mix(self, packages_by_repo, name_transformer):
@@ -157,17 +155,17 @@ class RepositoryManager:
         return repo_packages
 
     # Multi repo methods
-    def Fetch(self, update=True, tags=None, repositories=None, logger=NoopLogger()):
+    def Fetch(self, update=True, reponames=None, logger=NoopLogger()):
         if not os.path.isdir(self.statedir):
             os.mkdir(self.statedir)
 
-        for repo in self.GetRepositories(tags, repositories):
+        for repo in self.GetRepositories(reponames):
             self.FetchOne(repo['name'], update=update, logger=logger.GetPrefixed(repo['name'] + ": "))
 
-    def Parse(self, name_transformer, tags=None, repositories=None, logger=NoopLogger()):
+    def Parse(self, name_transformer, reponames, logger=NoopLogger()):
         packages_by_repo = {}
 
-        for repo in self.GetRepositories(tags, repositories):
+        for repo in self.GetRepositories(reponames):
             packages_by_repo[repo['name']] = self.ParseOne(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
 
         logger.Log("merging started")
@@ -175,14 +173,14 @@ class RepositoryManager:
         logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages
 
-    def ParseAndSerialize(self, tags=None, repositories=None, logger=NoopLogger()):
-        for repo in self.GetRepositories(tags, repositories):
+    def ParseAndSerialize(self, reponames=None, logger=NoopLogger()):
+        for repo in self.GetRepositories(reponames):
             self.ParseAndSerializeOne(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
 
-    def Deserialize(self, name_transformer, tags=None, repositories=None, logger=NoopLogger()):
+    def Deserialize(self, name_transformer, reponames=None, logger=NoopLogger()):
         packages_by_repo = {}
 
-        for repo in self.GetRepositories(tags, repositories):
+        for repo in self.GetRepositories(reponames):
             packages_by_repo[repo['name']] = self.DeserializeOne(repo['name'], name_transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
 
         logger.Log("merging started")

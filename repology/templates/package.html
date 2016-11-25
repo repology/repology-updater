@@ -1,8 +1,9 @@
 {% include 'header.html' %}
 
-{% for repository in metapackage.packages.keys() %}
-<h2>{{ repository }}</h2>
-    {% for package in metapackage.packages[repository] %}
+{% for reponame in reponames %}
+{% if reponame in metapackage.packages %}
+<h2>{{ repositories[reponame].desc }}</h2>
+    {% for package in metapackage.packages[reponame] %}
     <h3>{{ package.name|escape }}-{{ package.version|escape }}
             {% if package.fullversion and package.version != package.fullversion %}
                 ({{ package.fullversion|escape }})
@@ -51,6 +52,7 @@
         {% endif %}
     </ul>
     {% endfor %}
+{% endif %}
 {% endfor %}
 
 {% include 'footer.html' %}

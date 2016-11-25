@@ -1,9 +1,9 @@
 {% include 'header.html' %}
 
 <ul>
-{% for repository in repositories %}
+{% for reponame in reponames %}
     <li>
-        <a href="{{ repository }}.0.html">{{ repository }}</a>
+        <a href="{{ reponame }}.0.html">{{ repositories[reponame].desc }}</a>
     </li>
 {% endfor %}
 </ul>

@@ -35,14 +35,14 @@ def Main():
     parser.add_argument('-u', '--update', action='store_true', help='allow updating repository data')
     parser.add_argument('-p', '--parse', action='store_true', help='parse and serialize repository data')
 
-    parser.add_argument('-t', '--tag', action='append', help='only process repositories with this tag')
-    parser.add_argument('-r', '--repository', action='append', help='only process repositories with this name')
+    parser.add_argument('-r', '--repository', action='append', help='specify repository names or tags to process')
     options = parser.parse_args()
 
     if not options.statedir:
         raise RuntimeError("please set --statedir")
-    if not options.tag and not options.repository:
-        raise RuntimeError("please set --tag or --repository")
+
+    if not options.repository:
+        options.repository = ["all"]
 
     logger = StderrLogger()
     if options.logfile:
@@ -52,7 +52,7 @@ def Main():
 
     total_count = 0
     success_count = 0
-    for reponame in repoman.GetNames(tags=options.tag, repositories=options.repository):
+    for reponame in repoman.GetNames(reponames=options.repository):
         repo_logger = logger.GetPrefixed(reponame + ": ")
         repo_logger.Log("processing started")
         try:
