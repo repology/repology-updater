@@ -89,8 +89,7 @@ class CPANPackagesParser():
 
                 pkg = Package()
                 pkg.name = package_name
-                pkg.fullversion = package_version
-                pkg.version = pkg.fullversion
+                pkg.version = package_version
                 pkg.maintainers.append(package_path.split('/')[2].lower() + "@CPAN")
 
                 result.append(pkg)

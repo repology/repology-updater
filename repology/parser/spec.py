@@ -44,9 +44,8 @@ class SpecParser():
 
                         if line.startswith('Name:') and not pkg.name:
                             pkg.name = line[5:].strip()
-                        elif line.startswith('Version:') and not pkg.fullversion:
-                            pkg.fullversion = line[8:].strip()
-                            pkg.version = pkg.fullversion
+                        elif line.startswith('Version:') and not pkg.version:
+                            pkg.version = line[8:].strip()
                         elif line.startswith('Url:') and not pkg.homepage:
                             pkg.homepage = line[4:].strip()
                         elif line.startswith('License:') and not pkg.license:

@@ -57,8 +57,7 @@ class SlackBuildsParser():
                         if line.startswith('PRGNAM='):
                             pkg.name = line[7:].strip('"')
                         elif line.startswith('VERSION='):
-                            pkg.fullversion = line[8:].strip('"')
-                            pkg.version = pkg.fullversion
+                            pkg.version = line[8:].strip('"')
                         elif line.startswith('HOMEPAGE='):
                             pkg.homepage = line[9:].strip('"')
                         elif line.startswith('EMAIL='):
