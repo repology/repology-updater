@@ -19,7 +19,20 @@ from repology.version import VersionCompare
 
 
 class Package:
-    __slots__ = ['name', 'version', 'origversion', 'maintainers', 'category', 'comment', 'homepage', 'licenses', 'downloads', 'family', 'ignoreversion']
+    __slots__ = [
+        'name',
+        'version',
+        'origversion',
+        'maintainers',
+        'category',
+        'comment',
+        'homepage',
+        'licenses',
+        'downloads',
+        'family',
+        'ignoreversion'
+    ]
+
     def __init__(self):
         self.name = None
         self.version = None
