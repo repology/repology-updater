@@ -23,6 +23,8 @@ from ..package import Package
 
 
 def SanitizeVersion(version):
+    origversion = version
+
     pos = version.find('-')
     if pos != -1:
         version = version[0:pos]
@@ -35,7 +37,10 @@ def SanitizeVersion(version):
     if pos != -1:
         version = version[pos+1:]
 
-    return version
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 class AURParser():
@@ -65,7 +70,7 @@ class AURParser():
                         continue
 
                     pkg.fullversion = result["Version"]
-                    pkg.version = SanitizeVersion(pkg.fullversion)
+                    pkg.version, pkg.fullversion = SanitizeVersion(result["Version"])
                     pkg.comment = result["Description"]
                     pkg.homepage = result["URL"]
 

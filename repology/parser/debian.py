@@ -21,6 +21,8 @@ from ..package import Package
 
 
 def SanitizeVersion(version):
+    origversion = version
+
     pos = version.find(':')
     if pos != -1:
         version = version[pos+1:]
@@ -45,7 +47,10 @@ def SanitizeVersion(version):
     if match is not None:
         version = match.group(1)
 
-    return version
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 class DebianSourcesParser():
@@ -65,8 +70,7 @@ class DebianSourcesParser():
                 elif line.startswith('Package: '):
                     pkg.name = line[9:]
                 elif line.startswith('Version: '):
-                    pkg.fullversion = line[9:]
-                    pkg.version = SanitizeVersion(pkg.fullversion)
+                    pkg.version, pkg.fullversion = SanitizeVersion(line[9:])
                 elif line.startswith('Maintainer: '):
                     pkg.maintainers.append(line[12:])
                 elif line.startswith('Uploaders: '):

@@ -23,6 +23,8 @@ from repology.package import Package
 
 
 def SanitizeVersion(version):
+    origversion = version
+
     pos = version.find('-')
     if pos != -1:
         version = version[0:pos]
@@ -31,7 +33,10 @@ def SanitizeVersion(version):
     if pos != -1:
         version = version[0:pos]
 
-    return version
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 def IsBetterVersion(version, maxversion):
@@ -82,23 +87,22 @@ class GentooGitParser():
                             elif email_node is not None:
                                 pkg.maintainers.append(email_node.text)
 
-                maxrawversion = None
+                maxorigversion = None
                 maxversion = None
                 for ebuild in os.listdir(package_path):
                     if not ebuild.endswith(".ebuild"):
                         continue
 
-                    rawversion = ebuild[len(package)+1:-7]
-                    version = SanitizeVersion(rawversion)
+                    version, origversion = SanitizeVersion(ebuild[len(package)+1:-7])
 
                     if IsBetterVersion(version, maxversion):
-                        maxrawversion = rawversion
+                        maxorigversion = origversion
                         maxversion = version
 
                 if maxversion is not None:
                     pkg.name = package
-                    pkg.fullversion = maxrawversion
                     pkg.version = maxversion
+                    pkg.fullversion = maxorigversion
                     pkg.category = category
 
                     result.append(pkg)

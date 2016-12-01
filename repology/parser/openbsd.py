@@ -23,6 +23,8 @@ from ..package import Package
 
 
 def SanitizeVersion(version):
+    origversion = version
+
     match = re.match("(.*)v[0-9]+$", version)
     if match is not None:
         version = match.group(1)
@@ -31,7 +33,10 @@ def SanitizeVersion(version):
     if match is not None:
         version = match.group(1)
 
-    return version
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 class OpenBSDIndexParser():
@@ -53,8 +58,8 @@ class OpenBSDIndexParser():
                 if match is not None:
                     pkgname = match.group(1)
 
-                pkg.name, pkg.fullversion = SplitPackageNameVersion(pkgname)
-                pkg.version = SanitizeVersion(pkg.fullversion)
+                pkg.name, version = SplitPackageNameVersion(pkgname)
+                pkg.version, pkg.fullversion = SanitizeVersion(version)
                 pkg.comment = row[3]
                 for maintainer in re.split(",", row[5]):
                     pkg.maintainers.append(maintainer.strip())

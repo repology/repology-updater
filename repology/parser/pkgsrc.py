@@ -23,11 +23,16 @@ from ..package import Package
 
 
 def SanitizeVersion(version):
+    origversion = version
+
     match = re.match("(.*)nb[0-9]+$", version)
     if match is not None:
         version = match.group(1)
 
-    return version
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 class PkgsrcIndexParser():
@@ -44,8 +49,8 @@ class PkgsrcIndexParser():
             for row in reader:
                 pkg = Package()
 
-                pkg.name, pkg.fullversion = SplitPackageNameVersion(row[0])
-                pkg.version = SanitizeVersion(pkg.fullversion)
+                pkg.name, version = SplitPackageNameVersion(row[0])
+                pkg.version, pkg.fullversion = SanitizeVersion(version)
                 pkg.comment = row[3]
 
                 # sometimes use OWNER variable in which case there's no MAINTAINER

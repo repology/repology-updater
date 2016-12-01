@@ -22,11 +22,16 @@ from ..package import Package
 
 
 def SanitizeVersion(version):
+    origversion = version
+
     pos = version.find('+')
     if pos != -1:
         version = version[pos+1:]
 
-    return version
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 class RepodataParser():
@@ -43,8 +48,8 @@ class RepodataParser():
                 pkg = Package()
 
                 pkg.name = entry.find("{http://linux.duke.edu/metadata/common}name").text
-                pkg.fullversion = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
-                pkg.version = SanitizeVersion(pkg.fullversion)
+                version = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
+                pkg.version, pkg.fullversion = SanitizeVersion(version)
                 pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
                 pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
                 pkg.category = entry.find("{http://linux.duke.edu/metadata/common}format/"

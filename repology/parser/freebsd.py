@@ -22,6 +22,8 @@ from ..package import Package
 
 
 def SanitizeVersion(version):
+    origversion = version
+
     pos = version.rfind(',')
     if pos != -1:
         version = version[0:pos]
@@ -31,7 +33,10 @@ def SanitizeVersion(version):
     if pos != -1:
         version = version[0:pos]
 
-    return version
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 class FreeBSDIndexParser():
@@ -46,8 +51,8 @@ class FreeBSDIndexParser():
             for row in reader:
                 pkg = Package()
 
-                pkg.name, pkg.fullversion = SplitPackageNameVersion(row[0])
-                pkg.version = SanitizeVersion(pkg.fullversion)
+                pkg.name, version = SplitPackageNameVersion(row[0])
+                pkg.version, pkg.fullversion = SanitizeVersion(version)
                 pkg.comment = row[3]
                 pkg.maintainers.append(row[5])
                 pkg.category = row[6].split(' ')[0]

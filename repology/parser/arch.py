@@ -22,6 +22,8 @@ from ..package import Package
 
 
 def SanitizeVersion(version):
+    origversion = version
+
     pos = version.find('-')
     if pos != -1:
         version = version[0:pos]
@@ -34,7 +36,10 @@ def SanitizeVersion(version):
     if pos != -1:
         version = version[pos+1:]
 
-    return version
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 class ArchDBParser():
@@ -61,8 +66,7 @@ class ArchDBParser():
                     elif tag == 'NAME':
                         pkg.name = line
                     elif tag == 'VERSION':
-                        pkg.fullversion = line
-                        pkg.version = SanitizeVersion(pkg.fullversion)
+                        pkg.version, pkg.fullversion = SanitizeVersion(line)
                     elif tag == 'DESC':
                         if pkg.comment is None:
                             pkg.comment = ''
