@@ -23,12 +23,13 @@ import traceback
 from argparse import ArgumentParser
 
 from repology.repoman import RepositoryManager
+from repology.transformer import PackageTransformer
 from repology.logger import *
 
 
 def Main():
     parser = ArgumentParser()
-    parser.add_argument('-s', '--statedir', help='path to directory with repository state')
+    parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
     parser.add_argument('-l', '--logfile', help='path to log file')
 
     parser.add_argument('-f', '--fetch', action='store_true', help='allow fetching repository data')
@@ -37,9 +38,6 @@ def Main():
 
     parser.add_argument('-r', '--repository', action='append', help='specify repository names or tags to process')
     options = parser.parse_args()
-
-    if not options.statedir:
-        raise RuntimeError("please set --statedir")
 
     if not options.repository:
         options.repository = ["all"]

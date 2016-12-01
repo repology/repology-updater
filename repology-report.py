@@ -64,7 +64,7 @@ def FilterPackages(metapackages, maintainer=None, category=None, manyrepos=None,
 
 def Main():
     parser = ArgumentParser()
-    parser.add_argument('-s', '--statedir', help='path to directory with repository state')
+    parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
     parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
     parser.add_argument('-l', '--logfile', help='path to log file')
 
@@ -81,9 +81,6 @@ def Main():
 
     parser.add_argument('-o', '--output', help='path to output file')
     options = parser.parse_args()
-
-    if not options.statedir:
-        raise RuntimeError("please set --statedir")
 
     if not options.repository:
         options.repository = ["all"]
