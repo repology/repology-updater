@@ -81,109 +81,90 @@ class RepositoryManager:
             'desc': repository['desc'],
         } for repository in REPOSITORIES}
 
-    def Mix(self, packages_by_repo, name_transformer):
-        packages = {}
-
-        for repository in REPOSITORIES:
-            reponame = repository['name']
-            if reponame not in packages_by_repo:
-                continue
-
-            for package in packages_by_repo[reponame]:
-                package.family = repository['family']  # XXX: hack
-                metaname = name_transformer.TransformName(package)
-
-                if metaname is None:
-                    continue
-                if metaname not in packages:
-                    packages[metaname] = MetaPackage(metaname)
-                packages[metaname].Add(reponame, package)
-
-        for package in packages.values():
-            package.FillVersionData()
-
-        shadows = set()
-
-        if self.enable_shadow:
-            for repository in REPOSITORIES:
-                if 'shadow' in repository and repository['shadow']:
-                    shadows.add(repository['name'])
-
-        def CheckShadows(package):
-            for repo in package.versions.keys():
-                if repo not in shadows:
-                    return True
-
-            return False
-
-        return [packages[name] for name in sorted(packages.keys()) if CheckShadows(packages[name])]
-
     # Single repo methods
-    def FetchOne(self, reponame, update=True, logger=NoopLogger()):
+    def Fetch(self, reponame, update=True, logger=NoopLogger()):
         repository = self.GetRepository(reponame)
 
         logger.Log("fetching started")
         repository['fetcher'].Fetch(self.GetStatePath(repository), update=update, logger=logger.GetIndented())
         logger.Log("fetching complete")
 
-    def ParseOne(self, reponame, name_transformer, logger=NoopLogger()):
+    def Parse(self, reponame, transformer=None, logger=NoopLogger()):
         repository = self.GetRepository(reponame)
 
         logger.Log("parsing started")
-        repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
-        logger.Log("parsing complete, {} packages".format(len(repo_packages)))
-        return repo_packages
+        packages = repository['parser'].Parse(self.GetStatePath(repository))
+        logger.Log("parsing complete, {} packages".format(len(packages)))
 
-    def ParseAndSerializeOne(self, reponame, logger=NoopLogger()):
+        logger.Log("processing started")
+        for package in packages:
+            package.repo = reponame
+            package.family = repository['family']
+            if 'shadow' in repository and repository['shadow']:
+                package.shadow = True
+            if transformer:
+                transformer.Process(package)
+        logger.Log("processing complete, {} packages".format(len(packages)))
+
+        # XXX: later, we'll pass ignored packages; they will still
+        # be ignored in summary calculations, but will be visible
+        # in packages list
+        return [ package for package in packages if not package.ignore ]
+
+    def ParseAndSerialize(self, reponame, transformer=None, logger=NoopLogger()):
         repository = self.GetRepository(reponame)
 
-        logger.Log("parsing + saving started")
-        repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
+        packages = self.Parse(reponame, transformer, logger)
+
+        logger.Log("saving started")
         pickle.dump(
-            repo_packages,
+            packages,
             open(self.GetSerializedPath(repository, tmp=True), "wb")
         )
         os.rename(self.GetSerializedPath(repository, tmp=True), self.GetSerializedPath(repository))
-        logger.Log("parsing + saving complete, {} packages".format(len(repo_packages)))
+        logger.Log("saving complete, {} packages".format(len(packages)))
 
-    def DeserializeOne(self, reponame, name_transformer, logger=NoopLogger()):
+        return packages
+
+    def Deserialize(self, reponame, transformer=None, logger=NoopLogger()):
         repository = self.GetRepository(reponame)
 
         logger.Log("loading started")
-        repo_packages = pickle.load(open(self.GetSerializedPath(repository), "rb"))
-        logger.Log("loading complete, {} packages".format(len(repo_packages)))
-        return repo_packages
+        packages = pickle.load(open(self.GetSerializedPath(repository), "rb"))
+        logger.Log("loading complete, {} packages".format(len(packages)))
+
+        if transformer:
+            logger.Log("processing started")
+            for package in packages:
+                transformer.Process(package)
+            logger.Log("processing complete, {} packages".format(len(packages)))
+
+        return packages
 
     # Multi repo methods
-    def Fetch(self, update=True, reponames=None, logger=NoopLogger()):
+    def FetchMulti(self, update=True, reponames=None, logger=NoopLogger()):
         if not os.path.isdir(self.statedir):
             os.mkdir(self.statedir)
 
         for repo in self.GetRepositories(reponames):
-            self.FetchOne(repo['name'], update=update, logger=logger.GetPrefixed(repo['name'] + ": "))
+            self.Fetch(repo['name'], update=update, logger=logger.GetPrefixed(repo['name'] + ": "))
 
-    def Parse(self, name_transformer, reponames, logger=NoopLogger()):
-        packages_by_repo = {}
+    def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
+        packages = []
 
         for repo in self.GetRepositories(reponames):
-            packages_by_repo[repo['name']] = self.ParseOne(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
+            packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
 
-        logger.Log("merging started")
-        packages = self.Mix(packages_by_repo, name_transformer)
-        logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages
 
-    def ParseAndSerialize(self, reponames=None, logger=NoopLogger()):
+    def ParseAndSerializeMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
         for repo in self.GetRepositories(reponames):
-            self.ParseAndSerializeOne(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
+            self.ParseAndSerialize(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
 
-    def Deserialize(self, name_transformer, reponames=None, logger=NoopLogger()):
-        packages_by_repo = {}
+    def DeserializeMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
+        packages = []
 
         for repo in self.GetRepositories(reponames):
-            packages_by_repo[repo['name']] = self.DeserializeOne(repo['name'], name_transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
+            packages += self.Deserialize(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
 
-        logger.Log("merging started")
-        packages = self.Mix(packages_by_repo, name_transformer)
-        logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages

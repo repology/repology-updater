@@ -31,6 +31,7 @@ def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
     parser.add_argument('-l', '--logfile', help='path to log file')
+    parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
 
     parser.add_argument('-f', '--fetch', action='store_true', help='allow fetching repository data')
     parser.add_argument('-u', '--update', action='store_true', help='allow updating repository data')
@@ -47,6 +48,7 @@ def Main():
         logger = FileLogger(options.logfile)
 
     repoman = RepositoryManager(options.statedir)
+    transformer = PackageTransformer(options.rules)
 
     total_count = 0
     success_count = 0
@@ -55,9 +57,9 @@ def Main():
         repo_logger.Log("processing started")
         try:
             if options.fetch:
-                repoman.FetchOne(reponame, update=options.update, logger=repo_logger.GetIndented())
+                repoman.Fetch(reponame, update=options.update, logger=repo_logger.GetIndented())
             if options.parse:
-                repoman.ParseAndSerializeOne(reponame, logger=repo_logger.GetIndented())
+                repoman.ParseAndSerialize(reponame, transformer=transformer, logger=repo_logger.GetIndented())
         except KeyboardInterrupt:
             logger.Log("processing interrupted")
             return 1
@@ -74,6 +76,14 @@ def Main():
         total_count += 1
 
     logger.Log("{}/{} repositories processed successfully".format(success_count, total_count))
+
+    unmatched = transformer.GetUnmatchedRules()
+    if len(unmatched):
+        wlogger = logger.GetPrefixed("WARNING: ")
+        wlogger.Log("unmatched rules detected!")
+
+    for rule in unmatched:
+        wlogger.Log(rule)
 
     return 0 if success_count == total_count else 1
 

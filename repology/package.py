@@ -15,28 +15,85 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.version import VersionCompare
+from repology.version import VersionCompare, MaxVersion
+
+
+class PackageVersionClass:
+    newest = 1,
+    outdated = 2,
+    ignored = 3
+
+    @staticmethod
+    def ToChar(value):
+        if value == PackageVersionClass.newest:
+            return 'N'
+        elif value == PackageVersionClass.outdated:
+            return 'O'
+        elif value == PackageVersionClass.ignored:
+            return 'I'
+        else:
+            return '?'
+
+class RepositoryVersionClass:
+    newest = 1,
+    outdated = 2,
+    mixed = 3,
+    ignored = 4,
+    lonely = 5
+
+    @staticmethod
+    def ToChar(value):
+        if value == RepositoryVersionClass.newest:
+            return 'N'
+        elif value == RepositoryVersionClass.outdated:
+            return 'O'
+        elif value == RepositoryVersionClass.mixed:
+            return 'M'
+        elif value == RepositoryVersionClass.ignored:
+            return 'I'
+        elif value == RepositoryVersionClass.lonely:
+            return 'L'
+        else:
+            return '?'
 
 
 class Package:
     __slots__ = [
+        'repo',
+        'family',
+
         'name',
+        'effname',
+
         'version',
         'origversion',
+        'effversion',
+        'versionclass',
+
         'maintainers',
         'category',
         'comment',
         'homepage',
         'licenses',
         'downloads',
-        'family',
-        'ignoreversion'
+
+        'ignore',
+        'shadow',
+        'ignoreversion',
     ]
 
     def __init__(self):
+        self.repo = None
+        self.family = None
+
         self.name = None
+        self.effname = None
+
         self.version = None
         self.origversion = None
+        self.effversion = None
+        self.versionclass = None
+
         self.maintainers = []
         self.category = None
         self.comment = None
@@ -44,7 +101,8 @@ class Package:
         self.licenses = []
         self.downloads = []
 
-        self.family = None
+        self.ignore = False
+        self.shadow = False
         self.ignoreversion = False
 
     @property
@@ -52,136 +110,120 @@ class Package:
         return {slot: getattr(self, slot) for slot in self.__slots__}
 
 
-class MetaPackage:
-    __slots__ = ['name', 'packages', 'versions', 'maintainers']
-    def __init__(self, name):
-        self.name = name
-        self.packages = {}
-        self.versions = {}
-        self.maintainers = set()
+def MergeMetapackages(*packagesets, enable_shadows=True):
+    metapackages = {}
 
-    def GetName(self):
-        return self.name
+    for packageset in packagesets:
+        for package in packageset:
+            if package.effname not in metapackages:
+                metapackages[package.effname] = []
+            metapackages[package.effname].append(package)
 
-    def Add(self, reponame, package):
-        if reponame not in self.packages:
-            self.packages[reponame] = []
-        self.packages[reponame].append(package)
-
-    def Get(self, reponame):
-        if reponame in self.packages:
-            return self.packages[reponame]
-        return None
-
-    def GetMaxVersion(self):
-        bestversion, bestrepo, bestpackage = None, None, None
-        for reponame, packagelist in self.packages.items():
-            for package in packagelist:
-                if package.version is not None and not package.ignoreversion:
-                    if bestversion is None or VersionCompare(package.version, bestversion) > 0:
-                        bestversion, bestrepo, bestpackage = package.version, reponame, package
-
-        return bestversion, bestrepo, bestpackage
-
-    def GetVersionRangeForRepo(self, reponame):
-        if reponame not in self.packages:
-            return None, None
-
-        minversion, maxversion = None, None
-        for package in self.packages[reponame]:
-            if package.version is not None:
-                if maxversion is None or VersionCompare(package.version, maxversion) > 0:
-                    maxversion = package.version
-                if minversion is None or VersionCompare(package.version, minversion) < 0:
-                    minversion = package.version
-
-        return minversion, maxversion
-
-    def HasMaintainer(self, maintainer):
-        return maintainer in self.maintainers
-
-    def GetMaintainers(self):
-        return self.maintainers
-
-    def HasCategory(self, category):
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                if package.category == category:
-                    return True
-
+    # process shadows
+    # XXX: move this below, into summary processing
+    def CheckShadows(packages):
+        nonshadow = False
+        for package in packages:
+            if not package.shadow:
+                return True
         return False
 
-    def HasCategoryLike(self, category):
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                if package.category is not None and package.category.lower().find(category) != -1:
-                    return True
+    if enable_shadows:
+        metapackages = { metaname: packages for metaname, packages in metapackages.items() if CheckShadows(packages) }
 
-        return False
+    return metapackages
 
-    def GetNumRepos(self):
-        return len(self.packages)
 
-    def GetRepos(self):
-        return self.packages.keys()
+def FilterMetapackages(metapackages, *filters):
+    filtered_metapackages = {}
 
-    def GetFamilies(self):
+    for name, packages in metapackages.items():
+        passes = True
+        for filt in filters:
+            if not filt.Check(packages):
+                passes = False
+                break
+        if passes:
+            filtered_metapackages[name] = packages
+
+    return filtered_metapackages
+
+
+def FillMetapackagesVersionInfos(metapackages):
+    for name, packages in metapackages.items():
+        versions = set()
         families = set()
 
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                if package.family is not None:
-                    families.add(package.family)
+        for package in packages:
+            if not package.ignoreversion:
+                versions.add(package.version)
+            families.add(package.family)
 
-        return families
+        bestversion = None
+        for version in versions:
+            if bestversion is None or VersionCompare(version, bestversion) > 0:
+                bestversion = version
 
-    def HasRepository(self, reponame):
-        return reponame in self.packages
+        for package in packages:
+            result = VersionCompare(package.version, bestversion) if bestversion is not None else 1
+            if result > 0:
+                package.versionclass = PackageVersionClass.ignored
+            elif result == 0:
+                package.versionclass = PackageVersionClass.newest
+            else:
+                package.versionclass = PackageVersionClass.outdated
 
-    def IsOutdatedInRepository(self, reponame):
-        return reponame in self.versions and self.versions[reponame]['class'] == 'bad'
 
-    def FillVersionData(self):
-        # fill maintaiers
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                for maintainer in package.maintainers:
-                    self.maintainers.add(maintainer)
+def ProduceMetapackagesSummaries(metapackages):
+    metasummaries = {}
 
-        # fill versions
-        bestversion, _, _ = self.GetMaxVersion()
+    for name, packages in metapackages.items():
+        metasummaries[name] = {}
 
-        numfamilies = len(self.GetFamilies())
+        state_by_repo = {}
+        families = set()
 
-        for reponame in self.GetRepos():
-            # packages for this repository
-            repopackages = self.Get(reponame)
+        for package in packages:
+            if package.repo not in state_by_repo:
+                state_by_repo[package.repo] = {
+                    'newest': False,
+                    'outdated': False,
+                    'ignored': False,
+                    'bestversion': None,
+                    'count': 0
+                }
 
-            # determine versions
-            repominversion, repomaxversion = self.GetVersionRangeForRepo(reponame)
+            families.add(package.family)
 
-            bestrepopackage = repopackages[0]
-            for package in repopackages:
-                if package.version == repomaxversion:
-                    bestrepopackage = package
+            if package.versionclass == PackageVersionClass.ignored:
+                state_by_repo[package.repo]['ignored'] = True,
+            else:
+                if package.versionclass == PackageVersionClass.newest:
+                    state_by_repo[package.repo]['newest'] = True,
+                if package.versionclass == PackageVersionClass.outdated:
+                    state_by_repo[package.repo]['outdated'] = True,
+                state_by_repo[package.repo]['bestversion'] = MaxVersion(state_by_repo[package.repo]['bestversion'], package.version)
+                state_by_repo[package.repo]['count'] += 1
 
-            versionclass = 'bad'
-            if bestversion is None:
-                versionclass = 'good'
-            elif VersionCompare(repomaxversion, bestversion) > 0:  # due to ignore
-                versionclass = 'ignore'
-            elif VersionCompare(repomaxversion, bestversion) >= 0:
-                if VersionCompare(repominversion, bestversion) == 0:
-                    versionclass = 'good'
+        for repo, state in state_by_repo.items():
+            resulting_class = None
+
+            if state['newest']:
+                if len(families) == 1:
+                    resulting_class = RepositoryVersionClass.lonely
+                elif state['outdated']:
+                    resulting_class = RepositoryVersionClass.mixed
                 else:
-                    versionclass = 'multi'
+                    resulting_class = RepositoryVersionClass.newest
+            elif state['outdated']:
+                resulting_class = RepositoryVersionClass.outdated
+            elif state['ignored']:
+                resulting_class = RepositoryVersionClass.ignored
 
-            if (versionclass == 'good' or versionclass == 'multi') and numfamilies == 1:
-                versionclass = 'lonely'
-
-            self.versions[reponame] = {
-                'version': repomaxversion,
-                'subpackage': bestrepopackage,
-                'class': versionclass,
-                'numpackages': len(repopackages)
+            metasummaries[name][repo] = {
+                'version': state['bestversion'],
+                'versionclass': resulting_class,
+                'numpackages': state['count']
             }
+
+    return metasummaries

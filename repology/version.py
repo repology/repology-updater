@@ -74,3 +74,12 @@ def VersionCompare(v1, v2):
             return 1
 
     return 0
+
+
+def MaxVersion(v1, v2):
+    if v1 and v2:
+        return v1 if VersionCompare(v1, v2) > 0 else v2
+    elif v1:
+        return v1
+    else:
+        return v2

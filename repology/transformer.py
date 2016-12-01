@@ -27,7 +27,7 @@ class MatchResult:
     lastrule = 4
 
 
-class NameTransformer:
+class PackageTransformer:
     def __init__(self, rulespath):
         self.dollar0 = re.compile("\$0", re.ASCII)
         self.dollarN = re.compile("\$([0-9]+)", re.ASCII)
@@ -126,7 +126,7 @@ class NameTransformer:
 
         return flags, pkgname
 
-    def TransformName(self, package):
+    def Process(self, package):
         transformed_name = package.name
 
         # apply first matching rule
@@ -139,16 +139,15 @@ class NameTransformer:
             flags, transformed_name = self.ApplyRule(rule, transformed_name, package.version)
 
             if flags & MatchResult.ignorepackage:
-                return None
+                package.ignore = True
 
-            # XXX: this should not really be intrusive to package, fix
             if flags & MatchResult.ignoreversion:
                 package.ignoreversion = True
 
             if flags & MatchResult.lastrule:
                 break
 
-        return transformed_name
+        package.effname = transformed_name
 
     def GetUnmatchedRules(self):
         result = []

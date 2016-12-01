@@ -5,7 +5,7 @@
 {% set headerevery = 50 %}
 
 <table>
-{% for package in packages %}
+{% for package in packages.items() %}
     {% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
     <tr>
         <th></th>
