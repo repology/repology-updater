@@ -32,21 +32,20 @@ class RepositoryManager:
         self.statedir = statedir
         self.enable_shadow = enable_shadow
 
-    def GetStatePath(self, repository):
+    def __GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
 
-    def GetSerializedPath(self, repository, tmp=False):
-        tmpext = ".tmp" if tmp else ""
-        return os.path.join(self.statedir, repository['name'] + ".packages" + tmpext)
+    def __GetSerializedPath(self, repository):
+        return os.path.join(self.statedir, repository['name'] + ".packages.raw")
 
-    def GetRepository(self, reponame):
+    def __GetRepository(self, reponame):
         for repository in REPOSITORIES:
             if repository['name'] == reponame:
                 return repository
 
         raise KeyError('No such repository ' + reponame)
 
-    def GetRepositories(self, reponames=None):
+    def __GetRepositories(self, reponames=None):
         if reponames is None:
             return []
 
@@ -65,12 +64,52 @@ class RepositoryManager:
 
         return filtered_repositories
 
-    def ForEach(self, processor, reponames=None):
-        for repo in self.GetRepositories(reponames):
-            processor(repo)
+    # Private methods which provide single actions on repos
+    def __Fetch(self, update, repository, logger):
+        logger.Log("fetching started")
+        repository['fetcher'].Fetch(self.__GetStatePath(repository), update=update, logger=logger.GetIndented())
+        logger.Log("fetching complete")
 
+    def __Parse(self, repository, logger):
+        logger.Log("parsing started")
+        packages = repository['parser'].Parse(self.__GetStatePath(repository))
+        logger.Log("parsing complete, {} packages".format(len(packages)))
+
+        return packages
+
+    def __Transform(self, packages, transformer, repository, logger):
+        logger.Log("processing started")
+        for package in packages:
+            package.repo = repository['name']
+            package.family = repository['family']
+            if 'shadow' in repository and repository['shadow']:
+                package.shadow = True
+            if transformer:
+                transformer.Process(package)
+
+        packages = [ package for package in packages if not package.ignore ]
+        logger.Log("processing complete, {} packages".format(len(packages)))
+
+        return packages
+
+    def __Serialize(self, packages, path, repository, logger):
+        tmppath = path + ".tmp"
+
+        logger.Log("saving started")
+        pickle.dump(packages, open(tmppath, "wb"))
+        os.rename(tmppath, path)
+        logger.Log("saving complete, {} packages".format(len(packages)))
+
+    def __Deserialize(self, path, repository, logger):
+        logger.Log("loading started")
+        packages = pickle.load(open(path, "rb"))
+        logger.Log("loading complete, {} packages".format(len(packages)))
+
+        return packages
+
+    # Helpers to retrieve data on repositories
     def GetNames(self, reponames=None):
-        return [repo['name'] for repo in self.GetRepositories(reponames)]
+        return [repo['name'] for repo in self.__GetRepositories(reponames)]
 
     def GetMetadata(self):
         return {repository['name']: {
@@ -83,88 +122,38 @@ class RepositoryManager:
 
     # Single repo methods
     def Fetch(self, reponame, update=True, logger=NoopLogger()):
-        repository = self.GetRepository(reponame)
+        repository = self.__GetRepository(reponame)
 
-        logger.Log("fetching started")
-        repository['fetcher'].Fetch(self.GetStatePath(repository), update=update, logger=logger.GetIndented())
-        logger.Log("fetching complete")
+        self.__Fetch(update, repository, logger)
 
-    def Parse(self, reponame, transformer=None, logger=NoopLogger()):
-        repository = self.GetRepository(reponame)
+    def Parse(self, reponame, transformer, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
 
-        logger.Log("parsing started")
-        packages = repository['parser'].Parse(self.GetStatePath(repository))
-        logger.Log("parsing complete, {} packages".format(len(packages)))
-
-        logger.Log("processing started")
-        for package in packages:
-            package.repo = reponame
-            package.family = repository['family']
-            if 'shadow' in repository and repository['shadow']:
-                package.shadow = True
-            if transformer:
-                transformer.Process(package)
-        logger.Log("processing complete, {} packages".format(len(packages)))
-
-        # XXX: later, we'll pass ignored packages; they will still
-        # be ignored in summary calculations, but will be visible
-        # in packages list
-        return [ package for package in packages if not package.ignore ]
-
-    def ParseAndSerialize(self, reponame, transformer=None, logger=NoopLogger()):
-        repository = self.GetRepository(reponame)
-
-        packages = self.Parse(reponame, transformer, logger)
-
-        logger.Log("saving started")
-        pickle.dump(
-            packages,
-            open(self.GetSerializedPath(repository, tmp=True), "wb")
-        )
-        os.rename(self.GetSerializedPath(repository, tmp=True), self.GetSerializedPath(repository))
-        logger.Log("saving complete, {} packages".format(len(packages)))
+        packages = self.__Parse(repository, logger)
+        packages = self.__Transform(packages, transformer, repository, logger)
+        self.__Serialize(packages, self.__GetSerializedPath(repository), repository, logger)
 
         return packages
 
-    def Deserialize(self, reponame, transformer=None, logger=NoopLogger()):
-        repository = self.GetRepository(reponame)
+    def Deserialize(self, reponame, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
 
-        logger.Log("loading started")
-        packages = pickle.load(open(self.GetSerializedPath(repository), "rb"))
-        logger.Log("loading complete, {} packages".format(len(packages)))
+        return self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
 
-        if transformer:
-            logger.Log("processing started")
-            for package in packages:
-                transformer.Process(package)
-            logger.Log("processing complete, {} packages".format(len(packages)))
+    def Reprocess(self, reponame, transformer=None, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
+
+        packages = self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
+        packages = self.__Transform(packages, transformer, repository, logger)
+        self.__Serialize(packages, self.__GetSerializedPath(repository), repository, logger)
 
         return packages
 
     # Multi repo methods
-    def FetchMulti(self, update=True, reponames=None, logger=NoopLogger()):
-        if not os.path.isdir(self.statedir):
-            os.mkdir(self.statedir)
-
-        for repo in self.GetRepositories(reponames):
-            self.Fetch(repo['name'], update=update, logger=logger.GetPrefixed(repo['name'] + ": "))
-
-    def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
-        packages = []
-
-        for repo in self.GetRepositories(reponames):
-            packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
-
-        return packages
-
-    def ParseAndSerializeMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
-        for repo in self.GetRepositories(reponames):
-            self.ParseAndSerialize(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
-
     def DeserializeMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
         packages = []
 
-        for repo in self.GetRepositories(reponames):
-            packages += self.Deserialize(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
+        for repo in self.__GetRepositories(reponames):
+            packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
 
         return packages

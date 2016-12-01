@@ -33,9 +33,11 @@ def Main():
     parser.add_argument('-l', '--logfile', help='path to log file')
     parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
 
-    parser.add_argument('-f', '--fetch', action='store_true', help='allow fetching repository data')
-    parser.add_argument('-u', '--update', action='store_true', help='allow updating repository data')
-    parser.add_argument('-p', '--parse', action='store_true', help='parse and serialize repository data')
+    parser.add_argument('-f', '--fetch', action='count', help='allow fetching repository data (twice to also update)')
+    parser.add_argument('-p', '--parse', action='store_true', help='parse, process and serialize repository data')
+
+    # XXX: this is dangerous as long as ignored packages are removed from dumps
+    parser.add_argument('-P', '--reprocess', action='store_true', help='reprocess repository data')
 
     parser.add_argument('-r', '--repository', action='append', help='specify repository names or tags to process')
     options = parser.parse_args()
@@ -54,36 +56,39 @@ def Main():
     success_count = 0
     for reponame in repoman.GetNames(reponames=options.repository):
         repo_logger = logger.GetPrefixed(reponame + ": ")
-        repo_logger.Log("processing started")
+        repo_logger.Log("started")
         try:
             if options.fetch:
-                repoman.Fetch(reponame, update=options.update, logger=repo_logger.GetIndented())
+                repoman.Fetch(reponame, update=(options.fetch >= 2), logger=repo_logger.GetIndented())
             if options.parse:
-                repoman.ParseAndSerialize(reponame, transformer=transformer, logger=repo_logger.GetIndented())
+                repoman.Parse(reponame, transformer=transformer, logger=repo_logger.GetIndented())
+            elif options.reprocess:
+                repoman.Reprocess(reponame, transformer=transformer, logger=repo_logger.GetIndented())
         except KeyboardInterrupt:
-            logger.Log("processing interrupted")
+            logger.Log("interrupted")
             return 1
         except:
-            repo_logger.Log("processing failed, exception follows")
+            repo_logger.Log("failed, exception follows")
             for item in traceback.format_exception(*sys.exc_info()):
                 for line in item.split('\n'):
                     if line:
                         repo_logger.GetIndented().Log(line)
         else:
-            repo_logger.Log("processing complete")
+            repo_logger.Log("complete")
             success_count += 1
 
         total_count += 1
 
     logger.Log("{}/{} repositories processed successfully".format(success_count, total_count))
 
-    unmatched = transformer.GetUnmatchedRules()
-    if len(unmatched):
-        wlogger = logger.GetPrefixed("WARNING: ")
-        wlogger.Log("unmatched rules detected!")
+    if options.parse or options.reprocess:
+        unmatched = transformer.GetUnmatchedRules()
+        if len(unmatched):
+            wlogger = logger.GetPrefixed("WARNING: ")
+            wlogger.Log("unmatched rules detected!")
 
-    for rule in unmatched:
-        wlogger.Log(rule)
+            for rule in unmatched:
+                wlogger.Log(rule)
 
     return 0 if success_count == total_count else 1
 
