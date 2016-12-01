@@ -67,6 +67,9 @@ class RepositoryManager:
     # Private methods which provide single actions on repos
     def __Fetch(self, update, repository, logger):
         logger.Log("fetching started")
+        if not os.path.isdir(self.statedir):
+            os.mkdir(self.statedir)
+
         repository['fetcher'].Fetch(self.__GetStatePath(repository), update=update, logger=logger.GetIndented())
         logger.Log("fetching complete")
 
