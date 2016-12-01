@@ -50,7 +50,7 @@ class PkgsrcIndexParser():
                 pkg = Package()
 
                 pkg.name, version = SplitPackageNameVersion(row[0])
-                pkg.version, pkg.fullversion = SanitizeVersion(version)
+                pkg.version, pkg.origversion = SanitizeVersion(version)
                 pkg.comment = row[3]
 
                 # sometimes use OWNER variable in which case there's no MAINTAINER

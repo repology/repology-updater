@@ -70,7 +70,7 @@ class DebianSourcesParser():
                 elif line.startswith('Package: '):
                     pkg.name = line[9:]
                 elif line.startswith('Version: '):
-                    pkg.version, pkg.fullversion = SanitizeVersion(line[9:])
+                    pkg.version, pkg.origversion = SanitizeVersion(line[9:])
                 elif line.startswith('Maintainer: '):
                     pkg.maintainers.append(line[12:])
                 elif line.startswith('Uploaders: '):

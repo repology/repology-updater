@@ -49,7 +49,7 @@ class RepodataParser():
 
                 pkg.name = entry.find("{http://linux.duke.edu/metadata/common}name").text
                 version = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
-                pkg.version, pkg.fullversion = SanitizeVersion(version)
+                pkg.version, pkg.origversion = SanitizeVersion(version)
                 pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
                 pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
                 pkg.category = entry.find("{http://linux.duke.edu/metadata/common}format/"

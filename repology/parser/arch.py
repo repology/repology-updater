@@ -66,7 +66,7 @@ class ArchDBParser():
                     elif tag == 'NAME':
                         pkg.name = line
                     elif tag == 'VERSION':
-                        pkg.version, pkg.fullversion = SanitizeVersion(line)
+                        pkg.version, pkg.origversion = SanitizeVersion(line)
                     elif tag == 'DESC':
                         if pkg.comment is None:
                             pkg.comment = ''

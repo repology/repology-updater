@@ -69,8 +69,8 @@ class AURParser():
                     if has_badsuffix:
                         continue
 
-                    pkg.fullversion = result["Version"]
-                    pkg.version, pkg.fullversion = SanitizeVersion(result["Version"])
+                    pkg.origversion = result["Version"]
+                    pkg.version, pkg.origversion = SanitizeVersion(result["Version"])
                     pkg.comment = result["Description"]
                     pkg.homepage = result["URL"]
 

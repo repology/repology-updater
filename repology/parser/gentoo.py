@@ -102,7 +102,7 @@ class GentooGitParser():
                 if maxversion is not None:
                     pkg.name = package
                     pkg.version = maxversion
-                    pkg.fullversion = maxorigversion
+                    pkg.origversion = maxorigversion
                     pkg.category = category
 
                     result.append(pkg)

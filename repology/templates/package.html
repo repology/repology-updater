@@ -5,8 +5,8 @@
 <h2>{{ repositories[reponame].desc }}</h2>
     {% for package in metapackage.packages[reponame] %}
     <h3>{{ package.name|escape }}-{{ package.version|escape }}
-            {% if package.fullversion %}
-                ({{ package.fullversion|escape }})
+            {% if package.origversion %}
+                ({{ package.origversion|escape }})
             {% endif %}
     </h3>
     <ul>
