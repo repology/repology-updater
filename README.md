@@ -169,7 +169,7 @@ directory which is created if it doesn't exist.
 
 | Repository                       | Name | Ver | Summary | Maint-r | Categ | WWW | License | Download |
 |----------------------------------|:----:|:---:|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
-| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     | ✔   |         |          |
 | Debian/Ubuntu                    | ✔    | ✔   |         | ✔       | ✔     | ✔   |         |          |
 | Gentoo                           | ✔    | ✔   |         | ✔       | ✔     |     |         |          |
 | pkgsrc                           | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
