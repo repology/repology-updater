@@ -28,12 +28,11 @@ class MatchResult:
 
 
 class PackageTransformer:
-    def __init__(self, rulespath):
+    def __init__(self, rulespath=None, rulestext=None):
         self.dollar0 = re.compile("\$0", re.ASCII)
         self.dollarN = re.compile("\$([0-9]+)", re.ASCII)
 
-        with open(rulespath) as file:
-            self.rules = yaml.safe_load(file)
+        self.rules = yaml.safe_load(rulestext if rulestext else open(rulespath))
 
         pp = pprint.PrettyPrinter(width=10000)
         for rule in self.rules:
