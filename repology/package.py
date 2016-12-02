@@ -82,7 +82,7 @@ class Package:
         'ignoreversion',
     ]
 
-    def __init__(self):
+    def __init__(self, **args):
         self.repo = None
         self.family = None
 
@@ -104,6 +104,9 @@ class Package:
         self.ignore = False
         self.shadow = False
         self.ignoreversion = False
+
+        for k, v in args.items():
+            setattr(self, k, v)
 
     @property
     def __dict__(self):
