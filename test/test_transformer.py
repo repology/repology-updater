@@ -59,9 +59,20 @@ class TestPackageTransformer(unittest.TestCase):
         self.assertEqual(p.name, "foo")
         self.assertEqual(p.effname, "bar_foo")
 
+    def test_tolowername(self):
+        p = Package(name="fOoBaR", version="1.0")
+        PackageTransformer(rulestext='[ { tolowername: true } ]').Process(p)
+        self.assertEqual(p.name, "fOoBaR")
+        self.assertEqual(p.effname, "foobar")
+
+    def test_last(self):
+        p = Package(name="foo", version="1.0")
+        PackageTransformer(rulestext='[ { last: true }, { setname: "bar" } ]').Process(p)
+        self.assertEqual(p.effname, "foo")
+
     def test_match_name(self):
-        p1 = Package(name="p1", version="1.0", family="foo")
-        p2 = Package(name="p2", version="2.0", family="bar")
+        p1 = Package(name="p1", version="1.0")
+        p2 = Package(name="p2", version="2.0")
         t = PackageTransformer(rulestext='[ { name: p1, setname: bar } ]')
         t.Process(p1)
         t.Process(p2)
@@ -69,8 +80,8 @@ class TestPackageTransformer(unittest.TestCase):
         self.assertEqual(p2.effname, "p2")
 
     def test_match_namepat(self):
-        p1 = Package(name="p1", version="1.0", family="foo")
-        p2 = Package(name="p2", version="2.0", family="bar")
+        p1 = Package(name="p1", version="1.0")
+        p2 = Package(name="p2", version="2.0")
         t = PackageTransformer(rulestext='[ { namepat: ".*1", setname: bar } ]')
         t.Process(p1)
         t.Process(p2)
@@ -78,8 +89,8 @@ class TestPackageTransformer(unittest.TestCase):
         self.assertEqual(p2.effname, "p2")
 
     def test_match_ver(self):
-        p1 = Package(name="p1", version="1.0", family="foo")
-        p2 = Package(name="p2", version="2.0", family="bar")
+        p1 = Package(name="p1", version="1.0")
+        p2 = Package(name="p2", version="2.0")
         t = PackageTransformer(rulestext='[ { ver: "1.0", setname: bar } ]')
         t.Process(p1)
         t.Process(p2)
@@ -87,8 +98,8 @@ class TestPackageTransformer(unittest.TestCase):
         self.assertEqual(p2.effname, "p2")
 
     def test_match_verpat(self):
-        p1 = Package(name="p1", version="1.0", family="foo")
-        p2 = Package(name="p2", version="2.0", family="bar")
+        p1 = Package(name="p1", version="1.0")
+        p2 = Package(name="p2", version="2.0")
         t = PackageTransformer(rulestext='[ { verpat: "1.*", setname: bar } ]')
         t.Process(p1)
         t.Process(p2)
@@ -96,8 +107,8 @@ class TestPackageTransformer(unittest.TestCase):
         self.assertEqual(p2.effname, "p2")
 
     def test_match_verlonger(self):
-        p1 = Package(name="p1", version="1.0.0", family="foo")
-        p2 = Package(name="p2", version="1.0", family="bar")
+        p1 = Package(name="p1", version="1.0.0")
+        p2 = Package(name="p2", version="1.0")
         t = PackageTransformer(rulestext='[ { verlonger: 2, setname: bar } ]')
         t.Process(p1)
         t.Process(p2)
@@ -108,6 +119,15 @@ class TestPackageTransformer(unittest.TestCase):
         p1 = Package(name="p1", version="1.0", family="foo")
         p2 = Package(name="p2", version="2.0", family="bar")
         t = PackageTransformer(rulestext='[ { families: [ foo ], setname: bar } ]')
+        t.Process(p1)
+        t.Process(p2)
+        self.assertEqual(p1.effname, "bar")
+        self.assertEqual(p2.effname, "p2")
+
+    def test_match_category(self):
+        p1 = Package(name="p1", version="1.0", category="foo")
+        p2 = Package(name="p2", version="2.0", category="bar")
+        t = PackageTransformer(rulestext='[ { category: foo, setname: bar } ]')
         t.Process(p1)
         t.Process(p2)
         self.assertEqual(p1.effname, "bar")
