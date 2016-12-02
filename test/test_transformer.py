@@ -23,12 +23,41 @@ from repology.transformer import PackageTransformer
 from repology.package import Package
 
 class TestPackageTransformer(unittest.TestCase):
+    def test_ignore(self):
+        p = Package(name="foo", version="1.0")
+        self.assertEqual(p.ignore, False)
+        PackageTransformer(rulestext='[ { ignore: true } ]').Process(p)
+        self.assertEqual(p.ignore, True)
+
+    def test_unignore(self):
+        p = Package(name="foo", version="1.0")
+        self.assertEqual(p.ignore, False)
+        PackageTransformer(rulestext='[ { ignore: true }, { unignore: true } ]').Process(p)
+        self.assertEqual(p.ignore, False)
+
+    def test_ignorever(self):
+        p = Package(name="foo", version="1.0")
+        self.assertEqual(p.ignoreversion, False)
+        PackageTransformer(rulestext='[ { ignorever: true } ]').Process(p)
+        self.assertEqual(p.ignoreversion, True)
+
+    def test_unignorever(self):
+        p = Package(name="foo", version="1.0")
+        self.assertEqual(p.ignoreversion, False)
+        PackageTransformer(rulestext='[ { ignorever: true }, { unignorever: true } ]').Process(p)
+        self.assertEqual(p.ignoreversion, False)
+
     def test_setname(self):
-        t = PackageTransformer(rulestext='- { name: "foo", setname: "bar" }')
-        p = Package(name="foo")
-        t.Process(p)
+        p = Package(name="foo", version="1.0")
+        PackageTransformer(rulestext='[ { setname: "bar" } ]').Process(p)
         self.assertEqual(p.name, "foo")
         self.assertEqual(p.effname, "bar")
+
+    def test_setname_subst(self):
+        p = Package(name="foo", version="1.0")
+        PackageTransformer(rulestext='[ { setname: "bar_$0" } ]').Process(p)
+        self.assertEqual(p.name, "foo")
+        self.assertEqual(p.effname, "bar_foo")
 
 if __name__ == '__main__':
     unittest.main()
