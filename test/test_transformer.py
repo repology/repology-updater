@@ -59,5 +59,59 @@ class TestPackageTransformer(unittest.TestCase):
         self.assertEqual(p.name, "foo")
         self.assertEqual(p.effname, "bar_foo")
 
+    def test_match_name(self):
+        p1 = Package(name="p1", version="1.0", family="foo")
+        p2 = Package(name="p2", version="2.0", family="bar")
+        t = PackageTransformer(rulestext='[ { name: p1, setname: bar } ]')
+        t.Process(p1)
+        t.Process(p2)
+        self.assertEqual(p1.effname, "bar")
+        self.assertEqual(p2.effname, "p2")
+
+    def test_match_namepat(self):
+        p1 = Package(name="p1", version="1.0", family="foo")
+        p2 = Package(name="p2", version="2.0", family="bar")
+        t = PackageTransformer(rulestext='[ { namepat: ".*1", setname: bar } ]')
+        t.Process(p1)
+        t.Process(p2)
+        self.assertEqual(p1.effname, "bar")
+        self.assertEqual(p2.effname, "p2")
+
+    def test_match_ver(self):
+        p1 = Package(name="p1", version="1.0", family="foo")
+        p2 = Package(name="p2", version="2.0", family="bar")
+        t = PackageTransformer(rulestext='[ { ver: "1.0", setname: bar } ]')
+        t.Process(p1)
+        t.Process(p2)
+        self.assertEqual(p1.effname, "bar")
+        self.assertEqual(p2.effname, "p2")
+
+    def test_match_verpat(self):
+        p1 = Package(name="p1", version="1.0", family="foo")
+        p2 = Package(name="p2", version="2.0", family="bar")
+        t = PackageTransformer(rulestext='[ { verpat: "1.*", setname: bar } ]')
+        t.Process(p1)
+        t.Process(p2)
+        self.assertEqual(p1.effname, "bar")
+        self.assertEqual(p2.effname, "p2")
+
+    def test_match_verlonger(self):
+        p1 = Package(name="p1", version="1.0.0", family="foo")
+        p2 = Package(name="p2", version="1.0", family="bar")
+        t = PackageTransformer(rulestext='[ { verlonger: 2, setname: bar } ]')
+        t.Process(p1)
+        t.Process(p2)
+        self.assertEqual(p1.effname, "bar")
+        self.assertEqual(p2.effname, "p2")
+
+    def test_match_family(self):
+        p1 = Package(name="p1", version="1.0", family="foo")
+        p2 = Package(name="p2", version="2.0", family="bar")
+        t = PackageTransformer(rulestext='[ { families: [ foo ], setname: bar } ]')
+        t.Process(p1)
+        t.Process(p2)
+        self.assertEqual(p1.effname, "bar")
+        self.assertEqual(p2.effname, "p2")
+
 if __name__ == '__main__':
     unittest.main()
