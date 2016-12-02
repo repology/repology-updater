@@ -61,7 +61,7 @@ def Main():
             if options.fetch:
                 repoman.Fetch(reponame, update=(options.fetch >= 2), logger=repo_logger.GetIndented())
             if options.parse:
-                repoman.Parse(reponame, transformer=transformer, logger=repo_logger.GetIndented())
+                repoman.ParseAndSerialize(reponame, transformer=transformer, logger=repo_logger.GetIndented())
             elif options.reprocess:
                 repoman.Reprocess(reponame, transformer=transformer, logger=repo_logger.GetIndented())
         except KeyboardInterrupt:

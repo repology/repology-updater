@@ -134,6 +134,14 @@ class RepositoryManager:
 
         packages = self.__Parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
+
+        return packages
+
+    def ParseAndSerialize(self, reponame, transformer, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
+
+        packages = self.__Parse(repository, logger)
+        packages = self.__Transform(packages, transformer, repository, logger)
         self.__Serialize(packages, self.__GetSerializedPath(repository), repository, logger)
 
         return packages
