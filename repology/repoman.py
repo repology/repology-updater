@@ -161,6 +161,14 @@ class RepositoryManager:
         return packages
 
     # Multi repo methods
+    def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
+        packages = []
+
+        for repo in self.__GetRepositories(reponames):
+            packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
+
+        return packages
+
     def DeserializeMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
         packages = []
 
