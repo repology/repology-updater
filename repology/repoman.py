@@ -90,6 +90,9 @@ class RepositoryManager:
             if transformer:
                 transformer.Process(package)
 
+        # XXX: in future, ignored packages will not be dropped here, but
+        # ignored in summary and version calcualtions, but shown in
+        # package listing
         packages = [ package for package in packages if not package.ignore ]
         logger.Log("processing complete, {} packages".format(len(packages)))
 
