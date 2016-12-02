@@ -90,7 +90,7 @@ def Main():
         logger.Log("filtering complete")
 
     logger.Log("summary production started")
-    summaries = ProduceMetapackagesSummaries(metapackages)
+    summaries = ProduceMetapackagesRepositorySummaries(metapackages)
     logger.Log("summary production complete")
 
     logger.Log("dumping started")

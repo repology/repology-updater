@@ -152,79 +152,89 @@ def FilterMetapackages(metapackages, *filters):
     return filtered_metapackages
 
 
+def FillVersionInfos(packages):
+    versions = set()
+    families = set()
+
+    for package in packages:
+        if not package.ignoreversion:
+            versions.add(package.version)
+        families.add(package.family)
+
+    bestversion = None
+    for version in versions:
+        if bestversion is None or VersionCompare(version, bestversion) > 0:
+            bestversion = version
+
+    for package in packages:
+        result = VersionCompare(package.version, bestversion) if bestversion is not None else 1
+        if result > 0:
+            package.versionclass = PackageVersionClass.ignored
+        elif result == 0:
+            package.versionclass = PackageVersionClass.newest
+        else:
+            package.versionclass = PackageVersionClass.outdated
+
+
 def FillMetapackagesVersionInfos(metapackages):
-    for name, packages in metapackages.items():
-        versions = set()
-        families = set()
-
-        for package in packages:
-            if not package.ignoreversion:
-                versions.add(package.version)
-            families.add(package.family)
-
-        bestversion = None
-        for version in versions:
-            if bestversion is None or VersionCompare(version, bestversion) > 0:
-                bestversion = version
-
-        for package in packages:
-            result = VersionCompare(package.version, bestversion) if bestversion is not None else 1
-            if result > 0:
-                package.versionclass = PackageVersionClass.ignored
-            elif result == 0:
-                package.versionclass = PackageVersionClass.newest
-            else:
-                package.versionclass = PackageVersionClass.outdated
+    for packages in metapackages.values():
+        FillVersionInfos(packages)
 
 
-def ProduceMetapackagesSummaries(metapackages):
-    metasummaries = {}
+def ProduceRepositorySummary(packages):
+    summary = {}
 
-    for name, packages in metapackages.items():
-        metasummaries[name] = {}
+    state_by_repo = {}
+    families = set()
 
-        state_by_repo = {}
-        families = set()
+    for package in packages:
+        families.add(package.family)
 
-        for package in packages:
-            families.add(package.family)
-
-            if package.repo not in state_by_repo:
-                state_by_repo[package.repo] = {
-                    'has_outdated': False,
-                    'bestpackage': None,
-                    'count': 0
-                }
-
-            if package.versionclass == PackageVersionClass.outdated:
-                state_by_repo[package.repo]['has_outdated'] = True,
-
-            if state_by_repo[package.repo]['bestpackage'] is None or VersionCompare(package.version, state_by_repo[package.repo]['bestpackage'].version) > 0:
-                state_by_repo[package.repo]['bestpackage'] = package
-
-            state_by_repo[package.repo]['count'] += 1
-
-        for repo, state in state_by_repo.items():
-            resulting_class = None
-
-            # XXX: lonely ignored package is currently lonely; should it be ignored instead?
-            if state['bestpackage'].versionclass == PackageVersionClass.outdated:
-                resulting_class = RepositoryVersionClass.outdated
-            elif len(families) == 1:
-                resulting_class = RepositoryVersionClass.lonely
-            elif state['bestpackage'].versionclass == PackageVersionClass.newest:
-                if state['has_outdated']:
-                    resulting_class = RepositoryVersionClass.mixed
-                else:
-                    resulting_class = RepositoryVersionClass.newest
-            elif state['bestpackage'].versionclass == PackageVersionClass.ignored:
-                resulting_class = RepositoryVersionClass.ignored
-
-            metasummaries[name][repo] = {
-                'version': state['bestpackage'].version,
-                'bestpackage': state['bestpackage'],
-                'versionclass': resulting_class,
-                'numpackages': state['count']
+        if package.repo not in state_by_repo:
+            state_by_repo[package.repo] = {
+                'has_outdated': False,
+                'bestpackage': None,
+                'count': 0
             }
 
-    return metasummaries
+        if package.versionclass == PackageVersionClass.outdated:
+            state_by_repo[package.repo]['has_outdated'] = True,
+
+        if state_by_repo[package.repo]['bestpackage'] is None or VersionCompare(package.version, state_by_repo[package.repo]['bestpackage'].version) > 0:
+            state_by_repo[package.repo]['bestpackage'] = package
+
+        state_by_repo[package.repo]['count'] += 1
+
+    for repo, state in state_by_repo.items():
+        resulting_class = None
+
+        # XXX: lonely ignored package is currently lonely; should it be ignored instead?
+        if state['bestpackage'].versionclass == PackageVersionClass.outdated:
+            resulting_class = RepositoryVersionClass.outdated
+        elif len(families) == 1:
+            resulting_class = RepositoryVersionClass.lonely
+        elif state['bestpackage'].versionclass == PackageVersionClass.newest:
+            if state['has_outdated']:
+                resulting_class = RepositoryVersionClass.mixed
+            else:
+                resulting_class = RepositoryVersionClass.newest
+        elif state['bestpackage'].versionclass == PackageVersionClass.ignored:
+            resulting_class = RepositoryVersionClass.ignored
+
+        summary[repo] = {
+            'version': state['bestpackage'].version,
+            'bestpackage': state['bestpackage'],
+            'versionclass': resulting_class,
+            'numpackages': state['count']
+        }
+
+    return summary
+
+
+def ProduceMetapackagesRepositorySummaries(metapackages):
+    summaries = {}
+
+    for name, packages in metapackages.items():
+        summaries[name] = ProduceRepositorySummary(packages)
+
+    return summaries
