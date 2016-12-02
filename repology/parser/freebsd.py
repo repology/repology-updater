@@ -56,6 +56,7 @@ class FreeBSDIndexParser():
                 pkg.comment = row[3]
                 pkg.maintainers.append(row[5])
                 pkg.category = row[6].split(' ')[0]
+                pkg.homepage = row[9]
 
                 result.append(pkg)
 
