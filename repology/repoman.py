@@ -36,7 +36,7 @@ class RepositoryManager:
         return os.path.join(self.statedir, repository['name'] + ".state")
 
     def __GetSerializedPath(self, repository):
-        return os.path.join(self.statedir, repository['name'] + ".packages.raw")
+        return os.path.join(self.statedir, repository['name'] + ".packages")
 
     def __GetRepository(self, reponame):
         for repository in REPOSITORIES:
