@@ -26,7 +26,7 @@ from repology.package import Package
 class TestParsers(unittest.TestCase):
     def setUp(self):
         repoman = RepositoryManager("testdata")
-        self.packages = repoman.ParseMulti(reponames=['freebsd'])
+        self.packages = repoman.ParseMulti(reponames=['freebsd', 'gentoo'])
 
     def FindPackage(self, name):
         for package in self.packages:
@@ -37,6 +37,8 @@ class TestParsers(unittest.TestCase):
 
     def test_freebsd(self):
         p = self.FindPackage("kiconvtool")
+        self.assertEqual(p.repo, "freebsd")
+        self.assertEqual(p.family, "freebsd")
         self.assertEqual(p.name, "kiconvtool")
         self.assertEqual(p.version, "0.97")
         self.assertEqual(p.origversion, None)
@@ -45,6 +47,17 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(p.maintainers, ['amdmi3@FreeBSD.org'])
         self.assertEqual(p.homepage, 'http://wiki.freebsd.org/DmitryMarakasov/kiconvtool')
 
+    def test_gentoo(self):
+        p = self.FindPackage("chromium-bsu")
+        self.assertEqual(p.repo, "gentoo")
+        self.assertEqual(p.family, "gentoo")
+        self.assertEqual(p.name, "chromium-bsu")
+        self.assertEqual(p.version, "0.9.15.1")
+        self.assertEqual(p.origversion, None)
+        self.assertEqual(p.category, "games-action")
+        #self.assertEqual(p.comment, "Chromium B.S.U. - an arcade game")
+        self.assertEqual(p.maintainers, ['Gentoo Games Project <games@gentoo.org>'])
+        #self.assertEqual(p.homepage, 'http://chromium-bsu.sourceforge.net/')
 
 if __name__ == '__main__':
     unittest.main()
