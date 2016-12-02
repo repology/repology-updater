@@ -23,7 +23,7 @@ import pickle
 import fcntl
 
 from repology.package import *
-from repology.logger import *
+from repology.logger import NoopLogger
 from repology.repositories import REPOSITORIES
 
 
