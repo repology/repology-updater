@@ -2,7 +2,8 @@ language: python
 sudo: true
 dist: trusty
 python:
-  - "3.4"
+  - 3.4
+  - 3.5
 before_install:
   - pip install requests
   - pip install PyYAML
