@@ -18,5 +18,6 @@ script:
   - make check
   - make test
   - ./repology-update.py --help
-  - ./repology-report.py --help
-  - ./repology-gensite.py --help
+  - ./repology-dump.py --help
+  #- ./repology-report.py --help
+  #- ./repology-gensite.py --help
