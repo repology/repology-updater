@@ -172,7 +172,7 @@ class RepositoryManager:
 
         return packages
 
-    def DeserializeMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
+    def DeserializeMulti(self, reponames=None, logger=NoopLogger()):
         packages = []
 
         for repo in self.__GetRepositories(reponames):
