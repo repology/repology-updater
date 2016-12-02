@@ -25,6 +25,8 @@ class MatchResult:
     ignorepackage = 1
     ignoreversion = 2
     lastrule = 4
+    unignorepackage = 8
+    unignoreversion = 16
 
 
 class PackageTransformer:
@@ -101,8 +103,14 @@ class PackageTransformer:
         if 'ignore' in rule:
             flags |= MatchResult.ignorepackage
 
+        if 'unignore' in rule:
+            flags |= MatchResult.unignorepackage
+
         if 'ignorever' in rule:
             flags |= MatchResult.ignoreversion
+
+        if 'unignorever' in rule:
+            flags |= MatchResult.unignoreversion
 
         if 'last' in rule:
             flags |= MatchResult.lastrule
@@ -142,6 +150,12 @@ class PackageTransformer:
 
             if flags & MatchResult.ignoreversion:
                 package.ignoreversion = True
+
+            if flags & MatchResult.unignorepackage:
+                package.ignore = False
+
+            if flags & MatchResult.unignoreversion:
+                package.ignoreversion = False
 
             if flags & MatchResult.lastrule:
                 break
