@@ -105,6 +105,7 @@ class RepositoryManager:
         logger.Log("saving started")
         with open(tmppath, "wb") as outfile:
             pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
+            pickler.fast = True # deprecated, but I don't see any alternatives
             pickler.dump(len(packages))
             for package in packages:
                 pickler.dump(package)
