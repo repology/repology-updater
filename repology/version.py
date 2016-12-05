@@ -28,14 +28,14 @@ def SplitVersionComponents(c):
 
     number = -1 if number == '' else int(number)
 
+    if pos == end:
+        return number, '', -1
+
     # extract alpha part
     alpha = ''
     while pos < end and not (c[pos] >= '0' and c[pos] <= '9'):
         alpha += c[pos]
         pos += 1
-
-    if alpha == '':
-        return number, '', -1
 
     # extract second numeric part
     extranumber = ''
@@ -43,16 +43,21 @@ def SplitVersionComponents(c):
         extranumber += c[pos]
         pos += 1
 
+    # if we can't parse the whole string, give up: assume
+    # alphanumeric comparison will give better result
+    if pos != end:
+        return -1, c, -1
+
     extranumber = -1 if extranumber == '' else int(extranumber)
 
-    # only take first letter into account (alpha = a, beta = b etc.)
-    alpha = alpha[0]
+    # note that we only take first letter, so "a" == "alpha",
+    # "b" == "beta" etc.
+    alpha = alpha[0].lower()
 
-    # if there are two numeric parts, assume prerelease (alpha/beta/pre/rc)
-    # and create additional triplet
     if number != -1 and extranumber != -1:
         return number, '', -1, -1, alpha, extranumber
 
+    # two numeric parts, create extra triplet
     return number, alpha, extranumber
 
 
