@@ -35,25 +35,26 @@ from repology.filters import *
 def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
-    parser.add_argument('-l', '--logfile', help='path to log file')
-    parser.add_argument('-t', '--stream', action='store_true', help='stream reading mode')
+    parser.add_argument('-l', '--logfile', help='path to log file (log to stderr by default)')
+    parser.add_argument('-m', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
 
-    parser.add_argument('-r', '--repository', action='append', help='specify repository names or tags to process')
-    parser.add_argument('-S', '--no-shadow', action='store_true', help='treat shadow repositories as normal')
+    filters_grp = parser.add_argument_group('Filters')
+    filters_grp.add_argument('-S', '--no-shadow', action='store_true', help='treat shadow repositories as normal')
+    filters_grp.add_argument(      '--maintainer', help='filter by maintainer')
+    filters_grp.add_argument(      '--category', help='filter by category')
+    filters_grp.add_argument(      '--less-repos', help='filter by number of repos')
+    filters_grp.add_argument(      '--more-repos', help='filter by number of repos')
+    filters_grp.add_argument(      '--in-repository', help='filter by presence in repository')
+    filters_grp.add_argument(      '--not-in-repository', help='filter by absence in repository')
+    filters_grp.add_argument(      '--outdated-in-repository', help='filter by outdatedness in repository')
 
-    parser.add_argument('-m', '--maintainer', help='filter by maintainer')
-    parser.add_argument('-c', '--category', help='filter by category')
-    parser.add_argument('-n', '--less-repos', help='filter by number of repos')
-    parser.add_argument('-N', '--more-repos', help='filter by number of repos')
-    parser.add_argument('-i', '--in-repository', help='filter by presence in repository')
-    parser.add_argument('-x', '--not-in-repository', help='filter by absence in repository')
-    parser.add_argument('-O', '--outdated-in-repository', help='filter by outdatedness in repository')
+    parser.add_argument('-d', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
 
-    parser.add_argument('-d', '--dump', default='packages', help='dump mode (packages|summaries)')
+    parser.add_argument('reponames', metavar='repo|tag', nargs='+', help='repository or tag name to process')
     options = parser.parse_args()
 
-    if not options.repository:
-        options.repository = ["all"]
+    if not options.reponames:
+        options.reponames = ["all"]
 
     logger = StderrLogger()
     if options.logfile:
@@ -97,7 +98,7 @@ def Main():
         if options.dump == 'summaries':
             print(packages[0].effname)
             summary = ProduceRepositorySummary(packages)
-            for reponame in repoman.GetNames(options.repository):
+            for reponame in repoman.GetNames(options.reponames):
                 if reponame in summary:
                     print("  {}: {} ({}) *{}".format(
                         reponame,
@@ -106,12 +107,12 @@ def Main():
                         summary[reponame]['numpackages'],
                     ))
 
-    if options.stream:
+    if options.mode == 'stream':
         logger.Log("dumping...")
-        repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.repository)
+        repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
     else:
         logger.Log("loading packages...")
-        all_packages = repoman.DeserializeMulti(reponames=options.repository, logger=logger)
+        all_packages = repoman.DeserializeMulti(reponames=options.reponames, logger=logger)
         logger.Log("merging packages...")
         metapackages = MergeMetapackages(all_packages)
         logger.Log("dumping...")

@@ -30,20 +30,22 @@ from repology.logger import *
 def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
-    parser.add_argument('-l', '--logfile', help='path to log file')
+    parser.add_argument('-l', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
 
-    parser.add_argument('-f', '--fetch', action='count', help='allow fetching repository data (twice to also update)')
-    parser.add_argument('-p', '--parse', action='store_true', help='parse, process and serialize repository data')
+    actions_grp = parser.add_argument_group('Actions')
+    actions_grp.add_argument('-f', '--fetch', action='count', help='allow fetching repository data (twice to also update)')
+    actions_grp.add_argument('-p', '--parse', action='store_true', help='parse, process and serialize repository data')
 
     # XXX: this is dangerous as long as ignored packages are removed from dumps
-    parser.add_argument('-P', '--reprocess', action='store_true', help='reprocess repository data')
+    actions_grp.add_argument('-P', '--reprocess', action='store_true', help='reprocess repository data')
+    actions_grp.add_argument('-u', '--unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
-    parser.add_argument('-r', '--repository', action='append', help='specify repository names or tags to process')
+    parser.add_argument('reponames', metavar='repo|tag', nargs='+', help='repository or tag name to process')
     options = parser.parse_args()
 
-    if not options.repository:
-        options.repository = ["all"]
+    if not options.reponames:
+        options.reponames = ["all"]
 
     logger = StderrLogger()
     if options.logfile:
@@ -54,7 +56,7 @@ def Main():
 
     total_count = 0
     success_count = 0
-    for reponame in repoman.GetNames(reponames=options.repository):
+    for reponame in repoman.GetNames(reponames=options.reponames):
         repo_logger = logger.GetPrefixed(reponame + ": ")
         repo_logger.Log("started")
         try:
@@ -81,7 +83,7 @@ def Main():
 
     logger.Log("{}/{} repositories processed successfully".format(success_count, total_count))
 
-    if options.parse or options.reprocess:
+    if (options.parse or options.reprocess) and (options.unmatched_rules):
         unmatched = transformer.GetUnmatchedRules()
         if len(unmatched):
             wlogger = logger.GetPrefixed("WARNING: ")
