@@ -122,18 +122,6 @@ def MergeMetapackages(*packagesets, enable_shadows=True):
                 metapackages[package.effname] = []
             metapackages[package.effname].append(package)
 
-    # process shadows
-    # XXX: move this below, into summary processing
-    def CheckShadows(packages):
-        nonshadow = False
-        for package in packages:
-            if not package.shadow:
-                return True
-        return False
-
-    if enable_shadows:
-        metapackages = { metaname: packages for metaname, packages in metapackages.items() if CheckShadows(packages) }
-
     return metapackages
 
 
