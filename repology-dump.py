@@ -74,8 +74,7 @@ def Main():
     if options.outdated_in_repository:
         filters.append(OutdatedInRepoFilter(options.not_in_repository))
 
-    # Process package data
-    repoman = RepositoryManager(options.statedir, enable_shadow=not options.no_shadow)
+    repoman = RepositoryManager(options.statedir)
 
     def PackageProcessor(packages):
         name = packages[0].effname

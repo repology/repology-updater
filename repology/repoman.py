@@ -28,9 +28,8 @@ from repology.repositories import REPOSITORIES
 
 
 class RepositoryManager:
-    def __init__(self, statedir, enable_shadow=True):
+    def __init__(self, statedir):
         self.statedir = statedir
-        self.enable_shadow = enable_shadow
 
     def __GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
