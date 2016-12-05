@@ -104,13 +104,21 @@ class RepositoryManager:
         tmppath = path + ".tmp"
 
         logger.Log("saving started")
-        pickle.dump(packages, open(tmppath, "wb"))
+        with open(tmppath, "wb") as outfile:
+            pickler = pickle.Pickler(outfile)
+            pickler.dump(len(packages))
+            for package in packages:
+                pickler.dump(package)
         os.rename(tmppath, path)
         logger.Log("saving complete, {} packages".format(len(packages)))
 
     def __Deserialize(self, path, repository, logger):
+        packages = []
         logger.Log("loading started")
-        packages = pickle.load(open(path, "rb"))
+        with open(path, "rb") as infile:
+            unpickler = pickle.Unpickler(infile)
+            numpackages = unpickler.load()
+            packages = [ unpickler.load() for num in range(0, numpackages) ]
         logger.Log("loading complete, {} packages".format(len(packages)))
 
         return packages
