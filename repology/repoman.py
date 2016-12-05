@@ -123,6 +123,29 @@ class RepositoryManager:
 
         return packages
 
+    class __StreamDeserializer:
+        def __init__(self, path):
+            self.unpickler = pickle.Unpickler(open(path, "rb"))
+            self.count = self.unpickler.load()
+            self.current = None
+
+            self.Get()
+
+        def Peek(self):
+            return self.current
+
+        def EOF(self):
+            return self.current is None
+
+        def Get(self):
+            current = self.current
+            if self.count == 0:
+                self.current = None
+            else:
+                self.current = self.unpickler.load()
+                self.count -= 1
+            return current
+
     # Helpers to retrieve data on repositories
     def GetNames(self, reponames=None):
         return [repo['name'] for repo in self.__GetRepositories(reponames)]
@@ -189,3 +212,30 @@ class RepositoryManager:
             packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
 
         return packages
+
+    def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
+        deserializers = []
+        for repo in self.__GetRepositories(reponames):
+            deserializers.append(self.__StreamDeserializer(self.__GetSerializedPath(repo)))
+
+        while True:
+            thiskey = None
+
+            # find lowest key (effname)
+            for ds in deserializers:
+                thiskey = ds.Peek().effname if thiskey is None else min(ds.Peek().effname, thiskey)
+
+            # fetch all packages with given key from all deserializers
+            packages = []
+            for ds in deserializers:
+                while not ds.EOF() and ds.Peek().effname == thiskey:
+                    packages.append(ds.Get())
+
+            processor(packages)
+
+            # remove EOFed repos
+            deserializers = [ ds for ds in deserializers if not ds.EOF() ]
+
+            # exit when no more deserializers have left
+            if not deserializers:
+                break
