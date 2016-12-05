@@ -104,7 +104,7 @@ class RepositoryManager:
 
         logger.Log("saving started")
         with open(tmppath, "wb") as outfile:
-            pickler = pickle.Pickler(outfile)
+            pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
             pickler.dump(len(packages))
             for package in packages:
                 pickler.dump(package)
