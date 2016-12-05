@@ -48,7 +48,7 @@ def Main():
     parser.add_argument('-x', '--not-in-repository', help='filter by absence in repository')
     parser.add_argument('-O', '--outdated-in-repository', help='filter by outdatedness in repository')
 
-    parser.add_argument('-d', '--dump', help='dump mode (packages|summaries)')
+    parser.add_argument('-d', '--dump', default='packages', help='dump mode (packages|summaries)')
     options = parser.parse_args()
 
     if not options.repository:
