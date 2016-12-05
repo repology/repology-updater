@@ -36,6 +36,7 @@ def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
     parser.add_argument('-l', '--logfile', help='path to log file')
+    parser.add_argument('-t', '--stream', action='store_true', help='stream reading mode')
 
     parser.add_argument('-r', '--repository', action='append', help='specify repository names or tags to process')
     parser.add_argument('-S', '--no-shadow', action='store_true', help='treat shadow repositories as normal')
@@ -75,30 +76,17 @@ def Main():
 
     # Process package data
     repoman = RepositoryManager(options.statedir, enable_shadow=not options.no_shadow)
-    logger.Log("loading packages started")
-    packages = repoman.DeserializeMulti(reponames=options.repository, logger=logger)
-    logger.Log("loading packages complete")
-    logger.Log("merging packages started")
-    metapackages = MergeMetapackages(packages)
-    logger.Log("merging packages complete")
-    logger.Log("package versions processing started")
-    FillMetapackagesVersionInfos(metapackages)
-    logger.Log("package versions processing complete")
-    if filters:
-        logger.Log("filtering started")
-        metapackages = FilterMetapackages(metapackages, *filters)
-        logger.Log("filtering complete")
 
-    logger.Log("summary production started")
-    summaries = ProduceMetapackagesRepositorySummaries(metapackages)
-    logger.Log("summary production complete")
+    def PackageProcessor(packages):
+        name = packages[0].effname
+        FillVersionInfos(packages)
 
-    logger.Log("dumping started")
-    # Produce output
-    for metaname in sorted(summaries.keys()):
-        print("{}".format(metaname))
+        if not CheckFilters(packages, *filters):
+            return
+
         if options.dump == 'packages':
-            for package in metapackages[metaname]:
+            print(packages[0].effname)
+            for package in packages:
                 print("  {}: {}-{} ({})".format(
                     package.repo,
                     package.name,
@@ -106,16 +94,28 @@ def Main():
                     PackageVersionClass.ToChar(package.versionclass),
                 ))
         if options.dump == 'summaries':
+            print(packages[0].effname)
+            summary = ProduceRepositorySummary(packages)
             for reponame in repoman.GetNames(options.repository):
-                if reponame in summaries[metaname]:
+                if reponame in summary:
                     print("  {}: {} ({}) *{}".format(
                         reponame,
-                        summaries[metaname][reponame]['version'],
-                        RepositoryVersionClass.ToChar(summaries[metaname][reponame]['versionclass']),
-                        summaries[metaname][reponame]['numpackages'],
+                        summary[reponame]['version'],
+                        RepositoryVersionClass.ToChar(summary[reponame]['versionclass']),
+                        summary[reponame]['numpackages'],
                     ))
 
-    logger.Log("dumping complete")
+    if options.stream:
+        logger.Log("dumping...")
+        repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.repository)
+    else:
+        logger.Log("loading packages...")
+        all_packages = repoman.DeserializeMulti(reponames=options.repository, logger=logger)
+        logger.Log("merging packages...")
+        metapackages = MergeMetapackages(all_packages)
+        logger.Log("dumping...")
+        for metaname, packages in sorted(metapackages.items()):
+            PackageProcessor(packages)
 
     return 0
 
