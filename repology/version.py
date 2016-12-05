@@ -15,27 +15,35 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
-
 
 def SplitVersionComponents(c):
-    # split into number-alpha-number, as in 123a1
-    # each part is optional
-    m = re.match('([0-9]*)(?:([^0-9]+)([0-9]*))?$', c.lower())
+    pos = 0
+    end = len(c)
 
-    # version doesn't match pattern, fallback to alphanumeric comparison
-    if not m:
-        return -1, c, -1
+    # extract numeric part
+    number = ''
+    while pos < end and c[pos] >= '0' and c[pos] <= '9':
+        number += c[pos]
+        pos += 1
 
-    number = -1 if m.group(1) == '' else int(m.group(1))
+    number = -1 if number == '' else int(number)
 
-    alpha = m.group(2)
+    # extract alpha part
+    alpha = ''
+    while pos < end and not (c[pos] >= '0' and c[pos] <= '9'):
+        alpha += c[pos]
+        pos += 1
 
-    # no alpha part, just number
-    if alpha is None:
+    if alpha == '':
         return number, '', -1
 
-    extranumber = -1 if m.group(3) == '' else int(m.group(3))
+    # extract second numeric part
+    extranumber = ''
+    while pos < end and c[pos] >= '0' and c[pos] <= '9':
+        extranumber += c[pos]
+        pos += 1
+
+    extranumber = -1 if extranumber == '' else int(extranumber)
 
     # only take first letter into account (alpha = a, beta = b etc.)
     alpha = alpha[0]
