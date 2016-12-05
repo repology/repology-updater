@@ -28,9 +28,8 @@ from repology.repositories import REPOSITORIES
 
 
 class RepositoryManager:
-    def __init__(self, statedir, enable_shadow=True):
+    def __init__(self, statedir):
         self.statedir = statedir
-        self.enable_shadow = enable_shadow
 
     def __GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
@@ -90,6 +89,8 @@ class RepositoryManager:
             if transformer:
                 transformer.Process(package)
 
+        packages = sorted(packages, key=lambda package: package.effname)
+
         # XXX: in future, ignored packages will not be dropped here, but
         # ignored in summary and version calcualtions, but shown in
         # package listing
@@ -102,16 +103,48 @@ class RepositoryManager:
         tmppath = path + ".tmp"
 
         logger.Log("saving started")
-        pickle.dump(packages, open(tmppath, "wb"))
+        with open(tmppath, "wb") as outfile:
+            pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
+            pickler.fast = True # deprecated, but I don't see any alternatives
+            pickler.dump(len(packages))
+            for package in packages:
+                pickler.dump(package)
         os.rename(tmppath, path)
         logger.Log("saving complete, {} packages".format(len(packages)))
 
     def __Deserialize(self, path, repository, logger):
+        packages = []
         logger.Log("loading started")
-        packages = pickle.load(open(path, "rb"))
+        with open(path, "rb") as infile:
+            unpickler = pickle.Unpickler(infile)
+            numpackages = unpickler.load()
+            packages = [ unpickler.load() for num in range(0, numpackages) ]
         logger.Log("loading complete, {} packages".format(len(packages)))
 
         return packages
+
+    class __StreamDeserializer:
+        def __init__(self, path):
+            self.unpickler = pickle.Unpickler(open(path, "rb"))
+            self.count = self.unpickler.load()
+            self.current = None
+
+            self.Get()
+
+        def Peek(self):
+            return self.current
+
+        def EOF(self):
+            return self.current is None
+
+        def Get(self):
+            current = self.current
+            if self.count == 0:
+                self.current = None
+            else:
+                self.current = self.unpickler.load()
+                self.count -= 1
+            return current
 
     # Helpers to retrieve data on repositories
     def GetNames(self, reponames=None):
@@ -179,3 +212,25 @@ class RepositoryManager:
             packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
 
         return packages
+
+    def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
+        deserializers = []
+        for repo in self.__GetRepositories(reponames):
+            deserializers.append(self.__StreamDeserializer(self.__GetSerializedPath(repo)))
+
+        while deserializers:
+            # find lowest key (effname)
+            thiskey = deserializers[0].Peek().effname
+            for ds in deserializers[1:]:
+                thiskey = min(thiskey, ds.Peek().effname)
+
+            # fetch all packages with given key from all deserializers
+            packages = []
+            for ds in deserializers:
+                while not ds.EOF() and ds.Peek().effname == thiskey:
+                    packages.append(ds.Get())
+
+            processor(packages)
+
+            # remove EOFed repos
+            deserializers = [ ds for ds in deserializers if not ds.EOF() ]

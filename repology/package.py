@@ -113,7 +113,7 @@ class Package:
         return {slot: getattr(self, slot) for slot in self.__slots__}
 
 
-def MergeMetapackages(*packagesets, enable_shadows=True):
+def MergeMetapackages(*packagesets):
     metapackages = {}
 
     for packageset in packagesets:
@@ -122,19 +122,15 @@ def MergeMetapackages(*packagesets, enable_shadows=True):
                 metapackages[package.effname] = []
             metapackages[package.effname].append(package)
 
-    # process shadows
-    # XXX: move this below, into summary processing
-    def CheckShadows(packages):
-        nonshadow = False
-        for package in packages:
-            if not package.shadow:
-                return True
-        return False
-
-    if enable_shadows:
-        metapackages = { metaname: packages for metaname, packages in metapackages.items() if CheckShadows(packages) }
-
     return metapackages
+
+
+def CheckFilters(packages, *filters):
+    for filt in filters:
+        if not filt.Check(packages):
+            return False
+
+    return True
 
 
 def FilterMetapackages(metapackages, *filters):

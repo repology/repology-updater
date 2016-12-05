@@ -15,36 +15,49 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
-
 
 def SplitVersionComponents(c):
-    # split into number-alpha-number, as in 123a1
-    # each part is optional
-    m = re.match('([0-9]*)(?:([^0-9]+)([0-9]*))?$', c.lower())
+    pos = 0
+    end = len(c)
 
-    # version doesn't match pattern, fallback to alphanumeric comparison
-    if not m:
-        return -1, c, -1
+    # extract numeric part
+    number = ''
+    while pos < end and c[pos] >= '0' and c[pos] <= '9':
+        number += c[pos]
+        pos += 1
 
-    number = -1 if m.group(1) == '' else int(m.group(1))
+    number = -1 if number == '' else int(number)
 
-    alpha = m.group(2)
-
-    # no alpha part, just number
-    if alpha is None:
+    if pos == end:
         return number, '', -1
 
-    extranumber = -1 if m.group(3) == '' else int(m.group(3))
+    # extract alpha part
+    alpha = ''
+    while pos < end and not (c[pos] >= '0' and c[pos] <= '9'):
+        alpha += c[pos]
+        pos += 1
 
-    # only take first letter into account (alpha = a, beta = b etc.)
-    alpha = alpha[0]
+    # extract second numeric part
+    extranumber = ''
+    while pos < end and c[pos] >= '0' and c[pos] <= '9':
+        extranumber += c[pos]
+        pos += 1
 
-    # if there are two numeric parts, assume prerelease (alpha/beta/pre/rc)
-    # and create additional triplet
+    # if we can't parse the whole string, give up: assume
+    # alphanumeric comparison will give better result
+    if pos != end:
+        return -1, c, -1
+
+    extranumber = -1 if extranumber == '' else int(extranumber)
+
+    # note that we only take first letter, so "a" == "alpha",
+    # "b" == "beta" etc.
+    alpha = alpha[0].lower()
+
     if number != -1 and extranumber != -1:
         return number, '', -1, -1, alpha, extranumber
 
+    # two numeric parts, create extra triplet
     return number, alpha, extranumber
 
 
