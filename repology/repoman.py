@@ -90,6 +90,8 @@ class RepositoryManager:
             if transformer:
                 transformer.Process(package)
 
+        packages = sorted(packages, key=lambda package: package.effname)
+
         # XXX: in future, ignored packages will not be dropped here, but
         # ignored in summary and version calcualtions, but shown in
         # package listing
