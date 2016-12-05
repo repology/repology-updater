@@ -73,6 +73,8 @@ def Main():
         filters.append(NotInRepoFilter(options.not_in_repository))
     if options.outdated_in_repository:
         filters.append(OutdatedInRepoFilter(options.not_in_repository))
+    if not options.no_shadow:
+        filters.append(ShadowFilter())
 
     repoman = RepositoryManager(options.statedir)
 

@@ -137,6 +137,14 @@ def MergeMetapackages(*packagesets, enable_shadows=True):
     return metapackages
 
 
+def CheckFilters(packages, *filters):
+    for filt in filters:
+        if not filt.Check(packages):
+            return False
+
+    return True
+
+
 def FilterMetapackages(metapackages, *filters):
     filtered_metapackages = {}
 

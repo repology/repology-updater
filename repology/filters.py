@@ -114,3 +114,15 @@ class OutdatedInRepoFilter:
                 return True
 
         return False
+
+
+class ShadowFilter:
+    def __init__(self):
+        pass
+
+    def Check(self, packages):
+        for package in packages:
+            if not package.shadow:
+                return True
+
+        return False
