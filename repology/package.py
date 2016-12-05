@@ -113,7 +113,7 @@ class Package:
         return {slot: getattr(self, slot) for slot in self.__slots__}
 
 
-def MergeMetapackages(*packagesets, enable_shadows=True):
+def MergeMetapackages(*packagesets):
     metapackages = {}
 
     for packageset in packagesets:
