@@ -18,7 +18,6 @@
 import MySQLdb
 import sys
 
-from repology.logger import NoopLogger
 from repology.package import Package
 
 
@@ -57,8 +56,10 @@ class Database:
         ) character set='utf8'""")
 #            key(effname)
 
-    def AddPackages(self, packages, logger=NoopLogger()):
-        logger.Log("saving to database started")
+    def Clear(self):
+        self.cursor.execute("""delete from packages""")
+
+    def AddPackages(self, packages):
         self.cursor.executemany("""insert into packages(
             repo,
             family,
@@ -130,13 +131,11 @@ class Database:
                 ) for package in packages
             ]
         )
-        logger.Log("saving to database complete, committing")
-        self.db.commit()
-        logger.Log("saving to database complete, {} packages".format(self.GetNumPackages()))
 
+    def Commit(self):
+        self.db.commit()
 
     def GetNumPackages(self):
-        # slow with mysql for some reason
-        #self.cursor.execute("""select count(*) from packages""");
-        self.cursor.execute("""select max(id) from packages""");
+        # XXX: slow
+        self.cursor.execute("""select count(*) from packages""");
         return self.cursor.fetchone()[0]

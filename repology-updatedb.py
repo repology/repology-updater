@@ -36,6 +36,8 @@ def Main():
     parser.add_argument('-l', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-m', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
 
+    parser.add_argument('-i', '--init', action='store_true', help='(re)init the database by (re)creating all tables')
+
     parser.add_argument('-S', '--no-shadow', action='store_true', help='treat shadow repositories as normal')
 
     parser.add_argument('reponames', metavar='repo|tag', nargs='*', help='repository or tag name to process')
@@ -49,12 +51,13 @@ def Main():
         logger = FileLogger(options.logfile)
 
     repoman = RepositoryManager(options.statedir)
-
-    logger.Log("initializing database...")
-    database = Database(host="localhost", db="repology", user="repology", passwd="repology")
-    database.CreateTables()
-
     filters = [] if options.no_shadow else [ShadowFilter()]
+
+    logger.Log("connecting to database...")
+    database = Database(host="localhost", db="repology", user="repology", passwd="repology")
+    if options.init:
+        logger.Log("(re)initializing the database...")
+        database.CreateTables()
 
     package_queue = []
 
@@ -68,19 +71,22 @@ def Main():
             package_queue = []
 
     if options.mode == 'stream':
-        logger.Log("uploading to database...")
+        logger.Log("pushing packages to database...")
         repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
     else:
         logger.Log("loading packages...")
         all_packages = repoman.DeserializeMulti(reponames=options.reponames, logger=logger)
         logger.Log("merging packages...")
         metapackages = MergeMetapackages(all_packages)
-        logger.Log("uploading to database...")
+        logger.Log("pushing packages to database...")
         for metaname, packages in sorted(metapackages.items()):
             PackageProcessor(packages)
 
     # process what's left in the queue
     database.AddPackages(package_queue)
+
+    logger.Log("committing changes...")
+    database.Commit()
 
     return 0
 
