@@ -27,41 +27,66 @@ class Database:
         self.cursor = self.db.cursor()
 
     def CreateSchema(self):
-        self.cursor.execute("""drop table if exists packages cascade""")
+        self.cursor.execute("""
+            DROP TABLE IF EXISTS packages CASCADE
+        """)
 
-        self.cursor.execute("""create table packages (
-            id serial not null primary key,
+        self.cursor.execute("""
+            CREATE TABLE packages (
+                id serial not null primary key,
 
-            repo varchar(255) not null,
-            family varchar(255) not null,
+                repo varchar(255) not null,
+                family varchar(255) not null,
 
-            name varchar(255) not null,
-            effname varchar(255) not null,
+                name varchar(255) not null,
+                effname varchar(255) not null,
 
-            version varchar(255) not null,
-            origversion varchar(255),
-            effversion varchar(255),
-            versionclass smallint,
+                version varchar(255) not null,
+                origversion varchar(255),
+                effversion varchar(255),
+                versionclass smallint,
 
-            maintainers varchar(1024),
-            category varchar(255),
-            comment varchar(2048),
-            homepage varchar(1024),
-            licenses varchar(1024),
-            downloads varchar(1024),
+                maintainers varchar(1024)[],
+                category varchar(255),
+                comment text,
+                homepage varchar(1024),
+                licenses varchar(1024)[],
+                downloads varchar(1024)[],
 
-            ignorepackage bool not null,
-            shadow bool not null,
-            ignoreversion bool not null
-        )""")
+                ignorepackage bool not null,
+                shadow bool not null,
+                ignoreversion bool not null
+            )
+        """)
 
-        self.cursor.execute("""create index on packages(effname)""")
+        self.cursor.execute("""
+            CREATE INDEX ON packages(effname)
+        """)
+
+        self.cursor.execute("""
+            CREATE MATERIALIZED VIEW maintainer_package_counts AS
+                SELECT
+                    unnest(maintainers) AS maintainer,
+                    count(1) AS num_packages,
+                    count(DISTINCT effname) AS num_metapackages,
+                    count(nullif(versionclass = 1, false)) AS num_newest,
+                    count(nullif(versionclass = 2, false)) AS num_outdated,
+                    count(nullif(versionclass = 3, false)) AS num_ignored
+                FROM packages
+                GROUP BY maintainer
+                ORDER BY maintainer
+            WITH DATA
+        """)
+
+        self.cursor.execute("""
+            CREATE UNIQUE INDEX ON maintainer_package_counts(maintainer)
+        """)
 
     def Clear(self):
-        self.cursor.execute("""delete from packages""")
+        self.cursor.execute("""DELETE FROM packages""")
 
     def AddPackages(self, packages):
-        self.cursor.executemany("""insert into packages(
+        self.cursor.executemany("""INSERT INTO packages(
             repo,
             family,
 
@@ -83,7 +108,7 @@ class Database:
             ignorepackage,
             shadow,
             ignoreversion
-        ) values (
+        ) VALUES (
             %s,
             %s,
 
@@ -119,12 +144,12 @@ class Database:
                     package.effversion,
                     package.versionclass,
 
-                    ' '.join(package.maintainers),
+                    package.maintainers,
                     package.category,
                     package.comment,
                     package.homepage,
-                    ' '.join(package.licenses),
-                    ' '.join(package.downloads),
+                    package.licenses,
+                    package.downloads,
 
                     package.ignore,
                     package.shadow,
@@ -133,13 +158,16 @@ class Database:
             ]
         )
 
+    def UpdateViews(self):
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_package_counts""");
+
     def Commit(self):
         self.db.commit()
 
     def GetNumPackages(self):
-        self.cursor.execute("""select count(*) from packages""");
+        self.cursor.execute("""SELECT count(*) FROM packages""");
         return self.cursor.fetchone()[0]
 
     def GetNumMetapackages(self):
-        self.cursor.execute("""select count(*) from (select distinct effname from packages) as temp""");
+        self.cursor.execute("""SELECT count(*) FROM (SELECT DISTINCT effname FROM packages) AS temp""");
         return self.cursor.fetchone()[0]

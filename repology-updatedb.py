@@ -59,6 +59,7 @@ def Main():
     if options.init:
         logger.Log("(re)initializing the database...")
         database.CreateSchema()
+    database.Clear()
 
     package_queue = []
 
@@ -85,6 +86,9 @@ def Main():
 
     # process what's left in the queue
     database.AddPackages(package_queue)
+
+    logger.Log("updating views...")
+    database.UpdateViews()
 
     logger.Log("committing changes...")
     database.Commit()
