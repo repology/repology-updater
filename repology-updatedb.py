@@ -35,6 +35,7 @@ def Main():
     parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
     parser.add_argument('-l', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-m', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
+    parser.add_argument('-d', '--dsn', default='dbname=repology user=repology password=repology', help='database connection params')
 
     parser.add_argument('-i', '--init', action='store_true', help='(re)init the database by (re)creating all tables')
 
@@ -54,10 +55,10 @@ def Main():
     filters = [] if options.no_shadow else [ShadowFilter()]
 
     logger.Log("connecting to database...")
-    database = Database(host="localhost", db="repology", user="repology", passwd="repology")
+    database = Database(options.dsn)
     if options.init:
         logger.Log("(re)initializing the database...")
-        database.CreateTables()
+        database.CreateSchema()
 
     package_queue = []
 

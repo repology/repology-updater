@@ -15,22 +15,22 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import MySQLdb
+import psycopg2
 import sys
 
 from repology.package import Package
 
 
 class Database:
-    def __init__(self, host, db, user='', passwd=''):
-        self.db = MySQLdb.connect(host=host, db=db, user=user, passwd=passwd, use_unicode=True, charset="utf8")
+    def __init__(self, dsn):
+        self.db = psycopg2.connect(dsn)
         self.cursor = self.db.cursor()
 
-    def CreateTables(self):
-        self.cursor.execute("""drop table if exists packages""")
+    def CreateSchema(self):
+        self.cursor.execute("""drop table if exists packages cascade""")
 
         self.cursor.execute("""create table packages (
-            id integer not null primary key auto_increment,
+            id serial not null primary key,
 
             repo varchar(255) not null,
             family varchar(255) not null,
@@ -41,7 +41,7 @@ class Database:
             version varchar(255) not null,
             origversion varchar(255),
             effversion varchar(255),
-            versionclass tinyint,
+            versionclass smallint,
 
             maintainers varchar(1024),
             category varchar(255),
@@ -53,8 +53,9 @@ class Database:
             ignorepackage bool not null,
             shadow bool not null,
             ignoreversion bool not null
-        ) character set='utf8'""")
-#            key(effname)
+        )""")
+
+        self.cursor.execute("""create index on packages(effname)""")
 
     def Clear(self):
         self.cursor.execute("""delete from packages""")
@@ -136,6 +137,9 @@ class Database:
         self.db.commit()
 
     def GetNumPackages(self):
-        # XXX: slow
         self.cursor.execute("""select count(*) from packages""");
+        return self.cursor.fetchone()[0]
+
+    def GetNumMetapackages(self):
+        self.cursor.execute("""select count(*) from (select distinct effname from packages) as temp""");
         return self.cursor.fetchone()[0]
