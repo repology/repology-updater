@@ -4,13 +4,13 @@ CFLAGS+=	-Wall -Wextra
 CPPFLAGS+=	`pkg-config --cflags rpm`
 LDFLAGS+=	`pkg-config --libs rpm`
 
-all: cutils/rpmcat
+all: helpers/rpmcat/rpmcat
 
-cutils/rpmcat: cutils/rpmcat.c
-	${CC} cutils/rpmcat.c -o cutils/rpmcat ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}
+helpers/rpmcat/rpmcat: helpers/rpmcat/rpmcat.c
+	${CC} helpers/rpmcat/rpmcat.c -o helpers/rpmcat/rpmcat ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}
 
 clean:
-	rm cutils/rpmcat
+	rm helpers/rpmcat/rpmcat
 
 test::
 	python3 -m unittest discover
