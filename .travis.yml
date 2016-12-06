@@ -9,6 +9,7 @@ before_install:
   - pip install PyYAML
   - pip install Jinja2
   - pip install coveralls
+  - pip install mysqlclient
   - gem install kwalify
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
@@ -19,6 +20,7 @@ script:
   - make check
   - coverage run --source=repology -m unittest discover
   - ./repology-update.py --help
+  - ./repology-updatedb.py --help
   - ./repology-dump.py --help
   #- ./repology-report.py --help
   #- ./repology-gensite.py --help
