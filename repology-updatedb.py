@@ -56,9 +56,16 @@ def Main():
 
     filters = [] if options.no_shadow else [ShadowFilter()]
 
+    package_queue = []
+
     def PackageProcessor(packages):
+        nonlocal package_queue
         FillVersionInfos(packages)
-        database.AddPackages(packages)
+        package_queue.extend(packages)
+
+        if len(package_queue) >= 1000:
+            database.AddPackages(package_queue)
+            package_queue = []
 
     if options.mode == 'stream':
         logger.Log("uploading to database...")
@@ -71,6 +78,9 @@ def Main():
         logger.Log("uploading to database...")
         for metaname, packages in sorted(metapackages.items()):
             PackageProcessor(packages)
+
+    # process what's left in the queue
+    database.AddPackages(package_queue)
 
     return 0
 
