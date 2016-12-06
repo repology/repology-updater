@@ -41,7 +41,7 @@ def Main():
     actions_grp.add_argument('-P', '--reprocess', action='store_true', help='reprocess repository data')
     actions_grp.add_argument('-u', '--unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
-    parser.add_argument('reponames', metavar='repo|tag', nargs='+', help='repository or tag name to process')
+    parser.add_argument('reponames', metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
 
     if not options.reponames:

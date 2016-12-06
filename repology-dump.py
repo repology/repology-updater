@@ -50,7 +50,7 @@ def Main():
 
     parser.add_argument('-d', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
 
-    parser.add_argument('reponames', metavar='repo|tag', nargs='+', help='repository or tag name to process')
+    parser.add_argument('reponames', metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
 
     if not options.reponames:
