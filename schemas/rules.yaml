@@ -53,3 +53,4 @@ sequence:
               - pypi
               - sisyphus
               - slackbuilds
+              - yacp
