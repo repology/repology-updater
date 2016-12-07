@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import csv
+import sys
 
 from ..util import SplitPackageNameVersion
 from ..package import Package
@@ -46,19 +46,23 @@ class FreeBSDIndexParser():
     def Parse(self, path):
         result = []
 
-        with open(path) as file:
-            reader = csv.reader(file, delimiter='|')
-            for row in reader:
+        with open(path, encoding='utf-8') as indexfile:
+            for line in indexfile:
+                fields = line.strip().split('|')
+                if len(fields) != 13:
+                    print("WARNING: package {} skipped, incorrect number of fields in INDEX".format(fields[0]), file=sys.stderr)
+                    continue
+
                 pkg = Package()
 
-                pkg.name, version = SplitPackageNameVersion(row[0])
+                pkg.name, version = SplitPackageNameVersion(fields[0])
                 pkg.version, pkg.origversion = SanitizeVersion(version)
-                pkg.comment = row[3]
-                pkg.maintainers.append(row[5])
-                pkg.category = row[6].split(' ')[0]
+                pkg.comment = fields[3]
+                pkg.maintainers.append(fields[5])
+                pkg.category = fields[6].split(' ')[0]
 
-                if row[9]:
-                    pkg.homepage = row[9]
+                if fields[9]:
+                    pkg.homepage = fields[9]
 
                 result.append(pkg)
 

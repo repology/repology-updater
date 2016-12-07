@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import csv
+import sys
 
 from ..util import SplitPackageNameVersion
 from ..package import Package
@@ -42,24 +42,26 @@ class PkgsrcIndexParser():
     def Parse(self, path):
         result = []
 
-        csv.field_size_limit(1024*1024)
+        with open(path, encoding='utf-8') as indexfile:
+            for line in indexfile:
+                fields = line.strip().split('|')
+                if len(fields) != 12:
+                    print("WARNING: package {} skipped, incorrect number of fields in INDEX".format(fields[0]), file=sys.stderr)
+                    continue
 
-        with open(path, encoding='utf-8') as file:
-            reader = csv.reader(file, delimiter='|')
-            for row in reader:
                 pkg = Package()
 
-                pkg.name, version = SplitPackageNameVersion(row[0])
+                pkg.name, version = SplitPackageNameVersion(fields[0])
                 pkg.version, pkg.origversion = SanitizeVersion(version)
-                pkg.comment = row[3]
-                if row[11]:
-                    pkg.homepage = row[11]
+                pkg.comment = fields[3]
+                if fields[11]:
+                    pkg.homepage = fields[11]
 
                 # sometimes use OWNER variable in which case there's no MAINTAINER
                 # OWNER doesn't get to INDEX
-                if row[5]:
-                    pkg.maintainers.append(row[5])
-                pkg.category = row[6].split(' ')[0]
+                if fields[5]:
+                    pkg.maintainers.append(fields[5])
+                pkg.category = fields[6].split(' ')[0]
 
                 result.append(pkg)
 
