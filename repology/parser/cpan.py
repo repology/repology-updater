@@ -91,6 +91,7 @@ class CPANPackagesParser():
                 pkg.name = package_name
                 pkg.version = package_version
                 pkg.maintainers.append(package_path.split('/')[2].lower() + "@CPAN")
+                pkg.homepage = "http://search.cpan.org/dist/" + package_name + "/"
 
                 result.append(pkg)
 
