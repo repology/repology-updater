@@ -52,6 +52,8 @@ class PkgsrcIndexParser():
                 pkg.name, version = SplitPackageNameVersion(row[0])
                 pkg.version, pkg.origversion = SanitizeVersion(version)
                 pkg.comment = row[3]
+                if row[11]:
+                    pkg.homepage = row[11]
 
                 # sometimes use OWNER variable in which case there's no MAINTAINER
                 # OWNER doesn't get to INDEX
