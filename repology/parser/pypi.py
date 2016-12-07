@@ -36,6 +36,7 @@ class PyPiHTMLParser():
                 pkg.name = match[0]
                 pkg.version = match[1]
                 pkg.comment = match[2]
+                pkg.homepage = 'https://pypi.python.org/pypi/{}/{}'.format(match[0], match[1])
 
                 packages[pkg.name] = pkg
 

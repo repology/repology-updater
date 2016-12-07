@@ -180,7 +180,7 @@ directory which is created if it doesn't exist.
 | SlackBuilds                      | ✔    | ✔   |         | ✔       | ✔     | ✔   |         | ✔        |
 | freshcode.club                   | ✔    | ✔   | ✔       | n/a     |       | ✔   |         |          |
 | CPAN                             | ✔    | ✔   |         | ✔       |       | ✔   |         |          |
-| PyPi                             | ✔    | ✔   | ✔       |         |       |     |         |          |
+| PyPi                             | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
 | F-Droid                          | ✔    | ✔   |         |         | ✔     | ✔   | ✔       |          |
 
 ### FreeBSD
