@@ -319,7 +319,7 @@ REPOSITORIES = [
         'fetcher': GitFetcher("https://github.com/fd00/yacp.git"),
         'parser': YACPGitParser(),
         'link': 'https://github.com/fd00/yacp/tree/master/{name}',
-        'tags': ['all', 'fastfetch'],
+        'tags': ['all', 'preproduction', 'fastfetch'],
     },
     {
         'name': 'slackbuilds',
