@@ -313,6 +313,15 @@ REPOSITORIES = [
         'tags': ['all', 'production', 'fastfetch'],
     },
     {
+        'name': 'yacp',
+        'desc': 'YACP',
+        'family': 'yacp',
+        'fetcher': GitFetcher("https://github.com/fd00/yacp.git"),
+        'parser': YACPGitParser(),
+        'link': 'https://github.com/fd00/yacp/tree/master/{name}',
+        'tags': ['all', 'fastfetch'],
+    },
+    {
         'name': 'slackbuilds',
         'desc': 'SlackBuilds',
         'family': 'slackbuilds',
