@@ -63,7 +63,7 @@ class OpenBSDIndexParser():
                 pkg.comment = row[3]
                 for maintainer in re.split(",", row[5]):
                     pkg.maintainers.append(maintainer.strip())
-                pkg.category = row[6].split(' ')[0]
+                pkg.category = row[6].split(' ')[0].strip()
 
                 result.append(pkg)
 
