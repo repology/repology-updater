@@ -29,7 +29,7 @@ database = Database("dbname=repology user=repology password=repology")
 
 def api_v1_package_to_json(package):
     return {
-        field: getattr(self, field)
+        field: getattr(package, field)
         for field in (
             'repo',
             'name',
