@@ -53,6 +53,9 @@ def main():
 @app.route("/metapackage/<name>")
 def metapackage(name):
     packages = database.GetMetapackage(name)
+    if not packages:
+        flask.abort(404);
+
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
     repometadata = RepositoryManager("dummy").GetMetadata();
     return flask.render_template("package.html", packages=packages, repometadata=repometadata, name=name)
@@ -60,6 +63,9 @@ def metapackage(name):
 @app.route("/badge/all/<name>")
 def badge_all(name):
     packages = database.GetMetapackage(name)
+    if not packages:
+        flask.abort(404);
+
     summaries = ProduceRepositorySummary(packages)
     repometadata = RepositoryManager("dummy").GetMetadata();
 
@@ -83,30 +89,36 @@ def news():
 
 @app.route("/api/v1/metapackage/<name>")
 def api_v1_metapackage(name):
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackage(name)]
+    if not packages:
+        flask.abort(404)
     return (
-        json.dumps([api_v1_package_to_json(package) for package in database.GetMetapackage(name)]),
+        json.dumps(packages),
         {'Content-type': 'application/json'}
     )
 
 @app.route("/api/v1/metapackages/", defaults={'name':''})
 @app.route("/api/v1/metapackages/starting/<name>")
 def api_v1_metapackages_starting(name):
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=500)]
     return (
-        json.dumps([api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=500)]),
+        json.dumps(packages),
         {'Content-type': 'application/json'}
     )
 
 @app.route("/api/v1/metapackages/after/<name>")
 def api_v1_metapackages_after(name):
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=500)]
     return (
-        json.dumps([api_v1_package_to_json(package) for package in database.GetMetapackages(after=name, limit=500)]),
+        json.dumps(packages),
         {'Content-type': 'application/json'}
     )
 
 @app.route("/api/v1/metapackages/before/<name>")
 def api_v1_metapackages_before(name):
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=500)]
     return (
-        json.dumps([package.PublicDict() for package in database.GetMetapackages(before=name, limit=500)]),
+        json.dumps(packages),
         {'Content-type': 'application/json'}
     )
 
