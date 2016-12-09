@@ -33,7 +33,7 @@
             <text x="{{ repo_colwidth - 5 }}" y="{{ 14 + rowheight * i }}">{{ repo.name }}</text>
         </g>
         <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-            {% set truncatedver = repo.version|escape|truncate(length=15,killwords=True) %}
+            {% set truncatedver = repo.version|escape|truncate(length=13,killwords=True) %}
             <text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ 15 + rowheight * i }}" fill="#010101" fill-opacity=".3">{{ truncatedver }}</text>
             <text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ 14 + rowheight * i }}">{{ truncatedver }}</text>
         </g>
