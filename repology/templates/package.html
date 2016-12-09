@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Metapackage {{ name|escape }} - {{ super() }}
+Metapackage {{ name }} - {{ super() }}
 {% endblock %}
 
 {% block subheader %}
-Metapackage {{ name|escape }}
+Metapackage {{ name }}
 {% endblock %}
 
 {% block content %}
@@ -27,37 +27,37 @@ Metapackage {{ name|escape }}
     {% elif package.versionclass == 3 %}
         {% set versionclass = "ignored" %}
     {% endif %}
-    {{ package.name|escape }}-<span class="{{ versionclass }}">{{ package.version|escape }}</span>
-    {% if package.origversion %}({{ package.origversion|escape }}){% endif %}
+    {{ package.name }}-<span class="{{ versionclass }}">{{ package.version }}</span>
+    {% if package.origversion %}({{ package.origversion }}){% endif %}
 </h3>
 <ul>
     {% if package.comment %}
-        <li><b>Summary:</b> {{ package.comment|escape }}</li>
+        <li><b>Summary:</b> {{ package.comment }}</li>
     {% endif %}
     {% if package.maintainers %}
         {% if package.maintainers|length == 1 %}
-            <li><b>Maintainer:</b> {{ package.maintainers[0]|escape }}</li>
+            <li><b>Maintainer:</b> {{ package.maintainers[0] }}</li>
         {% else %}
             <li><b>Maintainers:</b>
                 <ul>
                     {% for maintainer in package.maintainers %}
-                        <li>{{ maintainer|escape }}</li>
+                        <li>{{ maintainer }}</li>
                     {% endfor %}
                 </ul>
             </li>
         {% endif %}
     {% endif %}
     {% if package.category %}
-        <li><b>Category:</b> {{ package.category|escape }}</li>
+        <li><b>Category:</b> {{ package.category }}</li>
     {% endif %}
     {% if package.homepage %}
-        <li><b>Homepage:</b> <a href="{{ package.homepage|escape }}">{{ package.homepage|escape }}</a></li>
+        <li><b>Homepage:</b> <a href="{{ package.homepage }}">{{ package.homepage }}</a></li>
     {% endif %}
     {% if package.licenses %}
         <li><b>License(s):</b>
             <ul>
                 {% for license in package.licenses %}
-                    <li>{{ license|escape }}</li>
+                    <li>{{ license }}</li>
                 {% endfor %}
             </ul>
         </li>
@@ -66,7 +66,7 @@ Metapackage {{ name|escape }}
         <li><b>Download(s):</b>
             <ul>
                 {% for download in package.downloads %}
-                    <li><a href="{{ download|escape }}">{{ download|escape }}</a></li>
+                    <li><a href="{{ download }}">{{ download }}</a></li>
                 {% endfor %}
             </ul>
         </li>
