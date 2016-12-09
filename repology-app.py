@@ -71,7 +71,11 @@ def badge_all(name):
             'versionclass': summary['versionclass']
         })
 
-    return flask.render_template("badge-big.svg", repositories=sorted(repostates, key=lambda repo: repo['name']))
+    return flask.render_template(
+            "badge-big.svg",
+            repositories=sorted(repostates, key=lambda repo: repo['name']),
+            name=name
+    )
 
 @app.route("/news")
 def news():

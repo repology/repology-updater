@@ -3,7 +3,7 @@
 {% set rowheight = 20 %}
 
 {% set hdrheight = 25 %}
-<svg xmlns="http://www.w3.org/2000/svg" width="{{ repo_colwidth + version_colwidth }}" height="{{ hdrheight + repositories|length * rowheight }}">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ repo_colwidth + version_colwidth }}" height="{{ hdrheight + repositories|length * rowheight }}">
     <clipPath id="clip">
         <rect rx="3" width="100%" height="100%" fill="#000"/>
     </clipPath>
@@ -16,8 +16,10 @@
         <rect width="100%" height="100%" fill="#555"/>
 
         <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="15" font-weight="bold">
-            <text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">Packaging status</text>
-            <text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">Packaging status</text>
+            <a xlink:href="http://repology.org/metapackage/{{ name|escape }}">
+                <text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">Packaging status</text>
+                <text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">Packaging status</text>
+            </a>
         </g>
 
         {% set i = 0 %}
