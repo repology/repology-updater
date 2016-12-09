@@ -19,8 +19,8 @@ from repology.version import VersionCompare
 
 
 class PackageVersionClass:
-    newest = 1,
-    outdated = 2,
+    newest = 1
+    outdated = 2
     ignored = 3
 
     @staticmethod
@@ -35,10 +35,10 @@ class PackageVersionClass:
             return '?'
 
 class RepositoryVersionClass:
-    newest = 1,
-    outdated = 2,
-    mixed = 3,
-    ignored = 4,
+    newest = 1
+    outdated = 2
+    mixed = 3
+    ignored = 4
     lonely = 5
 
     @staticmethod
