@@ -79,7 +79,23 @@ class Database:
         """)
 
         self.cursor.execute("""
+            CREATE MATERIALIZED VIEW metapackages AS
+                SELECT
+                    effname as name,
+                    array_agg(repo) as repos/*,
+                    array_agg(maintainers) as maintainers*/
+                FROM packages
+                GROUP BY effname
+                ORDER BY effname
+            WITH DATA
+        """)
+
+        self.cursor.execute("""
             CREATE UNIQUE INDEX ON maintainer_package_counts(maintainer)
+        """)
+
+        self.cursor.execute("""
+            CREATE UNIQUE INDEX ON metapackages(name)
         """)
 
     def Clear(self):
@@ -164,10 +180,135 @@ class Database:
     def Commit(self):
         self.db.commit()
 
-    def GetNumPackages(self):
-        self.cursor.execute("""SELECT count(*) FROM packages""");
-        return self.cursor.fetchone()[0]
+    def GetMetapackage(self, name):
+        self.cursor.execute("""
+            SELECT
+                repo,
+                family,
 
-    def GetNumMetapackages(self):
-        self.cursor.execute("""SELECT count(*) FROM (SELECT DISTINCT effname FROM packages) AS temp""");
-        return self.cursor.fetchone()[0]
+                name,
+                effname,
+
+                version,
+                origversion,
+                effversion,
+                versionclass,
+
+                maintainers,
+                category,
+                comment,
+                homepage,
+                licenses,
+                downloads,
+
+                ignorepackage,
+                shadow,
+                ignoreversion
+            FROM packages
+            WHERE effname = %s
+        """,
+            (name,)
+        )
+
+        return [
+            Package(
+                repo=row[0],
+                family=row[1],
+
+                name=row[2],
+                effname=row[3],
+
+                version=row[4],
+                origversion=row[5],
+                effversion=row[6],
+                versionclass=row[7],
+
+                maintainers=row[8],
+                category=row[9],
+                comment=row[10],
+                homepage=row[11],
+                licenses=row[12],
+                downloads=row[13],
+
+                ignore=row[14],
+                shadow=row[15],
+                ignoreversion=row[16],
+            ) for row in self.cursor.fetchall()
+        ]
+
+    def GetMetapackages(self, starting=None, after=None, before=None, limit=500):
+        addendum = ''
+        args = []
+        if starting is not None:
+            addendum = "WHERE effname >= %s LIMIT %s"
+            args.append(starting)
+            args.append(limit)
+        elif after is not None:
+            addendum = "WHERE effname > %s LIMIT %s"
+            args.append(after)
+            args.append(limit)
+        elif before is not None:
+            addendum = "WHERE effname < %s ORDER BY effname DESC LIMIT %s"
+            args.append(before)
+            args.append(limit)
+        else:
+            return []
+
+        self.cursor.execute("""
+            SELECT
+                repo,
+                family,
+
+                name,
+                effname,
+
+                version,
+                origversion,
+                effversion,
+                versionclass,
+
+                maintainers,
+                category,
+                comment,
+                homepage,
+                licenses,
+                downloads,
+
+                ignorepackage,
+                shadow,
+                ignoreversion
+            FROM packages WHERE effname IN (
+                SELECT
+                    DISTINCT effname
+                FROM packages
+                {}
+            )
+        """.format(addendum),
+            args
+        )
+
+        return [
+            Package(
+                repo=row[0],
+                family=row[1],
+
+                name=row[2],
+                effname=row[3],
+
+                version=row[4],
+                origversion=row[5],
+                effversion=row[6],
+                versionclass=row[7],
+
+                maintainers=row[8],
+                category=row[9],
+                comment=row[10],
+                homepage=row[11],
+                licenses=row[12],
+                downloads=row[13],
+
+                ignore=row[14],
+                shadow=row[15],
+                ignoreversion=row[16],
+            ) for row in self.cursor.fetchall()
+        ]
