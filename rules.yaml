@@ -255,7 +255,7 @@
 - { name: libreadonly-perl,            ver: "2.050",                                         ignorever: true }
 - { name: opencity,                    ver: "0.0.6.5stable",                                 ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 families: [ sisyphus ], ignorever: true }
-- { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
+- { name: OpenXcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
 - { name: p5-Catalyst-Plugin-Authentication, ver: "0.100230",                                ignorever: true }
 - { name: p5-Device-SerialPort,        ver: "1.040000",                                      ignorever: true }
 - { name: p5-Math-Polygon-Tree,        verpat: "0.0[^89].*",                                 ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
@@ -677,7 +677,7 @@
 - { category: dev-ruby,                setname: "ruby:$0", families: [ gentoo ] }
 
 # Tryton (wtf is that); needs to be before python
-- { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$2", families: [ pkgsrc ] }
+- { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$1", families: [ pkgsrc ] }
 - { namepat: "trytond28_(.*)",         setname: "tryton:$1", families: [ freebsd ] }
 - { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", families: [ debian ] }
 - { namepat: "trytond-module-(.*)",    setname: "tryton:$1", families: [ openbsd ] }
