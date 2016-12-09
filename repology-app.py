@@ -23,6 +23,7 @@ from flask import Flask
 
 from repology.database import Database
 from repology.repoman import RepositoryManager
+from repology.package import ProduceRepositorySummary
 
 app = Flask(__name__)
 database = Database("dbname=repology user=repology password=repology")
@@ -55,6 +56,22 @@ def metapackage(name):
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
     repometadata = RepositoryManager("dummy").GetMetadata();
     return flask.render_template("package.html", packages=packages, repometadata=repometadata, name=name)
+
+@app.route("/badge/all/<name>")
+def badge_all(name):
+    packages = database.GetMetapackage(name)
+    summaries = ProduceRepositorySummary(packages)
+    repometadata = RepositoryManager("dummy").GetMetadata();
+
+    repostates = []
+    for reponame, summary in summaries.items():
+        repostates.append({
+            'name': repometadata[reponame]['desc'],
+            'version': summary['version'],
+            'versionclass': summary['versionclass']
+        })
+
+    return flask.render_template("badge.svg", repositories=sorted(repostates, key=lambda repo: repo['name']))
 
 @app.route("/news")
 def news():

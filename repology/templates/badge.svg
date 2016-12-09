@@ -1,0 +1,43 @@
+{% set repo_colwidth = 150 %}
+{% set version_colwidth = 90 %}
+{% set rowheight = 20 %}
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ repo_colwidth + version_colwidth }}" height="{{ repositories|length * rowheight }}">
+    <clipPath id="clip">
+        <rect rx="3" width="100%" height="100%" fill="#000"/>
+    </clipPath>
+    <linearGradient id="grad" x2="0" y2="100%">
+        <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+        <stop offset="1" stop-opacity=".1"/>
+    </linearGradient>
+
+    <g clip-path="url(#clip)">
+        <rect width="100%" height="100%" fill="#555"/>
+
+        {% set i = 0 %}
+        {% for repo in repositories %}
+
+        {% set vercolor = "#97ca00" %}
+        {% if repo.versionclass == 1 %}
+             {% set vercolor = "#4c1" %}
+        {% elif repo.versionclass == 2 %}
+             {% set vercolor = "#e05d44" %}
+        {% elif repo.versionclass == 3 %}
+             {% set vercolor = "#dfb317" %}
+        {% elif repo.versionclass == 4 %}
+             {% set vercolor = "#9f9f9f" %}
+        {% endif %}
+        <rect x="{{ repo_colwidth }}" y="{{ rowheight * i }}" width="{{ version_colwidth }}" height="{{ rowheight }}" fill="{{ vercolor }}"/>
+        <rect y="{{ rowheight * i }}" width="100%" height="{{ rowheight }}" fill="url(#grad)"/>
+        <g fill="#fff" text-anchor="end" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+            <text x="{{ repo_colwidth - 5 }}" y="{{ 15 + rowheight * i }}" fill="#010101" fill-opacity=".3">{{ repo.name }}</text>
+            <text x="{{ repo_colwidth - 5 }}" y="{{ 14 + rowheight * i }}">{{ repo.name }}</text>
+        </g>
+        <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+            {% set truncatedver = repo.version|escape|truncate(length=15,killwords=True) %}
+            <text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ 15 + rowheight * i }}" fill="#010101" fill-opacity=".3">{{ truncatedver }}</text>
+            <text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ 14 + rowheight * i }}">{{ truncatedver }}</text>
+        </g>
+        {% set i = i + 1 %}
+        {% endfor %}
+    </g>
+</svg>
