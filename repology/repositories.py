@@ -104,6 +104,36 @@ REPOSITORIES = [
     },
 
     {
+        'name': 'ubuntu_precise',
+        'desc': 'Ubuntu Precise',
+        'family': 'debian',
+        'fetcher': FileFetcher(
+            "http://ftp.ubuntu.com/ubuntu/dists/precise/main/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/precise/multiverse/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/precise/restricted/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/precise/universe/source/Sources.gz",
+            gz=True
+        ),
+        'parser': DebianSourcesParser(),
+        'link': 'http://packages.ubuntu.com/precise/{name}',
+        'tags': ['all', 'ubuntu', 'fastfetch'],
+    },
+    {
+        'name': 'ubuntu_trusty',
+        'desc': 'Ubuntu Trusty',
+        'family': 'debian',
+        'fetcher': FileFetcher(
+            "http://ftp.ubuntu.com/ubuntu/dists/trusty/main/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/trusty/multiverse/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/trusty/restricted/source/Sources.gz",
+            "http://ftp.ubuntu.com/ubuntu/dists/trusty/universe/source/Sources.gz",
+            gz=True
+        ),
+        'parser': DebianSourcesParser(),
+        'link': 'http://packages.ubuntu.com/trusty/{name}',
+        'tags': ['all', 'ubuntu', 'fastfetch'],
+    },
+    {
         'name': 'ubuntu_xenial',
         'desc': 'Ubuntu Xenial',
         'family': 'debian',
