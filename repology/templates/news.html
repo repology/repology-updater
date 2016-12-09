@@ -1,5 +1,14 @@
-{% include 'header.html' %}
+{% extends "layout.html" %}
 
+{% block title %}
+News - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+News
+{% endblock %}
+
+{% block content %}
 <article><h3>2016-11-18</h3><p>
     <ul>
         <li><b>CentOS</b> and <b>Magaia</b> support added</li>
@@ -38,5 +47,4 @@
         <li>Statistics page, news page</li>
     </ul>
 </p></article>
-
-{% include 'footer.html' %}
+{% endblock %}

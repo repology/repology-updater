@@ -1,58 +1,76 @@
-{% include 'header.html' %}
+{% extends "layout.html" %}
 
-{% for reponame in reponames %}
-{% if reponame in metapackage.packages %}
-<h2>{{ repositories[reponame].desc }}</h2>
-    {% for package in metapackage.packages[reponame] %}
-    <h3>{{ package.name|escape }}-{{ package.version|escape }}
-            {% if package.origversion %}
-                ({{ package.origversion|escape }})
-            {% endif %}
-    </h3>
-    <ul>
-        {% if package.comment %}
-            <li><b>Summary:</b> {{ package.comment|escape }}</li>
-        {% endif %}
-        {% if package.maintainers %}
-            {% if package.maintainers|length == 1 %}
-                <li><b>Maintainer:</b> {{ package.maintainers[0]|escape }}</li>
-            {% else %}
-                <li><b>Maintainers:</b>
-                    <ul>
-                        {% for maintainer in package.maintainers %}
-                            <li>{{ maintainer|escape }}</li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endif %}
-        {% endif %}
-        {% if package.category %}
-            <li><b>Category:</b> {{ package.category|escape }}</li>
-        {% endif %}
-        {% if package.homepage %}
-            <li><b>Homepage:</b> <a href="{{ package.homepage|escape }}">{{ package.homepage|escape }}</a></li>
-        {% endif %}
-        {% if package.licenses %}
-            <li><b>License(s):</b>
+{% block title %}
+Metapackage {{ name|escape }} - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+Metapackage {{ name|escape }}
+{% endblock %}
+
+{% block content %}
+
+{% set prevrepo = "" %}
+
+{% for package in packages %}
+    {% if package.repo != prevrepo %}
+        <h2>
+            {{ repometadata[package.repo].desc }}
+            {% set prevrepo = package.repo %}
+        </h2>
+    {% endif %}
+<h3>
+    {% if package.versionclass == 1 %}
+        {% set versionclass = "good" %}
+    {% elif package.versionclass == 2 %}
+        {% set versionclass = "bad" %}
+    {% elif package.versionclass == 3 %}
+        {% set versionclass = "ignored" %}
+    {% endif %}
+    {{ package.name|escape }}-<span class="{{ versionclass }}">{{ package.version|escape }}</span>
+    {% if package.origversion %}({{ package.origversion|escape }}){% endif %}
+</h3>
+<ul>
+    {% if package.comment %}
+        <li><b>Summary:</b> {{ package.comment|escape }}</li>
+    {% endif %}
+    {% if package.maintainers %}
+        {% if package.maintainers|length == 1 %}
+            <li><b>Maintainer:</b> {{ package.maintainers[0]|escape }}</li>
+        {% else %}
+            <li><b>Maintainers:</b>
                 <ul>
-                    {% for license in package.licenses %}
-                        <li>{{ license|escape }}</li>
+                    {% for maintainer in package.maintainers %}
+                        <li>{{ maintainer|escape }}</li>
                     {% endfor %}
                 </ul>
             </li>
         {% endif %}
-        {% if package.downloads %}
-            <li><b>Download(s):</b>
-                <ul>
-                    {% for download in package.downloads %}
-                        <li><a href="{{ download|escape }}">{{ download|escape }}</a></li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endif %}
-    </ul>
-    {% endfor %}
-{% endif %}
+    {% endif %}
+    {% if package.category %}
+        <li><b>Category:</b> {{ package.category|escape }}</li>
+    {% endif %}
+    {% if package.homepage %}
+        <li><b>Homepage:</b> <a href="{{ package.homepage|escape }}">{{ package.homepage|escape }}</a></li>
+    {% endif %}
+    {% if package.licenses %}
+        <li><b>License(s):</b>
+            <ul>
+                {% for license in package.licenses %}
+                    <li>{{ license|escape }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+    {% if package.downloads %}
+        <li><b>Download(s):</b>
+            <ul>
+                {% for download in package.downloads %}
+                    <li><a href="{{ download|escape }}">{{ download|escape }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>
 {% endfor %}
-
-{% include 'footer.html' %}
+{% endblock %}

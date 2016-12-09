@@ -22,6 +22,7 @@ import flask
 from flask import Flask
 
 from repology.database import Database
+from repology.repoman import RepositoryManager
 
 app = Flask(__name__)
 database = Database("dbname=repology user=repology password=repology")
@@ -43,6 +44,17 @@ def api_v1_package_to_json(package):
             'ignore')
         if getattr(package, field)
     }
+
+@app.route("/")
+def main():
+    return flask.render_template("layout.html")
+
+@app.route("/metapackage/<name>")
+def metapackage(name):
+    packages = database.GetMetapackage(name)
+    packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
+    repometadata = RepositoryManager("dummy").GetMetadata();
+    return flask.render_template("package.html", packages=packages, repometadata=repometadata, name=name)
 
 @app.route("/news")
 def news():
