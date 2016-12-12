@@ -27,7 +27,7 @@ from repology.repoman import RepositoryManager
 from repology.package import *
 from repology.packageproc import *
 from repology.metapackageproc import *
-from repology.filters import ShadowFilter, InAnyRepoFilter
+from repology.filters import InAnyRepoFilter
 
 # settings
 PER_PAGE = 500
@@ -125,7 +125,6 @@ def metapackages(starting=None):
             PackagesToMetapackages(
                 database.GetMetapackages(starting=starting, limit=PER_PAGE)
             ),
-            ShadowFilter(),
             InAnyRepoFilter(reponames)
         )
     )

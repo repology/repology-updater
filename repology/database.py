@@ -82,8 +82,7 @@ class Database:
             CREATE MATERIALIZED VIEW metapackages AS
                 SELECT
                     effname as name,
-                    array_agg(repo) as repos/*,
-                    array_agg(maintainers) as maintainers*/
+                    count(nullif(shadow, true)) = 0 as shadow_only
                 FROM packages
                 GROUP BY effname
                 ORDER BY effname
@@ -176,6 +175,7 @@ class Database:
 
     def UpdateViews(self):
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_package_counts""");
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackages""");
 
     def Commit(self):
         self.db.commit()
@@ -237,17 +237,19 @@ class Database:
         ]
 
     def GetMetapackages(self, starting=None, after=None, before=None, limit=500):
-        addendum = ''
+        addendum = 'WHERE not shadow_only'
         args = []
         if starting is not None:
-            addendum = "WHERE effname >= %s"
+            addendum += " AND name >= %s ORDER BY name"
             args.append(starting)
         elif after is not None:
-            addendum = "WHERE effname > %s"
+            addendum += " AND name > %s ORDER BY name"
             args.append(after)
         elif before is not None:
-            addendum = "WHERE effname < %s ORDER BY effname DESC"
+            addendum += " AND name < %s ORDER BY name DESC"
             args.append(before)
+        else:
+            addendum += " ORDER BY name"
 
         addendum += " LIMIT %s"
         args.append(limit)
@@ -277,10 +279,10 @@ class Database:
                 ignoreversion
             FROM packages WHERE effname IN (
                 SELECT
-                    DISTINCT effname
-                FROM packages
+                    name
+                FROM metapackages
                 {}
-            )
+            ) ORDER BY effname
         """.format(addendum),
             args
         )
