@@ -126,3 +126,17 @@ class ShadowFilter:
                 return True
 
         return False
+
+
+class InAnyRepoFilter:
+    def __init__(self, reponames):
+        self.reponames = set()
+        for reponame in reponames:
+            self.reponames.add(reponame)
+
+    def Check(self, packages):
+        for package in packages:
+            if package.repo in self.reponames:
+                return True
+
+        return False
