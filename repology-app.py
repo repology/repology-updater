@@ -27,6 +27,7 @@ from repology.repoman import RepositoryManager
 from repology.package import *
 from repology.packageproc import *
 from repology.metapackageproc import *
+from repology.filters import ShadowFilter, InAnyRepoFilter
 
 # settings
 PER_PAGE = 500
@@ -118,8 +119,16 @@ def api_v1_package_to_json(package):
 @app.route("/")
 @app.route("/metapackages/<starting>")
 def metapackages(starting=None):
-    summaries = MetapackagesToMetasummaries(PackagesToMetapackages(database.GetMetapackages(starting=starting, limit=PER_PAGE)))
     reponames = repoman.GetNames(REPOSITORIES)
+    summaries = MetapackagesToMetasummaries(
+        FilterMetapackages(
+            PackagesToMetapackages(
+                database.GetMetapackages(starting=starting, limit=PER_PAGE)
+            ),
+            ShadowFilter(),
+            InAnyRepoFilter(reponames)
+        )
+    )
     repometadata = repoman.GetMetadata();
 
     return flask.render_template("metapackages.html", reponames=reponames, summaries=summaries, repometadata=repometadata)
