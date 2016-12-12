@@ -60,6 +60,26 @@ def Split(value, sep):
 def NewFormat(value, *args, **kwargs):
     return value.format(**kwargs) if kwargs else value.format(*args)
 
+def PackageVersionClass2CSSClass(value):
+    if value == PackageVersionClass.newest:
+        return 'good'
+    elif value == PackageVersionClass.outdated:
+        return 'bad'
+    elif value == PackageVersionClass.ignored:
+        return 'ignore'
+
+def RepositoryVersionClass2CSSClass(value):
+    if value == RepositoryVersionClass.newest:
+        return 'good'
+    elif value == RepositoryVersionClass.outdated:
+        return 'bad'
+    elif value == RepositoryVersionClass.mixed:
+        return 'multi'
+    elif value == RepositoryVersionClass.ignored:
+        return 'ignore'
+    elif value == RepositoryVersionClass.lonely:
+        return 'lonely'
+
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
@@ -68,6 +88,8 @@ app.jinja_env.filters['clamp'] = Clamp
 app.jinja_env.filters['sqrt'] = sqrt
 app.jinja_env.filters['split'] = Split
 app.jinja_env.filters['newformat'] = NewFormat
+app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
+app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
 
 database = Database("dbname=repology user=repology password=repology")
 repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
@@ -92,8 +114,13 @@ def api_v1_package_to_json(package):
     }
 
 @app.route("/")
-def main():
-    return flask.render_template("layout.html")
+@app.route("/metapackages/<starting>")
+def metapackages(starting=None):
+    summaries = ProduceMetapackagesRepositorySummaries(MergeMetapackages(database.GetMetapackages(starting=starting, limit=PER_PAGE)))
+    reponames = repoman.GetNames(REPOSITORIES)
+    repometadata = repoman.GetMetadata();
+
+    return flask.render_template("metapackages.html", reponames=reponames, summaries=summaries, repometadata=repometadata)
 
 @app.route("/metapackage/<name>")
 def metapackage(name):
