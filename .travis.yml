@@ -22,7 +22,5 @@ script:
   - ./repology-update.py --help
   - ./repology-updatedb.py --help
   - ./repology-dump.py --help
-  #- ./repology-report.py --help
-  #- ./repology-gensite.py --help
 after_success:
   - coveralls
