@@ -72,7 +72,7 @@ app.jinja_env.filters['newformat'] = NewFormat
 database = Database("dbname=repology user=repology password=repology")
 repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
 
-# helpres
+# helpers
 def api_v1_package_to_json(package):
     return {
         field: getattr(package, field)
