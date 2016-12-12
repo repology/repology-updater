@@ -117,6 +117,7 @@ def api_v1_package_to_json(package):
     }
 
 @app.route("/")
+@app.route("/metapackages/")
 @app.route("/metapackages/<starting>")
 def metapackages(starting=None):
     reponames = repoman.GetNames(REPOSITORIES)
