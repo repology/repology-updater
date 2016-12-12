@@ -26,6 +26,8 @@ from repology.repoman import RepositoryManager
 from repology.package import ProduceRepositorySummary
 
 app = Flask(__name__)
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
 database = Database("dbname=repology user=repology password=repology")
 
 def api_v1_package_to_json(package):
