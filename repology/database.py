@@ -240,19 +240,17 @@ class Database:
         addendum = ''
         args = []
         if starting is not None:
-            addendum = "WHERE effname >= %s LIMIT %s"
+            addendum = "WHERE effname >= %s"
             args.append(starting)
-            args.append(limit)
         elif after is not None:
-            addendum = "WHERE effname > %s LIMIT %s"
+            addendum = "WHERE effname > %s"
             args.append(after)
-            args.append(limit)
         elif before is not None:
-            addendum = "WHERE effname < %s ORDER BY effname DESC LIMIT %s"
+            addendum = "WHERE effname < %s ORDER BY effname DESC"
             args.append(before)
-            args.append(limit)
-        else:
-            return []
+
+        addendum += " LIMIT %s"
+        args.append(limit)
 
         self.cursor.execute("""
             SELECT
