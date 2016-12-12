@@ -23,7 +23,7 @@ from flask import Flask
 
 from repology.database import Database
 from repology.repoman import RepositoryManager
-from repology.package import ProduceRepositorySummary
+from repology.package import *
 
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
@@ -87,6 +87,32 @@ def badge_all(name):
         ),
         {'Content-type': 'image/svg+xml'}
     )
+
+@app.route("/badge/tiny/<name>")
+def badge_tiny(name):
+    packages = database.GetMetapackage(name)
+    if not packages:
+        flask.abort(404);
+
+    summaries = ProduceRepositorySummary(packages)
+
+    total_packages = 0
+    newest_packages = 0
+    for summary in summaries.values():
+        total_packages += 1
+        if summary['versionclass'] == RepositoryVersionClass.newest or summary['versionclass'] == RepositoryVersionClass.mixed:
+            newest_packages += 1
+
+    return (
+        flask.render_template(
+            "badge-small.svg",
+            total_packages=total_packages,
+            newest_packages=newest_packages,
+            name=name
+        ),
+        {'Content-type': 'image/svg+xml'}
+    )
+
 
 @app.route("/news")
 def news():
