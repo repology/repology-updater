@@ -25,6 +25,7 @@ from xml.sax.saxutils import escape
 import shutil
 
 from repology.package import *
+from repology.packageproc import *
 from repology.repoman import RepositoryManager
 from repology.logger import *
 from repology.filters import *
@@ -103,16 +104,16 @@ def Main():
 
     repoman = RepositoryManager(options.statedir)
 
-    def PackageProcessor(packages):
-        name = packages[0].effname
-        FillVersionInfos(packages)
+    def PackageProcessor(packageset):
+        name = packageset[0].effname
+        FillPackagesetVersions(packageset)
 
-        if not CheckFilters(packages, *filters):
+        if not PackagesetCheckFilters(packageset, *filters):
             return
 
         if options.dump == 'packages':
-            print(packages[0].effname)
-            for package in packages:
+            print(packageset[0].effname)
+            for package in packageset:
                 print("  {}: {}-{} ({})".format(
                     package.repo,
                     package.name,
@@ -120,15 +121,15 @@ def Main():
                     PackageVersionClass2Letter(package.versionclass),
                 ))
         if options.dump == 'summaries':
-            print(packages[0].effname)
-            summary = ProduceRepositorySummary(packages)
+            print(packageset[0].effname)
+            summaries = PackagesetToSummaries(packageset)
             for reponame in repoman.GetNames(options.reponames):
-                if reponame in summary:
+                if reponame in summaries:
                     print("  {}: {} ({}) *{}".format(
                         reponame,
-                        summary[reponame]['version'],
-                        RepositoryVersionClass2Letter(summary[reponame]['versionclass']),
-                        summary[reponame]['numpackages'],
+                        summaries[reponame]['version'],
+                        RepositoryVersionClass2Letter(summaries[reponame]['versionclass']),
+                        summaries[reponame]['numpackages'],
                     ))
 
     if options.mode == 'stream':
@@ -138,10 +139,10 @@ def Main():
         logger.Log("loading packages...")
         all_packages = repoman.DeserializeMulti(reponames=options.reponames, logger=logger)
         logger.Log("merging packages...")
-        metapackages = MergeMetapackages(all_packages)
+        metapackages = PackagesToMetapackages(all_packages)
         logger.Log("dumping...")
-        for metaname, packages in sorted(metapackages.items()):
-            PackageProcessor(packages)
+        for metapackage_name, packageset in sorted(metapackages.items()):
+            PackageProcessor(packageset)
 
     return 0
 

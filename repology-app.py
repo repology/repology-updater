@@ -25,6 +25,8 @@ from math import sqrt
 from repology.database import Database
 from repology.repoman import RepositoryManager
 from repology.package import *
+from repology.packageproc import *
+from repology.metapackageproc import *
 
 # settings
 PER_PAGE = 500
@@ -116,7 +118,7 @@ def api_v1_package_to_json(package):
 @app.route("/")
 @app.route("/metapackages/<starting>")
 def metapackages(starting=None):
-    summaries = ProduceMetapackagesRepositorySummaries(MergeMetapackages(database.GetMetapackages(starting=starting, limit=PER_PAGE)))
+    summaries = MetapackagesToMetasummaries(PackagesToMetapackages(database.GetMetapackages(starting=starting, limit=PER_PAGE)))
     reponames = repoman.GetNames(REPOSITORIES)
     repometadata = repoman.GetMetadata();
 
@@ -134,11 +136,11 @@ def metapackage(name):
 
 @app.route("/badge/all/<name>")
 def badge_all(name):
-    packages = database.GetMetapackage(name)
-    if not packages:
+    packageset = database.GetMetapackage(name)
+    if not packageset:
         flask.abort(404);
 
-    summaries = ProduceRepositorySummary(packages)
+    summaries = PackagesetToSummaries(packageset)
     repometadata = repoman.GetMetadata();
 
     repostates = []
@@ -160,11 +162,11 @@ def badge_all(name):
 
 @app.route("/badge/tiny/<name>")
 def badge_tiny(name):
-    packages = database.GetMetapackage(name)
-    if not packages:
+    packageset = database.GetMetapackage(name)
+    if not packageset:
         flask.abort(404);
 
-    summaries = ProduceRepositorySummary(packages)
+    summaries = PackagesetToSummaries(packageset)
 
     total_packages = 0
     newest_packages = 0
@@ -200,7 +202,7 @@ def api_v1_metapackage(name):
 @app.route("/api/v1/metapackages/")
 @app.route("/api/v1/metapackages/starting/<starting>")
 def api_v1_metapackages_starting(starting=None):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=PER_PAGE)]
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=starting, limit=PER_PAGE)]
     return (
         json.dumps(packages),
         {'Content-type': 'application/json'}
@@ -208,7 +210,7 @@ def api_v1_metapackages_starting(starting=None):
 
 @app.route("/api/v1/metapackages/after/<name>")
 def api_v1_metapackages_after(after=None):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(after=name, limit=PER_PAGE)]
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(after=after, limit=PER_PAGE)]
     return (
         json.dumps(packages),
         {'Content-type': 'application/json'}
@@ -216,7 +218,7 @@ def api_v1_metapackages_after(after=None):
 
 @app.route("/api/v1/metapackages/before/<name>")
 def api_v1_metapackages_before(before=None):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(before=name, limit=PER_PAGE)]
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(before=before, limit=PER_PAGE)]
     return (
         json.dumps(packages),
         {'Content-type': 'application/json'}

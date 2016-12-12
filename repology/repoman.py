@@ -225,12 +225,12 @@ class RepositoryManager:
                 thiskey = min(thiskey, ds.Peek().effname)
 
             # fetch all packages with given key from all deserializers
-            packages = []
+            packageset = []
             for ds in deserializers:
                 while not ds.EOF() and ds.Peek().effname == thiskey:
-                    packages.append(ds.Get())
+                    packageset.append(ds.Get())
 
-            processor(packages)
+            processor(packageset)
 
             # remove EOFed repos
             deserializers = [ ds for ds in deserializers if not ds.EOF() ]
