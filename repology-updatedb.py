@@ -63,15 +63,18 @@ def Main():
     database.Clear()
 
     package_queue = []
+    num_pushed = 0
 
     def PackageProcessor(packageset):
-        nonlocal package_queue
+        nonlocal package_queue, num_pushed
         FillPackagesetVersions(packageset)
         package_queue.extend(packageset)
 
         if len(package_queue) >= 1000:
             database.AddPackages(package_queue)
+            num_pushed += len(package_queue)
             package_queue = []
+            logger.Log("  pushed {} packages...".format(num_pushed))
 
     if options.mode == 'stream':
         logger.Log("pushing packages to database...")
