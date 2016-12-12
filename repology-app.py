@@ -26,6 +26,11 @@ from repology.database import Database
 from repology.repoman import RepositoryManager
 from repology.package import *
 
+# settings
+PER_PAGE = 500
+REPOSITORIES = ['production']
+
+# globals
 def SpanTrim(value, maxlength):
     # support lists as well
     if type(value) is list:
@@ -65,7 +70,9 @@ app.jinja_env.filters['split'] = Split
 app.jinja_env.filters['newformat'] = NewFormat
 
 database = Database("dbname=repology user=repology password=repology")
+repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
 
+# helpres
 def api_v1_package_to_json(package):
     return {
         field: getattr(package, field)
@@ -95,7 +102,7 @@ def metapackage(name):
         flask.abort(404);
 
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
-    repometadata = RepositoryManager("dummy").GetMetadata();
+    repometadata = repoman.GetMetadata();
     return flask.render_template("package.html", packages=packages, repometadata=repometadata, name=name)
 
 @app.route("/badge/all/<name>")
@@ -105,7 +112,7 @@ def badge_all(name):
         flask.abort(404);
 
     summaries = ProduceRepositorySummary(packages)
-    repometadata = RepositoryManager("dummy").GetMetadata();
+    repometadata = repoman.GetMetadata();
 
     repostates = []
     for reponame, summary in summaries.items():
@@ -149,7 +156,6 @@ def badge_tiny(name):
         {'Content-type': 'image/svg+xml'}
     )
 
-
 @app.route("/news")
 def news():
     return flask.render_template("news.html")
@@ -164,26 +170,26 @@ def api_v1_metapackage(name):
         {'Content-type': 'application/json'}
     )
 
-@app.route("/api/v1/metapackages/", defaults={'name':''})
-@app.route("/api/v1/metapackages/starting/<name>")
-def api_v1_metapackages_starting(name):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=500)]
+@app.route("/api/v1/metapackages/")
+@app.route("/api/v1/metapackages/starting/<starting>")
+def api_v1_metapackages_starting(starting=None):
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=PER_PAGE)]
     return (
         json.dumps(packages),
         {'Content-type': 'application/json'}
     )
 
 @app.route("/api/v1/metapackages/after/<name>")
-def api_v1_metapackages_after(name):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=500)]
+def api_v1_metapackages_after(after=None):
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(after=name, limit=PER_PAGE)]
     return (
         json.dumps(packages),
         {'Content-type': 'application/json'}
     )
 
 @app.route("/api/v1/metapackages/before/<name>")
-def api_v1_metapackages_before(name):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=name, limit=500)]
+def api_v1_metapackages_before(before=None):
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(before=name, limit=PER_PAGE)]
     return (
         json.dumps(packages),
         {'Content-type': 'application/json'}
