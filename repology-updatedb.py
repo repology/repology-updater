@@ -27,6 +27,7 @@ from repology.transformer import PackageTransformer
 from repology.database import Database
 from repology.logger import *
 from repology.package import *
+from repology.packageproc import *
 from repology.filters import ShadowFilter
 
 
@@ -63,10 +64,10 @@ def Main():
 
     package_queue = []
 
-    def PackageProcessor(packages):
+    def PackageProcessor(packageset):
         nonlocal package_queue
-        FillVersionInfos(packages)
-        package_queue.extend(packages)
+        FillPackagesetVersions(packageset)
+        package_queue.extend(packageset)
 
         if len(package_queue) >= 1000:
             database.AddPackages(package_queue)
