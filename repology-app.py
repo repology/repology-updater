@@ -20,14 +20,50 @@
 import json
 import flask
 from flask import Flask
+from math import sqrt
 
 from repology.database import Database
 from repology.repoman import RepositoryManager
 from repology.package import *
 
+def SpanTrim(value, maxlength):
+    # support lists as well
+    if type(value) is list:
+        return [SpanTrim(v, maxlength) for v in value]
+
+    if len(value) <= maxlength:
+        return value
+
+    # no point in leaving dot just before ellipsis
+    trimmed = value[0:maxlength-2]
+    while trimmed.endswith('.'):
+        trimmed = trimmed[0:-1]
+
+    # we assume ellipsis take ~2 char width
+    return "<span title=\"%s\">%s…</span>" % (value, trimmed)
+
+def Clamp(value, lower, upper):
+    if value < lower:
+        return lower
+    if value > upper:
+        return upper
+    return value
+
+def Split(value, sep):
+    return value.split(sep)
+
+def NewFormat(value, *args, **kwargs):
+    return value.format(**kwargs) if kwargs else value.format(*args)
+
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+app.jinja_env.filters['spantrim'] = SpanTrim
+app.jinja_env.filters['clamp'] = Clamp
+app.jinja_env.filters['sqrt'] = sqrt
+app.jinja_env.filters['split'] = Split
+app.jinja_env.filters['newformat'] = NewFormat
+
 database = Database("dbname=repology user=repology password=repology")
 
 def api_v1_package_to_json(package):
