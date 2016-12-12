@@ -23,16 +23,6 @@ class PackageVersionClass:
     outdated = 2
     ignored = 3
 
-    @staticmethod
-    def ToChar(value):
-        if value == PackageVersionClass.newest:
-            return 'N'
-        elif value == PackageVersionClass.outdated:
-            return 'O'
-        elif value == PackageVersionClass.ignored:
-            return 'I'
-        else:
-            return '?'
 
 class RepositoryVersionClass:
     newest = 1
@@ -40,21 +30,6 @@ class RepositoryVersionClass:
     mixed = 3
     ignored = 4
     lonely = 5
-
-    @staticmethod
-    def ToChar(value):
-        if value == RepositoryVersionClass.newest:
-            return 'N'
-        elif value == RepositoryVersionClass.outdated:
-            return 'O'
-        elif value == RepositoryVersionClass.mixed:
-            return 'M'
-        elif value == RepositoryVersionClass.ignored:
-            return 'I'
-        elif value == RepositoryVersionClass.lonely:
-            return 'L'
-        else:
-            return '?'
 
 
 class Package:

@@ -30,6 +30,32 @@ from repology.logger import *
 from repology.filters import *
 
 
+def PackageVersionClass2Letter(value):
+    if value == PackageVersionClass.newest:
+        return 'N'
+    elif value == PackageVersionClass.outdated:
+        return 'O'
+    elif value == PackageVersionClass.ignored:
+        return 'I'
+    else:
+        return '?'
+
+
+def RepositoryVersionClass2Letter(value):
+    if value == RepositoryVersionClass.newest:
+        return 'N'
+    elif value == RepositoryVersionClass.outdated:
+        return 'O'
+    elif value == RepositoryVersionClass.mixed:
+        return 'M'
+    elif value == RepositoryVersionClass.ignored:
+        return 'I'
+    elif value == RepositoryVersionClass.lonely:
+        return 'L'
+    else:
+        return '?'
+
+
 def Main():
     parser = ArgumentParser()
     parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
@@ -91,7 +117,7 @@ def Main():
                     package.repo,
                     package.name,
                     package.version,
-                    PackageVersionClass.ToChar(package.versionclass),
+                    PackageVersionClass2Letter(package.versionclass),
                 ))
         if options.dump == 'summaries':
             print(packages[0].effname)
@@ -101,7 +127,7 @@ def Main():
                     print("  {}: {} ({}) *{}".format(
                         reponame,
                         summary[reponame]['version'],
-                        RepositoryVersionClass.ToChar(summary[reponame]['versionclass']),
+                        RepositoryVersionClass2Letter(summary[reponame]['versionclass']),
                         summary[reponame]['numpackages'],
                     ))
 
