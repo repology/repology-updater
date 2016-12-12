@@ -25,8 +25,6 @@ from xml.sax.saxutils import escape
 import shutil
 
 from repology.package import *
-from repology.report import ReportProducer
-from repology.template import Template
 from repology.repoman import RepositoryManager
 from repology.logger import *
 from repology.filters import *
