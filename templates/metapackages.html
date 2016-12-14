@@ -6,25 +6,27 @@ Metapackages index
 
 {% block content %}
 
-{% if not firstpage or not lastpage %}
 <nav>
     Pages:
     <ul>
-        {% if firstname and not firstpage %}
+        {% if firstname %}
             <li><a href="{{ url_for_self(bound="<"+firstname) }}">«</a></li>
         {% endif %}
-        {% if lastname and not lastpage %}
+        {% if lastname %}
             <li><a href="{{ url_for_self(bound=">"+lastname) }}">»</a></li>
         {% endif %}
     </ul>
     <ul>
-        <li><a href="{{ url_for_self(bound=None) }}">0-9</a></li>
+        <li><a href="{{ url_for_self(bound=None) }}"{% if not firstname or firstname < 'a' %} class="active"{% endif %}>0-9</a></li>
         {% for letter in "abcdefghijklmnopqrstuvwxyz" %}
-        <li><a href="{{ url_for_self(bound=letter) }}"{% if starting and starting == letter %} class="active"{% endif %}>{{ letter|upper }}</a></li>
+            <li>
+                <a href="{{ url_for_self(bound=letter) }}"{% if firstname and firstname >= letter and firstname < next_letter(letter) %} class="active"{% endif %}>
+                    {{ letter|upper }}
+                </a>
+            </li>
         {% endfor %}
     </ul>
 </nav>
-{% endif %}
 
 {% if summaries %}
     <table>

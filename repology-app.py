@@ -96,6 +96,7 @@ app.jinja_env.filters['newformat'] = NewFormat
 app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
 app.jinja_env.globals['url_for_self'] = url_for_self
+app.jinja_env.globals['next_letter'] = lambda letter : chr(ord(letter) + 1)
 
 database = Database("dbname=repology user=repology password=repology", readonly=True)
 repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
