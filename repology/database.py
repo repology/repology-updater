@@ -21,6 +21,154 @@ import sys
 from repology.package import Package
 
 
+class QueryFilter():
+    def GetWhere(self):
+        return None
+
+    def GetWhereArgs(self):
+        return []
+
+    def GetHaving(self):
+        return None
+
+    def GetHavingArgs(self):
+        return []
+
+
+class NameStartingFilter(QueryFilter):
+    def __init__(self, name):
+        self.name = name
+
+    def GetTable(self):
+        return 'metapackages'
+
+    def GetWhere(self):
+        return 'effname >= %s'
+
+    def GetWhereArgs(self):
+        return [ self.name ]
+
+
+class NameSubstringFilter(QueryFilter):
+    def __init__(self, name):
+        self.name = name
+
+    def GetTable(self):
+        return 'metapackages'
+
+    def GetWhere(self):
+        return '{table}.effname like %s'
+
+    def GetWhereArgs(self):
+        return [ self.name + "%" ]
+
+
+class MaintainerFilter(QueryFilter):
+    def __init__(self, maintainer):
+        self.maintainer = maintainer
+
+    def GetTable(self):
+        return 'maintainers'
+
+    def GetWhere(self):
+        return '{table}.maintainer=%s'
+
+    def GetWhereArgs(self):
+        return [ self.maintainer ]
+
+
+class InRepoFilter(QueryFilter):
+    def __init__(self, repo):
+        self.repo = repo
+
+    def GetTable(self):
+        return 'metapackages'
+
+    def GetWhere(self):
+        return '{table}.repo=%s'
+
+    def GetWhereArgs(self):
+        return [ self.repo ]
+
+
+class OutdatedInRepoFilter(QueryFilter):
+    def __init__(self, repo):
+        self.repo = repo
+
+    def GetTable(self):
+        return 'metapackages'
+
+    def GetWhere(self):
+        return '{table}.repo=%s AND {table}.num_outdated>0'
+
+    def GetWhereArgs(self):
+        return [ self.repo ]
+
+
+class NotInRepoFilter(QueryFilter):
+    def __init__(self, repo):
+        self.repo = repo
+
+    def GetTable(self):
+        return 'metapackages'
+
+    def GetHaving(self):
+        return 'count(nullif({table}.repo = %s, false)) = 0'
+
+    def GetHavingArgs(self):
+        return [ self.repo ]
+
+
+class MetapackageQueryConstructor:
+    def __init__(self, *filters, limit=500):
+        self.filters = filters
+        self.limit = limit
+
+    def GetQuery(self):
+        tables = []
+        where = []
+        where_args = []
+        having = []
+        having_args = []
+        args = []
+
+        tablenum = 0
+        for f in self.filters:
+            tableid = '{}{}'.format(f.GetTable(), str(tablenum))
+
+            tables.append('{} AS {}'.format(f.GetTable(), tableid))
+
+            if f.GetWhere():
+                where.append(f.GetWhere().format(table=tableid))
+                where_args += f.GetWhereArgs()
+
+            if f.GetHaving():
+                having.append(f.GetHaving().format(table=tableid))
+                having_args += f.GetHavingArgs()
+
+            tablenum += 1
+
+        query = 'SELECT DISTINCT effname FROM '
+
+        query += tables[0]
+        for table in tables[1:]:
+            query += ' INNER JOIN {} USING(effname)'.format(table)
+
+        if where:
+            query += ' WHERE '
+            query += ' AND '.join(where)
+            args += where_args
+
+        if having:
+            query += ' GROUP BY effname HAVING ' + ' AND '.join(having)
+            args += having_args
+
+        query += ' ORDER BY effname LIMIT %s'
+        args.append(self.limit)
+
+        return (query, args)
+
+
 class Database:
     def __init__(self, dsn, readonly=True):
         self.db = psycopg2.connect(dsn)
@@ -269,23 +417,8 @@ class Database:
             ) for row in self.cursor.fetchall()
         ]
 
-    def GetMetapackages(self, starting=None, after=None, before=None, limit=500):
-        addendum = 'WHERE not shadow_only'
-        args = []
-        if starting is not None:
-            addendum += " AND name >= %s ORDER BY name"
-            args.append(starting)
-        elif after is not None:
-            addendum += " AND name > %s ORDER BY name"
-            args.append(after)
-        elif before is not None:
-            addendum += " AND name < %s ORDER BY name DESC"
-            args.append(before)
-        else:
-            addendum += " ORDER BY name"
-
-        addendum += " LIMIT %s"
-        args.append(limit)
+    def GetMetapackages(self, *filters, limit=500):
+        query, args = MetapackageQueryConstructor(*filters, limit=limit).GetQuery()
 
         self.cursor.execute("""
             SELECT
@@ -311,12 +444,9 @@ class Database:
                 shadow,
                 ignoreversion
             FROM packages WHERE effname IN (
-                SELECT
-                    name
-                FROM metapackages
                 {}
             ) ORDER BY effname
-        """.format(addendum),
+        """.format(query),
             args
         )
 
