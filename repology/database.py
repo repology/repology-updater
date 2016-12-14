@@ -91,6 +91,20 @@ class InRepoQueryFilter(QueryFilter):
         return [ self.repo ]
 
 
+class InAnyRepoQueryFilter(QueryFilter):
+    def __init__(self, repos):
+        self.repos = repos
+
+    def GetTable(self):
+        return 'metapackages'
+
+    def GetWhere(self):
+        return '{table}.repo in (' + ','.join(['%s'] * len(self.repos)) + ')'
+
+    def GetWhereArgs(self):
+        return [ repo for repo in self.repos ]
+
+
 class OutdatedInRepoQueryFilter(QueryFilter):
     def __init__(self, repo):
         self.repo = repo
