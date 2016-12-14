@@ -117,40 +117,43 @@ def api_v1_package_to_json(package):
 
 @app.route("/")
 @app.route("/metapackages/")
-@app.route("/metapackages/<starting>")
-@app.route("/metapackages/after/<after>")
-@app.route("/metapackages/before/<before>")
-def metapackages(starting=None, after=None, before=None):
-    reponames = repoman.GetNames(REPOSITORIES)
+@app.route("/metapackages/<bound>")
+def metapackages(bound=None):
+    before, after = None, None
+    firstpage, lastpage = False, False
 
-    # init filter to support pagination
-    namefilter = None
-    if after:
+    namefilter = NameStartingQueryFilter(bound)
+    if bound and bound.startswith('>'):
+        after = bound[1:]
         namefilter = NameAfterQueryFilter(after)
-    elif before:
+    elif bound and bound.startswith('<'):
+        before = bound[1:]
         namefilter = NameBeforeQueryFilter(before)
-    else:
-        namefilter = NameStartingQueryFilter(starting)
+
+    reponames = repoman.GetNames(REPOSITORIES)
 
     packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), limit=PER_PAGE)
 
     # on empty result, fallback to show first, last set of results
     if not packages:
         if after:
-            namefilter = NameAfterQueryFilter()
-        else:
             namefilter = NameBeforeQueryFilter()
+            lastpage = True
+        else:
+            namefilter = NameAfterQueryFilter()
+            firstpage = True
 
-    packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), limit=PER_PAGE)
+        packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), limit=PER_PAGE)
 
-    # get first and last entries for pagination
-    first, last = None, None
+    firstname, lastname = None, None
 
-    if packages:
-        first, last = packages[0].effname, packages[0].effname
+    if not packages:
+        lastpage = firstpage = True
+    else:
+        firstname, lastname = packages[0].effname, packages[0].effname
         for package in packages:
-            last = max(last, package.effname)
-            first = min(first, package.effname)
+            lastname = max(lastname, package.effname)
+            firstname = min(firstname, package.effname)
 
     summaries = MetapackagesToMetasummaries(PackagesToMetapackages(packages))
     repometadata = repoman.GetMetadata();
@@ -160,9 +163,11 @@ def metapackages(starting=None, after=None, before=None):
         reponames=reponames,
         summaries=summaries,
         repometadata=repometadata,
-        starting=starting,
-        first=first,
-        last=last
+        bound=bound,
+        firstname=firstname,
+        lastname=lastname,
+        firstpage=firstpage,
+        lastpage=lastpage
     )
 
 @app.route("/metapackage/<name>")

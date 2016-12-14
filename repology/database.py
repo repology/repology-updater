@@ -85,7 +85,7 @@ class NameBeforeQueryFilter(QueryFilter):
     def GetWhereArgs(self):
         return [ self.name ] if self.name else []
 
-    def GetOrder(self):
+    def GetSort(self):
         return 'effname DESC'
 
 
