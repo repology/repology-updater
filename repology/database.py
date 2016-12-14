@@ -561,3 +561,30 @@ class Database:
                 ignoreversion=row[16],
             ) for row in self.cursor.fetchall()
         ]
+
+    def GetMaintainersCount(self):
+        self.cursor.execute("""SELECT count(*) FROM maintainers""")
+
+        return self.cursor.fetchall()[0][0]
+
+    def GetMaintainers(self, offset=0, limit=500):
+        self.cursor.execute("""
+            SELECT
+                maintainer,
+                num_packages,
+                num_metapackages
+            FROM maintainers
+            ORDER BY maintainer
+            LIMIT %s
+            OFFSET %s
+        """,
+            (limit, offset,)
+        )
+
+        return [
+            {
+                'maintainer': row[0],
+                'num_packages': row[1],
+                'num_metapackages': row[2]
+            } for row in self.cursor.fetchall()
+        ]
