@@ -119,17 +119,40 @@ def api_v1_package_to_json(package):
         if getattr(package, field)
     }
 
-def metapackages_generic(bound, template='metapackages.html', *filters):
-    before, after = None, None
-    firstpage, lastpage = False, False
+def api_v1_metapackages_generic(bound, *filters):
+    return (
+        json.dumps(list(map(
+            api_v1_package_to_json,
+            database.GetMetapackages(
+                bound_to_filter(bound),
+                *filters,
+                limit=PER_PAGE
+            )
+        ))),
+        {'Content-type': 'application/json'}
+    )
 
-    namefilter = NameStartingQueryFilter(bound)
-    if bound and bound.startswith('>'):
-        after = bound[1:]
-        namefilter = NameAfterQueryFilter(after)
-    elif bound and bound.startswith('<'):
-        before = bound[1:]
-        namefilter = NameBeforeQueryFilter(before)
+def bound_to_filter(bound):
+    if bound and bound.startswith('<'):
+        return NameBeforeQueryFilter(bound[1:])
+    elif bound and bound.startswith('>'):
+        return NameAfterQueryFilter(bound[1:])
+    else:
+        return NameStartingQueryFilter(bound)
+
+def get_packages_name_range(packages):
+    firstname, lastname = None, None
+
+    if packages:
+        firstname = lastname = packages[0].effname
+        for package in packages[1:]:
+            lastname = max(lastname, package.effname)
+            firstname = min(firstname, package.effname)
+
+    return firstname, lastname
+
+def metapackages_generic(bound, template='metapackages.html', *filters):
+    namefilter = bound_to_filter(bound)
 
     reponames = repoman.GetNames(REPOSITORIES)
 
@@ -137,41 +160,23 @@ def metapackages_generic(bound, template='metapackages.html', *filters):
 
     # on empty result, fallback to show first, last set of results
     if not packages:
-        if after:
-            namefilter = NameBeforeQueryFilter()
-            lastpage = True
+        if bound and bound.startswith('<'):
+            namefilter = NameStartingQueryFilter()
         else:
-            namefilter = NameAfterQueryFilter()
-            firstpage = True
-
+            namefilter = NameBeforeQueryFilter()
         packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=PER_PAGE)
 
-    firstname, lastname = None, None
-
-    if not packages:
-        lastpage = firstpage = True
-    else:
-        firstname, lastname = packages[0].effname, packages[0].effname
-        for package in packages:
-            lastname = max(lastname, package.effname)
-            firstname = min(firstname, package.effname)
+    firstname, lastname = get_packages_name_range(packages)
 
     summaries = MetapackagesToMetasummaries(PackagesToMetapackages(packages))
-    repometadata = repoman.GetMetadata();
-
-    if len(summaries) < PER_PAGE:
-        lastpage = firstpage = True
 
     return flask.render_template(
         template,
         reponames=reponames,
         summaries=summaries,
-        repometadata=repometadata,
-        bound=bound,
+        repometadata=repoman.GetMetadata(),
         firstname=firstname,
-        lastname=lastname,
-        firstpage=firstpage,
-        lastpage=lastpage
+        lastname=lastname
     )
 
 @app.route("/")
