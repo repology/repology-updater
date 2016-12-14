@@ -297,26 +297,10 @@ def api_v1_metapackage(name):
         {'Content-type': 'application/json'}
     )
 
-@app.route("/api/v1/metapackages/")
-@app.route("/api/v1/metapackages/starting/<starting>")
-def api_v1_metapackages_starting(starting=None):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(starting=starting, limit=PER_PAGE)]
-    return (
-        json.dumps(packages),
-        {'Content-type': 'application/json'}
-    )
-
-@app.route("/api/v1/metapackages/after/<name>")
-def api_v1_metapackages_after(after=None):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(after=after, limit=PER_PAGE)]
-    return (
-        json.dumps(packages),
-        {'Content-type': 'application/json'}
-    )
-
-@app.route("/api/v1/metapackages/before/<name>")
-def api_v1_metapackages_before(before=None):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(before=before, limit=PER_PAGE)]
+@app.route("/api/v1/metapackages/all/")
+@app.route("/api/v1/metapackages/all/<bound>")
+def api_v1_metapackages_starting(bound=None):
+    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(NameStartingQueryFilter(bound), limit=PER_PAGE)]
     return (
         json.dumps(packages),
         {'Content-type': 'application/json'}
