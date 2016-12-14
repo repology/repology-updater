@@ -1,11 +1,30 @@
-{% include 'header.html' %}
+{% extends "layout.html" %}
+
+{% block title %}
+Package maintainers - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+Package maintainers
+{% endblock %}
+
+{% block content %}
+
+<nav>
+    Pages:
+    <ul>
+        {% for p in range(0, num_pages) %}
+        <li><a href="{{ url_for_self(page=p) }}"{% if page and page == p %} class="active"{% endif %}>{{ p }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>
 
 <ul>
 {% for maintainer in maintainers %}
     <li style="font-size: {{ 100 + ((maintainer.num_packages | sqrt) * 5) | clamp(0, 200) | round | int }}%">
-        <a href="{{ maintainer.sanitizedname }}.0.html">{{ maintainer.fullname }}</a> ({{ maintainer.num_packages }})
+        <a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">{{ maintainer.maintainer }}</a> ({{ maintainer.num_packages }})
     </li>
 {% endfor %}
 </ul>
 
-{% include 'footer.html' %}
+{% endblock %}
