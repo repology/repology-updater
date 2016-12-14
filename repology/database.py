@@ -63,39 +63,71 @@ class Database:
             CREATE INDEX ON packages(effname)
         """)
 
+        # metapackages
         self.cursor.execute("""
-            CREATE MATERIALIZED VIEW maintainer_package_counts AS
-                SELECT
-                    unnest(maintainers) AS maintainer,
-                    count(1) AS num_packages,
-                    count(DISTINCT effname) AS num_metapackages,
-                    count(nullif(versionclass = 1, false)) AS num_newest,
-                    count(nullif(versionclass = 2, false)) AS num_outdated,
-                    count(nullif(versionclass = 3, false)) AS num_ignored
-                FROM packages
-                GROUP BY maintainer
-                ORDER BY maintainer
-            WITH DATA
+            CREATE MATERIALIZED VIEW metapackages
+                AS
+                    SELECT
+                        repo,
+                        effname,
+                        count(nullif(versionclass=1, false)) AS num_newest,
+                        count(nullif(versionclass=2, false)) AS num_outdated,
+                        count(nullif(versionclass=3, false)) AS num_ignored
+                    FROM packages
+                    WHERE effname IN (
+                        SELECT
+                            effname
+                        FROM packages
+                        GROUP BY effname
+                        HAVING count(nullif(shadow, true)) > 0
+                    )
+                    GROUP BY effname,repo
+                WITH DATA
         """)
 
         self.cursor.execute("""
-            CREATE MATERIALIZED VIEW metapackages AS
-                SELECT
-                    effname as name,
-                    count(nullif(shadow, true)) = 0 as shadow_only
-                FROM packages
-                GROUP BY effname
-                ORDER BY effname
-            WITH DATA
+            CREATE UNIQUE INDEX ON metapackages(repo, effname)
         """)
 
         self.cursor.execute("""
-            CREATE UNIQUE INDEX ON maintainer_package_counts(maintainer)
+            CREATE INDEX ON metapackages(effname)
+        """)
+
+        # maintainers
+        self.cursor.execute("""
+            CREATE MATERIALIZED VIEW maintainers
+                AS
+                    SELECT
+                        unnest(maintainers) as maintainer,
+                        effname
+                    FROM packages
+                    GROUP BY maintainer, effname
+                WITH DATA
         """)
 
         self.cursor.execute("""
-            CREATE UNIQUE INDEX ON metapackages(name)
+            CREATE UNIQUE INDEX ON maintainers(maintainer, effname)
         """)
+
+        # not used yet
+        #self.cursor.execute("""
+        #    CREATE MATERIALIZED VIEW maintainer_package_counts AS
+        #        SELECT
+        #            unnest(maintainers) AS maintainer,
+        #            count(1) AS num_packages,
+        #            count(DISTINCT effname) AS num_metapackages,
+        #            count(nullif(versionclass = 1, false)) AS num_newest,
+        #            count(nullif(versionclass = 2, false)) AS num_outdated,
+        #            count(nullif(versionclass = 3, false)) AS num_ignored
+        #        FROM packages
+        #        GROUP BY maintainer
+        #        ORDER BY maintainer
+        #    WITH DATA
+        #""")
+
+        #self.cursor.execute("""
+        #    CREATE UNIQUE INDEX ON maintainer_package_counts(maintainer)
+        #""")
 
     def Clear(self):
         self.cursor.execute("""DELETE FROM packages""")
@@ -174,8 +206,9 @@ class Database:
         )
 
     def UpdateViews(self):
-        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_package_counts""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackages""");
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""");
+        #self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_package_counts""");
 
     def Commit(self):
         self.db.commit()
