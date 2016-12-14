@@ -35,7 +35,7 @@ class QueryFilter():
         return []
 
 
-class NameStartingFilter(QueryFilter):
+class NameStartingQueryFilter(QueryFilter):
     def __init__(self, name):
         self.name = name
 
@@ -49,7 +49,7 @@ class NameStartingFilter(QueryFilter):
         return [ self.name ] if self.name else []
 
 
-class NameSubstringFilter(QueryFilter):
+class NameSubstringQueryFilter(QueryFilter):
     def __init__(self, name):
         self.name = name
 
@@ -63,7 +63,7 @@ class NameSubstringFilter(QueryFilter):
         return [ self.name + "%" ]
 
 
-class MaintainerFilter(QueryFilter):
+class MaintainerQueryFilter(QueryFilter):
     def __init__(self, maintainer):
         self.maintainer = maintainer
 
@@ -77,7 +77,7 @@ class MaintainerFilter(QueryFilter):
         return [ self.maintainer ]
 
 
-class InRepoFilter(QueryFilter):
+class InRepoQueryFilter(QueryFilter):
     def __init__(self, repo):
         self.repo = repo
 
@@ -91,7 +91,7 @@ class InRepoFilter(QueryFilter):
         return [ self.repo ]
 
 
-class OutdatedInRepoFilter(QueryFilter):
+class OutdatedInRepoQueryFilter(QueryFilter):
     def __init__(self, repo):
         self.repo = repo
 
@@ -105,7 +105,7 @@ class OutdatedInRepoFilter(QueryFilter):
         return [ self.repo ]
 
 
-class NotInRepoFilter(QueryFilter):
+class NotInRepoQueryFilter(QueryFilter):
     def __init__(self, repo):
         self.repo = repo
 

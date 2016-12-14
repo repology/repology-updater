@@ -72,7 +72,7 @@ def RunTest(database, title, *filters):
     sc = StatCounter();
     for letter in [ '0' ] + [ chr(c) for c in range(ord('a'), ord('z')) ]:
         start = timer()
-        packages = database.GetMetapackages(NameStartingFilter(letter), *filters, limit=500)
+        packages = database.GetMetapackages(NameStartingQueryFilter(letter), *filters, limit=500)
         timedelta = timer() - start
 
         effnames = set()
@@ -94,19 +94,24 @@ def Main():
 
     database = Database(options.dsn)
 
+    print("==> Core requests")
+
     RunTest(database, "No filter")
-    RunTest(database, "Maintainer filter", MaintainerFilter('amdmi3@FreeBSD.org'))
-    RunTest(database, "Maintainer + InRepo", MaintainerFilter('amdmi3@FreeBSD.org'), InRepoFilter('freebsd'))
-    RunTest(database, "InRepo + Maintainer", InRepoFilter('freebsd'), MaintainerFilter('amdmi3@FreeBSD.org'))
-    RunTest(database, "InRepo ", InRepoFilter('freebsd'))
-    RunTest(database, "InRepo x2", InRepoFilter('freebsd'), InRepoFilter('debian_stable'))
-    RunTest(database, "InRepo x3", InRepoFilter('freebsd'), InRepoFilter('debian_stable'), InRepoFilter('debian_stable'))
-    RunTest(database, "InRepo x4", InRepoFilter('freebsd'), InRepoFilter('debian_stable'), InRepoFilter('debian_unstable'), InRepoFilter('debian_testing'))
-    RunTest(database, "Outdated", OutdatedInRepoFilter('freebsd'))
-    RunTest(database, "Outdated + InRepo", OutdatedInRepoFilter('freebsd'), InRepoFilter('debian_stable'))
-    RunTest(database, "NotInRepo", OutdatedInRepoFilter('freebsd'))
-    RunTest(database, "InRepo + NotInRepo", OutdatedInRepoFilter('freebsd'), NotInRepoFilter('pkgsrc'))
-    RunTest(database, "InRepo + NotInRepo + NotInRepo", OutdatedInRepoFilter('freebsd'), NotInRepoFilter('pkgsrc'), NotInRepoFilter('openbsd'))
+    RunTest(database, "Maintainer", MaintainerQueryFilter('amdmi3@FreeBSD.org'))
+    RunTest(database, "InRepo", InRepoQueryFilter('freebsd'))
+    RunTest(database, "Outdated", OutdatedInRepoQueryFilter('freebsd'))
+    RunTest(database, "NotInRepo", NotInRepoQueryFilter('freebsd'))
+
+    print("==> Advanced filtering")
+
+    RunTest(database, "Maintainer + InRepo", MaintainerQueryFilter('amdmi3@FreeBSD.org'), InRepoQueryFilter('freebsd'))
+    RunTest(database, "InRepo + Maintainer", InRepoQueryFilter('freebsd'), MaintainerQueryFilter('amdmi3@FreeBSD.org'))
+    RunTest(database, "InRepo x2", InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'))
+    RunTest(database, "InRepo x3", InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'), InRepoQueryFilter('debian_stable'))
+    RunTest(database, "InRepo x4", InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'), InRepoQueryFilter('debian_unstable'), InRepoQueryFilter('debian_testing'))
+    RunTest(database, "Outdated + InRepo", OutdatedInRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'))
+    RunTest(database, "InRepo + NotInRepo", OutdatedInRepoQueryFilter('freebsd'), NotInRepoQueryFilter('pkgsrc'))
+    RunTest(database, "InRepo + NotInRepo + NotInRepo", OutdatedInRepoQueryFilter('freebsd'), NotInRepoQueryFilter('pkgsrc'), NotInRepoQueryFilter('openbsd'))
 
     return 0
 
