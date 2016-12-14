@@ -82,6 +82,9 @@ def RepositoryVersionClass2CSSClass(value):
     elif value == RepositoryVersionClass.lonely:
         return 'lonely'
 
+def url_for_self(**args):
+    return flask.url_for(flask.request.endpoint, **dict(flask.request.view_args, **args))
+
 app = Flask(__name__)
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
@@ -92,6 +95,7 @@ app.jinja_env.filters['split'] = Split
 app.jinja_env.filters['newformat'] = NewFormat
 app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
+app.jinja_env.globals['url_for_self'] = url_for_self
 
 database = Database("dbname=repology user=repology password=repology", readonly=True)
 repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
@@ -115,10 +119,7 @@ def api_v1_package_to_json(package):
         if getattr(package, field)
     }
 
-@app.route("/")
-@app.route("/metapackages/")
-@app.route("/metapackages/<bound>")
-def metapackages(bound=None):
+def metapackages_generic(bound, *filters, **args):
     before, after = None, None
     firstpage, lastpage = False, False
 
@@ -132,7 +133,7 @@ def metapackages(bound=None):
 
     reponames = repoman.GetNames(REPOSITORIES)
 
-    packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), limit=PER_PAGE)
+    packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=PER_PAGE)
 
     # on empty result, fallback to show first, last set of results
     if not packages:
@@ -143,7 +144,7 @@ def metapackages(bound=None):
             namefilter = NameAfterQueryFilter()
             firstpage = True
 
-        packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), limit=PER_PAGE)
+        packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=PER_PAGE)
 
     firstname, lastname = None, None
 
