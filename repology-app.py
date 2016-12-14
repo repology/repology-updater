@@ -159,6 +159,9 @@ def metapackages_generic(bound, *filters):
     summaries = MetapackagesToMetasummaries(PackagesToMetapackages(packages))
     repometadata = repoman.GetMetadata();
 
+    if len(summaries) < PER_PAGE:
+        lastpage = firstpage = True
+
     return flask.render_template(
         "metapackages.html",
         reponames=reponames,
