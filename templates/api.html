@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block title %}
+API - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+API
+{% endblock %}
+
+{% block content %}
+
+<article>
+
+<h3>Introduction</h3>
+
+<p>API always returns a list of packages. These packages may belong to a single metapackage, or a range of metapackages, or a range of metapackages filtered by specific condition. API never returns data for more than {{ PER_PAGE }} metapackages at once. Data for all metapackages may be retrieved by iterating over batches metapackages. If first request returns batch for e.g. <b>aalib</b>..<b>acpid</b>, you may request the next batch as <b>&gt;acpid</b>, so it'll start with <b>acpidump</b>. Empty batch means the end of data.</p>
+
+<h3>Single metapackage</h3>
+
+<p>Get packages for single metapackage
+<pre>
+{{ url_for('api_v1_metapackage', name='firefox') }}
+</pre>
+</p>
+
+<h3>Multiple metapackages</h3>
+
+<p>Get packages for first 500 metapackages
+<pre>
+{{ url_for('api_v1_metapackages_all') }}
+</pre>
+</p>
+
+<p>Get packages for first 500 metapackages starting with <b>firefox</b>
+<pre>
+{{ url_for('api_v1_metapackages_all', bound='firefox') }}
+</pre>
+</p>
+
+<p>Get packages for first 500 metapackages after <b>firefox</b> (firefox not included)
+<pre>
+{{ url_for('api_v1_metapackages_all', bound='>firefox')|replace('%3E', '>') }}
+</pre>
+</p>
+
+<p>Get packages for first 500 metapackages just before <b>firefox</b> (firefox not included)
+<pre>
+{{ url_for('api_v1_metapackages_all', bound='<firefox')|replace('%3C', '<') }}
+</pre>
+</p>
+
+<p>All range-of-metapackage requests support <b>&lt;</b> and <b>&gt;</b> syntax</p>
+
+<h3>Filtered metapackage requests</h3>
+
+<p>Get packages for metapackages present in specific repository
+<pre>
+{{ url_for('api_v1_metapackages_in_repo', repo='freebsd') }}
+{{ url_for('api_v1_metapackages_in_repo', repo='freebsd', bound='firefox') }}
+{{ url_for('api_v1_metapackages_in_repo', repo='freebsd', bound='>firefox')|replace('%3E', '>') }}
+{{ url_for('api_v1_metapackages_in_repo', repo='freebsd', bound='<firefox')|replace('%3C', '<') }}
+</pre>
+</p>
+
+<p>Get packages for metapackages not present in specific repository
+<pre>
+{{ url_for('api_v1_metapackages_not_in_repo', repo='freebsd') }}
+{{ url_for('api_v1_metapackages_not_in_repo', repo='freebsd', bound='firefox') }}
+{{ url_for('api_v1_metapackages_not_in_repo', repo='freebsd', bound='>firefox')|replace('%3E', '>') }}
+{{ url_for('api_v1_metapackages_not_in_repo', repo='freebsd', bound='<firefox')|replace('%3C', '<') }}
+</pre>
+</p>
+
+<p>Get packages for metapackages outdated in specific repository
+<pre>
+{{ url_for('api_v1_metapackages_outdated_in_repo', repo='freebsd') }}
+{{ url_for('api_v1_metapackages_outdated_in_repo', repo='freebsd', bound='firefox') }}
+{{ url_for('api_v1_metapackages_outdated_in_repo', repo='freebsd', bound='>firefox')|replace('%3E', '>') }}
+{{ url_for('api_v1_metapackages_outdated_in_repo', repo='freebsd', bound='<firefox')|replace('%3C', '<') }}
+</pre>
+</p>
+
+<p>Get packages for metapackages for specific maintainer
+<pre>
+{{ url_for('api_v1_metapackages_by_maintainer', maintainer='amdmi3@FreeBSD.org') }}
+{{ url_for('api_v1_metapackages_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='firefox') }}
+{{ url_for('api_v1_metapackages_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='>firefox')|replace('%3E', '>') }}
+{{ url_for('api_v1_metapackages_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='<firefox')|replace('%3C', '<') }}
+</pre>
+</p>
+
+<p>Get packages for metapackages which are outdated for specific maintainer
+<pre>
+{{ url_for('api_v1_metapackages_outdated_by_maintainer', maintainer='amdmi3@FreeBSD.org') }}
+{{ url_for('api_v1_metapackages_outdated_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='firefox') }}
+{{ url_for('api_v1_metapackages_outdated_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='>firefox')|replace('%3E', '>') }}
+{{ url_for('api_v1_metapackages_outdated_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='<firefox')|replace('%3C', '<') }}
+</pre>
+</p>
+
+</article>
+
+{% endblock %}

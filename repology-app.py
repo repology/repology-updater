@@ -303,6 +303,11 @@ def api_v1_metapackage(name):
         {'Content-type': 'application/json'}
     )
 
+@app.route("/api")
+@app.route("/api/v1")
+def api_v1():
+    return flask.render_template("api.html", PER_PAGE=PER_PAGE)
+
 @app.route("/api/v1/metapackages/all/")
 @app.route("/api/v1/metapackages/all/<bound>")
 def api_v1_metapackages_starting(bound=None):
