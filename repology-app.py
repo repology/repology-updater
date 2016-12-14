@@ -119,7 +119,7 @@ def api_v1_package_to_json(package):
         if getattr(package, field)
     }
 
-def metapackages_generic(bound, *filters):
+def metapackages_generic(bound, template='metapackages.html', *filters):
     before, after = None, None
     firstpage, lastpage = False, False
 
@@ -163,7 +163,7 @@ def metapackages_generic(bound, *filters):
         lastpage = firstpage = True
 
     return flask.render_template(
-        "metapackages.html",
+        template,
         reponames=reponames,
         summaries=summaries,
         repometadata=repometadata,
