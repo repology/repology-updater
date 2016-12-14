@@ -16,12 +16,13 @@
         <nav id="nav-primary">
             <h1 class="site-logo">Repology</h1>
             <ul>
-                <li><a href="{{ url_for('news') }}"{% if request.endpoint == 'news' %} class="active"{% endif %}>News</a></li>
                 <li><a href="{{ url_for('about') }}"{% if request.endpoint == 'about' %} class="active"{% endif %}>About</a></li>
+                <li><a href="{{ url_for('news') }}"{% if request.endpoint == 'news' %} class="active"{% endif %}>News</a></li>
+                <li><a href="{{ url_for('api_v1') }}"{% if request.endpoint == 'api_v1' %} class="active"{% endif %}>API</a></li>
             </ul>
             <ul>
-                <li><a href="{{ url_for('metapackages_all') }}"{% if request.endpoint == 'metapackages' %} class="active"{% endif %}>All packages</a></li>
-                <li><a href="{{ url_for('maintainers') }}"{% if request.endpoint == 'metapackages_by_maintainer' %} class="active"{% endif %}>By maintainer</a></li>
+                <li><a href="{{ url_for('metapackages_all') }}"{% if request.endpoint == 'metapackages_all' %} class="active"{% endif %}>All packages</a></li>
+                <li><a href="{{ url_for('maintainers') }}"{% if request.endpoint == 'metapackages_by_maintainer' or request.endpoint == 'maintainers' %} class="active"{% endif %}>By maintainer</a></li>
                 {#
                 <li><a href="{{ url_for('metapackages_in_repo') }}"{% if subsection == "repositories" %} class="active"{% endif %}>By repo</a></li>
                 <li><a href="{{ site_root }}outdated/index.html"{% if subsection == "outdated" %} class="active"{% endif %}>Outdated by repo</a></li>
