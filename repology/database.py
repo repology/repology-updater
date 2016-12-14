@@ -43,7 +43,7 @@ class NameStartingQueryFilter(QueryFilter):
         self.name = name
 
     def GetTable(self):
-        return 'metapackages'
+        return 'repo_metapackages'
 
     def GetWhere(self):
         return 'effname >= %s' if self.name else 'true'
@@ -60,7 +60,7 @@ class NameAfterQueryFilter(QueryFilter):
         self.name = name
 
     def GetTable(self):
-        return 'metapackages'
+        return 'repo_metapackages'
 
     def GetWhere(self):
         return 'effname > %s' if self.name else 'true'
@@ -77,7 +77,7 @@ class NameBeforeQueryFilter(QueryFilter):
         self.name = name
 
     def GetTable(self):
-        return 'metapackages'
+        return 'repo_metapackages'
 
     def GetWhere(self):
         return 'effname < %s' if self.name else 'true'
@@ -94,7 +94,7 @@ class NameSubstringQueryFilter(QueryFilter):
         self.name = name
 
     def GetTable(self):
-        return 'metapackages'
+        return 'repo_metapackages'
 
     def GetWhere(self):
         return '{table}.effname like %s'
@@ -108,10 +108,24 @@ class MaintainerQueryFilter(QueryFilter):
         self.maintainer = maintainer
 
     def GetTable(self):
-        return 'maintainers'
+        return 'maintainer_metapackages'
 
     def GetWhere(self):
         return '{table}.maintainer=%s'
+
+    def GetWhereArgs(self):
+        return [ self.maintainer ]
+
+
+class MaintainerOutdatedQueryFilter(QueryFilter):
+    def __init__(self, maintainer):
+        self.maintainer = maintainer
+
+    def GetTable(self):
+        return 'maintainer_metapackages'
+
+    def GetWhere(self):
+        return '{table}.maintainer=%s and {table}.num_packages_outdated > 0'
 
     def GetWhereArgs(self):
         return [ self.maintainer ]
@@ -122,7 +136,7 @@ class InRepoQueryFilter(QueryFilter):
         self.repo = repo
 
     def GetTable(self):
-        return 'metapackages'
+        return 'repo_metapackages'
 
     def GetWhere(self):
         return '{table}.repo=%s'
@@ -136,7 +150,7 @@ class InAnyRepoQueryFilter(QueryFilter):
         self.repos = repos
 
     def GetTable(self):
-        return 'metapackages'
+        return 'repo_metapackages'
 
     def GetWhere(self):
         return '{table}.repo in (' + ','.join(['%s'] * len(self.repos)) + ')'
@@ -150,7 +164,7 @@ class OutdatedInRepoQueryFilter(QueryFilter):
         self.repo = repo
 
     def GetTable(self):
-        return 'metapackages'
+        return 'repo_metapackages'
 
     def GetWhere(self):
         return '{table}.repo=%s AND {table}.num_outdated>0'
@@ -164,7 +178,7 @@ class NotInRepoQueryFilter(QueryFilter):
         self.repo = repo
 
     def GetTable(self):
-        return 'metapackages'
+        return 'repo_metapackages'
 
     def GetHaving(self):
         return 'count(nullif({table}.repo = %s, false)) = 0'
@@ -281,7 +295,7 @@ class Database:
 
         # metapackages
         self.cursor.execute("""
-            CREATE MATERIALIZED VIEW metapackages
+            CREATE MATERIALIZED VIEW repo_metapackages
                 AS
                     SELECT
                         repo,
@@ -302,48 +316,52 @@ class Database:
         """)
 
         self.cursor.execute("""
-            CREATE UNIQUE INDEX ON metapackages(repo, effname)
+            CREATE UNIQUE INDEX ON repo_metapackages(repo, effname)
         """)
 
         self.cursor.execute("""
-            CREATE INDEX ON metapackages(effname)
+            CREATE INDEX ON repo_metapackages(effname)
         """)
 
         # maintainers
         self.cursor.execute("""
-            CREATE MATERIALIZED VIEW maintainers
+            CREATE MATERIALIZED VIEW maintainer_metapackages
                 AS
                     SELECT
                         unnest(maintainers) as maintainer,
-                        effname
+                        effname,
+                        count(1) AS num_packages,
+                        count(nullif(versionclass = 1, false)) AS num_packages_newest,
+                        count(nullif(versionclass = 2, false)) AS num_packages_outdated,
+                        count(nullif(versionclass = 3, false)) AS num_packages_ignored
                     FROM packages
                     GROUP BY maintainer, effname
                 WITH DATA
         """)
 
         self.cursor.execute("""
-            CREATE UNIQUE INDEX ON maintainers(maintainer, effname)
+            CREATE UNIQUE INDEX ON maintainer_metapackages(maintainer, effname)
         """)
 
         # not used yet
-        #self.cursor.execute("""
-        #    CREATE MATERIALIZED VIEW maintainer_package_counts AS
-        #        SELECT
-        #            unnest(maintainers) AS maintainer,
-        #            count(1) AS num_packages,
-        #            count(DISTINCT effname) AS num_metapackages,
-        #            count(nullif(versionclass = 1, false)) AS num_newest,
-        #            count(nullif(versionclass = 2, false)) AS num_outdated,
-        #            count(nullif(versionclass = 3, false)) AS num_ignored
-        #        FROM packages
-        #        GROUP BY maintainer
-        #        ORDER BY maintainer
-        #    WITH DATA
-        #""")
+        self.cursor.execute("""
+            CREATE MATERIALIZED VIEW maintainers AS
+                SELECT
+                    unnest(maintainers) AS maintainer,
+                    count(1) AS num_packages,
+                    count(DISTINCT effname) AS num_metapackages,
+                    count(nullif(versionclass = 1, false)) AS num_packages_newest,
+                    count(nullif(versionclass = 2, false)) AS num_packages_outdated,
+                    count(nullif(versionclass = 3, false)) AS num_packages_ignored
+                FROM packages
+                GROUP BY maintainer
+                ORDER BY maintainer
+            WITH DATA
+        """)
 
-        #self.cursor.execute("""
-        #    CREATE UNIQUE INDEX ON maintainer_package_counts(maintainer)
-        #""")
+        self.cursor.execute("""
+            CREATE UNIQUE INDEX ON maintainers(maintainer)
+        """)
 
     def Clear(self):
         self.cursor.execute("""DELETE FROM packages""")
@@ -422,9 +440,9 @@ class Database:
         )
 
     def UpdateViews(self):
-        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackages""");
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages""");
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""");
-        #self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_package_counts""");
 
     def Commit(self):
         self.db.commit()
