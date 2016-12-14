@@ -34,9 +34,12 @@ class QueryFilter():
     def GetHavingArgs(self):
         return []
 
+    def GetSort(self):
+        return None
+
 
 class NameStartingQueryFilter(QueryFilter):
-    def __init__(self, name):
+    def __init__(self, name=None):
         self.name = name
 
     def GetTable(self):
@@ -47,6 +50,43 @@ class NameStartingQueryFilter(QueryFilter):
 
     def GetWhereArgs(self):
         return [ self.name ] if self.name else []
+
+    def GetSort(self):
+        return 'effname ASC'
+
+
+class NameAfterQueryFilter(QueryFilter):
+    def __init__(self, name=None):
+        self.name = name
+
+    def GetTable(self):
+        return 'metapackages'
+
+    def GetWhere(self):
+        return 'effname > %s' if self.name else 'true'
+
+    def GetWhereArgs(self):
+        return [ self.name ] if self.name else []
+
+    def GetSort(self):
+        return 'effname ASC'
+
+
+class NameBeforeQueryFilter(QueryFilter):
+    def __init__(self, name=None):
+        self.name = name
+
+    def GetTable(self):
+        return 'metapackages'
+
+    def GetWhere(self):
+        return 'effname < %s' if self.name else 'true'
+
+    def GetWhereArgs(self):
+        return [ self.name ] if self.name else []
+
+    def GetOrder(self):
+        return 'effname DESC'
 
 
 class NameSubstringQueryFilter(QueryFilter):
@@ -145,6 +185,7 @@ class MetapackageQueryConstructor:
         having = []
         having_args = []
         args = []
+        sort = None
 
         tablenum = 0
         for f in self.filters:
@@ -159,6 +200,14 @@ class MetapackageQueryConstructor:
             if f.GetHaving():
                 having.append(f.GetHaving().format(table=tableid))
                 having_args += f.GetHavingArgs()
+
+            if f.GetSort():
+                if sort is None:
+                    sort = f.GetSort()
+                elif sort == f.GetSort():
+                    pass
+                else:
+                    raise RuntimeError("sorting mode conflict in query")
 
             tablenum += 1
 
@@ -177,7 +226,12 @@ class MetapackageQueryConstructor:
             query += ' GROUP BY effname HAVING ' + ' AND '.join(having)
             args += having_args
 
-        query += ' ORDER BY effname LIMIT %s'
+        if sort:
+            query += ' ORDER BY ' + sort
+        else:
+            query += ' ORDER BY effname ASC'
+
+        query += ' LIMIT %s'
         args.append(self.limit)
 
         return (query, args)
