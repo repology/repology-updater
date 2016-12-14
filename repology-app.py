@@ -22,12 +22,11 @@ import flask
 from flask import Flask
 from math import sqrt
 
-from repology.database import Database
+from repology.database import *
 from repology.repoman import RepositoryManager
 from repology.package import *
 from repology.packageproc import *
 from repology.metapackageproc import *
-from repology.filters import InAnyRepoFilter
 
 # settings
 PER_PAGE = 500
@@ -122,11 +121,12 @@ def api_v1_package_to_json(package):
 def metapackages(starting=None):
     reponames = repoman.GetNames(REPOSITORIES)
     summaries = MetapackagesToMetasummaries(
-        FilterMetapackages(
-            PackagesToMetapackages(
-                database.GetMetapackages(starting=starting, limit=PER_PAGE)
-            ),
-            InAnyRepoFilter(reponames)
+        PackagesToMetapackages(
+            database.GetMetapackages(
+                NameStartingQueryFilter(starting),
+                InAnyRepoQueryFilter(reponames),
+                limit=PER_PAGE
+            )
         )
     )
     repometadata = repoman.GetMetadata();
