@@ -6,9 +6,9 @@ Metapackages index
 
 {% block content %}
 
+{% if not firstpage or not lastpage %}
 <nav>
     Pages:
-    {% if not firstpage or not lastpage %}
     <ul>
         {% if firstname and not firstpage %}
             <li><a href="{{ url_for_self(bound="<"+firstname) }}">«</a></li>
@@ -17,7 +17,6 @@ Metapackages index
             <li><a href="{{ url_for_self(bound=">"+lastname) }}">»</a></li>
         {% endif %}
     </ul>
-    {% endif %}
     <ul>
         <li><a href="{{ url_for_self(bound=None) }}">0-9</a></li>
         {% for letter in "abcdefghijklmnopqrstuvwxyz" %}
@@ -25,6 +24,7 @@ Metapackages index
         {% endfor %}
     </ul>
 </nav>
+{% endif %}
 
 {% if summaries %}
     <table>
