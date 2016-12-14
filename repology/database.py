@@ -43,10 +43,10 @@ class NameStartingFilter(QueryFilter):
         return 'metapackages'
 
     def GetWhere(self):
-        return 'effname >= %s'
+        return 'effname >= %s' if self.name else 'true'
 
     def GetWhereArgs(self):
-        return [ self.name ]
+        return [ self.name ] if self.name else []
 
 
 class NameSubstringFilter(QueryFilter):
