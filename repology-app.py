@@ -177,7 +177,7 @@ def metapackages_generic(bound, template='metapackages.html', *filters):
 @app.route("/")
 @app.route("/metapackages/all/")
 @app.route("/metapackages/all/<bound>")
-def metapackages(bound=None):
+def metapackages_all(bound=None):
     return metapackages_generic(bound)
 
 @app.route("/metapackages/in-repo/<repo>/")

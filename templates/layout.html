@@ -20,7 +20,7 @@
                 <li><a href="{{ url_for('about') }}"{% if request.endpoint == 'about' %} class="active"{% endif %}>About</a></li>
             </ul>
             <ul>
-                <li><a href="{{ url_for('metapackages') }}"{% if request.endpoint == 'metapackages' %} class="active"{% endif %}>All packages</a></li>
+                <li><a href="{{ url_for('metapackages_all') }}"{% if request.endpoint == 'metapackages' %} class="active"{% endif %}>All packages</a></li>
                 <li><a href="{{ url_for('maintainers') }}"{% if request.endpoint == 'metapackages_by_maintainer' %} class="active"{% endif %}>By maintainer</a></li>
                 {#
                 <li><a href="{{ url_for('metapackages_in_repo') }}"{% if subsection == "repositories" %} class="active"{% endif %}>By repo</a></li>
