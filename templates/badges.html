@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Badges - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+Badges
+{% endblock %}
+
+{% block content %}
+
+<article>
+
+<p>Repology provides SVG badges which list packaging status for project authors to place on their web sites and repository READMEs.</p>
+
+<h3>Big badge</h3>
+
+<p>This shows all known repositories, package versions and up-to-date status</p>
+
+<p><img src="{{ url_for('badge_all', name='firefox') }}"></p>
+
+<p>HTML code:
+<pre>
+&lt;a href=&quot;http://repology.org{{ url_for('metapackage', name='PACKAGE') }}&quot;&gt;&lt;img src=&quot;http://repology.org{{ url_for('badge_all', name='PACKAGE')}}&quot;&gt;&lt;/a&gt;
+</pre>
+</p>
+
+<p>Markdown code:
+<pre>
+[![Packaging status](http://repology.org{{ url_for('badge_all', name='PACKAGE') }}))](http://repology.org{{ url_for('metapackage', name='PACKAGE') }})
+</pre>
+</p>
+
+<h3>Tiny badge</h3>
+
+<p>This shows all known repositories, package versions and up-to-date status</p>
+
+<p><img src="{{ url_for('badge_tiny', name='firefox') }}"></p>
+
+</article>
+
+{% endblock %}

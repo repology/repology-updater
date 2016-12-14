@@ -293,6 +293,10 @@ def news():
 def about():
     return flask.render_template("about.html")
 
+@app.route("/badges")
+def badges():
+    return flask.render_template("badges.html")
+
 @app.route("/api/v1/metapackage/<name>")
 def api_v1_metapackage(name):
     return (
