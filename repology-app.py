@@ -260,6 +260,10 @@ def badge_tiny(name):
 def news():
     return flask.render_template("news.html")
 
+@app.route("/about")
+def about():
+    return flask.render_template("about.html")
+
 @app.route("/api/v1/metapackage/<name>")
 def api_v1_metapackage(name):
     packages = [api_v1_package_to_json(package) for package in database.GetMetapackage(name)]
