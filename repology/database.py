@@ -35,8 +35,6 @@ class Database:
 
         self.cursor.execute("""
             CREATE TABLE packages (
-                id serial not null primary key,
-
                 repo varchar(255) not null,
                 family varchar(255) not null,
 
