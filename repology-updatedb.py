@@ -56,7 +56,7 @@ def Main():
     filters = [] if options.no_shadow else [ShadowFilter()]
 
     logger.Log("connecting to database...")
-    database = Database(options.dsn)
+    database = Database(options.dsn, readonly=False)
     if options.init:
         logger.Log("(re)initializing the database...")
         database.CreateSchema()

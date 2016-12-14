@@ -94,7 +94,7 @@ app.jinja_env.filters['newformat'] = NewFormat
 app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
 
-database = Database("dbname=repology user=repology password=repology")
+database = Database("dbname=repology user=repology password=repology", readonly=True)
 repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
 
 # helpers

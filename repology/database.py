@@ -22,8 +22,10 @@ from repology.package import Package
 
 
 class Database:
-    def __init__(self, dsn):
+    def __init__(self, dsn, readonly=True):
         self.db = psycopg2.connect(dsn)
+        if readonly:
+            self.db.set_session(readonly=True, autocommit=True)
         self.cursor = self.db.cursor()
 
     def CreateSchema(self):
