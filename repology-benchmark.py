@@ -66,13 +66,13 @@ class StatCounter():
         print('Metapackages: {}/{:.0f}/{}'.format(self.min_metapackages, self.total_metapackages / self.count, self.max_metapackages), file=sys.stderr)
 
 
-def RunTest(database, title, *filters):
+def RunTest(database, title, pagefilter, *filters):
     print("===> "+ title, file=sys.stderr)
 
     sc = StatCounter();
     for letter in [ '0' ] + [ chr(c) for c in range(ord('a'), ord('z')) ]:
         start = timer()
-        packages = database.GetMetapackages(NameStartingQueryFilter(letter), *filters, limit=500)
+        packages = database.GetMetapackages(pagefilter(letter), *filters, limit=500)
         timedelta = timer() - start
 
         effnames = set()
@@ -96,22 +96,25 @@ def Main():
 
     print("==> Core requests")
 
-    RunTest(database, "No filter")
-    RunTest(database, "Maintainer", MaintainerQueryFilter('amdmi3@FreeBSD.org'))
-    RunTest(database, "InRepo", InRepoQueryFilter('freebsd'))
-    RunTest(database, "Outdated", OutdatedInRepoQueryFilter('freebsd'))
-    RunTest(database, "NotInRepo", NotInRepoQueryFilter('freebsd'))
+    RunTest(database, "No filter (pagination only): starting", NameStartingQueryFilter)
+    RunTest(database, "No filter (pagination only): before", NameBeforeQueryFilter)
+    RunTest(database, "No filter (pagination only): after", NameAfterQueryFilter)
+
+    RunTest(database, "Maintainer", NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@FreeBSD.org'))
+    RunTest(database, "InRepo", NameStartingQueryFilter, InRepoQueryFilter('freebsd'))
+    RunTest(database, "Outdated", NameStartingQueryFilter, OutdatedInRepoQueryFilter('freebsd'))
+    RunTest(database, "NotInRepo", NameStartingQueryFilter, NotInRepoQueryFilter('freebsd'))
 
     print("==> Advanced filtering")
 
-    RunTest(database, "Maintainer + InRepo", MaintainerQueryFilter('amdmi3@FreeBSD.org'), InRepoQueryFilter('freebsd'))
-    RunTest(database, "InRepo + Maintainer", InRepoQueryFilter('freebsd'), MaintainerQueryFilter('amdmi3@FreeBSD.org'))
-    RunTest(database, "InRepo x2", InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'))
-    RunTest(database, "InRepo x3", InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'), InRepoQueryFilter('debian_stable'))
-    RunTest(database, "InRepo x4", InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'), InRepoQueryFilter('debian_unstable'), InRepoQueryFilter('debian_testing'))
-    RunTest(database, "Outdated + InRepo", OutdatedInRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'))
-    RunTest(database, "InRepo + NotInRepo", OutdatedInRepoQueryFilter('freebsd'), NotInRepoQueryFilter('pkgsrc'))
-    RunTest(database, "InRepo + NotInRepo + NotInRepo", OutdatedInRepoQueryFilter('freebsd'), NotInRepoQueryFilter('pkgsrc'), NotInRepoQueryFilter('openbsd'))
+    RunTest(database, "Maintainer + InRepo", NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@FreeBSD.org'), InRepoQueryFilter('freebsd'))
+    RunTest(database, "InRepo + Maintainer", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), MaintainerQueryFilter('amdmi3@FreeBSD.org'))
+    RunTest(database, "InRepo x2", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'))
+    RunTest(database, "InRepo x3", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'), InRepoQueryFilter('debian_stable'))
+    RunTest(database, "InRepo x4", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'), InRepoQueryFilter('debian_unstable'), InRepoQueryFilter('debian_testing'))
+    RunTest(database, "Outdated + InRepo", NameStartingQueryFilter, OutdatedInRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'))
+    RunTest(database, "InRepo + NotInRepo", NameStartingQueryFilter, OutdatedInRepoQueryFilter('freebsd'), NotInRepoQueryFilter('pkgsrc'))
+    RunTest(database, "InRepo + NotInRepo + NotInRepo", NameStartingQueryFilter, OutdatedInRepoQueryFilter('freebsd'), NotInRepoQueryFilter('pkgsrc'), NotInRepoQueryFilter('openbsd'))
 
     return 0
 
