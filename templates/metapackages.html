@@ -6,68 +6,71 @@ Metapackages index
 
 {% block content %}
 
-{% set headerevery = 50 %}
-
 <nav>
     Pages:
+    {% if not firstpage or not lastpage %}
     <ul>
         {% if firstname and not firstpage %}
-            <li><a href="{{ url_for('metapackages', bound="<"+firstname) }}">«</a></li>
+            <li><a href="{{ url_for_self(bound="<"+firstname) }}">«</a></li>
         {% endif %}
         {% if lastname and not lastpage %}
-            <li><a href="{{ url_for('metapackages', bound=">"+lastname) }}">»</a></li>
+            <li><a href="{{ url_for_self(bound=">"+lastname) }}">»</a></li>
         {% endif %}
     </ul>
+    {% endif %}
     <ul>
-        <li><a href="{{ url_for('metapackages') }}">*</a></li>
+        <li><a href="{{ url_for_self(bound=None) }}">0-9</a></li>
         {% for letter in "abcdefghijklmnopqrstuvwxyz" %}
-            <li><a href="{{ url_for('metapackages', bound=letter) }}"{% if starting and starting == letter %} class="active"{% endif %}>{{ letter|upper }}</a></li>
+        <li><a href="{{ url_for_self(bound=letter) }}"{% if starting and starting == letter %} class="active"{% endif %}>{{ letter|upper }}</a></li>
         {% endfor %}
     </ul>
 </nav>
 
-<table>
-{% for metapackagename,summaries in summaries|dictsort %}
-    {% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
-    <tr>
-        <th></th>
-        {% for reponame in reponames %}
-            <th>
-                {{ repometadata[reponame].desc|split(' ')|spantrim(8)|join('<br>')|safe }}
-            </th>
-        {% endfor %}
-    </tr>
-    {% endif %}
-    <tr>
-        <td><a href="{{ url_for("metapackage", name=metapackagename) }}">{{ metapackagename|spantrim(20)|safe }}</a></td>
-        {% for reponame in reponames %}
-            {% set summary = summaries[reponame] %}
-            {% if summary is defined %}
-                <td>
-                    <span class="version {{ summary.versionclass|repositoryversionclass2css }}">
-                        {%- if repometadata[reponame].link -%}
-                            <a href="{{ repometadata[reponame].link|newformat(**summary.bestpackage.__dict__)|safe }}">
-                        {%- endif -%}
+{% if summaries %}
+    <table>
+    {% for metapackagename,summaries in summaries|dictsort %}
+        {% set headerevery = 50 %}
+        {% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
+        <tr>
+            <th></th>
+            {% for reponame in reponames %}
+                <th>
+                    {{ repometadata[reponame].desc|split(' ')|spantrim(8)|join('<br>')|safe }}
+                </th>
+            {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+            <td><a href="{{ url_for("metapackage", name=metapackagename) }}">{{ metapackagename|spantrim(20)|safe }}</a></td>
+            {% for reponame in reponames %}
+                {% set summary = summaries[reponame] %}
+                {% if summary is defined %}
+                    <td>
+                        <span class="version {{ summary.versionclass|repositoryversionclass2css }}">
+                            {%- if repometadata[reponame].link -%}
+                                <a href="{{ repometadata[reponame].link|newformat(**summary.bestpackage.__dict__)|safe }}">
+                            {%- endif -%}
+                            {%- if summary.numpackages > 1 -%}
+                                {{- summary.version|spantrim(8)|safe -}}
+                            {%- else -%}
+                                {{- summary.version|spantrim(10)|safe -}}
+                            {%- endif -%}
+                            {%- if repometadata[reponame].link -%}
+                                </a>
+                            {%- endif -%}
+                        </span>
                         {%- if summary.numpackages > 1 -%}
-                            {{- summary.version|spantrim(8)|safe -}}
-                        {%- else -%}
-                            {{- summary.version|spantrim(10)|safe -}}
+                            <sup>{{- summary.numpackages -}}</sup>
                         {%- endif -%}
-                        {%- if repometadata[reponame].link -%}
-                            </a>
-                        {%- endif -%}
-                    </span>
-                    {%- if summary.numpackages > 1 -%}
-                        <sup>{{- summary.numpackages -}}</sup>
-                    {%- endif -%}
-                </td>
-            {% else %}
-                <td>-</td>
-            {% endif %}
-        {% endfor %}
-    </tr>
-{% endfor %}
-</table>
+                    </td>
+                {% else %}
+                    <td>-</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
 
 {% endblock %}
 

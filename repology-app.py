@@ -174,6 +174,27 @@ def metapackages_generic(bound, *filters):
         lastpage=lastpage
     )
 
+@app.route("/")
+@app.route("/metapackages/")
+@app.route("/metapackages/<bound>")
+def metapackages(bound=None):
+    return metapackages_generic(bound)
+
+@app.route("/metapackages/in-repo/<repo>/")
+@app.route("/metapackages/in-repo/<repo>/<bound>")
+def metapackages_by_repo(repo, bound=None):
+    return metapackages_generic(bound, InRepoQueryFilter(repo))
+
+@app.route("/metapackages/not-in-repo/<repo>/")
+@app.route("/metapackages/not-in-repo/<repo>/<bound>")
+def metapackages_not_in_repo(repo, bound=None):
+    return metapackages_generic(bound, NotInRepoQueryFilter(repo))
+
+@app.route("/metapackages/outdated-in-repo/<repo>/")
+@app.route("/metapackages/outdated-in-repo/<repo>/<bound>")
+def metapackages_outdated_in_repo(repo, bound=None):
+    return metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
+
 @app.route("/metapackage/<name>")
 def metapackage(name):
     packages = database.GetMetapackage(name)
