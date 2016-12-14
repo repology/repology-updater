@@ -289,20 +289,25 @@ def about():
 
 @app.route("/api/v1/metapackage/<name>")
 def api_v1_metapackage(name):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackage(name)]
-    if not packages:
-        flask.abort(404)
     return (
-        json.dumps(packages),
+        json.dumps(list(map(
+            api_v1_package_to_json,
+            database.GetMetapackage(name)
+        ))),
         {'Content-type': 'application/json'}
     )
 
 @app.route("/api/v1/metapackages/all/")
 @app.route("/api/v1/metapackages/all/<bound>")
 def api_v1_metapackages_starting(bound=None):
-    packages = [api_v1_package_to_json(package) for package in database.GetMetapackages(NameStartingQueryFilter(bound), limit=PER_PAGE)]
     return (
-        json.dumps(packages),
+        json.dumps(list(map(
+            api_v1_package_to_json,
+            database.GetMetapackages(
+                NameStartingQueryFilter(bound),
+                limit=PER_PAGE
+            )
+        ))),
         {'Content-type': 'application/json'}
     )
 
