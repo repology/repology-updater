@@ -8,6 +8,16 @@ Metapackages index
 
 {% set headerevery = 50 %}
 
+<nav>
+    Pages:
+    <ul>
+        <li><a href="{{ url_for('metapackages') }}">*</a></li>
+        {% for letter in "abcdefghijklmnopqrstuvwxyz" %}
+            <li><a href="{{ url_for('metapackages', starting=letter) }}">{{ letter|upper }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>
+
 <table>
 {% for metapackagename,summaries in summaries|dictsort %}
     {% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
