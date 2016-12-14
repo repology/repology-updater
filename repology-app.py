@@ -119,7 +119,7 @@ def api_v1_package_to_json(package):
         if getattr(package, field)
     }
 
-def metapackages_generic(bound, *filters, **args):
+def metapackages_generic(bound, *filters):
     before, after = None, None
     firstpage, lastpage = False, False
 
