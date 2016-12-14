@@ -182,37 +182,37 @@ def metapackages_generic(bound, template='metapackages.html', *filters):
 
 @app.route("/")
 @app.route("/metapackages/all/")
-@app.route("/metapackages/all/<bound>")
+@app.route("/metapackages/all/<bound>/")
 def metapackages_all(bound=None):
     return metapackages_generic(bound)
 
 @app.route("/metapackages/in-repo/<repo>/")
-@app.route("/metapackages/in-repo/<repo>/<bound>")
+@app.route("/metapackages/in-repo/<repo>/<bound>/")
 def metapackages_in_repo(repo, bound=None):
     return metapackages_generic(bound, InRepoQueryFilter(repo))
 
 @app.route("/metapackages/not-in-repo/<repo>/")
-@app.route("/metapackages/not-in-repo/<repo>/<bound>")
+@app.route("/metapackages/not-in-repo/<repo>/<bound>/")
 def metapackages_not_in_repo(repo, bound=None):
     return metapackages_generic(bound, NotInRepoQueryFilter(repo))
 
 @app.route("/metapackages/outdated-in-repo/<repo>/")
-@app.route("/metapackages/outdated-in-repo/<repo>/<bound>")
+@app.route("/metapackages/outdated-in-repo/<repo>/<bound>/")
 def metapackages_outdated_in_repo(repo, bound=None):
     return metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
 
 @app.route("/metapackages/by-maintainer/<maintainer>/")
-@app.route("/metapackages/by-maintainer/<maintainer>/<bound>")
+@app.route("/metapackages/by-maintainer/<maintainer>/<bound>/")
 def metapackages_by_maintainer(maintainer, bound=None):
     return metapackages_generic(bound, MaintainerQueryFilter(maintainer))
 
 @app.route("/metapackages/outdated-by-maintainer/<maintainer>/")
-@app.route("/metapackages/outdated-by-maintainer/<maintainer>/<bound>")
+@app.route("/metapackages/outdated-by-maintainer/<maintainer>/<bound>/")
 def metapackages_outdated_by_maintainer(maintainer, bound=None):
     return metapackages_generic(bound, MaintainerOutdatedQueryFilter(maintainer))
 
 @app.route("/maintainers/")
-@app.route("/maintainers/<int:page>")
+@app.route("/maintainers/<int:page>/")
 def maintainers(page=0):
     maintainers_count = database.GetMaintainersCount()
     maintainers = database.GetMaintainers(offset = page * PER_PAGE, limit = PER_PAGE)
