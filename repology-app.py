@@ -118,20 +118,52 @@ def api_v1_package_to_json(package):
 @app.route("/")
 @app.route("/metapackages/")
 @app.route("/metapackages/<starting>")
-def metapackages(starting=None):
+@app.route("/metapackages/after/<after>")
+@app.route("/metapackages/before/<before>")
+def metapackages(starting=None, after=None, before=None):
     reponames = repoman.GetNames(REPOSITORIES)
-    summaries = MetapackagesToMetasummaries(
-        PackagesToMetapackages(
-            database.GetMetapackages(
-                NameStartingQueryFilter(starting),
-                InAnyRepoQueryFilter(reponames),
-                limit=PER_PAGE
-            )
-        )
-    )
+
+    # init filter to support pagination
+    namefilter = None
+    if after:
+        namefilter = NameAfterQueryFilter(after)
+    elif before:
+        namefilter = NameBeforeQueryFilter(before)
+    else:
+        namefilter = NameStartingQueryFilter(starting)
+
+    packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), limit=PER_PAGE)
+
+    # on empty result, fallback to show first, last set of results
+    if not packages:
+        if after:
+            namefilter = NameAfterQueryFilter()
+        else:
+            namefilter = NameBeforeQueryFilter()
+
+    packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), limit=PER_PAGE)
+
+    # get first and last entries for pagination
+    first, last = None, None
+
+    if packages:
+        first, last = packages[0].effname, packages[0].effname
+        for package in packages:
+            last = max(last, package.effname)
+            first = min(first, package.effname)
+
+    summaries = MetapackagesToMetasummaries(PackagesToMetapackages(packages))
     repometadata = repoman.GetMetadata();
 
-    return flask.render_template("metapackages.html", reponames=reponames, summaries=summaries, repometadata=repometadata)
+    return flask.render_template(
+        "metapackages.html",
+        reponames=reponames,
+        summaries=summaries,
+        repometadata=repometadata,
+        starting=starting,
+        first=first,
+        last=last
+    )
 
 @app.route("/metapackage/<name>")
 def metapackage(name):

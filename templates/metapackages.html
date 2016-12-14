@@ -11,10 +11,16 @@ Metapackages index
 <nav>
     Pages:
     <ul>
+        {% if first %}
+            <li><a href="{{ url_for('metapackages', before=first) }}">«</a></li>
+        {% endif %}
         <li><a href="{{ url_for('metapackages') }}">*</a></li>
         {% for letter in "abcdefghijklmnopqrstuvwxyz" %}
-            <li><a href="{{ url_for('metapackages', starting=letter) }}">{{ letter|upper }}</a></li>
+            <li><a href="{{ url_for('metapackages', starting=letter) }}"{% if starting and starting == letter %} class="active"{% endif %}>{{ letter|upper }}</a></li>
         {% endfor %}
+        {% if last %}
+            <li><a href="{{ url_for('metapackages', after=last) }}">»</a></li>
+        {% endif %}
     </ul>
 </nav>
 
