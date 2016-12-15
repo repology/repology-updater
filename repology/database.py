@@ -159,6 +159,60 @@ class InAnyRepoQueryFilter(QueryFilter):
         return [ repo for repo in self.repos ]
 
 
+class InNumReposQueryFilter(QueryFilter):
+    def __init__(self, more=None, less=None):
+        self.more = more
+        self.less = less
+
+    def GetTable(self):
+        return 'metapackage_repocounts'
+
+    def GetWhere(self):
+        conditions = []
+        if self.more is not None:
+            conditions.append("{table}.num_repos >= %s")
+        if self.less is not None:
+            conditions.append("{table}.num_repos <= %s")
+
+        return ' AND '.join(conditions)
+
+    def GetWhereArgs(self):
+        args = []
+        if self.more is not None:
+            args.append(self.more)
+        if self.less is not None:
+            args.append(self.less)
+
+        return args
+
+
+class InNumFamiliesQueryFilter(QueryFilter):
+    def __init__(self, more=None, less=None):
+        self.more = more
+        self.less = less
+
+    def GetTable(self):
+        return 'metapackage_repocounts'
+
+    def GetWhere(self):
+        conditions = []
+        if self.more is not None:
+            conditions.append("{table}.num_families >= %s")
+        if self.less is not None:
+            conditions.append("{table}.num_families <= %s")
+
+        return ' AND '.join(conditions)
+
+    def GetWhereArgs(self):
+        args = []
+        if self.more is not None:
+            args.append(self.more)
+        if self.less is not None:
+            args.append(self.less)
+
+        return args
+
+
 class OutdatedInRepoQueryFilter(QueryFilter):
     def __init__(self, repo):
         self.repo = repo
@@ -293,7 +347,7 @@ class Database:
             CREATE INDEX ON packages(effname)
         """)
 
-        # metapackages
+        # repo_metapackages
         self.cursor.execute("""
             CREATE MATERIALIZED VIEW repo_metapackages
                 AS
@@ -323,7 +377,7 @@ class Database:
             CREATE INDEX ON repo_metapackages(effname)
         """)
 
-        # maintainers
+        # maintainer_metapackages
         self.cursor.execute("""
             CREATE MATERIALIZED VIEW maintainer_metapackages
                 AS
@@ -343,7 +397,7 @@ class Database:
             CREATE UNIQUE INDEX ON maintainer_metapackages(maintainer, effname)
         """)
 
-        # not used yet
+        # maintainers
         self.cursor.execute("""
             CREATE MATERIALIZED VIEW maintainers AS
                 SELECT
@@ -361,6 +415,31 @@ class Database:
 
         self.cursor.execute("""
             CREATE UNIQUE INDEX ON maintainers(maintainer)
+        """)
+
+        # repo counts
+        self.cursor.execute("""
+            CREATE MATERIALIZED VIEW metapackage_repocounts AS
+                SELECT
+                    effname,
+                    count(DISTINCT repo) AS num_repos,
+                    count(DISTINCT family) AS num_families
+                FROM packages
+                GROUP BY effname
+                ORDER BY effname
+            WITH DATA
+        """)
+
+        self.cursor.execute("""
+            CREATE UNIQUE INDEX ON metapackage_repocounts(effname)
+        """)
+
+        self.cursor.execute("""
+            CREATE INDEX ON metapackage_repocounts(num_repos)
+        """)
+
+        self.cursor.execute("""
+            CREATE INDEX ON metapackage_repocounts(num_families)
         """)
 
     def Clear(self):
@@ -443,6 +522,7 @@ class Database:
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""");
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""");
 
     def Commit(self):
         self.db.commit()

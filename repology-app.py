@@ -188,11 +188,17 @@ def repositories_generic(template='repositories.html'):
         repometadata=repoman.GetMetadata(),
     )
 
-@app.route("/")
+@app.route("/") # XXX: redirect to metapackages/all?
+@app.route("/metapackages/") # XXX: redirect to metapackages/all?
 @app.route("/metapackages/all/")
 @app.route("/metapackages/all/<bound>/")
 def metapackages_all(bound=None):
     return metapackages_generic(bound)
+
+@app.route("/metapackages/unique/")
+@app.route("/metapackages/unique/<bound>/")
+def metapackages_unique(bound=None):
+    return metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
 
 @app.route("/metapackages/in-repo/")
 @app.route("/metapackages/in-repo/<repo>/")
@@ -200,6 +206,15 @@ def metapackages_all(bound=None):
 def metapackages_in_repo(repo=None, bound=None):
     if repo:
         return metapackages_generic(bound, InRepoQueryFilter(repo))
+    else:
+        return repositories_generic()
+
+@app.route("/metapackages/outdated-in-repo/")
+@app.route("/metapackages/outdated-in-repo/<repo>/")
+@app.route("/metapackages/outdated-in-repo/<repo>/<bound>/")
+def metapackages_outdated_in_repo(repo=None, bound=None):
+    if repo:
+        return metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
     else:
         return repositories_generic()
 
@@ -212,12 +227,21 @@ def metapackages_not_in_repo(repo=None, bound=None):
     else:
         return repositories_generic()
 
-@app.route("/metapackages/outdated-in-repo/")
-@app.route("/metapackages/outdated-in-repo/<repo>/")
-@app.route("/metapackages/outdated-in-repo/<repo>/<bound>/")
-def metapackages_outdated_in_repo(repo=None, bound=None):
+@app.route("/metapackages/candidates-for-repo/")
+@app.route("/metapackages/candidates-for-repo/<repo>/")
+@app.route("/metapackages/candidates-for-repo/<repo>/<bound>/")
+def metapackages_candidates_for_repo(repo=None, bound=None):
     if repo:
-        return metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
+        return metapackages_generic(bound, NotInRepoQueryFilter(repo), InNumFamiliesQueryFilter(more=5))
+    else:
+        return repositories_generic()
+
+@app.route("/metapackages/unique-in-repo/")
+@app.route("/metapackages/unique-in-repo/<repo>/")
+@app.route("/metapackages/unique-in-repo/<repo>/<bound>/")
+def metapackages_unique_in_repo(repo=None, bound=None):
+    if repo:
+        return metapackages_generic(bound, InRepoQueryFilter(repo), InNumFamiliesQueryFilter(less=1))
     else:
         return repositories_generic()
 
