@@ -20,7 +20,6 @@ script:
   - make check
   - coverage run --source=repology -m unittest discover
   - ./repology-update.py --help
-  - ./repology-updatedb.py --help
   - ./repology-dump.py --help
 after_success:
   - coveralls
