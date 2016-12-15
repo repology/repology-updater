@@ -91,6 +91,9 @@ def Main():
     # process what's left in the queue
     database.AddPackages(package_queue)
 
+    logger.Log("recording repo updates...")
+    database.MarkRepositoriesUpdated(repoman.GetNames(options.reponames))
+
     logger.Log("updating views...")
     database.UpdateViews()
 

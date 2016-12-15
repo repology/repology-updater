@@ -328,6 +328,16 @@ def about():
 def badges():
     return flask.render_template("badges.html")
 
+@app.route("/statistics")
+def statistics():
+    return flask.render_template(
+        "statistics.html",
+        reponames=repoman.GetNames(REPOSITORIES),
+        repometadata=repoman.GetMetadata(),
+        repostats=database.GetRepositories(),
+        num_metapackages=database.GetMetapackagesCount()
+    )
+
 @app.route("/api/v1/metapackage/<name>")
 def api_v1_metapackage(name):
     return (

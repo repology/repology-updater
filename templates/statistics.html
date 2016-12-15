@@ -1,78 +1,40 @@
-{% include 'header.html' %}
+{% extends "layout.html" %}
+
+{% block title %}
+Statistics - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+Statistics
+{% endblock %}
+
+{% block content %}
 
 <table>
     <tr>
-        <th></th>
-        {% for reponame in reponames %}
-            {% if repositories[reponame].incomplete %}
-                <th class="incomplete" title="This repository is not completely supported, not all packages are shown. See GitHub readme for details.">
-            {% else %}
-                <th>
-            {% endif %}
-            {{ repositories[reponame].desc | split(' ') | spantrim(8) | join('<br>') }}
-            </th>
-        {% endfor %}
+        <th style="text-align: right">Repository</th>
+        <th>Total packages</th>
+        <th>Up to date</th>
+        <th>% up to date</th>
+        <th>Outdated</th>
+        <th>% outdated</th>
+        <th>Ignored</th>
+        <th>% ignored</th>
+        <th>Last updated</th>
     </tr>
-    <tr><td><b>Total packages</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="total">{{ statistics[reponame].total }}</span></td>
-        {% endfor %}
+    {% for reponame in reponames|sort %}
+    <tr>
+        <td style="text-align: right">{{ repometadata[reponame].desc }}</td>
+        <td style="text-align: center"><span class="total">{{ repostats[reponame].num_packages }}</span></td>
+        <td style="text-align: center"><span class="version good">{{ repostats[reponame].num_packages_newest }}</span></td>
+        <td style="text-align: center"><span class="version good">{{ (repostats[reponame].num_packages_newest / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
+        <td style="text-align: center"><span class="version bad">{{ repostats[reponame].num_packages_outdated }}</span></td>
+        <td style="text-align: center"><span class="version bad">{{ (repostats[reponame].num_packages_outdated / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
+        <td style="text-align: center"><span class="version ignore">{{ repostats[reponame].num_packages_ignored }}</span></td>
+        <td style="text-align: center"><span class="version ignore">{{ (repostats[reponame].num_packages_ignored / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
+        <td style="text-align: center"><span class="">{{ repostats[reponame].last_update.astimezone().strftime("%Y-%m-%d %H:%M %Z") }}</span></td>
     </tr>
-    <tr><td><b>Percent of all known</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="total">{{ (statistics[reponame].total / statistics.total|default(1, true) * 100) | round(1) }}%</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Up to date</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version good">{{ statistics[reponame].good }}</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Up to date of repo</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version good">{{ (statistics[reponame].good / statistics[reponame].total|default(1, true) * 100) | round(1) }}%</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Up to date of comparable</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version good">{{ (statistics[reponame].good / statistics[reponame].known|default(1, true) * 100) | round(1) }}%</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Up to date of all known</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><b><span class="version good">{{ (statistics[reponame].good / statistics.total|default(1, true) * 100) | round(1) }}%</span><b></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Outdated packages</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version bad">{{ statistics[reponame].bad }}</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Unique packages</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version lonely">{{ statistics[reponame].lonely }}</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Unique of repo</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version lonely">{{ (statistics[reponame].lonely / statistics[reponame].total|default(1, true) * 100) | round(1) }}%</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Unique of all known</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version lonely">{{ (statistics[reponame].lonely / statistics.total|default(1, true) * 100) | round(1) }}%</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Ignored packages</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version ignore">{{ statistics[reponame].ignore }}</span></td>
-        {% endfor %}
-    </tr>
-    <tr><td><b>Ignored of repo</b></td>
-        {% for reponame in reponames %}
-            <td align="center"><span class="version ignore">{{ (statistics[reponame].ignore / statistics[reponame].total|default(1, true) * 100) | round(1) }}%</span></td>
-        {% endfor %}
-    </tr>
+    {% endfor %}
 </table>
 
-{% include 'footer.html' %}
+{% endblock %}
