@@ -24,10 +24,10 @@
             <ul>
                 <li><a href="{{ url_for('metapackages_all') }}"{% if request.endpoint == 'metapackages_all' %} class="active"{% endif %}>All packages</a></li>
                 <li><a href="{{ url_for('maintainers') }}"{% if request.endpoint == 'metapackages_by_maintainer' or request.endpoint == 'maintainers' %} class="active"{% endif %}>By maintainer</a></li>
+                <li><a href="{{ url_for('metapackages_in_repo') }}"{% if request.endpoint == 'metapackages_in_repo' %} class="active"{% endif %}>By repo</a></li>
+                <li><a href="{{ url_for('metapackages_outdated_in_repo') }}"{% if request.endpoint == 'metapackages_outdated_in_repo' %} class="active"{% endif %}>Outdated by repo</a></li>
+                <li><a href="{{ url_for('metapackages_not_in_repo') }}"{% if request.endpoint == 'metapackages_not_in_repo' %} class="active"{% endif %}>Missing by repo</a></li>
                 {#
-                <li><a href="{{ url_for('metapackages_in_repo') }}"{% if subsection == "repositories" %} class="active"{% endif %}>By repo</a></li>
-                <li><a href="{{ site_root }}outdated/index.html"{% if subsection == "outdated" %} class="active"{% endif %}>Outdated by repo</a></li>
-                <li><a href="{{ site_root }}missing/index.html"{% if subsection == "missing" %} class="active"{% endif %}>Missing by repo</a></li>
                 <li><a href="{{ site_root }}widespread/widespread.0.html"{% if subsection == "widespread" %} class="active"{% endif %}>Wide-spread</a></li>
                 <li><a href="{{ site_root }}unique/unique.0.html"{% if subsection == "unique" %} class="active"{% endif %}>Unique</a></li>
                 #}

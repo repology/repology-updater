@@ -154,7 +154,7 @@ def get_packages_name_range(packages):
 
     return firstname, lastname
 
-def metapackages_generic(bound, template='metapackages.html', *filters):
+def metapackages_generic(bound, *filters, template='metapackages.html'):
     namefilter = bound_to_filter(bound)
 
     reponames = repoman.GetNames(REPOSITORIES)
@@ -182,26 +182,44 @@ def metapackages_generic(bound, template='metapackages.html', *filters):
         lastname=lastname
     )
 
+def repositories_generic(template='repositories.html'):
+    return flask.render_template(template,
+        reponames=repoman.GetNames(REPOSITORIES),
+        repometadata=repoman.GetMetadata(),
+    )
+
 @app.route("/")
 @app.route("/metapackages/all/")
 @app.route("/metapackages/all/<bound>/")
 def metapackages_all(bound=None):
     return metapackages_generic(bound)
 
+@app.route("/metapackages/in-repo/")
 @app.route("/metapackages/in-repo/<repo>/")
 @app.route("/metapackages/in-repo/<repo>/<bound>/")
-def metapackages_in_repo(repo, bound=None):
-    return metapackages_generic(bound, InRepoQueryFilter(repo))
+def metapackages_in_repo(repo=None, bound=None):
+    if repo:
+        return metapackages_generic(bound, InRepoQueryFilter(repo))
+    else:
+        return repositories_generic()
 
+@app.route("/metapackages/not-in-repo/")
 @app.route("/metapackages/not-in-repo/<repo>/")
 @app.route("/metapackages/not-in-repo/<repo>/<bound>/")
-def metapackages_not_in_repo(repo, bound=None):
-    return metapackages_generic(bound, NotInRepoQueryFilter(repo))
+def metapackages_not_in_repo(repo=None, bound=None):
+    if repo:
+        return metapackages_generic(bound, NotInRepoQueryFilter(repo))
+    else:
+        return repositories_generic()
 
+@app.route("/metapackages/outdated-in-repo/")
 @app.route("/metapackages/outdated-in-repo/<repo>/")
 @app.route("/metapackages/outdated-in-repo/<repo>/<bound>/")
-def metapackages_outdated_in_repo(repo, bound=None):
-    return metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
+def metapackages_outdated_in_repo(repo=None, bound=None):
+    if repo:
+        return metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
+    else:
+        return repositories_generic()
 
 @app.route("/metapackages/by-maintainer/<maintainer>/")
 @app.route("/metapackages/by-maintainer/<maintainer>/<bound>/")
