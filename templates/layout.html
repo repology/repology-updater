@@ -30,9 +30,7 @@
                 <li><a href="{{ url_for('metapackages_candidates_for_repo') }}"{% if request.endpoint == 'metapackages_candidates_for_repo' %} class="active"{% endif %}>Candidates by repo</a></li>
                 <li><a href="{{ url_for('metapackages_unique') }}"{% if request.endpoint == 'metapackages_unique' %} class="active"{% endif %}>Unique</a></li>
                 <li><a href="{{ url_for('metapackages_unique_in_repo') }}"{% if request.endpoint == 'metapackages_unique_in_repo' %} class="active"{% endif %}>Unique by repo</a></li>
-                {#
-                <li><a href="{{ site_root }}widespread/widespread.0.html"{% if subsection == "widespread" %} class="active"{% endif %}>Wide-spread</a></li>
-                #}
+                <li><a href="{{ url_for('metapackages_widespread') }}"{% if request.endpoint == 'metapackages_widespread' %} class="active"{% endif %}>Widespread</a></li>
             </ul>
         </nav>
     </div>

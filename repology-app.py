@@ -200,6 +200,11 @@ def metapackages_all(bound=None):
 def metapackages_unique(bound=None):
     return metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
 
+@app.route("/metapackages/widespread/")
+@app.route("/metapackages/widespread/<bound>/")
+def metapackages_widespread(bound=None):
+    return metapackages_generic(bound, InNumFamiliesQueryFilter(more=10))
+
 @app.route("/metapackages/in-repo/")
 @app.route("/metapackages/in-repo/<repo>/")
 @app.route("/metapackages/in-repo/<repo>/<bound>/")
