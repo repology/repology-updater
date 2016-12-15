@@ -234,13 +234,9 @@ def metapackage(name):
     repometadata = repoman.GetMetadata();
     return flask.render_template("package.html", packages=packages, repometadata=repometadata, name=name)
 
-@app.route("/badge/all/<name>")
-def badge_all(name):
-    packageset = database.GetMetapackage(name)
-    if not packageset:
-        flask.abort(404);
-
-    summaries = PackagesetToSummaries(packageset)
+@app.route("/badge/vertical-allrepos/<name>")
+def badge_vertical_allrepos(name):
+    summaries = PackagesetToSummaries(database.GetMetapackage(name))
     repometadata = repoman.GetMetadata();
 
     repostates = []
@@ -253,34 +249,20 @@ def badge_all(name):
 
     return (
         flask.render_template(
-            "badge-big.svg",
+            "badge-vertical.svg",
             repositories=sorted(repostates, key=lambda repo: repo['name']),
             name=name
         ),
         {'Content-type': 'image/svg+xml'}
     )
 
-@app.route("/badge/tiny/<name>")
-def badge_tiny(name):
-    packageset = database.GetMetapackage(name)
-    if not packageset:
-        flask.abort(404);
-
-    summaries = PackagesetToSummaries(packageset)
-
-    total_packages = 0
-    newest_packages = 0
-    for summary in summaries.values():
-        total_packages += 1
-        if summary['versionclass'] == RepositoryVersionClass.newest or summary['versionclass'] == RepositoryVersionClass.mixed:
-            newest_packages += 1
-
+@app.route("/badge/tiny-packages/<name>")
+def badge_tiny_packages(name):
     return (
         flask.render_template(
-            "badge-small.svg",
-            total_packages=total_packages,
-            newest_packages=newest_packages,
-            name=name
+            "badge-tiny.svg",
+            name=name,
+            num_packages=len(PackagesetToSummaries(database.GetMetapackage(name)))
         ),
         {'Content-type': 'image/svg+xml'}
     )

@@ -18,25 +18,37 @@ Badges
 
 <p>This shows all known repositories, package versions and up-to-date status</p>
 
-<p><img src="{{ url_for('badge_all', name='firefox') }}"></p>
+<p><img src="{{ url_for('badge_vertical_allrepos', name='firefox') }}"></p>
 
 <p>HTML code:
 <pre>
-&lt;a href=&quot;http://repology.org{{ url_for('metapackage', name='PACKAGE') }}&quot;&gt;&lt;img src=&quot;http://repology.org{{ url_for('badge_all', name='PACKAGE')}}&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;http://repology.org{{ url_for('metapackage', name='PACKAGE') }}&quot;&gt;&lt;img src=&quot;http://repology.org{{ url_for('badge_vertical_allrepos', name='PACKAGE')}}&quot;&gt;&lt;/a&gt;
 </pre>
 </p>
 
 <p>Markdown code:
 <pre>
-[![Packaging status](http://repology.org{{ url_for('badge_all', name='PACKAGE') }}))](http://repology.org{{ url_for('metapackage', name='PACKAGE') }})
+[![Packaging status](http://repology.org{{ url_for('badge_vertical_allrepos', name='PACKAGE') }}))](http://repology.org{{ url_for('metapackage', name='PACKAGE') }})
 </pre>
 </p>
 
 <h3>Tiny badge</h3>
 
-<p>This shows all known repositories, package versions and up-to-date status</p>
+<p>This shows total number of known packages</p>
 
-<p><img src="{{ url_for('badge_tiny', name='firefox') }}"></p>
+<p><img src="{{ url_for('badge_tiny_packages', name='firefox') }}"></p>
+
+<p>HTML code:
+<pre>
+&lt;a href=&quot;http://repology.org{{ url_for('metapackage', name='PACKAGE') }}&quot;&gt;&lt;img src=&quot;http://repology.org{{ url_for('badge_tiny_packages', name='PACKAGE')}}&quot;&gt;&lt;/a&gt;
+</pre>
+</p>
+
+<p>Markdown code:
+<pre>
+[![Packaging status](http://repology.org{{ url_for('badge_tiny_packages', name='PACKAGE') }}))](http://repology.org{{ url_for('metapackage', name='PACKAGE') }})
+</pre>
+</p>
 
 </article>
 
