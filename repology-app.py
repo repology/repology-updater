@@ -31,6 +31,7 @@ from repology.metapackageproc import *
 # settings
 PER_PAGE = 500
 REPOSITORIES = ['production']
+REPOLOGY_HOME = 'http://repology.org'
 
 # globals
 def SpanTrim(value, maxlength):
@@ -97,6 +98,7 @@ app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
 app.jinja_env.globals['url_for_self'] = url_for_self
 app.jinja_env.globals['next_letter'] = lambda letter : chr(ord(letter) + 1)
+app.jinja_env.globals['REPOLOGY_HOME'] = REPOLOGY_HOME
 
 database = Database("dbname=repology user=repology password=repology", readonly=True)
 repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here

@@ -15,7 +15,7 @@
 		<rect width="100%" height="100%" fill="#555"/>
 
 		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="15" font-weight="bold">
-			<a xlink:href="http://repology.org{{ url_for('metapackage', name=name ) }}">
+			<a xlink:href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name ) }}">
                 {% if repositories %}
                     <text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">Packaging status</text>
                     <text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">Packaging status</text>
