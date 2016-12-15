@@ -318,6 +318,10 @@ class Database:
         """)
 
         self.cursor.execute("""
+            DROP TABLE IF EXISTS repositories CASCADE
+        """)
+
+        self.cursor.execute("""
             CREATE TABLE packages (
                 repo varchar(255) not null,
                 family varchar(255) not null,
@@ -345,6 +349,20 @@ class Database:
 
         self.cursor.execute("""
             CREATE INDEX ON packages(effname)
+        """)
+
+        # repositories
+        self.cursor.execute("""
+            CREATE TABLE repositories (
+                name varchar(255) not null primary key,
+
+                num_packages integer,
+                num_packages_newest integer,
+                num_packages_outdated integer,
+                num_packages_ignored integer,
+
+                last_update timestamp with time zone
+            )
         """)
 
         # repo_metapackages
@@ -444,6 +462,14 @@ class Database:
 
     def Clear(self):
         self.cursor.execute("""DELETE FROM packages""")
+        self.cursor.execute("""
+            UPDATE repositories
+            SET
+                num_packages = 0,
+                num_packages_newest = 0,
+                num_packages_outdated = 0,
+                num_packages_ignored = 0
+        """)
 
     def AddPackages(self, packages):
         self.cursor.executemany("""INSERT INTO packages(
@@ -518,11 +544,50 @@ class Database:
             ]
         )
 
+    def MarkRepositoriesUpdated(self, reponames):
+        self.cursor.executemany("""
+            INSERT
+                INTO repositories (
+                    name,
+                    last_update
+                ) VALUES (
+                    %s,
+                    now()
+                )
+                ON CONFLICT (name)
+                DO UPDATE SET
+                    last_update = now()
+        """,
+            [ [ name ] for name in reponames ]
+        )
+
     def UpdateViews(self):
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""");
+        self.cursor.execute("""
+            INSERT
+                INTO repositories (
+                    name,
+                    num_packages,
+                    num_packages_newest,
+                    num_packages_outdated,
+                    num_packages_ignored
+                ) SELECT
+                    repo,
+                    count(*),
+                    count(nullif(versionclass=1, false)),
+                    count(nullif(versionclass=2, false)),
+                    count(nullif(versionclass=3, false))
+                FROM packages GROUP BY repo
+                ON CONFLICT (name)
+                DO UPDATE SET
+                    num_packages = EXCLUDED.num_packages,
+                    num_packages_newest = EXCLUDED.num_packages_newest,
+                    num_packages_outdated = EXCLUDED.num_packages_outdated,
+                    num_packages_ignored = EXCLUDED.num_packages_ignored
+        """)
 
     def Commit(self):
         self.db.commit()
@@ -668,3 +733,25 @@ class Database:
                 'num_metapackages': row[2]
             } for row in self.cursor.fetchall()
         ]
+
+    def GetRepositories(self):
+        self.cursor.execute("""
+            SELECT
+                name,
+                num_packages,
+                num_packages_newest,
+                num_packages_outdated,
+                num_packages_ignored,
+                last_update
+            FROM repositories
+        """)
+
+        return {
+            row[0]: {
+                'num_packages': row[1],
+                'num_packages_newest': row[2],
+                'num_packages_outdated': row[3],
+                'num_packages_ignored': row[4],
+                'last_update': row[5]
+            } for row in self.cursor.fetchall()
+        }
