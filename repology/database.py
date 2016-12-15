@@ -707,6 +707,16 @@ class Database:
             ) for row in self.cursor.fetchall()
         ]
 
+    def GetPackagesCount(self):
+        self.cursor.execute("""SELECT count(*) FROM packages""")
+
+        return self.cursor.fetchall()[0][0]
+
+    def GetMetapackagesCount(self):
+        self.cursor.execute("""SELECT count(*) FROM metapackage_repocounts""")
+
+        return self.cursor.fetchall()[0][0]
+
     def GetMaintainersCount(self):
         self.cursor.execute("""SELECT count(*) FROM maintainers""")
 
