@@ -67,25 +67,25 @@ Mandatory fields are <b>repo</b>, <b>name</b> and <b>version</b>, all other fiel
 
 <p>Following requests return data for multiple <em>metapackages</em> in form of <em>metapackage</em> name → list of <em>packages</em> dictionary. You may set a range of names to retrieve by specifying first or last name in range(inclusive or exclisive). API returns no more than {{ PER_PAGE }} <em>metapackages</em> per request. By taking last (alphanumerically) <em>name</em> from a request and making another request with <em>&gt;name</em> you can iterate through all metapackages. Empty output means end of data.</p>
 
-<p>Get first 500 metapackages:
+<p>Get first {{ PER_PAGE }} metapackages:
 <pre>
 {{ url_for('api_v1_metapackages_all') }}
 </pre>
 </p>
 
-<p>Get first 500 metapackages starting with <b>firefox</b> (inclusive):
+<p>Get first {{ PER_PAGE }} metapackages starting with <b>firefox</b> (inclusive):
 <pre>
 {{ url_for('api_v1_metapackages_all', bound='firefox') }}
 </pre>
 </p>
 
-<p>Get first 500 metapackages after <b>firefox</b> (exclusive, e.g. <b>firefox</b> not included):
+<p>Get first {{ PER_PAGE }} metapackages after <b>firefox</b> (exclusive, e.g. <b>firefox</b> not included):
 <pre>
 {{ url_for('api_v1_metapackages_all', bound='>firefox')|replace('%3E', '>') }}
 </pre>
 </p>
 
-<p>Get first 500 metapackages just before <b>firefox</b> (exclusive, e.g. <b>firefox</b> not included):
+<p>Get first {{ PER_PAGE }} metapackages just before <b>firefox</b> (exclusive, e.g. <b>firefox</b> not included):
 <pre>
 {{ url_for('api_v1_metapackages_all', bound='<firefox')|replace('%3C', '<') }}
 </pre>

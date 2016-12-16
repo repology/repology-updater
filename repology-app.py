@@ -28,11 +28,19 @@ from repology.package import *
 from repology.packageproc import *
 from repology.metapackageproc import *
 
-# settings
-PER_PAGE = 500
-REPOSITORIES = ['production']
-REPOLOGY_HOME = 'http://repology.org'
-DSN = 'dbname=repology user=repology password=repology'
+# globals
+app = Flask(__name__)
+
+app.config.update(dict(
+    DSN = 'dbname=repology user=repology password=repology',
+    PER_PAGE = 500,
+    REPOSITORIES = ['production'],
+    REPOLOGY_HOME = 'http://repology.org'
+))
+
+app.config.from_envvar('REPOLOGY_SETTINGS', silent=True)
+
+repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
 
 # globals
 def SpanTrim(value, maxlength):
@@ -87,7 +95,6 @@ def RepositoryVersionClass2CSSClass(value):
 def url_for_self(**args):
     return flask.url_for(flask.request.endpoint, **dict(flask.request.view_args, **args))
 
-app = Flask(__name__)
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 app.jinja_env.filters['spantrim'] = SpanTrim
@@ -99,13 +106,13 @@ app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
 app.jinja_env.globals['url_for_self'] = url_for_self
 app.jinja_env.globals['next_letter'] = lambda letter : chr(ord(letter) + 1)
-app.jinja_env.globals['REPOLOGY_HOME'] = REPOLOGY_HOME
+app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']
+app.jinja_env.globals['REPOLOGY_HOME'] = app.config['REPOLOGY_HOME']
 
-app.config.from_object(__name__)
-app.config.from_envvar('REPOLOGY_SETTINGS', silent=True)
-
-database = Database(app.config['DSN'], readonly=True)
-repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
+def get_db():
+    if not hasattr(flask.g, 'database'):
+        flask.g.database = Database(app.config['DSN'], readonly=True)
+    return flask.g.database
 
 # helpers
 def api_v1_package_to_json(package):
@@ -137,10 +144,10 @@ def api_v1_package_to_json(package):
 
 def api_v1_metapackages_generic(bound, *filters):
     metapackages = PackagesToMetapackages(
-        database.GetMetapackages(
+        get_db().GetMetapackages(
             bound_to_filter(bound),
             *filters,
-            limit=PER_PAGE
+            limit=app.config['PER_PAGE']
         )
     )
 
@@ -173,9 +180,9 @@ def get_packages_name_range(packages):
 def metapackages_generic(bound, *filters, template='metapackages.html'):
     namefilter = bound_to_filter(bound)
 
-    reponames = repoman.GetNames(REPOSITORIES)
+    reponames = repoman.GetNames(app.config['REPOSITORIES'])
 
-    packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=PER_PAGE)
+    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=app.config['PER_PAGE'])
 
     # on empty result, fallback to show first, last set of results
     if not packages:
@@ -183,7 +190,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html'):
             namefilter = NameStartingQueryFilter()
         else:
             namefilter = NameBeforeQueryFilter()
-        packages = database.GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=PER_PAGE)
+        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=app.config['PER_PAGE'])
 
     firstname, lastname = get_packages_name_range(packages)
 
@@ -200,7 +207,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html'):
 
 def repositories_generic(template='repositories.html'):
     return flask.render_template(template,
-        reponames=repoman.GetNames(REPOSITORIES),
+        reponames=repoman.GetNames(app.config['REPOSITORIES']),
         repometadata=repoman.GetMetadata(),
     )
 
@@ -279,19 +286,19 @@ def metapackages_outdated_by_maintainer(maintainer, bound=None):
 @app.route("/maintainers/")
 @app.route("/maintainers/<int:page>/")
 def maintainers(page=0):
-    maintainers_count = database.GetMaintainersCount()
-    maintainers = database.GetMaintainers(offset = page * PER_PAGE, limit = PER_PAGE)
+    maintainers_count = get_db().GetMaintainersCount()
+    maintainers = get_db().GetMaintainers(offset = page * app.config['PER_PAGE'], limit = app.config['PER_PAGE'])
 
     return flask.render_template(
         "maintainers.html",
         maintainers=maintainers,
         page=page,
-        num_pages=((maintainers_count + PER_PAGE - 1) // PER_PAGE)
+        num_pages=((maintainers_count + app.config['PER_PAGE'] - 1) // app.config['PER_PAGE'])
     )
 
 @app.route("/metapackage/<name>")
 def metapackage(name):
-    packages = database.GetMetapackage(name)
+    packages = get_db().GetMetapackage(name)
     if not packages:
         flask.abort(404);
 
@@ -301,7 +308,7 @@ def metapackage(name):
 
 @app.route("/badge/vertical-allrepos/<name>")
 def badge_vertical_allrepos(name):
-    summaries = PackagesetToSummaries(database.GetMetapackage(name))
+    summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
     repometadata = repoman.GetMetadata();
 
     repostates = []
@@ -327,7 +334,7 @@ def badge_tiny_packages(name):
         flask.render_template(
             "badge-tiny.svg",
             name=name,
-            num_packages=len(PackagesetToSummaries(database.GetMetapackage(name)))
+            num_packages=len(PackagesetToSummaries(get_db().GetMetapackage(name)))
         ),
         {'Content-type': 'image/svg+xml'}
     )
@@ -348,10 +355,10 @@ def badges():
 def statistics():
     return flask.render_template(
         "statistics.html",
-        reponames=repoman.GetNames(REPOSITORIES),
+        reponames=repoman.GetNames(app.config['REPOSITORIES']),
         repometadata=repoman.GetMetadata(),
-        repostats=database.GetRepositories(),
-        num_metapackages=database.GetMetapackagesCount()
+        repostats=get_db().GetRepositories(),
+        num_metapackages=get_db().GetMetapackagesCount()
     )
 
 @app.route("/api/v1/metapackage/<name>")
@@ -359,7 +366,7 @@ def api_v1_metapackage(name):
     return (
         json.dumps(list(map(
             api_v1_package_to_json,
-            database.GetMetapackage(name)
+            get_db().GetMetapackage(name)
         ))),
         {'Content-type': 'application/json'}
     )
@@ -367,7 +374,7 @@ def api_v1_metapackage(name):
 @app.route("/api")
 @app.route("/api/v1")
 def api_v1():
-    return flask.render_template("api.html", PER_PAGE=PER_PAGE)
+    return flask.render_template("api.html")
 
 @app.route("/api/v1/metapackages/")
 @app.route("/api/v1/metapackages/all/")
