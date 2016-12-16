@@ -15,28 +15,57 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.version import VersionCompare
+class PackageVersionClass:
+    newest = 1
+    outdated = 2
+    ignored = 3
+
+
+class RepositoryVersionClass:
+    newest = 1
+    outdated = 2
+    mixed = 3
+    ignored = 4
+    lonely = 5
 
 
 class Package:
     __slots__ = [
+        'repo',
+        'family',
+
         'name',
+        'effname',
+
         'version',
         'origversion',
+        'effversion',
+        'versionclass',
+
         'maintainers',
         'category',
         'comment',
         'homepage',
         'licenses',
         'downloads',
-        'family',
-        'ignoreversion'
+
+        'ignore',
+        'shadow',
+        'ignoreversion',
     ]
 
-    def __init__(self):
+    def __init__(self, **args):
+        self.repo = None
+        self.family = None
+
         self.name = None
+        self.effname = None
+
         self.version = None
         self.origversion = None
+        self.effversion = None
+        self.versionclass = None
+
         self.maintainers = []
         self.category = None
         self.comment = None
@@ -44,144 +73,13 @@ class Package:
         self.licenses = []
         self.downloads = []
 
-        self.family = None
+        self.ignore = False
+        self.shadow = False
         self.ignoreversion = False
+
+        for k, v in args.items():
+            setattr(self, k, v)
 
     @property
     def __dict__(self):
         return {slot: getattr(self, slot) for slot in self.__slots__}
-
-
-class MetaPackage:
-    __slots__ = ['name', 'packages', 'versions', 'maintainers']
-    def __init__(self, name):
-        self.name = name
-        self.packages = {}
-        self.versions = {}
-        self.maintainers = set()
-
-    def GetName(self):
-        return self.name
-
-    def Add(self, reponame, package):
-        if reponame not in self.packages:
-            self.packages[reponame] = []
-        self.packages[reponame].append(package)
-
-    def Get(self, reponame):
-        if reponame in self.packages:
-            return self.packages[reponame]
-        return None
-
-    def GetMaxVersion(self):
-        bestversion, bestrepo, bestpackage = None, None, None
-        for reponame, packagelist in self.packages.items():
-            for package in packagelist:
-                if package.version is not None and not package.ignoreversion:
-                    if bestversion is None or VersionCompare(package.version, bestversion) > 0:
-                        bestversion, bestrepo, bestpackage = package.version, reponame, package
-
-        return bestversion, bestrepo, bestpackage
-
-    def GetVersionRangeForRepo(self, reponame):
-        if reponame not in self.packages:
-            return None, None
-
-        minversion, maxversion = None, None
-        for package in self.packages[reponame]:
-            if package.version is not None:
-                if maxversion is None or VersionCompare(package.version, maxversion) > 0:
-                    maxversion = package.version
-                if minversion is None or VersionCompare(package.version, minversion) < 0:
-                    minversion = package.version
-
-        return minversion, maxversion
-
-    def HasMaintainer(self, maintainer):
-        return maintainer in self.maintainers
-
-    def GetMaintainers(self):
-        return self.maintainers
-
-    def HasCategory(self, category):
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                if package.category == category:
-                    return True
-
-        return False
-
-    def HasCategoryLike(self, category):
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                if package.category is not None and package.category.lower().find(category) != -1:
-                    return True
-
-        return False
-
-    def GetNumRepos(self):
-        return len(self.packages)
-
-    def GetRepos(self):
-        return self.packages.keys()
-
-    def GetFamilies(self):
-        families = set()
-
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                if package.family is not None:
-                    families.add(package.family)
-
-        return families
-
-    def HasRepository(self, reponame):
-        return reponame in self.packages
-
-    def IsOutdatedInRepository(self, reponame):
-        return reponame in self.versions and self.versions[reponame]['class'] == 'bad'
-
-    def FillVersionData(self):
-        # fill maintaiers
-        for packagelist in self.packages.values():
-            for package in packagelist:
-                for maintainer in package.maintainers:
-                    self.maintainers.add(maintainer)
-
-        # fill versions
-        bestversion, _, _ = self.GetMaxVersion()
-
-        numfamilies = len(self.GetFamilies())
-
-        for reponame in self.GetRepos():
-            # packages for this repository
-            repopackages = self.Get(reponame)
-
-            # determine versions
-            repominversion, repomaxversion = self.GetVersionRangeForRepo(reponame)
-
-            bestrepopackage = repopackages[0]
-            for package in repopackages:
-                if package.version == repomaxversion:
-                    bestrepopackage = package
-
-            versionclass = 'bad'
-            if bestversion is None:
-                versionclass = 'good'
-            elif VersionCompare(repomaxversion, bestversion) > 0:  # due to ignore
-                versionclass = 'ignore'
-            elif VersionCompare(repomaxversion, bestversion) >= 0:
-                if VersionCompare(repominversion, bestversion) == 0:
-                    versionclass = 'good'
-                else:
-                    versionclass = 'multi'
-
-            if (versionclass == 'good' or versionclass == 'multi') and numfamilies == 1:
-                versionclass = 'lonely'
-
-            self.versions[reponame] = {
-                'version': repomaxversion,
-                'subpackage': bestrepopackage,
-                'class': versionclass,
-                'numpackages': len(repopackages)
-            }

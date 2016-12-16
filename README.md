@@ -1,6 +1,7 @@
 # Repology
 
 [![Build Status](https://travis-ci.org/AMDmi3/repology.svg?branch=master)](https://travis-ci.org/AMDmi3/repology)
+[![Coverage Status](https://coveralls.io/repos/github/AMDmi3/repology/badge.svg?branch=coveralls)](https://coveralls.io/github/AMDmi3/repology?branch=coveralls)
 
 ![Example report](docs/screenshot.png)
 
@@ -168,7 +169,7 @@ directory which is created if it doesn't exist.
 
 | Repository                       | Name | Ver | Summary | Maint-r | Categ | WWW | License | Download |
 |----------------------------------|:----:|:---:|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
-| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     | ✔   |         |          |
 | Debian/Ubuntu                    | ✔    | ✔   |         | ✔       | ✔     | ✔   |         |          |
 | Gentoo                           | ✔    | ✔   |         | ✔       | ✔     |     |         |          |
 | pkgsrc                           | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |

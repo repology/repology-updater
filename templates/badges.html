@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Badges - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+Badges
+{% endblock %}
+
+{% block content %}
+
+<article>
+
+<p>Repology provides SVG badges which list packaging status for project authors to place on their web sites and repository READMEs.</p>
+
+<h3>Big badge</h3>
+
+<p>This shows all known repositories, package versions and up-to-date status</p>
+
+<p><img src="{{ url_for('badge_vertical_allrepos', name='firefox') }}"></p>
+
+<p>HTML code:
+<pre>
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name='METAPACKAGE') }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name='METAPACKAGE')}}&quot;&gt;&lt;/a&gt;
+</pre>
+</p>
+
+<p>Markdown code:
+<pre>
+[![Packaging status]({{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name='METAPACKAGE') }}))]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name='METAPACKAGE') }})
+</pre>
+</p>
+
+<h3>Tiny badge</h3>
+
+<p>This shows total number of known packages</p>
+
+<p><img src="{{ url_for('badge_tiny_packages', name='firefox') }}"></p>
+
+<p>HTML code:
+<pre>
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name='PACKAGE') }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_tiny_packages', name='PACKAGE')}}&quot;&gt;&lt;/a&gt;
+</pre>
+</p>
+
+<p>Markdown code:
+<pre>
+[![Packaging status]({{ REPOLOGY_HOME }}{{ url_for('badge_tiny_packages', name='PACKAGE') }}))]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name='PACKAGE') }})
+</pre>
+</p>
+
+</article>
+
+{% endblock %}

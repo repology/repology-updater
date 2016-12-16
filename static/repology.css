@@ -56,6 +56,11 @@ nav, article {
     margin: 0;
 }
 
+pre {
+    background-color: #eeeeee;
+    padding: 5px;
+}
+
 /* navigation */
 nav a:link, nav a:visited {
     color: #000000;

@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Metapackage {{ name }} - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+Metapackage {{ name }}
+{% endblock %}
+
+{% block content %}
+
+{% set prevrepo = "" %}
+
+{% for package in packages %}
+    {% if package.repo != prevrepo %}
+        <h2>
+            {{ repometadata[package.repo].desc }}
+            {% set prevrepo = package.repo %}
+        </h2>
+    {% endif %}
+<h3>
+    {% if package.versionclass == 1 %}
+        {% set versionclass = "good" %}
+    {% elif package.versionclass == 2 %}
+        {% set versionclass = "bad" %}
+    {% elif package.versionclass == 3 %}
+        {% set versionclass = "ignored" %}
+    {% endif %}
+    {{ package.name }}-<span class="{{ versionclass }}">{{ package.version }}</span>
+    {% if package.origversion %}({{ package.origversion }}){% endif %}
+</h3>
+<ul>
+    {% if package.comment %}
+        <li><b>Summary:</b> {{ package.comment }}</li>
+    {% endif %}
+    {% if package.maintainers %}
+        {% if package.maintainers|length == 1 %}
+            <li><b>Maintainer:</b> {{ package.maintainers[0] }}</li>
+        {% else %}
+            <li><b>Maintainers:</b>
+                <ul>
+                    {% for maintainer in package.maintainers %}
+                        <li>{{ maintainer }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+    {% endif %}
+    {% if package.category %}
+        <li><b>Category:</b> {{ package.category }}</li>
+    {% endif %}
+    {% if package.homepage %}
+        <li><b>Homepage:</b> <a href="{{ package.homepage }}">{{ package.homepage }}</a></li>
+    {% endif %}
+    {% if package.licenses %}
+        <li><b>License(s):</b>
+            <ul>
+                {% for license in package.licenses %}
+                    <li>{{ license }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+    {% if package.downloads %}
+        <li><b>Download(s):</b>
+            <ul>
+                {% for download in package.downloads %}
+                    <li><a href="{{ download }}">{{ download }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>
+{% endfor %}
+{% endblock %}

@@ -2,11 +2,14 @@ language: python
 sudo: true
 dist: trusty
 python:
-  - "3.4"
+  - 3.4
+  - 3.5
 before_install:
   - pip install requests
   - pip install PyYAML
   - pip install Jinja2
+  - pip install coveralls
+  - pip install psycopg2
   - gem install kwalify
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
@@ -15,7 +18,8 @@ script:
   # perform syntax check
   - make
   - make check
-  - make test
+  - coverage run --source=repology -m unittest discover
   - ./repology-update.py --help
-  - ./repology-report.py --help
-  - ./repology-gensite.py --help
+  - ./repology-dump.py --help
+after_success:
+  - coveralls

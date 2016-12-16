@@ -25,15 +25,16 @@ class MatchResult:
     ignorepackage = 1
     ignoreversion = 2
     lastrule = 4
+    unignorepackage = 8
+    unignoreversion = 16
 
 
-class NameTransformer:
-    def __init__(self, rulespath):
+class PackageTransformer:
+    def __init__(self, rulespath=None, rulestext=None):
         self.dollar0 = re.compile("\$0", re.ASCII)
         self.dollarN = re.compile("\$([0-9]+)", re.ASCII)
 
-        with open(rulespath) as file:
-            self.rules = yaml.safe_load(file)
+        self.rules = yaml.safe_load(rulestext if rulestext else open(rulespath))
 
         pp = pprint.PrettyPrinter(width=10000)
         for rule in self.rules:
@@ -102,8 +103,14 @@ class NameTransformer:
         if 'ignore' in rule:
             flags |= MatchResult.ignorepackage
 
+        if 'unignore' in rule:
+            flags |= MatchResult.unignorepackage
+
         if 'ignorever' in rule:
             flags |= MatchResult.ignoreversion
+
+        if 'unignorever' in rule:
+            flags |= MatchResult.unignoreversion
 
         if 'last' in rule:
             flags |= MatchResult.lastrule
@@ -126,7 +133,7 @@ class NameTransformer:
 
         return flags, pkgname
 
-    def TransformName(self, package):
+    def Process(self, package):
         transformed_name = package.name
 
         # apply first matching rule
@@ -139,16 +146,21 @@ class NameTransformer:
             flags, transformed_name = self.ApplyRule(rule, transformed_name, package.version)
 
             if flags & MatchResult.ignorepackage:
-                return None
+                package.ignore = True
 
-            # XXX: this should not really be intrusive to package, fix
             if flags & MatchResult.ignoreversion:
                 package.ignoreversion = True
+
+            if flags & MatchResult.unignorepackage:
+                package.ignore = False
+
+            if flags & MatchResult.unignoreversion:
+                package.ignoreversion = False
 
             if flags & MatchResult.lastrule:
                 break
 
-        return transformed_name
+        package.effname = transformed_name
 
     def GetUnmatchedRules(self):
         result = []

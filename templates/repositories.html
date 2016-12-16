@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Repositories - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+Repositories
+{% endblock %}
+
+{% block content %}
+<ul>
+{% for reponame in reponames %}
+    <li>
+        <a href="{{ url_for_self(repo=reponame) }}">{{ repometadata[reponame].desc}}</a>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

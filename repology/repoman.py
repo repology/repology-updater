@@ -23,30 +23,28 @@ import pickle
 import fcntl
 
 from repology.package import *
-from repology.logger import *
+from repology.logger import NoopLogger
 from repology.repositories import REPOSITORIES
 
 
 class RepositoryManager:
-    def __init__(self, statedir, enable_shadow=True):
+    def __init__(self, statedir):
         self.statedir = statedir
-        self.enable_shadow = enable_shadow
 
-    def GetStatePath(self, repository):
+    def __GetStatePath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
 
-    def GetSerializedPath(self, repository, tmp=False):
-        tmpext = ".tmp" if tmp else ""
-        return os.path.join(self.statedir, repository['name'] + ".packages" + tmpext)
+    def __GetSerializedPath(self, repository):
+        return os.path.join(self.statedir, repository['name'] + ".packages")
 
-    def GetRepository(self, reponame):
+    def __GetRepository(self, reponame):
         for repository in REPOSITORIES:
             if repository['name'] == reponame:
                 return repository
 
         raise KeyError('No such repository ' + reponame)
 
-    def GetRepositories(self, reponames=None):
+    def __GetRepositories(self, reponames=None):
         if reponames is None:
             return []
 
@@ -65,12 +63,92 @@ class RepositoryManager:
 
         return filtered_repositories
 
-    def ForEach(self, processor, reponames=None):
-        for repo in self.GetRepositories(reponames):
-            processor(repo)
+    # Private methods which provide single actions on repos
+    def __Fetch(self, update, repository, logger):
+        logger.Log("fetching started")
+        if not os.path.isdir(self.statedir):
+            os.mkdir(self.statedir)
 
+        repository['fetcher']().Fetch(self.__GetStatePath(repository), update=update, logger=logger.GetIndented())
+        logger.Log("fetching complete")
+
+    def __Parse(self, repository, logger):
+        logger.Log("parsing started")
+        packages = repository['parser']().Parse(self.__GetStatePath(repository))
+        logger.Log("parsing complete, {} packages".format(len(packages)))
+
+        return packages
+
+    def __Transform(self, packages, transformer, repository, logger):
+        logger.Log("processing started")
+        for package in packages:
+            package.repo = repository['name']
+            package.family = repository['family']
+            if 'shadow' in repository and repository['shadow']:
+                package.shadow = True
+            if transformer:
+                transformer.Process(package)
+
+        packages = sorted(packages, key=lambda package: package.effname)
+
+        # XXX: in future, ignored packages will not be dropped here, but
+        # ignored in summary and version calcualtions, but shown in
+        # package listing
+        packages = [ package for package in packages if not package.ignore ]
+        logger.Log("processing complete, {} packages".format(len(packages)))
+
+        return packages
+
+    def __Serialize(self, packages, path, repository, logger):
+        tmppath = path + ".tmp"
+
+        logger.Log("saving started")
+        with open(tmppath, "wb") as outfile:
+            pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
+            pickler.fast = True # deprecated, but I don't see any alternatives
+            pickler.dump(len(packages))
+            for package in packages:
+                pickler.dump(package)
+        os.rename(tmppath, path)
+        logger.Log("saving complete, {} packages".format(len(packages)))
+
+    def __Deserialize(self, path, repository, logger):
+        packages = []
+        logger.Log("loading started")
+        with open(path, "rb") as infile:
+            unpickler = pickle.Unpickler(infile)
+            numpackages = unpickler.load()
+            packages = [ unpickler.load() for num in range(0, numpackages) ]
+        logger.Log("loading complete, {} packages".format(len(packages)))
+
+        return packages
+
+    class __StreamDeserializer:
+        def __init__(self, path):
+            self.unpickler = pickle.Unpickler(open(path, "rb"))
+            self.count = self.unpickler.load()
+            self.current = None
+
+            self.Get()
+
+        def Peek(self):
+            return self.current
+
+        def EOF(self):
+            return self.current is None
+
+        def Get(self):
+            current = self.current
+            if self.count == 0:
+                self.current = None
+            else:
+                self.current = self.unpickler.load()
+                self.count -= 1
+            return current
+
+    # Helpers to retrieve data on repositories
     def GetNames(self, reponames=None):
-        return [repo['name'] for repo in self.GetRepositories(reponames)]
+        return [repo['name'] for repo in self.__GetRepositories(reponames)]
 
     def GetMetadata(self):
         return {repository['name']: {
@@ -81,109 +159,78 @@ class RepositoryManager:
             'desc': repository['desc'],
         } for repository in REPOSITORIES}
 
-    def Mix(self, packages_by_repo, name_transformer):
-        packages = {}
-
-        for repository in REPOSITORIES:
-            reponame = repository['name']
-            if reponame not in packages_by_repo:
-                continue
-
-            for package in packages_by_repo[reponame]:
-                package.family = repository['family']  # XXX: hack
-                metaname = name_transformer.TransformName(package)
-
-                if metaname is None:
-                    continue
-                if metaname not in packages:
-                    packages[metaname] = MetaPackage(metaname)
-                packages[metaname].Add(reponame, package)
-
-        for package in packages.values():
-            package.FillVersionData()
-
-        shadows = set()
-
-        if self.enable_shadow:
-            for repository in REPOSITORIES:
-                if 'shadow' in repository and repository['shadow']:
-                    shadows.add(repository['name'])
-
-        def CheckShadows(package):
-            for repo in package.versions.keys():
-                if repo not in shadows:
-                    return True
-
-            return False
-
-        return [packages[name] for name in sorted(packages.keys()) if CheckShadows(packages[name])]
-
     # Single repo methods
-    def FetchOne(self, reponame, update=True, logger=NoopLogger()):
-        repository = self.GetRepository(reponame)
+    def Fetch(self, reponame, update=True, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
 
-        logger.Log("fetching started")
-        repository['fetcher'].Fetch(self.GetStatePath(repository), update=update, logger=logger.GetIndented())
-        logger.Log("fetching complete")
+        self.__Fetch(update, repository, logger)
 
-    def ParseOne(self, reponame, name_transformer, logger=NoopLogger()):
-        repository = self.GetRepository(reponame)
+    def Parse(self, reponame, transformer, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
 
-        logger.Log("parsing started")
-        repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
-        logger.Log("parsing complete, {} packages".format(len(repo_packages)))
-        return repo_packages
+        packages = self.__Parse(repository, logger)
+        packages = self.__Transform(packages, transformer, repository, logger)
 
-    def ParseAndSerializeOne(self, reponame, logger=NoopLogger()):
-        repository = self.GetRepository(reponame)
+        return packages
 
-        logger.Log("parsing + saving started")
-        repo_packages = repository['parser'].Parse(self.GetStatePath(repository))
-        pickle.dump(
-            repo_packages,
-            open(self.GetSerializedPath(repository, tmp=True), "wb")
-        )
-        os.rename(self.GetSerializedPath(repository, tmp=True), self.GetSerializedPath(repository))
-        logger.Log("parsing + saving complete, {} packages".format(len(repo_packages)))
+    def ParseAndSerialize(self, reponame, transformer, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
 
-    def DeserializeOne(self, reponame, name_transformer, logger=NoopLogger()):
-        repository = self.GetRepository(reponame)
+        packages = self.__Parse(repository, logger)
+        packages = self.__Transform(packages, transformer, repository, logger)
+        self.__Serialize(packages, self.__GetSerializedPath(repository), repository, logger)
 
-        logger.Log("loading started")
-        repo_packages = pickle.load(open(self.GetSerializedPath(repository), "rb"))
-        logger.Log("loading complete, {} packages".format(len(repo_packages)))
-        return repo_packages
+        return packages
+
+    def Deserialize(self, reponame, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
+
+        return self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
+
+    def Reprocess(self, reponame, transformer=None, logger=NoopLogger()):
+        repository = self.__GetRepository(reponame)
+
+        packages = self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
+        packages = self.__Transform(packages, transformer, repository, logger)
+        self.__Serialize(packages, self.__GetSerializedPath(repository), repository, logger)
+
+        return packages
 
     # Multi repo methods
-    def Fetch(self, update=True, reponames=None, logger=NoopLogger()):
-        if not os.path.isdir(self.statedir):
-            os.mkdir(self.statedir)
+    def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
+        packages = []
 
-        for repo in self.GetRepositories(reponames):
-            self.FetchOne(repo['name'], update=update, logger=logger.GetPrefixed(repo['name'] + ": "))
+        for repo in self.__GetRepositories(reponames):
+            packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
 
-    def Parse(self, name_transformer, reponames, logger=NoopLogger()):
-        packages_by_repo = {}
-
-        for repo in self.GetRepositories(reponames):
-            packages_by_repo[repo['name']] = self.ParseOne(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
-
-        logger.Log("merging started")
-        packages = self.Mix(packages_by_repo, name_transformer)
-        logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages
 
-    def ParseAndSerialize(self, reponames=None, logger=NoopLogger()):
-        for repo in self.GetRepositories(reponames):
-            self.ParseAndSerializeOne(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
+    def DeserializeMulti(self, reponames=None, logger=NoopLogger()):
+        packages = []
 
-    def Deserialize(self, name_transformer, reponames=None, logger=NoopLogger()):
-        packages_by_repo = {}
+        for repo in self.__GetRepositories(reponames):
+            packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
 
-        for repo in self.GetRepositories(reponames):
-            packages_by_repo[repo['name']] = self.DeserializeOne(repo['name'], name_transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
-
-        logger.Log("merging started")
-        packages = self.Mix(packages_by_repo, name_transformer)
-        logger.Log("merging complete, {} metapackages".format(len(packages)))
         return packages
+
+    def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
+        deserializers = []
+        for repo in self.__GetRepositories(reponames):
+            deserializers.append(self.__StreamDeserializer(self.__GetSerializedPath(repo)))
+
+        while deserializers:
+            # find lowest key (effname)
+            thiskey = deserializers[0].Peek().effname
+            for ds in deserializers[1:]:
+                thiskey = min(thiskey, ds.Peek().effname)
+
+            # fetch all packages with given key from all deserializers
+            packageset = []
+            for ds in deserializers:
+                while not ds.EOF() and ds.Peek().effname == thiskey:
+                    packageset.append(ds.Get())
+
+            processor(packageset)
+
+            # remove EOFed repos
+            deserializers = [ ds for ds in deserializers if not ds.EOF() ]

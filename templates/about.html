@@ -1,4 +1,14 @@
-{% include 'header.html' %}
+{% extends "layout.html" %}
+
+{% block title %}
+About - {{ super() }}
+{% endblock %}
+
+{% block subheader %}
+About
+{% endblock %}
+
+{% block content %}
 
 <article>
 
@@ -84,4 +94,4 @@ meanings:</p>
 
 </article>
 
-{% include 'footer.html' %}
+{% endblock %}
