@@ -95,7 +95,7 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
     # process what's left in the queue
     database.AddPackages(package_queue)
 
-    if options.fetch >= 2 and options.parse:
+    if options.fetch and options.fetch >= 2 and options.parse:
         db_logger.Log("recording repo updates")
         database.MarkRepositoriesUpdated(repositories_updated)
     else:
