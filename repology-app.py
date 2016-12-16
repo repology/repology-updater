@@ -357,32 +357,32 @@ def api_v1():
 @app.route("/api/v1/metapackages/all/")
 @app.route("/api/v1/metapackages/all/<bound>/")
 def api_v1_metapackages_all(bound=None):
-    return api_v1_metapackages_all(bound)
+    return api_v1_metapackages_generic(bound)
 
 @app.route("/api/v1/metapackages/in-repo/<repo>/")
 @app.route("/api/v1/metapackages/in-repo/<repo>/<bound>/")
 def api_v1_metapackages_in_repo(repo, bound=None):
-    return api_v1_metapackages_in_repo(bound, InRepoQueryFilter(repo))
+    return api_v1_metapackages_generic(bound, InRepoQueryFilter(repo))
 
 @app.route("/api/v1/metapackages/not-in-repo/<repo>/")
 @app.route("/api/v1/metapackages/not-in-repo/<repo>/<bound>/")
 def api_v1_metapackages_not_in_repo(repo, bound=None):
-    return api_v1_metapackages_not_in_repo(bound, NotInRepoQueryFilter(repo))
+    return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo))
 
 @app.route("/api/v1/metapackages/outdated-in-repo/<repo>/")
 @app.route("/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/")
 def api_v1_metapackages_outdated_in_repo(repo, bound=None):
-    return api_v1_metapackages_outdated_in_repo(bound, OutdatedInRepoQueryFilter(repo))
+    return api_v1_metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
 
 @app.route("/api/v1/metapackages/by-maintainer/<maintainer>/")
 @app.route("/api/v1/metapackages/by-maintainer/<maintainer>/<bound>/")
 def api_v1_metapackages_by_maintainer(maintainer, bound=None):
-    return api_v1_metapackages_by_maintainer(bound, MaintainerQueryFilter(maintainer))
+    return api_v1_metapackages_generic(bound, MaintainerQueryFilter(maintainer))
 
 @app.route("/api/v1/metapackages/outdated-by-maintainer/<maintainer>/")
 @app.route("/api/v1/metapackages/outdated-by-maintainer/<maintainer>/<bound>/")
 def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
-    return api_v1_metapackages_outdated_by_maintainer(bound, MaintainerOutdatedQueryFilter(maintainer))
+    return api_v1_metapackages_generic(bound, MaintainerOutdatedQueryFilter(maintainer))
 
 if __name__ == "__main__":
     app.run()
