@@ -15,6 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
+
+
 def SplitPackageNameVersion(pkgname):
     hyphen_pos = pkgname.rindex('-')
 
@@ -24,5 +27,47 @@ def SplitPackageNameVersion(pkgname):
     return name, version
 
 
-def GetMaintainers(string):
-    return string
+def GetMaintainers(instr):
+    instr = instr.lower()
+
+    tmpresult = None
+    # match "name <mail>", but not "name <at> obfuscated"
+    if re.search('<[^<>]{3,}>', instr):
+        tmpresult = re.findall('<([^<>]*)>', instr)
+    else:
+        tmpresult = instr.split(',')
+
+    def ReverseBracket(s):
+        if s == '[': return ']'
+        if s == ']': return '['
+        if s == '(': return ')'
+        if s == ')': return '('
+        if s == '<': return '>'
+        if s == '>': return '<'
+        if s == '{': return '}'
+        if s == '}': return '{'
+        return s
+
+    def Reverse(s):
+        return ''.join(map(ReverseBracket, s[::-1]))
+
+    result = set()
+    for item in tmpresult:
+        # strip whitespace
+        item = item.strip()
+
+        # deobfuscate
+        if item.find('@') == -1:
+            match = re.search('([^a-z0-9]+)at[^a-z0-9]', item)
+            if match:
+                item = item.replace(match.group(1) + 'at' + Reverse(match.group(1)), '@')
+
+            match = re.search('([^a-z0-9]+)dot[^a-z0-9]', item)
+            if match:
+                item = item.replace(match.group(1) + 'dot' + Reverse(match.group(1)), '.')
+
+        # drop empty items
+        if item:
+            result.add(item)
+
+    return sorted([item for item in result])
