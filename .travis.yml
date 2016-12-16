@@ -3,6 +3,8 @@ sudo: true
 dist: trusty
 services:
   - postgresql
+addons:
+  postgresql: "9.3"
 python:
   - 3.4
   - 3.5
