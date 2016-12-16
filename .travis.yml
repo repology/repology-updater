@@ -22,8 +22,9 @@ before_script:
   - psql -c "CREATE DATABASE repology_test;" -U postgres
   - psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test';" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test;" -U postgres
-  - export REPOLOGY_TEST_DSN="dbname=repology_test user=repology_test password=repology_test"
 script:
+  - export REPOLOGY_TEST_DSN="dbname=repology_test user=repology_test password=repology_test"
+
   # test buidling C utils
   - make
 
