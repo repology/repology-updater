@@ -1,3 +1,4 @@
 _state
 __pycache__
 helpers/rpmcat/rpmcat
+testdata/*.packages
