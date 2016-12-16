@@ -29,7 +29,7 @@ REPOSITORIES = [
         'fetcher': lambda: FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bz2=True),
         'parser': lambda: FreeBSDIndexParser(),
         'link': 'http://www.freshports.org/{category}/{name}',
-        'tags': ['all', 'demo', 'production', 'fastfetch'],
+        'tags': ['all', 'have_testdata', 'demo', 'production', 'fastfetch'],
     },
 
     {
@@ -186,7 +186,7 @@ REPOSITORIES = [
         'fetcher': lambda: GitFetcher("https://github.com/gentoo/gentoo.git"),
         'parser': lambda: GentooGitParser(),
         'link': 'https://packages.gentoo.org/packages/{category}/{name}',
-        'tags': ['all', 'demo', 'production', 'fastfetch'],
+        'tags': ['all', 'have_testdata', 'demo', 'production', 'fastfetch'],
     },
     {
         'name': 'pkgsrc',

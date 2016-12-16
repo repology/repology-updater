@@ -1,6 +1,8 @@
 language: python
 sudo: true
 dist: trusty
+services:
+  - postgresql
 python:
   - 3.4
   - 3.5
@@ -13,13 +15,26 @@ before_install:
   - gem install kwalify
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
+before_script:
+  - psql -c "CREATE DATABASE repology;" -U postgres
+  - psql -c "CREATE USER repology WITH PASSWORD 'repology';" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE repology TO repology";" -U postgres
 script:
-  # Fetching from travis would be too heavy, so just
-  # perform syntax check
+  # test buidling C utils
   - make
+
+  # check yaml schemas
   - make check
+
+  # run unit tests with coverage
   - coverage run --source=repology -m unittest discover
+
+  # smoke tests, just try to run utils
   - ./repology-update.py --help
   - ./repology-dump.py --help
+
+  # try to parse from testdata
+  - ./repology-update.py -pdd -s testdata have_testdata
+
 after_success:
   - coveralls
