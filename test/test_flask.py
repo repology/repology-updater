@@ -33,6 +33,17 @@ class TestFlask(unittest.TestCase):
         reply = self.app.get('/news')
         self.assertTrue('support added' in reply.data.decode('utf-8'))
 
+        reply = self.app.get('/about')
+        self.assertTrue('maintainers' in reply.data.decode('utf-8'))
+
+        reply = self.app.get('/api')
+        self.assertTrue('/api/v1/metapackages/all/firefox' in reply.data.decode('utf-8'))
+
+    def test_badges(self):
+        reply = self.app.get('/badge/vertical-allrepos/kiconvtool')
+        self.assertTrue('<svg' in reply.data.decode('utf-8'))
+        self.assertTrue('FreeBSD' in reply.data.decode('utf-8'))
+
 
 if __name__ == '__main__':
     unittest.main()
