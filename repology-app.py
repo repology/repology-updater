@@ -105,33 +105,45 @@ repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and pa
 
 # helpers
 def api_v1_package_to_json(package):
-    return {
+    output = {
         field: getattr(package, field)
-        for field in (
-            'repo',
-            'name',
-            'version',
-            'origversion',
-            'maintainers',
-            'category',
-            'comment',
-            'homepage',
-            'licenses',
-            'downloads',
-            'ignore')
-        if getattr(package, field)
+            for field in (
+                'repo',
+                'name',
+                'version',
+                'origversion',
+                'maintainers',
+                #'category',
+                #'comment',
+                #'homepage',
+                'licenses',
+                'downloads')
+            if getattr(package, field)
     }
 
+    # XXX: these tweaks should be implemented in core
+    if package.homepage:
+        output['www'] = package.homepage,
+    if package.comment:
+        output['summary'] = package.comment,
+    if package.category:
+        output['categories'] = [ package.category ]
+
+    return output
+
 def api_v1_metapackages_generic(bound, *filters):
+    metapackages = PackagesToMetapackages(
+        database.GetMetapackages(
+            bound_to_filter(bound),
+            *filters,
+            limit=PER_PAGE
+        )
+    )
+
+    metapackages = { metapackage_name: list(map(api_v1_package_to_json, packageset)) for metapackage_name, packageset in metapackages.items() }
+
     return (
-        json.dumps(list(map(
-            api_v1_package_to_json,
-            database.GetMetapackages(
-                bound_to_filter(bound),
-                *filters,
-                limit=PER_PAGE
-            )
-        ))),
+        json.dumps(metapackages),
         {'Content-type': 'application/json'}
     )
 
