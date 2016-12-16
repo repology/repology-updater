@@ -6,7 +6,6 @@ services:
 addons:
   postgresql: "9.5"
 python:
-  - 3.4
   - 3.5
 before_install:
   - pip install requests
