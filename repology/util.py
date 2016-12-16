@@ -22,3 +22,7 @@ def SplitPackageNameVersion(pkgname):
     version = pkgname[hyphen_pos + 1:]
 
     return name, version
+
+
+def GetMaintainers(string):
+    return string
