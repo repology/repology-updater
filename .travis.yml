@@ -18,7 +18,7 @@ before_install:
 before_script:
   - psql -c "CREATE DATABASE repology;" -U postgres
   - psql -c "CREATE USER repology WITH PASSWORD 'repology';" -U postgres
-  - psql -c "GRANT ALL PRIVILEGES ON DATABASE repology TO repology";" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE repology TO repology;" -U postgres
 script:
   # test buidling C utils
   - make
