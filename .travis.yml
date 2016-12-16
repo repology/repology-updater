@@ -18,9 +18,10 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
 before_script:
-  - psql -c "CREATE DATABASE repology;" -U postgres
-  - psql -c "CREATE USER repology WITH PASSWORD 'repology';" -U postgres
-  - psql -c "GRANT ALL PRIVILEGES ON DATABASE repology TO repology;" -U postgres
+  - psql -c "CREATE DATABASE repology_test;" -U postgres
+  - psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test';" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test;" -U postgres
+  - export REPOLOGY_TEST_DSN="dbname=repology_test user=repology_test password=repology_test"
 script:
   # test buidling C utils
   - make
@@ -28,15 +29,14 @@ script:
   # check yaml schemas
   - make check
 
-  # run unit tests with coverage
-  - coverage run --source=repology -m unittest discover
+  # fill database with test data
+  - ./repology-update.py --dsn="$REPOLOGY_TEST_DSN" --parse --database --database --state testdata have_testdata
 
-  # smoke tests, just try to run utils
-  - ./repology-update.py --help
+  # smoke test bit
   - ./repology-dump.py --help
 
-  # try to parse from testdata
-  - ./repology-update.py -pdd -s testdata have_testdata
+  # run unit tests with coverage
+  - coverage run --source=repology -m unittest discover
 
 after_success:
   - coveralls
