@@ -32,7 +32,7 @@ Statistics
         <td style="text-align: center"><span class="version bad">{{ (repostats[reponame].num_packages_outdated / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
         <td style="text-align: center"><span class="version ignore">{{ repostats[reponame].num_packages_ignored }}</span></td>
         <td style="text-align: center"><span class="version ignore">{{ (repostats[reponame].num_packages_ignored / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
-        <td style="text-align: center"><span class="">{{ repostats[reponame].last_update.astimezone().strftime("%Y-%m-%d %H:%M %Z") }}</span></td>
+        <td style="text-align: center"><span class="">{% if repostats[reponame].last_update %}{{ repostats[reponame].last_update.astimezone().strftime("%Y-%m-%d %H:%M %Z") }}{% else %}never{% endif %}</span></td>
     </tr>
     {% endfor %}
 </table>
