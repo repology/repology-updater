@@ -69,12 +69,12 @@ class RepositoryManager:
         if not os.path.isdir(self.statedir):
             os.mkdir(self.statedir)
 
-        repository['fetcher'].Fetch(self.__GetStatePath(repository), update=update, logger=logger.GetIndented())
+        repository['fetcher']().Fetch(self.__GetStatePath(repository), update=update, logger=logger.GetIndented())
         logger.Log("fetching complete")
 
     def __Parse(self, repository, logger):
         logger.Log("parsing started")
-        packages = repository['parser'].Parse(self.__GetStatePath(repository))
+        packages = repository['parser']().Parse(self.__GetStatePath(repository))
         logger.Log("parsing complete, {} packages".format(len(packages)))
 
         return packages

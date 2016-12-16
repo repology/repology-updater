@@ -26,8 +26,8 @@ REPOSITORIES = [
         'name': 'freebsd',
         'desc': "FreeBSD",
         'family': 'freebsd',
-        'fetcher': FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bz2=True),
-        'parser': FreeBSDIndexParser(),
+        'fetcher': lambda: FileFetcher("http://www.FreeBSD.org/ports/INDEX-11.bz2", bz2=True),
+        'parser': lambda: FreeBSDIndexParser(),
         'link': 'http://www.freshports.org/{category}/{name}',
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
@@ -36,13 +36,13 @@ REPOSITORIES = [
         'name': 'debian_stable',
         'desc': 'Debian Stable',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'https://packages.debian.org/stable/{name}',
         'tags': ['all', 'debian', 'fastfetch'],
     },
@@ -50,13 +50,13 @@ REPOSITORIES = [
         'name': 'debian_stable_backports',
         'desc': 'Debian Stable Backports',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.debian.org/debian/dists/stable-backports/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable-backports/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/stable-backports/non-free/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'https://packages.debian.org/stable-backports/{name}',
         'tags': ['all', 'debian', 'fastfetch'],
     },
@@ -64,13 +64,13 @@ REPOSITORIES = [
         'name': 'debian_testing',
         'desc': 'Debian Testing',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'https://packages.debian.org/testing/{name}',
         'tags': ['all', 'debian', 'fastfetch'],
     },
@@ -78,13 +78,13 @@ REPOSITORIES = [
         'name': 'debian_unstable',
         'desc': 'Debian Unstable',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz",
             "http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'https://packages.debian.org/unstable/{name}',
         'tags': ['all', 'demo', 'debian', 'production', 'fastfetch'],
     },
@@ -92,13 +92,13 @@ REPOSITORIES = [
         'name': 'debian_experimental',
         'desc': 'Debian Experimental',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.debian.org/debian/dists/experimental/contrib/source/Sources.xz",
             "http://ftp.debian.org/debian/dists/experimental/main/source/Sources.xz",
             "http://ftp.debian.org/debian/dists/experimental/non-free/source/Sources.xz",
             xz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'https://packages.debian.org/experimental/{name}',
         'tags': ['all', 'preproduction', 'debian', 'fastfetch'],
     },
@@ -107,14 +107,14 @@ REPOSITORIES = [
         'name': 'ubuntu_precise',
         'desc': 'Ubuntu Precise',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.ubuntu.com/ubuntu/dists/precise/main/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/precise/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/precise/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/precise/universe/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/precise/{name}',
         'tags': ['all', 'ubuntu', 'fastfetch'],
     },
@@ -122,14 +122,14 @@ REPOSITORIES = [
         'name': 'ubuntu_trusty',
         'desc': 'Ubuntu Trusty',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.ubuntu.com/ubuntu/dists/trusty/main/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/trusty/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/trusty/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/trusty/universe/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/trusty/{name}',
         'tags': ['all', 'ubuntu', 'fastfetch'],
     },
@@ -137,14 +137,14 @@ REPOSITORIES = [
         'name': 'ubuntu_xenial',
         'desc': 'Ubuntu Xenial',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/xenial/{name}',
         'tags': ['all', 'ubuntu', 'fastfetch'],
     },
@@ -152,14 +152,14 @@ REPOSITORIES = [
         'name': 'ubuntu_yakkety',
         'desc': 'Ubuntu Yakkety',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/main/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/yakkety/{name}',
         'tags': ['all', 'ubuntu', 'fastfetch'],
     },
@@ -167,14 +167,14 @@ REPOSITORIES = [
         'name': 'ubuntu_zesty',
         'desc': 'Ubuntu Zesty',
         'family': 'debian',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.ubuntu.com/ubuntu/dists/zesty/main/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/zesty/multiverse/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/zesty/restricted/source/Sources.gz",
             "http://ftp.ubuntu.com/ubuntu/dists/zesty/universe/source/Sources.gz",
             gz=True
         ),
-        'parser': DebianSourcesParser(),
+        'parser': lambda: DebianSourcesParser(),
         'link': 'http://packages.ubuntu.com/zesty/{name}',
         'tags': ['all', 'demo', 'production', 'ubuntu', 'fastfetch'],
     },
@@ -183,8 +183,8 @@ REPOSITORIES = [
         'name': 'gentoo',
         'desc': 'Gentoo',
         'family': 'gentoo',
-        'fetcher': GitFetcher("https://github.com/gentoo/gentoo.git"),
-        'parser': GentooGitParser(),
+        'fetcher': lambda: GitFetcher("https://github.com/gentoo/gentoo.git"),
+        'parser': lambda: GentooGitParser(),
         'link': 'https://packages.gentoo.org/packages/{category}/{name}',
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
@@ -192,8 +192,8 @@ REPOSITORIES = [
         'name': 'pkgsrc',
         'desc': 'pkgsrc',
         'family': 'pkgsrc',
-        'fetcher': FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX"),
-        'parser': PkgsrcIndexParser(),
+        'fetcher': lambda: FileFetcher("https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX"),
+        'parser': lambda: PkgsrcIndexParser(),
         'link': 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}',
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
@@ -201,8 +201,8 @@ REPOSITORIES = [
         'name': 'openbsd',
         'desc': 'OpenBSD',
         'family': 'openbsd',
-        'fetcher': FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
-        'parser': OpenBSDIndexParser(),
+        'fetcher': lambda: FileFetcher("http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain"),
+        'parser': lambda: OpenBSDIndexParser(),
         'link': 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}',
         'tags': ['all', 'demo', 'production', 'fastfetch'],
     },
@@ -210,12 +210,12 @@ REPOSITORIES = [
         'name': 'arch',
         'desc': 'Arch',
         'family': 'arch',
-        'fetcher': ArchDBFetcher(
+        'fetcher': lambda: ArchDBFetcher(
             "http://delta.archlinux.fr/core/os/x86_64/core.db.tar.gz",
             "http://delta.archlinux.fr/extra/os/x86_64/extra.db.tar.gz",
             "http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz"
         ),
-        'parser': ArchDBParser(),
+        'parser': lambda: ArchDBParser(),
         # XXX: 'https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name} add support for `repository'
         'link': 'https://www.archlinux.org/packages/?sort=&q={name}',
         'tags': ['all', 'demo', 'production', 'fastfetch'],
@@ -224,8 +224,8 @@ REPOSITORIES = [
         'name': 'aur',
         'desc': 'AUR',
         'family': 'arch',
-        'fetcher': AURFetcher('https://aur.archlinux.org/'),
-        'parser': AURParser(),
+        'fetcher': lambda: AURFetcher('https://aur.archlinux.org/'),
+        'parser': lambda: AURParser(),
         'link': 'https://aur.archlinux.org/packages/{name}',
         'tags': ['all', 'preproduction', 'fastfetch'],
     },
@@ -233,10 +233,10 @@ REPOSITORIES = [
         'name': 'fedora_24',
         'desc': 'Fedora 24',
         'family': 'fedora',
-        'fetcher': RepodataFetcher(
+        'fetcher': lambda: RepodataFetcher(
             "https://mirror.yandex.ru/fedora/linux/releases/24/Everything/source/tree/"
         ),
-        'parser': RepodataParser(),
+        'parser': lambda: RepodataParser(),
         'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
         'tags': ['all', 'fedora', 'rpm', 'fastfetch'],
     },
@@ -244,10 +244,10 @@ REPOSITORIES = [
         'name': 'fedora_25',
         'desc': 'Fedora 25',
         'family': 'fedora',
-        'fetcher': RepodataFetcher(
+        'fetcher': lambda: RepodataFetcher(
             "https://mirror.yandex.ru/fedora/linux/development/25/Everything/source/tree/"
         ),
-        'parser': RepodataParser(),
+        'parser': lambda: RepodataParser(),
         'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
         'tags': ['all', 'fedora', 'rpm', 'fastfetch'],
     },
@@ -255,10 +255,10 @@ REPOSITORIES = [
         'name': 'fedora_rawhide',
         'desc': 'Fedora Rawhide',
         'family': 'fedora',
-        'fetcher': RepodataFetcher(
+        'fetcher': lambda: RepodataFetcher(
             "https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/"
         ),
-        'parser': RepodataParser(),
+        'parser': lambda: RepodataParser(),
         'link': 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}',
         'tags': ['all', 'demo', 'production', 'fedora', 'rpm', 'fastfetch'],
     },
@@ -266,11 +266,11 @@ REPOSITORIES = [
         'name': 'centos_6',
         'desc': 'CentOS 6',
         'family': 'centos',
-        'fetcher': RepodataFetcher(
+        'fetcher': lambda: RepodataFetcher(
             "http://vault.centos.org/centos/6/os/Source/",
             "http://vault.centos.org/centos/6/updates/Source/"
         ),
-        'parser': RepodataParser(),
+        'parser': lambda: RepodataParser(),
         'link': 'http://centos-packages.com/6/package/{name}/',
         'tags': ['all', 'centos', 'rpm', 'fastfetch'],
     },
@@ -278,11 +278,11 @@ REPOSITORIES = [
         'name': 'centos_7',
         'desc': 'CentOS 7',
         'family': 'centos',
-        'fetcher': RepodataFetcher(
+        'fetcher': lambda: RepodataFetcher(
             "http://vault.centos.org/centos/7/os/Source/",
             "http://vault.centos.org/centos/7/updates/Source/"
         ),
-        'parser': RepodataParser(),
+        'parser': lambda: RepodataParser(),
         'link': 'http://centos-packages.com/7/package/{name}/',
         'tags': ['all', 'preproduction', 'centos', 'rpm', 'fastfetch'],
     },
@@ -290,10 +290,10 @@ REPOSITORIES = [
         'name': 'mageia_6',
         'desc': 'Mageia 6',
         'family': 'mageia',
-        'fetcher': RepodataFetcher(
+        'fetcher': lambda: RepodataFetcher(
             "https://mirrors.kernel.org/mageia/distrib/6/SRPMS/core/release/"
         ),
-        'parser': RepodataParser(),
+        'parser': lambda: RepodataParser(),
         'link': 'https://madb.mageia.org/package/show/name/{name}',
         'tags': ['all', 'mageia', 'rpm', 'fastfetch'],
     },
@@ -301,10 +301,10 @@ REPOSITORIES = [
         'name': 'mageia_cauldron',
         'desc': 'Mageia Cauldron',
         'family': 'mageia',
-        'fetcher': RepodataFetcher(
+        'fetcher': lambda: RepodataFetcher(
             "https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/core/release/"
         ),
-        'parser': RepodataParser(),
+        'parser': lambda: RepodataParser(),
         'link': 'https://madb.mageia.org/package/show/name/{name}',
         'tags': ['all', 'production', 'mageia', 'rpm', 'fastfetch'],
     },
@@ -312,10 +312,10 @@ REPOSITORIES = [
         'name': 'opensuse_tumbleweed',
         'desc': 'OpenSUSE Tumbleweed',
         'family': 'opensuse',
-        'fetcher': RepodataFetcher(
+        'fetcher': lambda: RepodataFetcher(
             "http://download.opensuse.org/tumbleweed/repo/src-oss/suse/"
         ),
-        'parser': RepodataParser(),
+        'parser': lambda: RepodataParser(),
         'link': 'https://software.opensuse.org/package/{name}',
         'tags': ['all', 'demo', 'production', 'opensuse', 'rpm', 'fastfetch'],
     },
@@ -323,12 +323,12 @@ REPOSITORIES = [
         'name': 'sisyphus',
         'desc': 'ALT Sisyphus',
         'family': 'sisyphus',
-        'fetcher': FileFetcher(
+        'fetcher': lambda: FileFetcher(
             "http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/noarch/base/srclist.classic.xz",
             "http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/base/srclist.classic.xz",
             xz=True
         ),
-        'parser': SrcListClassicParser(),
+        'parser': lambda: SrcListClassicParser(),
         'link': 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}',
         'tags': ['all', 'production', 'fastfetch'],
     },
@@ -336,8 +336,8 @@ REPOSITORIES = [
         'name': 'chocolatey',
         'desc': 'Chocolatey',
         'family': 'chocolatey',
-        'fetcher': ChocolateyFetcher("https://chocolatey.org/api/v2/"),
-        'parser': ChocolateyParser(),
+        'fetcher': lambda: ChocolateyFetcher("https://chocolatey.org/api/v2/"),
+        'parser': lambda: ChocolateyParser(),
         'shadow': True,
         'link': 'https://chocolatey.org/packages/{name}',
         'tags': ['all', 'production', 'fastfetch'],
@@ -346,8 +346,8 @@ REPOSITORIES = [
         'name': 'yacp',
         'desc': 'YACP',
         'family': 'yacp',
-        'fetcher': GitFetcher("https://github.com/fd00/yacp.git"),
-        'parser': YACPGitParser(),
+        'fetcher': lambda: GitFetcher("https://github.com/fd00/yacp.git"),
+        'parser': lambda: YACPGitParser(),
         'link': 'https://github.com/fd00/yacp/tree/master/{name}',
         'tags': ['all', 'preproduction', 'fastfetch'],
     },
@@ -355,8 +355,8 @@ REPOSITORIES = [
         'name': 'slackbuilds',
         'desc': 'SlackBuilds',
         'family': 'slackbuilds',
-        'fetcher': GitFetcher("git://slackbuilds.org/slackbuilds"),
-        'parser': SlackBuildsParser(),
+        'fetcher': lambda: GitFetcher("git://slackbuilds.org/slackbuilds"),
+        'parser': lambda: SlackBuildsParser(),
         'link': 'https://slackbuilds.org/repository/14.2/{category}/{name}/',
         'tags': ['all', 'production', 'fastfetch'],
     },
@@ -364,8 +364,8 @@ REPOSITORIES = [
         'name': 'freshcode',
         'desc': 'freshcode.club',
         'family': 'freshcode',
-        'fetcher': FreshcodeFetcher("http://freshcode.club/feed/xfer.json"),
-        'parser': FreshcodeParser(),
+        'fetcher': lambda: FreshcodeFetcher("http://freshcode.club/feed/xfer.json"),
+        'parser': lambda: FreshcodeParser(),
         'shadow': True,
         'link': 'http://freshcode.club/projects/{name}',
         'tags': ['all', 'preproduction', 'fastfetch'],
@@ -374,8 +374,8 @@ REPOSITORIES = [
         'name': 'cpan',
         'desc': 'CPAN',
         'family': 'cpan',
-        'fetcher': FileFetcher("http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz", gz=True),
-        'parser': CPANPackagesParser(),
+        'fetcher': lambda: FileFetcher("http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz", gz=True),
+        'parser': lambda: CPANPackagesParser(),
         'shadow': True,
         'link': 'http://search.cpan.org/dist/{name}',
         'tags': ['all', 'preproduction', 'fastfetch'],
@@ -384,8 +384,8 @@ REPOSITORIES = [
         'name': 'pypi',
         'desc': 'PyPi',
         'family': 'pypi',
-        'fetcher': FileFetcher("https://pypi.python.org/pypi/"),
-        'parser': PyPiHTMLParser(),
+        'fetcher': lambda: FileFetcher("https://pypi.python.org/pypi/"),
+        'parser': lambda: PyPiHTMLParser(),
         'shadow': True,
         'link': 'https://pypi.python.org/pypi/{name}/',
         'tags': ['all', 'preproduction', 'fastfetch'],
@@ -394,8 +394,8 @@ REPOSITORIES = [
         'name': 'fdroid',
         'desc': 'F-Droid',
         'family': 'fdroid',
-        'fetcher': FileFetcher("https://f-droid.org/repo/index.xml"),
-        'parser': FDroidParser(),
+        'fetcher': lambda: FileFetcher("https://f-droid.org/repo/index.xml"),
+        'parser': lambda: FDroidParser(),
         'shadow': True,
         'link': 'http://freshcode.club/projects/{name}',
         'tags': ['all', 'fastfetch'],
