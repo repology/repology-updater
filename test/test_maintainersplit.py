@@ -57,5 +57,9 @@ class TestSplitMaintainers(unittest.TestCase):
         self.assertEqual(GetMaintainers("amdmi3<at>freebsd.org"), ['amdmi3@freebsd.org'])
         self.assertEqual(GetMaintainers("amdmi3 <at> freebsd.org"), ['amdmi3@freebsd.org'])
 
+    def test_empty(self):
+        self.assertEqual(GetMaintainers("somecrap"), [])
+        self.assertEqual(GetMaintainers(""), [])
+
 if __name__ == '__main__':
     unittest.main()
