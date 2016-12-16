@@ -14,7 +14,7 @@ Package maintainers
     Pages:
     <ul>
         {% for p in range(0, num_pages) %}
-        <li><a href="{{ url_for_self(page=p) }}"{% if page and page == p %} class="active"{% endif %}>{{ p }}</a></li>
+        <li><a href="{{ url_for_self(page=p) }}"{% if page|default(0) == p %} class="active"{% endif %}>{{ p }}</a></li>
         {% endfor %}
     </ul>
 </nav>
