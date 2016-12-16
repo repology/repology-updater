@@ -56,7 +56,7 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(p.origversion, None)
         self.assertEqual(p.category, "games-action")
         #self.assertEqual(p.comment, "Chromium B.S.U. - an arcade game")
-        self.assertEqual(p.maintainers, ['Gentoo Games Project <games@gentoo.org>'])
+        self.assertEqual(p.maintainers, ['games@gentoo.org'])
         #self.assertEqual(p.homepage, 'http://chromium-bsu.sourceforge.net/')
 
 if __name__ == '__main__':
