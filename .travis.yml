@@ -4,7 +4,7 @@ dist: trusty
 services:
   - postgresql
 addons:
-  postgresql: "9.4"
+  postgresql: "9.5"
 python:
   - 3.4
   - 3.5
