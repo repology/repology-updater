@@ -353,6 +353,7 @@ def api_v1_metapackage(name):
 def api_v1():
     return flask.render_template("api.html", PER_PAGE=PER_PAGE)
 
+@app.route("/api/v1/metapackages/")
 @app.route("/api/v1/metapackages/all/")
 @app.route("/api/v1/metapackages/all/<bound>/")
 def api_v1_metapackages_all(bound=None):
