@@ -66,8 +66,8 @@ def GetMaintainers(instr):
             if match:
                 item = item.replace(match.group(1) + 'dot' + Reverse(match.group(1)), '.')
 
-        # drop empty items
-        if item:
+        # also assumes non-empty items
+        if item.find('@') != -1:
             result.add(item)
 
     return sorted([item for item in result])
