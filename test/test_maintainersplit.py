@@ -35,10 +35,10 @@ class TestSplitMaintainers(unittest.TestCase):
         self.assertEqual(GetMaintainers("\"Marakasov, Dmitry\" <amdmi3@FreeBSD.org>"), ['amdmi3@freebsd.org'])
 
     def test_list(self):
-        self.assertEqual(GetMaintainers("amdmi3@FreeBSD.org,gnome@FreeBSD.org"), ['amdmi3@freebsd.org', 'gnome@FreeBSD.org'])
+        self.assertEqual(GetMaintainers("amdmi3@FreeBSD.org,gnome@FreeBSD.org"), ['amdmi3@freebsd.org', 'gnome@freebsd.org'])
 
     def test_list_name(self):
-        self.assertEqual(GetMaintainers("Dmitry Marakasov <amdmi3@FreeBSD.org>, Gnome Guys <gnome@FreeBSD.org>"), ['amdmi3@freebsd.org', 'gnome@FreeBSD.org'])
+        self.assertEqual(GetMaintainers("Dmitry Marakasov <amdmi3@FreeBSD.org>, Gnome Guys <gnome@FreeBSD.org>"), ['amdmi3@freebsd.org', 'gnome@freebsd.org'])
 
     def test_garbage(self):
         self.assertEqual(GetMaintainers(",amdmi3@FreeBSD.org, ,,   "), ['amdmi3@freebsd.org'])
@@ -54,6 +54,8 @@ class TestSplitMaintainers(unittest.TestCase):
         self.assertEqual(GetMaintainers("amdmi3 (at) freebsd (dot) org"), ['amdmi3@freebsd.org'])
         self.assertEqual(GetMaintainers("amdmi3 __at__ freebsd __dot__ org"), ['amdmi3@freebsd.org'])
         self.assertEqual(GetMaintainers("amdmi3-at-freebsd-dot-org"), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers("amdmi3<at>freebsd.org"), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers("amdmi3 <at> freebsd.org"), ['amdmi3@freebsd.org'])
 
 if __name__ == '__main__':
     unittest.main()
