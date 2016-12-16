@@ -18,8 +18,10 @@
 import os
 import sys
 import json
+import re
 
-from ..package import Package
+from repology.package import Package
+from repology.util import GetMaintainers
 
 
 def SanitizeVersion(version):
@@ -79,7 +81,7 @@ class AURParser():
                             pkg.licenses.append(license)
 
                     if "Maintainer" in result and result["Maintainer"]:
-                        pkg.maintainers.append(result["Maintainer"] + "@aur")
+                        pkg.maintainers += GetMaintainers(result["Maintainer"] + '@aur')
 
                     packages.append(pkg)
 

@@ -18,8 +18,8 @@
 import csv
 import re
 
-from ..util import SplitPackageNameVersion
-from ..package import Package
+from repology.util import SplitPackageNameVersion, GetMaintainers
+from repology.package import Package
 
 
 class CPANPackagesParser():
@@ -90,7 +90,8 @@ class CPANPackagesParser():
                 pkg = Package()
                 pkg.name = package_name
                 pkg.version = package_version
-                pkg.maintainers.append(package_path.split('/')[2].lower() + "@CPAN")
+
+                pkg.maintainers = GetMaintainers(package_path.split('/')[2].lower() + '@cpan')
                 pkg.homepage = "http://search.cpan.org/dist/" + package_name + "/"
 
                 result.append(pkg)

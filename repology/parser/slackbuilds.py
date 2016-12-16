@@ -18,7 +18,8 @@
 import os
 import sys
 
-from ..package import Package
+from repology.package import Package
+from repology.util import GetMaintainers
 
 
 class SlackBuildsParser():
@@ -61,7 +62,7 @@ class SlackBuildsParser():
                         elif line.startswith('HOMEPAGE='):
                             pkg.homepage = line[9:].strip('"')
                         elif line.startswith('EMAIL='):
-                            pkg.maintainers.append(line[6:].strip('"'))
+                            pkg.maintainers += GetMaintainers(line[6:].strip('"'))
                         elif line.startswith('DOWNLOAD='):
                             pkg.downloads.append(line[9:].strip('"'))
 

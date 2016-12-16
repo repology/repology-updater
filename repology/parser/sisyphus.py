@@ -18,7 +18,8 @@
 import os
 import subprocess
 
-from ..package import Package
+from repology.package import Package
+from repology.util import GetMaintainers
 
 
 class SrcListClassicParser():
@@ -37,7 +38,7 @@ class SrcListClassicParser():
 
                 pkg.name = fields[0]
                 pkg.version = fields[1]
-                pkg.maintainers.append(fields[2].strip())  # XXX: may have multiple maintainers
+                pkg.maintainers = GetMaintainers(fields[2])  # XXX: may have multiple maintainers
                 pkg.category = fields[3]
                 pkg.comment = fields[4]
 

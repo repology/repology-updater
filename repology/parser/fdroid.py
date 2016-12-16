@@ -18,7 +18,7 @@
 import os
 import xml.etree.ElementTree
 
-from ..package import Package
+from repology.package import Package
 
 
 class FDroidParser():

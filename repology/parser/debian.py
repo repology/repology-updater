@@ -17,7 +17,8 @@
 
 import re
 
-from ..package import Package
+from repology.package import Package
+from repology.util import GetMaintainers
 
 
 def SanitizeVersion(version):
@@ -72,10 +73,9 @@ class DebianSourcesParser():
                 elif line.startswith('Version: '):
                     pkg.version, pkg.origversion = SanitizeVersion(line[9:])
                 elif line.startswith('Maintainer: '):
-                    pkg.maintainers.append(line[12:])
+                    pkg.maintainers += GetMaintainers(line[12:])
                 elif line.startswith('Uploaders: '):
-                    for m in re.findall("(?:\"[^\"]*\"|[^,])+", line[11:]):
-                        pkg.maintainers.append(m.strip())
+                    pkg.maintainers += GetMaintainers(line[11:])
                 elif line.startswith('Section: '):
                     pkg.category = line[9:]
                 elif line.startswith('Homepage: '):

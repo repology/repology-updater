@@ -20,6 +20,7 @@ import xml.etree.ElementTree
 
 from repology.version import VersionCompare
 from repology.package import Package
+from repology.util import GetMaintainers
 
 
 def SanitizeVersion(version):
@@ -82,10 +83,8 @@ class GentooGitParser():
                             name_node = entry.find("name")
                             email_node = entry.find("email")
 
-                            if name_node is not None and email_node is not None:
-                                pkg.maintainers.append("{} <{}>".format(name_node.text, email_node.text))
-                            elif email_node is not None:
-                                pkg.maintainers.append(email_node.text)
+                            if email_node is not None:
+                                pkg.maintainers += GetMaintainers(email_node.text)
 
                 maxorigversion = None
                 maxversion = None

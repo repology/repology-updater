@@ -20,7 +20,7 @@ import re
 import xml.etree.ElementTree
 import html.parser
 
-from ..package import Package
+from repology.package import Package
 
 
 class PyPiHTMLParser():

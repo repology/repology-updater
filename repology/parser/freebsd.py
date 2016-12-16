@@ -17,8 +17,8 @@
 
 import sys
 
-from ..util import SplitPackageNameVersion
-from ..package import Package
+from repology.util import SplitPackageNameVersion, GetMaintainers
+from repology.package import Package
 
 
 def SanitizeVersion(version):
@@ -58,7 +58,7 @@ class FreeBSDIndexParser():
                 pkg.name, version = SplitPackageNameVersion(fields[0])
                 pkg.version, pkg.origversion = SanitizeVersion(version)
                 pkg.comment = fields[3]
-                pkg.maintainers.append(fields[5])
+                pkg.maintainers = GetMaintainers(fields[5])
                 pkg.category = fields[6].split(' ')[0]
 
                 if fields[9]:

@@ -18,8 +18,8 @@
 import re
 import sys
 
-from ..util import SplitPackageNameVersion
-from ..package import Package
+from repology.util import SplitPackageNameVersion, GetMaintainers
+from repology.package import Package
 
 
 def SanitizeVersion(version):
@@ -57,10 +57,10 @@ class PkgsrcIndexParser():
                 if fields[11]:
                     pkg.homepage = fields[11]
 
-                # sometimes use OWNER variable in which case there's no MAINTAINER
-                # OWNER doesn't get to INDEX
-                if fields[5]:
-                    pkg.maintainers.append(fields[5])
+                # sometimes OWNER variable is used in which case
+                # there's no MAINTAINER OWNER doesn't get to INDEX
+                pkg.maintainers = GetMaintainers(fields[5])
+
                 pkg.category = fields[6].split(' ')[0]
 
                 result.append(pkg)

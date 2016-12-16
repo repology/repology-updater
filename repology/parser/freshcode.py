@@ -18,7 +18,7 @@
 import os
 import json
 
-from ..package import Package
+from repology.package import Package
 
 
 class FreshcodeParser():
