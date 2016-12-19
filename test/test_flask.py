@@ -57,6 +57,9 @@ class TestFlask(unittest.TestCase):
     def test_metapackage(self):
         self.request_and_check('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
 
+        # FIXME: return page with "no packages found" message instead
+        self.request_and_check('/metapackage/nonexistent', status_code=404)
+
     def test_maintaners(self):
         self.request_and_check('/maintainers/', has=['amdmi3@freebsd.org'])
         self.request_and_check('/maintainers/0/', has=['amdmi3@freebsd.org'])
@@ -90,20 +93,21 @@ class TestFlask(unittest.TestCase):
         self.request_and_check('/metapackages/all/>zzzzzz/', has=['kiconvtool'])
 
     def test_api_v1_metapackage(self):
-        packages = json.loads(self.request_and_check('/api/v1/metapackage/kiconvtool', mimetype='application/json'))
-        self.assertEqual(len(packages), 1)
-        self.assertEqual(packages[0],
-            {
-                'repo': 'freebsd',
-                'name': 'kiconvtool',
-                'version': '0.97',
-                'origversion': '0.97_1',
-                'categories': ['sysutils'],
-                'summary': 'Tool to preload kernel iconv charset tables',
-                'maintainers': ['amdmi3@freebsd.org'],
-                'www': ['http://wiki.freebsd.org/DmitryMarakasov/kiconvtool'],
-            }
+        self.assertEqual(json.loads(self.request_and_check('/api/v1/metapackage/kiconvtool', mimetype='application/json')),
+            [
+                {
+                    'repo': 'freebsd',
+                    'name': 'kiconvtool',
+                    'version': '0.97',
+                    'origversion': '0.97_1',
+                    'categories': ['sysutils'],
+                    'summary': 'Tool to preload kernel iconv charset tables',
+                    'maintainers': ['amdmi3@freebsd.org'],
+                    'www': ['http://wiki.freebsd.org/DmitryMarakasov/kiconvtool'],
+                }
+            ]
         )
+        self.assertEqual(json.loads(self.request_and_check('/api/v1/metapackage/nonexistent', mimetype='application/json')), [])
 
     def test_api_v1_metapackages(self):
         self.request_and_check('/api/v1/metapackages/', mimetype='application/json', has=['kiconvtool', '0.97'])
