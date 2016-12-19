@@ -51,6 +51,10 @@ class TestFlask(unittest.TestCase):
     def test_metapackage(self):
         self.request_and_check('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
 
+    def test_maintaners(self):
+        self.request_and_check('/maintainers/', has=['amdmi3@freebsd.org'])
+        self.request_and_check('/maintainers/0/', has=['amdmi3@freebsd.org'])
+
     def test_metapackages(self):
         self.request_and_check('/metapackages/', has=['kiconvtool', '0.97'])
         self.request_and_check('/metapackages/all/', has=['kiconvtool', '0.97'])
