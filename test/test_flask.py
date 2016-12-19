@@ -58,6 +58,18 @@ class TestFlask(unittest.TestCase):
         self.request_and_check('/metapackages/all/>k/', has=['kiconvtool', '0.97'])
         self.request_and_check('/metapackages/all/<l/', has=['kiconvtool', '0.97'])
 
+        self.request_and_check('/metapackages/in-repo/', has=['FreeBSD'])
+        self.request_and_check('/metapackages/in-repo/freebsd/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/in-repo/freebsd/k/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/in-repo/freebsd/>k/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/in-repo/freebsd/<l/', has=['kiconvtool', '0.97'])
+
+        self.request_and_check('/metapackages/not-in-repo/', has=['FreeBSD'])
+        self.request_and_check('/metapackages/not-in-repo/arch/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/not-in-repo/arch/k/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/not-in-repo/arch/>k/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/not-in-repo/arch/<l/', has=['kiconvtool', '0.97'])
+
 
 if __name__ == '__main__':
     unittest.main()
