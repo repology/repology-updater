@@ -44,7 +44,7 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(p.origversion, None)
         self.assertEqual(p.category, "sysutils")
         self.assertEqual(p.comment, "Tool to preload kernel iconv charset tables")
-        self.assertEqual(p.maintainers, ['amdmi3@FreeBSD.org'])
+        self.assertEqual(p.maintainers, ['amdmi3@freebsd.org'])
         self.assertEqual(p.homepage, 'http://wiki.freebsd.org/DmitryMarakasov/kiconvtool')
 
     def test_gentoo(self):
