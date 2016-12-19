@@ -26,7 +26,7 @@ from repology.package import Package
 class TestParsers(unittest.TestCase):
     def setUp(self):
         repoman = RepositoryManager("testdata")
-        self.packages = repoman.ParseMulti(reponames=['freebsd', 'gentoo'])
+        self.packages = repoman.ParseMulti(reponames=['freebsd', 'gentoo', 'arch'])
 
     def FindPackage(self, name):
         for package in self.packages:
@@ -58,6 +58,18 @@ class TestParsers(unittest.TestCase):
         #self.assertEqual(p.comment, "Chromium B.S.U. - an arcade game")
         self.assertEqual(p.maintainers, ['games@gentoo.org'])
         #self.assertEqual(p.homepage, 'http://chromium-bsu.sourceforge.net/')
+
+    def test_arch(self):
+        p = self.FindPackage("zlib")
+        self.assertEqual(p.repo, "arch")
+        self.assertEqual(p.family, "arch")
+        self.assertEqual(p.name, "zlib")
+        self.assertEqual(p.version, "1.2.8")
+        self.assertEqual(p.origversion, "1:1.2.8-7")
+        self.assertEqual(p.comment, "Compression library implementing the deflate compression method found in gzip and PKZIP")
+        self.assertEqual(p.homepage, "http://www.zlib.net/")
+        self.assertEqual(p.licenses, ['custom'])
+        self.assertEqual(p.maintainers, ['pierre@archlinux.de'])
 
 if __name__ == '__main__':
     unittest.main()
