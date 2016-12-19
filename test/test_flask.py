@@ -61,29 +61,20 @@ class TestFlask(unittest.TestCase):
         self.request_and_check('/metapackages/all/k/', has=['kiconvtool', '0.97'])
         self.request_and_check('/metapackages/all/>k/', has=['kiconvtool', '0.97'])
         self.request_and_check('/metapackages/all/<l/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/all/l/', hasnot=['kiconvtool'])
+        self.request_and_check('/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
+        self.request_and_check('/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
 
         self.request_and_check('/metapackages/in-repo/', has=['FreeBSD'])
         self.request_and_check('/metapackages/in-repo/freebsd/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/in-repo/freebsd/k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/in-repo/freebsd/>k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/in-repo/freebsd/<l/', has=['kiconvtool', '0.97'])
 
         self.request_and_check('/metapackages/not-in-repo/', has=['FreeBSD'])
         self.request_and_check('/metapackages/not-in-repo/arch/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/not-in-repo/arch/k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/not-in-repo/arch/>k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/not-in-repo/arch/<l/', has=['kiconvtool', '0.97'])
 
         self.request_and_check('/metapackages/unique-in-repo/', has=['FreeBSD'])
         self.request_and_check('/metapackages/unique-in-repo/freebsd/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/unique-in-repo/freebsd/k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/unique-in-repo/freebsd/>k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/unique-in-repo/freebsd/<l/', has=['kiconvtool', '0.97'])
 
         self.request_and_check('/metapackages/unique/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/unique/k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/unique/>k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/metapackages/unique/<l/', has=['kiconvtool', '0.97'])
 
     def test_api(self):
         self.request_and_check('/api/v1/metapackages/', has=['kiconvtool', '0.97'])
@@ -91,26 +82,17 @@ class TestFlask(unittest.TestCase):
         self.request_and_check('/api/v1/metapackages/all/k/', has=['kiconvtool', '0.97'])
         self.request_and_check('/api/v1/metapackages/all/>k/', has=['kiconvtool', '0.97'])
         self.request_and_check('/api/v1/metapackages/all/<l/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/api/v1/metapackages/all/l/', hasnot=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
 
         self.request_and_check('/api/v1/metapackages/in-repo/freebsd/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/in-repo/freebsd/k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/in-repo/freebsd/>k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/in-repo/freebsd/<l/', has=['kiconvtool', '0.97'])
 
         self.request_and_check('/api/v1/metapackages/not-in-repo/arch/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/not-in-repo/arch/k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/not-in-repo/arch/>k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/not-in-repo/arch/<l/', has=['kiconvtool', '0.97'])
 
         self.request_and_check('/api/v1/metapackages/unique-in-repo/freebsd/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/unique-in-repo/freebsd/k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/unique-in-repo/freebsd/>k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/unique-in-repo/freebsd/<l/', has=['kiconvtool', '0.97'])
 
         self.request_and_check('/api/v1/metapackages/unique/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/unique/k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/unique/>k/', has=['kiconvtool', '0.97'])
-        self.request_and_check('/api/v1/metapackages/unique/<l/', has=['kiconvtool', '0.97'])
 
 
 if __name__ == '__main__':
