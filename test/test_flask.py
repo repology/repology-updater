@@ -85,6 +85,10 @@ class TestFlask(unittest.TestCase):
 
         self.request_and_check('/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
 
+        # special cases: check fallback code for going before first or after last entry
+        self.request_and_check('/metapackages/all/<0/', has=['kiconvtool'])
+        self.request_and_check('/metapackages/all/>zzzzzz/', has=['kiconvtool'])
+
     def test_api_v1_metapackage(self):
         packages = json.loads(self.app.get('/api/v1/metapackage/kiconvtool').data.decode('utf-8'))
         self.assertEqual(len(packages), 1)
