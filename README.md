@@ -40,18 +40,30 @@ report and a static website generator for [repology.org](repology.org).
 
 ### Dependencies
 
-- [python3](https://www.python.org/), with the following modules
-  - [flask](http://flask.pocoo.org/) web microframework
-  - [psycopg](http://initd.org/psycopg/) PostgreSQL adapter for Python
-  - [pyyaml](http://pyyaml.org/) YAML parser
-  - [requests](http://python-requests.org/) (for fetching some repository data)
-- [wget](https://www.gnu.org/software/wget/) (for fetching some repository data)
-- [git](https://git-scm.com/) (for fetching some repository data)
-- [librpm](http://www.rpm.org/) (for parsing some repository data)
-- pkg-config
+Mandatory:
 
-Repology includes some C utilites, to build them run ```make``` in
-project directory.
+- [Python](https://www.python.org/) 3.x
+- Python module [pyyaml](http://pyyaml.org/)
+- Python module [requests](http://python-requests.org/)
+
+Optional, needed for parsing some repositories:
+
+- [wget](https://www.gnu.org/software/wget/)
+- [git](https://git-scm.com/)
+- [librpm](http://www.rpm.org/) and [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
+
+Optional, for web-application:
+
+- Python module [flask](http://flask.pocoo.org/)
+- Python module [psycopg](http://initd.org/psycopg/)
+- [https://www.postgresql.org/](PostgreSQL database) 9.5+
+
+### Building
+
+Though repology is mostly a Python project, it contains C utility to
+read binary rpm format, which is used for parsing ALT Sisyphus
+repository. To build the utility, run ```make``` in project root.
+You need librpm and pkg-config.
 
 ### Usage
 
