@@ -377,20 +377,35 @@ def api_v1():
 def api_v1_metapackages_all(bound=None):
     return api_v1_metapackages_generic(bound)
 
+@app.route("/api/v1/metapackages/unique/")
+@app.route("/api/v1/metapackages/unique/<bound>/")
+def api_v1_metapackages_unique(bound=None):
+    return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
+
 @app.route("/api/v1/metapackages/in-repo/<repo>/")
 @app.route("/api/v1/metapackages/in-repo/<repo>/<bound>/")
 def api_v1_metapackages_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, InRepoQueryFilter(repo))
+
+@app.route("/api/v1/metapackages/outdated-in-repo/<repo>/")
+@app.route("/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/")
+def api_v1_metapackages_outdated_in_repo(repo, bound=None):
+    return api_v1_metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
 
 @app.route("/api/v1/metapackages/not-in-repo/<repo>/")
 @app.route("/api/v1/metapackages/not-in-repo/<repo>/<bound>/")
 def api_v1_metapackages_not_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo))
 
-@app.route("/api/v1/metapackages/outdated-in-repo/<repo>/")
-@app.route("/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/")
-def api_v1_metapackages_outdated_in_repo(repo, bound=None):
-    return api_v1_metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
+@app.route("/api/v1/metapackages/candidates-in-repo/<repo>/")
+@app.route("/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/")
+def api_v1_metapackages_candidates_in_repo(repo, bound=None):
+    return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(more=5))
+
+@app.route("/api/v1/metapackages/unique-in-repo/<repo>/")
+@app.route("/api/v1/metapackages/unique-in-repo/<repo>/<bound>/")
+def api_v1_metapackages_unique_in_repo(repo, bound=None):
+    return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
 
 @app.route("/api/v1/metapackages/by-maintainer/<maintainer>/")
 @app.route("/api/v1/metapackages/by-maintainer/<maintainer>/<bound>/")
