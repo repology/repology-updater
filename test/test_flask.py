@@ -56,9 +56,7 @@ class TestFlask(unittest.TestCase):
 
     def test_metapackage(self):
         self.request_and_check('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
-
-        # FIXME: return page with "no packages found" message instead
-        self.request_and_check('/metapackage/nonexistent', status_code=404)
+        self.request_and_check('/metapackage/nonexistent', has=['No packages found'])
 
     def test_maintaners(self):
         self.request_and_check('/maintainers/', has=['amdmi3@freebsd.org'])

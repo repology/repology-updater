@@ -294,9 +294,6 @@ def maintainers(page=0):
 @app.route("/metapackage/<name>")
 def metapackage(name):
     packages = get_db().GetMetapackage(name)
-    if not packages:
-        flask.abort(404);
-
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
     repometadata = repoman.GetMetadata();
     return flask.render_template("package.html", packages=packages, repometadata=repometadata, name=name)

@@ -12,6 +12,10 @@ Metapackage {{ name }}
 
 {% set prevrepo = "" %}
 
+{% if not packages %}
+<h2>No packages found</h2>
+{% endif %}
+
 {% for package in packages %}
     {% if package.repo != prevrepo %}
         <h2>
