@@ -30,8 +30,12 @@ class TestFlask(unittest.TestCase):
         repology_app.app.config['DSN'] = os.environ['REPOLOGY_TEST_DSN']
         self.app = repology_app.app.test_client()
 
-    def request_and_check(self, url, has=[], hasnot=[]):
+    def request_and_check(self, url, status_code=200, mimetype='text/html', has=[], hasnot=[]):
         reply = self.app.get(url)
+        if status_code is not None:
+            self.assertEqual(reply.status_code, status_code)
+        if mimetype is not None:
+            self.assertEqual(reply.mimetype, mimetype)
         text = reply.data.decode('utf-8')
         for pattern in has:
             self.assertTrue(pattern in text)
