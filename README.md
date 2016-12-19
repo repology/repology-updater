@@ -5,11 +5,10 @@
 
 ![Example report](docs/screenshot.png)
 
-Repology analyzes multiple package repositories and compares versions
-of packages in them.
-
-The report it produces shows which repositories contain or lack
-which packages, and whether packages need updating.
+Repology tracks and compares package versions along multiple
+repositories including Arch, Chocolatey, Debian, Fedora, FreeBSD,
+Gentoo, Mageia, OpenBSD, OpenSUSE, pkgsrc, Sisyphus, SlackBuilds,
+Ubuntu and more.
 
 ## Uses
 
@@ -42,8 +41,9 @@ report and a static website generator for [repology.org](repology.org).
 ### Dependencies
 
 - [python3](https://www.python.org/), with the following modules
+  - [flask](http://flask.pocoo.org/) web microframework
+  - [psycopg](http://initd.org/psycopg/) PostgreSQL adapter for Python
   - [pyyaml](http://pyyaml.org/) YAML parser
-  - [jinja2](https://jinja.pocoo.org/) template engine
   - [requests](http://python-requests.org/) (for fetching some repository data)
 - [wget](https://www.gnu.org/software/wget/) (for fetching some repository data)
 - [git](https://git-scm.com/) (for fetching some repository data)
@@ -55,115 +55,92 @@ project directory.
 
 ### Usage
 
-Repology operation is split into two distinct steps: repository
-data processing and producing the report. Separate utilities exist
-for these two phases.
+#### Fetching repository data
 
-#### Fetching data
-
-First, you need to fetch repository data with ```repology-update.py``` utility.
+First, repository data need to be fetched, parsed and optionally
+stored in the database. ```repology-update.py``` utility does that:
 
 ```
-./repology-update.py --statedir repology.state --tag demo --verbose --fetch --update --parse
+./repology-update \
+    --statedir=repology.state \
+    --fetch --fetch --parse \
+    production
 ```
 
-```--statedir``` is mandatory for all utilities and specifies path
-to directory where repository data will be stored. Directory is
-created by ```repology-update.py``` if it doesn't exist.
+* ```--statedir``` specifies where to store intermediary data.
+* ```--fetch``` tells the utility to fetch raw repository data
+(download files, scrape websites, clone git repos), specifying it
+allows updating the data (otherwise it's only fetched once).
+* ```--parse``` parses downloaded raw data into internal format.
+Parsed data is also stored in statedir.
+* Free arguments specify list of repositories or tags (tag is a
+group of repositories) to work on. Here we only process ```production```
+tag.
 
-```--tag``` and ```--repository``` specify which repositories to
-update. ```--tag``` is most useful as it allows to quickly pick
-repository groups. Tags include:
+Statedir defaults to ```_state``` in current directory and list of
+repositories defaults to all known repositories, so you may omit these.
 
-- ```all``` - all supported repositories
-- ```production``` - repositories available on [repology.org](repology.org)
-- ```fastfetch``` - repositories which take ~minutes to fetch their data
-- ```slowfetch``` - repositories which take long time to fetch
-- ```demo``` - a set of repositories for you to start playing with repology
-               with. These are repositories that just work and don't take
-               too much time to fetch.
-
-If you specify multiple tags separated by commas in one ```--tag```
-option, these will be processed with OR logic. Multiple ```--tag```
-options are processed with AND logic. E.g. ```--tag foo,bar --tag baz```
-get you repositories belonging to ```(foo OR bar) AND baz```
-
-```--verbose``` is useful for tracking progress of utility operation
-
-Remaining arguments specify which actions to perform.
-
-```--fetch``` and ```--update``` control whether downloading of
-repository data is allowed. Specify none to disallow downloading,
-specify ```--fetch``` so allow only downloading for repository
-data which hasn't been downloaded yet, or specify both options
-to always download data, e.g. keep all your repository data up
-to date.
-
-```--parse``` enables parsing repositories and processing serialized
-data other utilities may use.
-
-#### Generating HTML reports
-
-Next, you need to produce HTML page with report. The following
-command generates complete (huge!) report on a single page:
+After data is downloaded you may inspect it with
 
 ```
-./repology-report.py --statedir repology.state --tag demo --output full.html
+./repology-dump.py | less
 ```
 
-```--statedir``` and ```--tag``` have the same meaning as with
-fetching and should generally match arguments you've specified
-to ```repology-update.py```. But you are free to produce report
-for smaller subset of repositories.
+The utility allows filtering and several modes of operation, see
+```--help``` for full list of options.
 
-Since the full report is really huge any may hang your browser
-and hard to read, you may use multiple filtering options:
+#### Filling the database
 
-- ```-m``` filter by maintainer (e.g. ```amdmi3@FreeBSD.org```)
-- ```-c``` filter by category (e.g. ```games```; note that this
-	       matches substring, e.g. ```games-action``` from Gentoo
-	       as well)
-- ```-n``` filter only packages present in this many repos or less
-- ```-N``` filter only packages present in this many repos or more
-- ```-i``` matches only packages present in specified repo
-- ```-x``` matches only packages not present in specified repo
-
-Note, that generated report uses ```repology.css``` stylesheet,
-so if you want to copy report to another directory, you'll want to
-copy css file along with it.
-
-#### Examples
-
-Packages which likely are needed to be added to pkgsrc (because
-all other repositories have them) and their versions:
+If the above steps work for you, you may want to run repology web
+application. For that you'll need to create PostgreSQL database:
 
 ```
-./repology-report.py -s repology.state -t demo -x pkgsrc -N 3 -o missing-pkgsrc.html
+CREATE DATABASE repology;
+CREATE USER repology WITH PASSWORD 'repology';
+GRANT ALL ON DATABASE repology TO repology;
 ```
 
-State of FreeBSD ports maintained by me:
+Note that you may want to change database, user name and password.
+
+After database is created, make ```repology-update.py``` fill it.
+
+* Add ```--database``` argument to tell the utility to fill database.
+Specify twice to (re)initialize the database (you'll need to do this
+first time).
+* Specify ```--dsn="dbname=DBNAME user=USERNAME password=PASS"```
+if you've used custom database setup. Omit to use default
+repology/repology/repology.
+
+Summarizing, the minimal command to update all repositories and
+store them in the database created as mentioned above is:
 
 ```
-./repology-report.py -s repology.state -t demo -m amdmi3@FreeBSD.org -i FreeBSD -o maintainer-amdmi3.html
+./repology-update --fetch --fetch --parse --database
 ```
 
-State of games along all repos, with irrelevant packages filtered out:
+#### Running the webapp
+
+Repology is a flask application, so you may just run it locally:
 
 ```
-./repology-report.py -s repology.state -t demo -c games -n 2 -o games.html
+./repology-app.py
 ```
 
-#### Generating static website
+and then point your browser to http://127.0.0.1:5000/ to view the
+site. This should be enough for personal usage, experiments and
+testing.
 
-Finally, if you want to produce your own instance of
-[repology.org](http://repology.org) website, run
+Alternatively, you may deploy the application in numerous ways,
+including mod_wsgi, uwsgi, fastcgi and plain CGI application. See
+[flask documentation on deployment](http://flask.pocoo.org/docs/0.11/deploying/)
+for more info.
 
-```
-./repology-gensite.py --statedir repology.state --tag demo --output /usr/www/repology.org
-```
-
-This generates self-contained website in ```/usr/www/repology.org```
-directory which is created if it doesn't exist.
+There's a bunch of application settings you may want to tune (most
+importantly, DSN). These are taken from ```repology.conf.default```,
+but instead of modifying it copy it to ```repology.conf``` and
+override values there. You may also set ```REPOLOGY_SETTINGS```
+environment variable to the path to your custom config, which
+takes the highest priority.
 
 ## Repository support
 
