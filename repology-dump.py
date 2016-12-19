@@ -20,7 +20,7 @@
 import os
 import sys
 import re
-from argparse import ArgumentParser
+import argparse
 from xml.sax.saxutils import escape
 import shutil
 
@@ -29,6 +29,8 @@ from repology.packageproc import *
 from repology.repoman import RepositoryManager
 from repology.logger import *
 from repology.filters import *
+
+import repology.config
 
 
 def PackageVersionClass2Letter(value):
@@ -58,8 +60,8 @@ def RepositoryVersionClass2Letter(value):
 
 
 def Main():
-    parser = ArgumentParser()
-    parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
+    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-s', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
     parser.add_argument('-l', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-m', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
 
@@ -75,11 +77,8 @@ def Main():
 
     parser.add_argument('-d', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
 
-    parser.add_argument('reponames', metavar='repo|tag', nargs='*', help='repository or tag name to process')
+    parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
-
-    if not options.reponames:
-        options.reponames = ["all"]
 
     logger = StderrLogger()
     if options.logfile:

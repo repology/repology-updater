@@ -20,13 +20,15 @@
 import os
 import sys
 import traceback
-from argparse import ArgumentParser
+import argparse
 
 from repology.repoman import RepositoryManager
 from repology.transformer import PackageTransformer
 from repology.database import Database
 from repology.packageproc import FillPackagesetVersions
 from repology.logger import *
+
+import repology.config
 
 
 def ProcessRepositories(options, logger, repoman, transformer):
@@ -122,11 +124,11 @@ def ShowUnmatchedRules(options, logger, transformer):
 
 
 def Main():
-    parser = ArgumentParser()
-    parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
+    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-s', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
     parser.add_argument('-l', '--logfile', help='path to log file (log to stderr by default)')
-    parser.add_argument('-U', '--rules', default='rules.yaml', help='path to name transformation rules yaml')
-    parser.add_argument('-D', '--dsn', default='dbname=repology user=repology password=repology', help='database connection params')
+    parser.add_argument('-U', '--rules', default=repology.config.RULES_PATH, help='path to name transformation rules yaml')
+    parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
 
     actions_grp = parser.add_argument_group('Actions')
     actions_grp.add_argument('-f', '--fetch', action='count', help='allow fetching repository data (twice to also update)')
@@ -138,11 +140,8 @@ def Main():
 
     actions_grp.add_argument('-u', '--unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
-    parser.add_argument('reponames', metavar='repo|tag', nargs='*', help='repository or tag name to process')
+    parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
-
-    if not options.reponames:
-        options.reponames = ["all"]
 
     logger = StderrLogger()
     if options.logfile:
