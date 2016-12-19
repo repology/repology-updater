@@ -78,6 +78,8 @@ class TestFlask(unittest.TestCase):
 
         self.request_and_check('/metapackages/unique/', has=['kiconvtool', '0.97'])
 
+        self.request_and_check('/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool', '0.97'])
+
     def test_api_v1_metapackage(self):
         packages = json.loads(self.app.get('/api/v1/metapackage/kiconvtool').data.decode('utf-8'))
         self.assertEqual(len(packages), 1)
@@ -111,6 +113,8 @@ class TestFlask(unittest.TestCase):
         self.request_and_check('/api/v1/metapackages/unique-in-repo/freebsd/', has=['kiconvtool', '0.97'])
 
         self.request_and_check('/api/v1/metapackages/unique/', has=['kiconvtool', '0.97'])
+
+        self.request_and_check('/api/v1/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool', '0.97'])
 
 
 if __name__ == '__main__':
