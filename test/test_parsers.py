@@ -36,16 +36,16 @@ class TestParsers(unittest.TestCase):
         return Package()
 
     def test_freebsd(self):
-        p = self.FindPackage("kiconvtool")
+        p = self.FindPackage("vorbis-tools")
         self.assertEqual(p.repo, "freebsd")
         self.assertEqual(p.family, "freebsd")
-        self.assertEqual(p.name, "kiconvtool")
-        self.assertEqual(p.version, "0.97")
-        self.assertEqual(p.origversion, "0.97_1,1")
-        self.assertEqual(p.category, "sysutils")
-        self.assertEqual(p.comment, "Tool to preload kernel iconv charset tables")
-        self.assertEqual(p.maintainers, ['amdmi3@freebsd.org'])
-        self.assertEqual(p.homepage, 'http://wiki.freebsd.org/DmitryMarakasov/kiconvtool')
+        self.assertEqual(p.name, "vorbis-tools")
+        self.assertEqual(p.version, "1.4.0")
+        self.assertEqual(p.origversion, "1.4.0_10,3")
+        self.assertEqual(p.category, "audio")
+        self.assertEqual(p.comment, "Play, encode, and manage Ogg Vorbis files")
+        self.assertEqual(p.maintainers, ['naddy@freebsd.org'])
+        self.assertEqual(p.homepage, 'http://www.vorbis.com/')
 
     def test_gentoo(self):
         p = self.FindPackage("chromium-bsu")
