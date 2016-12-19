@@ -129,9 +129,9 @@ def api_v1_package_to_json(package):
 
     # XXX: these tweaks should be implemented in core
     if package.homepage:
-        output['www'] = package.homepage,
+        output['www'] = [ package.homepage ]
     if package.comment:
-        output['summary'] = package.comment,
+        output['summary'] = package.comment
     if package.category:
         output['categories'] = [ package.category ]
 
