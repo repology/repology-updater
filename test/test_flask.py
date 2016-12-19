@@ -29,21 +29,25 @@ class TestFlask(unittest.TestCase):
         repology_app.app.config['DSN'] = os.environ['REPOLOGY_TEST_DSN']
         self.app = repology_app.app.test_client()
 
+    def request_and_check(self, url, *patterns):
+        reply = self.app.get(url)
+        text = reply.data.decode('utf-8')
+        for pattern in patterns:
+            self.assertTrue(pattern in text)
+
     def test_static_pages(self):
-        reply = self.app.get('/news')
-        self.assertTrue('support added' in reply.data.decode('utf-8'))
-
-        reply = self.app.get('/about')
-        self.assertTrue('maintainers' in reply.data.decode('utf-8'))
-
-        reply = self.app.get('/api')
-        self.assertTrue('/api/v1/metapackages/all/firefox' in reply.data.decode('utf-8'))
+        self.request_and_check('/news', 'support added');
+        self.request_and_check('/about', 'maintainers');
+        self.request_and_check('/api', '/api/v1/metapackages/all/firefox');
 
     def test_badges(self):
-        reply = self.app.get('/badge/vertical-allrepos/kiconvtool')
-        self.assertTrue('<svg' in reply.data.decode('utf-8'))
-        self.assertTrue('FreeBSD' in reply.data.decode('utf-8'))
+        self.request_and_check('/badge/vertical-allrepos/kiconvtool', '<svg', 'FreeBSD')
+        self.request_and_check('/badge/vertical-allrepos/nonexistent', '<svg', 'yet')
+        self.request_and_check('/badge/tiny-packages/kiconvtool', '<svg', '>1<')
+        self.request_and_check('/badge/tiny-packages/nonexistent', '<svg', '>0<')
 
+    def test_metapackage(self):
+        self.request_and_check('/metapackage/kiconvtool', 'FreeBSD', '0.97', 'amdmi3')
 
 if __name__ == '__main__':
     unittest.main()
