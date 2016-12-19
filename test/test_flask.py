@@ -18,6 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import json
 import unittest
 
 repology_app = __import__("repology-app")
@@ -77,7 +78,23 @@ class TestFlask(unittest.TestCase):
 
         self.request_and_check('/metapackages/unique/', has=['kiconvtool', '0.97'])
 
-    def test_api(self):
+    def test_api_v1_metapackage(self):
+        packages = json.loads(self.app.get('/api/v1/metapackage/kiconvtool').data.decode('utf-8'))
+        self.assertEqual(len(packages), 1)
+        self.assertEqual(packages[0],
+            {
+                'repo': 'freebsd',
+                'name': 'kiconvtool',
+                'version': '0.97',
+                'origversion': '0.97_1',
+                'categories': ['sysutils'],
+                'summary': 'Tool to preload kernel iconv charset tables',
+                'maintainers': ['amdmi3@freebsd.org'],
+                'www': ['http://wiki.freebsd.org/DmitryMarakasov/kiconvtool'],
+            }
+        )
+
+    def test_api_v1_metapackages(self):
         self.request_and_check('/api/v1/metapackages/', has=['kiconvtool', '0.97'])
         self.request_and_check('/api/v1/metapackages/all/', has=['kiconvtool', '0.97'])
         self.request_and_check('/api/v1/metapackages/all/k/', has=['kiconvtool', '0.97'])
