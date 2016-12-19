@@ -54,6 +54,7 @@ class TestFlask(unittest.TestCase):
         self.checkurl('/news', has=['support added']);
         self.checkurl('/about', has=['maintainers']);
         self.checkurl('/api', has=['/api/v1/metapackages/all/firefox']);
+        self.checkurl('/badges', has=['http://repology.org/badge/vertical-allrepos/METAPACKAGE', 'http://repology.org/badge/tiny-packages/METAPACKAGE']);
 
     def test_badges(self):
         self.checkurl_svg('/badge/vertical-allrepos/kiconvtool', has=['<svg', 'FreeBSD'])
