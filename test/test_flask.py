@@ -30,7 +30,7 @@ class TestFlask(unittest.TestCase):
         repology_app.app.config['DSN'] = os.environ['REPOLOGY_TEST_DSN']
         self.app = repology_app.app.test_client()
 
-    def request_and_check(self, url, status_code=200, mimetype='text/html', has=[], hasnot=[]):
+    def checkurl(self, url, status_code=200, mimetype='text/html', has=[], hasnot=[]):
         reply = self.app.get(url)
         if status_code is not None:
             self.assertEqual(reply.status_code, status_code)
@@ -43,55 +43,61 @@ class TestFlask(unittest.TestCase):
             self.assertFalse(pattern in text)
         return text
 
+    def checkurl_json(self, url, status_code=200, mimetype='application/json', has=[], hasnot=[]):
+        return json.loads(self.checkurl(url=url, status_code=status_code, mimetype=mimetype, has=has, hasnot=hasnot))
+
+    def checkurl_svg(self, url, status_code=200, mimetype='image/svg+xml', has=[], hasnot=[]):
+        return self.checkurl(url=url, status_code=status_code, mimetype=mimetype, has=has, hasnot=hasnot)
+
     def test_static_pages(self):
-        self.request_and_check('/news', has=['support added']);
-        self.request_and_check('/about', has=['maintainers']);
-        self.request_and_check('/api', has=['/api/v1/metapackages/all/firefox']);
+        self.checkurl('/news', has=['support added']);
+        self.checkurl('/about', has=['maintainers']);
+        self.checkurl('/api', has=['/api/v1/metapackages/all/firefox']);
 
     def test_badges(self):
-        self.request_and_check('/badge/vertical-allrepos/kiconvtool', mimetype='image/svg+xml', has=['<svg', 'FreeBSD'])
-        self.request_and_check('/badge/vertical-allrepos/nonexistent', mimetype='image/svg+xml', has=['<svg', 'yet'])
-        self.request_and_check('/badge/tiny-packages/kiconvtool', mimetype='image/svg+xml', has=['<svg', '>1<'])
-        self.request_and_check('/badge/tiny-packages/nonexistent', mimetype='image/svg+xml', has=['<svg', '>0<'])
+        self.checkurl_svg('/badge/vertical-allrepos/kiconvtool', has=['<svg', 'FreeBSD'])
+        self.checkurl_svg('/badge/vertical-allrepos/nonexistent', has=['<svg', 'yet'])
+        self.checkurl_svg('/badge/tiny-packages/kiconvtool', has=['<svg', '>1<'])
+        self.checkurl_svg('/badge/tiny-packages/nonexistent', has=['<svg', '>0<'])
 
     def test_metapackage(self):
-        self.request_and_check('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.request_and_check('/metapackage/nonexistent', has=['No packages found'])
+        self.checkurl('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl('/metapackage/nonexistent', has=['No packages found'])
 
     def test_maintaners(self):
-        self.request_and_check('/maintainers/', has=['amdmi3@freebsd.org'])
-        self.request_and_check('/maintainers/0/', has=['amdmi3@freebsd.org'])
+        self.checkurl('/maintainers/', has=['amdmi3@freebsd.org'])
+        self.checkurl('/maintainers/0/', has=['amdmi3@freebsd.org'])
 
     def test_metapackages(self):
-        self.request_and_check('/metapackages/', has=['kiconvtool', '0.97'])
+        self.checkurl('/metapackages/', has=['kiconvtool', '0.97'])
 
-        self.request_and_check('/metapackages/all/', has=['kiconvtool'])
-        self.request_and_check('/metapackages/all/k/', has=['kiconvtool'])
-        self.request_and_check('/metapackages/all/>k/', has=['kiconvtool'])
-        self.request_and_check('/metapackages/all/<l/', has=['kiconvtool'])
-        self.request_and_check('/metapackages/all/l/', hasnot=['kiconvtool'])
-        self.request_and_check('/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
-        self.request_and_check('/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
+        self.checkurl('/metapackages/all/', has=['kiconvtool'])
+        self.checkurl('/metapackages/all/k/', has=['kiconvtool'])
+        self.checkurl('/metapackages/all/>k/', has=['kiconvtool'])
+        self.checkurl('/metapackages/all/<l/', has=['kiconvtool'])
+        self.checkurl('/metapackages/all/l/', hasnot=['kiconvtool'])
+        self.checkurl('/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
+        self.checkurl('/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
 
-        self.request_and_check('/metapackages/in-repo/', has=['FreeBSD'])
-        self.request_and_check('/metapackages/in-repo/freebsd/', has=['kiconvtool'])
+        self.checkurl('/metapackages/in-repo/', has=['FreeBSD'])
+        self.checkurl('/metapackages/in-repo/freebsd/', has=['kiconvtool'])
 
-        self.request_and_check('/metapackages/not-in-repo/', has=['FreeBSD'])
-        self.request_and_check('/metapackages/not-in-repo/freebsd/', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
+        self.checkurl('/metapackages/not-in-repo/', has=['FreeBSD'])
+        self.checkurl('/metapackages/not-in-repo/freebsd/', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
 
-        self.request_and_check('/metapackages/unique-in-repo/', has=['FreeBSD'])
-        self.request_and_check('/metapackages/unique-in-repo/freebsd/', has=['kiconvtool'])
+        self.checkurl('/metapackages/unique-in-repo/', has=['FreeBSD'])
+        self.checkurl('/metapackages/unique-in-repo/freebsd/', has=['kiconvtool'])
 
-        self.request_and_check('/metapackages/unique/', has=['kiconvtool'])
+        self.checkurl('/metapackages/unique/', has=['kiconvtool'])
 
-        self.request_and_check('/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
+        self.checkurl('/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
 
         # special cases: check fallback code for going before first or after last entry
-        self.request_and_check('/metapackages/all/<0/', has=['kiconvtool'])
-        self.request_and_check('/metapackages/all/>zzzzzz/', has=['kiconvtool'])
+        self.checkurl('/metapackages/all/<0/', has=['kiconvtool'])
+        self.checkurl('/metapackages/all/>zzzzzz/', has=['kiconvtool'])
 
     def test_api_v1_metapackage(self):
-        self.assertEqual(json.loads(self.request_and_check('/api/v1/metapackage/kiconvtool', mimetype='application/json')),
+        self.assertEqual(self.checkurl_json('/api/v1/metapackage/kiconvtool', mimetype='application/json'),
             [
                 {
                     'repo': 'freebsd',
@@ -105,28 +111,28 @@ class TestFlask(unittest.TestCase):
                 }
             ]
         )
-        self.assertEqual(json.loads(self.request_and_check('/api/v1/metapackage/nonexistent', mimetype='application/json')), [])
+        self.assertEqual(self.checkurl_json('/api/v1/metapackage/nonexistent', mimetype='application/json'), [])
 
     def test_api_v1_metapackages(self):
-        self.request_and_check('/api/v1/metapackages/', mimetype='application/json', has=['kiconvtool', '0.97'])
+        self.checkurl_json('/api/v1/metapackages/', has=['kiconvtool', '0.97'])
 
-        self.request_and_check('/api/v1/metapackages/all/', mimetype='application/json', has=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/k/', mimetype='application/json', has=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/>k/', mimetype='application/json', has=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/<l/', mimetype='application/json', has=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/l/', mimetype='application/json', hasnot=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/<kiconvtool/', mimetype='application/json', hasnot=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/>kiconvtool/', mimetype='application/json', hasnot=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/all/', has=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/all/k/', has=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/all/>k/', has=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/all/<l/', has=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/all/l/', hasnot=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
 
-        self.request_and_check('/api/v1/metapackages/in-repo/freebsd/', mimetype='application/json', has=['kiconvtool'], hasnot=['chromium-bsu', 'zlib'])
+        self.checkurl_json('/api/v1/metapackages/in-repo/freebsd/', has=['kiconvtool'], hasnot=['chromium-bsu', 'zlib'])
 
-        self.request_and_check('/api/v1/metapackages/not-in-repo/freebsd/', mimetype='application/json', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/not-in-repo/freebsd/', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
 
-        self.request_and_check('/api/v1/metapackages/unique-in-repo/freebsd/', mimetype='application/json', has=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/unique-in-repo/freebsd/', has=['kiconvtool'])
 
-        self.request_and_check('/api/v1/metapackages/unique/', mimetype='application/json', has=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/unique/', has=['kiconvtool'])
 
-        self.request_and_check('/api/v1/metapackages/by-maintainer/amdmi3@freebsd.org/', mimetype='application/json', has=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
 
 
 if __name__ == '__main__':
