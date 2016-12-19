@@ -49,10 +49,10 @@ class TestFlask(unittest.TestCase):
         self.request_and_check('/api', has=['/api/v1/metapackages/all/firefox']);
 
     def test_badges(self):
-        self.request_and_check('/badge/vertical-allrepos/kiconvtool', has=['<svg', 'FreeBSD'])
-        self.request_and_check('/badge/vertical-allrepos/nonexistent', has=['<svg', 'yet'])
-        self.request_and_check('/badge/tiny-packages/kiconvtool', has=['<svg', '>1<'])
-        self.request_and_check('/badge/tiny-packages/nonexistent', has=['<svg', '>0<'])
+        self.request_and_check('/badge/vertical-allrepos/kiconvtool', mimetype='image/svg+xml', has=['<svg', 'FreeBSD'])
+        self.request_and_check('/badge/vertical-allrepos/nonexistent', mimetype='image/svg+xml', has=['<svg', 'yet'])
+        self.request_and_check('/badge/tiny-packages/kiconvtool', mimetype='image/svg+xml', has=['<svg', '>1<'])
+        self.request_and_check('/badge/tiny-packages/nonexistent', mimetype='image/svg+xml', has=['<svg', '>0<'])
 
     def test_metapackage(self):
         self.request_and_check('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
@@ -90,7 +90,7 @@ class TestFlask(unittest.TestCase):
         self.request_and_check('/metapackages/all/>zzzzzz/', has=['kiconvtool'])
 
     def test_api_v1_metapackage(self):
-        packages = json.loads(self.app.get('/api/v1/metapackage/kiconvtool').data.decode('utf-8'))
+        packages = json.loads(self.request_and_check('/api/v1/metapackage/kiconvtool', mimetype='application/json'))
         self.assertEqual(len(packages), 1)
         self.assertEqual(packages[0],
             {
@@ -106,25 +106,25 @@ class TestFlask(unittest.TestCase):
         )
 
     def test_api_v1_metapackages(self):
-        self.request_and_check('/api/v1/metapackages/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/api/v1/metapackages/', mimetype='application/json', has=['kiconvtool', '0.97'])
 
-        self.request_and_check('/api/v1/metapackages/all/', has=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/k/', has=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/>k/', has=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/<l/', has=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/l/', hasnot=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
-        self.request_and_check('/api/v1/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/', mimetype='application/json', has=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/k/', mimetype='application/json', has=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/>k/', mimetype='application/json', has=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/<l/', mimetype='application/json', has=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/l/', mimetype='application/json', hasnot=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/<kiconvtool/', mimetype='application/json', hasnot=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/all/>kiconvtool/', mimetype='application/json', hasnot=['kiconvtool'])
 
-        self.request_and_check('/api/v1/metapackages/in-repo/freebsd/', has=['kiconvtool'], hasnot=['chromium-bsu', 'zlib'])
+        self.request_and_check('/api/v1/metapackages/in-repo/freebsd/', mimetype='application/json', has=['kiconvtool'], hasnot=['chromium-bsu', 'zlib'])
 
-        self.request_and_check('/api/v1/metapackages/not-in-repo/freebsd/', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/not-in-repo/freebsd/', mimetype='application/json', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
 
-        self.request_and_check('/api/v1/metapackages/unique-in-repo/freebsd/', has=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/unique-in-repo/freebsd/', mimetype='application/json', has=['kiconvtool'])
 
-        self.request_and_check('/api/v1/metapackages/unique/', has=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/unique/', mimetype='application/json', has=['kiconvtool'])
 
-        self.request_and_check('/api/v1/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
+        self.request_and_check('/api/v1/metapackages/by-maintainer/amdmi3@freebsd.org/', mimetype='application/json', has=['kiconvtool'])
 
 
 if __name__ == '__main__':
