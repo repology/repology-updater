@@ -20,6 +20,7 @@
 import os
 import json
 import unittest
+import xml.etree.ElementTree
 
 repology_app = __import__("repology-app")
 
@@ -47,7 +48,7 @@ class TestFlask(unittest.TestCase):
         return json.loads(self.checkurl(url=url, status_code=status_code, mimetype=mimetype, has=has, hasnot=hasnot))
 
     def checkurl_svg(self, url, status_code=200, mimetype='image/svg+xml', has=[], hasnot=[]):
-        return self.checkurl(url=url, status_code=status_code, mimetype=mimetype, has=has, hasnot=hasnot)
+        return xml.etree.ElementTree.fromstring(self.checkurl(url=url, status_code=status_code, mimetype=mimetype, has=has, hasnot=hasnot))
 
     def test_static_pages(self):
         self.checkurl('/news', has=['support added']);
