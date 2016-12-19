@@ -1,0 +1,4 @@
+DSN = "dbname=repology user=repology password=repology"
+PER_PAGE = 500
+REPOSITORIES = ['production']
+REPOLOGY_HOME = 'http://repology.org'

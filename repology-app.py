@@ -31,13 +31,8 @@ from repology.metapackageproc import *
 # globals
 app = Flask(__name__)
 
-app.config.update(dict(
-    DSN = 'dbname=repology user=repology password=repology',
-    PER_PAGE = 500,
-    REPOSITORIES = ['production'],
-    REPOLOGY_HOME = 'http://repology.org'
-))
-
+app.config.from_pyfile('repology.conf.default')
+app.config.from_pyfile('repology.conf', silent=True)
 app.config.from_envvar('REPOLOGY_SETTINGS', silent=True)
 
 repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
