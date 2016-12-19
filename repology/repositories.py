@@ -218,7 +218,7 @@ REPOSITORIES = [
         'parser': lambda: ArchDBParser(),
         # XXX: 'https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name} add support for `repository'
         'link': 'https://www.archlinux.org/packages/?sort=&q={name}',
-        'tags': ['all', 'demo', 'production', 'fastfetch'],
+        'tags': ['all', 'have_testdata', 'demo', 'production', 'fastfetch'],
     },
     {
         'name': 'aur',
