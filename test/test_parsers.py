@@ -41,7 +41,7 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(p.family, "freebsd")
         self.assertEqual(p.name, "kiconvtool")
         self.assertEqual(p.version, "0.97")
-        self.assertEqual(p.origversion, None)
+        self.assertEqual(p.origversion, "0.97_1,1")
         self.assertEqual(p.category, "sysutils")
         self.assertEqual(p.comment, "Tool to preload kernel iconv charset tables")
         self.assertEqual(p.maintainers, ['amdmi3@freebsd.org'])
