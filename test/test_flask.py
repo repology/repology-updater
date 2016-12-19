@@ -25,7 +25,7 @@ import xml.etree.ElementTree
 repology_app = __import__("repology-app")
 
 
-@unittest.skipIf(not 'REPOLOGY_CONFIG' in os.environ, 'flask tests require database filled with test data; please prepare the database and configuration file (see repology.conf.test for reference) and pass it via REPOLOGY_CONFIG environment variable')
+@unittest.skipIf(not 'REPOLOGY_CONFIG' in os.environ, 'flask tests require database filled with test data; please prepare the database and configuration file (see repology-test.conf.default for reference) and pass it via REPOLOGY_CONFIG environment variable')
 class TestFlask(unittest.TestCase):
     def setUp(self):
         self.app = repology_app.app.test_client()

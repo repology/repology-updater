@@ -1,0 +1,2 @@
+DSN = "dbname=repology_test user=repology_test password=repology_test"
+REPOSITORIES = ['have_testdata']
