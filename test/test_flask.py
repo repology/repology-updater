@@ -29,25 +29,35 @@ class TestFlask(unittest.TestCase):
         repology_app.app.config['DSN'] = os.environ['REPOLOGY_TEST_DSN']
         self.app = repology_app.app.test_client()
 
-    def request_and_check(self, url, *patterns):
+    def request_and_check(self, url, has=[], hasnot=[]):
         reply = self.app.get(url)
         text = reply.data.decode('utf-8')
-        for pattern in patterns:
+        for pattern in has:
             self.assertTrue(pattern in text)
+        for pattern in hasnot:
+            self.assertFalse(pattern in text)
 
     def test_static_pages(self):
-        self.request_and_check('/news', 'support added');
-        self.request_and_check('/about', 'maintainers');
-        self.request_and_check('/api', '/api/v1/metapackages/all/firefox');
+        self.request_and_check('/news', has=['support added']);
+        self.request_and_check('/about', has=['maintainers']);
+        self.request_and_check('/api', has=['/api/v1/metapackages/all/firefox']);
 
     def test_badges(self):
-        self.request_and_check('/badge/vertical-allrepos/kiconvtool', '<svg', 'FreeBSD')
-        self.request_and_check('/badge/vertical-allrepos/nonexistent', '<svg', 'yet')
-        self.request_and_check('/badge/tiny-packages/kiconvtool', '<svg', '>1<')
-        self.request_and_check('/badge/tiny-packages/nonexistent', '<svg', '>0<')
+        self.request_and_check('/badge/vertical-allrepos/kiconvtool', has=['<svg', 'FreeBSD'])
+        self.request_and_check('/badge/vertical-allrepos/nonexistent', has=['<svg', 'yet'])
+        self.request_and_check('/badge/tiny-packages/kiconvtool', has=['<svg', '>1<'])
+        self.request_and_check('/badge/tiny-packages/nonexistent', has=['<svg', '>0<'])
 
     def test_metapackage(self):
-        self.request_and_check('/metapackage/kiconvtool', 'FreeBSD', '0.97', 'amdmi3')
+        self.request_and_check('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
+
+    def test_metapackages(self):
+        self.request_and_check('/metapackages/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/all/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/all/k/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/all/>k/', has=['kiconvtool', '0.97'])
+        self.request_and_check('/metapackages/all/<l/', has=['kiconvtool', '0.97'])
+
 
 if __name__ == '__main__':
     unittest.main()
