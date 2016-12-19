@@ -36,6 +36,7 @@ class TestFlask(unittest.TestCase):
             self.assertTrue(pattern in text)
         for pattern in hasnot:
             self.assertFalse(pattern in text)
+        return text
 
     def test_static_pages(self):
         self.request_and_check('/news', has=['support added']);
