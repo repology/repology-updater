@@ -1,5 +1,10 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+# Lowercase all names first
+# if there's a need to process mixer case names, it shold be done before this rule
+
+- { tolowername: true }
+
 ################################################################################
 # Single (almost) package rules part
 ################################################################################
@@ -12,15 +17,14 @@
 - { name: accounts-qt5,                setname: accounts-qt ,             families: [ sisyphus ] }
 - { name: ace,                         setname: ace-of-penguins,          families: [ openbsd, slackbuilds ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          families: [ gentoo ] }
-- { name: AcetoneISO, verpat: "6.*",   setname: acetoneiso6,              families: [ fedora ] } # XXX: ???
-- { name: acetoneiso2,                 setname: acetoneiso,               families: [ arch ] }
-- { name: AcetoneISO2,                 setname: acetoneiso,               families: [ sisyphus ] }
+- { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              families: [ fedora ] } # XXX: ???
+- { name: acetoneiso2,                 setname: acetoneiso,               families: [ arch, sisyphus ] }
 - { name: ack-grep,                    setname: ack,                      families: [ debian ] }
 - { namepat: "acpica-(?:tools|unix|utils)", setname: acpica                                 }
 - { name: acroread9,                   setname: acroread,                 families: [ pkgsrc ] }
 - { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     families: [ pkgsrc ] }
 - { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      families: [ pkgsrc ] }
-- { name: Actionaz,                    setname: actiona,                  families: [ chocolatey ] }
+- { name: actionaz,                    setname: actiona,                  families: [ chocolatey ] }
 - { name: activeio,                    setname: activemq-activeio,        families: [ fedora, sisyphus ] }
 - { name: adb,                         setname: android-tools,            families: [ openbsd ] }
 - { name: adblockplus-firefox,         setname: adblock-plus,             families: [ chocolatey ] }
@@ -44,7 +48,7 @@
 - { name: blitz,                       setname: blitz++,                  families: [ gentoo, fedora, opensuse ] } # XXX: recheck
 - { name: blobby2,                     setname: blobby,                   families: [ arch ] } # XXX: recheck
 - { name: blockout2,                   setname: blockout,                 families: [ debian ]  }
-- { name: BlockOutII,                  setname: blockout,                 families: [ fedora ]  } # XXX: recheck
+- { name: blockoutii,                  setname: blockout,                 families: [ fedora ]  } # XXX: recheck
 - { name: boaconstructor,              setname: boa-constructor,          families: [ freebsd ] }
 - { name: boost-all,                   setname: boost,                    families: [ freebsd ] }
 - { namepat: "boost1.[0-9]+",          setname: boost,                    families: [ debian ] }
@@ -98,8 +102,8 @@
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle,                 families: [ debian ]  }
 - { name: gaul-devel,                  setname: gaul,                     families: [ gentoo ]  }
-- { name: geki2-KXL,                   setname: geki2,                    families: [ gentoo ]  } # XXX: recheck
-- { name: geki3-KXL,                   setname: geki3,                    families: [ gentoo ]  } # XXX: recheck
+- { name: geki2-kxl,                   setname: geki2,                    families: [ gentoo ]  } # XXX: recheck
+- { name: geki3-kxl,                   setname: geki3,                    families: [ gentoo ]  } # XXX: recheck
 - { name: gitg0,                       setname: gitg,                     families: [ freebsd ]  }
 - { name: gl117,                       setname: gl-117,                   families: [ gentoo ]  }
 - { name: google-mock,                 setname: gmock,                    families: [ debian ]  }
@@ -255,12 +259,12 @@
 - { name: libreadonly-perl,            ver: "2.050",                                         ignorever: true }
 - { name: opencity,                    ver: "0.0.6.5stable",                                 ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 families: [ sisyphus ], ignorever: true }
-- { name: OpenXcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
-- { name: p5-Catalyst-Plugin-Authentication, ver: "0.100230",                                ignorever: true }
-- { name: p5-Device-SerialPort,        ver: "1.040000",                                      ignorever: true }
-- { name: p5-Math-Polygon-Tree,        verpat: "0.0[^89].*",                                 ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
-- { name: perl-Test-Exception,         ver: "0.430000",                                      ignorever: true }
-- { name: perl-Time-Duration,          ver: "1.200000",                                      ignorever: true }
+- { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
+- { name: p5-catalyst-plugin-authentication, ver: "0.100230",                                ignorever: true }
+- { name: p5-device-serialport,        ver: "1.040000",                                      ignorever: true }
+- { name: p5-math-polygon-tree,        verpat: "0.0[^89].*",                                 ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
+- { name: perl-test-exception,         ver: "0.430000",                                      ignorever: true }
+- { name: perl-time-duration,          ver: "1.200000",                                      ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
 - { name: xmahjongg,                   ver: "3.70",                  families: [ pkgsrc ],   ignorever: true }
 
@@ -444,7 +448,6 @@
 - { name: keepass2,                    setname: keepass }
 
 - { name: keepassx-devel,              setname: keepassx, families: [ freebsd ] }
-- { name: KeePassX,                    setname: keepassx }
 - { namepat: "keepassx[0-9]*",         setname: keepassx }
 - { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
 - { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
@@ -538,8 +541,8 @@
 ################################################################################
 
 # FreeBSD: localized categories (XXX: fix this, contains useful packages)
-- { namepat: "([a-z]{2,3}|de-alt|pt_BR|pt_PT)-aspell", setname: "aspell-$1", families: [ freebsd ] }
-- { namepat: "([a-z]{2,3}|de-alt|pt_BR|pt_PT)-aspell", setname: "aspell-$1", families: [ freebsd ] }
+- { namepat: "([a-z]{2,3}|de-alt|pt_br|pt_pt)-aspell", setname: "aspell-$1", families: [ freebsd ] }
+- { namepat: "([a-z]{2,3}|de-alt|pt_br|pt_pt)-aspell", setname: "aspell-$1", families: [ freebsd ] }
 - { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, families: [ freebsd ] }
 
 # Perl modules
@@ -553,6 +556,7 @@
 - { category: perl-core,               setname: "perl:$0", families: [ gentoo ] }
   # Gentoo and Mageia shamelessly mangle perl module versions, ignore
 - { namepat: "perl:(.*)",              families: [ gentoo, mageia ], ignorever: true }
+- { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # fir for false ".*font" match below
 
 # Ruby
 - { namepat: "ruby-(.*)",              setname: "ruby:$1", families: [ debian, arch, fedora, mageia, sisyphus ] }
@@ -582,9 +586,8 @@
 - { category: dev-python,              setname: "python:$0", families: [ gentoo ] }
 
 # R libs
-- { namepat: "R-cran-(.*)",            setname: "r:$1", families: [ freebsd ] }
-- { namepat: "r-cran-(.*)",            setname: "r:$1", families: [ debian ] }
-- { namepat: "R-(.*)",                 setname: "r:$1", families: [ pkgsrc, fedora ] }
+- { namepat: "r-cran-(.*)",            setname: "r:$1", families: [ freebsd, debian ] }
+- { namepat: "r-(.*)",                 setname: "r:$1", families: [ pkgsrc, fedora ] }
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "r:$1", families: [ debian ] }
@@ -617,7 +620,7 @@
 - { namepat: ".*luassert",             setname: "lua:luassert", last: true } # save
 - { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", families: [ freebsd, pkgsrc, openbsd, arch, debian, fedora, mageia, opensuse ] }
 - { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", families: [ openbsd ] }
-- { category: dev-lua, name: LuaBitOp, setname: "lua:bitop", last: true, families: [ gentoo ] }
+- { category: dev-lua, name: luabitop, setname: "lua:bitop", last: true, families: [ gentoo ] }
 - { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", families: [ gentoo ] }
 
 # octave
@@ -629,7 +632,7 @@
 - { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", families: [ debian ] }
 
 # php
-- { category: dev-php, namepat: "(?:PEAR-|pecl-|php-)+(.*?)", setname: "php:$1", tolowername: true, replaceinname: { "_": "-" }, last: true, families: [ gentoo ] }
+- { category: dev-php, namepat: "(?:pear-|pecl-|php-)+(.*?)", setname: "php:$1", tolowername: true, replaceinname: { "_": "-" }, last: true, families: [ gentoo ] }
 - { category: dev-php,                 setname: "php:$0", families: [ gentoo ] }
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", families: [ freebsd, pkgsrc, openbsd, sisyphus ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", families: [ freebsd, pkgsrc, mageia ] }
