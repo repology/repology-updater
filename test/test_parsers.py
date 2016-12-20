@@ -118,5 +118,24 @@ class TestParsers(unittest.TestCase):
             }
         )
 
+    def test_debian(self):
+        self.check_package("a52dec",
+            {
+                "repo": "debian_unstable",
+                "category": "devel",
+                "family": "debian",
+                "name": "a52dec",
+                "version": "0.7.4",
+                "origversion": "0.7.4-18",
+                "maintainers": [
+                    'pkg-multimedia-maintainers@lists.alioth.debian.org',
+                    'dmitrij.ledkov@ubuntu.com',
+                    'sam+deb@zoy.org',
+                    'siretart@tauware.de',
+                ],
+                "homepage": "http://liba52.sourceforge.net/",
+            }
+        )
+
 if __name__ == '__main__':
     unittest.main()

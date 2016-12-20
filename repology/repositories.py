@@ -86,7 +86,7 @@ REPOSITORIES = [
         ),
         'parser': lambda: DebianSourcesParser(),
         'link': 'https://packages.debian.org/unstable/{name}',
-        'tags': ['all', 'demo', 'debian', 'production', 'fastfetch'],
+        'tags': ['all', 'have_testdata', 'demo', 'debian', 'production', 'fastfetch'],
     },
     {
         'name': 'debian_experimental',
