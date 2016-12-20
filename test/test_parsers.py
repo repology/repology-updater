@@ -25,6 +25,7 @@ from repology.package import Package
 
 class TestParsers(unittest.TestCase):
     def setUp(self):
+        self.maxDiff = None
         repoman = RepositoryManager("testdata")
         self.packages = repoman.ParseMulti(reponames=['have_testdata'])
 
