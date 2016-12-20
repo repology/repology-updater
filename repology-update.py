@@ -162,7 +162,7 @@ def Main():
     if options.initdb or options.database:
         ProcessDatabase(options=options, logger=logger, repoman=repoman, repositories_updated=repositories_updated)
 
-    if (options.parse or options.reprocess) and (options.unmatched_rules):
+    if (options.parse or options.reprocess) and (options.show_unmatched_rules):
         ShowUnmatchedRules(options=options, logger=logger, transformer=transformer)
 
     return 1 if repositories_not_updated else 0
