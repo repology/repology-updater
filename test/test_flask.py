@@ -49,6 +49,9 @@ class TestFlask(unittest.TestCase):
     def checkurl_svg(self, url, status_code=200, mimetype='image/svg+xml', has=[], hasnot=[]):
         return xml.etree.ElementTree.fromstring(self.checkurl(url=url, status_code=status_code, mimetype=mimetype, has=has, hasnot=hasnot))
 
+    def checkurl_404(self, url):
+        return self.checkurl(url=url, status_code=404, mimetype=None)
+
     def test_static_pages(self):
         self.checkurl('/news', has=['support added']);
         self.checkurl('/about', has=['maintainers']);
