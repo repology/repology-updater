@@ -30,7 +30,7 @@ script:
   - make check
 
   # fill database with test data
-  - ./repology-update.py --parse --database --database --state testdata
+  - ./repology-update.py --parse --initdb --database
 
   # smoke test bit
   - ./repology-dump.py --help
