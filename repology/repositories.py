@@ -397,7 +397,6 @@ REPOSITORIES = [
         'fetcher': lambda: FileFetcher("https://f-droid.org/repo/index.xml"),
         'parser': lambda: FDroidParser(),
         'shadow': True,
-        'link': 'http://freshcode.club/projects/{name}',
         'tags': ['all', 'fastfetch'],
     },
 ]
