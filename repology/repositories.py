@@ -333,6 +333,15 @@ REPOSITORIES = [
         'tags': ['all', 'production', 'fastfetch'],
     },
     {
+        'name': 'gobolinux',
+        'desc': 'GoboLinux',
+        'family': 'gobolinux',
+        'fetcher': lambda: GitFetcher("https://github.com/gobolinux/Recipes.git"),
+        'parser': lambda: GoboLinuxGitParser(),
+        'link': 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}',
+        'tags': ['all', 'preproduction', 'fastfetch'],
+    },
+    {
         'name': 'chocolatey',
         'desc': 'Chocolatey',
         'family': 'chocolatey',
