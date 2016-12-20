@@ -76,6 +76,8 @@ def Main():
     filters_grp.add_argument('--outdated-in-repository', help='filter by outdatedness in repository')
 
     parser.add_argument('-D', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
+    parser.add_argument('-f', '--fields', default='effname,repo', help='fields to list for the package')
+    parser.add_argument('-s', '--field-separator', default=' ', help='field separator')
 
     parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
@@ -111,14 +113,15 @@ def Main():
             return
 
         if options.dump == 'packages':
-            print(packageset[0].effname)
+            #print(packageset[0].effname)
             for package in packageset:
-                print("  {}: {}-{} ({})".format(
-                    package.repo,
-                    package.name,
-                    package.version,
-                    PackageVersionClass2Letter(package.versionclass),
-                ))
+                print(
+                    options.field_separator.join(
+                        [
+                            getattr(package, field) for field in options.fields.split(',')
+                        ]
+                    )
+                )
         if options.dump == 'summaries':
             print(packageset[0].effname)
             summaries = PackagesetToSummaries(packageset)
