@@ -7,34 +7,52 @@
 # as long as you set path to it in REPLOGY_CONF environment
 # variable
 
-#
+############################################################################
 # COMMON SETTINGS
-#
+############################################################################
 
-# postgresql database connect string
+#
+# Postgresql database connect string
+#
+# Used by repology-update and repology-app
+# Overridable via --dsn command line arg
+#
 DSN = "dbname=repology user=repology password=repology"
 
 #
-# directory to store repository data in
+# Directory to store repository data in
+#
+# Used in repology-update and repology-dump
+# Overridable via --statedir command line arg
 #
 STATE_DIR = "_state"
 
 #
-# path to YAML file containing package transformation rules
+# Path to YAML file containing package transformation rules
+#
+# Used by repology-update
+# Overridable via --rules command line arg
 #
 RULES_PATH = "rules.yaml"
 
 #
-# array of repository names or tags to work with
+# Array of repository names or tags to work with
+#
+# Used by repology-update and repology-dump
+# Overridable via free command line args
 #
 REPOSITORIES = ['production']
 
-#
+############################################################################
 # WEBAPP SETTINGS
-#
+############################################################################
 
-# items (metapackages, maintainers) per page
+#
+# Items (metapackages, maintainers) per page
+#
 PER_PAGE = 500
 
-# global address of repology website to use in links
+#
+# Address of repology.org to use in HTML links
+#
 REPOLOGY_HOME = 'http://repology.org'
