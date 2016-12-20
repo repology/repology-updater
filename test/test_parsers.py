@@ -56,9 +56,22 @@ class TestParsers(unittest.TestCase):
 
         reference_with_default.update(reference)
 
+        def sort_lists(what):
+            output = {}
+            for key, value in what.items():
+                if isinstance(value, list):
+                    output[key] = sorted(value)
+                else:
+                    output[key] = value
+
+            return output
+
         for package in self.packages:
             if package.name == name:
-                self.assertEqual(package.__dict__, reference_with_default)
+                self.assertEqual(
+                    sort_lists(package.__dict__),
+                    sort_lists(reference_with_default)
+                )
                 return
 
         self.assertFalse("package not found")
