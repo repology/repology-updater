@@ -298,7 +298,7 @@ def metapackage(name):
     repometadata = repoman.GetMetadata();
     return flask.render_template("package.html", packages=packages, repometadata=repometadata, name=name)
 
-@app.route("/badge/vertical-allrepos/<name>")
+@app.route("/badge/vertical-allrepos/<name>.svg")
 def badge_vertical_allrepos(name):
     summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
     repometadata = repoman.GetMetadata();
@@ -320,7 +320,7 @@ def badge_vertical_allrepos(name):
         {'Content-type': 'image/svg+xml'}
     )
 
-@app.route("/badge/tiny-packages/<name>")
+@app.route("/badge/tiny-packages/<name>.svg")
 def badge_tiny_packages(name):
     return (
         flask.render_template(

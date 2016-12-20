@@ -62,10 +62,12 @@ class TestFlask(unittest.TestCase):
         self.checkurl('/statistics', has=['FreeBSD']);
 
     def test_badges(self):
-        self.checkurl_svg('/badge/vertical-allrepos/kiconvtool', has=['<svg', 'FreeBSD'])
-        self.checkurl_svg('/badge/vertical-allrepos/nonexistent', has=['<svg', 'yet'])
-        self.checkurl_svg('/badge/tiny-packages/kiconvtool', has=['<svg', '>1<'])
-        self.checkurl_svg('/badge/tiny-packages/nonexistent', has=['<svg', '>0<'])
+        self.checkurl_svg('/badge/vertical-allrepos/kiconvtool.svg', has=['<svg', 'FreeBSD'])
+        self.checkurl_svg('/badge/vertical-allrepos/nonexistent.svg', has=['<svg', 'yet'])
+        self.checkurl_404('/badge/vertical-allrepos/nonexistent')
+        self.checkurl_svg('/badge/tiny-packages/kiconvtool.svg', has=['<svg', '>1<'])
+        self.checkurl_svg('/badge/tiny-packages/nonexistent.svg', has=['<svg', '>0<'])
+        self.checkurl_404('/badge/tiny-packages/nonexistent')
 
     def test_metapackage(self):
         self.checkurl('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
