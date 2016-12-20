@@ -105,5 +105,18 @@ class TestParsers(unittest.TestCase):
             }
         )
 
+    def test_cpan(self):
+        self.check_package("Acme-Brainfuck",
+            {
+                "repo": "cpan",
+                "family": "cpan",
+                "name": "Acme-Brainfuck",
+                "version": "1.1.1",
+                "maintainers": ['jaldhar@cpan'],
+                "homepage": "http://search.cpan.org/dist/Acme-Brainfuck/",
+                "shadow": True,
+            }
+        )
+
 if __name__ == '__main__':
     unittest.main()
