@@ -67,30 +67,34 @@ You need librpm and pkg-config.
 
 ### Usage
 
-#### Fetching repository data
+#### Configuration
 
-First, repository data need to be fetched, parsed and optionally
-stored in the database. ```repology-update.py``` utility does that:
+First, you may need to tune settings which are shared by all repology
+utilities, such as directory for storing downloaded repository state
+or DSN (string which specifies how to connect to PostgreSQL database).
+See ```repology.conf.default``` for default values, create
+```repology.conf``` in the same directory to override them or
+specify path to alternative config in ```REPOLOGY_SETTINGS```
+environment variable, or override settings via command line.
+
+By default, repology uses ```./_state``` state directory and
+```repology/repology/repology``` database/user/password on localhost.
+
+#### Fetching/updating repository data
+
+First, let's try to fetch some repository data and see if it works.
+No database is needed at this point.
 
 ```
-./repology-update \
-    --statedir=repology.state \
-    --fetch --fetch --parse \
-    production
+./repology-update --fetch --parse
 ```
 
-* ```--statedir``` specifies where to store intermediary data.
 * ```--fetch``` tells the utility to fetch raw repository data
-(download files, scrape websites, clone git repos), specifying it
-allows updating the data (otherwise it's only fetched once).
-* ```--parse``` parses downloaded raw data into internal format.
-Parsed data is also stored in statedir.
-* Free arguments specify list of repositories or tags (tag is a
-group of repositories) to work on. Here we only process ```production```
-tag.
-
-Statedir defaults to ```_state``` in current directory and list of
-repositories defaults to all known repositories, so you may omit these.
+(download files, scrape websites, clone git repos) into state
+directory. Note that it won't refetch (update) data unless
+```--update``` is also specified.
+* ```--parse``` parses downloaded raw data into internal format
+which is also saved into state directory.
 
 After data is downloaded you may inspect it with
 
@@ -101,10 +105,13 @@ After data is downloaded you may inspect it with
 The utility allows filtering and several modes of operation, see
 ```--help``` for full list of options.
 
-#### Filling the database
+#### Creating the database
 
-If the above steps work for you, you may want to run repology web
-application. For that you'll need to create PostgreSQL database:
+To run repology webapp you need PostgreSQL database.
+
+First, ensure PostgreSQL server is installed and running,
+and execute the following SQL queries (usually you'll run
+```psql -U postgres``` for this):
 
 ```
 CREATE DATABASE repology;
@@ -112,33 +119,29 @@ CREATE USER repology WITH PASSWORD 'repology';
 GRANT ALL ON DATABASE repology TO repology;
 ```
 
-Note that you may want to change database, user name and password.
-
-After database is created, make ```repology-update.py``` fill it.
-
-* Add ```--database``` argument to tell the utility to fill database.
-Specify twice to (re)initialize the database (you'll need to do this
-first time).
-* Specify ```--dsn="dbname=DBNAME user=USERNAME password=PASS"```
-if you've used custom database setup. Omit to use default
-repology/repology/repology.
-
-Summarizing, the minimal command to update all repositories and
-store them in the database created as mentioned above is:
+now you can create database schema (tables, indexes etc.) with:
 
 ```
-./repology-update --fetch --fetch --parse --database
+./repology-update --initdb
+```
+
+and finally push parsed data into the database with:
+
+```
+./repology-update --database
 ```
 
 #### Running the webapp
 
-Repology is a flask application, so you may just run it locally:
+Repology is a flask application, so as long as you've set up
+database and configuration, you may just run the application
+locally:
 
 ```
 ./repology-app.py
 ```
 
-and then point your browser to http://127.0.0.1:5000/ to view the
+and point your browser to http://127.0.0.1:5000/ to view the
 site. This should be enough for personal usage, experiments and
 testing.
 
@@ -147,12 +150,16 @@ including mod_wsgi, uwsgi, fastcgi and plain CGI application. See
 [flask documentation on deployment](http://flask.pocoo.org/docs/0.11/deploying/)
 for more info.
 
-There's a bunch of application settings you may want to tune (most
-importantly, DSN). These are taken from ```repology.conf.default```,
-but instead of modifying it copy it to ```repology.conf``` and
-override values there. You may also set ```REPOLOGY_SETTINGS```
-environment variable to the path to your custom config, which
-takes the highest priority.
+#### Keeping up to date
+
+To keep repository data up to date, you'll need to periodically
+refetch it and update the database. Note there's no need to recreate
+database schema every time (unless it needs changing). Everything
+can be done with single command:
+
+```
+./repology-app.py --fetch --update --parse --database
+```
 
 ## Repository support
 
