@@ -25,7 +25,7 @@ class TestVersionComparison(unittest.TestCase):
     # all these fields should be present in repository data
     def test_have_all_fields(self):
         for repository in REPOSITORIES:
-            for field in ('name', 'desc', 'family', 'fetcher', 'parser', 'link', 'tags'):
+            for field in ('name', 'desc', 'family', 'fetcher', 'parser', 'tags'):
                 self.assertEqual(field in repository, True)
 
     def test_names(self):
