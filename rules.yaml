@@ -264,183 +264,67 @@
 - { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
 - { name: xmahjongg,                   ver: "3.70",                  families: [ pkgsrc ],   ignorever: true }
 
-# Chocolatey is full of garbage, fake version and bad matches
-- { name: 0install,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: 7KAA,                                                      families: [ chocolatey ], ignorever: true }
-- { name: aacgain,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+# F-Droid is too alien, even if package names match in most cases it's entirely different application
+# So use whitelist
+- {                                                                  families: [ fdroid ], ignore: true }
+- { name: busybox,                                                   families: [ fdroid ], unignore: true }
+- { name: firefox,                                                   families: [ fdroid ], unignore: true }
+- { name: freeminer,                                                 families: [ fdroid ], unignore: true }
+- { name: i2p,                                                       families: [ fdroid ], unignore: true }
+- { name: kouchat,                                                   families: [ fdroid ], unignore: true }
+- { name: linphone,                                                  families: [ fdroid ], unignore: true }
+- { name: mupdf,                                                     families: [ fdroid ], unignore: true }
+- { name: onscripter,                                                families: [ fdroid ], unignore: true }
+- { name: reicast,                                                   families: [ fdroid ], unignore: true }
+- { name: scummvm,                                                   families: [ fdroid ], unignore: true }
+- { name: snapcast,                                                  families: [ fdroid ], unignore: true }
+- { name: yabause,                                                   families: [ fdroid ], unignore: true }
+
+# Chocolatey has no sane policy on version numbering so ignorever by default, and ignore conflicting names
+# Whitelist of unignorever's is possible (with constraints on versions too), but it's too hard to maintain
+# Chocolatey developers, PLEASE USE UPSTREAM VERSIONS.
+- {                                                                  families: [ chocolatey ], ignorever: true }
 - { name: ace,                                                       families: [ chocolatey ], ignore: true }
 - { name: acm,                                                       families: [ chocolatey ], ignore: true }
 - { name: acr,                                                       families: [ chocolatey ], ignore: true }
-- { name: ActiveMQ,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: aegisub,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: apache-httpd,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: apacheds,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: apm,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: argouml,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: aria2,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: audacity,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: autocomplete,                                              families: [ chocolatey ], ignore: true }
 - { name: awake,                                                     families: [ chocolatey ], ignore: true }
-- { name: axel,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: bacula,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: beacon,                                                    families: [ chocolatey ], ignore: true }
-- { name: Bing,                                                      families: [ chocolatey ], ignore: true }
+- { name: bing,                                                      families: [ chocolatey ], ignore: true }
 - { name: blat,                                                      families: [ chocolatey ], ignore: true }
-- { name: blender,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: blobby2,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true, setname: "blobby" }
-- { name: bluefish,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: brewtarget,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: bzr,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: celestia,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: Charles,                                                   families: [ chocolatey ], ignore: true }
-- { name: chicken,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: claws-mail,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: Clover,                                                    families: [ chocolatey ], ignore: true }
-- { name: Cntlm,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: codelite,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: CoffeeScript,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: charles,                                                   families: [ chocolatey ], ignore: true }
+- { name: clover,                                                    families: [ chocolatey ], ignore: true }
 - { name: composer,                                                  families: [ chocolatey ], ignore: true }
-- { name: copyq,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: Coq,                         verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: ctags,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: dfu-util,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: dia,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: diffuse,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: dosbox,                      verlonger: 2,                 families: [ chocolatey ], ignorever: true }
 - { name: duck,                                                      families: [ chocolatey ], ignore: true }
-- { name: ekiga,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: elinks,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: Emacs,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: emulationstation,            verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: err,                                                       families: [ chocolatey ], ignore: true }
-- { name: evince,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: expresso,                                                  families: [ chocolatey ], ignore: true }
-- { name: FBReader,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: ffe,                                                       families: [ chocolatey ], ignore: true }
-- { name: flare,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: freefilesync,                verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: freenet,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: gajim,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: gambit,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: ganttproject,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: gatling,                                                   families: [ chocolatey ], ignore: true }
 - { name: getopt,                                                    families: [ chocolatey ], ignore: true }
-- { name: Glassfish,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: glfw3,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: gnatsd,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: gsutil,                                                    families: [ chocolatey ], ignorever: true }
-- { name: GSView,                      verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: Graphviz,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: Gyazo,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: handbrake,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: hdparm,                                                    families: [ chocolatey ], ignore: true }
-- { name: Hercules,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: hexchat,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: HexEdit,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: hfsexplorer,                 verlonger: 2,                 families: [ chocolatey ], ignorever: true }
 - { name: hotswap,                                                   families: [ chocolatey ], ignore: true }
-- { name: HxD,                                                       families: [ chocolatey ], ignore: true }
-- { name: ironpython,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: jEdit,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: jmol,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: jpegoptim,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: krita,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: launchy,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: Leechcraft,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: libjpeg-turbo,               verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: LogRotate,                                                 families: [ chocolatey ], ignore: true }
-- { name: luckybackup,                 verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: lyx,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: maven,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: mc,                          verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: MeshLab,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: minetest,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: mucommander,                 verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: munin-node,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: Nagstamon,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: NAnt,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: nats-streaming-server,       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
+- { name: hxd,                                                       families: [ chocolatey ], ignore: true }
+- { name: logrotate,                                                 families: [ chocolatey ], ignore: true }
 - { name: nautilus,                                                  families: [ chocolatey ], ignore: true }
 - { name: nbfc,                                                      families: [ chocolatey ], ignore: true }
-- { name: ncftp,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: NetBeans,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: newt,                                                      families: [ chocolatey ], ignore: true }
-- { name: nextcloud-client,            verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: npm,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: nsis,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: nvu,                         verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: ocaml,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: OpenCV,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: openssh,                                                   families: [ chocolatey ], ignore: true }
-- { name: openttd,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: OptiPNG,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: pal,                                                       families: [ chocolatey ], ignore: true }
-- { name: pan,                         verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: pandoc,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: papercut,                                                  families: [ chocolatey ], ignore: true }
-- { name: passwordSafe,                                              families: [ chocolatey ], ignore: true }
-- { name: pcsx2,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: pdfedit,                                                   families: [ chocolatey ], ignorever: true }
-- { name: pgadmin3,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: pidgin,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: Pinta,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: Play,                                                      families: [ chocolatey ], ignorever: true }
-- { name: postgresql93,                verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: psi,                         verlonger: 2,                 families: [ chocolatey ], ignorever: true }
+- { name: passwordsafe,                                              families: [ chocolatey ], ignore: true }
 - { name: pvm,                                                       families: [ chocolatey ], ignore: true }
 - { name: pwgen,                                                     families: [ chocolatey ], ignore: true }
-- { name: python,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: qtox,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: redis,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: retroshare,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: RSSOwl,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: rsync,                                                     families: [ chocolatey ], ignore: true }
-- { name: rust,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: simutrans,                   verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: simutrans-pak128,            verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: simutrans-pak64,             verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: smartmontools,               verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: smplayer,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: snes9x,                      verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: soapui,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: solfege,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: SpeedCrunch,                 verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: speex,                       verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: spotify,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: sqlitebrowser,               verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: squashfs,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
 - { name: sumo,                                                      families: [ chocolatey ], ignore: true }
-- { name: suricata,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: SWI-Prolog,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: sylpheed,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: sysmon,                                                    families: [ chocolatey ], ignore: true }
 - { name: tcc,                                                       families: [ chocolatey ], ignore: true }
 - { name: tcptrace,                                                  families: [ chocolatey ], ignore: true }
-- { name: TcpView,                                                   families: [ chocolatey ], ignore: true }
+- { name: tcpview,                                                   families: [ chocolatey ], ignore: true }
 - { name: termite,                                                   families: [ chocolatey ], ignore: true }
-- { name: tightvnc,                                                  families: [ chocolatey ], ignorever: true }
-- { name: tiled,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: tipp10,                      verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: tktz,                                                      families: [ chocolatey ], ignore: true }
-- { name: transgui,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: transmission-qt,             verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: truecrypt,                   verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: usbview,                     verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: velocity,                    verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: virt-viewer,                 verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: virtualbox,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: VisualBoyAdvance,            verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: wavesurfer,                  verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: webdeploy,                                                 families: [ chocolatey ], ignore: true }
-- { name: Weka,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: Wget,                        verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: which,                                                     families: [ chocolatey ], ignore: true }
 - { name: whois,                                                     families: [ chocolatey ], ignore: true }
-- { name: winff,                       verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: workrave,                    verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: xbmc,                        verlonger: 2,                 families: [ chocolatey ], ignorever: true }
-- { name: xdelta3,                     verlonger: 3,                 families: [ chocolatey ], ignorever: true }
-- { name: yed,                         verlonger: 3,                 families: [ chocolatey ], ignorever: true }
 - { name: zoom,                                                      families: [ chocolatey ], ignore: true }
 
 # Unique ignores which will never appear in other distros
