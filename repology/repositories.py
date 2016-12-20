@@ -378,7 +378,7 @@ REPOSITORIES = [
         'parser': lambda: CPANPackagesParser(),
         'shadow': True,
         'link': 'http://search.cpan.org/dist/{name}',
-        'tags': ['all', 'preproduction', 'fastfetch'],
+        'tags': ['all', 'have_testdata', 'preproduction', 'fastfetch'],
     },
     {
         'name': 'pypi',
