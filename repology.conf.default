@@ -1,4 +1,58 @@
+#
+# Repology default configuration file
+#
+# These settings are used in web application and as defaults
+# for all command line utilities. You may override them in
+# repology.conf file in project root or in any custom file,
+# as long as you set path to it in REPLOGY_CONF environment
+# variable
+
+############################################################################
+# COMMON SETTINGS
+############################################################################
+
+#
+# Postgresql database connect string
+#
+# Used by repology-update and repology-app
+# Overridable via --dsn command line arg
+#
 DSN = "dbname=repology user=repology password=repology"
-PER_PAGE = 500
+
+#
+# Directory to store repository data in
+#
+# Used in repology-update and repology-dump
+# Overridable via --statedir command line arg
+#
+STATE_DIR = "_state"
+
+#
+# Path to YAML file containing package transformation rules
+#
+# Used by repology-update
+# Overridable via --rules command line arg
+#
+RULES_PATH = "rules.yaml"
+
+#
+# Array of repository names or tags to work with
+#
+# Used by repology-update and repology-dump
+# Overridable via free command line args
+#
 REPOSITORIES = ['production']
+
+############################################################################
+# WEBAPP SETTINGS
+############################################################################
+
+#
+# Items (metapackages, maintainers) per page
+#
+PER_PAGE = 500
+
+#
+# Address of repology.org to use in HTML links
+#
 REPOLOGY_HOME = 'http://repology.org'

@@ -33,7 +33,7 @@ app = Flask(__name__)
 
 app.config.from_pyfile('repology.conf.default')
 app.config.from_pyfile('repology.conf', silent=True)
-app.config.from_envvar('REPOLOGY_SETTINGS', silent=True)
+app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 
 repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
 

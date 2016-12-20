@@ -25,10 +25,9 @@ import xml.etree.ElementTree
 repology_app = __import__("repology-app")
 
 
-@unittest.skipIf(not 'REPOLOGY_TEST_DSN' in os.environ, 'flask tests require database, but REPOLOGY_TEST_DSN not defined')
+@unittest.skipIf(not 'REPOLOGY_CONFIG' in os.environ, 'flask tests require database filled with test data; please prepare the database and configuration file (see repology-test.conf.default for reference) and pass it via REPOLOGY_CONFIG environment variable')
 class TestFlask(unittest.TestCase):
     def setUp(self):
-        repology_app.app.config['DSN'] = os.environ['REPOLOGY_TEST_DSN']
         self.app = repology_app.app.test_client()
 
     def checkurl(self, url, status_code=200, mimetype='text/html', has=[], hasnot=[]):

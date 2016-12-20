@@ -20,7 +20,7 @@
 import os
 import sys
 import re
-from argparse import ArgumentParser
+import argparse
 from xml.sax.saxutils import escape
 import shutil
 
@@ -29,6 +29,8 @@ from repology.packageproc import *
 from repology.repoman import RepositoryManager
 from repology.logger import *
 from repology.filters import *
+
+import repology.config
 
 
 def PackageVersionClass2Letter(value):
@@ -58,28 +60,25 @@ def RepositoryVersionClass2Letter(value):
 
 
 def Main():
-    parser = ArgumentParser()
-    parser.add_argument('-s', '--statedir', default='_state', help='path to directory with repository state')
-    parser.add_argument('-l', '--logfile', help='path to log file (log to stderr by default)')
-    parser.add_argument('-m', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
+    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-S', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
+    parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
+    parser.add_argument('-M', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
 
     filters_grp = parser.add_argument_group('Filters')
-    filters_grp.add_argument('-S', '--no-shadow', action='store_true', help='treat shadow repositories as normal')
-    filters_grp.add_argument(      '--maintainer', help='filter by maintainer')
-    filters_grp.add_argument(      '--category', help='filter by category')
-    filters_grp.add_argument(      '--less-repos', help='filter by number of repos')
-    filters_grp.add_argument(      '--more-repos', help='filter by number of repos')
-    filters_grp.add_argument(      '--in-repository', help='filter by presence in repository')
-    filters_grp.add_argument(      '--not-in-repository', help='filter by absence in repository')
-    filters_grp.add_argument(      '--outdated-in-repository', help='filter by outdatedness in repository')
+    filters_grp.add_argument('--no-shadow', action='store_true', help='treat shadow repositories as normal')
+    filters_grp.add_argument('--maintainer', help='filter by maintainer')
+    filters_grp.add_argument('--category', help='filter by category')
+    filters_grp.add_argument('--less-repos', help='filter by number of repos')
+    filters_grp.add_argument('--more-repos', help='filter by number of repos')
+    filters_grp.add_argument('--in-repository', help='filter by presence in repository')
+    filters_grp.add_argument('--not-in-repository', help='filter by absence in repository')
+    filters_grp.add_argument('--outdated-in-repository', help='filter by outdatedness in repository')
 
-    parser.add_argument('-d', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
+    parser.add_argument('-D', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
 
-    parser.add_argument('reponames', metavar='repo|tag', nargs='*', help='repository or tag name to process')
+    parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
-
-    if not options.reponames:
-        options.reponames = ["all"]
 
     logger = StderrLogger()
     if options.logfile:

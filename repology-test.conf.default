@@ -1,0 +1,3 @@
+DSN = "dbname=repology_test user=repology_test password=repology_test"
+STATE_DIR = 'testdata'
+REPOSITORIES = ['have_testdata']

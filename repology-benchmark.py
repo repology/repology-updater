@@ -22,9 +22,11 @@ import sys
 import time
 from timeit import default_timer as timer
 from numbers import Number
-from argparse import ArgumentParser
+import argparse
 
 from repology.database import *
+
+import repology.config
 
 
 class StatCounter():
@@ -88,8 +90,8 @@ def RunTest(database, title, pagefilter, *filters):
 
 
 def Main():
-    parser = ArgumentParser()
-    parser.add_argument('-d', '--dsn', default='dbname=repology user=repology password=repology', help='database connection params')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
     options = parser.parse_args()
 
     database = Database(options.dsn)
