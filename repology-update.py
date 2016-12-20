@@ -40,7 +40,7 @@ def ProcessRepositories(options, logger, repoman, transformer):
         repo_logger.Log("started")
         try:
             if options.fetch:
-                repoman.Fetch(reponame, update=(options.fetch >= 2), logger=repo_logger.GetIndented())
+                repoman.Fetch(reponame, update=options.update, logger=repo_logger.GetIndented())
             if options.parse:
                 repoman.ParseAndSerialize(reponame, transformer=transformer, logger=repo_logger.GetIndented())
             elif options.reprocess:
@@ -72,73 +72,76 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
     db_logger = logger.GetIndented()
 
     database = Database(options.dsn, readonly=False)
-    if options.database > 1:
+    if options.initdb:
         db_logger.Log("(re)initializing database schema")
         database.CreateSchema()
-    database.Clear()
 
-    package_queue = []
-    num_pushed = 0
+    if options.database:
+        db_logger.Log("clearing the database")
+        database.Clear()
 
-    def PackageProcessor(packageset):
-        nonlocal package_queue, num_pushed
-        FillPackagesetVersions(packageset)
-        package_queue.extend(packageset)
+        package_queue = []
+        num_pushed = 0
 
-        if len(package_queue) >= 1000:
-            database.AddPackages(package_queue)
-            num_pushed += len(package_queue)
-            package_queue = []
-            db_logger.Log("  pushed {} packages".format(num_pushed))
+        def PackageProcessor(packageset):
+            nonlocal package_queue, num_pushed
+            FillPackagesetVersions(packageset)
+            package_queue.extend(packageset)
 
-    db_logger.Log("pushing packages to database")
-    repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
+            if len(package_queue) >= 1000:
+                database.AddPackages(package_queue)
+                num_pushed += len(package_queue)
+                package_queue = []
+                db_logger.Log("  pushed {} packages".format(num_pushed))
 
-    # process what's left in the queue
-    database.AddPackages(package_queue)
+        db_logger.Log("pushing packages to database")
+        repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
 
-    if options.fetch and options.fetch >= 2 and options.parse:
-        db_logger.Log("recording repo updates")
-        database.MarkRepositoriesUpdated(repositories_updated)
-    else:
-        db_logger.Log("not recording repo updates, need fetch + update + parse")
+        # process what's left in the queue
+        database.AddPackages(package_queue)
 
-    db_logger.Log("updating views")
-    database.UpdateViews()
+        if options.fetch and options.update and options.parse:
+            db_logger.Log("recording repo updates")
+            database.MarkRepositoriesUpdated(repositories_updated)
+        else:
+            db_logger.Log("not recording repo updates, need --fetch --update --parse")
 
-    db_logger.Log("committing changes")
-    database.Commit()
+        db_logger.Log("updating views")
+        database.UpdateViews()
+
+        db_logger.Log("committing changes")
+        database.Commit()
 
     logger.Log("database processing complete")
 
 
 def ShowUnmatchedRules(options, logger, transformer):
-    if (options.parse or options.reprocess) and (options.unmatched_rules):
-        unmatched = transformer.GetUnmatchedRules()
-        if len(unmatched):
-            wlogger = logger.GetPrefixed("WARNING: ")
-            wlogger.Log("unmatched rules detected!")
+    unmatched = transformer.GetUnmatchedRules()
+    if len(unmatched):
+        wlogger = logger.GetPrefixed("WARNING: ")
+        wlogger.Log("unmatched rules detected!")
 
-            for rule in unmatched:
-                wlogger.Log(rule)
-
+        for rule in unmatched:
+            wlogger.Log(rule)
 
 def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-s', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
-    parser.add_argument('-l', '--logfile', help='path to log file (log to stderr by default)')
-    parser.add_argument('-U', '--rules', default=repology.config.RULES_PATH, help='path to name transformation rules yaml')
+    parser.add_argument('-S', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
+    parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
+    parser.add_argument('-R', '--rules', default=repology.config.RULES_PATH, help='path to name transformation rules yaml')
     parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
 
     actions_grp = parser.add_argument_group('Actions')
-    actions_grp.add_argument('-f', '--fetch', action='count', help='allow fetching repository data (twice to also update)')
+    actions_grp.add_argument('-f', '--fetch', action='store_true', help='fetching repository data')
+    actions_grp.add_argument('-u', '--update', action='store_true', help='when fetching, allow updating (otherwise, only fetch once)')
     actions_grp.add_argument('-p', '--parse', action='store_true', help='parse, process and serialize repository data')
 
     # XXX: this is dangerous as long as ignored packages are removed from dumps
     actions_grp.add_argument('-P', '--reprocess', action='store_true', help='reprocess repository data')
-    actions_grp.add_argument('-d', '--database', action='count', help='store in the database (twice to reinit the database)')
+    actions_grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
+    actions_grp.add_argument('-d', '--database', action='store_true', help='store in the database')
 
-    actions_grp.add_argument('-u', '--unmatched-rules', action='store_true', help='show unmatched rules when parsing')
+    actions_grp.add_argument('-r', '--show-unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
     parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
@@ -150,10 +153,17 @@ def Main():
     repoman = RepositoryManager(options.statedir)
     transformer = PackageTransformer(options.rules)
 
-    repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoman=repoman, transformer=transformer)
-    if options.database:
+    repositories_updated = []
+    repositories_not_updated = []
+
+    if options.fetch or options.parse or options.reprocess:
+        repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoman=repoman, transformer=transformer)
+
+    if options.initdb or options.database:
         ProcessDatabase(options=options, logger=logger, repoman=repoman, repositories_updated=repositories_updated)
-    ShowUnmatchedRules(options=options, logger=logger, transformer=transformer)
+
+    if (options.parse or options.reprocess) and (options.unmatched_rules):
+        ShowUnmatchedRules(options=options, logger=logger, transformer=transformer)
 
     return 1 if repositories_not_updated else 0
 

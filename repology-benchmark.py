@@ -91,7 +91,7 @@ def RunTest(database, title, pagefilter, *filters):
 
 def Main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--dsn', default=repology.config.DSN, help='database connection params')
+    parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
     options = parser.parse_args()
 
     database = Database(options.dsn)
