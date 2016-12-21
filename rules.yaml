@@ -89,7 +89,6 @@
 - { name: falconseye,                  setname: falcons-eye,              families: [ freebsd, openbsd ] }
 - { name: farstream-0.2,               setname: farstream,                families: [ debian ]  }
 - { name: fish-fillets,                setname: fillets-ng,               families: [ gentoo ]  }
-- { name: focuswriter-qt4,             setname: focuswriter,              families: [ freebsd ] }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
 - { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
 - { name: fox1.6,                      setname: fox16,                    families: [ debian ]  }
@@ -121,7 +120,6 @@
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
-- { name: midnightcommander,           setname: mc                        }
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     families: [ freebsd ] }
 - { name: ogre3d,                      setname: ogre                      }
@@ -262,7 +260,7 @@
 - { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                                ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                      ignorever: true }
-- { name: p5-math-polygon-tree,        verpat: "0.0[^89].*",                                 ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
+- { name: perl-math-polygon-tree,      ver: "0.0691",                                        ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
 - { name: perl-test-exception,         ver: "0.430000",                                      ignorever: true }
 - { name: perl-time-duration,          ver: "1.200000",                                      ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
@@ -368,7 +366,7 @@
 - { name: eigen, verpat: "2\\..*",     setname: eigen2 }
 - { name: eigen, verpat: "3\\..*",     setname: eigen3 }
 
-- { name: enlightment, verpat: "1\\.0.*",    setname: enlightment16 }
+- { name: enlightenment, verpat: "1\\.0.*", setname: enlightenment16 }
 
 - { name: gitg, verpat: "0.*",         setname: gitg0 }
 
@@ -542,7 +540,6 @@
 
 # FreeBSD: localized categories (XXX: fix this, contains useful packages)
 - { namepat: "([a-z]{2,3}|de-alt|pt_br|pt_pt)-aspell", setname: "aspell-$1", families: [ freebsd ] }
-- { namepat: "([a-z]{2,3}|de-alt|pt_br|pt_pt)-aspell", setname: "aspell-$1", families: [ freebsd ] }
 - { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, families: [ freebsd ] }
 
 # Perl modules
@@ -656,9 +653,8 @@
 - { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", families: [ gentoo ] }
 - { namepat: "mod-(.*)",               setname: "apmod:$1", families: [ debian ] }
 - { namepat: "mod_(.*)",               setname: "apmod:$1", families: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos ] }
-- { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1", families: [ debian ] }
-- { namepat: "apache-mod-(.*)",        setname: "apmod:$1", families: [ mageia ] }
-- { namepat: "apache2-mod_(.*)",       setname: "apmod:$1", families: [ opensuse ] }
+- { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1" }
+- { namepat: "apache2?-mod_(.*)",      setname: "apmod:$1" }
 
 # Erlang
 - { category: dev-erlang,              setname: "erlang:$0", families: [ gentoo ] }
