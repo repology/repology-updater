@@ -35,7 +35,7 @@ app.config.from_pyfile('repology.conf.default')
 app.config.from_pyfile('repology.conf', silent=True)
 app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 
-repoman = RepositoryManager("dummy") # XXX: should not construct fetchers and parsers here
+repoman = RepositoryManager(app.config['REPOS_PATH'], "dummy") # XXX: should not construct fetchers and parsers here
 
 # globals
 def SpanTrim(value, maxlength):

@@ -21,6 +21,7 @@ import os
 import sys
 import pickle
 import fcntl
+import yaml
 
 from repology.package import *
 from repology.logger import NoopLogger
@@ -28,7 +29,8 @@ from repology.repositories import REPOSITORIES
 
 
 class RepositoryManager:
-    def __init__(self, statedir):
+    def __init__(self, repospath, statedir):
+        self.repositories = yaml.safe_load(open(repospath))
         self.statedir = statedir
 
     def __GetStatePath(self, repository):

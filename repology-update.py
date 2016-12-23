@@ -128,7 +128,8 @@ def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
-    parser.add_argument('-R', '--rules', default=repology.config.RULES_PATH, help='path to name transformation rules yaml')
+    parser.add_argument('-E', '--repos-path', default=repology.config.REPOS_PATH, help='path to reposotories config')
+    parser.add_argument('-U', '--rules-path', default=repology.config.RULES_PATH, help='path to name transformation rules yaml')
     parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
 
     actions_grp = parser.add_argument_group('Actions')
@@ -150,8 +151,8 @@ def Main():
     if options.logfile:
         logger = FileLogger(options.logfile)
 
-    repoman = RepositoryManager(options.statedir)
-    transformer = PackageTransformer(options.rules)
+    repoman = RepositoryManager(options.repos_path, options.statedir)
+    transformer = PackageTransformer(options.rules_path)
 
     repositories_updated = []
     repositories_not_updated = []
