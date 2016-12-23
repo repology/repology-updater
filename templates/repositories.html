@@ -10,7 +10,7 @@ Repositories
 
 {% block content %}
 <ul>
-{% for reponame in reponames %}
+{% for reponame in reponames|sort %}
     <li>
         <a href="{{ url_for_self(repo=reponame) }}">{{ repometadata[reponame].desc}}</a>
     </li>
