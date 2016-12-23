@@ -37,6 +37,9 @@ class MetapackageQueryConstructor:
 
         tablenum = 0
         for f in self.filters:
+            if f is None:
+                continue
+
             tableid = '{}{}'.format(f.GetTable(), str(tablenum))
 
             tables.append('{} AS {}'.format(f.GetTable(), tableid))
