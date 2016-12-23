@@ -47,9 +47,11 @@ sequence:
               - chocolatey
               - cpan
               - debian
+              - fdroid
               - fedora
               - freebsd
               - gentoo
+              - gobolinux
               - mageia
               - openbsd
               - opensuse
