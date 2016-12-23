@@ -39,9 +39,19 @@ sequence:
       "shadow":
         type: bool
         required: no
-      "link":
-        type: str
+      "links":
+        type: seq
         required: no
+        sequence:
+          - type: map
+            required: yes
+            mapping:
+              "desc":
+                type: str
+                required: yes
+              "url":
+                type: str
+                required: yes
       "tags":
         type: seq
         required: yes
