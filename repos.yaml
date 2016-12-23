@@ -10,7 +10,15 @@
       parser: FreeBSDIndex
       url: http://www.FreeBSD.org/ports/INDEX-11.bz2
       compression: bz2
-  link: 'http://www.freshports.org/{category}/{name}'
+  links:
+    - desc: FreshPorts page
+      url: 'http://www.freshports.org/{category}/{name}'
+    - desc: SVNWeb
+      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/'
+    - desc: Port's Makefile
+      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
+    - desc: PortsMon
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
   tags: [ all, have_testdata, demo, production, fastfetch ]
 
 - name: pkgsrc
@@ -21,7 +29,9 @@
       fetcher: File
       parser: PkgsrcIndex
       url: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
-  link: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
+  links:
+    - desc: CVSWeb
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
   tags: [ all, demo, production, fastfetch ]
 
 - name: openbsd
@@ -32,7 +42,9 @@
       fetcher: File
       parser: OpenBSDIndex
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
-  link: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}'
+  links:
+    - desc: CVSWeb
+      url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}'
   tags: [ all, demo, production, fastfetch ]
 
 ###########################################################################
@@ -57,7 +69,9 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz
       compression: gz
-  link: 'https://packages.debian.org/stable/{name}'
+  links:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/stable/{name}'
   tags: [ all, debian, fastfetch ]
 
 - name: debian_stable_backports
@@ -79,7 +93,9 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/stable-backports/non-free/source/Sources.gz
       compression: gz
-  link: 'https://packages.debian.org/stable-backports/{name}'
+  links:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/stable-backports/{name}'
   tags: [ all, debian, fastfetch ]
 
 - name: debian_testing
@@ -101,7 +117,9 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz
       compression: gz
-  link: 'https://packages.debian.org/testing/{name}'
+  links:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/testing/{name}'
   tags: [ all, debian, fastfetch ]
 
 - name: debian_unstable
@@ -123,7 +141,9 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz
       compression: gz
-  link: 'https://packages.debian.org/unstable/{name}'
+  links:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/unstable/{name}'
   tags: [ all, have_testdata, demo, debian, production, fastfetch ]
 
 - name: debian_experimental
@@ -145,7 +165,9 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/experimental/non-free/source/Sources.xz
       compression: xz
-  link: 'https://packages.debian.org/experimental/{name}'
+  links:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/experimental/{name}'
   tags: [ all, preproduction, debian, fastfetch ]
 
 ###########################################################################
@@ -175,7 +197,9 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/precise/universe/source/Sources.gz
       compression: gz
-  link: 'http://packages.ubuntu.com/precise/{name}'
+  links:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/precise/{name}'
   tags: [ all, ubuntu, fastfetch ]
 
 - name: ubuntu_trusty
@@ -202,7 +226,9 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/trusty/universe/source/Sources.gz
       compression: gz
-  link: 'http://packages.ubuntu.com/trusty/{name}'
+  links:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/trusty/{name}'
   tags: [ all, ubuntu, fastfetch ]
 
 - name: ubuntu_xenial
@@ -229,7 +255,9 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz
       compression: gz
-  link: 'http://packages.ubuntu.com/xenial/{name}'
+  links:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/xenial/{name}'
   tags: [ all, ubuntu, fastfetch ]
 
 - name: ubuntu_yakkety
@@ -256,7 +284,9 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz
       compression: gz
-  link: 'http://packages.ubuntu.com/yakkety/{name}'
+  links:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/yakkety/{name}'
   tags: [ all, ubuntu, fastfetch ]
 
 - name: ubuntu_zesty
@@ -283,7 +313,9 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/zesty/universe/source/Sources.gz
       compression: gz
-  link: 'http://packages.ubuntu.com/zesty/{name}'
+  links:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/zesty/{name}'
   tags: [ all, demo, production, ubuntu, fastfetch ]
 
 ###########################################################################
@@ -297,7 +329,11 @@
       fetcher: Git
       parser: GentooGit
       url: https://github.com/gentoo/gentoo.git
-  link: 'https://packages.gentoo.org/packages/{category}/{name}'
+  links:
+    - desc: Package details on packages.gentoo.org
+      url: 'https://packages.gentoo.org/packages/{category}/{name}'
+    - desc: View ebuild
+      url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{origversion}.ebuild'
   tags: [ all, have_testdata, demo, production, fastfetch ]
 
 ###########################################################################
@@ -319,8 +355,12 @@
       fetcher: ArchDB
       parser: ArchDB
       url: http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz
-  # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name} add support for `repository
-  link: 'https://www.archlinux.org/packages/?sort=&q={name}'
+  links:
+    - desc: Package search on archlinux.org
+      # XXX: no support for repository
+      # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
+      # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
+      url: 'https://www.archlinux.org/packages/?sort=&q={name}'
   tags: [ all, have_testdata, demo, production, fastfetch ]
 
 - name: aur
@@ -331,7 +371,9 @@
       fetcher: AUR
       parser: AUR
       url: https://aur.archlinux.org/
-  link: 'https://aur.archlinux.org/packages/{name}'
+  links:
+    - desc: AUR package details
+      url: 'https://aur.archlinux.org/packages/{name}'
   tags: [ all, preproduction, fastfetch ]
 
 ###########################################################################
@@ -345,7 +387,9 @@
       fetcher: Repodata
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/releases/24/Everything/source/tree/
-  link: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+  links:
+    - desc: Package details on Fedora PkgDB
+      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
   tags: [ all, fedora, rpm, fastfetch ]
 
 - name: fedora_25
@@ -356,7 +400,9 @@
       fetcher: Repodata
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/development/25/Everything/source/tree/
-  link: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+  links:
+    - desc: Package details on Fedora PkgDB
+      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
   tags: [ all, fedora, rpm, fastfetch ]
 
 - name: fedora_rawhide
@@ -367,7 +413,9 @@
       fetcher: Repodata
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
-  link: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+  links:
+    - desc: Package details on Fedora PkgDB
+      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
   tags: [ all, demo, production, fedora, rpm, fastfetch ]
 
 ###########################################################################
@@ -385,7 +433,9 @@
       fetcher: Repodata
       parser: Repodata
       url: http://vault.centos.org/centos/6/updates/Source/
-  link: 'http://centos-packages.com/6/package/{name}/'
+  links:
+    - desc: Package details on centos-packages.com
+      url: 'http://centos-packages.com/6/package/{name}/'
   tags: [ all, centos, rpm, fastfetch ]
 - name: centos_7
   desc: CentOS 7
@@ -399,7 +449,9 @@
       fetcher: Repodata
       parser: Repodata
       url: http://vault.centos.org/centos/7/updates/Source/
-  link: 'http://centos-packages.com/7/package/{name}/'
+  links:
+    - desc: Package details on centos-packages.com
+      url: 'http://centos-packages.com/7/package/{name}/'
   tags: [ all, preproduction, centos, rpm, fastfetch ]
 
 ###########################################################################
@@ -413,7 +465,9 @@
       fetcher: Repodata
       parser: Repodata
       url: https://mirrors.kernel.org/mageia/distrib/6/SRPMS/core/release/
-  link: 'https://madb.mageia.org/package/show/name/{name}'
+  links:
+    - desc: Package details on madb.mageia.org
+      url: 'https://madb.mageia.org/package/show/name/{name}'
   tags: [ all, mageia, rpm, fastfetch ]
 
 - name: mageia_cauldron
@@ -424,7 +478,9 @@
       fetcher: Repodata
       parser: Repodata
       url: https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/core/release/
-  link: 'https://madb.mageia.org/package/show/name/{name}'
+  links:
+    - desc: Package details on madb.mageia.org
+      url: 'https://madb.mageia.org/package/show/name/{name}'
   tags: [ all, production, mageia, rpm, fastfetch ]
 
 ###########################################################################
@@ -438,7 +494,9 @@
       fetcher: Repodata
       parser: Repodata
       url: http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
-  link: 'https://software.opensuse.org/package/{name}'
+  links:
+    - desc: Package details
+      url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, demo, production, opensuse, rpm, fastfetch ]
 
 ###########################################################################
@@ -458,7 +516,9 @@
       parser: SrcListClassic
       url: http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/base/srclist.classic.xz
       compression: xz
-  link: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}'
+  links:
+    - desc: Package details in Sisyphus repository
+      url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}'
   tags: [ all, production, fastfetch ]
 
 ###########################################################################
@@ -472,7 +532,9 @@
       fetcher: Git
       parser: GoboLinuxGit
       url: https://github.com/gobolinux/Recipes.git
-  link: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}'
+  links:
+    - desc: Git
+      url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}'
   tags: [ all, preproduction, fastfetch ]
 
 ###########################################################################
@@ -486,7 +548,9 @@
       fetcher: Git
       parser: YACPGit
       url: https://github.com/fd00/yacp.git
-  link: 'https://github.com/fd00/yacp/tree/master/{name}'
+  links:
+    - desc: Git
+      url: 'https://github.com/fd00/yacp/tree/master/{name}'
   tags: [ all, preproduction, fastfetch ]
 
 ###########################################################################
@@ -500,7 +564,9 @@
       fetcher: Git
       parser: SlackBuilds
       url: git://slackbuilds.org/slackbuilds
-  link: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
+  links:
+    - desc: Git
+      url: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
   tags: [ all, production, fastfetch ]
 
 ###########################################################################
@@ -515,7 +581,9 @@
       parser: Freshcode
       url: http://freshcode.club/feed/xfer.json
   shadow: true
-  link: 'http://freshcode.club/projects/{name}'
+  links:
+    - desc: freshcode.club page
+      url: 'http://freshcode.club/projects/{name}'
   tags: [ all, preproduction, fastfetch ]
 
 ###########################################################################
@@ -531,7 +599,9 @@
       url: http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
       compression: gz
   shadow: true
-  link: 'http://search.cpan.org/dist/{name}'
+  links:
+    - desc: CPAN page
+      url: 'http://search.cpan.org/dist/{name}'
   tags: [ all, have_testdata, preproduction, fastfetch ]
 
 - name: pypi
@@ -543,7 +613,9 @@
       parser: PyPiHTML
       url: https://pypi.python.org/pypi/
   shadow: true
-  link: 'https://pypi.python.org/pypi/{name}/'
+  links:
+    - desc: PyPi page
+      url: 'https://pypi.python.org/pypi/{name}/'
   tags: [ all, preproduction, fastfetch ]
 
 ###########################################################################
@@ -557,6 +629,7 @@
       fetcher: File
       parser: FDroid
       url: https://f-droid.org/repo/index.xml
+  # XXX: link requires java class O_o
   shadow: true
   tags: [ all, fastfetch ]
 
@@ -569,5 +642,7 @@
       parser: Chocolatey
       url: https://chocolatey.org/api/v2/
   shadow: true
-  link: 'https://chocolatey.org/packages/{name}'
+  links:
+    - desc: Chocolatey package page
+      url: 'https://chocolatey.org/packages/{name}'
   tags: [ all, production, fastfetch ]

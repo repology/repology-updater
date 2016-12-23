@@ -36,33 +36,56 @@ Metapackage {{ name }}
 </h3>
 <ul>
     {% if package.comment %}
-        <li><b>Summary:</b> {{ package.comment }}</li>
+        <li><b>Summary:</b>
+            <ul>
+                <li>
+                    {{ package.comment }}
+                </li>
+            </ul>
+        </li>
     {% endif %}
     {% if package.maintainers %}
-        {% if package.maintainers|length == 1 %}
-            <li><b>Maintainer:</b> {{ package.maintainers[0] }}</li>
-        {% else %}
-            <li><b>Maintainers:</b>
-                <ul>
-                    {% for maintainer in package.maintainers %}
-                        <li>{{ maintainer }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endif %}
+        <li><b>Maintainer{% if package.maintainers|length > 1 %}s{% endif %}:</b>
+            <ul>
+                {% for maintainer in package.maintainers %}
+                    <li>{{ maintainer }}</li>
+                {% endfor %}
+            </ul>
+        </li>
     {% endif %}
     {% if package.category %}
-        <li><b>Category:</b> {{ package.category }}</li>
-    {% endif %}
-    {% if package.homepage %}
-        <li><b>Homepage:</b> <a href="{{ package.homepage }}">{{ package.homepage }}</a></li>
+        <li><b>Category:</b>
+            <ul>
+                <li>
+                   {{ package.category }}
+                </li>
+            </ul>
+        </li>
     {% endif %}
     {% if package.licenses %}
-        <li><b>License(s):</b>
+        <li><b>License{% if package.licenses|length > 1 %}s{% endif %}:</b>
             <ul>
                 {% for license in package.licenses %}
                     <li>{{ license }}</li>
                 {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+    {% if repometadata[package.repo].links %}
+        <li><b>Package link{% if repometadata[package.repo].links|length > 1 %}s{% endif %}:</b>
+            <ul>
+                {% for link in repometadata[package.repo].links %}
+                    <li><a href="{{ link.url|pkg_format(package) }}">{{ link.desc }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+    {% if package.homepage %}
+        <li><b>Homepage:</b>
+            <ul>
+                <li>
+                    <a href="{{ package.homepage }}">{{ package.homepage }}</a>
+                </li>
             </ul>
         </li>
     {% endif %}
