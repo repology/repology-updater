@@ -26,6 +26,7 @@ from repology.database import Database
 from repology.queryfilters import *
 from repology.repoman import RepositoryManager
 from repology.package import *
+from repology.packageformatter import PackageFormatter
 from repology.packageproc import *
 from repology.metapackageproc import *
 
@@ -65,8 +66,8 @@ def Clamp(value, lower, upper):
 def Split(value, sep):
     return value.split(sep)
 
-def NewFormat(value, *args, **kwargs):
-    return value.format(**kwargs) if kwargs else value.format(*args)
+def pkg_format(value, pkg):
+    return PackageFormatter().format(value, pkg)
 
 def PackageVersionClass2CSSClass(value):
     if value == PackageVersionClass.newest:
@@ -97,7 +98,7 @@ app.jinja_env.filters['spantrim'] = SpanTrim
 app.jinja_env.filters['clamp'] = Clamp
 app.jinja_env.filters['sqrt'] = sqrt
 app.jinja_env.filters['split'] = Split
-app.jinja_env.filters['newformat'] = NewFormat
+app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
 app.jinja_env.globals['url_for_self'] = url_for_self

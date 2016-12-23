@@ -49,15 +49,15 @@ Metapackages index
                 {% if summary is defined %}
                     <td>
                         <span class="version {{ summary.versionclass|repositoryversionclass2css }}">
-                            {%- if repometadata[reponame].link -%}
-                                <a href="{{ repometadata[reponame].link|newformat(**summary.bestpackage.__dict__)|safe }}">
+                            {%- if repometadata[reponame].links -%}
+                                <a href="{{ repometadata[reponame].links[0].url|pkg_format(summary.bestpackage) }}">
                             {%- endif -%}
                             {%- if summary.numpackages > 1 -%}
                                 {{- summary.version|spantrim(8)|safe -}}
                             {%- else -%}
                                 {{- summary.version|spantrim(10)|safe -}}
                             {%- endif -%}
-                            {%- if repometadata[reponame].link -%}
+                            {%- if repometadata[reponame].links -%}
                                 </a>
                             {%- endif -%}
                         </span>

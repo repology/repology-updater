@@ -218,7 +218,7 @@ class RepositoryManager:
         return {repository['name']: {
             'incomplete': repository.get('incomplete', False),
             'shadow': repository.get('shadow', False),
-            'link': repository.get('link'),
+            'links': repository.get('links', []),
             'family': repository['family'],
             'desc': repository['desc'],
         } for repository in self.repositories}
