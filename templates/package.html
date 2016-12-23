@@ -29,7 +29,7 @@ Metapackage {{ name }}
     {% elif package.versionclass == 2 %}
         {% set versionclass = "bad" %}
     {% elif package.versionclass == 3 %}
-        {% set versionclass = "ignored" %}
+        {% set versionclass = "ignore" %}
     {% endif %}
     {{ package.name }}-<span class="{{ versionclass }}">{{ package.version }}</span>
     {% if package.origversion %}({{ package.origversion }}){% endif %}
