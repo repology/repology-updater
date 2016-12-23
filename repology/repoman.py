@@ -33,7 +33,8 @@ from repology.parser import *
 
 class RepositoryManager:
     def __init__(self, repospath, statedir):
-        self.repositories = yaml.safe_load(open(repospath))
+        with open(repospath) as reposfile:
+            self.repositories = yaml.safe_load(reposfile)
         self.statedir = statedir
 
     def __GetRepoPath(self, repository):

@@ -34,7 +34,11 @@ class PackageTransformer:
         self.dollar0 = re.compile("\$0", re.ASCII)
         self.dollarN = re.compile("\$([0-9]+)", re.ASCII)
 
-        self.rules = yaml.safe_load(rulestext if rulestext else open(rulespath))
+        if rulestext:
+            self.rules = yaml.safe_load(rulestext)
+        else:
+            with open(rulespath) as rulesfile:
+                self.rules = yaml.safe_load(rulesfile)
 
         pp = pprint.PrettyPrinter(width=10000)
         for rule in self.rules:
