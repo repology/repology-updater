@@ -21,11 +21,14 @@ import os
 import sys
 import pickle
 import fcntl
+import inspect
 import yaml
 
 from repology.package import *
 from repology.logger import NoopLogger
-from repology.repositories import REPOSITORIES
+
+from repology.fetcher import *
+from repology.parser import *
 
 
 class RepositoryManager:
@@ -33,14 +36,17 @@ class RepositoryManager:
         self.repositories = yaml.safe_load(open(repospath))
         self.statedir = statedir
 
-    def __GetStatePath(self, repository):
+    def __GetRepoPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".state")
+
+    def __GetSourcePath(self, repository, source):
+        return os.path.join(self.__GetRepoPath(repository), source['name'])
 
     def __GetSerializedPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + ".packages")
 
     def __GetRepository(self, reponame):
-        for repository in REPOSITORIES:
+        for repository in self.repositories:
             if repository['name'] == reponame:
                 return repository
 
@@ -51,7 +57,7 @@ class RepositoryManager:
             return []
 
         filtered_repositories = []
-        for repository in REPOSITORIES:
+        for repository in self.repositories:
             match = False
             for reponame in reponames:
                 if reponame == repository['name']:
@@ -65,18 +71,72 @@ class RepositoryManager:
 
         return filtered_repositories
 
+    # Parser/fetcher factory
+    def __SpawnClass(self, suffix, name, argsdict):
+        spawned_name = name + suffix
+        if not spawned_name in globals():
+            raise RuntimeError('unknown {} {}'.format(suffix.lower(), name))
+
+        spawned_class = globals()[spawned_name]
+        spawned_argspec = inspect.getargspec(spawned_class.__init__)
+        spawned_args = {
+            key: value for key, value in argsdict.items() if key in spawned_argspec.args
+        }
+
+        return spawned_class(**spawned_args)
+
+    # Private methods which provide single actions on sources
+    def __FetchSource(self, update, repository, source, logger):
+        logger.Log("fetching source {} started".format(source['name']))
+
+        self.__SpawnClass(
+            'Fetcher',
+            source['fetcher'],
+            source
+        ).Fetch(
+            self.__GetSourcePath(repository, source),
+            update=update,
+            logger=logger.GetIndented()
+        )
+
+        logger.Log("fetching source {} complete".format(source['name']))
+
+    def __ParseSource(self, repository, source, logger):
+        logger.Log("parsing source {} started".format(source['name']))
+
+        packages = self.__SpawnClass(
+            'Parser',
+            source['parser'],
+            source
+        ).Parse(
+            self.__GetSourcePath(repository, source)
+        )
+
+        logger.Log("parsing source {} complete".format(source['name']))
+
+        return packages
+
     # Private methods which provide single actions on repos
     def __Fetch(self, update, repository, logger):
         logger.Log("fetching started")
+
         if not os.path.isdir(self.statedir):
             os.mkdir(self.statedir)
 
-        repository['fetcher']().Fetch(self.__GetStatePath(repository), update=update, logger=logger.GetIndented())
+        for source in repository['sources']:
+            if not os.path.isdir(self.__GetRepoPath(repository)):
+                os.mkdir(self.__GetRepoPath(repository))
+            self.__FetchSource(update, repository, source, logger.GetIndented())
+
         logger.Log("fetching complete")
 
     def __Parse(self, repository, logger):
+        packages = []
         logger.Log("parsing started")
-        packages = repository['parser']().Parse(self.__GetStatePath(repository))
+
+        for source in repository['sources']:
+            packages += self.__ParseSource(repository, source, logger.GetIndented())
+
         logger.Log("parsing complete, {} packages".format(len(packages)))
 
         return packages
@@ -160,7 +220,7 @@ class RepositoryManager:
             'link': repository.get('link'),
             'family': repository['family'],
             'desc': repository['desc'],
-        } for repository in REPOSITORIES}
+        } for repository in self.repositories}
 
     # Single repo methods
     def Fetch(self, reponame, update=True, logger=NoopLogger()):
