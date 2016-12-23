@@ -47,19 +47,6 @@ class GoboLinuxGitParser():
 
             maxversion = None
             for version_name in os.listdir(package_path):
-                version_path = os.path.join(package_path, version_name)
-
-                recipe_path = os.path.join(version_path, 'Recipe')
-                description_path = os.path.join(version_path, 'Resources', 'Description')
-
-                if not os.path.isfile(recipe_path):
-                    print("WARNING: Recipe for {}/{} not found".format(package_name, version_name), file=sys.stderr)
-                    continue
-
-                if not os.path.isfile(description_path):
-                    print("WARNING: Description for {}/{} not found".format(package_name, version_name), file=sys.stderr)
-                    continue
-
                 if maxversion is None or VersionCompare(version_name, maxversion) > 0:
                     maxversion = version_name
 
@@ -75,38 +62,41 @@ class GoboLinuxGitParser():
             pkg.name = package_name
             pkg.version = maxversion
 
-            with open(recipe_path, 'r', encoding='utf-8', errors='ignore') as recipe:
-                for line in recipe:
-                    line = line.strip()
-                    if line.startswith("url="):
-                        download = ExpandDownloadUrlTemplates(line[4:])
-                        if download.find('$') == -1:
-                            pkg.downloads.append(download)
+            if os.path.isfile(recipe_path):
+                with open(recipe_path, 'r', encoding='utf-8', errors='ignore') as recipe:
+                    for line in recipe:
+                        line = line.strip()
+                        if line.startswith("url="):
+                            download = ExpandDownloadUrlTemplates(line[4:])
+                            if download.find('$') == -1:
+                                pkg.downloads.append(download)
+                            else:
+                                print("WARNING: Recipe for {}/{} skipped, unhandled URL substitude found".format(package_name, maxversion), file=sys.stderr)
+
+            if os.path.isfile(description_path):
+                with open(description_path, 'r', encoding='utf-8', errors='ignore') as description:
+                    data = {}
+                    current_tag = None
+                    for line in description:
+                        line = line.strip()
+                        match = re.match('^\[([A-Z][a-z]+)\](.*)$', line)
+                        if match:
+                            current_tag = match.group(1)
+                            data[current_tag] = match.group(2)
+                        elif current_tag is None:
+                            print("WARNING: Description for {}/{} skipped, dumb format".format(package_name, maxversion), file=sys.stderr)
+                            break
                         else:
-                            print("WARNING: Recipe for {}/{} skipped, unhandled URL substitude found".format(package_name, maxversion), file=sys.stderr)
+                            if data[current_tag]:
+                                data[current_tag] += ' '
+                            data[current_tag] += line
 
-            with open(description_path, 'r', encoding='utf-8', errors='ignore') as description:
-                data = {}
-                current_tag = None
-                for line in description:
-                    line = line.strip()
-                    match = re.match('^\[([A-Z][a-z]+)\](.*)$', line)
-                    if match:
-                        current_tag = match.group(1)
-                        data[current_tag] = match.group(2)
-                    elif current_tag is None:
-                        print("WARNING: Description for {}/{} is broken, lines not assigned to any tag ({})".format(package_name, maxversion, line), file=sys.stderr)
-                    else:
-                        if data[current_tag]:
-                            data[current_tag] += ' '
-                        data[current_tag] += line
-
-                if 'Summary' in data:
-                    pkg.comment = data['Summary']
-                if 'License' in data:
-                    pkg.licenses = [ data['License'] ]
-                if 'Homepage' in data:
-                    pkg.homepage = data['Homepage']
+                    if 'Summary' in data:
+                        pkg.comment = data['Summary']
+                    if 'License' in data:
+                        pkg.licenses = [ data['License'] ]
+                    if 'Homepage' in data:
+                        pkg.homepage = data['Homepage']
 
             result.append(pkg)
 
