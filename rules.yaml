@@ -33,6 +33,7 @@
 - { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               families: [ freebsd ]  }
 - { name: adzap,                       setname: adzapper,                 families: [ freebsd, pkgsrc ] }
 - { name: aiksaurus-gtk,               setname: aiksaurus,                families: [ freebsd ] } # slave port
+- { name: arxlibertatis,               setname: arx-libertatis,           }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
 - { name: armagetron,                  setname: armagetronad,             families: [ freebsd, opensuse ] }
@@ -65,6 +66,8 @@
 - { name: cegui-mk2,                   setname: cegui,                    families: [ debian ]  }
 - { name: celestia-nonfree,            setname: celestia,                 families: [ debian ]  }
 - { name: chexedit,                    setname: curses-hexedit,           families: [ freebsd ] }
+- { name: chromium-browser,            setname: chromium                  }
+- { name: chromium-browser-stable,     setname: chromium                  }
 - { name: corsixth,                    setname: corsix-th,                families: [ freebsd ] }
 - { name: cyphesis-cpp,                setname: cyphesis,                 families: [ debian ]  }
 - { name: dgen,                        setname: dgen-sdl,                 families: [ debian ]  } # recheck
@@ -116,9 +119,11 @@
 - { name: kiki,                        setname: kiki-the-nano-bot,        families: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
 - { name: libcheck,                    setname: check                     } # XXX: reverse?
-- { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
+- { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
+- { name: libsfml,                     setname: sfml,                     }
+- { name: compat-sfml16,               setname: sfml,                     }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: moonlander,                  setname: moon-lander,              families: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     families: [ freebsd ] }
@@ -142,6 +147,7 @@
 - { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
 - { name: seven-kingdoms,              setname: 7kaa,                     families: [ gentoo ]  }
 - { name: slashem-tty,                 setname: slashem,                  families: [ freebsd ] }
+- { name: sdl-asylum,                  setname: asylum                    }
 - { name: sni-qt4,                     setname: sni-qt                    }
 - { name: snorenotify-qt5,             setname: snorenotify               }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             families: [ gentoo ]  } # XXX: recheck
@@ -456,6 +462,9 @@
 - { name: sogo, verpat: "3\\..*",      setname: sogo3 }
 
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
+
+- { namepat: "sfml[0-9.]+",            setname: sfml }
+- { name: sfml, verpat: "1\\..*",      setname: sfml1 }
 
 - { namepat: "shibboleth-sp[0-9]+",    setname: shibboleth-sp }
 
