@@ -25,50 +25,37 @@ from repology.www import Get
 
 
 class RepodataFetcher():
-    def __init__(self, *repourls):
-        self.repourls = repourls
+    def __init__(self, url):
+        self.url = url
         pass
 
-    def DoFetch(self, statepath, update, logger):
-        number = 0
-
-        for repourl in self.repourls:
-            # Get and parse repomd.xml
-            repomd_url = repourl + "repodata/repomd.xml"
-            logger.Log("fetching metadata from " + repomd_url)
-            repomd_content = Get(repomd_url, check_status = True).text
-            repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
-
-            repodata_url = repourl + repomd_xml.find("{http://linux.duke.edu/metadata/repo}data[@type='primary']/{http://linux.duke.edu/metadata/repo}location").attrib['href']
-
-            logger.Log("fetching " + repodata_url)
-            data = Get(repodata_url).content
-
-            logger.GetIndented().Log("size is {} byte(s)".format(len(data)))
-
-            logger.GetIndented().Log("decompressing with gzip")
-            data = gzip.decompress(data)
-
-            logger.GetIndented().Log("size after decompression is {} byte(s)".format(len(data)))
-
-            with open(os.path.join(statepath, "{:05d}.xml".format(number)), "wb") as statefile:
-                statefile.write(data)
-
-            number += 1
-
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
+        tmppath = statepath + '.tmp'
+
+        if os.path.isfile(statepath) and not update:
             logger.Log("no update requested, skipping")
             return
 
-        if os.path.exists(statepath):
-            shutil.rmtree(statepath)
+        # Get and parse repomd.xml
+        repomd_url = self.url + "repodata/repomd.xml"
+        logger.Log("fetching metadata from " + repomd_url)
+        repomd_content = Get(repomd_url, check_status = True).text
+        repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
 
-        os.mkdir(statepath)
+        repodata_url = self.url + repomd_xml.find("{http://linux.duke.edu/metadata/repo}data[@type='primary']/{http://linux.duke.edu/metadata/repo}location").attrib['href']
 
-        try:
-            self.DoFetch(statepath, update, logger)
-        except:
-            if os.path.exists(statepath):
-                shutil.rmtree(statepath)
-            raise
+        logger.Log("fetching " + repodata_url)
+        data = Get(repodata_url).content
+
+        logger.GetIndented().Log("size is {} byte(s)".format(len(data)))
+
+        logger.GetIndented().Log("decompressing with gzip")
+        data = gzip.decompress(data)
+
+        logger.GetIndented().Log("size after decompression is {} byte(s)".format(len(data)))
+
+        logger.GetIndented().Log("saving")
+        with open(tmppath, "wb") as statefile:
+            statefile.write(data)
+
+        os.rename(tmppath, statepath)

@@ -24,12 +24,12 @@ from repology.www import Get
 
 
 class ChocolateyFetcher():
-    def __init__(self, apiurl):
-        self.apiurl = apiurl
+    def __init__(self, url):
+        self.url = url
 
     def DoFetch(self, statepath, update, logger):
         numpage = 0
-        nextpageurl = self.apiurl + "Packages()?$filter=IsLatestVersion"
+        nextpageurl = self.url + "Packages()?$filter=IsLatestVersion"
         while True:
             logger.Log("getting " + nextpageurl)
 

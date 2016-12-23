@@ -25,44 +25,37 @@ from repology.www import Get
 
 
 class FileFetcher():
-    def __init__(self, *sources, gz=False, bz2=False, xz=False):
-        self.sources = sources
-        self.gz = gz
-        self.bz2 = bz2
-        self.xz = xz
-
-    def DoFetch(self, statepath, update, logger):
-        with open(statepath, "wb") as statefile:
-            for source in self.sources:
-                logger.Log("fetching " + source)
-                data = Get(source).content
-
-                logger.GetIndented().Log("size is {} byte(s)".format(len(data)))
-
-                if self.gz:
-                    logger.GetIndented().Log("decompressing with gzip")
-                    data = gzip.decompress(data)
-                elif self.bz2:
-                    logger.GetIndented().Log("decompressing with bz2")
-                    data = bz2.decompress(data)
-                elif self.xz:
-                    logger.GetIndented().Log("decompressing with xz")
-                    data = lzma.LZMADecompressor().decompress(data)
-
-                if self.gz or self.bz2 or self.xz:
-                    logger.GetIndented().Log("size after decompression is {} byte(s)".format(len(data)))
-
-                logger.GetIndented().Log("saving")
-                statefile.write(data)
+    def __init__(self, url, compression=None):
+        self.url = url
+        self.compression = compression
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
+        tmppath = statepath + '.tmp'
+
         if os.path.isfile(statepath) and not update:
             logger.Log("no update requested, skipping")
             return
 
-        try:
-            self.DoFetch(statepath, update, logger)
-        except:
-            if os.path.exists(statepath):
-                os.remove(statepath)
-            raise
+        with open(tmppath, "wb") as statefile:
+            logger.Log("fetching " + self.url)
+            data = Get(self.url).content
+
+            logger.GetIndented().Log("size is {} byte(s)".format(len(data)))
+
+            if self.compression == 'gz':
+                logger.GetIndented().Log("decompressing with gzip")
+                data = gzip.decompress(data)
+            elif self.compression == 'bz2':
+                logger.GetIndented().Log("decompressing with bz2")
+                data = bz2.decompress(data)
+            elif self.compression == 'xz':
+                logger.GetIndented().Log("decompressing with xz")
+                data = lzma.LZMADecompressor().decompress(data)
+
+            if self.compression:
+                logger.GetIndented().Log("size after decompression is {} byte(s)".format(len(data)))
+
+            logger.GetIndented().Log("saving")
+            statefile.write(data)
+
+        os.rename(tmppath, statepath)

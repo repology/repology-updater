@@ -23,13 +23,8 @@ from repology.subprocess import RunSubprocess
 
 
 class ArchDBFetcher():
-    def __init__(self, *sources):
-        self.sources = sources
-
-    def DoFetch(self, statepath, update, logger):
-        for source in self.sources:
-            command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (source, statepath)
-            RunSubprocess(command, logger, shell=True)
+    def __init__(self, url):
+        self.url = url
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
@@ -42,7 +37,8 @@ class ArchDBFetcher():
         os.mkdir(statepath)
 
         try:
-            self.DoFetch(statepath, update, logger)
+            command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (self.url, statepath)
+            RunSubprocess(command, logger, shell=True)
         except:
             if os.path.exists(statepath):
                 shutil.rmtree(statepath)
