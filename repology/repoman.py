@@ -212,7 +212,7 @@ class RepositoryManager:
 
     # Helpers to retrieve data on repositories
     def GetNames(self, reponames=None):
-        return [repo['name'] for repo in self.__GetRepositories(reponames)]
+        return sorted([repo['name'] for repo in self.__GetRepositories(reponames)])
 
     def GetMetadata(self):
         return {repository['name']: {

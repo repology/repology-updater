@@ -22,7 +22,7 @@ Statistics
         <th>% ignored</th>
         <th>Last updated</th>
     </tr>
-    {% for reponame in reponames|sort %}
+    {% for reponame in reponames %}
     <tr>
         <td style="text-align: right">{{ repometadata[reponame].desc }}</td>
         <td style="text-align: center"><span class="total">{{ repostats[reponame].num_packages }}</span></td>
