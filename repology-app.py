@@ -22,7 +22,8 @@ import flask
 from flask import Flask
 from math import sqrt
 
-from repology.database import *
+from repology.database import Database
+from repology.queryfilters import *
 from repology.repoman import RepositoryManager
 from repology.package import *
 from repology.packageproc import *
