@@ -41,22 +41,21 @@ class RepodataParser():
     def Parse(self, path):
         result = []
 
-        for filename in sorted(os.listdir(path)):
-            root = xml.etree.ElementTree.parse(os.path.join(path, filename))
+        root = xml.etree.ElementTree.parse(path)
 
-            for entry in root.findall("{http://linux.duke.edu/metadata/common}package"):
-                pkg = Package()
+        for entry in root.findall("{http://linux.duke.edu/metadata/common}package"):
+            pkg = Package()
 
-                pkg.name = entry.find("{http://linux.duke.edu/metadata/common}name").text
-                version = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
-                pkg.version, pkg.origversion = SanitizeVersion(version)
-                pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
-                pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
-                pkg.category = entry.find("{http://linux.duke.edu/metadata/common}format/"
-                                      "{http://linux.duke.edu/metadata/rpm}group").text
-                pkg.licenses.append(entry.find("{http://linux.duke.edu/metadata/common}format/"
-                                           "{http://linux.duke.edu/metadata/rpm}license").text)
+            pkg.name = entry.find("{http://linux.duke.edu/metadata/common}name").text
+            version = entry.find("{http://linux.duke.edu/metadata/common}version").attrib['ver']
+            pkg.version, pkg.origversion = SanitizeVersion(version)
+            pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
+            pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
+            pkg.category = entry.find("{http://linux.duke.edu/metadata/common}format/"
+                                  "{http://linux.duke.edu/metadata/rpm}group").text
+            pkg.licenses.append(entry.find("{http://linux.duke.edu/metadata/common}format/"
+                                       "{http://linux.duke.edu/metadata/rpm}license").text)
 
-                result.append(pkg)
+            result.append(pkg)
 
         return result

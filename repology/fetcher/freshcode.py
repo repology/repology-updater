@@ -24,8 +24,8 @@ from repology.version import VersionCompare
 
 
 class FreshcodeFetcher():
-    def __init__(self, source):
-        self.source = source
+    def __init__(self, url):
+        self.url = url
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
@@ -41,7 +41,7 @@ class FreshcodeFetcher():
         else:
             logger.Log("starting with empty state")
 
-        newdata = json.loads(Get(self.source).text)
+        newdata = json.loads(Get(self.url).text)
 
         # add new entries in reversed order, oldest first so newest
         # have higher priority; may also compare versions here
