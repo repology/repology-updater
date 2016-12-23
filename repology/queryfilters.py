@@ -86,7 +86,7 @@ class NameBeforeQueryFilter(QueryFilter):
 
 class NameSubstringQueryFilter(QueryFilter):
     def __init__(self, name):
-        self.name = name
+        self.name = name.lower() # XXX: need to normalize like effnames
 
     def GetTable(self):
         return 'repo_metapackages'
@@ -95,7 +95,7 @@ class NameSubstringQueryFilter(QueryFilter):
         return '{table}.effname like %s'
 
     def GetWhereArgs(self):
-        return [ self.name + "%" ]
+        return [ "%" + self.name + "%" ]
 
 
 class MaintainerQueryFilter(QueryFilter):
