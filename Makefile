@@ -24,7 +24,9 @@ profile-reparse::
 	python3 -c 'import pstats; stats = pstats.Stats("_profile"); stats.sort_stats("time"); stats.print_stats()' | less
 
 check:
-	kwalify -lf schemas/rules.yaml rules.yaml | tee kwalify.log
+	rm -f kwalify.log
+	kwalify -lf schemas/rules.yaml rules.yaml | tee -a kwalify.log
+	kwalify -lf schemas/repos.yaml repos.yaml | tee -a kwalify.log
 	@if grep -q INVALID kwalify.log; then \
 		echo "Validation failed"; \
 		rm -f kwalify.log; \

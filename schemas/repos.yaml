@@ -1,0 +1,50 @@
+---
+type: seq
+required: yes
+sequence:
+  - type: map
+    required: yes
+    mapping:
+      "name":
+        type: str
+        required: yes
+      "desc":
+        type: str
+        required: yes
+      "family":
+        type: str
+        required: yes
+      "sources":
+        type: seq
+        required: yes
+        sequence:
+          - type: map
+            required: yes
+            mapping:
+              "name":
+                type: str
+                required: yes
+              "fetcher":
+                type: str
+                required: yes
+              "parser":
+                type: str
+                required: yes
+              "url":
+                type: str
+                required: no
+              "compression":
+                type: str
+                required: no
+      "shadow":
+        type: bool
+        required: no
+      "link":
+        type: str
+        required: no
+      "tags":
+        type: seq
+        required: yes
+        sequence:
+          - type: str
+            required: yes
