@@ -502,7 +502,7 @@
 ###########################################################################
 # AltLinux Sisyphus
 ###########################################################################
-- name: sisyphus
+- name: altsisyphus
   desc: ALT Sisyphus
   family: sisyphus
   sources:
