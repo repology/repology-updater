@@ -179,7 +179,12 @@ def metapackages_generic(bound, *filters, template='metapackages.html'):
 
     reponames = repoman.GetNames(app.config['REPOSITORIES'])
 
-    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=app.config['PER_PAGE'])
+    # process search
+    search = flask.request.args.to_dict().get('search')
+    searchfilter = NameSubstringQueryFilter(search) if search else None
+
+    # get packages
+    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['PER_PAGE'])
 
     # on empty result, fallback to show first, last set of results
     if not packages:
@@ -187,7 +192,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html'):
             namefilter = NameStartingQueryFilter()
         else:
             namefilter = NameBeforeQueryFilter()
-        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), *filters, limit=app.config['PER_PAGE'])
+        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['PER_PAGE'])
 
     firstname, lastname = get_packages_name_range(packages)
 
@@ -199,7 +204,8 @@ def metapackages_generic(bound, *filters, template='metapackages.html'):
         summaries=summaries,
         repometadata=repoman.GetMetadata(),
         firstname=firstname,
-        lastname=lastname
+        lastname=lastname,
+        search=search
     )
 
 def repositories_generic(template='repositories.html'):
