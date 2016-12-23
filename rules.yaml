@@ -265,6 +265,8 @@
 - { name: perl-time-duration,          ver: "1.200000",                                      ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   families: [ sisyphus, fedora ], ignorever: true }
 - { name: xmahjongg,                   ver: "3.70",                  families: [ pkgsrc ],   ignorever: true }
+- { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        families: [ sisyphus ], ignorever: true }
+- { name: mod_rpaf,                    verpat: "2015.*",             families: [ arch ],     ignorever: true }
 
 # F-Droid is too alien, even if package names match in most cases it's entirely different application
 # So use whitelist
@@ -652,9 +654,20 @@
 - { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", families: [ freebsd, openbsd, pkgsrc ] }
 - { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", families: [ gentoo ] }
 - { namepat: "mod-(.*)",               setname: "apmod:$1", families: [ debian ] }
-- { namepat: "mod_(.*)",               setname: "apmod:$1", families: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos ] }
+- { namepat: "mod_(.*)",               setname: "apmod:$1", families: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos, gobolinux ] }
 - { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1" }
 - { namepat: "apache2?-mod_(.*)",      setname: "apmod:$1" }
+- { namepat: "apmod:php[0-9]*",        verpat: "5\\..*", setname: "apmod:php5" }
+- { namepat: "apmod:php[0-9]*",        verpat: "7\\..*", setname: "apmod:php7" }
+- { namepat: "apmod:python[0-9]*",                       setname: "apmod:python" }
+- { namepat: "apmod:perl2",                              setname: "apmod:perl" }
+- { namepat: "apmod:limitipconn2",                       setname: "apmod:limitipconn" }
+- { namepat: "apmod:geoip2",                             setname: "apmod:geoip" }
+- { namepat: "apmod:fcgid-legacy",                       setname: "apmod:fcgid" }
+- { namepat: "apmod:rpaf2",                              setname: "apmod:rpaf" }
+- { namepat: "apmod:security2",                          setname: "apmod:security" }
+- { namepat: "apmod:wsgi[0-9]+",                         setname: "apmod:wsgi" }
+- { namepat: "apmod:ruby[0-9]+",                         setname: "apmod:ruby" }
 
 # Erlang
 - { category: dev-erlang,              setname: "erlang:$0", families: [ gentoo ] }
