@@ -163,24 +163,24 @@ can be done with single command:
 
 ## Repository support
 
-| Repository                       | Name | Ver | Summary | Maint-r | Categ | WWW | License | Download |
-|----------------------------------|:----:|:---:|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
-| ALT Sisyphus                     | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
-| Arch                             | ✔    | ✔   | ✔       | ✔       |       | ✔   | ✔       |          |
-| CentOS, Fedora, Mageia, OpenSUSE | ✔    | ✔   | ✔       |         | ✔     | ✔   | ✔       |          |
-| Chocolatey                       | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
-| CPAN                             | ✔    | ✔   |         | ✔       |       | ✔   |         |          |
-| Debian, Ubuntu                   | ✔    | ✔   |         | ✔       | ✔     | ✔   |         |          |
-| F-Droid                          | ✔    | ✔   |         |         | ✔     | ✔   | ✔       |          |
-| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     | ✔   |         |          |
-| freshcode.club                   | ✔    | ✔   | ✔       | n/a     |       | ✔   |         |          |
-| Gentoo                           | ✔    | ✔   |         | ✔       | ✔     |     |         |          |
-| GoboLinux                        | ✔    | ✔   | ✔       |         |       | ✔   | ✔       |          |
-| OpenBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
-| pkgsrc                           | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
-| PyPi                             | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
-| SlackBuilds                      | ✔    | ✔   |         | ✔       | ✔     | ✔   |         | ✔        |
-| YACP                             | ✔    | ✔   |         |         |       |     |         |          |
+| Repository                       | Summary | Maint-r | Categ | WWW | License | Download |
+|----------------------------------|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
+| ALT Sisyphus                     | ✔       | ✔       | ✔     |     |         |          |
+| Arch                             | ✔       | ✔       |       | ✔   | ✔       |          |
+| CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔   | ✔       |          |
+| Chocolatey                       | ✔       |         |       | ✔   |         |          |
+| CPAN                             |         | ✔       |       | ✔   |         |          |
+| Debian, Ubuntu                   |         | ✔       | ✔     | ✔   |         |          |
+| F-Droid                          |         |         | ✔     | ✔   | ✔       |          |
+| FreeBSD                          | ✔       | ✔       | ✔     | ✔   |         |          |
+| freshcode.club                   | ✔       | n/a     |       | ✔   |         |          |
+| Gentoo                           |         | ✔       | ✔     |     |         |          |
+| GoboLinux                        | ✔       |         |       | ✔   | ✔       |          |
+| OpenBSD                          | ✔       | ✔       | ✔     |     |         |          |
+| pkgsrc                           | ✔       | ✔       | ✔     |     |         |          |
+| PyPi                             | ✔       |         |       | ✔   |         |          |
+| SlackBuilds                      |         | ✔       | ✔     | ✔   |         | ✔        |
+| YACP                             |         |         |       |     |         |          |
 
 ### FreeBSD
 
