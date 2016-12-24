@@ -24,6 +24,7 @@
 - { name: acroread9,                   setname: acroread,                 family: [ pkgsrc ] }
 - { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     family: [ pkgsrc ] }
 - { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      family: [ pkgsrc ] }
+- { namepat: "aspell-dict-(.*)",       setname: "aspell-$1",              family: guix }
 - { name: actionaz,                    setname: actiona,                  family: [ chocolatey ] }
 - { name: activeio,                    setname: activemq-activeio,        family: [ fedora, sisyphus ] }
 - { name: adb,                         setname: android-tools,            family: [ openbsd ] }
@@ -559,7 +560,7 @@
 # we ignore it in comparison
 - { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", family: [ debian ] }
-- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix ] }
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
   # Gentoo and Mageia shamelessly mangle perl module versions, ignore
@@ -567,7 +568,7 @@
 - { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below
 
 # Ruby
-- { namepat: "ruby-(.*)",              setname: "ruby:$1", family: [ debian, arch, fedora, mageia, sisyphus ] }
+- { namepat: "ruby-(.*)",              setname: "ruby:$1", family: [ debian, arch, fedora, mageia, sisyphus, guix ] }
 - { namepat: "rubygem-(.*)",           setname: "ruby:$1", family: [ freebsd, fedora, opensuse, slackbuilds ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", family: [ freebsd, openbsd, pkgsrc ] }
 - { category: dev-ruby,                setname: "ruby:$0", family: [ gentoo ] }
@@ -589,13 +590,13 @@
 - { namepat: "py3?-(.*)",              setname: "python:$1", family: [ openbsd ] }
 - { namepat: "python-(.*)",            setname: "python:$1", family: [ debian, centos, mageia, gobolinux ] }
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", family: [ sisyphus ] }
-- { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch ] }
+- { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch, guix ] }
 - { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds ] }
 - { category: dev-python,              setname: "python:$0", family: [ gentoo ] }
 
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debian ] }
-- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora ] }
+- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix ] }
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "r:$1", family: [ debian ] }
@@ -612,7 +613,7 @@
 # Haskell
 - { namepat: "haskell-(.*)",           setname: "haskell:$1", family: [ debian, arch, slackbuilds, gobolinux ] }
 - { namepat: "hs-(.*)",                setname: "haskell:$1", family: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora ] }
+- { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora, guix ] }
 - { category: dev-haskell,             setname: "haskell:$0", family: [ gentoo ] }
 - { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", family: [ sisyphus ] }
 
@@ -636,7 +637,7 @@
 - { namepat: "octave-(.*)",            setname: "octave:$1", family: [ debian, sisyphus, fedora, arch ] }
 
 # xorg drivers
-- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", family: [ freebsd, gentoo, pkgsrc, arch, opensuse, gobolinux ] }
+- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", family: [ freebsd, gentoo, pkgsrc, arch, opensuse, gobolinux, guix ] }
 - { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", family: [ debian ] }
 
 # php
@@ -695,7 +696,7 @@
 #  setname: "xfonts:$1"
 - { namepat: "(.*)-fonts",             setname: "fonts:$1", family: [ gentoo ] }
 - { namepat: "(.*)-ttf",               setname: "fonts:$1", family: [ pkgsrc ] }
-- { namepat: "font-(.*)",              setname: "fonts:$1", family: [ freebsd, gentoo, pkgsrc, arch, gobolinux ] }
+- { namepat: "font-(.*)",              setname: "fonts:$1", family: [ freebsd, gentoo, pkgsrc, arch, gobolinux, guix ] }
 - { name: cantarell,                   setname: "fonts:cantarell", family: [ gentoo ]  }
 - { name: cantarell-fonts,             setname: "fonts:cantarell", family: [ freebsd, pkgsrc, openbsd, arch ] }
 - { namepat: "fonts-ttf-(.*)",         setname: "fonts:$1", family: [ mageia ] }
