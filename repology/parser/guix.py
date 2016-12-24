@@ -46,7 +46,7 @@ class GuixParser():
 
                 # name + version
                 cell = row.find("./td[2]/a")
-                pkg.name, pkg.version = cell.text.split(' ', 2)
+                pkg.name, pkg.version = cell.text.split(' ', 1)
 
                 # summary
                 cell = row.find("./td[3]/span")
