@@ -118,7 +118,7 @@ class TestPackageTransformer(unittest.TestCase):
     def test_match_family(self):
         p1 = Package(name="p1", version="1.0", family="foo")
         p2 = Package(name="p2", version="2.0", family="bar")
-        t = PackageTransformer(rulestext='[ { families: [ foo ], setname: bar } ]')
+        t = PackageTransformer(rulestext='[ { family: [ foo ], setname: bar } ]')
         t.Process(p1)
         t.Process(p2)
         self.assertEqual(p1.effname, "bar")
