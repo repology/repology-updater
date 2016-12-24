@@ -23,3 +23,4 @@ from .fedora import FedoraFetcher
 from .chocolatey import ChocolateyFetcher
 from .rpm import RepodataFetcher
 from .freshcode import FreshcodeFetcher
+from .guix import GuixFetcher

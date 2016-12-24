@@ -163,151 +163,28 @@ can be done with single command:
 
 ## Repository support
 
-| Repository                       | Name | Ver | Summary | Maint-r | Categ | WWW | License | Download |
-|----------------------------------|:----:|:---:|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
-| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     | ✔   |         |          |
-| Debian/Ubuntu                    | ✔    | ✔   |         | ✔       | ✔     | ✔   |         |          |
-| Gentoo                           | ✔    | ✔   |         | ✔       | ✔     |     |         |          |
-| pkgsrc                           | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
-| OpenBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
-| Arch                             | ✔    | ✔   | ✔       | ✔       |       | ✔   | ✔       |          |
-| CentOS, Fedora, Mageia, OpenSUSE | ✔    | ✔   | ✔       |         | ✔     | ✔   | ✔       |          |
-| Sisyphus                         | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
-| Chocolatey                       | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
-| SlackBuilds                      | ✔    | ✔   |         | ✔       | ✔     | ✔   |         | ✔        |
-| freshcode.club                   | ✔    | ✔   | ✔       | n/a     |       | ✔   |         |          |
-| CPAN                             | ✔    | ✔   |         | ✔       |       | ✔   |         |          |
-| PyPi                             | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
-| F-Droid                          | ✔    | ✔   |         |         | ✔     | ✔   | ✔       |          |
+As much data as possible is parsed from each repo. Package name and
+version are always parsed.
 
-### FreeBSD
-
-Parses data from INDEX-11.bz2.
-
-TODO: Parsing port Makefiles may extract additional info such as
-licenses and options.
-
-Links:
-- [FreshPorts](http://freshports.org)
-- [SVN](https://svnweb.freebsd.org/ports/head)
-
-### Debian/Ubuntu
-
-Parses data from Sources.gz. Maintainers are taken from both ```Maintainer``` and ```Uploader``` fields.
-
-TODO: May need to parse ```*.debian.tar.xz``` for additional info for
-each package. Heavy?
-
-Links:
-- [https://www.debian.org/distrib/packages#search_packages](Debian Packages)
-- [http://packages.ubuntu.com/](Ubuntu Packages)
-
-### Gentoo
-
-Parses git mirror of portage repository (file tree only, doesn't
-look into ebuilds).
-
-TODO: Parse ebuilds for more info.
-
-Links:
-- [Gentoo packages](https://packages.gentoo.org/)
-
-### pkgsrc
-
-Parses INDEX file (format similar to FreeBSD).
-
-Lacks maintainer for ~24 ports which use OWNER instead because
-OWNER does not get to INDEX.
-
-Links:
-- [pkgsrc.org](http://pkgsrc.org/)
-- [CVS](http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/)
-- [pkgsrc.se](http://www.pkgsrc.se/)
-
-### OpenBSD
-
-Parses INDEX file (format similar to FreeBSD).
-
-Links:
-- [CVS](http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/)
-- [openports.se](http://openports.se/)
-
-### Arch
-
-Parses package databases (core, extra, community).
-
-Links:
-- [Package Search](https://www.archlinux.org/packages/)
-
-### Fedora, Mageia, CentOS, OpenSUSE
-
-Parses source package lists.
-
-Links
-- [Fedora Repository](https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/)
-- [Fedora Package Database](https://admin.fedoraproject.org/pkgdb)
-- [Fedora GIT Repositories](http://pkgs.fedoraproject.org/cgit/rpms/)
-- [CentOS Repository](http://vault.centos.org/centos/7/os/Source/)
-- [CentOS Packages](http://centos-packages.com/)
-- [Mageia Repository](https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/core/release/)
-- [Mageia App Db](https://madb.mageia.org/)
-- [OpenSUSE Repository](http://download.opensuse.org/tumbleweed/repo/src-oss/suse/)
-- [OpenSUSE ](https://software.opensuse.org/)
-
-### Sisyphus
-
-Parses srclist.classic files with custom C utility.
-
-Links:
-- [Sisyphus repository](http://www.sisyphus.ru/en/)
-
-### Chocolatey
-
-Parses XML descriptions of packages from chocolatey API.
-
-Links:
-- [Chocolatey packages](https://chocolatey.org/packages)
-
-### SlackBuilds
-
-Parses .info files from SlackBuilds.
-
-Links:
-- [SlackBuilds.org](https://slackbuilds.org/)
-
-### freshcode.club
-
-Parses feed of version updates from freshcode.club.
-Since feed only contains 100 latest updates, it is accumulated in
-the state file with each update. Entries with highest vesion number
-are preserved.
-
-Links:
-- [freshcode.club](http://freshcode.club/)
-
-### CPAN
-
-Parses CPAN 02packages.details.txt index.
-
-Links:
-- [CPAN](http://search.cpan.org/)
-
-### PyPi
-
-Parses PyPi HTML index.
-
-Links:
-- [PyPi](https://pypi.python.org/pypi)
-
-### F-Droid
-
-Parses F-Droid package index XML. Is not enabled yet as most packages
-are android-unique, and, even if these are ports of PC software, have
-different versioning schemas. Probably it's best to support F-Droid
-packages on opt-in basis.
-
-Links:
-- [XML index](https://f-droid.org/repo/index.xml)
+| Repository                       | Summary | Maint-r | Categ | WWW | License | Download |
+|----------------------------------|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
+| ALT Sisyphus                     | ✔       | ✔       | ✔     |     |         |          |
+| Arch                             | ✔       | ✔       |       | ✔   | ✔       |          |
+| CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔   | ✔       |          |
+| Chocolatey                       | ✔       |         |       | ✔   |         |          |
+| CPAN                             |         | ✔       |       | ✔   |         |          |
+| Debian, Ubuntu                   |         | ✔       | ✔     | ✔   |         |          |
+| F-Droid                          |         |         | ✔     | ✔   | ✔       |          |
+| FreeBSD                          | ✔       | ✔       | ✔     | ✔   |         |          |
+| freshcode.club                   | ✔       | n/a     |       | ✔   |         |          |
+| Gentoo                           |         | ✔       | ✔     |     |         |          |
+| Guix                             | ✔       |         |       | ✔   | ✔       |          |
+| GoboLinux                        | ✔       |         |       | ✔   | ✔       |          |
+| OpenBSD                          | ✔       | ✔       | ✔     |     |         |          |
+| pkgsrc                           | ✔       | ✔       | ✔     |     |         |          |
+| PyPi                             | ✔       |         |       | ✔   |         |          |
+| SlackBuilds                      |         | ✔       | ✔     | ✔   |         | ✔        |
+| YACP                             |         |         |       |     |         |          |
 
 ## Reading the report
 

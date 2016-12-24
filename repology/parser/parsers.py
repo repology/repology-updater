@@ -33,3 +33,4 @@ from .cpan import CPANPackagesParser
 from .pypi import PyPiHTMLParser
 from .yacp import YACPGitParser
 from .gobolinux import GoboLinuxGitParser
+from .guix import GuixParser
