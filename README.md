@@ -177,7 +177,7 @@ version are always parsed.
 | F-Droid                          |         |         | ✔     | ✔   | ✔       |          |
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔   |         |          |
 | freshcode.club                   | ✔       | n/a     |       | ✔   |         |          |
-| Gentoo                           |         | ✔       | ✔     |     |         |          |
+| Gentoo                           | ✔       | ✔       | ✔     | ✔   | ✔ (1)   | ✔ (1)    |
 | Guix                             | ✔       |         |       | ✔   | ✔       |          |
 | GoboLinux                        | ✔       |         |       | ✔   | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |     |         |          |
@@ -185,6 +185,9 @@ version are always parsed.
 | PyPi                             | ✔       |         |       | ✔   |         |          |
 | SlackBuilds                      |         | ✔       | ✔     | ✔   |         | ✔        |
 | YACP                             |         |         |       |     |         |          |
+
+(1) Gentoo support is not complete, complex cases like condional downloads and licenses
+are ignored for now.
 
 ## Reading the report
 

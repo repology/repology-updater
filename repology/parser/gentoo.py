@@ -63,7 +63,7 @@ class GentooGitParser():
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):
                 continue
-            if category == 'virtual':
+            if category == 'virtual' or category == 'metadata':
                 continue
 
             for package in os.listdir(category_path):
@@ -103,6 +103,38 @@ class GentooGitParser():
                     pkg.version = maxversion
                     pkg.origversion = maxorigversion
                     pkg.category = category
+
+                    metadata_path = os.path.join(
+                        path,
+                        'metadata',
+                        'md5-cache',
+                        category,
+                        package + '-' + (maxorigversion if maxorigversion else maxversion)
+                    )
+                    if os.path.isfile(metadata_path):
+                        with open(metadata_path, 'r', encoding='utf-8') as metadata_file:
+                            for line in metadata_file:
+                                line = line.strip()
+                                key, value = line.split('=', 1)
+
+                                if key == 'DESCRIPTION':
+                                    pkg.comment = value
+                                elif key == 'HOMEPAGE':
+                                    pkg.homepage = value
+                                elif key == 'LICENSE':
+                                    if value.find('(') != -1:
+                                        # XXX: conditionals and OR's: need more
+                                        # complex parsing and backend support
+                                        pkg.licenses.append(value)
+                                    else:
+                                        pkg.licenses += value.split(' ')
+                                elif key == 'SRC_URI':
+                                    if value.find(' ') != -1:
+                                        # XXX: need more complex parsing
+                                        pass
+                                    else:
+                                        # XXX: mirror:// urls pass
+                                        pkg.downloads.append(value)
 
                     result.append(pkg)
 
