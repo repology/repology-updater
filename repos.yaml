@@ -554,6 +554,19 @@
   tags: [ all, preproduction, fastfetch ]
 
 ###########################################################################
+# GNU Guix
+###########################################################################
+- name: guix
+  desc: GNU Guix
+  family: guix
+  sources:
+    - name: guix
+      fetcher: Guix
+      parser: Guix
+      url: https://www.gnu.org/software/guix/packages/
+  tags: [ all, preproduction, fastfetch ]
+
+###########################################################################
 # SlackBuilds
 ###########################################################################
 - name: slackbuilds
