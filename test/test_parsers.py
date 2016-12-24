@@ -103,6 +103,10 @@ class TestParsers(unittest.TestCase):
                 "origversion": None,
                 "category": "games-action",
                 "maintainers": ['games@gentoo.org'],
+                "homepage": 'http://chromium-bsu.sourceforge.net/',
+                "comment": 'Chromium B.S.U. - an arcade game',
+                "downloads": ['mirror://sourceforge/chromium-bsu/chromium-bsu-0.9.15.1.tar.gz'],
+                "licenses": ['Clarified-Artistic'],
             }
         )
 
