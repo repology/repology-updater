@@ -73,11 +73,14 @@ class TestPackageTransformer(unittest.TestCase):
     def test_match_name(self):
         p1 = Package(name="p1", version="1.0")
         p2 = Package(name="p2", version="2.0")
-        t = PackageTransformer(rulestext='[ { name: p1, setname: bar } ]')
+        p3 = Package(name="p3", version="2.0")
+        t = PackageTransformer(rulestext='[ { name: p1, setname: bar }, { name: [p3], setname: baz } ]')
         t.Process(p1)
         t.Process(p2)
+        t.Process(p3)
         self.assertEqual(p1.effname, "bar")
         self.assertEqual(p2.effname, "p2")
+        self.assertEqual(p3.effname, "baz")
 
     def test_match_namepat(self):
         p1 = Package(name="p1", version="1.0")
@@ -91,11 +94,14 @@ class TestPackageTransformer(unittest.TestCase):
     def test_match_ver(self):
         p1 = Package(name="p1", version="1.0")
         p2 = Package(name="p2", version="2.0")
-        t = PackageTransformer(rulestext='[ { ver: "1.0", setname: bar } ]')
+        p3 = Package(name="p3", version="3.0")
+        t = PackageTransformer(rulestext='[ { ver: "1.0", setname: bar }, { ver: ["3.0"], setname: baz } ]')
         t.Process(p1)
         t.Process(p2)
+        t.Process(p3)
         self.assertEqual(p1.effname, "bar")
         self.assertEqual(p2.effname, "p2")
+        self.assertEqual(p3.effname, "baz")
 
     def test_match_verpat(self):
         p1 = Package(name="p1", version="1.0")
@@ -118,20 +124,26 @@ class TestPackageTransformer(unittest.TestCase):
     def test_match_family(self):
         p1 = Package(name="p1", version="1.0", family="foo")
         p2 = Package(name="p2", version="2.0", family="bar")
-        t = PackageTransformer(rulestext='[ { family: [ foo ], setname: bar } ]')
+        p3 = Package(name="p3", version="3.0", family="baz")
+        t = PackageTransformer(rulestext='[ { family: foo, setname: quux }, { family: baz, setname: bat } ]')
         t.Process(p1)
         t.Process(p2)
-        self.assertEqual(p1.effname, "bar")
+        t.Process(p3)
+        self.assertEqual(p1.effname, "quux")
         self.assertEqual(p2.effname, "p2")
+        self.assertEqual(p3.effname, "bat")
 
     def test_match_category(self):
         p1 = Package(name="p1", version="1.0", category="foo")
         p2 = Package(name="p2", version="2.0", category="bar")
-        t = PackageTransformer(rulestext='[ { category: foo, setname: bar } ]')
+        p3 = Package(name="p3", version="3.0", category="baz")
+        t = PackageTransformer(rulestext='[ { category: foo, setname: quux }, { category: [ baz ] , setname: bat } ]')
         t.Process(p1)
         t.Process(p2)
-        self.assertEqual(p1.effname, "bar")
+        t.Process(p3)
+        self.assertEqual(p1.effname, "quux")
         self.assertEqual(p2.effname, "p2")
+        self.assertEqual(p3.effname, "bat")
 
 if __name__ == '__main__':
     unittest.main()
