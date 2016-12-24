@@ -178,6 +178,7 @@ version are always parsed.
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔   |         |          |
 | freshcode.club                   | ✔       | n/a     |       | ✔   |         |          |
 | Gentoo                           |         | ✔       | ✔     |     |         |          |
+| Guix                             | ✔       |         |       | ✔   | ✔       |          |
 | GoboLinux                        | ✔       |         |       | ✔   | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |     |         |          |
 | pkgsrc                           | ✔       | ✔       | ✔     |     |         |          |
