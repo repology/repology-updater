@@ -5,58 +5,22 @@ sequence:
   - type: map
     required: yes
     mapping:
-      "name":
-        type: str
-      "namepat":
-        type: str
-      "ver":
-        type: str
-      "verpat":
-        type: str
-      "verlonger":
-        type: int
-      "setname":
-        type: str
-      "category":
-        type: str
-      "ignore":
-        type: bool
-      "ignorever":
-        type: bool
-      "unignore":
-        type: bool
-      "unignorever":
-        type: bool
-      "last":
-        type: bool
-      "tolowername":
-        type: bool
+      "name": { type: any } # either str or list
+      "ver": { type: any } # either str or list
+      "category": { type: any } # either str or list
+      "family": { type: any } # either str or list
+      "namepat": { type: str }
+      "verpat": { type: str }
+      "verlonger": { type: int }
+      "setname": { type: str }
+      "ignore": { type: bool }
+      "ignorever": { type: bool }
+      "unignore": { type: bool }
+      "unignorever": { type: bool }
+      "last": { type: bool }
+      "tolowername": { type: bool }
       "replaceinname":
         type: map
         mapping:
           =:
             type: str
-      "families":
-        type: seq
-        sequence:
-          - type: str
-            unique: yes
-            enum:
-              - arch
-              - centos
-              - chocolatey
-              - cpan
-              - debian
-              - fdroid
-              - fedora
-              - freebsd
-              - gentoo
-              - gobolinux
-              - mageia
-              - openbsd
-              - opensuse
-              - pkgsrc
-              - pypi
-              - sisyphus
-              - slackbuilds
-              - yacp
