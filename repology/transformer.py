@@ -46,7 +46,7 @@ class PackageTransformer:
             rule['pretty'] = pp.pformat(rule)
 
             # convert some fields to lists
-            for field in ['category']:
+            for field in ['name', 'ver', 'category', 'family']:
                 if field in rule and not isinstance(rule[field], list):
                     rule[field] = [rule[field]]
 
@@ -58,25 +58,20 @@ class PackageTransformer:
             rule['matches'] = 0
 
     def MatchRule(self, rule, pkgname, pkgversion, pkgcategory, pkgfamily):
-        # match families
-        if 'families' in rule:
-            if pkgfamily not in rule['families']:
+        # match family
+        if 'family' in rule:
+            if pkgfamily not in rule['family']:
                 return False
 
         # match categories
         if 'category' in rule:
             catmatch = False
-            for category in rule['category']:
-                if category == pkgcategory:
-                    catmatch = True
-                    break
-
-            if not catmatch:
+            if pkgcategory not in rule['category']:
                 return False
 
         # match name
         if 'name' in rule:
-            if pkgname != rule['name']:
+            if pkgname not in rule['name']:
                 return False
 
         # match name patterns
@@ -86,7 +81,7 @@ class PackageTransformer:
 
         # match version
         if 'ver' in rule:
-            if pkgversion != rule['ver']:
+            if pkgversion not in rule['ver']:
                 return False
 
         # match version patterns
