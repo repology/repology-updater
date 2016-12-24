@@ -165,20 +165,22 @@ can be done with single command:
 
 | Repository                       | Name | Ver | Summary | Maint-r | Categ | WWW | License | Download |
 |----------------------------------|:----:|:---:|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
-| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     | ✔   |         |          |
-| Debian/Ubuntu                    | ✔    | ✔   |         | ✔       | ✔     | ✔   |         |          |
-| Gentoo                           | ✔    | ✔   |         | ✔       | ✔     |     |         |          |
-| pkgsrc                           | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
-| OpenBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| ALT Sisyphus                     | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
 | Arch                             | ✔    | ✔   | ✔       | ✔       |       | ✔   | ✔       |          |
 | CentOS, Fedora, Mageia, OpenSUSE | ✔    | ✔   | ✔       |         | ✔     | ✔   | ✔       |          |
-| Sisyphus                         | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
 | Chocolatey                       | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
-| SlackBuilds                      | ✔    | ✔   |         | ✔       | ✔     | ✔   |         | ✔        |
-| freshcode.club                   | ✔    | ✔   | ✔       | n/a     |       | ✔   |         |          |
 | CPAN                             | ✔    | ✔   |         | ✔       |       | ✔   |         |          |
-| PyPi                             | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
+| Debian, Ubuntu                   | ✔    | ✔   |         | ✔       | ✔     | ✔   |         |          |
 | F-Droid                          | ✔    | ✔   |         |         | ✔     | ✔   | ✔       |          |
+| FreeBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     | ✔   |         |          |
+| freshcode.club                   | ✔    | ✔   | ✔       | n/a     |       | ✔   |         |          |
+| Gentoo                           | ✔    | ✔   |         | ✔       | ✔     |     |         |          |
+| GoboLinux                        | ✔    | ✔   | ✔       |         |       | ✔   | ✔       |          |
+| OpenBSD                          | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| pkgsrc                           | ✔    | ✔   | ✔       | ✔       | ✔     |     |         |          |
+| PyPi                             | ✔    | ✔   | ✔       |         |       | ✔   |         |          |
+| SlackBuilds                      | ✔    | ✔   |         | ✔       | ✔     | ✔   |         | ✔        |
+| YACP                             | ✔    | ✔   |         |         |       |     |         |          |
 
 ### FreeBSD
 
