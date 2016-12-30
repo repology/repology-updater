@@ -29,6 +29,7 @@ from repology.package import *
 from repology.packageformatter import PackageFormatter
 from repology.packageproc import *
 from repology.metapackageproc import *
+from repology.webhelpers import maintainer_to_link
 
 # globals
 app = Flask(__name__)
@@ -101,6 +102,7 @@ app.jinja_env.filters['split'] = Split
 app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
+app.jinja_env.filters['maintainer_to_link'] = maintainer_to_link
 app.jinja_env.globals['url_for_self'] = url_for_self
 app.jinja_env.globals['next_letter'] = lambda letter : chr(ord(letter) + 1)
 app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']

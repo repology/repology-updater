@@ -18,18 +18,20 @@ Metapackage {{ name }}
 {% for package in packages %}
 {% if not loop.first and loop.index0 % 3 == 0 %}</div><div class="row">{% endif %}
 	<div class="col-md-4">
-		<div class="panel panel-primary">
+		<div class="panel {% if package.versionclass == 1 %}panel-success{% elif package.versionclass == 2 %}panel-danger{% else %}panel-default{% endif %}">
 			<div class="panel-heading">
-				{{ repometadata[package.repo].desc }}<br>
-				{% if package.versionclass == 1 %}
-					{% set versionclass = "good" %}
-				{% elif package.versionclass == 2 %}
-					{% set versionclass = "bad" %}
-				{% elif package.versionclass == 3 %}
-					{% set versionclass = "ignore" %}
-				{% endif %}
-				{{ package.name }}<br><span class="{{ versionclass }}">{{ package.version }}</span>
-				{% if package.origversion %}({{ package.origversion }}){% endif %}
+				<div class="repository-name">
+					{{ repometadata[package.repo].desc }}
+				</div>
+				<h3 class="package-name">
+					{{ package.name }}
+				</h3>
+				<div class="package-version">
+					{{ package.version }}
+					{% if package.origversion %}
+						({{ package.origversion }})
+					{% endif %}
+				</div>
 			</div>
 			<ul class="list-group">
 			{% if package.comment %}
@@ -39,23 +41,27 @@ Metapackage {{ name }}
 			{% endif %}
 			{% if package.maintainers %}
 				<li class="list-group-item"><b>Maintainer{% if package.maintainers|length > 1 %}s{% endif %}:</b>
-					<ul>
+					<ul class="list-package-details">
 					{% for maintainer in package.maintainers %}
+					{% if maintainer|maintainer_to_link %}
+						<li><a href="{{ maintainer|maintainer_to_link }}">{{ maintainer }}</a></li>
+					{% else %}
 						<li>{{ maintainer }}</li>
+					{% endif %}
 					{% endfor %}
 					</ul>
 				</li>
 			{% endif %}
 			{% if package.category %}
 				<li class="list-group-item"><b>Category:</b>
-					<ul>
+					<ul class="list-package-details">
 						<li>{{ package.category }}</li>
 					</ul>
 				</li>
 			{% endif %}
 			{% if package.licenses %}
 				<li class="list-group-item"><b>License{% if package.licenses|length > 1 %}s{% endif %}:</b>
-					<ul>
+					<ul class="list-package-details">
 						{% for license in package.licenses %}
 							<li>{{ license }}</li>
 						{% endfor %}
@@ -63,8 +69,8 @@ Metapackage {{ name }}
 				</li>
 			{% endif %}
 			{% if repometadata[package.repo].links %}
-				<li class="list-group-item"><b>Package link{% if repometadata[package.repo].links|length > 1 %}s{% endif %}:</b>
-					<ul>
+				<li class="list-group-item"><b>Package-related links:</b>
+					<ul class="list-package-details">
 						{% for link in repometadata[package.repo].links %}
 							<li><a href="{{ link.url|pkg_format(package) }}">{{ link.desc }}</a></li>
 						{% endfor %}
@@ -73,7 +79,7 @@ Metapackage {{ name }}
 			{% endif %}
 			{% if package.homepage %}
 				<li class="list-group-item"><b>Homepage:</b>
-					<ul>
+					<ul class="list-package-details">
 						<li>
 							<a href="{{ package.homepage }}">{{ package.homepage }}</a>
 						</li>
@@ -82,7 +88,7 @@ Metapackage {{ name }}
 			{% endif %}
 			{% if package.downloads %}
 				<li class="list-group-item"><b>Download(s):</b>
-					<ul>
+					<ul class="list-package-details">
 						{% for download in package.downloads %}
 							<li><a href="{{ download }}">{{ download }}</a></li>
 						{% endfor %}
