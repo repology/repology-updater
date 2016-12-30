@@ -19,26 +19,26 @@ About
 <h3>Purpose</h3>
 
 <ul>
-    <li>For users:
-        <ul>
-            <li>Compare completeness and freshness of package repositories, choose most up to date distro</li>
-            <li>Find out what repositories contain newest versions of packages you need</li>
-        </ul>
-    </li>
-    <li>For package/port maintainers:
-        <ul>
-            <li>Another way to track new releases of software you package</li>
-            <li>Compete with other distros in keeping up to date</li>
-            <li>Find fellow maintainers to resolve packaging problems together</li>
-            <li>Keep package naming and versioning schemes in sync to other repos for your and your user's convenience</li>
-        </ul>
-    </li>
-    <li>For software authors:
-        <ul>
-            <li>Keep track of how well your project is packaged</li>
-            <li>Keep in touch with your product package maintainers</li>
-        </ul>
-    </li>
+	<li>For users:
+		<ul>
+			<li>Compare completeness and freshness of package repositories, choose most up to date distro</li>
+			<li>Find out what repositories contain newest versions of packages you need</li>
+		</ul>
+	</li>
+	<li>For package/port maintainers:
+		<ul>
+			<li>Another way to track new releases of software you package</li>
+			<li>Compete with other distros in keeping up to date</li>
+			<li>Find fellow maintainers to resolve packaging problems together</li>
+			<li>Keep package naming and versioning schemes in sync to other repos for your and your user's convenience</li>
+		</ul>
+	</li>
+	<li>For software authors:
+		<ul>
+			<li>Keep track of how well your project is packaged</li>
+			<li>Keep in touch with your product package maintainers</li>
+		</ul>
+	</li>
 </ul>
 
 <h3>Status</h3>
@@ -69,17 +69,17 @@ versions of each package in each repo. Colors have following
 meanings:</p>
 
 <ul>
-    <li><span class="good">1.2.3</span> - package is at latest version among all repos. It's likely up to date.</li>
-    <li><span class="bad">1.2.3</span> - some other repository contain newer version of this package. It may need updating.</li>
+	<li><span class="good">1.2.3</span> - package is at latest version among all repos. It's likely up to date.</li>
+	<li><span class="bad">1.2.3</span> - some other repository contain newer version of this package. It may need updating.</li>
 	<li><span class="multi">1.2.3</span><sup>2</sup> - there are multiple packages with the same name in this repository, and one of the is at latest version, but others are not. It may indicate one of the following conditions:
-        <ul>
-            <li>There are unrelated packages with the same name (for example, <em>clementine</em> may be either X11 window manager, or music player, unrelated projects). The package should be split with renaming rule.</li>
-            <li>There are packages for legacy versions (e.g. Qt version 4 and 5). One of them <em>has</em> to be on older version, everything is fine.</li>
-            <li>There are multiple flavors of the same package (for example, Russian and French l10n packages for libreoffice) and some of them are outdated.</li>
-        </ul>
-    </li>
-    <li><span class="ignore">1.2.3</span> - package version is ignored. This may indicate that a specific repo uses broken versioning scheme which makes it impossible to compare it with other repos. Package or repository policy may require fixing.</li>
-    <li><span class="lonely">1.2.3</span> - package is present only in one repository, there's nothing to compare it to. This may mean a not-so-popular package which haven't made it into other repos yet, or an unique naming scheme, which may require a rule to be merged with differently named packages in other repos. This may be a package unique to specific repository either (e.g. FreeBSD-specific software in FreeBSD ports).</li>
+		<ul>
+			<li>There are unrelated packages with the same name (for example, <em>clementine</em> may be either X11 window manager, or music player, unrelated projects). The package should be split with renaming rule.</li>
+			<li>There are packages for legacy versions (e.g. Qt version 4 and 5). One of them <em>has</em> to be on older version, everything is fine.</li>
+			<li>There are multiple flavors of the same package (for example, Russian and French l10n packages for libreoffice) and some of them are outdated.</li>
+		</ul>
+	</li>
+	<li><span class="ignore">1.2.3</span> - package version is ignored. This may indicate that a specific repo uses broken versioning scheme which makes it impossible to compare it with other repos. Package or repository policy may require fixing.</li>
+	<li><span class="lonely">1.2.3</span> - package is present only in one repository, there's nothing to compare it to. This may mean a not-so-popular package which haven't made it into other repos yet, or an unique naming scheme, which may require a rule to be merged with differently named packages in other repos. This may be a package unique to specific repository either (e.g. FreeBSD-specific software in FreeBSD ports).</li>
 </ul>
 
 <h3>Updates</h3>

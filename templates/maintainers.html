@@ -11,19 +11,19 @@ Package maintainers
 {% block content %}
 
 <nav>
-    Pages:
-    <ul>
-        {% for p in range(0, num_pages) %}
-        <li><a href="{{ url_for_self(page=p) }}"{% if page|default(0) == p %} class="active"{% endif %}>{{ p }}</a></li>
-        {% endfor %}
-    </ul>
+	Pages:
+	<ul>
+		{% for p in range(0, num_pages) %}
+		<li><a href="{{ url_for_self(page=p) }}"{% if page|default(0) == p %} class="active"{% endif %}>{{ p }}</a></li>
+		{% endfor %}
+	</ul>
 </nav>
 
 <ul>
 {% for maintainer in maintainers %}
-    <li style="font-size: {{ 100 + ((maintainer.num_packages | sqrt) * 5) | clamp(0, 200) | round | int }}%">
-        <a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">{{ maintainer.maintainer }}</a> ({{ maintainer.num_packages }})
-    </li>
+	<li style="font-size: {{ 100 + ((maintainer.num_packages | sqrt) * 5) | clamp(0, 200) | round | int }}%">
+		<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">{{ maintainer.maintainer }}</a> ({{ maintainer.num_packages }})
+	</li>
 {% endfor %}
 </ul>
 
