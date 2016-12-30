@@ -20,8 +20,8 @@ Metapackage {{ name }}
 	<div class="col-md-4">
 		<div class="panel {% if package.versionclass == 1 %}panel-success{% elif package.versionclass == 2 %}panel-danger{% else %}panel-default{% endif %}">
 			<div class="panel-heading">
-				<div class="repository-name">
-					{{ repometadata[package.repo].desc }}
+				<div class="package-repository">
+					<a href="#" class="panel-heading-link">{{ repometadata[package.repo].desc }}</a>
 				</div>
 				<h3 class="package-name">
 					{{ package.name }}

@@ -7,9 +7,19 @@
 }
 
 .package-version {
+    margin-left: 1em;
 }
 
 .list-package-details {
     padding-left: 0;
     list-style: none;
+}
+
+.panel-heading-link, .panel-heading-link:hover, .panel-heading-link:active, .panel-heading-link:visited {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.panel-heading-link:hover {
+    text-decoration: none;
 }
