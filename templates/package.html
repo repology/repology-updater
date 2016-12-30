@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Metapackage {{ name }} - {{ super() }}
+{{ super() }}: packages for {{ name }}
 {% endblock %}
 
-{% block subheader %}
-Metapackage {{ name }}
+{% block header %}
+Packages for <strong>{{ name }}</strong>
 {% endblock %}
 
 {% block content %}
