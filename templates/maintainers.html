@@ -8,7 +8,13 @@
 Maintainers
 {% endblock %}
 
+{% block breadcrumbs %}
+<li><a href="{{ REPOLOGY_HOME }} ">Home</a></li>
+<li class="active">Maintainers</li>
+{% endblock %}
+
 {% block content %}
+<div class="container">
 
 <nav>
 	<ul class="pagination">
@@ -60,4 +66,5 @@ Maintainers
 {% endfor %}
 </div>
 
+</div>
 {% endblock %}

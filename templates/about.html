@@ -8,7 +8,13 @@
 About
 {% endblock %}
 
+{% block breadcrumbs %}
+<li><a href="{{ REPOLOGY_HOME }}">Home</a></li>
+<li class="active">About</li>
+{% endblock %}
+
 {% block content %}
+<div class="container">
 
 <article>
 
@@ -94,4 +100,5 @@ meanings:</p>
 
 </article>
 
+</div>
 {% endblock %}

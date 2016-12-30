@@ -8,7 +8,14 @@
 News
 {% endblock %}
 
+{% block breadcrumbs %}
+<li><a href="{{ REPOLOGY_HOME }}">Home</a></li>
+<li class="active">News</li>
+{% endblock %}
+
 {% block content %}
+<div class="container">
+
 <article><h3>2016-12-14</h3><p>
 	<ul>
 		<li>Major switch from static generated site to dynamic database backend.</li>
@@ -56,4 +63,6 @@ News
 		<li>Statistics page, news page.</li>
 	</ul>
 </p></article>
+
+</div>
 {% endblock %}

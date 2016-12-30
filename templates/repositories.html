@@ -8,7 +8,14 @@
 Repositories
 {% endblock %}
 
+{% block breadcrumbs %}
+<li><a href="{{ REPOLOGY_HOME }} ">Home</a></li>
+<li class="active">Repositories</li>
+{% endblock %}
+
 {% block content %}
+<div class="container">
+
 <ul>
 {% for reponame in reponames %}
 	<li>
@@ -16,4 +23,6 @@ Repositories
 	</li>
 {% endfor %}
 </ul>
+
+</div>
 {% endblock %}
