@@ -36,11 +36,9 @@ Maintainers
 		{% for maintainer in column %}
 		<tr>
 			<td>
-			{% if maintainer.maintainer|maintainer_to_link %}
-				<a href="{{ maintainer.maintainer|maintainer_to_link }}">{{ maintainer.maintainer }}</a>
-			{% else %}
-				{{ maintainer.maintainer }}
-			{% endif %}
+				<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
+					{{ maintainer.maintainer }}
+				</a>
 			</td>
 			<td>
 				<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
