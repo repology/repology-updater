@@ -23,3 +23,30 @@
 .panel-heading-link:hover {
     text-decoration: none;
 }
+
+.repology-footer {
+    background-color: #2A2730;
+    color: #99979C;
+    margin-top: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.repology-footer a:link, .repology-footer-links a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.repology-footer a:hover, .repology-footer-links a:active {
+    text-decoration: underline;
+}
+
+.repology-footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.repology-footer-links li {
+    display: inline;
+    margin-right: 1em;
+}
