@@ -1,0 +1,9 @@
+{% extends "metapackages.html" %}
+
+{% block title %}
+Repology: metapackages unique in repository {{ repometadata[repo].desc }}
+{% endblock %}
+
+{% block header %}
+Metapackages unique in repository <strong>{{ repometadata[repo].desc }}</strong>
+{% endblock %}

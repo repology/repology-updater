@@ -8,13 +8,6 @@
 Packages for <strong>{{ name }}</strong>
 {% endblock %}
 
-{% block breadcrumbs %}
-<li><a href="{{ REPOLOGY_HOME }} ">Home</a></li>
-<li><a href="url_for('metapackages_all')">Metapackages</a></li>
-<li><a href="url_for('metapackage', name=name)">{{ name }}</a></li>
-<li class="active">Packages</li>
-{% endblock %}
-
 {% block content %}
 <div class="container">
 
