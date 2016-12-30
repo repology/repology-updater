@@ -532,7 +532,7 @@ class Database:
             SELECT
                 maintainer,
                 num_packages,
-                num_metapackages
+                num_packages_outdated
             FROM maintainers
         """
 
@@ -554,7 +554,7 @@ class Database:
             {
                 'maintainer': row[0],
                 'num_packages': row[1],
-                'num_metapackages': row[2]
+                'num_packages_outdated': row[2]
             } for row in self.cursor.fetchall()
         ]
 

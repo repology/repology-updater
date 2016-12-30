@@ -23,12 +23,43 @@ Maintainers
 	</ul>
 </nav>
 
-<ul>
-{% for maintainer in maintainers %}
-	<li style="font-size: {{ 100 + ((maintainer.num_packages | sqrt) * 5) | clamp(0, 200) | round | int }}%">
-		<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">{{ maintainer.maintainer }}</a> ({{ maintainer.num_packages }})
-	</li>
+<div class="row">
+{% for column in maintainers|slice(2) %}
+<div class="col-md-6">
+	<table class="table table-striped table-condensed">
+		<tr>
+			<th>Maintainer</th>
+			<th>Total packages</th>
+			<th>Outdated packages</th>
+			<th>Percent up to date</th>
+		</tr>
+		{% for maintainer in column %}
+		<tr>
+			<td>
+			{% if maintainer.maintainer|maintainer_to_link %}
+				<a href="{{ maintainer.maintainer|maintainer_to_link }}">{{ maintainer.maintainer }}</a>
+			{% else %}
+				{{ maintainer.maintainer }}
+			{% endif %}
+			</td>
+			<td>
+				<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
+					{{ maintainer.num_packages }}
+				</a>
+			</td>
+			<td>
+				<a href="{{ url_for('metapackages_outdated_by_maintainer', maintainer=maintainer.maintainer) }}">
+					{{ maintainer.num_packages_outdated }}
+				</a>
+			</td>
+			<td>
+				{{ ((maintainer.num_packages - maintainer.num_packages_outdated) / (maintainer.num_packages|default(1,true)) * 100) | round(1) }}%
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
 {% endfor %}
-</ul>
+</div>
 
 {% endblock %}
