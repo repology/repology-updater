@@ -7,24 +7,17 @@ Metapackages index
 {% block content %}
 
 <nav>
-    Pages:
-    <ul>
-        {% if firstname %}
-            <li><a href="{{ url_for_self(bound="<"+firstname) }}">«</a></li>
-        {% endif %}
-        {% if lastname %}
-            <li><a href="{{ url_for_self(bound=">"+lastname) }}">»</a></li>
-        {% endif %}
-    </ul>
-    <ul>
-        <li><a href="{{ url_for_self(bound=None) }}"{% if not firstname or firstname < 'a' %} class="active"{% endif %}>0-9</a></li>
+    <ul class="pagination">
+        <li{% if not firstname %} class="disabled"{% endif %}><a href="{{ url_for_self(bound="<"+firstname) }}">&laquo;</a></li>
+        <li{% if not firstname or firstname < 'a' %} class="active"{% endif %}><a href="{{ url_for_self(bound=None) }}">0-9</a></li>
         {% for letter in "abcdefghijklmnopqrstuvwxyz" %}
-            <li>
-                <a href="{{ url_for_self(bound=letter) }}"{% if firstname and firstname >= letter and firstname < next_letter(letter) %} class="active"{% endif %}>
+            <li{% if firstname and firstname >= letter and firstname < next_letter(letter) %} class="active"{% endif %}>
+                <a href="{{ url_for_self(bound=letter) }}">
                     {{ letter|upper }}
                 </a>
             </li>
         {% endfor %}
+        <li{% if not lastname %} class="disabled"{% endif %}><a href="{{ url_for_self(bound=">"+lastname) }}">&raquo;</a></li>
     </ul>
 </nav>
 
