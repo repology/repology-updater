@@ -11,10 +11,14 @@ Maintainers
 {% block content %}
 
 <nav>
-	Pages:
-	<ul>
-		{% for p in range(0, num_pages) %}
-		<li><a href="{{ url_for_self(page=p) }}"{% if page|default(0) == p %} class="active"{% endif %}>{{ p }}</a></li>
+	<ul class="pagination">
+		<li{% if page is for_page('0') %} class="active"{% endif %}><a href="{{ url_for_self(page=None) }}">0-9</a></li>
+		{% for letter in "abcdefghijklmnopqrstuvwxyz" %}
+		<li{% if page is for_page(letter) %} class="active"{% endif %}>
+			<a href="{{ url_for_self(page=letter) }}">
+				{{ letter|upper }}
+			</a>
+		</li>
 		{% endfor %}
 	</ul>
 </nav>

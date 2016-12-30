@@ -29,7 +29,7 @@ from repology.package import *
 from repology.packageformatter import PackageFormatter
 from repology.packageproc import *
 from repology.metapackageproc import *
-from repology.webhelpers import maintainer_to_link
+from repology.webhelpers import *
 
 # globals
 app = Flask(__name__)
@@ -103,6 +103,7 @@ app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
 app.jinja_env.filters['maintainer_to_link'] = maintainer_to_link
+app.jinja_env.tests['for_page'] = for_page
 app.jinja_env.globals['url_for_self'] = url_for_self
 app.jinja_env.globals['next_letter'] = lambda letter : chr(ord(letter) + 1)
 app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']
@@ -289,16 +290,14 @@ def metapackages_outdated_by_maintainer(maintainer, bound=None):
     return metapackages_generic(bound, MaintainerOutdatedQueryFilter(maintainer))
 
 @app.route("/maintainers/")
-@app.route("/maintainers/<int:page>/")
-def maintainers(page=0):
-    maintainers_count = get_db().GetMaintainersCount()
-    maintainers = get_db().GetMaintainers(offset = page * app.config['PER_PAGE'], limit = app.config['PER_PAGE'])
+@app.route("/maintainers/<page>/")
+def maintainers(page=None):
+    maintainers = get_db().GetMaintainersByLetter(page)
 
     return flask.render_template(
         "maintainers.html",
         maintainers=maintainers,
-        page=page,
-        num_pages=((maintainers_count + app.config['PER_PAGE'] - 1) // app.config['PER_PAGE'])
+        page=page
     )
 
 @app.route("/metapackage/<name>")

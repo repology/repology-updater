@@ -27,3 +27,12 @@ def maintainer_to_link(maintainer):
         return "http://search.cpan.org/~" + maintainer[:-5]
     else:
         return None
+
+
+def for_page(value, letter=None):
+    if letter is None or letter == '0':
+        return not value or value < 'a'
+    elif letter >= 'z':
+        return value and value >= 'z'
+    else:
+        return value and value >= letter and value < chr(ord(letter) + 1)

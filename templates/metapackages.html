@@ -13,9 +13,9 @@ Metapackages
 <nav>
 	<ul class="pagination">
 		<li{% if not firstname %} class="disabled"{% endif %}><a href="{{ url_for_self(bound="<"+firstname) }}">&laquo;</a></li>
-		<li{% if not firstname or firstname < 'a' %} class="active"{% endif %}><a href="{{ url_for_self(bound=None) }}">0-9</a></li>
+		<li{% if firstname is for_page('0') %} class="active"{% endif %}><a href="{{ url_for_self(bound=None) }}">0-9</a></li>
 		{% for letter in "abcdefghijklmnopqrstuvwxyz" %}
-			<li{% if firstname and firstname >= letter and firstname < next_letter(letter) %} class="active"{% endif %}>
+			<li{% if firstname is for_page(letter) %} class="active"{% endif %}>
 				<a href="{{ url_for_self(bound=letter) }}">
 					{{ letter|upper }}
 				</a>
