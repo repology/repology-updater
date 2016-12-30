@@ -59,12 +59,8 @@
 	</nav>
 </header>
 
-<div class="header-stripe-2">
-	<div class="container">
-		<header>
-			<h2>{% block subheader %}{% endblock %}</h2>
-		</heaeder>
-	</div>
+<div class="container">
+	<h1>{% block subheader %}{% endblock %}</h1>
 </div>
 
 <script src="{{ url_for("static", filename="jquery-3.1.1.min.js") }}"></script>
