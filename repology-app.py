@@ -39,6 +39,7 @@ app.config.from_pyfile('repology.conf', silent=True)
 app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 
 repoman = RepositoryManager(app.config['REPOS_PATH'], "dummy") # XXX: should not construct fetchers and parsers here
+repometadata = repoman.GetMetadata();
 
 # globals
 def SpanTrim(value, maxlength):
@@ -108,6 +109,7 @@ app.jinja_env.globals['url_for_self'] = url_for_self
 app.jinja_env.globals['next_letter'] = lambda letter : chr(ord(letter) + 1)
 app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']
 app.jinja_env.globals['REPOLOGY_HOME'] = app.config['REPOLOGY_HOME']
+app.jinja_env.globals['repometadata'] = repometadata
 
 def get_db():
     if not hasattr(flask.g, 'database'):
@@ -205,7 +207,6 @@ def metapackages_generic(bound, *filters, template='metapackages.html'):
         template,
         reponames=reponames,
         summaries=summaries,
-        repometadata=repoman.GetMetadata(),
         firstname=firstname,
         lastname=lastname,
         search=search
@@ -214,7 +215,6 @@ def metapackages_generic(bound, *filters, template='metapackages.html'):
 def repositories_generic(template='repositories.html'):
     return flask.render_template(template,
         reponames=repoman.GetNames(app.config['REPOSITORIES']),
-        repometadata=repoman.GetMetadata(),
     )
 
 @app.route("/") # XXX: redirect to metapackages/all?
@@ -310,7 +310,6 @@ def metapackage(name):
 @app.route("/badge/vertical-allrepos/<name>.svg")
 def badge_vertical_allrepos(name):
     summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
-    repometadata = repoman.GetMetadata();
 
     repostates = []
     for reponame, summary in summaries.items():
@@ -357,7 +356,6 @@ def statistics():
     return flask.render_template(
         "statistics.html",
         reponames=repoman.GetNames(app.config['REPOSITORIES']),
-        repometadata=repoman.GetMetadata(),
         repostats=get_db().GetRepositories(),
         num_metapackages=get_db().GetMetapackagesCount()
     )
