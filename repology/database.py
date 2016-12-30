@@ -527,6 +527,37 @@ class Database:
             } for row in self.cursor.fetchall()
         ]
 
+    def GetMaintainersByLetter(self, letter=None):
+        request = """
+            SELECT
+                maintainer,
+                num_packages,
+                num_metapackages
+            FROM maintainers
+        """
+
+        args = []
+        if letter:
+            letter = letter.lower()[0]
+        if not letter or letter < 'a':
+            request += " WHERE maintainer < 'a'"
+        elif letter >= 'z':
+            request += " WHERE maintainer >= 'z'"
+        else:
+            request += " WHERE maintainer >= %s"
+            request += " AND maintainer < %s"
+            args += [ letter, chr(ord(letter) + 1) ]
+
+        self.cursor.execute(request, args)
+
+        return [
+            {
+                'maintainer': row[0],
+                'num_packages': row[1],
+                'num_metapackages': row[2]
+            } for row in self.cursor.fetchall()
+        ]
+
     def GetRepositories(self):
         self.cursor.execute("""
             SELECT
