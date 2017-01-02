@@ -1,0 +1,31 @@
+[pull]
+        rebase = true
+
+[push]
+        default = matching
+
+[color]
+        ui = auto
+
+[merge]
+        commit = no
+
+[alias]
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+        br = branch -vva
+        st = status
+        ci = commit
+        co = checkout
+        unstage = reset HEAD --
+
+[transfer]
+        fsckobjects = true
+
+[fetch]
+        fsckobjects = true
+
+[receive]
+        fsckobjects = true
+
+[diff]
+        noprefix = true

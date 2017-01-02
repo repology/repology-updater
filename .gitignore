@@ -3,3 +3,5 @@ __pycache__
 helpers/rpmcat/rpmcat
 testdata/*.packages
 repology.conf
+.vagrant
+playbook.retry

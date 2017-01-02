@@ -1,0 +1,72 @@
+---
+# This playbook will install repology and set it up
+
+- name: Install required packages
+  pkgng: name={{ item }} state=present
+  with_items:
+  - bsdstats
+  - cowsay
+  - rubygem-lolcat
+  - vim-lite
+  - py27-powerline-status
+  - py27-psutil
+  - zsh
+  - git
+  - hub
+  - tmate
+  - tmux
+  - python3
+  - py34-yaml
+  - py34-requests
+  - wget
+  - git
+  - rpm4
+  - pkgconf
+  - postgresql95-client
+  - postgresql95-server
+
+- name: Setup .zshrc
+  copy: src=zshrc dest=/home/vagrant/.zshrc mode=0644
+
+- name: Setup .gitconfig
+  copy: src=gitconfig dest=/home/vagrant/.gitconfig mode=0644
+
+- name: Setup .tmux.conf
+  copy: src=tmux_conf dest=/home/vagrant/.tmux.conf mode=0644
+
+- name: set shell
+  user: name=vagrant shell=/usr/local/bin/zsh
+
+- name: clone repo
+  git:
+    repo: https://github.com/AMDmi3/repology.git
+    dest: /repology/checkout
+
+- pip:
+    name: flask
+    virtualenv: /repology/venv
+    virtualenv_site_packages: yes
+    virtualenv_command: pyvenv-3.4
+
+- pip:
+    name: psycopg2
+    virtualenv: /repology/venv
+    virtualenv_site_packages: yes
+    virtualenv_command: pyvenv-3.4
+
+- pip:
+    name: pyyaml
+    virtualenv: /repology/venv
+    virtualenv_site_packages: yes
+    virtualenv_command: pyvenv-3.4
+
+- pip:
+    name: requests
+    virtualenv: /repology/venv
+    virtualenv_site_packages: yes
+    virtualenv_command: pyvenv-3.4
+
+- name: Enable services
+  command: sysrc {{ item }}_enable=yes
+  with_items:
+  - postgresql
