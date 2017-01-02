@@ -45,6 +45,7 @@ Mandatory:
 - [Python](https://www.python.org/) 3.x
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [requests](http://python-requests.org/)
+- Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
 
 Optional, needed for parsing some repositories:
 
