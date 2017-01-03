@@ -22,14 +22,15 @@ from repology.subprocess import RunSubprocess
 
 
 class GitFetcher():
-    def __init__(self, url):
+    def __init__(self, url, branch="master"):
         self.url = url
+        self.branch = branch
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
             RunSubprocess(["git", "clone", "--progress", "--depth=1", self.url, statepath], logger=logger)
         elif update:
             RunSubprocess(["git", "fetch", "--progress"], cwd=statepath, logger=logger)
-            RunSubprocess(["git", "reset", "--hard", "origin/master"], cwd=statepath, logger=logger)
+            RunSubprocess(["git", "reset", "--hard", "origin/" + self.branch], cwd=statepath, logger=logger)
         else:
             logger.Log("no update requested, skipping")
