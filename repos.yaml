@@ -329,6 +329,7 @@
       fetcher: Git
       parser: GentooGit
       url: https://github.com/gentoo-mirror/gentoo.git
+      branch: stable
   links:
     - desc: Package details on packages.gentoo.org
       url: 'https://packages.gentoo.org/packages/{category}/{name}'
