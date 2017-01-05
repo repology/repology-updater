@@ -50,3 +50,11 @@
     display: inline;
     margin-right: 1em;
 }
+
+.navbar-separator-at-right {
+    border-right: 1px dotted #e7e7e7;
+}
+
+.navbar-separator-at-left {
+    border-left: 1px dotted #e7e7e7;
+}
