@@ -58,25 +58,25 @@ Metapackages
 			<th></th>
 			{% for reponame in reponames %}
 				<th>
-					{{ repometadata[reponame].desc.split(' ')|spantrim(8)|join('<br>')|safe }}
+					{{ repometadata[reponame].desc }}
 				</th>
 			{% endfor %}
 		</tr>
 		{% endif %}
 		<tr>
-			<td><a href="{{ url_for("metapackage_packages", name=metapackagename) }}">{{ metapackagename|spantrim(20)|safe }}</a></td>
+			<td><a href="{{ url_for("metapackage_packages", name=metapackagename) }}">{{ metapackagename }}</a></td>
 			{% for reponame in reponames %}
 				{% set summary = summaries[reponame] %}
 				{% if summary is defined %}
 					<td>
-						<span class="version {{ summary.versionclass|repositoryversionclass2css }}">
+						<span class="version version-{{ summary.versionclass|css_for_summary_versionclass }}">
 							{%- if repometadata[reponame].links -%}
 								<a href="{{ repometadata[reponame].links[0].url|pkg_format(summary.bestpackage) }}">
 							{%- endif -%}
 							{%- if summary.numpackages > 1 -%}
-								{{- summary.version|spantrim(8)|safe -}}
+								{{- summary.version -}}
 							{%- else -%}
-								{{- summary.version|spantrim(10)|safe -}}
+								{{- summary.version -}}
 							{%- endif -%}
 							{%- if repometadata[reponame].links -%}
 								</a>

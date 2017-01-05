@@ -63,26 +63,26 @@ def pkg_format(value, pkg):
     return PackageFormatter().format(value, pkg)
 
 
-def PackageVersionClass2CSSClass(value):
+def css_for_package_versionclass(value):
     if value == PackageVersionClass.newest:
-        return 'good'
+        return 'newest'
     elif value == PackageVersionClass.outdated:
-        return 'bad'
+        return 'outdated'
     elif value == PackageVersionClass.ignored:
-        return 'ignore'
+        return 'ignored'
 
 
-def RepositoryVersionClass2CSSClass(value):
+def css_for_summary_versionclass(value):
     if value == RepositoryVersionClass.newest:
-        return 'good'
+        return 'newest'
     elif value == RepositoryVersionClass.outdated:
-        return 'bad'
+        return 'outdated'
     elif value == RepositoryVersionClass.mixed:
-        return 'multi'
+        return 'mixer'
     elif value == RepositoryVersionClass.ignored:
-        return 'ignore'
+        return 'ignored'
     elif value == RepositoryVersionClass.lonely:
-        return 'lonely'
+        return 'unique'
 
 
 def url_for_self(**args):
