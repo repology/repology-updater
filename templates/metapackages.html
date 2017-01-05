@@ -16,6 +16,8 @@ Metapackages
 		<li{% if not firstname %} class="disabled"{% endif %}>
 		{% if firstname %}
 			<a href="{{ url_for_self(bound="<"+firstname) }}">&laquo;</a>
+		{% else %}
+			<span>&laquo;</span>
 		{% endif %}
 		</li>
 		<li{% if firstname is for_page('0') %} class="active"{% endif %}><a href="{{ url_for_self(bound=None) }}">0-9</a></li>
@@ -29,6 +31,8 @@ Metapackages
 		<li{% if not lastname %} class="disabled"{% endif %}>
 		{% if lastname %}
 			<a href="{{ url_for_self(bound=">"+lastname) }}">&raquo;</a>
+		{% else %}
+			<span>&raquo;</span>
 		{% endif %}
 		</li>
 	</ul>
