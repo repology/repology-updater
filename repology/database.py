@@ -566,7 +566,8 @@ class Database:
                 num_packages_newest,
                 num_packages_outdated,
                 num_packages_ignored,
-                last_update
+                last_update at time zone 'UTC',
+                now() - last_update
             FROM repositories
         """)
 
@@ -576,6 +577,7 @@ class Database:
                 'num_packages_newest': row[2],
                 'num_packages_outdated': row[3],
                 'num_packages_ignored': row[4],
-                'last_update': row[5]
+                'last_update_utc': row[5],
+                'since_last_update': row[6]
             } for row in self.cursor.fetchall()
         }
