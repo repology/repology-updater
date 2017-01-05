@@ -218,6 +218,7 @@ class RepositoryManager:
         return {repository['name']: {
             'incomplete': repository.get('incomplete', False),
             'shadow': repository.get('shadow', False),
+            'url': repository.get('url'),
             'links': repository.get('links', []),
             'family': repository['family'],
             'desc': repository['desc'],

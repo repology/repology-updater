@@ -17,12 +17,18 @@ Repositories
 
 	<table class="table table-striped">
 		<tr>
-			<th>Repository</th>
+			<th style="text-align: right">Repository</th>
 			<th>Metapackage lists</th>
 		</tr>
 	{% for reponame in column %}
 		<tr>
-			<td>{{ repometadata[reponame].desc}}</td>
+			<td  style="text-align: right">
+			{% if repometadata[reponame].url %}
+				<a href="{{ repometadata[reponame].url }}">{{ repometadata[reponame].desc }}</a>
+			{% else %}
+				{{ repometadata[reponame].desc}}
+			{% endif %}
+			</td>
 			<td style="white-space: nowrap;">
 				<a href="{{ url_for('metapackages_in_repo', repo=reponame) }}">Present</a>
 				<a href="{{ url_for('metapackages_not_in_repo', repo=reponame) }}">Absent</a>

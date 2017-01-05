@@ -25,7 +25,13 @@ Statistics
 	</tr>
 	{% for reponame in reponames %}
 	<tr>
-		<td style="text-align: right">{{ repometadata[reponame].desc }}</td>
+		<td  style="text-align: right">
+		{% if repometadata[reponame].url %}
+			<a href="{{ repometadata[reponame].url }}">{{ repometadata[reponame].desc }}</a>
+		{% else %}
+			{{ repometadata[reponame].desc}}
+		{% endif %}
+		</td>
 		<td style="text-align: center"><span>{{ repostats[reponame].num_packages }}</span></td>
 		<td style="text-align: center"><span class="version version-newest">{{ repostats[reponame].num_packages_newest }}</span></td>
 		<td style="text-align: center"><span class="version version-newest">{{ (repostats[reponame].num_packages_newest / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
