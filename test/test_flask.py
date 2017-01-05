@@ -74,8 +74,7 @@ class TestFlask(unittest.TestCase):
         self.checkurl('/metapackage/nonexistent', has=['No packages found'])
 
     def test_maintaners(self):
-        self.checkurl('/maintainers/', has=['amdmi3@freebsd.org'])
-        self.checkurl('/maintainers/0/', has=['amdmi3@freebsd.org'])
+        self.checkurl('/maintainers/a/', has=['amdmi3@freebsd.org'])
 
     def test_metapackages(self):
         self.checkurl('/metapackages/', has=['kiconvtool', '0.97'])
