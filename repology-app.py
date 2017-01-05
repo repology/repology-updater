@@ -46,7 +46,6 @@ app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSS
 app.jinja_env.filters['maintainer_to_link'] = maintainer_to_link
 app.jinja_env.tests['for_page'] = for_page
 app.jinja_env.globals['url_for_self'] = url_for_self
-app.jinja_env.globals['next_letter'] = lambda letter : chr(ord(letter) + 1)
 app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']
 app.jinja_env.globals['REPOLOGY_HOME'] = app.config['REPOLOGY_HOME']
 app.jinja_env.globals['repometadata'] = repometadata
