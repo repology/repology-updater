@@ -30,7 +30,7 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li{{ classactive_if_endpoint('metapackages_all') }}><a href="{{ url_for('metapackages_unique') }}">All metapackages</a></li>
+					<li{{ classactive_if_endpoint('metapackages_all') }}><a href="{{ url_for('metapackages_all') }}">All metapackages</a></li>
 					<li{{ classactive_if_endpoint('metapackages_unique') }}><a href="{{ url_for('metapackages_unique') }}">Unique</a></li>
 					<li{{ classactive_if_endpoint('metapackages_widespread') }}><a href="{{ url_for('metapackages_widespread') }}">Widespread</a></li>
 				</ul>
