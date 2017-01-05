@@ -23,13 +23,13 @@ Badges
 
 <p>HTML code:
 <pre>
-&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name='METAPACKAGE') }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name='METAPACKAGE')}}&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage_packages', name='METAPACKAGE') }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name='METAPACKAGE')}}&quot;&gt;&lt;/a&gt;
 </pre>
 </p>
 
 <p>Markdown code:
 <pre>
-[![Packaging status]({{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name='METAPACKAGE') }}))]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name='METAPACKAGE') }})
+[![Packaging status]({{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name='METAPACKAGE') }}))]({{ REPOLOGY_HOME }}{{ url_for('metapackage_packages', name='METAPACKAGE') }})
 </pre>
 </p>
 
@@ -41,13 +41,13 @@ Badges
 
 <p>HTML code:
 <pre>
-&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name='METAPACKAGE') }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_tiny_packages', name='METAPACKAGE')}}&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage_packages', name='METAPACKAGE') }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_tiny_packages', name='METAPACKAGE')}}&quot;&gt;&lt;/a&gt;
 </pre>
 </p>
 
 <p>Markdown code:
 <pre>
-[![Packaging status]({{ REPOLOGY_HOME }}{{ url_for('badge_tiny_packages', name='METAPACKAGE') }}))]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name='METAPACKAGE') }})
+[![Packaging status]({{ REPOLOGY_HOME }}{{ url_for('badge_tiny_packages', name='METAPACKAGE') }}))]({{ REPOLOGY_HOME }}{{ url_for('metapackage_packages', name='METAPACKAGE') }})
 </pre>
 </p>
 
