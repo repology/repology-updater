@@ -36,6 +36,9 @@ sequence:
               "compression":
                 type: str
                 required: no
+              "branch":
+                type: str
+                required: no
       "shadow":
         type: bool
         required: no
