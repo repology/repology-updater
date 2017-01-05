@@ -27,25 +27,35 @@ from repology.packageproc import *
 from repology.metapackageproc import *
 from repology.template_helpers import *
 
-# globals
+# create application and handle configuration
 app = flask.Flask(__name__)
 
 app.config.from_pyfile('repology.conf.default')
 app.config.from_pyfile('repology.conf', silent=True)
 app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 
+# global repology objects
 repoman = RepositoryManager(app.config['REPOS_PATH'], "dummy") # XXX: should not construct fetchers and parsers here
 repometadata = repoman.GetMetadata();
 
+# templates: tuning
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+
+# templates: custom filters
 app.jinja_env.filters['spantrim'] = SpanTrim
 app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
 app.jinja_env.filters['maintainer_to_link'] = maintainer_to_link
+
+# templates: custom tests
 app.jinja_env.tests['for_page'] = for_page
+
+# templates: custom global functions
 app.jinja_env.globals['url_for_self'] = url_for_self
+
+# templates: custom global data
 app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']
 app.jinja_env.globals['REPOLOGY_HOME'] = app.config['REPOLOGY_HOME']
 app.jinja_env.globals['repometadata'] = repometadata
