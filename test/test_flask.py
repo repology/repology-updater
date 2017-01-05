@@ -76,6 +76,9 @@ class TestFlask(unittest.TestCase):
     def test_maintaners(self):
         self.checkurl('/maintainers/a/', has=['amdmi3@freebsd.org'])
 
+    def test_repositories(self):
+        self.checkurl('/repositories/', has=['FreeBSD'])
+
     def test_metapackages(self):
         self.checkurl('/metapackages/', has=['kiconvtool', '0.97'])
 
@@ -87,13 +90,10 @@ class TestFlask(unittest.TestCase):
         self.checkurl('/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
         self.checkurl('/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
 
-        self.checkurl('/metapackages/in-repo/', has=['FreeBSD'])
         self.checkurl('/metapackages/in-repo/freebsd/', has=['kiconvtool'])
 
-        self.checkurl('/metapackages/not-in-repo/', has=['FreeBSD'])
         self.checkurl('/metapackages/not-in-repo/freebsd/', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
 
-        self.checkurl('/metapackages/unique-in-repo/', has=['FreeBSD'])
         self.checkurl('/metapackages/unique-in-repo/freebsd/', has=['kiconvtool'])
 
         self.checkurl('/metapackages/unique/', has=['kiconvtool'])

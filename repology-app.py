@@ -213,11 +213,6 @@ def metapackages_generic(bound, *filters, template='metapackages.html', extravar
         **(extravars if extravars else {})
     )
 
-def repositories_generic(template='repositories.html'):
-    return flask.render_template(template,
-        reponames=repoman.GetNames(app.config['REPOSITORIES']),
-    )
-
 @app.route("/") # XXX: redirect to metapackages/all?
 @app.route("/metapackages/") # XXX: redirect to metapackages/all?
 @app.route("/metapackages/all/")
@@ -246,76 +241,71 @@ def metapackages_widespread(bound=None):
         template="metapackages-widespread.html"
     )
 
-@app.route("/metapackages/in-repo/")
 @app.route("/metapackages/in-repo/<repo>/")
 @app.route("/metapackages/in-repo/<repo>/<bound>/")
-def metapackages_in_repo(repo=None, bound=None):
-    if repo and repo in repometadata:
-        return metapackages_generic(
-            bound,
-            InRepoQueryFilter(repo),
-            template="metapackages-in-repo.html",
-            extravars={'repo': repo}
-        )
-    else:
-        return repositories_generic()
+def metapackages_in_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
 
-@app.route("/metapackages/outdated-in-repo/")
+    return metapackages_generic(
+        bound,
+        InRepoQueryFilter(repo),
+        template="metapackages-in-repo.html",
+        extravars={'repo': repo}
+    )
+
 @app.route("/metapackages/outdated-in-repo/<repo>/")
 @app.route("/metapackages/outdated-in-repo/<repo>/<bound>/")
-def metapackages_outdated_in_repo(repo=None, bound=None):
-    if repo and repo in repometadata:
-        return metapackages_generic(
-            bound,
-            OutdatedInRepoQueryFilter(repo),
-            template="metapackages-outdated-in-repo.html",
-            extravars={'repo': repo}
-        )
-    else:
-        return repositories_generic()
+def metapackages_outdated_in_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
 
-@app.route("/metapackages/not-in-repo/")
+    return metapackages_generic(
+        bound,
+        OutdatedInRepoQueryFilter(repo),
+        template="metapackages-outdated-in-repo.html",
+        extravars={'repo': repo}
+    )
+
 @app.route("/metapackages/not-in-repo/<repo>/")
 @app.route("/metapackages/not-in-repo/<repo>/<bound>/")
-def metapackages_not_in_repo(repo=None, bound=None):
-    if repo and repo in repometadata:
-        return metapackages_generic(
-            bound,
-            NotInRepoQueryFilter(repo),
-            template="metapackages-not-in-repo.html",
-            extravars={'repo': repo}
-        )
-    else:
-        return repositories_generic()
+def metapackages_not_in_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
 
-@app.route("/metapackages/candidates-for-repo/")
+    return metapackages_generic(
+        bound,
+        NotInRepoQueryFilter(repo),
+        template="metapackages-not-in-repo.html",
+        extravars={'repo': repo}
+    )
+
 @app.route("/metapackages/candidates-for-repo/<repo>/")
 @app.route("/metapackages/candidates-for-repo/<repo>/<bound>/")
-def metapackages_candidates_for_repo(repo=None, bound=None):
-    if repo and repo in repometadata:
-        return metapackages_generic(
-            bound,
-            InNumFamiliesQueryFilter(more=5),
-            template="metapackages-candidates-for-repo.html",
-            extravars={'repo': repo}
-        )
-    else:
-        return repositories_generic()
+def metapackages_candidates_for_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
 
-@app.route("/metapackages/unique-in-repo/")
+    return metapackages_generic(
+        bound,
+        InNumFamiliesQueryFilter(more=5),
+        template="metapackages-candidates-for-repo.html",
+        extravars={'repo': repo}
+    )
+
 @app.route("/metapackages/unique-in-repo/<repo>/")
 @app.route("/metapackages/unique-in-repo/<repo>/<bound>/")
-def metapackages_unique_in_repo(repo=None, bound=None):
-    if repo and repo in repometadata:
-        return metapackages_generic(
-            bound,
-            InRepoQueryFilter(repo),
-            InNumFamiliesQueryFilter(less=1),
-            template="metapackages-unique-in-repo.html",
-            extravars={'repo': repo}
-        )
-    else:
-        return repositories_generic()
+def metapackages_unique_in_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
+
+    return metapackages_generic(
+        bound,
+        InRepoQueryFilter(repo),
+        InNumFamiliesQueryFilter(less=1),
+        template="metapackages-unique-in-repo.html",
+        extravars={'repo': repo}
+    )
 
 @app.route("/metapackages/by-maintainer/<maintainer>/")
 @app.route("/metapackages/by-maintainer/<maintainer>/<bound>/")
@@ -340,12 +330,19 @@ def metapackages_outdated_by_maintainer(maintainer, bound=None):
 @app.route("/maintainers/")
 @app.route("/maintainers/<page>/")
 def maintainers(page=None):
-    maintainers = get_db().GetMaintainersByLetter(page)
+    maintainers = get_db().GetMaintainersByLetter(page) # handles page sanity inside
 
     return flask.render_template(
         "maintainers.html",
         maintainers=maintainers,
         page=page
+    )
+
+@app.route("/repositories/")
+def repositories():
+    return flask.render_template(
+        "repositories.html",
+        reponames=repoman.GetNames(app.config['REPOSITORIES']),
     )
 
 @app.route("/metapackage/<name>")
