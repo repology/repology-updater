@@ -57,9 +57,6 @@ def SpanTrim(value, maxlength):
     # we assume ellipsis take ~2 char width
     return "<span title=\"%s\">%s…</span>" % (value, trimmed)
 
-def Split(value, sep):
-    return value.split(sep)
-
 def pkg_format(value, pkg):
     return PackageFormatter().format(value, pkg)
 
@@ -89,7 +86,6 @@ def url_for_self(**args):
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 app.jinja_env.filters['spantrim'] = SpanTrim
-app.jinja_env.filters['split'] = Split
 app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
 app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass

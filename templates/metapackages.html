@@ -58,7 +58,7 @@ Metapackages
 			<th></th>
 			{% for reponame in reponames %}
 				<th>
-					{{ repometadata[reponame].desc|split(' ')|spantrim(8)|join('<br>')|safe }}
+					{{ repometadata[reponame].desc.split(' ')|spantrim(8)|join('<br>')|safe }}
 				</th>
 			{% endfor %}
 		</tr>
