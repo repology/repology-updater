@@ -43,7 +43,6 @@ app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
 # templates: custom filters
-app.jinja_env.filters['spantrim'] = SpanTrim
 app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['css_for_package_versionclass'] = css_for_package_versionclass
 app.jinja_env.filters['css_for_summary_versionclass'] = css_for_summary_versionclass

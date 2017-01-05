@@ -42,23 +42,6 @@ def for_page(value, letter=None):
         return value and value >= letter and value < chr(ord(letter) + 1)
 
 
-def SpanTrim(value, maxlength):
-    # support lists as well
-    if type(value) is list:
-        return [SpanTrim(v, maxlength) for v in value]
-
-    if len(value) <= maxlength:
-        return value
-
-    # no point in leaving dot just before ellipsis
-    trimmed = value[0:maxlength-2]
-    while trimmed.endswith('.'):
-        trimmed = trimmed[0:-1]
-
-    # we assume ellipsis take ~2 char width
-    return "<span title=\"%s\">%s…</span>" % (value, trimmed)
-
-
 def pkg_format(value, pkg):
     return PackageFormatter().format(value, pkg)
 
