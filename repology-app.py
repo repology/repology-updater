@@ -19,19 +19,16 @@
 
 import json
 import flask
-from flask import Flask
 
 from repology.database import Database
 from repology.queryfilters import *
 from repology.repoman import RepositoryManager
-from repology.package import *
-from repology.packageformatter import PackageFormatter
 from repology.packageproc import *
 from repology.metapackageproc import *
-from repology.webhelpers import *
+from repology.template_helpers import *
 
 # globals
-app = Flask(__name__)
+app = flask.Flask(__name__)
 
 app.config.from_pyfile('repology.conf.default')
 app.config.from_pyfile('repology.conf', silent=True)
@@ -39,49 +36,6 @@ app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 
 repoman = RepositoryManager(app.config['REPOS_PATH'], "dummy") # XXX: should not construct fetchers and parsers here
 repometadata = repoman.GetMetadata();
-
-# globals
-def SpanTrim(value, maxlength):
-    # support lists as well
-    if type(value) is list:
-        return [SpanTrim(v, maxlength) for v in value]
-
-    if len(value) <= maxlength:
-        return value
-
-    # no point in leaving dot just before ellipsis
-    trimmed = value[0:maxlength-2]
-    while trimmed.endswith('.'):
-        trimmed = trimmed[0:-1]
-
-    # we assume ellipsis take ~2 char width
-    return "<span title=\"%s\">%s…</span>" % (value, trimmed)
-
-def pkg_format(value, pkg):
-    return PackageFormatter().format(value, pkg)
-
-def PackageVersionClass2CSSClass(value):
-    if value == PackageVersionClass.newest:
-        return 'good'
-    elif value == PackageVersionClass.outdated:
-        return 'bad'
-    elif value == PackageVersionClass.ignored:
-        return 'ignore'
-
-def RepositoryVersionClass2CSSClass(value):
-    if value == RepositoryVersionClass.newest:
-        return 'good'
-    elif value == RepositoryVersionClass.outdated:
-        return 'bad'
-    elif value == RepositoryVersionClass.mixed:
-        return 'multi'
-    elif value == RepositoryVersionClass.ignored:
-        return 'ignore'
-    elif value == RepositoryVersionClass.lonely:
-        return 'lonely'
-
-def url_for_self(**args):
-    return flask.url_for(flask.request.endpoint, **dict(flask.request.view_args, **args))
 
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
