@@ -354,10 +354,6 @@ def news():
 def about():
     return flask.render_template("about.html")
 
-@app.route("/badges")
-def badges():
-    return flask.render_template("badges.html")
-
 @app.route("/statistics")
 def statistics():
     return flask.render_template(
