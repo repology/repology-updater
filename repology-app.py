@@ -294,6 +294,10 @@ def repositories():
     )
 
 @app.route("/metapackage/<name>")
+def metapackage(name):
+    # metapackage landing page; just redirect to packages, may change in future
+    return flask.redirect(flask.url_for('metapackage_packages', 303))
+
 @app.route("/metapackage/<name>/packages")
 def metapackage_packages(name):
     packages = get_db().GetMetapackage(name)
