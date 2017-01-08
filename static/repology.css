@@ -99,3 +99,9 @@
 .version-ignored {
     background-color: #777777;
 }
+
+/* XXX: check if bootstrap h1.pageheader margin is always 40px */
+.pageheader-right {
+	float: right;
+	margin-top: 40px;
+}

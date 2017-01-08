@@ -1,1 +1,9 @@
 {% extends "layout.html" %}
+
+{% block preheader %}
+<div class="btn-group pageheader-right">
+	<a href="{{ url_for("metapackage_packages", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_packages" %} active{% endif %}">Packages</a>
+	<a href="{{ url_for("metapackage_information", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_information" %} active{% endif %}">Information</a>
+	<a href="{{ url_for("metapackage_badges", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_badges" %} active{% endif %}">Badges</a>
+</div>
+{% endblock %}
