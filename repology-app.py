@@ -304,6 +304,16 @@ def metapackage_packages(name):
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
     return flask.render_template("metapackage-packages.html", packages=packages, name=name)
 
+@app.route("/metapackage/<name>/information")
+def metapackage_information(name):
+    packages = get_db().GetMetapackage(name)
+    packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
+    return flask.render_template("metapackage-information.html", packages=packages, name=name)
+
+@app.route("/metapackage/<name>/badges")
+def metapackage_badges(name):
+    return flask.render_template("metapackage-badges.html", name=name)
+
 @app.route("/badge/vertical-allrepos/<name>.svg")
 def badge_vertical_allrepos(name):
     summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
