@@ -9,19 +9,17 @@ Badges for <strong>{{ name }}</strong>
 {% endblock %}
 
 {% macro badge_example(badge_type) %}
-<p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for(badge_type, name=name) }}"></a></p>
+<p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for(badge_type, name=name) }}" alt="Packaging status"></a></p>
 
-<p>HTML code:
+<p>HTML code:</p>
 <pre>
-&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name)}}&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name)}}&quot; alt=&quot;Packaging status&quot;&gt;&lt;/a&gt;
 </pre>
-</p>
 
-<p>Markdown code:
+<p>Markdown code:</p>
 <pre>
 [![Packaging status]({{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name) }}))]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})
 </pre>
-</p>
 {% endmacro %}
 
 {% block content %}
