@@ -20,7 +20,7 @@
       url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
     - desc: PortsMon
       url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
-  tags: [ all, have_testdata, demo, production, fastfetch ]
+  tags: [ all, have_testdata, production, fastfetch ]
 
 - name: pkgsrc
   desc: pkgsrc
@@ -34,7 +34,7 @@
   links:
     - desc: CVSWeb
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
-  tags: [ all, demo, production, fastfetch ]
+  tags: [ all, production, fastfetch ]
 
 - name: openbsd
   desc: OpenBSD
@@ -48,7 +48,7 @@
   links:
     - desc: CVSWeb
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}'
-  tags: [ all, demo, production, fastfetch ]
+  tags: [ all, production, fastfetch ]
 
 ###########################################################################
 # Debian
@@ -151,7 +151,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}'
-  tags: [ all, have_testdata, demo, debian, production, fastfetch ]
+  tags: [ all, have_testdata, debian, production, fastfetch ]
 
 - name: debian_experimental
   desc: Debian Experimental
@@ -329,7 +329,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/zesty/{name}'
-  tags: [ all, demo, production, ubuntu, fastfetch ]
+  tags: [ all, production, ubuntu, fastfetch ]
 
 ###########################################################################
 # Gentoo
@@ -349,7 +349,7 @@
       url: 'https://packages.gentoo.org/packages/{category}/{name}'
     - desc: View ebuild
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{origversion}.ebuild'
-  tags: [ all, have_testdata, demo, production, fastfetch ]
+  tags: [ all, have_testdata, production, fastfetch ]
 
 ###########################################################################
 # Arch & AUR
@@ -377,7 +377,7 @@
       # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
       # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
       url: 'https://www.archlinux.org/packages/?sort=&q={name}'
-  tags: [ all, have_testdata, demo, production, fastfetch ]
+  tags: [ all, have_testdata, production, fastfetch ]
 
 - name: aur
   desc: AUR
@@ -436,7 +436,7 @@
   links:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
-  tags: [ all, demo, production, fedora, rpm, fastfetch ]
+  tags: [ all, production, fedora, rpm, fastfetch ]
 
 ###########################################################################
 # CentOS
@@ -522,7 +522,7 @@
   links:
     - desc: Package details
       url: 'https://software.opensuse.org/package/{name}'
-  tags: [ all, demo, production, opensuse, rpm, fastfetch ]
+  tags: [ all, production, opensuse, rpm, fastfetch ]
 
 ###########################################################################
 # AltLinux Sisyphus
