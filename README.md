@@ -58,6 +58,9 @@ Optional, for web-application:
 - Python module [psycopg](http://initd.org/psycopg/)
 - [https://www.postgresql.org/](PostgreSQL database) 9.5+
 
+Optional, for doing HTML validation when running tests:
+- Python module [pytidylib](https://pypi.python.org/pypi/pytidylib) and [tidy-html5](http://www.html-tidy.org/) library
+
 ### Building
 
 Though repology is mostly a Python project, it contains C utility to
