@@ -19,6 +19,7 @@
 
 import json
 import flask
+from functools import cmp_to_key
 
 from repology.database import Database
 from repology.queryfilters import *
@@ -308,7 +309,57 @@ def metapackage_packages(name):
 def metapackage_information(name):
     packages = get_db().GetMetapackage(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
-    return flask.render_template("metapackage-information.html", packages=packages, name=name)
+
+    information = {}
+
+    def append_info(infokey, infoval, package):
+        if not infokey in information:
+            information[infokey] = {}
+
+        if not infoval in information[infokey]:
+            information[infokey][infoval] = set()
+
+        information[infokey][infoval].add(package.family)
+
+    for package in packages:
+        append_info('names', package.name, package)
+        append_info('versions', package.version, package)
+        append_info('repos', package.repo, package)
+
+        if package.comment:
+            append_info('summaries', package.comment, package)
+        for maintainer in package.maintainers:
+            append_info('maintainers', maintainer, package)
+        if package.category:
+            append_info('categories', package.category, package)
+        if package.homepage:
+            append_info('homepages', package.homepage, package)
+        for download in package.downloads:
+            append_info('downloads', download, package)
+
+    def packages_version_cmp_reverse(p1, p2):
+        return VersionCompare(p2.version, p1.version)
+
+    sortedversions = []
+
+    for package in sorted(packages, key=cmp_to_key(packages_version_cmp_reverse)):
+        if sortedversions and sortedversions[-1]['version'] == package.version and sortedversions[-1]['versionclass'] == package.versionclass:
+            sortedversions[-1]['families'].add(package.family)
+        else:
+            sortedversions.append(
+                {
+                    'families': set((package.family,)),
+                    'version': package.version,
+                    'versionclass': package.versionclass
+                }
+            )
+
+    return flask.render_template(
+        "metapackage-information.html",
+        information=information,
+        sortedversions=sortedversions,
+        name=name
+    )
 
 @app.route("/metapackage/<name>/badges")
 def metapackage_badges(name):
