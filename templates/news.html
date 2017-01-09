@@ -11,53 +11,71 @@ News
 {% block content %}
 <div class="container">
 
-<article><h3>2016-12-14</h3><p>
+<article>
+	<h3>2017-01-09</h3>
+	<ul>
+		<li>Total revamp of website design, switched to <a href="http://getbootstrap.com/">bootstrap</a>.</li>
+		<li>Maintainers pagination improved.</li>
+		<li>New <a href="{{ url_for("repositories") }}">repositories</a> page with links to per-repository metapackage lists.</li>
+		<li>Per-metapackage information and badges pages, per-metapackage package list readability improved.</li>
+		<li>No more abbreviations in metapackage table.</li>
+	</ul>
+</article>
+
+<article>
+	<h3>2016-12-14</h3>
 	<ul>
 		<li>Major switch from static generated site to dynamic database backend.</li>
 		<li>Pagination improved.</li>
 		<li>API supported.</li>
 		<li>Badges supported.</li>
 	</ul>
-</p></article>
+</article>
 
-<article><h3>2016-11-18</h3><p>
+<article>
+	<h3>2016-11-18</h3>
 	<ul>
 		<li><b>CentOS</b> and <b>Magaia</b> support added.</li>
 	</ul>
-</p></article>
+</article>
 
-<article><h3>2016-11-17</h3><p>
+<article>
+	<h3>2016-11-17</h3>
 	<ul>
 		<li><b>Fedora Rawhide</b> support added.</li>
 		<li>Support for parsing download URLs (only works for <b>SlackBuilds</b> for now).</li>
 	</ul>
-</p></article>
+</article>
 
-<article><h3>2016-11-14</h3><p>
+<article>
+	<h3>2016-11-14</h3>
 	<ul>
 		<li>Version comparison improvements.</li>
 		<li>More data extracted from some repositories.</li>
 	</ul>
-</p></article>
+</article>
 
-<article><h3>2016-10-14</h3><p>
+<article>
+	<h3>2016-10-14</h3>
 	<ul>
 		<li>All versions now link to upstream packages.</li>
 	</ul>
-</p></article>
+</article>
 
-<article><h3>2016-10-12</h3><p>
+<article>
+	<h3>2016-10-12</h3>
 	<ul>
 		<li>Per-package pages.</li>
 	</ul>
-</p></article>
+</article>
 
-<article><h3>2016-10-10</h3><p>
+<article>
+	<h3>2016-10-10</h3>
 	<ul>
 		<li>New repositores: <b>OpenSUSE Tumbleweed</b>, <b>Sisyphus</b>, <b>Chocolatey</b>, <b>SlackBuilds</b>.</li>
 		<li>Statistics page, news page.</li>
 	</ul>
-</p></article>
+</article>
 
 </div>
 {% endblock %}
