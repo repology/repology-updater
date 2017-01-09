@@ -237,6 +237,7 @@ def metapackages_candidates_for_repo(repo, bound=None):
 
     return metapackages_generic(
         bound,
+        NotInRepoQueryFilter(repo),
         InNumFamiliesQueryFilter(more=5),
         template="metapackages-candidates-for-repo.html",
         extravars={'repo': repo}
@@ -458,7 +459,7 @@ def api_v1_metapackages_not_in_repo(repo, bound=None):
 @app.route("/api/v1/metapackages/candidates-in-repo/<repo>/")
 @app.route("/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/")
 def api_v1_metapackages_candidates_in_repo(repo, bound=None):
-    return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(more=5))
+    return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo), InNumFamiliesQueryFilter(more=5))
 
 @app.route("/api/v1/metapackages/unique-in-repo/<repo>/")
 @app.route("/api/v1/metapackages/unique-in-repo/<repo>/<bound>/")
