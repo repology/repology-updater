@@ -61,7 +61,7 @@ def css_for_summary_versionclass(value):
     elif value == RepositoryVersionClass.outdated:
         return 'outdated'
     elif value == RepositoryVersionClass.mixed:
-        return 'mixer'
+        return 'mixed'
     elif value == RepositoryVersionClass.ignored:
         return 'ignored'
     elif value == RepositoryVersionClass.lonely:
