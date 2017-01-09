@@ -20,7 +20,7 @@
       url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
     - desc: PortsMon
       url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
-  tags: [ all, have_testdata, production, fastfetch ]
+  tags: [ all, have_testdata, production ]
 
 - name: pkgsrc
   desc: pkgsrc
@@ -34,7 +34,7 @@
   links:
     - desc: CVSWeb
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
-  tags: [ all, production, fastfetch ]
+  tags: [ all, production ]
 
 - name: openbsd
   desc: OpenBSD
@@ -48,7 +48,7 @@
   links:
     - desc: CVSWeb
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}'
-  tags: [ all, production, fastfetch ]
+  tags: [ all, production ]
 
 ###########################################################################
 # Debian
@@ -76,7 +76,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/{name}'
-  tags: [ all, debian, fastfetch ]
+  tags: [ all, debian ]
 
 - name: debian_stable_backports
   desc: Debian Stable Backports
@@ -101,7 +101,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/{name}'
-  tags: [ all, debian, fastfetch ]
+  tags: [ all, debian ]
 
 - name: debian_testing
   desc: Debian Testing
@@ -126,7 +126,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/{name}'
-  tags: [ all, debian, fastfetch ]
+  tags: [ all, debian ]
 
 - name: debian_unstable
   desc: Debian Unstable
@@ -151,7 +151,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}'
-  tags: [ all, have_testdata, debian, production, fastfetch ]
+  tags: [ all, have_testdata, debian, production ]
 
 - name: debian_experimental
   desc: Debian Experimental
@@ -176,7 +176,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/{name}'
-  tags: [ all, preproduction, debian, fastfetch ]
+  tags: [ all, preproduction, debian ]
 
 ###########################################################################
 # Ubuntu
@@ -209,7 +209,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/precise/{name}'
-  tags: [ all, ubuntu, fastfetch ]
+  tags: [ all, ubuntu ]
 
 - name: ubuntu_trusty
   desc: Ubuntu Trusty
@@ -239,7 +239,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/trusty/{name}'
-  tags: [ all, ubuntu, fastfetch ]
+  tags: [ all, ubuntu ]
 
 - name: ubuntu_xenial
   desc: Ubuntu Xenial
@@ -269,7 +269,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/xenial/{name}'
-  tags: [ all, ubuntu, fastfetch ]
+  tags: [ all, ubuntu ]
 
 - name: ubuntu_yakkety
   desc: Ubuntu Yakkety
@@ -299,7 +299,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/yakkety/{name}'
-  tags: [ all, ubuntu, fastfetch ]
+  tags: [ all, ubuntu ]
 
 - name: ubuntu_zesty
   desc: Ubuntu Zesty
@@ -329,7 +329,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/zesty/{name}'
-  tags: [ all, production, ubuntu, fastfetch ]
+  tags: [ all, production, ubuntu ]
 
 ###########################################################################
 # Gentoo
@@ -349,7 +349,7 @@
       url: 'https://packages.gentoo.org/packages/{category}/{name}'
     - desc: View ebuild
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{origversion}.ebuild'
-  tags: [ all, have_testdata, production, fastfetch ]
+  tags: [ all, have_testdata, production ]
 
 ###########################################################################
 # Arch & AUR
@@ -377,7 +377,7 @@
       # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
       # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
       url: 'https://www.archlinux.org/packages/?sort=&q={name}'
-  tags: [ all, have_testdata, production, fastfetch ]
+  tags: [ all, have_testdata, production ]
 
 - name: aur
   desc: AUR
@@ -391,7 +391,7 @@
   links:
     - desc: AUR package details
       url: 'https://aur.archlinux.org/packages/{name}'
-  tags: [ all, preproduction, fastfetch ]
+  tags: [ all, preproduction ]
 
 ###########################################################################
 # Fedora
@@ -408,7 +408,7 @@
   links:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
-  tags: [ all, fedora, rpm, fastfetch ]
+  tags: [ all, fedora, rpm ]
 
 - name: fedora_25
   desc: Fedora 25
@@ -422,7 +422,7 @@
   links:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
-  tags: [ all, fedora, rpm, fastfetch ]
+  tags: [ all, fedora, rpm ]
 
 - name: fedora_rawhide
   desc: Fedora Rawhide
@@ -436,7 +436,7 @@
   links:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
-  tags: [ all, production, fedora, rpm, fastfetch ]
+  tags: [ all, production, fedora, rpm ]
 
 ###########################################################################
 # CentOS
@@ -457,7 +457,7 @@
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/6/package/{name}/'
-  tags: [ all, centos, rpm, fastfetch ]
+  tags: [ all, centos, rpm ]
 - name: centos_7
   desc: CentOS 7
   url: http://centos-packages.com/
@@ -474,7 +474,7 @@
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/7/package/{name}/'
-  tags: [ all, preproduction, centos, rpm, fastfetch ]
+  tags: [ all, preproduction, centos, rpm ]
 
 ###########################################################################
 # Mageia
@@ -491,7 +491,7 @@
   links:
     - desc: Package details on madb.mageia.org
       url: 'https://madb.mageia.org/package/show/name/{name}'
-  tags: [ all, mageia, rpm, fastfetch ]
+  tags: [ all, mageia, rpm ]
 
 - name: mageia_cauldron
   desc: Mageia Cauldron
@@ -505,7 +505,7 @@
   links:
     - desc: Package details on madb.mageia.org
       url: 'https://madb.mageia.org/package/show/name/{name}'
-  tags: [ all, production, mageia, rpm, fastfetch ]
+  tags: [ all, production, mageia, rpm ]
 
 ###########################################################################
 # OpenSUSE
@@ -522,7 +522,7 @@
   links:
     - desc: Package details
       url: 'https://software.opensuse.org/package/{name}'
-  tags: [ all, production, opensuse, rpm, fastfetch ]
+  tags: [ all, production, opensuse, rpm ]
 
 ###########################################################################
 # AltLinux Sisyphus
@@ -545,7 +545,7 @@
   links:
     - desc: Package details in Sisyphus repository
       url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}'
-  tags: [ all, production, fastfetch ]
+  tags: [ all, production ]
 
 ###########################################################################
 # Gobolinux
@@ -562,7 +562,7 @@
   links:
     - desc: Git
       url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}'
-  tags: [ all, preproduction, fastfetch ]
+  tags: [ all, preproduction ]
 
 ###########################################################################
 # YACP (Yet Another Cygwin Ports)
@@ -579,7 +579,7 @@
   links:
     - desc: Git
       url: 'https://github.com/fd00/yacp/tree/master/{name}'
-  tags: [ all, preproduction, fastfetch ]
+  tags: [ all, preproduction ]
 
 ###########################################################################
 # GNU Guix
@@ -593,7 +593,7 @@
       fetcher: Guix
       parser: Guix
       url: https://www.gnu.org/software/guix/packages/
-  tags: [ all, preproduction, fastfetch ]
+  tags: [ all, preproduction ]
 
 ###########################################################################
 # SlackBuilds
@@ -610,7 +610,7 @@
   links:
     - desc: Git
       url: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
-  tags: [ all, production, fastfetch ]
+  tags: [ all, production ]
 
 ###########################################################################
 # News sites
@@ -628,7 +628,7 @@
   links:
     - desc: freshcode.club page
       url: 'http://freshcode.club/projects/{name}'
-  tags: [ all, preproduction, fastfetch ]
+  tags: [ all, preproduction ]
 
 ###########################################################################
 # Upstream module collections: CPAN, PyPi
@@ -647,7 +647,7 @@
   links:
     - desc: CPAN page
       url: 'http://search.cpan.org/dist/{name}'
-  tags: [ all, have_testdata, preproduction, fastfetch ]
+  tags: [ all, have_testdata, preproduction ]
 
 - name: pypi
   desc: PyPi
@@ -662,7 +662,7 @@
   links:
     - desc: PyPi page
       url: 'https://pypi.python.org/pypi/{name}/'
-  tags: [ all, preproduction, fastfetch ]
+  tags: [ all, preproduction ]
 
 ###########################################################################
 # Foreign repos (android, windows)
@@ -678,7 +678,7 @@
       url: https://f-droid.org/repo/index.xml
   # XXX: link requires java class O_o
   shadow: true
-  tags: [ all, fastfetch ]
+  tags: [ all ]
 
 - name: chocolatey
   desc: Chocolatey
@@ -693,4 +693,4 @@
   links:
     - desc: Chocolatey package page
       url: 'https://chocolatey.org/packages/{name}'
-  tags: [ all, fastfetch ]
+  tags: [ all ]
