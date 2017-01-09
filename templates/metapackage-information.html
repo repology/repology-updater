@@ -1,0 +1,99 @@
+{% extends "metapackage.html" %}
+
+{% block title %}
+{{ super() }}: information for {{ name }}
+{% endblock %}
+
+{% block header %}
+Information for <strong>{{ name }}</strong>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+{% if not information %}
+<div class="alert alert-warning" role="alert">No data found for metapackage <strong>{{ name }}</strong></div>
+{% else %}
+<div class="row">
+	<div class="col-md-4">
+
+		<h2>Package names</h2>
+		<ul>
+		{% for name,families in information.names|dictsort %}
+			<li>{{ name }} <b>({{ families|length }})</b></li>
+		{% endfor %}
+		</ul>
+
+		<h2>Versions</h2>
+		<ul>
+		{% for versioninfo in sortedversions %}
+			<li>
+				<span class="version version-{{ versioninfo.versionclass|css_for_package_versionclass }}">{{ versioninfo.version }}</span> <b>({{ versioninfo.families|length }})</b>
+			</li>
+		{% endfor %}
+		</ul>
+
+		<h2>Repositories</h2>
+		<ul>
+		{% for reponame,families in information.repos|dictsort %}
+			<li>{{ repometadata[reponame].desc }}</li>
+		{% endfor %}
+		</ul>
+
+		{% if information.categories %}
+		<h2>Categories</h2>
+		<ul>
+		{% for category,families in information.categories|dictsort %}
+			<li>{{ category }} <b>({{ families|length }})</b></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+	</div>
+	<div class="col-md-8">
+
+		{% if information.summaries %}
+		<h2>Summaries</h2>
+		<ul>
+		{% for summary,families in information.summaries|dictsort %}
+			<li>{{ summary }} <b>({{ families|length }})</b></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if information.maintainers %}
+		<h2>Maintainers</h2>
+		<ul>
+		{% for maintainer,families in information.maintainers|dictsort %}
+			<li>{% if maintainer|maintainer_to_link -%}
+				<a href="{{ maintainer|maintainer_to_link }}">{{ maintainer }}</a>
+			{%- else -%}
+				{{ maintainer }}
+			{%- endif %} <b>({{ families|length }})</b></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if information.homepages %}
+		<h2>Homepages</h2>
+		<ul>
+		{% for homepage,families in information.homepages|dictsort %}
+			<li><a href="{{ homepage }}">{{ homepage }}</a> <b>({{ families|length }})</b></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if information.downloads %}
+		<h2>Downloads</h2>
+		<ul>
+		{% for download,families in information.downloads|dictsort %}
+			<li><a href="{{ download }}">{{ download }}</a> <b>({{ families|length }})</b></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+	</div>
+</div>
+{% endif %}
+
+</div>
+{% endblock %}

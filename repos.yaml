@@ -3,6 +3,7 @@
 ###########################################################################
 - name: freebsd
   desc: FreeBSD
+  url: https://www.freebsd.org/ports/
   family: freebsd
   sources:
     - name: INDEX-11
@@ -23,6 +24,7 @@
 
 - name: pkgsrc
   desc: pkgsrc
+  url: https://www.pkgsrc.org/
   family: pkgsrc
   sources:
     - name: INDEX
@@ -36,6 +38,7 @@
 
 - name: openbsd
   desc: OpenBSD
+  url: http://openports.se/
   family: openbsd
   sources:
     - name: INDEX
@@ -52,6 +55,7 @@
 ###########################################################################
 - name: debian_stable
   desc: Debian Stable
+  url: https://packages.debian.org/
   family: debian
   sources:
     - name: contrib
@@ -76,6 +80,7 @@
 
 - name: debian_stable_backports
   desc: Debian Stable Backports
+  url: https://packages.debian.org/
   family: debian
   sources:
     - name: contrib
@@ -100,6 +105,7 @@
 
 - name: debian_testing
   desc: Debian Testing
+  url: https://packages.debian.org/
   family: debian
   sources:
     - name: contrib
@@ -124,6 +130,7 @@
 
 - name: debian_unstable
   desc: Debian Unstable
+  url: https://packages.debian.org/
   family: debian
   sources:
     - name: contrib
@@ -148,6 +155,7 @@
 
 - name: debian_experimental
   desc: Debian Experimental
+  url: https://packages.debian.org/
   family: debian
   sources:
     - name: contrib
@@ -175,6 +183,7 @@
 ###########################################################################
 - name: ubuntu_precise
   desc: Ubuntu Precise
+  url: http://packages.ubuntu.com/
   family: debian
   sources:
     - name: main
@@ -204,6 +213,7 @@
 
 - name: ubuntu_trusty
   desc: Ubuntu Trusty
+  url: http://packages.ubuntu.com/
   family: debian
   sources:
     - name: main
@@ -233,6 +243,7 @@
 
 - name: ubuntu_xenial
   desc: Ubuntu Xenial
+  url: http://packages.ubuntu.com/
   family: debian
   sources:
     - name: main
@@ -262,6 +273,7 @@
 
 - name: ubuntu_yakkety
   desc: Ubuntu Yakkety
+  url: http://packages.ubuntu.com/
   family: debian
   sources:
     - name: main
@@ -291,6 +303,7 @@
 
 - name: ubuntu_zesty
   desc: Ubuntu Zesty
+  url: http://packages.ubuntu.com/
   family: debian
   sources:
     - name: main
@@ -323,6 +336,7 @@
 ###########################################################################
 - name: gentoo
   desc: Gentoo
+  url: https://packages.gentoo.org/
   family: gentoo
   sources:
     - name: gentoo
@@ -342,6 +356,7 @@
 ###########################################################################
 - name: arch
   desc: Arch
+  url: https://www.archlinux.org/packages/
   family: arch
   sources:
     - name: core
@@ -366,6 +381,7 @@
 
 - name: aur
   desc: AUR
+  url: https://aur.archlinux.org/
   family: arch
   sources:
     - name: aur
@@ -382,6 +398,7 @@
 ###########################################################################
 - name: fedora_24
   desc: Fedora 24
+  url: https://apps.fedoraproject.org/packages/
   family: fedora
   sources:
     - name: data
@@ -395,6 +412,7 @@
 
 - name: fedora_25
   desc: Fedora 25
+  url: https://apps.fedoraproject.org/packages/
   family: fedora
   sources:
     - name: data
@@ -408,6 +426,7 @@
 
 - name: fedora_rawhide
   desc: Fedora Rawhide
+  url: https://apps.fedoraproject.org/packages/
   family: fedora
   sources:
     - name: data
@@ -424,6 +443,7 @@
 ###########################################################################
 - name: centos_6
   desc: CentOS 6
+  url: http://centos-packages.com/
   family: centos
   sources:
     - name: os
@@ -440,6 +460,7 @@
   tags: [ all, centos, rpm, fastfetch ]
 - name: centos_7
   desc: CentOS 7
+  url: http://centos-packages.com/
   family: centos
   sources:
     - name: os
@@ -460,6 +481,7 @@
 ###########################################################################
 - name: mageia_6
   desc: Mageia 6
+  url: https://madb.mageia.org/
   family: mageia
   sources:
     - name: data
@@ -473,6 +495,7 @@
 
 - name: mageia_cauldron
   desc: Mageia Cauldron
+  url: https://madb.mageia.org/
   family: mageia
   sources:
     - name: data
@@ -489,6 +512,7 @@
 ###########################################################################
 - name: opensuse_tumbleweed
   desc: OpenSUSE Tumbleweed
+  url: https://software.opensuse.org/
   family: opensuse
   sources:
     - name: data
@@ -505,6 +529,7 @@
 ###########################################################################
 - name: altsisyphus
   desc: ALT Sisyphus
+  url: http://www.sisyphus.ru/en/
   family: sisyphus
   sources:
     - name: noarch
@@ -527,6 +552,7 @@
 ###########################################################################
 - name: gobolinux
   desc: GoboLinux
+  url: https://github.com/gobolinux/Recipes
   family: gobolinux
   sources:
     - name: recipes
@@ -543,6 +569,7 @@
 ###########################################################################
 - name: yacp
   desc: YACP
+  url: https://github.com/fd00/yacp
   family: yacp
   sources:
     - name: yacp
@@ -559,6 +586,7 @@
 ###########################################################################
 - name: guix
   desc: GNU Guix
+  url: https://www.gnu.org/software/guix/packages/
   family: guix
   sources:
     - name: guix
@@ -572,6 +600,7 @@
 ###########################################################################
 - name: slackbuilds
   desc: SlackBuilds
+  url: https://slackbuilds.org/
   family: slackbuilds
   sources:
     - name: slackbuilds
@@ -588,6 +617,7 @@
 ###########################################################################
 - name: freshcode
   desc: freshcode.club
+  url: http://freshcode.club/
   family: freshcode
   sources:
     - name: feed
@@ -605,6 +635,7 @@
 ###########################################################################
 - name: cpan
   desc: CPAN
+  url: http://search.cpan.org/
   family: cpan
   sources:
     - name: CPAN
@@ -620,6 +651,7 @@
 
 - name: pypi
   desc: PyPi
+  url: https://pypi.python.org/pypi
   family: pypi
   sources:
     - name: PyPi
@@ -637,6 +669,7 @@
 ###########################################################################
 - name: fdroid
   desc: F-Droid
+  url: https://f-droid.org/
   family: fdroid
   sources:
     - name: F-Droid
@@ -649,6 +682,7 @@
 
 - name: chocolatey
   desc: Chocolatey
+  url: https://chocolatey.org/
   family: chocolatey
   sources:
     - name: chocolatey

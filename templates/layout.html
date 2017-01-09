@@ -1,54 +1,84 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Multiple package repositories analyzer">
-    <meta name="keywords" content="repository, package, version">
-    <meta name="author" content="Dmitry Marakasov">
-    <title>{% block title %}Repology{% endblock %}</title>
-    <link rel="stylesheet" media="screen" href="{{ url_for("static", filename="repology.css") }}">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="description" content="Multiple package repositories analyzer">
+	<meta name="keywords" content="repository, package, version">
+	<meta name="author" content="Dmitry Marakasov">
+	<title>{% block title %}Repology{% endblock %}</title>
+	<link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.css") }}">
+	<link rel="stylesheet" href="{{ url_for("static", filename="repology.css") }}">
 </head>
 <body>
 
-<a href="https://github.com/AMDmi3/repology"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+{% macro classactive_if_endpoint(endpoint) -%}
+	{%- if request.endpoint == endpoint %} class="active"{%- endif -%}
+{%- endmacro %}
+{% macro active_if_endpoint(endpoint) -%}
+	{%- if request.endpoint == endpoint %} active{%- endif -%}
+{%- endmacro %}
 
-<div class="header-stripe-1">
-    <div class="container">
-        <nav id="nav-primary">
-            <h1 class="site-logo">Repology</h1>
-            <ul>
-                <li><a href="{{ url_for('about') }}"{% if request.endpoint == 'about' %} class="active"{% endif %}>About</a></li>
-                <li><a href="{{ url_for('news') }}"{% if request.endpoint == 'news' %} class="active"{% endif %}>News</a></li>
-                <li><a href="{{ url_for('statistics') }}"{% if request.endpoint == 'statistics' %} class="active"{% endif %}>Statistics</a></li>
-                <li><a href="{{ url_for('badges') }}"{% if request.endpoint == 'badges' %} class="active"{% endif %}>Badges</a></li>
-                <li><a href="{{ url_for('api_v1') }}"{% if request.endpoint == 'api_v1' %} class="active"{% endif %}>API</a></li>
-            </ul>
-            <ul>
-                <li><a href="{{ url_for('metapackages_all') }}"{% if request.endpoint == 'metapackages_all' %} class="active"{% endif %}>All packages</a></li>
-                <li><a href="{{ url_for('maintainers') }}"{% if request.endpoint == 'metapackages_by_maintainer' or request.endpoint == 'maintainers' %} class="active"{% endif %}>By maintainer</a></li>
-                <li><a href="{{ url_for('metapackages_in_repo') }}"{% if request.endpoint == 'metapackages_in_repo' %} class="active"{% endif %}>By repo</a></li>
-                <li><a href="{{ url_for('metapackages_outdated_in_repo') }}"{% if request.endpoint == 'metapackages_outdated_in_repo' %} class="active"{% endif %}>Outdated by repo</a></li>
-                <li><a href="{{ url_for('metapackages_not_in_repo') }}"{% if request.endpoint == 'metapackages_not_in_repo' %} class="active"{% endif %}>Missing by repo</a></li>
-                <li><a href="{{ url_for('metapackages_candidates_for_repo') }}"{% if request.endpoint == 'metapackages_candidates_for_repo' %} class="active"{% endif %}>Candidates by repo</a></li>
-                <li><a href="{{ url_for('metapackages_unique') }}"{% if request.endpoint == 'metapackages_unique' %} class="active"{% endif %}>Unique</a></li>
-                <li><a href="{{ url_for('metapackages_unique_in_repo') }}"{% if request.endpoint == 'metapackages_unique_in_repo' %} class="active"{% endif %}>Unique by repo</a></li>
-                <li><a href="{{ url_for('metapackages_widespread') }}"{% if request.endpoint == 'metapackages_widespread' %} class="active"{% endif %}>Widespread</a></li>
-            </ul>
-        </nav>
-    </div>
-</div>
-
-<div class="header-stripe-2">
-    <div class="container">
-        <header>
-            <h2>{% block subheader %}{% endblock %}</h2>
-        </heaeder>
-    </div>
-</div>
+<header>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="{{ REPOLOGY_HOME }}">
+					Repology
+				</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li{{ classactive_if_endpoint('metapackages_all') }}><a href="{{ url_for('metapackages_all') }}">All metapackages</a></li>
+					<li{{ classactive_if_endpoint('metapackages_unique') }}><a href="{{ url_for('metapackages_unique') }}">Unique</a></li>
+					<li{{ classactive_if_endpoint('metapackages_widespread') }}><a href="{{ url_for('metapackages_widespread') }}">Widespread</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-separator-at-left">
+					<li{{ classactive_if_endpoint('maintainers') }}><a href="{{ url_for('maintainers') }}">Maintainers</a></li>
+					<li{{ classactive_if_endpoint('repositories') }}><a href="{{ url_for('repositories') }}">Repositories</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li{{ classactive_if_endpoint('news') }}><a href="{{ url_for('news') }}">News</a></li>
+					<li{{ classactive_if_endpoint('statistics') }}><a href="{{ url_for('statistics') }}">Statistics</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
 
 <div class="container">
+	{% block preheader %}{% endblock %}
+	<h1 class="page-header">{% block header %}{% endblock %}</h1>
+</div>
+
 {% block content %}
 {% endblock %}
-</div>
+
+<footer class="repology-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<ul class="repology-footer-links">
+					<li><a href="{{ url_for('about') }}">About</a></li>
+					<li><a href="{{ url_for('api_v1') }}">API</a></li>
+				</ul>
+			</div>
+			<div class="col-md-6 text-right">
+				<ul class="repology-footer-links">
+					<li><a href="https://github.com/AMDmi3/repology">GitHub</a></li>
+				</ul>
+			</div>
+		</div>
+		<p>
+			Copyright (C) 2016 Dmitry Marakasov &lt;<a href="mailto:amdmi3@amdmi3.ru">amdmi3@amdmi3.ru</a>&gt;.<br>
+			Code licensed GPLv3+.
+		</p>
+	</div>
+</footer>
+
+<script src="{{ url_for("static", filename="jquery-3.1.1.min.js") }}"></script>
+<script src="{{ url_for("static", filename="bootstrap.min.js") }}"></script>
 
 </body>
 </html>

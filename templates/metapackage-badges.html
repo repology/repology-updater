@@ -1,0 +1,47 @@
+{% extends "metapackage.html" %}
+
+{% block title %}
+{{ super() }}: badges for {{ name }}
+{% endblock %}
+
+{% block header %}
+Badges for <strong>{{ name }}</strong>
+{% endblock %}
+
+{% macro badge_example(badge_type) %}
+<p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for(badge_type, name=name) }}"></a></p>
+
+<p>HTML code:
+<pre>
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name)}}&quot;&gt;&lt;/a&gt;
+</pre>
+</p>
+
+<p>Markdown code:
+<pre>
+[![Packaging status]({{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name) }}))]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})
+</pre>
+</p>
+{% endmacro %}
+
+{% block content %}
+<div class="container">
+
+<article>
+
+<h2>Big badge</h2>
+
+<p>This shows all known repositories, package versions and up-to-date status</p>
+
+{{ badge_example('badge_vertical_allrepos') }}
+
+<h2>Tiny badge</h2>
+
+<p>This shows total number of known packages</p>
+
+{{ badge_example('badge_tiny_packages') }}
+
+</article>
+
+</div>
+{% endblock %}

@@ -1,85 +1,102 @@
 {% extends "layout.html" %}
 
-{% block subheader %}
-Metapackages index
+{% block title %}
+{{ super() }}: metapackages
+{% endblock %}
+
+{% block header %}
+Metapackages
 {% endblock %}
 
 {% block content %}
+<div class="container">
 
 <nav>
-    Pages:
-    <ul>
-        {% if firstname %}
-            <li><a href="{{ url_for_self(bound="<"+firstname) }}">«</a></li>
-        {% endif %}
-        {% if lastname %}
-            <li><a href="{{ url_for_self(bound=">"+lastname) }}">»</a></li>
-        {% endif %}
-    </ul>
-    <ul>
-        <li><a href="{{ url_for_self(bound=None) }}"{% if not firstname or firstname < 'a' %} class="active"{% endif %}>0-9</a></li>
-        {% for letter in "abcdefghijklmnopqrstuvwxyz" %}
-            <li>
-                <a href="{{ url_for_self(bound=letter) }}"{% if firstname and firstname >= letter and firstname < next_letter(letter) %} class="active"{% endif %}>
-                    {{ letter|upper }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+	<ul class="pagination">
+		<li{% if not firstname %} class="disabled"{% endif %}>
+		{% if firstname %}
+			<a href="{{ url_for_self(bound="<"+firstname) }}">&laquo;</a>
+		{% else %}
+			<span>&laquo;</span>
+		{% endif %}
+		</li>
+		<li{% if firstname is for_page('0') %} class="active"{% endif %}><a href="{{ url_for_self(bound=None) }}">0-9</a></li>
+		{% for letter in "abcdefghijklmnopqrstuvwxyz" %}
+			<li{% if firstname is for_page(letter) %} class="active"{% endif %}>
+				<a href="{{ url_for_self(bound=letter) }}">
+					{{ letter|upper }}
+				</a>
+			</li>
+		{% endfor %}
+		<li{% if not lastname %} class="disabled"{% endif %}>
+		{% if lastname %}
+			<a href="{{ url_for_self(bound=">"+lastname) }}">&raquo;</a>
+		{% else %}
+			<span>&raquo;</span>
+		{% endif %}
+		</li>
+	</ul>
 </nav>
 
-<nav>
-    Search:
-    <form action="{{ url_for_self(bound=None) }}" method="GET">
-        <input type="text" name="search" value="{{ search|default('', true) }}">
-    </form>
+<nav class="form-group">
+	<form class="form-inline" action="{{ url_for_self(bound=None) }}" method="GET">
+		<div class="input-group">
+			<input class="form-control" type="text" name="search" value="{{ search|default('', true) }}" placeholder="Search package names">
+			<div class="input-group-btn">
+				<button type="submit" class="btn btn-default">Go</button>
+			</div>
+		</div>
+	</form>
 </nav>
 
 {% if summaries %}
-    <table>
-    {% for metapackagename,summaries in summaries|dictsort %}
-        {% set headerevery = 50 %}
-        {% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
-        <tr>
-            <th></th>
-            {% for reponame in reponames %}
-                <th>
-                    {{ repometadata[reponame].desc|split(' ')|spantrim(8)|join('<br>')|safe }}
-                </th>
-            {% endfor %}
-        </tr>
-        {% endif %}
-        <tr>
-            <td><a href="{{ url_for("metapackage", name=metapackagename) }}">{{ metapackagename|spantrim(20)|safe }}</a></td>
-            {% for reponame in reponames %}
-                {% set summary = summaries[reponame] %}
-                {% if summary is defined %}
-                    <td>
-                        <span class="version {{ summary.versionclass|repositoryversionclass2css }}">
-                            {%- if repometadata[reponame].links -%}
-                                <a href="{{ repometadata[reponame].links[0].url|pkg_format(summary.bestpackage) }}">
-                            {%- endif -%}
-                            {%- if summary.numpackages > 1 -%}
-                                {{- summary.version|spantrim(8)|safe -}}
-                            {%- else -%}
-                                {{- summary.version|spantrim(10)|safe -}}
-                            {%- endif -%}
-                            {%- if repometadata[reponame].links -%}
-                                </a>
-                            {%- endif -%}
-                        </span>
-                        {%- if summary.numpackages > 1 -%}
-                            <sup>{{- summary.numpackages -}}</sup>
-                        {%- endif -%}
-                    </td>
-                {% else %}
-                    <td>-</td>
-                {% endif %}
-            {% endfor %}
-        </tr>
-    {% endfor %}
-    </table>
+	<table class="table table-striped table-condensed">
+	{% for metapackagename,summaries in summaries|dictsort %}
+		{% set headerevery = 50 %}
+		{% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
+		<tr>
+			<th></th>
+			{% for reponame in reponames %}
+				<th>
+					{{ repometadata[reponame].desc }}
+				</th>
+			{% endfor %}
+		</tr>
+		{% endif %}
+		<tr>
+			<td><a href="{{ url_for("metapackage_packages", name=metapackagename) }}">{{ metapackagename }}</a></td>
+			{% for reponame in reponames %}
+				{% set summary = summaries[reponame] %}
+				{% if summary is defined %}
+					<td>
+						<span class="version version-{{ summary.versionclass|css_for_summary_versionclass }}">
+							{%- if repometadata[reponame].links -%}
+								<a href="{{ repometadata[reponame].links[0].url|pkg_format(summary.bestpackage) }}">
+							{%- endif -%}
+							{%- if summary.numpackages > 1 -%}
+								{{- summary.version -}}
+							{%- else -%}
+								{{- summary.version -}}
+							{%- endif -%}
+							{%- if repometadata[reponame].links -%}
+								</a>
+							{%- endif -%}
+						</span>
+						{%- if summary.numpackages > 1 -%}
+							<sup>{{- summary.numpackages -}}</sup>
+						{%- endif -%}
+					</td>
+				{% else %}
+					<td>-</td>
+				{% endif %}
+			{% endfor %}
+		</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<div class="alert alert-warning" role="alert">No metapackages found matching the criteria</div>
 {% endif %}
 
+</div>
 {% endblock %}
 

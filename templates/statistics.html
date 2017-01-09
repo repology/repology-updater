@@ -1,40 +1,61 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Statistics - {{ super() }}
+{{ super() }}: statistics
 {% endblock %}
 
-{% block subheader %}
+{% block header %}
 Statistics
 {% endblock %}
 
 {% block content %}
+<div class="container">
 
-<table>
-    <tr>
-        <th style="text-align: right">Repository</th>
-        <th>Total packages</th>
-        <th>Up to date</th>
-        <th>% up to date</th>
-        <th>Outdated</th>
-        <th>% outdated</th>
-        <th>Ignored</th>
-        <th>% ignored</th>
-        <th>Last updated</th>
-    </tr>
-    {% for reponame in reponames %}
-    <tr>
-        <td style="text-align: right">{{ repometadata[reponame].desc }}</td>
-        <td style="text-align: center"><span class="total">{{ repostats[reponame].num_packages }}</span></td>
-        <td style="text-align: center"><span class="version good">{{ repostats[reponame].num_packages_newest }}</span></td>
-        <td style="text-align: center"><span class="version good">{{ (repostats[reponame].num_packages_newest / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
-        <td style="text-align: center"><span class="version bad">{{ repostats[reponame].num_packages_outdated }}</span></td>
-        <td style="text-align: center"><span class="version bad">{{ (repostats[reponame].num_packages_outdated / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
-        <td style="text-align: center"><span class="version ignore">{{ repostats[reponame].num_packages_ignored }}</span></td>
-        <td style="text-align: center"><span class="version ignore">{{ (repostats[reponame].num_packages_ignored / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
-        <td style="text-align: center"><span class="">{% if repostats[reponame].last_update %}{{ repostats[reponame].last_update.astimezone().strftime("%Y-%m-%d %H:%M %Z") }}{% else %}never{% endif %}</span></td>
-    </tr>
-    {% endfor %}
+<table class="table table-striped">
+	<tr>
+		<th style="text-align: right">Repository</th>
+		<th style="text-align: center">Total packages</th>
+		<th style="text-align: center">Up to date</th>
+		<th style="text-align: center">% up to date</th>
+		<th style="text-align: center">Outdated</th>
+		<th style="text-align: center">% outdated</th>
+		<th style="text-align: center">Ignored</th>
+		<th style="text-align: center">% ignored</th>
+		<th style="text-align: center">Updated</th>
+	</tr>
+	{% for reponame in reponames %}
+	<tr>
+		<td  style="text-align: right">
+		{% if repometadata[reponame].url %}
+			<a href="{{ repometadata[reponame].url }}">{{ repometadata[reponame].desc }}</a>
+		{% else %}
+			{{ repometadata[reponame].desc}}
+		{% endif %}
+		</td>
+		<td style="text-align: center"><span>{{ repostats[reponame].num_packages }}</span></td>
+		<td style="text-align: center"><span class="version version-newest">{{ repostats[reponame].num_packages_newest }}</span></td>
+		<td style="text-align: center"><span class="version version-newest">{{ (repostats[reponame].num_packages_newest / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
+		<td style="text-align: center"><span class="version version-outdated">{{ repostats[reponame].num_packages_outdated }}</span></td>
+		<td style="text-align: center"><span class="version version-outdated">{{ (repostats[reponame].num_packages_outdated / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
+		<td style="text-align: center"><span class="version version-ignored">{{ repostats[reponame].num_packages_ignored }}</span></td>
+		<td style="text-align: center"><span class="version version-ignored">{{ (repostats[reponame].num_packages_ignored / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
+		<td style="text-align: center">
+		{% if repostats[reponame].last_update_utc %}
+			{% set minutes_since_update = (repostats[reponame].since_last_update.total_seconds() / 60) | int %}
+			<time datetime="{{ repostats[reponame].last_update_utc.strftime("%Y-%m-%dT%H:%M:%SZ") }}">
+			{% if minutes_since_update >= 1 %}
+				{{ minutes_since_update }} minute(s) ago
+			{% else %}
+				just now
+			{% endif %}
+			</time>
+		{% else %}
+			never
+		{% endif %}
+		</td>
+	</tr>
+	{% endfor %}
 </table>
 
+</div>
 {% endblock %}

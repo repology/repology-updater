@@ -1,186 +1,107 @@
-body {
-	font-family: sans-serif;
-	font-size: 14px;
-	color: #333;
-    margin: 0px;
+.package-repository {
+    float: right;
 }
 
-div.container {
-    display: block;
-    margin: 0px 10px;
-}
-
-/* headers */
-.header-stripe-1 {
-    background-color: #dddddd;
-    overflow: auto;
-    padding: 10px 0px 10px 0px;
-}
-
-.header-stripe-1 h1 {
-    font-weight: bold;
-    font-size: 600%;
-}
-
-.site-logo {
-    display: block;
-    float: left;
-    margin: 0px 20px 0px 20px;
-}
-
-.header-stripe-2 {
-    background-color: #eeeeee;
-    margin-bottom: 20px;
-}
-
-.header-stripe-2 h2 {
-    font-weight: bold;
-    font-size: 200%;
-    padding: 10px;
+.package-name {
     margin: 0;
 }
 
-/* global */
-a:link, a:visited {
-    color: #808080;
+.package-version {
+    margin-left: 1em;
 }
 
-a:hover {
-    color: #000000;
+.list-package-details {
+    padding-left: 0;
+    list-style: none;
 }
 
-/* blocks */
-nav, article {
-    display: block;
-    padding: 10px;
-    margin: 0;
-}
-
-pre {
-    background-color: #eeeeee;
-    padding: 5px;
-}
-
-/* navigation */
-nav a:link, nav a:visited {
-    color: #000000;
-}
-
-nav {
-    padding: 0;
-}
-
-nav ul {
-    display: block;
-    padding: 5px;
-    margin: 0px;
-}
-
-nav ul li {
-    display: inline;
-}
-
-nav ul li a {
-    text-align: center;
-    min-width: 30px;
-    display: inline-block;
-    background-color: #f0f0f0;
-    padding: 4px 8px;
-    margin: 2px 0px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-nav ul li a.active {
-    background-color: #ffffff;
-}
-
-nav ul li a:hover {
-    background-color: #ffffff;
-}
-
-/* packages table */
-table {
-	border: 0px;
-	border-collapse: collapse;
-	margin: 0px auto;
-    width: 100%;
-    font-size: inherit;
-}
-
-td a:link, td a:visited {
-    color: #000000;
-    text-decoration: none;
-}
-
-td a:hover {
+.panel-heading-link, .panel-heading-link:hover, .panel-heading-link:active, .panel-heading-link:visited {
+    color: inherit;
     text-decoration: underline;
 }
 
-tr:nth-child(even) {
-	background: #f7f5f3;
+.panel-heading-link:hover {
+    text-decoration: none;
 }
 
-tr:nth-child(odd) {
-	background: #ffffff;
+.repology-footer {
+    background-color: #2A2730;
+    color: #99979C;
+    margin-top: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
-th {
-	vertical-align: bottom;
-	border-bottom: 2px solid #ddd;
-	padding: 0.5em 0;
+.repology-footer a:link, .repology-footer-links a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
 }
 
-td {
-	padding: 0.5em 0;
-	border-bottom: 1px solid #ddd;
-    white-space: nowrap;
+.repology-footer a:hover, .repology-footer-links a:active {
+    text-decoration: underline;
 }
 
-td:nth-child(1) {
-    padding-left: 0.5em;
+.repology-footer-links {
+    list-style: none;
+    padding: 0;
 }
 
-td:nth-last-child(1) {
-    padding-right: 0.5em;
+.repology-footer-links li {
+    display: inline;
+    margin-right: 1em;
 }
 
-.incomplete {
-    color: #808080;
+/* color copied from bootstrap */
+.navbar-separator-at-right {
+    border-right: 1px dotted #e7e7e7;
 }
 
+.navbar-separator-at-left {
+    border-left: 1px dotted #e7e7e7;
+}
+
+/* copied from bootstrap .label */
 .version {
-	font-size: 12px;
-	border-radius: 3px;
-	padding: 2px 4px;
-}
-
-.lonely {
-	background-color: #00e0e0;
-}
-
-.good {
-	background-color: #80ff80;
-}
-
-.multi {
-	background-color: #ffff40;
-}
-
-.bad {
-	background-color: #ff8080;
-}
-
-.ignore {
-	background-color: #c0c0c0;
-}
-
-.total {
-	font-weight: bold;
-}
-
-/* misc */
-div.gentime {
-    margin: 1em;
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
     text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+
+    text-shadow: 0px 1px 1px black;
+    color: white;
+}
+
+.version a {
+    color: white;
+}
+
+.version-newest {
+    background-color: #5cb85c;
+}
+
+.version-outdated {
+    background-color: #d9534f;
+}
+
+.version-mixed {
+    background-color: #f0ad4e;
+}
+
+.version-unique {
+    background-color: #5bc0de;
+}
+
+.version-ignored {
+    background-color: #777777;
+}
+
+/* XXX: check if bootstrap h1.pageheader margin is always 40px */
+.pageheader-right {
+	float: right;
+	margin-top: 40px;
 }

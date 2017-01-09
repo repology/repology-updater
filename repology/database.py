@@ -527,6 +527,37 @@ class Database:
             } for row in self.cursor.fetchall()
         ]
 
+    def GetMaintainersByLetter(self, letter=None):
+        request = """
+            SELECT
+                maintainer,
+                num_packages,
+                num_packages_outdated
+            FROM maintainers
+        """
+
+        args = []
+        if letter:
+            letter = letter.lower()[0]
+        if not letter or letter < 'a':
+            request += " WHERE maintainer < 'a'"
+        elif letter >= 'z':
+            request += " WHERE maintainer >= 'z'"
+        else:
+            request += " WHERE maintainer >= %s"
+            request += " AND maintainer < %s"
+            args += [ letter, chr(ord(letter) + 1) ]
+
+        self.cursor.execute(request, args)
+
+        return [
+            {
+                'maintainer': row[0],
+                'num_packages': row[1],
+                'num_packages_outdated': row[2]
+            } for row in self.cursor.fetchall()
+        ]
+
     def GetRepositories(self):
         self.cursor.execute("""
             SELECT
@@ -535,7 +566,8 @@ class Database:
                 num_packages_newest,
                 num_packages_outdated,
                 num_packages_ignored,
-                last_update
+                last_update at time zone 'UTC',
+                now() - last_update
             FROM repositories
         """)
 
@@ -545,6 +577,7 @@ class Database:
                 'num_packages_newest': row[2],
                 'num_packages_outdated': row[3],
                 'num_packages_ignored': row[4],
-                'last_update': row[5]
+                'last_update_utc': row[5],
+                'since_last_update': row[6]
             } for row in self.cursor.fetchall()
         }

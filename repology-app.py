@@ -19,92 +19,46 @@
 
 import json
 import flask
-from flask import Flask
-from math import sqrt
+from functools import cmp_to_key
 
 from repology.database import Database
 from repology.queryfilters import *
 from repology.repoman import RepositoryManager
-from repology.package import *
-from repology.packageformatter import PackageFormatter
 from repology.packageproc import *
 from repology.metapackageproc import *
+from repology.template_helpers import *
 
-# globals
-app = Flask(__name__)
+# create application and handle configuration
+app = flask.Flask(__name__)
 
 app.config.from_pyfile('repology.conf.default')
 app.config.from_pyfile('repology.conf', silent=True)
 app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 
+# global repology objects
 repoman = RepositoryManager(app.config['REPOS_PATH'], "dummy") # XXX: should not construct fetchers and parsers here
+repometadata = repoman.GetMetadata();
 
-# globals
-def SpanTrim(value, maxlength):
-    # support lists as well
-    if type(value) is list:
-        return [SpanTrim(v, maxlength) for v in value]
-
-    if len(value) <= maxlength:
-        return value
-
-    # no point in leaving dot just before ellipsis
-    trimmed = value[0:maxlength-2]
-    while trimmed.endswith('.'):
-        trimmed = trimmed[0:-1]
-
-    # we assume ellipsis take ~2 char width
-    return "<span title=\"%s\">%s…</span>" % (value, trimmed)
-
-def Clamp(value, lower, upper):
-    if value < lower:
-        return lower
-    if value > upper:
-        return upper
-    return value
-
-def Split(value, sep):
-    return value.split(sep)
-
-def pkg_format(value, pkg):
-    return PackageFormatter().format(value, pkg)
-
-def PackageVersionClass2CSSClass(value):
-    if value == PackageVersionClass.newest:
-        return 'good'
-    elif value == PackageVersionClass.outdated:
-        return 'bad'
-    elif value == PackageVersionClass.ignored:
-        return 'ignore'
-
-def RepositoryVersionClass2CSSClass(value):
-    if value == RepositoryVersionClass.newest:
-        return 'good'
-    elif value == RepositoryVersionClass.outdated:
-        return 'bad'
-    elif value == RepositoryVersionClass.mixed:
-        return 'multi'
-    elif value == RepositoryVersionClass.ignored:
-        return 'ignore'
-    elif value == RepositoryVersionClass.lonely:
-        return 'lonely'
-
-def url_for_self(**args):
-    return flask.url_for(flask.request.endpoint, **dict(flask.request.view_args, **args))
-
+# templates: tuning
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
-app.jinja_env.filters['spantrim'] = SpanTrim
-app.jinja_env.filters['clamp'] = Clamp
-app.jinja_env.filters['sqrt'] = sqrt
-app.jinja_env.filters['split'] = Split
+
+# templates: custom filters
 app.jinja_env.filters['pkg_format'] = pkg_format
-app.jinja_env.filters['packageversionclass2css'] = PackageVersionClass2CSSClass
-app.jinja_env.filters['repositoryversionclass2css'] = RepositoryVersionClass2CSSClass
+app.jinja_env.filters['css_for_package_versionclass'] = css_for_package_versionclass
+app.jinja_env.filters['css_for_summary_versionclass'] = css_for_summary_versionclass
+app.jinja_env.filters['maintainer_to_link'] = maintainer_to_link
+
+# templates: custom tests
+app.jinja_env.tests['for_page'] = for_page
+
+# templates: custom global functions
 app.jinja_env.globals['url_for_self'] = url_for_self
-app.jinja_env.globals['next_letter'] = lambda letter : chr(ord(letter) + 1)
+
+# templates: custom global data
 app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']
 app.jinja_env.globals['REPOLOGY_HOME'] = app.config['REPOLOGY_HOME']
+app.jinja_env.globals['repometadata'] = repometadata
 
 def get_db():
     if not hasattr(flask.g, 'database'):
@@ -174,7 +128,7 @@ def get_packages_name_range(packages):
 
     return firstname, lastname
 
-def metapackages_generic(bound, *filters, template='metapackages.html'):
+def metapackages_generic(bound, *filters, template='metapackages.html', extravars=None):
     namefilter = bound_to_filter(bound)
 
     reponames = repoman.GetNames(app.config['REPOSITORIES'])
@@ -202,16 +156,10 @@ def metapackages_generic(bound, *filters, template='metapackages.html'):
         template,
         reponames=reponames,
         summaries=summaries,
-        repometadata=repoman.GetMetadata(),
         firstname=firstname,
         lastname=lastname,
-        search=search
-    )
-
-def repositories_generic(template='repositories.html'):
-    return flask.render_template(template,
-        reponames=repoman.GetNames(app.config['REPOSITORIES']),
-        repometadata=repoman.GetMetadata(),
+        search=search,
+        **(extravars if extravars else {})
     )
 
 @app.route("/") # XXX: redirect to metapackages/all?
@@ -219,97 +167,207 @@ def repositories_generic(template='repositories.html'):
 @app.route("/metapackages/all/")
 @app.route("/metapackages/all/<bound>/")
 def metapackages_all(bound=None):
-    return metapackages_generic(bound)
+    return metapackages_generic(
+        bound,
+        template="metapackages-all.html"
+    )
 
 @app.route("/metapackages/unique/")
 @app.route("/metapackages/unique/<bound>/")
 def metapackages_unique(bound=None):
-    return metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
+    return metapackages_generic(
+        bound,
+        InNumFamiliesQueryFilter(less=1),
+        template="metapackages-unique.html"
+    )
 
 @app.route("/metapackages/widespread/")
 @app.route("/metapackages/widespread/<bound>/")
 def metapackages_widespread(bound=None):
-    return metapackages_generic(bound, InNumFamiliesQueryFilter(more=10))
+    return metapackages_generic(
+        bound,
+        InNumFamiliesQueryFilter(more=10),
+        template="metapackages-widespread.html"
+    )
 
-@app.route("/metapackages/in-repo/")
 @app.route("/metapackages/in-repo/<repo>/")
 @app.route("/metapackages/in-repo/<repo>/<bound>/")
-def metapackages_in_repo(repo=None, bound=None):
-    if repo:
-        return metapackages_generic(bound, InRepoQueryFilter(repo))
-    else:
-        return repositories_generic()
+def metapackages_in_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
 
-@app.route("/metapackages/outdated-in-repo/")
+    return metapackages_generic(
+        bound,
+        InRepoQueryFilter(repo),
+        template="metapackages-in-repo.html",
+        extravars={'repo': repo}
+    )
+
 @app.route("/metapackages/outdated-in-repo/<repo>/")
 @app.route("/metapackages/outdated-in-repo/<repo>/<bound>/")
-def metapackages_outdated_in_repo(repo=None, bound=None):
-    if repo:
-        return metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
-    else:
-        return repositories_generic()
+def metapackages_outdated_in_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
 
-@app.route("/metapackages/not-in-repo/")
+    return metapackages_generic(
+        bound,
+        OutdatedInRepoQueryFilter(repo),
+        template="metapackages-outdated-in-repo.html",
+        extravars={'repo': repo}
+    )
+
 @app.route("/metapackages/not-in-repo/<repo>/")
 @app.route("/metapackages/not-in-repo/<repo>/<bound>/")
-def metapackages_not_in_repo(repo=None, bound=None):
-    if repo:
-        return metapackages_generic(bound, NotInRepoQueryFilter(repo))
-    else:
-        return repositories_generic()
+def metapackages_not_in_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
 
-@app.route("/metapackages/candidates-for-repo/")
+    return metapackages_generic(
+        bound,
+        NotInRepoQueryFilter(repo),
+        template="metapackages-not-in-repo.html",
+        extravars={'repo': repo}
+    )
+
 @app.route("/metapackages/candidates-for-repo/<repo>/")
 @app.route("/metapackages/candidates-for-repo/<repo>/<bound>/")
-def metapackages_candidates_for_repo(repo=None, bound=None):
-    if repo:
-        return metapackages_generic(bound, NotInRepoQueryFilter(repo), InNumFamiliesQueryFilter(more=5))
-    else:
-        return repositories_generic()
+def metapackages_candidates_for_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
 
-@app.route("/metapackages/unique-in-repo/")
+    return metapackages_generic(
+        bound,
+        InNumFamiliesQueryFilter(more=5),
+        template="metapackages-candidates-for-repo.html",
+        extravars={'repo': repo}
+    )
+
 @app.route("/metapackages/unique-in-repo/<repo>/")
 @app.route("/metapackages/unique-in-repo/<repo>/<bound>/")
-def metapackages_unique_in_repo(repo=None, bound=None):
-    if repo:
-        return metapackages_generic(bound, InRepoQueryFilter(repo), InNumFamiliesQueryFilter(less=1))
-    else:
-        return repositories_generic()
+def metapackages_unique_in_repo(repo, bound=None):
+    if not repo or not repo in repometadata:
+        flask.abort(404)
+
+    return metapackages_generic(
+        bound,
+        InRepoQueryFilter(repo),
+        InNumFamiliesQueryFilter(less=1),
+        template="metapackages-unique-in-repo.html",
+        extravars={'repo': repo}
+    )
 
 @app.route("/metapackages/by-maintainer/<maintainer>/")
 @app.route("/metapackages/by-maintainer/<maintainer>/<bound>/")
 def metapackages_by_maintainer(maintainer, bound=None):
-    return metapackages_generic(bound, MaintainerQueryFilter(maintainer))
+    return metapackages_generic(
+        bound,
+        MaintainerQueryFilter(maintainer),
+        template="metapackages-by-maintainer.html",
+        extravars={'maintainer': maintainer}
+    )
 
 @app.route("/metapackages/outdated-by-maintainer/<maintainer>/")
 @app.route("/metapackages/outdated-by-maintainer/<maintainer>/<bound>/")
 def metapackages_outdated_by_maintainer(maintainer, bound=None):
-    return metapackages_generic(bound, MaintainerOutdatedQueryFilter(maintainer))
+    return metapackages_generic(
+        bound,
+        MaintainerOutdatedQueryFilter(maintainer),
+        template="metapackages-outdated-by-maintainer.html",
+        extravars={'maintainer': maintainer}
+    )
 
 @app.route("/maintainers/")
-@app.route("/maintainers/<int:page>/")
-def maintainers(page=0):
-    maintainers_count = get_db().GetMaintainersCount()
-    maintainers = get_db().GetMaintainers(offset = page * app.config['PER_PAGE'], limit = app.config['PER_PAGE'])
+@app.route("/maintainers/<page>/")
+def maintainers(page=None):
+    maintainers = get_db().GetMaintainersByLetter(page) # handles page sanity inside
 
     return flask.render_template(
         "maintainers.html",
         maintainers=maintainers,
-        page=page,
-        num_pages=((maintainers_count + app.config['PER_PAGE'] - 1) // app.config['PER_PAGE'])
+        page=page
+    )
+
+@app.route("/repositories/")
+def repositories():
+    return flask.render_template(
+        "repositories.html",
+        reponames=repoman.GetNames(app.config['REPOSITORIES']),
     )
 
 @app.route("/metapackage/<name>")
 def metapackage(name):
+    # metapackage landing page; just redirect to packages, may change in future
+    return flask.redirect(flask.url_for('metapackage_packages', name=name), 303)
+
+@app.route("/metapackage/<name>/packages")
+def metapackage_packages(name):
     packages = get_db().GetMetapackage(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
-    repometadata = repoman.GetMetadata();
-    return flask.render_template("package.html", packages=packages, repometadata=repometadata, name=name)
+    return flask.render_template("metapackage-packages.html", packages=packages, name=name)
+
+@app.route("/metapackage/<name>/information")
+def metapackage_information(name):
+    packages = get_db().GetMetapackage(name)
+    packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
+
+    information = {}
+
+    def append_info(infokey, infoval, package):
+        if not infokey in information:
+            information[infokey] = {}
+
+        if not infoval in information[infokey]:
+            information[infokey][infoval] = set()
+
+        information[infokey][infoval].add(package.family)
+
+    for package in packages:
+        append_info('names', package.name, package)
+        append_info('versions', package.version, package)
+        append_info('repos', package.repo, package)
+
+        if package.comment:
+            append_info('summaries', package.comment, package)
+        for maintainer in package.maintainers:
+            append_info('maintainers', maintainer, package)
+        if package.category:
+            append_info('categories', package.category, package)
+        if package.homepage:
+            append_info('homepages', package.homepage, package)
+        for download in package.downloads:
+            append_info('downloads', download, package)
+
+    def packages_version_cmp_reverse(p1, p2):
+        return VersionCompare(p2.version, p1.version)
+
+    sortedversions = []
+
+    for package in sorted(packages, key=cmp_to_key(packages_version_cmp_reverse)):
+        if sortedversions and sortedversions[-1]['version'] == package.version and sortedversions[-1]['versionclass'] == package.versionclass:
+            sortedversions[-1]['families'].add(package.family)
+        else:
+            sortedversions.append(
+                {
+                    'families': set((package.family,)),
+                    'version': package.version,
+                    'versionclass': package.versionclass
+                }
+            )
+
+    return flask.render_template(
+        "metapackage-information.html",
+        information=information,
+        sortedversions=sortedversions,
+        name=name
+    )
+
+@app.route("/metapackage/<name>/badges")
+def metapackage_badges(name):
+    return flask.render_template("metapackage-badges.html", name=name)
 
 @app.route("/badge/vertical-allrepos/<name>.svg")
 def badge_vertical_allrepos(name):
     summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
-    repometadata = repoman.GetMetadata();
 
     repostates = []
     for reponame, summary in summaries.items():
@@ -347,16 +405,11 @@ def news():
 def about():
     return flask.render_template("about.html")
 
-@app.route("/badges")
-def badges():
-    return flask.render_template("badges.html")
-
 @app.route("/statistics")
 def statistics():
     return flask.render_template(
         "statistics.html",
         reponames=repoman.GetNames(app.config['REPOSITORIES']),
-        repometadata=repoman.GetMetadata(),
         repostats=get_db().GetRepositories(),
         num_metapackages=get_db().GetMetapackagesCount()
     )
