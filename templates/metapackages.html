@@ -73,11 +73,7 @@ Metapackages
 							{%- if repometadata[reponame].links -%}
 								<a href="{{ repometadata[reponame].links[0].url|pkg_format(summary.bestpackage) }}">
 							{%- endif -%}
-							{%- if summary.numpackages > 1 -%}
-								{{- summary.version -}}
-							{%- else -%}
-								{{- summary.version -}}
-							{%- endif -%}
+							{{- summary.version|truncate(12) -}}
 							{%- if repometadata[reponame].links -%}
 								</a>
 							{%- endif -%}
