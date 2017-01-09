@@ -64,7 +64,7 @@ class TestFlask(unittest.TestCase):
         if not html_validation:
             return document
 
-        errors = [ error for error in tidy_document(document)[1].split('\n') if error ]
+        errors = [ error for error in tidy_document(document)[1].split('\n') if error and error.find('trimming empty <span>') == -1 ]
         for error in errors:
             print("HTML error in " + url + ": " + error, file=sys.stderr)
         self.assertTrue(not errors)
