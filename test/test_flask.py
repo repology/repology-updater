@@ -20,7 +20,23 @@
 import os
 import json
 import unittest
+import sys
 import xml.etree.ElementTree
+
+html_validation = True
+
+try:
+    from tidylib import tidy_document
+    _, errors = tidy_document('<!DOCTYPE html><html><head><title>test</title></head><body><nav>test</nav></body></html>')
+    if errors.find('<nav> is not recognized') != -1:
+        raise RuntimeError("Tidylib does not support HTML5")
+except ImportError:
+    print("Unable to import tidylib, HTML validation is disabled", file=sys.stderr)
+    html_validation = False
+except RuntimeError:
+    print("Tidylib HTML5 support check failed, HTML validation is disabled", file=sys.stderr)
+    html_validation = False
+
 
 repology_app = __import__("repology-app")
 
@@ -43,6 +59,18 @@ class TestFlask(unittest.TestCase):
             self.assertFalse(pattern in text)
         return text
 
+    def checkurl_html(self, url, status_code=200, mimetype='text/html', has=[], hasnot=[]):
+        document = self.checkurl(url=url, status_code=status_code, mimetype=mimetype, has=has, hasnot=hasnot)
+        if not html_validation:
+            return document
+
+        errors = [ error for error in tidy_document(document)[1].split('\n') if error ]
+        for error in errors:
+            print("HTML error in " + url + ": " + error, file=sys.stderr)
+        self.assertTrue(not errors)
+
+        return document
+
     def checkurl_json(self, url, status_code=200, mimetype='application/json', has=[], hasnot=[]):
         return json.loads(self.checkurl(url=url, status_code=status_code, mimetype=mimetype, has=has, hasnot=hasnot))
 
@@ -53,9 +81,9 @@ class TestFlask(unittest.TestCase):
         return self.checkurl(url=url, status_code=404, mimetype=None)
 
     def test_static_pages(self):
-        self.checkurl('/news', has=['support added']);
-        self.checkurl('/about', has=['maintainers']);
-        self.checkurl('/api', has=['/api/v1/metapackages/all/firefox']);
+        self.checkurl_html('/news', has=['support added']);
+        self.checkurl_html('/about', has=['maintainers']);
+        self.checkurl_html('/api', has=['/api/v1/metapackages/all/firefox']);
 
     def test_statistics(self):
         self.checkurl('/statistics', has=['FreeBSD']);
@@ -70,46 +98,46 @@ class TestFlask(unittest.TestCase):
 
     def test_metapackage(self):
         self.checkurl('/metapackage/kiconvtool', status_code=303)
-        self.checkurl('/metapackage/kiconvtool/packages', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl('/metapackage/nonexistent/packages', has=['No packages found'])
-        self.checkurl('/metapackage/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl('/metapackage/nonexistent/information', has=['No data found'])
-        self.checkurl('/metapackage/kiconvtool/badges', has=[
+        self.checkurl_html('/metapackage/kiconvtool/packages', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl_html('/metapackage/nonexistent/packages', has=['No packages found'])
+        self.checkurl_html('/metapackage/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl_html('/metapackage/nonexistent/information', has=['No data found'])
+        self.checkurl_html('/metapackage/kiconvtool/badges', has=[
             'http://repology.org/metapackage/kiconvtool',
             'http://repology.org/badge/vertical-allrepos/kiconvtool.svg',
             'http://repology.org/badge/tiny-packages/kiconvtool.svg',
         ])
 
     def test_maintaners(self):
-        self.checkurl('/maintainers/a/', has=['amdmi3@freebsd.org'])
+        self.checkurl_html('/maintainers/a/', has=['amdmi3@freebsd.org'])
 
     def test_repositories(self):
-        self.checkurl('/repositories/', has=['FreeBSD'])
+        self.checkurl_html('/repositories/', has=['FreeBSD'])
 
     def test_metapackages(self):
-        self.checkurl('/metapackages/', has=['kiconvtool', '0.97'])
+        self.checkurl_html('/metapackages/', has=['kiconvtool', '0.97'])
 
-        self.checkurl('/metapackages/all/', has=['kiconvtool'])
-        self.checkurl('/metapackages/all/k/', has=['kiconvtool'])
-        self.checkurl('/metapackages/all/>k/', has=['kiconvtool'])
-        self.checkurl('/metapackages/all/<l/', has=['kiconvtool'])
-        self.checkurl('/metapackages/all/l/', hasnot=['kiconvtool'])
-        self.checkurl('/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
-        self.checkurl('/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/k/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/>k/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/<l/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/l/', hasnot=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
 
-        self.checkurl('/metapackages/in-repo/freebsd/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/in-repo/freebsd/', has=['kiconvtool'])
 
-        self.checkurl('/metapackages/not-in-repo/freebsd/', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
+        self.checkurl_html('/metapackages/not-in-repo/freebsd/', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
 
-        self.checkurl('/metapackages/unique-in-repo/freebsd/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/unique-in-repo/freebsd/', has=['kiconvtool'])
 
-        self.checkurl('/metapackages/unique/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/unique/', has=['kiconvtool'])
 
-        self.checkurl('/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
 
         # special cases: check fallback code for going before first or after last entry
-        self.checkurl('/metapackages/all/<0/', has=['kiconvtool'])
-        self.checkurl('/metapackages/all/>zzzzzz/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/<0/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/>zzzzzz/', has=['kiconvtool'])
 
     def test_api_v1_metapackage(self):
         self.assertEqual(self.checkurl_json('/api/v1/metapackage/kiconvtool', mimetype='application/json'),
