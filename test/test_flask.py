@@ -69,8 +69,16 @@ class TestFlask(unittest.TestCase):
         self.checkurl_404('/badge/tiny-packages/nonexistent')
 
     def test_metapackage(self):
-        self.checkurl('/metapackage/kiconvtool', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl('/metapackage/nonexistent', has=['No packages found'])
+        self.checkurl('/metapackage/kiconvtool', status_code=303)
+        self.checkurl('/metapackage/kiconvtool/packages', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl('/metapackage/nonexistent/packages', has=['No packages found'])
+        self.checkurl('/metapackage/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl('/metapackage/nonexistent/information', has=['No data found'])
+        self.checkurl('/metapackage/kiconvtool/badges', has=[
+            'http://repology.org/metapackage/kiconvtool',
+            'http://repology.org/badge/vertical-allrepos/kiconvtool.svg',
+            'http://repology.org/badge/tiny-packages/kiconvtool.svg',
+        ])
 
     def test_maintaners(self):
         self.checkurl('/maintainers/a/', has=['amdmi3@freebsd.org'])
