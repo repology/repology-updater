@@ -48,6 +48,7 @@ def FillPackagesetVersions(packages):
         if result > 0:
             package.versionclass = PackageVersionClass.ignored
         elif result == 0:
+            # XXX: if len(families) == 1 -> PackageVersionClass.unique
             package.versionclass = PackageVersionClass.newest
         else:
             package.versionclass = PackageVersionClass.outdated
