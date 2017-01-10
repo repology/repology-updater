@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from "macros.html" import repository_name %}
 
 {% block title %}
 {{ super() }}: repositories
@@ -22,13 +23,7 @@ Repositories
 		</tr>
 	{% for reponame in column %}
 		<tr>
-			<td  style="text-align: right">
-			{% if repometadata[reponame].url %}
-				<a href="{{ repometadata[reponame].url }}">{{ repometadata[reponame].desc }}</a>
-			{% else %}
-				{{ repometadata[reponame].desc}}
-			{% endif %}
-			</td>
+			<td  style="text-align: right">{{ repository_name(reponame) }}</td>
 			<td style="white-space: nowrap;">
 				<a href="{{ url_for('metapackages_in_repo', repo=reponame) }}">Present</a>
 				<a href="{{ url_for('metapackages_not_in_repo', repo=reponame) }}">Absent</a>

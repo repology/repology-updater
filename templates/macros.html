@@ -1,0 +1,7 @@
+{% macro repository_name(reponame) %}
+	{% if repometadata[reponame].url %}
+		<a href="{{ repometadata[reponame].url }}">{{ repometadata[reponame].desc }}</a>
+	{% else %}
+		{{ repometadata[reponame].desc }}
+	{% endif %}
+{% endmacro %}
