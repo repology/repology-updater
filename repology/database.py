@@ -82,8 +82,9 @@ class MetapackageQueryConstructor:
         else:
             query += ' ORDER BY effname ASC'
 
-        query += ' LIMIT %s'
-        args.append(self.limit)
+        if self.limit:
+            query += ' LIMIT %s'
+            args.append(self.limit)
 
         return (query, args)
 
