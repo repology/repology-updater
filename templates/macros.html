@@ -1,7 +1,15 @@
-{%- macro repository_name(reponame) -%}
+{%- macro repository_link(reponame) -%}
 	{%- if repometadata[reponame].url -%}
 		<a href="{{ repometadata[reponame].url }}">{{ repometadata[reponame].desc }}</a>
 	{%- else -%}
 		{{ repometadata[reponame].desc }}
+	{%- endif -%}
+{%- endmacro -%}
+
+{%- macro maintainer_link(maintainer) -%}
+	{% if maintainer|maintainer_to_link -%}
+		<a href="{{ maintainer|maintainer_to_link }}">{{ maintainer }}</a>
+	{%- else -%}
+		{{ maintainer }}
 	{%- endif -%}
 {%- endmacro -%}
