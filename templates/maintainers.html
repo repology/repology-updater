@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "macros.html" as macros %}
 
 {% block title %}
 {{ super() }}: maintainers
@@ -29,30 +30,30 @@ Maintainers
 <div class="col-md-6">
 	<table class="table table-striped table-condensed">
 		<tr>
-			<th>Maintainer</th>
-			<th>Total packages</th>
-			<th>Outdated packages</th>
-			<th>Percent up to date</th>
+			<th class="text-right">Maintainer</th>
+			<th class="text-center">Total packages</th>
+			<th class="text-center">Outdated packages</th>
+			<th class="text-center">Up to date</th>
 		</tr>
 		{% for maintainer in column %}
 		<tr>
-			<td>
+			<td class="text-right">
 				<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
 					{{ maintainer.maintainer }}
 				</a>
 			</td>
-			<td>
+			<td class="text-center">
 				<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
 					{{ maintainer.num_packages }}
 				</a>
 			</td>
-			<td>
+			<td class="text-center">
 				<a href="{{ url_for('metapackages_outdated_by_maintainer', maintainer=maintainer.maintainer) }}">
 					{{ maintainer.num_packages_outdated }}
 				</a>
 			</td>
-			<td>
-				{{ ((maintainer.num_packages - maintainer.num_packages_outdated) / (maintainer.num_packages|default(1,true)) * 100) | round(1) }}%
+			<td class="text-center">
+				{{ macros.safe_percent(maintainer.num_packages - maintainer.num_packages_outdated, maintainer.num_packages, 0) }}
 			</td>
 		</tr>
 		{% endfor %}

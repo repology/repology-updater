@@ -21,3 +21,15 @@
 		{{ text }}
 	{%- endif -%}
 {%- endmacro -%}
+
+{%- macro safe_percent(value, total, round=1) -%}
+	{%- if total == 0 -%}
+		-
+	{%- else -%}
+	{%- if round > 0 -%}
+		{{ (value/total*100.0)|round(round) }}%
+	{%- else -%}
+		{{ (value/total*100.0)|int }}%
+	{%- endif -%}
+	{%- endif -%}
+{%- endmacro -%}

@@ -28,12 +28,12 @@ Statistics
 	<tr>
 		<td style="text-align: right">{{ macros.repository_link(reponame) }}</td>
 		<td style="text-align: center"><span>{{ repostats[reponame].num_packages }}</span></td>
-		<td style="text-align: center"><span class="version version-newest">{{ repostats[reponame].num_packages_newest }}</span></td>
-		<td style="text-align: center"><span class="version version-newest">{{ (repostats[reponame].num_packages_newest / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
-		<td style="text-align: center"><span class="version version-outdated">{{ repostats[reponame].num_packages_outdated }}</span></td>
-		<td style="text-align: center"><span class="version version-outdated">{{ (repostats[reponame].num_packages_outdated / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
-		<td style="text-align: center"><span class="version version-ignored">{{ repostats[reponame].num_packages_ignored }}</span></td>
-		<td style="text-align: center"><span class="version version-ignored">{{ (repostats[reponame].num_packages_ignored / (repostats[reponame].num_packages|default(1,true)) * 100.0) | round(1) }}%</span></td>
+		<td style="text-align: center"><span class="version version-big version-newest">{{ repostats[reponame].num_packages_newest }}</span></td>
+		<td style="text-align: center"><span class="version version-big version-newest">{{ macros.safe_percent(repostats[reponame].num_packages_newest, repostats[reponame].num_packages) }}</span></td>
+		<td style="text-align: center"><span class="version version-big version-outdated">{{ repostats[reponame].num_packages_outdated }}</span></td>
+		<td style="text-align: center"><span class="version version-big version-outdated">{{ macros.safe_percent(repostats[reponame].num_packages_outdated, repostats[reponame].num_packages) }}</span></td>
+		<td style="text-align: center"><span class="version version-big version-ignored">{{ repostats[reponame].num_packages_ignored }}</span></td>
+		<td style="text-align: center"><span class="version version-big version-ignored">{{ macros.safe_percent(repostats[reponame].num_packages_ignored, repostats[reponame].num_packages) }}</span></td>
 		<td style="text-align: center">
 		{% if repostats[reponame].last_update_utc %}
 			{% set minutes_since_update = (repostats[reponame].since_last_update.total_seconds() / 60) | int %}
