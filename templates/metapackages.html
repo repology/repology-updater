@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "macros.html" as macros %}
 
 {% block title %}
 {{ super() }}: metapackages
@@ -70,13 +71,7 @@ Metapackages
 				{% if summary is defined %}
 					<td>
 						<span class="version version-{{ summary.versionclass|css_for_summary_versionclass }}">
-							{%- if repometadata[reponame].links -%}
-								<a href="{{ repometadata[reponame].links[0].url|pkg_format(summary.bestpackage) }}">
-							{%- endif -%}
-							{{- summary.version|truncate(12) -}}
-							{%- if repometadata[reponame].links -%}
-								</a>
-							{%- endif -%}
+							{{- macros.package_link(summary.bestpackage, summary.version|truncate(12)) -}}
 						</span>
 						{%- if summary.numpackages > 1 -%}
 							<sup>{{- summary.numpackages -}}</sup>

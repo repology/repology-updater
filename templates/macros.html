@@ -13,3 +13,11 @@
 		{{ maintainer }}
 	{%- endif -%}
 {%- endmacro -%}
+
+{%- macro package_link(package, text) -%}
+	{%- if repometadata[package.repo].links -%}
+		<a href="{{ repometadata[package.repo].links[0].url|pkg_format(package) }}">{{ text }}</a>
+	{%- else -%}
+		{{ text }}
+	{%- endif -%}
+{%- endmacro -%}
