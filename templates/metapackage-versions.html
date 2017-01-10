@@ -46,9 +46,13 @@ Versions for <strong>{{ name }}</strong>
 			{{ package.category|default('-', boolean=True) }}
 		</td>
 		<td class="text-left">
+		{% if package.maintainers %}
 		{% for maintainer in package.maintainers -%}
 			{%- if not loop.first %}, {% endif -%}{{ macros.maintainer_link(maintainer) }}
 		{%- endfor %}
+		{% else %}
+			-
+		{% endif %}
 		</td>
 	</tr>
 	{% endfor %}
