@@ -1,7 +1,7 @@
-{% macro repository_name(reponame) %}
-	{% if repometadata[reponame].url %}
+{%- macro repository_name(reponame) -%}
+	{%- if repometadata[reponame].url -%}
 		<a href="{{ repometadata[reponame].url }}">{{ repometadata[reponame].desc }}</a>
-	{% else %}
+	{%- else -%}
 		{{ repometadata[reponame].desc }}
-	{% endif %}
-{% endmacro %}
+	{%- endif -%}
+{%- endmacro -%}
