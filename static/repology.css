@@ -76,6 +76,14 @@
     color: white;
 }
 
+.version-big {
+    font-size: 100%;
+}
+
+.list-sparse {
+    line-height: 2;
+}
+
 .version a {
     color: white;
 }

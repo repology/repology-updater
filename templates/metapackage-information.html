@@ -26,10 +26,10 @@ Information for <strong>{{ name }}</strong>
 		</ul>
 
 		<h2>Versions</h2>
-		<ul>
+		<ul class="list-sparse">
 		{% for versioninfo in versions %}
 			<li>
-				<span class="version version-{{ versioninfo.versionclass|css_for_package_versionclass }}">{{ versioninfo.version }}</span> <b>({{ versioninfo.families|length }})</b>
+				<span class="version version-big version-{{ versioninfo.versionclass|css_for_package_versionclass }}">{{ versioninfo.version }}</span> <b>({{ versioninfo.families|length }})</b>
 			</li>
 		{% endfor %}
 		</ul>
