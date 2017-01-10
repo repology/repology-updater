@@ -38,6 +38,7 @@ app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 # global repology objects
 repoman = RepositoryManager(app.config['REPOS_PATH'], "dummy") # XXX: should not construct fetchers and parsers here
 repometadata = repoman.GetMetadata();
+reponames = repoman.GetNames(app.config['REPOSITORIES'])
 
 # templates: tuning
 app.jinja_env.trim_blocks = True
@@ -59,6 +60,7 @@ app.jinja_env.globals['url_for_self'] = url_for_self
 app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']
 app.jinja_env.globals['REPOLOGY_HOME'] = app.config['REPOLOGY_HOME']
 app.jinja_env.globals['repometadata'] = repometadata
+app.jinja_env.globals['reponames'] = reponames
 
 def get_db():
     if not hasattr(flask.g, 'database'):
@@ -131,8 +133,6 @@ def get_packages_name_range(packages):
 def metapackages_generic(bound, *filters, template='metapackages.html', extravars=None):
     namefilter = bound_to_filter(bound)
 
-    reponames = repoman.GetNames(app.config['REPOSITORIES'])
-
     # process search
     search = flask.request.args.to_dict().get('search')
     searchfilter = NameSubstringQueryFilter(search) if search else None
@@ -154,7 +154,6 @@ def metapackages_generic(bound, *filters, template='metapackages.html', extravar
 
     return flask.render_template(
         template,
-        reponames=reponames,
         summaries=summaries,
         firstname=firstname,
         lastname=lastname,
@@ -290,10 +289,7 @@ def maintainers(page=None):
 
 @app.route("/repositories/")
 def repositories():
-    return flask.render_template(
-        "repositories.html",
-        reponames=repoman.GetNames(app.config['REPOSITORIES']),
-    )
+    return flask.render_template("repositories.html")
 
 @app.route("/metapackage/<name>")
 def metapackage(name):
@@ -398,7 +394,6 @@ def about():
 def statistics():
     return flask.render_template(
         "statistics.html",
-        reponames=repoman.GetNames(app.config['REPOSITORIES']),
         repostats=get_db().GetRepositories(),
         num_metapackages=get_db().GetMetapackagesCount()
     )
