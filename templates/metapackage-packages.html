@@ -17,7 +17,10 @@ Packages for <strong>{{ name }}</strong>
 
 <div class="row">
 {% for package in packages %}
-{% if not loop.first and loop.index0 % 3 == 0 %}</div><div class="row">{% endif %}
+{% if not loop.first and loop.index0 % 3 == 0 %}
+</div>
+<div class="row">
+{% endif %}
 	<div class="col-md-4">
 		<div class="panel {% if package.versionclass == 1 %}panel-success{% elif package.versionclass == 2 %}panel-danger{% else %}panel-default{% endif %}">
 			<div class="panel-heading">
@@ -29,13 +32,13 @@ Packages for <strong>{{ name }}</strong>
 				{% endif %}
 				</div>
 				<h3 class="package-name">
-					{{ package.name }}
+					{{- package.name -}}
 				</h3>
 				<div class="package-version">
-					{{ package.version }}
-					{% if package.origversion %}
+					{{- package.version -}}
+					{%- if package.origversion -%}
 						({{ package.origversion }})
-					{% endif %}
+					{%- endif -%}
 				</div>
 			</div>
 			<ul class="list-group">
@@ -67,18 +70,18 @@ Packages for <strong>{{ name }}</strong>
 			{% if package.licenses %}
 				<li class="list-group-item"><b>License{% if package.licenses|length > 1 %}s{% endif %}:</b>
 					<ul class="list-package-details">
-						{% for license in package.licenses %}
-							<li>{{ license }}</li>
-						{% endfor %}
+					{% for license in package.licenses %}
+						<li>{{ license }}</li>
+					{% endfor %}
 					</ul>
 				</li>
 			{% endif %}
 			{% if repometadata[package.repo].links %}
 				<li class="list-group-item"><b>Package-related links:</b>
 					<ul class="list-package-details">
-						{% for link in repometadata[package.repo].links %}
-							<li><a href="{{ link.url|pkg_format(package) }}">{{ link.desc }}</a></li>
-						{% endfor %}
+					{% for link in repometadata[package.repo].links %}
+						<li><a href="{{ link.url|pkg_format(package) }}">{{ link.desc }}</a></li>
+					{% endfor %}
 					</ul>
 				</li>
 			{% endif %}
