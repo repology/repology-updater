@@ -584,3 +584,7 @@ class Database:
                 'since_last_update': row[6]
             } for row in self.cursor.fetchall()
         }
+
+    def Query(self, query, *args):
+        self.cursor.execute(query, args)
+        return self.cursor.fetchall()
