@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from functools import cmp_to_key
+
 from repology.version import VersionCompare
 from repology.package import *
 
@@ -99,3 +101,28 @@ def PackagesetToSummaries(packages):
         }
 
     return summary
+
+
+def PackagesetSortByVersions(packages):
+    def packages_version_cmp_reverse(p1, p2):
+        return VersionCompare(p2.version, p1.version)
+
+    return sorted(packages, key=cmp_to_key(packages_version_cmp_reverse))
+
+
+def PackagesetAggregateByVersions(packages):
+    versions = []
+
+    for package in packages:
+        if versions and versions[-1]['version'] == package.version and versions[-1]['versionclass'] == package.versionclass:
+            versions[-1]['packages'].append(package)
+        else:
+            versions.append(
+                {
+                    'version': package.version,
+                    'versionclass': package.versionclass,
+                    'packages': [ package ],
+                }
+            )
+
+    return versions

@@ -338,27 +338,15 @@ def metapackage_information(name):
         for download in package.downloads:
             append_info('downloads', download, package)
 
-    def packages_version_cmp_reverse(p1, p2):
-        return VersionCompare(p2.version, p1.version)
+    versions = PackagesetAggregateByVersions(PackagesetSortByVersions(packages))
 
-    sortedversions = []
-
-    for package in sorted(packages, key=cmp_to_key(packages_version_cmp_reverse)):
-        if sortedversions and sortedversions[-1]['version'] == package.version and sortedversions[-1]['versionclass'] == package.versionclass:
-            sortedversions[-1]['families'].add(package.family)
-        else:
-            sortedversions.append(
-                {
-                    'families': set((package.family,)),
-                    'version': package.version,
-                    'versionclass': package.versionclass
-                }
-            )
+    for version in versions:
+        version['families'] = set([package.family for package in version['packages']])
 
     return flask.render_template(
         "metapackage-information.html",
         information=information,
-        sortedversions=sortedversions,
+        versions=versions,
         name=name
     )
 
