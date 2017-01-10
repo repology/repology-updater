@@ -1,0 +1,62 @@
+{% extends "metapackage.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}
+{{ super() }}: information for {{ name }}
+{% endblock %}
+
+{% block header %}
+Information for <strong>{{ name }}</strong>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+{% if not packages_by_repo %}
+<div class="alert alert-warning" role="alert">No data found for metapackage <strong>{{ name }}</strong></div>
+{% else %}
+
+<table class="table table-striped">
+	<tr>
+		<th class="text-right">Repository</th>
+		<th class="text-center">Package name</th>
+		<th class="text-center">Version</th>
+		<th class="text-center">Category</th>
+		<th class="text-left">Maintainer(s)</th>
+	</tr>
+	{% for reponame in reponames %}
+	{% set packages = packages_by_repo[reponame] %}
+	{% set numpackages = packages|length %}
+	{% if not packages %}
+	<tr>
+		<td class="text-right">{{ macros.repository_link(reponame) }}</td>
+		<td colspan="4"></td>
+	</tr>
+	{% else %}
+	{% for package in packages %}
+	<tr>
+		<td class="text-right">{{ macros.repository_link(reponame) }}</td>
+		<td class="text-center">{{ macros.package_link(package, package.name) }}</td>
+		<td class="text-center">
+			<span class="version version-big version-{{ package.versionclass|css_for_package_versionclass }}">
+				{{- macros.package_link(package, package.version) -}}
+			</span>
+		</td>
+		<td class="text-center">
+			{{ package.category|default('-', boolean=True) }}
+		</td>
+		<td class="text-left">
+		{% for maintainer in package.maintainers -%}
+			{%- if not loop.first %}, {% endif -%}{{ macros.maintainer_link(maintainer) }}
+		{%- endfor %}
+		</td>
+	</tr>
+	{% endfor %}
+	{% endif %}
+	{% endfor %}
+</table>
+
+{% endif %}
+
+</div>
+{% endblock %}

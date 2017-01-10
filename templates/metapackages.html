@@ -65,7 +65,7 @@ Metapackages
 		</tr>
 		{% endif %}
 		<tr>
-			<td><a href="{{ url_for("metapackage_packages", name=metapackagename) }}">{{ metapackagename }}</a></td>
+			<td><a href="{{ url_for("metapackage_versions", name=metapackagename) }}">{{ metapackagename }}</a></td>
 			{% for reponame in reponames %}
 				{% set summary = summaries[reponame] %}
 				{% if summary is defined %}

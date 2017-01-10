@@ -294,7 +294,20 @@ def repositories():
 @app.route("/metapackage/<name>")
 def metapackage(name):
     # metapackage landing page; just redirect to packages, may change in future
-    return flask.redirect(flask.url_for('metapackage_packages', name=name), 303)
+    return flask.redirect(flask.url_for('metapackage_versions', name=name), 303)
+
+@app.route("/metapackage/<name>/versions")
+def metapackage_versions(name):
+    packages_by_repo = {}
+    for package in get_db().GetMetapackage(name):
+        if not package.repo in packages_by_repo:
+            packages_by_repo[package.repo] = []
+        packages_by_repo[package.repo].append(package)
+
+    for repo, packages in packages_by_repo.items():
+        packages_by_repo[repo] = PackagesetSortByVersions(packages)
+
+    return flask.render_template("metapackage-versions.html", packages_by_repo=packages_by_repo, name=name)
 
 @app.route("/metapackage/<name>/packages")
 def metapackage_packages(name):
