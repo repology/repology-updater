@@ -548,6 +548,8 @@ class Database:
             request += " AND maintainer < %s"
             args += [ letter, chr(ord(letter) + 1) ]
 
+        request += " ORDER BY maintainer"
+
         self.cursor.execute(request, args)
 
         return [
