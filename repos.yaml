@@ -20,6 +20,8 @@
       url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
     - desc: PortsMon
       url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
+    - desc: Related bugs in FreeBSD bugzilla
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
   tags: [ all, have_testdata, production ]
 
 - name: pkgsrc
@@ -46,6 +48,8 @@
       parser: OpenBSDIndex
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
   links:
+    - desc: OpenPorts.se page
+      url: 'http://openports.se/{category}/{name}'
     - desc: CVSWeb
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}'
   tags: [ all, production ]
@@ -391,6 +395,10 @@
   links:
     - desc: AUR package details
       url: 'https://aur.archlinux.org/packages/{name}'
+    - desc: View PKGBUILD
+      url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={name}'
+    - desc: ArchWiki search
+      url: 'https://wiki.archlinux.org/index.php/Special:Search?search={name}'
   tags: [ all, preproduction ]
 
 ###########################################################################
