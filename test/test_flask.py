@@ -98,10 +98,16 @@ class TestFlask(unittest.TestCase):
 
     def test_metapackage(self):
         self.checkurl('/metapackage/kiconvtool', status_code=303)
+
+        self.checkurl_html('/metapackage/kiconvtool/versions', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl_html('/metapackage/nonexistent/versions', has=['No data found'])
+
         self.checkurl_html('/metapackage/kiconvtool/packages', has=['FreeBSD', '0.97', 'amdmi3'])
         self.checkurl_html('/metapackage/nonexistent/packages', has=['No packages found'])
+
         self.checkurl_html('/metapackage/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
         self.checkurl_html('/metapackage/nonexistent/information', has=['No data found'])
+
         self.checkurl_html('/metapackage/kiconvtool/badges', has=[
             'http://repology.org/metapackage/kiconvtool',
             'http://repology.org/badge/vertical-allrepos/kiconvtool.svg',
