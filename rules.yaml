@@ -574,6 +574,7 @@
 - { namepat: "rubygem-(.*)",           setname: "ruby:$1", family: [ freebsd, fedora, opensuse, slackbuilds ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", family: [ freebsd, openbsd, pkgsrc ] }
 - { family: [ rubygems ],              setname: "ruby:$0" }
+- { namepat: "lib(.*)-ruby",           setname: "ruby:$1", family: [ debian ] } # old Ubuntu Precise
 - { category: dev-ruby,                setname: "ruby:$0", family: [ gentoo ] }
 
 # Tryton (wtf is that); needs to be before python
