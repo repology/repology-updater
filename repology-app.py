@@ -384,13 +384,14 @@ def badge_vertical_allrepos(name):
         {'Content-type': 'image/svg+xml'}
     )
 
-@app.route("/badge/tiny-packages/<name>.svg")
-def badge_tiny_packages(name):
+@app.route("/badge/tiny-repos/<name>.svg")
+def badge_tiny_repos(name):
+    num_families = len(set([package.family for package in get_db().GetMetapackage(name)]))
     return (
         flask.render_template(
             "badge-tiny.svg",
             name=name,
-            num_packages=len(PackagesetToSummaries(get_db().GetMetapackage(name)))
+            num_families=num_families
         ),
         {'Content-type': 'image/svg+xml'}
     )

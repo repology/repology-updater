@@ -92,9 +92,9 @@ class TestFlask(unittest.TestCase):
         self.checkurl_svg('/badge/vertical-allrepos/kiconvtool.svg', has=['<svg', 'FreeBSD'])
         self.checkurl_svg('/badge/vertical-allrepos/nonexistent.svg', has=['<svg', 'yet'])
         self.checkurl_404('/badge/vertical-allrepos/nonexistent')
-        self.checkurl_svg('/badge/tiny-packages/kiconvtool.svg', has=['<svg', '>1<'])
-        self.checkurl_svg('/badge/tiny-packages/nonexistent.svg', has=['<svg', '>0<'])
-        self.checkurl_404('/badge/tiny-packages/nonexistent')
+        self.checkurl_svg('/badge/tiny-repos/kiconvtool.svg', has=['<svg', '>1<'])
+        self.checkurl_svg('/badge/tiny-repos/nonexistent.svg', has=['<svg', '>0<'])
+        self.checkurl_404('/badge/tiny-repos/nonexistent')
 
     def test_metapackage(self):
         self.checkurl('/metapackage/kiconvtool', status_code=303)
@@ -111,7 +111,7 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/metapackage/kiconvtool/badges', has=[
             'http://repology.org/metapackage/kiconvtool',
             'http://repology.org/badge/vertical-allrepos/kiconvtool.svg',
-            'http://repology.org/badge/tiny-packages/kiconvtool.svg',
+            'http://repology.org/badge/tiny-repos/kiconvtool.svg',
         ])
 
     def test_maintaners(self):

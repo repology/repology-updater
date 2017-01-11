@@ -1,4 +1,4 @@
-{% set leftwidth = 66 %}
+{% set leftwidth = 94 %}
 {% set rightwidth = 26 %}
 {% set height = 20 %}
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ leftwidth + rightwidth }}" height="{{ height }}">
@@ -14,10 +14,10 @@
 			<rect x="{{ leftwidth }}" width="{{ rightwidth }}" height="{{ height }}" fill="#007ec6"/>
 			<rect width="{{ leftwidth + rightwidth }}" height="{{ height }}" fill="url(#grad)"/>
 			<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-				<text x="{{ leftwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">packaged</text>
-				<text x="{{ leftwidth / 2.0 }}" y="14">packaged</text>
-				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ num_packages }}</text>
-				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="14">{{ num_packages }}</text>
+				<text x="{{ leftwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">in repositories</text>
+				<text x="{{ leftwidth / 2.0 }}" y="14">in repositories</text>
+				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ num_families }}</text>
+				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="14">{{ num_families }}</text>
 			</g>
 		</g>
 	</a>
