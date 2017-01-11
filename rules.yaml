@@ -141,6 +141,7 @@
 - { name: puzzles,                     setname: sgt-puzzles,              family: [ pkgsrc, arch, openbsd ] }
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
 - { name: "libsdl1.2",                 setname: sdl                       }
+- { name: sdl2pp,                      setname: libsdl2pp                 }
 - { name: sdl-sopwith,                 setname: sopwith,                  family: [ gentoo ]  }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debian ]  }
 - { name: sdlpango,                    setname: sdl-pango,                family: [ debian ]  }
