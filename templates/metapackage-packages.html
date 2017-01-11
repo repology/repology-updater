@@ -35,10 +35,7 @@ Packages for <strong>{{ name }}</strong>
 					{{- package.name -}}
 				</h3>
 				<div class="package-version">
-					{{- package.version -}}
-					{%- if package.origversion -%}
-						({{ package.origversion }})
-					{%- endif -%}
+					{{- package.version }}{% if package.origversion %} ({{ package.origversion }}){% endif -%}
 				</div>
 			</div>
 			<ul class="list-group">
