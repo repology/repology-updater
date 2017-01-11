@@ -274,6 +274,7 @@
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
+- { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 
 # F-Droid is too alien, even if package names match in most cases it's entirely different application
 # So use whitelist
