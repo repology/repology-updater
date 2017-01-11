@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -35,3 +35,4 @@ from .yacp import YACPGitParser
 from .gobolinux import GoboLinuxGitParser
 from .guix import GuixParser
 from .rubygem import RubyGemParser
+from .dports import DPortsIndexParser
