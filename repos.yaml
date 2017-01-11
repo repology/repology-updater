@@ -638,6 +638,20 @@
       url: 'http://freshcode.club/projects/{name}'
   tags: [ all, preproduction ]
 
+- name: libregamewiki
+  desc: Libregamewiki
+  url: https://libregamewiki.org/
+  family: libregamewiki
+  sources:
+    - name: newreleases
+      fetcher: File
+      parser: LibreGameWiki
+      url: https://libregamewiki.org/New_games_and_releases
+  links:
+  - desc: Libregamewiki entry
+    url: 'https://libregamewiki.org/{name}'
+  tags: [ all, preproduction ]
+
 ###########################################################################
 # Upstream module collections: CPAN, PyPi
 ###########################################################################
