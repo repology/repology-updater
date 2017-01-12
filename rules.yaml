@@ -37,7 +37,8 @@
 - { name: arxlibertatis,               setname: arx-libertatis            }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
-- { name: armagetron,                  setname: armagetronad,             family: [ freebsd, opensuse ] }
+- { name: armagetron,                  setname: armagetronad              }
+- { name: armagetronad-server,         setname: armagetronad              } # merge
 - { name: atk1.0,                      setname: atk,                      family: [ debian ]  }
 - { name: atk2mm,                      setname: atkmm,                    family: [ openbsd ]  }
 - { name: atkmm1.6,                    setname: atk,                      family: [ debian ]  }
@@ -48,7 +49,7 @@
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            family: [ freebsd ] }
 - { name: billard-gl,                  setname: billardgl,                family: [ debian ]  }
 - { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
-- { name: blobby2,                     setname: blobby,                   family: [ arch ] } # XXX: recheck
+- { name: blobby2,                     setname: blobby                    }
 - { name: blockout2,                   setname: blockout,                 family: [ debian ]  }
 - { name: blockoutii,                  setname: blockout,                 family: [ fedora ]  } # XXX: recheck
 - { name: boaconstructor,              setname: boa-constructor,          family: [ freebsd ] }
@@ -137,12 +138,13 @@
 - { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
 - { name: postgresql-libpqxx,          setname: libpqxx                   }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
+- { name: powdertoy,                   setname: powder-toy                }
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles,              family: [ pkgsrc, arch, openbsd ] }
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
 - { name: "libsdl1.2",                 setname: sdl                       }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
-- { name: sdl-sopwith,                 setname: sopwith,                  family: [ gentoo ]  }
+- { namepat: "sdl-?sopwith",           setname: sopwith                   }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debian ]  }
 - { name: sdlpango,                    setname: sdl-pango,                family: [ debian ]  }
 - { namepat: "sendmail\\+.*",          setname: sendmail,                 family: [ freebsd ]  }
