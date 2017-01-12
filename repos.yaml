@@ -24,6 +24,31 @@
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
   tags: [ all, have_testdata, production ]
 
+- name: dports
+  desc: DPorts
+  url: https://github.com/DragonFlyBSD/DPorts
+  family: freebsd
+  sources:
+    - name: INDEX
+      fetcher: File
+      parser: DPortsIndex
+      url: http://muscles.dragonflybsd.org/INDEX.bz2
+      compression: bz2
+  links:
+    - desc: FreshPorts page
+      url: 'http://www.freshports.org/{category}/{name}'
+    - desc: SVNWeb
+      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/'
+    - desc: Port's Makefile
+      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
+    - desc: PortsMon
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
+    - desc: Related bugs in FreeBSD bugzilla
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
+    - desc: Synth build log
+      url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{name}.log'
+  tags: [ all, preproduction ]
+
 - name: pkgsrc
   desc: pkgsrc
   url: https://www.pkgsrc.org/
