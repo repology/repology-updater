@@ -391,8 +391,9 @@
 - { namepat: "gnet[0-9]+",             setname: gnet }
 - { name: gnet, verpat: "1\\..*",      setname: gnet1 }
 
-- { namepat: "gnupg[0-9]+",            setname: gnupg }
-- { name: gnupg, verpat: "1\\..*",     setname: gnupg1 }
+- { namepat: "gnupg[0-9]+",                               setname: gnupg }
+- { name: gnupg, verpat: "1\\..*",                        setname: gnupg1 }
+- { family: [ gentoo ], category: app-crypt, name: gnupg, setname: gnupg }
 
 - { name: glusterfs3,                  setname: glusterfs }
 
