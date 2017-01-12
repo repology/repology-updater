@@ -45,6 +45,8 @@
       url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
     - desc: Related bugs in FreeBSD bugzilla
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
+    - desc: Synth build log
+      url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{name}.log'
   tags: [ all, preproduction ]
 
 - name: pkgsrc
