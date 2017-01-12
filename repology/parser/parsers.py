@@ -34,3 +34,4 @@ from .pypi import PyPiHTMLParser
 from .yacp import YACPGitParser
 from .gobolinux import GoboLinuxGitParser
 from .guix import GuixParser
+from .rubygem import RubyGemParser

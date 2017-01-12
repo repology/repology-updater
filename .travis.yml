@@ -16,6 +16,7 @@ before_install:
   - pip install flask
   - pip install pytidylib # XXX: proper html validation needs tidy-html5
   - gem install kwalify
+  - pip install rubymarshal
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
 before_script:

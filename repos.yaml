@@ -672,6 +672,22 @@
       url: 'https://pypi.python.org/pypi/{name}/'
   tags: [ all, preproduction ]
 
+- name: rubygems
+  desc: RubyGems
+  url: https://rubygems.org/
+  family: rubygems
+  sources:
+    - name: latest_specs.4.8
+      fetcher: File
+      parser: RubyGem
+      url: https://api.rubygems.org/latest_specs.4.8.gz
+      compression: gz
+  shadow: true
+  links:
+    - desc: RubyGem page
+      url: 'https://www.rubygems.org/gems/{name}/'
+  tags: [ all, demo, fastfetch ]
+
 ###########################################################################
 # Foreign repos (android, windows)
 ###########################################################################
