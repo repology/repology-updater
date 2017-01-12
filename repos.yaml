@@ -684,9 +684,9 @@
       compression: gz
   shadow: true
   links:
-    - desc: RubyGem page
+    - desc: RubyGems page
       url: 'https://www.rubygems.org/gems/{name}/'
-  tags: [ all, demo, fastfetch ]
+  tags: [ all, preproduction ]
 
 ###########################################################################
 # Foreign repos (android, windows)
