@@ -27,7 +27,7 @@ def SanitizeVersion(version):
 
     pos = version.find('-')
     if pos != -1:
-        version = version[0:pos]
+        version = version[:pos]
 
     pos = version.find(':')
     if pos != -1:
