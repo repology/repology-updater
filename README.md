@@ -211,66 +211,9 @@ as follows:
 Note that there may be multiple packages of a same name in a single repo
 (either naturally, or because of name transformations).
 
-## Package matching
+## Documentation
 
-Some packages are named differently across separate repositories,
-so package name transformations are performed to merge differently
-named packages into a single entity. [rules.yaml](rules.yaml) contains
-rules for such transformation, is in YAML format containing array
-of rules. Each rule may contain:
-
-- Matching conditions:
-  - ```repo```: only apply rule to repositories of specific type
-    (currently ```freebsd```, ```debian```, ```gentoo```, ```pkgsrc```,
-     or ```openbsd``` note that these are NOT repository names)
-  - ```name```: apply to package of specified name
-  - ```namepat```: apply to package with name matching specified regexp
-  - ```verpat```: apply to package with version matching specified regexp
-
-- Actions:
-  - ```ignore```: completely ignore the package
-  - ```setname```: set package name to an argument. ```$0``` is replaced
-    with old name, ```$1```, ```$2``` and so on may be used to refer
-    capture groups in ```namepat``` regexp, if it's present
-  - ```pass```: leave package as is. Useful to prevent following rules
-    from matching
-
-Only first matching rule applies. If no rule applies (or ```pass```
-rule applies), package data is not modified. Afterwards, regardless
-of whether any rule matched, name is always converted to lowercase
-and underscores (```_```) replaced with hyphens (```-```).
-
-Note that transformation may merge several packages into single
-entry. If they are unrelated this may be a problem (solved by giving
-them unique names by rules based on e.g category), otherwise it is
-useful and may be done intentionally to merge variants or parts of
-specific project into single entity (e.g. merge ```freeciv-client```
-and ```freeciv-server``` into ```freeciv``` in pkgsrc, to match
-them both against ```freeciv``` in other repos, or match ```fltk15```,
-```fltk16```, ```fltk17``` into just ```fltk``` and look at newest
-version).
-
-### Example
-
-Debian has ```botan1.10```, FreeBSD has ```botan110``` and other
-repos have ```botan```. To merge these into single entity:
-
-```
-- { repo: debian, name: botan1.10, setname: botan }
-- { repo: freebsd, name: botan110, setname: botan }
-```
-
-FreeBSD names Perl module ports as ```p5-My-Module```, Debian does
-```libmy-module-perl```, and Gentoo just places ```My-Module``` under
-```dev-perl``` category. To merge all these perl modules into single
-synthetic ```perl:my-module``` entry (and actually do the same to
-all perl modules at once):
-
-```
-- { repo: freebsd, namepat: "p5-(.*)",      setname: "perl:$1" }
-- { repo: debian,  namepat: "lib(.*)-perl", setname: "perl:$1" }
-- { repo: gentoo,  category: dev-perl,      setname: "perl:$0" }
-```
+- [Rules guide](docs/RULES.md)
 
 ## Author
 
