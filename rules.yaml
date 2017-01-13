@@ -444,6 +444,7 @@
 - { name: gnet, verpat: "1\\..*",      setname: gnet1 }
 
 - { namepat: "gnupg[0-9]+",            setname: gnupg }
+- { name: gnupg, category: app-vim, family: gentoo, setname: vim-gnupg }
 - { name: gnupg, verpat: "1\\..*",     setname: gnupg1 }
 
 - { name: glusterfs3,                  setname: glusterfs }
