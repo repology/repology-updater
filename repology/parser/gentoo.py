@@ -120,7 +120,7 @@ class GentooGitParser():
                                 if key == 'DESCRIPTION':
                                     pkg.comment = value
                                 elif key == 'HOMEPAGE':
-                                    pkg.homepage = value
+                                    pkg.homepage = value.split(' ')[0] # XXX: save all urls
                                 elif key == 'LICENSE':
                                     if value.find('(') != -1:
                                         # XXX: conditionals and OR's: need more
