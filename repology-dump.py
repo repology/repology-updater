@@ -119,7 +119,7 @@ def Main():
                 print(
                     options.field_separator.join(
                         [
-                            getattr(package, field) for field in options.fields.split(',')
+                            str(getattr(package, field)) for field in options.fields.split(',')
                         ]
                     )
                 )
