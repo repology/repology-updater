@@ -79,7 +79,7 @@ class GoboLinuxGitParser():
                     current_tag = None
                     for line in description:
                         line = line.strip()
-                        match = re.match('^\[([A-Z][a-z]+)\](.*)$', line)
+                        match = re.match('^\[([A-Z][a-z]+)\] *(.*?)$', line)
                         if match:
                             current_tag = match.group(1)
                             data[current_tag] = match.group(2)
