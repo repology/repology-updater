@@ -595,7 +595,7 @@
   links:
     - desc: Git
       url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}'
-  tags: [ all, preproduction ]
+  tags: [ all, have_testdata, preproduction ]
 
 ###########################################################################
 # YACP (Yet Another Cygwin Ports)

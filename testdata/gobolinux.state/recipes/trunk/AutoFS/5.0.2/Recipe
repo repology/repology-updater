@@ -1,0 +1,16 @@
+compile_version=1.8.5
+url="ftp://ftp.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.0.2.tar.bz2"
+file_size=217046
+file_md5=fd56817cba70814753bc98f5fb7f23ec
+recipe_type=configure
+environment=(
+"initdir=$target/Resources/Tasks"
+)
+configure_options=(
+   "--with-confdir=$settings_target/AutoFS"
+   "--with-mapdir=$settings_target/AutoFS"
+   "--mandir=$target/man"
+)
+unmanaged_files=(
+   "${goboVariable}/run/autofs"
+)

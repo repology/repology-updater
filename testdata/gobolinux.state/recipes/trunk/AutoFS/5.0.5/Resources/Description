@@ -1,0 +1,7 @@
+[Name] AutoFS
+[Summary] Automounting daemon
+[License] GNU General Public License (GPL)
+[Description] AutoFS performs mounting of remote/local \
+shares/devices on demand.  In uses the AutoFS feature in \
+the Linux kernel.
+[Homepage] ftp://ftp.kernel.org/pub/linux/daemons/autofs/

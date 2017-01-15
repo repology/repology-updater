@@ -1,0 +1,13 @@
+--- autofs-5.0.2/samples/auto.master	2007-06-18 04:18:08.000000000 -0300
++++ autofs-5.0.2.new/samples/auto.master	2007-09-05 22:08:27.000000000 -0300
+@@ -4,8 +4,8 @@
+ # key [ -mount-options-separated-by-comma ] location
+ # For details of the format look at autofs(5).
+ #
+-/misc	/etc/auto.misc
+-/net	-hosts
++/Mount/misc	/etc/AutoFS/auto.misc
++/Mount/net	-hosts
+ #
+ # Include central master map if it can be found using
+ # nsswitch sources.

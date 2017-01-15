@@ -1,0 +1,17 @@
+# Recipe for version 5.0.5 by Demian Florentin <demianflorentin@gmail.com>, on Thu May 6 23:17:55 PYT 2010
+compile_version=1.8.5
+url="http://www.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.0.5.tar.bz2"
+file_size=301327
+file_md5=a1d262cb6ebef0c2dd0fe22232fb3d5a
+recipe_type=configure
+environment=(
+"initdir=$target/Resources/Tasks"
+)
+configure_options=(
+   "--with-confdir=$settings_target/AutoFS"
+   "--with-mapdir=$settings_target/AutoFS"
+   "--mandir=$target/man"
+)
+unmanaged_files=(
+   "${goboVariable}/run/autofs"
+)

@@ -1,0 +1,11 @@
+--- autofs-5.0.2/samples/autofs.conf.default.in	2007-06-18 04:18:08.000000000 -0300
++++ autofs-5.0.2.new/samples/autofs.conf.default.in	2007-09-05 22:27:48.000000000 -0300
+@@ -3,7 +3,7 @@
+ #
+ # MASTER_MAP_NAME - default map name for the master map.
+ #
+-#MASTER_MAP_NAME="auto.master"
++MASTER_MAP_NAME="/etc/AutoFS/auto.master"
+ #
+ # TIMEOUT - set the default mount timeout (default 600).
+ #

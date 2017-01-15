@@ -109,6 +109,21 @@ class TestParsers(unittest.TestCase):
                 "licenses": ['Clarified-Artistic'],
             }
         )
+        self.check_package("asciinema",
+            {
+                "repo": "gentoo",
+                "family": "gentoo",
+                "name": "asciinema",
+                "version": "1.3.0",
+                "origversion": None,
+                "category": "app-misc",
+                "maintainers": ['kensington@gentoo.org'],
+                "homepage": 'https://asciinema.org/', # ['https://asciinema.org/', 'https://pypi.python.org/pypi/asciinema']
+                "comment": 'Command line recorder for asciinema.org service',
+                "downloads": [],
+                "licenses": ['GPL-3+'],
+            }
+        )
 
     def test_arch(self):
         self.check_package("zlib",
@@ -154,6 +169,22 @@ class TestParsers(unittest.TestCase):
                     'siretart@tauware.de',
                 ],
                 "homepage": "http://liba52.sourceforge.net/",
+            }
+        )
+
+    def test_gobolinux(self):
+        self.check_package("AutoFS",
+            {
+                "repo": "gobolinux",
+                "family": "gobolinux",
+                "name": "AutoFS",
+                "version": "5.0.5",
+                "comment": "Automounting daemon",
+                "homepage": "ftp://ftp.kernel.org/pub/linux/daemons/autofs/",
+                "downloads": [
+                    "http://www.kernel.org/pub/linux/daemons/autofs/v5/autofs-5.0.5.tar.bz2"
+                ],
+                "licenses": ["GNU General Public License (GPL)"]
             }
         )
 

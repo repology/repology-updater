@@ -1,0 +1,11 @@
+--- autofs-5.0.2/samples/Makefile	2007-06-18 04:18:08.000000000 -0300
++++ autofs-5.0.2.new/samples/Makefile	2007-09-05 22:14:43.000000000 -0300
+@@ -173,7 +173,7 @@
+ 		fi ; \
+ 	fi
+ 
+-install: rc.autofs autofs.conf.default dirs autofs.init autofs.conf \
++install: rc.autofs autofs.conf.default dirs autofs.conf \
+ 		autofs_ldap_auth.conf $(SAMPLES)
+ 	@echo
+ 

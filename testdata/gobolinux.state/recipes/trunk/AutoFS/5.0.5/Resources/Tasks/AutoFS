@@ -1,0 +1,45 @@
+#!/bin/bash
+#
+# rc file for automount using a Sun-style "master map".
+#
+# This is the start section from the official AutoFS initscript
+#
+
+#
+# Location of the automount daemon and the init directory
+#
+DAEMON=/Programs/AutoFS/5.0.2/sbin/automount
+MODULE="autofs4"
+confdir=/Programs/AutoFS/Settings/AutoFS
+
+test -e $DAEMON || exit 0
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+export PATH
+
+#
+# load customized configuation settings
+#
+if [ -r $confdir/autofs ]; then
+	. $confdir/autofs
+fi
+
+# Make sure autofs4 module is loaded
+if ! grep -q autofs /proc/filesystems
+then
+	# Try load the autofs4 module fail if we can't
+	modprobe $MODULE >/dev/null 2>&1
+	if [ $? -eq 1 ]
+	then
+		echo "Error: failed to load autofs4 module."
+		exit 1
+	fi
+elif ([ -f /proc/modules ] && lsmod) | grep -q autofs[^4]
+then
+	# wrong autofs filesystem module loaded
+	echo
+	echo "Error: autofs kernel module is loaded, autofs4 required"
+	exit 1
+fi
+
+$DAEMON $OPTIONS 
