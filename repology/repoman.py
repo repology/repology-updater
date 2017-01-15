@@ -79,7 +79,7 @@ class RepositoryManager:
             raise RuntimeError('unknown {} {}'.format(suffix.lower(), name))
 
         spawned_class = globals()[spawned_name]
-        spawned_argspec = inspect.getargspec(spawned_class.__init__)
+        spawned_argspec = inspect.getfullargspec(spawned_class.__init__)
         spawned_args = {
             key: value for key, value in argsdict.items() if key in spawned_argspec.args
         }
