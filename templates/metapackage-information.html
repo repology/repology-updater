@@ -20,7 +20,7 @@ Information for <strong>{{ name }}</strong>
 
 		<h2>Package names</h2>
 		<ul>
-		{% for name,families in information.names|dictsort %}
+		{% for name,families in information.names|dictsort(case_sensitive=True) %}
 			<li>{{ name }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
@@ -36,7 +36,7 @@ Information for <strong>{{ name }}</strong>
 
 		<h2>Repositories</h2>
 		<ul>
-		{% for reponame,families in information.repos|dictsort %}
+		{% for reponame,families in information.repos|dictsort(case_sensitive=True) %}
 			<li>{{ repometadata[reponame].desc }}</li>
 		{% endfor %}
 		</ul>
@@ -44,7 +44,7 @@ Information for <strong>{{ name }}</strong>
 		{% if information.categories %}
 		<h2>Categories</h2>
 		<ul>
-		{% for category,families in information.categories|dictsort %}
+		{% for category,families in information.categories|dictsort(case_sensitive=True)  %}
 			<li>{{ category }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
@@ -56,7 +56,7 @@ Information for <strong>{{ name }}</strong>
 		{% if information.summaries %}
 		<h2>Summaries</h2>
 		<ul>
-		{% for summary,families in information.summaries|dictsort %}
+		{% for summary,families in information.summaries|dictsort(case_sensitive=True)  %}
 			<li>{{ summary }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
@@ -65,7 +65,7 @@ Information for <strong>{{ name }}</strong>
 		{% if information.maintainers %}
 		<h2>Maintainers</h2>
 		<ul>
-		{% for maintainer,families in information.maintainers|dictsort %}
+		{% for maintainer,families in information.maintainers|dictsort(case_sensitive=True) %}
 			<li>{{ macros.maintainer_link(maintainer) }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
@@ -74,7 +74,7 @@ Information for <strong>{{ name }}</strong>
 		{% if information.homepages %}
 		<h2>Homepages</h2>
 		<ul>
-		{% for homepage,families in information.homepages|dictsort %}
+		{% for homepage,families in information.homepages|dictsort(case_sensitive=True)  %}
 			<li><a href="{{ homepage }}">{{ homepage }}</a> <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
@@ -83,7 +83,7 @@ Information for <strong>{{ name }}</strong>
 		{% if information.downloads %}
 		<h2>Downloads</h2>
 		<ul>
-		{% for download,families in information.downloads|dictsort %}
+		{% for download,families in information.downloads|dictsort(case_sensitive=True)  %}
 			<li><a href="{{ download }}">{{ download }}</a> <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
