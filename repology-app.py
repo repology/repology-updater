@@ -361,7 +361,9 @@ def metapackage_information(name):
 
 @app.route("/metapackage/<name>/badges")
 def metapackage_badges(name):
-    return flask.render_template("metapackage-badges.html", name=name)
+    packages = get_db().GetMetapackage(name)
+    repos=sorted(list(set([package.repo for package in get_db().GetMetapackage(name)])))
+    return flask.render_template("metapackage-badges.html", name=name, repos=repos)
 
 @app.route("/badge/vertical-allrepos/<name>.svg")
 def badge_vertical_allrepos(name):
@@ -392,6 +394,22 @@ def badge_tiny_repos(name):
             "badge-tiny.svg",
             name=name,
             num_families=num_families
+        ),
+        {'Content-type': 'image/svg+xml'}
+    )
+
+@app.route("/badge/version-for-repo/<repo>/<name>.svg")
+def badge_version_for_repo(repo, name):
+    summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
+    if repo not in summaries:
+        flask.abort(404)
+
+    return (
+        flask.render_template(
+            "badge-tiny-version.svg",
+            repo=repo,
+            version=summaries[repo]['version'],
+            versionclass=summaries[repo]['versionclass'],
         ),
         {'Content-type': 'image/svg+xml'}
     )

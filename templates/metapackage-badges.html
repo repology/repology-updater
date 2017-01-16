@@ -8,17 +8,17 @@
 Badges for <strong>{{ name }}</strong>
 {% endblock %}
 
-{% macro badge_example(badge_type) %}
-<p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for(badge_type, name=name) }}" alt="Packaging status"></a></p>
+{% macro badge_example(badge_type, alt="Packaging status", badge_args={}) %}
+<p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for(badge_type, name=name, **badge_args) }}" alt="{{ alt }}"></a></p>
 
 <p>HTML code:</p>
 <pre>
-&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name)}}&quot; alt=&quot;Packaging status&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args)}}&quot; alt=&quot;{{ alt }}&quot;&gt;&lt;/a&gt;
 </pre>
 
 <p>Markdown code:</p>
 <pre>
-[![Packaging status]({{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})
+[![{{ alt }}]({{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})
 </pre>
 {% endmacro %}
 
@@ -33,11 +33,20 @@ Badges for <strong>{{ name }}</strong>
 
 {{ badge_example('badge_vertical_allrepos') }}
 
-<h2>Tiny badge</h2>
+<h2>Tiny badge with number of repositories</h2>
 
 <p>This shows total number of repository families featuring this package. Repository family is an aggregation of related repositories, e.g. Debian Stable, Testing, Unstable and Experimental all belong to a single family and are thus only counted once.</p>
 
 {{ badge_example('badge_tiny_repos') }}
+
+<h2>Tiny per-repository badges with version</h2>
+
+<p>These show version in specific repository. Pick as many as you want!</p>
+
+{% for repo in repos %}
+<h3>{{ repometadata[repo].desc }}</h3>
+{{ badge_example('badge_version_for_repo', alt=repometadata[repo].desc + " package", badge_args={"repo":repo}) }}
+{% endfor %}
 
 </article>
 
