@@ -35,7 +35,15 @@ Statistics
 			{% for family in column %}
 				<tr>
 					<td class="text-center">{{ family.place }}</td>
-					<td class="text-right">{{ family.desc }}</td>
+					<td class="text-right">{{ family.desc -}}
+					{%- if family.place == 1 -%}
+						<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date for repository family"></span></sup>
+					{%- elif family.place == 2 -%}
+						<sup><div class="medal medal-silver" title="2nd place by number of metapackages up to date for repository family"></span></sup>
+					{%- elif family.place == 3 -%}
+						<sup><div class="medal medal-bronze" title="3rd place by number of metapackages up to date for repository family"></span></sup>
+					{%- endif -%}
+					</td>
 					<td class="text-center"><b>{{ family.num_metapackages }}</b></td>
 					<td class="text-center"><span class="version version-big version-newest">{{ family.num_metapackages_newest }}</span></td>
 				</tr>
