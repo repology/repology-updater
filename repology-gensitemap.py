@@ -74,9 +74,20 @@ def Main():
 
         num_repos += 1
 
+    # get most important packages
     for row in database.Query(
                 "SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families >= %s LIMIT %s",
                 num_repos,
+                (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE
+            ):
+        urls.append('/metapackage/' + row[0] + '/versions')
+        urls.append('/metapackage/' + row[0] + '/packages')
+        urls.append('/metapackage/' + row[0] + '/information')
+
+    # fill the remaining space with less important packages
+    for row in database.Query(
+                "SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families = %s LIMIT %s",
+                num_repos - 1,
                 (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE
             ):
         urls.append('/metapackage/' + row[0] + '/versions')
