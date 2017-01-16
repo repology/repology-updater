@@ -108,6 +108,29 @@
     background-color: #777777;
 }
 
+.medal {
+    display: inline-block;
+    border-radius: 50%;
+    width: 1.25em;
+    height: 1.25em;
+    box-shadow: inset 1px 1px 0px 0px #ffffffc0, inset -1px -1px 0px 0px #00000080;
+    text-align: center;
+    margin-left: 0.1em;
+}
+
+.medal-gold {
+    color: gold;
+    background-color: gold;
+}
+
+.medal-silver {
+    background-color: silver;
+}
+
+.medal-bronze {
+    background-color: #CD7F32;
+}
+
 /* XXX: check if bootstrap h1.pageheader margin is always 40px */
 .pageheader-right {
 	float: right;

@@ -424,9 +424,58 @@ def about():
 
 @app.route("/statistics")
 def statistics():
+    repostats=sorted(get_db().GetRepositories(), key=lambda x:x['name'])
+    repostats=[repo for repo in repostats if repo['name'] in reponames]
+
+    familynames=set([metadata['family'] for reponame,metadata in repometadata.items() if reponame in reponames])
+
+    familystats=sorted(get_db().GetFamilies(), key=lambda x:x['num_metapackages_newest'], reverse=True)
+    familystats=[family for family in familystats if family['name'] in familynames]
+
+    place = 1
+    for family in familystats:
+        family['place'] = place
+        place += 1
+
+        # XXX: move this to config
+        family['is_repository'] = family['name'] not in ['libregamewiki', 'freshcode', 'pypi', 'cpan', 'rybygems']
+
+        if family['name'] == 'freebsd':
+            family['desc'] = 'FreeBSD'
+        elif family['name'] == 'pkgsrc':
+            family['desc'] = 'pkgsrc'
+        elif family['name'] == 'openbsd':
+            family['desc'] = 'OpenBSD'
+        elif family['name'] == 'sisyphus':
+            family['desc'] = 'ALT Sisyphus'
+        elif family['name'] == 'opensuse':
+            family['desc'] = 'OpenSUSE'
+        elif family['name'] == 'guix':
+            family['desc'] = 'GNU Guix'
+        elif family['name'] == 'fdroid':
+            family['desc'] = 'F-Droid'
+        elif family['name'] == 'slackbuilds':
+            family['desc'] = 'SlackBuilds'
+        elif family['name'] == 'centos':
+            family['desc'] = 'CentOS'
+        elif family['name'] == 'rubygems':
+            family['desc'] = 'RubyGems'
+        elif family['name'] == 'yacp':
+            family['desc'] = 'YACP'
+        elif family['name'] == 'gobolinux':
+            family['desc'] = 'GoboLinux'
+        elif family['name'] == 'arch':
+            family['desc'] = 'Arch+AUR'
+        elif family['name'] == 'debian':
+            family['desc'] = 'Debian+Ubuntu'
+        else:
+            family['desc'] = family['name'].capitalize()
+
     return flask.render_template(
         "statistics.html",
-        repostats=get_db().GetRepositories(),
+        repostats=[repostat for repostat in repostats if repostat['name'] in reponames],
+        familystats=[family for family in familystats if family['is_repository']],
+        family_by_name={family['name']: family for family in familystats},
         num_metapackages=get_db().GetMetapackagesCount()
     )
 
