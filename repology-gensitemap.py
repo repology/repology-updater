@@ -20,6 +20,7 @@
 import os
 import sys
 import argparse
+from random import shuffle
 
 from repology.database import Database
 
@@ -81,6 +82,8 @@ def Main():
         urls.append('/metapackage/' + row[0] + '/versions')
         urls.append('/metapackage/' + row[0] + '/packages')
         urls.append('/metapackage/' + row[0] + '/information')
+
+    shuffle(urls)
 
     # write XML
     print("Writing XML", file=sys.stderr)
