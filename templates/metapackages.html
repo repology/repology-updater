@@ -55,34 +55,35 @@ Metapackages
 	{% for metapackagename,summaries in summaries|dictsort %}
 		{% set headerevery = 50 %}
 		{% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
-		<tr>
-			<th></th>
-			{% for reponame in reponames %}
-				<th>
-					{{ repometadata[reponame].desc }}
-				</th>
-			{% endfor %}
-		</tr>
+		{% if loop.first %}<thead>{% endif %}
+			<tr>
+				<th>Metapackage</th>
+				{% for reponame in reponames %}
+				<th>{{ repometadata[reponame].desc }}</th>
+				{% endfor %}
+			</tr>
+		{% if loop.first %}</thead><tbody>{% endif %}
 		{% endif %}
-		<tr>
-			<td><a href="{{ url_for("metapackage_versions", name=metapackagename) }}">{{ metapackagename }}</a></td>
-			{% for reponame in reponames %}
-				{% set summary = summaries[reponame] %}
-				{% if summary is defined %}
-					<td>
-						<span class="version version-{{ summary.versionclass|css_for_summary_versionclass }}">
-							{{- macros.package_link(summary.bestpackage, summary.version|truncate(12)) -}}
-						</span>
-						{%- if summary.numpackages > 1 -%}
-							<sup>{{- summary.numpackages -}}</sup>
-						{%- endif -%}
-					</td>
-				{% else %}
-					<td>-</td>
-				{% endif %}
-			{% endfor %}
-		</tr>
-	{% endfor %}
+			<tr>
+				<td><a href="{{ url_for("metapackage_versions", name=metapackagename) }}">{{ metapackagename }}</a></td>
+				{% for reponame in reponames %}
+					{% set summary = summaries[reponame] %}
+					{% if summary is defined %}
+						<td>
+							<span class="version version-{{ summary.versionclass|css_for_summary_versionclass }}">
+								{{- macros.package_link(summary.bestpackage, summary.version|truncate(12)) -}}
+							</span>
+							{%- if summary.numpackages > 1 -%}
+								<sup>{{- summary.numpackages -}}</sup>
+							{%- endif -%}
+						</td>
+					{% else %}
+						<td>-</td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+		{% endfor %}
+		</tbody>
 	</table>
 {% else %}
 	<div class="alert alert-warning" role="alert">No metapackages found matching the criteria</div>
