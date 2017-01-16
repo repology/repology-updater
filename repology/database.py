@@ -106,6 +106,10 @@ class Database:
         """)
 
         self.cursor.execute("""
+            DROP TABLE IF EXISTS families CASCADE
+        """)
+
+        self.cursor.execute("""
             CREATE TABLE packages (
                 repo varchar(255) not null,
                 family varchar(255) not null,
@@ -140,12 +144,24 @@ class Database:
             CREATE TABLE repositories (
                 name varchar(255) not null primary key,
 
-                num_packages integer,
-                num_packages_newest integer,
-                num_packages_outdated integer,
-                num_packages_ignored integer,
+                num_packages integer not null default 0,
+                num_packages_newest integer not null default 0,
+                num_packages_outdated integer not null default 0,
+                num_packages_ignored integer not null default 0,
+
+                num_metapackages integer not null default 0,
+                num_metapackages_newest integer not null default 0,
 
                 last_update timestamp with time zone
+            )
+        """)
+
+        self.cursor.execute("""
+            CREATE TABLE families (
+                name varchar(255) not null primary key,
+
+                num_metapackages integer not null default 0,
+                num_metapackages_newest integer not null default 0
             )
         """)
 
@@ -252,7 +268,15 @@ class Database:
                 num_packages = 0,
                 num_packages_newest = 0,
                 num_packages_outdated = 0,
-                num_packages_ignored = 0
+                num_packages_ignored = 0,
+                num_metapackages = 0,
+                num_metapackages_newest = 0
+        """)
+        self.cursor.execute("""
+            UPDATE families
+            SET
+                num_metapackages = 0,
+                num_metapackages_newest = 0
         """)
 
     def AddPackages(self, packages):
@@ -350,6 +374,8 @@ class Database:
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""");
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""");
+
+        # package stats
         self.cursor.execute("""
             INSERT
                 INTO repositories (
@@ -360,17 +386,90 @@ class Database:
                     num_packages_ignored
                 ) SELECT
                     repo,
-                    count(*),
-                    count(nullif(versionclass=1, false)),
-                    count(nullif(versionclass=2, false)),
-                    count(nullif(versionclass=3, false))
-                FROM packages GROUP BY repo
+                    sum(num_packages),
+                    sum(num_packages_newest),
+                    sum(num_packages_outdated),
+                    sum(num_packages_ignored)
+                FROM(
+                    SELECT
+                        repo,
+                        count(*) as num_packages,
+                        count(nullif(versionclass=1, false)) as num_packages_newest,
+                        count(nullif(versionclass=2, false)) as num_packages_outdated,
+                        count(nullif(versionclass=3, false)) as num_packages_ignored
+                    FROM packages
+                    GROUP BY repo, effname
+                ) AS TEMP
+                GROUP BY repo
                 ON CONFLICT (name)
                 DO UPDATE SET
                     num_packages = EXCLUDED.num_packages,
                     num_packages_newest = EXCLUDED.num_packages_newest,
                     num_packages_outdated = EXCLUDED.num_packages_outdated,
                     num_packages_ignored = EXCLUDED.num_packages_ignored
+        """)
+
+        # metapackage stats
+        self.cursor.execute("""
+            INSERT
+                INTO repositories (
+                    name,
+                    num_metapackages,
+                    num_metapackages_newest
+                ) SELECT
+                    repo,
+                    count(*),
+                    count(nullif(num_packages_newest>0, false))
+                FROM(
+                    SELECT
+                        repo,
+                        count(*) as num_packages,
+                        count(nullif(versionclass=1, false)) as num_packages_newest
+                    FROM packages
+                    WHERE effname IN (
+                        SELECT
+                            DISTINCT effname
+                            FROM PACKAGES
+                        WHERE NOT shadow
+                    )
+                    GROUP BY repo, effname
+                ) AS TEMP
+                GROUP BY repo
+                ON CONFLICT (name)
+                DO UPDATE SET
+                    num_metapackages = EXCLUDED.num_metapackages,
+                    num_metapackages_newest = EXCLUDED.num_metapackages_newest
+        """)
+
+        self.cursor.execute("""
+            INSERT
+                INTO families (
+                    name,
+                    num_metapackages,
+                    num_metapackages_newest
+                ) SELECT
+                    family,
+                    count(*),
+                    count(nullif(num_packages_newest>0, false))
+                FROM(
+                    SELECT
+                        family,
+                        count(*) as num_packages,
+                        count(nullif(versionclass=1, false)) as num_packages_newest
+                    FROM packages
+                    WHERE effname IN (
+                        SELECT
+                            DISTINCT effname
+                            FROM PACKAGES
+                        WHERE NOT shadow
+                    )
+                    GROUP BY family, effname
+                ) AS TEMP
+                GROUP BY family
+                ON CONFLICT (name)
+                DO UPDATE SET
+                    num_metapackages = EXCLUDED.num_metapackages,
+                    num_metapackages_newest = EXCLUDED.num_metapackages_newest
         """)
 
     def Commit(self):
@@ -569,21 +668,43 @@ class Database:
                 num_packages_newest,
                 num_packages_outdated,
                 num_packages_ignored,
+                num_metapackages,
+                num_metapackages_newest,
                 last_update at time zone 'UTC',
                 now() - last_update
             FROM repositories
         """)
 
-        return {
-            row[0]: {
+        return [
+            {
+                'name': row[0],
                 'num_packages': row[1],
                 'num_packages_newest': row[2],
                 'num_packages_outdated': row[3],
                 'num_packages_ignored': row[4],
-                'last_update_utc': row[5],
-                'since_last_update': row[6]
+                'num_metapackages': row[5],
+                'num_metapackages_newest': row[6],
+                'last_update_utc': row[7],
+                'since_last_update': row[8]
             } for row in self.cursor.fetchall()
-        }
+        ]
+
+    def GetFamilies(self):
+        self.cursor.execute("""
+            SELECT
+                name,
+                num_metapackages,
+                num_metapackages_newest
+            FROM families
+        """)
+
+        return [
+            {
+                'name': row[0],
+                'num_metapackages': row[1],
+                'num_metapackages_newest': row[2],
+            } for row in self.cursor.fetchall()
+        ]
 
     def Query(self, query, *args):
         self.cursor.execute(query, args)
