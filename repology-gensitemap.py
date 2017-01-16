@@ -56,7 +56,7 @@ def Main():
     num_repos = 1
     while True:
         num_metapackages = database.Query(
-            "SELECT count(DISTINCT effname) FROM metapackage_repocounts WHERE num_repos > %s",
+            "SELECT count(DISTINCT effname) FROM metapackage_repocounts WHERE num_families >= %s",
             num_repos
         )[0][0]
 
@@ -75,7 +75,7 @@ def Main():
         num_repos += 1
 
     for row in database.Query(
-                "SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_repos > %s LIMIT %s",
+                "SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families >= %s LIMIT %s",
                 num_repos,
                 (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE
             ):
