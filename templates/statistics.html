@@ -1,13 +1,8 @@
 {% extends "layout.html" %}
 {% import "macros.html" as macros %}
 
-{% block title %}
-{{ super() }}: statistics
-{% endblock %}
-
-{% block header %}
-Statistics
-{% endblock %}
+{% block title %}{{ super() }}: statistics{% endblock %}
+{% block header %}Statistics{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -17,7 +12,7 @@ Statistics
 <p>Related repositories are aggregated into families here for fair competition. For example, all versions of Debian and Ubuntu are single family, as they share most of the packages.</p>
 
 <div class="row">
-	{% for column in familystats|slice(3) %}
+{% for column in familystats|slice(3) %}
 	<div class="col-md-4">
 		<table class="table table-striped table-hover">
 			<thead>
@@ -51,7 +46,7 @@ Statistics
 			</tbody>
 		</table>
 	</div>
-	{% endfor %}
+{% endfor %}
 </div>
 
 <h2>Repository statistics</h2>
@@ -123,5 +118,5 @@ Statistics
 </table>
 </div>
 
-</div>
+</div> {#- container #}
 {% endblock %}

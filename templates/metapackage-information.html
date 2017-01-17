@@ -1,13 +1,8 @@
 {% extends "metapackage.html" %}
 {% import "macros.html" as macros %}
 
-{% block title %}
-{{ super() }}: information for {{ name }}
-{% endblock %}
-
-{% block header %}
-Information for <strong>{{ name }}</strong>
-{% endblock %}
+{% block title %}{{ super() }}: information for {{ name }}{% endblock %}
+{% block header %}Information for <strong>{{ name }}</strong>{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -92,5 +87,5 @@ Information for <strong>{{ name }}</strong>
 </div>
 {% endif %}
 
-</div>
+</div> {#- container #}
 {% endblock %}

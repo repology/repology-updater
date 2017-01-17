@@ -1,12 +1,7 @@
 {% extends "metapackage.html" %}
 
-{% block title %}
-{{ super() }}: packages for {{ name }}
-{% endblock %}
-
-{% block header %}
-Packages for <strong>{{ name }}</strong>
-{% endblock %}
+{% block title %}{{ super() }}: packages for {{ name }}{% endblock %}
+{% block header %}Packages for <strong>{{ name }}</strong>{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -108,5 +103,5 @@ Packages for <strong>{{ name }}</strong>
 
 {% endif %}
 
-</div>
+</div> {#- container #}
 {% endblock %}

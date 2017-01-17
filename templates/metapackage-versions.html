@@ -1,13 +1,8 @@
 {% extends "metapackage.html" %}
 {% import "macros.html" as macros %}
 
-{% block title %}
-{{ super() }}: versions for {{ name }}
-{% endblock %}
-
-{% block header %}
-Versions for <strong>{{ name }}</strong>
-{% endblock %}
+{% block title %}{{ super() }}: versions for {{ name }}{% endblock %}
+{% block header %}Versions for <strong>{{ name }}</strong>{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -62,5 +57,5 @@ Versions for <strong>{{ name }}</strong>
 
 {% endif %}
 
-</div>
+</div> {#- container #}
 {% endblock %}

@@ -12,14 +12,12 @@
 	<link rel="stylesheet" href="{{ url_for("static", filename="repology.css") }}">
 </head>
 <body>
-
 {% macro classactive_if_endpoint(endpoint) -%}
 	{%- if request.endpoint == endpoint %} class="active"{%- endif -%}
 {%- endmacro %}
 {% macro active_if_endpoint(endpoint) -%}
 	{%- if request.endpoint == endpoint %} active{%- endif -%}
 {%- endmacro %}
-
 <header>
 	<nav class="navbar navbar-default navbar-static-top">
 		<div class="container">

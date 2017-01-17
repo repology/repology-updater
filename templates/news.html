@@ -1,12 +1,7 @@
 {% extends "layout.html" %}
 
-{% block title %}
-{{ super() }}: news
-{% endblock %}
-
-{% block header %}
-News
-{% endblock %}
+{% block title %}{{ super() }}: news{% endblock %}
+{% block header %}News{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -76,5 +71,5 @@ News
 	</ul>
 </article>
 
-</div>
+</div> {#- container #}
 {% endblock %}
