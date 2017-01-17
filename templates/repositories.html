@@ -17,22 +17,26 @@ Repositories
 <div class="col-md-6">
 
 	<table class="table table-striped">
-		<tr>
-			<th style="text-align: right">Repository</th>
-			<th>Metapackage lists</th>
-		</tr>
-	{% for reponame in column %}
-		<tr>
-			<td  style="text-align: right">{{ macros.repository_link(reponame) }}</td>
-			<td style="white-space: nowrap;">
-				<a href="{{ url_for('metapackages_in_repo', repo=reponame) }}">Present</a>
-				<a href="{{ url_for('metapackages_not_in_repo', repo=reponame) }}">Absent</a>
-				<a href="{{ url_for('metapackages_outdated_in_repo', repo=reponame) }}">Outdated</a>
-				<a href="{{ url_for('metapackages_candidates_for_repo', repo=reponame) }}">Candidates</a>
-				<a href="{{ url_for('metapackages_unique_in_repo', repo=reponame) }}">Unique</a>
-			</td>
-		</tr>
-	{% endfor %}
+		<thead>
+			<tr>
+				<th style="text-align: right">Repository</th>
+				<th>Metapackage lists</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for reponame in column %}
+			<tr>
+				<td  style="text-align: right">{{ macros.repository_link(reponame) }}</td>
+				<td style="white-space: nowrap;">
+					<a href="{{ url_for('metapackages_in_repo', repo=reponame) }}">Present</a>
+					<a href="{{ url_for('metapackages_not_in_repo', repo=reponame) }}">Absent</a>
+					<a href="{{ url_for('metapackages_outdated_in_repo', repo=reponame) }}">Outdated</a>
+					<a href="{{ url_for('metapackages_candidates_for_repo', repo=reponame) }}">Candidates</a>
+					<a href="{{ url_for('metapackages_unique_in_repo', repo=reponame) }}">Unique</a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
 	</table>
 
 </div>
