@@ -3,6 +3,8 @@
 
 {% block title %}{{ super() }}: versions for {{ name }}{% endblock %}
 {% block header %}Versions for <strong>{{ name }}</strong>{% endblock %}
+{% block description %}List of package versions for metapackage {{ name }} in all repositories{% endblock %}
+{% block keywords %}{{ super() }}, {{ name }}{% endblock %}
 
 {% block content %}
 <div class="container">

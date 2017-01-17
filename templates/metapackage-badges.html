@@ -2,6 +2,8 @@
 
 {% block title %}{{ super() }}: badges for {{ name }}{% endblock %}
 {% block header %}Badges for <strong>{{ name }}</strong>{% endblock %}
+{% block description %}SVG badges with packaging information for metapackage {{ name }}{% endblock %}
+{% block keywords %}{{ super() }}, badge, {{ name }}{% endblock %}
 
 {% macro badge_example(badge_type, alt="Packaging status", badge_args={}) %}
 <p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for(badge_type, name=name, **badge_args) }}" alt="{{ alt }}"></a></p>

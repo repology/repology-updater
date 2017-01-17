@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<meta name="description" content="Multiple package repositories analyzer">
-	<meta name="keywords" content="repository, package, version">
+	<meta name="description" content="{% block description %}Multiple package repositories analyzer{% endblock %}">
+	<meta name="keywords" content="{% block keywords %}repository, package, packages, version{% endblock %}">
 	<meta name="author" content="Dmitry Marakasov">
 	<title>{% block title %}Repology{% endblock %}</title>
 	<link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.css") }}">

@@ -1,13 +1,10 @@
 {% extends "layout.html" %}
 {% import "macros.html" as macros %}
 
-{% block title %}
-{{ super() }}: maintainers
-{% endblock %}
-
-{% block header %}
-Maintainers
-{% endblock %}
+{% block title %}{{ super() }}: maintainers{% endblock %}
+{% block header %}Maintainers{% endblock %}
+{% block description %}Package maintainers listing{% endblock %}
+{% block keywords %}{{ super()}}, maintainer, maintainers{% endblock %}
 
 {% block content %}
 <div class="container">

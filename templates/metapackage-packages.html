@@ -2,6 +2,8 @@
 
 {% block title %}{{ super() }}: packages for {{ name }}{% endblock %}
 {% block header %}Packages for <strong>{{ name }}</strong>{% endblock %}
+{% block description %}Information on all packages for metapackage {{ name }}{% endblock %}
+{% block keywords %}{{ super() }}, {{ name }}{% endblock %}
 
 {% block content %}
 <div class="container">
