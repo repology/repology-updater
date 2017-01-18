@@ -17,6 +17,7 @@
 
 import psycopg2
 import sys
+import datetime
 
 from repology.package import Package
 
@@ -151,6 +152,14 @@ class Database:
                 num_metapackages_outdated integer not null default 0,
 
                 last_update timestamp with time zone
+            )
+        """)
+
+        # repository_history
+        self.cursor.execute("""
+            CREATE TABLE repositories_history (
+                ts timestamp with time zone not null primary key,
+                statistics json not null
             )
         """)
 
@@ -662,6 +671,52 @@ class Database:
             } for row in self.cursor.fetchall()
         ]
 
+    def GetRepositoriesRetrospect(self, **args):
+        self.cursor.execute("""
+            SELECT
+                ts,
+                now() - ts,
+                json_array_elements(statistics)
+            FROM repositories_history
+            WHERE ts IN (
+                SELECT
+                    ts
+                FROM repositories_history
+                WHERE ts < now() - INTERVAL %s SECOND
+                ORDER BY ts DESC
+                LIMIT 1
+            );
+        """, (datetime.timedelta(**args),)
+        )
+
+        return [
+            {
+                'timestamp': row[0],
+                'timedelta': row[1],
+                **row[2]
+            }
+            for row in self.cursor.fetchall()
+        ]
+
     def Query(self, query, *args):
         self.cursor.execute(query, args)
         return self.cursor.fetchall()
+
+    def SnapshotRepositoriesHistory(self):
+        self.cursor.execute("""
+            INSERT
+            INTO repositories_history(
+                ts,
+                statistics
+            )
+            SELECT
+                now(),
+                array_to_json(array_agg(row_to_json(statistics_snapshot)))
+            FROM (
+                SELECT
+                    name,
+                    num_metapackages,
+                    num_metapackages_newest
+                FROM repositories
+            ) AS statistics_snapshot
+       """)
