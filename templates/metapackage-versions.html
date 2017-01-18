@@ -21,16 +21,10 @@
 		<th class="text-center">Category</th>
 		<th class="text-left">Maintainer(s)</th>
 	</tr>
-	{% for reponame in reponames %}
-	{% set packages = packages_by_repo[reponame] %}
-	{% set numpackages = packages|length %}
-	{% if not packages %}
-	<tr>
-		<td class="text-right">{{ macros.repository_link(reponame) }}</td>
-		<td colspan="4"></td>
-	</tr>
-	{% else %}
-	{% for package in packages %}
+{% for reponame in reponames %}
+{% set packages = packages_by_repo[reponame] %}
+{% set numpackages = packages|length %}
+{% for package in packages %}
 	<tr>
 		<td class="text-right">{{ macros.repository_link(reponame) }}</td>
 		<td class="text-center">{{ macros.package_link(package, package.name) }}</td>
@@ -43,18 +37,20 @@
 			{{- package.category|default('-', boolean=True) -}}
 		</td>
 		<td class="text-left">
-		{%- if package.maintainers -%}
 		{%- for maintainer in package.maintainers -%}
 			{%- if not loop.first %}, {% endif -%}{{ macros.maintainer_link(maintainer) }}
-		{%- endfor %}
 		{%- else -%}
 			-
-		{%- endif -%}
+		{%- endfor %}
 		</td>
 	</tr>
-	{% endfor %}
-	{% endif %}
-	{% endfor %}
+{% else %}
+	<tr>
+		<td class="text-right">{{ macros.repository_link(reponame) }}</td>
+		<td colspan="4"></td>
+	</tr>
+{% endfor %}
+{% endfor %}
 </table>
 
 {% endif %}
