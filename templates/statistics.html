@@ -7,96 +7,97 @@
 {% block content %}
 <div class="container">
 
-<h2>Repository family rankings</h2>
-
-<p>Related repositories are aggregated into families here for fair competition. For example, all versions of Debian and Ubuntu are single family, as they share most of the packages.</p>
-
-<div class="row">
-{% for column in familystats|slice(3) %}
-	<div class="col-md-4">
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th class="text-center" rowspan="2">#</th>
-					<th class="text-right" rowspan="2">Family</th>
-					<th class="text-center" colspan="2">Metapackages</th>
-				</tr>
-				<tr>
-					<th class="text-center">Total</th>
-					<th class="text-center">Up to date</th>
-				</tr>
-			</thead>
-			<tbody>
-			{% for family in column %}
-				<tr>
-					<td class="text-center">{{ family.place }}</td>
-					<td class="text-right">{{ family.desc -}}
-					{%- if family.place == 1 -%}
-						<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date for repository family"></span></sup>
-					{%- elif family.place == 2 -%}
-						<sup><div class="medal medal-silver" title="2nd place by number of metapackages up to date for repository family"></span></sup>
-					{%- elif family.place == 3 -%}
-						<sup><div class="medal medal-bronze" title="3rd place by number of metapackages up to date for repository family"></span></sup>
-					{%- endif -%}
-					</td>
-					<td class="text-center"><b>{{ family.num_metapackages }}</b></td>
-					<td class="text-center"><span class="version version-big version-newest">{{ family.num_metapackages_newest }}</span></td>
-				</tr>
-			{% endfor %}
-			</tbody>
-		</table>
-	</div>
-{% endfor %}
-</div>
-
 <h2>Repository statistics</h2>
+
+<p>Total known metapackages: <b>{{ num_metapackages }}</b></p>
+
 <div class="table-responsive">
 <table class="table table-striped table-hover">
 	<thead>
 		<tr>
 			<th class="text-right" rowspan="2">Repository</th>
-			<th class="text-center" colspan="3">Metapackages</th>
-			<th class="text-center" colspan="7">Packages</th>
+			<th class="text-center" colspan="8">Metapackages</th>
+			<th class="text-center" colspan="4">Packages</th>
 			<th class="text-center" rowspan="2">Updated</th>
 		</tr>
 		<tr>
 			<th class="text-center">Total</th>
-			<th class="text-center" colspan="2">Up to date</th>
+			<th class="text-center" colspan="3">Up to date in repo/total</th>
+			<th class="text-center" colspan="2">Outdated</th>
+			<th class="text-center" colspan="2">Unique</th>
 
 			<th class="text-center">Total</th>
-			<th class="text-center" colspan="2">Up to date</th>
-			<th class="text-center" colspan="2">Outdated</th>
-			<th class="text-center" colspan="2">Ignored</th>
+			<th class="text-center">Newest</th>
+			<th class="text-center">Old</th>
+			<th class="text-center">Ignored</th>
 		</tr>
 	</thead>
 	<tbody>
-	{% for repostat in repostats %}
+	{% for repostat in repostats|sort(attribute='num_metapackages_newest', reverse=True) %}
 		<tr>
 			<th class="text-right">
 				{{- macros.repository_link(repostat.name) -}}
-			{%- if not repometadata[repostat.name].family in family_by_name -%}
-			{%- elif family_by_name[repometadata[repostat.name].family].place == 1 -%}
-				<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date for repository family"></span></sup>
-			{%- elif family_by_name[repometadata[repostat.name].family].place == 2 -%}
-				<sup><div class="medal medal-silver" title="2nd place by number of metapackages up to date for repository family"></span></sup>
-			{%- elif family_by_name[repometadata[repostat.name].family].place == 3 -%}
-				<sup><div class="medal medal-bronze" title="3rd place by number of metapackages up to date for repository family"></span></sup>
-			{%- endif -%}
+				{%- if loop.index == 1 -%}
+					<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date"></span></sup>
+				{%- elif loop.index == 2 -%}
+					<sup><div class="medal medal-silver" title="2nd place by number of metapackages up to date"></span></sup>
+				{%- elif loop.index == 3 -%}
+					<sup><div class="medal medal-bronze" title="3rd place by number of metapackages up to date"></span></sup>
+				{%- endif -%}
 			</th>
 
-			<td class="text-center"><b>{{ repostat.num_metapackages }}</b></td>
-			<td class="text-center"><span class="version version-big version-newest">{{ repostat.num_metapackages_newest }}</span></td>
-			<td class="text-center"><span class="version version-big version-newest">{{ macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages) }}</span></td>
+			<td class="text-center" title="Total number of metapackages in this repository"><b>{{ repostat.num_metapackages }}</b></td>
 
-			<td class="text-center"><span>{{ repostat.num_packages }}</span></td>
-			<td class="text-center"><span class="version version-big version-newest">{{ repostat.num_packages_newest }}</span></td>
-			<td class="text-center"><span class="version version-big version-newest">{{ macros.safe_percent(repostat.num_packages_newest, repostat.num_packages) }}</span></td>
+			<td class="text-center version-cell version-big version-newest">
+				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
+					{{ repostat.num_metapackages_newest }}
+				</a>
+			</td>
+			<td class="text-center version-cell version-big version-newest">
+				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
+					{{macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages) }}
+				</a>
+			</td>
+			<td class="text-center version-cell version-big version-newest">
+				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
+					{{macros.safe_percent(repostat.num_metapackages_newest, num_metapackages) }}
+				</a>
+			</td>
 
-			<td class="text-center"><span class="version version-big version-outdated">{{ repostat.num_packages_outdated }}</span></td>
-			<td class="text-center"><span class="version version-big version-outdated">{{ macros.safe_percent(repostat.num_packages_outdated, repostat.num_packages) }}</span></td>
+			<td class="text-center version-cell version-big version-outdated">
+				<a href="{{ url_for('metapackages_outdated_in_repo', repo=repostat.name) }}">
+					{{ repostat.num_metapackages_outdated }}
+				</a>
+			</td>
+			<td class="text-center version-cell version-big version-outdated">
+				<a href="{{ url_for('metapackages_outdated_in_repo', repo=repostat.name) }}">
+					{{ macros.safe_percent(repostat.num_metapackages_outdated, repostat.num_metapackages) }}
+				</a>
+			</td>
 
-			<td class="text-center"><span class="version version-big version-ignored">{{ repostat.num_packages_ignored }}</span></td>
-			<td class="text-center"><span class="version version-big version-ignored">{{ macros.safe_percent(repostat.num_packages_ignored, repostat.num_packages) }}</span></td>
+			<td class="text-center version-cell version-big version-unique">
+			{% if repometadata[repostat.name].shadow %}
+				<span title="This is a shadow repo, e.g. unique packages in it are ignored">n/a</span>
+			{% else %}
+				<a href="{{ url_for('metapackages_unique_in_repo', repo=repostat.name) }}">
+					{{ repostat.num_metapackages_unique }}
+				</a>
+			{% endif %}
+			</td>
+			<td class="text-center version-cell version-big version-unique">
+			{% if repometadata[repostat.name].shadow %}
+				<span title="This is a shadow repo, e.g. unique packages in it are ignored">n/a</span>
+			{% else %}
+				<a href="{{ url_for('metapackages_unique_in_repo', repo=repostat.name) }}">
+					{{ macros.safe_percent(repostat.num_metapackages_unique, repostat.num_metapackages) }}
+				</a>
+			{% endif %}
+			</td>
+
+			<td class="text-center">{{ repostat.num_packages }}</td>
+			<td class="text-center version-cell version-big version-newest">{{ repostat.num_packages_newest }}</td>
+			<td class="text-center version-cell version-big version-outdated">{{ repostat.num_packages_outdated }}</td>
+			<td class="text-center version-cell version-big version-ignored">{{ repostat.num_packages_ignored }}</td>
 
 			<td class="text-center">
 			{% if repostat.last_update_utc %}

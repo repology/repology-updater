@@ -106,10 +106,6 @@ class Database:
         """)
 
         self.cursor.execute("""
-            DROP TABLE IF EXISTS families CASCADE
-        """)
-
-        self.cursor.execute("""
             CREATE TABLE packages (
                 repo varchar(255) not null,
                 family varchar(255) not null,
@@ -150,18 +146,11 @@ class Database:
                 num_packages_ignored integer not null default 0,
 
                 num_metapackages integer not null default 0,
+                num_metapackages_unique integer not null default 0,
                 num_metapackages_newest integer not null default 0,
+                num_metapackages_outdated integer not null default 0,
 
                 last_update timestamp with time zone
-            )
-        """)
-
-        self.cursor.execute("""
-            CREATE TABLE families (
-                name varchar(255) not null primary key,
-
-                num_metapackages integer not null default 0,
-                num_metapackages_newest integer not null default 0
             )
         """)
 
@@ -241,24 +230,18 @@ class Database:
                 SELECT
                     effname,
                     count(DISTINCT repo) AS num_repos,
-                    count(DISTINCT family) AS num_families
+                    count(DISTINCT family) AS num_families,
+                    bool_and(shadow) AS shadow_only
                 FROM packages
                 GROUP BY effname
                 ORDER BY effname
             WITH DATA
         """)
 
-        self.cursor.execute("""
-            CREATE UNIQUE INDEX ON metapackage_repocounts(effname)
-        """)
-
-        self.cursor.execute("""
-            CREATE INDEX ON metapackage_repocounts(num_repos)
-        """)
-
-        self.cursor.execute("""
-            CREATE INDEX ON metapackage_repocounts(num_families)
-        """)
+        self.cursor.execute("CREATE UNIQUE INDEX ON metapackage_repocounts(effname)")
+        self.cursor.execute("CREATE INDEX ON metapackage_repocounts(num_repos)")
+        self.cursor.execute("CREATE INDEX ON metapackage_repocounts(num_families)")
+        self.cursor.execute("CREATE INDEX ON metapackage_repocounts(shadow_only, num_families)")
 
     def Clear(self):
         self.cursor.execute("""DELETE FROM packages""")
@@ -270,13 +253,9 @@ class Database:
                 num_packages_outdated = 0,
                 num_packages_ignored = 0,
                 num_metapackages = 0,
-                num_metapackages_newest = 0
-        """)
-        self.cursor.execute("""
-            UPDATE families
-            SET
-                num_metapackages = 0,
-                num_metapackages_newest = 0
+                num_metapackages_unique = 0,
+                num_metapackages_newest = 0,
+                num_metapackages_outdated = 0
         """)
 
     def AddPackages(self, packages):
@@ -415,61 +394,51 @@ class Database:
                 INTO repositories (
                     name,
                     num_metapackages,
-                    num_metapackages_newest
+                    num_metapackages_unique,
+                    num_metapackages_newest,
+                    num_metapackages_outdated
                 ) SELECT
                     repo,
                     count(*),
-                    count(nullif(num_packages_newest>0, false))
+                    count(nullif(unique_only, false)),
+                    count(nullif(NOT unique_only and num_packages_newest>0, false)),
+                    count(nullif(NOT unique_only and num_packages_newest=0, false))
                 FROM(
-                    SELECT
-                        repo,
-                        count(*) as num_packages,
-                        count(nullif(versionclass=1, false)) as num_packages_newest
-                    FROM packages
-                    WHERE effname IN (
                         SELECT
-                            DISTINCT effname
-                            FROM PACKAGES
-                        WHERE NOT shadow
-                    )
-                    GROUP BY repo, effname
+                            repo,
+                            TRUE as unique_only,
+                            count(*) as num_packages,
+                            count(nullif(versionclass=1, false)) as num_packages_newest
+                        FROM packages
+                        WHERE effname IN (
+                            SELECT
+                                effname
+                            FROM metapackage_repocounts
+                            WHERE NOT shadow_only AND num_families = 1
+                        )
+                        GROUP BY repo, effname
+                    UNION ALL
+                        SELECT
+                            repo,
+                            FALSE as unique_only,
+                            count(*) as num_packages,
+                            count(nullif(versionclass=1, false)) as num_packages_newest
+                        FROM packages
+                        WHERE effname IN (
+                            SELECT
+                                effname
+                            FROM metapackage_repocounts
+                            WHERE NOT shadow_only AND num_families > 1
+                        )
+                        GROUP BY repo, effname
                 ) AS TEMP
                 GROUP BY repo
                 ON CONFLICT (name)
                 DO UPDATE SET
                     num_metapackages = EXCLUDED.num_metapackages,
-                    num_metapackages_newest = EXCLUDED.num_metapackages_newest
-        """)
-
-        self.cursor.execute("""
-            INSERT
-                INTO families (
-                    name,
-                    num_metapackages,
-                    num_metapackages_newest
-                ) SELECT
-                    family,
-                    count(*),
-                    count(nullif(num_packages_newest>0, false))
-                FROM(
-                    SELECT
-                        family,
-                        count(*) as num_packages,
-                        count(nullif(versionclass=1, false)) as num_packages_newest
-                    FROM packages
-                    WHERE effname IN (
-                        SELECT
-                            DISTINCT effname
-                            FROM PACKAGES
-                        WHERE NOT shadow
-                    )
-                    GROUP BY family, effname
-                ) AS TEMP
-                GROUP BY family
-                ON CONFLICT (name)
-                DO UPDATE SET
-                    num_metapackages = EXCLUDED.num_metapackages,
-                    num_metapackages_newest = EXCLUDED.num_metapackages_newest
+                    num_metapackages_unique = EXCLUDED.num_metapackages_unique,
+                    num_metapackages_newest = EXCLUDED.num_metapackages_newest,
+                    num_metapackages_outdated = EXCLUDED.num_metapackages_outdated
         """)
 
     def Commit(self):
@@ -596,7 +565,7 @@ class Database:
         return self.cursor.fetchall()[0][0]
 
     def GetMetapackagesCount(self):
-        self.cursor.execute("""SELECT count(*) FROM metapackage_repocounts""")
+        self.cursor.execute("""SELECT count(*) FROM metapackage_repocounts WHERE NOT shadow_only""")
 
         return self.cursor.fetchall()[0][0]
 
@@ -669,7 +638,9 @@ class Database:
                 num_packages_outdated,
                 num_packages_ignored,
                 num_metapackages,
+                num_metapackages_unique,
                 num_metapackages_newest,
+                num_metapackages_outdated,
                 last_update at time zone 'UTC',
                 now() - last_update
             FROM repositories
@@ -683,26 +654,11 @@ class Database:
                 'num_packages_outdated': row[3],
                 'num_packages_ignored': row[4],
                 'num_metapackages': row[5],
-                'num_metapackages_newest': row[6],
-                'last_update_utc': row[7],
-                'since_last_update': row[8]
-            } for row in self.cursor.fetchall()
-        ]
-
-    def GetFamilies(self):
-        self.cursor.execute("""
-            SELECT
-                name,
-                num_metapackages,
-                num_metapackages_newest
-            FROM families
-        """)
-
-        return [
-            {
-                'name': row[0],
-                'num_metapackages': row[1],
-                'num_metapackages_newest': row[2],
+                'num_metapackages_unique': row[6],
+                'num_metapackages_newest': row[7],
+                'num_metapackages_outdated': row[8],
+                'last_update_utc': row[9],
+                'since_last_update': row[10]
             } for row in self.cursor.fetchall()
         ]
 
