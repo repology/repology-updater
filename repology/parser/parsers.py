@@ -37,3 +37,4 @@ from .guix import GuixParser
 from .rubygem import RubyGemParser
 from .dports import DPortsIndexParser
 from .libregamewiki import LibreGameWikiParser
+from .rosa import RosaInfoXmlParser

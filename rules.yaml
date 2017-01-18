@@ -615,7 +615,7 @@
 # we ignore it in comparison
 - { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", family: [ debian ] }
-- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa ] }
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
   # Gentoo and Mageia shamelessly mangle perl module versions, ignore
@@ -624,7 +624,7 @@
 
 # Ruby
 - { namepat: "ruby-(.*)",              setname: "ruby:$1", family: [ debian, arch, fedora, mageia, sisyphus, guix ] }
-- { namepat: "rubygem-(.*)",           setname: "ruby:$1", family: [ freebsd, fedora, opensuse, slackbuilds ] }
+- { namepat: "rubygem-(.*)",           setname: "ruby:$1", family: [ freebsd, fedora, opensuse, slackbuilds, rosa ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", family: [ freebsd, openbsd, pkgsrc ] }
 - { family: [ rubygems ],              setname: "ruby:$0" }
 - { namepat: "lib(.*)-ruby",           setname: "ruby:$1", family: [ debian ] } # old Ubuntu Precise
@@ -648,7 +648,7 @@
 - { namepat: "python-(.*)",            setname: "python:$1", family: [ debian, centos, mageia, gobolinux ] }
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", family: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch, guix ] }
-- { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds ] }
+- { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds, rosa ] }
 - { category: dev-python,              setname: "python:$0", family: [ gentoo ] }
 
 # R libs
@@ -756,7 +756,7 @@
 - { namepat: "font-(.*)",              setname: "fonts:$1", family: [ freebsd, gentoo, pkgsrc, arch, gobolinux, guix ] }
 - { name: cantarell,                   setname: "fonts:cantarell", family: [ gentoo ]  }
 - { name: cantarell-fonts,             setname: "fonts:cantarell", family: [ freebsd, pkgsrc, openbsd, arch ] }
-- { namepat: "fonts-ttf-(.*)",         setname: "fonts:$1", family: [ mageia ] }
+- { namepat: "fonts-ttf-(.*)",         setname: "fonts:$1", family: [ mageia, rosa ] }
 - { namepat: "fonts-(.*)",             setname: "fonts:$1", family: [ sisyphus ] }
 
 # fortunes
