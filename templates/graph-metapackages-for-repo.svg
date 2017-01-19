@@ -37,7 +37,7 @@
 {#### labels ####}
     <g fill="#000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
     {% for day in range(0, numdays - 1) %}
-        <text x="{{ x((day+1)/numdays) }}" y="{{ height - 5 }}">{{ day+1 }} day{% if not loop.first %}s{% endif %} ago</text>
+        <text x="{{ x((day+1)/numdays) }}" y="{{ height - 5 }}">{{ day+1 }} day{% if not loop.first %}s{% endif %}</text>
     {% endfor %}
     </g>
 </svg>
