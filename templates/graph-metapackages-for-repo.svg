@@ -5,21 +5,6 @@
 {%- macro y(value, offset=0) %}{{ ( ((1.0 - value) * 0.85 + 0.05) * height + offset ) | round(2) }}{% endmacro -%}
 
 {%- macro line(field, color) %}
-{#### line shadow ####}
-    <g stroke="gray" stroke-width="3">
-    {% for point in datapoints if field in point %}
-    {% if not loop.first and field in prev %}
-        <line x1="{{ x(point.pos, 0.5) }}" y1="{{ y(point[field], 1) }}" x2="{{ x(prev.pos, 0.5) }}" y2="{{ y(prev[field], 1) }}" />
-    {% endif %}
-    {% set prev = point %}
-    {% endfor %}
-    </g>
-{#### point shadow ####}
-    <g fill="gray">
-    {% for point in datapoints if field in point %}
-        <circle cx="{{ x(point.pos, 0.5) }}" cy="{{ y(point[field], 1) }}" r="4" />
-    {% endfor %}
-    </g>
 {#### line ####}
     <g stroke="{{ color }}" stroke-width="3">
     {% for point in datapoints if field in point %}
@@ -30,15 +15,9 @@
     {% endfor %}
     </g>
 {#### point ####}
-    <g fill="{{ color }}" stroke-width="3">
+    <g fill="{{ color }}">
     {% for point in datapoints if field in point %}
-        <circle cx="{{ x(point.pos) }}" cy="{{ y(point[field]) }}" r="4" />
-    {% endfor %}
-    </g>
-{#### point eye ####}
-    <g fill="white" stroke-width="3">
-    {% for point in datapoints if field in point %}
-        <circle cx="{{ x(point.pos) }}" cy="{{ y(point[field]) }}" r="2" />
+        <circle cx="{{ x(point.pos) }}" cy="{{ y(point[field]) }}" r="3" />
     {% endfor %}
     </g>
 {% endmacro -%}
