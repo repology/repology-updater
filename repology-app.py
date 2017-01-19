@@ -443,8 +443,21 @@ def graph_metapackages_for_repo(repo):
     history = get_db().GetRepositoriesHistoryPeriod(period)
 
     ranges = {}
-    for field in fields:
-        ranges[field] = [None, None]
+
+    def update_ranges(name, value):
+        if value is None:
+            return
+        if not name in ranges:
+            ranges[name] = [value, value]
+        if value < ranges[name][0]:
+            ranges[name][0] = value
+        if value > ranges[name][1]:
+            ranges[name][1] = value
+
+    def normalize_to_range(name, value):
+        if name in ranges and ranges[name][0] != ranges[name][1]:
+            return (value - ranges[name][0]) / (ranges[name][1] - ranges[name][0])
+        return 0.5
 
     # collect min/max ranges for all fields
     for entry in history:
@@ -453,11 +466,8 @@ def graph_metapackages_for_repo(repo):
         statistics = entry['statistics'][repo]
 
         for field in fields:
-            if field in statistics:
-                if ranges[field][0] is None or statistics[field] < ranges[field][0]:
-                    ranges[field][0] = statistics[field]
-                if ranges[field][1] is None or statistics[field] > ranges[field][1]:
-                    ranges[field][1] = statistics[field]
+            update_ranges(field, statistics.get(field, None))
+            update_ranges('all', statistics.get(field, None))
 
     datapoints = []
     for entry in history:
@@ -468,10 +478,7 @@ def graph_metapackages_for_repo(repo):
         statistics = entry['statistics'][repo]
         for field in fields:
             if field in statistics:
-                if ranges[field][0] == ranges[field][1]:
-                    datapoint[field] = 0.5
-                else:
-                    datapoint[field] = (statistics[field] - ranges[field][0]) / (ranges[field][1] - ranges[field][0])
+                datapoint[field] = normalize_to_range(field, statistics[field])
 
         datapoints.append(datapoint)
 
