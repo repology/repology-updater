@@ -716,7 +716,9 @@ class Database:
                 SELECT
                     name,
                     num_metapackages,
-                    num_metapackages_newest
+                    num_metapackages_unique,
+                    num_metapackages_newest,
+                    num_metapackages_outdated
                 FROM repositories
             ) AS statistics_snapshot
        """)
