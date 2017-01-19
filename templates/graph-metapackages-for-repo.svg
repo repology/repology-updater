@@ -25,8 +25,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="{{ width }}" height="{{ height }}">
 {#### background stripes ####}
 {% for day in range(numdays) %}
-{% if loop.index % 2 %}
-    <rect x="{{ x((day+1)/numdays) }}" width="{{ ( width / numdays ) | round(2) }}" height="{{ height }}" fill="#00000010" />
+{% if not day % 2 %}
+    <rect x="{{ x((day+1)/numdays) }}" width="{{ (width/numdays) }}" height="{{ height - 20 }}" fill="#f0f0f0" />
+{% endif %}
+{% endfor %}
+{#### background lines ####}
+{% for line in range(numdays*4-1) %}
+{% if line % 4 == 3 %}
+    <line x1="{{ x((line+1)/numdays/4) }}" x2="{{ x((line+1)/numdays/4) }}" y1="0" y2="{{ height - 20 }}" stroke="#c0c0c0" />
+{% else %}
+    <line x1="{{ x((line+1)/numdays/4) }}" x2="{{ x((line+1)/numdays/4) }}" y1="0" y2="{{ height }}" stroke="#e0e0e0" />
 {% endif %}
 {% endfor %}
 {#### lines ####}
