@@ -436,7 +436,8 @@ def graph_metapackages_for_repo(repo):
     if repo not in reponames:
         flask.abort(404)
 
-    period = 60*60*24*7
+    numdays = 7
+    period = 60*60*24*numdays
     fields = ('num_metapackages', 'num_metapackages_unique', 'num_metapackages_newest', 'num_metapackages_outdated')
 
     history = get_db().GetRepositoriesHistoryPeriod(period)
@@ -478,7 +479,7 @@ def graph_metapackages_for_repo(repo):
         flask.render_template(
             "graph-metapackages-for-repo.svg",
             datapoints=datapoints,
-            numdays=period//(60*60*24)
+            numdays=numdays
         ),
         {'Content-type': 'image/svg+xml'}
     )
