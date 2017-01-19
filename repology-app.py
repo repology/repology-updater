@@ -431,6 +431,59 @@ def statistics():
         num_metapackages=get_db().GetMetapackagesCount()
     )
 
+@app.route("/graph/metapackages-for-repo/<repo>.svg")
+def graph_metapackages_for_repo(repo):
+    if repo not in reponames:
+        flask.abort(404)
+
+    period = 60*60*24*7
+    fields = ('num_metapackages', 'num_metapackages_unique', 'num_metapackages_newest', 'num_metapackages_outdated')
+
+    history = get_db().GetRepositoriesHistoryPeriod(period)
+
+    ranges = {}
+    for field in fields:
+        ranges[field] = [None, None]
+
+    # collect min/max ranges for all fields
+    for entry in history:
+        entry['statistics'] = { repo['name'] : repo for repo in entry['statistics'] }
+
+        statistics = entry['statistics'][repo]
+
+        for field in fields:
+            if field in statistics:
+                if ranges[field][0] is None or statistics[field] < ranges[field][0]:
+                    ranges[field][0] = statistics[field]
+                if ranges[field][1] is None or statistics[field] > ranges[field][1]:
+                    ranges[field][1] = statistics[field]
+
+    datapoints = []
+    for entry in history:
+        datapoint = {
+            'pos': entry['timedelta'].total_seconds() / period,
+        }
+
+        statistics = entry['statistics'][repo]
+        for field in fields:
+            if field in statistics:
+                if ranges[field][0] == ranges[field][1]:
+                    datapoint[field] = 0.5
+                else:
+                    datapoint[field] = (statistics[field] - ranges[field][0]) / (ranges[field][1] - ranges[field][0])
+
+        datapoints.append(datapoint)
+
+    return (
+        flask.render_template(
+            "graph-metapackages-for-repo.svg",
+            datapoints=datapoints,
+            numdays=period//(60*60*24)
+        ),
+        {'Content-type': 'image/svg+xml'}
+    )
+
+
 @app.route("/api/v1/metapackage/<name>")
 def api_v1_metapackage(name):
     return (

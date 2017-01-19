@@ -698,6 +698,27 @@ class Database:
             for row in self.cursor.fetchall()
         ]
 
+    def GetRepositoriesHistoryPeriod(self, seconds=60*60*24, repo=None):
+        self.cursor.execute("""
+            SELECT
+                ts,
+                now() - ts,
+                statistics
+            FROM repositories_history
+            WHERE ts >= now() - INTERVAL %s
+            ORDER BY ts
+        """, (datetime.timedelta(seconds=seconds),)
+        )
+
+        return [
+            {
+                'timestamp': row[0],
+                'timedelta': row[1],
+                'statistics': row[2]
+            }
+            for row in self.cursor.fetchall()
+        ]
+
     def Query(self, query, *args):
         self.cursor.execute(query, args)
         return self.cursor.fetchall()
