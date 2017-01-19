@@ -231,6 +231,11 @@
 - { name: dragon,                      setname: dragon-scannerparser,     family: [ freebsd ] }
 - { name: dragon,                      setname: dragon-player                                }
 - { name: pacman,                      setname: pacman-game,              family: [ debian ] } # package manager vs. some game
+- { name: docker,                      setname: docker-tray,              family: gentoo, category: x11-plugins }
+- { name: crystal,                     setname: crystal-lang,             family: [ arch, freshcode ] }
+- { name: crystal,                     setname: crystal-lang,             family: gentoo, category: dev-lang }
+- { name: crystal,                     setname: crystal-mud,              family: gentoo, category: games-mud }
+- { name: crystal,                     setname: crystal-theme,            family: slackbuilds }
 # fuse-emulator vs. fusefs modules - see below
 
 # TODO
