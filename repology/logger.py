@@ -40,7 +40,6 @@ class FileLogger(NoopLogger):
     def __init__(self, path, prefix=None):
         self.path = path
         self.prefix = prefix
-        pass
 
     def Log(self, message):
         prefixstr = self.prefix if self.prefix else ""
@@ -57,7 +56,6 @@ class FileLogger(NoopLogger):
 class StderrLogger(NoopLogger):
     def __init__(self, prefix=None):
         self.prefix = prefix
-        pass
 
     def Log(self, message):
         prefixstr = self.prefix if self.prefix else ""
