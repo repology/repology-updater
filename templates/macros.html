@@ -33,3 +33,21 @@
 	{%- endif -%}
 	{%- endif -%}
 {%- endmacro -%}
+
+{%- macro value_with_delta(value, old_value) -%}
+	{%- if old_value is defined -%}
+		{%- if value > old_value -%}
+		<div class="popup-container">
+			{{- value -}}
+			<span class="popup-container-inner"><sup class="popup delta-positive">+{{ value - old_value }} in last 24h</sup></span></div>
+		{%- elif value < old_value -%}
+		<div class="popup-container">
+			{{- value -}}
+			<span class="popup-container-inner"><sup class="popup delta-negative">-{{ old_value - value }} in last 24h</sup></span></div>
+		{%- else -%}
+		{{- value -}}
+		{%- endif -%}
+	{%- else -%}
+	{{- value -}}
+	{%- endif -%}
+{%- endmacro -%}

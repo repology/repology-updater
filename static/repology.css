@@ -147,6 +147,36 @@
     background-color: #CD7F32;
 }
 
+.popup-container {
+    position: relative;
+}
+
+.popup-container-inner {
+    position: absolute;
+    display: none;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.popup-container:hover .popup-container-inner {
+    display: inline;
+}
+
+.popup {
+    background-color: #dddddd;
+    border-radius: 0.25em;
+    padding: .1em .3em;
+    text-shadow: none;
+}
+
+.delta-negative {
+    color: red;
+}
+
+.delta-positive {
+    color: green;
+}
+
 /* XXX: check if bootstrap h1.pageheader margin is always 40px */
 .pageheader-right {
 	float: right;
