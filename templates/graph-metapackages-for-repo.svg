@@ -26,7 +26,7 @@
 {#### background stripes ####}
 {% for day in range(numdays) %}
 {% if not day % 2 %}
-    <rect x="{{ x((day+1)/numdays) }}" width="{{ (width/numdays) }}" height="{{ height - 20 }}" fill="#f0f0f0" />
+    <rect x="{{ x((day+1)/numdays) }}" width="{{ (width/numdays) }}" height="{{ height }}" fill="#f0f0f0" />
 {% endif %}
 {% endfor %}
 {#### background lines ####}
