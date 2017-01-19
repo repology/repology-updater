@@ -34,6 +34,7 @@
 	</thead>
 	<tbody>
 	{% for repostat in repostats|sort(attribute='num_metapackages_newest', reverse=True) %}
+	{% if repostat.name in repostats_old %}{% set old_repostat = repostats_old[repostat.name] %}{% else %}{% set old_repostat = {} %}{% endif %}
 		<tr>
 			<th class="text-right">
 				{{- macros.repository_link(repostat.name) -}}
@@ -46,27 +47,31 @@
 				{%- endif -%}
 			</th>
 
-			<td class="text-center" title="Total number of metapackages in this repository"><b>{{ repostat.num_metapackages }}</b></td>
+			<td class="text-center" title="Total number of metapackages in this repository">
+				<b>
+					{{- macros.value_with_delta(repostat.num_metapackages, old_repostat.num_metapackages) -}}
+				</b>
+			</td>
 
 			<td class="text-center version-cell version-big version-newest">
 				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
-					{{ repostat.num_metapackages_newest }}
+					{{- macros.value_with_delta(repostat.num_metapackages_newest, old_repostat.num_metapackages_newest) -}}
 				</a>
 			</td>
 			<td class="text-center version-cell version-big version-newest">
 				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
-					{{macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages) }}
+					{{ macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages) }}
 				</a>
 			</td>
 			<td class="text-center version-cell version-big version-newest">
 				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
-					{{macros.safe_percent(repostat.num_metapackages_newest, num_metapackages) }}
+					{{ macros.safe_percent(repostat.num_metapackages_newest, num_metapackages) }}
 				</a>
 			</td>
 
 			<td class="text-center version-cell version-big version-outdated">
 				<a href="{{ url_for('metapackages_outdated_in_repo', repo=repostat.name) }}">
-					{{ repostat.num_metapackages_outdated }}
+					{{- macros.value_with_delta(repostat.num_metapackages_outdated, old_repostat.num_metapackages_outdated) -}}
 				</a>
 			</td>
 			<td class="text-center version-cell version-big version-outdated">
@@ -80,7 +85,7 @@
 				<span title="This is a shadow repo, e.g. unique packages in it are ignored">n/a</span>
 			{% else %}
 				<a href="{{ url_for('metapackages_unique_in_repo', repo=repostat.name) }}">
-					{{ repostat.num_metapackages_unique }}
+					{{- macros.value_with_delta(repostat.num_metapackages_unique, old_repostat.num_metapackages_unique) -}}
 				</a>
 			{% endif %}
 			</td>
