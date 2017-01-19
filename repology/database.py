@@ -671,7 +671,7 @@ class Database:
             } for row in self.cursor.fetchall()
         ]
 
-    def GetRepositoriesRetrospect(self, **args):
+    def GetRepositoriesHistoryAgo(self, seconds=60*60*24):
         self.cursor.execute("""
             SELECT
                 ts,
@@ -682,11 +682,11 @@ class Database:
                 SELECT
                     ts
                 FROM repositories_history
-                WHERE ts < now() - INTERVAL %s SECOND
+                WHERE ts < now() - INTERVAL %s
                 ORDER BY ts DESC
                 LIMIT 1
             );
-        """, (datetime.timedelta(**args),)
+        """, (datetime.timedelta(seconds=seconds),)
         )
 
         return [
