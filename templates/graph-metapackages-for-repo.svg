@@ -1,8 +1,8 @@
 {%- set width = 1140 -%}
 {%- set height = 400 -%}
 
-{%- macro x(value, offset=0) %}{{ ( (1.0 - value) * width + offset ) | round(2) }}{% endmacro -%}
-{%- macro y(value, offset=0) %}{{ ( ((1.0 - value) * 0.85 + 0.05) * height + offset ) | round(2) }}{% endmacro -%}
+{%- macro x(value, offset=0) %}{{ ( (1.0 - value) * width + offset )|int + 0.5 }}{% endmacro -%}
+{%- macro y(value, offset=0) %}{{ ( ((1.0 - value) * 0.85 + 0.05) * height + offset )|int + 0.5 }}{% endmacro -%}
 
 {%- macro line(field, color) %}
 {#### line ####}
