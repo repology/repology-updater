@@ -61,7 +61,10 @@ def Main():
         for link in links:
             # XXX: add support for gentoo mirrors, skip for now
             if link.startswith("mirror://"):
-                logger.Log("  Skipping {}, mirror detected".format(link))
+                logger.Log("  Skipping {}, mirror schema not supported".format(link))
+                continue
+            if link.startswith("ftp://"):
+                logger.Log("  Skipping {}, ftp schema not supported".format(link))
                 continue
 
             logger.Log("  Processing {}".format(link))
