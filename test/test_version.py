@@ -118,6 +118,14 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(VersionCompare("4.89", "4.90.f"), -1)
         self.assertEqual(VersionCompare("4.90.f", "4.49"), 1)
 
+    def test_miscomparation3(self): # github issue #138
+        self.assertEqual(VersionCompare("1.7.5~a1", "1.7.5a1"), 0)
+        self.assertEqual(VersionCompare("1.7.5a1", "1.7.5~a1"), 0)
+        self.assertEqual(VersionCompare("1.7.5~a1", "1.7.5-a1"), 0)
+        self.assertEqual(VersionCompare("1.7.5-a1", "1.7.5~a1"), 0)
+        self.assertEqual(VersionCompare("1.7.5a1", "1.7.5-a1"), 0)
+        self.assertEqual(VersionCompare("1.7.5-a1", "1.7.5a1"), 0)
+
     def test_specific1(self):
         self.assertEqual(VersionCompare("1.0r1", "1.0_RC1"), 0)
 
