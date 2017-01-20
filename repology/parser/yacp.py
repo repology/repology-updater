@@ -52,6 +52,7 @@ class YACPGitParser():
                 if not cygport.endswith(".cygport"):
                     continue
 
+                # XXX: save *bl* to origversion
                 match = re.match("(.*)-[0-9]+bl[0-9]+\.cygport$", cygport)
 
                 if not match:
