@@ -107,6 +107,14 @@ class Database:
         """)
 
         self.cursor.execute("""
+            DROP TABLE IF EXISTS repositories_history CASCADE
+        """)
+
+        self.cursor.execute("""
+            DROP TABLE IF EXISTS links CASCADE
+        """)
+
+        self.cursor.execute("""
             CREATE TABLE packages (
                 repo varchar(255) not null,
                 family varchar(255) not null,
