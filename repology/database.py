@@ -265,11 +265,12 @@ class Database:
             CREATE TABLE links (
                 url varchar(2048) not null primary key,
                 last_seen timestamp with time zone not null,
+                last_alive timestamp with time zone,
                 ts timestamp with time zone,
-                status smallint null,
-                redirect smallint null,
-                size integer null,
-                location varchar(2048) null
+                status smallint,
+                redirect smallint,
+                size integer,
+                location varchar(2048)
             )
         """)
 
@@ -809,6 +810,7 @@ class Database:
             UPDATE links
             SET
                 ts = now(),
+                last_alive = CASE WHEN %s THEN now() ELSE last_alive END,
                 status = %s,
                 redirect = %s,
                 size = %s,
@@ -816,6 +818,7 @@ class Database:
             WHERE url = %s
         """,
             (
+                status == 200,
                 status,
                 redirect,
                 size,
@@ -829,6 +832,7 @@ class Database:
             SELECT
                 url,
                 ts,
+                last_alive,
                 status,
                 redirect,
                 size,
@@ -850,10 +854,11 @@ class Database:
         return {
             row[0]: {
                 'ts': row[1],
-                'status': row[2],
-                'redirect': row[3],
-                'size': row[4],
-                'location': row[5]
+                'last_alive': row[2],
+                'status': row[3],
+                'redirect': row[4],
+                'size': row[5],
+                'location': row[6]
             }
             for row in self.cursor.fetchall()
         }
