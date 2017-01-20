@@ -252,6 +252,18 @@ class Database:
         self.cursor.execute("CREATE INDEX ON metapackage_repocounts(num_families)")
         self.cursor.execute("CREATE INDEX ON metapackage_repocounts(shadow_only, num_families)")
 
+        # links for link checker
+        self.cursor.execute("""
+            CREATE TABLE links (
+                url varchar(2048) not null primary key,
+                ts timestamp with time zone,
+                status smallint null,
+                redirect smallint null,
+                size integer null,
+                location varchar(2048) null
+            )
+        """)
+
     def Clear(self):
         self.cursor.execute("""DELETE FROM packages""")
         self.cursor.execute("""
@@ -743,3 +755,90 @@ class Database:
                 FROM repositories
             ) AS statistics_snapshot
        """)
+
+    def ExtractLinks(self):
+        self.cursor.execute("""
+            INSERT
+            INTO links(
+                url
+            ) SELECT
+                unnest(downloads) as url
+            FROM packages
+            UNION
+            SELECT
+                homepage
+            FROM packages
+            WHERE homepage IS NOT NULL
+        """)
+
+    def GetLinksForCheck(self, count, timeout_seconds):
+        # not really effective, but we don't care
+        self.cursor.execute("""
+            SELECT
+                url
+            FROM links
+            WHERE ts IS NULL OR ts <= now() - INTERVAL %s
+            ORDER BY random()
+            LIMIT %s
+        """, (datetime.timedelta(seconds=timeout_seconds),count)
+        )
+
+        return [ row[0] for row in self.cursor.fetchall() ]
+
+    linkcheck_status_timeout = -1
+    linkcheck_status_too_many_redirects = -2
+    linkcheck_status_unknown_error = -3
+    linkcheck_status_cannot_connect = -4
+    def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
+        self.cursor.execute("""
+            UPDATE links
+            SET
+                ts = now(),
+                status = %s,
+                redirect = %s,
+                size = %s,
+                location = %s
+            WHERE url = %s
+        """,
+            (
+                status,
+                redirect,
+                size,
+                location,
+                url
+            )
+        )
+
+    def GetMetapackageLinkStatuses(self, name):
+        self.cursor.execute("""
+            SELECT
+                url,
+                ts,
+                status,
+                redirect,
+                size,
+                location
+            FROM links
+            WHERE url in (
+                SELECT
+                    unnest(downloads) as url
+                FROM packages
+                WHERE effname = %s
+                UNION
+                SELECT
+                    homepage
+                FROM packages
+                WHERE homepage IS NOT NULL and effname = %s
+            )
+        """, (name,name,))
+
+        return {
+            row[0]: {
+                'ts': row[1],
+                'status': row[2],
+                'redirect': row[3],
+                'size': row[4],
+                'location': row[5]
+            }
+            for row in self.cursor.fetchall()
+        }
