@@ -491,7 +491,6 @@ def graph_metapackages_for_repo(repo):
         {'Content-type': 'image/svg+xml'}
     )
 
-
 @app.route("/api/v1/metapackage/<name>")
 def api_v1_metapackage(name):
     return (
