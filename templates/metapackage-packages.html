@@ -1,4 +1,5 @@
 {% extends "metapackage.html" %}
+{% import "macros.html" as macros %}
 
 {% block title %}{{ super() }}: packages for {{ name }}{% endblock %}
 {% block header %}Packages for <strong>{{ name }}</strong>{% endblock %}
@@ -83,7 +84,7 @@
 				<li class="list-group-item"><b>Homepage:</b>
 					<ul class="list-package-details">
 						<li>
-							<a href="{{ package.homepage }}">{{ package.homepage }}</a>
+							<a href="{{ package.homepage }}">{{ package.homepage }}</a>{{ macros.link_status(package.homepage, link_statuses) }}
 						</li>
 					</ul>
 				</li>
@@ -91,9 +92,9 @@
 			{% if package.downloads %}
 				<li class="list-group-item"><b>Download(s):</b>
 					<ul class="list-package-details">
-						{% for download in package.downloads %}
-							<li><a href="{{ download }}">{{ download }}</a></li>
-						{% endfor %}
+					{% for download in package.downloads %}
+						<li><a href="{{ download }}">{{ download }}</a>{{ macros.link_status(download, link_statuses) }}</li>
+					{% endfor %}
 					</ul>
 				</li>
 			{% endif %}

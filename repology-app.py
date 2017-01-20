@@ -313,7 +313,12 @@ def metapackage_versions(name):
 def metapackage_packages(name):
     packages = get_db().GetMetapackage(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
-    return flask.render_template("metapackage-packages.html", packages=packages, name=name)
+    return flask.render_template(
+        "metapackage-packages.html",
+        packages=packages,
+        name=name,
+        link_statuses=get_db().GetMetapackageLinkStatuses(name)
+    )
 
 @app.route("/metapackage/<name>/information")
 def metapackage_information(name):
