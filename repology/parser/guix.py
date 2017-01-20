@@ -16,9 +16,23 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import xml.etree.ElementTree
 
 from repology.package import Package
+
+
+def SanitizeVersion(version):
+    origversion = version
+
+    match = re.match("(.*)-[0-9]+\\.[0-9a-f]{7,}$", origversion)
+    if match:
+        version = match.group(1)
+
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
 
 
 class GuixParser():
@@ -46,7 +60,8 @@ class GuixParser():
 
                 # name + version
                 cell = row.find("./td[2]/a")
-                pkg.name, pkg.version = cell.text.split(' ', 1)
+                pkg.name, version = cell.text.split(' ', 1)
+                pkg.version, pkg.origversion = SanitizeVersion(version)
 
                 # summary
                 cell = row.find("./td[3]/span")
