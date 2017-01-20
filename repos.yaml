@@ -451,7 +451,7 @@
     - name: data
       fetcher: Repodata
       parser: Repodata
-      url: https://mirror.yandex.ru/fedora/linux/development/25/Everything/source/tree/
+      url: https://mirror.yandex.ru/fedora/linux/releases/25/Everything/source/tree/
   links:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
