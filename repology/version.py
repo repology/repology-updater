@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
+
+all_version_separators = re.compile('[^0-9a-z]', re.IGNORECASE)
+
 
 def SplitVersionComponents(c):
     pos = 0
@@ -66,10 +70,10 @@ def VersionCompare(v1, v2):
     components2 = []
 
     # split by dots
-    for c in v1.replace('_', '.').replace('+', '.').split('.'):
+    for c in all_version_separators.split(v1):
         components1.extend(SplitVersionComponents(c))
 
-    for c in v2.replace('_', '.').replace('+', '.').split('.'):
+    for c in all_version_separators.split(v2):
         components2.extend(SplitVersionComponents(c))
 
     # align lengths
