@@ -35,6 +35,7 @@ def Main():
 
     parser.add_argument('-t', '--timeout', type=int, default=60, help='timeout for link requests in seconds')
     parser.add_argument('-a', '--age', type=int, default=365, help='min age for recheck in days')
+    parser.add_argument('-p', '--packsize', type=int, default=128, help='pack size for link processing')
     options = parser.parse_args()
 
     logger = StderrLogger()
@@ -51,7 +52,7 @@ def Main():
 
     while True:
         logger.Log("Requesting pack of links")
-        links = database.GetLinksForCheck(128, options.age * 60 * 60 * 24)
+        links = database.GetLinksForCheck(options.packsize, options.age * 60 * 60 * 24)
         if not links:
             logger.Log("  Empty pack, we're done")
             break
