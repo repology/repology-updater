@@ -264,6 +264,7 @@ class Database:
         self.cursor.execute("""
             CREATE TABLE links (
                 url varchar(2048) not null primary key,
+                last_seen timestamp with time zone not null,
                 ts timestamp with time zone,
                 status smallint null,
                 redirect smallint null,
@@ -768,15 +769,21 @@ class Database:
         self.cursor.execute("""
             INSERT
             INTO links(
-                url
+                url,
+                last_seen
             ) SELECT
-                unnest(downloads) as url
+                unnest(downloads),
+                now()
             FROM packages
             UNION
             SELECT
-                homepage
+                homepage,
+                now()
             FROM packages
             WHERE homepage IS NOT NULL
+            ON CONFLICT (url)
+            DO UPDATE SET
+                last_seen = now()
         """)
 
     def GetLinksForCheck(self, count, timeout_seconds):
