@@ -125,7 +125,8 @@ fixed in the algorithm (and will be, or will be not due to rarity
 of occurances and avoiding adding unneded complexity), or may not
 be fixed, due to lack of information.
 
-* ```12ef23ad21```
+* ```1EE2AB3```
+
   These are undefined behavior now as we assume only one alphabetic
   part. I've seen this in practice for some nethack-related package,
   and this also may be encountered when version contains git commit
@@ -133,16 +134,19 @@ be fixed, due to lack of information.
   latter is doomed.
 
 * ```1.0beta``` vs. ```1.0beta1```
+
   Fails because the former is not split. May be fixed by handling
   words (as opposed to letters) specially. Real-word cases have
   it either split upstream (e.g. ```1.0.beta```), and most cases
   are numbered anyway.
 
 * ```1.beta``` vs. ```1.beta1```
+
   Compare as less, but may be expected to be equal. May be easily
   fixed, as soon as we assume there can't be ```beta0```.
 
 * ```1.0 vs 1.0patch2```
+
   ```patch``` is a special word which requires different handling
   than all other alphabetics. While ```1.0alpha1 < 1.0```,
   ```1.0patch1``` > ```1.0```. May handle it (as well as ```p```)
