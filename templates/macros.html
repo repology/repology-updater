@@ -22,6 +22,23 @@
 	{%- endif -%}
 {%- endmacro -%}
 
+{%- macro link_status(link, link_statuses) -%}
+	{%- if link in link_statuses %}
+		{%- if not link_statuses[link].status -%}
+		{%- elif link_statuses[link].status == -1 -%}
+			<sup class="link_error" title="Check failed for this URL: connect timeout">!</sup>
+		{%- elif link_statuses[link].status == -2 -%}
+			<sup class="link_error" title="Check failed for this URL: too many redirects">!</sup>
+		{%- elif link_statuses[link].status == -3 -%}
+			<sup class="link_error" title="Check failed for this URL: unknown error">!</sup>
+		{%- elif link_statuses[link].status == -4 -%}
+			<sup class="link_error" title="Check failed for this URL: could not connect">!</sup>
+		{%- elif link_statuses[link].status != 200 -%}
+			<sup class="link_error" title="Check failed for this URL: HTTP response {{ link_statuses[link].status }}">!</sup>
+		{%- endif -%}
+	{%- endif %}
+{%- endmacro -%}
+
 {%- macro safe_percent(value, total, round=1) -%}
 	{%- if total == 0 -%}
 		-

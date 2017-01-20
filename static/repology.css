@@ -177,6 +177,14 @@
     color: green;
 }
 
+.link_error {
+    color: white;
+    background-color: #d9534f;
+    font-weight: bold;
+    padding: 0.1em 0.5em;
+    border-radius: 50%;
+}
+
 /* XXX: check if bootstrap h1.pageheader margin is always 40px */
 .pageheader-right {
 	float: right;

@@ -356,7 +356,8 @@ def metapackage_information(name):
         "metapackage-information.html",
         information=information,
         versions=versions,
-        name=name
+        name=name,
+        link_statuses=get_db().GetMetapackageLinkStatuses(name)
     )
 
 @app.route("/metapackage/<name>/badges")
