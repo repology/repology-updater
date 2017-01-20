@@ -1,12 +1,12 @@
 # Repology version comparison algorithm
 
-The core of the project is its version coparison algorithm, which
+The core of the project is its version comparison algorithm, which
 need to be robust and generic enough to compare versions in different
 repos which may have incompatible rules or traditions for mangling.
 
 For example, ```1.2.3alpha4```, ```1.2.3~a4``` and ```1.2.3.a4```
 are all the same version written differently, and these should all
-compare as equal. And, by the way, it shold be compare less to
+compare as equal. And, by the way, it should be compare less to
 ```1.2.3``` because alpha versions come before the release. Repology
 does that.
 
@@ -17,8 +17,8 @@ in repository-specific way. For example, in FreeBSD ports you can
 run into something like ```1.2.3_4,5```, which means upstream version
 ```1.2.3```, port revision 4, epoch 5. Revisions and epochs are internal
 to FreeBSD ports, have nothing to do with upstream and cannot be compared
-to anythong in other repositories (though they have similar concepts). So
-such artufacts are just stripped. This doesn't make the life much
+to anything in other repositories (though they have similar concepts). So
+such artifacts are just stripped. This doesn't make the life much
 easier though, as complexity described in the first example remains.
 
 ## Base algorithm
@@ -50,7 +50,7 @@ The complexity begins when alphabetic part is added. First, some facts:
   ```1.2.a < 1.2.b < 1.2.e```, ```1.2a < 1.2b```
 * Alphabetic suffix may be used to denote minor releases
   ```1.2 < 1.2a < 1.2b```
-* Alphabetic part may denote pre-relase versions
+* Alphabetic part may denote pre-release versions
   ```1.2alpha1 < 1.2alpha2 < 1.2beta1 < 1.2prerelease1 < 1.2```
 
 Let's introduce some assumptions to make life easier:
@@ -76,7 +76,7 @@ Let's introduce some assumptions to make life easier:
    split upstream versions by hand.
    The split may me done in multiple ways, but we now only split
    ```0a0``` into ```0.a0```, as this is the most common case and
-   it is almost unambigous (e.g. ```1alpha2``` is version one,
+   it is almost unambiguous (e.g. ```1alpha2``` is version one,
    second alpha, not first alpha with subversion two). This does
    not affect comparison of equally formatted versions ```1alpha1
    vs. 1alpha2```, but allows us to catch differently formatted
@@ -92,10 +92,10 @@ Let's introduce some assumptions to make life easier:
 6. Letters always compare less to numbers. That is, ```z < 0```.
    This makes ```1.2.alpha1``` come before ```1.2``` and ```1.2.0```
    which is the same. Note that due to rule 4, ```1.2alpha1``` is
-   converted to ```1.2.alpha1``` so is theated the same way.
+   converted to ```1.2.alpha1``` so is treated the same way.
 7. Missing subcomponents are always compared before existing ones. E.g.
    ```0``` < ```0a``` (covers letter suffixes for minor releases as in
-   ```1.2 < 1.2a < 1.2b```) amd ```a``` < ```a0``` (ambigous, but
+   ```1.2 < 1.2a < 1.2b```) and ```a``` < ```a0``` (ambiguous, but
    not widely used in practice)
 
 ## Algorithm
@@ -119,10 +119,10 @@ Summarizing, what our algorithm does is:
 
 ## Failures
 
-All know theoretical and practical failures of the algorighm will
+All know theoretical and practical failures of the algorithm will
 be listed here. They fall into two major categories: some may be
 fixed in the algorithm (and will be, or will be not due to rarity
-of occurances and avoiding adding unneded complexity), or may not
+of occurrences and avoiding adding unneeded complexity), or may not
 be fixed, due to lack of information.
 
 * ```1EE2AB3```
@@ -153,6 +153,6 @@ be fixed, due to lack of information.
   specially. FreeBSD does that, btw.
 
 There are also cases like ```1b``` vs. ```1.b```, ```1beta vs.
-1.beta```, but the cause of this is package maintainer representing version incorrencly.
+1.beta```, but the cause of this is package maintainer representing version incorrectly.
 
 but this is out of scope of this algorithm.
