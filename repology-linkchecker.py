@@ -45,7 +45,9 @@ def Main():
 
     logger.Log("Updating links table")
     database.ExtractLinks()
-    logger.Log("Done")
+    logger.Log("Done, committing")
+    database.Commit()
+    logger.Log("  Committed")
 
     while True:
         logger.Log("Requesting pack of links")
@@ -115,7 +117,7 @@ def Main():
 
         logger.Log("Pack done, committing")
         database.Commit()
-        logger.Log("Committed")
+        logger.Log("  Committed")
 
     return 0
 
