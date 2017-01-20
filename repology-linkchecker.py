@@ -51,7 +51,7 @@ def Main():
 
     while True:
         logger.Log("Requesting pack of links")
-        links = database.GetLinksForCheck(10, options.age * 60 * 60 * 24)
+        links = database.GetLinksForCheck(128, options.age * 60 * 60 * 24)
         if not links:
             logger.Log("  Empty pack, we're done")
             break
