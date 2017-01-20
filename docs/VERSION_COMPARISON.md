@@ -57,15 +57,15 @@ Let's introduce some assumptions to make life easier:
 
 1. When comparing, alphabetics are compared lexicographically.
    This is obvious for single-letter suffixes, but it's less obvious
-   for long words. *Luckily*, the most words (that is, *alpha*,
-   *beta*, and *prerelease*) used in versions may be compared
-   which each other and produce correct order when compared
-   lexicographically.
+   for long words. *Luckily*, the most words (that is, ```alpha```,
+   ```beta```, ```prerelease```, and ```rc```) used in versions may
+   be compared which each other and produce correct order when
+   compared lexicographically.
 2. We may trim any alphabetic part to a single letter.
-   This follows from 1: ```alpha```, ```beta```, ```prerelease```
-   are compared the same as ```a```, ```b``` and ```p```, and
-   this is useful because ```a``` and ```alpha``` are often used
-   interchangeably in the versions.
+   This follows from 1: ```alpha```, ```beta```, ```prerelease```,
+   ```rc``` are compared the same as ```a```, ```b```, ```p```, and
+   ```r```, and this is useful because ```a``` and ```alpha``` are
+   often used interchangeably in the versions.
 3. Case is ignored.
    Well, *luckily* I don't have cases where ```1a``` and ```1A```
    would bean different versions
