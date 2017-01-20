@@ -86,6 +86,7 @@ Note that there may be multiple packages of a same name in a single repo
 
 - How to [run](docs/RUNNING.md) repology tools on your own
 - How to extend or fix [rules](docs/RULES.md) for package matching
+- How repology [compares versions](docs/RULES.md)
 
 ## Author
 

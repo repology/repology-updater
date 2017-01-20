@@ -129,6 +129,16 @@ class TestVersionComparison(unittest.TestCase):
     def test_specific1(self):
         self.assertEqual(VersionCompare("1.0r1", "1.0_RC1"), 0)
 
+    def test_doc_brag(self):
+        # ensure that capabilities we brag about in
+        # docs/VERSION_COMPARISON.md are actually there
+        self.assertEqual(VersionCompare("1.2.3alpha4", "1.2.3~a4"), 0)
+        self.assertEqual(VersionCompare("1.2.3alpha4", "1.2.3.a4"), 0)
+
+        self.assertEqual(VersionCompare("1.2.3alpha4", "1.2.3"), -1)
+        self.assertEqual(VersionCompare("1.2.3~a4", "1.2.3"), -1)
+        self.assertEqual(VersionCompare("1.2.3.a4", "1.2.3"), -1)
+
     def test_non_dot_separator(self):
         self.assertEqual(VersionCompare("1.0.beta1", "1.0_beta1"), 0)
 
