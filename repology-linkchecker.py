@@ -114,7 +114,7 @@ def Main():
                 database.UpdateLinkStatus(link, Database.linkcheck_status_too_many_redirects)
             except requests.ConnectionError:
                 logger.Log("    Failed, connection error")
-                database.UpdateLinkStatus(link, Database.linkcheck_status_too_many_redirects)
+                database.UpdateLinkStatus(link, Database.linkcheck_status_cannot_connect)
             except:
                 logger.Log("    Failed, unknown exception")
                 database.UpdateLinkStatus(link, Database.linkcheck_status_unknown_error)
