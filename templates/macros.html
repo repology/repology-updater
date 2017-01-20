@@ -26,15 +26,15 @@
 	{%- if link in link_statuses %}
 		{%- if not link_statuses[link].status -%}
 		{%- elif link_statuses[link].status == -1 -%}
-			<sup class="link_error" title="Check failed for this URL: connect timeout">!</sup>
+			<sup class="link_error" title="Check failed for this URL: connect timed out (60 seconds)">!</sup>
 		{%- elif link_statuses[link].status == -2 -%}
 			<sup class="link_error" title="Check failed for this URL: too many redirects">!</sup>
 		{%- elif link_statuses[link].status == -3 -%}
 			<sup class="link_error" title="Check failed for this URL: unknown error">!</sup>
 		{%- elif link_statuses[link].status == -4 -%}
-			<sup class="link_error" title="Check failed for this URL: could not connect">!</sup>
+			<sup class="link_error" title="Check failed for this URL: could not connect (likely DNS problem)">!</sup>
 		{%- elif link_statuses[link].status != 200 -%}
-			<sup class="link_error" title="Check failed for this URL: HTTP response {{ link_statuses[link].status }}">!</sup>
+			<sup class="link_error" title="Check failed for this URL: bad HTTP response {{ link_statuses[link].status }}">!</sup>
 		{%- endif -%}
 	{%- endif %}
 {%- endmacro -%}
