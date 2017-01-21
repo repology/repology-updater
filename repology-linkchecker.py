@@ -28,6 +28,43 @@ from repology.logger import StderrLogger, FileLogger
 import repology.config
 
 
+def GetLinkStatus(link):
+    try:
+        response = requests.head(link, allow_redirects=True, headers={'user-agent': "Repology link checker/0"})
+
+        redirect = None
+        size = None
+        location = None
+
+        # handle redirect chain
+        if response.history:
+            redirect = response.history[0].status_code
+
+            # resolve permanent (and only permament!) redirect chain
+            for h in response.history:
+                if h.status_code == 301:
+                    location = h.headers.get('location')
+
+        # handle size
+        if response.status_code == 200:
+            content_length = response.headers.get('content-length')
+            if content_length:
+                size = int(content_length)
+
+        return (response.status_code, redirect, size, location)
+    except KeyboardInterrupt:
+        raise
+    except requests.Timeout:
+        return (Database.linkcheck_status_timeout, None, None, None)
+    except requests.TooManyRedirects:
+        return (Database.linkcheck_status_too_many_redirects, None, None, None)
+    except requests.ConnectionError:
+        return (Database.linkcheck_status_cannot_connect, None, None, None)
+    except:
+        raise
+        return (Database.linkcheck_status_unknown_error, None, None, None)
+
+
 def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
@@ -59,67 +96,37 @@ def Main():
         else:
             logger.Log("  {} links(s)".format(len(links)))
 
+        results = []
         for link in links:
             # XXX: add support for gentoo mirrors, skip for now
-            if link.startswith("mirror://"):
-                logger.Log("  Skipping {}, mirror schema not supported".format(link))
-                continue
-            if link.startswith("ftp://"):
-                logger.Log("  Skipping {}, ftp schema not supported".format(link))
+            if not link.startswith("http://") and not link.startswith("https://"):
+                logger.Log("  Skipping {}, unsupported schema".format(link))
                 continue
 
             logger.Log("  Processing {}".format(link))
 
-            # schema is mandatory
-            if not link.startswith("http://") and not link.startswith("https://") and not link.startswith("ftp://"):
-                current_link = "http://" + link
-            else:
-                current_link = link
+            status, redirect, size, location = GetLinkStatus(link)
 
-            try:
-                response = requests.head(current_link, allow_redirects=True, headers={'user-agent': "Repology link checker/0"})
-
-                redirect = None
-                size = None
-                location = None
-
-                # handle redirect chain
-                if response.history:
-                    redirect = response.history[0].status_code
-
-                    # resolve permanent (and only permament!) redirect chain
-                    for h in response.history:
-                        if h.status_code == 301:
-                            location = h.headers.get('location')
-
-                # handle size
-                if response.status_code == 200:
-                    content_length = response.headers.get('content-length')
-                    if content_length:
-                        size = int(content_length)
-
-                    if location is None and current_link != link:
-                        location = current_link
-
-                logger.Log("    Status: {}, redirect: {}, size: {}, final location: {}".format(response.status_code, redirect, size, location))
-                database.UpdateLinkStatus(link, response.status_code, redirect, size, location)
-
-            except KeyboardInterrupt:
-                raise
-            except requests.Timeout:
+            if status == Database.linkcheck_status_timeout:
                 logger.Log("    Failed, timeout")
-                database.UpdateLinkStatus(link, Database.linkcheck_status_timeout)
-            except requests.TooManyRedirects:
+            elif status == Database.linkcheck_status_too_many_redirects:
                 logger.Log("    Failed, too many redirects")
-                database.UpdateLinkStatus(link, Database.linkcheck_status_too_many_redirects)
-            except requests.ConnectionError:
-                logger.Log("    Failed, connection error")
-                database.UpdateLinkStatus(link, Database.linkcheck_status_cannot_connect)
-            except:
+            elif status == Database.linkcheck_status_unknown_error:
                 logger.Log("    Failed, unknown exception")
-                database.UpdateLinkStatus(link, Database.linkcheck_status_unknown_error)
+            elif status == Database.linkcheck_status_cannot_connect:
+                logger.Log("    Failed, connection error")
+            else:
+                logger.Log("    Status: {}, redirect: {}, size: {}, final location: {}".format(status, redirect, size, location))
 
-        logger.Log("Pack done, committing")
+            results.append((link, status, redirect, size, location))
+
+        logger.Log("Writing pack")
+
+        for result in results:
+            link, status, redirect, size, location = result
+            database.UpdateLinkStatus(link, status=status, redirect=redirect, size=size, location=location)
+
+        logger.Log("Committing pack")
         database.Commit()
         logger.Log("  Committed")
 
