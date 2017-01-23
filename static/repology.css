@@ -149,6 +149,7 @@
 
 .popup-container {
     position: relative;
+    display: inline;
 }
 
 .popup-container-inner {
@@ -177,12 +178,25 @@
     color: green;
 }
 
-.link_error {
+.link_status {
+    padding: 0.1em 0.3em;
+    border-radius: 0.5em;
+    font-weight: bold;
+}
+
+.link_status_ok {
+    color: white;
+    background-color: #5cb85c;
+}
+
+.link_status_warning {
+    color: white;
+    background-color: #f0ad4e;
+}
+
+.link_status_error {
     color: white;
     background-color: #d9534f;
-    font-weight: bold;
-    padding: 0.1em 0.5em;
-    border-radius: 50%;
 }
 
 /* XXX: check if bootstrap h1.pageheader margin is always 40px */

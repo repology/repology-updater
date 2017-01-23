@@ -23,20 +23,54 @@
 {%- endmacro -%}
 
 {%- macro link_status(link, link_statuses) -%}
-	{%- if link in link_statuses %}
-		{%- if not link_statuses[link].status -%}
-		{%- elif link_statuses[link].status == -1 -%}
-			<sup class="link_error" title="Check failed for this URL: connect timed out (60 seconds)">!</sup>
-		{%- elif link_statuses[link].status == -2 -%}
-			<sup class="link_error" title="Check failed for this URL: too many redirects">!</sup>
-		{%- elif link_statuses[link].status == -3 -%}
-			<sup class="link_error" title="Check failed for this URL: unknown error">!</sup>
-		{%- elif link_statuses[link].status == -4 -%}
-			<sup class="link_error" title="Check failed for this URL: could not connect (likely DNS problem)">!</sup>
-		{%- elif link_statuses[link].status != 200 -%}
-			<sup class="link_error" title="Check failed for this URL: bad HTTP response {{ link_statuses[link].status }}">!</sup>
+	{%- if link in link_statuses and link_statuses[link].status -%}
+		<div class="popup-container">
+		{%- if link_statuses[link].status == 200 -%}
+		{%- if link_statuses[link].redirect == 301 -%}
+			<sup class="link_status link_status_warning">R</sup>
+			<span class="popup-container-inner">
+				<sup class="popup">Link check passed, but there's permanent redirect {# #}
+				{%- if link_statuses[link].location -%}
+					to <a href="{{ link_statuses[link].location }}">{{ link_statuses[link].location }}</a>
+				{%- endif -%}
+		{%- else -%}
+			<sup class="link_status link_status_ok">✔</sup>
+			<span class="popup-container-inner">
+				<sup class="popup">Link check passed
 		{%- endif -%}
-	{%- endif %}
+				{%- if link_statuses[link].size -%}
+					, target size is <b>{{ link_statuses[link].size }}</b> bytes
+				{%- endif -%}
+				</sup>
+			</span>
+		{%- elif link_statuses[link].status == -1 -%}
+			<sup class="link_status link_status_error">✘</sup>
+			<span class="popup-container-inner">
+				<sup class="popup">Link check failed, connect timed out (60 seconds)</sup>
+			</span>
+		{%- elif link_statuses[link].status == -2 -%}
+			<sup class="link_status link_status_error">✘</sup>
+			<span class="popup-container-inner">
+				<sup class="popup">Link check failed, too many redirects</sup>
+			</span>
+		{%- elif link_statuses[link].status == -3 -%}
+			<sup class="link_status link_status_error">✘</sup>
+			<span class="popup-container-inner">
+				<sup class="popup">Link check failed, unknown error</sup>
+			</span>
+		{%- elif link_statuses[link].status == -4 -%}
+			<sup class="link_status link_status_error">✘</sup>
+			<span class="popup-container-inner">
+				<sup class="popup">Link check failed, could not connect (likely DNS problem)</sup>
+			</span>
+		{%- else -%}
+			<sup class="link_status link_status_error">✘</sup>
+			<span class="popup-container-inner">
+				<sup class="popup">Link check failed, bad HTTP response {{ link_statuses[link].status }}</sup>
+			</span>
+		{%- endif -%}
+		</div>
+	{%- endif -%}
 {%- endmacro -%}
 
 {%- macro safe_percent(value, total, round=1) -%}
