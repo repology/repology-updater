@@ -23,6 +23,9 @@ profile-reparse::
 	python3 -m cProfile -o _profile ./repology-update.py -P >/dev/null 2>&1
 	python3 -c 'import pstats; stats = pstats.Stats("_profile"); stats.sort_stats("time"); stats.print_stats()' | less
 
+flake8:
+	flake8 --ignore=E501,F401,F405,F403,E265 *.py repology
+
 check:
 	rm -f kwalify.log
 	kwalify -lf schemas/rules.yaml rules.yaml | tee -a kwalify.log
