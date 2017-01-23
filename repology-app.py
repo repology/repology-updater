@@ -433,7 +433,7 @@ def statistics():
     return flask.render_template(
         "statistics.html",
         repostats=filter(lambda r:r['name'] in reponames, get_db().GetRepositories()),
-        repostats_old={ repo['name'] : repo for repo in get_db().GetRepositoriesHistoryAgo(60*60*24*1) },
+        repostats_old={ repo['name'] : repo for repo in get_db().GetRepositoriesHistoryAgo(60*60*24*7) },
         num_metapackages=get_db().GetMetapackagesCount()
     )
 

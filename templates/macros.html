@@ -56,11 +56,11 @@
 		{%- if value > old_value -%}
 		<div class="popup-container">
 			{{- value -}}
-			<span class="popup-container-inner"><sup class="popup delta-positive">+{{ value - old_value }} in last 24h</sup></span></div>
+			<span class="popup-container-inner"><sup class="popup delta-positive">+{{ value - old_value }} in last week</sup></span></div>
 		{%- elif value < old_value -%}
 		<div class="popup-container">
 			{{- value -}}
-			<span class="popup-container-inner"><sup class="popup delta-negative">-{{ old_value - value }} in last 24h</sup></span></div>
+			<span class="popup-container-inner"><sup class="popup delta-negative">-{{ old_value - value }} in last week</sup></span></div>
 		{%- else -%}
 		{{- value -}}
 		{%- endif -%}
