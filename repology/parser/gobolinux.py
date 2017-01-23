@@ -26,12 +26,11 @@ from repology.package import Package
 def ExpandDownloadUrlTemplates(url):
     httpSourceforge = 'http://downloads.sourceforge.net'
     ftpGnu = 'ftp://ftp.gnu.org/gnu'
-    return url \
-            .replace('$httpSourceforge', httpSourceforge) \
-            .replace('${httpSourceforge}', httpSourceforge) \
-            .replace('$ftpGnu', ftpGnu) \
-            .replace('${ftpGnu}', ftpGnu) \
-            .replace('$ftpAlphaGnu', ftpGnu)
+    return url.replace('$httpSourceforge', httpSourceforge) \
+              .replace('${httpSourceforge}', httpSourceforge) \
+              .replace('$ftpGnu', ftpGnu) \
+              .replace('${ftpGnu}', ftpGnu) \
+              .replace('$ftpAlphaGnu', ftpGnu)
 
 
 class GoboLinuxGitParser():
@@ -94,7 +93,7 @@ class GoboLinuxGitParser():
                     if 'Summary' in data:
                         pkg.comment = data['Summary']
                     if 'License' in data:
-                        pkg.licenses = [ data['License'] ]
+                        pkg.licenses = [data['License']]
                     if 'Homepage' in data:
                         pkg.homepage = data['Homepage'].strip('"')
 

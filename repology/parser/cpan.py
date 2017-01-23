@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import csv
 import re
 
 from repology.util import SplitPackageNameVersion, GetMaintainers
@@ -77,7 +76,7 @@ class CPANPackagesParser():
 
                 package_name, package_version = SplitPackageNameVersion(package_name)
                 if package_version.startswith('v') or package_version.startswith('V'):
-                    package_version= package_version[1:]
+                    package_version = package_version[1:]
 
                 if not re.match("[0-9]", package_version):
                     # Bad version; XXX: log?

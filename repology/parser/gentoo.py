@@ -80,7 +80,6 @@ class GentooGitParser():
                         meta = xml.etree.ElementTree.parse(metafile)
 
                         for entry in meta.findall("maintainer"):
-                            name_node = entry.find("name")
                             email_node = entry.find("email")
 
                             if email_node is not None:
@@ -92,7 +91,7 @@ class GentooGitParser():
                     if not ebuild.endswith(".ebuild"):
                         continue
 
-                    version, origversion = SanitizeVersion(ebuild[len(package)+1:-7])
+                    version, origversion = SanitizeVersion(ebuild[len(package) + 1:-7])
 
                     if IsBetterVersion(version, maxversion):
                         maxorigversion = origversion
@@ -120,7 +119,7 @@ class GentooGitParser():
                                 if key == 'DESCRIPTION':
                                     pkg.comment = value
                                 elif key == 'HOMEPAGE':
-                                    pkg.homepage = value.split(' ')[0] # XXX: save all urls
+                                    pkg.homepage = value.split(' ')[0]  # XXX: save all urls
                                 elif key == 'LICENSE':
                                     if value.find('(') != -1:
                                         # XXX: conditionals and OR's: need more

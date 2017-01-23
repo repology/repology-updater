@@ -18,13 +18,10 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
 import pickle
-import fcntl
 import inspect
 import yaml
 
-from repology.package import *
 from repology.logger import NoopLogger
 
 from repology.fetcher import *
@@ -75,7 +72,7 @@ class RepositoryManager:
     # Parser/fetcher factory
     def __SpawnClass(self, suffix, name, argsdict):
         spawned_name = name + suffix
-        if not spawned_name in globals():
+        if spawned_name not in globals():
             raise RuntimeError('unknown {} {}'.format(suffix.lower(), name))
 
         spawned_class = globals()[spawned_name]
@@ -158,7 +155,7 @@ class RepositoryManager:
         # XXX: in future, ignored packages will not be dropped here, but
         # ignored in summary and version calcualtions, but shown in
         # package listing
-        packages = [ package for package in packages if not package.ignore ]
+        packages = [package for package in packages if not package.ignore]
         logger.Log("processing complete, {} packages".format(len(packages)))
 
         return packages
@@ -169,7 +166,7 @@ class RepositoryManager:
         logger.Log("saving started")
         with open(tmppath, "wb") as outfile:
             pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
-            pickler.fast = True # deprecated, but I don't see any alternatives
+            pickler.fast = True  # deprecated, but I don't see any alternatives
             pickler.dump(len(packages))
             for package in packages:
                 pickler.dump(package)
@@ -182,7 +179,7 @@ class RepositoryManager:
         with open(path, "rb") as infile:
             unpickler = pickle.Unpickler(infile)
             numpackages = unpickler.load()
-            packages = [ unpickler.load() for num in range(0, numpackages) ]
+            packages = [unpickler.load() for num in range(0, numpackages)]
         logger.Log("loading complete, {} packages".format(len(packages)))
 
         return packages
@@ -298,4 +295,4 @@ class RepositoryManager:
             processor(packageset)
 
             # remove EOFed repos
-            deserializers = [ ds for ds in deserializers if not ds.EOF() ]
+            deserializers = [ds for ds in deserializers if not ds.EOF()]

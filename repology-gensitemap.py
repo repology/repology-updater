@@ -41,7 +41,7 @@ def Main():
     print("Adding static links", file=sys.stderr)
 
     # static pages
-    urls = [ '/', '/news', '/statistics', '/about', '/api/v1', '/repositories/' ]
+    urls = ['/', '/news', '/statistics', '/about', '/api/v1', '/repositories/']
 
     # maintainer lists
     urls.append('/maintainers/')
@@ -76,20 +76,18 @@ def Main():
 
     # get most important packages
     for row in database.Query(
-                "SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families >= %s LIMIT %s",
-                num_repos,
-                (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE
-            ):
+            "SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families >= %s LIMIT %s",
+            num_repos,
+            (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE):
         urls.append('/metapackage/' + row[0] + '/versions')
         urls.append('/metapackage/' + row[0] + '/packages')
         urls.append('/metapackage/' + row[0] + '/information')
 
     # fill the remaining space with less important packages
     for row in database.Query(
-                "SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families = %s LIMIT %s",
-                num_repos - 1,
-                (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE
-            ):
+            "SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families = %s LIMIT %s",
+            num_repos - 1,
+            (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE):
         urls.append('/metapackage/' + row[0] + '/versions')
         urls.append('/metapackage/' + row[0] + '/packages')
         urls.append('/metapackage/' + row[0] + '/information')
@@ -106,6 +104,7 @@ def Main():
     print('</urlset>')
 
     return 0
+
 
 if __name__ == '__main__':
     os.sys.exit(Main())

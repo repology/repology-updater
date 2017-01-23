@@ -46,7 +46,7 @@ class FreshcodeFetcher():
         # add new entries in reversed order, oldest first so newest
         # have higher priority; may also compare versions here
         for entry in newdata['releases']:
-            if not 'name' in entry:
+            if 'name' not in entry:
                 logger.Log("skipping entry with no name")
                 continue
 
@@ -59,7 +59,6 @@ class FreshcodeFetcher():
             else:
                 logger.Log("adding entry \"{}\", version {}".format(entry['name'], entry['version']))
                 state[entry['name']] = entry
-
 
         temppath = statepath + ".tmp"
         with open(temppath, 'w', encoding='utf-8') as newstatefile:

@@ -44,7 +44,7 @@ class NameStartingQueryFilter(QueryFilter):
         return 'effname >= %s' if self.name else 'true'
 
     def GetWhereArgs(self):
-        return [ self.name ] if self.name else []
+        return [self.name] if self.name else []
 
     def GetSort(self):
         return 'effname ASC'
@@ -61,7 +61,7 @@ class NameAfterQueryFilter(QueryFilter):
         return 'effname > %s' if self.name else 'true'
 
     def GetWhereArgs(self):
-        return [ self.name ] if self.name else []
+        return [self.name] if self.name else []
 
     def GetSort(self):
         return 'effname ASC'
@@ -78,7 +78,7 @@ class NameBeforeQueryFilter(QueryFilter):
         return 'effname < %s' if self.name else 'true'
 
     def GetWhereArgs(self):
-        return [ self.name ] if self.name else []
+        return [self.name] if self.name else []
 
     def GetSort(self):
         return 'effname DESC'
@@ -86,7 +86,7 @@ class NameBeforeQueryFilter(QueryFilter):
 
 class NameSubstringQueryFilter(QueryFilter):
     def __init__(self, name):
-        self.name = name.lower() # XXX: need to normalize like effnames
+        self.name = name.lower()  # XXX: need to normalize like effnames
 
     def GetTable(self):
         return 'repo_metapackages'
@@ -95,7 +95,7 @@ class NameSubstringQueryFilter(QueryFilter):
         return '{table}.effname like %s'
 
     def GetWhereArgs(self):
-        return [ "%" + self.name + "%" ]
+        return ["%" + self.name + "%"]
 
 
 class MaintainerQueryFilter(QueryFilter):
@@ -109,7 +109,7 @@ class MaintainerQueryFilter(QueryFilter):
         return '{table}.maintainer=%s'
 
     def GetWhereArgs(self):
-        return [ self.maintainer ]
+        return [self.maintainer]
 
 
 class MaintainerOutdatedQueryFilter(QueryFilter):
@@ -123,7 +123,7 @@ class MaintainerOutdatedQueryFilter(QueryFilter):
         return '{table}.maintainer=%s and {table}.num_packages_outdated > 0'
 
     def GetWhereArgs(self):
-        return [ self.maintainer ]
+        return [self.maintainer]
 
 
 class InRepoQueryFilter(QueryFilter):
@@ -137,7 +137,7 @@ class InRepoQueryFilter(QueryFilter):
         return '{table}.repo=%s'
 
     def GetWhereArgs(self):
-        return [ self.repo ]
+        return [self.repo]
 
 
 class InAnyRepoQueryFilter(QueryFilter):
@@ -151,7 +151,7 @@ class InAnyRepoQueryFilter(QueryFilter):
         return '{table}.repo in (' + ','.join(['%s'] * len(self.repos)) + ')'
 
     def GetWhereArgs(self):
-        return [ repo for repo in self.repos ]
+        return [repo for repo in self.repos]
 
 
 class InNumReposQueryFilter(QueryFilter):
@@ -219,7 +219,7 @@ class OutdatedInRepoQueryFilter(QueryFilter):
         return '{table}.repo=%s AND {table}.num_outdated>0'
 
     def GetWhereArgs(self):
-        return [ self.repo ]
+        return [self.repo]
 
 
 class NotInRepoQueryFilter(QueryFilter):
@@ -233,4 +233,4 @@ class NotInRepoQueryFilter(QueryFilter):
         return 'count(nullif({table}.repo = %s, false)) = 0'
 
     def GetHavingArgs(self):
-        return [ self.repo ]
+        return [self.repo]

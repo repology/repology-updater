@@ -18,11 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
-import re
 import argparse
-from xml.sax.saxutils import escape
-import shutil
 
 from repology.package import *
 from repology.packageproc import *
@@ -107,7 +103,6 @@ def Main():
     repoman = RepositoryManager(options.repos_path, options.statedir)
 
     def PackageProcessor(packageset):
-        name = packageset[0].effname
         FillPackagesetVersions(packageset)
 
         if not PackagesetCheckFilters(packageset, *filters):
@@ -148,6 +143,7 @@ def Main():
             PackageProcessor(packageset)
 
     return 0
+
 
 if __name__ == '__main__':
     os.sys.exit(Main())

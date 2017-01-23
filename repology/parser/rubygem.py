@@ -15,10 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import types
 import rubymarshal.reader
 
 from repology.package import Package
+
 
 class RubyGemParser():
     def __init__(self):
@@ -44,5 +44,3 @@ class RubyGemParser():
                     packages[pkg.name] = pkg
 
         return [package for package in packages.values()]
-
-

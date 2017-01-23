@@ -127,6 +127,7 @@ def ShowUnmatchedRules(options, logger, transformer):
         for rule in unmatched:
             wlogger.Log(rule)
 
+
 def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
@@ -170,6 +171,7 @@ def Main():
         ShowUnmatchedRules(options=options, logger=logger, transformer=transformer)
 
     return 1 if repositories_not_updated else 0
+
 
 if __name__ == '__main__':
     os.sys.exit(Main())

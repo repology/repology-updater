@@ -19,9 +19,7 @@
 
 import os
 import sys
-import time
 from timeit import default_timer as timer
-from numbers import Number
 import argparse
 
 from repology.database import *
@@ -69,10 +67,10 @@ class StatCounter():
 
 
 def RunTest(database, title, pagefilter, *filters):
-    print("===> "+ title, file=sys.stderr)
+    print("===> " + title, file=sys.stderr)
 
-    sc = StatCounter();
-    for letter in [ '0' ] + [ chr(c) for c in range(ord('a'), ord('z')) ]:
+    sc = StatCounter()
+    for letter in ['0'] + [chr(c) for c in range(ord('a'), ord('z'))]:
         start = timer()
         packages = database.GetMetapackages(pagefilter(letter), *filters, limit=500)
         timedelta = timer() - start
@@ -80,9 +78,6 @@ def RunTest(database, title, pagefilter, *filters):
         effnames = set()
         for package in packages:
             effnames.add(package.effname)
-
-        num_packages = len(packages)
-        num_metapackages = len(effnames)
 
         sc.Count(timedelta, len(packages), len(effnames))
 
@@ -125,6 +120,7 @@ def Main():
     RunTest(database, "NotInRepo + NumFamilies", NameStartingQueryFilter, NotInRepoQueryFilter('freebsd'), InNumFamiliesQueryFilter(more=5))
 
     return 0
+
 
 if __name__ == '__main__':
     os.sys.exit(Main())

@@ -30,7 +30,7 @@ class AURFetcher():
     def DoFetch(self, statepath, update, logger):
         packages_url = self.url + "packages.gz"
         logger.GetIndented().Log("fetching package list from " + packages_url)
-        data = Get(packages_url).text # autogunzipped?
+        data = Get(packages_url).text  # autogunzipped?
 
         package_names = []
 
@@ -50,7 +50,7 @@ class AURFetcher():
             url = '&'.join(["arg[]=" + urllib.parse.quote(name) for name in package_names[ifrom:ito]])
             url = self.url + "/rpc/?v=5&type=info&" + url
 
-            logger.GetIndented().Log("fetching page {}/{}".format(page+1, len(package_names) // pagesize + 1))
+            logger.GetIndented().Log("fetching page {}/{}".format(page + 1, len(package_names) // pagesize + 1))
 
             with open(os.path.join(statepath, "{}.json".format(page)), "wb") as statefile:
                 statefile.write(Get(url).content)

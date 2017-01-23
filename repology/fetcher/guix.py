@@ -27,7 +27,7 @@ class GuixFetcher():
         self.url = url
 
     def DoFetch(self, statepath, update, logger):
-        pages = [ chr(x) for x in range(ord('a'), ord('z') + 1) ] #  a..z
+        pages = [chr(x) for x in range(ord('a'), ord('z') + 1)]  # a..z
         pages.append('0-9')
 
         for page in pages:

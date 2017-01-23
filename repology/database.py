@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import psycopg2
-import sys
 import datetime
 
 from repology.package import Package
@@ -290,51 +289,54 @@ class Database:
         """)
 
     def AddPackages(self, packages):
-        self.cursor.executemany("""INSERT INTO packages(
-            repo,
-            family,
+        self.cursor.executemany(
+            """
+            INSERT INTO packages(
+                repo,
+                family,
 
-            name,
-            effname,
+                name,
+                effname,
 
-            version,
-            origversion,
-            effversion,
-            versionclass,
+                version,
+                origversion,
+                effversion,
+                versionclass,
 
-            maintainers,
-            category,
-            comment,
-            homepage,
-            licenses,
-            downloads,
+                maintainers,
+                category,
+                comment,
+                homepage,
+                licenses,
+                downloads,
 
-            ignorepackage,
-            shadow,
-            ignoreversion
-        ) VALUES (
-            %s,
-            %s,
+                ignorepackage,
+                shadow,
+                ignoreversion
+            ) VALUES (
+                %s,
+                %s,
 
-            %s,
-            %s,
+                %s,
+                %s,
 
-            %s,
-            %s,
-            %s,
-            %s,
+                %s,
+                %s,
+                %s,
+                %s,
 
-            %s,
-            %s,
-            %s,
-            %s,
-            %s,
-            %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
+                %s,
 
-            %s,
-            %s,
-            %s
-        )""",
+                %s,
+                %s,
+                %s
+            )
+            """,
             [
                 (
                     package.repo,
@@ -363,7 +365,8 @@ class Database:
         )
 
     def MarkRepositoriesUpdated(self, reponames):
-        self.cursor.executemany("""
+        self.cursor.executemany(
+            """
             INSERT
                 INTO repositories (
                     name,
@@ -375,15 +378,15 @@ class Database:
                 ON CONFLICT (name)
                 DO UPDATE SET
                     last_update = now()
-        """,
-            [ [ name ] for name in reponames ]
+            """,
+            [[name] for name in reponames]
         )
 
     def UpdateViews(self):
-        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages""");
-        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""");
-        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""");
-        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""");
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages""")
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""")
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""")
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""")
 
         # package stats
         self.cursor.execute("""
@@ -476,7 +479,8 @@ class Database:
         self.db.commit()
 
     def GetMetapackage(self, name):
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             SELECT
                 repo,
                 family,
@@ -501,7 +505,7 @@ class Database:
                 ignoreversion
             FROM packages
             WHERE effname = %s
-        """,
+            """,
             (name,)
         )
 
@@ -534,7 +538,8 @@ class Database:
     def GetMetapackages(self, *filters, limit=500):
         query, args = MetapackageQueryConstructor(*filters, limit=limit).GetQuery()
 
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             SELECT
                 repo,
                 family,
@@ -560,7 +565,7 @@ class Database:
             FROM packages WHERE effname IN (
                 {}
             ) ORDER BY effname
-        """.format(query),
+            """.format(query),
             args
         )
 
@@ -606,7 +611,8 @@ class Database:
         return self.cursor.fetchall()[0][0]
 
     def GetMaintainers(self, offset=0, limit=500):
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             SELECT
                 maintainer,
                 num_packages,
@@ -615,7 +621,7 @@ class Database:
             ORDER BY maintainer
             LIMIT %s
             OFFSET %s
-        """,
+            """,
             (limit, offset,)
         )
 
@@ -646,7 +652,7 @@ class Database:
         else:
             request += " WHERE maintainer >= %s"
             request += " AND maintainer < %s"
-            args += [ letter, chr(ord(letter) + 1) ]
+            args += [letter, chr(ord(letter) + 1)]
 
         request += " ORDER BY maintainer"
 
@@ -693,7 +699,7 @@ class Database:
             } for row in self.cursor.fetchall()
         ]
 
-    def GetRepositoriesHistoryAgo(self, seconds=60*60*24):
+    def GetRepositoriesHistoryAgo(self, seconds=60 * 60 * 24):
         self.cursor.execute("""
             SELECT
                 ts,
@@ -720,7 +726,7 @@ class Database:
             for row in self.cursor.fetchall()
         ]
 
-    def GetRepositoriesHistoryPeriod(self, seconds=60*60*24, repo=None):
+    def GetRepositoriesHistoryPeriod(self, seconds=60 * 60 * 24, repo=None):
         self.cursor.execute("""
             SELECT
                 ts,
@@ -746,7 +752,8 @@ class Database:
         return self.cursor.fetchall()
 
     def SnapshotRepositoriesHistory(self):
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             INSERT
             INTO repositories_history(
                 ts,
@@ -764,10 +771,12 @@ class Database:
                     num_metapackages_outdated
                 FROM repositories
             ) AS statistics_snapshot
-       """)
+           """
+        )
 
     def ExtractLinks(self):
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             INSERT
             INTO links(
                 url,
@@ -785,28 +794,36 @@ class Database:
             ON CONFLICT (url)
             DO UPDATE SET
                 last_seen = now()
-        """)
+            """
+        )
 
     def GetLinksForCheck(self, count, timeout_seconds):
         # not really effective, but we don't care
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             SELECT
                 url
             FROM links
             WHERE ts IS NULL OR ts <= now() - INTERVAL %s
             ORDER BY random()
             LIMIT %s
-        """, (datetime.timedelta(seconds=timeout_seconds),count)
+            """,
+            (
+                datetime.timedelta(seconds=timeout_seconds),
+                count
+            )
         )
 
-        return [ row[0] for row in self.cursor.fetchall() ]
+        return [row[0] for row in self.cursor.fetchall()]
 
     linkcheck_status_timeout = -1
     linkcheck_status_too_many_redirects = -2
     linkcheck_status_unknown_error = -3
     linkcheck_status_cannot_connect = -4
+
     def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             UPDATE links
             SET
                 ts = now(),
@@ -816,7 +833,7 @@ class Database:
                 size = %s,
                 location = %s
             WHERE url = %s
-        """,
+            """,
             (
                 status == 200,
                 status,
@@ -828,7 +845,8 @@ class Database:
         )
 
     def GetMetapackageLinkStatuses(self, name):
-        self.cursor.execute("""
+        self.cursor.execute(
+            """
             SELECT
                 url,
                 ts,
@@ -849,7 +867,9 @@ class Database:
                 FROM packages
                 WHERE homepage IS NOT NULL and effname = %s
             )
-        """, (name,name,))
+            """,
+            (name, name)
+        )
 
         return {
             row[0]: {

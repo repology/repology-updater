@@ -122,7 +122,7 @@ def PackagesetAggregateByVersions(packages):
                 {
                     'version': package.version,
                     'versionclass': package.versionclass,
-                    'packages': [ package ],
+                    'packages': [package],
                 }
             )
 

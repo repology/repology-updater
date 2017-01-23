@@ -15,6 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from repology.package import PackageVersionClass
+
+
 class MaintainerFilter:
     def __init__(self, maintainer):
         self.maintainer = maintainer
@@ -110,7 +113,7 @@ class OutdatedInRepoFilter:
 
     def Check(self, packages):
         for package in packages:
-            if package.repo == self.repo and package.versionstate == VersionState.outdated:
+            if package.repo == self.repo and package.versionclass == PackageVersionClass.outdated:
                 return True
 
         return False

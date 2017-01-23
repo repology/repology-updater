@@ -18,7 +18,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
 import argparse
 import requests
 
@@ -132,6 +131,7 @@ def Main():
         logger.Log("  Committed")
 
     return 0
+
 
 if __name__ == '__main__':
     os.sys.exit(Main())

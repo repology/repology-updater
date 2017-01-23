@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import sys
 import xml.etree.ElementTree
 
@@ -49,10 +48,10 @@ class RosaInfoXmlParser():
                 continue
 
             pkg.name = fn[:pos1]
-            pkg.origversion = fn[pos1+1:]
-            pkg.version = fn[pos1+1:pos2]
+            pkg.origversion = fn[pos1 + 1:]
+            pkg.version = fn[pos1 + 1:pos2]
             pkg.homepage = url
-            pkg.licenses = [ license ]
+            pkg.licenses = [license]
 
             result.append(pkg)
 

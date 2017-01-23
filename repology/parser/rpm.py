@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import xml.etree.ElementTree
 
 from ..package import Package
@@ -26,7 +25,7 @@ def SanitizeVersion(version):
 
     pos = version.find('+')
     if pos != -1:
-        version = version[pos+1:]
+        version = version[pos + 1:]
 
     if version != origversion:
         return version, origversion
@@ -52,9 +51,9 @@ class RepodataParser():
             pkg.comment = entry.find("{http://linux.duke.edu/metadata/common}summary").text
             pkg.homepage = entry.find("{http://linux.duke.edu/metadata/common}url").text
             pkg.category = entry.find("{http://linux.duke.edu/metadata/common}format/"
-                                  "{http://linux.duke.edu/metadata/rpm}group").text
+                                      "{http://linux.duke.edu/metadata/rpm}group").text
             pkg.licenses.append(entry.find("{http://linux.duke.edu/metadata/common}format/"
-                                       "{http://linux.duke.edu/metadata/rpm}license").text)
+                                           "{http://linux.duke.edu/metadata/rpm}license").text)
 
             result.append(pkg)
 

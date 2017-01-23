@@ -38,14 +38,22 @@ def GetMaintainers(instr):
         tmpresult = instr.split(',')
 
     def ReverseBracket(s):
-        if s == '[': return ']'
-        if s == ']': return '['
-        if s == '(': return ')'
-        if s == ')': return '('
-        if s == '<': return '>'
-        if s == '>': return '<'
-        if s == '{': return '}'
-        if s == '}': return '{'
+        if s == '[':
+            return ']'
+        if s == ']':
+            return '['
+        if s == '(':
+            return ')'
+        if s == ')':
+            return '('
+        if s == '<':
+            return '>'
+        if s == '>':
+            return '<'
+        if s == '{':
+            return '}'
+        if s == '}':
+            return '{'
         return s
 
     def Reverse(s):

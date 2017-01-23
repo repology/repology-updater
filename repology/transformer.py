@@ -65,7 +65,6 @@ class PackageTransformer:
 
         # match categories
         if 'category' in rule:
-            catmatch = False
             if pkgcategory not in rule['category']:
                 return False
 
