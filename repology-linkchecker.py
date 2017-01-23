@@ -90,6 +90,7 @@ def Main():
     while True:
         logger.Log("Requesting pack of links")
         links = database.GetLinksForCheck(options.packsize, options.age * 60 * 60 * 24)
+        database.Commit()
         if not links:
             logger.Log("  Empty pack, we're done")
             break
