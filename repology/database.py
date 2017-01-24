@@ -268,7 +268,7 @@ class Database:
                 ts timestamp with time zone,
                 status smallint,
                 redirect smallint,
-                size integer,
+                size bigint,
                 location varchar(2048)
             )
         """)
