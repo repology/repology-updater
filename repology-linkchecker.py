@@ -23,6 +23,7 @@ import argparse
 import requests
 import urllib.parse
 import time
+import multiprocessing
 
 from repology.database import Database
 from repology.logger import StderrLogger, FileLogger
@@ -69,39 +70,47 @@ def GetHTTPLinkStatus(url):
         return (url, Database.linkcheck_status_unknown_error, None, None, None)
 
 
-def ProcessLinksPack(pack, options, logger):
-    database = Database(options.dsn, readonly=False)
-
+def GetLinkStatuses(urls, delay):
     results = []
     prev_host = None
-    for url in pack:
+    for url in urls:
         # XXX: add support for gentoo mirrors, skip for now
         if not url.startswith("http://") and not url.startswith("https://"):
-            logger.Log("  Skipping {}, unsupported schema".format(url))
             continue
-
-        logger.Log("  Processing {}".format(url))
 
         host = urllib.parse.urlparse(url).hostname
 
         if host and host == prev_host:
-            time.sleep(options.delay)
+            time.sleep(delay)
 
         results.append(GetHTTPLinkStatus(url))
 
         prev_host = host
 
-    logger.Log("Writing pack")
+    return results
 
-    for result in results:
-        url, status, redirect, size, location = result
-        database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
 
-    logger.Log("  Committing")
+def LinkProcessorWorker(queue, options, logger):
+    database = Database(options.dsn, readonly=False)
 
-    database.Commit()
+    logger = logger.GetPrefixed("worker {}: ".format(os.getpid()))
 
-    logger.Log("    Done")
+    logger.Log("Worker spawned")
+
+    while True:
+        pack = queue.get()
+        if pack is None:
+            return
+
+        logger.Log("Processing pack of {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
+        for result in GetLinkStatuses(pack, delay=options.delay):
+            url, status, redirect, size, location = result
+            database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
+
+        database.Commit()
+        logger.Log("Done processing pack of {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
+
+    logger.Log("Worker exiting")
 
 
 def Main():
@@ -113,14 +122,22 @@ def Main():
     parser.add_argument('-d', '--delay', type=float, default=3.0, help='delay between requests to a single host')
     parser.add_argument('-a', '--age', type=int, default=365, help='min age for recheck in days')
     parser.add_argument('-p', '--packsize', type=int, default=128, help='pack size for link processing')
-    parser.add_argument('-j', '--jobs', type=int, default=128, help='pack size for link processing')
+    parser.add_argument('-j', '--jobs', type=int, default=1, help='pack size for link processing')
     options = parser.parse_args()
 
     logger = StderrLogger()
     if options.logfile:
         logger = FileLogger(options.logfile)
 
+
     database = Database(options.dsn, readonly=True)
+
+    queue = multiprocessing.Queue(10)
+    processpool = [multiprocessing.Process(target=LinkProcessorWorker, args=(queue, options, logger)) for i in range(options.jobs)]
+    for process in processpool:
+        process.start()
+
+    logger = logger.GetPrefixed('main: ')
 
     prev_url = None
     while True:
@@ -143,13 +160,19 @@ def Main():
         logger.Log("  {} total urls(s)".format(len(urls)))
 
         # Process
-        logger.Log("Processing pack of {} urls ({}:{})".format(len(urls), urls[0], urls[-1]))
+        logger.Log("Enquing pack of {} urls ({}:{})".format(len(urls), urls[0], urls[-1]))
 
-        ProcessLinksPack(urls, options, logger)
+        queue.put(urls)
 
         logger.Log("  Done")
 
         prev_url = urls[-1]
+
+    for process in processpool:
+        queue.put(None)
+
+    for process in processpool:
+        process.join()
 
     return 0
 
