@@ -108,6 +108,7 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
 
         db_logger.Log("updating views")
         database.UpdateViews()
+        database.ExtractLinks()
 
         db_logger.Log("updating history")
         database.SnapshotRepositoriesHistory()
