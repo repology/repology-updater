@@ -21,7 +21,7 @@
 			{% for reponame in column %}
 				<tr>
 					<td class="text-right">{{ macros.repository_link(reponame) }}</td>
-					<td style="white-space: nowrap;">
+					<td class="text-nowrap">
 						<a href="{{ url_for('metapackages_in_repo', repo=reponame) }}">Present</a>
 						<a href="{{ url_for('metapackages_not_in_repo', repo=reponame) }}">Absent</a>
 						<a href="{{ url_for('metapackages_outdated_in_repo', repo=reponame) }}">Outdated</a>
