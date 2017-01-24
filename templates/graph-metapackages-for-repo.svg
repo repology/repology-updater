@@ -6,18 +6,12 @@
 
 {%- macro line(field, color) %}
 {#### line ####}
-    <g stroke="{{ color }}" stroke-width="3">
+    <g stroke="{{ color }}" stroke-width="3" stroke-linecap="round">
     {% for point in datapoints if field in point %}
     {% if not loop.first and field in prev %}
         <line x1="{{ x(point.pos) }}" y1="{{ y(point[field]) }}" x2="{{ x(prev.pos) }}" y2="{{ y(prev[field]) }}" />
     {% endif %}
     {% set prev = point %}
-    {% endfor %}
-    </g>
-{#### point ####}
-    <g fill="{{ color }}">
-    {% for point in datapoints if field in point %}
-        <circle cx="{{ x(point.pos) }}" cy="{{ y(point[field]) }}" r="3" />
     {% endfor %}
     </g>
 {% endmacro -%}
