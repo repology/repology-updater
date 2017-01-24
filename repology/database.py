@@ -797,21 +797,42 @@ class Database:
             """
         )
 
-    def GetLinksForCheck(self, count, timeout_seconds):
-        # not really effective, but we don't care
+    def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None):
+        conditions = []
+        args = []
+
+        if after is not None:
+            conditions.append('url > %s')
+            args.append(after)
+
+        if prefix is not None:
+            conditions.append('url LIKE %s')
+            args.append(prefix + '%')
+
+        if recheck_age is not None:
+            conditions.append('(ts IS NULL OR ts <= now() - INTERVAL %s)')
+            args.append(datetime.timedelta(seconds=recheck_age))
+
+        conditions_expr = ''
+        limit_expr = ''
+
+        if conditions:
+            conditions_expr = 'WHERE ' + ' AND '.join(conditions)
+
+        if limit:
+            limit_expr = 'LIMIT %s'
+            args.append(limit)
+
         self.cursor.execute(
             """
             SELECT
                 url
             FROM links
-            WHERE ts IS NULL OR ts <= now() - INTERVAL %s
-            ORDER BY random()
-            LIMIT %s
-            """,
-            (
-                datetime.timedelta(seconds=timeout_seconds),
-                count
-            )
+            {}
+            ORDER BY url
+            {}
+            """.format(conditions_expr, limit_expr),
+            args
         )
 
         return [row[0] for row in self.cursor.fetchall()]

@@ -18,8 +18,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import argparse
 import requests
+import urllib.parse
+import time
 
 from repology.database import Database
 from repology.logger import StderrLogger, FileLogger
@@ -27,9 +30,9 @@ from repology.logger import StderrLogger, FileLogger
 import repology.config
 
 
-def GetLinkStatus(link):
+def GetHTTPLinkStatus(url):
     try:
-        response = requests.head(link, allow_redirects=True, headers={'user-agent': "Repology link checker/0"})
+        response = requests.head(url, allow_redirects=True, headers={'user-agent': "Repology link checker/0"})
 
         redirect = None
         size = None
@@ -50,20 +53,55 @@ def GetLinkStatus(link):
             if content_length:
                 size = int(content_length)
 
-        return (response.status_code, redirect, size, location)
+        return (url, response.status_code, redirect, size, location)
     except KeyboardInterrupt:
         raise
     except requests.Timeout:
-        return (Database.linkcheck_status_timeout, None, None, None)
+        return (url, Database.linkcheck_status_timeout, None, None, None)
     except requests.TooManyRedirects:
-        return (Database.linkcheck_status_too_many_redirects, None, None, None)
+        return (url, Database.linkcheck_status_too_many_redirects, None, None, None)
     except requests.ConnectionError:
-        return (Database.linkcheck_status_cannot_connect, None, None, None)
+        return (url, Database.linkcheck_status_cannot_connect, None, None, None)
     except requests.exceptions.InvalidURL:
-        return (Database.linkcheck_status_invalid_url, None, None, None)
+        return (url, Database.linkcheck_status_invalid_url, None, None, None)
     except:
         raise
-        return (Database.linkcheck_status_unknown_error, None, None, None)
+        return (url, Database.linkcheck_status_unknown_error, None, None, None)
+
+
+def ProcessLinksPack(pack, options, logger):
+    database = Database(options.dsn, readonly=False)
+
+    results = []
+    prev_host = None
+    for url in pack:
+        # XXX: add support for gentoo mirrors, skip for now
+        if not url.startswith("http://") and not url.startswith("https://"):
+            logger.Log("  Skipping {}, unsupported schema".format(url))
+            continue
+
+        logger.Log("  Processing {}".format(url))
+
+        host = urllib.parse.urlparse(url).hostname
+
+        if host and host == prev_host:
+            time.sleep(options.delay)
+
+        results.append(GetHTTPLinkStatus(url))
+
+        prev_host = host
+
+    logger.Log("Writing pack")
+
+    for result in results:
+        url, status, redirect, size, location = result
+        database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
+
+    logger.Log("  Committing")
+
+    database.Commit()
+
+    logger.Log("    Done")
 
 
 def Main():
@@ -72,65 +110,46 @@ def Main():
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
 
     parser.add_argument('-t', '--timeout', type=int, default=60, help='timeout for link requests in seconds')
+    parser.add_argument('-d', '--delay', type=float, default=3.0, help='delay between requests to a single host')
     parser.add_argument('-a', '--age', type=int, default=365, help='min age for recheck in days')
     parser.add_argument('-p', '--packsize', type=int, default=128, help='pack size for link processing')
+    parser.add_argument('-j', '--jobs', type=int, default=128, help='pack size for link processing')
     options = parser.parse_args()
 
     logger = StderrLogger()
     if options.logfile:
         logger = FileLogger(options.logfile)
 
-    database = Database(options.dsn, readonly=False)
+    database = Database(options.dsn, readonly=True)
 
-    logger.Log("Updating links table")
-    database.ExtractLinks()
-    logger.Log("Done, committing")
-    database.Commit()
-    logger.Log("  Committed")
-
+    prev_url = None
     while True:
-        logger.Log("Requesting pack of links")
-        links = database.GetLinksForCheck(options.packsize, options.age * 60 * 60 * 24)
-        database.Commit()
-        if not links:
+        # Get pack of links
+        logger.Log("Requesting pack of urls".format(prev_url))
+        urls = database.GetLinksForCheck(after=prev_url, limit=options.packsize, recheck_age=options.age * 60 * 60 * 24)
+        if not urls:
             logger.Log("  Empty pack, we're done")
             break
-        else:
-            logger.Log("  {} links(s)".format(len(links)))
 
-        results = []
-        for link in links:
-            # XXX: add support for gentoo mirrors, skip for now
-            if not link.startswith("http://") and not link.startswith("https://"):
-                logger.Log("  Skipping {}, unsupported schema".format(link))
-                continue
+        logger.Log("  {} urls(s)".format(len(urls)))
 
-            logger.Log("  Processing {}".format(link))
+        # Get another pack of urls with the last hostname to ensure
+        # that all urls for one hostname get into a same large pack
+        match = re.match('([a-z]+://[^/]+/)', urls[-1])
+        if match:
+            logger.Log("Requesting additinonal pack of urls with common prefix")
+            urls += database.GetLinksForCheck(after=urls[-1], prefix=match.group(1), recheck_age=options.age * 60 * 60 * 24)
 
-            status, redirect, size, location = GetLinkStatus(link)
+        logger.Log("  {} total urls(s)".format(len(urls)))
 
-            if status == Database.linkcheck_status_timeout:
-                logger.Log("    Failed, timeout")
-            elif status == Database.linkcheck_status_too_many_redirects:
-                logger.Log("    Failed, too many redirects")
-            elif status == Database.linkcheck_status_unknown_error:
-                logger.Log("    Failed, unknown exception")
-            elif status == Database.linkcheck_status_cannot_connect:
-                logger.Log("    Failed, connection error")
-            else:
-                logger.Log("    Status: {}, redirect: {}, size: {}, final location: {}".format(status, redirect, size, location))
+        # Process
+        logger.Log("Processing pack of {} urls ({}:{})".format(len(urls), urls[0], urls[-1]))
 
-            results.append((link, status, redirect, size, location))
+        ProcessLinksPack(urls, options, logger)
 
-        logger.Log("Writing pack")
+        logger.Log("  Done")
 
-        for result in results:
-            link, status, redirect, size, location = result
-            database.UpdateLinkStatus(link, status=status, redirect=redirect, size=size, location=location)
-
-        logger.Log("Committing pack")
-        database.Commit()
-        logger.Log("  Committed")
+        prev_url = urls[-1]
 
     return 0
 
