@@ -66,7 +66,6 @@ def GetHTTPLinkStatus(url):
     except requests.exceptions.InvalidURL:
         return (url, Database.linkcheck_status_invalid_url, None, None, None)
     except:
-        raise
         return (url, Database.linkcheck_status_unknown_error, None, None, None)
 
 
