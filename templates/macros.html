@@ -63,6 +63,11 @@
 			<span class="popup-container-inner">
 				<sup class="popup">Link check failed, could not connect (likely DNS problem)</sup>
 			</span>
+		{%- elif link_statuses[link].status == -5 -%}
+			<sup class="link_status link_status_error">✘</sup>
+			<span class="popup-container-inner">
+				<sup class="popup">Link check failed, invalid URL</sup>
+			</span>
 		{%- else -%}
 			<sup class="link_status link_status_error">✘</sup>
 			<span class="popup-container-inner">

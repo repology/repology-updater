@@ -820,6 +820,7 @@ class Database:
     linkcheck_status_too_many_redirects = -2
     linkcheck_status_unknown_error = -3
     linkcheck_status_cannot_connect = -4
+    linkcheck_status_invalid_url = -5
 
     def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
         self.cursor.execute(
