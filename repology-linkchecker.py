@@ -101,13 +101,13 @@ def LinkProcessorWorker(queue, options, logger):
         if pack is None:
             return
 
-        logger.Log("Processing pack of {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
+        logger.Log("Processing {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
         for result in GetLinkStatuses(pack, delay=options.delay):
             url, status, redirect, size, location = result
             database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
 
         database.Commit()
-        logger.Log("Done processing pack of {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
+        logger.Log("Done processing {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
 
     logger.Log("Worker exiting")
 
@@ -131,7 +131,7 @@ def Main():
 
     database = Database(options.dsn, readonly=True)
 
-    queue = multiprocessing.Queue(10)
+    queue = multiprocessing.Queue(1)
     processpool = [multiprocessing.Process(target=LinkProcessorWorker, args=(queue, options, logger)) for i in range(options.jobs)]
     for process in processpool:
         process.start()
@@ -144,34 +144,30 @@ def Main():
         logger.Log("Requesting pack of urls".format(prev_url))
         urls = database.GetLinksForCheck(after=prev_url, limit=options.packsize, recheck_age=options.age * 60 * 60 * 24)
         if not urls:
-            logger.Log("  Empty pack, we're done")
             break
-
-        logger.Log("  {} urls(s)".format(len(urls)))
 
         # Get another pack of urls with the last hostname to ensure
         # that all urls for one hostname get into a same large pack
         match = re.match('([a-z]+://[^/]+/)', urls[-1])
         if match:
-            logger.Log("Requesting additinonal pack of urls with common prefix")
             urls += database.GetLinksForCheck(after=urls[-1], prefix=match.group(1), recheck_age=options.age * 60 * 60 * 24)
 
-        logger.Log("  {} total urls(s)".format(len(urls)))
-
         # Process
-        logger.Log("Enquing pack of {} urls ({}:{})".format(len(urls), urls[0], urls[-1]))
-
         queue.put(urls)
 
-        logger.Log("  Done")
+        logger.Log("Enqueued {} urls ({}..{})".format(len(urls), urls[0], urls[-1]))
 
         prev_url = urls[-1]
+
+    logger.Log("Waiting for child processes to exit")
 
     for process in processpool:
         queue.put(None)
 
     for process in processpool:
         process.join()
+
+    logger.Log("Done")
 
     return 0
 
