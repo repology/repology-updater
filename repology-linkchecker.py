@@ -59,7 +59,7 @@ def GetLinkStatus(link):
         return (Database.linkcheck_status_too_many_redirects, None, None, None)
     except requests.ConnectionError:
         return (Database.linkcheck_status_cannot_connect, None, None, None)
-    except requests.InvalidURL:
+    except requests.exceptions.InvalidURL:
         return (Database.linkcheck_status_invalid_url, None, None, None)
     except:
         raise
