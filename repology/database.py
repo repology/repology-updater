@@ -801,6 +801,11 @@ class Database:
         conditions = []
         args = []
 
+        # reduce the noise while linkchecked code doesn't support other schemas
+        conditions.append("(url LIKE %s OR url LIKE %s)")
+        args.append('http://%')
+        args.append('https://%')
+
         if after is not None:
             conditions.append('url > %s')
             args.append(after)
