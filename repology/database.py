@@ -797,14 +797,21 @@ class Database:
             """
         )
 
+        # reduce the noise while linkchecker code doesn't support other schemas
+        self.cursor.execute(
+            """
+            DELETE
+            FROM links
+            WHERE
+                url NOT LIKE %s AND
+                url NOT LIKE %s
+            """
+            , ('http://%', 'https://%')
+        )
+
     def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None, what=None):
         conditions = []
         args = []
-
-        # reduce the noise while linkchecked code doesn't support other schemas
-        conditions.append("(url LIKE %s OR url LIKE %s)")
-        args.append('http://%')
-        args.append('https://%')
 
         if after is not None:
             conditions.append('url > %s')
