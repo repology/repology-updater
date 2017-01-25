@@ -797,7 +797,7 @@ class Database:
             """
         )
 
-    def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None):
+    def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None, what=None):
         conditions = []
         args = []
 
@@ -812,6 +812,18 @@ class Database:
         if recheck_age is not None:
             conditions.append('(ts IS NULL OR ts <= now() - INTERVAL %s)')
             args.append(datetime.timedelta(seconds=recheck_age))
+
+        if what == 'unchecked':
+            conditions.append('ts IS NULL')
+
+        if what == 'checked':
+            conditions.append('ts IS NOT NULL')
+
+        if what == 'failed':
+            conditions.append('status != 200')
+
+        if what == 'succeeded':
+            conditions.append('status == 200')
 
         conditions_expr = ''
         limit_expr = ''

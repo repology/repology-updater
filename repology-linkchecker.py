@@ -114,21 +114,22 @@ def LinkProcessorWorker(queue, options, logger):
 
 def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
-    parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
+    parser.add_argument('--dsn', default=repology.config.DSN, help='database connection params')
+    parser.add_argument('--logfile', help='path to log file (log to stderr by default)')
 
-    parser.add_argument('-t', '--timeout', type=int, default=60, help='timeout for link requests in seconds')
-    parser.add_argument('-d', '--delay', type=float, default=3.0, help='delay between requests to a single host')
-    parser.add_argument('-a', '--age', type=int, default=365, help='min age for recheck in days')
-    parser.add_argument('-p', '--packsize', type=int, default=128, help='pack size for link processing')
-    parser.add_argument('-j', '--jobs', type=int, default=1, help='pack size for link processing')
+    parser.add_argument('--timeout', type=int, default=60, help='timeout for link requests in seconds')
+    parser.add_argument('--delay', type=float, default=3.0, help='delay between requests to one host')
+    parser.add_argument('--age', type=int, default=365, help='min age for recheck in days')
+    parser.add_argument('--packsize', type=int, default=128, help='pack size for link processing')
+    parser.add_argument('--jobs', type=int, default=1, help='number of parallel jobs')
+
+    parser.add_argument('--unchecked', action='store_true', help='only process unchecked (newly discovered) links')
+    parser.add_argument('--checked', action='store_true', help='only process old (already checked) links')
+    parser.add_argument('--failed', action='store_true', help='only process links that were checked and failed')
+    parser.add_argument('--succeeded', action='store_true', help='only process links that were checked and failed')
     options = parser.parse_args()
 
-    logger = StderrLogger()
-    if options.logfile:
-        logger = FileLogger(options.logfile)
-
-
+    logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
     database = Database(options.dsn, readonly=True)
 
     queue = multiprocessing.Queue(1)
@@ -136,21 +137,33 @@ def Main():
     for process in processpool:
         process.start()
 
+    condition = None
+    if options.unchecked:
+        condition = 'unchecked'
+    if options.checked:
+        condition = 'checked'
+    if options.failed:
+        condition = 'failed'
+    if options.succeeded:
+        condition = 'succeeded'
+
+    # base logger already passed to workers, may append prefix here
     logger = logger.GetPrefixed('main: ')
 
     prev_url = None
     while True:
         # Get pack of links
         logger.Log("Requesting pack of urls".format(prev_url))
-        urls = database.GetLinksForCheck(after=prev_url, limit=options.packsize, recheck_age=options.age * 60 * 60 * 24)
+        urls = database.GetLinksForCheck(after=prev_url, limit=options.packsize, recheck_age=options.age * 60 * 60 * 24, what=condition)
         if not urls:
+            logger.Log("  No more urls to process")
             break
 
         # Get another pack of urls with the last hostname to ensure
         # that all urls for one hostname get into a same large pack
         match = re.match('([a-z]+://[^/]+/)', urls[-1])
         if match:
-            urls += database.GetLinksForCheck(after=urls[-1], prefix=match.group(1), recheck_age=options.age * 60 * 60 * 24)
+            urls += database.GetLinksForCheck(after=urls[-1], prefix=match.group(1), recheck_age=options.age * 60 * 60 * 24, what=condition)
 
         # Process
         queue.put(urls)
