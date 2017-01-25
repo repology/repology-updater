@@ -99,6 +99,7 @@ def LinkProcessorWorker(queue, options, logger):
     while True:
         pack = queue.get()
         if pack is None:
+            logger.Log("Worker exiting")
             return
 
         logger.Log("Processing {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
@@ -108,8 +109,6 @@ def LinkProcessorWorker(queue, options, logger):
 
         database.Commit()
         logger.Log("Done processing {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
-
-    logger.Log("Worker exiting")
 
 
 def Main():
