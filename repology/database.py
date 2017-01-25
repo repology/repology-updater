@@ -263,9 +263,10 @@ class Database:
         self.cursor.execute("""
             CREATE TABLE links (
                 url varchar(2048) not null primary key,
-                last_seen timestamp with time zone not null,
-                last_alive timestamp with time zone,
-                ts timestamp with time zone,
+                last_extracted timestamp with time zone not null,
+                last_checked timestamp with time zone,
+                last_success timestamp with time zone,
+                last_failure timestamp with time zone,
                 status smallint,
                 redirect smallint,
                 size bigint,
@@ -780,7 +781,7 @@ class Database:
             INSERT
             INTO links(
                 url,
-                last_seen
+                last_extracted
             ) SELECT
                 unnest(downloads),
                 now()
@@ -793,7 +794,7 @@ class Database:
             WHERE homepage IS NOT NULL
             ON CONFLICT (url)
             DO UPDATE SET
-                last_seen = now()
+                last_extracted = now()
             """
         )
 
@@ -809,7 +810,7 @@ class Database:
             , ('http://%', 'https://%')
         )
 
-    def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None, what=None):
+    def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None, unchecked_only=False, checked_only=False, failed_only=False, succeeded_only=False):
         conditions = []
         args = []
 
@@ -822,19 +823,19 @@ class Database:
             args.append(prefix + '%')
 
         if recheck_age is not None:
-            conditions.append('(ts IS NULL OR ts <= now() - INTERVAL %s)')
+            conditions.append('(last_checked IS NULL OR last_checked <= now() - INTERVAL %s)')
             args.append(datetime.timedelta(seconds=recheck_age))
 
-        if what == 'unchecked':
-            conditions.append('ts IS NULL')
+        if unchecked_only:
+            conditions.append('last_checked IS NULL')
 
-        if what == 'checked':
-            conditions.append('ts IS NOT NULL')
+        if checked_only:
+            conditions.append('last_checked IS NOT NULL')
 
-        if what == 'failed':
+        if failed_only:
             conditions.append('status != 200')
 
-        if what == 'succeeded':
+        if succeeded_only:
             conditions.append('status == 200')
 
         conditions_expr = ''
@@ -868,12 +869,15 @@ class Database:
     linkcheck_status_invalid_url = -5
 
     def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
+        success = status == 200
+
         self.cursor.execute(
             """
             UPDATE links
             SET
-                ts = now(),
-                last_alive = CASE WHEN %s THEN now() ELSE last_alive END,
+                last_checked = now(),
+                last_success = CASE WHEN %s THEN now() ELSE last_success END,
+                last_failure = CASE WHEN %s THEN now() ELSE last_failure END,
                 status = %s,
                 redirect = %s,
                 size = %s,
@@ -881,7 +885,8 @@ class Database:
             WHERE url = %s
             """,
             (
-                status == 200,
+                success,
+                not success,
                 status,
                 redirect,
                 size,
@@ -895,8 +900,9 @@ class Database:
             """
             SELECT
                 url,
-                ts,
-                last_alive,
+                last_checked,
+                last_success,
+                last_failure,
                 status,
                 redirect,
                 size,
@@ -919,12 +925,13 @@ class Database:
 
         return {
             row[0]: {
-                'ts': row[1],
-                'last_alive': row[2],
-                'status': row[3],
-                'redirect': row[4],
-                'size': row[5],
-                'location': row[6]
+                'last_checked': row[1],
+                'last_success': row[2],
+                'last_failure': row[3],
+                'status': row[4],
+                'redirect': row[5],
+                'size': row[6],
+                'location': row[7]
             }
             for row in self.cursor.fetchall()
         }

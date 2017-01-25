@@ -136,16 +136,6 @@ def Main():
     for process in processpool:
         process.start()
 
-    condition = None
-    if options.unchecked:
-        condition = 'unchecked'
-    if options.checked:
-        condition = 'checked'
-    if options.failed:
-        condition = 'failed'
-    if options.succeeded:
-        condition = 'succeeded'
-
     # base logger already passed to workers, may append prefix here
     logger = logger.GetPrefixed('main: ')
 
@@ -153,7 +143,15 @@ def Main():
     while True:
         # Get pack of links
         logger.Log("Requesting pack of urls".format(prev_url))
-        urls = database.GetLinksForCheck(after=prev_url, limit=options.packsize, recheck_age=options.age * 60 * 60 * 24, what=condition)
+        urls = database.GetLinksForCheck(
+            after=prev_url,
+            limit=options.packsize,
+            recheck_age=options.age * 60 * 60 * 24,
+            unchecked_only=options.unchecked,
+            checked_only=options.checked,
+            failed_only=options.failed,
+            succeeded_only=options.succeeded
+        )
         if not urls:
             logger.Log("  No more urls to process")
             break
@@ -162,7 +160,15 @@ def Main():
         # that all urls for one hostname get into a same large pack
         match = re.match('([a-z]+://[^/]+/)', urls[-1])
         if match:
-            urls += database.GetLinksForCheck(after=urls[-1], prefix=match.group(1), recheck_age=options.age * 60 * 60 * 24, what=condition)
+            urls += database.GetLinksForCheck(
+                after=urls[-1],
+                prefix=match.group(1),
+                recheck_age=options.age * 60 * 60 * 24,
+                unchecked_only=options.unchecked,
+                checked_only=options.checked,
+                failed_only=options.failed,
+                succeeded_only=options.succeeded
+            )
 
         # Process
         queue.put(urls)
