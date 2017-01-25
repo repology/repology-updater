@@ -89,10 +89,10 @@ def GetLinkStatuses(urls, delay):
     return results
 
 
-def LinkProcessorWorker(queue, options, logger):
+def LinkProcessorWorker(queue, workerid, options, logger):
     database = Database(options.dsn, readonly=False)
 
-    logger = logger.GetPrefixed("worker {}: ".format(os.getpid()))
+    logger = logger.GetPrefixed("worker{}: ".format(workerid))
 
     logger.Log("Worker spawned")
 
@@ -132,12 +132,12 @@ def Main():
     database = Database(options.dsn, readonly=True)
 
     queue = multiprocessing.Queue(1)
-    processpool = [multiprocessing.Process(target=LinkProcessorWorker, args=(queue, options, logger)) for i in range(options.jobs)]
+    processpool = [multiprocessing.Process(target=LinkProcessorWorker, args=(queue, i, options, logger)) for i in range(options.jobs)]
     for process in processpool:
         process.start()
 
     # base logger already passed to workers, may append prefix here
-    logger = logger.GetPrefixed('main: ')
+    logger = logger.GetPrefixed('master: ')
 
     prev_url = None
     while True:
