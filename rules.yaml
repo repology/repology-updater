@@ -135,6 +135,7 @@
 - { name: opencv2,                     setname: opencv                    }
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph,           family: [ freebsd ] }
 - { name: pacman-arena,                setname: pacmanarena,              family: [ openbsd ] }
+- { name: perlbrew,                    setname: perl:app-perlbrew         }
 - { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
 - { name: postgresql-libpqxx,          setname: libpqxx                   }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
