@@ -1,0 +1,14 @@
+bind-key H pipe-pane "exec cat >>$HOME/'#W-tmux.log'" \; display-message 'Started logging to $HOME/#W-tmux.log'
+bind-key h pipe-pane \; display-message 'Ended logging to $HOME/#W-tmux.log'
+set-window-option -g mode-keys vi
+set -g status off
+
+source /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf
+
+set-option -g history-limit 10000
+set-option -g mouse on
+
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
+
+setw -g mouse on

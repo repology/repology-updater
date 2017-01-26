@@ -1,0 +1,37 @@
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory autocd beep extendedglob nomatch notify EXTENDED_HISTORY
+bindkey -e
+
+zstyle :compinstall filename '/home/vagrant/.zshrc'
+
+autoload -Uz compinit
+compinit
+
+autoload -U promptinit
+promptinit
+
+export CLICOLOR=true
+export EDITOR=vim
+export PATH=/usr/local/bin:/usr/X11R6/bin:$PATH:/pd/ports/default/Tools/scripts
+
+TERM=xterm-256color
+
+export CDIFFCOLORS=1:31:36:35
+
+CDPATH=/usr/local/poudriere/ports/default
+
+export G_FILENAME_ENCODING=UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_MESSAGE=en_US.UTF-8
+export MM_CHARSET=UTF-8
+export XTERM_LOCALE=en_US.UTF-8
+
+eval "$(hub alias -s)"
+
+. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
+alias weather="clear ; curl wttr.in"
