@@ -23,6 +23,7 @@ from timeit import default_timer as timer
 import argparse
 
 from repology.database import *
+from repology.queryfilters import *
 
 import repology.config
 
