@@ -62,13 +62,13 @@ class StatCounter():
         self.count += 1
 
     def Print(self):
-        print('        Time: {:.2f}ms/{:.2f}ms/{:.2f}ms'.format(self.min_time * 1000.0, self.total_time / self.count * 1000.0, self.max_time * 1000.0), file=sys.stderr)
-        print('    Packages: {}/{:.0f}/{}'.format(self.min_packages, self.total_packages / self.count, self.max_packages), file=sys.stderr)
-        print('Metapackages: {}/{:.0f}/{}'.format(self.min_metapackages, self.total_metapackages / self.count, self.max_metapackages), file=sys.stderr)
+        print('        Time: {:.2f}ms/{:.2f}ms/{:.2f}ms'.format(self.min_time * 1000.0, self.total_time / self.count * 1000.0, self.max_time * 1000.0))
+        print('    Packages: {}/{:.0f}/{}'.format(self.min_packages, self.total_packages / self.count, self.max_packages))
+        print('Metapackages: {}/{:.0f}/{}'.format(self.min_metapackages, self.total_metapackages / self.count, self.max_metapackages))
 
 
 def RunTest(database, title, pagefilter, *filters):
-    print("===> " + title, file=sys.stderr)
+    print("===> " + title)
 
     sc = StatCounter()
     for letter in ['0'] + [chr(c) for c in range(ord('a'), ord('z'))]:
