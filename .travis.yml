@@ -17,6 +17,7 @@ before_install:
   - pip install pytidylib # XXX: proper html validation needs tidy-html5
   - gem install kwalify
   - pip install rubymarshal
+  - pip install flake8
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
 before_script:
@@ -30,6 +31,9 @@ script:
 
   # check yaml schemas
   - make check
+
+  # check python syntax
+  - make flake8
 
   # fill database with test data
   - ./repology-update.py --parse --initdb --database

@@ -26,6 +26,9 @@ profile-reparse::
 flake8:
 	flake8 --ignore=E501,F401,F405,F403,E265 *.py repology
 
+flake8-all:
+	flake8 *.py repology
+
 check:
 	rm -f kwalify.log
 	kwalify -lf schemas/rules.yaml rules.yaml | tee -a kwalify.log
