@@ -98,7 +98,7 @@ def Main():
     RunTest(database, "No filter (pagination only): before", NameBeforeQueryFilter)
     RunTest(database, "No filter (pagination only): after", NameAfterQueryFilter)
 
-    RunTest(database, "Maintainer", NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@FreeBSD.org'))
+    RunTest(database, "Maintainer", NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@freebsd.org'))
     RunTest(database, "InRepo", NameStartingQueryFilter, InRepoQueryFilter('freebsd'))
     RunTest(database, "Outdated", NameStartingQueryFilter, OutdatedInRepoQueryFilter('freebsd'))
     RunTest(database, "NotInRepo", NameStartingQueryFilter, NotInRepoQueryFilter('freebsd'))
@@ -107,8 +107,8 @@ def Main():
 
     print("==> Advanced filtering")
 
-    RunTest(database, "Maintainer + InRepo", NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@FreeBSD.org'), InRepoQueryFilter('freebsd'))
-    RunTest(database, "InRepo + Maintainer", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), MaintainerQueryFilter('amdmi3@FreeBSD.org'))
+    RunTest(database, "Maintainer + InRepo", NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@freebsd.org'), InRepoQueryFilter('freebsd'))
+    RunTest(database, "InRepo + Maintainer", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), MaintainerQueryFilter('amdmi3@freebsd.org'))
 
     RunTest(database, "InRepo x2", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'))
     RunTest(database, "InRepo x3", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), InRepoQueryFilter('debian_stable'), InRepoQueryFilter('debian_stable'))
