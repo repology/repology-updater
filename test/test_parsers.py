@@ -124,6 +124,21 @@ class TestParsers(unittest.TestCase):
                 "licenses": ['GPL-3+'],
             }
         )
+        self.check_package("away",
+            {
+                "repo": "gentoo",
+                "family": "gentoo",
+                "name": "away",
+                "version": "0.9.5",
+                "origversion": "0.9.5-r1",
+                "category": "app-misc",
+                "maintainers": ['maintainer-needed@gentoo.org'],
+                "homepage": 'http://unbeatenpath.net/software/away/',
+                "comment": 'Terminal locking program with few additional features',
+                "downloads": ['http://unbeatenpath.net/software/away/away-0.9.5.tar.bz2'],
+                "licenses": ['GPL-2'],
+            }
+        )
 
     def test_arch(self):
         self.check_package("zlib",
