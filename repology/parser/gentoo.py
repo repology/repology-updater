@@ -103,6 +103,11 @@ class GentooGitParser():
                     pkg.origversion = maxorigversion
                     pkg.category = category
 
+                    if not pkg.maintainers:
+                        # If we have no maintainer, assign Gentoo's default maintainer value
+                        # See https://wiki.gentoo.org/wiki/GLEP:67#Bug_assignment
+                        pkg.maintainers = ['maintainer-needed@gentoo.org']
+
                     metadata_path = os.path.join(
                         path,
                         'metadata',
