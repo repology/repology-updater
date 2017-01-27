@@ -134,7 +134,7 @@ def get_packages_name_range(packages):
     return firstname, lastname
 
 
-def metapackages_generic(bound, *filters, template='metapackages.html', extravars=None):
+def metapackages_generic(bound, *filters, template='metapackages.html', repo=None, maintainer=None):
     namefilter = bound_to_filter(bound)
 
     # process search
@@ -162,7 +162,8 @@ def metapackages_generic(bound, *filters, template='metapackages.html', extravar
         firstname=firstname,
         lastname=lastname,
         search=search,
-        **(extravars if extravars else {})
+        repo=repo,
+        maintainer=maintainer
     )
 
 
@@ -207,7 +208,7 @@ def metapackages_in_repo(repo, bound=None):
         bound,
         InRepoQueryFilter(repo),
         template="metapackages-in-repo.html",
-        extravars={'repo': repo}
+        repo=repo,
     )
 
 
@@ -221,7 +222,7 @@ def metapackages_outdated_in_repo(repo, bound=None):
         bound,
         OutdatedInRepoQueryFilter(repo),
         template="metapackages-outdated-in-repo.html",
-        extravars={'repo': repo}
+        repo=repo,
     )
 
 
@@ -235,7 +236,7 @@ def metapackages_not_in_repo(repo, bound=None):
         bound,
         NotInRepoQueryFilter(repo),
         template="metapackages-not-in-repo.html",
-        extravars={'repo': repo}
+        repo=repo,
     )
 
 
@@ -250,7 +251,7 @@ def metapackages_candidates_for_repo(repo, bound=None):
         NotInRepoQueryFilter(repo),
         InNumFamiliesQueryFilter(more=5),
         template="metapackages-candidates-for-repo.html",
-        extravars={'repo': repo}
+        repo=repo,
     )
 
 
@@ -265,7 +266,7 @@ def metapackages_unique_in_repo(repo, bound=None):
         InRepoQueryFilter(repo),
         InNumFamiliesQueryFilter(less=1),
         template="metapackages-unique-in-repo.html",
-        extravars={'repo': repo}
+        repo=repo,
     )
 
 
@@ -276,7 +277,7 @@ def metapackages_by_maintainer(maintainer, bound=None):
         bound,
         MaintainerQueryFilter(maintainer),
         template="metapackages-by-maintainer.html",
-        extravars={'maintainer': maintainer}
+        maintainer=maintainer,
     )
 
 
@@ -287,7 +288,7 @@ def metapackages_outdated_by_maintainer(maintainer, bound=None):
         bound,
         MaintainerOutdatedQueryFilter(maintainer),
         template="metapackages-outdated-by-maintainer.html",
-        extravars={'maintainer': maintainer}
+        maintainer=maintainer,
     )
 
 
