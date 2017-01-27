@@ -716,7 +716,7 @@ class Database:
                 ignoreversion
             FROM packages WHERE effname IN (
                 {}
-            ) ORDER BY effname
+            )
             """.format(query),
             args
         )
