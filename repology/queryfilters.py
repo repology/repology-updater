@@ -49,6 +49,9 @@ class NameStartingQueryFilter(QueryFilter):
     def GetSort(self):
         return 'effname ASC'
 
+    def ApplyToRequest(self, req):
+        req.NameStarting(self.name)
+
 
 class NameAfterQueryFilter(QueryFilter):
     def __init__(self, name=None):
@@ -65,6 +68,9 @@ class NameAfterQueryFilter(QueryFilter):
 
     def GetSort(self):
         return 'effname ASC'
+
+    def ApplyToRequest(self, req):
+        req.NameAfter(self.name)
 
 
 class NameBeforeQueryFilter(QueryFilter):
@@ -83,6 +89,8 @@ class NameBeforeQueryFilter(QueryFilter):
     def GetSort(self):
         return 'effname DESC'
 
+    def ApplyToRequest(self, req):
+        req.NameBefore(self.name)
 
 class NameSubstringQueryFilter(QueryFilter):
     def __init__(self, name):
@@ -96,6 +104,9 @@ class NameSubstringQueryFilter(QueryFilter):
 
     def GetWhereArgs(self):
         return ["%" + self.name + "%"]
+
+    def ApplyToRequest(self, req):
+        req.NameSubstring(self.name)
 
 
 class MaintainerQueryFilter(QueryFilter):
@@ -111,6 +122,9 @@ class MaintainerQueryFilter(QueryFilter):
     def GetWhereArgs(self):
         return [self.maintainer]
 
+    def ApplyToRequest(self, req):
+        req.Maintainer(self.maintainer)
+
 
 class MaintainerOutdatedQueryFilter(QueryFilter):
     def __init__(self, maintainer):
@@ -124,6 +138,9 @@ class MaintainerOutdatedQueryFilter(QueryFilter):
 
     def GetWhereArgs(self):
         return [self.maintainer]
+
+    def ApplyToRequest(self, req):
+        req.OutdatedForMaintainer(self.maintainer)
 
 
 class InRepoQueryFilter(QueryFilter):
@@ -139,6 +156,9 @@ class InRepoQueryFilter(QueryFilter):
     def GetWhereArgs(self):
         return [self.repo]
 
+    def ApplyToRequest(self, req):
+        req.InRepo(self.repo)
+
 
 class InAnyRepoQueryFilter(QueryFilter):
     def __init__(self, repos):
@@ -153,32 +173,8 @@ class InAnyRepoQueryFilter(QueryFilter):
     def GetWhereArgs(self):
         return [repo for repo in self.repos]
 
-
-class InNumReposQueryFilter(QueryFilter):
-    def __init__(self, more=None, less=None):
-        self.more = more
-        self.less = less
-
-    def GetTable(self):
-        return 'metapackage_repocounts'
-
-    def GetWhere(self):
-        conditions = []
-        if self.more is not None:
-            conditions.append("{table}.num_repos >= %s")
-        if self.less is not None:
-            conditions.append("{table}.num_repos <= %s")
-
-        return ' AND '.join(conditions)
-
-    def GetWhereArgs(self):
-        args = []
-        if self.more is not None:
-            args.append(self.more)
-        if self.less is not None:
-            args.append(self.less)
-
-        return args
+    def ApplyToRequest(self, req):
+        req.InAnyRepo(self.repos)
 
 
 class InNumFamiliesQueryFilter(QueryFilter):
@@ -207,6 +203,12 @@ class InNumFamiliesQueryFilter(QueryFilter):
 
         return args
 
+    def ApplyToRequest(self, req):
+        if self.more is not None:
+            req.MoreFamilies(self.more)
+        if self.less is not None:
+            req.LessFamilies(self.less)
+
 
 class OutdatedInRepoQueryFilter(QueryFilter):
     def __init__(self, repo):
@@ -221,6 +223,9 @@ class OutdatedInRepoQueryFilter(QueryFilter):
     def GetWhereArgs(self):
         return [self.repo]
 
+    def ApplyToRequest(self, req):
+        req.OutdatedInRepo(self.repo)
+
 
 class NotInRepoQueryFilter(QueryFilter):
     def __init__(self, repo):
@@ -234,3 +239,6 @@ class NotInRepoQueryFilter(QueryFilter):
 
     def GetHavingArgs(self):
         return [self.repo]
+
+    def ApplyToRequest(self, req):
+        req.NotInRepo(self.repo)
