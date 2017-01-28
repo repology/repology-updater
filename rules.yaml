@@ -44,6 +44,7 @@
 - { name: atkmm1.6,                    setname: atk,                      family: [ debian ]  }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: aws-cli,                     setname: awscli                    }
+- { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            family: [ freebsd ] }
