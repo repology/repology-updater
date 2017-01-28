@@ -281,6 +281,7 @@
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                                ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                      ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
+- { name: xl2tpd,                      verpat: "^[0-9]*",                                    ignorever: true } # pkgsrc is using some kind of snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
