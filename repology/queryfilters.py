@@ -92,6 +92,7 @@ class NameBeforeQueryFilter(QueryFilter):
     def ApplyToRequest(self, req):
         req.NameBefore(self.name)
 
+
 class NameSubstringQueryFilter(QueryFilter):
     def __init__(self, name):
         self.name = name.lower()  # XXX: need to normalize like effnames
