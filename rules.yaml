@@ -129,6 +129,7 @@
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
+- { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              family: [ freebsd ] }
