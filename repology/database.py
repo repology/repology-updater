@@ -138,7 +138,7 @@ class MetapackageRequest:
     def InAnyRepo(self, repos):
         if self.repos:
             for currentrepo in self.repos:
-                if not currentrepo in repos:
+                if currentrepo not in repos:
                     raise RuntimeError("duplicate repository condition")
         else:
             self.repos = set(repos)
