@@ -279,6 +279,7 @@
 - { name: opencity,                    ver: "0.0.6.5stable",                                 ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
+- { name: open-vm-tools,               verpat: "^[0-9]*",                                    ignorever: true } # FreeBSD is using some kind of snapshot; Others are using versions with dots
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                                ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                      ignorever: true }
 - { name: tt-rss,                      verpat: "r|201[67]",                                  ignorever: true } # Kind of snapshot release
