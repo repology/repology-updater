@@ -52,7 +52,7 @@ class AndQuery(Query):
     def GetQuery(self):
         if not self.parts:
             return None
-        return ' AND '.join(map(lambda x: '('+x+')', filter(None.__ne__, self.parts)))
+        return ' AND '.join(map(lambda x: '(' + x + ')', filter(None.__ne__, self.parts)))
 
 
 class OrQuery(Query):
@@ -62,7 +62,7 @@ class OrQuery(Query):
     def GetQuery(self):
         if not self.parts:
             return None
-        return ' OR '.join(map(lambda x: '('+x+')', filter(None.__ne__, self.parts)))
+        return ' OR '.join(map(lambda x: '(' + x + ')', filter(None.__ne__, self.parts)))
 
 
 class MetapackageRequest:
