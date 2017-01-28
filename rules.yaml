@@ -280,6 +280,7 @@
 - { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                                ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                      ignorever: true }
+- { name: tt-rss,                      verpat: "r|201[67]",                                  ignorever: true } # Kind of snapshot release
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
