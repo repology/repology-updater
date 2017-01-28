@@ -271,6 +271,8 @@
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       family: [ sisyphus ], ignorever: true }
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
 - { name: libfaketime,                 verpat: ".*201[67].*",                                ignorever: true } # FreeBSD is using git snapshot
+- { name: kbuild,                      verlonger: 3,                                         ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
+- { name: kbuild,                      verpat: ".*[rs].*",                                   ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
 - { name: opencity,                    ver: "0.0.6.5stable",                                 ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
