@@ -111,6 +111,10 @@ def PackagesetSortByVersions(packages):
     return sorted(packages, key=cmp_to_key(packages_version_cmp_reverse))
 
 
+def PackagesetToFamilies(packages):
+    return set([package.family for package in packages])
+
+
 def PackagesetAggregateByVersions(packages):
     versions = []
 
