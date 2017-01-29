@@ -27,6 +27,9 @@ from repology.packageproc import *
 from repology.metapackageproc import *
 from repology.template_helpers import *
 
+from repology.version import VersionCompare
+from repology.package import *
+
 # create application and handle configuration
 app = flask.Flask(__name__)
 
@@ -154,14 +157,71 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
 
     firstname, lastname = get_packages_name_range(packages)
 
-    summaries = MetapackagesToMetasummaries(PackagesToMetapackages(packages))
+    metapackages = PackagesToMetapackages(packages)
+
+    metapackagedata = {}
+    for metapackagename, packages in sorted(metapackages.items()):
+        packages = PackagesetSortByVersions(packages)
+
+        # 1. Aggregate by repository
+        packages_by_repo = {}
+        for package in packages:
+            if package.repo not in packages_by_repo:
+                packages_by_repo[package.repo] = []
+            packages_by_repo[package.repo].append(package)
+
+        # 2.1. Extract explicit packages
+        # 2.2. Discover repos worth showing
+        # Repo not worth showin is the repo from which all newest (in this repo) packages
+        # were extracted as explicit
+        explicit_packages = []
+        ignored_packages = []
+        repos_worth_showing = set()
+        for reponame, repopackages in packages_by_repo.items():
+            bestversion = None
+            for package in repopackages:
+                # discover best version
+                if bestversion is None and package.versionclass != PackageVersionClass.ignored:
+                    bestversion = package.version
+
+                if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
+                    explicit_packages.append(package)
+                elif package.versionclass == PackageVersionClass.ignored:
+                    ignored_packages.append(package)
+                elif VersionCompare(package.version, bestversion) == 0:
+                    repos_worth_showing.add(reponame)
+
+        # 3. Extract newest package from each repo
+        newest_packages = []
+        for reponame in repos_worth_showing:
+            for package in packages_by_repo[reponame]:
+                if package.versionclass != PackageVersionClass.ignored:
+                    newest_packages.append(package)
+                    break
+
+        # 4. Aggregate by versions
+        def VersionsDigest(version):
+            return {
+                'version': version['version'],
+                'repos': set(map(lambda p: p.repo, version['packages'])),
+                'class': version['packages'][0].versionclass,
+            }
+
+        versions = PackagesetAggregateByVersions(newest_packages)
+        metapackagedata[metapackagename] = {
+            'families': PackagesetToFamilies(packages),
+            'explicit': map(VersionsDigest, PackagesetAggregateByVersions(explicit_packages)),
+            'newest': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == PackageVersionClass.newest, versions)),
+            'outdated': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == PackageVersionClass.outdated, versions)),
+            'ignored': map(VersionsDigest, PackagesetAggregateByVersions(ignored_packages))
+        }
 
     return flask.render_template(
         template,
-        summaries=summaries,
         firstname=firstname,
         lastname=lastname,
         search=search,
+        metapackagedata=metapackagedata,
         repo=repo,
         maintainer=maintainer
     )
