@@ -207,7 +207,7 @@ class MetapackageRequest:
             where.Append('effname ' + self.namecond + ' %s', self.namebound)
 
         if self.name_substring:
-            where.Append('effname LIKE %s', self.name_substring)
+            where.Append('effname LIKE %s', '%' + self.name_substring + '%')
 
         # construct query
         query = Query('SELECT DISTINCT effname FROM')
