@@ -85,7 +85,7 @@
 - name: debian_stable
   desc: Debian Stable
   url: https://packages.debian.org/
-  family: debian
+  family: debuntu
   sources:
     - name: contrib
       fetcher: File
@@ -110,7 +110,7 @@
 - name: debian_stable_backports
   desc: Debian Stable Backports
   url: https://packages.debian.org/
-  family: debian
+  family: debuntu
   sources:
     - name: contrib
       fetcher: File
@@ -135,7 +135,7 @@
 - name: debian_testing
   desc: Debian Testing
   url: https://packages.debian.org/
-  family: debian
+  family: debuntu
   sources:
     - name: contrib
       fetcher: File
@@ -160,7 +160,7 @@
 - name: debian_unstable
   desc: Debian Unstable
   url: https://packages.debian.org/
-  family: debian
+  family: debuntu
   sources:
     - name: contrib
       fetcher: File
@@ -185,7 +185,7 @@
 - name: debian_experimental
   desc: Debian Experimental
   url: https://packages.debian.org/
-  family: debian
+  family: debuntu
   sources:
     - name: contrib
       fetcher: File
@@ -213,7 +213,7 @@
 - name: ubuntu_precise
   desc: Ubuntu Precise
   url: http://packages.ubuntu.com/
-  family: debian
+  family: debuntu
   sources:
     - name: main
       fetcher: File
@@ -243,7 +243,7 @@
 - name: ubuntu_trusty
   desc: Ubuntu Trusty
   url: http://packages.ubuntu.com/
-  family: debian
+  family: debuntu
   sources:
     - name: main
       fetcher: File
@@ -273,7 +273,7 @@
 - name: ubuntu_xenial
   desc: Ubuntu Xenial
   url: http://packages.ubuntu.com/
-  family: debian
+  family: debuntu
   sources:
     - name: main
       fetcher: File
@@ -303,7 +303,7 @@
 - name: ubuntu_yakkety
   desc: Ubuntu Yakkety
   url: http://packages.ubuntu.com/
-  family: debian
+  family: debuntu
   sources:
     - name: main
       fetcher: File
@@ -333,7 +333,7 @@
 - name: ubuntu_zesty
   desc: Ubuntu Zesty
   url: http://packages.ubuntu.com/
-  family: debian
+  family: debuntu
   sources:
     - name: main
       fetcher: File

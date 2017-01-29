@@ -173,7 +173,7 @@ class TestParsers(unittest.TestCase):
             {
                 "repo": "debian_unstable",
                 "category": "devel",
-                "family": "debian",
+                "family": "debuntu",
                 "name": "a52dec",
                 "version": "0.7.4",
                 "origversion": "0.7.4-18",

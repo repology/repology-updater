@@ -12,14 +12,14 @@
 # Some of these are to be reversed for less ambiguity, and some
 # are to consider for performing in the actual repositories
 - { name: "2048",                      setname: 2048-cli,                 family: [ freebsd ] } # differentiate from 2048-qt
-- { name: 3dchess,                     setname: 3dc,                      family: [ debian ] }
+- { name: 3dchess,                     setname: 3dc,                      family: [ debuntu ] }
 - { name: abuse_sdl,                   setname: abuse                     }
 - { name: accounts-qt5,                setname: accounts-qt ,             family: [ sisyphus ] }
 - { name: ace,                         setname: ace-of-penguins,          family: [ openbsd, slackbuilds ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          family: [ gentoo ] }
 - { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              family: [ fedora ] } # XXX: ???
 - { name: acetoneiso2,                 setname: acetoneiso,               family: [ arch, sisyphus ] }
-- { name: ack-grep,                    setname: ack,                      family: [ debian ] }
+- { name: ack-grep,                    setname: ack,                      family: [ debuntu ] }
 - { namepat: "acpica-(?:tools|unix|utils)", setname: acpica                                 }
 - { name: acroread9,                   setname: acroread,                 family: [ pkgsrc ] }
 - { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     family: [ pkgsrc ] }
@@ -39,24 +39,24 @@
 - { name: alienarena-data,             setname: alien-arena-data          }
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
-- { name: atk1.0,                      setname: atk,                      family: [ debian ]  }
+- { name: atk1.0,                      setname: atk,                      family: [ debuntu ]  }
 - { name: atk2mm,                      setname: atkmm,                    family: [ openbsd ]  }
-- { name: atkmm1.6,                    setname: atk,                      family: [ debian ]  }
+- { name: atkmm1.6,                    setname: atk,                      family: [ debuntu ]  }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: aws-cli,                     setname: awscli                    }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            family: [ freebsd ] }
-- { name: billard-gl,                  setname: billardgl,                family: [ debian ]  }
+- { name: billard-gl,                  setname: billardgl,                family: [ debuntu ]  }
 - { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
 - { name: blobby2,                     setname: blobby                    }
-- { name: blockout2,                   setname: blockout,                 family: [ debian ]  }
+- { name: blockout2,                   setname: blockout,                 family: [ debuntu ]  }
 - { name: blockoutii,                  setname: blockout,                 family: [ fedora ]  } # XXX: recheck
 - { name: boaconstructor,              setname: boa-constructor,          family: [ freebsd ] }
 - { name: boost-all,                   setname: boost,                    family: [ freebsd ] }
-- { namepat: "boost1.[0-9]+",          setname: boost,                    family: [ debian ] }
-- { name: botan1.10,                   setname: botan,                    family: [ debian ]  }
+- { namepat: "boost1.[0-9]+",          setname: boost,                    family: [ debuntu ] }
+- { name: botan1.10,                   setname: botan,                    family: [ debuntu ]  }
 - { name: botan110,                    setname: botan,                    family: [ freebsd ] }
 - { name: bouncycastle,                setname: bouncycastle14,           family: [ freebsd ] } # move away
 - { name: bouncycastle15,              setname: bouncycastle,             family: [ freebsd ] }
@@ -64,16 +64,16 @@
 - { name: bub-n-bros,                  setname: bubbros,                  family: [ gentoo ]  } # XXX: recheck
 - { name: bugzilla44,                  ignore: true,                      family: [ freebsd ] } # legacy
 - { name: bugzilla50,                  setname: bugzilla,                 family: [ freebsd ] }
-- { name: byacc-j,                     setname: byaccj,                   family: [ debian ]  }
-- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       family: [ debian, arch ] } # O_o
-- { name: cegui-mk2,                   setname: cegui,                    family: [ debian ]  }
-- { name: celestia-nonfree,            setname: celestia,                 family: [ debian ]  }
+- { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
+- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       family: [ debuntu, arch ] } # O_o
+- { name: cegui-mk2,                   setname: cegui,                    family: [ debuntu ]  }
+- { name: celestia-nonfree,            setname: celestia,                 family: [ debuntu ]  }
 - { name: chexedit,                    setname: curses-hexedit,           family: [ freebsd ] }
 - { name: chromium-browser,            setname: chromium                  }
 - { name: chromium-browser-stable,     setname: chromium                  }
 - { name: corsixth,                    setname: corsix-th,                family: [ freebsd ] }
-- { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debian ]  }
-- { name: dgen,                        setname: dgen-sdl,                 family: [ debian ]  } # recheck
+- { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debuntu ]  }
+- { name: dgen,                        setname: dgen-sdl,                 family: [ debuntu ]  } # recheck
 - { name: drpython-py27,               setname: drpython,                 family: [ freebsd ] }
 - { name: dynamips-community,          setname: dynamips,                 family: [ freebsd ] }
 - { name: dwarffortress,               setname: dwarf-fortress            }
@@ -90,31 +90,31 @@
 - { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
 - { name: eric6,                       setname: eric,                     family: [ freebsd ] }
 - { name: etracer,                     setname: extreme-tuxracer          }
-- { name: exactimage,                  setname: exact-image,              family: [ debian ]  }
+- { name: exactimage,                  setname: exact-image,              family: [ debuntu ]  }
 - { name: extremetuxracer,             setname: extreme-tuxracer          }
 - { name: falconseye,                  setname: falcons-eye,              family: [ freebsd, openbsd ] }
-- { name: farstream-0.2,               setname: farstream,                family: [ debian ]  }
+- { name: farstream-0.2,               setname: farstream,                family: [ debuntu ]  }
 - { name: fish-fillets,                setname: fillets-ng,               family: [ gentoo ]  }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
 - { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
-- { name: fox1.6,                      setname: fox16,                    family: [ debian ]  }
+- { name: fox1.6,                      setname: fox16,                    family: [ debuntu ]  }
 - { name: fox17,                       setname: fox,                      family: [ freebsd ] }
-- { name: free42-nologo,               setname: free42,                   family: [ debian ]  }
+- { name: free42-nologo,               setname: free42,                   family: [ debuntu ]  }
 - { name: freebsd-uucp,                setname: uucp,                     family: [ freebsd ] }
 - { name: freefont-ttf,                setname: freefont,                 family: [ freebsd ] }
 - { name: freetype,                    setname: freetype1,                family: [ freebsd, pkgsrc ] }
 - { name: freetype2,                   setname: freetype,                 family: [ freebsd, pkgsrc ] }
 - { name: garden,                      setname: garden-of-coloured-lights }
-- { name: gargoyle-free,               setname: gargoyle,                 family: [ debian ]  }
+- { name: gargoyle-free,               setname: gargoyle,                 family: [ debuntu ]  }
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
 - { name: gl117,                       setname: gl-117,                   family: [ gentoo ]  }
-- { name: google-mock,                 setname: gmock,                    family: [ debian ]  }
+- { name: google-mock,                 setname: gmock,                    family: [ debuntu ]  }
 - { name: googlemock,                  setname: gmock,                    family: [ freebsd ] }
 - { name: googletest,                  setname: gtest,                    family: [ freebsd, pkgsrc ] }
-- { name: hannah,                      setname: help-hannahs-horse,       family: [ debian ]  } # recheck
+- { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
 - { name: icecast2,                    setname: icecast                   }
 - { name: ir.lv2,                      setname: ir-lv2                    }
@@ -148,8 +148,8 @@
 - { name: "libsdl1.2",                 setname: sdl                       }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
 - { namepat: "sdl-?sopwith",           setname: sopwith                   }
-- { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debian ]  }
-- { name: sdlpango,                    setname: sdl-pango,                family: [ debian ]  }
+- { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debuntu ]  }
+- { name: sdlpango,                    setname: sdl-pango,                family: [ debuntu ]  }
 - { namepat: "sendmail\\+.*",          setname: sendmail,                 family: [ freebsd ]  }
 - { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
 - { name: seven-kingdoms,              setname: 7kaa,                     family: [ gentoo ]  }
@@ -179,18 +179,18 @@
 - { name: xfce4-dict-plugin,           setname: xfce4-dict,               family: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                family: [ freebsd ] }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
-- { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debian ] }
+- { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
 - { namepat: "android-tools-[^-]+",    setname: android-tools,            family: [ freebsd, pkgsrc ] }
 - { namepat: "celestia-.*",            setname: celestia,                 family: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
 - { namepat: "eclipse-plugin-(.*)",    setname: "eclipse-$1",             family: [ openbsd ] }
 - { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              family: [ freebsd ] }
 - { namepat: "enscript-.*",            setname: enscript,                 family: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
-- { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debian ]  }
+- { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         family: [ pkgsrc, openbsd ] }
-- { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debian, gentoo ]  }
+- { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debuntu, gentoo ]  }
 - { namepat: "open[gs]fx",             setname: "openttd-$0",             family: [ freebsd, gentoo ] }
-- { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 family: [ debian ]  }
-- { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                family: [ debian ]  }
+- { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 family: [ debuntu ]  }
+- { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                family: [ debuntu ]  }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
@@ -198,42 +198,42 @@
 # XXX: continue looking through the list starting from gaul
 
 # GNUstep packages (should be likely the other way around: foo->foo.app)
-- { name: aclock.app,                  setname: aclock,                   family: [ debian ]  }
-- { name: addresses-for-gnustep,       setname: addresses,                family: [ debian ]  }
-- { name: batmon.app,                  setname: batmon,                   family: [ debian ]  }
-- { name: camera.app,                  setname: camera,                   family: [ debian ]  }
-- { name: cenon.app,                   setname: cenon,                    family: [ debian ]  }
-- { name: charmap.app,                 setname: charmap,                  family: [ debian ]  }
-- { name: cynthiune.app,               setname: cynthiune,                family: [ debian ]  }
-- { name: edenmath.app,                setname: edenmath,                 family: [ debian ]  }
-- { name: gomoku.app,                  setname: gomoku,                   family: [ debian ]  }
-- { name: gorm.app,                    setname: gorm,                     family: [ debian ]  }
-- { name: grr.app,                     setname: grr,                      family: [ debian ]  }
-- { name: gtamsanalyzer.app,           setname: gtamsanalyzer,            family: [ debian ]  }
-- { name: helpviewer.app,              setname: helpviewer,               family: [ debian ]  }
-- { name: lusernet.app,                setname: lusernet,                 family: [ debian ]  }
+- { name: aclock.app,                  setname: aclock,                   family: [ debuntu ]  }
+- { name: addresses-for-gnustep,       setname: addresses,                family: [ debuntu ]  }
+- { name: batmon.app,                  setname: batmon,                   family: [ debuntu ]  }
+- { name: camera.app,                  setname: camera,                   family: [ debuntu ]  }
+- { name: cenon.app,                   setname: cenon,                    family: [ debuntu ]  }
+- { name: charmap.app,                 setname: charmap,                  family: [ debuntu ]  }
+- { name: cynthiune.app,               setname: cynthiune,                family: [ debuntu ]  }
+- { name: edenmath.app,                setname: edenmath,                 family: [ debuntu ]  }
+- { name: gomoku.app,                  setname: gomoku,                   family: [ debuntu ]  }
+- { name: gorm.app,                    setname: gorm,                     family: [ debuntu ]  }
+- { name: grr.app,                     setname: grr,                      family: [ debuntu ]  }
+- { name: gtamsanalyzer.app,           setname: gtamsanalyzer,            family: [ debuntu ]  }
+- { name: helpviewer.app,              setname: helpviewer,               family: [ debuntu ]  }
+- { name: lusernet.app,                setname: lusernet,                 family: [ debuntu ]  }
 - { name: mixer_app,                   setname: mixer.app,                family: [ gentoo ]  }
-- { name: mpdcon.app,                  setname: mpdcon,                   family: [ debian ]  }
-- { name: paje.app,                    setname: paje,                     family: [ debian ]  }
-- { name: plopfolio.app,               setname: plopfolio,                family: [ debian ]  }
-- { name: poe.app,                     setname: poe,                      family: [ debian ]  }
-- { name: preview.app,                 setname: preview,                  family: [ debian ]  }
-- { name: price.app,                   setname: price,                    family: [ debian ]  }
-- { name: projectcenter.app,           setname: projectcenter,            family: [ debian ]  }
-- { name: systempreferences.app,       setname: systempreferences,        family: [ debian ]  }
+- { name: mpdcon.app,                  setname: mpdcon,                   family: [ debuntu ]  }
+- { name: paje.app,                    setname: paje,                     family: [ debuntu ]  }
+- { name: plopfolio.app,               setname: plopfolio,                family: [ debuntu ]  }
+- { name: poe.app,                     setname: poe,                      family: [ debuntu ]  }
+- { name: preview.app,                 setname: preview,                  family: [ debuntu ]  }
+- { name: price.app,                   setname: price,                    family: [ debuntu ]  }
+- { name: projectcenter.app,           setname: projectcenter,            family: [ debuntu ]  }
+- { name: systempreferences.app,       setname: systempreferences,        family: [ debuntu ]  }
 - { name: terminal,                    setname: terminal.app,             family: [ gentoo ]  }
-- { name: textedit.app,                setname: textedit,                 family: [ debian ]  }
-- { name: timemon.app,                 setname: timemon,                  family: [ debian ]  }
-- { name: wmppp.app,                   setname: wmppp,                    family: [ debian ]  }
+- { name: textedit.app,                setname: textedit,                 family: [ debuntu ]  }
+- { name: timemon.app,                 setname: timemon,                  family: [ debuntu ]  }
+- { name: wmppp.app,                   setname: wmppp,                    family: [ debuntu ]  }
 - { name: xscreensaver-app,            setname: xscreensaver.app,         family: [ gentoo ]  }
-- { name: zipper.app,                  setname: zipper,                   family: [ debian ]  }
+- { name: zipper.app,                  setname: zipper,                   family: [ debuntu ]  }
 
 # Ambiguous upstream package names, careful!
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
 - { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
 - { name: dragon,                      setname: dragon-scannerparser,     family: [ freebsd ] }
 - { name: dragon,                      setname: dragon-player                                }
-- { name: pacman,                      setname: pacman-game,              family: [ debian ] } # package manager vs. some game
+- { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
 - { name: docker,                      setname: docker-tray,              family: gentoo, category: x11-plugins }
 - { name: crystal,                     setname: crystal-lang,             family: [ arch, freshcode ] }
 - { name: crystal,                     setname: crystal-lang,             family: gentoo, category: dev-lang }
@@ -573,7 +573,7 @@
 # - texlive
 
 # Merge some single-source plugin, i10n, l18n sets
-- { namepat: "archipel-agent-.*",      setname: "archipel-agents", family: [ debian ] }
+- { namepat: "archipel-agent-.*",      setname: "archipel-agents", family: [ debuntu ] }
 - { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", family: [ openbsd ] }
 - { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", family: [ openbsd ] }
 - { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", family: [ openbsd, arch ] }
@@ -587,24 +587,24 @@
 - { namepat: "gimp-docs-.*",           setname: "gimp-docs", family: [ pkgsrc ] }
 - { namepat: "gimp-help-.*",           setname: "gimp-help", family: [ arch ] }
 - { namepat: "kde-i18n-.*",            setname: "kde-i18n", family: [ openbsd, pkgsrc, gobolinux ] }
-- { namepat: "kde-l10n-.*",            setname: "kde-l10n", family: [ openbsd, arch, debian, gobolinux ] }
+- { namepat: "kde-l10n-.*",            setname: "kde-l10n", family: [ openbsd, arch, debuntu, gobolinux ] }
 - { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", family: [ pkgsrc ] }
 - { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", family: [ freebsd ] }
 - { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", family: [ pkgsrc ] }
 - { namepat: "kompozer-i18n-.*",       setname: "kompozer-i18n", family: [ arch ] }
-- { namepat: "language-pack-gnome-.*", setname: "language-pack-gnome", family: [ debian ] }
-- { namepat: "language-pack-kde-.*",   setname: "language-pack-kde", family: [ debian ] }
+- { namepat: "language-pack-gnome-.*", setname: "language-pack-gnome", family: [ debuntu ] }
+- { namepat: "language-pack-kde-.*",   setname: "language-pack-kde", family: [ debuntu ] }
 - { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", family: [ arch ] }
 - { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", family: [ openbsd ] }
 - { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", family: [ arch ] }
 - { namepat: "[^-]+-libreoffice",      setname: "libreoffice-i18n", family: [ freebsd ] }
-- { namepat: "mgltools-.*",            setname: "mgltools", family: [ debian ] }
+- { namepat: "mgltools-.*",            setname: "mgltools", family: [ debuntu ] }
 - { namepat: "mozilla-dicts-.*",       setname: "mozilla-dicts", family: [ openbsd ] }
 - { namepat: "netbeans-.*",            setname: "netbeans", family: [ gentoo ] }
 - { namepat: "opensmtpd-extras-.*",    setname: "opensmtpd-extras", family: [ freebsd, openbsd ] }
 - { namepat: "seamonkey-i18n-.*",      setname: "seamonkey-i18n", family: [ openbsd ] }
 - { namepat: "(squirrelmail-.*)-plugin", setname: "$1", family: [ freebsd ] }
-- { namepat: "tesseract-.*",           setname: "tesseract-data", family: [ openbsd, debian ] }
+- { namepat: "tesseract-.*",           setname: "tesseract-data", family: [ openbsd, debuntu ] }
 - { namepat: "tesseract-data-.*",      setname: "tesseract-data", family: [ arch ] }
 - { namepat: "texlive-documentation-.*", setname: "texlive-documentation", family: [ gentoo ] }
 - { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", family: [ openbsd, arch ] }
@@ -623,7 +623,7 @@
 # Note that Gentoo misbehaves by changing upstream versioning scheme, so
 # we ignore it in comparison
 - { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "lib(.*)-perl",           setname: "perl:$1", family: [ debian ] }
+- { namepat: "lib(.*)-perl",           setname: "perl:$1", family: [ debuntu ] }
 - { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa ] }
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
@@ -649,52 +649,52 @@
 - { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below
 
 # Ruby
-- { namepat: "ruby-(.*)",              setname: "ruby:$1", family: [ debian, arch, fedora, mageia, sisyphus, guix ] }
+- { namepat: "ruby-(.*)",              setname: "ruby:$1", family: [ debuntu, arch, fedora, mageia, sisyphus, guix ] }
 - { namepat: "rubygem-(.*)",           setname: "ruby:$1", family: [ freebsd, fedora, opensuse, slackbuilds, rosa ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", family: [ freebsd, openbsd, pkgsrc ] }
 - { family: [ rubygems ],              setname: "ruby:$0" }
-- { namepat: "lib(.*)-ruby",           setname: "ruby:$1", family: [ debian ] } # old Ubuntu Precise
+- { namepat: "lib(.*)-ruby",           setname: "ruby:$1", family: [ debuntu ] } # old Ubuntu Precise
 - { category: dev-ruby,                setname: "ruby:$0", family: [ gentoo ] }
 
 # Tryton (wtf is that); needs to be before python
 - { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$1", family: [ pkgsrc ] }
 - { namepat: "trytond28_(.*)",         setname: "tryton:$1", family: [ freebsd ] }
-- { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", family: [ debian ] }
+- { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", family: [ debuntu ] }
 - { namepat: "trytond-module-(.*)",    setname: "tryton:$1", family: [ openbsd ] }
 
 # Zope; needs to be before python
 - { namepat: "py[0-9][0-9]-zope\\.(.*)", setname: "zope:$1", family: [ freebsd ] }
-- { namepat: "zope\\.(.*)",              setname: "zope:$1", family: [ debian, slackbuilds ] }
+- { namepat: "zope\\.(.*)",              setname: "zope:$1", family: [ debuntu, slackbuilds ] }
 
 # Python modules
 - { family: [ pypi ],                setname: "python:$0" }
 # some rules may merge modules for different python version into single entry; this is intended
 - { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", family: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", family: [ openbsd ] }
-- { namepat: "python-(.*)",            setname: "python:$1", family: [ debian, centos, mageia, gobolinux ] }
+- { namepat: "python-(.*)",            setname: "python:$1", family: [ debuntu, centos, mageia, gobolinux ] }
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", family: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch, guix ] }
 - { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds, rosa ] }
 - { category: dev-python,              setname: "python:$0", family: [ gentoo ] }
 
 # R libs
-- { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debian ] }
+- { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu ] }
 - { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix ] }
 
 # Nodejs
-- { namepat: "node-(.*)",              setname: "r:$1", family: [ debian ] }
+- { namepat: "node-(.*)",              setname: "r:$1", family: [ debuntu ] }
 - { namepat: "nodejs-(.*)",            setname: "r:$1", family: [ fedora, mageia, arch ] }
 
 # ROS
 - { category: dev-ros,                 setname: "ros:$0", family: [ gentoo ] }
-- { namepat: "ros-(.*)",               setname: "ros:$1", family: [ debian, arch ] }
+- { namepat: "ros-(.*)",               setname: "ros:$1", family: [ debuntu, arch ] }
 
 # VDR
-- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", family: [ freebsd, debian, mageia, opensuse ] }
+- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", family: [ freebsd, debuntu, mageia, opensuse ] }
 - { namepat: "vdr-(.*)",               setname: "vdr:$1", family: [ gentoo, fedora ] }
 
 # Haskell
-- { namepat: "haskell-(.*)",           setname: "haskell:$1", family: [ debian, arch, slackbuilds, gobolinux ] }
+- { namepat: "haskell-(.*)",           setname: "haskell:$1", family: [ debuntu, arch, slackbuilds, gobolinux ] }
 - { namepat: "hs-(.*)",                setname: "haskell:$1", family: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora, guix ] }
 - { category: dev-haskell,             setname: "haskell:$0", family: [ gentoo ] }
@@ -710,18 +710,18 @@
 
 # lua
 - { namepat: ".*luassert",             setname: "lua:luassert", last: true } # save
-- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", family: [ freebsd, pkgsrc, openbsd, arch, debian, fedora, mageia, opensuse, gobolinux ] }
+- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", family: [ freebsd, pkgsrc, openbsd, arch, debuntu, fedora, mageia, opensuse, gobolinux ] }
 - { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", family: [ openbsd ] }
 - { category: dev-lua, name: luabitop, setname: "lua:bitop", last: true, family: [ gentoo ] }
 - { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", family: [ gentoo ] }
 
 # octave
 - { namepat: "octave-forge-(.*)",      setname: "octave:$1", family: [ freebsd, opensuse ] }
-- { namepat: "octave-(.*)",            setname: "octave:$1", family: [ debian, sisyphus, fedora, arch ] }
+- { namepat: "octave-(.*)",            setname: "octave:$1", family: [ debuntu, sisyphus, fedora, arch ] }
 
 # xorg drivers
 - { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", family: [ freebsd, gentoo, pkgsrc, arch, opensuse, gobolinux, guix ] }
-- { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", family: [ debian ] }
+- { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", family: [ debuntu ] }
 
 # php
 - { category: dev-php, namepat: "(?:pear-|pecl-|php-)+(.*?)", setname: "php:$1", tolowername: true, replaceinname: { "_": "-" }, last: true, family: [ gentoo ] }
@@ -729,12 +729,12 @@
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", family: [ freebsd, pkgsrc, openbsd, sisyphus ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", family: [ freebsd, pkgsrc, mageia ] }
 - { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", family: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "php-(.*)",               setname: "php:$1", family: [ arch, fedora, debian, slackbuilds ] }
+- { namepat: "php-(.*)",               setname: "php:$1", family: [ arch, fedora, debuntu, slackbuilds ] }
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ sisyphus ], "ignorever": true }
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ opensuse ] }
 
 # gstreamer plugins
-- { namepat: "gst-plugins-(.*)",       setname: "gstreamer1plugins:$1", family: [ gentoo, debian ] }
+- { namepat: "gst-plugins-(.*)",       setname: "gstreamer1plugins:$1", family: [ gentoo, debuntu ] }
 - { namepat: "gst-plugins0.10-(.*)",   setname: "gstreamer0plugins:$1" }
 - { namepat: "gstreamer-?0[_.]10-(?:plugins-)?(.*)", setname: "gstreamer0plugins:$1" }
 - { namepat: "gst-plugins1-(.*)",      setname: "gstreamer1plugins:$1" }
@@ -746,7 +746,7 @@
 # Apache modules
 - { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", family: [ freebsd, openbsd, pkgsrc ] }
 - { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", family: [ gentoo ] }
-- { namepat: "mod-(.*)",               setname: "apmod:$1", family: [ debian ] }
+- { namepat: "mod-(.*)",               setname: "apmod:$1", family: [ debuntu ] }
 - { namepat: "mod_(.*)",               setname: "apmod:$1", family: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos, gobolinux ] }
 - { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1" }
 - { namepat: "apache2?-mod_(.*)",      setname: "apmod:$1" }
@@ -773,7 +773,7 @@
 
 # fonts
 - { namepat: "font-manager",           last: true }
-- { namepat: "x?fonts-(.*)",           setname: "fonts:$1", family: [ debian ] }
+- { namepat: "x?fonts-(.*)",           setname: "fonts:$1", family: [ debuntu ] }
 #- family: [ freebsd ] # strange version mismatches
 #  namepat: "xorg-fonts-(.*)"
 #  setname: "xfonts:$1"
@@ -787,15 +787,15 @@
 
 # fortunes
 - { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1", family: [ gentoo ] }
-- { namepat: "fortunes-(.*)",          setname: "fortunes:$1", family: [ debian, pkgsrc, sisyphus ] }
+- { namepat: "fortunes-(.*)",          setname: "fortunes:$1", family: [ debuntu, pkgsrc, sisyphus ] }
 
 # cursors
-- { namepat: "(.*)-cursor-theme",      setname: "cursors:$1", family: [ debian ] }
+- { namepat: "(.*)-cursor-theme",      setname: "cursors:$1", family: [ debuntu ] }
 - { namepat: "(.*)-xcursors",          setname: "cursors:$1", family: [ gentoo ] }
 - { namepat: "cursor-(.*)",            setname: "cursors:$1", family: [ freebsd ] }
 
 # x11 protos
-- { namepat: "x11proto-(.*)",          setname: "$1proto", family: [ debian ] }
+- { namepat: "x11proto-(.*)",          setname: "$1proto", family: [ debuntu ] }
 
 # fusefs
 - { namepat: "fuse-emulator.*",        tolowername: true, replaceinname: { "_": "-" }, last: true } # protect from the next rule, has nothing to do with fusefs
