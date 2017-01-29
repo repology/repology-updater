@@ -113,7 +113,7 @@ class MetapackageRequest:
         self.namebound = name
         self.nameorder = 'DESC'
 
-    def NameSubsting(self, substring):
+    def NameSubstring(self, substring):
         if self.name_substring:
             raise RuntimeError("duplicate effname substring condition")
         self.name_substring = substring
