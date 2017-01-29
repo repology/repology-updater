@@ -123,15 +123,16 @@ class TestFlask(unittest.TestCase):
     def test_metapackages(self):
         self.checkurl_html('/metapackages/', has=['kiconvtool', '0.97'])
 
-        self.checkurl_html('/metapackages/all/', has=['kiconvtool'])
-        self.checkurl_html('/metapackages/all/k/', has=['kiconvtool'])
-        self.checkurl_html('/metapackages/all/>k/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/all/', has=['kiconvtool', 'chromium-bsu'])
+        self.checkurl_html('/metapackages/all/?search=iconv', has=['kiconvtool'], hasnot=['chromium-bsu'])
+        self.checkurl_html('/metapackages/all/k/', has=['kiconvtool'], hasnot=['chromium-bsu'])
+        self.checkurl_html('/metapackages/all/>k/', has=['kiconvtool'], hasnot=['chromium-bsu'])
         self.checkurl_html('/metapackages/all/<l/', has=['kiconvtool'])
         self.checkurl_html('/metapackages/all/l/', hasnot=['kiconvtool'])
         self.checkurl_html('/metapackages/all/<kiconvtool/', hasnot=['kiconvtool'])
         self.checkurl_html('/metapackages/all/>kiconvtool/', hasnot=['kiconvtool'])
 
-        self.checkurl_html('/metapackages/in-repo/freebsd/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/in-repo/freebsd/', has=['kiconvtool'], hasnot=['chromium-bsu'])
 
         self.checkurl_html('/metapackages/not-in-repo/freebsd/', has=['chromium-bsu', 'zlib'], hasnot=['kiconvtool'])
 
@@ -139,7 +140,7 @@ class TestFlask(unittest.TestCase):
 
         self.checkurl_html('/metapackages/unique/', has=['kiconvtool'])
 
-        self.checkurl_html('/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
+        self.checkurl_html('/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'], hasnot=['chromium-bsu'])
 
         # special cases: check fallback code for going before first or after last entry
         self.checkurl_html('/metapackages/all/<0/', has=['kiconvtool'])
@@ -165,8 +166,8 @@ class TestFlask(unittest.TestCase):
     def test_api_v1_metapackages(self):
         self.checkurl_json('/api/v1/metapackages/', has=['kiconvtool', '0.97'])
 
-        self.checkurl_json('/api/v1/metapackages/all/', has=['kiconvtool'])
-        self.checkurl_json('/api/v1/metapackages/all/k/', has=['kiconvtool'])
+        self.checkurl_json('/api/v1/metapackages/all/', has=['kiconvtool', 'chromium-bsu'])
+        self.checkurl_json('/api/v1/metapackages/all/k/', has=['kiconvtool'], hasnot=['chromium-bsu'])
         self.checkurl_json('/api/v1/metapackages/all/>k/', has=['kiconvtool'])
         self.checkurl_json('/api/v1/metapackages/all/<l/', has=['kiconvtool'])
         self.checkurl_json('/api/v1/metapackages/all/l/', hasnot=['kiconvtool'])
