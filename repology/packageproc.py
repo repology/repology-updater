@@ -116,18 +116,20 @@ def PackagesetToFamilies(packages):
 
 
 def PackagesetAggregateByVersions(packages):
-    versions = []
-
+    versions = {}
     for package in packages:
-        if versions and versions[-1]['version'] == package.version and versions[-1]['versionclass'] == package.versionclass:
-            versions[-1]['packages'].append(package)
-        else:
-            versions.append(
-                {
-                    'version': package.version,
-                    'versionclass': package.versionclass,
-                    'packages': [package],
-                }
-            )
+        key = (package.version, package.versionclass)
+        if key not in versions:
+            versions[key] = []
+        versions[key].append(package)
 
-    return versions
+    def key_cmp_reverse(v1, v2):
+        return VersionCompare(v2[0], v1[0])
+
+    return [
+        {
+            'version': key[0],
+            'versionclass': key[1],
+            'packages': versions[key]
+        } for key in sorted(versions.keys(), key=cmp_to_key(key_cmp_reverse))
+    ]
