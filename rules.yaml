@@ -44,6 +44,7 @@
 - { name: atkmm1.6,                    setname: atk,                      family: [ debian ]  }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: aws-cli,                     setname: awscli                    }
+- { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            family: [ freebsd ] }
@@ -129,6 +130,7 @@
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
+- { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              family: [ freebsd ] }
@@ -269,12 +271,21 @@
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       family: [ sisyphus ], ignorever: true }
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
+- { name: i7z,                         verlonger: 3,                                         ignorever: true } # 0.27.2.git1 @ Arch
+- { name: i7z,                         ver: "93",                        family: [ gentoo ], ignorever: true } # Snapshot version, based on svn r93
+- { name: libfaketime,                 verpat: ".*201[67].*",                                ignorever: true } # FreeBSD is using git snapshot
+- { name: kbuild,                      verlonger: 3,                                         ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
+- { name: kbuild,                      verpat: ".*[rs].*",                                   ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
+- { name: ksh,                         ver: "20120801",                  family: [ fedora ], ignorever: true }
 - { name: opencity,                    ver: "0.0.6.5stable",                                 ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
+- { name: open-vm-tools,               verpat: "^[0-9]*",                                    ignorever: true } # FreeBSD is using some kind of snapshot; Others are using versions with dots
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                                ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                      ignorever: true }
+- { name: tt-rss,                      verpat: "r|201[67]",                                  ignorever: true } # Kind of snapshot release
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
+- { name: xl2tpd,                      verpat: "^[0-9]*",                                    ignorever: true } # pkgsrc is using some kind of snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
