@@ -52,7 +52,7 @@ class AndQuery(Query):
     def GetQuery(self):
         if not self.parts:
             return None
-        return ' AND '.join(map(lambda x: '('+x+')', filter(None.__ne__, self.parts)))
+        return ' AND '.join(map(lambda x: '(' + x + ')', filter(None.__ne__, self.parts)))
 
 
 class OrQuery(Query):
@@ -62,7 +62,7 @@ class OrQuery(Query):
     def GetQuery(self):
         if not self.parts:
             return None
-        return ' OR '.join(map(lambda x: '('+x+')', filter(None.__ne__, self.parts)))
+        return ' OR '.join(map(lambda x: '(' + x + ')', filter(None.__ne__, self.parts)))
 
 
 class MetapackageRequest:
@@ -138,7 +138,7 @@ class MetapackageRequest:
     def InAnyRepo(self, repos):
         if self.repos:
             for currentrepo in self.repos:
-                if not currentrepo in repos:
+                if currentrepo not in repos:
                     raise RuntimeError("duplicate repository condition")
         else:
             self.repos = set(repos)
