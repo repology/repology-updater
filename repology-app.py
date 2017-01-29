@@ -373,10 +373,10 @@ def metapackage_information(name):
         for download in package.downloads:
             append_info('downloads', download, package)
 
-    versions = PackagesetAggregateByVersions(PackagesetSortByVersions(packages))
+    versions = PackagesetAggregateByVersions(packages)
 
     for version in versions:
-        version['families'] = set([package.family for package in version['packages']])
+        version['families'] = list(sorted(PackagesetToFamilies(version['packages'])))
 
     return flask.render_template(
         "metapackage-information.html",
