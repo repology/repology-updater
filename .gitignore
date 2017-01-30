@@ -1,5 +1,6 @@
-_state
 __pycache__
+_state
 helpers/rpmcat/rpmcat
-testdata/*.packages
 repology.conf
+static/*.gz
+testdata/*.packages

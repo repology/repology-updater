@@ -4,13 +4,25 @@ CFLAGS+=	-Wall -Wextra
 CPPFLAGS+=	`pkg-config --cflags rpm`
 LDFLAGS+=	`pkg-config --libs rpm`
 
-all: helpers/rpmcat/rpmcat
+all: helpers/rpmcat/rpmcat gzip-static
+
+gzip-static: static/bootstrap.min.css.gz static/bootstrap.min.js.gz static/jquery-3.1.1.min.js.gz
+
+static/bootstrap.min.css.gz: static/bootstrap.min.css
+	gzip -9 < static/bootstrap.min.css > static/bootstrap.min.css.gz
+
+static/bootstrap.min.js.gz: static/bootstrap.min.js
+	gzip -9 < static/bootstrap.min.js > static/bootstrap.min.js.gz
+
+static/jquery-3.1.1.min.js.gz: static/jquery-3.1.1.min.js
+	gzip -9 < static/jquery-3.1.1.min.js > static/jquery-3.1.1.min.js.gz
 
 helpers/rpmcat/rpmcat: helpers/rpmcat/rpmcat.c
 	${CC} helpers/rpmcat/rpmcat.c -o helpers/rpmcat/rpmcat ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}
 
 clean:
-	rm helpers/rpmcat/rpmcat
+	rm -f helpers/rpmcat/rpmcat
+	rm -f static/*.gz
 
 test::
 	python3 -m unittest discover
