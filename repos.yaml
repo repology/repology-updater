@@ -22,7 +22,7 @@
       url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
     - desc: Related bugs in FreeBSD bugzilla
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
-  tags: [ all, have_testdata, production ]
+  tags: [ all, production, have_testdata ]
 
 - name: dports
   desc: DPorts
@@ -47,7 +47,7 @@
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
     - desc: Synth build log
       url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{name}.log'
-  tags: [ all, preproduction ]
+  tags: [ all, production ]
 
 - name: pkgsrc
   desc: pkgsrc
@@ -105,7 +105,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/{name}'
-  tags: [ all, debian ]
+  tags: [ all, production, debian ]
 
 - name: debian_stable_backports
   desc: Debian Stable Backports
@@ -130,7 +130,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/{name}'
-  tags: [ all, debian ]
+  tags: [ all, production, debian ]
 
 - name: debian_testing
   desc: Debian Testing
@@ -155,7 +155,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/{name}'
-  tags: [ all, debian ]
+  tags: [ all, production, debian ]
 
 - name: debian_unstable
   desc: Debian Unstable
@@ -180,7 +180,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}'
-  tags: [ all, have_testdata, debian, production ]
+  tags: [ all, production, debian, have_testdata ]
 
 - name: debian_experimental
   desc: Debian Experimental
@@ -205,7 +205,7 @@
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/{name}'
-  tags: [ all, preproduction, debian ]
+  tags: [ all, production, debian ]
 
 ###########################################################################
 # Ubuntu
@@ -238,7 +238,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/precise/{name}'
-  tags: [ all, ubuntu ]
+  tags: [ all, production, ubuntu ]
 
 - name: ubuntu_trusty
   desc: Ubuntu Trusty
@@ -268,7 +268,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/trusty/{name}'
-  tags: [ all, ubuntu ]
+  tags: [ all, production, ubuntu ]
 
 - name: ubuntu_xenial
   desc: Ubuntu Xenial
@@ -298,7 +298,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/xenial/{name}'
-  tags: [ all, ubuntu ]
+  tags: [ all, production, ubuntu ]
 
 - name: ubuntu_yakkety
   desc: Ubuntu Yakkety
@@ -328,7 +328,7 @@
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/yakkety/{name}'
-  tags: [ all, ubuntu ]
+  tags: [ all, production, ubuntu ]
 
 - name: ubuntu_zesty
   desc: Ubuntu Zesty
@@ -378,7 +378,7 @@
       url: 'https://packages.gentoo.org/packages/{category}/{name}'
     - desc: View ebuild
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{origversion}.ebuild'
-  tags: [ all, have_testdata, production ]
+  tags: [ all, production, have_testdata ]
 
 ###########################################################################
 # Arch & AUR
@@ -406,7 +406,7 @@
       # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
       # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
       url: 'https://www.archlinux.org/packages/?sort=&q={name}'
-  tags: [ all, have_testdata, production ]
+  tags: [ all, production, have_testdata ]
 
 - name: aur
   desc: AUR
@@ -424,7 +424,7 @@
       url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={name}'
     - desc: ArchWiki search
       url: 'https://wiki.archlinux.org/index.php/Special:Search?search={name}'
-  tags: [ all, preproduction ]
+  tags: [ all, production ]
 
 ###########################################################################
 # Fedora
@@ -441,7 +441,7 @@
   links:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
-  tags: [ all, fedora, rpm ]
+  tags: [ all, production, fedora, rpm ]
 
 - name: fedora_25
   desc: Fedora 25
@@ -455,7 +455,7 @@
   links:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
-  tags: [ all, fedora, rpm ]
+  tags: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
   desc: Fedora Rawhide
@@ -490,7 +490,8 @@
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/6/package/{name}/'
-  tags: [ all, centos, rpm ]
+  tags: [ all, production, centos, rpm ]
+
 - name: centos_7
   desc: CentOS 7
   url: http://centos-packages.com/
@@ -507,7 +508,7 @@
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/7/package/{name}/'
-  tags: [ all, preproduction, centos, rpm ]
+  tags: [ all, production, centos, rpm ]
 
 ###########################################################################
 # Mageia
@@ -524,7 +525,7 @@
   links:
     - desc: Package details on madb.mageia.org
       url: 'https://madb.mageia.org/package/show/name/{name}'
-  tags: [ all, mageia, rpm ]
+  tags: [ all, production, mageia, rpm ]
 
 - name: mageia_cauldron
   desc: Mageia Cauldron
@@ -633,7 +634,7 @@
       parser: RosaInfoXml
       url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/restricted/updates/media_info/info.xml.lzma
       compression: xz
-  tags: [ all, preproduction, rosa ]
+  tags: [ all, production, rosa ]
 
 ###########################################################################
 # Gobolinux
@@ -650,7 +651,7 @@
   links:
     - desc: Git
       url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}'
-  tags: [ all, have_testdata, preproduction ]
+  tags: [ all, production, have_testdata ]
 
 ###########################################################################
 # YACP (Yet Another Cygwin Ports)
@@ -667,7 +668,7 @@
   links:
     - desc: Git
       url: 'https://github.com/fd00/yacp/tree/master/{name}'
-  tags: [ all, preproduction ]
+  tags: [ all, production ]
 
 ###########################################################################
 # GNU Guix
@@ -681,7 +682,7 @@
       fetcher: Guix
       parser: Guix
       url: https://www.gnu.org/software/guix/packages/
-  tags: [ all, preproduction ]
+  tags: [ all, production ]
 
 ###########################################################################
 # SlackBuilds
@@ -716,7 +717,7 @@
   links:
     - desc: freshcode.club page
       url: 'http://freshcode.club/projects/{name}'
-  tags: [ all, preproduction ]
+  tags: [ all, production ]
 
 - name: libregamewiki
   desc: Libregamewiki
@@ -730,7 +731,7 @@
   links:
     - desc: Libregamewiki entry
       url: 'https://libregamewiki.org/{name}'
-  tags: [ all, preproduction ]
+  tags: [ all, production ]
 
 ###########################################################################
 # Upstream module collections: CPAN, PyPi
@@ -749,7 +750,7 @@
   links:
     - desc: CPAN page
       url: 'http://search.cpan.org/dist/{name}'
-  tags: [ all, have_testdata, preproduction ]
+  tags: [ all, production, have_testdata ]
 
 - name: pypi
   desc: PyPi
@@ -764,7 +765,7 @@
   links:
     - desc: PyPi page
       url: 'https://pypi.python.org/pypi/{name}/'
-  tags: [ all, preproduction ]
+  tags: [ all, production ]
 
 - name: rubygems
   desc: RubyGems
@@ -780,7 +781,7 @@
   links:
     - desc: RubyGems page
       url: 'https://www.rubygems.org/gems/{name}/'
-  tags: [ all, preproduction ]
+  tags: [ all, production ]
 
 ###########################################################################
 # Foreign repos (android, windows)
@@ -796,7 +797,7 @@
       url: https://f-droid.org/repo/index.xml
   # XXX: link requires java class O_o
   shadow: true
-  tags: [ all ]
+  tags: [ all, production ]
 
 - name: chocolatey
   desc: Chocolatey
@@ -811,4 +812,4 @@
   links:
     - desc: Chocolatey package page
       url: 'https://chocolatey.org/packages/{name}'
-  tags: [ all ]
+  tags: [ all, production ]
