@@ -942,7 +942,7 @@ class Database:
                 homepage,
                 now()
             FROM packages
-            WHERE homepage IS NOT NULL
+            WHERE homepage IS NOT NULL AND homepage LIKE 'http%%' AND repo NOT IN('cpan', 'pypi', 'rubygems')
             ON CONFLICT (url)
             DO UPDATE SET
                 last_extracted = now()
