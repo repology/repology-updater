@@ -263,30 +263,31 @@
 # - fira* (font)
 
 # Version ignores, incompatible version mangling in the repositories
-- { name: aalib,                       verlonger: 3,                                         ignorever: true } # 1.4.0.5 @ pkgsrc
-- { name: apr,                         verlonger: 3,                                         ignorever: true } # FreeBSD
+- { name: aalib,                       verlonger: 3,                                       ignorever: true } # 1.4.0.5 @ pkgsrc
+- { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
+- { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
-- { name: biniax2,                     ver: "2.1.30",                                        ignorever: true } # 2 is not part of the version
-- { name: cryptcat,                    ver: "20031202",                                      ignorever: true }
+- { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
+- { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       family: [ sisyphus ], ignorever: true }
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
-- { name: i7z,                         verlonger: 3,                                         ignorever: true } # 0.27.2.git1 @ Arch
-- { name: i7z,                         ver: "93",                        family: [ gentoo ], ignorever: true } # Snapshot version, based on svn r93
-- { name: libfaketime,                 verpat: ".*201[67].*",                                ignorever: true } # FreeBSD is using git snapshot
-- { name: kbuild,                      verlonger: 3,                                         ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
-- { name: kbuild,                      verpat: ".*[rs].*",                                   ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
-- { name: opencity,                    ver: "0.0.6.5stable",                                 ignorever: true } # 0.0.6.5; "stable" is not a part of the version
-- { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
-- { name: openxcom,                    verpat: "2016.*",                                     ignorever: true } # git snapshots
-- { name: p5-catalyst-plugin-authentication, ver: "0.100230",                                ignorever: true }
-- { name: p5-device-serialport,        ver: "1.040000",                                      ignorever: true }
-- { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
-- { name: xl2tpd,                      ver: "20140214",                                      ignorever: true } # pkgsrc is using snapshot; Others are using versions with dots
-- { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
-- { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
+- { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
+- { name: i7z,                         ver: "93",                    family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
+- { name: kbuild,                      verlonger: 3,                                       ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
+- { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
+- { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
+- { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
+- { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
+- { name: openxcom,                    verpat: "2016.*",                                   ignorever: true } # git snapshots
+- { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
+- { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
+- { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
+- { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
+- { name: xl2tpd,                      ver: "20140214",                                    ignorever: true } # pkgsrc is using snapshot; Others are using versions with dots
+- { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 
 # F-Droid is too alien, even if package names match in most cases it's entirely different application
 # So use whitelist
