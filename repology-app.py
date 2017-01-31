@@ -558,6 +558,9 @@ def graph_metapackages_for_repo(repo):
     for entry in history:
         entry['statistics'] = {repo['name']: repo for repo in entry['statistics']}
 
+        if not repo in entry['statistics']:
+            continue
+
         statistics = entry['statistics'][repo]
 
         for field in fields:
@@ -569,6 +572,9 @@ def graph_metapackages_for_repo(repo):
         datapoint = {
             'pos': entry['timedelta'].total_seconds() / period,
         }
+
+        if not repo in entry['statistics']:
+            continue
 
         statistics = entry['statistics'][repo]
         for field in fields:
