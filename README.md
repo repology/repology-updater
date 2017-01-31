@@ -58,6 +58,7 @@ version are always parsed.
 | OpenBSD                          | ✔       | ✔       | ✔     |     |         |          |
 | pkgsrc                           | ✔       | ✔       | ✔     |     |         |          |
 | PyPi                             | ✔       |         |       | ✔   |         |          |
+| RubyGems                         |         |         |       |     |         |          |
 | SlackBuilds                      |         | ✔       | ✔     | ✔   |         | ✔        |
 | YACP                             |         |         |       |     |         |          |
 
