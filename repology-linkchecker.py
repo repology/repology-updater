@@ -31,9 +31,9 @@ from repology.logger import StderrLogger, FileLogger
 import repology.config
 
 
-def GetHTTPLinkStatus(url):
+def GetHTTPLinkStatus(url, timeout):
     try:
-        response = requests.head(url, allow_redirects=True, headers={'user-agent': "Repology link checker/0"})
+        response = requests.head(url, allow_redirects=True, headers={'user-agent': "Repology link checker/0"}, timeout=timeout)
 
         redirect = None
         size = None
@@ -69,7 +69,7 @@ def GetHTTPLinkStatus(url):
         return (url, Database.linkcheck_status_unknown_error, None, None, None)
 
 
-def GetLinkStatuses(urls, delay):
+def GetLinkStatuses(urls, delay, timeout):
     results = []
     prev_host = None
     for url in urls:
@@ -82,7 +82,7 @@ def GetLinkStatuses(urls, delay):
         if host and host == prev_host:
             time.sleep(delay)
 
-        results.append(GetHTTPLinkStatus(url))
+        results.append(GetHTTPLinkStatus(url, timeout))
 
         prev_host = host
 
@@ -103,7 +103,7 @@ def LinkProcessorWorker(queue, workerid, options, logger):
             return
 
         logger.Log("Processing {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
-        for result in GetLinkStatuses(pack, delay=options.delay):
+        for result in GetLinkStatuses(pack, delay=options.delay, timeout=options.timeout):
             url, status, redirect, size, location = result
             database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
 
@@ -116,7 +116,7 @@ def Main():
     parser.add_argument('--dsn', default=repology.config.DSN, help='database connection params')
     parser.add_argument('--logfile', help='path to log file (log to stderr by default)')
 
-    parser.add_argument('--timeout', type=int, default=60, help='timeout for link requests in seconds')
+    parser.add_argument('--timeout', type=float, default=60.0, help='timeout for link requests in seconds')
     parser.add_argument('--delay', type=float, default=3.0, help='delay between requests to one host')
     parser.add_argument('--age', type=int, default=365, help='min age for recheck in days')
     parser.add_argument('--packsize', type=int, default=128, help='pack size for link processing')
