@@ -558,7 +558,7 @@ def graph_metapackages_for_repo(repo):
     for entry in history:
         entry['statistics'] = {repo['name']: repo for repo in entry['statistics']}
 
-        if not repo in entry['statistics']:
+        if repo not in entry['statistics']:
             continue
 
         statistics = entry['statistics'][repo]
@@ -573,7 +573,7 @@ def graph_metapackages_for_repo(repo):
             'pos': entry['timedelta'].total_seconds() / period,
         }
 
-        if not repo in entry['statistics']:
+        if repo not in entry['statistics']:
             continue
 
         statistics = entry['statistics'][repo]
