@@ -240,21 +240,11 @@ class Database:
         self.cursor = self.db.cursor()
 
     def CreateSchema(self):
-        self.cursor.execute("""
-            DROP TABLE IF EXISTS packages CASCADE
-        """)
-
-        self.cursor.execute("""
-            DROP TABLE IF EXISTS repositories CASCADE
-        """)
-
-        self.cursor.execute("""
-            DROP TABLE IF EXISTS repositories_history CASCADE
-        """)
-
-        self.cursor.execute("""
-            DROP TABLE IF EXISTS links CASCADE
-        """)
+        self.cursor.execute("DROP TABLE IF EXISTS packages CASCADE")
+        self.cursor.execute("DROP TABLE IF EXISTS repositories CASCADE")
+        self.cursor.execute("DROP TABLE IF EXISTS repositories_history CASCADE")
+        self.cursor.execute("DROP TABLE IF EXISTS totals_history CASCADE")
+        self.cursor.execute("DROP TABLE IF EXISTS links CASCADE")
 
         self.cursor.execute("""
             CREATE TABLE packages (
