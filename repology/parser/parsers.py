@@ -39,3 +39,4 @@ from .dports import DPortsIndexParser
 from .libregamewiki import LibreGameWikiParser
 from .rosa import RosaInfoXmlParser
 from .nix import NixJsonParser
+from .aports import ApkIndexParser
