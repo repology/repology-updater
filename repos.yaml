@@ -687,8 +687,8 @@
 ###########################################################################
 # NixOS packages
 ###########################################################################
-- name: nix
-  desc: nixpkgs
+- name: nix_stable
+  desc: nixpkgs stable
   url: http://nixos.org/nixos/packages.html
   family: nix
   sources:
@@ -698,6 +698,18 @@
       url: https://nixos.org/nixpkgs/packages.json.gz
   # XXX: add urls
   tags: [ all, production ]
+
+- name: nix_unstable
+  desc: nixpkgs unstable
+  url: http://nixos.org/nixos/packages.html
+  family: nix
+  sources:
+    - name: nix
+      fetcher: File
+      parser: NixJson
+      url: https://nixos.org/nixpkgs/packages-unstable.json.gz
+  # XXX: add urls
+  tags: [ all ]
 
 ###########################################################################
 # SlackBuilds
