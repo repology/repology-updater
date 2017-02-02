@@ -43,6 +43,7 @@ version are always parsed.
 
 | Repository                       | Summary | Maint-r | Categ | WWW | License | Download |
 |----------------------------------|:-------:|:-------:|:-----:|:---:|:-------:|:--------:|
+| Alpine                           | ✔       | ✔       |       | ✔   | ✔       |          |
 | ALT Sisyphus                     | ✔       | ✔       | ✔     |     |         |          |
 | Arch                             | ✔       | ✔       |       | ✔   | ✔       |          |
 | CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔   | ✔       |          |
