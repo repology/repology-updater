@@ -685,6 +685,21 @@
   tags: [ all, production ]
 
 ###########################################################################
+# NixOS packages
+###########################################################################
+- name: nix
+  desc: nixpkgs
+  url: http://nixos.org/nixos/packages.html
+  family: nix
+  sources:
+    - name: nix
+      fetcher: File
+      parser: NixJson
+      url: https://nixos.org/nixpkgs/packages.json.gz
+  # XXX: add urls
+  tags: [ all, production ]
+
+###########################################################################
 # SlackBuilds
 ###########################################################################
 - name: slackbuilds

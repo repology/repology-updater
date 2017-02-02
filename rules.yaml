@@ -24,7 +24,7 @@
 - { name: acroread9,                   setname: acroread,                 family: [ pkgsrc ] }
 - { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     family: [ pkgsrc ] }
 - { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      family: [ pkgsrc ] }
-- { namepat: "aspell-dict-(.*)",       setname: "aspell-$1",              family: guix }
+- { namepat: "aspell-dict-(.*)",       setname: "aspell-$1",              family: [ guix, nix ] }
 - { name: actionaz,                    setname: actiona,                  family: [ chocolatey ] }
 - { name: activeio,                    setname: activemq-activeio,        family: [ fedora, sisyphus ] }
 - { name: adb,                         setname: android-tools,            family: [ openbsd ] }
@@ -265,6 +265,7 @@
 # Version ignores, incompatible version mangling in the repositories
 - { name: aalib,                       verlonger: 3,                                       ignorever: true } # 1.4.0.5 @ pkgsrc
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
+- { name: ack,                                                       family: mageia,       ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
@@ -626,7 +627,7 @@
 # we ignore it in comparison
 - { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", family: [ debuntu ] }
-- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa, nix ] }
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
   # Gentoo and Mageia shamelessly mangle perl module versions, ignore
@@ -779,6 +780,7 @@
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", family: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch, guix ] }
 - { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds, rosa ] }
+- { namepat: "python[0-9]\\.[0-9]-(.*)", setname: "python:$1", family: [ nix ] }
 - { category: dev-python,              setname: "python:$0", family: [ gentoo ] }
 
 # R libs
@@ -816,6 +818,7 @@
 - { namepat: ".*luassert",             setname: "lua:luassert", last: true } # save
 - { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", family: [ freebsd, pkgsrc, openbsd, arch, debuntu, fedora, mageia, opensuse, gobolinux ] }
 - { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", family: [ openbsd ] }
+- { namepat: "lua[0-9]\\.[0-9]-(?:lua)?(.+?)", setname: "lua:$1", family: [ nix ] }
 - { category: dev-lua, name: luabitop, setname: "lua:bitop", last: true, family: [ gentoo ] }
 - { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", family: [ gentoo ] }
 
@@ -824,7 +827,7 @@
 - { namepat: "octave-(.*)",            setname: "octave:$1", family: [ debuntu, sisyphus, fedora, arch ] }
 
 # xorg drivers
-- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", family: [ freebsd, gentoo, pkgsrc, arch, opensuse, gobolinux, guix ] }
+- { namepat: "xf86-((?:input|video)-.*)", setname: "xorg:$1", family: [ freebsd, gentoo, pkgsrc, arch, opensuse, gobolinux, guix, nix ] }
 - { namepat: "xserver-xorg-((?:input|video)-.*)", setname: "xorg:$1", family: [ debuntu ] }
 
 # php
@@ -883,7 +886,7 @@
 #  setname: "xfonts:$1"
 - { namepat: "(.*)-fonts",             setname: "fonts:$1", family: [ gentoo ] }
 - { namepat: "(.*)-ttf",               setname: "fonts:$1", family: [ pkgsrc ] }
-- { namepat: "font-(.*)",              setname: "fonts:$1", family: [ freebsd, gentoo, pkgsrc, arch, gobolinux, guix ] }
+- { namepat: "font-(.*)",              setname: "fonts:$1", family: [ freebsd, gentoo, pkgsrc, arch, gobolinux, guix, nix ] }
 - { name: cantarell,                   setname: "fonts:cantarell", family: [ gentoo ]  }
 - { name: cantarell-fonts,             setname: "fonts:cantarell", family: [ freebsd, pkgsrc, openbsd, arch ] }
 - { namepat: "fonts-ttf-(.*)",         setname: "fonts:$1", family: [ mageia, rosa ] }

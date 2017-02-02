@@ -55,6 +55,7 @@ version are always parsed.
 | Gentoo                           | ✔       | ✔       | ✔     | ✔   | ✔ (1)   | ✔ (1)    |
 | Guix                             | ✔       |         |       | ✔   | ✔       |          |
 | GoboLinux                        | ✔       |         |       | ✔   | ✔       |          |
+| nixpkgs                          | ✔       | ✔       |       | ✔   | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |     |         |          |
 | pkgsrc                           | ✔       | ✔       | ✔     |     |         |          |
 | PyPi                             | ✔       |         |       | ✔   |         |          |
