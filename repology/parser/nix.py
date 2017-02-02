@@ -26,15 +26,16 @@ from repology.util import GetMaintainers
 
 def ExtractLicenses(whatever):
     if isinstance(whatever, str):
-        return [ whatever ]
+        return [whatever]
     elif isinstance(whatever, list):
         return sum(map(ExtractLicenses, whatever), [])
     elif isinstance(whatever, dict) and 'spdxId' in whatever:
-        return [ whatever['spdxId'] ]
+        return [whatever['spdxId']]
     elif isinstance(whatever, dict) and 'fullName' in whatever:
-        return [ whatever['fullName'] ]
+        return [whatever['fullName']]
     else:
         raise RuntimeError("unparsable license info")
+
 
 class NixJsonParser():
     def __init__(self):
