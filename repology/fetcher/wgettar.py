@@ -22,7 +22,7 @@ from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
 
-class ArchDBFetcher():
+class WgetTarFetcher():
     def __init__(self, url):
         self.url = url
 

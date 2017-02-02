@@ -17,7 +17,7 @@
 
 from .file import FileFetcher
 from .git import GitFetcher
-from .arch import ArchDBFetcher
+from .wgettar import WgetTarFetcher
 from .aur import AURFetcher
 from .fedora import FedoraFetcher
 from .chocolatey import ChocolateyFetcher

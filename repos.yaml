@@ -389,15 +389,15 @@
   family: arch
   sources:
     - name: core
-      fetcher: ArchDB
+      fetcher: WgetTar
       parser: ArchDB
       url: http://delta.archlinux.fr/core/os/x86_64/core.db.tar.gz
     - name: extra
-      fetcher: ArchDB
+      fetcher: WgetTar
       parser: ArchDB
       url: http://delta.archlinux.fr/extra/os/x86_64/extra.db.tar.gz
     - name: community
-      fetcher: ArchDB
+      fetcher: WgetTar
       parser: ArchDB
       url: http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz
   links:
