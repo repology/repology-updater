@@ -281,6 +281,7 @@
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       family: [ sisyphus ], ignorever: true }
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
+- { name: ffmpeg,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
 - { name: i7z,                         ver: "93",                    family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
