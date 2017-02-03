@@ -268,6 +268,7 @@
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: ack,                                                       family: mageia,       ignorever: true }
+- { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
