@@ -732,7 +732,7 @@
 # Alpine Linux aports
 ###########################################################################
 - name: alpine_edge
-  desc: Alpine Edge
+  desc: Alpine Linux Edge
   url: https://pkgs.alpinelinux.org/packages
   family: alpine
   sources:
