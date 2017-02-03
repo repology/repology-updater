@@ -270,13 +270,13 @@
 - { name: ack,                                                       family: mageia,       ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
-- { name: att,                         verlonger: 3,                                       ignorever: true } # alt weirdness
+- { name: attr,                        verlonger: 3,                                       ignorever: true } # alt weirdness
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
 - { name: bison,                       verlonger: 3,                                       ignorever: true } # alt weirdness
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
-- { name: ckermit,                     ver: 302,                                           ignorever: true } # debian weirdness
+- { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       family: [ sisyphus ], ignorever: true }
