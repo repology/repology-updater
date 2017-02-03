@@ -42,7 +42,7 @@ class ApkIndexParser():
     def Parse(self, path):
         packages = []
 
-        with open(os.path.join(path, 'APKINDEX'), 'r') as apkindex:
+        with open(os.path.join(path, 'APKINDEX'), 'r', encoding='utf-8') as apkindex:
             state = {}
             for line in apkindex:
                 line = line.strip()
