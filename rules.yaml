@@ -43,6 +43,7 @@
 - { name: atk2mm,                      setname: atkmm,                    family: [ openbsd ]  }
 - { name: atkmm1.6,                    setname: atk,                      family: [ debuntu ]  }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
+- { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
 - { name: aws-cli,                     setname: awscli                    }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
@@ -121,6 +122,7 @@
 - { name: ja2,                         setname: ja2-stracciatella,        family: [ freebsd ] }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
+- { name: libarpack-ng,                setname: arpack-ng }
 - { name: libcheck,                    setname: check                     } # XXX: reverse?
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
