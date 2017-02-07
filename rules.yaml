@@ -279,6 +279,7 @@
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
+- { name: dhewm3,                      verpat: "2013.*",                                   ignorever: true }
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       family: [ sisyphus ], ignorever: true }
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
 - { name: ffmpeg,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey
@@ -289,11 +290,14 @@
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
+- { name: nvidia-texture-tools,        ver: "1388",                                        ignorever: true } # nix; what the hell is this?
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openxcom,                    verpat: "2016.*",                                   ignorever: true } # git snapshots
+- { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
+- { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
