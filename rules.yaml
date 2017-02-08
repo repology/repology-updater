@@ -457,6 +457,8 @@
 
 - { name: enlightenment, verpat: "1\\.0.*", setname: enlightenment16 }
 
+- { name: [ geos1, geos35 ],           setname: geos }
+
 - { name: gitg, verpat: "0.*",         setname: gitg0 }
 
 - { namepat: "gmime[0-9]+",            setname: gmime }
