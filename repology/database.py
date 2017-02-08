@@ -856,12 +856,40 @@ class Database:
         return [ row[0] for row in self.cursor.fetchall() ]
 
     def GetMaintainerSimilarMaintainers(self, maintainer, limit=100):
+        # this obscure request needs some clarification
+        #
+        # what we calculate as score here is actually Jaccard index
+        # (see wikipedia) for two sets (of metapackages maintained by
+        # two maintainers)
+        #
+        # let M = set of metapackages for maintainer passed to this function
+        # let C = set of metapackages for other maintainer we test for similarity
+        #
+        # score = |M⋂C| / |M⋃C| = |M⋂C| / (|M| + |C| - |M⋂C|)
+        #
+        # - count(*) is number of common metapackages for both maintainers, e.g. |M⋂C|
+        # - min(num_metapackages) is number of metapackages for candidate maintainer |C|
+        #   we use min because we use GROUP BY and just need a group operation; since we
+        #   group by maintainer and join by maintainer, num_metapackages is the same
+        #   in all records, and we may pick min, max, avg, whatever
+        # - sub-select just gets |M|
+        # - the divisor is |M⋃C| = |M| + |C| - |M⋂C|
         self.cursor.execute(
             """
             SELECT
                 maintainer,
-                count(*) AS count
+                count(*) AS count,
+                100.0 * count(*) / (
+                    min(num_metapackages) -
+                    count(*) +
+                    (
+                        SELECT num_metapackages
+                        FROM maintainers
+                        WHERE maintainer=%s
+                    )
+                ) AS score
             FROM maintainer_metapackages
+            INNER JOIN maintainers USING(maintainer)
             WHERE
                 maintainer != %s AND
                 effname IN (
@@ -870,17 +898,18 @@ class Database:
                     FROM maintainer_metapackages
                     WHERE maintainer=%s
                 )
-                GROUP BY maintainer
-                ORDER BY count DESC
-                LIMIT %s
+            GROUP BY maintainer
+            ORDER BY score DESC
+            LIMIT %s
             """,
-            (maintainer, maintainer, limit)
+            (maintainer, maintainer, maintainer, limit)
         )
 
         return [
             {
                 'maintainer': row[0],
                 'count': row[1],
+                'match': row[2],
             } for row in self.cursor.fetchall()
         ]
 

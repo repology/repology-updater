@@ -74,11 +74,32 @@
 
 <h2>Similar maintainers</h2>
 
-<ul>
-{% for similar_maintainer in similar_maintainers %}
-	<li><a href="{{ url_for('maintainer', maintainer=similar_maintainer.maintainer) }}">{{ similar_maintainer.maintainer}}</a> <b>({{ similar_maintainer.count }})</b></li>
+<div class="row">
+{% for column in similar_maintainers|slice(2) %}
+{% if column %}
+<div class="col-md-6">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="text-right">Maintainer</th>
+				<th class="text-center">Score</th>
+				<th class="text-center">Common packages</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for similar_maintainer in column %}
+			<tr>
+				<td class="text-right"><a href="{{ url_for('maintainer', maintainer=similar_maintainer.maintainer) }}">{{ similar_maintainer.maintainer}}</a></td>
+				<td class="text-center">{{ similar_maintainer.match|round(2) }}</td>
+				<td class="text-center">{{ similar_maintainer.count }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endif %}
 {% endfor %}
-</ul>
+</div>
 
 </div>
 {% endblock %}

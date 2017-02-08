@@ -368,7 +368,7 @@ def maintainers(page=None):
 def maintainer(maintainer):
     maintainer_info = get_db().GetMaintainerInformation(maintainer)
     metapackages = get_db().GetMaintainerMetapackages(maintainer, 500)
-    similar_maintainers = get_db().GetMaintainerSimilarMaintainers(maintainer, 25)
+    similar_maintainers = get_db().GetMaintainerSimilarMaintainers(maintainer, 50)
 
     if not maintainer_info:
         flask.abort(404)
