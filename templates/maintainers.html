@@ -39,7 +39,7 @@
 		{% for maintainer in column %}
 			<tr>
 				<td class="text-right">
-					<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
+					<a href="{{ url_for('maintainer', maintainer=maintainer.maintainer) }}">
 						{{ maintainer.maintainer }}
 					</a>
 				</td>

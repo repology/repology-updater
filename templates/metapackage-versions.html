@@ -38,7 +38,8 @@
 		</td>
 		<td class="text-left">
 		{%- for maintainer in package.maintainers -%}
-			{%- if not loop.first %}, {% endif -%}{{ macros.maintainer_link(maintainer) }}
+			{%- if not loop.first %}, {% endif -%}
+			<a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a>
 		{%- else -%}
 			-
 		{%- endfor %}

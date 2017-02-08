@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}Repology: maintainer {{ maintainer }}{% endblock %}
+{% block header %}Maintainer {{ maintainer }}{% endblock %}
+{% block description %}Information on package maintainer {{ maintainer }}{% endblock %}
+{% block keywords %}{{ super()}}, maintainer{% endblock %}
+
+{% block content %}
+<div class="container">
+
+{% if maintainer|maintainer_to_link %}
+<h2>Contact</h2>
+{% if (maintainer|maintainer_to_link).startswith('mailto:') %}
+<p><b>E-Mail:</b> <a href="{{ maintainer|maintainer_to_link }}">{{ maintainer }}</a></p>
+{% else %}
+<p><b>WWW:</b> <a href="{{ maintainer|maintainer_to_link }}">{{ maintainer|maintainer_to_link }}</a></p>
+{% endif %}
+{% endif %}
+
+<h2>Packages</h2>
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading"><h3>Total</h3></div>
+			<div class="panel-body">
+				<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer) }}">
+					{{ maintainer_info.num_packages }}
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-success">
+			<div class="panel-heading"><h3>Newest</h3></div>
+			<div class="panel-body">
+				{{ maintainer_info.num_packages_newest }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-danger">
+			<div class="panel-heading"><h3>Outdated</h3></div>
+			<div class="panel-body">
+				<a href="{{ url_for('metapackages_outdated_by_maintainer', maintainer=maintainer) }}">
+					{{ maintainer_info.num_packages_outdated }}
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3>Ignored</h3></div>
+			<div class="panel-body">
+				{{ maintainer_info.num_packages_ignored }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<h2>Metapackages ({{ maintainer_info.num_metapackages }})</h2>
+
+<p>
+{%- for metapackage in metapackages -%}
+	{%- if not loop.first %}, {% endif -%}
+	<a href="{{ url_for('metapackage', name=metapackage) }}">
+		{{- metapackage -}}
+	</a>
+{%- endfor -%}
+{%- if metapackages|length < maintainer_info.num_metapackages -%}
+	, …
+{%- endif -%}
+</p>
+
+<h2>Similar maintainers</h2>
+
+<ul>
+{% for similar_maintainer in similar_maintainers %}
+	<li><a href="{{ url_for('maintainer', maintainer=similar_maintainer.maintainer) }}">{{ similar_maintainer.maintainer}}</a> <b>({{ similar_maintainer.count }})</b></li>
+{% endfor %}
+</ul>
+
+</div>
+{% endblock %}

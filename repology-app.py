@@ -364,6 +364,24 @@ def maintainers(page=None):
     )
 
 
+@app.route("/maintainer/<maintainer>")
+def maintainer(maintainer):
+    maintainer_info = get_db().GetMaintainerInformation(maintainer)
+    metapackages = get_db().GetMaintainerMetapackages(maintainer, 500)
+    similar_maintainers = get_db().GetMaintainerSimilarMaintainers(maintainer, 25)
+
+    if not maintainer_info:
+        flask.abort(404)
+
+    return flask.render_template(
+        "maintainer.html",
+        maintainer=maintainer,
+        maintainer_info=maintainer_info,
+        metapackages=metapackages,
+        similar_maintainers=similar_maintainers
+    )
+
+
 @app.route("/repositories/")
 def repositories():
     return flask.render_template("repositories.html")

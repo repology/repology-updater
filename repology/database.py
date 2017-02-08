@@ -353,6 +353,10 @@ class Database:
             CREATE UNIQUE INDEX ON maintainer_metapackages(maintainer, effname)
         """)
 
+        self.cursor.execute("""
+            CREATE INDEX ON maintainer_metapackages(effname)
+        """)
+
         # maintainers
         self.cursor.execute("""
             CREATE MATERIALIZED VIEW maintainers AS
@@ -805,6 +809,78 @@ class Database:
                 'maintainer': row[0],
                 'num_packages': row[1],
                 'num_packages_outdated': row[2]
+            } for row in self.cursor.fetchall()
+        ]
+
+    def GetMaintainerInformation(self, maintainer):
+        self.cursor.execute(
+            """
+            SELECT
+                num_packages,
+                num_packages_newest,
+                num_packages_outdated,
+                num_packages_ignored,
+                num_metapackages
+            FROM maintainers
+            WHERE maintainer = %s
+            """,
+            (maintainer,)
+        )
+
+        rows = self.cursor.fetchall()
+
+        if not rows:
+            return None
+
+        return {
+            'num_packages': rows[0][0],
+            'num_packages_newest': rows[0][1],
+            'num_packages_outdated': rows[0][2],
+            'num_packages_ignored': rows[0][3],
+            'num_metapackages': rows[0][4],
+        }
+
+    def GetMaintainerMetapackages(self, maintainer, limit=1000):
+        self.cursor.execute(
+            """
+            SELECT
+                effname
+            FROM maintainer_metapackages
+            WHERE maintainer = %s
+            ORDER BY effname
+            LIMIT %s
+            """,
+            (maintainer, limit)
+        )
+
+        return [ row[0] for row in self.cursor.fetchall() ]
+
+    def GetMaintainerSimilarMaintainers(self, maintainer, limit=100):
+        self.cursor.execute(
+            """
+            SELECT
+                maintainer,
+                count(*) AS count
+            FROM maintainer_metapackages
+            WHERE
+                maintainer != %s AND
+                effname IN (
+                    SELECT
+                        effname
+                    FROM maintainer_metapackages
+                    WHERE maintainer=%s
+                )
+                GROUP BY maintainer
+                ORDER BY count DESC
+                LIMIT %s
+            """,
+            (maintainer, maintainer, limit)
+        )
+
+        return [
+            {
+                'maintainer': row[0],
+                'count': row[1],
             } for row in self.cursor.fetchall()
         ]
 

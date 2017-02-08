@@ -63,7 +63,7 @@
 		<h2>Maintainers</h2>
 		<ul>
 		{% for maintainer,families in information.maintainers|dictsort(case_sensitive=True) %}
-			<li>{{ macros.maintainer_link(maintainer) }} <b>({{ families|length }})</b></li>
+		<li><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a> <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
 		{% endif %}

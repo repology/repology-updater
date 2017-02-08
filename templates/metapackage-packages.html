@@ -46,11 +46,7 @@
 				<li class="list-group-item"><b>Maintainer{% if package.maintainers|length > 1 %}s{% endif %}:</b>
 					<ul class="list-package-details">
 					{% for maintainer in package.maintainers %}
-					{% if maintainer|maintainer_to_link %}
-						<li><a href="{{ maintainer|maintainer_to_link }}">{{ maintainer }}</a></li>
-					{% else %}
-						<li>{{ maintainer }}</li>
-					{% endif %}
+						<li><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a></li>
 					{% endfor %}
 					</ul>
 				</li>
