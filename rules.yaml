@@ -15,6 +15,8 @@
 - { name: 3dchess,                     setname: 3dc,                      family: [ debuntu ] }
 - { name: abuse_sdl,                   setname: abuse                     }
 - { name: accounts-qt5,                setname: accounts-qt ,             family: [ sisyphus ] }
+- { name: abbaye,                      setname: abbaye-des-morts          }
+- { name: abbayedesmorts,              setname: abbaye-des-morts          }
 - { name: ace,                         setname: ace-of-penguins,          family: [ openbsd, slackbuilds ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          family: [ gentoo ] }
 - { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              family: [ fedora ] } # XXX: ???
