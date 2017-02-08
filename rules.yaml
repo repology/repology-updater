@@ -535,8 +535,7 @@
 
 - { namepat: "perl5[0-9.]*",           setname: perl }
 
-- { namepat: "python2[0-9.]*",         setname: python }
-- { namepat: "python3[0-9.]*",         setname: python }
+- { namepat: "python[23][0-9.]*",      setname: python }
 - { name: python, verpat: "2\\.*",     setname: python2 }
 - { name: python, verpat: "3\\.*",     setname: python3 }
 
