@@ -853,7 +853,7 @@ class Database:
             (maintainer, limit)
         )
 
-        return [ row[0] for row in self.cursor.fetchall() ]
+        return [row[0] for row in self.cursor.fetchall()]
 
     def GetMaintainerSimilarMaintainers(self, maintainer, limit=100):
         # this obscure request needs some clarification
