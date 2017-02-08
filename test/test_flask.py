@@ -117,6 +117,9 @@ class TestFlask(unittest.TestCase):
     def test_maintaners(self):
         self.checkurl_html('/maintainers/a/', has=['amdmi3@freebsd.org'])
 
+    def test_maintaner(self):
+        self.checkurl_html('/maintainer/amdmi3@freebsd.org', has=['mailto:amdmi3@freebsd.org', 'kiconvtool'])
+
     def test_repositories(self):
         self.checkurl_html('/repositories/', has=['FreeBSD'])
 
