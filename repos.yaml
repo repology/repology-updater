@@ -709,7 +709,7 @@
       parser: NixJson
       url: https://nixos.org/nixpkgs/packages-unstable.json.gz
   # XXX: add urls
-  tags: [ all ]
+  tags: []
 
 ###########################################################################
 # SlackBuilds
@@ -798,7 +798,7 @@
     - desc: release-monitoring.org entry
       url: 'https://release-monitoring.org/project/{name}/'
   shadow: true
-  tags: [ all ]
+  tags: []
 
 ###########################################################################
 # Upstream module collections: CPAN, PyPi
