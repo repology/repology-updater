@@ -160,6 +160,7 @@
 - { name: sdl-asylum,                  setname: asylum                    }
 - { name: sni-qt4,                     setname: sni-qt                    }
 - { name: snorenotify-qt5,             setname: snorenotify               }
+- { name: sortedcontainers,            setname: "python:sortedcontainers" }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             family: [ gentoo ]  } # XXX: recheck
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
 - { name: stellarium-qt4,              setname: stellarium                }
