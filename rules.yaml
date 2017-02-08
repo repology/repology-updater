@@ -102,6 +102,7 @@
 - { name: fish-fillets-ng,             setname: fillets-ng                }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
 - { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
+- { namepat: "flake8.*",               setname: "python:$1"               }
 - { name: fox1.6,                      setname: fox16,                    family: [ debuntu ]  }
 - { name: fox17,                       setname: fox,                      family: [ freebsd ] }
 - { name: free42-nologo,               setname: free42,                   family: [ debuntu ]  }
