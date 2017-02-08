@@ -40,3 +40,4 @@ from .libregamewiki import LibreGameWikiParser
 from .rosa import RosaInfoXmlParser
 from .nix import NixJsonParser
 from .aports import ApkIndexParser
+from .anitya import AnityaApiParser

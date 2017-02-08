@@ -783,6 +783,24 @@
   tags: [ all, production ]
 
 ###########################################################################
+# release_monitoring.org
+###########################################################################
+- name: release_monitoring
+  desc: release-monitoring.org
+  url: https://release-monitoring.org/
+  family: anitya
+  sources:
+    - name: release-monitoring.org
+      fetcher: File
+      parser: AnityaApi
+      url: https://release-monitoring.org/api/projects
+  links:
+    - desc: release-monitoring.org entry
+      url: 'https://release-monitoring.org/project/{name}/'
+  shadow: true
+  tags: [ all ]
+
+###########################################################################
 # Upstream module collections: CPAN, PyPi
 ###########################################################################
 - name: cpan
