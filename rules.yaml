@@ -589,6 +589,15 @@
 - { name: swig, verpat: "2\\..*",      setname: swig2 }
 - { name: swig, verpat: "3\\..*",      setname: swig3 }
 
+- { namepat: "ruby-?[0-9.]+",          setname: ruby }
+- { name: ruby, verpat: "1\\.8.*",     setname: ruby18 }
+- { name: ruby, verpat: "1\\.9.*",     setname: ruby19 }
+- { name: ruby, verpat: "2\\.0.*",     setname: ruby20 }
+- { name: ruby, verpat: "2\\.1.*",     setname: ruby21 }
+- { name: ruby, verpat: "2\\.2.*",     setname: ruby22 }
+- { name: ruby, verpat: "2\\.3.*",     setname: ruby23 }
+- { name: ruby, verpat: "2\\.4.*",     setname: ruby24 }
+
 # TODO
 # - texlive
 
