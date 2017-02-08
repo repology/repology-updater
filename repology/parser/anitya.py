@@ -43,7 +43,7 @@ class AnityaApiParser():
                     print("no version: {}".format(pkg.name), file=sys.stderr)
                     continue
 
-                if pkg.vesion.startswith('v'):
+                if pkg.version.startswith('v'):
                     pkg.version = pkg.version[1:]
 
                 if project['backend'] == 'CPAN (perl)':
