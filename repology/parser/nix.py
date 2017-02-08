@@ -70,7 +70,7 @@ class NixJsonParser():
                     if pkg.name == pkgname:
                         dashpos = pkg.version.find('-')
                         pkg.name = pkg.name + "-" + pkg.version[0:dashpos]
-                        pkg.version = pkg.version[dashpos+1:]
+                        pkg.version = pkg.version[dashpos + 1:]
 
                 if pkg.name.endswith('-git'):
                     pkg.name = pkg.name[:-4]
