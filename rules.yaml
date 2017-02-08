@@ -533,6 +533,8 @@
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
+- { namepat: "perl5[0-9.]*",           setname: perl }
+
 - { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
 - { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
 
