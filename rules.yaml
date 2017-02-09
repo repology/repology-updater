@@ -101,8 +101,6 @@
 - { name: fish-fillets-ng,             setname: fillets-ng                }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
 - { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
-- { namepat: "flake8.*",               setname: "python:$0"               }
-- { namepat: "flask.*",                setname: "python:$0"               }
 - { name: fox1.6,                      setname: fox16,                    family: [ debuntu ]  }
 - { name: fox17,                       setname: fox,                      family: [ freebsd ] }
 - { name: free42-nologo,               setname: free42,                   family: [ debuntu ]  }
@@ -164,7 +162,6 @@
 - { name: sdl-asylum,                  setname: asylum                    }
 - { name: sni-qt4,                     setname: sni-qt                    }
 - { name: snorenotify-qt5,             setname: snorenotify               }
-- { name: sortedcontainers,            setname: "python:sortedcontainers" }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             family: [ gentoo ]  } # XXX: recheck
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
 - { name: stellarium-qt4,              setname: stellarium                }
@@ -821,6 +818,10 @@
 - { namepat: "python[0-9]\\.[0-9]-(.*)", setname: "python:$1", family: [ nix ] }
 - { namepat: "py[23]?-(.*)",           setname: "python:$1", family: [ alpine ] }
 - { category: dev-python,              setname: "python:$0", family: [ gentoo ] }
+
+- { namepat: "flake8.*",               setname: "python:$0"               }
+- { namepat: "flask.*",                setname: "python:$0"               }
+- { name: sortedcontainers,            setname: "python:sortedcontainers" }
 
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu ] }
