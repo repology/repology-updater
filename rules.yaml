@@ -33,10 +33,12 @@
 - { name: adblockplus-firefox,         setname: adblock-plus,             family: [ chocolatey ] }
 - { name: adobeps-win,                 setname: adobeps,                  family: [ pkgsrc ]  } # XXX: recheck
 - { name: adodb5,                      setname: adodb,                    family: [ freebsd ]  }
+- { name: adol-c,                      setname: adolc                     }
 - { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               family: [ freebsd ]  }
 - { name: adzap,                       setname: adzapper,                 family: [ freebsd, pkgsrc ] }
 - { name: aiksaurus-gtk,               setname: aiksaurus,                family: [ freebsd ] } # slave port
 - { name: arxlibertatis,               setname: arx-libertatis            }
+- { name: albatross-themes,            setname: albatross-gtk-theme       }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
 - { name: armagetron,                  setname: armagetronad              }
@@ -125,7 +127,8 @@
 - { name: ja2,                         setname: ja2-stracciatella,        family: [ freebsd ] }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
-- { name: libarpack-ng,                setname: arpack-ng }
+- { name: libarpack-ng,                setname: arpack-ng                 }
+- { name: libagg,                      setname: agg                       }
 - { name: libcheck,                    setname: check                     } # XXX: reverse?
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
@@ -821,6 +824,7 @@
 - { namepat: "py[23]?-(.*)",           setname: "python:$1", family: [ alpine ] }
 - { category: dev-python,              setname: "python:$0", family: [ gentoo ] }
 
+- { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { namepat: "flake8.*",               setname: "python:$0"               }
 - { namepat: "flask.*",                setname: "python:$0"               }
 - { name: sortedcontainers,            setname: "python:sortedcontainers" }
