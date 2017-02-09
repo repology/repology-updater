@@ -41,6 +41,7 @@
 - { name: albatross-themes,            setname: albatross-gtk-theme       }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
+- { name: angularjs,                   setname: angular.js                }
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
 - { name: atk1.0,                      setname: atk,                      family: [ debuntu ]  }
@@ -202,6 +203,9 @@
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
+
+# fonts; extra section as there's too much name variery
+- { name: [ anonymous-pro, anonymouspro, fonts-anonymous-pro, fonts-ttf-msimonson-anonymouspro, google-anonymouspro-fonts, ttf-anonymous-pro], setname: "fonts:anonymouspro" }
 
 # XXX: continue looking through the list starting from gaul
 
@@ -443,6 +447,8 @@
 - { name: allegro-devel, setname: allegro, family: freebsd }
 - { name: allegro, verpat: "4\\..*",   setname: allegro4 }
 - { name: allegro, verpat: "5\\..*",   setname: allegro5 }
+
+- { namepat: "angelscript-?[0-9.]+",   setname: angelscript }
 
 - { namepat: "automoc[0-9]+",          setname: automoc }
 - { name: automoc, verpat: "0\\..*",   setname: automoc4 }
