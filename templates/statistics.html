@@ -100,7 +100,9 @@
 			{% if repostat.last_update_utc %}
 				{% set minutes_since_update = (repostat.since_last_update.total_seconds() / 60) | int %}
 				<time datetime="{{ repostat.last_update_utc.strftime("%Y-%m-%dT%H:%M:%SZ") }}">
-				{% if minutes_since_update >= 1 %}
+				{% if minutes_since_update >= 120 %}
+					{{ minutes_since_update//60 }} hours(s) ago
+				{% elif minutes_since_update >= 1 %}
 					{{ minutes_since_update }} minute(s) ago
 				{% else %}
 					just now
