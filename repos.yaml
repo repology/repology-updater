@@ -474,6 +474,24 @@
 ###########################################################################
 # CentOS
 ###########################################################################
+- name: centos_5
+  desc: CentOS 5
+  url: http://centos-packages.com/
+  family: centos
+  sources:
+    - name: os
+      fetcher: Repodata
+      parser: Repodata
+      url: http://vault.centos.org/centos/5/os/Source/
+    - name: updates
+      fetcher: Repodata
+      parser: Repodata
+      url: http://vault.centos.org/centos/5/updates/Source/
+  links:
+    - desc: Package details on centos-packages.com
+      url: 'http://centos-packages.com/5/package/{name}/'
+  tags: [ all, production, centos, rpm ]
+
 - name: centos_6
   desc: CentOS 6
   url: http://centos-packages.com/
