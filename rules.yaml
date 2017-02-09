@@ -53,6 +53,7 @@
 - { name: atk1.0,                      setname: atk,                      family: [ debuntu ]  }
 - { name: atk2mm,                      setname: atkmm,                    family: [ openbsd ]  }
 - { name: atkmm1.6,                    setname: atk,                      family: [ debuntu ]  }
+- { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
@@ -490,6 +491,9 @@
 
 - { namepat: "automoc[0-9]+",          setname: automoc }
 - { name: automoc, verpat: "0\\..*",   setname: automoc4 }
+
+- { namepat: "autoconf-?[0-9.]+",      setname: autoconf }
+- { name: autoconf, verpat: "2\\.13.*", setname: autoconf213 }
 
 - { namepat: "bash[0-9]+",             setname: bash }
 - { name: bash, verpat: "3\\..*",      setname: bash3 }
