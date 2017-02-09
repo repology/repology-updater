@@ -50,9 +50,9 @@
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
 - { name: [astrometrynet,astrometry.net], setname: astrometry             }
-- { name: atk1.0,                      setname: atk,                      family: [ debuntu ]  }
-- { name: atk2mm,                      setname: atkmm,                    family: [ openbsd ]  }
-- { name: atkmm1.6,                    setname: atk,                      family: [ debuntu ]  }
+- { name: atk1.0,                      setname: atk                       }
+- { name: atk2mm,                      setname: atkmm                     }
+- { name: atkmm1.6,                    setname: atkmm                     }
 - { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
