@@ -70,7 +70,6 @@
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
 - { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       family: [ debuntu, arch ] } # O_o
 - { name: cegui-mk2,                   setname: cegui,                    family: [ debuntu ]  }
-- { name: catesc,                      setname: instead-cat               }
 - { name: celestia-nonfree,            setname: celestia,                 family: [ debuntu ]  }
 - { name: chexedit,                    setname: curses-hexedit,           family: [ freebsd ] }
 - { name: chromium-browser,            setname: chromium                  }
