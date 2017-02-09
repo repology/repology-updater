@@ -60,9 +60,13 @@
 - { name: aws-cli,                     setname: awscli                    }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
+- { name: bcel5-3,                     setname: bcel                      }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
+- { name: beneath-a-steel-sky-cd,      setname: beneath-a-steel-sky       }
+- { name: "bakery2.6",                 setname: bakery                    }
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            family: [ freebsd ] }
 - { name: billard-gl,                  setname: billardgl,                family: [ debuntu ]  }
+- { name: [bird-v6,bird6],             setname: bird                      }
 - { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
 - { name: blobby2,                     setname: blobby                    }
 - { name: blockout2,                   setname: blockout,                 family: [ debuntu ]  }
@@ -75,6 +79,7 @@
 - { name: bouncycastle,                setname: bouncycastle14,           family: [ freebsd ] } # move away
 - { name: bouncycastle15,              setname: bouncycastle,             family: [ freebsd ] }
 - { name: bowtie, verpat: "2.*",       setname: bowtie2,                  family: [ gentoo ] }
+- { name: battle-tanks,                setname: btanks                    }
 - { name: bub-n-bros,                  setname: bubbros,                  family: [ gentoo ]  } # XXX: recheck
 - { name: bugzilla44,                  ignore: true,                      family: [ freebsd ] } # legacy
 - { name: bugzilla50,                  setname: bugzilla,                 family: [ freebsd ] }
@@ -145,6 +150,7 @@
 - { name: libsfml,                     setname: sfml                      }
 - { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
+- { name: libass4,                     setname: libass                    }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
@@ -229,7 +235,7 @@
 # GNUstep packages (should be likely the other way around: foo->foo.app)
 - { name: aclock.app,                  setname: aclock,                   family: [ debuntu ]  }
 - { name: addresses-for-gnustep,       setname: addresses,                family: [ debuntu ]  }
-- { name: batmon.app,                  setname: batmon,                   family: [ debuntu ]  }
+- { name: batmon.app,                  setname: batmon,                   family: [ debuntu, arch ]  }
 - { name: camera.app,                  setname: camera,                   family: [ debuntu ]  }
 - { name: cenon.app,                   setname: cenon,                    family: [ debuntu ]  }
 - { name: charmap.app,                 setname: charmap,                  family: [ debuntu ]  }
@@ -502,6 +508,11 @@
 
 - { name: bbpager, verpat: "0\\.3.*",  setname: bbpager03, family: [ pkgsrc ] }
 - { name: bbpager04, setname: bbpager, family: [ pkgsrc ] }
+
+- { namepat: "bind[0-9]+",             setname: bind }
+- { name: bind, verpat: "9\\.9\\..*",  setname: bind99 }
+- { name: bind, verpat: "9\\.10\\..*", setname: bind910 }
+- { name: bind, verpat: "9\\.11\\..*", setname: bind911 }
 
 - { name: csound, verpat: "5\\..*",    setname: csound5 }
 - { name: csound, verpat: "6\\..*",    setname: csound6 }
