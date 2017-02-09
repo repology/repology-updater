@@ -450,7 +450,7 @@
 - { name: allegro, verpat: "4\\..*",   setname: allegro4 }
 - { name: allegro, verpat: "5\\..*",   setname: allegro5 }
 
-- { namepat: "angelscript-?[0-9.]+",   setname: angelscript }
+- { namepat: "angelscript-?[0-9.-]+",  setname: angelscript }
 
 - { namepat: "ant[0-9.]+",             setname: ant }
 
