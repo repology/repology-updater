@@ -558,6 +558,8 @@
 
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
 
+- { namepat: "pdfstudio[0-9]+",        setname: pdfstudio }
+
 - { namepat: "sfml[0-9.]+",            setname: sfml }
 - { name: sfml, verpat: "1\\..*",      setname: sfml1 }
 
