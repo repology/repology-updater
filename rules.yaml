@@ -207,7 +207,7 @@
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
 
 # fonts; extra section as there's too much name variery
-- { name: [ anonymous-pro, anonymouspro, fonts-anonymous-pro, fonts-ttf-msimonson-anonymouspro, google-anonymouspro-fonts, ttf-anonymous-pro], setname: "fonts:anonymouspro" }
+- { name: [ anonymous-pro, anonymouspro, fonts-anonymous-pro, fonts-ttf-msimonson-anonymouspro, google-anonymouspro-fonts, ttf-anonymous-pro, font-anonymous-pro], setname: "fonts:anonymouspro" }
 
 # XXX: continue looking through the list starting from gaul
 
