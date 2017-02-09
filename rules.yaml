@@ -69,7 +69,7 @@
 - { name: [bird-v6,bird6],             setname: bird                      }
 - { name: blinkensisters-with-addons,  setname: lostpixels                }
 - { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
-- { name: blobby2,                     setname: blobby                    }
+- { name: [blobby2,blobby-volley],     setname: blobby                    }
 - { name: blockout2,                   setname: blockout,                 family: [ debuntu ]  }
 - { name: blockoutii,                  setname: blockout,                 family: [ fedora ]  } # XXX: recheck
 - { name: boaconstructor,              setname: boa-constructor,          family: [ freebsd ] }
