@@ -796,6 +796,8 @@
 - { namepat: "(ruby:utilrb)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:web-console)[0-9._-]+", setname: "$1" }
 
+- { namepat: "ruby[0-9.]+-bundler", setname: "ruby:bundler" }
+
 # Tryton (wtf is that); needs to be before python
 - { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$1", family: [ pkgsrc ] }
 - { namepat: "trytond28_(.*)",         setname: "tryton:$1", family: [ freebsd ] }
