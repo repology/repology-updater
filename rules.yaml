@@ -76,16 +76,18 @@
 - { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect], setname: boehm-gc }
 - { name: bombono,                     setname: bombono-dvd               }
 - { name: [boost-all,boost-libs,boost-headers], setname: boost            }
-- { namepat: "boost1[0-9_.]+",         setname: boost                     }
-- { name: botan1.10,                   setname: botan,                    family: [ debuntu ]  }
-- { name: botan110,                    setname: botan,                    family: [ freebsd ] }
-- { name: bouncycastle,                setname: bouncycastle14,           family: [ freebsd ] } # move away
-- { name: bouncycastle15,              setname: bouncycastle,             family: [ freebsd ] }
+- { namepat: "boost[0-9_.]+",          setname: boost                     }
+- { namepat: "botan[0-9.]+",           setname: botan                     }
+- { name: botan-stable,                setname: botan                     }
+- { name: bouncycastle15,              setname: bouncycastle              }
 - { name: bowtie, verpat: "2.*",       setname: bowtie2,                  family: [ gentoo ] }
 - { name: battle-tanks,                setname: btanks                    }
 - { name: bub-n-bros,                  setname: bubbros,                  family: [ gentoo ]  } # XXX: recheck
-- { name: bugzilla44,                  ignore: true,                      family: [ freebsd ] } # legacy
-- { name: bugzilla50,                  setname: bugzilla,                 family: [ freebsd ] }
+- { name: [bpython-py27,bpython2],     setname: bpython                   }
+- { name: bsh2,                        setname: bsh                       }
+- { name: bugseverywhere,              setname: bugs-everywhere           }
+- { name: bugzilla50,                  setname: bugzilla                  }
+- { name: bullet3,                     setname: bullet                    }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
 - { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       family: [ debuntu, arch ] } # O_o
 - { name: cegui-mk2,                   setname: cegui,                    family: [ debuntu ]  }
@@ -96,7 +98,7 @@
 - { name: corsixth,                    setname: corsix-th,                family: [ freebsd ] }
 - { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debuntu ]  }
 - { name: dgen,                        setname: dgen-sdl,                 family: [ debuntu ]  } # recheck
-- { name: drpython-py27,               setname: drpython,                 family: [ freebsd ] }
+- { name: drpython-py27,               setname: drpython                  }
 - { name: dynamips-community,          setname: dynamips,                 family: [ freebsd ] }
 - { name: dwarffortress,               setname: dwarf-fortress            }
 - { name: linux-dwarffortress,         setname: dwarf-fortress            }
@@ -756,7 +758,7 @@
 
 # Ruby
 - { namepat: "ruby-(.*)",              setname: "ruby:$1", family: [ debuntu, arch, fedora, mageia, sisyphus, guix ] }
-- { namepat: "rubygem-(.*)",           setname: "ruby:$1", family: [ freebsd, fedora, opensuse, slackbuilds, rosa ] }
+- { namepat: "rubygem-(.*)",           setname: "ruby:$1", family: [ freebsd, fedora, opensuse, slackbuilds, rosa, centos ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", family: [ freebsd, openbsd, pkgsrc ] }
 - { family: [ rubygems ],              setname: "ruby:$0" }
 - { namepat: "lib(.*)-ruby",           setname: "ruby:$1", family: [ debuntu ] } # old Ubuntu Precise
@@ -865,6 +867,7 @@
 - { namepat: "(ruby:web-console)[0-9._-]+", setname: "$1" }
 
 - { namepat: "ruby[0-9.]+-bundler", setname: "ruby:bundler" }
+- { name: bundler, setname: "ruby:bundler" }
 
 # Tryton (wtf is that); needs to be before python
 - { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$1", family: [ pkgsrc ] }
