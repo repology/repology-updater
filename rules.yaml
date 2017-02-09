@@ -518,6 +518,13 @@
 - { namepat: "jersey[0-9]+",           setname: jersey }
 - { name: jersey, verpat: "1\\..*",    setname: jersey1 }
 
+- { name: keepass2,                    setname: keepass }
+
+- { name: keepassx-devel,              setname: keepassx, family: [ freebsd ] }
+- { namepat: "keepassx[0-9]*",         setname: keepassx }
+- { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
+- { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
+
 - { namepat: "libglade[0-9]+",         setname: libglade }
 - { namepat: "libglade[0-9]+-reference", setname: libglade-reference }
 
@@ -537,28 +544,24 @@
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
+- { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
+
+- { namepat: "pdfstudio[0-9]+",        setname: pdfstudio }
+
 - { namepat: "perl5[0-9.]*",           setname: perl }
 
 - { namepat: "python[23][0-9.]*",      setname: python }
 - { name: python, verpat: "2\\.*",     setname: python2 }
 - { name: python, verpat: "3\\.*",     setname: python3 }
 
-- { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
-- { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
-
-- { name: keepass2,                    setname: keepass }
-
-- { name: keepassx-devel,              setname: keepassx, family: [ freebsd ] }
-- { namepat: "keepassx[0-9]*",         setname: keepassx }
-- { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
-- { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
-
-- { name: sogo, verpat: "2\\..*",      setname: sogo2 }
-- { name: sogo, verpat: "3\\..*",      setname: sogo3 }
-
-- { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
-
-- { namepat: "pdfstudio[0-9]+",        setname: pdfstudio }
+- { namepat: "ruby-?[0-9.]+",          setname: ruby }
+- { name: ruby, verpat: "1\\.8.*",     setname: ruby18 }
+- { name: ruby, verpat: "1\\.9.*",     setname: ruby19 }
+- { name: ruby, verpat: "2\\.0.*",     setname: ruby20 }
+- { name: ruby, verpat: "2\\.1.*",     setname: ruby21 }
+- { name: ruby, verpat: "2\\.2.*",     setname: ruby22 }
+- { name: ruby, verpat: "2\\.3.*",     setname: ruby23 }
+- { name: ruby, verpat: "2\\.4.*",     setname: ruby24 }
 
 - { namepat: "sfml[0-9.]+",            setname: sfml }
 - { name: sfml, verpat: "1\\..*",      setname: sfml1 }
@@ -580,10 +583,16 @@
 - { namepat: "softhsm[0-9]+",          setname: softhsm }
 - { name: softhsm, verpat: "1\\..*",   setname: softhsm1 }
 
+- { name: sogo, verpat: "2\\..*",      setname: sogo2 }
+- { name: sogo, verpat: "3\\..*",      setname: sogo3 }
+
 - { name: sope, verpat: "2\\..*",      setname: sope2 }
 - { name: sope, verpat: "3\\..*",      setname: sope3 }
 
 - { namepat: "spidermonkey[0-9]+",     setname: spidermonkey }
+
+- { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
+- { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
 
 - { namepat: "squid[0-9]+",            setname: squid }
 - { name: squid, verpat: "4\\..*",     setname: squid4 }
@@ -600,15 +609,6 @@
 - { name: swig, verpat: "1\\..*",      setname: swig13 }
 - { name: swig, verpat: "2\\..*",      setname: swig2 }
 - { name: swig, verpat: "3\\..*",      setname: swig3 }
-
-- { namepat: "ruby-?[0-9.]+",          setname: ruby }
-- { name: ruby, verpat: "1\\.8.*",     setname: ruby18 }
-- { name: ruby, verpat: "1\\.9.*",     setname: ruby19 }
-- { name: ruby, verpat: "2\\.0.*",     setname: ruby20 }
-- { name: ruby, verpat: "2\\.1.*",     setname: ruby21 }
-- { name: ruby, verpat: "2\\.2.*",     setname: ruby22 }
-- { name: ruby, verpat: "2\\.3.*",     setname: ruby23 }
-- { name: ruby, verpat: "2\\.4.*",     setname: ruby24 }
 
 # TODO
 # - texlive
