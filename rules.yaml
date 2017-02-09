@@ -89,7 +89,11 @@
 - { name: bugzilla50,                  setname: bugzilla                  }
 - { name: bullet3,                     setname: bullet                    }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
-- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins,       family: [ debuntu, arch ] } # O_o
+- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins        }
+- { name: cairomm1_0,                  setname: cairomm                   }
+- { name: cattle-1.0,                  setname: cattle                    }
+- { name: cavez-of-phear,              setname: cavezofphear              }
+- { name: cbatticon-gtk2,              setname: cbatticon                 }
 - { name: cegui-mk2,                   setname: cegui,                    family: [ debuntu ]  }
 - { name: celestia-nonfree,            setname: celestia,                 family: [ debuntu ]  }
 - { name: chexedit,                    setname: curses-hexedit,           family: [ freebsd ] }
@@ -279,6 +283,8 @@
 - { name: crystal,                     setname: crystal-lang,             family: gentoo, category: dev-lang }
 - { name: crystal,                     setname: crystal-mud,              family: gentoo, category: games-mud }
 - { name: crystal,                     setname: crystal-theme,            family: slackbuilds }
+- { name: cdf3,                        setname: cdf                       } # Common Data Format lib
+- { name: cdf, verpat: "0.*",          setname: cdf-df                    } # split out colorized df
 # fuse-emulator vs. fusefs modules - see below
 
 # TODO
@@ -518,6 +524,9 @@
 - { name: bind, verpat: "9\\.9\\..*",  setname: bind99 }
 - { name: bind, verpat: "9\\.10\\..*", setname: bind910 }
 - { name: bind, verpat: "9\\.11\\..*", setname: bind911 }
+
+- { namepat: "cassandra[0-9]+",        setname: cassandra }
+- { name: cassandra, verpat: "2\\..*", setname: cassandra2 }
 
 - { name: csound, verpat: "5\\..*",    setname: csound5 }
 - { name: csound, verpat: "6\\..*",    setname: csound6 }
