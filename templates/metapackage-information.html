@@ -41,7 +41,7 @@
 		{% if information.categories %}
 		<h2>Categories</h2>
 		<ul>
-		{% for category,families in information.categories|dictsort(case_sensitive=True)  %}
+		{% for category,families in information.categories|dictsort(case_sensitive=True) %}
 			<li>{{ category }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
@@ -53,7 +53,7 @@
 		{% if information.summaries %}
 		<h2>Summaries</h2>
 		<ul>
-		{% for summary,families in information.summaries|dictsort(case_sensitive=True)  %}
+		{% for summary,families in information.summaries|dictsort(case_sensitive=True) %}
 			<li>{{ summary }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
@@ -71,7 +71,7 @@
 		{% if information.homepages %}
 		<h2>Homepages</h2>
 		<ul>
-		{% for homepage,families in information.homepages|dictsort(case_sensitive=True)  %}
+		{% for homepage,families in information.homepages|dictsort(case_sensitive=True) %}
 			<li><a href="{{ homepage }}">{{ homepage }}</a>{{ macros.link_status(homepage, link_statuses) }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
@@ -80,7 +80,7 @@
 		{% if information.downloads %}
 		<h2>Downloads</h2>
 		<ul>
-		{% for download,families in information.downloads|dictsort(case_sensitive=True)  %}
+		{% for download,families in information.downloads|dictsort(case_sensitive=True) %}
 			<li><a href="{{ download }}">{{ download }}</a>{{ macros.link_status(download, link_statuses) }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
