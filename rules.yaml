@@ -914,6 +914,7 @@
 - { namepat: "vdr-(.*)",               setname: "vdr:$1", family: [ gentoo, fedora ] }
 
 # Haskell
+- {                                    setname: "haskell:$0", family: [ hackage ] }
 - { namepat: "haskell-(.*)",           setname: "haskell:$1", family: [ debuntu, arch, slackbuilds, gobolinux ] }
 - { namepat: "hs-(.*)",                setname: "haskell:$1", family: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora, guix ] }

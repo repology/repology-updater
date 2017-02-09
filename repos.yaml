@@ -868,6 +868,21 @@
       url: 'https://www.rubygems.org/gems/{name}/'
   tags: [ all, production ]
 
+- name: hackage
+  desc: Hackage
+  url: https://hackage.haskell.org/
+  family: hackage
+  sources:
+    - name: hackage
+      fetcher: WgetTar
+      parser: Hackage
+      url: https://hackage.haskell.org/packages/index.tar.gz
+  shadow: true
+  links:
+    - desc: Hackage page
+      url: 'http://hackage.haskell.org/package/{name}'
+  tags: [ all, production ]
+
 ###########################################################################
 # Foreign repos (android, windows)
 ###########################################################################
