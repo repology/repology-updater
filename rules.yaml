@@ -70,11 +70,13 @@
 - { name: blinkensisters-with-addons,  setname: lostpixels                }
 - { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
 - { name: [blobby2,blobby-volley],     setname: blobby                    }
-- { name: blockout2,                   setname: blockout,                 family: [ debuntu ]  }
-- { name: blockoutii,                  setname: blockout,                 family: [ fedora ]  } # XXX: recheck
-- { name: boaconstructor,              setname: boa-constructor,          family: [ freebsd ] }
-- { name: boost-all,                   setname: boost,                    family: [ freebsd ] }
-- { namepat: "boost1.[0-9]+",          setname: boost,                    family: [ debuntu ] }
+- { name: [blockout2,blockoutii],      setname: blockout                  }
+- { name: bluedevil5,                  setname: bluedevil                 }
+- { name: boaconstructor,              setname: boa-constructor           }
+- { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect], setname: boehm-gc }
+- { name: bombono,                     setname: bombono-dvd               }
+- { name: [boost-all,boost-libs,boost-headers], setname: boost            }
+- { namepat: "boost1[0-9_.]+",         setname: boost                     }
 - { name: botan1.10,                   setname: botan,                    family: [ debuntu ]  }
 - { name: botan110,                    setname: botan,                    family: [ freebsd ] }
 - { name: bouncycastle,                setname: bouncycastle14,           family: [ freebsd ] } # move away
