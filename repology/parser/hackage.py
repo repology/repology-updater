@@ -37,10 +37,8 @@ class HackageParser():
                 if versiondir == 'preferred-versions':
                     continue
 
-                if maxversion == None or VersionCompare(versiondir, maxversion) > 0:
+                if maxversion is None or VersionCompare(versiondir, maxversion) > 0:
                     maxversion = versiondir
-
-            versionpath = os.path.join(modulepath, maxversion)
 
             pkg = Package()
 
