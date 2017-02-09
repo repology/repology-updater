@@ -500,13 +500,13 @@
 
 - { namepat: "asterisk[0-9.]+",        setname: asterisk }
 
-- { namepat: "autoconf-?[0-9.]+",      setname: autoconf }
+- { namepat: "autoconf[_-]?[0-9.]+",    setname: autoconf }
 - { name: autoconf, verpat: "2\\.13.*", setname: autoconf213 } # do we need more splits for this?
 
 - { namepat: "automoc[0-9]+",          setname: automoc }
 - { name: automoc, verpat: "0\\..*",   setname: automoc4 }
 
-- { namepat: "automake-?[0-9.]+",      setname: automake } # do we need splits for this?
+- { namepat: "automake[_-]?[0-9.]+",   setname: automake } # do we need splits for this?
 
 - { namepat: "bash[0-9]+",             setname: bash }
 - { name: bash, verpat: "3\\..*",      setname: bash3 }
