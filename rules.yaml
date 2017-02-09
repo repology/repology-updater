@@ -572,6 +572,7 @@
 
 - { namepat: "perl5[0-9.]*",           setname: perl }
 
+- { name: [python,python2,python3], family: freebsd, ignore: true } # ignore metaports
 - { namepat: "python[23][0-9.]*",      setname: python }
 - { name: python, verpat: "2\\..*",    setname: python2 }
 - { name: python, verpat: "3\\..*",    setname: python3 }
