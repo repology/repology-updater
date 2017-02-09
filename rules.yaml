@@ -439,10 +439,10 @@
 - { namepat: "suse(?:32)?_.*",                                       family: [ pkgsrc ], ignore: true } # linux binary packages?
 
 # Version splits/tweaks
-- { name: allegro, verpat: "4\\..*",  setname: allegro4 }
-- { name: allegro, verpat: "5\\..*",  setname: allegro5 }
-- { name: allegro4.4, setname: allegro4 }
-- { name: allegro-devel, setname: allegro5, family: [ freebsd ] }
+- { namepat: "allegro[0-9.]+",         setname: allegro }
+- { name: allegro-devel, setname: allegro, family: freebsd }
+- { name: allegro, verpat: "4\\..*",   setname: allegro4 }
+- { name: allegro, verpat: "5\\..*",   setname: allegro5 }
 
 - { namepat: "automoc[0-9]+",          setname: automoc }
 - { name: automoc, verpat: "0\\..*",   setname: automoc4 }
