@@ -37,14 +37,19 @@
 - { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               family: [ freebsd ]  }
 - { name: adzap,                       setname: adzapper,                 family: [ freebsd, pkgsrc ] }
 - { name: aiksaurus-gtk,               setname: aiksaurus,                family: [ freebsd ] } # slave port
+- { name: argyll,                      setname: argyllcms                 }
+- { name: arping2,                     setname: arping                    }
+- { namepat: "artefetcher-qt[45]",     setname: artefetcher               }
 - { name: arxlibertatis,               setname: arx-libertatis            }
 - { name: albatross-themes,            setname: albatross-gtk-theme       }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
 - { name: angularjs,                   setname: angular.js                }
 - { name: antimicro-qt4,               setname: antimicro                 }
+- { name: aprutil1,                    setname: apr-util                  }
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
+- { name: [astrometrynet,astrometry.net], setname: astrometry             }
 - { name: atk1.0,                      setname: atk,                      family: [ debuntu ]  }
 - { name: atk2mm,                      setname: atkmm,                    family: [ openbsd ]  }
 - { name: atkmm1.6,                    setname: atk,                      family: [ debuntu ]  }
@@ -474,6 +479,14 @@
 - { name: apache, verpat: "2\\.2\\..*", setname: apache22 }
 - { name: apache, verpat: "2\\.4\\..*", setname: apache24 }
 - { name: apache, verpat: "2\\.5\\..*", setname: apache25 }
+
+- { namepat: "apr[0-9]+",              setname: apr }
+- { name: apr, verpat: "1\\..*",       setname: apr1 }
+- { name: apr, verpat: "2\\..*",       setname: apr2 }
+
+- { namepat: "ardour[0-9]+",           setname: ardour }
+
+- { namepat: "asterisk[0-9.]+",        setname: asterisk }
 
 - { namepat: "automoc[0-9]+",          setname: automoc }
 - { name: automoc, verpat: "0\\..*",   setname: automoc4 }
