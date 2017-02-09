@@ -41,6 +41,7 @@
 - { name: arping2,                     setname: arping                    }
 - { namepat: "artefetcher-qt[45]",     setname: artefetcher               }
 - { name: arxlibertatis,               setname: arx-libertatis            }
+- { name: albatross, verpat: "1\\.7.*", setname: albatross-gtk-theme      }
 - { name: albatross-themes,            setname: albatross-gtk-theme       }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
@@ -904,7 +905,8 @@
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { namepat: "flake8.*",               setname: "python:$0"               }
 - { namepat: "flask.*",                setname: "python:$0"               }
-- { name: sortedcontainers,            setname: "python:sortedcontainers" }
+- { name: sortedcontainers,            setname: "python:$0"               }
+- { name: hy,                          setname: "python:$0"               }
 
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu ] }
