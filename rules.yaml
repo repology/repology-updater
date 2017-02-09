@@ -42,11 +42,13 @@
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
 - { name: angularjs,                   setname: angular.js                }
+- { name: antimicro-qt4,               setname: antimicro                 }
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
 - { name: atk1.0,                      setname: atk,                      family: [ debuntu ]  }
 - { name: atk2mm,                      setname: atkmm,                    family: [ openbsd ]  }
 - { name: atkmm1.6,                    setname: atk,                      family: [ debuntu ]  }
+- { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
 - { name: aws-cli,                     setname: awscli                    }
@@ -449,6 +451,20 @@
 - { name: allegro, verpat: "5\\..*",   setname: allegro5 }
 
 - { namepat: "angelscript-?[0-9.]+",   setname: angelscript }
+
+- { namepat: "ant[0-9.]+",             setname: ant }
+
+- { namepat: "antlr[0-9.]+",           setname: antlr }
+- { name: antlr, verpat: "2\\..*",     setname: antlr2 }
+- { name: antlr, verpat: "3\\..*",     setname: antlr3 }
+- { name: antlr, verpat: "4\\..*",     setname: antlr4 }
+
+- { name: apache-httpd,                setname: apache }
+- { namepat: "apache[0-9.]+",          setname: apache }
+- { name: apache, verpat: "1\\..*",    setname: apache1 }
+- { name: apache, verpat: "2\\.2\\..*", setname: apache22 }
+- { name: apache, verpat: "2\\.4\\..*", setname: apache24 }
+- { name: apache, verpat: "2\\.5\\..*", setname: apache25 }
 
 - { namepat: "automoc[0-9]+",          setname: automoc }
 - { name: automoc, verpat: "0\\..*",   setname: automoc4 }
