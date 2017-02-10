@@ -128,7 +128,20 @@
 - { name: crimson, verpat: "0\\.5.*",  setname: crimson-fields            } # XXX: MUST be renamed upstream
 - { name: critter,                     setname: criticalmass              }
 - { name: crypto++-562,                ignore: true                       } # specific version from AUR
+- { name: ctpp,                        setname: ctpp2                     }
+- { name: curl-http2,                  setname: curl                      }
+- { name: cutecom-legacy,              setname: cutecom                   }
+- { name: cvsweb3,                     setname: cvsweb                    }
+- { name: cython2,                     setname: cython                    }
+- { name: cython2-kivy,                setname: cython-kivy               }
 - { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debuntu ]  }
+- { name: dbench4,                     setname: dbench4                   }
+- { name: dbmail22,                    setname: dbmail                    }
+- { name: dboxfe2,                     setname: dboxfe                    }
+- { name: dconf-editor-3.20,           ignore: true                       } # AUR specific versions
+- { name: ddclient-ipv6,               setname: ddclient                  }
+- { name: deadbeef-with-plugins,       setname: deadbeef                  }
+- { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
 - { name: dgen,                        setname: dgen-sdl,                 family: [ debuntu ]  } # recheck
 - { name: drpython-py27,               setname: drpython                  }
 - { name: dynamips-community,          setname: dynamips,                 family: [ freebsd ] }
@@ -313,6 +326,8 @@
 - { name: crystal,                     setname: crystal-theme,            family: slackbuilds }
 - { name: cdf3,                        setname: cdf                       } # Common Data Format lib
 - { name: cdf, verpat: "0.*",          setname: cdf-df                    } # split out colorized df
+- { name: cutter, verpat: "1\\.0[0-9].*", setname: cutter-tcp             } # TCP/IP Connection Cutter
+- { name: [cutter,cutter-test_framework,cutter-testing-framework], setname: cutter-unittest } # C++ testing framework
 # fuse-emulator vs. fusefs modules - see below
 
 # TODO
@@ -451,6 +466,7 @@
 - { family: libregamewiki, name: "block attack - rise of the blocks", setname: blockattack }
 - { family: libregamewiki, name: "bos wars",                         setname: boswars }
 - { family: libregamewiki, name: "cavez of phear",                   setname: cavezofphear }
+- { family: libregamewiki, name: "curse of war",                     setname: curseofwar }
 - { family: libregamewiki, name: "chromium b.s.u.",                  setname: chromium-bsu }
 - { family: libregamewiki, name: "dungeon crawl stone soup",         setname: stone-soup }
 - { family: libregamewiki, name: "emilia pinball",                   setname: emilia-pinball }
@@ -574,6 +590,18 @@
 
 - { name: csound, verpat: "5\\..*",    setname: csound5 }
 - { name: csound, verpat: "6\\..*",    setname: csound6 }
+
+- { namepat: "cuda-?[0-9.]+",          setname: cuda }
+
+- { namepat: "cvsps[0-9]+",            setname: cvsps }
+
+- { namepat: "db[0-9.]+",              setname: db }
+- { name: db, verpat: "6\\..*",        setname: db6 }
+- { name: db, verpat: "5\\..*",        setname: db5 }
+- { name: db, verpat: "4\\..*",        setname: db4 }
+- { name: db, verpat: "3\\..*",        setname: db3 }
+- { name: db, verpat: "2\\..*",        setname: db2 }
+- { name: db, verpat: "1\\..*",        setname: db1 }
 
 - { name: eigen, verpat: "1\\..*",     setname: eigen1 }
 - { name: eigen, verpat: "2\\..*",     setname: eigen2 }
@@ -978,6 +1006,8 @@
 - { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora, guix ] }
 - { category: dev-haskell,             setname: "haskell:$0", family: [ gentoo ] }
 - { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", family: [ sisyphus ] }
+
+- { name: "haskell:darcs",             setname: darcs              } # ungeneralize as it's more of standalone application
 
 # golang
 - { namepat: "go-(.*)",                setname: "go:$1" }
