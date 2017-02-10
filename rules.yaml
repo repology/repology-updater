@@ -378,7 +378,7 @@
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
 - { name: bison,                       verlonger: 3,                                       ignorever: true } # alt weirdness
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
-- { name: cfitsio,                     ver: "[0-9]{4}",                                    ignorever: true }
+- { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
