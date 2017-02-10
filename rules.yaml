@@ -573,7 +573,7 @@
 - { namepat: "cassandra[0-9]+",        setname: cassandra }
 - { name: cassandra, verpat: "2\\..*", setname: cassandra2 }
 
-- { namepat: "cegui-?[0-9.]+",          setname: cegui }
+- { namepat: "cegui-?[0-9.]+",         setname: cegui }
 
 - { namepat: "celt[0-9.]+",            setname: celt }
 
@@ -584,7 +584,7 @@
 
 - { namepat: "clojure[0-9.]+",         setname: clojure }
 
-- { namepat: "cmake-[0-9.]+",          setname: cmake }
+- { namepat: "cmake-?[0-9.]+",         setname: cmake }
 
 - { namepat: "cryptominisat[0-9]+",    setname: cryptominisat }
 
