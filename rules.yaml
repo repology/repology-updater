@@ -280,6 +280,21 @@
     - ttf-anonymous-pro
   setname: "fonts:anonymouspro"
 
+- { name: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
+- { name: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
+
+- name:
+    - fonts-bitmap-terminus
+    - xfonts-terminus
+    - terminus-bitmap-fonts
+    - terminus-cyrillic
+  setname: "fonts:terminus"
+
+- name:
+    - terminus-font-ttf
+    - terminus-ttf
+  setname: "fonts:terminus-ttf"
+
 # XXX: continue looking through the list starting from gaul
 
 # GNUstep packages (should be likely the other way around: foo->foo.app)
@@ -365,6 +380,7 @@
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
 - { name: cfitsio,                     ver: "[0-9]{4}",                                    ignorever: true }
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
+- { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dhewm3,                      verpat: "2013.*",                                   ignorever: true }
