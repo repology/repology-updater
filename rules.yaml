@@ -94,13 +94,40 @@
 - { name: cairomm1_0,                  setname: cairomm                   }
 - { name: cattle-1.0,                  setname: cattle                    }
 - { name: cavez-of-phear,              setname: cavezofphear              }
+- { name: clipit-gtk3,                 setname: clipit                    }
 - { name: cbatticon-gtk2,              setname: cbatticon                 }
+- { name: cdogs,                       setname: cdogs-sdl                 }
+- { name: [cdparanoia-iii,cdparanoia-overread], setname: cdparanoia       }
 - { name: cegui-mk2,                   setname: cegui,                    family: [ debuntu ]  }
+- { name: ce-x11,                      setname: ce                        }
 - { name: celestia-nonfree,            setname: celestia,                 family: [ debuntu ]  }
+- { name: cfitsio3,                    setname: cfitsio                   }
+- { name: cglib3,                      setname: cglib                     }
+- { name: charls1,                     setname: charls                    }
 - { name: chexedit,                    setname: curses-hexedit,           family: [ freebsd ] }
+- { name: [chipmunk6,chipmunkphysics,libchipmunk], setname: chipmunk      }
 - { name: chromium-browser,            setname: chromium                  }
 - { name: chromium-browser-stable,     setname: chromium                  }
+- { name: ckeditor3,                   setname: ckeditor                  }
+- { name: cln6,                        setname: cln                       }
+- { name: [clucene09,clucene-core],    setname: clucene                   }
+- { name: clutter-1.0,                 setname: clutter                   }
+- { name: clutter-gtk0.10,             setname: clutter-gtk               }
+- { name: [cockatrice-client,cockatrice-server], setname: cockatrice      }
+- { name: collectd5,                   setname: collectd                  }
 - { name: corsixth,                    setname: corsix-th,                family: [ freebsd ] }
+- { name: commoncpp,                   setname: commoncpp2                }
+- { name: concurrency-kit,             setname: concurrencykit            }
+- { name: conserver8,                  setname: conserver                 }
+- { name: consolekit2,                 setname: consolekit                }
+- { name: coolreader,                  setname: coolreader3               }
+- { name: cpmtools2,                   setname: cpmtools                  }
+- { name: [cppcheck-nogui,cppcheck-nox], setname: cppcheck                }
+- { name: cracklib2,                   setname: cracklib                  }
+- { name: crimsonfields,               setname: crimson-fields            }
+- { name: crimson, verpat: "0\\.5.*",  setname: crimson-fields            } # XXX: MUST be renamed upstream
+- { name: critter,                     setname: criticalmass              }
+- { name: crypto++-562,                ignore: true                       } # specific version from AUR
 - { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debuntu ]  }
 - { name: dgen,                        setname: dgen-sdl,                 family: [ debuntu ]  } # recheck
 - { name: drpython-py27,               setname: drpython                  }
@@ -321,6 +348,7 @@
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
 - { name: bison,                       verlonger: 3,                                       ignorever: true } # alt weirdness
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
+- { name: cfitsio,                     ver: "[0-9]{4}",                                    ignorever: true }
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
@@ -528,6 +556,21 @@
 
 - { namepat: "cassandra[0-9]+",        setname: cassandra }
 - { name: cassandra, verpat: "2\\..*", setname: cassandra2 }
+
+- { namepat: "cegui-?[0-9]+",          setname: cegui }
+
+- { namepat: "celt[0-9.]+",            setname: celt }
+
+- { namepat: "cfengine[0-9]+",         setname: cfengine } # XXX: split?
+- { namepat: "cfengine-masterfiles[0-9]+", setname: cfengine-masterfiles }
+
+- { namepat: "clanlib-?[0-9.]+",       setname: clanlib } # XXX: split?
+
+- { namepat: "clojure[0-9.]+",         setname: clojure }
+
+- { namepat: "cmake-[0-9.]+",          setname: cmake }
+
+- { namepat: "cryptominisat[0-9]+",    setname: cryptominisat }
 
 - { name: csound, verpat: "5\\..*",    setname: csound5 }
 - { name: csound, verpat: "6\\..*",    setname: csound6 }
@@ -907,6 +950,10 @@
 - { namepat: "flask.*",                setname: "python:$0"               }
 - { name: sortedcontainers,            setname: "python:$0"               }
 - { name: hy,                          setname: "python:$0"               }
+- { name: cherrypy,                    setname: "python:$0"               }
+- { name: cherrypy3,                   setname: "python:cherrypy"         }
+- { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
+- { name: "python:cherrypy2",          setname: "python:cherrypy"         }
 
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu ] }
