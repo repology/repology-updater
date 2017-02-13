@@ -21,12 +21,10 @@ import pprint
 import yaml
 
 
-class MatchResult:
-    ignorepackage = 1
-    ignoreversion = 2
-    lastrule = 4
-    unignorepackage = 8
-    unignoreversion = 16
+class RuleApplyResult:
+    unmatched = 1
+    matched = 2
+    last = 3
 
 
 class PackageTransformer:
@@ -41,6 +39,7 @@ class PackageTransformer:
                 self.rules = yaml.safe_load(rulesfile)
 
         pp = pprint.PrettyPrinter(width=10000)
+        rulenum = 0
         for rule in self.rules:
             # save pretty-print before all transformations
             rule['pretty'] = pp.pformat(rule)
@@ -56,109 +55,131 @@ class PackageTransformer:
                     rule[field] = re.compile(rule[field] + "$", re.ASCII)
 
             rule['matches'] = 0
+            rule['number'] = rulenum
+            rulenum += 1
 
-    def MatchRule(self, rule, pkgname, pkgversion, pkgcategory, pkgfamily):
+        self.fastrules = {}
+        self.slowrules = []
+
+        for rule in self.rules:
+            if 'name' in rule:
+                for name in rule['name']:
+                    self.fastrules.setdefault(name, []).append(rule)
+            else:
+                self.slowrules.append(rule)
+
+    def ApplyRule(self, rule, package):
         # match family
         if 'family' in rule:
-            if pkgfamily not in rule['family']:
-                return False
+            if package.family not in rule['family']:
+                return RuleApplyResult.unmatched
 
         # match categories
         if 'category' in rule:
-            if pkgcategory not in rule['category']:
-                return False
+            if package.category not in rule['category']:
+                return RuleApplyResult.unmatched
 
         # match name
         if 'name' in rule:
-            if pkgname not in rule['name']:
-                return False
+            if package.effname not in rule['name']:
+                return RuleApplyResult.unmatched
 
         # match name patterns
         if 'namepat' in rule:
-            if not rule['namepat'].match(pkgname):
-                return False
+            if not rule['namepat'].match(package.effname):
+                return RuleApplyResult.unmatched
 
         # match version
         if 'ver' in rule:
-            if pkgversion not in rule['ver']:
-                return False
+            if package.version not in rule['ver']:
+                return RuleApplyResult.unmatched
 
         # match version patterns
         if 'verpat' in rule:
-            if not rule['verpat'].match(pkgversion):
-                return False
+            if not rule['verpat'].match(package.version):
+                return RuleApplyResult.unmatched
 
         # match number of version components
         if 'verlonger' in rule:
-            if not len(pkgversion.split('.')) > rule['verlonger']:
-                return False
+            if not len(package.version.split('.')) > rule['verlonger']:
+                return RuleApplyResult.unmatched
 
-        return True
+        # rule matches, apply effects!
+        result = RuleApplyResult.matched
 
-    def ApplyRule(self, rule, pkgname, pkgversion):
-        flags = 0
+        rule['matches'] += 1
 
         if 'ignore' in rule:
-            flags |= MatchResult.ignorepackage
+            package.ignore = True
 
         if 'unignore' in rule:
-            flags |= MatchResult.unignorepackage
+            package.ignore = False
 
         if 'ignorever' in rule:
-            flags |= MatchResult.ignoreversion
+            package.ignoreversion = True
 
         if 'unignorever' in rule:
-            flags |= MatchResult.unignoreversion
+            package.ignoreversion = False
 
         if 'last' in rule:
-            flags |= MatchResult.lastrule
+            result = RuleApplyResult.last
 
         if 'setname' in rule:
             match = None
             if 'namepat' in rule:
-                match = rule['namepat'].match(pkgname)
+                match = rule['namepat'].match(package.effname)
             if match:
-                pkgname = self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
+                package.effname = self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
             else:
-                pkgname = self.dollar0.sub(pkgname, rule['setname'])
+                package.effname = self.dollar0.sub(package.effname, rule['setname'])
 
         if 'replaceinname' in rule:
             for pattern, replacement in rule['replaceinname'].items():
-                pkgname = pkgname.replace(pattern, replacement)
+                package.effname = package.effname.replace(pattern, replacement)
 
         if 'tolowername' in rule:
-            pkgname = pkgname.lower()
+            package.effname = package.effname.lower()
 
-        return flags, pkgname
+        return result
+
+    def GetFastRule(self, package, lownumber=-1):
+        for fastrule in self.fastrules.get(package.effname, []):
+            if fastrule['number'] > lownumber:
+                return fastrule
+
+        return None
 
     def Process(self, package):
-        transformed_name = package.name
+        # start with package.name as is
+        package.effname = package.name
 
-        # apply first matching rule
-        for rule in self.rules:
-            if not self.MatchRule(rule, transformed_name, package.version, package.category, package.family):
-                continue
+        # keep the next fast rule that will match
+        # it will be racalculated as soon as it's reached or
+        # as soon as any slow rule matches (as it may change effname)
+        nextfastrule = self.GetFastRule(package)
 
-            rule['matches'] += 1
+        # walk the slow rules sequentionally
+        for slowrule in self.slowrules:
+            result = None
 
-            flags, transformed_name = self.ApplyRule(rule, transformed_name, package.version)
+            # apply fast rules
+            while nextfastrule and nextfastrule['number'] < slowrule['number']:
+                if self.ApplyRule(nextfastrule, package) == RuleApplyResult.last:
+                    return
+                nextfastrule = self.GetFastRule(package, nextfastrule['number'])
 
-            if flags & MatchResult.ignorepackage:
-                package.ignore = True
+            # apply slow rule
+            result = self.ApplyRule(slowrule, package)
+            if result == RuleApplyResult.matched:
+                nextfastrule = self.GetFastRule(package, slowrule['number'])
+            elif result == RuleApplyResult.last:
+                return
 
-            if flags & MatchResult.ignoreversion:
-                package.ignoreversion = True
-
-            if flags & MatchResult.unignorepackage:
-                package.ignore = False
-
-            if flags & MatchResult.unignoreversion:
-                package.ignoreversion = False
-
-            if flags & MatchResult.lastrule:
-                break
-
-        package.effname = transformed_name
+        # apply remaining fast rules
+        while nextfastrule:
+            if self.ApplyRule(nextfastrule) == RuleApplyResult.last:
+                return
+            nextfastrule = self.GetFastRule(package, nextfastrule['number'])
 
     def GetUnmatchedRules(self):
         result = []
