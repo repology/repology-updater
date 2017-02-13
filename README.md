@@ -49,6 +49,7 @@ version are always parsed.
 | CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔     | ✔       |          |
 | Chocolatey                       | ✔       |         |       | ✔     |         |          |
 | CPAN                             |         | ✔       |       | ✔ (2) |         |          |
+| CRUX                             | ✔       | ✔       |       | ✔     |         |          |
 | Debian, Ubuntu                   |         | ✔       | ✔     | ✔     |         |          |
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔     |         |          |

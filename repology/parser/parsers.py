@@ -42,3 +42,4 @@ from .nix import NixJsonParser
 from .aports import ApkIndexParser
 from .anitya import AnityaApiParser
 from .hackage import HackageParser
+from .crux import CRUXParser
