@@ -1061,14 +1061,9 @@
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ opensuse ] }
 
 # gstreamer plugins
-- { namepat: "gst-plugins-(.*)",       setname: "gstreamer1plugins:$1", family: [ gentoo, debuntu ] }
-- { namepat: "gst-plugins0.10-(.*)",   setname: "gstreamer0plugins:$1" }
-- { namepat: "gstreamer-?0[_.]10-(?:plugins-)?(.*)", setname: "gstreamer0plugins:$1" }
-- { namepat: "gst-plugins1-(.*)",      setname: "gstreamer1plugins:$1" }
-- { namepat: "gstreamer-plugins-(.*)", setname: "gstreamer0plugins:$1", family: [ freebsd ] }
-- { namepat: "gstreamer1(?:\\.0)?-(?:plugins-)?(.*)", setname: "gstreamer1plugins:$1" }
-- { namepat: "gstreamer-plugins-?(.*)", verpat: "0.*", setname: "gstreamer0plugins:$1", family: [ fedora, centos ] }
-- { namepat: "gstreamer-plugins-?(.*)", verpat: "1.*", setname: "gstreamer1plugins:$1", family: [ opensuse ] }
+- { namepat: "gst-plugins-(.*)-compat",              setname: "gstreamer1plugins:$1", family: crux }
+- { namepat: "gst(?:reamer)?[01.]*(?:-plugins[01.]*)?-(.*?)[01.]*(?:-plugins)?", setname: "gstreamer1plugins:$1" }
+- { namepat: "gstreamer1plugins:(.*)", verpat: "0.*", setname: "gstreamer0plugins:$1" }
 
 # Apache modules
 - { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", family: [ freebsd, openbsd, pkgsrc ] }
