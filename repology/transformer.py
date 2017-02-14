@@ -177,7 +177,7 @@ class PackageTransformer:
 
         # apply remaining fast rules
         while nextfastrule:
-            if self.ApplyRule(nextfastrule) == RuleApplyResult.last:
+            if self.ApplyRule(nextfastrule, package) == RuleApplyResult.last:
                 return
             nextfastrule = self.GetFastRule(package, nextfastrule['number'])
 
