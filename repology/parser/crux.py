@@ -76,7 +76,7 @@ class CRUXParser():
                         maintainer = line[13:].strip()
                         if ',' in maintainer:
                             _, email = line[13:].strip().split(',', 1)
-                            pkg.maintainers.append(email)
+                            pkg.maintainers += GetMaintainers(email)
                         else:
                             print("WARNING: bad Maintainer format for {}".format(pkgdir), file=sys.stderr)
 
