@@ -131,6 +131,7 @@
 - { name: ctpp,                        setname: ctpp2                     }
 - { name: curl-http2,                  setname: curl                      }
 - { name: cutecom-legacy,              setname: cutecom                   }
+- { name: curseofwar-sdl,              setname: curseofwar                }
 - { name: cvsweb3,                     setname: cvsweb                    }
 - { name: cython2,                     setname: cython                    }
 - { name: cython2-kivy,                setname: cython-kivy               }
