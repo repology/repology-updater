@@ -2,20 +2,21 @@
 
 ## Dependencies
 
-Mandatory:
+Needed for core:
 
-- [Python](https://www.python.org/) 3.x
+- [Python](https://www.python.org/) 3.5+
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [requests](http://python-requests.org/)
 - Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
 
-Optional, needed for parsing some repositories:
+Needed for fetching/parsing specific repository data:
 
 - [wget](https://www.gnu.org/software/wget/)
 - [git](https://git-scm.com/)
+- [rsync](https://rsync.samba.org/)
 - [librpm](http://www.rpm.org/) and [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
 
-Optional, for web-application:
+Needed for web-application:
 
 - Python module [flask](http://flask.pocoo.org/)
 - Python module [psycopg](http://initd.org/psycopg/)
