@@ -201,6 +201,7 @@
 - { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: libass4,                     setname: libass                    }
+- { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
@@ -260,7 +261,7 @@
 - { namepat: "enscript-.*",            setname: enscript,                 family: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         family: [ pkgsrc, openbsd ] }
-- { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debuntu, gentoo ]  }
+- { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debuntu, gentoo, crux ]  }
 - { namepat: "open[gs]fx",             setname: "openttd-$0",             family: [ freebsd, gentoo ] }
 - { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 family: [ debuntu ]  }
 - { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                family: [ debuntu ]  }
@@ -827,7 +828,7 @@
 - { family: [ cpan ],                setname: "perl:$0", tolowername: true, last: true } # don't replace _ with - !
 # Note that Gentoo misbehaves by changing upstream versioning scheme, so
 # we ignore it in comparison
-- { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd, crux ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", family: [ debuntu ] }
 - { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa, nix, alpine ] }
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo ] }
@@ -984,7 +985,7 @@
 - { namepat: "python-(.*)",            setname: "python:$1", family: [ debuntu, centos, mageia, gobolinux ] }
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", family: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch, guix ] }
-- { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds, rosa ] }
+- { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds, rosa, crux ] }
 - { namepat: "python[0-9]\\.[0-9]-(.*)", setname: "python:$1", family: [ nix ] }
 - { namepat: "py[23]?-(.*)",           setname: "python:$1", family: [ alpine ] }
 - { category: dev-python,              setname: "python:$0", family: [ gentoo ] }
@@ -1055,7 +1056,7 @@
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", family: [ freebsd, pkgsrc, openbsd, sisyphus ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", family: [ freebsd, pkgsrc, mageia ] }
 - { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", family: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "php-(.*)",               setname: "php:$1", family: [ arch, fedora, debuntu, slackbuilds ] }
+- { namepat: "php-(.*)",               setname: "php:$1", family: [ arch, fedora, debuntu, slackbuilds, crux ] }
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ sisyphus ], "ignorever": true }
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ opensuse ] }
 

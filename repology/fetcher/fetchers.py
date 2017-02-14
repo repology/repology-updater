@@ -24,3 +24,4 @@ from .chocolatey import ChocolateyFetcher
 from .rpm import RepodataFetcher
 from .freshcode import FreshcodeFetcher
 from .guix import GuixFetcher
+from .rsync import RsyncFetcher
