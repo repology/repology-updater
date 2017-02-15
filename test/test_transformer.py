@@ -82,6 +82,18 @@ class TestPackageTransformer(unittest.TestCase):
         self.assertEqual(p2.effname, "p2")
         self.assertEqual(p3.effname, "baz")
 
+    def test_match_name_multi(self):
+        p1 = Package(name="p1", version="1.0")
+        p2 = Package(name="p2", version="2.0")
+        p3 = Package(name="p3", version="2.0")
+        t = PackageTransformer(rulestext='[ { name: [p1,p2], setname: bar } ]')
+        t.Process(p1)
+        t.Process(p2)
+        t.Process(p3)
+        self.assertEqual(p1.effname, "bar")
+        self.assertEqual(p2.effname, "bar")
+        self.assertEqual(p3.effname, "p3")
+
     def test_match_namepat(self):
         p1 = Package(name="p1", version="1.0")
         p2 = Package(name="p2", version="2.0")
