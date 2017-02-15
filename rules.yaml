@@ -143,8 +143,9 @@
 - { name: ddclient-ipv6,               setname: ddclient                  }
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
 - { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
-- { name: dgen,                        setname: dgen-sdl,                 family: [ debuntu ]  } # recheck
+- { name: dgen,                        setname: dgen-sdl                  }
 - { name: drpython-py27,               setname: drpython                  }
+- { name: devedeng,                    setname: devede                    }
 - { name: dynamips-community,          setname: dynamips,                 family: [ freebsd ] }
 - { name: dwarffortress,               setname: dwarf-fortress            }
 - { name: linux-dwarffortress,         setname: dwarf-fortress            }
@@ -221,7 +222,6 @@
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles,              family: [ pkgsrc, arch, openbsd ] }
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
-- { name: [sdl12,"libsdl1.2"],         setname: sdl                       }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
 - { namepat: "sdl-?sopwith",           setname: sopwith                   }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debuntu ]  }
@@ -292,6 +292,15 @@
     - terminus-bitmap-fonts
     - terminus-cyrillic
   setname: "fonts:terminus"
+
+- name:
+    - dejavu-fonts
+    - dejavu-fonts-ttf
+    - dejavu-ttf
+    - fonts-dejavu
+    - fonts-ttf-dejavu
+    - xorg-font-dejavu-ttf
+  setname: "fonts:dejavu"
 
 - name:
     - terminus-font-ttf
@@ -733,6 +742,9 @@
 - { name: ruby, verpat: "2\\.2.*",     setname: ruby22 }
 - { name: ruby, verpat: "2\\.3.*",     setname: ruby23 }
 - { name: ruby, verpat: "2\\.4.*",     setname: ruby24 }
+
+- { name: [sdl12,"libsdl1.2"],         setname: sdl }
+- { name: sdl, verpat: "2.*",          setname: sdl2 }
 
 - { namepat: "sfml[0-9.]+",            setname: sfml }
 - { name: sfml, verpat: "1\\..*",      setname: sfml1 }
