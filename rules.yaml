@@ -192,6 +192,7 @@
 - { name: ja2,                         setname: ja2-stracciatella,        family: [ freebsd ] }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
+- { name: krita3,                      setname: krita                     }
 - { name: libarpack-ng,                setname: arpack-ng                 }
 - { name: libagg,                      setname: agg                       }
 - { name: libcheck,                    setname: check                     } # XXX: reverse?
@@ -379,6 +380,7 @@
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
 - { name: bison,                       verlonger: 3,                                       ignorever: true } # alt weirdness
+- { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
@@ -998,6 +1000,7 @@
 - { name: hy,                          setname: "python:$0"               }
 - { name: cherrypy,                    setname: "python:$0"               }
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
+- { name: numeric,                     setname: "python:numeric", family: [crux,gobolinux] }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
 
@@ -1062,7 +1065,7 @@
 
 # gstreamer plugins
 - { namepat: "gst-plugins-(.*)-compat",              setname: "gstreamer1plugins:$1", family: crux }
-- { namepat: "gst(?:reamer)?[01.]*(?:-plugins[01.]*)?-(.*?)[01.]*(?:-plugins)?", setname: "gstreamer1plugins:$1" }
+- { namepat: "gst(?:reamer)?[01.]*(?:-plugins?[01.]*)?-(.*?)[01.]*(?:-plugins)?", setname: "gstreamer1plugins:$1" }
 - { namepat: "gstreamer1plugins:(.*)", verpat: "0.*", setname: "gstreamer0plugins:$1" }
 
 # Apache modules
