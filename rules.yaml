@@ -707,6 +707,9 @@
 - { name: lua, verpat: "5\\.3\\..*",  setname: lua53 }
 - { namepat: "lua([0-9])\\.([0-9])",  setname: "lua$1$2" }
 
+- { name: [libevent2,libevent1],       setname: libevent }
+- { name: libevent, verpat: "2.*",     setname: libevent2 }
+
 - { namepat: "msynctool[0-9]+",        setname: msynctool }
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
