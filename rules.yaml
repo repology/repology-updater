@@ -708,7 +708,7 @@
 - { namepat: "lua([0-9])\\.([0-9])",  setname: "lua$1$2" }
 
 - { name: [libevent2,libevent1],       setname: libevent }
-- { name: libevent, verpat: "2.*",     setname: libevent2 }
+- { name: libevent, verpat: "1.*",     setname: libevent1 }
 
 - { namepat: "msynctool[0-9]+",        setname: msynctool }
 
