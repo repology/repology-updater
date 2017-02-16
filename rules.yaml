@@ -90,6 +90,7 @@
 - { name: bugzilla50,                  setname: bugzilla                  }
 - { name: bullet3,                     setname: bullet                    }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
+- { name: bzr-tools,                   setname: bzrtools                  }
 - { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins        }
 - { name: cairomm1_0,                  setname: cairomm                   }
 - { name: cattle-1.0,                  setname: cattle                    }
@@ -183,14 +184,15 @@
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
 - { name: gl117,                       setname: gl-117,                   family: [ gentoo ]  }
-- { name: google-mock,                 setname: gmock,                    family: [ debuntu ]  }
-- { name: googlemock,                  setname: gmock,                    family: [ freebsd ] }
-- { name: googletest,                  setname: gtest,                    family: [ freebsd, pkgsrc ] }
+- { name: [google-mock,googlemock,libgmock], setname: gmock               }
+- { name: [googletest,libgtest],       setname: gtest                     }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
+- { name: iccexamin,                   setname: icc-examin                }
 - { name: icecast2,                    setname: icecast                   }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: ja2,                         setname: ja2-stracciatella,        family: [ freebsd ] }
+- { name: jbig-kit,                    setname: jbigkit                   }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
 - { name: krita3,                      setname: krita                     }
@@ -222,6 +224,9 @@
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles,              family: [ pkgsrc, arch, openbsd ] }
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
+- { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease], setname: qtcreator }
+- { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
+- { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
 - { namepat: "sdl-?sopwith",           setname: sopwith                   }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debuntu ]  }
@@ -250,7 +255,8 @@
 - { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
 - { name: varnish4,                    setname: varnish,                  family: [ freebsd ]  }
 - { name: vsftpd-ssl,                  setname: vsftpd,                   family: [ freebsd ]  }
-- { name: webp,                        setname: libwebp,                  family: [ freebsd ]  }
+- { name: [webp,libwebp6],             setname: libwebp                   }
+- { name: wpasupplicant,               setname: wpa_supplicant            }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
 - { name: xfce4-dict-plugin,           setname: xfce4-dict,               family: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                family: [ freebsd ] }
@@ -294,6 +300,7 @@
   setname: "fonts:terminus"
 
 - name:
+    - dejavu
     - dejavu-fonts
     - dejavu-fonts-ttf
     - dejavu-ttf
@@ -301,6 +308,34 @@
     - fonts-ttf-dejavu
     - xorg-font-dejavu-ttf
   setname: "fonts:dejavu"
+
+- name:
+    - dejavu-lgc-fonts
+    - fonts-ttf-dejavu-lgc
+  setname: "fonts:dejavu-lgc"
+
+- name:
+    - dina
+    - dina-bitmap-fonts
+    - dina-font
+    - dina-font-pcf
+    - dina-fonts
+  setname: "fonts:dina"
+
+- name:
+    - fonts-ttf-opensans
+    - google-opensans-fonts
+    - opensans-ttf
+    - ttf-opensans
+  setname: "fonts:opensans"
+
+- name:
+    - proggy-fonts
+    - proggyfonts
+    - proggy_fonts-ttf
+    - proggy_fonts
+    - proggy-fonts
+  setname: "fonts:proggy"
 
 - name:
     - terminus-font-ttf
@@ -355,6 +390,8 @@
 - { name: cdf, verpat: "0.*",          setname: cdf-df                    } # split out colorized df
 - { name: cutter, verpat: "1\\.0[0-9].*", setname: cutter-tcp             } # TCP/IP Connection Cutter
 - { name: [cutter,cutter-test_framework,cutter-testing-framework], setname: cutter-unittest } # C++ testing framework
+- { name: diaspora, verpat: "1\\.[0-9]+\\.[0-9]+", setname: diaspora-game }
+- { name: diaspora, setname: diaspora-social }
 # fuse-emulator vs. fusefs modules - see below
 
 # TODO
@@ -667,7 +704,7 @@
 - { namepat: "inn[0-9]+",              setname: inn }
 - { name: inn, verpat: "1\\..*",       setname: inn1 }
 
-- { name: insighttoolkit4,             setname: insighttoolkit }
+- { name: [insighttoolkit4,insight-toolkit], setname: insighttoolkit }
 
 - { namepat: "italc[0-9]+",            setname: italc }
 - { name: italc, verpat: "1\\..*",     setname: italc1 }
@@ -792,6 +829,9 @@
 - { name: swig, verpat: "1\\..*",      setname: swig13 }
 - { name: swig, verpat: "2\\..*",      setname: swig2 }
 - { name: swig, verpat: "3\\..*",      setname: swig3 }
+
+- { namepat: "wesnoth[0-9.-]+",        setname: wesnoth }
+- { name: wesnoth-devel,               setname: wesnoth }
 
 # TODO
 # - texlive
@@ -1018,6 +1058,8 @@
 - { name: numeric,                     setname: "python:numeric", family: [crux,gobolinux] }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
+
+- { name: "python:bzrtools",           setname: bzrtools                  }
 
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu ] }
