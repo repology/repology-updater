@@ -82,6 +82,11 @@ def Main():
     if options.logfile:
         logger = FileLogger(options.logfile)
 
+    if options.fields == 'all':
+        options.fields = sorted(Package().__dict__.keys())
+    else:
+        options.fields = options.fields.split(',')
+
     # Set up filters
     filters = []
     if options.maintainer:
@@ -108,12 +113,11 @@ def Main():
             return
 
         if options.dump == 'packages':
-            #print(packageset[0].effname)
             for package in packageset:
                 print(
                     options.field_separator.join(
                         [
-                            str(getattr(package, field)) for field in options.fields.split(',')
+                            str(getattr(package, field)) for field in options.fields
                         ]
                     )
                 )
