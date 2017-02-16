@@ -30,7 +30,7 @@ class RosaInfoXmlParser():
 
         root = xml.etree.ElementTree.parse(path)
 
-        for info in root.findall("./info"):
+        for info in root.findall('./info'):
             pkg = Package()
 
             fn = info.attrib['fn']
@@ -39,12 +39,12 @@ class RosaInfoXmlParser():
 
             pos2 = fn.rfind('-')
             if pos2 == -1:
-                print("WARNING: unable to parse fn: {}".format(fn), file=sys.stderr)
+                print('WARNING: unable to parse fn: {}'.format(fn), file=sys.stderr)
                 continue
 
             pos1 = fn.rfind('-', 0, pos2)
             if pos1 == -1:
-                print("WARNING: unable to parse fn: {}".format(fn), file=sys.stderr)
+                print('WARNING: unable to parse fn: {}'.format(fn), file=sys.stderr)
                 continue
 
             pkg.name = fn[:pos1]

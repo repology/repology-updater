@@ -31,14 +31,14 @@ class GuixFetcher():
         pages.append('0-9')
 
         for page in pages:
-            logger.Log("fetching page " + page)
-            pageurl = self.url + "/" + page + ".html"
-            with open(os.path.join(statepath, page + ".html"), "w", encoding="utf-8") as pagefile:
+            logger.Log('fetching page ' + page)
+            pageurl = self.url + '/' + page + '.html'
+            with open(os.path.join(statepath, page + '.html'), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(Get(pageurl).text)
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
-            logger.Log("no update requested, skipping")
+            logger.Log('no update requested, skipping')
             return
 
         if os.path.exists(statepath):

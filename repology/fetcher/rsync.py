@@ -28,11 +28,11 @@ class RsyncFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
-            logger.Log("no update requested, skipping")
+            logger.Log('no update requested, skipping')
             return
 
         try:
-            command = "rsync -avz {} {}".format(self.url, statepath)
+            command = 'rsync -avz {} {}'.format(self.url, statepath)
             RunSubprocess(command, logger, shell=True)
         except:
             if os.path.exists(statepath):

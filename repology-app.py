@@ -38,7 +38,7 @@ app.config.from_pyfile('repology.conf', silent=True)
 app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 
 # global repology objects
-repoman = RepositoryManager(app.config['REPOS_PATH'], "dummy")  # XXX: should not construct fetchers and parsers here
+repoman = RepositoryManager(app.config['REPOS_PATH'], 'dummy')  # XXX: should not construct fetchers and parsers here
 repometadata = repoman.GetMetadata()
 reponames = repoman.GetNames(app.config['REPOSITORIES'])
 
@@ -227,39 +227,39 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
     )
 
 
-@app.route("/")  # XXX: redirect to metapackages/all?
-@app.route("/metapackages/")  # XXX: redirect to metapackages/all?
-@app.route("/metapackages/all/")
-@app.route("/metapackages/all/<bound>/")
+@app.route('/')  # XXX: redirect to metapackages/all?
+@app.route('/metapackages/')  # XXX: redirect to metapackages/all?
+@app.route('/metapackages/all/')
+@app.route('/metapackages/all/<bound>/')
 def metapackages_all(bound=None):
     return metapackages_generic(
         bound,
-        template="metapackages-all.html"
+        template='metapackages-all.html'
     )
 
 
-@app.route("/metapackages/unique/")
-@app.route("/metapackages/unique/<bound>/")
+@app.route('/metapackages/unique/')
+@app.route('/metapackages/unique/<bound>/')
 def metapackages_unique(bound=None):
     return metapackages_generic(
         bound,
         InNumFamiliesQueryFilter(less=1),
-        template="metapackages-unique.html"
+        template='metapackages-unique.html'
     )
 
 
-@app.route("/metapackages/widespread/")
-@app.route("/metapackages/widespread/<bound>/")
+@app.route('/metapackages/widespread/')
+@app.route('/metapackages/widespread/<bound>/')
 def metapackages_widespread(bound=None):
     return metapackages_generic(
         bound,
         InNumFamiliesQueryFilter(more=10),
-        template="metapackages-widespread.html"
+        template='metapackages-widespread.html'
     )
 
 
-@app.route("/metapackages/in-repo/<repo>/")
-@app.route("/metapackages/in-repo/<repo>/<bound>/")
+@app.route('/metapackages/in-repo/<repo>/')
+@app.route('/metapackages/in-repo/<repo>/<bound>/')
 def metapackages_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -267,13 +267,13 @@ def metapackages_in_repo(repo, bound=None):
     return metapackages_generic(
         bound,
         InRepoQueryFilter(repo),
-        template="metapackages-in-repo.html",
+        template='metapackages-in-repo.html',
         repo=repo,
     )
 
 
-@app.route("/metapackages/outdated-in-repo/<repo>/")
-@app.route("/metapackages/outdated-in-repo/<repo>/<bound>/")
+@app.route('/metapackages/outdated-in-repo/<repo>/')
+@app.route('/metapackages/outdated-in-repo/<repo>/<bound>/')
 def metapackages_outdated_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -281,13 +281,13 @@ def metapackages_outdated_in_repo(repo, bound=None):
     return metapackages_generic(
         bound,
         OutdatedInRepoQueryFilter(repo),
-        template="metapackages-outdated-in-repo.html",
+        template='metapackages-outdated-in-repo.html',
         repo=repo,
     )
 
 
-@app.route("/metapackages/not-in-repo/<repo>/")
-@app.route("/metapackages/not-in-repo/<repo>/<bound>/")
+@app.route('/metapackages/not-in-repo/<repo>/')
+@app.route('/metapackages/not-in-repo/<repo>/<bound>/')
 def metapackages_not_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -295,13 +295,13 @@ def metapackages_not_in_repo(repo, bound=None):
     return metapackages_generic(
         bound,
         NotInRepoQueryFilter(repo),
-        template="metapackages-not-in-repo.html",
+        template='metapackages-not-in-repo.html',
         repo=repo,
     )
 
 
-@app.route("/metapackages/candidates-for-repo/<repo>/")
-@app.route("/metapackages/candidates-for-repo/<repo>/<bound>/")
+@app.route('/metapackages/candidates-for-repo/<repo>/')
+@app.route('/metapackages/candidates-for-repo/<repo>/<bound>/')
 def metapackages_candidates_for_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -310,13 +310,13 @@ def metapackages_candidates_for_repo(repo, bound=None):
         bound,
         NotInRepoQueryFilter(repo),
         InNumFamiliesQueryFilter(more=5),
-        template="metapackages-candidates-for-repo.html",
+        template='metapackages-candidates-for-repo.html',
         repo=repo,
     )
 
 
-@app.route("/metapackages/unique-in-repo/<repo>/")
-@app.route("/metapackages/unique-in-repo/<repo>/<bound>/")
+@app.route('/metapackages/unique-in-repo/<repo>/')
+@app.route('/metapackages/unique-in-repo/<repo>/<bound>/')
 def metapackages_unique_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -325,46 +325,46 @@ def metapackages_unique_in_repo(repo, bound=None):
         bound,
         InRepoQueryFilter(repo),
         InNumFamiliesQueryFilter(less=1),
-        template="metapackages-unique-in-repo.html",
+        template='metapackages-unique-in-repo.html',
         repo=repo,
     )
 
 
-@app.route("/metapackages/by-maintainer/<maintainer>/")
-@app.route("/metapackages/by-maintainer/<maintainer>/<bound>/")
+@app.route('/metapackages/by-maintainer/<maintainer>/')
+@app.route('/metapackages/by-maintainer/<maintainer>/<bound>/')
 def metapackages_by_maintainer(maintainer, bound=None):
     return metapackages_generic(
         bound,
         MaintainerQueryFilter(maintainer),
-        template="metapackages-by-maintainer.html",
+        template='metapackages-by-maintainer.html',
         maintainer=maintainer,
     )
 
 
-@app.route("/metapackages/outdated-by-maintainer/<maintainer>/")
-@app.route("/metapackages/outdated-by-maintainer/<maintainer>/<bound>/")
+@app.route('/metapackages/outdated-by-maintainer/<maintainer>/')
+@app.route('/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def metapackages_outdated_by_maintainer(maintainer, bound=None):
     return metapackages_generic(
         bound,
         MaintainerOutdatedQueryFilter(maintainer),
-        template="metapackages-outdated-by-maintainer.html",
+        template='metapackages-outdated-by-maintainer.html',
         maintainer=maintainer,
     )
 
 
-@app.route("/maintainers/")
-@app.route("/maintainers/<page>/")
+@app.route('/maintainers/')
+@app.route('/maintainers/<page>/')
 def maintainers(page=None):
     maintainers = get_db().GetMaintainersByLetter(page)  # handles page sanity inside
 
     return flask.render_template(
-        "maintainers.html",
+        'maintainers.html',
         maintainers=maintainers,
         page=page
     )
 
 
-@app.route("/maintainer/<maintainer>")
+@app.route('/maintainer/<maintainer>')
 def maintainer(maintainer):
     maintainer_info = get_db().GetMaintainerInformation(maintainer)
     metapackages = get_db().GetMaintainerMetapackages(maintainer, 500)
@@ -374,7 +374,7 @@ def maintainer(maintainer):
         flask.abort(404)
 
     return flask.render_template(
-        "maintainer.html",
+        'maintainer.html',
         maintainer=maintainer,
         maintainer_info=maintainer_info,
         metapackages=metapackages,
@@ -382,18 +382,18 @@ def maintainer(maintainer):
     )
 
 
-@app.route("/repositories/")
+@app.route('/repositories/')
 def repositories():
-    return flask.render_template("repositories.html")
+    return flask.render_template('repositories.html')
 
 
-@app.route("/metapackage/<name>")
+@app.route('/metapackage/<name>')
 def metapackage(name):
     # metapackage landing page; just redirect to packages, may change in future
     return flask.redirect(flask.url_for('metapackage_versions', name=name), 303)
 
 
-@app.route("/metapackage/<name>/versions")
+@app.route('/metapackage/<name>/versions')
 def metapackage_versions(name):
     packages_by_repo = {}
     for package in get_db().GetMetapackage(name):
@@ -404,22 +404,22 @@ def metapackage_versions(name):
     for repo, packages in packages_by_repo.items():
         packages_by_repo[repo] = PackagesetSortByVersions(packages)
 
-    return flask.render_template("metapackage-versions.html", packages_by_repo=packages_by_repo, name=name)
+    return flask.render_template('metapackage-versions.html', packages_by_repo=packages_by_repo, name=name)
 
 
-@app.route("/metapackage/<name>/packages")
+@app.route('/metapackage/<name>/packages')
 def metapackage_packages(name):
     packages = get_db().GetMetapackage(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
     return flask.render_template(
-        "metapackage-packages.html",
+        'metapackage-packages.html',
         packages=packages,
         name=name,
         link_statuses=get_db().GetMetapackageLinkStatuses(name)
     )
 
 
-@app.route("/metapackage/<name>/information")
+@app.route('/metapackage/<name>/information')
 def metapackage_information(name):
     packages = get_db().GetMetapackage(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
@@ -457,7 +457,7 @@ def metapackage_information(name):
         version['families'] = list(sorted(PackagesetToFamilies(version['packages'])))
 
     return flask.render_template(
-        "metapackage-information.html",
+        'metapackage-information.html',
         information=information,
         versions=versions,
         name=name,
@@ -465,14 +465,14 @@ def metapackage_information(name):
     )
 
 
-@app.route("/metapackage/<name>/badges")
+@app.route('/metapackage/<name>/badges')
 def metapackage_badges(name):
     packages = get_db().GetMetapackage(name)
     repos = sorted(list(set([package.repo for package in packages])))
-    return flask.render_template("metapackage-badges.html", name=name, repos=repos)
+    return flask.render_template('metapackage-badges.html', name=name, repos=repos)
 
 
-@app.route("/badge/vertical-allrepos/<name>.svg")
+@app.route('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name):
     summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
 
@@ -486,7 +486,7 @@ def badge_vertical_allrepos(name):
 
     return (
         flask.render_template(
-            "badge-vertical.svg",
+            'badge-vertical.svg',
             repositories=sorted(repostates, key=lambda repo: repo['name']),
             name=name
         ),
@@ -494,12 +494,12 @@ def badge_vertical_allrepos(name):
     )
 
 
-@app.route("/badge/tiny-repos/<name>.svg")
+@app.route('/badge/tiny-repos/<name>.svg')
 def badge_tiny_repos(name):
     num_families = len(set([package.family for package in get_db().GetMetapackage(name)]))
     return (
         flask.render_template(
-            "badge-tiny.svg",
+            'badge-tiny.svg',
             name=name,
             num_families=num_families
         ),
@@ -507,7 +507,7 @@ def badge_tiny_repos(name):
     )
 
 
-@app.route("/badge/version-for-repo/<repo>/<name>.svg")
+@app.route('/badge/version-for-repo/<repo>/<name>.svg')
 def badge_version_for_repo(repo, name):
     summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
     if repo not in summaries:
@@ -515,7 +515,7 @@ def badge_version_for_repo(repo, name):
 
     return (
         flask.render_template(
-            "badge-tiny-version.svg",
+            'badge-tiny-version.svg',
             repo=repo,
             version=summaries[repo]['version'],
             versionclass=summaries[repo]['versionclass'],
@@ -524,27 +524,27 @@ def badge_version_for_repo(repo, name):
     )
 
 
-@app.route("/news")
+@app.route('/news')
 def news():
-    return flask.render_template("news.html")
+    return flask.render_template('news.html')
 
 
-@app.route("/about")
+@app.route('/about')
 def about():
-    return flask.render_template("about.html")
+    return flask.render_template('about.html')
 
 
-@app.route("/statistics")
+@app.route('/statistics')
 def statistics():
     return flask.render_template(
-        "statistics.html",
+        'statistics.html',
         repostats=filter(lambda r: r['name'] in reponames, get_db().GetRepositories()),
         repostats_old={repo['name']: repo for repo in get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 7)},
         num_metapackages=get_db().GetMetapackagesCount()
     )
 
 
-@app.route("/graph/metapackages-for-repo/<repo>.svg")
+@app.route('/graph/metapackages-for-repo/<repo>.svg')
 def graph_metapackages_for_repo(repo):
     if repo not in reponames:
         flask.abort(404)
@@ -603,7 +603,7 @@ def graph_metapackages_for_repo(repo):
 
     return (
         flask.render_template(
-            "graph-metapackages-for-repo.svg",
+            'graph-metapackages-for-repo.svg',
             datapoints=datapoints,
             numdays=numdays
         ),
@@ -611,7 +611,7 @@ def graph_metapackages_for_repo(repo):
     )
 
 
-@app.route("/api/v1/metapackage/<name>")
+@app.route('/api/v1/metapackage/<name>')
 def api_v1_metapackage(name):
     return (
         json.dumps(list(map(
@@ -622,66 +622,66 @@ def api_v1_metapackage(name):
     )
 
 
-@app.route("/api")
-@app.route("/api/v1")
+@app.route('/api')
+@app.route('/api/v1')
 def api_v1():
-    return flask.render_template("api.html")
+    return flask.render_template('api.html')
 
 
-@app.route("/api/v1/metapackages/")
-@app.route("/api/v1/metapackages/all/")
-@app.route("/api/v1/metapackages/all/<bound>/")
+@app.route('/api/v1/metapackages/')
+@app.route('/api/v1/metapackages/all/')
+@app.route('/api/v1/metapackages/all/<bound>/')
 def api_v1_metapackages_all(bound=None):
     return api_v1_metapackages_generic(bound)
 
 
-@app.route("/api/v1/metapackages/unique/")
-@app.route("/api/v1/metapackages/unique/<bound>/")
+@app.route('/api/v1/metapackages/unique/')
+@app.route('/api/v1/metapackages/unique/<bound>/')
 def api_v1_metapackages_unique(bound=None):
     return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
 
 
-@app.route("/api/v1/metapackages/in-repo/<repo>/")
-@app.route("/api/v1/metapackages/in-repo/<repo>/<bound>/")
+@app.route('/api/v1/metapackages/in-repo/<repo>/')
+@app.route('/api/v1/metapackages/in-repo/<repo>/<bound>/')
 def api_v1_metapackages_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, InRepoQueryFilter(repo))
 
 
-@app.route("/api/v1/metapackages/outdated-in-repo/<repo>/")
-@app.route("/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/")
+@app.route('/api/v1/metapackages/outdated-in-repo/<repo>/')
+@app.route('/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_outdated_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
 
 
-@app.route("/api/v1/metapackages/not-in-repo/<repo>/")
-@app.route("/api/v1/metapackages/not-in-repo/<repo>/<bound>/")
+@app.route('/api/v1/metapackages/not-in-repo/<repo>/')
+@app.route('/api/v1/metapackages/not-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_not_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo))
 
 
-@app.route("/api/v1/metapackages/candidates-in-repo/<repo>/")
-@app.route("/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/")
+@app.route('/api/v1/metapackages/candidates-in-repo/<repo>/')
+@app.route('/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_candidates_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo), InNumFamiliesQueryFilter(more=5))
 
 
-@app.route("/api/v1/metapackages/unique-in-repo/<repo>/")
-@app.route("/api/v1/metapackages/unique-in-repo/<repo>/<bound>/")
+@app.route('/api/v1/metapackages/unique-in-repo/<repo>/')
+@app.route('/api/v1/metapackages/unique-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_unique_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
 
 
-@app.route("/api/v1/metapackages/by-maintainer/<maintainer>/")
-@app.route("/api/v1/metapackages/by-maintainer/<maintainer>/<bound>/")
+@app.route('/api/v1/metapackages/by-maintainer/<maintainer>/')
+@app.route('/api/v1/metapackages/by-maintainer/<maintainer>/<bound>/')
 def api_v1_metapackages_by_maintainer(maintainer, bound=None):
     return api_v1_metapackages_generic(bound, MaintainerQueryFilter(maintainer))
 
 
-@app.route("/api/v1/metapackages/outdated-by-maintainer/<maintainer>/")
-@app.route("/api/v1/metapackages/outdated-by-maintainer/<maintainer>/<bound>/")
+@app.route('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/')
+@app.route('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
     return api_v1_metapackages_generic(bound, MaintainerOutdatedQueryFilter(maintainer))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()

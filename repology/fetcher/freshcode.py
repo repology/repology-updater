@@ -29,7 +29,7 @@ class FreshcodeFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
-            logger.Log("no update requested, skipping")
+            logger.Log('no update requested, skipping')
             return
 
         state = {}
@@ -37,9 +37,9 @@ class FreshcodeFetcher():
         if os.path.isfile(statepath):
             with open(statepath, 'r', encoding='utf-8') as oldstatefile:
                 state = json.load(oldstatefile)
-            logger.Log("loaded old state, {} entries".format(len(state)))
+            logger.Log('loaded old state, {} entries'.format(len(state)))
         else:
-            logger.Log("starting with empty state")
+            logger.Log('starting with empty state')
 
         newdata = json.loads(Get(self.url).text)
 
@@ -47,23 +47,23 @@ class FreshcodeFetcher():
         # have higher priority; may also compare versions here
         for entry in newdata['releases']:
             if 'name' not in entry:
-                logger.Log("skipping entry with no name")
+                logger.Log('skipping entry with no name')
                 continue
 
             if entry['name'] in state:
                 oldentry = state[entry['name']]
 
                 if VersionCompare(entry['version'], oldentry['version']) > 0:
-                    logger.Log("replacing entry \"{}\", version changed {} -> {}".format(entry['name'], oldentry['version'], entry['version']))
+                    logger.Log('replacing entry "{}", version changed {} -> {}'.format(entry['name'], oldentry['version'], entry['version']))
                     state[entry['name']] = entry
             else:
-                logger.Log("adding entry \"{}\", version {}".format(entry['name'], entry['version']))
+                logger.Log('adding entry "{}", version {}'.format(entry['name'], entry['version']))
                 state[entry['name']] = entry
 
-        temppath = statepath + ".tmp"
+        temppath = statepath + '.tmp'
         with open(temppath, 'w', encoding='utf-8') as newstatefile:
             json.dump(state, newstatefile)
 
         os.rename(temppath, statepath)
 
-        logger.Log("saved new state, {} entries".format(len(state)))
+        logger.Log('saved new state, {} entries'.format(len(state)))

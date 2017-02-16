@@ -46,10 +46,10 @@ def IsBetterVersion(version, maxversion):
         return True
 
     # prefer version without 9999 to version with 9999
-    if version.endswith("9999") == maxversion.endswith("9999"):
+    if version.endswith('9999') == maxversion.endswith('9999'):
         return VersionCompare(version, maxversion) > 0
 
-    return not version.endswith("9999")
+    return not version.endswith('9999')
 
 
 class GentooGitParser():
@@ -71,16 +71,16 @@ class GentooGitParser():
                 if not os.path.isdir(package_path):
                     continue
 
-                metadata_path = os.path.join(package_path, "metadata.xml")
+                metadata_path = os.path.join(package_path, 'metadata.xml')
 
                 pkg = Package()
 
                 if os.path.isfile(metadata_path):
-                    with open(os.path.join(package_path, "metadata.xml"), 'r', encoding='utf-8') as metafile:
+                    with open(os.path.join(package_path, 'metadata.xml'), 'r', encoding='utf-8') as metafile:
                         meta = xml.etree.ElementTree.parse(metafile)
 
-                        for entry in meta.findall("maintainer"):
-                            email_node = entry.find("email")
+                        for entry in meta.findall('maintainer'):
+                            email_node = entry.find('email')
 
                             if email_node is not None:
                                 pkg.maintainers += GetMaintainers(email_node.text)
@@ -88,7 +88,7 @@ class GentooGitParser():
                 maxorigversion = None
                 maxversion = None
                 for ebuild in os.listdir(package_path):
-                    if not ebuild.endswith(".ebuild"):
+                    if not ebuild.endswith('.ebuild'):
                         continue
 
                     version, origversion = SanitizeVersion(ebuild[len(package) + 1:-7])

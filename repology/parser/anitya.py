@@ -40,7 +40,7 @@ class AnityaApiParser():
                 pkg.homepage = project['homepage']
 
                 if pkg.version is None:
-                    print("no version: {}".format(pkg.name), file=sys.stderr)
+                    print('no version: {}'.format(pkg.name), file=sys.stderr)
                     continue
 
                 if pkg.version.startswith('v'):

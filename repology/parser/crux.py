@@ -60,38 +60,38 @@ class CRUXParser():
 
                 for line in pkgfile:
                     line = line.strip()
-                    if line.startswith("# Description:"):
+                    if line.startswith('# Description:'):
                         if not pkg.comment:
                             pkg.comment = line[14:].strip()
                         else:
-                            print("WARNING: duplicate Description for {}".format(pkgdir), file=sys.stderr)
+                            print('WARNING: duplicate Description for {}'.format(pkgdir), file=sys.stderr)
 
-                    if line.startswith("# URL:"):
+                    if line.startswith('# URL:'):
                         if not pkg.homepage:
                             pkg.homepage = line[6:].strip()
                         else:
-                            print("WARNING: duplicate URL for {}".format(pkgdir), file=sys.stderr)
+                            print('WARNING: duplicate URL for {}'.format(pkgdir), file=sys.stderr)
 
-                    if line.startswith("# Maintainer:"):
+                    if line.startswith('# Maintainer:'):
                         maintainer = line[13:].strip()
                         if ',' in maintainer:
                             _, email = line[13:].strip().split(',', 1)
                             pkg.maintainers += GetMaintainers(email)
                         else:
-                            print("WARNING: bad Maintainer format for {}".format(pkgdir), file=sys.stderr)
+                            print('WARNING: bad Maintainer format for {}'.format(pkgdir), file=sys.stderr)
 
-                    if line.startswith("name=") and not pkg.name:
+                    if line.startswith('name=') and not pkg.name:
                         pkg.name = line[5:]
 
-                    if line.startswith("version=") and not pkg.version:
+                    if line.startswith('version=') and not pkg.version:
                         pkg.version = line[8:]
 
                 if not pkg.name or not pkg.version:
-                    print("WARNING: unable to parse port form {}: no name or version".format(pkgdir), file=sys.stderr)
+                    print('WARNING: unable to parse port form {}: no name or version'.format(pkgdir), file=sys.stderr)
                     continue
 
                 if '$' in pkg.name or '$' in pkg.version:
-                    print("WARNING: unable to parse port form {}: name or version contain variables".format(pkgdir), file=sys.stderr)
+                    print('WARNING: unable to parse port form {}: name or version contain variables'.format(pkgdir), file=sys.stderr)
                     continue
 
                 packages.append(pkg)

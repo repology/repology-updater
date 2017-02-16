@@ -104,7 +104,7 @@ class NameSubstringQueryFilter(QueryFilter):
         return '{table}.effname like %s'
 
     def GetWhereArgs(self):
-        return ["%" + self.name + "%"]
+        return ['%' + self.name + '%']
 
     def ApplyToRequest(self, req):
         req.NameSubstring(self.name)
@@ -189,9 +189,9 @@ class InNumFamiliesQueryFilter(QueryFilter):
     def GetWhere(self):
         conditions = []
         if self.more is not None:
-            conditions.append("{table}.num_families >= %s")
+            conditions.append('{table}.num_families >= %s')
         if self.less is not None:
-            conditions.append("{table}.num_families <= %s")
+            conditions.append('{table}.num_families <= %s')
 
         return ' AND '.join(conditions)
 

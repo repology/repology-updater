@@ -33,7 +33,7 @@ from repology.logger import FileLogger, StderrLogger
 
 def GetHTTPLinkStatus(url, timeout):
     try:
-        response = requests.head(url, allow_redirects=True, headers={'user-agent': "Repology link checker/0"}, timeout=timeout)
+        response = requests.head(url, allow_redirects=True, headers={'user-agent': 'Repology link checker/0'}, timeout=timeout)
 
         redirect = None
         size = None
@@ -74,7 +74,7 @@ def GetLinkStatuses(urls, delay, timeout):
     prev_host = None
     for url in urls:
         # XXX: add support for gentoo mirrors, skip for now
-        if not url.startswith("http://") and not url.startswith("https://"):
+        if not url.startswith('http://') and not url.startswith('https://'):
             continue
 
         host = urllib.parse.urlparse(url).hostname
@@ -92,23 +92,23 @@ def GetLinkStatuses(urls, delay, timeout):
 def LinkProcessorWorker(queue, workerid, options, logger):
     database = Database(options.dsn, readonly=False)
 
-    logger = logger.GetPrefixed("worker{}: ".format(workerid))
+    logger = logger.GetPrefixed('worker{}: '.format(workerid))
 
-    logger.Log("Worker spawned")
+    logger.Log('Worker spawned')
 
     while True:
         pack = queue.get()
         if pack is None:
-            logger.Log("Worker exiting")
+            logger.Log('Worker exiting')
             return
 
-        logger.Log("Processing {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
+        logger.Log('Processing {} urls ({}..{})'.format(len(pack), pack[0], pack[-1]))
         for result in GetLinkStatuses(pack, delay=options.delay, timeout=options.timeout):
             url, status, redirect, size, location = result
             database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
 
         database.Commit()
-        logger.Log("Done processing {} urls ({}..{})".format(len(pack), pack[0], pack[-1]))
+        logger.Log('Done processing {} urls ({}..{})'.format(len(pack), pack[0], pack[-1]))
 
 
 def Main():
@@ -143,7 +143,7 @@ def Main():
     prev_url = None
     while True:
         # Get pack of links
-        logger.Log("Requesting pack of urls".format(prev_url))
+        logger.Log('Requesting pack of urls'.format(prev_url))
         urls = database.GetLinksForCheck(
             after=prev_url,
             limit=options.packsize,
@@ -154,7 +154,7 @@ def Main():
             succeeded_only=options.succeeded
         )
         if not urls:
-            logger.Log("  No more urls to process")
+            logger.Log('  No more urls to process')
             break
 
         # Get another pack of urls with the last hostname to ensure
@@ -173,14 +173,14 @@ def Main():
 
         # Process
         if options.maxpacksize and len(urls) > options.maxpacksize:
-            logger.Log("Skipping {} urls ({}..{}), exceeds max pack size".format(len(urls), urls[0], urls[-1]))
+            logger.Log('Skipping {} urls ({}..{}), exceeds max pack size'.format(len(urls), urls[0], urls[-1]))
         else:
             queue.put(urls)
-            logger.Log("Enqueued {} urls ({}..{})".format(len(urls), urls[0], urls[-1]))
+            logger.Log('Enqueued {} urls ({}..{})'.format(len(urls), urls[0], urls[-1]))
 
         prev_url = urls[-1]
 
-    logger.Log("Waiting for child processes to exit")
+    logger.Log('Waiting for child processes to exit')
 
     for process in processpool:
         queue.put(None)
@@ -188,7 +188,7 @@ def Main():
     for process in processpool:
         process.join()
 
-    logger.Log("Done")
+    logger.Log('Done')
 
     return 0
 

@@ -40,11 +40,11 @@ def SanitizeVersion(version):
     if pos != -1:
         version = version[0:pos]
 
-    match = re.match("(.*[0-9])[^0-9]*dfsg\\.?[0-9]*$", version)
+    match = re.match('(.*[0-9])[^0-9]*dfsg\\.?[0-9]*$', version)
     if match is not None:
         version = match.group(1)
 
-    match = re.match("(.*[0-9])ubuntu[0-9.]+$", version)
+    match = re.match('(.*[0-9])ubuntu[0-9.]+$', version)
     if match is not None:
         version = match.group(1)
 
@@ -65,7 +65,7 @@ class DebianSourcesParser():
             pkg = Package()
             for line in file:
                 line = line.strip()
-                if line == "":
+                if line == '':
                     result.append(pkg)
                     pkg = Package()
                 elif line.startswith('Package: '):

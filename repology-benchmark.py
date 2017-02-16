@@ -67,7 +67,7 @@ class StatCounter():
 
 
 def RunTest(database, title, pagefilter, *filters):
-    print("===> " + title)
+    print('===> ' + title)
 
     sc = StatCounter()
     for letter in ['0'] + [chr(c) for c in range(ord('a'), ord('z'))]:
@@ -91,24 +91,24 @@ def Main():
 
     database = Database(options.dsn)
 
-    print("==> Core requests")
+    print('==> Core requests')
 
-    RunTest(database, "No filter (pagination only): starting", NameStartingQueryFilter)
-    RunTest(database, "No filter (pagination only): before", NameBeforeQueryFilter)
-    RunTest(database, "No filter (pagination only): after", NameAfterQueryFilter)
+    RunTest(database, 'No filter (pagination only): starting', NameStartingQueryFilter)
+    RunTest(database, 'No filter (pagination only): before', NameBeforeQueryFilter)
+    RunTest(database, 'No filter (pagination only): after', NameAfterQueryFilter)
 
-    RunTest(database, "Maintainer", NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@freebsd.org'))
-    RunTest(database, "InRepo", NameStartingQueryFilter, InRepoQueryFilter('freebsd'))
-    RunTest(database, "Outdated", NameStartingQueryFilter, OutdatedInRepoQueryFilter('freebsd'))
-    RunTest(database, "NotInRepo", NameStartingQueryFilter, NotInRepoQueryFilter('freebsd'))
-    RunTest(database, "NumFamilies", NameStartingQueryFilter, InNumFamiliesQueryFilter(more=10))
+    RunTest(database, 'Maintainer', NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@freebsd.org'))
+    RunTest(database, 'InRepo', NameStartingQueryFilter, InRepoQueryFilter('freebsd'))
+    RunTest(database, 'Outdated', NameStartingQueryFilter, OutdatedInRepoQueryFilter('freebsd'))
+    RunTest(database, 'NotInRepo', NameStartingQueryFilter, NotInRepoQueryFilter('freebsd'))
+    RunTest(database, 'NumFamilies', NameStartingQueryFilter, InNumFamiliesQueryFilter(more=10))
 
-    print("==> Advanced filtering")
+    print('==> Advanced filtering')
 
-    RunTest(database, "Maintainer + InRepo", NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@freebsd.org'), InRepoQueryFilter('freebsd'))
-    RunTest(database, "InRepo + Maintainer", NameStartingQueryFilter, InRepoQueryFilter('freebsd'), MaintainerQueryFilter('amdmi3@freebsd.org'))
+    RunTest(database, 'Maintainer + InRepo', NameStartingQueryFilter, MaintainerQueryFilter('amdmi3@freebsd.org'), InRepoQueryFilter('freebsd'))
+    RunTest(database, 'InRepo + Maintainer', NameStartingQueryFilter, InRepoQueryFilter('freebsd'), MaintainerQueryFilter('amdmi3@freebsd.org'))
 
-    RunTest(database, "NotInRepo + NumFamilies", NameStartingQueryFilter, NotInRepoQueryFilter('freebsd'), InNumFamiliesQueryFilter(more=5))
+    RunTest(database, 'NotInRepo + NumFamilies', NameStartingQueryFilter, NotInRepoQueryFilter('freebsd'), InNumFamiliesQueryFilter(more=5))
 
     return 0
 

@@ -19,7 +19,7 @@
 
 import requests
 
-USER_AGENT = "Repology/0"
+USER_AGENT = 'Repology/0'
 
 
 def Get(url, check_status=True):

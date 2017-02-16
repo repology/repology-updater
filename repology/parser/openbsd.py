@@ -25,11 +25,11 @@ from repology.util import GetMaintainers, SplitPackageNameVersion
 def SanitizeVersion(version):
     origversion = version
 
-    match = re.match("(.*)v[0-9]+$", version)
+    match = re.match('(.*)v[0-9]+$', version)
     if match is not None:
         version = match.group(1)
 
-    match = re.match("(.*)p[0-9]+$", version)
+    match = re.match('(.*)p[0-9]+$', version)
     if match is not None:
         version = match.group(1)
 
@@ -46,7 +46,7 @@ class OpenBSDIndexParser():
     def Parse(self, path):
         result = []
 
-        with open(path, encoding="utf-8") as file:
+        with open(path, encoding='utf-8') as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
                 pkg = Package()
@@ -54,7 +54,7 @@ class OpenBSDIndexParser():
                 pkgname = row[0]
 
                 # cut away string suffixws which come after version
-                match = re.match("(.*?)(-[a-z_]+[0-9]*)+$", pkgname)
+                match = re.match('(.*?)(-[a-z_]+[0-9]*)+$', pkgname)
                 if match is not None:
                     pkgname = match.group(1)
 

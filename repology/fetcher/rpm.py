@@ -32,29 +32,29 @@ class RepodataFetcher():
         tmppath = statepath + '.tmp'
 
         if os.path.isfile(statepath) and not update:
-            logger.Log("no update requested, skipping")
+            logger.Log('no update requested, skipping')
             return
 
         # Get and parse repomd.xml
-        repomd_url = self.url + "repodata/repomd.xml"
-        logger.Log("fetching metadata from " + repomd_url)
+        repomd_url = self.url + 'repodata/repomd.xml'
+        logger.Log('fetching metadata from ' + repomd_url)
         repomd_content = Get(repomd_url, check_status=True).text
         repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
 
-        repodata_url = self.url + repomd_xml.find("{http://linux.duke.edu/metadata/repo}data[@type='primary']/{http://linux.duke.edu/metadata/repo}location").attrib['href']
+        repodata_url = self.url + repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location').attrib['href']
 
-        logger.Log("fetching " + repodata_url)
+        logger.Log('fetching ' + repodata_url)
         data = Get(repodata_url).content
 
-        logger.GetIndented().Log("size is {} byte(s)".format(len(data)))
+        logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 
-        logger.GetIndented().Log("decompressing with gzip")
+        logger.GetIndented().Log('decompressing with gzip')
         data = gzip.decompress(data)
 
-        logger.GetIndented().Log("size after decompression is {} byte(s)".format(len(data)))
+        logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
 
-        logger.GetIndented().Log("saving")
-        with open(tmppath, "wb") as statefile:
+        logger.GetIndented().Log('saving')
+        with open(tmppath, 'wb') as statefile:
             statefile.write(data)
 
         os.rename(tmppath, statepath)

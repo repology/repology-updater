@@ -25,7 +25,7 @@ from repology.package import Package
 def SanitizeVersion(version):
     origversion = version
 
-    match = re.match("(.*)-[0-9]+\\.[0-9a-f]{7,}$", origversion)
+    match = re.match('(.*)-[0-9]+\\.[0-9a-f]{7,}$', origversion)
     if match:
         version = match.group(1)
 
@@ -43,15 +43,15 @@ class GuixParser():
         result = []
 
         for filename in os.listdir(path):
-            if not filename.endswith(".html"):
+            if not filename.endswith('.html'):
                 continue
 
             root = xml.etree.ElementTree.parse(os.path.join(path, filename))
 
-            table = root.find(".//table[@id='packages']")
+            table = root.find('.//table[@id="packages"]')
 
             first = True
-            for row in table.findall("tr"):
+            for row in table.findall('tr'):
                 if first:
                     first = False
                     continue
@@ -59,20 +59,20 @@ class GuixParser():
                 pkg = Package()
 
                 # name + version
-                cell = row.find("./td[2]/a")
+                cell = row.find('./td[2]/a')
                 pkg.name, version = cell.text.split(' ', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
 
                 # summary
-                cell = row.find("./td[3]/span")
+                cell = row.find('./td[3]/span')
                 pkg.comment = cell.text
 
                 # licenses
-                for cell in row.findall("./td[3]/div[1]/div[2]/a[@title='Link to the full license']"):
+                for cell in row.findall('./td[3]/div[1]/div[2]/a[@title="Link to the full license"]'):
                     pkg.licenses.append(cell.text)
 
                 # www
-                cell = row.find("./td[3]/div[1]/a[@title=\"Link to the package's website\"]")
+                cell = row.find('./td[3]/div[1]/a[@title="Link to the package\'s website"]')
                 pkg.homepage = cell.attrib['href']
 
                 result.append(pkg)

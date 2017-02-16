@@ -95,44 +95,44 @@ class MetapackageRequest:
 
     def NameStarting(self, name):
         if self.namecond:
-            raise RuntimeError("duplicate effname condition")
+            raise RuntimeError('duplicate effname condition')
         self.namecond = '>='
         self.namebound = name
         self.nameorder = 'ASC'
 
     def NameAfter(self, name):
         if self.namecond:
-            raise RuntimeError("duplicate effname condition")
+            raise RuntimeError('duplicate effname condition')
         self.namecond = '>'
         self.namebound = name
         self.nameorder = 'ASC'
 
     def NameBefore(self, name):
         if self.namecond:
-            raise RuntimeError("duplicate effname condition")
+            raise RuntimeError('duplicate effname condition')
         self.namecond = '<'
         self.namebound = name
         self.nameorder = 'DESC'
 
     def NameSubstring(self, substring):
         if self.name_substring:
-            raise RuntimeError("duplicate effname substring condition")
+            raise RuntimeError('duplicate effname substring condition')
         self.name_substring = substring
 
     def Maintainer(self, maintainer):
         if self.maintainer:
-            raise RuntimeError("duplicate maintainer condition")
+            raise RuntimeError('duplicate maintainer condition')
         self.maintainer = maintainer
 
     def OutdatedForMaintainer(self, maintainer):
         if self.maintainer:
-            raise RuntimeError("duplicate maintainer condition")
+            raise RuntimeError('duplicate maintainer condition')
         self.maintainer = maintainer
         self.maintainer_outdated = True
 
     def InRepo(self, repo):
         if self.repos and repo not in self.repos:
-            raise RuntimeError("duplicate repository condition")
+            raise RuntimeError('duplicate repository condition')
 
         self.repos = set((repo,))
 
@@ -140,35 +140,35 @@ class MetapackageRequest:
         if self.repos:
             for currentrepo in self.repos:
                 if currentrepo not in repos:
-                    raise RuntimeError("duplicate repository condition")
+                    raise RuntimeError('duplicate repository condition')
         else:
             self.repos = set(repos)
 
     def OutdatedInRepo(self, repo):
         if self.repos and repo not in self.repos:
-            raise RuntimeError("duplicate repository condition")
+            raise RuntimeError('duplicate repository condition')
 
         self.repos = set((repo,))
         self.repos_outdated = True
 
     def NotInRepo(self, repo):
         if self.repo_not:
-            raise RuntimeError("duplicate not-in-repository condition")
+            raise RuntimeError('duplicate not-in-repository condition')
         self.repo_not = repo
 
     def MoreFamilies(self, num):
         if self.morefamilies:
-            raise RuntimeError("duplicate more families condition")
+            raise RuntimeError('duplicate more families condition')
         self.morefamilies = num
 
     def LessFamilies(self, num):
         if self.lessfamilies:
-            raise RuntimeError("duplicate less families condition")
+            raise RuntimeError('duplicate less families condition')
         self.lessfamilies = num
 
     def Limit(self, limit):
         if self.limit:
-            raise RuntimeError("duplicate limit")
+            raise RuntimeError('duplicate limit')
         self.limit = limit
 
     def GetQuery(self):
@@ -241,11 +241,11 @@ class Database:
         self.cursor = self.db.cursor()
 
     def CreateSchema(self):
-        self.cursor.execute("DROP TABLE IF EXISTS packages CASCADE")
-        self.cursor.execute("DROP TABLE IF EXISTS repositories CASCADE")
-        self.cursor.execute("DROP TABLE IF EXISTS repositories_history CASCADE")
-        self.cursor.execute("DROP TABLE IF EXISTS totals_history CASCADE")
-        self.cursor.execute("DROP TABLE IF EXISTS links CASCADE")
+        self.cursor.execute('DROP TABLE IF EXISTS packages CASCADE')
+        self.cursor.execute('DROP TABLE IF EXISTS repositories CASCADE')
+        self.cursor.execute('DROP TABLE IF EXISTS repositories_history CASCADE')
+        self.cursor.execute('DROP TABLE IF EXISTS totals_history CASCADE')
+        self.cursor.execute('DROP TABLE IF EXISTS links CASCADE')
 
         self.cursor.execute("""
             CREATE TABLE packages (
@@ -392,10 +392,10 @@ class Database:
             WITH DATA
         """)
 
-        self.cursor.execute("CREATE UNIQUE INDEX ON metapackage_repocounts(effname)")
-        self.cursor.execute("CREATE INDEX ON metapackage_repocounts(num_repos)")
-        self.cursor.execute("CREATE INDEX ON metapackage_repocounts(num_families)")
-        self.cursor.execute("CREATE INDEX ON metapackage_repocounts(shadow_only, num_families)")
+        self.cursor.execute('CREATE UNIQUE INDEX ON metapackage_repocounts(effname)')
+        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(num_repos)')
+        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(num_families)')
+        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(shadow_only, num_families)')
 
         # links for link checker
         self.cursor.execute("""
@@ -793,15 +793,15 @@ class Database:
         if letter:
             letter = letter.lower()[0]
         if not letter or letter < 'a':
-            request += " WHERE maintainer < 'a'"
+            request += ' WHERE maintainer < \'a\''
         elif letter >= 'z':
-            request += " WHERE maintainer >= 'z'"
+            request += ' WHERE maintainer >= \'z\''
         else:
-            request += " WHERE maintainer >= %s"
-            request += " AND maintainer < %s"
+            request += ' WHERE maintainer >= %s'
+            request += ' AND maintainer < %s'
             args += [letter, chr(ord(letter) + 1)]
 
-        request += " ORDER BY maintainer"
+        request += ' ORDER BY maintainer'
 
         self.cursor.execute(request, args)
 
@@ -1050,7 +1050,7 @@ class Database:
         args = []
 
         # reduce the noise while linkchecker code doesn't support other schemas
-        conditions.append("(url LIKE %s OR url LIKE %s)")
+        conditions.append('(url LIKE %s OR url LIKE %s)')
         args.append('http://%')
         args.append('https://%')
 

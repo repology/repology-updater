@@ -26,10 +26,10 @@ from repology.packageformatter import PackageFormatter
 
 
 def maintainer_to_link(maintainer):
-    if re.match(".*@.*\..*", maintainer):
-        return "mailto:" + maintainer
-    elif maintainer.endswith("@cpan"):
-        return "http://search.cpan.org/~" + maintainer[:-5]
+    if re.match('.*@.*\..*', maintainer):
+        return 'mailto:' + maintainer
+    elif maintainer.endswith('@cpan'):
+        return 'http://search.cpan.org/~' + maintainer[:-5]
     else:
         return None
 

@@ -29,19 +29,19 @@ class ChocolateyFetcher():
 
     def DoFetch(self, statepath, update, logger):
         numpage = 0
-        nextpageurl = self.url + "Packages()?$filter=IsLatestVersion"
+        nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
         while True:
-            logger.Log("getting " + nextpageurl)
+            logger.Log('getting ' + nextpageurl)
 
             text = Get(nextpageurl).text
-            with open(os.path.join(statepath, "{}.xml".format(numpage)), "w", encoding="utf-8") as pagefile:
+            with open(os.path.join(statepath, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
 
             # parse next page
-            logger.Log("parsing " + nextpageurl)
+            logger.Log('parsing ' + nextpageurl)
             root = xml.etree.ElementTree.fromstring(text)
 
-            next_link = root.find("{http://www.w3.org/2005/Atom}link[@rel='next']")
+            next_link = root.find('{http://www.w3.org/2005/Atom}link[@rel="next"]')
             if next_link is None:
                 break
 
@@ -50,7 +50,7 @@ class ChocolateyFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
-            logger.Log("no update requested, skipping")
+            logger.Log('no update requested, skipping')
             return
 
         if os.path.exists(statepath):

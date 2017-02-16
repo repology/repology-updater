@@ -35,8 +35,8 @@ def ProcessRepositories(options, logger, repoman, transformer):
     repositories_not_updated = []
 
     for reponame in repoman.GetNames(reponames=options.reponames):
-        repo_logger = logger.GetPrefixed(reponame + ": ")
-        repo_logger.Log("started")
+        repo_logger = logger.GetPrefixed(reponame + ': ')
+        repo_logger.Log('started')
         try:
             if options.fetch:
                 repoman.Fetch(reponame, update=options.update, logger=repo_logger.GetIndented())
@@ -45,38 +45,38 @@ def ProcessRepositories(options, logger, repoman, transformer):
             elif options.reprocess:
                 repoman.Reprocess(reponame, transformer=transformer, logger=repo_logger.GetIndented())
         except KeyboardInterrupt:
-            logger.Log("interrupted")
+            logger.Log('interrupted')
             return 1
         except:
-            repo_logger.Log("failed, exception follows")
+            repo_logger.Log('failed, exception follows')
             for item in traceback.format_exception(*sys.exc_info()):
                 for line in item.split('\n'):
                     if line:
                         repo_logger.GetIndented().Log(line)
             repositories_not_updated.append(reponame)
         else:
-            repo_logger.Log("complete")
+            repo_logger.Log('complete')
             repositories_updated.append(reponame)
 
-    logger.Log("{}/{} repositories processed successfully".format(len(repositories_updated), len(repositories_updated) + len(repositories_not_updated)))
+    logger.Log('{}/{} repositories processed successfully'.format(len(repositories_updated), len(repositories_updated) + len(repositories_not_updated)))
     if repositories_not_updated:
-        logger.Log("  failed repositories: {}".format(', '.join(sorted(repositories_not_updated))))
+        logger.Log('  failed repositories: {}'.format(', '.join(sorted(repositories_not_updated))))
 
     return repositories_updated, repositories_not_updated
 
 
 def ProcessDatabase(options, logger, repoman, repositories_updated):
-    logger.Log("connecting to database")
+    logger.Log('connecting to database')
 
     db_logger = logger.GetIndented()
 
     database = Database(options.dsn, readonly=False)
     if options.initdb:
-        db_logger.Log("(re)initializing database schema")
+        db_logger.Log('(re)initializing database schema')
         database.CreateSchema()
 
     if options.database:
-        db_logger.Log("clearing the database")
+        db_logger.Log('clearing the database')
         database.Clear()
 
         package_queue = []
@@ -91,38 +91,38 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
                 database.AddPackages(package_queue)
                 num_pushed += len(package_queue)
                 package_queue = []
-                db_logger.Log("  pushed {} packages".format(num_pushed))
+                db_logger.Log('  pushed {} packages'.format(num_pushed))
 
-        db_logger.Log("pushing packages to database")
+        db_logger.Log('pushing packages to database')
         repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
 
         # process what's left in the queue
         database.AddPackages(package_queue)
 
         if options.fetch and options.update and options.parse:
-            db_logger.Log("recording repo updates")
+            db_logger.Log('recording repo updates')
             database.MarkRepositoriesUpdated(repositories_updated)
         else:
-            db_logger.Log("not recording repo updates, need --fetch --update --parse")
+            db_logger.Log('not recording repo updates, need --fetch --update --parse')
 
-        db_logger.Log("updating views")
+        db_logger.Log('updating views')
         database.UpdateViews()
         database.ExtractLinks()
 
-        db_logger.Log("updating history")
+        db_logger.Log('updating history')
         database.SnapshotRepositoriesHistory()
 
-        db_logger.Log("committing changes")
+        db_logger.Log('committing changes')
         database.Commit()
 
-    logger.Log("database processing complete")
+    logger.Log('database processing complete')
 
 
 def ShowUnmatchedRules(options, logger, transformer):
     unmatched = transformer.GetUnmatchedRules()
     if len(unmatched):
-        wlogger = logger.GetPrefixed("WARNING: ")
-        wlogger.Log("unmatched rules detected!")
+        wlogger = logger.GetPrefixed('WARNING: ')
+        wlogger.Log('unmatched rules detected!')
 
         for rule in unmatched:
             wlogger.Log(rule)

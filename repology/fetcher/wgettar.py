@@ -28,7 +28,7 @@ class WgetTarFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
-            logger.Log("no update requested, skipping")
+            logger.Log('no update requested, skipping')
             return
 
         if os.path.exists(statepath):
@@ -37,7 +37,7 @@ class WgetTarFetcher():
         os.mkdir(statepath)
 
         try:
-            command = "wget -O- \"%s\" | tar -xz -f- -C \"%s\"" % (self.url, statepath)
+            command = 'wget -O- "%s" | tar -xz -f- -C "%s"' % (self.url, statepath)
             RunSubprocess(command, logger, shell=True)
         except:
             if os.path.exists(statepath):

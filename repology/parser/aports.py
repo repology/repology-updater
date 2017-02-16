@@ -25,7 +25,7 @@ from repology.util import GetMaintainers
 def SanitizeVersion(version):
     origversion = version
 
-    match = re.match("(.*)-r[0-9]+$", version)
+    match = re.match('(.*)-r[0-9]+$', version)
     if match is not None:
         version = match.group(1)
 

@@ -25,7 +25,7 @@ from repology.util import GetMaintainers, SplitPackageNameVersion
 def SanitizeVersion(version):
     origversion = version
 
-    match = re.match("(.*)nb[0-9]+$", version)
+    match = re.match('(.*)nb[0-9]+$', version)
     if match is not None:
         version = match.group(1)
 
@@ -46,7 +46,7 @@ class PkgsrcIndexParser():
             for line in indexfile:
                 fields = line.strip().split('|')
                 if len(fields) != 12:
-                    print("WARNING: package {} skipped, incorrect number of fields in INDEX".format(fields[0]), file=sys.stderr)
+                    print('WARNING: package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), file=sys.stderr)
                     continue
 
                 pkg = Package()

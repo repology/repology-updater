@@ -62,11 +62,11 @@ class CPANPackagesParser():
                 package_path, package_file = package.rsplit('/', 1)
                 package_name = None
 
-                if package_file.endswith(".tar.gz"):
+                if package_file.endswith('.tar.gz'):
                     package_name = package_file[0:-7]
-                elif package_file.endswith(".tar.bz2"):
+                elif package_file.endswith('.tar.bz2'):
                     package_name = package_file[0:-8]
-                elif package_file.endswith(".zip") or package_file.endswith(".tgz"):
+                elif package_file.endswith('.zip') or package_file.endswith('.tgz'):
                     package_name = package_file[0:-4]
 
                 if package_name is None or package_name.find('-') == -1:
@@ -77,11 +77,11 @@ class CPANPackagesParser():
                 if package_version.startswith('v') or package_version.startswith('V'):
                     package_version = package_version[1:]
 
-                if not re.match("[0-9]", package_version):
+                if not re.match('[0-9]', package_version):
                     # Bad version; XXX: log?
                     continue
 
-                if module.replace("::", "-") != package_name:
+                if module.replace('::', '-') != package_name:
                     # Submodules not really needed
                     continue
 
@@ -90,7 +90,7 @@ class CPANPackagesParser():
                 pkg.version = package_version
 
                 pkg.maintainers = GetMaintainers(package_path.split('/')[2].lower() + '@cpan')
-                pkg.homepage = "http://search.cpan.org/dist/" + package_name + "/"
+                pkg.homepage = 'http://search.cpan.org/dist/' + package_name + '/'
 
                 result.append(pkg)
 

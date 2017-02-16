@@ -29,8 +29,8 @@ class RuleApplyResult:
 
 class PackageTransformer:
     def __init__(self, rulespath=None, rulestext=None):
-        self.dollar0 = re.compile("\$0", re.ASCII)
-        self.dollarN = re.compile("\$([0-9]+)", re.ASCII)
+        self.dollar0 = re.compile('\$0', re.ASCII)
+        self.dollarN = re.compile('\$([0-9]+)', re.ASCII)
 
         if rulestext:
             self.rules = yaml.safe_load(rulestext)
@@ -52,7 +52,7 @@ class PackageTransformer:
             # compile regexps
             for field in ['namepat', 'verpat']:
                 if field in rule:
-                    rule[field] = re.compile(rule[field] + "$", re.ASCII)
+                    rule[field] = re.compile(rule[field] + '$', re.ASCII)
 
             rule['matches'] = 0
             rule['number'] = rulenum

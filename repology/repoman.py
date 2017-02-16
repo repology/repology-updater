@@ -35,13 +35,13 @@ class RepositoryManager:
         self.statedir = statedir
 
     def __GetRepoPath(self, repository):
-        return os.path.join(self.statedir, repository['name'] + ".state")
+        return os.path.join(self.statedir, repository['name'] + '.state')
 
     def __GetSourcePath(self, repository, source):
         return os.path.join(self.__GetRepoPath(repository), source['name'])
 
     def __GetSerializedPath(self, repository):
-        return os.path.join(self.statedir, repository['name'] + ".packages")
+        return os.path.join(self.statedir, repository['name'] + '.packages')
 
     def __GetRepository(self, reponame):
         for repository in self.repositories:
@@ -85,7 +85,7 @@ class RepositoryManager:
 
     # Private methods which provide single actions on sources
     def __FetchSource(self, update, repository, source, logger):
-        logger.Log("fetching source {} started".format(source['name']))
+        logger.Log('fetching source {} started'.format(source['name']))
 
         self.__SpawnClass(
             'Fetcher',
@@ -97,10 +97,10 @@ class RepositoryManager:
             logger=logger.GetIndented()
         )
 
-        logger.Log("fetching source {} complete".format(source['name']))
+        logger.Log('fetching source {} complete'.format(source['name']))
 
     def __ParseSource(self, repository, source, logger):
-        logger.Log("parsing source {} started".format(source['name']))
+        logger.Log('parsing source {} started'.format(source['name']))
 
         packages = self.__SpawnClass(
             'Parser',
@@ -110,13 +110,13 @@ class RepositoryManager:
             self.__GetSourcePath(repository, source)
         )
 
-        logger.Log("parsing source {} complete".format(source['name']))
+        logger.Log('parsing source {} complete'.format(source['name']))
 
         return packages
 
     # Private methods which provide single actions on repos
     def __Fetch(self, update, repository, logger):
-        logger.Log("fetching started")
+        logger.Log('fetching started')
 
         if not os.path.isdir(self.statedir):
             os.mkdir(self.statedir)
@@ -126,21 +126,21 @@ class RepositoryManager:
                 os.mkdir(self.__GetRepoPath(repository))
             self.__FetchSource(update, repository, source, logger.GetIndented())
 
-        logger.Log("fetching complete")
+        logger.Log('fetching complete')
 
     def __Parse(self, repository, logger):
         packages = []
-        logger.Log("parsing started")
+        logger.Log('parsing started')
 
         for source in repository['sources']:
             packages += self.__ParseSource(repository, source, logger.GetIndented())
 
-        logger.Log("parsing complete, {} packages".format(len(packages)))
+        logger.Log('parsing complete, {} packages'.format(len(packages)))
 
         return packages
 
     def __Transform(self, packages, transformer, repository, logger):
-        logger.Log("processing started")
+        logger.Log('processing started')
         for package in packages:
             package.repo = repository['name']
             package.family = repository['family']
@@ -156,37 +156,37 @@ class RepositoryManager:
         # ignored in summary and version calcualtions, but shown in
         # package listing
         packages = [package for package in packages if not package.ignore]
-        logger.Log("processing complete, {} packages".format(len(packages)))
+        logger.Log('processing complete, {} packages'.format(len(packages)))
 
         return packages
 
     def __Serialize(self, packages, path, repository, logger):
-        tmppath = path + ".tmp"
+        tmppath = path + '.tmp'
 
-        logger.Log("saving started")
-        with open(tmppath, "wb") as outfile:
+        logger.Log('saving started')
+        with open(tmppath, 'wb') as outfile:
             pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
             pickler.fast = True  # deprecated, but I don't see any alternatives
             pickler.dump(len(packages))
             for package in packages:
                 pickler.dump(package)
         os.rename(tmppath, path)
-        logger.Log("saving complete, {} packages".format(len(packages)))
+        logger.Log('saving complete, {} packages'.format(len(packages)))
 
     def __Deserialize(self, path, repository, logger):
         packages = []
-        logger.Log("loading started")
-        with open(path, "rb") as infile:
+        logger.Log('loading started')
+        with open(path, 'rb') as infile:
             unpickler = pickle.Unpickler(infile)
             numpackages = unpickler.load()
             packages = [unpickler.load() for num in range(0, numpackages)]
-        logger.Log("loading complete, {} packages".format(len(packages)))
+        logger.Log('loading complete, {} packages'.format(len(packages)))
 
         return packages
 
     class __StreamDeserializer:
         def __init__(self, path):
-            self.unpickler = pickle.Unpickler(open(path, "rb"))
+            self.unpickler = pickle.Unpickler(open(path, 'rb'))
             self.count = self.unpickler.load()
             self.current = None
 
@@ -263,7 +263,7 @@ class RepositoryManager:
         packages = []
 
         for repo in self.__GetRepositories(reponames):
-            packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ": "))
+            packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ': '))
 
         return packages
 
@@ -271,7 +271,7 @@ class RepositoryManager:
         packages = []
 
         for repo in self.__GetRepositories(reponames):
-            packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ": "))
+            packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ': '))
 
         return packages
 

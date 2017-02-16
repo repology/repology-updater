@@ -33,29 +33,29 @@ class FileFetcher():
         tmppath = statepath + '.tmp'
 
         if os.path.isfile(statepath) and not update:
-            logger.Log("no update requested, skipping")
+            logger.Log('no update requested, skipping')
             return
 
-        with open(tmppath, "wb") as statefile:
-            logger.Log("fetching " + self.url)
+        with open(tmppath, 'wb') as statefile:
+            logger.Log('fetching ' + self.url)
             data = Get(self.url).content
 
-            logger.GetIndented().Log("size is {} byte(s)".format(len(data)))
+            logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 
             if self.compression == 'gz':
-                logger.GetIndented().Log("decompressing with gzip")
+                logger.GetIndented().Log('decompressing with gzip')
                 data = gzip.decompress(data)
             elif self.compression == 'bz2':
-                logger.GetIndented().Log("decompressing with bz2")
+                logger.GetIndented().Log('decompressing with bz2')
                 data = bz2.decompress(data)
             elif self.compression == 'xz':
-                logger.GetIndented().Log("decompressing with xz")
+                logger.GetIndented().Log('decompressing with xz')
                 data = lzma.LZMADecompressor().decompress(data)
 
             if self.compression:
-                logger.GetIndented().Log("size after decompression is {} byte(s)".format(len(data)))
+                logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
 
-            logger.GetIndented().Log("saving")
+            logger.GetIndented().Log('saving')
             statefile.write(data)
 
         os.rename(tmppath, statepath)

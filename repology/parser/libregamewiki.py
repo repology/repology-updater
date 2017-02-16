@@ -30,13 +30,13 @@ class LibreGameWikiParser():
 
         root = xml.etree.ElementTree.parse(path)
 
-        content = root.find(".//div[@id='mw-content-text']")
+        content = root.find('.//div[@id="mw-content-text"]')
 
-        for item in content.findall("./div[@style='float:left; width:25.3em; height:8.5em; border:1px solid #ccc; padding:0.1em; margin-bottom: 2em; margin-right: 1em; overflow:hidden']"):
+        for item in content.findall('./div[@style="float:left; width:25.3em; height:8.5em; border:1px solid #ccc; padding:0.1em; margin-bottom: 2em; margin-right: 1em; overflow:hidden"]'):
             pkg = Package()
 
             # name
-            cell = item.find("./p[1]/b[1]/a[1]")
+            cell = item.find('./p[1]/b[1]/a[1]')
 
             if cell is None or not cell.text:
                 continue
@@ -44,24 +44,24 @@ class LibreGameWikiParser():
             pkg.name = cell.text
 
             # version
-            cell = item.find("./p[2]")
+            cell = item.find('./p[2]')
             if cell is None or not cell.text:
                 continue
 
             pkg.version = cell.text
 
-            match = re.match("(.*) \(.*\)$", pkg.version)
+            match = re.match('(.*) \(.*\)$', pkg.version)
             if match:
                 pkg.origversion = pkg.version
                 pkg.version = match.group(1)
 
             # www
-            for a in item.findall("./p[2]/a"):
-                if a.text == "Website":
+            for a in item.findall('./p[2]/a'):
+                if a.text == 'Website':
                     pkg.homepage = a.attrib['href']
 
             # category
-            pkg.category = "games"
+            pkg.category = 'games'
 
             result.append(pkg)
 

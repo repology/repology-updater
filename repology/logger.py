@@ -42,10 +42,10 @@ class FileLogger(NoopLogger):
         self.prefix = prefix
 
     def Log(self, message):
-        prefixstr = self.prefix if self.prefix else ""
-        with open(self.path, "a", encoding='utf-8') as logfile:
+        prefixstr = self.prefix if self.prefix else ''
+        with open(self.path, 'a', encoding='utf-8') as logfile:
             fcntl.flock(logfile, fcntl.LOCK_EX)
-            print(time.strftime("%b %d %T ") + prefixstr + message,
+            print(time.strftime('%b %d %T ') + prefixstr + message,
                   file=logfile)
 
     def GetPrefixed(self, prefix):
@@ -58,8 +58,8 @@ class StderrLogger(NoopLogger):
         self.prefix = prefix
 
     def Log(self, message):
-        prefixstr = self.prefix if self.prefix else ""
-        print(time.strftime("%b %d %T ") + prefixstr + message,
+        prefixstr = self.prefix if self.prefix else ''
+        print(time.strftime('%b %d %T ') + prefixstr + message,
               file=sys.stderr)
 
     def GetPrefixed(self, prefix):

@@ -29,14 +29,14 @@ class FDroidParser():
 
         root = xml.etree.ElementTree.parse(path)
 
-        for application in root.findall("application"):
+        for application in root.findall('application'):
             pkg = Package()
-            pkg.name = application.find("name").text
-            pkg.version = application.find("marketversion").text
-            pkg.licenses.append(application.find("license").text)
-            pkg.category = application.find("category").text
+            pkg.name = application.find('name').text
+            pkg.version = application.find('marketversion').text
+            pkg.licenses.append(application.find('license').text)
+            pkg.category = application.find('category').text
 
-            www = application.find("web").text
+            www = application.find('web').text
 
             if www:
                 pkg.homepage = www

@@ -50,7 +50,7 @@ class GoboLinuxGitParser():
                     maxversion = version_name
 
             if maxversion is None:
-                print("WARNING: no usable versions for package {}".format(package_name), file=sys.stderr)
+                print('WARNING: no usable versions for package {}'.format(package_name), file=sys.stderr)
                 continue
 
             recipe_path = os.path.join(package_path, maxversion, 'Recipe')
@@ -65,12 +65,12 @@ class GoboLinuxGitParser():
                 with open(recipe_path, 'r', encoding='utf-8', errors='ignore') as recipe:
                     for line in recipe:
                         line = line.strip()
-                        if line.startswith("url="):
+                        if line.startswith('url='):
                             download = ExpandDownloadUrlTemplates(line[4:])
                             if download.find('$') == -1:
                                 pkg.downloads.append(download.strip('"'))
                             else:
-                                print("WARNING: Recipe for {}/{} skipped, unhandled URL substitude found".format(package_name, maxversion), file=sys.stderr)
+                                print('WARNING: Recipe for {}/{} skipped, unhandled URL substitude found'.format(package_name, maxversion), file=sys.stderr)
 
             if os.path.isfile(description_path):
                 with open(description_path, 'r', encoding='utf-8', errors='ignore') as description:
@@ -83,7 +83,7 @@ class GoboLinuxGitParser():
                             current_tag = match.group(1)
                             data[current_tag] = match.group(2)
                         elif current_tag is None:
-                            print("WARNING: Description for {}/{} skipped, dumb format".format(package_name, maxversion), file=sys.stderr)
+                            print('WARNING: Description for {}/{} skipped, dumb format'.format(package_name, maxversion), file=sys.stderr)
                             break
                         else:
                             if data[current_tag]:

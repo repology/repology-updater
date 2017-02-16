@@ -34,7 +34,7 @@ def ExtractLicenses(whatever):
     elif isinstance(whatever, dict) and 'fullName' in whatever:
         return [whatever['fullName']]
     else:
-        raise RuntimeError("unparsable license info")
+        raise RuntimeError('unparsable license info')
 
 
 class NixJsonParser():
@@ -51,9 +51,9 @@ class NixJsonParser():
                 # it just splits on dash followed by non-letter
                 #
                 # this doesn't work well on 100% cases, it's an upstream problem
-                match = re.match("(.+?)-([^a-zA-Z].*)$", packagedata['name'])
+                match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
                 if not match:
-                    print("cannot extract version: {}/{}".format(key, packagedata['name']), file=sys.stderr)
+                    print('cannot extract version: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
                     continue
 
                 pkg = Package()
@@ -69,20 +69,20 @@ class NixJsonParser():
                 for pkgname in ('liblqr', ):
                     if pkg.name == pkgname:
                         dashpos = pkg.version.find('-')
-                        pkg.name = pkg.name + "-" + pkg.version[0:dashpos]
+                        pkg.name = pkg.name + '-' + pkg.version[0:dashpos]
                         pkg.version = pkg.version[dashpos + 1:]
 
                 if pkg.name.endswith('-git'):
                     pkg.name = pkg.name[:-4]
-                    print("ignoring version for git snapshot: {}/{}".format(key, packagedata['name']), file=sys.stderr)
+                    print('ignoring version for git snapshot: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
                     pkg.ignoreversion = True
 
-                if re.match(".*20[0-9]{2}-[0-9]{2}-[0-9]{2}", pkg.version):
-                    print("ignoring version which is a date: {}/{}".format(key, packagedata['name']), file=sys.stderr)
+                if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
+                    print('ignoring version which is a date: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
                     pkg.ignoreversion = True
 
-                if re.match("[0-9a-f]*[a-f][0-9a-f]*$", pkg.version) and len(pkg.version) >= 7:
-                    print("ignoring version which looks like commit hash: {}/{}".format(key, packagedata['name']), file=sys.stderr)
+                if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
+                    print('ignoring version which looks like commit hash: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
                     pkg.ignoreversion = True
 
                 meta = packagedata['meta']

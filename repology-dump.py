@@ -122,7 +122,7 @@ def Main():
             summaries = PackagesetToSummaries(packageset)
             for reponame in repoman.GetNames(options.reponames):
                 if reponame in summaries:
-                    print("  {}: {} ({}) *{}".format(
+                    print('  {}: {} ({}) *{}'.format(
                         reponame,
                         summaries[reponame]['version'],
                         RepositoryVersionClass2Letter(summaries[reponame]['versionclass']),
@@ -130,14 +130,14 @@ def Main():
                     ))
 
     if options.mode == 'stream':
-        logger.Log("dumping...")
+        logger.Log('dumping...')
         repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
     else:
-        logger.Log("loading packages...")
+        logger.Log('loading packages...')
         all_packages = repoman.DeserializeMulti(reponames=options.reponames, logger=logger)
-        logger.Log("merging packages...")
+        logger.Log('merging packages...')
         metapackages = PackagesToMetapackages(all_packages)
-        logger.Log("dumping...")
+        logger.Log('dumping...')
         for metapackage_name, packageset in sorted(metapackages.items()):
             PackageProcessor(packageset)
 

@@ -49,14 +49,14 @@ class YACPGitParser():
                 continue
 
             for cygport in os.listdir(package_path):
-                if not cygport.endswith(".cygport"):
+                if not cygport.endswith('.cygport'):
                     continue
 
                 # XXX: save *bl* to origversion
-                match = re.match("(.*)-[0-9]+bl[0-9]+\.cygport$", cygport)
+                match = re.match('(.*)-[0-9]+bl[0-9]+\.cygport$', cygport)
 
                 if not match:
-                    print("WARNING: unable to parse cygport: {}".format(cygport), file=sys.stderr)
+                    print('WARNING: unable to parse cygport: {}'.format(cygport), file=sys.stderr)
                     continue
 
                 pkg = Package()

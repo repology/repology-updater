@@ -30,29 +30,29 @@ class FedoraFetcher():
         pass
 
     def LoadSpec(self, package, statepath, logger):
-        specurl = self.giturl + "/{0}.git/plain/{0}.spec".format(package)
+        specurl = self.giturl + '/{0}.git/plain/{0}.spec'.format(package)
 
-        logger.GetIndented().Log("getting spec from {}".format(specurl))
+        logger.GetIndented().Log('getting spec from {}'.format(specurl))
 
         r = Get(specurl, check_status=False)
         if r.status_code != 200:
-            deadurl = self.giturl + "/{0}.git/plain/dead.package".format(package)
+            deadurl = self.giturl + '/{0}.git/plain/dead.package'.format(package)
             dr = Get(deadurl, check_status=False)
             if dr.status_code == 200:
-                logger.GetIndented(2).Log("dead: " + ';'.join(dr.text.split('\n')))
+                logger.GetIndented(2).Log('dead: ' + ';'.join(dr.text.split('\n')))
             else:
-                logger.GetIndented(2).Log("failed: {}".format(r.status_code))  # XXX: check .dead.package, instead throw
+                logger.GetIndented(2).Log('failed: {}'.format(r.status_code))  # XXX: check .dead.package, instead throw
             return
 
-        with open(os.path.join(statepath, package + ".spec"), "wb") as file:
+        with open(os.path.join(statepath, package + '.spec'), 'wb') as file:
             file.write(r.content)
 
     def ParsePackages(self, statepath, logger):
         page = 1
 
         while True:
-            pageurl = self.apiurl + "packages/?page={}".format(page)
-            logger.Log("getting page {} from {}".format(page, pageurl))
+            pageurl = self.apiurl + 'packages/?page={}'.format(page)
+            logger.Log('getting page {} from {}'.format(page, pageurl))
             pagedata = json.loads(Get(pageurl).text)
 
             for package in pagedata['packages']:
@@ -65,7 +65,7 @@ class FedoraFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
-            logger.Log("no update requested, skipping")
+            logger.Log('no update requested, skipping')
             return
 
         if os.path.exists(statepath):

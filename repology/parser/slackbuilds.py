@@ -30,7 +30,7 @@ class SlackBuildsParser():
         result = []
 
         for category in os.listdir(path):
-            if category.startswith("."):
+            if category.startswith('.'):
                 continue
 
             category_path = os.path.join(path, category)
@@ -42,9 +42,9 @@ class SlackBuildsParser():
                 if not os.path.isdir(package_path):
                     continue
 
-                info_path = os.path.join(category_path, package, package + ".info")
+                info_path = os.path.join(category_path, package, package + '.info')
                 if not os.path.isfile(info_path):
-                    print("WARNING: {} does not exist, package skipped".format(info_path), file=sys.stderr)
+                    print('WARNING: {} does not exist, package skipped'.format(info_path), file=sys.stderr)
                     continue
 
                 with open(info_path, encoding='utf-8', errors='ignore') as infofile:
@@ -69,6 +69,6 @@ class SlackBuildsParser():
                     if pkg.name is not None and pkg.version is not None:
                         result.append(pkg)
                     else:
-                        print("WARNING: {} skipped, likely due to parsing problems".format(info_path), file=sys.stderr)
+                        print('WARNING: {} skipped, likely due to parsing problems'.format(info_path), file=sys.stderr)
 
         return result

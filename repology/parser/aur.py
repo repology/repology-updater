@@ -51,17 +51,17 @@ class AURParser():
         packages = []
 
         for filename in os.listdir(path):
-            if not filename.endswith(".json"):
+            if not filename.endswith('.json'):
                 continue
 
-            with open(os.path.join(path, filename), "r") as jsonfile:
-                for result in json.load(jsonfile)["results"]:
+            with open(os.path.join(path, filename), 'r') as jsonfile:
+                for result in json.load(jsonfile)['results']:
                     pkg = Package()
 
-                    pkg.name = result["Name"]
+                    pkg.name = result['Name']
 
                     has_badsuffix = False
-                    for badsuffix in ["-cvs", "-svn", "-hg", "-darcs", "-bzr", "-git", "-bin"]:
+                    for badsuffix in ['-cvs', '-svn', '-hg', '-darcs', '-bzr', '-git', '-bin']:
                         if pkg.name.endswith(badsuffix):
                             has_badsuffix = True
                             break
@@ -69,17 +69,17 @@ class AURParser():
                     if has_badsuffix:
                         continue
 
-                    pkg.origversion = result["Version"]
-                    pkg.version, pkg.origversion = SanitizeVersion(result["Version"])
-                    pkg.comment = result["Description"]
-                    pkg.homepage = result["URL"]
+                    pkg.origversion = result['Version']
+                    pkg.version, pkg.origversion = SanitizeVersion(result['Version'])
+                    pkg.comment = result['Description']
+                    pkg.homepage = result['URL']
 
-                    if "License" in result:
-                        for license in result["License"]:
+                    if 'License' in result:
+                        for license in result['License']:
                             pkg.licenses.append(license)
 
-                    if "Maintainer" in result and result["Maintainer"]:
-                        pkg.maintainers += GetMaintainers(result["Maintainer"] + '@aur')
+                    if 'Maintainer' in result and result['Maintainer']:
+                        pkg.maintainers += GetMaintainers(result['Maintainer'] + '@aur')
 
                     packages.append(pkg)
 

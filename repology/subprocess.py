@@ -21,11 +21,11 @@ import subprocess
 
 
 def RunSubprocess(command, logger, shell=False, cwd=None):
-    message = "running \"{}\"".format(' '.join(command)
-                                      if isinstance(command, list)
-                                      else command)
+    message = 'running "{}"'.format(' '.join(command)
+                                    if isinstance(command, list)
+                                    else command)
     if cwd is not None:
-        message += " in \"{}\"".format(cwd)
+        message += ' in "{}"'.format(cwd)
 
     logger.Log(message)
 
@@ -38,7 +38,7 @@ def RunSubprocess(command, logger, shell=False, cwd=None):
         for line in proc.stdout:
             logger.GetIndented().Log(line.strip())
         proc.wait()
-        logger.Log("command finished with code {}".format(proc.returncode))
+        logger.Log('command finished with code {}'.format(proc.returncode))
         if proc.returncode != 0:
             raise subprocess.CalledProcessError(cmd=command,
                                                 returncode=proc.returncode)

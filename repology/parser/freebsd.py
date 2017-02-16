@@ -50,7 +50,7 @@ class FreeBSDIndexParser():
             for line in indexfile:
                 fields = line.strip().split('|')
                 if len(fields) != 13:
-                    print("WARNING: package {} skipped, incorrect number of fields in INDEX".format(fields[0]), file=sys.stderr)
+                    print('WARNING: package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), file=sys.stderr)
                     continue
 
                 pkg = Package()

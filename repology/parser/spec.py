@@ -30,7 +30,7 @@ class SpecParser():
 
         for root, _, files in os.walk(path):
             for filename in files:
-                if not filename.endswith(".spec"):
+                if not filename.endswith('.spec'):
                     continue
 
                 with open(os.path.join(root, filename), encoding='utf-8', errors='ignore') as specfile:
@@ -39,7 +39,7 @@ class SpecParser():
                     for line in specfile:
                         line = line.strip()
 
-                        if line.find("%") != -1:  # substitudes: ignore
+                        if line.find('%') != -1:  # substitudes: ignore
                             continue
 
                         if line.startswith('Name:') and not pkg.name:
@@ -58,6 +58,6 @@ class SpecParser():
                     if pkg.name is not None and pkg.version is not None:
                         result.append(pkg)
                     else:
-                        print("WARNING: %s skipped, likely due to parsing problems" % filename, file=sys.stderr)
+                        print('WARNING: %s skipped, likely due to parsing problems' % filename, file=sys.stderr)
 
         return result

@@ -51,7 +51,7 @@ class ArchDBParser():
         result = []
 
         for package in os.listdir(path):
-            desc_path = os.path.join(path, package, "desc")
+            desc_path = os.path.join(path, package, 'desc')
             if not os.path.isfile(desc_path):
                 continue
 
@@ -72,7 +72,7 @@ class ArchDBParser():
                         if pkg.comment is None:
                             pkg.comment = ''
                         if pkg.comment != '':
-                            pkg.comment += "\n"
+                            pkg.comment += '\n'
                         pkg.comment += line
                     elif tag == 'URL':
                         pkg.homepage = line
@@ -86,6 +86,6 @@ class ArchDBParser():
                 if pkg.name is not None and pkg.version is not None:
                     result.append(pkg)
                 else:
-                    print("WARNING: %s skipped, likely due to parsing problems" % package, file=sys.stderr)
+                    print('WARNING: %s skipped, likely due to parsing problems' % package, file=sys.stderr)
 
         return result

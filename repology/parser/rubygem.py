@@ -38,7 +38,7 @@ class RubyGemParser():
             for gem in content:
                 pkg = Package()
                 gemplat = self.force_decode(gem[2])
-                if gemplat == "ruby":
+                if gemplat == 'ruby':
                     pkg.name = self.force_decode(gem[0])
                     pkg.version = self.force_decode(gem[1].values[0])
                     pkg.homepage = 'https://rubygems.org/gems/' + pkg.name

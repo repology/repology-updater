@@ -27,8 +27,8 @@ class PyPiHTMLParser():
     def Parse(self, path):
         packages = {}
 
-        with open(path, "r", encoding="utf-8") as htmlfile:
-            for match in re.findall("<td><a href=\"/pypi/([^\"]+)/([^\"]+)\">[^<>]*</a></td>[ \n]*<td>([^<>]*)</td>", htmlfile.read(), flags=re.MULTILINE):
+        with open(path, 'r', encoding='utf-8') as htmlfile:
+            for match in re.findall('<td><a href="/pypi/([^"]+)/([^"]+)">[^<>]*</a></td>[ \n]*<td>([^<>]*)</td>', htmlfile.read(), flags=re.MULTILINE):
                 pkg = Package()
                 pkg.name = match[0]
                 pkg.version = match[1]
