@@ -145,8 +145,11 @@
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
 - { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
 - { name: dgen,                        setname: dgen-sdl                  }
+- { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
+- { name: [djvulibre-lib,djvulibre-qt4,djvulibre-tools], setname: djvulibre }
 - { name: drpython-py27,               setname: drpython                  }
 - { name: devedeng,                    setname: devede                    }
+- { name: [dogecoind,dogecoin-qt,dogecoin-daemon], setname: dogecoin }
 - { name: dynamips-community,          setname: dynamips,                 family: [ freebsd ] }
 - { name: dwarffortress,               setname: dwarf-fortress            }
 - { name: linux-dwarffortress,         setname: dwarf-fortress            }
@@ -669,6 +672,8 @@
 - { name: db, verpat: "2\\..*",        setname: db2 }
 - { name: db, verpat: "1\\..*",        setname: db1 }
 
+- { name: dmd2,                        setname: dmd }
+
 - { name: eigen, verpat: "1\\..*",     setname: eigen1 }
 - { name: eigen, verpat: "2\\..*",     setname: eigen2 }
 - { name: eigen, verpat: "3\\..*",     setname: eigen3 }
@@ -1058,6 +1063,8 @@
 - { name: numeric,                     setname: "python:numeric", family: [crux,gobolinux] }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
+- { namepat: "django-.*",              setname: "python:$0"               }
+- { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 
 - { name: "python:bzrtools",           setname: bzrtools                  }
 
