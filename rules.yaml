@@ -36,7 +36,6 @@
 - { name: adol-c,                      setname: adolc                     }
 - { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               family: [ freebsd ]  }
 - { name: adzap,                       setname: adzapper,                 family: [ freebsd, pkgsrc ] }
-- { name: aiksaurus-gtk,               setname: aiksaurus,                family: [ freebsd ] } # slave port
 - { name: argyll,                      setname: argyllcms                 }
 - { name: arping2,                     setname: arping                    }
 - { namepat: "artefetcher-qt[45]",     setname: artefetcher               }
@@ -61,7 +60,7 @@
 - { name: aws-cli,                     setname: awscli                    }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
-- { name: bcel5-3,                     setname: bcel                      }
+- { name: bcel5_3,                     setname: bcel                      }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: beneath-a-steel-sky-cd,      setname: beneath-a-steel-sky       }
 - { name: "bakery2.6",                 setname: bakery                    }
@@ -201,7 +200,6 @@
 - { name: krita3,                      setname: krita                     }
 - { name: libarpack-ng,                setname: arpack-ng                 }
 - { name: libagg,                      setname: agg                       }
-- { name: libcheck,                    setname: check                     } # XXX: reverse?
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
@@ -292,8 +290,8 @@
     - ttf-anonymous-pro
   setname: "fonts:anonymouspro"
 
-- { name: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
-- { name: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
+- { namepat: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
+- { namepat: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
 
 - name:
     - fonts-bitmap-terminus
@@ -909,7 +907,7 @@
 - { name: "perl:cbor-xs",              ver: [ "1.60", "1.50", "1.30" ], ignorever: true }
 - { name: "perl:cgi-formbuilder",      ver: [ "3.1000", "3.0900", "3.90.0" ], ignorever: true }
 - { name: "perl:chi",                  ver: "0.580",           ignorever: true }
-- { name: "perl:compress-lzf",         ver: "3.70",            ignorever: true }
+- { name: "perl:compress-lzf",         verpat: "3.[789]0",     ignorever: true }
 - { name: "perl:math-polygon-tree",    ver: "0.0691",          ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
 - { name: "perl:readonly",             ver: "2.050",           ignorever: true }
 - { name: "perl:test-exception",       ver: [ "0.430000", "0.400", "0.320" ], ignorever: true }
@@ -955,7 +953,7 @@
 - { namepat: "(ruby:faraday)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:faraday_middleware)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:fast_gettext)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:fast-xs)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:fast_xs)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:fluentd)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:gherkin)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:glib2)[0-9._-]+", setname: "$1" }
@@ -986,7 +984,7 @@
 - { namepat: "(ruby:moneta)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:multipart-post)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mustermann)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:net-http-digest-auth)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:net-http-digest_auth)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-http-persistent)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-scp)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-ssh)[0-9._-]+", setname: "$1" }
@@ -995,7 +993,7 @@
 - { namepat: "(ruby:nokogiri)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:parslet)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:pry)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:puppet-forge)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:puppet_forge)[0-9._-]+", setname: "$1" }
 - { name: "ruby:pygments_rb", setname: "ruby:pygments.rb" }
 - { namepat: "(ruby:rack)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:rack-cache)[0-9._-]+", setname: "$1" }
