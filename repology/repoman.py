@@ -17,14 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import inspect
 import os
 import pickle
-import inspect
+
 import yaml
 
-from repology.logger import NoopLogger
-
 from repology.fetcher import *
+from repology.logger import NoopLogger
 from repology.parser import *
 
 

@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import json
+import os
 
 from repology.logger import NoopLogger
-from repology.www import Get
 from repology.version import VersionCompare
+from repology.www import Get
 
 
 class FreshcodeFetcher():

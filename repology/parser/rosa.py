@@ -35,7 +35,7 @@ class RosaInfoXmlParser():
 
             fn = info.attrib['fn']
             url = info.attrib['url']
-            license = info.attrib['license']
+            license_ = info.attrib['license']
 
             pos2 = fn.rfind('-')
             if pos2 == -1:
@@ -51,7 +51,7 @@ class RosaInfoXmlParser():
             pkg.origversion = fn[pos1 + 1:]
             pkg.version = fn[pos1 + 1:pos2]
             pkg.homepage = url
-            pkg.licenses = [license]
+            pkg.licenses = [license_]
 
             result.append(pkg)
 

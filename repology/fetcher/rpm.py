@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import gzip
 import os
 import xml.etree.ElementTree
-import gzip
 
 from repology.logger import NoopLogger
 from repology.www import Get

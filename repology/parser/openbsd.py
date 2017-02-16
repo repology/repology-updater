@@ -15,11 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
 import csv
+import re
 
-from repology.util import SplitPackageNameVersion, GetMaintainers
 from repology.package import Package
+from repology.util import GetMaintainers, SplitPackageNameVersion
 
 
 def SanitizeVersion(version):

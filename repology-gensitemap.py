@@ -17,14 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import argparse
 import os
 import sys
-import argparse
 from random import shuffle
 
-from repology.database import Database
-
 import repology.config
+from repology.database import Database
 
 
 def Main():

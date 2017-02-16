@@ -17,18 +17,18 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import argparse
+import multiprocessing
 import os
 import re
-import argparse
-import requests
-import urllib.parse
 import time
-import multiprocessing
+import urllib.parse
 
-from repology.database import Database
-from repology.logger import StderrLogger, FileLogger
+import requests
 
 import repology.config
+from repology.database import Database
+from repology.logger import FileLogger, StderrLogger
 
 
 def GetHTTPLinkStatus(url, timeout):

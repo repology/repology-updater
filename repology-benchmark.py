@@ -17,15 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import argparse
 import os
 import sys
 from timeit import default_timer as timer
-import argparse
-
-from repology.database import *
-from repology.queryfilters import *
 
 import repology.config
+from repology.database import *
+from repology.queryfilters import *
 
 
 class StatCounter():

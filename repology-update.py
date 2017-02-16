@@ -17,18 +17,17 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import argparse
 import os
 import sys
 import traceback
-import argparse
-
-from repology.repoman import RepositoryManager
-from repology.transformer import PackageTransformer
-from repology.database import Database
-from repology.packageproc import FillPackagesetVersions
-from repology.logger import *
 
 import repology.config
+from repology.database import Database
+from repology.logger import *
+from repology.packageproc import FillPackagesetVersions
+from repology.repoman import RepositoryManager
+from repology.transformer import PackageTransformer
 
 
 def ProcessRepositories(options, logger, repoman, transformer):

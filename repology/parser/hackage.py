@@ -17,8 +17,8 @@
 
 import os
 
-from repology.version import VersionCompare
 from repology.package import Package
+from repology.version import VersionCompare
 
 
 class HackageParser():
