@@ -20,6 +20,7 @@
 import json
 
 import flask
+from werkzeug.contrib.profiler import ProfilerMiddleware
 
 from repology.database import Database
 from repology.metapackageproc import *
@@ -684,4 +685,8 @@ def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
 
 
 if __name__ == '__main__':
-    app.run()
+    if app.config['PROFILE']:
+        app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
+        app.run(debug = True)
+    else:
+        app.run()
