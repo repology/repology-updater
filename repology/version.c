@@ -111,14 +111,13 @@ static size_t GetNextVersionComponent(const char** str, long* target) {
 }
 
 static PyObject* VersionCompare(PyObject *self, PyObject *args) {
+    (void)self; // (unused)
+
 	const char *v1;
 	const char *v2;
 
 	if (!PyArg_ParseTuple(args, "ss", &v1, &v2))
 		return NULL;
-
-	const char *v1_end = v1 + strlen(v1);
-	const char *v2_end = v2 + strlen(v1);
 
 	long v1_comps[6];
 	long v2_comps[6];
