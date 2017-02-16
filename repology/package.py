@@ -55,31 +55,32 @@ class Package:
         'ignoreversion',
     ]
 
-    def __init__(self, **args):
-        self.repo = None
-        self.family = None
+    def __init__(self, repo=None, family=None,
+                 name=None, effname=None,
+                 version=None, origversion=None, effversion=None, versionclass=None,
+                 maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
+                 ignore=False, shadow=False, ignoreversion=False):
+        self.repo = repo
+        self.family = family
 
-        self.name = None
-        self.effname = None
+        self.name = name
+        self.effname = effname
 
-        self.version = None
-        self.origversion = None
-        self.effversion = None
-        self.versionclass = None
+        self.version = version
+        self.origversion = origversion
+        self.effversion = effversion
+        self.versionclass = versionclass
 
-        self.maintainers = []
-        self.category = None
-        self.comment = None
-        self.homepage = None
-        self.licenses = []
-        self.downloads = []
+        self.maintainers = maintainers if maintainers else []
+        self.category = category
+        self.comment = comment
+        self.homepage = homepage
+        self.licenses = licenses if licenses else []
+        self.downloads = downloads if downloads else []
 
-        self.ignore = False
-        self.shadow = False
-        self.ignoreversion = False
-
-        for k, v in args.items():
-            setattr(self, k, v)
+        self.ignore = ignore
+        self.shadow = shadow
+        self.ignoreversion = ignoreversion
 
     @property
     def __dict__(self):
