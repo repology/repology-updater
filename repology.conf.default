@@ -56,6 +56,11 @@ REPOSITORIES = ['production']
 ############################################################################
 
 #
+# Enable webapp profiling
+#
+PROFILE = False
+
+#
 # Items (metapackages, maintainers) per page
 #
 PER_PAGE = 500
