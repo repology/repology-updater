@@ -14,6 +14,14 @@ setup(
         'repology.fetcher',
         'repology.parser',
     ],
+    scripts=[
+        'repology-app.py',
+        'repology-benchmark.py',
+        'repology-dump.py',
+        'repology-gensitemap.py',
+        'repology-linkchecker.py',
+        'repology-update.py',
+    ],
     classifiers=[
         'Topic :: System :: Archiving :: Packaging',
         'Topic :: System :: Software Distribution',
