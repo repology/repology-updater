@@ -18,17 +18,17 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+
 import flask
 
 from repology.database import Database
+from repology.metapackageproc import *
+from repology.package import *
+from repology.packageproc import *
 from repology.queryfilters import *
 from repology.repoman import RepositoryManager
-from repology.packageproc import *
-from repology.metapackageproc import *
 from repology.template_helpers import *
-
 from repology.version import VersionCompare
-from repology.package import *
 
 # create application and handle configuration
 app = flask.Flask(__name__)

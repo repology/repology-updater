@@ -18,8 +18,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import fcntl
-import time
 import sys
+import time
 
 
 class NoopLogger:

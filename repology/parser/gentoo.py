@@ -18,9 +18,9 @@
 import os
 import xml.etree.ElementTree
 
-from repology.version import VersionCompare
 from repology.package import Package
 from repology.util import GetMaintainers
+from repology.version import VersionCompare
 
 
 def SanitizeVersion(version):

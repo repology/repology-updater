@@ -17,16 +17,15 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import argparse
+import os
 
+import repology.config
+from repology.filters import *
+from repology.logger import *
 from repology.package import *
 from repology.packageproc import *
 from repology.repoman import RepositoryManager
-from repology.logger import *
-from repology.filters import *
-
-import repology.config
 
 
 def PackageVersionClass2Letter(value):

@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import xml.etree.ElementTree
 import shutil
+import xml.etree.ElementTree
 
 from repology.logger import NoopLogger
 from repology.www import Get

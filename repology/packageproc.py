@@ -17,8 +17,8 @@
 
 from functools import cmp_to_key
 
-from repology.version import VersionCompare
 from repology.package import *
+from repology.version import VersionCompare
 
 
 def PackagesetCheckFilters(packages, *filters):

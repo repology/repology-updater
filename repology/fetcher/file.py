@@ -15,10 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import gzip
 import bz2
+import gzip
 import lzma
+import os
 
 from repology.logger import NoopLogger
 from repology.www import Get

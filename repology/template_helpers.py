@@ -18,10 +18,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+
 import flask
 
-from repology.packageformatter import PackageFormatter
 from repology.package import *
+from repology.packageformatter import PackageFormatter
 
 
 def maintainer_to_link(maintainer):

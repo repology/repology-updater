@@ -15,13 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from .file import FileFetcher
-from .git import GitFetcher
-from .wgettar import WgetTarFetcher
 from .aur import AURFetcher
-from .fedora import FedoraFetcher
 from .chocolatey import ChocolateyFetcher
-from .rpm import RepodataFetcher
+from .fedora import FedoraFetcher
+from .file import FileFetcher
 from .freshcode import FreshcodeFetcher
+from .git import GitFetcher
 from .guix import GuixFetcher
+from .rpm import RepodataFetcher
 from .rsync import RsyncFetcher
+from .wgettar import WgetTarFetcher

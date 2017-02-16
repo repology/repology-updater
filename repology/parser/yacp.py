@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
 import re
+import sys
 
 from repology.package import Package
 from repology.util import SplitPackageNameVersion

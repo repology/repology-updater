@@ -17,8 +17,8 @@
 
 import re
 
-from repology.util import SplitPackageNameVersion, GetMaintainers
 from repology.package import Package
+from repology.util import GetMaintainers, SplitPackageNameVersion
 
 
 class CPANPackagesParser():
