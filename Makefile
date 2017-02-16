@@ -1,12 +1,19 @@
 FLAKE8?=	flake8
 
 CC?=		gcc
+CFLAGS?=	-O3
 CFLAGS+=	-Wall -Wextra
 
 CPPFLAGS+=	`pkg-config --cflags rpm`
 LDFLAGS+=	`pkg-config --libs rpm`
 
-all: helpers/rpmcat/rpmcat gzip-static
+all: helpers/rpmcat/rpmcat repology/version.so gzip-static
+
+repology/version.so: build/repology/version.so
+	cp build/repology/version.so repology/version.so
+
+build/repology/version.so: repology/version.c
+	env CFLAGS="${CFLAGS}" python3 setup.py build --build-lib build build
 
 gzip-static: static/bootstrap.min.css.gz static/bootstrap.min.js.gz static/jquery-3.1.1.min.js.gz
 
@@ -25,6 +32,8 @@ helpers/rpmcat/rpmcat: helpers/rpmcat/rpmcat.c
 clean:
 	rm -f helpers/rpmcat/rpmcat
 	rm -f static/*.gz
+	rm -rf build
+	rm repology/version.so
 
 test::
 	python3 -m unittest discover
