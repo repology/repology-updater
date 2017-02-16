@@ -1,3 +1,5 @@
+FLAKE8?=	flake8
+
 CC?=		gcc
 CFLAGS+=	-Wall -Wextra
 
@@ -36,10 +38,10 @@ profile-reparse::
 	python3 -c 'import pstats; stats = pstats.Stats("_profile"); stats.sort_stats("time"); stats.print_stats()' | less
 
 flake8:
-	flake8 --ignore=E501,F401,F405,F403,E265 *.py repology
+	${FLAKE8} --ignore=E501,F401,F405,F403,E265,Q000,D10 --application-import-names=repology *.py repology
 
 flake8-all:
-	flake8 *.py repology
+	${FLAKE8} *.py repology
 
 check:
 	rm -f kwalify.log
