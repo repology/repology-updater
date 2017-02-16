@@ -145,7 +145,7 @@
 - { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
 - { name: dgen,                        setname: dgen-sdl                  }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
-- { name: [djvulibre-lib,djvulibre-qt4,djvulibre-tools], setname: djvulibre }
+- { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools], setname: djvulibre }
 - { name: drpython-py27,               setname: drpython                  }
 - { name: devedeng,                    setname: devede                    }
 - { name: [dogecoind,dogecoin-qt,dogecoin-daemon], setname: dogecoin }
@@ -307,6 +307,7 @@
     - dejavu-ttf
     - fonts-dejavu
     - fonts-ttf-dejavu
+    - ttf-dejavu
     - xorg-font-dejavu-ttf
   setname: "fonts:dejavu"
 
@@ -337,6 +338,11 @@
     - proggy_fonts
     - proggy-fonts
   setname: "fonts:proggy"
+
+- name:
+    - fonts-ttf-grimmer-proggy-tinysz
+    - grimmer-proggy-tinysz-fonts
+  setname: "fonts:grimmer-proggy-tinysz"
 
 - name:
     - terminus-font-ttf
