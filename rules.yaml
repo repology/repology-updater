@@ -225,7 +225,7 @@
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles,              family: [ pkgsrc, arch, openbsd ] }
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
-- { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease], setname: qtcreator }
+- { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator], setname: qtcreator }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
