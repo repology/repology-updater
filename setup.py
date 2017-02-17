@@ -38,6 +38,7 @@ setup(
         Extension(
             'repology.version',
             sources=['repology/version.c'],
+            extra_compile_args=['-std=c99'],
         )
     ]
 )
