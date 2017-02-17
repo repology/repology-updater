@@ -60,6 +60,7 @@ version are always parsed.
 | Hackage                          |         |         |       | ✔ (2) |         |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
+| PCLinuxOS                        | ✔       | ✔       | ✔     |       |         |          |
 | pkgsrc                           | ✔       | ✔       | ✔     |       |         |          |
 | PyPi                             | ✔       |         |       | ✔ (2) |         |          |
 | RubyGems                         |         |         |       | ✔ (2) |         |          |
