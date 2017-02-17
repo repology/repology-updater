@@ -537,10 +537,27 @@ def about():
 
 
 @app.route('/statistics')
-def statistics():
+@app.route('/statistics/<sorting>')
+def statistics(sorting=None):
+    repostats = filter(lambda r: r['name'] in reponames, get_db().GetRepositories())
+    showmedals = True
+
+    if sorting == 'newest':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'], reverse=True)
+    elif sorting == 'pnewest':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'] / (1 + s['num_metapackages']), reverse=True)
+    elif sorting == 'total':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages'], reverse=True)
+    else:
+        sorting = 'name'
+        repostats = sorted(repostats, key=lambda s: s['name'])
+        showmedals = False
+
     return flask.render_template(
         'statistics.html',
-        repostats=filter(lambda r: r['name'] in reponames, get_db().GetRepositories()),
+        sorting=sorting,
+        repostats=repostats,
+        showmedals=showmedals,
         repostats_old={repo['name']: repo for repo in get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 7)},
         num_metapackages=get_db().GetMetapackagesCount()
     )

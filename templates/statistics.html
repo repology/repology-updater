@@ -4,6 +4,21 @@
 {% block title %}{{ super() }}: statistics{% endblock %}
 {% block header %}Statistics{% endblock %}
 
+{% block preheader %}
+<div class="dropdown pageheader-right">
+	<button class="btn btn-default dropdown-toggle" type="button" id="statisticsSortMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		Sort by
+		<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="statisticsSortMenu">
+		<li><a href="{{ url_for('statistics') }}" class="{% if sorting == "alpha" %} active{% endif %}">Name</a></li>
+		<li><a href="{{ url_for('statistics', sorting="newest") }}" class="{% if sorting == "newest" %} active{% endif %}">Metapackages up to date</a></li>
+		<li><a href="{{ url_for('statistics', sorting="pnewest") }}" class="{% if sorting == "pnewest" %} active{% endif %}">Percent metapackages up to date</a></li>
+		<li><a href="{{ url_for('statistics', sorting="total") }}" class="{% if sorting == "total" %} active{% endif %}">Total metapackages</a></li>
+	</ul>
+</div>
+{% endblock %}
+
 {% block content %}
 <div class="container">
 
@@ -33,17 +48,19 @@
 		</tr>
 	</thead>
 	<tbody>
-	{% for repostat in repostats|sort(attribute='num_metapackages_newest', reverse=True) %}
+	{% for repostat in repostats %}
 	{% if repostat.name in repostats_old %}{% set old_repostat = repostats_old[repostat.name] %}{% else %}{% set old_repostat = {} %}{% endif %}
 		<tr>
 			<th class="text-right">
 				{{- macros.repository_link(repostat.name) -}}
+				{%- if showmedals -%}
 				{%- if loop.index == 1 -%}
 					<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date"></span></sup>
 				{%- elif loop.index == 2 -%}
 					<sup><div class="medal medal-silver" title="2nd place by number of metapackages up to date"></span></sup>
 				{%- elif loop.index == 3 -%}
 					<sup><div class="medal medal-bronze" title="3rd place by number of metapackages up to date"></span></sup>
+				{%- endif -%}
 				{%- endif -%}
 			</th>
 
