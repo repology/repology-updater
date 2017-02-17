@@ -153,7 +153,7 @@
 - { name: dwarffortress,               setname: dwarf-fortress            }
 - { name: linux-dwarffortress,         setname: dwarf-fortress            }
 - { name: easyrpg,                     setname: easyrpg-player,           family: [ openbsd ] }
-- { name: eclipse-java,                setname: eclipse,                  family: [ arch ]    }
+- { name: eclipse-java,                setname: eclipse                   }
 - { name: einstein-puzzle,             setname: einstein,                 family: [ pkgsrc ] }
 - { name: el,                          setname: eternal-lands,            family: [ freebsd ] }
 - { name: el-data,                     setname: eternal-lands-data,       family: [ freebsd ] }
