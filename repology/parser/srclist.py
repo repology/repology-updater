@@ -22,7 +22,7 @@ from repology.package import Package
 from repology.util import GetMaintainers
 
 
-class SrcListClassicParser():
+class SrcListParser():
     def __init__(self):
         if not os.path.exists('helpers/rpmcat/rpmcat'):
             raise RuntimeError('helpers/rpmcat/rpmcat does not exist, please run `make\' in project root directory')
@@ -30,7 +30,7 @@ class SrcListClassicParser():
     def Parse(self, path):
         result = []
 
-        with subprocess.Popen(['helpers/rpmcat/rpmcat', path], stdout=subprocess.PIPE, universal_newlines=True) as proc:
+        with subprocess.Popen(['helpers/rpmcat/rpmcat', path], errors='ignore', stdout=subprocess.PIPE, universal_newlines=True) as proc:
             for line in proc.stdout:
                 fields = line.split('|')
 

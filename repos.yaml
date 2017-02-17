@@ -644,12 +644,12 @@
   sources:
     - name: noarch
       fetcher: File
-      parser: SrcListClassic
+      parser: SrcList
       url: http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/noarch/base/srclist.classic.xz
       compression: xz
     - name: x86_64
       fetcher: File
-      parser: SrcListClassic
+      parser: SrcList
       url: http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/base/srclist.classic.xz
       compression: xz
   links:

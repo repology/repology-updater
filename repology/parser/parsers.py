@@ -36,10 +36,10 @@ from .nix import NixJsonParser
 from .openbsd import OpenBSDIndexParser
 from .pkgsrc import PkgsrcIndexParser
 from .pypi import PyPiHTMLParser
+from .repodata import RepodataParser
 from .rosa import RosaInfoXmlParser
-from .rpm import RepodataParser
 from .rubygem import RubyGemParser
-from .sisyphus import SrcListClassicParser
 from .slackbuilds import SlackBuildsParser
 from .spec import SpecParser
+from .srclist import SrcListParser
 from .yacp import YACPGitParser

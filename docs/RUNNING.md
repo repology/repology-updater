@@ -4,7 +4,7 @@
 
 Needed for core:
 
-- [Python](https://www.python.org/) 3.5+
+- [Python](https://www.python.org/) 3.6+
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [requests](http://python-requests.org/)
 - Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
