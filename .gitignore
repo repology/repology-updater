@@ -5,3 +5,4 @@ repology.conf
 static/*.gz
 testdata/*.packages
 repology/version.so
+build
