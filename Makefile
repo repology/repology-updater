@@ -10,7 +10,7 @@ LDFLAGS+=	`pkg-config --libs rpm`
 all: helpers/rpmcat/rpmcat repology/version.so gzip-static
 
 repology/version.so: build/repology/version.so
-	cp build/repology/version.so repology/version.so
+	cp build/repology/version*.so repology/version.so
 
 build/repology/version.so: repology/version.c
 	env CFLAGS="${CFLAGS}" python3 setup.py build --build-lib build build
