@@ -327,6 +327,21 @@
   setname: "fonts:dina"
 
 - name:
+    - fonts-linuxlibertine
+    - fonts-ttf-libertine
+    - fonts-ttf-linuxlibertine
+    - linux-libertine
+    - linux-libertine-fonts
+    - linux-libertine-ttf
+    - linuxlibertine
+    - linuxlibertine-fonts-otf
+    - linuxlibertine-fonts-ttf
+    - ttf-linux-libertine
+  setname: "fonts:linuxlibertine"
+- { name: libertine, category: media-fonts, setname: "fonts:linuxlibertine" }
+- { name: [ttf-linux-libertine-g,linuxlibertine-g], setname: "fonts:linuxlibertine-g" }
+
+- name:
     - fonts-ttf-opensans
     - google-opensans-fonts
     - opensans-ttf
