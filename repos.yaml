@@ -764,7 +764,7 @@
 ###########################################################################
 # GNU Guix
 ###########################################################################
-- name: guix
+- name: gnuguix
   desc: GNU Guix
   url: https://www.gnu.org/software/guix/packages/
   family: guix
