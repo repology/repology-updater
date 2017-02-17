@@ -658,6 +658,21 @@
   tags: [ all, production ]
 
 ###########################################################################
+# PCLinuxOS
+###########################################################################
+- name: pclinuxos
+  desc: PCLinuxOS
+  url: http://www.pclinuxos.com
+  family: pclinuxos
+  sources:
+    - name: srpms
+      fetcher: File
+      parser: SrcList
+      url: http://distrib-coffee.ipsl.jussieu.fr/pub/linux/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
+      compression: bz2
+  tags: [ all, production ]
+
+###########################################################################
 # Rosa
 ###########################################################################
 - name: rosa_2016_1
