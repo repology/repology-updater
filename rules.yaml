@@ -209,6 +209,7 @@
 - { name: libass4,                     setname: libass                    }
 - { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
+- { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
 - { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: ogre3d,                      setname: ogre                      }
@@ -227,6 +228,7 @@
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
 - { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator], setname: qtcreator }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
+- { name: r2e,                         setname: rss2email                 }
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
 - { namepat: "sdl-?sopwith",           setname: sopwith                   }
@@ -423,6 +425,7 @@
 - { name: [cutter,cutter-test_framework,cutter-testing-framework], setname: cutter-unittest } # C++ testing framework
 - { name: diaspora, verpat: "1\\.[0-9]+\\.[0-9]+", setname: diaspora-game }
 - { name: diaspora, setname: diaspora-social }
+- { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 # fuse-emulator vs. fusefs modules - see below
 
 # TODO
@@ -1095,7 +1098,9 @@
 - { namepat: "django-.*",              setname: "python:$0"               }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 
+# These are more applications than modules, so rename
 - { name: "python:bzrtools",           setname: bzrtools                  }
+- { name: "python:rss2email",          setname: rss2email                 }
 
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu ] }
