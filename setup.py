@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from distutils.core import setup, Extension
+from distutils.core import Extension, setup
 
 setup(
     name='repology',
@@ -34,7 +34,7 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: C',
     ],
-    ext_modules = [
+    ext_modules=[
         Extension(
             'repology.version',
             sources=['repology/version.c'],
