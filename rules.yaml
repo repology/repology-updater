@@ -485,6 +485,7 @@
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dhewm3,                      verpat: "2013.*",                                   ignorever: true }
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       family: [ sisyphus ], ignorever: true }
+- { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignorever: true } # no such release
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
 - { name: ffmpeg,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey
