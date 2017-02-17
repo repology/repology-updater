@@ -332,6 +332,20 @@
   setname: "fonts:opensans"
 
 - name:
+    - fonts-ttf-paratype
+    - fonts-ttf-paratype-pt-mono
+    - fonts-ttf-paratype-pt-sans
+    - fonts-ttf-paratype-pt-serif
+    - paratype
+    - paratype-pt-mono-fonts
+    - paratype-pt-sans-fonts
+    - paratype-pt-serif-fonts
+    - paratype-ttf
+    - ttf-paratype
+    - ttf-paratype-pt-fonts
+  setname: "fonts:paratype"
+
+- name:
     - proggy-fonts
     - proggyfonts
     - proggy_fonts-ttf
@@ -343,6 +357,16 @@
     - fonts-ttf-grimmer-proggy-tinysz
     - grimmer-proggy-tinysz-fonts
   setname: "fonts:grimmer-proggy-tinysz"
+
+- name:
+    - fonts-otf-gdouros-symbola
+    - symbola-ttf
+    - gdouros-symbola-fonts
+    - symbola
+    - symbola-font-ttf
+    - symbola-ttf
+    - ttf-symbola
+  setname: "fonts:symbola"
 
 - name:
     - terminus-font-ttf
