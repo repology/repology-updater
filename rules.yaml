@@ -170,6 +170,7 @@
 - { name: farstream-0.2,               setname: farstream,                family: [ debuntu ]  }
 - { name: fish-fillets,                setname: fillets-ng                }
 - { name: fish-fillets-ng,             setname: fillets-ng                }
+- { name: foobillardplus,              setname: foobillard++              }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
 - { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
 - { name: fox1.6,                      setname: fox16,                    family: [ debuntu ]  }
