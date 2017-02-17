@@ -33,7 +33,7 @@ clean:
 	rm -f helpers/rpmcat/rpmcat
 	rm -f static/*.gz
 	rm -rf build
-	rm repology/version.so
+	rm -f repology/version.so
 
 test::
 	python3 -m unittest discover
