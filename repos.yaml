@@ -405,8 +405,66 @@
       # XXX: no support for repository
       # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
       # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
-      url: 'https://www.archlinux.org/packages/?sort=&q={name}'
+      url: 'https://www.archlinux.org/packages/?q={name}'
   tags: [ all, production, have_testdata ]
+
+- name: parabola
+  desc: Parabola
+  url: https://www.parabola.nu/packages/
+  family: arch
+  sources:
+    - name: core
+      fetcher: WgetTar
+      parser: ArchDB
+      url: https://repomirror.parabola.nu/core/os/x86_64/core.db.tar.gz
+    - name: extra
+      fetcher: WgetTar
+      parser: ArchDB
+      url: https://repomirror.parabola.nu/extra/os/x86_64/extra.db.tar.gz
+    - name: community
+      fetcher: WgetTar
+      parser: ArchDB
+      url: https://repomirror.parabola.nu/community/os/x86_64/community.db.tar.gz
+    - name: libre
+      fetcher: WgetTar
+      parser: ArchDB
+      url: https://repomirror.parabola.nu/libre/os/x86_64/libre.db.tar.gz
+    - name: pcr
+      fetcher: WgetTar
+      parser: ArchDB
+      url: https://repomirror.parabola.nu/pcr/os/x86_64/pcr.db.tar.gz
+  links:
+    - desc: Package search on parabola.nu
+      # XXX: no support for repository
+      # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
+      # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
+      url: 'https://www.parabola.nu/packages/?q={name}'
+  tags: [ all ]
+
+- name: parabola-testing
+  desc: Parabola Testing
+  url: https://www.parabola.nu/packages/
+  family: arch
+  sources:
+    - name: testing
+      fetcher: WgetTar
+      parser: ArchDB
+      url: https://repomirror.parabola.nu/testing/os/x86_64/testing.db.tar.gz
+    - name: libre-testing
+      fetcher: WgetTar
+      parser: ArchDB
+      url: https://repomirror.parabola.nu/libre-testing/os/x86_64/libre-testing.db.tar.gz
+    - name: pcr-testing
+      fetcher: WgetTar
+      parser: ArchDB
+      url: https://repomirror.parabola.nu/pcr-testing/os/x86_64/pcr-testing.db.tar.gz
+  links:
+    - desc: Package search on parabola.nu
+      # XXX: no support for repository
+      # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
+      # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
+      url: 'https://www.parabola.nu/packages/?q={name}'
+  tags: [ all ]
 
 - name: aur
   desc: AUR

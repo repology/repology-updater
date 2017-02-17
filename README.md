@@ -45,7 +45,7 @@ version are always parsed.
 |----------------------------------|:-------:|:-------:|:-----:|:-----:|:-------:|:--------:|
 | Alpine                           | ✔       | ✔       |       | ✔     | ✔       |          |
 | ALT Sisyphus                     | ✔       | ✔       | ✔     |       |         |          |
-| Arch                             | ✔       | ✔       |       | ✔     | ✔       |          |
+| Arch, Parabola                   | ✔       | ✔       |       | ✔     | ✔       |          |
 | CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔     | ✔       |          |
 | Chocolatey                       | ✔       |         |       | ✔     |         |          |
 | CPAN                             |         | ✔       |       | ✔ (2) |         |          |
