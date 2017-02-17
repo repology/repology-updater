@@ -662,7 +662,7 @@
 ###########################################################################
 - name: pclinuxos
   desc: PCLinuxOS
-  url: http://www.pclinuxos.com
+  url: http://www.pclinuxos.com/
   family: pclinuxos
   sources:
     - name: srpms
