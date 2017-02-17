@@ -551,7 +551,7 @@ def graph_metapackages_for_repo(repo):
     if repo not in reponames:
         flask.abort(404)
 
-    numdays = 7
+    numdays = 28
     period = 60 * 60 * 24 * numdays
     fields = ('num_metapackages', 'num_metapackages_unique', 'num_metapackages_newest', 'num_metapackages_outdated')
 
