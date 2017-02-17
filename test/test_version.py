@@ -179,6 +179,18 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(VersionCompare("1.0rc1", "1.0"), -1)
         self.assertEqual(VersionCompare("1.0", "1.0rc1"), 1)
 
+    def test_empty(self):
+        self.assertEqual(VersionCompare("", "0"), 0)
+        self.assertEqual(VersionCompare("", "1"), -1)
+
+    def test_garbage(self):
+        self.assertEqual(VersionCompare("......-----~~~~~!!!", "0.0.0.0"), 0)
+        self.assertEqual(VersionCompare(".-~1~-.-~2~-.", "1.2"), 0)
+
+    def test_case_insensitivity(self):
+        self.assertEqual(VersionCompare("1.0A", "1.0a"), 0)
+        self.assertEqual(VersionCompare("1.0ALPHA", "1.0alpha"), 0)
+
 
 if __name__ == '__main__':
     unittest.main()
