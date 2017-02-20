@@ -439,7 +439,7 @@
       # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
       # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
       url: 'https://www.parabola.nu/packages/?q={name}'
-  tags: [ all ]
+  tags: [ all, production ]
 
 - name: parabola-testing
   desc: Parabola Testing
@@ -464,7 +464,7 @@
       # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
       # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
       url: 'https://www.parabola.nu/packages/?q={name}'
-  tags: [ all ]
+  tags: [ all, production ]
 
 - name: aur
   desc: AUR
@@ -865,7 +865,7 @@
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.2/contrib/
-  tags: ['all', 'production', 'crux']
+  tags: [ all, production, crux]
 
 - name: crux_33
   desc: CRUX 3.3
@@ -888,7 +888,7 @@
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.3/contrib/
-  tags: ['all', 'production', 'crux']
+  tags: [ all, production, crux ]
 
 ###########################################################################
 # News sites
