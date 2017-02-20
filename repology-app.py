@@ -61,7 +61,6 @@ app.jinja_env.tests['for_page'] = for_page
 app.jinja_env.globals['url_for_self'] = url_for_self
 
 # templates: custom global data
-app.jinja_env.globals['PER_PAGE'] = app.config['PER_PAGE']
 app.jinja_env.globals['REPOLOGY_HOME'] = app.config['REPOLOGY_HOME']
 app.jinja_env.globals['repometadata'] = repometadata
 app.jinja_env.globals['reponames'] = reponames
@@ -106,7 +105,7 @@ def api_v1_metapackages_generic(bound, *filters):
         get_db().GetMetapackages(
             bound_to_filter(bound),
             *filters,
-            limit=app.config['PER_PAGE']
+            limit=app.config['METAPACKAGES_PER_PAGE']
         )
     )
 
@@ -147,7 +146,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
     searchfilter = NameSubstringQueryFilter(search) if search else None
 
     # get packages
-    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['PER_PAGE'])
+    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['METAPACKAGES_PER_PAGE'])
 
     # on empty result, fallback to show first, last set of results
     if not packages:
@@ -155,7 +154,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
             namefilter = NameStartingQueryFilter()
         else:
             namefilter = NameBeforeQueryFilter()
-        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['PER_PAGE'])
+        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['METAPACKAGES_PER_PAGE'])
 
     firstname, lastname = get_packages_name_range(packages)
 
@@ -644,7 +643,7 @@ def api_v1_metapackage(name):
 @app.route('/api')
 @app.route('/api/v1')
 def api_v1():
-    return flask.render_template('api.html')
+    return flask.render_template('api.html', per_page=app.config['METAPACKAGES_PER_PAGE'])
 
 
 @app.route('/api/v1/metapackages/')

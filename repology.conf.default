@@ -61,9 +61,10 @@ REPOSITORIES = ['production']
 PROFILE = False
 
 #
-# Items (metapackages, maintainers) per page
+# Items per page
 #
-PER_PAGE = 500
+METAPACKAGES_PER_PAGE = 200
+MAINTAINERS_PER_PAGE = 500
 
 #
 # Address of repology.org to use in HTML links
