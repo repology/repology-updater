@@ -10,16 +10,32 @@
 <div class="container">
 
 <nav>
-	<ul class="pagination">
-		<li{% if page is for_page('0') %} class="active"{% endif %}><a href="{{ url_for_self(page=None) }}">0-9</a></li>
-		{% for letter in "abcdefghijklmnopqrstuvwxyz" %}
-		<li{% if page is for_page(letter) %} class="active"{% endif %}>
-			<a href="{{ url_for_self(page=letter) }}">
-				{{ letter|upper }}
-			</a>
-		</li>
-		{% endfor %}
-	</ul>
+	<div class="form-group">
+		<form class="form-inline" action="{{ url_for_self(bound=None) }}" method="GET">
+			<div class="btn-group">
+			{% if search %}
+			{% if maintainers %}
+				<a href="{{ url_for_self(bound=(maintainers|first).maintainer+"..") }}" class="btn btn-default">Clear</a>
+			{% else %}
+				<a href="{{ url_for_self(bound=None) }}" class="btn btn-default">Clear</a>
+			{% endif %}
+			{% else %}
+				<a href="{{ url_for_self(bound=None) }}" class="btn btn-default {% if firstpage %} disabled{% endif %}">&laquo;&laquo;</a>
+				{% if maintainers %}
+				<a href="{{ url_for_self(bound=".."+(maintainers|first).maintainer, search=search) }}" class="btn btn-default{% if firstpage %} disabled{% endif %}">&laquo;</a>
+				<a href="{{ url_for_self(bound=(maintainers|last).maintainer+"..", search=search) }}" class="btn btn-default{% if lastpage %} disabled{% endif %}">&raquo;</a>
+				{% endif %}
+				<a href="{{ url_for_self(bound=".."+maxmaintainer) }}" class="btn btn-default {% if lastpage %} disabled{% endif %}">&raquo;&raquo;</a>
+			{% endif %}
+			</div>
+			<div class="input-group">
+				<input class="form-control" type="text" name="search" value="{{ search|default('', true) }}" placeholder="Search maintainers">
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-default">Go</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </nav>
 
 {% if maintainers %}

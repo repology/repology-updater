@@ -757,61 +757,59 @@ class Database:
 
         return self.cursor.fetchall()[0][0]
 
-    def GetMaintainers(self, offset=0, limit=500):
-        self.cursor.execute(
-            """
-            SELECT
-                maintainer,
-                num_packages,
-                num_metapackages
-            FROM maintainers
-            ORDER BY maintainer
-            LIMIT %s
-            OFFSET %s
-            """,
-            (limit, offset,)
-        )
+    def GetMaintainersRange(self):
+        # should use min/max here, but these are slower on pgsql 9.6
+        self.cursor.execute('SELECT maintainer FROM maintainers ORDER BY maintainer LIMIT 1')
+        min_ = self.cursor.fetchall()[0][0]
+        self.cursor.execute('SELECT maintainer FROM maintainers ORDER BY maintainer DESC LIMIT 1')
+        max_ = self.cursor.fetchall()[0][0]
+        return (min_, max_)
 
-        return [
-            {
-                'maintainer': row[0],
-                'num_packages': row[1],
-                'num_metapackages': row[2]
-            } for row in self.cursor.fetchall()
-        ]
+    def GetMaintainers(self, bound=None, reverse=False, search=None, limit=500):
+        where = []
+        order = 'maintainer'
 
-    def GetMaintainersByLetter(self, letter=None):
-        request = """
+        query = """
             SELECT
                 maintainer,
                 num_packages,
                 num_packages_outdated
             FROM maintainers
         """
-
         args = []
-        if letter:
-            letter = letter.lower()[0]
-        if not letter or letter < 'a':
-            request += ' WHERE maintainer < \'a\''
-        elif letter >= 'z':
-            request += ' WHERE maintainer >= \'z\''
-        else:
-            request += ' WHERE maintainer >= %s'
-            request += ' AND maintainer < %s'
-            args += [letter, chr(ord(letter) + 1)]
 
-        request += ' ORDER BY maintainer'
+        if bound:
+            if reverse:
+                where.append('maintainer <= %s')
+                order = 'maintainer DESC'
+                args.append(bound)
+            else:
+                where.append('maintainer >= %s')
+                args.append(bound)
 
-        self.cursor.execute(request, args)
+        if search:
+            where.append('maintainer LIKE %s')
+            args.append('%' + search + '%')
 
-        return [
+        if where:
+            query += ' WHERE ' + ' AND '.join(where)
+
+        if order:
+            query += ' ORDER BY ' + order
+
+        if limit:
+            query += ' LIMIT %s'
+            args.append(limit)
+
+        self.cursor.execute(query, args)
+
+        return sorted([
             {
                 'maintainer': row[0],
                 'num_packages': row[1],
                 'num_packages_outdated': row[2]
             } for row in self.cursor.fetchall()
-        ]
+        ], key=lambda m: m['maintainer'])
 
     def GetMaintainerInformation(self, maintainer):
         self.cursor.execute(

@@ -354,14 +354,36 @@ def metapackages_outdated_by_maintainer(maintainer, bound=None):
 
 
 @app.route('/maintainers/')
-@app.route('/maintainers/<page>/')
-def maintainers(page=None):
-    maintainers = get_db().GetMaintainersByLetter(page)  # handles page sanity inside
+@app.route('/maintainers/<bound>/')
+def maintainers(bound=None):
+    reverse = False
+    if bound and bound.startswith('..'):
+        bound = bound[2:]
+        reverse = True
+    elif bound and bound.endswith('..'):
+        bound = bound[:-2]
+
+    search = flask.request.args.to_dict().get('search')
+
+    minmaintainer, maxmaintainer = get_db().GetMaintainersRange()
+
+    maintainers = get_db().GetMaintainers(bound, reverse, search, app.config['MAINTAINERS_PER_PAGE'])
+
+    firstpage, lastpage = False, False
+    for maintainer in maintainers:
+        if maintainer['maintainer'] == minmaintainer:
+            firstpage = True
+        if maintainer['maintainer'] == maxmaintainer:
+            lastpage = True
 
     return flask.render_template(
         'maintainers.html',
-        maintainers=maintainers,
-        page=page
+        search=search,
+        minmaintainer=minmaintainer,
+        maxmaintainer=maxmaintainer,
+        firstpage=firstpage,
+        lastpage=lastpage,
+        maintainers=maintainers
     )
 
 
