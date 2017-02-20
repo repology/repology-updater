@@ -22,48 +22,52 @@
 	</ul>
 </nav>
 
+{% if maintainers %}
 <div class="row">
 {% for column in maintainers|slice(2) %}
 {% if column %}
-<div class="col-md-6">
-	<table class="table table-striped table-condensed">
-		<thead>
-			<tr>
-				<th class="text-right">Maintainer</th>
-				<th class="text-center">Total packages</th>
-				<th class="text-center">Outdated packages</th>
-				<th class="text-center">Up to date</th>
-			</tr>
-		</thead>
-		<tbody>
-		{% for maintainer in column %}
-			<tr>
-				<td class="text-right">
-					<a href="{{ url_for('maintainer', maintainer=maintainer.maintainer) }}">
-						{{ maintainer.maintainer }}
-					</a>
-				</td>
-				<td class="text-center">
-					<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
-						{{ maintainer.num_packages }}
-					</a>
-				</td>
-				<td class="text-center">
-					<a href="{{ url_for('metapackages_outdated_by_maintainer', maintainer=maintainer.maintainer) }}">
-						{{ maintainer.num_packages_outdated }}
-					</a>
-				</td>
-				<td class="text-center">
-					{{ macros.safe_percent(maintainer.num_packages - maintainer.num_packages_outdated, maintainer.num_packages, 0) }}
-				</td>
-			</tr>
-		{% endfor %}
-		</tbody>
-	</table>
-</div>
+	<div class="col-md-6">
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th class="text-right">Maintainer</th>
+					<th class="text-center">Total packages</th>
+					<th class="text-center">Outdated packages</th>
+					<th class="text-center">Up to date</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for maintainer in column %}
+				<tr>
+					<td class="text-right break-word">
+						<a href="{{ url_for('maintainer', maintainer=maintainer.maintainer) }}">
+							{{ maintainer.maintainer }}
+						</a>
+					</td>
+					<td class="text-center">
+						<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
+							{{ maintainer.num_packages }}
+						</a>
+					</td>
+					<td class="text-center">
+						<a href="{{ url_for('metapackages_outdated_by_maintainer', maintainer=maintainer.maintainer) }}">
+							{{ maintainer.num_packages_outdated }}
+						</a>
+					</td>
+					<td class="text-center">
+						{{ macros.safe_percent(maintainer.num_packages - maintainer.num_packages_outdated, maintainer.num_packages, 0) }}
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{% endif %}
+	{% endfor %}
+	</div>
+{% else %}
+<div class="alert alert-warning" role="alert">No metapackages found matching the criteria</div>
 {% endif %}
-{% endfor %}
-</div>
 
 </div>
 {% endblock %}

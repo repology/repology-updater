@@ -204,3 +204,8 @@
 	float: right;
 	margin-top: 40px;
 }
+
+.break-word {
+    word-break: break-all;
+    word-wrap: break-word;
+}
