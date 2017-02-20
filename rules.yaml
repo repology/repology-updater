@@ -146,9 +146,16 @@
 - { name: dgen,                        setname: dgen-sdl                  }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
 - { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools], setname: djvulibre }
+- { name: [dosbox-sdl2,dosbox-debug,dosbox-multilib-patched], setname: dosbox }
+- { name: [doublecmd-gtk2,doublecmd-qt], setname: doublecmd }
+- { name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], setname: doxygen }
 - { name: drpython-py27,               setname: drpython                  }
+- { name: dr14_tmeter,                 setname: dr14tmeter                }
 - { name: devedeng,                    setname: devede                    }
-- { name: [dogecoind,dogecoin-qt,dogecoin-daemon], setname: dogecoin }
+- { name: [dogecoind,dogecoin-qt,dogecoin-daemon], setname: dogecoin      }
+- { name: dsniff-nox11,                setname: dsniff                    }
+- { name: [dspam-mysql,dspam-pgsql,dspam-web], setname: dspam             }
+- { name: dungeoncrawl,                setname: dungeon-crawl             }
 - { name: dynamips-community,          setname: dynamips,                 family: [ freebsd ] }
 - { name: dwarffortress,               setname: dwarf-fortress            }
 - { name: linux-dwarffortress,         setname: dwarf-fortress            }
@@ -249,6 +256,7 @@
 - { namepat: "stonesoup(?:-sdl)?",     setname: stone-soup                }
 - { name: stransball2,                 setname: supertransball2,          family: [ freebsd ] }
 - { name: structure-synth,             setname: structuresynth            }
+- { name: stone-soup-ncurses,          setname: stone-soup                }
 - { name: supertux,                    setname: supertux1,                family: [ freebsd ] } # ???
 - { name: supertux2,                   setname: supertux,                 family: [ freebsd ] }
 - { name: sweet-home-3d,               setname: sweethome3d               }
@@ -326,6 +334,16 @@
     - dina-font-pcf
     - dina-fonts
   setname: "fonts:dina"
+
+- name:
+    - droid-fonts-ttf
+    - droid-ttf
+    - font-droid
+    - fonts-droid
+    - fonts-ttf-droid
+    - fonts-ttf-google-droid
+    - fonts-ttf-google-droid
+  setname: "fonts:droid"
 
 - name:
     - fonts-linuxlibertine
@@ -722,6 +740,10 @@
 - { name: db, verpat: "1\\..*",        setname: db1 }
 
 - { name: dmd2,                        setname: dmd }
+
+- { namepat: "dovecot[0-9]+",          setname: dovecot }
+
+- { namepat: "drbd[0-9]+",             setname: drbd }
 
 - { name: eigen, verpat: "1\\..*",     setname: eigen1 }
 - { name: eigen, verpat: "2\\..*",     setname: eigen2 }
