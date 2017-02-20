@@ -21,6 +21,7 @@ import argparse
 import os
 import sys
 import traceback
+from timeit import default_timer as timer
 
 import repology.config
 from repology.database import Database
@@ -161,6 +162,7 @@ def Main():
     repositories_updated = []
     repositories_not_updated = []
 
+    start = timer()
     if options.fetch or options.parse or options.reprocess:
         repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoman=repoman, transformer=transformer)
 
@@ -169,6 +171,8 @@ def Main():
 
     if (options.parse or options.reprocess) and (options.show_unmatched_rules):
         ShowUnmatchedRules(options=options, logger=logger, transformer=transformer)
+
+    logger.Log('total time taken: {:.2f} seconds'.format((timer() - start)))
 
     return 1 if repositories_not_updated else 0
 
