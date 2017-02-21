@@ -201,6 +201,8 @@
 - { name: iccexamin,                   setname: icc-examin                }
 - { name: icecast2,                    setname: icecast                   }
 - { name: ir.lv2,                      setname: ir-lv2                    }
+- { name: [intellij-idea-ce,idea-community], setname: intellij-idea-community }
+- { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
 - { name: ja2,                         setname: ja2-stracciatella,        family: [ freebsd ] }
 - { name: jbig-kit,                    setname: jbigkit                   }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
@@ -288,6 +290,7 @@
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
+- { namepat: "zabbix[0-9]+-(?:agent|frontend|proxy|server|common|proxy-sqlite|server-mysql|agentd)(?:[0-9.-]+)", setname: "zabbix" }
 
 # fonts; extra section as there's too much name variery
 - name:
@@ -1132,15 +1135,19 @@
 - { name: hy,                          setname: "python:$0"               }
 - { name: cherrypy,                    setname: "python:$0"               }
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
-- { name: numeric,                     setname: "python:numeric", family: [crux,gobolinux] }
+- { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }
+- { name: paramiko,                    setname: "python:$0"               }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
 - { namepat: "django-.*",              setname: "python:$0"               }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
+- { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
 
 # These are more applications than modules, so rename
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:rss2email",          setname: rss2email                 }
+- { name: ["python:pypy", "python:pypy-bin"], setname: pypy               }
+- { name: ["python:pypy3", "python:pypy3-bin"], setname: pypy3            }
 
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu ] }
