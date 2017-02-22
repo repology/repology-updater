@@ -290,7 +290,7 @@
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
-- { namepat: "zabbix[0-9]+-(?:agent|frontend|proxy|server|common|proxy-sqlite|server-mysql|agentd)(?:[0-9.-]+)", setname: "zabbix" }
+- { namepat: "zabbix[0-9]*-(?:agent|frontend|proxy|server|common|proxy-sqlite|server-mysql|agentd)[0-9.-]*", setname: "zabbix" }
 
 # fonts; extra section as there's too much name variery
 - name:
