@@ -201,7 +201,7 @@
 - { name: iccexamin,                   setname: icc-examin                }
 - { name: icecast2,                    setname: icecast                   }
 - { name: ir.lv2,                      setname: ir-lv2                    }
-- { name: [intellij-idea-ce,idea-community], setname: intellij-idea-community }
+- { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
 - { name: ja2,                         setname: ja2-stracciatella,        family: [ freebsd ] }
 - { name: jbig-kit,                    setname: jbigkit                   }
