@@ -30,6 +30,8 @@ def maintainer_to_link(maintainer):
         return 'mailto:' + maintainer
     elif maintainer.endswith('@cpan'):
         return 'http://search.cpan.org/~' + maintainer[:-5]
+    elif maintainer.endswith('@aur'):
+        return 'https://aur.archlinux.org/account/' + maintainer[:-4]
     else:
         return None
 
