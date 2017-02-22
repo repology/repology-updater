@@ -25,15 +25,23 @@ from repology.package import *
 from repology.packageformatter import PackageFormatter
 
 
-def maintainer_to_link(maintainer):
-    if re.match('.*@.*\..*', maintainer):
-        return 'mailto:' + maintainer
-    elif maintainer.endswith('@cpan'):
-        return 'http://search.cpan.org/~' + maintainer[:-5]
-    elif maintainer.endswith('@aur'):
-        return 'https://aur.archlinux.org/account/' + maintainer[:-4]
-    else:
-        return None
+def maintainer_to_links(maintainer):
+    links = []
+
+    if '@' in maintainer:
+        name, domain = maintainer.split('@', 1)
+
+        if domain == 'cpan':
+            links.append('http://search.cpan.org/~' + name)
+        elif domain == 'aur':
+            links.append('https://aur.archlinux.org/account/' + name)
+        elif domain in ('altlinux.org', 'altlinux.ru'):
+            links.append('http://sisyphus.ru/en/packager/' + name + '/')
+
+        if '.' in domain:
+            links.append('mailto:' + maintainer)
+
+    return links
 
 
 def for_page(value, letter=None):

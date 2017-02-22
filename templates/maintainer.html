@@ -9,13 +9,17 @@
 {% block content %}
 <div class="container">
 
-{% if maintainer|maintainer_to_link %}
+{% if maintainer|maintainer_to_links %}
 <h2>Contact</h2>
-{% if (maintainer|maintainer_to_link).startswith('mailto:') %}
-<p><b>E-Mail:</b> <a href="{{ maintainer|maintainer_to_link }}">{{ maintainer }}</a></p>
+<ul>
+{% for link in maintainer|maintainer_to_links %}
+{% if link.startswith('mailto:') %}
+	<li><b>E-Mail:</b> <a href="{{ link }}">{{ maintainer }}</a></li>
 {% else %}
-<p><b>WWW:</b> <a href="{{ maintainer|maintainer_to_link }}">{{ maintainer|maintainer_to_link }}</a></p>
+	<li><b>WWW:</b> <a href="{{ link }}">{{ link }}</a></li>
 {% endif %}
+{% endfor %}
+</ul>
 {% endif %}
 
 <h2>Packages</h2>
