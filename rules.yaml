@@ -144,6 +144,7 @@
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
 - { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
 - { name: dgen,                        setname: dgen-sdl                  }
+- { name: divideandsucceed,            setname: divide-and-succeed        }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
 - { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools], setname: djvulibre }
 - { name: [dosbox-sdl2,dosbox-debug,dosbox-multilib-patched], setname: dosbox }
@@ -208,15 +209,21 @@
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
 - { name: krita3,                      setname: krita                     }
-- { name: libarpack-ng,                setname: arpack-ng                 }
+- { name: libass4,                     setname: libass                    }
+- { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
 - { name: libagg,                      setname: agg                       }
+- { name: libarpack-ng,                setname: arpack-ng                 }
+- { name: libaudiofile,                setname: audiofile                 }
+- { name: libenet,                     setname: enet                      }
+- { name: libfreeglut,                 setname: freeglut                  }
+- { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
 - { name: libsfml,                     setname: sfml                      }
+- { name: libtremor,                   setname: tremor                    }
 - { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
-- { name: libass4,                     setname: libass                    }
 - { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
