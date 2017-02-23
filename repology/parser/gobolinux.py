@@ -85,7 +85,7 @@ class GoboLinuxGitParser():
                         elif current_tag is None:
                             print('WARNING: Description for {}/{} skipped, dumb format'.format(package_name, maxversion), file=sys.stderr)
                             break
-                        else:
+                        elif line:
                             if data[current_tag]:
                                 data[current_tag] += ' '
                             data[current_tag] += line
