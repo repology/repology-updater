@@ -25,6 +25,7 @@ import yaml
 
 from repology.fetcher import *
 from repology.logger import NoopLogger
+from repology.package import PackageSanityCheckFailure
 from repology.packageproc import PackagesMerge
 from repology.parser import *
 
@@ -152,6 +153,7 @@ class RepositoryManager:
 
     def __Transform(self, packages, transformer, repository, logger):
         logger.Log('processing started')
+        sanitylogger = logger.GetIndented()
         for package in packages:
             package.repo = repository['name']
             package.family = repository['family']
@@ -159,6 +161,11 @@ class RepositoryManager:
                 package.shadow = True
             if transformer:
                 transformer.Process(package)
+
+            try:
+                package.CheckSanity()
+            except PackageSanityCheckFailure as err:
+                sanitylogger.Log('sanity: {}'.format(err))
 
         if transformer:
             packages = sorted(packages, key=lambda package: package.effname)
