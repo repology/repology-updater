@@ -25,17 +25,17 @@ from repology.packageformatter import PackageFormatter
 
 class TestVersionComparison(unittest.TestCase):
     def test_simple(self):
-        pkg = Package(name='foo', version='1.0', origversion='1.0_1', category='devel')
+        pkg = Package(name='foo', version='1.0', origversion='1.0_1', category='devel', subrepo='main')
         fmt = PackageFormatter()
 
-        self.assertEqual(fmt.format("Just A String", pkg), "Just A String")
-        self.assertEqual(fmt.format("{name} {version} {origversion} {category}", pkg), "foo 1.0 1.0_1 devel")
+        self.assertEqual(fmt.format('Just A String', pkg), 'Just A String')
+        self.assertEqual(fmt.format('{name} {version} {origversion} {category} {subrepo}', pkg), 'foo 1.0 1.0_1 devel main')
 
     def test_empty_origversion(self):
         pkg = Package(name='foo', version='1.0')
         fmt = PackageFormatter()
 
-        self.assertEqual(fmt.format("{origversion}", pkg), "1.0")
+        self.assertEqual(fmt.format('{origversion}', pkg), '1.0')
 
 
 if __name__ == '__main__':

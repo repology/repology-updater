@@ -21,22 +21,24 @@ import unittest
 
 from repology.template_helpers import maintainer_to_links
 
+
 class TestMaintainerLinks(unittest.TestCase):
     def test_email(self):
-        self.assertEqual(maintainer_to_links("amdmi3@freebsd.org"), ['mailto:amdmi3@freebsd.org'])
+        self.assertEqual(maintainer_to_links('amdmi3@freebsd.org'), ['mailto:amdmi3@freebsd.org'])
 
     def test_garbage(self):
-        self.assertEqual(maintainer_to_links("foo"), [])
+        self.assertEqual(maintainer_to_links('foo'), [])
 
     def test_cpan(self):
-        self.assertEqual(maintainer_to_links("foo@cpan"), ['http://search.cpan.org/~foo'])
+        self.assertEqual(maintainer_to_links('foo@cpan'), ['http://search.cpan.org/~foo'])
 
     def test_aur(self):
-        self.assertEqual(maintainer_to_links("foo@aur"), ['https://aur.archlinux.org/account/foo'])
+        self.assertEqual(maintainer_to_links('foo@aur'), ['https://aur.archlinux.org/account/foo'])
 
     def test_alt(self):
-        self.assertEqual(maintainer_to_links("foo@altlinux.org"), ['http://sisyphus.ru/en/packager/foo/', 'mailto:foo@altlinux.org'])
-        self.assertEqual(maintainer_to_links("foo@altlinux.ru"), ['http://sisyphus.ru/en/packager/foo/', 'mailto:foo@altlinux.ru'])
+        self.assertEqual(maintainer_to_links('foo@altlinux.org'), ['http://sisyphus.ru/en/packager/foo/', 'mailto:foo@altlinux.org'])
+        self.assertEqual(maintainer_to_links('foo@altlinux.ru'), ['http://sisyphus.ru/en/packager/foo/', 'mailto:foo@altlinux.ru'])
+
 
 if __name__ == '__main__':
     unittest.main()

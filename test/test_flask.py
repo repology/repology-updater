@@ -17,11 +17,12 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import json
-import unittest
+import os
 import sys
+import unittest
 import xml.etree.ElementTree
+
 
 html_validation = True
 
@@ -29,19 +30,19 @@ try:
     from tidylib import tidy_document
     _, errors = tidy_document('<!DOCTYPE html><html><head><title>test</title></head><body><nav>test</nav></body></html>')
     if errors.find('<nav> is not recognized') != -1:
-        raise RuntimeError("Tidylib does not support HTML5")
+        raise RuntimeError('Tidylib does not support HTML5')
 except ImportError:
-    print("Unable to import tidylib, HTML validation is disabled", file=sys.stderr)
+    print('Unable to import tidylib, HTML validation is disabled', file=sys.stderr)
     html_validation = False
 except RuntimeError:
-    print("Tidylib HTML5 support check failed, HTML validation is disabled", file=sys.stderr)
+    print('Tidylib HTML5 support check failed, HTML validation is disabled', file=sys.stderr)
     html_validation = False
 
 
-repology_app = __import__("repology-app")
+repology_app = __import__('repology-app')
 
 
-@unittest.skipIf(not 'REPOLOGY_CONFIG' in os.environ, 'flask tests require database filled with test data; please prepare the database and configuration file (see repology-test.conf.default for reference) and pass it via REPOLOGY_CONFIG environment variable')
+@unittest.skipIf('REPOLOGY_CONFIG' not in os.environ, 'flask tests require database filled with test data; please prepare the database and configuration file (see repology-test.conf.default for reference) and pass it via REPOLOGY_CONFIG environment variable')
 class TestFlask(unittest.TestCase):
     def setUp(self):
         self.app = repology_app.app.test_client()
@@ -64,9 +65,9 @@ class TestFlask(unittest.TestCase):
         if not html_validation:
             return document
 
-        errors = [ error for error in tidy_document(document)[1].split('\n') if error and error.find('trimming empty <span>') == -1 ]
+        errors = [error for error in tidy_document(document)[1].split('\n') if error and error.find('trimming empty <span>') == -1]
         for error in errors:
-            print("HTML error in " + url + ": " + error, file=sys.stderr)
+            print('HTML error in ' + url + ': ' + error, file=sys.stderr)
         self.assertTrue(not errors)
 
         return document
@@ -81,12 +82,12 @@ class TestFlask(unittest.TestCase):
         return self.checkurl(url=url, status_code=404, mimetype=None)
 
     def test_static_pages(self):
-        self.checkurl_html('/news', has=['support added']);
-        self.checkurl_html('/about', has=['maintainers']);
-        self.checkurl_html('/api', has=['/api/v1/metapackages/all/firefox']);
+        self.checkurl_html('/news', has=['support added'])
+        self.checkurl_html('/about', has=['maintainers'])
+        self.checkurl_html('/api', has=['/api/v1/metapackages/all/firefox'])
 
     def test_statistics(self):
-        self.checkurl('/statistics', has=['FreeBSD']);
+        self.checkurl('/statistics', has=['FreeBSD'])
 
     def test_badges(self):
         self.checkurl_svg('/badge/vertical-allrepos/kiconvtool.svg', has=['<svg', 'FreeBSD'])
@@ -150,7 +151,8 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/metapackages/all/>zzzzzz/', has=['kiconvtool'])
 
     def test_api_v1_metapackage(self):
-        self.assertEqual(self.checkurl_json('/api/v1/metapackage/kiconvtool', mimetype='application/json'),
+        self.assertEqual(
+            self.checkurl_json('/api/v1/metapackage/kiconvtool', mimetype='application/json'),
             [
                 {
                     'repo': 'freebsd',

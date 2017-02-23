@@ -29,20 +29,21 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(pkg.name, None)
 
         pkg = Package()
-        pkg.Merge(Package(name="foo"))
-        self.assertEqual(pkg.name, "foo")
+        pkg.Merge(Package(name='foo'))
+        self.assertEqual(pkg.name, 'foo')
 
-        pkg = Package(name="foo")
+        pkg = Package(name='foo')
         pkg.Merge(Package())
-        self.assertEqual(pkg.name, "foo")
+        self.assertEqual(pkg.name, 'foo')
 
-        pkg = Package(name="foo")
-        pkg.Merge(Package(name="foo"))
-        self.assertEqual(pkg.name, "foo")
+        pkg = Package(name='foo')
+        pkg.Merge(Package(name='foo'))
+        self.assertEqual(pkg.name, 'foo')
 
-        pkg = Package(name="foo")
+        pkg = Package(name='foo')
         with self.assertRaises(PackageMergeConflict):
-            pkg.Merge(Package(name="bar"))
+            pkg.Merge(Package(name='bar'))
+
 
 if __name__ == '__main__':
     unittest.main()

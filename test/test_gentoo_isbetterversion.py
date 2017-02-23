@@ -21,19 +21,20 @@ import unittest
 
 from repology.parser.gentoo import IsBetterVersion
 
+
 class TestGentooIsBetterVersion(unittest.TestCase):
     def test_againstnone(self):
-        self.assertEqual(IsBetterVersion("0", None), True)
-        self.assertEqual(IsBetterVersion("1", None), True)
-        self.assertEqual(IsBetterVersion("9999", None), True)
+        self.assertEqual(IsBetterVersion('0', None), True)
+        self.assertEqual(IsBetterVersion('1', None), True)
+        self.assertEqual(IsBetterVersion('9999', None), True)
 
     def test_againstver(self):
-        self.assertEqual(IsBetterVersion("0", "1"), False)
-        self.assertEqual(IsBetterVersion("1", "0"), True)
+        self.assertEqual(IsBetterVersion('0', '1'), False)
+        self.assertEqual(IsBetterVersion('1', '0'), True)
 
     def test_agains9999(self):
-        self.assertEqual(IsBetterVersion("1", "9999"), True)
-        self.assertEqual(IsBetterVersion("9999", "1"), False)
+        self.assertEqual(IsBetterVersion('1', '9999'), True)
+        self.assertEqual(IsBetterVersion('9999', '1'), False)
 
 
 if __name__ == '__main__':

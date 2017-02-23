@@ -21,45 +21,47 @@ import unittest
 
 from repology.util import GetMaintainers
 
+
 class TestSplitMaintainers(unittest.TestCase):
     def test_simple(self):
-        self.assertEqual(GetMaintainers("amdmi3@FreeBSD.org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3@FAKE"), ['amdmi3@fake'])
+        self.assertEqual(GetMaintainers('amdmi3@FreeBSD.org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3@FAKE'), ['amdmi3@fake'])
 
     def test_name(self):
-        self.assertEqual(GetMaintainers("Dmitry Marakasov <amdmi3@FreeBSD.org>"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("\"Dmitry Marakasov\" <amdmi3@FreeBSD.org>"), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('Dmitry Marakasov <amdmi3@FreeBSD.org>'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('"Dmitry Marakasov" <amdmi3@FreeBSD.org>'), ['amdmi3@freebsd.org'])
 
     def test_name_comma(self):
-        self.assertEqual(GetMaintainers("Marakasov, Dmitry <amdmi3@FreeBSD.org>"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("\"Marakasov, Dmitry\" <amdmi3@FreeBSD.org>"), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('Marakasov, Dmitry <amdmi3@FreeBSD.org>'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('"Marakasov, Dmitry" <amdmi3@FreeBSD.org>'), ['amdmi3@freebsd.org'])
 
     def test_list(self):
-        self.assertEqual(GetMaintainers("amdmi3@FreeBSD.org,gnome@FreeBSD.org"), ['amdmi3@freebsd.org', 'gnome@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3@FreeBSD.org,gnome@FreeBSD.org'), ['amdmi3@freebsd.org', 'gnome@freebsd.org'])
 
     def test_list_name(self):
-        self.assertEqual(GetMaintainers("Dmitry Marakasov <amdmi3@FreeBSD.org>, Gnome Guys <gnome@FreeBSD.org>"), ['amdmi3@freebsd.org', 'gnome@freebsd.org'])
+        self.assertEqual(GetMaintainers('Dmitry Marakasov <amdmi3@FreeBSD.org>, Gnome Guys <gnome@FreeBSD.org>'), ['amdmi3@freebsd.org', 'gnome@freebsd.org'])
 
     def test_garbage(self):
-        self.assertEqual(GetMaintainers(",amdmi3@FreeBSD.org, ,,   "), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers(',amdmi3@FreeBSD.org, ,,   '), ['amdmi3@freebsd.org'])
 
     def test_obfuscation(self):
-        self.assertEqual(GetMaintainers("amdmi3[at]FreeBSD[dot]org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3 [ at ] FreeBSD [ dot ] org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3 at FreeBSD dot org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3_at_FreeBSD.org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3{at}FreeBSD{dot}org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3 <at> freebsd {dot} org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3~at~freebsd~dot~org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3 (at) freebsd (dot) org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3 __at__ freebsd __dot__ org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3-at-freebsd-dot-org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3<at>freebsd.org"), ['amdmi3@freebsd.org'])
-        self.assertEqual(GetMaintainers("amdmi3 <at> freebsd.org"), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3[at]FreeBSD[dot]org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 [ at ] FreeBSD [ dot ] org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 at FreeBSD dot org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3_at_FreeBSD.org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3{at}FreeBSD{dot}org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 <at> freebsd {dot} org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3~at~freebsd~dot~org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 (at) freebsd (dot) org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 __at__ freebsd __dot__ org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3-at-freebsd-dot-org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3<at>freebsd.org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 <at> freebsd.org'), ['amdmi3@freebsd.org'])
 
     def test_empty(self):
-        self.assertEqual(GetMaintainers("somecrap"), [])
-        self.assertEqual(GetMaintainers(""), [])
+        self.assertEqual(GetMaintainers('somecrap'), [])
+        self.assertEqual(GetMaintainers(''), [])
+
 
 if __name__ == '__main__':
     unittest.main()
