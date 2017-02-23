@@ -62,7 +62,7 @@ class ApkIndexParser():
                 pkg.version, pkg.origversion = SanitizeVersion(state['V'])
 
                 pkg.comment = state['T']
-                pkg.homepage = state['U'] # XXX: switch to homepages, split
+                pkg.homepage = state['U']  # XXX: switch to homepages, split
                 pkg.licenses = [state['L']]
 
                 if 'm' in state:
