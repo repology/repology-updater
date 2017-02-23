@@ -43,6 +43,9 @@ sequence:
               "branch":
                 type: str
                 required: no
+              "subrepo":
+                type: str
+                required: no
       "shadow":
         type: bool
         required: no

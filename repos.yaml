@@ -92,16 +92,19 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz
       compression: gz
+      subrepo: contrib
     - name: main
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: non-free
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz
       compression: gz
+      subrepo: non-free
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/{name}'
@@ -117,16 +120,19 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/stable-backports/contrib/source/Sources.gz
       compression: gz
+      subrepo: contrib
     - name: main
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/stable-backports/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: non-free
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/stable-backports/non-free/source/Sources.gz
       compression: gz
+      subrepo: non-free
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/{name}'
@@ -142,16 +148,19 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz
       compression: gz
+      subrepo: contrib
     - name: main
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: non-free
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz
       compression: gz
+      subrepo: non-free
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/{name}'
@@ -167,16 +176,19 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz
       compression: gz
+      subrepo: contrib
     - name: main
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: non-free
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz
       compression: gz
+      subrepo: non-free
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}'
@@ -192,16 +204,19 @@
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/experimental/contrib/source/Sources.xz
       compression: xz
+      subrepo: contrib
     - name: main
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/experimental/main/source/Sources.xz
       compression: xz
+      subrepo: main
     - name: non-free
       fetcher: File
       parser: DebianSources
       url: http://ftp.debian.org/debian/dists/experimental/non-free/source/Sources.xz
       compression: xz
+      subrepo: non-free
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/{name}'
@@ -220,21 +235,25 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/precise/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: multiverse
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/precise/multiverse/source/Sources.gz
       compression: gz
+      subrepo: multiverse
     - name: restricted
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/precise/restricted/source/Sources.gz
       compression: gz
+      subrepo: restricted
     - name: universe
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/precise/universe/source/Sources.gz
       compression: gz
+      subrepo: universe
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/precise/{name}'
@@ -250,21 +269,25 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/trusty/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: multiverse
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/trusty/multiverse/source/Sources.gz
       compression: gz
+      subrepo: multiverse
     - name: restricted
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/trusty/restricted/source/Sources.gz
       compression: gz
+      subrepo: restricted
     - name: universe
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/trusty/universe/source/Sources.gz
       compression: gz
+      subrepo: universe
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/trusty/{name}'
@@ -280,21 +303,25 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: multiverse
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz
       compression: gz
+      subrepo: multiverse
     - name: restricted
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz
       compression: gz
+      subrepo: restricted
     - name: universe
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz
       compression: gz
+      subrepo: universe
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/xenial/{name}'
@@ -310,21 +337,25 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: multiverse
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz
       compression: gz
+      subrepo: multiverse
     - name: restricted
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz
       compression: gz
+      subrepo: restricted
     - name: universe
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz
       compression: gz
+      subrepo: universe
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/yakkety/{name}'
@@ -340,21 +371,25 @@
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/zesty/main/source/Sources.gz
       compression: gz
+      subrepo: main
     - name: multiverse
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/zesty/multiverse/source/Sources.gz
       compression: gz
+      subrepo: multiverse
     - name: restricted
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/zesty/restricted/source/Sources.gz
       compression: gz
+      subrepo: restricted
     - name: universe
       fetcher: File
       parser: DebianSources
       url: http://ftp.ubuntu.com/ubuntu/dists/zesty/universe/source/Sources.gz
       compression: gz
+      subrepo: universe
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/zesty/{name}'
@@ -392,14 +427,17 @@
       fetcher: WgetTar
       parser: ArchDB
       url: http://delta.archlinux.fr/core/os/x86_64/core.db.tar.gz
+      subrepo: core
     - name: extra
       fetcher: WgetTar
       parser: ArchDB
       url: http://delta.archlinux.fr/extra/os/x86_64/extra.db.tar.gz
+      subrepo: extra
     - name: community
       fetcher: WgetTar
       parser: ArchDB
       url: http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz
+      subrepo: community
   links:
     - desc: Package search on archlinux.org
       # XXX: no support for repository
@@ -417,22 +455,27 @@
       fetcher: WgetTar
       parser: ArchDB
       url: https://repomirror.parabola.nu/core/os/x86_64/core.db.tar.gz
+      subrepo: core
     - name: extra
       fetcher: WgetTar
       parser: ArchDB
       url: https://repomirror.parabola.nu/extra/os/x86_64/extra.db.tar.gz
+      subrepo: extra
     - name: community
       fetcher: WgetTar
       parser: ArchDB
       url: https://repomirror.parabola.nu/community/os/x86_64/community.db.tar.gz
+      subrepo: community
     - name: libre
       fetcher: WgetTar
       parser: ArchDB
       url: https://repomirror.parabola.nu/libre/os/x86_64/libre.db.tar.gz
+      subrepo: libre
     - name: pcr
       fetcher: WgetTar
       parser: ArchDB
       url: https://repomirror.parabola.nu/pcr/os/x86_64/pcr.db.tar.gz
+      subrepo: pcr
   links:
     - desc: Package search on parabola.nu
       # XXX: no support for repository
@@ -450,14 +493,17 @@
       fetcher: WgetTar
       parser: ArchDB
       url: https://repomirror.parabola.nu/testing/os/x86_64/testing.db.tar.gz
+      subrepo: testing
     - name: libre-testing
       fetcher: WgetTar
       parser: ArchDB
       url: https://repomirror.parabola.nu/libre-testing/os/x86_64/libre-testing.db.tar.gz
+      subrepo: libre-testing
     - name: pcr-testing
       fetcher: WgetTar
       parser: ArchDB
       url: https://repomirror.parabola.nu/pcr-testing/os/x86_64/pcr-testing.db.tar.gz
+      subrepo: pcr-testing
   links:
     - desc: Package search on parabola.nu
       # XXX: no support for repository
@@ -541,10 +587,12 @@
       fetcher: Repodata
       parser: Repodata
       url: http://vault.centos.org/centos/5/os/Source/
+      subrepo: os
     - name: updates
       fetcher: Repodata
       parser: Repodata
       url: http://vault.centos.org/centos/5/updates/Source/
+      subrepo: updates
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/5/package/{name}/'
@@ -559,10 +607,12 @@
       fetcher: Repodata
       parser: Repodata
       url: http://vault.centos.org/centos/6/os/Source/
+      subrepo: os
     - name: updates
       fetcher: Repodata
       parser: Repodata
       url: http://vault.centos.org/centos/6/updates/Source/
+      subrepo: updates
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/6/package/{name}/'
@@ -577,10 +627,12 @@
       fetcher: Repodata
       parser: Repodata
       url: http://vault.centos.org/centos/7/os/Source/
+      subrepo: os
     - name: updates
       fetcher: Repodata
       parser: Repodata
       url: http://vault.centos.org/centos/7/updates/Source/
+      subrepo: updates
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/7/package/{name}/'
@@ -831,14 +883,17 @@
       fetcher: WgetTar
       parser: ApkIndex
       url: http://dl-3.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+      subrepo: community
     - name: main
       fetcher: WgetTar
       parser: ApkIndex
       url: http://dl-3.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+      subrepo: main
     - name: testing
       fetcher: WgetTar
       parser: ApkIndex
       url: http://dl-3.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
+      subrepo: testing
   tags: [ all, production ]
 
 ###########################################################################
@@ -853,18 +908,22 @@
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.2/core/
+      subrepo: core
     - name: opt
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.2/opt/
+      subrepo: opt
     - name: xorg
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.2/xorg/
+      subrepo: xorg
     - name: contrib
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.2/contrib/
+      subrepo: contrib
   tags: [ all, production, crux]
 
 - name: crux_33
@@ -876,18 +935,22 @@
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.3/core/
+      subrepo: core
     - name: opt
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.3/opt/
+      subrepo: opt
     - name: xorg
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.3/xorg/
+      subrepo: xorg
     - name: contrib
       fetcher: Rsync
       parser: CRUX
       url: crux.nu::ports/crux-3.3/contrib/
+      subrepo: contrib
   tags: [ all, production, crux ]
 
 ###########################################################################
