@@ -251,6 +251,7 @@ class Database:
             CREATE TABLE packages (
                 repo varchar(255) not null,
                 family varchar(255) not null,
+                subrepo varchar(255),
 
                 name varchar(255) not null,
                 effname varchar(255) not null,
@@ -433,6 +434,7 @@ class Database:
             INSERT INTO packages(
                 repo,
                 family,
+                subrepo,
 
                 name,
                 effname,
@@ -453,6 +455,7 @@ class Database:
                 shadow,
                 ignoreversion
             ) VALUES (
+                %s,
                 %s,
                 %s,
 
@@ -480,6 +483,7 @@ class Database:
                 (
                     package.repo,
                     package.family,
+                    package.subrepo,
 
                     package.name,
                     package.effname,
@@ -623,6 +627,7 @@ class Database:
             SELECT
                 repo,
                 family,
+                subrepo,
 
                 name,
                 effname,
@@ -652,25 +657,26 @@ class Database:
             Package(
                 repo=row[0],
                 family=row[1],
+                subrepo=row[2],
 
-                name=row[2],
-                effname=row[3],
+                name=row[3],
+                effname=row[4],
 
-                version=row[4],
-                origversion=row[5],
-                effversion=row[6],
-                versionclass=row[7],
+                version=row[5],
+                origversion=row[6],
+                effversion=row[7],
+                versionclass=row[8],
 
-                maintainers=row[8],
-                category=row[9],
-                comment=row[10],
-                homepage=row[11],
-                licenses=row[12],
-                downloads=row[13],
+                maintainers=row[9],
+                category=row[10],
+                comment=row[11],
+                homepage=row[12],
+                licenses=row[13],
+                downloads=row[14],
 
-                ignore=row[14],
-                shadow=row[15],
-                ignoreversion=row[16],
+                ignore=row[15],
+                shadow=row[16],
+                ignoreversion=row[17],
             ) for row in self.cursor.fetchall()
         ]
 
@@ -690,6 +696,7 @@ class Database:
             SELECT
                 repo,
                 family,
+                subrepo,
 
                 name,
                 effname,
@@ -720,25 +727,26 @@ class Database:
             Package(
                 repo=row[0],
                 family=row[1],
+                subrepo=row[2],
 
-                name=row[2],
-                effname=row[3],
+                name=row[3],
+                effname=row[4],
 
-                version=row[4],
-                origversion=row[5],
-                effversion=row[6],
-                versionclass=row[7],
+                version=row[5],
+                origversion=row[6],
+                effversion=row[7],
+                versionclass=row[8],
 
-                maintainers=row[8],
-                category=row[9],
-                comment=row[10],
-                homepage=row[11],
-                licenses=row[12],
-                downloads=row[13],
+                maintainers=row[9],
+                category=row[10],
+                comment=row[11],
+                homepage=row[12],
+                licenses=row[13],
+                downloads=row[14],
 
-                ignore=row[14],
-                shadow=row[15],
-                ignoreversion=row[16],
+                ignore=row[15],
+                shadow=row[16],
+                ignoreversion=row[17],
             ) for row in self.cursor.fetchall()
         ]
 

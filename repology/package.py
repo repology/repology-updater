@@ -34,6 +34,7 @@ class Package:
     __slots__ = [
         'repo',
         'family',
+        'subrepo',
 
         'name',
         'effname',
@@ -55,13 +56,14 @@ class Package:
         'ignoreversion',
     ]
 
-    def __init__(self, repo=None, family=None,
+    def __init__(self, repo=None, family=None, subrepo=None,
                  name=None, effname=None,
                  version=None, origversion=None, effversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
                  ignore=False, shadow=False, ignoreversion=False):
         self.repo = repo
         self.family = family
+        self.subrepo = subrepo
 
         self.name = name
         self.effname = effname
