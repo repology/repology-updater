@@ -186,13 +186,12 @@
 - { name: free42-nologo,               setname: free42,                   family: [ debuntu ]  }
 - { name: freebsd-uucp,                setname: uucp,                     family: [ freebsd ] }
 - { name: freefont-ttf,                setname: freefont,                 family: [ freebsd ] }
-- { name: freetype,                    setname: freetype1,                family: [ freebsd, pkgsrc ] }
-- { name: freetype2,                   setname: freetype,                 family: [ freebsd, pkgsrc ] }
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle,                 family: [ debuntu ]  }
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
+- { name: geotiff,                     setname: libgeotiff                }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
 - { name: gl117,                       setname: gl-117,                   family: [ gentoo ]  }
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
@@ -210,17 +209,18 @@
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
 - { name: krita3,                      setname: krita                     }
 - { name: libass4,                     setname: libass                    }
-- { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
 - { name: libagg,                      setname: agg                       }
 - { name: libarpack-ng,                setname: arpack-ng                 }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libenet,                     setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
+- { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
 - { name: libsfml,                     setname: sfml                      }
+- { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
 - { name: libtremor,                   setname: tremor                    }
 - { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
