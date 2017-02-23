@@ -102,6 +102,7 @@ class RepositoryManager:
     def __ParseSource(self, repository, source, logger):
         logger.Log('parsing source {} started'.format(source['name']))
 
+        # parse
         packages = self.__SpawnClass(
             'Parser',
             source['parser'],
@@ -109,6 +110,11 @@ class RepositoryManager:
         ).Parse(
             self.__GetSourcePath(repository, source)
         )
+
+        # fill subrepos
+        if 'subrepo' in source:
+            for package in packages:
+                package.subrepo = source['subrepo']
 
         logger.Log('parsing source {} complete'.format(source['name']))
 
