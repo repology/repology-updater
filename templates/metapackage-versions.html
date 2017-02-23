@@ -26,7 +26,12 @@
 {% set numpackages = packages|length %}
 {% for package in packages %}
 	<tr>
-		<td class="text-right">{{ macros.repository_link(reponame) }}</td>
+		<td class="text-right">
+			{{- macros.repository_link(reponame) -}}
+			{%- if package.subrepo -%}
+				<br><sup>{{ package.subrepo }}</sup>
+			{%- endif -%}
+		</td>
 		<td class="text-center">{{ macros.package_link(package, package.name) }}</td>
 		<td class="text-center">
 			<span class="version version-big version-{{ package.versionclass|css_for_package_versionclass }}">
