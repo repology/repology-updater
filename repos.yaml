@@ -827,15 +827,15 @@
   url: https://pkgs.alpinelinux.org/packages
   family: alpine
   sources:
-    - name: edge_community
+    - name: community
       fetcher: WgetTar
       parser: ApkIndex
       url: http://dl-3.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
-    - name: edge_main
+    - name: main
       fetcher: WgetTar
       parser: ApkIndex
       url: http://dl-3.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
-    - name: edge_testing
+    - name: testing
       fetcher: WgetTar
       parser: ApkIndex
       url: http://dl-3.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
