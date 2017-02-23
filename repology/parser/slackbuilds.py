@@ -48,23 +48,39 @@ class SlackBuildsParser():
                     continue
 
                 with open(info_path, encoding='utf-8', errors='ignore') as infofile:
-                    pkg = Package()
+                    variables = {}
 
-                    pkg.category = category
+                    key = None
+                    total_value = []
 
                     for line in infofile:
                         line = line.strip()
+                        if not line:
+                            continue
 
-                        if line.startswith('PRGNAM='):
-                            pkg.name = line[7:].strip('"')
-                        elif line.startswith('VERSION='):
-                            pkg.version = line[8:].strip('"')
-                        elif line.startswith('HOMEPAGE='):
-                            pkg.homepage = line[9:].strip('"')
-                        elif line.startswith('EMAIL='):
-                            pkg.maintainers += GetMaintainers(line[6:].strip('"'))
-                        elif line.startswith('DOWNLOAD='):
-                            pkg.downloads.append(line[9:].strip('"'))
+                        value = None
+                        if key:  # continued
+                            value = line
+                        else:  # new variable
+                            key, value = line.split('=', 1)
+                            value = value.lstrip('"').lstrip()
+
+                        if value.endswith('\\'):  # will continue
+                            total_value.append(value.rstrip('\\').rstrip())
+                        elif value.endswith('"'):
+                            total_value.append(value.rstrip('"').rstrip())
+                            variables[key] = ' '.join(total_value)
+                            key = None
+                            total_value = []
+
+                    pkg = Package()
+                    pkg.category = category
+
+                    pkg.name = variables['PRGNAM']
+                    pkg.version = variables['VERSION']
+                    pkg.homepage = variables['HOMEPAGE']
+                    pkg.maintainers = GetMaintainers(variables['EMAIL'])
+                    pkg.downloads = variables['DOWNLOAD'].split()
 
                     if pkg.name is not None and pkg.version is not None:
                         result.append(pkg)

@@ -1,0 +1,16 @@
+PRGNAM="virtualbox"
+VERSION="5.0.30"
+HOMEPAGE="http://www.virtualbox.org"
+DOWNLOAD="http://download.virtualbox.org/virtualbox/5.0.30/VirtualBox-5.0.30.tar.bz2 \
+          http://download.virtualbox.org/virtualbox/5.0.30/VBoxGuestAdditions_5.0.30.iso \
+          http://download.virtualbox.org/virtualbox/5.0.30/UserManual.pdf \
+          http://download.virtualbox.org/virtualbox/5.0.30/SDKRef.pdf"
+MD5SUM="9ba8ff724dadfb7327dc4c6401afb7a8 \
+        b484878eaafcf6b62b3a290a28495e56 \
+        7bb5e3dcfa06bb8ff7d5d7cfc1f80e69 \
+        1503b03024f790b2344c4728c27a8e2a"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="acpica virtualbox-kernel"
+MAINTAINER="Heinz Wiesinger"
+EMAIL="pprkut@liwjatan.at"

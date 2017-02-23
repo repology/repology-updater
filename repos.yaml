@@ -870,7 +870,7 @@
   links:
     - desc: Git
       url: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
-  tags: [ all, production ]
+  tags: [ all, production, have_testdata ]
 
 ###########################################################################
 # Alpine Linux aports

@@ -213,6 +213,26 @@ class TestParsers(unittest.TestCase):
             }
         )
 
+    def test_slackbuilds(self):
+        self.check_package(
+            'virtualbox',
+            {
+                'repo': 'slackbuilds',
+                'family': 'slackbuilds',
+                'name': 'virtualbox',
+                'version': '5.0.30',
+                'category': 'system',
+                'homepage': 'http://www.virtualbox.org',
+                'downloads': [
+                    'http://download.virtualbox.org/virtualbox/5.0.30/SDKRef.pdf',
+                    'http://download.virtualbox.org/virtualbox/5.0.30/UserManual.pdf',
+                    'http://download.virtualbox.org/virtualbox/5.0.30/VBoxGuestAdditions_5.0.30.iso',
+                    'http://download.virtualbox.org/virtualbox/5.0.30/VirtualBox-5.0.30.tar.bz2',
+                ],
+                'maintainers': ['pprkut@liwjatan.at'],
+            }
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

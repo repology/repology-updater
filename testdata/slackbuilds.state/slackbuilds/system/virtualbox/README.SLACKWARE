@@ -1,0 +1,23 @@
+You'll need to add the following lines to /etc/rc.d/rc.local:
+
+	# Start vboxdrv
+	if [ -x /etc/rc.d/rc.vboxdrv ]; then
+	  /etc/rc.d/rc.vboxdrv start
+	fi
+
+This will load the support kernel module for VirtualBox.
+
+
+You'll then need to add the following lines to /etc/rc.d/rc.local_shutdown:
+
+	# Stop vboxdrv
+	if [ -x /etc/rc.d/rc.vboxdrv ]; then
+	  /etc/rc.d/rc.vboxdrv stop
+	fi
+
+
+Any user accounts that plan to use virtualbox will need to be members
+of the "vboxusers" group.
+
+In order to use USB devices in VirtualBox Guests you may have to restart
+your host system after installing the virtualbox package.
