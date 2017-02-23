@@ -30,6 +30,10 @@ class RepositoryVersionClass:
     lonely = 5
 
 
+class PackageMergeConflict(Exception):
+    pass
+
+
 class Package:
     __slots__ = [
         'repo',
@@ -83,6 +87,28 @@ class Package:
         self.ignore = ignore
         self.shadow = shadow
         self.ignoreversion = ignoreversion
+
+    def IsMergeable(self, other):
+        for slot in self.__slots__:
+            self_val = getattr(self, slot)
+            other_val = getattr(other, slot)
+
+            if self_val is not None and self_val != [] and other_val is not None and other_val != [] and self_val != other_val:
+                return False
+
+        return True
+
+    def Merge(self, other):
+        for slot in self.__slots__:
+            self_val = getattr(self, slot)
+            other_val = getattr(other, slot)
+
+            if self_val is None or self_val == []:
+                setattr(self, slot, other_val)
+            elif other_val is None or other_val == []:
+                setattr(self, slot, self_val)
+            elif self_val != other_val:
+                raise PackageMergeConflict('{}: {} != {}'.format(self.name, self_val, other_val))
 
     @property
     def __dict__(self):

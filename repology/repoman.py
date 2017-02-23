@@ -25,6 +25,7 @@ import yaml
 
 from repology.fetcher import *
 from repology.logger import NoopLogger
+from repology.packageproc import PackagesMerge
 from repology.parser import *
 
 
@@ -141,7 +142,11 @@ class RepositoryManager:
         for source in repository['sources']:
             packages += self.__ParseSource(repository, source, logger.GetIndented())
 
-        logger.Log('parsing complete, {} packages'.format(len(packages)))
+        logger.Log('parsing complete, {} packages, merging'.format(len(packages)))
+
+        packages = PackagesMerge(packages)
+
+        logger.Log('merging complete, {} packages'.format(len(packages)))
 
         return packages
 
