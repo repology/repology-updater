@@ -35,6 +35,7 @@ class TestParsers(unittest.TestCase):
         reference_with_default = {
             # repo must be filled
             # family must be filled
+            'subrepo': None,
 
             # name must be filled
             'effname': None,
@@ -145,6 +146,7 @@ class TestParsers(unittest.TestCase):
             {
                 "repo": "arch",
                 "family": "arch",
+                "subrepo": "core",
                 "name": "zlib",
                 "version": "1.2.8",
                 "origversion": "1:1.2.8-7",
@@ -172,6 +174,7 @@ class TestParsers(unittest.TestCase):
         self.check_package("a52dec",
             {
                 "repo": "debian_unstable",
+                "subrepo": "main",
                 "category": "devel",
                 "family": "debuntu",
                 "name": "a52dec",
