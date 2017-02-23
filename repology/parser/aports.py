@@ -47,7 +47,7 @@ class ApkIndexParser():
             for line in apkindex:
                 line = line.strip()
                 if line:
-                    state[line[0]] = line[2:]
+                    state[line[0]] = line[2:].strip()
                     continue
 
                 if not state:
@@ -62,7 +62,7 @@ class ApkIndexParser():
                 pkg.version, pkg.origversion = SanitizeVersion(state['V'])
 
                 pkg.comment = state['T']
-                pkg.homepage = state['U']
+                pkg.homepage = state['U'] # XXX: switch to homepages, split
                 pkg.licenses = [state['L']]
 
                 if 'm' in state:

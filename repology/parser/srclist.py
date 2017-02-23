@@ -32,7 +32,7 @@ class SrcListParser():
 
         with subprocess.Popen(['helpers/rpmcat/rpmcat', path], errors='ignore', stdout=subprocess.PIPE, universal_newlines=True) as proc:
             for line in proc.stdout:
-                fields = line.split('|')
+                fields = line.strip().split('|')
 
                 pkg = Package()
 
