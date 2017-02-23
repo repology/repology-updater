@@ -439,11 +439,12 @@
       url: http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz
       subrepo: community
   links:
-    - desc: Package search on archlinux.org
-      # XXX: no support for repository
-      # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
-      # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
-      url: 'https://www.archlinux.org/packages/?q={name}'
+    - desc: Git repository
+      url: 'https://git.archlinux.org/svntogit/{subrepo}.git/tree/trunk?h=packages/{name}'
+    - desc: PKGBUILD
+      url: 'https://git.archlinux.org/svntogit/{subrepo}.git/tree/trunk/PKGBUILD?h=packages/{name}'
+    - desc: Package information
+      url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{name}/'
   tags: [ all, production, have_testdata ]
 
 - name: parabola

@@ -23,6 +23,8 @@ class PackageFormatter(string.Formatter):
         pkg = args[0]
         if key == 'name':
             return pkg.name
+        elif key == 'subrepo':
+            return pkg.subrepo
         elif key == 'version':
             return pkg.version
         elif key == 'origversion':
