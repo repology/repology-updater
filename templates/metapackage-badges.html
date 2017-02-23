@@ -10,7 +10,9 @@
 
 <p>HTML code:</p>
 <pre>
-&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args)}}&quot; alt=&quot;{{ alt }}&quot;&gt;&lt;/a&gt;
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;
+    &lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args)}}&quot; alt=&quot;{{ alt }}&quot;&gt;
+&lt;/a&gt;
 </pre>
 
 <p>Markdown code:</p>
