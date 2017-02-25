@@ -176,7 +176,7 @@
 - { name: extremetuxracer,             setname: extreme-tuxracer          }
 - { name: falconseye,                  setname: falcons-eye,              family: [ freebsd, openbsd ] }
 - { name: farstream-0.2,               setname: farstream,                family: [ debuntu ]  }
-- { name: fifengine,                   setname: fife                      }
+- { name: [fifengine,py27-fife],       setname: fife                      }
 - { name: fish-fillets,                setname: fillets-ng                }
 - { name: fish-fillets-ng,             setname: fillets-ng                }
 - { name: foobillardplus,              setname: foobillard++              }
