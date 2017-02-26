@@ -197,6 +197,7 @@
 - { name: gl117,                       setname: gl-117,                   family: [ gentoo ]  }
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: [googletest,libgtest],       setname: gtest                     }
+- { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
 - { name: iccexamin,                   setname: icc-examin                }
