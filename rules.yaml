@@ -1137,7 +1137,9 @@
 - { namepat: "(ruby:web-console)[0-9._-]+", setname: "$1" }
 
 - { namepat: "ruby[0-9.]+-bundler", setname: "ruby:bundler" }
-- { name: bundler, setname: "ruby:bundler" }
+- { name: bundler,                  setname: "ruby:bundler" }
+- { name: jekyll,                   setname: "ruby:$0" }
+- { namepat: "jekyll-.*",           setname: "ruby:$0" }
 
 # Tryton (wtf is that); needs to be before python
 - { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$1", family: [ pkgsrc ] }
@@ -1174,7 +1176,6 @@
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
 - { namepat: "django-.*",              setname: "python:$0"               }
-- { namepat: "jekyll-.*",              setname: "python:$0"               }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
 
