@@ -701,8 +701,10 @@
       url: http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/base/srclist.classic.xz
       compression: xz
   links:
-    - desc: Package details in Sisyphus repository
+    - desc: Sisyphus package details
       url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}'
+    - desc: Spec file
+      url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}/spec'
   tags: [ all, production ]
 
 ###########################################################################
