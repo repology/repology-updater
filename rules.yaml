@@ -206,6 +206,7 @@
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
 - { name: iccexamin,                   setname: icc-examin                }
 - { name: icecast2,                    setname: icecast                   }
+- { name: iperf3,                      setname: iperf                     }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
@@ -255,7 +256,9 @@
 - { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator], setname: qtcreator }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
 - { name: r2e,                         setname: rss2email                 }
+- { name: rdkafka,                     setname: librdkafka                }
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
+- { name: [s3fs,s3fs-fuse],            setname: "fusefs:s3fs"             }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
 - { namepat: "sdl-?sopwith",           setname: sopwith                   }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debuntu ]  }
@@ -1174,6 +1177,10 @@
 - { namepat: "jekyll-.*",              setname: "python:$0"               }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
+
+# as per pypi package name
+- { name: "python:axolotl",            setname: "python:python-axolotl"   }
+- { name: "python:axolotl-curve25519", setname: "python:python-axolotl-curve25519" }
 
 # These are more applications than modules, so rename
 - { name: "python:bzrtools",           setname: bzrtools                  }
