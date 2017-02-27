@@ -500,11 +500,6 @@
       parser: ArchDB
       url: https://repomirror.parabola.nu/libre-testing/os/x86_64/libre-testing.db.tar.gz
       subrepo: libre-testing
-    - name: pcr-testing
-      fetcher: WgetTar
-      parser: ArchDB
-      url: https://repomirror.parabola.nu/pcr-testing/os/x86_64/pcr-testing.db.tar.gz
-      subrepo: pcr-testing
   links:
     - desc: Package search on parabola.nu
       # XXX: no support for repository
