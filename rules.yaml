@@ -115,6 +115,7 @@
 - { name: clutter-gtk0.10,             setname: clutter-gtk               }
 - { name: [cockatrice-client,cockatrice-server], setname: cockatrice      }
 - { name: collectd5,                   setname: collectd                  }
+- { name: [coreos-etcd, coreos-etcd3], setname: etcd                      }
 - { name: corsixth,                    setname: corsix-th,                family: [ freebsd ] }
 - { name: commoncpp,                   setname: commoncpp2                }
 - { name: concurrency-kit,             setname: concurrencykit            }
@@ -175,6 +176,7 @@
 - { name: exactimage,                  setname: exact-image,              family: [ debuntu ]  }
 - { name: extremetuxracer,             setname: extreme-tuxracer          }
 - { name: falconseye,                  setname: falcons-eye,              family: [ freebsd, openbsd ] }
+- { name: fb-folly,                    setname: folly                     }
 - { name: farstream-0.2,               setname: farstream,                family: [ debuntu ]  }
 - { name: [fifengine,py27-fife],       setname: fife                      }
 - { name: fish-fillets,                setname: fillets-ng                }
@@ -194,9 +196,11 @@
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geotiff,                     setname: libgeotiff                }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
+- { name: git-flow,                    setname: gitflow                   }
 - { name: gl117,                       setname: gl-117,                   family: [ gentoo ]  }
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: [googletest,libgtest],       setname: gtest                     }
+- { namepat: "grafana[0-9]+",          setname: grafana                   }
 - { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
@@ -214,6 +218,7 @@
 - { name: libagg,                      setname: agg                       }
 - { name: libarpack-ng,                setname: arpack-ng                 }
 - { name: libaudiofile,                setname: audiofile                 }
+- { name: libbrotli,                   setname: brotli                    }
 - { name: libenet,                     setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
@@ -222,8 +227,10 @@
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
 - { name: libsfml,                     setname: sfml                      }
+- { name: libuv1,                      setname: libuv                     }
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
 - { name: libtremor,                   setname: tremor                    }
+- { name: libzstd,                     setname: zstd                      }
 - { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
@@ -402,6 +409,18 @@
   setname: "fonts:proggy"
 
 - name:
+    - adobe-source-code-pro
+    - adobe-source-code-pro-font
+    - adobe-source-code-pro-fonts
+    - adobe-sourcecodepro-fonts
+    - font-adobe-source-code-pro
+    - fonts-otf-adobe-source-code-pro
+    - source-code-pro
+    - sourcecodepro-fonts
+    - sourcecodepro-ttf
+  setname: "fonts:adobe-source-code-pro"
+
+- name:
     - fonts-ttf-grimmer-proggy-tinysz
     - grimmer-proggy-tinysz-fonts
   setname: "fonts:grimmer-proggy-tinysz"
@@ -472,6 +491,7 @@
 - { name: diaspora, verpat: "1\\.[0-9]+\\.[0-9]+", setname: diaspora-game }
 - { name: diaspora, setname: diaspora-social }
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
+- { name: etcd, verpat: "1.*", setname: "etcd-player" } # Enhanced Tiny CD, a simple ncurses-based CD player vs. coreos etcd
 # fuse-emulator vs. fusefs modules - see below
 
 # TODO
@@ -1151,6 +1171,7 @@
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
 - { namepat: "django-.*",              setname: "python:$0"               }
+- { namepat: "jekyll-.*",              setname: "python:$0"               }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
 
@@ -1161,8 +1182,8 @@
 - { name: ["python:pypy3", "python:pypy3-bin"], setname: pypy3            }
 
 # R libs
-- { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu ] }
-- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix ] }
+- { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu, aur ] }
+- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, aur, debuntu ] }
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "r:$1", family: [ debuntu ] }
