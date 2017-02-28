@@ -1017,7 +1017,7 @@
 - { name: "perl:bio-asn1-entrezgene",  verpat: "1\\.[0-9]{3}", ignorever: true }
 - { name: "perl:catmandu-store-mongodb", ver: "0.0501",        ignorever: true }
 - { name: "perl:cbor-xs",              ver: [ "1.60", "1.50", "1.30" ], ignorever: true }
-- { name: "perl:cgi-formbuilder",      ver: [ "3.1000", "3.0900", "3.90.0" ], ignorever: true }
+- { name: "perl:cgi-formbuilder",      ver: [ "3.1000", "3.0900", "3.90.0", "3.90.0", "3.0501" ], ignorever: true }
 - { name: "perl:chi",                  ver: "0.580",           ignorever: true }
 - { name: "perl:compress-lzf",         verpat: "3.[789]0",     ignorever: true }
 - { name: "perl:math-polygon-tree",    ver: "0.0691",          ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
