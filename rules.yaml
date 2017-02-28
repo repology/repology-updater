@@ -297,7 +297,6 @@
 - { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
 - { namepat: "android-tools-[^-]+",    setname: android-tools,            family: [ freebsd, pkgsrc ] }
 - { namepat: "celestia-.*",            setname: celestia,                 family: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
-- { namepat: "eclipse-plugin-(.*)",    setname: "eclipse-$1",             family: [ openbsd ] }
 - { namepat: "eiskaltdcpp-.*",         setname: eiskaltdcpp,              family: [ freebsd ] }
 - { namepat: "enscript-.*",            setname: enscript,                 family: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
@@ -959,7 +958,6 @@
 - { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", family: [ openbsd ] }
 - { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", family: [ openbsd, arch ] }
 - { namepat: "eric-i18n-.*",           setname: "eric-i18n", family: [ arch ] }
-- { namepat: "eric-qt4-i18n-.*",       setname: "eric-qt4-i18n", family: [ arch ] }
 - { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n", family: [ openbsd ] }
 - { namepat: "firefox-i18n-.*",        setname: "firefox-i18n", family: [ openbsd, arch ] }
 - { namepat: "fpc-.*",                 setname: "fpc-modules", family: [ freebsd ] }
