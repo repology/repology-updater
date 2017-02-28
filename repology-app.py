@@ -77,6 +77,7 @@ def api_v1_package_to_json(package):
     output = {
         field: getattr(package, field) for field in (
             'repo',
+            'subrepo',
             'name',
             'version',
             'origversion',
