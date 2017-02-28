@@ -183,6 +183,7 @@
 - { name: fish-fillets-ng,             setname: fillets-ng                }
 - { name: foobillardplus,              setname: foobillard++              }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
+- { name: fossology-nomos-standalone,  setname: fossology                 } # part of fossology
 - { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
 - { name: fox1.6,                      setname: fox16,                    family: [ debuntu ]  }
 - { name: fox17,                       setname: fox,                      family: [ freebsd ] }
