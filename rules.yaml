@@ -1191,8 +1191,8 @@
 - { name: ["python:pypy3", "python:pypy3-bin"], setname: pypy3            }
 
 # R libs
-- { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu, aur ] }
-- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, aur, debuntu ] }
+- { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu, arch ] }
+- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, arch, debuntu ] }
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "r:$1", family: [ debuntu ] }
