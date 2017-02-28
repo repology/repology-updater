@@ -206,7 +206,6 @@
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
 - { name: iccexamin,                   setname: icc-examin                }
 - { name: icecast2,                    setname: icecast                   }
-- { name: iperf3,                      setname: iperf                     }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
@@ -829,6 +828,9 @@
 
 - { namepat: "itk[0-9]+",              setname: itk }
 - { name: itk, verpat: "3\\..*",       setname: itk3 }
+
+- { name: iperf3,                      setname: iperf }
+- { name: iperf, verpat: "3\\..*",     setname: iperf3 }
 
 - { name: jabberd2,                    setname: jabberd }
 
