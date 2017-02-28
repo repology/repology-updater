@@ -415,6 +415,28 @@
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{origversion}.ebuild'
   tags: [ all, production, have_testdata ]
 
+- name: gentoo_ovl_games
+  desc: Gentoo Overlay Games
+  url: https://github.com/hasufell/games-overlay
+  family: gentoo
+  sources:
+    - name: overlay
+      fetcher: Git
+      parser: GentooGit
+      url: https://github.com/hasufell/games-overlay.git
+  tags: [ all ]
+
+- name: gentoo_ovl_gamerlay
+  desc: Gentoo Overlay Gamerlay
+  url: https://cgit.gentoo.org/proj/gamerlay.git/
+  family: gentoo
+  sources:
+    - name: overlay
+      fetcher: Git
+      parser: GentooGit
+      url: https://anongit.gentoo.org/git/proj/gamerlay.git
+  tags: [ all ]
+
 ###########################################################################
 # Arch & AUR
 ###########################################################################
