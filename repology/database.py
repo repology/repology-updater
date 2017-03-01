@@ -246,6 +246,7 @@ class Database:
         self.cursor.execute('DROP TABLE IF EXISTS repositories_history CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS totals_history CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS links CASCADE')
+        self.cursor.execute('DROP TABLE IF EXISTS problems CASCADE')
 
         self.cursor.execute("""
             CREATE TABLE packages (
@@ -414,6 +415,21 @@ class Database:
             )
         """)
 
+        # problems
+        self.cursor.execute("""
+            CREATE TABLE problems (
+                repo varchar(255) not null,
+                name varchar(255) not null,
+                effname varchar(255) not null,
+                maintainer varchar(255) not null,
+                problem varchar(1024) not null,
+            )
+        """)
+
+        self.cursor.execute('CREATE INDEX ON problems(effname)')
+        self.cursor.execute('CREATE INDEX ON problems(repo, effname)')
+        self.cursor.execute('CREATE INDEX ON problems(maintainer)')
+
     def Clear(self):
         self.cursor.execute("""DELETE FROM packages""")
         self.cursor.execute("""
@@ -428,6 +444,7 @@ class Database:
                 num_metapackages_newest = 0,
                 num_metapackages_outdated = 0
         """)
+        self.cursor.execute("""DELETE FROM problems""")
 
     def AddPackages(self, packages):
         self.cursor.executemany(
@@ -617,6 +634,42 @@ class Database:
                     num_metapackages_unique = EXCLUDED.num_metapackages_unique,
                     num_metapackages_newest = EXCLUDED.num_metapackages_newest,
                     num_metapackages_outdated = EXCLUDED.num_metapackages_outdated
+        """)
+
+        # problems
+        self.cursor.execute("""
+            INSERT
+                INTO problems (
+                    repo,
+                    name,
+                    effname,
+                    maintainer,
+                    problem
+                )
+                SELECT DISTINCT
+                    packages.repo,
+                    packages.name,
+                    packages.effname,
+                    unnest(packages.maintainers),
+                    'WWW link ' ||
+                        links.url ||
+                        ' is dead (' ||
+                        CASE
+                            WHEN links.status=-1 THEN 'connect timeout'
+                            WHEN links.status=-2 THEN 'too many redirects'
+                            WHEN links.status=-4 THEN 'cannot connect'
+                            WHEN links.status=-5 THEN 'invalid url'
+                            ELSE 'HTTP ' || links.status
+                        END ||
+                        ') for more than a month'
+                FROM packages
+                    INNER JOIN links ON (packages.homepage = links.url)
+                WHERE
+                    (links.status IN (-1, -2, -4, -5, 400, 404) OR links.status >= 500) AND
+                    (
+                        (links.last_success IS NULL AND links.first_extracted < now() - INTERVAL '30' DAY) OR
+                        links.last_success < now() - INTERVAL '30' DAY
+                    )
         """)
 
     def Commit(self):
