@@ -402,6 +402,7 @@ class Database:
         self.cursor.execute("""
             CREATE TABLE links (
                 url varchar(2048) not null primary key,
+                first_extracted timestamp with time zone not null,
                 last_extracted timestamp with time zone not null,
                 last_checked timestamp with time zone,
                 last_success timestamp with time zone,
@@ -1034,14 +1035,17 @@ class Database:
             INSERT
             INTO links(
                 url,
+                first_extracted,
                 last_extracted
             ) SELECT
                 unnest(downloads),
+                now(),
                 now()
             FROM packages
             UNION
             SELECT
                 homepage,
+                now(),
                 now()
             FROM packages
             WHERE homepage IS NOT NULL AND homepage LIKE 'http%%' AND repo NOT IN('cpan', 'pypi', 'rubygems', 'hackage')
