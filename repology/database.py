@@ -422,7 +422,7 @@ class Database:
                 name varchar(255) not null,
                 effname varchar(255) not null,
                 maintainer varchar(255) not null,
-                problem varchar(1024) not null,
+                problem varchar(1024) not null
             )
         """)
 
