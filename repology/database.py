@@ -651,7 +651,7 @@ class Database:
                     packages.name,
                     packages.effname,
                     unnest(packages.maintainers),
-                    'WWW link ' ||
+                    'Homepage link ' ||
                         links.url ||
                         ' is dead (' ||
                         CASE
@@ -659,7 +659,7 @@ class Database:
                             WHEN links.status=-2 THEN 'too many redirects'
                             WHEN links.status=-4 THEN 'cannot connect'
                             WHEN links.status=-5 THEN 'invalid url'
-                            ELSE 'HTTP ' || links.status
+                            ELSE 'HTTP error ' || links.status
                         END ||
                         ') for more than a month'
                 FROM packages
