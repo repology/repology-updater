@@ -672,6 +672,34 @@ class Database:
                     )
         """)
 
+        self.cursor.execute("""
+            INSERT
+                INTO problems(repo, name, effname, maintainer, problem)
+                SELECT DISTINCT
+                    repo,
+                    name,
+                    effname,
+                    unnest(maintainers),
+                    'GitHub homepage lists http:// schema, while it should be https://'
+                FROM packages
+                WHERE homepage LIKE 'http://github.com/%'
+        """)
+
+        self.cursor.execute("""
+            INSERT
+                INTO problems(repo, name, effname, maintainer, problem)
+                SELECT DISTINCT
+                    repo,
+                    name,
+                    effname,
+                    unnest(maintainers),
+                    'Homepage lists googlecode.com which was discontinued; the page probably contains new URL, please update'
+                FROM packages
+                WHERE
+                    homepage LIKE 'http://%googlecode.com/%' OR
+                    homepage LIKE 'https://%googlecode.com/%'
+        """)
+
     def Commit(self):
         self.db.commit()
 
