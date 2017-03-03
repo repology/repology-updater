@@ -396,6 +396,22 @@
   tags: [ all, production, ubuntu ]
 
 ###########################################################################
+# KDE neon
+###########################################################################
+- name: kde_neon
+  desc: KDE neon
+  url: https://neon.kde.org/
+  family: debuntu
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: http://archive.neon.kde.org/user/dists/xenial/main/source/Sources.gz
+      compression: gz
+      subrepo: main
+  tags: [ all, production ]
+
+###########################################################################
 # Gentoo
 ###########################################################################
 - name: gentoo
