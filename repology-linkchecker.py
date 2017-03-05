@@ -127,6 +127,7 @@ def Main():
     parser.add_argument('--checked', action='store_true', help='only process old (already checked) links')
     parser.add_argument('--failed', action='store_true', help='only process links that were checked and failed')
     parser.add_argument('--succeeded', action='store_true', help='only process links that were checked and failed')
+    parser.add_argument('--prefix', help='only process links with specified prefix')
     options = parser.parse_args()
 
     logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
@@ -146,6 +147,7 @@ def Main():
         logger.Log('Requesting pack of urls'.format(prev_url))
         urls = database.GetLinksForCheck(
             after=prev_url,
+            prefix=options.prefix,  # no limit by default
             limit=options.packsize,
             recheck_age=options.age * 60 * 60 * 24,
             unchecked_only=options.unchecked,
