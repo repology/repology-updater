@@ -949,7 +949,7 @@
 - { name: swig, verpat: "2\\..*",      setname: swig2 }
 - { name: swig, verpat: "3\\..*",      setname: swig3 }
 
-- { name: tor-devel                    setname: tor }
+- { name: tor-devel,                   setname: tor }
 - { name: tor, verpat: "0\\.3\\...*",  setname: tor-unstable }
 
 - { namepat: "wesnoth[0-9.-]+",        setname: wesnoth }
