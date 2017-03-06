@@ -326,12 +326,20 @@
 - { namepat: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
 - { namepat: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
 
+- { namepat: "(?:fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" }
+
 - name:
     - fonts-bitmap-terminus
     - xfonts-terminus
     - terminus-bitmap-fonts
     - terminus-cyrillic
   setname: "fonts:terminus"
+
+- name:
+    - font-cronyx-cyrillic
+    - x11-font-cronyx-cyrillic
+    - xorg-font-cronyx-cyrillic
+  setname: "fonts:cronyx-cyrillic"
 
 - name:
     - dejavu
@@ -368,6 +376,45 @@
   setname: "fonts:droid"
 
 - name:
+    - fira-code
+    - firacode
+    - fonts-firacode
+    - otf-fira-code
+    - ttf-fira-code
+  setname: "fonts:firacode"
+
+- name:
+    - fira-mono
+    - font-fira-mono
+    - otf-fira-mono
+    - ttf-fira-mono
+  setname: "fonts:fira-mono"
+
+- name:
+    - font-gnu-freefont-ttf
+    - fonts-freefont
+    - fonts-ttf-freefont
+    - fonts-ttf-freefont
+    - fonts-ttf-gnu-freefont
+    - freefont
+    - freefont-ttf
+    - ttf-freefont
+  setname: "fonts:gnu-freefont"
+
+- { namepat: "(?:fonts-)?(?:[ot]tf-)?(gdouros-.+?)(?:-fonts)?", setname: "fonts:$1" }
+- { name: [aegyptus, fonts-aegyptus], setname: "fonts:gdouros-aegyptus" }
+- { name: fonts-aegean, setname: "fonts:gdouros-aegean" }
+- { name: [akkadian, fonts-akkadian], setname: "fonts:gdouros-akkadian" }
+- { name: analecta, setname: "fonts:gdouros-analecta" }
+
+- name:
+    - fonts-isabella
+    - isabella-ttf
+    - otf-isabella
+    - ttf-isabella
+  setname: "fonts:isabella"
+
+- name:
     - fonts-linuxlibertine
     - fonts-ttf-libertine
     - fonts-ttf-linuxlibertine
@@ -381,6 +428,8 @@
   setname: "fonts:linuxlibertine"
 - { name: libertine, category: media-fonts, setname: "fonts:linuxlibertine" }
 - { name: [ttf-linux-libertine-g,linuxlibertine-g], setname: "fonts:linuxlibertine-g" }
+
+- { namepat: "(?:fonts-)?(?:ttf-)?(lohit-.+?)(?:-fonts)?", setname: "fonts:$1" }
 
 - name:
     - fonts-ttf-opensans
