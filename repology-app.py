@@ -393,12 +393,14 @@ def maintainer(maintainer):
     maintainer_info = get_db().GetMaintainerInformation(maintainer)
     metapackages = get_db().GetMaintainerMetapackages(maintainer, 500)
     similar_maintainers = get_db().GetMaintainerSimilarMaintainers(maintainer, 50)
+    numproblems = get_db().GetProblemsCount(maintainer=maintainer)
 
     if not maintainer_info:
         flask.abort(404)
 
     return flask.render_template(
         'maintainer.html',
+        numproblems=numproblems,
         maintainer=maintainer,
         maintainer_info=maintainer_info,
         metapackages=metapackages,
