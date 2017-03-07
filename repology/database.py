@@ -1129,7 +1129,8 @@ class Database:
                     num_metapackages,
                     num_metapackages_unique,
                     num_metapackages_newest,
-                    num_metapackages_outdated
+                    num_metapackages_outdated,
+                    num_problems
                 FROM repositories
             ) AS statistics_snapshot
            """

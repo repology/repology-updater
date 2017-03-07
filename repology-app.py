@@ -607,7 +607,7 @@ def graph_metapackages_for_repo(repo):
 
     numdays = 28
     period = 60 * 60 * 24 * numdays
-    fields = ('num_metapackages', 'num_metapackages_unique', 'num_metapackages_newest', 'num_metapackages_outdated')
+    fields = ('num_metapackages', 'num_metapackages_unique', 'num_metapackages_newest', 'num_metapackages_outdated', 'num_problems')
 
     history = get_db().GetRepositoriesHistoryPeriod(period)
 

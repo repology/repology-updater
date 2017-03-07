@@ -36,6 +36,7 @@
 {{- line('num_metapackages_newest', '#5cb85c') -}}
 {{- line('num_metapackages_unique', '#5bc0de') -}}
 {{- line('num_metapackages_outdated', '#d9534f') -}}
+{{- line('num_problems', '#808080') -}}
 {#### labels ####}
     <g fill="#000" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
     {% for day in range(0, numdays - 1) %}
