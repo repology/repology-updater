@@ -424,6 +424,7 @@ class Database:
                 name varchar(255) not null,
                 effname varchar(255) not null,
                 maintainer varchar(255) not null,
+                severity smallint not null default 1,
                 problem varchar(1024) not null
             )
         """)
@@ -647,6 +648,7 @@ class Database:
                     name,
                     effname,
                     maintainer,
+                    severity,
                     problem
                 )
                 SELECT DISTINCT
@@ -654,6 +656,7 @@ class Database:
                     packages.name,
                     packages.effname,
                     unnest(packages.maintainers),
+                    3,
                     'Homepage link ' ||
                         links.url ||
                         ' is dead (' ||
@@ -690,12 +693,13 @@ class Database:
 
         self.cursor.execute("""
             INSERT
-                INTO problems(repo, name, effname, maintainer, problem)
+                INTO problems(repo, name, effname, maintainer, severity, problem)
                 SELECT DISTINCT
                     repo,
                     name,
                     effname,
                     unnest(maintainers),
+                    3,
                     'Homepage link "' || homepage || '" points to googlecode.com which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
                 FROM packages
                 WHERE
@@ -1348,6 +1352,7 @@ class Database:
                 name,
                 effname,
                 maintainer,
+                severity,
                 problem
             FROM problems
             {}
@@ -1363,7 +1368,8 @@ class Database:
                 'name': row[1],
                 'effname': row[2],
                 'maintainer': row[3],
-                'problem': row[4],
+                'severity': row[4],
+                'problem': row[5],
             }
             for row in self.cursor.fetchall()
         ]
