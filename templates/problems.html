@@ -12,20 +12,20 @@
 	<thead>
 		<tr>
 			<th class="text-right">Repository</th>
-			<th>Package name</th>
-			<th>Metapackage</th>
-			<th>Maintainer</th>
-			<th>Problem</th>
+			<th class="text-center">Metapackage</th>
+			<th class="text-center">Package name</th>
+			<th class="text-center">Maintainer</th>
+			<th class="text-left">Problem</th>
 		</tr>
 	</thead>
 	<tbody>
 	{% for problem in problems %}
 		<tr>
 			<td class="text-right">{{- macros.repository_link(problem.repo) -}}</td>
-			<td>{{ problem.name }}</td>
-			<td><a href="{{ url_for('metapackage', name=problem.effname) }}">{{ problem.effname }}</a></td>
-			<td><a href="{{ url_for('maintainer', maintainer=problem.maintainer) }}">{{ problem.maintainer }}</a></td>
-			<td>{{ problem.problem }}</td>
+			<td class="text-center"><a href="{{ url_for('metapackage', name=problem.effname) }}">{{ problem.effname }}</a></td>
+			<td class="text-center">{{ problem.name }}</td>
+			<td class="text-center"><a href="{{ url_for('maintainer', maintainer=problem.maintainer) }}">{{ problem.maintainer }}</a></td>
+			<td class="text-left">{{ problem.problem }}</td>
 		</tr>
 	{% endfor %}
 	</tbody>

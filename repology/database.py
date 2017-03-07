@@ -294,7 +294,9 @@ class Database:
                 num_metapackages_newest integer not null default 0,
                 num_metapackages_outdated integer not null default 0,
 
-                last_update timestamp with time zone
+                last_update timestamp with time zone,
+
+                num_problems integer not null default 0
             )
         """)
 
@@ -442,7 +444,8 @@ class Database:
                 num_metapackages = 0,
                 num_metapackages_unique = 0,
                 num_metapackages_newest = 0,
-                num_metapackages_outdated = 0
+                num_metapackages_outdated = 0,
+                num_problems = 0
         """)
         self.cursor.execute("""DELETE FROM problems""")
 
@@ -698,6 +701,21 @@ class Database:
                 WHERE
                     homepage LIKE 'http://%googlecode.com/%' OR
                     homepage LIKE 'https://%googlecode.com/%'
+        """)
+
+        self.cursor.execute("""
+            INSERT
+                INTO repositories (
+                    name,
+                    num_problems
+                ) SELECT
+                    repo,
+                    count(distinct effname)
+                FROM problems
+                GROUP BY repo
+                ON CONFLICT (name)
+                DO UPDATE SET
+                    num_problems = EXCLUDED.num_problems
         """)
 
     def Commit(self):
@@ -1015,7 +1033,8 @@ class Database:
                 num_metapackages_newest,
                 num_metapackages_outdated,
                 last_update at time zone 'UTC',
-                now() - last_update
+                now() - last_update,
+                num_problems
             FROM repositories
         """)
 
@@ -1031,7 +1050,8 @@ class Database:
                 'num_metapackages_newest': row[7],
                 'num_metapackages_outdated': row[8],
                 'last_update_utc': row[9],
-                'since_last_update': row[10]
+                'since_last_update': row[10],
+                'num_problems': row[11],
             } for row in self.cursor.fetchall()
         ]
 

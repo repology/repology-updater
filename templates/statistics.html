@@ -33,6 +33,7 @@
 			<th class="text-right" rowspan="2">Repository</th>
 			<th class="text-center" colspan="8">Metapackages</th>
 			<th class="text-center" colspan="4">Packages</th>
+			<th class="text-center" rowspan="2">Problems</th>
 			<th class="text-center" rowspan="2">Updated</th>
 		</tr>
 		<tr>
@@ -112,6 +113,16 @@
 			<td class="text-center version-cell version-big version-newest">{{ repostat.num_packages_newest }}</td>
 			<td class="text-center version-cell version-big version-outdated">{{ repostat.num_packages_outdated }}</td>
 			<td class="text-center version-cell version-big version-ignored">{{ repostat.num_packages_ignored }}</td>
+
+			<td class="text-center">
+			{%- if repostat.num_problems -%}
+				<a href="{{ url_for("problems_for_repo", repo=repostat.name) }}">
+					{{- repostat.num_problems -}}
+				</a>
+			{%- else -%}
+				0
+			{%- endif -%}
+			</td>
 
 			<td class="text-center">
 			{% if repostat.last_update_utc %}
