@@ -665,13 +665,14 @@ class Database:
                             WHEN links.status=-2 THEN 'too many redirects'
                             WHEN links.status=-4 THEN 'cannot connect'
                             WHEN links.status=-5 THEN 'invalid url'
+                            WHEN links.status=-6 THEN 'DNS problem'
                             ELSE 'HTTP error ' || links.status
                         END ||
                         ') for more than a month.'
                 FROM packages
                     INNER JOIN links ON (packages.homepage = links.url)
                 WHERE
-                    (links.status IN (-1, -2, -4, -5, 400, 404) OR links.status >= 500) AND
+                    (links.status IN (-1, -2, -4, -5, -6, 400, 404) OR links.status >= 500) AND
                     (
                         (links.last_success IS NULL AND links.first_extracted < now() - INTERVAL '30' DAY) OR
                         links.last_success < now() - INTERVAL '30' DAY
@@ -1222,6 +1223,7 @@ class Database:
     linkcheck_status_unknown_error = -3
     linkcheck_status_cannot_connect = -4
     linkcheck_status_invalid_url = -5
+    linkcheck_status_dns_error = -6
 
     def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
         success = status == 200

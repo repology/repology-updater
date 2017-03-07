@@ -21,6 +21,7 @@ import argparse
 import multiprocessing
 import os
 import re
+import socket
 import time
 import urllib.parse
 
@@ -62,6 +63,14 @@ def GetHTTPLinkStatus(url, timeout):
     except requests.TooManyRedirects:
         return (url, Database.linkcheck_status_too_many_redirects, None, None, None)
     except requests.ConnectionError:
+        # check for DNS error additionally
+        try:
+            parsed = urllib.parse.urlparse(url)
+            socket.gethostbyname(parsed.hostname)
+        except socket.gaierror:
+            return (url, Database.linkcheck_status_dns_error, None, None, None)
+        except:
+            pass
         return (url, Database.linkcheck_status_cannot_connect, None, None, None)
     except requests.exceptions.InvalidURL:
         return (url, Database.linkcheck_status_invalid_url, None, None, None)
