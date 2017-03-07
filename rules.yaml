@@ -402,9 +402,9 @@
   setname: "fonts:gnu-freefont"
 
 - { namepat: "(?:fonts-)?(?:[ot]tf-)?(gdouros-.+?)(?:-fonts)?", setname: "fonts:$1" }
-- { name: [aegyptus, fonts-aegyptus], setname: "fonts:gdouros-aegyptus" }
-- { name: fonts-aegean, setname: "fonts:gdouros-aegean" }
-- { name: [akkadian, fonts-akkadian], setname: "fonts:gdouros-akkadian" }
+- { name: [aegyptus, aegyptus-ttf], setname: "fonts:gdouros-aegyptus" }
+- { name: aegean-ttf, setname: "fonts:gdouros-aegean" }
+- { name: [akkadian, akkadian-ttf], setname: "fonts:gdouros-akkadian" }
 - { name: analecta, setname: "fonts:gdouros-analecta" }
 
 - name:
@@ -429,7 +429,7 @@
 - { name: libertine, category: media-fonts, setname: "fonts:linuxlibertine" }
 - { name: [ttf-linux-libertine-g,linuxlibertine-g], setname: "fonts:linuxlibertine-g" }
 
-- { namepat: "(?:fonts-)?(?:ttf-)?(lohit-.+?)(?:-fonts)?", setname: "fonts:$1" }
+- { namepat: "(?:fonts-)?(?:ttf-)?(lohit-.+?)(?:-fonts)?", setname: "fonts:$1", last: true }
 
 - name:
     - fonts-ttf-opensans
