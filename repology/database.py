@@ -664,7 +664,7 @@ class Database:
                             WHEN links.status=-5 THEN 'invalid url'
                             ELSE 'HTTP error ' || links.status
                         END ||
-                        ') for more than a month'
+                        ') for more than a month.'
                 FROM packages
                     INNER JOIN links ON (packages.homepage = links.url)
                 WHERE
@@ -683,7 +683,7 @@ class Database:
                     name,
                     effname,
                     unnest(maintainers),
-                    'GitHub homepage lists http:// schema, while it should be https://'
+                    'Homepage link "' || homepage || '" should use https:// schema as GitHub is HTTPS-only.'
                 FROM packages
                 WHERE homepage LIKE 'http://github.com/%'
         """)
@@ -696,7 +696,7 @@ class Database:
                     name,
                     effname,
                     unnest(maintainers),
-                    'Homepage lists googlecode.com which was discontinued; the page probably contains new URL, please update'
+                    'Homepage link "' || homepage || '" points to googlecode.com which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
                 FROM packages
                 WHERE
                     homepage LIKE 'http://%googlecode.com/%' OR
