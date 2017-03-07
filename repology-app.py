@@ -411,6 +411,19 @@ def repositories():
     return flask.render_template('repositories.html')
 
 
+@app.route('/problems/maintainer/<maintainer>')
+def problems_for_maintainer(maintainer):
+    return flask.render_template('problems-for-maintainer.html', maintainer=maintainer, problems=get_db().GetProblems(maintainer=maintainer, limit=app.config['PROBLEMS_PER_PAGE']))
+
+
+@app.route('/problems/repo/<repo>')
+def problems_for_repo(repo):
+    if not repo or repo not in repometadata:
+        flask.abort(404)
+
+    return flask.render_template('problems-for-repo.html', repo=repo, problems=get_db().GetProblems(repo=repo, limit=app.config['PROBLEMS_PER_PAGE']))
+
+
 @app.route('/metapackage/<name>')
 def metapackage(name):
     # metapackage landing page; just redirect to packages, may change in future

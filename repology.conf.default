@@ -65,6 +65,7 @@ PROFILE = False
 #
 METAPACKAGES_PER_PAGE = 200
 MAINTAINERS_PER_PAGE = 500
+PROBLEMS_PER_PAGE = 500
 
 #
 # Address of repology.org to use in HTML links

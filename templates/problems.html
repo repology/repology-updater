@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}Repology: problems{% endblock %}
+{% block header %}Problems{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th class="text-right">Repository</th>
+			<th>Package name</th>
+			<th>Metapackage</th>
+			<th>Maintainer</th>
+			<th>Problem</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for problem in problems %}
+		<tr>
+			<td class="text-right">{{- macros.repository_link(problem.repo) -}}</td>
+			<td>{{ problem.name }}</td>
+			<td><a href="{{ url_for('metapackage', name=problem.effname) }}">{{ problem.effname }}</a></td>
+			<td><a href="{{ url_for('maintainer', maintainer=problem.maintainer) }}">{{ problem.maintainer }}</a></td>
+			<td>{{ problem.problem }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+</div> {#- container #}
+{% endblock %}
