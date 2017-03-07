@@ -1288,7 +1288,7 @@ class Database:
         }
 
     def GetProblemsCount(self, repo=None, effname=None, maintainer=None):
-        where_expr = ""
+        where_expr = ''
         args = []
 
         conditions = []
@@ -1319,8 +1319,8 @@ class Database:
 
     def GetProblems(self, repo=None, effname=None, maintainer=None, limit=None):
         # XXX: eliminate duplication with GetProblemsCount()
-        where_expr = ""
-        limit_expr = ""
+        where_expr = ''
+        limit_expr = ''
         args = []
 
         conditions = []
@@ -1338,7 +1338,7 @@ class Database:
         if conditions:
             where_expr = 'WHERE ' + ' AND '.join(conditions)
         if limit:
-            limit_expr = "LIMIT %s"
+            limit_expr = 'LIMIT %s'
             args.append(limit)
 
         self.cursor.execute(
