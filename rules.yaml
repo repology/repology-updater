@@ -326,7 +326,7 @@
 - { namepat: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
 - { namepat: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
 
-- { namepat: "(?:fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" }
+- { namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" }
 
 - name:
     - fonts-bitmap-terminus
