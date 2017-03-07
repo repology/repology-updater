@@ -657,9 +657,9 @@ class Database:
                     packages.effname,
                     unnest(packages.maintainers),
                     3,
-                    'Homepage link ' ||
+                    'Homepage link "' ||
                         links.url ||
-                        ' is dead (' ||
+                        '" is dead (' ||
                         CASE
                             WHEN links.status=-1 THEN 'connect timeout'
                             WHEN links.status=-2 THEN 'too many redirects'
