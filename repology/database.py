@@ -1266,3 +1266,84 @@ class Database:
             }
             for row in self.cursor.fetchall()
         }
+
+    def GetProblemsCount(self, repo=None, effname=None, maintainer=None):
+        where_expr = ""
+        args = []
+
+        conditions = []
+
+        if repo:
+            conditions.append('repo = %s')
+            args.append(repo)
+        if effname:
+            conditions.append('effname = %s')
+            args.append(effname)
+        if maintainer:
+            conditions.append('maintainer = %s')
+            args.append(maintainer)
+
+        if conditions:
+            where_expr = 'WHERE ' + ' AND '.join(conditions)
+
+        self.cursor.execute(
+            """
+            SELECT count(*)
+            FROM problems
+            {}
+            """.format(where_expr),
+            args
+        )
+
+        return self.cursor.fetchall()[0][0]
+
+    def GetProblems(self, repo=None, effname=None, maintainer=None, limit=None):
+        # XXX: eliminate duplication with GetProblemsCount()
+        where_expr = ""
+        limit_expr = ""
+        args = []
+
+        conditions = []
+
+        if repo:
+            conditions.append('repo = %s')
+            args.append(repo)
+        if effname:
+            conditions.append('effname = %s')
+            args.append(effname)
+        if maintainer:
+            conditions.append('maintainer = %s')
+            args.append(maintainer)
+
+        if conditions:
+            where_expr = 'WHERE ' + ' AND '.join(conditions)
+        if limit:
+            limit_expr = "LIMIT %s"
+            args.append(limit)
+
+        self.cursor.execute(
+            """
+            SELECT
+                repo,
+                name,
+                effname,
+                maintainer,
+                problem
+            FROM problems
+            {}
+            ORDER by repo, effname, maintainer
+            {}
+            """.format(where_expr, limit_expr),
+            args
+        )
+
+        return [
+            {
+                'repo': row[0],
+                'name': row[1],
+                'effname': row[2],
+                'maintainer': row[3],
+                'problem': row[4],
+            }
+            for row in self.cursor.fetchall()
+        ]
