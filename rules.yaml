@@ -242,6 +242,7 @@
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
+- { name: [okular-kde4-support, okular-light, kde4-okular, kde5-okular], setname: okular }
 - { name: openastromenace,             setname: astromenace,              family: [ freebsd ] }
 - { name: opencv2,                     setname: opencv                    }
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph,           family: [ freebsd ] }
