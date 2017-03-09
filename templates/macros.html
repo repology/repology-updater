@@ -1,11 +1,3 @@
-{%- macro repository_link(reponame) -%}
-	{%- if repometadata[reponame].url -%}
-		<a href="{{ repometadata[reponame].url }}">{{ repometadata[reponame].desc }}</a>
-	{%- else -%}
-		{{ repometadata[reponame].desc }}
-	{%- endif -%}
-{%- endmacro -%}
-
 {%- macro package_link(package, text) -%}
 	{%- if repometadata[package.repo].links -%}
 		<a href="{{ repometadata[package.repo].links[0].url|pkg_format(package) }}">{{ text }}</a>

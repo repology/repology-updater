@@ -53,7 +53,7 @@
 	{% if repostat.name in repostats_old %}{% set old_repostat = repostats_old[repostat.name] %}{% else %}{% set old_repostat = {} %}{% endif %}
 		<tr>
 			<th class="text-right">
-				{{- macros.repository_link(repostat.name) -}}
+				<a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a>
 				{%- if showmedals -%}
 				{%- if loop.index == 1 -%}
 					<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date"></span></sup>

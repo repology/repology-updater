@@ -34,7 +34,7 @@
 		<h2>Repositories</h2>
 		<ul>
 		{% for reponame,families in information.repos|dictsort(case_sensitive=True) %}
-			<li>{{ repometadata[reponame].desc }}</li>
+		<li><a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a></li>
 		{% endfor %}
 		</ul>
 

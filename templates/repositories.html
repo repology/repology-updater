@@ -1,5 +1,4 @@
 {% extends "layout.html" %}
-{% import "macros.html" as macros %}
 
 {% block title %}{{ super() }}: repositories{% endblock %}
 {% block header %}Repositories{% endblock %}
@@ -20,7 +19,7 @@
 			<tbody>
 			{% for reponame in column %}
 				<tr>
-					<td class="text-right">{{ macros.repository_link(reponame) }}</td>
+					<td class="text-right"><a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a></td>
 					<td class="text-nowrap">
 						<a href="{{ url_for('metapackages_in_repo', repo=reponame) }}">Present</a>
 						<a href="{{ url_for('metapackages_not_in_repo', repo=reponame) }}">Absent</a>

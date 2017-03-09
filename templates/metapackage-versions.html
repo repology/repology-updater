@@ -27,7 +27,7 @@
 {% for package in packages %}
 	<tr>
 		<td class="text-right">
-			{{- macros.repository_link(reponame) -}}
+			<a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a>
 			{%- if package.subrepo -%}
 				<br><sup>{{ package.subrepo }}</sup>
 			{%- endif -%}
@@ -52,7 +52,7 @@
 	</tr>
 {% else %}
 	<tr>
-		<td class="text-right">{{ macros.repository_link(reponame) }}</td>
+		<td class="text-right"><a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a></td>
 		<td colspan="4"></td>
 	</tr>
 {% endfor %}
