@@ -1090,7 +1090,7 @@
 - { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below
 
 # Ruby
-- { namepat: "ruby-(.*)",              setname: "ruby:$1", family: [ debuntu, arch, fedora, mageia, sisyphus, guix ] }
+- { namepat: "ruby-(.*)",              setname: "ruby:$1", family: [ debuntu, arch, fedora, mageia, sisyphus, guix, rosa ] }
 - { namepat: "rubygem-(.*)",           setname: "ruby:$1", family: [ freebsd, fedora, opensuse, slackbuilds, rosa, centos, pclinuxos ] }
 - { namepat: "ruby[0-9][0-9]-(.*)",    setname: "ruby:$1", family: [ freebsd, openbsd, pkgsrc ] }
 - { family: [ rubygems ],              setname: "ruby:$0" }
@@ -1255,11 +1255,11 @@
 
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu, arch ] }
-- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, arch, debuntu ] }
+- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, arch, debuntu, rosa ] }
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "r:$1", family: [ debuntu ] }
-- { namepat: "nodejs-(.*)",            setname: "r:$1", family: [ fedora, mageia, arch ] }
+- { namepat: "nodejs-(.*)",            setname: "r:$1", family: [ fedora, mageia, arch, rosa ] }
 
 # ROS
 - { category: dev-ros,                 setname: "ros:$0", family: [ gentoo ] }
@@ -1273,7 +1273,7 @@
 - {                                    setname: "haskell:$0", family: [ hackage ] }
 - { namepat: "haskell-(.*)",           setname: "haskell:$1", family: [ debuntu, arch, slackbuilds, gobolinux ] }
 - { namepat: "hs-(.*)",                setname: "haskell:$1", family: [ freebsd, pkgsrc, openbsd ] }
-- { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora, guix ] }
+- { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora, guix, rosa ] }
 - { category: dev-haskell,             setname: "haskell:$0", family: [ gentoo ] }
 - { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", family: [ sisyphus ] }
 
@@ -1297,7 +1297,7 @@
 
 # octave
 - { namepat: "octave-forge-(.*)",      setname: "octave:$1", family: [ freebsd, opensuse ] }
-- { namepat: "octave-(.*)",            setname: "octave:$1", family: [ debuntu, sisyphus, fedora, arch ] }
+- { namepat: "octave-(.*)",            setname: "octave:$1", family: [ debuntu, sisyphus, fedora, arch, rosa ] }
 
 # xorg drivers
 - { namepat: "(?:xf86|xserver-xorg|x11-driver|xorg-xf86)-((?:input|video)-.*)", setname: "xorg:$1" }
@@ -1307,6 +1307,7 @@
 - { category: dev-php,                 setname: "php:$0", family: [ gentoo ] }
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", family: [ freebsd, pkgsrc, openbsd, sisyphus ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", family: [ freebsd, pkgsrc, mageia ] }
+- { namepat: "php-(?:(?:pear|pecl)-)?(.*)", setname: "php:$1", family: [ rosa ] }
 - { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", family: [ freebsd, pkgsrc, openbsd ] }
 - { namepat: "php-(.*)",               setname: "php:$1", family: [ arch, fedora, debuntu, slackbuilds, crux, pclinuxos ] }
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ sisyphus ], "ignorever": true }
