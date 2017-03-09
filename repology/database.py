@@ -305,7 +305,7 @@ class Database:
         self.cursor.execute("""
             CREATE TABLE repositories_history (
                 ts timestamp with time zone not null primary key,
-                statistics json not null
+                statistics jsonb not null
             )
         """)
 
@@ -1146,7 +1146,7 @@ class Database:
             SELECT
                 ts,
                 now() - ts,
-                json_array_elements(statistics)
+                jsonb_array_elements(statistics)
             FROM repositories_history
             WHERE ts IN (
                 SELECT
@@ -1203,7 +1203,7 @@ class Database:
             )
             SELECT
                 now(),
-                array_to_json(array_agg(row_to_json(statistics_snapshot)))
+                jsonb_object_agg(statistics_snapshot.name, to_jsonb(statistics_snapshot) - 'name')
             FROM (
                 SELECT
                     name,
@@ -1211,7 +1211,8 @@ class Database:
                     num_metapackages_unique,
                     num_metapackages_newest,
                     num_metapackages_outdated,
-                    num_problems
+                    num_problems,
+                    num_maintainers
                 FROM repositories
             ) AS statistics_snapshot
            """

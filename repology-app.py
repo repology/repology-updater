@@ -24,6 +24,7 @@ import flask
 from werkzeug.contrib.profiler import ProfilerMiddleware
 
 from repology.database import Database
+from repology.graphprocessor import GraphProcessor
 from repology.metapackageproc import *
 from repology.package import *
 from repology.packageproc import *
@@ -607,73 +608,97 @@ def statistics(sorting=None):
         sorting=sorting,
         repostats=repostats,
         showmedals=showmedals,
-        repostats_old={repo['name']: repo for repo in get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 7)},
+        repostats_old={},  # {repo['name']: repo for repo in get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 7)},
         num_metapackages=get_db().GetMetapackagesCount()
     )
 
 
-@app.route('/graph/metapackages-for-repo/<repo>.svg')
-def graph_metapackages_for_repo(repo):
+@app.route('/graph/repo/<repo>/<type_>.svg')
+def repograph(repo, type_):
     if repo not in reponames:
         flask.abort(404)
 
-    numdays = 28
+    types = {
+        'metapackages_total': {
+            'value': lambda s: s['num_metapackages'],
+            'color': '#000000'
+        },
+        'metapackages_newest': {
+            'value': lambda s: s['num_metapackages_newest'],
+            'color': '#5cb85c'
+        },
+        'metapackages_newest_percent': {
+            'value': lambda s: s['num_metapackages_newest'] / s['num_metapackages'] * 100.0,
+            'color': '#5cb85c'
+        },
+        'metapackages_outdated': {
+            'value': lambda s: s['num_metapackages_outdated'],
+            'color': '#d9534f'
+        },
+        'metapackages_outdated_percent': {
+            'value': lambda s: s['num_metapackages_outdated'] / s['num_metapackages'] * 100.0,
+            'color': '#d9534f'
+        },
+        'metapackages_unique': {
+            'value': lambda s: s['num_metapackages_unique'],
+            'color': '#5bc0de'
+        },
+        'metapackages_unique_percent': {
+            'value': lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0,
+            'color': '#5bc0de'
+        },
+        'problems': {
+            'value': lambda s: s['num_problems'],
+            'color': '#c00000'
+        },
+        'problems_per_metapackage': {
+            'value': lambda s: s['num_problems'] / s['num_metapackages'],
+            'color': '#c00000'
+        },
+        'maintainers': {
+            'value': lambda s: s['num_maintainers'],
+            'color': '#00c0c0'
+        },
+        'metapackages_per_maintainer': {
+            'value': lambda s: s['num_metapackages'] / s['num_maintainers'],
+            'color': '#00c0c0'
+        },
+    }
+
+    if type_ not in types:
+        flask.abort(404)
+
+    numdays = 14
+    width = 1140
+    height = 400
+    gwidth = width - 50
+    gheight = height - 20
     period = 60 * 60 * 24 * numdays
-    fields = ('num_metapackages', 'num_metapackages_unique', 'num_metapackages_newest', 'num_metapackages_outdated', 'num_problems')
 
-    history = get_db().GetRepositoriesHistoryPeriod(period)
+    g = GraphProcessor()
 
-    ranges = {}
-
-    def update_ranges(name, value):
-        if value is None:
-            return
-        if name not in ranges:
-            ranges[name] = [value, value]
-        if value < ranges[name][0]:
-            ranges[name][0] = value
-        if value > ranges[name][1]:
-            ranges[name][1] = value
-
-    def normalize_to_range(name, value):
-        if name in ranges and ranges[name][0] != ranges[name][1]:
-            return (value - ranges[name][0]) / (ranges[name][1] - ranges[name][0])
-        return 0.5
-
-    # collect min/max ranges for all fields
-    for entry in history:
-        entry['statistics'] = {repo['name']: repo for repo in entry['statistics']}
-
-        if repo not in entry['statistics']:
+    for histentry in get_db().GetRepositoriesHistoryPeriod(period):
+        if repo not in histentry['statistics']:
             continue
 
-        statistics = entry['statistics'][repo]
-
-        for field in fields:
-            update_ranges(field, statistics.get(field, None))
-            update_ranges('all', statistics.get(field, None))
-
-    datapoints = []
-    for entry in history:
-        datapoint = {
-            'pos': entry['timedelta'].total_seconds() / period,
-        }
-
-        if repo not in entry['statistics']:
-            continue
-
-        statistics = entry['statistics'][repo]
-        for field in fields:
-            if field in statistics:
-                datapoint[field] = normalize_to_range(field, statistics[field])
-
-        datapoints.append(datapoint)
+        try:
+            g.AddPoint(histentry['timedelta'], types[type_]['value'](histentry['statistics'][repo]))
+        except:
+            pass  # ignore missing keys, division errors etc.
 
     return (
         flask.render_template(
-            'graph-metapackages-for-repo.svg',
-            datapoints=datapoints,
-            numdays=numdays
+            'graph.svg',
+            width=width,
+            height=height,
+            gwidth=gwidth,
+            gheight=gheight,
+            points=g.GetPoints(period),
+            yticks=g.GetYTicks(),
+            color=types[type_]['color'],
+            numdays=numdays,
+            x=lambda x: int((1.0 - x) * gwidth) + 0.5,
+            y=lambda y: int(10.0 + (1.0 - y) * (gheight - 20.0)) + 0.5,
         ),
         {'Content-type': 'image/svg+xml'}
     )
