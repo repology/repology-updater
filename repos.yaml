@@ -813,6 +813,21 @@
       parser: RosaInfoXml
       url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/restricted/updates/media_info/info.xml.lzma
       compression: xz
+    - name: contrib_release
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/contrib/release/media_info/info.xml.lzma
+      compression: xz
+    - name: contrib_testing
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/contrib/testing/media_info/info.xml.lzma
+      compression: xz
+    - name: contrib_updates
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/contrib/updates/media_info/info.xml.lzma
+      compression: xz
   tags: [ all, production, rosa ]
 
 ###########################################################################
