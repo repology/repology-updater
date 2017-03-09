@@ -116,7 +116,7 @@
 
 			<td class="text-center">
 			{%- if repostat.num_problems -%}
-				<a href="{{ url_for("problems_for_repo", repo=repostat.name) }}">
+				<a href="{{ url_for("repository_problems", repo=repostat.name) }}">
 					{{- repostat.num_problems -}}
 				</a>
 			{%- else -%}

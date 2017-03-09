@@ -93,7 +93,7 @@
 {% if repo_info.num_problems %}
 <h2>Problems</h2>
 
-<p>There are <a href="{{ url_for('problems_for_repo', repo=repo) }}">{{ repo_info.num_problems }} known problems</a> for packages in this repository</p>
+<p>There are <a href="{{ url_for('repository_problems', repo=repo) }}">{{ repo_info.num_problems }} known problems</a> for packages in this repository</p>
 {% endif %}
 
 </div>

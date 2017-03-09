@@ -66,7 +66,7 @@
 {% if numproblems %}
 <h2>Problems</h2>
 
-<p>There are <a href="{{ url_for('problems_for_maintainer', maintainer=maintainer) }}">{{ numproblems }} known problems</a> for packages maintained by <strong>{{ maintainer }}</strong></p>
+<p>There are <a href="{{ url_for('maintainer_problems', maintainer=maintainer) }}">{{ numproblems }} known problems</a> for packages maintained by <strong>{{ maintainer }}</strong></p>
 {% endif %}
 
 <h2>Metapackages ({{ maintainer_info.num_metapackages }})</h2>

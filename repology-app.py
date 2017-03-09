@@ -408,6 +408,16 @@ def maintainer(maintainer):
     )
 
 
+@app.route('/maintainer/<maintainer>/problems')
+def maintainer_problems(maintainer):
+    return flask.render_template('maintainer-problems.html', maintainer=maintainer, problems=get_db().GetProblems(maintainer=maintainer, limit=app.config['PROBLEMS_PER_PAGE']))
+
+
+@app.route('/repositories/')
+def repositories():
+    return flask.render_template('repositories.html')
+
+
 @app.route('/repository/<repo>')
 def repository(repo):
     if not repo or repo not in repometadata:
@@ -420,22 +430,12 @@ def repository(repo):
     )
 
 
-@app.route('/repositories/')
-def repositories():
-    return flask.render_template('repositories.html')
-
-
-@app.route('/problems/maintainer/<maintainer>')
-def problems_for_maintainer(maintainer):
-    return flask.render_template('problems-for-maintainer.html', maintainer=maintainer, problems=get_db().GetProblems(maintainer=maintainer, limit=app.config['PROBLEMS_PER_PAGE']))
-
-
-@app.route('/problems/repo/<repo>')
-def problems_for_repo(repo):
+@app.route('/repository/<repo>/problems')
+def repository_problems(repo):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.render_template('problems-for-repo.html', repo=repo, problems=get_db().GetProblems(repo=repo, limit=app.config['PROBLEMS_PER_PAGE']))
+    return flask.render_template('repository-problems.html', repo=repo, problems=get_db().GetProblems(repo=repo, limit=app.config['PROBLEMS_PER_PAGE']))
 
 
 @app.route('/metapackage/<name>')
