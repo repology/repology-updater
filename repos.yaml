@@ -763,6 +763,73 @@
 ###########################################################################
 # Rosa
 ###########################################################################
+- name: rosa_2014_1
+  desc: Rosa 2014.1
+  url: http://en.rosalinux.com/
+  family: rosa
+  sources:
+    - name: main_release
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/main/release/media_info/info.xml.lzma
+      compression: xz
+    - name: main_testing
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/main/testing/media_info/info.xml.lzma
+      compression: xz
+    - name: main_updates
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/main/updates/media_info/info.xml.lzma
+      compression: xz
+    - name: nonfree_release
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/non-free/release/media_info/info.xml.lzma
+      compression: xz
+    - name: nonfree_testing
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/non-free/testing/media_info/info.xml.lzma
+      compression: xz
+    - name: nonfree_updates
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/non-free/updates/media_info/info.xml.lzma
+      compression: xz
+    - name: restricted_release
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/restricted/release/media_info/info.xml.lzma
+      compression: xz
+    - name: restricted_testing
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/restricted/testing/media_info/info.xml.lzma
+      compression: xz
+    - name: restricted_updates
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/restricted/updates/media_info/info.xml.lzma
+      compression: xz
+    - name: contrib_release
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/contrib/release/media_info/info.xml.lzma
+      compression: xz
+    - name: contrib_testing
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/contrib/testing/media_info/info.xml.lzma
+      compression: xz
+    - name: contrib_updates
+      fetcher: File
+      parser: RosaInfoXml
+      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/contrib/updates/media_info/info.xml.lzma
+      compression: xz
+  tags: [ all, production, rosa ]
+
 - name: rosa_2016_1
   desc: Rosa 2016.1
   url: http://en.rosalinux.com/
