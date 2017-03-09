@@ -1084,6 +1084,64 @@ class Database:
             } for row in self.cursor.fetchall()
         ]
 
+    def GetRepository(self, repo):
+        # XXX: remove duplication with GetRepositories()
+        self.cursor.execute(
+            """
+            SELECT
+                num_packages,
+                num_packages_newest,
+                num_packages_outdated,
+                num_packages_ignored,
+                num_metapackages,
+                num_metapackages_unique,
+                num_metapackages_newest,
+                num_metapackages_outdated,
+                last_update at time zone 'UTC',
+                now() - last_update,
+                num_problems,
+                num_maintainers
+            FROM repositories
+            WHERE name = %s
+            """,
+            (repo,)
+        )
+
+        rows = self.cursor.fetchall()
+
+        if rows:
+            row = rows[0]
+            return {
+                'num_packages': row[0],
+                'num_packages_newest': row[1],
+                'num_packages_outdated': row[2],
+                'num_packages_ignored': row[3],
+                'num_metapackages': row[4],
+                'num_metapackages_unique': row[5],
+                'num_metapackages_newest': row[6],
+                'num_metapackages_outdated': row[7],
+                'last_update_utc': row[8],
+                'since_last_update': row[9],
+                'num_problems': row[10],
+                'num_maintainers': row[11],
+            }
+        else:
+            return {
+                'num_packages': 0,
+                'num_packages_newest': 0,
+                'num_packages_outdated': 0,
+                'num_packages_ignored': 0,
+                'num_metapackages': 0,
+                'num_metapackages_unique': 0,
+                'num_metapackages_newest': 0,
+                'num_metapackages_outdated': 0,
+                'last_update_utc': None,
+                'since_last_update': None,
+                'num_problems': 0,
+                'num_maintainers': 0,
+            }
+
+
     def GetRepositoriesHistoryAgo(self, seconds=60 * 60 * 24):
         self.cursor.execute("""
             SELECT
