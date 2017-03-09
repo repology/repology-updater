@@ -396,6 +396,135 @@
   tags: [ all, production, ubuntu ]
 
 ###########################################################################
+# Astra Linux
+###########################################################################
+- name: astra
+  desc: Astra Linux Orel
+  url: http://astralinux.com/
+  family: debuntu
+  sources:
+    - name: contrib
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/contrib/source/Sources.gz
+      compression: gz
+      subrepo: contrib
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/main/source/Sources.gz
+      compression: gz
+      subrepo: main
+    - name: non-free
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/non-free/source/Sources.gz
+      compression: gz
+      subrepo: non-free
+  tags: [ all, production ]
+
+###########################################################################
+# Linux Mint
+###########################################################################
+- name: linux_mint_18
+  desc: Linux Mint Sarah
+  url: https://linuxmint.com/
+  family: debuntu
+  sources:
+    - name: backport
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/backport/source/Sources.gz
+      compression: gz
+      subrepo: backport
+    - name: import
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/import/source/Sources.gz
+      compression: gz
+      subrepo: import
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/main/source/Sources.gz
+      compression: gz
+      subrepo: main
+    - name: multiverse
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/multiverse/source/Sources.gz
+      compression: gz
+      subrepo: multiverse
+    - name: romeo
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/romeo/source/Sources.gz
+      compression: gz
+      subrepo: romeo
+    - name: universe
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/universe/source/Sources.gz
+      compression: gz
+      subrepo: universe
+    - name: upstream
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/upstream/source/Sources.gz
+      compression: gz
+      subrepo: upstream
+  tags: [ all, production, mint ]
+
+- name: linux_mint_18_1
+  desc: Linux Mint Serena
+  url: https://linuxmint.com/
+  family: debuntu
+  sources:
+    - name: backport
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/backport/source/Sources.gz
+      compression: gz
+      subrepo: backport
+    - name: import
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/import/source/Sources.gz
+      compression: gz
+      subrepo: import
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/main/source/Sources.gz
+      compression: gz
+      subrepo: main
+    - name: multiverse
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/multiverse/source/Sources.gz
+      compression: gz
+      subrepo: multiverse
+    - name: romeo
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/romeo/source/Sources.gz
+      compression: gz
+      subrepo: romeo
+    - name: universe
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/universe/source/Sources.gz
+      compression: gz
+      subrepo: universe
+    - name: upstream
+      fetcher: File
+      parser: DebianSources
+      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/upstream/source/Sources.gz
+      compression: gz
+      subrepo: upstream
+  tags: [ all, production, mint ]
+
+###########################################################################
 # KDE neon
 ###########################################################################
 - name: kde_neon
