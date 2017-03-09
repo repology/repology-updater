@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}Repology: repository {{ repometadata[repo].desc }}{% endblock %}
+{% block header %}Repository <strong>{{ repometadata[repo].desc }}</strong>{% endblock %}
+{% block description %}Information on repository {{ repometadata[repo].desc }}{% endblock %}
+{% block keywords %}{{ super()}}, repository{% endblock %}
+
+{% block content %}
+<div class="container">
+
+{%- if repometadata[repo].url -%}
+<h2>Link</h2>
+<ul><li><a href="{{ repometadata[repo].url }}">{{ repometadata[repo].url }}</a></li></ul>
+{%- endif -%}
+
+<h2>Packages</h2>
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading"><h3>Total</h3></div>
+			<div class="panel-body">
+				{{ repo_info.num_packages }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-success">
+			<div class="panel-heading"><h3>Newest</h3></div>
+			<div class="panel-body">
+				{{ repo_info.num_packages_newest }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-danger">
+			<div class="panel-heading"><h3>Outdated</h3></div>
+			<div class="panel-body">
+				{{ repo_info.num_packages_outdated }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3>Ignored</h3></div>
+			<div class="panel-body">
+				{{ repo_info.num_packages_ignored }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<h2>Metapackages</h2>
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading"><h3>Total</h3></div>
+			<div class="panel-body">
+				{{ repo_info.num_metapackages }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-success">
+			<div class="panel-heading"><h3>Newest</h3></div>
+			<div class="panel-body">
+				{{ repo_info.num_metapackages_newest }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-danger">
+			<div class="panel-heading"><h3>Outdated</h3></div>
+			<div class="panel-body">
+				{{ repo_info.num_metapackages_outdated }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3>Unique</h3></div>
+			<div class="panel-body">
+				{{ repo_info.num_metapackages_unique }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<h2>Maintainers</h2>
+
+<p>There are {{ repo_info.num_maintainers }} maintainers for this repository</p>
+
+{% if repo_info.num_problems %}
+<h2>Problems</h2>
+
+<p>There are <a href="{{ url_for('problems_for_repo', repo=repo) }}">{{ repo_info.num_problems }} known problems</a> for packages in this repository</p>
+{% endif %}
+
+</div>
+{% endblock %}
