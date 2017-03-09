@@ -1141,7 +1141,6 @@ class Database:
                 'num_maintainers': 0,
             }
 
-
     def GetRepositoriesHistoryAgo(self, seconds=60 * 60 * 24):
         self.cursor.execute("""
             SELECT
