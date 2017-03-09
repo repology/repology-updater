@@ -296,7 +296,8 @@ class Database:
 
                 last_update timestamp with time zone,
 
-                num_problems integer not null default 0
+                num_problems integer not null default 0,
+                num_maintainers integer not null default 0
             )
         """)
 
@@ -446,7 +447,8 @@ class Database:
                 num_metapackages_unique = 0,
                 num_metapackages_newest = 0,
                 num_metapackages_outdated = 0,
-                num_problems = 0
+                num_problems = 0,
+                num_maintainers = 0
         """)
         self.cursor.execute("""DELETE FROM problems""")
 
@@ -585,6 +587,26 @@ class Database:
                     num_packages_newest = EXCLUDED.num_packages_newest,
                     num_packages_outdated = EXCLUDED.num_packages_outdated,
                     num_packages_ignored = EXCLUDED.num_packages_ignored
+        """)
+
+        self.cursor.execute("""
+            INSERT
+                INTO repositories (
+                    name,
+                    num_maintainers
+                ) SELECT
+                    repo,
+                    count(DISTINCT maintainer)
+                FROM (
+                    SELECT
+                        repo,
+                        unnest(maintainers) as maintainer
+                    FROM packages
+                ) AS temp
+                GROUP BY repo
+                ON CONFLICT (name)
+                DO UPDATE SET
+                    num_maintainers = EXCLUDED.num_maintainers
         """)
 
         # metapackage stats
