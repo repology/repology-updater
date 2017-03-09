@@ -1061,7 +1061,8 @@ class Database:
                 num_metapackages_outdated,
                 last_update at time zone 'UTC',
                 now() - last_update,
-                num_problems
+                num_problems,
+                num_maintainers
             FROM repositories
         """)
 
@@ -1079,6 +1080,7 @@ class Database:
                 'last_update_utc': row[9],
                 'since_last_update': row[10],
                 'num_problems': row[11],
+                'num_maintainers': row[12],
             } for row in self.cursor.fetchall()
         ]
 
