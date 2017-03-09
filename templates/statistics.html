@@ -33,8 +33,9 @@
 			<th class="text-right" rowspan="2">Repository</th>
 			<th class="text-center" colspan="8">Metapackages</th>
 			<th class="text-center" colspan="4">Packages</th>
-			<th class="text-center" rowspan="2">Problems</th>
-			<th class="text-center" rowspan="2">Updated</th>
+			<th class="text-center" rowspan="2"><span title="Number of maintainers">Maint.</abbr></th>
+			<th class="text-center" rowspan="2"><span title="Number of problems">Probl.</abbr></th>
+			<th class="text-center" rowspan="2"><span title="Last updated this time ago">Upd. ago</abbr></th>
 		</tr>
 		<tr>
 			<th class="text-center">Total</th>
@@ -115,6 +116,14 @@
 			<td class="text-center version-cell version-big version-ignored">{{ repostat.num_packages_ignored }}</td>
 
 			<td class="text-center">
+			{%- if repostat.num_maintainers -%}
+				{{- repostat.num_maintainers -}}
+			{%- else -%}
+				?
+			{%- endif -%}
+			</td>
+
+			<td class="text-center">
 			{%- if repostat.num_problems -%}
 				<a href="{{ url_for("repository_problems", repo=repostat.name) }}">
 					{{- repostat.num_problems -}}
@@ -129,9 +138,9 @@
 				{% set minutes_since_update = (repostat.since_last_update.total_seconds() / 60) | int %}
 				<time datetime="{{ repostat.last_update_utc.strftime("%Y-%m-%dT%H:%M:%SZ") }}">
 				{% if minutes_since_update >= 120 %}
-					{{ minutes_since_update//60 }} hours(s) ago
+					{{ minutes_since_update//60 }}h
 				{% elif minutes_since_update >= 1 %}
-					{{ minutes_since_update }} minute(s) ago
+					{{ minutes_since_update }}m
 				{% else %}
 					just now
 				{% endif %}
