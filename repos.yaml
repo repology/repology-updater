@@ -66,8 +66,10 @@
       parser: PkgsrcIndex
       url: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
   repolinks:
-    - desc: Link
+    - desc: pkgsrc home
       url: https://www.pkgsrc.org/
+    - desc: pkgsrc.se
+      url: http://pkgsrc.se/
   packagelinks:
     - desc: CVSWeb
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
@@ -82,7 +84,9 @@
       parser: OpenBSDIndex
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
   repolinks:
-    - desc: Link
+    - desc: OpenBSD FAQ: Packages and Ports
+      url: https://www.openbsd.org/faq/faq15.html
+    - desc: openports.se
       url: http://openports.se/
   packagelinks:
     - desc: OpenPorts.se page
@@ -105,8 +109,10 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
-      url: https://packages.debian.org/
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in stable distribution
+      url: https://packages.debian.org/stable/
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/{name}'
@@ -123,8 +129,8 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
-      url: https://packages.debian.org/
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/{name}'
@@ -132,9 +138,6 @@
 
 - name: debian_testing
   desc: Debian Testing
-  repolinks:
-    - desc: Link
-      url: https://packages.debian.org/
   family: debuntu
   sources:
     - name: [ main, contrib, non-free ]
@@ -143,6 +146,11 @@
       url: 'http://ftp.debian.org/debian/dists/testing/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in testing distribution
+      url: https://packages.debian.org/testing/
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/{name}'
@@ -159,8 +167,10 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
-      url: https://packages.debian.org/
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in unstable distribution
+      url: https://packages.debian.org/unstable/
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}'
@@ -168,9 +178,6 @@
 
 - name: debian_experimental
   desc: Debian Experimental
-  repolinks:
-    - desc: Link
-      url: https://packages.debian.org/
   family: debuntu
   sources:
     - name: [ main, contrib, non-free ]
@@ -179,6 +186,9 @@
       url: 'http://ftp.debian.org/debian/dists/experimental/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/{name}'
@@ -198,8 +208,10 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Ubuntu packages
       url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in precise
+      url: http://packages.ubuntu.com/precise/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/precise/{name}'
@@ -216,8 +228,10 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Ubuntu packages
       url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in trusty
+      url: http://packages.ubuntu.com/trusty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/trusty/{name}'
@@ -234,8 +248,10 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Ubuntu packages
       url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in xenial
+      url: http://packages.ubuntu.com/xenial/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/xenial/{name}'
@@ -252,8 +268,10 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Ubuntu packages
       url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in yakkety
+      url: http://packages.ubuntu.com/yakkety/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/yakkety/{name}'
@@ -270,8 +288,10 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Ubuntu packages
       url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in zesty
+      url: http://packages.ubuntu.com/zesty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/zesty/{name}'
