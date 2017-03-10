@@ -424,7 +424,7 @@ class Database:
                 repo varchar(255) not null,
                 name varchar(255) not null,
                 effname varchar(255) not null,
-                maintainer varchar(255) not null,
+                maintainer varchar(255),
                 severity smallint not null default 1,
                 problem varchar(1024) not null
             )
@@ -677,7 +677,7 @@ class Database:
                     packages.repo,
                     packages.name,
                     packages.effname,
-                    unnest(packages.maintainers),
+                    case when packages.maintainers = '{}' then null else unnest(package.maintainers) end,
                     3,
                     'Homepage link "' ||
                         links.url ||
@@ -708,7 +708,7 @@ class Database:
                     repo,
                     name,
                     effname,
-                    unnest(maintainers),
+                    case when maintainers = '{}' then null else unnest(maintainers) end,
                     'Homepage link "' || homepage || '" should use https:// schema as GitHub is HTTPS-only.'
                 FROM packages
                 WHERE homepage LIKE 'http://github.com/%'
@@ -721,7 +721,7 @@ class Database:
                     repo,
                     name,
                     effname,
-                    unnest(maintainers),
+                    case when maintainers = '{}' then null else unnest(maintainers) end,
                     3,
                     'Homepage link "' || homepage || '" points to googlecode.com which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
                 FROM packages
