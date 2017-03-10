@@ -731,7 +731,7 @@
   desc: Rosa 2014.1
   family: rosa
   sources:
-    - name: [ main/release, main/testing, main/updates, nonfree/release, nonfree/testing, nonfree/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
+    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
       fetcher: File
       parser: RosaInfoXml
       url: 'http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
@@ -746,7 +746,7 @@
   desc: Rosa 2016.1
   family: rosa
   sources:
-    - name: [ main/release, main/testing, main/updates, nonfree/release, nonfree/testing, nonfree/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
+    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
       fetcher: File
       parser: RosaInfoXml
       url: 'http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
