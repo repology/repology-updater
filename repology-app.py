@@ -630,7 +630,8 @@ def repograph(repo, type_):
         },
         'metapackages_newest_percent': {
             'value': lambda s: s['num_metapackages_newest'] / s['num_metapackages'] * 100.0,
-            'color': '#5cb85c'
+            'color': '#5cb85c',
+            'suffix': '%'
         },
         'metapackages_outdated': {
             'value': lambda s: s['num_metapackages_outdated'],
@@ -638,7 +639,8 @@ def repograph(repo, type_):
         },
         'metapackages_outdated_percent': {
             'value': lambda s: s['num_metapackages_outdated'] / s['num_metapackages'] * 100.0,
-            'color': '#d9534f'
+            'color': '#d9534f',
+            'suffix': '%'
         },
         'metapackages_unique': {
             'value': lambda s: s['num_metapackages_unique'],
@@ -646,7 +648,8 @@ def repograph(repo, type_):
         },
         'metapackages_unique_percent': {
             'value': lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0,
-            'color': '#5bc0de'
+            'color': '#5bc0de',
+            'suffix': '%'
         },
         'problems': {
             'value': lambda s: s['num_problems'],
@@ -696,7 +699,7 @@ def repograph(repo, type_):
             gwidth=gwidth,
             gheight=gheight,
             points=g.GetPoints(period),
-            yticks=g.GetYTicks(),
+            yticks=g.GetYTicks(types[type_].get('suffix', '')),
             color=types[type_]['color'],
             numdays=numdays,
             x=lambda x: int((1.0 - x) * gwidth) + 0.5,

@@ -54,7 +54,7 @@ class GraphProcessor:
             ) for point in self.points
         ]
 
-    def GetYTicks(self):
+    def GetYTicks(self, suffix=''):
         if self.minval is None:
             return []
 
@@ -82,6 +82,6 @@ class GraphProcessor:
         return [
             (
                 (lowtick + step * n - self.minval) / (self.maxval - self.minval),
-                round(lowtick + step * n, rounding)
+                '{:.{}f}{}'.format(lowtick + step * n, rounding, suffix)
             ) for n in range(numticks)
         ]
