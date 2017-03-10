@@ -244,6 +244,8 @@ class Database:
         self.cursor.execute('DROP TABLE IF EXISTS packages CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS repositories CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS repositories_history CASCADE')
+        self.cursor.execute('DROP TABLE IF EXISTS statistics CASCADE')
+        self.cursor.execute('DROP TABLE IF EXISTS statistics_history CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS totals_history CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS links CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS problems CASCADE')
@@ -305,7 +307,29 @@ class Database:
         self.cursor.execute("""
             CREATE TABLE repositories_history (
                 ts timestamp with time zone not null primary key,
-                statistics jsonb not null
+                snapshot jsonb not null
+            )
+        """)
+
+        # statistics
+        self.cursor.execute("""
+            CREATE TABLE statistics (
+                num_packages integer not null default 0,
+                num_metapackages integer not null default 0,
+                num_problems integer not null default 0,
+                num_maintainers integer not null default 0
+            )
+        """)
+
+        self.cursor.execute("""
+            INSERT INTO statistics VALUES(DEFAULT)
+        """)
+
+        # statistics_history
+        self.cursor.execute("""
+            CREATE TABLE statistics_history (
+                ts timestamp with time zone not null primary key,
+                snapshot jsonb not null
             )
         """)
 
@@ -451,6 +475,15 @@ class Database:
                 num_maintainers = 0
         """)
         self.cursor.execute("""DELETE FROM problems""")
+        self.cursor.execute("""
+            UPDATE statistics
+            SET
+                num_packages = 0,
+                num_metapackages = 0,
+                num_problems = 0,
+                num_maintainers = 0
+            LIMIT 1
+        """)
 
     def AddPackages(self, packages):
         self.cursor.executemany(
@@ -743,6 +776,16 @@ class Database:
                 ON CONFLICT (name)
                 DO UPDATE SET
                     num_problems = EXCLUDED.num_problems
+        """)
+
+        # statistics
+        self.cursor.execute("""
+            UPDATE statistics
+            SET
+                num_packages = (SELECT count(*) FROM packages),
+                num_metapackages = (SELECT count(*) FROM metapackage_repocounts WHERE NOT shadow_only),
+                num_problems = (SELECT count(*) FROM problems),
+                num_maintainers = (SELECT count(*) FROM maintainers)
         """)
 
     def Commit(self):
@@ -1146,7 +1189,7 @@ class Database:
             SELECT
                 ts,
                 now() - ts,
-                jsonb_array_elements(statistics)
+                jsonb_array_elements(snapshot)
             FROM repositories_history
             WHERE ts IN (
                 SELECT
@@ -1173,7 +1216,7 @@ class Database:
             SELECT
                 ts,
                 now() - ts,
-                statistics
+                snapshot
             FROM repositories_history
             WHERE ts >= now() - INTERVAL %s
             ORDER BY ts
@@ -1184,7 +1227,28 @@ class Database:
             {
                 'timestamp': row[0],
                 'timedelta': row[1],
-                'statistics': row[2]
+                'snapshot': row[2]
+            }
+            for row in self.cursor.fetchall()
+        ]
+
+    def GetStatisticsHistoryPeriod(self, seconds=60 * 60 * 24, repo=None):
+        self.cursor.execute("""
+            SELECT
+                ts,
+                now() - ts,
+                snapshot
+            FROM statistics_history
+            WHERE ts >= now() - INTERVAL %s
+            ORDER BY ts
+        """, (datetime.timedelta(seconds=seconds),)
+        )
+
+        return [
+            {
+                'timestamp': row[0],
+                'timedelta': row[1],
+                'snapshot': row[2]
             }
             for row in self.cursor.fetchall()
         ]
@@ -1193,17 +1257,17 @@ class Database:
         self.cursor.execute(query, args)
         return self.cursor.fetchall()
 
-    def SnapshotRepositoriesHistory(self):
+    def SnapshotHistory(self):
         self.cursor.execute(
             """
             INSERT
             INTO repositories_history(
                 ts,
-                statistics
+                snapshot
             )
             SELECT
                 now(),
-                jsonb_object_agg(statistics_snapshot.name, to_jsonb(statistics_snapshot) - 'name')
+                jsonb_object_agg(snapshot.name, to_jsonb(snapshot) - 'name')
             FROM (
                 SELECT
                     name,
@@ -1214,7 +1278,25 @@ class Database:
                     num_problems,
                     num_maintainers
                 FROM repositories
-            ) AS statistics_snapshot
+            ) AS snapshot
+           """
+        )
+
+        self.cursor.execute(
+            """
+            INSERT
+            INTO statistics_history(
+                ts,
+                snapshot
+            )
+            SELECT
+                now(),
+                to_jsonb(snapshot)
+            FROM (
+                SELECT
+                    *
+                FROM statistics
+            ) AS snapshot
            """
         )
 

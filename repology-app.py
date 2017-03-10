@@ -683,11 +683,11 @@ def repograph(repo, type_):
     g = GraphProcessor()
 
     for histentry in get_db().GetRepositoriesHistoryPeriod(period):
-        if repo not in histentry['statistics']:
+        if repo not in histentry['snapshot']:
             continue
 
         try:
-            g.AddPoint(histentry['timedelta'], types[type_]['value'](histentry['statistics'][repo]))
+            g.AddPoint(histentry['timedelta'], types[type_]['value'](histentry['snapshot'][repo]))
         except:
             pass  # ignore missing keys, division errors etc.
 

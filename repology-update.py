@@ -111,7 +111,7 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
         database.ExtractLinks()
 
         db_logger.Log('updating history')
-        database.SnapshotRepositoriesHistory()
+        database.SnapshotHistory()
 
         db_logger.Log('committing changes')
         database.Commit()
