@@ -96,6 +96,7 @@
 - { name: cavez-of-phear,              setname: cavezofphear              }
 - { name: clipit-gtk3,                 setname: clipit                    }
 - { name: cbatticon-gtk2,              setname: cbatticon                 }
+- { name: [ccache-memcached, ccache-memcached-static, ccache-static], setname: ccache } # freebsd subpackages
 - { name: cdogs,                       setname: cdogs-sdl                 }
 - { name: [cdparanoia-iii,cdparanoia-overread], setname: cdparanoia       }
 - { name: cegui-mk2,                   setname: cegui,                    family: [ debuntu ]  }
@@ -828,6 +829,11 @@
 
 - { namepat: "cvsps[0-9]+",            setname: cvsps }
 
+- { namepat: "cyrus-imapd[0-9.-]+",    setname: cyrus-imapd }
+- { name: cyrus-imapd-ldap,            setname: cyrus-imapd }
+- { name: cyrus-imapd, verpat: "2\\..*", setname: cyrus-imapd2 }
+- { name: cyrus-imapd, verpat: "3\\..*", setname: cyrus-imapd3 }
+
 - { namepat: "db[0-9.]+",              setname: db }
 - { name: db, verpat: "6\\..*",        setname: db6 }
 - { name: db, verpat: "5\\..*",        setname: db5 }
@@ -1159,6 +1165,7 @@
 - { namepat: "(ruby:moneta)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:multipart-post)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mustermann)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:mustache)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-http-digest_auth)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-http-persistent)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-scp)[0-9._-]+", setname: "$1" }
