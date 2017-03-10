@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% import "macros.html" as macros %}
 
+{% block extrameta %}
+	<meta http-equiv="refresh" content="3600">
+{% endblock %}
+
 {% block title %}Repology: repository {{ repometadata[repo].desc }}{% endblock %}
 {% block header %}Repository <strong>{{ repometadata[repo].desc }}</strong>{% endblock %}
 {% block description %}Information on repository {{ repometadata[repo].desc }}{% endblock %}

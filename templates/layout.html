@@ -7,6 +7,8 @@
 	<meta name="description" content="{% block description %}Multiple package repositories analyzer{% endblock %}">
 	<meta name="keywords" content="{% block keywords %}repository, package, packages, version{% endblock %}">
 	<meta name="author" content="Dmitry Marakasov">
+{% block extrameta %}
+{% endblock %}
 	<title>{% block title %}Repology{% endblock %}</title>
 	<link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.css") }}">
 	<link rel="stylesheet" href="{{ url_for("static", filename="repology.css") }}">
