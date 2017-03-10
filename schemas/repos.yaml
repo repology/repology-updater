@@ -26,7 +26,7 @@ sequence:
             required: yes
             mapping:
               "name":
-                type: str
+                type: any
                 required: yes
               "fetcher":
                 type: str

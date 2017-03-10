@@ -34,6 +34,22 @@ class RepositoryManager:
     def __init__(self, repospath, statedir):
         with open(repospath) as reposfile:
             self.repositories = yaml.safe_load(reposfile)
+
+        # process source loops
+        for repo in self.repositories:
+            newsources = []
+            for source in repo['sources']:
+                if isinstance(source['name'], list):
+                    for name in source['name']:
+                        newsource = source.copy()
+                        for key in newsource.keys():
+                            if isinstance(newsource[key], str):
+                                newsource[key] = newsource[key].replace('{name}', name)
+                        newsource['name'] = name.replace('/', '_')
+                        newsources.append(newsource)
+                else:
+                    newsources.append(source)
+            repo['sources'] = newsources
         self.statedir = statedir
 
     def __GetRepoPath(self, repository):

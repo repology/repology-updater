@@ -87,24 +87,12 @@
   url: https://packages.debian.org/
   family: debuntu
   sources:
-    - name: contrib
+    - name: [ main, contrib, non-free ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/stable/contrib/source/Sources.gz
+      url: 'http://ftp.debian.org/debian/dists/stable/{name}/source/Sources.gz'
       compression: gz
-      subrepo: contrib
-    - name: main
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/stable/main/source/Sources.gz
-      compression: gz
-      subrepo: main
-    - name: non-free
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/stable/non-free/source/Sources.gz
-      compression: gz
-      subrepo: non-free
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/{name}'
@@ -115,24 +103,12 @@
   url: https://packages.debian.org/
   family: debuntu
   sources:
-    - name: contrib
+    - name: [ main, contrib, non-free ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/stable-backports/contrib/source/Sources.gz
+      url: 'http://ftp.debian.org/debian/dists/stable-backports/{name}/source/Sources.gz'
       compression: gz
-      subrepo: contrib
-    - name: main
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/stable-backports/main/source/Sources.gz
-      compression: gz
-      subrepo: main
-    - name: non-free
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/stable-backports/non-free/source/Sources.gz
-      compression: gz
-      subrepo: non-free
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/{name}'
@@ -143,24 +119,12 @@
   url: https://packages.debian.org/
   family: debuntu
   sources:
-    - name: contrib
+    - name: [ main, contrib, non-free ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/testing/contrib/source/Sources.gz
+      url: 'http://ftp.debian.org/debian/dists/testing/{name}/source/Sources.gz'
       compression: gz
-      subrepo: contrib
-    - name: main
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/testing/main/source/Sources.gz
-      compression: gz
-      subrepo: main
-    - name: non-free
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/testing/non-free/source/Sources.gz
-      compression: gz
-      subrepo: non-free
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/{name}'
@@ -171,24 +135,12 @@
   url: https://packages.debian.org/
   family: debuntu
   sources:
-    - name: contrib
+    - name: [ main, contrib, non-free ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/unstable/contrib/source/Sources.gz
+      url: 'http://ftp.debian.org/debian/dists/unstable/{name}/source/Sources.gz'
       compression: gz
-      subrepo: contrib
-    - name: main
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/unstable/main/source/Sources.gz
-      compression: gz
-      subrepo: main
-    - name: non-free
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/unstable/non-free/source/Sources.gz
-      compression: gz
-      subrepo: non-free
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}'
@@ -199,24 +151,12 @@
   url: https://packages.debian.org/
   family: debuntu
   sources:
-    - name: contrib
+    - name: [ main, contrib, non-free ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/experimental/contrib/source/Sources.xz
-      compression: xz
-      subrepo: contrib
-    - name: main
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/experimental/main/source/Sources.xz
-      compression: xz
-      subrepo: main
-    - name: non-free
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.debian.org/debian/dists/experimental/non-free/source/Sources.xz
-      compression: xz
-      subrepo: non-free
+      url: 'http://ftp.debian.org/debian/dists/experimental/{name}/source/Sources.gz'
+      compression: gz
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/{name}'
@@ -230,30 +170,12 @@
   url: http://packages.ubuntu.com/
   family: debuntu
   sources:
-    - name: main
+    - name: [ main, multiverse, restricted, universe ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/precise/main/source/Sources.gz
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/precise/{name}/source/Sources.gz'
       compression: gz
-      subrepo: main
-    - name: multiverse
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/precise/multiverse/source/Sources.gz
-      compression: gz
-      subrepo: multiverse
-    - name: restricted
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/precise/restricted/source/Sources.gz
-      compression: gz
-      subrepo: restricted
-    - name: universe
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/precise/universe/source/Sources.gz
-      compression: gz
-      subrepo: universe
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/precise/{name}'
@@ -264,30 +186,12 @@
   url: http://packages.ubuntu.com/
   family: debuntu
   sources:
-    - name: main
+    - name: [ main, multiverse, restricted, universe ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/trusty/main/source/Sources.gz
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/trusty/{name}/source/Sources.gz'
       compression: gz
-      subrepo: main
-    - name: multiverse
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/trusty/multiverse/source/Sources.gz
-      compression: gz
-      subrepo: multiverse
-    - name: restricted
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/trusty/restricted/source/Sources.gz
-      compression: gz
-      subrepo: restricted
-    - name: universe
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/trusty/universe/source/Sources.gz
-      compression: gz
-      subrepo: universe
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/trusty/{name}'
@@ -298,30 +202,12 @@
   url: http://packages.ubuntu.com/
   family: debuntu
   sources:
-    - name: main
+    - name: [ main, multiverse, restricted, universe ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/xenial/main/source/Sources.gz
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/xenial/{name}/source/Sources.gz'
       compression: gz
-      subrepo: main
-    - name: multiverse
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/xenial/multiverse/source/Sources.gz
-      compression: gz
-      subrepo: multiverse
-    - name: restricted
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/xenial/restricted/source/Sources.gz
-      compression: gz
-      subrepo: restricted
-    - name: universe
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/xenial/universe/source/Sources.gz
-      compression: gz
-      subrepo: universe
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/xenial/{name}'
@@ -332,30 +218,12 @@
   url: http://packages.ubuntu.com/
   family: debuntu
   sources:
-    - name: main
+    - name: [ main, multiverse, restricted, universe ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/main/source/Sources.gz
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/yakkety/{name}/source/Sources.gz'
       compression: gz
-      subrepo: main
-    - name: multiverse
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/multiverse/source/Sources.gz
-      compression: gz
-      subrepo: multiverse
-    - name: restricted
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/restricted/source/Sources.gz
-      compression: gz
-      subrepo: restricted
-    - name: universe
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/yakkety/universe/source/Sources.gz
-      compression: gz
-      subrepo: universe
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/yakkety/{name}'
@@ -366,30 +234,12 @@
   url: http://packages.ubuntu.com/
   family: debuntu
   sources:
-    - name: main
+    - name: [ main, multiverse, restricted, universe ]
       fetcher: File
       parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/zesty/main/source/Sources.gz
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/zesty/{name}/source/Sources.gz'
       compression: gz
-      subrepo: main
-    - name: multiverse
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/zesty/multiverse/source/Sources.gz
-      compression: gz
-      subrepo: multiverse
-    - name: restricted
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/zesty/restricted/source/Sources.gz
-      compression: gz
-      subrepo: restricted
-    - name: universe
-      fetcher: File
-      parser: DebianSources
-      url: http://ftp.ubuntu.com/ubuntu/dists/zesty/universe/source/Sources.gz
-      compression: gz
-      subrepo: universe
+      subrepo: '{name}'
   links:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/zesty/{name}'
@@ -403,24 +253,12 @@
   url: http://astralinux.com/
   family: debuntu
   sources:
-    - name: contrib
+    - name: [ main, contrib, non-free]
       fetcher: File
       parser: DebianSources
-      url: http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/contrib/source/Sources.gz
+      url: 'http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/{name}/source/Sources.gz'
       compression: gz
-      subrepo: contrib
-    - name: main
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/main/source/Sources.gz
-      compression: gz
-      subrepo: main
-    - name: non-free
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/non-free/source/Sources.gz
-      compression: gz
-      subrepo: non-free
+      subrepo: '{name}'
   tags: [ all, production ]
 
 ###########################################################################
@@ -431,48 +269,12 @@
   url: https://linuxmint.com/
   family: debuntu
   sources:
-    - name: backport
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File
       parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/backport/source/Sources.gz
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sarah/{name}/source/Sources.gz'
       compression: gz
-      subrepo: backport
-    - name: import
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/import/source/Sources.gz
-      compression: gz
-      subrepo: import
-    - name: main
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/main/source/Sources.gz
-      compression: gz
-      subrepo: main
-    - name: multiverse
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/multiverse/source/Sources.gz
-      compression: gz
-      subrepo: multiverse
-    - name: romeo
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/romeo/source/Sources.gz
-      compression: gz
-      subrepo: romeo
-    - name: universe
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/universe/source/Sources.gz
-      compression: gz
-      subrepo: universe
-    - name: upstream
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/sarah/upstream/source/Sources.gz
-      compression: gz
-      subrepo: upstream
+      subrepo: '{name}'
   tags: [ all, production, mint ]
 
 - name: linux_mint_18_1
@@ -480,48 +282,12 @@
   url: https://linuxmint.com/
   family: debuntu
   sources:
-    - name: backport
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File
       parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/backport/source/Sources.gz
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/serena/{name}/source/Sources.gz'
       compression: gz
-      subrepo: backport
-    - name: import
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/import/source/Sources.gz
-      compression: gz
-      subrepo: import
-    - name: main
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/main/source/Sources.gz
-      compression: gz
-      subrepo: main
-    - name: multiverse
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/multiverse/source/Sources.gz
-      compression: gz
-      subrepo: multiverse
-    - name: romeo
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/romeo/source/Sources.gz
-      compression: gz
-      subrepo: romeo
-    - name: universe
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/universe/source/Sources.gz
-      compression: gz
-      subrepo: universe
-    - name: upstream
-      fetcher: File
-      parser: DebianSources
-      url: http://mirror.yandex.ru/linuxmint-packages/dists/serena/upstream/source/Sources.gz
-      compression: gz
-      subrepo: upstream
+      subrepo: '{name}'
   tags: [ all, production, mint ]
 
 ###########################################################################
@@ -590,21 +356,11 @@
   url: https://www.archlinux.org/packages/
   family: arch
   sources:
-    - name: core
+    - name: [ core, extra, community ]
       fetcher: WgetTar
       parser: ArchDB
-      url: http://delta.archlinux.fr/core/os/x86_64/core.db.tar.gz
-      subrepo: core
-    - name: extra
-      fetcher: WgetTar
-      parser: ArchDB
-      url: http://delta.archlinux.fr/extra/os/x86_64/extra.db.tar.gz
-      subrepo: extra
-    - name: community
-      fetcher: WgetTar
-      parser: ArchDB
-      url: http://delta.archlinux.fr/community/os/x86_64/community.db.tar.gz
-      subrepo: community
+      url: 'http://delta.archlinux.fr/{name}/os/x86_64/{name}.db.tar.gz'
+      subrepo: '{name}'
   links:
     - desc: Git repository
       url: 'https://git.archlinux.org/svntogit/{subrepo}.git/tree/trunk?h=packages/{name}'
@@ -619,31 +375,11 @@
   url: https://www.parabola.nu/packages/
   family: arch
   sources:
-    - name: core
+    - name: [ core, extra, community, libre, pcr ]
       fetcher: WgetTar
       parser: ArchDB
-      url: https://repomirror.parabola.nu/core/os/x86_64/core.db.tar.gz
-      subrepo: core
-    - name: extra
-      fetcher: WgetTar
-      parser: ArchDB
-      url: https://repomirror.parabola.nu/extra/os/x86_64/extra.db.tar.gz
-      subrepo: extra
-    - name: community
-      fetcher: WgetTar
-      parser: ArchDB
-      url: https://repomirror.parabola.nu/community/os/x86_64/community.db.tar.gz
-      subrepo: community
-    - name: libre
-      fetcher: WgetTar
-      parser: ArchDB
-      url: https://repomirror.parabola.nu/libre/os/x86_64/libre.db.tar.gz
-      subrepo: libre
-    - name: pcr
-      fetcher: WgetTar
-      parser: ArchDB
-      url: https://repomirror.parabola.nu/pcr/os/x86_64/pcr.db.tar.gz
-      subrepo: pcr
+      url: 'https://repomirror.parabola.nu/{name}/os/x86_64/{name}.db.tar.gz'
+      subrepo: '{name}'
   links:
     - desc: Package search on parabola.nu
       # XXX: no support for repository
@@ -657,16 +393,11 @@
   url: https://www.parabola.nu/packages/
   family: arch
   sources:
-    - name: testing
+    - name: [ testing, libre-testing ]
       fetcher: WgetTar
       parser: ArchDB
-      url: https://repomirror.parabola.nu/testing/os/x86_64/testing.db.tar.gz
-      subrepo: testing
-    - name: libre-testing
-      fetcher: WgetTar
-      parser: ArchDB
-      url: https://repomirror.parabola.nu/libre-testing/os/x86_64/libre-testing.db.tar.gz
-      subrepo: libre-testing
+      url: 'https://repomirror.parabola.nu/{name}/os/x86_64/testing.db.tar.gz'
+      subrepo: '{name}'
   links:
     - desc: Package search on parabola.nu
       # XXX: no support for repository
@@ -746,16 +477,11 @@
   url: http://centos-packages.com/
   family: centos
   sources:
-    - name: os
+    - name: [ os, updates ]
       fetcher: Repodata
       parser: Repodata
-      url: http://vault.centos.org/centos/5/os/Source/
-      subrepo: os
-    - name: updates
-      fetcher: Repodata
-      parser: Repodata
-      url: http://vault.centos.org/centos/5/updates/Source/
-      subrepo: updates
+      url: 'http://vault.centos.org/centos/5/{name}/Source/'
+      subrepo: '{name}'
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/5/package/{name}/'
@@ -766,16 +492,11 @@
   url: http://centos-packages.com/
   family: centos
   sources:
-    - name: os
+    - name: [ os, updates ]
       fetcher: Repodata
       parser: Repodata
-      url: http://vault.centos.org/centos/6/os/Source/
-      subrepo: os
-    - name: updates
-      fetcher: Repodata
-      parser: Repodata
-      url: http://vault.centos.org/centos/6/updates/Source/
-      subrepo: updates
+      url: 'http://vault.centos.org/centos/6/{name}/Source/'
+      subrepo: '{name}'
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/6/package/{name}/'
@@ -786,16 +507,11 @@
   url: http://centos-packages.com/
   family: centos
   sources:
-    - name: os
+    - name: [ os, updates ]
       fetcher: Repodata
       parser: Repodata
-      url: http://vault.centos.org/centos/7/os/Source/
-      subrepo: os
-    - name: updates
-      fetcher: Repodata
-      parser: Repodata
-      url: http://vault.centos.org/centos/7/updates/Source/
-      subrepo: updates
+      url: 'http://vault.centos.org/centos/7/{name}/Source/'
+      subrepo: '{name}'
   links:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/7/package/{name}/'
@@ -857,15 +573,10 @@
   url: http://www.sisyphus.ru/en/
   family: sisyphus
   sources:
-    - name: noarch
+    - name: [ noarch, x86_64 ]
       fetcher: File
       parser: SrcList
-      url: http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/noarch/base/srclist.classic.xz
-      compression: xz
-    - name: x86_64
-      fetcher: File
-      parser: SrcList
-      url: http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/x86_64/base/srclist.classic.xz
+      url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/{name}/base/srclist.classic.xz'
       compression: xz
   links:
     - desc: Sisyphus package details
@@ -897,66 +608,12 @@
   url: http://en.rosalinux.com/
   family: rosa
   sources:
-    - name: main_release
+    - name: [ main/release, main/testing, main/updates, nonfree/release, nonfree/testing, nonfree/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
       fetcher: File
       parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/main/release/media_info/info.xml.lzma
+      url: 'http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/{name}/media_info/info.xml.lzma'
       compression: xz
-    - name: main_testing
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/main/testing/media_info/info.xml.lzma
-      compression: xz
-    - name: main_updates
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/main/updates/media_info/info.xml.lzma
-      compression: xz
-    - name: nonfree_release
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/non-free/release/media_info/info.xml.lzma
-      compression: xz
-    - name: nonfree_testing
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/non-free/testing/media_info/info.xml.lzma
-      compression: xz
-    - name: nonfree_updates
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/non-free/updates/media_info/info.xml.lzma
-      compression: xz
-    - name: restricted_release
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/restricted/release/media_info/info.xml.lzma
-      compression: xz
-    - name: restricted_testing
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/restricted/testing/media_info/info.xml.lzma
-      compression: xz
-    - name: restricted_updates
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/restricted/updates/media_info/info.xml.lzma
-      compression: xz
-    - name: contrib_release
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/contrib/release/media_info/info.xml.lzma
-      compression: xz
-    - name: contrib_testing
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/contrib/testing/media_info/info.xml.lzma
-      compression: xz
-    - name: contrib_updates
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/contrib/updates/media_info/info.xml.lzma
-      compression: xz
+      subrepo: '{name}'
   tags: [ all, production, rosa ]
 
 - name: rosa_2016_1
@@ -964,66 +621,12 @@
   url: http://en.rosalinux.com/
   family: rosa
   sources:
-    - name: main_release
+    - name: [ main/release, main/testing, main/updates, nonfree/release, nonfree/testing, nonfree/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
       fetcher: File
       parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/main/release/media_info/info.xml.lzma
+      url: 'http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/{name}/media_info/info.xml.lzma'
       compression: xz
-    - name: main_testing
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/main/testing/media_info/info.xml.lzma
-      compression: xz
-    - name: main_updates
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/main/updates/media_info/info.xml.lzma
-      compression: xz
-    - name: nonfree_release
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/non-free/release/media_info/info.xml.lzma
-      compression: xz
-    - name: nonfree_testing
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/non-free/testing/media_info/info.xml.lzma
-      compression: xz
-    - name: nonfree_updates
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/non-free/updates/media_info/info.xml.lzma
-      compression: xz
-    - name: restricted_release
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/restricted/release/media_info/info.xml.lzma
-      compression: xz
-    - name: restricted_testing
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/restricted/testing/media_info/info.xml.lzma
-      compression: xz
-    - name: restricted_updates
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/restricted/updates/media_info/info.xml.lzma
-      compression: xz
-    - name: contrib_release
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/contrib/release/media_info/info.xml.lzma
-      compression: xz
-    - name: contrib_testing
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/contrib/testing/media_info/info.xml.lzma
-      compression: xz
-    - name: contrib_updates
-      fetcher: File
-      parser: RosaInfoXml
-      url: http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/contrib/updates/media_info/info.xml.lzma
-      compression: xz
+      subrepo: '{name}'
   tags: [ all, production, rosa ]
 
 ###########################################################################
@@ -1126,21 +729,11 @@
   url: https://pkgs.alpinelinux.org/packages
   family: alpine
   sources:
-    - name: community
+    - name: [ community, main, testing ]
       fetcher: WgetTar
       parser: ApkIndex
-      url: http://dl-3.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
-      subrepo: community
-    - name: main
-      fetcher: WgetTar
-      parser: ApkIndex
-      url: http://dl-3.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
-      subrepo: main
-    - name: testing
-      fetcher: WgetTar
-      parser: ApkIndex
-      url: http://dl-3.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
-      subrepo: testing
+      url: 'http://dl-3.alpinelinux.org/alpine/edge/{name}/x86_64/APKINDEX.tar.gz'
+      subrepo: '{name}'
   tags: [ all, production ]
 
 ###########################################################################
@@ -1151,26 +744,11 @@
   url: https://crux.nu/portdb
   family: crux
   sources:
-    - name: core
+    - name: [ core, opt, xorg, contrib ]
       fetcher: Rsync
       parser: CRUX
-      url: crux.nu::ports/crux-3.2/core/
-      subrepo: core
-    - name: opt
-      fetcher: Rsync
-      parser: CRUX
-      url: crux.nu::ports/crux-3.2/opt/
-      subrepo: opt
-    - name: xorg
-      fetcher: Rsync
-      parser: CRUX
-      url: crux.nu::ports/crux-3.2/xorg/
-      subrepo: xorg
-    - name: contrib
-      fetcher: Rsync
-      parser: CRUX
-      url: crux.nu::ports/crux-3.2/contrib/
-      subrepo: contrib
+      url: 'crux.nu::ports/crux-3.2/{name}/'
+      subrepo: '{name}'
   tags: [ all, production, crux]
 
 - name: crux_33
@@ -1178,26 +756,11 @@
   url: https://crux.nu/portdb
   family: crux
   sources:
-    - name: core
+    - name: [ core, opt, xorg, contrib ]
       fetcher: Rsync
       parser: CRUX
-      url: crux.nu::ports/crux-3.3/core/
-      subrepo: core
-    - name: opt
-      fetcher: Rsync
-      parser: CRUX
-      url: crux.nu::ports/crux-3.3/opt/
-      subrepo: opt
-    - name: xorg
-      fetcher: Rsync
-      parser: CRUX
-      url: crux.nu::ports/crux-3.3/xorg/
-      subrepo: xorg
-    - name: contrib
-      fetcher: Rsync
-      parser: CRUX
-      url: crux.nu::ports/crux-3.3/contrib/
-      subrepo: contrib
+      url: 'crux.nu::ports/crux-3.3/{name}/'
+      subrepo: '{name}'
   tags: [ all, production, crux ]
 
 ###########################################################################
