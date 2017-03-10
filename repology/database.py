@@ -482,7 +482,6 @@ class Database:
                 num_metapackages = 0,
                 num_problems = 0,
                 num_maintainers = 0
-            LIMIT 1
         """)
 
     def AddPackages(self, packages):
