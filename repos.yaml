@@ -187,8 +187,8 @@
     - name: [ main, contrib, non-free ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.debian.org/debian/dists/experimental/{source}/source/Sources.gz'
-      compression: gz
+      url: 'http://ftp.debian.org/debian/dists/experimental/{source}/source/Sources.xz'
+      compression: xz
       subrepo: '{source}'
   repolinks:
     - desc: Debian packages
