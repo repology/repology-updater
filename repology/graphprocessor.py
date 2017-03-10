@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import math
+
 
 class GraphProcessor:
     def __init__(self):
@@ -61,17 +63,25 @@ class GraphProcessor:
 
         step = (self.maxval - self.minval) / 10
 
-        for roundedstep in (0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000):
+        for roundedstep in (0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000):
             if roundedstep > step:
                 step = roundedstep
                 break
 
-        lowtick = int((self.minval + step - 1) / step) * step
+        rounding = 0
+        if step < 0.01:
+            rounding = 3
+        if step < 0.1:
+            rounding = 2
+        if step < 1:
+            rounding = 1
+
+        lowtick = math.ceil(self.minval / step) * step
         numticks = int((self.maxval - lowtick) / step) + 1
 
         return [
             (
                 (lowtick + step * n - self.minval) / (self.maxval - self.minval),
-                lowtick + step * n
+                round(lowtick + step * n, rounding)
             ) for n in range(numticks)
         ]
