@@ -677,7 +677,7 @@ class Database:
                     packages.repo,
                     packages.name,
                     packages.effname,
-                    case when packages.maintainers = '{}' then null else unnest(package.maintainers) end,
+                    case when packages.maintainers = '{}' then null else unnest(packages.maintainers) end,
                     3,
                     'Homepage link "' ||
                         links.url ||
