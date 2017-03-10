@@ -11,7 +11,7 @@
       url: http://www.FreeBSD.org/ports/INDEX-11.bz2
       compression: bz2
   repolinks:
-    - desc: FreeBSD project home
+    - desc: FreeBSD home
       url: https://www.freebsd.org/
     - desc: About FreeBSD ports
       url: https://www.freebsd.org/ports/
@@ -40,6 +40,10 @@
       url: http://muscles.dragonflybsd.org/INDEX.bz2
       compression: bz2
   repolinks:
+    - desc: DragonFly BSD home
+      url: https://www.dragonflybsd.org/
+    - desc: DragonFly BSD DPorts howto
+      url: https://www.dragonflybsd.org/docs/howtos/HowToDPorts/
     - desc: DPorts repository on GitHub
       url: https://github.com/DragonFlyBSD/DPorts
   packagelinks:
@@ -311,7 +315,7 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Astra Linux home
       url: http://astralinux.com/
   tags: [ all, production ]
 
@@ -329,7 +333,7 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Linux Mint home
       url: https://linuxmint.com/
   tags: [ all, production, mint ]
 
@@ -344,7 +348,7 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Linux Mint home
       url: https://linuxmint.com/
   tags: [ all, production, mint ]
 
@@ -362,8 +366,12 @@
       compression: gz
       subrepo: main
   repolinks:
-    - desc: Link
+    - desc: KDE neon home
       url: https://neon.kde.org/
+    - desc: KDE neon git repositories
+      url: https://packaging.neon.kde.org/
+    - desc: KDE neon wiki
+      url: https://community.kde.org/Neon/Git
   tags: [ all, production ]
 
 ###########################################################################
@@ -379,10 +387,12 @@
       url: https://github.com/gentoo-mirror/gentoo.git
       branch: stable
   repolinks:
-    - desc: Link
+    - desc: Gentoo Linux home
+      url: https://gentoo.org/
+    - desc: Gentoo Packages
       url: https://packages.gentoo.org/
   packagelinks:
-    - desc: Package details on packages.gentoo.org
+    - desc: Package details
       url: 'https://packages.gentoo.org/packages/{category}/{name}'
     - desc: View ebuild
       url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{origversion}.ebuild'
@@ -397,7 +407,7 @@
       parser: GentooGit
       url: https://github.com/hasufell/games-overlay.git
   repolinks:
-    - desc: Link
+    - desc: Git repository
       url: https://github.com/hasufell/games-overlay
   tags: [ all ]
 
@@ -410,7 +420,7 @@
       parser: GentooGit
       url: https://anongit.gentoo.org/git/proj/gamerlay.git
   repolinks:
-    - desc: Link
+    - desc: Git repository
       url: https://cgit.gentoo.org/proj/gamerlay.git/
   tags: [ all ]
 
@@ -427,7 +437,9 @@
       url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Arch Linux home
+      url: https://www.archlinux.org/
+    - desc: Arch Linux Packages
       url: https://www.archlinux.org/packages/
   packagelinks:
     - desc: Git repository
@@ -448,13 +460,12 @@
       url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Parabola GNU/Linux-libre home
+      url: https://www.parabola.nu/
+    - desc: Parabola Packages
       url: https://www.parabola.nu/packages/
   packagelinks:
     - desc: Package search on parabola.nu
-      # XXX: no support for repository
-      # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
-      # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
       url: 'https://www.parabola.nu/packages/?q={name}'
   tags: [ all, production ]
 
@@ -468,13 +479,12 @@
       url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Parabola GNU/Linux-libre home
+      url: https://www.parabola.nu/
+    - desc: Parabola Packages
       url: https://www.parabola.nu/packages/
   packagelinks:
     - desc: Package search on parabola.nu
-      # XXX: no support for repository
-      # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
-      # XXX: https://www.archlinux.org/packages/{repository}/{arch}/0ad/
       url: 'https://www.parabola.nu/packages/?q={name}'
   tags: [ all, production ]
 
@@ -487,7 +497,7 @@
       parser: AUR
       url: https://aur.archlinux.org/
   repolinks:
-    - desc: Link
+    - desc: AUR Home
       url: https://aur.archlinux.org/
   packagelinks:
     - desc: AUR package details
@@ -510,7 +520,9 @@
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/releases/24/Everything/source/tree/
   repolinks:
-    - desc: Link
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
       url: https://apps.fedoraproject.org/packages/
   packagelinks:
     - desc: Package details on Fedora PkgDB
@@ -526,7 +538,9 @@
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/releases/25/Everything/source/tree/
   repolinks:
-    - desc: Link
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
       url: https://apps.fedoraproject.org/packages/
   packagelinks:
     - desc: Package details on Fedora PkgDB
@@ -542,7 +556,9 @@
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
   repolinks:
-    - desc: Link
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
       url: https://apps.fedoraproject.org/packages/
   packagelinks:
     - desc: Package details on Fedora PkgDB
@@ -562,7 +578,9 @@
       url: 'http://vault.centos.org/centos/5/{source}/Source/'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: CentOS home
+      url: https://www.centos.org/
+    - desc: CentOS packages
       url: http://centos-packages.com/
   packagelinks:
     - desc: Package details on centos-packages.com
@@ -579,8 +597,10 @@
       url: 'http://vault.centos.org/centos/6/{source}/Source/'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
-      url: http://centos-packages.com/
+    - desc: CentOS home
+      url: https://www.centos.org/
+    - desc: CentOS packages
+      url: http://centos-packages.com/6/
   packagelinks:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/6/package/{name}/'
@@ -596,8 +616,10 @@
       url: 'http://vault.centos.org/centos/7/{source}/Source/'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
-      url: http://centos-packages.com/
+    - desc: CentOS home
+      url: https://www.centos.org/
+    - desc: CentOS packages
+      url: http://centos-packages.com/7/
   packagelinks:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/7/package/{name}/'
@@ -615,7 +637,9 @@
       parser: Repodata
       url: https://mirrors.kernel.org/mageia/distrib/6/SRPMS/core/release/
   repolinks:
-    - desc: Link
+    - desc: Mageia home
+      url: https://www.mageia.org/en/
+    - desc: Mageia App Db
       url: https://madb.mageia.org/
   packagelinks:
     - desc: Package details on madb.mageia.org
@@ -631,7 +655,9 @@
       parser: Repodata
       url: https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/core/release/
   repolinks:
-    - desc: Link
+    - desc: Mageia home
+      url: https://www.mageia.org/en/
+    - desc: Mageia App Db
       url: https://madb.mageia.org/
   packagelinks:
     - desc: Package details on madb.mageia.org
@@ -650,7 +676,9 @@
       parser: Repodata
       url: http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
   repolinks:
-    - desc: Link
+    - desc: OpenSUSE home
+      url: https://www.opensuse.org/
+    - desc: OpenSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
     - desc: Package details
@@ -670,7 +698,7 @@
       url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/{source}/base/srclist.classic.xz'
       compression: xz
   repolinks:
-    - desc: Link
+    - desc: Sisyphus repository
       url: http://www.sisyphus.ru/en/
   packagelinks:
     - desc: Sisyphus package details
@@ -692,7 +720,7 @@
       url: http://distrib-coffee.ipsl.jussieu.fr/pub/linux/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
       compression: bz2
   repolinks:
-    - desc: Link
+    - desc: PCLinuxOS home
       url: http://www.pclinuxos.com/
   tags: [ all, production ]
 
@@ -710,7 +738,7 @@
       compression: xz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Rosa Linux home
       url: http://en.rosalinux.com/
   tags: [ all, production, rosa ]
 
@@ -725,7 +753,7 @@
       compression: xz
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Rosa Linux home
       url: http://en.rosalinux.com/
   tags: [ all, production, rosa ]
 
@@ -741,7 +769,9 @@
       parser: GoboLinuxGit
       url: https://github.com/gobolinux/Recipes.git
   repolinks:
-    - desc: Link
+    - desc: GoboLinux home
+      url: http://gobolinux.org/
+    - desc: GoboLinux recipes repository
       url: https://github.com/gobolinux/Recipes
   packagelinks:
     - desc: Git
@@ -760,7 +790,7 @@
       parser: YACPGit
       url: https://github.com/fd00/yacp.git
   repolinks:
-    - desc: Link
+    - desc: Yet Another Cygwin Ports GitHub repository
       url: https://github.com/fd00/yacp
   packagelinks:
     - desc: Git
@@ -779,7 +809,9 @@
       parser: Guix
       url: https://www.gnu.org/software/guix/packages/
   repolinks:
-    - desc: Link
+    - desc: GuixSD home
+      url: https://www.gnu.org/software/guix/
+    - desc: GuixSD packages
       url: https://www.gnu.org/software/guix/packages/
   tags: [ all, production ]
 
@@ -795,7 +827,9 @@
       parser: NixJson
       url: https://nixos.org/nixpkgs/packages.json.gz
   repolinks:
-    - desc: Link
+    - desc: NixOS home
+      url: http://nixos.org/
+    - desc: NixOS packages
       url: http://nixos.org/nixos/packages.html
   # XXX: add urls
   tags: [ all, production ]
@@ -809,7 +843,9 @@
       parser: NixJson
       url: https://nixos.org/nixpkgs/packages-unstable.json.gz
   repolinks:
-    - desc: Link
+    - desc: NixOS home
+      url: http://nixos.org/
+    - desc: NixOS packages
       url: http://nixos.org/nixos/packages.html
   # XXX: add urls
   tags: []
@@ -825,12 +861,12 @@
       fetcher: Git
       parser: SlackBuilds
       url: git://slackbuilds.org/slackbuilds
+  repolinks:
+    - desc: SlackBuilds.org
+      url: https://slackbuilds.org/
   packagelinks:
     - desc: Git
       url: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
-  repolinks:
-    - desc: Link
-      url: https://slackbuilds.org/
   tags: [ all, production, have_testdata ]
 
 ###########################################################################
@@ -846,7 +882,9 @@
       url: 'http://dl-3.alpinelinux.org/alpine/edge/{source}/x86_64/APKINDEX.tar.gz'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: Alpine Linux home
+      url: https://alpinelinux.org/
+    - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
   tags: [ all, production ]
 
@@ -863,7 +901,9 @@
       url: 'crux.nu::ports/crux-3.2/{source}/'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: CRUX home
+      url: https://crux.nu/
+    - desc: CRUX port browser
       url: https://crux.nu/portdb
   tags: [ all, production, crux]
 
@@ -877,7 +917,9 @@
       url: 'crux.nu::ports/crux-3.3/{source}/'
       subrepo: '{source}'
   repolinks:
-    - desc: Link
+    - desc: CRUX home
+      url: https://crux.nu/
+    - desc: CRUX port browser
       url: https://crux.nu/portdb
   tags: [ all, production, crux ]
 
@@ -894,7 +936,7 @@
       url: http://freshcode.club/feed/xfer.json
   shadow: true
   repolinks:
-    - desc: Link
+    - desc: freshcode.club
       url: http://freshcode.club/
   packagelinks:
     - desc: freshcode.club page
@@ -910,7 +952,7 @@
       parser: LibreGameWiki
       url: https://libregamewiki.org/New_games_and_releases
   repolinks:
-    - desc: Link
+    - desc: Libregamewiki
       url: https://libregamewiki.org/
   packagelinks:
     - desc: Libregamewiki entry
@@ -929,7 +971,7 @@
       parser: AnityaApi
       url: https://release-monitoring.org/api/projects
   repolinks:
-    - desc: Link
+    - desc: release-monitoring.org
       url: https://release-monitoring.org/
   packagelinks:
     - desc: release-monitoring.org entry
@@ -951,7 +993,9 @@
       compression: gz
   shadow: true
   repolinks:
-    - desc: Link
+    - desc: CPAN
+      url: http://cpan.org/
+    - desc: CPAN search
       url: http://search.cpan.org/
   packagelinks:
     - desc: CPAN page
@@ -968,7 +1012,7 @@
       url: https://pypi.python.org/pypi/
   shadow: true
   repolinks:
-    - desc: Link
+    - desc: PyPI - the Python Package Index
       url: https://pypi.python.org/pypi
   packagelinks:
     - desc: PyPi page
@@ -986,7 +1030,7 @@
       compression: gz
   shadow: true
   repolinks:
-    - desc: Link
+    - desc: RubyGems.org
       url: https://rubygems.org/
   packagelinks:
     - desc: RubyGems page
@@ -1003,7 +1047,7 @@
       url: https://hackage.haskell.org/packages/index.tar.gz
   shadow: true
   repolinks:
-    - desc: Link
+    - desc: Hackage
       url: https://hackage.haskell.org/
   packagelinks:
     - desc: Hackage page
@@ -1023,7 +1067,7 @@
       url: https://f-droid.org/repo/index.xml
   shadow: true
   repolinks:
-    - desc: Link
+    - desc: F-Droid
       url: https://f-droid.org/
   # XXX: link requires java class O_o
   tags: [ all, production ]
@@ -1038,7 +1082,7 @@
       url: https://chocolatey.org/api/v2/
   shadow: true
   repolinks:
-    - desc: Link
+    - desc: Chocolatey - the package manager for Windows
       url: https://chocolatey.org/
   packagelinks:
     - desc: Chocolatey package page
