@@ -1135,6 +1135,7 @@
 - { namepat: "(ruby:faraday_middleware)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:fast_gettext)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:fast_xs)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:fog-aws)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:fluentd)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:gherkin)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:glib2)[0-9._-]+", setname: "$1" }
@@ -1174,6 +1175,7 @@
 - { namepat: "(ruby:nio4r)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:nokogiri)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:parslet)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:progressbar)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:pry)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:puppet_forge)[0-9._-]+", setname: "$1" }
 - { name: "ruby:pygments_rb", setname: "ruby:pygments.rb" }
@@ -1202,6 +1204,7 @@
 - { namepat: "(ruby:tilt)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:treetop)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:trollop)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:typhoeus)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:tzinfo)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:uber)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:utilrb)[0-9._-]+", setname: "$1" }
