@@ -96,5 +96,33 @@
 <p>There are <a href="{{ url_for('repository_problems', repo=repo) }}">{{ repo_info.num_problems }} known problems</a> for packages in this repository</p>
 {% endif %}
 
+<h2>Graphs</h2>
+<h3>Total metapackages</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='metapackages_total') }}">
+
+<h3>Newest metapackages</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='metapackages_newest') }}">
+
+<h3>Newest metapackages percentage</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='metapackages_newest_percent') }}">
+
+<h3>Outdated metapackages</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='metapackages_outdated') }}">
+
+<h3>Outdated metapackages percentage</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='metapackages_outdated_percent') }}">
+
+<h3>Unique metapackages</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='metapackages_unique') }}">
+
+<h3>Unique metapackages percentage</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='metapackages_unique_percent') }}">
+
+<h3>Maintainers</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='maintainers') }}">
+
+<h3>Problems</h3>
+<img src="{{ url_for('repograph', repo=repo, type_='problems') }}">
+
 </div>
 {% endblock %}
