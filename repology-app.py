@@ -18,6 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+import time
 
 import flask
 
@@ -668,7 +669,8 @@ def repograph(repo, type_):
     if type_ not in types:
         flask.abort(404)
 
-    numdays = 14
+    # use autoscaling until history is filled
+    numdays = max(2, min(14, int((time.time() - 1489088664.24984) / 60 / 60 / 24) + 1))
     width = 1140
     height = 400
     gwidth = width - 50
