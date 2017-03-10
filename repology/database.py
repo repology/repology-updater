@@ -921,17 +921,22 @@ class Database:
         ]
 
     def GetPackagesCount(self):
-        self.cursor.execute("""SELECT count(*) FROM packages""")
+        self.cursor.execute("""SELECT num_packages FROM statistics LIMIT 1""")
 
         return self.cursor.fetchall()[0][0]
 
     def GetMetapackagesCount(self):
-        self.cursor.execute("""SELECT count(*) FROM metapackage_repocounts WHERE NOT shadow_only""")
+        self.cursor.execute("""SELECT num_metapackages FROM statistics LIMIT 1""")
 
         return self.cursor.fetchall()[0][0]
 
     def GetMaintainersCount(self):
-        self.cursor.execute("""SELECT count(*) FROM maintainers""")
+        self.cursor.execute("""SELECT num_maintainers FROM statistics LIMIT 1""")
+
+        return self.cursor.fetchall()[0][0]
+
+    def GetProblemsCount(self):
+        self.cursor.execute("""SELECT num_problems FROM statistics LIMIT 1""")
 
         return self.cursor.fetchall()[0][0]
 
