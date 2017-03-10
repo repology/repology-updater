@@ -163,6 +163,10 @@ class Package:
         CheckList(self.licenses, 'licenses', no_newlines=True, stripped=True)
         CheckList(self.downloads, 'downloads', no_whitespace=True)
 
+    def Sanitize(self):
+        if self.maintainers:
+            self.maintainers = sorted(set(self.maintainers))
+
     @property
     def __dict__(self):
         return {slot: getattr(self, slot) for slot in self.__slots__}

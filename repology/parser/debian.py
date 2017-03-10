@@ -73,9 +73,9 @@ class DebianSourcesParser():
                 elif line.startswith('Version: '):
                     pkg.version, pkg.origversion = SanitizeVersion(line[9:])
                 elif line.startswith('Maintainer: '):
-                    pkg.maintainers = list(set(pkg.maintainers + GetMaintainers(line[12:])))  # unicalize
+                    pkg.maintainers += GetMaintainers(line[12:])
                 elif line.startswith('Uploaders: '):
-                    pkg.maintainers = list(set(pkg.maintainers + GetMaintainers(line[11:])))  # unicalize
+                    pkg.maintainers += GetMaintainers(line[11:])
                 elif line.startswith('Section: '):
                     pkg.category = line[9:]
                 elif line.startswith('Homepage: '):
