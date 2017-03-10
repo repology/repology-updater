@@ -88,7 +88,7 @@
       parser: OpenBSDIndex
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
   repolinks:
-    - desc: OpenBSD FAQ: Packages and Ports
+    - desc: 'OpenBSD FAQ: Packages and Ports'
       url: https://www.openbsd.org/faq/faq15.html
     - desc: openports.se
       url: http://openports.se/
