@@ -315,7 +315,7 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: Astra Linux home
+    - desc: Astra Linux home (in Russian)
       url: http://astralinux.com/
   tags: [ all, production ]
 
