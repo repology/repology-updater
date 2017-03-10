@@ -934,11 +934,6 @@ class Database:
 
         return self.cursor.fetchall()[0][0]
 
-    def GetProblemsCount(self):
-        self.cursor.execute("""SELECT num_problems FROM statistics LIMIT 1""")
-
-        return self.cursor.fetchall()[0][0]
-
     def GetMaintainersRange(self):
         # should use min/max here, but these are slower on pgsql 9.6
         self.cursor.execute('SELECT maintainer FROM maintainers ORDER BY maintainer LIMIT 1')
