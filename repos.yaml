@@ -3,7 +3,6 @@
 ###########################################################################
 - name: freebsd
   desc: FreeBSD
-  url: https://www.freebsd.org/ports/
   family: freebsd
   sources:
     - name: INDEX-11
@@ -11,7 +10,14 @@
       parser: FreeBSDIndex
       url: http://www.FreeBSD.org/ports/INDEX-11.bz2
       compression: bz2
-  links:
+  repolinks:
+    - desc: FreeBSD project home
+      url: https://www.freebsd.org/
+    - desc: About FreeBSD ports
+      url: https://www.freebsd.org/ports/
+    - desc: FreshPorts - The Place For Ports
+      url: https://www.freshports.org/
+  packagelinks:
     - desc: FreshPorts page
       url: 'http://www.freshports.org/{category}/{name}'
     - desc: SVNWeb
@@ -26,7 +32,6 @@
 
 - name: dports
   desc: DPorts
-  url: https://github.com/DragonFlyBSD/DPorts
   family: freebsd
   sources:
     - name: INDEX
@@ -34,7 +39,10 @@
       parser: DPortsIndex
       url: http://muscles.dragonflybsd.org/INDEX.bz2
       compression: bz2
-  links:
+  repolinks:
+    - desc: DPorts repository on GitHub
+      url: https://github.com/DragonFlyBSD/DPorts
+  packagelinks:
     - desc: FreshPorts page
       url: 'http://www.freshports.org/{category}/{name}'
     - desc: SVNWeb
@@ -51,28 +59,32 @@
 
 - name: pkgsrc
   desc: pkgsrc
-  url: https://www.pkgsrc.org/
   family: pkgsrc
   sources:
     - name: INDEX
       fetcher: File
       parser: PkgsrcIndex
       url: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
-  links:
+  repolinks:
+    - desc: Link
+      url: https://www.pkgsrc.org/
+  packagelinks:
     - desc: CVSWeb
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
   tags: [ all, production ]
 
 - name: openbsd
   desc: OpenBSD
-  url: http://openports.se/
   family: openbsd
   sources:
     - name: INDEX
       fetcher: File
       parser: OpenBSDIndex
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://openports.se/
+  packagelinks:
     - desc: OpenPorts.se page
       url: 'http://openports.se/{category}/{name}'
     - desc: CVSWeb
@@ -84,7 +96,6 @@
 ###########################################################################
 - name: debian_stable
   desc: Debian Stable
-  url: https://packages.debian.org/
   family: debuntu
   sources:
     - name: [ main, contrib, non-free ]
@@ -93,14 +104,16 @@
       url: 'http://ftp.debian.org/debian/dists/stable/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: https://packages.debian.org/
+  packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/{name}'
   tags: [ all, production, debian ]
 
 - name: debian_stable_backports
   desc: Debian Stable Backports
-  url: https://packages.debian.org/
   family: debuntu
   sources:
     - name: [ main, contrib, non-free ]
@@ -109,14 +122,19 @@
       url: 'http://ftp.debian.org/debian/dists/stable-backports/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: https://packages.debian.org/
+  packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/{name}'
   tags: [ all, production, debian ]
 
 - name: debian_testing
   desc: Debian Testing
-  url: https://packages.debian.org/
+  repolinks:
+    - desc: Link
+      url: https://packages.debian.org/
   family: debuntu
   sources:
     - name: [ main, contrib, non-free ]
@@ -125,14 +143,13 @@
       url: 'http://ftp.debian.org/debian/dists/testing/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/{name}'
   tags: [ all, production, debian ]
 
 - name: debian_unstable
   desc: Debian Unstable
-  url: https://packages.debian.org/
   family: debuntu
   sources:
     - name: [ main, contrib, non-free ]
@@ -141,14 +158,19 @@
       url: 'http://ftp.debian.org/debian/dists/unstable/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: https://packages.debian.org/
+  packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}'
   tags: [ all, production, debian, have_testdata ]
 
 - name: debian_experimental
   desc: Debian Experimental
-  url: https://packages.debian.org/
+  repolinks:
+    - desc: Link
+      url: https://packages.debian.org/
   family: debuntu
   sources:
     - name: [ main, contrib, non-free ]
@@ -157,7 +179,7 @@
       url: 'http://ftp.debian.org/debian/dists/experimental/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/{name}'
   tags: [ all, production, debian ]
@@ -167,7 +189,6 @@
 ###########################################################################
 - name: ubuntu_precise
   desc: Ubuntu Precise
-  url: http://packages.ubuntu.com/
   family: debuntu
   sources:
     - name: [ main, multiverse, restricted, universe ]
@@ -176,14 +197,16 @@
       url: 'http://ftp.ubuntu.com/ubuntu/dists/precise/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://packages.ubuntu.com/
+  packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/precise/{name}'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_trusty
   desc: Ubuntu Trusty
-  url: http://packages.ubuntu.com/
   family: debuntu
   sources:
     - name: [ main, multiverse, restricted, universe ]
@@ -192,14 +215,16 @@
       url: 'http://ftp.ubuntu.com/ubuntu/dists/trusty/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://packages.ubuntu.com/
+  packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/trusty/{name}'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_xenial
   desc: Ubuntu Xenial
-  url: http://packages.ubuntu.com/
   family: debuntu
   sources:
     - name: [ main, multiverse, restricted, universe ]
@@ -208,14 +233,16 @@
       url: 'http://ftp.ubuntu.com/ubuntu/dists/xenial/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://packages.ubuntu.com/
+  packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/xenial/{name}'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_yakkety
   desc: Ubuntu Yakkety
-  url: http://packages.ubuntu.com/
   family: debuntu
   sources:
     - name: [ main, multiverse, restricted, universe ]
@@ -224,14 +251,16 @@
       url: 'http://ftp.ubuntu.com/ubuntu/dists/yakkety/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://packages.ubuntu.com/
+  packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/yakkety/{name}'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_zesty
   desc: Ubuntu Zesty
-  url: http://packages.ubuntu.com/
   family: debuntu
   sources:
     - name: [ main, multiverse, restricted, universe ]
@@ -240,7 +269,10 @@
       url: 'http://ftp.ubuntu.com/ubuntu/dists/zesty/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://packages.ubuntu.com/
+  packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/zesty/{name}'
   tags: [ all, production, ubuntu ]
@@ -250,7 +282,6 @@
 ###########################################################################
 - name: astra
   desc: Astra Linux Orel
-  url: http://astralinux.com/
   family: debuntu
   sources:
     - name: [ main, contrib, non-free]
@@ -259,6 +290,9 @@
       url: 'http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
+  repolinks:
+    - desc: Link
+      url: http://astralinux.com/
   tags: [ all, production ]
 
 ###########################################################################
@@ -266,7 +300,6 @@
 ###########################################################################
 - name: linux_mint_18
   desc: Linux Mint Sarah
-  url: https://linuxmint.com/
   family: debuntu
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
@@ -275,11 +308,13 @@
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sarah/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
+  repolinks:
+    - desc: Link
+      url: https://linuxmint.com/
   tags: [ all, production, mint ]
 
 - name: linux_mint_18_1
   desc: Linux Mint Serena
-  url: https://linuxmint.com/
   family: debuntu
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
@@ -288,6 +323,9 @@
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/serena/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
+  repolinks:
+    - desc: Link
+      url: https://linuxmint.com/
   tags: [ all, production, mint ]
 
 ###########################################################################
@@ -295,7 +333,6 @@
 ###########################################################################
 - name: kde_neon
   desc: KDE neon
-  url: https://neon.kde.org/
   family: debuntu
   sources:
     - name: main
@@ -304,6 +341,9 @@
       url: http://archive.neon.kde.org/user/dists/xenial/main/source/Sources.gz
       compression: gz
       subrepo: main
+  repolinks:
+    - desc: Link
+      url: https://neon.kde.org/
   tags: [ all, production ]
 
 ###########################################################################
@@ -311,7 +351,6 @@
 ###########################################################################
 - name: gentoo
   desc: Gentoo
-  url: https://packages.gentoo.org/
   family: gentoo
   sources:
     - name: gentoo
@@ -319,7 +358,10 @@
       parser: GentooGit
       url: https://github.com/gentoo-mirror/gentoo.git
       branch: stable
-  links:
+  repolinks:
+    - desc: Link
+      url: https://packages.gentoo.org/
+  packagelinks:
     - desc: Package details on packages.gentoo.org
       url: 'https://packages.gentoo.org/packages/{category}/{name}'
     - desc: View ebuild
@@ -328,24 +370,28 @@
 
 - name: gentoo_ovl_games
   desc: Gentoo Overlay Games
-  url: https://github.com/hasufell/games-overlay
   family: gentoo
   sources:
     - name: overlay
       fetcher: Git
       parser: GentooGit
       url: https://github.com/hasufell/games-overlay.git
+  repolinks:
+    - desc: Link
+      url: https://github.com/hasufell/games-overlay
   tags: [ all ]
 
 - name: gentoo_ovl_gamerlay
   desc: Gentoo Overlay Gamerlay
-  url: https://cgit.gentoo.org/proj/gamerlay.git/
   family: gentoo
   sources:
     - name: overlay
       fetcher: Git
       parser: GentooGit
       url: https://anongit.gentoo.org/git/proj/gamerlay.git
+  repolinks:
+    - desc: Link
+      url: https://cgit.gentoo.org/proj/gamerlay.git/
   tags: [ all ]
 
 ###########################################################################
@@ -353,7 +399,6 @@
 ###########################################################################
 - name: arch
   desc: Arch
-  url: https://www.archlinux.org/packages/
   family: arch
   sources:
     - name: [ core, extra, community ]
@@ -361,7 +406,10 @@
       parser: ArchDB
       url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: https://www.archlinux.org/packages/
+  packagelinks:
     - desc: Git repository
       url: 'https://git.archlinux.org/svntogit/{subrepo}.git/tree/trunk?h=packages/{name}'
     - desc: PKGBUILD
@@ -372,7 +420,6 @@
 
 - name: parabola
   desc: Parabola
-  url: https://www.parabola.nu/packages/
   family: arch
   sources:
     - name: [ core, extra, community, libre, pcr ]
@@ -380,7 +427,10 @@
       parser: ArchDB
       url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: https://www.parabola.nu/packages/
+  packagelinks:
     - desc: Package search on parabola.nu
       # XXX: no support for repository
       # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
@@ -390,7 +440,6 @@
 
 - name: parabola-testing
   desc: Parabola Testing
-  url: https://www.parabola.nu/packages/
   family: arch
   sources:
     - name: [ testing, libre-testing ]
@@ -398,7 +447,10 @@
       parser: ArchDB
       url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: https://www.parabola.nu/packages/
+  packagelinks:
     - desc: Package search on parabola.nu
       # XXX: no support for repository
       # XXX: https://git.archlinux.org/svntogit/{repository}.git/tree/trunk?h=packages/{name}
@@ -408,14 +460,16 @@
 
 - name: aur
   desc: AUR
-  url: https://aur.archlinux.org/
   family: arch
   sources:
     - name: aur
       fetcher: AUR
       parser: AUR
       url: https://aur.archlinux.org/
-  links:
+  repolinks:
+    - desc: Link
+      url: https://aur.archlinux.org/
+  packagelinks:
     - desc: AUR package details
       url: 'https://aur.archlinux.org/packages/{name}'
     - desc: View PKGBUILD
@@ -429,42 +483,48 @@
 ###########################################################################
 - name: fedora_24
   desc: Fedora 24
-  url: https://apps.fedoraproject.org/packages/
   family: fedora
   sources:
     - name: data
       fetcher: Repodata
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/releases/24/Everything/source/tree/
-  links:
+  repolinks:
+    - desc: Link
+      url: https://apps.fedoraproject.org/packages/
+  packagelinks:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_25
   desc: Fedora 25
-  url: https://apps.fedoraproject.org/packages/
   family: fedora
   sources:
     - name: data
       fetcher: Repodata
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/releases/25/Everything/source/tree/
-  links:
+  repolinks:
+    - desc: Link
+      url: https://apps.fedoraproject.org/packages/
+  packagelinks:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
   desc: Fedora Rawhide
-  url: https://apps.fedoraproject.org/packages/
   family: fedora
   sources:
     - name: data
       fetcher: Repodata
       parser: Repodata
       url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
-  links:
+  repolinks:
+    - desc: Link
+      url: https://apps.fedoraproject.org/packages/
+  packagelinks:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
@@ -474,7 +534,6 @@
 ###########################################################################
 - name: centos_5
   desc: CentOS 5
-  url: http://centos-packages.com/
   family: centos
   sources:
     - name: [ os, updates ]
@@ -482,14 +541,16 @@
       parser: Repodata
       url: 'http://vault.centos.org/centos/5/{source}/Source/'
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://centos-packages.com/
+  packagelinks:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/5/package/{name}/'
   tags: [ all, production, centos, rpm ]
 
 - name: centos_6
   desc: CentOS 6
-  url: http://centos-packages.com/
   family: centos
   sources:
     - name: [ os, updates ]
@@ -497,14 +558,16 @@
       parser: Repodata
       url: 'http://vault.centos.org/centos/6/{source}/Source/'
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://centos-packages.com/
+  packagelinks:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/6/package/{name}/'
   tags: [ all, production, centos, rpm ]
 
 - name: centos_7
   desc: CentOS 7
-  url: http://centos-packages.com/
   family: centos
   sources:
     - name: [ os, updates ]
@@ -512,7 +575,10 @@
       parser: Repodata
       url: 'http://vault.centos.org/centos/7/{source}/Source/'
       subrepo: '{source}'
-  links:
+  repolinks:
+    - desc: Link
+      url: http://centos-packages.com/
+  packagelinks:
     - desc: Package details on centos-packages.com
       url: 'http://centos-packages.com/7/package/{name}/'
   tags: [ all, production, centos, rpm ]
@@ -522,28 +588,32 @@
 ###########################################################################
 - name: mageia_6
   desc: Mageia 6
-  url: https://madb.mageia.org/
   family: mageia
   sources:
     - name: data
       fetcher: Repodata
       parser: Repodata
       url: https://mirrors.kernel.org/mageia/distrib/6/SRPMS/core/release/
-  links:
+  repolinks:
+    - desc: Link
+      url: https://madb.mageia.org/
+  packagelinks:
     - desc: Package details on madb.mageia.org
       url: 'https://madb.mageia.org/package/show/name/{name}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_cauldron
   desc: Mageia Cauldron
-  url: https://madb.mageia.org/
   family: mageia
   sources:
     - name: data
       fetcher: Repodata
       parser: Repodata
       url: https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/core/release/
-  links:
+  repolinks:
+    - desc: Link
+      url: https://madb.mageia.org/
+  packagelinks:
     - desc: Package details on madb.mageia.org
       url: 'https://madb.mageia.org/package/show/name/{name}'
   tags: [ all, production, mageia, rpm ]
@@ -553,14 +623,16 @@
 ###########################################################################
 - name: opensuse_tumbleweed
   desc: OpenSUSE Tumbleweed
-  url: https://software.opensuse.org/
   family: opensuse
   sources:
     - name: data
       fetcher: Repodata
       parser: Repodata
       url: http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
-  links:
+  repolinks:
+    - desc: Link
+      url: https://software.opensuse.org/
+  packagelinks:
     - desc: Package details
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]
@@ -570,7 +642,6 @@
 ###########################################################################
 - name: altsisyphus
   desc: ALT Sisyphus
-  url: http://www.sisyphus.ru/en/
   family: sisyphus
   sources:
     - name: [ noarch, x86_64 ]
@@ -578,7 +649,10 @@
       parser: SrcList
       url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/{source}/base/srclist.classic.xz'
       compression: xz
-  links:
+  repolinks:
+    - desc: Link
+      url: http://www.sisyphus.ru/en/
+  packagelinks:
     - desc: Sisyphus package details
       url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}'
     - desc: Spec file
@@ -590,7 +664,6 @@
 ###########################################################################
 - name: pclinuxos
   desc: PCLinuxOS
-  url: http://www.pclinuxos.com/
   family: pclinuxos
   sources:
     - name: srpms
@@ -598,6 +671,9 @@
       parser: SrcList
       url: http://distrib-coffee.ipsl.jussieu.fr/pub/linux/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
       compression: bz2
+  repolinks:
+    - desc: Link
+      url: http://www.pclinuxos.com/
   tags: [ all, production ]
 
 ###########################################################################
@@ -605,7 +681,6 @@
 ###########################################################################
 - name: rosa_2014_1
   desc: Rosa 2014.1
-  url: http://en.rosalinux.com/
   family: rosa
   sources:
     - name: [ main/release, main/testing, main/updates, nonfree/release, nonfree/testing, nonfree/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
@@ -614,11 +689,13 @@
       url: 'http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
       compression: xz
       subrepo: '{source}'
+  repolinks:
+    - desc: Link
+      url: http://en.rosalinux.com/
   tags: [ all, production, rosa ]
 
 - name: rosa_2016_1
   desc: Rosa 2016.1
-  url: http://en.rosalinux.com/
   family: rosa
   sources:
     - name: [ main/release, main/testing, main/updates, nonfree/release, nonfree/testing, nonfree/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
@@ -627,6 +704,9 @@
       url: 'http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
       compression: xz
       subrepo: '{source}'
+  repolinks:
+    - desc: Link
+      url: http://en.rosalinux.com/
   tags: [ all, production, rosa ]
 
 ###########################################################################
@@ -634,14 +714,16 @@
 ###########################################################################
 - name: gobolinux
   desc: GoboLinux
-  url: https://github.com/gobolinux/Recipes
   family: gobolinux
   sources:
     - name: recipes
       fetcher: Git
       parser: GoboLinuxGit
       url: https://github.com/gobolinux/Recipes.git
-  links:
+  repolinks:
+    - desc: Link
+      url: https://github.com/gobolinux/Recipes
+  packagelinks:
     - desc: Git
       url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}'
   tags: [ all, production, have_testdata ]
@@ -651,14 +733,16 @@
 ###########################################################################
 - name: yacp
   desc: YACP
-  url: https://github.com/fd00/yacp
   family: yacp
   sources:
     - name: yacp
       fetcher: Git
       parser: YACPGit
       url: https://github.com/fd00/yacp.git
-  links:
+  repolinks:
+    - desc: Link
+      url: https://github.com/fd00/yacp
+  packagelinks:
     - desc: Git
       url: 'https://github.com/fd00/yacp/tree/master/{name}'
   tags: [ all, production ]
@@ -668,12 +752,14 @@
 ###########################################################################
 - name: gnuguix
   desc: GNU Guix
-  url: https://www.gnu.org/software/guix/packages/
   family: guix
   sources:
     - name: guix
       fetcher: Guix
       parser: Guix
+      url: https://www.gnu.org/software/guix/packages/
+  repolinks:
+    - desc: Link
       url: https://www.gnu.org/software/guix/packages/
   tags: [ all, production ]
 
@@ -682,25 +768,29 @@
 ###########################################################################
 - name: nix_stable
   desc: nixpkgs stable
-  url: http://nixos.org/nixos/packages.html
   family: nix
   sources:
     - name: nix
       fetcher: File
       parser: NixJson
       url: https://nixos.org/nixpkgs/packages.json.gz
+  repolinks:
+    - desc: Link
+      url: http://nixos.org/nixos/packages.html
   # XXX: add urls
   tags: [ all, production ]
 
 - name: nix_unstable
   desc: nixpkgs unstable
-  url: http://nixos.org/nixos/packages.html
   family: nix
   sources:
     - name: nix
       fetcher: File
       parser: NixJson
       url: https://nixos.org/nixpkgs/packages-unstable.json.gz
+  repolinks:
+    - desc: Link
+      url: http://nixos.org/nixos/packages.html
   # XXX: add urls
   tags: []
 
@@ -709,16 +799,18 @@
 ###########################################################################
 - name: slackbuilds
   desc: SlackBuilds
-  url: https://slackbuilds.org/
   family: slackbuilds
   sources:
     - name: slackbuilds
       fetcher: Git
       parser: SlackBuilds
       url: git://slackbuilds.org/slackbuilds
-  links:
+  packagelinks:
     - desc: Git
       url: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
+  repolinks:
+    - desc: Link
+      url: https://slackbuilds.org/
   tags: [ all, production, have_testdata ]
 
 ###########################################################################
@@ -726,7 +818,6 @@
 ###########################################################################
 - name: alpine_edge
   desc: Alpine Linux Edge
-  url: https://pkgs.alpinelinux.org/packages
   family: alpine
   sources:
     - name: [ community, main, testing ]
@@ -734,6 +825,9 @@
       parser: ApkIndex
       url: 'http://dl-3.alpinelinux.org/alpine/edge/{source}/x86_64/APKINDEX.tar.gz'
       subrepo: '{source}'
+  repolinks:
+    - desc: Link
+      url: https://pkgs.alpinelinux.org/packages
   tags: [ all, production ]
 
 ###########################################################################
@@ -741,7 +835,6 @@
 ###########################################################################
 - name: crux_32
   desc: CRUX 3.2
-  url: https://crux.nu/portdb
   family: crux
   sources:
     - name: [ core, opt, xorg, contrib ]
@@ -749,11 +842,13 @@
       parser: CRUX
       url: 'crux.nu::ports/crux-3.2/{source}/'
       subrepo: '{source}'
+  repolinks:
+    - desc: Link
+      url: https://crux.nu/portdb
   tags: [ all, production, crux]
 
 - name: crux_33
   desc: CRUX 3.3
-  url: https://crux.nu/portdb
   family: crux
   sources:
     - name: [ core, opt, xorg, contrib ]
@@ -761,6 +856,9 @@
       parser: CRUX
       url: 'crux.nu::ports/crux-3.3/{source}/'
       subrepo: '{source}'
+  repolinks:
+    - desc: Link
+      url: https://crux.nu/portdb
   tags: [ all, production, crux ]
 
 ###########################################################################
@@ -768,7 +866,6 @@
 ###########################################################################
 - name: freshcode
   desc: freshcode.club
-  url: http://freshcode.club/
   family: freshcode
   sources:
     - name: feed
@@ -776,21 +873,26 @@
       parser: Freshcode
       url: http://freshcode.club/feed/xfer.json
   shadow: true
-  links:
+  repolinks:
+    - desc: Link
+      url: http://freshcode.club/
+  packagelinks:
     - desc: freshcode.club page
       url: 'http://freshcode.club/projects/{name}'
   tags: [ all, production ]
 
 - name: libregamewiki
   desc: Libregamewiki
-  url: https://libregamewiki.org/
   family: libregamewiki
   sources:
     - name: newreleases
       fetcher: File
       parser: LibreGameWiki
       url: https://libregamewiki.org/New_games_and_releases
-  links:
+  repolinks:
+    - desc: Link
+      url: https://libregamewiki.org/
+  packagelinks:
     - desc: Libregamewiki entry
       url: 'https://libregamewiki.org/{name}'
   tags: [ all, production ]
@@ -800,14 +902,16 @@
 ###########################################################################
 - name: release_monitoring
   desc: release-monitoring.org
-  url: https://release-monitoring.org/
   family: anitya
   sources:
     - name: release-monitoring.org
       fetcher: File
       parser: AnityaApi
       url: https://release-monitoring.org/api/projects
-  links:
+  repolinks:
+    - desc: Link
+      url: https://release-monitoring.org/
+  packagelinks:
     - desc: release-monitoring.org entry
       url: 'https://release-monitoring.org/project/{name}/'
   shadow: true
@@ -818,7 +922,6 @@
 ###########################################################################
 - name: cpan
   desc: CPAN
-  url: http://search.cpan.org/
   family: cpan
   sources:
     - name: CPAN
@@ -827,14 +930,16 @@
       url: http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
       compression: gz
   shadow: true
-  links:
+  repolinks:
+    - desc: Link
+      url: http://search.cpan.org/
+  packagelinks:
     - desc: CPAN page
       url: 'http://search.cpan.org/dist/{name}'
   tags: [ all, production, have_testdata ]
 
 - name: pypi
   desc: PyPi
-  url: https://pypi.python.org/pypi
   family: pypi
   sources:
     - name: PyPi
@@ -842,14 +947,16 @@
       parser: PyPiHTML
       url: https://pypi.python.org/pypi/
   shadow: true
-  links:
+  repolinks:
+    - desc: Link
+      url: https://pypi.python.org/pypi
+  packagelinks:
     - desc: PyPi page
       url: 'https://pypi.python.org/pypi/{name}/'
   tags: [ all, production ]
 
 - name: rubygems
   desc: RubyGems
-  url: https://rubygems.org/
   family: rubygems
   sources:
     - name: latest_specs.4.8
@@ -858,14 +965,16 @@
       url: https://api.rubygems.org/latest_specs.4.8.gz
       compression: gz
   shadow: true
-  links:
+  repolinks:
+    - desc: Link
+      url: https://rubygems.org/
+  packagelinks:
     - desc: RubyGems page
       url: 'https://www.rubygems.org/gems/{name}/'
   tags: [ all, production ]
 
 - name: hackage
   desc: Hackage
-  url: https://hackage.haskell.org/
   family: hackage
   sources:
     - name: hackage
@@ -873,7 +982,10 @@
       parser: Hackage
       url: https://hackage.haskell.org/packages/index.tar.gz
   shadow: true
-  links:
+  repolinks:
+    - desc: Link
+      url: https://hackage.haskell.org/
+  packagelinks:
     - desc: Hackage page
       url: 'http://hackage.haskell.org/package/{name}'
   tags: [ all, production ]
@@ -883,20 +995,21 @@
 ###########################################################################
 - name: fdroid
   desc: F-Droid
-  url: https://f-droid.org/
   family: fdroid
   sources:
     - name: F-Droid
       fetcher: File
       parser: FDroid
       url: https://f-droid.org/repo/index.xml
-  # XXX: link requires java class O_o
   shadow: true
+  repolinks:
+    - desc: Link
+      url: https://f-droid.org/
+  # XXX: link requires java class O_o
   tags: [ all, production ]
 
 - name: chocolatey
   desc: Chocolatey
-  url: https://chocolatey.org/
   family: chocolatey
   sources:
     - name: chocolatey
@@ -904,7 +1017,10 @@
       parser: Chocolatey
       url: https://chocolatey.org/api/v2/
   shadow: true
-  links:
+  repolinks:
+    - desc: Link
+      url: https://chocolatey.org/
+  packagelinks:
     - desc: Chocolatey package page
       url: 'https://chocolatey.org/packages/{name}'
   tags: [ all, production ]

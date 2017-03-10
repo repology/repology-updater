@@ -13,10 +13,14 @@
 {% block content %}
 <div class="container">
 
-{%- if repometadata[repo].url -%}
-<h2>Link</h2>
-<ul><li><a href="{{ repometadata[repo].url }}">{{ repometadata[repo].url }}</a></li></ul>
-{%- endif -%}
+{% if repometadata[repo].repolinks %}
+<h2>Links</h2>
+<ul>
+{% for link in repometadata[repo].repolinks %}
+	<li><a href="{{ link.url }}">{{ link.desc }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
 
 <h2>Packages</h2>
 <div class="row">

@@ -11,10 +11,6 @@ sequence:
       "desc":
         type: str
         required: yes
-      "url":
-        type: str
-        required: yes
-        pattern: /^https?:\/\/[^/]+/.*$/
       "family":
         type: str
         required: yes
@@ -49,7 +45,21 @@ sequence:
       "shadow":
         type: bool
         required: no
-      "links":
+      "repolinks":
+        type: seq
+        required: no
+        sequence:
+          - type: map
+            required: yes
+            mapping:
+              "desc":
+                type: str
+                required: yes
+              "url":
+                type: str
+                required: yes
+                pattern: /^https?:\/\/[^/]+/.*$/
+      "packagelinks":
         type: seq
         required: no
         sequence:

@@ -70,10 +70,10 @@
 					</ul>
 				</li>
 			{% endif %}
-			{% if repometadata[package.repo].links %}
+			{% if repometadata[package.repo].packagelinks %}
 				<li class="list-group-item"><b>Package-related links:</b>
 					<ul class="list-package-details">
-					{% for link in repometadata[package.repo].links %}
+					{% for link in repometadata[package.repo].packagelinks %}
 						<li><a href="{{ link.url|pkg_format(package) }}">{{ link.desc }}</a></li>
 					{% endfor %}
 					</ul>
