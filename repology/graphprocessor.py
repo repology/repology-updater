@@ -71,9 +71,9 @@ class GraphProcessor:
         rounding = 0
         if step < 0.01:
             rounding = 3
-        if step < 0.1:
+        elif step < 0.1:
             rounding = 2
-        if step < 1:
+        elif step < 1:
             rounding = 1
 
         lowtick = math.ceil(self.minval / step) * step
