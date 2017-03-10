@@ -1210,7 +1210,7 @@ class Database:
             for row in self.cursor.fetchall()
         ]
 
-    def GetRepositoriesHistoryPeriod(self, seconds=60 * 60 * 24, repo=None):
+    def GetRepositoriesHistoryPeriod(self, seconds=60 * 60 * 24):
         self.cursor.execute("""
             SELECT
                 ts,
@@ -1231,7 +1231,7 @@ class Database:
             for row in self.cursor.fetchall()
         ]
 
-    def GetStatisticsHistoryPeriod(self, seconds=60 * 60 * 24, repo=None):
+    def GetStatisticsHistoryPeriod(self, seconds=60 * 60 * 24):
         self.cursor.execute("""
             SELECT
                 ts,

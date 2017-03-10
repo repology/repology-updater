@@ -155,5 +155,19 @@
 </table>
 </div>
 
+<h2>Graphs</h2>
+
+<h3>Packages</h3>
+<img src="{{ url_for('graph_total_packages') }}">
+
+<h3>Metapackages</h3>
+<img src="{{ url_for('graph_total_metapackages') }}">
+
+<h3>Maintainers</h3>
+<img src="{{ url_for('graph_total_maintainers') }}">
+
+<h3>Problems</h3>
+<img src="{{ url_for('graph_total_problems') }}">
+
 </div> {#- container #}
 {% endblock %}

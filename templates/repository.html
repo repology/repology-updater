@@ -106,31 +106,31 @@
 
 <h2>Graphs</h2>
 <h3>Total metapackages</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='metapackages_total') }}">
+<img src="{{ url_for('graph_repo_metapackages_total', repo=repo) }}">
 
 <h3>Newest metapackages</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='metapackages_newest') }}">
+<img src="{{ url_for('graph_repo_metapackages_newest', repo=repo) }}">
 
 <h3>Newest metapackages percentage</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='metapackages_newest_percent') }}">
+<img src="{{ url_for('graph_repo_metapackages_newest_percent', repo=repo) }}">
 
 <h3>Outdated metapackages</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='metapackages_outdated') }}">
+<img src="{{ url_for('graph_repo_metapackages_outdated', repo=repo) }}">
 
 <h3>Outdated metapackages percentage</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='metapackages_outdated_percent') }}">
+<img src="{{ url_for('graph_repo_metapackages_outdated_percent', repo=repo) }}">
 
 <h3>Unique metapackages</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='metapackages_unique') }}">
+<img src="{{ url_for('graph_repo_metapackages_unique', repo=repo) }}">
 
 <h3>Unique metapackages percentage</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='metapackages_unique_percent') }}">
+<img src="{{ url_for('graph_repo_metapackages_unique_percent', repo=repo) }}">
 
 <h3>Maintainers</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='maintainers') }}">
+<img src="{{ url_for('graph_repo_maintainers', repo=repo) }}">
 
 <h3>Problems</h3>
-<img src="{{ url_for('repograph', repo=repo, type_='problems') }}">
+<img src="{{ url_for('graph_repo_problems', repo=repo) }}">
 
 </div>
 {% endblock %}

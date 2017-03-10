@@ -614,64 +614,7 @@ def statistics(sorting=None):
     )
 
 
-@app.route('/graph/repo/<repo>/<type_>.svg')
-def repograph(repo, type_):
-    if repo not in reponames:
-        flask.abort(404)
-
-    types = {
-        'metapackages_total': {
-            'value': lambda s: s['num_metapackages'],
-            'color': '#000000'
-        },
-        'metapackages_newest': {
-            'value': lambda s: s['num_metapackages_newest'],
-            'color': '#5cb85c'
-        },
-        'metapackages_newest_percent': {
-            'value': lambda s: s['num_metapackages_newest'] / s['num_metapackages'] * 100.0,
-            'color': '#5cb85c',
-            'suffix': '%'
-        },
-        'metapackages_outdated': {
-            'value': lambda s: s['num_metapackages_outdated'],
-            'color': '#d9534f'
-        },
-        'metapackages_outdated_percent': {
-            'value': lambda s: s['num_metapackages_outdated'] / s['num_metapackages'] * 100.0,
-            'color': '#d9534f',
-            'suffix': '%'
-        },
-        'metapackages_unique': {
-            'value': lambda s: s['num_metapackages_unique'],
-            'color': '#5bc0de'
-        },
-        'metapackages_unique_percent': {
-            'value': lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0,
-            'color': '#5bc0de',
-            'suffix': '%'
-        },
-        'problems': {
-            'value': lambda s: s['num_problems'],
-            'color': '#c00000'
-        },
-        'problems_per_metapackage': {
-            'value': lambda s: s['num_problems'] / s['num_metapackages'],
-            'color': '#c00000'
-        },
-        'maintainers': {
-            'value': lambda s: s['num_maintainers'],
-            'color': '#00c0c0'
-        },
-        'metapackages_per_maintainer': {
-            'value': lambda s: s['num_metapackages'] / s['num_maintainers'],
-            'color': '#00c0c0'
-        },
-    }
-
-    if type_ not in types:
-        flask.abort(404)
-
+def graph_generic(getgraph, color, suffix=''):
     # use autoscaling until history is filled
     numdays = max(2, min(14, int((time.time() - 1489088664.24984) / 60 / 60 / 24) + 1))
     width = 1140
@@ -680,16 +623,7 @@ def repograph(repo, type_):
     gheight = height - 20
     period = 60 * 60 * 24 * numdays
 
-    g = GraphProcessor()
-
-    for histentry in get_db().GetRepositoriesHistoryPeriod(period):
-        if repo not in histentry['snapshot']:
-            continue
-
-        try:
-            g.AddPoint(histentry['timedelta'], types[type_]['value'](histentry['snapshot'][repo]))
-        except:
-            pass  # ignore missing keys, division errors etc.
+    graph = getgraph(period)
 
     return (
         flask.render_template(
@@ -698,15 +632,123 @@ def repograph(repo, type_):
             height=height,
             gwidth=gwidth,
             gheight=gheight,
-            points=g.GetPoints(period),
-            yticks=g.GetYTicks(types[type_].get('suffix', '')),
-            color=types[type_]['color'],
+            points=graph.GetPoints(period),
+            yticks=graph.GetYTicks(suffix),
+            color=color,
             numdays=numdays,
             x=lambda x: int((1.0 - x) * gwidth) + 0.5,
             y=lambda y: int(10.0 + (1.0 - y) * (gheight - 20.0)) + 0.5,
         ),
         {'Content-type': 'image/svg+xml'}
     )
+
+
+def graph_repo_generic(repo, getvalue, color, suffix=''):
+    if repo not in reponames:
+        flask.abort(404)
+
+    def GetGraph(period):
+        graph = GraphProcessor()
+
+        for histentry in get_db().GetRepositoriesHistoryPeriod(period):
+            try:
+                graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot'][repo]))
+            except:
+                pass  # ignore missing keys, division errors etc.
+
+        return graph
+
+    return graph_generic(GetGraph, color, suffix)
+
+
+def graph_total_generic(getvalue, color, suffix=''):
+    def GetGraph(period):
+        graph = GraphProcessor()
+
+        for histentry in get_db().GetStatisticsHistoryPeriod(period):
+            try:
+                graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot']))
+            except:
+                pass  # ignore missing keys, division errors etc.
+
+        return graph
+
+    return graph_generic(GetGraph, color, suffix)
+
+
+@app.route('/graph/repo/<repo>/metapackages_total.svg')
+def graph_repo_metapackages_total(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages'], '#000000')
+
+
+@app.route('/graph/repo/<repo>/metapackages_newest.svg')
+def graph_repo_metapackages_newest(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_newest'], '#5cb85c')
+
+
+@app.route('/graph/repo/<repo>/metapackages_newest_percent.svg')
+def graph_repo_metapackages_newest_percent(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_newest'] / s['num_metapackages'] * 100.0, '#5cb85c', '%')
+
+
+@app.route('/graph/repo/<repo>/metapackages_outdated.svg')
+def graph_repo_metapackages_outdated(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_outdated'], '#d9534f')
+
+
+@app.route('/graph/repo/<repo>/metapackages_outdated_percent.svg')
+def graph_repo_metapackages_outdated_percent(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_outdated'] / s['num_metapackages'] * 100.0, '#d9534f', '%')
+
+
+@app.route('/graph/repo/<repo>/metapackages_unique.svg')
+def graph_repo_metapackages_unique(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'], '#5bc0de')
+
+
+@app.route('/graph/repo/<repo>/metapackages_unique_percent.svg')
+def graph_repo_metapackages_unique_percent(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0, '#5bc0de', '%')
+
+
+@app.route('/graph/repo/<repo>/problems.svg')
+def graph_repo_problems(repo):
+    return graph_repo_generic(repo, lambda s: s['num_problems'], '#c00000')
+
+
+@app.route('/graph/repo/<repo>/problems_per_metapackage.svg')
+def graph_repo_problems_per_metapackage(repo):
+    return graph_repo_generic(repo, lambda s: s['num_problems'] / s['num_metapackages'], '#c00000')
+
+
+@app.route('/graph/repo/<repo>/maintainers.svg')
+def graph_repo_maintainers(repo):
+    return graph_repo_generic(repo, lambda s: s['num_maintainers'], '#00c0c0')
+
+
+@app.route('/graph/repo/<repo>/packages_per_maintainer.svg')
+def graph_repo_packages_per_maintainer(repo):
+    return graph_repo_generic(repo, lambda s: s['num_packages'] / s['num_maintainers'], '#00c0c0')
+
+
+@app.route('/graph/total/packages.svg')
+def graph_total_packages():
+    return graph_total_generic(lambda s: s['num_packages'], '#000000')
+
+
+@app.route('/graph/total/metapackages.svg')
+def graph_total_metapackages():
+    return graph_total_generic(lambda s: s['num_metapackages'], '#000000')
+
+
+@app.route('/graph/total/maintainers.svg')
+def graph_total_maintainers():
+    return graph_total_generic(lambda s: s['num_maintainers'], '#00c0c0')
+
+
+@app.route('/graph/total/problems.svg')
+def graph_total_problems():
+    return graph_total_generic(lambda s: s['num_problems'], '#c00000')
 
 
 @app.route('/api/v1/metapackage/<name>')
