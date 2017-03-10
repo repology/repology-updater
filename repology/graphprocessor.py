@@ -59,7 +59,19 @@ class GraphProcessor:
             return []
 
         if self.minval == self.maxval:
-            return [(0.5, self.points[0][1])]
+            value = self.points[0][1]
+
+            rounding = 0
+            if isinstance(value, int):
+                pass
+            elif value < 0.1:
+                rounding = 3
+            elif value < 1:
+                rounding = 2
+            elif value < 10:
+                rounding = 1
+
+            return [(0.5, '{:.{}f}{}'.format(value, rounding, suffix))]
 
         step = (self.maxval - self.minval) / 10
 
