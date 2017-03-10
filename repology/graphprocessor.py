@@ -61,14 +61,17 @@ class GraphProcessor:
 
         step = (self.maxval - self.minval) / 10
 
-        for roundedstep in (1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000):
+        for roundedstep in (0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000):
             if roundedstep > step:
                 step = roundedstep
                 break
 
+        lowtick = int((self.minval + step - 1) / step) * step
+        numticks = int((self.maxval - lowtick) / step) + 1
+
         return [
             (
-                (val - self.minval) / (self.maxval - self.minval),
-                val
-            ) for val in range(((self.minval + step - 1) // step) * step, self.maxval + 1, step)
+                (lowtick + step * n - self.minval) / (self.maxval - self.minval),
+                lowtick + step * n
+            ) for n in range(numticks)
         ]
