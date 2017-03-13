@@ -70,7 +70,7 @@ app.jinja_env.globals['reponames'] = reponames
 
 def get_db():
     if not hasattr(flask.g, 'database'):
-        flask.g.database = Database(app.config['DSN'], readonly=True)
+        flask.g.database = Database(app.config['DSN'], readonly=False, autocommit=True)
     return flask.g.database
 
 

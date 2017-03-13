@@ -234,10 +234,9 @@ class MetapackageRequest:
 
 
 class Database:
-    def __init__(self, dsn, readonly=True):
+    def __init__(self, dsn, readonly=True, autocommit=False):
         self.db = psycopg2.connect(dsn)
-        if readonly:
-            self.db.set_session(readonly=True, autocommit=True)
+        self.db.set_session(readonly=readonly, autocommit=autocommit)
         self.cursor = self.db.cursor()
 
     def CreateSchema(self):
