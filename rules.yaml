@@ -628,6 +628,7 @@
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
+- { name: youtube-dl,                  ver: "[0-9]{8}",                                    ignorever: true } # canonical version is period-separated
 - { name: xl2tpd,                      ver: "20140214",                                    ignorever: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 
