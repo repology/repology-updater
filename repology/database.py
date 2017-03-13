@@ -1602,7 +1602,7 @@ class Database:
                 need_merge,
                 comment,
                 reply,
-                case when expires > now() then expires - now() else interval '0' end
+                CASE WHEN expires IS NULL then NULL WHEN expires > now() THEN expires - now() ELSE interval '0' END
             FROM reports
             WHERE effname = %s
             ORDER BY created desc
