@@ -1,0 +1,91 @@
+{% extends "metapackage.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ super() }}: report problem for {{ name }}{% endblock %}
+{% block header %}Report problem for <strong>{{ name }}</strong>{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<p>While repology tries its best in matching packages across different repositories, this is quite a complex task:</p>
+
+<ul>
+	<li>Packages of a single software project may be named differently in some repositories (for instance, <b>libagg</b> vs. <b>agg</b>, <b>dungeoncrawl</b> vs. <b>dungeon-crawl</b>, <b>fonts-linuxlibertine</b> vs. <b>fonts-ttf-linuxlibertine</b> vs. <b>linux-libertine-fonts</b> vs. <b>linuxlibertine-fonts-ttf</b>).</li>
+	<li>There may be multiple unrelated software projects with a same name (for instance, <b>clementine</b> is both X11 window manager and a media player).</li>
+	<li>Some packages may use incorrect versions (for instance, picking "next" version number which was not released yet when packaging a git snapshot, or using dates and commit hashes instead of version numbers).</li>
+</ul>
+
+<p>Repology uses a set of manually edited rules to resolve these cases. You may submit a change to the <a href="https://github.com/AMDmi3/repology/blob/master/rules.yaml">ruleset</a> directly or use this form to suggest an improbement to the ruleset. Please only use this for for problems which may be fixed by the ruleset (which are basically problems listed above).</p>
+
+{% if reports %}
+<h2>Current reports</h2>
+{% for report in reports %}
+<div class="panel {% if report.reply %}panel-danger{% else %}panel-default{% endif %}">
+	<div class="panel-heading">
+		Created {{ macros.format_time_interval(report.created_ago) }} ago
+		{%- if report.expires is not none and report.expires -%}
+			, expires in {{ macros.format_time_interval(report.expires) }}
+		{%- elif report.expires is not none -%}
+			, expired
+		{% endif %}
+	</div>
+	<ul class="list-group">
+	{% if report.need_verignore %}
+		<li class="list-group-item"><b>The metapackage needs some version(s) to be marked as ignored</b></li>
+	{% endif %}
+	{% if report.need_split %}
+		<li class="list-group-item"><b>The metapackage needs to be split into multiple metapackages</b></li>
+	{% endif %}
+	{% if report.need_merge %}
+		<li class="list-group-item"><b>The metapackage needs to be merged with other metapackages</b></li>
+	{% endif %}
+	{% if report.comment %}
+	<li class="list-group-item break-word"><b>Comment:</b>
+	{% for line in report.comment.split('\n') -%}
+		<br>{{ line }}
+	{% endfor %}
+	</li>
+	{% endif %}
+	{% if report.reply %}
+		<li class="list-group-item break-word"><b>Repology reply:</b>
+		{% for line in report.reply.split('\n') -%}
+			<br>{{ line -}}
+		{% endfor %}
+		</li>
+	{% endif %}
+	</ul>
+</div>
+{% endfor %}
+{% endif %}
+
+<h2>New report</h2>
+{% if error %}
+<div class="alert alert-danger" role="alert">{{ error }}.</div>
+{% endif %}
+
+{% if reports|length >= config['MAX_REPORTS'] %}
+<div class="alert alert-warning" role="alert">There are a lot of reports for this metapackage already, so adding new ones is disabled.</div>
+{% else %}
+<form action="{{ url_for_self() }}" method="POST">
+	<div class="form-group">
+		<label><input type="checkbox" name="need_verignore"> Needs specific version ignored</label><br>
+		<span class="help-block">Check if the latest version detected for this metapackage is incorrect (e.g. a non-existing version, version with incorrect format, version with date or a git commit hash) and should be ignored. You may list bad versions in the comment field.</span>
+	</div>
+	<div class="form-group">
+		<label><input type="checkbox" name="need_split"> Needs to be split</label><br>
+		<span class="help-block">Check if this metapackage refers to multiple unrelated projects and thus needs to be split into multiple metapackages. Naming suggestions for new metapackages are welcome.</span>
+	</div>
+	<div class="form-group">
+		<label><input type="checkbox" name="need_merge"> Needs to be merged</label><br>
+		<span class="help-block">Check if there are other metapackages which refer to the same project and thus need to be merged into a single entity. Please list them in the comment field.</span>
+	</div>
+	<div class="form-group">
+		<label for="comment">Additional comments</label>
+		<textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+	</div>
+	<button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endif %}
+
+</div> {#- container #}
+{% endblock %}

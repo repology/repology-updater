@@ -76,6 +76,11 @@ MAINTAINERS_PER_PAGE = 500
 PROBLEMS_PER_PAGE = 500
 
 #
+# Max reports for metapackage
+#
+MAX_REPORTS = 10
+
+#
 # Address of repology.org to use in HTML links
 #
 REPOLOGY_HOME = 'http://repology.org'

@@ -525,6 +525,40 @@ def metapackage_badges(name):
     return flask.render_template('metapackage-badges.html', name=name, repos=repos)
 
 
+@app.route('/metapackage/<name>/report', methods=['GET', 'POST'])
+def metapackage_report(name):
+    if flask.request.method == 'POST':
+        if get_db().GetReportsCount(name) >= app.config['MAX_REPORTS']:
+            flask.flash('Could not add report: too many reports for this metapackage', 'danger')
+            return flask.redirect(flask.url_for('metapackage_report', name=name))
+
+        need_verignore = 'need_verignore' in flask.request.form
+        need_split = 'need_split' in flask.request.form
+        need_merge = 'need_merge' in flask.request.form
+        comment = flask.request.form.get('comment', '').strip().replace('\r', '') or None
+
+        if comment and len(comment) > 1024:
+            flask.flash('Could not add report: comment os too long', 'danger')
+            return flask.redirect(flask.url_for('metapackage_report', name=name))
+
+        if not need_verignore and not need_split and not need_merge and not comment:
+            flask.flash('Could not add report: please fill out the form', 'danger')
+            return flask.redirect(flask.url_for('metapackage_report', name=name))
+
+        get_db().AddReport(
+            name,
+            need_verignore,
+            need_split,
+            need_merge,
+            comment
+        )
+
+        flask.flash('Report for {} added succesfully and will be processed in days, thank you!'.format(name), 'success')
+        return flask.redirect(flask.url_for('metapackage_report', name=name))
+
+    return flask.render_template('metapackage-report.html', reports=get_db().GetReports(name), name=name)
+
+
 @app.route('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name):
     summaries = PackagesetToSummaries(get_db().GetMetapackage(name))

@@ -457,6 +457,22 @@ class Database:
         self.cursor.execute('CREATE INDEX ON problems(repo, effname)')
         self.cursor.execute('CREATE INDEX ON problems(maintainer)')
 
+        # reports
+        self.cursor.execute("""
+            CREATE TABLE reports (
+                created timestamp with time zone not null,
+                effname varchar(255) not null,
+                need_verignore boolean not null,
+                need_split boolean not null,
+                need_merge boolean not null,
+                comment text,
+                reply text,
+                expires timestamp with time zone
+            )
+        """)
+
+        self.cursor.execute('CREATE INDEX ON reports(effname)')
+
     def Clear(self):
         self.cursor.execute("""DELETE FROM packages""")
         self.cursor.execute("""
@@ -785,6 +801,9 @@ class Database:
                 num_problems = (SELECT count(*) FROM problems),
                 num_maintainers = (SELECT count(*) FROM maintainers)
         """)
+
+        # reports
+        self.cursor.execute('DELETE FROM reports WHERE expires >= now()')
 
     def Commit(self):
         self.db.commit()
@@ -1535,6 +1554,72 @@ class Database:
                 'maintainer': row[3],
                 'severity': row[4],
                 'problem': row[5],
+            }
+            for row in self.cursor.fetchall()
+        ]
+
+    def AddReport(self, effname, need_verignore, need_split, need_merge, comment):
+        self.cursor.execute(
+            """
+            INSERT
+            INTO reports (
+                created,
+                effname,
+                need_verignore,
+                need_split,
+                need_merge,
+                comment
+            ) VALUES (
+                now(),
+                %s,
+                %s,
+                %s,
+                %s,
+                %s
+            )
+            """,
+            (
+                effname,
+                need_verignore,
+                need_split,
+                need_merge,
+                comment
+            )
+        )
+
+    def GetReportsCount(self, effname):
+        self.cursor.execute('SELECT count(*) FROM reports WHERE effname = %s', (effname, ))
+        return self.cursor.fetchall()[0][0]
+
+    def GetReports(self, effname):
+        self.cursor.execute(
+            """
+            SELECT
+                now() - created,
+                effname,
+                need_verignore,
+                need_split,
+                need_merge,
+                comment,
+                reply,
+                case when expires > now() then expires - now() else interval '0' end
+            FROM reports
+            WHERE effname = %s
+            ORDER BY created desc
+            """,
+            (effname, )
+        )
+
+        return [
+            {
+                'created_ago': row[0],
+                'effname': row[1],
+                'need_verignore': row[2],
+                'need_split': row[3],
+                'need_merge': row[4],
+                'comment': row[5],
+                'reply': row[6],
+                'expires': row[7],
             }
             for row in self.cursor.fetchall()
         ]
