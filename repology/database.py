@@ -803,7 +803,7 @@ class Database:
         """)
 
         # reports
-        self.cursor.execute('DELETE FROM reports WHERE expires >= now()')
+        self.cursor.execute('DELETE FROM reports WHERE now() >= expires')
 
     def Commit(self):
         self.db.commit()
