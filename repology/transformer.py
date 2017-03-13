@@ -17,6 +17,7 @@
 
 import pprint
 import re
+import sys
 
 import yaml
 
@@ -139,6 +140,9 @@ class PackageTransformer:
 
         if 'tolowername' in rule:
             package.effname = package.effname.lower()
+
+        if 'warning' in rule:
+            print('Rule warning for {} in {}: {}'.format(package.name, package.repo, rule['warning']), file=sys.stderr)
 
         return result
 

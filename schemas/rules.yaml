@@ -19,6 +19,7 @@ sequence:
       "unignorever": { type: bool }
       "last": { type: bool }
       "tolowername": { type: bool }
+      "warning": { type: str }
       "replaceinname":
         type: map
         mapping:

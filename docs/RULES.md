@@ -170,3 +170,11 @@ Example:
 # like 2015.01.01 or 20150101 appear as newer
 - { name: openxcom, verpat: "2015.*", ignorever: true }
 ```
+
+### unignorever
+
+TODO
+
+### warning
+
+TODO
