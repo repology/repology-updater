@@ -1,13 +1,21 @@
 {%- macro format_time_interval(value) -%}
 	{%- with seconds = value.total_seconds() | int -%}
-	{%- if seconds < 60 -%}
-		{{ seconds }} second(s)
+	{%- if seconds == 1 -%}
+		a second
+	{%- elif seconds < 60 -%}
+		{{ seconds }} seconds
+	{%- elif seconds // 60 == 1 -%}
+		a minute
 	{%- elif seconds < 60 * 60 -%}
-		{{ seconds // 60 }} minute(s)
+		{{ seconds // 60 }} minutes
+	{%- elif seconds // (60 * 60) == 1 -%}
+		an hour
 	{%- elif seconds < 60 * 60 * 24 -%}
-		{{ seconds // (60 * 60) }} hour(s)
+		{{ seconds // (60 * 60) }} hours
+	{%- elif seconds // (60 * 60 * 24) == 1 -%}
+		a day
 	{%- else -%}
-		{{ seconds // (60 * 60 * 24) }} day(s)
+		{{ seconds // (60 * 60 * 24) }} days
 	{%- endif -%}
 	{%- endwith -%}
 {%- endmacro -%}
