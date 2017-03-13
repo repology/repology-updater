@@ -1,3 +1,17 @@
+{%- macro format_time_interval(value) -%}
+	{%- with seconds = value.total_seconds() | int -%}
+	{%- if seconds < 60 -%}
+		{{ seconds }} second(s)
+	{%- elif seconds < 60 * 60 -%}
+		{{ seconds // 60 }} minute(s)
+	{%- elif seconds < 60 * 60 * 24 -%}
+		{{ seconds // (60 * 60) }} hour(s)
+	{%- else -%}
+		{{ seconds // (60 * 60 * 24) }} day(s)
+	{%- endif -%}
+	{%- endwith -%}
+{%- endmacro -%}
+
 {%- macro package_link(package, text) -%}
 	{%- if repometadata[package.repo].packagelinks -%}
 		<a href="{{ repometadata[package.repo].packagelinks[0].url|pkg_format(package) }}">{{ text }}</a>
