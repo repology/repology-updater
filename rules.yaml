@@ -1266,6 +1266,7 @@
 - { name: "python:axolotl-curve25519", setname: "python:python-axolotl-curve25519" }
 
 # These are more applications than modules, so rename
+- { name: "python:youtube-dl",         setname: youtube-dl                }
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:rss2email",          setname: rss2email                 }
 - { name: ["python:pypy", "python:pypy-bin"], setname: pypy               }
