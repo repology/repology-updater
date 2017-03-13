@@ -56,6 +56,14 @@ REPOSITORIES = ['production']
 ############################################################################
 
 #
+# Secret key for flask, see
+# http://flask.pocoo.org/docs/0.12/api/#flask.Flask.secret_key
+#
+# There's no default value, please set it to some random string
+#
+#SECRET_KEY = ''
+
+#
 # Enable webapp profiling
 #
 PROFILE = False
