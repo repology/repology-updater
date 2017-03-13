@@ -29,12 +29,10 @@
 		{%- set i = 0 %}
 		{% for repo in repositories %}
 			{% set vercolor = "#97ca00" %}
-			{% if repo.versionclass == 1 %}
+			{% if repo.versionclass == 1 or repo.versionclass == 3 %}
 				 {% set vercolor = "#4c1" %}
 			{% elif repo.versionclass == 2 %}
 				 {% set vercolor = "#e05d44" %}
-			{% elif repo.versionclass == 3 %}
-				 {% set vercolor = "#dfb317" %}
 			{% elif repo.versionclass == 4 %}
 				 {% set vercolor = "#9f9f9f" %}
 			{% endif %}
