@@ -44,6 +44,31 @@ class TestParsers(unittest.TestCase):
         with self.assertRaises(PackageMergeConflict):
             pkg.Merge(Package(name='bar'))
 
+    def test_sanitize(self):
+        pkg = Package(maintainers=['c', 'b', 'a'])
+        pkg.Sanitize()
+        self.assertEqual(pkg.maintainers, ['a', 'b', 'c'])
+
+        pkg = Package(homepage='http://example.com')
+        pkg.Sanitize()
+        self.assertEqual(pkg.homepage, 'http://example.com/')
+
+        pkg = Package(homepage='https://example.com')
+        pkg.Sanitize()
+        self.assertEqual(pkg.homepage, 'https://example.com/')
+
+        pkg = Package(homepage='http://example.com/')
+        pkg.Sanitize()
+        self.assertEqual(pkg.homepage, 'http://example.com/')
+
+        pkg = Package(homepage='https://example.com/')
+        pkg.Sanitize()
+        self.assertEqual(pkg.homepage, 'https://example.com/')
+
+        pkg = Package(homepage='http://example.com/foo')
+        pkg.Sanitize()
+        self.assertEqual(pkg.homepage, 'http://example.com/foo')
+
 
 if __name__ == '__main__':
     unittest.main()

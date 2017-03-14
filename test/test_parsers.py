@@ -222,7 +222,7 @@ class TestParsers(unittest.TestCase):
                 'name': 'virtualbox',
                 'version': '5.0.30',
                 'category': 'system',
-                'homepage': 'http://www.virtualbox.org',
+                'homepage': 'http://www.virtualbox.org/',
                 'downloads': [
                     'http://download.virtualbox.org/virtualbox/5.0.30/SDKRef.pdf',
                     'http://download.virtualbox.org/virtualbox/5.0.30/UserManual.pdf',
