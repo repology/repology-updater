@@ -163,7 +163,7 @@ class Package:
         CheckList(self.licenses, 'licenses', no_newlines=True, stripped=True)
         CheckList(self.downloads, 'downloads', no_whitespace=True)
 
-    def Sanitize(self):
+    def Normalize(self):
         if self.homepage:
             if re.match('https?://[^/]+$', self.homepage):
                 self.homepage = self.homepage + '/'

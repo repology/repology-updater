@@ -183,7 +183,7 @@ class RepositoryManager:
             except PackageSanityCheckFailure as err:
                 sanitylogger.Log('sanity: {}'.format(err))
 
-            package.Sanitize()
+            package.Normalize()
 
         if transformer:
             packages = sorted(packages, key=lambda package: package.effname)
