@@ -212,7 +212,7 @@
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
-- { name: ja2,                         setname: ja2-stracciatella,        family: [ freebsd ] }
+- { name: ja2,                         setname: ja2-stracciatella         }
 - { name: jbig-kit,                    setname: jbigkit                   }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
 - { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
@@ -701,6 +701,7 @@
 # Libregamewiki requires some renames
 - { family: libregamewiki, name: "0 a.d.",                           setname: 0ad }
 - { family: libregamewiki, name: "3d pong",                          setname: 3dpong }
+- { family: libregamewiki, name: "8 kingdoms",                       setname: 8kingdoms }
 - { family: libregamewiki, name: "advanced strategic command",       setname: asc }
 - { family: libregamewiki, name: "armagetron advanced",              setname: armagetronad }
 - { family: libregamewiki, name: "balazar iii",                      setname: balazar3 }
@@ -709,8 +710,8 @@
 - { family: libregamewiki, name: "block attack - rise of the blocks", setname: blockattack }
 - { family: libregamewiki, name: "bos wars",                         setname: boswars }
 - { family: libregamewiki, name: "cavez of phear",                   setname: cavezofphear }
-- { family: libregamewiki, name: "curse of war",                     setname: curseofwar }
 - { family: libregamewiki, name: "chromium b.s.u.",                  setname: chromium-bsu }
+- { family: libregamewiki, name: "curse of war",                     setname: curseofwar }
 - { family: libregamewiki, name: "dungeon crawl stone soup",         setname: stone-soup }
 - { family: libregamewiki, name: "emilia pinball",                   setname: emilia-pinball }
 - { family: libregamewiki, name: "empty clip",                       setname: empty-clip }
@@ -724,15 +725,19 @@
 - { family: libregamewiki, name: "globulation 2",                    setname: globulation2 }
 - { family: libregamewiki, name: "help hannah's horse",              setname: help-hannahs-horse }
 - { family: libregamewiki, name: "hero of allacrost",                setname: allacrost }
+- { family: libregamewiki, name: "heroes of wesnoth",                setname: heroes-of-wesnoth }
 - { family: libregamewiki, name: "infon battle arena",               setname: infon }
 - { family: libregamewiki, name: "iter vehemens ad necem",           setname: ivan }
 - { family: libregamewiki, name: "jump n bump",                      setname: jumpnbump }
 - { family: libregamewiki, name: "kobo deluxe",                      setname: kobodeluxe }
 - { family: libregamewiki, name: "liquid war 6",                     setname: liquidwar6 }
+- { family: libregamewiki, name: "lips of suna",                     setname: lipsofsuna }
 - { family: libregamewiki, name: "lordsawar!",                       setname: lordsawar }
 - { family: libregamewiki, name: "me and my shadow",                 setname: meandmyshadow }
+- { family: libregamewiki, name: "pink pony",                        setname: pink-pony }
 - { family: libregamewiki, name: "powder toy",                       setname: powder-toy }
 - { family: libregamewiki, name: "red eclipse",                      setname: redeclipse }
+- { family: libregamewiki, name: "rigs of rods",                     setname: rigsofrods }
 - { family: libregamewiki, name: "sdl sopwith",                      setname: sopwith }
 - { family: libregamewiki, name: "secret maryo chronicles",          setname: smc }
 - { family: libregamewiki, name: "seven kingdoms: ancient adversaries", setname: 7kaa }
