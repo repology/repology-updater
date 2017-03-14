@@ -64,15 +64,7 @@ class GraphProcessor:
         if self.minval == self.maxval:
             value = self.points[0][1]
 
-            rounding = 0
-            if isinstance(value, int):
-                pass
-            elif value < 0.1:
-                rounding = 3
-            elif value < 1:
-                rounding = 2
-            elif value < 10:
-                rounding = 1
+            rounding = 0 if isinstance(value, int) else 3
 
             return [(0.5, '{:.{}f}{}'.format(value, rounding, suffix))]
 
