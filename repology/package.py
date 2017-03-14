@@ -164,6 +164,10 @@ class Package:
         CheckList(self.downloads, 'downloads', no_whitespace=True)
 
     def Sanitize(self):
+        if self.homepage:
+            if re.match('https?://[^/]+$', self.homepage):
+                self.homepage = self.homepage + '/'
+
         if self.maintainers:
             self.maintainers = sorted(set(self.maintainers))
 
