@@ -17,6 +17,10 @@
       url: https://www.freebsd.org/ports/
     - desc: FreshPorts - The Place For Ports
       url: https://www.freshports.org/
+    - desc: FreeBSD ports SVN repository
+      url: https://svnweb.freebsd.org/ports/head/
+    - desc: Package builds status
+      url: https://pkg-status.freebsd.org/
   packagelinks:
     - desc: FreshPorts page
       url: 'http://www.freshports.org/{category}/{name}'
@@ -74,11 +78,15 @@
       url: https://www.pkgsrc.org/
     - desc: pkgsrc.se
       url: http://pkgsrc.se/
-    - desc: pkgsrc CVSWeb
+    - desc: pkgsrc CVS repository
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
-    - desc: CVSWeb
+    - desc: pkgsrc.se page
+      url: 'http://pkgsrc.se/{category}/{name}'
+    - desc: Port CVS directory
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
+    - desc: Port Makefile
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{category}/{name}/Makefile?content-type=text/plain'
   tags: [ all, production ]
 
 - name: openbsd
@@ -94,11 +102,14 @@
       url: https://www.openbsd.org/faq/faq15.html
     - desc: openports.se
       url: http://openports.se/
+    - desc: OpenBSD ports CVS repository
+      url: http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/
   packagelinks:
     - desc: OpenPorts.se page
       url: 'http://openports.se/{category}/{name}'
-    - desc: CVSWeb
+    - desc: Port CVS directory
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}'
+    # XXX: no Makefile link is Makefile would just refer to subports
   tags: [ all, production ]
 
 ###########################################################################
