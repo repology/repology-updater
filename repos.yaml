@@ -74,6 +74,8 @@
       url: https://www.pkgsrc.org/
     - desc: pkgsrc.se
       url: http://pkgsrc.se/
+    - desc: pkgsrc CVSWeb
+      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
     - desc: CVSWeb
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
