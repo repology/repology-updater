@@ -89,6 +89,8 @@ class NixJsonParser():
 
                 if 'homepage' in meta:
                     pkg.homepage = meta['homepage']
+                    if isinstance(pkg.homepage, list):  # XXX: remove after adding support for homepages array
+                        pkg.homepage = pkg.homepage[0]
 
                 if 'description' in meta:
                     pkg.comment = meta['description']
