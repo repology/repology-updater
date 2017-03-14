@@ -45,12 +45,12 @@ version are always parsed.
 |----------------------------------|:-------:|:-------:|:-----:|:-----:|:-------:|:--------:|
 | Alpine                           | ✔       | ✔       |       | ✔     | ✔       |          |
 | ALT Sisyphus                     | ✔       | ✔       | ✔     |       |         |          |
-| Arch, Parabola                   | ✔       | ✔       |       | ✔     | ✔       |          |
+| Arch, Parabola, Manjaro          | ✔       | ✔       |       | ✔     | ✔       |          |
 | CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔     | ✔       |          |
 | Chocolatey                       | ✔       |         |       | ✔     |         |          |
 | CPAN                             |         | ✔       |       | ✔ (2) |         |          |
 | CRUX                             | ✔       | ✔       |       | ✔     |         |          |
-| Debian, Ubuntu                   |         | ✔       | ✔     | ✔     |         |          |
+| Debian, Ubuntu, KDE neon         |         | ✔       | ✔     | ✔     |         |          |
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔     |         |          |
 | freshcode.club                   | ✔       | n/a     |       | ✔     |         |          |
