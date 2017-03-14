@@ -25,11 +25,14 @@ class GraphProcessor:
         self.minval = None
         self.maxval = None
         self.points = []
+        self.float = False
 
     def AddPoint(self, time, value):
         self.minval = value if self.minval is None else min(value, self.minval)
         self.maxval = value if self.maxval is None else max(value, self.maxval)
         self.points.append([time, value])
+        if isinstance(value, float):
+            self.float = True
 
     def GetPoints(self, period):
         if self.minval is None:
@@ -75,7 +78,11 @@ class GraphProcessor:
 
         step = (self.maxval - self.minval) / 10
 
-        for roundedstep in (0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000):
+        steps = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]
+        if self.float:
+            steps = [0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5] + steps
+
+        for roundedstep in steps:
             if roundedstep > step:
                 step = roundedstep
                 break
