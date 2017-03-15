@@ -239,6 +239,7 @@
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
+- { name: multicorn,                   setname: postgresql-multicorn      }
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
 - { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
