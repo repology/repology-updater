@@ -37,7 +37,7 @@
 		<li class="list-group-item"><b>The metapackage needs to be split into multiple metapackages</b></li>
 	{% endif %}
 	{% if report.need_merge %}
-		<li class="list-group-item"><b>The metapackage needs to be merged with other metapackages</b></li>
+		<li class="list-group-item"><b>The metapackage needs other metapackages merged into it</b></li>
 	{% endif %}
 	{% if report.comment %}
 	<li class="list-group-item break-word"><b>Comment:</b>
@@ -68,16 +68,16 @@
 {% else %}
 <form action="{{ url_for_self() }}" method="POST">
 	<div class="form-group">
-		<label><input type="checkbox" name="need_verignore"> Needs specific version ignored</label><br>
+		<label><input type="checkbox" name="need_verignore"> Needs version ignore</label><br>
 		<span class="help-block">Check if the latest version detected for this metapackage is incorrect (e.g. a non-existing version, version with incorrect format, version with date or a git commit hash) and should be ignored. You may list bad versions in the comment field.</span>
 	</div>
 	<div class="form-group">
-		<label><input type="checkbox" name="need_split"> Needs to be split</label><br>
+		<label><input type="checkbox" name="need_split"> Needs split</label><br>
 		<span class="help-block">Check if this metapackage refers to multiple unrelated projects and thus needs to be split into multiple metapackages. Naming suggestions for new metapackages are welcome.</span>
 	</div>
 	<div class="form-group">
-		<label><input type="checkbox" name="need_merge"> Needs to be merged</label><br>
-		<span class="help-block">Check if there are other metapackages which refer to the same project and thus need to be merged into a single entity. Please list them in the comment field.</span>
+		<label><input type="checkbox" name="need_merge"> Needs merge</label><br>
+		<span class="help-block">Check if there are other metapackages which refer to the same project and thus need to be merged with this metapackage. Please list them in the comment field.</span>
 	</div>
 	<div class="form-group">
 		<label for="comment">Additional comments</label>
