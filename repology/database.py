@@ -769,12 +769,14 @@ class Database:
                     name,
                     effname,
                     case when maintainers = '{}' then null else unnest(maintainers) end,
-                    3,
-                    'Homepage link "' || homepage || '" points to googlecode.com which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
+                    2,
+                    'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
                 FROM packages
                 WHERE
                     homepage LIKE 'http://%googlecode.com/%' OR
-                    homepage LIKE 'https://%googlecode.com/%'
+                    homepage LIKE 'https://%googlecode.com/%' OR
+                    homepage LIKE 'http://code.google.com/%' OR
+                    homepage LIKE 'https://code.google.com/%'
         """)
 
         self.cursor.execute("""
