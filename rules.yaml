@@ -564,8 +564,10 @@
 
 - { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
 
+# python package manager vs. program wrapper (which was renamed to pipo upstream)
 # XXX: generate problem from this
-- { name: pip,                         setname: pipo,                     family: [ arch, gentoo ] } # python package manager vs. program wrapper (which was renamed to pipo upstream)
+- { name: pip,                         setname: pipo,                     family: arch }
+- { name: pip,                         setname: pipo,                     family: gentoo, category: app-misc }
 
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
@@ -642,7 +644,7 @@
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
-- { name: smem,                        ver: 20071119,                                      ignorever: true }
+- { name: smem,                        ver: "20071119",                                    ignorever: true }
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: youtube-dl,                  verpat: "[0-9]{8}",                                 ignorever: true } # canonical version is period-separated
