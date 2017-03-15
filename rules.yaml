@@ -204,6 +204,7 @@
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: [googletest,libgtest],       setname: gtest                     }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
+- { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna], setname: graphviz }
 - { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
