@@ -1271,22 +1271,26 @@
 - { namepat: "py[23]?-(.*)",           setname: "python:$1", family: [ alpine ] }
 - { category: dev-python,              setname: "python:$0", family: [ gentoo ] }
 
+# turn python modules into such
+- name:
+    - cherrypy
+    - dulwich
+    - hy
+    - paramiko
+    - pip
+    - sortedcontainers
+    - virtualenv
+    - virtualenv-clone
+    - virtualenvwrapper
+  setname: "python:$0"
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
-- { namepat: "flake8.*",               setname: "python:$0"               }
-- { namepat: "flask.*",                setname: "python:$0"               }
-- { name: cherrypy,                    setname: "python:$0"               }
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
-- { name: hy,                          setname: "python:$0"               }
-- { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }
-- { name: paramiko,                    setname: "python:$0"               }
-- { name: pip,                         setname: "python:$0"               }
-- { name: sortedcontainers,            setname: "python:$0"               }
-- { name: virtualenv,                  setname: "python:$0"               }
-- { name: virtualenv-clone,            setname: "python:$0"               }
-- { name: virtualenvwrapper,           setname: "python:$0"               }
-- { name: [dyndnsc,dyndnsc-py2],       setname: "python:dyndnsc"          }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
+- { namepat: "flake8.*",               setname: "python:$0"               }
+- { namepat: "flask.*",                setname: "python:$0"               }
+- { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }
+- { name: [dyndnsc,dyndnsc-py2],       setname: "python:dyndnsc"          }
 - { namepat: "django-.*",              setname: "python:$0"               }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
