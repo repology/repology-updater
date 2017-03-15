@@ -1276,6 +1276,8 @@
 - name:
     - cherrypy
     - dulwich
+    - hg-git
+    - hgsubversion
     - hy
     - paramiko
     - pip
