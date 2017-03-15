@@ -684,9 +684,9 @@ def graph_repo_generic(repo, getvalue, color, suffix=''):
     def GetGraph(period):
         graph = GraphProcessor()
 
-        for histentry in get_db().GetRepositoriesHistoryPeriod(period):
+        for histentry in get_db().GetRepositoriesHistoryPeriod(period, repo):
             try:
-                graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot'][repo]))
+                graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot']))
             except:
                 pass  # ignore missing keys, division errors etc.
 

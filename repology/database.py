@@ -1233,16 +1233,24 @@ class Database:
             for row in self.cursor.fetchall()
         ]
 
-    def GetRepositoriesHistoryPeriod(self, seconds=60 * 60 * 24):
+    def GetRepositoriesHistoryPeriod(self, seconds=60 * 60 * 24, repo=None):
+        repopath = ''
+        repoargs = ()
+
+        if repo:
+            repopath = '#>%s'
+            repoargs = ('{' + repo + '}', )
+
         self.cursor.execute("""
             SELECT
                 ts,
                 now() - ts,
-                snapshot
+                snapshot{}
             FROM repositories_history
             WHERE ts >= now() - INTERVAL %s
             ORDER BY ts
-        """, (datetime.timedelta(seconds=seconds),)
+            """.format(repopath),
+            repoargs + (datetime.timedelta(seconds=seconds),)
         )
 
         return [
