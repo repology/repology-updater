@@ -241,6 +241,7 @@
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
 - { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
+- { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              family: [ freebsd ] }
@@ -537,23 +538,36 @@
 
 # Ambiguous upstream package names, careful!
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
-- { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
-- { name: dragon,                      setname: dragon-scannerparser,     family: [ freebsd ] }
-- { name: dragon,                      setname: dragon-player                                }
-- { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
-- { name: docker,                      setname: docker-tray,              family: gentoo, category: x11-plugins }
+
 - { name: crystal,                     setname: crystal-lang,             family: [ arch, freshcode ] }
 - { name: crystal,                     setname: crystal-lang,             family: gentoo, category: dev-lang }
 - { name: crystal,                     setname: crystal-mud,              family: gentoo, category: games-mud }
 - { name: crystal,                     setname: crystal-theme,            family: slackbuilds }
+
 - { name: cdf3,                        setname: cdf                       } # Common Data Format lib
 - { name: cdf, verpat: "0.*",          setname: cdf-df                    } # split out colorized df
+
 - { name: cutter, verpat: "1\\.0[0-9].*", setname: cutter-tcp             } # TCP/IP Connection Cutter
 - { name: [cutter,cutter-test_framework,cutter-testing-framework], setname: cutter-unittest } # C++ testing framework
+
 - { name: diaspora, verpat: "1\\.[0-9]+\\.[0-9]+", setname: diaspora-game }
 - { name: diaspora, setname: diaspora-social }
-- { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
+
+- { name: docker,                      setname: docker-tray,              family: gentoo, category: x11-plugins }
+
+- { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
+
+- { name: dragon,                      setname: dragon-scannerparser,     family: [ freebsd ] }
+- { name: dragon,                      setname: dragon-player                                }
+
 - { name: etcd, verpat: "1.*", setname: "etcd-player" } # Enhanced Tiny CD, a simple ncurses-based CD player vs. coreos etcd
+
+- { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
+
+# XXX: generate problem from this
+- { name: pip,                         setname: pipo,                     family: [ arch, gentoo ] } # python package manager vs. program wrapper (which was renamed to pipo upstream)
+
+- { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
 - { name: whereami, family: [ arch ], setname: "whereami-kootenpv" } # Uses WiFi signals and machine learning to predict where you are
 - { name: whereami, family: [ debuntu ], setname: "whereami-debian" } # Automatically reconfigure your (laptop) system for a new location based of wifi hotspots
@@ -628,6 +642,7 @@
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
+- { name: smem,                        ver: 20071119,                                      ignorever: true }
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: youtube-dl,                  verpat: "[0-9]{8}",                                 ignorever: true } # canonical version is period-separated
@@ -1256,12 +1271,16 @@
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { namepat: "flake8.*",               setname: "python:$0"               }
 - { namepat: "flask.*",                setname: "python:$0"               }
-- { name: sortedcontainers,            setname: "python:$0"               }
-- { name: hy,                          setname: "python:$0"               }
 - { name: cherrypy,                    setname: "python:$0"               }
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
+- { name: hy,                          setname: "python:$0"               }
 - { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }
 - { name: paramiko,                    setname: "python:$0"               }
+- { name: pip,                         setname: "python:$0"               }
+- { name: sortedcontainers,            setname: "python:$0"               }
+- { name: virtualenv,                  setname: "python:$0"               }
+- { name: virtualenv-clone,            setname: "python:$0"               }
+- { name: virtualenvwrapper,           setname: "python:$0"               }
 - { name: [dyndnsc,dyndnsc-py2],       setname: "python:dyndnsc"          }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
