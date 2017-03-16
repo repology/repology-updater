@@ -209,3 +209,7 @@
     word-break: break-all;
     word-wrap: break-word;
 }
+
+.navbar-brand img {
+    margin: -10px -10px -10px 0px;
+}
