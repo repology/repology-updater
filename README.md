@@ -1,7 +1,7 @@
 # Repology
 
-[![Build Status](https://travis-ci.org/AMDmi3/repology.svg?branch=master)](https://travis-ci.org/AMDmi3/repology)
-[![Coverage Status](https://coveralls.io/repos/github/AMDmi3/repology/badge.svg?branch=master)](https://coveralls.io/github/AMDmi3/repology?branch=master)
+[![Build Status](https://travis-ci.org/repology/repology.svg?branch=master)](https://travis-ci.org/repology/repology)
+[![Coverage Status](https://coveralls.io/repos/github/repology/repology/badge.svg?branch=master)](https://coveralls.io/github/repology/repology?branch=master)
 
 ![Example report](docs/screenshot.png)
 
