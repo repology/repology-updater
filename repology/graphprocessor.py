@@ -28,6 +28,10 @@ class GraphProcessor:
         self.float = False
 
     def AddPoint(self, time, value):
+        # minor optimization of merging straight lines
+        if len(self.points) >= 2 and value == self.points[-1][1] and value == self.points[-2][1]:
+            del(self.points[-1])
+
         self.minval = value if self.minval is None else min(value, self.minval)
         self.maxval = value if self.maxval is None else max(value, self.maxval)
         self.points.append([time, value])
