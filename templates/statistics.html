@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% import "macros.html" as macros %}
 
+{% block extrameta %}
+	<meta http-equiv="refresh" content="3600">
+{% endblock %}
+
 {% block title %}{{ super() }}: statistics{% endblock %}
 {% block header %}Statistics{% endblock %}
 
