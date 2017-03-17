@@ -8,6 +8,7 @@ Needed for core:
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [requests](http://python-requests.org/)
 - Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
+- [libversion](https://github.com/repology/libversion) library
 
 Needed for fetching/parsing specific repository data:
 

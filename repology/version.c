@@ -18,100 +18,10 @@
  */
 
 #include <Python.h>
-
-#include <stdio.h>
-#include <stdint.h>
-
-#define VERCOMP_MAX ((LONG_MAX - 9) / 10)
-
-#define MY_MIN(a, b) ((a) < (b) ? (a) : (b))
-#define MY_MAX(a, b) ((a) > (b) ? (a) : (b))
-
-static int IsVersionChar(char c) {
-	return (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-}
-
-static long ParseNumber(const char** str) {
-	const char *cur = *str;
-	long number = 0;
-	while (*cur >= '0' && *cur <= '9') {
-		number = number * 10 + (*cur - '0');
-		if (number > VERCOMP_MAX)
-			number = VERCOMP_MAX;
-		cur++;
-	}
-
-	if (cur == *str)
-		return -1;
-
-	*str = cur;
-	return number;
-}
-
-static long ParseAlpha(const char** str) {
-	char start = **str;
-
-	const char *cur = *str;
-
-	while ((*cur >= 'a' && *cur <= 'z') || (*cur >= 'A' && *cur <= 'Z'))
-		cur++;
-
-	if (cur == *str)
-		return 0;
-
-	*str = cur;
-
-	if (start >= 'A' && start <= 'Z')
-		return start - 'A' + 'a'; // lowercase
-	else
-		return start;
-}
-
-static size_t GetNextVersionComponent(const char** str, long* target) {
-	// skip separators
-	while (**str != '\0' && !IsVersionChar(**str))
-		++*str;
-
-	// EOL, generate empty component
-	if (**str == '\0') {
-		*(target++) = 0;
-		*(target++) = 0;
-		*(target++) = -1;
-		return 3;
-	}
-
-	const char *end = *str;
-	while (IsVersionChar(*end))
-		end++;
-
-	// parse component from string [str; end)
-	long number = ParseNumber(str);
-	long alpha = ParseAlpha(str);
-	long extranumber = ParseNumber(str);
-
-	// skip remaining alphanumeric part
-	while (IsVersionChar(**str))
-		++*str;
-
-	// split part with two numbers
-	if (number != -1 && extranumber != -1) {
-		*(target++) = number;
-		*(target++) = 0;
-		*(target++) = -1;
-		*(target++) = -1;
-		*(target++) = alpha;
-		*(target++) = extranumber;
-		return 6;
-	} else {
-		*(target++) = number;
-		*(target++) = alpha;
-		*(target++) = extranumber;
-		return 3;
-	}
-}
+#include <libversion/compare.h>
 
 static PyObject* VersionCompare(PyObject *self, PyObject *args) {
-    (void)self; // (unused)
+	(void)self; // (unused)
 
 	const char *v1;
 	const char *v2;
@@ -119,36 +29,7 @@ static PyObject* VersionCompare(PyObject *self, PyObject *args) {
 	if (!PyArg_ParseTuple(args, "ss", &v1, &v2))
 		return NULL;
 
-	long v1_comps[6];
-	long v2_comps[6];
-	size_t v1_len = 0;
-	size_t v2_len = 0;
-	while (*v1 != '\0' || *v2 != '\0' || v1_len || v2_len) {
-		if (v1_len == 0)
-			v1_len = GetNextVersionComponent(&v1, v1_comps);
-		if (v2_len == 0)
-			v2_len = GetNextVersionComponent(&v2, v2_comps);
-
-		const size_t shift = MY_MIN(v1_len, v2_len);
-		for (size_t i = 0; i < shift; i++) {
-			if (v1_comps[i] < v2_comps[i])
-				return PyLong_FromLong(-1);
-			if (v1_comps[i] > v2_comps[i])
-				return PyLong_FromLong(1);
-		}
-
-		if (v1_len != v2_len) {
-			for (size_t i = 0; i < shift; i++) {
-				v1_comps[i] = v1_comps[i+shift];
-				v2_comps[i] = v2_comps[i+shift];
-			}
-		}
-
-		v1_len -= shift;
-		v2_len -= shift;
-	}
-
-	return PyLong_FromLong(0);
+	return PyLong_FromLong(version_compare_simple(v1, v2));
 }
 
 static PyMethodDef module_methods[] = {
