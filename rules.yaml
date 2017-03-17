@@ -564,6 +564,11 @@
 
 - { name: etcd, verpat: "1.*", setname: "etcd-player" } # Enhanced Tiny CD, a simple ncurses-based CD player vs. coreos etcd
 
+# distributed compiler vs. stream download utility
+- { name: icecream,                    setname: icecream-distributed-compiler, verpat: "1\\.[01].*" }
+- { name: icecream,                    setname: icecream-stream-extractor,     ver: "1.3" }
+- { name: icecream,                    warning: "please classify me" }
+
 - { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
 
 # python package manager vs. program wrapper (which was renamed to pipo upstream)
@@ -576,7 +581,7 @@
 - { name: whereami, family: [ arch ], setname: "whereami-kootenpv" } # Uses WiFi signals and machine learning to predict where you are
 - { name: whereami, family: [ debuntu ], setname: "whereami-debian" } # Automatically reconfigure your (laptop) system for a new location based of wifi hotspots
 - { name: whereami, family: [ fedora, yacp ], setname: "whereami-pjp" } # displays information about machine(location) you are working on
-- { name: whereami, warning: "whereami is an ambigous name, please add rule to resolve" }
+- { name: whereami, warning: "please classify me" }
 
 # fuse-emulator vs. fusefs modules - see below
 
@@ -1291,6 +1296,14 @@
     - virtualenv
     - virtualenv-clone
     - virtualenvwrapper
+  setname: "python:$0"
+# this lists packages for which a problem should be created too
+# so they are renamed upstream (e.g. in SlackBuilds not all packages
+# follow the naming guidelines, and it's not always possible to
+# detect python modules)
+- name:
+    - sqlalchemy-migrate
+    - werkzeug
   setname: "python:$0"
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
