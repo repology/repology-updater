@@ -628,6 +628,7 @@
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignorever: true } # no such release
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
 - { name: ffmpeg,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey
+- { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: hyperrogue,                  ver: "83j",                                         ignorever: true } # it's 8.3j!
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
@@ -646,13 +647,17 @@
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
+- { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignorever: true } # 2.15.0 was not released yet
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
+- { name: sdcc,                        ver: "8378",                                        ignorever: true }
+- { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
 - { name: smem,                        ver: "20071119",                                    ignorever: true }
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: youtube-dl,                  verpat: "[0-9]{8}",                                 ignorever: true } # canonical version is period-separated
 - { name: xl2tpd,                      ver: "20140214",                                    ignorever: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
+- { name: xdot,                        ver: "20121124",                                    ignorever: true }
 
 # F-Droid is too alien, even if package names match in most cases it's entirely different application
 # So use whitelist
