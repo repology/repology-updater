@@ -21,7 +21,7 @@ Needed for web-application:
 
 - Python module [flask](http://flask.pocoo.org/)
 - Python module [psycopg](http://initd.org/psycopg/)
-- [https://www.postgresql.org/](PostgreSQL database) 9.5+
+- [PostgreSQL database](https://www.postgresql.org/) 9.6+
 
 Optional, for doing HTML validation when running tests:
 - Python module [pytidylib](https://pypi.python.org/pypi/pytidylib) and [tidy-html5](http://www.html-tidy.org/) library
