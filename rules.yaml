@@ -1009,7 +1009,6 @@
 - { name: [sdl12,"libsdl1.2"],         setname: sdl }
 - { name: sdl, verpat: "2.*",          setname: sdl2 }
 
-- { name: libsfml2,                    setname: sfml }
 - { namepat: "sfml[0-9.]+",            setname: sfml }
 - { name: sfml, verpat: "1\\..*",      setname: sfml1 }
 
