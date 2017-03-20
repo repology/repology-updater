@@ -110,9 +110,10 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/metapackage/nonexistent/information', has=['No data found'])
 
         self.checkurl_html('/metapackage/kiconvtool/badges', has=[
-            'http://repology.org/metapackage/kiconvtool',
-            'http://repology.org/badge/vertical-allrepos/kiconvtool.svg',
-            'http://repology.org/badge/tiny-repos/kiconvtool.svg',
+            # XXX: agnostic to site home
+            '/metapackage/kiconvtool',
+            '/badge/vertical-allrepos/kiconvtool.svg',
+            '/badge/tiny-repos/kiconvtool.svg',
         ])
 
     def test_maintaners(self):
