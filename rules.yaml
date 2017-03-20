@@ -57,6 +57,7 @@
 - { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
+- { name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4], setname: avidemux }
 - { name: aws-cli,                     setname: awscli                    }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
@@ -575,6 +576,10 @@
 # XXX: generate problem from this
 - { name: pip,                         setname: pipo,                     family: arch }
 - { name: pip,                         setname: pipo,                     family: gentoo, category: app-misc }
+
+- { name: polly, verpat: "4\\..*",     setname: polly-llvm-opt            } # polyhedral optimizationa for llvm
+- { name: polly, verpat: "0\\.93\\..*", setname: polly-twitter-client     } # twitter client
+- { name: polly, warning: "please classify me" }
 
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
