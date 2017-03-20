@@ -83,4 +83,4 @@ MAX_REPORTS = 10
 #
 # Address of repology.org to use in HTML links
 #
-REPOLOGY_HOME = 'http://repology.org'
+REPOLOGY_HOME = 'https://repology.org'
