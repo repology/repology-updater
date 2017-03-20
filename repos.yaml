@@ -705,10 +705,12 @@
   desc: Mageia Cauldron
   family: mageia
   sources:
-    - name: data
+      # XXX: */backports_testing and */updates_testing not included, are these needed?
+    - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
       fetcher: Repodata
       parser: Repodata
-      url: https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/core/release/
+      url: 'https://mirrors.kernel.org/mageia/distrib/cauldron/SRPMS/{source}/'
+      subrepo: '{source}'
   repolinks:
     - desc: Mageia home
       url: https://www.mageia.org/en/
