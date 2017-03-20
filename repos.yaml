@@ -388,6 +388,24 @@
   tags: [ all, production ]
 
 ###########################################################################
+# PlayDeb
+###########################################################################
+- name: playdeb
+  desc: PlayDeb
+  family: debuntu
+  sources:
+    - name: [ games, apps ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: PlayDeb home
+      url: http://www.playdeb.net/
+  tags: [ all ]
+
+###########################################################################
 # Gentoo
 ###########################################################################
 - name: gentoo
