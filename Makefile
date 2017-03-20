@@ -15,7 +15,7 @@ repology/version.so: build/repology/version.so
 build/repology/version.so: repology/version.c
 	env CFLAGS="${CFLAGS}" python3 setup.py build --build-lib build build
 
-gzip-static: static/bootstrap.min.css.gz static/bootstrap.min.js.gz static/jquery-3.1.1.min.js.gz
+gzip-static: static/bootstrap.min.css.gz static/bootstrap.min.js.gz static/jquery-3.1.1.min.js.gz static/repology.ico.gz
 
 static/bootstrap.min.css.gz: static/bootstrap.min.css
 	gzip -9 < static/bootstrap.min.css > static/bootstrap.min.css.gz
@@ -25,6 +25,9 @@ static/bootstrap.min.js.gz: static/bootstrap.min.js
 
 static/jquery-3.1.1.min.js.gz: static/jquery-3.1.1.min.js
 	gzip -9 < static/jquery-3.1.1.min.js > static/jquery-3.1.1.min.js.gz
+
+static/repology.ico.gz: static/repology.ico
+	gzip -9 < static/repology.ico > static/repology.ico.gz
 
 helpers/rpmcat/rpmcat: helpers/rpmcat/rpmcat.c
 	${CC} helpers/rpmcat/rpmcat.c -o helpers/rpmcat/rpmcat ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}
