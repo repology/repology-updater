@@ -12,7 +12,7 @@
 	<title>{% block title %}Repology{% endblock %}</title>
 	<link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.css") }}">
 	<link rel="stylesheet" href="{{ url_for("static", filename="repology.css") }}">
-	<link rel="icon" href="{{ url_for("static", filename="repology16.png") }}" sizes="16x16" type="image/png">
+	<link rel="icon" href="{{ url_for("static", filename="repology.ico") }}" sizes="16x16 32x32 64x64" type="image/x-icon">
 </head>
 <body>
 {% macro classactive_if_endpoint(endpoint) -%}
@@ -32,7 +32,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="{{ REPOLOGY_HOME }}">
-					<img alt="Repology" src="{{ url_for("static", filename="repology40.png") }}">
+					<img alt="Repology" src="{{ url_for("static", filename="repology40x40.png") }}" width="40" height="40">
 				</a>
 			</div>
 
