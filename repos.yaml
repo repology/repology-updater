@@ -701,24 +701,6 @@
 ###########################################################################
 # Mageia
 ###########################################################################
-- name: mageia_6
-  desc: Mageia 6
-  family: mageia
-  sources:
-    - name: data
-      fetcher: Repodata
-      parser: Repodata
-      url: https://mirrors.kernel.org/mageia/distrib/6/SRPMS/core/release/
-  repolinks:
-    - desc: Mageia home
-      url: https://www.mageia.org/en/
-    - desc: Mageia App Db
-      url: https://madb.mageia.org/
-  packagelinks:
-    - desc: Package details on madb.mageia.org
-      url: 'https://madb.mageia.org/package/show/name/{name}'
-  tags: [ all, production, mageia, rpm ]
-
 - name: mageia_cauldron
   desc: Mageia Cauldron
   family: mageia
