@@ -1309,6 +1309,7 @@
     - pip
     - pyusb
     - sortedcontainers
+    - vdirsyncer
     - virtualenv
     - virtualenv-clone
     - virtualenvwrapper
