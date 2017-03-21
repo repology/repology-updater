@@ -388,10 +388,10 @@
   tags: [ all, production ]
 
 ###########################################################################
-# PlayDeb
+# GetDeb
 ###########################################################################
-- name: playdeb
-  desc: PlayDeb
+- name: getdeb
+  desc: GetDeb/PlayDeb
   family: debuntu
   sources:
     - name: [ games, apps ]
@@ -401,8 +401,10 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
+    - desc: GetDeb home
+      url: http://www.getdeb.net/welcome/
     - desc: PlayDeb home
-      url: http://www.playdeb.net/
+      url: http://www.playdeb.net/welcome/
   tags: [ all, production ]
 
 ###########################################################################
