@@ -44,11 +44,12 @@ class TestParsers(unittest.TestCase):
         with self.assertRaises(PackageMergeConflict):
             pkg.Merge(Package(name='bar'))
 
-    def test_normalize(self):
+    def test_normalize_sort_maintainers(self):
         pkg = Package(maintainers=['c', 'b', 'a'])
         pkg.Normalize()
         self.assertEqual(pkg.maintainers, ['a', 'b', 'c'])
 
+    def test_normalize_slash(self):
         pkg = Package(homepage='http://example.com')
         pkg.Normalize()
         self.assertEqual(pkg.homepage, 'http://example.com/')
@@ -68,6 +69,11 @@ class TestParsers(unittest.TestCase):
         pkg = Package(homepage='http://example.com/foo')
         pkg.Normalize()
         self.assertEqual(pkg.homepage, 'http://example.com/foo')
+
+    def test_normalize_host_case(self):
+        pkg = Package(homepage='HttP://ExamplE.CoM/FoO')
+        pkg.Normalize()
+        self.assertEqual(pkg.homepage, 'http://example.com/FoO')
 
 
 if __name__ == '__main__':
