@@ -403,7 +403,7 @@
   repolinks:
     - desc: PlayDeb home
       url: http://www.playdeb.net/
-  tags: [ all ]
+  tags: [ all, production ]
 
 ###########################################################################
 # Gentoo
