@@ -756,12 +756,12 @@ def graph_repo_problems_per_metapackage(repo):
 
 @app.route('/graph/repo/<repo>/maintainers.svg')
 def graph_repo_maintainers(repo):
-    return graph_repo_generic(repo, lambda s: s['num_maintainers'], '#00c0c0')
+    return graph_repo_generic(repo, lambda s: s['num_maintainers'], '#c000c0')
 
 
 @app.route('/graph/repo/<repo>/packages_per_maintainer.svg')
 def graph_repo_packages_per_maintainer(repo):
-    return graph_repo_generic(repo, lambda s: s['num_packages'] / s['num_maintainers'], '#00c0c0')
+    return graph_repo_generic(repo, lambda s: s['num_packages'] / s['num_maintainers'], '#c000c0')
 
 
 @app.route('/graph/total/packages.svg')
@@ -776,7 +776,7 @@ def graph_total_metapackages():
 
 @app.route('/graph/total/maintainers.svg')
 def graph_total_maintainers():
-    return graph_total_generic(lambda s: s['num_maintainers'], '#00c0c0')
+    return graph_total_generic(lambda s: s['num_maintainers'], '#c000c0')
 
 
 @app.route('/graph/total/problems.svg')
