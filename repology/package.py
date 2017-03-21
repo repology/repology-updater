@@ -165,8 +165,14 @@ class Package:
 
     def Normalize(self):
         if self.homepage:
-            if re.match('https?://[^/]+$', self.homepage):
-                self.homepage = self.homepage + '/'
+            match = re.match('(https?://)([^/]+)(/.*)?$', self.homepage, re.IGNORECASE)
+
+            if match:
+                schema = match.group(1).lower()
+                hostname = match.group(2).lower()
+                path = match.group(3) or '/'
+
+                self.homepage = schema + hostname + path
 
         if self.maintainers:
             self.maintainers = sorted(set(self.maintainers))
