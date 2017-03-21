@@ -1305,10 +1305,12 @@
     - hg-git
     - hgsubversion
     - hy
+    - khal
     - paramiko
     - pip
     - pyusb
     - sortedcontainers
+    - todoman
     - vdirsyncer
     - virtualenv
     - virtualenv-clone
