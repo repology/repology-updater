@@ -164,6 +164,7 @@
 - { name: dwarffortress,               setname: dwarf-fortress            }
 - { name: dzen2,                       setname: dzen                      }
 - { name: linux-dwarffortress,         setname: dwarf-fortress            }
+- { name: [e2fsprogs-libblkid,e2fsprogs-libs,e2fsprogs-libss,e2fsprogs-libuuid,e2fsprogs1.41], setname: e2fsprogs }
 - { name: easyrpg,                     setname: easyrpg-player,           family: [ openbsd ] }
 - { name: eawpatches,                  setname: eawpats                   }
 - { name: eclipse-java,                setname: eclipse                   }
@@ -211,6 +212,7 @@
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
 - { name: iccexamin,                   setname: icc-examin                }
+- { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
