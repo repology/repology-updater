@@ -1333,6 +1333,12 @@
     - paramiko
     - pip
     - pytest
+    - pylint
+    - pylint-celery
+    - pylint-common
+    - pylint-django
+    - pylint-flask
+    - pylint-plugin-utils
     - pytest-catchlog
     - pytest-cookies
     - pytest-django
@@ -1379,6 +1385,7 @@
 - { namepat: "django-.*",              setname: "python:$0"               }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
+- { name: [pylint-py27,pylint3,pylint-gui,pylint3-gui], setname: "python:pylint" }
 
 # as per pypi package name
 - { name: "python:axolotl",            setname: "python:python-axolotl"   }
