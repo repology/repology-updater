@@ -165,6 +165,7 @@
 - { name: dzen2,                       setname: dzen                      }
 - { name: linux-dwarffortress,         setname: dwarf-fortress            }
 - { name: easyrpg,                     setname: easyrpg-player,           family: [ openbsd ] }
+- { name: eawpatches,                  setname: eawpats                   }
 - { name: eclipse-java,                setname: eclipse                   }
 - { name: einstein-puzzle,             setname: einstein,                 family: [ pkgsrc ] }
 - { name: el,                          setname: eternal-lands,            family: [ freebsd ] }
@@ -817,6 +818,26 @@
 - { namepat: "suse(?:32)?_.*",                                       family: [ pkgsrc ], ignore: true } # linux binary packages?
 
 # Version splits/tweaks
+- name:
+    - adobe-flash-player
+    - adobe-flash-player-ppapi
+    - adobe-flash-plugin
+    - chromium-browser-pepper-flash
+    - chromium-pepper-flash
+    - flash-player-plugin
+    - flashplayer
+    - flashplayer-plugin
+    - flashplayer-standalone
+    - flashplayer-standalone-debug
+    - flashplugin
+    - flashplugin-beta
+    - flashplugin-nonfree
+    - linux-flashplayer
+    - pepper-flash
+    - pepperflash-plugin
+    - pepperflashplugin-nonfree
+  setname: adobe-flash # XXX: what's differente between 11.x and 2[45].x ? should it be split?
+
 - { namepat: "allegro[0-9.]+",         setname: allegro }
 - { name: allegro-devel, setname: allegro, family: freebsd }
 - { name: allegro, verpat: "4\\..*",   setname: allegro4 }
@@ -1301,6 +1322,7 @@
 
 # turn python modules into such
 - name:
+    - 3to2
     - cherrypy
     - dulwich
     - hg-git
