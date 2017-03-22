@@ -445,6 +445,7 @@
 - { name: [ttf-linux-libertine-g,linuxlibertine-g], setname: "fonts:linuxlibertine-g" }
 
 - { namepat: "(?:fonts-)?(?:ttf-)?(lohit-.+?)(?:-fonts)?", setname: "fonts:$1", last: true }
+- { name: [ fonts-ttf-lohit, lohit ], setname: "fonts:lohit" }
 
 - name:
     - fonts-ttf-opensans
