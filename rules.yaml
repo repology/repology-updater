@@ -1331,6 +1331,24 @@
     - khal
     - paramiko
     - pip
+    - pytest
+    - pytest-catchlog
+    - pytest-cookies
+    - pytest-django
+    - pytest-expect
+    - pytest-httpbin
+    - pytest-instafail
+    - pytest-localserver
+    - pytest-mock
+    - pytest-mpl
+    - pytest-multihost
+    - pytest-pylint
+    - pytest-qt
+    - pytest-runner
+    - pytest-sourceorder
+    - pytest-tornado
+    - pytest-xdist
+    - pytest-xvfb
     - pyusb
     - sortedcontainers
     - todoman
@@ -1347,6 +1365,7 @@
     - sqlalchemy-migrate
     - tempita
     - werkzeug
+    - pytest-cov
   setname: "python:$0"
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
