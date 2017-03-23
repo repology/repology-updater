@@ -63,6 +63,7 @@
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: bcel5_3,                     setname: bcel                      }
+- { name: biosncpp,                    setname: bisonc++                  }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: beneath-a-steel-sky-cd,      setname: beneath-a-steel-sky       }
 - { name: "bakery2.6",                 setname: bakery                    }
@@ -76,6 +77,7 @@
 - { name: bluedevil5,                  setname: bluedevil                 }
 - { name: boaconstructor,              setname: boa-constructor           }
 - { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect], setname: boehm-gc }
+- { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
 - { name: bombono,                     setname: bombono-dvd               }
 - { name: [boost-all,boost-libs,boost-headers], setname: boost            }
 - { namepat: "boost[0-9_.]+",          setname: boost                     }
@@ -230,12 +232,14 @@
 - { name: libbrotli,                   setname: brotli                    }
 - { name: libenet,                     setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
+- { name: libgc,                       setname: boehm-gc                  }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
 - { name: libsfml,                     setname: sfml                      }
+- { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libuv1,                      setname: libuv                     }
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
 - { name: libtremor,                   setname: tremor                    }
@@ -297,6 +301,7 @@
 - { name: tintin,                      setname: tintin++,                 family: [ gentoo ]  }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
+- { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
 - { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
 - { name: varnish4,                    setname: varnish,                  family: [ freebsd ]  }
 - { name: vsftpd-ssl,                  setname: vsftpd,                   family: [ freebsd ]  }
@@ -330,6 +335,9 @@
 - { name: [kde5-poxml], setname: poxml }
 
 # fonts; extra section as there's too much name variery
+- { namepat: "artwiz.*", setname: "fonts:artwiz-aleczapka" }
+- { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
+
 - name:
     - anonymous-pro
     - anonymouspro
@@ -352,6 +360,18 @@
     - terminus-bitmap-fonts
     - terminus-cyrillic
   setname: "fonts:terminus"
+
+- name:
+    - bitstream-vera
+    - bitstream-vera-fonts
+    - font-bitstream-vera
+    - fonts-ttf-bitstream-vera
+    - fonts-ttf-vera
+    - ttf-bitstream-vera
+    - ttf-bitstream-vera-dummy
+    - vera-ttf
+    - xorg-font-bitstream-vera
+  setname: "fonts:bitstream-vera"
 
 - name:
     - font-cronyx-cyrillic
