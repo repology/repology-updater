@@ -336,7 +336,7 @@
 - { name: [kde5-poxml], setname: poxml }
 
 # fonts; extra section as there's too much name variery
-- { namepat: "artwiz.*", setname: "fonts:artwiz-aleczapka" }
+- { namepat: "artwiz.*", setname: "fonts:artwiz-aleczapka" } # hopefully it's not too broad
 - { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
 
 - name:
