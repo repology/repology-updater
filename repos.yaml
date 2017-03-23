@@ -641,6 +641,48 @@
   tags: [ all, production, fedora, rpm ]
 
 ###########################################################################
+# EPEL
+###########################################################################
+- name: epel_5
+  desc: EPEL 5
+  family: fedora
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: https://dl.fedoraproject.org/pub/epel/5/SRPMS/
+  repolinks:
+    - desc: EPEL wiki page
+      url: https://fedoraproject.org/wiki/EPEL
+  tags: [ all, production ]
+
+- name: epel_6
+  desc: EPEL 6
+  family: fedora
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: https://dl.fedoraproject.org/pub/epel/6/SRPMS/
+  repolinks:
+    - desc: EPEL wiki page
+      url: https://fedoraproject.org/wiki/EPEL
+  tags: [ all, production ]
+
+- name: epel_7
+  desc: EPEL 7
+  family: fedora
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: https://dl.fedoraproject.org/pub/epel/7/SRPMS/
+  repolinks:
+    - desc: EPEL wiki page
+      url: https://fedoraproject.org/wiki/EPEL
+  tags: [ all, production ]
+
+###########################################################################
 # CentOS
 ###########################################################################
 - name: centos_5
