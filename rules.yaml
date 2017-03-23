@@ -94,6 +94,7 @@
 - { name: bullet3,                     setname: bullet                    }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
 - { name: bzr-tools,                   setname: bzrtools                  }
+- { name: cacti-cactid,                setname: cacti-spine               } # cactid renamed to spine upstream
 - { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins        }
 - { name: cairomm1_0,                  setname: cairomm                   }
 - { name: cattle-1.0,                  setname: cattle                    }
