@@ -14,7 +14,6 @@
 			<th class="text-center">Metapackage</th>
 			<th class="text-center">Package name</th>
 			<th class="text-center">Maintainer</th>
-			<th class="text-center">Severity</th>
 			<th class="text-left">Problem</th>
 		</tr>
 	</thead>
@@ -30,15 +29,6 @@
 			{%- else -%}
 				-
 			{%- endif -%}
-			</td>
-			<td class="text-center">
-				{%- if problem.severity == 3 -%}
-					<span class="text-danger">high</span>
-				{%- elif problem.severity == 2 -%}
-					<span class="text-warning">medium</span>
-				{%- else -%}
-					<span>low</span>
-				{%- endif -%}
 			</td>
 			<td class="text-left">{{ problem.problem }}</td>
 		</tr>
