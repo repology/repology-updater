@@ -924,7 +924,7 @@
     - desc: SlackBuilds.org
       url: https://slackbuilds.org/
   packagelinks:
-    - desc: Git
+    - desc: SlackBuilds.org page
       url: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
   tags: [ all, production, have_testdata ]
 
