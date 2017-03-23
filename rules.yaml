@@ -375,6 +375,18 @@
   setname: "fonts:bitstream-vera"
 
 - name:
+    - font-bitstream-speedo
+    - x11-font-bitstream-speedo
+    - xorg-font-bitstream-speedo
+  setname: "fonts:bitstream-speedo"
+
+- name:
+    - font-bitstream-type1
+    - x11-font-bitstream-type1
+    - xorg-font-bitstream-type1
+  setname: "fonts:bitstream-type1"
+
+- name:
     - font-cronyx-cyrillic
     - x11-font-cronyx-cyrillic
     - xorg-font-cronyx-cyrillic
