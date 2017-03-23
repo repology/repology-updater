@@ -63,7 +63,7 @@
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: bcel5_3,                     setname: bcel                      }
-- { name: biosncpp,                    setname: bisonc++                  }
+- { name: bisoncpp,                    setname: bisonc++                  }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: beneath-a-steel-sky-cd,      setname: beneath-a-steel-sky       }
 - { name: "bakery2.6",                 setname: bakery                    }
