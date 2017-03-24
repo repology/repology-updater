@@ -178,7 +178,7 @@
 - { name: [e2fsprogs-libblkid,e2fsprogs-libs,e2fsprogs-libss,e2fsprogs-libuuid,e2fsprogs1.41], setname: e2fsprogs }
 - { name: easyrpg,                     setname: easyrpg-player,           family: [ openbsd ] }
 - { name: easyrsa,                     setname: easy-rsa                  }
-- { name: easy-spice,                  setname: easyspice                 }
+- { name: easy_spice,                  setname: easyspice                 }
 - { name: easysoap,                    setname: easysoap++                }
 - { name: [easytag24,easytag-gtk2],    setname: easytag                   }
 - { name: eawpatches,                  setname: eawpats                   }
@@ -639,7 +639,7 @@
 - { name: xscreensaver-app,            setname: xscreensaver.app,         family: [ gentoo ]  }
 - { name: zipper.app,                  setname: zipper,                   family: [ debuntu ]  }
 
-- { name: alspamixer-app,              setname: alsamixer.app             }
+- { name: alsamixer-app,               setname: alsamixer.app             }
 
 # Ambiguous upstream package names, careful!
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
