@@ -63,6 +63,7 @@
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
 - { name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4], setname: avidemux }
+- { name: avr8-burn-omat,              setname: avr8-burn-o-mat           }
 - { name: avro-cpp,                    setname: avro-c++                  }
 - { name: aws-cli,                     setname: awscli                    }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
@@ -104,6 +105,7 @@
 - { name: cairomm1_0,                  setname: cairomm                   }
 - { name: cattle-1.0,                  setname: cattle                    }
 - { name: cavez-of-phear,              setname: cavezofphear              }
+- { name: ceti-2-themes,               setname: ceti-2-theme              }
 - { name: clipit-gtk3,                 setname: clipit                    }
 - { name: cbatticon-gtk2,              setname: cbatticon                 }
 - { name: [ccache-memcached, ccache-memcached-static, ccache-static], setname: ccache } # freebsd subpackages
@@ -223,6 +225,7 @@
 - { name: iccexamin,                   setname: icc-examin                }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
+- { name: [intel-tbb,libtbb],          setname: tbb                       }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
@@ -1376,13 +1379,13 @@
     - khal
     - paramiko
     - pip
-    - pytest
     - pylint
     - pylint-celery
     - pylint-common
     - pylint-django
     - pylint-flask
     - pylint-plugin-utils
+    - pytest
     - pytest-catchlog
     - pytest-cookies
     - pytest-django
