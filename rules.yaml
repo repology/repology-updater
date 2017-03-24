@@ -1035,6 +1035,8 @@
 - { name: eigen, verpat: "2\\..*",     setname: eigen2 }
 - { name: eigen, verpat: "3\\..*",     setname: eigen3 }
 
+- { namepat: "elasticsearch[0-9]+",    setname: "elasticsearch" }
+
 - { name: enlightenment, verpat: "1\\.0.*", setname: enlightenment16 }
 
 - { name: [ geos1, geos35 ],           setname: geos }
