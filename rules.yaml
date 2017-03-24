@@ -51,7 +51,8 @@
 - { name: aprutil1,                    setname: apr-util                  }
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
-- { name: [arpack-ng-mpich,arpack-ng-openmpi], setname: arpack-ng         }
+- { name: [arpack-ng-mpich,arpack-ng-openmpi,libarpack-ng], setname: arpack-ng }
+- { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
 - { name: [astrometrynet,astrometry.net], setname: astrometry             }
 - { name: atk1.0,                      setname: atk                       }
 - { name: atk2mm,                      setname: atkmm                     }
@@ -61,7 +62,6 @@
 - { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
-- { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
 - { name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4], setname: avidemux }
 - { name: avr8-burn-omat,              setname: avr8-burn-o-mat           }
 - { name: avro-cpp,                    setname: avro-c++                  }
@@ -245,7 +245,6 @@
 - { name: krita3,                      setname: krita                     }
 - { name: libass4,                     setname: libass                    }
 - { name: libagg,                      setname: agg                       }
-- { name: libarpack-ng,                setname: arpack-ng                 }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbrotli,                   setname: brotli                    }
 - { name: libenet,                     setname: enet                      }
