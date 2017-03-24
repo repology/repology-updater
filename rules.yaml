@@ -57,7 +57,7 @@
 - { name: atk2mm,                      setname: atkmm                     }
 - { name: atkmm1.6,                    setname: atkmm                     }
 - { name: [atlas-cpp,atlascpp,libatlascpp], setname: atlas-c++            }
-- { name: [atlas,atlas-devel],         setname: atlas-c++,                family: freebsd }
+- { name: [atlas,atlas-devel],         setname: atlas-c++, category: devel, family: [ freebsd, openbsd ] } # don't mix with math/atlas
 - { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
