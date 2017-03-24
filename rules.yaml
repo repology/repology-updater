@@ -191,6 +191,7 @@
 - { name: einstein-puzzle,             setname: einstein,                 family: [ pkgsrc ] }
 - { name: el,                          setname: eternal-lands,            family: [ freebsd ] }
 - { name: el-data,                     setname: eternal-lands-data,       family: [ freebsd ] }
+- { name: electric-fence,              setname: electricfence             }
 - { name: enblend,                     setname: enblend-enfuse,           family: [ freebsd ] }
 - { name: endgame-singularity,         setname: singularity,              family: [ freebsd ] }
 - { name: endgame-singularity-music,   setname: singularity-music,        family: [ freebsd ] } # for consistency
