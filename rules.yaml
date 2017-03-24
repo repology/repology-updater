@@ -44,21 +44,26 @@
 - { name: albatross-themes,            setname: albatross-gtk-theme       }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
+- { name: american-fuzzy-lop,          setname: afl                       }
 - { name: anacron, verpat: "2\\.[4-9].*", setname: anacron2               } # different project (a fork?)
 - { name: angularjs,                   setname: angular.js                }
 - { name: antimicro-qt4,               setname: antimicro                 }
 - { name: aprutil1,                    setname: apr-util                  }
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
+- { name: [arpack-ng-mpich,arpack-ng-openmpi], setname: arpack-ng         }
 - { name: [astrometrynet,astrometry.net], setname: astrometry             }
 - { name: atk1.0,                      setname: atk                       }
 - { name: atk2mm,                      setname: atkmm                     }
 - { name: atkmm1.6,                    setname: atkmm                     }
+- { name: [atlas-cpp,atlascpp,libatlascpp], setname: atlas-c++            }
+- { name: [atlas,atlas-devel],         setname: atlas-c++                 family: freebsd }
 - { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
 - { name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4], setname: avidemux }
+- { name: avro-cpp,                    setname: avro-c++                  }
 - { name: aws-cli,                     setname: awscli                    }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
@@ -576,6 +581,8 @@
 - { name: wmppp.app,                   setname: wmppp,                    family: [ debuntu ]  }
 - { name: xscreensaver-app,            setname: xscreensaver.app,         family: [ gentoo ]  }
 - { name: zipper.app,                  setname: zipper,                   family: [ debuntu ]  }
+
+- { name: alspamixer-app,              setname: alsamixer.app             }
 
 # Ambiguous upstream package names, careful!
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
@@ -1406,10 +1413,11 @@
 # follow the naming guidelines, and it's not always possible to
 # detect python modules)
 - name:
+    - bitarray
+    - pytest-cov
     - sqlalchemy-migrate
     - tempita
     - werkzeug
-    - pytest-cov
   setname: "python:$0"
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
