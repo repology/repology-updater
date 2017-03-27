@@ -250,7 +250,6 @@
 - { name: ja2,                         setname: ja2-stracciatella         }
 - { name: jbig-kit,                    setname: jbigkit                   }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
-- { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules       }
 - { name: krita3,                      setname: krita                     }
 - { name: libass4,                     setname: libass                    }
 - { name: libagg,                      setname: agg                       }
@@ -357,9 +356,12 @@
 # kde stuff; see https://download.kde.org/stable/applications/16.12.2/src/ for list
 - { name: [okular-kde4-support, okular-light, kde4-okular, kde5-okular], setname: okular }
 - { name: [kde5-parley, kde-edu-parley], setname: parley }
-- { name: [kde5-bovo], setname: bovo }
-- { name: [kde5-yakuake], setname: yakuake }
-- { name: [kde5-poxml], setname: poxml }
+- { name: kde5-bovo,                   setname: bovo }
+- { name: kde5-poxml,                  setname: poxml }
+- { name: kde5-yakuake,                setname: yakuake }
+- { name: kf5-extra-cmake-modules,     setname: extra-cmake-modules }
+- { name: kf5-kdelibs4support,         setname: kdelibs4support }
+- { name: kf5-kio,                     setname: kio }
 
 # fonts; extra section as there's too much name variery
 - { namepat: "artwiz.*", setname: "fonts:artwiz-aleczapka" } # hopefully it's not too broad
