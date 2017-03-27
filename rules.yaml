@@ -332,6 +332,7 @@
 - { name: varnish4,                    setname: varnish,                  family: [ freebsd ]  }
 - { name: vsftpd-ssl,                  setname: vsftpd,                   family: [ freebsd ]  }
 - { name: [webp,libwebp6],             setname: libwebp                   }
+- { name: wop,                         setname: wormsofprey               }
 - { name: wpasupplicant,               setname: wpa_supplicant            }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
 - { name: xfce4-dict-plugin,           setname: xfce4-dict,               family: [ freebsd ] }
