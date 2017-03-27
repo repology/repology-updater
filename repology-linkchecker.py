@@ -140,7 +140,7 @@ def Main():
     options = parser.parse_args()
 
     logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
-    database = Database(options.dsn, readonly=True)
+    database = Database(options.dsn, readonly=True, autocommit=True)
 
     queue = multiprocessing.Queue(1)
     processpool = [multiprocessing.Process(target=LinkProcessorWorker, args=(queue, i, options, logger)) for i in range(options.jobs)]
