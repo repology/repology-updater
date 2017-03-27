@@ -158,6 +158,7 @@
 - { name: dbench4,                     setname: dbench4                   }
 - { name: dbmail22,                    setname: dbmail                    }
 - { name: dboxfe2,                     setname: dboxfe                    }
+- { name: d-conf,                      setname: dconf                     }
 - { name: dconf-editor-3.20,           ignore: true                       } # AUR specific versions
 - { name: ddclient-ipv6,               setname: ddclient                  }
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
@@ -228,6 +229,7 @@
 - { name: geotiff,                     setname: libgeotiff                }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
 - { name: git-flow,                    setname: gitflow                   }
+- { name: gkrellm-cpufreq,             setname: gkrellm2-cpufreq          }
 - { name: gl117,                       setname: gl-117,                   family: [ gentoo ]  }
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: [googletest,libgtest],       setname: gtest                     }
@@ -1538,6 +1540,24 @@
 # R libs
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu, arch ] }
 - { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, arch, debuntu, rosa ] }
+
+# coin-or
+- { namepat: "coinor-(.*)",            setname: "coin-or-$1"              } # XXX: problem
+
+- { name: coinalps, setname: coin-or-alps }
+- { name: coinbcp, setname: coin-or-bcp }
+- { name: coinbcps, setname: coin-or-bcps }
+- { name: coinblis, setname: coin-or-blis }
+- { name: coinbonmin, setname: coin-or-bonmin }
+- { name: coincbc, setname: coin-or-cbc }
+- { name: coincgl, setname: coin-or-cgl }
+- { name: coinclp, setname: coin-or-clp }
+- { name: coincouenne, setname: coin-or-couenne }
+- { name: coincsdp, setname: coin-or-csdp }
+- { name: coindip, setname: coin-or-dip }
+- { name: coindylp, setname: coin-or-dylp }
+- { name: coinflopcpp, setname: coin-or-flopc++ }
+- { name: coinlemon, setname: coin-or-lemon }
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "r:$1", family: [ debuntu ] }
