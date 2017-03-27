@@ -122,11 +122,13 @@
 - { name: chromium-browser,            setname: chromium                  }
 - { name: chromium-browser-stable,     setname: chromium                  }
 - { name: ckeditor3,                   setname: ckeditor                  }
+- { name: [clearlooks-phenix-gtk-theme,clearlooks-phenix-theme,gtk3-theme-clearlooks-phenix], setname: clearlooks-phenix }
 - { name: cln6,                        setname: cln                       }
 - { name: [clucene09,clucene-core],    setname: clucene                   }
 - { name: clutter-1.0,                 setname: clutter                   }
 - { name: clutter-gtk0.10,             setname: clutter-gtk               }
 - { name: [cockatrice-client,cockatrice-server], setname: cockatrice      }
+- { name: coffeescript,                setname: coffee-script             } # XXX: problem
 - { name: collectd5,                   setname: collectd                  }
 - { name: [coreos-etcd, coreos-etcd3], setname: etcd                      }
 - { name: corsixth,                    setname: corsix-th,                family: [ freebsd ] }
@@ -137,12 +139,15 @@
 - { name: coolreader,                  setname: coolreader3               }
 - { name: cpmtools2,                   setname: cpmtools                  }
 - { name: [cppcheck-nogui,cppcheck-nox], setname: cppcheck                }
+- { name: cpufreq-utils,               setname: cpufrequtils              }
 - { name: cracklib2,                   setname: cracklib                  }
 - { name: crimsonfields,               setname: crimson-fields            }
 - { name: crimson, verpat: "0\\.5.*",  setname: crimson-fields            } # XXX: MUST be renamed upstream
 - { name: critter,                     setname: criticalmass              }
 - { name: crypto++-562,                ignore: true                       } # specific version from AUR
+- { name: csharp-mode,                 setname: csharp-mode.el            }
 - { name: ctpp,                        setname: ctpp2                     }
+- { name: ctypes-sh,                   setname: ctypes.sh                 }
 - { name: curl-http2,                  setname: curl                      }
 - { name: cutecom-legacy,              setname: cutecom                   }
 - { name: curseofwar-sdl,              setname: curseofwar                }
@@ -248,6 +253,7 @@
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbrotli,                   setname: brotli                    }
 - { name: libenet,                     setname: enet                      }
+- { name: libcomedi,                   setname: comedilib                 }
 - { name: libfreeglut,                 setname: freeglut                  }
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
@@ -403,6 +409,13 @@
   setname: "fonts:bitstream-type1"
 
 - name:
+    - cm-unicode
+    - cm-unicode-fonts
+    - otf-cm-unicode
+    - ttf-cm-unicode
+  setname: "fonts:cm-unicode"
+
+- name:
     - font-cronyx-cyrillic
     - x11-font-cronyx-cyrillic
     - xorg-font-cronyx-cyrillic
@@ -413,6 +426,14 @@
     - google-croscore-fonts
     - ttf-crosscorefonts # XXX: should be renamed to ttf-crosscorefonts in SlackBuilds (it's CrOS (as in Chrome OS), not cross)
   setname: "fonts:croscore"
+
+- name:
+    - culmus
+    - culmus-ancient-semitic-fonts
+    - culmus-fancy
+    - culmus-fonts
+    - fonts-ttf-culmus
+  setname: "fonts:culmus"
 
 - name:
     - dejavu
@@ -544,6 +565,12 @@
     - opensans-ttf
     - ttf-opensans
   setname: "fonts:opensans"
+
+- name:
+    - fonts-ttf-oxygen
+    - oxygen-fonts
+    - ttf-oxygen
+  setname: "fonts:oxygen"
 
 - name:
     - fonts-ttf-paratype
@@ -730,6 +757,7 @@
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
+- { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dhewm3,                      verpat: "2013.*",                                   ignorever: true }
@@ -998,6 +1026,9 @@
 - { namepat: "cfengine-masterfiles[0-9]+", setname: cfengine-masterfiles }
 
 - { namepat: "clanlib-?[0-9.]+",       setname: clanlib } # XXX: split?
+
+- { namepat: "clutter-gst[0-9.-]+",    setname: clutter-gst }
+- { name: clutter-gst, verpat: "2\\..*", setname: clutter-gst2 }
 
 - { namepat: "clojure[0-9.]+",         setname: clojure }
 
@@ -1472,6 +1503,8 @@
 # detect python modules)
 - name:
     - bitarray
+    - colorama
+    - ctypes
     - pytest-cov
     - sqlalchemy-migrate
     - tempita
@@ -1481,6 +1514,7 @@
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
+- { name: "python:colorama-0.3.3",     setname: "python:colorama"         }
 - { namepat: "flake8.*",               setname: "python:$0"               }
 - { namepat: "flask.*",                setname: "python:$0"               }
 - { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }
