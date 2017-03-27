@@ -1139,6 +1139,10 @@
 - { namepat: "jersey[0-9]+",           setname: jersey }
 - { name: jersey, verpat: "1\\..*",    setname: jersey1 }
 
+- { namepat: "kdelibs[0-9]+",          setname: kdelibs }
+- { name: kdelibs, verpat: "3\\..*",   setname: kdelibs3 }
+- { name: kdelibs, verpat: "4\\..*",   setname: kdelibs4 }
+
 - { name: keepass2,                    setname: keepass }
 
 - { name: keepassx-devel,              setname: keepassx, family: [ freebsd ] }
