@@ -246,6 +246,7 @@
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
+- { name: [intellij-pycharm,pycharm-community], setname: pycharm          }
 - { name: ja2,                         setname: ja2-stracciatella         }
 - { name: jbig-kit,                    setname: jbigkit                   }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
@@ -1043,6 +1044,9 @@
 - { name: csound, verpat: "6\\..*",    setname: csound6 }
 
 - { namepat: "cuda-?[0-9.]+",          setname: cuda }
+- { name: cudatoolkit,                 setname: cuda }
+- { name: nvidia-cuda-sdk,             setname: cuda }
+- { name: nvidia-cuda-toolkit,         setname: cuda }
 
 - { namepat: "cvsps[0-9]+",            setname: cvsps }
 
