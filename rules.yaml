@@ -805,10 +805,12 @@
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
+- { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
 - { name: smem,                        ver: "20071119",                                    ignorever: true }
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignorever: true } # 2.15.0 was not released yet
 - { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
+- { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignorever: true }
