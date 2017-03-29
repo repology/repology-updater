@@ -521,7 +521,7 @@
       url: 'https://www.parabola.nu/packages/?q={name}'
   tags: [ all, production ]
 
-- name: parabola-testing
+- name: parabola_testing
   desc: Parabola Testing
   family: arch
   sources:
