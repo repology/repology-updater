@@ -156,9 +156,11 @@
 - { name: cython2,                     setname: cython                    }
 - { name: cython2-kivy,                setname: cython-kivy               }
 - { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debuntu ]  }
+- { name: dash-el,                     setname: dash.el                   }
 - { name: dbench4,                     setname: dbench4                   }
 - { name: dbmail22,                    setname: dbmail                    }
 - { name: dboxfe2,                     setname: dboxfe                    }
+- { name: dbus-cplusplus,              setname: dbus-c++                  }
 - { name: d-conf,                      setname: dconf                     }
 - { name: dconf-editor-3.20,           ignore: true                       } # AUR specific versions
 - { name: ddclient-ipv6,               setname: ddclient                  }
@@ -167,7 +169,7 @@
 - { name: dgen,                        setname: dgen-sdl                  }
 - { name: divideandsucceed,            setname: divide-and-succeed        }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
-- { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools], setname: djvulibre }
+- { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools,djvu], setname: djvulibre }
 - { name: [dosbox-sdl2,dosbox-debug,dosbox-multilib-patched], setname: dosbox }
 - { name: [doublecmd-gtk2,doublecmd-qt], setname: doublecmd }
 - { name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], setname: doxygen }
@@ -441,6 +443,12 @@
     - culmus-fonts
     - fonts-ttf-culmus
   setname: "fonts:culmus"
+
+- name:
+    - dai-banna
+    - dai-banna-fonts
+    - fonts-sil-dai-banna
+  setname: "fonts:dai-banna"
 
 - name:
     - dejavu
@@ -1474,6 +1482,7 @@
 - name:
     - 3to2
     - cherrypy
+    - decoratortools
     - dulwich
     - hg-git
     - hgsubversion
@@ -1521,6 +1530,7 @@
     - bitarray
     - colorama
     - ctypes
+    - decorator
     - pytest-cov
     - sqlalchemy-migrate
     - tempita
