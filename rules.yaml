@@ -366,6 +366,27 @@
 - { name: kf5-kdelibs4support,         setname: kdelibs4support }
 - { name: kf5-kio,                     setname: kio }
 
+# flash
+- name:
+    - adobe-flash-player
+    - adobe-flash-player-ppapi
+    - adobe-flash-plugin
+    - chromium-browser-pepper-flash
+    - chromium-pepper-flash
+    - flash-player-plugin
+    - flashplayer
+    - flashplayer-plugin
+    - flashplayer-standalone
+    - flashplayer-standalone-debug
+    - flashplugin
+    - flashplugin-beta
+    - flashplugin-nonfree
+    - linux-flashplayer
+    - pepper-flash
+    - pepperflash-plugin
+    - pepperflashplugin-nonfree
+  setname: adobe-flash # XXX: what's differente between 11.x and 2[45].x ? should it be split?
+
 # fonts; extra section as there's too much name variery
 - { namepat: "artwiz.*", setname: "fonts:artwiz-aleczapka" } # hopefully it's not too broad
 - { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
@@ -969,26 +990,6 @@
 - { namepat: "suse(?:32)?_.*",                                       family: [ pkgsrc ], ignore: true } # linux binary packages?
 
 # Version splits/tweaks
-- name:
-    - adobe-flash-player
-    - adobe-flash-player-ppapi
-    - adobe-flash-plugin
-    - chromium-browser-pepper-flash
-    - chromium-pepper-flash
-    - flash-player-plugin
-    - flashplayer
-    - flashplayer-plugin
-    - flashplayer-standalone
-    - flashplayer-standalone-debug
-    - flashplugin
-    - flashplugin-beta
-    - flashplugin-nonfree
-    - linux-flashplayer
-    - pepper-flash
-    - pepperflash-plugin
-    - pepperflashplugin-nonfree
-  setname: adobe-flash # XXX: what's differente between 11.x and 2[45].x ? should it be split?
-
 - { namepat: "allegro[0-9.]+",         setname: allegro }
 - { name: allegro-devel, setname: allegro, family: freebsd }
 - { name: allegro, verpat: "4\\..*",   setname: allegro4 }
