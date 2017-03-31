@@ -764,6 +764,11 @@
 - { name: [ddrescue],                  setname: dd_rescue, ver: "1.23", family: debuntu } # dd_rescue, not GNU one
 - { name: [gddrescue, gnu_ddrescue],   setname: ddrescue }
 
+- { name: hugo,                        setname: hugo-interactive-fiction, verpat: "3\\..*" }
+- { name: hugo,                        setname: hugo-sitegen, verpat: "2\\..*" }
+- { name: hugo,                        setname: hugo-emulator }
+- { name: gohugo,                      setname: hugo-sitegen }
+
 # distributed compiler vs. stream download utility
 - { name: icecream,                    setname: icecream-distributed-compiler, verpat: "1\\.[01].*" }
 - { name: icecream,                    setname: icecream-stream-extractor,     ver: "1.3" }
