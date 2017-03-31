@@ -618,6 +618,12 @@
 - { name: [ fonts-ttf-lohit, lohit ], setname: "fonts:lohit" }
 
 - name:
+    - font-micro-misc
+    - x11-font-micro-misc
+    - xorg-font-micro-misc
+  setname: "fonts:micro-misc"
+
+- name:
     - fonts-ttf-opensans
     - google-opensans-fonts
     - opensans-ttf
