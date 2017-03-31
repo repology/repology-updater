@@ -44,7 +44,7 @@
 - { name: albatross-themes,            setname: albatross-gtk-theme       }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
-- { name: american-fuzzy-lop,          setname: afl                       }
+- { name: [american-fuzzy-lop,afl-fuzz], setname: afl                     }
 - { name: anacron, verpat: "2\\.[4-9].*", setname: anacron2               } # different project (a fork?)
 - { name: angularjs,                   setname: angular.js                }
 - { name: antimicro-qt4,               setname: antimicro                 }
@@ -85,7 +85,8 @@
 - { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect], setname: boehm-gc }
 - { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
 - { name: bombono,                     setname: bombono-dvd               }
-- { name: [boost-all,boost-libs,boost-headers], setname: boost            }
+- { name: [boost-all,boost-libs,boost-headers,boost-python-libs,boost-python,boost-mpi,boost-bcp], setname: boost }
+- { namepat: "boost-mpi-source[0-9-.]+", setname: boost                   }
 - { namepat: "boost[0-9_.]+",          setname: boost                     }
 - { namepat: "botan[0-9.]+",           setname: botan                     }
 - { name: botan-stable,                setname: botan                     }
@@ -812,6 +813,7 @@
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: ack,                                                       family: mageia,       ignorever: true }
 - { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
+- { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
