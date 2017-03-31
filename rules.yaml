@@ -1576,7 +1576,6 @@
 - { name: gkrellm-aclock, setname: gkrellaclock }
 - { name: [gkrellm-bgchanger, gkrellmbgchg2], setname: gkrellmbgchg }
 - { name: gkrellm-flynn, setname: gkrellflynn }
-- { name: gkrellm-reminder, setname: gkrellmreminder }
 - { name: gkrellm-shoot, setname: gkrellshoot }
 - { name: gkrellm-sun, setname: gkrellsun }
 - { name: gkrellm-top, setname: gkrelltop }
@@ -1586,6 +1585,7 @@
 - { name: [gkrellmmailwatch, gkrellmmailwatch2], setname: gkrellm-mailwatch }
 - { name: gkrellmms2, setname: gkrellmms }
 - { name: gkrellmoon2, setname: gkrellmoon }
+- { name: gkrellmreminder, setname: gkrellm-reminder }
 - { name: [gkrellmvolume, gkrellmvolume2], setname: gkrellm-volume }
 
 # coin-or
