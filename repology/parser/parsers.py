@@ -31,6 +31,7 @@ from .gentoo import GentooGitParser
 from .gobolinux import GoboLinuxGitParser
 from .guix import GuixParser
 from .hackage import HackageParser
+from .homebrew import HomebrewJsonParser
 from .libregamewiki import LibreGameWikiParser
 from .nix import NixJsonParser
 from .openbsd import OpenBSDIndexParser
