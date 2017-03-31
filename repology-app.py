@@ -552,7 +552,7 @@ def metapackage_report(name):
             comment
         )
 
-        flask.flash('Report for {} added succesfully and will be processed in days, thank you!'.format(name), 'success')
+        flask.flash('Report for {} added succesfully and will be processed in a few days, thank you!'.format(name), 'success')
         return flask.redirect(flask.url_for('metapackage_report', name=name))
 
     return flask.render_template('metapackage-report.html', reports=get_db().GetReports(name), name=name)
