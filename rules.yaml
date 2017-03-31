@@ -624,6 +624,12 @@
   setname: "fonts:micro-misc"
 
 - name:
+    - font-mutt-misc
+    - x11-font-mutt-misc
+    - xorg-font-mutt-misc
+  setname: "fonts:mutt-misc"
+
+- name:
     - fonts-ttf-opensans
     - google-opensans-fonts
     - opensans-ttf
