@@ -620,6 +620,16 @@ def about():
     return flask.render_template('about.html')
 
 
+@app.route('/opensearch/metapackage.xml')
+def opensearch_metapackage():
+    return flask.render_template('opensearch-metapackage.xml'), {'Content-type': 'application/xml'}
+
+
+@app.route('/opensearch/maintainer.xml')
+def opensearch_maintainer():
+    return flask.render_template('opensearch-maintainer.xml'), {'Content-type': 'application/xml'}
+
+
 @app.route('/statistics')
 @app.route('/statistics/<sorting>')
 def statistics(sorting=None):

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+    <ShortName>{% block shortname %}{% endblock %}</ShortName>
+    <LongName>{% block longname %}{% endblock %}</LongName>
+	<Description>{% block description %}{% endblock %}</Description>
+	<Tags>{% block tags %}{% endblock %}</Tags>
+	<Image height="16" width="16" type="image/png">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAD9AAAA/QHie4OTAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAR1QTFRFAAAAJ4gnIYAhJ4YnIYEh5ISB546O6JCN5YKAIYAhL44v4Xd0L44v6I+M4nd05o+NIYAhNZU13mpn54+NIYAhKIcoL44vMIswMYkxMY8xNYs1NZU1PJw8Pp0+QqNCRp5GR5hHSapJSqpKTKtMULFQUqFSVrhWXb9dX7xfYMBgZMZkZsNmgsWChMaEj9OPm9ebo8+jpNakp9qnqNCoqNOoqdmpq9arrdqtst2yt+O3vNm8w+fDy+HLzevN0eXR1OnU2O/Y2u3a2+7b2/Db2/Hb3F5b3O/c3fDd3mpn4Xd04+/j4/Lj5IOA54+N55GO5/Pn6JaU6/Tr7aup7rGv77i28b+98cC/88jH9M3M9c/O9tTT99va++/v/PHx////XKecgAAAABR0Uk5TAE9UVFVVVldYzs7Oz8/Q0Pr6+vsFOHMTAAAAt0lEQVQYGQXBOzMDURgA0LPZTzYrhRljRobCMOnoUlH70/6AUplKoUmDIJMH+7h7nROqSTyYjvVbz23TxuSRLJOze55inNS1gjjxdzCOyEYlFKUyq2KRtAWgSxaxAgBEIsppVH23awdEproDVquBGMjW63R67nK3JhL9yyH7yjPTdyKxgfQzkxMxAIqa7UDsj4GzK5uP7BBdB+XFre3ylyb2NUbXc5/LPZrI30fVZH7j7bXVN83wD26oUE8XFR8QAAAAAElFTkSuQmCC</Image>
+	<InputEncoding>UTF-8</InputEncoding>
+	<OutputEncoding>UTF-8</OutputEncoding>
+    <Url type="text/html" method="get" template="{% block url %}{% endblock %}"/>
+	<Query role="example" searchTerms="{% block example %}{% endblock %}"/>
+	<Language>en-us</Language>
+</OpenSearchDescription>

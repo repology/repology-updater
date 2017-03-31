@@ -13,6 +13,8 @@
 	<link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.css") }}">
 	<link rel="stylesheet" href="{{ url_for("static", filename="repology.css") }}">
 	<link rel="icon" href="{{ url_for("static", filename="repology.ico") }}" sizes="16x16 32x32 64x64" type="image/x-icon">
+	<link rel="search" type="application/opensearchdescription+xml" title="Repology packages" href="{{ url_for("opensearch_metapackage") }}">
+	<link rel="search" type="application/opensearchdescription+xml" title="Repology maintainers" href="{{ url_for("opensearch_maintainer") }}">
 </head>
 <body>
 {% macro classactive_if_endpoint(endpoint) -%}
