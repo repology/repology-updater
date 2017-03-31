@@ -103,6 +103,10 @@ class RepositoryManager:
 
     # Private methods which provide single actions on sources
     def __FetchSource(self, update, repository, source, logger):
+        if 'fetcher' not in source:
+            logger.Log('fetching source {} not supported'.format(source['name']))
+            return
+
         logger.Log('fetching source {} started'.format(source['name']))
 
         self.__SpawnClass(
@@ -118,6 +122,10 @@ class RepositoryManager:
         logger.Log('fetching source {} complete'.format(source['name']))
 
     def __ParseSource(self, repository, source, logger):
+        if 'parser' not in source:
+            logger.Log('parsing source {} not supported'.format(source['name']))
+            return []
+
         logger.Log('parsing source {} started'.format(source['name']))
 
         # parse

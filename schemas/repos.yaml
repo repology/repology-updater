@@ -26,10 +26,10 @@ sequence:
                 required: yes
               "fetcher":
                 type: str
-                required: yes
+                required: no
               "parser":
                 type: str
-                required: yes
+                required: no
               "url":
                 type: str
                 required: no
