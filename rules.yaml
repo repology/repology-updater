@@ -339,6 +339,7 @@
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
 - { name: xfce4-dict-plugin,           setname: xfce4-dict,               family: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                family: [ freebsd ] }
+- { name: yofrankie-bge,               setname: yofrankie                 }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
 - { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
 - { namepat: "android-tools-[^-]+",    setname: android-tools,            family: [ freebsd, pkgsrc ] }
@@ -411,6 +412,11 @@
     - msimonson-anonymouspro-fonts
     - ttf-anonymous-pro
   setname: "fonts:anonymouspro"
+
+- name:
+    - aarkpandora
+    - fonts-arkpandora
+  setname: aarkpandora
 
 - { namepat: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
 - { namepat: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
@@ -586,6 +592,12 @@
     - otf-isabella
     - ttf-isabella
   setname: "fonts:isabella"
+
+- name:
+    - x11-font-isas-misc
+    - xorg-font-isas-misc
+    - font-isas-misc
+  setname: "fonts:isas-misc"
 
 - name:
     - fonts-linuxlibertine
@@ -960,8 +972,9 @@
 - { family: libregamewiki, name: "iter vehemens ad necem",           setname: ivan }
 - { family: libregamewiki, name: "jump n bump",                      setname: jumpnbump }
 - { family: libregamewiki, name: "kobo deluxe",                      setname: kobodeluxe }
-- { family: libregamewiki, name: "liquid war 6",                     setname: liquidwar6 }
+- { family: libregamewiki, name: "liberation circuit",               setname: liberation-circuit }
 - { family: libregamewiki, name: "lips of suna",                     setname: lipsofsuna }
+- { family: libregamewiki, name: "liquid war 6",                     setname: liquidwar6 }
 - { family: libregamewiki, name: "lordsawar!",                       setname: lordsawar }
 - { family: libregamewiki, name: "me and my shadow",                 setname: meandmyshadow }
 - { family: libregamewiki, name: "pink pony",                        setname: pink-pony }
@@ -983,6 +996,8 @@
 - { family: libregamewiki, name: "unknown horizons",                 setname: unknown-horizons }
 - { family: libregamewiki, name: "valyria tear",                     setname: valyriatear }
 - { family: libregamewiki, name: "vega strike",                      setname: vegastrike }
+- { family: libregamewiki, name: "vulture's eye",                    setname: vultures-eye }
+- { family: libregamewiki, name: "yo frankie!",                      setname: yofrankie }
 
 # Unique ignores which will never appear in other distros
 - { namepat: "alterator-.*",                                         family: [ sisyphus ], ignore: true } # ALT-specific
@@ -1560,6 +1575,7 @@
 - { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }
 - { name: [dyndnsc,dyndnsc-py2],       setname: "python:dyndnsc"          }
 - { namepat: "django-.*",              setname: "python:$0"               }
+- { name: [django, django12, django14], setname: "python:django"          }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
 - { name: [pylint-py27,pylint3,pylint-gui,pylint3-gui], setname: "python:pylint" }
