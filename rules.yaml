@@ -410,9 +410,9 @@
   setname: "fonts:anonymouspro"
 
 - name:
-    - aarkpandora
+    - arkpandora
     - fonts-arkpandora
-  setname: aarkpandora
+  setname: fonts:arkpandora
 
 - { namepat: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
 - { namepat: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
