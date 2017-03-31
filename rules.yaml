@@ -356,6 +356,16 @@
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
 - { namepat: "zabbix[0-9]*-(?:agent|frontend|proxy|server|common|proxy-sqlite|server-mysql|agentd)[0-9.-]*", setname: "zabbix" }
 
+# qt
+- { name: [qt, qt1, qt3, qt4, qt5], setname: qt }
+- { name: qt, verpat: "1\\..*", setname: qt1 }
+- { name: qt, verpat: "3\\..*", setname: qt3 }
+- { name: qt, verpat: "4\\..*", setname: qt4 }
+- { name: qt, verpat: "5\\..*", setname: qt5 }
+
+- { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns)[0-9]*", verpat: "4\\..*", setname: "qt4-$1" }
+- { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns|widgets|qml)[0-9]*", verpat: "5\\..*", setname: "qt5-$1" }
+
 # kde stuff; see https://download.kde.org/stable/applications/16.12.2/src/ for list
 - { name: [okular-kde4-support, okular-light, kde4-okular, kde5-okular], setname: okular }
 - { name: [kde5-parley, kde-edu-parley], setname: parley }
