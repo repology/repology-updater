@@ -1677,7 +1677,7 @@
 - { namepat: "ros-(.*)",               setname: "ros:$1", family: [ debuntu, arch ] }
 
 # VDR
-- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", family: [ freebsd, debuntu, mageia, opensuse ] }
+- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", family: [ freebsd, debuntu, mageia, opensuse, rosa ] }
 - { namepat: "vdr-(.*)",               setname: "vdr:$1", family: [ gentoo, fedora ] }
 
 # Haskell
