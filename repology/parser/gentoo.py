@@ -23,6 +23,34 @@ from repology.util import GetMaintainers
 from repology.version import VersionCompare
 
 
+def ParseConditionalExpr(string):
+    words = string.split()
+    result = []
+
+    nestlevel = 0
+    while words:
+        word = words.pop(0)
+
+        # enter condition
+        if not '/' in word and word.endswith('?') and words and words[0] == '(':
+            words.pop(0)
+            nestlevel += 1
+            continue
+
+        # leave condition
+        if word == ')':
+            nestlevel -= 1
+            continue
+
+        result.append(word)
+
+        # rename
+        if len(words) >= 2 and words[0] == '->':
+            words = words[2:]
+
+    return result
+
+
 def SanitizeVersion(version):
     origversion = version
 
@@ -133,12 +161,7 @@ class GentooGitParser():
                                     else:
                                         pkg.licenses += value.split(' ')
                                 elif key == 'SRC_URI':
-                                    if value.find(' ') != -1:
-                                        # XXX: need more complex parsing
-                                        pass
-                                    else:
-                                        # XXX: mirror:// urls pass
-                                        pkg.downloads.append(value)
+                                    pkg.downloads += ParseConditionalExpr(value)
 
                     result.append(pkg)
 
