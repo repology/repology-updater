@@ -334,6 +334,7 @@
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
 - { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
 - { name: varnish4,                    setname: varnish,                  family: [ freebsd ]  }
+- { name: vdr-devel,                   setname: vdr, ignorever: true      }
 - { name: vsftpd-ssl,                  setname: vsftpd,                   family: [ freebsd ]  }
 - { name: [webp,libwebp6],             setname: libwebp                   }
 - { name: wop,                         setname: wormsofprey               }
@@ -1686,7 +1687,7 @@
 - { namepat: "ros-(.*)",               setname: "ros:$1", family: [ debuntu, arch ] }
 
 # VDR
-- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1", family: [ freebsd, debuntu, mageia, opensuse, rosa ] }
+- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1" }
 - { namepat: "vdr-(.*)",               setname: "vdr:$1", family: [ gentoo, fedora ] }
 
 # Haskell
