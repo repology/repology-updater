@@ -16,8 +16,8 @@
 			<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
 				<text x="{{ leftwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ repometadata[repo].desc }} package</text>
 				<text x="{{ leftwidth / 2.0 }}" y="14">{{ repometadata[repo].desc }} package</text>
-				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ version|truncate(length=8,killwords=True)|escape }}</text>
-				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="14">{{ version|truncate(length=8,killwords=True)|escape }}</text>
+				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ version|truncate(length=8, killwords=True, "...", 0)|escape }}</text>
+				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="14">{{ version|truncate(8, True, "...", 0)|escape }}</text>
 			</g>
 		</g>
 	</a>

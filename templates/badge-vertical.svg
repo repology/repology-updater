@@ -42,7 +42,7 @@
 				<text x="{{ repo_colwidth - 5 }}" y="{{ hdrheight + rowheight * loop.index0 + 14 }}">{{ repo.name }}</text>
 			</g>
 			<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-				{%- set truncatedver = repo.version|escape|truncate(length=13,killwords=True) -%}
+				{%- set truncatedver = repo.version|escape|truncate(13, True, "...", 0) -%}
 				<text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ hdrheight + rowheight * loop.index0 + 15 }}" fill="#010101" fill-opacity=".3">{{ truncatedver }}</text>
 				<text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ hdrheight + rowheight * loop.index0 + 14 }}">{{ truncatedver }}</text>
 			</g>
