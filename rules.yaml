@@ -773,8 +773,8 @@
 - { name: [gddrescue, gnu_ddrescue],   setname: ddrescue }
 
 - { name: hugo,                        setname: hugo-interactive-fiction, verpat: "3\\..*" }
-- { name: hugo,                        setname: hugo-sitegen, verpat: "2\\..*" }
-- { name: hugo,                        setname: hugo-emulator }
+- { name: hugo,                        setname: hugo-emulator, verpat: "2\\..*" }
+- { name: hugo,                        setname: hugo-sitegen }
 - { name: gohugo,                      setname: hugo-sitegen }
 
 # distributed compiler vs. stream download utility
