@@ -901,6 +901,7 @@
 # F-Droid is too alien, even if package names match in most cases it's entirely different application
 # So use whitelist
 - {                                                                  family: [ fdroid ], ignore: true }
+- { name: "andor's trail",                                           family: [ fdroid ], unignore: true } # as an exception, allow android project (present in f-droid and libregamewiki)
 - { name: busybox,                                                   family: [ fdroid ], unignore: true }
 - { name: firefox,                                                   family: [ fdroid ], unignore: true }
 - { name: freeminer,                                                 family: [ fdroid ], unignore: true }
