@@ -123,7 +123,7 @@ class TestParsers(unittest.TestCase):
                 'maintainers': ['kensington@gentoo.org'],
                 'homepage': 'https://asciinema.org/',  # ['https://asciinema.org/', 'https://pypi.python.org/pypi/asciinema']
                 'comment': 'Command line recorder for asciinema.org service',
-                'downloads': [],
+                'downloads': ['https://github.com/asciinema/asciinema/archive/v1.3.0.tar.gz'],
                 'licenses': ['GPL-3+'],
             }
         )
