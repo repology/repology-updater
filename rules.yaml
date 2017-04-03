@@ -1619,6 +1619,7 @@
 - { name: [django, django12, django14], setname: "python:django"          }
 - { name: "python:djvulibre",          setname: "python:python-djvulibre" } # correct name on PyPi
 - { name: "python:python-pyaudio",     setname: "python:pyaudio" }
+- { name: "python:audio", verpat: "0\\.2\\..*", setname: "python:pyaudio" }
 - { name: ["python:poppler", "python:python-poppler"], setname: "python:pypoppler"       }
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
 - { name: [pylint-py27,pylint3,pylint-gui,pylint3-gui], setname: "python:pylint" }
