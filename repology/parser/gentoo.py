@@ -48,6 +48,8 @@ def ParseConditionalExpr(string):
         if len(words) >= 2 and words[0] == '->':
             words = words[2:]
 
+        # XXX: parse ( || foo bar ) construct used with licenses
+
     return result
 
 
