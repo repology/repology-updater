@@ -871,7 +871,7 @@
 - { name: openxcom,                    verpat: "2016.*",                                   ignorever: true } # git snapshots
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
-- { name: py-cpuinfo,                  ver: "201.*",                                       ignorever: true }
+- { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: ppsspp,                      verpat: "201.*",                                    ignorever: true } # XXX: problem
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
@@ -1597,7 +1597,7 @@
 - { name: "python:graphviz", verpat: "1\\.[34].*", setname: "python:pygraphviz" } # use pypi name!!!
 - { namepat: "python:scikits-(.*)",      setname: "python:scikits.$1" }
 - { namepat: "scikits-(learn|optimization|timeseries)", setname: "python:scikits.$1" }
-- { name: scikits-image,               setname: "python:scikit-image" }
+- { name: scikits_image,               setname: "python:scikit-image" }
 - { name: "python:cpuinfo",            setname: "python:py-cpuinfo"       }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
 - { name: "python:colorama-0.3.3",     setname: "python:colorama"         }
