@@ -24,20 +24,20 @@ from repology.parser.gentoo import ParseConditionalExpr
 
 class TestGentooParseExpr(unittest.TestCase):
     def test_simple(self):
-        self.assertEqual(ParseConditionalExpr('http://foo'), [ 'http://foo' ])
+        self.assertEqual(ParseConditionalExpr('http://foo'), ['http://foo'])
 
     def test_multiple(self):
-        self.assertEqual(ParseConditionalExpr('http://foo http://bar'), [ 'http://foo', 'http://bar' ])
+        self.assertEqual(ParseConditionalExpr('http://foo http://bar'), ['http://foo', 'http://bar'])
 
     def test_rename(self):
-        self.assertEqual(ParseConditionalExpr('http://foo/file.tgz -> file.tar.gz'), [ 'http://foo/file.tgz' ])
+        self.assertEqual(ParseConditionalExpr('http://foo/file.tgz -> file.tar.gz'), ['http://foo/file.tgz'])
 
     def test_condition(self):
-        self.assertEqual(ParseConditionalExpr('!http? ( http://foo )'), [ 'http://foo' ])
-        self.assertEqual(ParseConditionalExpr('!http? ( http://foo ) !ftp? ( http://bar )'), [ 'http://foo', 'http://bar' ])
+        self.assertEqual(ParseConditionalExpr('!http? ( http://foo )'), ['http://foo'])
+        self.assertEqual(ParseConditionalExpr('!http? ( http://foo ) !ftp? ( http://bar )'), ['http://foo', 'http://bar'])
 
     def test_nested_condition(self):
-        self.assertEqual(ParseConditionalExpr('!http? ( !ftp? ( http://foo ) )'), [ 'http://foo' ])
+        self.assertEqual(ParseConditionalExpr('!http? ( !ftp? ( http://foo ) )'), ['http://foo'])
 
     def test_realworld(self):
         self.assertEqual(

@@ -32,7 +32,7 @@ def ParseConditionalExpr(string):
         word = words.pop(0)
 
         # enter condition
-        if not '/' in word and word.endswith('?') and words and words[0] == '(':
+        if '/' not in word and word.endswith('?') and words and words[0] == '(':
             words.pop(0)
             nestlevel += 1
             continue
