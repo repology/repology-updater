@@ -454,6 +454,11 @@
   setname: "fonts:bitstream-type1"
 
 - name:
+    - ttf-cheapskate
+    - cheapskatefonts
+  setname: "fonts:cheapskate"
+
+- name:
     - cm-unicode
     - cm-unicode-fonts
     - otf-cm-unicode
