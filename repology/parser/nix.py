@@ -97,8 +97,10 @@ class NixJsonParser():
 
                 if 'maintainers' in meta:
                     maintainers = meta['maintainers']
-                    if isinstance(maintainers, list):
-                        maintainers = ', '.join(meta['maintainers'])
+                    if not isinstance(meta['maintainers'], list):
+                        print('maintainers is not a list: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
+                    else:
+                        maintainers = ', '.join(maintainers)
                     pkg.maintainers = GetMaintainers(maintainers)
 
                 if 'license' in meta:
