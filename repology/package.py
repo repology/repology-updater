@@ -164,6 +164,7 @@ class Package:
         CheckList(self.downloads, 'downloads', no_whitespace=True)
 
     def Normalize(self):
+        # normalize homepage (currently adds / to url which points to host)
         if self.homepage:
             match = re.match('(https?://)([^/]+)(/.*)?$', self.homepage, re.IGNORECASE)
 
@@ -174,7 +175,8 @@ class Package:
 
                 self.homepage = schema + hostname + path
 
-        if self.maintainers:
+        # unicalize and sort maintainers list
+        if len(self.maintainers) > 1:
             self.maintainers = sorted(set(self.maintainers))
 
     @property
