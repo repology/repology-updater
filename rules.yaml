@@ -300,6 +300,7 @@
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5], setname: qbittorrent }
 - { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator], setname: qtcreator }
+- { name: quadkonsole,                 setname: quadkonsole4              }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
 - { name: r2e,                         setname: rss2email                 }
 - { name: rdkafka,                     setname: librdkafka                }
