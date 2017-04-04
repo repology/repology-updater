@@ -283,10 +283,12 @@
 - { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
+- { namepat: "network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine)", setname: "networkmanager-$1" }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              family: [ freebsd ] }
 - { name: opencv2,                     setname: opencv                    }
+- { name: [openvpn-mbedtls, openvpn-polarssl, openvpn23], setname: openvpn                   }
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph,           family: [ freebsd ] }
 - { name: pacman-arena,                setname: pacmanarena,              family: [ openbsd ] }
 - { name: perlbrew,                    setname: "perl:app-perlbrew"       }
