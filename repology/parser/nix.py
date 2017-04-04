@@ -96,7 +96,10 @@ class NixJsonParser():
                     pkg.comment = meta['description']
 
                 if 'maintainers' in meta:
-                    pkg.maintainers = GetMaintainers(', '.join(meta['maintainers']))
+                    maintainers = meta['maintainers']
+                    if isinstance(maintainers, list):
+                        maintainers = ', '.join(meta['maintainers'])
+                    pkg.maintainers = GetMaintainers(maintainers)
 
                 if 'license' in meta:
                     pkg.licenses = ExtractLicenses(meta['license'])
