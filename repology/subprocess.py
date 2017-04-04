@@ -34,6 +34,8 @@ def RunSubprocess(command, logger, shell=False, cwd=None):
                           stdout=subprocess.PIPE,
                           stderr=subprocess.STDOUT,
                           universal_newlines=True,
+                          encoding='utf-8',
+                          errors='ignore',
                           cwd=cwd) as proc:
         for line in proc.stdout:
             logger.GetIndented().Log(line.strip())
