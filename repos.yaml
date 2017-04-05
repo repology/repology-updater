@@ -942,27 +942,6 @@
   tags: [ all, production, mageia, rpm ]
 
 ###########################################################################
-# OpenSUSE
-###########################################################################
-- name: opensuse_tumbleweed
-  desc: OpenSUSE Tumbleweed
-  family: opensuse
-  sources:
-    - name: data
-      fetcher: Repodata
-      parser: Repodata
-      url: http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
-  repolinks:
-    - desc: OpenSUSE home
-      url: https://www.opensuse.org/
-    - desc: OpenSUSE package search
-      url: https://software.opensuse.org/
-  packagelinks:
-    - desc: Package details
-      url: 'https://software.opensuse.org/package/{name}'
-  tags: [ all, production, opensuse, rpm ]
-  #
-###########################################################################
 # OpenSUSE Leap 42.2
 ###########################################################################
 - name: opensuse_leap_42_2
@@ -989,6 +968,27 @@
       parser: Repodata
       url: http://download.opensuse.org/update/leap/42.2/non-oss/
       subrepo: update-non-oss
+  repolinks:
+    - desc: OpenSUSE home
+      url: https://www.opensuse.org/
+    - desc: OpenSUSE package search
+      url: https://software.opensuse.org/
+  packagelinks:
+    - desc: Package details
+      url: 'https://software.opensuse.org/package/{name}'
+  tags: [ all, production, opensuse, rpm ]
+
+###########################################################################
+# OpenSUSE
+###########################################################################
+- name: opensuse_tumbleweed
+  desc: OpenSUSE Tumbleweed
+  family: opensuse
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
   repolinks:
     - desc: OpenSUSE home
       url: https://www.opensuse.org/
