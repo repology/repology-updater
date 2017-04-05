@@ -24,7 +24,7 @@
 				<div class="package-repository">
 				<a class="panel-heading-link" href="{{ url_for('repository', repo=package.repo) }}">{{ repometadata[package.repo].desc }}</a>
 				{%- if package.subrepo -%}
-					<sup>{{ package.subrepo }}</sup>
+					<br><sup>{{ package.subrepo }}</sup>
 				{%- endif -%}
 				</div>
 				<h3 class="package-name">

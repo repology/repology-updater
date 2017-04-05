@@ -1,5 +1,6 @@
 .package-repository {
     float: right;
+    text-align: right;
 }
 
 .package-name {
