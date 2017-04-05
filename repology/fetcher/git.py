@@ -30,7 +30,9 @@ class GitFetcher():
         if not os.path.isdir(statepath):
             RunSubprocess(['git', 'clone', '--progress', '--depth=1', self.url, statepath], logger=logger)
         elif update:
-            RunSubprocess(['git', 'fetch', '--progress'], cwd=statepath, logger=logger)
+            RunSubprocess(['git', 'fetch', '--progress', '--depth=1'], cwd=statepath, logger=logger)
             RunSubprocess(['git', 'reset', '--hard', 'origin/' + self.branch], cwd=statepath, logger=logger)
+            RunSubprocess(['git', 'reflog', 'expire', '--expire=0', '--all'], cwd=statepath, logger=logger)
+            RunSubprocess(['git', 'prune'], cwd=statepath, logger=logger)
         else:
             logger.Log('no update requested, skipping')
