@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 
+{% block keywords %}{{ super() }}, {{ name }}{% endblock %}
+
 {% block preheader %}
 <div class="btn-group pageheader-right">
 	<a href="{{ url_for("metapackage_versions", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_versions" %} active{% endif %}">Versions</a>
