@@ -45,6 +45,7 @@ class RepositoryManager:
                         for key in newsource.keys():
                             if isinstance(newsource[key], str):
                                 newsource[key] = newsource[key].replace('{source}', name)
+                        newsource['name'] = name
                         newsources.append(newsource)
                 else:
                     newsources.append(source)
