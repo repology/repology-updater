@@ -45,7 +45,6 @@ class RepositoryManager:
                         for key in newsource.keys():
                             if isinstance(newsource[key], str):
                                 newsource[key] = newsource[key].replace('{source}', name)
-                        newsource['name'] = name.replace('/', '_')
                         newsources.append(newsource)
                 else:
                     newsources.append(source)
@@ -56,7 +55,7 @@ class RepositoryManager:
         return os.path.join(self.statedir, repository['name'] + '.state')
 
     def __GetSourcePath(self, repository, source):
-        return os.path.join(self.__GetRepoPath(repository), source['name'])
+        return os.path.join(self.__GetRepoPath(repository), source['name'].replace('/', '_'))
 
     def __GetSerializedPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.packages')
