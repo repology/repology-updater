@@ -972,23 +972,23 @@
     - name: oss
       fetcher: Repodata
       parser: Repodata
-      url: http://download.opensuse.org/distribution/leap/42.2/repo/oss/suse/
-      subrepo: Main Repository (OSS)
+      url: http://download.opensuse.org/source/distribution/leap/42.2/repo/oss/suse/
+      subrepo: oss
     - name: non-oss
       fetcher: Repodata
       parser: Repodata
-      url: http://download.opensuse.org/distribution/leap/42.2/repo/non-oss/suse/
-      subrepo: Main Repository (NON-OSS)
+      url: http://download.opensuse.org/source/distribution/leap/42.2/repo/non-oss/suse/
+      subrepo: non-oss
     - name: update-oss
       fetcher: Repodata
       parser: Repodata
       url: http://download.opensuse.org/update/leap/42.2/oss/
-      subrepo: Update Repository (OSS)
+      subrepo: update-oss
     - name: update-non-oss
       fetcher: Repodata
       parser: Repodata
       url: http://download.opensuse.org/update/leap/42.2/non-oss/
-      subrepo: Update Repository (NON-OSS)
+      subrepo: update-non-oss
   repolinks:
     - desc: OpenSUSE home
       url: https://www.opensuse.org/
