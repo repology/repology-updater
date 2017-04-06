@@ -65,8 +65,36 @@
       url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{name}.log'
   tags: [ all, production ]
 
-- name: pkgsrc
-  desc: pkgsrc
+- name: pkgsrc_2017_1
+  desc: pkgsrc-2017Q1
+  family: pkgsrc
+  sources:
+    - name: INDEX
+      fetcher: File
+      parser: PkgsrcIndex
+      url: https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2017Q1/pkgsrc/INDEX
+  repolinks:
+    - desc: pkgsrc home
+      url: https://www.pkgsrc.org/
+    - desc: pkgsrc.se
+      url: http://pkgsrc.se/
+    - desc: pkgsrc CVS repository
+      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
+  packagelinks:
+    - desc: pkgsrc.se page
+      url: 'http://pkgsrc.se/{category}/{name}'
+    - desc: Port CVS directory
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
+    - desc: Port CVS directory (quarterly branch)
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}/?only_with_tag=pkgsrc-2017Q1'
+    - desc: Port Makefile
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{category}/{name}/Makefile?content-type=text/plain'
+    - desc: Port Makefile (quarterly branch)
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{category}/{name}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q1'
+  tags: [ all, production ]
+
+- name: pkgsrc_current
+  desc: pkgsrc current
   family: pkgsrc
   sources:
     - name: INDEX
