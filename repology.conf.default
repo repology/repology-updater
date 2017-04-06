@@ -33,7 +33,7 @@ STATE_DIR = "_state"
 # Used by repology-update, repology-app, repology-dump
 # Overridable via --repos-path command line arg
 #
-REPOS_PATH = "repos.yaml"
+REPOS_DIR = "repos.d"
 
 #
 # Path to YAML file containing package transformation rules
@@ -41,7 +41,7 @@ REPOS_PATH = "repos.yaml"
 # Used by repology-update
 # Overridable via --rules-path command line arg
 #
-RULES_PATH = "rules.yaml"
+RULES_DIR = "rules.d"
 
 #
 # Array of repository names or tags to work with

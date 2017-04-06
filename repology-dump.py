@@ -58,7 +58,7 @@ def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
-    parser.add_argument('-E', '--repos-path', default=repology.config.REPOS_PATH, help='path to reposotories config')
+    parser.add_argument('-E', '--repos-dir', default=repology.config.REPOS_DIR, help='path directory with reposotory configs')
     parser.add_argument('-M', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
 
     filters_grp = parser.add_argument_group('Filters')
@@ -104,7 +104,7 @@ def Main():
     if not options.no_shadow:
         filters.append(ShadowFilter())
 
-    repoman = RepositoryManager(options.repos_path, options.statedir)
+    repoman = RepositoryManager(options.repos_dir, options.statedir)
 
     def PackageProcessor(packageset):
         FillPackagesetVersions(packageset)
