@@ -1,0 +1,34 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# GNUstep packages (should be likely the other way around: foo->foo.app)
+- { name: aclock.app,                  setname: aclock,                   family: [ debuntu ]  }
+- { name: addresses-for-gnustep,       setname: addresses,                family: [ debuntu ]  }
+- { name: batmon.app,                  setname: batmon,                   family: [ debuntu, arch ]  }
+- { name: camera.app,                  setname: camera,                   family: [ debuntu ]  }
+- { name: cenon.app,                   setname: cenon,                    family: [ debuntu ]  }
+- { name: charmap.app,                 setname: charmap,                  family: [ debuntu ]  }
+- { name: cynthiune.app,               setname: cynthiune,                family: [ debuntu ]  }
+- { name: edenmath.app,                setname: edenmath,                 family: [ debuntu ]  }
+- { name: gomoku.app,                  setname: gomoku,                   family: [ debuntu ]  }
+- { name: gorm.app,                    setname: gorm,                     family: [ debuntu ]  }
+- { name: grr.app,                     setname: grr,                      family: [ debuntu ]  }
+- { name: gtamsanalyzer.app,           setname: gtamsanalyzer,            family: [ debuntu ]  }
+- { name: helpviewer.app,              setname: helpviewer,               family: [ debuntu ]  }
+- { name: lusernet.app,                setname: lusernet,                 family: [ debuntu ]  }
+- { name: mixer_app,                   setname: mixer.app,                family: [ gentoo ]  }
+- { name: mpdcon.app,                  setname: mpdcon,                   family: [ debuntu ]  }
+- { name: paje.app,                    setname: paje,                     family: [ debuntu ]  }
+- { name: plopfolio.app,               setname: plopfolio,                family: [ debuntu ]  }
+- { name: poe.app,                     setname: poe,                      family: [ debuntu ]  }
+- { name: preview.app,                 setname: preview,                  family: [ debuntu ]  }
+- { name: price.app,                   setname: price,                    family: [ debuntu ]  }
+- { name: projectcenter.app,           setname: projectcenter,            family: [ debuntu ]  }
+- { name: systempreferences.app,       setname: systempreferences,        family: [ debuntu ]  }
+- { name: terminal,                    setname: terminal.app,             family: [ gentoo ]  }
+- { name: textedit.app,                setname: textedit,                 family: [ debuntu ]  }
+- { name: timemon.app,                 setname: timemon,                  family: [ debuntu ]  }
+- { name: wmppp.app,                   setname: wmppp,                    family: [ debuntu ]  }
+- { name: xscreensaver-app,            setname: xscreensaver.app,         family: [ gentoo ]  }
+- { name: zipper.app,                  setname: zipper,                   family: [ debuntu ]  }
+
+- { name: alsamixer-app,               setname: alsamixer.app             }

@@ -1,0 +1,14 @@
+- name: fdroid
+  desc: F-Droid
+  family: fdroid
+  sources:
+    - name: F-Droid
+      fetcher: File
+      parser: FDroid
+      url: https://f-droid.org/repo/index.xml
+  shadow: true
+  repolinks:
+    - desc: F-Droid
+      url: https://f-droid.org/
+  # XXX: link requires java class O_o
+  tags: [ all, production ]

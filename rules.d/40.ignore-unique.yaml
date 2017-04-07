@@ -1,0 +1,16 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Unique ignores which will never appear in other distros
+- { namepat: "alterator-.*",                                         family: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "installer-.*",                                         family: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "altlinux-.*",                                          family: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "appliance-.*",                                         family: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "repocop.*",                                            family: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "livecd-*",                                             family: [ sisyphus ], ignore: true } # ALT-specific
+- { namepat: "compat[0-9].*",                                        family: [ freebsd, pkgsrc ], ignore: true } # system libs for older FreeBSD versions
+- { namepat: "netbsd32_compat[0-9].*",                               family: [ pkgsrc ], ignore: true } # system libs for older FreeBSD versions
+- { name: "eselect",                                                 family: [ gentoo ], ignore: true } # Gentoo-specific
+- { namepat: "eselect-.*",                                           family: [ gentoo ], ignore: true } # Gentoo-specific
+- { namepat: "fedora-.*",                                            family: [ fedora ], ignore: true } # Fedora-specific
+- { namepat: "linux-(?:c6|f10)-.*",                                  family: [ freebsd ], ignore: true } # linux binary packages for FreeBSD
+- { namepat: "suse(?:32)?_.*",                                       family: [ pkgsrc ], ignore: true } # linux binary packages?

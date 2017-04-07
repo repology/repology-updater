@@ -1,0 +1,21 @@
+###########################################################################
+# AltLinux Sisyphus
+###########################################################################
+- name: altsisyphus
+  desc: ALT Sisyphus
+  family: sisyphus
+  sources:
+    - name: [ noarch, x86_64 ]
+      fetcher: File
+      parser: SrcList
+      url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/{source}/base/srclist.classic.xz'
+      compression: xz
+  repolinks:
+    - desc: Sisyphus repository
+      url: http://www.sisyphus.ru/en/
+  packagelinks:
+    - desc: Sisyphus package details
+      url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}'
+    - desc: Spec file
+      url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}/spec'
+  tags: [ all, production ]

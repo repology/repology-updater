@@ -1,0 +1,20 @@
+###########################################################################
+# Gobolinux
+###########################################################################
+- name: gobolinux
+  desc: GoboLinux
+  family: gobolinux
+  sources:
+    - name: recipes
+      fetcher: Git
+      parser: GoboLinuxGit
+      url: https://github.com/gobolinux/Recipes.git
+  repolinks:
+    - desc: GoboLinux home
+      url: http://gobolinux.org/
+    - desc: GoboLinux recipes repository
+      url: https://github.com/gobolinux/Recipes
+  packagelinks:
+    - desc: Git
+      url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}'
+  tags: [ all, production, have_testdata ]

@@ -31,9 +31,13 @@ from repology.parser import *
 
 
 class RepositoryManager:
-    def __init__(self, repospath, statedir):
-        with open(repospath) as reposfile:
-            self.repositories = yaml.safe_load(reposfile)
+    def __init__(self, reposdir, statedir):
+        self.repositories = []
+
+        for root, dirs, files in os.walk(reposdir):
+            for filename in filter(lambda f: f.endswith('.yaml'), files):
+                with open(os.path.join(root, filename)) as reposfile:
+                    self.repositories += yaml.safe_load(reposfile)
 
         # process source loops
         for repo in self.repositories:

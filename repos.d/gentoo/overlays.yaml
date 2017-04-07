@@ -1,0 +1,28 @@
+###########################################################################
+# Gentoo Overlays (disabled because outdated)
+###########################################################################
+- name: gentoo_ovl_games
+  desc: Gentoo Overlay Games
+  family: gentoo
+  sources:
+    - name: overlay
+      fetcher: Git
+      parser: GentooGit
+      url: https://github.com/hasufell/games-overlay.git
+  repolinks:
+    - desc: Git repository
+      url: https://github.com/hasufell/games-overlay
+  tags: [ all ]
+
+- name: gentoo_ovl_gamerlay
+  desc: Gentoo Overlay Gamerlay
+  family: gentoo
+  sources:
+    - name: overlay
+      fetcher: Git
+      parser: GentooGit
+      url: https://anongit.gentoo.org/git/proj/gamerlay.git
+  repolinks:
+    - desc: Git repository
+      url: https://cgit.gentoo.org/proj/gamerlay.git/
+  tags: [ all ]

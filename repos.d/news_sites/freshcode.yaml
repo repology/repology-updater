@@ -1,0 +1,19 @@
+###########################################################################
+# freshcode.club (freshmeat successor)
+###########################################################################
+- name: freshcode
+  desc: freshcode.club
+  family: freshcode
+  sources:
+    - name: feed
+      fetcher: Freshcode
+      parser: Freshcode
+      url: http://freshcode.club/feed/xfer.json
+  shadow: true
+  repolinks:
+    - desc: freshcode.club
+      url: http://freshcode.club/
+  packagelinks:
+    - desc: freshcode.club page
+      url: 'http://freshcode.club/projects/{name}'
+  tags: [ all, production ]

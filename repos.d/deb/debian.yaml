@@ -1,0 +1,98 @@
+###########################################################################
+# Debian
+###########################################################################
+- name: debian_stable
+  desc: Debian Stable
+  family: debuntu
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.debian.org/debian/dists/stable/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in stable distribution
+      url: https://packages.debian.org/stable/
+  packagelinks:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/stable/{name}'
+  tags: [ all, production, debian ]
+
+- name: debian_stable_backports
+  desc: Debian Stable Backports
+  family: debuntu
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.debian.org/debian/dists/stable-backports/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+  packagelinks:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/stable-backports/{name}'
+  tags: [ all, production, debian ]
+
+- name: debian_testing
+  desc: Debian Testing
+  family: debuntu
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.debian.org/debian/dists/testing/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in testing distribution
+      url: https://packages.debian.org/testing/
+  packagelinks:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/testing/{name}'
+  tags: [ all, production, debian ]
+
+- name: debian_unstable
+  desc: Debian Unstable
+  family: debuntu
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.debian.org/debian/dists/unstable/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in unstable distribution
+      url: https://packages.debian.org/unstable/
+  packagelinks:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/unstable/{name}'
+  tags: [ all, production, debian, have_testdata ]
+
+- name: debian_experimental
+  desc: Debian Experimental
+  family: debuntu
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.debian.org/debian/dists/experimental/{source}/source/Sources.xz'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Debian packages
+      url: https://www.debian.org/distrib/packages
+  packagelinks:
+    - desc: Package details on packages.debian.org
+      url: 'https://packages.debian.org/experimental/{name}'
+  tags: [ all, production, debian ]

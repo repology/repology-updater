@@ -1,0 +1,32 @@
+###########################################################################
+# Linux Mint
+###########################################################################
+- name: linux_mint_18
+  desc: Linux Mint Sarah
+  family: debuntu
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sarah/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
+
+- name: linux_mint_18_1
+  desc: Linux Mint Serena
+  family: debuntu
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/serena/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]

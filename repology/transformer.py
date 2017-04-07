@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import pprint
 import re
 import sys
@@ -29,15 +30,22 @@ class RuleApplyResult:
 
 
 class PackageTransformer:
-    def __init__(self, rulespath=None, rulestext=None):
+    def __init__(self, rulesdir=None, rulestext=None):
         self.dollar0 = re.compile('\$0', re.ASCII)
         self.dollarN = re.compile('\$([0-9]+)', re.ASCII)
+
+        self.rules = []
 
         if rulestext:
             self.rules = yaml.safe_load(rulestext)
         else:
-            with open(rulespath) as rulesfile:
-                self.rules = yaml.safe_load(rulesfile)
+            for filename in sorted(os.listdir(rulesdir)):
+                rulespath = os.path.join(rulesdir, filename)
+                if not os.path.isfile(rulespath) or not rulespath.endswith('.yaml'):
+                    continue
+
+                with open(rulespath) as rulesfile:
+                    self.rules += yaml.safe_load(rulesfile)
 
         pp = pprint.PrettyPrinter(width=10000)
         rulenum = 0

@@ -1,0 +1,20 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Apache modules
+- { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", family: [ freebsd, openbsd, pkgsrc ] }
+- { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", family: [ gentoo ] }
+- { namepat: "mod-(.*)",               setname: "apmod:$1", family: [ debuntu ] }
+- { namepat: "mod_(.*)",               setname: "apmod:$1", family: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos, gobolinux ] }
+- { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1" }
+- { namepat: "apache2?-mod_(.*)",      setname: "apmod:$1" }
+- { namepat: "apmod:php[0-9]*",        verpat: "5\\..*", setname: "apmod:php5" }
+- { namepat: "apmod:php[0-9]*",        verpat: "7\\..*", setname: "apmod:php7" }
+- { namepat: "apmod:python[0-9]*",                       setname: "apmod:python" }
+- { namepat: "apmod:perl2",                              setname: "apmod:perl" }
+- { namepat: "apmod:limitipconn2",                       setname: "apmod:limitipconn" }
+- { namepat: "apmod:geoip2",                             setname: "apmod:geoip" }
+- { namepat: "apmod:fcgid-legacy",                       setname: "apmod:fcgid" }
+- { namepat: "apmod:rpaf2",                              setname: "apmod:rpaf" }
+- { namepat: "apmod:security2",                          setname: "apmod:security" }
+- { namepat: "apmod:wsgi[0-9]+",                         setname: "apmod:wsgi" }
+- { namepat: "apmod:ruby[0-9]+",                         setname: "apmod:ruby" }

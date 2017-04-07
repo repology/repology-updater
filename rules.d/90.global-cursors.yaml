@@ -1,0 +1,6 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# cursors
+- { namepat: "(.*)-cursor-theme",      setname: "cursors:$1", family: [ debuntu ] }
+- { namepat: "(.*)-xcursors",          setname: "cursors:$1", family: [ gentoo ] }
+- { namepat: "cursor-(.*)",            setname: "cursors:$1", family: [ freebsd ] }

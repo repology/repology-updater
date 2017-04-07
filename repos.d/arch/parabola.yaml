@@ -1,0 +1,40 @@
+###########################################################################
+# Parabola (arch derivative)
+###########################################################################
+- name: parabola
+  desc: Parabola
+  family: arch
+  sources:
+    - name: [ core, extra, community, libre, pcr ]
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Parabola GNU/Linux-libre home
+      url: https://www.parabola.nu/
+    - desc: Parabola Packages
+      url: https://www.parabola.nu/packages/
+  packagelinks:
+    - desc: Package search on parabola.nu
+      url: 'https://www.parabola.nu/packages/?q={name}'
+  tags: [ all, production ]
+
+- name: parabola_testing
+  desc: Parabola Testing
+  family: arch
+  sources:
+    - name: [ testing, libre-testing ]
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Parabola GNU/Linux-libre home
+      url: https://www.parabola.nu/
+    - desc: Parabola Packages
+      url: https://www.parabola.nu/packages/
+  packagelinks:
+    - desc: Package search on parabola.nu
+      url: 'https://www.parabola.nu/packages/?q={name}'
+  tags: [ all, production ]

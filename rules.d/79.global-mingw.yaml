@@ -1,0 +1,5 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# mingw
+- { namepat: "mingw-(.*)",             setname: "mingw:$1", family: [ fedora, mageia ] }
+- { namepat: "mingw32-(.*)",           setname: "mingw:$1", family: [ sisyphus ] }

@@ -1,0 +1,6 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Gentoo global rules
+#- { category: dev-XXX,              setname: "XXX:$0", family: [ gentoo ] }
+#- { category: virtual,                 family: [ gentoo ], ignore: true } # we don't parse these
+- { "verpat": ".*9999",                                      family: [ gentoo ], ignorever: true }

@@ -1,0 +1,21 @@
+###########################################################################
+# KDE neon
+###########################################################################
+- name: kde_neon
+  desc: KDE neon
+  family: debuntu
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: http://archive.neon.kde.org/user/dists/xenial/main/source/Sources.gz
+      compression: gz
+      subrepo: main
+  repolinks:
+    - desc: KDE neon home
+      url: https://neon.kde.org/
+    - desc: KDE neon git repositories
+      url: https://packaging.neon.kde.org/
+    - desc: KDE neon wiki
+      url: https://community.kde.org/Neon/Git
+  tags: [ all, production ]

@@ -1,0 +1,11 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Haskell
+- {                                    setname: "haskell:$0", family: [ hackage ] }
+- { namepat: "haskell-(.*)",           setname: "haskell:$1", family: [ debuntu, arch, slackbuilds, gobolinux ] }
+- { namepat: "hs-(.*)",                setname: "haskell:$1", family: [ freebsd, pkgsrc, openbsd ] }
+- { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora, guix, rosa ] }
+- { category: dev-haskell,             setname: "haskell:$0", family: [ gentoo ] }
+- { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", family: [ sisyphus ] }
+
+- { name: "haskell:darcs",             setname: darcs              } # ungeneralize as it's more of standalone application

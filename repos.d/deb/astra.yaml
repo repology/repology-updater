@@ -1,0 +1,17 @@
+###########################################################################
+# Astra Linux
+###########################################################################
+- name: astra
+  desc: Astra Linux Orel
+  family: debuntu
+  sources:
+    - name: [ main, contrib, non-free]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Astra Linux home (in Russian)
+      url: http://astralinux.com/
+  tags: [ all, production ]

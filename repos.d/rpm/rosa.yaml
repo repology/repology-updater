@@ -1,0 +1,32 @@
+###########################################################################
+# Rosa
+###########################################################################
+- name: rosa_2014_1
+  desc: Rosa 2014.1
+  family: rosa
+  sources:
+    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
+      fetcher: File
+      parser: RosaInfoXml
+      url: 'http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rosa Linux home
+      url: http://en.rosalinux.com/
+  tags: [ all, production, rosa ]
+
+- name: rosa_2016_1
+  desc: Rosa 2016.1
+  family: rosa
+  sources:
+    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
+      fetcher: File
+      parser: RosaInfoXml
+      url: 'http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rosa Linux home
+      url: http://en.rosalinux.com/
+  tags: [ all, production, rosa ]

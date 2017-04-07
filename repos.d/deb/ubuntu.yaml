@@ -1,0 +1,102 @@
+###########################################################################
+# Ubuntu
+###########################################################################
+- name: ubuntu_precise
+  desc: Ubuntu Precise
+  family: debuntu
+  sources:
+    - name: [ main, multiverse, restricted, universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/precise/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in precise
+      url: http://packages.ubuntu.com/precise/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/precise/{name}'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_trusty
+  desc: Ubuntu Trusty
+  family: debuntu
+  sources:
+    - name: [ main, multiverse, restricted, universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/trusty/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in trusty
+      url: http://packages.ubuntu.com/trusty/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/trusty/{name}'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_xenial
+  desc: Ubuntu Xenial
+  family: debuntu
+  sources:
+    - name: [ main, multiverse, restricted, universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/xenial/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in xenial
+      url: http://packages.ubuntu.com/xenial/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/xenial/{name}'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_yakkety
+  desc: Ubuntu Yakkety
+  family: debuntu
+  sources:
+    - name: [ main, multiverse, restricted, universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/yakkety/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in yakkety
+      url: http://packages.ubuntu.com/yakkety/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/yakkety/{name}'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_zesty
+  desc: Ubuntu Zesty
+  family: debuntu
+  sources:
+    - name: [ main, multiverse, restricted, universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/zesty/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in zesty
+      url: http://packages.ubuntu.com/zesty/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/zesty/{name}'
+  tags: [ all, production, ubuntu ]

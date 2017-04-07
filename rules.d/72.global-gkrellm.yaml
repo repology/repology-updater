@@ -1,0 +1,20 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# gkrellm
+- { namepat: "gkrellm2-(.*)",          setname: "gkrellm-$1" }
+
+- { name: gkrellkam2, setname: gkrellkam }
+- { name: gkrellm-aclock, setname: gkrellaclock }
+- { name: [gkrellm-bgchanger, gkrellmbgchg2], setname: gkrellmbgchg }
+- { name: gkrellm-flynn, setname: gkrellflynn }
+- { name: gkrellm-shoot, setname: gkrellshoot }
+- { name: gkrellm-sun, setname: gkrellsun }
+- { name: gkrellm-top, setname: gkrelltop }
+- { name: gkrellm-weather, setname: gkrellweather }
+- { name: gkrellm-wireless, setname: gkrellmwireless }
+- { name: [gkrellmlaunch, gkrellmlaunch2], setname: gkrellm-launch }
+- { name: [gkrellmmailwatch, gkrellmmailwatch2], setname: gkrellm-mailwatch }
+- { name: gkrellmms2, setname: gkrellmms }
+- { name: gkrellmoon2, setname: gkrellmoon }
+- { name: gkrellmreminder, setname: gkrellm-reminder }
+- { name: [gkrellmvolume, gkrellmvolume2], setname: gkrellm-volume }

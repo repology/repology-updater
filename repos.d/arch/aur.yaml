@@ -1,0 +1,22 @@
+###########################################################################
+# AUR
+###########################################################################
+- name: aur
+  desc: AUR
+  family: arch
+  sources:
+    - name: aur
+      fetcher: AUR
+      parser: AUR
+      url: https://aur.archlinux.org/
+  repolinks:
+    - desc: AUR Home
+      url: https://aur.archlinux.org/
+  packagelinks:
+    - desc: AUR package details
+      url: 'https://aur.archlinux.org/packages/{name}'
+    - desc: View PKGBUILD
+      url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={name}'
+    - desc: ArchWiki search
+      url: 'https://wiki.archlinux.org/index.php/Special:Search?search={name}'
+  tags: [ all, production ]

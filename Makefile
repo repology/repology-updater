@@ -57,8 +57,8 @@ flake8-all:
 
 check:
 	rm -f kwalify.log
-	kwalify -lf schemas/rules.yaml rules.yaml | tee -a kwalify.log
-	kwalify -lf schemas/repos.yaml repos.yaml | tee -a kwalify.log
+	kwalify -lf schemas/rules.yaml $$(find rules.d -name "*.yaml") | tee -a kwalify.log
+	kwalify -lf schemas/repos.yaml $$(find repos.d -name "*.yaml") | tee -a kwalify.log
 	@if grep -q INVALID kwalify.log; then \
 		echo "Validation failed"; \
 		rm -f kwalify.log; \

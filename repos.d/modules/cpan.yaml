@@ -1,0 +1,22 @@
+###########################################################################
+# CPAN (perl)
+###########################################################################
+- name: cpan
+  desc: CPAN
+  family: cpan
+  sources:
+    - name: CPAN
+      fetcher: File
+      parser: CPANPackages
+      url: http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
+      compression: gz
+  shadow: true
+  repolinks:
+    - desc: CPAN
+      url: http://cpan.org/
+    - desc: CPAN search
+      url: http://search.cpan.org/
+  packagelinks:
+    - desc: CPAN page
+      url: 'http://search.cpan.org/dist/{name}'
+  tags: [ all, production, have_testdata ]

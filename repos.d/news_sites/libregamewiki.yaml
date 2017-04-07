@@ -1,0 +1,18 @@
+###########################################################################
+# libregamewiki.org (libre games wiki)
+###########################################################################
+- name: libregamewiki
+  desc: Libregamewiki
+  family: libregamewiki
+  sources:
+    - name: newreleases
+      fetcher: File
+      parser: LibreGameWiki
+      url: https://libregamewiki.org/New_games_and_releases
+  repolinks:
+    - desc: Libregamewiki
+      url: https://libregamewiki.org/
+  packagelinks:
+    - desc: Libregamewiki entry
+      url: 'https://libregamewiki.org/{name}'
+  tags: [ all, production ]
