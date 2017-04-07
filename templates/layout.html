@@ -75,21 +75,13 @@
 {% block content %}
 {% endblock %}
 
-<footer class="repology-footer">
+<footer class="footer">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<ul class="repology-footer-links">
-					<li><a href="{{ url_for('about') }}">About</a></li>
-					<li><a href="{{ url_for('api_v1') }}">API</a></li>
-				</ul>
-			</div>
-			<div class="col-md-6 text-right">
-				<ul class="repology-footer-links">
-					<li><a href="https://github.com/repology/repology">GitHub</a></li>
-				</ul>
-			</div>
-		</div>
+		<ul class="footer-links">
+			<li><a href="{{ url_for('about') }}">About</a></li>
+			<li><a href="{{ url_for('api_v1') }}">API</a></li>
+			<li class="footer-links-right"><a href="https://github.com/repology/repology">GitHub</a></li>
+		</ul>
 		<p>
 			Copyright (C) 2016-2017 Dmitry Marakasov &lt;<a href="mailto:amdmi3@amdmi3.ru">amdmi3@amdmi3.ru</a>&gt;.<br>
 			Code licensed under GPLv3+.

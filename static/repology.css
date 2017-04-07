@@ -25,7 +25,7 @@
     text-decoration: none;
 }
 
-.repology-footer {
+.footer {
     background-color: #2A2730;
     color: #99979C;
     margin-top: 100px;
@@ -33,23 +33,27 @@
     padding-bottom: 50px;
 }
 
-.repology-footer a:link, .repology-footer-links a:visited {
+.footer a:link, .footer-links a:visited {
     color: #FFFFFF;
     text-decoration: none;
 }
 
-.repology-footer a:hover, .repology-footer-links a:active {
+.footer a:hover, .footer-links a:active {
     text-decoration: underline;
 }
 
-.repology-footer-links {
+.footer-links {
     list-style: none;
     padding: 0;
 }
 
-.repology-footer-links li {
+.footer-links li {
     display: inline;
     margin-right: 1em;
+}
+
+.footer-links-right {
+    float: right;
 }
 
 /* color copied from bootstrap */
