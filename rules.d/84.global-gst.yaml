@@ -1,0 +1,6 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# gstreamer plugins
+- { namepat: "gst-plugins-(.*)-compat",              setname: "gstreamer1plugins:$1", family: crux }
+- { namepat: "gst(?:reamer)?[01.]*(?:-plugins?[01.]*)?-(.*?)[01.]*(?:-plugins)?", setname: "gstreamer1plugins:$1" }
+- { namepat: "gstreamer1plugins:(.*)", verpat: "0.*", setname: "gstreamer0plugins:$1" }

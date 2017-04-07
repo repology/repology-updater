@@ -1,0 +1,31 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Perl modules
+- { family: [ cpan ],                setname: "perl:$0", tolowername: true, last: true } # don't replace _ with - !
+# Note that Gentoo misbehaves by changing upstream versioning scheme, so
+# we ignore it in comparison
+- { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd, crux ] }
+- { namepat: "lib(.*)-perl",           setname: "perl:$1", family: [ debuntu ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa, nix, alpine, pclinuxos ] }
+- { category: dev-perl,                setname: "perl:$0", family: [ gentoo ] }
+- { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
+  # Gentoo and Mageia shamelessly mangle perl module versions, ignore
+- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa ], ignorever: true }
+
+# specific perl ignores
+- { name: "perl:anyevent",             ver: [ "7.070", "7.120", "7.130" ], ignorever: true }
+- { name: "perl:app-tlsme",            ver: "0.110000",        ignorever: true }
+- { name: "perl:array-diff",           ver: "0.07000",         ignorever: true }
+- { name: "perl:authen-sasl",          ver: [ "2.150", "2.160", "2.1500", "2.1600" ], ignorever: true }
+- { name: "perl:bio-asn1-entrezgene",  verpat: "1\\.[0-9]{3}", ignorever: true }
+- { name: "perl:catmandu-store-mongodb", ver: "0.0501",        ignorever: true }
+- { name: "perl:cbor-xs",              ver: [ "1.60", "1.50", "1.30" ], ignorever: true }
+- { name: "perl:cgi-formbuilder",      ver: [ "3.1000", "3.0900", "3.90.0", "3.90.0", "3.0501" ], ignorever: true }
+- { name: "perl:chi",                  ver: "0.580",           ignorever: true }
+- { name: "perl:compress-lzf",         verpat: "3.[789]0",     ignorever: true }
+- { name: "perl:math-polygon-tree",    ver: "0.0691",          ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
+- { name: "perl:readonly",             ver: "2.050",           ignorever: true }
+- { name: "perl:test-exception",       ver: [ "0.430000", "0.400", "0.320" ], ignorever: true }
+- { name: "perl:time-duration",        ver: "1.200000",        ignorever: true }
+
+- { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below

@@ -1,0 +1,19 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# coin-or
+- { namepat: "coinor-(.*)",            setname: "coin-or-$1"              } # XXX: problem
+
+- { name: coinalps, setname: coin-or-alps }
+- { name: coinbcp, setname: coin-or-bcp }
+- { name: coinbcps, setname: coin-or-bcps }
+- { name: coinblis, setname: coin-or-blis }
+- { name: coinbonmin, setname: coin-or-bonmin }
+- { name: coincbc, setname: coin-or-cbc }
+- { name: coincgl, setname: coin-or-cgl }
+- { name: coinclp, setname: coin-or-clp }
+- { name: coincouenne, setname: coin-or-couenne }
+- { name: coincsdp, setname: coin-or-csdp }
+- { name: coindip, setname: coin-or-dip }
+- { name: coindylp, setname: coin-or-dylp }
+- { name: coinflopcpp, setname: coin-or-flopc++ }
+- { name: coinlemon, setname: coin-or-lemon }

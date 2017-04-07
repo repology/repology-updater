@@ -1,0 +1,5 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# golang
+- { namepat: "go-(.*)",                setname: "go:$1" }
+- { namepat: "golang-(.*)",            setname: "go:$1" }

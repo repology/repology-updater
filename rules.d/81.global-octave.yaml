@@ -1,0 +1,5 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# octave
+- { namepat: "octave-forge-(.*)",      setname: "octave:$1", family: [ freebsd, opensuse ] }
+- { namepat: "octave-(.*)",            setname: "octave:$1", family: [ debuntu, sisyphus, fedora, arch, rosa ] }

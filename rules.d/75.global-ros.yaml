@@ -1,0 +1,5 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# ROS
+- { category: dev-ros,                 setname: "ros:$0", family: [ gentoo ] }
+- { namepat: "ros-(.*)",               setname: "ros:$1", family: [ debuntu, arch ] }

@@ -1,0 +1,4 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# x11 protos
+- { namepat: "x11proto-(.*)",          setname: "$1proto", family: [ debuntu ] }

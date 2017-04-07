@@ -1,0 +1,5 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# VDR
+- { namepat: "vdr-plugin-(.*)",        setname: "vdr:$1" }
+- { namepat: "vdr-(.*)",               setname: "vdr:$1", family: [ gentoo, fedora ] }

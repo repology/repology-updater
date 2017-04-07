@@ -1,0 +1,5 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# FreeBSD: localized categories (XXX: fix this, contains useful packages)
+- { namepat: "([a-z]{2,3}|de-alt|pt_br|pt_pt)-aspell", setname: "aspell-$1", family: [ freebsd ] }
+- { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", ignore: yes, family: [ freebsd ] }

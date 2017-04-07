@@ -1,0 +1,81 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Ambiguous upstream package names, careful!
+- { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
+
+- { name: crystal,                     setname: crystal-lang,             family: [ arch, freshcode ] }
+- { name: crystal,                     setname: crystal-lang,             family: gentoo, category: dev-lang }
+- { name: crystal,                     setname: crystal-mud,              family: gentoo, category: games-mud }
+- { name: crystal,                     setname: crystal-theme,            family: slackbuilds }
+
+- { name: cdf3,                        setname: cdf                       } # Common Data Format lib
+- { name: cdf, verpat: "0.*",          setname: cdf-df                    } # split out colorized df
+
+- { name: cutter, verpat: "1\\.0[0-9].*", setname: cutter-tcp             } # TCP/IP Connection Cutter
+- { name: [cutter,cutter-test_framework,cutter-testing-framework], setname: cutter-unittest } # C++ testing framework
+
+- { name: diaspora, verpat: "1\\.[0-9]+\\.[0-9]+", setname: diaspora-game }
+- { name: diaspora, setname: diaspora-social }
+
+- { name: docker,                      setname: docker-tray,              family: gentoo, category: x11-plugins }
+
+- { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
+
+- { name: dragon,                      setname: dragon-scannerparser,     family: [ freebsd ] }
+- { name: dragon,                      setname: dragon-player                                }
+
+- { name: etcd, verpat: "1.*", setname: "etcd-player" } # Enhanced Tiny CD, a simple ncurses-based CD player vs. coreos etcd
+
+- { name: [ddrescue],                  setname: dd_rescue, ver: "1.23", family: debuntu } # dd_rescue, not GNU one
+- { name: [gddrescue, gnu_ddrescue],   setname: ddrescue }
+
+- { name: hugo,                        setname: hugo-interactive-fiction, verpat: "3\\..*" }
+- { name: hugo,                        setname: hugo-emulator, verpat: "2\\..*" }
+- { name: hugo,                        setname: hugo-sitegen }
+- { name: gohugo,                      setname: hugo-sitegen }
+
+# distributed compiler vs. stream download utility
+- { name: icecream,                    setname: icecream-distributed-compiler, verpat: "1\\.[01].*" }
+- { name: icecream,                    setname: icecream-stream-extractor,     ver: "1.3" }
+- { name: icecream,                    warning: "please classify me" }
+
+- { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
+
+# python package manager vs. program wrapper (which was renamed to pipo upstream)
+# XXX: generate problem from this
+- { name: pip,                         setname: pipo,                     family: arch }
+- { name: pip,                         setname: pipo,                     family: gentoo, category: app-misc }
+
+- { name: polly, verpat: "4\\..*",     setname: polly-llvm-opt            } # polyhedral optimizationa for llvm
+- { name: polly, verpat: "0\\.93\\..*", setname: polly-twitter-client     } # twitter client
+- { name: polly, warning: "please classify me" }
+
+- { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
+
+- { name: whereami, family: [ arch ], setname: "whereami-kootenpv" } # Uses WiFi signals and machine learning to predict where you are
+- { name: whereami, family: [ debuntu ], setname: "whereami-debian" } # Automatically reconfigure your (laptop) system for a new location based of wifi hotspots
+- { name: whereami, family: [ fedora, yacp ], setname: "whereami-pjp" } # displays information about machine(location) you are working on
+- { name: whereami, warning: "please classify me" }
+
+# fuse-emulator vs. fusefs modules - see below
+
+# TODO
+# - flare engine/game vs. flare database; known, but database doesn't seem
+# to be widely packaged (had FreeBSD port which was removed)
+# - elixir vs. elixir-lang (investigate)
+# - emma vs. emma-coverage
+
+# TODO
+# - ace vs. ace-of-penguins
+# - crimson vs. crimson-fields
+# - critterding version
+# - pkgsrc: enigma
+# - empty vs. empty-expect
+# - emotion-generic-players vs. emotion-generic-players-vlc
+# - enblend vs. enblend-enfuse
+# - enemy-territory vs. etqw
+# - engauge vs. engauge-digitizer
+# - fbg vs fbg2
+# - fcgi vs. fcgi-devkit
+# - filebeat/filebeat-bin
+# - fira* (font)

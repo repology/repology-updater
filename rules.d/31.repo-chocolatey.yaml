@@ -1,0 +1,48 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Chocolatey has no sane policy on version numbering so ignorever by default, and ignore conflicting names
+# Whitelist of unignorever's is possible (with constraints on versions too), but it's too hard to maintain
+# Chocolatey developers, PLEASE USE UPSTREAM VERSIONS.
+- {                                                                  family: [ chocolatey ], ignorever: true }
+- { name: ace,                                                       family: [ chocolatey ], ignore: true }
+- { name: acm,                                                       family: [ chocolatey ], ignore: true }
+- { name: acr,                                                       family: [ chocolatey ], ignore: true }
+- { name: autocomplete,                                              family: [ chocolatey ], ignore: true }
+- { name: awake,                                                     family: [ chocolatey ], ignore: true }
+- { name: beacon,                                                    family: [ chocolatey ], ignore: true }
+- { name: bing,                                                      family: [ chocolatey ], ignore: true }
+- { name: blat,                                                      family: [ chocolatey ], ignore: true }
+- { name: charles,                                                   family: [ chocolatey ], ignore: true }
+- { name: clover,                                                    family: [ chocolatey ], ignore: true }
+- { name: composer,                                                  family: [ chocolatey ], ignore: true }
+- { name: duck,                                                      family: [ chocolatey ], ignore: true }
+- { name: err,                                                       family: [ chocolatey ], ignore: true }
+- { name: expresso,                                                  family: [ chocolatey ], ignore: true }
+- { name: ffe,                                                       family: [ chocolatey ], ignore: true }
+- { name: gatling,                                                   family: [ chocolatey ], ignore: true }
+- { name: getopt,                                                    family: [ chocolatey ], ignore: true }
+- { name: hdparm,                                                    family: [ chocolatey ], ignore: true }
+- { name: hotswap,                                                   family: [ chocolatey ], ignore: true }
+- { name: hxd,                                                       family: [ chocolatey ], ignore: true }
+- { name: logrotate,                                                 family: [ chocolatey ], ignore: true }
+- { name: nautilus,                                                  family: [ chocolatey ], ignore: true }
+- { name: nbfc,                                                      family: [ chocolatey ], ignore: true }
+- { name: newt,                                                      family: [ chocolatey ], ignore: true }
+- { name: openssh,                                                   family: [ chocolatey ], ignore: true }
+- { name: pal,                                                       family: [ chocolatey ], ignore: true }
+- { name: papercut,                                                  family: [ chocolatey ], ignore: true }
+- { name: passwordsafe,                                              family: [ chocolatey ], ignore: true }
+- { name: pvm,                                                       family: [ chocolatey ], ignore: true }
+- { name: pwgen,                                                     family: [ chocolatey ], ignore: true }
+- { name: rsync,                                                     family: [ chocolatey ], ignore: true }
+- { name: sumo,                                                      family: [ chocolatey ], ignore: true }
+- { name: sysmon,                                                    family: [ chocolatey ], ignore: true }
+- { name: tcc,                                                       family: [ chocolatey ], ignore: true }
+- { name: tcptrace,                                                  family: [ chocolatey ], ignore: true }
+- { name: tcpview,                                                   family: [ chocolatey ], ignore: true }
+- { name: termite,                                                   family: [ chocolatey ], ignore: true }
+- { name: tktz,                                                      family: [ chocolatey ], ignore: true }
+- { name: webdeploy,                                                 family: [ chocolatey ], ignore: true }
+- { name: which,                                                     family: [ chocolatey ], ignore: true }
+- { name: whois,                                                     family: [ chocolatey ], ignore: true }
+- { name: zoom,                                                      family: [ chocolatey ], ignore: true }

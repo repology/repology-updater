@@ -1,0 +1,60 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Libregamewiki requires some renames
+- { family: libregamewiki, name: "0 a.d.",                           setname: 0ad }
+- { family: libregamewiki, name: "3d pong",                          setname: 3dpong }
+- { family: libregamewiki, name: "8 kingdoms",                       setname: 8kingdoms }
+- { family: libregamewiki, name: "advanced strategic command",       setname: asc }
+- { family: libregamewiki, name: "armagetron advanced",              setname: armagetronad }
+- { family: libregamewiki, name: "balazar iii",                      setname: balazar3 }
+- { family: libregamewiki, name: "berusky ii",                       setname: berusky2 }
+- { family: libregamewiki, name: "blobby volley 2",                  setname: blobby }
+- { family: libregamewiki, name: "block attack - rise of the blocks", setname: blockattack }
+- { family: libregamewiki, name: "bos wars",                         setname: boswars }
+- { family: libregamewiki, name: "cavez of phear",                   setname: cavezofphear }
+- { family: libregamewiki, name: "chromium b.s.u.",                  setname: chromium-bsu }
+- { family: libregamewiki, name: "curse of war",                     setname: curseofwar }
+- { family: libregamewiki, name: "dungeon crawl stone soup",         setname: stone-soup }
+- { family: libregamewiki, name: "emilia pinball",                   setname: emilia-pinball }
+- { family: libregamewiki, name: "empty clip",                       setname: empty-clip }
+- { family: libregamewiki, name: "endgame: singularity",             setname: singularity }
+- { family: libregamewiki, name: "endless sky",                      setname: endless-sky }
+- { family: libregamewiki, name: "falcon's eye",                     setname: falcons-eye }
+- { family: libregamewiki, name: "fish fillets - next generation",   setname: fillets-ng }
+- { family: libregamewiki, name: "freedroid rpg",                    setname: freedroidrpg }
+- { family: libregamewiki, name: "frets on fire",                    setname: fretsonfire }
+- { family: libregamewiki, name: "gearhead 2",                       setname: gearhead2 }
+- { family: libregamewiki, name: "globulation 2",                    setname: globulation2 }
+- { family: libregamewiki, name: "help hannah's horse",              setname: help-hannahs-horse }
+- { family: libregamewiki, name: "hero of allacrost",                setname: allacrost }
+- { family: libregamewiki, name: "heroes of wesnoth",                setname: heroes-of-wesnoth }
+- { family: libregamewiki, name: "infon battle arena",               setname: infon }
+- { family: libregamewiki, name: "iter vehemens ad necem",           setname: ivan }
+- { family: libregamewiki, name: "jump n bump",                      setname: jumpnbump }
+- { family: libregamewiki, name: "kobo deluxe",                      setname: kobodeluxe }
+- { family: libregamewiki, name: "liberation circuit",               setname: liberation-circuit }
+- { family: libregamewiki, name: "lips of suna",                     setname: lipsofsuna }
+- { family: libregamewiki, name: "liquid war 6",                     setname: liquidwar6 }
+- { family: libregamewiki, name: "lordsawar!",                       setname: lordsawar }
+- { family: libregamewiki, name: "me and my shadow",                 setname: meandmyshadow }
+- { family: libregamewiki, name: "pink pony",                        setname: pink-pony }
+- { family: libregamewiki, name: "powder toy",                       setname: powder-toy }
+- { family: libregamewiki, name: "red eclipse",                      setname: redeclipse }
+- { family: libregamewiki, name: "rigs of rods",                     setname: rigsofrods }
+- { family: libregamewiki, name: "sdl sopwith",                      setname: sopwith }
+- { family: libregamewiki, name: "secret maryo chronicles",          setname: smc }
+- { family: libregamewiki, name: "seven kingdoms: ancient adversaries", setname: 7kaa }
+- { family: libregamewiki, name: "simon tatham's portable puzzle collection", setname: sgt-puzzles }
+- { family: libregamewiki, name: "speed dreams",                     setname: speed-dreams }
+- { family: libregamewiki, name: "tanks of freedom",                 setname: tanks-of-freedom }
+- { family: libregamewiki, name: "the battle for wesnoth",           setname: wesnoth }
+- { family: libregamewiki, name: "the legend of edgar",              setname: edgar }
+- { family: libregamewiki, name: "the mana world",                   setname: tmw }
+- { family: libregamewiki, name: "thunder&lightning",                setname: thunder-and-lightning }
+- { family: libregamewiki, name: "tile world",                       setname: tile-world }
+- { family: libregamewiki, name: "tux paint",                        setname: tuxpaint }
+- { family: libregamewiki, name: "unknown horizons",                 setname: unknown-horizons }
+- { family: libregamewiki, name: "valyria tear",                     setname: valyriatear }
+- { family: libregamewiki, name: "vega strike",                      setname: vegastrike }
+- { family: libregamewiki, name: "vulture's eye",                    setname: vultures-eye }
+- { family: libregamewiki, name: "yo frankie!",                      setname: yofrankie }

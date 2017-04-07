@@ -1,0 +1,22 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# flash
+- name:
+    - adobe-flash-player
+    - adobe-flash-player-ppapi
+    - adobe-flash-plugin
+    - chromium-browser-pepper-flash
+    - chromium-pepper-flash
+    - flash-player-plugin
+    - flashplayer
+    - flashplayer-plugin
+    - flashplayer-standalone
+    - flashplayer-standalone-debug
+    - flashplugin
+    - flashplugin-beta
+    - flashplugin-nonfree
+    - linux-flashplayer
+    - pepper-flash
+    - pepperflash-plugin
+    - pepperflashplugin-nonfree
+  setname: adobe-flash # XXX: what's differente between 11.x and 2[45].x ? should it be split?

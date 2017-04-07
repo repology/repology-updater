@@ -1,0 +1,5 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# fortunes
+- { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1", family: [ gentoo ] }
+- { namepat: "fortunes-(.*)",          setname: "fortunes:$1", family: [ debuntu, pkgsrc, sisyphus ] }

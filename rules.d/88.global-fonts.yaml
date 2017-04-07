@@ -1,0 +1,15 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# fonts
+- { namepat: "font-manager",           last: true }
+- { namepat: "x?fonts-(.*)",           setname: "fonts:$1", family: [ debuntu ] }
+#- family: [ freebsd ] # strange version mismatches
+#  namepat: "xorg-fonts-(.*)"
+#  setname: "xfonts:$1"
+- { namepat: "(.*)-fonts",             setname: "fonts:$1", family: [ gentoo ] }
+- { namepat: "(.*)-ttf",               setname: "fonts:$1", family: [ pkgsrc ] }
+- { namepat: "font-(.*)",              setname: "fonts:$1", family: [ freebsd, gentoo, pkgsrc, arch, gobolinux, guix, nix, alpine ] }
+- { name: cantarell,                   setname: "fonts:cantarell", family: [ gentoo ]  }
+- { name: cantarell-fonts,             setname: "fonts:cantarell", family: [ freebsd, pkgsrc, openbsd, arch ] }
+- { namepat: "fonts-ttf-(.*)",         setname: "fonts:$1", family: [ mageia, rosa ] }
+- { namepat: "fonts-(.*)",             setname: "fonts:$1", family: [ sisyphus ] }

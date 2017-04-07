@@ -1,0 +1,4 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# xorg drivers
+- { namepat: "(?:xf86|xserver-xorg|x11-driver|xorg-xf86)-((?:input|video)-.*)", setname: "xorg:$1" }

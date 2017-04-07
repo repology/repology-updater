@@ -1,0 +1,360 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+################################################################################
+# Single (almost) package rules part
+################################################################################
+
+# Some of these are to be reversed for less ambiguity, and some
+# are to consider for performing in the actual repositories
+- { name: "2048",                      setname: 2048-cli,                 family: [ freebsd ] } # differentiate from 2048-qt
+- { name: 3dchess,                     setname: 3dc,                      family: [ debuntu ] }
+- { name: abuse_sdl,                   setname: abuse                     }
+- { name: accounts-qt5,                setname: accounts-qt ,             family: [ sisyphus ] }
+- { name: abbaye,                      setname: abbaye-des-morts          }
+- { name: abbayedesmorts,              setname: abbaye-des-morts          }
+- { name: ace,                         setname: ace-of-penguins,          family: [ openbsd, slackbuilds ] }
+- { name: ace, category: games-board,  setname: ace-of-penguins,          family: [ gentoo ] }
+- { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              family: [ fedora ] } # XXX: ???
+- { name: acetoneiso2,                 setname: acetoneiso,               family: [ arch, sisyphus ] }
+- { name: ack-grep,                    setname: ack,                      family: [ debuntu ] }
+- { namepat: "acpica-(?:tools|unix|utils)", setname: acpica                                 }
+- { name: acroread9,                   setname: acroread,                 family: [ pkgsrc ] }
+- { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     family: [ pkgsrc ] }
+- { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      family: [ pkgsrc ] }
+- { namepat: "aspell-dict-(.*)",       setname: "aspell-$1",              family: [ guix, nix ] }
+- { name: actionaz,                    setname: actiona,                  family: [ chocolatey ] }
+- { name: activeio,                    setname: activemq-activeio,        family: [ fedora, sisyphus ] }
+- { name: adb,                         setname: android-tools,            family: [ openbsd ] }
+- { name: adblockplus-firefox,         setname: adblock-plus,             family: [ chocolatey ] }
+- { name: adobeps-win,                 setname: adobeps,                  family: [ pkgsrc ]  } # XXX: recheck
+- { name: adodb5,                      setname: adodb,                    family: [ freebsd ]  }
+- { name: adol-c,                      setname: adolc                     }
+- { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               family: [ freebsd ]  }
+- { name: adzap,                       setname: adzapper,                 family: [ freebsd, pkgsrc ] }
+- { name: argyll,                      setname: argyllcms                 }
+- { name: arping2,                     setname: arping                    }
+- { namepat: "artefetcher-qt[45]",     setname: artefetcher               }
+- { name: arxlibertatis,               setname: arx-libertatis            }
+- { name: albatross, verpat: "1\\.7.*", setname: albatross-gtk-theme      }
+- { name: albatross-themes,            setname: albatross-gtk-theme       }
+- { name: alienarena,                  setname: alien-arena               }
+- { name: alienarena-data,             setname: alien-arena-data          }
+- { name: [american-fuzzy-lop,afl-fuzz], setname: afl                     }
+- { name: anacron, verpat: "2\\.[4-9].*", setname: anacron2               } # different project (a fork?)
+- { name: angularjs,                   setname: angular.js                }
+- { name: antimicro-qt4,               setname: antimicro                 }
+- { name: aprutil1,                    setname: apr-util                  }
+- { name: armagetron,                  setname: armagetronad              }
+- { name: armagetronad-server,         setname: armagetronad              } # merge
+- { name: [arpack-ng-mpich,arpack-ng-openmpi,libarpack-ng], setname: arpack-ng }
+- { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
+- { name: [astrometrynet,astrometry.net], setname: astrometry             }
+- { name: atk1.0,                      setname: atk                       }
+- { name: atk2mm,                      setname: atkmm                     }
+- { name: atkmm1.6,                    setname: atkmm                     }
+- { name: [atlas-cpp,atlascpp,libatlascpp], setname: atlas-c++            }
+- { name: [atlas,atlas-devel],         setname: atlas-c++, category: devel, family: [ freebsd, openbsd ] } # don't mix with math/atlas
+- { namepat: "ats2(.*)",               setname: "ats$1"                   }
+- { name: apcupsd-x11,                 setname: apcupsd                   }
+- { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
+- { name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4], setname: avidemux }
+- { name: avr8-burn-omat,              setname: avr8-burn-o-mat           }
+- { name: avro-cpp,                    setname: avro-c++                  }
+- { name: aws-cli,                     setname: awscli                    }
+- { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
+- { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
+- { name: bcel5_3,                     setname: bcel                      }
+- { name: bisoncpp,                    setname: bisonc++                  }
+- { name: scummvm-bass,                setname: beneath-a-steel-sky       }
+- { name: beneath-a-steel-sky-cd,      setname: beneath-a-steel-sky       }
+- { name: "bakery2.6",                 setname: bakery                    }
+- { name: bicyclerepair-py27,          setname: bicyclerepair,            family: [ freebsd ] }
+- { name: billard-gl,                  setname: billardgl,                family: [ debuntu ]  }
+- { name: [bird-v6,bird6],             setname: bird                      }
+- { name: blinkensisters-with-addons,  setname: lostpixels                }
+- { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
+- { name: [blobby2,blobby-volley],     setname: blobby                    }
+- { name: [blockout2,blockoutii],      setname: blockout                  }
+- { name: bluedevil5,                  setname: bluedevil                 }
+- { name: boaconstructor,              setname: boa-constructor           }
+- { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect], setname: boehm-gc }
+- { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
+- { name: bombono,                     setname: bombono-dvd               }
+- { name: [boost-all,boost-libs,boost-headers,boost-python-libs,boost-python,boost-mpi,boost-bcp], setname: boost }
+- { namepat: "boost-mpi-source[0-9-.]+", setname: boost                   }
+- { namepat: "boost[0-9_.]+",          setname: boost                     }
+- { namepat: "botan[0-9.]+",           setname: botan                     }
+- { name: botan-stable,                setname: botan                     }
+- { name: bouncycastle15,              setname: bouncycastle              }
+- { name: bowtie, verpat: "2.*",       setname: bowtie2,                  family: [ gentoo ] }
+- { name: battle-tanks,                setname: btanks                    }
+- { name: bub-n-bros,                  setname: bubbros,                  family: [ gentoo ]  } # XXX: recheck
+- { name: [bpython-py27,bpython2],     setname: bpython                   }
+- { name: bsh2,                        setname: bsh                       }
+- { name: bugseverywhere,              setname: bugs-everywhere           }
+- { name: bugzilla50,                  setname: bugzilla                  }
+- { name: bullet3,                     setname: bullet                    }
+- { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
+- { name: bzr-tools,                   setname: bzrtools                  }
+- { name: cacti-cactid,                setname: cacti-spine               } # cactid renamed to spine upstream
+- { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins        }
+- { name: cairomm1_0,                  setname: cairomm                   }
+- { name: cattle-1.0,                  setname: cattle                    }
+- { name: cavez-of-phear,              setname: cavezofphear              }
+- { name: ceti-2-themes,               setname: ceti-2-theme              }
+- { name: clipit-gtk3,                 setname: clipit                    }
+- { name: cbatticon-gtk2,              setname: cbatticon                 }
+- { name: [ccache-memcached, ccache-memcached-static, ccache-static], setname: ccache } # freebsd subpackages
+- { name: cdogs,                       setname: cdogs-sdl                 }
+- { name: [cdparanoia-iii,cdparanoia-overread], setname: cdparanoia       }
+- { name: cegui-mk2,                   setname: cegui,                    family: [ debuntu ]  }
+- { name: ce-x11,                      setname: ce                        }
+- { name: celestia-nonfree,            setname: celestia,                 family: [ debuntu ]  }
+- { name: cfitsio3,                    setname: cfitsio                   }
+- { name: cglib3,                      setname: cglib                     }
+- { name: charls1,                     setname: charls                    }
+- { name: chexedit,                    setname: curses-hexedit,           family: [ freebsd ] }
+- { name: [chipmunk6,chipmunkphysics,libchipmunk], setname: chipmunk      }
+- { name: chromium-browser,            setname: chromium                  }
+- { name: chromium-browser-stable,     setname: chromium                  }
+- { name: ckeditor3,                   setname: ckeditor                  }
+- { name: [clearlooks-phenix-gtk-theme,clearlooks-phenix-theme,gtk3-theme-clearlooks-phenix], setname: clearlooks-phenix }
+- { name: cln6,                        setname: cln                       }
+- { name: [clucene09,clucene-core],    setname: clucene                   }
+- { name: clutter-1.0,                 setname: clutter                   }
+- { name: clutter-gtk0.10,             setname: clutter-gtk               }
+- { name: [cockatrice-client,cockatrice-server], setname: cockatrice      }
+- { name: coffeescript,                setname: coffee-script             } # XXX: problem
+- { name: collectd5,                   setname: collectd                  }
+- { name: [coreos-etcd, coreos-etcd3], setname: etcd                      }
+- { name: corsixth,                    setname: corsix-th,                family: [ freebsd ] }
+- { name: commoncpp,                   setname: commoncpp2                }
+- { name: concurrency-kit,             setname: concurrencykit            }
+- { name: conserver8,                  setname: conserver                 }
+- { name: consolekit2,                 setname: consolekit                }
+- { name: coolreader,                  setname: coolreader3               }
+- { name: cpmtools2,                   setname: cpmtools                  }
+- { name: [cppcheck-nogui,cppcheck-nox], setname: cppcheck                }
+- { name: cpufreq-utils,               setname: cpufrequtils              }
+- { name: cracklib2,                   setname: cracklib                  }
+- { name: crimsonfields,               setname: crimson-fields            }
+- { name: crimson, verpat: "0\\.5.*",  setname: crimson-fields            } # XXX: MUST be renamed upstream
+- { name: critter,                     setname: criticalmass              }
+- { name: crypto++-562,                ignore: true                       } # specific version from AUR
+- { name: csharp-mode,                 setname: csharp-mode.el            }
+- { name: ctpp,                        setname: ctpp2                     }
+- { name: ctypes-sh,                   setname: ctypes.sh                 }
+- { name: cuneiform-linux,             setname: cuneiform                 }
+- { name: curl-http2,                  setname: curl                      }
+- { name: cutecom-legacy,              setname: cutecom                   }
+- { name: curseofwar-sdl,              setname: curseofwar                }
+- { name: cvsweb3,                     setname: cvsweb                    }
+- { name: cython2,                     setname: cython                    }
+- { name: cython2-kivy,                setname: cython-kivy               }
+- { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debuntu ]  }
+- { name: dash-el,                     setname: dash.el                   }
+- { name: dbench4,                     setname: dbench4                   }
+- { name: dbmail22,                    setname: dbmail                    }
+- { name: dboxfe2,                     setname: dboxfe                    }
+- { name: dbus-cplusplus,              setname: dbus-c++                  }
+- { name: d-conf,                      setname: dconf                     }
+- { name: dconf-editor-3.20,           ignore: true                       } # AUR specific versions
+- { name: ddclient-ipv6,               setname: ddclient                  }
+- { name: deadbeef-with-plugins,       setname: deadbeef                  }
+- { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
+- { name: dgen,                        setname: dgen-sdl                  }
+- { name: divideandsucceed,            setname: divide-and-succeed        }
+- { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
+- { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools,djvu], setname: djvulibre }
+- { name: [dosbox-sdl2,dosbox-debug,dosbox-multilib-patched], setname: dosbox }
+- { name: [doublecmd-gtk2,doublecmd-qt], setname: doublecmd }
+- { name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], setname: doxygen }
+- { name: drpython-py27,               setname: drpython                  }
+- { name: dr14_tmeter,                 setname: dr14tmeter                }
+- { name: devedeng,                    setname: devede                    }
+- { name: [dogecoind,dogecoin-qt,dogecoin-daemon], setname: dogecoin      }
+- { name: dsniff-nox11,                setname: dsniff                    }
+- { name: [dspam-mysql,dspam-pgsql,dspam-web], setname: dspam             }
+- { name: dungeoncrawl,                setname: dungeon-crawl             }
+- { name: dynamips-community,          setname: dynamips,                 family: [ freebsd ] }
+- { name: dwarffortress,               setname: dwarf-fortress            }
+- { name: dzen2,                       setname: dzen                      }
+- { name: linux-dwarffortress,         setname: dwarf-fortress            }
+- { name: [e2fsprogs-libblkid,e2fsprogs-libs,e2fsprogs-libss,e2fsprogs-libuuid,e2fsprogs1.41], setname: e2fsprogs }
+- { name: easyrpg,                     setname: easyrpg-player,           family: [ openbsd ] }
+- { name: easyrsa,                     setname: easy-rsa                  }
+- { name: easy_spice,                  setname: easyspice                 }
+- { name: easysoap,                    setname: easysoap++                }
+- { name: [easytag24,easytag-gtk2],    setname: easytag                   }
+- { name: eawpatches,                  setname: eawpats                   }
+- { name: eclipse-java,                setname: eclipse                   }
+- { name: ecmtools,                    setname: ecm-tools                 }
+- { name: ecrire-git,                  setname: ecrire                    }
+- { name: edsim51,                     setname: edsim51di                 }
+- { name: ee-editor,                   setname: ee                        }
+- { name: eekboard-gtk2,               setname: eekboard                  }
+- { name: einstein-puzzle,             setname: einstein,                 family: [ pkgsrc ] }
+- { name: el,                          setname: eternal-lands,            family: [ freebsd ] }
+- { name: el-data,                     setname: eternal-lands-data,       family: [ freebsd ] }
+- { name: electric-fence,              setname: electricfence             }
+- { name: enblend,                     setname: enblend-enfuse,           family: [ freebsd ] }
+- { name: endgame-singularity,         setname: singularity,              family: [ freebsd ] }
+- { name: endgame-singularity-music,   setname: singularity-music,        family: [ freebsd ] } # for consistency
+- { name: entagged-tageditor,          setname: entagged,                 family: [ gentoo ]  }
+- { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
+- { name: eric6,                       setname: eric,                     family: [ freebsd ] }
+- { name: etracer,                     setname: extreme-tuxracer          }
+- { name: exactimage,                  setname: exact-image,              family: [ debuntu ]  }
+- { name: extremetuxracer,             setname: extreme-tuxracer          }
+- { name: falconseye,                  setname: falcons-eye,              family: [ freebsd, openbsd ] }
+- { name: fb-folly,                    setname: folly                     }
+- { name: farstream-0.2,               setname: farstream,                family: [ debuntu ]  }
+- { name: [fifengine,py27-fife],       setname: fife                      }
+- { name: fish-fillets,                setname: fillets-ng                }
+- { name: fish-fillets-ng,             setname: fillets-ng                }
+- { name: foobillardplus,              setname: foobillard++              }
+- { name: fotaq,                       setname: flight-of-the-amazon-queen }
+- { name: fossology-nomos-standalone,  setname: fossology                 } # part of fossology
+- { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
+- { name: fox1.6,                      setname: fox16,                    family: [ debuntu ]  }
+- { name: fox17,                       setname: fox,                      family: [ freebsd ] }
+- { name: free42-nologo,               setname: free42,                   family: [ debuntu ]  }
+- { name: freebsd-uucp,                setname: uucp,                     family: [ freebsd ] }
+- { name: garden,                      setname: garden-of-coloured-lights }
+- { name: gargoyle-free,               setname: gargoyle,                 family: [ debuntu ]  }
+- { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
+- { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
+- { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
+- { name: geotiff,                     setname: libgeotiff                }
+- { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
+- { name: git-flow,                    setname: gitflow                   }
+- { name: gkrellm2,                    setname: gkrellm                   }
+- { name: gl117,                       setname: gl-117,                   family: [ gentoo ]  }
+- { name: [google-mock,googlemock,libgmock], setname: gmock               }
+- { name: [googletest,libgtest],       setname: gtest                     }
+- { namepat: "grafana[0-9]+",          setname: grafana                   }
+- { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna], setname: graphviz }
+- { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
+- { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
+- { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
+- { name: iccexamin,                   setname: icc-examin                }
+- { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
+- { name: icecast2,                    setname: icecast                   }
+- { name: [intel-tbb,libtbb],          setname: tbb                       }
+- { name: ir.lv2,                      setname: ir-lv2                    }
+- { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
+- { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
+- { name: [intellij-pycharm,pycharm-community], setname: pycharm          }
+- { name: ja2,                         setname: ja2-stracciatella         }
+- { name: jbig-kit,                    setname: jbigkit                   }
+- { name: [kid3-qt, kid3-qt4, kid3-qt5, kid4-qt, kid3-cli], setname: kid3 }
+- { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
+- { name: krita3,                      setname: krita                     }
+- { name: libass4,                     setname: libass                    }
+- { name: libagg,                      setname: agg                       }
+- { name: libaudiofile,                setname: audiofile                 }
+- { name: libbrotli,                   setname: brotli                    }
+- { name: libenet,                     setname: enet                      }
+- { name: libcomedi,                   setname: comedilib                 }
+- { name: libfreeglut,                 setname: freeglut                  }
+- { name: libgc,                       setname: boehm-gc                  }
+- { name: [libfreetype,freetype1,freetype2], setname: freetype            }
+- { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
+- { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
+- { name: liblz4,                      setname: lz4                       } # XXX: reverse?
+- { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
+- { name: libsfml,                     setname: sfml                      }
+- { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
+- { name: libuv1,                      setname: libuv                     }
+- { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
+- { name: libtremor,                   setname: tremor                    }
+- { name: libzstd,                     setname: zstd                      }
+- { name: compat-sfml16,               setname: sfml                      }
+- { name: libtre,                      setname: tre                       } # XXX: reverse?
+- { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
+- { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
+- { name: multicorn,                   setname: postgresql-multicorn      }
+- { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
+- { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
+- { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
+- { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
+- { namepat: "network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine)", setname: "networkmanager-$1" }
+- { name: ogre3d,                      setname: ogre                      }
+- { name: ogre-1.9,                    setname: ogre                      }
+- { name: openastromenace,             setname: astromenace,              family: [ freebsd ] }
+- { name: opencv2,                     setname: opencv                    }
+- { name: [openjp2, libopenjpeg2.0],   setname: openjpeg2                 }
+- { name: [openvpn-mbedtls, openvpn-polarssl, openvpn23], setname: openvpn                   }
+- { namepat: "osg(?:-devel)?",         setname: openscenegraph,           family: [ freebsd ] }
+- { name: pacman-arena,                setname: pacmanarena,              family: [ openbsd ] }
+- { name: perlbrew,                    setname: "perl:app-perlbrew"       }
+- { name: pioneerspacesim,             setname: pioneer                   }
+- { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
+- { name: postgresql-libpqxx,          setname: libpqxx                   }
+- { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
+- { name: [powdertoy, the-powder-toy, powder-toy-static], setname: powder-toy }
+- { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
+- { name: puzzles,                     setname: sgt-puzzles,              family: [ pkgsrc, arch, openbsd ] }
+- { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
+- { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5], setname: qbittorrent }
+- { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator], setname: qtcreator }
+- { name: quadkonsole,                 setname: quadkonsole4              }
+- { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
+- { name: r2e,                         setname: rss2email                 }
+- { name: rdkafka,                     setname: librdkafka                }
+- { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
+- { name: [s3fs,s3fs-fuse],            setname: "fusefs:s3fs"             }
+- { name: sdl2pp,                      setname: libsdl2pp                 }
+- { namepat: "sdl-?sopwith",           setname: sopwith                   }
+- { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debuntu ]  }
+- { name: sdlpango,                    setname: sdl-pango,                family: [ debuntu ]  }
+- { namepat: "sendmail\\+.*",          setname: sendmail,                 family: [ freebsd ]  }
+- { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
+- { name: seven-kingdoms,              setname: 7kaa,                     family: [ gentoo ]  }
+- { name: slashem-tty,                 setname: slashem,                  family: [ freebsd ] }
+- { name: sdl-asylum,                  setname: asylum                    }
+- { name: sni-qt4,                     setname: sni-qt                    }
+- { name: snorenotify-qt5,             setname: snorenotify               }
+- { name: spacearyarya-kxl,            setname: spacearyarya,             family: [ gentoo ]  } # XXX: recheck
+- { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
+- { name: stellarium-qt4,              setname: stellarium                }
+- { name: stepmania-devel,             setname: stepmania,                family: [ freebsd ] }
+- { namepat: "stonesoup(?:-sdl)?",     setname: stone-soup                }
+- { name: stransball2,                 setname: supertransball2           }
+- { name: structure-synth,             setname: structuresynth            }
+- { name: stone-soup-ncurses,          setname: stone-soup                }
+- { name: supertux,                    setname: supertux1,                family: [ freebsd ] } # ???
+- { name: supertux2,                   setname: supertux,                 family: [ freebsd ] }
+- { name: sweet-home-3d,               setname: sweethome3d               }
+- { name: tetrinet-x,                  setname: tetrinetx,                family: [ freebsd ] }
+- { name: tintin,                      setname: tintin++,                 family: [ gentoo ]  }
+- { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
+- { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
+- { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
+- { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
+- { name: varnish4,                    setname: varnish,                  family: [ freebsd ]  }
+- { name: vdr-devel,                   setname: vdr, ignorever: true      }
+- { name: vsftpd-ssl,                  setname: vsftpd,                   family: [ freebsd ]  }
+- { name: [webp,libwebp6],             setname: libwebp                   }
+- { name: wop,                         setname: wormsofprey               }
+- { name: wpasupplicant,               setname: wpa_supplicant            }
+- { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
+- { name: xfce4-dict-plugin,           setname: xfce4-dict,               family: [ freebsd ] }
+- { name: xpi-foxyproxy,               setname: foxyproxy,                family: [ freebsd ] }
+- { name: yofrankie-bge,               setname: yofrankie                 }
+- { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
+- { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
+- { namepat: "android-tools-[^-]+",    setname: android-tools,            family: [ freebsd, pkgsrc ] }
+- { namepat: "celestia-.*",            setname: celestia,                 family: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
+- { namepat: "eiskaltdcpp-(cli|daemon|data|gtk|lib|qt|core)",             setname: eiskaltdcpp }
+- { namepat: "enscript-.*",            setname: enscript,                 family: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
+- { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
+- { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         family: [ pkgsrc, openbsd ] }
+- { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debuntu, gentoo, crux ]  }
+- { namepat: "open[gs]fx",             setname: "openttd-$0",             family: [ freebsd, gentoo ] }
+- { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 family: [ debuntu ]  }
+- { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                family: [ debuntu ]  }
+- { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
+- { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
+- { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
+- { namepat: "zabbix[0-9]*-(?:agent|frontend|proxy|server|common|proxy-sqlite|server-mysql|agentd)[0-9.-]*", setname: "zabbix" }

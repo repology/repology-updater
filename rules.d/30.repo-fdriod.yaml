@@ -1,0 +1,19 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# F-Droid is too alien, even if package names match in most cases it's entirely different application
+# So use whitelist
+- {                                                                  family: [ fdroid ], ignore: true }
+- { name: "andor's trail",                                           family: [ fdroid ], unignore: true } # as an exception, allow android project (present in f-droid and libregamewiki)
+- { name: busybox,                                                   family: [ fdroid ], unignore: true }
+- { name: firefox,                                                   family: [ fdroid ], unignore: true }
+- { name: freeminer,                                                 family: [ fdroid ], unignore: true }
+- { name: hyperrogue,                                                family: [ fdroid ], unignore: true }
+- { name: i2p,                                                       family: [ fdroid ], unignore: true }
+- { name: kouchat,                                                   family: [ fdroid ], unignore: true }
+- { name: linphone,                                                  family: [ fdroid ], unignore: true }
+- { name: mupdf,                                                     family: [ fdroid ], unignore: true }
+- { name: onscripter,                                                family: [ fdroid ], unignore: true }
+- { name: reicast,                                                   family: [ fdroid ], unignore: true }
+- { name: scummvm,                                                   family: [ fdroid ], unignore: true }
+- { name: snapcast,                                                  family: [ fdroid ], unignore: true }
+- { name: yabause,                                                   family: [ fdroid ], unignore: true }

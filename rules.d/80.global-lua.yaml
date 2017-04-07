@@ -1,0 +1,9 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# lua
+- { namepat: ".*luassert",             setname: "lua:luassert", last: true } # save
+- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", family: [ freebsd, pkgsrc, openbsd, arch, debuntu, fedora, mageia, opensuse, gobolinux ] }
+- { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", family: [ openbsd ] }
+- { namepat: "lua(?:[0-9]\\.[0-9])?-(?:lua)?(.+?)", setname: "lua:$1", family: [ nix, alpine ] }
+- { category: dev-lua, name: luabitop, setname: "lua:bitop", last: true, family: [ gentoo ] }
+- { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", family: [ gentoo ] }

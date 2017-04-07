@@ -1,0 +1,7 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Tryton (wtf is that); needs to be before python
+- { namepat: "py[0-9][0-9]-trytond-(.*)", setname: "tryton:$1", family: [ pkgsrc ] }
+- { namepat: "trytond28_(.*)",         setname: "tryton:$1", family: [ freebsd ] }
+- { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", family: [ debuntu ] }
+- { namepat: "trytond-module-(.*)",    setname: "tryton:$1", family: [ openbsd ] }
