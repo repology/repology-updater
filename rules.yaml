@@ -322,6 +322,8 @@
 - { name: snorenotify-qt5,             setname: snorenotify               }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             family: [ gentoo ]  } # XXX: recheck
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
+- { name: sphinx,                      setname: "python:sphinx",          family: [ slackbuilds ], category: [ development ]  }
+- { name: ssr,                         setname: simplescreenrecorder,     family: [ slackbuilds ]  }
 - { name: stellarium-qt4,              setname: stellarium                }
 - { name: stepmania-devel,             setname: stepmania,                family: [ freebsd ] }
 - { namepat: "stonesoup(?:-sdl)?",     setname: stone-soup                }
