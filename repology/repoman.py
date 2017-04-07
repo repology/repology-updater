@@ -34,13 +34,10 @@ class RepositoryManager:
     def __init__(self, reposdir, statedir):
         self.repositories = []
 
-        for filename in os.listdir(reposdir):
-            repospath = os.path.join(reposdir, filename)
-            if not os.path.isfile(repospath) or not repospath.endswith('.yaml'):
-                continue
-
-            with open(repospath) as reposfile:
-                self.repositories += yaml.safe_load(reposfile)
+        for root, dirs, files in os.walk(reposdir):
+            for filename in filter(lambda f: f.endswith('.yaml'), files):
+                with open(os.path.join(root, filename)) as reposfile:
+                    self.repositories += yaml.safe_load(reposfile)
 
         # process source loops
         for repo in self.repositories:
