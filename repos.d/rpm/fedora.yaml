@@ -8,7 +8,7 @@
     - name: data
       fetcher: Repodata
       parser: Repodata
-      url: https://mirror.yandex.ru/fedora/linux/releases/24/Everything/source/tree/
+      url: https://download.fedoraproject.org/pub/fedora/linux/releases/24/Everything/source/tree/
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
@@ -26,7 +26,7 @@
     - name: data
       fetcher: Repodata
       parser: Repodata
-      url: https://mirror.yandex.ru/fedora/linux/releases/25/Everything/source/tree/
+      url: https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/source/tree/
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
@@ -44,7 +44,7 @@
     - name: data
       fetcher: Repodata
       parser: Repodata
-      url: https://mirror.yandex.ru/fedora/linux/development/26/Everything/source/tree/
+      url: https://download.fedoraproject.org/pub/fedora/linux/development/26/Everything/source/tree/
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
@@ -62,7 +62,7 @@
     - name: data
       fetcher: Repodata
       parser: Repodata
-      url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
+      url: https://download.fedoraproject.org/pub/fedora/linux/development/rawhide/Everything/source/tree/
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
