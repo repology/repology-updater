@@ -1,0 +1,19 @@
+###########################################################################
+# PyPi (python)
+###########################################################################
+- name: pypi
+  desc: PyPi
+  family: pypi
+  sources:
+    - name: PyPi
+      fetcher: File
+      parser: PyPiHTML
+      url: https://pypi.python.org/pypi/
+  shadow: true
+  repolinks:
+    - desc: PyPI - the Python Package Index
+      url: https://pypi.python.org/pypi
+  packagelinks:
+    - desc: PyPi page
+      url: 'https://pypi.python.org/pypi/{name}/'
+  tags: [ all, production ]

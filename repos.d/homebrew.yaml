@@ -1,0 +1,21 @@
+###########################################################################
+# Homebrew (not functional yet)
+###########################################################################
+- name: homebrew
+  desc: Homebrew
+  family: homebrew
+  sources:
+      # XXX: nowhere to fetch from yet
+      # See https://github.com/koraktor/braumeister.org
+      # http://discourse.brew.sh/t/regular-formula-info-dump-in-machine-readable-format/687
+    - name: homebrew.json
+      parser: HomebrewJson
+  repolinks:
+    - desc: Homebrew home
+      url: https://github.com/fd00/yacp
+    - desc: Braumeister - online package browser for Homebrew
+      url: http://braumeister.org/
+  packagelinks:
+    - desc: Braumeister page
+      url: 'http://braumeister.org/formula/{name}'
+  tags: [ homebrew ]

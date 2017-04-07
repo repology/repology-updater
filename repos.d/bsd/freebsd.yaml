@@ -1,0 +1,69 @@
+###########################################################################
+# FreeBSD
+###########################################################################
+- name: freebsd
+  desc: FreeBSD
+  family: freebsd
+  sources:
+    - name: INDEX-11
+      fetcher: File
+      parser: FreeBSDIndex
+      url: http://www.FreeBSD.org/ports/INDEX-11.bz2
+      compression: bz2
+  repolinks:
+    - desc: FreeBSD home
+      url: https://www.freebsd.org/
+    - desc: About FreeBSD ports
+      url: https://www.freebsd.org/ports/
+    - desc: FreshPorts - The Place For Ports
+      url: https://www.freshports.org/
+    - desc: FreeBSD ports SVN repository
+      url: https://svnweb.freebsd.org/ports/head/
+    - desc: Package builds status
+      url: https://pkg-status.freebsd.org/
+  packagelinks:
+    - desc: FreshPorts page
+      url: 'http://www.freshports.org/{category}/{name}'
+    - desc: SVNWeb
+      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/'
+    - desc: Port's Makefile
+      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
+    - desc: PortsMon
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
+    - desc: Related bugs in FreeBSD bugzilla
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
+  tags: [ all, production, have_testdata ]
+
+###########################################################################
+# DragonFlyBSD DPorts (derivative from FreeBSD ports)
+###########################################################################
+- name: dports
+  desc: DPorts
+  family: freebsd
+  sources:
+    - name: INDEX
+      fetcher: File
+      parser: DPortsIndex
+      url: http://muscles.dragonflybsd.org/INDEX.bz2
+      compression: bz2
+  repolinks:
+    - desc: DragonFly BSD home
+      url: https://www.dragonflybsd.org/
+    - desc: DragonFly BSD DPorts howto
+      url: https://www.dragonflybsd.org/docs/howtos/HowToDPorts/
+    - desc: DPorts repository on GitHub
+      url: https://github.com/DragonFlyBSD/DPorts
+  packagelinks:
+    - desc: FreshPorts page
+      url: 'http://www.freshports.org/{category}/{name}'
+    - desc: SVNWeb
+      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/'
+    - desc: Port's Makefile
+      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
+    - desc: PortsMon
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
+    - desc: Related bugs in FreeBSD bugzilla
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
+    - desc: Synth build log
+      url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{name}.log'
+  tags: [ all, production ]

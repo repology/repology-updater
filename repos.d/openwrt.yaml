@@ -1,0 +1,35 @@
+###########################################################################
+# OpenWRT
+###########################################################################
+- name: openwrt_15_05_01_x86
+  desc: OpenWrt 15.05.01 x86
+  family: openwrt
+  sources:
+    - name: [ base, luci, management, packages, routing, telephony ]
+      fetcher: File
+      parser: DebianSources
+      url: 'https://downloads.openwrt.org/chaos_calmer/15.05.1/x86/generic/packages/{source}/Packages.gz'
+      compression: gz
+      subrepo: '{source}'
+  shadow: true
+  repolinks:
+    - desc: OpenWrt home
+      url: https://openwrt.org/
+  tags: [ all, production, openwrt ]
+
+- name: openwrt_trunk_x86
+  desc: OpenWrt trunk x86
+  family: openwrt
+  sources:
+    - name: [ base, luci, management, packages, routing, telephony ]
+      fetcher: File
+      parser: DebianSources
+      url: 'https://downloads.openwrt.org/snapshots/trunk/x86/generic/packages/{source}/Packages.gz'
+      compression: gz
+      subrepo: '{source}'
+  shadow: true
+  repolinks:
+    - desc: OpenWrt home
+      url: https://openwrt.org/
+  tags: [ all, production, openwrt ]
+

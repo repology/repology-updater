@@ -1,0 +1,16 @@
+###########################################################################
+# PCLinuxOS
+###########################################################################
+- name: pclinuxos
+  desc: PCLinuxOS
+  family: pclinuxos
+  sources:
+    - name: srpms
+      fetcher: File
+      parser: SrcList
+      url: http://distrib-coffee.ipsl.jussieu.fr/pub/linux/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
+      compression: bz2
+  repolinks:
+    - desc: PCLinuxOS home
+      url: http://www.pclinuxos.com/
+  tags: [ all, production ]

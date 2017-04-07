@@ -1,0 +1,44 @@
+###########################################################################
+# Manjaro (arch derivative)
+###########################################################################
+- name: manjaro_stable
+  desc: Manjaro Stable
+  family: arch
+  sources:
+    - name: [ community, core, extra ]
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'http://mirror.yandex.ru/mirrors/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Manjaro Linux home
+      url: https://manjaro.org/
+  tags: [ all, production, manjaro ]
+
+- name: manjaro_testing
+  desc: Manjaro Testing
+  family: arch
+  sources:
+    - name: [ community, core, extra ]
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'http://mirror.yandex.ru/mirrors/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Manjaro Linux home
+      url: https://manjaro.org/
+  tags: [ all, production, manjaro ]
+
+- name: manjaro_unstable
+  desc: Manjaro Unstable
+  family: arch
+  sources:
+    - name: [ community, core, extra ]
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'http://mirror.yandex.ru/mirrors/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Manjaro Linux home
+      url: https://manjaro.org/
+  tags: [ all, production, manjaro ]

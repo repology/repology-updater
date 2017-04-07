@@ -1,0 +1,18 @@
+###########################################################################
+# Alpine Linux aports
+###########################################################################
+- name: alpine_edge
+  desc: Alpine Linux Edge
+  family: alpine
+  sources:
+    - name: [ community, main, testing ]
+      fetcher: WgetTar
+      parser: ApkIndex
+      url: 'http://dl-3.alpinelinux.org/alpine/edge/{source}/x86_64/APKINDEX.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Alpine Linux home
+      url: https://alpinelinux.org/
+    - desc: Alpine packages
+      url: https://pkgs.alpinelinux.org/packages
+  tags: [ all, production ]

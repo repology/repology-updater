@@ -1,0 +1,22 @@
+###########################################################################
+# Calculate linux
+###########################################################################
+- name: calculate
+  desc: Calculate
+  family: gentoo
+  sources:
+    - name: calculate
+      fetcher: Git
+      parser: GentooGit
+      url: https://github.com/calculatelinux/calculate.git
+  repolinks:
+    - desc: Calculate Linux home
+      url: http://www.calculate-linux.org/
+    - desc: Calculate Linux git repository
+      url: https://github.com/calculatelinux/calculate
+  packagelinks:
+    - desc: Package details
+      url: 'http://www.calculate-linux.org/packages/{category}/{name}'
+    - desc: View ebuild
+      url: 'http://www.calculate-linux.org/packages/{category}/{name}/{name}-{origversion}.ebuild'
+  tags: [ all, production ]

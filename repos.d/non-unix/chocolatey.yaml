@@ -1,0 +1,16 @@
+- name: chocolatey
+  desc: Chocolatey
+  family: chocolatey
+  sources:
+    - name: chocolatey
+      fetcher: Chocolatey
+      parser: Chocolatey
+      url: https://chocolatey.org/api/v2/
+  shadow: true
+  repolinks:
+    - desc: Chocolatey - the package manager for Windows
+      url: https://chocolatey.org/
+  packagelinks:
+    - desc: Chocolatey package page
+      url: 'https://chocolatey.org/packages/{name}'
+  tags: [ all, production ]

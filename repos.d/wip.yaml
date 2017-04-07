@@ -1,0 +1,20 @@
+###########################################################################
+# release_monitoring.org (disabled)
+###########################################################################
+- name: release_monitoring
+  desc: release-monitoring.org
+  family: anitya
+  sources:
+    - name: release-monitoring.org
+      fetcher: File
+      parser: AnityaApi
+      url: https://release-monitoring.org/api/projects
+  repolinks:
+    - desc: release-monitoring.org
+      url: https://release-monitoring.org/
+  packagelinks:
+    - desc: release-monitoring.org entry
+      url: 'https://release-monitoring.org/project/{name}/'
+  shadow: true
+  tags: []
+

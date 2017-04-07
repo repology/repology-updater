@@ -1,0 +1,18 @@
+###########################################################################
+# SlackBuilds
+###########################################################################
+- name: slackbuilds
+  desc: SlackBuilds
+  family: slackbuilds
+  sources:
+    - name: slackbuilds
+      fetcher: Git
+      parser: SlackBuilds
+      url: git://slackbuilds.org/slackbuilds
+  repolinks:
+    - desc: SlackBuilds.org
+      url: https://slackbuilds.org/
+  packagelinks:
+    - desc: SlackBuilds.org page
+      url: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
+  tags: [ all, production, have_testdata ]

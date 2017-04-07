@@ -1,0 +1,20 @@
+###########################################################################
+# RubyGems (ruby)
+###########################################################################
+- name: rubygems
+  desc: RubyGems
+  family: rubygems
+  sources:
+    - name: latest_specs.4.8
+      fetcher: File
+      parser: RubyGem
+      url: https://api.rubygems.org/latest_specs.4.8.gz
+      compression: gz
+  shadow: true
+  repolinks:
+    - desc: RubyGems.org
+      url: https://rubygems.org/
+  packagelinks:
+    - desc: RubyGems page
+      url: 'https://www.rubygems.org/gems/{name}/'
+  tags: [ all, production ]

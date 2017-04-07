@@ -1,0 +1,34 @@
+###########################################################################
+# NixOS packages
+###########################################################################
+- name: nix_stable
+  desc: nixpkgs stable
+  family: nix
+  sources:
+    - name: nix
+      fetcher: File
+      parser: NixJson
+      url: https://nixos.org/nixpkgs/packages.json.gz
+  repolinks:
+    - desc: NixOS home
+      url: http://nixos.org/
+    - desc: NixOS packages
+      url: http://nixos.org/nixos/packages.html
+  # XXX: add urls
+  tags: [ all, production ]
+
+- name: nix_unstable
+  desc: nixpkgs unstable
+  family: nix
+  sources:
+    - name: nix
+      fetcher: File
+      parser: NixJson
+      url: https://nixos.org/nixpkgs/packages-unstable.json.gz
+  repolinks:
+    - desc: NixOS home
+      url: http://nixos.org/
+    - desc: NixOS packages
+      url: http://nixos.org/nixos/packages.html
+  # XXX: add urls
+  tags: []

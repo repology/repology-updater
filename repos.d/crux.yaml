@@ -1,0 +1,34 @@
+###########################################################################
+# CRUX
+###########################################################################
+- name: crux_32
+  desc: CRUX 3.2
+  family: crux
+  sources:
+    - name: [ core, opt, xorg, contrib ]
+      fetcher: Rsync
+      parser: CRUX
+      url: 'crux.nu::ports/crux-3.2/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: CRUX home
+      url: https://crux.nu/
+    - desc: CRUX port browser
+      url: https://crux.nu/portdb
+  tags: [ all, production, crux]
+
+- name: crux_33
+  desc: CRUX 3.3
+  family: crux
+  sources:
+    - name: [ core, opt, xorg, contrib ]
+      fetcher: Rsync
+      parser: CRUX
+      url: 'crux.nu::ports/crux-3.3/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: CRUX home
+      url: https://crux.nu/
+    - desc: CRUX port browser
+      url: https://crux.nu/portdb
+  tags: [ all, production, crux ]

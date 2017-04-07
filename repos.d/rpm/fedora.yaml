@@ -1,0 +1,74 @@
+###########################################################################
+# Fedora
+###########################################################################
+- name: fedora_24
+  desc: Fedora 24
+  family: fedora
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: https://mirror.yandex.ru/fedora/linux/releases/24/Everything/source/tree/
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://apps.fedoraproject.org/packages/
+  packagelinks:
+    - desc: Package details on Fedora PkgDB
+      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+  tags: [ all, production, fedora, rpm ]
+
+- name: fedora_25
+  desc: Fedora 25
+  family: fedora
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: https://mirror.yandex.ru/fedora/linux/releases/25/Everything/source/tree/
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://apps.fedoraproject.org/packages/
+  packagelinks:
+    - desc: Package details on Fedora PkgDB
+      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+  tags: [ all, production, fedora, rpm ]
+
+- name: fedora_26
+  desc: Fedora 26
+  family: fedora
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: https://mirror.yandex.ru/fedora/linux/development/26/Everything/source/tree/
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://apps.fedoraproject.org/packages/
+  packagelinks:
+    - desc: Package details on Fedora PkgDB
+      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+  tags: [ all, production, fedora, rpm ]
+
+- name: fedora_rawhide
+  desc: Fedora Rawhide
+  family: fedora
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://apps.fedoraproject.org/packages/
+  packagelinks:
+    - desc: Package details on Fedora PkgDB
+      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+  tags: [ all, production, fedora, rpm ]
