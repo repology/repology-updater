@@ -1,25 +1,6 @@
 ###########################################################################
 # CentOS
 ###########################################################################
-- name: centos_5
-  desc: CentOS 5
-  family: centos
-  sources:
-    - name: [ os, updates ]
-      fetcher: Repodata
-      parser: Repodata
-      url: 'http://vault.centos.org/centos/5/{source}/Source/'
-      subrepo: '{source}'
-  repolinks:
-    - desc: CentOS home
-      url: https://www.centos.org/
-    - desc: CentOS packages
-      url: http://centos-packages.com/
-  packagelinks:
-    - desc: Package details on centos-packages.com
-      url: 'http://centos-packages.com/5/package/{name}/'
-  tags: [ all, production, centos, rpm ]
-
 - name: centos_6
   desc: CentOS 6
   family: centos
