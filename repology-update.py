@@ -76,6 +76,9 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
         db_logger.Log('(re)initializing database schema')
         database.CreateSchema()
 
+        db_logger.Log('committing changes')
+        database.Commit()
+
     if options.database:
         db_logger.Log('clearing the database')
         database.Clear()
