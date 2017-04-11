@@ -41,6 +41,7 @@ from .repodata import RepodataParser
 from .rosa import RosaInfoXmlParser
 from .rubygem import RubyGemParser
 from .slackbuilds import SlackBuildsParser
+from .snap import SnapJsonParser
 from .spec import SpecParser
 from .srclist import SrcListParser
 from .yacp import YACPGitParser

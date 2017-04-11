@@ -1,0 +1,18 @@
+###########################################################################
+# Snap
+###########################################################################
+- name: snap
+  desc: Snap
+  family: snap
+  sources:
+    - name: snap
+      fetcher: File
+      parser: SnapJson
+      url: 'https://uappexplorer.com/api/apps?query={"types":"snappy"}'
+  shadow: true
+  repolinks:
+    - desc: snapcraft.io
+      url: https://snapcraft.io/
+    - desc: uApp Explorer
+      url: https://uappexplorer.com/
+  tags: [ all ]
