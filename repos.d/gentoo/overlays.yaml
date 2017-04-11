@@ -1,5 +1,23 @@
 ###########################################################################
-# Gentoo Overlays (disabled because outdated)
+# Pentoo
+###########################################################################
+- name: gentoo_ovl_pentoo
+  desc: Gentoo Overlay Pentoo
+  family: gentoo
+  sources:
+    - name: overlay
+      fetcher: Git
+      parser: GentooGit
+      url: git://github.com/pentoo/pentoo-overlay.git
+  repolinks:
+    - desc: Home page
+      url: http://www.pentoo.ch/
+    - desc: GitHub page
+      url: https://github.com/pentoo/pentoo-overlay
+  tags: [ all ]
+
+###########################################################################
+# Disabled overlays (not really useful)
 ###########################################################################
 - name: gentoo_ovl_games
   desc: Gentoo Overlay Games
