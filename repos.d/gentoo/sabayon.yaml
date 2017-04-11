@@ -1,0 +1,20 @@
+###########################################################################
+# Gentoo
+###########################################################################
+- name: sabayon
+  desc: Sabayon
+  family: gentoo
+  sources:
+    - name: sabayon
+      fetcher: Git
+      parser: GentooGit
+      url: https://github.com/Sabayon/sabayon-distro.git
+  repolinks:
+    - desc: Sabayon Linux home
+      url: https://www.sabayon.org/
+  packagelinks:
+    - desc: Package directory on GitHub
+      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{category}/{name}'
+    - desc: Ebuild on GitHub
+      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{category}/{name}/{name}-{origversion}.ebuild'
+  tags: [ all ]
