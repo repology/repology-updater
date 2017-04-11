@@ -122,11 +122,13 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
     logger.Log('database processing complete')
 
 
-def ShowUnmatchedRules(options, logger, transformer):
+def ShowUnmatchedRules(options, logger, transformer, reliable):
     unmatched = transformer.GetUnmatchedRules()
     if len(unmatched):
         wlogger = logger.GetPrefixed('WARNING: ')
         wlogger.Log('unmatched rules detected!')
+        if not reliable:
+            wlogger.Log('this information is not reliable because not all repositories were updated!')
 
         for rule in unmatched:
             wlogger.Log(rule)
@@ -173,7 +175,7 @@ def Main():
         ProcessDatabase(options=options, logger=logger, repoman=repoman, repositories_updated=repositories_updated)
 
     if (options.parse or options.reprocess) and (options.show_unmatched_rules):
-        ShowUnmatchedRules(options=options, logger=logger, transformer=transformer)
+        ShowUnmatchedRules(options=options, logger=logger, transformer=transformer, reliable=repositories_not_updated == [])
 
     logger.Log('total time taken: {:.2f} seconds'.format((timer() - start)))
 
