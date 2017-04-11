@@ -1,8 +1,68 @@
 ###########################################################################
 # Linux Mint
 ###########################################################################
+- name: linux_mint_17
+  desc: Linux Mint 17
+  family: debuntu
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/qiana/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
+
+- name: linux_mint_17_1
+  desc: Linux Mint 17.1
+  family: debuntu
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rebecca/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
+
+- name: linux_mint_17_2
+  desc: Linux Mint 17.2
+  family: debuntu
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rafaela/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
+
+- name: linux_mint_17_3
+  desc: Linux Mint 17.3
+  family: debuntu
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rosa/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
+
 - name: linux_mint_18
-  desc: Linux Mint Sarah
+  desc: Linux Mint 18
   family: debuntu
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
@@ -17,7 +77,7 @@
   tags: [ all, production, mint ]
 
 - name: linux_mint_18_1
-  desc: Linux Mint Serena
+  desc: Linux Mint 18.1
   family: debuntu
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
