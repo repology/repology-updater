@@ -14,7 +14,7 @@
       url: http://www.pentoo.ch/
     - desc: GitHub page
       url: https://github.com/pentoo/pentoo-overlay
-  tags: [ all ]
+  tags: [ all, production ]
 
 ###########################################################################
 # Disabled overlays (not really useful)
