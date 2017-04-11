@@ -1,19 +1,6 @@
 ###########################################################################
 # EPEL
 ###########################################################################
-- name: epel_5
-  desc: EPEL 5
-  family: fedora
-  sources:
-    - name: data
-      fetcher: Repodata
-      parser: Repodata
-      url: https://dl.fedoraproject.org/pub/epel/5/SRPMS/
-  repolinks:
-    - desc: EPEL wiki page
-      url: https://fedoraproject.org/wiki/EPEL
-  tags: [ all, production ]
-
 - name: epel_6
   desc: EPEL 6
   family: fedora
