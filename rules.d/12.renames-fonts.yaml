@@ -18,7 +18,39 @@
 - name:
     - arkpandora
     - fonts-arkpandora
-  setname: fonts:arkpandora
+  setname: "fonts:arkpandora"
+
+- name:
+    - ttf-atarismall
+    - fonts-atarismall
+  setname: "fonts:atarismall"
+
+- name:
+    - font-awesome
+    - fontawesome
+    - fontawesome-fonts
+    - fonts-font-awesome
+    - fonts-ttf-fontawesome
+    - otf-font-awesome
+    - otf-fontawesome
+    - ttf-font-awesome
+  setname: "fonts:fontawesome"
+
+- name:
+    - babelstone-han-fonts
+    - fonts-babelstone-han
+    - ttf-babelstone-han
+  setname: "fonts:babelstone-han"
+
+- name:
+    - babelstone-modern-fonts
+    - fonts-babelstone-modern
+  setname: "fonts:babelstone-modern"
+
+- { name: babelstone-marchen-fonts, setname: "fonts:babelstone-marchen" }
+- { name: babelstone-ogham-fonts, setname: "fonts:babelstone-ogham" }
+- { name: babelstone-phags-pa-fonts, setname: "fonts:babelstone-phags-pa" }
+- { name: babelstone-runic-fonts, setname: "fonts:babelstone-runic" }
 
 - { namepat: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
 - { namepat: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
@@ -60,6 +92,11 @@
     - ttf-cheapskate
     - cheapskatefonts
   setname: "fonts:cheapskate"
+
+- name:
+    - consolamono-ttf
+    - fonts-ttf-consolamono
+  setname: "fonts:consolamono"
 
 - name:
     - cm-unicode
@@ -160,6 +197,22 @@
     - fonts-bitmap-efont-unicode
     - xfonts-efont-unicode
   setname: "fonts:efont-unicode"
+
+- name:
+    - emojione
+    - fonts-emojione
+  setname: "fonts:emojione"
+
+- name:
+    - emojione-color-font
+    - emojione-color-font-ttf
+    - ttf-emojione-color
+  setname: "fonts:emojione-color" # check this isn't this the same as fonts:emojione
+
+- name:
+    - fonts-fanwood
+    - ttf-fanwood
+  setname: "fonts:fanwood"
 
 - name:
     - fira-code
