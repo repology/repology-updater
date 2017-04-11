@@ -50,6 +50,12 @@
 - { name: polly, verpat: "0\\.93\\..*", setname: polly-twitter-client     } # twitter client
 - { name: polly, warning: "please classify me" }
 
+# infrastructure manager vs. heighfield generation
+- { name: terraform, setname: gnome-terraform, family: yacp }
+
+# "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
+- { name: packer, setname: "pacman-packer", family: arch  }
+
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
 - { name: whereami, family: [ arch ], setname: "whereami-kootenpv" } # Uses WiFi signals and machine learning to predict where you are
