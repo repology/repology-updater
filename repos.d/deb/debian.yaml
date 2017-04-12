@@ -19,6 +19,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/{name}'
+    - desc: Related bugs in Debian bugzilla
+      url: 'https://bugs.debian.org/{name}'
   tags: [ all, production, debian ]
 
 - name: debian_stable_backports
@@ -37,6 +39,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/{name}'
+    - desc: Related bugs in Debian bugzilla
+      url: 'https://bugs.debian.org/{name}'
   tags: [ all, production, debian ]
 
 - name: debian_testing
@@ -57,6 +61,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/{name}'
+    - desc: Related bugs in Debian bugzilla
+      url: 'https://bugs.debian.org/{name}'
   tags: [ all, production, debian ]
 
 - name: debian_unstable
@@ -77,6 +83,8 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}'
+    - desc: Related bugs in Debian bugzilla
+      url: 'https://bugs.debian.org/{name}'
   tags: [ all, production, debian, have_testdata ]
 
 - name: debian_experimental
@@ -95,4 +103,6 @@
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/{name}'
+    - desc: Related bugs in Debian bugzilla
+      url: 'https://bugs.debian.org/{name}'
   tags: [ all, production, debian ]
