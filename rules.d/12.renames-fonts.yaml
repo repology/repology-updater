@@ -26,6 +26,7 @@
   setname: "fonts:atarismall"
 
 - name:
+    - awesome-ttf
     - font-awesome
     - fontawesome
     - fontawesome-fonts
