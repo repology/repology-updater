@@ -24,7 +24,6 @@
 - { namepat: "(ruby:ansi)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:arel)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:blankslate)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:bson)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:builder)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:cfpropertylist)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:coffee-rails)[0-9._-]+", setname: "$1" }
@@ -53,7 +52,6 @@
 - { namepat: "(ruby:html-pipeline)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:http_parser.rb)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:journey)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:jquery-rails)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:json)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:json_pure)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:json-schema)[0-9._-]+", setname: "$1" }
@@ -62,7 +60,6 @@
 - { namepat: "(ruby:listen)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mail)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:map)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:mechanize)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mime-types)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mini_magick)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mini_portile)[0-9._-]+", setname: "$1" }
@@ -71,7 +68,6 @@
 - { namepat: "(ruby:multipart-post)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mustermann)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mustache)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:net-http-digest_auth)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-http-persistent)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-scp)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-ssh)[0-9._-]+", setname: "$1" }
