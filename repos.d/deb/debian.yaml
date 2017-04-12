@@ -18,9 +18,11 @@
       url: https://packages.debian.org/stable/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/stable/{name}'
+      url: 'https://packages.debian.org/stable/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Popularity contest statistics
+      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
 
 - name: debian_stable_backports
@@ -38,9 +40,11 @@
       url: https://www.debian.org/distrib/packages
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/stable-backports/{name}'
+      url: 'https://packages.debian.org/stable-backports/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Popularity contest statistics
+      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
 
 - name: debian_testing
@@ -60,9 +64,11 @@
       url: https://packages.debian.org/testing/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/testing/{name}'
+      url: 'https://packages.debian.org/testing/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Popularity contest statistics
+      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
 
 - name: debian_unstable
@@ -82,9 +88,11 @@
       url: https://packages.debian.org/unstable/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/unstable/{name}'
+      url: 'https://packages.debian.org/unstable/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Popularity contest statistics
+      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian, have_testdata ]
 
 - name: debian_experimental
@@ -102,7 +110,9 @@
       url: https://www.debian.org/distrib/packages
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/experimental/{name}'
+      url: 'https://packages.debian.org/experimental/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Popularity contest statistics
+      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
