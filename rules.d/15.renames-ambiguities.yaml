@@ -39,6 +39,10 @@
 - { name: icecream,                    setname: icecream-stream-extractor,     ver: "1.3" }
 - { name: icecream,                    warning: "please classify me" }
 
+- { name: mog,                         setname: mog-cat, family: freebsd }
+- { name: mog,                         setname: mog-game, family: slackbuilds }
+- { name: mog,                         warning: "please classify me" }
+
 - { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
 
 # python package manager vs. program wrapper (which was renamed to pipo upstream)

@@ -180,6 +180,9 @@
 
 - { namepat: "libglademm[0-9.]+",      setname: libglademm }
 
+- { name: [links1,links2,links+,links-g-directfb,links-gui], setname: links }
+- { name: links, verpat: "1\\..*",     setname: links1 }
+
 - { name: love, verpat: "0\\.10\\..*", setname: love10 }
 - { name: love, verpat: "0\\.8\\..*",  setname: love08 }
 - { name: love, verpat: "0\\.9\\..*",  setname: love09 }
