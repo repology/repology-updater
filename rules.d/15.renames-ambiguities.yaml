@@ -57,7 +57,7 @@
 # Programming language vs. XMPP client vs. openstack object storage
 - { name: swift,                       setname: swift-lang, family: [ arch, freebsd ] }
 - { name: swift,                       setname: swift-im, family: [ sisyphus, fedora, pkgsrc ] }
-- { name: swift,                       setname: swift-storage, family: [ debuntu, gentoo ] }
+- { name: swift,                       setname: openstack-swift, family: [ debuntu, gentoo ] }
 - { name: swift, warning: "please classify me" }
 
 # infrastructure manager vs. heighfield generation
