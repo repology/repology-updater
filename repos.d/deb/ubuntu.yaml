@@ -18,7 +18,9 @@
       url: http://packages.ubuntu.com/precise/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/precise/{name}'
+      url: 'http://packages.ubuntu.com/precise/{name}' # XXX: we should use binare package names here!
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_trusty
@@ -38,7 +40,9 @@
       url: http://packages.ubuntu.com/trusty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/trusty/{name}'
+      url: 'http://packages.ubuntu.com/trusty/{name}' # XXX: we should use binare package names here!
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_xenial
@@ -58,7 +62,9 @@
       url: http://packages.ubuntu.com/xenial/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/xenial/{name}'
+      url: 'http://packages.ubuntu.com/xenial/{name}' # XXX: we should use binare package names here!
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_yakkety
@@ -78,7 +84,9 @@
       url: http://packages.ubuntu.com/yakkety/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/yakkety/{name}'
+      url: 'http://packages.ubuntu.com/yakkety/{name}' # XXX: we should use binare package names here!
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_zesty
@@ -98,5 +106,7 @@
       url: http://packages.ubuntu.com/zesty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/zesty/{name}'
+      url: 'http://packages.ubuntu.com/zesty/{name}' # XXX: we should use binare package names here!
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
   tags: [ all, production, ubuntu ]
