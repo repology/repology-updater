@@ -112,7 +112,7 @@ class GentooGitParser():
                         for entry in meta.findall('maintainer'):
                             email_node = entry.find('email')
 
-                            if email_node is not None:
+                            if email_node is not None and email_node.text is not None:
                                 pkg.maintainers += GetMaintainers(email_node.text)
 
                 maxorigversion = None
