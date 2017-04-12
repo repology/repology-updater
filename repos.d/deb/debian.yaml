@@ -14,13 +14,17 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in stable distribution
+    - desc: Debian packages in stable
       url: https://packages.debian.org/stable/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Package auto-building status
+      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=stable'
     - desc: Popularity contest statistics
       url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
@@ -38,11 +42,17 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in stable-backports
+      url: https://packages.debian.org/stable-backports/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/stable-backports/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Package auto-building status
+      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=jessie-backports' # XXX: keep this up to date, it doesn't know stable-backports!
     - desc: Popularity contest statistics
       url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
@@ -60,13 +70,17 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in testing distribution
+    - desc: Debian packages in testing
       url: https://packages.debian.org/testing/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/testing/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Package auto-building status
+      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=testing'
     - desc: Popularity contest statistics
       url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
@@ -84,13 +98,17 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in unstable distribution
+    - desc: Debian packages in unstable
       url: https://packages.debian.org/unstable/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/unstable/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Package auto-building status
+      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=unstable'
     - desc: Popularity contest statistics
       url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian, have_testdata ]
@@ -108,11 +126,17 @@
   repolinks:
     - desc: Debian packages
       url: https://www.debian.org/distrib/packages
+    - desc: Debian packages in experimental
+      url: https://packages.debian.org/experimental/
+    - desc: Debian package auto-building status
+      url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
       url: 'https://packages.debian.org/experimental/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
+    - desc: Package auto-building status
+      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=exprimental'
     - desc: Popularity contest statistics
       url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
