@@ -21,6 +21,8 @@
       url: 'http://packages.ubuntu.com/precise/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_trusty
@@ -43,6 +45,8 @@
       url: 'http://packages.ubuntu.com/trusty/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_xenial
@@ -65,6 +69,8 @@
       url: 'http://packages.ubuntu.com/xenial/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_yakkety
@@ -87,6 +93,8 @@
       url: 'http://packages.ubuntu.com/yakkety/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_zesty
@@ -109,4 +117,6 @@
       url: 'http://packages.ubuntu.com/zesty/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
