@@ -11,7 +11,6 @@
 - { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns|widgets|qml)[0-9]*", verpat: "5\\..*", setname: "qt5-$1" }
 
 # kde stuff; see https://download.kde.org/stable/applications/16.12.2/src/ for list
-- { name: amarok1, setname: amarok }
 - { name: kdemultimedia-kmix, setname: kmix }
 
 # XXX: god, we really need a loop support here!

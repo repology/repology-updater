@@ -135,7 +135,6 @@
 - { name: coolreader,                  setname: coolreader3               }
 - { name: cpmtools2,                   setname: cpmtools                  }
 - { name: [cppcheck-nogui,cppcheck-nox], setname: cppcheck                }
-- { name: cpufreq-utils,               setname: cpufrequtils              }
 - { name: cracklib2,                   setname: cracklib                  }
 - { name: crimsonfields,               setname: crimson-fields            }
 - { name: crimson, verpat: "0\\.5.*",  setname: crimson-fields            } # XXX: MUST be renamed upstream
