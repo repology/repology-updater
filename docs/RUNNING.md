@@ -115,7 +115,7 @@ testing.
 
 Alternatively, you may deploy the application in numerous ways,
 including mod_wsgi, uwsgi, fastcgi and plain CGI application. See
-[flask documentation on deployment](http://flask.pocoo.org/docs/0.11/deploying/)
+[flask documentation on deployment](http://flask.pocoo.org/docs/deploying/)
 for more info.
 
 ### Keeping up to date
