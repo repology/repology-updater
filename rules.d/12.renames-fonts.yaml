@@ -251,14 +251,22 @@
     - fonts-sil-gentium
     - fonts-ttf-gentium
     - fonts-ttf-sil-gentium
+    - gentium
     - gentium-ttf
+    - sil-gentium
+    - sil-gentium-fonts
     - ttf-gentium
-  setname: "fonts:gentium"
+  setname: "fonts:gentium-plus" # stick these into gentium-plus
+# actually, unspecified gentium packages seems to be outdated as
+# their homepages point to a redirect page; we stick them into
+# gentium plus which has version higher than any of them to make
+# them outdated
 
 - name:
     - fonts-sil-gentium-basic
     - fonts-ttf-sil-gentium-basic
     - gentium-book-basic
+    - gentiumbasic
     - sil-gentium-basic-fonts
     - ttf-gentium-basic
   setname: "fonts:gentium-basic"
