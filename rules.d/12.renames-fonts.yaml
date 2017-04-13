@@ -248,6 +248,29 @@
 - { name: analecta, setname: "fonts:gdouros-analecta" }
 
 - name:
+    - fonts-sil-gentium
+    - fonts-ttf-gentium
+    - fonts-ttf-sil-gentium
+    - gentium-ttf
+    - ttf-gentium
+  setname: "fonts:gentium"
+
+- name:
+    - fonts-sil-gentium-basic
+    - fonts-ttf-sil-gentium-basic
+    - gentium-book-basic
+    - sil-gentium-basic-fonts
+    - ttf-gentium-basic
+  setname: "fonts:gentium-basic"
+
+- name:
+    - fonts-sil-gentiumplus
+    - fonts-sil-gentiumplus-compact
+    - gentiumplus
+    - ttf-gentium-plus
+  setname: "fonts:gentium-plus"
+
+- name:
     - fonts-isabella
     - isabella-ttf
     - otf-isabella
