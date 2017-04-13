@@ -279,6 +279,7 @@
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
 - { namepat: "network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine)", setname: "networkmanager-$1" }
+- { name: [nginx-devel,nginx-mainline,nginx-libressl,nginx-lite,nginx-full,nginx-openssl-1.1,nginx-mainline-libressl,nginx-mainline-boringssl,nginx-mainline-full], setname: nginx }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: openastromenace,             setname: astromenace,              family: [ freebsd ] }
