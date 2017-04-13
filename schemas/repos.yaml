@@ -14,6 +14,8 @@ sequence:
       "family":
         type: str
         required: yes
+      "valid_till":
+        type: date
       "sources":
         type: seq
         required: yes

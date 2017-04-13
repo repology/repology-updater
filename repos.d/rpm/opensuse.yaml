@@ -4,6 +4,7 @@
 - name: opensuse_leap_42_1
   desc: OpenSUSE Leap 42.1
   family: opensuse
+  valid_till: 2017-05-16
   sources:
     - name: oss
       fetcher: Repodata

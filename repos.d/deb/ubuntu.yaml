@@ -4,6 +4,7 @@
 - name: ubuntu_precise
   desc: Ubuntu Precise
   family: debuntu
+  valid_till: 2017-04-26
   sources:
     - name: [ main, multiverse, restricted, universe ]
       fetcher: File
@@ -28,6 +29,7 @@
 - name: ubuntu_trusty
   desc: Ubuntu Trusty
   family: debuntu
+  valid_till: 2019-05-01
   sources:
     - name: [ main, multiverse, restricted, universe ]
       fetcher: File
@@ -52,6 +54,7 @@
 - name: ubuntu_xenial
   desc: Ubuntu Xenial
   family: debuntu
+  valid_till: 2021-05-01
   sources:
     - name: [ main, multiverse, restricted, universe ]
       fetcher: File
@@ -76,6 +79,7 @@
 - name: ubuntu_yakkety
   desc: Ubuntu Yakkety
   family: debuntu
+  valid_till: 2017-08-01
   sources:
     - name: [ main, multiverse, restricted, universe ]
       fetcher: File
@@ -100,6 +104,7 @@
 - name: ubuntu_zesty
   desc: Ubuntu Zesty
   family: debuntu
+  valid_till: 2018-02-01
   sources:
     - name: [ main, multiverse, restricted, universe ]
       fetcher: File

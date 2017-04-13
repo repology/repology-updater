@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 import inspect
 import os
 import pickle
@@ -71,6 +72,10 @@ class RepositoryManager:
                 return repository
 
         raise KeyError('No such repository ' + reponame)
+
+    def __CheckRepositoryOutdatedness(self, repository, logger):
+        if 'valid_till' in repository and datetime.date.today() >= repository['valid_till']:
+            logger.Log('WARNING: Repository {} has reached EoL, please update configs'.format(repository['name']))
 
     def __GetRepositories(self, reponames=None):
         if reponames is None:
@@ -272,6 +277,8 @@ class RepositoryManager:
     # Single repo methods
     def Fetch(self, reponame, update=True, logger=NoopLogger()):
         repository = self.__GetRepository(reponame)
+
+        self.__CheckRepositoryOutdatedness(repository, logger)
 
         self.__Fetch(update, repository, logger)
 

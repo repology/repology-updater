@@ -4,6 +4,7 @@
 - name: pkgsrc_2017_1
   desc: pkgsrc-2017Q1
   family: pkgsrc
+  valid_till: 2017-07-01
   sources:
     - name: INDEX
       fetcher: File
