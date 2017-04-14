@@ -143,6 +143,8 @@ def Main():
     parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
 
     actions_grp = parser.add_argument_group('Actions')
+    actions_grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
+
     actions_grp.add_argument('-f', '--fetch', action='store_true', help='fetching repository data')
     actions_grp.add_argument('-u', '--update', action='store_true', help='when fetching, allow updating (otherwise, only fetch once)')
     actions_grp.add_argument('-p', '--parse', action='store_true', help='parse, process and serialize repository data')
@@ -157,12 +159,17 @@ def Main():
     parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
 
+    repoman = RepositoryManager(options.repos_dir, options.statedir)
+
+    if options.list:
+        print('\n'.join(sorted(repoman.GetNames(reponames=options.reponames))))
+        return 0
+
+    transformer = PackageTransformer(options.rules_dir)
+
     logger = StderrLogger()
     if options.logfile:
         logger = FileLogger(options.logfile)
-
-    repoman = RepositoryManager(options.repos_dir, options.statedir)
-    transformer = PackageTransformer(options.rules_dir)
 
     repositories_updated = []
     repositories_not_updated = []
