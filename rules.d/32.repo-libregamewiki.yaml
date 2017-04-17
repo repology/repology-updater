@@ -16,7 +16,7 @@
 - { family: libregamewiki, name: "curse of war",                     setname: curseofwar }
 - { family: libregamewiki, name: "dungeon crawl stone soup",         setname: stone-soup }
 - { family: libregamewiki, name: "emilia pinball",                   setname: emilia-pinball }
-- { family: libregamewiki, name: "empty clip",                       setname: empty-clip }
+- { family: libregamewiki, name: "empty clip",                       setname: emptyclip }
 - { family: libregamewiki, name: "endgame: singularity",             setname: singularity }
 - { family: libregamewiki, name: "endless sky",                      setname: endless-sky }
 - { family: libregamewiki, name: "falcon's eye",                     setname: falcons-eye }

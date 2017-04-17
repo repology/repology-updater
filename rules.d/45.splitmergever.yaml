@@ -105,9 +105,14 @@
 
 - { namepat: "elasticsearch[0-9]+",    setname: "elasticsearch" }
 
+- { name: [emacs-24bit, emacs-nox, emacs-nox11], setname: emacs }
+- { name: [emacs-devel, emacs-git],    setname: emacs, ignorever: yes }
+- { namepat: "emacs[0-9.-]+(?:-nox11|-non-dfsg)?", setname: emacs }
+
 - { name: enlightenment, verpat: "1\\.0.*", setname: enlightenment16 }
 
-- { namepat: "gcc[0-9.-]+(?:-devel)?", setname: gcc }
+- { namepat: "gcc[0-9.-]+",            setname: gcc }
+- { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignorever: yes }
 
 - { namepat: "gccgo[0-9.-]+",          setname: gccgo }
 

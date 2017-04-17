@@ -196,14 +196,32 @@
 - { name: el,                          setname: eternal-lands,            family: [ freebsd ] }
 - { name: el-data,                     setname: eternal-lands-data,       family: [ freebsd ] }
 - { name: electric-fence,              setname: electricfence             }
-- { name: enblend,                     setname: enblend-enfuse,           family: [ freebsd ] }
+- { name: elvis-x11,                   setname: elvis                     }
+- { name: emacs-lua,                   setname: emacs-lua-mode            }
+- { name: emacs-mmm,                   setname: emacs-mmm-mode            }
+- { name: embree-isa,                  setname: embree                    }
+- { name: emby-server,                 setname: emby                      }
+- { name: emby-server-beta,            setname: emby, ignorever: true     }
+- { name: emotiongenericplayers,       setname: emotion-generic-players   }
+- { name: emulation-station,           setname: emulationstation          }
+- { name: enblend,                     setname: enblend-enfuse            }
 - { name: endgame-singularity,         setname: singularity,              family: [ freebsd ] }
 - { name: endgame-singularity-music,   setname: singularity-music,        family: [ freebsd ] } # for consistency
+- { name: enemyterritory,              setname: enemy-territory           }
+- { name: enigma-sdl,                  setname: enigma                    }
 - { name: entagged-tageditor,          setname: entagged,                 family: [ gentoo ]  }
 - { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
+- { name: epsxe1.9,                    setname: epsxe                     }
 - { name: eric6,                       setname: eric,                     family: [ freebsd ] }
+- { namepat: "eternallands(.*)",       setname: "eternal-lands$1"         }
 - { name: etracer,                     setname: extreme-tuxracer          }
-- { name: exactimage,                  setname: exact-image,              family: [ debuntu ]  }
+- { name: ettercap-gtk,                setname: ettercap                  }
+- { name: [evince-light,evince2,evince2-light], setname: evince           }
+- { name: evoluspencil,                setname: evolus-pencil             }
+- { name: evopedia-qt,                 setname: evopedia                  }
+- { name: exactimage,                  setname: exact-image               }
+- { name: exercism,                    setname: exercism-cl               }
+- { name: exim4,                       setname: exim                      }
 - { name: extremetuxracer,             setname: extreme-tuxracer          }
 - { name: falconseye,                  setname: falcons-eye,              family: [ freebsd, openbsd ] }
 - { name: fb-folly,                    setname: folly                     }

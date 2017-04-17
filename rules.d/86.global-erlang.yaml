@@ -1,5 +1,8 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Erlang
+- { namepat: "erlang-runtime.*",       last: true }
 - { category: dev-erlang,              setname: "erlang:$0", family: [ gentoo ] }
 - { namepat: "erlang-(.*)",            setname: "erlang:$1" }
+
+- { name: [esdl, "erlang:sdl"],        setname: "erlang:esdl" }
