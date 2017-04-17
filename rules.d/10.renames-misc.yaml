@@ -208,7 +208,7 @@
 - { name: endgame-singularity,         setname: singularity,              family: [ freebsd ] }
 - { name: endgame-singularity-music,   setname: singularity-music,        family: [ freebsd ] } # for consistency
 - { name: enemyterritory,              setname: enemy-territory           }
-- { name: enigma-sdl,                  setname: enigma                    }
+- { name: enigma_sdl,                  setname: enigma                    }
 - { name: entagged-tageditor,          setname: entagged,                 family: [ gentoo ]  }
 - { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
 - { name: epsxe1.9,                    setname: epsxe                     }
@@ -216,11 +216,11 @@
 - { namepat: "eternallands(.*)",       setname: "eternal-lands$1"         }
 - { name: etracer,                     setname: extreme-tuxracer          }
 - { name: ettercap-gtk,                setname: ettercap                  }
-- { name: [evince-light,evince2,evince2-light], setname: evince           }
+- { name: [evince-light,evince-lite,evince2,evince2-light], setname: evince           }
 - { name: evoluspencil,                setname: evolus-pencil             }
-- { name: evopedia-qt,                 setname: evopedia                  }
+- { name: evopedia_qt,                 setname: evopedia                  }
 - { name: exactimage,                  setname: exact-image               }
-- { name: exercism,                    setname: exercism-cl               }
+- { name: [exercism, "go:github-exercism-cli"], setname: exercism-cli     }
 - { name: exim4,                       setname: exim                      }
 - { name: extremetuxracer,             setname: extreme-tuxracer          }
 - { name: falconseye,                  setname: falcons-eye,              family: [ freebsd, openbsd ] }
