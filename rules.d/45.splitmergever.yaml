@@ -107,6 +107,10 @@
 
 - { name: enlightenment, verpat: "1\\.0.*", setname: enlightenment16 }
 
+- { namepat: "gcc[0-9.-]+(?:-devel)?", setname: gcc }
+
+- { namepat: "gccgo[0-9.-]+",          setname: gccgo }
+
 - { name: [ geos1, geos35 ],           setname: geos }
 
 - { namepat: "gmime[0-9]+",            setname: gmime }
