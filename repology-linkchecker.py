@@ -36,6 +36,10 @@ def GetHTTPLinkStatus(url, timeout):
     try:
         response = requests.head(url, allow_redirects=True, headers={'user-agent': 'Repology link checker/0'}, timeout=timeout)
 
+        # fallback to GET
+        if response.status_code != 200:
+            response = requests.get(url, allow_redirects=True, headers={'user-agent': 'Repology link checker/0'}, timeout=timeout)
+
         redirect = None
         size = None
         location = None
