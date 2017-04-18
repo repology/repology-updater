@@ -458,7 +458,7 @@ class Database:
 
         # reports
         self.cursor.execute("""
-            CREATE TABLE reports (
+            CREATE TABLE IF NOT EXISTS reports (
                 created timestamp with time zone not null,
                 effname varchar(255) not null,
                 need_verignore boolean not null,
