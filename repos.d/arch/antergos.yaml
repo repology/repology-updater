@@ -5,11 +5,10 @@
   desc: Antergos Main
   family: arch
   sources:
-    - name: [ antergos ]
+    - name: antergos
       fetcher: WgetTar
       parser: ArchDB
-      url: 'https://repo.antergos.info/{source}/x86_64/{source}.db.tar.gz'
-      subrepo: '{source}'
+      url: 'https://repo.antergos.info/antergos/x86_64/antergos.db.tar.gz'
   repolinks:
     - desc: Antergos Linux home
       url: https://antergos.com/
@@ -21,11 +20,10 @@
   desc: Antergos Staging
   family: arch
   sources:
-    - name: [ antergos-staging ]
+    - name: antergos-staging
       fetcher: WgetTar
       parser: ArchDB
-      url: 'https://repo.antergos.info/{source}/x86_64/{source}.db.tar.gz'
-      subrepo: '{source}'
+      url: 'https://repo.antergos.info/antergos-staging/x86_64/antergos-staging.db.tar.gz'
   repolinks:
     - desc: Antergos Linux home
       url: https://antergos.com/
