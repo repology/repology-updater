@@ -26,7 +26,7 @@
 
 - { name: etcd, verpat: "1.*", setname: "etcd-player" } # Enhanced Tiny CD, a simple ncurses-based CD player vs. coreos etcd
 
-- { name: emma,                        setname: emma-coverage, family: [sisyphus, fedora, gentoo, mageia, rosa, nixpkgs] }
+- { name: emma,                        setname: emma-coverage, family: [sisyphus, fedora, gentoo, mageia, rosa, nix] }
 - { name: emma,                        setname: emma-mysql, family: [arch, freebsd, debuntu] }
 - { name: emma,                        warning: "please classify me" }
 

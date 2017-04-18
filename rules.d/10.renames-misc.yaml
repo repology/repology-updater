@@ -220,7 +220,7 @@
 - { name: evoluspencil,                setname: evolus-pencil             }
 - { name: evopedia_qt,                 setname: evopedia                  }
 - { name: exactimage,                  setname: exact-image               }
-- { name: [exercism, "go:github-exercism-cli"], setname: exercism-cli     }
+- { name: [exercism, golang-github-exercism-cli], setname: exercism-cli     }
 - { name: exim4,                       setname: exim                      }
 - { name: extremetuxracer,             setname: extreme-tuxracer          }
 - { name: falconseye,                  setname: falcons-eye,              family: [ freebsd, openbsd ] }
