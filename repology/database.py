@@ -747,15 +747,30 @@ class Database:
 
         self.cursor.execute("""
             INSERT
-                INTO problems(repo, name, effname, maintainer, problem)
-                SELECT DISTINCT
+                INTO problems (
                     repo,
                     name,
                     effname,
-                    case when maintainers = '{}' then null else unnest(maintainers) end,
-                    'Homepage link "' || homepage || '" should use https:// schema as GitHub is HTTPS-only.'
+                    maintainer,
+                    problem
+                )
+                SELECT DISTINCT
+                    packages.repo,
+                    packages.name,
+                    packages.effname,
+                    case when packages.maintainers = '{}' then null else unnest(packages.maintainers) end,
+                    'Homepage link "' ||
+                        links.url ||
+                        '" is a permanent redirect to "' ||
+                        links.location ||
+                        '" and should be updated'
                 FROM packages
-                WHERE homepage LIKE 'http://github.com/%'
+                    INNER JOIN links ON (packages.homepage = links.url)
+                WHERE
+                    (
+                        links.redirect = 301 AND
+                        replace(links.url, 'http://', 'https://') = links.location
+                    )
         """)
 
         self.cursor.execute("""
