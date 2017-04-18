@@ -33,3 +33,34 @@
       url: https://openwrt.org/
   tags: [ all, production, openwrt ]
 
+- name: openwrt_15_05_01_ar71xx
+  desc: OpenWrt 15.05.01 ar71xx
+  family: openwrt
+  sources:
+    - name: [ base, luci, management, packages, routing, telephony ]
+      fetcher: File
+      parser: DebianSources
+      url: 'https://downloads.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/packages/{source}/Packages.gz'
+      compression: gz
+      subrepo: '{source}'
+  shadow: true
+  repolinks:
+    - desc: OpenWrt home
+      url: https://openwrt.org/
+  tags: [ all, production, openwrt ]
+
+- name: openwrt_trunk_ar71xx
+  desc: OpenWrt trunk ar71xx
+  family: openwrt
+  sources:
+    - name: [ base, luci, management, packages, routing, telephony ]
+      fetcher: File
+      parser: DebianSources
+      url: 'https://downloads.openwrt.org/snapshots/trunk/ar71xx/generic/packages/{source}/Packages.gz'
+      compression: gz
+      subrepo: '{source}'
+  shadow: true
+  repolinks:
+    - desc: OpenWrt home
+      url: https://openwrt.org/
+  tags: [ all, production, openwrt ]
