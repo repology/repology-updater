@@ -5,6 +5,7 @@
 - { name: ack,                                                       family: mageia,       ignorever: true }
 - { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
 - { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
+- { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
