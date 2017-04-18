@@ -75,6 +75,7 @@
     - decorator
     - pbr
     - py-cpuinfo
+    - pyfiglet
     - pymediainfo
     - pytest-cov
     - sqlalchemy-migrate

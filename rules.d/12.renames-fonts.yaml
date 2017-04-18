@@ -216,6 +216,21 @@
   setname: "fonts:fanwood"
 
 - name:
+    - farsi-fonts
+    - farsi-fonts
+    - farsifonts
+    - farsifonts-ttf
+    - fonts-farsiweb
+    - fonts-ttf-arabic-farsi
+  setname: "fonts:farsi"
+
+- name:
+    - fifth-leg
+    - fifth-leg-font
+    - otf-fifthleg
+  setname: "fonts:fifth-leg"
+
+- name:
     - fira-code
     - firacode
     - fonts-firacode

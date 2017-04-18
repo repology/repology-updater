@@ -111,6 +111,27 @@
 
 - { name: enlightenment, verpat: "1\\.0.*", setname: enlightenment16 }
 
+- name:
+    - ffmpeg-compat
+    - ffmpeg-decklink
+    - ffmpeg-full
+    - ffmpeg-full-nvenc
+    - ffmpeg-headless
+    - ffmpeg-headless2.8
+    - ffmpeg-nvenc
+    - ffmpeg-nvenc-manjaro
+    - ffplay1
+    - ffplay2
+    - ffplay3
+  setname: ffmpeg
+- { namepat: "ffmpeg[0-9.-]+",         setname: ffmpeg }
+
+- { namepat: "(?:lib)?fftw[0-9.-]?(?:-double|-float|-long-douple|-quad|-single|-long|-mpi|-mpich|-openmpi)?", setname: fftw }
+- { name: fftwf, setname: fftw }
+- { name: ffmpeg, verpat: "2\\..*",    setname: fftw2 }
+
+- { namepat: "firebird[0-9.-]*(?:-client|-server)?", setname: firebird }
+
 - { namepat: "gcc[0-9.-]+",            setname: gcc }
 - { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignorever: yes }
 

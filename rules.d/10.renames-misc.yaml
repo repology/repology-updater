@@ -216,17 +216,26 @@
 - { namepat: "eternallands(.*)",       setname: "eternal-lands$1"         }
 - { name: etracer,                     setname: extreme-tuxracer          }
 - { name: ettercap-gtk,                setname: ettercap                  }
-- { name: [evince-light,evince-lite,evince2,evince2-light], setname: evince           }
+- { name: [evince-light,evince-lite,evince2,evince2-light], setname: evince }
 - { name: evoluspencil,                setname: evolus-pencil             }
 - { name: evopedia_qt,                 setname: evopedia                  }
 - { name: exactimage,                  setname: exact-image               }
-- { name: [exercism, golang-github-exercism-cli], setname: exercism-cli     }
+- { name: [exercism, golang-github-exercism-cli], setname: exercism-cli   }
 - { name: exim4,                       setname: exim                      }
 - { name: extremetuxracer,             setname: extreme-tuxracer          }
-- { name: falconseye,                  setname: falcons-eye,              family: [ freebsd, openbsd ] }
+- { name: expat21,                     setname: expat                     }
+- { name: falconseye,                  setname: falcons-eye               }
+- { name: faad,                        setname: faad2                     }
+- { name: facter2,                     setname: facter                    }
+- { name: factor-lang,                 setname: factor                    }
+- { name: fail2ban6,                   setname: fail2ban                  }
+- { namepat: "farstream[0-9.-]+",      setname: farstream                 }
+- { name: fastd-devel,                 setname: fastd, ignorever: true    }
+- { name: fasta3,                      setname: fasta                     }
 - { name: fb-folly,                    setname: folly                     }
-- { name: farstream-0.2,               setname: farstream,                family: [ debuntu ]  }
 - { name: [fifengine,py27-fife],       setname: fife                      }
+- { name: [fcitx-gtk2, fcitx-gtk3],    setname: fcitx                     }
+- { name: fetch-crl3,                  setname: fetch-crl                 }
 - { name: fish-fillets,                setname: fillets-ng                }
 - { name: fish-fillets-ng,             setname: fillets-ng                }
 - { name: foobillardplus,              setname: foobillard++              }
