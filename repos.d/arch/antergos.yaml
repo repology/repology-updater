@@ -1,0 +1,32 @@
+###########################################################################
+# Antergos (arch derivative)
+###########################################################################
+- name: antergos_main
+  desc: Antergos Main
+  family: arch
+  sources:
+    - name: antergos
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'https://repo.antergos.info/antergos/x86_64/antergos.db.tar.gz'
+  repolinks:
+    - desc: Antergos Linux home
+      url: https://antergos.com/
+    - desc: Antergos Linux Packages
+      url: https://build.antergos.com/repo/antergos/packages/
+  tags: [ all, production, antergos ]
+
+- name: antergos_staging
+  desc: Antergos Staging
+  family: arch
+  sources:
+    - name: antergos-staging
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'https://repo.antergos.info/antergos-staging/x86_64/antergos-staging.db.tar.gz'
+  repolinks:
+    - desc: Antergos Linux home
+      url: https://antergos.com/
+    - desc: Antergos Linux Packages
+      url: https://build.antergos.com/repo/antergos-staging/packages/
+  tags: [ all, production, antergos ]
