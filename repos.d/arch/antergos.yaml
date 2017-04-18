@@ -1,7 +1,7 @@
 ###########################################################################
 # Antergos (arch derivative)
 ###########################################################################
-- name: antergos
+- name: antergos_main
   desc: Antergos Main
   family: arch
   sources:
@@ -16,7 +16,7 @@
       url: https://build.antergos.com/repo/antergos/packages/
   tags: [ all, production, antergos ]
 
-- name: antergos-staging
+- name: antergos_staging
   desc: Antergos Staging
   family: arch
   sources:
@@ -29,4 +29,4 @@
       url: https://antergos.com/
     - desc: Antergos Linux Packages
       url: https://build.antergos.com/repo/antergos-staging/packages/
-  tags: [ all, staging, antergos ]
+  tags: [ all, production, antergos ]
