@@ -216,6 +216,11 @@
   setname: "fonts:fanwood"
 
 - name:
+    - fonts-freefarsi
+    - freefarsi-ttf
+  setname: "fonts:freefarsi"
+
+- name:
     - farsi-fonts
     - farsi-fonts
     - farsifonts
