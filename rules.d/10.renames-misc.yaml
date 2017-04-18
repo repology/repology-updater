@@ -84,7 +84,7 @@
 - { namepat: "boost-mpi-source[0-9-.]+", setname: boost                   }
 - { namepat: "boost[0-9_.]+",          setname: boost                     }
 - { namepat: "botan[0-9.]+",           setname: botan                     }
-- { namepat: "libbotan[0-9.]+",        setname: botan                     }
+- { namepat: "libbotan[0-9.]*",        setname: botan                     }
 - { name: bouncycastle15,              setname: bouncycastle              }
 - { name: bowtie, verpat: "2.*",       setname: bowtie2,                  family: [ gentoo ] }
 - { name: battle-tanks,                setname: btanks                    }
