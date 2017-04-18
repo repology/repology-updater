@@ -12,7 +12,9 @@
       subrepo: '{source}'
   repolinks:
     - desc: Antergos Linux home
-      url: https://antergos.com/
+      url: https://antergos.com
+    - desc: Antergos Linux Packages
+      url: https://build.antergos.com/repo/antergos/packages
   tags: [ all, production, antergos ]
 
 - name: antergos-staging
@@ -26,5 +28,7 @@
       subrepo: '{source}'
   repolinks:
     - desc: Antergos Linux home
-      url: https://antergos.com/
+      url: https://antergos.com
+    - desc: Antergos Linux Packages
+      url: https://build.antergos.com/repo/antergos-staging/packages
   tags: [ all, staging, antergos ]
