@@ -38,6 +38,7 @@
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
 - { name: fgrun,                       verpat: "2013.*",                                   ignorever: true }
 - { name: "fonts:gentium-basic",       ver: "1102",                                        ignorever: true } # it's 1.102!
+- { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
 - { name: geary,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet

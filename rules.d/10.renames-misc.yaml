@@ -238,6 +238,18 @@
 - { name: fetch-crl3,                  setname: fetch-crl                 }
 - { name: fish-fillets,                setname: fillets-ng                }
 - { name: fish-fillets-ng,             setname: fillets-ng                }
+- { name: flacon-qt5,                  setname: flacon                    }
+- { name: [flare-engine, flare-game],  setname: flare                     } # these are actually distinct packages, but too many repos merge them together
+- { name: [flim-xemacs,flim-emacs25,emacs-flim],  setname: flim           }
+- { name: [flite1, flit-fpic],         setname: flite                     }
+- { name: flipit-x10,                  setname: flipit                    }
+- { name: florence05,                  setname: florence                  }
+- { name: florist-gpl,                 setname: florist                   }
+- { name: flow-tools-ng,               setname: flow-tools                }
+- { name: flrig-docs,                  setname: flrig                     }
+- { name: [fltk-docs,fltk-editor,fltk-games,fltk11], setname: fltk        }
+- { name: fluxbox-wm,                  setname: fluxbox                   }
+- { name: flwm-tc,                     setname: flwm                      }
 - { name: foobillardplus,              setname: foobillard++              }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
 - { name: fossology-nomos-standalone,  setname: fossology                 } # part of fossology

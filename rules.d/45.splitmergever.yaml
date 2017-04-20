@@ -132,6 +132,10 @@
 
 - { namepat: "firebird[0-9.-]*(?:-client|-server)?", setname: firebird }
 
+- { namepat: "firefox[0-9.-]*",        setname: firefox }
+- { namepat: "firefox-esr[0-9.-]*",    setname: firefox-esr }
+- { namepat: "firefox-esr[0-9.-]*-l10n", setname: firefox-esr-l10n }
+
 - { namepat: "gcc[0-9.-]+",            setname: gcc }
 - { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignorever: yes }
 
