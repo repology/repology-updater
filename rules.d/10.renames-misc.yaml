@@ -241,7 +241,7 @@
 - { name: flacon-qt5,                  setname: flacon                    }
 - { name: [flare-engine, flare-game],  setname: flare                     } # these are actually distinct packages, but too many repos merge them together
 - { name: [flim-xemacs,flim-emacs25,emacs-flim],  setname: flim           }
-- { name: [flite1, flit-fpic],         setname: flite                     }
+- { name: [flite1, flite-fpic],        setname: flite                     }
 - { name: flipit-x10,                  setname: flipit                    }
 - { name: florence05,                  setname: florence                  }
 - { name: florist-gpl,                 setname: florist                   }
