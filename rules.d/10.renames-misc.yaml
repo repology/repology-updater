@@ -250,14 +250,23 @@
 - { name: [fltk-docs,fltk-editor,fltk-games,fltk11], setname: fltk        }
 - { name: fluxbox-wm,                  setname: fluxbox                   }
 - { name: flwm-tc,                     setname: flwm                      }
+- { name: foldingathome-noroot,        setname: foldingathome             }
+- { name: foo2zjs-nightly,             setname: foo2js, ignorever: true   }
 - { name: foobillardplus,              setname: foobillard++              }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
 - { name: fossology-nomos-standalone,  setname: fossology                 } # part of fossology
+- { name: [fpc-source,fpc-src],        setname: fpc                       } # part of fossology
+- { name: [fping3,fping6],             setname: fping                     }
 - { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
-- { name: fox1.6,                      setname: fox16,                    family: [ debuntu ]  }
-- { name: fox17,                       setname: fox,                      family: [ freebsd ] }
 - { name: free42-nologo,               setname: free42,                   family: [ debuntu ]  }
+- { name: [freeciv-nox11, freeciv-gtk, freeciv-sdl], setname: freeciv     }
 - { name: freebsd-uucp,                setname: uucp,                     family: [ freebsd ] }
+- { name: freedink-engine,             setname: freedink                  }
+- { name: [freedoom1, freedoom2],      setname: freefoom                  }
+- { name: freefemxx,                   setname: freefem++                 }
+- { name: freemedforms-project,        setname: freemedforms              }
+- { name: freeplane-srcbuild,          setname: freeplane                 }
+- { name: [freeradius-server, freeradius3], setname: freeradius           }
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle,                 family: [ debuntu ]  }
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }

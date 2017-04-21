@@ -136,6 +136,16 @@
 - { namepat: "firefox-esr[0-9.-]*",    setname: firefox-esr }
 - { namepat: "firefox-esr[0-9.-]*-l10n", setname: firefox-esr-l10n }
 
+- { name: [fox-devel, fox-toolkit, fox-toolkit-devel], setname: fox }
+- { namepat: "fox[0-9.-]+",            setname: fox }
+- { name: fox, verpat: "1\\.4\\..*", setname: fox14 }
+- { name: fox, verpat: "1\\.6\\..*", setname: fox16 }
+- { name: fox, verpat: "1\\.7\\..*", last: true }
+- { name: fox, warning: "please classify me" }
+
+- { namepat: "freerdp[0-9.-]+", setname: freerdp }
+- { name: freerdp, verpat: "1\\..*", setname: freerdp1 }
+
 - { namepat: "gcc[0-9.-]+",            setname: gcc }
 - { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignorever: yes }
 
