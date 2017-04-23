@@ -214,6 +214,7 @@ class TestParsers(unittest.TestCase):
         )
 
     def test_slackbuilds(self):
+        # multiline DOWNLOAD
         self.check_package(
             'virtualbox',
             {
@@ -230,6 +231,71 @@ class TestParsers(unittest.TestCase):
                     'http://download.virtualbox.org/virtualbox/5.0.30/VirtualBox-5.0.30.tar.bz2',
                 ],
                 'maintainers': ['pprkut@liwjatan.at'],
+            }
+        )
+        # different DOWNLOAD and DOWNLOAD_x86_64
+        self.check_package(
+            'baudline',
+            {
+                'repo': 'slackbuilds',
+                'family': 'slackbuilds',
+                'name': 'baudline',
+                'version': '1.08',
+                'category': 'ham',
+                'homepage': 'http://www.baudline.com/',
+                'downloads': [
+                    'http://www.baudline.com/baudline_1.08_linux_i686.tar.gz',
+                    'http://www.baudline.com/baudline_1.08_linux_x86_64.tar.gz',
+                ],
+                'maintainers': ['joshuakwood@gmail.com'],
+            }
+        )
+        # DOWNLOAD_x86_64 is UNSUPPORTED
+        self.check_package(
+            'teamviewer',
+            {
+                'repo': 'slackbuilds',
+                'family': 'slackbuilds',
+                'name': 'teamviewer',
+                'version': '12.0.76279',
+                'category': 'network',
+                'homepage': 'https://www.teamviewer.com/',
+                'downloads': [
+                    'https://download.teamviewer.com/download/teamviewer_i386.deb',
+                ],
+                'maintainers': ['willysr@slackbuilds.org'],
+            }
+        )
+        # DOWNLOAD is UNSUPPORTED
+        self.check_package(
+            'oracle-xe',
+            {
+                'repo': 'slackbuilds',
+                'family': 'slackbuilds',
+                'name': 'oracle-xe',
+                'version': '11.2.0',
+                'category': 'system',
+                'homepage': 'http://www.oracle.com/technetwork/database/database-technologies/express-edition/overview/index.html',
+                'downloads': [
+                    'http://download.oracle.com/otn/linux/oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip',
+                ],
+                'maintainers': ['slack.dhabyx@gmail.com'],
+            }
+        )
+        # DOWNLOAD_x86_64 is UNTESTED
+        self.check_package(
+            'kforth',
+            {
+                'repo': 'slackbuilds',
+                'family': 'slackbuilds',
+                'name': 'kforth',
+                'version': '1.5.2p1',
+                'category': 'development',
+                'homepage': 'http://ccreweb.org/software/kforth/kforth.html',
+                'downloads': [
+                    'ftp://ccreweb.org/software/kforth/linux/kforth-x86-linux-1.5.2.tar.gz',
+                ],
+                'maintainers': ['gschoen@iinet.net.au'],
             }
         )
 
