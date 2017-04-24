@@ -67,7 +67,7 @@ class SlackBuildsParser():
 
                         if value.endswith('\\'):  # will continue
                             total_value.append(value.rstrip('\\').rstrip())
-                        elif value.endswith('"'):
+                        elif not value or value.endswith('"'):
                             total_value.append(value.rstrip('"').rstrip())
                             variables[key] = ' '.join(total_value)
                             key = None
@@ -80,7 +80,9 @@ class SlackBuildsParser():
                     pkg.version = variables['VERSION']
                     pkg.homepage = variables['HOMEPAGE']
                     pkg.maintainers = GetMaintainers(variables['EMAIL'])
-                    pkg.downloads = variables['DOWNLOAD'].split()
+                    for key in ['DOWNLOAD', 'DOWNLOAD_x86_64']:
+                        if variables[key] not in ['', 'UNSUPPORTED', 'UNTESTED']:
+                            pkg.downloads.extend(variables[key].split())
 
                     if pkg.name is not None and pkg.version is not None:
                         result.append(pkg)
