@@ -4,3 +4,4 @@
 - { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1" }
 - { namepat: "fortunes-(.*)",          setname: "fortunes:$1" }
 - { namepat: "fortune-(.*)",           setname: "fortunes:$1" }
+- { namepat: "fortune_(.*)",           setname: "fortunes:$1" }
