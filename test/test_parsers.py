@@ -143,6 +143,21 @@ class TestParsers(unittest.TestCase):
                 'licenses': ['GPL-2'],
             }
         )
+        self.check_package(
+            'aspell',
+            {
+                'repo': 'gentoo',
+                'family': 'gentoo',
+                'name': 'aspell',
+                'version': '0.60.7_rc1',
+                'category': 'app-test',
+                'maintainers': ['maintainer-needed@gentoo.org'],
+                'homepage': 'http://aspell.net/',
+                'comment': 'A spell checker replacement for ispell',
+                'downloads': ['mirror://gnu-alpha/aspell/aspell-0.60.7-rc1.tar.gz'],
+                'licenses': ['LGPL-2'],
+            }
+        )
 
     def test_arch(self):
         self.check_package(
