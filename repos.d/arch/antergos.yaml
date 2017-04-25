@@ -32,10 +32,12 @@
       parser: ArchDB
       url: 'https://repo.antergos.info/antergos-staging/x86_64/antergos-staging.db.tar.gz'
   repolinks:
-    - desc: Antergos Linux home
+    - desc: Antergos Home
       url: https://antergos.com/
-    - desc: Antergos Linux Packages
+    - desc: Antergos Staging Packages
       url: https://build.antergos.com/repo/antergos-staging/packages
+    - desc: Antergos Packages Github
+      url: https://github.com/antergos/antergos-packages
   packagelinks:
     - desc: Package Information
       url: 'https://build.antergos.com/package/{name}'
