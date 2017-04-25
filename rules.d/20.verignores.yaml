@@ -67,6 +67,7 @@
 - { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: ppsspp,                      verpat: "201.*",                                    ignorever: true } # XXX: problem
+- { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
