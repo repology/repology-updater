@@ -60,10 +60,6 @@ def SanitizeVersion(version):
     if pos != -1:
         version = version[0:pos]
 
-    pos = version.find('_')
-    if pos != -1:
-        version = version[0:pos]
-
     if version != origversion:
         return version, origversion
     else:
