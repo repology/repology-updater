@@ -112,10 +112,11 @@
 
 # These are more applications than modules, so rename
 - { name: "python:bzrtools",           setname: bzrtools                  }
+- { name: "python:meson",              setname: meson                     }
 - { name: "python:pgcli",              setname: pgcli                     }
 - { name: "python:pypanel",            setname: pypanel                   }
 - { name: "python:rss2email",          setname: rss2email                 }
+- { name: "python:uwsgi",              setname: uwsgi                     }
 - { name: "python:youtube-dl",         setname: youtube-dl                }
-- { name: "python:meson",              setname: meson                     }
 - { name: ["python:pypy", "python:pypy-bin"], setname: pypy               }
 - { name: ["python:pypy3", "python:pypy3-bin"], setname: pypy3            }

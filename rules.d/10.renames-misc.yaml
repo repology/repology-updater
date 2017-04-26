@@ -54,6 +54,7 @@
 - { name: atkmm1.6,                    setname: atkmm                     }
 - { name: [atlas-cpp,atlascpp,libatlascpp], setname: atlas-c++            }
 - { name: [atlas,atlas-devel],         setname: atlas-c++, category: devel, family: [ freebsd, openbsd ] } # don't mix with math/atlas
+- { name: [atlas-with-lapack,atlas-lapack], setname: atlas                }
 - { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
@@ -299,7 +300,11 @@
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
 - { name: krita3,                      setname: krita                     }
 - { name: lapackpp,                    setname: lapack++                  }
+- { name: lapack-tmg,                  setname: lapack                    } # component of
+- { name: [lapack-docs,lapack-manpages,lapack-reference], setname: lapack }
+- { name: lapacke-tmg,                 setname: lapacke                   } # component of
 - { name: libass4,                     setname: libass                    }
+- { name: libatlas3,                   setname: altas                     }
 - { name: libagg,                      setname: agg                       }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbrotli,                   setname: brotli                    }
