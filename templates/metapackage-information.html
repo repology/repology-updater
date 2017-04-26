@@ -65,6 +65,14 @@
 		<li><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a> <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
+
+		{% if information.maintainers|maintainers_to_group_mailto %}
+		<ul>
+			<li>
+				<a href="{{ information.maintainers|maintainers_to_group_mailto('[repology] ' + name + ' package') }}">Group email</a>
+			</li>
+		</ul>
+		{% endif %}
 		{% endif %}
 
 		{% if information.homepages %}

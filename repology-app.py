@@ -54,6 +54,7 @@ app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['css_for_package_versionclass'] = css_for_package_versionclass
 app.jinja_env.filters['css_for_summary_versionclass'] = css_for_summary_versionclass
 app.jinja_env.filters['maintainer_to_links'] = maintainer_to_links
+app.jinja_env.filters['maintainers_to_group_mailto'] = maintainers_to_group_mailto
 
 # templates: custom tests
 app.jinja_env.tests['for_page'] = for_page

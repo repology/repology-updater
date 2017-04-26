@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.template_helpers import maintainer_to_links
+from repology.template_helpers import maintainer_to_links, maintainers_to_group_mailto
 
 
 class TestMaintainerLinks(unittest.TestCase):
@@ -38,6 +38,12 @@ class TestMaintainerLinks(unittest.TestCase):
     def test_alt(self):
         self.assertEqual(maintainer_to_links('foo@altlinux.org'), ['http://sisyphus.ru/en/packager/foo/', 'mailto:foo@altlinux.org'])
         self.assertEqual(maintainer_to_links('foo@altlinux.ru'), ['http://sisyphus.ru/en/packager/foo/', 'mailto:foo@altlinux.ru'])
+
+    def test_group(self):
+        self.assertEqual(maintainers_to_group_mailto(['some@notemail', 'amdmi3@freebsd.org', 'amdmi3@amdmi3.ru']), 'mailto:amdmi3@amdmi3.ru,amdmi3@freebsd.org')
+        self.assertEqual(maintainers_to_group_mailto(['some@notemail', 'amdmi3@freebsd.org', 'amdmi3@amdmi3.ru'], 'Hello, world!'), 'mailto:amdmi3@amdmi3.ru,amdmi3@freebsd.org?subject=Hello, world!')
+        self.assertEqual(maintainers_to_group_mailto(['some@notemail'], 'Hello, world!'), None)
+        self.assertEqual(maintainers_to_group_mailto(['some@notemail']), None)
 
 
 if __name__ == '__main__':

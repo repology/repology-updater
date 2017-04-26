@@ -44,6 +44,21 @@ def maintainer_to_links(maintainer):
     return links
 
 
+def maintainers_to_group_mailto(maintainers, subject=None):
+    emails = []
+
+    for maintainer in maintainers:
+        name, domain = maintainer.split('@', 1)
+
+        if '.' in domain:
+            emails.append(maintainer)
+
+    if not emails:
+        return None
+
+    return 'mailto:' + ','.join(sorted(emails)) + ('?subject=' + subject if subject else '')
+
+
 def for_page(value, letter=None):
     if letter is None or letter == '0':
         return not value or value < 'a'
