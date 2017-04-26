@@ -257,6 +257,7 @@
 - { name: fossology-nomos-standalone,  setname: fossology                 } # part of fossology
 - { name: [fpc-source,fpc-src],        setname: fpc                       } # part of fossology
 - { name: [fping3,fping6],             setname: fping                     }
+- { name: fsv2,                        setname: fsv                       }
 - { name: scummvm-fotaq,               setname: flight-of-the-amazon-queen }
 - { name: free42-nologo,               setname: free42,                   family: [ debuntu ]  }
 - { name: [freeciv-nox11, freeciv-gtk, freeciv-sdl], setname: freeciv     }
