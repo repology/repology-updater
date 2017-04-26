@@ -2,8 +2,8 @@
 
 # Version ignores, incompatible version mangling in the repositories
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
-- { name: ack,                                                       family: mageia,       ignorever: true }
 - { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
+- { name: ack,                                                       family: mageia,       ignorever: true }
 - { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
@@ -24,14 +24,14 @@
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
-- { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
+- { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.r.*",       family: [ sisyphus ], ignorever: true }
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignorever: true }
-- { name: ethtool,                     verpat: "[0-9]+",                                   ignorever: true }
 - { name: eternal-lands,               verpat: "[0-9]+",                                   ignorever: true }
 - { name: eternal-lands-data,          verpat: "[0-9]+",                                   ignorever: true }
+- { name: ethtool,                     verpat: "[0-9]+",                                   ignorever: true }
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignorever: true } # no such release
 - { name: fdupes,                      verpat: "1\\.[0-9]{2}",                             ignorever: true } # it has switched to 3 componennts (e.g. 1.51 -> 1.6.0 -> 1.6.1)
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignorever: true }
@@ -61,13 +61,15 @@
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
-- { name: p5-net-whois-ripe,           ver: "2.005005",                                    ignorever: true } # < 2.006
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
-- { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
+- { name: p5-net-whois-ripe,           ver: "2.005005",                                    ignorever: true } # < 2.006
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: ppsspp,                      verpat: "201.*",                                    ignorever: true } # XXX: problem
+- { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
+- { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
+- { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
@@ -88,5 +90,3 @@
 - { name: xmoto,                       ver: "0.5.12",                family: [ rosa ],     ignorever: true } # no such version
 - { name: youtube-dl,                  verpat: "[0-9]{8}",                                 ignorever: true } # canonical version is period-separated
 - { name: zpaq,                        verpat: "[0-9]+",                                   ignorever: true }
-- { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
-- { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
