@@ -79,6 +79,7 @@
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
+- { name: usbview,                     ver: "2.0.1",                 family: rosa          ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignorever: true }
 - { name: xdot,                        ver: "20121124",                                    ignorever: true }
