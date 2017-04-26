@@ -10,8 +10,8 @@
       parser: Guix
       url: https://www.gnu.org/software/guix/packages/
   repolinks:
-    - desc: GuixSD home
+    - desc: GNU Guix home
       url: https://www.gnu.org/software/guix/
-    - desc: GuixSD packages
+    - desc: GNU Guix packages
       url: https://www.gnu.org/software/guix/packages/
   tags: [ all, production ]
