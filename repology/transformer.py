@@ -59,7 +59,7 @@ class PackageTransformer:
                     rule[field] = [rule[field]]
 
             # compile regexps
-            for field in ['namepat', 'verpat']:
+            for field in ['namepat', 'verpat', 'wwwpat']:
                 if field in rule:
                     rule[field] = re.compile(rule[field] + '$', re.ASCII)
 
@@ -111,6 +111,11 @@ class PackageTransformer:
         # match number of version components
         if 'verlonger' in rule:
             if not len(package.version.split('.')) > rule['verlonger']:
+                return RuleApplyResult.unmatched
+
+        # match name patterns
+        if 'wwwpat' in rule:
+            if not package.homepage or not rule['wwwpat'].search(package.homepage):
                 return RuleApplyResult.unmatched
 
         # rule matches, apply effects!

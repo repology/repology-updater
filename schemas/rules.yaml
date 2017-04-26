@@ -12,6 +12,7 @@ sequence:
       "namepat": { type: str }
       "verpat": { type: str }
       "verlonger": { type: int }
+      "wwwpat": { type: str }
       "setname": { type: str }
       "ignore": { type: bool }
       "ignorever": { type: bool }
