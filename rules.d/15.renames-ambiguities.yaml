@@ -75,6 +75,8 @@
 
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
+- { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
+
 - { name: whereami, family: [ arch ], setname: "whereami-kootenpv" } # Uses WiFi signals and machine learning to predict where you are
 - { name: whereami, family: [ debuntu ], setname: "whereami-debian" } # Automatically reconfigure your (laptop) system for a new location based of wifi hotspots
 - { name: whereami, family: [ fedora, yacp ], setname: "whereami-pjp" } # displays information about machine(location) you are working on

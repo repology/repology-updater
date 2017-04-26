@@ -298,6 +298,7 @@
 - { name: [kid3-qt, kid3-qt4, kid3-qt5, kid4-qt, kid3-cli], setname: kid3 }
 - { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
 - { name: krita3,                      setname: krita                     }
+- { name: lapackpp,                    setname: lapack++                  }
 - { name: libass4,                     setname: libass                    }
 - { name: libagg,                      setname: agg                       }
 - { name: libaudiofile,                setname: audiofile                 }
@@ -308,9 +309,11 @@
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
+- { name: liblapack,                   setname: lapack                    }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
+- { name: libscalapack,                setname: scalapack                 }
 - { name: libsfml,                     setname: sfml                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libuv1,                      setname: libuv                     }
