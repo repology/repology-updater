@@ -68,7 +68,7 @@ specified name.
 Example:
 
 ```
-- { name: firfox, ... }
+- { name: firefox, ... }
 ```
 
 ### namepat
@@ -89,7 +89,7 @@ Matches package version.
 Example:
 
 ```
-- { name: firfox, ver: "50.0.1", ... }
+- { name: firefox, ver: "50.0.1", ... }
 ```
 
 ### verpat
@@ -100,9 +100,9 @@ mean "any symbol" in regular expressions.
 Example:
 
 ```
-- { name: firfox, verpat: "50\\.[0-9]+", ... }
+- { name: firefox, verpat: "50\\.[0-9]+", ... }
 
-- { name: firfox, verpat: "50\\..*", ... }
+- { name: firefox, verpat: "50\\..*", ... }
 ```
 
 ## Actions
