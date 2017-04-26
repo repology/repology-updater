@@ -18,6 +18,8 @@
 		<li><a href="{{ url_for('statistics') }}" class="{% if sorting == "alpha" %} active{% endif %}">Name</a></li>
 		<li><a href="{{ url_for('statistics', sorting="newest") }}" class="{% if sorting == "newest" %} active{% endif %}">Metapackages up to date</a></li>
 		<li><a href="{{ url_for('statistics', sorting="pnewest") }}" class="{% if sorting == "pnewest" %} active{% endif %}">Percent metapackages up to date</a></li>
+		<li><a href="{{ url_for('statistics', sorting="outdated") }}" class="{% if sorting == "outdated" %} active{% endif %}">Metapackages outdated</a></li>
+		<li><a href="{{ url_for('statistics', sorting="poutdated") }}" class="{% if sorting == "poutdated" %} active{% endif %}">Percent metapackages outdated</a></li>
 		<li><a href="{{ url_for('statistics', sorting="total") }}" class="{% if sorting == "total" %} active{% endif %}">Total metapackages</a></li>
 	</ul>
 </div>

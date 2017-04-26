@@ -640,6 +640,10 @@ def statistics(sorting=None):
         repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'], reverse=True)
     elif sorting == 'pnewest':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'] / (1 + s['num_metapackages']), reverse=True)
+    elif sorting == 'outdated':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages_outdated'], reverse=True)
+    elif sorting == 'poutdated':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages_outdated'] / (1 + s['num_metapackages']), reverse=True)
     elif sorting == 'total':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages'], reverse=True)
     else:
