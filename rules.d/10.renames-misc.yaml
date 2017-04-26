@@ -72,7 +72,8 @@
 - { name: bicyclerepair-py27,          setname: bicyclerepair,            family: [ freebsd ] }
 - { name: billard-gl,                  setname: billardgl,                family: [ debuntu ]  }
 - { name: [bird-v6,bird6],             setname: bird                      }
-- { name: blas-reference,              setname: blas                      }
+- { name: [blas-reference,blas-docs],  setname: blas                      }
+- { name: blas-tmg,                    setname: blas                      }
 - { name: blinkensisters-with-addons,  setname: lostpixels                }
 - { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
 - { name: [blobby2,blobby-volley],     setname: blobby                    }
@@ -104,6 +105,7 @@
 - { name: cattle-1.0,                  setname: cattle                    }
 - { name: cavez-of-phear,              setname: cavezofphear              }
 - { name: cblas-reference,             setname: cblas                     }
+- { name: cblas-tmg,                   setname: cblas                     }
 - { name: ceti-2-themes,               setname: ceti-2-theme              }
 - { name: clipit-gtk3,                 setname: clipit                    }
 - { name: cbatticon-gtk2,              setname: cbatticon                 }
@@ -303,6 +305,7 @@
 - { name: krita3,                      setname: krita                     }
 - { name: lapackpp,                    setname: lapack++                  }
 - { name: lapack-tmg,                  setname: lapack                    } # component of
+- { name: lapack-atlas,                setname: lapack                    }
 - { name: [lapack-docs,lapack-manpages,lapack-reference], setname: lapack }
 - { name: lapacke-tmg,                 setname: lapacke                   } # component of
 - { name: libass4,                     setname: libass                    }
