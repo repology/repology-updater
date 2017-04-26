@@ -8,16 +8,16 @@
 {% macro badge_example(badge_type, alt="Packaging status", badge_args={}) %}
 <p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for(badge_type, name=name, **badge_args) }}" alt="{{ alt }}"></a></p>
 
+<p>Markdown code:</p>
+<pre>
+[![{{ alt }}]({{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})
+</pre>
+
 <p>HTML code:</p>
 <pre>
 &lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;
     &lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args)}}&quot; alt=&quot;{{ alt }}&quot;&gt;
 &lt;/a&gt;
-</pre>
-
-<p>Markdown code:</p>
-<pre>
-[![{{ alt }}]({{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})
 </pre>
 {% endmacro %}
 
@@ -31,6 +31,15 @@
 <p>This shows versions and up to date status of this package in all known repositories.</p>
 
 {{ badge_example('badge_vertical_allrepos') }}
+
+<p>When using HTML code, you can also right-align the big badge by adding <code>align="right"</code> attribute (works on GitHub as well). When the badge is right-aligned, space to the left of it can be occupied by other content, and is not wasted as it would be otherwise, so it's recommended way of embedding the big badge.</p>
+
+<p>HTML code for right-aligned badge:</p>
+<pre>
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;
+    &lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name)}}&quot; alt=&quot;Packaging status&quot; <strong>align=&quot;right&quot;</strong>&gt;
+&lt;/a&gt;
+</pre>
 
 <h2>Tiny badge with number of repositories</h2>
 
