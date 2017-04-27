@@ -17,8 +17,9 @@
 - { name: diaspora, verpat: "1\\.[0-9]+\\.[0-9]+", setname: diaspora-game }
 - { name: diaspora, setname: diaspora-social }
 
-- { name: docker,                      family: gentoo, category: x11-plugins, setname: wmdocker }
-- { name: docker,                      wwwpat: "icculus\\.org",               setname: wmdocker }
+- { name: wmdocker,                    setname: docker-tray }
+- { name: docker,                      family: gentoo, category: x11-plugins, setname: docker-tray }
+- { name: docker,                      wwwpat: "icculus\\.org",               setname: docker-tray }
 
 - { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
 

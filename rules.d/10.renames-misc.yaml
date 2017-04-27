@@ -74,6 +74,7 @@
 - { name: [bird-v6,bird6],             setname: bird                      }
 - { name: [blas-reference,blas-docs],  setname: blas                      }
 - { name: blas-tmg,                    setname: blas                      }
+- { name: blasphemer-wad,              setname: blasphemer                }
 - { name: blinkensisters-with-addons,  setname: lostpixels                }
 - { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
 - { name: [blobby2,blobby-volley],     setname: blobby                    }
@@ -324,7 +325,8 @@
 - { name: liblastfm0,                  setname: liblastfm                 }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
-- { name: libphysfs,                   setname: physfs                    } # XXX: reverse?
+- { name: libphysfs,                   setname: physfs                    }
+- { name: libpolyclipping,             setname: polyclipping              }
 - { name: libscalapack,                setname: scalapack                 }
 - { name: libsfml,                     setname: sfml                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }

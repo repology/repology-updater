@@ -78,6 +78,7 @@
     - pyfiglet
     - pymediainfo
     - pytest-cov
+    - sphinxcontrib-adadomain
     - sqlalchemy-migrate
     - tempita
     - werkzeug
