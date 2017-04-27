@@ -27,7 +27,6 @@
     - pip
     - pyalsaaudio
     - pyaudio
-    - pypoppler
     - pygraphviz
     - pylint
     - pylint-celery
@@ -35,6 +34,8 @@
     - pylint-django
     - pylint-flask
     - pylint-plugin-utils
+    - pypoppler
+    - pyproj
     - pyserial
     - pytest
     - pytest-catchlog
@@ -55,14 +56,14 @@
     - pytest-xdist
     - pytest-xvfb
     - pyusb
+    - scikit-image
+    - scikits-cuda
     - sortedcontainers
     - todoman
     - vdirsyncer
     - virtualenv
     - virtualenv-clone
     - virtualenvwrapper
-    - scikit-image
-    - scikits-cuda
   setname: "python:$0"
 # this lists packages for which a problem should be created too
 # so they are renamed upstream (e.g. in SlackBuilds not all packages
@@ -110,6 +111,7 @@
 # as per pypi package name
 - { name: "python:axolotl",            setname: "python:python-axolotl"   }
 - { name: "python:axolotl-curve25519", setname: "python:python-axolotl-curve25519" }
+- { name: "python:proj", verpat: "1\\.9\\..*", setname: "python:pyproj"   }
 
 # These are more applications than modules, so rename
 - { name: "python:bzrtools",           setname: bzrtools                  }
