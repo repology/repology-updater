@@ -18,8 +18,9 @@
 - { name: diaspora, setname: diaspora-social }
 
 - { name: wmdocker,                    setname: docker-tray }
-- { name: docker,                      family: gentoo, category: x11-plugins, setname: docker-tray }
-- { name: docker,                      wwwpat: "icculus\\.org",               setname: docker-tray }
+- { name: docker,                      category: [x11,x11-plugins,"Graphical desktop/Window Maker","User Interface/X"], setname: docker-tray }
+- { name: docker,                      family: rosa, ver: "1.5",          setname: docker-tray }
+- { name: docker,                      wwwpat: "icculus\\.org",           setname: docker-tray }
 
 - { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
 
