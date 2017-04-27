@@ -40,11 +40,11 @@ setup(
     classifiers=[
         'Topic :: System :: Archiving :: Packaging',
         'Topic :: System :: Software Distribution',
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Environment :: Web Environment',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: C',
     ],
