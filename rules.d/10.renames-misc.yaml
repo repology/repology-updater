@@ -109,6 +109,7 @@
 - { name: cblas-tmg,                   setname: cblas                     }
 - { name: ceti-2-themes,               setname: ceti-2-theme              }
 - { name: clipit-gtk3,                 setname: clipit                    }
+- { name: clipperlib,                  setname: polyclipping              }
 - { name: cbatticon-gtk2,              setname: cbatticon                 }
 - { name: [ccache-memcached, ccache-memcached-static, ccache-static], setname: ccache } # freebsd subpackages
 - { name: cdogs,                       setname: cdogs-sdl                 }
@@ -277,6 +278,7 @@
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle,                 family: [ debuntu ]  }
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
+- { name: [gdal-1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4], setname: gdal }
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geotiff,                     setname: libgeotiff                }
@@ -327,6 +329,7 @@
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libphysfs,                   setname: physfs                    }
 - { name: libpolyclipping,             setname: polyclipping              }
+- { name: libproj,                     setname: proj                      }
 - { name: libscalapack,                setname: scalapack                 }
 - { name: libsfml,                     setname: sfml                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
@@ -365,6 +368,7 @@
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles,              family: [ pkgsrc, arch, openbsd ] }
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
+- { name: [proj4,proj.4],              setname: proj                      }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5], setname: qbittorrent }
 - { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator], setname: qtcreator }
 - { name: quadkonsole,                 setname: quadkonsole4              }
