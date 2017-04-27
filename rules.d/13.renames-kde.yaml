@@ -9,6 +9,7 @@
 
 - { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns)[0-9]*", verpat: "4\\..*", setname: "qt4-$1" }
 - { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns|widgets|qml|base)[0-9]*", verpat: "5\\..*", setname: "qt5-$1" }
+- { name: [qtbase-opensource-src, qtbase-opensource-src-gles], verpat: "5\\..*", setname: qt5-base }
 
 # kde stuff; see https://download.kde.org/stable/applications/16.12.2/src/ for list
 - { name: kdemultimedia-kmix, setname: kmix }
