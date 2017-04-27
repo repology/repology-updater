@@ -310,7 +310,7 @@
 - { name: [lapack-docs,lapack-manpages,lapack-reference], setname: lapack }
 - { name: lapacke-tmg,                 setname: lapacke                   } # component of
 - { name: libass4,                     setname: libass                    }
-- { name: libatlas3,                   setname: altas                     }
+- { name: libatlas3,                   setname: atlas                     }
 - { name: libagg,                      setname: agg                       }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbrotli,                   setname: brotli                    }
