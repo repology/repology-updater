@@ -178,6 +178,8 @@
 - { name: drpython-py27,               setname: drpython                  }
 - { name: dr14_tmeter,                 setname: dr14tmeter                }
 - { name: devedeng,                    setname: devede                    }
+- { name: [docker-io,docker.io],       setname: docker                    }
+- { name: docker-git-x86,              setname: docker, ignorever: true   } # ignore version just for the cause, because of suspicious name
 - { name: [dogecoind,dogecoin-qt,dogecoin-daemon], setname: dogecoin      }
 - { name: dsniff-nox11,                setname: dsniff                    }
 - { name: [dspam-mysql,dspam-pgsql,dspam-web], setname: dspam             }
@@ -278,7 +280,7 @@
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle,                 family: [ debuntu ]  }
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
-- { name: [gdal-1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4], setname: gdal }
+- { name: [gdal1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4], setname: gdal }
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geotiff,                     setname: libgeotiff                }
@@ -321,6 +323,7 @@
 - { name: libcomedi,                   setname: comedilib                 }
 - { name: libfreeglut,                 setname: freeglut                  }
 - { name: libgc,                       setname: boehm-gc                  }
+- { name: libgdal-grass,               setname: gdal-grass                }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
 - { name: liblapack,                   setname: lapack                    }
