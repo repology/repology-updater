@@ -17,11 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
-
 import flask
 
-from repology.package import *
 from repology.packageformatter import PackageFormatter
 
 
