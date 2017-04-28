@@ -319,3 +319,11 @@
 
 - { namepat: "wesnoth[0-9.-]+",        setname: wesnoth }
 - { name: wesnoth-devel,               setname: wesnoth }
+
+- { namepat: "wine[0-9.-]+",           setname: wine }
+- { name: [wine-devel,wine-development,wine-vanilla,wine-stable,wine-ivb], setname: wine }
+- { name: wine, verpat: "[0-9]+\\.0\\..*", setname: wine-stable }
+
+- { namepat: "wine-gecko([0-9.-]+|-devel|-stable)", setname: wine-gecko }
+
+- { namepat: "wine-mono([0-9.-]+|-devel)", setname: wine-mono }
