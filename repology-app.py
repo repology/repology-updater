@@ -412,7 +412,14 @@ def maintainer(maintainer):
 
 @app.route('/maintainer/<maintainer>/problems')
 def maintainer_problems(maintainer):
-    return flask.render_template('maintainer-problems.html', maintainer=maintainer, problems=get_db().GetProblems(maintainer=maintainer, limit=app.config['PROBLEMS_PER_PAGE']))
+    return flask.render_template(
+        'maintainer-problems.html',
+        maintainer=maintainer,
+        problems=get_db().GetProblems(
+            maintainer=maintainer,
+            limit=app.config['PROBLEMS_PER_PAGE']
+        )
+    )
 
 
 @app.route('/repositories/')
