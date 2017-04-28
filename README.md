@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/repology/repology.svg?branch=master)](https://travis-ci.org/repology/repology)
 [![Coverage Status](https://coveralls.io/repos/github/repology/repology/badge.svg?branch=master)](https://coveralls.io/github/repology/repology?branch=master)
+[![Code Health](https://landscape.io/github/repology/repology/master/landscape.svg?style=flat)](https://landscape.io/github/repology/repology/master)
 
 ![Example report](docs/screenshot.png)
 
