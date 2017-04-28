@@ -45,9 +45,7 @@ def maintainers_to_group_mailto(maintainers, subject=None):
     emails = []
 
     for maintainer in maintainers:
-        name, domain = maintainer.split('@', 1)
-
-        if '.' in domain:
+        if '@' in maintainer and '.' in maintainer.split('@', 1)[1]:
             emails.append(maintainer)
 
     if not emails:
