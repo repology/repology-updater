@@ -19,7 +19,6 @@
 
 - { name: wmdocker,                    setname: docker-tray }
 - { name: docker,                      category: [x11,x11-plugins,"Graphical desktop/Window Maker","User Interface/X","universe/x11"], setname: docker-tray }
-- { name: docker,                      family: [rosa, gobolinux], ver: "1.5", setname: docker-tray }
 - { name: docker,                      wwwpat: "icculus\\.org",           setname: docker-tray }
 
 - { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
@@ -80,9 +79,14 @@
 
 - { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
 
-- { name: whereami, family: [ arch ], setname: "whereami-kootenpv" } # Uses WiFi signals and machine learning to predict where you are
-- { name: whereami, family: [ debuntu ], setname: "whereami-debian" } # Automatically reconfigure your (laptop) system for a new location based of wifi hotspots
-- { name: whereami, family: [ fedora, yacp ], setname: "whereami-pjp" } # displays information about machine(location) you are working on
+- { name: wise, wwwpat: "jboss", setname: jboss-wise }
+- { name: wise, wwwpat: "ebi\\.ac\\.uk", setname: wise2 }
+- { name: wise, category: [ Sciences/Biology, science, biology, sci-biology, universe/science ], setname: wise2 }
+- { name: wise, warning: "please classify me" }
+
+- { name: whereami, family: [ arch ], setname: whereami-kootenpv } # Uses WiFi signals and machine learning to predict where you are
+- { name: whereami, family: [ debuntu ], setname: whereami-debian } # Automatically reconfigure your (laptop) system for a new location based of wifi hotspots
+- { name: whereami, family: [ fedora, yacp ], setname: whereami-pjp } # displays information about machine(location) you are working on
 - { name: whereami, warning: "please classify me" }
 
 # fuse-emulator vs. fusefs modules - see below
