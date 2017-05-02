@@ -157,7 +157,7 @@ def Main():
     prev_url = None
     while True:
         # Get pack of links
-        logger.Log('Requesting pack of urls'.format(prev_url))
+        logger.Log('Requesting pack of urls')
         urls = database.GetLinksForCheck(
             after=prev_url,
             prefix=options.prefix,  # no limit by default
