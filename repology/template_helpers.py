@@ -19,6 +19,7 @@
 
 import flask
 
+from repology.package import PackageVersionClass, RepositoryVersionClass
 from repology.packageformatter import PackageFormatter
 
 
