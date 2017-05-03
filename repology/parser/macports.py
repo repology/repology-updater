@@ -47,11 +47,11 @@ class MacPortsParser():
         result = []
 
         with subprocess.Popen(
-                [repology.config.TCLSH, self.helperpath, path],
-                errors='ignore',
-                stdout=subprocess.PIPE,
-                universal_newlines=True
-            ) as macportsjson:
+            [repology.config.TCLSH, self.helperpath, path],
+            errors='ignore',
+            stdout=subprocess.PIPE,
+            universal_newlines=True
+        ) as macportsjson:
             for pkgdata in json.load(macportsjson.stdout):
                 pkg = Package()
 
@@ -68,7 +68,7 @@ class MacPortsParser():
                     pkg.category = pkgdata['categories'].split()[0]
 
                 if 'license' in pkgdata:
-                    pkg.licenses = [ pkgdata['license'] ]  # XXX: properly handle arrays
+                    pkg.licenses = [pkgdata['license']]  # XXX: properly handle braces
 
                 if 'maintainers' in pkgdata:
                     for maintainer in pkgdata['maintainers'].replace('{', '').replace('}', '').lower().split():
