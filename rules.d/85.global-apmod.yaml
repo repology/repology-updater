@@ -4,7 +4,7 @@
 - { namepat: "ap[0-9]+-(?:mod_)?(.*?)", setname: "apmod:$1", family: [ freebsd, openbsd, pkgsrc ] }
 - { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", family: [ gentoo ] }
 - { namepat: "mod-(.*)",               setname: "apmod:$1", family: [ debuntu ] }
-- { namepat: "mod_(.*)",               setname: "apmod:$1", family: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos, gobolinux ] }
+- { namepat: "mod_(.*)",               setname: "apmod:$1", family: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos, gobolinux, macports ] }
 - { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1" }
 - { namepat: "apache2?-mod_(.*)",      setname: "apmod:$1" }
 - { namepat: "apmod:php[0-9]*",        verpat: "5\\..*", setname: "apmod:php5" }
