@@ -70,7 +70,27 @@ class MacPortsParser():
                 if 'license' in pkgdata:
                     pkg.licenses = [ pkgdata['license'] ]  # XXX: properly handle arrays
 
-                # pkg.maintainers = [ pkgdata['maintainers'] ]
+                if 'maintainers' in pkgdata:
+                    for maintainer in pkgdata['maintainers'].replace('{', '').replace('}', '').lower().split():
+                        if maintainer.startswith('@'):
+                            # @foo means github user foo
+                            pkg.maintainers.append(maintainer[1:] + '@github')
+                        elif '@' in maintainer:
+                            # plain email
+                            pkg.maintainers.append(maintainer)
+                        elif ':' in maintainer:
+                            # foo.com:bar means bar@foo.com
+                            host, user = maintainer.split(':', 1)
+                            pkg.maintainers.append(user + '@' + host)
+                        elif maintainer == 'openmaintainer':
+                            # ignore, this is a flag that minor changes to a port
+                            # are allowed without involving the maintainer
+                            pass
+                        else:
+                            # otherwise it's username@macports.org
+                            pkg.maintainers.append(maintainer + '@macports.org')
+
+                    print(pkg.maintainers)
 
                 result.append(pkg)
 
