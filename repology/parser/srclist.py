@@ -18,19 +18,23 @@
 import os
 import subprocess
 
+import repology.config
+
 from repology.package import Package
 from repology.util import GetMaintainers
 
 
 class SrcListParser():
     def __init__(self):
-        if not os.path.exists('helpers/rpmcat/rpmcat'):
-            raise RuntimeError('helpers/rpmcat/rpmcat does not exist, please run `make\' in project root directory')
+        self.helperpath = os.path.join(repology.config.HELPERS_DIR, 'rpmcat', 'rpmcat')
+
+        if not os.path.exists(self.helperpath):
+            raise RuntimeError('{} does not exist, please run `make\' in project root directory to build it'.format(self.helperpath))
 
     def Parse(self, path):
         result = []
 
-        with subprocess.Popen(['helpers/rpmcat/rpmcat', path], errors='ignore', stdout=subprocess.PIPE, universal_newlines=True) as proc:
+        with subprocess.Popen([self.helperpath, path], errors='ignore', stdout=subprocess.PIPE, universal_newlines=True) as proc:
             for line in proc.stdout:
                 fields = line.strip().split('|')
 
