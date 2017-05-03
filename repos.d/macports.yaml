@@ -1,0 +1,20 @@
+###########################################################################
+# YACP (Yet Another Cygwin Ports)
+###########################################################################
+- name: macports
+  desc: MacPorts
+  family: macports
+  sources:
+    - name: PortIndex
+      fetcher: Rsync
+      parser: MacPorts
+      url: rsync://rsync.macports.org/macports//trunk/dports/PortIndex_darwin_16_i386/PortIndex
+  repolinks:
+    - desc: MacPorts home
+      url: https://www.macports.org/
+    - desc: MacPorts GitHub repository
+      url: https://github.com/macports/macports-ports
+  packagelinks:
+    - desc: Port directory in GitHub repository
+      url: 'https://github.com/macports/macports-ports/blob/master/{category}/{name}'
+  tags: [ all, production ]

@@ -59,6 +59,7 @@ version are always parsed.
 | Guix                             | ✔       |         |       | ✔     | ✔       |          |
 | GoboLinux                        | ✔       |         |       | ✔     | ✔       |          |
 | Hackage                          |         |         |       | ✔ (2) |         |          |
+| MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
 | PCLinuxOS                        | ✔       | ✔       | ✔     |       |         |          |

@@ -348,7 +348,7 @@
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: multicorn,                   setname: postgresql-multicorn      }
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
-- { name: mutt-lite,                   setname: mutt,                     family: [ freebsd ] }
+- { name: [mutt-lite,mutt-devel,mutt14,mutt14-lite,mutt-patched,mutt-slang,mutt-kiss], setname: mutt }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: ncbi-blast-plus,             setname: ncbi-blast+               }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
@@ -429,10 +429,11 @@
 - { namepat: "enscript-.*",            setname: enscript,                 family: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         family: [ pkgsrc, openbsd ] }
-- { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debuntu, gentoo, crux ]  }
+- { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debuntu, gentoo, crux, macports ]  }
 - { namepat: "open[gs]fx",             setname: "openttd-$0",             family: [ freebsd, gentoo ] }
 - { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 family: [ debuntu ]  }
 - { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                family: [ debuntu ]  }
+- { namepat: "lib(sdl2?)-(image|mixer|net|sound|ttf|gfx)", setname: "$2-$2", family: [ macports ]  }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }

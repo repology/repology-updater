@@ -34,7 +34,7 @@
 - { namepat: "opensmtpd-extras-.*",    setname: "opensmtpd-extras", family: [ freebsd, openbsd ] }
 - { namepat: "seamonkey-i18n-.*",      setname: "seamonkey-i18n", family: [ openbsd ] }
 - { namepat: "(squirrelmail-.*)-plugin", setname: "$1", family: [ freebsd ] }
-- { namepat: "tesseract-.*",           setname: "tesseract-data", family: [ openbsd, debuntu ] }
+- { namepat: "tesseract-.*",           setname: "tesseract-data", family: [ openbsd, debuntu, macports ] }
 - { namepat: "tesseract-data-.*",      setname: "tesseract-data", family: [ arch ] }
 - { namepat: "texlive-documentation-.*", setname: "texlive-documentation", family: [ gentoo ] }
 - { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", family: [ openbsd, arch ] }

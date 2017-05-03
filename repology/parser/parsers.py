@@ -33,6 +33,7 @@ from .guix import GuixParser
 from .hackage import HackageParser
 from .homebrew import HomebrewJsonParser
 from .libregamewiki import LibreGameWikiParser
+from .macports import MacPortsParser
 from .nix import NixJsonParser
 from .openbsd import OpenBSDIndexParser
 from .pkgsrc import PkgsrcIndexParser

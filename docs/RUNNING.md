@@ -16,6 +16,7 @@ Needed for fetching/parsing specific repository data:
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
 - [librpm](http://www.rpm.org/) and [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
+- [tclsh](https://www.tcl.tk/) and [tcllib](https://www.tcl.tk/)
 
 Needed for web-application:
 
