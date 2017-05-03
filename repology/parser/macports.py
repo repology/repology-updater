@@ -90,8 +90,6 @@ class MacPortsParser():
                             # otherwise it's username@macports.org
                             pkg.maintainers.append(maintainer + '@macports.org')
 
-                    print(pkg.maintainers)
-
                 result.append(pkg)
 
         return result
