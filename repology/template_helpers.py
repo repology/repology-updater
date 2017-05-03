@@ -35,6 +35,8 @@ def maintainer_to_links(maintainer):
             links.append('https://aur.archlinux.org/account/' + name)
         elif domain in ('altlinux.org', 'altlinux.ru'):
             links.append('http://sisyphus.ru/en/packager/' + name + '/')
+        elif domain == 'github':
+            links.append('https://github.com/' + name)
 
         if '.' in domain:
             links.append('mailto:' + maintainer)
