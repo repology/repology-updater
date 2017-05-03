@@ -12,4 +12,9 @@
   repolinks:
     - desc: MacPorts home
       url: https://www.macports.org/
-  tags: [ all ]
+    - desc: MacPorts GitHub repository
+      url: https://github.com/macports/macports-ports
+  packagelinks:
+    - desc: Port directory in GitHub repository
+      url: 'https://github.com/macports/macports-ports/blob/master/{category}/{name}'
+  tags: [ all, production ]
