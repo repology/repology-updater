@@ -52,6 +52,9 @@
 - { name: mog,                         setname: mog-game, family: slackbuilds }
 - { name: mog,                         warning: "please classify me" }
 
+# "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
+- { name: packer, setname: "pacman-packer", family: arch  }
+
 - { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
 
 # python package manager vs. program wrapper (which was renamed to pipo upstream)
@@ -63,6 +66,8 @@
 - { name: polly, verpat: "0\\.93\\..*", setname: polly-twitter-client     } # twitter client
 - { name: polly, warning: "please classify me" }
 
+- { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
+
 # Programming language vs. XMPP client vs. openstack object storage
 - { name: swift,                       setname: swift-lang, family: [ arch, freebsd ] }
 - { name: swift,                       setname: swift-im, family: [ sisyphus, fedora, pkgsrc ] }
@@ -71,11 +76,6 @@
 
 # infrastructure manager vs. heighfield generation
 - { name: terraform, setname: gnome-terraform, family: yacp }
-
-# "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
-- { name: packer, setname: "pacman-packer", family: arch  }
-
-- { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
 - { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
 
