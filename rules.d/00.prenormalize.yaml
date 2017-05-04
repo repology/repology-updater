@@ -3,4 +3,4 @@
 # Lowercase all names first
 # if there's a need to process mixer case names, it shold be done before this rule
 
-- { tolowername: true }
+- { tolowername: true, replaceinname: { "/": "-" } }
