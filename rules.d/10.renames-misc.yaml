@@ -12,6 +12,7 @@
 - { name: accounts-qt5,                setname: accounts-qt ,             family: [ sisyphus ] }
 - { name: abbaye,                      setname: abbaye-des-morts          }
 - { name: abbayedesmorts,              setname: abbaye-des-morts          }
+- { name: [abiword-x11,abiword-gtk2,abiword-minimal], setname: abiword    }
 - { name: ace,                         setname: ace-of-penguins,          family: [ openbsd, slackbuilds ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          family: [ gentoo ] }
 - { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              family: [ fedora ] } # XXX: ???
@@ -43,6 +44,7 @@
 - { name: anacron, verpat: "2\\.[4-9].*", setname: anacron2               } # different project (a fork?)
 - { name: angularjs,                   setname: angular.js                }
 - { name: antimicro-qt4,               setname: antimicro                 }
+- { name: antigraingeometry,           setname: agg                       }
 - { name: aprutil1,                    setname: apr-util                  }
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
@@ -133,7 +135,7 @@
 - { name: [cockatrice-client,cockatrice-server], setname: cockatrice      }
 - { name: coffeescript,                setname: coffee-script             } # XXX: problem
 - { name: collectd5,                   setname: collectd                  }
-- { name: [coreos-etcd, coreos-etcd3], setname: etcd                      }
+- { name: [coreos-etcd,coreos-etcd3],  setname: etcd                      }
 - { name: corsixth,                    setname: corsix-th,                family: [ freebsd ] }
 - { name: commoncpp,                   setname: commoncpp2                }
 - { name: concurrency-kit,             setname: concurrencykit            }
@@ -277,6 +279,7 @@
 - { name: freemedforms-project,        setname: freemedforms              }
 - { name: freeplane-srcbuild,          setname: freeplane                 }
 - { name: [freeradius-server, freeradius3], setname: freeradius           }
+- { name: frozenbubble2,               setname: frozen-bubble             }
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle,                 family: [ debuntu ]  }
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
@@ -314,6 +317,9 @@
 - { name: lapack-atlas,                setname: lapack                    }
 - { name: [lapack-docs,lapack-manpages,lapack-reference], setname: lapack }
 - { name: lapacke-tmg,                 setname: lapacke                   } # component of
+
+# lib* block
+- { name: [liballegroogg,allegroogg],  setname: alogg                     }
 - { name: libass4,                     setname: libass                    }
 - { name: libatlas3,                   setname: atlas                     }
 - { name: libagg,                      setname: agg                       }
@@ -343,6 +349,7 @@
 - { name: libzstd,                     setname: zstd                      }
 - { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
+
 - { name: mc46,                        setname: mc                        }
 - { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
@@ -430,7 +437,7 @@
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         family: [ pkgsrc, openbsd ] }
 - { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debuntu, gentoo, crux, macports ]  }
-- { namepat: "open[gs]fx",             setname: "openttd-$0",             family: [ freebsd, gentoo ] }
+- { namepat: "open[gs]fx",             setname: "openttd-$0"              }
 - { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 family: [ debuntu ]  }
 - { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                family: [ debuntu ]  }
 - { namepat: "lib(sdl2?)-(image|mixer|net|sound|ttf|gfx)", setname: "$2-$2", family: [ macports ]  }
