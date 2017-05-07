@@ -82,9 +82,10 @@ class MacPortsParser():
                             # foo.com:bar means bar@foo.com
                             host, user = maintainer.split(':', 1)
                             pkg.maintainers.append(user + '@' + host)
-                        elif maintainer == 'openmaintainer':
-                            # ignore, this is a flag that minor changes to a port
-                            # are allowed without involving the maintainer
+                        elif maintainer == 'openmaintainer' or maintainer == 'nomaintainer':
+                            # ignore, openmaintainer is a flag that minor changes to a port
+                            # are allowed without involving the maintainer, nomaintainer
+                            # means that the port is unmaintained
                             pass
                         else:
                             # otherwise it's username@macports.org
