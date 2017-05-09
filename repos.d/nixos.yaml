@@ -31,4 +31,4 @@
     - desc: NixOS packages
       url: http://nixos.org/nixos/packages.html
   # XXX: add urls
-  tags: []
+  tags: [ all, production ]
