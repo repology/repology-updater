@@ -33,6 +33,8 @@ def ExtractLicenses(whatever):
         return [whatever['spdxId']]
     elif isinstance(whatever, dict) and 'fullName' in whatever:
         return [whatever['fullName']]
+    elif isinstance(whatever, dict) and 'fullname' in whatever:
+        return [whatever['fullname']]
     else:
         raise RuntimeError('unparsable license info')
 
