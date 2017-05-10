@@ -66,6 +66,7 @@
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
+- { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
