@@ -2,7 +2,7 @@
 # Pentoo
 ###########################################################################
 - name: gentoo_ovl_pentoo
-  desc: Gentoo Overlay Pentoo
+  desc: Gentoo overlay Pentoo
   family: gentoo
   sources:
     - name: overlay
