@@ -125,3 +125,28 @@
     - desc: Package builds on launchpad
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
+
+- name: ubuntu__artful
+  desc: Ubuntu Artful
+  family: debuntu
+  valid_till: 2018-08-01
+  sources:
+    - name: [ main, multiverse, restricted, universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/artful/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: http://packages.ubuntu.com/
+    - desc: Ubuntu packages in artful
+      url: http://packages.ubuntu.com/artful/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'http://packages.ubuntu.com/artful/{name}' # XXX: we should use binare package names here!
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
