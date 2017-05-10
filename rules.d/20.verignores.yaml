@@ -63,6 +63,8 @@
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
+- { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignorever: true }   # \  force correct
+- { name: onioncat,                    verpat: "0\\.2\\.2\\.r[0-9]+.*",                    unignorever: true } # / version schema
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
