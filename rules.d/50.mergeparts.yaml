@@ -5,19 +5,17 @@
 - { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", family: [ openbsd ] }
 - { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", family: [ openbsd ] }
 - { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", family: [ openbsd, arch ] }
-- { namepat: "eric-i18n-.*",           setname: "eric-i18n", family: [ arch ] }
+- { namepat: "eric-i18n-.*",           setname: "eric-i18n" }
 - { namepat: "firefox-kde-i18n-.*",    setname: "firefox-kde-i18n" }
-- { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n", family: [ openbsd ] }
-- { namepat: "firefox-i18n-.*",        setname: "firefox-i18n", family: [ openbsd, arch ] }
-- { namepat: "firefox-l10n-.*",        setname: "firefox-l10n" }
+- { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n" }
+- { namepat: "firefox-(i18n|l10n)-.*", setname: "firefox-i18n" }
 - { namepat: "fossamail-i18n-.*",      setname: "fossamail-i18n" }
 - { namepat: "fpc-.*",                 setname: "fpc-modules", family: [ freebsd ] }
 - { namepat: "gambas3-gb-.*",          setname: "gambas3-gb-modules", family: [ arch ] }
 - { namepat: "geany-plugin-.*",        setname: "geany-plugins", family: [ freebsd ] }
 - { namepat: "gimp-docs-.*",           setname: "gimp-docs", family: [ pkgsrc ] }
 - { namepat: "gimp-help-.*",           setname: "gimp-help", family: [ arch ] }
-- { namepat: "kde-i18n-.*",            setname: "kde-i18n", family: [ openbsd, pkgsrc, gobolinux ] }
-- { namepat: "kde-l10n-.*",            setname: "kde-l10n", family: [ openbsd, arch, debuntu, gobolinux ] }
+- { namepat: "kde-(i18n|l10n)-.*",      setname: "kde-i18n" }
 - { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", family: [ pkgsrc ] }
 - { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", family: [ freebsd ] }
 - { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", family: [ pkgsrc ] }
@@ -25,7 +23,7 @@
 - { namepat: "language-pack-gnome-.*", setname: "language-pack-gnome", family: [ debuntu ] }
 - { namepat: "language-pack-kde-.*",   setname: "language-pack-kde", family: [ debuntu ] }
 - { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", family: [ arch ] }
-- { namepat: "libreoffice-i18n-.*",    setname: "libreoffice-i18n", family: [ openbsd ] }
+- { namepat: "libreoffice-(i18n|l10n)-.*", setname: "libreoffice-i18n" }
 - { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", family: [ arch ] }
 - { namepat: "[^-]+-libreoffice",      setname: "libreoffice-i18n", family: [ freebsd ] }
 - { namepat: "mgltools-.*",            setname: "mgltools", family: [ debuntu ] }
