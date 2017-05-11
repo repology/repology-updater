@@ -9,7 +9,6 @@
 - { namepat: "firefox-kde-i18n-.*",    setname: "firefox-kde-i18n" }
 - { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n" }
 - { namepat: "firefox-(i18n|l10n)-.*", setname: "firefox-i18n" }
-- { namepat: "fossamail-i18n-.*",      setname: "fossamail-i18n" }
 - { namepat: "fpc-.*",                 setname: "fpc-modules", family: [ freebsd ] }
 - { namepat: "gambas3-gb-.*",          setname: "gambas3-gb-modules", family: [ arch ] }
 - { namepat: "geany-plugin-.*",        setname: "geany-plugins", family: [ freebsd ] }

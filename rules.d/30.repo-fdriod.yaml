@@ -5,7 +5,6 @@
 - {                                                                  family: [ fdroid ], ignore: true }
 - { name: "andor's trail",                                           family: [ fdroid ], unignore: true } # as an exception, allow android project (present in f-droid and libregamewiki)
 - { name: busybox,                                                   family: [ fdroid ], unignore: true }
-- { name: firefox,                                                   family: [ fdroid ], unignore: true }
 - { name: freeminer,                                                 family: [ fdroid ], unignore: true }
 - { name: hyperrogue,                                                family: [ fdroid ], unignore: true }
 - { name: i2p,                                                       family: [ fdroid ], unignore: true }

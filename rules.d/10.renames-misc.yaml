@@ -153,7 +153,6 @@
 - { name: ctpp,                        setname: ctpp2                     }
 - { name: ctypes-sh,                   setname: ctypes.sh                 }
 - { name: cuneiform-linux,             setname: cuneiform                 }
-- { name: curl-http2,                  setname: curl                      }
 - { name: cutecom-legacy,              setname: cutecom                   }
 - { name: curseofwar-sdl,              setname: curseofwar                }
 - { name: cvsweb3,                     setname: cvsweb                    }
