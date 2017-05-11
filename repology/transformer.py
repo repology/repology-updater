@@ -59,11 +59,7 @@ class PackageTransformer:
                     rule[field] = [rule[field]]
 
             # compile regexps
-            for field in ['namepat', 'verpat']:
-                if field in rule:
-                    rule[field] = re.compile(rule[field] + '$', re.ASCII)
-
-            for field in ['wwwpat']:
+            for field in ['namepat', 'verpat', 'wwwpat']:
                 if field in rule:
                     rule[field] = re.compile(rule[field], re.ASCII)
 
@@ -99,7 +95,7 @@ class PackageTransformer:
 
         # match name patterns
         if 'namepat' in rule:
-            if not rule['namepat'].match(package.effname):
+            if not rule['namepat'].fullmatch(package.effname):
                 return RuleApplyResult.unmatched
 
         # match version
@@ -109,7 +105,7 @@ class PackageTransformer:
 
         # match version patterns
         if 'verpat' in rule:
-            if not rule['verpat'].match(package.version):
+            if not rule['verpat'].fullmatch(package.version):
                 return RuleApplyResult.unmatched
 
         # match number of version components
@@ -145,7 +141,7 @@ class PackageTransformer:
         if 'setname' in rule:
             match = None
             if 'namepat' in rule:
-                match = rule['namepat'].match(package.effname)
+                match = rule['namepat'].fullmatch(package.effname)
             if match:
                 package.effname = self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
             else:
