@@ -5,7 +5,7 @@
   desc: nixpkgs stable
   family: nix
   sources:
-    - name: nix
+    - name: packages.json
       fetcher: File
       parser: NixJson
       url: https://nixos.org/nixpkgs/packages.json.gz
@@ -21,7 +21,7 @@
   desc: nixpkgs unstable
   family: nix
   sources:
-    - name: nix
+    - name: packages-unstable.json
       fetcher: File
       parser: NixJson
       url: https://nixos.org/nixpkgs/packages-unstable.json.gz
