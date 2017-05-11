@@ -24,151 +24,162 @@ from repology.transformer import PackageTransformer
 
 
 class TestPackageTransformer(unittest.TestCase):
+    def check_transformer(self, rulestext, *packages):
+        transformer = PackageTransformer(rulestext=rulestext)
+
+        for packagedict in packages:
+            create_params = {}
+            expected_params = {}
+            for field, value in packagedict.items():
+                if field.startswith('expect_'):
+                    expected_params[field[7:]] = value
+                else:
+                    create_params[field] = value
+
+            package = Package(**create_params)
+            transformer.Process(package)
+
+            for field, value in expected_params.items():
+                self.assertEqual(package.__dict__[field], value)
+
     def test_ignore(self):
-        p = Package(name='foo', version='1.0')
-        self.assertEqual(p.ignore, False)
-        PackageTransformer(rulestext='[ { ignore: true } ]').Process(p)
-        self.assertEqual(p.ignore, True)
+        self.check_transformer(
+            '[ { name: p1, ignore: true } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_ignore': True},
+            {'name': 'p2', 'version': '1.0', 'expect_ignore': False}
+        )
 
     def test_unignore(self):
-        p = Package(name='foo', version='1.0')
-        self.assertEqual(p.ignore, False)
-        PackageTransformer(rulestext='[ { ignore: true }, { unignore: true } ]').Process(p)
-        self.assertEqual(p.ignore, False)
+        self.check_transformer(
+            '[ { name: p1, unignore: true } ]',
+            {'name': 'p1', 'version': '1.0', 'ignore': True, 'expect_ignore': False},
+            {'name': 'p2', 'version': '1.0', 'ignore': True, 'expect_ignore': True}
+        )
 
     def test_ignorever(self):
-        p = Package(name='foo', version='1.0')
-        self.assertEqual(p.ignoreversion, False)
-        PackageTransformer(rulestext='[ { ignorever: true } ]').Process(p)
-        self.assertEqual(p.ignoreversion, True)
+        self.check_transformer(
+            '[ { name: p1, ignorever: true } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_ignoreversion': True},
+            {'name': 'p2', 'version': '1.0', 'expect_ignoreversion': False}
+        )
 
     def test_unignorever(self):
-        p = Package(name='foo', version='1.0')
-        self.assertEqual(p.ignoreversion, False)
-        PackageTransformer(rulestext='[ { ignorever: true }, { unignorever: true } ]').Process(p)
-        self.assertEqual(p.ignoreversion, False)
+        self.check_transformer(
+            '[ { name: p1, unignorever: true } ]',
+            {'name': 'p1', 'version': '1.0', 'ignoreversion': True, 'expect_ignoreversion': False},
+            {'name': 'p2', 'version': '1.0', 'ignoreversion': True, 'expect_ignoreversion': True}
+        )
 
     def test_setname(self):
-        p = Package(name='foo', version='1.0')
-        PackageTransformer(rulestext='[ { setname: "bar" } ]').Process(p)
-        self.assertEqual(p.name, 'foo')
-        self.assertEqual(p.effname, 'bar')
+        self.check_transformer(
+            '[ { setname: "bar" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_name': 'foo', 'expect_effname': 'bar'}
+        )
 
     def test_setname_subst(self):
-        p = Package(name='foo', version='1.0')
-        PackageTransformer(rulestext='[ { setname: "bar_$0" } ]').Process(p)
-        self.assertEqual(p.name, 'foo')
-        self.assertEqual(p.effname, 'bar_foo')
+        self.check_transformer(
+            '[ { setname: "bar_$0" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_name': 'foo', 'expect_effname': 'bar_foo'}
+        )
 
     def test_tolowername(self):
-        p = Package(name='fOoBaR', version='1.0')
-        PackageTransformer(rulestext='[ { tolowername: true } ]').Process(p)
-        self.assertEqual(p.name, 'fOoBaR')
-        self.assertEqual(p.effname, 'foobar')
+        self.check_transformer(
+            '[ { tolowername: true } ]',
+            {'name': 'fOoBaR', 'version': '1.0', 'expect_name': 'fOoBaR', 'expect_effname': 'foobar'}
+        )
 
     def test_last(self):
-        p = Package(name='foo', version='1.0')
-        PackageTransformer(rulestext='[ { last: true }, { setname: "bar" } ]').Process(p)
-        self.assertEqual(p.effname, 'foo')
+        self.check_transformer(
+            '[ { last: true }, { setname: "bar" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_effname': 'foo'}
+        )
 
     def test_match_name(self):
-        p1 = Package(name='p1', version='1.0')
-        p2 = Package(name='p2', version='2.0')
-        p3 = Package(name='p3', version='2.0')
-        t = PackageTransformer(rulestext='[ { name: p1, setname: bar }, { name: [p3], setname: baz } ]')
-        t.Process(p1)
-        t.Process(p2)
-        t.Process(p3)
-        self.assertEqual(p1.effname, 'bar')
-        self.assertEqual(p2.effname, 'p2')
-        self.assertEqual(p3.effname, 'baz')
+        self.check_transformer(
+            '[ { name: p1, setname: bar }, { name: [p3], setname: baz } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '2.0', 'expect_effname': 'baz'}
+        )
 
     def test_match_name_multi(self):
-        p1 = Package(name='p1', version='1.0')
-        p2 = Package(name='p2', version='2.0')
-        p3 = Package(name='p3', version='2.0')
-        t = PackageTransformer(rulestext='[ { name: [p1,p2], setname: bar } ]')
-        t.Process(p1)
-        t.Process(p2)
-        t.Process(p3)
-        self.assertEqual(p1.effname, 'bar')
-        self.assertEqual(p2.effname, 'bar')
-        self.assertEqual(p3.effname, 'p3')
+        self.check_transformer(
+            '[ { name: [p1,p2], setname: bar } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'bar'},
+            {'name': 'p3', 'version': '2.0', 'expect_effname': 'p3'}
+        )
 
     def test_match_namepat(self):
-        p1 = Package(name='p1', version='1.0')
-        p2 = Package(name='p2', version='2.0')
-        t = PackageTransformer(rulestext='[ { namepat: ".*1", setname: bar } ]')
-        t.Process(p1)
-        t.Process(p2)
-        self.assertEqual(p1.effname, 'bar')
-        self.assertEqual(p2.effname, 'p2')
+        self.check_transformer(
+            '[ { namepat: ".*1", setname: bar } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'p2'}
+        )
+
+        self.check_transformer(
+            '[ { namepat: "p.*", setname: bar } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'bar'}
+        )
+
+        self.check_transformer(
+            '[ { namepat: "p", setname: bar }, { namepat: "1", setname: bar }, { namepat: ".", setname: bar } ] ',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'p1'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'p2'}
+        )
+
+        self.check_transformer(
+            '[ { namepat: "p2", setname: bar } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'p1'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'bar'}
+        )
 
     def test_match_ver(self):
-        p1 = Package(name='p1', version='1.0')
-        p2 = Package(name='p2', version='2.0')
-        p3 = Package(name='p3', version='3.0')
-        t = PackageTransformer(rulestext='[ { ver: "1.0", setname: bar }, { ver: ["3.0"], setname: baz } ]')
-        t.Process(p1)
-        t.Process(p2)
-        t.Process(p3)
-        self.assertEqual(p1.effname, 'bar')
-        self.assertEqual(p2.effname, 'p2')
-        self.assertEqual(p3.effname, 'baz')
+        self.check_transformer(
+            '[ { ver: "1.0", setname: bar }, { ver: ["3.0"], setname: baz } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '3.0', 'expect_effname': 'baz'}
+        )
 
     def test_match_verpat(self):
-        p1 = Package(name='p1', version='1.0')
-        p2 = Package(name='p2', version='2.0')
-        t = PackageTransformer(rulestext='[ { verpat: "1.*", setname: bar } ]')
-        t.Process(p1)
-        t.Process(p2)
-        self.assertEqual(p1.effname, 'bar')
-        self.assertEqual(p2.effname, 'p2')
+        self.check_transformer(
+            '[ { verpat: "1.*", setname: bar } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'p2'}
+        )
 
     def test_match_verlonger(self):
-        p1 = Package(name='p1', version='1.0.0')
-        p2 = Package(name='p2', version='1.0')
-        t = PackageTransformer(rulestext='[ { verlonger: 2, setname: bar } ]')
-        t.Process(p1)
-        t.Process(p2)
-        self.assertEqual(p1.effname, 'bar')
-        self.assertEqual(p2.effname, 'p2')
+        self.check_transformer(
+            '[ { verlonger: 2, setname: bar } ]',
+            {'name': 'p1', 'version': '1.0.0', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'}
+        )
 
     def test_match_wwwpat(self):
-        p1 = Package(name='p1', version='1.0', homepage='http://foo.com/xxx')
-        p2 = Package(name='p2', version='1.0', homepage='http://bar.com/yyy')
-        p3 = Package(name='p3', version='2.0')
-        t = PackageTransformer(rulestext='[ { wwwpat: "foo.com", setname: bar } ]')
-        t.Process(p1)
-        t.Process(p2)
-        t.Process(p3)
-        self.assertEqual(p1.effname, 'bar')
-        self.assertEqual(p2.effname, 'p2')
-        self.assertEqual(p3.effname, 'p3')
+        self.check_transformer(
+            '[ { wwwpat: "foo.com", setname: bar } ]',
+            { 'name': 'p1', 'version': '1.0', 'homepage': 'http://foo.com/xxx', 'expect_effname': 'bar'},
+            { 'name': 'p2', 'version': '1.0', 'homepage': 'http://bar.com/yyy', 'expect_effname': 'p2'},
+            { 'name': 'p3', 'version': '2.0', 'expect_effname': 'p3'}
+        )
 
     def test_match_family(self):
-        p1 = Package(name='p1', version='1.0', family='foo')
-        p2 = Package(name='p2', version='2.0', family='bar')
-        p3 = Package(name='p3', version='3.0', family='baz')
-        t = PackageTransformer(rulestext='[ { family: foo, setname: quux }, { family: baz, setname: bat } ]')
-        t.Process(p1)
-        t.Process(p2)
-        t.Process(p3)
-        self.assertEqual(p1.effname, 'quux')
-        self.assertEqual(p2.effname, 'p2')
-        self.assertEqual(p3.effname, 'bat')
+        self.check_transformer(
+            '[ { family: foo, setname: quux }, { family: [ baz ], setname: bat } ]',
+            {'name': 'p1', 'version': '1.0', 'family': 'foo', 'expect_effname': 'quux'},
+            {'name': 'p2', 'version': '2.0', 'family': 'bar', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '3.0', 'family': 'baz', 'expect_effname': 'bat'}
+        )
 
     def test_match_category(self):
-        p1 = Package(name='p1', version='1.0', category='foo')
-        p2 = Package(name='p2', version='2.0', category='bar')
-        p3 = Package(name='p3', version='3.0', category='baz')
-        t = PackageTransformer(rulestext='[ { category: foo, setname: quux }, { category: [ baz ] , setname: bat } ]')
-        t.Process(p1)
-        t.Process(p2)
-        t.Process(p3)
-        self.assertEqual(p1.effname, 'quux')
-        self.assertEqual(p2.effname, 'p2')
-        self.assertEqual(p3.effname, 'bat')
+        self.check_transformer(
+            '[ { category: foo, setname: quux }, { category: [ baz ], setname: bat } ]',
+            {'name': 'p1', 'version': '1.0', 'category': 'foo', 'expect_effname': 'quux'},
+            {'name': 'p2', 'version': '2.0', 'category': 'bar', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '3.0', 'category': 'baz', 'expect_effname': 'bat'}
+        )
 
 
 if __name__ == '__main__':
