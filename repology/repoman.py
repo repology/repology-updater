@@ -26,7 +26,7 @@ import yaml
 
 from repology.fetcher import *
 from repology.logger import NoopLogger
-from repology.package import PackageSanityCheckFailure
+from repology.package import PackageSanityCheckFailure, PackageSanityCheckProblem
 from repology.packageproc import PackagesMerge
 from repology.parser import *
 
@@ -198,7 +198,10 @@ class RepositoryManager:
             try:
                 package.CheckSanity()
             except PackageSanityCheckFailure as err:
-                sanitylogger.Log('sanity: {}'.format(err))
+                sanitylogger.Log('sanity error: {}'.format(err))
+                raise
+            except PackageSanityCheckProblem as err:
+                sanitylogger.Log('sanity warning: {}'.format(err))
 
             package.Normalize()
 

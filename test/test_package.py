@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.package import Package, PackageMergeConflict
+from repology.package import Package, PackageMergeConflict, PackageSanityCheckFailure, PackageSanityCheckProblem
 
 
 class TestParsers(unittest.TestCase):
@@ -43,6 +43,120 @@ class TestParsers(unittest.TestCase):
         pkg = Package(name='foo')
         with self.assertRaises(PackageMergeConflict):
             pkg.Merge(Package(name='bar'))
+
+    def test_sanity_ok(self):
+        Package(repo='r', family='f', name='n', effname='e', version='0').CheckSanity()
+
+    def test_sanity_essential_fields_missing(self):
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(family='f', name='n', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', name='n', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e').CheckSanity()
+
+    def test_sanity_essential_fields_bad_type(self):
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo=['r'], family='f', name='n', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family=['f'], name='n', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name=['n'], effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname=['e'], version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version=['0']).CheckSanity()
+
+    def test_sanity_extra_fields_bad_type(self):
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', maintainers='foo').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', category=['foo']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', comment=['foo']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', homepage=['foo']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', licenses='foo').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', downloads='foo').CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', ignore=1).CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', shadow=1).CheckSanity()
+        with self.assertRaises(PackageSanityCheckFailure):
+            Package(repo='r', family='f', name='n', effname='e', version='0', ignoreversion=1).CheckSanity()
+
+    def test_sanity_essential_fields_bad_format(self):
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='', family='f', name='n', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r r', family='f', name='n', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='', name='n', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f f', name='n', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='', effname='e', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='', version='0').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e/e', version='0').CheckSanity()
+
+    def test_sanity_extra_fields_bad_format(self):
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', maintainers=['']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', maintainers=['a/a']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', maintainers=[' a ']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', maintainers=['a a']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', maintainers=['a\na']).CheckSanity()
+
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', category='').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', category=' a ').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', category='a\na').CheckSanity()
+
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', comment='').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', comment=' a ').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', comment='a\na').CheckSanity()
+
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', homepage='').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', homepage=' a ').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', homepage='a a').CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', homepage='a\na').CheckSanity()
+
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', downloads=['']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', downloads=[' a ']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', downloads=['a a']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', downloads=['a\na']).CheckSanity()
+
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', licenses=['']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', licenses=[' a ']).CheckSanity()
+        with self.assertRaises(PackageSanityCheckProblem):
+            Package(repo='r', family='f', name='n', effname='e', version='0', licenses=['a\na']).CheckSanity()
 
     def test_normalize_sort_maintainers(self):
         pkg = Package(maintainers=['c', 'b', 'a'])

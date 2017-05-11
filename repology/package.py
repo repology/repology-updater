@@ -37,7 +37,11 @@ class PackageMergeConflict(Exception):
     pass
 
 
-class PackageSanityCheckFailure(Exception):
+class PackageSanityCheckProblem(Exception):
+    pass
+
+
+class PackageSanityCheckFailure(PackageSanityCheckProblem):
     pass
 
 
@@ -118,50 +122,73 @@ class Package:
                 raise PackageMergeConflict('{}: {} != {}'.format(self.name, self_val, other_val))
 
     def CheckSanity(self):
-        def CheckStr(value, name, no_newlines=False, no_whitespace=False, non_empty=False, stripped=False, alphanumeric=False, lowercase=False):
+        # checks
+        def NoNewlines(value):
+            return 'contains newlines' if '\n' in value else ''
+
+        def NoSlashes(value):
+            return 'contains slashes' if '/' in value else ''
+
+        def Stripped(value):
+            return 'is not stripped' if value != value.strip() else ''
+
+        def Alphanumeric(value):
+            return 'contains not allowed symbols' if not re.fullmatch('[a-zA-Z0-9_-]+', value) else ''
+
+        def Lowercase(value):
+            return 'is not lowercase' if value != value.lower() else ''
+
+        def NoWhitespace(value):
+            return 'contains whitespace' if re.search('[ \t\n\r]', value) else ''
+
+        def NonEmpty(value):
+            return 'is empty' if value == '' else ''
+
+        # checkers
+        def CheckBool(value, name):
+            if not isinstance(value, bool):
+                raise PackageSanityCheckFailure('{}: {} is not a boolean'.format(self.name, name))
+
+        def CheckStr(value, name, *checks):
             if not isinstance(value, str):
                 raise PackageSanityCheckFailure('{}: {} is not a string'.format(self.name, name))
-            if no_newlines and '\n' in value:
-                raise PackageSanityCheckFailure('{}: {} contains newlines: "{}"'.format(self.name, name, value))
-            if stripped and value != value.strip():
-                raise PackageSanityCheckFailure('{}: {} not stripped: "{}"'.format(self.name, name, value))
-            if alphanumeric and not re.fullmatch('[a-zA-Z0-9_-]+', value):
-                raise PackageSanityCheckFailure('{}: {} contains not allowed symbols: "{}"'.format(self.name, name, value))
-            if lowercase and value != value.lower():
-                raise PackageSanityCheckFailure('{}: {} not lowercase: "{}"'.format(self.name, name, value))
-            if no_whitespace and (' ' in value or '\t' in value or '\n' in value or '\r' in value):
-                raise PackageSanityCheckFailure('{}: {} contains whitespace: "{}"'.format(self.name, name, value))
-            if non_empty and value == '':
-                raise PackageSanityCheckFailure('{}: {} is empty'.format(self.name, name))
+            for check in checks:
+                result = check(value)
+                if result:
+                    raise PackageSanityCheckProblem('{}: {} {}: "{}"'.format(self.name, name, result, value))
 
-        def CheckList(value, name, no_newlines=False, no_whitespace=False, non_empty=False, stripped=False, alphanumeric=False, lowercase=False):
+        def CheckList(value, name, *checks):
             if not isinstance(value, list):
                 raise PackageSanityCheckFailure('{}: {} is not a list'.format(self.name, name))
-            for subvalue in value:
-                CheckStr(subvalue, name, no_newlines=no_newlines, no_whitespace=no_whitespace, non_empty=non_empty, stripped=stripped, alphanumeric=alphanumeric, lowercase=lowercase)
+            for element in value:
+                CheckStr(element, name, *checks)
 
-        CheckStr(self.repo, 'repo', no_newlines=True, stripped=True, alphanumeric=True, lowercase=True)
-        CheckStr(self.family, 'family', no_newlines=True, stripped=True, alphanumeric=True, lowercase=True)
+        CheckStr(self.repo, 'repo', NoNewlines, Stripped, Alphanumeric, Lowercase)
+        CheckStr(self.family, 'family', NoNewlines, Stripped, Alphanumeric, Lowercase)
         if self.subrepo is not None:
-            CheckStr(self.subrepo, 'subrepo', no_newlines=True, stripped=True, alphanumeric=True, lowercase=True)
+            CheckStr(self.subrepo, 'subrepo', NoNewlines, Stripped)
 
-        CheckStr(self.name, 'name', no_newlines=True, stripped=True)
-        if self.effname is not None:
-            CheckStr(self.effname, 'effname', no_newlines=True, stripped=True)
+        CheckStr(self.name, 'name', NoNewlines, Stripped, NonEmpty)
+        CheckStr(self.effname, 'effname', NoNewlines, Stripped, NonEmpty, NoSlashes)
 
-        CheckStr(self.version, 'version', no_newlines=True, stripped=True)
+        CheckStr(self.version, 'version', NoNewlines, Stripped, NonEmpty)
         if self.origversion is not None:
-            CheckStr(self.origversion, 'origversion', no_newlines=True, stripped=True)
+            CheckStr(self.origversion, 'origversion', NoNewlines, Stripped)
 
-        CheckList(self.maintainers, 'maintainers', no_newlines=True, stripped=True)
+        CheckList(self.maintainers, 'maintainers', NoNewlines, Stripped, NoWhitespace, NoSlashes, NonEmpty)
         if self.category is not None:
-            CheckStr(self.category, 'category', no_newlines=True, stripped=True)
+            CheckStr(self.category, 'category', NoNewlines, Stripped, NonEmpty)
         if self.comment is not None:
-            CheckStr(self.comment, 'comment', no_newlines=True, stripped=True)
+            CheckStr(self.comment, 'comment', NoNewlines, Stripped, NonEmpty)
         if self.homepage is not None:
-            CheckStr(self.homepage, 'homepage', no_whitespace=True)
-        CheckList(self.licenses, 'licenses', no_newlines=True, stripped=True)
-        CheckList(self.downloads, 'downloads', no_whitespace=True)
+            CheckStr(self.homepage, 'homepage', NoWhitespace, NonEmpty)
+        CheckList(self.licenses, 'licenses', NoNewlines, Stripped, NonEmpty)
+        CheckList(self.downloads, 'downloads', NoWhitespace, NoNewlines, NonEmpty)
+
+        CheckBool(self.ignore, 'ignore')
+        CheckBool(self.shadow, 'shadow')
+        CheckBool(self.ignoreversion, 'ignoreversion')
+
 
     def Normalize(self):
         # normalize homepage (currently adds / to url which points to host)
