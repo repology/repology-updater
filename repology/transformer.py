@@ -59,9 +59,13 @@ class PackageTransformer:
                     rule[field] = [rule[field]]
 
             # compile regexps
-            for field in ['namepat', 'verpat', 'wwwpat']:
+            for field in ['namepat', 'verpat']:
                 if field in rule:
                     rule[field] = re.compile(rule[field] + '$', re.ASCII)
+
+            for field in ['wwwpat']:
+                if field in rule:
+                    rule[field] = re.compile(rule[field], re.ASCII)
 
             rule['matches'] = 0
             rule['number'] = rulenum

@@ -135,8 +135,8 @@ class TestPackageTransformer(unittest.TestCase):
         self.assertEqual(p2.effname, 'p2')
 
     def test_match_wwwpat(self):
-        p1 = Package(name='p1', version='1.0', homepage='http://foo.com')
-        p2 = Package(name='p2', version='1.0', homepage='http://bar.com')
+        p1 = Package(name='p1', version='1.0', homepage='http://foo.com/xxx')
+        p2 = Package(name='p2', version='1.0', homepage='http://bar.com/yyy')
         p3 = Package(name='p3', version='2.0')
         t = PackageTransformer(rulestext='[ { wwwpat: "foo.com", setname: bar } ]')
         t.Process(p1)
