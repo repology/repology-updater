@@ -340,6 +340,7 @@
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
 - { name: libscalapack,                setname: scalapack                 }
+- { name: libsdl-gfx13,                setname: sdl-gfx }
 - { name: libsfml,                     setname: sfml                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libuv1,                      setname: libuv                     }
@@ -436,11 +437,11 @@
 - { namepat: "enscript-.*",            setname: enscript,                 family: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         family: [ pkgsrc, openbsd ] }
-- { namepat: "lib(sdl.*)",             setname: "$1",                     family: [ debuntu, gentoo, crux, macports ]  }
 - { namepat: "open[gs]fx",             setname: "openttd-$0"              }
-- { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1",                 family: [ debuntu ]  }
-- { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1",                family: [ debuntu ]  }
-- { namepat: "lib(sdl2?)-(image|mixer|net|sound|ttf|gfx)", setname: "$2-$2", family: [ macports ]  }
+- { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1"                  }
+- { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1"                 }
+- { namepat: "lib(sdl2?-image|mixer|net|sound|ttf|gfx)", setname: "$1"    }
+- { namepat: "libsdl-(image|mixer|net|sound|ttf|gfx)2", setname: "sdl2-$1" }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
