@@ -190,7 +190,6 @@ class Package:
         CheckBool(self.shadow, 'shadow')
         CheckBool(self.ignoreversion, 'ignoreversion')
 
-
     def Normalize(self):
         # normalize homepage (currently adds / to url which points to host)
         if self.homepage:
