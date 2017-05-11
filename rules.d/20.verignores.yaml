@@ -48,7 +48,7 @@
 - { name: geary,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: hyperrogue,                  ver: "83j",                                         ignorever: true } # it's 8.3j!
-- { name: i7z,                         ver: "93.*",                  family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
+- { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
 - { name: icon,                        verpat: "[0-9]{3}",                                 ignorever: true } # XXX: transform + problem
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
