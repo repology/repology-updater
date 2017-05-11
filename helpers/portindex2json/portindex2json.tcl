@@ -13,6 +13,7 @@
 package require json::write
 
 set fd [open [lindex $argv 0] r]
+chan configure $fd -encoding utf-8
 while {[gets $fd line] >= 0} {
     if {[llength $line] != 2} {
         continue
@@ -27,5 +28,7 @@ while {[gets $fd line] >= 0} {
     }
     lappend objects [::json::write object {*}[array get json_portinfo]]
 }
-puts [::json::write array {*}$objects]
 close $fd
+
+chan configure stdout -encoding utf-8
+puts [::json::write array {*}$objects]
