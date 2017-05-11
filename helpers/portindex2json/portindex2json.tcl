@@ -1,8 +1,8 @@
-# Script for converting the metadata in the PortIndex to 
+# Script for converting the metadata in the PortIndex to
 # a list of JSON objects.
 # Written by Joshua Root <jmr@macports.org>, 2017
 # Requires: tclsh with the tcllib 'json' package.
-# Usage: tclsh portindex2json.tcl < path/to/PortIndex
+# Usage: tclsh portindex2json.tcl path/to/PortIndex
 
 # To the extent possible under law, the author(s) have dedicated all
 # copyright and related and neighboring rights to this software to the
