@@ -12,7 +12,7 @@
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
-  tags: [ all, production ]
+  tags: [ all, production, epel ]
 
 - name: epel_7
   desc: EPEL 7
@@ -25,4 +25,4 @@
   repolinks:
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
-  tags: [ all, production ]
+  tags: [ all, production, epel ]
