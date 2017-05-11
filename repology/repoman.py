@@ -196,7 +196,7 @@ class RepositoryManager:
                 transformer.Process(package)
 
             try:
-                package.CheckSanity()
+                package.CheckSanity(transformed=transformer is not None)
             except PackageSanityCheckFailure as err:
                 sanitylogger.Log('sanity error: {}'.format(err))
                 raise

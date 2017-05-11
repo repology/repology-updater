@@ -121,7 +121,7 @@ class Package:
             elif self_val != other_val:
                 raise PackageMergeConflict('{}: {} != {}'.format(self.name, self_val, other_val))
 
-    def CheckSanity(self):
+    def CheckSanity(self, transformed=True):
         # checks
         def NoNewlines(value):
             return 'contains newlines' if '\n' in value else ''
@@ -169,7 +169,8 @@ class Package:
             CheckStr(self.subrepo, 'subrepo', NoNewlines, Stripped)
 
         CheckStr(self.name, 'name', NoNewlines, Stripped, NonEmpty)
-        CheckStr(self.effname, 'effname', NoNewlines, Stripped, NonEmpty, NoSlashes)
+        if transformed or self.effname is not None:
+            CheckStr(self.effname, 'effname', NoNewlines, Stripped, NonEmpty, NoSlashes)
 
         CheckStr(self.version, 'version', NoNewlines, Stripped, NonEmpty)
         if self.origversion is not None:
