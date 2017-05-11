@@ -125,7 +125,7 @@ class Package:
                 raise PackageSanityCheckFailure('{}: {} contains newlines: "{}"'.format(self.name, name, value))
             if stripped and value != value.strip():
                 raise PackageSanityCheckFailure('{}: {} not stripped: "{}"'.format(self.name, name, value))
-            if alphanumeric and re.match('[^a-zA-Z0-9_-]', value):
+            if alphanumeric and not re.fullmatch('[a-zA-Z0-9_-]+', value):
                 raise PackageSanityCheckFailure('{}: {} contains not allowed symbols: "{}"'.format(self.name, name, value))
             if lowercase and value != value.lower():
                 raise PackageSanityCheckFailure('{}: {} not lowercase: "{}"'.format(self.name, name, value))
@@ -166,7 +166,7 @@ class Package:
     def Normalize(self):
         # normalize homepage (currently adds / to url which points to host)
         if self.homepage:
-            match = re.match('(https?://)([^/]+)(/.*)?$', self.homepage, re.IGNORECASE)
+            match = re.fullmatch('(https?://)([^/]+)(/.*)?', self.homepage, re.IGNORECASE)
 
             if match:
                 schema = match.group(1).lower()
