@@ -340,7 +340,7 @@
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
 - { name: libscalapack,                setname: scalapack                 }
-- { name: libsdl-gfx13,                setname: sdl-gfx }
+- { name: libsdl_gfx13,                setname: sdl-gfx }
 - { name: libsfml,                     setname: sfml                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libuv1,                      setname: libuv                     }
@@ -438,10 +438,10 @@
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         family: [ pkgsrc, openbsd ] }
 - { namepat: "open[gs]fx",             setname: "openttd-$0"              }
-- { namepat: "sdl-([a-z]+)1\\.2",      setname: "sdl-$1"                  }
-- { namepat: "sdl-([a-z]+)2\\.0",      setname: "sdl2-$1"                 }
-- { namepat: "lib(sdl2?-image|mixer|net|sound|ttf|gfx)", setname: "$1"    }
-- { namepat: "libsdl-(image|mixer|net|sound|ttf|gfx)2", setname: "sdl2-$1" }
+- { namepat: "sdl[_-]([a-z]+)1\\.2",      setname: "sdl-$1"                  }
+- { namepat: "sdl[_-]([a-z]+)2\\.0",      setname: "sdl2-$1"                 }
+- { namepat: "lib(sdl2?[_-]image|mixer|net|sound|ttf|gfx)", setname: "$1"    }
+- { namepat: "libsdl[_-](image|mixer|net|sound|ttf|gfx)2", setname: "sdl2-$1" }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
 - { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
