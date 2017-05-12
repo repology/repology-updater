@@ -91,7 +91,7 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
             FillPackagesetVersions(packageset)
             package_queue.extend(packageset)
 
-            if len(package_queue) >= 1000:
+            if len(package_queue) >= 10000:
                 database.AddPackages(package_queue)
                 num_pushed += len(package_queue)
                 package_queue = []
