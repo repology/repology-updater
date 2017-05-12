@@ -369,6 +369,7 @@
 - { name: [openblas-lapack,openblas-lapack-ilp64], setname: openblas      }
 - { name: opencv2,                     setname: opencv                    }
 - { name: [openjp2, libopenjpeg2.0],   setname: openjpeg2                 }
+- { name: openshot-qt,                 setname: openshot }
 - { name: [openvpn-mbedtls, openvpn-polarssl, openvpn2, openvpn23], setname: openvpn }
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph,           family: [ freebsd ] }
 - { name: pacman-arena,                setname: pacmanarena,              family: [ openbsd ] }
