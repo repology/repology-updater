@@ -155,12 +155,9 @@
 
 - { name: [ geos1, geos35 ],           setname: geos }
 
-- { name: [gimp-app,gimp-devel,gimp-docs,gimp-with-plugins,gimp2,gimp2-devel], setname: gimp }
+- { name: [gimp-app,gimp-devel,gimp-with-plugins,gimp2,gimp2-devel], setname: gimp }
 - { name: [gimp3-devel, gimp-git],     setname: gimp, ignorever: true }
 - { name: gimp, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", setname: gimp-devel }
-
-- { namepat: ".*gimp-help.*",          setname: gimp-help }
-- { name: gimp-help, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", setname: gimp-devel-help }
 
 - { namepat: "gmime[0-9]+",            setname: gmime }
 - { name: gmime, verpat: "2\\.2\\..*", setname: gmime22 }

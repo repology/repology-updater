@@ -12,9 +12,9 @@
 - { namepat: "fpc-.*",                 setname: "fpc-modules", family: [ freebsd ] }
 - { namepat: "gambas3-gb-.*",          setname: "gambas3-gb-modules", family: [ arch ] }
 - { namepat: "geany-plugin-.*",        setname: "geany-plugins", family: [ freebsd ] }
-- { namepat: "gimp-docs-.*",           setname: "gimp-docs", family: [ pkgsrc ] }
-- { namepat: "gimp-help-.*",           setname: "gimp-help", family: [ arch ] }
-- { namepat: "kde-(i18n|l10n)-.*",      setname: "kde-i18n" }
+- { namepat: "gimp-docs-.*",           setname: "gimp-docs" }
+- { namepat: ".*gimp-help.*",          setname: "gimp-help" }
+- { namepat: "kde-(i18n|l10n)-.*",     setname: "kde-i18n" }
 - { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", family: [ pkgsrc ] }
 - { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", family: [ freebsd ] }
 - { namepat: "koffice-l10n-.*",        setname: "koffice-l10n", family: [ pkgsrc ] }
