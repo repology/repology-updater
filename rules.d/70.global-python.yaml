@@ -117,6 +117,7 @@
 
 # These are more applications than modules, so rename
 - { name: "python:bzrtools",           setname: bzrtools                  }
+- { name: "python:gixy",               setname: gixy                      }
 - { name: "python:meson",              setname: meson                     }
 - { name: "python:pgcli",              setname: pgcli                     }
 - { name: "python:pypanel",            setname: pypanel                   }
