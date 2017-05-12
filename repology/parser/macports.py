@@ -58,6 +58,10 @@ class MacPortsParser():
                 pkg.name = pkgdata['name']
                 pkg.version = pkgdata['version']
 
+                # drop obsolete ports (see #235)
+                if 'replaced_by' in pkgdata:
+                    continue
+
                 if 'description' in pkgdata:
                     pkg.comment = pkgdata['description']
 
