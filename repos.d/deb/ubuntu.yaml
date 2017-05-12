@@ -126,7 +126,7 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu__artful
+- name: ubuntu_artful
   desc: Ubuntu Artful
   family: debuntu
   valid_till: 2018-08-01
