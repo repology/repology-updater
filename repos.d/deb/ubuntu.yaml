@@ -1,8 +1,8 @@
 ###########################################################################
 # Ubuntu
 ###########################################################################
-- name: ubuntu_precise
-  desc: Ubuntu Precise
+- name: ubuntu_12_04
+  desc: Ubuntu 12.04
   family: debuntu
   valid_till: 2017-04-26
   sources:
@@ -26,8 +26,8 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu_trusty
-  desc: Ubuntu Trusty
+- name: ubuntu_14_04
+  desc: Ubuntu 14.04
   family: debuntu
   valid_till: 2019-05-01
   sources:
@@ -51,8 +51,8 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu_xenial
-  desc: Ubuntu Xenial
+- name: ubuntu_16_04
+  desc: Ubuntu 16.04
   family: debuntu
   valid_till: 2021-05-01
   sources:
@@ -76,8 +76,8 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu_yakkety
-  desc: Ubuntu Yakkety
+- name: ubuntu_16_10
+  desc: Ubuntu 16.10
   family: debuntu
   valid_till: 2017-08-01
   sources:
@@ -101,8 +101,8 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu_zesty
-  desc: Ubuntu Zesty
+- name: ubuntu_17_04
+  desc: Ubuntu 17.04
   family: debuntu
   valid_till: 2018-02-01
   sources:
@@ -126,8 +126,8 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu_artful
-  desc: Ubuntu Artful
+- name: ubuntu_17_10
+  desc: Ubuntu 17.10
   family: debuntu
   valid_till: 2018-08-01
   sources:
