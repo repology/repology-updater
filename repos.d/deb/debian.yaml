@@ -5,10 +5,10 @@
   desc: Debian Stable
   family: debuntu
   sources:
-    - name: [ main, contrib, non-free ]
+    - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.debian.org/debian/dists/stable/{source}/source/Sources.gz'
+      url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -61,10 +61,10 @@
   desc: Debian Testing
   family: debuntu
   sources:
-    - name: [ main, contrib, non-free ]
+    - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.debian.org/debian/dists/testing/{source}/source/Sources.gz'
+      url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:

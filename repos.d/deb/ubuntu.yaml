@@ -6,10 +6,10 @@
   family: debuntu
   valid_till: 2017-04-26
   sources:
-    - name: [ main, multiverse, restricted, universe ]
+    - name: [ precise/main, precise/multiverse, precise/restricted, precise/universe, precise-updates/main, precise-updates/multiverse, precise-updates/restricted, precise-updates/universe ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/precise/{source}/source/Sources.gz'
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -31,10 +31,10 @@
   family: debuntu
   valid_till: 2019-05-01
   sources:
-    - name: [ main, multiverse, restricted, universe ]
+    - name: [ trusty/main, trusty/multiverse, trusty/restricted, trusty/universe, trusty-updates/main, trusty-updates/multiverse, trusty-updates/restricted, trusty-updates/universe ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/trusty/{source}/source/Sources.gz'
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -56,10 +56,10 @@
   family: debuntu
   valid_till: 2021-05-01
   sources:
-    - name: [ main, multiverse, restricted, universe ]
+    - name: [ xenial/main, xenial/multiverse, xenial/restricted, xenial/universe, xenial-updates/main, xenial-updates/multiverse, xenial-updates/restricted, xenial-updates/universe ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/xenial/{source}/source/Sources.gz'
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -81,10 +81,10 @@
   family: debuntu
   valid_till: 2017-08-01
   sources:
-    - name: [ main, multiverse, restricted, universe ]
+    - name: [ yakkety/main, yakkety/multiverse, yakkety/restricted, yakkety/universe, yakkety-updates/main, yakkety-updates/multiverse, yakkety-updates/restricted, yakkety-updates/universe ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/yakkety/{source}/source/Sources.gz'
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -106,10 +106,10 @@
   family: debuntu
   valid_till: 2018-02-01
   sources:
-    - name: [ main, multiverse, restricted, universe ]
+    - name: [ zesty/main, zesty/multiverse, zesty/restricted, zesty/universe, zesty-updates/main, zesty-updates/multiverse, zesty-updates/restricted, zesty-updates/universe ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/zesty/{source}/source/Sources.gz'
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -131,10 +131,10 @@
   family: debuntu
   valid_till: 2018-08-01
   sources:
-    - name: [ main, multiverse, restricted, universe ]
+    - name: [ artful/main, artful/multiverse, artful/restricted, artful/universe, artful-updates/main, artful-updates/multiverse, artful-updates/restricted, artful-updates/universe ]
       fetcher: File
       parser: DebianSources
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/artful/{source}/source/Sources.gz'
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
