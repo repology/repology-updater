@@ -25,6 +25,7 @@
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
+- { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
