@@ -261,6 +261,9 @@
 
 - { namepat: "perl5[0-9.]*",           setname: perl }
 
+- { name: [postfix-current,postfix-current-sasl,postfix211,postfix211-sasl], setname: postfix }
+- { name: postfix, verpat: ".*20[0-9]{6}.*",  setname: postfix-experimental }
+
 - { name: [python,python2,python3], family: freebsd, ignore: true } # ignore metaports
 - { namepat: "python[23][0-9.]*",      setname: python }
 - { name: python, verpat: "2\\..*",    setname: python2 }
