@@ -424,6 +424,7 @@
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
 - { name: vsftpd-ssl,                  setname: vsftpd,                   family: [ freebsd ]  }
 - { name: [webp,libwebp6],             setname: libwebp                   }
+- { name: wine,                        setname: wine-etersoft,            family: sisyphus } # counterfeit
 - { name: wings,                       setname: wings3d                   }
 - { name: wmaker,                      setname: windowmaker               }
 - { name: wop,                         setname: wormsofprey               }

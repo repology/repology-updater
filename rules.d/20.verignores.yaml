@@ -18,6 +18,7 @@
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
+- { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
 - { name: cblas,                       verpat: "201[0-9]+",                                ignorever: true }
 - { name: cegui,                       verpat: "6\\..*",                                   ignorever: true } # it's 0.6.2!
@@ -53,6 +54,7 @@
 - { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
 - { name: icon,                        verpat: "[0-9]{3}",                                 ignorever: true } # XXX: transform + problem
+- { name: icu-le-hb,                   ver: "1.0.3.3",                                     ignorever: true } # fake (FreeBSD)
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
 - { name: jwm,                         verpat: "[0-9]+",                                   ignorever: true }
 - { name: kbuild,                      verlonger: 3,                                       ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
