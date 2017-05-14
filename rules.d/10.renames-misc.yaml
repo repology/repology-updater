@@ -415,6 +415,7 @@
 - { name: supertux2,                   setname: supertux,                 family: [ freebsd ] }
 - { name: sweet-home-3d,               setname: sweethome3d               }
 - { name: tetrinet-x,                  setname: tetrinetx,                family: [ freebsd ] }
+- { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
 - { name: tintin,                      setname: tintin++,                 family: [ gentoo ]  }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }

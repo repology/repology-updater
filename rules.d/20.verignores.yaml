@@ -88,6 +88,8 @@
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
+- { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # obsoleted
+- { name: tidy,                        ver: "090315.c",                                    ignorever: true } # obsoleted
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignorever: true } # 2.15.0 was not released yet
 - { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
