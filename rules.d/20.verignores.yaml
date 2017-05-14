@@ -62,6 +62,7 @@
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: libmpcdec,                   verpat: "[0-9]+",                                   ignorever: true }
 - { name: libssh,                      ver: ["0.73", "0.11"],                              ignorever: true } # pkgsrc, gobo
+- { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
