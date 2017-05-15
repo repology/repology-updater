@@ -8,7 +8,7 @@
     - name: slackbuilds
       fetcher: Git
       parser: SlackBuilds
-      url: git://slackbuilds.org/slackbuilds
+      url: git://git.slackbuilds.org/slackbuilds/
   repolinks:
     - desc: SlackBuilds.org
       url: https://slackbuilds.org/
