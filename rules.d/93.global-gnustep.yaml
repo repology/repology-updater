@@ -4,12 +4,30 @@
 - { family: gentoo, category: gnustep-apps, setname: "gnustep-$0" }
 - { family: openbsd, category: x11/gnustep, setname: "gnustep-$0" }
 
+# ~unsafe to globally convert to gnustep (too generic names), limit to families
 - { name: aclock, family: freebsd, setname: "gnustep-$0" }
+- { name: camera, family: [freebsd,openbsd], setname: "gnustep-$0" }
+- { name: gomoku, family: [freebsd,openbsd,macports], setname: "gnustep-$0" }
 
+# ~safe to globally convert to gnustep
 - name:
+    - affiche
+    - batmon
+    - cynthiune
+    - gorm
+    - gworkspace
+    - mknfonts
     - price
     - projectcenter
+    - simpleagenda
+    - steptalk
+    - talksoup
+    - timemon
   setname: "gnustep-$0"
+
+# extra rules
+- { name: mknfonts.tool,  setname: gnustep-mknfonts }
+- { name: gnustep-agenda,  setname: gnustep-simpleagenda }
 
   #- { name: aclock.app,                  setname: aclock,                   family: [ debuntu ]  }
   #- { name: addresses-for-gnustep,       setname: addresses,                family: [ debuntu ]  }
