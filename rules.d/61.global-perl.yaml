@@ -16,14 +16,22 @@
 # specific perl ignores
 - { name: "perl:anyevent",             ver: [ "7.070", "7.120", "7.130" ], ignorever: true }
 - { name: "perl:app-tlsme",            ver: "0.110000",        ignorever: true }
-- { name: "perl:array-diff",           ver: "0.07000",         ignorever: true }
+- { name: "perl:array-diff",           ver: ["0.05002", "0.07000"], ignorever: true }
 - { name: "perl:authen-sasl",          ver: [ "2.150", "2.160", "2.1500", "2.1600" ], ignorever: true }
 - { name: "perl:bio-asn1-entrezgene",  verpat: "1\\.[0-9]{3}", ignorever: true }
-- { name: "perl:catmandu-store-mongodb", ver: "0.0501",        ignorever: true }
+- { name: "perl:catmandu-store-mongodb", ver: ["0.0501","0.0403"], ignorever: true }
 - { name: "perl:cbor-xs",              ver: [ "1.60", "1.50", "1.30" ], ignorever: true }
-- { name: "perl:cgi-formbuilder",      ver: [ "3.1000", "3.0900", "3.90.0", "3.90.0", "3.0501" ], ignorever: true }
+- { name: "perl:cgi-formbuilder",      ver: [ "3.1000", "3.0900", "3.90.0", "3.90.0", "3.0501", "3.0800", "3.100.0" ], ignorever: true }
 - { name: "perl:chi",                  ver: "0.580",           ignorever: true }
+- { name: "perl:compress-lzf",         ver: "3.43",            ignorever: true }
 - { name: "perl:compress-lzf",         verpat: "3.[789]0",     ignorever: true }
+- { name: "perl:convert-ber",          ver: ["1.3200","1.3101"], ignorever: true }
+- { name: "perl:convert-uulib",        ver: "1.50",            ignorever: true }
+- { name: "perl:cpan",                 ver: "2.1600",          ignorever: true }
+- { name: "perl:cpan-meta-requirements", verpat: "2\\.[0-9]{6}.*", ignorever: true }
+- { name: "perl:curses-ui-poe",        ver: ["0.04000","0.40.0","0.035","0.35.0"], ignorever: true }
+- { name: "perl:dancer-session-memcached", ver: ["0.2020"], ignorever: true }
+- { name: "perl:data-compare",         ver: ["1.2200","1.2102","1.2101","1.250.0","1.240.0"], ignorever: true }
 - { name: "perl:math-polygon-tree",    ver: "0.0691",          ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
 - { name: "perl:readonly",             ver: "2.050",           ignorever: true }
 - { name: "perl:test-exception",       ver: [ "0.430000", "0.400", "0.320" ], ignorever: true }
