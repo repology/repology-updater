@@ -4,10 +4,12 @@
 - { family: gentoo, category: gnustep-apps, setname: "gnustep-$0" }
 - { family: openbsd, category: x11/gnustep, setname: "gnustep-$0" }
 
+- { name: aclock, family: freebsd, setname: "gnustep-$0" }
+
 - name:
-    - aclock
-  setname: "gnustep:$0"
-  family: [ freebsd ]
+    - price
+    - projectcenter
+  setname: "gnustep-$0"
 
   #- { name: aclock.app,                  setname: aclock,                   family: [ debuntu ]  }
   #- { name: addresses-for-gnustep,       setname: addresses,                family: [ debuntu ]  }
