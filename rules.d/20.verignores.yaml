@@ -79,6 +79,7 @@
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
 - { name: p5-net-whois-ripe,           ver: "2.005005",                                    ignorever: true } # < 2.006
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
+- { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
 - { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: quilt,                       ver: "0.65.0.3.1cde1",                              ignorever: true } # sisyphus garbage
