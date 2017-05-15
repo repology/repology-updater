@@ -58,4 +58,4 @@ class FileFetcher():
             logger.GetIndented().Log('saving')
             statefile.write(data)
 
-        os.rename(tmppath, statepath)
+        os.replace(tmppath, statepath)

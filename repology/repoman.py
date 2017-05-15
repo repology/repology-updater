@@ -226,7 +226,7 @@ class RepositoryManager:
             pickler.dump(len(packages))
             for package in packages:
                 pickler.dump(package)
-        os.rename(tmppath, path)
+        os.replace(tmppath, path)
         logger.Log('saving complete, {} packages'.format(len(packages)))
 
     def __Deserialize(self, path, repository, logger):

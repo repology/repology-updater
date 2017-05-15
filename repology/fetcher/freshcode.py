@@ -64,6 +64,6 @@ class FreshcodeFetcher():
         with open(temppath, 'w', encoding='utf-8') as newstatefile:
             json.dump(state, newstatefile)
 
-        os.rename(temppath, statepath)
+        os.replace(temppath, statepath)
 
         logger.Log('saved new state, {} entries'.format(len(state)))

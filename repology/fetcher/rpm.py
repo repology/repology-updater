@@ -57,4 +57,4 @@ class RepodataFetcher():
         with open(tmppath, 'wb') as statefile:
             statefile.write(data)
 
-        os.rename(tmppath, statepath)
+        os.replace(tmppath, statepath)
