@@ -5,12 +5,13 @@
 - { family: openbsd, category: x11/gnustep, setname: "gnustep-$0" }
 
 # ~unsafe to globally convert to gnustep (too generic names), limit to families
-- { name: addresses, family: [freebsd,openbsd,pkgsrc], setname: "gnustep-$0" }
 - { name: aclock, family: freebsd, setname: "gnustep-$0" }
+- { name: addresses, family: [freebsd,openbsd,pkgsrc], setname: "gnustep-$0" }
 - { name: camera, family: [freebsd,openbsd], setname: "gnustep-$0" }
+- { name: ftp, family: openbsd, setname: "gnustep-$0" }
 - { name: gomoku, family: [freebsd,openbsd,macports], setname: "gnustep-$0" }
-- { name: zipper, family: freebsd, setname: "gnustep-$0" }
 - { name: preferences, family: freebsd, setname: "gnustep-$0" }
+- { name: zipper, family: freebsd, setname: "gnustep-$0" }
 
 # ~safe to globally convert to gnustep
 - name:
