@@ -1,0 +1,7 @@
+- { name: [gimp-liquid-rescale,gimp-lqr,gimp-plugin-lqr,lqr-plugin], setname: "gimp:lqr-plugin" }
+
+- { name: gimplensfun, setname: "gimp:lensfun" }
+
+- { namepat: "gimp-plugin-(.*)", setname: "gimp:$1" }
+- { namepat: "gimp-script-(.*)", setname: "gimp:$1" }
+- { namepat: "gimp-(.*)-plugin", setname: "gimp:$1" }
