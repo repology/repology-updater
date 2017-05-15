@@ -11,7 +11,7 @@
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
   # Gentoo and Mageia shamelessly mangle perl module versions, ignore
-- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa ], ignorever: true }
+- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports ], ignorever: true }
 
 # specific perl ignores
 - { name: "perl:anyevent",             ver: [ "7.070", "7.120", "7.130" ], ignorever: true }
