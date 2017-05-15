@@ -5,3 +5,4 @@
 - { namepat: "trytond28_(.*)",         setname: "tryton:$1", family: [ freebsd ] }
 - { namepat: "tryton-modules-(.*)",    setname: "tryton:$1", family: [ debuntu ] }
 - { namepat: "trytond-module-(.*)",    setname: "tryton:$1", family: [ openbsd ] }
+- { namepat: "trytond-(.*)",           setname: "tryton:$1", family: [ fedora ] }
