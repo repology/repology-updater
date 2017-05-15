@@ -1,4 +1,4 @@
-- { name: [gimp-liquid-rescale,gimp-lqr,gimp-plugin-lqr,lqr-plugin], setname: "gimp:lqr-plugin" }
+- { name: [gimp-liquid-rescale,gimp-lqr,gimp-plugin-lqr,lqr-plugin,gimp-lqr-plugin], setname: "gimp:lqr-plugin" }
 
 - { name: gimplensfun, setname: "gimp:lensfun" }
 
