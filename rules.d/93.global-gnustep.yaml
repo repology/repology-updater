@@ -5,15 +5,20 @@
 - { family: openbsd, category: x11/gnustep, setname: "gnustep-$0" }
 
 # ~unsafe to globally convert to gnustep (too generic names), limit to families
+- { name: addresses, family: [freebsd,openbsd,pkgsrc], setname: "gnustep-$0" }
 - { name: aclock, family: freebsd, setname: "gnustep-$0" }
 - { name: camera, family: [freebsd,openbsd], setname: "gnustep-$0" }
 - { name: gomoku, family: [freebsd,openbsd,macports], setname: "gnustep-$0" }
+- { name: zipper, family: freebsd, setname: "gnustep-$0" }
+- { name: preferences, family: freebsd, setname: "gnustep-$0" }
 
 # ~safe to globally convert to gnustep
 - name:
     - affiche
     - batmon
+    - biococoa
     - cynthiune
+    - gnumail
     - gorm
     - gworkspace
     - mknfonts
@@ -21,13 +26,17 @@
     - projectcenter
     - simpleagenda
     - steptalk
+    - system-preferences
+    - systempreferences
     - talksoup
     - timemon
   setname: "gnustep-$0"
 
 # extra rules
-- { name: mknfonts.tool,  setname: gnustep-mknfonts }
-- { name: gnustep-agenda,  setname: gnustep-simpleagenda }
+- { name: mknfonts.tool, setname: gnustep-mknfonts }
+- { name: gnustep-agenda, setname: gnustep-simpleagenda }
+- { name: gnustep-sogo3, setname: sogo3 }
+- { name: addresses-for-gnustep, setname: gnustep-addresses }
 
   #- { name: aclock.app,                  setname: aclock,                   family: [ debuntu ]  }
   #- { name: addresses-for-gnustep,       setname: addresses,                family: [ debuntu ]  }
