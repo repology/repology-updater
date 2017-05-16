@@ -57,6 +57,11 @@ class TestSplitMaintainers(unittest.TestCase):
         self.assertEqual(GetMaintainers('amdmi3-at-freebsd-dot-org'), ['amdmi3@freebsd.org'])
         self.assertEqual(GetMaintainers('amdmi3<at>freebsd.org'), ['amdmi3@freebsd.org'])
         self.assertEqual(GetMaintainers('amdmi3 <at> freebsd.org'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 [underscore] ports [at] freebsd.org'), ['amdmi3_ports@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 plus ports@freebsd.org'), ['amdmi3+ports@freebsd.org'])
+        self.assertEqual(GetMaintainers('agent smith (amdmi3@freebsd.org)'), ['amdmi3@freebsd.org'])
+
+        self.assertEqual(GetMaintainers('amdNOmi3@freeSPAMbsd.org (remove NO and SPAM)'), ['amdmi3@freebsd.org'])
 
     def test_empty(self):
         self.assertEqual(GetMaintainers('somecrap'), [])
