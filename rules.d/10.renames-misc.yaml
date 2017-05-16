@@ -286,6 +286,7 @@
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geotiff,                     setname: libgeotiff                }
+- { namepat: "gimp2-(.*)",             setname: "gimp-$1"                 }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
 - { name: git-flow,                    setname: gitflow                   }
 - { name: gkrellm2,                    setname: gkrellm                   }

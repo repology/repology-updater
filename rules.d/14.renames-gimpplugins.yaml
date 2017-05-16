@@ -1,7 +1,10 @@
 - { name: [gimp-liquid-rescale,gimp-lqr,gimp-plugin-lqr,lqr-plugin,gimp-lqr-plugin], setname: "gimp:lqr-plugin" }
 
 - { name: gimplensfun, setname: "gimp:lensfun" }
+- { name: focusblur, setname: "gimp:$0" }
 
 - { namepat: "gimp-plugin-(.*)", setname: "gimp:$1" }
 - { namepat: "gimp-script-(.*)", setname: "gimp:$1" }
 - { namepat: "gimp-(.*)-plugin", setname: "gimp:$1" }
+
+- { namepat: "gimp:(.*)", setname: "gimp-$1" } # flush instead of matching individual plugins
