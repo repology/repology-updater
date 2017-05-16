@@ -2,6 +2,7 @@
 
 - { name: gimplensfun, setname: "gimp:lensfun" }
 - { name: focusblur, setname: "gimp:$0" }
+- { name: gimp-resynthesizer-git, setname: "gimp:resynthesizer", ignorever: true }
 
 - { namepat: "gimp-plugin-(.*)", setname: "gimp:$1" }
 - { namepat: "gimp-script-(.*)", setname: "gimp:$1" }
