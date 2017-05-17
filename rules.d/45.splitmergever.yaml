@@ -175,6 +175,8 @@
 
 - { name: glusterfs3,                  setname: glusterfs }
 
+- { namepat: "golang-[0-9.]+",         setname: golang }
+
 - { namepat: "ices[0-9]+",             setname: ices }
 - { name: ices, verpat: "0\\..*",      setname: ices0 }
 
