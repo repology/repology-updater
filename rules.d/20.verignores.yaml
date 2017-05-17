@@ -3,6 +3,8 @@
 # Version ignores, incompatible version mangling in the repositories
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
+- { name: acl,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: acl,                         verlonger: 3,                                       ignorever: true }
 - { name: ack,                                                       family: mageia,       ignorever: true }
 - { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
