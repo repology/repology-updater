@@ -167,8 +167,9 @@ class PackageTransformer:
         return None
 
     def Process(self, package):
-        # start with package.name as is
-        package.effname = package.name
+        # start with package.name as is, if it was not already set
+        if package.effname is None:
+            package.effname = package.name
 
         # keep the next fast rule that will match
         # it will be racalculated as soon as it's reached or
