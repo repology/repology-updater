@@ -337,6 +337,7 @@
 - { name: liblastfm0,                  setname: liblastfm                 }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
+- { name: libmpcdec5,                  setname: libmpcdec                 }
 - { name: libphysfs,                   setname: physfs                    }
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
