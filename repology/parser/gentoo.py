@@ -66,18 +66,6 @@ def SanitizeVersion(version):
         return version, None
 
 
-def IsBetterVersion(version, maxversion):
-    # if we have no best version, take any
-    if maxversion is None:
-        return True
-
-    # prefer version without 9999 to version with 9999
-    if version.endswith('9999') == maxversion.endswith('9999'):
-        return VersionCompare(version, maxversion) > 0
-
-    return not version.endswith('9999')
-
-
 class GentooGitParser():
     def __init__(self):
         pass
@@ -99,47 +87,46 @@ class GentooGitParser():
 
                 metadata_path = os.path.join(package_path, 'metadata.xml')
 
-                pkg = Package()
-
+                # parse maintainers from metadata.xml
+                # these are the same for all ebuilds for current package
+                maintainers = []
                 if os.path.isfile(metadata_path):
-                    with open(os.path.join(package_path, 'metadata.xml'), 'r', encoding='utf-8') as metafile:
+                    with open(metadata_path, 'r', encoding='utf-8') as metafile:
                         meta = xml.etree.ElementTree.parse(metafile)
 
                         for entry in meta.findall('maintainer'):
                             email_node = entry.find('email')
 
                             if email_node is not None and email_node.text is not None:
-                                pkg.maintainers += GetMaintainers(email_node.text)
+                                maintainers += GetMaintainers(email_node.text)
 
-                maxorigversion = None
-                maxversion = None
+                if not maintainers:
+                    # If we have no maintainer set, assign Gentoo's default maintainer value
+                    # See https://wiki.gentoo.org/wiki/GLEP:67#Bug_assignment
+                    maintainers = ['maintainer-needed@gentoo.org']
+
                 for ebuild in os.listdir(package_path):
                     if not ebuild.endswith('.ebuild'):
                         continue
 
-                    version, origversion = SanitizeVersion(ebuild[len(package) + 1:-7])
+                    pkg = Package()
 
-                    if IsBetterVersion(version, maxversion):
-                        maxorigversion = origversion
-                        maxversion = version
-
-                if maxversion is not None:
                     pkg.name = package
-                    pkg.version = maxversion
-                    pkg.origversion = maxorigversion
                     pkg.category = category
+                    pkg.maintainers = maintainers
 
-                    if not pkg.maintainers:
-                        # If we have no maintainer, assign Gentoo's default maintainer value
-                        # See https://wiki.gentoo.org/wiki/GLEP:67#Bug_assignment
-                        pkg.maintainers = ['maintainer-needed@gentoo.org']
+                    pkg.version, pkg.origversion = SanitizeVersion(ebuild[len(package) + 1:-7])
+
+                    if pkg.version.endswith('9999'):
+                        # ignore versions for snapshots
+                        pkg.ignoreversion = True
 
                     metadata_path = os.path.join(
                         path,
                         'metadata',
                         'md5-cache',
                         category,
-                        package + '-' + (maxorigversion if maxorigversion else maxversion)
+                        package + '-' + (pkg.origversion if pkg.origversion else pkg.version)
                     )
                     if os.path.isfile(metadata_path):
                         with open(metadata_path, 'r', encoding='utf-8') as metadata_file:
