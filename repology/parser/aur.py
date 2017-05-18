@@ -63,13 +63,10 @@ class AURParser():
                     has_badsuffix = False
                     for badsuffix in ['-cvs', '-svn', '-hg', '-darcs', '-bzr', '-git', '-bin']:
                         if pkg.name.endswith(badsuffix):
-                            has_badsuffix = True
+                            pkg.effname = pkg.name[:-len(badsuffix)]
+                            pkg.ignoreversion = True
                             break
 
-                    if has_badsuffix:
-                        continue
-
-                    pkg.origversion = result['Version']
                     pkg.version, pkg.origversion = SanitizeVersion(result['Version'])
                     pkg.comment = result['Description']
                     pkg.homepage = result['URL']
