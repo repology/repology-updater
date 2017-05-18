@@ -21,6 +21,9 @@ import datetime
 import inspect
 import os
 import pickle
+import sys
+import time
+import traceback
 
 import yaml
 
@@ -32,7 +35,7 @@ from repology.parser import *
 
 
 class RepositoryManager:
-    def __init__(self, reposdir, statedir):
+    def __init__(self, reposdir, statedir, fetch_retries=3, fetch_retry_delay=30):
         self.repositories = []
 
         for root, dirs, files in os.walk(reposdir):
@@ -55,7 +58,10 @@ class RepositoryManager:
                 else:
                     newsources.append(source)
             repo['sources'] = newsources
+
         self.statedir = statedir
+        self.fetch_retries = fetch_retries
+        self.fetch_retry_delay = fetch_retry_delay
 
     def __GetRepoPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.state')
@@ -116,19 +122,43 @@ class RepositoryManager:
             logger.Log('fetching source {} not supported'.format(source['name']))
             return
 
-        logger.Log('fetching source {} started'.format(source['name']))
-
-        self.__SpawnClass(
+        fetcher = self.__SpawnClass(
             'Fetcher',
             source['fetcher'],
             source
-        ).Fetch(
-            self.__GetSourcePath(repository, source),
-            update=update,
-            logger=logger.GetIndented()
         )
 
-        logger.Log('fetching source {} complete'.format(source['name']))
+        ntry = 1
+        while ntry <= self.fetch_retries:
+            logger.Log('fetching source {} try {} started'.format(source['name'], ntry))
+
+            try:
+                fetcher.Fetch(
+                    self.__GetSourcePath(repository, source),
+                    update=update,
+                    logger=logger.GetIndented()
+                )
+
+                break
+            except KeyboardInterrupt:
+                raise
+            except:
+                if ntry >= self.fetch_retries:
+                    raise
+
+                logger.Log('fetching source {} try {} failed:'.format(source['name'], ntry))
+                for item in traceback.format_exception(*sys.exc_info()):
+                    for line in item.split('\n'):
+                        if line:
+                            logger.GetIndented().Log(line)
+
+                logger.Log('waiting {} seconds before retry'.format(self.fetch_retry_delay))
+                if self.fetch_retry_delay:
+                    time.sleep(self.fetch_retry_delay)
+
+            ntry += 1
+
+        logger.Log('fetching source {} complete with {} tries'.format(source['name'], ntry))
 
     def __ParseSource(self, repository, source, logger):
         if 'parser' not in source:
