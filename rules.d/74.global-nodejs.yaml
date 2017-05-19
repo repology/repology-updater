@@ -1,5 +1,5 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Nodejs
-- { namepat: "node-(.*)",              setname: "r:$1", family: [ debuntu ] }
-- { namepat: "nodejs-(.*)",            setname: "r:$1", family: [ fedora, mageia, arch, rosa ] }
+- { namepat: "node-(.*)",              setname: "node:$1", family: [ debuntu ] }
+- { namepat: "nodejs-(.*)",            setname: "node:$1", family: [ fedora, mageia, arch, rosa ] }
