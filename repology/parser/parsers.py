@@ -21,6 +21,7 @@ from .arch import ArchDBParser
 from .aur import AURParser
 from .chocolatey import ChocolateyParser
 from .cpan import CPANPackagesParser
+from .cran import CRANCheckSummaryParser
 from .crux import CRUXParser
 from .debian import DebianSourcesParser
 from .dports import DPortsIndexParser

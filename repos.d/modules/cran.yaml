@@ -1,0 +1,21 @@
+###########################################################################
+# CRAN (R)
+###########################################################################
+- name: cran
+  desc: CRAN
+  family: cran
+  sources:
+    - name: CRAN
+      fetcher: File
+      parser: CRANCheckSummary
+      url: https://cran.r-project.org/web/checks/check_summary_by_package.html
+  shadow: true
+  repolinks:
+    - desc: R project home
+      url: https://www.r-project.org/
+    - desc: CRAN home
+      url: https://cran.r-project.org/
+  packagelinks:
+    - desc: CRAN page
+      url: 'https://cran.r-project.org/web/packages/{name}/index.html'
+  tags: [ all, production ]

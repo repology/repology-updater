@@ -50,6 +50,7 @@ version are always parsed.
 | CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔     | ✔       |          |
 | Chocolatey                       | ✔       |         |       | ✔     |         |          |
 | CPAN                             |         | ✔       |       | ✔ (2) |         |          |
+| CRAN                             |         |         |       | ✔ (2) |         |          |
 | CRUX                             | ✔       | ✔       |       | ✔     |         |          |
 | Debian, Ubuntu, KDE neon         |         | ✔       | ✔     | ✔     |         |          |
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
