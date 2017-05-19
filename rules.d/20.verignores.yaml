@@ -65,6 +65,7 @@
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: libssh,                      ver: ["0.73", "0.11"],                              ignorever: true } # pkgsrc, gobo
+- { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
