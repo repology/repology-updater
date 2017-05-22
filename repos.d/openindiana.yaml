@@ -1,0 +1,22 @@
+###########################################################################
+# OpenIndiana
+###########################################################################
+- name: openindiana
+  desc: OpenIndiana
+  family: openindiana
+  sources:
+    - name: [hipster, hipster-encumbered]
+      fetcher: File
+      parser: OpenIndianaSummaryJson
+      url: "http://pkg.openindiana.org/{source}/catalog/1/catalog.summary.C"
+      subrepo: "{source}"
+  repolinks:
+    - desc: OpenIndiana home
+      url: https://www.macports.org/
+    - desc: Hipster package repository home
+      url: http://pkg.openindiana.org/hipster/en/index.shtml
+    - desc: Hipster-encumbered package repository home
+      url: http://pkg.openindiana.org/hipster-encumbered/en/index.shtml
+  # XXX: add pagelinks based on package path extra field
+  # https://github.com/OpenIndiana/oi-userland/tree/oi/hipster/components/{path}
+  tags: [ all, production ]

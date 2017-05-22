@@ -63,6 +63,7 @@ version are always parsed.
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
+| OpenIndiana                      | ✔       |         | ✔     | ✔     |         | ✔        |
 | PCLinuxOS                        | ✔       | ✔       | ✔     |       |         |          |
 | pkgsrc                           | ✔       | ✔       | ✔     |       |         |          |
 | PyPi                             | ✔       |         |       | ✔ (2) |         |          |

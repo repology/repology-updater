@@ -7,7 +7,7 @@
 #  namepat: "xorg-fonts-(.*)"
 #  setname: "xfonts:$1"
 - { namepat: "(.*)-fonts",             setname: "fonts:$1", family: [ gentoo ] }
-- { namepat: "(.*)-ttf",               setname: "fonts:$1", family: [ pkgsrc ] }
+- { namepat: "(.*)-ttf",               setname: "fonts:$1", family: [ pkgsrc, openindiana ] }
 - { namepat: "font-(.*)",              setname: "fonts:$1", family: [ freebsd, gentoo, pkgsrc, arch, gobolinux, guix, nix, alpine, macports ] }
 - { name: cantarell,                   setname: "fonts:cantarell", family: [ gentoo ]  }
 - { name: cantarell-fonts,             setname: "fonts:cantarell", family: [ freebsd, pkgsrc, openbsd, arch ] }

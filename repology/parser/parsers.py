@@ -37,6 +37,7 @@ from .libregamewiki import LibreGameWikiParser
 from .macports import MacPortsParser
 from .nix import NixJsonParser
 from .openbsd import OpenBSDIndexParser
+from .openindiana import OpenIndianaSummaryJsonParser
 from .pkgsrc import PkgsrcIndexParser
 from .pypi import PyPiHTMLParser
 from .repodata import RepodataParser
