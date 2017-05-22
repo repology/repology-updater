@@ -68,6 +68,7 @@
 - name:
     - bitstream-vera
     - bitstream-vera-fonts
+    - bitstream-vera-ttf
     - font-bitstream-vera
     - fonts-ttf-bitstream-vera
     - fonts-ttf-vera
