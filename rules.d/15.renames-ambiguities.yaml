@@ -68,6 +68,8 @@
 
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
+- { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
+
 # Programming language vs. XMPP client vs. openstack object storage
 - { name: swift,                       setname: swift-lang, family: [ arch, freebsd ] }
 - { name: swift,                       setname: swift-im, family: [ sisyphus, fedora, pkgsrc ] }
@@ -76,8 +78,6 @@
 
 # infrastructure manager vs. heighfield generation
 - { name: terraform, setname: gnome-terraform, family: yacp }
-
-- { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
 
 - { name: wise, wwwpat: "jboss", setname: jboss-wise }
 - { name: wise, wwwpat: "ebi\\.ac\\.uk", setname: wise2 }
