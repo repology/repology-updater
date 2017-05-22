@@ -339,3 +339,9 @@
 - { namepat: "wine-gecko([0-9.-]+|-devel|-stable)", setname: wine-gecko }
 
 - { namepat: "wine-mono([0-9.-]+|-devel)", setname: wine-mono }
+
+- { namepat: "wxgtk[0-9.-]*(:?-light|-gtk3|-gtk2|-contrib|-doc)*", setname: wxgtk }
+- { name: wxgtk, verpat: "3\\.1\\..*",     setname: wxgtk31, last: true }
+- { name: wxgtk, verpat: "3\\.0\\..*",     setname: wxgtk30, last: true }
+- { name: wxgtk, verpat: "2\\..*",         setname: wxgtk28, last: true }
+- { name: wxgtk, warning: "please classify me" }
