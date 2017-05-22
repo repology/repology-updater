@@ -16,13 +16,13 @@
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
 - { name: bison,                       verlonger: 3,                                       ignorever: true } # alt weirdness
-- { name: blas,                        verpat: "201[0-9]+",                                ignorever: true }
+- { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
-- { name: cblas,                       verpat: "201[0-9]+",                                ignorever: true }
+- { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: cegui,                       verpat: "6\\..*",                                   ignorever: true } # it's 0.6.2!
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
