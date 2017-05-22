@@ -72,7 +72,7 @@ def Main():
     filters_grp.add_argument('--outdated-in-repository', help='filter by outdatedness in repository')
 
     parser.add_argument('-D', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
-    parser.add_argument('-f', '--fields', default='effname,repo', help='fields to list for the package')
+    parser.add_argument('-f', '--fields', default='repo,effname,version', help='fields to list for the package')
     parser.add_argument('-s', '--field-separator', default=' ', help='field separator')
 
     parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
