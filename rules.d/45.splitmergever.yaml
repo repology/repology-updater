@@ -1,10 +1,10 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Version splits/tweaks
-- { namepat: "allegro[0-9.]+",         setname: allegro }
-- { name: allegro-devel, setname: allegro, family: freebsd }
-- { name: allegro, verpat: "4\\..*",   setname: allegro4 }
-- { name: allegro, verpat: "5\\..*",   setname: allegro5 }
+- { namepat: "allegro[0-9.]*(?:-devel)?", setname: allegro }
+- { name: allegro, verpat: "4\\..*",   setname: allegro4, last: true }
+- { name: allegro, verpat: "5\\..*",   setname: allegro5, last: true }
+- { name: allegro, warning: "please classify me" }
 
 - { namepat: "angelscript-?[0-9._-]+", setname: angelscript }
 
