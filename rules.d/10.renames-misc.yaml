@@ -59,7 +59,11 @@
 - { name: [atlas-with-lapack,atlas-lapack], setname: atlas                }
 - { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
+- { name: [aqbanking5,aqbanking5-gtk,aqbanking5-svn], setname: aqbanking }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
+- { name: [audacious-gtk3,audacious-core,audacious-qt5,audacious2,audacious-itself], setname: audacious }
+- { name: audacious2-plugins,          setname: audacious-plugins         }
+- { name: audacity-freeworld,          setname: audacity                  }
 - { name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4], setname: avidemux }
 - { name: avr8-burn-omat,              setname: avr8-burn-o-mat           }
 - { name: avro-cpp,                    setname: avro-c++                  }
@@ -127,6 +131,7 @@
 - { name: chromium-browser,            setname: chromium                  }
 - { name: chromium-browser-stable,     setname: chromium                  }
 - { name: ckeditor3,                   setname: ckeditor                  }
+- { name: [clamav-server,clamav-light], setname: clamav                    }
 - { name: [clearlooks-phenix-gtk-theme,clearlooks-phenix-theme,gtk3-theme-clearlooks-phenix], setname: clearlooks-phenix }
 - { name: cln6,                        setname: cln                       }
 - { name: [clucene09,clucene-core],    setname: clucene                   }
@@ -415,7 +420,7 @@
 - { name: stone-soup-ncurses,          setname: stone-soup                }
 - { name: supertux,                    setname: supertux1,                family: [ freebsd ] } # ???
 - { name: supertux2,                   setname: supertux,                 family: [ freebsd ] }
-- { name: sweet-home-3d,               setname: sweethome3d               }
+- { name: [sweet-home-3d,sweethome3d-application], setname: sweethome3d   }
 - { name: tetrinet-x,                  setname: tetrinetx,                family: [ freebsd ] }
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
 - { name: tintin,                      setname: tintin++,                 family: [ gentoo ]  }
