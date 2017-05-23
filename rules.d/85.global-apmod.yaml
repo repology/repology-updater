@@ -5,8 +5,7 @@
 - { category: www-apache, namepat: "mod_(.*)", setname: "apmod:$1", family: [ gentoo ] }
 - { namepat: "mod-(.*)",               setname: "apmod:$1", family: [ debuntu ] }
 - { namepat: "mod_(.*)",               setname: "apmod:$1", family: [ freebsd, arch, sisyphus, slackbuilds, fedora, centos, gobolinux, macports, openindiana ] }
-- { namepat: "libapache2?-mod-(.*)",   setname: "apmod:$1" }
-- { namepat: "apache2?-mod_(.*)",      setname: "apmod:$1" }
+- { namepat: "(?:lib)?apache2?-mod[_-](.*)", setname: "apmod:$1" }
 - { namepat: "apmod:php[0-9]*",        verpat: "5\\..*", setname: "apmod:php5" }
 - { namepat: "apmod:php[0-9]*",        verpat: "7\\..*", setname: "apmod:php7" }
 - { namepat: "apmod:python[0-9]*",                       setname: "apmod:python" }
@@ -18,3 +17,14 @@
 - { namepat: "apmod:security2",                          setname: "apmod:security" }
 - { namepat: "apmod:wsgi[0-9]+",                         setname: "apmod:wsgi" }
 - { namepat: "apmod:ruby[0-9]+",                         setname: "apmod:ruby" }
+
+# can't just use mod_ wildcard here, as there are similarly named nagios and jack modules
+- { name: mod_auth_cas,                                  setname: "apmod:auth_cas" }
+- { name: mod_cluster,                                   setname: "apmod:cluster" }
+- { name: mod_dnssd,                                     setname: "apmod:dnssd" }
+- { name: mod_fastcgi,                                   setname: "apmod:fastcgi" }
+- { name: mod_perl,                                      setname: "apmod:perl" }
+- { name: mod_php,                                       setname: "apmod:php" }
+- { name: mod_python,                                    setname: "apmod:python" }
+- { name: mod_survey,                                    setname: "apmod:survey" }
+- { name: mod_wsgi,                                      setname: "apmod:wsgi" }
