@@ -82,6 +82,7 @@
 - { name: onioncat,                    verpat: "0\\.2\\.2\\.r[0-9]+.*",                    unignorever: true } # / version schema
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
+- { name: opencollada,                 verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
@@ -120,3 +121,5 @@
 - { name: youtube-dl,                  verpat: "[0-9]{8}",                                 ignorever: true } # canonical version is period-separated
 - { name: zpaq,                        verpat: "[0-9]+",                                   ignorever: true }
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: vlc,                         ver: "3.0.0",                 family: mageia,       ignorever: true } # fake
+- { name: zsh-syntax-highlighting,     verpat: "20[0-9]{6}.*",                             ignorever: true } # FreeBSD
