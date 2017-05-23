@@ -11,11 +11,11 @@
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
-- { name: attr,                        verlonger: 3,                                       ignorever: true } # alt weirdness
+- { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
-- { name: bison,                       verlonger: 3,                                       ignorever: true } # alt weirdness
+- { name: bison,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # alt weirdness
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
@@ -28,14 +28,17 @@
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
+- { name: coreutils,                   verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
+- { name: dejagnu,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: dosbox,                      verpat: "0\\.74\\.[4r].*",                          ignorever: true }
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignorever: true }
+- { name: e2fsprogs,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: eternal-lands,               verpat: "[0-9]+",                                   ignorever: true }
 - { name: eternal-lands-data,          verpat: "[0-9]+",                                   ignorever: true }
 - { name: ethtool,                     verpat: "[0-9]+",                                   ignorever: true }
@@ -43,6 +46,7 @@
 - { name: f3,                          verpat: ".*unstable",                               ignorever: true } # nix garbage
 - { name: fdupes,                      verpat: "1\\.[0-9]{2}",                             ignorever: true } # it has switched to 3 componennts (e.g. 1.51 -> 1.6.0 -> 1.6.1)
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignorever: true }
+- { name: findutils,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
 - { name: fgrun,                       verpat: "2013.*",                                   ignorever: true }
 - { name: "fonts:gentium-basic",       ver: "1102",                                        ignorever: true } # it's 1.102!
@@ -53,6 +57,8 @@
 - { namepat: "gcc[0-9]*",              verpat: ".*20[0-9]{6}.*",                           ignorever: true } # snapshots
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignorever: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
+- { name: gzip,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: grep,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: hyperrogue,                  ver: "83j",                                         ignorever: true } # it's 8.3j!
 - { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
@@ -67,6 +73,7 @@
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: libssh,                      ver: ["0.73", "0.11"],                              ignorever: true } # pkgsrc, gobo
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
+- { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
@@ -78,6 +85,7 @@
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
+- { name: patch,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
 - { name: p5-net-whois-ripe,           ver: "2.005005",                                    ignorever: true } # < 2.006
@@ -85,8 +93,9 @@
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
 - { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
+- { name: quota,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
-- { name: quilt,                       ver: "0.65.0.3.1cde1",                              ignorever: true } # sisyphus garbage
+- { name: quilt,                       verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
