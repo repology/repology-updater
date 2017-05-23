@@ -81,7 +81,7 @@ class CPANPackagesParser():
                     # Bad version; XXX: log?
                     continue
 
-                if module.replace('::', '-') != package_name:
+                if module.replace('::', '-').lower() != package_name.lower():
                     # Submodules not really needed
                     continue
 
