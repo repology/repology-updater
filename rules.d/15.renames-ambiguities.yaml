@@ -79,6 +79,9 @@
 # infrastructure manager vs. heighfield generation
 - { name: terraform, setname: gnome-terraform, family: yacp }
 
+# GNU time vs. xemacs module
+- { name: time, setname: xemacs-time, wwwpat: xemacs } # gentoo
+
 # emulator vs. ruby-rack http server
 - { name: unicorn, setname: unicorn-emulator, wwwpat: "unicorn-engine\\.org" }
 - { name: unicorn, setname: "ruby:unicorn", wwwpat: "bogomips\\.org" }
