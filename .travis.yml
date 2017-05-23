@@ -23,7 +23,7 @@ before_install:
   - pip install rubymarshal
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
-  - wget -qO- https://github.com/repology/libversion/archive/1.0.0.tar.gz | tar -xzf- && ( cd libversion-1.0.0 && cmake . && make && sudo make install )
+  - wget -qO- https://github.com/repology/libversion/archive/1.1.0.tar.gz | tar -xzf- && ( cd libversion-1.1.0 && cmake . && make && sudo make install )
 before_script:
   - psql -c "CREATE DATABASE repology_test;" -U postgres
   - psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test';" -U postgres
