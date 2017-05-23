@@ -83,6 +83,7 @@
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: opencollada,                 verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: opencollada,                 verpat: ".*3335ac.*",                               ignorever: true }
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
@@ -113,10 +114,10 @@
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
-- { name: vlc,                         ver: "3.0.0",                 family: mageia,       ignorever: true } # fake
+- { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora], ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
-- { name: wpa-supplicant,              ver: "201[0-9]+.*",           family: openwrt,      ignorever: true }
+- { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignorever: true }
 - { name: xdot,                        ver: "20121124",                                    ignorever: true }
 - { name: xl2tpd,                      ver: "20140214",                                    ignorever: true } # pkgsrc is using snapshot; Others are using versions with dots
