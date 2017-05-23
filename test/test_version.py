@@ -108,7 +108,7 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(VersionCompare('0', 'a'), 1)
 
     def test_case_is_ignored(self):
-        self.assertEqual(VersionCompare('1a', '1ALPHA'), 0)
+        self.assertEqual(VersionCompare('1a1', '1ALPHA1'), 0)
         self.assertEqual(VersionCompare('1A1', '1alpha1'), 0)
 
     def test_miscomparation1(self):  # github issue #16
