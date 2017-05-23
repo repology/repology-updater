@@ -53,6 +53,7 @@ version are always parsed.
 | CRAN                             |         |         |       | ✔ (2) |         |          |
 | CRUX                             | ✔       | ✔       |       | ✔     |         |          |
 | Debian, Ubuntu, KDE neon         |         | ✔       | ✔     | ✔     |         |          |
+| DistroWatch.com                  | ✔       |         |       | ✔     |         | ✔        |
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔     |         |          |
 | freshcode.club                   | ✔       | n/a     |       | ✔     |         |          |
