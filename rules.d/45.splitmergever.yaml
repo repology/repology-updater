@@ -235,10 +235,13 @@
 - { name: [links1,links2,links+,links-g-directfb,links-gui], setname: links }
 - { name: links, verpat: "1\\..*",     setname: links1 }
 
-- { name: love, verpat: "0\\.10\\..*", setname: love10 }
-- { name: love, verpat: "0\\.8\\..*",  setname: love08 }
-- { name: love, verpat: "0\\.9\\..*",  setname: love09 }
-- { name: love5, setname: love05 }
+- { namepat: "love(?:-legacy)?[0-9.-]+", setname: love }
+- { name: love, verpat: "0\\.10\\..*", setname: love10, last: true }
+- { name: love, verpat: "0\\.9\\..*",  setname: love09, last: true }
+- { name: love, verpat: "0\\.8\\..*",  setname: love08, last: true }
+- { name: love, verpat: "0\\.7\\..*",  setname: love07, last: true }
+- { name: love, verpat: "0\\.5\\..*",  setname: love05, last: true }
+- { name: love, warning: "please classify me" }
 
 - { name: lua, verpat: "5\\.1\\..*",  setname: lua51 }
 - { name: lua, verpat: "5\\.2\\..*",  setname: lua52 }
