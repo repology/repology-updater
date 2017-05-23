@@ -7,11 +7,12 @@ Needed for core:
 - [Python](https://www.python.org/) 3.6+
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [requests](http://python-requests.org/)
-- Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
 - [libversion](https://github.com/repology/libversion) library
 
 Needed for fetching/parsing specific repository data:
 
+- Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
+- Python module [lxml](http://lxml.de/)
 - [wget](https://www.gnu.org/software/wget/)
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
