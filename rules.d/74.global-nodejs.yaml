@@ -2,4 +2,4 @@
 
 # Nodejs
 - { namepat: "node-(.*)",              setname: "node:$1", family: [ debuntu ] }
-- { namepat: "nodejs-(.*)",            setname: "node:$1", family: [ fedora, mageia, arch, rosa ] }
+- { namepat: "nodejs-(.*)",            setname: "node:$1", family: [ fedora, mageia, arch, rosa, sisyphus ] } # sisyphus=autoimports
