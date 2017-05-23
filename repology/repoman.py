@@ -298,14 +298,16 @@ class RepositoryManager:
         return sorted([repo['name'] for repo in self.__GetRepositories(reponames)])
 
     def GetMetadata(self):
-        return {repository['name']: {
-            'incomplete': repository.get('incomplete', False),
-            'shadow': repository.get('shadow', False),
-            'repolinks': repository.get('repolinks', []),
-            'packagelinks': repository.get('packagelinks', []),
-            'family': repository['family'],
-            'desc': repository['desc'],
-        } for repository in self.repositories}
+        return {
+            repository['name']: {
+                'incomplete': repository.get('incomplete', False),
+                'shadow': repository.get('shadow', False),
+                'repolinks': repository.get('repolinks', []),
+                'packagelinks': repository.get('packagelinks', []),
+                'family': repository['family'],
+                'desc': repository['desc'],
+            } for repository in self.repositories
+        }
 
     # Single repo methods
     def Fetch(self, reponame, update=True, logger=NoopLogger()):
