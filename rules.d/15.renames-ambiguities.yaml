@@ -79,6 +79,13 @@
 # infrastructure manager vs. heighfield generation
 - { name: terraform, setname: gnome-terraform, family: yacp }
 
+# emulator vs. ruby-rack http server
+- { name: unicorn, setname: unicorn-emulator, wwwpat: "unicorn-engine\\.org" }
+- { name: unicorn, setname: "ruby:unicorn", wwwpat: "bogomips\\.org" }
+- { name: unicorn, setname: "ruby:unicorn", family: sisyphus }
+- { name: unicorn, setname: unicorn-emulator, family: gentoo }
+- { name: unicorn, warning: "please classify me" }
+
 - { name: wise, wwwpat: "jboss", setname: jboss-wise }
 - { name: wise, wwwpat: "ebi\\.ac\\.uk", setname: wise2 }
 - { name: wise, category: [ Sciences/Biology, science, biology, sci-biology, universe/science ], setname: wise2 }

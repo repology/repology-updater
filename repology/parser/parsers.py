@@ -24,6 +24,7 @@ from .cpan import CPANPackagesParser
 from .cran import CRANCheckSummaryParser
 from .crux import CRUXParser
 from .debian import DebianSourcesParser
+from .distrowatch import DistrowatchPackagesParser
 from .dports import DPortsIndexParser
 from .fdroid import FDroidParser
 from .freebsd import FreeBSDIndexParser
