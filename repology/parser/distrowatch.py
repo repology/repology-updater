@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import lxml.html
-import lxml.etree
 
 from repology.package import Package
 
@@ -27,8 +26,6 @@ class DistrowatchPackagesParser():
 
     def Parse(self, path):
         result = []
-
-        table = lxml.html.parse(path).getroot().xpath('.//table[@class="Auto"]')
 
         first = True
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="Auto"]')[0].xpath('./tr'):
@@ -46,7 +43,7 @@ class DistrowatchPackagesParser():
             # summary
             cell = row.xpath('./td[1]/a')[0]
             pkg.version = cell.text
-            pkg.downloads = [ cell.attrib['href'] ]
+            pkg.downloads = [cell.attrib['href']]
 
             # summary
             cell = row.xpath('./td[2]')[0]
