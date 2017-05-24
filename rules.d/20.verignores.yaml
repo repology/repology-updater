@@ -72,6 +72,7 @@
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
 - { name: keybase,                     verpat: "20170209.*",                               ignorever: true } # nix garbage
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
+- { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignorever: true }
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: libssh,                      ver: ["0.73", "0.11"],                              ignorever: true } # pkgsrc, gobo
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
