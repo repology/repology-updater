@@ -232,7 +232,7 @@
 
 - { namepat: "libglademm[0-9.]+",      setname: libglademm }
 
-- { namepat: "libtool[0-9.-]+",        setname: libtool }
+- { namepat: "libtool[0-9._-]+",       setname: libtool }
 
 - { name: [links1,links2,links+,links-g-directfb,links-gui], setname: links }
 - { name: links, verpat: "1\\..*",     setname: links1 }
