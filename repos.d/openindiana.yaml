@@ -12,7 +12,7 @@
       subrepo: "{source}"
   repolinks:
     - desc: OpenIndiana home
-      url: https://www.macports.org/
+      url: https://www.openindiana.org/
     - desc: Hipster package repository home
       url: http://pkg.openindiana.org/hipster/en/index.shtml
     - desc: Hipster-encumbered package repository home
