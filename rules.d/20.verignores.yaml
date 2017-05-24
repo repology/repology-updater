@@ -66,6 +66,7 @@
 - { name: icon,                        verpat: "[0-9]{3}",                                 ignorever: true } # XXX: transform + problem
 - { name: icu-le-hb,                   ver: "1.0.3.3",                                     ignorever: true } # fake (FreeBSD)
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
+- { name: john,                        verpat: "1.8.0.2",            family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: jwm,                         verpat: "[0-9]+",                                   ignorever: true }
 - { name: kbuild,                      verlonger: 3,                                       ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
@@ -104,8 +105,11 @@
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
+- { name: sed,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
+- { name: strace,                      verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
+- { name: tar,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # obsoleted
 - { name: tidy,                        ver: "090315.c",                                    ignorever: true } # obsoleted
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignorever: true } # 2.15.0 was not released yet
