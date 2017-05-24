@@ -246,8 +246,9 @@
 
 - { namepat: "libnet[0-9.]+",          setname: libnet }
 
+- { name: [libsigc++-docs, libsigc++-legacy12], setname: libsigc++ }
 - { namepat: "libsigc(\\+\\+|xx|pp)[0-9.-]+", setname: libsigc++ }
-- { name: libsigc++, verpat: "1\\..*",  setname: libsigc++1 }
+- { name: libsigc++, verpat: "1\\..*",  setname: libsigc++12 }
 - { name: libsigc++, verpat: "2\\.99.*", setname: libsigc++3 }
 - { name: libsigc++, verpat: "3\\..*", setname: libsigc++3 } # not in the wild yet
 
@@ -301,7 +302,7 @@
 - { namepat: "postgresql[0-9.-]+-plpython", setname: postgresql }
 - { namepat: "postgresql[0-9.-]+-pltcl", setname: postgresql }
 - { namepat: "postgresql[0-9.-]+-server", setname: postgresql }
-- { name: postgresql, verpat: "10\\..*", setname: postgresql10 }
+- { name: postgresql, verpat: "10.*", setname: postgresql10 }
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
 
@@ -368,7 +369,8 @@
 
 - { name: stunnel4,                    setname: stunnel }
 
-- { namepat: "(sugar(?:|-artwork|-base|-activity|-chat-activity|-datastore|-presence-service|-toolkit|-write-activity))[0-9.-]+", setname: "$1" }
+- { namepat: "(sugar(?:|-artwork|-activity|-base|-browse-activity|-chat-activity|-datastore|-presence-service|-toolkit|-write-activity))[0-9.-]+", setname: "$1" }
+- { name: [sugar-toolkit-gtk2, sugar-toolkit-gtk3], setname: sugar-toolkit }
 
 - { namepat: "swig[0-9]+",             setname: swig }
 - { name: swig, verpat: "1\\..*",      setname: swig13 }
@@ -399,6 +401,11 @@
 - { name: wxgtk, verpat: "3\\.0\\..*",     setname: wxgtk30, last: true }
 - { name: wxgtk, verpat: "2\\..*",         setname: wxgtk28, last: true }
 - { name: wxgtk, warning: "please classify me" }
+
+- { namepat: "(?:lib)?xerces-?c[0-9.-]+",   setname: xerces-c }
+- { namepat: "(?:lib)?xerces2-java.-]+",    setname: xerces-j }
+- { name: xerces-j2,                        setname: xerces-j }
+- { name: xerces-c, verpat: "2\\..*"        setname: xerces-c2 }
 
 - { name: xulrunner-devel,             setname: xulrunner, ignorever: true }
 - { namepat: "xulrunner[0-9.-]+",      setname: xulrunner }
