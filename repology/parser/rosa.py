@@ -50,7 +50,8 @@ class RosaInfoXmlParser():
             pkg.name = fn[:pos1]
             pkg.origversion = fn[pos1 + 1:]
             pkg.version = fn[pos1 + 1:pos2]
-            pkg.homepage = url
+            if url:
+                pkg.homepage = url
             pkg.licenses = [license_]
 
             result.append(pkg)
