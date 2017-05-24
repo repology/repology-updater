@@ -68,6 +68,8 @@
 
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
+- { name: scramble, wwwpat: "xffm", setname: scramble-xffm } # wtf is that
+
 - { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
 
 # Programming language vs. XMPP client vs. openstack object storage
