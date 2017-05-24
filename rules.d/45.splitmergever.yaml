@@ -180,6 +180,11 @@
 - { namepat: "ices[0-9]+",             setname: ices }
 - { name: ices, verpat: "0\\..*",      setname: ices0 }
 
+- { name: [icu-docs],                  setname: icu }
+- { namepat: "icu[0-9.-]+",            setname: icu }
+
+- { namepat: "icu4j[0-9.-]+",          setname: icu4j }
+
 - { namepat: "igal[0-9]+",             setname: igal }
 - { name: igal, verpat: "1\\..*",      setname: igal1 }
 
@@ -227,10 +232,24 @@
 - { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
 - { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
 
+- { name: kibana-bin,                  setname: kibana }
+- { namepat: "kibana[0-9]+",           setname: kibana }
+
+- { namepat: "libgee[0-9.-]+",         setname: libgee }
+
 - { namepat: "libglade[0-9]+",         setname: libglade }
 - { namepat: "libglade[0-9]+-reference", setname: libglade-reference }
 
 - { namepat: "libglademm[0-9.]+",      setname: libglademm }
+
+- { namepat: "libmozjs[0-9.-]+",       setname: libmozjs }
+
+- { namepat: "libnet[0-9.]+",          setname: libnet }
+
+- { namepat: "libsigc(\\+\\+|xx|pp)[0-9.-]+", setname: libsigc++ }
+- { name: libsigc++, verpat: "1\\..*",  setname: libsigc++1 }
+- { name: libsigc++, verpat: "2\\.99.*", setname: libsigc++3 }
+- { name: libsigc++, verpat: "3\\..*", setname: libsigc++3 } # not in the wild yet
 
 - { name: [libtool-base,libtool-fortran,libtool-info,libtool-lts], setname: libtool }
 - { namepat: "libtool[0-9._-]+",       setname: libtool }
@@ -272,6 +291,20 @@
 - { name: [postfix-current,postfix-current-sasl,postfix211,postfix211-sasl], setname: postfix }
 - { name: postfix, verpat: ".*20[0-9]{6}.*",  setname: postfix-experimental }
 
+- { namepat: "postgresql[0-9.-]+",     setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-client", setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-contrib", setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-docs?", setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-lib", setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-libs", setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-plperl", setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-plpython", setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-pltcl", setname: postgresql }
+- { namepat: "postgresql[0-9.-]+-server", setname: postgresql }
+- { name: postgresql, verpat: "10\\..*", setname: postgresql10 }
+
+- { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
+
 - { name: [python,python2,python3], family: freebsd, ignore: true } # ignore metaports
 - { namepat: "python[23][0-9.]*",      setname: python }
 - { name: python, verpat: "2\\..*",    setname: python2 }
@@ -285,6 +318,10 @@
 - { name: ruby, verpat: "2\\.2.*",     setname: ruby22 }
 - { name: ruby, verpat: "2\\.3.*",     setname: ruby23 }
 - { name: ruby, verpat: "2\\.4.*",     setname: ruby24 }
+
+- { name: [samba-docs],                setname: samba }
+- { namepat: "samba[0-9.-]+",          setname: samba }
+- { name: samba, verpat: "3\\..*",     setname: samba3 }
 
 - { name: [sdl12,"libsdl1.2"],         setname: sdl }
 - { name: sdl, verpat: "2.*",          setname: sdl2 }
@@ -331,12 +368,20 @@
 
 - { name: stunnel4,                    setname: stunnel }
 
+- { namepat: "(sugar(?:|-artwork|-base|-activity|-chat-activity|-datastore|-presence-service|-toolkit|-write-activity))[0-9.-]+", setname: "$1" }
+
 - { namepat: "swig[0-9]+",             setname: swig }
 - { name: swig, verpat: "1\\..*",      setname: swig13 }
 - { name: swig, verpat: "2\\..*",      setname: swig2 }
 - { name: swig, verpat: "3\\..*",      setname: swig3 }
 
 - { name: tor-devel,                   setname: tor }
+
+- { name: unison-devel,                setname: unison, ignorever: true }
+- { name: unison-nox11,                setname: unison }
+- { namepat: "unison[0-9.-]+(?:-compat)?", setname: unison }
+
+- { namepat: "vala[0-9.-]+",           setname: vala }
 
 - { namepat: "wesnoth[0-9.-]+",        setname: wesnoth }
 - { name: wesnoth-devel,               setname: wesnoth }
@@ -354,3 +399,6 @@
 - { name: wxgtk, verpat: "3\\.0\\..*",     setname: wxgtk30, last: true }
 - { name: wxgtk, verpat: "2\\..*",         setname: wxgtk28, last: true }
 - { name: wxgtk, warning: "please classify me" }
+
+- { name: xulrunner-devel,             setname: xulrunner, ignorever: true }
+- { namepat: "xulrunner[0-9.-]+",      setname: xulrunner }
