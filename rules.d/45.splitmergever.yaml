@@ -266,7 +266,7 @@
 
 - { namepat: "perl5[0-9.]*",           setname: perl }
 
-- { name: png,                         setname: libpng }
+- { name: [png,libpng-apng],           setname: libpng }
 - { namepat: "libpng(?:-legacy)?[0-9.-]*", setname: libpng }
 
 - { name: [postfix-current,postfix-current-sasl,postfix211,postfix211-sasl], setname: postfix }
