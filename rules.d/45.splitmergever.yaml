@@ -232,6 +232,7 @@
 
 - { namepat: "libglademm[0-9.]+",      setname: libglademm }
 
+- { name: [libtool-base,libtool-fortran,libtool-info,libtool-lts], setname: libtool }
 - { namepat: "libtool[0-9._-]+",       setname: libtool }
 
 - { name: [links1,links2,links+,links-g-directfb,links-gui], setname: links }
