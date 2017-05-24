@@ -3,4 +3,4 @@
 # R libs
 - {                                    setname: "r:$0", family: [ cran ] }
 - { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu, arch ] }
-- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, arch, debuntu, rosa ] }
+- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, arch, debuntu, rosa, sisyphus ] } # sisyphus=autoimports
