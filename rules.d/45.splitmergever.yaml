@@ -422,7 +422,7 @@
 - { namepat: "(?:lib)?xerces-?c[0-9.-]+",   setname: xerces-c }
 - { namepat: "(?:lib)?xerces2-java.-]+",    setname: xerces-j }
 - { name: xerces-j2,                        setname: xerces-j }
-- { name: xerces-c, verpat: "2\\..*"        setname: xerces-c2 }
+- { name: xerces-c, verpat: "2\\..*",       setname: xerces-c2 }
 
 - { name: xulrunner-devel,             setname: xulrunner, ignorever: true }
 - { namepat: "xulrunner[0-9.-]+",      setname: xulrunner }
