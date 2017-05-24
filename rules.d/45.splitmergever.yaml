@@ -159,6 +159,10 @@
 - { name: [gimp3-devel,gimp-git],      setname: gimp-devel, ignorever: true }
 - { name: gimp, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", setname: gimp-devel }
 
+- { namepat: "glew[0-9.-]+",           setname: glew }
+
+- { name: glusterfs3,                  setname: glusterfs }
+
 - { namepat: "gmime[0-9]+",            setname: gmime }
 - { name: gmime, verpat: "2\\.2\\..*", setname: gmime22 }
 - { name: gmime, verpat: "2\\.4\\..*", setname: gmime24 }
@@ -173,7 +177,8 @@
 - { name: gnupg, category: app-vim, family: gentoo, setname: vim-gnupg }
 - { name: gnupg, verpat: "1\\..*",     setname: gnupg1 }
 
-- { name: glusterfs3,                  setname: glusterfs }
+- { name: goffice-light,               setname: goffice }
+- { namepat: "goffice[0-9.-]+",        setname: goffice }
 
 - { namepat: "golang[0-9.-]*",         setname: go }
 
@@ -409,3 +414,5 @@
 
 - { name: xulrunner-devel,             setname: xulrunner, ignorever: true }
 - { namepat: "xulrunner[0-9.-]+",      setname: xulrunner }
+
+- { namepat: "zabbix[0-9.-]+",         setname: zabbix }
