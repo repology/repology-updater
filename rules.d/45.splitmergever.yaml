@@ -238,7 +238,7 @@
 - { name: [links1,links2,links+,links-g-directfb,links-gui], setname: links }
 - { name: links, verpat: "1\\..*",     setname: links1 }
 
-- { namepat: "love(?:-legacy)?[0-9.-]+", setname: love }
+- { namepat: "love(?:-legacy)?[0-9._-]+", setname: love }
 - { name: love, verpat: "0\\.10\\..*", setname: love10, last: true }
 - { name: love, verpat: "0\\.9\\..*",  setname: love09, last: true }
 - { name: love, verpat: "0\\.8\\..*",  setname: love08, last: true }
