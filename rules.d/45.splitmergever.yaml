@@ -240,6 +240,10 @@
 - { name: kibana-bin,                  setname: kibana }
 - { namepat: "kibana[0-9]+",           setname: kibana }
 
+- { namepat: "libchamplain[0-9.-]+",   setname: libchamplain }
+
+- { namepat: "libdvbpsi[0-9.-]+",      setname: libdvbpsi }
+
 - { namepat: "libgee[0-9.-]+",         setname: libgee }
 
 - { namepat: "libglade[0-9]+",         setname: libglade }
@@ -259,6 +263,12 @@
 
 - { name: [libtool-base,libtool-fortran,libtool-info,libtool-lts], setname: libtool }
 - { namepat: "libtool[0-9._-]+",       setname: libtool }
+
+- { namepat: "libtorrent-rasterbar[0-9._-]+", setname: libtorrent-rasterbar }
+
+- { namepat: "libwpd[0-9.-]+",         setname: libwpd }
+
+- { namepat: "libwps[0-9.-]+",         setname: libwps }
 
 - { name: [links1,links2,links+,links-g-directfb,links-gui], setname: links }
 - { name: links, verpat: "1\\..*",     setname: links1 }
@@ -282,6 +292,8 @@
 - { namepat: "llvm[0-9.-]+",           setname: llvm }
 
 - { namepat: "msynctool[0-9]+",        setname: msynctool }
+
+- { namepat: "netatalk[0-9.-]+",       setname: netatalk }
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
@@ -414,5 +426,8 @@
 
 - { name: xulrunner-devel,             setname: xulrunner, ignorever: true }
 - { namepat: "xulrunner[0-9.-]+",      setname: xulrunner }
+
+- { namepat: "(?:lib)?yaml-cpp[0-9.-]+", setname: yaml-cpp }
+- { name: yaml-cpp, verpat: "0\\.3\\..*", setname: yaml-cpp03 }
 
 - { namepat: "zabbix[0-9.-]+",         setname: zabbix }
