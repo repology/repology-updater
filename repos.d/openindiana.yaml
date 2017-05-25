@@ -17,6 +17,8 @@
       url: http://pkg.openindiana.org/hipster/en/index.shtml
     - desc: Hipster-encumbered package repository home
       url: http://pkg.openindiana.org/hipster-encumbered/en/index.shtml
+    - desc: GitHub repository
+      url: https://github.com/OpenIndiana/oi-userland
   # XXX: add pagelinks based on package path extra field
   # https://github.com/OpenIndiana/oi-userland/tree/oi/hipster/components/{path}
   tags: [ all, production ]
