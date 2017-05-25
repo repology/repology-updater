@@ -10,6 +10,8 @@
 - { category: dev-ruby,                setname: "ruby:$0", family: [ gentoo ] }
 
 # Ruby version merges
+- { namepat: "(ruby:.*)-rails(?:5|50)", setname: "$1", family: freebsd }
+
 - { namepat: "(ruby:actioncable)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:actionmailer)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:actionpack)[0-9._-]+", setname: "$1" }
