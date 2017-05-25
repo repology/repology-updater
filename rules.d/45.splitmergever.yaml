@@ -159,7 +159,7 @@
 - { name: [gimp3-devel,gimp-git],      setname: gimp-devel, ignorever: true }
 - { name: gimp, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", setname: gimp-devel }
 
-- { namepat: "glew[0-9.-]+",           setname: glew }
+- { namepat: "(?:lib)?glew[0-9.-]+",   setname: glew }
 
 - { name: glusterfs3,                  setname: glusterfs }
 
@@ -178,7 +178,7 @@
 - { name: gnupg, verpat: "1\\..*",     setname: gnupg1 }
 
 - { name: goffice-light,               setname: goffice }
-- { namepat: "goffice[0-9.-]+",        setname: goffice }
+- { namepat: "goffice[0-9._-]+",       setname: goffice }
 
 - { namepat: "golang[0-9.-]*",         setname: go }
 
@@ -419,15 +419,14 @@
 - { name: wxgtk, verpat: "2\\..*",         setname: wxgtk28, last: true }
 - { name: wxgtk, warning: "please classify me" }
 
-- { namepat: "(?:lib)?xerces-?c[0-9.-]+",   setname: xerces-c }
-- { namepat: "(?:lib)?xerces2-java.-]+",    setname: xerces-j }
-- { name: xerces-j2,                        setname: xerces-j }
+- { namepat: "(?:lib)?xerces-?c[0-9.+-]*",  setname: xerces-c }
+- { namepat: "(?:lib)?xerces2?-?j(?:ava)?[0-9-]*", setname: xerces-j }
 - { name: xerces-c, verpat: "2\\..*",       setname: xerces-c2 }
 
 - { name: xulrunner-devel,             setname: xulrunner, ignorever: true }
 - { namepat: "xulrunner[0-9.-]+",      setname: xulrunner }
 
-- { namepat: "(?:lib)?yaml-cpp[0-9.-]+", setname: yaml-cpp }
+- { namepat: "(?:lib)?yaml-cpp[0-9.-]*", setname: yaml-cpp }
 - { name: yaml-cpp, verpat: "0\\.3\\..*", setname: yaml-cpp03 }
 
 - { namepat: "zabbix[0-9.-]+",         setname: zabbix }
