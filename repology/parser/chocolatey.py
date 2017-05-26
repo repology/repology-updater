@@ -39,7 +39,10 @@ class ChocolateyParser():
                 pkg.name = entry.find('{http://www.w3.org/2005/Atom}title').text
                 pkg.version = entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Version').text
                 pkg.homepage = entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}ProjectUrl').text
-                pkg.comment = entry.find('{http://www.w3.org/2005/Atom}summary').text
+
+                commentnode = entry.find('{http://www.w3.org/2005/Atom}summary')
+                if commentnode is not None:
+                    pkg.comment = commentnode.text
 
                 result.append(pkg)
 
