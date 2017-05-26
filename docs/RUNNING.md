@@ -77,16 +77,17 @@ The utility allows filtering and several modes of operation, see
 
 ### Creating the database
 
-To run repology webapp you need PostgreSQL database.
+To run repology webapp you need a PostgreSQL database.
 
 First, ensure PostgreSQL server is installed and running,
-and execute the following SQL queries (usually you'll run
-```psql -U postgres``` for this):
+then execute the following commands to create a database for
+repology:
 
 ```
-CREATE DATABASE repology;
-CREATE USER repology WITH PASSWORD 'repology';
-GRANT ALL ON DATABASE repology TO repology;
+psql --username postgres -c "CREATE DATABASE repology"
+psql --username postgres -c "CREATE USER repology WITH PASSWORD 'repology'"
+psql --username postgres -c "GRANT ALL ON DATABASE repology TO repology"
+psql --username postgres --dbname repology CREATE EXTENSION pg_trgm;
 ```
 
 now you can create database schema (tables, indexes etc.) with:
