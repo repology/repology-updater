@@ -25,9 +25,10 @@ before_install:
   - sudo apt-get install -qq librpm-dev
   - wget -qO- https://github.com/repology/libversion/archive/1.2.0.tar.gz | tar -xzf- && ( cd libversion-1.2.0 && cmake . && make && sudo make install )
 before_script:
-  - psql -c "CREATE DATABASE repology_test;" -U postgres
-  - psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test';" -U postgres
-  - psql -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test;" -U postgres
+  - psql -U postgres -c "CREATE DATABASE repology_test;"
+  - psql -U postgres -c "CREATE USER repology_test WITH PASSWORD 'repology_test'"
+  - psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test"
+  - psql -U postgres -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
   - export REPOLOGY_CONFIG=repology-test.conf.default
 script:
   # test buidling C utils
