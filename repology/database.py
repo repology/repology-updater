@@ -251,24 +251,24 @@ class Database:
 
         self.cursor.execute("""
             CREATE TABLE packages (
-                repo varchar(255) not null,
-                family varchar(255) not null,
-                subrepo varchar(255),
+                repo text not null,
+                family text not null,
+                subrepo text,
 
-                name varchar(255) not null,
-                effname varchar(255) not null,
+                name text not null,
+                effname text not null,
 
-                version varchar(255) not null,
-                origversion varchar(255),
-                effversion varchar(255),
+                version text not null,
+                origversion text,
+                effversion text,
                 versionclass smallint,
 
-                maintainers varchar(1024)[],
-                category varchar(255),
+                maintainers text[],
+                category text,
                 comment text,
-                homepage varchar(1024),
-                licenses varchar(1024)[],
-                downloads varchar(1024)[],
+                homepage text,
+                licenses text[],
+                downloads text[],
 
                 ignorepackage bool not null,
                 shadow bool not null,
@@ -283,7 +283,7 @@ class Database:
         # repositories
         self.cursor.execute("""
             CREATE TABLE repositories (
-                name varchar(255) not null primary key,
+                name text not null primary key,
 
                 num_packages integer not null default 0,
                 num_packages_newest integer not null default 0,
@@ -428,7 +428,7 @@ class Database:
         # links for link checker
         self.cursor.execute("""
             CREATE TABLE links (
-                url varchar(2048) not null primary key,
+                url text not null primary key,
                 first_extracted timestamp with time zone not null,
                 last_extracted timestamp with time zone not null,
                 last_checked timestamp with time zone,
@@ -437,18 +437,18 @@ class Database:
                 status smallint,
                 redirect smallint,
                 size bigint,
-                location varchar(2048)
+                location text
             )
         """)
 
         # problems
         self.cursor.execute("""
             CREATE TABLE problems (
-                repo varchar(255) not null,
-                name varchar(255) not null,
-                effname varchar(255) not null,
-                maintainer varchar(255),
-                problem varchar(1024) not null
+                repo text not null,
+                name text not null,
+                effname text not null,
+                maintainer text,
+                problem text not null
             )
         """)
 
@@ -460,7 +460,7 @@ class Database:
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS reports (
                 created timestamp with time zone not null,
-                effname varchar(255) not null,
+                effname text not null,
                 need_verignore boolean not null,
                 need_split boolean not null,
                 need_merge boolean not null,
