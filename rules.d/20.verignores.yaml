@@ -110,6 +110,7 @@
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
 - { name: strace,                      verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
+- { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             ignorever: true }
 - { name: tar,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # obsoleted
 - { name: tidy,                        ver: "090315.c",                                    ignorever: true } # obsoleted
