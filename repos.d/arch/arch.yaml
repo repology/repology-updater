@@ -16,6 +16,8 @@
     - desc: Arch Linux Packages
       url: https://www.archlinux.org/packages/
   packagelinks:
+    # XXX: there are only two git repos: "packages" and "community", so these do
+    # not map 1:1 onto subrepos and some links are broken; not sure on the fix yet
     - desc: Git repository
       url: 'https://git.archlinux.org/svntogit/{subrepo}.git/tree/trunk?h=packages/{name}'
     - desc: PKGBUILD
