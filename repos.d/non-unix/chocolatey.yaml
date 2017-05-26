@@ -14,3 +14,14 @@
     - desc: Chocolatey package page
       url: 'https://chocolatey.org/packages/{name}'
   tags: [ all, production ]
+
+- name: nuget
+  desc: NuGet
+  family: chocolatey
+  sources:
+    - name: nuget
+      fetcher: Chocolatey
+      parser: Chocolatey
+      url: https://www.nuget.org/api/v2/
+  shadow: true
+  tags: [ all ]
