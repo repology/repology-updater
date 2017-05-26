@@ -1476,15 +1476,21 @@ class Database:
                 location
             FROM links
             WHERE url in (
-                SELECT
-                    unnest(downloads) as url
-                FROM packages
-                WHERE effname = %s
-                UNION
-                SELECT
-                    homepage
-                FROM packages
-                WHERE homepage IS NOT NULL and effname = %s
+                -- this additional wrap seem to fix query planner somehow
+                -- to use index scan on links instead of seq scan, which
+                -- makes the query 100x faster; XXX: recheck with postgres 10
+                -- or report this?
+                SELECT DISTINCT url from (
+                    SELECT
+                        unnest(downloads) as url
+                    FROM packages
+                    WHERE effname = %s
+                    UNION
+                    SELECT
+                        homepage as url
+                    FROM packages
+                    WHERE homepage IS NOT NULL and effname = %s
+                ) AS tmp
             )
             """,
             (name, name)
