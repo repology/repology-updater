@@ -421,6 +421,8 @@
 
 - { namepat: "(?:lib)?xerces-?c[0-9.+-]*",  setname: xerces-c }
 - { namepat: "(?:lib)?xerces2?-?j(?:ava)?[0-9-]*", setname: xerces-j }
+- { name: xerces, family: gentoo, category: dev-java, setname: xerces-j }
+- { name: xerces, family: [openbsd, slackbuilds], setname: xerces-j }
 - { name: xerces-c, verpat: "2\\..*",       setname: xerces-c2 }
 
 - { name: xulrunner-devel,             setname: xulrunner, ignorever: true }
