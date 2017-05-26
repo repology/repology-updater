@@ -4,9 +4,9 @@ dist: trusty
 services:
   - postgresql
 addons:
-  postgresql: "9.5"
+  postgresql: "9.6"
 python:
-  - 3.5
+  - 3.6
 before_install:
   - gem install kwalify
   - pip install Jinja2
