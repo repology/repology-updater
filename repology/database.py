@@ -362,6 +362,10 @@ class Database:
             CREATE INDEX ON repo_metapackages(effname)
         """)
 
+        self.cursor.execute("""
+            CREATE INDEX repo_metapackages_effname_trgm ON repo_metapackages USING gin (effname gin_trgm_ops);
+        """)
+
         # maintainer_metapackages
         self.cursor.execute("""
             CREATE MATERIALIZED VIEW maintainer_metapackages
