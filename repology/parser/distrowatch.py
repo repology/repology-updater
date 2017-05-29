@@ -27,12 +27,7 @@ class DistrowatchPackagesParser():
     def Parse(self, path):
         result = []
 
-        first = True
-        for row in lxml.html.parse(path).getroot().xpath('.//table[@class="Auto"]')[0].xpath('./tr'):
-            if first:
-                first = False
-                continue
-
+        for row in lxml.html.parse(path).getroot().xpath('.//table[@class="Auto"]')[0].xpath('./tr[position()>1]'):
             pkg = Package()
 
             # name + version
