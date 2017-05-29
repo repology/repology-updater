@@ -17,7 +17,7 @@
 
 import os
 import re
-import xml.etree.ElementTree
+import lxml.html
 
 from repology.package import Package
 
@@ -46,33 +46,26 @@ class GuixParser():
             if not filename.endswith('.html'):
                 continue
 
-            root = xml.etree.ElementTree.parse(os.path.join(path, filename))
+            root = lxml.html.parse(os.path.join(path, filename)).getroot()
 
-            table = root.find('.//table[@id="packages"]')
-
-            first = True
-            for row in table.findall('tr'):
-                if first:
-                    first = False
-                    continue
-
+            for row in root.xpath('.//table[@id="packages"]')[0].xpath('./tr[position()>1]'):
                 pkg = Package()
 
                 # name + version
-                cell = row.find('./td[2]/a')
+                cell = row.xpath('./td[2]/a')[0]
                 pkg.name, version = cell.text.split(' ', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
 
                 # summary
-                cell = row.find('./td[3]/span')
+                cell = row.xpath('./td[3]/span')[0]
                 pkg.comment = cell.text
 
                 # licenses
-                for cell in row.findall('./td[3]/div[1]/div[2]/a[@title="Link to the full license"]'):
+                for cell in row.xpath('./td[3]/div[1]/div[2]/a[@title="Link to the full license"]'):
                     pkg.licenses.append(cell.text)
 
                 # www
-                cell = row.find('./td[3]/div[1]/a[@title="Link to the package\'s website"]')
+                cell = row.xpath('./td[3]/div[1]/a[@title="Link to the package\'s website"]')[0]
                 pkg.homepage = cell.attrib['href']
 
                 result.append(pkg)
