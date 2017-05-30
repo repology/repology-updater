@@ -258,8 +258,7 @@
 - { name: [libsigc++-docs, libsigc++-legacy12], setname: libsigc++ }
 - { namepat: "libsigc(\\+\\+|xx|pp)[0-9.-]+", setname: libsigc++ }
 - { name: libsigc++, verpat: "1\\..*",  setname: libsigc++12 }
-- { name: libsigc++, verpat: "2\\.99.*", setname: libsigc++3 }
-- { name: libsigc++, verpat: "3\\..*", setname: libsigc++3 } # not in the wild yet
+- { name: libsigc++, verpat: "(2\\.99|3).*", setname: libsigc++3 } # 3.x not really in the wild yet
 
 - { name: [libtool-base,libtool-fortran,libtool-info,libtool-lts], setname: libtool }
 - { namepat: "libtool[0-9._-]+",       setname: libtool }
