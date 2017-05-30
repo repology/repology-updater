@@ -289,6 +289,9 @@
 - { name: [libevent2,libevent1],       setname: libevent }
 - { name: libevent, verpat: "1.*",     setname: libevent1 }
 
+- { name: [libxfont,libxfont1,libxfont2,xorg-libxfont,xorg-libxfont2], setname: libxfont }
+- { name: libxfont, verpat: "2\\..*", setname: libxfont2 }
+
 - { namepat: "llvm[0-9.-]+",           setname: llvm }
 
 - { namepat: "msynctool[0-9]+",        setname: msynctool }
