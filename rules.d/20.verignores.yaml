@@ -14,7 +14,7 @@
 - { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
-- { name: bastet,                      ver: "0.43.1.201508300",                            ignorever: true }
+- { name: bastet,                      ver: "0.43.1.2015083000",                           ignorever: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
 - { name: bison,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # alt weirdness
