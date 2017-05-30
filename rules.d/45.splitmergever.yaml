@@ -311,16 +311,17 @@
 - { name: [postfix-current,postfix-current-sasl,postfix211,postfix211-sasl], setname: postfix }
 - { name: postfix, verpat: ".*20[0-9]{6}.*",  setname: postfix-experimental }
 
-- { namepat: "postgresql[0-9.-]+",     setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-client", setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-contrib", setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-docs?", setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-lib", setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-libs", setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-plperl", setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-plpython", setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-pltcl", setname: postgresql }
-- { namepat: "postgresql[0-9.-]+-server", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*",     setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-client", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-contrib", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-docs?", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-libs", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-plperl", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-plpython", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-pltcl", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-server", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*-beta.*", setname: postgresql, ignorever: true }
+- { namepat: "postgresql[0-9.-]*-lts.*", setname: postgresql }
 - { name: postgresql, verpat: "10.*", setname: postgresql10 }
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
