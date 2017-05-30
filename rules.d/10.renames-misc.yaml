@@ -324,15 +324,17 @@
 - { name: lapacke-tmg,                 setname: lapacke                   } # component of
 
 # lib* block
+- { name: libagg,                      setname: agg                       }
 - { name: [liballegroogg,allegroogg],  setname: alogg                     }
 - { name: libass4,                     setname: libass                    }
 - { name: libatlas3,                   setname: atlas                     }
-- { name: libagg,                      setname: agg                       }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbrotli,                   setname: brotli                    }
-- { name: libenet,                     setname: enet                      }
+- { name: libcodec2,                   setname: codec2                    }
 - { name: libcomedi,                   setname: comedilib                 }
+- { name: libenet,                     setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
+- { name: libfdk-aac,                  setname: fdk-aac                   }
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: libgdal-grass,               setname: gdal-grass                }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
@@ -372,6 +374,7 @@
 - { name: [nginx-devel,nginx-mainline,nginx-libressl,nginx-lite,nginx-full,nginx-openssl-1.1,nginx-mainline-libressl,nginx-mainline-boringssl,nginx-mainline-full], setname: nginx }
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
+- { name: oggz,                        setname: liboggz                   }
 - { name: openastromenace,             setname: astromenace,              family: [ freebsd ] }
 - { name: [openblas-lapack,openblas-lapack-ilp64], setname: openblas      }
 - { name: opencv2,                     setname: opencv                    }
@@ -421,6 +424,7 @@
 - { name: supertux,                    setname: supertux1,                family: [ freebsd ] } # ???
 - { name: supertux2,                   setname: supertux,                 family: [ freebsd ] }
 - { name: [sweet-home-3d,sweethome3d-application], setname: sweethome3d   }
+- { name: [libtelepathy-farstream, telepathy-farstream-0.4], setname: telepathy-farstream }
 - { name: tetrinet-x,                  setname: tetrinetx,                family: [ freebsd ] }
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
 - { name: tintin,                      setname: tintin++,                 family: [ gentoo ]  }

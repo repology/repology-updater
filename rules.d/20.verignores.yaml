@@ -33,6 +33,7 @@
 - { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
+- { name: cvs,                         ver: "1.20120905",                                  ignorever: true }
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dejagnu,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
@@ -53,13 +54,14 @@
 - { name: "fonts:gentium-basic",       ver: "1102",                                        ignorever: true } # it's 1.102!
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
-- { name: frozen-bubble,               ver: ["905bf71","2.212"],                           ignorever: true } # fake?
+- { name: frozen-bubble,               ver: ["905bf71","2.212.0"],                         ignorever: true } # fake?
 - { name: frozen-bubble,               ver: "2.2.1",                 family: [ fedora ],   ignorever: true } # 2.2.1 was never released, it should be 2.2.1beta1
 - { namepat: "gcc[0-9]*",              verpat: ".*20[0-9]{6}.*",                           ignorever: true } # snapshots
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignorever: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gzip,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: grep,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: glw,                         verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: hyperrogue,                  ver: "83j",                                         ignorever: true } # it's 8.3j!
 - { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
@@ -102,6 +104,7 @@
 - { name: quota,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: quilt,                       verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: rage,                        ver: "0.3.0.042",                                   ignorever: true }
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
@@ -130,6 +133,7 @@
 - { name: xl2tpd,                      ver: "20140214",                                    ignorever: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 - { name: xmoto,                       ver: "0.5.12",                family: [ rosa ],     ignorever: true } # no such version
+- { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignorever: true }
 - { name: youtube-dl,                  verpat: "[0-9]{8}",                                 ignorever: true } # canonical version is period-separated
 - { name: zpaq,                        verpat: "[0-9]+",                                   ignorever: true }
 - { name: zsh-syntax-highlighting,     verpat: "20[0-9]{6}.*",                             ignorever: true } # FreeBSD
