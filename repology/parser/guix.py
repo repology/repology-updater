@@ -17,6 +17,7 @@
 
 import os
 import re
+
 import lxml.html
 
 from repology.package import Package
