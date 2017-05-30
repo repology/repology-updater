@@ -446,6 +446,7 @@
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
 - { name: xfce4-dict-plugin,           setname: xfce4-dict,               family: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                family: [ freebsd ] }
+- { name: xsel-conrad,                 setname: xsel                      }
 - { name: yofrankie-bge,               setname: yofrankie                 }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
 - { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
