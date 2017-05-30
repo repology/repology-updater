@@ -345,6 +345,8 @@
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libmpcdec5,                  setname: libmpcdec                 }
+- { name: libopus,                     setname: opus                      }
+- { name: libopusfile,                 setname: opusfile                  }
 - { name: libphysfs,                   setname: physfs                    }
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
@@ -428,6 +430,7 @@
 - { name: tetrinet-x,                  setname: tetrinetx,                family: [ freebsd ] }
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
 - { name: tintin,                      setname: tintin++,                 family: [ gentoo ]  }
+- { name: [tiled-java,tiled-qt],       setname: tiled                     }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
