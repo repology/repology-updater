@@ -77,7 +77,7 @@
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignorever: true }
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
-- { name: libssh,                      ver: ["0.73", "0.11"],                              ignorever: true } # pkgsrc, gobo
+- { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
