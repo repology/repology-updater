@@ -300,6 +300,7 @@
 - { name: [googletest,libgtest],       setname: gtest                     }
 - { name: gopro-vrplayer,              setname: gopro-vr-player           }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
+- { name: grub2,                       setname: grub                      } # since grub legacy is obsoleted, just let grub2 eat it away
 - { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna], setname: graphviz }
 - { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck

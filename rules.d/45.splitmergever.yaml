@@ -163,7 +163,7 @@
 
 - { name: glusterfs3,                  setname: glusterfs }
 
-- { namepat: "gmime[0-9]+",            setname: gmime }
+- { namepat: "(?:lib)?gmime[0-9._-]+", setname: gmime }
 - { name: gmime, verpat: "2\\.2\\..*", setname: gmime22 }
 - { name: gmime, verpat: "2\\.4\\..*", setname: gmime24 }
 - { name: gmime, verpat: "2\\.6\\..*", setname: gmime26 }
@@ -181,6 +181,33 @@
 - { namepat: "goffice[0-9._-]+",       setname: goffice }
 
 - { namepat: "golang[0-9.-]*",         setname: go }
+
+- { namepat: "libftdi[0-9._-]+",       setname: libftdi }
+- { name: libftdi, verpat: "0\\..*",   setname: libftdi0 }
+
+- { namepat: "(?:lib)?gtk[0-9._+-]*",  setname: gtk }
+- { name: gtk, verpat: "1\\..*",       setname: gtk1 }
+- { name: gtk, verpat: "2\\..*",       setname: gtk2 }
+- { name: gtk, verpat: "3\\..*",       setname: gtk3 }
+- { name: gtk, verpat: "(4|3\\.9[0-9]+)\\..*", setname: gtk4 }
+
+- { namepat: "(?:lib)?gtksourceview[0-9._-]*", setname: gtksourceview }
+- { name: gtksourceview, verpat: "1\\..*", setname: gtksourceview1 }
+- { name: gtksourceview, verpat: "2\\..*", setname: gtksourceview2 }
+- { name: gtksourceview, verpat: "3\\..*", setname: gtksourceview3 }
+- { name: gtksourceview, verpat: "(4|3\\.99)\\..*", setname: gtksourceview4 }
+
+- { namepat: "(?:lib)?gtksourceviewmm[0-9._-]*", setname: gtksourceviewmm }
+- { name: gtksourceviewmm, verpat: "2\\..*", setname: gtksourceviewmm2 }
+- { name: gtksourceviewmm, verpat: "3\\..*", setname: gtksourceviewmm3 }
+
+- { namepat: "(?:lib)?gtkspell[0-9._-]*", setname: gtkspell }
+- { name: gtkspell, verpat: "2\\..*", setname: gtkspell2 }
+- { name: gtkspell, verpat: "3\\..*", setname: gtkspell3 }
+
+- { namepat: "(?:lib)?gtkspellmm[0-9._-]*", setname: gtkspellmm }
+
+- { namepat: "(?:lib)?gphoto2?",       setname: gphoto2 }
 
 - { namepat: "ices[0-9]+",             setname: ices }
 - { name: ices, verpat: "0\\..*",      setname: ices0 }
