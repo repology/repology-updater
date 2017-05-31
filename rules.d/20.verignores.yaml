@@ -84,6 +84,7 @@
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
+- { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignorever: true } # it's x.y.z, ignore all revisions and dates
 - { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignorever: true }   # \  force correct
 - { name: onioncat,                    verpat: "0\\.2\\.2\\.r[0-9]+.*",                    unignorever: true } # / version schema
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }
@@ -93,6 +94,7 @@
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
+- { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignorever: true }
 - { name: patch,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
