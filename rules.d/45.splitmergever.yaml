@@ -322,6 +322,13 @@
 
 - { namepat: "msynctool[0-9]+",        setname: msynctool }
 
+- { namepat: "(?:lib)?musicbrainz[0-9]+", setname: libmusicbrainz }
+- { name: libmusicbrainz, namepat: "2\\..*", setname: libmusicbrainz2 }
+- { name: libmusicbrainz, namepat: "3\\..*", setname: libmusicbrainz3 }
+- { name: libmusicbrainz, namepat: "4\\..*", setname: libmusicbrainz4 }
+- { name: libmusicbrainz, namepat: "5\\..*", setname: libmusicbrainz5 }
+- { name: libmusicbrainz, warning: "please classify me" }
+
 - { namepat: "netatalk[0-9.-]+",       setname: netatalk }
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
