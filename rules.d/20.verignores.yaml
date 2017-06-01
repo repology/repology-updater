@@ -85,6 +85,8 @@
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
 - { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignorever: true } # it's x.y.z, ignore all revisions and dates
+- { name: mplayer,                     ver: "5.1.4",                                       ignorever: true } # pclinuxos garbage
+- { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignorever: true }   # \  force correct
 - { name: onioncat,                    verpat: "0\\.2\\.2\\.r[0-9]+.*",                    unignorever: true } # / version schema
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }

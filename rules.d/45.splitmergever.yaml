@@ -163,10 +163,16 @@
 
 - { name: glusterfs3,                  setname: glusterfs }
 
-- { namepat: "(?:lib)?gmime[0-9._-]+", setname: gmime }
+- { namepat: "(?:lib)?gmime[0-9._-]*", setname: gmime }
 - { name: gmime, verpat: "2\\.2\\..*", setname: gmime22 }
 - { name: gmime, verpat: "2\\.4\\..*", setname: gmime24 }
 - { name: gmime, verpat: "2\\.6\\..*", setname: gmime26 }
+- { name: gmime, verpat: "3\\..*",     setname: gmime3 }
+
+- { namepat: "(?:lib)?gmime[0-9._-]*-sharp", setname: gmime-sharp }
+- { name: gmime-sharp, verpat: "2\\.2\\..*", setname: gmime22-sharp }
+- { name: gmime-sharp, verpat: "2\\.4\\..*", setname: gmime24-sharp }
+- { name: gmime-sharp, verpat: "2\\.6\\..*", setname: gmime26-sharp }
 
 - { namepat: "gnats[0-9]+",            setname: gnats }
 
@@ -321,7 +327,7 @@
 
 - { namepat: "msynctool[0-9]+",        setname: msynctool }
 
-- { namepat: "(?:lib)?musicbrainz[0-9]+", setname: libmusicbrainz }
+- { namepat: "(?:lib)?musicbrainz[0-9]*", setname: libmusicbrainz }
 - { name: libmusicbrainz, verpat: "2\\..*", setname: libmusicbrainz2 }
 - { name: libmusicbrainz, verpat: "3\\..*", setname: libmusicbrainz3 }
 - { name: libmusicbrainz, verpat: "4\\..*", setname: libmusicbrainz4 }
