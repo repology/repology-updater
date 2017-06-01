@@ -302,6 +302,7 @@
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
 - { name: grub2,                       setname: grub                      } # since grub legacy is obsoleted, just let grub2 eat it away
 - { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna], setname: graphviz }
+- { name: [gucharmap-gtk2,gucharmap7], setname: gucharmap                 }
 - { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
