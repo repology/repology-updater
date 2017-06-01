@@ -22,6 +22,7 @@
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
+- { name: bzflag,                      ver: "2.4.11",                family: sisyphus,     ignorever: true } # fake
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
