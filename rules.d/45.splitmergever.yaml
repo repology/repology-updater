@@ -197,9 +197,8 @@
 - { name: gtksourceview, verpat: "3\\..*", setname: gtksourceview3 }
 - { name: gtksourceview, verpat: "(4|3\\.99)\\..*", setname: gtksourceview4 }
 
-- { namepat: "(?:lib)?gtksourceviewmm[0-9._-]*", setname: gtksourceviewmm }
-- { name: gtksourceviewmm, verpat: "2\\..*", setname: gtksourceviewmm2 }
-- { name: gtksourceviewmm, verpat: "3\\..*", setname: gtksourceviewmm3 }
+- { namepat: "(?:lib)?gtksourceviewmm[0-9._-]*", setname: gtksourceviewmm2 }
+- { name: gtksourceviewmm2, verpat: "3\\..*", setname: gtksourceviewmm3 }
 
 - { namepat: "(?:lib)?gtkspell[0-9._-]*", setname: gtkspell }
 - { name: gtkspell, verpat: "2\\..*", setname: gtkspell2 }
