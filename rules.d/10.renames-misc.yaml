@@ -305,7 +305,6 @@
 - { name: [gucharmap-gtk2,gucharmap7], setname: gucharmap                 }
 - { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
-- { name: hs-darcs,                    setname: darcs,                    family: [ freebsd ] }
 - { name: iccexamin,                   setname: icc-examin                }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
