@@ -12,7 +12,7 @@
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
-- { name: arora,                       ver: "20[0-9]{6}.*",                                ignorever: true }
+- { name: arora,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 - { name: bastet,                      ver: "0.43.1.2015083000",                           ignorever: true }
