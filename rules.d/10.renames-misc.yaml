@@ -99,7 +99,7 @@
 - { name: bowtie, verpat: "2.*",       setname: bowtie2,                  family: [ gentoo ] }
 - { name: battle-tanks,                setname: btanks                    }
 - { name: [bpython-py27,bpython2],     setname: bpython                   }
-- { name: brasero2,                    setname: brasero                   }
+- { name: [brasero2,brasero-dvdcssfix], setname: brasero                  }
 - { name: bsh2,                        setname: bsh                       }
 - { name: bub-n-bros,                  setname: bubbros,                  family: [ gentoo ]  } # XXX: recheck
 - { name: bugseverywhere,              setname: bugs-everywhere           }
