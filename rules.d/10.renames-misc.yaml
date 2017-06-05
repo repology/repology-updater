@@ -98,9 +98,10 @@
 - { name: bouncycastle15,              setname: bouncycastle              }
 - { name: bowtie, verpat: "2.*",       setname: bowtie2,                  family: [ gentoo ] }
 - { name: battle-tanks,                setname: btanks                    }
-- { name: bub-n-bros,                  setname: bubbros,                  family: [ gentoo ]  } # XXX: recheck
 - { name: [bpython-py27,bpython2],     setname: bpython                   }
+- { name: brasero2,                    setname: brasero                   }
 - { name: bsh2,                        setname: bsh                       }
+- { name: bub-n-bros,                  setname: bubbros,                  family: [ gentoo ]  } # XXX: recheck
 - { name: bugseverywhere,              setname: bugs-everywhere           }
 - { name: bugzilla50,                  setname: bugzilla                  }
 - { name: bullet3,                     setname: bullet                    }
