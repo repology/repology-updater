@@ -225,6 +225,7 @@
 - { name: enemyterritory,              setname: enemy-territory           }
 - { name: enigma_sdl,                  setname: enigma                    }
 - { name: entagged-tageditor,          setname: entagged,                 family: [ gentoo ]  }
+- { name: ephoto-git,                  setname: ephoto                    ignorever: true }
 - { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
 - { name: epsxe1.9,                    setname: epsxe                     }
 - { name: eric6,                       setname: eric,                     family: [ freebsd ] }

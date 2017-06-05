@@ -21,6 +21,7 @@
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
+- { name: brasero,                     ver: "3.12.2",                family: opensuse,     ignorever: true } # not released yet
 - { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
 - { name: bzflag,                      ver: "2.4.11",                family: sisyphus,     ignorever: true } # fake
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
@@ -43,6 +44,7 @@
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignorever: true }
 - { name: e2fsprogs,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: ephoto,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: eternal-lands,               verpat: "[0-9]+",                                   ignorever: true }
 - { name: eternal-lands-data,          verpat: "[0-9]+",                                   ignorever: true }
 - { name: ethtool,                     verpat: "[0-9]+",                                   ignorever: true }
@@ -130,7 +132,7 @@
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
-- { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora], ignorever: true } # fake
+- { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
