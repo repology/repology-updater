@@ -37,4 +37,7 @@
 - { name: "perl:test-exception",       ver: [ "0.430000", "0.400", "0.320" ], ignorever: true }
 - { name: "perl:time-duration",        ver: "1.200000",        ignorever: true }
 
+# These are more applications than modules, so rename
+- { name: "perl:get_iplayer",          setname: get_iplayer }
+
 - { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below
