@@ -12,6 +12,7 @@
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
+- { name: arora,                       ver: "20[0-9]{6}.*",                                ignorever: true }
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 - { name: bastet,                      ver: "0.43.1.2015083000",                           ignorever: true }
@@ -22,6 +23,7 @@
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: brasero,                     ver: "3.12.2",                family: opensuse,     ignorever: true } # not released yet
+- { name: brotli,                      verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
 - { name: bzflag,                      ver: "2.4.11",                family: sisyphus,     ignorever: true } # fake
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6

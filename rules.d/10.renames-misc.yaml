@@ -162,6 +162,7 @@
 - { name: cutecom-legacy,              setname: cutecom                   }
 - { name: curseofwar-sdl,              setname: curseofwar                }
 - { name: cvsweb3,                     setname: cvsweb                    }
+- { name: cyrus5-imapd,                setname: cyrus-imapd               }
 - { name: cython2,                     setname: cython                    }
 - { name: cython2-kivy,                setname: cython-kivy               }
 - { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debuntu ]  }
