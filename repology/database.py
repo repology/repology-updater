@@ -856,7 +856,7 @@ class Database:
                 ignoreversion
             FROM packages
             WHERE effname {}
-            """.format("= ANY (%s)" if isinstance(names, list) else "= %s"),
+            """.format('= ANY (%s)' if isinstance(names, list) else '= %s'),
             (names,)
         )
 

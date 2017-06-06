@@ -260,7 +260,7 @@ def index():
         'by_pnewest': [
             {
                 'name': repo['name'],
-                'value': "{:.2f}%".format(100.0 * repo['num_metapackages_newest'] / repo['num_metapackages']),
+                'value': '{:.2f}%'.format(100.0 * repo['num_metapackages_newest'] / repo['num_metapackages']),
             }
             for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (1 + repo['num_metapackages']), reverse=True)[:10]
         ]
@@ -390,6 +390,7 @@ def index():
         top_repos=top_repos,
         metapackagedata=metapackagedata
     )
+
 
 @app.route('/metapackages/')  # XXX: redirect to metapackages/all?
 @app.route('/metapackages/all/')
