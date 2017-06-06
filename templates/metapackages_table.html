@@ -1,0 +1,60 @@
+{% if metapackagedata %}
+<table class="table table-striped table-condensed">
+	<thead>
+	{% for metapackagename,data in metapackagedata|dictsort %}
+	{% set headerevery = 50 %}
+	{% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
+		<tr>
+			<th>Metapackage</th>
+			{% if repo %}
+			<th class="text-nowrap">In {{ repometadata[repo].desc }}</th>
+			{% elif maintainer %}
+			<th class="text-nowrap">By {{ maintainer }}</th>
+			{% endif %}
+			<th class="text-center">Spread</th>
+			<th>Newest</th>
+			<th>Outdated</th>
+			<th>Ignored</th>
+		</tr>
+	{% if loop.first %}</thead><tbody>{% endif %}
+	{% endif %}
+		<tr>
+			<td><a href="{{ url_for("metapackage_versions", name=metapackagename) }}">{{ metapackagename }}</a></td>
+			{% if repo or maintainer %}
+			<td>
+			{% for versioninfo in data.explicit %}
+				{% set versionclass = versioninfo.class|css_for_package_versionclass %}
+				{% set versionclass = 'unique' if data.families|length == 1 and versionclass == 'newest' else versionclass %}
+				<span class="version version-{{ versionclass }}">{{ versioninfo.version }}</span>
+				{%- set count = versioninfo.repos|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+			{% else %}
+				-
+			{% endfor %}
+			</td>
+			{% endif %}
+			<td class="text-center"><b>{{ data.families|length }}</b></td>
+			<td>
+			{% for versioninfo in data.newest %}
+				<span class="version version-{% if data.families|length > 1 %}newest{% else %}unique{% endif %}">{{ versioninfo.version }}</span>
+				{%- set count = versioninfo.repos|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+			{% endfor %}
+			</td>
+			<td>
+			{% for versioninfo in data.outdated %}
+				<span class="version version-outdated">{{ versioninfo.version }}</span>
+				{%- set count = versioninfo.repos|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+			{% endfor %}
+			</td>
+			<td>
+			{% for versioninfo in data.ignored %}
+				<span class="version version-ignored">{{ versioninfo.version }}</span>
+				{%- set count = versioninfo.repos|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+			{% endfor %}
+			</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<div class="alert alert-warning" role="alert">No metapackages found matching the criteria</div>
+{% endif %}
