@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="105">
+	<clipPath id="clip">
+		<rect rx="3" width="100%" height="100%" fill="#000"/>
+	</clipPath>
+	<linearGradient id="grad" x2="0" y2="100%">
+		<stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
+		<stop offset="1" stop-opacity=".1"/>
+	</linearGradient>
+
+	<g clip-path="url(#clip)">
+		<rect width="100%" height="100%" fill="#555"/>
+
+		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="15" font-weight="bold">
+			<a xlink:href="https://repology.org/metapackage/libsdl2pp/packages">
+				<text x="100.0" y="18" fill="#010101" fill-opacity=".3">Packaging status</text>
+				<text x="100.0" y="17">Packaging status</text>
+			</a>
+		</g>
+
+		<rect x="110" y="25" width="90" height="20" fill="#e05d44"/>
+		<rect y="25" width="100%" height="20" fill="url(#grad)"/>
+		<g fill="#fff" text-anchor="end" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+			<text x="105" y="40" fill="#010101" fill-opacity=".3">Arch</text>
+			<text x="105" y="39">Arch</text>
+		</g>
+		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11"><text x="155.0" y="40" fill="#010101" fill-opacity=".3">1.1.0</text>
+			<text x="155.0" y="39">1.1.0</text>
+		</g>
+		<rect x="110" y="45" width="90" height="20" fill="#e05d44"/>
+		<rect y="45" width="100%" height="20" fill="url(#grad)"/>
+		<g fill="#fff" text-anchor="end" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+			<text x="105" y="60" fill="#010101" fill-opacity=".3">Debian</text>
+			<text x="105" y="59">Debian</text>
+		</g>
+		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11"><text x="155.0" y="60" fill="#010101" fill-opacity=".3">1.0.7</text>
+			<text x="155.0" y="59">1.0.7</text>
+		</g>
+		<rect x="110" y="65" width="90" height="20" fill="#4c1"/>
+		<rect y="65" width="100%" height="20" fill="url(#grad)"/>
+		<g fill="#fff" text-anchor="end" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+			<text x="105" y="80" fill="#010101" fill-opacity=".3">FreeBSD</text>
+			<text x="105" y="79">FreeBSD</text>
+		</g>
+		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11"><text x="155.0" y="80" fill="#010101" fill-opacity=".3">1.3.0</text>
+			<text x="155.0" y="79">1.3.0</text>
+		</g>
+		<rect x="110" y="85" width="90" height="20" fill="#e05d44"/>
+		<rect y="85" width="100%" height="20" fill="url(#grad)"/>
+		<g fill="#fff" text-anchor="end" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+			<text x="105" y="100" fill="#010101" fill-opacity=".3">Gentoo</text>
+			<text x="105" y="99">Gentoo</text>
+		</g>
+		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11"><text x="155.0" y="100" fill="#010101" fill-opacity=".3">1.2.1</text>
+			<text x="155.0" y="99">1.2.1</text>
+		</g>
+	</g>
+</svg>

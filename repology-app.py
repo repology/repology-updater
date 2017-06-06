@@ -236,6 +236,161 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
 
 
 @app.route('/')  # XXX: redirect to metapackages/all?
+def index():
+    repostats = [
+        repo for repo in get_db().GetRepositories()
+        if repo['name'] in reponames and repometadata[repo['name']]['type'] == 'repository'
+    ]
+
+    top_repos = {
+        'by_total': [
+            {
+                'name': repo['name'],
+                'value': repo['num_metapackages'],
+            }
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages'], reverse=True)[:10]
+        ],
+        'by_newest': [
+            {
+                'name': repo['name'],
+                'value': repo['num_metapackages_newest'],
+            }
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'], reverse=True)[:10]
+        ],
+        'by_pnewest': [
+            {
+                'name': repo['name'],
+                'value': "{:.2f}%".format(100.0 * repo['num_metapackages_newest'] / repo['num_metapackages']),
+            }
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (1 + repo['num_metapackages']), reverse=True)[:10]
+        ]
+    }
+
+    important_packages = [
+        'apache24',
+        'awesome',
+        'bash',
+        'binutils',
+        'bison',
+        'blender',
+        'boost',
+        'bzip2',
+        'chromium',
+        'claws-mail',
+        'cmake',
+        'cppcheck',
+        'cups',
+        'curl',
+        'darktable',
+        'dia',
+        'djvulibre',
+        'dosbox',
+        'dovecot',
+        'doxygen',
+        'dvd+rw-tools',
+        'emacs',
+        'exim',
+        'ffmpeg',
+        'firefox',
+        'flex',
+        'fluxbox',
+        'freecad',
+        'freetype',
+        'gcc',
+        'gdb',
+        'geeqie',
+        'gimp',
+        'git',
+        'gnupg',
+        'go',
+        'graphviz',
+        'grub',
+        'icewm',
+        'imagemagick',
+        'inkscape',
+        'irssi',
+        'kodi',
+        'lame',
+        'lftp',
+        'libreoffice',
+        'libressl',
+        'lighttpd',
+        'links',
+        'llvm',
+        'mariadb',
+        'maxima',
+        'mc',
+        'memcached',
+        'mercurial',
+        'mesa',
+        'mplayer',
+        'mutt',
+        'mysql',
+        'nginx',
+        'nmap',
+        'octave',
+        'openbox',
+        'openssh',
+        'openssl',
+        'openttf',
+        'openvpn',
+        'p7zip',
+        'perl',
+        'pidgin',
+        'postfix',
+        'postgresql',
+        'privoxy',
+        'procmail',
+        'python3',
+        'qemu',
+        'rdesktop',
+        'redis',
+        'rrdtool',
+        'rsync',
+        'rtorrent',
+        'rxvt-unicode',
+        'samba',
+        'sane-backends',
+        'scons',
+        'screen',
+        'scribus',
+        'scummvm',
+        'sdl2',
+        'smartmontools',
+        'sqlite3',
+        'squid',
+        'subversion',
+        'sudo',
+        'sumversion',
+        'thunderbird',
+        'tigervnc',
+        'tmux',
+        'tor',
+        'valgrind',
+        'vim',
+        'virtualbox',
+        'vlc',
+        'vsftpd',
+        'wayland',
+        'wesnoth',
+        'wget',
+        'wine',
+        'wireshark',
+        'xorg-server',
+        'youtube-dl',
+        'zsh',
+    ]
+
+    packages = get_db().GetMetapackage(important_packages)
+
+    metapackagedata = metapackages_to_data(PackagesToMetapackages(packages))
+
+    return flask.render_template(
+        'index.html',
+        top_repos=top_repos,
+        metapackagedata=metapackagedata
+    )
+
 @app.route('/metapackages/')  # XXX: redirect to metapackages/all?
 @app.route('/metapackages/all/')
 @app.route('/metapackages/all/<bound>/')
