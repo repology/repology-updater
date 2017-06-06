@@ -2,6 +2,7 @@
 # GNU Guix
 ###########################################################################
 - name: gnuguix
+  type: repository
   desc: GNU Guix
   family: guix
   sources:

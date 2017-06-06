@@ -2,6 +2,7 @@
 # FreeBSD
 ###########################################################################
 - name: freebsd
+  type: repository
   desc: FreeBSD
   family: freebsd
   sources:
@@ -38,6 +39,7 @@
 # DragonFlyBSD DPorts (derivative from FreeBSD ports)
 ###########################################################################
 - name: dports
+  type: repository
   desc: DPorts
   family: freebsd
   sources:

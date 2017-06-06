@@ -2,6 +2,7 @@
 # PCLinuxOS
 ###########################################################################
 - name: pclinuxos
+  type: repository
   desc: PCLinuxOS
   family: pclinuxos
   sources:

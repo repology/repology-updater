@@ -2,6 +2,7 @@
 # CPAN (perl)
 ###########################################################################
 - name: cpan
+  type: modules
   desc: CPAN
   family: cpan
   sources:

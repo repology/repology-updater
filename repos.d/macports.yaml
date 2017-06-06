@@ -2,6 +2,7 @@
 # MacPorts
 ###########################################################################
 - name: macports
+  type: repository
   desc: MacPorts
   family: macports
   sources:

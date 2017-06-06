@@ -2,6 +2,7 @@
 # SlackBuilds
 ###########################################################################
 - name: slackbuilds
+  type: repository
   desc: SlackBuilds
   family: slackbuilds
   sources:

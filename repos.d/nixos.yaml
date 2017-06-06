@@ -2,6 +2,7 @@
 # NixOS packages
 ###########################################################################
 - name: nix_stable
+  type: repository
   desc: nixpkgs stable
   family: nix
   sources:
@@ -18,6 +19,7 @@
   tags: [ all, production ]
 
 - name: nix_unstable
+  type: repository
   desc: nixpkgs unstable
   family: nix
   sources:

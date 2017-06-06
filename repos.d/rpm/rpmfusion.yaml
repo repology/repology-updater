@@ -2,6 +2,7 @@
 # RPM Fusion
 ###########################################################################
 - name: rpmfusion_fedora_24
+  type: repository
   desc: RPM Fusion Fedora 24
   family: fedora
   sources:
@@ -41,6 +42,7 @@
   tags: [ all, production, rpmfusion ]
 
 - name: rpmfusion_fedora_25
+  type: repository
   desc: RPM Fusion Fedora 25
   family: fedora
   sources:
@@ -80,6 +82,7 @@
   tags: [ all, production, rpmfusion ]
 
 - name: rpmfusion_fedora_rawhide
+  type: repository
   desc: RPM Fusion Fedora Rawhide
   family: fedora
   sources:

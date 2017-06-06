@@ -2,6 +2,7 @@
 # Linux Mint
 ###########################################################################
 - name: linux_mint_17
+  type: repository
   desc: Linux Mint 17
   family: debuntu
   sources:
@@ -17,6 +18,7 @@
   tags: [ all, production, mint ]
 
 - name: linux_mint_17_1
+  type: repository
   desc: Linux Mint 17.1
   family: debuntu
   sources:
@@ -32,6 +34,7 @@
   tags: [ all, production, mint ]
 
 - name: linux_mint_17_2
+  type: repository
   desc: Linux Mint 17.2
   family: debuntu
   sources:
@@ -47,6 +50,7 @@
   tags: [ all, production, mint ]
 
 - name: linux_mint_17_3
+  type: repository
   desc: Linux Mint 17.3
   family: debuntu
   sources:
@@ -62,6 +66,7 @@
   tags: [ all, production, mint ]
 
 - name: linux_mint_18
+  type: repository
   desc: Linux Mint 18
   family: debuntu
   sources:
@@ -77,6 +82,7 @@
   tags: [ all, production, mint ]
 
 - name: linux_mint_18_1
+  type: repository
   desc: Linux Mint 18.1
   family: debuntu
   sources:

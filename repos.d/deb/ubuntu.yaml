@@ -2,6 +2,7 @@
 # Ubuntu
 ###########################################################################
 - name: ubuntu_12_04
+  type: repository
   desc: Ubuntu 12.04
   family: debuntu
   valid_till: 2017-04-26
@@ -27,6 +28,7 @@
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_14_04
+  type: repository
   desc: Ubuntu 14.04
   family: debuntu
   valid_till: 2019-05-01
@@ -52,6 +54,7 @@
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_16_04
+  type: repository
   desc: Ubuntu 16.04
   family: debuntu
   valid_till: 2021-05-01
@@ -77,6 +80,7 @@
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_16_10
+  type: repository
   desc: Ubuntu 16.10
   family: debuntu
   valid_till: 2017-08-01
@@ -102,6 +106,7 @@
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_17_04
+  type: repository
   desc: Ubuntu 17.04
   family: debuntu
   valid_till: 2018-02-01
@@ -127,6 +132,7 @@
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_17_10
+  type: repository
   desc: Ubuntu 17.10
   family: debuntu
   valid_till: 2018-08-01

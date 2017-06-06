@@ -2,6 +2,7 @@
 # Fedora
 ###########################################################################
 - name: fedora_24
+  type: repository
   desc: Fedora 24
   family: fedora
   sources:
@@ -20,6 +21,7 @@
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_25
+  type: repository
   desc: Fedora 25
   family: fedora
   sources:
@@ -38,6 +40,7 @@
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_26
+  type: repository
   desc: Fedora 26
   family: fedora
   sources:
@@ -56,6 +59,7 @@
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
+  type: repository
   desc: Fedora Rawhide
   family: fedora
   sources:

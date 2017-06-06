@@ -2,6 +2,7 @@
 # Pentoo
 ###########################################################################
 - name: gentoo_ovl_pentoo
+  type: repository
   desc: Gentoo overlay Pentoo
   family: gentoo
   sources:
@@ -20,6 +21,7 @@
 # Disabled overlays (not really useful)
 ###########################################################################
 - name: gentoo_ovl_games
+  type: repository
   desc: Gentoo Overlay Games
   family: gentoo
   sources:
@@ -33,6 +35,7 @@
   tags: [ all ]
 
 - name: gentoo_ovl_gamerlay
+  type: repository
   desc: Gentoo Overlay Gamerlay
   family: gentoo
   sources:

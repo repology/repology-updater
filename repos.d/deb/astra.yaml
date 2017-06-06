@@ -2,6 +2,7 @@
 # Astra Linux
 ###########################################################################
 - name: astra
+  type: repository
   desc: Astra Linux Orel
   family: debuntu
   sources:

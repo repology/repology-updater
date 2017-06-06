@@ -2,6 +2,7 @@
 # Debian
 ###########################################################################
 - name: debian_stable
+  type: repository
   desc: Debian Stable
   family: debuntu
   sources:
@@ -30,6 +31,7 @@
   tags: [ all, production, debian ]
 
 - name: debian_stable_backports
+  type: repository
   desc: Debian Stable Backports
   family: debuntu
   sources:
@@ -58,6 +60,7 @@
   tags: [ all, production, debian ]
 
 - name: debian_testing
+  type: repository
   desc: Debian Testing
   family: debuntu
   sources:
@@ -86,6 +89,7 @@
   tags: [ all, production, debian ]
 
 - name: debian_unstable
+  type: repository
   desc: Debian Unstable
   family: debuntu
   sources:
@@ -114,6 +118,7 @@
   tags: [ all, production, debian, have_testdata ]
 
 - name: debian_experimental
+  type: repository
   desc: Debian Experimental
   family: debuntu
   sources:

@@ -2,6 +2,7 @@
 # freshcode.club (freshmeat successor)
 ###########################################################################
 - name: freshcode
+  type: site
   desc: freshcode.club
   family: freshcode
   sources:

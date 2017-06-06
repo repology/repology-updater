@@ -2,6 +2,7 @@
 # EPEL
 ###########################################################################
 - name: epel_6
+  type: repository
   desc: EPEL 6
   family: fedora
   sources:
@@ -15,6 +16,7 @@
   tags: [ all, production, epel ]
 
 - name: epel_7
+  type: repository
   desc: EPEL 7
   family: fedora
   sources:

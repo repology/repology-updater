@@ -2,6 +2,7 @@
 # OpenIndiana
 ###########################################################################
 - name: openindiana
+  type: repository
   desc: OpenIndiana
   family: openindiana
   sources:

@@ -2,6 +2,7 @@
 # Gobolinux
 ###########################################################################
 - name: gobolinux
+  type: repository
   desc: GoboLinux
   family: gobolinux
   sources:

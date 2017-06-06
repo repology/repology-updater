@@ -2,6 +2,7 @@
 # Homebrew (not functional yet)
 ###########################################################################
 - name: homebrew
+  type: repository
   desc: Homebrew
   family: homebrew
   sources:

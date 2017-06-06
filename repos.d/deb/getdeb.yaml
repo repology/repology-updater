@@ -2,6 +2,7 @@
 # GetDeb
 ###########################################################################
 - name: getdeb
+  type: repository
   desc: GetDeb/PlayDeb
   family: debuntu
   sources:

@@ -2,6 +2,7 @@
 # libregamewiki.org (libre games wiki)
 ###########################################################################
 - name: libregamewiki
+  type: site
   desc: Libregamewiki
   family: libregamewiki
   sources:

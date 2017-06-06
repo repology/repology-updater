@@ -2,6 +2,7 @@
 # YACP (Yet Another Cygwin Ports)
 ###########################################################################
 - name: yacp
+  type: repository
   desc: YACP
   family: yacp
   sources:

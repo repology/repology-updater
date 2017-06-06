@@ -2,6 +2,7 @@
 # OpenSUSE
 ###########################################################################
 - name: opensuse_leap_42_1
+  type: repository
   desc: OpenSUSE Leap 42.1
   family: opensuse
   valid_till: 2017-05-16
@@ -27,6 +28,7 @@
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_42_2
+  type: repository
   desc: OpenSUSE Leap 42.2
   family: opensuse
   sources:
@@ -51,6 +53,7 @@
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_42_3
+  type: repository
   desc: OpenSUSE Leap 42.3
   family: opensuse
   sources:
@@ -75,6 +78,7 @@
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_tumbleweed
+  type: repository
   desc: OpenSUSE Tumbleweed
   family: opensuse
   sources:

@@ -2,6 +2,7 @@
 # OpenBSD
 ###########################################################################
 - name: openbsd
+  type: repository
   desc: OpenBSD
   family: openbsd
   sources:

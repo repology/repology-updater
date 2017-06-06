@@ -2,6 +2,7 @@
 # Antergos (arch derivative)
 ###########################################################################
 - name: antergos_main
+  type: repository
   desc: Antergos Main
   family: arch
   sources:
@@ -24,6 +25,7 @@
   tags: [ all, production, antergos ]
 
 - name: antergos_staging
+  type: repository
   desc: Antergos Staging
   family: arch
   sources:

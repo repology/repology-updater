@@ -2,6 +2,7 @@
 # Calculate linux
 ###########################################################################
 - name: calculate
+  type: repository
   desc: Calculate
   family: gentoo
   sources:
