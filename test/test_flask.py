@@ -86,6 +86,9 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/about', has=['maintainers'])
         self.checkurl_html('/api', has=['/api/v1/metapackages/all/firefox'])
 
+    def test_titlepage(self):
+        self.checkurl('/', has=['FreeBSD', 'virtualbox'])
+
     def test_statistics(self):
         self.checkurl('/statistics', has=['FreeBSD'])
 
