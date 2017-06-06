@@ -828,7 +828,7 @@ class Database:
     def Commit(self):
         self.db.commit()
 
-    def GetMetapackage(self, name):
+    def GetMetapackage(self, names):
         self.cursor.execute(
             """
             SELECT
@@ -855,9 +855,9 @@ class Database:
                 shadow,
                 ignoreversion
             FROM packages
-            WHERE effname = %s
-            """,
-            (name,)
+            WHERE effname {}
+            """.format("= ANY (%s)" if isinstance(names, list) else "= %s"),
+            (names,)
         )
 
         return [
