@@ -141,28 +141,7 @@ def get_packages_name_range(packages):
     return firstname, lastname
 
 
-def metapackages_generic(bound, *filters, template='metapackages.html', repo=None, maintainer=None):
-    namefilter = bound_to_filter(bound)
-
-    # process search
-    search = flask.request.args.to_dict().get('search')
-    searchfilter = NameSubstringQueryFilter(search) if search else None
-
-    # get packages
-    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['METAPACKAGES_PER_PAGE'])
-
-    # on empty result, fallback to show first, last set of results
-    if not packages:
-        if bound and bound.startswith('<'):
-            namefilter = NameStartingQueryFilter()
-        else:
-            namefilter = NameBeforeQueryFilter()
-        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['METAPACKAGES_PER_PAGE'])
-
-    firstname, lastname = get_packages_name_range(packages)
-
-    metapackages = PackagesToMetapackages(packages)
-
+def metapackages_to_data(metapackages, repo=None, maintainer=None):
     metapackagedata = {}
     for metapackagename, packages in sorted(metapackages.items()):
         packages = PackagesetSortByVersions(packages)
@@ -219,6 +198,31 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
             'outdated': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == PackageVersionClass.outdated, versions)),
             'ignored': map(VersionsDigest, PackagesetAggregateByVersions(ignored_packages))
         }
+
+    return metapackagedata
+
+
+def metapackages_generic(bound, *filters, template='metapackages.html', repo=None, maintainer=None):
+    namefilter = bound_to_filter(bound)
+
+    # process search
+    search = flask.request.args.to_dict().get('search')
+    searchfilter = NameSubstringQueryFilter(search) if search else None
+
+    # get packages
+    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['METAPACKAGES_PER_PAGE'])
+
+    # on empty result, fallback to show first, last set of results
+    if not packages:
+        if bound and bound.startswith('<'):
+            namefilter = NameStartingQueryFilter()
+        else:
+            namefilter = NameBeforeQueryFilter()
+        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['METAPACKAGES_PER_PAGE'])
+
+    firstname, lastname = get_packages_name_range(packages)
+
+    metapackagedata = metapackages_to_data(PackagesToMetapackages(packages), repo, maintainer)
 
     return flask.render_template(
         template,
