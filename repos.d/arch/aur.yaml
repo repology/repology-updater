@@ -2,6 +2,7 @@
 # AUR
 ###########################################################################
 - name: aur
+  type: repository
   desc: AUR
   family: arch
   sources:

@@ -2,6 +2,7 @@
 # Parabola (arch derivative)
 ###########################################################################
 - name: parabola
+  type: repository
   desc: Parabola
   family: arch
   sources:
@@ -21,6 +22,7 @@
   tags: [ all, production ]
 
 - name: parabola_testing
+  type: repository
   desc: Parabola Testing
   family: arch
   sources:

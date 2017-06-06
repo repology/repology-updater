@@ -2,6 +2,7 @@
 # Mageia
 ###########################################################################
 - name: mageia_cauldron
+  type: repository
   desc: Mageia Cauldron
   family: mageia
   sources:

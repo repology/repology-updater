@@ -2,6 +2,7 @@
 # Hackage (haskell)
 ###########################################################################
 - name: hackage
+  type: modules
   desc: Hackage
   family: hackage
   sources:

@@ -8,6 +8,13 @@ sequence:
       "name":
         type: str
         required: yes
+      "type":
+        type: str
+        required: yes
+        enum:
+          - repository
+          - modules
+          - site
       "desc":
         type: str
         required: yes

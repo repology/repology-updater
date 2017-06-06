@@ -2,6 +2,7 @@
 # KDE neon
 ###########################################################################
 - name: kde_neon
+  type: repository
   desc: KDE neon
   family: debuntu
   sources:

@@ -2,6 +2,7 @@
 # RubyGems (ruby)
 ###########################################################################
 - name: rubygems
+  type: modules
   desc: RubyGems
   family: rubygems
   sources:

@@ -2,6 +2,7 @@
 # CentOS
 ###########################################################################
 - name: centos_6
+  type: repository
   desc: CentOS 6
   family: centos
   sources:
@@ -21,6 +22,7 @@
   tags: [ all, production, centos, rpm ]
 
 - name: centos_7
+  type: repository
   desc: CentOS 7
   family: centos
   sources:

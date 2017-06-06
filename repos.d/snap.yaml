@@ -2,6 +2,7 @@
 # Snap
 ###########################################################################
 - name: snap
+  type: repository
   desc: Snap
   family: snap
   sources:

@@ -2,6 +2,7 @@
 # DistroWatch.com
 ###########################################################################
 - name: distrowatch
+  type: site
   desc: DistroWatch.com
   family: distrowatch
   sources:

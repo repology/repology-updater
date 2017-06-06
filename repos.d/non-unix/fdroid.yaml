@@ -1,4 +1,5 @@
 - name: fdroid
+  type: repository
   desc: F-Droid
   family: fdroid
   sources:

@@ -2,6 +2,7 @@
 # PyPi (python)
 ###########################################################################
 - name: pypi
+  type: modules
   desc: PyPi
   family: pypi
   sources:

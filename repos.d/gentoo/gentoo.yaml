@@ -2,6 +2,7 @@
 # Gentoo
 ###########################################################################
 - name: gentoo
+  type: repository
   desc: Gentoo
   family: gentoo
   sources:

@@ -16,6 +16,15 @@
     list-style: none;
 }
 
+.list-jumbotron-items {
+    padding-left: 10px;
+}
+
+.jumbotron-badge {
+    display: block;
+    margin: 10px auto 0px;
+}
+
 .panel-heading-link, .panel-heading-link:hover, .panel-heading-link:active, .panel-heading-link:visited {
     color: inherit;
     text-decoration: underline;

@@ -2,6 +2,7 @@
 # CRUX
 ###########################################################################
 - name: crux_32
+  type: repository
   desc: CRUX 3.2
   family: crux
   sources:
@@ -18,6 +19,7 @@
   tags: [ all, production, crux]
 
 - name: crux_33
+  type: repository
   desc: CRUX 3.3
   family: crux
   sources:

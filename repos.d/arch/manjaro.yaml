@@ -2,6 +2,7 @@
 # Manjaro (arch derivative)
 ###########################################################################
 - name: manjaro_stable
+  type: repository
   desc: Manjaro Stable
   family: arch
   sources:
@@ -16,6 +17,7 @@
   tags: [ all, production, manjaro ]
 
 - name: manjaro_testing
+  type: repository
   desc: Manjaro Testing
   family: arch
   sources:
@@ -30,6 +32,7 @@
   tags: [ all, production, manjaro ]
 
 - name: manjaro_unstable
+  type: repository
   desc: Manjaro Unstable
   family: arch
   sources:

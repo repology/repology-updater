@@ -2,6 +2,7 @@
 # release_monitoring.org (disabled)
 ###########################################################################
 - name: release_monitoring
+  type: site
   desc: release-monitoring.org
   family: anitya
   sources:

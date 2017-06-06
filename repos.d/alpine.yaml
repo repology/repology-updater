@@ -2,6 +2,7 @@
 # Alpine Linux aports
 ###########################################################################
 - name: alpine_edge
+  type: repository
   desc: Alpine Linux Edge
   family: alpine
   sources:

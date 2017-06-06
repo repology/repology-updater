@@ -304,6 +304,7 @@ class RepositoryManager:
                 'packagelinks': repository.get('packagelinks', []),
                 'family': repository['family'],
                 'desc': repository['desc'],
+                'type': repository['type'],
             } for repository in self.repositories
         }
 

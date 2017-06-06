@@ -2,6 +2,7 @@
 # OpenWRT
 ###########################################################################
 - name: openwrt_15_05_01_x86
+  type: repository
   desc: OpenWrt 15.05.01 x86
   family: openwrt
   sources:
@@ -18,6 +19,7 @@
   tags: [ all, production, openwrt ]
 
 - name: openwrt_trunk_x86
+  type: repository
   desc: OpenWrt trunk x86
   family: openwrt
   sources:
@@ -34,6 +36,7 @@
   tags: [ all, production, openwrt ]
 
 - name: openwrt_15_05_01_ar71xx
+  type: repository
   desc: OpenWrt 15.05.01 ar71xx
   family: openwrt
   sources:
@@ -50,6 +53,7 @@
   tags: [ all, production, openwrt ]
 
 - name: openwrt_trunk_ar71xx
+  type: repository
   desc: OpenWrt trunk ar71xx
   family: openwrt
   sources:

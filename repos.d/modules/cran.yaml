@@ -2,6 +2,7 @@
 # CRAN (R)
 ###########################################################################
 - name: cran
+  type: modules
   desc: CRAN
   family: cran
   sources:

@@ -2,6 +2,7 @@
 # Arch
 ###########################################################################
 - name: arch
+  type: repository
   desc: Arch
   family: arch
   sources:

@@ -2,6 +2,7 @@
 # Sabayon
 ###########################################################################
 - name: sabayon
+  type: repository
   desc: Sabayon
   family: gentoo
   sources:
@@ -20,6 +21,7 @@
   tags: [ all, production ]
 
 - name: sabayon_for_gentoo
+  type: repository
   desc: Sabayon for-gentoo
   family: gentoo
   sources:
