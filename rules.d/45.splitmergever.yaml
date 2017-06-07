@@ -179,13 +179,17 @@
 - { namepat: "gnet[0-9]+",             setname: gnet }
 - { name: gnet, verpat: "1\\..*",      setname: gnet1 }
 
+- { namepat: "gpg[0-9]+",              setname: gnupg }
 - { namepat: "gnupg[0-9]+",            setname: gnupg }
 - { name: gnupg, category: app-vim, family: gentoo, setname: vim-gnupg }
 - { name: gnupg, verpat: "1\\..*",     setname: gnupg1 }
 
+- { namepat: "gpgme[0-9._-]+",         setname: gpgme }
+
 - { name: goffice-light,               setname: goffice }
 - { namepat: "goffice[0-9._-]+",       setname: goffice }
 
+- { namepat: "go[0-9.-]+",             setname: go }
 - { namepat: "golang[0-9.-]*",         setname: go }
 
 - { namepat: "libftdi[0-9._-]+",       setname: libftdi }
@@ -319,6 +323,8 @@
 
 - { name: [libevent2,libevent1],       setname: libevent }
 - { name: libevent, verpat: "1.*",     setname: libevent1 }
+
+- { namepat: "libgcrypt[0-9_.-]+",     setname: libgcrypt }
 
 - { name: [libxfont,libxfont1,libxfont2,xorg-libxfont,xorg-libxfont2], setname: libxfont }
 - { name: libxfont, verpat: "2\\..*", setname: libxfont2 }
