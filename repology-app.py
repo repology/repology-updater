@@ -685,6 +685,15 @@ def metapackage_information(name):
     )
 
 
+@app.route('/metapackage/<name>/related')
+def metapackage_related(name):
+    packages = get_db().GetMetapackage(get_db().GetRelatedMetapackages(name))
+
+    metapackagedata = metapackages_to_data(PackagesToMetapackages(packages))
+
+    return flask.render_template('metapackage-related.html', name=name, metapackagedata=metapackagedata)
+
+
 @app.route('/metapackage/<name>/badges')
 def metapackage_badges(name):
     packages = get_db().GetMetapackage(name)
