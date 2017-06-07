@@ -687,11 +687,22 @@ def metapackage_information(name):
 
 @app.route('/metapackage/<name>/related')
 def metapackage_related(name):
-    packages = get_db().GetMetapackage(get_db().GetRelatedMetapackages(name))
+    names = get_db().GetRelatedMetapackages(name, limit=app.config['METAPACKAGES_PER_PAGE'])
+
+    too_many_warning = None
+    if len(names) == app.config['METAPACKAGES_PER_PAGE']:
+        too_many_warning = app.config['METAPACKAGES_PER_PAGE']
+
+    packages = get_db().GetMetapackage(names)
 
     metapackagedata = metapackages_to_data(PackagesToMetapackages(packages))
 
-    return flask.render_template('metapackage-related.html', name=name, metapackagedata=metapackagedata)
+    return flask.render_template(
+        'metapackage-related.html',
+        name=name,
+        metapackagedata=metapackagedata,
+        too_many_warning=too_many_warning
+    )
 
 
 @app.route('/metapackage/<name>/badges')

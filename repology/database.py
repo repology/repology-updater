@@ -1671,7 +1671,7 @@ class Database:
             for row in self.cursor.fetchall()
         ]
 
-    def GetRelatedMetapackages(self, name):
+    def GetRelatedMetapackages(self, name, limit=500):
         self.cursor.execute(
             """
             WITH RECURSIVE r AS (
@@ -1687,9 +1687,9 @@ class Database:
                     FROM url_relations
                     JOIN r ON
                         url_relations.effname = r.effname OR url_relations.url = r.url
-            ) SELECT DISTINCT effname FROM r
+            ) SELECT DISTINCT effname FROM r ORDER by effname LIMIT %s
             """,
-            (name,)
+            (name, limit)
         )
 
         return [
