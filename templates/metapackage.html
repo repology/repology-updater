@@ -7,6 +7,7 @@
 	<a href="{{ url_for("metapackage_versions", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_versions" %} active{% endif %}">Versions</a>
 	<a href="{{ url_for("metapackage_packages", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_packages" %} active{% endif %}">Packages</a>
 	<a href="{{ url_for("metapackage_information", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_information" %} active{% endif %}">Information</a>
+	<a href="{{ url_for("metapackage_related", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_related" %} active{% endif %}">Ralated</a>
 	<a href="{{ url_for("metapackage_badges", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_badges" %} active{% endif %}">Badges</a>
 	<a href="{{ url_for("metapackage_report", name=name) }}" class="btn btn-default{% if request.endpoint == "metapackage_report" %} active{% endif %}"><span class="text-danger">Report</span></a>
 </div>
