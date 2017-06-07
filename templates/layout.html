@@ -10,9 +10,9 @@
 {% block extrameta %}
 {% endblock %}
 	<title>{% block title %}Repology{% endblock %}</title>
-	<link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.css") }}">
-	<link rel="stylesheet" href="{{ url_for("static", filename="repology.css") }}">
-	<link rel="icon" href="{{ url_for("static", filename="repology.ico") }}" sizes="16x16 32x32 64x64" type="image/x-icon">
+	<link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.v3.3.7.css") }}">
+	<link rel="stylesheet" href="{{ url_for("static", filename="repology.v1.css") }}">
+	<link rel="icon" href="{{ url_for("static", filename="repology.v1.ico") }}" sizes="16x16 32x32 64x64" type="image/x-icon">
 	<link rel="search" type="application/opensearchdescription+xml" title="Repology packages" href="{{ url_for("opensearch_metapackage") }}">
 	<link rel="search" type="application/opensearchdescription+xml" title="Repology maintainers" href="{{ url_for("opensearch_maintainer") }}">
 </head>
@@ -34,7 +34,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="{{ url_for("index") }}">
-					<img alt="Repology" src="{{ url_for("static", filename="repology40x40.png") }}" width="40" height="40">
+					<img alt="Repology" src="{{ url_for("static", filename="repology40x40.v1.png") }}" width="40" height="40">
 				</a>
 			</div>
 
@@ -92,7 +92,7 @@
 </footer>
 
 <script src="{{ url_for("static", filename="jquery-3.1.1.min.js") }}"></script>
-<script src="{{ url_for("static", filename="bootstrap.min.js") }}"></script>
+<script src="{{ url_for("static", filename="bootstrap.min.v3.3.7.js") }}"></script>
 
 </body>
 </html>
