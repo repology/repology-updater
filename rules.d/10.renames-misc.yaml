@@ -313,6 +313,7 @@
 - { name: icecast2,                    setname: icecast                   }
 - { name: [intel-tbb,libtbb],          setname: tbb                       }
 - { name: ir.lv2,                      setname: ir-lv2                    }
+- { name: isc-kea,                     setname: kea }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
 - { name: [intellij-pycharm,pycharm-community], setname: pycharm          }
