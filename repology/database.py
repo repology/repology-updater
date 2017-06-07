@@ -476,6 +476,20 @@ class Database:
 
         self.cursor.execute('CREATE INDEX ON reports(effname)')
 
+        # url_relations
+        self.cursor.execute("""
+            CREATE MATERIALIZED VIEW url_relations AS
+                SELECT DISTINCT
+                    effname,
+                    replace(regexp_replace(homepage, '/?([#?].*)?$', ''), 'https://', 'http://') as url
+                FROM packages
+                WHERE homepage ~ '^https?://'
+            WITH DATA
+        """)
+
+        self.cursor.execute('CREATE UNIQUE INDEX ON url_relations(effname, url)')  # we only need url here because we need unique index for concurrent refresh
+        self.cursor.execute('CREATE INDEX ON url_relations(url)')
+
     def Clear(self):
         self.cursor.execute("""DELETE FROM packages""")
         self.cursor.execute("""
@@ -604,6 +618,7 @@ class Database:
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""")
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations""")
 
         # package stats
         self.cursor.execute("""
@@ -1654,4 +1669,29 @@ class Database:
                 'expires': row[7],
             }
             for row in self.cursor.fetchall()
+        ]
+
+    def GetRelatedMetapackages(self, name):
+        self.cursor.execute(
+            """
+            WITH RECURSIVE r AS (
+                    SELECT
+                        effname,
+                        url
+                    FROM url_relations
+                    WHERE effname=%s
+                UNION
+                    SELECT
+                        url_relations.effname,
+                        url_relations.url
+                    FROM url_relations
+                    JOIN r ON
+                        url_relations.effname = r.effname OR url_relations.url = r.url
+            ) SELECT DISTINCT effname FROM r
+            """,
+            (name,)
+        )
+
+        return [
+            row[0] for row in self.cursor.fetchall()
         ]
