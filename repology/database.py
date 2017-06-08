@@ -481,7 +481,7 @@ class Database:
             CREATE MATERIALIZED VIEW url_relations AS
                 SELECT DISTINCT
                     effname,
-                    replace(regexp_replace(homepage, '/?([#?].*)?$', ''), 'https://', 'http://') as url
+                    regexp_replace(regexp_replace(homepage, '/?([#?].*)?$', ''), '^https?://(www\\.)?', '') as url
                 FROM packages
                 WHERE homepage ~ '^https?://'
             WITH DATA
