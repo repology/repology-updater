@@ -350,6 +350,11 @@
 - { name: libwnck, verpat: "2\\..*",   setname: libwnck2 }
 - { name: libwnck, verpat: "3\\..*",   setname: libwnck3 }
 
+- { namepat: "mariadb[0-9.-]*(?:-client|-server)?", setname: mariadb }
+
+- { namepat: "mysql[0-9.-]*(?:-client|-server)?", setname: mysql }
+- { name: mysql, verpat: "8\\..*", setname: mysql8 }
+
 - { namepat: "netatalk[0-9.-]+",       setname: netatalk }
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
