@@ -338,7 +338,7 @@
 - { name: libbrotli,                   setname: brotli                    }
 - { name: libcodec2,                   setname: codec2                    }
 - { name: libcomedi,                   setname: comedilib                 }
-- { name: libenet,                     setname: enet                      }
+- { name: [libenet,enet1.2],           setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
 - { name: libfdk-aac,                  setname: fdk-aac                   }
 - { name: libgc,                       setname: boehm-gc                  }
