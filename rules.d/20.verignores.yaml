@@ -39,6 +39,7 @@
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: cvs,                         ver: "1.20120905",                                  ignorever: true }
+- { name: cvs,                         ver: "1.12.13.1",                                   ignorever: true } # respin for Windows *only* to fix carriage returns, it does not make sense to list it
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dejagnu,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org

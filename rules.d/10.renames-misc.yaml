@@ -161,6 +161,7 @@
 - { name: cuneiform-linux,             setname: cuneiform                 }
 - { name: cutecom-legacy,              setname: cutecom                   }
 - { name: curseofwar-sdl,              setname: curseofwar                }
+- { name: cvs-devel,                   setname: cvs                       }
 - { name: cvsweb3,                     setname: cvsweb                    }
 - { name: cyrus5-imapd,                setname: cyrus-imapd               }
 - { name: cython2,                     setname: cython                    }
