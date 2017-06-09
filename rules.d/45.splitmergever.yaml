@@ -377,6 +377,13 @@
 
 - { namepat: "netatalk[0-9.-]+",       setname: netatalk }
 
+# XXX: more merges needed here
+- { namepat: "openjdk[0-9._-]*(?:-doc)?", setname: openjdk }
+- { name: openjdk, verpat: "9.*", setname: openjdk9 }
+- { name: openjdk, verpat: "8.*", setname: openjdk8 }
+- { name: openjdk, verpat: "7.*", setname: openjdk7 }
+- { name: openjdk, verpat: "6.*", setname: openjdk6 }
+
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
 - { namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?", setname: openssl }
