@@ -488,11 +488,12 @@
 
 - { namepat: "wine-mono([0-9.-]+|-devel)", setname: wine-mono }
 
-- { namepat: "wxgtk[0-9._-]*(:?-light|-gtk3|-gtk2|-contrib|-doc)*", setname: wxgtk }
-- { name: wxgtk, verpat: "3\\.1\\..*",     setname: wxgtk31, last: true }
-- { name: wxgtk, verpat: "3\\.0\\..*",     setname: wxgtk30, last: true }
-- { name: wxgtk, verpat: "2\\..*",         setname: wxgtk28, last: true }
-- { name: wxgtk, warning: "please classify me" }
+- { name: wxgtk-common, setname: wxwidgets }
+- { namepat: "(wxgtk|wxwidgets)[0-9._-]*(:?-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*", setname: wxwidgets }
+- { name: wxwidgets, verpat: "3\\.1\\..*",     setname: wxwidgets31, last: true }
+- { name: wxwidgets, verpat: "3\\.0\\..*",     setname: wxwidgets30, last: true }
+- { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28, last: true }
+- { name: wxwidgets, warning: "please classify me" }
 
 - { namepat: "(?:lib)?xerces-?c[0-9.+-]*",  setname: xerces-c }
 - { namepat: "(?:lib)?xerces2?-?j(?:ava)?[0-9-]*", setname: xerces-j }
