@@ -195,11 +195,21 @@
 - { namepat: "libftdi[0-9._-]+",       setname: libftdi }
 - { name: libftdi, verpat: "0\\..*",   setname: libftdi0 }
 
+- { namepat: "(?:lib)?gconfmm[0-9._-]*", setname: gconfmm }
+
+- { namepat: "(?:lib)?glibmm[0-9._-]*", setname: glibmm }
+
 - { namepat: "(?:lib)?gtk[0-9._+-]*",  setname: gtk }
 - { name: gtk, verpat: "(4|3\\.9[0-9]+)\\..*", setname: gtk4 }
 - { name: gtk, verpat: "3\\..*",       setname: gtk3 }
 - { name: gtk, verpat: "2\\..*",       setname: gtk2 }
 - { name: gtk, verpat: "1\\..*",       setname: gtk1 }
+
+- { namepat: "(?:lib)?gtkmm[0-9._-]*", setname: gtkmm }
+- { name: gtkmm, verpat: "(4|3\\.[89])\\..*", setname: gtkmm4 }
+- { name: gtkmm, verpat: "3\\..*",       setname: gtkmm3 }
+- { name: gtkmm, verpat: "2\\..*",       setname: gtkmm2 }
+- { name: gtkmm, verpat: "1\\..*",       setname: gtkmm1 }
 
 - { namepat: "(?:lib)?gtksourceview[0-9._-]*", setname: gtksourceview }
 - { name: gtksourceview, verpat: "(4|3\\.99)\\..*", setname: gtksourceview4 }
