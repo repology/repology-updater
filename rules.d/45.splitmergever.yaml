@@ -295,7 +295,13 @@
 - { namepat: "libglade[0-9]+",         setname: libglade }
 - { namepat: "libglade[0-9]+-reference", setname: libglade-reference }
 
-- { namepat: "libglademm[0-9.]+",      setname: libglademm }
+- { namepat: "(?:lib)?glademm[0-9.]+",      setname: libglademm }
+
+- { namepat: "(?:lib)?gnomecanvasmm[0-9._-]+", setname: libgnomecanvas }
+
+- { namepat: "(?:lib)?gnomemm[0-9._-]+",      setname: libgnomemm }
+
+- { namepat: "(?:lib)?gnomeuimm[0-9._-]+",      setname: libgnomeuimm }
 
 - { namepat: "libmozjs[0-9.-]+",       setname: libmozjs }
 
