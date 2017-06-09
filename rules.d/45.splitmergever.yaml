@@ -321,6 +321,8 @@
 
 - { namepat: "libwps[0-9.-]+",         setname: libwps }
 
+- { namepat: "libzdb-(mariadb|mysql|oracle|percona|postgresql|sqlite)[0-9._-]*", setname: libzdb }
+
 - { name: [links1,links2,links+,links-g-directfb,links-gui], setname: links }
 - { name: links, verpat: "1\\..*",     setname: links1 }
 
