@@ -136,6 +136,7 @@
 
 - { namepat: "firefox[0-9.-]*",        setname: firefox }
 - { namepat: "firefox-esr[0-9.-]*",    setname: firefox-esr }
+- { namepat: "firefox-esr[0-9.-]*(-gtk2|-privacy|-unwrapped)", setname: firefox-esr }
 - { namepat: "firefox-esr[0-9.-]*-l10n", setname: firefox-esr-l10n }
 
 - { name: [fox-devel, fox-toolkit, fox-toolkit-devel], setname: fox }
