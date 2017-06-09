@@ -144,7 +144,6 @@
 - { name: [coreos-etcd,coreos-etcd3],  setname: etcd                      }
 - { name: corsixth,                    setname: corsix-th,                family: [ freebsd ] }
 - { name: commoncpp,                   setname: commoncpp2                }
-- { name: concurrency-kit,             setname: concurrencykit            }
 - { name: conserver8,                  setname: conserver                 }
 - { name: consolekit2,                 setname: consolekit                }
 - { name: coolreader,                  setname: coolreader3               }
