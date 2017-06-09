@@ -196,8 +196,10 @@
 - { name: libftdi, verpat: "0\\..*",   setname: libftdi0 }
 
 - { namepat: "(?:lib)?gconfmm[0-9._-]*", setname: gconfmm }
+- { namepat: "(?:lib)?gconfmm[0-9._-]*(-docs)", setname: gconfmm }
 
 - { namepat: "(?:lib)?glibmm[0-9._-]*", setname: glibmm }
+- { namepat: "(?:lib)?glibmm[0-9._-]*(-docs|-reference)", setname: glibmm }
 
 - { namepat: "(?:lib)?gtk[0-9._+-]*",  setname: gtk }
 - { name: gtk, verpat: "(4|3\\.9[0-9]+)\\..*", setname: gtk4 }
@@ -206,10 +208,10 @@
 - { name: gtk, verpat: "1\\..*",       setname: gtk1 }
 
 - { namepat: "(?:lib)?gtkmm[0-9._-]*", setname: gtkmm }
+- { namepat: "(?:lib)?gtkmm[0-9._-]*(-docs|-documentation|-reference)", setname: gtkmm }
 - { name: gtkmm, verpat: "(4|3\\.[89])\\..*", setname: gtkmm4 }
 - { name: gtkmm, verpat: "3\\..*",       setname: gtkmm3 }
 - { name: gtkmm, verpat: "2\\..*",       setname: gtkmm2 }
-- { name: gtkmm, verpat: "1\\..*",       setname: gtkmm1 }
 
 - { namepat: "(?:lib)?gtksourceview[0-9._-]*", setname: gtksourceview }
 - { name: gtksourceview, verpat: "(4|3\\.99)\\..*", setname: gtksourceview4 }
@@ -292,16 +294,18 @@
 
 - { namepat: "libgee[0-9.-]+",         setname: libgee }
 
-- { namepat: "libglade[0-9]+",         setname: libglade }
-- { namepat: "libglade[0-9]+-reference", setname: libglade-reference }
+- { namepat: "libglade[0-9._-]*",           setname: libglade }
+- { namepat: "libglade[0-9._-]*-reference", setname: libglade-reference }
 
-- { namepat: "(?:lib)?glademm[0-9.]+",      setname: libglademm }
+- { namepat: "(?:lib)?glademm[0-9.]*", setname: libglademm }
 
-- { namepat: "(?:lib)?gnomecanvasmm[0-9._-]+", setname: libgnomecanvas }
+- { namepat: "(?:lib)?gnomecanvas[0-9._-]*(-reference)", setname: libgnomecanvas }
 
-- { namepat: "(?:lib)?gnomemm[0-9._-]+",      setname: libgnomemm }
+- { namepat: "(?:lib)?gnomecanvasmm[0-9._-]*", setname: libgnomecanvasmm }
 
-- { namepat: "(?:lib)?gnomeuimm[0-9._-]+",      setname: libgnomeuimm }
+- { namepat: "(?:lib)?gnomemm[0-9._-]*", setname: libgnomemm }
+
+- { namepat: "(?:lib)?gnomeuimm[0-9._-]*", setname: libgnomeuimm }
 
 - { namepat: "libmozjs[0-9.-]+",       setname: libmozjs }
 
@@ -386,6 +390,19 @@
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
+- name:
+    - openssl-1.0-chacha20
+    - openssl-chacha
+    - openssl-chacha20
+    - openssl-devel
+    - openssl-no-aesni
+    - openssl-pre
+    - openssl-purify
+    - openssl-static
+    - openssl-stream
+    - openssl-tls1.3
+  setname: openssl
+  verignore: true
 - { namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?", setname: openssl }
 
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
