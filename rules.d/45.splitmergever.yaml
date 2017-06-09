@@ -377,6 +377,8 @@
 
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
+- { namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?", setname: openssl }
+
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
 
 - { namepat: "pdfstudio[0-9]+",        setname: pdfstudio }
