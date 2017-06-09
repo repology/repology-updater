@@ -176,6 +176,7 @@
 - { name: ddclient-ipv6,               setname: ddclient                  }
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
 - { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
+- { name: iodoom3-dhewm3,              setname: dhewm3                    }
 - { name: dgen,                        setname: dgen-sdl                  }
 - { name: divideandsucceed,            setname: divide-and-succeed        }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?

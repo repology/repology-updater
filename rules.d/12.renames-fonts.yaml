@@ -5,6 +5,14 @@
 - { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
 
 - name:
+    - alef
+    - alef-fonts
+    - alef-webfont
+    - fonts-ttf-alef
+    - ttf-alef
+  setname: "fonts:alef"
+
+- name:
     - anonymous-pro
     - anonymouspro
     - font-anonymous-pro
@@ -300,6 +308,22 @@
   setname: "fonts:gentium-plus"
 
 - name:
+    - fonts-hanazono
+    - fonts-ttf-hanazono
+    - hanazono
+    - hanazono-fonts
+    - hanazono-fonts-ttf
+    - ttf-hanazono
+    - ttf-sazanami-hanazono
+  setname: "fonts:hanazono"
+
+- name:
+    - fonts-humor-sans
+    - humor-sans
+    - ttf-humor-sans
+  setname: "fonts:humor-sans"
+
+- name:
     - fonts-isabella
     - isabella-ttf
     - otf-isabella
@@ -311,6 +335,11 @@
     - xorg-font-isas-misc
     - font-isas-misc
   setname: "fonts:isas-misc"
+
+- name:
+    - fonts-linex
+    - ttf-linex-fonts
+  setname: "fonts:linex"
 
 - name:
     - fonts-linuxlibertine
@@ -414,3 +443,13 @@
     - horai-ume-fonts
     - umefont-ttf
   setname: "fonts:umefont"
+
+- name:
+    - font-vollkorn
+    - fonts-otf-vollkorn
+    - fonts-vollkorn
+    - otf-vollkorn
+    - vollkorn
+    - vollkorn-fonts
+    - vollkorn-ttf
+  setname: "fonts:vollkorn"
