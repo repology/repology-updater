@@ -109,6 +109,7 @@
 - { name: "python:audio", verpat: "0\\.2\\..*", setname: "python:pyaudio" }
 - { name: ["python:poppler", "python:python-poppler"], setname: "python:pypoppler"       }
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
+- { name: "python:usb",                setname: "python:pyusb"            } # create problem!
 - { name: [pylint-py27,pylint3,pylint-gui,pylint3-gui], setname: "python:pylint" }
 
 # as per pypi package name
