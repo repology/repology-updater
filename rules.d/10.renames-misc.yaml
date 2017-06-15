@@ -312,6 +312,7 @@
 - { name: iccexamin,                   setname: icc-examin                }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
+- { name: icon-lang,                   setname: icon                      }
 - { name: [intel-tbb,libtbb],          setname: tbb                       }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: isc-kea,                     setname: kea }
@@ -371,6 +372,7 @@
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 
 - { name: mc46,                        setname: mc                        }
+- { name: memtestplus,                 setname: memtest86+                }
 - { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: multicorn,                   setname: postgresql-multicorn      }
