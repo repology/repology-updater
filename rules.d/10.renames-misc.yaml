@@ -401,7 +401,7 @@
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
 - { name: [powdertoy, the-powder-toy, powder-toy-static], setname: powder-toy }
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
-- { name: puzzles,                     setname: sgt-puzzles,              family: [ pkgsrc, arch, openbsd ] }
+- { name: puzzles,                     setname: sgt-puzzles               } # not completely safe, but other puzzles were not encountered yet
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
 - { name: [proj4,proj.4],              setname: proj                      }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5], setname: qbittorrent }
