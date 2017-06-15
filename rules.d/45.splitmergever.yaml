@@ -130,7 +130,7 @@
 
 - { namepat: "(?:lib)?fftw[0-9.-]*(?:-double|-float|-long-double|-quad|-single|-long|-mpi|-mpich|-openmpi|-common)?", setname: fftw }
 - { name: fftwf, setname: fftw }
-- { name: ffmpeg, verpat: "2\\..*",    setname: fftw2 }
+- { name: fftw, verpat: "2\\..*",    setname: fftw2 }
 
 - { namepat: "firebird[0-9.-]*(?:-client|-server)?", setname: firebird }
 
