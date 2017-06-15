@@ -507,10 +507,10 @@
 - { name: swig, verpat: "2\\..*",      setname: swig2 }
 - { name: swig, verpat: "3\\..*",      setname: swig3 }
 
-- { namepat: "tcl8[0-9,_-]+",          setname: tcl }
+- { namepat: "tcl8[0-9._-]+",          setname: tcl }
 - { name: tcl, verpat: ".*20[0-9]{6}.*", ignorever: true } # 8.7 snapshots
 
-- { namepat: "tk8[0-9,_-]+",           setname: tk } # don't mix with tk2, tk5, tk707 which are unrelated projects
+- { namepat: "tk8[0-9._-]+",           setname: tk } # don't mix with tk2, tk5, tk707 which are unrelated projects
 
 - { name: tor-devel,                   setname: tor }
 
