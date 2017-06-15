@@ -75,7 +75,9 @@
 
 - { name: scramble, wwwpat: "xffm", setname: scramble-xffm } # wtf is that
 
-- { name: sphinx, wwwpat: "sphinx-doc.org", setname: "python:sphinx" } # otherwise sphinx search
+# sphinx search
+- { name: sphinx, wwwpat: "sphinx-doc.org", setname: "python:sphinx" }
+- { name: sphinx, wwwpat: "pocoo", setname: "python:sphinx" }
 
 - { name: ssr, wwwpat: "spatialaudio", setname: soundscaperenderer }
 - { name: ssr, wwwpat: "maarten", setname: simplescreenrecorder }
