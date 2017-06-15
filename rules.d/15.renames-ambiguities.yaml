@@ -75,6 +75,12 @@
 
 - { name: scramble, wwwpat: "xffm", setname: scramble-xffm } # wtf is that
 
+- { name: sphinx, wwwpat: "sphinx-doc.org", setname: "python:sphinx" } # otherwise sphinx search
+
+- { name: ssr, wwwpat: "spatialaudio", setname: soundscaperenderer }
+- { name: ssr, wwwpat: "maarten", setname: simplescreenrecorder }
+- { name: ssr, family: pclinuxos, setname: simplescreenrecorder }
+
 - { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
 
 # Programming language vs. XMPP client vs. openstack object storage

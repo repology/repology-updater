@@ -124,6 +124,7 @@
 - { name: "python:pgcli",              setname: pgcli                     }
 - { name: "python:pypanel",            setname: pypanel                   }
 - { name: "python:rss2email",          setname: rss2email                 }
+- { name: "python:sphinx10",           setname: "python:sphinx"           }
 - { name: "python:uwsgi",              setname: uwsgi                     }
 - { name: "python:uwsgitop",           setname: uwsgitop                  }
 - { name: "python:xdot",               setname: xdot                      }
