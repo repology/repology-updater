@@ -373,6 +373,9 @@
 - { name: libwnck, verpat: "2\\..*",   setname: libwnck2 }
 - { name: libwnck, verpat: "3\\..*",   setname: libwnck3 }
 
+- { name: [lilypond-devel, lilypond-devel-docs, lilypond-doc, lilypond-docs], setname: lilypond }
+- { name: lilypond, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", setname: lilypond-unstable }
+
 - { namepat: "mariadb[0-9.-]*(?:-client|-server)?", setname: mariadb }
 
 - { namepat: "mysql[0-9.-]*(?:-client|-server)?", setname: mysql }

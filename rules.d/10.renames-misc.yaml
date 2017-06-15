@@ -343,6 +343,7 @@
 - { name: libfdk-aac,                  setname: fdk-aac                   }
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: libgdal-grass,               setname: gdal-grass                }
+- { name: libgtkdatabox,               setname: gtkdatabox                }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
 - { name: liblapack,                   setname: lapack                    }
