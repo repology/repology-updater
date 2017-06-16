@@ -60,6 +60,7 @@
 - { name: fgrun,                       verpat: "2013.*",                                   ignorever: true }
 - { name: "fonts:gentium-basic",       ver: "1102",                                        ignorever: true } # it's 1.102!
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
+- { name: "fonts:quattrocento",        ver: "2.0",                   family: aur,          ignorever: true } # webpage says it's 1.1
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
 - { name: frozen-bubble,               ver: ["905bf71","2.212.0"],                         ignorever: true } # fake?
 - { name: frozen-bubble,               ver: "2.2.1",                 family: [ fedora ],   ignorever: true } # 2.2.1 was never released, it should be 2.2.1beta1

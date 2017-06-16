@@ -166,6 +166,12 @@
   setname: "fonts:dina"
 
 - name:
+    - dosis
+    - fonts-dosis
+    - ttf-impallari-dosis
+  setname: "fonts:dosis"
+
+- name:
     - droid-fonts-ttf
     - droid-ttf
     - font-droid
@@ -337,6 +343,12 @@
   setname: "fonts:isas-misc"
 
 - name:
+    - koruri
+    - koruri-ttf
+    - ttf-koruri
+  setname: "fonts:koruri"
+
+- name:
     - fonts-linex
     - ttf-linex-fonts
   setname: "fonts:linex"
@@ -356,6 +368,12 @@
 - { name: libertine, category: media-fonts, setname: "fonts:linuxlibertine" }
 - { name: [ttf-linux-libertine-g,linuxlibertine-g], setname: "fonts:linuxlibertine-g" }
 
+- name:
+    - fonts-lobstertwo
+    - lobstertwo
+    - ttf-impallari-lobstertwo
+  setname: "fonts:lobstertwo"
+
 - { namepat: "(?:fonts-)?(?:ttf-)?(lohit-.+?)(?:-fonts)?", setname: "fonts:$1", last: true }
 - { name: [ fonts-ttf-lohit, lohit ], setname: "fonts:lohit" }
 
@@ -370,6 +388,11 @@
     - x11-font-mutt-misc
     - xorg-font-mutt-misc
   setname: "fonts:mutt-misc"
+
+- name:
+    - ohruri-ttf
+    - ttf-ohruri
+  setname: "fonts:ohruri"
 
 - name:
     - fonts-ttf-opensans
@@ -399,6 +422,13 @@
   setname: "fonts:paratype"
 
 - name:
+    - fonts-pecita
+    - otf-pecita
+    - otf-pecita-font-stable
+    - pecita
+  setname: "fonts:pecita"
+
+- name:
     - proggy-fonts
     - proggyfonts
     - proggy_fonts-ttf
@@ -424,6 +454,27 @@
   setname: "fonts:grimmer-proggy-tinysz"
 
 - name:
+    - fonts-quattrocento
+    - quattrocento
+    - ttf-impallari-quattrocento
+  setname: "fonts:quattrocento"
+
+- name:
+    - quattrocento-sans
+    - ttf-impallari-quattrocento-sans
+  setname: "fonts:quattrocento-sans"
+
+- name:
+    - fonts-otf-stix
+    - fonts-stix
+    - otf-stix
+    - stix-fonts
+    - stix-otf
+    - stix-two
+    - stixfonts
+  setname: "fonts:stix"
+
+- name:
     - fonts-otf-gdouros-symbola
     - symbola-ttf
     - gdouros-symbola-fonts
@@ -437,6 +488,26 @@
     - terminus-font-ttf
     - terminus-ttf
   setname: "fonts:terminus-ttf"
+
+- name:
+    - font-ubuntu
+    - fonts-ttf-ubuntu
+    - fonts-ttf-ubuntu-font-family
+    - ttf-ubuntu-font-family
+    - ttf-ubuntu-font-family-ib
+    - ubuntu-font
+    - ubuntu-font-family
+    - ubuntu-font-family-sources
+    - ubuntu-fonts
+    - ubuntu.font
+  setname: "fonts:ubuntu"
+
+- name:
+    - fonts-ttf-ubuntu-title
+    - fonts-ubuntu-title
+    - ttf-ubuntu-title
+    - ubuntu-title-fonts
+  setname: "fonts:ubuntu-title"
 
 - name:
     - fonts-horai-umefont
