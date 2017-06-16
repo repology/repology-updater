@@ -449,6 +449,7 @@
 - { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignorever: true }
 - { name: vlc-nightly,                 setname: vlc, ignorever: true      }
 - { name: vsftpd-ssl,                  setname: vsftpd,                   family: [ freebsd ]  }
+- { name: walcommander,                setname: wcmcommander              } # old name
 - { name: [webp,libwebp6],             setname: libwebp                   }
 - { name: wine,                        setname: wine-etersoft,            family: sisyphus } # counterfeit
 - { name: wings,                       setname: wings3d                   }
