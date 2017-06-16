@@ -10,6 +10,7 @@
       # See https://github.com/koraktor/braumeister.org
       # http://discourse.brew.sh/t/regular-formula-info-dump-in-machine-readable-format/687
     - name: homebrew.json
+      fetcher: None
       parser: HomebrewJson
   repolinks:
     - desc: Homebrew home
