@@ -159,10 +159,10 @@ class TestPackageTransformer(unittest.TestCase):
 
     def test_match_wwwpat(self):
         self.check_transformer(
-            '[ { wwwpat: "foo\\\\.com", setname: bar } ]',
-            {'name': 'p1', 'version': '1.0', 'homepage': 'http://foo.com/xxx', 'expect_effname': 'bar'},
-            {'name': 'p2', 'version': '1.0', 'homepage': 'http://foo_com.com/xxx', 'expect_effname': 'p2'},
-            {'name': 'p3', 'version': '1.0', 'homepage': 'http://bar.com/yyy', 'expect_effname': 'p3'},
+            '[ { wwwpat: "https?://foo\\\\.com/.*", setname: bar } ]',
+            {'name': 'p1', 'version': '1.0', 'homepage': 'https://foo.com/xxx', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '1.0', 'homepage': 'http://foo.com/', 'expect_effname': 'bar'},
+            {'name': 'p3', 'version': '1.0', 'homepage': 'http://foo_com/xxx', 'expect_effname': 'p3'},
             {'name': 'p4', 'version': '2.0', 'expect_effname': 'p4'}
         )
 

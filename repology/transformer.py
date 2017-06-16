@@ -115,7 +115,7 @@ class PackageTransformer:
 
         # match name patterns
         if 'wwwpat' in rule:
-            if not package.homepage or not rule['wwwpat'].search(package.homepage):
+            if not package.homepage or not rule['wwwpat'].fullmatch(package.homepage):
                 return RuleApplyResult.unmatched
 
         if 'wwwpart' in rule:
