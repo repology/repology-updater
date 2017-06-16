@@ -54,7 +54,7 @@ class PackageTransformer:
             rule['pretty'] = pp.pformat(rule)
 
             # convert some fields to lists
-            for field in ['name', 'ver', 'category', 'family']:
+            for field in ['name', 'ver', 'category', 'family', 'wwwpart']:
                 if field in rule and not isinstance(rule[field], list):
                     rule[field] = [rule[field]]
 
@@ -116,6 +116,17 @@ class PackageTransformer:
         # match name patterns
         if 'wwwpat' in rule:
             if not package.homepage or not rule['wwwpat'].search(package.homepage):
+                return RuleApplyResult.unmatched
+
+        if 'wwwpart' in rule:
+            if not package.homepage:
+                return RuleApplyResult.unmatched
+            matched = False
+            for wwwpart in rule['wwwpart']:
+                if wwwpart in package.homepage:
+                    matched = True
+                    break
+            if not matched:
                 return RuleApplyResult.unmatched
 
         # rule matches, apply effects!

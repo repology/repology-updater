@@ -159,8 +159,17 @@ class TestPackageTransformer(unittest.TestCase):
 
     def test_match_wwwpat(self):
         self.check_transformer(
-            '[ { wwwpat: "foo.com", setname: bar } ]',
+            '[ { wwwpat: "foo\\\\.com", setname: bar } ]',
             {'name': 'p1', 'version': '1.0', 'homepage': 'http://foo.com/xxx', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '1.0', 'homepage': 'http://foo_com.com/xxx', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '1.0', 'homepage': 'http://bar.com/yyy', 'expect_effname': 'p3'},
+            {'name': 'p4', 'version': '2.0', 'expect_effname': 'p4'}
+        )
+
+    def test_match_wwwpart(self):
+        self.check_transformer(
+            '[ { wwwpart: "foo", setname: bar } ]',
+            {'name': 'p1', 'version': '1.0', 'homepage': 'http://foo/xxx', 'expect_effname': 'bar'},
             {'name': 'p2', 'version': '1.0', 'homepage': 'http://bar.com/yyy', 'expect_effname': 'p2'},
             {'name': 'p3', 'version': '2.0', 'expect_effname': 'p3'}
         )
