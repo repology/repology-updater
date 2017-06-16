@@ -24,7 +24,7 @@
 
 - { name: wmdocker,                    setname: docker-tray }
 - { name: docker,                      category: [x11,x11-plugins,"Graphical desktop/Window Maker","User Interface/X","universe/x11"], setname: docker-tray }
-- { name: docker,                      wwwpat: "icculus\\.org",           setname: docker-tray }
+- { name: docker,                      wwwpart: icculus.org,              setname: docker-tray }
 
 - { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
 
@@ -73,14 +73,13 @@
 
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
-- { name: scramble, wwwpat: "xffm", setname: scramble-xffm } # wtf is that
+- { name: scramble, wwwpart: xffm, setname: scramble-xffm } # wtf is that
 
 # sphinx search
-- { name: sphinx, wwwpat: "sphinx-doc.org", setname: "python:sphinx" }
-- { name: sphinx, wwwpat: "pocoo", setname: "python:sphinx" }
+- { name: sphinx, wwwpart: [sphinx-doc.org,pocoo], setname: "python:sphinx" }
 
-- { name: ssr, wwwpat: "spatialaudio", setname: soundscaperenderer }
-- { name: ssr, wwwpat: "maarten", setname: simplescreenrecorder }
+- { name: ssr, wwwpart: spatialaudio, setname: soundscaperenderer }
+- { name: ssr, wwwpart: maarten, setname: simplescreenrecorder }
 - { name: ssr, family: pclinuxos, setname: simplescreenrecorder }
 
 - { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
@@ -95,17 +94,17 @@
 - { name: terraform, setname: gnome-terraform, family: yacp }
 
 # GNU time vs. xemacs module
-- { name: time, setname: xemacs-time, wwwpat: xemacs } # gentoo
+- { name: time, setname: xemacs-time, wwwpart: xemacs } # gentoo
 
 # emulator vs. ruby-rack http server
-- { name: unicorn, setname: unicorn-emulator, wwwpat: "unicorn-engine\\.org" }
-- { name: unicorn, setname: "ruby:unicorn", wwwpat: "bogomips\\.org" }
+- { name: unicorn, setname: unicorn-emulator, wwwpart: unicorn-engine.org }
+- { name: unicorn, setname: "ruby:unicorn", wwwpart: bogomips.org }
 - { name: unicorn, setname: "ruby:unicorn", family: sisyphus }
 - { name: unicorn, setname: unicorn-emulator, family: gentoo }
 - { name: unicorn, warning: "please classify me" }
 
-- { name: wise, wwwpat: "jboss", setname: jboss-wise }
-- { name: wise, wwwpat: "ebi\\.ac\\.uk", setname: wise2 }
+- { name: wise, wwwpart: jboss, setname: jboss-wise }
+- { name: wise, wwwpart: ebi.ac.uk, setname: wise2 }
 - { name: wise, category: [ Sciences/Biology, science, biology, sci-biology, universe/science ], setname: wise2 }
 - { name: wise, warning: "please classify me" }
 
