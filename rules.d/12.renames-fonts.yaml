@@ -67,13 +67,6 @@
 - { namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" }
 
 - name:
-    - fonts-bitmap-terminus
-    - xfonts-terminus
-    - terminus-bitmap-fonts
-    - terminus-cyrillic
-  setname: "fonts:terminus"
-
-- name:
     - bitstream-vera
     - bitstream-vera-fonts
     - bitstream-vera-ttf
@@ -134,6 +127,12 @@
     - culmus-fonts
     - fonts-ttf-culmus
   setname: "fonts:culmus"
+
+- name:
+    - bitstream-cyberbit
+    - cyberbit-ttf
+    - cyberbit-ttfonts
+  setname: "fonts:cyberbit"
 
 - name:
     - dai-banna
@@ -483,6 +482,13 @@
     - symbola-ttf
     - ttf-symbola
   setname: "fonts:symbola"
+
+- name:
+    - fonts-bitmap-terminus
+    - xfonts-terminus
+    - terminus-bitmap-fonts
+    - terminus-cyrillic
+  setname: "fonts:terminus"
 
 - name:
     - terminus-font-ttf
