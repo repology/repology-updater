@@ -28,6 +28,9 @@ Needed for web-application:
 Optional, for doing HTML validation when running tests:
 - Python module [pytidylib](https://pypi.python.org/pypi/pytidylib) and [tidy-html5](http://www.html-tidy.org/) library
 
+Optional, for checking schemas of configuration files:
+- Python module [voluptuous](https://pypi.python.org/pypi/voluptuous)
+
 ## Building
 
 Though repology is mostly a Python project, it contains C utility to
