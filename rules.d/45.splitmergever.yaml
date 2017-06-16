@@ -190,7 +190,7 @@
 - { name: goffice-light,               setname: goffice }
 - { namepat: "goffice[0-9._-]+",       setname: goffice }
 
-- { namepat: "go[0-9.-]+",             setname: go }
+- { namepat: "go-?1[0-9._-]+",         setname: go }  # don't mix with e.g. go2, go4
 - { namepat: "golang[0-9.-]*",         setname: go }
 
 - { namepat: "libftdi[0-9._-]+",       setname: libftdi }
