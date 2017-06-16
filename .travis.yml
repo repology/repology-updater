@@ -8,7 +8,6 @@ addons:
 python:
   - 3.6
 before_install:
-  - gem install kwalify
   - pip install Jinja2
   - pip install PyYAML
   - pip install coveralls
@@ -21,6 +20,7 @@ before_install:
   - pip install pytidylib # XXX: proper html validation needs tidy-html5
   - pip install requests
   - pip install rubymarshal
+  - pip install voluptuous
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
   - wget -qO- https://github.com/repology/libversion/archive/1.2.0.tar.gz | tar -xzf- && ( cd libversion-1.2.0 && cmake . && make && sudo make install )
