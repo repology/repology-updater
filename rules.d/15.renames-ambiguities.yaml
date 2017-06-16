@@ -25,6 +25,7 @@
 - { name: wmdocker,                    setname: docker-tray }
 - { name: docker,                      category: [x11,x11-plugins,"Graphical desktop/Window Maker","User Interface/X","universe/x11"], setname: docker-tray }
 - { name: docker,                      wwwpart: icculus.org,              setname: docker-tray }
+- { name: docker,                      family: gobolinux,                 setname: docker-tray }
 
 - { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
 
