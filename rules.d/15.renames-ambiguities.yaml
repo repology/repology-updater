@@ -76,7 +76,7 @@
 - { name: scramble, wwwpart: xffm, setname: scramble-xffm } # wtf is that
 
 # sphinx search
-- { name: sphinx, wwwpart: [sphinx-doc.org,pocoo], setname: "python:sphinx" }
+- { name: sphinx, wwwpart: [sphinx-doc.org,pocoo.org], setname: "python:sphinx" }
 
 - { name: ssr, wwwpart: spatialaudio, setname: soundscaperenderer }
 - { name: ssr, wwwpart: maarten, setname: simplescreenrecorder }
