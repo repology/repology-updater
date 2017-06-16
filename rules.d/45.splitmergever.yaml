@@ -406,7 +406,7 @@
     - openssl-stream
     - openssl-tls1.3
   setname: openssl
-  verignore: true
+  ignorever: true
 - { namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?", setname: openssl }
 
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
