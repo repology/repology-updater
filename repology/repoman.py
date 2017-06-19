@@ -369,7 +369,14 @@ class RepositoryManager:
         for repo in self.__GetRepositories(reponames):
             deserializers.append(self.__StreamDeserializer(self.__GetSerializedPath(repo)))
 
-        while deserializers:
+        while True:
+            # remove EOFed repos
+            deserializers = [ds for ds in deserializers if not ds.EOF()]
+
+            # stop when all deserializers are empty
+            if not deserializers:
+                break
+
             # find lowest key (effname)
             thiskey = deserializers[0].Peek().effname
             for ds in deserializers[1:]:
@@ -382,6 +389,3 @@ class RepositoryManager:
                     packageset.append(ds.Get())
 
             processor(packageset)
-
-            # remove EOFed repos
-            deserializers = [ds for ds in deserializers if not ds.EOF()]
