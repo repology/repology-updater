@@ -1,0 +1,5 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { name: xorg-xcb-proto,              setname: xcb-proto                 }
+- { name: xorg-libxfontcache,          setname: libxfontcache             }
+- { name: [xorg-libpixman, libpixman, pixman-static], setname: pixman     }

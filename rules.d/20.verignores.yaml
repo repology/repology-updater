@@ -148,6 +148,7 @@
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
+- { name: xcb-proto,                   verpat: "7.*",                                      ignorever: true } # opensuse version prefixed with xorg version (e.g. 7.6_1.2)
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignorever: true }
 - { name: xdot,                        ver: "20121124",                                    ignorever: true }
 - { name: xdotool,                     ver: "20110530.1",                                  ignorever: true }

@@ -380,6 +380,8 @@
 - { name: multicorn,                   setname: postgresql-multicorn      }
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
 - { name: [mutt-lite,mutt-devel,mutt14,mutt14-lite,mutt-patched,mutt-slang,mutt-kiss], setname: mutt }
+- { namepat: "mysql[0-9]*-connector-cpp", setname: mysql-connector-c++    }
+- { name: libmysqlconnectorcpp,        setname: mysql-connector-c++       }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: ncbi-blast-plus,             setname: ncbi-blast+               }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }

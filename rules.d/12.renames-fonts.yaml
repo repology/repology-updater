@@ -329,6 +329,14 @@
   setname: "fonts:humor-sans"
 
 - name:
+    - font-iosevka
+    - iosevka
+    - ttf-inziu-iosevka
+    - ttf-iosevka
+  setname: "fonts:iosevka"
+- { namepat: "ttf-iosevka-(.*)", setname: "fonts:iosevka" }
+
+- name:
     - fonts-isabella
     - isabella-ttf
     - otf-isabella
