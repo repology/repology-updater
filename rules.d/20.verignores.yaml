@@ -6,6 +6,7 @@
 - { name: acl,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: acl,                         verlonger: 3,                                       ignorever: true }
 - { name: ack,                                                       family: mageia,       ignorever: true }
+- { name: aften,                       ver: [ "0.05", "0.08" ],                            ignorever: true }
 - { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
@@ -124,6 +125,7 @@
 - { name: rage,                        ver: "0.3.0.042",                                   ignorever: true }
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
+- { name: scite,                       ver: "375",                                         ignorever: true } # pclinuxos
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
 - { name: sed,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
