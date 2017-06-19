@@ -1,0 +1,20 @@
+- name: msys2
+  type: repository
+  desc: MSYS2
+  family: msys2
+  sources:
+    - name: msys2.db
+      fetcher: WgetTar
+      parser: MSYS2
+      url: http://repo.msys2.org/msys/x86_64/msys.db.tar.gz
+  repolinks:
+    - desc: MSYS2 homepage
+      url: http://www.msys2.org/
+    - desc: MSYS2 repository
+      url: http://repo.msys2.org/
+  packagelinks:
+    - desc: Package source
+      url: 'https://github.com/Alexpux/MSYS2-packages/tree/master/{name}'
+    - desc: PKGBUILD
+      url: 'https://github.com/Alexpux/MSYS2-packages/blob/master/{name}/PKGBUILD'
+  tags: [ all, production ]

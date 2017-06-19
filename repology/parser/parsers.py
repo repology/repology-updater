@@ -36,6 +36,7 @@ from .hackage import HackageParser
 from .homebrew import HomebrewJsonParser
 from .libregamewiki import LibreGameWikiParser
 from .macports import MacPortsParser
+from .msys2 import MSYS2Parser
 from .nix import NixJsonParser
 from .openbsd import OpenBSDIndexParser
 from .openindiana import OpenIndianaSummaryJsonParser
