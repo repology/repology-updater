@@ -74,7 +74,9 @@ class MSYS2Parser():
                 if 'URL' in data:
                     pkg.homepage = data['URL'][0]
 
-                pkg.licenses = data['LICENSE']
+                if 'LICENSE' in data:
+                    pkg.licenses = data['LICENSE']
+
                 pkg.maintainers = sum(map(GetMaintainers, data['PACKAGER']), [])
 
                 if 'GROUPS' in data:
