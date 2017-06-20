@@ -17,7 +17,7 @@
       url: 'https://github.com/Alexpux/MINGW-packages/tree/master/{name}'
     - desc: PKGBUILD
       url: 'https://github.com/Alexpux/MINGW-packages/blob/master/{name}/PKGBUILD'
-  tags: [ all, production, msys2 ]
+  tags: [ all, msys2 ]
 
 - name: msys2_msys2
   type: repository
@@ -38,4 +38,4 @@
       url: 'https://github.com/Alexpux/MSYS2-packages/tree/master/{name}'
     - desc: PKGBUILD
       url: 'https://github.com/Alexpux/MSYS2-packages/blob/master/{name}/PKGBUILD'
-  tags: [ all, production, msys2 ]
+  tags: [ all, msys2 ]
