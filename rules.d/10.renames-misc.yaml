@@ -108,8 +108,24 @@
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
 - { name: bzr-tools,                   setname: bzrtools                  }
 - { name: cacti-cactid,                setname: cacti-spine               } # cactid renamed to spine upstream
+- { name: cairo-clock-ccw,             setname: cairo-clock               }
 - { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins        }
-- { name: cairomm1_0,                  setname: cairomm                   }
+- name:
+    - cairo-coloredemoji
+    - cairo-dfb
+    - cairo-gobject
+    - cairo-infinality
+    - cairo-infinality-lcdfilter
+    - cairo-infinality-ultimate
+    - cairo-infinality-ultimate-with-colored-emoji
+    - cairo-minimal
+    - cairo-nomesa
+    - cairo-reference
+    - cairo-ubuntu
+    - cairo-xcb
+    - libcairo
+  setname: cairo
+- { name: [cairomm1_0,cairomm-docs,libcairomm], setname: cairomm          }
 - { name: cattle-1.0,                  setname: cattle                    }
 - { name: cavez-of-phear,              setname: cavezofphear              }
 - { name: cblas-reference,             setname: cblas                     }
@@ -375,7 +391,40 @@
 
 - { name: mc46,                        setname: mc                        }
 - { name: memtestplus,                 setname: memtest86+                }
-- { name: [mesa3d,mesalib,mesalib7],   setname: mesa                      }
+- { name: [mesa-demo,mesademos],       setname: mesa-demos                }
+- name:
+    - libosmesa
+    - libva-mesa-driver
+    - libva-mesa-driver-noglvnd
+    - libva-mesa-driver-vanilla
+    - mesa-dri
+    - mesa-dri1-drivers
+    - mesa-headers
+    - mesa-hybris
+    - mesa-hybris-libgl
+    - mesa-hybris-wayland-egl
+    - mesa-libgl-noglvnd
+    - mesa-libgl-vanilla
+    - mesa-libs
+    - mesa-noglu
+    - mesa-noglvnd
+    - mesa-nowayland
+    - mesa-progs
+    - mesa-utils
+    - mesa-vanilla
+    - mesa-vdpau
+    - mesa-vdpau-noglvnd
+    - mesa-vdpau-vanilla
+    - mesa3d
+    - mesalib
+    - mesalib7
+    - opencl-mesa
+    - opencl-mesa-noglvnd
+    - opencl-mesa-vanilla
+  setname: mesa
+- { name: mesa-libglu,                 setname: libglu                    }
+- { namepat: "mesa-lts-.*",            setname: mesa                      }
+- { name: [glw,mesa-glw,mesa-libglw],  setname: libglw                    }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: multicorn,                   setname: postgresql-multicorn      }
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
