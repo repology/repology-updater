@@ -48,7 +48,7 @@
 - { name: dosbox,                      verpat: "0\\.74\\.[4r].*",                          ignorever: true }
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignorever: true }
-- { category: "Graphical desktop/Enlightenment", verpat: "20[0-8]{6}.*", family: pclinuxos, ignorever: true }
+- { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignorever: true }
 - { name: e2fsprogs,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: ephoto,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: eternal-lands,               verpat: "[0-9]+",                                   ignorever: true }
