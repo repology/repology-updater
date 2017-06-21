@@ -26,6 +26,7 @@
     - hy
     - khal
     - paramiko
+    - phply
     - pip
     - pyalsaaudio
     - pyaudio
@@ -62,6 +63,7 @@
     - scikit-image
     - scikits-cuda
     - sortedcontainers
+    - stopit
     - todoman
     - vdirsyncer
     - virtualenv
@@ -76,11 +78,13 @@
     - bitarray
     - colorama
     - ctypes
+    - darts.util.lru
     - decorator
     - pbr
     - py-cpuinfo
     - pyfiglet
     - pymediainfo
+    - pyperclip
     - pyspatialite
     - pytest-cov
     - sphinxcontrib-adadomain

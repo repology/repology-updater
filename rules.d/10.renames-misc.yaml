@@ -362,6 +362,7 @@
 - { name: libfdk-aac,                  setname: fdk-aac                   }
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: libgdal-grass,               setname: gdal-grass                }
+- { name: libgranite,                  setname: granite                   }
 - { name: libgtkdatabox,               setname: gtkdatabox                }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
@@ -436,6 +437,7 @@
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
 - { namepat: "network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine)", setname: "networkmanager-$1" }
 - { name: [nginx-devel,nginx-mainline,nginx-libressl,nginx-lite,nginx-full,nginx-openssl-1.1,nginx-mainline-libressl,nginx-mainline-boringssl,nginx-mainline-full], setname: nginx }
+- { name: notion-3,                    setname: notion                    } # XXX: also has version problems
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: oggz,                        setname: liboggz                   }
@@ -488,6 +490,7 @@
 - { name: supertux,                    setname: supertux1,                family: [ freebsd ] } # ???
 - { name: supertux2,                   setname: supertux,                 family: [ freebsd ] }
 - { name: [sweet-home-3d,sweethome3d-application], setname: sweethome3d   }
+- { name: switchboard-plug-network,    setname: switchboard-plug-networking }
 - { name: [libtelepathy-farstream, telepathy-farstream-0.4], setname: telepathy-farstream }
 - { name: tetrinet-x,                  setname: tetrinetx,                family: [ freebsd ] }
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }

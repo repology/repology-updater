@@ -116,6 +116,8 @@
 
 - { name: xclip, setname: emacs-xclip, family: gentoo, category: app-emacs }
 
+- { name: zed, wwwpart: [ocamlcore, github.com/diml/zed], setname: ocaml-zed }
+
 # fuse-emulator vs. fusefs modules - see below
 
 # TODO
