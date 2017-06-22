@@ -37,6 +37,7 @@
 - { family: libregamewiki, name: "liquid war 6",                     setname: liquidwar6 }
 - { family: libregamewiki, name: "lordsawar!",                       setname: lordsawar }
 - { family: libregamewiki, name: "me and my shadow",                 setname: meandmyshadow }
+- { family: libregamewiki, name: "numpty physics",                   setname: numptyphysics }
 - { family: libregamewiki, name: "pink pony",                        setname: pink-pony }
 - { family: libregamewiki, name: "powder toy",                       setname: powder-toy }
 - { family: libregamewiki, name: "red eclipse",                      setname: redeclipse }
