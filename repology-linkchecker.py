@@ -131,7 +131,7 @@ def Main():
 
     parser.add_argument('--timeout', type=float, default=60.0, help='timeout for link requests in seconds')
     parser.add_argument('--delay', type=float, default=3.0, help='delay between requests to one host')
-    parser.add_argument('--age', type=int, default=365, help='min age for recheck in days')
+    parser.add_argument('--age', type=int, default=0, help='min age for recheck in days')
     parser.add_argument('--packsize', type=int, default=128, help='pack size for link processing')
     parser.add_argument('--maxpacksize', type=int, help='max pack size for link processing (useful to skip large hosts)')
     parser.add_argument('--jobs', type=int, default=1, help='number of parallel jobs')
