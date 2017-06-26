@@ -87,6 +87,7 @@
     - pyperclip
     - pyspatialite
     - pytest-cov
+    - socksipy
     - sphinxcontrib-adadomain
     - sqlalchemy-migrate
     - tempita
