@@ -45,3 +45,19 @@
     - desc: Manjaro Linux home
       url: https://manjaro.org/
   tags: [ all, production, manjaro ]
+
+# This is more outdated than stable, likely legacy
+- name: manjaro_xperimental
+  type: repository
+  desc: Manjaro Xperimental
+  family: arch
+  sources:
+    - name: [ community, core, extra ]
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'http://mirror.yandex.ru/mirrors/manjaro/xperimental/{source}/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Manjaro Linux home
+      url: https://manjaro.org/
+  tags: []
