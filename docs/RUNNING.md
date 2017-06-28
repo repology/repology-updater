@@ -31,6 +31,12 @@ Optional, for doing HTML validation when running tests:
 Optional, for checking schemas of configuration files:
 - Python module [voluptuous](https://pypi.python.org/pypi/voluptuous)
 
+Optional, for python code linding:
+- Python module [flake8](https://pypi.python.org/pypi/flake8)
+- Python module [flake8-buildins](https://pypi.python.org/pypi/flake8-builtins)
+- Python module [flake8-import-order](https://pypi.python.org/pypi/flake8-import-order)
+- Python module [flake8-quotes](https://pypi.python.org/pypi/flake8-quotes)
+
 ## Building
 
 Though repology is mostly a Python project, it contains C utility to
