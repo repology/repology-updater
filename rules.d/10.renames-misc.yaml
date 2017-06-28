@@ -498,6 +498,7 @@
 - { name: [tiled-java,tiled-qt],       setname: tiled                     }
 - { name: timidity, verpat: "2\\..*",  setname: timidity++                }
 - { name: [timidity++-emacs,timidity++-gtk,timidity++-motif,timidity++-slang,timidity++-tcltk,timidity++-xaw,timidity++-xskin], setname: timidity++ }
+- { name: [timidity-freepats,timidity-patch-freepats], setname: freepats  }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
