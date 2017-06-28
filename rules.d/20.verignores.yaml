@@ -60,11 +60,10 @@
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignorever: true }
 - { name: findutils,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
-- { name: fgrun,                       verpat: "2013.*",                                   ignorever: true }
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
 - { name: "fonts:gentium-basic",       ver: "1102",                                        ignorever: true } # it's 1.102!
-- { name: "fonts:quattrocento",        ver: "2.0",                   family: aur,          ignorever: true } # webpage says it's 1.1
+- { name: "fonts:quattrocento",        ver: "2.000",                 family: aur,          ignorever: true } # webpage says it's 1.1
 - { name: "fonts:ubuntu",              ver: "1.0",                   family: pclinuxos,    ignorever: true } # no such version on the website
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
 - { name: frozen-bubble,               ver: ["905bf71","2.212.0"],                         ignorever: true } # fake?
@@ -76,7 +75,7 @@
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gzip,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: grep,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
-- { name: glw,                         verpat: "20[0-9]{6}",                               ignorever: true }
+- { name: libglw,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
 - { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch

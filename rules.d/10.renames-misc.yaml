@@ -461,7 +461,6 @@
 - { name: [proj4,proj.4],              setname: proj                      }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5], setname: qbittorrent }
 - { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator], setname: qtcreator }
-- { name: quadkonsole,                 setname: quadkonsole4              }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
 - { name: r2e,                         setname: rss2email                 }
 - { name: rdkafka,                     setname: librdkafka                }
