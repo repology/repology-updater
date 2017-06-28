@@ -14,6 +14,7 @@ before_install:
   - pip install flake8
   - pip install flake8-builtins
   - pip install flake8-import-order
+  - pip install flake8-quotes
   - pip install flask
   - pip install lxml
   - pip install psycopg2
