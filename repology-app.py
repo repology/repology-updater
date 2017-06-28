@@ -743,7 +743,12 @@ def metapackage_report(name):
         flask.flash('Report for {} added succesfully and will be processed in a few days, thank you!'.format(name), 'success')
         return flask.redirect(flask.url_for('metapackage_report', name=name))
 
-    return flask.render_template('metapackage-report.html', reports=get_db().GetReports(name), name=name)
+    return flask.render_template(
+        'metapackage-report.html',
+        reports=get_db().GetReports(name),
+        name=name,
+        afk_till=AFKChecker(app.config['STAFF_AFK']).GetAFKEnd()
+    )
 
 
 @app.route('/badge/vertical-allrepos/<name>.svg')

@@ -7,6 +7,10 @@
 {% block content %}
 <div class="container">
 
+{% if afk_till %}
+<div class="alert alert-warning" role="alert">Repology staff is not available till <time datetime="{{ afk_till.strftime("%Y-%m-%d") }}">{{ afk_till.strftime("%Y-%m-%d") }}</time>. Please don't worry, your report will be processed after this date as soon as possible.</div>
+{% endif %}
+
 <p>While repology tries its best in matching packages across different repositories, this is quite a complex task:</p>
 
 <ul>

@@ -108,3 +108,10 @@ MAX_REPORTS = 10
 # Address of repology.org to use in HTML links
 #
 REPOLOGY_HOME = 'https://repology.org'
+
+#
+# AFK times when reports cannot be processed, to be reported to users
+# array of strings in 'YYYY-MM-DD' (single date) or 'YYYY-MM-DD
+# YYYY-MM-DD' (date interval) format
+#
+STAFF_AFK = []
