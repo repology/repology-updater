@@ -339,7 +339,7 @@
 - { name: ja2,                         setname: ja2-stracciatella         }
 - { name: jbig-kit,                    setname: jbigkit                   }
 - { name: [kid3-qt, kid3-qt4, kid3-qt5, kid4-qt, kid3-cli], setname: kid3 }
-- { name: kiki,                        setname: kiki-the-nano-bot,        family: [ freebsd, gentoo ] }
+- { name: kiki-the-nano-bot,           setname: kiki                      }
 - { name: krita3,                      setname: krita                     }
 - { name: lapackpp,                    setname: lapack++                  }
 - { name: lapack-tmg,                  setname: lapack                    } # component of
