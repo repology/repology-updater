@@ -127,6 +127,9 @@
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:gixy",               setname: gixy                      }
 - { name: "python:meson",              setname: meson                     }
+- { name: [ipython,"python:ipython",ipython2,ipython3,python2-ipython], setname: ipython2 }
+- { name: ipython2, verpat: "6\\..*",   setname: ipython                  }
+- { name: [ipython-genutils,ipython_genutils], setname: "python:ipython_genutils" }
 - { name: "python:pgcli",              setname: pgcli                     }
 - { name: "python:pypanel",            setname: pypanel                   }
 - { name: "python:rss2email",          setname: rss2email                 }
