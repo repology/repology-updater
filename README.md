@@ -62,7 +62,6 @@ version are always parsed.
 | GoboLinux                        | ✔       |         |       | ✔     | ✔       |          |
 | Hackage                          |         |         |       | ✔ (2) |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
-| MSYS2                            | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
 | OpenIndiana                      | ✔       |         | ✔     | ✔     |         | ✔        |
