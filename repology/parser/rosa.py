@@ -33,25 +33,20 @@ class RosaInfoXmlParser():
         for info in root.findall('./info'):
             pkg = Package()
 
-            fn = info.attrib['fn']
+            fn = info.attrib['fn'].rsplit('-', 2)
+            if len(fn) < 3:
+                print('WARNING: unable to parse fn: {}'.format(fn), file=sys.stderr)
+                continue
+
+            pkg.name = fn[0]
+            pkg.origversion = '-'.join(fn[1:])
+            pkg.version = fn[1]
+
             url = info.attrib['url']
-            license_ = info.attrib['license']
-
-            pos2 = fn.rfind('-')
-            if pos2 == -1:
-                print('WARNING: unable to parse fn: {}'.format(fn), file=sys.stderr)
-                continue
-
-            pos1 = fn.rfind('-', 0, pos2)
-            if pos1 == -1:
-                print('WARNING: unable to parse fn: {}'.format(fn), file=sys.stderr)
-                continue
-
-            pkg.name = fn[:pos1]
-            pkg.origversion = fn[pos1 + 1:]
-            pkg.version = fn[pos1 + 1:pos2]
             if url:
                 pkg.homepage = url
+
+            license_ = info.attrib['license']
             pkg.licenses = [license_]
 
             result.append(pkg)
