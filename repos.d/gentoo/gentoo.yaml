@@ -10,6 +10,7 @@
       fetcher: Git
       parser: GentooGit
       url: https://github.com/gentoo-mirror/gentoo.git
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
       branch: stable
   repolinks:
     - desc: Gentoo Linux home

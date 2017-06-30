@@ -10,6 +10,7 @@
       fetcher: Git
       parser: SlackBuilds
       url: git://git.slackbuilds.org/slackbuilds/
+      sparse_checkout: [ '**/*.info' ]
   repolinks:
     - desc: SlackBuilds.org
       url: https://slackbuilds.org/
