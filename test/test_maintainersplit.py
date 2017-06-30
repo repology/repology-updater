@@ -62,6 +62,7 @@ class TestSplitMaintainers(unittest.TestCase):
         self.assertEqual(GetMaintainers('agent smith (amdmi3@freebsd.org)'), ['amdmi3@freebsd.org'])
 
         self.assertEqual(GetMaintainers('amdNOmi3@freeSPAMbsd.org (remove NO and SPAM)'), ['amdmi3@freebsd.org'])
+        self.assertEqual(GetMaintainers('amdmi3 @ google mail'), ['amdmi3@gmail.com'])
 
     def test_empty(self):
         self.assertEqual(GetMaintainers('somecrap'), [])

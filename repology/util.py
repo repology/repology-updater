@@ -80,6 +80,9 @@ def GetMaintainers(instr):
             if match:
                 item = match.group(1)
 
+        for extrarepl in ((' @ google mail', '@gmail.com'), ):
+            item = item.replace(extrarepl[0], extrarepl[1])
+
         # also assumes non-empty items
         if item.find('@') != -1:
             result.add(item)
