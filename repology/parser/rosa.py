@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import re
 import xml.etree.ElementTree
 
 from repology.package import Package
@@ -33,6 +34,7 @@ class RosaInfoXmlParser():
         for info in root.findall('./info'):
             pkg = Package()
 
+            # derive names and versions from fn field
             fn = info.attrib['fn'].rsplit('-', 2)
             if len(fn) < 3:
                 print('WARNING: unable to parse fn: {}'.format(fn), file=sys.stderr)
@@ -42,6 +44,21 @@ class RosaInfoXmlParser():
             pkg.origversion = '-'.join(fn[1:])
             pkg.version = fn[1]
 
+            # Rosa packages are named like PKGNAME-PKGVER-ROSAREV
+            # where ROSAREV is most commonly in the form of N.src, but
+            # may contain other components, such as prerelease stuff
+            # like alpha/beta/rc/pre/... and snapshot revisions/dates
+            #
+            # What we do here is we try to extract prerelease part
+            # and mark version as ignored with non-trivial ROSAREV,
+            # as it it likely a snapshot and trus cannot be trusted
+            if not re.fullmatch('[0-9]+\\.src', fn[2]):
+                pkg.ignoreversion = True
+                match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', fn[2].lower())
+                if match:
+                    pkg.version += match.group(0)
+
+            # process url and license
             url = info.attrib['url']
             if url:
                 pkg.homepage = url
