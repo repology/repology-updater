@@ -87,8 +87,6 @@
 - { namepat: "(ruby:rails-dom-testing)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:railties)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:rake-compiler)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:representable)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:retriable)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:rouge)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:ruby-vnc)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:rubyntlm)[0-9._-]+", setname: "$1" }
@@ -105,7 +103,6 @@
 - { namepat: "(ruby:trollop)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:typhoeus)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:tzinfo)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:uber)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:utilrb)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:web-console)[0-9._-]+", setname: "$1" }
 

@@ -350,7 +350,6 @@
 # lib* block
 - { name: libagg,                      setname: agg                       }
 - { name: [liballegroogg,allegroogg],  setname: alogg                     }
-- { name: libass4,                     setname: libass                    }
 - { name: libatlas3,                   setname: atlas                     }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbrotli,                   setname: brotli                    }
