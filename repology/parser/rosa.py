@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
 import re
+import sys
 import xml.etree.ElementTree
 
 from repology.package import Package

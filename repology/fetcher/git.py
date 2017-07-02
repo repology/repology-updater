@@ -41,7 +41,7 @@ class GitFetcher():
                 for item in self.sparse_checkout:
                     print(item, file=sparse_checkout_file)
             else:
-                print("/*", file=sparse_checkout_file)
+                print('/*', file=sparse_checkout_file)
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
