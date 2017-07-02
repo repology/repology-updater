@@ -98,8 +98,8 @@
 - { name: "python:alsaaudio",          setname: "python:pyalsaaudio"      } # use pypi name!
 - { name: "python:graphviz", verpat: "1\\.[34].*", setname: "python:pygraphviz" } # use pypi name!!!
 - { namepat: "python:scikits-(.*)",      setname: "python:scikits.$1" }
-- { name: scikits-learn, family: gentoo, setname: "python:scikit-learn" } # XXX: problem
-- { name: scikits-image, family: gentoo, setname: "python:scikit-image" } # XXX: problem
+- { name: scikits_learn, family: gentoo, setname: "python:scikit-learn" } # XXX: problem
+- { name: scikits_image, family: gentoo, setname: "python:scikit-image" } # XXX: problem
 - { namepat: "scikits[_-](bootstrap|optimization|timeseries)", setname: "python:scikits.$1" }
 - { name: "python:cpuinfo",            setname: "python:py-cpuinfo"       }
 - { name: "python:cherrypy2",          setname: "python:cherrypy"         }
