@@ -41,10 +41,12 @@ schemas = {
                     Required('name'): Any(str, [str]),
                     Required('fetcher'): str,
                     Required('parser'): str,
-                    'url': str,  # not url, as there may be rsync or cvs addresses
-                    'compression': Any('xz', 'bz2', 'gz'),
+                    'url': str,  # not Url(), as there may be rsync or cvs addresses
                     'branch': str,
                     'subrepo': str,
+
+                    'compression': Any('xz', 'bz2', 'gz'),
+                    'sparse_checkout': [str]
                 }
             ],
             'shadow': bool,
