@@ -133,6 +133,7 @@
 - { name: [ipython-ipyparallel,ipython2-ipyparallel,ipyparallel], setname: "python:ipyparallel" }
 - { name: "python:pgcli",              setname: pgcli                     }
 - { name: "python:pypanel",            setname: pypanel                   }
+- { name: "python:qbzr",               setname: qbzr                      }
 - { name: "python:rss2email",          setname: rss2email                 }
 - { name: "python:sphinx10",           setname: "python:sphinx"           }
 - { name: "python:uwsgi",              setname: uwsgi                     }
