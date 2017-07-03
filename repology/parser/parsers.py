@@ -42,6 +42,7 @@ from .openbsd import OpenBSDIndexParser
 from .openindiana import OpenIndianaSummaryJsonParser
 from .pkgsrc import PkgsrcIndexParser
 from .pypi import PyPiHTMLParser
+from .ravenports import RavenportsJsonParser
 from .repodata import RepodataParser
 from .rosa import RosaInfoXmlParser
 from .rubygem import RubyGemParser

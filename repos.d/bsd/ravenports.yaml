@@ -1,0 +1,16 @@
+###########################################################################
+# Ravenports
+###########################################################################
+- name: ravenports
+  type: repository
+  desc: Ravenports
+  family: ravenports
+  sources:
+    - name: repology.json
+      fetcher: File
+      parser: RavenportsJson
+      url: https://raw.githubusercontent.com/jrmarino/Ravenports/master/Mk/Misc/repology.json
+  repolinks:
+    - desc: Ravenports GitHub repository
+      url: https://github.com/jrmarino/Ravenports
+  tags: [ all, production ]
