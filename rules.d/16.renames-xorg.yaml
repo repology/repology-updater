@@ -2,4 +2,11 @@
 
 - { name: xorg-xcb-proto,              setname: xcb-proto                 }
 - { name: xorg-libxfontcache,          setname: libxfontcache             }
-- { name: [xorg-libpixman, libpixman, pixman-static], setname: pixman     }
+- { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }
+
+- { name: xorg-xtrans, setname: xtrans }
+- { name: [x11-xtrans-devel, xorg-x11-xtrans-devel, xorg-xtrans-devel], setname: xtrans, ignorever: true }
+- { name: xorg-libfontenc, setname: libfontenc }
+- { name: [xorg-libpciaccess, xorg-pciaccess], setname: libpciaccess }
+- { name: [xorg-x11-xauth, xorg-xauth], setname: xauth }
+- { name: [xorg-libxau, xorg-xau], setname: libxau }

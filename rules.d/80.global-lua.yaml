@@ -7,3 +7,6 @@
 - { namepat: "lua(?:[0-9]\\.[0-9])?-(?:lua)?(.+?)", setname: "lua:$1", family: [ nix, alpine ] }
 - { category: dev-lua, name: luabitop, setname: "lua:bitop", last: true, family: [ gentoo ] }
 - { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", family: [ gentoo ] }
+
+- { name: [lua-luabitop, lua-luabitop, lua5.2-bitop, luabitop], setname: "lua:bitop" }
+- { name: lua-ada, setname: "lua:ada" }

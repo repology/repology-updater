@@ -90,7 +90,7 @@
 - { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect], setname: boehm-gc }
 - { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
 - { name: bombono,                     setname: bombono-dvd               }
-- { name: [boost-all,boost-libs,boost-headers,boost-python-libs,boost-python,boost-mpi,boost-bcp], setname: boost }
+- { name: [boost-all,boost-libs,boost-headers,boost-python-libs,boost-python,boost-mpi,boost-bcp,boost-libraries], setname: boost }
 - { namepat: "boost-mpi-source[0-9-.]+", setname: boost                   }
 - { namepat: "boost[0-9_.]+",          setname: boost                     }
 - { namepat: "botan[0-9.]+",           setname: botan                     }
@@ -312,6 +312,7 @@
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geotiff,                     setname: libgeotiff                }
+- { name: gif,                         setname: giflib, family: ravenports }
 - { namepat: "gimp2-(.*)",             setname: "gimp-$1"                 }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
 - { name: git-flow,                    setname: gitflow                   }
