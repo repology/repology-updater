@@ -82,7 +82,7 @@ class TestFlask(unittest.TestCase):
         return self.checkurl(url=url, status_code=404, mimetype=None)
 
     def test_static_pages(self):
-        self.checkurl_html('/news', has=['support added'])
+        self.checkurl_html('/news', has=['Added', 'repository'])
         self.checkurl_html('/about', has=['maintainers'])
         self.checkurl_html('/api', has=['/api/v1/metapackages/all/firefox'])
 
