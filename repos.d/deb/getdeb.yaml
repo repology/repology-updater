@@ -3,18 +3,72 @@
 ###########################################################################
 - name: getdeb
   type: repository
-  desc: GetDeb/PlayDeb
+  desc: GetDeb
   family: debuntu
   sources:
-    - name: [ games, apps ]
+    - name: Sources
       fetcher: File
       parser: DebianSources
-      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb/{source}/source/Sources.gz'
+      url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb/apps/source/Sources.gz'
       compression: gz
-      subrepo: '{source}'
   repolinks:
     - desc: GetDeb home
       url: http://www.getdeb.net/welcome/
+  packagelinks:
+    - desc: GetDeb page
+      url: 'http://www.getdeb.net/app/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: getdeb_testing
+  type: repository
+  desc: GetDeb Testing
+  family: debuntu
+  sources:
+    - name: Sources
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb-testing/apps/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: GetDeb home
+      url: http://www.getdeb.net/welcome/
+  packagelinks:
+    - desc: GetDeb page
+      url: 'http://www.getdeb.net/app/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: playdeb
+  type: repository
+  desc: PlayDeb
+  family: debuntu
+  sources:
+    - name: apps
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb/games/source/Sources.gz'
+      compression: gz
+  repolinks:
     - desc: PlayDeb home
       url: http://www.playdeb.net/welcome/
-  tags: [ all, production ]
+  packagelinks:
+    - desc: PlayDeb page
+      url: 'http://www.playdeb.net/game/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: playdeb_testing
+  type: repository
+  desc: PlayDeb Testing
+  family: debuntu
+  sources:
+    - name: apps
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb-testing/games/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: PlayDeb home
+      url: http://www.playdeb.net/welcome/
+  packagelinks:
+    - desc: PlayDeb page
+      url: 'http://www.playdeb.net/game/{name}'
+  tags: [ all, production, getplaydeb ]
