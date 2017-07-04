@@ -68,6 +68,7 @@ version are always parsed.
 | PCLinuxOS                        | ✔       | ✔       | ✔     |       |         |          |
 | pkgsrc                           | ✔       | ✔       | ✔     |       |         |          |
 | PyPi                             | ✔       |         |       | ✔ (2) |         |          |
+| Ravenports                       | ✔       |         | ✔     | ✔     |         |          |
 | RubyGems                         |         |         |       | ✔ (2) |         |          |
 | SlackBuilds                      |         | ✔       | ✔     | ✔     |         | ✔        |
 | YACP                             |         |         |       |       |         |          |

@@ -354,7 +354,7 @@
 
 - { namepat: "libgcrypt[0-9_.-]+",     setname: libgcrypt }
 
-- { name: [libxfont,libxfont1,libxfont2,xorg-libxfont,xorg-libxfont2], setname: libxfont }
+- { name: [libxfont,libxfont1,libxfont2,xorg-libxfont,xorg-libxfont2,xorg-xfont,xorg-xfont2], setname: libxfont }
 - { name: libxfont, verpat: "2\\..*", setname: libxfont2 }
 
 - { namepat: "llvm[0-9.-]+",           setname: llvm }
@@ -418,7 +418,7 @@
 
 - { namepat: "pdfstudio[0-9]+",        setname: pdfstudio }
 
-- { namepat: "perl5[0-9.]*",           setname: perl }
+- { namepat: "perl-?5[0-9.]*",         setname: perl }
 
 - { name: [png,libpng-apng],           setname: libpng }
 - { namepat: "libpng(?:-legacy)?[0-9.-]*", setname: libpng }
