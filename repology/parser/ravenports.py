@@ -38,7 +38,10 @@ class RavenportsJsonParser():
             pkg.name = packagedata['namebase']
             pkg.version = packagedata['version']
             pkg.category = packagedata['keywords'][0]
-            pkg.homepage = packagedata['homepage']
+            if 'homepage' in packagedata:
+                pkg.homepage = packagedata['homepage']
+
+            pkg.downloads = packagedata['distfile']
             pkg.comment = packagedata['variants'][0]['sdesc']
 
             result.append(pkg)
