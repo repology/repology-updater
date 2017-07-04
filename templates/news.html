@@ -17,64 +17,70 @@
 <article>
 	<h3>2017-06-07</h3>
 	<ul>
-		<li>Related metapackages feature.</li>
+		<li>
+			Added related metapackages page: for each metapackage, related ones are discovered
+			by matching homepage URLs. This helps to discover actual related packages (e.g. a GUI
+			package for some CLI utility from the save vendor) as well as candidates for merging.
+			Related packages are available through <b>Related</b> tab in the metapackage view.
+			See <a href="{{ url_for('metapackage_related', name='git') }}">git</a> for an example.
+		</li>
 	</ul>
 </article>
 
 <article>
 	<h3>2017-06-06</h3>
 	<ul>
-		<li>New functional title page.</li>
+		<li>New functional <a href="{{ url_for('index') }}">title page</a>.</li>
 	</ul>
 </article>
 
 <article>
 	<h3>2017-05-23</h3>
 	<ul>
-		<li>Added <b>DistroWatch</b> support.</li>
+		<li>Added <a href="{{ url_for('repository', repo='distrowatch') }}">DistroWatch</a> repositry.</li>
 	</ul>
 </article>
 
 <article>
 	<h3>2017-05-22</h3>
 	<ul>
-		<li>Added <b>OpenIndiana</b> repository.</li>
+		<li>Added <a href="{{ url_for('repository', repo='openindiana') }}">OpenIndiana</a> repository.</li>
 	</ul>
 </article>
 
 <article>
 	<h3>2017-05-19</h3>
 	<ul>
-		<li>Included all <b>Gentoo</b> and <b>AUR</b> packages. Snapshots and older ebuilds are no longer ignored.</li>
-		<li>Added <b>CRAN</b> repository.</li>
+		<li>Snapshot packages from <a href="{{ url_for('repository', repo='gentoo') }}">Gentoo</a> (with versions like 9999 or 99999999) and <a href="{{ url_for('repository', repo='aur') }}">AUR</a> (*-git, *-svn etc.) are no longer discarded.</li>
+		<li>Added <a href="{{ url_for('repository', repo='cran') }}">CRAN</a> repository.</li>
 	</ul>
 </article>
 
 <article>
 	<h3>2017-05-04</h3>
 	<ul>
-		<li>Added <b>MacPorts</b> repository.</li>
+		<li>Added <a href="{{ url_for('repository', repo='macports') }}">MacPorts</a> repository.</li>
 	</ul>
 </article>
 
 <article>
 	<h3>2017-03-27</h3>
 	<ul>
-		<li>Added <b>RPM Fusion Fedora</b> repositories.</li>
+		<li>Added <a href="{{ url_for('repository', repo='rpmfusion_fedora_24') }}">RPM Fusion Fedora 24</a>, <a href="{{ url_for('repository', repo='rpmfusion_fedora_25') }}">RPM Fusion Fedora 25</a>, and <a href="{{ url_for('repository', repo='rpmfusion_fedora_rawhide') }}">RPM Fusion Fedora Rawhide</a> repositories.</li>
 	</ul>
 </article>
 
 <article>
 	<h3>2017-03-23</h3>
 	<ul>
-		<li>Added <b>EPEL</b> repositories.</li>
+		<li>Added <a href="{{ url_for('repository', repo='epel_6') }}">EPEL 6</a> and <a href="{{ url_for('repository', repo='epel_7') }}">EPEL 7</a> repositories.</li>
 	</ul>
 </article>
 
 <article>
 	<h3>2017-03-20</h3>
 	<ul>
-		<li>Added <b>PlayDeb</b> repository.</li>
+		<li>Added <a href="{{ url_for('repository', repo='getdeb') }}">GetDeb/PlayDeb</a> repository.</li>
 	</ul>
 </article>
 
