@@ -227,3 +227,12 @@
 .navbar-brand img {
     margin: -10px -10px -10px 0px;
 }
+
+.time-bold {
+    font-weight: bold;
+}
+
+.news-summary-time {
+    font-weight: bold;
+    margin-right: 10px;
+}
