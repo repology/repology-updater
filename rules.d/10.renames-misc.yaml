@@ -531,6 +531,7 @@
 - { namepat: "open[gs]fx",             setname: "openttd-$0"              }
 - { namepat: "(?:lib)?sdl[_-]([a-z]+)1\\.2",      setname: "sdl-$1"                  }
 - { namepat: "(?:lib)?sdl[_-]([a-z]+)2\\.0",      setname: "sdl2-$1"                 }
+- { namepat: "(?:lib)?(?:sdl1(.*))",   setname: "sdl$1" }
 - { namepat: "(?:lib)?(sdl2?[_-](?:image|mixer|net|sound|ttf|gfx|console|sge|pango))", setname: "$1" }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
