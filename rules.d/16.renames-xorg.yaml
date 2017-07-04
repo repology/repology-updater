@@ -1,12 +1,14 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+# protos
 - { name: xorg-xcb-proto,              setname: xcb-proto                 }
-- { name: xorg-libxfontcache,          setname: libxfontcache             }
-- { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }
 
-- { name: xorg-xtrans, setname: xtrans }
-- { name: [x11-xtrans-devel, xorg-x11-xtrans-devel, xorg-xtrans-devel], setname: xtrans, ignorever: true }
-- { name: xorg-libfontenc, setname: libfontenc }
-- { name: [xorg-libpciaccess, xorg-pciaccess], setname: libpciaccess }
-- { name: [xorg-x11-xauth, xorg-xauth], setname: xauth }
-- { name: [xorg-libxau, xorg-xau], setname: libxau }
+# utils
+- { namepat: "(?:xorg-|x11-)+(xauth|xfontsel|xtrans)", setname: "$1" }
+- { namepat: "(?:xorg-|x11-)+(xtrans)-devel", setname: "$1", ignorever: true }
+
+# libs
+- { namepat: "(?:xorg-|x11-)+(?:lib)?(dmx|fontenc|ice|fs|oldx|pciaccess|sm|x11|xau|xaw|xcomposite|xcursor|xdamage|xdmcp|xevie|xext|xfixes|xfontcache|xft|xi|xinerama|xkbfile|xkbui|xmu|xp|xpm|xrandr|xres|xscrnsaver|xt|xtrans|xtrap|xtst|xv|xvmc|xxf86dga|xxf86misc|xxf86vm)", setname: "lib$1" }
+
+# libs exceptions
+- { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }

@@ -68,6 +68,8 @@
 - { name: avr8-burn-omat,              setname: avr8-burn-o-mat           }
 - { name: avro-cpp,                    setname: avro-c++                  }
 - { name: aws-cli,                     setname: awscli                    }
+- { name: backuppc-devel,              setname: backuppc, ignorever: true }
+- { name: backuppc4,                   setname: backuppc                  }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: bcel5_3,                     setname: bcel                      }
@@ -313,6 +315,9 @@
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geotiff,                     setname: libgeotiff                }
 - { name: gif,                         setname: giflib, family: ravenports }
+- { name: giflib-util,                 setname: giflib                    }
+- { name: giflib4,                     setname: giflib                    }
+- { name: libungif,                    setname: giflib                    } # former name
 - { namepat: "gimp2-(.*)",             setname: "gimp-$1"                 }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
 - { name: git-flow,                    setname: gitflow                   }
