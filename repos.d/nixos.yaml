@@ -5,6 +5,7 @@
   type: repository
   desc: nixpkgs stable
   family: nix
+  color: '7eb2dd'
   sources:
     - name: packages.json
       fetcher: File
@@ -22,6 +23,7 @@
   type: repository
   desc: nixpkgs unstable
   family: nix
+  color: '7eb2dd'
   sources:
     - name: packages-unstable.json
       fetcher: File

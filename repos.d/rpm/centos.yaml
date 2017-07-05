@@ -5,6 +5,7 @@
   type: repository
   desc: CentOS 6
   family: centos
+  color: '932279'
   sources:
     - name: [ os, updates ]
       fetcher: Repodata
@@ -25,6 +26,7 @@
   type: repository
   desc: CentOS 7
   family: centos
+  color: '932279'
   sources:
     - name: [ os, updates ]
       fetcher: Repodata

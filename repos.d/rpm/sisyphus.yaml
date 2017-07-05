@@ -5,6 +5,7 @@
   type: repository
   desc: ALT Sisyphus
   family: sisyphus
+  color: 'baccdd'
   sources:
     - name: [ noarch, x86_64 ]
       fetcher: File
@@ -27,6 +28,7 @@
   type: repository
   desc: ALT Sisyphus Autoimports
   family: sisyphus
+  color: 'baccdd'
   sources:
     - name: [ noarch, x86_64 ]
       fetcher: File

@@ -5,6 +5,7 @@
   type: repository
   desc: Arch
   family: arch
+  color: '0088cc'
   sources:
     - name: [ core, extra, community ]
       fetcher: WgetTar

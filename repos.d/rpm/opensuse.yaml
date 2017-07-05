@@ -5,6 +5,7 @@
   type: repository
   desc: OpenSUSE Leap 42.1
   family: opensuse
+  color: '6da741'
   valid_till: 2017-05-16
   sources:
     - name: oss
@@ -31,6 +32,7 @@
   type: repository
   desc: OpenSUSE Leap 42.2
   family: opensuse
+  color: '6da741'
   sources:
     - name: oss
       fetcher: Repodata
@@ -56,6 +58,7 @@
   type: repository
   desc: OpenSUSE Leap 42.3
   family: opensuse
+  color: '6da741'
   sources:
     - name: oss
       fetcher: Repodata
@@ -81,6 +84,7 @@
   type: repository
   desc: OpenSUSE Tumbleweed
   family: opensuse
+  color: '6da741'
   sources:
     - name: data
       fetcher: Repodata

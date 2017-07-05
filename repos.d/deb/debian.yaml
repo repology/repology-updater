@@ -5,6 +5,7 @@
   type: repository
   desc: Debian Stable
   family: debuntu
+  color: 'c70036'
   sources:
     - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
       fetcher: File
@@ -34,6 +35,7 @@
   type: repository
   desc: Debian Stable Backports
   family: debuntu
+  color: 'c70036'
   sources:
     - name: [ main, contrib, non-free ]
       fetcher: File
@@ -63,6 +65,7 @@
   type: repository
   desc: Debian Testing
   family: debuntu
+  color: 'c70036'
   sources:
     - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
       fetcher: File
@@ -92,6 +95,7 @@
   type: repository
   desc: Debian Unstable
   family: debuntu
+  color: 'c70036'
   sources:
     - name: [ main, contrib, non-free ]
       fetcher: File
@@ -121,6 +125,7 @@
   type: repository
   desc: Debian Experimental
   family: debuntu
+  color: 'c70036'
   sources:
     - name: [ main, contrib, non-free ]
       fetcher: File

@@ -5,6 +5,7 @@
   type: repository
   desc: Linux Mint 17
   family: debuntu
+  color: '87cf3e'
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File
@@ -21,6 +22,7 @@
   type: repository
   desc: Linux Mint 17.1
   family: debuntu
+  color: '87cf3e'
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File
@@ -37,6 +39,7 @@
   type: repository
   desc: Linux Mint 17.2
   family: debuntu
+  color: '87cf3e'
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File
@@ -53,6 +56,7 @@
   type: repository
   desc: Linux Mint 17.3
   family: debuntu
+  color: '87cf3e'
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File
@@ -69,6 +73,7 @@
   type: repository
   desc: Linux Mint 18
   family: debuntu
+  color: '87cf3e'
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File
@@ -85,6 +90,7 @@
   type: repository
   desc: Linux Mint 18.1
   family: debuntu
+  color: '87cf3e'
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File
@@ -101,6 +107,7 @@
   type: repository
   desc: Linux Mint 18.2
   family: debuntu
+  color: '87cf3e'
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: File

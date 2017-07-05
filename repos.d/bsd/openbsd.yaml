@@ -5,6 +5,7 @@
   type: repository
   desc: OpenBSD
   family: openbsd
+  color: 'f8e808'
   sources:
     - name: INDEX
       fetcher: File

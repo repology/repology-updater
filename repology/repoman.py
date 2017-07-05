@@ -305,6 +305,7 @@ class RepositoryManager:
                 'family': repository['family'],
                 'desc': repository['desc'],
                 'type': repository['type'],
+                'color': repository.get('color'),
             } for repository in self.repositories
         }
 

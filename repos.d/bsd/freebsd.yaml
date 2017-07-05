@@ -5,6 +5,7 @@
   type: repository
   desc: FreeBSD
   family: freebsd
+  color: '990000'
   sources:
     - name: INDEX-11
       fetcher: File
@@ -42,6 +43,7 @@
   type: repository
   desc: DPorts
   family: freebsd
+  color: '9eff11'
   sources:
     - name: INDEX
       fetcher: File

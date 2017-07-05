@@ -5,6 +5,7 @@
   type: repository
   desc: Gentoo overlay Pentoo
   family: gentoo
+  color: '62548f'
   sources:
     - name: overlay
       fetcher: Git

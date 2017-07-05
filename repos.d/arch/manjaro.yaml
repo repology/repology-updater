@@ -5,6 +5,7 @@
   type: repository
   desc: Manjaro Stable
   family: arch
+  color: '34be5b'
   sources:
     - name: [ community, core, extra ]
       fetcher: WgetTar
@@ -20,6 +21,7 @@
   type: repository
   desc: Manjaro Testing
   family: arch
+  color: '34be5b'
   sources:
     - name: [ community, core, extra ]
       fetcher: WgetTar
@@ -35,6 +37,7 @@
   type: repository
   desc: Manjaro Unstable
   family: arch
+  color: '34be5b'
   sources:
     - name: [ community, core, extra ]
       fetcher: WgetTar
@@ -51,6 +54,7 @@
   type: repository
   desc: Manjaro Xperimental
   family: arch
+  color: '34be5b'
   sources:
     - name: [ community, core, extra ]
       fetcher: WgetTar

@@ -5,6 +5,7 @@
   type: repository
   desc: EPEL 6
   family: fedora
+  color: 'ff0000'
   sources:
     - name: data
       fetcher: Repodata
@@ -19,6 +20,7 @@
   type: repository
   desc: EPEL 7
   family: fedora
+  color: 'ff0000'
   sources:
     - name: data
       fetcher: Repodata

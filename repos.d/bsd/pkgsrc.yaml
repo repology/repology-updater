@@ -5,6 +5,7 @@
   type: repository
   desc: pkgsrc-2017Q1
   family: pkgsrc
+  color: 'ff6600'
   valid_till: 2017-07-01
   sources:
     - name: INDEX
@@ -35,6 +36,7 @@
   type: repository
   desc: pkgsrc current
   family: pkgsrc
+  color: 'ff6600'
   sources:
     - name: INDEX
       fetcher: File

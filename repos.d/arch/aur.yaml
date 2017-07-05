@@ -5,6 +5,7 @@
   type: repository
   desc: AUR
   family: arch
+  color: '0088cc'
   sources:
     - name: aur
       fetcher: AUR

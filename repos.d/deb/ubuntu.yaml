@@ -5,6 +5,7 @@
   type: repository
   desc: Ubuntu 12.04
   family: debuntu
+  color: 'e95420'
   valid_till: 2017-04-26
   sources:
     - name: [ precise/main, precise/multiverse, precise/restricted, precise/universe, precise-updates/main, precise-updates/multiverse, precise-updates/restricted, precise-updates/universe ]
@@ -31,6 +32,7 @@
   type: repository
   desc: Ubuntu 14.04
   family: debuntu
+  color: 'e95420'
   valid_till: 2019-05-01
   sources:
     - name: [ trusty/main, trusty/multiverse, trusty/restricted, trusty/universe, trusty-updates/main, trusty-updates/multiverse, trusty-updates/restricted, trusty-updates/universe ]
@@ -57,6 +59,7 @@
   type: repository
   desc: Ubuntu 16.04
   family: debuntu
+  color: 'e95420'
   valid_till: 2021-05-01
   sources:
     - name: [ xenial/main, xenial/multiverse, xenial/restricted, xenial/universe, xenial-updates/main, xenial-updates/multiverse, xenial-updates/restricted, xenial-updates/universe ]
@@ -83,6 +86,7 @@
   type: repository
   desc: Ubuntu 16.10
   family: debuntu
+  color: 'e95420'
   valid_till: 2017-08-01
   sources:
     - name: [ yakkety/main, yakkety/multiverse, yakkety/restricted, yakkety/universe, yakkety-updates/main, yakkety-updates/multiverse, yakkety-updates/restricted, yakkety-updates/universe ]
@@ -109,6 +113,7 @@
   type: repository
   desc: Ubuntu 17.04
   family: debuntu
+  color: 'e95420'
   valid_till: 2018-02-01
   sources:
     - name: [ zesty/main, zesty/multiverse, zesty/restricted, zesty/universe, zesty-updates/main, zesty-updates/multiverse, zesty-updates/restricted, zesty-updates/universe ]
@@ -135,6 +140,7 @@
   type: repository
   desc: Ubuntu 17.10
   family: debuntu
+  color: 'e95420'
   valid_till: 2018-08-01
   sources:
     - name: [ artful/main, artful/multiverse, artful/restricted, artful/universe, artful-updates/main, artful-updates/multiverse, artful-updates/restricted, artful-updates/universe ]

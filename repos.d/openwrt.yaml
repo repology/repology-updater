@@ -5,6 +5,7 @@
   type: repository
   desc: OpenWrt 15.05.01 x86
   family: openwrt
+  color: '5d6993'
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
       fetcher: File
@@ -22,6 +23,7 @@
   type: repository
   desc: OpenWrt trunk x86
   family: openwrt
+  color: '5d6993'
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
       fetcher: File
@@ -39,6 +41,7 @@
   type: repository
   desc: OpenWrt 15.05.01 ar71xx
   family: openwrt
+  color: '5d6993'
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
       fetcher: File
@@ -56,6 +59,7 @@
   type: repository
   desc: OpenWrt trunk ar71xx
   family: openwrt
+  color: '5d6993'
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
       fetcher: File

@@ -5,6 +5,7 @@
   type: repository
   desc: PCLinuxOS
   family: pclinuxos
+  color: '1c5482'
   sources:
     - name: srpms
       fetcher: File

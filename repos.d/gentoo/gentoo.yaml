@@ -5,6 +5,7 @@
   type: repository
   desc: Gentoo
   family: gentoo
+  color: '62548f'
   sources:
     - name: gentoo
       fetcher: Git

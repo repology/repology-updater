@@ -35,6 +35,7 @@ schemas = {
             Required('type'): Any('repository', 'site', 'modules'),
             Required('desc'): str,
             Required('family'): str,
+            'color': str,
             'valid_till': date,
             Required('sources'): [
                 {
