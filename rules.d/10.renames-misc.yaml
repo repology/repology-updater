@@ -395,6 +395,7 @@
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 
 - { name: mc46,                        setname: mc                        }
+- { name: mednaffe-gtk2,               setname: mednaffe                  }
 - { name: memtestplus,                 setname: memtest86+                }
 - { name: [mesa-demo,mesademos],       setname: mesa-demos                }
 - name:
@@ -465,6 +466,7 @@
 - { name: [proj4,proj.4],              setname: proj                      }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5], setname: qbittorrent }
 - { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator], setname: qtcreator }
+- { name: [qupzilla-qt4,qupzilla-qt5,qupzilla-qtwebkit], setname: qupzilla }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
 - { name: r2e,                         setname: rss2email                 }
 - { name: rdkafka,                     setname: librdkafka                }
@@ -507,6 +509,7 @@
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
 - { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
+- { name: v4l2loopback-dkms,           setname: v4l2loopback              }
 - { name: varnish4,                    setname: varnish,                  family: [ freebsd ]  }
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
 - { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignorever: true }
