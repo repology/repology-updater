@@ -5,6 +5,7 @@
   type: repository
   desc: Parabola
   family: arch
+  color: '787dab'
   sources:
     - name: [ core, extra, community, libre, pcr ]
       fetcher: WgetTar
@@ -25,6 +26,7 @@
   type: repository
   desc: Parabola Testing
   family: arch
+  color: '787dab'
   sources:
     - name: [ testing, libre-testing ]
       fetcher: WgetTar

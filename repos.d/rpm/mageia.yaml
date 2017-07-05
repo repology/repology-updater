@@ -5,6 +5,7 @@
   type: repository
   desc: Mageia Cauldron
   family: mageia
+  color: '262f45'
   sources:
       # XXX: */backports_testing and */updates_testing not included, are these needed?
     - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]

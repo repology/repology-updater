@@ -5,6 +5,7 @@
   type: repository
   desc: SlackBuilds
   family: slackbuilds
+  color: '000000'
   sources:
     - name: slackbuilds
       fetcher: Git
