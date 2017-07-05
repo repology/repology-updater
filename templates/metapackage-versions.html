@@ -49,14 +49,27 @@
 		{%- endfor %}
 		</td>
 	</tr>
-{% else %}
-	<tr>
-		<td class="text-right"><a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a></td>
-		<td colspan="4"></td>
-	</tr>
 {% endfor %}
 {% endfor %}
 </table>
+
+{% if reponames_absent %}
+<h1>Absent in repositories</h1>
+
+<div class="row">
+{% for column in reponames_absent|slice(4) %}
+{% if column %}
+	<div class="col-md-3">
+		<ul>
+		{% for reponame in column %}
+			<li><a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a></li>
+		{% endfor %}
+		<ul>
+	</div>
+{% endif %}
+{% endfor %}
+</div>
+{% endif %}
 
 {% endif %}
 

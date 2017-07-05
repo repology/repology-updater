@@ -624,7 +624,12 @@ def metapackage_versions(name):
     for repo, packages in packages_by_repo.items():
         packages_by_repo[repo] = PackagesetSortByVersions(packages)
 
-    return flask.render_template('metapackage-versions.html', packages_by_repo=packages_by_repo, name=name)
+    return flask.render_template(
+        'metapackage-versions.html',
+        reponames_absent=[reponame for reponame in reponames if not reponame in packages_by_repo],
+        packages_by_repo=packages_by_repo,
+        name=name
+    )
 
 
 @app.route('/metapackage/<name>/packages')
