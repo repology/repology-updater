@@ -1,9 +1,157 @@
 ###########################################################################
 # GetDeb
 ###########################################################################
-- name: getdeb
+
+# xenial
+- name: getdeb_16_04
   type: repository
-  desc: GetDeb
+  desc: GetDeb Xenial
+  family: debuntu
+  sources:
+    - name: Sources
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb/apps/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: GetDeb home
+      url: http://www.getdeb.net/welcome/
+  packagelinks:
+    - desc: GetDeb page
+      url: 'http://www.getdeb.net/app/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: getdeb_16_04_testing
+  type: repository
+  desc: GetDeb Xenial Testing
+  family: debuntu
+  sources:
+    - name: Sources
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb-testing/apps/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: GetDeb home
+      url: http://www.getdeb.net/welcome/
+  packagelinks:
+    - desc: GetDeb page
+      url: 'http://www.getdeb.net/app/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: playdeb_16_04
+  type: repository
+  desc: PlayDeb Xenial
+  family: debuntu
+  sources:
+    - name: apps
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb/games/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: PlayDeb home
+      url: http://www.playdeb.net/welcome/
+  packagelinks:
+    - desc: PlayDeb page
+      url: 'http://www.playdeb.net/game/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: playdeb_16_04_testing
+  type: repository
+  desc: PlayDeb Xenial Testing
+  family: debuntu
+  sources:
+    - name: apps
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb-testing/games/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: PlayDeb home
+      url: http://www.playdeb.net/welcome/
+  packagelinks:
+    - desc: PlayDeb page
+      url: 'http://www.playdeb.net/game/{name}'
+  tags: [ all, production, getplaydeb ]
+
+# yakkety
+- name: getdeb_16_10
+  type: repository
+  desc: GetDeb Yakkety
+  family: debuntu
+  sources:
+    - name: Sources
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb/apps/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: GetDeb home
+      url: http://www.getdeb.net/welcome/
+  packagelinks:
+    - desc: GetDeb page
+      url: 'http://www.getdeb.net/app/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: getdeb_16_10_testing
+  type: repository
+  desc: GetDeb Yakkety Testing
+  family: debuntu
+  sources:
+    - name: Sources
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb-testing/apps/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: GetDeb home
+      url: http://www.getdeb.net/welcome/
+  packagelinks:
+    - desc: GetDeb page
+      url: 'http://www.getdeb.net/app/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: playdeb_16_10
+  type: repository
+  desc: PlayDeb Yakkety
+  family: debuntu
+  sources:
+    - name: apps
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb/games/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: PlayDeb home
+      url: http://www.playdeb.net/welcome/
+  packagelinks:
+    - desc: PlayDeb page
+      url: 'http://www.playdeb.net/game/{name}'
+  tags: [ all, production, getplaydeb ]
+
+- name: playdeb_16_10_testing
+  type: repository
+  desc: PlayDeb Yakkety Testing
+  family: debuntu
+  sources:
+    - name: apps
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb-testing/games/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: PlayDeb home
+      url: http://www.playdeb.net/welcome/
+  packagelinks:
+    - desc: PlayDeb page
+      url: 'http://www.playdeb.net/game/{name}'
+  tags: [ all, production, getplaydeb ]
+
+# zesty
+- name: getdeb_17_04
+  type: repository
+  desc: GetDeb Zesty
   family: debuntu
   sources:
     - name: Sources
@@ -19,9 +167,9 @@
       url: 'http://www.getdeb.net/app/{name}'
   tags: [ all, production, getplaydeb ]
 
-- name: getdeb_testing
+- name: getdeb_17_04_testing
   type: repository
-  desc: GetDeb Testing
+  desc: GetDeb Zesty Testing
   family: debuntu
   sources:
     - name: Sources
@@ -37,9 +185,9 @@
       url: 'http://www.getdeb.net/app/{name}'
   tags: [ all, production, getplaydeb ]
 
-- name: playdeb
+- name: playdeb_17_04
   type: repository
-  desc: PlayDeb
+  desc: PlayDeb Zesty
   family: debuntu
   sources:
     - name: apps
@@ -55,9 +203,9 @@
       url: 'http://www.playdeb.net/game/{name}'
   tags: [ all, production, getplaydeb ]
 
-- name: playdeb_testing
+- name: playdeb_17_04_testing
   type: repository
-  desc: PlayDeb Testing
+  desc: PlayDeb Zesty Testing
   family: debuntu
   sources:
     - name: apps
