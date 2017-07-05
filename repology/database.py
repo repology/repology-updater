@@ -1241,7 +1241,7 @@ class Database:
             SELECT
                 ts,
                 now() - ts,
-                jsonb_array_elements(snapshot)
+                snapshot
             FROM repositories_history
             WHERE ts IN (
                 SELECT
@@ -1250,7 +1250,7 @@ class Database:
                 WHERE ts < now() - INTERVAL %s
                 ORDER BY ts DESC
                 LIMIT 1
-            );
+            )
         """, (datetime.timedelta(seconds=seconds),)
         )
 
