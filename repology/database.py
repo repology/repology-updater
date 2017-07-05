@@ -1254,14 +1254,13 @@ class Database:
         """, (datetime.timedelta(seconds=seconds),)
         )
 
-        return [
-            {
-                'timestamp': row[0],
-                'timedelta': row[1],
-                **row[2]
-            }
-            for row in self.cursor.fetchall()
-        ]
+        row = self.cursor.fetchall()[0]
+
+        return {
+            'timestamp': row[0],
+            'timedelta': row[1],
+            **row[2]
+        }
 
     def GetRepositoriesHistoryPeriod(self, seconds=60 * 60 * 24, repo=None):
         repopath = ''
