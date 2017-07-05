@@ -18,6 +18,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+import math
+
+from operator import itemgetter
 
 import flask
 
@@ -994,6 +997,84 @@ def graph_total_maintainers():
 @app.route('/graph/total/problems.svg')
 def graph_total_problems():
     return graph_total_generic(lambda s: s['num_problems'], '#c00000')
+
+
+def clever_ceil(value):
+    tick = math.pow(10, math.ceil(math.log(value, 10) - 2))
+    return int(math.ceil(value / tick) * tick)
+
+
+def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
+    snapshots = [
+        #get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 30)
+    ]
+
+    points = []
+    for repo in get_db().GetRepositories():
+        if not repo['name'] in reponames:
+            continue
+
+        point = {
+            'text': repometadata[repo['name']]['desc'],
+            'coords': list(map(repo2coords,
+                [repo] +
+                [snapshot[repo['name']] for snapshot in snapshots if repo['name'] in snapshot]
+            ))
+        }
+
+        if 'color' in repometadata[repo['name']]:
+            point['color'] = repometadata[repo['name']]['color']
+
+        points.append(point)
+
+    width = 1140
+    height = 800
+
+    return flask.render_template(
+        'map.svg',
+        width=width,
+        height=height,
+        minx=0,
+        miny=0,
+        maxx=clever_ceil(max(map(lambda p: p['coords'][0]['x'], points))),
+        maxy=clever_ceil(max(map(lambda p: p['coords'][0]['y'], points))),
+        namex=namex,
+        namey=namey,
+        unitx=unitx,
+        unity=unity,
+        points=points
+    )
+
+
+@app.route('/graph/map_repo_size_fresh.svg')
+def graph_map_repo_size_fresh():
+    def repo2coords(repo):
+        return {
+            'x': repo['num_metapackages'],
+            'y': repo['num_metapackages_newest']
+        }
+
+    return map_repo_generic(
+        repo2coords,
+        namex='Number of packages in repository',
+        namey='Number of fresh packages in repository'
+    )
+
+
+@app.route('/graph/map_repo_size_freshness.svg')
+def graph_map_repo_size_freshness():
+    def repo2coords(repo):
+        return {
+            'x': repo['num_metapackages'],
+            'y': 100.0 * repo['num_metapackages_newest'] / repo['num_metapackages'] if repo['num_metapackages'] else 0
+        }
+
+    return map_repo_generic(
+        repo2coords,
+        namex='Number of packages in repository',
+        namey='Percentage of fresh packages',
+        unity='%'
+    )
 
 
 @app.route('/api/v1/metapackage/<name>')

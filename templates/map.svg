@@ -1,0 +1,68 @@
+{% set leftoffset = 40 %}
+{% set topoffset = 30 %}
+{% set rightoffset = 50 %}
+{% set bottomoffset = 20 %}
+
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ width }}" height="{{ height }}">
+	<defs>
+		<marker id="arrow" markerWidth="10" markerHeight="10" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
+			<path d="M0,0 L2,3 L0,6 L9,3 z" fill="#000" />
+		</marker>
+	</defs>
+	<rect width="{{ width }}" height="{{ height }}" fill="#f0f0f0" />
+{#### axes ####}
+	<line x1="{{ leftoffset + 0.5 }}" x2="{{ leftoffset + 0.5 }}" y1="{{ height - bottomoffset + 0.5 }}" y2="{{ (topoffset/2)|int + 0.5 }}" stroke="#000" marker-end="url(#arrow)" />
+	<line x1="{{ leftoffset + 0.5 }}" x2="{{ width - (rightoffset/2)|int + 0.5 }}" y1="{{ height - bottomoffset + 0.5 }}" y2="{{ height - bottomoffset + 0.5 }}" stroke="#000" marker-end="url(#arrow)" />
+{#### axis labels ####}
+	<g fill="#000" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="13" font-weight="bold">
+        <text x="{{ leftoffset + ((width - rightoffset - leftoffset)/2)|int + 0.5 }}" y="{{ (height - bottomoffset/2)|int + 3 + 0.5 }}" text-anchor="middle">{{ namex }}</text>
+
+		{% set textx = (leftoffset/2)|int + 0.5 %}
+		{% set texty = topoffset + ((height - topoffset - bottomoffset)/2)|int + 0.5 %}
+        <text x="0" y="0" text-anchor="middle" transform="translate({{ textx }}, {{ texty }}),rotate(-90)">{{ namey }}</text>
+    </g>
+{#### axis ticks ####}
+	<g fill="#000" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
+        <text x="{{ width - rightoffset + 3 + 0.5 }}" y="{{ height - (bottomoffset/2)|int + 3 + 0.5 }}" text-anchor="middle">{{ maxx }}{{ unitx }}</text>
+        <text x="{{ leftoffset + 0.5 }}" y="{{ height - (bottomoffset/2)|int + 0.5 }}" text-anchor="middle">{{ minx }}{{ unitx }}</text>
+
+        <text x="{{ leftoffset - 5 + 0.5 }}" y="{{ height - bottomoffset + 3 + 0.5 }}" text-anchor="end">{{ miny }}{{ unity }}</text>
+        <text x="{{ leftoffset - 5 + 0.5 }}" y="{{ topoffset + 3 + 0.5 }}" text-anchor="end">{{ maxy }}{{ unity }}</text>
+    </g>
+
+{#### data point history trails ####}
+{% for point in points %}
+{% if point.coords|length > 1 %}
+<path d="
+{% for coord in point.coords %}
+	{% set x = (leftoffset + coord.x / maxx * (width - leftoffset - rightoffset) )|int + 0.5 %}
+	{% set y = (height - bottomoffset - coord.y / maxy * (height - topoffset - bottomoffset) )|int + 0.5 %}
+	{% if loop.index0 == 0 %}M{% else %}L{% endif %} {{ x }} {{ y }}
+{% endfor %}
+" stroke="#{{ point.color|default('000000', boolean=True) }}" fill="none" />
+{% endif %}
+{% endfor %}
+
+{#### data points ####}
+	<g font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11" text-anchor="start">
+{% for point in points %}
+{% if point.text %}
+	{% set x = (leftoffset + point.coords[0].x / maxx * (width - leftoffset - rightoffset) )|int + 0.5 %}
+	{% set y = (height - bottomoffset - point.coords[0].y / maxy * (height - topoffset - bottomoffset) )|int + 0.5 %}
+		<text fill="#f0f0f0" stroke="#f0f0f0" stroke-width="3" stroke-linecap="round" x="{{ x + 5 }}" y="{{ y + 3 }}">{{ point.text }}</text>
+		<text fill="#000000" x="{{ x + 5 }}" y="{{ y + 3 }}">{{ point.text }}</text>
+{% endif %}
+{% endfor %}
+	</g>
+{#### data point labels ####}
+{% for point in points %}
+	{% set x = (leftoffset + point.coords[0].x / maxx * (width - leftoffset - rightoffset) )|int + 0.5 %}
+	{% set y = (height - bottomoffset - point.coords[0].y / maxy * (height - topoffset - bottomoffset) )|int + 0.5 %}
+	<circle cx="{{ x }}" cy="{{ y }}" r="5" fill="#f0f0f0" />
+	{% if point.color %}
+	<circle cx="{{ x }}" cy="{{ y }}" r="4" fill="#{{ point.color }}" />
+	{% else %}
+	<circle cx="{{ x }}" cy="{{ y }}" r="4" fill="#000000" />
+	{% endif %}
+{% endfor %}
+</svg>
