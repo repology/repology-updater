@@ -629,7 +629,7 @@ def metapackage_versions(name):
 
     return flask.render_template(
         'metapackage-versions.html',
-        reponames_absent=[reponame for reponame in reponames if not reponame in packages_by_repo],
+        reponames_absent=[reponame for reponame in reponames if reponame not in packages_by_repo],
         packages_by_repo=packages_by_repo,
         name=name
     )
@@ -1016,10 +1016,7 @@ def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
 
         point = {
             'text': repometadata[repo['name']]['desc'],
-            'coords': list(map(repo2coords,
-                [repo] +
-                [snapshot[repo['name']] for snapshot in snapshots if repo['name'] in snapshot]
-            ))
+            'coords': list(map(repo2coords, [repo] + [snapshot[repo['name']] for snapshot in snapshots if repo['name'] in snapshot]))
         }
 
         if 'color' in repometadata[repo['name']]:
