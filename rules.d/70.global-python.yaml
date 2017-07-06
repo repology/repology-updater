@@ -18,16 +18,22 @@
 # turn python modules into such
 - name:
     - 3to2
+    - backports-abc
+    - cartopy
     - cherrypy
     - decoratortools
     - dulwich
+    - geojson
     - hg-git
     - hgsubversion
     - hy
     - khal
+    - munch
+    - pandocfilters
     - paramiko
     - phply
     - pip
+    - polyline
     - pyalsaaudio
     - pyaudio
     - pygraphviz
@@ -117,6 +123,18 @@
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
 - { name: "python:usb",                setname: "python:pyusb"            } # create problem!
 - { name: [pylint-py27,pylint3,pylint-gui,pylint3-gui], setname: "python:pylint" }
+- { name: [ipykernel,jupyter-ipykernel,"python:jupyter-ipykernel","python:jupyter-ipykernel-doc"], setname: "python:ipykernel" }
+- { name: [ipywidgets,jupyter-ipywidgets,"python:jupyter-ipywidgets","python:jupyter-ipywidgets-doc"], setname: "python:ipywidgets" }
+- { name: geographiclib-python,        setname: "python:geographiclib"    }
+- { name: bleach, family: slackbuilds, setname: "python:bleach"           }
+- { name: geohash, family: slackbuilds, setname: "python:geohash"         }
+- { name: jupyter-nbdime,              setname: "python:nbdime"           }
+- { name: pycld2,                      setname: "python:cld2"             }
+- { namepat: "python:backports[_-]shutil[_-]get[_-]terminal[_-]size", setname: "python:backports.shutil_get_terminal_size" }
+- { name: shutil_get_terminal_size,    setname: "python:backports.shutil-get-terminal-size" }
+- { namepat: "(?python:)?backports?[_-]ssl[_-]match[_-]hostname", setname: "python:backports.ssl_match_hostname" }
+- { name: shutil-which,                setname: "python:backports.shutil_which" }
+- { name: sphinxcontrib-websupport,    setname: "python:sphinxcontrib-websupport" }
 
 # as per pypi package name
 - { name: "python:axolotl",            setname: "python:python-axolotl"   }
