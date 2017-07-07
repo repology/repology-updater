@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+import sys
 
 from repology.package import Package
 
@@ -32,7 +33,15 @@ class PyPiHTMLParser():
                 pkg = Package()
                 pkg.name = match[0]
                 pkg.version = match[1]
-                pkg.comment = match[2]
+
+                comment = match[2].strip()
+                if comment == '':
+                    print('{}: summary is empty'.format(pkg.name), file=sys.stderr)
+                elif '\n' in comment:
+                    print('{}: summary is multiline'.format(pkg.name), file=sys.stderr)
+                else:
+                    pkg.comment = comment
+
                 pkg.homepage = 'https://pypi.python.org/pypi/{}/{}'.format(match[0], match[1])
 
                 packages[pkg.name] = pkg
