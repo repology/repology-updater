@@ -9,7 +9,8 @@
     - name: feed
       fetcher: Freshcode
       parser: Freshcode
-      url: http://freshcode.club/feed/xfer.json
+      url: http://freshcode.club/feed/xfer.json?num=15000 # max allowed value,
+      # see http://fossil.include-once.org/freshcode/finfo?name=page_feed.php
   shadow: true
   repolinks:
     - desc: freshcode.club
