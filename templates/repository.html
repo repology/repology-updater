@@ -28,9 +28,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading"><h3>Total</h3></div>
 			<div class="panel-body">
-				<a href="{{ url_for('metapackages_in_repo', repo=repo) }}">
-					{{ repo_info.num_packages }}
-				</a>
+				{{ repo_info.num_packages }}
 			</div>
 		</div>
 	</div>
@@ -46,9 +44,7 @@
 		<div class="panel panel-danger">
 			<div class="panel-heading"><h3>Outdated</h3></div>
 			<div class="panel-body">
-				<a href="{{ url_for('metapackages_outdated_in_repo', repo=repo) }}">
-					{{ repo_info.num_packages_outdated }}
-				</a>
+				{{ repo_info.num_packages_outdated }}
 			</div>
 		</div>
 	</div>
@@ -68,7 +64,9 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading"><h3>Total</h3></div>
 			<div class="panel-body">
-				{{ repo_info.num_metapackages }}
+				<a href="{{ url_for('metapackages_in_repo', repo=repo) }}">
+					{{ repo_info.num_metapackages }}
+				</a>
 			</div>
 		</div>
 	</div>
@@ -84,7 +82,9 @@
 		<div class="panel panel-danger">
 			<div class="panel-heading"><h3>Outdated</h3></div>
 			<div class="panel-body">
-				{{ repo_info.num_metapackages_outdated }}
+				<a href="{{ url_for('metapackages_outdated_in_repo', repo=repo) }}">
+					{{ repo_info.num_metapackages_outdated }}
+				</a>
 			</div>
 		</div>
 	</div>
