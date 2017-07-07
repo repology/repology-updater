@@ -123,8 +123,8 @@
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
 - { name: "python:usb",                setname: "python:pyusb"            } # create problem!
 - { name: [pylint-py27,pylint3,pylint-gui,pylint3-gui], setname: "python:pylint" }
-- { name: [ipykernel,jupyter-ipykernel,"python:jupyter-ipykernel","python:jupyter-ipykernel-doc"], setname: "python:ipykernel" }
-- { name: [ipywidgets,jupyter-ipywidgets,"python:jupyter-ipywidgets","python:jupyter-ipywidgets-doc"], setname: "python:ipywidgets" }
+- { name: [ipykernel,jupyter-ipykernel,"python:jupyter_ipykernel","python:jupyter_ipykernel-doc"], setname: "python:ipykernel" }
+- { name: [ipywidgets,jupyter-ipywidgets,"python:jupyter_ipywidgets","python:jupyter_ipywidgets-doc"], setname: "python:ipywidgets" }
 - { name: geographiclib-python,        setname: "python:geographiclib"    }
 - { name: bleach, family: slackbuilds, setname: "python:bleach"           }
 - { name: geohash, family: slackbuilds, setname: "python:geohash"         }
