@@ -344,6 +344,7 @@
 - { name: [intellij-pycharm,pycharm-community], setname: pycharm          }
 - { name: ja2,                         setname: ja2-stracciatella         }
 - { name: jbig-kit,                    setname: jbigkit                   }
+- { name: josm-latest,                 setname: josm, ignorever: true     }
 - { name: [kid3-qt, kid3-qt4, kid3-qt5, kid4-qt, kid3-cli], setname: kid3 }
 - { name: kiki-the-nano-bot,           setname: kiki                      }
 - { name: krita3,                      setname: krita                     }
