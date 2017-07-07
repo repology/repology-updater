@@ -380,8 +380,8 @@
 - { name: libwnck, verpat: "2\\..*",   setname: libwnck2 }
 - { name: libwnck, verpat: "3\\..*",   setname: libwnck3 }
 
-- { namepat: "libxml++[0-9._-]+",      setname: libxml++ }
-- { namepat: "libxml++[0-9._-]+-docs", setname: libxml++ }
+- { namepat: "libxml\\+\\+[0-9._-]+",      setname: libxml++ }
+- { namepat: "libxml\\+\\+[0-9._-]+-docs", setname: libxml++ }
 - { name: [libxmlpp,libxmlxx,libxmlxx2], setname: libxml++ }
 - { name: [libxml++-reference],        setname: libxml++ }
 
