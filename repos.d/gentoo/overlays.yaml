@@ -5,9 +5,9 @@
   type: repository
   desc: Gentoo overlay Pentoo
   family: gentoo
-  color: '62548f'
+  color: '62548f'  # or own color 285c73?
   sources:
-    - name: overlay
+    - name: pentoo-overlay
       fetcher: Git
       parser: GentooGit
       url: git://github.com/pentoo/pentoo-overlay.git
@@ -16,6 +16,11 @@
       url: http://www.pentoo.ch/
     - desc: GitHub page
       url: https://github.com/pentoo/pentoo-overlay
+  packagelinks:
+    - desc: Port git directory
+      url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{category}/{name}'
+    - desc: View ebuild
+      url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{category}/{name}/{name}-{origversion}.ebuild'
   tags: [ all, production ]
 
 ###########################################################################
@@ -26,13 +31,14 @@
   desc: Gentoo Overlay Games
   family: gentoo
   sources:
-    - name: overlay
+    - name: games-overlay
       fetcher: Git
       parser: GentooGit
       url: https://github.com/hasufell/games-overlay.git
   repolinks:
     - desc: Git repository
       url: https://github.com/hasufell/games-overlay
+  # XXX: add packagelinks if this is ever enabled
   tags: [ all ]
 
 - name: gentoo_ovl_gamerlay
@@ -40,11 +46,12 @@
   desc: Gentoo Overlay Gamerlay
   family: gentoo
   sources:
-    - name: overlay
+    - name: gamerlay
       fetcher: Git
       parser: GentooGit
       url: https://anongit.gentoo.org/git/proj/gamerlay.git
   repolinks:
     - desc: Git repository
       url: https://cgit.gentoo.org/proj/gamerlay.git/
+  # XXX: add packagelinks if this is ever enabled
   tags: [ all ]
