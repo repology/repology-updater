@@ -28,13 +28,54 @@ from voluptuous import All, Any, MultipleInvalid, Required, Schema, Url
 import yaml
 
 
+families = [
+    'alpine',
+    'anitya',
+    'arch',
+    'centos',
+    'chocolatey',
+    'cpan',
+    'cran',
+    'crux',
+    'debuntu',
+    'distrowatch',
+    'fdroid',
+    'fedora',
+    'freebsd',
+    'freshcode',
+    'gentoo',
+    'gobolinux',
+    'guix',
+    'hackage',
+    'homebrew',
+    'libregamewiki',
+    'macports',
+    'mageia',
+    'msys2',
+    'nix',
+    'openbsd',
+    'openindiana',
+    'opensuse',
+    'openwrt',
+    'pclinuxos',
+    'pkgsrc',
+    'pypi',
+    'ravenports',
+    'rosa',
+    'rubygems',
+    'sisyphus',
+    'slackbuilds',
+    'snap',
+    'yacp',
+]
+
 schemas = {
     'repos': [
         {
             Required('name'): str,
             Required('type'): Any('repository', 'site', 'modules'),
             Required('desc'): str,
-            Required('family'): str,
+            Required('family'): Any(*families),
             'color': str,
             'valid_till': date,
             Required('sources'): [
@@ -76,7 +117,7 @@ schemas = {
             'verpat': str,
             'wwwpart': Any(str, [str]),
             'wwwpat': str,
-            'family': Any(str, [str]),
+            'family': Any(Any(*families), [Any(*families)]),
             'category': Any(str, [str]),
             'verlonger': int,
 
