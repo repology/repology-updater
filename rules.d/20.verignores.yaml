@@ -105,7 +105,7 @@
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # fake
 - { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignorever: true } # it's x.y.z, ignore all revisions and dates
 - { name: mplayer,                     ver: "5.1.4",                                       ignorever: true } # pclinuxos garbage
-- { name: ncurses,                     ver: "6\\.0-20[0-9]{6}.*",                          ignorever: true } # macports
+- { name: ncurses,                     verpat: "6\\.0-20[0-9]{6}.*",                       ignorever: true } # macports
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignorever: true }   # \  force correct
 - { name: onioncat,                    verpat: "0\\.2\\.2\\.r[0-9]+.*",                    unignorever: true } # / version schema
