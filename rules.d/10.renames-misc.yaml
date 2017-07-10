@@ -511,6 +511,7 @@
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
 - { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
 - { name: v4l2loopback-dkms,           setname: v4l2loopback              }
+- { name: valyria-tear,                setname: valyriatear               }
 - { name: varnish4,                    setname: varnish,                  family: [ freebsd ]  }
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
 - { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignorever: true }
