@@ -21,7 +21,33 @@
       url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{category}/{name}'
     - desc: View ebuild
       url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{category}/{name}/{name}-{origversion}.ebuild'
-  tags: [ all, production ]
+  tags: [ all, production, gentoo-overlays ]
+
+###########################################################################
+# Other overlays added on-demand
+###########################################################################
+
+- name: gentoo_ovl_linuxunderground
+  type: repository
+  desc: Gentoo overlay linuxunderground
+  family: gentoo
+  color: '62548f'
+  sources:
+    - name: gentoo.overlay
+      fetcher: Git
+      parser: GentooGit
+      url: https://github.com/linuxunderground/gentoo.overlay.git
+  repolinks:
+    - desc: Home page
+      url: https://www.linuxunderground.be/en/linuxunderground-overlay.html
+    - desc: GitHub page
+      url: https://github.com/linuxunderground/gentoo.overlay
+  packagelinks:
+    - desc: Port git directory
+      url: 'https://github.com/linuxunderground/gentoo.overlay/tree/master/{category}/{name}'
+    - desc: View ebuild
+      url: 'https://github.com/linuxunderground/gentoo.overlay/tree/master/{category}/{name}/{name}-{origversion}.ebuild'
+  tags: [ all, production, gentoo-overlays ]
 
 ###########################################################################
 # Disabled overlays (not really useful)
