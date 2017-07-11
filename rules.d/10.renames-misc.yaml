@@ -32,6 +32,8 @@
 - { name: adol-c,                      setname: adolc                     }
 - { namepat: "adwaita-qt[45]",         setname: adwaita-qt,               family: [ freebsd ]  }
 - { name: adzap,                       setname: adzapper,                 family: [ freebsd, pkgsrc ] }
+- { name: aflex-ayacc,                 setname: afay                      } # ravenports
+- { name: apq-base,                    setname: apq                       } # ravenports
 - { name: argyll,                      setname: argyllcms                 }
 - { name: arping2,                     setname: arping                    }
 - { namepat: "artefetcher-qt[45]",     setname: artefetcher               }
@@ -64,6 +66,8 @@
 - { name: [audacious-gtk3,audacious-core,audacious-qt5,audacious2,audacious-itself], setname: audacious }
 - { name: audacious2-plugins,          setname: audacious-plugins         }
 - { name: audacity-freeworld,          setname: audacity                  }
+- { name: autotools-wrappers,          setname: autotools                 } # ravenports
+- { name: autotools-dev,               setname: autotools, ignorever: true }
 - { name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4], setname: avidemux }
 - { name: avr8-burn-omat,              setname: avr8-burn-o-mat           }
 - { name: avro-cpp,                    setname: avro-c++                  }
@@ -339,6 +343,7 @@
 - { name: [intel-tbb,libtbb],          setname: tbb                       }
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: isc-kea,                     setname: kea }
+- { name: iso-8879,                    setname: iso8879 }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
 - { name: [intellij-pycharm,pycharm-community], setname: pycharm          }
@@ -457,6 +462,8 @@
 - { name: pacman-arena,                setname: pacmanarena,              family: [ openbsd ] }
 - { name: perlbrew,                    setname: "perl:app-perlbrew"       }
 - { name: pioneerspacesim,             setname: pioneer                   }
+- { name: pkg-bsd,                     setname: pkg,                      family: ravenports }
+- { name: pkg-devel,                   setname: pkg, ignorever: true,     family: freebsd }
 - { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
 - { name: postgresql-libpqxx,          setname: libpqxx                   }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
