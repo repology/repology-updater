@@ -26,7 +26,7 @@
 {% for package in packages %}
 	<tr>
 		<td class="text-right">
-			<a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a>
+			<a href="{{ url_for('repository', repo=reponame) }}"{% if loop.first %} name="{{ reponame }}"{% endif %}>{{ repometadata[reponame].desc }}</a>
 			{%- if package.subrepo -%}
 				<br><sup>{{ package.subrepo }}</sup>
 			{%- endif -%}

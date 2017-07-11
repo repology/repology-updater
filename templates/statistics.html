@@ -60,7 +60,7 @@
 	{% if repostat.name in repostats_old %}{% set old_repostat = repostats_old[repostat.name] %}{% else %}{% set old_repostat = {} %}{% endif %}{# XXX: this does not work due to jinja2 scoping rules; we don't support history for now anyway, but when we do want to bring it back, this will have tobe fixed #}
 		<tr>
 			<th class="text-right">
-				<a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a>
+				<a href="{{ url_for('repository', repo=repostat.name) }}" name="{{ repostat.name }}">{{ repometadata[repostat.name].desc }}</a>
 				{%- if showmedals -%}
 				{%- if loop.index == 1 -%}
 					<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date"></span></sup>
