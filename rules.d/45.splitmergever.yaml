@@ -49,6 +49,9 @@
 - { name: bind, verpat: "9\\.10\\..*", setname: bind910 }
 - { name: bind, verpat: "9\\.11\\..*", setname: bind911 }
 
+- { name: bowtie2,                     setname: bowtie }
+- { name: bowtie, verpat: "2\\..*",    setname: bowtie2 }
+
 - { namepat: "cassandra[0-9]+",        setname: cassandra }
 - { name: cassandra, verpat: "2\\..*", setname: cassandra2 }
 
@@ -429,7 +432,10 @@
   ignorever: true
 - { namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?", setname: openssl }
 
-- { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-unstable }
+- { namepat: "osg(?:-devel)?",         setname: openscenegraph }
+- { namepat: "openscenegraph[0-9.-]+", setname: openscenegraph }
+- { name: [openscenegraph-qt, openscenegraph-qt4], setname: openscenegraph }
+- { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-devel }
 
 - { namepat: "(?:lib)?pcre[0-9._-]*",          setname: pcre }
 - { name: [pcre-static,pcre-cpp],      setname: pcre }
@@ -525,6 +531,9 @@
 
 - { namepat: "(sugar(?:|-artwork|-activity|-base|-browse-activity|-chat-activity|-datastore|-presence-service|-toolkit|-write-activity))[0-9.-]+", setname: "$1" }
 - { name: [sugar-toolkit-gtk2, sugar-toolkit-gtk3], setname: sugar-toolkit }
+
+- { name: [supertux,supertux1,supertux2,supertux-old,supertux-stable], setname: supertux }
+- { name: supertux, verpat: "0\\.[^1]\\..*", setname: supertux2 }
 
 - { namepat: "swig[0-9]+",             setname: swig }
 - { name: swig, verpat: "1\\..*",      setname: swig13 }

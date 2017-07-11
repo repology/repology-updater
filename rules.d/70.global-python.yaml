@@ -19,6 +19,7 @@
 - name:
     - 3to2
     - backports-abc
+    - bicyclerepair
     - cartopy
     - cherrypy
     - decoratortools
@@ -142,6 +143,7 @@
 - { name: "python:proj", verpat: "1\\.9\\..*", setname: "python:pyproj"   }
 
 # These are more applications than modules, so rename
+- { name: "python:awscli",             setname: awscli                    }
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:gixy",               setname: gixy                      }
 - { name: "python:meson",              setname: meson                     }
