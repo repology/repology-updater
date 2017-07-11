@@ -541,6 +541,7 @@
 - { name: yofrankie-bge,               setname: yofrankie                 }
 - { name: zeroad,                      setname: 0ad                       }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
+- { name: zstandard,                   setname: zstd                      }
 - { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
 - { namepat: "android-tools-[^-]+",    setname: android-tools,            family: [ freebsd, pkgsrc ] }
 - { namepat: "celestia-.*",            setname: celestia,                 family: [ freebsd ] } # merges glut/gnome/gtk, just GUI variants
