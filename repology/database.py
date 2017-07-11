@@ -811,6 +811,21 @@ class Database:
 
         self.cursor.execute("""
             INSERT
+                INTO problems(repo, name, effname, maintainer, problem)
+                SELECT DISTINCT
+                    repo,
+                    name,
+                    effname,
+                    case when maintainers = '{}' then null else unnest(maintainers) end,
+                    'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
+                FROM packages
+                WHERE
+                    homepage LIKE 'http://%codeplex.com/%' OR
+                    homepage LIKE 'https://%codeplex.com/%'
+        """)
+
+        self.cursor.execute("""
+            INSERT
                 INTO repositories (
                     name,
                     num_problems
