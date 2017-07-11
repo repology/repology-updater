@@ -404,6 +404,7 @@
 - { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 
+- { name: linux-kernel,                setname: linux                     }
 - { name: mc46,                        setname: mc                        }
 - { name: mednaffe-gtk2,               setname: mednaffe                  }
 - { name: memtestplus,                 setname: memtest86+                }
