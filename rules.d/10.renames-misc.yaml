@@ -230,6 +230,7 @@
 - { name: eclipse-java,                setname: eclipse                   }
 - { name: ecmtools,                    setname: ecm-tools                 }
 - { name: ecrire-git,                  setname: ecrire                    }
+- { name: [ectags,exctags],            setname: exuberant-ctags           }
 - { name: edsim51,                     setname: edsim51di                 }
 - { name: ee-editor,                   setname: ee                        }
 - { name: eekboard-gtk2,               setname: eekboard                  }
@@ -385,6 +386,7 @@
 - { name: libopus,                     setname: opus                      }
 - { name: libopusfile,                 setname: opusfile                  }
 - { name: libphysfs,                   setname: physfs                    }
+- { name: [libpcre++,pcrexx],          setname: pcre++                    }
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
 - { name: libscalapack,                setname: scalapack                 }
