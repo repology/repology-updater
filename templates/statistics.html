@@ -143,7 +143,9 @@
 			{% if repostat.last_update_utc %}
 				{% set minutes_since_update = (repostat.since_last_update.total_seconds() / 60) | int %}
 				<time datetime="{{ repostat.last_update_utc.strftime("%Y-%m-%dT%H:%M:%SZ") }}"{% if minutes_since_update > 60 * 24 %} class="text-danger"{% endif %}>
-				{% if minutes_since_update >= 120 %}
+				{% if minutes_since_update >= 60 * 48 %}
+					{{ minutes_since_update//60//24 }}d
+				{% elif minutes_since_update >= 60 * 2 %}
 					{{ minutes_since_update//60 }}h
 				{% elif minutes_since_update >= 1 %}
 					{{ minutes_since_update }}m
