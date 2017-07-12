@@ -59,6 +59,7 @@
 - { name: ethtool,                     verpat: "[0-9]+",                                   ignorever: true }
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignorever: true } # no such release
 - { name: f3,                          verpat: ".*unstable",                               ignorever: true } # nix garbage
+- { name: faifa,                       ver: "0.2",                   family: debuntu,      ignorever: true }
 - { name: fdupes,                      verpat: "1\\.[0-9]{2}",                             ignorever: true } # it has switched to 3 componennts (e.g. 1.51 -> 1.6.0 -> 1.6.1)
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignorever: true }
 - { name: findutils,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
@@ -158,9 +159,11 @@
 - { name: tuxpaint-stamps,             verpat: "20[0-9]{6}.*",                             ignorever: true } # it's separated
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
+- { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: whatweb,                     ver: "0.4.8",                 family: [debuntu,openbsd], ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
 - { name: xcb-proto,                   verpat: "7.*",                                      ignorever: true } # opensuse version prefixed with xorg version (e.g. 7.6_1.2)
