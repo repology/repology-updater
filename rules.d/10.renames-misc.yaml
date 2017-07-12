@@ -331,7 +331,7 @@
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: [googletest,libgtest],       setname: gtest                     }
 - { name: gopro-vrplayer,              setname: gopro-vr-player           }
-- { name: gopro-vrplayer-beta,         setname: gopro-vr-player, ignorever: true }
+- { name: gopro-vr-player-beta,        setname: gopro-vr-player, ignorever: true }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
 - { name: grafana-bin,                 setname: grafana                   }
 - { name: grub2,                       setname: grub                      } # since grub legacy is obsoleted, just let grub2 eat it away
