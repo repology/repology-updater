@@ -506,6 +506,7 @@
 - { name: stransball2,                 setname: supertransball2           }
 - { name: structure-synth,             setname: structuresynth            }
 - { name: stone-soup-ncurses,          setname: stone-soup                }
+- { name: svm-light,                   setname: svmlight }
 - { name: [sweet-home-3d,sweethome3d-application], setname: sweethome3d   }
 - { name: switchboard-plug-network,    setname: switchboard-plug-networking }
 - { name: [libtelepathy-farstream, telepathy-farstream-0.4], setname: telepathy-farstream }
