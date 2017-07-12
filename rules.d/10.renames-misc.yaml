@@ -368,6 +368,7 @@
 - { name: libatlas3,                   setname: atlas                     }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbrotli,                   setname: brotli                    }
+- { name: libcatch-cpp-headers,        setname: catch                     }
 - { name: libcodec2,                   setname: codec2                    }
 - { name: libcomedi,                   setname: comedilib                 }
 - { name: [libenet,enet1.2],           setname: enet                      }
