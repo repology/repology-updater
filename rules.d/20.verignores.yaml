@@ -81,9 +81,12 @@
 - { name: gzip,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: grep,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: libglw,                      verpat: "20[0-9]{6}",                               ignorever: true }
+- { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignorever: true }
 - { name: libxml2,                     ver: "2.9.4.83",                                    ignorever: true }
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
+- { name: hostapd,                     verpat: "20[0-9]{2}.*",       family: openwrt,      ignorever: true }
+- { name: iaxclient,                   ver: "2.1",                   family: fedora,       ignorever: true } # there's beta only
 - { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
 - { name: icon,                        verpat: "[0-9]{3}",                                 ignorever: true } # XXX: transform + problem
