@@ -538,6 +538,8 @@
 - { name: wmaker,                      setname: windowmaker               }
 - { name: wop,                         setname: wormsofprey               }
 - { name: wpasupplicant,               setname: wpa_supplicant            }
+- { name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2], setname: xine-lib  }
+- { name: [xine,xine-ui2],             setname: xine-ui                   }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
 - { name: xfce4-dict-plugin,           setname: xfce4-dict,               family: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                family: [ freebsd ] }
