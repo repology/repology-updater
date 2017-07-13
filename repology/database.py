@@ -853,7 +853,7 @@ class Database:
         self.cursor.execute('DELETE FROM reports WHERE now() >= expires')
 
         # cleanup stale links
-        self.cursor.execute('DELETE FROM links WHERE last_extracted < now() - INTERVAL \'2\' MONTH')
+        self.cursor.execute('DELETE FROM links WHERE last_extracted < now() - INTERVAL \'1\' MONTH')
 
     def Commit(self):
         self.db.commit()
