@@ -485,6 +485,7 @@
 - { name: r2e,                         setname: rss2email                 }
 - { name: rdkafka,                     setname: librdkafka                }
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
+- { name: rrdtool12,                   setname: rrdtool                   }
 - { name: [s3fs,s3fs-fuse],            setname: "fusefs:s3fs"             }
 - { name: schism,                      setname: schismtracker             }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
