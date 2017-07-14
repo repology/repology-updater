@@ -160,6 +160,7 @@
 - { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: tuxpaint-stamps,             verpat: "20[0-9]{6}.*",                             ignorever: true } # it's separated
+- { name: unace,                       ver: "2.50",                                        ignorever: true } # it's 2.5
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
@@ -173,10 +174,12 @@
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignorever: true }
 - { name: xdot,                        ver: "20121124",                                    ignorever: true }
 - { name: xdotool,                     ver: "20110530.1",                                  ignorever: true }
+- { name: xmbmon,                      verpat: "[0-9]{3}",                                 ignorever: true } # it's 2.05, not 205. Also not 2.0.5.
 - { name: xl2tpd,                      ver: "20140214",                                    ignorever: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 - { name: xmoto,                       ver: "0.5.12",                family: [ rosa ],     ignorever: true } # no such version
 - { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignorever: true }
+- { name: xz-utils,                    ver: "5.03",                                        ignorever: true } # gobolinux garbage
 - { name: youtube-dl,                  verpat: "[0-9]{8}",                                 ignorever: true } # canonical version is period-separated
 - { name: zathura,                     ver: "20101104",                                    ignorever: true }
 - { name: zpaq,                        verpat: "[0-9]+",                                   ignorever: true }

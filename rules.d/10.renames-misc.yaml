@@ -406,6 +406,7 @@
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 
 - { name: linux-kernel,                setname: linux                     }
+- { name: mbmon,                       setname: xmbmon                    }
 - { name: mc46,                        setname: mc                        }
 - { name: mednaffe-gtk2,               setname: mednaffe                  }
 - { name: memtestplus,                 setname: memtest86+                }
@@ -520,6 +521,7 @@
 - { name: [timidity-freepats,timidity-patch-freepats], setname: freepats  }
 - { name: [timidity-eaw-patches,timidity-eawpatches,eawpatches], setname: eawpats }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
+- { name: [unace-bin,unace-nonfree],   setname: unace                     }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
 - { name: [libupnp1.8,libupnp4],       setname: libupnp                   }
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
