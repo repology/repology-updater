@@ -59,6 +59,8 @@
 
 - { namepat: "celt[0-9.]+",            setname: celt }
 
+- { name: centerim, verpat: "5\\..*",  setname: centerim5 }
+
 - { namepat: "cfengine[0-9]+",         setname: cfengine } # XXX: split?
 - { namepat: "cfengine-masterfiles[0-9]+", setname: cfengine-masterfiles }
 
@@ -90,6 +92,8 @@
 - { name: cyrus-imapd, verpat: "2\\..*", setname: cyrus-imapd2 }
 - { name: cyrus-imapd, verpat: "3\\..*", setname: cyrus-imapd3 }
 
+- { name: berkeley-db,                 setname: db }
+- { namepat: "libdb[0-9._-]*",         setname: db }
 - { namepat: "db[0-9.]+",              setname: db }
 - { name: db, verpat: "6\\..*",        setname: db6 }
 - { name: db, verpat: "5\\..*",        setname: db5 }
@@ -97,6 +101,7 @@
 - { name: db, verpat: "3\\..*",        setname: db3 }
 - { name: db, verpat: "2\\..*",        setname: db2 }
 - { name: db, verpat: "1\\..*",        setname: db1 }
+- { name: db, warning: "please classify me"         }
 
 - { name: dmd2,                        setname: dmd }
 
@@ -298,6 +303,9 @@
 
 - { name: kibana-bin,                  setname: kibana }
 - { namepat: "kibana[0-9]+",           setname: kibana }
+
+- { name: [lcms,lcms2,little-cms,little-cms2,lcms-python], setname: lcms }
+- { name: lcms, verpat: "2.*",         setname: lcms2 }
 
 - { namepat: "libchamplain[0-9.-]+",   setname: libchamplain }
 

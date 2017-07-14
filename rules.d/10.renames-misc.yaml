@@ -35,7 +35,7 @@
 - { name: adzap,                       setname: adzapper                  }
 - { name: aflex-ayacc,                 setname: afay                      } # ravenports
 - { name: apq-base,                    setname: apq                       } # ravenports
-- { name: argyll,                      setname: argyllcms                 }
+- { name: [argyll,argyll-cms],         setname: argyllcms                 }
 - { name: arping2,                     setname: arping                    }
 - { namepat: "artefetcher-qt[45]",     setname: artefetcher               }
 - { name: arxlibertatis,               setname: arx-libertatis            }
@@ -113,6 +113,8 @@
 - { name: bullet3,                     setname: bullet                    }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
 - { name: bzr-tools,                   setname: bzrtools                  }
+- { name: [c-kermit,kermit],           setname: ckermit                   }
+- { name: c2048,                       setname: 2048.c                    }
 - { name: cacti-cactid,                setname: cacti-spine               } # cactid renamed to spine upstream
 - { name: cairo-clock-ccw,             setname: cairo-clock               }
 - { name: cairo-dock-plug-ins,         setname: cairo-dock-plugins        }
@@ -137,6 +139,8 @@
 - { name: cblas-reference,             setname: cblas                     }
 - { name: cblas-tmg,                   setname: cblas                     }
 - { name: ceti-2-themes,               setname: ceti-2-theme              }
+- { name: [center-im,centerim5],       setname: centerim                  }
+- { name: centerim-devel,              setname: centerim, ignorever: true }
 - { name: clipit-gtk3,                 setname: clipit                    }
 - { name: clipperlib,                  setname: polyclipping              }
 - { name: cbatticon-gtk2,              setname: cbatticon                 }
@@ -198,6 +202,7 @@
 - { name: ddclient-ipv6,               setname: ddclient                  }
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
 - { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
+- { name: deja-gnu,                    setname: dejagnu                   }
 - { name: iodoom3-dhewm3,              setname: dhewm3                    }
 - { name: dgen,                        setname: dgen-sdl                  }
 - { name: divideandsucceed,            setname: divide-and-succeed        }
@@ -222,6 +227,8 @@
 - { name: dzen2,                       setname: dzen                      }
 - { name: linux-dwarffortress,         setname: dwarf-fortress            }
 - { name: [e2fsprogs-libblkid,e2fsprogs-libs,e2fsprogs-libss,e2fsprogs-libuuid,e2fsprogs1.41], setname: e2fsprogs }
+- { name: [easy-git,eg],               setname: easygit }
+- { name: easy-tag,                    setname: easytag }
 - { name: easyrpg,                     setname: easyrpg-player,           family: [ openbsd ] }
 - { name: [easyrsa,easy-rsa2],         setname: easy-rsa                  }
 - { name: easy_spice,                  setname: easyspice                 }
@@ -267,6 +274,7 @@
 - { name: [exercism, golang-github-exercism-cli], setname: exercism-cli   }
 - { name: exim4,                       setname: exim                      }
 - { name: expat21,                     setname: expat                     }
+- { name: eye-d3,                      setname: eyed3                     }
 - { name: falconseye,                  setname: falcons-eye               }
 - { name: faad,                        setname: faad2                     }
 - { name: facter2,                     setname: facter                    }
@@ -279,6 +287,7 @@
 - { name: [fifengine,py27-fife],       setname: fife                      }
 - { name: [fcitx-gtk2, fcitx-gtk3],    setname: fcitx                     }
 - { name: fetch-crl3,                  setname: fetch-crl                 }
+- { name: firebase-tools,              setname: firebase-cli              }
 - { name: fish-fillets,                setname: fillets-ng                }
 - { name: fish-fillets-ng,             setname: fillets-ng                }
 - { name: flacon-qt5,                  setname: flacon                    }
@@ -291,6 +300,7 @@
 - { name: flow-tools-ng,               setname: flow-tools                }
 - { name: flrig-docs,                  setname: flrig                     }
 - { name: [fltk-docs,fltk-editor,fltk-games,fltk11], setname: fltk        }
+- { name: fluid-synth,                 setname: fluidsynth                }
 - { name: fluxbox-wm,                  setname: fluxbox                   }
 - { name: flwm-tc,                     setname: flwm                      }
 - { name: foldingathome-noroot,        setname: foldingathome             }
@@ -328,7 +338,20 @@
 - { name: git-flow,                    setname: gitflow                   }
 - { name: gkrellm2,                    setname: gkrellm                   }
 - { name: gl117,                       setname: gl-117                    }
+- { name: gnu-barcode,                 setname: barcode                   }
+- { name: [gnu-chess,gnuchess4],       setname: gnuchess                  }
+- { name: gnu-complexity,              setname: complexity                }
+- { name: gnu-go,                      setname: gnugo                     }
+- { name: [gnu-indent,gindent],        setname: indent                    }
+- { name: gnu-prolog,                  setname: gprolog                   }
+- { name: [gnu-sed,gnused,gsed],       setname: sed                       }
+- { name: gnu-shogi,                   setname: gnushogi                  }
+- { name: [gnu-time,gtime],            setname: time                      }
+- { name: gnu-typist,                  setname: gtypist                   }
+- { name: [gnu-units,gunits],          setname: units                     }
+- { name: [gnu-which,gwhich],          setname: which                     }
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
+- { name: google-sparsehash,           setname: sparsehash                }
 - { name: [googletest,libgtest],       setname: gtest                     }
 - { name: gopro-vrplayer,              setname: gopro-vr-player           }
 - { name: gopro-vr-player-beta,        setname: gopro-vr-player, ignorever: true }
@@ -356,6 +379,8 @@
 - { name: [kid3-qt, kid3-qt4, kid3-qt5, kid4-qt, kid3-cli], setname: kid3 }
 - { name: kiki-the-nano-bot,           setname: kiki                      }
 - { name: krita3,                      setname: krita                     }
+- { name: kyoto-cabinet,               setname: kyotocabinet              }
+- { name: kyoto-tycoon,                setname: kyototycoon               }
 - { name: lapackpp,                    setname: lapack++                  }
 - { name: lapack-tmg,                  setname: lapack                    } # component of
 - { name: lapack-atlas,                setname: lapack                    }
@@ -386,13 +411,16 @@
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libmpcdec5,                  setname: libmpcdec                 }
+- { name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework], setname: ngspice }
 - { name: libopus,                     setname: opus                      }
+- { name: libopendkim,                 setname: opendkim                  }
 - { name: libopusfile,                 setname: opusfile                  }
 - { name: libphysfs,                   setname: physfs                    }
 - { name: [libpcre++,pcrexx],          setname: pcre++                    }
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
 - { name: libscalapack,                setname: scalapack                 }
+- { name: [libsoundtouch,sound-touch], setname: soundtouch                }
 - { name: libsdl,                      setname: sdl }
 - { name: libsdl2,                     setname: sdl2 }
 - { name: libsdl_gfx13,                setname: sdl-gfx }
@@ -451,6 +479,9 @@
 - { name: [mutt-lite,mutt-devel,mutt14,mutt14-lite,mutt-patched,mutt-slang,mutt-kiss], setname: mutt }
 - { namepat: "mysql[0-9]*-connector-cpp", setname: mysql-connector-c++    }
 - { name: libmysqlconnectorcpp,        setname: mysql-connector-c++       }
+- { name: [mc-contrib,midnight-commander,midnightcommander], setname: mc  }
+- { name: [minimal-racket,racket-docs,racket-minimal], setname: racket    }
+- { name: mobile-shell,                setname: mosh                      }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 - { name: ncbi-blast-plus,             setname: ncbi-blast+               }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
@@ -467,6 +498,11 @@
 - { name: [openjp2, libopenjpeg2.0],   setname: openjpeg2                 }
 - { name: openshot-qt,                 setname: openshot }
 - { name: [openvpn-mbedtls, openvpn-polarssl, openvpn2, openvpn23], setname: openvpn }
+- { name: open-tyrian,                 setname: opentyrian }
+- { name: open-babel,                  setname: openbabel }
+- { name: open-mesh,                   setname: openmesh }
+- { name: open-mpi,                    setname: openmpi }
+- { name: open-zwave,                  setname: openzwave }
 - { name: pacmanarena,                 setname: pacman-arena              }
 - { name: perlbrew,                    setname: "perl:app-perlbrew"       }
 - { name: pioneerspacesim,             setname: pioneer                   }
@@ -497,6 +533,7 @@
 - { namepat: "sendmail\\+.*",          setname: sendmail,                 family: [ freebsd ]  }
 - { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
 - { name: seven-kingdoms,              setname: 7kaa                      }
+- { name: [libslang,libslang2,s-lang,slang2], setname: slang              }
 - { name: slashem-tty,                 setname: slashem                   }
 - { name: sdl-asylum,                  setname: asylum                    }
 - { name: sni-qt4,                     setname: sni-qt                    }
@@ -515,12 +552,16 @@
 - { name: [libtelepathy-farstream, telepathy-farstream-0.4], setname: telepathy-farstream }
 - { name: [tetrinet-x,tetrinet-server], setname: tetrinetx                }
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
+- { name: [tiger-vnc,tigervnc-viewer], setname: tigervnc }
+- { name: tigervnc-devel,              setname: tigervnc-devel, ignorever: true }
 - { name: [tintin,tintinxx],           setname: tintin++                  }
 - { name: [tiled-java,tiled-qt],       setname: tiled                     }
 - { name: timidity, verpat: "2\\..*",  setname: timidity++                }
 - { name: [timidity++-emacs,timidity++-gtk,timidity++-motif,timidity++-slang,timidity++-tcltk,timidity++-xaw,timidity++-xskin], setname: timidity++ }
 - { name: [timidity-freepats,timidity-patch-freepats], setname: freepats  }
 - { name: [timidity-eaw-patches,timidity-eawpatches,eawpatches], setname: eawpats }
+- { name: tokyo-cabinet,               setname: tokyocabinet }
+- { name: tokyo-dystopia,              setname: tokyodystopia }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
 - { name: [unace-bin,unace-nonfree],   setname: unace                     }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
