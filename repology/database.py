@@ -826,6 +826,21 @@ class Database:
 
         self.cursor.execute("""
             INSERT
+                INTO problems(repo, name, effname, maintainer, problem)
+                SELECT DISTINCT
+                    repo,
+                    name,
+                    effname,
+                    case when maintainers = '{}' then null else unnest(maintainers) end,
+                    'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
+                FROM packages
+                WHERE
+                    homepage LIKE 'http://%gna.org/%' OR
+                    homepage LIKE 'https://%gna.org/%'
+        """)
+
+        self.cursor.execute("""
+            INSERT
                 INTO repositories (
                     name,
                     num_problems
