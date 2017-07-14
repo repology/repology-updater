@@ -1000,6 +1000,9 @@ def graph_total_problems():
 
 
 def clever_ceil(value):
+    if value == 0:
+        return 1
+
     tick = math.pow(10, math.ceil(math.log(value, 10) - 2))
     return int(math.ceil(value / tick) * tick)
 
