@@ -11,7 +11,7 @@
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
   # Gentoo and Mageia shamelessly mangle perl module versions, ignore
-- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports ], ignorever: true }
+- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports, pclinuxos ], ignorever: true }
 
 # manual perl modules
 - { name: backuppc-xs,                 setname: "perl:backuppc-xs" }
