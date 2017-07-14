@@ -167,6 +167,7 @@
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: wget,                        verpat: "16\\..*",                                  ignorever: true } # freshcode
 - { name: whatweb,                     ver: "0.4.8",                 family: [debuntu,openbsd], ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
