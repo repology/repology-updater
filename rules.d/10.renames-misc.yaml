@@ -406,6 +406,7 @@
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 
 - { name: linux-kernel,                setname: linux                     }
+- { name: mate-brisk-menu,             setname: brisk-menu                }
 - { name: mbmon,                       setname: xmbmon                    }
 - { name: mc46,                        setname: mc                        }
 - { name: mednaffe-gtk2,               setname: mednaffe                  }
