@@ -18,8 +18,8 @@
 			</thead>
 			<tbody>
 			{% for reponame in column %}
-				<tr>
-					<td class="text-right"><a href="{{ url_for('repository', repo=reponame) }}" name="{{ reponame }}">{{ repometadata[reponame].desc }}</a></td>
+				<tr id="{{ reponame }}">
+					<td class="text-right"><a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a></td>
 					<td class="text-nowrap">
 						<a href="{{ url_for('metapackages_in_repo', repo=reponame) }}">Present</a>
 						<a href="{{ url_for('metapackages_not_in_repo', repo=reponame) }}">Absent</a>
