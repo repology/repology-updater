@@ -168,6 +168,7 @@
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
+- { name: vlc,                         ver: "2.2.7",                 family: freshcode,    ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: wget,                        verpat: "16\\..*",                                  ignorever: true } # freshcode
 - { name: whatweb,                     ver: "0.4.8",                 family: [debuntu,openbsd], ignorever: true }
