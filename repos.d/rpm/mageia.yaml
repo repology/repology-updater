@@ -1,6 +1,27 @@
 ###########################################################################
 # Mageia
 ###########################################################################
+- name: mageia_6
+  type: repository
+  desc: Mageia 6
+  family: mageia
+  color: '262f45'
+  sources:
+      # XXX: */backports_testing and */updates_testing not included, are these needed?
+    - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
+      fetcher: Repodata
+      parser: Repodata
+      url: 'https://mirrors.kernel.org/mageia/distrib/6/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Mageia home
+      url: https://www.mageia.org/en/
+    - desc: Mageia App Db
+      url: https://madb.mageia.org/
+  packagelinks:
+    - desc: Package details on madb.mageia.org
+      url: 'https://madb.mageia.org/package/show/name/{name}'
+  tags: [ all, production, mageia, rpm ]
 - name: mageia_cauldron
   type: repository
   desc: Mageia Cauldron
