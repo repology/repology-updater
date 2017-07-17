@@ -1,6 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Version ignores, incompatible version mangling in the repositories
+- { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
 - { name: acl,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
@@ -125,6 +126,8 @@
 - { name: opencollada,                 verpat: ".*3335ac.*",                               ignorever: true }
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
+- { name: openssh,                     verpat: "[0-9]+\\.[0-9]+\\.[0-9]+",                 ignorever: true } # pkgrc: it's X.YpZ!
+- { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignorever: true } # freshcode, pZ part missing
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
 - { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignorever: true }
 - { name: patch,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org

@@ -11,6 +11,9 @@
 - { name: cdf3,                        setname: cdf                       } # Common Data Format lib
 - { name: cdf, verpat: "0.*",          setname: cdf-df                    } # split out colorized df
 
+- { name: chess, wwwpart: gnu.org,     setname: gnuchess                  }
+- { name: chess, category: Games/Boards, setname: gnuchess                  }
+
 - { name: ck,                          setname: ck-tcl, family: gentoo, category: dev-tcltk }
 - { name: [ck,concurrency-kit,libck],  setname: concurrencykit }
 

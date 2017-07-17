@@ -28,6 +28,7 @@
     - hg-git
     - hgsubversion
     - hy
+    - internetarchive
     - khal
     - munch
     - pandocfilters
@@ -145,6 +146,7 @@
 # These are more applications than modules, so rename
 - { name: "python:awscli",             setname: awscli                    }
 - { name: "python:bzrtools",           setname: bzrtools                  }
+- { name: "python:eyed3",              setname: eyed3                     }
 - { name: "python:gixy",               setname: gixy                      }
 - { name: "python:meson",              setname: meson                     }
 - { name: [ipython,"python:ipython",ipython2,ipython3,python2-ipython], setname: ipython2 }
