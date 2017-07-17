@@ -96,9 +96,17 @@ class TestFlask(unittest.TestCase):
         self.checkurl_svg('/badge/vertical-allrepos/kiconvtool.svg', has=['<svg', 'FreeBSD'])
         self.checkurl_svg('/badge/vertical-allrepos/nonexistent.svg', has=['<svg', 'yet'])
         self.checkurl_404('/badge/vertical-allrepos/nonexistent')
+
         self.checkurl_svg('/badge/tiny-repos/kiconvtool.svg', has=['<svg', '>1<'])
         self.checkurl_svg('/badge/tiny-repos/nonexistent.svg', has=['<svg', '>0<'])
         self.checkurl_404('/badge/tiny-repos/nonexistent')
+
+    def test_graphs(self):
+        self.checkurl_svg('/graph/total/metapackages.svg')
+        self.checkurl_svg('/graph/total/maintainers.svg')
+        self.checkurl_svg('/graph/total/problems.svg')
+
+        self.checkurl_svg('/graph/map_repo_size_fresh.svg')
 
     def test_metapackage(self):
         self.checkurl('/metapackage/kiconvtool', status_code=303)
