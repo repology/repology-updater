@@ -22,6 +22,7 @@
     - desc: Package details on madb.mageia.org
       url: 'https://madb.mageia.org/package/show/name/{name}'
   tags: [ all, production, mageia, rpm ]
+
 - name: mageia_cauldron
   type: repository
   desc: Mageia Cauldron
