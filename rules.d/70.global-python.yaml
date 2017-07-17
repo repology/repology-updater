@@ -28,6 +28,7 @@
     - hg-git
     - hgsubversion
     - hy
+    - internetarchive
     - khal
     - munch
     - pandocfilters

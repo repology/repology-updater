@@ -386,6 +386,8 @@
 - { name: libunique, verpat: "3\\..*", setname: libunique3 }
 - { name: libunique, warning: "please classify me" }
 
+- { namepat: "libvpx[0-9._-]+", setname: libvpx }
+
 - { name: libwnck-gtk3,                setname: libwnck }
 - { namepat: "libwnck[0-9]+",          setname: libwnck }
 - { name: libwnck, verpat: "2\\..*",   setname: libwnck2 }
@@ -442,7 +444,7 @@
 
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph }
 - { namepat: "openscenegraph[0-9.-]+", setname: openscenegraph }
-- { name: [openscenegraph-qt, openscenegraph-qt4], setname: openscenegraph }
+- { name: [openscenegraph-qt,openscenegraph-qt4,open-scene-graph], setname: openscenegraph }
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-devel }
 
 - { namepat: "(?:lib)?pcre[0-9._-]*",          setname: pcre }
