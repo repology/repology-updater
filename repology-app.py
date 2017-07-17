@@ -1030,19 +1030,22 @@ def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
     width = 1140
     height = 800
 
-    return flask.render_template(
-        'map.svg',
-        width=width,
-        height=height,
-        minx=0,
-        miny=0,
-        maxx=clever_ceil(max(map(lambda p: p['coords'][0]['x'], points))),
-        maxy=clever_ceil(max(map(lambda p: p['coords'][0]['y'], points))),
-        namex=namex,
-        namey=namey,
-        unitx=unitx,
-        unity=unity,
-        points=points
+    return (
+        flask.render_template(
+            'map.svg',
+            width=width,
+            height=height,
+            minx=0,
+            miny=0,
+            maxx=clever_ceil(max(map(lambda p: p['coords'][0]['x'], points))),
+            maxy=clever_ceil(max(map(lambda p: p['coords'][0]['y'], points))),
+            namex=namex,
+            namey=namey,
+            unitx=unitx,
+            unity=unity,
+            points=points,
+        ),
+        {'Content-type': 'image/svg+xml'}
     )
 
 
