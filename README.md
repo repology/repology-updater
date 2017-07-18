@@ -35,7 +35,7 @@ Ubuntu and more.
 Repology is currently in an early phase of development, with a goal
 of creating usable utility in a quick and dirty way. For now, it is
 usable in two modes: as a command line generator of single HTML
-report and a static website generator for [repology.org](repology.org).
+report and a static website generator for [repology.org](https://repology.org).
 
 ## Repository support
 
