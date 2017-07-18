@@ -36,6 +36,8 @@
     - phply
     - pip
     - polyline
+    - redis-py
+    - redis-py-cluster
     - pre-commit
     - pwntools
     - pyalsaaudio
@@ -160,6 +162,7 @@
 - { name: "python:qbzr",               setname: qbzr                      }
 - { name: "python:rss2email",          setname: rss2email                 }
 - { name: "python:sphinx10",           setname: "python:sphinx"           }
+- { name: "python:redis-py",           setname: "python:redis"            }
 - { name: "python:uwsgi",              setname: uwsgi                     }
 - { name: "python:uwsgitop",           setname: uwsgitop                  }
 - { name: "python:xdot",               setname: xdot                      }
