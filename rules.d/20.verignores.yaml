@@ -47,7 +47,6 @@
 - { name: cvs,                         ver: "1.20120905",                                  ignorever: true }
 - { name: cvs,                         ver: "1.12.13.1",                                   ignorever: true } # respin for Windows *only* to fix carriage returns, it does not make sense to list it
 - { name: cwiid,                       ver: ["20110107","0.6.01","2010-02-21-git"],        ignorever: true } # abandonware; a lot of snapshots
-- { name: darktable,                   ver: "2.3.0",                 family: freshcode,    ignorever: true }
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dejagnu,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
@@ -174,9 +173,7 @@
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
-- { name: vlc,                         ver: "2.2.7",                 family: freshcode,    ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
-- { name: wget,                        verpat: "16\\..*",                                  ignorever: true } # freshcode
 - { name: whatweb,                     ver: "0.4.8",                 family: [debuntu,openbsd], ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
