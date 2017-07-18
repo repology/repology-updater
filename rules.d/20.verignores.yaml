@@ -3,6 +3,7 @@
 # Version ignores, incompatible version mangling in the repositories
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
+- { name: abuse,                       ver: "2.0",                   family: pkgsrc,       ignorever: true }
 - { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
 - { name: acl,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: acl,                         verlonger: 3,                                       ignorever: true }
@@ -12,6 +13,7 @@
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
+- { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
 - { name: arora,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
