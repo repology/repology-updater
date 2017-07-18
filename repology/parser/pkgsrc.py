@@ -48,6 +48,9 @@ class PkgsrcIndexParser():
                 if len(fields) != 12:
                     print('WARNING: package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), file=sys.stderr)
                     continue
+                if not fields[0]:
+                    print('WARNING: line {} bogus, critical fields are empty'.format(line.strip()), file=sys.stderr)
+                    continue
 
                 pkg = Package()
 
