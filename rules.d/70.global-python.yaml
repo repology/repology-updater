@@ -36,8 +36,6 @@
     - phply
     - pip
     - polyline
-    - redis-py
-    - redis-py-cluster
     - pre-commit
     - pwntools
     - pyalsaaudio
@@ -67,6 +65,8 @@
     - pytest-qt
     - pytest-runner
     - pytest-sourceorder
+    - redis-py
+    - redis-py-cluster
     - pytest-tornado
     - pytest-xdist
     - pytest-xvfb
