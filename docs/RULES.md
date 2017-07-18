@@ -6,9 +6,9 @@ maintained.
 
 ## Ruleset structure
 
-Ruleset resides in [rules.yaml](../rules.yaml) file.
+Rulesets reside in [rules.d](../rules.d) directory.
 
-It is text file in YAML format, which contains a list of rules.
+They are text files in YAML format, which contain a list of rules.
 The convention is to keep each rule on one line, group them into
 blocks and sort alphabetically within a single block to simplify
 ruleset maintanance.
@@ -34,8 +34,8 @@ names to _extreme-tuxracer_:
 
 ### family
 
-Matches repository family. See [repos.yaml](../repos.yaml) for the
-list of families. You may specify multiple families as an array.
+Matches repository family. See the [repos.d](../repos.d) directory
+for the list of families. You may specify multiple families as an array.
 
 Example:
 
