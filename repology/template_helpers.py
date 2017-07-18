@@ -37,6 +37,8 @@ def maintainer_to_links(maintainer):
             links.append('http://sisyphus.ru/en/packager/' + name + '/')
         elif domain == 'github':
             links.append('https://github.com/' + name)
+        elif domain == 'freshcode':
+            links.append('http://freshcode.club/search?user=' + name)
 
         if '.' in domain:
             links.append('mailto:' + maintainer)

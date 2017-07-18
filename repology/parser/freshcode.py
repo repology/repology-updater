@@ -19,6 +19,7 @@ import json
 import os
 
 from repology.package import Package
+from repology.version import VersionCompare
 
 
 class FreshcodeParser():
@@ -26,19 +27,47 @@ class FreshcodeParser():
         pass
 
     def Parse(self, path):
-        result = []
+        result = {}
 
         # note that we actually parse database prepared by
         # fetcher, not the file we've downloaded
         with open(path, 'r', encoding='utf-8') as jsonfile:
-            for entry in json.load(jsonfile).values():
+            for entry in json.load(jsonfile)['releases']:
                 pkg = Package()
 
                 pkg.name = entry['name']
                 pkg.version = entry['version']
-                pkg.homepage = entry['homepage']
-                pkg.comment = entry['description']
 
-                result.append(pkg)
+                if not pkg.name or not pkg.version:
+                    continue
 
-        return result
+                homepage = entry.get('homepage')
+                summary = entry.get('summary')
+                description = entry.get('description')
+                #submitter = entry.get('submitter')
+                #download = entry.get('download')
+                license_ = entry.get('license')
+
+                if homepage:
+                    pkg.homepage = homepage
+
+                if summary:
+                    pkg.comment = summary
+                elif description:
+                    pkg.comment = description  # multiline
+
+                if license_:
+                    pkg.licenses = [license_]
+
+                # unfiltered garbage
+                #if submitter:
+                #    pkg.maintainers = [submitter + '@freshcode']
+
+                # ignore for now, may contain download page urls instead of file urls
+                #if download
+                #    pkg.downloads = [download]
+
+                if pkg.name not in result or VersionCompare(pkg.version, result[pkg.name].version) > 0:
+                    result[pkg.name] = pkg
+
+        return result.values()

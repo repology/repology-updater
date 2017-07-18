@@ -56,7 +56,7 @@ version are always parsed.
 | DistroWatch.com                  | ✔       |         |       | ✔     |         | ✔        |
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔     |         |          |
-| freshcode.club                   | ✔       | n/a     |       | ✔     |         |          |
+| freshcode.club                   | ✔       |         |       | ✔     | ✔       |          |
 | Gentoo                           | ✔       | ✔       | ✔     | ✔     | ✔ (1)   | ✔ (1)    |
 | Guix                             | ✔       |         |       | ✔     | ✔       |          |
 | GoboLinux                        | ✔       |         |       | ✔     | ✔       |          |
