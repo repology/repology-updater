@@ -44,6 +44,7 @@
 - { namepat: "(ruby:gherkin)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:glib2)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:gobject-introspection)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:google-api-client)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:gstreamer)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:hashie)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:hiera)[0-9._-]+", setname: "$1" }
