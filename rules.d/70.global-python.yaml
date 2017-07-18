@@ -36,6 +36,8 @@
     - phply
     - pip
     - polyline
+    - pre-commit
+    - pwntools
     - pyalsaaudio
     - pyaudio
     - pygraphviz

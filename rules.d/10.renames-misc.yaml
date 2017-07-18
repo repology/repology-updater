@@ -574,6 +574,10 @@
 - { name: pacmanarena,                 setname: pacman-arena              }
 - { name: perlbrew,                    setname: "perl:app-perlbrew"       }
 - { name: pioneerspacesim,             setname: pioneer                   }
+- { name: pdns-common,                 setname: pdns }
+- { name: [pdnsrec,powerdns-recursor], setname: pdns }
+- { name: powerdns,                    setname: pdns }
+- { name: [powerdns-geoip,powerdns-ldap,powerdns-mysql,powerdns-odbc,powerdns-pgsql], setname: pdns }
 - { name: pkg-bsd,                     setname: pkg,                      family: ravenports }
 - { name: pkg-devel,                   setname: pkg, ignorever: true,     family: freebsd }
 - { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
@@ -583,6 +587,7 @@
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles               } # not completely safe, but other puzzles were not encountered yet
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
+- { name: presto-cli,                  setname: presto }
 - { name: [proj4,proj.4,proj47],       setname: proj                      }
 
 # Q
