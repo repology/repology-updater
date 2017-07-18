@@ -34,9 +34,8 @@ names to _extreme-tuxracer_:
 
 ### family
 
-Matches repository family. See
-[repology-schemacheck.py](../repology-schemacheck.py) for the
-list of families. You may specify multiple families as an array.
+Matches repository family. See the [repos.d](../repos.d) directory
+for the list of families. You may specify multiple families as an array.
 
 Example:
 
