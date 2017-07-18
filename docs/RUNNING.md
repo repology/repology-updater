@@ -65,7 +65,7 @@ First, let's try to fetch some repository data and see if it works.
 No database is needed at this point.
 
 ```
-./repology-update --fetch --parse
+./repology-update.py --fetch --parse
 ```
 
 * ```--fetch``` tells the utility to fetch raw repository data
@@ -102,13 +102,13 @@ psql --username postgres --dbname repology -c "CREATE EXTENSION pg_trgm"
 now you can create database schema (tables, indexes etc.) with:
 
 ```
-./repology-update --initdb
+./repology-update.py --initdb
 ```
 
 and finally push parsed data into the database with:
 
 ```
-./repology-update --database
+./repology-update.py --database
 ```
 
 ### Running the webapp
@@ -138,5 +138,5 @@ database schema every time (unless it needs changing). Everything
 can be done with single command:
 
 ```
-./repology-app.py --fetch --update --parse --database
+./repology-update.py --fetch --update --parse --database
 ```
