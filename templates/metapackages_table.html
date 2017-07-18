@@ -26,7 +26,7 @@
 				{% set versionclass = versioninfo.class|css_for_package_versionclass %}
 				{% set versionclass = 'unique' if data.families|length == 1 and versionclass == 'newest' else versionclass %}
 				<span class="version version-{{ versionclass }}">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.repos|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+				{%- set count = versioninfo.families|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
 			{% else %}
 				-
 			{% endfor %}
@@ -36,19 +36,19 @@
 			<td>
 			{% for versioninfo in data.newest %}
 				<span class="version version-{% if data.families|length > 1 %}newest{% else %}unique{% endif %}">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.repos|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+				{%- set count = versioninfo.families|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
 			{% endfor %}
 			</td>
 			<td>
 			{% for versioninfo in data.outdated %}
 				<span class="version version-outdated">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.repos|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+				{%- set count = versioninfo.families|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
 			{% endfor %}
 			</td>
 			<td>
 			{% for versioninfo in data.ignored %}
 				<span class="version version-ignored">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.repos|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+				{%- set count = versioninfo.families|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
 			{% endfor %}
 			</td>
 		</tr>

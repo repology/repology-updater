@@ -189,7 +189,7 @@ def metapackages_to_data(metapackages, repo=None, maintainer=None):
         def VersionsDigest(version):
             return {
                 'version': version['version'],
-                'repos': set(map(lambda p: p.repo, version['packages'])),
+                'families': set(map(lambda p: p.family, version['packages'])),
                 'class': version['packages'][0].versionclass,
             }
 
