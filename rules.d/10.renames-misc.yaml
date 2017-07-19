@@ -417,8 +417,10 @@
 - { name: ir.lv2,                      setname: ir-lv2                    }
 - { name: isc-kea,                     setname: kea }
 - { name: iso_8879,                    setname: iso8879 }
-- { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition], setname: intellij-idea-community }
-- { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre], setname: intellij-idea-ultimate }
+- { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition,intellij], setname: intellij-idea-community }
+- { name: intellij-idea-ce-eap,        setname: intellij-idea-community, ignorever: true }
+- { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre,intellij-ultimate], setname: intellij-idea-ultimate }
+- { name: intellij-idea-ue-eap,        setname: intellij-idea-ultimate, ignorever: true }
 - { name: [intellij-pycharm,pycharm-community], setname: pycharm          }
 
 # J
