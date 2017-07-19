@@ -28,6 +28,8 @@
 
 - { namepat: "ardour[0-9]+",           setname: ardour }
 
+- { namepat: "arduino[0-9._-]+",       setname: arduino }
+
 - { namepat: "asterisk[0-9.]+",        setname: asterisk }
 
 - { namepat: "autoconf[_-]?[0-9.]+",    setname: autoconf }
