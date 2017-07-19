@@ -2,6 +2,7 @@
 
 # Version ignores, incompatible version mangling in the repositories
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
+- { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignorever: true } # pkgsrc
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: abuse,                       ver: "2.0",                   family: pkgsrc,       ignorever: true }
 - { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
