@@ -95,6 +95,7 @@
 - { name: bcel5_3,                     setname: bcel                      }
 - { name: bib-tool,                    setname: bibtool                   }
 - { name: bisoncpp,                    setname: bisonc++                  }
+- { name: [bison27,bison-doc,bison-runtime], setname: bison               }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: beneath-a-steel-sky-cd,      setname: beneath-a-steel-sky       }
 - { name: "bakery2.6",                 setname: bakery                    }
@@ -693,6 +694,7 @@
 
 # Y
 - { name: yofrankie-bge,               setname: yofrankie                 }
+- { name: youtube-dlg,                 setname: youtube-dl-gui            }
 
 # Z
 - { name: zeroad,                      setname: 0ad                       }
