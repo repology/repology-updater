@@ -1,0 +1,23 @@
+###########################################################################
+# Deepin Linux
+###########################################################################
+
+# Though we reserve place for deepin_{testing,stable} here, unstable
+# is currently the only repo (not taking precise/trusty into account)
+- name: deepin_unstable
+  type: repository
+  desc: Deepin
+  family: debuntu
+  color: '949393'
+  sources:
+    - name: [ contrib, main, non-free ]
+      fetcher: File
+      parser: DebianSources
+      #url: 'http://packages.deepin.com/deepin/dists/unstable/{source}/source/Sources.gz'
+      url: 'http://mirror.yandex.ru/mirrors/deepin/packages/dists/unstable/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Deepin home
+      url: https://www.deepin.org/
+  tags: [ all, production, deepin ]

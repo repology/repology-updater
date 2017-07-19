@@ -1,0 +1,21 @@
+###########################################################################
+# SparkyLinux
+###########################################################################
+
+# Though we reserve place for sparky_{unstable,stable} here, we only add
+# testing as a main repo (see https://sparkylinux.org/repo/). Unstable and
+# stable repos are almost empty
+- name: sparky_testing
+  type: repository
+  desc: Sparky
+  family: debuntu
+  color: '949393'
+  sources:
+    - name: Sources
+      fetcher: File
+      parser: DebianSources
+      url: 'https://sparkylinux.org/repo/dists/testing/main/source/Sources.gz'
+  repolinks:
+    - desc: SparkyLinux home
+      url: https://sparkylinux.org/
+  tags: [ all, production, sparky ]
