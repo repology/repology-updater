@@ -112,6 +112,7 @@
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
+- { name: mame,                        ver: "0153s",                                       ignorever: true } # pclinuxos
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # fake
