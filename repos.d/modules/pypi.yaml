@@ -17,4 +17,4 @@
   packagelinks:
     - desc: PyPi page
       url: 'https://pypi.python.org/pypi/{name}/'
-  tags: [ all, production ]
+  tags: [ all ]
