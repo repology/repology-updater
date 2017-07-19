@@ -69,7 +69,7 @@
 		{% if information.maintainers|maintainers_to_group_mailto %}
 		<ul>
 			<li>
-				<a href="{{ information.maintainers|maintainers_to_group_mailto('[repology] ' + name + ' package') }}">Group email</a>
+				<a href="{{ information.maintainers|maintainers_to_group_mailto('%5Brepology%5D%20' + name + '%20package') }}">Group email</a>
 			</li>
 		</ul>
 		{% endif %}
