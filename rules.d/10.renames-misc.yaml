@@ -17,6 +17,7 @@
 - { name: abbaye,                      setname: abbaye-des-morts          }
 - { name: abbayedesmorts,              setname: abbaye-des-morts          }
 - { name: [abiword-x11,abiword-gtk2,abiword-minimal], setname: abiword    }
+- { name: abuse-sdl,                   setname: abuse }
 - { name: ace,                         setname: ace-of-penguins,          family: [ openbsd, slackbuilds ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          family: [ gentoo ] }
 - { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              family: [ fedora ] } # XXX: ???
