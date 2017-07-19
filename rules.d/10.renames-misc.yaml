@@ -71,11 +71,13 @@
 - { name: apache-arrow,                setname: arrow                     }
 - { name: apache-flume-ng,             setname: flume                     }
 - { name: apache-jena,                 setname: jena                      }
+- { name: apache-jena-fuseki,          setname: jena                      }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
 - { name: [aqbanking5,aqbanking5-gtk,aqbanking5-svn], setname: aqbanking }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: archi-steam-farm,            setname: asf }
 - { name: atomic-ops,                  setname: libatomic-ops }
+- { name: atomic_ops,                  setname: libatomic-ops }
 - { name: [audacious-gtk3,audacious-core,audacious-qt5,audacious2,audacious-itself], setname: audacious }
 - { name: audacious2-plugins,          setname: audacious-plugins         }
 - { name: audacity-freeworld,          setname: audacity                  }
@@ -401,6 +403,8 @@
 - { name: gopro-vr-player-beta,        setname: gopro-vr-player, ignorever: true }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
 - { name: grafana-bin,                 setname: grafana                   }
+- { name: [groovy-docs,groovysdk],     setname: groovy }
+- { namepat: "groovy[0-9._-]+",        setname: groovy }
 - { name: grub2,                       setname: grub                      } # since grub legacy is obsoleted, just let grub2 eat it away
 - { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui], setname: graphviz }
 - { name: [gucharmap-gtk2,gucharmap7], setname: gucharmap                 }
@@ -428,6 +432,7 @@
 # J
 - { name: ja2,                         setname: ja2-stracciatella         }
 - { name: jbig-kit,                    setname: jbigkit                   }
+- { name: jboss-forge-offline,         setname: jboss-forge               }
 - { name: josm-latest,                 setname: josm, ignorever: true     }
 
 # K
