@@ -65,16 +65,17 @@
     - pytest-qt
     - pytest-runner
     - pytest-sourceorder
-    - redis-py
-    - redis-py-cluster
     - pytest-tornado
     - pytest-xdist
     - pytest-xvfb
     - pyusb
     - rabbyt
+    - redis-py
+    - redis-py-cluster
     - sortedcontainers
     - stopit
     - todoman
+    - utidylib
     - vdirsyncer
     - virtualenv
     - virtualenv-clone
@@ -127,6 +128,7 @@
 - { name: "python:audio", verpat: "0\\.2\\..*", setname: "python:pyaudio" }
 - { name: ["python:poppler", "python:python-poppler"], setname: "python:pypoppler"       }
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
+- { name: ["python:pytidylib6","python:tidylib"], setname: "python:pytidylib"         }
 - { name: "python:usb",                setname: "python:pyusb"            } # create problem!
 - { name: [pylint-py27,pylint3,pylint-gui,pylint3-gui], setname: "python:pylint" }
 - { name: [ipykernel,jupyter-ipykernel,"python:jupyter-ipykernel","python:jupyter_ipykernel","python:jupyter_ipykernel-doc"], setname: "python:ipykernel" }
