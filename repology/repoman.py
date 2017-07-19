@@ -295,7 +295,7 @@ class RepositoryManager:
     def GetNames(self, reponames=None):
         return sorted([repo['name'] for repo in self.__GetRepositories(reponames)])
 
-    def GetMetadata(self):
+    def GetMetadata(self, reponames=None):
         return {
             repository['name']: {
                 'incomplete': repository.get('incomplete', False),
@@ -306,7 +306,7 @@ class RepositoryManager:
                 'desc': repository['desc'],
                 'type': repository['type'],
                 'color': repository.get('color'),
-            } for repository in self.repositories
+            } for repository in self.__GetRepositories(reponames)
         }
 
     # Single repo methods

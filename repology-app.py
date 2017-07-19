@@ -45,7 +45,7 @@ app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
 
 # global repology objects
 repoman = RepositoryManager(app.config['REPOS_DIR'], 'dummy')  # XXX: should not construct fetchers and parsers here
-repometadata = repoman.GetMetadata()
+repometadata = repoman.GetMetadata(app.config['REPOSITORIES'])
 reponames = repoman.GetNames(app.config['REPOSITORIES'])
 
 # templates: tuning
