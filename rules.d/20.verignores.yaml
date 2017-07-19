@@ -146,6 +146,7 @@
 - { name: quilt,                       verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
 - { name: rage,                        ver: "0.3.0.042",                                   ignorever: true }
+- { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: scite,                       ver: "375",                                         ignorever: true } # pclinuxos
