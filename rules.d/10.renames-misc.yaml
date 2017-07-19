@@ -581,6 +581,7 @@
 
 # P
 - { name: pacmanarena,                 setname: pacman-arena              }
+- { name: [pasystray-gtk2,pasystray-gtk2-standalone,pasystray-gtk3-standalone], setname: pasystray }
 - { name: perlbrew,                    setname: "perl:app-perlbrew"       }
 - { name: pioneerspacesim,             setname: pioneer                   }
 - { name: pdns-common,                 setname: pdns }
@@ -640,6 +641,7 @@
 - { name: stransball2,                 setname: supertransball2           }
 - { name: structure-synth,             setname: structuresynth            }
 - { name: stone-soup-ncurses,          setname: stone-soup                }
+- { name: stunt-rally,                 setname: stuntrally                }
 - { name: svm_light,                   setname: svmlight }
 - { name: [sweet-home-3d,sweethome3d-application], setname: sweethome3d   }
 - { name: switchboard-plug-network,    setname: switchboard-plug-networking }

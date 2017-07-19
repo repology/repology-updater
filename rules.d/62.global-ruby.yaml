@@ -113,6 +113,8 @@
 - { namepat: "jekyll-.*",           setname: "ruby:$0" }
 - { name: ruby-install,             setname: "ruby:install" }
 
+- { name: "ruby:pdumpfs",           setname: "pdumpfs" }
+
 # preserve from further normalization (_ -> -) as there's e.g.
 # separate dm_core and dm-core modules
 - { namepat: "ruby:.*", last: true }
