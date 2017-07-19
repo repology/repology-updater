@@ -52,7 +52,7 @@ version are always parsed.
 | CPAN                             |         | ✔       |       | ✔ (2) |         |          |
 | CRAN                             |         |         |       | ✔ (2) |         |          |
 | CRUX                             | ✔       | ✔       |       | ✔     |         |          |
-| Debian, Ubuntu, KDE neon         |         | ✔       | ✔     | ✔     |         |          |
+| Debian, Ubuntu, other deb-based  |         | ✔       | ✔     | ✔     |         |          |
 | DistroWatch.com                  | ✔       |         |       | ✔     |         | ✔        |
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔     |         |          |
