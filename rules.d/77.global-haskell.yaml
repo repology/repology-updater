@@ -8,4 +8,6 @@
 - { category: dev-haskell,             setname: "haskell:$0", family: [ gentoo ] }
 - { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", family: [ sisyphus ] }
 
+- { name: haxml,                       setname: "haskell:haxml" }
+
 - { name: "haskell:darcs",             setname: darcs              } # ungeneralize as it's more of standalone application

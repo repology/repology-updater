@@ -273,6 +273,7 @@
     - fonts-ttf-gnu-freefont
     - freefont
     - freefont-ttf
+    - gnu-free-fonts
     - ttf-freefont
   setname: "fonts:gnu-freefont"
 

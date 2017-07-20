@@ -23,6 +23,7 @@
     - cartopy
     - cherrypy
     - decoratortools
+    - defusedxml
     - dulwich
     - geojson
     - hg-git

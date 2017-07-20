@@ -408,6 +408,7 @@
 - { namepat: "groovy[0-9._-]+",        setname: groovy }
 - { name: grub2,                       setname: grub                      } # since grub legacy is obsoleted, just let grub2 eat it away
 - { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui], setname: graphviz }
+- { name: gss-proxy,                   setname: gssproxy                  }
 - { name: [gucharmap-gtk2,gucharmap7], setname: gucharmap                 }
 
 # H
@@ -505,6 +506,7 @@
 
 # M
 - { name: mc46,                        setname: mc                        }
+- { name: mcron2,                      setname: mcron                     }
 - { name: mednaffe-gtk2,               setname: mednaffe                  }
 - { name: memtestplus,                 setname: memtest86+                }
 - { name: [mesa-demo,mesademos],       setname: mesa-demos                }
@@ -552,6 +554,7 @@
 - { name: mobile-shell,                setname: mosh                      }
 - { name: mdv,                         setname: terminal_markdown_viewer }
 - { name: media-info,                  setname: mediainfo }
+- { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
 - { name: mvnsh,                       setname: maven-shell }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 
@@ -634,6 +637,7 @@
 - { name: sdl-asylum,                  setname: asylum                    }
 - { name: sni-qt4,                     setname: sni-qt                    }
 - { name: snorenotify-qt5,             setname: snorenotify               }
+- { name: [sodium,libsodium-static],   setname: libsodium                 }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             family: [ gentoo ]  } # XXX: recheck
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
 - { name: stellarium-qt4,              setname: stellarium                }
