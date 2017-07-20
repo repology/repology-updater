@@ -421,7 +421,7 @@
 - { namepat: "netatalk[0-9.-]+",       setname: netatalk }
 
 - { name: [nethack-all,nethack-lib,nethack-patch,nethack-qt,nethack-tty,nethack-x11], setname: nethack }
-- { namepat: "nethack[0-9._-]*(?:-nox11)?", setname: nethack }
+- { namepat: "nethack[._-]*(?:[23][0-9._-]*)?(?:-nox11)?", setname: nethack }
 
 # XXX: more merges needed here
 - { namepat: "openjdk[0-9._-]*(?:-doc)?", setname: openjdk }
