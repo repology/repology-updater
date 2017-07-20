@@ -73,6 +73,7 @@
 - { name: apache-jena,                 setname: jena                      }
 - { name: apache-jena-fuseki,          setname: jena                      }
 - { name: apcupsd-x11,                 setname: apcupsd                   }
+- { name: aptanastudio,                setname: aptana-studio }
 - { name: [aqbanking5,aqbanking5-gtk,aqbanking5-svn], setname: aqbanking }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: archi-steam-farm,            setname: asf }
