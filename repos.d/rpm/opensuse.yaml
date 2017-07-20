@@ -1,9 +1,9 @@
 ###########################################################################
-# OpenSUSE
+# openSUSE
 ###########################################################################
 - name: opensuse_leap_42_1
   type: repository
-  desc: OpenSUSE Leap 42.1
+  desc: openSUSE Leap 42.1
   family: opensuse
   color: '6da741'
   valid_till: 2017-05-16
@@ -19,9 +19,9 @@
       url: http://download.opensuse.org/source/distribution/leap/42.1/repo/non-oss/suse/
       subrepo: main/non-oss
   repolinks:
-    - desc: OpenSUSE home
+    - desc: openSUSE home
       url: https://www.opensuse.org/
-    - desc: OpenSUSE package search
+    - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
     - desc: Package details
@@ -30,7 +30,7 @@
 
 - name: opensuse_leap_42_2
   type: repository
-  desc: OpenSUSE Leap 42.2
+  desc: openSUSE Leap 42.2
   family: opensuse
   color: '6da741'
   sources:
@@ -45,9 +45,9 @@
       url: http://download.opensuse.org/source/distribution/leap/42.2/repo/non-oss/suse/
       subrepo: main/non-oss
   repolinks:
-    - desc: OpenSUSE home
+    - desc: openSUSE home
       url: https://www.opensuse.org/
-    - desc: OpenSUSE package search
+    - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
     - desc: Package details
@@ -56,7 +56,7 @@
 
 - name: opensuse_leap_42_3
   type: repository
-  desc: OpenSUSE Leap 42.3
+  desc: openSUSE Leap 42.3
   family: opensuse
   color: '6da741'
   sources:
@@ -71,9 +71,9 @@
       url: http://download.opensuse.org/source/distribution/leap/42.3/repo/non-oss/suse/
       subrepo: main/non-oss
   repolinks:
-    - desc: OpenSUSE home
+    - desc: openSUSE home
       url: https://www.opensuse.org/
-    - desc: OpenSUSE package search
+    - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
     - desc: Package details
@@ -82,7 +82,7 @@
 
 - name: opensuse_tumbleweed
   type: repository
-  desc: OpenSUSE Tumbleweed
+  desc: openSUSE Tumbleweed
   family: opensuse
   color: '6da741'
   sources:
@@ -91,9 +91,9 @@
       parser: Repodata
       url: http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
   repolinks:
-    - desc: OpenSUSE home
+    - desc: openSUSE home
       url: https://www.opensuse.org/
-    - desc: OpenSUSE package search
+    - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
     - desc: Package details
