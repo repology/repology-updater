@@ -7,10 +7,16 @@
   family: fedora
   color: '294172'
   sources:
-    - name: data
+    - name: release
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/releases/24/Everything/source/tree/
+      subrepo: release
+    - name: updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download.fedoraproject.org/pub/fedora/linux/updates/24/SRPMS/
+      subrepo: updates
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
@@ -27,10 +33,16 @@
   family: fedora
   color: '294172'
   sources:
-    - name: data
+    - name: release
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/releases/25/Everything/source/tree/
+      subrepo: release
+    - name: updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download.fedoraproject.org/pub/fedora/linux/updates/25/SRPMS/
+      subrepo: updates
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
@@ -47,10 +59,16 @@
   family: fedora
   color: '294172'
   sources:
-    - name: data
+    - name: release
       fetcher: Repodata
       parser: Repodata
-      url: https://download.fedoraproject.org/pub/fedora/linux/development/26/Everything/source/tree/
+      url: https://download.fedoraproject.org/pub/fedora/linux/releases/26/Everything/source/tree/
+      subrepo: release
+    - name: updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download.fedoraproject.org/pub/fedora/linux/updates/26/SRPMS/
+      subrepo: updates
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
