@@ -1,0 +1,21 @@
+###########################################################################
+# openSUSE additional repositories
+###########################################################################
+- name: opensuse_games_tumbleweed
+  type: repository
+  desc: openSUSE Games Tumbleweed
+  family: opensuse
+  color: '6da741'
+  sources:
+    - name: data
+      fetcher: Repodata
+      parser: Repodata
+      url: http://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/
+      allowed_archs: ['src']
+  repolinks:
+    - desc: openSUSE:Games wiki page
+      url: https://en.opensuse.org/openSUSE:Games
+  packagelinks:
+    - desc: Package details
+      url: 'https://software.opensuse.org/package/{name}'
+  tags: [ all, production, opensuse, rpm ]
