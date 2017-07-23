@@ -51,7 +51,7 @@ def GetHTTPLinkStatus(url, timeout):
             # resolve permanent (and only permament!) redirect chain
             for h in response.history:
                 if h.status_code == 301:
-                    location = h.headers.get('location')
+                    location = urllib.parse.urljoin(h.url, h.headers.get('location'))
 
         # handle size
         if response.status_code == 200:
