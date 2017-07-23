@@ -108,6 +108,7 @@
   setname: "python:$0"
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
+- { name: html2text,                   setname: "python:$0", family: slackbuilds }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:alsaaudio",          setname: "python:pyalsaaudio"      } # use pypi name!
 - { name: "python:graphviz", verpat: "1\\.[34].*", setname: "python:pygraphviz" } # use pypi name!!!

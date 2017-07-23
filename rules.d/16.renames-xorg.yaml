@@ -2,6 +2,9 @@
 
 # protos
 - { name: xorg-xcb-proto,              setname: xcb-proto                 }
+- { name: xorg-dmx, family: freebsd,   setname: xorg-server-xdmx          }
+- { name: [xorg-server-xdmx-dev],      setname: xorg-server-xdmx, ignorever: true }
+- { name: [xorg-server-xdmx-mir,xorg-server-xdmx-nosystemd,xorg-server1.12-xdmx], setname: xorg-server-xdmx }
 - { name: [xproxymngproto,xorg-xproxymanagementprotocol,xorg-xproxymngproto], setname: xproxymanagementprotocol }
 - { name: xprintproto, setname: printproto }
 - { namepat: "(?:xorg-)(applewmproto|bigreqsproto|compositeproto|damageproto|dmxproto|dri2proto|dri3proto|evieproto|fixesproto|fontcacheproto|fontsproto|glproto|inputproto|kbproto|presentproto|printproto|randrproto|xextproto|xf86bigfontproto|xf86dgaproto|xf86driproto|xf86miscproto|xf86rushproto|xf86vidmodeproto)", setname: "$1" }
