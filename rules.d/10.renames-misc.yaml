@@ -415,6 +415,7 @@
 - { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hg-flow,                     setname: hgflow }
+- { name: html2text-with-utf8,         setname: html2text }
 
 # I
 - { name: iccexamin,                   setname: icc-examin                }
