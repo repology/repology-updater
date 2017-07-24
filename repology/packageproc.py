@@ -39,9 +39,7 @@ def PackagesMerge(packages):
             nextpackages = []
             merged = packages[0]
             for package in packages[1:]:
-                if merged.IsMergeable(package):
-                    merged.Merge(package)
-                else:
+                if not merged.TryMerge(package):
                     nextpackages.append(package)
 
             outpkgs.append(merged)

@@ -19,30 +19,29 @@
 
 import unittest
 
-from repology.package import Package, PackageMergeConflict, PackageSanityCheckFailure, PackageSanityCheckProblem
+from repology.package import Package, PackageSanityCheckFailure, PackageSanityCheckProblem
 
 
 class TestParsers(unittest.TestCase):
     def test_merge(self):
         pkg = Package()
-        pkg.Merge(Package())
+        self.assertEqual(pkg.TryMerge(Package()), True)
         self.assertEqual(pkg.name, None)
 
         pkg = Package()
-        pkg.Merge(Package(name='foo'))
+        self.assertEqual(pkg.TryMerge(Package(name='foo')), True)
         self.assertEqual(pkg.name, 'foo')
 
         pkg = Package(name='foo')
-        pkg.Merge(Package())
+        self.assertEqual(pkg.TryMerge(Package()), True)
         self.assertEqual(pkg.name, 'foo')
 
         pkg = Package(name='foo')
-        pkg.Merge(Package(name='foo'))
+        self.assertEqual(pkg.TryMerge(Package(name='foo')), True)
         self.assertEqual(pkg.name, 'foo')
 
         pkg = Package(name='foo')
-        with self.assertRaises(PackageMergeConflict):
-            pkg.Merge(Package(name='bar'))
+        self.assertEqual(pkg.TryMerge(Package(name='bar')), False)
 
     def test_sanity_ok(self):
         Package(repo='r', family='f', name='n', effname='e', version='0').CheckSanity()
