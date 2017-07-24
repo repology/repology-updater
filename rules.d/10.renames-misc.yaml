@@ -77,7 +77,6 @@
 - { name: [aqbanking5,aqbanking5-gtk,aqbanking5-svn], setname: aqbanking }
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: archi-steam-farm,            setname: asf }
-- { name: atomic-ops,                  setname: libatomic-ops }
 - { name: atomic_ops,                  setname: libatomic-ops }
 - { name: [audacious-gtk3,audacious-core,audacious-qt5,audacious2,audacious-itself], setname: audacious }
 - { name: audacious2-plugins,          setname: audacious-plugins         }
