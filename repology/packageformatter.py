@@ -31,4 +31,6 @@ class PackageFormatter(string.Formatter):
             return pkg.origversion if pkg.origversion is not None else pkg.version
         elif key == 'category':
             return pkg.category if pkg.category is not None else ''
+        elif key in pkg.extrafields:
+            return pkg.extrafields[key]
         return ''
