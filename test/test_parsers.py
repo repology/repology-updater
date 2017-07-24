@@ -54,6 +54,8 @@ class TestParsers(unittest.TestCase):
             'ignore': False,
             'shadow': False,
             'ignoreversion': False,
+
+            'extrafields': {},
         }
 
         reference_with_default.update(reference)

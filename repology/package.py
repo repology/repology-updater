@@ -65,13 +65,16 @@ class Package:
         'ignore',
         'shadow',
         'ignoreversion',
+
+        'extrafields',
     ]
 
     def __init__(self, repo=None, family=None, subrepo=None,
                  name=None, effname=None,
                  version=None, origversion=None, effversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
-                 ignore=False, shadow=False, ignoreversion=False):
+                 ignore=False, shadow=False, ignoreversion=False,
+                 extrafields=None):
         self.repo = repo
         self.family = family
         self.subrepo = subrepo
@@ -185,6 +188,8 @@ class Package:
         CheckBool(self.ignore, 'ignore')
         CheckBool(self.shadow, 'shadow')
         CheckBool(self.ignoreversion, 'ignoreversion')
+
+        CheckDict(self.extrafields, 'extrafields', NoWhitespace, NonEmpty)
 
     def Normalize(self):
         # normalize homepage (currently adds / to url which points to host)

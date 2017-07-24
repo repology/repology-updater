@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+import json
 
 import psycopg2
 
@@ -272,7 +273,9 @@ class Database:
 
                 ignorepackage bool not null,
                 shadow bool not null,
-                ignoreversion bool not null
+                ignoreversion bool not null,
+
+                extrafields jsonb not null,
             )
         """)
 
@@ -541,7 +544,9 @@ class Database:
 
                 ignorepackage,
                 shadow,
-                ignoreversion
+                ignoreversion,
+
+                extrafields
             ) VALUES (
                 %s,
                 %s,
@@ -564,6 +569,8 @@ class Database:
 
                 %s,
                 %s,
+                %s,
+
                 %s
             )
             """,
@@ -591,6 +598,8 @@ class Database:
                     package.ignore,
                     package.shadow,
                     package.ignoreversion,
+
+                    json.dumps(package.extrafields),
                 ) for package in packages
             ]
         )
@@ -894,7 +903,9 @@ class Database:
 
                 ignorepackage,
                 shadow,
-                ignoreversion
+                ignoreversion,
+
+                extrafields
             FROM packages
             WHERE effname {}
             """.format('= ANY (%s)' if isinstance(names, list) else '= %s'),
@@ -925,6 +936,8 @@ class Database:
                 ignore=row[15],
                 shadow=row[16],
                 ignoreversion=row[17],
+
+                extrafields=row[18],
             ) for row in self.cursor.fetchall()
         ]
 
@@ -963,7 +976,9 @@ class Database:
 
                 ignorepackage,
                 shadow,
-                ignoreversion
+                ignoreversion,
+
+                extrafields
             FROM packages WHERE effname IN (
                 {}
             )
@@ -995,6 +1010,8 @@ class Database:
                 ignore=row[15],
                 shadow=row[16],
                 ignoreversion=row[17],
+
+                extrafields=row[18],
             ) for row in self.cursor.fetchall()
         ]
 
