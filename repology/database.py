@@ -275,7 +275,7 @@ class Database:
                 shadow bool not null,
                 ignoreversion bool not null,
 
-                extrafields jsonb not null,
+                extrafields jsonb not null
             )
         """)
 
