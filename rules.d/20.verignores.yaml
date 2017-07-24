@@ -29,6 +29,8 @@
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
+- { name: boost-jam,                   ver: "3.1.18",                                      ignorever: true }
+- { name: boost-jam,                   verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: brasero,                     ver: "3.12.2",                family: opensuse,     ignorever: true } # not released yet
 - { name: brotli,                      verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
