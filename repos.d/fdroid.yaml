@@ -11,5 +11,7 @@
   repolinks:
     - desc: F-Droid
       url: https://f-droid.org/
-  # XXX: link requires java class O_o
+  packagelinks:
+    - desc: F-Droid.org page
+      url: 'https://f-droid.org/packages/{id}/'
   tags: [ all, production ]

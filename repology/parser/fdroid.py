@@ -41,6 +41,8 @@ class FDroidParser():
             if www:
                 pkg.homepage = www
 
+            pkg.extrafields['id'] = application.find('id').text
+
             if pkg.name and pkg.version:
                 result.append(pkg)
 
