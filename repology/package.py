@@ -153,6 +153,12 @@ class Package:
             for element in value:
                 CheckStr(element, name, *checks)
 
+        def CheckDict(value, name, *checks):
+            if not isinstance(value, dict):
+                raise PackageSanityCheckFailure('{}: {} is not a dict'.format(self.name, name))
+            for element in value.values():
+                CheckStr(element, name, *checks)
+
         CheckStr(self.repo, 'repo', NoNewlines, Stripped, Alphanumeric, Lowercase)
         CheckStr(self.family, 'family', NoNewlines, Stripped, Alphanumeric, Lowercase)
         if self.subrepo is not None:
