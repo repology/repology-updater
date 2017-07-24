@@ -25,15 +25,15 @@
       url: https://pkg-status.freebsd.org/
   packagelinks:
     - desc: FreshPorts page
-      url: 'http://www.freshports.org/{category}/{name}'
+      url: 'http://www.freshports.org/{origin}'
     - desc: SVNWeb
-      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/'
+      url: 'https://svnweb.freebsd.org/ports/head/{origin}/'
     - desc: Port's Makefile
-      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
+      url: 'https://svnweb.freebsd.org/ports/head/{origin}/Makefile?view=co'
     - desc: PortsMon
-      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={portname}'
     - desc: Related bugs in FreeBSD bugzilla
-      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{portname}'
   tags: [ all, production, have_testdata ]
 
 ###########################################################################
@@ -59,15 +59,15 @@
       url: https://github.com/DragonFlyBSD/DPorts
   packagelinks:
     - desc: FreshPorts page
-      url: 'http://www.freshports.org/{category}/{name}'
+      url: 'http://www.freshports.org/{origin}'
     - desc: SVNWeb
-      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/'
+      url: 'https://svnweb.freebsd.org/ports/head/{origin}/'
     - desc: Port's Makefile
-      url: 'https://svnweb.freebsd.org/ports/head/{category}/{name}/Makefile?view=co'
+      url: 'https://svnweb.freebsd.org/ports/head/{origin}/Makefile?view=co'
     - desc: PortsMon
-      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={name}'
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={portname}'
     - desc: Related bugs in FreeBSD bugzilla
-      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{name}'
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={origin}'
     - desc: Synth build log
-      url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{name}.log'
+      url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{portname}.log'
   tags: [ all, production ]

@@ -21,15 +21,15 @@
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
     - desc: pkgsrc.se page
-      url: 'http://pkgsrc.se/{category}/{name}'
+      url: 'http://pkgsrc.se/{origin}'
     - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
     - desc: Port CVS directory (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}/?only_with_tag=pkgsrc-2017Q1'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2017Q1'
     - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{category}/{name}/Makefile?content-type=text/plain'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
     - desc: Port Makefile (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{category}/{name}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q1'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q1'
   tags: [ all, production ]
 
 - name: pkgsrc_2017_2
@@ -52,15 +52,15 @@
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
     - desc: pkgsrc.se page
-      url: 'http://pkgsrc.se/{category}/{name}'
+      url: 'http://pkgsrc.se/{origin}'
     - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
     - desc: Port CVS directory (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}/?only_with_tag=pkgsrc-2017Q2'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2017Q2'
     - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{category}/{name}/Makefile?content-type=text/plain'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
     - desc: Port Makefile (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{category}/{name}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q2'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q2'
   tags: [ all, production ]
 
 - name: pkgsrc_current
@@ -82,9 +82,9 @@
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
   packagelinks:
     - desc: pkgsrc.se page
-      url: 'http://pkgsrc.se/{category}/{name}'
+      url: 'http://pkgsrc.se/{origin}'
     - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{category}/{name}'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
     - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{category}/{name}/Makefile?content-type=text/plain'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
   tags: [ all, production ]

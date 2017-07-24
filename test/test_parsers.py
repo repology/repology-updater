@@ -54,6 +54,8 @@ class TestParsers(unittest.TestCase):
             'ignore': False,
             'shadow': False,
             'ignoreversion': False,
+
+            'extrafields': {},
         }
 
         reference_with_default.update(reference)
@@ -91,6 +93,10 @@ class TestParsers(unittest.TestCase):
                 'comment': 'Play, encode, and manage Ogg Vorbis files',
                 'maintainers': ['naddy@freebsd.org'],
                 'homepage': 'http://www.vorbis.com/',
+                'extrafields': {
+                    'portname': 'vorbis-tools',
+                    'origin': 'audio/vorbis-tools',
+                }
             }
         )
 

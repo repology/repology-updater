@@ -33,10 +33,6 @@ class RepositoryVersionClass:
     lonely = 5
 
 
-class PackageMergeConflict(Exception):
-    pass
-
-
 class PackageSanityCheckProblem(Exception):
     pass
 
@@ -69,13 +65,16 @@ class Package:
         'ignore',
         'shadow',
         'ignoreversion',
+
+        'extrafields',
     ]
 
     def __init__(self, repo=None, family=None, subrepo=None,
                  name=None, effname=None,
                  version=None, origversion=None, effversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
-                 ignore=False, shadow=False, ignoreversion=False):
+                 ignore=False, shadow=False, ignoreversion=False,
+                 extrafields=None):
         self.repo = repo
         self.family = family
         self.subrepo = subrepo
@@ -99,27 +98,21 @@ class Package:
         self.shadow = shadow
         self.ignoreversion = ignoreversion
 
-    def IsMergeable(self, other):
+        self.extrafields = extrafields if extrafields else {}
+
+    def TryMerge(self, other):
         for slot in self.__slots__:
             self_val = getattr(self, slot)
             other_val = getattr(other, slot)
 
-            if self_val is not None and self_val != [] and other_val is not None and other_val != [] and self_val != other_val:
+            if self_val is None or self_val == [] or self_val == {}:
+                setattr(self, slot, other_val)
+            elif other_val is None or other_val == [] or other_val == {}:
+                pass
+            elif self_val != other_val:
                 return False
 
         return True
-
-    def Merge(self, other):
-        for slot in self.__slots__:
-            self_val = getattr(self, slot)
-            other_val = getattr(other, slot)
-
-            if self_val is None or self_val == []:
-                setattr(self, slot, other_val)
-            elif other_val is None or other_val == []:
-                setattr(self, slot, self_val)
-            elif self_val != other_val:
-                raise PackageMergeConflict('{}: {} != {}'.format(self.name, self_val, other_val))
 
     def CheckSanity(self, transformed=True):
         # checks
@@ -163,6 +156,12 @@ class Package:
             for element in value:
                 CheckStr(element, name, *checks)
 
+        def CheckDict(value, name, *checks):
+            if not isinstance(value, dict):
+                raise PackageSanityCheckFailure('{}: {} is not a dict'.format(self.name, name))
+            for element in value.values():
+                CheckStr(element, name, *checks)
+
         CheckStr(self.repo, 'repo', NoNewlines, Stripped, Alphanumeric, Lowercase)
         CheckStr(self.family, 'family', NoNewlines, Stripped, Alphanumeric, Lowercase)
         if self.subrepo is not None:
@@ -189,6 +188,8 @@ class Package:
         CheckBool(self.ignore, 'ignore')
         CheckBool(self.shadow, 'shadow')
         CheckBool(self.ignoreversion, 'ignoreversion')
+
+        CheckDict(self.extrafields, 'extrafields', NoWhitespace, NonEmpty)
 
     def Normalize(self):
         # normalize homepage (currently adds / to url which points to host)

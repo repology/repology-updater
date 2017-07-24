@@ -66,6 +66,9 @@ class PkgsrcIndexParser():
 
                 pkg.category = fields[6].split(' ')[0]
 
+                pkg.extrafields['portname'] = fields[1].split('/')[-1]
+                pkg.extrafields['origin'] = fields[1]
+
                 result.append(pkg)
 
         return result

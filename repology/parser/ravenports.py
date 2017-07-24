@@ -44,6 +44,8 @@ class RavenportsJsonParser():
             pkg.downloads = packagedata['distfile']
             pkg.comment = packagedata['variants'][0]['sdesc']
 
+            pkg.extrafields['bucket'] = packagedata['bucket']
+
             result.append(pkg)
 
         return result

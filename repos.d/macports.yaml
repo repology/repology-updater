@@ -18,5 +18,5 @@
       url: https://github.com/macports/macports-ports
   packagelinks:
     - desc: Port directory in GitHub repository
-      url: 'https://github.com/macports/macports-ports/blob/master/{category}/{name}'
+      url: 'https://github.com/macports/macports-ports/blob/master/{portdir}'
   tags: [ all, production ]

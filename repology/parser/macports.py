@@ -94,6 +94,9 @@ class MacPortsParser():
                             # otherwise it's username@macports.org
                             pkg.maintainers.append(maintainer + '@macports.org')
 
+                pkg.extrafields['portdir'] = pkgdata['portdir']
+                pkg.extrafields['portname'] = pkgdata['portdir'].split('/')[1]
+
                 result.append(pkg)
 
         return result
