@@ -64,6 +64,9 @@ class OpenBSDIndexParser():
                 pkg.maintainers = GetMaintainers(row[5])
                 pkg.category = row[6].split(' ')[0].strip()
 
+                pkg.extrafields['portname'] = row[1].split('/')[-1]
+                pkg.extrafields['origin'] = row[1]
+
                 result.append(pkg)
 
         return result

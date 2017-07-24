@@ -64,6 +64,11 @@ class FreeBSDIndexParser():
                 if fields[9]:
                     pkg.homepage = fields[9]
 
+                path = fields[1].split('/')
+
+                pkg.extrafields['portname'] = path[-1]
+                pkg.extrafields['origin'] = '/'.join(path[-2:])
+
                 result.append(pkg)
 
         return result
