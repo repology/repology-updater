@@ -20,8 +20,8 @@
       url: http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/
   packagelinks:
     - desc: OpenPorts.se page
-      url: 'http://openports.se/{category}/{name}'
+      url: 'http://openports.se/{origin}'
     - desc: Port CVS directory
-      url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{category}/{name}'
+      url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{origin}'
     # XXX: no Makefile link is Makefile would just refer to subports
   tags: [ all, production ]

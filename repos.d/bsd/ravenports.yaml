@@ -13,4 +13,7 @@
   repolinks:
     - desc: Ravenports GitHub repository
       url: https://github.com/jrmarino/Ravenports
+  packagelinks:
+    - desc: Port buildsheet
+      url: 'https://github.com/jrmarino/Ravenports/blob/master/bucket_{bucket}/{name}'
   tags: [ all, production ]
