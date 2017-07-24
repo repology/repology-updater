@@ -803,10 +803,8 @@ class Database:
                     'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
                 FROM packages
                 WHERE
-                    homepage LIKE 'http://%googlecode.com/%' OR
-                    homepage LIKE 'https://%googlecode.com/%' OR
-                    homepage LIKE 'http://code.google.com/%' OR
-                    homepage LIKE 'https://code.google.com/%'
+                    homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%)?' OR
+                    homepage SIMILAR TO 'https?://code.google.com(/%)?'
         """)
 
         self.cursor.execute("""
@@ -820,8 +818,7 @@ class Database:
                     'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
                 FROM packages
                 WHERE
-                    homepage LIKE 'http://%codeplex.com/%' OR
-                    homepage LIKE 'https://%codeplex.com/%'
+                    homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%)?'
         """)
 
         self.cursor.execute("""
@@ -835,8 +832,7 @@ class Database:
                     'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
                 FROM packages
                 WHERE
-                    homepage LIKE 'http://%gna.org/%' OR
-                    homepage LIKE 'https://%gna.org/%'
+                    homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%)?'
         """)
 
         self.cursor.execute("""
