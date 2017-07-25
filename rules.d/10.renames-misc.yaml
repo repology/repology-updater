@@ -300,6 +300,7 @@
 - { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
 - { name: epsxe1.9,                    setname: epsxe                     }
 - { name: [eric4,eric5,eric6],         setname: eric                      }
+- { name: [eric-common,eric-i18n]      setname: eric                      }
 - { namepat: "[a-z]{2}-eric6",         setname: eric                      } # freebsd l10n ports
 - { namepat: "eternallands(.*)",       setname: "eternal-lands$1"         }
 - { name: [etracer,extremetuxracer],   setname: extreme-tuxracer          }
@@ -683,7 +684,7 @@
 - { name: valyria-tear,                setname: valyriatear               }
 - { name: [varnish4,varnish5],         setname: varnish                   }
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
-- { name: vim-core,                    setname: vim                       }
+- { name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw], setname: vim }
 - { name: vlc-nightly,                 setname: vlc, ignorever: true      }
 - { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignorever: true }
 - { name: [vsftpd-ssl,vsftpd-ext],     setname: vsftpd                    }

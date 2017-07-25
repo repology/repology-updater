@@ -155,6 +155,7 @@
 - { name: "python:awscli",             setname: awscli                    }
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:diffoscope",         setname: diffoscope                }
+- { name: "python:eric",               setname: eric                      }
 - { name: "python:eyed3",              setname: eyed3                     }
 - { name: "python:gixy",               setname: gixy                      }
 - { name: "python:kye",                setname: kye                       }
