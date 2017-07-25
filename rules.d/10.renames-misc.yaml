@@ -300,7 +300,7 @@
 - { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
 - { name: epsxe1.9,                    setname: epsxe                     }
 - { name: [eric4,eric5,eric6],         setname: eric                      }
-- { name: [eric-common,eric-i18n]      setname: eric                      }
+- { name: [eric-common,eric-i18n],     setname: eric                      }
 - { namepat: "[a-z]{2}-eric6",         setname: eric                      } # freebsd l10n ports
 - { namepat: "eternallands(.*)",       setname: "eternal-lands$1"         }
 - { name: [etracer,extremetuxracer],   setname: extreme-tuxracer          }
