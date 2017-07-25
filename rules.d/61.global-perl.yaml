@@ -37,6 +37,7 @@
 - { name: "perl:data-compare",         ver: ["1.2200","1.2102","1.2101","1.250.0","1.240.0"], ignorever: true }
 - { name: "perl:datetime-locale",      verpat: "1\\.[0-9]{3,}.*", ignorever: true }
 - { name: "perl:math-polygon-tree",    ver: "0.0691",          ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
+- { name: "perl:module-starter",       ver: "1.[0-9]{3,}.*",   ignorever: true }
 - { name: "perl:opengl",               verpat: "0\\.[0-9]{3,}", ignorever: true }
 - { name: "perl:readonly",             ver: "2.050",           ignorever: true }
 - { name: "perl:redis",                verpat: "1\\.[0-9]{4,}", ignorever: true }

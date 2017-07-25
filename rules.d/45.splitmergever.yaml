@@ -395,10 +395,12 @@
 - { name: libwnck, verpat: "2\\..*",   setname: libwnck2 }
 - { name: libwnck, verpat: "3\\..*",   setname: libwnck3 }
 
+- { name: libxml,                      setname: libxml2 }
+
 - { namepat: "libxml\\+\\+[0-9._-]+",      setname: libxml++ }
 - { namepat: "libxml\\+\\+[0-9._-]+-docs", setname: libxml++ }
 - { name: [libxmlpp,libxmlxx,libxmlxx2], setname: libxml++ }
-- { name: [libxml++-reference],        setname: libxml++ }
+- { name: [libxml++-reference,libxml++-docs], setname: libxml++ }
 
 - { name: [lilypond-devel, lilypond-devel-docs, lilypond-doc, lilypond-docs], setname: lilypond }
 - { name: lilypond, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", setname: lilypond-unstable }
@@ -422,6 +424,10 @@
 
 - { name: [nethack-all,nethack-lib,nethack-patch,nethack-qt,nethack-tty,nethack-x11], setname: nethack }
 - { namepat: "nethack[._-]*(?:[23][0-9._-]*)?(?:-nox11)?", setname: nethack }
+
+- { namepat: "ogre[0-9._-]+", setname: ogre }
+- { name: [ogre-docs,ogre-samples], setname: ogre }
+- { name: ogre, verpat: "2.*", ignorever: true }
 
 # XXX: more merges needed here
 - { namepat: "openjdk[0-9._-]*(?:-doc)?", setname: openjdk }
@@ -569,6 +575,9 @@
 - { namepat: "unison[0-9.-]+(?:-compat)?", setname: unison }
 
 - { namepat: "vala[0-9.-]+",           setname: vala }
+
+- { namepat: "vte[0-9._-]+",           setname: vte }
+- { name: [vte-common,vte-gtk2-compat,vte-gtk2-xfce,vte-gtk3,vte-reference], setname: vte }
 
 - { namepat: "wesnoth[0-9.-]+",        setname: wesnoth }
 - { name: wesnoth-devel,               setname: wesnoth }

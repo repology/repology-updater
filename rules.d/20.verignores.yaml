@@ -120,6 +120,7 @@
 - { name: mame,                        ver: "0153s",                                       ignorever: true } # pclinuxos
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
+- { name: mpfr,                        ver: "3.1.5.2",                                     ignorever: true } # openbsd fake
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # fake
 - { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignorever: true } # it's x.y.z, ignore all revisions and dates
 - { name: mplayer,                     ver: "5.1.4",                                       ignorever: true } # pclinuxos garbage
