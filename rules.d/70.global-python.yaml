@@ -181,3 +181,6 @@
 
 - { name: "python:pyspatialite", ver: "3.0.1", ignorever: true            }
 - { name: "python:pyspatialite", family: pypi, unignorever: true          }
+
+- { name: "python:pygobject", verpat: "2.*", setname: "python:pygobject2" }
+- { name: "python:pygobject", verpat: "3.*", setname: "python:pygobject3" }

@@ -596,6 +596,7 @@
 - { name: [powerdns-geoip,powerdns-ldap,powerdns-mysql,powerdns-odbc,powerdns-pgsql], setname: pdns }
 - { name: pkg-bsd,                     setname: pkg,                      family: ravenports }
 - { name: pkg-devel,                   setname: pkg, ignorever: true,     family: freebsd }
+- { name: pkgconfig,                   setname: pkgconf,                  family: ravenports } # XXX
 - { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
 - { name: postgresql-libpqxx,          setname: libpqxx                   }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }

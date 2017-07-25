@@ -11,7 +11,7 @@
 - { namepat: "(?:xorg-)(applewmproto|bigreqsproto|compositeproto|damageproto|dmxproto|dri2proto|dri3proto|evieproto|fixesproto|fontcacheproto|fontsproto|glproto|inputproto|kbproto|presentproto|printproto|randrproto|recordproto|renderproto|resourceproto|scrnsaverproto|trapproto|videoproto|xcmiscproto|xineramaproto|xextproto|xf86bigfontproto|xf86dgaproto|xf86driproto|xf86miscproto|xf86rushproto|xf86vidmodeproto)-devel", setname: "$1", ignorever: true }
 
 # utils
-- { namepat: "(?:xorg-|x11-)+(xauth|xfontsel|xtrans)", setname: "$1" }
+- { namepat: "(?:xorg-|x11-)+(bdftopcf|beforelight|editres|mkfontdir|setxkbmap|xauth|xfontsel|xtrans)", setname: "$1" }
 - { namepat: "(?:xorg-|x11-)+(xtrans)-devel", setname: "$1", ignorever: true }
 
 # libs
