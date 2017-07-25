@@ -157,6 +157,7 @@
 - { name: "python:diffoscope",         setname: diffoscope                }
 - { name: "python:eyed3",              setname: eyed3                     }
 - { name: "python:gixy",               setname: gixy                      }
+- { name: "python:kye",                setname: kye                       }
 - { name: "python:meson",              setname: meson                     }
 - { name: [ipython,"python:ipython",ipython2,ipython3,python2-ipython], setname: ipython2 }
 - { name: ipython2, verpat: "6\\..*",   setname: ipython                  }
@@ -165,9 +166,9 @@
 - { name: "python:pgcli",              setname: pgcli                     }
 - { name: "python:pypanel",            setname: pypanel                   }
 - { name: "python:qbzr",               setname: qbzr                      }
+- { name: "python:redis-py",           setname: "python:redis"            }
 - { name: "python:rss2email",          setname: rss2email                 }
 - { name: "python:sphinx10",           setname: "python:sphinx"           }
-- { name: "python:redis-py",           setname: "python:redis"            }
 - { name: "python:uwsgi",              setname: uwsgi                     }
 - { name: "python:uwsgitop",           setname: uwsgitop                  }
 - { name: "python:xdot",               setname: xdot                      }

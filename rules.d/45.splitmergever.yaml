@@ -502,6 +502,8 @@
 - { name: [sdl12,"libsdl1.2"],         setname: sdl }
 - { name: sdl, verpat: "2.*",          setname: sdl2 }
 
+- { name: sdl_image, verpat: "2.*",    setname: sdl2-image }
+
 - { namepat: "sfml[0-9.]+",            setname: sfml }
 - { name: sfml, verpat: "1\\..*",      setname: sfml1 }
 
