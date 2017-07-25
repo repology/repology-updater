@@ -153,6 +153,7 @@
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: quilt,                       verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
+- { name: r-hexbin,                    ver: "1.27.1-1",                                    ignorever: true } # guix fake
 - { name: rage,                        ver: "0.3.0.042",                                   ignorever: true }
 - { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
