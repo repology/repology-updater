@@ -409,6 +409,7 @@
 - { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui], setname: graphviz }
 - { name: gss-proxy,                   setname: gssproxy                  }
 - { name: [gucharmap-gtk2,gucharmap7], setname: gucharmap                 }
+- { name: [gvim,gvim-gtk2],            setname: vim                       }
 
 # H
 - { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
@@ -682,6 +683,7 @@
 - { name: valyria-tear,                setname: valyriatear               }
 - { name: [varnish4,varnish5],         setname: varnish                   }
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
+- { name: vim-core,                    setname: vim                       }
 - { name: vlc-nightly,                 setname: vlc, ignorever: true      }
 - { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignorever: true }
 - { name: [vsftpd-ssl,vsftpd-ext],     setname: vsftpd                    }
