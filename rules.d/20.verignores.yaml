@@ -128,6 +128,7 @@
 - { name: mplayer,                     ver: "5.1.4",                                       ignorever: true } # pclinuxos garbage
 - { name: mtree,                                                     family: ravenports,   ignorever: true } # fake
 - { name: [mkgmap,mkgmap-splitter],    ver: "0.0.0",                                       ignorever: true } # debian; original bersion has svnXXXX addendum
+- { name: munin,                       verpat: "2\\.999.*",                                ignorever: true } # debian fake
 - { name: ncurses,                     verpat: "6\\.0-20[0-9]{6}.*",                       ignorever: true } # macports
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignorever: true }   # \  force correct
