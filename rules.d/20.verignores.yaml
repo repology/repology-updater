@@ -106,6 +106,7 @@
 - { name: kbuild,                      verlonger: 3,                                       ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
 - { name: keybase,                     verpat: "20170209.*",                               ignorever: true } # nix garbage
+- { name: kicad,                       verpat: "20[0-9][0-9].*",                           ignorever: true }
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignorever: true }
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
