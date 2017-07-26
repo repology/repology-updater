@@ -32,6 +32,11 @@ from repology.packageproc import PackagesMerge
 from repology.parser import *
 
 
+class StateFileFormatCheckProblem(Exception):
+    def __init__(self, where):
+        Exception.__init__(self, 'Illegal package format in {}. Please run `repology-update.py --parse` on all repositories to update the format.'.format(where))
+
+
 class RepositoryManager:
     def __init__(self, reposdir, statedir, fetch_retries=3, fetch_retry_delay=30):
         self.repositories = []
@@ -264,6 +269,8 @@ class RepositoryManager:
             unpickler = pickle.Unpickler(infile)
             numpackages = unpickler.load()
             packages = [unpickler.load() for num in range(0, numpackages)]
+            if packages and not packages[0].CheckFormat():
+                raise StateFileFormatCheckProblem(path)
         logger.Log('loading complete, {} packages'.format(len(packages)))
 
         return packages
@@ -275,6 +282,9 @@ class RepositoryManager:
             self.current = None
 
             self.Get()
+
+            if self.current and not self.current.CheckFormat():
+                raise StateFileFormatCheckProblem(path)
 
         def Peek(self):
             return self.current

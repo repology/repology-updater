@@ -207,6 +207,14 @@ class Package:
         if len(self.maintainers) > 1:
             self.maintainers = sorted(set(self.maintainers))
 
+    def CheckFormat(self):
+        # check
+        for slot in self.__slots__:
+            if not hasattr(self, slot):
+                return False
+
+        return True
+
     @property
     def __dict__(self):
         return {slot: getattr(self, slot) for slot in self.__slots__}
