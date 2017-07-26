@@ -180,6 +180,7 @@
 - { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: tuxpaint-stamps,             verpat: "20[0-9]{6}.*",                             ignorever: true } # it's separated
+- { name: ufoai,                       ver: "2.5.0+20150216",                              ignorever: true } # homebrew
 - { name: unace,                       ver: "2.50",                                        ignorever: true } # it's 2.5
 - { name: unrar,                       ver: "5.50",                  family: mageia,       ignorever: true } # it's betaX yet
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
