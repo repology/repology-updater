@@ -717,6 +717,7 @@
 
 # Z
 - { name: zeroad,                      setname: 0ad                       }
+- { name: zint-gui,                    setname: zint                      }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
 - { name: zstandard,                   setname: zstd                      }
 
