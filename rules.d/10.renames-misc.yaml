@@ -371,6 +371,7 @@
 # G
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle                  }
+- { name: garlic-doc,                  setname: garlic                    }
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
 - { name: [gdal1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4], setname: gdal }
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
@@ -487,6 +488,7 @@
 - { name: [libpcre++,pcrexx],          setname: pcre++                    }
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
+- { name: librfm5,                     setname: librfm                    }
 - { name: libscalapack,                setname: scalapack                 }
 - { name: [libsoundtouch,sound-touch], setname: soundtouch                }
 - { name: libsdl,                      setname: sdl }
@@ -500,6 +502,8 @@
 - { name: libzstd,                     setname: zstd                      }
 - { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
+- { name: libzzip,                     setname: zziplib                   }
+- { name: libzenxml,                   setname: zenxml                    }
 
 # L (continued)
 - { name: linux-kernel,                setname: linux                     }
@@ -609,6 +613,7 @@
 - { name: [proj4,proj.4,proj47],       setname: proj                      }
 
 # Q
+- { name: qastools-qt5,                setname: qastools                  }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5,qbittorrent-dark,qbittorrent-nogui,qbittorrent-stable], setname: qbittorrent }
 - { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], setname: qtcreator }
 - { name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], setname: qtkeychain }
@@ -676,6 +681,7 @@
 - { name: twoping,                     setname: 2ping }
 
 # U
+- { name: [uade123,uade2],             setname: uade                      }
 - { name: [unace-bin,unace-nonfree],   setname: unace                     }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
 - { name: [libupnp1.8,libupnp4],       setname: libupnp                   }
@@ -696,6 +702,7 @@
 - { name: w-calc,                      setname: wcalc }
 - { name: walcommander,                setname: wcmcommander              } # old name
 - { name: [webp,libwebp6],             setname: libwebp                   }
+- { name: websocket++,                 setname: websocketpp               }
 - { name: wine,                        setname: wine-etersoft,            family: sisyphus } # counterfeit
 - { name: wings,                       setname: wings3d                   }
 - { name: wirouter_keyrec,             setname: wirouter-keyrec }
@@ -704,22 +711,29 @@
 - { name: wpasupplicant,               setname: wpa_supplicant            }
 
 # X
+- { name: x-moto,                      setname: xmoto                     }
 - { name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2], setname: xine-lib  }
 - { name: [xine,xine-ui2],             setname: xine-ui                   }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
 - { name: xfce4-dict-plugin,           setname: xfce4-dict,               family: [ freebsd ] }
 - { name: xpi-foxyproxy,               setname: foxyproxy,                family: [ freebsd ] }
 - { name: xsel-conrad,                 setname: xsel                      }
+- { name: [xmobar-alsa,xmobar-volume], setname: xmobar                    }
+- { name: [xvid,libxvid],              setname: xvidcore                  }
 
 # Y
 - { name: yofrankie-bge,               setname: yofrankie                 }
 - { name: youtube-dlg,                 setname: youtube-dl-gui            }
+- { name: yui-compressor,              setname: yuicompressor             }
 
 # Z
 - { name: zeroad,                      setname: 0ad                       }
-- { name: zint-gui,                    setname: zint                      }
+- { name: [zerotier,zerotier-one-with-controller], setname: zerotier-one  }
+- { name: [zint-gui,zint-qt],          setname: zint                      }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
 - { name: zstandard,                   setname: zstd                      }
+- { name: zthreads,                    setname: zthread                   }
+- { name: zeronet-git,                 setname: zeronet, ignorever: true  }
 
 - { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
 - { namepat: "android-tools-[^-]+",    setname: android-tools,            family: [ freebsd, pkgsrc ] }

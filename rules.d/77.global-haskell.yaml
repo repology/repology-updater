@@ -11,3 +11,4 @@
 - { name: haxml,                       setname: "haskell:haxml" }
 
 - { name: "haskell:darcs",             setname: darcs              } # ungeneralize as it's more of standalone application
+- { name: "haskell:xmobar",            setname: xmobar             } # ungeneralize as it's more of standalone application
