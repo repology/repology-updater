@@ -16,6 +16,7 @@
 # manual perl modules
 - { name: backuppc-xs,                 setname: "perl:backuppc-xs" }
 - { name: perl-build,                  setname: "perl:build" }
+- { name: cpanminus,                   setname: "perl:app-cpanminus" }
 
 # specific perl ignores
 - { name: "perl:anyevent",             ver: [ "7.070", "7.120", "7.130" ], ignorever: true }
