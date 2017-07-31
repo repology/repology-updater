@@ -18,7 +18,7 @@
 import subprocess
 
 
-def RunSubprocess(command, logger, shell=False, cwd=None):
+def RunSubprocess(command, logger, cwd=None):
     message = 'running "{}"'.format(' '.join(command)
                                     if isinstance(command, list)
                                     else command)
@@ -28,7 +28,6 @@ def RunSubprocess(command, logger, shell=False, cwd=None):
     logger.Log(message)
 
     with subprocess.Popen(command,
-                          shell=shell,
                           stdout=subprocess.PIPE,
                           stderr=subprocess.STDOUT,
                           universal_newlines=True,
