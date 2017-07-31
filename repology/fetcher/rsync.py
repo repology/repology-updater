@@ -32,8 +32,8 @@ class RsyncFetcher():
             return
 
         try:
-            command = 'rsync --verbose --archive --compress --delete --delete-excluded {} {}'.format(self.url, statepath)
-            RunSubprocess(command, logger, shell=True)
+            command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', self.url, statepath]
+            RunSubprocess(command, logger)
         except:
             if os.path.exists(statepath):
                 shutil.rmtree(statepath)
