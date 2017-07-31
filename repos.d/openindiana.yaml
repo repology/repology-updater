@@ -3,7 +3,7 @@
 ###########################################################################
 - name: openindiana
   type: repository
-  desc: OpenIndiana
+  desc: OpenIndiana packages
   family: openindiana
   sources:
     - name: [hipster, hipster-encumbered]

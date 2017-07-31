@@ -3,7 +3,7 @@
 ###########################################################################
 - name: openbsd
   type: repository
-  desc: OpenBSD
+  desc: OpenBSD Ports
   family: openbsd
   color: 'f8e808'
   sources:
