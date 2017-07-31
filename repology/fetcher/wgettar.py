@@ -36,9 +36,12 @@ class WgetTarFetcher():
 
         os.mkdir(statepath)
 
+        tempfile = os.path.join(statepath, '.temporary.tar')
+
         try:
-            command = 'wget -O- "%s" | tar -xz -f- -C "%s"' % (self.url, statepath)
-            RunSubprocess(command, logger, shell=True)
+            RunSubprocess(['wget', '-O', tempfile, self.url], logger)
+            RunSubprocess(['tar', '-x', '-z', '-f', tempfile, '-C', statepath], logger)
+            os.remove(tempfile)
         except:
             if os.path.exists(statepath):
                 shutil.rmtree(statepath)
