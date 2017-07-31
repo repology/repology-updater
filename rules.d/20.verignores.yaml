@@ -110,6 +110,7 @@
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignorever: true }
 - { name: krename,                     verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: libcpuid,                    ver: "0.21",                                        ignorever: true } # deepin crap (it's 0.2.1)
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: libexecinfo,                                               family: ravenports,   ignorever: true } # fake
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignorever: true } # fake
