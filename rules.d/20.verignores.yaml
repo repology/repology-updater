@@ -168,7 +168,7 @@
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
 - { name: sed,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
-- { name: shairplay,                   verpat: "2016.*",                                   ignorever: true }
+- { name: shairplay,                   verpat: "20[0-8]{2}.*",                             ignorever: true }
 - { name: sndio,                       ver: "20161106",                                    ignorever: true }
 - { name: strace,                      verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
