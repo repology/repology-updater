@@ -16,4 +16,6 @@
   packagelinks:
     - desc: Port buildsheet
       url: 'https://github.com/jrmarino/Ravenports/blob/master/bucket_{bucket}/{name}'
+    - desc: Ravenports Catalog entry
+      url: 'http://ravenports.ironwolf.systems/catalog/bucket_{bucket}/{name}/{variant}/'
   tags: [ all, production ]

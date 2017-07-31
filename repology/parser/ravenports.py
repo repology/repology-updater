@@ -45,6 +45,7 @@ class RavenportsJsonParser():
             pkg.comment = packagedata['variants'][0]['sdesc']
 
             pkg.extrafields['bucket'] = packagedata['bucket']
+            pkg.extrafields['variant'] = packagedata['variants'][0]['label']
 
             result.append(pkg)
 
