@@ -1,4 +1,4 @@
-{% set repo_colwidth = 170 %}
+{% set repo_colwidth = 190 %}
 {% set version_colwidth = 90 %}
 {% set rowheight = 20 %}
 {% set hdrheight = 25 %}

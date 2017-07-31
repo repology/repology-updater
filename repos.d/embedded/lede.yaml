@@ -58,7 +58,7 @@
 
 - name: lede_trunk_arm_cortex_a9_vfpv3
   type: repository
-  desc: LEDE trunk ARM Cortex VFPv3
+  desc: LEDE trunk ARM Cortex A9 VFPv3
   family: openwrt
   color: '8f5902'
   sources:
