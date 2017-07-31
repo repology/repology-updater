@@ -506,7 +506,6 @@
 - { name: libzenxml,                   setname: zenxml                    }
 
 # L (continued)
-- { name: linux-kernel,                setname: linux                     }
 - { name: mate-brisk-menu,             setname: brisk-menu                }
 - { name: mbmon,                       setname: xmbmon                    }
 

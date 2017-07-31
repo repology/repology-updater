@@ -5,6 +5,12 @@
 - { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
 
 - name:
+    - alee-fonts
+    - alee-ttf
+    - fonts-alee
+  setname: "fonts:alee"
+
+- name:
     - alef
     - alef-fonts
     - alef-webfont
