@@ -500,6 +500,9 @@
 - { name: python, verpat: "2\\..*",    setname: python2 }
 - { name: python, verpat: "3\\..*",    setname: python3 }
 
+- { namepat: "lib(32|qt5)-?qtwebkit4?(-examples)?", setname: qtwebkit }
+- { namepat: "qt[45]([1567.]6?)?-?(qt)?webkit5?(-docs|-examples|-print|-docindex|-html|-qch|-source)?(-opensource-src|-and-demos)?", setname: qtwebkit }
+
 - { namepat: "ruby-?[0-9.]+",          setname: ruby }
 - { name: ruby, verpat: "1\\.8.*",     setname: ruby18 }
 - { name: ruby, verpat: "1\\.9.*",     setname: ruby19 }
@@ -586,6 +589,11 @@
 
 - { namepat: "vte[0-9._-]+",           setname: vte }
 - { name: [vte-common,vte-gtk2-compat,vte-gtk2-xfce,vte-gtk3,vte-reference], setname: vte }
+
+- { namepat: "libwebkitgtk[234]?",     setname: webkitgtk }
+- { namepat: "webkit(24?)?(-?gtk)+[1234]?(-2[.]0)?", setname: webkitgtk }
+- { namepat: "webkit2?",               setname: webkitgtk }
+- { name: webkit2gtk-unstable,         setname: webkitgtk, ignorever: true }
 
 - { namepat: "wesnoth[0-9.-]+",        setname: wesnoth }
 - { name: wesnoth-devel,               setname: wesnoth }
