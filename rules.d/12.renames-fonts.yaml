@@ -8,6 +8,7 @@
     - alee-fonts
     - alee-ttf
     - fonts-alee
+    - ttf-alee
   setname: "fonts:alee"
 
 - name:
