@@ -11,8 +11,10 @@
 - { name: ack,                                                       family: mageia,       ignorever: true }
 - { name: aften,                       ver: [ "0.05", "0.08" ],                            ignorever: true }
 - { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
+- { name: agda-stdlib,                                               family: gentoo,       ignorever: true } # documented broken versioning
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
+- { name: amule,                       ver: "2.4.0",                 family: [ mageia, debuntu ], ignorever: true } # unreleased
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
@@ -158,6 +160,7 @@
 - { name: quilt,                       verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
 - { name: r-hexbin,                    ver: "1.27.1-1",                                    ignorever: true } # guix fake
+- { name: racer,                       ver: "2.07",                                        ignorever: true }
 - { name: rage,                        ver: "0.3.0.042",                                   ignorever: true }
 - { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
