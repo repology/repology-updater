@@ -7,7 +7,7 @@
   family: centos
   color: '932279'
   sources:
-    - name: [ os, updates, extras ]
+    - name: [ os, updates ]
       fetcher: Repodata
       parser: Repodata
       url: 'http://vault.centos.org/centos/6/{source}/Source/'
