@@ -41,6 +41,7 @@
     - pwntools
     - pyalsaaudio
     - pyaudio
+    - pycassa
     - pygraphviz
     - pylint
     - pylint-celery
