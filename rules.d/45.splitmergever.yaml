@@ -587,6 +587,10 @@
 - { namepat: "vte[0-9._-]+",           setname: vte }
 - { name: [vte-common,vte-gtk2-compat,vte-gtk2-xfce,vte-gtk3,vte-reference], setname: vte }
 
+- { namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*", setname: webkitgtk }
+- { namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*-unstable", setname: webkitgtk, ignorever: true }
+- { namepat: "webkit[0-9._-]", setname: webkitgtk }  # assuming gtk
+
 - { namepat: "wesnoth[0-9.-]+",        setname: wesnoth }
 - { name: wesnoth-devel,               setname: wesnoth }
 
