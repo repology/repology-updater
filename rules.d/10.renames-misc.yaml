@@ -515,6 +515,8 @@
 - { name: mbmon,                       setname: xmbmon                    }
 
 # M
+- { name: m4ri,                        setname: libm4ri                   }
+- { name: m4rie,                       setname: libm4rie                  }
 - { name: mc46,                        setname: mc                        }
 - { name: mcron2,                      setname: mcron                     }
 - { name: mdocml,                      setname: mandoc                    } # mdocml is an old name (schwarze@openbsd.org)
