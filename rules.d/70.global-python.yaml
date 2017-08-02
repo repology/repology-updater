@@ -34,6 +34,7 @@
     - munch
     - pandocfilters
     - paramiko
+    - passlib
     - phply
     - pip
     - polyline
@@ -42,6 +43,8 @@
     - pyalsaaudio
     - pyaudio
     - pycassa
+    - pycha
+    - pychart
     - pygraphviz
     - pylint
     - pylint-celery
@@ -71,11 +74,13 @@
     - pytest-xdist
     - pytest-xvfb
     - pyusb
+    - pyviennacl
     - rabbyt
     - redis-py
     - redis-py-cluster
     - shutilwhich
     - sortedcontainers
+    - sphinxcontrib-spelling
     - stopit
     - todoman
     - utidylib
@@ -175,6 +180,7 @@
 - { name: "python:sphinx10",           setname: "python:sphinx"           }
 - { name: "python:uwsgi",              setname: uwsgi                     }
 - { name: "python:uwsgitop",           setname: uwsgitop                  }
+- { name: "python:waf",                setname: waf                       }
 - { name: "python:xdot",               setname: xdot                      }
 - { name: "python:youtube-dl",         setname: youtube-dl                }
 - { name: ["python:pypy", "python:pypy-bin"], setname: pypy               }
@@ -182,6 +188,7 @@
 
 - { name: "python:pyspatialite", ver: "3.0.1", ignorever: true            }
 - { name: "python:pyspatialite", family: pypi, unignorever: true          }
+- { name: "python:pycha", ver: "279", ignorever: true }
 
 - { name: "python:pygobject", verpat: "2.*", setname: "python:pygobject2" }
 - { name: "python:pygobject", verpat: "3.*", setname: "python:pygobject3" }

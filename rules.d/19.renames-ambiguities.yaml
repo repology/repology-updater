@@ -41,6 +41,10 @@
 - { name: emma,                        setname: emma-mysql, family: [arch, freebsd, debuntu] }
 - { name: emma,                        warning: "please classify me" }
 
+# not a browser
+- { name: epiphany,                    wwwpart: epiphany.sourceforge.net, setname: epiphany-game }
+- { name: epiphany,                    category: games-arcade, setname: epiphany-game }
+
 # file change monitor vs. file system checksum checker
 - { name: fswatch, verpat: "1.*",      setname: fswatch-mon }
 

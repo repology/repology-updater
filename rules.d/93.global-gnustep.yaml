@@ -38,6 +38,7 @@
 - { name: gnustep-agenda, setname: gnustep-simpleagenda }
 - { name: gnustep-sogo3, setname: sogo3 }
 - { name: addresses-for-gnustep, setname: gnustep-addresses }
+- { name: volume-app, setname: gnustep-volume }
 
   #- { name: aclock.app,                  setname: aclock,                   family: [ debuntu ]  }
   #- { name: addresses-for-gnustep,       setname: addresses,                family: [ debuntu ]  }

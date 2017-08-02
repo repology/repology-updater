@@ -4,4 +4,4 @@
 - { namepat: "fuse-emulator.*",        tolowername: true, replaceinname: { "_": "-" }, last: true } # protect from the next rule, has nothing to do with fusefs
 - { namepat: "fuse(?:fs)?-(.*)",       setname: "fusefs:$1" }
 - { name: curlftpfs,                   setname: "fusefs:$0" }
-- { name: encfs,                       setname: "fusefs:$0" }
+- { name: [encfs,encfs18],             setname: "fusefs:$0" }

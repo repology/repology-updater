@@ -132,6 +132,7 @@
 - { name: bugzilla50,                  setname: bugzilla                  }
 - { name: bullet3,                     setname: bullet                    }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
+- { name: bzflag-server,               setname: bzflag                    }
 - { name: bzr-tools,                   setname: bzrtools                  }
 
 # C
@@ -296,7 +297,10 @@
 - { name: enemyterritory,              setname: enemy-territory           }
 - { name: enigma_sdl,                  setname: enigma                    }
 - { name: entagged-tageditor,          setname: entagged,                 family: [ gentoo ]  }
+- { name: eot-utilities,               setname: eot-utils }
 - { name: ephoto-git,                  setname: ephoto, ignorever: true }
+- { name: epiphany-browser,            setname: epiphany                  }
+- { name: epiphany-unstable,           setname: epiphany, ignorever: true }
 - { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
 - { name: epsxe1.9,                    setname: epsxe                     }
 - { name: [eric4,eric5,eric6],         setname: eric                      }
@@ -478,6 +482,7 @@
 - { name: liblastfm0,                  setname: liblastfm                 }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
+- { name: [libmowgli-2,libmowgli2,mowgli], setname: libmowgli             }
 - { name: libmpcdec5,                  setname: libmpcdec                 }
 - { name: libmxml,                     setname: minixml }
 - { name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework], setname: ngspice }
@@ -494,14 +499,14 @@
 - { name: libsdl,                      setname: sdl }
 - { name: libsdl2,                     setname: sdl2 }
 - { name: libsdl_gfx13,                setname: sdl-gfx }
-- { name: libsfml,                     setname: sfml                      }
+- { name: [libsfml,compat-sfml16],     setname: sfml                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
-- { name: libuv1,                      setname: libuv                     }
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
-- { name: libtremor,                   setname: tremor                    }
-- { name: libzstd,                     setname: zstd                      }
-- { name: compat-sfml16,               setname: sfml                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
+- { name: libtremor,                   setname: tremor                    }
+- { name: libuv1,                      setname: libuv                     }
+- { name: libx264,                     setname: x264                      }
+- { name: libzstd,                     setname: zstd                      }
 - { name: libzzip,                     setname: zziplib                   }
 - { name: libzenxml,                   setname: zenxml                    }
 
@@ -596,6 +601,7 @@
 - { name: pioneerspacesim,             setname: pioneer                   }
 - { name: pdns-common,                 setname: pdns }
 - { name: [pdnsrec,powerdns-recursor], setname: pdns }
+- { name: phoenix-emu-project,         setname: phoenix-emu }
 - { name: powerdns,                    setname: pdns }
 - { name: [powerdns-geoip,powerdns-ldap,powerdns-mysql,powerdns-odbc,powerdns-pgsql], setname: pdns }
 - { name: pkg-bsd,                     setname: pkg,                      family: ravenports }
@@ -622,6 +628,7 @@
 
 # R
 - { name: r2e,                         setname: rss2email                 }
+- { name: randomize-lines,             setname: rl                        } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
 - { name: rdkafka,                     setname: librdkafka                }
 - { name: ringo,                       setname: ringojs                   }
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
@@ -683,6 +690,7 @@
 # U
 - { name: [uade123,uade2],             setname: uade                      }
 - { name: [unace-bin,unace-nonfree],   setname: unace                     }
+- { name: ultimate-stunts,             setname: ultimatestunts            }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
 - { name: [libupnp1.8,libupnp4],       setname: libupnp                   }
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
@@ -720,6 +728,7 @@
 - { name: xsel-conrad,                 setname: xsel                      }
 - { name: [xmobar-alsa,xmobar-volume], setname: xmobar                    }
 - { name: [xvid,libxvid],              setname: xvidcore                  }
+- { name: xmlbird,                     setname: libxmlbird                }
 
 # Y
 - { name: yofrankie-bge,               setname: yofrankie                 }
