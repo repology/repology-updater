@@ -626,6 +626,7 @@
 - { name: pnp4nagios-cgi,              setname: pnp4nagios }
 - { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
 - { name: postgresql-libpqxx,          setname: libpqxx                   }
+- { name: poudriere-devel,             setname: poudriere, ignorever: true }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
 - { name: [powdertoy, the-powder-toy, powder-toy-static], setname: powder-toy }
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
