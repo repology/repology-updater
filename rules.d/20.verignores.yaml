@@ -63,8 +63,6 @@
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignorever: true }
 - { name: e2fsprogs,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: ephoto,                      verpat: "20[0-9]{6}",                               ignorever: true }
-- { name: eternal-lands,               verpat: "[0-9]+",                                   ignorever: true }
-- { name: eternal-lands-data,          verpat: "[0-9]+",                                   ignorever: true }
 - { name: ethtool,                     verpat: "[0-9]+",                                   ignorever: true }
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignorever: true } # no such release
 - { name: f3,                          verpat: ".*unstable",                               ignorever: true } # nix garbage

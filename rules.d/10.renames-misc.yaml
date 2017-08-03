@@ -340,7 +340,6 @@
 - { name: firebase-tools,              setname: firebase-cli              }
 - { name: fish-fillets,                setname: fillets-ng                }
 - { name: fish-fillets-ng,             setname: fillets-ng                }
-- { name: flacon-qt5,                  setname: flacon                    }
 - { name: [flare-engine, flare-game],  setname: flare                     } # these are actually distinct packages, but too many repos merge them together
 - { name: fleetctl,                    setname: fleet }
 - { name: [flim-xemacs,flim-emacs25,emacs-flim],  setname: flim           }
