@@ -315,6 +315,12 @@
   setname: "fonts:gentium-basic"
 
 - name:
+    - gw-fonts-ttf
+    - fonts-georgewilliams
+    - ttf-georgewilliams
+  setname: "fonts:georgewilliams"
+
+- name:
     - fonts-sil-gentiumplus
     - fonts-sil-gentiumplus-compact
     - gentiumplus

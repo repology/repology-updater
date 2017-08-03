@@ -8,7 +8,17 @@
 - { category: dev-haskell,             setname: "haskell:$0", family: [ gentoo ] }
 - { namepat: "ghc[0-9.]+-(.*)",        setname: "haskell:$1", family: [ sisyphus ] }
 
-- { name: haxml,                       setname: "haskell:haxml" }
+# Force modules
+- name:
+    - haxml
+    - hpc-coveralls
+    - hspec-discover
+    - hspec-setup
+    - lentil-setup
+    - yackage
+  setname: "haskell:$0"
 
-- { name: "haskell:darcs",             setname: darcs              } # ungeneralize as it's more of standalone application
-- { name: "haskell:xmobar",            setname: xmobar             } # ungeneralize as it's more of standalone application
+# APPS, not modules
+- { name: "haskell:darcs",             setname: darcs              }
+- { name: "haskell:xmobar",            setname: xmobar             }
+- { name: "haskell:xmonad",            setname: xmonad             }

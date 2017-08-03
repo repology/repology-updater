@@ -137,6 +137,7 @@
 
 # C
 - { name: [c-kermit,kermit],           setname: ckermit                   }
+- { name: c-reduce,                    setname: creduce                   }
 - { name: c2048,                       setname: 2048.c                    }
 - { name: cacti-cactid,                setname: cacti-spine               } # cactid renamed to spine upstream
 - { name: cairo-clock-ccw,             setname: cairo-clock               }
@@ -167,6 +168,7 @@
 - { name: centerim-devel,              setname: centerim, ignorever: true }
 - { name: cfr-decompiler,              setname: cfr }
 - { name: chakra,                      setname: chakracore, family: homebrew }
+- { name: chefdk,                      setname: chef-dk }
 - { name: clipit-gtk3,                 setname: clipit                    }
 - { name: clipperlib,                  setname: polyclipping              }
 - { name: cloud-watch,                 setname: aws-cw-tools              }
@@ -253,6 +255,7 @@
 - { name: [docker-io,docker.io],       setname: docker                    }
 - { name: docker-git-x86,              setname: docker, ignorever: true   } # ignore version just for the cause, because of suspicious name
 - { name: [dogecoind,dogecoin-qt,dogecoin-daemon], setname: dogecoin      }
+- { name: drbl-experimental,           setname: drbl, ignorever: true     }
 - { name: dsniff-nox11,                setname: dsniff                    }
 - { name: [dspam-mysql,dspam-pgsql,dspam-web], setname: dspam             }
 - { name: dungeoncrawl,                setname: dungeon-crawl             }
@@ -314,6 +317,7 @@
 - { name: evopedia_qt,                 setname: evopedia                  }
 - { name: exactimage,                  setname: exact-image               }
 - { name: [exercism, golang-github-exercism-cli], setname: exercism-cli   }
+- { name: exaile-devel,                setname: exaile, ignorever: true }
 - { name: exim4,                       setname: exim                      }
 - { name: expat21,                     setname: expat                     }
 - { name: eye-d3,                      setname: eyed3                     }
@@ -348,7 +352,7 @@
 - { name: flrig-docs,                  setname: flrig                     }
 - { name: [fltk-docs,fltk-editor,fltk-games,fltk11], setname: fltk        }
 - { name: fluid-synth,                 setname: fluidsynth                }
-- { name: fluxbox-wm,                  setname: fluxbox                   }
+- { name: [fluxbox-wm,fluxbox-noslit], setname: fluxbox                   }
 - { name: flwm-tc,                     setname: flwm                      }
 - { name: foldingathome-noroot,        setname: foldingathome             }
 - { name: foo2zjs-nightly,             setname: foo2js, ignorever: true   }
@@ -376,8 +380,10 @@
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle                  }
 - { name: garlic-doc,                  setname: garlic                    }
+- { name: garmin-forerunner-tools,     setname: garmintools               }
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
 - { name: [gdal1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4], setname: gdal }
+- { name: gchemutils,                  setname: gnome-chemistry-utils }
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geotiff,                     setname: libgeotiff                }
@@ -390,6 +396,7 @@
 - { name: git-flow,                    setname: gitflow                   }
 - { name: gkrellm2,                    setname: gkrellm                   }
 - { name: gl117,                       setname: gl-117                    }
+- { name: [gnomephotoprinter,gnome-photo-print], setname: gnome-photo-printer }
 - { name: gnu-barcode,                 setname: barcode                   }
 - { name: [gnu-chess,gnuchess4],       setname: gnuchess                  }
 - { name: gnu-complexity,              setname: complexity                }
@@ -402,6 +409,7 @@
 - { name: gnu-typist,                  setname: gtypist                   }
 - { name: [gnu-units,gunits],          setname: units                     }
 - { name: [gnu-which,gwhich],          setname: which                     }
+- { name: [google-gflags,libgflags],   setname: gflags                    }
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: google-sparsehash,           setname: sparsehash                }
 - { name: [googletest,libgtest],       setname: gtest                     }
@@ -425,13 +433,16 @@
 
 # I
 - { name: iccexamin,                   setname: icc-examin                }
+- { name: icewm2,                      setname: icewm }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
 - { name: icon-lang,                   setname: icon                      }
 - { name: [intel-tbb,libtbb],          setname: tbb                       }
 - { name: ir.lv2,                      setname: ir-lv2                    }
+- { name: ircii-current,               setname: ircii, ignorever: true }
 - { name: isc-kea,                     setname: kea }
 - { name: iso_8879,                    setname: iso8879 }
+- { name: ingen-unstable,              setname: ingen, ignorever: true }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition,intellij], setname: intellij-idea-community }
 - { name: intellij-idea-ce-eap,        setname: intellij-idea-community, ignorever: true }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre,intellij-ultimate], setname: intellij-idea-ultimate }
@@ -452,6 +463,7 @@
 - { name: kyoto-tycoon,                setname: kyototycoon               }
 
 # L
+- { name: lantern-headless,            setname: lantern }
 - { name: lapackpp,                    setname: lapack++                  }
 - { name: lapack-tmg,                  setname: lapack                    } # component of
 - { name: lapack-atlas,                setname: lapack                    }
@@ -504,6 +516,7 @@
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: libtremor,                   setname: tremor                    }
+- { name: [libtsm-asciinema,libtsm-patched], setname: libtsm }
 - { name: libuv1,                      setname: libuv                     }
 - { name: libx264,                     setname: x264                      }
 - { name: libzstd,                     setname: zstd                      }
@@ -595,6 +608,7 @@
 - { name: open-mpi,                    setname: openmpi }
 - { name: open-ocd,                    setname: openocd }
 - { name: open-zwave,                  setname: openzwave }
+- { name: osmpbf,                      setname: libosmpbf }
 
 # P
 - { name: pacmanarena,                 setname: pacman-arena              }

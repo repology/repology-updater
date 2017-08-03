@@ -26,11 +26,14 @@
     - defusedxml
     - dulwich
     - geojson
+    - grokmirror
     - hg-git
     - hgsubversion
     - hy
     - internetarchive
+    - jsonschema
     - khal
+    - lektor
     - munch
     - pandocfilters
     - paramiko
@@ -40,6 +43,7 @@
     - polyline
     - pre-commit
     - pwntools
+    - py-ubjson
     - pyalsaaudio
     - pyaudio
     - pycassa
@@ -163,6 +167,7 @@
 - { name: "python:awscli",             setname: awscli                    }
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:diffoscope",         setname: diffoscope                }
+- { name: "python:dreampie",           setname: dreampie                  }
 - { name: "python:eric",               setname: eric                      }
 - { name: "python:eyed3",              setname: eyed3                     }
 - { name: "python:gixy",               setname: gixy                      }
@@ -172,6 +177,7 @@
 - { name: ipython2, verpat: "6\\..*",   setname: ipython                  }
 - { name: [ipython-genutils,ipython_genutils], setname: "python:ipython_genutils" }
 - { name: [ipython-ipyparallel,ipython2-ipyparallel,ipyparallel], setname: "python:ipyparallel" }
+- { name: "python:pelican",            setname: pelican                   }
 - { name: "python:pgcli",              setname: pgcli                     }
 - { name: "python:pypanel",            setname: pypanel                   }
 - { name: "python:qbzr",               setname: qbzr                      }
