@@ -600,6 +600,7 @@
 - { name: opencv2,                     setname: opencv                    }
 - { name: [openjp2, libopenjpeg2.0],   setname: openjpeg2                 }
 - { name: openshot-qt,                 setname: openshot }
+- { name: openssh-.*,                  setname: openssh                   }
 - { name: [openvpn-mbedtls, openvpn-polarssl, openvpn2, openvpn23], setname: openvpn }
 - { name: open-tyrian,                 setname: opentyrian }
 - { name: open-babel,                  setname: openbabel }
