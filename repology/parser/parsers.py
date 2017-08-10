@@ -50,4 +50,5 @@ from .slackbuilds import SlackBuildsParser
 from .snap import SnapJsonParser
 from .spec import SpecParser
 from .srclist import SrcListParser
+from .voidlinux import VoidLinuxGitParser
 from .yacp import YACPGitParser

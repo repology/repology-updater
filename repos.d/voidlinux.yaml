@@ -1,0 +1,22 @@
+###########################################################################
+# Voidlinux
+###########################################################################
+- name: voidlinux
+  type: repository
+  desc: Void Linux
+  family: voidlinux
+  sources:
+    - name: xbps
+      fetcher: Git
+      parser: VoidLinuxGit
+      url: https://github.com/voidlinux/void-packages.git
+      sparse_checkout: [ 'srcpkgs/**/template' ]
+  repolinks:
+    - desc: Void Linux home
+      url: https://www.voidlinux.eu/
+    - desc: Void Linux package repository
+      url: https://github.com/voidlinux/void-packages
+  packagelinks:
+    - desc: Git
+      url: 'https://github.com/voidlinux/void-packages/tree/master/srcpkgs/{name}'
+  tags: [ all, production, have_testdata ]
