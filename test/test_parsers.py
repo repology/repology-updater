@@ -164,6 +164,21 @@ class TestParsers(unittest.TestCase):
                 'licenses': ['LGPL-2'],
             }
         )
+        self.check_package(
+            'zaproxy',
+            {
+                'repo': 'pentoo',
+                'family': 'gentoo',
+                'name': 'zaproxy',
+                'version': '2.6.0',
+                'category': 'net-proxy',
+                'maintainers': [],
+                'homepage': 'https://github.com/zaproxy/zaproxy',
+                'comment': 'The OWASP Zed Attack Proxy for finding vulnerabilities in web applications',
+                'downloads': ['https://github.com/zaproxy/zaproxy/releases/download/2.6.0/ZAP_2.6.0_Core.tar.gz'],
+                'licenses': ['Apache-2.0'],
+            }
+        )
 
     def test_arch(self):
         self.check_package(
