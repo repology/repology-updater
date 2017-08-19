@@ -740,6 +740,10 @@ def metapackage_report(name):
             flask.flash('Could not add report: please fill out the form', 'danger')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
 
+        if '<a href' in comment:
+            flask.flash('Spammers not welcome, HTML not allowed', 'danger')
+            return flask.redirect(flask.url_for('metapackage_report', name=name))
+
         get_db().AddReport(
             name,
             need_verignore,
