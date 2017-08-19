@@ -84,7 +84,7 @@
 - { name: frozen-bubble,               ver: "2.2.1",                 family: [ fedora ],   ignorever: true } # 2.2.1 was never released, it should be 2.2.1beta1
 - { namepat: "gcc[0-9]*",              verpat: ".*20[0-9]{6}.*",                           ignorever: true } # snapshots
 - { namepat: "gcc[0-9]*",              verpat: "7\\.1\\.1.*",        family: [fedora,arch,opensuse], ignorever: true } # snapshots
-- { name: geary,                       ver: "0.12.0",                family: fedora,       ignorever: true } # not released yet
+- { name: geary,                       ver: "0.12.0",                family: [fedora,debuntu], ignorever: true } # not released yet
 - { name: gdb,                         verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gzip,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
@@ -119,6 +119,7 @@
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
 - { name: libusbmuxd,                  ver: "1.1.0",                 family: openwrt,      ignorever: true } # fake
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignorever: true } # version from mediainfo is used, while libzen has its own version scheme
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 - { name: mame,                        ver: "0153s",                                       ignorever: true } # pclinuxos
@@ -178,6 +179,7 @@
 - { name: sqlninja,                    ver: ["0.2.999"],                                   ignorever: true } # it's 0.2.999-alpha1
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignorever: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
 - { name: sunxi-tools,                 verpat: "20[0-9]{6}",                               ignorever: true }
+- { name: sutils,                      verpat: "[0-9][0-9]",                               ignorever: true } # manjaro, aur snapshots
 - { name: tar,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # obsoleted
 - { name: tidy,                        ver: "090315.c",                                    ignorever: true } # obsoleted

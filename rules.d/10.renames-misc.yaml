@@ -518,6 +518,7 @@
 - { name: [libtsm-asciinema,libtsm-patched], setname: libtsm }
 - { name: libuv1,                      setname: libuv                     }
 - { name: libx264,                     setname: x264                      }
+- { name: libzen0,                     setname: libzen                    }
 - { name: libzstd,                     setname: zstd                      }
 - { name: libzzip,                     setname: zziplib                   }
 - { name: libzenxml,                   setname: zenxml                    }
@@ -607,6 +608,18 @@
 - { name: open-mpi,                    setname: openmpi }
 - { name: open-ocd,                    setname: openocd }
 - { name: open-zwave,                  setname: openzwave }
+- name:
+    - openssh-gssapi
+    - openssh-knock
+    - openssh-krb5
+    - openssh-multiple-bindaddress
+    - openssh-portable
+    - openssh-secp256k1
+    - openssh-selinux
+    - openssh-ubuntu
+    - openssh-with-hpn
+    - openssh-with-kerberos
+  setname: openzwave
 - { name: osmpbf,                      setname: libosmpbf }
 
 # P
