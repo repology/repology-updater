@@ -620,7 +620,7 @@
     - openssh-ubuntu
     - openssh-with-hpn
     - openssh-with-kerberos
-  setname: openzwave
+  setname: openssh
 - { name: osmpbf,                      setname: libosmpbf }
 
 # P
