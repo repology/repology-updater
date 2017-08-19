@@ -82,33 +82,6 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu_16_10
-  type: repository
-  desc: Ubuntu 16.10
-  family: debuntu
-  color: 'e95420'
-  valid_till: 2017-08-01
-  sources:
-    - name: [ yakkety/main, yakkety/multiverse, yakkety/restricted, yakkety/universe, yakkety-updates/main, yakkety-updates/multiverse, yakkety-updates/restricted, yakkety-updates/universe ]
-      fetcher: File
-      parser: DebianSources
-      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
-      compression: gz
-      subrepo: '{source}'
-  repolinks:
-    - desc: Ubuntu packages
-      url: http://packages.ubuntu.com/
-    - desc: Ubuntu packages in yakkety
-      url: http://packages.ubuntu.com/yakkety/
-  packagelinks:
-    - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/yakkety/{name}' # XXX: we should use binare package names here!
-    - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
-    - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
-  tags: [ all, production, ubuntu ]
-
 - name: ubuntu_17_04
   type: repository
   desc: Ubuntu 17.04
