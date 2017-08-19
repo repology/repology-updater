@@ -412,6 +412,7 @@
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: google-sparsehash,           setname: sparsehash                }
 - { name: [googletest,libgtest],       setname: gtest                     }
+- { name: google-glog,                 setname: glog                      }
 - { name: gopro-vrplayer,              setname: gopro-vr-player           }
 - { name: gopro-vr-player-beta,        setname: gopro-vr-player, ignorever: true }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
