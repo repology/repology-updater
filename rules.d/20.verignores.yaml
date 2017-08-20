@@ -84,7 +84,8 @@
 - { name: frozen-bubble,               ver: "2.2.1",                 family: [ fedora ],   ignorever: true } # 2.2.1 was never released, it should be 2.2.1beta1
 - { namepat: "gcc[0-9]*",              verpat: ".*20[0-9]{6}.*",                           ignorever: true } # snapshots
 - { namepat: "gcc[0-9]*",              verpat: "7\\.1\\.1.*",        family: [fedora,arch,opensuse], ignorever: true } # snapshots
-- { name: geary,                       ver: "0.12.0",                family: [fedora,debuntu], ignorever: true } # not released yet
+- { name: geary,                       ver: "0.12",                  family: debuntu,      ignorever: true } # not released yet
+- { name: geary,                       ver: "0.12.0",                family: fedora,       ignorever: true } # not released yet
 - { name: gdb,                         verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gzip,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
