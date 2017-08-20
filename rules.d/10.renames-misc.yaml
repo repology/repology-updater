@@ -612,6 +612,7 @@
 - { name: open-ocd,                    setname: openocd }
 - { name: open-zwave,                  setname: openzwave }
 - name:
+    - gsi-openssh
     - openssh-gssapi
     - openssh-knock
     - openssh-krb5
