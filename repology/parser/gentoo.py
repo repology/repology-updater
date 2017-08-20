@@ -100,7 +100,14 @@ class GentooGitParser():
                             if email_node is not None and email_node.text is not None:
                                 maintainers += GetMaintainers(email_node.text)
 
-                if not maintainers:
+                reponame_path = os.path.join(path, 'profiles', 'repo_name')
+                if os.path.isfile(reponame_path):
+                    with open(reponame_path) as reponame_file:
+                        reponame = reponame_file.read()
+                else:
+                    reponame = 'unknown'
+
+                if not maintainers and reponame == 'gentoo':
                     # If we have no maintainer set, assign Gentoo's default maintainer value
                     # See https://wiki.gentoo.org/wiki/GLEP:67#Bug_assignment
                     maintainers = ['maintainer-needed@gentoo.org']
