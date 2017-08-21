@@ -2,4 +2,4 @@
 
 # Tryton (wtf is that); needs to be after python
 - { namepat: "(?:python:)?(trytond?)[0-9]*", setname: "$1" }
-- { namepat: "(?:python:)?trytond?[0-9_-](?:modules?-)?(.*)", setname: "tryton:$1" }
+- { namepat: "(?:python:)?trytond?[0-9]*[_-](?:modules?-)?(.*)", setname: "tryton:$1" }
