@@ -58,7 +58,7 @@
 - { name: hugo,                        setname: hugo-sitegen }
 - { name: gohugo,                      setname: hugo-sitegen }
 
-- { name: git-fame,                    setname: git-fame-rb, wwwpart: oleander.io }
+- { name: git_fame,                    setname: git-fame-rb, wwwpart: oleander.io }
 
 # distributed compiler vs. stream download utility
 - { name: icecream,                    setname: icecream-distributed-compiler, verpat: "1\\.[01].*" }
