@@ -47,6 +47,7 @@
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
 - { name: coreutils,                   verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: crack-attack,                ver: "1.1.15_cvs_01",                               ignorever: true }
 - { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
