@@ -1,7 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # mail client vs. asynchronous synthesis system
-- { name: balsa,                       setname: balsa-synthesis,          cagetory: sci-electronics }
+- { name: balsa,                       setname: balsa-synthesis,          category: sci-electronics }
 
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
 
