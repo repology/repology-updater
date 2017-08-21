@@ -1,6 +1,8 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-# Ambiguous upstream package names, careful!
+# mail client vs. asynchronous synthesis system
+- { name: balsa,                       setname: balsa-synthesis,          cagetory: sci-electronics }
+
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
 
 - { name: crystal,                     setname: crystal-lang,             family: [ arch, freshcode ] }
