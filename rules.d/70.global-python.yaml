@@ -193,6 +193,9 @@
 - { name: ["python:pypy", "python:pypy-bin"], setname: pypy               }
 - { name: ["python:pypy3", "python:pypy3-bin"], setname: pypy3            }
 
+# these are not pypi modules, but pyalsa, python bindings from alsa project
+- { name: ["python:alsa", "python:pyalsa"], setname: pyalsa }
+
 - { name: "python:pyspatialite", ver: "3.0.1", ignorever: true            }
 - { name: "python:pyspatialite", family: pypi, unignorever: true          }
 - { name: "python:pycha", ver: "279", ignorever: true }
