@@ -515,6 +515,7 @@
 - { name: libsdl_gfx13,                setname: sdl-gfx }
 - { name: [libsfml,compat-sfml16],     setname: sfml                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
+- { name: libsysstat-qt5,              setname: libsysstat                }
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: libtremor,                   setname: tremor                    }
