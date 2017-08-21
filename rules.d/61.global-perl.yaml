@@ -17,7 +17,7 @@
 - { name: backuppc-xs,                 setname: "perl:backuppc-xs" }
 - { name: perl-build,                  setname: "perl:build" }
 - { name: cpanminus,                   setname: "perl:app-cpanminus" }
-- { name: cddb-get,                    setname: "perl:$0" }
+- { name: cddb_get,                    setname: "perl:$0" }
 
 # specific perl ignores
 - { name: "perl:anyevent",             ver: [ "7.070", "7.120", "7.130" ], ignorever: true }
