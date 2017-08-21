@@ -238,7 +238,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
     )
 
 
-@app.route('/')  # XXX: redirect to metapackages/all?
+@app.route('/')
 def index():
     repostats = [
         repo for repo in get_db().GetRepositories()
