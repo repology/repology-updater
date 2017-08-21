@@ -78,6 +78,7 @@ schemas = {
             Required('family'): Any(*families),
             'color': str,
             'valid_till': date,
+            'default_maintainer': str,
             Required('sources'): [
                 {
                     Required('name'): Any(str, [str]),
