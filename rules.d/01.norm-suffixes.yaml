@@ -1,4 +1,4 @@
 - { family: macports, namepat: "(.*)-devel", setname: "$1", ignorever: true }
-- { family: msys2, namepat: "(.*)-git", setname: "$1", ignorever: true }
+#- { family: msys2, namepat: "(.*)-git", setname: "$1", ignorever: true }
 
 # XXX: handle -devel for freebsd?
