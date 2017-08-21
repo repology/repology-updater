@@ -4,7 +4,7 @@
 - { namepat: "archipel-agent-.*",      setname: "archipel-agents", family: [ debuntu ] }
 - { namepat: "asterisk-core-sounds-.*", setname: "asterisk-core-sounds", family: [ openbsd ] }
 - { namepat: "asterisk-extra-sounds-.*", setname: "asterisk-extra-sounds", family: [ openbsd ] }
-- { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", family: [ openbsd, arch ] }
+- { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", family: [ sisyphus ] }
 - { namepat: "eric-i18n-.*",           setname: "eric-i18n" }
 - { namepat: "firefox-kde-i18n-.*",    setname: "firefox-kde-i18n" }
 - { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n" }
