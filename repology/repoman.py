@@ -179,10 +179,19 @@ class RepositoryManager:
             self.__GetSourcePath(repository, source)
         )
 
-        # fill subrepos
-        if 'subrepo' in source:
-            for package in packages:
+        logger.Log('parsing source {} postprocessing'.format(source['name']))
+
+        for package in packages:
+            # - fill subrepos
+            if 'subrepo' in source:
                 package.subrepo = source['subrepo']
+
+            # - fill default maintainer
+            if not package.maintainers:
+                if 'default_maintainer' in repository:
+                    package.maintainers = [repository['default_maintainer']]
+                else:
+                    package.maintainers = ['fallback-maintainer-{}@repology'.format(repository['name'])]
 
         logger.Log('parsing source {} complete'.format(source['name']))
 

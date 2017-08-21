@@ -100,11 +100,6 @@ class GentooGitParser():
                             if email_node is not None and email_node.text is not None:
                                 maintainers += GetMaintainers(email_node.text)
 
-                if not maintainers:
-                    # If we have no maintainer set, assign Gentoo's default maintainer value
-                    # See https://wiki.gentoo.org/wiki/GLEP:67#Bug_assignment
-                    maintainers = ['maintainer-needed@gentoo.org']
-
                 for ebuild in os.listdir(package_path):
                     if not ebuild.endswith('.ebuild'):
                         continue

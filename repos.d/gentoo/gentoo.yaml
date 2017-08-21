@@ -6,6 +6,7 @@
   desc: Gentoo
   family: gentoo
   color: '62548f'
+  default_maintainer: maintainer-needed@gentoo.org
   sources:
     - name: gentoo
       fetcher: Git
