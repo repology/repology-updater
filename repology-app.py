@@ -1156,6 +1156,22 @@ def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
     return api_v1_metapackages_generic(bound, MaintainerOutdatedQueryFilter(maintainer))
 
 
+@app.route('/api/v1/repository/<repo>/problems')
+def api_v1_repository_problems(repo):
+    return (
+        json.dumps(get_db().GetProblems(repo=repo)),
+        {'Content-type': 'application/json'}
+    )
+
+
+@app.route('/api/v1/maintainer/<maintainer>/problems')
+def api_v1_maintainer_problems(maintainer):
+    return (
+        json.dumps(get_db().GetProblems(maintainer=maintainer)),
+        {'Content-type': 'application/json'}
+    )
+
+
 if __name__ == '__main__':
     if app.config['PROFILE']:
         app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])

@@ -201,6 +201,11 @@ class TestFlask(unittest.TestCase):
 
         self.checkurl_json('/api/v1/metapackages/by-maintainer/amdmi3@freebsd.org/', has=['kiconvtool'])
 
+    def test_api_v1_problems(self):
+        # XXX: empty output for now
+        self.checkurl_json('/api/v1/maintainer/amdmi3@freebsd.org/problems')
+        self.checkurl_json('/api/v1/repository/freebsd/problems')
+
 
 if __name__ == '__main__':
     unittest.main()
