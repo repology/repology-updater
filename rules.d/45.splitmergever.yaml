@@ -298,6 +298,10 @@
 - { namepat: "jersey[0-9]+",           setname: jersey }
 - { name: jersey, verpat: "1\\..*",    setname: jersey1 }
 
+- { name: [jpeg,libjpeg,jpeg-turbo,libjpeg-turbo], setname: jpeg }
+- { namepat: "libjpeg[0-9]+([a-z]|-turbo)?", setname: jpeg }
+- { name: jpeg, verpat: "1\\..*",      setname: libjpeg-turbo }
+
 - { namepat: "kdelibs[0-9]+",          setname: kdelibs }
 - { name: kdelibs, verpat: "3\\..*",   setname: kdelibs3 }
 - { name: kdelibs, verpat: "4\\..*",   setname: kdelibs4 }
@@ -444,6 +448,7 @@
 - { name: openjdk, verpat: "7.*", setname: openjdk7 }
 - { name: openjdk, verpat: "6.*", setname: openjdk6 }
 
+- { namepat: "(?:lib)?openjpeg[0-9]*", setname: openjpeg }
 - { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
 - name:
