@@ -661,6 +661,10 @@
 - { name: poudriere-devel,             setname: poudriere, ignorever: true }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
 - { name: [powdertoy, the-powder-toy, powder-toy-static], setname: powder-toy }
+- { name: psi+,                        setname: psi-plus                  }
+- { name: [psi+-plugins-psimediaplugin,psi-plus-plugin-psimedia], setname: psimedia }
+- { name: psi-im,                      setname: psi                       }
+- { name: psicode,                     setname: psi4                      }
 - { name: puppet4,                     setname: puppet,                   family: [ freebsd ] }
 - { name: puzzles,                     setname: sgt-puzzles               } # not completely safe, but other puzzles were not encountered yet
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }

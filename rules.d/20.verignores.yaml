@@ -159,6 +159,7 @@
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignorever: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
+- { name: psimedia,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
 - { name: pytrainer,                   ver: ["1.10.1", "1.10.2"],    family: debuntu,      ignorever: true }
 - { name: quota,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
