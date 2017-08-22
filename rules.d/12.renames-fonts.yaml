@@ -104,6 +104,15 @@
   setname: "fonts:cheapskate"
 
 - name:
+    - aajohan-comfortaa-fonts
+    - comfortaa
+    - comfortaa-ttf
+    - fonts-comfortaa
+    - fonts-ttf-aajohan-comfortaa
+    - ttf-comfortaa
+  setname: "fonts:comfortaa"
+
+- name:
     - consolamono-ttf
     - fonts-ttf-consolamono
   setname: "fonts:consolamono"

@@ -12,6 +12,7 @@
 - { name: 3dchess,                     setname: 3dc,                      family: [ debuntu ] }
 
 # A
+- { name: aap,                         setname: a-a-p                     }
 - { name: abuse_sdl,                   setname: abuse                     }
 - { name: accounts-qt5,                setname: accounts-qt ,             family: [ sisyphus ] }
 - { name: abbaye,                      setname: abbaye-des-morts          }
@@ -60,6 +61,7 @@
 - { name: armagetronad-server,         setname: armagetronad              } # merge
 - { name: [arpack-ng-mpich,arpack-ng-openmpi,libarpack-ng], setname: arpack-ng }
 - { name: arpack, verpat: "[34]\\..*", setname: arpack-ng }
+- { name: arx,                         setname: arx-libertatis            }
 - { name: [astrometrynet,astrometry.net], setname: astrometry             }
 - { name: atk1.0,                      setname: atk                       }
 - { name: atk2mm,                      setname: atkmm                     }
@@ -79,6 +81,10 @@
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: archi-steam-farm,            setname: asf }
 - { name: atomic_ops,                  setname: libatomic-ops }
+- { name: astromatic-psfex,            setname: psfex }
+- { name: astromatic-scamp,            setname: scamp }
+- { name: astromatic-sextractor,       setname: sextractor }
+- { name: astromatic-swarp,            setname: swarp }
 - { name: [audacious-gtk3,audacious-core,audacious-qt5,audacious2,audacious-itself], setname: audacious }
 - { name: audacious2-plugins,          setname: audacious-plugins         }
 - { name: audacity-freeworld,          setname: audacity                  }
@@ -97,6 +103,7 @@
 - { name: balsa-gtk2,                  setname: balsa                     }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
+- { name: bazaar,                      setname: bzr                       }
 - { name: bcel5_3,                     setname: bcel                      }
 - { name: bib-tool,                    setname: bibtool                   }
 - { name: bisoncpp,                    setname: bisonc++                  }
@@ -115,6 +122,7 @@
 - { name: [blobby2,blobby-volley],     setname: blobby                    }
 - { name: [blockout2,blockoutii],      setname: blockout                  }
 - { name: bluedevil5,                  setname: bluedevil                 }
+- { name: bnd1.50,                     setname: bnd                       }
 - { name: boaconstructor,              setname: boa-constructor           }
 - { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect,boehm_garbage_collector,bdw-gc,gc], setname: boehm-gc }
 - { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
@@ -428,9 +436,10 @@
 - { name: gss-proxy,                   setname: gssproxy                  }
 - { name: [gucharmap-gtk2,gucharmap7], setname: gucharmap                 }
 - { name: [gvim,gvim-gtk2],            setname: vim                       }
+- { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 
 # H
-- { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
+- { name: hadoop2,                     setname: hadoop                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hg-flow,                     setname: hgflow }
 - { name: html2text-with-utf8,         setname: html2text }
@@ -498,6 +507,7 @@
 - { name: liblastfm0,                  setname: liblastfm                 }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
+- { name: libmikmod2,                  setname: libmikmod                 }
 - { name: [libmowgli-2,libmowgli2,mowgli], setname: libmowgli             }
 - { name: libmpcdec5,                  setname: libmpcdec                 }
 - { name: libmxml,                     setname: minixml }
@@ -575,6 +585,7 @@
 - { name: mesa-libglu,                 setname: libglu                    }
 - { namepat: "mesa-lts-.*",            setname: mesa                      }
 - { name: [glw,mesa-glw,mesa-libglw],  setname: libglw                    }
+- { name: mirrormagic-sdl,             setname: mirrormagic               }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
 - { name: multicorn,                   setname: postgresql-multicorn      }
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
@@ -636,6 +647,7 @@
 - { name: pioneerspacesim,             setname: pioneer                   }
 - { name: pdns-common,                 setname: pdns }
 - { name: [pdnsrec,powerdns-recursor], setname: pdns }
+- { name: pgplot5,                     setname: pgplot }
 - { name: phoenix-emu-project,         setname: phoenix-emu }
 - { name: powerdns,                    setname: pdns }
 - { name: [powerdns-geoip,powerdns-ldap,powerdns-mysql,powerdns-odbc,powerdns-pgsql], setname: pdns }
@@ -645,6 +657,7 @@
 - { name: pnp4nagios-cgi,              setname: pnp4nagios }
 - { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
 - { name: postgresql-libpqxx,          setname: libpqxx                   }
+- { name: [postgresql-pglogical,pglogical2], setname: pglogical }
 - { name: poudriere-devel,             setname: poudriere, ignorever: true }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
 - { name: [powdertoy, the-powder-toy, powder-toy-static], setname: powder-toy }
@@ -681,6 +694,7 @@
 - { name: sdlpango,                    setname: sdl-pango,                family: [ debuntu ]  }
 - { namepat: "sendmail\\+.*",          setname: sendmail,                 family: [ freebsd ]  }
 - { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
+- { name: searx-py3,                   setname: searx                     }
 - { name: seven-kingdoms,              setname: 7kaa                      }
 - { name: sfk,                         setname: swissfileknife            }
 - { name: sha1dc,                      setname: sha1collisiondetection    }
@@ -710,6 +724,7 @@
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
 - { name: [tiger-vnc,tigervnc-viewer], setname: tigervnc }
 - { name: talk-filters,                setname: talkfilters }
+- { name: tecla,                       setname: libtecla }
 - { name: tigervnc-devel,              setname: tigervnc, ignorever: true }
 - { name: [tintin,tintinxx],           setname: tintin++                  }
 - { name: [tiled-java,tiled-qt],       setname: tiled                     }

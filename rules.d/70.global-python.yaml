@@ -18,13 +18,18 @@
 # turn python modules into such
 - name:
     - 3to2
+    - aiopg
+    - aiozmq
+    - aplpy
     - backports-abc
     - bicyclerepair
+    - boto3
     - cartopy
     - cherrypy
     - decoratortools
     - defusedxml
     - dulwich
+    - empy
     - geojson
     - grokmirror
     - hg-git
@@ -32,9 +37,11 @@
     - hy
     - internetarchive
     - jsonschema
+    - kapteyn
     - khal
     - lektor
     - munch
+    - netifaces
     - pandocfilters
     - paramiko
     - passlib
@@ -46,6 +53,7 @@
     - py-ubjson
     - pyalsaaudio
     - pyaudio
+    - pyavm
     - pycassa
     - pycha
     - pychart
@@ -99,6 +107,7 @@
 # detect python modules)
 - name:
     - bitarray
+    - bottleneck
     - colorama
     - ctypes
     - darts.util.lru

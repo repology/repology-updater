@@ -90,6 +90,8 @@
 
 - { name: poster, setname: "python:poster", category: python } # python module, not a postscript utility
 
+- { name: scamp, wwwpart: sourceforge.net/projects/scamp, setname: scamp-clamav }
+
 - { name: scramble, wwwpart: xffm, setname: scramble-xffm } # wtf is that
 
 # sphinx search
