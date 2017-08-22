@@ -18,6 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
+import html
 import os
 import sys
 from random import shuffle
@@ -100,7 +101,7 @@ def Main():
     print('<?xml version="1.0" encoding="UTF-8"?>')
     print('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
     for url in urls:
-        print('<url><loc>' + options.www_home + url + '</loc><changefreq>daily</changefreq></url>')
+        print('<url><loc>' + html.escape(options.www_home + url) + '</loc><changefreq>daily</changefreq></url>')
     print('</urlset>')
 
     return 0
