@@ -93,6 +93,7 @@
 # XMPP IM program vs. open-source quantum chemistry
 - { name: psi, category: sci-chemistry, setname: psi4 }
 - { name: psi, wwwpart: psicode.org, setname: psi4 }
+- { name: psi4, verpat: "3\\.4.*", setname: psicode }
 
 - { name: scamp, wwwpart: sourceforge.net/projects/scamp, setname: scamp-clamav }
 
