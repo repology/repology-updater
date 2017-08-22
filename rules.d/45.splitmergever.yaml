@@ -298,7 +298,7 @@
 - { namepat: "jersey[0-9]+",           setname: jersey }
 - { name: jersey, verpat: "1\\..*",    setname: jersey1 }
 
-- { name: [jpeg,libjpeg,jpeg-turbo,libjpeg-turbo], setname: jpeg }
+- { name: [jpeg,libjpeg,jpeg-turbo,libjpeg-turbo,turbojpeg], setname: jpeg }
 - { namepat: "libjpeg[0-9]+([a-z]|-turbo)?", setname: jpeg }
 - { name: jpeg, verpat: "1\\..*",      setname: libjpeg-turbo }
 
