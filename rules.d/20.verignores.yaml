@@ -76,6 +76,7 @@
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
+- { name: "fonts:eeyek",               ver: "20091204",                                    ignorever: true }
 - { name: "fonts:gentium-basic",       ver: "1102",                                        ignorever: true } # it's 1.102!
 - { name: "fonts:quattrocento",        ver: "2.000",                 family: arch,         ignorever: true } # webpage says it's 1.1
 - { name: "fonts:ubuntu",              ver: "1.0",                   family: pclinuxos,    ignorever: true } # no such version on the website

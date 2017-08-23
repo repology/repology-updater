@@ -53,6 +53,7 @@
   setname: "fonts:fontawesome"
 
 - name:
+    - babelstone-han
     - babelstone-han-fonts
     - fonts-babelstone-han
     - ttf-babelstone-han
@@ -223,6 +224,13 @@
   setname: "fonts:ecolier-court"
 
 - name:
+    - eeyek-fonts
+    - fonts-eeyek
+    - fonts-ttf-tabish-eeyek
+    - tabish-eeyek-fonts
+  setname: "fonts:eeyek"
+
+- name:
     - efont-unicode
     - efont-unicode-bdf
     - efont-unicode-bitmap-fonts
@@ -357,6 +365,7 @@
     - iosevka
     - iosevka-fonts
     - ttf-inziu-iosevka
+    - ttf-inziu-iosevka-ttfs
     - ttf-iosevka
   setname: "fonts:iosevka"
 - { namepat: "ttf-iosevka-(.*)", setname: "fonts:iosevka" }
@@ -414,6 +423,12 @@
     - x11-font-micro-misc
     - xorg-font-micro-misc
   setname: "fonts:micro-misc"
+
+- name:
+    - montecarlo
+    - montecarlo-font
+    - montecarlo-fonts
+  setname: "fonts:montecarlo"
 
 - name:
     - font-mutt-misc
