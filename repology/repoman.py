@@ -191,7 +191,7 @@ class RepositoryManager:
                 if 'default_maintainer' in repository:
                     package.maintainers = [repository['default_maintainer']]
                 else:
-                    package.maintainers = ['fallback-maintainer-{}@repology'.format(repository['name'])]
+                    package.maintainers = ['fallback-mnt-{}@repology'.format(repository['name'])]
 
         logger.Log('parsing source {} complete'.format(source['name']))
 
