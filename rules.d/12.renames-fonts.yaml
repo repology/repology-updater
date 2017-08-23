@@ -487,6 +487,7 @@
 
 # L
 - name:
+    - font-liberation
     - fonts-liberation
     - fonts-liberation2
     - fonts-ttf-liberation
