@@ -34,6 +34,13 @@
   setname: "fonts:allerta"
 
 - name:
+    - amiri-fonts
+    - fonts-hosny-amiri
+    - fonts-ttf-amiri
+    - ttf-amiri
+  setname: "fonts:amiri"
+
+- name:
     - anonymous-pro
     - anonymouspro
     - font-anonymous-pro
@@ -114,6 +121,10 @@
   setname: "fonts:cheapskate"
 
 - name:
+    - fonts-ttf-chinese-opendesktop
+  setname: "fonts:chinese-opendesktop"
+
+- name:
     - cm-unicode
     - cm-unicode-fonts
     - otf-cm-unicode
@@ -128,6 +139,14 @@
     - fonts-ttf-aajohan-comfortaa
     - ttf-comfortaa
   setname: "fonts:comfortaa"
+
+- name:
+    - comic-neue
+    - comic-neue-fonts
+    - font-comic-neue
+    - fonts-otf-comic-neue
+    - ttf-comic-neue
+  setname: "fonts:comic-neue"
 
 - name:
     - consolamono-ttf
@@ -379,6 +398,11 @@
   setname: "fonts:gnu-freefont"
 
 - name:
+    - fonts-goudybookletter
+    - ttf-goudybookletter
+  setname: "fonts:goudybookletter"
+
+- name:
     - fonts-ttf-grimmer-proggy-tinysz
     - grimmer-proggy-tinysz-fonts
   setname: "fonts:grimmer-proggy-tinysz"
@@ -427,6 +451,25 @@
 # J
 
 # K
+- name:
+    - fonts-kanjistrokeorders
+    - fonts-ttf-kanjistrokeorders
+    - ja-kanjistrokeorders-ttf
+    - kanjistrokeorders
+    - kanjistrokeorders-fonts
+    - kanjistrokeorders-ttf
+    - kanjistrokeorders-ttf
+    - ttf-kanjistrokeorders
+  setname: "fonts:kanjistrokeorders"
+
+- name:
+    - kochi-ttf
+    - kochi-substitute
+    - ttf-kochi
+    - ttf-kochi-naga10
+    - ttf-kochi-substitute
+  setname: "fonts:kochi"
+
 - name:
     - koruri
     - koruri-ttf
@@ -493,6 +536,8 @@
     - montecarlo-fonts
   setname: "fonts:montecarlo"
 
+# XXX: mplus
+
 - name:
     - font-mutt-misc
     - x11-font-mutt-misc
@@ -515,6 +560,20 @@
     - oldstandard-sfd-fonts
     - thessalonica-oldstandard-fonts
   setname: "fonts:oldstandard"
+
+- name:
+    - opendesktop-fonts
+  setname: "fonts:opendesktop"
+
+- name:
+    - font-open-dyslexic
+    - fonts-ttf-open-dyslexic
+    - fonts-opendyslexic
+    - fonts-otf-opendyslexic
+    - open-dyslexic
+    - open-dyslexic-fonts
+    - opendyslexic-fonts
+  setname: "fonts:opendyslexic"
 
 - name:
     - fonts-ttf-opensans
@@ -565,6 +624,12 @@
   setname: "fonts:pecita"
 
 - name:
+    - fonts-ttf-pothana2000
+    - pothana2000-fonts
+    - pothana2k
+  setname: "fonts:pothana2000"
+
+- name:
     - proggy-fonts
     - proggyfonts
     - proggy_fonts-ttf
@@ -587,6 +652,15 @@
 # R
 
 # S
+- name:
+    - fonts-ttf-sazanami
+    - ja-sazanami-ttf
+    - sazanami
+    - sazanami-font
+    - sazanami-fonts
+    - ttf-sazanami
+  setname: "fonts:sazanami"
+
 - name:
     - sgi-fonts
     - sgifonts
@@ -613,6 +687,11 @@
   setname: "fonts:symbola"
 
 # T
+- name:
+    - font-tamzen
+    - tamzen-font
+  setname: "fonts:tamzen"
+
 - name:
     - fonts-bitmap-terminus
     - xfonts-terminus
@@ -661,6 +740,16 @@
   setname: "fonts:umefont"
 
 # V
+- name:
+    - ttf-vdrsymbols
+    - vdrsymbols-ttf
+  setname: "fonts:vdrsymbols"
+
+- name:
+    - fonts-ttf-vemana2000
+    - vemana2000-fonts
+  setname: "fonts:vemana2000"
+
 - name:
     - font-vollkorn
     - fonts-otf-vollkorn
