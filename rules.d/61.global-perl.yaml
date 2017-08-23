@@ -45,6 +45,9 @@
 - { name: "perl:enum",                 verpat: "1\\.[0-9]{3,}.*", ignorever: true }
 - { name: "perl:enum",                 ver: "1.16", ignorever: true } # it's 1.016 < 1.11
 - { name: "perl:extutils-pkgconfig",   verpat: "1\\.[0-9]{3,}.*", ignorever: true }
+- { name: "perl:extutils-xspp",        verpat: "0\\.[0-9]{3,}.*", ignorever: true }
+- { name: "perl:json-xs",              verpat: "0\\.[0-9]{3,}.*", ignorever: true }
+- { name: "perl:json-xs",              verpat: "0\\.[1-9]0.*", ignorever: true }
 - { name: "perl:math-polygon-tree",    ver: "0.0691",          ignorever: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
 - { name: "perl:module-build",         verpat: "0\\.[0-9]{5,}.*", ignorever: true }
 - { name: "perl:module-starter",       verpat: "1\\.[0-9]{3,}.*", ignorever: true }
