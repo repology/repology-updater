@@ -494,13 +494,12 @@
     - liberation-ttf
     - liberation2-fonts
     - ttf-liberation
-  setname: "fonts:liberation"
-
-- name:
     - fonts-ttf-liberation-narrow
     - liberationsansnarrow
     - ttf-liberation-sans-narrow
-  setname: "fonts:liberation-sans-narrow"
+  setname: "fonts:liberation"
+
+- { name: "fonts:liberation", verpat: "2\\..*", setname: "fonts:liberation2" }
 
 - name:
     - fonts-linex
@@ -541,7 +540,7 @@
 - name:
     - montecarlo
     - montecarlo-font
-    - montecarlo-fonts
+    - montecarlo_fonts
   setname: "fonts:montecarlo"
 
 # XXX: mplus
