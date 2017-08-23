@@ -17,7 +17,7 @@
     - desc: NixOS packages
       url: http://nixos.org/nixos/packages.html
   # XXX: add urls
-  tags: [ all, production ]
+  tags: [ all, production, nix ]
 
 - name: nix_unstable
   type: repository
@@ -35,4 +35,4 @@
     - desc: NixOS packages
       url: http://nixos.org/nixos/packages.html
   # XXX: add urls
-  tags: [ all, production ]
+  tags: [ all, production, nix ]

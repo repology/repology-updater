@@ -67,8 +67,8 @@
 
 - { name: kiki, category: [python,universe/python], setname: kiki-re }
 
-- { name: lr, family: freebsd, setname: lazyread }
-- { name: lrfiles, family: freebsd, setname: lr }
+- { name: lr, family: freebsd, category: misc, setname: lazyread } # XXX: will be obsolete soon
+- { name: lrfiles, family: freebsd, setname: lr } # XXX: will be obsolete soon
 
 - { name: mog,                         setname: mog-cat, family: freebsd }
 - { name: mog,                         setname: mog-game, family: slackbuilds }
