@@ -318,6 +318,7 @@
 - name:
     - fira
     - fira-fonts
+    - fira-sans
     - fira-webfont
     - mozilla-fira-fonts
     - otf-fira-sans
