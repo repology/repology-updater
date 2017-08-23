@@ -74,6 +74,8 @@
 - { name: mog,                         setname: mog-game, family: slackbuilds }
 - { name: mog,                         warning: "please classify me" }
 
+- { name: nvi, verpat: "2\\..*",       setname: nvi2 }
+
 # "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
 - { name: packer, setname: "pacman-packer", family: arch  }
 
