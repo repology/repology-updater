@@ -265,7 +265,7 @@ def index():
                 'name': repo['name'],
                 'value': '{:.2f}%'.format(100.0 * repo['num_metapackages_newest'] / repo['num_metapackages'] if repo['num_metapackages'] else 0),
             }
-            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (1 + repo['num_metapackages']), reverse=True)[:10]
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (repo['num_metapackages'] or 1), reverse=True)[:10]
         ]
     }
 
@@ -844,11 +844,11 @@ def statistics(sorting=None):
     if sorting == 'newest':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'], reverse=True)
     elif sorting == 'pnewest':
-        repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'] / (1 + s['num_metapackages']), reverse=True)
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'] / (s['num_metapackages'] or 1), reverse=True)
     elif sorting == 'outdated':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages_outdated'], reverse=True)
     elif sorting == 'poutdated':
-        repostats = sorted(repostats, key=lambda s: s['num_metapackages_outdated'] / (1 + s['num_metapackages']), reverse=True)
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages_outdated'] / (s['num_metapackages'] or 1), reverse=True)
     elif sorting == 'total':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages'], reverse=True)
     else:
