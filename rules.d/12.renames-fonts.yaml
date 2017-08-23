@@ -279,6 +279,14 @@
     - ttf-emojione-color
   setname: "fonts:emojione-color" # check this isn't this the same as fonts:emojione
 
+- name:
+    - essays1743
+    - fonts-ttf-essays1743
+    - fonts-ttf-essays1743
+    - otf-essays-1743
+    - ttf-essays
+  setname: "fonts:essays1743"
+
 # F
 - name:
     - fonts-fanwood
