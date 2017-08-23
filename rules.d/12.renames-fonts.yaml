@@ -29,6 +29,11 @@
   setname: "fonts:alef"
 
 - name:
+    - google-allerta-fonts
+    - otf-allerta
+  setname: "fonts:allerta"
+
+- name:
     - anonymous-pro
     - anonymouspro
     - font-anonymous-pro
@@ -69,6 +74,13 @@
 - { name: babelstone-ogham-fonts, setname: "fonts:babelstone-ogham" }
 - { name: babelstone-phags-pa-fonts, setname: "fonts:babelstone-phags-pa" }
 - { name: babelstone-runic-fonts, setname: "fonts:babelstone-runic" }
+
+- name:
+    - beteckna-fonts
+    - fonts-beteckna
+    - fonts-otf-beteckna
+    - ttf-beteckna
+  setname: "fonts:beteckna"
 
 - name:
     - font-bitstream-speedo
@@ -277,6 +289,15 @@
   setname: "fonts:fira-mono"
 
 - name:
+    - fira
+    - fira-fonts
+    - fira-webfont
+    - mozilla-fira-fonts
+    - otf-fira-sans
+    - ttf-fira-sans
+  setname: "fonts:fira-sans"
+
+- name:
     - fira-code
     - firacode
     - fonts-firacode
@@ -414,6 +435,23 @@
 
 # L
 - name:
+    - fonts-liberation
+    - fonts-liberation2
+    - fonts-ttf-liberation
+    - liberation-fonts
+    - liberation-fonts-ttf
+    - liberation-ttf
+    - liberation2-fonts
+    - ttf-liberation
+  setname: "fonts:liberation"
+
+- name:
+    - fonts-ttf-liberation-narrow
+    - liberationsansnarrow
+    - ttf-liberation-sans-narrow
+  setname: "fonts:liberation-sans-narrow"
+
+- name:
     - fonts-linex
     - ttf-linex-fonts
   setname: "fonts:linex"
@@ -470,11 +508,30 @@
   setname: "fonts:ohruri"
 
 - name:
+    - fonts-oldstandard
+    - fonts-otf-oldstandard
+    - fonts-ttf-oldstandard
+    - oldstandard
+    - oldstandard-sfd-fonts
+    - thessalonica-oldstandard-fonts
+  setname: "fonts:oldstandard"
+
+- name:
     - fonts-ttf-opensans
     - google-opensans-fonts
     - opensans-ttf
     - ttf-opensans
   setname: "fonts:opensans"
+
+- name:
+    - fonts-ttf-overpass
+    - otf-overpass
+    - overpass
+    - overpass-desktop-fonts
+    - overpass-fonts
+    - overpass-webfonts
+  setname: "fonts:overpass"
+- { name: "fonts:overpass", wwwpart: overpass-api-python-wrapper, setname: "python:overpass" } # don't mix up
 
 - name:
     - fonts-ttf-oxygen
@@ -484,10 +541,12 @@
 
 # P
 - name:
+    - fonts-pt
     - fonts-ttf-paratype
     - fonts-ttf-paratype-pt-mono
     - fonts-ttf-paratype-pt-sans
     - fonts-ttf-paratype-pt-serif
+    - fonts-ttf-ptserif
     - paratype
     - paratype-pt-mono-fonts
     - paratype-pt-sans-fonts
@@ -495,6 +554,7 @@
     - paratype-ttf
     - ttf-paratype
     - ttf-paratype-pt-fonts
+    - ttf-pt-fonts
   setname: "fonts:paratype"
 
 - name:
@@ -527,6 +587,11 @@
 # R
 
 # S
+- name:
+    - sgi-fonts
+    - sgifonts
+  setname: "fonts:sgi"
+
 - name:
     - fonts-otf-stix
     - fonts-stix
@@ -582,8 +647,16 @@
   setname: "fonts:ubuntu-title"
 
 - name:
+    - fonts-bitmap-univga
+    - uni-vga
+    - univga
+    - univga-font
+  setname: "fonts:univga"
+
+- name:
     - fonts-horai-umefont
     - horai-ume-fonts
+    - ttf-ume
     - umefont-ttf
   setname: "fonts:umefont"
 
