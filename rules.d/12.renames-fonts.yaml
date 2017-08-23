@@ -1,8 +1,17 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-# fonts; extra section as there's too much name variery
-- { namepat: "artwiz.*", setname: "fonts:artwiz-aleczapka" } # hopefully it's not too broad
-- { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
+# A
+- name:
+    - adobe-source-code-pro
+    - adobe-source-code-pro-font
+    - adobe-source-code-pro-fonts
+    - adobe-sourcecodepro-fonts
+    - font-adobe-source-code-pro
+    - fonts-otf-adobe-source-code-pro
+    - source-code-pro
+    - sourcecodepro-fonts
+    - sourcecodepro-ttf
+  setname: "fonts:adobe-source-code-pro"
 
 - name:
     - alee-fonts
@@ -35,23 +44,15 @@
     - fonts-arkpandora
   setname: "fonts:arkpandora"
 
+- { namepat: "artwiz.*", setname: "fonts:artwiz-aleczapka" } # hopefully it's not too broad
+- { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
+
 - name:
     - ttf-atarismall
     - fonts-atarismall
   setname: "fonts:atarismall"
 
-- name:
-    - awesome-ttf
-    - font-awesome
-    - fontawesome
-    - fontawesome-fonts
-    - fonts-font-awesome
-    - fonts-ttf-fontawesome
-    - otf-font-awesome
-    - otf-fontawesome
-    - ttf-font-awesome
-  setname: "fonts:fontawesome"
-
+# B
 - name:
     - babelstone-han
     - babelstone-han-fonts
@@ -69,10 +70,17 @@
 - { name: babelstone-phags-pa-fonts, setname: "fonts:babelstone-phags-pa" }
 - { name: babelstone-runic-fonts, setname: "fonts:babelstone-runic" }
 
-- { namepat: "cyr-rfx-.*", setname: "fonts:cyr-rfx" }
-- { namepat: "fonts-bitmap-cyr_rfx.*", setname: "fonts:cyr-rfx" }
+- name:
+    - font-bitstream-speedo
+    - x11-font-bitstream-speedo
+    - xorg-font-bitstream-speedo
+  setname: "fonts:bitstream-speedo"
 
-- { namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" }
+- name:
+    - font-bitstream-type1
+    - x11-font-bitstream-type1
+    - xorg-font-bitstream-type1
+  setname: "fonts:bitstream-type1"
 
 - name:
     - bitstream-vera
@@ -87,22 +95,18 @@
     - xorg-font-bitstream-vera
   setname: "fonts:bitstream-vera"
 
-- name:
-    - font-bitstream-speedo
-    - x11-font-bitstream-speedo
-    - xorg-font-bitstream-speedo
-  setname: "fonts:bitstream-speedo"
-
-- name:
-    - font-bitstream-type1
-    - x11-font-bitstream-type1
-    - xorg-font-bitstream-type1
-  setname: "fonts:bitstream-type1"
-
+# C
 - name:
     - ttf-cheapskate
     - cheapskatefonts
   setname: "fonts:cheapskate"
+
+- name:
+    - cm-unicode
+    - cm-unicode-fonts
+    - otf-cm-unicode
+    - ttf-cm-unicode
+  setname: "fonts:cm-unicode"
 
 - name:
     - aajohan-comfortaa-fonts
@@ -117,13 +121,6 @@
     - consolamono-ttf
     - fonts-ttf-consolamono
   setname: "fonts:consolamono"
-
-- name:
-    - cm-unicode
-    - cm-unicode-fonts
-    - otf-cm-unicode
-    - ttf-cm-unicode
-  setname: "fonts:cm-unicode"
 
 - name:
     - font-cronyx-cyrillic
@@ -151,6 +148,7 @@
     - cyberbit-ttfonts
   setname: "fonts:cyberbit"
 
+# D
 - name:
     - dai-banna
     - dai-banna-fonts
@@ -198,6 +196,7 @@
     - fonts-ttf-google-droid
   setname: "fonts:droid"
 
+# E
 - name:
     - eb-garamond
     - eb-garamond-fonts
@@ -249,15 +248,11 @@
     - ttf-emojione-color
   setname: "fonts:emojione-color" # check this isn't this the same as fonts:emojione
 
+# F
 - name:
     - fonts-fanwood
     - ttf-fanwood
   setname: "fonts:fanwood"
-
-- name:
-    - fonts-freefarsi
-    - freefarsi-ttf
-  setname: "fonts:freefarsi"
 
 - name:
     - farsi-fonts
@@ -275,6 +270,13 @@
   setname: "fonts:fifth-leg"
 
 - name:
+    - fira-mono
+    - font-fira-mono
+    - otf-fira-mono
+    - ttf-fira-mono
+  setname: "fonts:fira-mono"
+
+- name:
     - fira-code
     - firacode
     - fonts-firacode
@@ -283,29 +285,37 @@
   setname: "fonts:firacode"
 
 - name:
-    - fira-mono
-    - font-fira-mono
-    - otf-fira-mono
-    - ttf-fira-mono
-  setname: "fonts:fira-mono"
+    - awesome-ttf
+    - font-awesome
+    - fontawesome
+    - fontawesome-fonts
+    - fonts-font-awesome
+    - fonts-ttf-fontawesome
+    - otf-font-awesome
+    - otf-fontawesome
+    - ttf-font-awesome
+  setname: "fonts:fontawesome"
 
 - name:
-    - font-gnu-freefont-ttf
-    - fonts-freefont
-    - fonts-ttf-freefont
-    - fonts-ttf-freefont
-    - fonts-ttf-gnu-freefont
-    - freefont
-    - freefont-ttf
-    - gnu-free-fonts
-    - ttf-freefont
-  setname: "fonts:gnu-freefont"
+    - fonts-freefarsi
+    - freefarsi-ttf
+  setname: "fonts:freefarsi"
 
+# G
 - { namepat: "(?:fonts-)?(?:[ot]tf-)?(gdouros-.+?)(?:-fonts)?", setname: "fonts:$1" }
 - { name: [aegyptus, aegyptus-ttf], setname: "fonts:gdouros-aegyptus" }
 - { name: aegean-ttf, setname: "fonts:gdouros-aegean" }
 - { name: [akkadian, akkadian-ttf], setname: "fonts:gdouros-akkadian" }
 - { name: analecta, setname: "fonts:gdouros-analecta" }
+
+- name:
+    - fonts-sil-gentium-basic
+    - fonts-ttf-sil-gentium-basic
+    - gentium-book-basic
+    - gentiumbasic
+    - sil-gentium-basic-fonts
+    - ttf-gentium-basic
+  setname: "fonts:gentium-basic"
 
 - name:
     - fonts-sil-gentium
@@ -323,13 +333,11 @@
 # them outdated
 
 - name:
-    - fonts-sil-gentium-basic
-    - fonts-ttf-sil-gentium-basic
-    - gentium-book-basic
-    - gentiumbasic
-    - sil-gentium-basic-fonts
-    - ttf-gentium-basic
-  setname: "fonts:gentium-basic"
+    - fonts-sil-gentiumplus
+    - fonts-sil-gentiumplus-compact
+    - gentiumplus
+    - ttf-gentium-plus
+  setname: "fonts:gentium-plus"
 
 - name:
     - gw-fonts-ttf
@@ -338,12 +346,23 @@
   setname: "fonts:georgewilliams"
 
 - name:
-    - fonts-sil-gentiumplus
-    - fonts-sil-gentiumplus-compact
-    - gentiumplus
-    - ttf-gentium-plus
-  setname: "fonts:gentium-plus"
+    - font-gnu-freefont-ttf
+    - fonts-freefont
+    - fonts-ttf-freefont
+    - fonts-ttf-freefont
+    - fonts-ttf-gnu-freefont
+    - freefont
+    - freefont-ttf
+    - gnu-free-fonts
+    - ttf-freefont
+  setname: "fonts:gnu-freefont"
 
+- name:
+    - fonts-ttf-grimmer-proggy-tinysz
+    - grimmer-proggy-tinysz-fonts
+  setname: "fonts:grimmer-proggy-tinysz"
+
+# H
 - name:
     - fonts-hanazono
     - fonts-ttf-hanazono
@@ -360,6 +379,7 @@
     - ttf-humor-sans
   setname: "fonts:humor-sans"
 
+# I
 - name:
     - font-iosevka
     - iosevka
@@ -383,12 +403,16 @@
     - font-isas-misc
   setname: "fonts:isas-misc"
 
+# J
+
+# K
 - name:
     - koruri
     - koruri-ttf
     - ttf-koruri
   setname: "fonts:koruri"
 
+# L
 - name:
     - fonts-linex
     - ttf-linex-fonts
@@ -418,6 +442,7 @@
 - { namepat: "(?:fonts-)?(?:ttf-)?(lohit-.+?)(?:-fonts)?", setname: "fonts:$1", last: true }
 - { name: [ fonts-ttf-lohit, lohit ], setname: "fonts:lohit" }
 
+# M
 - name:
     - font-micro-misc
     - x11-font-micro-misc
@@ -436,6 +461,9 @@
     - xorg-font-mutt-misc
   setname: "fonts:mutt-misc"
 
+# N
+
+# O
 - name:
     - ohruri-ttf
     - ttf-ohruri
@@ -454,6 +482,7 @@
     - ttf-oxygen
   setname: "fonts:oxygen"
 
+# P
 - name:
     - fonts-ttf-paratype
     - fonts-ttf-paratype-pt-mono
@@ -483,23 +512,7 @@
     - proggy-fonts
   setname: "fonts:proggy"
 
-- name:
-    - adobe-source-code-pro
-    - adobe-source-code-pro-font
-    - adobe-source-code-pro-fonts
-    - adobe-sourcecodepro-fonts
-    - font-adobe-source-code-pro
-    - fonts-otf-adobe-source-code-pro
-    - source-code-pro
-    - sourcecodepro-fonts
-    - sourcecodepro-ttf
-  setname: "fonts:adobe-source-code-pro"
-
-- name:
-    - fonts-ttf-grimmer-proggy-tinysz
-    - grimmer-proggy-tinysz-fonts
-  setname: "fonts:grimmer-proggy-tinysz"
-
+# Q
 - name:
     - fonts-quattrocento
     - quattrocento
@@ -511,6 +524,9 @@
     - ttf-impallari-quattrocento-sans
   setname: "fonts:quattrocento-sans"
 
+# R
+
+# S
 - name:
     - fonts-otf-stix
     - fonts-stix
@@ -531,6 +547,7 @@
     - ttf-symbola
   setname: "fonts:symbola"
 
+# T
 - name:
     - fonts-bitmap-terminus
     - xfonts-terminus
@@ -543,6 +560,7 @@
     - terminus-ttf
   setname: "fonts:terminus-ttf"
 
+# U
 - name:
     - font-ubuntu
     - fonts-ttf-ubuntu
@@ -569,6 +587,7 @@
     - umefont-ttf
   setname: "fonts:umefont"
 
+# V
 - name:
     - font-vollkorn
     - fonts-otf-vollkorn
@@ -578,3 +597,12 @@
     - vollkorn-fonts
     - vollkorn-ttf
   setname: "fonts:vollkorn"
+
+# W
+
+# X
+- { namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" } # xorg
+
+# Y
+
+# Z
