@@ -421,6 +421,7 @@
 - { name: gnu-typist,                  setname: gtypist                   }
 - { name: [gnu-units,gunits],          setname: units                     }
 - { name: [gnu-which,gwhich],          setname: which                     }
+- { name: google-breakpad,             setname: breakpad                  }
 - { name: [google-gflags,libgflags],   setname: gflags                    }
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: google-sparsehash,           setname: sparsehash                }
