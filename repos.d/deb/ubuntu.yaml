@@ -155,8 +155,6 @@
     - desc: Ubuntu packages in artful
       url: http://packages.ubuntu.com/artful/
   packagelinks:
-    - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/artful/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
