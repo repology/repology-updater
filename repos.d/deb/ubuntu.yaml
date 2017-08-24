@@ -16,9 +16,9 @@
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
-      url: http://packages.ubuntu.com/
+      url: https://packages.ubuntu.com/
     - desc: Ubuntu packages in precise
-      url: http://packages.ubuntu.com/precise/
+      url: https://packages.ubuntu.com/precise/
   packagelinks:
     - desc: Package on Launchpad.net
       url: 'https://launchpad.net/ubuntu/+source/{name}'
@@ -43,12 +43,12 @@
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
-      url: http://packages.ubuntu.com/
+      url: https://packages.ubuntu.com/
     - desc: Ubuntu packages in trusty
-      url: http://packages.ubuntu.com/trusty/
+      url: https://packages.ubuntu.com/trusty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/source/trusty/{name}'
+      url: 'https://packages.ubuntu.com/source/trusty/{name}'
     - desc: Package on Launchpad.net
       url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
@@ -72,12 +72,12 @@
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
-      url: http://packages.ubuntu.com/
+      url: https://packages.ubuntu.com/
     - desc: Ubuntu packages in xenial
-      url: http://packages.ubuntu.com/xenial/
+      url: https://packages.ubuntu.com/xenial/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/source/xenial/{name}'
+      url: 'https://packages.ubuntu.com/source/xenial/{name}'
     - desc: Package on Launchpad.net
       url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
@@ -101,12 +101,12 @@
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
-      url: http://packages.ubuntu.com/
+      url: https://packages.ubuntu.com/
     - desc: Ubuntu packages in zesty
-      url: http://packages.ubuntu.com/zesty/
+      url: https://packages.ubuntu.com/zesty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/source/zesty/{name}'
+      url: 'https://packages.ubuntu.com/source/zesty/{name}'
     - desc: Package on Launchpad.net
       url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
@@ -130,12 +130,12 @@
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
-      url: http://packages.ubuntu.com/
+      url: https://packages.ubuntu.com/
     - desc: Ubuntu packages in artful
-      url: http://packages.ubuntu.com/artful/
+      url: https://packages.ubuntu.com/artful/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/source/artful/{name}'
+      url: 'https://packages.ubuntu.com/source/artful/{name}'
     - desc: Package on Launchpad.net
       url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
@@ -159,9 +159,9 @@
       subrepo: '{source}'
   repolinks:
     - desc: Ubuntu packages
-      url: http://packages.ubuntu.com/
+      url: https://packages.ubuntu.com/
     - desc: Ubuntu packages in artful
-      url: http://packages.ubuntu.com/artful/
+      url: https://packages.ubuntu.com/artful/
   packagelinks:
     - desc: Package on Launchpad.net
       url: 'https://launchpad.net/ubuntu/+source/{name}'
