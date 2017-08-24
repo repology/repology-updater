@@ -21,7 +21,7 @@
       url: http://packages.ubuntu.com/precise/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/precise/{name}' # XXX: we should use binare package names here!
+      url: 'http://packages.ubuntu.com/source/precise/{name}' # XXX: we should use binare package names here!
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -48,7 +48,7 @@
       url: http://packages.ubuntu.com/trusty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/trusty/{name}' # XXX: we should use binare package names here!
+      url: 'http://packages.ubuntu.com/source/trusty/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -75,7 +75,7 @@
       url: http://packages.ubuntu.com/xenial/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/xenial/{name}' # XXX: we should use binare package names here!
+      url: 'http://packages.ubuntu.com/source/xenial/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -102,7 +102,7 @@
       url: http://packages.ubuntu.com/zesty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/zesty/{name}' # XXX: we should use binare package names here!
+      url: 'http://packages.ubuntu.com/source/zesty/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -129,7 +129,7 @@
       url: http://packages.ubuntu.com/artful/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/artful/{name}' # XXX: we should use binare package names here!
+      url: 'http://packages.ubuntu.com/source/artful/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad

@@ -22,7 +22,7 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/stable/{name}' # XXX: we should use binare package names here!
+      url: 'https://packages.debian.org/stable/source/{name}'
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
     - desc: Package auto-building status
@@ -52,7 +52,7 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/stable-backports/{name}' # XXX: we should use binare package names here!
+      url: 'https://packages.debian.org/stable-backports/source/{name}'
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
     - desc: Package auto-building status
@@ -82,7 +82,7 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/testing/{name}' # XXX: we should use binare package names here!
+      url: 'https://packages.debian.org/testing/source/{name}'
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
     - desc: Package auto-building status
@@ -112,7 +112,7 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/unstable/{name}' # XXX: we should use binare package names here!
+      url: 'https://packages.debian.org/unstable/source/{name}'
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
     - desc: Package auto-building status
@@ -142,7 +142,7 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/experimental/{name}' # XXX: we should use binare package names here!
+      url: 'https://packages.debian.org/experimental/source/{name}'
     - desc: Related bugs in Debian bugzilla
       url: 'https://bugs.debian.org/{name}'
     - desc: Package auto-building status
