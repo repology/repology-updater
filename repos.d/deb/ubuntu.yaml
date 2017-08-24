@@ -20,8 +20,6 @@
     - desc: Ubuntu packages in precise
       url: http://packages.ubuntu.com/precise/
   packagelinks:
-    - desc: Package details on packages.ubuntu.com
-      url: 'http://packages.ubuntu.com/source/precise/{name}' # XXX: we should use binare package names here!
     - desc: Package on Launchpad.net
       url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
