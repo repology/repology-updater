@@ -365,6 +365,7 @@
 - { name: fluid-synth,                 setname: fluidsynth                }
 - { name: [fluxbox-wm,fluxbox-noslit], setname: fluxbox                   }
 - { name: flwm-tc,                     setname: flwm                      }
+- { name: fofix-dfsg,                  setname: fofix                     }
 - { name: foldingathome-noroot,        setname: foldingathome             }
 - { name: foo2zjs-nightly,             setname: foo2js, ignorever: true   }
 - { name: foobillardplus,              setname: foobillard++              }
