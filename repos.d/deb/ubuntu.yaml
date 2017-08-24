@@ -22,6 +22,8 @@
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/source/precise/{name}' # XXX: we should use binare package names here!
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -49,6 +51,8 @@
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/source/trusty/{name}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -76,6 +80,8 @@
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/source/xenial/{name}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -103,6 +109,8 @@
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/source/zesty/{name}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -130,6 +138,8 @@
   packagelinks:
     - desc: Package details on packages.ubuntu.com
       url: 'http://packages.ubuntu.com/source/artful/{name}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
@@ -155,6 +165,8 @@
     - desc: Ubuntu packages in artful
       url: http://packages.ubuntu.com/artful/
   packagelinks:
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
     - desc: Related bugs on Launchpad.net
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
