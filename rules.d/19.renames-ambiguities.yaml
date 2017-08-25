@@ -119,6 +119,10 @@
 # infrastructure manager vs. heighfield generation
 - { name: terraform, setname: gnome-terraform, family: yacp }
 
+- { name: tesseract, setname: tesseract-game, wwwpart: tesseract.gg }
+- { name: tesseract, setname: tesseract-game, category: games }
+- { name: tesseract, setname: tesseract-ocr, wwwpart: tesseract-ocr }
+
 # GNU time vs. xemacs module
 - { name: time, setname: xemacs-time, wwwpart: xemacs } # gentoo
 
