@@ -25,8 +25,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora PkgDB
-      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+    - desc: Package details on Fedora Pagure
+      url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_25
@@ -53,8 +53,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora PkgDB
-      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+    - desc: Package details on Fedora Pagure
+      url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_26
@@ -81,8 +81,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora PkgDB
-      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+    - desc: Package details on Fedora Pagure
+      url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
@@ -103,6 +103,6 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora PkgDB
-      url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
+    - desc: Package details on Fedora Pagure
+      url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
