@@ -245,6 +245,7 @@
 - { name: dboxfe2,                     setname: dboxfe                    }
 - { name: dbus-cplusplus,              setname: dbus-c++                  }
 - { name: d-conf,                      setname: dconf                     }
+- { name: dcc-dccd,                    setname: dcc                       }
 - { name: dconf-editor-3.20,           ignore: true                       } # AUR specific versions
 - { name: ddclient-ipv6,               setname: ddclient                  }
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
