@@ -25,6 +25,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
@@ -53,6 +55,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
@@ -81,6 +85,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
@@ -103,6 +109,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
