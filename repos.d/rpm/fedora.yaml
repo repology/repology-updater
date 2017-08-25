@@ -22,6 +22,8 @@
       url: https://getfedora.org/
     - desc: Fedora Packages Search
       url: https://apps.fedoraproject.org/packages/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
@@ -48,6 +50,8 @@
       url: https://getfedora.org/
     - desc: Fedora Packages Search
       url: https://apps.fedoraproject.org/packages/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
@@ -74,6 +78,8 @@
       url: https://getfedora.org/
     - desc: Fedora Packages Search
       url: https://apps.fedoraproject.org/packages/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
@@ -94,6 +100,8 @@
       url: https://getfedora.org/
     - desc: Fedora Packages Search
       url: https://apps.fedoraproject.org/packages/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora PkgDB
       url: 'https://admin.fedoraproject.org/pkgdb/package/rpms/{name}'
