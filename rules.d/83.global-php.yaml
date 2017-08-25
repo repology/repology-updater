@@ -6,7 +6,7 @@
 - { namepat: "(?:pear|pecl)-(.*)",     setname: "php:$1", family: [ freebsd, pkgsrc, openbsd, sisyphus, macports ] }
 - { namepat: "php[0-9]+-(?:pear|pecl)-(.*)", setname: "php:$1", family: [ freebsd, pkgsrc, mageia ] }
 - { namepat: "php-(?:(?:pear|pecl)-)?(.*)", setname: "php:$1", family: [ rosa, mageia ] }
-- { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", family: [ freebsd, pkgsrc, openbsd, macports ] }
+- { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", family: [ freebsd, pkgsrc, openbsd, macports, ravenports ] }
 - { namepat: "php-(.*)",               setname: "php:$1", family: [ arch, fedora, debuntu, slackbuilds, crux, pclinuxos ] }
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ sisyphus ], "ignorever": true }
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ opensuse ] }
