@@ -210,6 +210,7 @@
 - { name: clutter-gtk0.10,             setname: clutter-gtk               }
 - { name: [cockatrice-client,cockatrice-server], setname: cockatrice      }
 - { name: coffeescript,                setname: coffee-script             } # XXX: problem
+- { name: cogl-amdgpu-pro,             setname: cogl                      }
 - { name: collectd5,                   setname: collectd                  }
 - { name: [coreos-etcd,coreos-etcd3],  setname: etcd                      }
 - { name: corsix-th,                   setname: corsixth                  }
@@ -432,6 +433,7 @@
 - { name: google-glog,                 setname: glog                      }
 - { name: gopro-vrplayer,              setname: gopro-vr-player           }
 - { name: gopro-vr-player-beta,        setname: gopro-vr-player, ignorever: true }
+- { name: gpg-agent,                   setname: gnupg                     }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
 - { name: grafana-bin,                 setname: grafana                   }
 - { name: [groovy-docs,groovysdk],     setname: groovy }
