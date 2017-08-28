@@ -1,33 +1,6 @@
 ###########################################################################
 # openSUSE
 ###########################################################################
-- name: opensuse_leap_42_1
-  type: repository
-  desc: openSUSE Leap 42.1
-  family: opensuse
-  color: '6da741'
-  valid_till: 2017-05-16
-  sources:
-    - name: oss
-      fetcher: Repodata
-      parser: Repodata
-      url: http://download.opensuse.org/source/distribution/leap/42.1/repo/oss/suse/
-      subrepo: main/oss
-    - name: non-oss
-      fetcher: Repodata
-      parser: Repodata
-      url: http://download.opensuse.org/source/distribution/leap/42.1/repo/non-oss/suse/
-      subrepo: main/non-oss
-  repolinks:
-    - desc: openSUSE home
-      url: https://www.opensuse.org/
-    - desc: openSUSE package search
-      url: https://software.opensuse.org/
-  packagelinks:
-    - desc: Package details
-      url: 'https://software.opensuse.org/package/{name}'
-  tags: [ all, production, opensuse, rpm ]
-
 - name: opensuse_leap_42_2
   type: repository
   desc: openSUSE Leap 42.2
