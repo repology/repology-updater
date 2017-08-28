@@ -64,7 +64,6 @@
 - { name: [astrometrynet,astrometry.net], setname: astrometry             }
 - { name: atk1.0,                      setname: atk                       }
 - { name: atk2mm,                      setname: atkmm                     }
-- { name: atkmm1.6,                    setname: atkmm                     }
 - { name: [atlas-cpp,atlascpp,libatlascpp], setname: atlas-c++            }
 - { name: [atlas,atlas-devel],         setname: atlas-c++, category: devel, family: [ freebsd, openbsd ] } # don't mix with math/atlas
 - { name: [atlas-with-lapack,atlas-lapack], setname: atlas                }
