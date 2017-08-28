@@ -57,6 +57,9 @@
 - { name: bowtie2,                     setname: bowtie }
 - { name: bowtie, verpat: "2\\..*",    setname: bowtie2 }
 
+- { namepat: "(?:lib)?cairomm[0-9._-]*", setname: cairomm }
+- { namepat: "(?:lib)?cairomm[0-9._-]*(-docs)", setname: cairomm }
+
 - { namepat: "cassandra[0-9]+",        setname: cassandra }
 - { name: cassandra, verpat: "2\\..*", setname: cassandra2 }
 
@@ -326,6 +329,9 @@
 
 - { namepat: "libdvbpsi[0-9.-]+",      setname: libdvbpsi }
 
+- { namepat: "libgdamm[0-9._-]+",      setname: libgdamm }
+- { name: "libgdamm-docs",             setname: libgdamm }
+
 - { namepat: "libgee[0-9.-]+",         setname: libgee }
 
 - { namepat: "libglade[0-9._-]*",           setname: libglade }
@@ -342,6 +348,8 @@
 - { namepat: "(?:lib)?gnomeuimm[0-9._-]*", setname: libgnomeuimm }
 
 - { namepat: "libmozjs[0-9.-]+",       setname: libmozjs }
+
+- { namepat: "libmm[0-9._-]+",         setname: libmm }
 
 - { namepat: "libnet[0-9.]+",          setname: libnet }
 
