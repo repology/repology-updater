@@ -58,7 +58,7 @@
 - { name: gambit,                      category: games-board, setname: gambitchess }
 - { name: gambit,                      verpat: "4\\..*", setname: gambit-c }
 
-- { name: gom,                         category: [sound,media-sound], setname: gom-mixer }
+- { name: gom,                         category: [sound,media-sound,universe/sound], setname: gom-mixer }
 
 - { name: git_fame,                    setname: git-fame-rb, wwwpart: oleander.io }
 
@@ -116,7 +116,7 @@
 
 - { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
 
-- { name: svn2git, verpat: "1\\.1[0-9]+", setname: svn-all-fast-export }
+- { name: svn2git, verpat: "1\\.[0-9]+.*", setname: svn-all-fast-export }
 
 # Programming language vs. XMPP client vs. openstack object storage
 - { name: swift,                       setname: swift-lang, family: [ arch, freebsd ] }
