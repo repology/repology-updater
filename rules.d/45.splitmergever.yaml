@@ -412,6 +412,7 @@
 - { namepat: "libvpx[0-9._-]+", setname: libvpx }
 
 - { name: libwnck-gtk3,                setname: libwnck }
+- { name: [libwnck-sticky,libwnck-reference], setname: libwnck }
 - { namepat: "libwnck[0-9]+",          setname: libwnck }
 - { name: libwnck, verpat: "2\\..*",   setname: libwnck2 }
 - { name: libwnck, verpat: "3\\..*",   setname: libwnck3 }
