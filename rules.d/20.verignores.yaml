@@ -1,8 +1,10 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-# Version ignores, incompatible version mangling in the repositories
+# 0-9
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
 - { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignorever: true } # pkgsrc
+
+# A
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: abuse,                       ver: "2.0",                   family: pkgsrc,       ignorever: true }
 - { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
@@ -24,6 +26,8 @@
 - { name: asp2php,                     ver: "20080813",                                    ignorever: true }
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
+
+# B
 - { name: bastet,                      ver: "0.43.1.2015083000",                           ignorever: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
@@ -38,6 +42,8 @@
 - { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
 - { name: bzflag,                      ver: "2.4.11",                family: sisyphus,     ignorever: true } # fake
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
+
+# C
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: cegui,                       verpat: "6\\..*",                                   ignorever: true } # it's 0.6.2!
@@ -54,19 +60,25 @@
 - { name: cvs,                         ver: "1.20120905",                                  ignorever: true }
 - { name: cvs,                         ver: "1.12.13.1",                                   ignorever: true } # respin for Windows *only* to fix carriage returns, it does not make sense to list it
 - { name: cwiid,                       ver: ["20110107","0.6.01","2010-02-21-git"],        ignorever: true } # abandonware; a lot of snapshots
+
+# D
+- { name: dejagnu,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
-- { name: dejagnu,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: dosbox,                      verpat: "0\\.74\\.[4r].*",                          ignorever: true }
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
 - { name: dsniff,                      ver: "2.4",                   family: [sisyphus,fedora,mageia], ignorever: true } # it's 2.4beta1
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignorever: true }
+
+# E
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignorever: true }
 - { name: e2fsprogs,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: egoboo,                      ver: "2.81",                                        ignorever: true } # it's 2.8.1
 - { name: ephoto,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: ethtool,                     verpat: "[0-9]+",                                   ignorever: true }
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignorever: true } # no such release
+
+# F
 - { name: f3,                          verpat: ".*unstable",                               ignorever: true } # nix garbage
 - { name: faifa,                       ver: "0.2",                   family: debuntu,      ignorever: true }
 - { name: fdupes,                      verpat: "1\\.[0-9]{2}",                             ignorever: true } # it has switched to 3 componennts (e.g. 1.51 -> 1.6.0 -> 1.6.1)
@@ -86,24 +98,26 @@
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
 - { name: frozen-bubble,               ver: ["905bf71","2.212.0"],                         ignorever: true } # fake?
 - { name: frozen-bubble,               ver: "2.2.1",                 family: [ fedora ],   ignorever: true } # 2.2.1 was never released, it should be 2.2.1beta1
+
+# G
 - { namepat: "gcc[0-9]*",              verpat: ".*20[0-9]{6}.*",                           ignorever: true } # snapshots
 - { namepat: "gcc[0-9]*",              verpat: "7\\.1\\.1.*",        family: [fedora,arch,opensuse], ignorever: true } # snapshots
+- { name: gdb,                         verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: geary,                       ver: "0.12",                  family: debuntu,      ignorever: true } # not released yet
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignorever: true } # not released yet
-- { name: gdb,                         verpat: ".*20[0-9]{6}.*",                           ignorever: true }
+- { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignorever: true }
 - { name: grep,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: gzip,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
-- { name: libglw,                      verpat: "20[0-9]{6}",                               ignorever: true }
-- { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignorever: true }
-- { name: libxml2,                     ver: "2.9.4.83",                                    ignorever: true }
-- { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
-- { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
+
+# H
 - { name: hostapd,                     verpat: "20[0-9]{2}.*",       family: openwrt,      ignorever: true }
 - { name: hunspell-en,                 verpat: "20[0-9]{6}.*",                             ignorever: true } # ALT
 - { name: hunspell-es,                 verpat: "20[0-9]{2}.*",                             ignorever: true } # actual version is 2.2
 - { name: hunspell-it,                 ver: "2016.2.13",                                   ignorever: true } # the real version is 2016.02.10, see #298
+
+# I
 - { name: iaxclient,                   ver: "2.1",                   family: fedora,       ignorever: true } # there's beta only
 - { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
@@ -112,8 +126,12 @@
 - { name: icu-le-hb,                   ver: "1.0.3.3",                                     ignorever: true } # fake (FreeBSD)
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
 - { name: iputils,                     verpat: "[0-9]{8}\\.[0-9a-f]{7,}",                  ignorever: true } # arch: commit id in version
+
+# J
 - { name: john,                        verpat: "1.8.0.2",            family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: jwm,                         verpat: "[0-9]+",                                   ignorever: true }
+
+# K
 - { name: kbuild,                      verlonger: 3,                                       ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
 - { name: keybase,                     verpat: "20170209.*",                               ignorever: true } # nix garbage
@@ -121,6 +139,10 @@
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignorever: true }
 - { name: krename,                     verpat: "20[0-9]{6}.*",                             ignorever: true }
+
+# L
+
+# LIB*
 - { name: libcpuid,                    ver: "0.21",                                        ignorever: true } # deepin crap (it's 0.2.1)
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: libexecinfo,                                               family: ravenports,   ignorever: true } # fake
@@ -130,8 +152,16 @@
 - { name: libusbmuxd,                  ver: "1.1.0",                 family: openwrt,      ignorever: true } # fake
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignorever: true } # version from mediainfo is used, while libzen has its own version scheme
+- { name: libglw,                      verpat: "20[0-9]{6}",                               ignorever: true }
+- { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignorever: true }
+- { name: libxml2,                     ver: "2.9.4.83",                                    ignorever: true }
+- { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+
+# L (continued)
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
+
+# M
 - { name: mame,                        ver: "0153s",                                       ignorever: true } # pclinuxos
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
@@ -142,8 +172,12 @@
 - { name: mtree,                                                     family: ravenports,   ignorever: true } # fake
 - { name: [mkgmap,mkgmap-splitter],    ver: "0.0.0",                                       ignorever: true } # debian; original bersion has svnXXXX addendum
 - { name: munin,                       verpat: "2\\.999.*",                                ignorever: true } # debian fake
+
+# N
 - { name: ncurses,                     verpat: "6\\.0-20[0-9]{6}.*",                       ignorever: true } # macports
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
+
+# O
 - { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignorever: true }   # \  force correct
 - { name: onioncat,                    verpat: "0\\.2\\.2\\.r[0-9]+.*",                    unignorever: true } # / version schema
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }
@@ -155,29 +189,37 @@
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+\\.[0-9]+",                 ignorever: true } # pkgrc: it's X.YpZ!
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignorever: true } # freshcode, pZ part missing
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
-- { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignorever: true }
-- { name: patch,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+
+# P
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
 - { name: p5-net-whois-ripe,           ver: "2.005005",                                    ignorever: true } # < 2.006
+- { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignorever: true }
+- { name: patch,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: pciids,                                                    family: sisyphus,     ignorever: true } # ALT pick random date instead of official date version
+- { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignorever: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
-- { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
 - { name: procmail,                    verpat: "[0-9]+",                                   ignorever: true } # homebrew
 - { name: psimedia,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
 - { name: pytrainer,                   ver: ["1.10.1", "1.10.2"],    family: debuntu,      ignorever: true }
-- { name: quota,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+
+# Q
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: quilt,                       verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: quota,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
+
+# R
 - { name: r-hexbin,                    ver: "1.27.1-1",                                    ignorever: true } # guix fake
 - { name: racer,                       ver: "2.07",                                        ignorever: true }
 - { name: rage,                        ver: "0.3.0.042",                                   ignorever: true }
 - { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
-- { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
 - { name: rpcgen,                                                    family: ravenports,   ignorever: true } # fake
+- { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
+
+# S
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: scite,                       ver: "375",                                         ignorever: true } # pclinuxos
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
@@ -185,15 +227,17 @@
 - { name: sed,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
 - { name: shairplay,                   verpat: "20[0-8]{2}.*",                             ignorever: true }
-- { name: sndio,                       ver: "20161106",                                    ignorever: true }
-- { name: strace,                      verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
+- { name: sndio,                       ver: "20161106",                                    ignorever: true }
 - { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             ignorever: true }
 - { name: sqlninja,                    ver: ["0.2.999"],                                   ignorever: true } # it's 0.2.999-alpha1
+- { name: strace,                      verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignorever: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
 - { name: sunxi-tools,                 verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: sutils,                      verpat: "[0-9][0-9]",                               ignorever: true } # manjaro, aur snapshots
 - { name: sysstat,                     ver: "20151012",                                    ignorever: true } # openindiana garbage
+
+# T
 - { name: tar,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # obsoleted
 - { name: tidy,                        ver: "090315.c",                                    ignorever: true } # obsoleted
@@ -201,18 +245,26 @@
 - { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: tuxpaint-stamps,             verpat: "20[0-9]{6}.*",                             ignorever: true } # it's separated
+
+# U
 - { name: ufoai,                       ver: "2.5.0+20150216",                              ignorever: true } # homebrew
 - { name: unace,                       ver: "2.50",                                        ignorever: true } # it's 2.5
-- { name: unrar,                       ver: "5.50",                  family: mageia,       ignorever: true } # it's betaX yet
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
+- { name: unrar,                       ver: "5.50",                  family: mageia,       ignorever: true } # it's betaX yet
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
+
+# V
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
+
+# W
 - { name: whatweb,                     ver: "0.4.8",                 family: [debuntu,openbsd], ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
+
+# X
 - { name: xcb-proto,                   verpat: "7.*",                                      ignorever: true } # opensuse version prefixed with xorg version (e.g. 7.6_1.2)
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignorever: true }
 - { name: xdot,                        ver: "20121124",                                    ignorever: true }
@@ -223,7 +275,11 @@
 - { name: xmoto,                       ver: "0.5.12",                family: [ rosa ],     ignorever: true } # no such version
 - { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignorever: true }
 - { name: xz-utils,                    ver: "5.03",                                        ignorever: true } # gobolinux garbage
+
+# Y
 - { name: youtube-dl,                  verpat: "[0-9]{8}",                                 ignorever: true } # canonical version is period-separated
+
+# Z
 - { name: zathura,                     ver: "20101104",                                    ignorever: true }
 - { name: zpaq,                        verpat: "[0-9]+",                                   ignorever: true }
 - { name: zsh-syntax-highlighting,     verpat: "20[0-9]{6}.*",                             ignorever: true } # FreeBSD
