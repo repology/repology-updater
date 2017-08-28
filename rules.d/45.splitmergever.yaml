@@ -471,6 +471,9 @@
 - { name: [openscenegraph-qt,openscenegraph-qt4,open-scene-graph], setname: openscenegraph }
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-devel }
 
+- { namepat: "(?:lib)?pangomm[0-9._-]*", setname: pangomm }
+- { namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", setname: pangomm }
+
 - { namepat: "(?:lib)?pcre[0-9._-]*",          setname: pcre }
 - { name: [pcre-static,pcre-cpp],      setname: pcre }
 - { name: pcre, verpat: "[0-9]{2}\\..*", setname: pcre2 }

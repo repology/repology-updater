@@ -14,11 +14,11 @@
 # A
 - { name: aap,                         setname: a-a-p                     }
 - { name: abuse_sdl,                   setname: abuse                     }
-- { name: accounts-qt5,                setname: accounts-qt ,             family: [ sisyphus ] }
 - { name: abbaye,                      setname: abbaye-des-morts          }
 - { name: abbayedesmorts,              setname: abbaye-des-morts          }
 - { name: [abiword-x11,abiword-gtk2,abiword-minimal], setname: abiword    }
 - { name: abuse-sdl,                   setname: abuse }
+- { name: accounts-qt5,                setname: accounts-qt ,             family: [ sisyphus ] }
 - { name: ace,                         setname: ace-of-penguins,          family: [ openbsd, slackbuilds ] }
 - { name: ace, category: games-board,  setname: ace-of-penguins,          family: [ gentoo ] }
 - { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              family: [ fedora ] } # XXX: ???
@@ -29,7 +29,6 @@
 - { name: [adobereader, adobe-reader], setname: acroread }
 - { namepat: "acroread7-.*font.*",     setname: acroread7-asianfonts,     family: [ pkgsrc ] }
 - { namepat: "acroread9-.*font.*",     setname: acroread-asianfonts,      family: [ pkgsrc ] }
-- { namepat: "aspell-dict-(.*)",       setname: "aspell-$1",              family: [ guix, nix ] }
 - { name: actionaz,                    setname: actiona,                  family: [ chocolatey ] }
 - { name: activemq-activeio,           setname: activeio                  }
 - { name: adb,                         setname: android-tools,            family: [ openbsd ] }
@@ -85,6 +84,7 @@
 - { name: astromatic-scamp,            setname: scamp }
 - { name: astromatic-sextractor,       setname: sextractor }
 - { name: astromatic-swarp,            setname: swarp }
+- { namepat: "aspell-dict-(.*)",       setname: "aspell-$1",              family: [ guix, nix ] }
 - { name: [audacious-gtk3,audacious-core,audacious-qt5,audacious2,audacious-itself], setname: audacious }
 - { name: audacious2-plugins,          setname: audacious-plugins         }
 - { name: audacity-freeworld,          setname: audacity                  }
