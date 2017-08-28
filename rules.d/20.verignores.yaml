@@ -235,6 +235,7 @@
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignorever: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
 - { name: sunxi-tools,                 verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: sutils,                      verpat: "[0-9][0-9]",                               ignorever: true } # manjaro, aur snapshots
+- { name: svn2git,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # macports
 - { name: sysstat,                     ver: "20151012",                                    ignorever: true } # openindiana garbage
 
 # T

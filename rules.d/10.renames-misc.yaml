@@ -390,6 +390,7 @@
 - { name: frozenbubble2,               setname: frozen-bubble             }
 
 # G
+- { name: gambc,                       setname: gambit-c                  }
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle                  }
 - { name: garlic-doc,                  setname: garlic                    }
@@ -495,7 +496,9 @@
 - { name: libbrotli,                   setname: brotli                    }
 - { name: libcatch-cpp-headers,        setname: catch                     }
 - { name: libcodec2,                   setname: codec2                    }
+- { name: libcogl,                     setname: cogl                      }
 - { name: libcomedi,                   setname: comedilib                 }
+- { name: libelf0,                     setname: libelf                    }
 - { name: [libenet,enet1.2],           setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
 - { name: libfdk-aac,                  setname: fdk-aac                   }

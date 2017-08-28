@@ -13,6 +13,8 @@
 - { name: cdf3,                        setname: cdf                       } # Common Data Format lib
 - { name: cdf, verpat: "0.*",          setname: cdf-df                    } # split out colorized df
 
+- { name: cogl, ver: "1.22.5",         setname: deepin-cogl               } # XXX: needs concrete repository match (not family)
+
 - { name: chess, wwwpart: gnu.org,     setname: gnuchess                  }
 - { name: chess, category: Games/Boards, setname: gnuchess                  }
 
@@ -53,12 +55,17 @@
 - { name: [ddrescue],                  setname: dd_rescue, ver: "1.23", family: debuntu } # dd_rescue, not GNU one
 - { name: [gddrescue, gnu_ddrescue],   setname: ddrescue }
 
+- { name: gambit,                      category: games-board, setname: gambitchess }
+- { name: gambit,                      verpat: "4\\..*", setname: gambit-c }
+
+- { name: gom,                         category: [sound,media-sound], setname: gom-mixer }
+
+- { name: git_fame,                    setname: git-fame-rb, wwwpart: oleander.io }
+
 - { name: hugo,                        setname: hugo-interactive-fiction, verpat: "3\\..*" }
 - { name: hugo,                        setname: hugo-emulator, verpat: "2\\..*" }
 - { name: hugo,                        setname: hugo-sitegen }
 - { name: gohugo,                      setname: hugo-sitegen }
-
-- { name: git_fame,                    setname: git-fame-rb, wwwpart: oleander.io }
 
 # distributed compiler vs. stream download utility
 - { name: icecream,                    setname: icecream-distributed-compiler, verpat: "1\\.[01].*" }
@@ -66,6 +73,8 @@
 - { name: icecream,                    warning: "please classify me" }
 
 - { name: kiki, category: [python,universe/python], setname: kiki-re }
+
+- { name: libelf,                      wwwpart: elfutils, setname: elfutils } # Arch: XXX: problem
 
 - { name: mog,                         setname: mog-cat, family: freebsd }
 - { name: mog,                         setname: mog-game, family: slackbuilds }
@@ -106,6 +115,8 @@
 - { name: ssr, family: pclinuxos, setname: simplescreenrecorder }
 
 - { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
+
+- { name: svn2git, verpat: "1\\.1[0-9]+", setname: svn-all-fast-export }
 
 # Programming language vs. XMPP client vs. openstack object storage
 - { name: swift,                       setname: swift-lang, family: [ arch, freebsd ] }
