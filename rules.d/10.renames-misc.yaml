@@ -83,6 +83,7 @@
 - { name: astromatic-scamp,            setname: scamp }
 - { name: astromatic-sextractor,       setname: sextractor }
 - { name: astromatic-swarp,            setname: swarp }
+- { name: [attica-kf5,attica-qt4,attica-qt5], setname: attica }
 - { namepat: "aspell-dict-(.*)",       setname: "aspell-$1",              family: [ guix, nix ] }
 - { name: [audacious-gtk3,audacious-core,audacious-qt5,audacious2,audacious-itself], setname: audacious }
 - { name: audacious2-plugins,          setname: audacious-plugins         }
