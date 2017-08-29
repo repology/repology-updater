@@ -61,6 +61,7 @@ version are always parsed.
 | Guix                             | ✔       |         |       | ✔     | ✔       |          |
 | GoboLinux                        | ✔       |         |       | ✔     | ✔       |          |
 | Hackage                          |         |         |       | ✔ (2) |         |          |
+| HaikuPorts                       |         |         | ✔     |       |         |          |
 | Homebrew                         | ✔       |         |       | ✔     |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
