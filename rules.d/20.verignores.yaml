@@ -130,6 +130,7 @@
 
 # J
 - { name: john,                        verpat: "1.8.0.2",            family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: json-c,                      verpat: "0\\.12\\.1-[0-9]{8}.*",                    ignorever: true } # macports garbage
 - { name: jwm,                         verpat: "[0-9]+",                                   ignorever: true }
 
 # K
@@ -142,8 +143,10 @@
 - { name: krename,                     verpat: "20[0-9]{6}.*",                             ignorever: true }
 
 # L
+- { name: lcab,                        ver: "1.0",                   family: mageia,       ignorever: true }
 
 # LIB*
+- { name: libasr,                      ver: "[0-9]{8}.*",                                  ignorever: true } # guix crap
 - { name: libcpuid,                    ver: "0.21",                                        ignorever: true } # deepin crap (it's 0.2.1)
 - { name: libexecinfo,                                               family: ravenports,   ignorever: true } # fake
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
