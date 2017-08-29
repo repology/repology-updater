@@ -406,11 +406,10 @@
 - { name: gif,                         setname: giflib, family: ravenports }
 - { name: giflib-util,                 setname: giflib                    }
 - { name: giflib4,                     setname: giflib                    }
-- { name: git-flow,                    setname: gitflow                   }
 - { name: libungif,                    setname: giflib                    } # former name
 - { namepat: "gimp2-(.*)",             setname: "gimp-$1"                 }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
-- { name: git-flow,                    setname: gitflow                   }
+- { name: [git-flow,git_flow],         setname: gitflow                   }
 - { name: gkrellm2,                    setname: gkrellm                   }
 - { name: gl117,                       setname: gl-117                    }
 - { name: [gnomephotoprinter,gnome-photo-print], setname: gnome-photo-printer }
