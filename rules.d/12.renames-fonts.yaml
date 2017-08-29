@@ -42,6 +42,7 @@
 
 - name:
     - anonymous-pro
+    - anonymous_pro
     - anonymouspro
     - font-anonymous-pro
     - fonts-anonymous-pro
@@ -50,6 +51,15 @@
     - msimonson-anonymouspro-fonts
     - ttf-anonymous-pro
   setname: "fonts:anonymouspro"
+
+- name:
+    - arabeyes-fonts
+    - arabeyes-ttf
+    - arabeyes_fonts
+    - fonts-arabeyes
+    - fonts-ttf-arabic-arabeyes
+    - ttf-arabeyes-fonts
+  setname: "fonts:arabeyes"
 
 - name:
     - arkpandora
@@ -125,6 +135,12 @@
   setname: "fonts:chinese-opendesktop"
 
 - name:
+    - clear_sans
+    - clearsans
+    - ttf-clear-sans
+  setname: "fonts:clearsans"
+
+- name:
     - cm-unicode
     - cm-unicode-fonts
     - otf-cm-unicode
@@ -143,6 +159,7 @@
 - name:
     - comic-neue
     - comic-neue-fonts
+    - comic_neue
     - font-comic-neue
     - fonts-otf-comic-neue
     - ttf-comic-neue
@@ -281,6 +298,7 @@
 
 - name:
     - essays1743
+    - essays-1743
     - fonts-ttf-essays1743
     - fonts-ttf-essays1743
     - otf-essays-1743
@@ -295,7 +313,7 @@
 
 - name:
     - farsi-fonts
-    - farsi-fonts
+    - farsi_fonts
     - farsifonts
     - farsifonts-ttf
     - fonts-farsiweb
@@ -430,6 +448,7 @@
 - name:
     - fonts-humor-sans
     - humor-sans
+    - humor_sans
     - ttf-humor-sans
   setname: "fonts:humor-sans"
 
@@ -487,17 +506,26 @@
 
 # L
 - name:
+    - fonts-sil-lateef
+    - fonts-ttf-sil-lateef
+    - lateef_font
+    - sil-lateef-fonts
+    - ttf-sil-lateef
+  setname: "fonts:lateef"
+
+- name:
     - font-liberation
     - fonts-liberation
     - fonts-liberation2
     - fonts-ttf-liberation
+    - fonts-ttf-liberation-narrow
     - liberation-fonts
     - liberation-fonts-ttf
     - liberation-ttf
     - liberation2-fonts
-    - ttf-liberation
-    - fonts-ttf-liberation-narrow
+    - liberation_fonts
     - liberationsansnarrow
+    - ttf-liberation
     - ttf-liberation-sans-narrow
   setname: "fonts:liberation"
 
@@ -554,6 +582,17 @@
   setname: "fonts:mutt-misc"
 
 # N
+- name:
+    - fonts-ttf-nafees-nastaleeq
+    - nafees-nastaleeq-fonts
+    - nafees_nastaleeq
+  setname: "fonts:nafees-nastaleeq"
+
+- name:
+    - fonts-ttf-nafees-riqa
+    - nafees-riqa-fonts
+    - nafees_riqa
+  setname: "fonts:nafees-riqa"
 
 # O
 - name:
@@ -671,6 +710,14 @@
   setname: "fonts:sazanami"
 
 - name:
+    - fonts-sil-scheherazade
+    - fonts-ttf-sil-scheherazade
+    - scheherazade_font
+    - sil-scheherazade-fonts
+    - ttf-sil-scheherazade
+  setname: "fonts:scheherazade"
+
+- name:
     - sgi-fonts
     - sgifonts
   setname: "fonts:sgi"
@@ -711,6 +758,7 @@
 - name:
     - terminus-font-ttf
     - terminus-ttf
+    - terminus_ttf
   setname: "fonts:terminus-ttf"
 
 # U
@@ -725,6 +773,7 @@
     - ubuntu-font-family-sources
     - ubuntu-fonts
     - ubuntu.font
+    - ubuntu_font_family
   setname: "fonts:ubuntu"
 
 - name:
@@ -733,6 +782,11 @@
     - ttf-ubuntu-title
     - ubuntu-title-fonts
   setname: "fonts:ubuntu-title"
+
+- name:
+    - fonts-ttf-ukij-tuz
+    - ukij-tuz-fonts
+  setname: "fonts:ukij-tuz"
 
 - name:
     - fonts-bitmap-univga
@@ -749,6 +803,18 @@
   setname: "fonts:umefont"
 
 # V
+- name:
+    - fonts-ttf-japanese-vlgothic
+    - fonts-ttf-vlgothic
+    - fonts-vlgothic
+    - ttf-vlgothic
+    - ttf-vlgothic-ibx
+    - vl_gothic
+    - vlgothic
+    - vlgothic-fonts
+    - vlgothic-ttf
+  setname: "fonts:vlgothic"
+
 - name:
     - ttf-vdrsymbols
     - vdrsymbols-ttf

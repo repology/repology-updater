@@ -213,7 +213,7 @@
 - { name: cogl-amdgpu-pro,             setname: cogl                      }
 - { name: collectd5,                   setname: collectd                  }
 - { name: [coreos-etcd,coreos-etcd3],  setname: etcd                      }
-- { name: corsix-th,                   setname: corsixth                  }
+- { name: [corsix-th,corsix_th],       setname: corsixth                  }
 - { name: commoncpp,                   setname: commoncpp2                }
 - { name: conserver8,                  setname: conserver                 }
 - { name: consolekit2,                 setname: consolekit                }
@@ -233,6 +233,7 @@
 - { name: curseofwar-sdl,              setname: curseofwar                }
 - { name: cvs-devel,                   setname: cvs                       }
 - { name: cvsweb3,                     setname: cvsweb                    }
+- { name: cyberdogs_sdl,               setname: cdogs-sdl                 }
 - { name: cyrus5-imapd,                setname: cyrus-imapd               }
 - { name: cython2,                     setname: cython                    }
 - { name: cython2-kivy,                setname: cython-kivy               }
@@ -405,6 +406,7 @@
 - { name: gif,                         setname: giflib, family: ravenports }
 - { name: giflib-util,                 setname: giflib                    }
 - { name: giflib4,                     setname: giflib                    }
+- { name: git-flow,                    setname: gitflow                   }
 - { name: libungif,                    setname: giflib                    } # former name
 - { namepat: "gimp2-(.*)",             setname: "gimp-$1"                 }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
@@ -609,6 +611,7 @@
 - { name: media-info,                  setname: mediainfo }
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
 - { name: mvnsh,                       setname: maven-shell }
+- { name: [msgpack-c,msgpack_c_cpp],   setname: msgpack } # c/cpp by default
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 
 # N
@@ -670,7 +673,7 @@
 - { name: [postgresql-pglogical,pglogical2], setname: pglogical }
 - { name: poudriere-devel,             setname: poudriere, ignorever: true }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
-- { name: [powdertoy, the-powder-toy, powder-toy-static], setname: powder-toy }
+- { name: [powdertoy,the-powder-toy,powder-toy-static,thepowdertoy], setname: powder-toy }
 - { name: psi+,                        setname: psi-plus                  }
 - { name: [psi+-plugins-psimediaplugin,psi-plus-plugin-psimedia], setname: psimedia }
 - { name: psi-im,                      setname: psi                       }
@@ -684,7 +687,7 @@
 # Q
 - { name: qastools-qt5,                setname: qastools                  }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5,qbittorrent-dark,qbittorrent-nogui,qbittorrent-stable], setname: qbittorrent }
-- { name: [qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], setname: qtcreator }
+- { name: [qt_creator,qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], setname: qtcreator }
 - { name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], setname: qtkeychain }
 - { name: [qupzilla-qt4,qupzilla-qt5,qupzilla-qtwebkit], setname: qupzilla }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
@@ -702,6 +705,7 @@
 - { name: s3-backer,                   setname: s3backer                  }
 - { name: [s3fs,s3fs-fuse],            setname: "fusefs:s3fs"             }
 - { name: schism,                      setname: schismtracker             }
+- { name: sdl_lopan,                   setname: sdllopan                  }
 - { name: sdl2pp,                      setname: libsdl2pp                 }
 - { namepat: "sdl-?sopwith",           setname: sopwith                   }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debuntu ]  }
@@ -724,7 +728,7 @@
 - { name: stellarium-qt4,              setname: stellarium                }
 - { name: stepmania-devel,             setname: stepmania,                family: [ freebsd ] }
 - { namepat: "stonesoup(?:-sdl)?",     setname: stone-soup                }
-- { name: stransball2,                 setname: supertransball2           }
+- { name: [stransball2,super_transball], setname: supertransball2         }
 - { name: structure-synth,             setname: structuresynth            }
 - { name: stone-soup-ncurses,          setname: stone-soup                }
 - { name: stunt-rally,                 setname: stuntrally                }
@@ -816,7 +820,9 @@
 - { namepat: "enscript-.*",            setname: enscript,                 family: [ freebsd ] } # enscript-a4, enscript-letter, enscript-letterdj
 - { namepat: "fltk[0-9.]+",            setname: fltk,                     family: [ debuntu ]  }
 - { namepat: "freeciv-(?:client|server|share)", setname: freeciv,         family: [ pkgsrc, openbsd ] }
-- { namepat: "open[gs]fx",             setname: "openttd-$0"              }
+- { namepat: "open(?:gfx|sfx)", setname: "openttd-$0"           }
+- { namepat: "openmsx", wwwpart: openttd, setname: "openttd-$0" }
+- { namepat: "openttd[-_](gfx|sfx|msx)", setname: "openttd-open$1" }
 - { namepat: "(?:lib)?sdl[_-]([a-z]+)1\\.2",      setname: "sdl-$1"                  }
 - { namepat: "(?:lib)?sdl[_-]([a-z]+)2\\.0",      setname: "sdl2-$1"                 }
 - { namepat: "(?:lib)?(?:sdl1(.*))",   setname: "sdl$1" }
