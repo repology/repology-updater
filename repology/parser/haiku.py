@@ -51,7 +51,8 @@ class HaikuPortsFilenamesParser():
                     if pkg.category.startswith('haiku-'):
                         pkg.shadow = True
 
-                    name, version = recipe[:-7].split('-', 2)
+                    # it seems to be guaranteed there's only one hyphen in recipe filename
+                    name, version = recipe[:-7].split('-', 1)
 
                     if package.replace('-', '_') != name:
                         print('WARNING: mismatch for package directory and recipe name: {} != {}'.format(package, name), file=sys.stderr)
