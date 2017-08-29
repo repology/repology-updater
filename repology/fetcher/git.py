@@ -45,7 +45,7 @@ class GitFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
-            RunSubprocess(['git', 'clone', '--progress', '--no-checkout', '--depth=1', self.url, statepath], logger=logger)
+            RunSubprocess(['git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statepath], logger=logger)
             self.__SetupSparseCheckout(statepath, logger)
             RunSubprocess(['git', 'checkout'], cwd=statepath, logger=logger)
         elif update:
