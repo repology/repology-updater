@@ -47,9 +47,9 @@ class HaikuPortsFilenamesParser():
                     pkg.name = package
                     pkg.category = category
 
-                    # shadow haiku-only ports
-                    if pkg.category.startswith('haiku-'):
-                        pkg.shadow = True
+                    # may want to shadow haiku-only ports
+                    #if pkg.category.startswith('haiku-'):
+                    #    pkg.shadow = True
 
                     # it seems to be guaranteed there's only one hyphen in recipe filename
                     name, version = recipe[:-7].split('-', 1)
