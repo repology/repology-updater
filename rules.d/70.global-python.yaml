@@ -166,6 +166,7 @@
 - { name: "python:backports-shutil-which", setname: "python:backports.shutil_which" }
 - { name: shutil_which,                setname: "python:backports.shutil_which" }
 - { name: sphinxcontrib-websupport,    setname: "python:sphinxcontrib-websupport" }
+- { name: sphinx, wwwpart: [sphinx-doc.org,pocoo.org], setname: "python:sphinx" }
 
 # as per pypi package name
 - { name: "python:axolotl",            setname: "python:python-axolotl"   }

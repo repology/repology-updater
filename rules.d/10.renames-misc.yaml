@@ -715,6 +715,7 @@
 - { name: seven-kingdoms,              setname: 7kaa                      }
 - { name: sfk,                         setname: swissfileknife            }
 - { name: sha1dc,                      setname: sha1collisiondetection    }
+- { name: simplescreenrecorder-lib,    setname: simplescreenrecorder      }
 - { name: sisc-scheme,                 setname: sisc }
 - { name: [libslang,libslang2,s-lang,slang2], setname: slang              }
 - { name: slashem-tty,                 setname: slashem                   }
