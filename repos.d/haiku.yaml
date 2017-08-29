@@ -5,6 +5,7 @@
   type: repository
   desc: HaikuPorts master
   family: haikuports
+  color: "ffc245"
   sources:
     - name: haikuports
       fetcher: Git
@@ -23,6 +24,7 @@
   type: repository
   desc: HaikuPorts release
   family: haikuports
+  color: "ffc245"
   sources:
     - name: haikuports
       fetcher: Git
@@ -42,6 +44,7 @@
   type: repository
   desc: HaikuPorts 2017Q1
   family: haikuports
+  color: "ffc245"
   sources:
     - name: haikuports
       fetcher: Git
@@ -61,6 +64,7 @@
   type: repository
   desc: HaikuPorts 2017Q2
   family: haikuports
+  color: "ffc245"
   sources:
     - name: haikuports
       fetcher: Git
@@ -80,6 +84,7 @@
   type: repository
   desc: HaikuPorts 2017Q3
   family: haikuports
+  color: "ffc245"
   sources:
     - name: haikuports
       fetcher: Git
