@@ -46,6 +46,10 @@ def maintainer_to_links(maintainer):
     return links
 
 
+def is_fallback_maintainer(maintainer):
+    return maintainer.startswith('fallback-mnt-') and maintainer.endswith('@repology')
+
+
 def maintainers_to_group_mailto(maintainers, subject=None):
     emails = []
 

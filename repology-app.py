@@ -61,6 +61,7 @@ app.jinja_env.filters['maintainers_to_group_mailto'] = maintainers_to_group_mail
 
 # templates: custom tests
 app.jinja_env.tests['for_page'] = for_page
+app.jinja_env.tests['fallback_maintainer'] = is_fallback_maintainer
 
 # templates: custom global functions
 app.jinja_env.globals['url_for_self'] = url_for_self
