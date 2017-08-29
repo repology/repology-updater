@@ -33,6 +33,7 @@ from .gentoo import GentooGitParser
 from .gobolinux import GoboLinuxGitParser
 from .guix import GuixParser
 from .hackage import HackageParser
+from .haiku import HaikuPortsFilenamesParser
 from .homebrew import HomebrewJsonParser
 from .libregamewiki import LibreGameWikiParser
 from .macports import MacPortsParser

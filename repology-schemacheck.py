@@ -47,6 +47,7 @@ families = [
     'gobolinux',
     'guix',
     'hackage',
+    'haikuports',
     'homebrew',
     'libregamewiki',
     'macports',

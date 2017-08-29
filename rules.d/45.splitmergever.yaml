@@ -511,7 +511,7 @@
 - { namepat: "postgresql[0-9.-]*-plperl", setname: postgresql }
 - { namepat: "postgresql[0-9.-]*-plpython", setname: postgresql }
 - { namepat: "postgresql[0-9.-]*-pltcl", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-server", setname: postgresql }
+- { namepat: "postgresql[0-9.-]*[_-]server", setname: postgresql }
 - { namepat: "postgresql[0-9.-]*-beta.*", setname: postgresql, ignorever: true }
 - { namepat: "postgresql[0-9.-]*-lts.*", setname: postgresql }
 - { name: postgresql, verpat: "10.*", setname: postgresql10 }
