@@ -172,7 +172,7 @@
 
 - { namepat: "gccgo[0-9.-]+",          setname: gccgo }
 
-- { namepat: "(:?lib)?gdk-pixbuf[0-9._-]*(+svg|-jasper,-xlib)", setname: gdk-pixbuf }
+- { namepat: "(?:lib)?gdk-pixbuf[0-9._-]*(\\+svg|-jasper,-xlib)", setname: gdk-pixbuf }
 - { name: gdk-pixbuf, verpat: "0.*",   setname: gdk-pixbuf0 }
 
 - { name: [ geos1, geos35 ],           setname: geos }
