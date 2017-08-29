@@ -116,6 +116,16 @@
 
 # C
 - name:
+    - abattis-cantarell-fonts
+    - cantarell
+    - cantarell-fonts
+    - font-abattis-cantarell
+    - fonts-cantarell
+    - fonts-otf-abattis-cantarell
+    - ttf-cantarell
+  setname: "fonts:cantarell"
+
+- name:
     - ttf-cheapskate
     - cheapskatefonts
   setname: "fonts:cheapskate"
