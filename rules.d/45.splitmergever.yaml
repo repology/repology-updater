@@ -464,6 +464,8 @@
 - { name: [ogre-docs,ogre-samples], setname: ogre }
 - { name: ogre, verpat: "2.*", ignorever: true }
 
+- { namepat: "openjade[0-9._-]+", setname: openjade }
+
 # XXX: more merges needed here
 - { namepat: "openjdk[0-9._-]*(?:-doc)?", setname: openjdk }
 - { name: openjdk, verpat: "9.*", setname: openjdk9 }
@@ -505,6 +507,10 @@
 
 - { namepat: "perl-?5[0-9.]*",         setname: perl }
 
+- { namepat: "pgpool-ii[0-9._-]*",         setname: pgpool }
+- { namepat: "postgresql[0-9._-]*-pgpool[0-9._-]*", setname: pgpool }
+- { name: [pgpool2,postgresql-pgpool-ii], setname: pgpool }
+
 - { name: [png,libpng-apng],           setname: libpng }
 - { namepat: "libpng(?:-legacy)?[0-9.-]*", setname: libpng }
 
@@ -513,7 +519,7 @@
 
 - { namepat: "postgis[0-9._-]+",     setname: postgis }
 - { namepat: "postgresql[0-9._-]*-postgis", setname: postgis }
-- { name: postgis-src, setname: postgis }
+- { name: [postgis-src,postgis-sfcgal], setname: postgis }
 
 - { namepat: "postgresql[0-9.-]*",     setname: postgresql }
 - { namepat: "postgresql[0-9.-]*-client", setname: postgresql }
@@ -529,6 +535,9 @@
 - { name: postgresql, verpat: "10.*", setname: postgresql10 }
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
+
+- { namepat: "postgresql[0-9._-]*-(plr|orafce|plv8js|pgroonga|tds_fdw|zhparser|pg-dirtyread|cstore-fdw|mysql-fdw)", setname: "$1" }
+- { name: plv8js, setname: plv8 }
 
 - { name: [python,python2,python3], family: freebsd, ignore: true } # ignore metaports
 - { namepat: "python[._-]?[23][0-9._-]*", setname: python }
