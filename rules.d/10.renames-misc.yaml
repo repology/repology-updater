@@ -142,6 +142,7 @@
 - { name: bugseverywhere,              setname: bugs-everywhere           }
 - { name: bugzilla50,                  setname: bugzilla                  }
 - { name: bullet3,                     setname: bullet                    }
+- { name: bullet-docs,                 setname: bullet                    }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
 - { name: bzflag-server,               setname: bzflag                    }
 - { name: bzr-tools,                   setname: bzrtools                  }
@@ -619,6 +620,7 @@
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
 - { name: mvnsh,                       setname: maven-shell }
 - { name: [msgpack-c,msgpack_c_cpp,libmsgpack,msgpack1], setname: msgpack } # c/cpp by default
+- { namepat: "mygui-(?:docs|dummy|gl|opengl|ogre[0-9._-]*)", setname: mygui }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 
 # N
