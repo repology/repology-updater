@@ -438,6 +438,7 @@
 # XXX: handle moodle-lang*
 
 - { namepat: "mysql[0-9.-]*(?:-client|-server)?", setname: mysql }
+- { namepat: "libmysqlclient", family: haikuports, setname: mysql-connector-c } # not really libmysqlclient from mysql
 - { namepat: "libmysqlclient[0-9.-]*", setname: mysql }
 - { namepat: "mysql-clients[0-9.-]*", setname: mysql }
 - { name: mysql, verpat: "8\\..*", setname: mysql8 }
