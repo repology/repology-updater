@@ -175,7 +175,7 @@
 - { namepat: "(?:lib)?gdk-pixbuf[0-9._-]*(\\+svg|-jasper|-xlib)?", setname: gdk-pixbuf }
 - { name: gdk-pixbuf, verpat: "0.*",   setname: gdk-pixbuf0 }
 
-- { name: [ geos1, geos35 ],           setname: geos }
+- { namepat: "geos[0-9._-]+",          setname: geos }
 
 - { name: [gimp-app,gimp-devel,gimp-with-plugins,gimp2,gimp2-devel], setname: gimp }
 - { name: [gimp3-devel,gimp-git,gimp3,gimp-gtk3], setname: gimp-devel, ignorever: true }
@@ -222,6 +222,8 @@
 - { namepat: "(?:lib)?goocanvas[0-9._-]*", setname: goocanvas }
 
 - { namepat: "(?:lib)?goocanvasmm[0-9._-]*", setname: goocanvasmm }
+
+- { namepat: "grass[0-9._-]+",         setname: grass }
 
 - { namepat: "guile[0-9._-]+",         setname: guile }
 

@@ -508,6 +508,7 @@
 - { name: libfdk-aac,                  setname: fdk-aac                   }
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: libgdal-grass,               setname: gdal-grass                }
+- { name: [libgeotiff-dfsg,libgeotiff-epsg], setname: libgeotiff          }
 - { name: libgom,                      setname: gom                       }
 - { name: libgranite,                  setname: granite                   }
 - { name: libgtkdatabox,               setname: gtkdatabox                }
