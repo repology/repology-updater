@@ -83,6 +83,7 @@
 - { name: node, wwwpart: ax25, setname: node-ax25 }
 - { name: node, category: [universe/hamradio,lang,Development/Tools,hamradio], setname: node-ax25 }
 - { name: node, wwwpart: nodejs, setname: nodejs }
+- { name: node, family: pclinuxos, setname: nodejs }
 - { name: node, warning: "please classify me" }
 
 - { name: nvi, verpat: "2\\..*",       setname: nvi2 }
