@@ -123,7 +123,7 @@ class PackageTransformer:
                 return RuleApplyResult.unmatched
             matched = False
             for wwwpart in rule['wwwpart']:
-                if wwwpart in package.homepage:
+                if wwwpart in package.homepage.lower():
                     matched = True
                     break
             if not matched:
