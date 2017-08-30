@@ -102,7 +102,7 @@ PROBLEMS_PER_PAGE = 500
 #
 # Max reports for metapackage
 #
-MAX_REPORTS = 10
+MAX_REPORTS = 20
 
 #
 # Address of repology.org to use in HTML links
