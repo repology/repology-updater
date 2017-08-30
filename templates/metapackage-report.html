@@ -24,14 +24,10 @@
 {% if reports %}
 <h2>Current reports</h2>
 {% for report in reports %}
-<div class="panel {% if report.reply and report.expires is not none %}panel-success{% elif report.reply %}panel-danger{% else %}panel-default{% endif %}">
+<div class="panel {% if report.accepted is none %}panel-default{% elif report.accepted %}panel-success{% else %}panel-danger{% endif %}">
 	<div class="panel-heading">
-		Created {{ macros.format_time_interval(report.created_ago) }} ago
-		{%- if report.expires is not none and report.expires -%}
-			, expires in {{ macros.format_time_interval(report.expires) }}
-		{%- elif report.expires is not none -%}
-			, expired
-		{% endif %}
+		Created {{ macros.format_time_interval(report.created_ago) }} ago,
+		{% if report.accepted is none %}not processed yet{% elif report.accepted %}accepted{% else %}rejected{% endif %}
 	</div>
 	<ul class="list-group">
 	{% if report.need_verignore %}

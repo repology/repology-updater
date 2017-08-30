@@ -466,6 +466,7 @@ class Database:
         # reports
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS reports (
+                id serial not null primary key,
                 created timestamp with time zone not null,
                 effname text not null,
                 need_verignore boolean not null,
@@ -473,7 +474,7 @@ class Database:
                 need_merge boolean not null,
                 comment text,
                 reply text,
-                expires timestamp with time zone
+                accepted boolean
             )
         """)
 
@@ -868,9 +869,6 @@ class Database:
                 num_problems = (SELECT count(*) FROM problems),
                 num_maintainers = (SELECT count(*) FROM maintainers)
         """)
-
-        # cleanup expired reports
-        self.cursor.execute('DELETE FROM reports WHERE now() >= expires')
 
         # cleanup stale links
         self.cursor.execute('DELETE FROM links WHERE last_extracted < now() - INTERVAL \'1\' MONTH')
@@ -1684,6 +1682,7 @@ class Database:
         self.cursor.execute(
             """
             SELECT
+                id,
                 now() - created,
                 effname,
                 need_verignore,
@@ -1691,7 +1690,7 @@ class Database:
                 need_merge,
                 comment,
                 reply,
-                CASE WHEN expires IS NULL then NULL WHEN expires > now() THEN expires - now() ELSE interval '0' END
+                accepted
             FROM reports
             WHERE effname = %s
             ORDER BY created desc
@@ -1701,14 +1700,15 @@ class Database:
 
         return [
             {
-                'created_ago': row[0],
-                'effname': row[1],
-                'need_verignore': row[2],
-                'need_split': row[3],
-                'need_merge': row[4],
-                'comment': row[5],
-                'reply': row[6],
-                'expires': row[7],
+                'id': row[0],
+                'created_ago': row[1],
+                'effname': row[2],
+                'need_verignore': row[3],
+                'need_split': row[4],
+                'need_merge': row[5],
+                'comment': row[6],
+                'reply': row[7],
+                'accepted': row[8],
             }
             for row in self.cursor.fetchall()
         ]
