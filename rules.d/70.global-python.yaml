@@ -92,6 +92,8 @@
     - redis-py-cluster
     - shutilwhich
     - sortedcontainers
+    - sphinxcontrib-plantuml
+    - sphinxcontrib-programoutput
     - sphinxcontrib-spelling
     - stopit
     - todoman

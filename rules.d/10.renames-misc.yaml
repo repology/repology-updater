@@ -475,6 +475,7 @@
 - { name: jbig-kit,                    setname: jbigkit                   }
 - { name: jboss-forge-offline,         setname: jboss-forge               }
 - { name: josm-latest,                 setname: josm, ignorever: true     }
+- { name: json-c12,                    setname: json-c                    }
 
 # K
 - { name: [kid3-qt, kid3-qt4, kid3-qt5, kid4-qt, kid3-cli], setname: kid3 }
@@ -611,7 +612,7 @@
 - { name: media-info,                  setname: mediainfo }
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
 - { name: mvnsh,                       setname: maven-shell }
-- { name: [msgpack-c,msgpack_c_cpp],   setname: msgpack } # c/cpp by default
+- { name: [msgpack-c,msgpack_c_cpp,libmsgpack,msgpack1], setname: msgpack } # c/cpp by default
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 
 # N
@@ -824,6 +825,7 @@
 - { namepat: "open(?:gfx|sfx)", setname: "openttd-$0"           }
 - { namepat: "openmsx", wwwpart: openttd, setname: "openttd-$0" }
 - { namepat: "openttd[-_](gfx|sfx|msx)", setname: "openttd-open$1" }
+- { name: openttd-opengfx-snapshot, setname: "openttd-opengfx", ignorever: true }
 - { namepat: "(?:lib)?sdl[_-]([a-z]+)1\\.2",      setname: "sdl-$1"                  }
 - { namepat: "(?:lib)?sdl[_-]([a-z]+)2\\.0",      setname: "sdl2-$1"                 }
 - { namepat: "(?:lib)?(?:sdl1(.*))",   setname: "sdl$1" }
