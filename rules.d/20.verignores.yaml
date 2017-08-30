@@ -181,6 +181,7 @@
 - { name: mtree,                                                     family: ravenports,   ignorever: true } # fake
 - { name: [mkgmap,mkgmap-splitter],    ver: "0.0.0",                                       ignorever: true } # debian; original bersion has svnXXXX addendum
 - { name: munin,                       verpat: "2\\.999.*",                                ignorever: true } # debian fake
+- { name: musescore,                   verpat: ".*git.*",                                  ignorever: true } # haiku
 
 # N
 - { name: ncurses,                     verpat: "6\\.0-20[0-9]{6}.*",                       ignorever: true } # macports
