@@ -261,6 +261,7 @@
 - { name: unace,                       ver: "2.50",                                        ignorever: true } # it's 2.5
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: unrar,                       ver: "5.50",                  family: mageia,       ignorever: true } # it's betaX yet
+- { name: unzip,                       ver: "6.10c11",                                     ignorever: true } # haikuports
 - { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
