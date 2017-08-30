@@ -157,7 +157,7 @@
 - { name: libglw,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignorever: true } # fake
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
-- { name: libpng,                      verpat: "1\\.7\\0beta.*",     family: freshcode,    ignorever: true }
+- { name: libpng,                      verpat: "1\\.7\\.0beta.*",    family: freshcode,    ignorever: true }
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
 - { name: libusbmuxd,                  ver: "1.1.0",                 family: openwrt,      ignorever: true } # fake
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
