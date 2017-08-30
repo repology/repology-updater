@@ -456,7 +456,7 @@
 - { namepat: "nethack[._-]*(?:[23][0-9._-]*)?(?:-nox11)?", setname: nethack }
 
 - { namepat: "nodejs-lts.*", setname: nodejs }
-- { namepat: "nodejs[0-9._-]+", setname: nodejs }
+- { namepat: "node(?:js)?[0-9._-]+", setname: nodejs }
 - { name: [nodejs-bigger-heap,nodejs-slim], setname: nodejs }
 - { name: nodejs-current, setname: nodejs, ignorever: true }
 
@@ -536,7 +536,7 @@
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
 
-- { namepat: "postgresql[0-9._-]*-(plr|orafce|plv8js|pgroonga|tds_fdw|zhparser|pg-dirtyread|cstore-fdw|mysql-fdw)", setname: "$1" }
+- { namepat: "postgresql[0-9._-]*-(plr|orafce|plv8|plv8js|pgroonga|tds_fdw|zhparser|pg_dirtyread|pg_repack|cstore_fdw|mysql_fdw|plpgsql_check)", setname: "$1" }
 - { name: plv8js, setname: plv8 }
 
 - { name: [python,python2,python3], family: freebsd, ignore: true } # ignore metaports
