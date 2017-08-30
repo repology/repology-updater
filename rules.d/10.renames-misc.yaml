@@ -727,6 +727,7 @@
 - { name: simplescreenrecorder-lib,    setname: simplescreenrecorder      }
 - { name: sisc-scheme,                 setname: sisc }
 - { name: [libslang,libslang2,s-lang,slang2], setname: slang              }
+- { name: skobo,                       setname: kobodeluxe                } # old name
 - { name: slashem-tty,                 setname: slashem                   }
 - { name: sdl-asylum,                  setname: asylum                    }
 - { name: sni-qt4,                     setname: sni-qt                    }
