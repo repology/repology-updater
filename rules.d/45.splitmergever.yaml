@@ -453,6 +453,11 @@
 - { name: [nethack-all,nethack-lib,nethack-patch,nethack-qt,nethack-tty,nethack-x11], setname: nethack }
 - { namepat: "nethack[._-]*(?:[23][0-9._-]*)?(?:-nox11)?", setname: nethack }
 
+- { namepat: "nodejs-lts.*", setname: nodejs }
+- { namepat: "nodejs[0-9._-]+", setname: nodejs }
+- { name: [nodejs-bigger-heap,nodejs-slim], setname: nodejs }
+- { name: nodejs-current, setname: nodejs, ignorever: true }
+
 - { namepat: "ogre[0-9._-]+", setname: ogre }
 - { name: [ogre-docs,ogre-samples], setname: ogre }
 - { name: ogre, verpat: "2.*", ignorever: true }

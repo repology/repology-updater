@@ -80,6 +80,11 @@
 - { name: mog,                         setname: mog-game, family: slackbuilds }
 - { name: mog,                         warning: "please classify me" }
 
+- { name: node, wwwpart: ax25, setname: node-ax25 }
+- { name: node, category: [universe/hamradio,lang,Development/Tools,hamradio], setname: node-ax25 }
+- { name: node, wwwpart: nodejs, setname: nodejs }
+- { name: node, warning: "please classify me" }
+
 - { name: nvi, verpat: "2\\..*",       setname: nvi2 }
 
 # "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
