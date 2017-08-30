@@ -410,6 +410,7 @@
 - { name: libungif,                    setname: giflib                    } # former name
 - { namepat: "gimp2-(.*)",             setname: "gimp-$1"                 }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
+- { name: gitter-bin,                  setname: gitter                    }
 - { name: [git-flow,git_flow],         setname: gitflow                   }
 - { name: gkrellm2,                    setname: gkrellm                   }
 - { name: gl117,                       setname: gl-117                    }
@@ -751,6 +752,7 @@
 - { name: [tiger-vnc,tigervnc-viewer], setname: tigervnc }
 - { name: talk-filters,                setname: talkfilters }
 - { name: tecla,                       setname: libtecla }
+- { name: theora,                      setname: libtheora }
 - { name: tigervnc-devel,              setname: tigervnc, ignorever: true }
 - { name: [tintin,tintinxx],           setname: tintin++                  }
 - { name: [tiled-java,tiled-qt],       setname: tiled                     }
@@ -790,7 +792,7 @@
 - { name: websocket++,                 setname: websocketpp               }
 - { name: wine,                        setname: wine-etersoft,            family: sisyphus } # counterfeit
 - { name: wings,                       setname: wings3d                   }
-- { name: wirouter_keyrec,             setname: wirouter-keyrec }
+- { name: wirouter_keyrec,             setname: wirouterkeyrec }
 - { name: wmaker,                      setname: windowmaker               }
 - { name: wop,                         setname: wormsofprey               }
 - { name: wpasupplicant,               setname: wpa_supplicant            }

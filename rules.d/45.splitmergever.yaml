@@ -519,7 +519,7 @@
 
 - { namepat: "postgis[0-9._-]+",     setname: postgis }
 - { namepat: "postgresql[0-9._-]*-postgis", setname: postgis }
-- { name: [postgis-src,postgis-sfcgal], setname: postgis }
+- { name: [postgis-src,postgis-sfcgal,liblwgeom], setname: postgis }
 
 - { namepat: "postgresql[0-9.-]*",     setname: postgresql }
 - { namepat: "postgresql[0-9.-]*-client", setname: postgresql }

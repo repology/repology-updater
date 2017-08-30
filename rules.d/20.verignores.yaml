@@ -271,6 +271,7 @@
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 
 # W
+- { name: warsow,                      ver: "2.10",                  family: debuntu,      ignorever: true } # playdeb weirdnes
 - { name: whatweb,                     ver: "0.4.8",                 family: [debuntu,openbsd], ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }

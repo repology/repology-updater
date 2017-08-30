@@ -5,4 +5,11 @@
 - { namepat: "nodejs-(.*)",            setname: "node:$1", family: [ fedora, mageia, arch, rosa, sisyphus ] } # sisyphus=autoimports
 
 # manual modules
-- { name: gitter-cli, setname: "node:$0" }
+- name:
+    - n
+    - nativefier
+  setname: "node:$0"
+
+# manual programs
+- { name: "node:svgo", setname: svgo }
+- { name: "node:gitter-cli", setname: gitter-cli }

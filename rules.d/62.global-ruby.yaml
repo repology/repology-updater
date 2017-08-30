@@ -113,6 +113,8 @@
 - { name: ruby-install,             setname: "ruby:install" }
 
 - { name: "ruby:pdumpfs",           setname: "pdumpfs" }
+- { name: "ruby:tmuxinator",        setname: "tmuxinator" }
+- { name: "ruby:t",                 setname: "t" }
 
 # don't allow replacing _ with - to fix _/- clashes
 - { namepat: "ruby:dm_core", last: true }

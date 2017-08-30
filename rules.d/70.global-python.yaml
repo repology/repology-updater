@@ -40,6 +40,7 @@
     - kapteyn
     - khal
     - lektor
+    - martian
     - munch
     - netifaces
     - pandocfilters
@@ -196,6 +197,7 @@
 - { name: "python:redis-py",           setname: "python:redis"            }
 - { name: "python:rss2email",          setname: rss2email                 }
 - { name: "python:sphinx10",           setname: "python:sphinx"           }
+- { name: "python:stormssh",           setname: stormssh                  }
 - { name: "python:uwsgi",              setname: uwsgi                     }
 - { name: "python:uwsgitop",           setname: uwsgitop                  }
 - { name: "python:waf",                setname: waf                       }
