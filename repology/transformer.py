@@ -90,6 +90,8 @@ class PackageTransformer:
 
         # match categories
         if 'category' in rule:
+            if not package.category:
+                return RuleApplyResult.unmatched
             if package.category.lower() not in rule['category']:
                 return RuleApplyResult.unmatched
 
