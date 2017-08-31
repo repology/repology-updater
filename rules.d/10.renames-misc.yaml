@@ -561,13 +561,14 @@
 - { name: libzenxml,                   setname: zenxml                    }
 
 # L (continued)
-- { name: mate-brisk-menu,             setname: brisk-menu                }
-- { name: mbmon,                       setname: xmbmon                    }
+- { name: lxc,       family: homebrew, setname: lxd } # misname
 
 # M
 - { name: m4ri,                        setname: libm4ri                   }
 - { name: m4rie,                       setname: libm4rie                  }
 - { name: [marsshooter,mars-shooter],  setname: m.a.r.s.                  }
+- { name: mate-brisk-menu,             setname: brisk-menu                }
+- { name: mbmon,                       setname: xmbmon                    }
 - { name: mc46,                        setname: mc                        }
 - { name: mcron2,                      setname: mcron                     }
 - { name: mdocml,                      setname: mandoc                    } # mdocml is an old name (schwarze@openbsd.org)
