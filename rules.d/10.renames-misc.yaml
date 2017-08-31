@@ -533,6 +533,7 @@
 - { name: libopus,                     setname: opus                      }
 - { name: libopendkim,                 setname: opendkim                  }
 - { name: libopusfile,                 setname: opusfile                  }
+- { name: libpaper1,                   setname: libpaper                  }
 - { name: libphash,                    setname: phash                     }
 - { name: libphysfs,                   setname: physfs                    }
 - { name: [libpcre++,pcrexx],          setname: pcre++                    }
