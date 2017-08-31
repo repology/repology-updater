@@ -87,7 +87,7 @@
 				<li class="list-group-item"><b>Download(s):</b>
 					<ul class="list-package-details">
 					{% for download in package.downloads %}
-						<li><a href="{{ download }}">{{ download }}</a>{{ macros.link_status(download, link_statuses) }}</li>
+						<li class="break-word"><a href="{{ download }}">{{ download }}</a>{{ macros.link_status(download, link_statuses) }}</li>
 					{% endfor %}
 					</ul>
 				</li>

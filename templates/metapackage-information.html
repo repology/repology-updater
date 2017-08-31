@@ -88,7 +88,7 @@
 		<h2>Downloads</h2>
 		<ul>
 		{% for download,families in information.downloads|dictsort(case_sensitive=True) %}
-			<li><a href="{{ download }}">{{ download }}</a>{{ macros.link_status(download, link_statuses) }} <b>({{ families|length }})</b></li>
+			<li class="break-word"><a href="{{ download }}">{{ download }}</a>{{ macros.link_status(download, link_statuses) }} <b>({{ families|length }})</b></li>
 		{% endfor %}
 		</ul>
 		{% endif %}
