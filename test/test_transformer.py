@@ -174,6 +174,19 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p3', 'version': '2.0', 'expect_effname': 'p3'}
         )
 
+    def test_match_wwwpart_case(self):
+        self.check_transformer(
+            '[ { wwwpart: homepage1, setname: ok1 }, { wwwpart: HOMEPAGE2, setname: ok2 }, { wwwpart: homepage3, setname: ok3 }, { wwwpart: HOMEPAGE4, setname: ok4 } ]',
+            {'name': 'p1', 'version': '1.0', 'homepage': 'homepage1', 'expect_effname': 'ok1'},
+            {'name': 'p2', 'version': '1.0', 'homepage': 'HOMEPAGE1', 'expect_effname': 'ok1'},
+            {'name': 'p3', 'version': '1.0', 'homepage': 'homepage2', 'expect_effname': 'ok2'},
+            {'name': 'p4', 'version': '1.0', 'homepage': 'HOMEPAGE2', 'expect_effname': 'ok2'},
+            {'name': 'p5', 'version': '1.0', 'homepage': 'homepage3', 'expect_effname': 'ok3'},
+            {'name': 'p6', 'version': '1.0', 'homepage': 'HOMEPAGE3', 'expect_effname': 'ok3'},
+            {'name': 'p7', 'version': '1.0', 'homepage': 'homepage4', 'expect_effname': 'ok4'},
+            {'name': 'p8', 'version': '1.0', 'homepage': 'HOMEPAGE4', 'expect_effname': 'ok4'},
+        )
+
     def test_match_family(self):
         self.check_transformer(
             '[ { family: foo, setname: quux }, { family: [ baz ], setname: bat } ]',
@@ -188,6 +201,19 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p1', 'version': '1.0', 'category': 'foo', 'expect_effname': 'quux'},
             {'name': 'p2', 'version': '2.0', 'category': 'bar', 'expect_effname': 'p2'},
             {'name': 'p3', 'version': '3.0', 'category': 'baz', 'expect_effname': 'bat'}
+        )
+
+    def test_match_category_case(self):
+        self.check_transformer(
+            '[ { category: categ1, setname: ok1 }, { category: CATEG2, setname: ok2 }, { category: categ3, setname: ok3 }, { category: CATEG4, setname: ok4 } ]',
+            {'name': 'p1', 'version': '1.0', 'category': 'categ1', 'expect_effname': 'ok1'},
+            {'name': 'p2', 'version': '1.0', 'category': 'CATEG1', 'expect_effname': 'ok1'},
+            {'name': 'p3', 'version': '1.0', 'category': 'categ2', 'expect_effname': 'ok2'},
+            {'name': 'p4', 'version': '1.0', 'category': 'CATEG2', 'expect_effname': 'ok2'},
+            {'name': 'p5', 'version': '1.0', 'category': 'categ3', 'expect_effname': 'ok3'},
+            {'name': 'p6', 'version': '1.0', 'category': 'CATEG3', 'expect_effname': 'ok3'},
+            {'name': 'p7', 'version': '1.0', 'category': 'categ4', 'expect_effname': 'ok4'},
+            {'name': 'p8', 'version': '1.0', 'category': 'CATEG4', 'expect_effname': 'ok4'},
         )
 
 
