@@ -92,7 +92,7 @@
 - { name: mpd, category: [media-sound,Sound,audio], setname: musicpd }
 - { name: mpd, wwwpart: cs.arizona.edu/mpd, setname: mpd-compiler }
 - { name: mpd, warning: "please classify me" } # nothing should be left here
-- { name: mpd, setname: mpd } # still use more canonical name
+- { name: musicpd, setname: mpd } # still use more canonical name
 
 - { name: mpc, wwwpart: [musicpd,mpd.wikia.com], setname: musicpc }
 - { name: mpc, category: [media-sound,Sound,audio,Sound/Players,universe/sound], setname: musicpc }
