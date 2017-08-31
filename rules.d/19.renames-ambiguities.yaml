@@ -151,6 +151,10 @@
 - { name: swift,                       setname: openstack-swift, family: [ debuntu, gentoo ] }
 - { name: swift, warning: "please classify me" }
 
+- { name: telegram, wwwpart: telegram.org, setname: telegram-desktop }
+- { name: telegram, wwwpart: vysheng/tg, setname: telegram-cli }
+- { name: telegram, warning: "please classify me" }
+
 # infrastructure manager vs. heighfield generation
 - { name: terraform, setname: gnome-terraform, family: yacp }
 
@@ -160,6 +164,8 @@
 
 # GNU time vs. xemacs module
 - { name: time, setname: xemacs-time, wwwpart: xemacs } # gentoo
+
+- { name: tg, wwwpart: vysheng/tg, setname: telegram-cli }
 
 - { name: tracker, setname: tracker-modplayer, category: audio }
 

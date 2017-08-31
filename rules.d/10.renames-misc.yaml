@@ -753,6 +753,8 @@
 - { name: switchboard-plug-network,    setname: switchboard-plug-networking }
 
 # T
+- { name: [telegram-desktop-bin,telegram-desktop-systemqt,telegram-desktop-systemqt-emojione,telegram-desktop-systemqt-notoemoji], setname: telegram-desktop }
+- { name: [telegram-desktop-bin-dev,telegram-desktop-dev], setname: telegram-desktop, ignorever: true }
 - { name: [libtelepathy-farstream, telepathy-farstream-0.4], setname: telepathy-farstream }
 - { name: [tetrinet-x,tetrinet-server], setname: tetrinetx                }
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
