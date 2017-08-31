@@ -105,6 +105,8 @@
 
 - { name: nvi, verpat: "2\\..*",       setname: nvi2 }
 
+- { name: openal, wwwpart: [openal-soft, kcat.strangesoft.net], setname: openal-soft }
+
 # "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
 - { name: packer, setname: "pacman-packer", family: arch  }
 

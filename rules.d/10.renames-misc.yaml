@@ -636,6 +636,7 @@
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: oggz,                        setname: liboggz                   }
+- { name: [openal-static,openal-examples], setname: openal                }
 - { name: openastromenace,             setname: astromenace               }
 - { name: openastromenace-devel,       setname: astromenace, ignorever: true }
 - { name: [openblas-lapack,openblas-lapack-ilp64], setname: openblas      }
