@@ -91,12 +91,15 @@
 - { name: mpd, wwwpart: [musicpd,mpd.wikia.com], setname: musicpd }
 - { name: mpd, category: [media-sound,Sound,audio], setname: musicpd }
 - { name: mpd, wwwpart: cs.arizona.edu/mpd, setname: mpd-compiler }
-- { name: mpd, warning: "please classify me" }
+- { name: mpd, warning: "please classify me" } # nothing should be left here
+- { name: mpd, setname: mpd } # still use more canonical name
 
 - { name: mpc, wwwpart: [musicpd,mpd.wikia.com], setname: musicpc }
 - { name: mpc, category: [media-sound,Sound,audio,Sound/Players,universe/sound], setname: musicpc }
 - { name: mpc, wwwpart: multiprecision.org, setname: gnumpc }
 - { name: mpc, category: dev-libs, setname: gnumpc }
+- { name: mpc, warning: "please classify me" } # nothing should be left here
+- { name: musicpc, setname: mpc } # still use more canonical name
 
 - { name: node, wwwpart: ax25, setname: node-ax25 }
 - { name: node, category: [universe/hamradio,lang,Development/Tools,hamradio], setname: node-ax25 }
