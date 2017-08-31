@@ -701,6 +701,7 @@
 # Q
 - { name: qastools-qt5,                setname: qastools                  }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5,qbittorrent-dark,qbittorrent-nogui,qbittorrent-stable], setname: qbittorrent }
+- { name: qbs-docs,                    setname: qbs                       }
 - { name: [qt_creator,qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], setname: qtcreator }
 - { name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], setname: qtkeychain }
 - { name: [qupzilla-qt4,qupzilla-qt5,qupzilla-qtwebkit], setname: qupzilla }
