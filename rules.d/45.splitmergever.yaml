@@ -540,7 +540,7 @@
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
 
-- { namepat: "postgresql[0-9._-]*-(plr|orafce|plv8|plv8js|pgroonga|tds_fdw|zhparser|pg_dirtyread|pg_repack|cstore_fdw|mysql_fdw|plpgsql_check)", setname: "$1" }
+- { namepat: "postgresql[0-9._-]*-(plr|orafce|plv8|plv8js|pgroonga|tds_fdw|zhparser|pg_dirtyread|pg_repack|cstore_fdw|mysql[_-]fdw|plpgsql_check)", setname: "$1" }
 - { name: plv8js, setname: plv8 }
 
 - { name: [python,python2,python3], family: freebsd, ignore: true } # ignore metaports
