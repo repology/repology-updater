@@ -83,6 +83,10 @@
 
 - { namepat: "cmake-?[0-9.]+",         setname: cmake }
 
+- { name: [compiz-core,compiz-gtk],    setname: compiz }
+- { namepat: "compiz[0-9._-]+",        setname: compiz }
+- { name: compiz, verpat: "0\\.8.*",   setname: compiz08 }
+
 - { namepat: "cryptominisat[0-9]+",    setname: cryptominisat }
 
 - { name: csound, verpat: "5\\..*",    setname: csound5 }
