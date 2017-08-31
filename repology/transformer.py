@@ -58,6 +58,11 @@ class PackageTransformer:
                 if field in rule and not isinstance(rule[field], list):
                     rule[field] = [rule[field]]
 
+            # convert some fields to lowercase
+            for field in ['category', 'wwwpart']:
+                if field in rule:
+                    rule[field] = [s.lower() for s in rule[field]]
+
             # compile regexps
             for field in ['namepat', 'verpat', 'wwwpat']:
                 if field in rule:
@@ -85,7 +90,7 @@ class PackageTransformer:
 
         # match categories
         if 'category' in rule:
-            if package.category not in rule['category']:
+            if package.category.lower() not in rule['category']:
                 return RuleApplyResult.unmatched
 
         # match name
