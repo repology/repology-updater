@@ -561,7 +561,10 @@
 - { name: libzenxml,                   setname: zenxml                    }
 
 # L (continued)
+- { name: lxc-selinux,                 setname: lxc }
 - { name: lxc,       family: homebrew, setname: lxd } # misname
+- { name: lxcfs-unstable,              setname: lxcfs, ignorever: true }
+- { name: lxd-lts,                     setname: lxd }
 
 # M
 - { name: m4ri,                        setname: libm4ri                   }
