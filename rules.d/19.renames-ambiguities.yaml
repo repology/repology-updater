@@ -79,8 +79,8 @@
 - { name: mars,                        category: games, setname: m.a.r.s. }
 - { name: mars,                        wwwpart: www.mpibpc.mpg.de, setname: mars-proteins-assignment }
 - { name: mars,                        wwwpart: Sony-PS3/mars, setname: mars-runtime-system }
-- { name: mars,                        category: Development/Java, setname: mars-mips-assembler }
-- { name: mars,                        wwwpart: courses.missouristate.edu, setname: mars-mips-assembler }
+- { name: mars,                        category: Development/Java, setname: mars-mips }
+- { name: mars,                        wwwpart: courses.missouristate.edu, setname: mars-mips }
 - { name: mars,                        warning: "please classify me" }
 
 - { name: mog,                         setname: mog-cat, family: freebsd }
