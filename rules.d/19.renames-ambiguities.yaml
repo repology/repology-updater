@@ -106,9 +106,8 @@
 
 - { name: nvi, verpat: "2\\..*",       setname: nvi2 }
 
-- { name: openal, wwwpart: [openal-soft, kcat.strangesoft.net], setname: openal-soft }
-- { name: openal, wwwpart: [openal.org], setname: openal-creative }
-- { name: openal, warning: "please classify me" }
+- { name: openal, family: [pkgsrc,chocolatey,freebsd,macports], setname: openal-creative }
+- { name: openal, setname: openal-soft } # most openal's are openal-soft, even if they erroneously list openal.org as a website
 
 # "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
 - { name: packer, setname: "pacman-packer", family: arch  }
