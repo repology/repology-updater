@@ -713,6 +713,7 @@
 
 # R
 - { name: r2e,                         setname: rss2email                 }
+- { name: rabbitmq,                    setname: rabbitmq-server           }
 - { name: randomize-lines,             setname: rl                        } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
 - { name: rdkafka,                     setname: librdkafka                }
 - { name: ringo,                       setname: ringojs                   }
