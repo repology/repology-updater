@@ -538,6 +538,7 @@
 - { name: [libpcre++,pcrexx],          setname: pcre++                    }
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
+- { name: libressl-devel,              setname: libressl, ignorever: true }
 - { name: librfm5,                     setname: librfm                    }
 - { name: libscalapack,                setname: scalapack                 }
 - { name: [libsoundtouch,sound-touch], setname: soundtouch                }
