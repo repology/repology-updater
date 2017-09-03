@@ -36,7 +36,8 @@ def ExtractLicenses(whatever):
     elif isinstance(whatever, dict) and 'fullname' in whatever:
         return [whatever['fullname']]
     else:
-        raise RuntimeError('unparsable license info')
+        print('unable to parse license {}'.format(whatever), file=sys.stderr)
+        return []
 
 
 class NixJsonParser():
