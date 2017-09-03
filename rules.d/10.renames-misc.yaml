@@ -501,7 +501,6 @@
 - { name: [liballegroogg,allegroogg],  setname: alogg                     }
 - { name: libatlas3,                   setname: atlas                     }
 - { name: libaudiofile,                setname: audiofile                 }
-- { name: libbrotli,                   setname: brotli                    }
 - { name: libbullet,                   setname: bullet                    }
 - { name: libcatch-cpp-headers,        setname: catch                     }
 - { name: libcodec2,                   setname: codec2                    }
