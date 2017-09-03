@@ -551,6 +551,7 @@
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: libtremor,                   setname: tremor                    }
 - { name: [libtsm-asciinema,libtsm-patched], setname: libtsm }
+- { name: libunistring2,               setname: libunistring              }
 - { name: libuv1,                      setname: libuv                     }
 - { name: libx264,                     setname: x264                      }
 - { name: libxmp-lite,                 setname: libxmp                    }
