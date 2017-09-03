@@ -577,6 +577,8 @@
     - xorg-font-micro-misc
   setname: "fonts:micro-misc"
 
+- { name: xorg-misc-bitmap-fonts, setname: xorg-fonts-miscbitmaps }
+
 - name:
     - montecarlo
     - montecarlo-font
@@ -770,6 +772,8 @@
     - terminus-ttf
     - terminus_ttf
   setname: "fonts:terminus-ttf"
+
+- { name: xorg-truetype-fonts, setname: xorg-fonts-truetype }
 
 # U
 - name:
