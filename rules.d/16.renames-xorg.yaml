@@ -16,8 +16,9 @@
 - { namepat: "(?:xorg-|x11-)+(xtrans)-devel", setname: "$1", ignorever: true }
 
 # libs
-- { namepat: "(?:xorg-|x11-)+(?:lib)?(dmx|fontenc|ice|fs|oldx|pciaccess|sm|x11|xau|xaw|xcb|xcomposite|xcursor|xdamage|xdmcp|xevie|xext|xfixes|xfontcache|xft|xi|xinerama|xkbfile|xkbui|xmu|xp|xpm|xrandr|xres|xscrnsaver|xshmfence|xt|xtrans|xtrap|xtst|xv|xvmc|xxf86dga|xxf86misc|xxf86vm)", setname: "lib$1" }
+- { namepat: "(?:xorg-|x11-)+(?:lib)?(dmx|fontenc|ice|fs|oldx|pciaccess|sm|x11|xau|xaw|xcb|xcomposite|xcursor|xdamage|xdmcp|xevie|xext|xfixes|xfontcache|xft|xi|xinerama|xkbfile|xkbui|xmu|xp|xpm|xrandr|xrender|xres|xscrnsaver|xshmfence|xt|xtrans|xtrap|xtst|xv|xvmc|xxf86dga|xxf86misc|xxf86vm)", setname: "lib$1" }
 - { name: [libx32-libxcb,mingw-w64-libxcb,xorg-libxcb], setname: libxcb }
+- { name: [libx32-libxrender,xorg-libxrender,xrender], setname: libxrender }
 
 # libs exceptions
 - { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }
