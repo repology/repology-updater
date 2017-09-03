@@ -25,3 +25,7 @@
 
 # libs exceptions
 - { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }
+
+# JRM: font-util was caught by 88.global-fonts.yaml rules, transformed to fonts:util.
+#      It may be more correct to later move them all to "font-util" metapackage
+- { name: [fontutil,font-util,x11-font-util,xorg-font-util,xorg-fontutil], setname: fonts:util }
