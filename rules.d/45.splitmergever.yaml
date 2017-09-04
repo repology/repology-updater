@@ -331,7 +331,7 @@
 - { name: kibana-bin,                  setname: kibana }
 - { namepat: "kibana[0-9]+",           setname: kibana }
 
-- { name: [lcms,lcms2,little-cms,little-cms2,lcms-python], setname: lcms }
+- { name: [lcms,lcms2,little-cms,little-cms2,lcms-python,liblcms,liblcms2], setname: lcms }
 - { name: lcms, verpat: "2.*",         setname: lcms2 }
 
 - { namepat: "libchamplain[0-9.-]+",   setname: libchamplain }
