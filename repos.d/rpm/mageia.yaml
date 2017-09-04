@@ -20,7 +20,7 @@
       url: https://madb.mageia.org/
   packagelinks:
     - desc: Package details on madb.mageia.org
-      url: 'https://madb.mageia.org/package/show/name/{name}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{name}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_cauldron
@@ -42,5 +42,10 @@
       url: https://madb.mageia.org/
   packagelinks:
     - desc: Package details on madb.mageia.org
-      url: 'https://madb.mageia.org/package/show/name/{name}'
+      # XXX: directories in this url work as CGI params:
+      # source=1 (show source packages)
+      # application=0 (show all packages, not only applications)
+      # release=cauldron (select release)
+      # name=XXX (package name)
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/cauldron/name/{name}'
   tags: [ all, production, mageia, rpm ]
