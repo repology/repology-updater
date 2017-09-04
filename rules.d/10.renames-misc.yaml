@@ -627,6 +627,8 @@
 - { name: mdv,                         setname: terminal_markdown_viewer }
 - { name: media-info,                  setname: mediainfo }
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
+- { name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], setname: mpd }
+- { name: mpd-mpc,                     setname: mpc }
 - { name: mvnsh,                       setname: maven-shell }
 - { name: [msgpack-c,msgpack_c_cpp,libmsgpack,msgpack1], setname: msgpack } # c/cpp by default
 - { namepat: "mygui-(?:docs|dummy|gl|opengl|ogre[0-9._-]*)", setname: mygui }
