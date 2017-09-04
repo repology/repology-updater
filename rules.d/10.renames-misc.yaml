@@ -456,6 +456,7 @@
 - { name: html2text-with-utf8,         setname: html2text }
 
 # I
+- { name: [i3-kde,i3-lazy,i3-wm,i3-wm-iconpatch,i3wm], setname: i3        }
 - { name: iccexamin,                   setname: icc-examin                }
 - { name: icewm2,                      setname: icewm }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
