@@ -682,6 +682,11 @@
   setname: "fonts:pecita"
 
 - name:
+    - fonts-otf-poltawski-antiqua
+    - fonts-ttf-poltawski-antiqua
+  setname: "fonts:poltawski-antiqua"
+
+- name:
     - fonts-ttf-pothana2000
     - pothana2000-fonts
     - pothana2k
