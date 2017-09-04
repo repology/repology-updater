@@ -201,7 +201,7 @@
 - { name: [chexedit, ncurses-hexedit], setname: curses-hexedit            }
 - { name: [chipmunk6,chipmunkphysics,libchipmunk], setname: chipmunk      }
 - { name: [chromium-browser,chromium-browser-stable,chromium-gtk2], setname: chromium }
-- { name: [chromium-beta,chromium-dev], setname: chromium, ignorever: true }
+- { name: [chromium-beta,chromium-dev,chromium-browser-dev], setname: chromium, ignorever: true }
 - { name: ckeditor3,                   setname: ckeditor                  }
 - { name: [clamav-server,clamav-light], setname: clamav                    }
 - { name: [clearlooks-phenix-gtk-theme,clearlooks-phenix-theme,gtk3-theme-clearlooks-phenix], setname: clearlooks-phenix }
