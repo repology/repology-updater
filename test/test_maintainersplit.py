@@ -67,6 +67,9 @@ class TestSplitMaintainers(unittest.TestCase):
     def test_empty(self):
         self.assertEqual(GetMaintainers('somecrap'), [])
         self.assertEqual(GetMaintainers(''), [])
+        self.assertEqual(GetMaintainers('http://repology.org'), [])
+        self.assertEqual(GetMaintainers('Repology <http://repology.org>'), [])
+        self.assertEqual(GetMaintainers('nobody <really>'), [])
 
 
 if __name__ == '__main__':

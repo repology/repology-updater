@@ -56,6 +56,7 @@ families = [
     'nix',
     'openbsd',
     'openindiana',
+    'openmandriva',
     'opensuse',
     'openwrt',
     'pclinuxos',

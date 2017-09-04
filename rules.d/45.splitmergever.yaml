@@ -178,6 +178,8 @@
 
 - { namepat: "gccgo[0-9.-]+",          setname: gccgo }
 
+- { namepat: "(?:lib)?geoclue[0-9._-]*", setname: geoclue }
+
 - { namepat: "(?:lib)?gdk-pixbuf[0-9._-]*(\\+svg|-jasper|-xlib)?", setname: gdk-pixbuf }
 - { name: gdk-pixbuf, verpat: "0.*",   setname: gdk-pixbuf0 }
 
@@ -652,6 +654,8 @@
 - { namepat: "wine-gecko([0-9.-]+|-devel|-stable)", setname: wine-gecko }
 
 - { namepat: "wine-mono([0-9.-]+|-devel)", setname: wine-mono }
+
+- { namepat: "wxqt[0-9._-]+", setname: wxqt }
 
 - { name: [wxmac,wxx11,wxmsw], setname: wxwidgets }
 - { namepat: "(wx|wxgtk|wxwidgets|wxcommon|wxbase)[0-9._-]*(:?-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*", setname: wxwidgets }

@@ -17,7 +17,8 @@
 
 import xml.etree.ElementTree
 
-from ..package import Package
+from repology.package import Package
+from repology.util import GetMaintainers
 
 
 def SanitizeVersion(version):
@@ -54,6 +55,10 @@ class RepodataParser():
                                       '{http://linux.duke.edu/metadata/rpm}group').text
             pkg.licenses.append(entry.find('{http://linux.duke.edu/metadata/common}format/'
                                            '{http://linux.duke.edu/metadata/rpm}license').text)
+
+            packager = entry.find('{http://linux.duke.edu/metadata/common}packager').text
+            if packager:
+                pkg.maintainers = GetMaintainers(packager)
 
             result.append(pkg)
 

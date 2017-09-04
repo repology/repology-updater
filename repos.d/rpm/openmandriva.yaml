@@ -1,0 +1,42 @@
+###########################################################################
+# OpenMandriva
+###########################################################################
+- name: openmandriva_3
+  type: repository
+  desc: OpenMandriva 3.x
+  family: openmandriva
+  color: '045e9d'
+  sources:
+    # - name: [ main/release, main/updates, main/testing, contrib/release, contrib/updates, contrib/testing, non-free/release, non-free/updates, non-free/testing, restricted/release, restricted/updates, restricted/testing ]
+    - name: [ main/release, contrib/release ]
+      fetcher: Repodata
+      parser: Repodata
+      url: 'http://abf-downloads.openmandriva.org/3.0/repository/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: OpenMandriva home
+      url: https://openmandriva.org/
+  packagelinks:
+    - desc: Package repository
+      url: 'https://github.com/OpenMandrivaAssociation/{name}'
+  tags: [ all, production, openmandriva, rpm ]
+
+- name: openmandriva_cooker
+  type: repository
+  desc: OpenMandriva Cooker
+  family: openmandriva
+  color: '045e9d'
+  sources:
+    # - name: [ main/release, main/updates, main/testing, contrib/release, contrib/updates, contrib/testing, non-free/release, non-free/updates, non-free/testing, restricted/release, restricted/updates, restricted/testing ]
+    - name: [ main/release, contrib/release ]
+      fetcher: Repodata
+      parser: Repodata
+      url: 'http://abf-downloads.openmandriva.org/cooker/repository/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: OpenMandriva home
+      url: https://www.openmandriva.org/
+  packagelinks:
+    - desc: Package repository
+      url: 'https://github.com/OpenMandrivaAssociation/{name}'
+  tags: [ all, production, openmandriva, rpm ]
