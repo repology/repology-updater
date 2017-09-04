@@ -241,6 +241,7 @@
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
 - { name: sed,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: serf,                        ver: "1.4.0",                 family: mageia,       ignorever: true } # nonexisting
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
 - { name: shairplay,                   verpat: ".*20[0-8]{2}.*",                           ignorever: true } # \
 - { name: shairplay,                   verpat: "0\\.9.*",                                  ignorever: true } #  > se report on shairplay; latest is 0.1.1 of github.com/qasim fork
