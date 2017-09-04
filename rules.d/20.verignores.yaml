@@ -146,6 +146,7 @@
 
 # L
 - { name: lcab,                        ver: "1.0",                   family: mageia,       ignorever: true }
+- { name: lcms,                        ver: "2.2[0-9]",                                    ignorever: true } # gobolinux brokenness
 
 # LIB*
 - { name: libasr,                      ver: "[0-9]{8}.*",                                  ignorever: true } # guix crap
