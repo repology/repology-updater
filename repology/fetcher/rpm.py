@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import gzip
+import lzma
 import os
 import xml.etree.ElementTree
 
@@ -48,8 +49,12 @@ class RepodataFetcher():
 
         logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 
-        logger.GetIndented().Log('decompressing with gzip')
-        data = gzip.decompress(data)
+        if repodata_url.endswith('gz'):
+            logger.GetIndented().Log('decompressing with gzip')
+            data = gzip.decompress(data)
+        elif repodata_url.endswith('xz'):
+            logger.GetIndented().Log('decompressing with xz')
+            data = lzma.LZMADecompressor().decompress(data)
 
         logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
 
