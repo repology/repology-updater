@@ -499,6 +499,7 @@
 # LIB
 - { name: libagg,                      setname: agg                       }
 - { name: [liballegroogg,allegroogg],  setname: alogg                     }
+- { name: [libasr-devel,libasr-snapshot], setname: libasr, ignorever: true }
 - { name: libatlas3,                   setname: atlas                     }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbullet,                   setname: bullet                    }
