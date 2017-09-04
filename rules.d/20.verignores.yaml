@@ -132,7 +132,7 @@
 - { name: iputils,                     verpat: "[0-9]{8}\\.[0-9a-f]{7,}",                  ignorever: true } # arch: commit id in version
 
 # J
-- { name: jade,                        verpat: "1\\.2\\.1\\.[0-9]{2}.*",                   ignorever: true } # nix, adds debian patchlevel
+- { name: jade,                        verpat: "1\\.2\\.1-[0-9]{2}.*",                     ignorever: true } # nix, adds debian patchlevel
 - { name: john,                        verpat: "1.8.0.2",            family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: json-c,                      verpat: "0\\.12\\.1-[0-9]{8}.*",                    ignorever: true } # macports garbage
 - { name: jwm,                         verpat: "[0-9]+",                                   ignorever: true }
