@@ -155,6 +155,7 @@
 - { name: libcpuid,                    ver: "0.21",                                        ignorever: true } # deepin crap (it's 0.2.1)
 - { name: libexecinfo,                                               family: ravenports,   ignorever: true } # fake
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
+- { name: libffi,                      ver: "3.3",                   family: debuntu,      ignorever: true } # snapshot of nonexisting version
 - { name: libglw,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignorever: true } # fake
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
