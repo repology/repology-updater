@@ -149,7 +149,7 @@
 - { name: lcms,                        ver: "2.2[0-9]",                                    ignorever: true } # gobolinux brokenness
 
 # LIB*
-- { name: libasr,                      ver: "[0-9]{8}.*",                                  ignorever: true } # guix crap
+- { name: libasr,                      verpat: "[0-9]{8}.*",                               ignorever: true } # guix crap
 - { name: libcaca,                     ver: "0.99", family: [sisyphus,fedora,mageia,pclinuxos], ignorever: true } # it's 0.99.betaX!
 - { name: libcaca,                     verpat: "0.99.[0-9]+.*",                            ignorever: true } # it.s 0.99.betaX, not 0.99.X
 - { name: libcpuid,                    ver: "0.21",                                        ignorever: true } # deepin crap (it's 0.2.1)
