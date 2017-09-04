@@ -22,10 +22,10 @@
 - { name: apache, verpat: "2\\.4\\..*", setname: apache24 }
 - { name: apache, verpat: "2\\.5\\..*", setname: apache25 }
 
-- { namepat: "(?:lib)apr[0-9._-]*",    setname: apr }
+- { namepat: "(?:lib)?apr[0-9._-]*",    setname: apr }
 - { name: apr, verpat: "2\\..*",       setname: apr2 }
 
-- { namepat: "(?:lib)apr-util[0-9._-]*", setname: apr-util }
+- { namepat: "(?:lib)?apr-util[0-9._-]*", setname: apr-util }
 - { name: apr-util, verpat: "0\\..*",  setname: apr-util0 }
 
 - { namepat: "ardour[0-9]+",           setname: ardour }
