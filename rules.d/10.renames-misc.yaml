@@ -794,6 +794,7 @@
 
 # V
 - { name: v4l2loopback-dkms,           setname: v4l2loopback              }
+- { name: [libv4l,v4l-utils,v4l_compat], setname: video4linux }
 - { name: valyria-tear,                setname: valyriatear               }
 - { name: [varnish4,varnish5],         setname: varnish                   }
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
