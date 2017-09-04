@@ -67,7 +67,7 @@ version are always parsed.
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
 | OpenIndiana                      | ✔       |         | ✔     | ✔     |         | ✔        |
-| OpenMandriva                     | ✔       |         | ✔     | ✔     | ✔       |          |
+| OpenMandriva                     | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | PCLinuxOS                        | ✔       | ✔       | ✔     |       |         |          |
 | pkgsrc                           | ✔       | ✔       | ✔     |       |         |          |
 | PyPi                             | ✔       |         |       | ✔ (2) |         |          |
