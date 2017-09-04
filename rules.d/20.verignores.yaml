@@ -192,7 +192,7 @@
 - { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignorever: true }   # \  force correct
 - { name: onioncat,                    verpat: "0\\.2\\.2\\.r[0-9]+.*",                    unignorever: true } # / version schema
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignorever: true }
-- { name: openal,                      ver: "20060211",                                    ignorever: true } # freebsd (should probably be 0.0.8)
+- { name: openal-creative,             ver: "20060211",                                    ignorever: true } # freebsd (should probably be 0.0.8)
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: opencollada,                 verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: opencollada,                 verpat: ".*3335ac.*",                               ignorever: true }
