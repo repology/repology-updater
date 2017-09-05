@@ -599,10 +599,30 @@
   setname: "fonts:nafees-nastaleeq"
 
 - name:
+    - fonts-ttf-nafees-naskh
+    - nafees-naskh-fonts
+  setname: "fonts:nafees-naskh"
+
+- name:
+    - fonts-ttf-nafees-pakistani-naskh
+    - nafees-pakistani-naskh-fonts
+  setname: "fonts:nafees-pakistani-naskh"
+
+- name:
+    - fonts-ttf-nafees-pakistani-web-naskh
+    - nafees-pakistani-web-naskh-fonts
+  setname: "fonts:nafees-pakistani-web-naskh"
+
+- name:
     - fonts-ttf-nafees-riqa
     - nafees-riqa-fonts
     - nafees_riqa
   setname: "fonts:nafees-riqa"
+
+- name:
+    - nafees-tehreer-naskh-fonts
+    - fonts-ttf-nafees-tehreer-naskh
+  setname: "fonts:nafees-tehreer-naskh"
 
 # O
 - name:
