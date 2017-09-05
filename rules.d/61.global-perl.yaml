@@ -10,8 +10,8 @@
 - { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa, nix, alpine, pclinuxos, msys2, ravenports, openmandriva ] }
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo, haikuports ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
-  # Gentoo and Mageia shamelessly mangle perl module versions, ignore
-- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports, pclinuxos ], ignorever: true }
+# These shamelessly mangle with perl module versions
+- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports, pclinuxos, openmandriva ], ignorever: true }
 
 # manual perl modules
 - { name: backuppc-xs,                 setname: "perl:backuppc-xs" }
