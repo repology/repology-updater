@@ -241,6 +241,12 @@
 - { namepat: "(?:lib)?gconfmm[0-9._-]*", setname: gconfmm }
 - { namepat: "(?:lib)?gconfmm[0-9._-]*(-docs)", setname: gconfmm }
 
+- { namepat: "(?:lib)?glib[0-9._-]*", setname: glib }
+- { name: [glib-reference,glib2-docs,glib2-patched-thumbnailer,glib2-quiet,glib2-static], setname: glib }
+- { name: glib, verpat: "1\\..*", setname: glib12 }
+
+- { name: glib2-networking, setname: glib-networking }
+
 - { namepat: "(?:lib)?glibmm[0-9._-]*", setname: glibmm }
 - { namepat: "(?:lib)?glibmm[0-9._-]*(-docs|-reference)", setname: glibmm }
 
