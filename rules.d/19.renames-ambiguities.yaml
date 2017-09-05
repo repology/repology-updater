@@ -39,7 +39,7 @@
 - { name: dragon,                      setname: dragon-scannerparser,     family: [ freebsd ] }
 - { name: dragon,                      setname: dragon-player                                }
 
-- { name: dt, wwwpat: 42wim/dt,        setname: dt-dns }
+- { name: dt, wwwpart: 42wim/dt,       setname: dt-dns }
 - { name: dt, family: pkgsrc,          setname: dt-virtconsoles }
 
 - { name: etcd, verpat: "1.*", setname: "etcd-player" } # Enhanced Tiny CD, a simple ncurses-based CD player vs. coreos etcd
