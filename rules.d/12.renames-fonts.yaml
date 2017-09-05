@@ -738,6 +738,11 @@
   setname: "fonts:sgi"
 
 - name:
+    - fonts-ttf-silkscreen
+    - silkscreen-fonts
+  setname: "fonts:silkscreen"
+
+- name:
     - fonts-otf-stix
     - fonts-stix
     - otf-stix

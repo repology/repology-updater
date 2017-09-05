@@ -244,6 +244,11 @@
 - { namepat: "(?:lib)?glibmm[0-9._-]*", setname: glibmm }
 - { namepat: "(?:lib)?glibmm[0-9._-]*(-docs|-reference)", setname: glibmm }
 
+- { namepat: "gstreamer[0-9._-]+",     setname: gstreamer }
+- { name: gstreamer, verpat: "0\\..*", setname: gstreamer0 }
+- { name: gstreamer, verpat: "1\\..*", setname: gstreamer1 }
+- { name: gstreamer, warning: "please classify me"         }
+
 - { namepat: "(?:lib)?gtk[0-9._+-]*",  setname: gtk }
 - { name: gtk, verpat: "(4|3\\.9[0-9]+)\\..*", setname: gtk4 }
 - { name: gtk, verpat: "3\\..*",       setname: gtk3 }

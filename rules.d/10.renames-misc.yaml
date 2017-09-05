@@ -782,6 +782,7 @@
 - { name: [timidity-eaw-patches,timidity-eawpatches,eawpatches], setname: eawpats }
 - { name: tokyo-cabinet,               setname: tokyocabinet }
 - { name: tokyo-dystopia,              setname: tokyodystopia }
+- { name: [tomee-jax-rs,tomee-plume,tomee-plus,tomee-webprofile], setname: tomee }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
 - { name: two-lame,                    setname: twolame }
 - { name: twoping,                     setname: 2ping }
