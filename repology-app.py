@@ -869,7 +869,7 @@ def statistics(sorting=None):
 
 def graph_generic(getgraph, color, suffix=''):
     # use autoscaling until history is filled
-    numdays = 14
+    numdays = 21
     width = 1140
     height = 400
     gwidth = width - 50
