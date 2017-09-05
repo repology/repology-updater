@@ -2,6 +2,16 @@
 
 # A
 - name:
+    - adf-gillius-fonts
+    - fonts-otf-adf-gillius
+  setname: "fonts:adf-gillius"
+
+- name:
+    - adf-tribun-fonts
+    - fonts-ttf-adf-tribun
+  setname: "fonts:adf-tribun"
+
+- name:
     - adobe-source-code-pro
     - adobe-source-code-pro-font
     - adobe-source-code-pro-fonts
@@ -254,6 +264,15 @@
     - fonts-ttf-google-droid
   setname: "fonts:droid"
 
+- name:
+    - dustin-dustismo-fonts
+    - fonts-ttf-dustin-dustismo
+  setname: "fonts:dustin-dustismo"
+
+- name:
+    - fonts-ttf-dustismo
+  setname: "fonts:dustismo"
+
 # E
 - name:
     - eb-garamond
@@ -472,6 +491,12 @@
     - ttf-iosevka
   setname: "fonts:iosevka"
 - { namepat: "ttf-iosevka-(.*)", setname: "fonts:iosevka" }
+
+- name:
+    - fonts-otf-impallari-lobster
+    - impallari-lobster-fonts
+    - ttf-impallari-lobster-font
+  setname: "fonts:impallari-lobster"
 
 - name:
     - fonts-isabella
