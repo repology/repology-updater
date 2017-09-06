@@ -227,6 +227,7 @@
 - { name: critter,                     setname: criticalmass              }
 - { name: crypto++-562,                ignore: true                       } # specific version from AUR
 - { name: csharp-mode,                 setname: csharp-mode.el            }
+- { name: cssh,                        setname: clusterssh                }
 - { name: ctpp,                        setname: ctpp2                     }
 - { name: ctypes-sh,                   setname: ctypes.sh                 }
 - { name: cuneiform-linux,             setname: cuneiform                 }
