@@ -465,6 +465,20 @@
 
 # H
 - name:
+    - font-hack
+    - fonts-hack
+    - hack
+    - hack-font
+    - hack-font-ttf
+    - hack-fonts
+    - hack-ttf
+    - hackfont
+    - otf-hack
+    - ttf-hack
+    - ttf-hack-ibx
+  setname: "fonts:hack"
+
+- name:
     - fonts-hanazono
     - fonts-ttf-hanazono
     - hanazono
@@ -781,6 +795,95 @@
     - sgi-fonts
     - sgifonts
   setname: "fonts:sgi"
+
+- name:
+    - abyssinica
+    - abyssinica-fonts
+    - fonts-sil-abyssinica
+    - fonts-ttf-sil-abyssinica
+    - sil-abyssinica
+    - sil-abyssinica-fonts
+    - ttf-sil-abyssinica
+  setname: "fonts:sil-abyssinica"
+
+- name:
+    - andika
+    - fonts-sil-andika
+    - fonts-ttf-sil-andika
+    - sil-andika-fonts
+    - ttf-andika
+  setname: "fonts:sil-andika"
+
+- name:
+    - fonts-sil-charis
+    - fonts-ttf-sil-charis
+    - sil-charis
+    - sil-charis-fonts
+  setname: "fonts:sil-charis"
+
+- name:
+    - fonts-sil-charis-compact
+    - fonts-ttf-sil-charis-compact
+    - sil-charis-compact-fonts
+  setname: "fonts:sil-charis-compact"
+
+- name:
+    - doulos
+    - doulossil
+    - fonts-sil-doulos
+    - fonts-ttf-doulos-sil
+    - fonts-ttf-sil-doulos
+    - sil-doulos
+    - sil-doulos-fonts
+  setname: "fonts:sil-doulos"
+
+- name:
+    - doulossilcompact
+    - fonts-sil-doulos-compact
+  setname: "fonts:sil-doulos-compact"
+
+- name:
+    - fonts-sil-ezra
+    - sil-ezra
+    - ttf-sil-ezra
+  setname: "fonts:sil-ezra"
+
+- name:
+    - fonts-sil-galatia
+    - sil-galatia
+  setname: "fonts:sil-galatia"
+
+- name:
+    - fonts-ttf-mingzat
+    - fonts-ttf-sil-mingzat
+    - mingzat-fonts
+    - sil-mingzat-fonts
+  setname: "fonts:sil-mingzat"
+
+- name:
+    - fonts-sil-mondulkiri
+    - mondulkiri
+  setname: "fonts:sil-mondulkiri"
+
+- name:
+    - fonts-sil-mondulkiri-extra
+  setname: "fonts:sil-mondulkiri-extra"
+
+- name:
+    - fonts-sil-nuosusil
+    - fonts-ttf-sil-nuosu
+    - nuosu-fonts
+    - nuosu-sil
+    - sil-nuosu-fonts
+  setname: "fonts:sil-nuosu"
+
+- name:
+    - fonts-sil-padauk
+    - fonts-ttf-sil-padauk
+    - padauk
+    - sil-padauk
+    - sil-padauk-fonts
+  setname: "fonts:sil-padauk"
 
 - name:
     - fonts-ttf-silkscreen
