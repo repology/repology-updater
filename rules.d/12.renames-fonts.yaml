@@ -80,6 +80,15 @@
 - { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
 
 - name:
+    - fonts-oflb-asana-math
+    - fonts-otf-asana-math
+    - fonts-otf-oflb-asana-math
+    - oflb-asana-math-fonts
+    - otf-asana-math
+    - ttf-asana-math
+  setname: "fonts:asana-math"
+
+- name:
     - ttf-atarismall
     - fonts-atarismall
   setname: "fonts:atarismall"
@@ -144,6 +153,14 @@
     - fonts-otf-abattis-cantarell
     - ttf-cantarell
   setname: "fonts:cantarell"
+
+- name:
+    - cardo
+    - fonts-ttf-scholarsfonts-cardo
+    - google-cardo-fonts
+    - scholarsfonts-cardo-fonts
+    - ttf-cardo
+  setname: "fonts:cardo" # needs post-split (google vs. scgolarsfonts)
 
 - name:
     - ttf-cheapskate
@@ -489,6 +506,14 @@
   setname: "fonts:hanazono"
 
 - name:
+    - fonts-ttf-pcaro-hermit
+    - hermit
+    - hermit-font
+    - otf-hermit
+    - pcaro-hermit-fonts
+  setname: "fonts:hermit"
+
+- name:
     - fonts-humor-sans
     - humor-sans
     - humor_sans
@@ -617,12 +642,29 @@
   setname: "fonts:micro-misc"
 
 - name:
+    - fonts-mikachan
+    - mikachan-font-otf
+    - mikachan-font-ttc
+    - mikachan-font-ttf
+    - mikachan-fonts
+    - mikachanfont
+    - ttf-mikachan
+  setname: "fonts:mikachan"
+
+- name:
     - montecarlo
     - montecarlo-font
     - montecarlo_fonts
   setname: "fonts:montecarlo"
 
-# XXX: mplus
+- name:
+    - fonts-mplus
+    - fonts-ttf-mplus
+    - mplus
+    - mplus-font
+    - mplus-fonts
+    - ttf-mplus
+  setname: "fonts:mplus" # XXX: e.g. debian gas fonts-mplus 062 and xfonts-mplus 2.2.4. What's the difference?
 
 - name:
     - font-mutt-misc
@@ -772,8 +814,22 @@
   setname: "fonts:quattrocento-sans"
 
 # R
+- name:
+    - fonts-radisnoir
+    - ttf-radisnoir
+  setname: "fonts:radisnoir"
 
 # S
+- name:
+    - fonts-sawarabi-gothic
+    - ttf-sawarabi-gothic
+  setname: "fonts:sawarabi-gothic"
+
+- name:
+    - fonts-sawarabi-mincho
+    - ttf-sawarabi-mincho
+  setname: "fonts:sawarabi-mincho"
+
 - name:
     - fonts-ttf-sazanami
     - ja-sazanami-ttf
@@ -929,6 +985,25 @@
     - terminus_ttf
   setname: "fonts:terminus-ttf"
 
+- name:
+    - fonts-tiresias
+    - fonts-ttf-tiresias
+    - tiresias-fonts
+    - ttf-tiresias
+  setname: "fonts:tiresias"
+
+- name:
+    - fonts-ttf-thibault
+    - thibault-fonts
+  setname: "fonts:thibault"
+
+- name:
+    - fonts-ttf-tulrich-tuffy
+    - fonts-tuffy
+    - ttf-tuffy
+    - tulrich-tuffy-fonts
+  setname: "fonts:tulrich-tuffy"
+
 # U
 - name:
     - font-ubuntu
@@ -1004,10 +1079,29 @@
   setname: "fonts:vollkorn"
 
 # W
+- name:
+    - font-wqy-zenhei
+    - fonts-ttf-wqy-zenhei
+    - fonts-wqy-zenhei
+    - ttf-wqy-zenhei
+    - ttf-wqy-zenhei-ibx
+    - wqy-zenhei
+    - wqy-zenhei-fonts
+    - zh-wqy-zenhei-ttf
+  setname: "fonts:wqy-zenhei"
+- { name: "wqy-zenhei-nightly-build", setname: "fonts:wqy-zenhei", ignorever: true }
 
 # X
 - { namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" } # xorg
 
 # Y
+- name:
+    - fonts-ttf-yanone-kaffeesatz
+    - fonts-yanone-kaffeesatz
+    - otf-yanone-kaffeesatz
+    - otf-yanone-kaffeesatz-ibx
+    - ttf-yanone-kaffeesatz-ibx
+    - yanone-kaffeesatz-fonts
+  setname: "fonts:yanone-kaffeesatz"
 
 # Z
