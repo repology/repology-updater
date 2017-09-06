@@ -53,6 +53,7 @@
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: clamav,                      ver: "0.99.3",                family: [freshcode,debuntu], ignorever: true }
+- { name: clusterssh,                                                family: gentoo,       ignorever: true } # perl module version mangling rules apply here
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
 - { name: coreutils,                   verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
