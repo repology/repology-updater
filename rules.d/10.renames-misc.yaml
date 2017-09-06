@@ -497,6 +497,7 @@
 - { name: [lapack-docs,lapack-manpages,lapack-reference], setname: lapack }
 - { name: lapacke-tmg,                 setname: lapacke                   } # component of
 - { name: lcs,                         setname: liberal-crime-squad       }
+- { name: luxrender14,                 setname: luxrender }
 
 # LIB
 - { name: libagg,                      setname: agg                       }
