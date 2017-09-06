@@ -14,7 +14,7 @@
 # utils
 - { namepat: "(?:xorg-|x11-)+(bdftopcf|beforelight|editres|mkfontdir|setxkbmap|xauth|xfontsel|xtrans)", setname: "$1" }
 - { namepat: "(?:xorg-|x11-)+(xtrans)-devel", setname: "$1", ignorever: true }
-- { name: xorg-xtransproto, setname: xtrans }
+- { name: xorg-xtransproto, setname: xtrans } # ravenports manually split this out of xtrans
 
 # libs
 - { namepat: "(?:xorg-|x11-)+(?:lib)?(dmx|fontenc|ice|fs|oldx|pciaccess|sm|x11|xau|xaw|xcb|xcomposite|xcursor|xdamage|xdmcp|xevie|xext|xfixes|xfontcache|xft|xi|xinerama|xkbfile|xkbui|xmu|xp|xpm|xrandr|xrender|xres|xscrnsaver|xshmfence|xt|xtrans|xtrap|xtst|xv|xvmc|xxf86dga|xxf86misc|xxf86vm)", setname: "lib$1" }
