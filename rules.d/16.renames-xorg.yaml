@@ -26,3 +26,6 @@
 
 # libs exceptions
 - { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }
+
+# ignore metaports
+- { name: [xorg-misc-bitmap-fonts, xorg-fonts-miscbitmaps, xorg-truetype-fonts, xorg-fonts-truetype], ignore: true }
