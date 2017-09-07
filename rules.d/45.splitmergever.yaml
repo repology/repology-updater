@@ -536,6 +536,16 @@
 - { namepat: "postgresql[0-9._-]*-pgpool[0-9._-]*", setname: pgpool }
 - { name: [pgpool2,postgresql-pgpool-ii], setname: pgpool }
 
+- { namepat: "php[0-9._-]*", setname: php }
+- { name: php, verpat: "5\\.3\\..*", setname: php53 }
+- { name: php, verpat: "5\\.4\\..*", setname: php54 }
+- { name: php, verpat: "5\\.5\\..*", setname: php55 }
+- { name: php, verpat: "5\\.6\\..*", setname: php56 }
+- { name: php, verpat: "7\\.0\\..*", setname: php70 }
+- { name: php, verpat: "7\\.1\\..*", setname: php71 }
+- { name: php, verpat: "7\\.2\\..*", setname: php72 }
+- { name: php, warning: "please classify me" }
+
 - { name: [png,libpng-apng],           setname: libpng }
 - { namepat: "libpng(?:-legacy)?[0-9.-]*", setname: libpng }
 
