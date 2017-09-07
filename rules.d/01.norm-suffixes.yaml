@@ -4,4 +4,8 @@
 - { family: chocolatey, namepat: "(.*)\\.(install|portable)", setname: "$1" }
 - { family: kaos, namepat: "(.*)-debug", setname: "$1" }
 
+# XXX: should only affect AUR
+#- { family: arch, name: php-svn, setname: "php:svn" } # XXX: hack to save from following rule
+#- { family: arch, namepat: "(.*)-(cvs|svn|hg|darcs|bzr|git|bin)", setname: "$1", ignorever: true }
+
 # XXX: handle -devel for freebsd?
