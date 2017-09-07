@@ -140,7 +140,7 @@
 	<h2>Top repositories</h2>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					By <b>total</b> number of packages
@@ -154,7 +154,21 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					By number of <b>non-unique</b> packages
+				</div>
+				<div class="panel-body">
+					<ol>
+					{% for repostat in top_repos.by_nonunique %}
+						<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
+					{% endfor %}
+					</ol>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					By number of <b>fresh</b> packages
@@ -168,7 +182,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					By <b>percentage</b> of fresh packages
@@ -179,6 +193,9 @@
 						<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
 					{% endfor %}
 					</ol>
+				</div>
+				<div class="panel-footer">
+					<sup>*</sup>only repos with > 1000 packages
 				</div>
 			</div>
 		</div>

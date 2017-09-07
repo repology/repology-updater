@@ -252,22 +252,30 @@ def index():
                 'name': repo['name'],
                 'value': repo['num_metapackages'],
             }
-            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages'], reverse=True)[:10]
-        ],
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages'], reverse=True)
+        ][:10],
+        'by_nonunique': [
+            {
+                'name': repo['name'],
+                'value': repo['num_metapackages_newest'] + repo['num_metapackages_outdated'],
+            }
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] + repo['num_metapackages_outdated'], reverse=True)
+        ][:10],
         'by_newest': [
             {
                 'name': repo['name'],
                 'value': repo['num_metapackages_newest'],
             }
-            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'], reverse=True)[:10]
-        ],
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'], reverse=True)
+        ][:10],
         'by_pnewest': [
             {
                 'name': repo['name'],
                 'value': '{:.2f}%'.format(100.0 * repo['num_metapackages_newest'] / repo['num_metapackages'] if repo['num_metapackages'] else 0),
             }
-            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (repo['num_metapackages'] or 1), reverse=True)[:10]
-        ]
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (repo['num_metapackages'] or 1), reverse=True)
+            if repo['num_metapackages'] > 1000
+            ][:8]
     }
 
     important_packages = [
