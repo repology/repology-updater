@@ -948,6 +948,11 @@
   setname: "fonts:sil-padauk"
 
 - name:
+    - fonts-sil-sophia-nubian
+    - sophia-nubian
+  setname: "fonts:sophia-nubian"
+
+- name:
     - fonts-ttf-silkscreen
     - silkscreen-fonts
   setname: "fonts:silkscreen"
