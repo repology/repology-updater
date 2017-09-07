@@ -50,7 +50,7 @@ script:
   - ./repology-dump.py --help
 
   # run unit tests with coverage
-  - coverage run --source="repology,repology-app" --omit="repology/fetcher/*" -m unittest discover
+  - coverage run --source="repology,repology-app" --omit="repology/fetchers/*" -m unittest discover
 
 after_success:
   - coveralls
