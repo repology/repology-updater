@@ -49,6 +49,7 @@ families = [
     'hackage',
     'haikuports',
     'homebrew',
+    'kaos',
     'libregamewiki',
     'macports',
     'mageia',
