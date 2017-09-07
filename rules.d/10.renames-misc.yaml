@@ -117,6 +117,7 @@
 - { name: [blas-reference,blas-docs],  setname: blas                      }
 - { name: blas-tmg,                    setname: blas                      }
 - { name: blasphemer-wad,              setname: blasphemer                }
+- { name: blender-binaries,            setname: blender                   }
 - { name: blinkensisters-with-addons,  setname: lostpixels                }
 - { name: blitz,                       setname: blitz++,                  family: [ gentoo, fedora, opensuse ] } # XXX: recheck
 - { name: [blobby2,blobby-volley],     setname: blobby                    }

@@ -226,6 +226,7 @@
 - { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignorever: true }
 - { name: patch,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: pciids,                                                    family: sisyphus,     ignorever: true } # ALT pick random date instead of official date version
+- { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignorever: true }
 - { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignorever: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
