@@ -17,6 +17,7 @@
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { name: amule,                       ver: "2.4.0",                 family: [ mageia, debuntu ], ignorever: true } # unreleased
+- { name: amule,                       verlonger: 3,                 family: [ kaos ],     ignorever: true } # fake
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
@@ -47,12 +48,14 @@
 
 # C
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
+- { name: calamares,                   verlonger: 3,                 family: kaos,         ignorever: true } # own version?
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: cegui,                       verpat: "6\\..*",                                   ignorever: true } # it's 0.6.2!
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: clamav,                      ver: "0.99.3",                family: [freshcode,debuntu], ignorever: true }
+- { name: clementine-player,           verlonger: 3,                 family: kaos,          ignorever: true }
 - { name: clusterssh,                                                family: gentoo,       ignorever: true } # perl module version mangling rules apply here
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
@@ -85,6 +88,7 @@
 # F
 - { name: f3,                          verpat: ".*unstable",                               ignorever: true } # nix garbage
 - { name: faifa,                       ver: "0.2",                   family: debuntu,      ignorever: true }
+- { name: fatrat,                      verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: fdupes,                      verpat: "1\\.[0-9]{2}",                             ignorever: true } # it has switched to 3 componennts (e.g. 1.51 -> 1.6.0 -> 1.6.1)
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignorever: true }
 - { name: fetch,                                                     family: ravenports,   ignorever: true } # fake
@@ -156,24 +160,29 @@
 - { name: libasr,                      verpat: "[0-9]{8}.*",                               ignorever: true } # guix crap
 - { name: libcaca,                     ver: "0.99", family: [sisyphus,fedora,mageia,pclinuxos], ignorever: true } # it's 0.99.betaX!
 - { name: libcaca,                     verpat: "0.99.[0-9]+.*",                            ignorever: true } # it.s 0.99.betaX, not 0.99.X
+- { name: libcdio-paranoia,            verpat: "[0-9]+\\.[0-9]+\\.[0-9]+", family: kaos,   ignorever: true } # bad versioning
 - { name: libcpuid,                    ver: "0.21",                                        ignorever: true } # deepin crap (it's 0.2.1)
 - { name: libexecinfo,                                               family: ravenports,   ignorever: true } # fake
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
 - { name: libffi,                      ver: "3.3",                   family: debuntu,      ignorever: true } # snapshot of nonexisting version
 - { name: libglw,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignorever: true } # fake
+- { name: libimobiledevice, 	verlonger: 3,                 family: kaos,         ignorever: true } # fake
+- { name: libkfapi, 	verlonger: 2,                 family: kaos,         ignorever: true } # fake
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
 - { name: libpng,                      verpat: "1\\.7\\.0beta.*",    family: freshcode,    ignorever: true }
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
 - { name: libusbmuxd,                  ver: "1.1.0",                 family: openwrt,      ignorever: true } # fake
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignorever: true } # version from mediainfo is used, while libzen has its own version scheme
+- { name: libx86emu,                   verlonger: 2,                 family: kaos,         ignorever: true } # uses some opensuse package with mangled version
 - { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignorever: true }
 - { name: libxml2,                     ver: "2.9.4.83",                                    ignorever: true }
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 
 # L (continued)
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
+- { name: lightworks,                  verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 
 # M
@@ -186,6 +195,7 @@
 - { name: mplayer,                     ver: "5.1.4",                                       ignorever: true } # pclinuxos garbage
 - { name: mtree,                                                     family: ravenports,   ignorever: true } # fake
 - { name: [mkgmap,mkgmap-splitter],    ver: "0.0.0",                                       ignorever: true } # debian; original bersion has svnXXXX addendum
+- { name: mumble,                                                    family: kaos,         ignorever: true } # snapshot with random version
 - { name: munin,                       verpat: "2\\.999.*",                                ignorever: true } # debian fake
 - { name: musescore,                   verpat: ".*git.*",                                  ignorever: true } # haiku
 
@@ -207,6 +217,7 @@
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+\\.[0-9]+",                 ignorever: true } # pkgrc: it's X.YpZ!
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignorever: true } # freshcode, pZ part missing
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
+- { name: oxygen-gtk3,                 verlonger: 3,                 family: kaos,         ignorever: true }
 
 # P
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
@@ -224,10 +235,12 @@
 - { name: pytrainer,                   ver: ["1.10.1", "1.10.2"],    family: debuntu,      ignorever: true }
 
 # Q
+- { name: qgis,                                                      family: kaos,         ignorever: true } # snapshot with random version
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: quilt,                       verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: quota,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
+- { name: qupzilla,                                                  family: kaos,         ignorever: true } # snapshot with random version
 
 # R
 - { name: r-hexbin,                    ver: "1.27.1-1",                                    ignorever: true } # guix fake
@@ -242,6 +255,7 @@
 - { name: scite,                       ver: "375",                                         ignorever: true } # pclinuxos
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
 - { name: sdcc,                        ver: "8378",                                        ignorever: true }
+- { name: sddm,                        verpat: "[0-9]{4,}.*",        family: kaos,         ignorever: true } # snapshot with random version
 - { name: sed,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: serf,                        ver: "1.4.0",                 family: mageia,       ignorever: true } # nonexisting
 - { name: sgt-puzzles,                 verpat: "[0-9]{8}.[0-9a-fr]+",                      ignorever: true } # remove commit and revision parts
@@ -281,8 +295,12 @@
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
 
 # V
+- { name: vlc,                                                       family: kaos,         ignorever: true } # fake
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: vokoscreen,                  ver: "2.5.5",                 family: kaos,         ignorever: true } # fake
+- { name: vorbis-tools,                verlonger: 3,                 family: kaos,         ignorever: true } # fake
+- { name: vpnc,                        ver: "0.5.3.3",               family: kaos,         ignorever: true } # fake
 
 # W
 - { name: warsow,                      ver: "2.10",                  family: debuntu,      ignorever: true } # playdeb weirdnes

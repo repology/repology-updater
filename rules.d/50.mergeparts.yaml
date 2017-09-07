@@ -24,6 +24,7 @@
 - { namepat: "libreoffice-fresh-.*",   setname: "libreoffice-fresh-l10n", family: [ arch ] }
 - { namepat: "libreoffice-(i18n|l10n)-.*", setname: "libreoffice-i18n" }
 - { namepat: "libreoffice-still-.*",   setname: "libreoffice-still-l10n", family: [ arch ] }
+- { namepat: "libreoffice-.*",         setname: "libreoffice-l10n", family: [ kaos ] }
 - { namepat: "[^-]+-libreoffice",      setname: "libreoffice-i18n", family: [ freebsd ] }
 - { namepat: "mgltools-.*",            setname: "mgltools", family: [ debuntu ] }
 - { namepat: "mozilla-dicts-.*",       setname: "mozilla-dicts", family: [ openbsd ] }
@@ -33,5 +34,5 @@
 - { namepat: "(squirrelmail-.*)-plugin", setname: "$1", family: [ freebsd ] }
 - { namepat: "tesseract(?:-ocr|-data)*-[a-z]{3}(?:-.*)?", setname: "tesseract-ocr-data" }
 - { namepat: "texlive-documentation-.*", setname: "texlive-documentation", family: [ gentoo ] }
-- { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", family: [ openbsd, arch ] }
+- { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", family: [ openbsd, arch, kaos ] }
 - { namepat: "vim-spell-.*",           setname: "vim-spell", family: [ openbsd, gentoo, arch ] }

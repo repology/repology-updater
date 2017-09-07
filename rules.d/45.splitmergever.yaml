@@ -194,7 +194,11 @@
 - { name: glade-dev,                   setname: glade, ignorever: yes }
 - { name: glade, verpat: "2\\..*",     setname: glade2 }
 
-- { namepat: "(?:lib)?glew[0-9.-]+",   setname: glew }
+- { namepat: "(?:lib)?glew[0-9.-]*",   setname: glew }
+
+- { name: [glfw-doc,glfw-wayland,glfw-x11], setname: glfw }
+- { namepat: "(?:lib)?glfw[0-9._-]*",  setname: glfw }
+- { name: glfw, verpat: "2\\..*",      setname: glfw2 }
 
 - { name: glusterfs3,                  setname: glusterfs }
 

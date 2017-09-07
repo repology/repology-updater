@@ -3,6 +3,8 @@
 # mail client vs. asynchronous synthesis system
 - { name: balsa,                       setname: balsa-synthesis,          category: sci-electronics }
 
+- { name: beanshell,                   setname: beanshell2, family: kaos }
+
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
 
 - { name: crystal,                     setname: crystal-lang,             family: [ arch, freshcode ] }

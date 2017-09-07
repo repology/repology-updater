@@ -455,6 +455,7 @@
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hg-flow,                     setname: hgflow }
 - { name: html2text-with-utf8,         setname: html2text }
+- { name: [hugin-app, hugin-tools],    setname: hugin }
 
 # I
 - { name: [i3-kde,i3-lazy,i3-wm,i3-wm-iconpatch,i3wm], setname: i3        }
@@ -737,6 +738,7 @@
 - { namepat: "sdl-?sopwith",           setname: sopwith                   }
 - { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debuntu ]  }
 - { name: sdlpango,                    setname: sdl-pango,                family: [ debuntu ]  }
+- { name: sdl_ttf,                     setname: sdl_ttf2,                 family: [ kaos ]  }
 - { namepat: "sendmail\\+.*",          setname: sendmail,                 family: [ freebsd ]  }
 - { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
 - { name: searx-py3,                   setname: searx                     }

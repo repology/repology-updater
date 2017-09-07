@@ -1025,6 +1025,7 @@
     - font-ubuntu
     - fonts-ttf-ubuntu
     - fonts-ttf-ubuntu-font-family
+    - ttf-ubuntu-font
     - ttf-ubuntu-font-family
     - ttf-ubuntu-font-family-ib
     - ubuntu-font

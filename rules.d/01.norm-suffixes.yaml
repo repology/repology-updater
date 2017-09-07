@@ -2,5 +2,6 @@
 #- { family: msys2, namepat: "(.*)-git", setname: "$1", ignorever: true }
 
 - { family: chocolatey, namepat: "(.*)\\.(install|portable)", setname: "$1" }
+- { family: kaos, namepat: "(.*)-debug", setname: "$1" }
 
 # XXX: handle -devel for freebsd?
