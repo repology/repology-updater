@@ -26,8 +26,8 @@ setup(
     url='http://repology.org/',
     packages=[
         'repology',
-        'repology.fetcher',
-        'repology.parser',
+        'repology.fetchers',
+        'repology.parsers',
     ],
     scripts=[
         'repology-app.py',
