@@ -1,0 +1,24 @@
+###########################################################################
+# GNU Guix
+###########################################################################
+- name: kaos
+  type: repository
+  desc: KaOS
+  family: kaos
+  sources:
+    - name: [ apps, core, main ]
+      fetcher: File
+      parser: KaOSHTML
+      url: "http://kaosx.tk/packages/index.php?subdir={source}&sortby=name"
+      subrepo: "{source}"
+  repolinks:
+    - desc: KaOS Home
+      url: https://kaosx.us/
+    - desc: KaOS - packages
+      url: http://kaosx.tk/packages/
+    - desc: GitHub organisation
+      url: https://github.com/KaOSx
+  packagelinks:
+    - desc: PKGBUILD
+      url: "https://github.com/KaOSx/{subrepo}/blob/master/{name}/PKGBUILD"
+  tags: [ all, production ]

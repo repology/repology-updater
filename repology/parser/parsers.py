@@ -35,6 +35,7 @@ from .guix import GuixParser
 from .hackage import HackageParser
 from .haiku import HaikuPortsFilenamesParser
 from .homebrew import HomebrewJsonParser
+from .kaos import KaOSHTMLParser
 from .libregamewiki import LibreGameWikiParser
 from .macports import MacPortsParser
 from .msys2 import MSYS2Parser
