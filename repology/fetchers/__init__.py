@@ -15,13 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from .aur import AURFetcher
-from .chocolatey import ChocolateyFetcher
-from .fedora import FedoraFetcher
-from .file import FileFetcher
-from .freshcode import FreshcodeFetcher
-from .git import GitFetcher
-from .guix import GuixFetcher
-from .repodata import RepodataFetcher
-from .rsync import RsyncFetcher
-from .wgettar import WgetTarFetcher
+import repology.modulefactory
+
+
+Factory = repology.modulefactory.ModuleFactory(__name__, __file__, 'Fetcher')

@@ -25,11 +25,11 @@ import traceback
 
 import yaml
 
-from repology.fetcher import *
+from repology.fetchers import Factory as FetcherFactory
 from repology.logger import NoopLogger
 from repology.package import PackageSanityCheckFailure, PackageSanityCheckProblem
 from repology.packageproc import PackagesMerge
-from repology.parser import *
+from repology.parsers import Factory as ParserFactory
 
 
 class StateFileFormatCheckProblem(Exception):
@@ -105,31 +105,13 @@ class RepositoryManager:
 
         return filtered_repositories
 
-    # Parser/fetcher factory
-    def __SpawnClass(self, suffix, name, argsdict):
-        spawned_name = name + suffix
-        if spawned_name not in globals():
-            raise RuntimeError('unknown {} {}'.format(suffix.lower(), name))
-
-        spawned_class = globals()[spawned_name]
-        spawned_argspec = inspect.getfullargspec(spawned_class.__init__)
-        spawned_args = {
-            key: value for key, value in argsdict.items() if key in spawned_argspec.args
-        }
-
-        return spawned_class(**spawned_args)
-
     # Private methods which provide single actions on sources
     def __FetchSource(self, update, repository, source, logger):
         if 'fetcher' not in source:
             logger.Log('fetching source {} not supported'.format(source['name']))
             return
 
-        fetcher = self.__SpawnClass(
-            'Fetcher',
-            source['fetcher'],
-            source
-        )
+        fetcher = FetcherFactory.Spawn(source['fetcher'], source)
 
         ntry = 1
         while ntry <= self.fetch_retries:
@@ -171,8 +153,7 @@ class RepositoryManager:
         logger.Log('parsing source {} started'.format(source['name']))
 
         # parse
-        packages = self.__SpawnClass(
-            'Parser',
+        packages = ParserFactory.Spawn(
             source['parser'],
             source
         ).Parse(

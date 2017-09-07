@@ -15,4 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from .parsers import *
+import repology.modulefactory
+
+
+Factory = repology.modulefactory.ModuleFactory(__name__, __file__, 'Parser')
