@@ -22,6 +22,6 @@ from .file import FileFetcher
 from .freshcode import FreshcodeFetcher
 from .git import GitFetcher
 from .guix import GuixFetcher
-from .rpm import RepodataFetcher
+from .repodata import RepodataFetcher
 from .rsync import RsyncFetcher
 from .wgettar import WgetTarFetcher
