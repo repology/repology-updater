@@ -65,6 +65,7 @@ version are always parsed.
 | Homebrew                         | ✔       |         |       | ✔     |         |          |
 | KaOS                             |         |         |       |       |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
+| MX Linux                         |         | ✔       | ✔     | ✔     |         |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
 | OpenIndiana                      | ✔       |         | ✔     | ✔     |         | ✔        |

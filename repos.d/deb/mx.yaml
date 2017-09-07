@@ -1,0 +1,86 @@
+###########################################################################
+# MX Linux
+###########################################################################
+- name: mx_15
+  type: repository
+  desc: MX Linux MX-15
+  family: debuntu
+  color: "6693d6"
+  sources:
+    - name: [ main, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mxrepo.com/mx/repo/dists/mx15/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
+    - desc: Community Packages for MX-15
+      url: http://mxrepo.com/MX15packages.html
+  tags: [ all, production, mx ]
+
+- name: mx_15_testing
+  type: repository
+  desc: MX Linux MX-15 Testing
+  family: debuntu
+  color: "6693d6"
+  sources:
+    - name: [ test ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mxrepo.com/mx/testrepo/dists/mx15/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
+    - desc: Community Packages for MX-15
+      url: http://mxrepo.com/MX15packages.html
+  tags: [ all, production, mx ]
+
+- name: mx_16
+  type: repository
+  desc: MX Linux MX-16
+  family: debuntu
+  color: "6693d6"
+  sources:
+    - name: [ main, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mxrepo.com/mx/repo/dists/mx16/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
+    - desc: Community Packages for MX-16
+      url: http://mxrepo.com/MX16packages.html
+  tags: [ all, production, mx ]
+
+- name: mx_16_testing
+  type: repository
+  desc: MX Linux MX-16 Testing
+  family: debuntu
+  color: "6693d6"
+  sources:
+    - name: [ test ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mxrepo.com/mx/testrepo/dists/mx16/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
+    - desc: Community Packages for MX-16
+      url: http://mxrepo.com/MX16packages.html
+  tags: [ all, production, mx ]
