@@ -275,7 +275,7 @@ def index():
             }
             for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (repo['num_metapackages'] or 1), reverse=True)
             if repo['num_metapackages'] > 1000
-            ][:8]
+        ][:8]
     }
 
     important_packages = [
@@ -829,6 +829,11 @@ def news():
     return flask.render_template('news.html')
 
 
+@app.route('/links')
+def links():
+    return flask.render_template('links.html')
+
+
 @app.route('/about')
 def about():
     return flask.render_template('about.html')
@@ -1179,6 +1184,23 @@ def api_v1_maintainer_problems(maintainer):
         json.dumps(get_db().GetProblems(maintainer=maintainer)),
         {'Content-type': 'application/json'}
     )
+
+
+#@app.route('/api/v1/history/repository/<repo>')
+#def api_v1_maintainer_problems():
+#    get_db().GetRepositoriesHistoryPeriod(seconds = 365
+#    return (
+#        json.dumps(get_db().GetProblems(maintainer=maintainer)),
+#        {'Content-type': 'application/json'}
+#    )
+
+
+#@app.route('/api/v1/history/statistics')
+#def api_v1_maintainer_problems(repo):
+#    return (
+#        json.dumps(get_db().GetProblems(maintainer=maintainer)),
+#        {'Content-type': 'application/json'}
+#    )
 
 
 if __name__ == '__main__':
