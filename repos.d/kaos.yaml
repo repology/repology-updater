@@ -23,3 +23,23 @@
     - desc: PKGBUILD
       url: "https://github.com/KaOSx/{subrepo}/blob/master/{name}/PKGBUILD"
   tags: [ all, production ]
+
+- name: kaos_build
+  type: repository
+  desc: KaOS Build
+  family: kaos
+  default_maintainer: demm@kaosx.us
+  sources:
+    - name: [ build ]
+      fetcher: File
+      parser: KaOSHTML
+      url: "http://kaosx.tk/packages/index.php?subdir={source}&sortby=name"
+      subrepo: "{source}"
+  repolinks:
+    - desc: KaOS Home
+      url: https://kaosx.us/
+    - desc: KaOS - packages
+      url: http://kaosx.tk/packages/
+    - desc: GitHub organisation
+      url: https://github.com/KaOSx
+  tags: [ all, production ]
