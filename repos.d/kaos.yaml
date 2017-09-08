@@ -5,6 +5,7 @@
   type: repository
   desc: KaOS
   family: kaos
+  default_maintainer: demm@kaosx.us
   sources:
     - name: [ apps, core, main ]
       fetcher: File
