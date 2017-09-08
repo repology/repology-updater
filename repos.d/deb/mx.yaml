@@ -20,6 +20,9 @@
       url: http://mxrepo.com/
     - desc: Community Packages for MX-15
       url: http://mxrepo.com/MX15packages.html
+  packagelinks:
+    - desc: Package directory on mxrepo.com
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
 
 - name: mx_15_testing
@@ -41,6 +44,9 @@
       url: http://mxrepo.com/
     - desc: Community Packages for MX-15
       url: http://mxrepo.com/MX15packages.html
+  packagelinks:
+    - desc: Package directory on mxrepo.com
+      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
 
 - name: mx_16
@@ -62,6 +68,9 @@
       url: http://mxrepo.com/
     - desc: Community Packages for MX-16
       url: http://mxrepo.com/MX16packages.html
+  packagelinks:
+    - desc: Package directory on mxrepo.com
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
 
 - name: mx_16_testing
@@ -83,4 +92,7 @@
       url: http://mxrepo.com/
     - desc: Community Packages for MX-16
       url: http://mxrepo.com/MX16packages.html
+  packagelinks:
+    - desc: Package directory on mxrepo.com
+      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
