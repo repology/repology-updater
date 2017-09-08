@@ -1082,6 +1082,21 @@ def graph_map_repo_size_fresh():
     )
 
 
+@app.route('/graph/map_repo_size_fresh_nonunique.svg')
+def graph_map_repo_size_fresh_nonunique():
+    def repo2coords(repo):
+        return {
+            'x': repo['num_metapackages_newest'] + repo['num_metapackages_outdated'],
+            'y': repo['num_metapackages_newest']
+        }
+
+    return map_repo_generic(
+        repo2coords,
+        namex='Number of non-unique packages in repository',
+        namey='Number of fresh packages in repository'
+    )
+
+
 @app.route('/graph/map_repo_size_freshness.svg')
 def graph_map_repo_size_freshness():
     def repo2coords(repo):
