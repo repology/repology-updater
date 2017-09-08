@@ -381,6 +381,11 @@
 
 - { namepat: "libnet[0-9.]+",          setname: libnet }
 
+- { name: libnl-doc,                   setname: libnl }
+- { namepat: "libnl[0-9._-]+",         setname: libnl }
+- { name: libnl, verpat: "1\\..*",     setname: libnl1 }
+- { name: libnl, verpat: "2\\..*",     setname: libnl2 }
+
 - { namepat: "(?:lib)?serf[0-9._-]*",  setname: serf }
 
 - { name: [libsigc++-docs, libsigc++-legacy12], setname: libsigc++ }

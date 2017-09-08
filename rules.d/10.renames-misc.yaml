@@ -504,11 +504,13 @@
 # LIB
 - { name: libagg,                      setname: agg                       }
 - { name: [liballegroogg,allegroogg],  setname: alogg                     }
+- { name: libargon2,                   setname: argon2                    }
 - { name: [libasr-devel,libasr-snapshot], setname: libasr, ignorever: true }
 - { name: libatlas3,                   setname: atlas                     }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbullet,                   setname: bullet                    }
 - { name: libcatch-cpp-headers,        setname: catch                     }
+- { name: libccaudio2,                 setname: ccaudio2                  }
 - { name: libcodec2,                   setname: codec2                    }
 - { name: libcogl,                     setname: cogl                      }
 - { name: libcomedi,                   setname: comedilib                 }
@@ -518,11 +520,13 @@
 - { name: libfdk-aac,                  setname: fdk-aac                   }
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: libgdal-grass,               setname: gdal-grass                }
+- { name: libgeoip,                    setname: geoip                     }
 - { name: [libgeotiff-dfsg,libgeotiff-epsg], setname: libgeotiff          }
 - { name: libglpng,                    setname: glpng                     }
 - { name: libgom,                      setname: gom                       }
 - { name: libgranite,                  setname: granite                   }
 - { name: libgtkdatabox,               setname: gtkdatabox                }
+- { name: libiksemel,                  setname: iksemel                   }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
 - { name: liblapack,                   setname: lapack                    }
@@ -535,6 +539,7 @@
 - { name: libmpcdec5,                  setname: libmpcdec                 }
 - { name: libmxml,                     setname: minixml }
 - { name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework], setname: ngspice }
+- { name: libnsl2,                     setname: libnsl                    }
 - { name: libopus,                     setname: opus                      }
 - { name: libopendkim,                 setname: opendkim                  }
 - { name: libopusfile,                 setname: opusfile                  }
@@ -546,6 +551,7 @@
 - { name: libproj,                     setname: proj                      }
 - { name: libressl-devel,              setname: libressl, ignorever: true }
 - { name: librfm5,                     setname: librfm                    }
+- { name: librlog,                     setname: rlog }
 - { name: libscalapack,                setname: scalapack                 }
 - { name: [libsoundtouch,sound-touch], setname: soundtouch                }
 - { name: libsdl,                      setname: sdl }
@@ -678,6 +684,7 @@
     - openssh-with-kerberos
     - ssh-copy-id
   setname: openssh
+- { name: [orcus,orcus0.12],           setname: liborcus }
 - { name: osmpbf,                      setname: libosmpbf }
 
 # P
@@ -748,6 +755,7 @@
 - { name: seven-kingdoms,              setname: 7kaa                      }
 - { name: sfk,                         setname: swissfileknife            }
 - { name: sha1dc,                      setname: sha1collisiondetection    }
+- { name: signon-glib,                 setname: libsignon-glib            }
 - { name: simplescreenrecorder-lib,    setname: simplescreenrecorder      }
 - { name: sisc-scheme,                 setname: sisc }
 - { name: [libslang,libslang2,s-lang,slang2], setname: slang              }
@@ -758,6 +766,7 @@
 - { name: snorenotify-qt5,             setname: snorenotify               }
 - { name: [sodium,libsodium-static],   setname: libsodium                 }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             family: [ gentoo ]  } # XXX: recheck
+- { name: spatialite,                  setname: libspatialite }
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
 - { name: stellarium-qt4,              setname: stellarium                }
 - { name: stepmania-devel,             setname: stepmania,                family: [ freebsd ] }
@@ -791,6 +800,7 @@
 - { name: tokyo-dystopia,              setname: tokyodystopia }
 - { name: [tomee-jax-rs,tomee-plume,tomee-plus,tomee-webprofile], setname: tomee }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
+- { name: [tubo,libtubo0],             setname: libtubo }
 - { name: two-lame,                    setname: twolame }
 - { name: twoping,                     setname: 2ping }
 
