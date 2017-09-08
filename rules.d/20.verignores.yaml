@@ -74,6 +74,7 @@
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dosbox,                      verpat: "0\\.74\\.[4r].*",                          ignorever: true }
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
+- { name: dolphin-emu,                 verpat: "[0-9]{4,}.*",                              ignorever: true }
 - { name: dsniff,                      ver: "2.4",                   family: [sisyphus,fedora,mageia], ignorever: true } # it's 2.4beta1
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignorever: true }
 

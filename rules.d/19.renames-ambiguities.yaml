@@ -36,7 +36,7 @@
 - { name: docker,                      wwwpart: icculus.org,              setname: docker-tray }
 - { name: docker,                      family: gobolinux,                 setname: docker-tray }
 
-- { name: dolphin,                     setname: dolphin-emu,              family: [ gentoo ]  } # dolphin file namager vs. emulator
+- { name: dolphin,                     setname: dolphin-emu,              wwwpart: dolphin-emu.org }
 
 - { name: dragon,                      setname: dragon-scannerparser,     family: [ freebsd ] }
 - { name: dragon,                      setname: dragon-player                                }
