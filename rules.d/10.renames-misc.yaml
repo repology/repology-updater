@@ -724,6 +724,8 @@
 - { name: r2e,                         setname: rss2email                 }
 - { name: rabbitmq,                    setname: rabbitmq-server           }
 - { name: randomize-lines,             setname: rl                        } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
+- { name: rawtherapee-gtk2,            setname: rawtherapee               }
+- { name: rawtherapee-unstable,        setname: rawtherapee, ignorever: true }
 - { name: rdkafka,                     setname: librdkafka                }
 - { name: ringo,                       setname: ringojs                   }
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
@@ -815,6 +817,7 @@
 # W
 - { name: w-calc,                      setname: wcalc }
 - { name: walcommander,                setname: wcmcommander              } # old name
+- { name: wcm-commander,               setname: wcmcommander              }
 - { name: [webp,libwebp6],             setname: libwebp                   }
 - { name: websocket++,                 setname: websocketpp               }
 - { name: wine,                        setname: wine-etersoft,            family: sisyphus } # counterfeit
