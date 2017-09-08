@@ -32,10 +32,26 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(fmt.format('{name} {version} {origversion} {category} {subrepo} {foo}', pkg), 'foo 1.0 1.0_1 devel main bar')
 
     def test_empty_origversion(self):
-        pkg = Package(name='foo', version='1.0')
         fmt = PackageFormatter()
 
-        self.assertEqual(fmt.format('{origversion}', pkg), '1.0')
+        self.assertEqual(fmt.format('{origversion}', Package(name='foo', version='1.0')), '1.0')
+
+    def test_filter_lowercase(self):
+        fmt = PackageFormatter()
+
+        self.assertEqual(fmt.format('{name|lowercase}', Package(name='FOO', version='1.0')), 'foo')
+
+    def test_filter_firstletter(self):
+        fmt = PackageFormatter()
+
+        self.assertEqual(fmt.format('{name|firstletter}', Package(name='FOO', version='1.0')), 'f')
+        self.assertEqual(fmt.format('{name|firstletter}', Package(name='LIBFOO', version='1.0')), 'l')
+
+    def test_filter_libfirstletter(self):
+        fmt = PackageFormatter()
+
+        self.assertEqual(fmt.format('{name|libfirstletter}', Package(name='FOO', version='1.0')), 'f')
+        self.assertEqual(fmt.format('{name|libfirstletter}', Package(name='LIBFOO', version='1.0')), 'libf')
 
 
 if __name__ == '__main__':

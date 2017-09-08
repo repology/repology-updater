@@ -18,19 +18,42 @@
 import string
 
 
+__all__ = ['PackageFormatter']
+
+
 class PackageFormatter(string.Formatter):
+    filters = {
+        'lowercase': lambda x: x.lower(),
+        'firstletter': lambda x: x.lower()[0],
+        'libfirstletter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0]
+    }
+
     def get_value(self, key, args, kwargs):
         pkg = args[0]
+
+        key, *requested_filters = key.split('|')
+
+        value = ''
+
         if key == 'name':
-            return pkg.name
+            value = pkg.name
         elif key == 'subrepo':
-            return pkg.subrepo
+            value = pkg.subrepo
         elif key == 'version':
-            return pkg.version
+            value = pkg.version
         elif key == 'origversion':
-            return pkg.origversion if pkg.origversion is not None else pkg.version
+            value = pkg.origversion if pkg.origversion is not None else pkg.version
         elif key == 'category':
-            return pkg.category if pkg.category is not None else ''
+            value = pkg.category if pkg.category is not None else ''
         elif key in pkg.extrafields:
-            return pkg.extrafields[key]
-        return ''
+            value = pkg.extrafields[key]
+
+        for filtername in requested_filters:
+            if filtername in self.filters:
+                value = self.filters[filtername](value)
+
+        # XXX: we should handle errors here, e.g. unknown fields and unknown filters
+        # but that way bebsite users will get errors first. Need some kind of log facility
+        # instead
+
+        return value
