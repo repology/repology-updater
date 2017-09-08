@@ -18,6 +18,7 @@
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { name: amule,                       ver: "2.4.0",                 family: [ mageia, debuntu ], ignorever: true } # unreleased
 - { name: amule,                       verlonger: 3,                 family: [ kaos ],     ignorever: true } # fake
+- { name: android-tools,               verpat: "[0-9]{4,}.*",                              ignorever: true } # fake
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
