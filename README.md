@@ -64,6 +64,7 @@ version are always parsed.
 | HaikuPorts                       |         |         | ✔     |       |         |          |
 | Homebrew                         | ✔       |         |       | ✔     |         |          |
 | KaOS                             |         |         |       |       |         |          |
+| Linuxbrew                        | ✔       |         |       | ✔     |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | MX Linux                         |         | ✔       | ✔     | ✔     |         |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
