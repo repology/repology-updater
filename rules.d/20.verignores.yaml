@@ -149,8 +149,8 @@
 # K
 - { name: kbuild,                      verlonger: 3,                                       ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
-- { name: kdnssd,                      varpat: "1[6789]\\..*",                             ignorever: true }
-- { name: knewstuff,                   varpat: "1[6789]\\..*",                             ignorever: true }
+- { name: kdnssd,                      verpat: "1[6789]\\..*",                             ignorever: true }
+- { name: knewstuff,                   verpat: "1[6789]\\..*",                             ignorever: true }
 - { name: keybase,                     verpat: "20170209.*",                               ignorever: true } # nix garbage
 - { name: kicad,                       verpat: "20[0-9][0-9].*",                           ignorever: true }
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
