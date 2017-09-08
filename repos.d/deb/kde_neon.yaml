@@ -29,7 +29,7 @@
     - name: main
       fetcher: File
       parser: DebianSources
-      url: http://archive.neon.kde.org/user/dists/xenial/main/source/Sources.gz
+      url: http://archive.neon.kde.org/user/lts/dists/xenial/main/source/Sources.gz
       compression: gz
       subrepo: main
   repolinks:
