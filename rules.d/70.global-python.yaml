@@ -89,6 +89,7 @@
     - pytest-xvfb
     - pyusb
     - pyviennacl
+    - pyxdg
     - rabbyt
     - redis-py
     - redis-py-cluster
@@ -156,6 +157,7 @@
 - { name: "python:paramiko", verpat: "1.*", setname: "python:paramiko1"   }
 - { name: ["python:pytidylib6","python:tidylib"], setname: "python:pytidylib"         }
 - { name: "python:usb",                setname: "python:pyusb"            } # create problem!
+- { name: "python:xdg",                setname: "python:pyxdg"            } # create problem!
 - { name: [pylint-py27,pylint3,pylint-gui,pylint3-gui], setname: "python:pylint" }
 - { name: [ipykernel,jupyter-ipykernel,"python:jupyter-ipykernel","python:jupyter_ipykernel","python:jupyter_ipykernel-doc"], setname: "python:ipykernel" }
 - { name: [ipywidgets,jupyter-ipywidgets,"python:jupyter_ipywidgets","python:jupyter_ipywidgets-doc"], setname: "python:ipywidgets" }
@@ -205,6 +207,7 @@
 - { name: "python:xandikos",           setname: xandikos                  }
 - { name: "python:xdot",               setname: xdot                      }
 - { name: "python:youtube-dl",         setname: youtube-dl                }
+- { name: "python:zim",                setname: zim                       }
 - { name: ["python:pypy", "python:pypy-bin"], setname: pypy               }
 - { name: ["python:pypy3", "python:pypy3-bin"], setname: pypy3            }
 

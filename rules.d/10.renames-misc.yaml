@@ -646,6 +646,7 @@
 
 # N
 - { name: ncbi-blast-plus,             setname: ncbi-blast+               }
+- { name: [libnettle,nettle4],         setname: nettle                    }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
 - { namepat: "network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine)", setname: "networkmanager-$1" }
 - { name: [nginx-devel,nginx-mainline,nginx-libressl,nginx-lite,nginx-full,nginx-openssl-1.1,nginx-mainline-libressl,nginx-mainline-boringssl,nginx-mainline-full], setname: nginx }
@@ -840,6 +841,7 @@
 # X
 - { name: x-moto,                      setname: xmoto                     }
 - { name: xar-mackyle,                 setname: xar                       }
+- { name: [xdg-utils-mimeo,xdg-utils-no-open,xgd-utils-patched,xgd-utils-slock], setname: xdg-utils }
 - { name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2], setname: xine-lib  }
 - { name: [xine,xine-ui2],             setname: xine-ui                   }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
@@ -859,6 +861,7 @@
 # Z
 - { name: zeroad,                      setname: 0ad                       }
 - { name: [zerotier,zerotier-one-with-controller], setname: zerotier-one  }
+- { name: zim-wiki,                    setname: zim                       }
 - { name: [zint-gui,zint-qt],          setname: zint                      }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
 - { name: zstandard,                   setname: zstd                      }
