@@ -841,7 +841,7 @@
 # X
 - { name: x-moto,                      setname: xmoto                     }
 - { name: xar-mackyle,                 setname: xar                       }
-- { name: [xdg-utils-mimeo,xdg-utils-no-open,xgd-utils-patched,xgd-utils-slock], setname: xdg-utils }
+- { name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock], setname: xdg-utils }
 - { name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2], setname: xine-lib  }
 - { name: [xine,xine-ui2],             setname: xine-ui                   }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
