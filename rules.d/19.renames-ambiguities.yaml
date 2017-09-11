@@ -57,6 +57,8 @@
 # file change monitor vs. file system checksum checker
 - { name: fswatch, verpat: "1.*",      setname: fswatch-mon }
 
+- { name: fuse, wwwpart: fuse-emulator, setname: fuse-emulator }
+
 - { name: [ddrescue],                  setname: dd_rescue, ver: "1.23", family: debuntu } # dd_rescue, not GNU one
 - { name: [gddrescue, gnu_ddrescue],   setname: ddrescue }
 
@@ -209,8 +211,6 @@
 - { name: zap, warning: "please classify me" }
 
 - { name: zed, wwwpart: [ocamlcore, github.com/diml/zed], setname: ocaml-zed }
-
-# fuse-emulator vs. fusefs modules - see below
 
 # TODO
 # - flare engine/game vs. flare database; known, but database doesn't seem
