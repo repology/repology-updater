@@ -99,6 +99,8 @@
 - { name: mars,                        wwwpart: courses.missouristate.edu, setname: mars-mips }
 - { name: mars,                        warning: "please classify me" }
 
+- { name: meld3,                       wwwpart: meldmerge, setname: meld } # XXX: create problem; this is wrongly named
+
 - { name: mog,                         setname: mog-cat, family: freebsd }
 - { name: mog,                         setname: mog-game, family: slackbuilds }
 - { name: mog,                         warning: "please classify me" }

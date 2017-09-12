@@ -593,6 +593,8 @@
 - { name: mcron2,                      setname: mcron                     }
 - { name: mdocml,                      setname: mandoc                    } # mdocml is an old name (schwarze@openbsd.org)
 - { name: mednaffe-gtk2,               setname: mednaffe                  }
+- { name: [meld-gtk2],                 setname: meld                      }
+- { name: meld-dev,                    setname: meld, ignorever: true     }
 - { name: memtestplus,                 setname: memtest86+                }
 - { name: [mesa-demo,mesademos],       setname: mesa-demos                }
 - name:
