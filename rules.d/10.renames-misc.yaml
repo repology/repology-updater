@@ -393,6 +393,7 @@
 - { name: freeplane-srcbuild,          setname: freeplane                 }
 - { name: [freeradius-server, freeradius3], setname: freeradius           }
 - { name: frozenbubble2,               setname: frozen-bubble             }
+- { name: [fuse2,fuse3],               setname: fuse                      }
 
 # G
 - { name: gambc,                       setname: gambit-c                  }
