@@ -173,7 +173,7 @@
 - { name: shutil_which,                setname: "python:backports.shutil_which" }
 - { name: sphinxcontrib-websupport,    setname: "python:sphinxcontrib-websupport" }
 - { name: sphinx, wwwpart: [sphinx-doc.org,pocoo.org], setname: "python:sphinx" }
-- { name: "python:pygtk-git", setname: "python:pygtk", ignorever: true }
+- { name: "python:pygtk_git", setname: "python:pygtk", ignorever: true }
 - { name: [pygtk,pygtk2,pygtk2.0,"python:gtk","python:gtk2","python:pygtk","python:pygtk2"], setname: "python:pygtk" }
 
 # as per pypi package name
