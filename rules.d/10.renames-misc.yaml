@@ -586,6 +586,8 @@
 - { name: m4rie,                       setname: libm4rie                  }
 - { name: [marsshooter,mars-shooter],  setname: m.a.r.s.                  }
 - { name: mate-brisk-menu,             setname: brisk-menu                }
+- { name: [magit-emacs25,emacs-magit], setname: magit                     }
+- { name: [magit-svn,emacs-magit-git], setname: magit, ignorever: true    }
 - { name: mbmon,                       setname: xmbmon                    }
 - { name: mc46,                        setname: mc                        }
 - { name: mcron2,                      setname: mcron                     }
