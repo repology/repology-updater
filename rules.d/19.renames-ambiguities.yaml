@@ -86,6 +86,11 @@
 
 - { name: libelf,                      wwwpart: elfutils, setname: elfutils } # Arch: XXX: problem
 
+# gentoo vs. fedora livecd-tools
+- { name: livecd-tools,                wwwpart: gentoo, setname: livecd-tools-gentoo }
+- { name: livecd-tools,                category: app-misc, family: gentoo, setname: livecd-tools-gentoo }
+- { name: livecd-tools,                setname: "$0-fedora" }
+
 - { name: mars,                        category: games, setname: m.a.r.s. }
 - { name: mars,                        wwwpart: [marsshooter,mars-game], setname: m.a.r.s. }
 - { name: mars,                        wwwpart: www.mpibpc.mpg.de, setname: mars-proteins-assignment }
