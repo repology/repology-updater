@@ -26,6 +26,11 @@
 - { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
 - { name: arora,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: asp2php,                     ver: "20080813",                                    ignorever: true }
+- { name: aspell-ca,                   ver: ["20090721","2.3.0"],                          ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/ca/
+- { name: aspell-el,                   ver: ["0.50","0.50.3"],                             ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/el/
+- { name: aspell-fo,                   ver: ["0.51.0","0.4.2"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/fo/
+- { name: aspell-qu,                   ver: "20040424.1",                                  ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/qu/
+- { name: aspell-tet,                  ver: "0.50",                                        ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 

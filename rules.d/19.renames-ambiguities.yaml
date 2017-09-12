@@ -58,6 +58,7 @@
 - { name: fswatch, verpat: "1.*",      setname: fswatch-mon }
 
 - { name: fuse, wwwpart: fuse-emulator, setname: fuse-emulator }
+- { name: fuse, category: [emulators,app-emulation], setname: fuse-emulator }
 
 - { name: [ddrescue],                  setname: dd_rescue, ver: "1.23", family: debuntu } # dd_rescue, not GNU one
 - { name: [gddrescue, gnu_ddrescue],   setname: ddrescue }
