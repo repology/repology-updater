@@ -23,9 +23,13 @@
 - { name: [libx32-libxcb,mingw-w64-libxcb,xorg-libxcb], setname: libxcb }
 - { name: [libx32-libxrender,xorg-libxrender,xrender], setname: libxrender }
 - { name: [lib32-xcb-util-renderutil,libxcb-render-util,xorg-xcb-render-util], setname: xcb-util-renderutil }
+- { name: libx11-nokeyboardgrab, setname: libx11 }
 
 # libs exceptions
 - { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }
 
 # ignore metaports
 - { name: [xorg-misc-bitmap-fonts, xorg-fonts-miscbitmaps, xorg-truetype-fonts, xorg-fonts-truetype], ignore: true }
+
+# components have their own versions, should not use version of xorg release
+- { name: [libx11], verpat: "7\\.[4567]", verignore: true }
