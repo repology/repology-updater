@@ -183,10 +183,9 @@
 - { name: libpng,                      verpat: "1\\.7\\.0beta.*",    family: freshcode,    ignorever: true }
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
 - { name: libusbmuxd,                  ver: "1.1.0",                 family: openwrt,      ignorever: true } # fake
-- { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignorever: true } # version from mediainfo is used, while libzen has its own version scheme
-- { name: libx86emu,                   verlonger: 2,                 family: kaos,         ignorever: true } # uses some opensuse package with mangled version
 - { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignorever: true }
+- { name: libx86emu,                   verlonger: 2,                 family: kaos,         ignorever: true } # uses some opensuse package with mangled version
 - { name: libxml2,                     ver: "2.9.4.83",                                    ignorever: true }
 - { name: libxml2,                     verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 
