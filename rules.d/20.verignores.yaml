@@ -240,6 +240,7 @@
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignorever: true }
 - { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignorever: true }
+- { name: pixiewps,                    ver: "1.2.3",                 family: sisyphus,     ignorever: true } # fake
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: procmail,                    verpat: "[0-9]+",                                   ignorever: true } # homebrew
 - { name: psimedia,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
