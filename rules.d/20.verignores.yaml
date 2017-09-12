@@ -30,7 +30,7 @@
 - { name: aspell-el,                   ver: ["0.50","0.50.3"],                             ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/el/
 - { name: aspell-fo,                   ver: ["0.51.0","0.4.2"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/fo/
 - { name: aspell-qu,                   ver: "20040424.1",                                  ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/qu/
-- { name: aspell-tet,                  ver: "0.50",                                        ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
+- { name: aspell-tet,                  ver: "0.50.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 
