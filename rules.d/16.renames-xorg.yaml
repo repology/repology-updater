@@ -32,4 +32,4 @@
 - { name: [xorg-misc-bitmap-fonts, xorg-fonts-miscbitmaps, xorg-truetype-fonts, xorg-fonts-truetype], ignore: true }
 
 # components have their own versions, should not use version of xorg release
-- { name: [libx11], verpat: "7\\.[4567]", verignore: true }
+- { name: [libx11], verpat: "7\\.[4567]", ignorever: true }
