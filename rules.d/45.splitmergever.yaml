@@ -62,7 +62,7 @@
 - { name: bowtie, verpat: "2\\..*",    setname: bowtie2 }
 
 - { namepat: "(?:lib)?cairomm[0-9._-]*", setname: cairomm }
-- { namepat: "(?:lib)?cairomm[0-9._-]*(-docs)", setname: cairomm }
+- { namepat: "(?:lib)?cairomm[0-9._-]*(-docs)?", setname: cairomm }
 
 - { namepat: "cassandra[0-9]+",        setname: cassandra }
 - { name: cassandra, verpat: "2\\..*", setname: cassandra2 }
