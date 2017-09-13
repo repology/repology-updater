@@ -652,6 +652,7 @@
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 
 # N
+- { name: nbd-server,                  setname: nbd                       }
 - { name: ncbi-blast-plus,             setname: ncbi-blast+               }
 - { name: [libnettle,nettle4],         setname: nettle                    }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
