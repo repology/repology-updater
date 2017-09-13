@@ -27,7 +27,7 @@
 - { name: arora,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: asp2php,                     ver: "20080813",                                    ignorever: true }
 - { name: aspell-ca,                   ver: ["20090721","2.3.0"],                          ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/ca/
-- { name: aspell-el,                   ver: ["0.50","0.50.3"],                             ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/el/
+- { name: [aspell-el,el-aspell],       ver: ["0.50","0.50.3"],                             ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/el/
 - { name: aspell-fo,                   ver: ["0.51.0","0.4.2"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/fo/
 - { name: aspell-qu,                   ver: "20040424.1",                                  ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/qu/
 - { name: aspell-tet,                  ver: "0.50.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
