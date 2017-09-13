@@ -520,6 +520,7 @@
 - { name: [libenet,enet1.2],           setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
 - { name: libfdk-aac,                  setname: fdk-aac                   }
+- { name: [libfm-directory-thumbnails,libfm-extra,libfm-gtk2,libfm-gtk3], setname: libfm }
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: libgdal-grass,               setname: gdal-grass                }
 - { name: libgeoip,                    setname: geoip                     }
