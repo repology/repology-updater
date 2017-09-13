@@ -172,7 +172,7 @@
 - { name: fox, verpat: "1\\.7\\..*", last: true }
 - { name: fox, warning: "please classify me" }
 
-- { namepat: "(?:lib)?fmod(?:ex)?(?:api)?[0-9._-]+", setname: fmod }
+- { namepat: "(?:lib)?fmod(?:ex|api)?[0-9._-]*", setname: fmod }
 
 - { namepat: "freerdp[0-9.-]+", setname: freerdp }
 - { name: freerdp, verpat: "1\\..*", setname: freerdp1 }
