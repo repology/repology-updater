@@ -418,6 +418,7 @@
 - { name: [git-flow,git_flow],         setname: gitflow                   }
 - { name: gkrellm2,                    setname: gkrellm                   }
 - { name: gl117,                       setname: gl-117                    }
+- { name: [gmrun-multihead,gmrun-xdg], setname: gmrun }
 - { name: [gnomephotoprinter,gnome-photo-print], setname: gnome-photo-printer }
 - { name: gnu-barcode,                 setname: barcode                   }
 - { name: [gnu-chess,gnuchess4],       setname: gnuchess                  }
