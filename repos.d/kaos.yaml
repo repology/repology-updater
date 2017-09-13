@@ -6,6 +6,7 @@
   desc: KaOS
   family: kaos
   default_maintainer: demm@kaosx.us
+  color: "1d6fa5"
   sources:
     - name: [ apps, core, main ]
       fetcher: File

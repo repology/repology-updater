@@ -5,6 +5,7 @@
   type: repository
   desc: Ravenports
   family: ravenports
+  color: "00bcd4"
   sources:
     - name: repology.json
       fetcher: File
