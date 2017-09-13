@@ -167,6 +167,7 @@
 # L
 - { name: lcab,                        ver: "1.0",                   family: mageia,       ignorever: true }
 - { name: lcms,                        verpat: "2.2[0-9]",                                 ignorever: true } # gobolinux brokenness
+- { name: luit,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 
 # LIB*
 - { name: libasr,                      verpat: "[0-9]{8}.*",                               ignorever: true } # guix crap
@@ -295,6 +296,7 @@
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignorever: true } # 2.15.0 was not released yet
 - { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
 - { name: tome2,                       ver: "235",                                         ignorever: true }
+- { name: transset,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: tuxpaint-stamps,             verpat: "20[0-9]{6}.*",                             ignorever: true } # it's separated
 

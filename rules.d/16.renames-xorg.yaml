@@ -13,7 +13,7 @@
 
 # utils
 - { namepat: "xkeyboard-config-(?:chromebook|hhk|rub)", setname: xkeyboard-config }
-- { namepat: "(?:xorg-|x11-)+(bdftopcf|beforelight|editres|mkfontdir|setxkbmap|xauth|xcb-util-renderutil|xfontsel|xkeyboard-config|xprop|xset|xsetmode|xsetpointer|xsetroot|xtrans)", setname: "$1" }
+- { namepat: "(?:xorg-|x11-)+(bdftopcf|beforelight|editres|gccmakedep|imake|luit|makedepend|mkfontdir|mkfontscale|setxkbmap|transset|twm|xauth|xcb-util-renderutil|xfontsel|xkeyboard-config|xprop|xset|xsetmode|xsetpointer|xsetroot|xtrans)", setname: "$1" }
 - { namepat: "(?:xorg-|x11-)+(xtrans)-devel", setname: "$1", ignorever: true }
 - { name: xorg-xtransproto, setname: xtrans } # ravenports manually split this out of xtrans
 - { name: [fontutil,font-util,x11-font-util,xorg-font-util,xorg-fontutil], setname: font-util, last: true } # XXX: save from font rules converting it to fonts:util
@@ -29,7 +29,20 @@
 - { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }
 
 # ignore metaports
-- { name: [xorg-misc-bitmap-fonts, xorg-fonts-miscbitmaps, xorg-truetype-fonts, xorg-fonts-truetype], ignore: true }
+- name:
+    - xorg-app
+    - xorg-apps
+    - xorg-driver
+    - xorg-drivers
+    - xorg-font
+    - xorg-fonts
+    - xorg-fonts-miscbitmaps
+    - xorg-fonts-truetype
+    - xorg-lib
+    - xorg-libraries
+    - xorg-misc-bitmap-fonts
+    - xorg-truetype-fonts
+  ignore: true
 
 # components have their own versions, should not use version of xorg release
 - { name: [libx11], verpat: "7\\.[4567].*", ignorever: true }

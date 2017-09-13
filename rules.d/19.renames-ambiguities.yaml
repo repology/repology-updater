@@ -91,6 +91,9 @@
 - { name: livecd-tools,                category: app-misc, family: gentoo, setname: livecd-tools-gentoo }
 - { name: livecd-tools,                setname: "$0-fedora" }
 
+# there are two branches, see http://invisible-island.net/luit/
+- { name: luit,                        verpat: "2\\..*", setname: luit-xterm }
+
 - { name: mars,                        category: games, setname: m.a.r.s. }
 - { name: mars,                        wwwpart: [marsshooter,mars-game], setname: m.a.r.s. }
 - { name: mars,                        wwwpart: www.mpibpc.mpg.de, setname: mars-proteins-assignment }
