@@ -56,6 +56,8 @@
 - { name: bind, verpat: "9\\.10\\..*", setname: bind910 }
 - { name: bind, verpat: "9\\.11\\..*", setname: bind911 }
 
+- { namepat: "blender[0-9._-]+",       setname: blender }
+
 - { name: bowtie2,                     setname: bowtie }
 - { name: bowtie, verpat: "2\\..*",    setname: bowtie2 }
 
