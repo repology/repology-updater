@@ -716,6 +716,6 @@
 - { namepat: "zendframework[0-9._-]+", setname: zendframework }
 - { name: zendframework, verpat: "1\\..*", setname: zendframework1 }
 
-- { namepat: "(zeromq|zmq|libzmq)[0-9._-]+",  setname: zeromq }
+- { namepat: "(zeromq|zmq|libzmq)[0-9._-]*",  setname: zeromq }
 - { name: zeromq, verpat: "2\\..*",    setname: zeromq2 }
 - { name: zeromq, verpat: "3\\..*",    setname: zeromq3 }
