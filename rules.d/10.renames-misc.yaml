@@ -866,14 +866,20 @@
 - { name: yui-compressor,              setname: yuicompressor             }
 
 # Z
+- { name: zenity-gtk2,                 setname: zenity                    }
 - { name: zeroad,                      setname: 0ad                       }
+- { name: zeroballistics,              setname: zero-ballistics           }
+- { name: zeronet-git,                 setname: zeronet, ignorever: true  }
 - { name: [zerotier,zerotier-one-with-controller], setname: zerotier-one  }
+- { name: zetacoin-nox11,              setname: zetacoin                  }
 - { name: zim-wiki,                    setname: zim                       }
 - { name: [zint-gui,zint-qt],          setname: zint                      }
+- { name: zlib-static,                 setname: zlib                      }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
-- { name: zstandard,                   setname: zstd                      }
+- { name: zoneminder-h264,             setname: zoneminder, ignorever: true }
+- { name: zookeeper-bin,               setname: zookeeper                 }
+- { name: [zstandard,zstd-static],     setname: zstd                      }
 - { name: zthreads,                    setname: zthread                   }
-- { name: zeronet-git,                 setname: zeronet, ignorever: true  }
 
 - { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
 - { namepat: "android-tools-[^-]+",    setname: android-tools,            family: [ freebsd, pkgsrc ] }

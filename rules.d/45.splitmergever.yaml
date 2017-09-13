@@ -712,3 +712,10 @@
 - { name: yaml-cpp, verpat: "0\\.3\\..*", setname: yaml-cpp03 }
 
 - { namepat: "zabbix[0-9.-]+",         setname: zabbix }
+
+- { namepat: "zendframework[0-9._-]+", setname: zendframework }
+- { name: zendframework, verpat: "1\\..*", setname: zendframework1 }
+
+- { namepat: "(zeromq|zmq|libzmq)[0-9._-]+",  setname: zeromq }
+- { name: zeromq, verpat: "2\\..*",    setname: zeromq2 }
+- { name: zeromq, verpat: "3\\..*",    setname: zeromq3 }
