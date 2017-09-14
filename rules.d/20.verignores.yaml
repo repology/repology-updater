@@ -26,10 +26,17 @@
 - { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
 - { name: arora,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: asp2php,                     ver: "20080813",                                    ignorever: true }
+- { name: aspell-be,                   ver: ["0.50.0", "0.60"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/be/
+- { name: aspell-br,                   ver: "0.60.2",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/br/
 - { name: aspell-ca,                   ver: ["20090721","2.3.0"],                          ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/ca/
 - { name: [aspell-el,el-aspell],       ver: ["0.50","0.50.3"],                             ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/el/
+- { name: aspell-fi,                   ver: "0.60.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/fi/
 - { name: aspell-fo,                   ver: ["0.51.0","0.4.2"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/fo/
+- { name: aspell-fr,                   ver: "0.60",                                        ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/fr/
 - { name: aspell-qu,                   ver: "20040424.1",                                  ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/qu/
+- { name: aspell-sl,                   ver: "0.60",                                        ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/sl/
+- { name: aspell-sr,                   ver: ["0.60.0", "0.60"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/sr/
+- { name: aspell-te,                   ver: "0.60.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/te/
 - { name: aspell-tet,                  ver: "0.50.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
