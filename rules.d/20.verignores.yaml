@@ -34,6 +34,7 @@
 - { name: aspell-fo,                   ver: ["0.51.0","0.4.2"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/fo/
 - { name: aspell-fr,                   ver: "0.60",                                        ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/fr/
 - { name: aspell-qu,                   ver: "20040424.1",                                  ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/qu/
+- { name: aspell-ru,                   ver: "0.99.15.7.1",                                 ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/ru/
 - { name: aspell-sl,                   ver: "0.60",                                        ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/sl/
 - { name: aspell-sr,                   ver: ["0.60.0", "0.60"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/sr/
 - { name: aspell-te,                   ver: "0.60.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/te/
@@ -271,6 +272,7 @@
 - { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
 - { name: rpcgen,                                                    family: ravenports,   ignorever: true } # fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
+- { name: rtmpdump,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 
 # S
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
