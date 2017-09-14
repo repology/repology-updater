@@ -105,6 +105,7 @@
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: bazaar,                      setname: bzr                       }
 - { name: bcel5_3,                     setname: bcel                      }
+- { name: [beid-middleware,libbeid],   setname: eid-mw                    }
 - { name: bib-tool,                    setname: bibtool                   }
 - { name: bisoncpp,                    setname: bisonc++                  }
 - { name: [bison27,bison-doc,bison-runtime], setname: bison               }
@@ -298,6 +299,7 @@
 - { name: edsim51,                     setname: edsim51di                 }
 - { name: ee-editor,                   setname: ee                        }
 - { name: eekboard-gtk2,               setname: eekboard                  }
+- { name: eid-viewer-bin,              setname: eid-viewer                }
 - { name: einstein-puzzle,             setname: einstein,                 family: [ pkgsrc ] }
 - { name: ejdb,                        setname: libejdb }
 - { name: el,                          setname: eternal-lands,            family: [ freebsd ] }
