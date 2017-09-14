@@ -105,7 +105,7 @@
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: bazaar,                      setname: bzr                       }
 - { name: bcel5_3,                     setname: bcel                      }
-- { name: [beid-middleware,libbeid],   setname: eid-mw                    }
+- { name: [beid-middleware,beid,libbeid], setname: eid-mw                 }
 - { name: bib-tool,                    setname: bibtool                   }
 - { name: bisoncpp,                    setname: bisonc++                  }
 - { name: [bison27,bison-doc,bison-runtime], setname: bison               }
