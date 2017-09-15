@@ -843,6 +843,7 @@
 - { name: wcm-commander,               setname: wcmcommander              }
 - { name: [webp,libwebp6],             setname: libwebp                   }
 - { name: websocket++,                 setname: websocketpp               }
+- { name: webtoolkit-java-sdk,         setname: gwt                       }
 - { name: wine,                        setname: wine-etersoft,            family: sisyphus } # counterfeit
 - { name: wings,                       setname: wings3d                   }
 - { name: wirouter_keyrec,             setname: wirouterkeyrec }
