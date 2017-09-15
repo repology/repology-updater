@@ -292,6 +292,9 @@ class Database:
                 num_packages_newest integer not null default 0,
                 num_packages_outdated integer not null default 0,
                 num_packages_ignored integer not null default 0,
+                num_packages_unique integer not null default 0,
+                num_packages_unstable integer not null default 0,
+                num_packages_legacy integer not null default 0,
 
                 num_metapackages integer not null default 0,
                 num_metapackages_unique integer not null default 0,
@@ -344,7 +347,10 @@ class Database:
                         effname,
                         count(nullif(versionclass=1, false)) AS num_newest,
                         count(nullif(versionclass=2, false)) AS num_outdated,
-                        count(nullif(versionclass=3, false)) AS num_ignored
+                        count(nullif(versionclass=3, false)) AS num_ignored,
+                        count(nullif(versionclass=4, false)) AS num_unique,
+                        count(nullif(versionclass=5, false)) AS num_unstable,
+                        count(nullif(versionclass=6, false)) AS num_legacy
                     FROM packages
                     WHERE effname IN (
                         SELECT
@@ -379,7 +385,10 @@ class Database:
                         count(1) AS num_packages,
                         count(nullif(versionclass = 1, false)) AS num_packages_newest,
                         count(nullif(versionclass = 2, false)) AS num_packages_outdated,
-                        count(nullif(versionclass = 3, false)) AS num_packages_ignored
+                        count(nullif(versionclass = 3, false)) AS num_packages_ignored,
+                        count(nullif(versionclass = 4, false)) AS num_packages_unique,
+                        count(nullif(versionclass = 5, false)) AS num_packages_unstable,
+                        count(nullif(versionclass = 6, false)) AS num_packages_lefacy
                     FROM packages
                     GROUP BY maintainer, effname
                 WITH DATA
@@ -402,7 +411,10 @@ class Database:
                     count(DISTINCT effname) AS num_metapackages,
                     count(nullif(versionclass = 1, false)) AS num_packages_newest,
                     count(nullif(versionclass = 2, false)) AS num_packages_outdated,
-                    count(nullif(versionclass = 3, false)) AS num_packages_ignored
+                    count(nullif(versionclass = 3, false)) AS num_packages_ignored,
+                    count(nullif(versionclass = 4, false)) AS num_packages_unique,
+                    count(nullif(versionclass = 5, false)) AS num_packages_unstable,
+                    count(nullif(versionclass = 6, false)) AS num_packages_legacy
                 FROM packages
                 GROUP BY maintainer
                 ORDER BY maintainer
@@ -503,6 +515,9 @@ class Database:
                 num_packages_newest = 0,
                 num_packages_outdated = 0,
                 num_packages_ignored = 0,
+                num_packages_unique = 0,
+                num_packages_unstable = 0,
+                num_packages_legacy = 0,
                 num_metapackages = 0,
                 num_metapackages_unique = 0,
                 num_metapackages_newest = 0,
@@ -638,20 +653,29 @@ class Database:
                     num_packages,
                     num_packages_newest,
                     num_packages_outdated,
-                    num_packages_ignored
+                    num_packages_ignored,
+                    num_packages_unique,
+                    num_packages_unstable,
+                    num_packages_legacy
                 ) SELECT
                     repo,
                     sum(num_packages),
                     sum(num_packages_newest),
                     sum(num_packages_outdated),
-                    sum(num_packages_ignored)
+                    sum(num_packages_ignored),
+                    sum(num_packages_unique),
+                    sum(num_packages_unstable),
+                    sum(num_packages_legacy)
                 FROM(
                     SELECT
                         repo,
                         count(*) as num_packages,
                         count(nullif(versionclass=1, false)) as num_packages_newest,
                         count(nullif(versionclass=2, false)) as num_packages_outdated,
-                        count(nullif(versionclass=3, false)) as num_packages_ignored
+                        count(nullif(versionclass=3, false)) as num_packages_ignored,
+                        count(nullif(versionclass=4, false)) as num_packages_unique,
+                        count(nullif(versionclass=5, false)) as num_packages_unstable,
+                        count(nullif(versionclass=6, false)) as num_packages_legacy
                     FROM packages
                     GROUP BY repo, effname
                 ) AS TEMP
@@ -1090,6 +1114,9 @@ class Database:
                 num_packages_newest,
                 num_packages_outdated,
                 num_packages_ignored,
+                num_packages_unique,
+                num_packages_unstable,
+                num_packages_legacy,
                 num_metapackages
             FROM maintainers
             WHERE maintainer = %s
@@ -1107,7 +1134,10 @@ class Database:
             'num_packages_newest': rows[0][1],
             'num_packages_outdated': rows[0][2],
             'num_packages_ignored': rows[0][3],
-            'num_metapackages': rows[0][4],
+            'num_packages_unique': rows[0][4],
+            'num_packages_unstable': rows[0][5],
+            'num_packages_legacy': rows[0][6],
+            'num_metapackages': rows[0][7],
         }
 
     def GetMaintainerMetapackages(self, maintainer, limit=1000):
@@ -1191,6 +1221,9 @@ class Database:
                 num_packages_newest,
                 num_packages_outdated,
                 num_packages_ignored,
+                num_packages_unique,
+                num_packages_unstable,
+                num_packages_legacy,
                 num_metapackages,
                 num_metapackages_unique,
                 num_metapackages_newest,
@@ -1209,14 +1242,17 @@ class Database:
                 'num_packages_newest': row[2],
                 'num_packages_outdated': row[3],
                 'num_packages_ignored': row[4],
-                'num_metapackages': row[5],
-                'num_metapackages_unique': row[6],
-                'num_metapackages_newest': row[7],
-                'num_metapackages_outdated': row[8],
-                'last_update_utc': row[9],
-                'since_last_update': row[10],
-                'num_problems': row[11],
-                'num_maintainers': row[12],
+                'num_packages_unique': row[5],
+                'num_packages_unstable': row[6],
+                'num_packages_legacy': row[7],
+                'num_metapackages': row[8],
+                'num_metapackages_unique': row[9],
+                'num_metapackages_newest': row[10],
+                'num_metapackages_outdated': row[11],
+                'last_update_utc': row[12],
+                'since_last_update': row[13],
+                'num_problems': row[14],
+                'num_maintainers': row[15],
             } for row in self.cursor.fetchall()
         ]
 
@@ -1229,6 +1265,9 @@ class Database:
                 num_packages_newest,
                 num_packages_outdated,
                 num_packages_ignored,
+                num_packages_unique,
+                num_packages_unstable,
+                num_packages_legacy,
                 num_metapackages,
                 num_metapackages_unique,
                 num_metapackages_newest,
@@ -1252,14 +1291,17 @@ class Database:
                 'num_packages_newest': row[1],
                 'num_packages_outdated': row[2],
                 'num_packages_ignored': row[3],
-                'num_metapackages': row[4],
-                'num_metapackages_unique': row[5],
-                'num_metapackages_newest': row[6],
-                'num_metapackages_outdated': row[7],
-                'last_update_utc': row[8],
-                'since_last_update': row[9],
-                'num_problems': row[10],
-                'num_maintainers': row[11],
+                'num_packages_unique': row[4],
+                'num_packages_unstable': row[5],
+                'num_packages_legacy': row[6],
+                'num_metapackages': row[7],
+                'num_metapackages_unique': row[8],
+                'num_metapackages_newest': row[9],
+                'num_metapackages_outdated': row[10],
+                'last_update_utc': row[11],
+                'since_last_update': row[12],
+                'num_problems': row[13],
+                'num_maintainers': row[14],
             }
         else:
             return {
@@ -1267,6 +1309,9 @@ class Database:
                 'num_packages_newest': 0,
                 'num_packages_outdated': 0,
                 'num_packages_ignored': 0,
+                'num_packages_unique': 0,
+                'num_packages_unstable': 0,
+                'num_packages_legacy': 0,
                 'num_metapackages': 0,
                 'num_metapackages_unique': 0,
                 'num_metapackages_newest': 0,
