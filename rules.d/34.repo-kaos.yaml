@@ -1,0 +1,30 @@
+# KaOS fake versions of KDE plasma related packages
+
+- name:
+    - bluedevil
+    - breeze
+    - breeze-gtk
+    - discover
+    - kactivitymanagerd
+    - kde-cli-tools
+    - kde-gtk-config
+    - kdecoration
+    - kdeplasma-addons
+    - kgamma
+    - kscreenlocker
+    - ksshaskpass
+    - kwayland-integration
+    - kwin
+    - milou
+    - plasma-desktop
+    - plasma-integration
+    - plasma-nm
+    - plasma-pa
+    - plasma-sdk
+    - plasma-workspace
+    - polkit-kde-agent-1
+    - powerdevil
+    - sddm-kcm
+  verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.1"
+  family: kaos
+  ignorever: true
