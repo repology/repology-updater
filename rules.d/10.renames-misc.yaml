@@ -79,6 +79,7 @@
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: archi-steam-farm,            setname: asf }
 - { name: atomic_ops,                  setname: libatomic-ops }
+- { name: aspell-uk,                   setname: ispell-uk,                ver: "1.8.0" } # see ftp://ftp.gnu.org/gnu/aspell/dict/uk/
 - { name: astromatic-psfex,            setname: psfex }
 - { name: astromatic-scamp,            setname: scamp }
 - { name: astromatic-sextractor,       setname: sextractor }
