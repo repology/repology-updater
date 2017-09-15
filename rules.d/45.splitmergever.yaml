@@ -493,6 +493,24 @@
 - { name: [nodejs-bigger-heap,nodejs-slim], setname: nodejs }
 - { name: nodejs-current, setname: nodejs, ignorever: true }
 
+- { name: nvidia, setname: nvidia-driver }
+- { namepat: "linux[0-9]+-nvidia(?:[0-9]+xx)", setname: nvidia-driver }
+- { namepat: "nvidia[0-9]+xx.*", setname: nvidia-driver }
+- { namepat: "nvidia-driver[0-9._-]+", setname: nvidia-driver }
+- { name: nvidia-graphics-drivers-tegra, setname: nvidia-driver, ignorever: true }
+- { namepat: "nvidia-graphics-drivers.*", setname: nvidia-driver }
+- { namepat: "nvidia-legacy.*", setname: nvidia-driver }
+- { name: [nvidia-kernel,nvidia-kmod], setname: nvidia-driver }
+- { name: [nvidia-beta,nvidia-beta-all,nvidia-beta-dkms,nvidia-current], setname: nvidia-driver, ignorever: true }
+- { name: nvidia, verpat: "173\\.14\\..*", setname: nvidia-driver-173.14.xx }
+- { name: nvidia, verpat: "96\\.43\\..*", setname: nvidia-driver-96.43.xx }
+- { name: nvidia, verpat: "71\\.86\\..*", setname: nvidia-driver-71.86.xx }
+- { name: nvidia, verpat: "304\\..*", setname: nvidia-driver-304.xx }
+- { name: nvidia, verpat: "340\\..*", setname: nvidia-driver-340.xx }
+# (see http://www.nvidia.com/object/unix.html)
+
+- { namepat: "(?:dkms|linux-rt.*|linux[0-9]+)-nvidiabl", setname: nvidiabl }
+
 - { namepat: "ogre[0-9._-]+", setname: ogre }
 - { name: [ogre-docs,ogre-samples], setname: ogre }
 - { name: ogre, verpat: "2.*", ignorever: true }
