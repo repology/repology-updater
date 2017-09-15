@@ -38,7 +38,7 @@
 		<tr>
 			<th class="text-right" rowspan="2">Repository</th>
 			<th class="text-center" colspan="7">Metapackages</th>
-			<th class="text-center" colspan="4">Packages</th>
+			<th class="text-center" colspan="7">Packages</th>
 			<th class="text-center" rowspan="2"><abbr title="Number of maintainers">Maint.</abbr></th>
 			<th class="text-center" rowspan="2"><abbr title="Number of problems">Probl.</abbr></th>
 			<th class="text-center" rowspan="2"><abbr title="Last updated this time ago">Upd. ago</abbr></th>
@@ -50,9 +50,12 @@
 			<th class="text-center" colspan="2">Unique</th>
 
 			<th class="text-center">Total</th>
-			<th class="text-center">Newest</th>
-			<th class="text-center">Old</th>
-			<th class="text-center">Ignored</th>
+			<th class="text-center"><abbr title="Ignored">Ign.</abbr></th>
+			<th class="text-center"><abbr title="Unique">Unq.</abbr></th>
+			<th class="text-center"><abbr title="Unstable">Uns.</abbr></th>
+			<th class="text-center"><abbr title="Newest">New.</abbr></th>
+			<th class="text-center"><abbr title="Legacy">Leg.</abbr></th>
+			<th class="text-center"><abbr title="Outdated">Out.</abbr></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -114,9 +117,12 @@
 			</td>
 
 			<td class="text-center">{{ repostat.num_packages }}</td>
-			<td class="text-center version-cell version-big version-newest">{{ repostat.num_packages_newest }}</td>
-			<td class="text-center version-cell version-big version-outdated">{{ repostat.num_packages_outdated }}</td>
 			<td class="text-center version-cell version-big version-ignored">{{ repostat.num_packages_ignored }}</td>
+			<td class="text-center version-cell version-big version-unique">{{ repostat.num_packages_unique }}</td>
+			<td class="text-center version-cell version-big version-unstable">{{ repostat.num_packages_unstable }}</td>
+			<td class="text-center version-cell version-big version-newest">{{ repostat.num_packages_newest }}</td>
+			<td class="text-center version-cell version-big version-legacy">{{ repostat.num_packages_legacy }}</td>
+			<td class="text-center version-cell version-big version-outdated">{{ repostat.num_packages_outdated }}</td>
 
 			<td class="text-center">
 			{%- if repostat.num_maintainers -%}
