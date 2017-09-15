@@ -1,0 +1,92 @@
+###########################################################################
+# UnitedRPMs
+###########################################################################
+- name: unitedrpms_28
+  type: repository
+  desc: UnitedRPMs Fedora 28
+  family: fedora
+  color: '261d22'
+  sources:
+    - name: repo
+      fetcher: Repodata
+      parser: Repodata
+      url: https://downloads.sourceforge.net/project/unitedrpms/28/srpm/
+      subrepo: release
+  repolinks:
+    - desc: UnitedRPMs home
+      url: https://unitedrpms.github.io/
+    - desc: GitHub organization
+      url: https://github.com/UnitedRPMs
+  tags: [ all, production, unitedrpms, rpm ]
+
+- name: unitedrpms_27
+  type: repository
+  desc: UnitedRPMs Fedora 27
+  family: fedora
+  color: '261d22'
+  sources:
+    - name: repo
+      fetcher: Repodata
+      parser: Repodata
+      url: https://downloads.sourceforge.net/project/unitedrpms/27/srpm/
+      subrepo: release
+  repolinks:
+    - desc: UnitedRPMs home
+      url: https://unitedrpms.github.io/
+    - desc: GitHub organization
+      url: https://github.com/UnitedRPMs
+  tags: [ all, production, unitedrpms, rpm ]
+
+- name: unitedrpms_26
+  type: repository
+  desc: UnitedRPMs Fedora 26
+  family: fedora
+  color: '261d22'
+  sources:
+    - name: repo
+      fetcher: Repodata
+      parser: Repodata
+      url: https://downloads.sourceforge.net/project/unitedrpms/26/srpm/
+      subrepo: release
+  repolinks:
+    - desc: UnitedRPMs home
+      url: https://unitedrpms.github.io/
+    - desc: GitHub organization
+      url: https://github.com/UnitedRPMs
+  tags: [ all, production, unitedrpms, rpm ]
+
+- name: unitedrpms_25
+  type: repository
+  desc: UnitedRPMs Fedora 25
+  family: fedora
+  color: '261d22'
+  sources:
+    - name: repo
+      fetcher: Repodata
+      parser: Repodata
+      url: https://downloads.sourceforge.net/project/unitedrpms/25/srpm/
+      subrepo: release
+  repolinks:
+    - desc: UnitedRPMs home
+      url: https://unitedrpms.github.io/
+    - desc: GitHub organization
+      url: https://github.com/UnitedRPMs
+  tags: [ all, production, unitedrpms, rpm ]
+
+- name: unitedrpms_24
+  type: repository
+  desc: UnitedRPMs Fedora 24
+  family: fedora
+  color: '261d22'
+  sources:
+    - name: repo
+      fetcher: Repodata
+      parser: Repodata
+      url: https://downloads.sourceforge.net/project/unitedrpms/24/srpm/
+      subrepo: release
+  repolinks:
+    - desc: UnitedRPMs home
+      url: https://unitedrpms.github.io/
+    - desc: GitHub organization
+      url: https://github.com/UnitedRPMs
+  tags: [ all, production, unitedrpms, rpm ]
