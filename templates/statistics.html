@@ -37,7 +37,7 @@
 	<thead>
 		<tr>
 			<th class="text-right" rowspan="2">Repository</th>
-			<th class="text-center" colspan="8">Metapackages</th>
+			<th class="text-center" colspan="7">Metapackages</th>
 			<th class="text-center" colspan="4">Packages</th>
 			<th class="text-center" rowspan="2"><abbr title="Number of maintainers">Maint.</abbr></th>
 			<th class="text-center" rowspan="2"><abbr title="Number of problems">Probl.</abbr></th>
@@ -46,7 +46,7 @@
 		<tr>
 			<th class="text-center">Total</th>
 			<th class="text-center" colspan="3">Up to date in repo/total</th>
-			<th class="text-center" colspan="2">Outdated</th>
+			<th class="text-center">Outdated</th>
 			<th class="text-center" colspan="2">Unique</th>
 
 			<th class="text-center">Total</th>
@@ -94,9 +94,6 @@
 				<a href="{{ url_for('metapackages_outdated_in_repo', repo=repostat.name) }}">
 					{{- macros.value_with_delta(repostat.num_metapackages_outdated, old_repostat.num_metapackages_outdated) -}}
 				</a>
-			</td>
-			<td class="text-center version-cell version-big version-outdated">
-				{{ macros.safe_percent(repostat.num_metapackages_outdated, repostat.num_metapackages) }}
 			</td>
 
 			<td class="text-center version-cell version-big version-unique">
