@@ -453,6 +453,29 @@
   setname: "fonts:gentium-plus"
 
 - name:
+    - fonts-otf-gfs-bodoni
+    - gfs-bodoni-fonts
+  setname: "fonts:gfs-bodoni"
+
+# GFS-*
+- name:
+    - fonts-otf-gfs-ambrosia
+    - gfs-ambrosia-fonts
+  setname: "fonts:gfs-ambrosia"
+
+- name:
+    - fonts-gfs-artemisia
+    - fonts-otf-gfs-artemisia
+    - gfs-artemisia-fonts
+  setname: "fonts:gfs-artemisia"
+
+- name:
+    - fonts-gfs-bodoni-classic
+    - fonts-otf-gfs-bodoni-classic
+    - gfs-bodoni-classic-fonts
+  setname: "fonts:gfs-bodoni-classic"
+
+- name:
     - gw-fonts-ttf
     - fonts-georgewilliams
     - ttf-georgewilliams
