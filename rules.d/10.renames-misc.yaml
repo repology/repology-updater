@@ -835,6 +835,8 @@
 - { name: [varnish4,varnish5],         setname: varnish                   }
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
 - { name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw], setname: vim }
+- { name: [visual-studio-code,visual-studio-code-oss,visualstudiocode], setname: vscode }
+- { name: visual-studio-code-insiders, setname: vscode, ignorever: true }
 - { name: vlc-nightly,                 setname: vlc, ignorever: true      }
 - { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignorever: true }
 - { name: [vsftpd-ssl,vsftpd-ext],     setname: vsftpd                    }
