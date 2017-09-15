@@ -19,18 +19,14 @@
 import re
 
 
-class PackageVersionClass:
+class VersionClass:
     newest = 1
     outdated = 2
     ignored = 3
-
-
-class RepositoryVersionClass:
-    newest = 1
-    outdated = 2
-    mixed = 3
-    ignored = 4
-    lonely = 5
+    unique = 4
+    unstable = 5
+    legacy = 6
+    mixed = 99  # to be removed
 
 
 class PackageSanityCheckProblem(Exception):

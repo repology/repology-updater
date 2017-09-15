@@ -54,8 +54,7 @@ app.jinja_env.lstrip_blocks = True
 
 # templates: custom filters
 app.jinja_env.filters['pkg_format'] = pkg_format
-app.jinja_env.filters['css_for_package_versionclass'] = css_for_package_versionclass
-app.jinja_env.filters['css_for_summary_versionclass'] = css_for_summary_versionclass
+app.jinja_env.filters['css_for_versionclass'] = css_for_versionclass
 app.jinja_env.filters['maintainer_to_links'] = maintainer_to_links
 app.jinja_env.filters['maintainers_to_group_mailto'] = maintainers_to_group_mailto
 
@@ -168,12 +167,12 @@ def metapackages_to_data(metapackages, repo=None, maintainer=None):
             bestversion = None
             for package in repopackages:
                 # discover best version
-                if bestversion is None and package.versionclass != PackageVersionClass.ignored:
+                if bestversion is None and package.versionclass != VersionClass.ignored:
                     bestversion = package.version
 
                 if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
                     explicit_packages.append(package)
-                elif package.versionclass == PackageVersionClass.ignored:
+                elif package.versionclass == VersionClass.ignored:
                     ignored_packages.append(package)
                 elif VersionCompare(package.version, bestversion) == 0:
                     repos_worth_showing.add(reponame)
@@ -182,7 +181,7 @@ def metapackages_to_data(metapackages, repo=None, maintainer=None):
         newest_packages = []
         for reponame in repos_worth_showing:
             for package in packages_by_repo[reponame]:
-                if package.versionclass != PackageVersionClass.ignored:
+                if package.versionclass != VersionClass.ignored:
                     newest_packages.append(package)
                     break
 
@@ -198,8 +197,8 @@ def metapackages_to_data(metapackages, repo=None, maintainer=None):
         metapackagedata[metapackagename] = {
             'families': PackagesetToFamilies(packages),
             'explicit': map(VersionsDigest, PackagesetAggregateByVersions(explicit_packages)),
-            'newest': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == PackageVersionClass.newest, versions)),
-            'outdated': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == PackageVersionClass.outdated, versions)),
+            'newest': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == VersionClass.newest, versions)),
+            'outdated': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == VersionClass.outdated, versions)),
             'ignored': map(VersionsDigest, PackagesetAggregateByVersions(ignored_packages))
         }
 

@@ -73,12 +73,12 @@ def FillPackagesetVersions(packages):
     for package in packages:
         result = VersionCompare(package.version, bestversion) if bestversion is not None else 1
         if result > 0:
-            package.versionclass = PackageVersionClass.ignored
+            package.versionclass = VersionClass.ignored
         elif result == 0:
-            # XXX: if len(families) == 1 -> PackageVersionClass.unique
-            package.versionclass = PackageVersionClass.newest
+            # XXX: if len(families) == 1 -> VersionClass.unique
+            package.versionclass = VersionClass.newest
         else:
-            package.versionclass = PackageVersionClass.outdated
+            package.versionclass = VersionClass.outdated
 
 
 def PackagesetToSummaries(packages):
@@ -97,7 +97,7 @@ def PackagesetToSummaries(packages):
                 'count': 0
             }
 
-        if package.versionclass == PackageVersionClass.outdated:
+        if package.versionclass == VersionClass.outdated:
             state_by_repo[package.repo]['has_outdated'] = True,
 
         if state_by_repo[package.repo]['bestpackage'] is None or VersionCompare(package.version, state_by_repo[package.repo]['bestpackage'].version) > 0:
@@ -108,18 +108,18 @@ def PackagesetToSummaries(packages):
     for repo, state in state_by_repo.items():
         resulting_class = None
 
-        # XXX: lonely ignored package is currently lonely; should it be ignored instead?
-        if state['bestpackage'].versionclass == PackageVersionClass.outdated:
-            resulting_class = RepositoryVersionClass.outdated
+        # XXX: unique ignored package is currently unique; should it be ignored instead?
+        if state['bestpackage'].versionclass == VersionClass.outdated:
+            resulting_class = VersionClass.outdated
         elif len(families) == 1:
-            resulting_class = RepositoryVersionClass.lonely
-        elif state['bestpackage'].versionclass == PackageVersionClass.newest:
+            resulting_class = VersionClass.unique
+        elif state['bestpackage'].versionclass == VersionClass.newest:
             if state['has_outdated']:
-                resulting_class = RepositoryVersionClass.mixed
+                resulting_class = VersionClass.mixed
             else:
-                resulting_class = RepositoryVersionClass.newest
-        elif state['bestpackage'].versionclass == PackageVersionClass.ignored:
-            resulting_class = RepositoryVersionClass.ignored
+                resulting_class = VersionClass.newest
+        elif state['bestpackage'].versionclass == VersionClass.ignored:
+            resulting_class = VersionClass.ignored
 
         summary[repo] = {
             'version': state['bestpackage'].version,

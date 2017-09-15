@@ -28,28 +28,21 @@ from repology.packageproc import *
 from repology.repoman import RepositoryManager
 
 
-def PackageVersionClass2Letter(value):
-    if value == PackageVersionClass.newest:
-        return 'N'
-    elif value == PackageVersionClass.outdated:
-        return 'O'
-    elif value == PackageVersionClass.ignored:
+def VersionClass2Letter(value):
+    if value == VersionClass.ignored:
         return 'I'
-    else:
-        return '?'
-
-
-def RepositoryVersionClass2Letter(value):
-    if value == RepositoryVersionClass.newest:
+    elif value == VersionClass.unique:
+        return '1'
+    elif value == VersionClass.unstable:
+        return 'U'
+    elif value == VersionClass.newest:
         return 'N'
-    elif value == RepositoryVersionClass.outdated:
-        return 'O'
-    elif value == RepositoryVersionClass.mixed:
-        return 'M'
-    elif value == RepositoryVersionClass.ignored:
-        return 'I'
-    elif value == RepositoryVersionClass.lonely:
+    elif value == VersionClass.legacy:
         return 'L'
+    elif value == VersionClass.outdated:
+        return 'O'
+    elif value == VersionClass.mixer:
+        return 'M'
     else:
         return '?'
 
@@ -129,7 +122,7 @@ def Main():
                     print('  {}: {} ({}) *{}'.format(
                         reponame,
                         summaries[reponame]['version'],
-                        RepositoryVersionClass2Letter(summaries[reponame]['versionclass']),
+                        VersionClass2Letter(summaries[reponame]['versionclass']),
                         summaries[reponame]['numpackages'],
                     ))
 

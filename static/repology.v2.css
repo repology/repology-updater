@@ -118,8 +118,24 @@
     color: white;
 }
 
+.version-ignored {
+    background-color: #777777;
+}
+
+.version-unique {
+    background-color: #5bc0de;
+}
+
+.version-unstable {
+    background-color: #5ac0de;
+}
+
 .version-newest {
     background-color: #5cb85c;
+}
+
+.version-legacy {
+    background-color: #f0ad4e;
 }
 
 .version-outdated {
@@ -128,14 +144,6 @@
 
 .version-mixed {
     background-color: #f0ad4e;
-}
-
-.version-unique {
-    background-color: #5bc0de;
-}
-
-.version-ignored {
-    background-color: #777777;
 }
 
 .medal {
