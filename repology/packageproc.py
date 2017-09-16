@@ -57,28 +57,68 @@ def PackagesetCheckFilters(packages, *filters):
 
 
 def FillPackagesetVersions(packages):
-    versions = set()
+    # Pass 1:
+    # - calculate newest stable version
+    # - aggregate by repo
+    bestversion = None
+    bestdevelversion = None
     families = set()
+    packages_by_repo = {}
 
     for package in packages:
         if not package.ignoreversion:
-            versions.add(package.version)
+            if not package.devel:
+                if bestversion is None or VersionCompare(package.version, bestversion) > 0:
+                    bestversion = package.version
+            else:
+                if bestdevelversion is None or VersionCompare(package.version, bestdevelversion) > 0:
+                    bestdevelversion = package.version
+
         families.add(package.family)
+        packages_by_repo.setdefault(package.repo, []).append(package)
 
-    bestversion = None
-    for version in versions:
-        if bestversion is None or VersionCompare(version, bestversion) > 0:
-            bestversion = version
+    # for unique metapackages, replace fresh classes with unique
+    newestclass = VersionClass.newest
+    develclass = VersionClass.devel
 
-    for package in packages:
-        result = VersionCompare(package.version, bestversion) if bestversion is not None else 1
-        if result > 0:
-            package.versionclass = VersionClass.ignored
-        elif result == 0:
-            # XXX: if len(families) == 1 -> VersionClass.unique
-            package.versionclass = VersionClass.newest
-        else:
-            package.versionclass = VersionClass.outdated
+    if len(families) == 1:
+        newestclass = develclass = VersionClass.unique
+
+    # Pass 2:
+    # - per-repo aggregation
+    # - fill classes
+    for repo, repo_packages in packages_by_repo.items():
+        # Pass 2.1:
+        # - determine best version for this repo
+        bestversion_for_repo = None
+
+        for package in repo_packages:
+            if not package.ignoreversion:
+                if bestversion_for_repo is None or VersionCompare(package.version, bestversion_for_repo) > 0:
+                    bestversion_for_repo = package.version
+
+        # Pass 2.2:
+        # - fill version classes
+        for package in repo_packages:
+            cmpresult = VersionCompare(package.version, bestversion) if bestversion is not None else 1
+
+            if cmpresult > 0:  # version newer than best
+                if package.ignoreversion:
+                    package.versionclass = VersionClass.ignored
+                else:
+                    assert(package.devel)
+                    assert(bestdevelversion)
+                    if VersionCompare(package.version, bestdevelversion) < 0:
+                        package.versionclass = VersionClass.legacy
+                    else:
+                        package.versionclass = develclass
+            elif cmpresult == 0:  # version is best
+                package.versionclass = newestclass
+            else:
+                if bestversion_for_repo is None or VersionCompare(package.version, bestversion_for_repo) >= 0:
+                    package.versionclass = VersionClass.outdated
+                else:
+                    package.versionclass = VersionClass.legacy
 
 
 def PackagesetToSummaries(packages):
