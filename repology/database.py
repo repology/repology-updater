@@ -202,7 +202,7 @@ class MetapackageRequest:
 
         if self.repo_not:
             tables.add('repo_metapackages as repo_metapackages1')
-            having.Append('count(nullif(repo_metapackages1.repo = %s, false)) = 0', self.repo_not)
+            having.Append('count(*) FILTER (WHERE repo_metapackages1.repo = %s) = 0', self.repo_not)
 
         # effname conditions
         if self.namecond and self.namebound:
@@ -345,19 +345,19 @@ class Database:
                     SELECT
                         repo,
                         effname,
-                        count(nullif(versionclass=1, false)) AS num_newest,
-                        count(nullif(versionclass=2, false)) AS num_outdated,
-                        count(nullif(versionclass=3, false)) AS num_ignored,
-                        count(nullif(versionclass=4, false)) AS num_unique,
-                        count(nullif(versionclass=5, false)) AS num_unstable,
-                        count(nullif(versionclass=6, false)) AS num_legacy
+                        count(*) FILTER (WHERE versionclass = 1) AS num_newest,
+                        count(*) FILTER (WHERE versionclass = 2) AS num_outdated,
+                        count(*) FILTER (WHERE versionclass = 3) AS num_ignored,
+                        count(*) FILTER (WHERE versionclass = 4) AS num_unique,
+                        count(*) FILTER (WHERE versionclass = 5) AS num_unstable,
+                        count(*) FILTER (WHERE versionclass = 6) AS num_legacy
                     FROM packages
                     WHERE effname IN (
                         SELECT
                             effname
                         FROM packages
                         GROUP BY effname
-                        HAVING count(nullif(shadow, true)) > 0
+                        HAVING NOT bool_and(shadow)
                     )
                     GROUP BY effname,repo
                 WITH DATA
@@ -383,12 +383,12 @@ class Database:
                         unnest(maintainers) as maintainer,
                         effname,
                         count(1) AS num_packages,
-                        count(nullif(versionclass = 1, false)) AS num_packages_newest,
-                        count(nullif(versionclass = 2, false)) AS num_packages_outdated,
-                        count(nullif(versionclass = 3, false)) AS num_packages_ignored,
-                        count(nullif(versionclass = 4, false)) AS num_packages_unique,
-                        count(nullif(versionclass = 5, false)) AS num_packages_unstable,
-                        count(nullif(versionclass = 6, false)) AS num_packages_lefacy
+                        count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
+                        count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
+                        count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
+                        count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
+                        count(*) FILTER (WHERE versionclass = 5) AS num_packages_unstable,
+                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_lefacy
                     FROM packages
                     GROUP BY maintainer, effname
                 WITH DATA
@@ -409,12 +409,12 @@ class Database:
                     unnest(maintainers) AS maintainer,
                     count(1) AS num_packages,
                     count(DISTINCT effname) AS num_metapackages,
-                    count(nullif(versionclass = 1, false)) AS num_packages_newest,
-                    count(nullif(versionclass = 2, false)) AS num_packages_outdated,
-                    count(nullif(versionclass = 3, false)) AS num_packages_ignored,
-                    count(nullif(versionclass = 4, false)) AS num_packages_unique,
-                    count(nullif(versionclass = 5, false)) AS num_packages_unstable,
-                    count(nullif(versionclass = 6, false)) AS num_packages_legacy
+                    count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
+                    count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
+                    count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
+                    count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
+                    count(*) FILTER (WHERE versionclass = 5) AS num_packages_unstable,
+                    count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy
                 FROM packages
                 GROUP BY maintainer
             WITH DATA
@@ -669,12 +669,12 @@ class Database:
                     SELECT
                         repo,
                         count(*) as num_packages,
-                        count(nullif(versionclass=1, false)) as num_packages_newest,
-                        count(nullif(versionclass=2, false)) as num_packages_outdated,
-                        count(nullif(versionclass=3, false)) as num_packages_ignored,
-                        count(nullif(versionclass=4, false)) as num_packages_unique,
-                        count(nullif(versionclass=5, false)) as num_packages_unstable,
-                        count(nullif(versionclass=6, false)) as num_packages_legacy
+                        count(*) FILTER (WHERE versionclass = 1) as num_packages_newest,
+                        count(*) FILTER (WHERE versionclass = 2) as num_packages_outdated,
+                        count(*) FILTER (WHERE versionclass = 3) as num_packages_ignored,
+                        count(*) FILTER (WHERE versionclass = 4) as num_packages_unique,
+                        count(*) FILTER (WHERE versionclass = 5) as num_packages_unstable,
+                        count(*) FILTER (WHERE versionclass = 6) as num_packages_legacy
                     FROM packages
                     GROUP BY repo, effname
                 ) AS TEMP
@@ -722,15 +722,15 @@ class Database:
                 ) SELECT
                     repo,
                     count(*),
-                    count(nullif(unique_only, false)),
-                    count(nullif(NOT unique_only and num_packages_newest>0, false)),
-                    count(nullif(NOT unique_only and num_packages_newest=0, false))
+                    count(*) FILTER (WHERE unique_only),
+                    count(*) FILTER (WHERE NOT unique_only AND num_packages_newest > 0),
+                    count(*) FILTER (WHERE NOT unique_only AND num_packages_newest = 0)
                 FROM(
                         SELECT
                             repo,
                             TRUE as unique_only,
                             count(*) as num_packages,
-                            count(nullif(versionclass=1, false)) as num_packages_newest
+                            count(*) FILTER (WHERE versionclass = 1) as num_packages_newest
                         FROM packages
                         WHERE effname IN (
                             SELECT
@@ -744,7 +744,7 @@ class Database:
                             repo,
                             FALSE as unique_only,
                             count(*) as num_packages,
-                            count(nullif(versionclass=1, false)) as num_packages_newest
+                            count(*) FILTER (WHERE versionclass = 1) as num_packages_newest
                         FROM packages
                         WHERE effname IN (
                             SELECT
