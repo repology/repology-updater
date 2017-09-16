@@ -1041,7 +1041,7 @@ class Database:
                 ignore=row[15],
                 shadow=row[16],
                 ignoreversion=row[17],
-                instable=row[18],
+                devel=row[18],
 
                 extrafields=row[19],
             ) for row in self.cursor.fetchall()
