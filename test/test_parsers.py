@@ -54,6 +54,7 @@ class TestParsers(unittest.TestCase):
             'ignore': False,
             'shadow': False,
             'ignoreversion': False,
+            'devel': False,
 
             'extrafields': {},
         }
