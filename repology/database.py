@@ -1512,7 +1512,7 @@ class Database:
             conditions.append('status != 200')
 
         if succeeded_only:
-            conditions.append('status == 200')
+            conditions.append('status = 200')
 
         conditions_expr = ''
         limit_expr = ''
