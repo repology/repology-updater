@@ -153,6 +153,12 @@ class PackageTransformer:
         if 'unignorever' in rule:
             package.ignoreversion = False
 
+        if 'devel' in rule:
+            package.devel = True
+
+        if 'undevel' in rule:
+            package.devel = False
+
         if 'last' in rule:
             result = RuleApplyResult.last
 

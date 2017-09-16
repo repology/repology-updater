@@ -130,6 +130,8 @@ schemas = {
             'unignorever': bool,
             'ignore': bool,
             'unignore': bool,
+            'devel': bool,
+            'undevel': bool,
             'last': bool,
             'tolowername': bool,
             'replaceinname': dict,
