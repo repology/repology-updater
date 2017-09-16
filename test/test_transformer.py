@@ -70,6 +70,20 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p2', 'version': '1.0', 'ignoreversion': True, 'expect_ignoreversion': True}
         )
 
+    def test_devel(self):
+        self.check_transformer(
+            '[ { name: p1, devel: true } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_devel': True},
+            {'name': 'p2', 'version': '1.0', 'expect_devel': False}
+        )
+
+    def test_undevel(self):
+        self.check_transformer(
+            '[ { name: p1, undevel: true } ]',
+            {'name': 'p1', 'version': '1.0', 'devel': True, 'expect_devel': False},
+            {'name': 'p2', 'version': '1.0', 'devel': True, 'expect_devel': True}
+        )
+
     def test_setname(self):
         self.check_transformer(
             '[ { setname: "bar" } ]',
