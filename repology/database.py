@@ -417,7 +417,6 @@ class Database:
                     count(nullif(versionclass = 6, false)) AS num_packages_legacy
                 FROM packages
                 GROUP BY maintainer
-                ORDER BY maintainer
             WITH DATA
         """)
 
