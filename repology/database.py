@@ -274,6 +274,7 @@ class Database:
                 ignorepackage bool not null,
                 shadow bool not null,
                 ignoreversion bool not null,
+                devel bool not null,
 
                 extrafields jsonb not null
             )
@@ -560,6 +561,7 @@ class Database:
                 ignorepackage,
                 shadow,
                 ignoreversion,
+                devel,
 
                 extrafields
             ) VALUES (
@@ -582,6 +584,7 @@ class Database:
                 %s,
                 %s,
 
+                %s,
                 %s,
                 %s,
                 %s,
@@ -613,6 +616,7 @@ class Database:
                     package.ignore,
                     package.shadow,
                     package.ignoreversion,
+                    package.devel,
 
                     json.dumps(package.extrafields),
                 ) for package in packages
@@ -928,6 +932,7 @@ class Database:
                 ignorepackage,
                 shadow,
                 ignoreversion,
+                devel,
 
                 extrafields
             FROM packages
@@ -960,8 +965,9 @@ class Database:
                 ignore=row[15],
                 shadow=row[16],
                 ignoreversion=row[17],
+                devel=row[18],
 
-                extrafields=row[18],
+                extrafields=row[19],
             ) for row in self.cursor.fetchall()
         ]
 
@@ -1001,6 +1007,7 @@ class Database:
                 ignorepackage,
                 shadow,
                 ignoreversion,
+                devel,
 
                 extrafields
             FROM packages WHERE effname IN (
@@ -1034,8 +1041,9 @@ class Database:
                 ignore=row[15],
                 shadow=row[16],
                 ignoreversion=row[17],
+                instable=row[18],
 
-                extrafields=row[18],
+                extrafields=row[19],
             ) for row in self.cursor.fetchall()
         ]
 

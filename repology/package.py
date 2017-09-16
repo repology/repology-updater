@@ -61,6 +61,7 @@ class Package:
         'ignore',
         'shadow',
         'ignoreversion',
+        'devel',
 
         'extrafields',
     ]
@@ -69,7 +70,7 @@ class Package:
                  name=None, effname=None,
                  version=None, origversion=None, effversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
-                 ignore=False, shadow=False, ignoreversion=False,
+                 ignore=False, shadow=False, ignoreversion=False, devel=False,
                  extrafields=None):
         self.repo = repo
         self.family = family
@@ -93,6 +94,7 @@ class Package:
         self.ignore = ignore
         self.shadow = shadow
         self.ignoreversion = ignoreversion
+        self.devel = devel
 
         self.extrafields = extrafields if extrafields else {}
 
@@ -184,6 +186,7 @@ class Package:
         CheckBool(self.ignore, 'ignore')
         CheckBool(self.shadow, 'shadow')
         CheckBool(self.ignoreversion, 'ignoreversion')
+        CheckBool(self.devel, 'devel')
 
         CheckDict(self.extrafields, 'extrafields', NoWhitespace, NonEmpty)
 
