@@ -81,8 +81,8 @@ def css_for_versionclass(value):
         return 'ignored'
     elif value == VersionClass.unique:
         return 'unique'
-    elif value == VersionClass.unstable:
-        return 'unstable'
+    elif value == VersionClass.devel:
+        return 'devel'
     elif value == VersionClass.newest:
         return 'newest'
     elif value == VersionClass.legacy:

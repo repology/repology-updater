@@ -24,7 +24,7 @@ class VersionClass:
     outdated = 2
     ignored = 3
     unique = 4
-    unstable = 5
+    devel = 5
     legacy = 6
     mixed = 99  # to be removed
 

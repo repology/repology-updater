@@ -32,9 +32,9 @@ def VersionClass2Letter(value):
     if value == VersionClass.ignored:
         return 'I'
     elif value == VersionClass.unique:
-        return '1'
-    elif value == VersionClass.unstable:
         return 'U'
+    elif value == VersionClass.devel:
+        return 'D'
     elif value == VersionClass.newest:
         return 'N'
     elif value == VersionClass.legacy:
