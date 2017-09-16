@@ -685,7 +685,10 @@ class Database:
                     num_packages = EXCLUDED.num_packages,
                     num_packages_newest = EXCLUDED.num_packages_newest,
                     num_packages_outdated = EXCLUDED.num_packages_outdated,
-                    num_packages_ignored = EXCLUDED.num_packages_ignored
+                    num_packages_ignored = EXCLUDED.num_packages_ignored,
+                    num_packages_unique = EXCLUDED.num_packages_unique,
+                    num_packages_unstable = EXCLUDED.num_packages_unstable,
+                    num_packages_legacy = EXCLUDED.num_packages_legacy
         """)
 
         self.cursor.execute("""
