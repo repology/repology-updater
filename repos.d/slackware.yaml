@@ -1,0 +1,103 @@
+###########################################################################
+# Slackware
+###########################################################################
+
+- name: slackware_14_2
+  type: repository
+  desc: Slackware 14.2
+  family: slackware
+  color: '0066ff'
+  default_maintainer: volkerdi@slackware.com
+  sources:
+    - name: FILELIST-i586.txt
+      fetcher: File
+      parser: Slackware
+      url: http://mirrors.slackware.com/slackware/slackware-14.2/FILELIST.TXT
+    - name: FILELIST-x86_64.txt
+      fetcher: File
+      parser: Slackware
+      url: http://mirrors.slackware.com/slackware/slackware64-14.2/FILELIST.TXT
+  repolinks:
+    - desc: Slackware Home
+      url: http://www.slackware.com/
+    - desc: Slackware x86 (32-bit) 14.2 ChangeLog
+      url: http://mirrors.slackware.com/slackware/slackware-14.2/ChangeLog.txt
+    - desc: Slackware x86_64 14.2 ChangeLog
+      url: http://mirrors.slackware.com/slackware/slackware64-14.2/ChangeLog.txt
+  packagelinks:
+    - desc: Source directory
+      url: 'http://mirrors.slackware.com/slackware/slackware-14.2/{sourcedir}'
+  tags: [ all, production, slackware ]
+
+- name: slackware_current
+  type: repository
+  desc: Slackware Current
+  family: slackware
+  color: '0066ff'
+  default_maintainer: volkerdi@slackware.com
+  sources:
+    - name: FILELIST-i586.txt
+      fetcher: File
+      parser: Slackware
+      url: http://mirrors.slackware.com/slackware/slackware-current/FILELIST.TXT
+    - name: FILELIST-x86_64.txt
+      fetcher: File
+      parser: Slackware
+      url: http://mirrors.slackware.com/slackware/slackware64-current/FILELIST.TXT
+  repolinks:
+    - desc: Slackware Home
+      url: http://www.slackware.com/
+    - desc: Slackware x86 (32-bit) Current ChangeLog
+      url: http://mirrors.slackware.com/slackware/slackware-current/ChangeLog.txt
+    - desc: Slackware x86_64 Current ChangeLog
+      url: http://mirrors.slackware.com/slackware/slackware64-current/ChangeLog.txt
+  packagelinks:
+    - desc: Source directory
+      url: 'http://mirrors.slackware.com/slackware/slackware-current/{sourcedir}'
+  tags: [ all, production, slackware ]
+
+- name: slackwarearm_14_2
+  type: repository
+  desc: SlackwareARM 14.2
+  family: slackware
+  color: '0066ff'
+  default_maintainer: volkerdi@slackware.com
+  sources:
+    - name: FILELIST-arm.txt
+      fetcher: File
+      parser: Slackware
+      url: http://slackware.uk/slackwarearm/slackwarearm-14.2/FILELIST.TXT
+  repolinks:
+    - desc: Slackware Home
+      url: http://www.slackware.com/
+    - desc: Slackware ARM 14.2 ChangeLog
+      url: http://slackware.uk/slackwarearm/slackwarearm-14.2/ChangeLog.txt
+  packagelinks:
+    - desc: Source directory (ARM)
+      url: 'http://slackware.uk/slackwarearm/slackwarearm-14.2/{sourcedir}'
+    - desc: Source directory (base)
+      url: 'http://mirrors.slackware.com/slackware/slackware-14.2/{sourcedir}'
+  tags: [ all, production, slackware ]
+
+- name: slackwarearm_current
+  type: repository
+  desc: SlackwareARM Current
+  family: slackware
+  color: '0066ff'
+  default_maintainer: volkerdi@slackware.com
+  sources:
+    - name: FILELIST-arm.txt
+      fetcher: File
+      parser: Slackware
+      url: http://slackware.uk/slackwarearm/slackwarearm-current/FILELIST.TXT
+  repolinks:
+    - desc: Slackware Home
+      url: http://www.slackware.com/
+    - desc: Slackware ARM Current ChangeLog
+      url: http://slackware.uk/slackwarearm/slackwarearm-current/ChangeLog.txt
+  packagelinks:
+    - desc: Source directory (ARM)
+      url: 'http://slackware.uk/slackwarearm/slackwarearm-current/{sourcedir}'
+    - desc: Source directory (base)
+      url: 'http://mirrors.slackware.com/slackware/slackware-current/{sourcedir}'
+  tags: [ all, production, slackware ]

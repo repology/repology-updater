@@ -1,0 +1,7 @@
+# Don't use a pattern for the gcc-languages, because gcc-java would become java ;)
+- { name: gcc-g++, setname: g++, family: slackware }
+- { name: gcc-brig, setname: brig, family: slackware }
+- { name: gcc-gfortran, setname: gfortran, family: slackware }
+- { name: gcc-gnat, setname: gnat, family: slackware }
+
+- { name: xf86-video-nouveau, category: extra, ignore: true, family: slackware }
