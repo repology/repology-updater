@@ -157,6 +157,14 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'}
         )
 
+    def test_match_vergreater(self):
+        self.check_transformer(
+            '[ { vergreater: "1.0", setname: bar } ]',
+            {'name': 'p1', 'version': '0.9', 'expect_effname': 'p1'},
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '1.1', 'expect_effname': 'bar'}
+        )
+
     def test_match_wwwpat(self):
         self.check_transformer(
             '[ { wwwpat: "https?://foo\\\\.com/.*", setname: bar } ]',

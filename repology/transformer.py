@@ -22,6 +22,8 @@ import sys
 
 import yaml
 
+from repology.version import VersionCompare
+
 
 class RuleApplyResult:
     unmatched = 1
@@ -118,6 +120,11 @@ class PackageTransformer:
         # match number of version components
         if 'verlonger' in rule:
             if not len(package.version.split('.')) > rule['verlonger']:
+                return RuleApplyResult.unmatched
+
+        # compare versions
+        if 'vergreater' in rule:
+            if VersionCompare(package.version, rule['vergreater']) <= 0:
                 return RuleApplyResult.unmatched
 
         # match name patterns

@@ -124,6 +124,7 @@ schemas = {
             'family': Any(Any(*families), [Any(*families)]),
             'category': Any(str, [str]),
             'verlonger': int,
+            'vergreater': str,
 
             'setname': str,
             'ignorever': bool,
