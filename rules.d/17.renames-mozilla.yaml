@@ -1,0 +1,2 @@
+- { namepat: mozilla-*firefox(.*), setname: firefox$1 }
+- { namepat: mozilla-*thunderbird(.*), setname: thunderbird$1 }

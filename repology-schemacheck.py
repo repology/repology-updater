@@ -68,6 +68,7 @@ families = [
     'rubygems',
     'sisyphus',
     'slackbuilds',
+    'slackware',
     'snap',
     'yacp',
 ]
