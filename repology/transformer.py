@@ -123,8 +123,20 @@ class PackageTransformer:
                 return RuleApplyResult.unmatched
 
         # compare versions
-        if 'vergreater' in rule:
-            if VersionCompare(package.version, rule['vergreater']) <= 0:
+        if 'vergt' in rule:
+            if VersionCompare(package.version, rule['vergt']) <= 0:
+                return RuleApplyResult.unmatched
+
+        if 'verge' in rule:
+            if VersionCompare(package.version, rule['verge']) < 0:
+                return RuleApplyResult.unmatched
+
+        if 'verlt' in rule:
+            if VersionCompare(package.version, rule['verlt']) >= 0:
+                return RuleApplyResult.unmatched
+
+        if 'verle' in rule:
+            if VersionCompare(package.version, rule['verle']) > 0:
                 return RuleApplyResult.unmatched
 
         # match name patterns

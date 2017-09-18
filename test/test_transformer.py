@@ -157,12 +157,36 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'}
         )
 
-    def test_match_vergreater(self):
+    def test_match_vergt(self):
         self.check_transformer(
-            '[ { vergreater: "1.0", setname: bar } ]',
+            '[ { vergt: "1.0", setname: bar } ]',
             {'name': 'p1', 'version': '0.9', 'expect_effname': 'p1'},
             {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'},
             {'name': 'p3', 'version': '1.1', 'expect_effname': 'bar'}
+        )
+
+    def test_match_verge(self):
+        self.check_transformer(
+            '[ { verge: "1.0", setname: bar } ]',
+            {'name': 'p1', 'version': '0.9', 'expect_effname': 'p1'},
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p3', 'version': '1.1', 'expect_effname': 'bar'}
+        )
+
+    def test_match_verlt(self):
+        self.check_transformer(
+            '[ { verlt: "1.0", setname: bar } ]',
+            {'name': 'p1', 'version': '0.9', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '1.1', 'expect_effname': 'p3'}
+        )
+
+    def test_match_verle(self):
+        self.check_transformer(
+            '[ { verle: "1.0", setname: bar } ]',
+            {'name': 'p1', 'version': '0.9', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p3', 'version': '1.1', 'expect_effname': 'p3'}
         )
 
     def test_match_wwwpat(self):

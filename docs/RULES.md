@@ -109,7 +109,19 @@ Example:
 
 TODO
 
-### vergreater
+### vergt
+
+TODO
+
+### verge
+
+TODO
+
+### verlt
+
+TODO
+
+### verle
 
 TODO
 
