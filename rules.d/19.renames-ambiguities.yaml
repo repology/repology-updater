@@ -28,6 +28,8 @@
 
 - { name: dash, setname: emacs-dash, family: gentoo, category: app-emacs }
 
+- { name: debugedit, wwwpart: rpm.org, setname: rpm } # part of rpm, apart from FreeBSD port which is a separate project
+
 - { name: diaspora, verpat: "1\\.[0-9]+\\.[0-9]+", setname: diaspora-game }
 - { name: diaspora, setname: diaspora-social }
 

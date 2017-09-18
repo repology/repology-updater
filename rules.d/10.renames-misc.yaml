@@ -535,6 +535,7 @@
 - { name: libgranite,                  setname: granite                   }
 - { name: libgtkdatabox,               setname: gtkdatabox                }
 - { name: libiksemel,                  setname: iksemel                   }
+- { name: libintl,                     setname: gettext                   }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
 - { name: liblapack,                   setname: lapack                    }
@@ -583,6 +584,7 @@
 - { name: libzenxml,                   setname: zenxml                    }
 
 # L (continued)
+- { name: lsof, family: freebsd,       setname: lsof-freebsd } # patched version with own versioning
 - { name: lxc-selinux,                 setname: lxc }
 - { name: lxc,       family: homebrew, setname: lxd } # misname
 - { name: lxcfs-unstable,              setname: lxcfs, ignorever: true }
@@ -804,6 +806,7 @@
 - { name: talk-filters,                setname: talkfilters }
 - { name: tecla,                       setname: libtecla }
 - { name: theora,                      setname: libtheora }
+- { name: thttpd,                      setname: sthttpd, family: gentoo } # actually fork of thttpd; XXX: problem
 - { name: tigervnc-devel,              setname: tigervnc, ignorever: true }
 - { name: [tintin,tintinxx],           setname: tintin++                  }
 - { name: [tiled-java,tiled-qt],       setname: tiled                     }

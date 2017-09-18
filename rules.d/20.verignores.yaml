@@ -23,6 +23,7 @@
 - { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: arduino,                     ver: "0021",                                        ignorever: true } # EPEL 6
+- { name: arptables,                   ver: "20[0-9]{2}",                                  ignorever: true } # LEDE year
 - { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
 - { name: arora,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: asp2php,                     ver: "20080813",                                    ignorever: true }
@@ -40,6 +41,8 @@
 - { name: aspell-te,                   ver: "0.60.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/te/
 - { name: aspell-tet,                  ver: "0.50.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: attr,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: autoconf,                    ver: "2.13.000227",                                 ignorever: true }
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 
 # B
@@ -63,7 +66,8 @@
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
 
 # C
-- { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # gentoo weirdness
+- { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # no need to append NSS version
+- { name: ca-certificates,             ver: "20170801",                                    ignorever: true } # see https://hg.mozilla.org/projects/nss/log/tip/lib/ckfw/builtins/certdata.txt for valid dates
 - { name: calamares,                   verlonger: 3,                 family: kaos,         ignorever: true } # own version?
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: cegui,                       verpat: "6\\..*",                                   ignorever: true } # it's 0.6.2!
@@ -75,6 +79,7 @@
 - { name: clusterssh,                                                family: gentoo,       ignorever: true } # perl module version mangling rules apply here
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
+- { name: cons,                        ver: "2.3.0.1",                                     ignorever: true } # debian uses this to revert to 2.2.0. http://metadata.ftp-master.debian.org/changelogs/main/c/cons/cons_2.3.0.1+2.2.0-2_changelog "The odd version string is to avoid using epochs" <- that's what epochs are for, dammit
 - { name: coreutils,                   verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: crack-attack,                ver: "1.1.15_cvs_01",                               ignorever: true }
 - { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
@@ -100,9 +105,10 @@
 # E
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignorever: true }
 - { name: e2fsprogs,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: ebtables,                    verpat: "20[0-9]{2}.*",                             ignorever: true } # LEDE year
 - { name: egoboo,                      ver: "2.81",                                        ignorever: true } # it's 2.8.1
 - { name: ephoto,                      verpat: "20[0-9]{6}",                               ignorever: true }
-- { name: ethtool,                     verpat: "[0-9]+",                                   ignorever: true }
+- { name: ethtool,                     verpat: "6.*",                                      ignorever: true } # XXX: check if https://www.kernel.org/pub/software/network/ethtool/ and ethtool from https://sourceforge.net/projects/gkernel/ are the same project. Anyway, the former is fresh and the latter is ancient crap from 2007
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignorever: true } # no such release
 
 # F
@@ -125,6 +131,7 @@
 - { name: "fonts:ubuntu",              ver: "1.0",                   family: pclinuxos,    ignorever: true } # no such version on the website
 - { name: freeminer,                   verlonger: 4,                 family: fdroid,       ignorever: true }
 - { name: ftgl,                        ver: "2.1.3",                                       ignorever: true } # it's 2.1.3-rc5; 2.1.3 was never released
+- { name: ftp,                         verpat: "20[0-9]{6}.*",                             ignorever: true } # haiku snapshot
 - { name: frozen-bubble,               ver: ["905bf71","2.212.0"],                         ignorever: true } # fake?
 - { name: frozen-bubble,               ver: "2.2.1",                 family: [ fedora ],   ignorever: true } # 2.2.1 was never released, it should be 2.2.1beta1
 
@@ -135,6 +142,7 @@
 - { name: gdb,                         verpat: ".*20[0-9]{2}.*",                           ignorever: true }
 - { name: geary,                       ver: "0.12",                  family: debuntu,      ignorever: true } # not released yet
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignorever: true } # not released yet
+- { name: gettext,                     ver: "2",                                           ignorever: true } # libintl from LEDE
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignorever: true }
@@ -315,9 +323,9 @@
 - { name: ufoai,                       ver: "2.5.0+20150216",                              ignorever: true } # homebrew
 - { name: unace,                       ver: "2.50",                                        ignorever: true } # it's 2.5
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
-- { name: unrar,                       ver: "5.50",                  family: mageia,       ignorever: true } # it's betaX yet
+- { name: unrar,                       verpat: "5\\.50.*",                                 ignorever: true } # it uses 5.5.X schema
 - { name: unzip,                       ver: "6.10c11",                                     ignorever: true } # haikuports
-- { name: urlview,                     ver: "0.9.20131021",                                ignorever: true }
+- { name: urlview,                     ver: ["20131023","0.9.20131021"],                   ignorever: true }
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
 
