@@ -43,6 +43,7 @@
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: attr,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: autoconf,                    ver: "2.13.000227",                                 ignorever: true }
+- { name: autoconf-archive,            ver: "[0-9]{8}.*",                                  ignorever: true } # it's YYYY.MM.DD
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 
 # B
