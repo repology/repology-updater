@@ -31,9 +31,9 @@ class TestPackageProc(unittest.TestCase):
             # Reference repo
             (Package(repo='1', family='1', name='a', version='2.2.20990101', ignoreversion=True), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', ignoreversion=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', ignoreversion=True), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.2alpha1', devel=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.1.20990101', ignoreversion=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.1.20990101', ignoreversion=True), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
             (Package(repo='1', family='1', name='a', version='2.0.20990101', ignoreversion=True), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
@@ -68,6 +68,17 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='6', family='6', name='a', version='1.1.20990101', ignoreversion=True), VersionClass.outdated),
             (Package(repo='6', family='6', name='a', version='1.1'), VersionClass.outdated),
             (Package(repo='6', family='6', name='a', version='1.0'), VersionClass.legacy),
+
+            # devel class should be ignored for newest version
+            (Package(repo='7', family='7', name='a', version='2.1', devel=True), VersionClass.newest),
+
+            # ignored classes are unignored when they are backed with real classes
+            (Package(repo='8', family='8', name='a', version='2.2beta1', ignoreversion=True), VersionClass.devel),
+
+            (Package(repo='9', family='9', name='a', version='2.1', ignoreversion=True), VersionClass.newest),
+
+            (Package(repo='10', family='10', name='a', version='2.0', ignoreversion=True), VersionClass.outdated),
+            (Package(repo='10', family='10', name='a', version='1.9', ignoreversion=True), VersionClass.outdated),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])

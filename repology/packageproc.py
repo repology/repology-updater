@@ -103,19 +103,20 @@ def FillPackagesetVersions(packages):
             cmpresult = VersionCompare(package.version, bestversion) if bestversion is not None else 1
 
             if cmpresult > 0:  # version newer than best
-                if package.ignoreversion:
+                develcmpresult = VersionCompare(package.version, bestdevelversion) if bestdevelversion is not None else 1
+
+                if develcmpresult > 0:
                     package.versionclass = VersionClass.ignored
+                elif develcmpresult == 0:
+                    package.versionclass = develclass
                 else:
-                    assert(package.devel)
-                    assert(bestdevelversion)
-                    if VersionCompare(package.version, bestdevelversion) < 0:
-                        package.versionclass = VersionClass.legacy
-                    else:
-                        package.versionclass = develclass
+                    package.versionclass = VersionClass.legacy
             elif cmpresult == 0:  # version is best
                 package.versionclass = newestclass
             else:
-                if bestversion_for_repo is None or VersionCompare(package.version, bestversion_for_repo) >= 0:
+                repocmpresult = VersionCompare(package.version, bestversion_for_repo) if bestversion_for_repo is not None else 1
+
+                if repocmpresult >= 0:
                     package.versionclass = VersionClass.outdated
                 else:
                     package.versionclass = VersionClass.legacy
