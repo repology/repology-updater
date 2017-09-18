@@ -79,7 +79,7 @@
 - { name: argus-sasl,                  setname: argus,                    family: [ freebsd ]  }
 - { name: archi-steam-farm,            setname: asf }
 - { name: atomic_ops,                  setname: libatomic-ops }
-- { name: aspell-uk,                   setname: ispell-uk,                ver: "1.8.0" } # see ftp://ftp.gnu.org/gnu/aspell/dict/uk/
+- { name: aspell-uk,                   setname: ispell-uk,                ver: ["1.6.5","1.8.0"] } # see ftp://ftp.gnu.org/gnu/aspell/dict/uk/
 - { name: astromatic-psfex,            setname: psfex }
 - { name: astromatic-scamp,            setname: scamp }
 - { name: astromatic-sextractor,       setname: sextractor }
@@ -535,6 +535,7 @@
 - { name: libgranite,                  setname: granite                   }
 - { name: libgtkdatabox,               setname: gtkdatabox                }
 - { name: libiksemel,                  setname: iksemel                   }
+- { name: libintl,                     setname: gettext                   }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
 - { name: liblapack,                   setname: lapack                    }
@@ -583,6 +584,7 @@
 - { name: libzenxml,                   setname: zenxml                    }
 
 # L (continued)
+- { name: lsof, family: freebsd,       setname: lsof-freebsd } # patched version with own versioning
 - { name: lxc-selinux,                 setname: lxc }
 - { name: lxc,       family: homebrew, setname: lxd } # misname
 - { name: lxcfs-unstable,              setname: lxcfs, ignorever: true }
@@ -804,6 +806,7 @@
 - { name: talk-filters,                setname: talkfilters }
 - { name: tecla,                       setname: libtecla }
 - { name: theora,                      setname: libtheora }
+- { name: thttpd,                      setname: sthttpd, family: gentoo } # actually fork of thttpd; XXX: problem
 - { name: tigervnc-devel,              setname: tigervnc, ignorever: true }
 - { name: [tintin,tintinxx],           setname: tintin++                  }
 - { name: [tiled-java,tiled-qt],       setname: tiled                     }
@@ -835,6 +838,8 @@
 - { name: [varnish4,varnish5],         setname: varnish                   }
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
 - { name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw], setname: vim }
+- { name: [visual-studio-code,visual-studio-code-oss,visualstudiocode], setname: vscode }
+- { name: visual-studio-code-insiders, setname: vscode, ignorever: true }
 - { name: vlc-nightly,                 setname: vlc, ignorever: true      }
 - { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignorever: true }
 - { name: [vsftpd-ssl,vsftpd-ext],     setname: vsftpd                    }

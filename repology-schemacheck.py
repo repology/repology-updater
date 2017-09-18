@@ -124,6 +124,10 @@ schemas = {
             'family': Any(Any(*families), [Any(*families)]),
             'category': Any(str, [str]),
             'verlonger': int,
+            'vergt': str,
+            'verge': str,
+            'verlt': str,
+            'verle': str,
 
             'setname': str,
             'ignorever': bool,

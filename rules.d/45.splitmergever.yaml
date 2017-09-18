@@ -495,20 +495,25 @@
 
 - { namepat: "(?:dkms|linux-rt.*|linux[0-9]+)-nvidiabl", setname: nvidiabl }
 
-- { name: nvidia, setname: nvidia-driver }
-- { namepat: "linux[0-9]+-nvidia(?:[0-9]+xx)", setname: nvidia-driver }
-- { namepat: "nvidia[0-9]+xx.*", setname: nvidia-driver }
-- { namepat: "nvidia-driver[0-9._-]+", setname: nvidia-driver }
-- { name: nvidia-graphics-drivers-tegra, setname: nvidia-driver, ignorever: true }
-- { namepat: "nvidia-graphics-drivers.*", setname: nvidia-driver }
-- { namepat: "nvidia-legacy.*", setname: nvidia-driver }
-- { name: [nvidia-kernel,nvidia-kmod], setname: nvidia-driver }
-- { name: [nvidia-beta,nvidia-beta-all,nvidia-beta-dkms,nvidia-current], setname: nvidia-driver, ignorever: true }
-- { name: nvidia, verpat: "173\\.14\\..*", setname: nvidia-driver-173.14.xx }
-- { name: nvidia, verpat: "96\\.43\\..*", setname: nvidia-driver-96.43.xx }
-- { name: nvidia, verpat: "71\\.86\\..*", setname: nvidia-driver-71.86.xx }
-- { name: nvidia, verpat: "304\\..*", setname: nvidia-driver-304.xx }
-- { name: nvidia, verpat: "340\\..*", setname: nvidia-driver-340.xx }
+- { namepat: "nvidia-settings-experimental.*", setname: nvidia-settings, ignorever: true }
+- { namepat: "nvidia-settings-.*", setname: nvidia-settings }
+- { namepat: "nvidia-[0-9._-]*-settings", setname: nvidia-settings }
+
+- { namepat: "linux[0-9]+-nvidia(?:[0-9]+xx)", setname: nvidia }
+- { namepat: "nvidia[0-9._-]+xx.*", setname: nvidia }
+- { namepat: "nvidia-driver[0-9._-]+", setname: nvidia }
+- { name: nvidia-graphics-drivers-tegra, setname: nvidia, ignorever: true }
+- { namepat: "nvidia-graphics-drivers.*", setname: nvidia }
+- { namepat: "nvidia-legacy.*", setname: nvidia }
+- { namepat: "nvidia-libgl.*beta.*", setname: nvidia, ignorever: true }
+- { namepat: "nvidia-glx.*beta.*", setname: nvidia, ignorever: true }
+- { name: [nvidia-kernel,nvidia-kmod], setname: nvidia }
+- { name: [nvidia-beta,nvidia-beta-all,nvidia-beta-dkms,nvidia-current], setname: nvidia, ignorever: true }
+- { name: nvidia, verpat: "173\\.14\\..*", setname: nvidia-173.14.xx }
+- { name: nvidia, verpat: "96\\.43\\..*", setname: nvidia-96.43.xx }
+- { name: nvidia, verpat: "71\\.86\\..*", setname: nvidia-71.86.xx }
+- { name: nvidia, verpat: "304\\..*", setname: nvidia-304.xx }
+- { name: nvidia, verpat: "340\\..*", setname: nvidia-340.xx }
 # (see http://www.nvidia.com/object/unix.html)
 
 - { namepat: "ogre[0-9._-]+", setname: ogre }

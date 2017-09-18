@@ -105,6 +105,26 @@ Example:
 - { name: firefox, verpat: "50\\..*", ... }
 ```
 
+### verlonger
+
+TODO
+
+### vergt
+
+TODO
+
+### verge
+
+TODO
+
+### verlt
+
+TODO
+
+### verle
+
+TODO
+
 ### wwwpat
 Matches package homepage against a regular expression. Note that
 unlike namepat and verpat, partial match is allowed here.
