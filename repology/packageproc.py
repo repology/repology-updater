@@ -182,10 +182,13 @@ def PackagesetToFamilies(packages):
     return set([package.family for package in packages])
 
 
-def PackagesetAggregateByVersions(packages):
+def PackagesetAggregateByVersions(packages, classmap={}):
+    def MapClass(versionclass):
+        return classmap.get(versionclass, versionclass)
+
     versions = {}
     for package in packages:
-        key = (package.version, package.versionclass)
+        key = (package.version, MapClass(package.versionclass))
         if key not in versions:
             versions[key] = []
         versions[key].append(package)
