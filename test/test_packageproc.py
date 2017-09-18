@@ -69,7 +69,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='6', family='6', name='a', version='1.1'), VersionClass.outdated),
             (Package(repo='6', family='6', name='a', version='1.0'), VersionClass.legacy),
 
-            # devel class should be ignored for newest version
+            # devel class should be ignored for newest version and below
             (Package(repo='7', family='7', name='a', version='2.1', devel=True), VersionClass.newest),
 
             # ignored classes are unignored when they are backed with real classes
@@ -79,6 +79,9 @@ class TestPackageProc(unittest.TestCase):
 
             (Package(repo='10', family='10', name='a', version='2.0', ignoreversion=True), VersionClass.outdated),
             (Package(repo='10', family='10', name='a', version='1.9', ignoreversion=True), VersionClass.outdated),
+
+            # Version between newest and devel should be outdated when there's no devel
+            (Package(repo='11', family='11', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])

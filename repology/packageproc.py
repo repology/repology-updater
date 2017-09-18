@@ -91,7 +91,6 @@ def FillPackagesetVersions(packages):
         # Pass 2.1:
         # - determine best version for this repo
         bestversion_for_repo = None
-
         for package in repo_packages:
             if not package.ignoreversion:
                 if bestversion_for_repo is None or VersionCompare(package.version, bestversion_for_repo) > 0:
@@ -100,26 +99,32 @@ def FillPackagesetVersions(packages):
         # Pass 2.2:
         # - fill version classes
         for package in repo_packages:
-            cmpresult = VersionCompare(package.version, bestversion) if bestversion is not None else 1
+            newestcmpresult = VersionCompare(package.version, bestversion) if bestversion is not None else 1
+            develcmpresult = VersionCompare(package.version, bestdevelversion) if bestdevelversion is not None else 1
+            repocmpresult = VersionCompare(package.version, bestversion_for_repo) if bestversion_for_repo is not None else 1
 
-            if cmpresult > 0:  # version newer than best
-                develcmpresult = VersionCompare(package.version, bestdevelversion) if bestdevelversion is not None else 1
-
-                if develcmpresult > 0:
-                    package.versionclass = VersionClass.ignored
-                elif develcmpresult == 0:
-                    package.versionclass = develclass
-                else:
-                    package.versionclass = VersionClass.legacy
-            elif cmpresult == 0:  # version is best
+            if newestcmpresult > 0 and develcmpresult > 0:
+                # when we have version newer than both newest and devel
+                # versions, it can only be ignored
+                package.versionclass = VersionClass.ignored
+            elif newestcmpresult > 0 and develcmpresult == 0:
+                # devel, while we've ensured it's greater than newest
+                package.versionclass = develclass
+            elif newestcmpresult == 0:
+                # just newest
                 package.versionclass = newestclass
+            elif repocmpresult >= 0:
+                # a) prerequisite here is that the version is (<newest) or (>newest <devel)
+                # b) we compare it to greatest non-ignored version in this repo
+                # now it's either == greatest, and since it's not newest or devel, it's outdated
+                # or it's > greatest, which may happen if it's ignored. Alias it as outdated
+                # as well
+                package.versionclass = VersionClass.outdated
             else:
-                repocmpresult = VersionCompare(package.version, bestversion_for_repo) if bestversion_for_repo is not None else 1
-
-                if repocmpresult >= 0:
-                    package.versionclass = VersionClass.outdated
-                else:
-                    package.versionclass = VersionClass.legacy
+                # otherwise package is <best for this repo, e.g.
+                # we have some kind of outdated, devel or fresh package
+                # all version lesser than it are considered legacy
+                package.versionclass = VersionClass.legacy
 
 
 def PackagesetToSummaries(packages):
