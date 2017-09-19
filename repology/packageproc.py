@@ -134,7 +134,7 @@ def FillPackagesetVersions(packages):
                     package.versionclass = versionclass
                     break
 
-                # process what's left (outdated for this branch) on the following branch
+                # process what's left (outdated for this branch) on the following iteration
 
                 prevrepocmpresult = repocmpresult
 
