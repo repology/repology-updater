@@ -196,7 +196,7 @@ class MetapackageRequest:
         if self.repos:
             tables.add('repo_metapackages')
             if self.repos_outdated:
-                where.Append('repo_metapackages.repo in (' + ','.join(['%s'] * len(self.repos)) + ') AND repo_metapackages.num_outdated > 0', *self.repos)
+                where.Append('repo_metapackages.repo in (' + ','.join(['%s'] * len(self.repos)) + ') AND repo_metapackages.num_packages_outdated > 0', *self.repos)
             else:
                 where.Append('repo_metapackages.repo in (' + ','.join(['%s'] * len(self.repos)) + ')', *self.repos)
 
@@ -362,12 +362,12 @@ class Database:
                     SELECT
                         repo,
                         effname,
-                        count(*) FILTER (WHERE versionclass = 1) AS num_newest,
-                        count(*) FILTER (WHERE versionclass = 2) AS num_outdated,
-                        count(*) FILTER (WHERE versionclass = 3) AS num_ignored,
-                        count(*) FILTER (WHERE versionclass = 4) AS num_unique,
-                        count(*) FILTER (WHERE versionclass = 5) AS num_devel,
-                        count(*) FILTER (WHERE versionclass = 6) AS num_legacy
+                        count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
+                        count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
+                        count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
+                        count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
+                        count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
+                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy
                     FROM packages_ns AS packages
                     GROUP BY effname,repo
                 WITH DATA
