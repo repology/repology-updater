@@ -23,10 +23,8 @@
 			{% if repo or maintainer %}
 			<td>
 			{% for versioninfo in data.explicit %}
-				{% set versionclass = versioninfo.class|css_for_versionclass %}
-				{% set versionclass = 'unique' if data.families|length == 1 and versionclass == 'newest' else versionclass %}
-				<span class="version version-{{ versionclass }}">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.families|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+				<span class="version version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span>
+				{%- set count = versioninfo.families|length %}{% if count > 1 %}<sup>{{ count }}</sup>{% endif %}
 			{% else %}
 				-
 			{% endfor %}
