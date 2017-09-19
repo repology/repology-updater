@@ -118,13 +118,12 @@ def FillPackagesetVersions(packages):
                 repocmpresult = VersionCompare(package.version, bestversion_for_repo) if bestversion_for_repo is not None else 1
 
                 if cmpresult > 0:
-                    # newer than newest in current branch
-
+                    # newer than newest for current branch
                     if prevrepocmpresult is None:
-                        # only possible on first iteration, everything > most newest is ignored
+                        # only possible on first iteration, everything > most newest can only be ignored
                         package.versionclass = VersionClass.ignored
                     elif prevrepocmpresult >= 0:
-                        # otherwise, we're procesing outdated from the brevious iteration
+                        # otherwise, we're procesing outdated from the brevious iteration (1)
                         package.versionclass = VersionClass.outdated
                     else:
                         package.versionclass = VersionClass.legacy
@@ -134,12 +133,12 @@ def FillPackagesetVersions(packages):
                     package.versionclass = versionclass
                     break
 
-                # process what's left (outdated for this branch) on the following iteration
+                # packages outdated for this branch are processed on the
+                # next iteration or in the else block (1)
 
                 prevrepocmpresult = repocmpresult
-
-            # leftovers are outdated packages for the last branch
-            if package.versionclass is None:
+            else:
+                # leftovers are outdated packages for the last branch
                 if prevrepocmpresult >= 0:
                     package.versionclass = VersionClass.outdated
                 else:
