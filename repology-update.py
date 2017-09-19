@@ -96,7 +96,7 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
                 database.AddPackages(package_queue)
                 num_pushed += len(package_queue)
                 package_queue = []
-                db_logger.Log('  pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed/(timer() - start_time)))
+                db_logger.Log('  pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
 
         db_logger.Log('pushing packages to database')
         repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
