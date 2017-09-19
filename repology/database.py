@@ -382,7 +382,7 @@ class Database:
         """)
 
         self.cursor.execute("""
-            CREATE INDEX repo_metapackages_effname_trgm ON repo_metapackages USING gin (effname gin_trgm_ops);
+            CREATE INDEX repo_metapackages_effname_trgm ON repo_metapackages USING gin (effname gin_trgm_ops)
         """)
 
         # maintainer_metapackages
