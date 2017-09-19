@@ -181,7 +181,7 @@ class MetapackageRequest:
         if self.maintainer:
             tables.add('maintainer_metapackages')
             if self.maintainer_outdated:
-                where.Append('maintainer_metapackages.maintainer = %s AND maintainer_metapackages.num_packages_outdated > 0 AND maintainer_metapackages.num_packages_newest = 0', self.maintainer)
+                where.Append('maintainer_metapackages.maintainer = %s AND maintainer_metapackages.num_packages_outdated > 0', self.maintainer)
             else:
                 where.Append('maintainer_metapackages.maintainer = %s', self.maintainer)
 
@@ -196,7 +196,7 @@ class MetapackageRequest:
         if self.repos:
             tables.add('repo_metapackages')
             if self.repos_outdated:
-                where.Append('repo_metapackages.repo in (' + ','.join(['%s'] * len(self.repos)) + ') AND repo_metapackages.num_outdated > 0 AND repo_metapackages.num_newest = 0', *self.repos)
+                where.Append('repo_metapackages.repo in (' + ','.join(['%s'] * len(self.repos)) + ') AND repo_metapackages.num_outdated > 0', *self.repos)
             else:
                 where.Append('repo_metapackages.repo in (' + ','.join(['%s'] * len(self.repos)) + ')', *self.repos)
 
