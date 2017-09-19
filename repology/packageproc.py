@@ -142,7 +142,7 @@ def FillPackagesetVersions(packages):
                 prevrepocmpresult = repocmpresult
             else:
                 # leftovers are outdated packages for the last branch
-                if prevrepocmpresult >= 0:
+                if prevrepocmpresult is None or prevrepocmpresult >= 0:
                     package.versionclass = VersionClass.outdated
                 else:
                     package.versionclass = VersionClass.legacy
