@@ -284,6 +284,22 @@ class Database:
             CREATE INDEX ON packages(effname)
         """)
 
+        # This should be used in queries instead of packages table
+        # everywhere where shadow metapackages need to be ignored
+        #
+        # XXX: may also investigate using NOT IN (HAVING bool_and())
+        # variant of this query
+        self.cursor.execute("""
+            CREATE VIEW packages_ns AS
+                SELECT * FROM PACKAGES
+                WHERE effname IN (
+                    SELECT effname
+                    FROM packages
+                    GROUP BY effname
+                    HAVING NOT bool_and(shadow)
+                )
+        """)
+
         # repositories
         self.cursor.execute("""
             CREATE TABLE repositories (
@@ -352,14 +368,7 @@ class Database:
                         count(*) FILTER (WHERE versionclass = 4) AS num_unique,
                         count(*) FILTER (WHERE versionclass = 5) AS num_devel,
                         count(*) FILTER (WHERE versionclass = 6) AS num_legacy
-                    FROM packages
-                    WHERE effname IN (
-                        SELECT
-                            effname
-                        FROM packages
-                        GROUP BY effname
-                        HAVING NOT bool_and(shadow)
-                    )
+                    FROM packages_ns AS packages
                     GROUP BY effname,repo
                 WITH DATA
         """)
