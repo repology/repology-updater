@@ -355,20 +355,42 @@ class Database:
             )
         """)
 
-        # repo_metapackages
+        # repo counts per metapackage
+        self.cursor.execute("""
+            CREATE MATERIALIZED VIEW metapackage_repocounts AS
+                SELECT
+                    effname,
+                    count(DISTINCT repo) AS num_repos,
+                    count(DISTINCT family) AS num_families,
+                    bool_and(shadow) AS shadow_only
+                FROM packages
+                GROUP BY effname
+                ORDER BY effname
+            WITH DATA
+        """)
+
+        self.cursor.execute('CREATE UNIQUE INDEX ON metapackage_repocounts(effname)')
+        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(num_repos)')
+        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(num_families)')
+        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(shadow_only, num_families)')
+
+        # package class counts aggregated for each metapackage/repo
         self.cursor.execute("""
             CREATE MATERIALIZED VIEW repo_metapackages
                 AS
                     SELECT
                         repo,
                         effname,
+                        count(*) AS num_packages,
                         count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
                         count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
                         count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
                         count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
                         count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
-                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy
-                    FROM packages_ns AS packages
+                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy,
+                        max(num_families) = 1 as unique
+                    FROM packages INNER JOIN metapackage_repocounts USING(effname)
+                    WHERE NOT shadow_only
                     GROUP BY effname,repo
                 WITH DATA
         """)
@@ -433,25 +455,6 @@ class Database:
         self.cursor.execute("""
             CREATE UNIQUE INDEX ON maintainers(maintainer)
         """)
-
-        # repo counts
-        self.cursor.execute("""
-            CREATE MATERIALIZED VIEW metapackage_repocounts AS
-                SELECT
-                    effname,
-                    count(DISTINCT repo) AS num_repos,
-                    count(DISTINCT family) AS num_families,
-                    bool_and(shadow) AS shadow_only
-                FROM packages
-                GROUP BY effname
-                ORDER BY effname
-            WITH DATA
-        """)
-
-        self.cursor.execute('CREATE UNIQUE INDEX ON metapackage_repocounts(effname)')
-        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(num_repos)')
-        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(num_families)')
-        self.cursor.execute('CREATE INDEX ON metapackage_repocounts(shadow_only, num_families)')
 
         # links for link checker
         self.cursor.execute("""
@@ -651,10 +654,10 @@ class Database:
         )
 
     def UpdateViews(self):
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""")
-        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations""")
 
         # package stats
