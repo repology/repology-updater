@@ -49,7 +49,7 @@ class TestPackageProc(unittest.TestCase):
 
             # devel + legacy
             (Package(repo='2', family='2', name='a', version='2.2beta1', devel=True), VersionClass.devel),
-            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.outdated),
 
             # devel + newest + legacy
             (Package(repo='3', family='3', name='a', version='2.2beta1', devel=True), VersionClass.devel),
@@ -80,8 +80,12 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='10', family='10', name='a', version='2.0', ignoreversion=True), VersionClass.outdated),
             (Package(repo='10', family='10', name='a', version='1.9', ignoreversion=True), VersionClass.outdated),
 
-            # Version between newest and devel should be outdated when there's no devel
+            # version between newest and devel should be outdated when there's no devel
             (Package(repo='11', family='11', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
+
+            # outdated in devel and normal at the same time
+            (Package(repo='12', family='12', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
+            (Package(repo='12', family='12', name='a', version='2.0'), VersionClass.outdated),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])

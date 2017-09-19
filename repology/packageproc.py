@@ -57,32 +57,44 @@ def PackagesetCheckFilters(packages, *filters):
 
 
 def FillPackagesetVersions(packages):
+    branchchecks = [
+        lambda package: package.devel,
+        lambda package: not package.devel
+    ]
+
+    branchclasses = [
+        VersionClass.devel,
+        VersionClass.newest,
+    ]
+
+    bestversions = [ None for _ in branchchecks ]
+
+    def UpdateBestVersions(bvlist, package):
+        if package.ignoreversion:
+            return
+
+        for branchnum, check in enumerate(branchchecks):
+            if not check(package):
+                continue
+
+            if bvlist[branchnum] is None or VersionCompare(package.version, bvlist[branchnum]) > 0:
+                bvlist[branchnum] = package.version
+
     # Pass 1:
-    # - calculate newest stable version
+    # - calculate newest version for each branch
     # - aggregate by repo
-    bestversion = None
-    bestdevelversion = None
     families = set()
     packages_by_repo = {}
 
     for package in packages:
-        if not package.ignoreversion:
-            if not package.devel:
-                if bestversion is None or VersionCompare(package.version, bestversion) > 0:
-                    bestversion = package.version
-            else:
-                if bestdevelversion is None or VersionCompare(package.version, bestdevelversion) > 0:
-                    bestdevelversion = package.version
+        UpdateBestVersions(bestversions, package)
 
         families.add(package.family)
         packages_by_repo.setdefault(package.repo, []).append(package)
 
     # for unique metapackages, replace fresh classes with unique
-    newestclass = VersionClass.newest
-    develclass = VersionClass.devel
-
     if len(families) == 1:
-        newestclass = develclass = VersionClass.unique
+        branchclasses = [ VersionClass.unique for _ in range(0, len(branchclasses)) ]
 
     # Pass 2:
     # - per-repo aggregation
@@ -90,41 +102,48 @@ def FillPackagesetVersions(packages):
     for repo, repo_packages in packages_by_repo.items():
         # Pass 2.1:
         # - determine best version for this repo
-        bestversion_for_repo = None
+        bestversions_for_repo = [ None for _ in branchchecks ]
         for package in repo_packages:
-            if not package.ignoreversion:
-                if bestversion_for_repo is None or VersionCompare(package.version, bestversion_for_repo) > 0:
-                    bestversion_for_repo = package.version
+            UpdateBestVersions(bestversions_for_repo, package)
 
         # Pass 2.2:
         # - fill version classes
+        prevrepocmpresult = None
         for package in repo_packages:
-            newestcmpresult = VersionCompare(package.version, bestversion) if bestversion is not None else 1
-            develcmpresult = VersionCompare(package.version, bestdevelversion) if bestdevelversion is not None else 1
-            repocmpresult = VersionCompare(package.version, bestversion_for_repo) if bestversion_for_repo is not None else 1
+            # ensure versionclass is reset first
+            package.versionclass = None
 
-            if newestcmpresult > 0 and develcmpresult > 0:
-                # when we have version newer than both newest and devel
-                # versions, it can only be ignored
-                package.versionclass = VersionClass.ignored
-            elif newestcmpresult > 0 and develcmpresult == 0:
-                # devel, while we've ensured it's greater than newest
-                package.versionclass = develclass
-            elif newestcmpresult == 0:
-                # just newest
-                package.versionclass = newestclass
-            elif repocmpresult >= 0:
-                # a) prerequisite here is that the version is (<newest) or (>newest <devel)
-                # b) we compare it to greatest non-ignored version in this repo
-                # now it's either == greatest, and since it's not newest or devel, it's outdated
-                # or it's > greatest, which may happen if it's ignored. Alias it as outdated
-                # as well
-                package.versionclass = VersionClass.outdated
-            else:
-                # otherwise package is <best for this repo, e.g.
-                # we have some kind of outdated, devel or fresh package
-                # all version lesser than it are considered legacy
-                package.versionclass = VersionClass.legacy
+            for bestversion, bestversion_for_repo, versionclass in zip(bestversions, bestversions_for_repo, branchclasses):
+                cmpresult = VersionCompare(package.version, bestversion) if bestversion is not None else 1
+                repocmpresult = VersionCompare(package.version, bestversion_for_repo) if bestversion_for_repo is not None else 1
+
+                if cmpresult > 0:
+                    # newer than newest in current branch
+
+                    if prevrepocmpresult is None:
+                        # only possible on first iteration, everything > most newest is ignored
+                        package.versionclass = VersionClass.ignored
+                    elif prevrepocmpresult >= 0:
+                        # otherwise, we're procesing outdated from the brevious iteration
+                        package.versionclass = VersionClass.outdated
+                    else:
+                        package.versionclass = VersionClass.legacy
+                    break
+                elif cmpresult == 0:
+                    # newest in current branch
+                    package.versionclass = versionclass
+                    break
+
+                # process what's left (outdated for this branch) on the following branch
+
+                prevrepocmpresult = repocmpresult
+
+            # leftovers are outdated packages for the last branch
+            if package.versionclass is None:
+                if prevrepocmpresult >= 0:
+                    package.versionclass = VersionClass.outdated
+                else:
+                    package.versionclass = VersionClass.legacy
 
 
 def PackagesetToSummaries(packages):
