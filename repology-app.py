@@ -687,7 +687,7 @@ def metapackage_information(name):
         for download in package.downloads:
             append_info('downloads', download, package)
 
-    versions = PackagesetAggregateByVersions(packages, { VersionClass.legacy: VersionClass.outdated } )
+    versions = PackagesetAggregateByVersions(packages, {VersionClass.legacy: VersionClass.outdated})
 
     for version in versions:
         version['families'] = list(sorted(PackagesetToFamilies(version['packages'])))

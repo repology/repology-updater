@@ -67,7 +67,7 @@ def FillPackagesetVersions(packages):
         VersionClass.newest,
     ]
 
-    bestversions = [ None for _ in branchchecks ]
+    bestversions = [None for _ in branchchecks]
 
     def UpdateBestVersions(bvlist, package):
         if package.ignoreversion:
@@ -94,7 +94,7 @@ def FillPackagesetVersions(packages):
 
     # for unique metapackages, replace fresh classes with unique
     if len(families) == 1:
-        branchclasses = [ VersionClass.unique for _ in range(0, len(branchclasses)) ]
+        branchclasses = [VersionClass.unique for _ in range(0, len(branchclasses))]
 
     # Pass 2:
     # - per-repo aggregation
@@ -102,7 +102,7 @@ def FillPackagesetVersions(packages):
     for repo, repo_packages in packages_by_repo.items():
         # Pass 2.1:
         # - determine best version for this repo
-        bestversions_for_repo = [ None for _ in branchchecks ]
+        bestversions_for_repo = [None for _ in branchchecks]
         for package in repo_packages:
             UpdateBestVersions(bestversions_for_repo, package)
 
