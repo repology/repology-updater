@@ -521,6 +521,7 @@
 - { name: libcodec2,                   setname: codec2                    }
 - { name: libcogl,                     setname: cogl                      }
 - { name: libcomedi,                   setname: comedilib                 }
+- { name: libconfuse0,                 setname: libconfuse                }
 - { name: libelf0,                     setname: libelf                    }
 - { name: [libenet,enet1.2],           setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
