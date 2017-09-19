@@ -681,19 +681,7 @@ class Database:
                     sum(num_packages_unique),
                     sum(num_packages_devel),
                     sum(num_packages_legacy)
-                FROM(
-                    SELECT
-                        repo,
-                        count(*) as num_packages,
-                        count(*) FILTER (WHERE versionclass = 1) as num_packages_newest,
-                        count(*) FILTER (WHERE versionclass = 2) as num_packages_outdated,
-                        count(*) FILTER (WHERE versionclass = 3) as num_packages_ignored,
-                        count(*) FILTER (WHERE versionclass = 4) as num_packages_unique,
-                        count(*) FILTER (WHERE versionclass = 5) as num_packages_devel,
-                        count(*) FILTER (WHERE versionclass = 6) as num_packages_legacy
-                    FROM packages
-                    GROUP BY repo, effname
-                ) AS TEMP
+                FROM repo_metapackages
                 GROUP BY repo
                 ON CONFLICT (name)
                 DO UPDATE SET
@@ -738,38 +726,10 @@ class Database:
                 ) SELECT
                     repo,
                     count(*),
-                    count(*) FILTER (WHERE unique_only),
-                    count(*) FILTER (WHERE NOT unique_only AND num_packages_newest > 0),
-                    count(*) FILTER (WHERE NOT unique_only AND num_packages_newest = 0)
-                FROM(
-                        SELECT
-                            repo,
-                            TRUE as unique_only,
-                            count(*) as num_packages,
-                            count(*) FILTER (WHERE versionclass = 1) as num_packages_newest
-                        FROM packages
-                        WHERE effname IN (
-                            SELECT
-                                effname
-                            FROM metapackage_repocounts
-                            WHERE NOT shadow_only AND num_families = 1
-                        )
-                        GROUP BY repo, effname
-                    UNION ALL
-                        SELECT
-                            repo,
-                            FALSE as unique_only,
-                            count(*) as num_packages,
-                            count(*) FILTER (WHERE versionclass = 1) as num_packages_newest
-                        FROM packages
-                        WHERE effname IN (
-                            SELECT
-                                effname
-                            FROM metapackage_repocounts
-                            WHERE NOT shadow_only AND num_families > 1
-                        )
-                        GROUP BY repo, effname
-                ) AS TEMP
+                    count(*) FILTER (WHERE repo_metapackages.unique),
+                    count(*) FILTER (WHERE NOT repo_metapackages.unique AND (num_packages_newest > 0 OR num_packages_devel > 0) AND num_packages_outdated = 0),
+                    count(*) FILTER (WHERE num_packages_outdated > 0)
+                FROM repo_metapackages
                 GROUP BY repo
                 ON CONFLICT (name)
                 DO UPDATE SET
