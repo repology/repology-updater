@@ -75,16 +75,14 @@
 				{%- endif -%}
 			</th>
 
-			<td class="text-center" title="Total number of metapackages in this repository">
-				<b>
+			<td class="text-center total-cell" title="Total number of metapackages in this repository">
+				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
 					{{- macros.value_with_delta(repostat.num_metapackages, old_repostat.num_metapackages) -}}
-				</b>
+				</a>
 			</td>
 
 			<td class="text-center version-cell version-big version-newest">
-				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
-					{{- macros.value_with_delta(repostat.num_metapackages_newest, old_repostat.num_metapackages_newest) -}}
-				</a>
+				{{- macros.value_with_delta(repostat.num_metapackages_newest, old_repostat.num_metapackages_newest) -}}
 			</td>
 			<td class="text-center version-cell version-big version-newest">
 				{{ macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages) }}
