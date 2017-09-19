@@ -108,8 +108,9 @@ def FillPackagesetVersions(packages):
 
         # Pass 2.2:
         # - fill version classes
-        prevrepocmpresult = None
         for package in repo_packages:
+            prevrepocmpresult = None
+
             # ensure versionclass is reset first
             package.versionclass = None
 
