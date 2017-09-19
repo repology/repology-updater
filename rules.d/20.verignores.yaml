@@ -23,7 +23,7 @@
 - { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: arduino,                     ver: "0021",                                        ignorever: true } # EPEL 6
-- { name: arptables,                   ver: "20[0-9]{2}",                                  ignorever: true } # LEDE year
+- { name: arptables,                   verpat: "20[0-9]{2}",                               ignorever: true } # LEDE year
 - { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
 - { name: arora,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: asp2php,                     ver: "20080813",                                    ignorever: true }
@@ -42,7 +42,7 @@
 - { name: aspell-tet,                  ver: "0.50.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
 - { name: attr,                        verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: attr,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
-- { name: autoconf,                    ver: "2.13.000227",                                 ignorever: true }
+- { name: autoconf213,                 ver: "2.13.000227",                                 ignorever: true }
 - { name: autoconf-archive,            ver: "[0-9]{8}.*",                                  ignorever: true } # it's YYYY.MM.DD
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 
@@ -52,8 +52,8 @@
 - { name: bastet,                      ver: "0.43.1.2015083000",                           ignorever: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
-- { name: binutils,                    verpat: ".*20[0-9]{2}.*",                           ignorever: true } # snapshots
 - { name: binutils,                    verpat: ".*r.*",                                    ignorever: true } # snapshots
+- { name: binutils,                    verpat: ".*[0-9]{4}.*",                             ignorever: true } # snapshots and GUIX 2281 garbage
 - { name: bison,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # alt weirdness
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
@@ -232,6 +232,7 @@
 
 # N
 - { name: ncurses,                     verpat: "6\\.0-20[0-9]{6}.*",                       ignorever: true } # macports
+- { name: netcat-openbsd,              verpat: "20[0-9]{6}.*",                             ignorever: true } # pkgsrc garbage
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 
 # O
