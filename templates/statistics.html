@@ -85,10 +85,10 @@
 				{{- macros.value_with_delta(repostat.num_metapackages_newest, old_repostat.num_metapackages_newest) -}}
 			</td>
 			<td class="text-center version-cell version-big version-newest">
-				{{ macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages) }}
+				{{- macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages) -}}
 			</td>
 			<td class="text-center version-cell version-big version-newest">
-				{{ macros.safe_percent(repostat.num_metapackages_newest, num_metapackages) }}
+				{{- macros.safe_percent(repostat.num_metapackages_newest, num_metapackages) -}}
 			</td>
 
 			<td class="text-center version-cell version-big version-outdated">
