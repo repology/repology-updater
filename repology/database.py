@@ -781,7 +781,7 @@ class Database:
                     packages.repo,
                     packages.name,
                     packages.effname,
-                    case when packages.maintainers = '{}' then null else unnest(packages.maintainers) end,
+                    unnest(case when packages.maintainers = '{}' then '{null}' else packages.maintainers end),
                     'Homepage link "' ||
                         links.url ||
                         '" is dead (' ||
@@ -817,7 +817,7 @@ class Database:
                     packages.repo,
                     packages.name,
                     packages.effname,
-                    case when packages.maintainers = '{}' then null else unnest(packages.maintainers) end,
+                    unnest(case when packages.maintainers = '{}' then '{null}' else packages.maintainers end),
                     'Homepage link "' ||
                         links.url ||
                         '" is a permanent redirect to "' ||
@@ -839,7 +839,7 @@ class Database:
                     repo,
                     name,
                     effname,
-                    case when maintainers = '{}' then null else unnest(maintainers) end,
+                    unnest(case when packages.maintainers = '{}' then '{null}' else packages.maintainers end),
                     'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
                 FROM packages
                 WHERE
@@ -854,7 +854,7 @@ class Database:
                     repo,
                     name,
                     effname,
-                    case when maintainers = '{}' then null else unnest(maintainers) end,
+                    unnest(case when packages.maintainers = '{}' then '{null}' else packages.maintainers end),
                     'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
                 FROM packages
                 WHERE
@@ -868,7 +868,7 @@ class Database:
                     repo,
                     name,
                     effname,
-                    case when maintainers = '{}' then null else unnest(maintainers) end,
+                    unnest(case when packages.maintainers = '{}' then '{null}' else packages.maintainers end),
                     'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
                 FROM packages
                 WHERE
