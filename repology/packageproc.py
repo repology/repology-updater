@@ -114,6 +114,9 @@ def FillPackagesetVersions(packages):
             package.versionclass = None
 
             for bestversion, bestversion_for_repo, versionclass in zip(bestversions, bestversions_for_repo, branchclasses):
+                if bestversion is None:
+                    continue
+
                 cmpresult = VersionCompare(package.version, bestversion) if bestversion is not None else 1
                 repocmpresult = VersionCompare(package.version, bestversion_for_repo) if bestversion_for_repo is not None else 1
 

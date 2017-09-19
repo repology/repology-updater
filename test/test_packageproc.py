@@ -24,10 +24,8 @@ from repology.packageproc import FillPackagesetVersions
 
 
 class TestPackageProc(unittest.TestCase):
-    def test_version_classes(self):
+    def test_versionclasses_big(self):
         packages = [
-            # Package A
-
             # Reference repo
             (Package(repo='1', family='1', name='a', version='2.2.20990101', ignoreversion=True), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
@@ -86,6 +84,44 @@ class TestPackageProc(unittest.TestCase):
             # outdated in devel and normal at the same time
             (Package(repo='12', family='12', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
             (Package(repo='12', family='12', name='a', version='2.0'), VersionClass.outdated),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_versionclass_single_branch1(self):
+        packages = [
+            # here we only have default branch
+            (Package(repo='1', family='1', name='a', version='2.2.20990101', ignoreversion=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
+            (Package(repo='1', family='1', name='a', version='2.0.20990101', ignoreversion=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+
+            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
+            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+
+            (Package(repo='3', family='3', name='a', version='2.0'), VersionClass.outdated),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_versionclass_single_branch2(self):
+        packages = [
+            # here we only have devel
+            (Package(repo='1', family='1', name='a', version='2.2.20990101', ignoreversion=True, devel=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.1', devel=True), VersionClass.devel),
+            (Package(repo='1', family='1', name='a', version='2.0.20990101', ignoreversion=True, devel=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.0', devel=True), VersionClass.legacy),
+
+            (Package(repo='2', family='2', name='a', version='2.1', devel=True), VersionClass.devel),
+            (Package(repo='2', family='2', name='a', version='2.0', devel=True), VersionClass.legacy),
+
+            (Package(repo='3', family='3', name='a', version='2.0', devel=True), VersionClass.outdated),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
