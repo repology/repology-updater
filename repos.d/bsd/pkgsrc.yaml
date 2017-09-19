@@ -11,7 +11,7 @@
     - name: INDEX
       fetcher: File
       parser: PkgsrcIndex
-      url: https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2017Q1/pkgsrc/INDEX
+      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q1/pkgsrc/INDEX
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
@@ -42,7 +42,7 @@
     - name: INDEX
       fetcher: File
       parser: PkgsrcIndex
-      url: https://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2017Q2/pkgsrc/INDEX
+      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q2/pkgsrc/INDEX
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
@@ -72,7 +72,7 @@
     - name: INDEX
       fetcher: File
       parser: PkgsrcIndex
-      url: https://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
+      url: https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
