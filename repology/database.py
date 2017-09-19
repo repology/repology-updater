@@ -1019,7 +1019,8 @@ class Database:
                 devel,
 
                 extrafields
-            FROM packages WHERE effname IN (
+            FROM packages
+            WHERE effname IN (
                 {}
             )
             """.format(query),
