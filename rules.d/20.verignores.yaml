@@ -333,6 +333,7 @@
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
 
 # V
+- { name: vid.stab,                    verpat: ".*[0-9a-f]{7}.*",                          ignorever: true } # git commit
 - { name: vlc,                                                       family: kaos,         ignorever: true } # fake
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
