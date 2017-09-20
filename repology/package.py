@@ -26,7 +26,6 @@ class VersionClass:
     unique = 4
     devel = 5
     legacy = 6
-    mixed = 99  # to be removed
 
 
 class PackageSanityCheckProblem(Exception):

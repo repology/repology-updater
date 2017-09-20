@@ -89,8 +89,6 @@ def css_for_versionclass(value):
         return 'legacy'
     elif value == VersionClass.outdated:
         return 'outdated'
-    elif value == VersionClass.mixed:
-        return 'mixed'
 
 
 def url_for_self(**args):
