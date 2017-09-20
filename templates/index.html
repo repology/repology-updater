@@ -22,7 +22,7 @@
 					<div class="panel-body">
 						<ul class="list-jumbotron-items">
 							<li>Discover new releases of software you maintain packages for</li>
-							<li>Discover new project to package</li>
+							<li>Find new projects to package</li>
 							<li>Get in touch with fellow maintainers to improve packages together</li>
 							<li>Keep package naming and versioning schemes in sync to other repos</li>
 							<li>Fix problems detected by repology, such as broken links</li>
@@ -37,8 +37,8 @@
 					</div>
 					<div class="panel-body">
 						<ul class="list-jumbotron-items">
-							<li>Keep track of how well your project is packaged</li>
-							<li>Keep in touch with package maintainers</li>
+							<li>Keep track of where and how well your project is packaged</li>
+							<li>Keep in touch with your product package maintainers</li>
 							<li>Use packaging badges like this one:
 								<img class="jumbotron-badge" src="{{ url_for("static", filename="demobadge.v1.svg") }}" alt="Repology badge example">
 							</li>
@@ -203,7 +203,7 @@
 
 	<h2>Popular packages</h2>
 
-	{% include "metapackages_legend.html" %}
+	{% include "versionclass_legend.html" %}
 
 	{% include "metapackages_table.html" %}
 
@@ -212,14 +212,8 @@
 	<p id="repos-footnote">
 		* "a lot of package repositories and other sources" include:
 	</p>
-	<ul>
-		<li>Linux repositories: Alpine, ALT, Antergos, Arch and AUR, Calculate, CentOS, CRUX, Debian, Deepin, EPEL, Fedora, Gentoo, Guix, GoboLinux, KaOS, LEDE, Linuxbrew, Mageia, Manjaro, Mint, MX Linux, Nix, OpenMandriva, OpenSUSE, OpenWrt, Parabola, PCLinuxOS, Rosa, Sabayon, SlackBuilds, Ubuntu</li>
-		<li>*BSD repositories: DragonFly DPorts, FreeBSD ports, OpenBSD packages, pkgsrc, Ravenports</li>
-		<li>third party repositories: GetDeb, KDE neon, some Gentoo overlays</li>
-		<li>other *nix repositories: Homebrew, OpenIndiana, MacPorts</li>
-		<li>and non-*nix repositories: Chocolatey, F-Droid, HaikuPorts, MSYS2, YACP</li>
-		<li>upstream module collections: CPAN, CRAN, Hackage, PyPi, RubyGems</li>
-		<li>F/OSS news sites: DistroWatch, freshcode.club, libregamewiki</li>
-	</ul>
+
+	{% include "supported_repos.html" %}
+
 </div> {# container #}
 {% endblock %}
