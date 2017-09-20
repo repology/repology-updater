@@ -7,6 +7,34 @@
 <div class="container">
 
 <article>
+	<h3 name="2017-09-2?">2017-09-2?</h3>
+	<ul>
+		<li>
+			<p>Huge rewrite of package classification system. This adds two new major features:</p>
+			<ul>
+				<li>
+					<p><span class="version version-devel">Devel</span> version class now exists in addition to <span class="version version-newest">newest</span>.</p>
+					<p>The idea is to track stable and devel/unstable version independently, e.g. if some repository packages <span class="version version-devel">2.0alpha1</span> version of some package, it no longer makes <span class="version version-newest">1.234</span> (which is latest known stable version) outdated in other repositories. Any repository may have newest and devel version at the same time, and is considered up to date if either is present. Devel versions may still become outdated as soon as newer devel version is available.</p>
+					<p>Note that devel status is set through rule system, so this feature is not available for too many packages yet. Reports on packages which have unstable branches are appreciated. We're also considering enabling this globally for all alpha/beta/pre versions.</p>
+					<p>To see this feature in action, check out <a href="{{ url_for('metapackage_information', name='glib') }}">glib</a> metapackage.</p>
+				</li>
+				<li>
+					<p><span class="version version-legacy">Legacy</span> version class now exists in addition to <span class="version version-outdated">outdated</span>.</p>
+					<p>The idea here is that if multiple versions of the same package exist in a repository, older ones are specifically preserved for purposes of compatibility and user convenience and are not meant to be updated. So, instead of <span class="version version-outdated">outdated</span>, they are now marked as <span class="version version-legacy">legacy</span> and are not accounted for outdated counts and metapackage lists.</li>
+					<p>To see this feature in action, check out <a href="{{ url_for('metapackage_information', name='phrack', _anchor='gentoo') }}">phrack</a> metapackage.</p>
+			</ul>
+			<p>Here's an example set of package versions to demonstrate these new features:</p>
+			<ul>
+				<li>Repository A: <span class="version version-devel">2.0beta1</span> <span class="version version-newest">1.1</span> (latest devel and latest normal versions)</li>
+				<li>Repository B: <span class="version version-outdated">2.0alpha1</span> <span class="version version-outdated">1.0</span> (both devel and normal versions outdated)</li>
+				<li>Repository C: <span class="version version-newest">1.1</span> <span class="version version-legacy">1.0</span> <span class="version version-legacy">0.5</span> (latest version and a set of legacy versions)</li>
+			</ul>
+			<p>This change introduced additional minor improvements, such as more accurate statistics counting (no more discrepancy between statistics and number of actual items in e.g. outdated metapackages list) and better badges rendering (ignored versions are no longer shown on the badge as long as there are other correct verions).</p>
+		</li>
+	</ul>
+</article>
+
+<article>
 	<h3>2017-09-15</h3>
 	<ul>
 		<li>Added <a href="{{ url_for('repository', repo='unitedrpms_28') }}">UnitedRPMs</a> repositories.</li>
