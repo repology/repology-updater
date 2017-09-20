@@ -94,6 +94,7 @@
     - rabbyt
     - redis-py
     - redis-py-cluster
+    - robotframework
     - shutilwhich
     - sortedcontainers
     - sphinxcontrib-plantuml
@@ -179,6 +180,9 @@
 - { name: [pygtk,pygtk2,pygtk2.0,"python:gtk","python:gtk2","python:pygtk","python:pygtk2"], setname: "python:pygtk" }
 - { name: meld3,                       setname: "python:meld3" }
 - { name: twine-pypi,                  setname: "python:twine" }
+- { name: robot-framework,             setname: "python:robotframework" }
+- { name: python-markdown,             setname: "python:markdown" }
+- { name: markdown, wwwpart: pypi,     setname: "python:markdown" }
 
 # as per pypi package name
 - { name: "python:axolotl",            setname: "python:python-axolotl"   }
