@@ -203,15 +203,7 @@
 
 	<h2>Popular packages</h2>
 
-	<p>Legend:</p>
-
-	<ul>
-		<li><span class="version version-newest">newest</span><sup>#repos</sup> - newest known version for a package is marked like this. The superscript number shows how many repos have this version.</li>
-		<li><span class="version version-outdated">outdated</span> - older versions, which may require updating.</li>
-		<li><span class="version version-ignored">ignored</span> - version is ignored and excluded from comparison. Fake or snapshot versions are marked like this.</li>
-		<li><span class="version version-unique">unique</span> - package is present only in a single repository, there's nothing to compare it to.</li>
-		<li><b>Spread</b> means how many repository families (e.g. all Debian versions are a single family) contain this package.</li>
-	</ul>
+	{% include "metapackages_legend.html" %}
 
 	{% include "metapackages_table.html" %}
 
