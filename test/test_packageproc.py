@@ -129,6 +129,22 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
+    def test_versionclass_branch_confusion(self):
+        packages = [
+            # same version is both devel and default in different packages
+            # this should be consistently aggregated
+            (Package(repo='1', family='1', name='a', version='2.1', devel=True), VersionClass.devel),
+            (Package(repo='1', family='1', name='a', version='2.0', devel=True), VersionClass.legacy),
+
+            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.devel),
+            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
 
 if __name__ == '__main__':
     unittest.main()
