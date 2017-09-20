@@ -19,7 +19,7 @@ import datetime
 
 import flask
 
-from repology.package import PackageVersionClass, RepositoryVersionClass
+from repology.package import VersionClass
 from repology.packageformatter import PackageFormatter
 
 
@@ -76,26 +76,19 @@ def pkg_format(value, pkg):
     return PackageFormatter().format(value, pkg)
 
 
-def css_for_package_versionclass(value):
-    if value == PackageVersionClass.newest:
-        return 'newest'
-    elif value == PackageVersionClass.outdated:
-        return 'outdated'
-    elif value == PackageVersionClass.ignored:
+def css_for_versionclass(value):
+    if value == VersionClass.ignored:
         return 'ignored'
-
-
-def css_for_summary_versionclass(value):
-    if value == RepositoryVersionClass.newest:
-        return 'newest'
-    elif value == RepositoryVersionClass.outdated:
-        return 'outdated'
-    elif value == RepositoryVersionClass.mixed:
-        return 'mixed'
-    elif value == RepositoryVersionClass.ignored:
-        return 'ignored'
-    elif value == RepositoryVersionClass.lonely:
+    elif value == VersionClass.unique:
         return 'unique'
+    elif value == VersionClass.devel:
+        return 'devel'
+    elif value == VersionClass.newest:
+        return 'newest'
+    elif value == VersionClass.legacy:
+        return 'legacy'
+    elif value == VersionClass.outdated:
+        return 'outdated'
 
 
 def url_for_self(**args):

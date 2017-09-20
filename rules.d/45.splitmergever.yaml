@@ -1,6 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-# Version splits/tweaks
+- { name: adwaita-icon-theme, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
+
 - { namepat: "allegro[0-9.]*(?:-devel)?", setname: allegro }
 - { name: allegro, verpat: "4\\..*",   setname: allegro4, last: true }
 - { name: allegro, verpat: "5\\..*",   setname: allegro5, last: true }
@@ -23,7 +24,7 @@
 - { name: apache, verpat: "2\\.5\\..*", setname: apache25 }
 
 - { namepat: "(?:lib)?apr[0-9._-]*",    setname: apr }
-- { name: apr, verpat: "2\\..*",       setname: apr2 }
+- { name: apr, verpat: "2\\..*",       devel: true }
 
 - { namepat: "(?:lib)?apr-util[0-9._-]*", setname: apr-util }
 - { name: apr-util, verpat: "0\\..*",  setname: apr-util0 }
@@ -33,6 +34,12 @@
 - { namepat: "arduino[0-9._-]+",       setname: arduino }
 
 - { namepat: "asterisk[0-9.]+",        setname: asterisk }
+
+- { name: at-spi2-atk, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
+
+- { name: at-spi2-core, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
+
+- { name: atk, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?atkmm[0-9._-]*", setname: atkmm }
 - { namepat: "(?:lib)?atkmm[0-9._-]*(-docs)", setname: atkmm }
@@ -60,6 +67,8 @@
 
 - { name: bowtie2,                     setname: bowtie }
 - { name: bowtie, verpat: "2\\..*",    setname: bowtie2 }
+
+- { name: cairo, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?cairomm[0-9._-]*", setname: cairomm }
 - { namepat: "(?:lib)?cairomm[0-9._-]*(-docs)?", setname: cairomm }
@@ -179,6 +188,8 @@
 
 - { namepat: "gcc[0-9.-]+",            setname: gcc }
 - { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignorever: yes }
+- { name: gcc, verpat: "[0-9]+\\.0\\..*", devel: true }
+- { name: gcc, verpat: "[0-9]+\\.[0-9]+\\.[1-9].*", devel: true }
 
 - { namepat: "gccgo[0-9.-]+",          setname: gccgo }
 
@@ -229,6 +240,9 @@
 
 - { namepat: "gpgme[0-9._-]+",         setname: gpgme }
 
+- { name: [gobject-introspection-common,gobject-introspection-runtime], setname: gobject-introspection }
+- { name: gobject-introspection, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
+
 - { name: goffice-light,               setname: goffice }
 - { namepat: "goffice[0-9._-]+",       setname: goffice }
 
@@ -251,6 +265,7 @@
 
 - { namepat: "(?:lib)?glib[0-9._-]*", setname: glib }
 - { name: [glib-reference,glib2-docs,glib2-patched-thumbnailer,glib2-quiet,glib2-static], setname: glib }
+- { name: glib, verpat: "[2-9][0-9]*\\.[0-9]*[13579]\\..*", devel: true }
 - { name: glib, verpat: "1\\..*", setname: glib12 }
 
 - { name: glib2-networking, setname: glib-networking }
@@ -391,6 +406,8 @@
 
 - { namepat: "(?:lib)?serf[0-9._-]*",  setname: serf }
 
+- { name: libressl, verpat: "2\\.6\\..*", devel: true }
+
 - { name: [libsigc++-docs, libsigc++-legacy12], setname: libsigc++ }
 - { namepat: "libsigc(\\+\\+|xx|pp)[0-9.-]+", setname: libsigc++ }
 - { name: libsigc++, verpat: "1\\..*",  setname: libsigc++12 }
@@ -441,6 +458,9 @@
 - { name: libmusicbrainz, verpat: "4\\..*", setname: libmusicbrainz4 }
 - { name: libmusicbrainz, verpat: "5\\..*", setname: libmusicbrainz5 }
 - { name: libmusicbrainz, warning: "please classify me" }
+
+- { name: [librsvg-stable,librsvg2], setname: librsvg }
+- { name: librsvg, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "libunique[0-9]+", setname: libunique }
 - { name: libunique, verpat: "1\\..*", setname: libunique1 }
@@ -550,7 +570,7 @@
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph }
 - { namepat: "openscenegraph[0-9.-]+", setname: openscenegraph }
 - { name: [openscenegraph-qt,openscenegraph-qt4,open-scene-graph], setname: openscenegraph }
-- { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", setname: openscenegraph-devel }
+- { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?pangomm[0-9._-]*", setname: pangomm }
 - { namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", setname: pangomm }
@@ -598,7 +618,8 @@
 - { namepat: "postgresql[0-9.-]*[_-]server", setname: postgresql }
 - { namepat: "postgresql[0-9.-]*-beta.*", setname: postgresql, ignorever: true }
 - { namepat: "postgresql[0-9.-]*-lts.*", setname: postgresql }
-- { name: postgresql, verpat: "10.*", setname: postgresql10 }
+- { name: postgresql, verpat: "10.*", devel: true }
+- { name: postgresql, ver: "10", ignorever: true }
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
 
@@ -656,11 +677,13 @@
 
 - { namepat: "spidermonkey[0-9]+",     setname: spidermonkey }
 
+- { name: [squid-ldap,squid-ntlm], family: openbsd, setname: squid }
+- { name: [squid-devel], setname: squid, ignorever: true }
+- { namepat: "squid[0-9._-]+", setname: squid }
+- { name: squid, verpat: "4\\..*", devel: true }
+
 - { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
 - { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
-
-- { namepat: "squid[0-9]+",            setname: squid }
-- { name: squid, verpat: "4\\..*",     setname: squid4 }
 
 - { namepat: "streamtuner[0-9]+",        setname: streamtuner }
 - { name: streamtuner, verpat: "0\\..*", setname: streamtuner0 }
@@ -687,6 +710,7 @@
 - { namepat: "tk8[0-9._-]+",           setname: tk } # don't mix with tk2, tk5, tk707 which are unrelated projects
 
 - { name: tor-devel,                   setname: tor }
+- { name: tor, verge: "0.3.1",         devel: true }
 
 - { name: unison-devel,                setname: unison, ignorever: true }
 - { name: unison-nox11,                setname: unison }
@@ -707,7 +731,7 @@
 
 - { namepat: "wine[0-9.-]+",           setname: wine }
 - { name: [wine-devel,wine-development,wine-vanilla,wine-stable,wine-ivb], setname: wine }
-- { name: wine, verpat: "[0-9]+\\.0.*", setname: wine-stable }
+- { name: wine, verpat: "[0-9]+\\.0*[1-9].*", devel: true }
 
 - { namepat: "wine-gecko([0-9.-]+|-devel|-stable)", setname: wine-gecko }
 

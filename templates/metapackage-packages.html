@@ -19,7 +19,7 @@
 <div class="row">
 {% endif %}
 	<div class="col-md-4">
-		<div class="panel {% if package.versionclass == 1 %}panel-success{% elif package.versionclass == 2 %}panel-danger{% else %}panel-default{% endif %}">
+		<div class="panel panel-version-{{ package.versionclass|css_for_versionclass }}">
 			<div class="panel-heading">
 				<div class="package-repository">
 				<a class="panel-heading-link" href="{{ url_for('repository', repo=package.repo) }}">{{ repometadata[package.repo].desc }}</a>

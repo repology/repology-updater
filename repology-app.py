@@ -54,8 +54,7 @@ app.jinja_env.lstrip_blocks = True
 
 # templates: custom filters
 app.jinja_env.filters['pkg_format'] = pkg_format
-app.jinja_env.filters['css_for_package_versionclass'] = css_for_package_versionclass
-app.jinja_env.filters['css_for_summary_versionclass'] = css_for_summary_versionclass
+app.jinja_env.filters['css_for_versionclass'] = css_for_versionclass
 app.jinja_env.filters['maintainer_to_links'] = maintainer_to_links
 app.jinja_env.filters['maintainers_to_group_mailto'] = maintainers_to_group_mailto
 
@@ -145,62 +144,72 @@ def get_packages_name_range(packages):
     return firstname, lastname
 
 
-def metapackages_to_data(metapackages, repo=None, maintainer=None):
+def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
     metapackagedata = {}
-    for metapackagename, packages in sorted(metapackages.items()):
-        packages = PackagesetSortByVersions(packages)
 
-        # 1. Aggregate by repository
-        packages_by_repo = {}
-        for package in packages:
-            if package.repo not in packages_by_repo:
-                packages_by_repo[package.repo] = []
-            packages_by_repo[package.repo].append(package)
+    for metapackagename, packages in metapackages.items():
+        # we gather two kinds of statistics: one is for explicitly requested
+        # subset of packages (e.g. ones belonging to specified repo or maintainer)
+        # and a general one for all other packages
+        explicit = {
+            'keys': [],
+            'families_by_key': {}
+        }
+        summaries = {
+            sumtype: {
+                'keys': [],
+                'families_by_key': {}
+            } for sumtype in ['newest', 'outdated', 'ignored']
+        }
 
-        # 2.1. Extract explicit packages
-        # 2.2. Discover repos worth showing
-        # Repo not worth showin is the repo from which all newest (in this repo) packages
-        # were extracted as explicit
-        explicit_packages = []
-        ignored_packages = []
-        repos_worth_showing = set()
-        for reponame, repopackages in packages_by_repo.items():
-            bestversion = None
-            for package in repopackages:
-                # discover best version
-                if bestversion is None and package.versionclass != PackageVersionClass.ignored:
-                    bestversion = package.version
+        families = set()
 
-                if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
-                    explicit_packages.append(package)
-                elif package.versionclass == PackageVersionClass.ignored:
-                    ignored_packages.append(package)
-                elif VersionCompare(package.version, bestversion) == 0:
-                    repos_worth_showing.add(reponame)
+        # gather summaries
+        for package in PackagesetSortByVersions(packages):
+            families.add(package.family)
 
-        # 3. Extract newest package from each repo
-        newest_packages = []
-        for reponame in repos_worth_showing:
-            for package in packages_by_repo[reponame]:
-                if package.versionclass != PackageVersionClass.ignored:
-                    newest_packages.append(package)
-                    break
+            key = None
+            target = None
 
-        # 4. Aggregate by versions
-        def VersionsDigest(version):
-            return {
-                'version': version['version'],
-                'families': set(map(lambda p: p.family, version['packages'])),
-                'class': version['packages'][0].versionclass,
-            }
+            if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
+                key = (package.version, package.versionclass)
+                target = explicit
+            else:
+                key = package.version
+                target = summaries['ignored']
+                if package.versionclass in [VersionClass.outdated, VersionClass.legacy]:
+                    target = summaries['outdated']
+                elif package.versionclass in [VersionClass.devel, VersionClass.newest, VersionClass.unique]:
+                    target = summaries['newest']
 
-        versions = PackagesetAggregateByVersions(newest_packages)
+            if key not in target['families_by_key']:
+                target['keys'].append(key)
+
+            target['families_by_key'].setdefault(key, set()).add(package.family)
+
+        # convert summaries
+        for sumtype, summary in summaries.items():
+            summaries[sumtype] = [
+                {
+                    'version': key,
+                    'families': summary['families_by_key'][key]
+                } for key in summary['keys']
+            ]
+
+        explicit = [
+            {
+                'version': key[0],
+                'versionclass': key[1],
+                'families': explicit['families_by_key'][key]
+            } for key in explicit['keys']
+        ]
+
         metapackagedata[metapackagename] = {
-            'families': PackagesetToFamilies(packages),
-            'explicit': map(VersionsDigest, PackagesetAggregateByVersions(explicit_packages)),
-            'newest': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == PackageVersionClass.newest, versions)),
-            'outdated': map(VersionsDigest, filter(lambda v: v['packages'][0].versionclass == PackageVersionClass.outdated, versions)),
-            'ignored': map(VersionsDigest, PackagesetAggregateByVersions(ignored_packages))
+            'families': families,
+            'explicit': explicit,
+            'newest': summaries['newest'],
+            'outdated': summaries['outdated'],
+            'ignored': summaries['ignored']
         }
 
     return metapackagedata
@@ -226,7 +235,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
 
     firstname, lastname = get_packages_name_range(packages)
 
-    metapackagedata = metapackages_to_data(PackagesToMetapackages(packages), repo, maintainer)
+    metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages), repo, maintainer)
 
     return flask.render_template(
         template,
@@ -395,7 +404,7 @@ def index():
 
     packages = get_db().GetMetapackage(important_packages)
 
-    metapackagedata = metapackages_to_data(PackagesToMetapackages(packages))
+    metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
 
     return flask.render_template(
         'index.html',
@@ -688,7 +697,7 @@ def metapackage_information(name):
         for download in package.downloads:
             append_info('downloads', download, package)
 
-    versions = PackagesetAggregateByVersions(packages)
+    versions = PackagesetAggregateByVersions(packages, {VersionClass.legacy: VersionClass.outdated})
 
     for version in versions:
         version['families'] = list(sorted(PackagesetToFamilies(version['packages'])))
@@ -712,7 +721,7 @@ def metapackage_related(name):
 
     packages = get_db().GetMetapackage(names)
 
-    metapackagedata = metapackages_to_data(PackagesToMetapackages(packages))
+    metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
 
     return flask.render_template(
         'metapackage-related.html',
@@ -774,20 +783,19 @@ def metapackage_report(name):
 
 @app.route('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name):
-    summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
+    best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
 
-    repostates = []
-    for reponame, summary in summaries.items():
-        repostates.append({
-            'name': repometadata[reponame]['desc'],
-            'version': summary['version'],
-            'versionclass': summary['versionclass']
-        })
+    entries = [
+        {
+            'repo': repometadata[reponame],
+            'package': best_pkg_by_repo[reponame]
+        } for reponame in reponames if reponame in repometadata and reponame in best_pkg_by_repo
+    ]
 
     return (
         flask.render_template(
             'badge-vertical.svg',
-            repositories=sorted(repostates, key=lambda repo: repo['name']),
+            entries=entries,
             name=name
         ),
         {'Content-type': 'image/svg+xml'}
@@ -809,16 +817,17 @@ def badge_tiny_repos(name):
 
 @app.route('/badge/version-for-repo/<repo>/<name>.svg')
 def badge_version_for_repo(repo, name):
-    summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
-    if repo not in summaries:
+    best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
+
+    if repo not in best_pkg_by_repo:
         flask.abort(404)
 
     return (
         flask.render_template(
             'badge-tiny-version.svg',
             repo=repo,
-            version=summaries[repo]['version'],
-            versionclass=summaries[repo]['versionclass'],
+            version=best_pkg_by_repo[repo].version,
+            versionclass=best_pkg_by_repo[repo].versionclass,
         ),
         {'Content-type': 'image/svg+xml'}
     )

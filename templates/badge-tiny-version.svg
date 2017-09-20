@@ -11,7 +11,7 @@
 	<a xlink:href="{{ REPOLOGY_HOME }}{{ url_for('metapackage_packages', name=name) }}">
 		<g clip-path="url(#clip)">
 			<rect width="{{ leftwidth }}" height="{{ height }}" fill="#555"/>
-			<rect x="{{ leftwidth }}" width="{{ rightwidth }}" height="{{ height }}" fill="{% if versionclass == 2 %}#e05d44{% elif versionclass == 4 %}#9f9f9f{% else %}#4c1{% endif %}"/>
+			<rect x="{{ leftwidth }}" width="{{ rightwidth }}" height="{{ height }}" fill="{% if versionclass == 2 %}#e05d44{% elif versionclass == 3 %}#9f9f9f{% else %}#4c1{% endif %}"/>
 			<rect width="{{ leftwidth + rightwidth }}" height="{{ height }}" fill="url(#grad)"/>
 			<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
 				<text x="{{ leftwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ repometadata[repo].desc }} package</text>

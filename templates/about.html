@@ -8,75 +8,64 @@
 
 <article>
 
-<p>Repology analyzes a lot of package repositories and compares versions of packages in them.</p>
-
-<p>The report it produces shows which repositories contain or lack which packages, and whether packages need updating.</p>
+<p>Repology is a service which tracks and compares package versions in more than 120 package repositories.</p>
 
 <h3>Purpose</h3>
 
 <ul>
-	<li>For users:
-		<ul>
-			<li>Compare completeness and freshness of package repositories, choose most up to date distro</li>
-			<li>Find out what repositories contain newest versions of packages you need</li>
-		</ul>
-	</li>
 	<li>For package/port maintainers:
 		<ul>
-			<li>Another way to track new releases of software you package</li>
-			<li>Compete with other distros in keeping up to date</li>
-			<li>Find fellow maintainers to resolve packaging problems together</li>
+			<li>Discover new releases of software you maintain packages for</li>
+			<li>Find new projects to package</li>
+			<li>Get in touch with fellow maintainers to improve packages together</li>
 			<li>Keep package naming and versioning schemes in sync to other repos for your and your user's convenience</li>
+			<li>Fix problems detected by repology, such as broken links</li>
 		</ul>
 	</li>
 	<li>For software authors:
 		<ul>
-			<li>Keep track of how well your project is packaged</li>
+			<li>Keep track of where and how well your project is packaged</li>
 			<li>Keep in touch with your product package maintainers</li>
 		</ul>
 	</li>
-</ul>
-
-<h3>Status</h3>
-
-<p>Repology is currently in an early phase of development, with a goal
-of creating usable utility in a quick and dirty way. For now, it is
-usable in two modes: as a command line generator of single HTML
-report and a static website generator for this website.</p>
-
-<p><strong>BEWARE</strong> that this website is in beta state. Expect
-links and bookmarks to it to become broken at any moment</p>
-
-<h3>Operation</h3>
-
-<p>Since different repositories use different package naming and
-versioning schemes, repology transforms package names to aggregate
-information on single package in a single entity, and transforms
-versions to be comparable. So expect packages names in repology
-to be different from ones in your repository. Name transformation
-is controlled by a ruleset, which you may need to extend if you
-find a mismatched package. <a href="https://github.com/repology/repology/blob/master/docs/RULES.md">Read more</a></p>
-
-<h3>Legend</h3>
-
-<p>Repology generates a table with rows corresponding to packages
-and columns corresponding to repositories. Cells contain color-coded
-versions of each package in each repo. Colors have following
-meanings:</p>
-
-<ul>
-	<li><span class="version version-newest">1.2.3</span> - package is at latest version among all repos. It's likely up to date.</li>
-	<li><span class="version version-outdated">1.2.3</span> - some other repository contain newer version of this package. It may need updating.</li>
-	<li><span class="version version-mixed">1.2.3</span><sup>2</sup> - there are multiple packages with the same name in this repository, and one of the is at latest version, but others are not. It may indicate one of the following conditions:
+	<li>For users:
 		<ul>
-			<li>There are unrelated packages with the same name (for example, <em>clementine</em> may be either X11 window manager, or music player, unrelated projects). The package should be split with renaming rule.</li>
-			<li>There are packages for legacy versions (e.g. Qt version 4 and 5). One of them <em>has</em> to be on older version, everything is fine.</li>
-			<li>There are multiple flavors of the same package (for example, Russian and French l10n packages for libreoffice) and some of them are outdated.</li>
+			<li>Discover new releases of software you use</li>
+			<li>Pick distribution most suitable for you, in terms of package quantity, freshness or stability</li>
+			<li>Keep in touch with maintainers of software you use</li>
 		</ul>
 	</li>
-	<li><span class="version version-ignored">1.2.3</span> - package version is ignored. This may indicate that a specific repo uses broken versioning scheme which makes it impossible to compare it with other repos. Package or repository policy may require fixing.</li>
-	<li><span class="version version-unique">1.2.3</span> - package is present only in one repository, there's nothing to compare it to. This may mean a not-so-popular package which haven't made it into other repos yet, or an unique naming scheme, which may require a rule to be merged with differently named packages in other repos. This may be a package unique to specific repository either (e.g. FreeBSD-specific software in FreeBSD ports).</li>
 </ul>
+
+<h3>Supported repositoroes</h3>
+
+{% include "supported_repos.html" %}
+
+<h3>How does it work?</h3>
+
+<p>First, repology fetches and parses available sources of data on
+packages. There is a built-in set of fetchers and parsers for many
+types of sources, such as text index files, git repositories, web
+pages and JSON API output.</p>
+
+<p>After raw package data is obtained from all available sources,
+it is aggregated per upstream project. By default, package names
+are used to aggregate packages, and though it works fine for most
+cases, real world data contains inconsincies, so first an elaborate
+ruleset is used to handle inconsistencies specially. For instance,
+rules allow to merge packages with different names into a single
+project (for example, <b>firefox</b>, <b>firefox-lts</b> and
+<b>firefox43</b> into a single <b>firefox</b>), or, instead, split
+packages with a same name into multiple project (for example,
+<b>clementine</b> may be either a player or window manager, which
+are unrelated projects).</p>
+
+<p>Last, for each project versions are compared with a custom
+general algorithm, and each package is classified by its version.</p>
+
+{% include "versionclass_list.html" %}
+
+<p>Ruleset is also used to mark ignored and devel versions</p>
 
 <h3>Updates</h3>
 

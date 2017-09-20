@@ -1,0 +1,13 @@
+{% block header %}
+{% endblock%}
+
+<ul>
+	{% block extraitems %}
+	{% endblock %}
+	<li><span class="version version-newest">newest</span><sup>#repos</sup> - newest known version. The number shows how many repository families have this version.</li>
+	<li><span class="version version-devel">devel</span> - newest known devel (or unstable) version. There may be both devel and newest versions for a given package.</li>
+	<li><span class="version version-unique">unique</span> - package is only present in a single repository family, there are no other sources to compare it against, so although it's latest version known to repology, is not really reliable.</li>
+	<li><span class="version version-outdated">outdated</span> - outdated version which requires updating.</li>
+	<li><span class="version version-legacy">legacy</span> - outdated version when a newer version is present. This is assumed to be legacy version preserved for e.g. compatibility.</li>
+	<li><span class="version version-ignored">ignored</span> - version is ignored and excluded from comparison. Fake or snapshot versions are marked like this, either way it's not possible to compared it with other versions in a meaningful way.</li>
+</ul>

@@ -28,28 +28,21 @@ from repology.packageproc import *
 from repology.repoman import RepositoryManager
 
 
-def PackageVersionClass2Letter(value):
-    if value == PackageVersionClass.newest:
-        return 'N'
-    elif value == PackageVersionClass.outdated:
-        return 'O'
-    elif value == PackageVersionClass.ignored:
+def VersionClass2Letter(value):
+    if value == VersionClass.ignored:
         return 'I'
-    else:
-        return '?'
-
-
-def RepositoryVersionClass2Letter(value):
-    if value == RepositoryVersionClass.newest:
+    elif value == VersionClass.unique:
+        return 'U'
+    elif value == VersionClass.devel:
+        return 'D'
+    elif value == VersionClass.newest:
         return 'N'
-    elif value == RepositoryVersionClass.outdated:
-        return 'O'
-    elif value == RepositoryVersionClass.mixed:
-        return 'M'
-    elif value == RepositoryVersionClass.ignored:
-        return 'I'
-    elif value == RepositoryVersionClass.lonely:
+    elif value == VersionClass.legacy:
         return 'L'
+    elif value == VersionClass.outdated:
+        return 'O'
+    elif value == VersionClass.mixer:
+        return 'M'
     else:
         return '?'
 
@@ -123,14 +116,13 @@ def Main():
                 )
         if options.dump == 'summaries':
             print(packageset[0].effname)
-            summaries = PackagesetToSummaries(packageset)
+            best_pkg_by_repo = PackagesetToBestByRepo(packageset)
             for reponame in repoman.GetNames(options.reponames):
-                if reponame in summaries:
-                    print('  {}: {} ({}) *{}'.format(
+                if reponame in best_pkg_by_repo:
+                    print('  {}: {} ({})'.format(
                         reponame,
-                        summaries[reponame]['version'],
-                        RepositoryVersionClass2Letter(summaries[reponame]['versionclass']),
-                        summaries[reponame]['numpackages'],
+                        best_pkg_by_repo[reponame].version,
+                        VersionClass2Letter(best_pkg_by_repo[reponame].versionclass)
                     ))
 
     if options.mode == 'stream':

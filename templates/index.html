@@ -22,7 +22,7 @@
 					<div class="panel-body">
 						<ul class="list-jumbotron-items">
 							<li>Discover new releases of software you maintain packages for</li>
-							<li>Discover new project to package</li>
+							<li>Find new projects to package</li>
 							<li>Get in touch with fellow maintainers to improve packages together</li>
 							<li>Keep package naming and versioning schemes in sync to other repos</li>
 							<li>Fix problems detected by repology, such as broken links</li>
@@ -37,8 +37,8 @@
 					</div>
 					<div class="panel-body">
 						<ul class="list-jumbotron-items">
-							<li>Keep track of how well your project is packaged</li>
-							<li>Keep in touch with package maintainers</li>
+							<li>Keep track of where and how well your project is packaged</li>
+							<li>Keep in touch with your product package maintainers</li>
 							<li>Use packaging badges like this one:
 								<img class="jumbotron-badge" src="{{ url_for("static", filename="demobadge.v1.svg") }}" alt="Repology badge example">
 							</li>
@@ -67,16 +67,16 @@
 
 	<div class="row">
 		<div class="col-md-4">
+			<time class="news-summary-time" datetime="2017-09-20">2017-09-20</time>
+			added new package classes (<a href="{{ url_for('news', _anchor='2017-09-20') }}">more...</a>)
+		</div>
+		<div class="col-md-4">
 			<time class="news-summary-time" datetime="2017-09-15">2017-09-15</time>
 			added <a href="{{ url_for('repository', repo='unitedrpms_28') }}">UnitedRPMs</a> repositories
 		</div>
 		<div class="col-md-4">
 			<time class="news-summary-time" datetime="2017-09-08">2017-09-08</time>
 			added <a href="{{ url_for('repository', repo='linuxbrew') }}">Linuxbrew</a> repository
-		</div>
-		<div class="col-md-4">
-			<time class="news-summary-time" datetime="2017-09-07">2017-09-07</time>
-			added <a href="{{ url_for('repository', repo='kaos') }}">KaOS</a>, <a href="{{ url_for('repository', repo='mx_16') }}">MX Linux</a> repositories
 		</div>
 	</div>
 
@@ -203,15 +203,7 @@
 
 	<h2>Popular packages</h2>
 
-	<p>Legend:</p>
-
-	<ul>
-		<li><span class="version version-newest">newest</span><sup>#repos</sup> - newest known version for a package is marked like this. The superscript number shows how many repos have this version.</li>
-		<li><span class="version version-outdated">outdated</span> - older versions, which may require updating.</li>
-		<li><span class="version version-ignored">ignored</span> - version is ignored and excluded from comparison. Fake or snapshot versions are marked like this.</li>
-		<li><span class="version version-unique">unique</span> - package is present only in a single repository, there's nothing to compare it to.</li>
-		<li><b>Spread</b> means how many repository families (e.g. all Debian versions are a single family) contain this package.</li>
-	</ul>
+	{% include "versionclass_legend.html" %}
 
 	{% include "metapackages_table.html" %}
 
@@ -220,14 +212,8 @@
 	<p id="repos-footnote">
 		* "a lot of package repositories and other sources" include:
 	</p>
-	<ul>
-		<li>Linux repositories: Alpine, ALT, Antergos, Arch and AUR, Calculate, CentOS, CRUX, Debian, Deepin, EPEL, Fedora, Gentoo, Guix, GoboLinux, KaOS, LEDE, Linuxbrew, Mageia, Manjaro, Mint, MX Linux, Nix, OpenMandriva, OpenSUSE, OpenWrt, Parabola, PCLinuxOS, Rosa, Sabayon, SlackBuilds, Ubuntu</li>
-		<li>*BSD repositories: DragonFly DPorts, FreeBSD ports, OpenBSD packages, pkgsrc, Ravenports</li>
-		<li>third party repositories: GetDeb, KDE neon, some Gentoo overlays</li>
-		<li>other *nix repositories: Homebrew, OpenIndiana, MacPorts</li>
-		<li>and non-*nix repositories: Chocolatey, F-Droid, HaikuPorts, MSYS2, YACP</li>
-		<li>upstream module collections: CPAN, CRAN, Hackage, PyPi, RubyGems</li>
-		<li>F/OSS news sites: DistroWatch, freshcode.club, libregamewiki</li>
-	</ul>
+
+	{% include "supported_repos.html" %}
+
 </div> {# container #}
 {% endblock %}

@@ -57,78 +57,106 @@ def PackagesetCheckFilters(packages, *filters):
 
 
 def FillPackagesetVersions(packages):
-    versions = set()
+    branchchecks = [
+        lambda package: package.devel,
+        lambda package: not package.devel
+    ]
+
+    branchclasses = [
+        VersionClass.devel,
+        VersionClass.newest,
+    ]
+
+    bestversions = [None for _ in branchchecks]
+
+    def UpdateBestVersions(bvlist, package):
+        if package.ignoreversion:
+            return
+
+        for branchnum, check in enumerate(branchchecks):
+            if not check(package):
+                continue
+
+            if bvlist[branchnum] is None or VersionCompare(package.version, bvlist[branchnum]) > 0:
+                bvlist[branchnum] = package.version
+
+    # Pass 1:
+    # - calculate newest version for each branch
+    # - aggregate by repo
     families = set()
+    packages_by_repo = {}
 
     for package in packages:
-        if not package.ignoreversion:
-            versions.add(package.version)
+        UpdateBestVersions(bestversions, package)
+
         families.add(package.family)
+        packages_by_repo.setdefault(package.repo, []).append(package)
 
-    bestversion = None
-    for version in versions:
-        if bestversion is None or VersionCompare(version, bestversion) > 0:
-            bestversion = version
+    # for unique metapackages, replace fresh classes with unique
+    if len(families) == 1:
+        branchclasses = [VersionClass.unique for _ in range(0, len(branchclasses))]
 
-    for package in packages:
-        result = VersionCompare(package.version, bestversion) if bestversion is not None else 1
-        if result > 0:
-            package.versionclass = PackageVersionClass.ignored
-        elif result == 0:
-            # XXX: if len(families) == 1 -> PackageVersionClass.unique
-            package.versionclass = PackageVersionClass.newest
-        else:
-            package.versionclass = PackageVersionClass.outdated
+    # Pass 2:
+    # - per-repo aggregation
+    # - fill classes
+    for repo, repo_packages in packages_by_repo.items():
+        # Pass 2.1:
+        # - determine best version for this repo
+        bestversions_for_repo = [None for _ in branchchecks]
+        for package in repo_packages:
+            UpdateBestVersions(bestversions_for_repo, package)
 
+        # Pass 2.2:
+        # - fill version classes
+        for package in repo_packages:
+            prevrepocmpresult = None
 
-def PackagesetToSummaries(packages):
-    summary = {}
+            # ensure versionclass is reset first
+            package.versionclass = None
 
-    state_by_repo = {}
-    families = set()
+            for bestversion, bestversion_for_repo, versionclass in zip(bestversions, bestversions_for_repo, branchclasses):
+                if bestversion is None:
+                    continue
 
-    for package in packages:
-        families.add(package.family)
+                cmpresult = VersionCompare(package.version, bestversion) if bestversion is not None else 1
+                repocmpresult = VersionCompare(package.version, bestversion_for_repo) if bestversion_for_repo is not None else 1
 
-        if package.repo not in state_by_repo:
-            state_by_repo[package.repo] = {
-                'has_outdated': False,
-                'bestpackage': None,
-                'count': 0
-            }
+                if cmpresult > 0:
+                    # newer than newest for current branch
+                    if prevrepocmpresult is None:
+                        # only possible on first iteration, everything > most newest can only be ignored
+                        package.versionclass = VersionClass.ignored
+                    elif prevrepocmpresult >= 0:
+                        # otherwise, we're procesing outdated from the brevious iteration (1)
+                        package.versionclass = VersionClass.outdated
+                    else:
+                        package.versionclass = VersionClass.legacy
+                    break
+                elif cmpresult == 0:
+                    # newest in current branch
+                    package.versionclass = versionclass
+                    break
 
-        if package.versionclass == PackageVersionClass.outdated:
-            state_by_repo[package.repo]['has_outdated'] = True,
+                # packages outdated for this branch are processed on the
+                # next iteration or in the else block (1)
 
-        if state_by_repo[package.repo]['bestpackage'] is None or VersionCompare(package.version, state_by_repo[package.repo]['bestpackage'].version) > 0:
-            state_by_repo[package.repo]['bestpackage'] = package
-
-        state_by_repo[package.repo]['count'] += 1
-
-    for repo, state in state_by_repo.items():
-        resulting_class = None
-
-        # XXX: lonely ignored package is currently lonely; should it be ignored instead?
-        if state['bestpackage'].versionclass == PackageVersionClass.outdated:
-            resulting_class = RepositoryVersionClass.outdated
-        elif len(families) == 1:
-            resulting_class = RepositoryVersionClass.lonely
-        elif state['bestpackage'].versionclass == PackageVersionClass.newest:
-            if state['has_outdated']:
-                resulting_class = RepositoryVersionClass.mixed
+                prevrepocmpresult = repocmpresult
             else:
-                resulting_class = RepositoryVersionClass.newest
-        elif state['bestpackage'].versionclass == PackageVersionClass.ignored:
-            resulting_class = RepositoryVersionClass.ignored
+                # leftovers are outdated packages for the last branch
+                if prevrepocmpresult is None or prevrepocmpresult >= 0:
+                    package.versionclass = VersionClass.outdated
+                else:
+                    package.versionclass = VersionClass.legacy
 
-        summary[repo] = {
-            'version': state['bestpackage'].version,
-            'bestpackage': state['bestpackage'],
-            'versionclass': resulting_class,
-            'numpackages': state['count']
-        }
 
-    return summary
+def PackagesetToBestByRepo(packages):
+    state_by_repo = {}
+
+    for package in PackagesetSortByVersions(packages):
+        if package.repo not in state_by_repo or (state_by_repo[package.repo].versionclass == VersionClass.ignored and package.versionclass != VersionClass.ignored):
+            state_by_repo[package.repo] = package
+
+    return state_by_repo
 
 
 def PackagesetSortByVersions(packages):
@@ -142,10 +170,13 @@ def PackagesetToFamilies(packages):
     return set([package.family for package in packages])
 
 
-def PackagesetAggregateByVersions(packages):
+def PackagesetAggregateByVersions(packages, classmap={}):
+    def MapClass(versionclass):
+        return classmap.get(versionclass, versionclass)
+
     versions = {}
     for package in packages:
-        key = (package.version, package.versionclass)
+        key = (package.version, MapClass(package.versionclass))
         if key not in versions:
             versions[key] = []
         versions[key].append(package)
