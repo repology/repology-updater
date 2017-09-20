@@ -306,6 +306,7 @@
 - { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             ignorever: true }
 - { name: sqlninja,                    ver: ["0.2.999"],                                   ignorever: true } # it's 0.2.999-alpha1
 - { name: strace,                      verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: supertransball2,             verpat: "2\\.[0-9]+\\.[0-9]+",                      ignorever: true } # 2 is port of the project name, not version
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignorever: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
 - { name: sunxi-tools,                 verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: sutils,                      verpat: "[0-9][0-9]",                               ignorever: true } # manjaro, aur snapshots
