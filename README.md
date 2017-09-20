@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/repology/repology/badge.svg?branch=master)](https://coveralls.io/github/repology/repology?branch=master)
 [![Code Health](https://landscape.io/github/repology/repology/master/landscape.svg?style=flat)](https://landscape.io/github/repology/repology/master)
 
-Repology tracks and compares package versions along more than 120
+Repology tracks and compares package versions in more than 120
 package repositories.
 
 ## Uses
