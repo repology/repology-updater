@@ -808,6 +808,7 @@
 - { name: [tiger-vnc,tigervnc-viewer], setname: tigervnc }
 - { name: talk-filters,                setname: talkfilters }
 - { name: tecla,                       setname: libtecla }
+- { name: tex-whizzytex,               setname: whizzytex }
 - { name: theora,                      setname: libtheora }
 - { name: thttpd,                      setname: sthttpd, family: gentoo } # actually fork of thttpd; XXX: problem
 - { name: tigervnc-devel,              setname: tigervnc, ignorever: true }
