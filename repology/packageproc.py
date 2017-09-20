@@ -149,54 +149,14 @@ def FillPackagesetVersions(packages):
                     package.versionclass = VersionClass.legacy
 
 
-def PackagesetToSummaries(packages):
-    summary = {}
-
+def PackagesetToBestByRepo(packages):
     state_by_repo = {}
-    families = set()
 
-    for package in packages:
-        families.add(package.family)
+    for package in PackagesetSortByVersions(packages):
+        if package.repo not in state_by_repo or (state_by_repo[package.repo].versionclass == VersionClass.ignored and package.versionclass != VersionClass.ignored):
+            state_by_repo[package.repo] = package
 
-        if package.repo not in state_by_repo:
-            state_by_repo[package.repo] = {
-                'has_outdated': False,
-                'bestpackage': None,
-                'count': 0
-            }
-
-        if package.versionclass == VersionClass.outdated:
-            state_by_repo[package.repo]['has_outdated'] = True,
-
-        if state_by_repo[package.repo]['bestpackage'] is None or VersionCompare(package.version, state_by_repo[package.repo]['bestpackage'].version) > 0:
-            state_by_repo[package.repo]['bestpackage'] = package
-
-        state_by_repo[package.repo]['count'] += 1
-
-    for repo, state in state_by_repo.items():
-        resulting_class = None
-
-        # XXX: unique ignored package is currently unique; should it be ignored instead?
-        if state['bestpackage'].versionclass == VersionClass.outdated:
-            resulting_class = VersionClass.outdated
-        elif len(families) == 1:
-            resulting_class = VersionClass.unique
-        elif state['bestpackage'].versionclass == VersionClass.newest:
-            if state['has_outdated']:
-                resulting_class = VersionClass.mixed
-            else:
-                resulting_class = VersionClass.newest
-        elif state['bestpackage'].versionclass == VersionClass.ignored:
-            resulting_class = VersionClass.ignored
-
-        summary[repo] = {
-            'version': state['bestpackage'].version,
-            'bestpackage': state['bestpackage'],
-            'versionclass': resulting_class,
-            'numpackages': state['count']
-        }
-
-    return summary
+    return state_by_repo
 
 
 def PackagesetSortByVersions(packages):

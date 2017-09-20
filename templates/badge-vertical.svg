@@ -2,7 +2,7 @@
 {% set version_colwidth = 90 %}
 {% set rowheight = 20 %}
 {% set hdrheight = 25 %}
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ repo_colwidth + version_colwidth }}" height="{{ hdrheight + repositories|length * rowheight }}">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ repo_colwidth + version_colwidth }}" height="{{ hdrheight + entries|length * rowheight }}">
 	<clipPath id="clip">
 		<rect rx="3" width="100%" height="100%" fill="#000"/>
 	</clipPath>
@@ -16,7 +16,7 @@
 
 		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="15" font-weight="bold">
 			<a xlink:href="{{ REPOLOGY_HOME }}{{ url_for('metapackage_packages', name=name ) }}">
-				{% if repositories %}
+				{% if entries %}
 					<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">Packaging status</text>
 					<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">Packaging status</text>
 				{% else %}
@@ -26,23 +26,25 @@
 			</a>
 		</g>
 
-		{% for repo in repositories %}
-			{% set vercolor = "#97ca00" %}
-			{% if repo.versionclass == 1 or repo.versionclass == 3 %}
-				 {% set vercolor = "#4c1" %}
-			{% elif repo.versionclass == 2 %}
+		{% for entry in entries %}
+			{% set package = entry.package %}
+			{% set repo = entry.repo %}
+
+			{% if package.versionclass == 2 %}
 				 {% set vercolor = "#e05d44" %}
-			{% elif repo.versionclass == 4 %}
+			{% elif package.versionclass == 3 %}
 				 {% set vercolor = "#9f9f9f" %}
+			{% else %}
+				 {% set vercolor = "#4c1" %}
 			{% endif %}
 			<rect x="{{ repo_colwidth }}" y="{{ hdrheight + rowheight * loop.index0 }}" width="{{ version_colwidth }}" height="{{ rowheight }}" fill="{{ vercolor }}"/>
 			<rect y="{{ hdrheight + rowheight * loop.index0 }}" width="100%" height="{{ rowheight }}" fill="url(#grad)"/>
 			<g fill="#fff" text-anchor="end" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-				<text x="{{ repo_colwidth - 5 }}" y="{{ hdrheight + rowheight * loop.index0 + 15 }}" fill="#010101" fill-opacity=".3">{{ repo.name }}</text>
-				<text x="{{ repo_colwidth - 5 }}" y="{{ hdrheight + rowheight * loop.index0 + 14 }}">{{ repo.name }}</text>
+				<text x="{{ repo_colwidth - 5 }}" y="{{ hdrheight + rowheight * loop.index0 + 15 }}" fill="#010101" fill-opacity=".3">{{ repo.desc }}</text>
+				<text x="{{ repo_colwidth - 5 }}" y="{{ hdrheight + rowheight * loop.index0 + 14 }}">{{ repo.desc }}</text>
 			</g>
 			<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-				{%- set truncatedver = repo.version|escape|truncate(13, True, "...", 0) -%}
+				{%- set truncatedver = package.version|escape|truncate(13, True, "...", 0) -%}
 				<text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ hdrheight + rowheight * loop.index0 + 15 }}" fill="#010101" fill-opacity=".3">{{ truncatedver }}</text>
 				<text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ hdrheight + rowheight * loop.index0 + 14 }}">{{ truncatedver }}</text>
 			</g>

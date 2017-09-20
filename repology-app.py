@@ -783,20 +783,19 @@ def metapackage_report(name):
 
 @app.route('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name):
-    summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
+    best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
 
-    repostates = []
-    for reponame, summary in summaries.items():
-        repostates.append({
-            'name': repometadata[reponame]['desc'],
-            'version': summary['version'],
-            'versionclass': summary['versionclass']
-        })
+    entries = [
+        {
+            'repo': repometadata[reponame],
+            'package': best_pkg_by_repo[reponame]
+        } for reponame in reponames if reponame in repometadata and reponame in best_pkg_by_repo
+    ]
 
     return (
         flask.render_template(
             'badge-vertical.svg',
-            repositories=sorted(repostates, key=lambda repo: repo['name']),
+            entries=entries,
             name=name
         ),
         {'Content-type': 'image/svg+xml'}
@@ -818,16 +817,17 @@ def badge_tiny_repos(name):
 
 @app.route('/badge/version-for-repo/<repo>/<name>.svg')
 def badge_version_for_repo(repo, name):
-    summaries = PackagesetToSummaries(get_db().GetMetapackage(name))
-    if repo not in summaries:
+    best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
+
+    if repo not in best_pkg_by_repo:
         flask.abort(404)
 
     return (
         flask.render_template(
             'badge-tiny-version.svg',
             repo=repo,
-            version=summaries[repo]['version'],
-            versionclass=summaries[repo]['versionclass'],
+            version=best_pkg_by_repo[repo].version,
+            versionclass=best_pkg_by_repo[repo].versionclass,
         ),
         {'Content-type': 'image/svg+xml'}
     )

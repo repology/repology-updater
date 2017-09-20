@@ -116,14 +116,13 @@ def Main():
                 )
         if options.dump == 'summaries':
             print(packageset[0].effname)
-            summaries = PackagesetToSummaries(packageset)
+            best_pkg_by_repo = PackagesetToBestByRepo(packageset)
             for reponame in repoman.GetNames(options.reponames):
-                if reponame in summaries:
-                    print('  {}: {} ({}) *{}'.format(
+                if reponame in best_pkg_by_repo:
+                    print('  {}: {} ({})'.format(
                         reponame,
-                        summaries[reponame]['version'],
-                        VersionClass2Letter(summaries[reponame]['versionclass']),
-                        summaries[reponame]['numpackages'],
+                        best_pkg_by_repo[reponame].version,
+                        VersionClass2Letter(best_pkg_by_repo[reponame].versionclass)
                     ))
 
     if options.mode == 'stream':
