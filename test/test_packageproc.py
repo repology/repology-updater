@@ -145,6 +145,36 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
+    def test_versionclass_devel_lower_than_default(self):
+        packages = [
+            # devel package < normal package
+            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
+            (Package(repo='1', family='1', name='a', version='2.0', devel=True), VersionClass.legacy),
+
+            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
+            (Package(repo='2', family='2', name='a', version='2.0', devel=True), VersionClass.legacy),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_versionclass_unignored_really_unignored(self):
+        packages = [
+            # ignored package should be fully unignored with the same non-ignored version in another repo
+            (Package(repo='1', family='1', name='a', version='2.1', ignoreversion=True), VersionClass.newest),
+            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+
+            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
+            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
 
 if __name__ == '__main__':
     unittest.main()
