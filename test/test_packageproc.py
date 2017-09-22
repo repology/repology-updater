@@ -191,16 +191,31 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_branch_bounds(self):
         packages = [
             (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
-
             (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', ignoreversion=True, devel=True), VersionClass.outdated),
-
             # this one should be assigned to default branch and counted as outdated
             (Package(repo='1', family='1', name='a', version='2.1.9999', ignoreversion=True), VersionClass.outdated),
-
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
-
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.outdated),
+
+            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_versionclass_ignoredignored(self):
+        packages = [
+            (Package(repo='1', family='1', name='a', version='2.2.99999999', ignoreversion=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2.9999', ignoreversion=True), VersionClass.ignored),
+            # this one should be outdated, not legacy, e.g. ignored's should not be counted
+            # as first packages in the branch
+            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.outdated),
+            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+
+            (Package(repo='2', family='2', name='a', version='2.2'), VersionClass.newest),
+
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
