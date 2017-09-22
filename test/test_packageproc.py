@@ -175,6 +175,20 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
+    def test_versionclass_unique(self):
+        packages = [
+            # ignored package should be fully unignored with the same non-ignored version in another repo
+            (Package(repo='1', family='1', name='a', version='2.0alpha1', devel=True), VersionClass.unique),
+            (Package(repo='2', family='1', name='a', version='1.2'), VersionClass.unique),
+            (Package(repo='3', family='1', name='a', version='1.1'), VersionClass.outdated),
+            (Package(repo='3', family='1', name='a', version='1.0'), VersionClass.legacy),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
 
 if __name__ == '__main__':
     unittest.main()
