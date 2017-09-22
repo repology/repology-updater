@@ -177,11 +177,30 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_unique(self):
         packages = [
-            # ignored package should be fully unignored with the same non-ignored version in another repo
             (Package(repo='1', family='1', name='a', version='2.0alpha1', devel=True), VersionClass.unique),
             (Package(repo='2', family='1', name='a', version='1.2'), VersionClass.unique),
             (Package(repo='3', family='1', name='a', version='1.1'), VersionClass.outdated),
             (Package(repo='3', family='1', name='a', version='1.0'), VersionClass.legacy),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_versionclass_branch_bounds(self):
+        packages = [
+            (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
+
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', ignoreversion=True, devel=True), VersionClass.outdated),
+
+            # this one should be assigned to default branch and counted as outdated
+            (Package(repo='1', family='1', name='a', version='2.1.9999', ignoreversion=True), VersionClass.outdated),
+
+            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
+            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
+
+            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.outdated),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
