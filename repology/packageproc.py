@@ -134,7 +134,6 @@ def FillPackagesetVersions(packages):
                 if current_comparison > 0:
                     # only possible before first branch
                     package.versionclass = VersionClass.ignored
-                    first_in_branch = False
                     break
 
                 if current_comparison == 0:
