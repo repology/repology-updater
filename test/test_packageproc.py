@@ -112,16 +112,16 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_single_branch2(self):
         packages = [
-            # here we only have devel
-            (Package(repo='1', family='1', name='a', version='2.2.20990101', ignoreversion=True, devel=True), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.1', devel=True), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.0.20990101', ignoreversion=True, devel=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.0', devel=True), VersionClass.legacy),
+            # here we only have devel branch
+            (Package(repo='1', family='1', name='a', version='2.2rc1.20990101', ignoreversion=True, devel=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', ignoreversion=True, devel=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1', devel=True), VersionClass.legacy),
 
-            (Package(repo='2', family='2', name='a', version='2.1', devel=True), VersionClass.devel),
-            (Package(repo='2', family='2', name='a', version='2.0', devel=True), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.2beta1', devel=True), VersionClass.devel),
+            (Package(repo='2', family='2', name='a', version='2.2alpha1', devel=True), VersionClass.legacy),
 
-            (Package(repo='3', family='3', name='a', version='2.0', devel=True), VersionClass.outdated),
+            (Package(repo='3', family='3', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
