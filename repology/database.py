@@ -437,18 +437,60 @@ class Database:
         # maintainers
         self.cursor.execute("""
             CREATE MATERIALIZED VIEW maintainers AS
-                SELECT
-                    unnest(maintainers) AS maintainer,
-                    count(1) AS num_packages,
-                    count(DISTINCT effname) AS num_metapackages,
-                    count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
-                    count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
-                    count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
-                    count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
-                    count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
-                    count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy
-                FROM packages
-                GROUP BY maintainer
+                SELECT *
+                FROM
+                (
+                    SELECT
+                        unnest(maintainers) AS maintainer,
+                        count(1) AS num_packages,
+                        count(DISTINCT effname) AS num_metapackages,
+                        count(DISTINCT effname) FILTER(WHERE versionclass = 2) AS num_metapackages_outdated,
+                        count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
+                        count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
+                        count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
+                        count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
+                        count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
+                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy
+                    FROM packages
+                    GROUP BY maintainer
+                ) AS packages_subreq
+                INNER JOIN
+                (
+                    SELECT
+                        maintainer,
+                        json_object_agg(repo, numrepopkg) AS repository_package_counts,
+                        json_object_agg(repo, numrepometapkg) AS repository_metapackage_counts
+                    FROM
+                    (
+                        SELECT
+                            unnest(maintainers) AS maintainer,
+                            repo,
+                            count(*) AS numrepopkg,
+                            count(DISTINCT effname) AS numrepometapkg
+                        FROM packages
+                        GROUP BY maintainer, repo
+                    ) AS repositories_subreq_inner
+                    GROUP BY maintainer
+                ) AS repositories_subreq
+                USING(maintainer)
+                INNER JOIN
+                (
+                    SELECT
+                        maintainer,
+                        json_object_agg(category, numcatmetapkg) AS category_metapackage_counts
+                    FROM
+                    (
+                        SELECT
+                            unnest(maintainers) AS maintainer,
+                            category,
+                            count(DISTINCT effname) AS numcatmetapkg
+                        FROM packages
+                        WHERE category IS NOT NULL
+                        GROUP BY maintainer, category
+                    ) AS categories_subreq_innser
+                    GROUP BY maintainer
+                ) AS categories_subreq
+                USING(maintainer)
             WITH DATA
         """)
 
@@ -1051,7 +1093,8 @@ class Database:
             SELECT
                 maintainer,
                 num_packages,
-                num_packages_outdated
+                num_metapackages,
+                num_metapackages_outdated
             FROM maintainers
         """
         args = []
@@ -1085,7 +1128,8 @@ class Database:
             {
                 'maintainer': row[0],
                 'num_packages': row[1],
-                'num_packages_outdated': row[2]
+                'num_metapackages': row[2],
+                'num_metapackages_outdated': row[3]
             } for row in self.cursor.fetchall()
         ], key=lambda m: m['maintainer'])
 
@@ -1100,7 +1144,11 @@ class Database:
                 num_packages_unique,
                 num_packages_devel,
                 num_packages_legacy,
-                num_metapackages
+                num_metapackages,
+                num_metapackages_outdated,
+                repository_package_counts,
+                repository_metapackage_counts,
+                category_metapackage_counts
             FROM maintainers
             WHERE maintainer = %s
             """,
@@ -1121,6 +1169,10 @@ class Database:
             'num_packages_devel': rows[0][5],
             'num_packages_legacy': rows[0][6],
             'num_metapackages': rows[0][7],
+            'num_metapackages_outdated': rows[0][8],
+            'repository_package_counts': rows[0][9],
+            'repository_metapackage_counts': rows[0][10],
+            'category_metapackage_counts': rows[0][11],
         }
 
     def GetMaintainerMetapackages(self, maintainer, limit=1000):
