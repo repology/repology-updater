@@ -72,28 +72,52 @@ def FillPackagesetVersions(packages):
         if current is not None:
             yield current
 
-    class Branch:
-        __slots__ = ['bestversion', 'versionclass']
+    class BranchPrototype:
+        __slots__ = ['versionclass', 'check']
 
-        def __init__(self, bestversion, versionclass):
-            self.bestversion = bestversion
+        def __init__(self, versionclass, check):
             self.versionclass = versionclass
+            self.check = check
 
-        def VersionCompare(self, version):
+        def Materialize(self, bestversion=None):
+            return Branch(self.versionclass, bestversion)
+
+    class Branch:
+        __slots__ = ['versionclass', 'bestversion', 'lastversion']
+
+        def __init__(self, versionclass, bestversion = None):
+            self.versionclass = versionclass
+            self.bestversion = bestversion
+            self.lastversion = bestversion
+
+        def SetLastVersion(self, lastversion):
+            self.lastversion = lastversion
+
+        def BestVersionCompare(self, version):
             return VersionCompare(version, self.bestversion) if self.bestversion is not None else 1
+
+        def IsAfterBranch(self, version):
+            return VersionCompare(version, self.lastversion) == -1 if self.lastversion is not None else False
 
     # we always work on packages sorted by version
     packages = PackagesetSortByVersions(packages)
+
+    # possible branches
+    default_branch = BranchPrototype(VersionClass.newest, lambda package: not package.devel)
+
+    branch_prototypes = [
+        BranchPrototype(VersionClass.devel, lambda package: package.devel),
+        default_branch,
+    ]
 
     # first, determine best version for each branch and # of families
     branches = []
     families = set()
     packages_by_repo = {}
-    state = 0  # 0 = default, 1 = devel, 2 = non-devel
+    current_branch = None
     for verpackages in AggregateBySameVersion(packages):
         has_non_ignored = False
-        has_devel = False
-        has_default = False
+        matching_branches = set()
 
         for package in verpackages:
             families.add(package.family)
@@ -102,25 +126,24 @@ def FillPackagesetVersions(packages):
             if not package.ignoreversion:
                 has_non_ignored = True
 
-            if package.devel:
-                has_devel = True
-            else:
-                has_default = True
+            for nbranch in range(0, len(branch_prototypes)):
+                if branch_prototypes[nbranch].check(package):
+                    matching_branches.add(nbranch)
 
-        if has_non_ignored:
-            if state == 0 and has_devel and not has_default:
-                branches.append(Branch(verpackages[0].version, VersionClass.devel))
-                state = 1
-            elif state <= 1 and has_default:
-                branches.append(Branch(verpackages[0].version, VersionClass.newest))
-                state = 2
+        nbranch = list(matching_branches)[0] if len(matching_branches) == 1 else 1
+
+        if nbranch == current_branch:
+            branches[-1].SetLastVersion(verpackages[0].version)
+        elif (current_branch is None or nbranch > current_branch) and has_non_ignored:
+            branches.append(branch_prototypes[nbranch].Materialize(verpackages[0].version))
+            current_branch = nbranch
 
     # handle unique package
     metapackage_is_unique = len(families) == 1
 
     # we should always have at least one branch
     if not branches:
-        branches.append(Branch(None, VersionClass.newest))
+        branches = [default_branch.Materialize(None)]
 
     # now fill in classes
     for repo, repo_packages in packages_by_repo.items():
@@ -128,37 +151,21 @@ def FillPackagesetVersions(packages):
         first_in_branch = True
 
         for package in repo_packages:  # these are still sorted by version
-            current_comparison = branches[current_branch].VersionCompare(package.version)
-
-            while True:
-                if current_comparison > 0:
-                    # only possible before first branch
-                    package.versionclass = VersionClass.ignored
-                    break
-
-                if current_comparison == 0:
-                    package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch].versionclass
-                    first_in_branch = False
-                    break
-
-                if current_branch == len(branches) - 1:
-                    # last branch
-                    package.versionclass = VersionClass.outdated if first_in_branch else VersionClass.legacy
-                    first_in_branch = False
-                    break
-
-                next_comparison = branches[current_branch + 1].VersionCompare(package.version)
-
-                if next_comparison > 0:
-                    # still not in next branch
-                    package.versionclass = VersionClass.outdated if first_in_branch else VersionClass.legacy
-                    first_in_branch = False
-                    break
-
-                # otherwise, we need to advance to the next branch
-                first_in_branch = True
+            # switch to next branch when it's time
+            while current_branch < len(branches) - 1 and branches[current_branch].IsAfterBranch(package.version):
                 current_branch += 1
-                current_comparison = next_comparison
+                first_in_branch = True
+
+            current_comparison = branches[current_branch].BestVersionCompare(package.version)
+
+            if current_comparison > 0:
+                package.versionclass = VersionClass.ignored
+            elif current_comparison == 0:
+                package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch].versionclass
+                first_in_branch = False
+            else:
+                package.versionclass = VersionClass.outdated if first_in_branch else VersionClass.legacy
+                first_in_branch = False
 
 
 def PackagesetToBestByRepo(packages):
