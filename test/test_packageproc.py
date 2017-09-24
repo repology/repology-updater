@@ -78,7 +78,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='9', family='9', name='a', version='2.1', ignoreversion=True), VersionClass.newest),
 
             (Package(repo='10', family='10', name='a', version='2.0', ignoreversion=True), VersionClass.outdated),
-            (Package(repo='10', family='10', name='a', version='1.9', ignoreversion=True), VersionClass.outdated),
+            (Package(repo='10', family='10', name='a', version='1.9', ignoreversion=True), VersionClass.legacy),
 
             # version between newest and devel should be outdated when there's no devel
             (Package(repo='11', family='11', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
@@ -193,12 +193,12 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_branch_bounds(self):
         packages = [
             (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', ignoreversion=True, devel=True), VersionClass.outdated),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', ignoreversion=True, devel=True), VersionClass.legacy),
             # see #338. There are multiple possible ways to ignored version between branches,
             # we go with ignored for now
             (Package(repo='1', family='1', name='a', version='2.1.9999', ignoreversion=True), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.outdated),
+            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
 
             (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
         ]
