@@ -88,7 +88,7 @@ def FillPackagesetVersions(packages):
     class Branch:
         __slots__ = ['versionclass', 'bestversion', 'lastversion']
 
-        def __init__(self, versionclass, bestversion = None):
+        def __init__(self, versionclass, bestversion=None):
             self.versionclass = versionclass
             self.bestversion = bestversion
             self.lastversion = bestversion
