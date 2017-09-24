@@ -206,6 +206,7 @@
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
 - { name: libpng,                      verpat: "1\\.7\\.0beta.*",    family: freshcode,    ignorever: true }
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
+- { name: libtomcrypt,                 ver: "1.18",                  family: fedora,       ignorever: true } # lie, not released yet
 - { name: libusbmuxd,                  ver: "1.1.0",                 family: openwrt,      ignorever: true } # fake
 - { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignorever: true } # version from mediainfo is used, while libzen has its own version scheme
 - { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignorever: true }
