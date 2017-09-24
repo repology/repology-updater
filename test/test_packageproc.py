@@ -31,7 +31,9 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
             (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', devel=True, ignoreversion=True), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.2alpha1', devel=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.1.20990101', ignoreversion=True), VersionClass.legacy),
+            # see #338. There are multiple possible ways to ignored version between branches,
+            # we go with ignored for now
+            (Package(repo='1', family='1', name='a', version='2.1.20990101', ignoreversion=True), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
             (Package(repo='1', family='1', name='a', version='2.0.20990101', ignoreversion=True), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
@@ -192,8 +194,9 @@ class TestPackageProc(unittest.TestCase):
         packages = [
             (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
             (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', ignoreversion=True, devel=True), VersionClass.outdated),
-            # this one should be assigned to default branch and counted as outdated
-            (Package(repo='1', family='1', name='a', version='2.1.9999', ignoreversion=True), VersionClass.outdated),
+            # see #338. There are multiple possible ways to ignored version between branches,
+            # we go with ignored for now
+            (Package(repo='1', family='1', name='a', version='2.1.9999', ignoreversion=True), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.outdated),
 
