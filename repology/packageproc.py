@@ -79,7 +79,10 @@ def FillPackagesetVersions(packages):
             self.versionclass = versionclass
             self.check = check
 
-        def Materialize(self, bestversion=None):
+        def Check(self, package):
+            return self.check(package)
+
+        def CreateBranch(self, bestversion=None):
             return Branch(self.versionclass, bestversion)
 
     class Branch:
@@ -102,22 +105,26 @@ def FillPackagesetVersions(packages):
     # we always work on packages sorted by version
     packages = PackagesetSortByVersions(packages)
 
-    # possible branches
-    default_branch = BranchPrototype(VersionClass.newest, lambda package: not package.devel)
+    # branch prototypes
+    default_branchproto = BranchPrototype(VersionClass.newest, lambda package: not package.devel)
 
-    branch_prototypes = [
+    branchprotos = [
         BranchPrototype(VersionClass.devel, lambda package: package.devel),
-        default_branch,
+        default_branchproto,
     ]
 
-    # first, determine best version for each branch and # of families
+    default_branchproto_idx = branchprotos.index(default_branchproto)
+
+    #
+    # Pass 1: discover branches
+    #
     branches = []
     families = set()
     packages_by_repo = {}
-    current_branch = None
+    current_branchproto_idx = None
     for verpackages in AggregateBySameVersion(packages):
         has_non_ignored = False
-        matching_branches = set()
+        matching_branchproto_indexes = set()
 
         for package in verpackages:
             families.add(package.family)
@@ -126,42 +133,45 @@ def FillPackagesetVersions(packages):
             if not package.ignoreversion:
                 has_non_ignored = True
 
-            for nbranch in range(0, len(branch_prototypes)):
-                if branch_prototypes[nbranch].check(package):
-                    matching_branches.add(nbranch)
+            for branchproto_idx in range(0, len(branchprotos)):
+                if branchprotos[branchproto_idx].Check(package):
+                    matching_branchproto_indexes.add(branchproto_idx)
 
-        nbranch = list(matching_branches)[0] if len(matching_branches) == 1 else 1
+        final_branchproto_idx = list(matching_branchproto_indexes)[0] if len(matching_branchproto_indexes) == 1 else default_branchproto_idx
 
-        if nbranch == current_branch:
+        if final_branchproto_idx == current_branchproto_idx:
             branches[-1].SetLastVersion(verpackages[0].version)
-        elif (current_branch is None or nbranch > current_branch) and has_non_ignored:
-            branches.append(branch_prototypes[nbranch].Materialize(verpackages[0].version))
-            current_branch = nbranch
+        elif (current_branchproto_idx is None or final_branchproto_idx > current_branchproto_idx) and has_non_ignored:
+            branches.append(branchprotos[final_branchproto_idx].CreateBranch(verpackages[0].version))
+            current_branchproto_idx = final_branchproto_idx
 
     # handle unique package
     metapackage_is_unique = len(families) == 1
 
     # we should always have at least one branch
     if not branches:
-        branches = [default_branch.Materialize(None)]
+        branches = [default_branchproto.CreateBranch()]
 
-    # now fill in classes
+    #
+    # Pass 2: fill version classes
+    #
     for repo, repo_packages in packages_by_repo.items():
-        current_branch = 0
+        current_branch_idx = 0
         first_in_branch = True
 
         for package in repo_packages:  # these are still sorted by version
-            # switch to next branch when it's time
-            while current_branch < len(branches) - 1 and branches[current_branch].IsAfterBranch(package.version):
-                current_branch += 1
+            # switch to next branch when the current one is over, but not past the last branch
+            while current_branch_idx < len(branches) - 1 and branches[current_branch_idx].IsAfterBranch(package.version):
+                current_branch_idx += 1
                 first_in_branch = True
 
-            current_comparison = branches[current_branch].BestVersionCompare(package.version)
+            # chose version class based on comparison to branch best version
+            current_comparison = branches[current_branch_idx].BestVersionCompare(package.version)
 
             if current_comparison > 0:
                 package.versionclass = VersionClass.ignored
             elif current_comparison == 0:
-                package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch].versionclass
+                package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch_idx].versionclass
                 first_in_branch = False
             else:
                 package.versionclass = VersionClass.outdated if first_in_branch else VersionClass.legacy
