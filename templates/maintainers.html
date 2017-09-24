@@ -46,9 +46,12 @@
 		<table class="table table-striped table-condensed">
 			<thead>
 				<tr>
-					<th class="text-right">Maintainer</th>
-					<th class="text-center">Total packages</th>
-					<th class="text-center">Outdated packages</th>
+					<th class="text-right" rowspan="2">Maintainer</th>
+					<th class="text-center" colspan="3">Metapackages</th>
+				</tr>
+				<tr>
+					<th class="text-center">Total</th>
+					<th class="text-center">Outdated</th>
 					<th class="text-center">Up to date</th>
 				</tr>
 			</thead>
@@ -62,16 +65,16 @@
 					</td>
 					<td class="text-center">
 						<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
-							{{ maintainer.num_packages }}
+							{{ maintainer.num_metapackages }}
 						</a>
 					</td>
 					<td class="text-center">
 						<a href="{{ url_for('metapackages_outdated_by_maintainer', maintainer=maintainer.maintainer) }}">
-							{{ maintainer.num_packages_outdated }}
+							{{ maintainer.num_metapackages_outdated }}
 						</a>
 					</td>
 					<td class="text-center">
-						{{ macros.safe_percent(maintainer.num_packages - maintainer.num_packages_outdated, maintainer.num_packages, 0) }}
+						{{- macros.safe_percent(maintainer.num_metapackages - maintainer.num_metapackages_outdated, maintainer.num_metapackages) -}}
 					</td>
 				</tr>
 			{% endfor %}
