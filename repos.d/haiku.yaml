@@ -40,46 +40,6 @@
       url: 'https://github.com/haikuports/haikuports/tree/master/{category}/{name}'
   tags: [ all, production, haiku ]
 
-- name: haikuports_2017_1
-  type: repository
-  desc: HaikuPorts 2017Q1
-  family: haikuports
-  color: "ffc245"
-  sources:
-    - name: haikuports
-      fetcher: Git
-      parser: HaikuPortsFilenames
-      url: https://github.com/haikuports/haikuports.git
-      sparse_checkout: [ '**/*.recipe' ]
-      branch: 2017Q1
-  repolinks:
-    - desc: HaikuPorts repository
-      url: https://github.com/haikuports/haikuports
-  packagelinks:
-    - desc: Port directory in git repo
-      url: 'https://github.com/haikuports/haikuports/tree/master/{category}/{name}'
-  tags: [ all, production, haiku ]
-
-- name: haikuports_2017_2
-  type: repository
-  desc: HaikuPorts 2017Q2
-  family: haikuports
-  color: "ffc245"
-  sources:
-    - name: haikuports
-      fetcher: Git
-      parser: HaikuPortsFilenames
-      url: https://github.com/haikuports/haikuports.git
-      sparse_checkout: [ '**/*.recipe' ]
-      branch: 2017Q2
-  repolinks:
-    - desc: HaikuPorts repository
-      url: https://github.com/haikuports/haikuports
-  packagelinks:
-    - desc: Port directory in git repo
-      url: 'https://github.com/haikuports/haikuports/tree/master/{category}/{name}'
-  tags: [ all, production, haiku ]
-
 - name: haikuports_2017_3
   type: repository
   desc: HaikuPorts 2017Q3
