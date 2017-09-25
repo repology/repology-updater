@@ -361,8 +361,8 @@
 - { name: vpnc,                        ver: "0.5.3.3",               family: kaos,         ignorever: true } # fake
 
 # W
-- { name: w3m,                         verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: w3m,                         verlonger: 3,                                       ignorever: true }
+- { name: w3m,                         verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.(git)?20[0-9]{6}.*", unignorever: true, devel: true }
 - { name: warsow,                      ver: "2.10",                  family: debuntu,      ignorever: true } # playdeb weirdnes
 - { name: whatweb,                     ver: "0.4.8",                 family: [debuntu,openbsd], ignorever: true }
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
