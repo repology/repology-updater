@@ -713,7 +713,7 @@
 - { namepat: "tk8[0-9._-]+",           setname: tk } # don't mix with tk2, tk5, tk707 which are unrelated projects
 
 - { name: tor-devel,                   setname: tor }
-- { name: tor, verge: "0.3.1",         devel: true }
+- { name: tor, verge: "0.3.2",         devel: true }
 
 - { name: unison-devel,                setname: unison, ignorever: true }
 - { name: unison-nox11,                setname: unison }
