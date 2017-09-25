@@ -110,9 +110,12 @@
     font-size: 100%;
 }
 
+.total-cell {
+    font-weight: bold;
+}
+
 .total-cell :link, .total-cell :visited {
     color: black;
-    font-weight: bold;
 }
 
 .list-sparse {
