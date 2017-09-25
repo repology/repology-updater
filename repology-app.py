@@ -151,15 +151,11 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
         # we gather two kinds of statistics: one is for explicitly requested
         # subset of packages (e.g. ones belonging to specified repo or maintainer)
         # and a general one for all other packages
-        explicit = {
-            'keys': [],
-            'families_by_key': {}
-        }
         summaries = {
             sumtype: {
                 'keys': [],
                 'families_by_key': {}
-            } for sumtype in ['newest', 'outdated', 'ignored']
+            } for sumtype in ['explicit', 'newest', 'outdated', 'ignored']
         }
 
         families = set()
@@ -168,19 +164,18 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
         for package in PackagesetSortByVersions(packages):
             families.add(package.family)
 
-            key = None
+            key = (package.version, package.versionclass)
             target = None
 
             if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
-                key = (package.version, package.versionclass)
-                target = explicit
+                target = summaries['explicit']
+            elif package.versionclass in [VersionClass.outdated, VersionClass.legacy]:
+                target = summaries['outdated']
+                key = (package.version, VersionClass.outdated)  # we don't to distinguish legacy here
+            elif package.versionclass in [VersionClass.devel, VersionClass.newest, VersionClass.unique]:
+                target = summaries['newest']
             else:
-                key = package.version
                 target = summaries['ignored']
-                if package.versionclass in [VersionClass.outdated, VersionClass.legacy]:
-                    target = summaries['outdated']
-                elif package.versionclass in [VersionClass.devel, VersionClass.newest, VersionClass.unique]:
-                    target = summaries['newest']
 
             if key not in target['families_by_key']:
                 target['keys'].append(key)
@@ -191,25 +186,15 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
         for sumtype, summary in summaries.items():
             summaries[sumtype] = [
                 {
-                    'version': key,
+                    'version': key[0],
+                    'versionclass': key[1],
                     'families': summary['families_by_key'][key]
                 } for key in summary['keys']
             ]
 
-        explicit = [
-            {
-                'version': key[0],
-                'versionclass': key[1],
-                'families': explicit['families_by_key'][key]
-            } for key in explicit['keys']
-        ]
-
         metapackagedata[metapackagename] = {
             'families': families,
-            'explicit': explicit,
-            'newest': summaries['newest'],
-            'outdated': summaries['outdated'],
-            'ignored': summaries['ignored']
+            **summaries
         }
 
     return metapackagedata
