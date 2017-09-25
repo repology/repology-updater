@@ -131,9 +131,6 @@
 - { name: [dbus-1,dbus-1-x11,dbus-docs,dbus-docs-selinux,dbus-nosystemd,dbus-x11,dbus-selinux], setname: dbus }
 - { name: dbus, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
-- { name: dbus-python-common,          setname: "python:dbus-python" }
-- { namepat: "dbus-python[0-9]+",      setname: "python:dbus-python" }
-
 - { name: dmd2,                        setname: dmd }
 
 - { namepat: "dovecot[0-9]+",          setname: dovecot }

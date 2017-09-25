@@ -136,6 +136,8 @@
   setname: "python:$0"
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { name: cherrypy3,                   setname: "python:cherrypy"         }
+- { name: [dbus-python,dbus-python-common], setname: "python:dbus-python" }
+- { namepat: "dbus-python[0-9]+",      setname: "python:dbus-python" }
 - { name: html2text,                   setname: "python:$0", family: slackbuilds }
 - { name: "python:cherrypy-old",       setname: "python:cherrypy"         }
 - { name: "python:alsaaudio",          setname: "python:pyalsaaudio"      } # use pypi name!
