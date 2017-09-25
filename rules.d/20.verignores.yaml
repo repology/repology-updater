@@ -372,6 +372,8 @@
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
 
 # X
+- { name: x86info,                     verpat: ".*[sp].*",                                 ignorever: true } # snapshots
+- { name: x86info,                     verpat: "1\\.[0-9]+\\..*",                          ignorever: true } # snapshots
 - { name: xcb-proto,                   verpat: "7.*",                                      ignorever: true } # opensuse version prefixed with xorg version (e.g. 7.6_1.2)
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignorever: true }
 - { name: xdot,                        ver: "20121124",                                    ignorever: true }
