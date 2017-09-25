@@ -1,5 +1,8 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+# global devel rule
+- { verpat: ".*(alpha|beta|rc|prerelease|pre)[0-9]+",                                      devel: true }
+
 # 0-9
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
 - { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignorever: true } # pkgsrc
