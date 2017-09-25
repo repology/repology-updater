@@ -205,6 +205,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
 
     # process search
     search = flask.request.args.to_dict().get('search')
+    search = None if search is None else search.strip()
     searchfilter = NameSubstringQueryFilter(search) if search else None
 
     # get packages
@@ -533,6 +534,7 @@ def maintainers(bound=None):
         bound = bound[:-2]
 
     search = flask.request.args.to_dict().get('search')
+    search = None if search is None else search.strip()
 
     minmaintainer, maxmaintainer = get_db().GetMaintainersRange()
 
