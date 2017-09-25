@@ -779,7 +779,7 @@
 - { name: signon-glib,                 setname: libsignon-glib            }
 - { name: simplescreenrecorder-lib,    setname: simplescreenrecorder      }
 - { name: sisc-scheme,                 setname: sisc }
-- { name: [libslang,libslang2,s-lang,slang2], setname: slang              }
+- { name: [libslang,libslang2,s-lang,slang2,slang1], setname: slang       }
 - { name: skobo,                       setname: kobodeluxe                } # old name
 - { name: slashem-tty,                 setname: slashem                   }
 - { name: sdl-asylum,                  setname: asylum                    }
@@ -844,7 +844,8 @@
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
 - { name: vertx,                       setname: vert.x }
 - { name: [libvidstab,vid-stab,vidstab], setname: vid.stab }
-- { name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw], setname: vim }
+- { name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw,vim-gvim], setname: vim }
+- { name: [virtuoso-6,virtuoso-7,virtuoso-opensource,virtuoso-ose,virtuoso6], setname: virtuoso }
 - { name: [visual-studio-code,visual-studio-code-oss,visualstudiocode], setname: vscode }
 - { name: visual-studio-code-insiders, setname: vscode, ignorever: true }
 - { name: vlc-nightly,                 setname: vlc, ignorever: true      }
