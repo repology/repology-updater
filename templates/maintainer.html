@@ -76,6 +76,34 @@
 <p>There are <a href="{{ url_for('maintainer_problems', maintainer=maintainer) }}">{{ numproblems }} known problems</a> for packages maintained by <strong>{{ maintainer }}</strong></p>
 {% endif %}
 
+{% if maintainer_info.repository_package_counts %}
+<h2>Repositories</h2>
+
+<p>This maintainer is active in the following repositories:</p>
+
+<ul>
+	{% for num,repo in maintainer_info.repository_metapackage_counts|sort(reverse=True) %}
+	<li>
+		<strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong> ({{ num }})
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+{% if maintainer_info.category_metapackage_counts %}
+<h2>Categories</h2>
+
+<p>This maintainer is active in the following package categories:</p>
+
+<ul>
+	{% for num,category in maintainer_info.category_metapackage_counts|sort(reverse=True) %}
+	<li>
+		<strong>{{ category }}</strong> ({{ num }})
+	</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
 <h2>Metapackages ({{ maintainer_info.num_metapackages }})</h2>
 
 <p>
