@@ -229,6 +229,8 @@
 
 # M
 - { name: mame,                        ver: "0153s",                                       ignorever: true } # pclinuxos
+- { name: magic,                       verpat: "8\\.2\\..*",                               devel: true }
+- { name: magic,                       verpat: "[0-9]\\.[0-9]\\.[0-9]{3}",                 unignorever: true } # unignore some good -devel's
 - { name: matreshka,                   ver: "0.8.0",                 family: fedora,       ignorever: true } # fake (see report)
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
@@ -328,6 +330,7 @@
 - { name: sutils,                      verpat: "[0-9][0-9]",                               ignorever: true } # manjaro, aur snapshots
 - { name: svn2git,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # macports
 - { name: sysstat,                     ver: "20151012",                                    ignorever: true } # openindiana garbage
+- { name: synfigstudio,                verpat: "1\\.3\\..*",                               devel: true } # openindiana garbage
 
 # T
 - { name: tar,                         verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
