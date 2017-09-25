@@ -454,7 +454,7 @@ class Database:
                     FROM packages
                     GROUP BY maintainer
                 ) AS packages_subreq
-                INNER JOIN
+                LEFT JOIN
                 (
                     SELECT
                         maintainer,
@@ -473,7 +473,7 @@ class Database:
                     GROUP BY maintainer
                 ) AS repositories_subreq
                 USING(maintainer)
-                INNER JOIN
+                LEFT JOIN
                 (
                     SELECT
                         maintainer,
