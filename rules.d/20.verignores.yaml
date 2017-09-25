@@ -89,6 +89,7 @@
 - { name: coreutils,                   verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: crack-attack,                ver: "1.1.15_cvs_01",                               ignorever: true }
 - { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
+- { name: crda,                        ver: "3.18_2016.02.08",                             ignorever: true }
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: cvs,                         ver: "1.20120905",                                  ignorever: true }
