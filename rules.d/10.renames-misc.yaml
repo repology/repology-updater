@@ -578,6 +578,7 @@
 - { name: libuchardet,                 setname: uchardet                  }
 - { name: libunistring2,               setname: libunistring              }
 - { name: libuv1,                      setname: libuv                     }
+- { name: [libwmf-nox11,libwmf-docs],  setname: libwmf                    }
 - { name: libx264,                     setname: x264                      }
 - { name: libxmp-lite,                 setname: libxmp                    }
 - { name: libzen0,                     setname: libzen                    }

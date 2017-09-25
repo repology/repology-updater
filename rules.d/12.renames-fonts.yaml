@@ -651,6 +651,11 @@
 - { name: [ttf-linux-libertine-g,linuxlibertine-g], setname: "fonts:linuxlibertine-g" }
 
 - name:
+    - fonts-lklug-sinhala
+    - sinhala-lklug-font-ttf
+  setname: "fonts:lklug-sinhala"
+
+- name:
     - fonts-lobstertwo
     - lobstertwo
     - ttf-impallari-lobstertwo
@@ -861,6 +866,7 @@
     - sazanami
     - sazanami-font
     - sazanami-fonts
+    - sazanami-fonts-ttf
     - ttf-sazanami
   setname: "fonts:sazanami"
 
