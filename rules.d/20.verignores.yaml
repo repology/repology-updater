@@ -291,6 +291,8 @@
 - { name: r-hexbin,                    ver: "1.27.1-1",                                    ignorever: true } # guix fake
 - { name: racer,                       ver: "2.07",                                        ignorever: true }
 - { name: rage,                        ver: "0.3.0.042",                                   ignorever: true }
+- { name: recode,                      ver: "3.7-2fd838565",                               ignorever: true }
+- { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignorever: true }
 - { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
 - { name: rpcgen,                                                    family: ravenports,   ignorever: true } # fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
