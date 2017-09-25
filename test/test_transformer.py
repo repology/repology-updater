@@ -164,6 +164,13 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p2', 'version': '2.0', 'expect_effname': 'p2'}
         )
 
+    def test_match_verpat_case_ignored(self):
+        self.check_transformer(
+            '[ { verpat: ".*beta.*", setname: bar } ]',
+            {'name': 'p1', 'version': '1beta1', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '1BETA2', 'expect_effname': 'bar'}
+        )
+
     def test_match_verlonger(self):
         self.check_transformer(
             '[ { verlonger: 2, setname: bar } ]',

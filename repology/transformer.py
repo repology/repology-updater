@@ -114,7 +114,7 @@ class PackageTransformer:
 
         # match version patterns
         if 'verpat' in rule:
-            if not rule['verpat'].fullmatch(package.version):
+            if not rule['verpat'].fullmatch(package.version.lower()):
                 return RuleApplyResult.unmatched
 
         # match number of version components
