@@ -128,6 +128,12 @@
 - { name: db, verpat: "1\\..*",        setname: db1 }
 - { name: db, warning: "please classify me"         }
 
+- { name: [dbus-1,dbus-1-x11,dbus-docs,dbus-docs-selinux,dbus-nosystemd,dbus-x11,dbus-selinux], setname: dbus }
+- { name: dbus, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
+
+- { name: dbus-python-common,          setname: "python:dbus-python" }
+- { namepat: "dbus-python[0-9]+",      setname: "python:dbus-python" }
+
 - { name: dmd2,                        setname: dmd }
 
 - { namepat: "dovecot[0-9]+",          setname: dovecot }
@@ -740,11 +746,10 @@
 - { namepat: "wxqt[0-9._-]+", setname: wxqt }
 
 - { name: [wxmac,wxx11,wxmsw], setname: wxwidgets }
+- { name: [wxwidgets-3.0-cxx11,wxwidgets-ansi,wxwidgets-media,wxwidgets-wxcontainer,wxwidgets-wxcontainer24c], setname: wxwidgets }
 - { namepat: "(wx|wxgtk|wxwidgets|wxcommon|wxbase)[0-9._-]*(:?-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*", setname: wxwidgets }
-- { name: wxwidgets, verpat: "3\\.1\\..*",     setname: wxwidgets31, last: true }
-- { name: wxwidgets, verpat: "3\\.0\\..*",     setname: wxwidgets30, last: true }
-- { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28, last: true }
-- { name: wxwidgets, warning: "please classify me" }
+- { name: wxwidgets, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
+- { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28 }
 
 - { namepat: "(?:lib)?xerces-?c[0-9.+-]*",  setname: xerces-c }
 - { namepat: "(?:lib)?xerces2?-?j(?:ava)?[0-9-]*", setname: xerces-j }

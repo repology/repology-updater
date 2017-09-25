@@ -188,6 +188,7 @@
 - { name: "python:axolotl",            setname: "python:python-axolotl"   }
 - { name: "python:axolotl-curve25519", setname: "python:python-axolotl-curve25519" }
 - { name: "python:proj", verpat: "1\\.9\\..*", setname: "python:pyproj"   }
+- { name: ["python:dbus", "python:dbus-common"], setname: "python:dbus-python" }
 
 # These are more applications than modules, so rename
 - { name: "python:awscli",             setname: awscli                    }
