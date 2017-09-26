@@ -565,15 +565,15 @@ def maintainer(maintainer):
     similar_maintainers = get_db().GetMaintainerSimilarMaintainers(maintainer, 50)
     numproblems = get_db().GetProblemsCount(maintainer=maintainer)
 
+    if not maintainer_info:
+        flask.abort(404)
+
     for key in ('repository_package_counts', 'repository_metapackage_counts', 'category_metapackage_counts'):
         if maintainer_info[key]:
             maintainer_info[key] = [
                 (num, name)
                 for name, num in maintainer_info[key].items()
             ]
-
-    if not maintainer_info:
-        flask.abort(404)
 
     return flask.render_template(
         'maintainer.html',
