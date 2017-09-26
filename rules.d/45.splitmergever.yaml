@@ -289,9 +289,10 @@
 
 - { namepat: "(?:lib)?gtkmm[0-9._-]*", setname: gtkmm }
 - { namepat: "(?:lib)?gtkmm[0-9._-]*(-docs|-documentation|-reference)", setname: gtkmm }
-- { name: gtkmm, verpat: "(4|3\\.[89])\\..*", setname: gtkmm4 }
-- { name: gtkmm, verpat: "3\\..*",       setname: gtkmm3 }
-- { name: gtkmm, verpat: "2\\..*",       setname: gtkmm2 }
+- { name: gtkmm, verpat: "4\\..*",     setname: gtkmm4 }
+- { name: gtkmm, verpat: "3\\.9[0-9]+\\..*", setname: gtkmm4 }
+- { name: gtkmm, verpat: "3\\..*",     setname: gtkmm3 }
+- { name: gtkmm, verpat: "2\\..*",     setname: gtkmm2 }
 
 - { namepat: "(?:lib)?gtksourceview[0-9._-]*", setname: gtksourceview }
 - { name: gtksourceview, verpat: "(4|3\\.99)\\..*", setname: gtksourceview4 }
