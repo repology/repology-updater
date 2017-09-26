@@ -68,6 +68,7 @@
 - { name: brasero,                     ver: "3.12.2",                family: opensuse,     ignorever: true } # not released yet
 - { name: brotli,                      verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
+- { name: bully,                       verpat: "1\\.1.+",                                  ignorever: true } # snapshots, latest is 1.1
 - { name: bzflag,                      ver: "2.4.11",                family: sisyphus,     ignorever: true } # fake
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
 
@@ -280,6 +281,7 @@
 - { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignorever: true }
 - { name: pixiewps,                    ver: "1.2.3",                 family: sisyphus,     ignorever: true } # fake
+- { name: pixiewps,                    verpat: "1\\.2\\.2.+",                              ignorever: true } # arch snapshot
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: procmail,                    verpat: "[0-9]+",                                   ignorever: true } # homebrew
 - { name: psimedia,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
