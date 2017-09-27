@@ -210,6 +210,7 @@
 - { name: libffi,                      ver: "3.3",                   family: debuntu,      ignorever: true } # snapshot of nonexisting version
 - { name: libglw,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: libgnomeui,                  ver: "2.24.6",                family: opensuse,     ignorever: true }
+- { name: libiconv,                    verpat: "[0-9]",                                    ignorever: true } # lede/openwrt strange version
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignorever: true } # fake
 - { name: libimobiledevice,            verlonger: 3,                 family: kaos,         ignorever: true } # fake
 - { name: libkfapi,                    verlonger: 2,                 family: kaos,         ignorever: true } # fake
