@@ -634,6 +634,7 @@
 - { namepat: "python[._-]?[23][0-9._-]*", setname: python }
 - { name: python, verpat: "2\\..*",    setname: python2 }
 - { name: python, verpat: "3\\..*",    setname: python3 }
+- { name: python3, verpat: ".*a.*",    devel: true }
 
 - { namepat: "(?:lib)?readline[0-9._-]*", setname: readline }
 
