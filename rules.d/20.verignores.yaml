@@ -228,6 +228,7 @@
 # L (continued)
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignorever: true }
+- { name: llvm,                        verpat: ".*git",                                    ignorever: true }
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 
 # M
