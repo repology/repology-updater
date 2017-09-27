@@ -111,6 +111,7 @@
 - { name: jekyll,                   setname: "ruby:$0" }
 - { namepat: "jekyll-.*",           setname: "ruby:$0" }
 - { name: ruby-install,             setname: "ruby:install" }
+- { name: [ruby-gems,"ruby:rubygems",rubygems], setname: "ruby:gems" }
 
 - { name: "ruby:pdumpfs",           setname: "pdumpfs" }
 - { name: "ruby:tmuxinator",        setname: "tmuxinator" }
