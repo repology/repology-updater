@@ -157,13 +157,13 @@ def FillPackagesetVersions(packages):
     #
     for repo, repo_packages in packages_by_repo.items():
         current_branch_idx = 0
-        first_verion_in_branch = None
+        first_version_in_branch = None
 
         for package in repo_packages:  # these are still sorted by version
             # switch to next branch when the current one is over, but not past the last branch
             while current_branch_idx < len(branches) - 1 and branches[current_branch_idx].IsAfterBranch(package.version):
                 current_branch_idx += 1
-                first_verion_in_branch = None
+                first_version_in_branch = None
 
             # chose version class based on comparison to branch best version
             current_comparison = branches[current_branch_idx].BestVersionCompare(package.version)
@@ -172,11 +172,13 @@ def FillPackagesetVersions(packages):
                 package.versionclass = VersionClass.ignored
             elif current_comparison == 0:
                 package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch_idx].versionclass
-                first_verion_in_branch = package.version
+                if first_version_in_branch is None:
+                    first_version_in_branch = package.version
             else:
-                non_first_in_branch = first_verion_in_branch is not None and VersionCompare(first_verion_in_branch, package.version) != 0
+                non_first_in_branch = first_version_in_branch is not None and VersionCompare(first_version_in_branch, package.version) != 0
                 package.versionclass = VersionClass.legacy if non_first_in_branch else VersionClass.outdated
-                first_verion_in_branch = package.version
+                if first_version_in_branch is None:
+                    first_version_in_branch = package.version
 
 
 def PackagesetToBestByRepo(packages):

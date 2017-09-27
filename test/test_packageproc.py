@@ -239,6 +239,24 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
+    def test_versionclass_manylegacy(self):
+        packages = [
+            (Package(repo='2', family='2', name='a', version='2.2'), VersionClass.newest),
+            # one of these packages should not make the other one legacy instead of outdated
+            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.outdated),
+            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.9'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.9'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.8'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.8'), VersionClass.legacy),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
 
 if __name__ == '__main__':
     unittest.main()
