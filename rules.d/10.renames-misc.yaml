@@ -728,6 +728,7 @@
 - { name: [postgresql-pglogical,pglogical2], setname: pglogical }
 - { name: poudriere-devel,             setname: poudriere, ignorever: true }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
+- { name: powder, wwwpart: powder.hardwired.org.uk, setname: powder-toy } # rosa 2014 brokenness
 - { name: [powdertoy,the-powder-toy,powder-toy-static,thepowdertoy], setname: powder-toy }
 - { name: psi+,                        setname: psi-plus                  }
 - { name: [psi+-plugins-psimediaplugin,psi-plus-plugin-psimedia], setname: psimedia }
