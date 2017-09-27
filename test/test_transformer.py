@@ -269,6 +269,25 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p8', 'version': '1.0', 'category': 'CATEG4', 'expect_effname': 'ok4'},
         )
 
+    def test_addflavor(self):
+        self.check_transformer(
+            '[ { name: foo, addflavor: fff } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_flavors': ['fff']},
+            {'name': 'bar', 'version': '1.0', 'expect_flavors': []}
+        )
+
+        self.check_transformer(
+            '[ { name: foo, addflavor: "$0" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_flavors': ['foo']},
+            {'name': 'bar', 'version': '1.0', 'expect_flavors': []}
+        )
+
+        self.check_transformer(
+            '[ { namepat: "(fo).*", addflavor: "$1" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_flavors': ['fo']},
+            {'name': 'bar', 'version': '1.0', 'expect_flavors': []}
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
