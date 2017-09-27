@@ -182,13 +182,20 @@ class PackageTransformer:
             result = RuleApplyResult.last
 
         if 'addflavor' in rule:
+            flavor = None
+
             match = None
             if 'namepat' in rule:
                 match = rule['namepat'].fullmatch(package.effname)
             if match:
-                package.flavors.append(self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['addflavor']))
+                flavor = self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['addflavor'])
             else:
-                package.flavors.append(self.dollar0.sub(package.effname, rule['addflavor']))
+                flavor = self.dollar0.sub(package.effname, rule['addflavor'])
+
+            flavor = flavor.strip('-')
+
+            if flavor:
+                package.flavors.append(flavor)
 
         if 'setname' in rule:
             match = None
