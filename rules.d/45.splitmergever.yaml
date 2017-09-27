@@ -656,7 +656,7 @@
 
 - { name: sdl_image, verpat: "2.*",    setname: sdl2-image }
 
-- { namepat: "sfml[0-9.]+",            setname: sfml }
+- { namepat: "(?:lib)?sfml[0-9._-]*",  setname: sfml }
 - { name: sfml, verpat: "1\\..*",      setname: sfml1 }
 
 - { namepat: "shibboleth-sp[0-9]+",    setname: shibboleth-sp }

@@ -523,6 +523,7 @@
 - { name: libcogl,                     setname: cogl                      }
 - { name: libcomedi,                   setname: comedilib                 }
 - { name: libconfuse0,                 setname: libconfuse                }
+- { name: libcsfml,                    setname: csfml                     }
 - { name: libelf0,                     setname: libelf                    }
 - { name: [libenet,enet1.2],           setname: enet                      }
 - { name: libfreeglut,                 setname: freeglut                  }
@@ -568,7 +569,7 @@
 - { name: libsdl,                      setname: sdl }
 - { name: libsdl2,                     setname: sdl2 }
 - { name: libsdl_gfx13,                setname: sdl-gfx }
-- { name: [libsfml,compat-sfml16],     setname: sfml                      }
+- { name: [compat-sfml16],             setname: sfml                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libsysstat-qt5,              setname: libsysstat                }
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
