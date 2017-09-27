@@ -415,11 +415,88 @@
   setname: "fonts:freefarsi"
 
 # G
-- { namepat: "(?:fonts-)?(?:[ot]tf-)?(gdouros-.+?)(?:-fonts)?", setname: "fonts:$1" }
-- { name: [aegyptus, aegyptus-ttf], setname: "fonts:gdouros-aegyptus" }
-- { name: aegean-ttf, setname: "fonts:gdouros-aegean" }
-- { name: [akkadian, akkadian-ttf], setname: "fonts:gdouros-akkadian" }
-- { name: analecta, setname: "fonts:gdouros-analecta" }
+#- { namepat: "(?:fonts-)?(?:[ot]tf-)?(gdouros-.+?)(?:-fonts)?", setname: "fonts:$1" }
+- name:
+    - aegean-ttf
+    - fonts-otf-aegean
+    - fonts-otf-gdouros-aegean
+    - gdouros-aegean-fonts
+  setname: "fonts:gdouros-aegean"
+
+- name:
+    - aegyptus
+    - aegyptus-ttf
+    - fonts-otf-aegyptus
+    - fonts-otf-gdouros-aegyptus
+    - gdouros-aegyptus-fonts
+  setname: "fonts:gdouros-aegyptus"
+
+- name:
+    - akkadian
+    - akkadian-ttf
+    - fonts-otf-akkadian
+    - fonts-otf-gdouros-akkadian
+    - gdouros-akkadian-fonts
+  setname: "fonts:gdouros-akkadian"
+
+- name:
+    - fonts-otf-alexander
+    - fonts-otf-gdouros-alexander
+    - gdouros-alexander-fonts
+  setname: "fonts:gdouros-alexander"
+
+- name:
+    - fonts-otf-alfios
+    - gdouros-alfios-fonts
+  setname: "fonts:gdouros-alfios"
+
+- name:
+    - fonts-otf-anaktoria
+    - fonts-ttf-gdouros-anaktoria
+    - gdouros-anaktoria-fonts
+  setname: "fonts:gdouros-anaktoria"
+
+- name:
+    - analecta
+    - fonts-otf-analecta
+    - fonts-otf-gdouros-analecta
+    - gdouros-analecta-fonts
+  setname: "fonts:gdouros-analecta"
+
+- name:
+    - fonts-otf-aroania
+    - fonts-ttf-gdouros-aroania
+    - gdouros-aroania-fonts
+  setname: "fonts:gdouros-aroania"
+
+- name:
+    - fonts-otf-atavyros
+    - gdouros-atavyros-fonts
+  setname: "fonts:gdouros-atavyros"
+
+- name:
+    - fonts-otf-avdira
+    - fonts-ttf-gdouros-avdira
+    - gdouros-avdira-fonts
+  setname: "fonts:gdouros-avdira"
+
+- name:
+    - fonts-otf-gdouros-musica
+    - fonts-otf-musica
+    - gdouros-musica-fonts
+    - musica
+  setname: "fonts:gdouros-musica"
+
+- name:
+    - fonts-otf-gdouros-symbola
+    - fonts-otf-symbola
+    - gdouros-symbola-fonts
+    - symbola
+    - symbola-font-ttf
+    - symbola-ttf
+    - ttf-symbola
+    - ttf-symbola-ib
+  setname: "fonts:gdouros-symbola"
 
 - name:
     - fonts-sil-gentium-basic
