@@ -109,14 +109,15 @@
 - { name: [beid-middleware,beid,libbeid], setname: eid-mw                 }
 - { name: bib-tool,                    setname: bibtool                   }
 - { name: bisoncpp,                    setname: bisonc++                  }
-- { name: [bison27,bison-doc,bison-runtime], setname: bison               }
+- { name: bison27,                     setname: bison                     }
+- { name: [bison-doc,bison-runtime],   setname: bison, addflavor: true    }
 - { name: scummvm-bass,                setname: beneath-a-steel-sky       }
 - { name: beneath-a-steel-sky-cd,      setname: beneath-a-steel-sky       }
 - { name: "bakery2.6",                 setname: bakery                    }
 - { name: bicyclerepair-py27,          setname: bicyclerepair             }
 - { name: billard-gl,                  setname: billardgl                 }
 - { name: [bird-v6,bird6],             setname: bird                      }
-- { name: [blas-reference,blas-docs],  setname: blas                      }
+- { name: [blas-reference,blas-docs],  setname: blas, addflavor: docs     }
 - { name: blas-tmg,                    setname: blas                      }
 - { name: blasphemer-wad,              setname: blasphemer                }
 - { name: blender-binaries,            setname: blender                   }
@@ -145,7 +146,7 @@
 - { name: bugseverywhere,              setname: bugs-everywhere           }
 - { name: bugzilla50,                  setname: bugzilla                  }
 - { name: bullet3,                     setname: bullet                    }
-- { name: bullet-docs,                 setname: bullet                    }
+- { name: bullet-docs,                 setname: bullet, addflavor: docs   }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
 - { name: bzflag-server,               setname: bzflag                    }
 - { name: bzr-tools,                   setname: bzrtools                  }
@@ -172,7 +173,6 @@
     - cairo-xcb
     - libcairo
   setname: cairo
-- { name: [cairomm1_0,cairomm-docs,libcairomm], setname: cairomm          }
 - { name: cattle-1.0,                  setname: cattle                    }
 - { name: cavez-of-phear,              setname: cavezofphear              }
 - { name: [capnp,capnproto-0.6],       setname: capnproto }
@@ -193,7 +193,7 @@
 - { name: color-code,                  setname: colorcode                 }
 - { name: couchpotatoserver,           setname: couchpotato               }
 - { name: cbatticon-gtk2,              setname: cbatticon                 }
-- { name: [ccache-memcached, ccache-memcached-static, ccache-static], setname: ccache } # freebsd subpackages
+- { name: [ccache-memcached, ccache-memcached-static, ccache-static], setname: ccache, addflavor: true } # freebsd subpackages
 - { name: cdogs,                       setname: cdogs-sdl                 }
 - { name: [cdparanoia-iii,cdparanoia-overread], setname: cdparanoia       }
 - { name: [cegui-mk2, cegui_mk-2],     setname: cegui                     }
@@ -270,7 +270,7 @@
 - { name: docbook-xml-simple,          setname: sdocbook-xml              } # ravenports
 - { name: [dosbox-sdl2,dosbox-debug,dosbox-multilib-patched], setname: dosbox }
 - { name: [doublecmd-gtk2,doublecmd-qt], setname: doublecmd }
-- { name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], setname: doxygen }
+- { name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], setname: doxygen, addflavor: true }
 - { name: drpython-py27,               setname: drpython                  }
 - { name: dr14_tmeter,                 setname: dr14tmeter                }
 - { name: devedeng,                    setname: devede                    }
@@ -371,8 +371,9 @@
 - { name: florence05,                  setname: florence                  }
 - { name: florist-gpl,                 setname: florist                   }
 - { name: flow-tools-ng,               setname: flow-tools                }
-- { name: flrig-docs,                  setname: flrig                     }
-- { name: [fltk-docs,fltk-editor,fltk-games,fltk11], setname: fltk        }
+- { name: flrig-docs,                  setname: flrig, addflavor: true    }
+- { name: fltk11,                      setname: fltk                      }
+- { name: [fltk-docs,fltk-editor,fltk-games], setname: fltk, addflavor: true }
 - { name: fluid-synth,                 setname: fluidsynth                }
 - { name: [fluxbox-wm,fluxbox-noslit], setname: fluxbox                   }
 - { name: flwm-tc,                     setname: flwm                      }
@@ -449,7 +450,8 @@
 - { name: gpg-agent,                   setname: gnupg                     }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
 - { name: grafana-bin,                 setname: grafana                   }
-- { name: [groovy-docs,groovysdk],     setname: groovy }
+- { name: groovy-docs,                 setname: groovy, addflavor: docs }
+- { name: groovysdk,                   setname: groovy }
 - { namepat: "groovy[0-9._-]+",        setname: groovy }
 - { name: grub2,                       setname: grub                      } # since grub legacy is obsoleted, just let grub2 eat it away
 - { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui], setname: graphviz }
@@ -502,10 +504,11 @@
 # L
 - { name: lantern-headless,            setname: lantern }
 - { name: lapackpp,                    setname: lapack++                  }
-- { name: lapack-tmg,                  setname: lapack                    } # component of
-- { name: lapack-atlas,                setname: lapack                    }
-- { name: [lapack-docs,lapack-manpages,lapack-reference], setname: lapack }
-- { name: lapacke-tmg,                 setname: lapacke                   } # component of
+- { name: lapack-tmg,                  setname: lapack, addflavor: tmg    } # component of
+- { name: lapack-atlas,                setname: lapack, addflavor: atlas  }
+- { name: lapack-manpages,             setname: lapack, addflavor: man }
+- { name: [lapack-docs,lapack-reference], setname: lapack, addflavor: docs }
+- { name: lapacke-tmg,                 setname: lapacke, addflavor: tmg   } # component of
 - { name: lcs,                         setname: liberal-crime-squad       }
 - { name: luxrender14,                 setname: luxrender }
 
@@ -579,7 +582,7 @@
 - { name: libuchardet,                 setname: uchardet                  }
 - { name: libunistring2,               setname: libunistring              }
 - { name: libuv1,                      setname: libuv                     }
-- { name: [libwmf-nox11,libwmf-docs],  setname: libwmf                    }
+- { name: [libwmf-nox11,libwmf-docs],  setname: libwmf, addflavor: true   }
 - { name: libx264,                     setname: x264                      }
 - { name: libxmp-lite,                 setname: libxmp                    }
 - { name: libzen0,                     setname: libzen                    }
@@ -651,16 +654,17 @@
 - { namepat: "mysql[0-9]*-connector-cpp", setname: mysql-connector-c++    }
 - { name: libmysqlconnectorcpp,        setname: mysql-connector-c++       }
 - { name: [mc-contrib,midnight-commander,midnightcommander], setname: mc  }
-- { name: [minimal-racket,racket-docs,racket-minimal], setname: racket    }
+- { name: [minimal-racket,racket-minimal], setname: racket, addflavor: minimal }
+- { name: racket-docs,                 setname: racket, addflavor: docs    }
 - { name: mobile-shell,                setname: mosh                      }
 - { name: mdv,                         setname: terminal_markdown_viewer }
 - { name: media-info,                  setname: mediainfo }
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
-- { name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], setname: mpd }
+- { name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], setname: mpd, addflavor: true }
 - { name: mpd-mpc,                     setname: mpc }
 - { name: mvnsh,                       setname: maven-shell }
 - { name: [msgpack-c,msgpack_c_cpp,libmsgpack,msgpack1], setname: msgpack } # c/cpp by default
-- { namepat: "mygui-(?:docs|dummy|gl|opengl|ogre[0-9._-]*)", setname: mygui }
+- { namepat: "mygui-(docs|dummy|gl|opengl|ogre[0-9._-]*)", setname: mygui, addflavor: "$1" }
 - { name: mytop,                       setname: mariadb-mytop,            family: [ arch ] }
 
 # N
@@ -669,7 +673,12 @@
 - { name: [libnettle,nettle4],         setname: nettle                    }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
 - { namepat: "network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine)", setname: "networkmanager-$1" }
-- { name: [nginx-devel,nginx-mainline,nginx-libressl,nginx-lite,nginx-full,nginx-openssl-1.1,nginx-mainline-libressl,nginx-mainline-boringssl,nginx-mainline-full], setname: nginx }
+- { name: [nginx-devel,nginx-mainline],             setname: nginx }
+- { name: [nginx-libressl,nginx-mainline-libressl], setname: nginx, addflavor: libressl }
+- { name: nginx-lite,                               setname: nginx, addflavor: lite }
+- { name: [nginx-full,nginx-mainline-full],         setname: nginx, addflavor: full }
+- { name: nginx-openssl-1.1,                        setname: nginx, addflavor: openssl-1.1 }
+- { name: nginx-mainline-boringssl,                 setname: nginx, addflavor: boringssl }
 - { name: nodejs.commandline,          setname: nodejs                    }
 - { name: notion-3,                    setname: notion                    } # XXX: also has version problems
 
@@ -677,13 +686,13 @@
 - { name: ogre3d,                      setname: ogre                      }
 - { name: ogre-1.9,                    setname: ogre                      }
 - { name: oggz,                        setname: liboggz                   }
-- { name: [openal-static,openal-examples], setname: openal                }
+- { name: [openal-static,openal-examples], setname: openal, addflavor: true }
 - { name: openastromenace,             setname: astromenace               }
 - { name: openastromenace-devel,       setname: astromenace, ignorever: true }
 - { name: [openblas-lapack,openblas-lapack-ilp64], setname: openblas      }
 - { name: opencv2,                     setname: opencv                    }
 - { name: [openjp2, libopenjpeg2.0],   setname: openjpeg2                 }
-- { name: openshot-qt,                 setname: openshot }
+- { name: openshot-qt,                 setname: openshot, addflavor: qt }
 - { name: [openvpn-mbedtls, openvpn-polarssl, openvpn2, openvpn23], setname: openvpn }
 - { name: open-tyrian,                 setname: opentyrian }
 - { name: open-babel,                  setname: openbabel }
@@ -697,15 +706,16 @@
     - openssh-knock
     - openssh-krb5
     - openssh-multiple-bindaddress
-    - openssh-portable
     - openssh-secp256k1
     - openssh-selinux
     - openssh-ssh1
     - openssh-ubuntu
     - openssh-with-hpn
     - openssh-with-kerberos
-    - ssh-copy-id
   setname: openssh
+  addflavor: true
+- { name: ssh-copy-id, setname: openssh, addflavor: ssh-copy-id }
+- { name: openssh-portable, setname: openssh }
 - { name: [orcus,orcus0.12],           setname: liborcus }
 - { name: osmpbf,                      setname: libosmpbf }
 
@@ -744,7 +754,7 @@
 # Q
 - { name: qastools-qt5,                setname: qastools                  }
 - { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5,qbittorrent-dark,qbittorrent-nogui,qbittorrent-stable], setname: qbittorrent }
-- { name: qbs-docs,                    setname: qbs                       }
+- { name: qbs-docs,                    setname: qbs, addflavor: docs }
 - { name: [qt_creator,qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], setname: qtcreator }
 - { name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], setname: qtkeychain }
 - { name: [qupzilla-qt4,qupzilla-qt5,qupzilla-qtwebkit], setname: qupzilla }
@@ -894,10 +904,10 @@
 - { name: zeroballistics,              setname: zero-ballistics           }
 - { name: zeronet-git,                 setname: zeronet, ignorever: true  }
 - { name: [zerotier,zerotier-one-with-controller], setname: zerotier-one  }
-- { name: zetacoin-nox11,              setname: zetacoin                  }
+- { name: zetacoin-nox11,              setname: zetacoin, addflavor: nox11 }
 - { name: zim-wiki,                    setname: zim                       }
 - { name: [zint-gui,zint-qt],          setname: zint                      }
-- { name: zlib-static,                 setname: zlib                      }
+- { name: zlib-static,                 setname: zlib, addflavor: static }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
 - { name: zoneminder-h264,             setname: zoneminder, ignorever: true }
 - { name: zookeeper-bin,               setname: zookeeper                 }
@@ -920,6 +930,6 @@
 - { namepat: "(?:lib)?(?:sdl1(.*))",   setname: "sdl$1" }
 - { namepat: "(?:lib)?(sdl2?[_-](?:image|mixer|net|sound|ttf|gfx|console|sge|pango))", setname: "$1" }
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
-- { namepat: "xpilot-ng-(?:client|server)", setname: "xpilot-ng",         family: [ freebsd ] }
-- { namepat: "munin-(?:master|node|server|common)",  setname: "munin" }
-- { namepat: "zabbix[0-9]*-(?:agent|frontend|proxy|server|common|proxy-sqlite|server-mysql|agentd)[0-9.-]*", setname: "zabbix" }
+- { namepat: "xpilot-ng-(client|server)", setname: xpilot-ng, addflavor: "$1" }
+- { namepat: "munin-(master|node|server|common)",  setname: munin, addflavor: "$1" }
+- { namepat: "zabbix[0-9]*-(agent|frontend|proxy|server|common|proxy-sqlite|server-mysql|agentd)[0-9.-]*", setname: zabbix, addflavor: "$1" }
