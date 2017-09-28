@@ -13,3 +13,7 @@
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ opensuse ] }
 - { namepat: "php-5_6-ext-(.*)",       setname: "php56:$1", family: [ openindiana ] }
 - { namepat: "php-7\\.0-ext-(.*)",     setname: "php70:$1", family: [ openindiana ] }
+
+# https://github.com/PHPOffice/PHPExcel vs. https://github.com/iliaal/php_excel
+- { namepat: "php:excel",              setname: "php:php_excel", wwwpart: php_excel }
+- { namepat: "php:excel",              setname: "php:phpexcel", wwwpart: phpoffice }
