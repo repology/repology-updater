@@ -464,6 +464,12 @@
   setname: "fonts:gdouros-analecta"
 
 - name:
+    - anatolian
+    - anatolian-ttf
+    - gdouros-anatolian-fonts
+  setname: "fonts:gdouros-anatolian"
+
+- name:
     - fonts-otf-aroania
     - fonts-ttf-gdouros-aroania
     - gdouros-aroania-fonts
