@@ -1,36 +1,6 @@
 ###########################################################################
 # Fedora
 ###########################################################################
-- name: fedora_24
-  type: repository
-  desc: Fedora 24
-  family: fedora
-  color: '294172'
-  sources:
-    - name: release
-      fetcher: Repodata
-      parser: Repodata
-      url: https://download.fedoraproject.org/pub/fedora/linux/releases/24/Everything/source/tree/
-      subrepo: release
-    - name: updates
-      fetcher: Repodata
-      parser: Repodata
-      url: https://download.fedoraproject.org/pub/fedora/linux/updates/24/SRPMS/
-      subrepo: updates
-  repolinks:
-    - desc: Fedora home
-      url: https://getfedora.org/
-    - desc: Fedora Packages Search
-      url: https://apps.fedoraproject.org/packages/
-    - desc: Fedora repository for package maintenance
-      url: https://src.fedoraproject.org/
-  packagelinks:
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
-    - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{name}'
-  tags: [ all, production, fedora, rpm ]
-
 - name: fedora_25
   type: repository
   desc: Fedora 25
