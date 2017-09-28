@@ -33,6 +33,7 @@
 - { name: asp2php,                     ver: "20080813",                                    ignorever: true }
 - { name: aspell,                      ver: "0.60.7",                family: debuntu,      ignorever: true } # snapshot actually
 - { name: aspell-be,                   ver: ["0.50.0", "0.60"],                            ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/be/
+- { name: aspell-bn,                   ver: "0.02",                  family: arch,         ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/bn/
 - { name: aspell-br,                   ver: "0.60.2",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/br/
 - { name: aspell-ca,                   ver: ["20090721","2.3.0"],                          ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/ca/
 - { name: [aspell-el,el-aspell],       ver: ["0.50","0.50.3"],                             ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/el/
