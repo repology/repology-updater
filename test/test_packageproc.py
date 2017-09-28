@@ -257,6 +257,28 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
+    def test_versionclass_flavors(self):
+        packages = [
+            (Package(repo='1', family='1', name='a', version='2.2'), VersionClass.newest),
+
+            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.outdated),
+            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+
+            (Package(repo='3', family='3', name='a', version='2.1'), VersionClass.outdated),
+            (Package(repo='3', family='3', name='a', version='2.0', flavors=['foo']), VersionClass.outdated),
+
+            (Package(repo='4', family='4', name='a', version='2.1', flavors=['foo']), VersionClass.outdated),
+            (Package(repo='4', family='4', name='a', version='2.0'), VersionClass.outdated),
+
+            (Package(repo='5', family='5', name='a', version='2.1', flavors=['foo']), VersionClass.outdated),
+            (Package(repo='5', family='5', name='a', version='2.0', flavors=['foo']), VersionClass.legacy),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
 
 if __name__ == '__main__':
     unittest.main()

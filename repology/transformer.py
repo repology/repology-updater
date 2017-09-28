@@ -181,6 +181,24 @@ class PackageTransformer:
         if 'last' in rule:
             result = RuleApplyResult.last
 
+        if 'addflavor' in rule:
+            flavor_to_add = rule['addflavor']
+            if flavor_to_add is True:
+                flavor_to_add = package.effname
+
+            match = None
+            if 'namepat' in rule:
+                match = rule['namepat'].fullmatch(package.effname)
+            if match:
+                flavor_to_add = self.dollarN.sub(lambda x: match.group(int(x.group(1))), flavor_to_add)
+            else:
+                flavor_to_add = self.dollar0.sub(package.effname, flavor_to_add)
+
+            flavor_to_add = flavor_to_add.strip('-')
+
+            if flavor_to_add:
+                package.flavors.append(flavor_to_add)
+
         if 'setname' in rule:
             match = None
             if 'namepat' in rule:

@@ -42,7 +42,7 @@
 - { name: atk, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?atkmm[0-9._-]*", setname: atkmm }
-- { namepat: "(?:lib)?atkmm[0-9._-]*(-docs)", setname: atkmm }
+- { namepat: "(?:lib)?atkmm[0-9._-]*(-docs)", setname: atkmm, addflavor: docs }
 
 - { namepat: "autoconf[_-]?[0-9.]+",    setname: autoconf }
 - { name: autoconf, verpat: "2\\.13.*", setname: autoconf213 } # do we need more splits for this?
@@ -71,7 +71,8 @@
 - { name: cairo, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?cairomm[0-9._-]*", setname: cairomm }
-- { namepat: "(?:lib)?cairomm[0-9._-]*(-docs)?", setname: cairomm }
+- { namepat: "(?:lib)?cairomm[0-9._-]*(-docs)?", setname: cairomm, addflavor: docs }
+- { name: cairomm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "cassandra[0-9]+",        setname: cassandra }
 - { name: cassandra, verpat: "2\\..*", setname: cassandra2 }
@@ -128,7 +129,8 @@
 - { name: db, verpat: "1\\..*",        setname: db1 }
 - { name: db, warning: "please classify me"         }
 
-- { name: [dbus-1,dbus-1-x11,dbus-docs,dbus-docs-selinux,dbus-nosystemd,dbus-x11,dbus-selinux], setname: dbus }
+- { name: dbus-1, setname: dbus }
+- { name: [dbus-1-x11,dbus-docs,dbus-docs-selinux,dbus-nosystemd,dbus-x11,dbus-selinux], setname: dbus, addflavor: true }
 - { name: dbus, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { name: dmd2,                        setname: dmd }
@@ -255,6 +257,7 @@
 - { namepat: "(?:lib)?goocanvas[0-9._-]*", setname: goocanvas }
 
 - { namepat: "(?:lib)?goocanvasmm[0-9._-]*", setname: goocanvasmm }
+- { name: goocanvasmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "grass[0-9._-]+",         setname: grass }
 
@@ -264,17 +267,18 @@
 - { name: libftdi, verpat: "0\\..*",   setname: libftdi0 }
 
 - { namepat: "(?:lib)?gconfmm[0-9._-]*", setname: gconfmm }
-- { namepat: "(?:lib)?gconfmm[0-9._-]*(-docs)", setname: gconfmm }
+- { namepat: "(?:lib)?gconfmm[0-9._-]*(-docs)", setname: gconfmm, addflavor: docs }
 
 - { namepat: "(?:lib)?glib[0-9._-]*", setname: glib }
-- { name: [glib-reference,glib2-docs,glib2-patched-thumbnailer,glib2-quiet,glib2-static], setname: glib }
+- { name: [glib-reference,glib2-docs,glib2-patched-thumbnailer,glib2-quiet,glib2-static], setname: glib, addflavor: true }
 - { name: glib, verpat: "[2-9][0-9]*\\.[0-9]*[13579]\\..*", devel: true }
 - { name: glib, verpat: "1\\..*", setname: glib12 }
 
 - { name: glib2-networking, setname: glib-networking }
 
 - { namepat: "(?:lib)?glibmm[0-9._-]*", setname: glibmm }
-- { namepat: "(?:lib)?glibmm[0-9._-]*(-docs|-reference)", setname: glibmm }
+- { namepat: "(?:lib)?glibmm[0-9._-]*(-docs|-reference)", setname: glibmm, addflavor: docs }
+- { name: glibmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "gstreamer[0-9._-]+",     setname: gstreamer }
 - { name: gstreamer, verpat: "0\\..*", setname: gstreamer0 }
@@ -288,7 +292,8 @@
 - { name: gtk, verpat: "1\\..*",       setname: gtk1 }
 
 - { namepat: "(?:lib)?gtkmm[0-9._-]*", setname: gtkmm }
-- { namepat: "(?:lib)?gtkmm[0-9._-]*(-docs|-documentation|-reference)", setname: gtkmm }
+- { namepat: "(?:lib)?gtkmm[0-9._-]*(-docs|-documentation|-reference)", setname: gtkmm, addflavor: docs }
+- { name: gtkmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 - { name: gtkmm, verpat: "4\\..*",     setname: gtkmm4 }
 - { name: gtkmm, verpat: "3\\.9[0-9]+\\..*", setname: gtkmm4 }
 - { name: gtkmm, verpat: "3\\..*",     setname: gtkmm3 }
@@ -314,7 +319,7 @@
 - { namepat: "ices[0-9]+",             setname: ices }
 - { name: ices, verpat: "0\\..*",      setname: ices0 }
 
-- { name: [icu-docs],                  setname: icu }
+- { name: [icu-docs],                  setname: icu, addflavor: docs }
 - { namepat: "icu[0-9.-]+",            setname: icu }
 
 - { namepat: "icu4j[0-9.-]+",          setname: icu4j }
@@ -381,7 +386,7 @@
 - { namepat: "libdvbpsi[0-9.-]+",      setname: libdvbpsi }
 
 - { namepat: "libgdamm[0-9._-]+",      setname: libgdamm }
-- { name: "libgdamm-docs",             setname: libgdamm }
+- { name: "libgdamm-docs",             setname: libgdamm, addflavor: docs }
 
 - { namepat: "libgee[0-9.-]+",         setname: libgee }
 
@@ -412,7 +417,8 @@
 
 - { name: libressl, verpat: "2\\.6\\..*", devel: true }
 
-- { name: [libsigc++-docs, libsigc++-legacy12], setname: libsigc++ }
+- { name: libsigc++-docs, setname: libsigc++, addflavor: docs }
+- { name: libsigc++-legacy12, setname: libsigc++ }
 - { namepat: "libsigc(\\+\\+|xx|pp)[0-9.-]+", setname: libsigc++ }
 - { name: libsigc++, verpat: "1\\..*",  setname: libsigc++12 }
 - { name: libsigc++, verpat: "(2\\.99|3).*", setname: libsigc++3 } # 3.x not really in the wild yet
@@ -486,8 +492,9 @@
 - { name: [libxmlpp,libxmlxx,libxmlxx2], setname: libxml++ }
 - { name: [libxml++-reference,libxml++-docs], setname: libxml++ }
 
-- { name: [lilypond-devel, lilypond-devel-docs, lilypond-doc, lilypond-docs], setname: lilypond }
-- { name: lilypond, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", setname: lilypond-unstable }
+- { name: lilypond-devel, setname: lilypond }
+- { name: [lilypond-devel-docs,lilypond-doc,lilypond-docs], setname: lilypond, addflavor: docs }
+- { name: lilypond, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "linux-kernel(?:-lts)?[0-9._-]*", setname: linux }
 
@@ -577,7 +584,7 @@
 - { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?pangomm[0-9._-]*", setname: pangomm }
-- { namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", setname: pangomm }
+- { namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", setname: pangomm, addflavor: docs }
 
 - { namepat: "(?:lib)?pcre[0-9._-]*",          setname: pcre }
 - { name: [pcre-static,pcre-cpp],      setname: pcre }
@@ -612,15 +619,15 @@
 - { name: [postgis-src,postgis-sfcgal,liblwgeom], setname: postgis }
 
 - { namepat: "postgresql[0-9.-]*",     setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-client", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-contrib", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-docs?", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-libs", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-plperl", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-plpython", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-pltcl", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*[_-]server", setname: postgresql }
-- { namepat: "postgresql[0-9.-]*-beta.*", setname: postgresql, ignorever: true }
+- { namepat: "postgresql[0-9.-]*-client", setname: postgresql, addflavor: client }
+- { namepat: "postgresql[0-9.-]*-contrib", setname: postgresql, addflavor: contrib }
+- { namepat: "postgresql[0-9.-]*-docs?", setname: postgresql, addflavor: docs }
+- { namepat: "postgresql[0-9.-]*-libs", setname: postgresql, addflavor: libs }
+- { namepat: "postgresql[0-9.-]*-plperl", setname: postgresql, addflavor: plperl }
+- { namepat: "postgresql[0-9.-]*-plpython", setname: postgresql, addflavor: plpython }
+- { namepat: "postgresql[0-9.-]*-pltcl", setname: postgresql, addflavor: pltcl }
+- { namepat: "postgresql[0-9.-]*[_-]server", setname: postgresql, addflavor: server }
+- { namepat: "postgresql[0-9.-]*-beta.*", setname: postgresql, devel: true }
 - { namepat: "postgresql[0-9.-]*-lts.*", setname: postgresql }
 - { name: postgresql, verpat: "10.*", devel: true }
 - { name: postgresql, ver: "10", ignorever: true }
@@ -647,7 +654,7 @@
 - { name: ruby, verpat: "2\\.3.*",     setname: ruby23 }
 - { name: ruby, verpat: "2\\.4.*",     setname: ruby24 }
 
-- { name: [samba-docs],                setname: samba }
+- { name: [samba-docs],                setname: samba, addflavor: docs }
 - { namepat: "samba[0-9.-]+",          setname: samba }
 - { name: samba, verpat: "3\\..*",     setname: samba3 }
 
@@ -737,6 +744,7 @@
 - { name: wesnoth-devel,               setname: wesnoth }
 
 - { namepat: "wine[0-9.-]+",           setname: wine }
+- { name: wine-ivb, addflavor: true }
 - { name: [wine-devel,wine-development,wine-vanilla,wine-stable,wine-ivb], setname: wine }
 - { name: wine, verpat: "[0-9]+\\.0*[1-9].*", devel: true }
 
@@ -748,7 +756,7 @@
 
 - { name: [wxmac,wxx11,wxmsw], setname: wxwidgets }
 - { name: [wxwidgets-3.0-cxx11,wxwidgets-ansi,wxwidgets-media,wxwidgets-wxcontainer,wxwidgets-wxcontainer24c], setname: wxwidgets }
-- { namepat: "(wx|wxgtk|wxwidgets|wxcommon|wxbase)[0-9._-]*(:?-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*", setname: wxwidgets }
+- { namepat: "(?:wx|wxgtk|wxwidgets|wxcommon|wxbase)[0-9._-]*((?:-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*)", setname: wxwidgets, addflavor: "$1" }
 - { name: wxwidgets, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 - { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28 }
 

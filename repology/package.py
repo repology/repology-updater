@@ -62,6 +62,8 @@ class Package:
         'ignoreversion',
         'devel',
 
+        'flavors',
+
         'extrafields',
     ]
 
@@ -70,6 +72,7 @@ class Package:
                  version=None, origversion=None, effversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
                  ignore=False, shadow=False, ignoreversion=False, devel=False,
+                 flavors=None,
                  extrafields=None):
         self.repo = repo
         self.family = family
@@ -94,6 +97,8 @@ class Package:
         self.shadow = shadow
         self.ignoreversion = ignoreversion
         self.devel = devel
+
+        self.flavors = flavors if flavors else []
 
         self.extrafields = extrafields if extrafields else {}
 
@@ -186,6 +191,8 @@ class Package:
         CheckBool(self.shadow, 'shadow')
         CheckBool(self.ignoreversion, 'ignoreversion')
         CheckBool(self.devel, 'devel')
+
+        CheckList(self.flavors, 'flavors', Alphanumeric, Lowercase)
 
         CheckDict(self.extrafields, 'extrafields', NoWhitespace, NonEmpty)
 
