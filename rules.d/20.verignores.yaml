@@ -185,7 +185,7 @@
 - { name: kbuild,                      verlonger: 3,                                       ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
 - { name: kdnssd,                      verpat: "1[6789]\\..*",                             ignorever: true }
-- { name: kdiff3,                      verpat: "1\\.7\\.0\\.[0-8a-f]{7}.*",                ignorever: true } # nix snapshot
+- { name: kdiff3,                      verpat: "1\\.7\\.0-[0-8a-f]{7}.*",                 ignorever: true } # nix snapshot
 - { name: kdiff3,                      verpat: ".*201[789].*",                             ignorever: true } # nix snapshot
 - { name: knewstuff,                   verpat: "1[6789]\\..*",                             ignorever: true }
 - { name: keybase,                     verpat: "20170209.*",                               ignorever: true } # nix garbage
