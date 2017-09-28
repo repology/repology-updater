@@ -78,6 +78,7 @@
 - { namepat: "(ruby:parslet)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:progressbar)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:pry)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:public-suffix)[0-9._-]+", setname: "$1" }
 - { name: "ruby:pygments_rb", setname: "ruby:pygments.rb" }
 - { namepat: "(ruby:rack)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:rack-cache)[0-9._-]+", setname: "$1" }
