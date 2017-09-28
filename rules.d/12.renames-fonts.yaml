@@ -476,6 +476,12 @@
   setname: "fonts:gdouros-aroania"
 
 - name:
+    - asea-ttf
+    - fonts-ttf-gdouros-asea
+    - gdouros-asea-fonts
+  setname: "fonts:gdouros-asea"
+
+- name:
     - fonts-otf-atavyros
     - gdouros-atavyros-fonts
   setname: "fonts:gdouros-atavyros"
