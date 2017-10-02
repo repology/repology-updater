@@ -294,6 +294,7 @@
 - { name: procmail,                    verpat: "[0-9]+",                                   ignorever: true } # homebrew
 - { name: psimedia,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
+- { name: python-module-progressbar,   ver: "2.4",                   family: sisyphus,     ignorever: true } # fake
 - { name: pytrainer,                   ver: ["1.10.1", "1.10.2"],    family: debuntu,      ignorever: true }
 
 # Q
