@@ -266,6 +266,7 @@
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignorever: true } # 0.0.6.5; "stable" is not a part of the version
 - { name: opencollada,                 verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: opencollada,                 verpat: ".*3335ac.*",                               ignorever: true }
+- { name: openjade,                    verpat: ".*(p|pre|devel)[0-9]*",                    devel: true }
 - { name: openlierox,                  ver: "0.58",                  family: [fedora,debuntu], ignorever: true } # there's no 0.58, only 0.58beta3
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
