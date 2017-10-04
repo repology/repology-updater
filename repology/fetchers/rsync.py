@@ -32,7 +32,7 @@ class RsyncFetcher():
             return
 
         try:
-            command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', self.url, statepath]
+            command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', '--timeout=60', self.url, statepath]
             RunSubprocess(command, logger)
         except:
             if os.path.exists(statepath):

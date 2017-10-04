@@ -39,7 +39,7 @@ class WgetTarFetcher():
         tempfile = os.path.join(statepath, '.temporary.tar')
 
         try:
-            RunSubprocess(['wget', '-O', tempfile, self.url], logger)
+            RunSubprocess(['wget', '--timeout=60', '-O', tempfile, self.url], logger)
             RunSubprocess(['tar', '-x', '-z', '-f', tempfile, '-C', statepath], logger)
             os.remove(tempfile)
         except:
