@@ -119,7 +119,7 @@ class PackageTransformer:
 
         # match number of version components
         if 'verlonger' in rule:
-            if not len(package.version.split('.')) > rule['verlonger']:
+            if not len(re.split('[^a-zA-Z0-9]', package.version)) > rule['verlonger']:
                 return RuleApplyResult.unmatched
 
         # compare versions

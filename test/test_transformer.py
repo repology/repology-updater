@@ -175,7 +175,8 @@ class TestPackageTransformer(unittest.TestCase):
         self.check_transformer(
             '[ { verlonger: 2, setname: bar } ]',
             {'name': 'p1', 'version': '1.0.0', 'expect_effname': 'bar'},
-            {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'}
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '1-0-0', 'expect_effname': 'bar'}
         )
 
     def test_match_vergt(self):
