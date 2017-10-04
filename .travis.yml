@@ -24,7 +24,7 @@ before_install:
   - pip install voluptuous
   - sudo apt-get update -qq
   - sudo apt-get install -qq librpm-dev
-  - wget -qO- https://github.com/repology/libversion/archive/1.2.0.tar.gz | tar -xzf- && ( cd libversion-1.2.0 && cmake . && make && sudo make install )
+  - wget -qO- https://github.com/repology/libversion/archive/2.2.0.tar.gz | tar -xzf- && ( cd libversion-2.2.0 && cmake . && make && sudo make install )
   - git clone --depth=1 https://github.com/htacg/tidy-html5.git && ( cd tidy-html5 && cmake . && make && sudo make install )
   - sudo ldconfig
 before_script:
