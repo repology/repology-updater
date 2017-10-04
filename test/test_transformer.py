@@ -289,6 +289,12 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'bar', 'version': '1.0', 'expect_flavors': []}
         )
 
+        self.check_transformer(
+            '[ { name: foo, addflavor: [a,b,c] } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_flavors': ['a', 'b', 'c']},
+            {'name': 'bar', 'version': '1.0', 'expect_flavors': []}
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
