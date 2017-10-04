@@ -267,6 +267,7 @@
 - { name: opencollada,                 verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: opencollada,                 verpat: ".*3335ac.*",                               ignorever: true }
 - { name: openjade,                    verpat: ".*(p|pre|devel)[0-9]*",                    devel: true }
+- { name: openjade,                    ver: "1.3.3",                 family: [pclinuxos,mageia], ignorever: true } # fake, it's 1.3.3pre1
 - { name: openlierox,                  ver: "0.58",                  family: [fedora,debuntu], ignorever: true } # there's no 0.58, only 0.58beta3
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
