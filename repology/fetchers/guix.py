@@ -18,9 +18,9 @@
 import os
 import shutil
 
+from repology.fetchers.helpers.fetch import Fetch
 from repology.fetchers.helpers.statedir import TemporaryStateDir
 from repology.logger import NoopLogger
-from repology.www import Get
 
 
 class GuixFetcher():
@@ -40,4 +40,4 @@ class GuixFetcher():
                 logger.Log('fetching page ' + page)
                 pageurl = self.url + '/' + page + '.html'
                 with open(os.path.join(tmpstatepath, page + '.html'), 'w', encoding='utf-8') as pagefile:
-                    pagefile.write(Get(pageurl).text)
+                    pagefile.write(Fetch(pageurl).text)

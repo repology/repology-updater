@@ -19,9 +19,9 @@ import json
 import os
 import shutil
 
+from repology.fetchers.helpers.fetch import Fetch
 from repology.fetchers.helpers.statedir import TemporaryStateDir
 from repology.logger import NoopLogger
-from repology.www import Get
 
 
 class FedoraFetcher():
@@ -35,10 +35,10 @@ class FedoraFetcher():
 
         logger.GetIndented().Log('getting spec from {}'.format(specurl))
 
-        r = Get(specurl, check_status=False)
+        r = Fetch(specurl, check_status=False)
         if r.status_code != 200:
             deadurl = self.giturl + '/{0}.git/plain/dead.package'.format(package)
-            dr = Get(deadurl, check_status=False)
+            dr = Fetch(deadurl, check_status=False)
             if dr.status_code == 200:
                 logger.GetIndented(2).Log('dead: ' + ';'.join(dr.text.split('\n')))
             else:
@@ -59,7 +59,7 @@ class FedoraFetcher():
             while True:
                 pageurl = self.apiurl + 'packages/?page={}'.format(page)
                 logger.Log('getting page {} from {}'.format(page, pageurl))
-                pagedata = json.loads(Get(pageurl).text)
+                pagedata = json.loads(Fetch(pageurl).text)
 
                 for package in pagedata['packages']:
                     self.LoadSpec(package['name'], tmpstatepath, logger)

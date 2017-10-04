@@ -18,9 +18,9 @@
 import json
 import os
 
+from repology.fetchers.helpers.fetch import Fetch
 from repology.logger import NoopLogger
 from repology.version import VersionCompare
-from repology.www import Get
 
 
 class FreshcodeFetcher():
@@ -41,7 +41,7 @@ class FreshcodeFetcher():
         else:
             logger.Log('starting with empty state')
 
-        newdata = json.loads(Get(self.url).text)
+        newdata = json.loads(Fetch(self.url).text)
 
         # add new entries in reversed order, oldest first so newest
         # have higher priority; may also compare versions here

@@ -23,8 +23,8 @@ from contextlib import contextmanager
 
 @contextmanager
 def TemporaryStateDir(path):
-    new_path = path + ".new"
-    old_path = path + ".old"
+    new_path = path + '.new'
+    old_path = path + '.old'
 
     def Cleanup():
         if os.path.exists(new_path):

@@ -19,9 +19,9 @@ import os
 import shutil
 import xml.etree.ElementTree
 
+from repology.fetchers.helpers.fetch import Fetch
 from repology.fetchers.helpers.statedir import TemporaryStateDir
 from repology.logger import NoopLogger
-from repology.www import Get
 
 
 class ChocolateyFetcher():
@@ -39,7 +39,7 @@ class ChocolateyFetcher():
             while True:
                 logger.Log('getting ' + nextpageurl)
 
-                text = Get(nextpageurl).text
+                text = Fetch(nextpageurl).text
                 with open(os.path.join(tmpstatepath, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                     pagefile.write(text)
 

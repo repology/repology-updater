@@ -20,8 +20,8 @@ import lzma
 import os
 import xml.etree.ElementTree
 
+from repology.fetchers.helpers.fetch import Fetch
 from repology.logger import NoopLogger
-from repology.www import Get
 
 
 class RepodataFetcher():
@@ -39,13 +39,13 @@ class RepodataFetcher():
         # Get and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)
-        repomd_content = Get(repomd_url, check_status=True).text
+        repomd_content = Fetch(repomd_url, check_status=True).text
         repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
 
         repodata_url = self.url + repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location').attrib['href']
 
         logger.Log('fetching ' + repodata_url)
-        data = Get(repodata_url).content
+        data = Fetch(repodata_url).content
 
         logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 

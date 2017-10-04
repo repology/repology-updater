@@ -20,8 +20,8 @@ import gzip
 import lzma
 import os
 
+from repology.fetchers.helpers.fetch import Fetch
 from repology.logger import NoopLogger
-from repology.www import Get
 
 
 class FileFetcher():
@@ -38,7 +38,7 @@ class FileFetcher():
 
         with open(tmppath, 'wb') as statefile:
             logger.Log('fetching ' + self.url)
-            data = Get(self.url).content
+            data = Fetch(self.url).content
 
             logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 
