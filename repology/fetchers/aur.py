@@ -53,7 +53,7 @@ class AURFetcher():
             logger.GetIndented().Log('fetching page {}/{}'.format(page + 1, len(package_names) // pagesize + 1))
 
             with open(os.path.join(statepath, '{}.json'.format(page)), 'wb') as statefile:
-                statefile.write(Get(url).content)
+                statefile.write(Get(url, timeout=5).content)
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
