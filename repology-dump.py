@@ -41,8 +41,6 @@ def VersionClass2Letter(value):
         return 'L'
     elif value == VersionClass.outdated:
         return 'O'
-    elif value == VersionClass.mixer:
-        return 'M'
     else:
         return '?'
 
