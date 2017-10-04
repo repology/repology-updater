@@ -19,6 +19,7 @@ import os
 import shutil
 import urllib
 
+from repology.fetchers.helpers.statedir import TemporaryStateDir
 from repology.logger import NoopLogger
 from repology.www import Get
 
@@ -27,47 +28,35 @@ class AURFetcher():
     def __init__(self, url):
         self.url = url
 
-    def DoFetch(self, statepath, update, logger):
-        packages_url = self.url + 'packages.gz'
-        logger.GetIndented().Log('fetching package list from ' + packages_url)
-        data = Get(packages_url).text  # autogunzipped?
-
-        package_names = []
-
-        for line in data.split('\n'):
-            line = line.strip()
-            if line.startswith('#') or line == '':
-                continue
-            package_names.append(line)
-
-        logger.GetIndented().Log('{} package name(s) parsed'.format(len(package_names)))
-
-        pagesize = 100
-
-        for page in range(0, len(package_names) // pagesize + 1):
-            ifrom = page * pagesize
-            ito = (page + 1) * pagesize
-            url = '&'.join(['arg[]=' + urllib.parse.quote(name) for name in package_names[ifrom:ito]])
-            url = self.url + '/rpc/?v=5&type=info&' + url
-
-            logger.GetIndented().Log('fetching page {}/{}'.format(page + 1, len(package_names) // pagesize + 1))
-
-            with open(os.path.join(statepath, '{}.json'.format(page)), 'wb') as statefile:
-                statefile.write(Get(url, timeout=5).content)
-
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
 
-        if os.path.exists(statepath):
-            shutil.rmtree(statepath)
+        with TemporaryStateDir(statepath) as tmpstatepath:
+            packages_url = self.url + 'packages.gz'
+            logger.GetIndented().Log('fetching package list from ' + packages_url)
+            data = Get(packages_url).text  # autogunzipped?
 
-        os.mkdir(statepath)
+            package_names = []
 
-        try:
-            self.DoFetch(statepath, update, logger)
-        except:
-            if os.path.exists(statepath):
-                shutil.rmtree(statepath)
-            raise
+            for line in data.split('\n'):
+                line = line.strip()
+                if line.startswith('#') or line == '':
+                    continue
+                package_names.append(line)
+
+            logger.GetIndented().Log('{} package name(s) parsed'.format(len(package_names)))
+
+            pagesize = 100
+
+            for page in range(0, len(package_names) // pagesize + 1):
+                ifrom = page * pagesize
+                ito = (page + 1) * pagesize
+                url = '&'.join(['arg[]=' + urllib.parse.quote(name) for name in package_names[ifrom:ito]])
+                url = self.url + '/rpc/?v=5&type=info&' + url
+
+                logger.GetIndented().Log('fetching page {}/{}'.format(page + 1, len(package_names) // pagesize + 1))
+
+                with open(os.path.join(tmpstatepath, '{}.json'.format(page)), 'wb') as statefile:
+                    statefile.write(Get(url, timeout=5).content)

@@ -19,6 +19,7 @@ import json
 import os
 import shutil
 
+from repology.fetchers.helpers.statedir import TemporaryStateDir
 from repology.logger import NoopLogger
 from repology.www import Get
 
@@ -47,35 +48,23 @@ class FedoraFetcher():
         with open(os.path.join(statepath, package + '.spec'), 'wb') as file:
             file.write(r.content)
 
-    def ParsePackages(self, statepath, logger):
-        page = 1
-
-        while True:
-            pageurl = self.apiurl + 'packages/?page={}'.format(page)
-            logger.Log('getting page {} from {}'.format(page, pageurl))
-            pagedata = json.loads(Get(pageurl).text)
-
-            for package in pagedata['packages']:
-                self.LoadSpec(package['name'], statepath, logger)
-
-            page += 1
-
-            if page > pagedata['page_total']:
-                break
-
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
 
-        if os.path.exists(statepath):
-            shutil.rmtree(statepath)
+        with TemporaryStateDir(statepath) as tmpstatepath:
+            page = 1
 
-        os.mkdir(statepath)
+            while True:
+                pageurl = self.apiurl + 'packages/?page={}'.format(page)
+                logger.Log('getting page {} from {}'.format(page, pageurl))
+                pagedata = json.loads(Get(pageurl).text)
 
-        try:
-            self.ParsePackages(statepath, logger)
-        except:
-            if os.path.exists(statepath):
-                shutil.rmtree(statepath)
-            raise
+                for package in pagedata['packages']:
+                    self.LoadSpec(package['name'], tmpstatepath, logger)
+
+                page += 1
+
+                if page > pagedata['page_total']:
+                    break

@@ -18,6 +18,7 @@
 import os
 import shutil
 
+from repology.fetchers.helpers.statedir import TemporaryStateDir
 from repology.logger import NoopLogger
 from repology.www import Get
 
@@ -26,29 +27,17 @@ class GuixFetcher():
     def __init__(self, url):
         self.url = url
 
-    def DoFetch(self, statepath, update, logger):
-        pages = [chr(x) for x in range(ord('a'), ord('z') + 1)]  # a..z
-        pages.append('0-9')
-
-        for page in pages:
-            logger.Log('fetching page ' + page)
-            pageurl = self.url + '/' + page + '.html'
-            with open(os.path.join(statepath, page + '.html'), 'w', encoding='utf-8') as pagefile:
-                pagefile.write(Get(pageurl).text)
-
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
 
-        if os.path.exists(statepath):
-            shutil.rmtree(statepath)
+        with TemporaryStateDir(statepath) as tmpstatepath:
+            pages = [chr(x) for x in range(ord('a'), ord('z') + 1)]  # a..z
+            pages.append('0-9')
 
-        os.mkdir(statepath)
-
-        try:
-            self.DoFetch(statepath, update, logger)
-        except:
-            if os.path.exists(statepath):
-                shutil.rmtree(statepath)
-            raise
+            for page in pages:
+                logger.Log('fetching page ' + page)
+                pageurl = self.url + '/' + page + '.html'
+                with open(os.path.join(tmpstatepath, page + '.html'), 'w', encoding='utf-8') as pagefile:
+                    pagefile.write(Get(pageurl).text)

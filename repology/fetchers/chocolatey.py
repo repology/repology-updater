@@ -19,6 +19,7 @@ import os
 import shutil
 import xml.etree.ElementTree
 
+from repology.fetchers.helpers.statedir import TemporaryStateDir
 from repology.logger import NoopLogger
 from repology.www import Get
 
@@ -27,40 +28,28 @@ class ChocolateyFetcher():
     def __init__(self, url):
         self.url = url
 
-    def DoFetch(self, statepath, update, logger):
-        numpage = 0
-        nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
-        while True:
-            logger.Log('getting ' + nextpageurl)
-
-            text = Get(nextpageurl).text
-            with open(os.path.join(statepath, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
-                pagefile.write(text)
-
-            # parse next page
-            logger.Log('parsing ' + nextpageurl)
-            root = xml.etree.ElementTree.fromstring(text)
-
-            next_link = root.find('{http://www.w3.org/2005/Atom}link[@rel="next"]')
-            if next_link is None:
-                break
-
-            nextpageurl = next_link.attrib['href']
-            numpage += 1
-
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
 
-        if os.path.exists(statepath):
-            shutil.rmtree(statepath)
+        with TemporaryStateDir(statepath) as tmpstatepath:
+            numpage = 0
+            nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
+            while True:
+                logger.Log('getting ' + nextpageurl)
 
-        os.mkdir(statepath)
+                text = Get(nextpageurl).text
+                with open(os.path.join(tmpstatepath, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
+                    pagefile.write(text)
 
-        try:
-            self.DoFetch(statepath, update, logger)
-        except:
-            if os.path.exists(statepath):
-                shutil.rmtree(statepath)
-            raise
+                # parse next page
+                logger.Log('parsing ' + nextpageurl)
+                root = xml.etree.ElementTree.fromstring(text)
+
+                next_link = root.find('{http://www.w3.org/2005/Atom}link[@rel="next"]')
+                if next_link is None:
+                    break
+
+                nextpageurl = next_link.attrib['href']
+                numpage += 1

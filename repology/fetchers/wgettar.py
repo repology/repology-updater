@@ -18,6 +18,7 @@
 import os
 import shutil
 
+from repology.fetchers.helpers.statedir import TemporaryStateDir
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
@@ -31,18 +32,8 @@ class WgetTarFetcher():
             logger.Log('no update requested, skipping')
             return
 
-        if os.path.exists(statepath):
-            shutil.rmtree(statepath)
-
-        os.mkdir(statepath)
-
-        tempfile = os.path.join(statepath, '.temporary.tar')
-
-        try:
-            RunSubprocess(['wget', '--timeout=60', '-O', tempfile, self.url], logger)
-            RunSubprocess(['tar', '-x', '-z', '-f', tempfile, '-C', statepath], logger)
-            os.remove(tempfile)
-        except:
-            if os.path.exists(statepath):
-                shutil.rmtree(statepath)
-            raise
+        with TemporaryStateDir(statepath) as tmpstatepath:
+            tarpath = os.path.join(tmpstatepath, '.temporary.tar')
+            RunSubprocess(['wget', '--timeout=60', '-O', tarpath, self.url], logger)
+            RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', tmpstatepath], logger)
+            os.remove(tarpath)

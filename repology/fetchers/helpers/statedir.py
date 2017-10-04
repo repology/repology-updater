@@ -18,18 +18,28 @@
 import os
 import shutil
 
-from repology.logger import NoopLogger
-from repology.subprocess import RunSubprocess
+from contextlib import contextmanager
 
 
-class RsyncFetcher():
-    def __init__(self, url):
-        self.url = url
+@contextmanager
+def TemporaryStateDir(path):
+    new_path = path + ".new"
+    old_path = path + ".old"
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
+    def Cleanup():
+        if os.path.exists(new_path):
+            shutil.rmtree(new_path)
+        if os.path.exists(old_path):
+            shutil.rmtree(old_path)
 
-        command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', '--timeout=60', self.url, statepath]
-        RunSubprocess(command, logger)
+    Cleanup()
+
+    os.mkdir(new_path)
+
+    try:
+        yield new_path
+        if os.path.exists(path):
+            os.rename(path, old_path)
+        os.rename(new_path, path)
+    finally:
+        Cleanup()
