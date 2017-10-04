@@ -1,5 +1,5 @@
 ###########################################################################
-# RPM Fusion
+# RPM Fusion Fedora
 ###########################################################################
 - name: rpmfusion_fedora_24
   type: repository
@@ -186,6 +186,69 @@
       parser: Repodata
       url: https://download1.rpmfusion.org/nonfree/fedora/development/rawhide/Everything/source/SRPMS/
       subrepo: nonfree/release
+  repolinks:
+    - desc: RPM Fusion home
+      url: https://rpmfusion.org/
+  tags: [ all, production, rpmfusion ]
+
+###########################################################################
+# RPM Fusion EL
+###########################################################################
+- name: rpmfusion_el_6
+  type: repository
+  desc: RPM Fusion EL 6
+  family: fedora
+  sources:
+    - name: free-updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/free/el/updates/6/SRPMS/
+      subrepo: free/updates
+    - name: free-updates-testing
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/free/el/updates/testing/6/SRPMS/
+      subrepo: free/updates-testing
+    - name: nonfree-updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/nonfree/el/updates/6/SRPMS/
+      subrepo: nonfree/updates
+    - name: nonfree-updates-testing
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/nonfree/el/updates/testing/6/SRPMS/
+      subrepo: nonfree/updates-testing
+  repolinks:
+    - desc: RPM Fusion home
+      url: https://rpmfusion.org/
+  tags: [ all, production, rpmfusion ]
+
+- name: rpmfusion_el_7
+  type: repository
+  desc: RPM Fusion EL 7
+  family: fedora
+  sources:
+    - name: free-updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/free/el/updates/7/SRPMS/
+      subrepo: free/updates
+    - name: free-updates-testing
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/free/el/updates/testing/7/SRPMS/
+      subrepo: free/updates-testing
+    - name: nonfree-updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/nonfree/el/updates/7/SRPMS/
+      subrepo: nonfree/updates
+    - name: nonfree-updates-testing
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/nonfree/el/updates/testing/7/SRPMS/
+      subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
       url: https://rpmfusion.org/
