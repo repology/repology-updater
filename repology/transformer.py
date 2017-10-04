@@ -190,22 +190,22 @@ class PackageTransformer:
         if 'addflavor' in rule:
             flavors = []
             if isinstance(rule['addflavor'], bool):
-                flavors = [ package.effname ]
+                flavors = [package.effname]
             elif isinstance(rule['addflavor'], str):
-                flavors = [ rule['addflavor'] ]
+                flavors = [rule['addflavor']]
             elif isinstance(rule['addflavor'], list):
                 flavors = rule['addflavor']
             else:
-                raise RuntimeError("addflavor must be boolean or str or list")
+                raise RuntimeError('addflavor must be boolean or str or list')
 
             if name_match:
-                flavors = [ self.dollarN.sub(lambda x: name_match.group(int(x.group(1))), flavor) for flavor in flavors ]
+                flavors = [self.dollarN.sub(lambda x: name_match.group(int(x.group(1))), flavor) for flavor in flavors]
             else:
-                flavors = [ self.dollar0.sub(package.effname, flavor) for flavor in flavors ]
+                flavors = [self.dollar0.sub(package.effname, flavor) for flavor in flavors]
 
-            flavors = [ flavor.strip('-') for flavor in flavors ]
+            flavors = [flavor.strip('-') for flavor in flavors]
 
-            package.flavors += [ flavor for flavor in flavors if flavor ]
+            package.flavors += [flavor for flavor in flavors if flavor]
 
         if 'setname' in rule:
             if name_match:
