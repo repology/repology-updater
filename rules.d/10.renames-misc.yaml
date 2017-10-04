@@ -414,6 +414,7 @@
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geotiff,                     setname: libgeotiff                }
+- { name: getopt,                      setname: util-linux, family: openwrt }
 - { name: gif,                         setname: giflib, family: ravenports }
 - { name: giflib-util,                 setname: giflib                    }
 - { name: giflib4,                     setname: giflib                    }
@@ -582,6 +583,7 @@
 - { name: [libtsm-asciinema,libtsm-patched], setname: libtsm }
 - { name: libuchardet,                 setname: uchardet                  }
 - { name: libunistring2,               setname: libunistring              }
+- { name: [libutil-linux-aarch64,libutil-linux-nosystemd,libutil-linux-nosystemd-debug,libutil-linux-selinux], setname: util-linux, addflavor: true }
 - { name: libuv1,                      setname: libuv                     }
 - { name: [libwmf-nox11,libwmf-docs],  setname: libwmf, addflavor: true   }
 - { name: libx264,                     setname: x264                      }
@@ -848,6 +850,7 @@
 - { name: [libupnp1.8,libupnp4],       setname: libupnp                   }
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
 - { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
+- { name: [util-linux-aes,util-linux-minimal,util-linux-nosystemd,util-linux-nosystemd-debug,util-linux-selinux,util-linux-systemd], setname: util-linux, addflavor: true }
 
 # V
 - { name: v4l2loopback-dkms,           setname: v4l2loopback              }
