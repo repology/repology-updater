@@ -531,17 +531,17 @@
 - { namepat: "nvidia-[0-9._-]*-settings", setname: nvidia-settings }
 
 - { namepat: "(linux[0-9]+)-nvidia(?:-[0-9]+xx)?", setname: nvidia, addflavor: "$1" }
-- { namepat: "nvidia[0-9._-]+xx.*", setname: nvidia }
+#- { namepat: "nvidia[0-9._-]+xx.*", setname: nvidia }
 - { namepat: "nvidia[0-9._-]+", setname: nvidia }
 - { namepat: "nvidia-driver[0-9._-]+", setname: nvidia }
-- { name: nvidia-graphics-drivers-tegra, setname: nvidia, ignorever: true }
-- { namepat: "nvidia-graphics-drivers.*", setname: nvidia }
+- { name: nvidia-graphics-drivers-tegra, setname: nvidia, ignorever: true, addflavor: tegra }
+#- { namepat: "nvidia-graphics-drivers.*", setname: nvidia }
 - { namepat: "nvidia-legacy.*", setname: nvidia }
-- { namepat: "nvidia-libgl.*beta.*", setname: nvidia, ignorever: true, addflavor: libgl }
-- { namepat: "nvidia-glx.*beta.*", setname: nvidia, ignorever: true, addflavor: glx }
+#- { namepat: "nvidia-libgl.*beta.*", setname: nvidia, ignorever: true, addflavor: libgl }
+#- { namepat: "nvidia-glx.*beta.*", setname: nvidia, ignorever: true, addflavor: glx }
 - { namepat: "nvidia-glx-src[0-9._-]*", setname: nvidia, addflavor: glx }
 - { namepat: "xorg-x11-drv-nvidia[x0-9._-]*", setname: nvidia }
-- { name: [nvidia-driver,nvidia-drivers], setname: nvidia }
+- { name: [nvidia-driver,nvidia-drivers,driver-graphics-nvidia], setname: nvidia }
 - { name: [nvidia-kernel,nvidia-kmod,nvidia-graphics-modules], setname: nvidia, addflavor: kmod }
 - { name: [nvidia-beta,nvidia-beta-all,nvidia-current], setname: nvidia, ignorever: true }
 - { name: nvidia-beta-dkms, setname: nvidia, ignorever: true, addflavor: dkms }
