@@ -105,6 +105,7 @@
 - { name: djvulibre,                   ver: "3.5.27.1",                                    ignorever: true }
 - { name: dosbox,                      verpat: "0\\.74\\.[4r].*",                          ignorever: true }
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
+- { name: dosemu,                      verpat: "1\\.4\\.1.*",        family: [sisyphus,gentoo], ignorever: true }
 - { name: dolphin-emu,                 verpat: "[0-9]{4,}.*",                              ignorever: true }
 - { name: dsniff,                      ver: "2.4",                   family: [sisyphus,fedora,mageia], ignorever: true } # it's 2.4beta1
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignorever: true }
@@ -256,6 +257,7 @@
 - { name: ncurses,                     verpat: "6\\.0-20[0-9]{6}.*",                       ignorever: true } # macports
 - { name: netcat-openbsd,              verpat: "20[0-9]{6}.*",                             ignorever: true } # pkgsrc garbage
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: npapi-vlc,                   ver: "2.2.7",                 family: fedora,       ignorever: true } # no such tag on https://code.videolan.org/videolan/npapi-vlc/tags
 
 # O
 - { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignorever: true }   # \  force correct
@@ -370,6 +372,7 @@
 - { name: util-linux,                  ver: "2.31",                  family: fedora,       ignorever: true } # fake, it's 2.31rc1
 
 # V
+- { name: vcdimager,                   ver: "0.7.24cvs",                                   ignorever: true } # opensuse garbage
 - { name: vid.stab,                    verpat: ".*[0-9a-f]{7}.*",                          ignorever: true } # git commit
 - { name: vlc,                                                       family: kaos,         ignorever: true } # fake
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
