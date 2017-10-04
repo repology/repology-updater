@@ -85,6 +85,10 @@ class PackageTransformer:
                 self.slowrules.append(rule)
 
     def ApplyRule(self, rule, package):
+        # pattern matches are reused when rule applies
+        name_match = None
+        ver_match = None
+
         # match family
         if 'family' in rule:
             if package.family not in rule['family']:
@@ -104,7 +108,8 @@ class PackageTransformer:
 
         # match name patterns
         if 'namepat' in rule:
-            if not rule['namepat'].fullmatch(package.effname):
+            name_match = rule['namepat'].fullmatch(package.effname)
+            if not name_match:
                 return RuleApplyResult.unmatched
 
         # match version
@@ -114,7 +119,8 @@ class PackageTransformer:
 
         # match version patterns
         if 'verpat' in rule:
-            if not rule['verpat'].fullmatch(package.version.lower()):
+            ver_match = rule['verpat'].fullmatch(package.version.lower())
+            if not ver_match:
                 return RuleApplyResult.unmatched
 
         # match number of version components
@@ -192,12 +198,8 @@ class PackageTransformer:
             else:
                 raise RuntimeError("addflavor must be boolean or str or list")
 
-            match = None
-            if 'namepat' in rule:
-                match = rule['namepat'].fullmatch(package.effname)
-
-            if match:
-                flavors = [ self.dollarN.sub(lambda x: match.group(int(x.group(1))), flavor) for flavor in flavors ]
+            if name_match:
+                flavors = [ self.dollarN.sub(lambda x: name_match.group(int(x.group(1))), flavor) for flavor in flavors ]
             else:
                 flavors = [ self.dollar0.sub(package.effname, flavor) for flavor in flavors ]
 
@@ -206,11 +208,8 @@ class PackageTransformer:
             package.flavors += [ flavor for flavor in flavors if flavor ]
 
         if 'setname' in rule:
-            match = None
-            if 'namepat' in rule:
-                match = rule['namepat'].fullmatch(package.effname)
-            if match:
-                package.effname = self.dollarN.sub(lambda x: match.group(int(x.group(1))), rule['setname'])
+            if name_match:
+                package.effname = self.dollarN.sub(lambda x: name_match.group(int(x.group(1))), rule['setname'])
             else:
                 package.effname = self.dollar0.sub(package.effname, rule['setname'])
 
