@@ -63,6 +63,37 @@
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q2'
   tags: [ all, production, pkgsrc ]
 
+- name: pkgsrc_2017_3
+  type: repository
+  desc: pkgsrc-2017Q3
+  family: pkgsrc
+  color: 'ff6600'
+  valid_till: 2018-01-01
+  sources:
+    - name: INDEX
+      fetcher: File
+      parser: PkgsrcIndex
+      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q3/pkgsrc/INDEX
+  repolinks:
+    - desc: pkgsrc home
+      url: https://www.pkgsrc.org/
+    - desc: pkgsrc.se
+      url: http://pkgsrc.se/
+    - desc: pkgsrc CVS repository
+      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
+  packagelinks:
+    - desc: pkgsrc.se page
+      url: 'http://pkgsrc.se/{origin}'
+    - desc: Port CVS directory
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
+    - desc: Port CVS directory (quarterly branch)
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2017Q3'
+    - desc: Port Makefile
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
+    - desc: Port Makefile (quarterly branch)
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q3'
+  tags: [ all, production, pkgsrc ]
+
 - name: pkgsrc_current
   type: repository
   desc: pkgsrc current
