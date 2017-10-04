@@ -201,7 +201,9 @@ class PackageTransformer:
             else:
                 flavors = [ self.dollar0.sub(package.effname, flavor) for flavor in flavors ]
 
-            package.flavors += [ flavor.strip('-') for flavor in flavors ]
+            flavors = [ flavor.strip('-') for flavor in flavors ]
+
+            package.flavors += [ flavor for flavor in flavors if flavor ]
 
         if 'setname' in rule:
             match = None

@@ -295,6 +295,14 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'bar', 'version': '1.0', 'expect_flavors': []}
         )
 
+        self.check_transformer(
+            '[ { namepat: "(prefix-)?foo(-suffix)?", addflavor: ["$1", "$2"] } ]',
+            {'name': 'prefix-foo-suffix', 'version': '1.0', 'expect_flavors': ['prefix', 'suffix']},
+            {'name': 'prefix-foo', 'version': '1.0', 'expect_flavors': ['prefix']},
+            {'name': 'foo-suffix', 'version': '1.0', 'expect_flavors': ['suffix']},
+            {'name': 'foo', 'version': '1.0', 'expect_flavors': []}
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
