@@ -156,6 +156,7 @@
 - { name: gettext,                     ver: "2",                                           ignorever: true } # libintl from LEDE
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
+- { name: gnash,                       verpat: ".*git.*",                                  ignorever: true } # snapshots
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignorever: true }
 - { name: grep,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: gzip,                        verlonger: 2,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
