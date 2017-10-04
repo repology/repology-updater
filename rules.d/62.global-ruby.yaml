@@ -74,7 +74,6 @@
 - { namepat: "(ruby:net-scp)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-ssh)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-ssh-multi)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:nokogiri)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:parslet)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:progressbar)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:pry)[0-9._-]+", setname: "$1" }

@@ -220,7 +220,6 @@
 - { name: [coreos-etcd,coreos-etcd3],  setname: etcd                      }
 - { name: [corsix-th,corsix_th],       setname: corsixth                  }
 - { name: commoncpp,                   setname: commoncpp2                }
-- { name: compat-libuv010,             setname: libuv                     }
 - { name: conserver8,                  setname: conserver                 }
 - { name: consolekit2,                 setname: consolekit                }
 - { name: coolreader,                  setname: coolreader3               }

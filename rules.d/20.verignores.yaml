@@ -10,7 +10,6 @@
 # A
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: abuse,                       ver: "2.0",                   family: pkgsrc,       ignorever: true }
-- { name: ace-of-penguins,             ver: "1.5",                   family: debuntu,      ignorever: true } # 1.5 was never released
 - { name: acl,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: acl,                         verlonger: 3,                                       ignorever: true }
 - { name: ack,                                                       family: mageia,       ignorever: true }
@@ -82,7 +81,6 @@
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
-- { name: clamav,                      ver: "0.99.3",                family: [freshcode,debuntu], ignorever: true }
 - { name: clementine-player,           verlonger: 3,                 family: kaos,          ignorever: true }
 - { name: clusterssh,                                                family: gentoo,       ignorever: true } # perl module version mangling rules apply here
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
@@ -122,7 +120,7 @@
 
 # F
 - { name: f3,                          verpat: ".*unstable",                               ignorever: true } # nix garbage
-- { name: faifa,                       ver: "0.2",                   family: debuntu,      ignorever: true }
+- { name: faifa,                       verpat: ".*svn.*",            family: debuntu,      ignorever: true }
 - { name: fatrat,                      verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: fdupes,                      verpat: "1\\.[0-9]{2}",                             ignorever: true } # it has switched to 3 componennts (e.g. 1.51 -> 1.6.0 -> 1.6.1)
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignorever: true }
@@ -132,7 +130,7 @@
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
 - { name: "fonts:eeyek",               ver: "20091204",                                    ignorever: true }
-- { name: "fonts:fira-sans",           ver: "20140907",                                    ignorever: true } # openbsd garbage
+- { name: "fonts:fira-sans",           ver: "20[0-9]{6}",                                  ignorever: true } # openbsd garbage
 - { name: "fonts:gentium-basic",       ver: "1102",                                        ignorever: true } # it's 1.102!
 - { name: "fonts:mikachan",            ver: "9.1.2006.08.09",                              ignorever: true } # openSUSE garbage
 - { name: "fonts:oldstandard",         ver: "2.2really",                                   ignorever: true } # debian garbage
@@ -376,7 +374,6 @@
 - { name: vlc,                                                       family: kaos,         ignorever: true } # fake
 - { name: vlc,                         ver: "3.0.0",                 family: [mageia,fedora,sisyphus], ignorever: true } # fake
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
-- { name: vokoscreen,                  ver: "2.5.5",                 family: kaos,         ignorever: true } # fake
 - { name: vorbis-tools,                verlonger: 3,                 family: kaos,         ignorever: true } # fake
 - { name: vpnc,                        ver: "0.5.3.3",               family: kaos,         ignorever: true } # fake
 

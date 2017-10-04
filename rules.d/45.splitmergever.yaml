@@ -630,7 +630,7 @@
 - { namepat: "postgresql[0-9.-]*-beta.*", setname: postgresql, devel: true }
 - { namepat: "postgresql[0-9.-]*-lts.*", setname: postgresql }
 - { name: postgresql, verpat: "10.*", devel: true }
-- { name: postgresql, ver: "10", ignorever: true }
+- { name: postgresql, ver: ["10","10.0"], ignorever: true }
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
 
