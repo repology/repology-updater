@@ -43,6 +43,9 @@ class FreshcodeFetcher():
 
         newdata = json.loads(Fetch(self.url).text)
 
+        if not newdata['releases']:
+            raise RuntimeError('Empty freshcode package list received, refusing to go on')
+
         # add new entries in reversed order, oldest first so newest
         # have higher priority; may also compare versions here
         for entry in newdata['releases']:
