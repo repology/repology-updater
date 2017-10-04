@@ -399,6 +399,7 @@
 - { name: xl2tpd,                      ver: "20140214",                                    ignorever: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignorever: true }
 - { name: xmoto,                       ver: "0.5.12",                family: [ rosa ],     ignorever: true } # no such version
+- { name: xorg-server,                 verlonger: 3,                 family: crux,         ignorever: true } # bogus siffux
 - { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignorever: true }
 - { name: xz-utils,                    ver: "5.03",                                        ignorever: true } # gobolinux garbage
 
