@@ -20,8 +20,8 @@ import requests
 USER_AGENT = 'Repology/0'
 
 
-def Get(url, check_status=True):
-    r = requests.get(url, headers={'user-agent': USER_AGENT}, timeout=60)
+def Get(url, check_status=True, timeout=60):
+    r = requests.get(url, headers={'user-agent': USER_AGENT}, timeout=timeout)
     if check_status:
         r.raise_for_status()
     return r
