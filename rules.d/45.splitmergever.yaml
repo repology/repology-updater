@@ -727,13 +727,13 @@
 - { name: tor, verge: "0.3.2",         devel: true }
 
 - { name: unison-devel,                setname: unison, ignorever: true }
-- { name: unison-nox11,                setname: unison }
+- { name: unison-nox11,                setname: unison, addflavor: true }
 - { namepat: "unison[0-9.-]+(?:-compat)?", setname: unison }
 
 - { namepat: "vala[0-9.-]+",           setname: vala }
 
-- { namepat: "vte[0-9._-]+",           setname: vte }
-- { name: [vte-common,vte-gtk2-compat,vte-gtk2-xfce,vte-gtk3,vte-reference], setname: vte }
+- { namepat: "(?:lib)?vte[0-9._-]*",   setname: vte }
+- { name: [vte-common,vte-gtk2-compat,vte-gtk2-xfce,vte-gtk3,vte-reference], setname: vte, addflavor: true }
 
 - { namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*", setname: webkitgtk }
 - { namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*-unstable", setname: webkitgtk, ignorever: true }
