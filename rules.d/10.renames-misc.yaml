@@ -439,6 +439,9 @@
 - { name: gnu-typist,                  setname: gtypist                   }
 - { name: [gnu-units,gunits],          setname: units                     }
 - { name: [gnu-which,gwhich],          setname: which                     }
+- { name: [gnugetopt,gnu-getopt,gnu.getopt], setname: getopt }
+- { name: getopt,                      setname: java-getopt, wwwpart: urbanophile.com }
+- { name: getopt,                      setname: java-getopt, family: sisyphus }
 - { name: gnupg1compat,                setname: gnupg                     }
 - { name: google-breakpad,             setname: breakpad                  }
 - { name: [google-gflags,libgflags],   setname: gflags                    }
@@ -538,6 +541,7 @@
 - { name: libgdal-grass,               setname: gdal-grass                }
 - { name: libgeoip,                    setname: geoip                     }
 - { name: [libgeotiff-dfsg,libgeotiff-epsg], setname: libgeotiff          }
+- { name: libgetopt-java,              setname: java-getopt               }
 - { name: libglpng,                    setname: glpng                     }
 - { name: libgom,                      setname: gom                       }
 - { name: libgranite,                  setname: granite                   }
