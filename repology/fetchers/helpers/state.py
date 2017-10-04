@@ -22,7 +22,7 @@ from contextlib import contextmanager
 
 
 @contextmanager
-def TemporaryStateDir(path):
+def StateDir(path):
     new_path = path + '.new'
     old_path = path + '.old'
 
@@ -41,5 +41,25 @@ def TemporaryStateDir(path):
         if os.path.exists(path):
             os.rename(path, old_path)
         os.rename(new_path, path)
+    finally:
+        Cleanup()
+
+
+@contextmanager
+def StateFile(path, *args, **kwargs):
+    new_path = path + '.new'
+
+    def Cleanup():
+        if os.path.exists(new_path):
+            os.remove(new_path)
+
+    Cleanup()
+
+    statefile = open(new_path, *args, **kwargs)
+
+    try:
+        with open(new_path, *args, **kwargs) as statefile:
+            yield statefile
+        os.replace(new_path, path)
     finally:
         Cleanup()

@@ -21,6 +21,7 @@ import lzma
 import os
 
 from repology.fetchers.helpers.fetch import Fetch
+from repology.fetchers.helpers.state import StateFile
 from repology.logger import NoopLogger
 
 
@@ -30,32 +31,29 @@ class FileFetcher():
         self.compression = compression
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        tmppath = statepath + '.tmp'
-
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
 
-        with open(tmppath, 'wb') as statefile:
-            logger.Log('fetching ' + self.url)
-            data = Fetch(self.url).content
+        logger.Log('fetching ' + self.url)
+        data = Fetch(self.url).content
 
-            logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
+        logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 
-            if self.compression == 'gz':
-                logger.GetIndented().Log('decompressing with gzip')
-                data = gzip.decompress(data)
-            elif self.compression == 'bz2':
-                logger.GetIndented().Log('decompressing with bz2')
-                data = bz2.decompress(data)
-            elif self.compression == 'xz':
-                logger.GetIndented().Log('decompressing with xz')
-                data = lzma.LZMADecompressor().decompress(data)
+        if self.compression == 'gz':
+            logger.GetIndented().Log('decompressing with gzip')
+            data = gzip.decompress(data)
+        elif self.compression == 'bz2':
+            logger.GetIndented().Log('decompressing with bz2')
+            data = bz2.decompress(data)
+        elif self.compression == 'xz':
+            logger.GetIndented().Log('decompressing with xz')
+            data = lzma.LZMADecompressor().decompress(data)
 
-            if self.compression:
-                logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
+        if self.compression:
+            logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
 
-            logger.GetIndented().Log('saving')
+        logger.GetIndented().Log('saving')
+
+        with StateFile(statepath, 'wb') as statefile:
             statefile.write(data)
-
-        os.replace(tmppath, statepath)

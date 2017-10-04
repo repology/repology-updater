@@ -19,6 +19,7 @@ import json
 import os
 
 from repology.fetchers.helpers.fetch import Fetch
+from repology.fetchers.helpers.state import StateFile
 from repology.logger import NoopLogger
 from repology.version import VersionCompare
 
@@ -63,10 +64,7 @@ class FreshcodeFetcher():
                 logger.Log('adding entry "{}", version {}'.format(entry['name'], entry['version']))
                 state[entry['name']] = entry
 
-        temppath = statepath + '.tmp'
-        with open(temppath, 'w', encoding='utf-8') as newstatefile:
-            json.dump(state, newstatefile)
-
-        os.replace(temppath, statepath)
+        with StateFile(statepath, 'w', encoding='utf-8') as statefile:
+            json.dump(state, statefile)
 
         logger.Log('saved new state, {} entries'.format(len(state)))

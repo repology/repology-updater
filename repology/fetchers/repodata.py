@@ -21,6 +21,7 @@ import os
 import xml.etree.ElementTree
 
 from repology.fetchers.helpers.fetch import Fetch
+from repology.fetchers.helpers.state import StateFile
 from repology.logger import NoopLogger
 
 
@@ -30,8 +31,6 @@ class RepodataFetcher():
         pass
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        tmppath = statepath + '.tmp'
-
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
@@ -59,7 +58,6 @@ class RepodataFetcher():
         logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
 
         logger.GetIndented().Log('saving')
-        with open(tmppath, 'wb') as statefile:
-            statefile.write(data)
 
-        os.replace(tmppath, statepath)
+        with StateFile(statepath, 'wb') as statefile:
+            statefile.write(data)

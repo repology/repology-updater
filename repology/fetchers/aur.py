@@ -20,7 +20,7 @@ import shutil
 import urllib
 
 from repology.fetchers.helpers.fetch import Fetch
-from repology.fetchers.helpers.statedir import TemporaryStateDir
+from repology.fetchers.helpers.state import StateDir
 from repology.logger import NoopLogger
 
 
@@ -33,7 +33,7 @@ class AURFetcher():
             logger.Log('no update requested, skipping')
             return
 
-        with TemporaryStateDir(statepath) as tmpstatepath:
+        with StateDir(statepath) as statedir:
             packages_url = self.url + 'packages.gz'
             logger.GetIndented().Log('fetching package list from ' + packages_url)
             data = Fetch(packages_url).text  # autogunzipped?
@@ -58,5 +58,5 @@ class AURFetcher():
 
                 logger.GetIndented().Log('fetching page {}/{}'.format(page + 1, len(package_names) // pagesize + 1))
 
-                with open(os.path.join(tmpstatepath, '{}.json'.format(page)), 'wb') as statefile:
+                with open(os.path.join(statedir, '{}.json'.format(page)), 'wb') as statefile:
                     statefile.write(Fetch(url, timeout=5).content)

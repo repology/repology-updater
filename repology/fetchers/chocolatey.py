@@ -20,7 +20,7 @@ import shutil
 import xml.etree.ElementTree
 
 from repology.fetchers.helpers.fetch import Fetch
-from repology.fetchers.helpers.statedir import TemporaryStateDir
+from repology.fetchers.helpers.state import StateDir
 from repology.logger import NoopLogger
 
 
@@ -33,14 +33,14 @@ class ChocolateyFetcher():
             logger.Log('no update requested, skipping')
             return
 
-        with TemporaryStateDir(statepath) as tmpstatepath:
+        with StateDir(statepath) as statedir:
             numpage = 0
             nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
             while True:
                 logger.Log('getting ' + nextpageurl)
 
                 text = Fetch(nextpageurl).text
-                with open(os.path.join(tmpstatepath, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
+                with open(os.path.join(statedir, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                     pagefile.write(text)
 
                 # parse next page

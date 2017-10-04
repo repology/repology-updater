@@ -20,7 +20,7 @@ import os
 import shutil
 
 from repology.fetchers.helpers.fetch import Fetch
-from repology.fetchers.helpers.statedir import TemporaryStateDir
+from repology.fetchers.helpers.state import StateDir
 from repology.logger import NoopLogger
 
 
@@ -30,7 +30,7 @@ class FedoraFetcher():
         self.giturl = giturl
         pass
 
-    def LoadSpec(self, package, statepath, logger):
+    def LoadSpec(self, package, statedir, logger):
         specurl = self.giturl + '/{0}.git/plain/{0}.spec'.format(package)
 
         logger.GetIndented().Log('getting spec from {}'.format(specurl))
@@ -45,7 +45,7 @@ class FedoraFetcher():
                 logger.GetIndented(2).Log('failed: {}'.format(r.status_code))  # XXX: check .dead.package, instead throw
             return
 
-        with open(os.path.join(statepath, package + '.spec'), 'wb') as file:
+        with open(os.path.join(statedir, package + '.spec'), 'wb') as file:
             file.write(r.content)
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
@@ -53,7 +53,7 @@ class FedoraFetcher():
             logger.Log('no update requested, skipping')
             return
 
-        with TemporaryStateDir(statepath) as tmpstatepath:
+        with StateDir(statepath) as statedir:
             page = 1
 
             while True:
@@ -62,7 +62,7 @@ class FedoraFetcher():
                 pagedata = json.loads(Fetch(pageurl).text)
 
                 for package in pagedata['packages']:
-                    self.LoadSpec(package['name'], tmpstatepath, logger)
+                    self.LoadSpec(package['name'], statedir, logger)
 
                 page += 1
 
