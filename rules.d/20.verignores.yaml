@@ -4,6 +4,8 @@
 - { verpat: ".*(alpha|beta|rc|prerelease|pre)[0-9._-]*",                                   devel: true }
 
 # 0-9
+- { name: 0ad,                         verpat: "(?:0\\.0\\.|a|alpha ?)([0-9]+)(?:[-_]alpha| .+)?", setver: "alpha $1" }
+- { name: 0ad,                         verpat: "[^a].*",                                   ignorever: true }
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
 - { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignorever: true } # pkgsrc
 
@@ -62,6 +64,8 @@
 - { name: bison,                       verlonger: 3,                 family: sisyphus,     ignorever: true } # alt weirdness
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
+- { name: bloodfrontier,               ver: "0.84",                                        setver: b1 }
+- { name: bloodfrontier,               ver: "0.85",                                        setver: b2 }
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: boost-jam,                   ver: "3.1.18",                                      ignorever: true }
 - { name: boost-jam,                   verpat: "20[0-9]{6}.*",                             ignorever: true }
@@ -127,6 +131,7 @@
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignorever: true }
 - { name: fetch,                                                     family: ravenports,   ignorever: true } # fake
 - { name: findutils,                   verlonger: 3,                 family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { namepat: "firebird[0-9._-]*",      verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.[0-9]{5,}.*", setver: "$1" }
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
@@ -166,6 +171,8 @@
 - { name: hunspell-en,                 verpat: "20[0-9]{6}.*",                             ignorever: true } # ALT
 - { name: hunspell-es,                 verpat: "20[0-9]{2}.*",                             ignorever: true } # actual version is 2.2
 - { name: hunspell-it,                 ver: "2016.2.13",                                   ignorever: true } # the real version is 2016.02.10, see #298
+- { name: hunspell-pt-br,              ver: "20131017",                                    ignorever: true }
+- { name: hunspell-pt_br,              ver: "2013.10.30",                                  setver: "3.2" } # see report
 
 # I
 - { name: iaxclient,                   ver: "2.1",                   family: fedora,       ignorever: true } # there's beta only
@@ -180,6 +187,7 @@
 # J
 - { name: jade,                        verpat: "1\\.2\\.1-[0-9]{2}.*",                     ignorever: true } # nix, adds debian patchlevel
 - { name: john,                        verpat: "1.8.0.2",            family: sisyphus,     ignorever: true } # ldv@altlinux.org
+- { name: josm,                        verpat: "0\\.0\\.svn([0-9]+)",                      setver: "$1" }
 - { name: json-c,                      verpat: "0\\.12\\.1-[0-9]{8}.*",                    ignorever: true } # macports garbage
 - { name: jwm,                         verpat: "[0-9]+",                                   ignorever: true }
 
@@ -187,7 +195,7 @@
 - { name: kbuild,                      verlonger: 3,                                       ignorever: true } # 0.1.9998.8.2814.25 @ pkgsrc
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignorever: true } # 0.1.9998.r2813 | 0.1.9998svn2814
 - { name: kdnssd,                      verpat: "1[6789]\\..*",                             ignorever: true }
-- { name: kdiff3,                      verpat: "1\\.7\\.0-[0-8a-f]{7}.*",                 ignorever: true } # nix snapshot
+- { name: kdiff3,                      verpat: "1\\.7\\.0-[0-8a-f]{7}.*",                  ignorever: true } # nix snapshot
 - { name: kdiff3,                      verpat: ".*201[789].*",                             ignorever: true } # nix snapshot
 - { name: knewstuff,                   verpat: "1[6789]\\..*",                             ignorever: true }
 - { name: keybase,                     verpat: "20170209.*",                               ignorever: true } # nix garbage
@@ -219,6 +227,8 @@
 - { name: libimobiledevice,            verlonger: 3,                 family: kaos,         ignorever: true } # fake
 - { name: libkfapi,                    verlonger: 2,                 family: kaos,         ignorever: true } # fake
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
+- { name: libpaper,                    ver: "1.1.24",                                      setver: "$0nmu0" }
+- { name: libpaper,                    verpat: "(1\\.1\\.24)[^0-9]+([0-9]+)",              setver: "$1nmu$2" } # they all take from debian and there's num suffix
 - { name: libpng,                      verpat: "1\\.7\\.0beta.*",    family: freshcode,    ignorever: true }
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
 - { name: libtheora,                   ver: "1.2.0",                 family: openmandriva, ignorever: true } # lie, not released yet
@@ -242,6 +252,9 @@
 - { name: magic,                       verpat: "[0-9]\\.[0-9]\\.[0-9]{3}",                 unignorever: true } # unignore some good -devel's
 - { name: matreshka,                   ver: "0.8.0",                 family: fedora,       ignorever: true } # fake (see report)
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
+- { name: mkgmap,                      verpat: "0\\.0\\.0svn([0-9]{4,})",                  setver: "r$1" }
+- { name: mkgmap,                      verpat: "[0-9]{4,}",                                setver: "r$0" }
+- { name: mkgmap-splitter,             verpat: "0\\.0\\.0svn([0-9]{3,})",                  setver: "r$1" }
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
 - { name: mpfr,                        ver: "3.1.5.2",                                     ignorever: true } # openbsd fake
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # fake
@@ -357,6 +370,7 @@
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignorever: true } # 2.15.0 was not released yet
 - { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
 - { name: tome2,                       ver: "235",                                         ignorever: true }
+- { name: [tor,tor-devel],             verpat: "(.*)[._-][ar].*",                          setver: "$1" } # version is self-sufficient; remove redundant alpha/rc suffix
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
 - { name: tuxpaint-stamps,             verpat: "20[0-9]{6}.*",                             ignorever: true } # it's separated
@@ -385,6 +399,8 @@
 - { name: w3m,                         verlonger: 3,                                       ignorever: true }
 - { name: w3m,                         verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.(git)?20[0-9]{6}.*", unignorever: true, devel: true }
 - { name: warsow,                      ver: "2.10",                  family: debuntu,      ignorever: true } # playdeb weirdnes
+- { name: widelands,                   verpat: "(?:b|build|0\\.)?([0-9]{2})(?:\\.0)?",     setver: "build$1" }
+- { name: widelands,                   verpat: "[^b].*",                                   ignorever: true }
 - { name: whatweb,                     vergt: "0.4.7",               family: [debuntu,openbsd,gentoo,freebsd], ignorever: true } # 0.4.8 has never been released
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
