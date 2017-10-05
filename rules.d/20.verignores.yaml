@@ -4,7 +4,7 @@
 - { verpat: ".*(alpha|beta|rc|prerelease|pre)[0-9._-]*",                                   devel: true }
 
 # 0-9
-- { name: 0ad,                         verpat: "(?:0\\.0\\.|a|alpha ?)([0-9]+)(?:[-_]alpha| .+)?", setver: "alpha $1" }
+- { name: [0ad,"0 A.D."],              verpat: "(?:0\\.0\\.|a|alpha ?)([0-9]+)(?:[-_]alpha| .+)?", setver: "alpha $1" }
 - { name: 0ad,                         verpat: "[^a].*",                                   ignorever: true }
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
 - { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignorever: true } # pkgsrc
