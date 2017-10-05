@@ -58,4 +58,5 @@
 - { family: libregamewiki, name: "valyria tear",                     setname: valyriatear }
 - { family: libregamewiki, name: "vega strike",                      setname: vegastrike }
 - { family: libregamewiki, name: "vulture's eye",                    setname: vultures-eye }
+- { family: libregamewiki, name: "warp rogue",                       setname: wrogue}
 - { family: libregamewiki, name: "yo frankie!",                      setname: yofrankie }
