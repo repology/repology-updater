@@ -1,0 +1,25 @@
+###########################################################################
+# Gentoo
+###########################################################################
+- name: funtoo
+  type: repository
+  desc: Funtoo
+  family: gentoo
+  color: '4e4e71'
+  sources:
+    - name: [ core-hw-kit, core-kit, desktop-kit, dev-kit, editors-kit, games-kit, gnome-kit, java-kit, kde-kit, media-kit, net-kit, nokit, perl-kit, php-kit, python-kit, science-kit, security-kit, text-kit, xorg-kit ]
+      fetcher: Git
+      parser: GentooGit
+      url: 'https://github.com/funtoo/{source}.git'
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+  repolinks:
+    - desc: Funtoo Linux home
+      url: http://www.funtoo.org/Welcome
+    - desc: GitHub organization
+      url: https://github.com/funtoo/
+  packagelinks:
+    - desc: Git directory
+      url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
+    - desc: View ebuild
+      url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{origversion}.ebuild'
+  tags: [ all, production ]
