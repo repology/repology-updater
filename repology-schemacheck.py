@@ -130,6 +130,7 @@ schemas = {
             'verle': str,
 
             'setname': str,
+            'setver': Any(bool, str, [str]),
             'addflavor': Any(str, bool),
             'ignorever': bool,
             'unignorever': bool,
