@@ -535,12 +535,16 @@
 - { namepat: "nvidia[0-9._-]+", setname: nvidia }
 - { namepat: "nvidia-drivers?[0-9._-]*", setname: nvidia }
 - { name: nvidia-graphics-drivers-tegra, setname: nvidia, ignorever: true, addflavor: tegra }
-#- { namepat: "nvidia-graphics-drivers.*", setname: nvidia }
+- { namepat: "nvidia-graphics-drivers[0-9._-]*", setname: nvidia }
+- { namepat: "nvidia-graphics-drivers[0-9._-]*-updates", setname: nvidia, addflavor: updates }
+- { namepat: "nvidia-graphics-drivers-legacy[x0-9._-]*", setname: nvidia }
+- { namepat: "nvidia-graphics-drivers-experimental[x0-9._-]*", setname: nvidia, ignorever: true }
+- { name: nvidia-graphics-drivers-updates, setname: nvidia, addflavor: updates }
 - { namepat: "nvidia-legacy.*", setname: nvidia }
 #- { namepat: "nvidia-libgl.*beta.*", setname: nvidia, ignorever: true, addflavor: libgl }
 #- { namepat: "nvidia-glx.*beta.*", setname: nvidia, ignorever: true, addflavor: glx }
-- { namepat: "nvidia-glx-src[0-9._-]*", setname: nvidia, addflavor: glx }
-- { name: nvidia-glx-common, setname: nvidia, addflavor: glx }
+- { namepat: "nvidia_glx_src[0-9._-]*", setname: nvidia, addflavor: glx }
+- { name: nvidia_glx_common, setname: nvidia, addflavor: glx }
 - { namepat: "xorg-x11-drv-nvidia[x0-9._-]*", setname: nvidia }
 - { namepat: "(mhwd|khd)-nvidia[x0-9._-]*", setname: nvidia, addflavor: "$1" }
 - { namepat: "nvidia-bfq[x0-9._-]*", setname: nvidia, addflavor: bfq }
