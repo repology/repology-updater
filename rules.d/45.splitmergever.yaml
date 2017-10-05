@@ -151,6 +151,16 @@
 - { namepat: "clojure[0-9.]+",         setname: clojure }
 
 - { namepat: "cmake-?[0-9.]+",         setname: cmake }
+- name:
+    - cmake-cursesui
+    - cmake-cursesui-qt4ui
+    - cmake-cursesui-qt5ui
+    - cmake-doc
+    - cmake-doc-qch
+    - cmake-gui
+    - cmake-modules
+  setname: cmake
+  addflavor: true
 
 - { name: [compiz-core,compiz-gtk],    setname: compiz }
 - { namepat: "compiz[0-9._-]+",        setname: compiz }

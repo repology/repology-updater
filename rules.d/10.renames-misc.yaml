@@ -111,6 +111,7 @@
 - { name: backuppc4,                   setname: backuppc                  }
 - { name: balsa-gtk2,                  setname: balsa                     }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
+- { name: bash-interactive,            setname: bash, addflavor: interactive }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: bazaar,                      setname: bzr                       }
 - { name: bcel5_3,                     setname: bcel                      }
@@ -193,6 +194,7 @@
 - { name: cfr-decompiler,              setname: cfr }
 - { name: chakra,                      setname: chakracore, family: homebrew }
 - { name: chefdk,                      setname: chef-dk }
+- { name: clementine-free,             setname: clementine                }
 - { name: clipit-gtk3,                 setname: clipit                    }
 - { name: clipperlib,                  setname: polyclipping              }
 - { name: cloud-watch,                 setname: aws-cw-tools              }
@@ -428,6 +430,7 @@
 - { name: giflib4,                     setname: giflib                    }
 - { name: libungif,                    setname: giflib                    } # former name
 - { namepat: "gimp2-(.*)",             setname: "gimp-$1"                 }
+- { name: [git-base,git-docs,git-gitk,git-contrib,git-lite,git-gui,git-bashcompletion,gitweb,git-minimal,git-with-svn],  setname: git, addflavor: true }
 - { name: gitg0,                       setname: gitg,                     family: [ freebsd ]  }
 - { name: gitter-bin,                  setname: gitter                    }
 - { name: [git-flow,git_flow],         setname: gitflow                   }

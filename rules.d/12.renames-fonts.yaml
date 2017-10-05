@@ -112,6 +112,31 @@
 - { name: babelstone-runic-fonts, setname: "fonts:babelstone-runic" }
 
 - name:
+    - baekmuk-bdf-fonts
+    - baekmuk-bitmap-fonts
+    - bdf-baekmuk
+    - fonts-bitmap-baekmuk
+  setname: "fonts:baekmuk"
+  addflavor: bdf
+
+- name:
+    - baekmuk-ttf
+    - baekmuk-ttf-fonts
+    - fonts-ttf-baekmuk
+    - ko-baekmuk-ttf
+    - ttf-baekmuk
+  setname: "fonts:baekmuk"
+  addflavor: ttf
+
+- name:
+    - baekmuk-fonts
+    - fonts-baekmuk
+    - ko-baekmuk
+    - ko-baekmuk-fonts
+    - xfonts-baekmuk
+  setname: "fonts:baekmuk"
+
+- name:
     - beteckna-fonts
     - fonts-beteckna
     - fonts-otf-beteckna
