@@ -812,6 +812,7 @@
 - { name: [libslang,libslang2,s-lang,slang2,slang1], setname: slang       }
 - { name: skobo,                       setname: kobodeluxe                } # old name
 - { name: slashem-tty,                 setname: slashem                   }
+- { name: smplayer-qt4,                setname: smplayer, addflavor: qt4 }
 - { name: sdl-asylum,                  setname: asylum                    }
 - { name: sni-qt4,                     setname: sni-qt                    }
 - { name: snorenotify-qt5,             setname: snorenotify               }
