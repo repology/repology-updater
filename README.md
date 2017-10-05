@@ -51,7 +51,7 @@ version are always parsed.
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔     |         |          |
 | freshcode.club                   | ✔       |         |       | ✔     | ✔       |          |
-| Gentoo                           | ✔       | ✔       | ✔     | ✔     | ✔ (1)   | ✔ (1)    |
+| Gentoo, Funtoo                   | ✔       | ✔       | ✔     | ✔     | ✔ (1)   | ✔ (1)    |
 | Guix                             | ✔       |         |       | ✔     | ✔       |          |
 | GoboLinux                        | ✔       |         |       | ✔     | ✔       |          |
 | Hackage                          |         |         |       | ✔ (2) |         |          |
