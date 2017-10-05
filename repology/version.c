@@ -18,7 +18,7 @@
  */
 
 #include <Python.h>
-#include <libversion/compare.h>
+#include <libversion/version.h>
 
 static PyObject* VersionCompare(PyObject *self, PyObject *args) {
 	(void)self; // (unused)
