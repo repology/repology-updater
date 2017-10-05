@@ -96,6 +96,28 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'foo', 'version': '1.0', 'expect_name': 'foo', 'expect_effname': 'bar_foo'}
         )
 
+    def test_setver(self):
+        self.check_transformer(
+            '[ { setver: "2.0" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_version': '2.0'}
+        )
+
+    def test_setver_subst(self):
+        self.check_transformer(
+            '[ { setver: "2.$0" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_version': '2.1.0'}
+        )
+        self.check_transformer(
+            '[ { verpat: "([0-9]+)\\\\.([0-9]+)", setver: "$2.$1" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_version': '0.1'}
+        )
+
+    def test_setver_setname_subst(self):
+        self.check_transformer(
+            '[ { namepat: "f(.*)", verpat: "1(.*)", setname: "$1/$0", setver: "$1/$0" } ]',
+            {'name': 'foo', 'version': '1.0', 'expect_effname': 'oo/foo', 'expect_version': '.0/1.0'}
+        )
+
     def test_tolowername(self):
         self.check_transformer(
             '[ { tolowername: true } ]',
