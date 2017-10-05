@@ -213,6 +213,15 @@ class PackageTransformer:
             else:
                 package.effname = self.dollar0.sub(package.effname, rule['setname'])
 
+        if 'setver' in rule:
+            if package.origversion is None:
+                package.origversion = package.version
+
+            if ver_match:
+                package.version = self.dollarN.sub(lambda x: ver_match.group(int(x.group(1))), rule['setver'])
+            else:
+                package.version = self.dollar0.sub(package.version, rule['setver'])
+
         if 'replaceinname' in rule:
             for pattern, replacement in rule['replaceinname'].items():
                 package.effname = package.effname.replace(pattern, replacement)

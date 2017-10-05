@@ -159,6 +159,10 @@ Examples:
 - { fanmily: gentoo, category: dev-perl, setname: "perl:$0" }
 ```
 
+### server
+
+TODO
+
 ### ignore
 
 Completely ignore package. It will not appear anywhere in repology.
