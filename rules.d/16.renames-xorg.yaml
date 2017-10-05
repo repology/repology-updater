@@ -2,9 +2,11 @@
 
 # servers
 - { name: modular-xorg-server,         setname: xorg-server }
-- { namepat: "(xorg-server-.*)-dev", setname: "$1", ignorever: true }
-- { namepat: "(xorg-server)[0-9.]+(-.*)", setname: "$1$2" }
+- { namepat: "(xorg-server(?:-.+)?)-dev", setname: "$1", ignorever: true }
+- { namepat: "(xorg-server)[0-9.]+(-.+)?", setname: "$1$2" }
+- { namepat: "xorg-server-lts-[a-z]+", setname: xorg-server }
 - name:
+    - xorg-dmx
     - xorg-server-bug865
     - xorg-server-common
     - xorg-server-common-mir
@@ -13,6 +15,7 @@
     - xorg-server-devel-mir
     - xorg-server-devel-nosystemd
     - xorg-server-hwcursor-gamma
+    - xorg-server-hwe-16.04
     - xorg-server-mir
     - xorg-server-nosystemd
     - xorg-server-systemd
@@ -36,7 +39,6 @@
 
 # protos
 - { name: xorg-xcb-proto,              setname: xcb-proto                 }
-- { name: xorg-dmx, family: freebsd,   setname: xorg-server-xdmx          }
 - { name: [xproxymngproto,xorg-xproxymanagementprotocol,xorg-xproxymngproto], setname: xproxymanagementprotocol }
 - { name: [libxcbutil-proto,mingw-w64-xcb-proto,xorg-xcbproto-devel], setname: xcb-proto }
 - { name: xprintproto, setname: printproto }
