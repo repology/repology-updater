@@ -39,6 +39,8 @@
 
 - { name: at-spi2-core, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
+- { name: [atk-reference,atk-docs], setname: atk, addflavor: docs }
+- { name: libatk, setname: atk }
 - { name: atk, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?atkmm[0-9._-]*", setname: atkmm }
@@ -52,6 +54,53 @@
 
 - { namepat: "automake[_-]?[0-9.]+",   setname: automake } # do we need splits for this?
 
+- name:
+    - avahi-app
+    - avahi-autoipd
+    - avahi-glib2
+    - avahi-gtk
+    - avahi-gtk2
+    - avahi-gtk3
+    - avahi-header
+    - avahi-libdns
+    - avahi-mono
+    - avahi-nosystemd
+    - avahi-qt4
+    - avahi-sharp
+    - avahi-ui
+  setname: avahi
+  addflavor: true
+
+- { namepat: "awesome[0-9._-]+",       setname: awesome }
+
+- name:
+    - bareos-bat
+    - bareos-bconsole
+    - bareos-client
+    - bareos-client-static
+    - bareos-common
+    - bareos-database-common
+    - bareos-database-mysql
+    - bareos-database-postgresql
+    - bareos-database-sqlite3
+    - bareos-database-tools
+    - bareos-devel
+    - bareos-director
+    - bareos-director-python-plugin
+    - bareos-docs
+    - bareos-filedaemon
+    - bareos-filedaemon-python-plugin
+    - bareos-server
+    - bareos-storage
+    - bareos-storage-fifo
+    - bareos-storage-python-plugin
+    - bareos-storage-tape
+    - bareos-tools
+    - bareos-traymonitor
+    - bareos-webui
+  setname: bareos
+  addflavor: true
+
 - { namepat: "bash[0-9]+",             setname: bash }
 - { name: bash, verpat: "3\\..*",      setname: bash3 }
 
@@ -64,6 +113,12 @@
 - { name: bind, verpat: "9\\.11\\..*", setname: bind911 }
 
 - { namepat: "blender[0-9._-]+",       setname: blender }
+
+- name:
+    - bogofilter-sqlite
+    - bogofilter-tc
+  setname: bogofilter
+  addflavor: true
 
 - { name: bowtie2,                     setname: bowtie }
 - { name: bowtie, verpat: "2\\..*",    setname: bowtie2 }

@@ -193,6 +193,7 @@
 - { name: ["python:dbus", "python:dbus-common"], setname: "python:dbus-python" }
 
 # These are more applications than modules, so rename
+- { name: "python:ansible",            setname: ansible                   }
 - { name: "python:awscli",             setname: awscli                    }
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:diffoscope",         setname: diffoscope                }

@@ -40,6 +40,7 @@
 - { name: adzap,                       setname: adzapper                  }
 - { name: aescrypt-packetizer,         setname: aescrypt                  }
 - { name: aflex-ayacc,                 setname: afay                      } # ravenports
+- { name: afterstep1,                  setname: afterstep                 }
 - { name: apq-base,                    setname: apq                       } # ravenports
 - { name: [argyll,argyll-cms],         setname: argyllcms                 }
 - { name: arping2,                     setname: arping                    }
@@ -51,11 +52,16 @@
 - { name: alienarena-data,             setname: alien-arena-data          }
 - { name: [alsa,libalsa,libalsa2,alsa-lib-noassertion], setname: alsa-lib }
 - { name: [american-fuzzy-lop,afl-fuzz], setname: afl                     }
+- { name: amule-devel,                 setname: amule, ignorever: true }
+- { name: amule-daemon,                setname: amule, addflavor: daemon }
+- { name: amule-gui,                   setname: amule, addflavor: gui }
 - { name: anacron, verpat: "2\\.[4-9].*", setname: anacron2               } # different project (a fork?)
 - { name: angularjs,                   setname: angular.js                }
+- { name: ansible1,                    setname: ansible                   }
 - { name: antimicro-qt4,               setname: antimicro                 }
 - { name: antigraingeometry,           setname: agg                       }
 - { name: aprutil1,                    setname: apr-util                  }
+- { name: arduino-avrdude,             setname: avrdude, addflavor: adruino }
 - { name: armagetron,                  setname: armagetronad              }
 - { name: armagetronad-server,         setname: armagetronad              } # merge
 - { name: [arpack-ng-mpich,arpack-ng-openmpi,libarpack-ng], setname: arpack-ng }
@@ -73,6 +79,8 @@
 - { name: apache-flume-ng,             setname: flume                     }
 - { name: apache-jena,                 setname: jena                      }
 - { name: apache-jena-fuseki,          setname: jena                      }
+- { name: apache-openoffice,           setname: openoffice                }
+- { name: apache-openoffice-devel,     setname: openoffice, ignorever: true }
 - { name: [apcupsd-x11,apcupsd-cgi],   setname: apcupsd                   }
 - { name: aptanastudio,                setname: aptana-studio }
 - { name: [aqbanking5,aqbanking5-gtk,aqbanking5-svn], setname: aqbanking }
@@ -132,8 +140,8 @@
 - { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
 - { name: bombono,                     setname: bombono-dvd               }
 - { name: [booch95, gnat-booch95],     setname: adabooch                  }
-- { name: [boost-all,boost-libs,boost-headers,boost-python-libs,boost-python,boost-mpi,boost-bcp,boost-libraries], setname: boost }
-- { namepat: "boost-mpi-source[0-9-.]+", setname: boost                   }
+- { name: [boost-all,boost-libs,boost-headers,boost-python-libs,boost-python,boost-mpi,boost-bcp,boost-libraries,boost-python3-libs], setname: boost, addflavor: true }
+- { namepat: "boost-mpi-source[0-9-.]+", setname: boost, addflavor: boost-mpi }
 - { namepat: "boost[0-9_.]+",          setname: boost                     }
 - { namepat: "botan[0-9.]+",           setname: botan                     }
 - { namepat: "libbotan[0-9.]*",        setname: botan                     }
@@ -148,7 +156,7 @@
 - { name: bullet3,                     setname: bullet                    }
 - { name: bullet-docs,                 setname: bullet, addflavor: docs   }
 - { name: byacc-j,                     setname: byaccj,                   family: [ debuntu ]  }
-- { name: bzflag-server,               setname: bzflag                    }
+- { name: bzflag-server,               setname: bzflag, addflavor: server }
 - { name: bzr-tools,                   setname: bzrtools                  }
 
 # C
@@ -173,10 +181,11 @@
     - cairo-xcb
     - libcairo
   setname: cairo
+  addflavor: true
 - { name: cattle-1.0,                  setname: cattle                    }
 - { name: cavez-of-phear,              setname: cavezofphear              }
 - { name: [capnp,capnproto-0.6],       setname: capnproto }
-- { name: cblas-reference,             setname: cblas                     }
+- { name: cblas-reference,             setname: cblas, addflavor: docs }
 - { name: cblas-tmg,                   setname: cblas                     }
 - { name: ceti-2-themes,               setname: ceti-2-theme              }
 - { name: [center-im,centerim5],       setname: centerim                  }
@@ -192,13 +201,13 @@
 - { name: collector-sidecar,           setname: graylog-collector-sidecar }
 - { name: color-code,                  setname: colorcode                 }
 - { name: couchpotatoserver,           setname: couchpotato               }
-- { name: cbatticon-gtk2,              setname: cbatticon                 }
+- { name: cbatticon-gtk2,              setname: cbatticon, addflavor: gtk2 }
 - { name: [ccache-memcached, ccache-memcached-static, ccache-static], setname: ccache, addflavor: true } # freebsd subpackages
 - { name: cdogs,                       setname: cdogs-sdl                 }
 - { name: [cdparanoia-iii,cdparanoia-overread], setname: cdparanoia       }
 - { name: [cegui-mk2, cegui_mk-2],     setname: cegui                     }
 - { name: ce-x11,                      setname: ce                        }
-- { name: celestia-nonfree,            setname: celestia,                 family: [ debuntu ]  }
+- { name: celestia-nonfree,            setname: celestia }
 - { name: cfitsio3,                    setname: cfitsio                   }
 - { name: cglib3,                      setname: cglib                     }
 - { name: charls1,                     setname: charls                    }
@@ -722,6 +731,7 @@
   setname: openssh
   addflavor: true
 - { name: ssh-copy-id, setname: openssh, addflavor: ssh-copy-id }
+- { name: openoffice.org, setname: openoffice }
 - { name: openssh-portable, setname: openssh }
 - { name: [orcus,orcus0.12],           setname: liborcus }
 - { name: osmpbf,                      setname: libosmpbf }
