@@ -195,6 +195,7 @@
 - { name: chakra,                      setname: chakracore, family: homebrew }
 - { name: chefdk,                      setname: chef-dk }
 - { name: clementine-free,             setname: clementine                }
+- { name: cl-asdf,                     setname: asdf                      }
 - { name: clipit-gtk3,                 setname: clipit                    }
 - { name: clipperlib,                  setname: polyclipping              }
 - { name: cloud-watch,                 setname: aws-cw-tools              }
@@ -865,6 +866,7 @@
 
 # U
 - { name: [uade123,uade2],             setname: uade                      }
+- { name: uiop,                        setname: asdf                      }
 - { name: [unace-bin,unace-nonfree],   setname: unace                     }
 - { name: ultimate-stunts,             setname: ultimatestunts            }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
