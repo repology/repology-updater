@@ -97,6 +97,7 @@
 - { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
 - { name: crda,                        ver: "3.18_2016.02.08",                             ignorever: true }
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
+- { name: critterding,                 verpat: "1\\.0(beta.*)",                            setver: "$1" }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
 - { name: cvs,                         ver: "1.20120905",                                  ignorever: true }
 - { name: cvs,                         ver: "1.12.13.1",                                   ignorever: true } # respin for Windows *only* to fix carriage returns, it does not make sense to list it
