@@ -86,7 +86,8 @@
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
-- { name: clementine-player,           verlonger: 3,                 family: kaos,          ignorever: true }
+- { name: clementine-player,           verlonger: 3,                 family: kaos,         ignorever: true }
+- { name: cl-asdf,                     verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: clusterssh,                                                family: gentoo,       ignorever: true } # perl module version mangling rules apply here
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
