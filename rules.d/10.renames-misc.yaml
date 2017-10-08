@@ -830,6 +830,7 @@
 - { name: structure-synth,             setname: structuresynth            }
 - { name: stone-soup-ncurses,          setname: stone-soup                }
 - { name: stunt-rally,                 setname: stuntrally                }
+- { name: suite-sparse,                setname: suitesparse               }
 - { name: svm_light,                   setname: svmlight }
 - { name: [sweet-home-3d,sweethome3d-application], setname: sweethome3d   }
 - { name: switchboard-plug-network,    setname: switchboard-plug-networking }
