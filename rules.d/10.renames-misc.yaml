@@ -557,6 +557,7 @@
 - { name: [libgeotiff-dfsg,libgeotiff-epsg], setname: libgeotiff          }
 - { name: libgetopt-java,              setname: java-getopt               }
 - { name: libglpng,                    setname: glpng                     }
+- { name: libgnurl,                    setname: gnurl                     }
 - { name: libgom,                      setname: gom                       }
 - { name: libgranite,                  setname: granite                   }
 - { name: libgtkdatabox,               setname: gtkdatabox                }
