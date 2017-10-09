@@ -30,6 +30,7 @@ import yaml
 
 families = [
     'alpine',
+    'aosc',
     'anitya',
     'arch',
     'centos',
