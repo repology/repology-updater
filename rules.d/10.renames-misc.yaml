@@ -866,7 +866,7 @@
 
 # U
 - { name: [uade123,uade2],             setname: uade                      }
-- { name: uiop,                        setname: asdf                      }
+- { name: uiop,                        setname: asdf, addflavor: true }
 - { name: [unace-bin,unace-nonfree],   setname: unace                     }
 - { name: ultimate-stunts,             setname: ultimatestunts            }
 - { name: upnp,                        setname: libupnp,                  family: [ freebsd ]  }
