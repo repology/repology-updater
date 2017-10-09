@@ -80,6 +80,8 @@ class ArchDBParser():
                         pkg.licenses.append(line)
                     elif tag == 'PACKAGER':
                         pkg.maintainers += GetMaintainers(line)
+                    elif tag == 'BASE':
+                        pkg.extrafields['base'] = line
                     elif line.startswith('%') and line.endswith('%'):
                         tag = line[1:-1]
 
