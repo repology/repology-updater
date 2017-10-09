@@ -39,7 +39,7 @@ class ChocolateyFetcher():
             while True:
                 logger.Log('getting ' + nextpageurl)
 
-                text = Fetch(nextpageurl).text
+                text = Fetch(nextpageurl, timeout=5).text
                 with open(os.path.join(statedir, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                     pagefile.write(text)
 
