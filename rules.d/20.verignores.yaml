@@ -137,6 +137,8 @@
 - { namepat: "firebird[0-9._-]*",      verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.[0-9]{5,}.*", setver: "$1" }
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
+- { name: flvstreamer,                 ver: "2.1.c.1",                                     setver: "2.1c1" }
+- { name: flvstreamer,                 ver: "2.1c",                                        setver: "2.1c0" }
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
 - { name: "fonts:eeyek",               ver: "20091204",                                    ignorever: true }
 - { name: "fonts:fira-sans",           ver: "20[0-9]{6}",                                  ignorever: true } # openbsd garbage
