@@ -45,6 +45,8 @@ class PackageFormatter(string.Formatter):
             value = pkg.origversion if pkg.origversion is not None else pkg.version
         elif key == 'category':
             value = pkg.category if pkg.category is not None else ''
+        elif key == 'archrepo':
+            value = 'community' if pkg.subrepo == 'community' else 'packages'
         elif key in pkg.extrafields:
             value = pkg.extrafields[key]
 

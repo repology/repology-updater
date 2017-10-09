@@ -21,9 +21,9 @@
     # XXX: there are only two git repos: "packages" and "community", so these do
     # not map 1:1 onto subrepos and some links are broken; not sure on the fix yet
     - desc: Git repository
-      url: 'https://git.archlinux.org/svntogit/{subrepo}.git/tree/trunk?h=packages/{name}'
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{name}'
     - desc: PKGBUILD
-      url: 'https://git.archlinux.org/svntogit/{subrepo}.git/tree/trunk/PKGBUILD?h=packages/{name}'
-    - desc: Package information
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{name}'
+    - desc: Package information (x86_64)
       url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{name}/'
   tags: [ all, production, have_testdata ]
