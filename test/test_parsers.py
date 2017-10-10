@@ -182,6 +182,7 @@ class TestParsers(unittest.TestCase):
                 'homepage': 'http://www.zlib.net/',
                 'licenses': ['custom'],
                 'maintainers': ['pierre@archlinux.de'],
+                'extrafields': {'base': 'zlib'},
             }
         )
 
