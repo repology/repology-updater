@@ -60,17 +60,17 @@
 				<tr>
 					<td class="text-right break-word">
 						<a href="{{ url_for('maintainer', maintainer=maintainer.maintainer) }}">
-							{{ maintainer.maintainer }}
+							{{- maintainer.maintainer -}}
 						</a>
 					</td>
 					<td class="text-center">
 						<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
-							{{ maintainer.num_metapackages }}
+							{{- maintainer.num_metapackages -}}
 						</a>
 					</td>
 					<td class="text-center">
 						<a href="{{ url_for('metapackages_outdated_by_maintainer', maintainer=maintainer.maintainer) }}">
-							{{ maintainer.num_metapackages_outdated }}
+							{{- maintainer.num_metapackages_outdated -}}
 						</a>
 					</td>
 					<td class="text-center">
