@@ -876,6 +876,7 @@
 - { name: [libupnp1.8,libupnp4],       setname: libupnp                   }
 - { name: [ufconfig,suitesparse-common-devel], setname: suitesparseconfig } # from report: ufconfig is an old name for suitesparseconfig
 - { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
+- { name: [ufoai-data,ufoai-maps,ufoai-music], setname: ufoai, addflavor: true }
 - { name: [util-linux-aes,util-linux-minimal,util-linux-nosystemd,util-linux-nosystemd-debug,util-linux-selinux,util-linux-systemd], setname: util-linux, addflavor: true }
 
 # V
