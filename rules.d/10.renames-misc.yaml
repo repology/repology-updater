@@ -886,7 +886,8 @@
 - { name: vdr-devel,                   setname: vdr, ignorever: true      }
 - { name: vertx,                       setname: vert.x }
 - { name: [libvidstab,vid-stab,vidstab], setname: vid.stab }
-- { name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw,vim-gvim], setname: vim }
+- { name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw,vim-gvim], setname: vim, addflavor: true }
+- { name: vim-vint,                    setname: vint }
 - { name: [virtuoso-6,virtuoso-7,virtuoso-opensource,virtuoso-ose,virtuoso6], setname: virtuoso }
 - { name: [visual-studio-code,visual-studio-code-oss,visualstudiocode], setname: vscode }
 - { name: visual-studio-code-insiders, setname: vscode, ignorever: true }
