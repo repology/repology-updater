@@ -72,6 +72,10 @@
 
 - { name: git_fame,                    setname: git-fame-rb, wwwpart: oleander.io }
 
+- { name: hermes,                      setname: hermes-proxy, wwwpart: hermes-project.com }
+- { name: hermes,                      setname: hermes-auth, wwwpart: ralt/hermes }
+# otherwise, (dead?) pixel format convertsion library
+
 - { name: hugo,                        setname: hugo-interactive-fiction, verpat: "3\\..*" }
 - { name: hugo,                        setname: hugo-emulator, verpat: "2\\..*" }
 - { name: hugo,                        setname: hugo-sitegen }

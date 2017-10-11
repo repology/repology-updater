@@ -562,6 +562,7 @@
 - { name: libgom,                      setname: gom                       }
 - { name: libgranite,                  setname: granite                   }
 - { name: libgtkdatabox,               setname: gtkdatabox                }
+- { name: libhermes,                   setname: hermes                    }
 - { name: libiksemel,                  setname: iksemel                   }
 - { name: libintl,                     setname: gettext                   }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
