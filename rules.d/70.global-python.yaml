@@ -218,6 +218,7 @@
 - { name: "python:stormssh",           setname: stormssh                  }
 - { name: "python:uwsgi",              setname: uwsgi                     }
 - { name: "python:uwsgitop",           setname: uwsgitop                  }
+- { name: "python:vint",               setname: vint                      }
 - { name: "python:waf",                setname: waf                       }
 - { name: "python:xandikos",           setname: xandikos                  }
 - { name: "python:xdot",               setname: xdot                      }

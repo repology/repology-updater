@@ -165,6 +165,7 @@
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gnash,                       verpat: ".*git.*",                                  ignorever: true } # snapshots
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignorever: true }
+- { name: gts,                         verpat: "20[0-9]{6,}.*",                            ignorever: true }
 
 # H
 - { name: hex2bin,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR snapshot

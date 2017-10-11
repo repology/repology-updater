@@ -439,6 +439,7 @@
 - { name: gl117,                       setname: gl-117                    }
 - { name: [gmrun-multihead,gmrun-xdg], setname: gmrun }
 - { name: gnash-git,                   setname: gnash, ignorever: true }
+- { namepat: "gnat(cross-binutils.*)", setname: "$1", addflavor: gnat }
 - { name: [gnomephotoprinter,gnome-photo-print], setname: gnome-photo-printer }
 - { name: gnu-barcode,                 setname: barcode                   }
 - { name: [gnu-chess,gnuchess4],       setname: gnuchess                  }
