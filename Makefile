@@ -7,6 +7,8 @@ CFLAGS+=	-Wall -Wextra
 CPPFLAGS+=	`pkg-config --cflags rpm`
 LDFLAGS+=	`pkg-config --libs rpm`
 
+STATICDIR=	repologyapp/static
+
 all: helpers/rpmcat/rpmcat repology/version.so gzip-static
 
 repology/version.so: build/repology/version.so
@@ -16,14 +18,14 @@ build/repology/version.so: repology/version.c
 	env CFLAGS="${CFLAGS}" python3 setup.py build --build-lib build build
 
 gzip-static:
-	gzip -9 -f -k -v static/*.css static/*.js static/*.ico static/*.svg
+	gzip -9 -f -k -v ${STATICDIR}/*.css ${STATICDIR}/*.js ${STATICDIR}/*.ico ${STATICDIR}/*.svg
 
 helpers/rpmcat/rpmcat: helpers/rpmcat/rpmcat.c
 	${CC} helpers/rpmcat/rpmcat.c -o helpers/rpmcat/rpmcat ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}
 
 clean:
 	rm -f helpers/rpmcat/rpmcat
-	rm -f static/*.gz
+	rm -f ${STATICDIR}/*.gz
 	rm -rf build
 	rm -f repology/version.so
 
