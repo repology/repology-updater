@@ -38,6 +38,8 @@ from repology.version import VersionCompare
 # create application and handle configuration
 app = flask.Flask(__name__)
 
+import repologyapp.views
+
 # global repology objects
 repoman = RepositoryManager(repology.config.REPOS_DIR, 'dummy')  # XXX: should not construct fetchers and parsers here
 repometadata = repoman.GetMetadata(repology.config.REPOSITORIES)
@@ -820,21 +822,6 @@ def badge_version_for_repo(repo, name):
         ),
         {'Content-type': 'image/svg+xml'}
     )
-
-
-@app.route('/news')
-def news():
-    return flask.render_template('news.html')
-
-
-@app.route('/links')
-def links():
-    return flask.render_template('links.html')
-
-
-@app.route('/about')
-def about():
-    return flask.render_template('about.html')
 
 
 @app.route('/opensearch/metapackage.xml')
