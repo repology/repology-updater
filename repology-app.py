@@ -26,6 +26,7 @@ import flask
 
 from werkzeug.contrib.profiler import ProfilerMiddleware
 
+import repology.config
 from repology.database import Database
 from repology.graphprocessor import GraphProcessor
 from repology.metapackageproc import *
@@ -39,14 +40,10 @@ from repology.version import VersionCompare
 # create application and handle configuration
 app = flask.Flask(__name__)
 
-app.config.from_pyfile('repology.conf.default')
-app.config.from_pyfile('repology.conf', silent=True)
-app.config.from_envvar('REPOLOGY_CONFIG', silent=True)
-
 # global repology objects
-repoman = RepositoryManager(app.config['REPOS_DIR'], 'dummy')  # XXX: should not construct fetchers and parsers here
-repometadata = repoman.GetMetadata(app.config['REPOSITORIES'])
-reponames = repoman.GetNames(app.config['REPOSITORIES'])
+repoman = RepositoryManager(repology.config.REPOS_DIR, 'dummy')  # XXX: should not construct fetchers and parsers here
+repometadata = repoman.GetMetadata(repology.config.REPOSITORIES)
+reponames = repoman.GetNames(repology.config.REPOSITORIES)
 
 # templates: tuning
 app.jinja_env.trim_blocks = True
@@ -66,14 +63,14 @@ app.jinja_env.tests['fallback_maintainer'] = is_fallback_maintainer
 app.jinja_env.globals['url_for_self'] = url_for_self
 
 # templates: custom global data
-app.jinja_env.globals['REPOLOGY_HOME'] = app.config['REPOLOGY_HOME']
+app.jinja_env.globals['REPOLOGY_HOME'] = repology.config.REPOLOGY_HOME
 app.jinja_env.globals['repometadata'] = repometadata
 app.jinja_env.globals['reponames'] = reponames
 
 
 def get_db():
     if not hasattr(flask.g, 'database'):
-        flask.g.database = Database(app.config['DSN'], readonly=False, autocommit=True)
+        flask.g.database = Database(repology.config.DSN, readonly=False, autocommit=True)
     return flask.g.database
 
 
@@ -111,7 +108,7 @@ def api_v1_metapackages_generic(bound, *filters):
         get_db().GetMetapackages(
             bound_to_filter(bound),
             *filters,
-            limit=app.config['METAPACKAGES_PER_PAGE']
+            limit=repology.config.METAPACKAGES_PER_PAGE
         )
     )
 
@@ -209,7 +206,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
     searchfilter = NameSubstringQueryFilter(search) if search else None
 
     # get packages
-    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['METAPACKAGES_PER_PAGE'])
+    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=repology.config.METAPACKAGES_PER_PAGE)
 
     # on empty result, fallback to show first, last set of results
     if not packages:
@@ -217,7 +214,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
             namefilter = NameStartingQueryFilter()
         else:
             namefilter = NameBeforeQueryFilter()
-        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=app.config['METAPACKAGES_PER_PAGE'])
+        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=repology.config.METAPACKAGES_PER_PAGE)
 
     firstname, lastname = get_packages_name_range(packages)
 
@@ -538,7 +535,7 @@ def maintainers(bound=None):
 
     minmaintainer, maxmaintainer = get_db().GetMaintainersRange()
 
-    maintainers = get_db().GetMaintainers(bound, reverse, search, app.config['MAINTAINERS_PER_PAGE'])
+    maintainers = get_db().GetMaintainers(bound, reverse, search, repology.config.MAINTAINERS_PER_PAGE)
 
     firstpage, lastpage = False, False
     for maintainer in maintainers:
@@ -592,7 +589,7 @@ def maintainer_problems(maintainer):
         maintainer=maintainer,
         problems=get_db().GetProblems(
             maintainer=maintainer,
-            limit=app.config['PROBLEMS_PER_PAGE']
+            limit=repology.config.PROBLEMS_PER_PAGE
         )
     )
 
@@ -619,7 +616,7 @@ def repository_problems(repo):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.render_template('repository-problems.html', repo=repo, problems=get_db().GetProblems(repo=repo, limit=app.config['PROBLEMS_PER_PAGE']))
+    return flask.render_template('repository-problems.html', repo=repo, problems=get_db().GetProblems(repo=repo, limit=repology.config.PROBLEMS_PER_PAGE))
 
 
 @app.route('/metapackage/<name>')
@@ -707,11 +704,11 @@ def metapackage_information(name):
 
 @app.route('/metapackage/<name>/related')
 def metapackage_related(name):
-    names = get_db().GetRelatedMetapackages(name, limit=app.config['METAPACKAGES_PER_PAGE'])
+    names = get_db().GetRelatedMetapackages(name, limit=repology.config.METAPACKAGES_PER_PAGE)
 
     too_many_warning = None
-    if len(names) == app.config['METAPACKAGES_PER_PAGE']:
-        too_many_warning = app.config['METAPACKAGES_PER_PAGE']
+    if len(names) == repology.config.METAPACKAGES_PER_PAGE:
+        too_many_warning = repology.config.METAPACKAGES_PER_PAGE
 
     packages = get_db().GetMetapackage(names)
 
@@ -735,7 +732,7 @@ def metapackage_badges(name):
 @app.route('/metapackage/<name>/report', methods=['GET', 'POST'])
 def metapackage_report(name):
     if flask.request.method == 'POST':
-        if get_db().GetReportsCount(name) >= app.config['MAX_REPORTS']:
+        if get_db().GetReportsCount(name) >= repology.config.MAX_REPORTS:
             flask.flash('Could not add report: too many reports for this metapackage', 'danger')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
 
@@ -771,7 +768,7 @@ def metapackage_report(name):
         'metapackage-report.html',
         reports=get_db().GetReports(name),
         name=name,
-        afk_till=AFKChecker(app.config['STAFF_AFK']).GetAFKEnd()
+        afk_till=AFKChecker(repology.config.STAFF_AFK).GetAFKEnd()
     )
 
 
@@ -1130,7 +1127,7 @@ def api_v1_metapackage(name):
 @app.route('/api')
 @app.route('/api/v1')
 def api_v1():
-    return flask.render_template('api.html', per_page=app.config['METAPACKAGES_PER_PAGE'])
+    return flask.render_template('api.html', per_page=repology.config.METAPACKAGES_PER_PAGE)
 
 
 @app.route('/api/v1/metapackages/')
@@ -1222,7 +1219,7 @@ def api_v1_maintainer_problems(maintainer):
 
 
 if __name__ == '__main__':
-    if app.config['PROFILE']:
+    if repology.config.PROFILE:
         app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
         app.run(debug=True)
     else:
