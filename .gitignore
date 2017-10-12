@@ -2,7 +2,7 @@ __pycache__
 _state
 helpers/rpmcat/rpmcat
 repology.conf
-static/*.gz
+repologyapp/static/*.gz
 testdata/*.packages
 repology/version.so
 build
