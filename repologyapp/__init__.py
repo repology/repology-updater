@@ -66,6 +66,7 @@ app.jinja_env.globals['url_for_self'] = url_for_self
 app.jinja_env.globals['REPOLOGY_HOME'] = repology.config.REPOLOGY_HOME
 app.jinja_env.globals['repometadata'] = repometadata
 app.jinja_env.globals['reponames'] = reponames
+app.jinja_env.globals['config'] = repology.config
 
 
 def get_db():
