@@ -25,6 +25,7 @@ __all__ = [
     'ClassFactory',
 ]
 
+
 class ModuleEnumerator:
     def __init__(self, pkgname, pkgfile):
         self.modules = []
@@ -49,7 +50,6 @@ class ClassFactory:
             for name, member in inspect.getmembers(module):
                 if name.endswith(suffix) and inspect.isclass(member):
                     self.modules[name[:-len(suffix)]] = member
-
 
     def Spawn(self, name, kwargs):
         class_ = self.modules[name]

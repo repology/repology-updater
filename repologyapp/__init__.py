@@ -38,7 +38,8 @@ from repology.version import VersionCompare
 # create application and handle configuration
 app = flask.Flask(__name__)
 
-import repologyapp.views
+if True:  # silence "import not at top" warning
+    import repologyapp.views
 
 # global repology objects
 repoman = RepositoryManager(repology.config.REPOS_DIR, 'dummy')  # XXX: should not construct fetchers and parsers here
