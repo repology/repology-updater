@@ -21,24 +21,35 @@ import os
 
 
 __all__ = [
-    'ModuleFactory',
+    'ModuleEnumerator',
+    'ClassFactory',
 ]
 
-
-class ModuleFactory:
-    def __init__(self, pkgname, pkgfile, suffix):
-        self.modules = {}
+class ModuleEnumerator:
+    def __init__(self, pkgname, pkgfile):
+        self.modules = []
 
         pkgdir = os.path.dirname(pkgfile)
 
         for modfile in os.listdir(pkgdir):
             modname = inspect.getmodulename(os.path.join(pkgdir, modfile))
             if modname and modname != '__init__':
-                module = importlib.import_module(pkgname + '.' + modname)
+                self.modules.append(importlib.import_module(pkgname + '.' + modname))
 
-                for name, member in inspect.getmembers(module):
-                    if name.endswith(suffix) and inspect.isclass(member):
-                        self.modules[name[:-len(suffix)]] = member
+    def Enumerate(self):
+        for module in self.modules:
+            yield module
+
+
+class ClassFactory:
+    def __init__(self, pkgname, pkgfile, suffix):
+        self.modules = {}
+
+        for module in ModuleEnumerator(pkgname, pkgfile).Enumerate():
+            for name, member in inspect.getmembers(module):
+                if name.endswith(suffix) and inspect.isclass(member):
+                    self.modules[name[:-len(suffix)]] = member
+
 
     def Spawn(self, name, kwargs):
         class_ = self.modules[name]

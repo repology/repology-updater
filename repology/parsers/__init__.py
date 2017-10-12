@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import repology.modulefactory
+from repology.moduleutils import ClassFactory
 
 
-Factory = repology.modulefactory.ModuleFactory(__name__, __file__, 'Parser')
+Factory = ClassFactory(__name__, __file__, 'Parser')
