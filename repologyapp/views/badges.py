@@ -19,14 +19,14 @@
 
 import flask
 
-from repologyapp import app
 from repologyapp.globals import *
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 from repology.packageproc import PackagesetToBestByRepo
 
 
-@app.route('/badge/vertical-allrepos/<name>.svg')
+@ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name):
     best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
 
@@ -47,7 +47,7 @@ def badge_vertical_allrepos(name):
     )
 
 
-@app.route('/badge/tiny-repos/<name>.svg')
+@ViewRegistrar('/badge/tiny-repos/<name>.svg')
 def badge_tiny_repos(name):
     num_families = len(set([package.family for package in get_db().GetMetapackage(name)]))
     return (
@@ -60,7 +60,7 @@ def badge_tiny_repos(name):
     )
 
 
-@app.route('/badge/version-for-repo/<repo>/<name>.svg')
+@ViewRegistrar('/badge/version-for-repo/<repo>/<name>.svg')
 def badge_version_for_repo(repo, name):
     best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
 

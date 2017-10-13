@@ -19,6 +19,7 @@
 
 import flask
 
+from repologyapp.views import Registry as ViewRegistry
 from repologyapp.globals import *
 from repologyapp.template_helpers import *
 
@@ -26,9 +27,6 @@ import repology.config
 
 # create application and handle configuration
 app = flask.Flask(__name__)
-
-if True:  # silence "import not at top" warning
-    import repologyapp.views
 
 # templates: tuning
 app.jinja_env.trim_blocks = True
@@ -52,3 +50,5 @@ app.jinja_env.globals['REPOLOGY_HOME'] = repology.config.REPOLOGY_HOME
 app.jinja_env.globals['repometadata'] = repometadata
 app.jinja_env.globals['reponames'] = reponames
 app.jinja_env.globals['config'] = repology.config
+
+ViewRegistry.RegisterInFlask(app)

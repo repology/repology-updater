@@ -19,14 +19,14 @@
 
 import flask
 
-from repologyapp import app
 from repologyapp.globals import *
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 
 
-@app.route('/maintainers/')
-@app.route('/maintainers/<bound>/')
+@ViewRegistrar('/maintainers/')
+@ViewRegistrar('/maintainers/<bound>/')
 def maintainers(bound=None):
     reverse = False
     if bound and bound.startswith('..'):
@@ -60,7 +60,7 @@ def maintainers(bound=None):
     )
 
 
-@app.route('/maintainer/<maintainer>')
+@ViewRegistrar('/maintainer/<maintainer>')
 def maintainer(maintainer):
     maintainer_info = get_db().GetMaintainerInformation(maintainer)
     metapackages = get_db().GetMaintainerMetapackages(maintainer, 500)
@@ -87,7 +87,7 @@ def maintainer(maintainer):
     )
 
 
-@app.route('/maintainer/<maintainer>/problems')
+@ViewRegistrar('/maintainer/<maintainer>/problems')
 def maintainer_problems(maintainer):
     return flask.render_template(
         'maintainer-problems.html',

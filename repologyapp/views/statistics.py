@@ -19,14 +19,14 @@
 
 import flask
 
-from repologyapp import app
 from repologyapp.globals import *
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 
 
-@app.route('/statistics')
-@app.route('/statistics/<sorting>')
+@ViewRegistrar('/statistics')
+@ViewRegistrar('/statistics/<sorting>')
 def statistics(sorting=None):
     repostats = filter(lambda r: r['name'] in reponames, get_db().GetRepositories())
     showmedals = True

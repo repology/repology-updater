@@ -19,10 +19,10 @@
 
 import flask
 
-from repologyapp import app
 from repologyapp.globals import *
 from repologyapp.metapackages import metapackages_to_summary_items
 from repologyapp.template_helpers import AFKChecker
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 from repology.metapackageproc import PackagesToMetapackages
@@ -30,13 +30,13 @@ from repology.package import VersionClass
 from repology.packageproc import PackagesetSortByVersions, PackagesetAggregateByVersions, PackagesetToFamilies
 
 
-@app.route('/metapackage/<name>')
+@ViewRegistrar('/metapackage/<name>')
 def metapackage(name):
     # metapackage landing page; just redirect to packages, may change in future
     return flask.redirect(flask.url_for('metapackage_versions', name=name), 303)
 
 
-@app.route('/metapackage/<name>/versions')
+@ViewRegistrar('/metapackage/<name>/versions')
 def metapackage_versions(name):
     packages_by_repo = {}
     for package in get_db().GetMetapackage(name):
@@ -55,7 +55,7 @@ def metapackage_versions(name):
     )
 
 
-@app.route('/metapackage/<name>/packages')
+@ViewRegistrar('/metapackage/<name>/packages')
 def metapackage_packages(name):
     packages = get_db().GetMetapackage(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
@@ -67,7 +67,7 @@ def metapackage_packages(name):
     )
 
 
-@app.route('/metapackage/<name>/information')
+@ViewRegistrar('/metapackage/<name>/information')
 def metapackage_information(name):
     packages = get_db().GetMetapackage(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
@@ -113,7 +113,7 @@ def metapackage_information(name):
     )
 
 
-@app.route('/metapackage/<name>/related')
+@ViewRegistrar('/metapackage/<name>/related')
 def metapackage_related(name):
     names = get_db().GetRelatedMetapackages(name, limit=repology.config.METAPACKAGES_PER_PAGE)
 
@@ -133,14 +133,14 @@ def metapackage_related(name):
     )
 
 
-@app.route('/metapackage/<name>/badges')
+@ViewRegistrar('/metapackage/<name>/badges')
 def metapackage_badges(name):
     packages = get_db().GetMetapackage(name)
     repos = sorted(list(set([package.repo for package in packages])))
     return flask.render_template('metapackage-badges.html', name=name, repos=repos)
 
 
-@app.route('/metapackage/<name>/report', methods=['GET', 'POST'])
+@ViewRegistrar('/metapackage/<name>/report', methods=['GET', 'POST'])
 def metapackage_report(name):
     if flask.request.method == 'POST':
         if get_db().GetReportsCount(name) >= repology.config.MAX_REPORTS:

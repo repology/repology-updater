@@ -19,14 +19,14 @@
 
 import flask
 
-from repologyapp import app
+from repologyapp.view_registry import ViewRegistrar
 
 
-@app.route('/news')
+@ViewRegistrar('/news')
 def news():
     return flask.render_template('news.html')
 
 
-@app.route('/about')
+@ViewRegistrar('/about')
 def about():
     return flask.render_template('about.html')

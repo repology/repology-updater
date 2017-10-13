@@ -19,18 +19,18 @@
 
 import flask
 
-from repologyapp import app
 from repologyapp.globals import *
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 
 
-@app.route('/repositories/')
+@ViewRegistrar('/repositories/')
 def repositories():
     return flask.render_template('repositories.html')
 
 
-@app.route('/repository/<repo>')
+@ViewRegistrar('/repository/<repo>')
 def repository(repo):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -42,7 +42,7 @@ def repository(repo):
     )
 
 
-@app.route('/repository/<repo>/problems')
+@ViewRegistrar('/repository/<repo>/problems')
 def repository_problems(repo):
     if not repo or repo not in repometadata:
         flask.abort(404)

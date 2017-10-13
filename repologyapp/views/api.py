@@ -20,8 +20,9 @@
 import flask
 import json
 
-from repologyapp import app
 from repologyapp.globals import *
+from repologyapp.view_registry import ViewRegistrar
+from repologyapp.metapackages import bound_to_filter
 
 import repology.config
 from repology.metapackageproc import PackagesToMetapackages
@@ -73,13 +74,13 @@ def api_v1_metapackages_generic(bound, *filters):
     )
 
 
-@app.route('/api')
-@app.route('/api/v1')
+@ViewRegistrar('/api')
+@ViewRegistrar('/api/v1')
 def api_v1():
     return flask.render_template('api.html', per_page=repology.config.METAPACKAGES_PER_PAGE)
 
 
-@app.route('/api/v1/metapackage/<name>')
+@ViewRegistrar('/api/v1/metapackage/<name>')
 def api_v1_metapackage(name):
     return (
         json.dumps(list(map(
@@ -90,62 +91,62 @@ def api_v1_metapackage(name):
     )
 
 
-@app.route('/api/v1/metapackages/')
-@app.route('/api/v1/metapackages/all/')
-@app.route('/api/v1/metapackages/all/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/')
+@ViewRegistrar('/api/v1/metapackages/all/')
+@ViewRegistrar('/api/v1/metapackages/all/<bound>/')
 def api_v1_metapackages_all(bound=None):
     return api_v1_metapackages_generic(bound)
 
 
-@app.route('/api/v1/metapackages/unique/')
-@app.route('/api/v1/metapackages/unique/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/unique/')
+@ViewRegistrar('/api/v1/metapackages/unique/<bound>/')
 def api_v1_metapackages_unique(bound=None):
     return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
 
 
-@app.route('/api/v1/metapackages/in-repo/<repo>/')
-@app.route('/api/v1/metapackages/in-repo/<repo>/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/in-repo/<repo>/<bound>/')
 def api_v1_metapackages_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, InRepoQueryFilter(repo))
 
 
-@app.route('/api/v1/metapackages/outdated-in-repo/<repo>/')
-@app.route('/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/outdated-in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_outdated_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
 
 
-@app.route('/api/v1/metapackages/not-in-repo/<repo>/')
-@app.route('/api/v1/metapackages/not-in-repo/<repo>/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/not-in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/not-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_not_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo))
 
 
-@app.route('/api/v1/metapackages/candidates-in-repo/<repo>/')
-@app.route('/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/candidates-in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_candidates_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo), InNumFamiliesQueryFilter(more=5))
 
 
-@app.route('/api/v1/metapackages/unique-in-repo/<repo>/')
-@app.route('/api/v1/metapackages/unique-in-repo/<repo>/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/unique-in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/unique-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_unique_in_repo(repo, bound=None):
     return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
 
 
-@app.route('/api/v1/metapackages/by-maintainer/<maintainer>/')
-@app.route('/api/v1/metapackages/by-maintainer/<maintainer>/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/by-maintainer/<maintainer>/')
+@ViewRegistrar('/api/v1/metapackages/by-maintainer/<maintainer>/<bound>/')
 def api_v1_metapackages_by_maintainer(maintainer, bound=None):
     return api_v1_metapackages_generic(bound, MaintainerQueryFilter(maintainer))
 
 
-@app.route('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/')
-@app.route('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
+@ViewRegistrar('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/')
+@ViewRegistrar('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
     return api_v1_metapackages_generic(bound, MaintainerOutdatedQueryFilter(maintainer))
 
 
-@app.route('/api/v1/repository/<repo>/problems')
+@ViewRegistrar('/api/v1/repository/<repo>/problems')
 def api_v1_repository_problems(repo):
     return (
         json.dumps(get_db().GetProblems(repo=repo)),
@@ -153,7 +154,7 @@ def api_v1_repository_problems(repo):
     )
 
 
-@app.route('/api/v1/maintainer/<maintainer>/problems')
+@ViewRegistrar('/api/v1/maintainer/<maintainer>/problems')
 def api_v1_maintainer_problems(maintainer):
     return (
         json.dumps(get_db().GetProblems(maintainer=maintainer)),
@@ -161,7 +162,7 @@ def api_v1_maintainer_problems(maintainer):
     )
 
 
-#@app.route('/api/v1/history/repository/<repo>')
+#@ViewRegistrar('/api/v1/history/repository/<repo>')
 #def api_v1_maintainer_problems():
 #    get_db().GetRepositoriesHistoryPeriod(seconds = 365
 #    return (
@@ -170,7 +171,7 @@ def api_v1_maintainer_problems(maintainer):
 #    )
 
 
-#@app.route('/api/v1/history/statistics')
+#@ViewRegistrar('/api/v1/history/statistics')
 #def api_v1_maintainer_problems(repo):
 #    return (
 #        json.dumps(get_db().GetProblems(maintainer=maintainer)),

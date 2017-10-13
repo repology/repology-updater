@@ -19,9 +19,9 @@
 
 import flask
 
-from repologyapp import app
 from repologyapp.globals import *
 from repologyapp.metapackages import bound_to_filter, get_packages_name_range, metapackages_to_summary_items
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 from repology.queryfilters import *
@@ -64,9 +64,9 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
     )
 
 
-@app.route('/metapackages/')  # XXX: redirect to metapackages/all?
-@app.route('/metapackages/all/')
-@app.route('/metapackages/all/<bound>/')
+@ViewRegistrar('/metapackages/')  # XXX: redirect to metapackages/all?
+@ViewRegistrar('/metapackages/all/')
+@ViewRegistrar('/metapackages/all/<bound>/')
 def metapackages_all(bound=None):
     return metapackages_generic(
         bound,
@@ -74,8 +74,8 @@ def metapackages_all(bound=None):
     )
 
 
-@app.route('/metapackages/unique/')
-@app.route('/metapackages/unique/<bound>/')
+@ViewRegistrar('/metapackages/unique/')
+@ViewRegistrar('/metapackages/unique/<bound>/')
 def metapackages_unique(bound=None):
     return metapackages_generic(
         bound,
@@ -84,8 +84,8 @@ def metapackages_unique(bound=None):
     )
 
 
-@app.route('/metapackages/widespread/')
-@app.route('/metapackages/widespread/<bound>/')
+@ViewRegistrar('/metapackages/widespread/')
+@ViewRegistrar('/metapackages/widespread/<bound>/')
 def metapackages_widespread(bound=None):
     return metapackages_generic(
         bound,
@@ -94,8 +94,8 @@ def metapackages_widespread(bound=None):
     )
 
 
-@app.route('/metapackages/in-repo/<repo>/')
-@app.route('/metapackages/in-repo/<repo>/<bound>/')
+@ViewRegistrar('/metapackages/in-repo/<repo>/')
+@ViewRegistrar('/metapackages/in-repo/<repo>/<bound>/')
 def metapackages_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -108,8 +108,8 @@ def metapackages_in_repo(repo, bound=None):
     )
 
 
-@app.route('/metapackages/outdated-in-repo/<repo>/')
-@app.route('/metapackages/outdated-in-repo/<repo>/<bound>/')
+@ViewRegistrar('/metapackages/outdated-in-repo/<repo>/')
+@ViewRegistrar('/metapackages/outdated-in-repo/<repo>/<bound>/')
 def metapackages_outdated_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -122,8 +122,8 @@ def metapackages_outdated_in_repo(repo, bound=None):
     )
 
 
-@app.route('/metapackages/not-in-repo/<repo>/')
-@app.route('/metapackages/not-in-repo/<repo>/<bound>/')
+@ViewRegistrar('/metapackages/not-in-repo/<repo>/')
+@ViewRegistrar('/metapackages/not-in-repo/<repo>/<bound>/')
 def metapackages_not_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -136,8 +136,8 @@ def metapackages_not_in_repo(repo, bound=None):
     )
 
 
-@app.route('/metapackages/candidates-for-repo/<repo>/')
-@app.route('/metapackages/candidates-for-repo/<repo>/<bound>/')
+@ViewRegistrar('/metapackages/candidates-for-repo/<repo>/')
+@ViewRegistrar('/metapackages/candidates-for-repo/<repo>/<bound>/')
 def metapackages_candidates_for_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -151,8 +151,8 @@ def metapackages_candidates_for_repo(repo, bound=None):
     )
 
 
-@app.route('/metapackages/unique-in-repo/<repo>/')
-@app.route('/metapackages/unique-in-repo/<repo>/<bound>/')
+@ViewRegistrar('/metapackages/unique-in-repo/<repo>/')
+@ViewRegistrar('/metapackages/unique-in-repo/<repo>/<bound>/')
 def metapackages_unique_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
@@ -166,8 +166,8 @@ def metapackages_unique_in_repo(repo, bound=None):
     )
 
 
-@app.route('/metapackages/by-maintainer/<maintainer>/')
-@app.route('/metapackages/by-maintainer/<maintainer>/<bound>/')
+@ViewRegistrar('/metapackages/by-maintainer/<maintainer>/')
+@ViewRegistrar('/metapackages/by-maintainer/<maintainer>/<bound>/')
 def metapackages_by_maintainer(maintainer, bound=None):
     return metapackages_generic(
         bound,
@@ -177,8 +177,8 @@ def metapackages_by_maintainer(maintainer, bound=None):
     )
 
 
-@app.route('/metapackages/outdated-by-maintainer/<maintainer>/')
-@app.route('/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
+@ViewRegistrar('/metapackages/outdated-by-maintainer/<maintainer>/')
+@ViewRegistrar('/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def metapackages_outdated_by_maintainer(maintainer, bound=None):
     return metapackages_generic(
         bound,

@@ -19,14 +19,14 @@
 
 import flask
 
-from repologyapp import app
+from repologyapp.view_registry import ViewRegistrar
 
 
-@app.route('/opensearch/metapackage.xml')
+@ViewRegistrar('/opensearch/metapackage.xml')
 def opensearch_metapackage():
     return flask.render_template('opensearch-metapackage.xml'), {'Content-type': 'application/xml'}
 
 
-@app.route('/opensearch/maintainer.xml')
+@ViewRegistrar('/opensearch/maintainer.xml')
 def opensearch_maintainer():
     return flask.render_template('opensearch-maintainer.xml'), {'Content-type': 'application/xml'}

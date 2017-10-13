@@ -19,16 +19,16 @@
 
 import flask
 
-from repologyapp import app
 from repologyapp.globals import *
 from repologyapp.metapackages import metapackages_to_summary_items
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 #from repology.packageproc import PackagesetSortByVersions
 from repology.metapackageproc import PackagesToMetapackages
 
 
-@app.route('/')
+@ViewRegistrar('/')
 def index():
     repostats = [
         repo for repo in get_db().GetRepositories()

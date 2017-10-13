@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.moduleutils import ModuleEnumerator
+from repologyapp.view_registry import ViewRegistry
 
 
-ModuleEnumerator(__name__, __file__)
+Registry = ViewRegistry(__name__, __file__)

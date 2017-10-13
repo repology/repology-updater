@@ -21,8 +21,8 @@ import math
 
 import flask
 
-from repologyapp import app
 from repologyapp.globals import *
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 from repology.graphprocessor import GraphProcessor
@@ -90,77 +90,77 @@ def graph_total_generic(getvalue, color, suffix=''):
     return graph_generic(GetGraph, color, suffix)
 
 
-@app.route('/graph/repo/<repo>/metapackages_total.svg')
+@ViewRegistrar('/graph/repo/<repo>/metapackages_total.svg')
 def graph_repo_metapackages_total(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages'], '#000000')
 
 
-@app.route('/graph/repo/<repo>/metapackages_newest.svg')
+@ViewRegistrar('/graph/repo/<repo>/metapackages_newest.svg')
 def graph_repo_metapackages_newest(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_newest'], '#5cb85c')
 
 
-@app.route('/graph/repo/<repo>/metapackages_newest_percent.svg')
+@ViewRegistrar('/graph/repo/<repo>/metapackages_newest_percent.svg')
 def graph_repo_metapackages_newest_percent(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_newest'] / s['num_metapackages'] * 100.0, '#5cb85c', '%')
 
 
-@app.route('/graph/repo/<repo>/metapackages_outdated.svg')
+@ViewRegistrar('/graph/repo/<repo>/metapackages_outdated.svg')
 def graph_repo_metapackages_outdated(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_outdated'], '#d9534f')
 
 
-@app.route('/graph/repo/<repo>/metapackages_outdated_percent.svg')
+@ViewRegistrar('/graph/repo/<repo>/metapackages_outdated_percent.svg')
 def graph_repo_metapackages_outdated_percent(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_outdated'] / s['num_metapackages'] * 100.0, '#d9534f', '%')
 
 
-@app.route('/graph/repo/<repo>/metapackages_unique.svg')
+@ViewRegistrar('/graph/repo/<repo>/metapackages_unique.svg')
 def graph_repo_metapackages_unique(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'], '#5bc0de')
 
 
-@app.route('/graph/repo/<repo>/metapackages_unique_percent.svg')
+@ViewRegistrar('/graph/repo/<repo>/metapackages_unique_percent.svg')
 def graph_repo_metapackages_unique_percent(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0, '#5bc0de', '%')
 
 
-@app.route('/graph/repo/<repo>/problems.svg')
+@ViewRegistrar('/graph/repo/<repo>/problems.svg')
 def graph_repo_problems(repo):
     return graph_repo_generic(repo, lambda s: s['num_problems'], '#c00000')
 
 
-@app.route('/graph/repo/<repo>/problems_per_metapackage.svg')
+@ViewRegistrar('/graph/repo/<repo>/problems_per_metapackage.svg')
 def graph_repo_problems_per_metapackage(repo):
     return graph_repo_generic(repo, lambda s: s['num_problems'] / s['num_metapackages'], '#c00000')
 
 
-@app.route('/graph/repo/<repo>/maintainers.svg')
+@ViewRegistrar('/graph/repo/<repo>/maintainers.svg')
 def graph_repo_maintainers(repo):
     return graph_repo_generic(repo, lambda s: s['num_maintainers'], '#c000c0')
 
 
-@app.route('/graph/repo/<repo>/packages_per_maintainer.svg')
+@ViewRegistrar('/graph/repo/<repo>/packages_per_maintainer.svg')
 def graph_repo_packages_per_maintainer(repo):
     return graph_repo_generic(repo, lambda s: s['num_packages'] / s['num_maintainers'], '#c000c0')
 
 
-@app.route('/graph/total/packages.svg')
+@ViewRegistrar('/graph/total/packages.svg')
 def graph_total_packages():
     return graph_total_generic(lambda s: s['num_packages'], '#000000')
 
 
-@app.route('/graph/total/metapackages.svg')
+@ViewRegistrar('/graph/total/metapackages.svg')
 def graph_total_metapackages():
     return graph_total_generic(lambda s: s['num_metapackages'], '#000000')
 
 
-@app.route('/graph/total/maintainers.svg')
+@ViewRegistrar('/graph/total/maintainers.svg')
 def graph_total_maintainers():
     return graph_total_generic(lambda s: s['num_maintainers'], '#c000c0')
 
 
-@app.route('/graph/total/problems.svg')
+@ViewRegistrar('/graph/total/problems.svg')
 def graph_total_problems():
     return graph_total_generic(lambda s: s['num_problems'], '#c00000')
 
@@ -215,7 +215,7 @@ def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
     )
 
 
-@app.route('/graph/map_repo_size_fresh.svg')
+@ViewRegistrar('/graph/map_repo_size_fresh.svg')
 def graph_map_repo_size_fresh():
     def repo2coords(repo):
         return {
@@ -230,7 +230,7 @@ def graph_map_repo_size_fresh():
     )
 
 
-@app.route('/graph/map_repo_size_fresh_nonunique.svg')
+@ViewRegistrar('/graph/map_repo_size_fresh_nonunique.svg')
 def graph_map_repo_size_fresh_nonunique():
     def repo2coords(repo):
         return {
@@ -245,7 +245,7 @@ def graph_map_repo_size_fresh_nonunique():
     )
 
 
-@app.route('/graph/map_repo_size_freshness.svg')
+@ViewRegistrar('/graph/map_repo_size_freshness.svg')
 def graph_map_repo_size_freshness():
     def repo2coords(repo):
         return {
