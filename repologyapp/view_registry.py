@@ -50,8 +50,10 @@ class ViewRegistrant():
         if isinstance(f, ViewRegistrant):
             # allow nesting
             self.f = f.f
+            self.next = f
         else:
             self.f = f
+            self.next = None
         self.route = route
         self.options = options
 
@@ -60,3 +62,5 @@ class ViewRegistrant():
 
     def RegisterInFlask(self, app):
         app.add_url_rule(self.route, self.f.__name__, self.f, **self.options)
+        if self.next is not None:
+            self.next.RegisterInFlask(app)
