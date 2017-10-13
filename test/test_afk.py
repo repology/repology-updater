@@ -21,7 +21,7 @@ import unittest
 
 from datetime import date
 
-from repology.template_helpers import AFKChecker
+from repologyapp.template_helpers import AFKChecker
 
 
 class TestAFK(unittest.TestCase):

@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.template_helpers import maintainer_to_links, maintainers_to_group_mailto
+from repologyapp.template_helpers import maintainer_to_links, maintainers_to_group_mailto
 
 
 class TestMaintainerLinks(unittest.TestCase):
