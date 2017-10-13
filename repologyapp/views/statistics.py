@@ -31,14 +31,20 @@ def statistics(sorting=None):
     repostats = filter(lambda r: r['name'] in reponames, get_db().GetRepositories())
     showmedals = True
 
+    def safe_percent(a, b):
+        if b <= 0:
+            return 0.0
+
+        return 100.0 * a / b
+
     if sorting == 'newest':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'], reverse=True)
     elif sorting == 'pnewest':
-        repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'] / (s['num_metapackages'] or 1), reverse=True)
+        repostats = sorted(repostats, key=lambda s: safe_percent(s['num_metapackages_newest'], s['num_metapackages'] - s['num_metapackages_unique']), reverse=True)
     elif sorting == 'outdated':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages_outdated'], reverse=True)
     elif sorting == 'poutdated':
-        repostats = sorted(repostats, key=lambda s: s['num_metapackages_outdated'] / (s['num_metapackages'] or 1), reverse=True)
+        repostats = sorted(repostats, key=lambda s: safe_percent(s['num_metapackages_outdated'], s['num_metapackages'] - s['num_metapackages_unique']), reverse=True)
     elif sorting == 'total':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages'], reverse=True)
     else:

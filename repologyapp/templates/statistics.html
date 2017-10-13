@@ -37,7 +37,7 @@
 	<thead>
 		<tr>
 			<th class="text-right" rowspan="2">Repository</th>
-			<th class="text-center" colspan="7">Metapackages</th>
+			<th class="text-center" colspan="6">Metapackages</th>
 			<th class="text-center" colspan="7">Packages</th>
 			<th class="text-center" rowspan="2"><abbr title="Number of maintainers">Mnt.</abbr></th>
 			<th class="text-center" rowspan="2"><abbr title="Number of problems">Prb.</abbr></th>
@@ -45,7 +45,7 @@
 		</tr>
 		<tr>
 			<th class="text-center">Total</th>
-			<th class="text-center" colspan="3">Up to date in repo/total</th>
+			<th class="text-center" colspan="2">Up to date</th>
 			<th class="text-center"><abbr title="Outdated">Outd.</abbr></th>
 			<th class="text-center" colspan="2">Unique</th>
 
@@ -85,10 +85,7 @@
 				{{- macros.value_with_delta(repostat.num_metapackages_newest, old_repostat.num_metapackages_newest) -}}
 			</td>
 			<td class="text-center version-cell version-big version-newest">
-				{{- macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages) -}}
-			</td>
-			<td class="text-center version-cell version-big version-newest">
-				{{- macros.safe_percent(repostat.num_metapackages_newest, num_metapackages) -}}
+				{{- macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages - repostat.num_metapackages_unique) -}}
 			</td>
 
 			<td class="text-center version-cell version-big version-outdated">

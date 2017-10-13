@@ -35,6 +35,12 @@ def index():
         if repo['name'] in reponames and repometadata[repo['name']]['type'] == 'repository'
     ]
 
+    def safe_percent(a, b):
+        if b <= 0:
+            return 0.0
+
+        return 100.0 * a / b
+
     top_repos = {
         'by_total': [
             {
@@ -60,9 +66,9 @@ def index():
         'by_pnewest': [
             {
                 'name': repo['name'],
-                'value': '{:.2f}%'.format(100.0 * repo['num_metapackages_newest'] / repo['num_metapackages'] if repo['num_metapackages'] else 0),
+                'value': '{:.2f}%'.format(safe_percent(repo['num_metapackages_newest'], repo['num_metapackages'] - repo['num_metapackages_unique'])),
             }
-            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (repo['num_metapackages'] or 1), reverse=True)
+            for repo in sorted(repostats, key=lambda repo: safe_percent(repo['num_metapackages_newest'], repo['num_metapackages'] - repo['num_metapackages_unique']), reverse=True)
             if repo['num_metapackages'] > 1000
         ][:8]
     }
