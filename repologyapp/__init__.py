@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import sys
+
 import flask
 
 from repologyapp.globals import get_db, repometadata, reponames
@@ -28,6 +30,13 @@ import repology.config
 
 # create application and handle configuration
 app = flask.Flask(__name__)
+
+# translate some repology config items to flask
+if not hasattr(repology.config, 'SECRET_KEY'):
+    print('Error: SECRET_KEY is required to be set in the configuration', file=sys.stderr)
+    sys.exit(1)
+
+app.config['SECRET_KEY'] = repology.config.SECRET_KEY
 
 # templates: tuning
 app.jinja_env.trim_blocks = True
