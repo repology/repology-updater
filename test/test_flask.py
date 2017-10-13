@@ -91,6 +91,7 @@ class TestFlask(unittest.TestCase):
 
     def test_statistics(self):
         self.checkurl('/statistics', has=['FreeBSD'])
+        self.checkurl('/statistics?sorting=newest', has=['FreeBSD'])
 
     def test_badges(self):
         self.checkurl_svg('/badge/vertical-allrepos/kiconvtool.svg', has=['<svg', 'FreeBSD'])
@@ -120,6 +121,9 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/metapackage/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
         self.checkurl_html('/metapackage/nonexistent/information', has=['No data found'])
 
+        self.checkurl_html('/metapackage/kiconvtool/related', has=['0.97'])
+        self.checkurl_html('/metapackage/nonexistent/related', has=['No metapackages found matching the criteria'])
+
         self.checkurl_html('/metapackage/kiconvtool/badges', has=[
             # XXX: agnostic to site home
             '/metapackage/kiconvtool',
@@ -127,14 +131,25 @@ class TestFlask(unittest.TestCase):
             '/badge/tiny-repos/kiconvtool.svg',
         ])
 
+        self.checkurl_html('/metapackage/kiconvtool/report', has=[''])
+
     def test_maintaners(self):
         self.checkurl_html('/maintainers/a/', has=['amdmi3@freebsd.org'])
 
     def test_maintaner(self):
         self.checkurl_html('/maintainer/amdmi3@freebsd.org', has=['mailto:amdmi3@freebsd.org', 'kiconvtool'])
 
+    def test_maintaner_problems(self):
+        self.checkurl_html('/maintainer/amdmi3@freebsd.org/problems')
+
     def test_repositories(self):
         self.checkurl_html('/repositories/', has=['FreeBSD'])
+
+    def test_repository(self):
+        self.checkurl_html('/repository/freebsd', has=['FreeBSD'])
+
+    def test_repository_problems(self):
+        self.checkurl_html('/repository/freebsd/problems', has=['FreeBSD'])
 
     def test_metapackages(self):
         self.checkurl_html('/metapackages/', has=['kiconvtool', '0.97'])
