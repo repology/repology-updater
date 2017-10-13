@@ -17,12 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import flask
 import json
 
+import flask
+
 from repologyapp.globals import *
-from repologyapp.view_registry import ViewRegistrar
 from repologyapp.metapackages import bound_to_filter
+from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
 from repology.metapackageproc import PackagesToMetapackages

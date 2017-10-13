@@ -24,10 +24,10 @@ from repologyapp.metapackages import bound_to_filter, get_packages_name_range, m
 from repologyapp.view_registry import ViewRegistrar
 
 import repology.config
-from repology.queryfilters import *
-from repology.packageproc import PackagesetSortByVersions
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
+from repology.packageproc import PackagesetSortByVersions
+from repology.queryfilters import *
 
 
 def metapackages_generic(bound, *filters, template='metapackages.html', repo=None, maintainer=None):

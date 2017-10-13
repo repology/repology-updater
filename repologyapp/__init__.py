@@ -19,9 +19,10 @@
 
 import flask
 
+from repologyapp.globals import get_db, repometadata, reponames
+from repologyapp.template_helpers import css_for_versionclass, maintainer_to_links, maintainers_to_group_mailto
+from repologyapp.template_helpers import for_page, is_fallback_maintainer, pkg_format, url_for_self
 from repologyapp.views import Registry as ViewRegistry
-from repologyapp.globals import *
-from repologyapp.template_helpers import *
 
 import repology.config
 

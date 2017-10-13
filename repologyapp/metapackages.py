@@ -21,7 +21,7 @@ import flask
 
 from repology.package import VersionClass
 from repology.packageproc import PackagesetSortByVersions
-from repology.queryfilters import NameBeforeQueryFilter, NameAfterQueryFilter, NameStartingQueryFilter
+from repology.queryfilters import NameAfterQueryFilter, NameBeforeQueryFilter, NameStartingQueryFilter
 
 
 def bound_to_filter(bound):
