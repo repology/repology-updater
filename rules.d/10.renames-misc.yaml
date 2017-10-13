@@ -16,6 +16,7 @@
 - { name: abuse_sdl,                   setname: abuse                     }
 - { name: abbaye,                      setname: abbaye-des-morts          }
 - { name: abbayedesmorts,              setname: abbaye-des-morts          }
+- { name: abbayedesmorts-gpl,          setname: abbaye-des-morts          }
 - { name: [abiword-x11,abiword-gtk2,abiword-minimal], setname: abiword    }
 - { name: abuse-sdl,                   setname: abuse }
 - { name: accounts-qt5,                setname: accounts-qt ,             family: [ sisyphus ] }
