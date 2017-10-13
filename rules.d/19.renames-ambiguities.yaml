@@ -220,6 +220,11 @@
 - { name: whereami, family: [ fedora, yacp ], setname: whereami-pjp } # displays information about machine(location) you are working on
 - { name: whereami, warning: "please classify me" }
 
+- { name: words, wwwpart: wordlist.sourceforge.net, setname: words-scrowl }
+- { name: words, wwwpart: moby, setname: words-moby }
+- { name: words, wwwpart: wordsdoc, setname: words-latin }
+- { name: words, wwwpart: ftp.gnu.org/gnu/aspell, setname: words-international }
+
 - { name: xclip, setname: emacs-xclip, family: gentoo, category: app-emacs }
 
 - { name: zap, wwwpart: owasp, setname: zaproxy }
