@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+#
+# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+#
+# This file is part of repology
+#
+# repology is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# repology is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with repology.  If not, see <http://www.gnu.org/licenses/>.
+
+import flask
+
+from repologyapp import app
+from repologyapp.globals import *
+from repologyapp.metapackages import metapackages_to_summary_items
+
+import repology.config
+#from repology.packageproc import PackagesetSortByVersions
+from repology.metapackageproc import PackagesToMetapackages
+
+
+@app.route('/')
+def index():
+    repostats = [
+        repo for repo in get_db().GetRepositories()
+        if repo['name'] in reponames and repometadata[repo['name']]['type'] == 'repository'
+    ]
+
+    top_repos = {
+        'by_total': [
+            {
+                'name': repo['name'],
+                'value': repo['num_metapackages'],
+            }
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages'], reverse=True)
+        ][:10],
+        'by_nonunique': [
+            {
+                'name': repo['name'],
+                'value': repo['num_metapackages_newest'] + repo['num_metapackages_outdated'],
+            }
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] + repo['num_metapackages_outdated'], reverse=True)
+        ][:10],
+        'by_newest': [
+            {
+                'name': repo['name'],
+                'value': repo['num_metapackages_newest'],
+            }
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'], reverse=True)
+        ][:10],
+        'by_pnewest': [
+            {
+                'name': repo['name'],
+                'value': '{:.2f}%'.format(100.0 * repo['num_metapackages_newest'] / repo['num_metapackages'] if repo['num_metapackages'] else 0),
+            }
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] / (repo['num_metapackages'] or 1), reverse=True)
+            if repo['num_metapackages'] > 1000
+        ][:8]
+    }
+
+    important_packages = [
+        'apache24',
+        'awesome',
+        'bash',
+        'binutils',
+        'bison',
+        'blender',
+        'boost',
+        'bzip2',
+        'chromium',
+        'claws-mail',
+        'cmake',
+        'cppcheck',
+        'cups',
+        'curl',
+        'darktable',
+        'dia',
+        'djvulibre',
+        'dosbox',
+        'dovecot',
+        'doxygen',
+        'dvd+rw-tools',
+        'emacs',
+        'exim',
+        'ffmpeg',
+        'firefox',
+        'flex',
+        'fluxbox',
+        'freecad',
+        'freetype',
+        'gcc',
+        'gdb',
+        'geeqie',
+        'gimp',
+        'git',
+        'gnupg',
+        'go',
+        'graphviz',
+        'grub',
+        'icewm',
+        'imagemagick',
+        'inkscape',
+        'irssi',
+        'kodi',
+        'lame',
+        'lftp',
+        'libreoffice',
+        'libressl',
+        'lighttpd',
+        'links',
+        'llvm',
+        'mariadb',
+        'maxima',
+        'mc',
+        'memcached',
+        'mercurial',
+        'mesa',
+        'mplayer',
+        'mutt',
+        'mysql',
+        'nginx',
+        'nmap',
+        'octave',
+        'openbox',
+        'openssh',
+        'openssl',
+        'openttf',
+        'openvpn',
+        'p7zip',
+        'perl',
+        'pidgin',
+        'postfix',
+        'postgresql',
+        'privoxy',
+        'procmail',
+        'python3',
+        'qemu',
+        'rdesktop',
+        'redis',
+        'rrdtool',
+        'rsync',
+        'rtorrent',
+        'rxvt-unicode',
+        'samba',
+        'sane-backends',
+        'scons',
+        'screen',
+        'scribus',
+        'scummvm',
+        'sdl2',
+        'smartmontools',
+        'sqlite3',
+        'squid',
+        'subversion',
+        'sudo',
+        'sumversion',
+        'thunderbird',
+        'tigervnc',
+        'tmux',
+        'tor',
+        'valgrind',
+        'vim',
+        'virtualbox',
+        'vlc',
+        'vsftpd',
+        'wayland',
+        'wesnoth',
+        'wget',
+        'wine',
+        'wireshark',
+        'xorg-server',
+        'youtube-dl',
+        'zsh',
+    ]
+
+    packages = get_db().GetMetapackage(important_packages)
+
+    metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
+
+    return flask.render_template(
+        'index.html',
+        top_repos=top_repos,
+        metapackagedata=metapackagedata
+    )
