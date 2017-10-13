@@ -24,6 +24,8 @@ from operator import itemgetter
 
 import flask
 
+from repologyapp.globals import *
+
 import repology.config
 from repology.database import Database
 from repology.graphprocessor import GraphProcessor
@@ -40,11 +42,6 @@ app = flask.Flask(__name__)
 
 if True:  # silence "import not at top" warning
     import repologyapp.views
-
-# global repology objects
-repoman = RepositoryManager(repology.config.REPOS_DIR, 'dummy')  # XXX: should not construct fetchers and parsers here
-repometadata = repoman.GetMetadata(repology.config.REPOSITORIES)
-reponames = repoman.GetNames(repology.config.REPOSITORIES)
 
 # templates: tuning
 app.jinja_env.trim_blocks = True
@@ -68,12 +65,6 @@ app.jinja_env.globals['REPOLOGY_HOME'] = repology.config.REPOLOGY_HOME
 app.jinja_env.globals['repometadata'] = repometadata
 app.jinja_env.globals['reponames'] = reponames
 app.jinja_env.globals['config'] = repology.config
-
-
-def get_db():
-    if not hasattr(flask.g, 'database'):
-        flask.g.database = Database(repology.config.DSN, readonly=False, autocommit=True)
-    return flask.g.database
 
 
 # helpers
