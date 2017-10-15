@@ -224,6 +224,9 @@
 - { name: words, wwwpart: moby, setname: words-moby }
 - { name: words, wwwpart: wordsdoc, setname: words-latin }
 - { name: words, wwwpart: ftp.gnu.org/gnu/aspell, setname: words-international }
+- { name: words, family: pclinuxos, setname: words-moby }
+- { name: words, family: sisyphus, setname: words-ibiblio } # not sure what this is
+- { name: words, warning: "please classify me" }
 
 - { name: xclip, setname: emacs-xclip, family: gentoo, category: app-emacs }
 
