@@ -7,7 +7,7 @@
 - { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd, crux, macports ] }
 - { namepat: "p5.[0-9]+-(.*)",         setname: "perl:$1", family: [ macports ] }
 - { namepat: "lib(.*)-perl",           setname: "perl:$1", family: [ debuntu ] }
-- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa, nix, alpine, pclinuxos, msys2, ravenports, openmandriva, kaos ] }
+- { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa, nix, alpine, pclinuxos, msys2, ravenports, openmandriva, kaos, aosc ] }
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo, haikuports ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
 # These shamelessly mangle with perl module versions
