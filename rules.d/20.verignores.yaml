@@ -243,6 +243,7 @@
 - { name: libxml2,                     ver: "2.9.4.83",                                    ignorever: true }
 
 # L (continued)
+- { name: litecoin,                    ver: "0.15.0.1",              family: sisyphus,     ignorever: true } # it's 0.15.0.1rc1
 - { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: llvm,                        verpat: ".*git",                                    ignorever: true }
