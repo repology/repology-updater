@@ -102,26 +102,47 @@ def GetLinkStatuses(urls, delay, timeout):
     return results
 
 
-def LinkProcessorWorker(queue, workerid, options, logger):
-    database = Database(options.dsn, readonly=False)
-
+def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
     logger = logger.GetPrefixed('worker{}: '.format(workerid))
 
     logger.Log('Worker spawned')
 
+    def Slicer(pack):
+        for i in range(0, len(pack), options.packsize):
+            yield pack[i:i + options.packsize]
+
     while True:
-        pack = queue.get()
+        pack = readqueue.get()
         if pack is None:
             logger.Log('Worker exiting')
             return
 
-        logger.Log('Processing {} urls ({}..{})'.format(len(pack), pack[0], pack[-1]))
-        for result in GetLinkStatuses(pack, delay=options.delay, timeout=options.timeout):
-            url, status, redirect, size, location = result
+        logger.Log('Processing {} urls ({} .. {})'.format(len(pack), pack[0], pack[-1]))
+
+        for subpack in Slicer(GetLinkStatuses(pack, delay=options.delay, timeout=options.timeout)):
+            writequeue.put(subpack)
+
+        logger.Log('Done processing {} urls ({} .. {})'.format(len(pack), pack[0], pack[-1]))
+
+
+def LinkUpdatingWorker(queue, options, logger):
+    database = Database(options.dsn, readonly=False)
+
+    logger = logger.GetPrefixed('writer: ')
+
+    logger.Log('Writer spawned')
+
+    while True:
+        pack = queue.get()
+        if pack is None:
+            logger.Log('Writer exiting')
+            return
+
+        for url, status, redirect, size, location in pack:
             database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
 
         database.Commit()
-        logger.Log('Done processing {} urls ({}..{})'.format(len(pack), pack[0], pack[-1]))
+        logger.Log('Updated {} urls ({} .. {})'.format(len(pack), pack[0], pack[-1]))
 
 
 def Main():
@@ -146,8 +167,13 @@ def Main():
     logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
     database = Database(options.dsn, readonly=True, autocommit=True)
 
-    queue = multiprocessing.Queue(1)
-    processpool = [multiprocessing.Process(target=LinkProcessorWorker, args=(queue, i, options, logger)) for i in range(options.jobs)]
+    readqueue = multiprocessing.Queue(10)
+    writequeue = multiprocessing.Queue(10)
+
+    writer = multiprocessing.Process(target=LinkUpdatingWorker, args=(writequeue, options, logger))
+    writer.start()
+
+    processpool = [multiprocessing.Process(target=LinkProcessingWorker, args=(readqueue, writequeue, i, options, logger)) for i in range(options.jobs)]
     for process in processpool:
         process.start()
 
@@ -190,18 +216,22 @@ def Main():
         if options.maxpacksize and len(urls) > options.maxpacksize:
             logger.Log('Skipping {} urls ({}..{}), exceeds max pack size'.format(len(urls), urls[0], urls[-1]))
         else:
-            queue.put(urls)
+            readqueue.put(urls)
             logger.Log('Enqueued {} urls ({}..{})'.format(len(urls), urls[0], urls[-1]))
 
         prev_url = urls[-1]
 
     logger.Log('Waiting for child processes to exit')
 
+    # close workers
     for process in processpool:
-        queue.put(None)
-
+        readqueue.put(None)
     for process in processpool:
         process.join()
+
+    # close writer
+    writequeue.put(None)
+    writer.join()
 
     logger.Log('Done')
 
