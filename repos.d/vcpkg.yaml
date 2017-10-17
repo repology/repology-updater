@@ -1,0 +1,20 @@
+###########################################################################
+# Vcpkg
+###########################################################################
+- name: vcpkg
+  type: repository
+  desc: Vcpkg
+  family: vcpkg
+  sources:
+    - name: vcpkg
+      fetcher: Git
+      parser: VcpkgGit
+      url: https://github.com/Microsoft/vcpkg.git
+      sparse_checkout: [ 'ports/*/CONTROL' ]
+  repolinks:
+    - desc: Vcpkg GitHub repository
+      url: https://github.com/Microsoft/vcpkg
+  packagelinks:
+    - desc: Port directory
+      url: 'https://github.com/Microsoft/vcpkg/tree/master/ports/{name}'
+  tags: [ all, production ]
