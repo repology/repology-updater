@@ -185,7 +185,7 @@
 - { name: robot-framework,             setname: "python:robotframework" }
 - { name: python-markdown,             setname: "python:markdown" }
 - { name: markdown, wwwpart: pypi,     setname: "python:markdown" }
-- { name: [nbsphinx,"python:jupyter-nbsphinx"], setname: "python:nbsphinx" }
+- { name: [nbsphinx,"python:jupyter_nbsphinx"], setname: "python:nbsphinx" }
 
 # as per pypi package name
 - { name: "python:axolotl",            setname: "python:python-axolotl"   }
