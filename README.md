@@ -71,6 +71,7 @@ version are always parsed.
 | Ravenports                       | ✔       |         | ✔     | ✔     |         |          |
 | RubyGems                         |         |         |       | ✔ (2) |         |          |
 | SlackBuilds                      |         | ✔       | ✔     | ✔     |         | ✔        |
+| Vcpkg                            | ✔       |         |       |       |         |          |
 | YACP                             |         |         |       |       |         |          |
 
 (1) Gentoo support is not complete, complex cases like condional downloads and licenses
