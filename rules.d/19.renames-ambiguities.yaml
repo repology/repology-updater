@@ -26,6 +26,8 @@
 - { name: cutter, verpat: "1\\.0[0-9].*", setname: cutter-tcp             } # TCP/IP Connection Cutter
 - { name: [cutter,cutter-test_framework,cutter-testing-framework], setname: cutter-unittest } # C++ testing framework
 
+- { name: date, family: vcpkg, category: date-howardhinnant } # https://github.com/HowardHinnant/date
+
 - { name: dash, setname: emacs-dash, family: gentoo, category: app-emacs }
 
 - { name: debugedit, wwwpart: [rpm.org, rpm5.org], setname: rpm } # part of rpm, apart from FreeBSD port which is a separate project
