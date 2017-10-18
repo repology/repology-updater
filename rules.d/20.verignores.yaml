@@ -379,6 +379,7 @@
 - { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # obsoleted
 - { name: tidy,                        ver: "090315.c",                                    ignorever: true } # obsoleted
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignorever: true } # 2.15.0 was not released yet
+- { name: thrift,                      verpat: "[0-9]{7}.*",                               ignorever: true } # vcpkg and macports garbage
 - { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
 - { name: tome2,                       ver: "235",                                         ignorever: true }
 - { name: [tor,tor-devel],             verpat: "(.*)[._-][ar].*",                          setver: "$1" } # version is self-sufficient; remove redundant alpha/rc suffix
@@ -395,6 +396,7 @@
 - { name: urlview,                     ver: ["20131023","0.9.20131021"],                   ignorever: true }
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
+- { name: utfcpp,                      ver: "2012.*",                                      ignorever: true } # slackbuilds
 - { name: util-linux,                  ver: "2.31",                  family: fedora,       ignorever: true } # fake, it's 2.31rc1
 
 # V
