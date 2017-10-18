@@ -278,6 +278,7 @@
 - { name: netcat-openbsd,              verpat: "20[0-9]{6}.*",                             ignorever: true } # pkgsrc garbage
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: npapi-vlc,                   ver: "2.2.7",                 family: fedora,       ignorever: true } # no such tag on https://code.videolan.org/videolan/npapi-vlc/tags
+- { name: ntp,                         verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.([0-9]+)",    setver: "$1p$2" }
 
 # O
 - { name: octomap,                     verpat: "[0-9a-f]{40}",                             ignorever: true } # commit
