@@ -5,6 +5,9 @@
 
 - { name: beanshell,                   setname: beanshell2, family: kaos }
 
+- { name: beast,                       setname: beast-mcmc, wwwpart: beast.bio.ed.ac.uk }
+- { name: beast,                       setname: boost-beast, family: pcpkg }
+
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager
 
 - { name: crystal,                     setname: crystal-lang,             family: [ arch, freshcode ] }
