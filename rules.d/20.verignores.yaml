@@ -331,7 +331,9 @@
 - { name: qupzilla,                                                  family: kaos,         ignorever: true } # snapshot with random version
 
 # R
+- { name: r-cran-nws,                  ver: "2.0.0.3",               family: debuntu,      ignorever: true } # fake
 - { name: r-hexbin,                    ver: "1.27.1-1",                                    ignorever: true } # guix fake
+- { name: r-waveslim,                  ver: "1.12",                  family: rosa,         ignorever: true } # fake
 - { name: racer,                       ver: "2.07",                                        ignorever: true }
 - { name: rage,                        ver: "0.3.0.042",                                   ignorever: true }
 - { name: recode,                      ver: "3.7-2fd838565",                               ignorever: true }
