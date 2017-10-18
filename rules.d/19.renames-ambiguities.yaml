@@ -97,6 +97,8 @@
 
 - { name: libelf,                      wwwpart: elfutils, setname: elfutils } # Arch: XXX: problem
 
+- { name: libtorrent,                  family: vcpkg, setname: arvidn-libtorrent  }
+
 # gentoo vs. fedora livecd-tools
 - { name: livecd-tools,                wwwpart: gentoo, setname: livecd-tools-gentoo }
 - { name: livecd-tools,                category: app-misc, family: gentoo, setname: livecd-tools-gentoo }

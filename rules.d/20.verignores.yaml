@@ -240,6 +240,7 @@
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
 - { name: libtheora,                   ver: "1.2.0",                 family: openmandriva, ignorever: true } # lie, not released yet
 - { name: libtomcrypt,                 ver: "1.18",                  family: fedora,       ignorever: true } # lie, not released yet
+- { name: libtorrent,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # nix fake
 - { name: libusbmuxd,                  ver: "1.1.0",                 family: openwrt,      ignorever: true } # fake
 - { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignorever: true } # version from mediainfo is used, while libzen has its own version scheme
 - { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignorever: true }
@@ -338,6 +339,7 @@
 - { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
 - { name: rpcgen,                                                    family: ravenports,   ignorever: true } # fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
+- { name: rtorrent,                    verpat: "20[0-9]{6}.*",                             ignorever: true } # nix fake
 - { name: rtmpdump,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: rubygem-io-like,             ver: "0.3.0.20130301",                              ignorever: true } # freebsd
 - { name: rust,                        verpat: ".*dev",                                    ignorever: true } # haikuports garbage

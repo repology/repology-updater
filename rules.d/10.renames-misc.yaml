@@ -601,6 +601,7 @@
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libsysstat-qt5,              setname: libsysstat                }
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
+- { name: [libtorrent-ipv6,libtorrent-extended], setname: libtorrent, addflavor: true }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
 - { name: libtremor,                   setname: tremor                    }
 - { name: [libtsm-asciinema,libtsm-patched], setname: libtsm }
@@ -781,17 +782,18 @@
 
 # Q
 - { name: qastools-qt5,                setname: qastools                  }
-- { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5,qbittorrent-dark,qbittorrent-nogui,qbittorrent-stable], setname: qbittorrent }
+- { name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5,qbittorrent-dark,qbittorrent-nogui,qbittorrent-stable], setname: qbittorrent, addflavor: true }
 - { name: qbs-docs,                    setname: qbs, addflavor: docs }
-- { name: [qt_creator,qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], setname: qtcreator }
-- { name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], setname: qtkeychain }
-- { name: [qupzilla-qt4,qupzilla-qt5,qupzilla-qtwebkit], setname: qupzilla }
-- { namepat: "qt-?creator[0-9]*",      setname: qtcreator }
+- { name: [qt_creator,qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], setname: qtcreator, addflavor: true }
+- { name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], setname: qtkeychain, addflavor: true }
+- { name: [qupzilla-qt4,qupzilla-qt5,qupzilla-qtwebkit], setname: qupzilla, addflavor: true }
+- { namepat: "qt-?creator[0-9]*",      setname: qtcreator, addflavor: true }
 
 # R
 - { name: r2e,                         setname: rss2email                 }
 - { name: rabbitmq,                    setname: rabbitmq-server           }
 - { name: randomize-lines,             setname: rl                        } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
+- { name: rb-libtorrent,               setname: libtorrent-rasterbar      }
 - { name: rawtherapee-gtk2,            setname: rawtherapee               }
 - { name: rawtherapee-unstable,        setname: rawtherapee, ignorever: true }
 - { name: rdkafka,                     setname: librdkafka                }
@@ -799,6 +801,7 @@
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
 - { name: rrdtool12,                   setname: rrdtool                   }
 - { name: rt-audio,                    setname: rtaudio                   }
+- { name: [rtorrent-cdl,rtorrent-color,rtorrent-ipv6,rtorrent-vi-color], setname: rtorrent, addflavor: true }
 
 # S
 - { name: s3-backer,                   setname: s3backer                  }
