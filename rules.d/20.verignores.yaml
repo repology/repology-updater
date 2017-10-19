@@ -398,7 +398,7 @@
 - { name: urlview,                     ver: ["20131023","0.9.20131021"],                   ignorever: true }
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         ignorever: true }
-- { name: utfcpp,                      ver: "2012.*",                                      ignorever: true } # slackbuilds
+- { name: utfcpp,                      verpat: "2012.*",                                   ignorever: true } # slackbuilds
 - { name: util-linux,                  ver: "2.31",                  family: fedora,       ignorever: true } # fake, it's 2.31rc1
 
 # V
