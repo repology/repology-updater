@@ -114,7 +114,6 @@
 - { name: dosemu,                      verpat: "1\\.4\\.1.*",        family: [sisyphus,gentoo], ignorever: true }
 - { name: dolphin-emu,                 verpat: "[0-9]{4,}.*",                              ignorever: true }
 - { name: dsniff,                      ver: "2.4",                   family: [sisyphus,fedora,mageia], ignorever: true } # it's 2.4beta1
-- { name: dte,                         ver: "6.12",                  family: macports,     ignorever: true } # upstream dead, so I can't even check if it's the same package as other dte's
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignorever: true }
 
 # E

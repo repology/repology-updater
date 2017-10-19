@@ -51,6 +51,9 @@
 - { name: dt, wwwpart: 42wim/dt,       setname: dt-dns }
 - { name: dt, family: pkgsrc,          setname: dt-virtconsoles }
 
+# upstream completely dead, different project than https://github.com/craigbarnes/dte
+- { name: dte,                         setname: dte-dougt, family: macports }
+
 - { name: etcd, verpat: "1.*", setname: "etcd-player" } # Enhanced Tiny CD, a simple ncurses-based CD player vs. coreos etcd
 
 - { name: emma,                        setname: emma-coverage, family: [sisyphus, fedora, gentoo, mageia, rosa, nix] }
