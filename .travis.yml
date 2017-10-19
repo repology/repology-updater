@@ -17,6 +17,7 @@ before_install:
   - pip install flake8-quotes
   - pip install flask
   - pip install lxml
+  - pip install pillow
   - pip install psycopg2
   - pip install pytidylib # uses newer libtidy installed below
   - pip install requests
