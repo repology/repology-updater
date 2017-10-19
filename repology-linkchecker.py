@@ -142,7 +142,7 @@ def LinkUpdatingWorker(queue, options, logger):
             database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
 
         database.Commit()
-        logger.Log('Updated {} urls ({} .. {})'.format(len(pack), pack[0], pack[-1]))
+        logger.Log('Updated {} urls ({} .. {})'.format(len(pack), pack[0][0], pack[-1][0]))
 
 
 def Main():
