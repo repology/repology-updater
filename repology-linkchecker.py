@@ -117,12 +117,12 @@ def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
             logger.Log('Worker exiting')
             return
 
-        logger.Log('Processing {} urls ({} .. {})'.format(len(pack), pack[0], pack[-1]))
+        logger.Log('Processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
 
         for subpack in Slicer(GetLinkStatuses(pack, delay=options.delay, timeout=options.timeout)):
             writequeue.put(subpack)
 
-        logger.Log('Done processing {} urls ({} .. {})'.format(len(pack), pack[0], pack[-1]))
+        logger.Log('Done processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
 
 
 def LinkUpdatingWorker(queue, options, logger):
@@ -142,7 +142,7 @@ def LinkUpdatingWorker(queue, options, logger):
             database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
 
         database.Commit()
-        logger.Log('Updated {} urls ({} .. {})'.format(len(pack), pack[0][0], pack[-1][0]))
+        logger.Log('Updated {} url(s) ({} .. {})'.format(len(pack), pack[0][0], pack[-1][0]))
 
 
 def Main():
