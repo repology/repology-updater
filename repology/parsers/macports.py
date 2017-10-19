@@ -19,7 +19,7 @@ import json
 import os
 import subprocess
 
-import repology.config
+from repology.config import config
 
 from repology.package import Package
 from repology.util import SplitPackageNameVersion
@@ -40,14 +40,14 @@ def SanitizeVersion(version):
 
 class MacPortsParser():
     def __init__(self):
-        self.helperpath = os.path.join(repology.config.HELPERS_DIR, 'portindex2json', 'portindex2json.tcl')
+        self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
         pass
 
     def Parse(self, path):
         result = []
 
         with subprocess.Popen(
-            [repology.config.TCLSH, self.helperpath, path],
+            [config['TCLSH'], self.helperpath, path],
             errors='ignore',
             stdout=subprocess.PIPE,
             universal_newlines=True

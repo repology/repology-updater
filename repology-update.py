@@ -23,7 +23,7 @@ import sys
 import traceback
 from timeit import default_timer as timer
 
-import repology.config
+from repology.config import config
 from repology.database import Database
 from repology.logger import *
 from repology.packageproc import FillPackagesetVersions
@@ -137,11 +137,11 @@ def ShowUnmatchedRules(options, logger, transformer, reliable):
 
 def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-S', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
+    parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
-    parser.add_argument('-E', '--repos-dir', default=repology.config.REPOS_DIR, help='path to directory with repository configs')
-    parser.add_argument('-U', '--rules-dir', default=repology.config.RULES_DIR, help='path to directory with rules')
-    parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
+    parser.add_argument('-E', '--repos-dir', default=config['REPOS_DIR'], help='path to directory with repository configs')
+    parser.add_argument('-U', '--rules-dir', default=config['RULES_DIR'], help='path to directory with rules')
+    parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
 
     actions_grp = parser.add_argument_group('Actions')
     actions_grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
@@ -157,7 +157,7 @@ def Main():
 
     actions_grp.add_argument('-r', '--show-unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
-    parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
+    parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
 
     repoman = RepositoryManager(options.repos_dir, options.statedir)

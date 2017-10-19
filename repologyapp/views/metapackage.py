@@ -24,7 +24,7 @@ from repologyapp.metapackages import metapackages_to_summary_items
 from repologyapp.template_helpers import AFKChecker
 from repologyapp.view_registry import ViewRegistrar
 
-import repology.config
+from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
 from repology.packageproc import PackagesetAggregateByVersions, PackagesetSortByVersions, PackagesetToFamilies
@@ -115,11 +115,11 @@ def metapackage_information(name):
 
 @ViewRegistrar('/metapackage/<name>/related')
 def metapackage_related(name):
-    names = get_db().GetRelatedMetapackages(name, limit=repology.config.METAPACKAGES_PER_PAGE)
+    names = get_db().GetRelatedMetapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     too_many_warning = None
-    if len(names) == repology.config.METAPACKAGES_PER_PAGE:
-        too_many_warning = repology.config.METAPACKAGES_PER_PAGE
+    if len(names) == config['METAPACKAGES_PER_PAGE']:
+        too_many_warning = config['METAPACKAGES_PER_PAGE']
 
     packages = get_db().GetMetapackage(names)
 
@@ -143,7 +143,7 @@ def metapackage_badges(name):
 @ViewRegistrar('/metapackage/<name>/report', methods=['GET', 'POST'])
 def metapackage_report(name):
     if flask.request.method == 'POST':
-        if get_db().GetReportsCount(name) >= repology.config.MAX_REPORTS:
+        if get_db().GetReportsCount(name) >= config['MAX_REPORTS']:
             flask.flash('Could not add report: too many reports for this metapackage', 'danger')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
 
@@ -179,5 +179,5 @@ def metapackage_report(name):
         'metapackage-report.html',
         reports=get_db().GetReports(name),
         name=name,
-        afk_till=AFKChecker(repology.config.STAFF_AFK).GetAFKEnd()
+        afk_till=AFKChecker(config['STAFF_AFK']).GetAFKEnd()
     )

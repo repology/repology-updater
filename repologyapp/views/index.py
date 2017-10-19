@@ -23,7 +23,7 @@ from repologyapp.globals import *
 from repologyapp.metapackages import metapackages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
 
-import repology.config
+from repology.config import config
 #from repology.packageproc import PackagesetSortByVersions
 from repology.metapackageproc import PackagesToMetapackages
 

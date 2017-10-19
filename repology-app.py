@@ -21,11 +21,11 @@ from repologyapp import app
 
 from werkzeug.contrib.profiler import ProfilerMiddleware
 
-import repology.config
+from repology.config import config
 
 
 if __name__ == '__main__':
-    if repology.config.PROFILE:
+    if config['PROFILE']:
         app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
         app.run(debug=True)
     else:

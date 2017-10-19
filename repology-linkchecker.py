@@ -27,7 +27,7 @@ import urllib.parse
 
 import requests
 
-import repology.config
+from repology.config import config
 from repology.database import Database
 from repology.logger import FileLogger, StderrLogger
 
@@ -147,7 +147,7 @@ def LinkUpdatingWorker(queue, options, logger):
 
 def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--dsn', default=repology.config.DSN, help='database connection params')
+    parser.add_argument('--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('--logfile', help='path to log file (log to stderr by default)')
 
     parser.add_argument('--timeout', type=float, default=60.0, help='timeout for link requests in seconds')

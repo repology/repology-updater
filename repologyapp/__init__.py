@@ -26,17 +26,17 @@ from repologyapp.template_helpers import css_for_versionclass, maintainer_to_lin
 from repologyapp.template_helpers import for_page, is_fallback_maintainer, pkg_format, url_for_self
 from repologyapp.views import Registry as ViewRegistry
 
-import repology.config
+from repology.config import config
 
 # create application and handle configuration
 app = flask.Flask(__name__)
 
 # translate some repology config items to flask
-if not hasattr(repology.config, 'SECRET_KEY'):
+if 'SECRET_KEY' not in config:
     print('Error: SECRET_KEY is required to be set in the configuration', file=sys.stderr)
     sys.exit(1)
 
-app.config['SECRET_KEY'] = repology.config.SECRET_KEY
+app.config['SECRET_KEY'] = config['SECRET_KEY']
 
 # templates: tuning
 app.jinja_env.trim_blocks = True
@@ -56,9 +56,9 @@ app.jinja_env.tests['fallback_maintainer'] = is_fallback_maintainer
 app.jinja_env.globals['url_for_self'] = url_for_self
 
 # templates: custom global data
-app.jinja_env.globals['REPOLOGY_HOME'] = repology.config.REPOLOGY_HOME
+app.jinja_env.globals['REPOLOGY_HOME'] = config['REPOLOGY_HOME']
 app.jinja_env.globals['repometadata'] = repometadata
 app.jinja_env.globals['reponames'] = reponames
-app.jinja_env.globals['config'] = repology.config
+app.jinja_env.globals['config'] = config
 
 ViewRegistry.RegisterInFlask(app)

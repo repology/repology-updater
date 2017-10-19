@@ -20,7 +20,7 @@
 import argparse
 import os
 
-import repology.config
+from repology.config import config
 from repology.filters import *
 from repology.logger import *
 from repology.package import *
@@ -47,9 +47,9 @@ def VersionClass2Letter(value):
 
 def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-S', '--statedir', default=repology.config.STATE_DIR, help='path to directory with repository state')
+    parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
-    parser.add_argument('-E', '--repos-dir', default=repology.config.REPOS_DIR, help='path directory with reposotory configs')
+    parser.add_argument('-E', '--repos-dir', default=config['REPOS_DIR'], help='path directory with reposotory configs')
     parser.add_argument('-M', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
 
     filters_grp = parser.add_argument_group('Filters')
@@ -66,7 +66,7 @@ def Main():
     parser.add_argument('-f', '--fields', default='repo,effname,version', help='fields to list for the package')
     parser.add_argument('-s', '--field-separator', default=' ', help='field separator')
 
-    parser.add_argument('reponames', default=repology.config.REPOSITORIES, metavar='repo|tag', nargs='*', help='repository or tag name to process')
+    parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
 
     logger = StderrLogger()

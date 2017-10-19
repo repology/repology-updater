@@ -22,7 +22,7 @@ import flask
 from repologyapp.globals import *
 from repologyapp.view_registry import ViewRegistrar
 
-import repology.config
+from repology.config import config
 
 
 @ViewRegistrar('/repositories/')
@@ -47,4 +47,4 @@ def repository_problems(repo):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.render_template('repository-problems.html', repo=repo, problems=get_db().GetProblems(repo=repo, limit=repology.config.PROBLEMS_PER_PAGE))
+    return flask.render_template('repository-problems.html', repo=repo, problems=get_db().GetProblems(repo=repo, limit=config['PROBLEMS_PER_PAGE']))

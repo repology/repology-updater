@@ -19,7 +19,7 @@
 
 import flask
 
-import repology.config
+from repology.config import config
 from repology.database import Database
 from repology.repoman import RepositoryManager
 
@@ -31,13 +31,13 @@ __all__ = [
 ]
 
 
-repoman = RepositoryManager(repology.config.REPOS_DIR, 'dummy')
-repometadata = repoman.GetMetadata(repology.config.REPOSITORIES)
-reponames = repoman.GetNames(repology.config.REPOSITORIES)
+repoman = RepositoryManager(config['REPOS_DIR'], 'dummy')
+repometadata = repoman.GetMetadata(config['REPOSITORIES'])
+reponames = repoman.GetNames(config['REPOSITORIES'])
 
 
 def get_db():
     # XXX: this is not really a persistent DB connection!
     if not hasattr(flask.g, 'database'):
-        flask.g.database = Database(repology.config.DSN, readonly=False, autocommit=True)
+        flask.g.database = Database(config['DSN'], readonly=False, autocommit=True)
     return flask.g.database

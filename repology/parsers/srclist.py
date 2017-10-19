@@ -18,7 +18,7 @@
 import os
 import subprocess
 
-import repology.config
+from repology.config import config
 
 from repology.package import Package
 from repology.util import GetMaintainers
@@ -26,7 +26,7 @@ from repology.util import GetMaintainers
 
 class SrcListParser():
     def __init__(self):
-        self.helperpath = os.path.join(repology.config.HELPERS_DIR, 'rpmcat', 'rpmcat')
+        self.helperpath = os.path.join(config['HELPERS_DIR'], 'rpmcat', 'rpmcat')
 
         if not os.path.exists(self.helperpath):
             raise RuntimeError('{} does not exist, please run `make\' in project root directory to build it'.format(self.helperpath))

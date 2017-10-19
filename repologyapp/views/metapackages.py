@@ -23,7 +23,7 @@ from repologyapp.globals import *
 from repologyapp.metapackages import bound_to_filter, get_packages_name_range, metapackages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
 
-import repology.config
+from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
 from repology.packageproc import PackagesetSortByVersions
@@ -39,7 +39,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
     searchfilter = NameSubstringQueryFilter(search) if search else None
 
     # get packages
-    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=repology.config.METAPACKAGES_PER_PAGE)
+    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=config['METAPACKAGES_PER_PAGE'])
 
     # on empty result, fallback to show first, last set of results
     if not packages:
@@ -47,7 +47,7 @@ def metapackages_generic(bound, *filters, template='metapackages.html', repo=Non
             namefilter = NameStartingQueryFilter()
         else:
             namefilter = NameBeforeQueryFilter()
-        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=repology.config.METAPACKAGES_PER_PAGE)
+        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=config['METAPACKAGES_PER_PAGE'])
 
     firstname, lastname = get_packages_name_range(packages)
 

@@ -25,7 +25,7 @@ from repologyapp.globals import *
 from repologyapp.graphprocessor import GraphProcessor
 from repologyapp.view_registry import ViewRegistrar
 
-import repology.config
+from repology.config import config
 
 
 def graph_generic(getgraph, color, suffix=''):

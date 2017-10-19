@@ -25,7 +25,7 @@ from repologyapp.globals import *
 from repologyapp.metapackages import bound_to_filter
 from repologyapp.view_registry import ViewRegistrar
 
-import repology.config
+from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.queryfilters import *
 
@@ -63,7 +63,7 @@ def api_v1_metapackages_generic(bound, *filters):
         get_db().GetMetapackages(
             bound_to_filter(bound),
             *filters,
-            limit=repology.config.METAPACKAGES_PER_PAGE
+            limit=config['METAPACKAGES_PER_PAGE']
         )
     )
 
@@ -78,7 +78,7 @@ def api_v1_metapackages_generic(bound, *filters):
 @ViewRegistrar('/api')
 @ViewRegistrar('/api/v1')
 def api_v1():
-    return flask.render_template('api.html', per_page=repology.config.METAPACKAGES_PER_PAGE)
+    return flask.render_template('api.html', per_page=config['METAPACKAGES_PER_PAGE'])
 
 
 @ViewRegistrar('/api/v1/metapackage/<name>')

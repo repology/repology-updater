@@ -22,7 +22,7 @@ import flask
 from repologyapp.globals import *
 from repologyapp.view_registry import ViewRegistrar
 
-import repology.config
+from repology.config import config
 
 
 @ViewRegistrar('/maintainers/')
@@ -40,7 +40,7 @@ def maintainers(bound=None):
 
     minmaintainer, maxmaintainer = get_db().GetMaintainersRange()
 
-    maintainers = get_db().GetMaintainers(bound, reverse, search, repology.config.MAINTAINERS_PER_PAGE)
+    maintainers = get_db().GetMaintainers(bound, reverse, search, config['MAINTAINERS_PER_PAGE'])
 
     firstpage, lastpage = False, False
     for maintainer in maintainers:
@@ -94,6 +94,6 @@ def maintainer_problems(maintainer):
         maintainer=maintainer,
         problems=get_db().GetProblems(
             maintainer=maintainer,
-            limit=repology.config.PROBLEMS_PER_PAGE
+            limit=config['PROBLEMS_PER_PAGE']
         )
     )

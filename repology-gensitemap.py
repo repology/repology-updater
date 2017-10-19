@@ -23,15 +23,15 @@ import os
 import sys
 from random import shuffle
 
-import repology.config
+from repology.config import config
 from repology.database import Database
 
 
 def Main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
+    parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
 
-    parser.add_argument('-w', '--www-home', default=repology.config.REPOLOGY_HOME, help='repology www home')
+    parser.add_argument('-w', '--www-home', default=config['REPOLOGY_HOME'], help='repology www home')
     parser.add_argument('-m', '--max-urls', default=50000, help='max number of urls to generate')
 
     parser.add_argument('--main', action='store_true', help='generate maintainers sitemap')

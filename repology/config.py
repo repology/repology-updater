@@ -17,10 +17,14 @@
 
 import os
 
+__all__ = ['config']
+
+config = {}
+
 
 def __load_config(path):
     with open(path) as f:
-        exec(compile(f.read(), path, 'exec'), globals())
+        exec(compile(f.read(), path, 'exec'), globals(), config)
 
 
 def __load_configs():

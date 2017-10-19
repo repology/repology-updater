@@ -22,7 +22,7 @@ import os
 import sys
 from timeit import default_timer as timer
 
-import repology.config
+from repology.config import config
 from repology.database import *
 from repology.queryfilters import *
 
@@ -86,7 +86,7 @@ def RunTest(database, title, pagefilter, *filters):
 
 def Main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-D', '--dsn', default=repology.config.DSN, help='database connection params')
+    parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
     options = parser.parse_args()
 
     database = Database(options.dsn)
