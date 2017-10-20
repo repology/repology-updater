@@ -30,8 +30,24 @@ class FontMeasurerTest(unittest.TestCase):
     def test_fontmeasurer(self):
         fontmeas = FontMeasurer(config['BADGE_FONT'], 11)
 
-        self.assertEqual(fontmeas.GetDimensions('The quick brown fox jumps over the lazy dog'), (254, 13))
-        self.assertEqual(fontmeas.GetDimensions('The quick brown fox jumps over the lazy dog'), (254, 13))  # cached
+        first_result = fontmeas.GetDimensions('The quick brown fox jumps over the lazy dog')
+        cached_result = fontmeas.GetDimensions('The quick brown fox jumps over the lazy dog')
+
+        self.assertEqual(first_result, cached_result)
+
+        # I've got 254 on FreeBSD and 258 on Ubuntu, I believe there
+        # are fluctuations because of freetype hinting settings
+        #
+        # We currently use 6 pixel padding for badge texts. I'd say
+        # that for center-aligned text we can tolerate fluctuations
+        # of this size (e.g. +/-6, which may eat up to half of the
+        # padding on each size), and for side-aligned text we can
+        # add additional 3 pixel safety padding
+        #
+        # Note also that real strings will be usually shorter than
+        # this example
+
+        self.assertTrue(abs(first_result[0] - 254) <= 6)
 
 
 if __name__ == '__main__':
