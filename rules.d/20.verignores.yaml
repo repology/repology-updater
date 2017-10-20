@@ -264,6 +264,7 @@
 - { name: mkgmap,                      verpat: "[0-9]{4,}",                                setver: "r$0" }
 - { name: mkgmap-splitter,             verpat: "0\\.0\\.0svn([0-9]{3,})",                  setver: "r$1" }
 - { name: moc,                         ver: ["2.6","2.6.0"],         family: [sisyphus,fedora], ignorever: true } # 2.6alpha3
+- { name: moc,                         verpat: "2\\.6\\.0r.*",                             ignorever: true }
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
 - { name: mpfr,                        ver: "3.1.5.2",                                     ignorever: true } # openbsd fake
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # fake
