@@ -17,6 +17,7 @@ before_install:
   - pip install flake8-quotes
   - pip install flask
   - pip install lxml
+  - pip install pillow
   - pip install psycopg2
   - pip install pytidylib # uses newer libtidy installed below
   - pip install requests
@@ -43,6 +44,7 @@ before_script:
   - psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test"
   - psql -U postgres -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
   - export REPOLOGY_CONFIG=repology-test.conf.default
+  - echo "BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'" >> repology-test.conf.default
 script:
   # test buidling C utils
   - make

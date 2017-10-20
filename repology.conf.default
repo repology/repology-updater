@@ -110,6 +110,14 @@ MAX_REPORTS = 20
 REPOLOGY_HOME = 'https://repology.org'
 
 #
+# Path to DejaVuSans.ttf
+#
+# This is used to calculate SVG badge sizes
+#
+#BADGE_FONT = '/usr/local/share/fonts/dejavu/DejaVuSans.ttf'  # FreeBSD
+#BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'  # Ubuntu
+
+#
 # AFK times when reports cannot be processed, to be reported to users
 # array of strings in 'YYYY-MM-DD' (single date) or 'YYYY-MM-DD
 # YYYY-MM-DD' (date interval) format
