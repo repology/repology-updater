@@ -202,6 +202,7 @@
 - { name: "python:eric",               setname: eric                      }
 - { name: "python:eyed3",              setname: eyed3                     }
 - { name: "python:gixy",               setname: gixy                      }
+- { name: "python:goobook",            setname: goobook                   }
 - { name: "python:kye",                setname: kye                       }
 - { name: "python:meson",              setname: meson                     }
 - { name: [ipython,"python:ipython",ipython2,ipython3,python2-ipython], setname: ipython2 }
