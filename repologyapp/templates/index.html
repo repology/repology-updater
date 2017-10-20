@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container">
-	<div class="jumbotron">
+	<header class="jumbotron">
 		<h1>Repology, the packaging hub</h1>
 		<p>Repology analyzes a lot of package repositories and other sources<a href="#repos-footnote">*</a>
 		comparing packages versions across them and gathering other information. Repology shows you in which
@@ -61,159 +61,170 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</header>
 
-	<h2>News highlights</h2>
+	<section>
+		<h2>News highlights</h2>
 
-	<div class="row">
-		<div class="col-md-4">
-			<time class="news-summary-time" datetime="2017-10-17">2017-10-17</time>
-			added <a href="{{ url_for('repository', repo='vcpkg') }}">Vcpkg</a> repository
+		<div class="row">
+			<div class="col-md-4">
+				<time class="news-summary-time" datetime="2017-10-17">2017-10-17</time>
+				added <a href="{{ url_for('repository', repo='vcpkg') }}">Vcpkg</a> repository
+			</div>
+			<div class="col-md-4">
+				<time class="news-summary-time" datetime="2017-10-05">2017-10-05</time>
+				added <a href="{{ url_for('repository', repo='funtoo') }}">Funtoo</a> repository
+			</div>
+			<div class="col-md-4">
+				<time class="news-summary-time" datetime="2017-09-20">2017-09-20</time>
+				added new package classes (<a href="{{ url_for('news', _anchor='2017-09-20') }}">more...</a>)
+			</div>
 		</div>
-		<div class="col-md-4">
-			<time class="news-summary-time" datetime="2017-10-05">2017-10-05</time>
-			added <a href="{{ url_for('repository', repo='funtoo') }}">Funtoo</a> repository
-		</div>
-		<div class="col-md-4">
-			<time class="news-summary-time" datetime="2017-09-20">2017-09-20</time>
-			added new package classes (<a href="{{ url_for('news', _anchor='2017-09-20') }}">more...</a>)
-		</div>
-	</div>
+	</section>
 
-	<h2>Quick navigation</h2>
+	<section>
+		<h2>Quick navigation</h2>
 
-	<div class="row">
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Search <b>packages</b>
-				</div>
-				<div class="panel-body">
-					<form action="{{ url_for("metapackages_all") }}" method="GET">
-						<div class="input-group">
-							<input type="text" class="form-control" name="search" placeholder="e.g. &quot;firefox&quot;">
-							<div class="input-group-btn">
-								<button type="submit" class="btn btn-default">Go</button>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Search <b>packages</b>
+					</div>
+					<div class="panel-body">
+						<form action="{{ url_for("metapackages_all") }}" method="GET">
+							<div class="input-group">
+								<input type="text" class="form-control" name="search" placeholder="e.g. &quot;firefox&quot;">
+								<div class="input-group-btn">
+									<button type="submit" class="btn btn-default">Go</button>
+								</div>
 							</div>
-						</div>
-					</form>
-				</div>
-				<div class="panel-footer">
-					or <a href="{{ url_for("metapackages_all") }}">browse</a> list of all packages
+						</form>
+					</div>
+					<div class="panel-footer">
+						or <a href="{{ url_for("metapackages_all") }}">browse</a> list of all packages
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Search <b>maintainers</b>
-				</div>
-				<div class="panel-body">
-					<form action="{{ url_for("maintainers") }}" method="GET">
-						<div class="input-group">
-							<input type="text" class="form-control" name="search" placeholder="e.g. &quot;foo@bar.com&quot;">
-							<div class="input-group-btn">
-								<button type="submit" class="btn btn-default">Go</button>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Search <b>maintainers</b>
+					</div>
+					<div class="panel-body">
+						<form action="{{ url_for("maintainers") }}" method="GET">
+							<div class="input-group">
+								<input type="text" class="form-control" name="search" placeholder="e.g. &quot;foo@bar.com&quot;">
+								<div class="input-group-btn">
+									<button type="submit" class="btn btn-default">Go</button>
+								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
+					<div class="panel-footer">
+						or <a href="{{ url_for("maintainers") }}">browse</a> list of all maintainers
+					</div>
 				</div>
-				<div class="panel-footer">
-					or <a href="{{ url_for("maintainers") }}">browse</a> list of all maintainers
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						...or
+					</div>
+					<div class="panel-body">
+						See some <a href="{{ url_for("maintainers") }}">statistics</a> and a list of all
+						supported <a href="{{ url_for("repositories") }}">repositories</a>, and navigate
+						to per-repository package lists from there.
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					...or
+	</section>
+
+	<section>
+		<h2>Top repositories</h2>
+
+		<div class="row">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						By <b>total</b> number of packages
+					</div>
+					<div class="panel-body">
+						<ol>
+						{% for repostat in top_repos.by_total %}
+							<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
+						{% endfor %}
+						</ol>
+					</div>
 				</div>
-				<div class="panel-body">
-					See some <a href="{{ url_for("maintainers") }}">statistics</a> and a list of all
-					supported <a href="{{ url_for("repositories") }}">repositories</a>, and navigate
-					to per-repository package lists from there.
+			</div>
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						By number of <b>non-unique</b> packages
+					</div>
+					<div class="panel-body">
+						<ol>
+						{% for repostat in top_repos.by_nonunique %}
+							<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
+						{% endfor %}
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						By number of <b>fresh</b> packages
+					</div>
+					<div class="panel-body">
+						<ol>
+						{% for repostat in top_repos.by_newest %}
+							<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
+						{% endfor %}
+						</ol>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						By <b>percentage</b> of fresh packages
+					</div>
+					<div class="panel-body">
+						<ol>
+						{% for repostat in top_repos.by_pnewest %}
+							<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
+						{% endfor %}
+						</ol>
+					</div>
+					<div class="panel-footer">
+						<sup>*</sup>only repos with > 1000 packages
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 
-	<h2>Top repositories</h2>
+	<section>
+		<h2>Popular packages</h2>
 
-	<div class="row">
-		<div class="col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					By <b>total</b> number of packages
-				</div>
-				<div class="panel-body">
-					<ol>
-					{% for repostat in top_repos.by_total %}
-						<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
-					{% endfor %}
-					</ol>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					By number of <b>non-unique</b> packages
-				</div>
-				<div class="panel-body">
-					<ol>
-					{% for repostat in top_repos.by_nonunique %}
-						<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
-					{% endfor %}
-					</ol>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					By number of <b>fresh</b> packages
-				</div>
-				<div class="panel-body">
-					<ol>
-					{% for repostat in top_repos.by_newest %}
-						<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
-					{% endfor %}
-					</ol>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					By <b>percentage</b> of fresh packages
-				</div>
-				<div class="panel-body">
-					<ol>
-					{% for repostat in top_repos.by_pnewest %}
-						<li><a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a> ({{ repostat.value }})</li>
-					{% endfor %}
-					</ol>
-				</div>
-				<div class="panel-footer">
-					<sup>*</sup>only repos with > 1000 packages
-				</div>
-			</div>
-		</div>
-	</div>
+		{% include "versionclass_legend.html" %}
 
-	<h2>Popular packages</h2>
+		{% include "metapackages_table.html" %}
 
-	{% include "versionclass_legend.html" %}
+	</section>
 
-	{% include "metapackages_table.html" %}
+	<section>
+		<h2>Footnotes</h2>
 
-	<h2>Footnotes</h2>
+		<p id="repos-footnote">
+			* "a lot of package repositories and other sources" include:
+		</p>
 
-	<p id="repos-footnote">
-		* "a lot of package repositories and other sources" include:
-	</p>
-
-	{% include "supported_repos.html" %}
+		{% include "supported_repos.html" %}
+	<section>
 
 </div> {# container #}
 {% endblock %}

@@ -23,39 +23,38 @@
 {% macro active_if_endpoint(endpoint) -%}
 	{%- if request.endpoint == endpoint %} active{%- endif -%}
 {%- endmacro %}
-<header>
-	<nav class="navbar navbar-default navbar-static-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#repology-navbar-collapse" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="{{ url_for("index") }}">
-					<img alt="Repology" src="{{ url_for("static", filename="repology40x40.v1.png") }}" width="40" height="40">
-				</a>
-			</div>
 
-			<div class="collapse navbar-collapse" id="repology-navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li{{ classactive_if_endpoint('metapackages_all') }}><a href="{{ url_for('metapackages_all') }}">All metapackages</a></li>
-					<li{{ classactive_if_endpoint('metapackages_unique') }}><a href="{{ url_for('metapackages_unique') }}">Unique</a></li>
-					<li{{ classactive_if_endpoint('metapackages_widespread') }}><a href="{{ url_for('metapackages_widespread') }}">Widespread</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-separator-at-left">
-					<li{{ classactive_if_endpoint('maintainers') }}><a href="{{ url_for('maintainers') }}">Maintainers</a></li>
-					<li{{ classactive_if_endpoint('repositories') }}><a href="{{ url_for('repositories') }}">Repositories</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li{{ classactive_if_endpoint('news') }}><a href="{{ url_for('news') }}">News</a></li>
-					<li{{ classactive_if_endpoint('statistics') }}><a href="{{ url_for('statistics') }}">Statistics</a></li>
-				</ul>
-			</div>
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#repology-navbar-collapse" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="{{ url_for("index") }}">
+				<img alt="Repology" src="{{ url_for("static", filename="repology40x40.v1.png") }}" width="40" height="40">
+			</a>
 		</div>
-	</nav>
-</header>
+
+		<div class="collapse navbar-collapse" id="repology-navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li{{ classactive_if_endpoint('metapackages_all') }}><a href="{{ url_for('metapackages_all') }}">All metapackages</a></li>
+				<li{{ classactive_if_endpoint('metapackages_unique') }}><a href="{{ url_for('metapackages_unique') }}">Unique</a></li>
+				<li{{ classactive_if_endpoint('metapackages_widespread') }}><a href="{{ url_for('metapackages_widespread') }}">Widespread</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-separator-at-left">
+				<li{{ classactive_if_endpoint('maintainers') }}><a href="{{ url_for('maintainers') }}">Maintainers</a></li>
+				<li{{ classactive_if_endpoint('repositories') }}><a href="{{ url_for('repositories') }}">Repositories</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li{{ classactive_if_endpoint('news') }}><a href="{{ url_for('news') }}">News</a></li>
+				<li{{ classactive_if_endpoint('statistics') }}><a href="{{ url_for('statistics') }}">Statistics</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
 
 {% block pageheader %}
 <div class="container">
