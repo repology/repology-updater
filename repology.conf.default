@@ -4,7 +4,7 @@
 # These settings are used in web application and as defaults
 # for all command line utilities. You may override them in
 # repology.conf file in project root or in any custom file,
-# as long as you set path to it in REPLOGY_CONF environment
+# as long as you set path to it in REPOLOGY_CONF environment
 # variable
 
 ############################################################################
