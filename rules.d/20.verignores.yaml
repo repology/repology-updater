@@ -394,7 +394,7 @@
 # U
 - { name: ufoai,                       ver: "2.5.0+20150216",                              ignorever: true } # homebrew
 - { name: unace,                       ver: "2.50",                                        ignorever: true } # it's 2.5
-- { name: unarr,                       ver: "20[0-9]{6}.*",                                ignorever: true } # slackbuilds
+- { name: unarr,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # slackbuilds
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: unrar,                       verpat: "5\\.50.*",                                 ignorever: true } # it uses 5.5.X schema
 - { name: unzip,                       ver: "6.10c11",                                     ignorever: true } # haikuports
