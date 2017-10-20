@@ -30,8 +30,8 @@ class FontMeasurerTest(unittest.TestCase):
     def test_fontmeasurer(self):
         fontmeas = FontMeasurer(config['BADGE_FONT'], 11)
 
-        self.assertEqual(fontmeas.GetDimensions('A'), (7, 11))
-        self.assertEqual(fontmeas.GetDimensions('A'), (7, 11))  # cached
+        self.assertEqual(fontmeas.GetDimensions('The quick brown fox jumps over the lazy dog'), (254, 13))
+        self.assertEqual(fontmeas.GetDimensions('The quick brown fox jumps over the lazy dog'), (254, 13))  # cached
 
 
 if __name__ == '__main__':
