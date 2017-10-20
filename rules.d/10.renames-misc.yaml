@@ -591,6 +591,7 @@
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
 - { name: libressl-devel,              setname: libressl, ignorever: true }
+- { name: libressl-netcat,             setname: libressl, addflavor: netcat }
 - { name: librfm5,                     setname: librfm                    }
 - { name: librlog,                     setname: rlog }
 - { name: libscalapack,                setname: scalapack                 }
@@ -609,6 +610,7 @@
 - { name: libuchardet,                 setname: uchardet                  }
 - { name: libunistring2,               setname: libunistring              }
 - { name: [libutil-linux-aarch64,libutil-linux-nosystemd,libutil-linux-nosystemd-debug,libutil-linux-selinux], setname: util-linux, addflavor: true }
+- { name: libunarr,                    setname: unarr                     }
 - { name: libuv1,                      setname: libuv                     }
 - { name: [libwmf-nox11,libwmf-docs],  setname: libwmf, addflavor: true   }
 - { name: libx264,                     setname: x264                      }
