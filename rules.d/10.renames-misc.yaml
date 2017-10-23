@@ -915,6 +915,10 @@
 - { name: websocket++,                 setname: websocketpp               }
 - { name: webtoolkit-java-sdk,         setname: gwt                       }
 - { name: wine,                        setname: wine-etersoft,            family: sisyphus } # counterfeit
+- { name: [wine-next,wine-staging],    setname: wine }
+- { name: [wine-d3d9,wine-any,wine-gaming-nine,wine-rt,wine-staging-ivb], setname: wine, addflavor: true }
+- { name: wine-gecko-stable,           setname: wine-gecko                }
+- { name: wine-wizard,                 setname: winewizard                }
 - { name: wings,                       setname: wings3d                   }
 - { name: wirouter_keyrec,             setname: wirouterkeyrec }
 - { name: wmaker,                      setname: windowmaker               }
