@@ -18,6 +18,7 @@
 import flask
 
 from repologyapp.globals import *
+from repologyapp.math import safe_percent
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
@@ -29,12 +30,6 @@ def statistics(sorting=None):
     repostats = {repostat['name']: repostat for repostat in get_db().GetRepositories()}
     repostats = [repostats[reponame] for reponame in reponames if reponame in repostats]
     showmedals = True
-
-    def safe_percent(a, b):
-        if b <= 0:
-            return 0.0
-
-        return 100.0 * a / b
 
     if sorting == 'newest':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'], reverse=True)

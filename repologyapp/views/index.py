@@ -18,6 +18,7 @@
 import flask
 
 from repologyapp.globals import *
+from repologyapp.math import safe_percent
 from repologyapp.metapackages import metapackages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
 
@@ -32,12 +33,6 @@ def index():
         repo for repo in get_db().GetRepositories()
         if repo['name'] in reponames and repometadata[repo['name']]['type'] == 'repository'
     ]
-
-    def safe_percent(a, b):
-        if b <= 0:
-            return 0.0
-
-        return 100.0 * a / b
 
     top_repos = {
         'by_total': [
