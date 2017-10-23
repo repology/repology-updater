@@ -7,7 +7,7 @@
 - { verpat: ".*\\.[0-9]+\\.[0-9]+\\.[0-9a-f]{4,}",                   family: sisyphus,     ignorever: true } # personal rule for ldv@altlinux.org
 
 # 0-9
-- { name: [0ad,"0 A.D."],              verpat: "(?:0\\.0\\.|a|alpha ?)([0-9]+)(?:[-_]alpha| .+)?", setver: "alpha $1" }
+- { name: [0ad,0ad-data,"0 A.D."],     verpat: "(?:0\\.0\\.|a|alpha ?)([0-9]+)(?:[-_]alpha| .+)?", setver: "alpha $1" }
 - { name: 0ad,                         verpat: "[^a].*",                                   ignorever: true }
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
 - { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignorever: true } # pkgsrc
@@ -309,6 +309,7 @@
 - { name: p5-catalyst-plugin-authentication, ver: "0.100230",                              ignorever: true }
 - { name: p5-device-serialport,        ver: "1.040000",                                    ignorever: true }
 - { name: p5-net-whois-ripe,           ver: "2.005005",                                    ignorever: true } # < 2.006
+- { name: pachi,                       verpat: "11.*",                                     ignorever: true }
 - { name: perl-xml-parser,             ver: "2.44.01",                                     devel: true } # marked as developer release on cpan
 - { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignorever: true }
 - { name: patchelf,                    verpat: ".*pre.*",                                  ignorever: true } # nix
