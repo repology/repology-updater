@@ -549,6 +549,7 @@
 - { name: libcogl,                     setname: cogl                      }
 - { name: libcomedi,                   setname: comedilib                 }
 - { name: libconfuse0,                 setname: libconfuse                }
+- { name: libcpuid11,                  setname: libcpuid                  }
 - { name: libcsfml,                    setname: csfml                     }
 - { name: libelf0,                     setname: libelf                    }
 - { name: [libenet,enet1.2],           setname: enet                      }

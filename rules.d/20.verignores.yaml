@@ -34,7 +34,7 @@
 - { name: apr2,                        verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: arduino,                     ver: "0021",                                        ignorever: true } # EPEL 6
 - { name: arptables,                   verpat: "20[0-9]{2}",                               ignorever: true } # LEDE year
-- { name: arpwatch,                    ver: "2.1.15",                                      ignorever: true } # it's 2.1a15!
+- { name: arpwatch,                    ver: "2.1.15",                                      setver: "2.1a15" }
 - { name: arora,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: asdf,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: asp2php,                     ver: "20080813",                                    ignorever: true }
@@ -55,7 +55,7 @@
 - { name: aspell-tet,                  ver: "0.50.0",                                      ignorever: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
 - { name: attr,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: autoconf213,                 ver: "2.13.000227",                                 ignorever: true }
-- { name: autoconf-archive,            verpat: "[0-9]{8}.*",                               ignorever: true } # it's YYYY.MM.DD
+- { name: autoconf-archive,            verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 
 # B
@@ -75,7 +75,7 @@
 - { name: boost-jam,                   verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: brasero,                     ver: "3.12.2",                family: opensuse,     ignorever: true } # not released yet
 - { name: brotli,                      verpat: "20[0-9]{6}.*",                             ignorever: true }
-- { name: brickout,                    ver: "20020609",                                    ignorever: true } # it's clearly 2002.06.09 as stated on the website
+- { name: brickout-archive,            verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # it's clearly 2002.06.09 as stated on the website
 - { name: bully,                       verpat: "1\\.1.+",                                  ignorever: true } # snapshots, latest is 1.1
 - { name: bzflag,                      ver: "2.4.11",                family: sisyphus,     ignorever: true } # fake
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
@@ -85,7 +85,7 @@
 - { name: ca-certificates,                                           family: [alpine,crux], ignorever: true } # see https://hg.mozilla.org/projects/nss/log/tip/lib/ckfw/builtins/certdata.txt for valid dates
 - { name: calamares,                   verlonger: 3,                 family: kaos,         ignorever: true } # own version?
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
-- { name: cegui,                       verpat: "6\\..*",                                   ignorever: true } # it's 0.6.2!
+- { name: cegui,                       verpat: "6\\..*",                                   setver: "0.$0" } # it's 0.6.2!
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
@@ -122,7 +122,7 @@
 # E
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignorever: true }
 - { name: ebtables,                    verpat: "20[0-9]{2}.*",                             ignorever: true } # LEDE year
-- { name: egoboo,                      ver: "2.81",                                        ignorever: true } # it's 2.8.1
+- { name: egoboo,                      ver: "2.81",                                        setver: "2.8.1" }
 - { name: ephoto,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: ethtool,                     verpat: "6.*",                                      ignorever: true } # XXX: check if https://www.kernel.org/pub/software/network/ethtool/ and ethtool from https://sourceforge.net/projects/gkernel/ are the same project. Anyway, the former is fresh and the latter is ancient crap from 2007
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignorever: true } # no such release
@@ -143,7 +143,7 @@
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
 - { name: "fonts:eeyek",               ver: "20091204",                                    ignorever: true }
 - { name: "fonts:fira-sans",           ver: "20[0-9]{6}",                                  ignorever: true } # openbsd garbage
-- { name: "fonts:gentium-basic",       ver: "1102",                                        ignorever: true } # it's 1.102!
+- { name: "fonts:gentium-basic",       ver: "1102",                                        setver: "1.102" }
 - { name: "fonts:mikachan",            ver: "9.1.2006.08.09",                              ignorever: true } # openSUSE garbage
 - { name: "fonts:oldstandard",         ver: "2.2really",                                   ignorever: true } # debian garbage
 - { name: "fonts:quattrocento",        ver: "2.000",                 family: arch,         ignorever: true } # webpage says it's 1.1
@@ -187,7 +187,7 @@
 - { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
 - { name: i7z,                         verlonger: 3,                                       ignorever: true } # 0.27.2.git1 @ Arch
 - { name: icon,                        verpat: "[0-9]{3}",                                 ignorever: true } # XXX: transform + problem
-- { name: icebreaker,                  ver: "1.21",                                        ignorever: true } # it's 1.2.1!
+- { name: icebreaker,                  ver: "1.21",                                        setver: "1.2.1" }
 - { name: icu-le-hb,                   ver: "1.0.3.3",                                     ignorever: true } # fake (FreeBSD)
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
 - { name: iputils,                     verpat: "[0-9]{8}\\.[0-9a-f]{7,}",                  ignorever: true } # arch: commit id in version
@@ -225,7 +225,7 @@
 - { name: libcaca,                     ver: "0.99", family: [sisyphus,fedora,mageia,pclinuxos], ignorever: true } # it's 0.99.betaX!
 - { name: libcaca,                     verpat: "0.99.[0-9]+.*",                            ignorever: true } # it.s 0.99.betaX, not 0.99.X
 - { name: libcdio-paranoia,            verpat: "[0-9]+\\.[0-9]+\\.[0-9]+", family: kaos,   ignorever: true } # bad versioning
-- { name: libcpuid,                    ver: "0.21",                                        ignorever: true } # deepin crap (it's 0.2.1)
+- { name: libcpuid,                    ver: "0.21",                                        setver: "0.2.1" } # deepin crap
 - { name: libdvdread,                  ver: "5.0.4",                 family: [arch,openindiana], ignorever: true } # fake
 - { name: libexecinfo,                                               family: ravenports,   ignorever: true } # fake
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignorever: true } # FreeBSD is using git snapshot
@@ -252,7 +252,7 @@
 
 # L (continued)
 - { name: litecoin,                    ver: "0.15.0.1",              family: sisyphus,     ignorever: true } # it's 0.15.0.1rc1
-- { name: live555,                     verpat: "[0-9]{8}.*",                               ignorever: true } # alt; it's dot-separated, dummies!
+- { name: live555,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # alt; it's dot-separated, dummies!
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: llvm,                        verpat: ".*git",                                    ignorever: true }
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
@@ -300,7 +300,7 @@
 - { name: openlierox,                  ver: "0.58",                  family: [fedora,debuntu], ignorever: true } # there's no 0.58, only 0.58beta3
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
-- { name: openssh,                     verpat: "[0-9]+\\.[0-9]+\\.[0-9]+",                 ignorever: true } # pkgrc: it's X.YpZ!
+- { name: openssh,                     verpat: "([0-9]+\\.[0-9]+)\\.([0-9]+)",             setver: "$1p$2" } # pkgrc: it's X.YpZ!
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignorever: true } # freshcode, pZ part missing
 - { name: openxcom,                    verpat: "2017.*",                                   ignorever: true } # git snapshots
 - { name: osc,                         ver: "0.160.0",               family: opensuse,     ignorever: true } # fake
@@ -392,12 +392,12 @@
 - { name: [tor,tor-devel],             verpat: "(.*)[._-][ar].*",                          setver: "$1" } # version is self-sufficient; remove redundant alpha/rc suffix
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: tuxmath,                     ver: "20010907",                                    ignorever: true }
-- { name: tuxpaint-stamps,             verpat: "20[0-9]{6}.*",                             ignorever: true } # it's separated
+- { name: tuxpaint-stamps,             verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
 - { name: tvheadend,                   verpat: "[0-9]+\\.[0-9]*[13579](?:\\..*)?",         devel: true } # https://tvheadend.org/projects/tvheadend/wiki/download
 
 # U
 - { name: ufoai,                       ver: "2.5.0+20150216",                              ignorever: true } # homebrew
-- { name: unace,                       ver: "2.50",                                        ignorever: true } # it's 2.5
+- { name: unace,                       ver: "2.50",                                        setver: "2.5" }
 - { name: unarr,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # slackbuilds
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: unrar,                       verpat: "5\\.50.*",                                 ignorever: true } # it uses 5.5.X schema
