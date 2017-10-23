@@ -25,7 +25,7 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
-from repology.packageproc import PackagesetAggregateByVersions, PackagesetSortByVersions, PackagesetToFamilies
+from repology.packageproc import PackagesetAggregateByVersions, PackagesetSortByNameVersion, PackagesetSortByVersions, PackagesetToFamilies
 
 
 @ViewRegistrar('/metapackage/<name>')
@@ -55,8 +55,16 @@ def metapackage_versions(name):
 
 @ViewRegistrar('/metapackage/<name>/packages')
 def metapackage_packages(name):
-    packages = get_db().GetMetapackage(name)
-    packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
+    packages_by_repo = {}
+
+    for package in get_db().GetMetapackage(name):
+        packages_by_repo.setdefault(package.repo, []).append(package)
+
+    packages = []
+    for repo in reponames:
+        if repo in packages_by_repo:
+            packages.extend(PackagesetSortByNameVersion(packages_by_repo[repo]))
+
     return flask.render_template(
         'metapackage-packages.html',
         packages=packages,
@@ -97,6 +105,13 @@ def metapackage_information(name):
         for download in package.downloads:
             append_info('downloads', download, package)
 
+    if 'repos' in information:
+        # preserve repos order
+        information['repos'] = [
+            (reponame, information['repos'][reponame])
+            for reponame in reponames if reponame in information['repos']
+        ]
+
     versions = PackagesetAggregateByVersions(packages, {VersionClass.legacy: VersionClass.outdated})
 
     for version in versions:
@@ -133,8 +148,8 @@ def metapackage_related(name):
 
 @ViewRegistrar('/metapackage/<name>/badges')
 def metapackage_badges(name):
-    packages = get_db().GetMetapackage(name)
-    repos = sorted(list(set([package.repo for package in packages])))
+    repos_present_in = set([package.repo for package in get_db().GetMetapackage(name)])
+    repos = [repo for repo in reponames if repo in repos_present_in]
     return flask.render_template('metapackage-badges.html', name=name, repos=repos)
 
 

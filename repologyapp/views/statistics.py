@@ -26,7 +26,8 @@ from repology.config import config
 @ViewRegistrar('/statistics')
 @ViewRegistrar('/statistics/<sorting>')
 def statistics(sorting=None):
-    repostats = filter(lambda r: r['name'] in reponames, get_db().GetRepositories())
+    repostats = {repostat['name']: repostat for repostat in get_db().GetRepositories()}
+    repostats = [repostats[reponame] for reponame in reponames if reponame in repostats]
     showmedals = True
 
     def safe_percent(a, b):
@@ -47,7 +48,6 @@ def statistics(sorting=None):
         repostats = sorted(repostats, key=lambda s: s['num_metapackages'], reverse=True)
     else:
         sorting = 'name'
-        repostats = sorted(repostats, key=lambda s: s['name'])
         showmedals = False
 
     return flask.render_template(

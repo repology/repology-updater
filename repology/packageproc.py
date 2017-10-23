@@ -194,10 +194,21 @@ def PackagesetToBestByRepo(packages):
 
 
 def PackagesetSortByVersions(packages):
-    def packages_version_cmp_reverse(p1, p2):
+    def compare(p1, p2):
         return VersionCompare(p2.version, p1.version)
 
-    return sorted(packages, key=cmp_to_key(packages_version_cmp_reverse))
+    return sorted(packages, key=cmp_to_key(compare))
+
+
+def PackagesetSortByNameVersion(packages):
+    def compare(p1, p2):
+        if p1.name < p2.name:
+            return -1
+        if p1.name > p2.name:
+            return 1
+        return VersionCompare(p2.version, p1.version)
+
+    return sorted(packages, key=cmp_to_key(compare))
 
 
 def PackagesetToFamilies(packages):

@@ -163,7 +163,7 @@ def Main():
     repoman = RepositoryManager(options.repos_dir, options.statedir)
 
     if options.list:
-        print('\n'.join(sorted(repoman.GetNames(reponames=options.reponames))))
+        print('\n'.join(repoman.GetNames(reponames=options.reponames)))
         return 0
 
     transformer = PackageTransformer(options.rules_dir)
