@@ -564,6 +564,7 @@
 - { namepat: "linux-kernel(?:-lts)?[0-9._-]*", setname: linux }
 
 - { namepat: "mariadb[0-9.-]*(?:-client|-server)?", setname: mariadb }
+- { name: mariadb, verge: "10.3", devel: true } # https://downloads.mariadb.org/
 
 - { namepat: "moodle[0-9._-]+", setname: moodle }
 # XXX: handle moodle-lang*
