@@ -75,7 +75,7 @@
 - { name: boost-jam,                   verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: brasero,                     ver: "3.12.2",                family: opensuse,     ignorever: true } # not released yet
 - { name: brotli,                      verpat: "20[0-9]{6}.*",                             ignorever: true }
-- { name: brickout-archive,            verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # it's clearly 2002.06.09 as stated on the website
+- { name: brickout,                    verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # it's clearly 2002.06.09 as stated on the website
 - { name: bully,                       verpat: "1\\.1.+",                                  ignorever: true } # snapshots, latest is 1.1
 - { name: bzflag,                      ver: "2.4.11",                family: sisyphus,     ignorever: true } # fake
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
