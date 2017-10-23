@@ -14,7 +14,7 @@
 
 # A
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5" ],                 ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
-- { name: abcmidi,                     ver: "(20[0-9]{2})([0-9]{2})([0-9]{2})",            setver: "$1.$2.$3" }
+- { name: abcmidi,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
 - { name: abuse,                       ver: "2.0",                   family: pkgsrc,       ignorever: true }
 - { name: acl,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: acl,                         verlonger: 3,                                       ignorever: true }
@@ -142,7 +142,7 @@
 - { name: flvstreamer,                 ver: "2.1c",                                        setver: "2.1c0" }
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
 - { name: "fonts:eeyek",               ver: "20091204",                                    ignorever: true }
-- { name: "fonts:fira-sans",           ver: "20[0-9]{6}",                                  ignorever: true } # openbsd garbage
+- { name: "fonts:fira-sans",           verpat: "20[0-9]{6}",                               ignorever: true } # openbsd garbage
 - { name: "fonts:gentium-basic",       ver: "1102",                                        setver: "1.102" }
 - { name: "fonts:mikachan",            ver: "9.1.2006.08.09",                              ignorever: true } # openSUSE garbage
 - { name: "fonts:oldstandard",         ver: "2.2really",                                   ignorever: true } # debian garbage
