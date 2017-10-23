@@ -78,7 +78,7 @@
 - { name: apache-archiva,              setname: archiva                   }
 - { name: apache-arrow,                setname: arrow                     }
 - { name: apache-flume-ng,             setname: flume                     }
-- { name: [apache-fop,fop2],           setname: fop                       }
+- { name: [apache-fop,fop2,xmlgraphics-fop], setname: fop                 }
 - { name: apache-jena,                 setname: jena                      }
 - { name: apache-jena-fuseki,          setname: jena                      }
 - { name: apache-openoffice,           setname: openoffice                }
