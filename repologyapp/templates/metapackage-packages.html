@@ -37,7 +37,7 @@
 			<ul class="list-group">
 			{% if package.comment %}
 				<li class="list-group-item"><b>Summary:</b><br>
-					{{ package.comment }}
+					{{- package.comment -}}
 				</li>
 			{% endif %}
 			{% if package.maintainers %}
