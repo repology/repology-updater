@@ -16,12 +16,12 @@
 - { name: antlr, verpat: "3\\..*",     setname: antlr3 }
 - { name: antlr, verpat: "4\\..*",     setname: antlr4 }
 
-- { name: apache-httpd,                setname: apache }
+- { name: [apache-httpd,httpd],        setname: apache }
+- { name: apache-html-manual,          setname: apache, addflavor: html-manual }
+- { name: apache-tools,                setname: apache, addflavor: tools }
+- { name: htdigest,                    setname: apache, addflavor: htdigest }
 - { namepat: "apache[0-9.]+",          setname: apache }
-- { name: apache, verpat: "1\\..*",    setname: apache1 }
-- { name: apache, verpat: "2\\.2\\..*", setname: apache22 }
-- { name: apache, verpat: "2\\.4\\..*", setname: apache24 }
-- { name: apache, verpat: "2\\.5\\..*", setname: apache25 }
+- { name: apache, verpat: "2\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?apr[0-9._-]*",    setname: apr }
 - { name: apr, verpat: "2\\..*",       devel: true }
