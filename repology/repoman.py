@@ -62,6 +62,9 @@ class RepositoryManager:
                     newsources.append(source)
             repo['sources'] = newsources
 
+            if 'sortname' not in repo:
+                repo['sortname'] = repo['name']
+
         self.statedir = statedir
         self.fetch_retries = fetch_retries
         self.fetch_retry_delay = fetch_retry_delay
@@ -293,7 +296,13 @@ class RepositoryManager:
 
     # Helpers to retrieve data on repositories
     def GetNames(self, reponames=None):
-        return sorted([repo['name'] for repo in self.__GetRepositories(reponames)])
+        def GetName(repo):
+            return repo['name']
+
+        def GetSortName(repo):
+            return repo['sortname']
+
+        return list(map(GetName, sorted(self.__GetRepositories(reponames), key=GetSortName)))
 
     def GetMetadata(self, reponames=None):
         return {

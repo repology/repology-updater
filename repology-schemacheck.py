@@ -77,6 +77,7 @@ schemas = {
     'repos': [
         {
             Required('name'): str,
+            'sortname': str,
             Required('type'): Any('repository', 'site', 'modules'),
             Required('desc'): str,
             Required('family'): Any(*families),
