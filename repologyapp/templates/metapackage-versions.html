@@ -33,7 +33,7 @@
 		</td>
 		<td class="text-center">{{ macros.package_link(package, package.name) }}</td>
 		<td class="text-center">
-			<span class="version version-big version-{{ package.versionclass|css_for_versionclass }}">
+			<span class="version version-big version-{{ package.versionclass|css_for_versionclass }}{% if package.verfixed %} version-property-fixed{% endif %}">
 				{{- macros.package_link(package, package.version) -}}
 			</span>
 		</td>

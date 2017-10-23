@@ -41,7 +41,6 @@ class TestParsers(unittest.TestCase):
 
             # version must be filled
             'origversion': None,
-            'effversion': None,
             'versionclass': None,
 
             'maintainers': [],
@@ -55,6 +54,7 @@ class TestParsers(unittest.TestCase):
             'shadow': False,
             'ignoreversion': False,
             'devel': False,
+            'verfixed': False,
 
             'flavors': [],
 

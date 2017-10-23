@@ -261,7 +261,6 @@ class Database:
 
                 version text not null,
                 origversion text,
-                effversion text,
                 versionclass smallint,
 
                 maintainers text[],
@@ -275,6 +274,7 @@ class Database:
                 shadow bool not null,
                 ignoreversion bool not null,
                 devel bool not null,
+                verfixed bool not null,
 
                 flavors text[],
 
@@ -604,7 +604,6 @@ class Database:
 
                 version,
                 origversion,
-                effversion,
                 versionclass,
 
                 maintainers,
@@ -618,6 +617,7 @@ class Database:
                 shadow,
                 ignoreversion,
                 devel,
+                verfixed,
 
                 flavors,
 
@@ -633,7 +633,6 @@ class Database:
                 %s,
                 %s,
                 %s,
-                %s,
 
                 %s,
                 %s,
@@ -642,6 +641,7 @@ class Database:
                 %s,
                 %s,
 
+                %s,
                 %s,
                 %s,
                 %s,
@@ -663,7 +663,6 @@ class Database:
 
                     package.version,
                     package.origversion,
-                    package.effversion,
                     package.versionclass,
 
                     package.maintainers,
@@ -677,6 +676,7 @@ class Database:
                     package.shadow,
                     package.ignoreversion,
                     package.devel,
+                    package.verfixed,
 
                     package.flavors,
 
@@ -941,7 +941,6 @@ class Database:
 
                 version,
                 origversion,
-                effversion,
                 versionclass,
 
                 maintainers,
@@ -955,6 +954,7 @@ class Database:
                 shadow,
                 ignoreversion,
                 devel,
+                verfixed,
 
                 flavors,
 
@@ -976,20 +976,20 @@ class Database:
 
                 version=row[5],
                 origversion=row[6],
-                effversion=row[7],
-                versionclass=row[8],
+                versionclass=row[7],
 
-                maintainers=row[9],
-                category=row[10],
-                comment=row[11],
-                homepage=row[12],
-                licenses=row[13],
-                downloads=row[14],
+                maintainers=row[8],
+                category=row[9],
+                comment=row[10],
+                homepage=row[11],
+                licenses=row[12],
+                downloads=row[13],
 
-                ignore=row[15],
-                shadow=row[16],
-                ignoreversion=row[17],
-                devel=row[18],
+                ignore=row[14],
+                shadow=row[15],
+                ignoreversion=row[16],
+                devel=row[17],
+                verfixed=row[18],
 
                 flavors=row[19],
 
@@ -1020,7 +1020,6 @@ class Database:
 
                 version,
                 origversion,
-                effversion,
                 versionclass,
 
                 maintainers,
@@ -1034,6 +1033,7 @@ class Database:
                 shadow,
                 ignoreversion,
                 devel,
+                verfixed,
 
                 flavors,
 
@@ -1057,20 +1057,20 @@ class Database:
 
                 version=row[5],
                 origversion=row[6],
-                effversion=row[7],
-                versionclass=row[8],
+                versionclass=row[7],
 
-                maintainers=row[9],
-                category=row[10],
-                comment=row[11],
-                homepage=row[12],
-                licenses=row[13],
-                downloads=row[14],
+                maintainers=row[8],
+                category=row[9],
+                comment=row[10],
+                homepage=row[11],
+                licenses=row[12],
+                downloads=row[13],
 
-                ignore=row[15],
-                shadow=row[16],
-                ignoreversion=row[17],
-                devel=row[18],
+                ignore=row[14],
+                shadow=row[15],
+                ignoreversion=row[16],
+                devel=row[17],
+                verfixed=row[18],
 
                 flavors=row[19],
 

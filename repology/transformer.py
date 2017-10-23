@@ -214,6 +214,8 @@ class PackageTransformer:
                 package.effname = self.dollar0.sub(package.effname, rule['setname'])
 
         if 'setver' in rule:
+            version_before_fix = package.version
+
             if package.origversion is None:
                 package.origversion = package.version
 
@@ -221,6 +223,8 @@ class PackageTransformer:
                 package.version = self.dollarN.sub(lambda x: ver_match.group(int(x.group(1))), rule['setver'])
             else:
                 package.version = self.dollar0.sub(package.version, rule['setver'])
+
+            package.verfixed = package.version != version_before_fix
 
         if 'replaceinname' in rule:
             for pattern, replacement in rule['replaceinname'].items():

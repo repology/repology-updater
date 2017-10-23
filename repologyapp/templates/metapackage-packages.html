@@ -31,7 +31,10 @@
 					{{- package.name -}}
 				</h3>
 				<div class="package-version">
-					{{- package.version }}{% if package.origversion %} ({{ package.origversion }}){% endif -%}
+					{%- if package.verfixed %}<span class="version-property-fixed">{% endif -%}
+					{{- package.version -}}
+					{%- if package.verfixed %}</span>{% endif -%}
+					{%- if package.origversion %} ({{ package.origversion }}){% endif -%}
 				</div>
 			</div>
 			<ul class="list-group">

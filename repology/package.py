@@ -47,7 +47,6 @@ class Package:
 
         'version',
         'origversion',
-        'effversion',
         'versionclass',
 
         'maintainers',
@@ -61,6 +60,7 @@ class Package:
         'shadow',
         'ignoreversion',
         'devel',
+        'verfixed',
 
         'flavors',
 
@@ -69,9 +69,9 @@ class Package:
 
     def __init__(self, repo=None, family=None, subrepo=None,
                  name=None, effname=None,
-                 version=None, origversion=None, effversion=None, versionclass=None,
+                 version=None, origversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
-                 ignore=False, shadow=False, ignoreversion=False, devel=False,
+                 ignore=False, shadow=False, ignoreversion=False, devel=False, verfixed=False,
                  flavors=None,
                  extrafields=None):
         self.repo = repo
@@ -83,7 +83,6 @@ class Package:
 
         self.version = version
         self.origversion = origversion
-        self.effversion = effversion
         self.versionclass = versionclass
 
         self.maintainers = maintainers if maintainers else []
@@ -97,6 +96,7 @@ class Package:
         self.shadow = shadow
         self.ignoreversion = ignoreversion
         self.devel = devel
+        self.verfixed = verfixed
 
         self.flavors = flavors if flavors else []
 
@@ -191,6 +191,7 @@ class Package:
         CheckBool(self.shadow, 'shadow')
         CheckBool(self.ignoreversion, 'ignoreversion')
         CheckBool(self.devel, 'devel')
+        CheckBool(self.verfixed, 'verfixed')
 
         CheckList(self.flavors, 'flavors', Alphanumeric, Lowercase)
 

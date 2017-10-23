@@ -150,6 +150,10 @@
     background-color: #d9534f;
 }
 
+.version-property-fixed {
+    font-style: italic;
+}
+
 .medal {
     display: inline-block;
     border-radius: 50%;
