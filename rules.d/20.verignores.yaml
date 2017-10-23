@@ -446,7 +446,7 @@
 
 # Y
 - { name: yaml-cpp,                    ver: "0.5.4",                 family: vcpkg,        ignorever: true } # not released yet
-- { name: youtube-dl,                  verpat: "(20[0-9]{2}).([0-9]{2}).([0-9]{2})",       setver: "$1.$2.$3" } # canonical version is period-separated
+- { name: youtube-dl,                  verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # canonical version is period-separated
 
 # Z
 - { name: zathura,                     ver: "20101104",                                    ignorever: true }
