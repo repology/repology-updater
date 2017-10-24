@@ -422,7 +422,7 @@ class Database:
                         count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
                         count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
                         count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
-                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_lefacy
+                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy
                     FROM packages
                     GROUP BY maintainer, effname
                 WITH DATA
