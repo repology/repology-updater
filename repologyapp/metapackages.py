@@ -24,15 +24,15 @@ from repology.packageproc import PackagesetSortByVersions
 
 class MetapackagesFilterInfo:
     fields = {
-        'search':     { 'type': str,  'advanced': False },
-        'maintainer': { 'type': str,  'advanced': True },
-        'category':   { 'type': str,  'advanced': True },
-        'inrepo':     { 'type': str,  'advanced': True },
-        'notinrepo':  { 'type': str,  'advanced': True },
-        'minspread':  { 'type': int,  'advanced': True },
-        'maxspread':  { 'type': int,  'advanced': True },
-        'outdated':   { 'type': bool, 'advanced': True },
-        'unique':     { 'type': bool, 'advanced': True },
+        'search':     {'type': str,  'advanced': False},  # noqa: E241
+        'maintainer': {'type': str,  'advanced': True},   # noqa: E241
+        'category':   {'type': str,  'advanced': True},   # noqa: E241
+        'inrepo':     {'type': str,  'advanced': True},   # noqa: E241
+        'notinrepo':  {'type': str,  'advanced': True},   # noqa: E241
+        'minspread':  {'type': int,  'advanced': True},   # noqa: E241
+        'maxspread':  {'type': int,  'advanced': True},   # noqa: E241
+        'outdated':   {'type': bool, 'advanced': True},   # noqa: E241
+        'unique':     {'type': bool, 'advanced': True},   # noqa: E241
     }
 
     def __init__(self):
