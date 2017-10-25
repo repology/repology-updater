@@ -93,8 +93,6 @@ class MetapackageRequest:
 
         # flags
         self.outdated = None
-        self.unique = None
-        self.nonunique = None
 
         # other
         self.limit = None
@@ -167,19 +165,12 @@ class MetapackageRequest:
     def Outdated(self):
         self.outdated = True
 
-    def Unique(self):
-        self.unique = True
-
-    def NonUnique(self):
-        self.nonunique = True
-
     def GetQuery(self):
         tables = set()
         where = AndQuery()
         having = AndQuery()
 
         outdated_handled = False
-        unique_handled = False
 
         # table joins and conditions
         if self.maintainer:
@@ -203,12 +194,6 @@ class MetapackageRequest:
             if self.outdated:
                 where.Append('repo_metapackages.num_packages_outdated > 0')
                 outdated_handled = True
-            if self.unique:
-                where.Append('repo_metapackages.unique')
-                unique_handled = True
-            if self.nonunique:
-                where.Append('NOT repo_metapackages.unique')
-                unique_handled = True
 
         if self.notinrepo:
             tables.add('repo_metapackages as repo_metapackages1')
@@ -217,24 +202,10 @@ class MetapackageRequest:
         if self.category:
             tables.add('category_metapackages')
             where.Append('category_metapackages.category = %s', self.category)
-            if self.unique:
-                where.Append('category_metapackages.unique')
-                unique_handled = True
-            if self.nonunique:
-                where.Append('NOT category_metapackages.unique')
-                unique_handled = True
 
         if self.outdated and not outdated_handled:
             tables.add('repo_metapackages')
             where.Append('repo_metapackages.num_packages_outdated > 0')
-
-        if self.unique and not unique_handled:
-            tables.add('repo_metapackages')
-            where.Append('repo_metapackages.unique')
-
-        if self.nonunique and not unique_handled:
-            tables.add('repo_metapackages')
-            where.Append('NOT repo_metapackages.unique')
 
         # effname conditions
         if self.namecond and self.namebound:

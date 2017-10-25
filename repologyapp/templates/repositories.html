@@ -25,7 +25,7 @@
 						<a href="{{ url_for('metapackages', notinrepo=reponame) }}">Absent</a>
 						<a href="{{ url_for('metapackages', inrepo=reponame, outdated=1) }}">Outdated</a>
 						<a href="{{ url_for('metapackages', inrepo=reponame, minspread=5) }}">Candidates</a>
-						<a href="{{ url_for('metapackages', inrepo=reponame, unique=1) }}">Unique</a>
+						<a href="{{ url_for('metapackages', inrepo=reponame, maxspread=1) }}">Unique</a>
 					</td>
 				</tr>
 			{% endfor %}
