@@ -412,6 +412,28 @@ class Database:
             CREATE INDEX repo_metapackages_effname_trgm ON repo_metapackages USING gin (effname gin_trgm_ops)
         """)
 
+        # metapackages per category
+        self.cursor.execute("""
+            CREATE MATERIALIZED VIEW category_metapackages
+                AS
+                    SELECT
+                        category,
+                        effname,
+                        max(num_families) = 1 as unique
+                    FROM packages INNER JOIN metapackage_repocounts USING(effname)
+                    WHERE NOT shadow_only
+                    GROUP BY effname,category
+                WITH DATA
+        """)
+
+        self.cursor.execute("""
+            CREATE UNIQUE INDEX ON category_metapackages(category, effname)
+        """)
+
+        self.cursor.execute("""
+            CREATE INDEX ON category_metapackages(effname)
+        """)
+
         # maintainer_metapackages
         self.cursor.execute("""
             CREATE MATERIALIZED VIEW maintainer_metapackages
@@ -709,6 +731,7 @@ class Database:
     def UpdateViews(self):
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages""")
+        self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers""")
         self.cursor.execute("""REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations""")
