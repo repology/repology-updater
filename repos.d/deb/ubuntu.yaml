@@ -144,14 +144,14 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu_17_10_proposed
+- name: ubuntu_18_04
   type: repository
-  desc: Ubuntu 17.10 Proposed
+  desc: Ubuntu 18.14
   family: debuntu
   color: 'e95420'
-  valid_till: 2018-08-01
+  valid_till: 2023-04-01
   sources:
-    - name: [ artful-proposed/main, artful-proposed/multiverse, artful-proposed/restricted, artful-proposed/universe ]
+    - name: [ bionic/main, bionic/multiverse, bionic/restricted, bionic/universe, bionic-updates/main, bionic-updates/multiverse, bionic-updates/restricted, bionic-updates/universe ]
       fetcher: File
       parser: DebianSources
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
@@ -160,8 +160,36 @@
   repolinks:
     - desc: Ubuntu packages
       url: https://packages.ubuntu.com/
-    - desc: Ubuntu packages in artful
-      url: https://packages.ubuntu.com/artful/
+    - desc: Ubuntu packages in bionic
+      url: https://packages.ubuntu.com/bionic/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'https://packages.ubuntu.com/source/bionic/{name}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_18_04_proposed
+  type: repository
+  desc: Ubuntu 18.04 Proposed
+  family: debuntu
+  color: 'e95420'
+  sources:
+    - name: [ bionic-proposed/main, bionic-proposed/multiverse, bionic-proposed/restricted, bionic-proposed/universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in bionic
+      url: https://packages.ubuntu.com/bionic/
   packagelinks:
     - desc: Package on Launchpad.net
       url: 'https://launchpad.net/ubuntu/+source/{name}'
