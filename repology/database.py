@@ -201,7 +201,7 @@ class MetapackageRequest:
 
         if self.outdated and not outdated_handled:
             tables.add('repo_metapackages')
-            where.Append('repo_metapackages.unique')
+            where.Append('repo_metapackages.num_packages_outdated > 0')
 
         if self.unique and not unique_handled:
             tables.add('repo_metapackages')
