@@ -88,6 +88,9 @@ class MetapackageRequest:
         self.inrepo = None
         self.notinrepo = None
 
+        # category
+        self.category = None
+
         # flags
         self.outdated = None
         self.unique = None
@@ -140,6 +143,11 @@ class MetapackageRequest:
         if self.notinrepo:
             raise RuntimeError('duplicate not-in-repository condition')
         self.notinrepo = repo
+
+    def Category(self, category):
+        if self.category:
+            raise RuntimeError('duplicate category condition')
+        self.category = category
 
     def MinFamilies(self, num):
         if self.minfamilies:
@@ -205,6 +213,16 @@ class MetapackageRequest:
         if self.notinrepo:
             tables.add('repo_metapackages as repo_metapackages1')
             having.Append('count(*) FILTER (WHERE repo_metapackages1.repo = %s) = 0', self.notinrepo)
+
+        if self.category:
+            tables.add('category_metapackages')
+            where.Append('category_metapackages.category = %s', self.category)
+            if self.unique:
+                where.Append('category_metapackages.unique')
+                unique_handled = True
+            if self.nonunique:
+                where.Append('NOT category_metapackages.unique')
+                unique_handled = True
 
         if self.outdated and not outdated_handled:
             tables.add('repo_metapackages')

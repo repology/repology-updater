@@ -60,6 +60,8 @@ class MetapackagesFilterInfo:
             request.NameSubstring(self.args['search'])
         if 'maintainer' in self.args:
             request.Maintainer(self.args['maintainer'])
+        if 'category' in self.args:
+            request.Category(self.args['category'])
         if 'inrepo' in self.args:
             request.InRepo(self.args['inrepo'])
         if 'notinrepo' in self.args:
