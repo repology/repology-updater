@@ -64,70 +64,57 @@ Mandatory fields are <b>repo</b>, <b>name</b> and <b>version</b>, all other fiel
 
 <h3>Multiple metapackages</h3>
 
-<p>Following requests return data for multiple <em>metapackages</em> in form of <em>metapackage</em> name → list of <em>packages</em> dictionary. You may set a range of names to retrieve by specifying first or last name in range(inclusive or exclisive). API returns no more than {{ per_page }} <em>metapackages</em> per request. By taking last (alphanumerically) <em>name</em> from a request and making another request with <em>&gt;name</em> you can iterate through all metapackages. Empty output means end of data.</p>
+<p>The following requests return data for multiple <em>metapackages</em>
+in form of <em>metapackage</em> name → list of <em>packages</em>
+dictionary. API returns no more than {{ per_page }} <em>metapackages</em>
+per request. You may specify a start or an end of <em>metapackage</em> names
+range to request.</p>
 
 <p>Get first {{ per_page }} metapackages:</p>
 <pre>
-{{ url_for('api_v1_metapackages_all') }}
+{{ url_for('api_v1_metapackages') }}
 </pre>
 
 <p>Get first {{ per_page }} metapackages starting with <b>firefox</b> (inclusive):</p>
 <pre>
-{{ url_for('api_v1_metapackages_all', bound='firefox') }}
+{{ url_for('api_v1_metapackages', bound='firefox') }}
 </pre>
 
-<p>Get first {{ per_page }} metapackages after <b>firefox</b> (exclusive, e.g. <b>firefox</b> not included):</p>
+<p>Get last {{ per_page }} metapackages up to <b>firefox</b> (inclusive):</p>
 <pre>
-{{ url_for('api_v1_metapackages_all', bound='>firefox')|replace('%3E', '>') }}
+{{ url_for('api_v1_metapackages', bound='..firefox') }}
 </pre>
 
-<p>Get first {{ per_page }} metapackages just before <b>firefox</b> (exclusive, e.g. <b>firefox</b> not included):</p>
+<p>You may iterate through all metapackages by using the last metapackage name in the next
+request</p>
 <pre>
-{{ url_for('api_v1_metapackages_all', bound='<firefox')|replace('%3C', '<') }}
+{{ url_for('api_v1_metapackages') }}  # returns '010editor' ... 'aaut'
+{{ url_for('api_v1_metapackages', bound='aaut') }}  # returns 'aaut' ... 'acf-snort'
+{{ url_for('api_v1_metapackages', bound='acf-snort') }}  # returns 'acf-snort' ... 'adinatha-fonts'
+# ...
 </pre>
-
-<p>All <em>metapackages</em> requests support <b>&lt;</b> and <b>&gt;</b> syntax.</p>
 
 <h3>Filtered metapackages</h3>
 
-<p>Get metapackages present in specific repository (e.g. containing a <em>package</em> from that repository):</p>
-<pre>
-{{ url_for('api_v1_metapackages_in_repo', repo='freebsd') }}
-{{ url_for('api_v1_metapackages_in_repo', repo='freebsd', bound='firefox') }}
-{{ url_for('api_v1_metapackages_in_repo', repo='freebsd', bound='>firefox')|replace('%3E', '>') }}
-{{ url_for('api_v1_metapackages_in_repo', repo='freebsd', bound='<firefox')|replace('%3C', '<') }}
-</pre>
+<p>API supports all the filters available on the website, so you can just
+play with filters in the <a href="{{ url_for('metapackages') }}">website</a>
+and then replace <code>{{ url_for('metapackages') }}</code> URL prefix with
+<code>{{ url_for('api_v1_metapackages') }}</code> to get API output.</p>
 
-<p>Get metapackages not present in specific repository:</p>
-<pre>
-{{ url_for('api_v1_metapackages_not_in_repo', repo='freebsd') }}
-{{ url_for('api_v1_metapackages_not_in_repo', repo='freebsd', bound='firefox') }}
-{{ url_for('api_v1_metapackages_not_in_repo', repo='freebsd', bound='>firefox')|replace('%3E', '>') }}
-{{ url_for('api_v1_metapackages_not_in_repo', repo='freebsd', bound='<firefox')|replace('%3C', '<') }}
-</pre>
+<p>Supported filters are:</p>
+<dl class="dl-horizontal">
+	<dt>search</dt><dd>metapackage name substring to look for</dd>
+	<dt>maintainer</dt><dd>return metapackages maintainer by specified person</dd>
+	<dt>category</dt><dd>return metapackages with specified category</dd>
+	<dt>inrepo</dt><dd>return metapackages present in specified repository</dd>
+	<dt>notinrepo</dt><dd>return metapackages absent in specified repository</dd>
+	<dt>minspread</dt><dd>return metapackages present in at least specified number of repository families (for instance, use 2 to get non-unique metapackages)</dd>
+	<dt>maxspread</dt><dd>return metapackages present in at most specified number of repository families (for instance, use 1 to get unique metapackages)</dd>
+</dl>
 
-<p>Get metapackages outdated in specific repository:</p>
+<p>Example: get unique outdated metapackages not present in FreeBSD maintainer by foo@bar.com</p>
 <pre>
-{{ url_for('api_v1_metapackages_outdated_in_repo', repo='freebsd') }}
-{{ url_for('api_v1_metapackages_outdated_in_repo', repo='freebsd', bound='firefox') }}
-{{ url_for('api_v1_metapackages_outdated_in_repo', repo='freebsd', bound='>firefox')|replace('%3E', '>') }}
-{{ url_for('api_v1_metapackages_outdated_in_repo', repo='freebsd', bound='<firefox')|replace('%3C', '<') }}
-</pre>
-
-<p>Get metapackages for specific maintainer (e.g. containing a <em>package</em> with specific maintainer):</p>
-<pre>
-{{ url_for('api_v1_metapackages_by_maintainer', maintainer='amdmi3@FreeBSD.org') }}
-{{ url_for('api_v1_metapackages_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='firefox') }}
-{{ url_for('api_v1_metapackages_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='>firefox')|replace('%3E', '>') }}
-{{ url_for('api_v1_metapackages_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='<firefox')|replace('%3C', '<') }}
-</pre>
-
-<p>Get metapackages which are outdated for specific maintainer:</p>
-<pre>
-{{ url_for('api_v1_metapackages_outdated_by_maintainer', maintainer='amdmi3@FreeBSD.org') }}
-{{ url_for('api_v1_metapackages_outdated_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='firefox') }}
-{{ url_for('api_v1_metapackages_outdated_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='>firefox')|replace('%3E', '>') }}
-{{ url_for('api_v1_metapackages_outdated_by_maintainer', maintainer='amdmi3@FreeBSD.org', bound='<firefox')|replace('%3C', '<') }}
+{{ url_for('api_v1_metapackages', notinrepo='freebsd', maintainer='foo@bar.com', maxspread=1, outdated=1) }}
 </pre>
 
 <h3>Problems</h3>
