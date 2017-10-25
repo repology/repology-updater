@@ -92,7 +92,7 @@
 						Search <b>packages</b>
 					</div>
 					<div class="panel-body">
-						<form action="{{ url_for("metapackages_all") }}" method="GET">
+						<form action="{{ url_for("metapackages") }}" method="GET">
 							<div class="input-group">
 								<input type="text" class="form-control" name="search" placeholder="e.g. &quot;firefox&quot;">
 								<div class="input-group-btn">
@@ -102,7 +102,7 @@
 						</form>
 					</div>
 					<div class="panel-footer">
-						or <a href="{{ url_for("metapackages_all") }}">browse</a> list of all packages
+						or <a href="{{ url_for("metapackages") }}">browse</a> list of all packages
 					</div>
 				</div>
 			</div>

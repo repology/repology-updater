@@ -76,7 +76,7 @@
 			</th>
 
 			<td class="text-center total-cell" title="Total number of metapackages in this repository">
-				<a href="{{ url_for('metapackages_in_repo', repo=repostat.name) }}">
+				<a href="{{ url_for('metapackages', inrepo=repostat.name) }}">
 					{{- macros.value_with_delta(repostat.num_metapackages, old_repostat.num_metapackages) -}}
 				</a>
 			</td>
@@ -89,7 +89,7 @@
 			</td>
 
 			<td class="text-center version-cell version-big version-outdated">
-				<a href="{{ url_for('metapackages_outdated_in_repo', repo=repostat.name) }}">
+				<a href="{{ url_for('metapackages', inrepo=repostat.name, outdated=1) }}">
 					{{- macros.value_with_delta(repostat.num_metapackages_outdated, old_repostat.num_metapackages_outdated) -}}
 				</a>
 			</td>
@@ -98,7 +98,7 @@
 			{% if repometadata[repostat.name].shadow %}
 				<span title="This is a shadow repo, e.g. unique packages in it are ignored">n/a</span>
 			{% else %}
-				<a href="{{ url_for('metapackages_unique_in_repo', repo=repostat.name) }}">
+				<a href="{{ url_for('metapackages', inrepo=repostat.name, maxspread=1) }}">
 					{{- macros.value_with_delta(repostat.num_metapackages_unique, old_repostat.num_metapackages_unique) -}}
 				</a>
 			{% endif %}
