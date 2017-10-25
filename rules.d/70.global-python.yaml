@@ -120,6 +120,7 @@
     - ctypes
     - darts.util.lru
     - decorator
+    - numpy
     - pbr
     - py-cpuinfo
     - pyfiglet
@@ -152,6 +153,13 @@
 - { namepat: "flake8.*",               setname: "python:$0"               }
 - { namepat: "flask.*",                setname: "python:$0"               }
 - { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }
+- { name: [numpy-legacy,numpy-legacy3,numpy3], setname: "python:numpy" }
+- { name: "python:numpy-1-13-3-gnu-hpc", setname: "python:numpy", addflavor: gnuhpc }
+- { name: "python:numpy-docs-devhelp", setname: "python:numpy", addflavor: devhelp }
+- { name: ["python:numpy-documentation","python:numpy-doc"], setname: "python:numpy", addflavor: docs }
+- { name: "python:numpy-mkl",          setname: "python:numpy", addflavor: mkl }
+- { name: "python:numpy-next",         setname: "python:numpy", addflavor: next }
+- { name: "python:numpy-openblas",     setname: "python:numpy", addflavor: openblas }
 - { name: [dyndnsc,dyndnsc-py2],       setname: "python:dyndnsc"          }
 - { namepat: "django-.*",              setname: "python:$0"               }
 - { name: [django, django12, django14], setname: "python:django"          }
