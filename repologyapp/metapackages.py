@@ -17,18 +17,74 @@
 
 import flask
 
+from repology.database import MetapackageRequest
 from repology.package import VersionClass
 from repology.packageproc import PackagesetSortByVersions
-from repology.queryfilters import NameAfterQueryFilter, NameBeforeQueryFilter, NameStartingQueryFilter
 
 
-def bound_to_filter(bound):
-    if bound and bound.startswith('<'):
-        return NameBeforeQueryFilter(bound[1:])
-    elif bound and bound.startswith('>'):
-        return NameAfterQueryFilter(bound[1:])
-    else:
-        return NameStartingQueryFilter(bound)
+class MetapackagesFilterInfo:
+    fields = {
+        'search':     { 'type': str,  'advanced': False },
+        'maintainer': { 'type': str,  'advanced': True },
+        'category':   { 'type': str,  'advanced': True },
+        'inrepo':     { 'type': str,  'advanced': True },
+        'notinrepo':  { 'type': str,  'advanced': True },
+        'minspread':  { 'type': int,  'advanced': True },
+        'maxspread':  { 'type': int,  'advanced': True },
+        'outdated':   { 'type': bool, 'advanced': True },
+        'unique':     { 'type': bool, 'advanced': True },
+    }
+
+    def __init__(self):
+        self.args = {}
+
+    def ParseFlaskArgs(self):
+        flask_args = flask.request.args.to_dict()
+
+        for fieldname, fieldinfo in MetapackagesFilterInfo.fields.items():
+            if fieldname in flask_args:
+                if fieldinfo['type'] == bool:
+                    self.args[fieldname] = True
+                elif fieldinfo['type'] == int and flask_args[fieldname].isdecimal():
+                    self.args[fieldname] = int(flask_args[fieldname])
+                elif fieldinfo['type'] == str and flask_args[fieldname]:
+                    self.args[fieldname] = flask_args[fieldname]
+
+    def GetDict(self):
+        return self.args
+
+    def GetRequest(self):
+        request = MetapackageRequest()
+        if 'search' in self.args:
+            request.NameSubstring(self.args['search'])
+        if 'maintainer' in self.args:
+            request.Maintainer(self.args['maintainer'])
+        if 'inrepo' in self.args:
+            request.InRepo(self.args['inrepo'])
+        if 'notinrepo' in self.args:
+            request.NotInRepo(self.args['notinrepo'])
+        if 'minspread' in self.args:
+            request.MinFamilies(self.args['minspread'])
+        if 'maxspread' in self.args:
+            request.MaxFamilies(self.args['maxspread'])
+        if 'outdated' in self.args:
+            request.Outdated()
+        if 'unique' in self.args:
+            request.Unique()
+
+        return request
+
+    def GetMaintainer(self):
+        return self.args['maintainer'] if 'maintainer' in self.args else None
+
+    def GetRepo(self):
+        return self.args['inrepo'] if 'inrepo' in self.args else None
+
+    def IsAdvanced(self):
+        for fieldname in self.args.keys():
+            if MetapackagesFilterInfo.fields[fieldname]['advanced']:
+                return True
+        return False
 
 
 def get_packages_name_range(packages):

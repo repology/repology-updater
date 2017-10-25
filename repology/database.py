@@ -76,43 +76,47 @@ class MetapackageRequest:
 
         self.name_substring = None
 
-        self.effname_sorting = None
-        self.limit = None
-
         # maintainer (maintainer_metapackages)
         self.maintainer = None
         self.maintainer_outdated = False
 
         # num families (metapackage_repocounts)
-        self.morefamilies = None
-        self.lessfamilies = None
+        self.minfamilies = None
+        self.maxfamilies = None
 
         # repos (repo_metapackages)
-        self.repos = None
-        self.repos_outdated = False
+        self.inrepo = None
+        self.notinrepo = None
 
-        # not repos (repo_metapackages + having)
-        self.repo_not = None
+        # flags
+        self.outdated = None
+        self.unique = None
 
-    def NameStarting(self, name):
+        # other
+        self.limit = None
+
+    def Bound(self, bound):
+        if not bound:
+            pass
+        elif bound.startswith('..'):
+            self.NameTo(bound[3:])
+        else:
+            self.NameFrom(bound)
+
+    def NameFrom(self, name):
         if self.namecond:
             raise RuntimeError('duplicate effname condition')
-        self.namecond = '>='
-        self.namebound = name
+        if name is not None:
+            self.namecond = '>='
+            self.namebound = name
         self.nameorder = 'ASC'
 
-    def NameAfter(self, name):
+    def NameTo(self, name):
         if self.namecond:
             raise RuntimeError('duplicate effname condition')
-        self.namecond = '>'
-        self.namebound = name
-        self.nameorder = 'ASC'
-
-    def NameBefore(self, name):
-        if self.namecond:
-            raise RuntimeError('duplicate effname condition')
-        self.namecond = '<'
-        self.namebound = name
+        if name is not None:
+            self.namecond = '<='
+            self.namebound = name
         self.nameorder = 'DESC'
 
     def NameSubstring(self, substring):
@@ -125,84 +129,83 @@ class MetapackageRequest:
             raise RuntimeError('duplicate maintainer condition')
         self.maintainer = maintainer
 
-    def OutdatedForMaintainer(self, maintainer):
-        if self.maintainer:
-            raise RuntimeError('duplicate maintainer condition')
-        self.maintainer = maintainer
-        self.maintainer_outdated = True
-
     def InRepo(self, repo):
-        if self.repos and repo not in self.repos:
+        if self.inrepo:
             raise RuntimeError('duplicate repository condition')
 
-        self.repos = set((repo,))
-
-    def InAnyRepo(self, repos):
-        if self.repos:
-            for currentrepo in self.repos:
-                if currentrepo not in repos:
-                    raise RuntimeError('duplicate repository condition')
-        else:
-            self.repos = set(repos)
-
-    def OutdatedInRepo(self, repo):
-        if self.repos and repo not in self.repos:
-            raise RuntimeError('duplicate repository condition')
-
-        self.repos = set((repo,))
-        self.repos_outdated = True
+        self.inrepo = repo
 
     def NotInRepo(self, repo):
-        if self.repo_not:
+        if self.notinrepo:
             raise RuntimeError('duplicate not-in-repository condition')
-        self.repo_not = repo
+        self.notinrepo = repo
 
-    def MoreFamilies(self, num):
-        if self.morefamilies:
+    def MinFamilies(self, num):
+        if self.minfamilies:
             raise RuntimeError('duplicate more families condition')
-        self.morefamilies = num
+        self.minfamilies = num
 
-    def LessFamilies(self, num):
-        if self.lessfamilies:
+    def MaxFamilies(self, num):
+        if self.maxfamilies:
             raise RuntimeError('duplicate less families condition')
-        self.lessfamilies = num
+        self.maxfamilies = num
 
     def Limit(self, limit):
         if self.limit:
             raise RuntimeError('duplicate limit')
         self.limit = limit
 
+    def Outdated(self):
+        self.outdated = True
+
+    def Unique(self):
+        self.unique = True
+
     def GetQuery(self):
         tables = set()
         where = AndQuery()
         having = AndQuery()
 
+        outdated_handled = False
+        unique_handled = False
+
         # table joins and conditions
         if self.maintainer:
             tables.add('maintainer_metapackages')
-            if self.maintainer_outdated:
-                where.Append('maintainer_metapackages.maintainer = %s AND maintainer_metapackages.num_packages_outdated > 0', self.maintainer)
-            else:
-                where.Append('maintainer_metapackages.maintainer = %s', self.maintainer)
+            where.Append('maintainer_metapackages.maintainer = %s', self.maintainer)
+            if self.outdated:
+                outdated_handled = True
+                where.Append('maintainer_metapackages.num_packages_outdated > 0')
 
-        if self.morefamilies:
+        if self.minfamilies:
             tables.add('metapackage_repocounts')
-            where.Append('metapackage_repocounts.num_families >= %s', self.morefamilies)
+            where.Append('metapackage_repocounts.num_families >= %s', self.minfamilies)
 
-        if self.lessfamilies:
+        if self.maxfamilies:
             tables.add('metapackage_repocounts')
-            where.Append('metapackage_repocounts.num_families <= %s', self.lessfamilies)
+            where.Append('metapackage_repocounts.num_families <= %s', self.maxfamilies)
 
-        if self.repos:
+        if self.inrepo:
             tables.add('repo_metapackages')
-            if self.repos_outdated:
-                where.Append('repo_metapackages.repo in (' + ','.join(['%s'] * len(self.repos)) + ') AND repo_metapackages.num_packages_outdated > 0', *self.repos)
-            else:
-                where.Append('repo_metapackages.repo in (' + ','.join(['%s'] * len(self.repos)) + ')', *self.repos)
+            where.Append('repo_metapackages.repo = %s', self.inrepo)
+            if self.outdated:
+                where.Append('repo_metapackages.num_packages_outdated > 0')
+                outdated_handled = True
+            if self.unique:
+                where.Append('repo_metapackages.unique')
+                unique_handled = True
 
-        if self.repo_not:
+        if self.notinrepo:
             tables.add('repo_metapackages as repo_metapackages1')
-            having.Append('count(*) FILTER (WHERE repo_metapackages1.repo = %s) = 0', self.repo_not)
+            having.Append('count(*) FILTER (WHERE repo_metapackages1.repo = %s) = 0', self.notinrepo)
+
+        if self.outdated and not outdated_handled:
+            tables.add('repo_metapackages')
+            where.Append('repo_metapackages.unique')
+
+        if self.unique and not unique_handled:
+            tables.add('repo_metapackages')
+            where.Append('repo_metapackages.unique')
 
         # effname conditions
         if self.namecond and self.namebound:
@@ -997,16 +1000,10 @@ class Database:
             ) for row in self.cursor.fetchall()
         ]
 
-    def GetMetapackages(self, *filters, limit=500):
-        req = MetapackageRequest()
+    def GetMetapackages(self, request, limit=500):
+        request.Limit(limit)
 
-        for f in filters:
-            if f:
-                f.ApplyToRequest(req)
-
-        req.Limit(limit)
-
-        query, args = req.GetQuery()
+        query, args = request.GetQuery()
 
         self.cursor.execute(
             """
