@@ -146,7 +146,7 @@
 
 - name: ubuntu_18_04
   type: repository
-  desc: Ubuntu 18.14
+  desc: Ubuntu 18.04
   family: debuntu
   color: 'e95420'
   valid_till: 2023-04-01
