@@ -472,6 +472,7 @@
 - { name: gpg-agent,                   setname: gnupg                     }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
 - { name: grafana-bin,                 setname: grafana                   }
+- { name: greed-game,                  setname: greed                     }
 - { name: groovy-docs,                 setname: groovy, addflavor: docs }
 - { name: groovysdk,                   setname: groovy }
 - { namepat: "groovy[0-9._-]+",        setname: groovy }
