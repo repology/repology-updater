@@ -121,7 +121,7 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
             key = (package.version, package.versionclass)
             target = None
 
-            if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
+            if (repo is not None and repo == package.repo) or (repo is None and maintainer is not None and maintainer in package.maintainers):
                 target = summaries['explicit']
             elif package.versionclass in [VersionClass.outdated, VersionClass.legacy]:
                 target = summaries['outdated']
