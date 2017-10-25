@@ -91,6 +91,7 @@ class MetapackageRequest:
         # flags
         self.outdated = None
         self.unique = None
+        self.nonunique = None
 
         # other
         self.limit = None
@@ -161,6 +162,9 @@ class MetapackageRequest:
     def Unique(self):
         self.unique = True
 
+    def NonUnique(self):
+        self.nonunique = True
+
     def GetQuery(self):
         tables = set()
         where = AndQuery()
@@ -194,6 +198,9 @@ class MetapackageRequest:
             if self.unique:
                 where.Append('repo_metapackages.unique')
                 unique_handled = True
+            if self.nonunique:
+                where.Append('NOT repo_metapackages.unique')
+                unique_handled = True
 
         if self.notinrepo:
             tables.add('repo_metapackages as repo_metapackages1')
@@ -206,6 +213,10 @@ class MetapackageRequest:
         if self.unique and not unique_handled:
             tables.add('repo_metapackages')
             where.Append('repo_metapackages.unique')
+
+        if self.nonunique and not unique_handled:
+            tables.add('repo_metapackages')
+            where.Append('NOT repo_metapackages.unique')
 
         # effname conditions
         if self.namecond and self.namebound:

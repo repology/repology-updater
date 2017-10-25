@@ -33,6 +33,7 @@ class MetapackagesFilterInfo:
         'maxspread':  {'type': int,  'advanced': True},   # noqa: E241
         'outdated':   {'type': bool, 'advanced': True},   # noqa: E241
         'unique':     {'type': bool, 'advanced': True},   # noqa: E241
+        'nonunique':  {'type': bool, 'advanced': True},   # noqa: E241
     }
 
     def __init__(self):
@@ -71,6 +72,8 @@ class MetapackagesFilterInfo:
             request.Outdated()
         if 'unique' in self.args:
             request.Unique()
+        if 'nonunique' in self.args:
+            request.NonUnique()
 
         return request
 
