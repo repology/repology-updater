@@ -66,19 +66,19 @@ def metapackages(bound=None):
 @ViewRegistrar('/metapackages/all/')
 @ViewRegistrar('/metapackages/all/<bound>/')
 def metapackages_all(bound=None):
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound), 301)
 
 
 @ViewRegistrar('/metapackages/unique/')
 @ViewRegistrar('/metapackages/unique/<bound>/')
 def metapackages_unique(bound=None):
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, maxspread=1), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, maxspread=1), 301)
 
 
 @ViewRegistrar('/metapackages/widespread/')
 @ViewRegistrar('/metapackages/widespread/<bound>/')
 def metapackages_widespread(bound=None):
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, minspread=10), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, minspread=10), 301)
 
 
 @ViewRegistrar('/metapackages/in-repo/<repo>/')
@@ -87,7 +87,7 @@ def metapackages_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, inrepo=repo), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo), 301)
 
 
 @ViewRegistrar('/metapackages/outdated-in-repo/<repo>/')
@@ -96,7 +96,7 @@ def metapackages_outdated_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, inrepo=repo, outdated=1), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, outdated=1), 301)
 
 
 @ViewRegistrar('/metapackages/not-in-repo/<repo>/')
@@ -105,7 +105,7 @@ def metapackages_not_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, notinrepo=repo), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, notinrepo=repo), 301)
 
 
 @ViewRegistrar('/metapackages/candidates-for-repo/<repo>/')
@@ -114,7 +114,7 @@ def metapackages_candidates_for_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, inrepo=repo, minspread=5), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, minspread=5), 301)
 
 
 @ViewRegistrar('/metapackages/unique-in-repo/<repo>/')
@@ -123,16 +123,16 @@ def metapackages_unique_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, inrepo=repo, maxspread=1), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, maxspread=1), 301)
 
 
 @ViewRegistrar('/metapackages/by-maintainer/<maintainer>/')
 @ViewRegistrar('/metapackages/by-maintainer/<maintainer>/<bound>/')
 def metapackages_by_maintainer(maintainer, bound=None):
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, maintainer=maintainer), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, maintainer=maintainer), 301)
 
 
 @ViewRegistrar('/metapackages/outdated-by-maintainer/<maintainer>/')
 @ViewRegistrar('/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def metapackages_outdated_by_maintainer(maintainer, bound=None):
-    return flask.redirect(flask.url_for('/metapackages/', bound=bound, maintainer=maintainer, outdated=1), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, maintainer=maintainer, outdated=1), 301)
