@@ -103,7 +103,7 @@ class MetapackageRequest:
         if not bound:
             pass
         elif bound.startswith('..'):
-            self.NameTo(bound[3:])
+            self.NameTo(bound[2:])
         else:
             self.NameFrom(bound)
 
