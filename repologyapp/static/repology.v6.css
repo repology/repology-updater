@@ -253,6 +253,14 @@
     margin-right: 10px;
 }
 
+.advanced-search {
+    display: none;
+}
+
+#advanced-search-toggle:checked ~ .advanced-search {
+    display: block;
+}
+
 /* copied from panel-* */
 .panel-version-ignored {
   border-color: #ddd;
