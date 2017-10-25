@@ -7,6 +7,22 @@
 <div class="container">
 
 <article>
+	<h3 id="2017-10-25">2017-10-25</h3>
+	<ul>
+		<li>
+			<p>Implemented advanced metapackage filtering. Now instead of predefined filters (all/unique/widespread metapackages and metapackages present/not present/outdated in/unique in each repository) we have a flexible set of name, repository, category and spread filters, all available at a single <a href="{{ url_for('metapackages') }}">metapackages endpoint</a>. Metapackage name search is now integraded there as well and supports proper pagination.</p>
+			<p>Some examples of what you can now do with the filters:</p>
+			<ul>
+				<li>Lists of packages <a href="{{ url_for('metapackages', notinrepo='ubuntu_17_04', inrepo='ubuntu_18_04') }}">added</a> or <a href="{{ url_for('metapackages', inrepo='ubuntu_17_04', notinrepo='ubuntu_18_04') }}">removed</a> between Ubuntu Zesty and Ubuntu Bionic.</li>
+				<li>A list of <a href="{{ url_for('metapackages', notinrepo='gentoo', category='games', minspread=10) }}">moderately wide spread games not yet present in Gentoo</a></li>
+				<li>A list of <a href="{{ url_for('metapackages', inrepo='freebsd', notinrepo='dports', maxspread=1) }}">unique FreeBSD ports which haven't made their way into DragonFlyBSD DPorts</a>.</li>
+				<li>A list of <a href="{{ url_for('metapackages', inrepo='openbsd', category='games', maintainer='ports@openbsd.org', outdated=1) }}">outdated unmaintained games in OpenBSD</a>.</li>
+			</ul>
+		</li>
+	</ul>
+</article>
+
+<article>
 	<h3>2017-10-17</h3>
 	<ul>
 		<li>Added <a href="{{ url_for('repository', repo='vcpkg') }}">Vcpkg</a> repository.</li>
