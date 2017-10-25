@@ -237,6 +237,7 @@
 - { name: commoncpp,                   setname: commoncpp2                }
 - { name: conserver8,                  setname: conserver                 }
 - { name: consolekit2,                 setname: consolekit                }
+- { name: controllermap,               setname: sdl2, addflavor: controllermap }
 - { name: coolreader,                  setname: coolreader3               }
 - { name: cpmtools2,                   setname: cpmtools                  }
 - { name: [cppcheck-nogui,cppcheck-nox,cppcheck-gui], setname: cppcheck   }
