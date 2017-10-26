@@ -175,6 +175,12 @@
 
 - { name: singularity, wwwpart: singularity.lbl.gov, setname: singularity-container }
 
+- { name: sokoban, wwwpart: dansoft, setname: sokoban-dansoft }
+- { name: sokoban, category: app-emacs, setname: sokoban-emacs }
+- { name: sokoban, family: freebsd, setname: sokoban-ncurses }
+- { name: sokoban, wwwpart: sourceforge.net/projects/sokoban, setname: sokoban-tgfcoder }
+- { name: sokoban, warning: "please classify me" }
+
 - { name: ssr, wwwpart: spatialaudio, setname: soundscaperenderer }
 - { name: ssr, wwwpart: maarten, setname: simplescreenrecorder }
 - { name: ssr, family: pclinuxos, setname: simplescreenrecorder }
