@@ -173,6 +173,8 @@
 
 - { name: scramble, wwwpart: xffm, setname: scramble-xffm } # wtf is that
 
+- { name: singularity, wwwpart: singularity.lbl.gov, setname: singularity-container }
+
 - { name: ssr, wwwpart: spatialaudio, setname: soundscaperenderer }
 - { name: ssr, wwwpart: maarten, setname: simplescreenrecorder }
 - { name: ssr, family: pclinuxos, setname: simplescreenrecorder }
