@@ -1218,38 +1218,40 @@ class Database:
         #
         # score = |M⋂C| / |M⋃C| = |M⋂C| / (|M| + |C| - |M⋂C|)
         #
-        # - count(*) is number of common metapackages for both maintainers, e.g. |M⋂C|
-        # - min(num_metapackages) is number of metapackages for candidate maintainer |C|
-        #   we use min because we use GROUP BY and just need a group operation; since we
-        #   group by maintainer and join by maintainer, num_metapackages is the same
-        #   in all records, and we may pick min, max, avg, whatever
+        # - num_metapackages_common is |M⋂C|
+        # - num_metapackages is |C|
         # - sub-select just gets |M|
-        # - the divisor is |M⋃C| = |M| + |C| - |M⋂C|
+        # - the divisor thus is |M⋃C| = |M| + |C| - |M⋂C|
         self.cursor.execute(
             """
             SELECT
                 maintainer,
-                count(*) AS count,
-                100.0 * count(*) / (
-                    min(num_metapackages) -
-                    count(*) +
-                    (
+                num_metapackages_common,
+                100.0 * num_metapackages_common / (
+                    num_metapackages - num_metapackages_common + (
                         SELECT num_metapackages
                         FROM maintainers
                         WHERE maintainer=%s
                     )
                 ) AS score
-            FROM maintainer_metapackages
-            INNER JOIN maintainers USING(maintainer)
-            WHERE
-                maintainer != %s AND
-                effname IN (
+            FROM
+                (
                     SELECT
-                        effname
-                    FROM maintainer_metapackages
-                    WHERE maintainer=%s
-                )
-            GROUP BY maintainer
+                        maintainer,
+                        count(*) AS num_metapackages_common
+                    FROM
+                        maintainer_metapackages
+                    WHERE
+                        maintainer != %s AND
+                        effname IN (
+                            SELECT
+                                effname
+                            FROM maintainer_metapackages
+                            WHERE maintainer=%s
+                        )
+                    GROUP BY maintainer
+                ) AS intersecting_counts
+                INNER JOIN maintainers USING(maintainer)
             ORDER BY score DESC
             LIMIT %s
             """,
