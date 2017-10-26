@@ -31,7 +31,6 @@ setup(
     ],
     scripts=[
         'repology-app.py',
-        'repology-benchmark.py',
         'repology-dump.py',
         'repology-gensitemap.py',
         'repology-linkchecker.py',

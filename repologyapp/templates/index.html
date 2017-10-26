@@ -68,16 +68,16 @@
 
 		<div class="row">
 			<div class="col-md-4">
+				<time class="news-summary-time" datetime="2017-10-25">2017-09-20</time>
+				advanced metapackage filtering (<a href="{{ url_for('news', _anchor='2017-10-25') }}">more...</a>)
+			</div>
+			<div class="col-md-4">
 				<time class="news-summary-time" datetime="2017-10-17">2017-10-17</time>
 				added <a href="{{ url_for('repository', repo='vcpkg') }}">Vcpkg</a> repository
 			</div>
 			<div class="col-md-4">
 				<time class="news-summary-time" datetime="2017-10-05">2017-10-05</time>
 				added <a href="{{ url_for('repository', repo='funtoo') }}">Funtoo</a> repository
-			</div>
-			<div class="col-md-4">
-				<time class="news-summary-time" datetime="2017-09-20">2017-09-20</time>
-				added new package classes (<a href="{{ url_for('news', _anchor='2017-09-20') }}">more...</a>)
 			</div>
 		</div>
 	</section>
@@ -92,7 +92,7 @@
 						Search <b>packages</b>
 					</div>
 					<div class="panel-body">
-						<form action="{{ url_for("metapackages_all") }}" method="GET">
+						<form action="{{ url_for("metapackages") }}" method="GET">
 							<div class="input-group">
 								<input type="text" class="form-control" name="search" placeholder="e.g. &quot;firefox&quot;">
 								<div class="input-group-btn">
@@ -102,7 +102,7 @@
 						</form>
 					</div>
 					<div class="panel-footer">
-						or <a href="{{ url_for("metapackages_all") }}">browse</a> list of all packages
+						or <a href="{{ url_for("metapackages") }}">browse</a> list of all packages
 					</div>
 				</div>
 			</div>

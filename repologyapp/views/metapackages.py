@@ -18,78 +18,67 @@
 import flask
 
 from repologyapp.globals import *
-from repologyapp.metapackages import bound_to_filter, get_packages_name_range, metapackages_to_summary_items
+from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_range, metapackages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
 from repology.packageproc import PackagesetSortByVersions
-from repology.queryfilters import *
 
 
-def metapackages_generic(bound, *filters, template='metapackages.html', repo=None, maintainer=None):
-    namefilter = bound_to_filter(bound)
-
+@ViewRegistrar('/metapackages/')
+@ViewRegistrar('/metapackages/<bound>/')
+def metapackages(bound=None):
     # process search
-    search = flask.request.args.to_dict().get('search')
-    search = None if search is None else search.strip()
-    searchfilter = NameSubstringQueryFilter(search) if search else None
+    filterinfo = MetapackagesFilterInfo()
+    filterinfo.ParseFlaskArgs()
+
+    request = filterinfo.GetRequest()
+    request.Bound(bound)
 
     # get packages
-    packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=config['METAPACKAGES_PER_PAGE'])
+    packages = get_db().GetMetapackages(request, limit=config['METAPACKAGES_PER_PAGE'])
 
     # on empty result, fallback to show first, last set of results
     if not packages:
-        if bound and bound.startswith('<'):
-            namefilter = NameStartingQueryFilter()
-        else:
-            namefilter = NameBeforeQueryFilter()
-        packages = get_db().GetMetapackages(namefilter, InAnyRepoQueryFilter(reponames), searchfilter, *filters, limit=config['METAPACKAGES_PER_PAGE'])
+        request = filterinfo.GetRequest()
+        if bound and bound.startswith('..'):
+            request.NameTo(None)
+        packages = get_db().GetMetapackages(request, limit=config['METAPACKAGES_PER_PAGE'])
 
     firstname, lastname = get_packages_name_range(packages)
 
-    metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages), repo, maintainer)
+    metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages), filterinfo.GetRepo(), filterinfo.GetMaintainer())
 
     return flask.render_template(
-        template,
+        'metapackages.html',
         firstname=firstname,
         lastname=lastname,
-        search=search,
+        search=filterinfo.GetDict(),
+        advanced=filterinfo.IsAdvanced(),
         metapackagedata=metapackagedata,
-        repo=repo,
-        maintainer=maintainer
+        repo=filterinfo.GetRepo(),
+        maintainer=filterinfo.GetMaintainer()
     )
 
 
-@ViewRegistrar('/metapackages/')  # XXX: redirect to metapackages/all?
 @ViewRegistrar('/metapackages/all/')
 @ViewRegistrar('/metapackages/all/<bound>/')
 def metapackages_all(bound=None):
-    return metapackages_generic(
-        bound,
-        template='metapackages-all.html'
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound), 301)
 
 
 @ViewRegistrar('/metapackages/unique/')
 @ViewRegistrar('/metapackages/unique/<bound>/')
 def metapackages_unique(bound=None):
-    return metapackages_generic(
-        bound,
-        InNumFamiliesQueryFilter(less=1),
-        template='metapackages-unique.html'
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, maxspread=1), 301)
 
 
 @ViewRegistrar('/metapackages/widespread/')
 @ViewRegistrar('/metapackages/widespread/<bound>/')
 def metapackages_widespread(bound=None):
-    return metapackages_generic(
-        bound,
-        InNumFamiliesQueryFilter(more=10),
-        template='metapackages-widespread.html'
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, minspread=10), 301)
 
 
 @ViewRegistrar('/metapackages/in-repo/<repo>/')
@@ -98,12 +87,7 @@ def metapackages_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return metapackages_generic(
-        bound,
-        InRepoQueryFilter(repo),
-        template='metapackages-in-repo.html',
-        repo=repo,
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo), 301)
 
 
 @ViewRegistrar('/metapackages/outdated-in-repo/<repo>/')
@@ -112,12 +96,7 @@ def metapackages_outdated_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return metapackages_generic(
-        bound,
-        OutdatedInRepoQueryFilter(repo),
-        template='metapackages-outdated-in-repo.html',
-        repo=repo,
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, outdated=1), 301)
 
 
 @ViewRegistrar('/metapackages/not-in-repo/<repo>/')
@@ -126,12 +105,7 @@ def metapackages_not_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return metapackages_generic(
-        bound,
-        NotInRepoQueryFilter(repo),
-        template='metapackages-not-in-repo.html',
-        repo=repo,
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, notinrepo=repo), 301)
 
 
 @ViewRegistrar('/metapackages/candidates-for-repo/<repo>/')
@@ -140,13 +114,7 @@ def metapackages_candidates_for_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return metapackages_generic(
-        bound,
-        NotInRepoQueryFilter(repo),
-        InNumFamiliesQueryFilter(more=5),
-        template='metapackages-candidates-for-repo.html',
-        repo=repo,
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, minspread=5), 301)
 
 
 @ViewRegistrar('/metapackages/unique-in-repo/<repo>/')
@@ -155,32 +123,16 @@ def metapackages_unique_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return metapackages_generic(
-        bound,
-        InRepoQueryFilter(repo),
-        InNumFamiliesQueryFilter(less=1),
-        template='metapackages-unique-in-repo.html',
-        repo=repo,
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, maxspread=1), 301)
 
 
 @ViewRegistrar('/metapackages/by-maintainer/<maintainer>/')
 @ViewRegistrar('/metapackages/by-maintainer/<maintainer>/<bound>/')
 def metapackages_by_maintainer(maintainer, bound=None):
-    return metapackages_generic(
-        bound,
-        MaintainerQueryFilter(maintainer),
-        template='metapackages-by-maintainer.html',
-        maintainer=maintainer,
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, maintainer=maintainer), 301)
 
 
 @ViewRegistrar('/metapackages/outdated-by-maintainer/<maintainer>/')
 @ViewRegistrar('/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def metapackages_outdated_by_maintainer(maintainer, bound=None):
-    return metapackages_generic(
-        bound,
-        MaintainerOutdatedQueryFilter(maintainer),
-        template='metapackages-outdated-by-maintainer.html',
-        maintainer=maintainer,
-    )
+    return flask.redirect(flask.url_for('metapackages', bound=bound, maintainer=maintainer, outdated=1), 301)

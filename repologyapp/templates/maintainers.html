@@ -64,12 +64,12 @@
 						</a>
 					</td>
 					<td class="text-center">
-						<a href="{{ url_for('metapackages_by_maintainer', maintainer=maintainer.maintainer) }}">
+						<a href="{{ url_for('metapackages', maintainer=maintainer.maintainer) }}">
 							{{- maintainer.num_metapackages -}}
 						</a>
 					</td>
 					<td class="text-center">
-						<a href="{{ url_for('metapackages_outdated_by_maintainer', maintainer=maintainer.maintainer) }}">
+						<a href="{{ url_for('metapackages', maintainer=maintainer.maintainer, outdated=1) }}">
 							{{- maintainer.num_metapackages_outdated -}}
 						</a>
 					</td>

@@ -21,11 +21,11 @@
 				<tr id="{{ reponame }}">
 					<td class="text-right"><a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a></td>
 					<td class="text-nowrap">
-						<a href="{{ url_for('metapackages_in_repo', repo=reponame) }}">Present</a>
-						<a href="{{ url_for('metapackages_not_in_repo', repo=reponame) }}">Absent</a>
-						<a href="{{ url_for('metapackages_outdated_in_repo', repo=reponame) }}">Outdated</a>
-						<a href="{{ url_for('metapackages_candidates_for_repo', repo=reponame) }}">Candidates</a>
-						<a href="{{ url_for('metapackages_unique_in_repo', repo=reponame) }}">Unique</a>
+						<a href="{{ url_for('metapackages', inrepo=reponame) }}">Present</a>
+						<a href="{{ url_for('metapackages', notinrepo=reponame) }}">Absent</a>
+						<a href="{{ url_for('metapackages', inrepo=reponame, outdated=1) }}">Outdated</a>
+						<a href="{{ url_for('metapackages', inrepo=reponame, minspread=5) }}">Candidates</a>
+						<a href="{{ url_for('metapackages', inrepo=reponame, maxspread=1) }}">Unique</a>
 					</td>
 				</tr>
 			{% endfor %}

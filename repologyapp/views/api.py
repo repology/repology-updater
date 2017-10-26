@@ -20,12 +20,11 @@ import json
 import flask
 
 from repologyapp.globals import *
-from repologyapp.metapackages import bound_to_filter
+from repologyapp.metapackages import MetapackagesFilterInfo
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
-from repology.queryfilters import *
 
 
 def api_v1_package_to_json(package):
@@ -56,16 +55,23 @@ def api_v1_package_to_json(package):
     return output
 
 
-def api_v1_metapackages_generic(bound, *filters):
-    metapackages = PackagesToMetapackages(
-        get_db().GetMetapackages(
-            bound_to_filter(bound),
-            *filters,
-            limit=config['METAPACKAGES_PER_PAGE']
-        )
-    )
+@ViewRegistrar('/api/v1/metapackages/')
+@ViewRegistrar('/api/v1/metapackages/<bound>/')
+def api_v1_metapackages(bound=None):
+    filterinfo = MetapackagesFilterInfo()
+    filterinfo.ParseFlaskArgs()
 
-    metapackages = {metapackage_name: list(map(api_v1_package_to_json, packageset)) for metapackage_name, packageset in metapackages.items()}
+    request = filterinfo.GetRequest()
+    request.Bound(bound)
+
+    packages = get_db().GetMetapackages(request, limit=config['METAPACKAGES_PER_PAGE'])
+
+    metapackages = PackagesToMetapackages(packages)
+
+    metapackages = {
+        metapackage_name: [api_v1_package_to_json(package) for package in packageset]
+        for metapackage_name, packageset in metapackages.items()
+    }
 
     return (
         json.dumps(metapackages),
@@ -90,59 +96,58 @@ def api_v1_metapackage(name):
     )
 
 
-@ViewRegistrar('/api/v1/metapackages/')
 @ViewRegistrar('/api/v1/metapackages/all/')
 @ViewRegistrar('/api/v1/metapackages/all/<bound>/')
 def api_v1_metapackages_all(bound=None):
-    return api_v1_metapackages_generic(bound)
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/unique/')
 @ViewRegistrar('/api/v1/metapackages/unique/<bound>/')
 def api_v1_metapackages_unique(bound=None):
-    return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, maxspread=1), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/in-repo/<repo>/')
 @ViewRegistrar('/api/v1/metapackages/in-repo/<repo>/<bound>/')
 def api_v1_metapackages_in_repo(repo, bound=None):
-    return api_v1_metapackages_generic(bound, InRepoQueryFilter(repo))
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/outdated-in-repo/<repo>/')
 @ViewRegistrar('/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_outdated_in_repo(repo, bound=None):
-    return api_v1_metapackages_generic(bound, OutdatedInRepoQueryFilter(repo))
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, outdated=1), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/not-in-repo/<repo>/')
 @ViewRegistrar('/api/v1/metapackages/not-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_not_in_repo(repo, bound=None):
-    return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo))
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, notinrepo=repo), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/candidates-in-repo/<repo>/')
 @ViewRegistrar('/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_candidates_in_repo(repo, bound=None):
-    return api_v1_metapackages_generic(bound, NotInRepoQueryFilter(repo), InNumFamiliesQueryFilter(more=5))
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, minspread=5), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/unique-in-repo/<repo>/')
 @ViewRegistrar('/api/v1/metapackages/unique-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_unique_in_repo(repo, bound=None):
-    return api_v1_metapackages_generic(bound, InNumFamiliesQueryFilter(less=1))
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, maxspread=1), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/by-maintainer/<maintainer>/')
 @ViewRegistrar('/api/v1/metapackages/by-maintainer/<maintainer>/<bound>/')
 def api_v1_metapackages_by_maintainer(maintainer, bound=None):
-    return api_v1_metapackages_generic(bound, MaintainerQueryFilter(maintainer))
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, maintainer=maintainer), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/')
 @ViewRegistrar('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
-    return api_v1_metapackages_generic(bound, MaintainerOutdatedQueryFilter(maintainer))
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, maintainer=maintainer, outdated=1), 301)
 
 
 @ViewRegistrar('/api/v1/repository/<repo>/problems')
