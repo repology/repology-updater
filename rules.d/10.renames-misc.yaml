@@ -487,6 +487,7 @@
 - { name: hadoop2,                     setname: hadoop                    }
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hashdeep,                    setname: md5deep }
+- { name: hashcat-legacy,              setname: hashcat }
 - { name: hg-flow,                     setname: hgflow }
 - { name: [hostapd-rtl,hostapd-rtl871xdrv,hostapd1], setname: hostapd }
 - { name: html2text-with-utf8,         setname: html2text }
