@@ -954,7 +954,7 @@ class Database:
     def Commit(self):
         self.db.commit()
 
-    def GetMetapackage(self, names):
+    def GetMetapackage(self, name):
         self.cursor.execute(
             """
             SELECT
@@ -986,9 +986,9 @@ class Database:
 
                 extrafields
             FROM packages
-            WHERE effname {}
-            """.format('= ANY (%s)' if isinstance(names, list) else '= %s'),
-            (names,)
+            WHERE effname = %s
+            """,
+            (name,)
         )
 
         return [
@@ -1064,6 +1064,95 @@ class Database:
             )
             """.format(query),
             args
+        )
+
+        return [
+            Package(
+                repo=row[0],
+                family=row[1],
+                subrepo=row[2],
+
+                name=row[3],
+                effname=row[4],
+
+                version=row[5],
+                origversion=row[6],
+                versionclass=row[7],
+
+                maintainers=row[8],
+                category=row[9],
+                comment=row[10],
+                homepage=row[11],
+                licenses=row[12],
+                downloads=row[13],
+
+                ignore=row[14],
+                shadow=row[15],
+                ignoreversion=row[16],
+                devel=row[17],
+                verfixed=row[18],
+
+                flavors=row[19],
+
+                extrafields=row[20],
+            ) for row in self.cursor.fetchall()
+        ]
+
+    def GetRelatedMetapackages(self, name, limit=500):
+        self.cursor.execute(
+            """
+            SELECT
+                repo,
+                family,
+                subrepo,
+
+                name,
+                effname,
+
+                version,
+                origversion,
+                versionclass,
+
+                maintainers,
+                category,
+                comment,
+                homepage,
+                licenses,
+                downloads,
+
+                ignorepackage,
+                shadow,
+                ignoreversion,
+                devel,
+                verfixed,
+
+                flavors,
+
+                extrafields
+            FROM packages
+            WHERE effname IN (
+                WITH RECURSIVE r AS (
+                        SELECT
+                            effname,
+                            url
+                        FROM url_relations
+                        WHERE effname=%s
+                    UNION
+                        SELECT
+                            url_relations.effname,
+                            url_relations.url
+                        FROM url_relations
+                        JOIN r ON
+                            url_relations.effname = r.effname OR url_relations.url = r.url
+                )
+                SELECT DISTINCT
+                    effname
+                FROM r
+                ORDER BY effname
+                LIMIT %s
+            )
+            """,
+            (name, limit)
         )
 
         return [
@@ -1829,29 +1918,4 @@ class Database:
                 'accepted': row[8],
             }
             for row in self.cursor.fetchall()
-        ]
-
-    def GetRelatedMetapackages(self, name, limit=500):
-        self.cursor.execute(
-            """
-            WITH RECURSIVE r AS (
-                    SELECT
-                        effname,
-                        url
-                    FROM url_relations
-                    WHERE effname=%s
-                UNION
-                    SELECT
-                        url_relations.effname,
-                        url_relations.url
-                    FROM url_relations
-                    JOIN r ON
-                        url_relations.effname = r.effname OR url_relations.url = r.url
-            ) SELECT DISTINCT effname FROM r ORDER by effname LIMIT %s
-            """,
-            (name, limit)
-        )
-
-        return [
-            row[0] for row in self.cursor.fetchall()
         ]

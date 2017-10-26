@@ -128,15 +128,13 @@ def metapackage_information(name):
 
 @ViewRegistrar('/metapackage/<name>/related')
 def metapackage_related(name):
-    names = get_db().GetRelatedMetapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
-
-    too_many_warning = None
-    if len(names) == config['METAPACKAGES_PER_PAGE']:
-        too_many_warning = config['METAPACKAGES_PER_PAGE']
-
-    packages = get_db().GetMetapackage(names)
+    packages = get_db().GetRelatedMetapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
+
+    too_many_warning = None
+    if len(metapackagedata) == config['METAPACKAGES_PER_PAGE']:
+        too_many_warning = config['METAPACKAGES_PER_PAGE']
 
     return flask.render_template(
         'metapackage-related.html',
