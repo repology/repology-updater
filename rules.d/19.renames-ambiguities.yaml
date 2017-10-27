@@ -174,6 +174,7 @@
 - { name: scramble, wwwpart: xffm, setname: scramble-xffm } # wtf is that
 
 - { name: singularity, wwwpart: singularity.lbl.gov, setname: singularity-container }
+- { name: singularity, wwwpart: ingularityviewer, setname: singularityviewer }
 
 - { name: sokoban, wwwpart: dansoft, setname: sokoban-dansoft }
 - { name: sokoban, category: app-emacs, setname: sokoban-emacs }

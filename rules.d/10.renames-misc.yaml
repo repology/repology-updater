@@ -830,6 +830,7 @@
 - { name: sha1dc,                      setname: sha1collisiondetection    }
 - { name: signon-glib,                 setname: libsignon-glib            }
 - { name: simplescreenrecorder-lib,    setname: simplescreenrecorder      }
+- { name: singularityviewer-alpha,     setname: singularityviewer, devel: true }
 - { name: sisc-scheme,                 setname: sisc }
 - { name: [libslang,libslang2,s-lang,slang2,slang1], setname: slang       }
 - { name: skobo,                       setname: kobodeluxe                } # old name
