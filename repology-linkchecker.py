@@ -119,8 +119,8 @@ def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
 
         logger.Log('Processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
 
-        for subpack in Slicer(GetLinkStatuses(pack, delay=options.delay, timeout=options.timeout)):
-            writequeue.put(subpack)
+        for subpack in Slicer(pack):
+            writequeue.put(GetLinkStatuses(subpack, delay=options.delay, timeout=options.timeout))
 
         logger.Log('Done processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
 
