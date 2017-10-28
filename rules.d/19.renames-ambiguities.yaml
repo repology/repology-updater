@@ -229,6 +229,8 @@
 - { name: unicorn, setname: unicorn-emulator, family: gentoo }
 - { name: unicorn, warning: "please classify me" }
 
+- { name: vapor, family: nix, setname: love-vapor }
+
 - { name: wise, wwwpart: jboss, setname: jboss-wise }
 - { name: wise, wwwpart: ebi.ac.uk, setname: wise2 }
 - { name: wise, category: [ Sciences/Biology, science, biology, sci-biology, universe/science ], setname: wise2 }
