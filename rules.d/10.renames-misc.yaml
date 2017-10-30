@@ -756,6 +756,7 @@
 - { name: openssh-portable, setname: openssh }
 - { name: [orcus,orcus0.12],           setname: liborcus }
 - { name: osmpbf,                      setname: libosmpbf }
+- { name: osmium,                      setname: libosmium }
 
 # P
 - { name: pacmanarena,                 setname: pacman-arena              }
