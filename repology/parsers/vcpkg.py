@@ -25,9 +25,10 @@ from repology.package import Package
 def SanitizeVersion(version):
     origversion = version
 
-    pos = version.find('-')
-    if pos != -1:
-        version = version[:pos]
+    version = re.sub('[^0-9]*vcpkg.*$', '', version)  # vcpkg stuff
+    version = re.sub('(alpha|beta|rc|patch)-([0-9]+)$', '\\1\\2', version)  # save from the following rule
+    version = re.sub('-[0-9]+$', '', version)  # cut off revision
+    version = re.sub('-[0-9a-f]{6,}$', '', version)  # drop commits
 
     if version != origversion:
         return version, origversion
