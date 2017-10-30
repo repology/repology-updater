@@ -514,6 +514,8 @@
 
 # J
 - { name: ja2,                         setname: ja2-stracciatella         }
+- { name: jenkins-bin,                 setname: jenkins, addflavor: bin   }
+- { name: jenkins-lts,                 setname: jenkins                   }
 - { name: jbig-kit,                    setname: jbigkit                   }
 - { name: jboss-forge-offline,         setname: jboss-forge               }
 - { name: josm-latest,                 setname: josm, ignorever: true     }
