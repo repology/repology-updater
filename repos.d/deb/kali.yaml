@@ -1,0 +1,25 @@
+###########################################################################
+# Kali Linux
+#
+# https://docs.kali.org/general-use/kali-linux-sources-list-repositories
+###########################################################################
+
+- name: kali_rolling
+  type: repository
+  desc: Kali Linux Rolling
+  family: debuntu
+  color: '32638f'
+  sources:
+    - name: [ contrib, main, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://http.kali.org/kali/dists/kali-rolling/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Kali Linux home
+      url: https://www.kali.org/
+  packagelinks:
+    - desc: Git repository
+      url: 'http://git.kali.org/gitweb/?p=packages/{name}.git'
+  tags: [ all, production, kali ]
