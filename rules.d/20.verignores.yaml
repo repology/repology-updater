@@ -426,6 +426,7 @@
 - { name: warsow,                      ver: "2.10",                  family: debuntu,      ignorever: true } # playdeb weirdnes
 - { name: widelands,                   verpat: "(?:b|build|0\\.)?([0-9]{2})(?:\\.0)?",     setver: "build$1" }
 - { name: widelands,                   verpat: "[^b].*",                                   ignorever: true }
+- { name: winexe,                      ver: "1.1",                   family: debuntu,      ignorever: true } # snapshot
 - { name: whatweb,                     vergt: "0.4.7",               family: [debuntu,openbsd,gentoo,freebsd], ignorever: true } # 0.4.8 has never been released
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
