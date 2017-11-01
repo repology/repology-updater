@@ -736,6 +736,7 @@
 - { name: open-mesh,                   setname: openmesh }
 - { name: open-mpi,                    setname: openmpi }
 - { name: open-ocd,                    setname: openocd }
+- { name: [open-vm-tools-dkms,open-vm-tools-lts-trusty,open-vm-tools-nox11], setname: open-vm-tools, addflavor: true }
 - { name: open-zwave,                  setname: openzwave }
 - name:
     - gsi-openssh
