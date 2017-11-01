@@ -365,6 +365,7 @@
 - { name: shairplay,                   verpat: ".*20[0-8]{2}.*",                           ignorever: true } # \
 - { name: shairplay,                   verpat: "0\\.9.*",                                  ignorever: true } #  > se report on shairplay; latest is 0.1.1 of github.com/qasim fork
 - { name: shairplay,                   verpat: "1\\.0.*",                                  ignorever: true } # /
+- { name: sipp,                        verpat: "3\\.6[_-]?[a-z]+",                         setver: "3.6", devel: true } # 3.6-dev
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
 - { name: slime,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: slime,                       ver: "2.20.2.gef68a0b4",                            ignorever: true }
