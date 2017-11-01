@@ -64,5 +64,6 @@
 # These are more applications than modules, so rename
 - { name: "perl:get_iplayer",          setname: get_iplayer }
 - { name: "perl:bucardo",              setname: bucardo }
+- { name: "perl:unburden-home-dir",    setname: unburden-home-dir }
 
 - { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below
