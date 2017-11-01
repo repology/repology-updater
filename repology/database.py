@@ -252,6 +252,7 @@ class Database:
         self.cursor.execute('DROP TABLE IF EXISTS totals_history CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS links CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS problems CASCADE')
+        self.cursor.execute('DROP TABLE IF EXISTS reports CASCADE')
 
         self.cursor.execute("""
             CREATE TABLE packages (
