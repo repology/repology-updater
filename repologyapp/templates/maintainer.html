@@ -84,7 +84,7 @@
 <ul>
 	{% for num,repo in maintainer_info.repository_metapackage_counts|sort(reverse=True) %}
 	<li>
-		<strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong> ({{ num }})
+		<strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong> (<a href="{{ url_for('metapackages', inrepo=repo, maintainer=maintainer) }}">{{ num }}</a>)
 	</li>
 	{% endfor %}
 </ul>
@@ -98,7 +98,7 @@
 <ul>
 	{% for num,category in maintainer_info.category_metapackage_counts|sort(reverse=True) %}
 	<li>
-		<strong>{{ category }}</strong> ({{ num }})
+		<strong>{{ category }}</strong> (<a href="{{ url_for('metapackages', category=category, maintainer=maintainer) }}">{{ num }}</a>)
 	</li>
 	{% endfor %}
 </ul>
