@@ -36,7 +36,7 @@
 			<div class="panel-heading"><h3>Total</h3></div>
 			<div class="panel-body">
 				<a href="{{ url_for('metapackages', maintainer=maintainer) }}">
-					{{ maintainer_info.num_packages }}
+					{{- maintainer_info.num_packages -}}
 				</a>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 		<div class="panel panel-success">
 			<div class="panel-heading"><h3>Newest</h3></div>
 			<div class="panel-body">
-				{{ maintainer_info.num_packages_newest }}
+				{{- maintainer_info.num_packages_newest -}}
 			</div>
 		</div>
 	</div>
@@ -54,7 +54,7 @@
 			<div class="panel-heading"><h3>Outdated</h3></div>
 			<div class="panel-body">
 				<a href="{{ url_for('metapackages', maintainer=maintainer, outdated=1) }}">
-					{{ maintainer_info.num_packages_outdated }}
+					{{- maintainer_info.num_packages_outdated -}}
 				</a>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3>Ignored</h3></div>
 			<div class="panel-body">
-				{{ maintainer_info.num_packages_ignored }}
+				{{- maintainer_info.num_packages_ignored -}}
 			</div>
 		</div>
 	</div>
