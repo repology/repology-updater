@@ -65,14 +65,14 @@
 			<th class="text-right">
 				<a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a>
 				{%- if showmedals -%}
-				{%- if loop.index == 1 -%}
-					<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date"></span></sup>
-				{%- elif loop.index == 2 -%}
-					<sup><div class="medal medal-silver" title="2nd place by number of metapackages up to date"></span></sup>
-				{%- elif loop.index == 3 -%}
-					<sup><div class="medal medal-bronze" title="3rd place by number of metapackages up to date"></span></sup>
-				{%- endif -%}
-				{%- endif -%}
+				{% if loop.index == 1 -%}
+				<sup><div class="medal medal-gold" title="1st place by number of metapackages up to date"></div></sup>
+				{% elif loop.index == 2 -%}
+				<sup><div class="medal medal-silver" title="2nd place by number of metapackages up to date"></div></sup>
+				{% elif loop.index == 3 -%}
+				<sup><div class="medal medal-bronze" title="3rd place by number of metapackages up to date"></div></sup>
+				{% endif %}
+				{% endif %}
 			</th>
 
 			<td class="text-center total-cell" title="Total number of metapackages in this repository">
@@ -104,11 +104,11 @@
 			{% endif %}
 			</td>
 			<td class="text-center version-cell version-big version-unique">
-			{% if repometadata[repostat.name].shadow %}
+			{%- if repometadata[repostat.name].shadow -%}
 				<span title="This is a shadow repo, e.g. unique packages in it are ignored">n/a</span>
-			{% else %}
+			{%- else -%}
 				{{ macros.safe_percent(repostat.num_metapackages_unique, repostat.num_metapackages) }}
-			{% endif %}
+			{%- endif -%}
 			</td>
 
 			<td class="text-center">{{ repostat.num_packages }}</td>
