@@ -138,18 +138,18 @@
 			</td>
 
 			<td class="text-center">
-			{% if repostat.last_update_utc %}
-				{% set minutes_since_update = (repostat.since_last_update.total_seconds() / 60) | int %}
+			{%- if repostat.last_update_utc -%}
+				{%- set minutes_since_update = (repostat.since_last_update.total_seconds() / 60) | int -%}
 				<time datetime="{{ repostat.last_update_utc.strftime("%Y-%m-%dT%H:%M:%SZ") }}"{% if minutes_since_update > 60 * 24 %} class="text-danger"{% endif %}>
-				{% if minutes_since_update >= 60 * 48 %}
+				{%- if minutes_since_update >= 60 * 48 -%}
 					{{ minutes_since_update//60//24 }}d
-				{% else %}
+				{%- else -%}
 					{{ '%d:%02d'|format(minutes_since_update//60, minutes_since_update%60) }}
-				{% endif %}
+				{%- endif -%}
 				</time>
-			{% else %}
+			{%- else -%}
 				never
-			{% endif %}
+			{%- endif -%}
 			</td>
 		</tr>
 	{% endfor %}
