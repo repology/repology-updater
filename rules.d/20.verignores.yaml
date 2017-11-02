@@ -66,6 +66,7 @@
 - { name: binutils,                    verlonger: 3,                                       ignorever: true } # debian weirdness
 - { name: binutils,                    verpat: ".*r.*",                                    ignorever: true } # snapshots
 - { name: binutils,                    verpat: ".*[0-9]{4}.*",                             ignorever: true } # snapshots and GUIX 2281 garbage
+- { name: biogenesis,                  ver: "0.8.1.42.1",                                  ignorever: true } # mageia garbage
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
 - { name: bloodfrontier,               ver: "0.84",                                        setver: b1 }
