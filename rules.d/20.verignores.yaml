@@ -92,6 +92,7 @@
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: clementine-player,           verlonger: 3,                 family: kaos,         ignorever: true }
+- { name: clonekeen,                   verpat: "0\\.(.*)",                                 setver: "$1" }
 - { name: clusterssh,                                                family: gentoo,       ignorever: true } # perl module version mangling rules apply here
 - { name: cmake,                       ver: "3.10.0",                family: mageia,       ignorever: true } # rc
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
