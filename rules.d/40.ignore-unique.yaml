@@ -14,3 +14,5 @@
 - { namepat: "fedora-.*",                                            family: [ fedora ], ignore: true } # Fedora-specific
 - { namepat: "linux-(?:c6|f10)-.*",                                  family: [ freebsd ], ignore: true } # linux binary packages for FreeBSD
 - { namepat: "suse(?:32)?_.*",                                       family: [ pkgsrc ], ignore: true } # linux binary packages?
+
+- { name: docbook,                                                   family: [ freebsd, ravenports ], ignore: true } # metaports
