@@ -417,6 +417,7 @@
 - { name: [fuse2,fuse3],               setname: fuse                      }
 
 # G
+- { name: g++,                         setname: gcc, addflavor: true }
 - { name: gambc,                       setname: gambit-c                  }
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle                  }
