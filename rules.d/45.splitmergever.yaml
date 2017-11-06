@@ -840,6 +840,7 @@
 - { namepat: "(?:wx|wxgtk|wxwidgets|wxcommon|wxbase)[0-9._-]*((?:-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*)", setname: wxwidgets, addflavor: "$1" }
 - { name: wxwidgets, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 - { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28 }
+- { name: wxwidgets28, verpat: "2\\.9\\..*",   setname: wxwidets }  # belongs to 3.x - prerelease branch of
 
 - { namepat: "(?:lib)?xerces-?c[0-9.+-]*",  setname: xerces-c }
 - { namepat: "(?:lib)?xerces2?-?j(?:ava)?[0-9-]*", setname: xerces-j }
