@@ -480,7 +480,7 @@
 
 - { namepat: "(?:lib)?serf[0-9._-]*",  setname: serf }
 
-- { name: libressl, verpat: "2\\.6\\..*", devel: true }
+#- { name: libressl, verpat: "2\\.6\\..*", devel: true } # http://www.libressl.org/
 
 - { name: libsigc++-docs, setname: libsigc++, addflavor: docs }
 - { name: libsigc++-legacy12, setname: libsigc++ }
