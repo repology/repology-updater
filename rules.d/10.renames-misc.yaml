@@ -316,7 +316,6 @@
 - { name: ecmtools,                    setname: ecm-tools                 }
 - { name: ecrire-git,                  setname: ecrire                    }
 - { name: [ectags,exctags],            setname: exuberant-ctags           }
-- { name: edsim51,                     setname: edsim51di                 }
 - { name: ee-editor,                   setname: ee                        }
 - { name: eekboard-gtk2,               setname: eekboard                  }
 - { name: eid-viewer-bin,              setname: eid-viewer                }
@@ -500,7 +499,6 @@
 
 # I
 - { name: [i3-kde,i3-lazy,i3-wm,i3-wm-iconpatch,i3wm], setname: i3        }
-- { name: iccexamin,                   setname: icc-examin                }
 - { name: icewm2,                      setname: icewm }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
@@ -636,7 +634,6 @@
 - { name: lsof, family: freebsd,       setname: lsof-freebsd } # patched version with own versioning
 - { name: lxc-selinux,                 setname: lxc }
 - { name: lxc,       family: homebrew, setname: lxd } # misname
-- { name: lxcfs-unstable,              setname: lxcfs, ignorever: true }
 - { name: lxd-lts,                     setname: lxd }
 
 # M
@@ -698,7 +695,6 @@
 - { name: [mc-contrib,midnight-commander,midnightcommander], setname: mc  }
 - { name: [minimal-racket,racket-minimal], setname: racket, addflavor: minimal }
 - { name: racket-docs,                 setname: racket, addflavor: docs    }
-- { name: mobile-shell,                setname: mosh                      }
 - { name: mdv,                         setname: terminal_markdown_viewer }
 - { name: media-info,                  setname: mediainfo }
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }

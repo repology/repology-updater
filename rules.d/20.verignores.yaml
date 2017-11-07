@@ -59,7 +59,6 @@
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignorever: true }
 
 # B
-- { name: baloo,                       verpat: "1[6789]\\..*",                             ignorever: true }
 - { name: baloo,                       ver: "15.04.26",                                    ignorever: true }
 - { name: bastet,                      ver: "0.43.1.2015083000",                           ignorever: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
