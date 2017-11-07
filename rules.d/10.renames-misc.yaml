@@ -713,13 +713,14 @@
 - { name: [libnettle,nettle4],         setname: nettle                    }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
 - { namepat: "network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine)", setname: "networkmanager-$1" }
+- { name: nginx-custom,                             setname: nginx, addflavor: aurcrap1 }
+- { name: nginx-custom-dev,                         setname: nginx, addflavor: aurcrap2 }
 - { name: [nginx-devel,nginx-mainline],             setname: nginx }
 - { name: [nginx-libressl,nginx-mainline-libressl], setname: nginx, addflavor: libressl }
 - { name: nginx-lite,                               setname: nginx, addflavor: lite }
 - { name: [nginx-full,nginx-mainline-full],         setname: nginx, addflavor: full }
-- { name: nginx-openssl-1.1,                        setname: nginx, addflavor: openssl-1.1 }
 - { name: nginx-mainline-boringssl,                 setname: nginx, addflavor: boringssl }
-- { name: nodejs.commandline,          setname: nodejs                    }
+- { name: nginx-rtmp,                               setname: nginx, addflavor: rtmp }
 - { name: notion-3,                    setname: notion                    } # XXX: also has version problems
 
 # O
