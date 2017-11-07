@@ -1,0 +1,9 @@
+PyYAML
+requests
+
+flask
+pillow
+psycopg2
+
+lxml
+rubymarshal
