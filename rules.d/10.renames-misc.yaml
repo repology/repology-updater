@@ -953,6 +953,7 @@
 - { name: xmlbird,                     setname: libxmlbird                }
 
 # Y
+- { name: [yabause-gtk,yabause-qt,yabause-qt5], setname: yabause, addflavor: true }
 - { name: yaze,                        setname: yaze-ag                   }
 - { name: yofrankie-bge,               setname: yofrankie                 }
 - { name: youtube-dlg,                 setname: youtube-dl-gui            }
@@ -960,6 +961,7 @@
 
 # Z
 - { name: zenity-gtk2,                 setname: zenity                    }
+- { name: zef-without-alacryd,         setname: zef, addflavor: without-alacryd }
 - { name: zeroad,                      setname: 0ad                       }
 - { name: zeroballistics,              setname: zero-ballistics           }
 - { name: zeronet-git,                 setname: zeronet, ignorever: true  }
@@ -973,6 +975,7 @@
 - { name: zookeeper-bin,               setname: zookeeper                 }
 - { name: [zstandard,zstd-static],     setname: zstd                      }
 - { name: zthreads,                    setname: zthread                   }
+- { name: zsh-doc,                     setname: zsh, addflavor: doc }
 
 - { namepat: "android-platform-system-(core|extras)", setname: android-tools, family: [ debuntu ] }
 - { namepat: "android-tools-[^-]+",    setname: android-tools,            family: [ freebsd, pkgsrc ] }
@@ -992,4 +995,4 @@
 - { namepat: "virtualbox-ose-(.*)",    setname: "virtualbox-$1",          family: [ freebsd ] }
 - { namepat: "xpilot-ng-(client|server)", setname: xpilot-ng, addflavor: "$1" }
 - { namepat: "munin-(master|node|server|common)",  setname: munin, addflavor: "$1" }
-- { namepat: "zabbix[0-9]*-(agent|frontend|proxy|server|common|proxy-sqlite|server-mysql|agentd)[0-9.-]*", setname: zabbix, addflavor: "$1" }
+- { namepat: "zabbix[0-9]*[_-](agentd|agentd|frontend|frontend-php|proxy|server|common|proxy-sqlite|server-mysql|agentd)[0-9.-]*", setname: zabbix, addflavor: "$1" }
