@@ -957,6 +957,7 @@
 - { name: [xmobar-alsa,xmobar-volume], setname: xmobar                    }
 - { name: [xvid,libxvid],              setname: xvidcore                  }
 - { name: xmlbird,                     setname: libxmlbird                }
+- { name: xmltooling-c,                setname: xmltooling                }
 - { name: xonotic-data,                setname: xonotic, addflavor: true }
 
 # Y
