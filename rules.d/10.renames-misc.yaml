@@ -940,7 +940,12 @@
 
 # X
 - { name: x-moto,                      setname: xmoto                     }
+- { name: x2vnc-no-xinerama,           setname: x2vnc, addflavor: true }
+- { name: xa65,                        setname: xa }
+- { name: [xalanc,xalan-c++],          setname: xalan-c }
 - { name: xar-mackyle,                 setname: xar                       }
+- { name: xfce4-xarchiver,             setname: xarchiver }
+- { name: [xarchiver-assume-name,xarchiver-gtk2], setname: xarchiver, addflavor: true }
 - { name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock], setname: xdg-utils }
 - { name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2], setname: xine-lib  }
 - { name: [xine,xine-ui2],             setname: xine-ui                   }
@@ -951,6 +956,7 @@
 - { name: [xmobar-alsa,xmobar-volume], setname: xmobar                    }
 - { name: [xvid,libxvid],              setname: xvidcore                  }
 - { name: xmlbird,                     setname: libxmlbird                }
+- { name: xonotic-data,                setname: xonotic, addflavor: true }
 
 # Y
 - { name: [yabause-gtk,yabause-qt,yabause-qt5], setname: yabause, addflavor: true }
