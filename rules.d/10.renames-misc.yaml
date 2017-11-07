@@ -592,6 +592,7 @@
 - { name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework], setname: ngspice }
 - { name: libnsl2,                     setname: libnsl                    }
 - { name: libopus,                     setname: opus                      }
+- { name: libopencollada,              setname: opencollada               }
 - { name: libopendkim,                 setname: opendkim                  }
 - { name: libopusfile,                 setname: opusfile                  }
 - { name: libpaper1,                   setname: libpaper                  }
