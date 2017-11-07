@@ -846,8 +846,8 @@
 
 - { namepat: "xapian[0-9._-]*-bindings[0-9._-]*", setname: xapian-bindings }
 - { namepat: "xapian-bindings-(perl|python)",     setname: xapian-bindings, addflavor: "$1" }
-- { namepat: [xapian-tcl-bindings,tcl-xapian],    setname: xapian-bindings, addflavor: tcl }
-- { namepat: p5-xapian,                           setname: xapian-bindings, addflavor: perl }
+- { name: [xapian-tcl-bindings,tcl-xapian],       setname: xapian-bindings, addflavor: tcl }
+- { name: p5-xapian,                              setname: xapian-bindings, addflavor: perl }
 # XXX: py-, py2-, py-3, pythin-... xapian
 
 - { namepat: "xapian[0-9._-]*-core[0-9._-]*",     setname: xapian-core }
