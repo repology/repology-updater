@@ -491,6 +491,8 @@
 - { name: [libtool-base,libtool-fortran,libtool-info,libtool-lts], setname: libtool }
 - { namepat: "libtool[0-9._-]+",       setname: libtool }
 
+- { namepat: "libtorrent[0-9._-]+",    setname: libtorrent}
+
 - { namepat: "libtorrent-rasterbar[0-9._-]+", setname: libtorrent-rasterbar }
 
 - { namepat: "libwpd[0-9.-]+",         setname: libwpd }
