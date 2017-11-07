@@ -1,0 +1,3 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { name: docbook,                                                   family: [ freebsd, ravenports ], ignore: true } # metaports
