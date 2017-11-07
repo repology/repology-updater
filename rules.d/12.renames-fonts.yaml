@@ -1110,16 +1110,6 @@
     - stixfonts
   setname: "fonts:stix"
 
-- name:
-    - fonts-otf-gdouros-symbola
-    - symbola-ttf
-    - gdouros-symbola-fonts
-    - symbola
-    - symbola-font-ttf
-    - symbola-ttf
-    - ttf-symbola
-  setname: "fonts:symbola"
-
 # T
 - name:
     - font-tamzen
