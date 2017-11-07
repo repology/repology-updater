@@ -1,0 +1,19 @@
+###########################################################################
+# AntiX
+###########################################################################
+
+- name: antix_jessie
+  type: repository
+  desc: AntiX Jessie
+  family: debuntu
+  sources:
+    - name: [ dev, main, nosystemd ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://nl.mxrepo.com/antix/jessie/dists/jessie/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: AntiX home
+      url: http://antix.mepis.org/index.php?title=Main_Page
+  tags: [ all, production, antix ]

@@ -36,7 +36,7 @@ def SanitizeVersion(version):
         version = version[0:pos]
 
     # garbage debian/ubuntu addendums
-    version = re.sub('[.~+-]?(dfsg|ubuntu).*', '', version)
+    version = re.sub('[.~+-]?(dfsg|ubuntu|mx).*', '', version)
 
     # remove suffixes
     version, *suffixes = re.split('[~+-]', version)
