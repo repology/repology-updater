@@ -844,6 +844,16 @@
 - { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28 }
 - { name: wxwidgets28, verpat: "2\\.9\\..*",   setname: wxwidets }  # belongs to 3.x - prerelease branch of
 
+- { namepat: "xapian[0-9._-]*-bindings[0-9._-]*", setname: xapian-bindings }
+- { namepat: "xapian-bindings-(perl|python)",     setname: xapian-bindings, addflavor: "$1" }
+- { namepat: [xapian-tcl-bindings,tcl-xapian],    setname: xapian-bindings, addflavor: tcl }
+- { namepat: p5-xapian,                           setname: xapian-bindings, addflavor: perl }
+# XXX: py-, py2-, py-3, pythin-... xapian
+
+- { namepat: "xapian[0-9._-]*-core[0-9._-]*",     setname: xapian-core }
+
+- { namepat: "xapian-omega[0-9._-]*",             setname: xapian-omega }
+
 - { namepat: "(?:lib)?xerces-?c[0-9.+-]*",  setname: xerces-c }
 - { namepat: "(?:lib)?xerces2?-?j(?:ava)?[0-9-]*", setname: xerces-j }
 - { name: xerces, family: gentoo, category: dev-java, setname: xerces-j }

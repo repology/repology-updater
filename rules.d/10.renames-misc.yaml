@@ -947,6 +947,7 @@
 - { name: xfce4-xarchiver,             setname: xarchiver }
 - { name: [xarchiver-assume-name,xarchiver-gtk2], setname: xarchiver, addflavor: true }
 - { name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock], setname: xdg-utils }
+- { name: [xdelta1,xdelta3],           setname: xdelta }
 - { name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2], setname: xine-lib  }
 - { name: [xine,xine-ui2],             setname: xine-ui                   }
 - { name: xpi-adblock_plus,            setname: adblock-plus,             family: [ freebsd ] }
