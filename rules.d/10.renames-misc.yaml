@@ -191,6 +191,8 @@
 - { name: [capnp,capnproto-0.6],       setname: capnproto }
 - { name: cblas-reference,             setname: cblas, addflavor: docs }
 - { name: cblas-tmg,                   setname: cblas                     }
+- { name: cde-desktop,                 setname: cdesktopenv               }
+- { name: cdemu,                       setname: cdemu-client, family: gentoo }
 - { name: ceti-2-themes,               setname: ceti-2-theme              }
 - { name: [center-im,centerim5],       setname: centerim                  }
 - { name: centerim-devel,              setname: centerim, ignorever: true }
