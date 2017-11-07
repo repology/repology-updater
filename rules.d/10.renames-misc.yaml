@@ -923,6 +923,7 @@
 # W
 - { name: w-calc,                      setname: wcalc }
 - { name: walcommander,                setname: wcmcommander              } # old name
+- { name: waterfox-kde,                setname: waterfox, addflavor: kde  }
 - { name: wcm-commander,               setname: wcmcommander              }
 - { name: [webp,libwebp6],             setname: libwebp                   }
 - { name: websocket++,                 setname: websocketpp               }
