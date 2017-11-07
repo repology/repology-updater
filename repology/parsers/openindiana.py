@@ -54,6 +54,8 @@ class OpenIndianaSummaryJsonParser():
 
         pkg = Package()
 
+        pkg.extrafields['path'] = pkgpath
+
         if 'com.oracle.info.name' in variables:
             pkg.name = variables['com.oracle.info.name'][0]
 
