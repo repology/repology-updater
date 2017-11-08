@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
-
 from functools import cmp_to_key
 
 from repology.package import *

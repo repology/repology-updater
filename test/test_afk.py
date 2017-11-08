@@ -18,7 +18,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
-
 from datetime import date
 
 from repologyapp.template_helpers import AFKChecker

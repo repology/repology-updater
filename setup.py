@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import subprocess
-
 from distutils.core import Extension, setup
 
 

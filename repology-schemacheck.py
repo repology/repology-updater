@@ -20,7 +20,6 @@
 import argparse
 import os
 import sys
-
 from datetime import date
 
 from voluptuous import All, Any, MultipleInvalid, Required, Schema, Url

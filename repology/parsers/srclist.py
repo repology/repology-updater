@@ -19,7 +19,6 @@ import os
 import subprocess
 
 from repology.config import config
-
 from repology.package import Package
 from repology.util import GetMaintainers
 
