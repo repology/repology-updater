@@ -334,6 +334,7 @@
 
 # Q
 - { name: qca,                         ver: "2.2.0",                 family: vcpkg,        ignorever: true } # not released yet
+- { name: qemu,                        ver: ".*git.*",                                     ignorever: true } # haikuports snapshot
 - { name: qgis,                                                      family: kaos,         ignorever: true } # snapshot with random version
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
@@ -437,6 +438,7 @@
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
 
 # X
+- { name: x264,                                                                            ignorever: true } # no single versioning scheme at all
 - { name: x86info,                     verpat: ".*[sp].*",                                 ignorever: true } # snapshots
 - { name: x86info,                     verpat: "1\\.[0-9]+\\..*",                          ignorever: true } # snapshots
 - { name: xalan-c,                     verpat: "1\\.11_[0-9]{5}.*",                        ignorever: true } # slackbuilds garbage
