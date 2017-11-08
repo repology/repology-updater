@@ -9,7 +9,7 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-        REPOLOGY_CONFIG: repology.conf.docker
+        REPOLOGY_CONFIG: repology-docker.conf.default
     ports:
       - 5000:5000
 
