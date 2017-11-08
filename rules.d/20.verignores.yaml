@@ -254,7 +254,7 @@
 - { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignorever: true } # version from mediainfo is used, while libzen has its own version scheme
 - { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignorever: true }
 - { name: libx86emu,                   verlonger: 2,                 family: kaos,         ignorever: true } # uses some opensuse package with mangled version
-- { name: libzen,                      ver: "17.10",                 family: freebsd,      ignorever: true }
+- { name: libzen,                      ver: ["17.10","0.7.99"],      family: freebsd,      ignorever: true }
 
 # L (continued)
 - { name: litecoin,                    ver: "0.15.0.1",              family: sisyphus,     ignorever: true } # it's 0.15.0.1rc1
