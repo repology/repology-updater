@@ -357,6 +357,7 @@
 - { name: rust,                        verpat: ".*dev",                                    ignorever: true } # haikuports garbage
 
 # S
+- { name: sbcl,                        verpat: ".*20[0-9]{6}.*",                           ignorever: true } # nixpkgs garbage
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: scite,                       ver: "375",                                         ignorever: true } # pclinuxos
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet

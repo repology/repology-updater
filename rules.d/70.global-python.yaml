@@ -221,6 +221,7 @@
 - { name: [ipython-ipyparallel,ipython2-ipyparallel,ipyparallel], setname: "python:ipyparallel" }
 - { name: "python:pelican",            setname: pelican                   }
 - { name: "python:pgcli",              setname: pgcli                     }
+- { name: "python:pipenv",             setname: pipenv                     }
 - { name: "python:progressbar", wwwpart: "wolph", setname: "python:progressbar2" }
 - { name: "python:pypanel",            setname: pypanel                   }
 - { name: "python:qbzr",               setname: qbzr                      }
