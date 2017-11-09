@@ -1,0 +1,32 @@
+###########################################################################
+# Parrot
+###########################################################################
+
+# there's some ambiguity here on which is the correct repo for Parrot:
+#
+# [1] https://archive.parrotsec.org/parrot/dists/stable/{source}/source/Sources.gz
+# [2] https://archive.parrotsec.org/parrot/dists/parrot/{source}/source/Sources.gz
+# [3] https://deb.parrotsec.org/parrot/dists/stable/{source}/source/Sources.gz
+# [4] https://deb.parrotsec.org/parrot/dists/parrot/{source}/source/Sources.gz
+#
+# Looking into Parrot ISO, [2] is used in apt/sources.list and [3] sources.list.d/parrot.list
+# https://docs.parrotsec.org/doku.php/mirrors-list only says there should be [3] in sources.list.d/parrot.list
+#
+# Quick check shows all repos are the same. We're also using [3] here
+
+- name: parrot
+  type: repository
+  desc: Parrot
+  family: debuntu
+  color: '95b8c8'
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'https://deb.parrotsec.org/parrot/dists/stable/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Parrot Project home
+      url: https://parrotsec.org/
+  tags: [ all, production ]
