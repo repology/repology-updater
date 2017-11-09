@@ -334,7 +334,7 @@
 
 # Q
 - { name: qca,                         ver: "2.2.0",                 family: vcpkg,        ignorever: true } # not released yet
-- { name: qemu,                        ver: ".*git.*",                                     ignorever: true } # haikuports snapshot
+- { name: qemu,                        verpat: ".*git.*",                                  ignorever: true } # haikuports snapshot
 - { name: qgis,                                                      family: kaos,         ignorever: true } # snapshot with random version
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
