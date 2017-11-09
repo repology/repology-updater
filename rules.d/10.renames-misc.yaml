@@ -947,6 +947,9 @@
 - { name: xar-mackyle,                 setname: xar                       }
 - { name: xfce4-xarchiver,             setname: xarchiver }
 - { name: [xarchiver-assume-name,xarchiver-gtk2], setname: xarchiver, addflavor: true }
+- { name: xfdesktop-gtk3,              setname: xfdesktop, addflavor: gtk3 }
+- { name: xfdesktop-devel,             setname: xfdesktop, ignorever: true }
+- { name: [xfdesktop4,xfce4-desktop],  setname: xfdesktop }
 - { name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock], setname: xdg-utils }
 - { name: [xdelta1,xdelta3],           setname: xdelta }
 - { name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2], setname: xine-lib  }
