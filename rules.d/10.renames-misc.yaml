@@ -902,6 +902,7 @@
 - { name: ufo-ai,                      setname: ufoai,                    family: [ gentoo ]  }
 - { name: [ufoai-data,ufoai-maps,ufoai-music], setname: ufoai, addflavor: true }
 - { name: [util-linux-aes,util-linux-minimal,util-linux-nosystemd,util-linux-nosystemd-debug,util-linux-selinux,util-linux-systemd], setname: util-linux, addflavor: true }
+- { name: uncrustify0.60,              setname: uncrustify }
 
 # V
 - { name: v4l2loopback-dkms,           setname: v4l2loopback              }
