@@ -29,4 +29,4 @@ if __name__ == '__main__':
         app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
         app.run(debug=True)
     else:
-        app.run()
+        app.run(host='0.0.0.0')

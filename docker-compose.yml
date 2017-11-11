@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  www:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    environment:
+        REPOLOGY_CONFIG: repology-docker.conf.default
+    ports:
+      - 5000:5000
+
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_DB=repology
+      - POSTGRES_USER=repology
+      - POSTGRES_PASSWORD=repology
+    ports:
+      - 5432:5432
+
+networks:
+  default:
+    external:
+      name: repology

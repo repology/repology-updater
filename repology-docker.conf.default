@@ -1,0 +1,125 @@
+#
+# Repology default configuration file
+#
+# These settings are used in web application and as defaults
+# for all command line utilities. You may override them in
+# repology.conf file in project root or in any custom file,
+# as long as you set path to it in REPOLOGY_CONF environment
+# variable
+
+############################################################################
+# COMMON SETTINGS
+############################################################################
+
+#
+# Postgresql database connect string
+#
+# Used by repology-update and repology-app
+# Overridable via --dsn command line arg
+#
+DSN = "dbname=repology user=repology password=repology host=repology_database_1"
+
+#
+# Directory to store repository data in
+#
+# Used in repology-update and repology-dump
+# Overridable via --statedir command line arg
+#
+STATE_DIR = "_state"
+
+#
+# Path to YAML file containing repository configuration
+#
+# Used by repology-update, repology-app, repology-dump
+# Overridable via --repos-path command line arg
+#
+REPOS_DIR = "repos.d"
+
+#
+# Path to YAML file containing package transformation rules
+#
+# Used by repology-update
+# Overridable via --rules-path command line arg
+#
+RULES_DIR = "rules.d"
+
+#
+# Array of repository names or tags to work with
+#
+# Used by repology-update and repology-dump
+# Overridable via free command line args
+#
+REPOSITORIES = ['production']
+
+############################################################################
+# UPDATE SETTINGS
+############################################################################
+
+#
+# Path to helpers directory
+#
+# Helpers are small programs or scripts used to parse repository
+# data in different formats which are hard to parse directly from
+# python
+#
+# Used by repology-update
+#
+HELPERS_DIR = "helpers"
+
+#
+# Path to tclsh
+#
+# tclsh is used to parse macports repository
+#
+# Used by repology-update
+#
+TCLSH = "tclsh"
+
+############################################################################
+# WEBAPP SETTINGS
+############################################################################
+
+#
+# Secret key for flask, see
+# http://flask.pocoo.org/docs/0.12/api/#flask.Flask.secret_key
+#
+# There's no default value, please set it to some random string
+#
+SECRET_KEY = 'abc'
+
+#
+# Enable webapp profiling
+#
+PROFILE = False
+
+#
+# Items per page
+#
+METAPACKAGES_PER_PAGE = 200
+MAINTAINERS_PER_PAGE = 500
+PROBLEMS_PER_PAGE = 500
+
+#
+# Max reports for metapackage
+#
+MAX_REPORTS = 20
+
+#
+# Address of repology.org to use in HTML links
+#
+REPOLOGY_HOME = 'https://repology.org'
+
+#
+# Path to DejaVuSans.ttf
+#
+# This is used to calculate SVG badge sizes
+#
+#BADGE_FONT = '/usr/local/share/fonts/dejavu/DejaVuSans.ttf'  # FreeBSD
+#BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'  # Ubuntu
+
+#
+# AFK times when reports cannot be processed, to be reported to users
+# array of strings in 'YYYY-MM-DD' (single date) or 'YYYY-MM-DD
+# YYYY-MM-DD' (date interval) format
+#
+STAFF_AFK = []
