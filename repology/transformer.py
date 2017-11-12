@@ -50,8 +50,7 @@ class PackageTransformer:
                     self.rules += yaml.safe_load(rulesfile)
 
         pp = pprint.PrettyPrinter(width=10000)
-        rulenum = 0
-        for rule in self.rules:
+        for rulenum, rule in enumerate(self.rules):
             # save pretty-print before all transformations
             rule['pretty'] = pp.pformat(rule)
 
@@ -72,7 +71,6 @@ class PackageTransformer:
 
             rule['matches'] = 0
             rule['number'] = rulenum
-            rulenum += 1
 
         self.fastrules = {}
         self.slowrules = []
