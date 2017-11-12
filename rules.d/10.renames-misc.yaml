@@ -658,6 +658,7 @@
     - libva-mesa-driver
     - libva-mesa-driver-noglvnd
     - libva-mesa-driver-vanilla
+    - mesa+dri1
     - mesa-dri
     - mesa-dri1-drivers
     - mesa-headers
@@ -688,6 +689,7 @@
 - { name: [glw,mesa-glw,mesa-libglw],  setname: libglw                    }
 - { name: mirrormagic-sdl,             setname: mirrormagic               }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
+- { name: mocp,                        setname: moc }
 - { name: multicorn,                   setname: postgresql-multicorn      }
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
 - { name: [mutt-lite,mutt-devel,mutt14,mutt14-lite,mutt-patched,mutt-slang,mutt-kiss], setname: mutt }

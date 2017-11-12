@@ -1,11 +1,22 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Python modules
-- { family: [ pypi ],                setname: "python:$0" }
+
+# AOSC does not inentify python modules by a prefix, so we need to rely on category
+# and blacklist ports which are not python modules
+- family: aosc
+  category: python
+  name:
+    - python2
+    - python3
+  last: true
+- { family: aosc, category: python,    setname: "python:$0" }
+
+- { family: [ pypi ],                  setname: "python:$0" }
 # some rules may merge modules for different python version into single entry; this is intended
 - { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", family: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", family: [ openbsd ] }
-- { namepat: "python-(.*)",            setname: "python:$1", family: [ debuntu, centos, mageia, gobolinux, pclinuxos, ravenports, aosc ] }
+- { namepat: "python-(.*)",            setname: "python:$1", family: [ debuntu, centos, mageia, gobolinux, pclinuxos, ravenports ] }
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", family: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch, guix, openmandriva ] }
 #- { namepat: "python2-(.*)",           setname: "python:$1", family: [ msys2 ] }

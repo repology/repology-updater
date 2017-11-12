@@ -30,6 +30,7 @@
 - { name: android-tools,               verpat: "[0-9]{4,}.*",                              ignorever: true } # fake
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
+- { name: appmenu-qt,                  verpat: "(.*)\\+.*",                                setver: "$1" } # aosc garbage
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
 - { name: apr2,                        verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: arduino,                     ver: "0021",                                        ignorever: true } # EPEL 6
@@ -88,11 +89,13 @@
 - { name: cegui,                       verpat: "6\\..*",                                   setver: "0.$0" } # it's 0.6.2!
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
+- { name: cherrytree,                  verpat: "[0-9]+",                                   ignorever: true } # freshcode garbage
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: clementine-player,           verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: clonekeen,                   verpat: "0\\.(.*)",                                 setver: "$1" }
 - { name: clusterssh,                                                family: gentoo,       ignorever: true } # perl module version mangling rules apply here
 - { name: cmake,                       ver: "3.10.0",                family: mageia,       ignorever: true } # rc
+- { name: cmst,                        verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # manjaro
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
 - { name: cons,                        ver: "2.3.0.1",                                     ignorever: true } # debian uses this to revert to 2.2.0. http://metadata.ftp-master.debian.org/changelogs/main/c/cons/cons_2.3.0.1+2.2.0-2_changelog "The odd version string is to avoid using epochs" <- that's what epochs are for, dammit
@@ -107,6 +110,8 @@
 - { name: cwiid,                       ver: ["20110107","0.6.01","2010-02-21-git"],        ignorever: true } # abandonware; a lot of snapshots
 
 # D
+- { name: dbus-cpp,                    verpat: "(.*)\\+.*",                                setver: "$1" } # aosc garbage
+- { name: dee-qt,                      verpat: "(.*)\\+.*",                                setver: "$1" } # aosc garbage
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dia,                         verpat: ".*[0-9]{8}.*",                             ignorever: true } # snapshot
@@ -326,6 +331,7 @@
 - { name: pmount,                      verpat: "0\\.9\\.99.*",                             devel: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: procmail,                    verpat: "[0-9]+",                                   ignorever: true } # homebrew
+- { name: properties-cpp,              verpat: "(.*)\\+.*",                                setver: "$1" } # aosc garbage
 - { name: psi-plus,                    verpat: "20[0-9]{6}.*",                             ignorever: true } # opensuse garbage
 - { name: psi-plus,                    verlonger: 3,                                       ignorever: true } # aur garbage
 - { name: py-cpuinfo,                  verpat: "201.*",                                    ignorever: true }
@@ -371,6 +377,7 @@
 - { name: shairplay,                   verpat: ".*20[0-8]{2}.*",                           ignorever: true } # \
 - { name: shairplay,                   verpat: "0\\.9.*",                                  ignorever: true } #  > se report on shairplay; latest is 0.1.1 of github.com/qasim fork
 - { name: shairplay,                   verpat: "1\\.0.*",                                  ignorever: true } # /
+- { name: signon-ui,                   verpat: "(.*)\\+.*",                                setver: "$1" } # aosc garbage
 - { name: sipp,                        verpat: "3\\.6[_-]?[a-z]+",                         setver: "3.6", devel: true } # 3.6-dev
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
 - { name: slime,                       verpat: "20[0-9]{6}.*",                             ignorever: true }

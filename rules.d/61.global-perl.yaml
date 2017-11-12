@@ -10,8 +10,6 @@
 - { namepat: "perl-(.*)",              setname: "perl:$1", family: [ arch, fedora, centos, mageia, opensuse, sisyphus, slackbuilds, gobolinux, guix, rosa, nix, alpine, pclinuxos, msys2, ravenports, openmandriva, kaos, aosc ] }
 - { category: dev-perl,                setname: "perl:$0", family: [ gentoo, haikuports ] }
 - { category: perl-core,               setname: "perl:$0", family: [ gentoo ] }
-# These shamelessly mangle with perl module versions
-- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports, pclinuxos, openmandriva ], ignorever: true }
 
 # manual perl modules
 - { name: backuppc-xs,                 setname: "perl:backuppc-xs" }
@@ -19,6 +17,10 @@
 - { name: cpanminus,                   setname: "perl:app-cpanminus" }
 - { name: cddb_get,                    setname: "perl:$0" }
 - { name: gearman-server,              setname: "perl:$0" }
+- { name: ack,                         setname: "perl:$0" }
+
+# These shamelessly mangle with perl module versions
+- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports, pclinuxos, openmandriva ], ignorever: true }
 
 # specific perl ignores
 - { name: "perl:anyevent",             ver: [ "7.070", "7.120", "7.130" ], ignorever: true }
@@ -62,6 +64,7 @@
 - { name: "perl:timedate",             verpat: "2\\.[0-9]{3,}", ignorever: true }
 
 # These are more applications than modules, so rename
+- { name: "perl:ack",                  setname: ack }
 - { name: "perl:awstats",              setname: awstats }
 - { name: "perl:bucardo",              setname: bucardo }
 - { name: "perl:get_iplayer",          setname: get_iplayer }
