@@ -1,0 +1,21 @@
+###########################################################################
+# AOSC OS
+###########################################################################
+- name: aosc
+  type: repository
+  desc: AOSC
+  family: aosc
+  sources:
+    - name: staging
+      fetcher: File
+      parser: AoscPkgs
+      url: https://packages.aosc.io/list.json
+  repolinks:
+    - desc: AOSC OS home
+      url: https://aosc.io/
+    - desc: AOSC packages
+      url: https://packages.aosc.io/
+  packagelinks:
+    - desc: Package details
+      url: 'https://packages.aosc.io/packages/{name}'
+  tags: [ all, production ]

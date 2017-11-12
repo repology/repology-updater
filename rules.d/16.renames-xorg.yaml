@@ -69,6 +69,11 @@
 
 # ignore metaports
 - name:
+    - x11-app
+    - x11-base
+    - x11-font
+    - x11-lib
+    - x11-proto
     - xorg-app
     - xorg-apps
     - xorg-driver

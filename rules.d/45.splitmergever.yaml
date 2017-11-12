@@ -134,7 +134,7 @@
 
 - { namepat: "cegui-?[0-9.]+",         setname: cegui }
 
-- { namepat: "celt[0-9.]+",            setname: celt }
+- { namepat: "celt[0-9._-]+",          setname: celt }
 
 - { name: centerim, verpat: "5\\..*",  setname: centerim5 }
 
@@ -443,7 +443,7 @@
 - { name: kibana-bin,                  setname: kibana }
 - { namepat: "kibana[0-9]+",           setname: kibana }
 
-- { name: [lcms,lcms2,little-cms,little-cms2,lcms-python,liblcms,liblcms2], setname: lcms }
+- { name: [lcms,lcms1,lcms2,little-cms,little-cms2,lcms-python,liblcms,liblcms2], setname: lcms }
 - { name: lcms, verpat: "2.*",         setname: lcms2 }
 
 - { namepat: "libchamplain[0-9.-]+",   setname: libchamplain }
@@ -547,8 +547,8 @@
 - { namepat: "libvpx[0-9._-]+", setname: libvpx }
 
 - { name: libwnck-gtk3,                setname: libwnck }
-- { name: [libwnck-sticky,libwnck-reference], setname: libwnck }
-- { namepat: "libwnck[0-9]+",          setname: libwnck }
+- { name: [libwnck-sticky,libwnck-reference], setname: libwnck, addflavor: true }
+- { namepat: "libwnck[0-9._-]+",       setname: libwnck }
 - { name: libwnck, verpat: "2\\..*",   setname: libwnck2 }
 - { name: libwnck, verpat: "3\\..*",   setname: libwnck3 }
 
@@ -557,7 +557,7 @@
 - { namepat: "libxml\\+\\+[0-9._-]+",      setname: libxml++ }
 - { namepat: "libxml\\+\\+[0-9._-]+-docs", setname: libxml++ }
 - { name: [libxmlpp,libxmlxx,libxmlxx2], setname: libxml++ }
-- { name: [libxml++-reference,libxml++-docs], setname: libxml++ }
+- { name: [libxml++-reference,libxml++-docs], setname: libxml++, addflavor: true }
 
 - { name: lilypond-devel, setname: lilypond }
 - { name: [lilypond-devel-docs,lilypond-doc,lilypond-docs], setname: lilypond, addflavor: docs }
@@ -724,6 +724,7 @@
 - { namepat: "python[._-]?[23][0-9._-]*", setname: python }
 - { name: python, verpat: "2\\..*",    setname: python2 }
 - { name: python, verpat: "3\\..*",    setname: python3 }
+- { name: python, ver: "999", family: aosc, setname: python2 }
 - { name: python3, verpat: ".*a.*",    devel: true }
 
 - { namepat: "(?:lib)?readline[0-9._-]*", setname: readline }

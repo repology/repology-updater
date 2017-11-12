@@ -517,6 +517,7 @@
 
 # J
 - { name: ja2,                         setname: ja2-stracciatella         }
+- { name: jade, family: aosc,          setname: openjade                  }
 - { name: jenkins-bin,                 setname: jenkins, addflavor: bin   }
 - { name: jenkins-lts,                 setname: jenkins                   }
 - { name: jbig-kit,                    setname: jbigkit                   }
@@ -587,6 +588,7 @@
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libmikmod2,                  setname: libmikmod                 }
 - { name: [libmowgli-2,libmowgli2,mowgli], setname: libmowgli             }
+- { name: libmpc3,                     setname: libmpc }
 - { name: libmpcdec5,                  setname: libmpcdec                 }
 - { name: libmxml,                     setname: minixml }
 - { name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework], setname: ngspice }
@@ -658,6 +660,7 @@
     - libva-mesa-driver
     - libva-mesa-driver-noglvnd
     - libva-mesa-driver-vanilla
+    - mesa+dri1
     - mesa-dri
     - mesa-dri1-drivers
     - mesa-headers
@@ -688,6 +691,7 @@
 - { name: [glw,mesa-glw,mesa-libglw],  setname: libglw                    }
 - { name: mirrormagic-sdl,             setname: mirrormagic               }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
+- { name: mocp,                        setname: moc }
 - { name: multicorn,                   setname: postgresql-multicorn      }
 - { name: [multivalent-tool-pdf,multivalent-pdf-tools], setname: multivalent }
 - { name: [mutt-lite,mutt-devel,mutt14,mutt14-lite,mutt-patched,mutt-slang,mutt-kiss], setname: mutt }
@@ -699,6 +703,7 @@
 - { name: mdv,                         setname: terminal_markdown_viewer }
 - { name: media-info,                  setname: mediainfo }
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
+- { name: mpc, family: aosc, category: libs, setname: libmpc }
 - { name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], setname: mpd, addflavor: true }
 - { name: mpd-mpc,                     setname: mpc }
 - { name: [mpfr3,mpfr4,libmpfr],       setname: mpfr }
