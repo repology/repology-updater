@@ -40,6 +40,7 @@ version are always parsed.
 |----------------------------------|:-------:|:-------:|:-----:|:-----:|:-------:|:--------:|
 | Alpine                           | ✔       | ✔       |       | ✔     | ✔       |          |
 | ALT Sisyphus                     | ✔       | ✔       | ✔     |       |         |          |
+| AOSC                             | ✔       |         | ✔     |       |         |          |
 | Arch, Parabola, Manjaro          | ✔       | ✔       |       | ✔     | ✔       |          |
 | CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔     | ✔       |          |
 | Chocolatey                       | ✔       |         |       | ✔     |         |          |
