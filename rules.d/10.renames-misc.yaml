@@ -517,6 +517,7 @@
 
 # J
 - { name: ja2,                         setname: ja2-stracciatella         }
+- { name: jade, family: aosc,          setname: openjade                  }
 - { name: jenkins-bin,                 setname: jenkins, addflavor: bin   }
 - { name: jenkins-lts,                 setname: jenkins                   }
 - { name: jbig-kit,                    setname: jbigkit                   }
@@ -587,6 +588,7 @@
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libmikmod2,                  setname: libmikmod                 }
 - { name: [libmowgli-2,libmowgli2,mowgli], setname: libmowgli             }
+- { name: libmpc3,                     setname: libmpc }
 - { name: libmpcdec5,                  setname: libmpcdec                 }
 - { name: libmxml,                     setname: minixml }
 - { name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework], setname: ngspice }
@@ -701,6 +703,7 @@
 - { name: mdv,                         setname: terminal_markdown_viewer }
 - { name: media-info,                  setname: mediainfo }
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
+- { name: mpc, family: aosc, category: libs, setname: libmpc }
 - { name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], setname: mpd, addflavor: true }
 - { name: mpd-mpc,                     setname: mpc }
 - { name: [mpfr3,mpfr4,libmpfr],       setname: mpfr }
