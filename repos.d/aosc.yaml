@@ -3,7 +3,7 @@
 ###########################################################################
 - name: aosc
   type: repository
-  desc: AOSC Packages
+  desc: AOSC
   family: aosc
   sources:
     - name: staging
