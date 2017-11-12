@@ -55,6 +55,9 @@ class AoscPkgsParser():
                     print('no version: {}'.format(pkg.name), file=sys.stderr)
                     continue
 
+                if pkg.version == '999':
+                    pkg.ignoreversion = True
+
                 result.append(pkg)
 
         return result
