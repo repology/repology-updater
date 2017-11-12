@@ -325,6 +325,15 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'foo', 'version': '1.0', 'expect_flavors': []}
         )
 
+    def test_rule_chain(self):
+        self.check_transformer(
+            '[ { name: aaa, setname: bbb }, { name: bbb, setname: ccc }, { name: eee, setname: fff }, { name: ddd, setname: eee } ]',
+            {'name': 'aaa', 'version': '1.0', 'expect_effname': 'ccc'},
+            {'name': 'bbb', 'version': '1.0', 'expect_effname': 'ccc'},
+            {'name': 'ddd', 'version': '1.0', 'expect_effname': 'eee'},
+            {'name': 'eee', 'version': '1.0', 'expect_effname': 'fff'}
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
