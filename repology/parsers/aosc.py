@@ -21,6 +21,19 @@ import sys
 from repology.package import Package
 
 
+def SanitizeVersion(version):
+    origversion = version
+
+    pos = version.rfind(':')
+    if pos != -1:
+        version = version[pos + 1:]
+
+    if version != origversion:
+        return version, origversion
+    else:
+        return version, None
+
+
 class AoscPkgsParser():
     def __init__(self):
         pass
@@ -33,7 +46,7 @@ class AoscPkgsParser():
                 pkg = Package()
 
                 pkg.name = package['name']
-                pkg.version = package['version']
+                pkg.version, _ = SanitizeVersion(package['version'])
                 pkg.origversion = package['full_version']
                 pkg.category = package['pkg_section'] or package['section']
                 pkg.comment = package['description']
