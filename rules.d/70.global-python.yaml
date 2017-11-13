@@ -80,6 +80,8 @@
     - pylint-plugin-utils
     - pypoppler
     - pyproj
+    - pyqt4
+    - pyqt5
     - pyserial
     - pytest
     - pytest-catchlog
