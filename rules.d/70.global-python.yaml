@@ -71,6 +71,7 @@
     - pycha
     - pychart
     - pyexcelerator
+    - pygeoip
     - pygraphviz
     - pylint
     - pylint-celery
