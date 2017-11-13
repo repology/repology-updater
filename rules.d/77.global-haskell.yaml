@@ -20,5 +20,6 @@
 
 # APPS, not modules
 - { name: "haskell:darcs",             setname: darcs              }
+- { name: "haskell:hledger-web",       setname: hledger-web        }
 - { name: "haskell:xmobar",            setname: xmobar             }
 - { name: "haskell:xmonad",            setname: xmonad             }
