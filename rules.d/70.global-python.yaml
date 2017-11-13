@@ -166,6 +166,7 @@
 - { name: "python:colorama-0.3.3",     setname: "python:colorama"         }
 - { name: "python:pygeoip",            setname: "python:geoip", family: aosc }
 - { name: "python:geoip",              setname: "python:pygeoip", family: alpine }
+- { name: "python:geoip-python",       setname: "python:geoip" }
 - { namepat: "flake8.*",               setname: "python:$0"               }
 - { namepat: "flask.*",                setname: "python:$0"               }
 - { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }

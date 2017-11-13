@@ -285,7 +285,7 @@
 - { name: magic,                       verpat: "8\\.2\\..*",                               devel: true }
 - { name: magic,                       verpat: "[0-9]\\.[0-9]\\.[0-9]{3}",                 unignorever: true } # unignore some good -devel's
 - { name: matreshka,                   ver: "0.8.0",                 family: fedora,       ignorever: true } # fake (see report)
-- { name: mesa,                        ver: "[^a-z]+",               family: [fedora,mageia], ignorever: true } # accused in ignoring rc suffix
+- { name: mesa,                        verpat: "[^a-z]+",            family: [fedora,mageia], ignorever: true } # accused in ignoring rc suffix
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mkgmap,                      verpat: "0\\.0\\.0svn([0-9]{4,})",                  setver: "r$1" }
 - { name: mkgmap,                      verpat: "[0-9]{4,}",                                setver: "r$0" }
