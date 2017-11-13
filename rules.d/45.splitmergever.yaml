@@ -842,10 +842,10 @@
 - { name: [wxwidgets-3.0-cxx11,wxwidgets-ansi,wxwidgets-media,wxwidgets-wxcontainer,wxwidgets-wxcontainer24c], setname: wxwidgets }
 - { namepat: "(?:wx|wxgtk|wxwidgets|wxcommon|wxbase)[0-9._-]*((?:-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*)", setname: wxwidgets, addflavor: "$1" }
 - { name: wxwidgets, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
-- { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28 }
 # some distros use tarballs from wxpython (for instance, gentoo because "they include the full wxGTK sources and docs, and are released more frequently than wxGTK")
 # so the version may be broken
 - { name: wxwidgets, ver: "2.8.12.1",          setver: "2.8.12" }
+- { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28 }
 - { name: wxwidgets28, verpat: "2\\.9\\..*",   setname: wxwidets }  # belongs to 3.x - prerelease branch of
 
 - { namepat: "xapian[0-9._-]*-bindings[0-9._-]*", setname: xapian-bindings }
