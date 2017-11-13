@@ -46,14 +46,15 @@ class AoscPkgsParser():
                 pkg = Package()
 
                 pkg.name = package['name']
+
+                if package['version'] is None:
+                    print('no version: {}'.format(pkg.name), file=sys.stderr)
+                    continue
+
                 pkg.version, _ = SanitizeVersion(package['version'])
                 pkg.origversion = package['full_version']
                 pkg.category = package['pkg_section'] or package['section']
                 pkg.comment = package['description']
-
-                if pkg.version is None:
-                    print('no version: {}'.format(pkg.name), file=sys.stderr)
-                    continue
 
                 if pkg.version == '999':
                     pkg.ignoreversion = True
