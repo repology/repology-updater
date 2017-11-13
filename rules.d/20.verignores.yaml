@@ -244,6 +244,7 @@
 - { name: libcaca,                     ver: "0.99", family: [sisyphus,fedora,mageia,pclinuxos], ignorever: true } # it's 0.99.betaX!
 - { name: libcaca,                     verpat: "0.99.[0-9]+.*",                            ignorever: true } # it.s 0.99.betaX, not 0.99.X
 - { name: libcdio-paranoia,            verpat: "[0-9]+\\.[0-9]+\\.[0-9]+", family: kaos,   ignorever: true } # bad versioning
+- { name: libclc,                                                                          ignorever: true } # no single versioning scheme at all
 - { name: libcpuid,                    ver: "0.21",                                        setver: "0.2.1" } # deepin crap
 - { name: libdvdread,                  ver: "5.0.4",                 family: [arch,openindiana], ignorever: true } # fake
 - { name: libexecinfo,                                               family: ravenports,   ignorever: true } # fake
