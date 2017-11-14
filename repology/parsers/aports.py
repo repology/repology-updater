@@ -50,26 +50,22 @@ class ApkIndexParser():
                     state[line[0]] = line[2:].strip()
                     continue
 
-                if not state:
-                    continue
+                # empty line, we can flush our state
+                if state and state['P'] == state['o']:
+                    pkg = Package()
 
-                if state['P'] != state['o']:
-                    continue
+                    pkg.name = state['P']
+                    pkg.version, pkg.origversion = SanitizeVersion(state['V'])
 
-                pkg = Package()
+                    pkg.comment = state['T']
+                    pkg.homepage = state['U']  # XXX: switch to homepages, split
+                    pkg.licenses = [state['L']]
 
-                pkg.name = state['P']
-                pkg.version, pkg.origversion = SanitizeVersion(state['V'])
+                    if 'm' in state:
+                        pkg.maintainers = GetMaintainers(state['m'])
 
-                pkg.comment = state['T']
-                pkg.homepage = state['U']  # XXX: switch to homepages, split
-                pkg.licenses = [state['L']]
-
-                if 'm' in state:
-                    pkg.maintainers = GetMaintainers(state['m'])
+                    packages.append(pkg)
 
                 state = {}
-
-                packages.append(pkg)
 
         return packages
