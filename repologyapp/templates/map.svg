@@ -4,6 +4,31 @@
 {% set bottomoffset = 20 %}
 
 <svg xmlns="http://www.w3.org/2000/svg" width="{{ width }}" height="{{ height }}">
+	<script type="text/javascript"><![CDATA[
+		let colliding = null;
+		let inter = (a, b) => (a.x < b.x + b.width) && (a.x + a.width > b.x) && (a.y < b.y + b.height) && (a.height + a.y > b.y);
+		let collides = (a, b) => {
+			let ar = a.getBoundingClientRect(), br = b.getBoundingClientRect();
+			ar.width += 28;
+			ar.height += 8;
+			return (a != b) && inter(ar, br);
+		};
+		window.addEventListener('load', () => {
+			let labels = Array.from(document.querySelectorAll('.point'));
+			labels.forEach(el => {
+				el.addEventListener('mouseover', () => {
+					if (colliding) return;
+					colliding = labels.filter(l => collides(el, l));
+					colliding.forEach(l => l.setAttribute('style', 'opacity: .1'));
+				});
+				el.addEventListener('mouseout', () => {
+					colliding.forEach(l => l.setAttribute('style', ''));
+					colliding = null;
+				});
+			});
+		});
+	]]></script>
+	<style><![CDATA[ .label { transition: opacity 300ms ease; } ]]></style>
 	<defs>
 		<marker id="arrow" markerWidth="10" markerHeight="10" refX="2" refY="3" orient="auto" markerUnits="strokeWidth">
 			<path d="M0,0 L2,3 L0,6 L9,3 z" fill="#000" />
@@ -43,26 +68,21 @@
 {% endif %}
 {% endfor %}
 
-{#### data points ####}
-	<g font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11" text-anchor="start">
+{#### data points and labels ####}
 {% for point in points %}
 {% if point.text %}
 	{% set x = (leftoffset + point.coords[0].x / maxx * (width - leftoffset - rightoffset) )|int + 0.5 %}
 	{% set y = (height - bottomoffset - point.coords[0].y / maxy * (height - topoffset - bottomoffset) )|int + 0.5 %}
-		<text fill="#f0f0f0" stroke="#f0f0f0" stroke-width="3" stroke-linecap="round" x="{{ x + 5 }}" y="{{ y + 3 }}">{{ point.text }}</text>
-		<text fill="#000000" x="{{ x + 5 }}" y="{{ y + 3 }}">{{ point.text }}</text>
-{% endif %}
-{% endfor %}
+	<g font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11" text-anchor="start" transform="translate({{ x }},{{ y }})" class="point">
+		<circle r="5" fill="#f0f0f0" />
+		{% if point.color %}
+		<circle r="4" fill="#{{ point.color }}" />
+		{% else %}
+		<circle r="4" fill="#000000" />
+		{% endif %}
+		<text fill="#f0f0f0" stroke="#f0f0f0" stroke-width="3" stroke-linecap="round" x="5" y="3">{{ point.text }}</text>
+		<text fill="#000000" x="5" y="3">{{ point.text }}</text>
 	</g>
-{#### data point labels ####}
-{% for point in points %}
-	{% set x = (leftoffset + point.coords[0].x / maxx * (width - leftoffset - rightoffset) )|int + 0.5 %}
-	{% set y = (height - bottomoffset - point.coords[0].y / maxy * (height - topoffset - bottomoffset) )|int + 0.5 %}
-	<circle cx="{{ x }}" cy="{{ y }}" r="5" fill="#f0f0f0" />
-	{% if point.color %}
-	<circle cx="{{ x }}" cy="{{ y }}" r="4" fill="#{{ point.color }}" />
-	{% else %}
-	<circle cx="{{ x }}" cy="{{ y }}" r="4" fill="#000000" />
-	{% endif %}
+{% endif %}
 {% endfor %}
 </svg>
