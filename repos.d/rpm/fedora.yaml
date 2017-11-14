@@ -70,7 +70,7 @@
     - name: release
       fetcher: Repodata
       parser: Repodata
-      url: https://mirror.yandex.ru/fedora/linux/releases/test/27_Beta/Everything/source/tree/
+      url: https://mirror.yandex.ru/fedora/linux/releases/27/Everything/source/tree/
       subrepo: release
     - name: updates
       fetcher: Repodata
