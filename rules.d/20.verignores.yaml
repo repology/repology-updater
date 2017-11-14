@@ -154,6 +154,7 @@
 - { name: flvstreamer,                 ver: "2.1.c.1",                                     setver: "2.1c1" }
 - { name: flvstreamer,                 ver: "2.1c",                                        setver: "2.1c0" }
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
+- { name: "fonts:dseg",                ver: "030",                                         setver: "0.30" }
 - { name: "fonts:eeyek",               ver: "20091204",                                    ignorever: true }
 - { name: "fonts:fira-sans",           verpat: "20[0-9]{6}",                               ignorever: true } # openbsd garbage
 - { name: "fonts:gentium-basic",       ver: "1102",                                        setver: "1.102" }
