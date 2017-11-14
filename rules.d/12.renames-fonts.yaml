@@ -312,6 +312,11 @@
   setname: "fonts:dustin-dustismo"
 
 - name:
+    - fonts-dseg
+    - ttf-dseg
+  setname: "fonts:dseg"
+
+- name:
     - fonts-ttf-dustismo
   setname: "fonts:dustismo"
 
