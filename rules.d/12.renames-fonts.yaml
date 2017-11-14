@@ -690,6 +690,12 @@
   setname: "fonts:isas-misc"
 
 # J
+- name:
+    - fonts-junicode
+    - fonts-ttf-junicode
+    - junicode
+    - ttf-junicode
+  setname: "fonts:junicode"
 
 # K
 - name:
