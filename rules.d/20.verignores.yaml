@@ -383,7 +383,8 @@
 - { name: rpcgen,                                                    family: ravenports,   ignorever: true } # fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
 - { name: rtorrent,                    verpat: "20[0-9]{6}.*",                             ignorever: true } # nix fake
-- { name: rtmpdump,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: rtmpdump,                    verpat: ".*20[0-9]{6}.*",                           ignorever: true }
+- { name: rtmpdump,                    verlonger: 2,                                       ignorever: true }
 - { name: rubygem-io-like,             ver: "0.3.0.20130301",                              ignorever: true } # freebsd
 - { name: rust,                        verpat: ".*dev",                                    ignorever: true } # haikuports garbage
 
