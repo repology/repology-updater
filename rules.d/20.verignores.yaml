@@ -325,7 +325,6 @@
 - { name: openssh,                     verpat: "([0-9]+\\.[0-9]+)\\.([0-9]+)",             setver: "$1p$2" } # pkgrc: it's X.YpZ!
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignorever: true } # freshcode, pZ part missing
 - { name: openxcom,                    verpat: ".*201[789].*",                             ignorever: true } # git snapshots
-- { name: osc,                         ver: "0.160.0",               family: opensuse,     ignorever: true } # fake
 - { name: oxygen-gtk3,                 verlonger: 3,                 family: kaos,         ignorever: true }
 
 # P
