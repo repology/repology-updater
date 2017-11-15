@@ -39,6 +39,21 @@
   setname: "fonts:alef"
 
 - name:
+    - alegreya
+    - fonts-otf-ht-alegreya
+    - google-alegreya-fonts
+    - ht-alegreya-fonts
+    - otf-alegreya
+    - ttf-alegreya-ibx
+  setname: "fonts:alegreya"
+
+- name:
+    - alegreya-sans
+    - otf-alegreya-sans
+    - ttf-alegreya-sans-ibx
+  setname: "fonts:alegreya-sans"
+
+- name:
     - google-allerta-fonts
     - otf-allerta
   setname: "fonts:allerta"
