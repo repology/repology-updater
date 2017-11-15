@@ -69,7 +69,6 @@
 - { name: biogenesis,                  ver: "0.8.1.42.1",                                  ignorever: true } # mageia garbage
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
-- { name: bloodfrontier,               ver: "0.84",                                        setver: b1 }
 - { name: bloodfrontier,               ver: "0.85",                                        setver: b2 }
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: boost-jam,                   ver: "3.1.18",                                      ignorever: true }
@@ -83,13 +82,11 @@
 # C
 - { name: ca-certificates,             verlonger: 1,                                       ignorever: true } # no need to append NSS version
 - { name: ca-certificates,                                           family: [alpine,crux], ignorever: true } # see https://hg.mozilla.org/projects/nss/log/tip/lib/ckfw/builtins/certdata.txt for valid dates
-- { name: calamares,                   verlonger: 3,                 family: kaos,         ignorever: true } # own version?
 - { name: calf,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # slackbuilds garbage
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: cegui,                       verpat: "6\\..*",                                   setver: "0.$0" } # it's 0.6.2!
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
-- { name: cherrytree,                  verpat: "[0-9]+",                                   ignorever: true } # freshcode garbage
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: cld2,                        ver: "20160820",                                    ignorever: true } # aosc fake (there were no commits to cld2 since 2015)
 - { name: clementine-player,           verlonger: 3,                 family: kaos,         ignorever: true }
@@ -226,8 +223,6 @@
 - { name: kdnssd,                      verpat: "1[6789]\\..*",                             ignorever: true }
 - { name: kdiff3,                      verpat: "1\\.7\\.0-[0-8a-f]{7}.*",                  ignorever: true } # nix snapshot
 - { name: kdiff3,                      verpat: ".*201[789].*",                             ignorever: true } # nix snapshot
-- { name: knewstuff,                   verpat: "1[6789]\\..*",                             ignorever: true }
-- { name: keybase,                     verpat: "20170209.*",                               ignorever: true } # nix garbage
 - { name: kicad,                       verpat: "20[0-9][0-9].*",                           ignorever: true }
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignorever: true }
@@ -258,7 +253,6 @@
 - { name: libiconv,                    verpat: "[0-9]",                                    ignorever: true } # lede/openwrt strange version
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignorever: true } # fake
 - { name: libimobiledevice,            verlonger: 3,                 family: kaos,         ignorever: true } # fake
-- { name: libkfapi,                    verlonger: 2,                 family: kaos,         ignorever: true } # fake
 - { name: libkvkontakte,               verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: libmediawiki,                verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
@@ -268,7 +262,6 @@
 - { name: libsndfile,                  ver: "1.0.29",                family: vcpkg,        ignorever: true }
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
 - { name: libtheora,                   ver: "1.2.0",                 family: openmandriva, ignorever: true } # lie, not released yet
-- { name: libtomcrypt,                 ver: "1.18",                  family: fedora,       ignorever: true } # lie, not released yet
 - { name: libtorrent,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # nix fake
 - { name: libusbmuxd,                  ver: "1.1.0",                 family: openwrt,      ignorever: true } # fake
 - { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignorever: true } # version from mediainfo is used, while libzen has its own version scheme
@@ -393,7 +386,6 @@
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: scite,                       ver: "375",                                         ignorever: true } # pclinuxos
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
-- { name: sdcc,                        ver: "8378",                                        ignorever: true }
 - { name: sddm,                        verpat: "[0-9]{4,}.*",        family: kaos,         ignorever: true } # snapshot with random version
 - { name: serf,                        ver: "1.4.0",                 family: mageia,       ignorever: true } # nonexisting
 - { name: sgt-puzzles,                 verpat: "([0-9]{8})\\.[0-9a-fr]+",                  setver: "$1" } # remove commit hashes and revisions

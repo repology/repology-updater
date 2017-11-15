@@ -410,7 +410,6 @@
 - { name: freebsd-uucp,                setname: uucp,                     family: [ freebsd ] }
 - { name: freedink-engine,             setname: freedink                  }
 - { name: [freedoom1, freedoom2],      setname: freefoom                  }
-- { name: freefemxx,                   setname: freefem++                 }
 - { name: freemedforms-project,        setname: freemedforms              }
 - { name: freeplane-srcbuild,          setname: freeplane                 }
 - { name: [freeradius-server, freeradius3], setname: freeradius           }
