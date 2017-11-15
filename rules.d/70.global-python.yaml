@@ -261,6 +261,7 @@
 - { name: ["python:alsa", "python:pyalsa"], setname: pyalsa }
 
 - { name: "python:pyspatialite", ver: "3.0.1", ignorever: true            }
+- { name: "python:pyspatialite", verpat: "(.*)([_-]alpha[_-])(.*)", setver: "$1alpha$2" }
 - { name: "python:pyspatialite", family: pypi, unignorever: true          }
 - { name: "python:pycha", ver: "279", ignorever: true }
 - { name: "python:pycrypto", verpat: "3.*", family: nix, setname: "python:pycryptodome" } # different package

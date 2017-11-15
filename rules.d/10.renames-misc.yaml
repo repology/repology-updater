@@ -836,6 +836,7 @@
 - { name: sdlgfx,                      setname: sdl2-gfx,                 family: [ debuntu ]  }
 - { name: sdlpango,                    setname: sdl-pango,                family: [ debuntu ]  }
 - { name: sdl_ttf,                     setname: sdl_ttf2,                 family: [ kaos ]  }
+- { name: sdlmame-wout-toolkits,       setname: sdlmame, addflavor: wout-toolkits }
 - { namepat: "sendmail\\+.*",          setname: sendmail,                 family: [ freebsd ]  }
 - { name: seahorse-adventures,         setname: barbie-seahorse-adventures }
 - { name: searx-py3,                   setname: searx                     }
