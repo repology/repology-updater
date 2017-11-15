@@ -77,11 +77,9 @@ class NixJsonParser():
 
                 if pkg.name.endswith('-git'):
                     pkg.name = pkg.name[:-4]
-                    print('ignoring version for git snapshot: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
                     pkg.ignoreversion = True
 
                 if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
-                    print('ignoring version which is a date: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
                     pkg.ignoreversion = True
 
                 if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
