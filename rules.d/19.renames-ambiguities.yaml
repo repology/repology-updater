@@ -69,6 +69,10 @@
 # file change monitor vs. file system checksum checker
 - { name: fswatch, verpat: "1.*",      setname: fswatch-mon }
 
+- { name: fts, wwwpart: musl-fts, setname: musl-fts } # file tree traversal for musl
+- { name: fts, wwwpart: gonicus, setname: fuse-fts } # fuse TFTP supplicant
+# otherwise fts3, "File Transfer Service V3"
+
 - { name: fuse, wwwpart: fuse-emulator, setname: fuse-emulator }
 - { name: fuse, category: [emulators,app-emulation], setname: fuse-emulator }
 
