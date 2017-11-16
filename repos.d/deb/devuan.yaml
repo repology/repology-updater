@@ -1,0 +1,53 @@
+###########################################################################
+# Devuan
+###########################################################################
+- name: devuan_stable
+  type: repository
+  desc: Devuan Stable
+  family: debuntu
+  color: '88839c'
+  sources:
+    - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://auto.mirror.devuan.org/merged/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Devuan home
+      url: https://devuan.org/
+  tags: [ all, production, devuan ]
+
+- name: devuan_testing
+  type: repository
+  desc: Devuan Testing
+  family: debuntu
+  color: '88839c'
+  sources:
+    - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://auto.mirror.devuan.org/merged/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Devuan home
+      url: https://devuan.org/
+  tags: [ all, production, devuan ]
+
+- name: devuan_unstable
+  type: repository
+  desc: Devuan Unstable
+  family: debuntu
+  color: '88839c'
+  sources:
+    - name: [ unstable/main, unstable/contrib, unstable/non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://auto.mirror.devuan.org/merged/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Devuan home
+      url: https://devuan.org/
+  tags: [ all, production, devuan ]
