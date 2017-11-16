@@ -12,6 +12,7 @@
       parser: GentooGit
       url: 'https://github.com/funtoo/{source}.git'
       sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
   repolinks:
     - desc: Funtoo Linux home
       url: http://www.funtoo.org/Welcome
