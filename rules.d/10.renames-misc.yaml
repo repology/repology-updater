@@ -491,13 +491,15 @@
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hashdeep,                    setname: md5deep }
 - { name: hashcat-legacy,              setname: hashcat }
+- { name: hedgewars-server,            setname: hedgewars, addflavor: server }
 - { name: hg-flow,                     setname: hgflow }
 - { name: [hostapd-rtl,hostapd-rtl871xdrv,hostapd1], setname: hostapd }
 - { name: html2text-with-utf8,         setname: html2text }
-- { name: [hugin-app, hugin-tools],    setname: hugin }
+- { name: [hugin-app, hugin-tools],    setname: hugin, addflavor: true }
 
 # I
-- { name: [i3-kde,i3-lazy,i3-wm,i3-wm-iconpatch,i3wm], setname: i3        }
+- { name: [i3-wm,i3wm], setname: i3        }
+- { name: [i3-kde,i3-lazy,i3-wm-iconpatch], setname: i3, addflavor: true }
 - { name: icewm2,                      setname: icewm }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
