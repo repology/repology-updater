@@ -143,6 +143,10 @@
 - { name: mpc, warning: "please classify me" } # nothing should be left here
 - { name: musicpc, setname: mpc } # still use more canonical name
 
+# there are two `ne`s, and they are both editors; prefix is for `cambridge`
+# another is `nice editor`, but I don't feel like renaming it as it's `ne` everywhere
+- { name: ne, wwwpart: wordprocessing/unix/ne, setname: ne-cam }
+
 - { name: node, wwwpart: ax25, setname: node-ax25 }
 - { name: node, category: [universe/hamradio,lang,Development/Tools,hamradio], setname: node-ax25 }
 - { name: node, wwwpart: nodejs, setname: nodejs }
