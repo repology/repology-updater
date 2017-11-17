@@ -46,7 +46,7 @@ class PackageFormatter(string.Formatter):
         elif key == 'category':
             value = pkg.category if pkg.category is not None else ''
         elif key == 'archrepo':
-            value = 'community' if pkg.subrepo == 'community' else 'packages'
+            value = 'community' if pkg.subrepo.startswith('community') else 'packages'
         elif key == 'archbase':
             value = pkg.extrafields['base'] if 'base' in pkg.extrafields else pkg.name
         elif key in pkg.extrafields:

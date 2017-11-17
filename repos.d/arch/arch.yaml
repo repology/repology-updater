@@ -18,8 +18,33 @@
     - desc: Arch Linux Packages
       url: https://www.archlinux.org/packages/
   packagelinks:
-    # XXX: there are only two git repos: "packages" and "community", so these do
-    # not map 1:1 onto subrepos and some links are broken; not sure on the fix yet
+    # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
+    - desc: Git repository
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{archbase}'
+    - desc: PKGBUILD
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{archbase}'
+    - desc: Package information (x86_64)
+      url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{name}/'
+  tags: [ all, production, have_testdata ]
+
+- name: arch_testing
+  type: repository
+  desc: Arch Testing
+  family: arch
+  color: '0088cc'
+  sources:
+    - name: [ testing, community-testing, multilib-testing ]
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Arch Linux home
+      url: https://www.archlinux.org/
+    - desc: Arch Linux Packages
+      url: https://www.archlinux.org/packages/
+  packagelinks:
+    # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
     - desc: Git repository
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{archbase}'
     - desc: PKGBUILD
