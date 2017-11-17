@@ -7,7 +7,7 @@
   family: arch
   color: '0088cc'
   sources:
-    - name: [ core, extra, community ]
+    - name: [ core, extra, community, multilib ]
       fetcher: WgetTar
       parser: ArchDB
       url: 'http://delta.archlinux.fr/{source}/os/x86_64/{source}.db.tar.gz'
