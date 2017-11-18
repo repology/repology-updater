@@ -860,6 +860,8 @@
 - { name: snorenotify-qt5,             setname: snorenotify               }
 - { name: [sodium,libsodium-static],   setname: libsodium                 }
 - { name: spacearyarya-kxl,            setname: spacearyarya,             family: [ gentoo ]  } # XXX: recheck
+- { name: spamassassin-rules,          setname: spamassassin, addflavor: rules }
+- { name: spamassassin-spamc,          setname: spamassassin, addflavor: rules }
 - { name: spatialite,                  setname: libspatialite }
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
 - { name: stellarium-qt4,              setname: stellarium                }
