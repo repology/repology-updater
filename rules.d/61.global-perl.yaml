@@ -1,7 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Perl modules
-- { family: [ cpan ],                setname: "perl:$0", tolowername: true, last: true } # don't replace _ with - !
+- { family: cpan,                      setname: "perl:$0" }
 # Note that Gentoo misbehaves by changing upstream versioning scheme, so
 # we ignore it in comparison
 - { namepat: "p5-(.*)",                setname: "perl:$1", family: [ freebsd, pkgsrc, openbsd, crux, macports ] }
@@ -73,3 +73,5 @@
 - { name: "perl:unburden-home-dir",    setname: unburden-home-dir }
 
 - { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below
+
+- { family: cpan, last: true } # don't replace _ with - !
