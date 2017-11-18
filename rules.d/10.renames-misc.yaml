@@ -594,10 +594,13 @@
 - { name: libmxml,                     setname: minixml }
 - { name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework], setname: ngspice }
 - { name: libnsl2,                     setname: libnsl                    }
+- { name: libnss-ldap,                 setname: nss-ldap                  }
 - { name: libopus,                     setname: opus                      }
 - { name: libopencollada,              setname: opencollada               }
 - { name: libopendkim,                 setname: opendkim                  }
 - { name: libopusfile,                 setname: opusfile                  }
+- { name: libpam-ccreds,               setname: pam-ccreds                }
+- { name: libpam-ldap,                 setname: pam-ldap                  }
 - { name: libpaper1,                   setname: libpaper                  }
 - { name: libphash,                    setname: phash                     }
 - { name: libphysfs,                   setname: physfs                    }
