@@ -20,6 +20,7 @@
 
 # APPS, not modules
 - { name: "haskell:darcs",             setname: darcs              }
-- { namepat: "haskell:hledger(?!-lib)", setname: hledger$1         }
+- { namepat: "haskell:hledger(.*)",    setname: "hledger$1"        }
+- { name: "hledger-lib",               setname: "haskell:hledger$1" }
 - { name: "haskell:xmobar",            setname: xmobar             }
 - { name: "haskell:xmonad",            setname: xmonad             }
