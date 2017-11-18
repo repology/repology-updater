@@ -631,6 +631,8 @@
 - { name: libuv1,                      setname: libuv                     }
 - { name: [libwmf-nox11,libwmf-docs],  setname: libwmf, addflavor: true   }
 - { name: libx264,                     setname: x264                      }
+- { name: libxml2-reference,           setname: libxml2, addflavor: reference }
+- { name: libxml2-linenum,             setname: libxml2, addflavor: linenum }
 - { name: libxmp-lite,                 setname: libxmp                    }
 - { name: libzen0,                     setname: libzen                    }
 - { name: libzstd,                     setname: zstd                      }
