@@ -109,6 +109,7 @@
 
 # B
 - { name: b2-tools,                    setname: backblaze-b2 }
+- { name: [backintime-cli,backintime-common,backintime-qt4], setname: backintime, addflavor: true }
 - { name: backuppc-devel,              setname: backuppc, ignorever: true }
 - { name: backuppc4,                   setname: backuppc                  }
 - { name: balsa-gtk2,                  setname: balsa                     }
@@ -745,6 +746,7 @@
 - { name: [openblas-lapack,openblas-lapack-ilp64], setname: openblas      }
 - { name: opencv2,                     setname: opencv                    }
 - { name: [openjp2, libopenjpeg2.0],   setname: openjpeg2                 }
+- { name: openoffice-bin,              setname: openoffice, addflavor: bin }
 - { name: openshot-qt,                 setname: openshot, addflavor: qt }
 - { name: [openvpn-mbedtls, openvpn-polarssl, openvpn2, openvpn23], setname: openvpn }
 - { name: open-tyrian,                 setname: opentyrian }
