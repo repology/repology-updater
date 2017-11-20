@@ -29,13 +29,14 @@ import yaml
 
 families = [
     'alpine',
-    'aosc',
     'anitya',
+    'aosc',
     'arch',
     'centos',
     'chocolatey',
     'cpan',
     'cran',
+    'crates_io',
     'crux',
     'debuntu',
     'distrowatch',

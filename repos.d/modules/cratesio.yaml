@@ -1,0 +1,21 @@
+###########################################################################
+# Hackage (haskell)
+###########################################################################
+- name: crates_io
+  type: modules
+  desc: crates.io
+  family: crates_io
+  color: "e8ad39"
+  sources:
+    - name: crates.io
+      fetcher: CratesIO
+      parser: CratesIO
+      url: https://crates.io/api/v1/crates
+  shadow: true
+  repolinks:
+    - desc: crates.io
+      url: https://crates.io/
+  packagelinks:
+    - desc: Crate page
+      url: 'https://crates.io/crates/{name}'
+  tags: [ all, production ]
