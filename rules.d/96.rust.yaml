@@ -1,0 +1,22 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# merge rust itself
+- { namepat: "rust-nightly(.*)", setname: "rust-$1", ignorever: true }
+- { name: rust-always-nightly, setname: rust, ignorever: true }
+- { name: [rust-analysis,rust-bin,rust-ms,rust-src,rust-doc,rust-docs,rustc,rustc-stage0], setname: rust, addflavor: true }
+
+# merge cargo
+- { name: rust-cargo, setname: cargo }
+- { name: cargo-nightly, setname: cargo, ignorever: true }
+- { name: [cargo-completion,cargo-standalone], setname: cargo, addflavor: true }
+
+# save from wildcard
+- name:
+    - rust-mode
+    - rust-zshcom
+    - rust-vim
+  last: true
+
+# global rule
+- { family: crates_io,    setname: "rust:$0" }
+- { namepat: "rust-(.*)", setname: "rust:$1", family: [arch, nix, fedora] }
