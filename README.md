@@ -46,6 +46,7 @@ version are always parsed.
 | Chocolatey                       | ✔       |         |       | ✔     |         |          |
 | CPAN                             |         | ✔       |       | ✔ (2) |         |          |
 | CRAN                             |         |         |       | ✔ (2) |         |          |
+| crates.io                        | ✔       |         |       | ✔     |         |          |
 | CRUX                             | ✔       | ✔       |       | ✔     |         |          |
 | Debian, Ubuntu, other deb-based  |         | ✔       | ✔     | ✔     |         |          |
 | DistroWatch.com                  | ✔       |         |       | ✔     |         | ✔        |
