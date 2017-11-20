@@ -586,6 +586,7 @@
 - { name: liblapack,                   setname: lapack                    }
 - { name: liblas12,                    setname: liblas                    }
 - { name: liblastfm0,                  setname: liblastfm                 }
+- { name: [libldb,ldb12,ldb13],        setname: ldb                       }
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libmikmod2,                  setname: libmikmod                 }

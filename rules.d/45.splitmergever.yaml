@@ -381,6 +381,8 @@
 
 - { namepat: "(?:lib)?gphoto2?",       setname: gphoto2 }
 
+- { namepat: "hsqldb[0-9._-]+",        setname: hsqldb }
+
 - { namepat: "ices[0-9]+",             setname: ices }
 - { name: ices, verpat: "0\\..*",      setname: ices0 }
 
