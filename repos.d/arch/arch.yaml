@@ -51,4 +51,4 @@
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{archbase}'
     - desc: Package information (x86_64)
       url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{name}/'
-  tags: [ all, production, have_testdata ]
+  tags: [ all, production ]
