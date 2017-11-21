@@ -34,7 +34,7 @@ class CratesIOParser():
 
             pagepath = os.path.join(path, pagefilename)
 
-            with open(pagepath, 'r') as pagedata:
+            with open(pagepath, 'r', encoding='utf-8', errors='ignore') as pagedata:
                 for crate in json.load(pagedata)['crates']:
                     pkg = Package()
 
