@@ -18,6 +18,8 @@
     - yackage
   setname: "haskell:$0"
 
+- { namepat: "haskelldb.*",            setname: "haskell:$0" }
+
 # APPS, not modules
 - { name: "haskell:darcs",             setname: darcs              }
 - { namepat: "haskell:hledger(.*)",    setname: "hledger$1"        }

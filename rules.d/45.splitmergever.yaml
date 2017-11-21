@@ -567,6 +567,11 @@
 
 - { namepat: "linux-kernel(?:-lts)?[0-9._-]*", setname: linux }
 
+- { namepat: "lldb[0-9._-]+",          setname: lldb }
+- { namepat: "lldb[0-9._-]*-split",    setname: lldb, addflavor: split }
+- { name: lldb-assert,                 setname: lldb, addflavor: assert }
+- { name: lldb-polly,                  setname: lldb, addflavor: polly }
+
 - { namepat: "mariadb[0-9.-]*(?:-client|-server)?", setname: mariadb }
 - { name: mariadb, verge: "10.3", devel: true } # https://downloads.mariadb.org/
 
