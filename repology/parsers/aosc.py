@@ -19,6 +19,7 @@ import json
 import sys
 
 from repology.package import Package
+from repology.util import GetMaintainers
 
 
 def SanitizeVersion(version):
@@ -55,6 +56,7 @@ class AoscPkgsParser():
                 pkg.origversion = package['full_version']
                 pkg.category = package['pkg_section'] or package['section']
                 pkg.comment = package['description']
+                pkg.maintainers = GetMaintainers(package['committer'])
 
                 if pkg.version == '999':
                     pkg.ignoreversion = True
