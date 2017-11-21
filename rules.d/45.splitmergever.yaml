@@ -594,6 +594,9 @@
 - { name: [nodejs-bigger-heap,nodejs-slim], setname: nodejs }
 - { name: nodejs-current, setname: nodejs, ignorever: true }
 
+- { namepat: "npm[0-9._-]+", setname: npm }
+- { name: npm, ver: ["5.5.0", "5.5.1"], devel: true } # should be updated manually
+
 - { namepat: "(?:dkms|linux-rt.*|linux[0-9]+)-nvidiabl", setname: nvidiabl }
 
 - { namepat: "nvidia-settings-experimental.*", setname: nvidia-settings, ignorever: true }
