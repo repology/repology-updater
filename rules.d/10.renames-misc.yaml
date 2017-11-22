@@ -651,6 +651,7 @@
 - { name: m4ri,                        setname: libm4ri                   }
 - { name: m4rie,                       setname: libm4rie                  }
 - { name: [marsshooter,mars-shooter],  setname: m.a.r.s.                  }
+- { name: [man-pages,linux-man-pages,linux-manpages], setname: manpages                  }
 - { name: mate-brisk-menu,             setname: brisk-menu                }
 - { name: [magit-emacs25,emacs-magit], setname: magit                     }
 - { name: [magit-svn,emacs-magit-git], setname: magit, ignorever: true    }
