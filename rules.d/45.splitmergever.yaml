@@ -596,6 +596,7 @@
 
 - { namepat: "nodejs-lts.*", setname: nodejs }
 - { namepat: "node(?:js)?[0-9._-]+", setname: nodejs }
+- { name: node, setname: nodejs }
 - { name: [nodejs-bigger-heap,nodejs-slim], setname: nodejs }
 - { name: nodejs-current, setname: nodejs, ignorever: true }
 

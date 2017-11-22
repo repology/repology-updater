@@ -140,6 +140,7 @@
 - { name: mpc, category: [media-sound,Sound,audio,Sound/Players,universe/sound], setname: musicpc }
 - { name: mpc, wwwpart: multiprecision.org, setname: gnumpc }
 - { name: mpc, category: dev-libs, setname: gnumpc }
+- { name: mpc, family: rudix, setname: gnumpc }
 - { name: mpc, warning: "please classify me" } # nothing should be left here
 - { name: musicpc, setname: mpc } # still use more canonical name
 
