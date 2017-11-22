@@ -1,5 +1,8 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+# fuse itself
+- { name: [fuse-common,fusefs-fusexmp_fh,fuse-libs,fuse-libs3,libfuse], setname: fusefs, addflavor: true }
+
 # fusefs
 - { namepat: "fuse-emulator.*",        tolowername: true, replaceinname: { "_": "-" }, last: true } # protect from the next rule, has nothing to do with fusefs
 - { namepat: "fuse(?:fs)?-(.*)",       setname: "fusefs:$1" }
