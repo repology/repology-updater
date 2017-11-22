@@ -1,0 +1,21 @@
+###########################################################################
+# Vcpkg
+###########################################################################
+- name: rudix
+  type: repository
+  desc: Rudix
+  family: rudix
+  sources:
+    - name: rudix
+      fetcher: File
+      parser: RudixHTML
+      url: http://rudix.org/packages/index.html
+  repolinks:
+    - desc: Rudix home
+      url: http://rudix.org/
+    - desc: Rudix packages
+      url: http://rudix.org/packages/index.html
+  packagelinks:
+    - desc: Package page
+      url: 'http://rudix.org/packages/{name}.html'
+  tags: [ all, production ]

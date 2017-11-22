@@ -67,6 +67,7 @@ families = [
     'ravenports',
     'rosa',
     'rubygems',
+    'rudix',
     'sisyphus',
     'slackbuilds',
     'snap',
