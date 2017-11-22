@@ -7,6 +7,7 @@
 - { namepat: "calligra-l10n-.*",       setname: "calligra-l10n", family: [ sisyphus ] }
 - { namepat: "eric-i18n-.*",           setname: "eric" }
 - { namepat: "firefox-kde-i18n-.*",    setname: "firefox-kde-i18n" }
+- { namepat: "firefox-beta-i18n-.*",   setname: "firefox-beta-i18n" }
 - { namepat: "firefox-esr-i18n-.*",    setname: "firefox-esr-i18n" }
 - { namepat: "firefox-(i18n|l10n)-.*", setname: "firefox-i18n" }
 - { namepat: "fpc-.*",                 setname: "fpc-modules", family: [ freebsd ] }
