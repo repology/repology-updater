@@ -290,6 +290,7 @@
 - { name: mkgmap-splitter,             verpat: "0\\.0\\.0svn([0-9]{3,})",                  setver: "r$1" }
 - { name: moc,                         ver: ["2.6","2.6.0"],         family: [sisyphus,fedora], ignorever: true } # 2.6alpha3
 - { name: moc,                         verpat: "2\\.6\\.0r.*",                             ignorever: true }
+- { name: moc,                         verpat: "(2\\.6)\\.0(a.*)",                         setver: "$1$2" } # there's no third numeric component for alpha
 - { name: mod_rpaf,                    verpat: "2015.*",             family: [ arch ],     ignorever: true }
 - { name: mpfr,                        verlonger: 3,                                       ignorever: true } # openbsd, openindiana fakes
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # fake
