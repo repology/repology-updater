@@ -224,6 +224,7 @@
 - { name: [chipmunk6,chipmunkphysics,libchipmunk], setname: chipmunk      }
 - { name: [chromium-browser,chromium-browser-stable,chromium-gtk2], setname: chromium }
 - { name: [chromium-beta,chromium-dev,chromium-browser-dev], setname: chromium, ignorever: true }
+- { name: chromiumbsu,                 setname: chromium-bsu }
 - { name: ckeditor3,                   setname: ckeditor                  }
 - { name: [clamav-server,clamav-light], setname: clamav                    }
 - { name: [clearlooks-phenix-gtk-theme,clearlooks-phenix-theme,gtk3-theme-clearlooks-phenix], setname: clearlooks-phenix }
@@ -543,6 +544,7 @@
 - { name: [lapack-docs,lapack-reference], setname: lapack, addflavor: docs }
 - { name: lapacke-tmg,                 setname: lapacke, addflavor: tmg   } # component of
 - { name: lcs,                         setname: liberal-crime-squad       }
+- { name: liquidwar5,                  setname: liquidwar }
 - { name: luxrender14,                 setname: luxrender }
 
 # LIB
