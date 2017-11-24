@@ -511,6 +511,7 @@
 - { name: isc-kea,                     setname: kea }
 - { name: iso_8879,                    setname: iso8879 }
 - { name: ingen-unstable,              setname: ingen, ignorever: true }
+- { name: inotify-tools-inc,           setname: inotify-tools, addflavor: inc }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition,intellij], setname: intellij-idea-community }
 - { name: intellij-idea-ce-eap,        setname: intellij-idea-community, ignorever: true }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre,intellij-ultimate], setname: intellij-idea-ultimate }
@@ -637,6 +638,7 @@
 - { name: libxml2-reference,           setname: libxml2, addflavor: reference }
 - { name: libxml2-linenum,             setname: libxml2, addflavor: linenum }
 - { name: libxmp-lite,                 setname: libxmp                    }
+- { name: libytnef,                    setname: ytnef                     } # see https://github.com/Yeraze/ytnef/blob/master/ChangeLog
 - { name: libzen0,                     setname: libzen                    }
 - { name: libzstd,                     setname: zstd                      }
 - { name: libzzip,                     setname: zziplib                   }

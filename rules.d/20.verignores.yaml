@@ -103,12 +103,14 @@
 - { name: crimson,                     ver: "2014.10",                                     ignorever: true }
 - { name: critterding,                 verpat: "1\\.0(beta.*)",                            setver: "$1" }
 - { name: cryptcat,                    ver: "20031202",                                    ignorever: true }
+- { name: cryptsetup,                  ver: "2.0.0",                 family: fedora,       ignorever: true } # 2.0.0rc1
 - { name: cvs,                         ver: "1.20120905",                                  ignorever: true }
 - { name: cvs,                         ver: "1.12.13.1",                                   ignorever: true } # respin for Windows *only* to fix carriage returns, it does not make sense to list it
 - { name: cwiid,                       ver: ["20110107","0.6.01","2010-02-21-git"],        ignorever: true } # abandonware; a lot of snapshots
 
 # D
 - { name: dbus-cpp,                    verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
+- { name: ddrescue,                    ver: "1.28",                  family: kali,         ignorever: true } # fake
 - { name: dee-qt,                      verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: dff,                         verpat: "(.*)\\.20[0-9]{6}",                        setver: "$1" } # aosc snapshot
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
@@ -209,6 +211,7 @@
 - { name: icebreaker,                  ver: "1.21",                                        setver: "1.2.1" }
 - { name: icu-le-hb,                   ver: "1.0.3.3",                                     ignorever: true } # fake (FreeBSD)
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
+- { name: inotify-tools,               ver: ["3.14.01","3.14pl0"],                         ignorever: true } # fake
 - { name: iozone,                      verpat: "[0-9]{3}",                                 ignorever: true } # aosc fake
 - { name: iputils,                     verpat: "[0-9]{8}\\.[0-9a-f]{7,}",                  ignorever: true } # arch: commit id in version
 
@@ -277,6 +280,7 @@
 - { name: live555,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # alt; it's dot-separated, dummies!
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: llvm,                        verpat: ".*git",                                    ignorever: true }
+- { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignorever: true } # fake
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 
 # M
@@ -496,6 +500,7 @@
 
 # Y
 - { name: youtube-dl,                  verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # canonical version is period-separated
+- { name: ytnef,                       ver: "2.6",                                         setver: "oldschema.$0" } # see https://github.com/Yeraze/ytnef/blob/master/ChangeLog; latest is 1.9.2, rename it so it's outdated
 
 # Z
 - { name: zathura,                     ver: "20101104",                                    ignorever: true }
