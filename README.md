@@ -72,6 +72,7 @@ version are always parsed.
 | PyPi                             | ✔       |         |       | ✔ (2) |         |          |
 | Ravenports                       | ✔       |         | ✔     | ✔     |         |          |
 | RubyGems                         |         |         |       | ✔ (2) |         |          |
+| Rudix                            | ✔       |         |       |       | ✔       |          |
 | SlackBuilds                      |         | ✔       | ✔     | ✔     |         | ✔        |
 | Vcpkg                            | ✔       |         |       |       |         |          |
 | YACP                             |         |         |       |       |         |          |
