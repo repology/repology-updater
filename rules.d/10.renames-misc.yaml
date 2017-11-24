@@ -447,6 +447,25 @@
 - { name: gnash-git,                   setname: gnash, ignorever: true }
 - { namepat: "gnat(cross-binutils.*)", setname: "$1", addflavor: gnat }
 - { name: [gnomephotoprinter,gnome-photo-print], setname: gnome-photo-printer }
+- { name: gnome-games-aisleriot,       setname: aisleriot }
+- { name: gnome-games-atomix,          setname: atomix }
+- { name: gnome-games-chess,           setname: gnome-chess }
+- { name: gnome-games-five-or-more,    setname: five-or-more }
+- { name: gnome-games-four-in-a-row,   setname: four-in-a-row }
+- { name: gnome-games-hitori,          setname: hitori }
+- { name: gnome-games-iagno,           setname: iagno }
+- { name: gnome-games-klotski,         setname: klotski }
+- { name: gnome-games-lightsoff,       setname: lightsoff }
+- { name: gnome-games-mahjongg,        setname: gnome-mahjongg }
+- { name: gnome-games-mines,           setname: gnome-mines }
+- { name: gnome-games-nibbles,         setname: gnome-nibbles }
+- { name: gnome-games-quadrapassel,    setname: quadrapassel }
+- { name: gnome-games-robots,          setname: gnome-robots }
+- { name: gnome-games-sudoku,          setname: gnome-sudoku }
+- { name: gnome-games-tali,            setname: tali }
+- { name: gnome-games-taquin,          setname: gnome-taquin }
+- { name: gnome-games-tetravex,        setname: gnome-tetravex }
+- { name: gnome-mines-3.12.2,          setname: gnome-mines }
 - { name: gnu-barcode,                 setname: barcode                   }
 - { name: [gnu-chess,gnuchess4],       setname: gnuchess                  }
 - { name: gnu-complexity,              setname: complexity                }
@@ -857,6 +876,8 @@
 - { name: sfk,                         setname: swissfileknife            }
 - { name: sha1dc,                      setname: sha1collisiondetection    }
 - { name: signon-glib,                 setname: libsignon-glib            }
+- { name: simple-scan-3.12,            setname: simple-scan }
+- { name: simple-scan-trunk,           setname: simple-scan, ignorever: true }
 - { name: simplescreenrecorder-lib,    setname: simplescreenrecorder      }
 - { name: singularityviewer-alpha,     setname: singularityviewer, devel: true }
 - { name: sisc-scheme,                 setname: sisc }
