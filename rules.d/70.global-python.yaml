@@ -212,7 +212,7 @@
 - { name: markdown, wwwpart: pypi,     setname: "python:markdown" }
 - { name: [nbsphinx,"python:jupyter_nbsphinx"], setname: "python:nbsphinx" }
 
-- { name: html2text, family: rudix,    setname: setname: "python:$0" }
+- { name: html2text, family: rudix,    setname: "python:$0" }
 
 # as per pypi package name
 - { name: "python:axolotl",            setname: "python:python-axolotl"   }
