@@ -57,6 +57,7 @@
     - netifaces
     - pandocfilters
     - paramiko
+    - parso
     - passlib
     - phply
     - pip
