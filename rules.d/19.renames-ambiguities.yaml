@@ -86,6 +86,10 @@
 
 - { name: git_fame,                    setname: git-fame-rb, wwwpart: oleander.io }
 
+- { name: [gnat_util,gnat-util],       family: [arch,gentoo], setname: gnat-util-adacore }
+- { name: [gnat_util,gnat-util],       family: [freebsd,pkgsrc,ravenports], setname: gnat-util-gcc }
+- { name: [gnat_util,gnat-util],       warning: "please classify me" }
+
 - { name: hermes,                      setname: hermes-proxy, wwwpart: hermes-project.com }
 - { name: hermes,                      setname: hermes-auth, wwwpart: ralt/hermes }
 # otherwise, (dead?) pixel format convertsion library
