@@ -200,7 +200,7 @@
 - { namepat: "python:backports[_-]shutil[_-]get[_-]terminal[_-]size", setname: "python:backports.shutil_get_terminal_size" }
 - { name: shutil_get_terminal_size,    setname: "python:backports.shutil-get-terminal-size" }
 - { namepat: "(?:python:)?backports?[_-]ssl[_-]match[_-]hostname", setname: "python:backports.ssl_match_hostname" }
-- { name: "python:backports-shutil-which", setname: "python:backports.shutil_which" }
+- { name: "python:backports-shutil_which", setname: "python:backports.shutil_which" }
 - { name: shutil_which,                setname: "python:backports.shutil_which" }
 - { name: sphinxcontrib-websupport,    setname: "python:sphinxcontrib-websupport" }
 - { name: sphinx, wwwpart: [sphinx-doc.org,pocoo.org], setname: "python:sphinx" }
