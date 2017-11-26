@@ -834,6 +834,7 @@
 - { namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*-unstable", setname: webkitgtk, ignorever: true }
 - { namepat: "webkit[0-9._-]", setname: webkitgtk }  # assuming gtk
 - { name: [webkitgtk-gtk2], setname: webkitgtk }
+- { name: webkitgtk,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 
 - { namepat: "wesnoth[0-9.-]+",        setname: wesnoth }
 - { name: wesnoth-devel,               setname: wesnoth }
