@@ -991,6 +991,7 @@
 - { name: xfce4-xarchiver,             setname: xarchiver }
 - { name: [xfce4-conf,xfce4-config,xfconf4.12,xfce4-conf,xfce4-config], setname: xfconf }
 - { name: xfconf-gtk3,                 setname: xfconf, addflavor: gtk3 }
+- { name: libxfconf,                   setname: xfconf, addflavor: lib }
 - { name: xfconf-devel,                setname: xfconf, ignorever: true }
 - { name: [xarchiver-assume-name,xarchiver-gtk2], setname: xarchiver, addflavor: true }
 - { name: xfdesktop-gtk3,              setname: xfdesktop, addflavor: gtk3 }
