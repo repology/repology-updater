@@ -46,6 +46,14 @@
 		</ul>
 		{% endif %}
 
+		{% if information.licenses %}
+		<h2>Licenses</h2>
+		<ul>
+		{% for license,families in information.licenses|dictsort(case_sensitive=True) %}
+			<li>{{ license }} <b>({{ families|length }})</b></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
 	</div>
 	<div class="col-md-8">
 
