@@ -5,6 +5,7 @@
 
 # other global rules
 - { verpat: ".*\\.[0-9]+\\.[0-9]+\\.[0-9a-f]{4,}",                   family: sisyphus,     ignorever: true } # personal rule for ldv@altlinux.org
+- { verpat: "[1-9]+\\..*[0-9a-f]{7}",                                family: arch,         ignorever: true } # primarily blackarch snapshots
 
 # 0-9
 - { name: [0ad,0ad-data,"0 a.d."],     verpat: "(?:0\\.0\\.|a|[Aa]lpha ?)([0-9]+)(?:[-_]alpha| .+)?", setver: "alpha $1" }
@@ -85,6 +86,7 @@
 - { name: calf,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # slackbuilds garbage
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: cegui,                       verpat: "6\\..*",                                   setver: "0.$0" } # it's 0.6.2!
+- { name: cfr,                         verpat: "[0-9]{3}",                                 setver: "0_$0" } # blackarch, broken schema
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
@@ -117,6 +119,7 @@
 - { name: dia,                         verpat: ".*[0-9]{8}.*",                             ignorever: true } # snapshot
 - { name: discord,                                                   family: chocolatey,   ignorever: true } # windows version has different versioning
 - { name: discord,                                                   family: debuntu,      ignorever: true } # XXX: (deepin actually)
+- { name: distorm,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # freebsd garbage
 - { name: djvulibre,                   ver: "3.5.27.1",                                    ignorever: true }
 - { name: dosbox,                      verpat: "0\\.74\\.[4r].*",                          ignorever: true }
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
@@ -153,6 +156,7 @@
 - { name: fetch,                                                     family: ravenports,   ignorever: true } # fake
 - { namepat: "firebird[0-9._-]*",      verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.[0-9]{5,}.*", setver: "$1" }
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
+- { name: firmware-mod-kit,            verpat: "0([1-9][0-9]*)",                           setver: "0.$1" } # blackarch, broken schema
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: flvstreamer,                 ver: "2.1.c.1",                                     setver: "2.1c1" }
 - { name: flvstreamer,                 ver: "2.1c",                                        setver: "2.1c0" }
@@ -249,6 +253,7 @@
 - { name: krename,                     verpat: "20[0-9]{6}.*",                             ignorever: true }
 
 # L
+- { name: lbd,                         verpat: "20[0-9]{6}",                               ignorever: true } # BlackArch snap
 - { name: lcab,                        ver: "1.0",                   family: mageia,       ignorever: true }
 - { name: lcms,                        verpat: "2.2[0-9]",                                 ignorever: true } # gobolinux brokenness
 - { name: less,                        vergt: "487",                                       devel: true } # http://www.greenwoodsoftware.com/less/
@@ -296,6 +301,7 @@
 - { name: live555,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # alt; it's dot-separated, dummies!
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: llvm,                        verpat: ".*git",                                    ignorever: true }
+- { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignorever: true } # fake
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 
@@ -306,6 +312,7 @@
 - { name: matreshka,                   ver: "0.8.0",                 family: fedora,       ignorever: true } # fake (see report)
 - { name: mesa,                        verpat: "[^a-z]+",            family: [fedora,mageia], ignorever: true } # accused in ignoring rc suffix
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
+- { name: mimikatz,                    verpat: ".*20[0-9]{6}",                             ignorever: true } # BlackArch snap
 - { name: mkgmap,                      verpat: "0\\.0\\.0svn([0-9]{4,})",                  setver: "r$1" }
 - { name: mkgmap,                      verpat: "[0-9]{4,}",                                setver: "r$0" }
 - { name: mkgmap-splitter,             verpat: "0\\.0\\.0svn([0-9]{3,})",                  setver: "r$1" }
@@ -319,6 +326,7 @@
 - { name: mplayer,                     ver: "5.1.4",                                       ignorever: true } # pclinuxos garbage
 - { name: mtree,                                                     family: ravenports,   ignorever: true } # fake
 - { name: mumble,                                                    family: kaos,         ignorever: true } # snapshot with random version
+- { name: multimon-ng,                 verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: munin,                       verpat: "2\\.999.*",                                ignorever: true } # debian fake
 - { name: musescore,                   verpat: ".*git.*",                                  ignorever: true } # haiku
 - { name: mutter,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -401,6 +409,7 @@
 - { name: recode,                      ver: "3.7-2fd838565",                               ignorever: true }
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignorever: true }
 - { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
+- { name: rinetd,                      ver: "0.62.1sam",                                   ignorever: true } # debian garbage
 - { name: rpcgen,                                                    family: ravenports,   ignorever: true } # fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
 - { name: rtorrent,                    verpat: "20[0-9]{6}.*",                             ignorever: true } # nix fake

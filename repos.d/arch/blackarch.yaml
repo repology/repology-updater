@@ -1,0 +1,24 @@
+###########################################################################
+# BlackArch
+###########################################################################
+- name: blackarch
+  type: repository
+  desc: BlackArch
+  family: arch
+  color: '000000'
+  sources:
+    - name: blackarch
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'https://www.mirrorservice.org/sites/blackarch.org/blackarch/blackarch/os/x86_64/blackarch.db.tar.gz'
+  repolinks:
+    - desc: BlackArch Linux home
+      url: https://blackarch.org/
+    - desc: Tools in BlackArch
+      url: https://blackarch.org/tools.html
+  packagelinks:
+    - desc: Git repository
+      url: 'https://github.com/BlackArch/blackarch/tree/master/packages/{name}'
+    - desc: PKGBUILD
+      url: 'https://github.com/BlackArch/blackarch/blob/master/packages/{name}/PKGBUILD'
+  tags: [ all, production ]
