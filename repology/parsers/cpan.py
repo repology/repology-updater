@@ -69,7 +69,7 @@ class CPANPackagesParser():
                 elif package_file.endswith('.zip') or package_file.endswith('.tgz'):
                     package_name = package_file[0:-4]
 
-                if package_name is None or package_name.find('-') == -1:
+                if package_name is None or '-' not in package_name:
                     # Bad package name; XXX: log?
                     continue
 

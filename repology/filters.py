@@ -39,7 +39,7 @@ class CategoryFilter:
 
     def Check(self, packages):
         for package in packages:
-            if package.category and package.category.lower().find(self.category) != -1:
+            if package.category and self.category in package.category.lower():
                 return True
 
         return False

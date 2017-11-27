@@ -84,7 +84,7 @@ def GetMaintainers(instr):
             item = item.replace(extrarepl[0], extrarepl[1])
 
         # also assumes non-empty items
-        if item.find('@') != -1:
+        if '@' in item:
             result.add(item)
 
     return sorted([item for item in result])

@@ -67,7 +67,7 @@ class GoboLinuxGitParser():
                         line = line.strip()
                         if line.startswith('url='):
                             download = ExpandDownloadUrlTemplates(line[4:])
-                            if download.find('$') == -1:
+                            if '$' not in download:
                                 pkg.downloads.append(download.strip('"'))
                             else:
                                 print('WARNING: Recipe for {}/{} skipped, unhandled URL substitude found'.format(package_name, maxversion), file=sys.stderr)
