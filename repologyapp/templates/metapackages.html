@@ -9,9 +9,7 @@
 Metapackages
 {% endblock %}
 
-{% block content %}
-<div class="container">
-
+{% macro pagination() %}
 <nav>
 	<ul class="pagination">
 		<li{% if not firstname %} class="disabled"{% endif %}>
@@ -38,6 +36,10 @@ Metapackages
 		</li>
 	</ul>
 </nav>
+{% endmacro %}
+
+{% block content %}
+<div class="container">
 
 <nav>
 	<form class="form-horizontal" action="{{ url_for_self(bound=None) }}" method="GET">
@@ -122,7 +124,11 @@ Metapackages
 	</form>
 </nav>
 
+{{ pagination() }}
+
 {% include "metapackages_table.html" %}
+
+{{ pagination() }}
 
 {% include "versionclass_legend.html" %}
 
