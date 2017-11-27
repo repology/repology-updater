@@ -25,7 +25,7 @@
       url: https://pkg-status.freebsd.org/
   packagelinks:
     - desc: FreshPorts page
-      url: 'http://www.freshports.org/{origin}'
+      url: 'https://www.freshports.org/{origin}'
     - desc: SVNWeb
       url: 'https://svnweb.freebsd.org/ports/head/{origin}/'
     - desc: Port's Makefile
@@ -59,7 +59,7 @@
       url: https://github.com/DragonFlyBSD/DPorts
   packagelinks:
     - desc: FreshPorts page
-      url: 'http://www.freshports.org/{origin}'
+      url: 'https://www.freshports.org/{origin}'
     - desc: SVNWeb
       url: 'https://svnweb.freebsd.org/ports/head/{origin}/'
     - desc: Port's Makefile
