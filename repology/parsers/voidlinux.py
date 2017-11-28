@@ -20,9 +20,12 @@ import plistlib
 
 from repology.package import Package
 
+
 def parse_maintainer(maintainerstr):
-    if not maintainerstr: return []
+    if not maintainerstr:
+        return []
     return [maintainerstr.split()[-1].lstrip('<').rstrip('>')]
+
 
 class VoidLinuxParser():
 
@@ -34,11 +37,10 @@ class VoidLinuxParser():
         plist_index = plistlib.load(open(index_path, 'rb'),
                                     fmt=plistlib.FMT_XML)
 
-        return [ Package(name=pkgname,
-                         version=props['pkgver'].split('-')[-1].replace('_', '-'),
-                         maintainers=parse_maintainer(props.get('maintainer')),
-                         comment=props['short_desc'],
-                         homepage=props['homepage'],
-                         licenses=[l.strip() for l in props['license'].split(',')])
-                 for pkgname, props in plist_index.items() ]
-
+        return [Package(name=pkgname,
+                        version=props['pkgver'].split('-')[-1].replace('_', '-'),
+                        maintainers=parse_maintainer(props.get('maintainer')),
+                        comment=props['short_desc'],
+                        homepage=props['homepage'],
+                        licenses=[l.strip() for l in props['license'].split(',')])
+                for pkgname, props in plist_index.items()]
