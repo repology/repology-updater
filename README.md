@@ -75,6 +75,7 @@ version are always parsed.
 | Rudix                            | ✔       |         |       |       | ✔       |          |
 | SlackBuilds                      |         | ✔       | ✔     | ✔     |         | ✔        |
 | Vcpkg                            | ✔       |         |       |       |         |          |
+| Void Linux                       | ✔       | ✔       |       | ✔     | ✔       |          |
 | YACP                             |         |         |       |       |         |          |
 
 (1) Gentoo support is not complete, complex cases like condional downloads and licenses

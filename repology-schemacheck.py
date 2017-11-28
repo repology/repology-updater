@@ -72,6 +72,7 @@ families = [
     'slackbuilds',
     'snap',
     'vcpkg',
+    'void'
     'yacp',
 ]
 
