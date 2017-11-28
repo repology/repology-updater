@@ -142,7 +142,7 @@
 - { name: bluedevil5,                  setname: bluedevil                 }
 - { name: bnd1.50,                     setname: bnd                       }
 - { name: boaconstructor,              setname: boa-constructor           }
-- { name: bochs-gdb,                   setname: bochs-gdb, addflavor: gdb }
+- { name: bochs-gdb,                   setname: bochs, addflavor: gdb }
 - { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect,boehm_garbage_collector,bdw-gc,gc], setname: boehm-gc }
 - { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
 - { name: bombono,                     setname: bombono-dvd               }
