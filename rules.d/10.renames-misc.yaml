@@ -572,6 +572,7 @@
 - { name: [lapack-docs,lapack-reference], setname: lapack, addflavor: docs }
 - { name: lapacke-tmg,                 setname: lapacke, addflavor: tmg   } # component of
 - { name: lcs,                         setname: liberal-crime-squad       }
+- { name: [ldns-tools,ldns-utils],     setname: ldns                      }
 - { name: liquidwar5,                  setname: liquidwar }
 - { name: luxrender14,                 setname: luxrender }
 
@@ -944,6 +945,7 @@
 - { name: tokyo-dystopia,              setname: tokyodystopia }
 - { name: [tomee-jax-rs,tomee-plume,tomee-plus,tomee-webprofile], setname: tomee }
 - { name: trigger,                     setname: trigger-rally,            family: [ gentoo ]  }
+- { name: [tripwire-131,tripwire12],   setname: tripwire }
 - { name: [tubo,libtubo0],             setname: libtubo }
 - { name: two-lame,                    setname: twolame }
 - { name: twoping,                     setname: 2ping }
@@ -994,6 +996,8 @@
 - { name: wings,                       setname: wings3d                   }
 - { name: wire-desktop,                setname: wire }
 - { name: wire-desktop-beta,           setname: wire, devel: true }
+- { name: [wireshark-cli,wireshark-common,wireshark-gtk,wireshark-gtk2,wireshark-headers,wireshark-lite,wireshark-qt,wireshark-qt5], setname: wireshark, addflavor: true }
+- { name: [wireshark2,wireshark22],    setname: wireshark }
 - { name: wirouter_keyrec,             setname: wirouterkeyrec }
 - { name: wiznote-qt4,                 setname: wiznote, addflavor: true }
 - { name: wmaker,                      setname: windowmaker               }

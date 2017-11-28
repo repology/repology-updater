@@ -54,6 +54,7 @@
 - { name: dragon,                      setname: dragon-player                                }
 
 - { name: drill, wwwpart: apache.org,  setname: apache-drill }
+- { name: drill, setname: ldns }
 
 - { name: dt, wwwpart: 42wim/dt,       setname: dt-dns }
 - { name: dt, family: pkgsrc,          setname: dt-virtconsoles }
