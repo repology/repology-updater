@@ -52,6 +52,7 @@
     - kapteyn
     - khal
     - lektor
+    - m2crypto
     - martian
     - munch
     - netifaces

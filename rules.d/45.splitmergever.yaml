@@ -531,6 +531,8 @@
 
 - { namepat: "msynctool[0-9]+",        setname: msynctool }
 
+- { namepat: "libmediaart[0-9._-]+",   setname: libmediaart }
+
 - { namepat: "(?:lib)?musicbrainz[0-9._-]*", setname: libmusicbrainz }
 - { name: libmusicbrainz, verpat: "2\\..*", setname: libmusicbrainz2 }
 - { name: libmusicbrainz, verpat: "3\\..*", setname: libmusicbrainz3 }

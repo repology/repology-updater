@@ -77,6 +77,7 @@
 - { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apache-archiva,              setname: archiva                   }
 - { name: apache-arrow,                setname: arrow                     }
+- { name: [apache-cassandra,cassandra2], setname: cassandra }
 - { name: apache-flume-ng,             setname: flume                     }
 - { name: [apache-fop,fop2,xmlgraphics-fop], setname: fop                 }
 - { name: apache-jena,                 setname: jena                      }
@@ -141,6 +142,7 @@
 - { name: bluedevil5,                  setname: bluedevil                 }
 - { name: bnd1.50,                     setname: bnd                       }
 - { name: boaconstructor,              setname: boa-constructor           }
+- { name: bochs-gdb,                   setname: bochs-gdb, addflavor: gdb }
 - { name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect,boehm_garbage_collector,bdw-gc,gc], setname: boehm-gc }
 - { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
 - { name: bombono,                     setname: bombono-dvd               }
@@ -155,6 +157,7 @@
 - { name: [bpython-py27,bpython2],     setname: bpython                   }
 - { name: [brasero2,brasero-dvdcssfix], setname: brasero                  }
 - { name: bsh2,                        setname: bsh                       }
+- { name: btanks-data,                 setname: btanks, addflavor: data }
 - { name: bub-n-bros,                  setname: bubbros,                  family: [ gentoo ]  } # XXX: recheck
 - { name: bugseverywhere,              setname: bugs-everywhere           }
 - { name: bugzilla50,                  setname: bugzilla                  }
@@ -200,6 +203,8 @@
 - { name: cfr-decompiler,              setname: cfr }
 - { name: chakra,                      setname: chakracore, family: homebrew }
 - { name: chefdk,                      setname: chef-dk }
+- { name: cgoban1,                     setname: cgoban }
+- { name: clanbomber2,                 setname: clanbomber                }
 - { name: clementine-free,             setname: clementine                }
 - { name: cl-asdf,                     setname: asdf                      }
 - { name: clipit-gtk3,                 setname: clipit                    }
@@ -264,6 +269,7 @@
 - { name: cython2,                     setname: cython                    }
 - { name: cython2-kivy,                setname: cython-kivy               }
 - { name: cyphesis-cpp,                setname: cyphesis,                 family: [ debuntu ]  }
+- { name: cyreposurgeon,               setname: reposurgeon }
 
 # D
 - { name: dash-el,                     setname: dash.el                   }
@@ -397,6 +403,7 @@
 - { name: flwm-tc,                     setname: flwm                      }
 - { name: fofix-dfsg,                  setname: fofix                     }
 - { name: foldingathome-noroot,        setname: foldingathome             }
+- { name: [fomp-lv2,lv2-fomp-plugins], setname: fomp                      }
 - { name: foo2zjs-nightly,             setname: foo2js, ignorever: true   }
 - { name: foobillardplus,              setname: foobillard++              }
 - { name: fon-flash-cli,               setname: fon-flash }
@@ -420,6 +427,7 @@
 # G
 - { name: g++,                         setname: gcc, addflavor: true }
 - { name: gambc,                       setname: gambit-c                  }
+- { name: [garcon-gtk3,libgarcon,xfce4-garcon], setname: garcon, addflavor: true }
 - { name: garden,                      setname: garden-of-coloured-lights }
 - { name: gargoyle-free,               setname: gargoyle                  }
 - { name: garlic-doc,                  setname: garlic                    }
@@ -576,7 +584,9 @@
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbullet,                   setname: bullet                    }
 - { name: libcatch-cpp-headers,        setname: catch                     }
+- { name: [libcares,libcares2],        setname: c-ares                    }
 - { name: libccaudio2,                 setname: ccaudio2                  }
+- { name: libcmrt,                     setname: cmrt                      }
 - { name: libcodec2,                   setname: codec2                    }
 - { name: libcogl,                     setname: cogl                      }
 - { name: libcomedi,                   setname: comedilib                 }
@@ -640,6 +650,7 @@
 - { name: libsdl2,                     setname: sdl2 }
 - { name: libsdl_gfx13,                setname: sdl-gfx }
 - { name: [compat-sfml16],             setname: sfml                      }
+- { name: [libstfl,libstfl0],          setname: stfl                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libsysstat-qt5,              setname: libsysstat                }
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
@@ -738,6 +749,7 @@
 - { name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], setname: mpd, addflavor: true }
 - { name: mpd-mpc,                     setname: mpc }
 - { name: [mpfr3,mpfr4,libmpfr],       setname: mpfr }
+- { name: mstflint4,                   setname: mstflint }
 - { name: mvnsh,                       setname: maven-shell }
 - { name: [msgpack-c,msgpack_c_cpp,libmsgpack,msgpack1], setname: msgpack } # c/cpp by default
 - { namepat: "mygui-(docs|dummy|gl|opengl|ogre[0-9._-]*)", setname: mygui, addflavor: "$1" }
@@ -746,6 +758,7 @@
 # N
 - { name: nbd-server,                  setname: nbd                       }
 - { name: ncbi-blast-plus,             setname: ncbi-blast+               }
+- { name: netlogo-bin,                 setname: netlogo, addflavor: bin }
 - { name: neverball-data,              setname: neverball, addflavor: data }
 - { name: [libnettle,nettle4],         setname: nettle                    }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
@@ -803,6 +816,7 @@
 
 # P
 - { name: pacmanarena,                 setname: pacman-arena              }
+- { name: panoply-nodesktop,           setname: panoply, addflavor: nodesktop }
 - { name: [pasystray-gtk2,pasystray-gtk2-standalone,pasystray-gtk3-standalone], setname: pasystray }
 - { name: perlbrew,                    setname: "perl:app-perlbrew"       }
 - { name: pioneerspacesim,             setname: pioneer                   }
@@ -840,6 +854,7 @@
 - { name: qbs-docs,                    setname: qbs, addflavor: docs }
 - { name: [qt_creator,qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], setname: qtcreator, addflavor: true }
 - { name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], setname: qtkeychain, addflavor: true }
+- { name: qrmumps,                     setname: qr_mumps }
 - { name: [qupzilla-qt4,qupzilla-qt5,qupzilla-qtwebkit], setname: qupzilla, addflavor: true }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator, addflavor: true }
 
@@ -977,7 +992,10 @@
 - { name: wine-gecko-stable,           setname: wine-gecko                }
 - { name: wine-wizard,                 setname: winewizard                }
 - { name: wings,                       setname: wings3d                   }
+- { name: wire-desktop,                setname: wire }
+- { name: wire-desktop-beta,           setname: wire, devel: true }
 - { name: wirouter_keyrec,             setname: wirouterkeyrec }
+- { name: wiznote-qt4,                 setname: wiznote, addflavor: true }
 - { name: wmaker,                      setname: windowmaker               }
 - { name: wop,                         setname: wormsofprey               }
 - { name: wpasupplicant,               setname: wpa_supplicant            }
