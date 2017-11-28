@@ -119,3 +119,20 @@
     - desc: Linux Mint home
       url: https://linuxmint.com/
   tags: [ all, production, mint ]
+
+- name: linux_mint_18_3
+  type: repository
+  desc: Linux Mint 18.3
+  family: debuntu
+  color: '87cf3e'
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sylvia/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
