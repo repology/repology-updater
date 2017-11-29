@@ -397,6 +397,7 @@
 - { name: qemu,                        ver: "2.11.0",                family: fedora,       ignorever: true } # fake, it's 2.11.0-rc2
 - { name: qgis,                                                      family: kaos,         ignorever: true } # snapshot with random version
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
+- { name: qt5-webkit,                  ver: "5.212.0",               family: fedora,       ignorever: true } # lie, it's 5.212.0alpha2
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
 - { name: qupzilla,                                                  family: kaos,         ignorever: true } # snapshot with random version
 
