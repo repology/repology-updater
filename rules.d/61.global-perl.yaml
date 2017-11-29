@@ -71,6 +71,7 @@
 - { name: "perl:mail-spamassassin",    setname: spamassassin }
 - { name: "perl:spamassassin",         setname: spamassassin }
 - { name: "perl:unburden-home-dir",    setname: unburden-home-dir }
+- { name: "perl:dns-ldns", wwwpart: nlnetlabs, setname: ldns } # part of
 
 - { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below
 

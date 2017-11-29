@@ -264,6 +264,7 @@
 
 # these are not pypi modules, but pyalsa, python bindings from alsa project
 - { name: ["python:alsa", "python:pyalsa"], setname: pyalsa }
+- { name: "python:ldns",               setname: ldns } # part of ldns
 
 - { name: "python:pyspatialite", ver: "3.0.1", ignorever: true            }
 - { name: "python:pyspatialite", verpat: "(.*)(?:[_-]alpha[_-])(.*)", setver: "$1alpha$2" }

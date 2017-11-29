@@ -996,6 +996,7 @@
 - { name: wings,                       setname: wings3d                   }
 - { name: wire-desktop,                setname: wire }
 - { name: wire-desktop-beta,           setname: wire, devel: true }
+- { name: wireless-regdb-pentest,      setname: wireless-regdb, addflavor: pentest }
 - { name: [wireshark-cli,wireshark-common,wireshark-gtk,wireshark-gtk2,wireshark-headers,wireshark-lite,wireshark-qt,wireshark-qt5], setname: wireshark, addflavor: true }
 - { name: [wireshark2,wireshark22],    setname: wireshark }
 - { name: wirouter_keyrec,             setname: wirouterkeyrec }

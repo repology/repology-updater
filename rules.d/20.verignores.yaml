@@ -506,6 +506,7 @@
 - { name: widelands,                   verpat: "[^b].*",                                   ignorever: true }
 - { name: winexe,                      ver: "1.1",                   family: debuntu,      ignorever: true } # snapshot
 - { name: wire,                        verpat: "20[0-9]{6}",                               ignorever: true } # aur snapshot
+- { name: wireless-regdb,              verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/refs/
 - { name: whatweb,                     vergt: "0.4.7",               family: [debuntu,openbsd,gentoo,freebsd], ignorever: true } # 0.4.8 has never been released
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignorever: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignorever: true }
