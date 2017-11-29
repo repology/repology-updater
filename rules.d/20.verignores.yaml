@@ -410,7 +410,7 @@
 - { name: recode,                      ver: "3.7-2fd838565",                               ignorever: true }
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignorever: true }
 - { name: reptyr,                      ver: "0.6.3a",                                      ignorever: true } # freebsd; fake
-- { name: remmina,                     ver: "(.*?)([^0-9]*r[^0-9]*)(.*?)",                 setname: "$1-rcgit.$2" } # r, rc, rcgit, etc.
+- { name: remmina,                     ver: "(.*?)([^0-9]*r[^0-9]*)(.*?)",                 setname: "$1rc$2" } # r, rc, rcgit, etc.
 - { name: rinetd,                      ver: "0.62.1sam",                                   ignorever: true } # debian garbage
 - { name: rpcgen,                                                    family: ravenports,   ignorever: true } # fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignorever: true }
