@@ -1,4 +1,4 @@
-- { family: [macports, voidlinux], namepat: "(.*)-devel", setname: "$1", ignorever: true }
+- { family: [macports, void], namepat: "(.*)-devel", setname: "$1", ignorever: true }
 #- { family: msys2, namepat: "(.*)-git", setname: "$1", ignorever: true }
 
 - { family: chocolatey, namepat: "(.*)\\.(install|portable|commandline)", setname: "$1", addflavor: "$2" }

@@ -20,7 +20,7 @@
 - { namepat: "python3?-module-(.*)",   setname: "python:$1", family: [ sisyphus ] }
 - { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch, guix, openmandriva ] }
 #- { namepat: "python2-(.*)",           setname: "python:$1", family: [ msys2 ] }
-- { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds, rosa, crux, voidlinux ] }
+- { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds, rosa, crux, void ] }
 - { namepat: "python[0-9]\\.[0-9]-(.*)", setname: "python:$1", family: [ nix ] }
 - { namepat: "py[23]?-(.*)",           setname: "python:$1", family: [ alpine ] }
 - { namepat: "py[0-9]*-(.*)",          setname: "python:$1", family: [ macports ] }
