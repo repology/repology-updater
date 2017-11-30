@@ -28,10 +28,10 @@ from repology.subprocess import RunSubprocess
 
 
 class VoidFetcher(GitFetcher):
-    def __init__(self, url, giturl=None, arches=[]):
+    def __init__(self, url, giturl=None, flavors=[]):
         super().__init__(giturl)
         self.dataurl = url
-        self.arches = arches
+        self.flavors = flavors
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
@@ -43,7 +43,7 @@ class VoidFetcher(GitFetcher):
             archdir = os.path.join(statedir, 'arches')
             os.mkdir(archdir)
             tarpath = os.path.join(statedir, '.temporary.tar')
-            for arch in self.arches:
+            for arch in self.flavors:
                 with open(tarpath, 'wb') as tarfile:
                     tarfile.write(Fetch(self.dataurl + arch + '-repodata', timeout=5).content)
                 RunSubprocess(['tar', 'xzfC', tarpath, statedir, 'index.plist'], logger)

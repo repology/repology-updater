@@ -170,10 +170,6 @@ class RepositoryManager:
             if 'subrepo' in source:
                 package.subrepo = source['subrepo']
 
-            # - fill flavors
-            if 'flavor' in source:
-                package.flavors.append(source['flavor'])
-
             # - fill default maintainer
             if not package.maintainers:
                 if 'default_maintainer' in repository:

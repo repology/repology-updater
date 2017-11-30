@@ -95,10 +95,11 @@ schemas = {
                     'url': str,  # not Url(), as there may be rsync or cvs addresses
                     'branch': str,
                     'subrepo': str,
-                    'flavor': str,
 
                     'compression': Any('xz', 'bz2', 'gz'),
-                    'sparse_checkout': [str]
+                    'sparse_checkout': [str],
+                    'giturl': str,
+                    'flavors': [str]
                 }
             ],
             'shadow': bool,
