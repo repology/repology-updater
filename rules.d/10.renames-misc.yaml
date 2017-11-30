@@ -965,7 +965,7 @@
 - { name: [ufoai-data,ufoai-maps,ufoai-music], setname: ufoai, addflavor: true }
 - { name: [util-linux-aes,util-linux-minimal,util-linux-nosystemd,util-linux-nosystemd-debug,util-linux-selinux,util-linux-systemd], setname: util-linux, addflavor: true }
 - { name: uncrustify0.60,              setname: uncrustify }
-- { name: [uqm_3domusic,uqm-content,uqm_voice], setname: uqm, addflavor: true }
+- { name: [uqm_3domusic,uqm-3domusic,uqm-content,uqm_voice,uqm-voice], setname: uqm, addflavor: true }
 
 # V
 - { name: v4l2loopback-dkms,           setname: v4l2loopback              }
