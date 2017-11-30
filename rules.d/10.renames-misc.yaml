@@ -9,6 +9,7 @@
 
 # 0-9
 - { name: "2048",                      setname: 2048-cli,                 family: [ freebsd ] } # differentiate from 2048-qt
+- { name: "20kly",                     setname: lightyears }
 - { name: 3dchess,                     setname: 3dc,                      family: [ debuntu ] }
 
 # A
