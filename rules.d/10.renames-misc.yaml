@@ -249,6 +249,7 @@
 - { name: consolekit2,                 setname: consolekit                }
 - { name: controllermap,               setname: sdl2, addflavor: controllermap }
 - { name: coolreader,                  setname: coolreader3               }
+- { name: [cpprest,casablanca],        setname: cpprestsdk                }
 - { name: cpmtools2,                   setname: cpmtools                  }
 - { name: [cppcheck-nogui,cppcheck-nox,cppcheck-gui], setname: cppcheck   }
 - { name: cracklib2,                   setname: cracklib                  }
