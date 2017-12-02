@@ -46,6 +46,9 @@ class AURFetcher():
                     continue
                 package_names.append(line)
 
+            if not package_names:
+                raise RuntimeError('Empty package list received, refusing to continue')
+
             logger.GetIndented().Log('{} package name(s) parsed'.format(len(package_names)))
 
             pagesize = 100
