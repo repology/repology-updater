@@ -45,6 +45,7 @@
 
 - { namepat: "(?:lib)?atkmm[0-9._-]*", setname: atkmm }
 - { namepat: "(?:lib)?atkmm[0-9._-]*(-docs)", setname: atkmm, addflavor: docs }
+- { name: atkmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "autoconf[_-]?[0-9.]+",    setname: autoconf }
 - { name: autoconf, verpat: "2\\.13.*", setname: autoconf213 } # do we need more splits for this?

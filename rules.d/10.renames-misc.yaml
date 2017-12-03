@@ -603,6 +603,7 @@
 - { name: [libfm-directory_thumbnails,libfm-extra,libfm-gtk2,libfm-gtk3], setname: libfm }
 - { name: libgc,                       setname: boehm-gc                  }
 - { name: libgdal-grass,               setname: gdal-grass                }
+- { name: libgeocode-glib,             setname: geocode-glib              }
 - { name: libgeoip,                    setname: geoip                     }
 - { name: [libgeotiff-dfsg,libgeotiff-epsg], setname: libgeotiff          }
 - { name: libgetopt-java,              setname: java-getopt               }

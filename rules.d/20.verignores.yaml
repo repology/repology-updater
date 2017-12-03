@@ -132,6 +132,7 @@
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignorever: true }
 - { name: ebtables,                    verpat: "20[0-9]{2}.*",                             ignorever: true } # LEDE year
 - { name: egoboo,                      ver: "2.81",                                        setver: "2.8.1" }
+- { name: eog,                         verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: ephoto,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: epydoc,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # fedora garbage
 - { name: ethtool,                     verpat: "6.*",                                      ignorever: true } # XXX: check if https://www.kernel.org/pub/software/network/ethtool/ and ethtool from https://sourceforge.net/projects/gkernel/ are the same project. Anyway, the former is fresh and the latter is ancient crap from 2007
@@ -188,9 +189,11 @@
 - { name: geary,                       ver: "0.12",                  family: debuntu,      ignorever: true } # not released yet
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignorever: true } # not released yet
 - { name: gettext,                     ver: "2",                                           ignorever: true } # libintl from LEDE
+- { name: geocode-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gnash,                       verpat: ".*git.*",                                  ignorever: true } # snapshots
+- { name: gnome-boxes,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-disk-utility,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # see "select distinct effname from packages where version like '3.27.%' and devel=false;"
 - { name: gnome-keyring,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-logs,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
