@@ -99,6 +99,8 @@
 - { name: [gnat_util,gnat-util],       family: [freebsd,pkgsrc,ravenports], setname: gnat-util-gcc }
 - { name: [gnat_util,gnat-util],       warning: "please classify me" }
 
+- { name: gsl,                         wwwpart: microsoft, setname: ms-gsl }
+
 - { name: hermes,                      setname: hermes-proxy, wwwpart: hermes-project.com }
 - { name: hermes,                      setname: hermes-auth, wwwpart: ralt/hermes }
 # otherwise, (dead?) pixel format convertsion library
@@ -168,6 +170,8 @@
 - { name: node, warning: "please classify me" }
 
 - { name: nvi, verpat: "2\\..*",       setname: nvi2 }
+
+- { name: omi,                         setname: omi-ftpmirror, category: ftp } # vs. Open Management Infrastructure
 
 - { name: openal, family: [pkgsrc,chocolatey,freebsd,macports], setname: openal-creative }
 - { name: openal, setname: openal-soft } # most openal's are openal-soft, even if they erroneously list openal.org as a website

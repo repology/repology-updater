@@ -227,6 +227,7 @@
 - { name: "python:ansible",            setname: ansible                   }
 - { name: "python:awscli",             setname: awscli                    }
 - { name: "python:bzrtools",           setname: bzrtools                  }
+- { name: "python:cntk",               setname: cntk                      }
 - { name: "python:diffoscope",         setname: diffoscope                }
 - { name: "python:dreampie",           setname: dreampie                  }
 - { name: "python:epydoc",             setname: epydoc                    }

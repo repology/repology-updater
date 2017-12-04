@@ -88,6 +88,7 @@
 - { name: cegui,                       verpat: "6\\..*",                                   setver: "0.$0" } # it's 0.6.2!
 - { name: cfr,                         verpat: "[0-9]{3}",                                 setver: "0_$0" } # blackarch, broken schema
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
+- { name: chakracore,                  wwwpart: cauldrondevelopmentllc,                    ignorever: true } # fork with different versioning
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
 - { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
 - { name: cld2,                        ver: "20160820",                                    ignorever: true } # aosc fake (there were no commits to cld2 since 2015)

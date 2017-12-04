@@ -203,6 +203,7 @@
 - { name: centerim-devel,              setname: centerim, ignorever: true }
 - { name: cfr-decompiler,              setname: cfr }
 - { name: chakra,                      setname: chakracore, family: homebrew }
+- { name: chakaracore,                 setname: chakracore } # AUR misspell
 - { name: chefdk,                      setname: chef-dk }
 - { name: cgoban1,                     setname: cgoban }
 - { name: clanbomber2,                 setname: clanbomber                }
@@ -511,6 +512,7 @@
 - { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui], setname: graphviz }
 - { name: gss-proxy,                   setname: gssproxy                  }
 - { name: gtk-doc-am,                  setname: gtk-doc, addflavor: am }
+- { name: [guidelines-support-library,microsoft-gsl,microsoft_gsl], setname: ms-gsl }
 - { name: gucharmap-gtk2,              setname: gucharmap, addflavor: gtk2 }
 - { name: gucharmap7,                  setname: gucharmap                 }
 - { name: [gvim,gvim-gtk2],            setname: vim, addflavor: true }
