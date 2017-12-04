@@ -875,6 +875,8 @@
 - { name: rawtherapee-unstable,        setname: rawtherapee, ignorever: true }
 - { name: [remmina-appindicator,remmina-gtk2,remmina-plugin-gnome,remmina-plugin-nx,remmina-plugin-rdp,remmina-plugin-telepathy,remmina-plugin-vnc,remmina-plugin-xdmcp,remmina-plugins,remmina-xfce], setname: remmina, addflavor: true }
 - { name: rdkafka,                     setname: librdkafka                }
+- { name: renpy6,                      setname: renpy }
+- { name: [renpy-demos,renpy-sdk],     setname: renpy, addflavor: true }
 - { name: ringo,                       setname: ringojs                   }
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
 - { name: rrdtool12,                   setname: rrdtool                   }
