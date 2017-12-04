@@ -510,6 +510,7 @@
 - { namepat: "groovy[0-9._-]+",        setname: groovy }
 - { name: grub2,                       setname: grub                      } # since grub legacy is obsoleted, just let grub2 eat it away
 - { name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui], setname: graphviz }
+- { name: gsl-doc,                     setname: gsl, addflavor: doc }
 - { name: gss-proxy,                   setname: gssproxy                  }
 - { name: gtk-doc-am,                  setname: gtk-doc, addflavor: am }
 - { name: [guidelines-support-library,microsoft-gsl,microsoft_gsl], setname: ms-gsl }
