@@ -740,7 +740,7 @@
 - { name: python, verpat: "3\\..*",    setname: python3 }
 - { name: python, ver: "999", family: aosc, setname: python2 }
 - { name: python3, verpat: ".*a.*",    devel: true }
-- { name: python3, verpat: "3\\.7.*",  ignorever: true } # fedora fake
+- { name: python3, ver: "3.7.0", family: fedora, ignorever: true } # fedora fake, no such version
 
 - { namepat: "(?:lib)?readline[0-9._-]*", setname: readline }
 
