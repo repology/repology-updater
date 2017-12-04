@@ -1044,6 +1044,7 @@
 - { name: xmlbird,                     setname: libxmlbird                }
 - { name: xmltooling-c,                setname: xmltooling                }
 - { name: xonotic-data,                setname: xonotic, addflavor: true }
+- { name: xrdp-devel,                  setname: xrdp, ignorever: true }
 
 # Y
 - { name: [yabause-gtk,yabause-qt,yabause-qt5], setname: yabause, addflavor: true }
