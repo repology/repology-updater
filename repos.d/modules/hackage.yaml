@@ -19,3 +19,45 @@
     - desc: Hackage page
       url: 'http://hackage.haskell.org/package/{name}'
   tags: [ all, production ]
+
+- name: stackage_nighly
+  type: modules
+  desc: Stackage Nightly
+  family: hackage
+  color: "293845"
+  sources:
+    - name: nightly
+      fetcher: File
+      parser: StackageHTML
+      url: https://www.stackage.org/nightly
+  shadow: true
+  repolinks:
+    - desc: Stackage
+      url: https://www.stackage.org/
+    - desc: Stackage Nightly
+      url: https://www.stackage.org/nightly
+  packagelinks:
+    - desc: Stackage page
+      url: 'https://www.stackage.org/nightly/package/{name}-{version}'
+  tags: [ all, production, stackage ]
+
+- name: stackage_lts
+  type: modules
+  desc: Stackage LTS Haskell
+  family: hackage
+  color: "293845"
+  sources:
+    - name: lts
+      fetcher: File
+      parser: StackageHTML
+      url: https://www.stackage.org/lts
+  shadow: true
+  repolinks:
+    - desc: Stackage
+      url: https://www.stackage.org/
+    - desc: LTS Haskell
+      url: https://www.stackage.org/lts
+  packagelinks:
+    - desc: Stackage page
+      url: 'https://www.stackage.org/lts/package/{name}-{version}'
+  tags: [ all, production, stackage ]
