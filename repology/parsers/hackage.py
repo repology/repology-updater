@@ -32,7 +32,7 @@ class HackageParser():
         offset = None
         key = None
 
-        with open(path) as cabalfile:
+        with open(path, 'r', encoding='utf-8') as cabalfile:
             for line in cabalfile:
                 line = line.rstrip()
 
