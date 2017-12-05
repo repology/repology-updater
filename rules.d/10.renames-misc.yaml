@@ -883,6 +883,7 @@
 - { name: rrdtool12,                   setname: rrdtool                   }
 - { name: rt-audio,                    setname: rtaudio                   }
 - { name: [rtorrent-cdl,rtorrent-color,rtorrent-ipv6,rtorrent-vi-color], setname: rtorrent, addflavor: true }
+- { name: rtv-py36,                    setname: rtv, addflavor: py36 }
 
 # S
 - { name: s3-backer,                   setname: s3backer                  }
