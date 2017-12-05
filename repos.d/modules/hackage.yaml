@@ -13,6 +13,8 @@
       url: https://hackage.haskell.org/packages/index.tar.gz
   shadow: true
   repolinks:
+    - desc: Haskell Language
+      url: https://www.haskell.org/
     - desc: Hackage
       url: https://hackage.haskell.org/
   packagelinks:
