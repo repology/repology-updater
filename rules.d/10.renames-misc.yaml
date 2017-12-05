@@ -864,6 +864,7 @@
 - { name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], setname: qtkeychain, addflavor: true }
 - { name: qrmumps,                     setname: qr_mumps }
 - { name: [qupzilla-qt4,qupzilla-qt5,qupzilla-qtwebkit], setname: qupzilla, addflavor: true }
+- { name: qwtpolar-qt4,                setname: qwtpolar, addflavor: qt4 }
 - { namepat: "qt-?creator[0-9]*",      setname: qtcreator, addflavor: true }
 
 # R
