@@ -288,6 +288,7 @@
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
 - { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
 - { name: deja-gnu,                    setname: dejagnu                   }
+- { name: [doom-freedoom,freedoom-freedm], setname: freedoom              }
 - { name: iodoom3-dhewm3,              setname: dhewm3                    }
 - { name: dgen,                        setname: dgen-sdl                  }
 - { name: divideandsucceed,            setname: divide-and-succeed        }
