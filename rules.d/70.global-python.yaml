@@ -268,6 +268,7 @@
 - { name: ["python:alsa", "python:pyalsa"], setname: pyalsa, addflavor: python }
 - { name: "python:ldns",               setname: ldns, addflavor: python } # part of ldns
 
+- { name: "python:backports", ver: "4.0.0", ignorever: true            } # opensuse fake
 - { name: "python:pyspatialite", ver: "3.0.1", ignorever: true            }
 - { name: "python:pyspatialite", verpat: "(.*)(?:[_-]alpha[_-])(.*)", setver: "$1alpha$2" }
 - { name: "python:pyspatialite", family: pypi, unignorever: true          }
