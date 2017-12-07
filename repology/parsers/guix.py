@@ -47,27 +47,29 @@ class GuixParser():
             if not filename.endswith('.html'):
                 continue
 
-            root = lxml.html.parse(os.path.join(path, filename)).getroot()
+            root = None
+            with open(os.path.join(path, filename), encoding='utf-8') as htmlfile:
+                root = lxml.html.document_fromstring(htmlfile.read())
 
-            for row in root.xpath('.//table[@id="packages"]')[0].xpath('./tr[position()>1]'):
+            for row in root.xpath('.//div[@class="package-preview"]'):
                 pkg = Package()
 
-                # name + version
-                cell = row.xpath('./td[2]/a')[0]
+                # header
+                cell = row.xpath('./h3[@class="package-name"]')[0]
                 pkg.name, version = cell.text.split(' ', 1)
-                pkg.version, pkg.origversion = SanitizeVersion(version)
+                pkg.version, pkg.origversion = SanitizeVersion(version.strip())
+                pkg.comment = cell.xpath('./span[@class="package-synopsis"]')[0].text.strip().strip('—').strip() or None
 
-                # summary
-                cell = row.xpath('./td[3]/span')[0]
-                pkg.comment = cell.text
+                # details
+                for cell in row.xpath('./ul[@class="package-info"]/li'):
+                    key = cell.xpath('./b')[0].text
 
-                # licenses
-                for cell in row.xpath('./td[3]/div[1]/div[2]/a[@title="Link to the full license"]'):
-                    pkg.licenses.append(cell.text)
-
-                # www
-                cell = row.xpath('./td[3]/div[1]/a[@title="Link to the package\'s website"]')[0]
-                pkg.homepage = cell.attrib['href']
+                    if key == 'License:':
+                        pkg.licenses = [a.text for a in cell.xpath('./a')]
+                    elif key == 'Website:':
+                        pkg.homepage = cell.xpath('./a')[0].attrib['href']
+                    elif key == 'Package source:':
+                        pkg.extrafields['source'] = cell.xpath('./a')[0].text
 
                 result.append(pkg)
 

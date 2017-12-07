@@ -17,6 +17,9 @@
 
 import os
 import shutil
+from string import ascii_uppercase
+
+import lxml.html
 
 from repology.fetchers.helpers.fetch import Fetch
 from repology.fetchers.helpers.state import StateDir
@@ -33,11 +36,31 @@ class GuixFetcher():
             return
 
         with StateDir(statepath) as statedir:
-            pages = [chr(x) for x in range(ord('a'), ord('z') + 1)]  # a..z
-            pages.append('0-9')
+            for letter in ['0-9'] + [l for l in ascii_uppercase]:
+                page = 1
+                numpages = 1
+                while True:
+                    logger.Log('fetching {} page {}'.format(letter, page))
 
-            for page in pages:
-                logger.Log('fetching page ' + page)
-                pageurl = self.url + '/' + page + '.html'
-                with open(os.path.join(statedir, page + '.html'), 'w', encoding='utf-8') as pagefile:
-                    pagefile.write(Fetch(pageurl).text)
+                    pageurl = '{}/{}/page/{}/'.format(self.url, letter, page)
+
+                    # fetch HTML
+                    response = Fetch(pageurl)
+                    response.encoding = 'utf-8'  # is not detected properly
+                    text = response.text
+
+                    # get number of pages, if there are more than 1 of them
+                    if numpages == 1:
+                        for pagebutton in lxml.html.document_fromstring(text).xpath('.//nav[@class="page-selector"]/a'):
+                            numpages = max(numpages, int(pagebutton.text))
+
+                    # save HTML
+                    with open(os.path.join(statedir, '{}-{}.html'.format(letter, page)), 'w', encoding='utf-8') as pagefile:
+                        pagefile.write(text)
+
+                    # end if that was last (or only) page
+                    if page >= numpages:
+                        break
+
+                    # proceed with the next page
+                    page += 1
