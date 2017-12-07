@@ -334,6 +334,7 @@
 - { name: munin,                       verpat: "2\\.999.*",                                ignorever: true } # debian fake
 - { name: musescore,                   verpat: ".*git.*",                                  ignorever: true } # haiku
 - { name: mutter,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: mygui,                       verpat: "20[0-9]{6}",                               ignorever: true }
 
 # N
 - { name: ncurses,                     verpat: "6\\.0-20[0-9]{6}.*",                       ignorever: true } # macports
