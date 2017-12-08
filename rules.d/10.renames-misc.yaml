@@ -59,7 +59,7 @@
 - { name: amule-gui,                   setname: amule, addflavor: gui }
 - { name: anacron, verpat: "2\\.[4-9].*", setname: anacron2               } # different project (a fork?)
 - { name: angularjs,                   setname: angular.js                }
-- { name: ansible1,                    setname: ansible                   }
+- { namepat: "ansible[0-9]+",          setname: ansible                   }
 - { name: antimicro-qt4,               setname: antimicro                 }
 - { name: antigraingeometry,           setname: agg                       }
 - { name: aprutil1,                    setname: apr-util                  }
