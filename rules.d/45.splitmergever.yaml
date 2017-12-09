@@ -848,6 +848,7 @@
 - { name: wine-ivb, addflavor: true }
 - { name: [wine-devel,wine-development,wine-vanilla,wine-stable,wine-ivb], setname: wine }
 - { name: wine, verpat: "[0-9]+\\.0*[1-9].*", devel: true }
+- { name: wine, verpat: ".*r.*", devel: true }
 
 - { namepat: "wine-gecko([0-9.-]+|-devel|-stable)", setname: wine-gecko }
 
