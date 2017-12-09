@@ -316,6 +316,7 @@
 - { name: magic,                       verpat: "[0-9]\\.[0-9]\\.[0-9]{3}",                 unignorever: true } # unignore some good -devel's
 - { name: matreshka,                   ver: "0.8.0",                 family: fedora,       ignorever: true } # fake (see report)
 - { name: mesa,                        verpat: "[^a-z]+",            family: [fedora,mageia], ignorever: true } # accused in ignoring rc suffix
+- { name: mesa,                        verpat: "[0-9]+\\.[0-9]+\\.0",                      devel: true } # .0 are devel releases, example: https://www.mesa3d.org/relnotes/17.2.0.html
 - { name: minio,                       verpat: "[0-9]+",                                   ignorever: true } # should use separators
 - { name: mimikatz,                    verpat: ".*20[0-9]{6}",                             ignorever: true } # BlackArch snap
 - { name: mkgmap,                      verpat: "0\\.0\\.0svn([0-9]{4,})",                  setver: "r$1" }
