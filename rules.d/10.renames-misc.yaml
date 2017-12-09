@@ -648,6 +648,8 @@
 - { name: [libpcre++,pcrexx],          setname: pcre++                    }
 - { name: libpolyclipping,             setname: polyclipping              }
 - { name: libproj,                     setname: proj                      }
+- { name: libquicktime-lame,           setname: libquicktime, addflavor: lame }
+- { name: libquicktime111,             setname: libquicktime              }
 - { name: libressl-devel,              setname: libressl, ignorever: true }
 - { name: libressl-netcat,             setname: libressl, addflavor: netcat }
 - { name: librfm5,                     setname: librfm                    }
