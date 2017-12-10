@@ -229,7 +229,7 @@
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:cntk",               setname: cntk                      }
 - { name: "python:diffoscope",         setname: diffoscope                }
-- { name: "python:ddgr",               setname: ddgr                      }
+- { name: "python:ddgr",               setname: ddgr, addflavor: python }
 - { name: "python:dreampie",           setname: dreampie                  }
 - { name: "python:epydoc",             setname: epydoc                    }
 - { name: "python:eric",               setname: eric                      }
