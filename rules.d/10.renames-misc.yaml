@@ -495,6 +495,7 @@
 - { name: getopt,                      setname: java-getopt, family: sisyphus }
 - { name: gnupg1compat,                setname: gnupg                     }
 - { name: google-breakpad,             setname: breakpad                  }
+- { name: golden-cheetah,              setname: goldencheetah             }
 - { name: [google-gflags,libgflags],   setname: gflags                    }
 - { name: [google-mock,googlemock,libgmock], setname: gmock               }
 - { name: google-sparsehash,           setname: sparsehash                }
