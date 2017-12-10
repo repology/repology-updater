@@ -1,7 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # global devel rule
-- { verpat: ".*(alpha|beta|rc|prerelease|pre)[0-9._-]*",                                   devel: true }
+- { verpat: ".*(alpha|beta|dev|rc|prerelease|pre)[0-9._-]*",                                   devel: true }
 
 # other global rules
 - { verpat: ".*\\.[0-9]+\\.[0-9]+\\.[0-9a-f]{4,}",                   family: sisyphus,     ignorever: true } # personal rule for ldv@altlinux.org

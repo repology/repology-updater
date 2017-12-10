@@ -44,7 +44,7 @@ def SanitizeVersion(version):
     # append useful suffixes
     good_suffixes = []
     for suffix in suffixes:
-        match = re.match('((?:a|b|r|alpha|beta|rc|pre|patch|git|svn|cvs|hg|bzr|nmu|darcs)[-]?[0-9]+(?:\\.[0-9]+)*)', suffix, re.IGNORECASE)
+        match = re.match('((?:a|b|r|alpha|beta|rc|pre|patch|git|svn|cvs|hg|bzr|nmu|darcs|dev)[-]?[0-9]+(?:\\.[0-9]+)*)', suffix, re.IGNORECASE)
         if match:
             good_suffixes.append(match.group(1))
 
