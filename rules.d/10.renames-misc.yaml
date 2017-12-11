@@ -148,7 +148,7 @@
 - { name: [boinc-client, boinc-nox],   setname: boinc                     } # or to boinc-client?
 - { name: bombono,                     setname: bombono-dvd               }
 - { name: [booch95, gnat-booch95],     setname: adabooch                  }
-- { name: [boost-all,boost-libs,boost-headers,boost-python-libs,boost-python,boost-mpi,boost-bcp,boost-libraries,boost-python3-libs], setname: boost, addflavor: true }
+- { name: [boost-all,boost-libs,boost-headers,boost-python-libs,boost-python,boost-mpi,boost-bcp,boost-libraries,boost-python3-libs,boost-63-compat,boost-docs,boost-jam], setname: boost, addflavor: true }
 - { namepat: "boost-mpi-source[0-9-.]+", setname: boost, addflavor: boost-mpi }
 - { namepat: "boost[0-9_.]+",          setname: boost                     }
 - { namepat: "botan[0-9.]+",           setname: botan                     }

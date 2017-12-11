@@ -229,7 +229,6 @@
 - { name: "python:bzrtools",           setname: bzrtools                  }
 - { name: "python:cntk",               setname: cntk                      }
 - { name: "python:diffoscope",         setname: diffoscope                }
-- { name: "python:ddgr",               setname: ddgr, addflavor: python }
 - { name: "python:dreampie",           setname: dreampie                  }
 - { name: "python:epydoc",             setname: epydoc                    }
 - { name: "python:eric",               setname: eric                      }
@@ -265,9 +264,11 @@
 - { name: ["python:pypy", "python:pypy-bin"], setname: pypy               }
 - { name: ["python:pypy3", "python:pypy3-bin"], setname: pypy3            }
 
-# these are not pypi modules, but pyalsa, python bindings from alsa project
+# python bindings bundled with corresponding projects, not real modules
 - { name: ["python:alsa", "python:pyalsa"], setname: pyalsa, addflavor: python }
-- { name: "python:ldns",               setname: ldns, addflavor: python } # part of ldns
+- { name: "python:boost",              setname: boost, addflavor: python }
+- { name: "python:ddgr",               setname: ddgr, addflavor: python }
+- { name: "python:ldns",               setname: ldns, addflavor: python }
 
 - { name: "python:backports", ver: "4.0.0", ignorever: true            } # opensuse fake
 - { name: "python:pyspatialite", ver: "3.0.1", ignorever: true            }
