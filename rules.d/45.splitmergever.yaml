@@ -823,6 +823,17 @@
 
 - { namepat: "tk8[0-9._-]+",           setname: tk } # don't mix with tk2, tk5, tk707 which are unrelated projects
 
+- { namepat: "thunderbird[0-9.-]*",    setname: thunderbird }
+- { namepat: "thunderbird[0-9.-]*-l10n", setname: thunderbird, addflavor: l10n }
+- { name: [mozilla-thunderbird,mozillathunderbird], setname: thunderbird }
+- { name: mozilla-thunderbird-l10n, setname: thunderbird, addflavor: l10n }
+- { name: [thunderbird-45-gtk2,thunderbird-gtk2], setname: thunderbird, addflavor: gtk2 }
+- { name: thunderbird-bin, setname: thunderbird, addflavor: bin }
+- { name: thunderbird-ru, setname: thunderbird, addflavor: ru }
+- { name: [thunderbird-beta,thunderbird-beta-bin-ru,thunderbird-beta-bin-uk,thunderbird-beta-gtk3], setname: thunderbird, addflavor: true, ignorever: true }
+- { name: thunderbird-l10n-xpi, setname: thunderbird, addflavor: l10n }
+- { namepat: "thunderbird-(i18n-.*)",  setname: thunderbird, family: [ openbsd, arch, kaos ], addflavor: "$1" }
+
 - { name: tor-devel,                   setname: tor }
 - { name: tor, verge: "0.3.2",         devel: true }
 

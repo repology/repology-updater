@@ -35,5 +35,4 @@
 - { namepat: "(squirrelmail-.*)-plugin", setname: "$1", family: [ freebsd ] }
 - { namepat: "tesseract(?:-ocr|-data)*-[a-z]{3}(?:-.*)?", setname: "tesseract-ocr-data" }
 - { namepat: "texlive-documentation-.*", setname: "texlive-documentation", family: [ gentoo ] }
-- { namepat: "thunderbird-i18n-.*",    setname: "thunderbird-i18n", family: [ openbsd, arch, kaos ] }
 - { namepat: "vim-spell-.*",           setname: "vim-spell", family: [ openbsd, gentoo, arch ] }
