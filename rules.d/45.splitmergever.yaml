@@ -830,9 +830,12 @@
 - { name: [thunderbird-45-gtk2,thunderbird-gtk2], setname: thunderbird, addflavor: gtk2 }
 - { name: thunderbird-bin, setname: thunderbird, addflavor: bin }
 - { name: thunderbird-ru, setname: thunderbird, addflavor: ru }
-- { name: [thunderbird-beta,thunderbird-beta-bin-ru,thunderbird-beta-bin-uk,thunderbird-beta-gtk3], setname: thunderbird, addflavor: true, ignorever: true }
 - { name: thunderbird-l10n-xpi, setname: thunderbird, addflavor: l10n }
-- { namepat: "thunderbird-(i18n-.*)",  setname: thunderbird, family: [ openbsd, arch, kaos ], addflavor: "$1" }
+- { name: thunderbird-i18n, setname: thunderbird, addflavor: i18n }
+- { namepat: "thunderbird-beta(.*)", setname: thunderbird, addflavor: "$1", ignorever: true }
+- { namepat: "thunderbird-nightly(.*)", setname: thunderbird, addflavor: "$1", ignorever: true }
+- { namepat: "thunderbird-(i18n-.*)", setname: thunderbird, family: [ openbsd, arch, kaos ], addflavor: "$1" }
+- { name: thunderbird, verpat: ".*[ab].*", devel: true }
 
 - { name: tor-devel,                   setname: tor }
 - { name: tor, verge: "0.3.2",         devel: true }
