@@ -111,6 +111,7 @@
 - { name: cvs,                         ver: "1.20120905",                                  ignorever: true }
 - { name: cvs,                         ver: "1.12.13.1",                                   ignorever: true } # respin for Windows *only* to fix carriage returns, it does not make sense to list it
 - { name: cwiid,                       ver: ["20110107","0.6.01","2010-02-21-git"],        ignorever: true } # abandonware; a lot of snapshots
+- { name: cwm,                         ver: "6.2.9",                                       ignorever: true } # FreeBSD fake
 
 # D
 - { name: dbus-cpp,                    verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
