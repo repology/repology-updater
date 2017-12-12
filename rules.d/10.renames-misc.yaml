@@ -926,6 +926,8 @@
 - { name: spamassassin-spamc,          setname: spamassassin, addflavor: rules }
 - { name: spatialite,                  setname: libspatialite }
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
+- { name: spotify-client,              setname: spotify, addflavor: client }
+- { name: [spotify-stable,spotify094], setname: spotify }
 - { name: stellarium-qt4,              setname: stellarium                }
 - { name: stepmania-devel,             setname: stepmania,                family: [ freebsd ] }
 - { namepat: "stonesoup(?:-sdl)?",     setname: stone-soup                }
