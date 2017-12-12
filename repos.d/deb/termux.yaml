@@ -1,0 +1,22 @@
+###########################################################################
+# Termux
+###########################################################################
+- name: termux
+  type: repository
+  desc: Termux
+  family: debuntu
+  color: 'c70036'
+  sources:
+    - name: [ stable/main ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://termux.net/dists/{source}/binary-aarch64/Packages.xz'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Termux packages
+      url: 'https://github.com/termux/termux-packages'
+  packagelinks:
+    - desc: Package build script
+      url: 'https://github.com/termux/termux-packages/blob/master/packages/{name}/build.sh'
+  tags: [ all, production, debian ]
