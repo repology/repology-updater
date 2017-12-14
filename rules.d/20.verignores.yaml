@@ -20,6 +20,7 @@
 - { name: acl,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: acl,                         verlonger: 3,                                       ignorever: true }
 - { name: ack,                                                       family: mageia,       ignorever: true }
+- { name: afdko,                       verpat: "([0-9]+\\.[0-9]+)\\.b?([0-9]+).*?",        setver: "$1.$2" }
 - { name: aften,                       ver: [ "0.05", "0.08" ],                            ignorever: true }
 - { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
 - { name: agda-stdlib,                                               family: gentoo,       ignorever: true } # documented broken versioning
