@@ -264,7 +264,7 @@
 - { name: ctypes-sh,                   setname: ctypes.sh                 }
 - { name: cuneiform-linux,             setname: cuneiform                 }
 - { name: cutecom-legacy,              setname: cutecom                   }
-- { name: [curl-http2,curl-openssl],   setname: curl, addflavor: true }
+- { name: [curl-ca-bundle,curl-http2,curl-openssl], setname: curl, addflavor: true }
 - { name: curseofwar-sdl,              setname: curseofwar                }
 - { name: cvs-devel,                   setname: cvs                       }
 - { name: cvsweb3,                     setname: cvsweb                    }
