@@ -81,6 +81,7 @@
     - pylint-django
     - pylint-flask
     - pylint-plugin-utils
+    - pyode
     - pypoppler
     - pyproj
     - pyqt4
@@ -179,6 +180,7 @@
 - { name: "python:numpy-mkl",          setname: "python:numpy", addflavor: mkl }
 - { name: "python:numpy-next",         setname: "python:numpy", addflavor: next }
 - { name: "python:numpy-openblas",     setname: "python:numpy", addflavor: openblas }
+- { name: "python:ode",                setname: "python:pyode" }
 - { name: [dyndnsc,dyndnsc-py2],       setname: "python:dyndnsc"          }
 - { namepat: "django-.*",              setname: "python:$0"               }
 - { name: [django, django12, django14], setname: "python:django"          }
@@ -277,6 +279,7 @@
 - { name: "python:pycha", ver: "279", ignorever: true }
 - { name: "python:pycrypto", verpat: "3.*", family: nix, setname: "python:pycryptodome" } # different package
 - { name: "python:pycrypto", ver: "2.7", family: sisyphus, ignorever: true } # it's 2.7a1
+- { name: "python:pyode", verpat: ".*2010.*", ignorever: true }
 
 - { name: "python:pygobject", verpat: "2.*", setname: "python:pygobject2" }
 - { name: "python:pygobject", verpat: "3.*", setname: "python:pygobject3" }
