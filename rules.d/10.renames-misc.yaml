@@ -551,7 +551,7 @@
 - { name: intellij-idea-ce-eap,        setname: intellij-idea-community, ignorever: true }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre,intellij-ultimate], setname: intellij-idea-ultimate }
 - { name: intellij-idea-ue-eap,        setname: intellij-idea-ultimate, ignorever: true }
-- { name: [intellij-pycharm,pycharm-community], setname: pycharm          }
+- { name: intellij-pycharm,            setname: pycharm          }
 
 # J
 - { name: ja2,                         setname: ja2-stracciatella         }
@@ -860,6 +860,9 @@
 - { namepat: "py[0-9][0-9]-fail2ban",  setname: fail2ban,                 family: [ freebsd ] }
 - { name: presto-cli,                  setname: presto }
 - { name: [proj4,proj.4,proj47],       setname: proj                      }
+- { name: [pycharm-ce,pycharm-community,pycharm-community-eap,pycharm-community-edition], setname: pycharm, addflavor: community }
+- { name: pycharm-eap,                 setname: pycharm } # EAP versions handled with other rules
+- { name: pycharm-professional,        setname: pycharm, addflavor: professional }
 
 # Q
 - { name: qastools-qt5,                setname: qastools                  }
