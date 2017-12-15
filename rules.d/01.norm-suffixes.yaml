@@ -6,8 +6,10 @@
 
 - { family: aosc, namepat: "(.*)\\+32", setname: "$1", addflavor: "32" }
 
-- { family: arch, namepat: "lib32-(.*)", setname: "$1", addflavor: "lib32" }
-- { family: arch, namepat: "(.*)-multilib", setname: "$1", addflavor: "multilib" }
+- { family: arch, namepat: "lib32-(.*)", setname: "$1", addflavor: lib32 }
+- { family: arch, namepat: "(.*)-multilib", setname: "$1", addflavor: multilib }
+
+- { namepat: "libx32-(.*)", setname: "$1", addflavor: libx32 }
 
 # XXX: should only affect AUR
 #- { family: arch, name: php-svn, setname: "php:svn" } # XXX: hack to save from following rule
