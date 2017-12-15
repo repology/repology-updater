@@ -29,4 +29,5 @@
 
 # unrust
 - { name: "rust:cargo", setname: cargo }
+- { name: "rust:exa", setname: exa }
 - { name: "rust:systemd-manager", setname: systemd-manager }
