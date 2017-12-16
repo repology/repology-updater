@@ -131,6 +131,8 @@
 # there are two branches, see http://invisible-island.net/luit/
 - { name: luit,                        verpat: "2\\..*", setname: luit-xterm }
 
+- { name: man, wwwpart: man-db,        setname: man-db }
+
 - { name: mars,                        category: games, setname: m.a.r.s. }
 - { name: mars,                        wwwpart: [marsshooter,mars-game], setname: m.a.r.s. }
 - { name: mars,                        wwwpart: www.mpibpc.mpg.de, setname: mars-proteins-assignment }
