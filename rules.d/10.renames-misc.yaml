@@ -292,6 +292,7 @@
 - { name: [doom-freedoom,freedoom-freedm], setname: freedoom              }
 - { name: iodoom3-dhewm3,              setname: dhewm3                    }
 - { name: dgen,                        setname: dgen-sdl                  }
+- { name: dino-unstable,               setname: dino, ignorever: true }
 - { name: divideandsucceed,            setname: divide-and-succeed        }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
 - { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools,djvu], setname: djvulibre }
