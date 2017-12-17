@@ -509,7 +509,7 @@
 - { name: vid.stab,                    verpat: ".*[0-9a-f]{7}.*",                          ignorever: true } # git commit
 - { name: vlc,                                                       family: kaos,         ignorever: true } # fakes like 2.2.85 where actual version is 2.2.8
 - { name: vlc,                         verpat: "[34].*",                                   ignorever: true } # 3 and 4 are devel branches, no announced releaes
-- { name: vlc,                         verpat: "3\\.0\\.0rc[0-9]+",                        unignorever: true, devel: true } # except for this one
+- { name: vlc,                         verpat: "3\\.0\\.0[^0-9a-z]?rc[0-9]+",              unignorever: true, devel: true } # except for this one
 - { name: vlc,                         verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: vorbis-tools,                verlonger: 3,                 family: kaos,         ignorever: true } # fake
 - { name: vpnc,                        ver: "0.5.3.3",               family: kaos,         ignorever: true } # fake
