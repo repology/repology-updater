@@ -291,6 +291,7 @@
 - { name: libiconv,                    verpat: "[0-9]",                                    ignorever: true } # lede/openwrt strange version
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignorever: true } # fake
 - { name: libimobiledevice,            verlonger: 3,                 family: kaos,         ignorever: true } # fake
+- { name: libimobiledevice,            verpat: ".*git.*",                                  ignorever: true } # snapshot
 - { name: libkvkontakte,               verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: libmediawiki,                verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: liblqr,                      verpat: "1-.*",                                     ignorever: true } # "1" is not part of the version
