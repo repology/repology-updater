@@ -459,7 +459,9 @@
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignorever: true } # not yet released
 - { name: slime,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: slime,                       ver: "2.20.2.gef68a0b4",                            ignorever: true }
+- { name: smtp-fuzz,                                                                       ignorever: true } # no official versioning scheme
 - { name: sndio,                       ver: ["20161106","1.2.0_2"],                        ignorever: true }
+- { name: snmpenum,                                                                        ignorever: true } # no official versioning scheme
 - { name: solvespace,                  verpat: ".*[0-9]{8}.*",                             ignorever: true } # nix garbage
 - { name: speex,                       verlonger: 3,                 family: openindiana,  ignorever: true }
 - { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             ignorever: true }
