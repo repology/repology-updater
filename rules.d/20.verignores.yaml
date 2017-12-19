@@ -117,6 +117,7 @@
 # D
 - { name: dbus-cpp,                    verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: dee-qt,                      verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
+- { name: deja-dup,                    verpat: "[0-9]*[13579]\\..*",                       devel: true }
 - { name: dff,                         verpat: "(.*)\\.20[0-9]{6}",                        setver: "$1" } # aosc snapshot
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignorever: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
@@ -136,14 +137,15 @@
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignorever: true }
 - { name: ebtables,                    verpat: "20[0-9]{2}.*",                             ignorever: true } # LEDE year
 - { name: egoboo,                      ver: "2.81",                                        setver: "2.8.1" }
+- { name: empathy,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: enventor,                    verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: eog,                         verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: ephoto,                      verpat: "20[0-9]{6}",                               ignorever: true }
-- { name: epydoc,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # fedora garbage
-- { name: ethtool,                     verpat: "6.*",                                      ignorever: true } # XXX: check if https://www.kernel.org/pub/software/network/ethtool/ and ethtool from https://sourceforge.net/projects/gkernel/ are the same project. Anyway, the former is fresh and the latter is ancient crap from 2007
-- { name: enventor,                    verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: epiphany,                    verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: epub2txt,                    verpat: ".*20[0-9]{6}",                             ignorever: true } # aosc snapshot
+- { name: epydoc,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # fedora garbage
 - { name: erlang-cl,                   verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
+- { name: ethtool,                     verpat: "6.*",                                      ignorever: true } # XXX: check if https://www.kernel.org/pub/software/network/ethtool/ and ethtool from https://sourceforge.net/projects/gkernel/ are the same project. Anyway, the former is fresh and the latter is ancient crap from 2007
 - { name: evolution,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: evolution-data-server,       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: evolution-ews,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -208,6 +210,7 @@
 - { name: gnome-shell,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-shell-extensions,      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-software,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-sudoku,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-tweak-tool,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnat-util-gcc,               verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: gnuastro,                    verlonger: 2,                                       devel: true } # alphas
