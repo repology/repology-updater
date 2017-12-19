@@ -464,16 +464,16 @@
 - { name: speex,                       verlonger: 3,                 family: openindiana,  ignorever: true }
 - { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             ignorever: true }
 - { name: sqlninja,                    ver: ["0.2.999"],                                   ignorever: true } # it's 0.2.999-alpha1
-- { name: supertransball2,             verpat: "2\\.[0-9]+\\.[0-9]+",                      ignorever: true } # 2 is port of the project name, not version
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignorever: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
-- { name: sunxi-tools,                 verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: sunpinyin,                   ver: "3.0.0",                                       ignorever: true } # aosc fake, it's rc1
+- { name: sunxi-tools,                 verpat: "20[0-9]{6}",                               ignorever: true }
+- { name: supertransball2,             verpat: "2\\.[0-9]+\\.[0-9]+",                      ignorever: true } # 2 is port of the project name, not version
 - { name: sutils,                      verpat: "[0-9][0-9]",                               ignorever: true } # manjaro, aur snapshots
 - { name: svn2git,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # macports
 - { name: swell-foop,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: sword,                       ver: "1.7.5",                 family: mageia,       ignorever: true } # fake
-- { name: sysstat,                     ver: "20151012",                                    ignorever: true } # openindiana garbage
 - { name: synfigstudio,                verpat: "1\\.3\\..*",                               devel: true } # openindiana garbage
+- { name: sysstat,                     ver: "20151012",                                    ignorever: true } # openindiana garbage
 
 # T
 - { name: taisei,                      verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
