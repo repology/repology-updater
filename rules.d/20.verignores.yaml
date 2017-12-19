@@ -210,6 +210,7 @@
 - { name: gnome-software,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-tweak-tool,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnat-util-gcc,               verpat: "20[0-9]{6}",                               ignorever: true }
+- { name: gnuastro,                    verlonger: 2,                                       devel: true } # alphas
 - { name: goldencheetah,               verpat: ".*dev.*",                                  ignorever: true }
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignorever: true }
 - { name: gsettings-desktop-schemas,   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
