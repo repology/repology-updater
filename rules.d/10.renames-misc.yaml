@@ -556,9 +556,11 @@
 
 # J
 - { name: ja2,                         setname: ja2-stracciatella         }
-- { name: [jackit,jack-audio-connection-kit,jack1,jack2,jackd2,jack-cd-ripper,libjack2], setname: jack } # jack needs untangling anyway, so dump everything there and untangle it in 19
-- { name: [jack2-dbus,jack-dbus],      setname: jack, addflavor: dbus }
-- { name: jack2-no-dbus,               setname: jack, addflavor: no-dbus }
+- { name: [jackit,jack-audio-connection-kit,jack1,jack-cd-ripper], setname: jack } # jack needs untangling anyway, so dump everything into jakc and untangle it later
+- { name: jack-dbus,                   setname: jack, addflavor: dbus }
+- { name: [jackd2,libjack2],           setname: jack2 }
+- { name: jack2-dbus,                  setname: jack2, addflavor: dbus }
+- { name: jack2-no-dbus,               setname: jack2, addflavor: no-dbus }
 - { name: jade, family: aosc,          setname: openjade                  }
 - { name: jenkins-bin,                 setname: jenkins, addflavor: bin   }
 - { name: jenkins-lts,                 setname: jenkins                   }
