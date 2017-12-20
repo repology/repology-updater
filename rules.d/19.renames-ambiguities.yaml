@@ -117,6 +117,12 @@
 - { name: icecream,                    setname: icecream-stream-extractor,     ver: "1.3" }
 - { name: icecream,                    warning: "please classify me" }
 
+- { name: jack,                        wwwpart: unix-ag.org, setname: jack-cd-ripper }
+- { name: jack,                        verpat: "3\\.1\\.1.*", setname: jack-cd-ripper }
+- { name: jack,                        verpat: "0\\.1[0-9][0-9].*", setname: jack1 }
+- { name: jack,                        verpat: "1.*", setname: jack2 }
+- { name: jack,                        warning: "please classify me" }
+
 - { name: jade,                        wwwpart: jade.cselt.it, setname: jade-java }
 
 - { name: kiki, category: [python,universe/python], setname: kiki-re }

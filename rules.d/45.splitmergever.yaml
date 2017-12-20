@@ -416,10 +416,6 @@
 
 - { name: jabberd2,                    setname: jabberd }
 
-- { name: jackit,                      setname: jack-audio-connection-kit }
-- { name: jackd2,                      setname: jack2 }
-- { name: jack-audio-connection-kit, verpat: "1\\..*", setname: jack2 }
-
 - { namepat: "jdeparser[0-9]+",        setname: jdeparser }
 - { name: jdeparser, verpat: "1\\..*", setname: jdeparser1 }
 
