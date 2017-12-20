@@ -73,16 +73,16 @@
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
 
-- name: mx_16_testing
+- name: mx_17
   type: repository
-  desc: MX Linux MX-16 Testing
+  desc: MX Linux MX-17
   family: debuntu
   color: "6693d6"
   sources:
-    - name: [ test ]
+    - name: [ main, non-free ]
       fetcher: File
       parser: DebianSources
-      url: 'http://mxrepo.com/mx/testrepo/dists/mx16/{source}/source/Sources.gz'
+      url: 'http://mxrepo.com/mx/repo/dists/stretch/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -90,8 +90,28 @@
       url: https://mxlinux.org/
     - desc: MX and MEPIS Community Repository
       url: http://mxrepo.com/
-    - desc: Community Packages for MX-16
-      url: http://mxrepo.com/MX16packages.html
+  packagelinks:
+    - desc: Package directory on mxrepo.com
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
+  tags: [ all, production, mx ]
+
+- name: mx_17_testing
+  type: repository
+  desc: MX Linux MX-17 Testing
+  family: debuntu
+  color: "6693d6"
+  sources:
+    - name: [ test ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mxrepo.com/mx/testrepo/dists/stretch/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
   packagelinks:
     - desc: Package directory on mxrepo.com
       url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{name|libfirstletter}/{name}'
