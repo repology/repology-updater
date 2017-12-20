@@ -809,10 +809,8 @@
 - { name: [supertux,supertux1,supertux2,supertux-old,supertux-stable], setname: supertux }
 - { name: supertux, verpat: "0\\.[^1]\\..*", setname: supertux2 }
 
-- { namepat: "swig[0-9]+",             setname: swig }
-- { name: swig, verpat: "1\\..*",      setname: swig13 }
-- { name: swig, verpat: "2\\..*",      setname: swig2 }
-- { name: swig, verpat: "3\\..*",      setname: swig3 }
+- { namepat: "swig[0-9._-]+",          setname: swig }
+- { namepat: "swig-(.*)", family: macports, setname: swig, addflavor: "$1" } # split by supported language
 
 - { namepat: "tcl8[0-9._-]+",          setname: tcl }
 - { name: tcl, verpat: ".*20[0-9]{6}.*", ignorever: true } # 8.7 snapshots
