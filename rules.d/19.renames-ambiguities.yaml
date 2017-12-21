@@ -8,6 +8,8 @@
 - { name: beast,                       setname: beast-mcmc, wwwpart: beast.bio.ed.ac.uk }
 - { name: beast,                       setname: boost-beast, family: vcpkg }
 
+- { name: bos, wwwpart: boswars,       setname: boswars }
+
 - { name: cde,                         setname: cdesktopenv, wwwpart: cdesktopenv } # desktop env. vs packaging tool
 
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager

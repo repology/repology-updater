@@ -7,6 +7,10 @@
 # modules
 - { namepat: "ocaml([0-9.]*)-(.*)", setname: "ocaml:$2", addflavor: "$1" }
 
+# modules (manual)
+# XXX: merge everything from gentoo's dev-ml (but with care)
+- { name: bos, wwwpart: erratique.ch,  setname: "ocaml:bos" }
+
 # recover non-modules
 - { name: "ocaml:mode", setname: "ocaml-mode" }
 - { name: "ocaml:mode.el", setname: "ocaml-mode.el" }
