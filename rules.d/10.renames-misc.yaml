@@ -407,6 +407,7 @@
 - { name: fluid-synth,                 setname: fluidsynth                }
 - { name: [fluxbox-wm,fluxbox-noslit], setname: fluxbox                   }
 - { name: flwm-tc,                     setname: flwm                      }
+- { name: [fmtlib,libfmt,cppformat],   setname: fmt                       } # cppformat is the former name, see http://fmtlib.net
 - { name: fofix-dfsg,                  setname: fofix                     }
 - { name: foldingathome-noroot,        setname: foldingathome             }
 - { name: [fomp-lv2,lv2-fomp-plugins], setname: fomp                      }
