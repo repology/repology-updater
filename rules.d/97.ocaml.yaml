@@ -13,7 +13,7 @@
     - bos
     - fmt
   category: dev-ml
-  setname: "ocaml:$1"
+  setname: "ocaml:$0"
 
 # recover non-modules
 - { name: "ocaml:mode", setname: "ocaml-mode" }
