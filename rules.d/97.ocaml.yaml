@@ -9,7 +9,11 @@
 
 # modules (manual)
 # XXX: merge everything from gentoo's dev-ml (but with care)
-- { name: bos, wwwpart: erratique.ch,  setname: "ocaml:bos" }
+- name:
+    - bos
+    - fmt
+  category: dev-ml
+  setname: "ocaml:$1"
 
 # recover non-modules
 - { name: "ocaml:mode", setname: "ocaml-mode" }
