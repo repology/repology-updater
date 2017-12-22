@@ -10,9 +10,49 @@
 # modules (manual)
 # XXX: merge everything from gentoo's dev-ml (but with care)
 - name:
+    - alcotest
+    - angstrom
+    - ansiterminal
+    - astring
+    - atd
+    - atdgen
+    - base
+    - batteries
+    - bignum
+    - biniou
+    - bolt
     - bos
+    - calendar
+    - camlbz2
+    - camldbm
+    - camlidl
     - fmt
+    - qcheck
+    - reactivedata
+    - reason
+    - result
+    - rresult
+    - sedlex
+    - sequence
+    - spawn
+    - stdio
+    - topkg
+    - uchar
+    - xmlm
   category: dev-ml
+  setname: "ocaml:$0"
+
+- { namepat: "angstrom-(async|lwt-unix|uniq)", category: dev-ml, setname: "ocaml:angstrom", addflavor: "$1" }
+
+- name:
+    - ansiterminal
+    - bolt
+  setname: "ocaml:$0"
+  family: nix
+
+- name:
+    - ulex
+    - zarith
   setname: "ocaml:$0"
 
 # recover non-modules
