@@ -167,6 +167,7 @@
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: flvstreamer,                 ver: "2.1.c.1",                                     setver: "2.1c1" }
 - { name: flvstreamer,                 ver: "2.1c",                                        setver: "2.1c0" }
+- { name: fontconfig,                  verpat: "[0-9]+\\.[0-9]+\\.9[0-9]+",                devel: true }
 - { name: "fonts:cyberbit",            ver: "2.0.20050220",                                ignorever: true }
 - { name: "fonts:dseg",                ver: "030",                                         setver: "0.30" }
 - { name: "fonts:eeyek",               ver: "20091204",                                    ignorever: true }
@@ -196,6 +197,7 @@
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignorever: true } # not released yet
 - { name: gettext,                     ver: "2",                                           ignorever: true } # libintl from LEDE
 - { name: geocode-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: glib-networking,             verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gnash,                       verpat: ".*git.*",                                  ignorever: true } # snapshots
