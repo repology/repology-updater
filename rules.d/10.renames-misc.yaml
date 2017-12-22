@@ -25,6 +25,7 @@
 - { name: ace, category: games-board,  setname: ace-of-penguins,          family: [ gentoo ] }
 - { name: acetoneiso, verpat: "6.*",   setname: acetoneiso6,              family: [ fedora ] } # XXX: ???
 - { name: acetoneiso2,                 setname: acetoneiso,               family: [ arch, sisyphus ] }
+- { name: acidbase,                    setname: base }
 - { name: ack-grep,                    setname: ack,                      family: [ debuntu ] }
 - { namepat: "acpica-(?:tools|unix|utils)", setname: acpica                                 }
 - { namepat: "acroread[0-9.]*", setname: acroread }
