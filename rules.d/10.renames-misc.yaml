@@ -608,6 +608,7 @@
 - { name: libcomedi,                   setname: comedilib                 }
 - { name: libconfuse0,                 setname: libconfuse                }
 - { name: libcpuid11,                  setname: libcpuid                  }
+- { name: libcpptest,                  setname: cpptest                   }
 - { name: libcsfml,                    setname: csfml                     }
 - { name: [libcurl-compat,libcurl-compat-nostatic,libcurl-gnutls,libcurl-openssl-1.0], setname: curl, addflavor: true }
 - { name: libelf0,                     setname: libelf                    }
@@ -639,6 +640,7 @@
 - { name: liblqr-1,                    setname: liblqr                    } # XXX: reverse?
 - { name: liblz4,                      setname: lz4                       } # XXX: reverse?
 - { name: libmikmod2,                  setname: libmikmod                 }
+- { name: libcminpack,                 setname: minpack                   }
 - { name: [libmowgli-2,libmowgli2,mowgli], setname: libmowgli             }
 - { name: libmpc3,                     setname: libmpc }
 - { name: libmpcdec5,                  setname: libmpcdec                 }
