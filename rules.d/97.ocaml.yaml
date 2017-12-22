@@ -42,7 +42,7 @@
   category: dev-ml
   setname: "ocaml:$0"
 
-- { namepat: "angstrom-(async|lwt-unix|uniq)", category: dev-ml, setname: "ocaml:angstrom", addflavor: "$1" }
+- { namepat: "angstrom-(async|lwt-unix|unix)", category: dev-ml, setname: "ocaml:angstrom", addflavor: "$1" }
 
 - name:
     - ansiterminal
