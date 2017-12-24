@@ -615,6 +615,7 @@
 - { name: [libcurl-compat,libcurl-compat-nostatic,libcurl-gnutls,libcurl-openssl-1.0], setname: curl, addflavor: true }
 - { name: libelf0,                     setname: libelf                    }
 - { name: [libenet,enet1.2],           setname: enet                      }
+- { name: libexecinfo,                 setname: elftoolchain, family: ravenports, addflavor: "$0" }
 - { name: libfreeglut,                 setname: freeglut                  }
 - { name: libfdk-aac,                  setname: fdk-aac                   }
 - { name: [libfm-directory_thumbnails,libfm-extra,libfm-gtk2,libfm-gtk3], setname: libfm }
