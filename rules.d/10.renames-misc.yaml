@@ -539,6 +539,7 @@
 # I
 - { name: [i3-wm,i3wm], setname: i3        }
 - { name: [i3-kde,i3-lazy,i3-wm-iconpatch], setname: i3, addflavor: true }
+- { name: i3status-manjaro,            setname: i3status, addflavor: manjaro }
 - { name: icewm2,                      setname: icewm }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
@@ -696,6 +697,7 @@
 - { name: libxml2-reference,           setname: libxml2, addflavor: reference }
 - { name: libxml2-linenum,             setname: libxml2, addflavor: linenum }
 - { name: libxmp-lite,                 setname: libxmp                    }
+- { name: [libyajl,libyajl1,libyajl2], setname: yajl                      }
 - { name: libytnef,                    setname: ytnef                     } # see https://github.com/Yeraze/ytnef/blob/master/ChangeLog
 - { name: libzen0,                     setname: libzen                    }
 - { name: libzstd,                     setname: zstd                      }
