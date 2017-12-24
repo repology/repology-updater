@@ -133,6 +133,9 @@
 
 - { name: libtorrent,                  family: vcpkg, setname: arvidn-libtorrent  }
 
+- { name: libunwind,                   wwwpart: llvm, setname: llvm-libunwind }
+- { name: libunwind,                   verpat: "[45]\\..*", setname: llvm-libunwind }
+
 # gentoo vs. fedora livecd-tools
 - { name: livecd-tools,                wwwpart: gentoo, setname: livecd-tools-gentoo }
 - { name: livecd-tools,                category: app-misc, family: gentoo, setname: livecd-tools-gentoo }
