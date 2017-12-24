@@ -688,7 +688,10 @@
 - { name: libunarr,                    setname: unarr                     }
 - { name: libuv1,                      setname: libuv                     }
 - { name: [libwmf-nox11,libwmf-docs],  setname: libwmf, addflavor: true   }
-- { name: libx264,                     setname: x264                      }
+- { name: [libx264,lib264-142],        setname: x264                      }
+- { name: libx264-10bit,               setname: x264, addflavor: 10bit }
+- { name: libx264-all,                 setname: x264, addflavor: all }
+- { name: libx264-devel,               setname: x264, ignorever: true }
 - { name: libxml2-reference,           setname: libxml2, addflavor: reference }
 - { name: libxml2-linenum,             setname: libxml2, addflavor: linenum }
 - { name: libxmp-lite,                 setname: libxmp                    }
@@ -1043,6 +1046,7 @@
 
 # X
 - { name: x-moto,                      setname: xmoto                     }
+- { name: x264-devel,                  setname: x264, ignorever: true }
 - { name: x2vnc-no-xinerama,           setname: x2vnc, addflavor: true }
 - { name: xa65,                        setname: xa }
 - { name: [xalanc,xalan-c++],          setname: xalan-c }
