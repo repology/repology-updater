@@ -244,6 +244,8 @@
 - { namepat: "firefox-esr[0-9.-]*",    setname: firefox-esr }
 - { namepat: "firefox-esr[0-9.-]*(-gtk2|-privacy|-unwrapped)", setname: firefox-esr }
 - { namepat: "firefox-esr[0-9.-]*-l10n", setname: firefox-esr-l10n }
+- { namepat: "firefox-developer-edition(.*)", setname: firefox, addflavor: "$1", devel: true }
+- { namepat: "firefox-developer(.*)", setname: firefox, addflavor: "$1", devel: true }
 - { name: firefox, verpat: ".*[ab].*",  devel: true }
 
 - { name: [fox-devel, fox-toolkit, fox-toolkit-devel], setname: fox }
@@ -574,6 +576,9 @@
 
 - { namepat: "mariadb[0-9.-]*(?:-client|-server)?", setname: mariadb }
 - { name: mariadb, verge: "10.3", devel: true } # https://downloads.mariadb.org/
+
+- { namepat: "mozjs[0-9._-]+",     setname: mozjs }
+- { name: libmozjs,                setname: mozjs }
 
 - { namepat: "moodle[0-9._-]+", setname: moodle }
 # XXX: handle moodle-lang*

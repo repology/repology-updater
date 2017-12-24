@@ -542,6 +542,7 @@
 - { name: icewm2,                      setname: icewm }
 - { name: icon-theme-adwaita,          setname: adwaita-icon-theme        }
 - { name: icecast2,                    setname: icecast                   }
+- { name: icecat-debug,                setname: icecat, addflavor: debug }
 - { name: icon-lang,                   setname: icon                      }
 - { name: [intel-tbb,libtbb],          setname: tbb                       }
 - { name: ir.lv2,                      setname: ir-lv2                    }

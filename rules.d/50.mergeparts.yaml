@@ -15,6 +15,7 @@
 - { namepat: "geany-plugin-.*",        setname: "geany-plugins", family: [ freebsd ] }
 - { namepat: "gimp-docs-.*",           setname: "gimp-docs" }
 - { namepat: ".*gimp-help.*",          setname: "gimp-help" }
+- { namepat: "icecat-(l10n.*)",        setname: "icecat", addflavor: "$1" }
 - { namepat: "kde-(i18n|l10n)-.*",     setname: "kde-i18n" }
 - { namepat: "kde4-l10n-.*",           setname: "kde4-l10n", family: [ pkgsrc ] }
 - { namepat: "kipi-plugin-.*",         setname: "kipi-plugins", family: [ freebsd ] }
