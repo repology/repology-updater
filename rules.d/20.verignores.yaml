@@ -105,6 +105,8 @@
 - { name: cmst,                        verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # manjaro
 - { name: cmus,                        verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: cmus,                        ver: "2.8.0",                 family: fedora,       ignorever: true } # it's rc0
+- { name: colormake,                   verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: colormake,                   ver: ["2.1.0", "0.9.20140504", "0.9.20170221"],     ignorever: true }
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
 - { name: cons,                        ver: "2.3.0.1",                                     ignorever: true } # debian uses this to revert to 2.2.0. http://metadata.ftp-master.debian.org/changelogs/main/c/cons/cons_2.3.0.1+2.2.0-2_changelog "The odd version string is to avoid using epochs" <- that's what epochs are for, dammit
