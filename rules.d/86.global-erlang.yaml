@@ -1,7 +1,14 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Erlang
-- { namepat: "erlang-runtime.*",       last: true }
+- { namepat: "erlang[0-9._-]+",   setname: erlang }
+- { name: erlang-doc,             setname: erlang, addflavor: doc }
+- { name: erlang-man,             setname: erlang, addflavor: man }
+- { name: [erlang-nox,erlang-nox-r17], setname: erlang, addflavor: nox }
+- { name: erlang-otp,             setname: erlang }
+- { namepat: "erlang-runtime[0-9._-]+", setname: erlang, addflavor: runtime }
+
+# Modules
 - { category: dev-erlang,              setname: "erlang:$0", family: [ gentoo ] }
 - { namepat: "erlang-(.*)",            setname: "erlang:$1" }
 

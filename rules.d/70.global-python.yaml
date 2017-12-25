@@ -239,6 +239,7 @@
 - { name: "python:eyed3",              setname: eyed3                     }
 - { name: "python:getdns",             setname: getdns                    }
 - { name: "python:gixy",               setname: gixy                      }
+- { name: "python:gitinspector",       setname: gitinspector              }
 - { name: "python:goobook",            setname: goobook                   }
 - { name: "python:kye",                setname: kye                       }
 - { name: "python:meson",              setname: meson                     }
