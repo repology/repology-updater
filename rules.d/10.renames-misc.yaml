@@ -117,6 +117,7 @@
 - { name: backuppc4,                   setname: backuppc                  }
 - { name: balsa-gtk2,                  setname: balsa                     }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
+- { name: bash-bats,                   setname: bats }
 - { name: bash-interactive,            setname: bash, addflavor: interactive }
 - { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
 - { name: bazaar,                      setname: bzr                       }

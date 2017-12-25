@@ -3,6 +3,8 @@
 # mail client vs. asynchronous synthesis system
 - { name: balsa,                       setname: balsa-synthesis,          category: sci-electronics }
 
+- { name: bats, wwwpart: github.com/cdown/bats, setname: bats-battery-status }
+
 - { name: beanshell,                   setname: beanshell2, family: kaos }
 
 - { name: beast,                       setname: beast-mcmc, wwwpart: beast.bio.ed.ac.uk }
