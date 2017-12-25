@@ -99,7 +99,7 @@
 - { name: cld2,                        ver: "20160820",                                    ignorever: true } # aosc fake (there were no commits to cld2 since 2015)
 - { name: clementine-player,           verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: clonekeen,                   verpat: "0\\.(.*)",                                 setver: "$1" }
-- { name: cloog,                       ver: "0.18.5",                family: [haikuports, aosc, aur], ignorever: true } # unofficial fork
+- { name: cloog,                       ver: "0.18.5",                family: [haikuports, aosc, arch], ignorever: true } # unofficial fork
 - { name: clusterssh,                                                family: gentoo,       ignorever: true } # perl module version mangling rules apply here
 - { name: cmake,                       ver: "3.10.0",                family: mageia,       ignorever: true } # rc
 - { name: cmst,                        verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # manjaro
