@@ -94,7 +94,8 @@
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignorever: true }
 - { name: chakracore,                  wwwpart: cauldrondevelopmentllc,                    ignorever: true } # fork with different versioning
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR
-- { name: ckermit,                     ver: "302",                                         ignorever: true } # debian weirdness
+- { name: ckermit,                     ver: "302",                                         setver: "9.0.$0" }
+- { name: ckermit,                     ver: "9.0.304",                                     devel: true }
 - { name: cld2,                        ver: "20160820",                                    ignorever: true } # aosc fake (there were no commits to cld2 since 2015)
 - { name: clementine-player,           verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: clonekeen,                   verpat: "0\\.(.*)",                                 setver: "$1" }
