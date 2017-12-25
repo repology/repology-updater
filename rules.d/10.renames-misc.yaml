@@ -196,7 +196,7 @@
 - { name: cavez-of-phear,              setname: cavezofphear              }
 - { name: [capnp,capnproto-0.6],       setname: capnproto }
 - { name: cblas-reference,             setname: cblas, addflavor: docs }
-- { name: cblas-tmg,                   setname: cblas                     }
+- { name: cblas-tmg,                   setname: cblas, addflavor: tmg }
 - { name: cde-desktop,                 setname: cdesktopenv               }
 - { name: cdemu,                       setname: cdemu-client, family: gentoo }
 - { name: ceti-2-themes,               setname: ceti-2-theme              }
@@ -210,7 +210,7 @@
 - { name: clanbomber2,                 setname: clanbomber                }
 - { name: clementine-free,             setname: clementine                }
 - { name: cl-asdf,                     setname: asdf                      }
-- { name: clipit-gtk3,                 setname: clipit                    }
+- { name: clipit-gtk3,                 setname: clipit, addflavor: gtk3 }
 - { name: clipperlib,                  setname: polyclipping              }
 - { name: cloud-watch,                 setname: aws-cw-tools              }
 - { name: [clozure-cl,clozurecl],      setname: ccl                       }
@@ -221,10 +221,11 @@
 - { name: cbatticon-gtk2,              setname: cbatticon, addflavor: gtk2 }
 - { name: [ccache-memcached, ccache-memcached-static, ccache-static], setname: ccache, addflavor: true } # freebsd subpackages
 - { name: cdogs,                       setname: cdogs-sdl                 }
-- { name: [cdparanoia-iii,cdparanoia-overread], setname: cdparanoia       }
+- { name: cdparanoia-iii,              setname: cdparanoia }
+- { name: cdparanoia-overread,         setname: cdparanoia, addflavor: overread }
 - { name: [cegui-mk2, cegui_mk-2],     setname: cegui                     }
-- { name: ce-x11,                      setname: ce                        }
-- { name: celestia-nonfree,            setname: celestia }
+- { name: ce-x11,                      setname: ce, addflavor: x11 }
+- { name: celestia-nonfree,            setname: celestia, addflavor: nonfree }
 - { name: cfitsio3,                    setname: cfitsio                   }
 - { name: cglib3,                      setname: cglib                     }
 - { name: charls1,                     setname: charls                    }
