@@ -227,6 +227,7 @@
 - { name: ["python:dbus", "python:dbus-common"], setname: "python:dbus-python" }
 
 # These are more applications than modules, so rename
+- { name: ["python:ampy",ampy,"python:adafruit-ampy",adafruit-ampy], wwwpart: adafruit, setname: ampy }
 - { name: "python:ansible",            setname: ansible                   }
 - { name: "python:awscli",             setname: awscli                    }
 - { name: "python:bzrtools",           setname: bzrtools                  }
