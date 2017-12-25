@@ -688,6 +688,7 @@
 - { name: libunistring2,               setname: libunistring              }
 - { name: [libutil-linux-aarch64,libutil-linux-nosystemd,libutil-linux-nosystemd-debug,libutil-linux-selinux], setname: util-linux, addflavor: true }
 - { name: libunarr,                    setname: unarr                     }
+- { name: [libunrar,libunrar5],        setname: unrar                     }
 - { name: libuv1,                      setname: libuv                     }
 - { name: [libwmf-nox11,libwmf-docs],  setname: libwmf, addflavor: true   }
 - { name: [libx264,lib264-142],        setname: x264                      }
