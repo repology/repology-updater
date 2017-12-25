@@ -110,6 +110,7 @@
 - { name: comedilib,                   ver: "140410",                                      ignorever: true } # pclinuxos weirdness
 - { name: commandergenius,             verpat: ".*[0-9]{4}.*",                             ignorever: true } # nixpkgs weirdness
 - { name: cons,                        ver: "2.3.0.1",                                     ignorever: true } # debian uses this to revert to 2.2.0. http://metadata.ftp-master.debian.org/changelogs/main/c/cons/cons_2.3.0.1+2.2.0-2_changelog "The odd version string is to avoid using epochs" <- that's what epochs are for, dammit
+- { name: containerd,                  ver: "[0-9a-f]{7}",                                 ignorever: true } # crux garbage
 - { name: cowsay,                      ver: "3.04.01",                                     ignorever: true }
 - { name: crack-attack,                ver: "1.1.15_cvs_01",                               ignorever: true }
 - { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
