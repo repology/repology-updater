@@ -213,6 +213,7 @@
 - { name: cl-asdf,                     setname: asdf                      }
 - { name: clipit-gtk3,                 setname: clipit, addflavor: gtk3 }
 - { name: clipperlib,                  setname: polyclipping              }
+- { name: cloog-lts,                   setname: cloog }
 - { name: [cloog-isl,cloog-isl14],     setname: cloog, addflavor: isl }
 - { name: cloog-ppl-gcc4,              setname: cloog-ppl, addflavor: gcc4 }
 - { name: cloud-watch,                 setname: aws-cw-tools              }
