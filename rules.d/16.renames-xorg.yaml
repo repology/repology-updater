@@ -55,11 +55,13 @@
 - { name: [fontutil,font-util,x11-font-util,xorg-font-util,xorg-fontutil], setname: font-util, last: true } # XXX: save from font rules converting it to fonts:util
 
 # libs
-- { namepat: "(?:xorg-|x11-)+(?:lib)?(fontenc|ice|fs|oldx|pciaccess|sm|x11|xau|xaw|xcb|xcomposite|xcursor|xdamage|xdmcp|xevie|xext|xfixes|xfontcache|xft|xi|xinerama|xkbfile|xkbui|xmu|xp|xpm|xrandr|xrender|xres|xscrnsaver|xshmfence|xt|xtrans|xtrap|xtst|xv|xvmc|xxf86dga|xxf86misc|xxf86vm)", setname: "lib$1" }
+- { namepat: "(?:xorg-|x11-)+(?:lib)?(fontenc|ice|fs|oldx|pciaccess|sm|x11|xau|xaw|xcb|xcomposite|xcursor|xdamage|xdmcp|xevie|xext|xfixes|xfontcache|xft|xi|xinerama|xkbcommon|xkbfile|xkbui|xmu|xp|xpm|xrandr|xrender|xres|xscrnsaver|xshmfence|xt|xtrans|xtrap|xtst|xv|xvmc|xxf86dga|xxf86misc|xxf86vm)", setname: "lib$1" }
 - { name: [libx32-libxcb,mingw-w64-libxcb,xorg-libxcb], setname: libxcb }
 - { name: [libx32-libxrender,xorg-libxrender,xrender], setname: libxrender }
 - { name: [lib32-xcb-util-renderutil,libxcb-render-util,xorg-xcb-render-util], setname: xcb-util-renderutil }
 - { name: libx11-nokeyboardgrab, setname: libx11 }
+- { name: libxkbcommon-doc, setname: libxkbcommon, addflavor: doc }
+- { name: libxkbcommon-x11, setname: libxkbcommon, addflavor: x11 }
 
 # libs exceptions
 - { name: [xorg-pixman, xorg-libpixman, libpixman, pixman-static], setname: pixman }

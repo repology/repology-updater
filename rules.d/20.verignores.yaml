@@ -242,6 +242,8 @@
 - { name: ibus-sunpinyin,              ver: "3.0.0",                                       ignorever: true } # aosc fake, it's rc1
 - { name: icon,                        verpat: "[0-9]{3}",                                 ignorever: true } # XXX: transform + problem
 - { name: icebreaker,                  ver: "1.21",                                        setver: "1.2.1" }
+- { name: icecat,                                                                          setver: "$0gnu1" } # it uses gnu suffix, in most cases it's gnu1, but there were gnu2 as well
+- { name: icecat,                      verpat: "(.*gnu.*)gnu1",                            setver: "$1" }
 - { name: icu-le-hb,                   ver: "1.0.3.3",                                     ignorever: true } # fake (FreeBSD)
 - { name: inkscape,                    ver: "0.92",                  family: [ fedora ],   ignorever: true } # prerepease
 - { name: inotify-tools,               ver: ["3.14.01","3.14pl0"],                         ignorever: true } # fake
@@ -518,6 +520,7 @@
 - { name: util-linux,                  ver: "2.31",                  family: fedora,       ignorever: true } # fake, it's 2.31rc1
 
 # V
+- { name: vbindiff,                    ver: "3.0",                   family: [fedora,mageia], ignorever: true } # fake, it's 3.0beta5
 - { name: vcdimager,                   ver: "0.7.24cvs",                                   ignorever: true } # opensuse garbage
 - { name: vid.stab,                    verpat: ".*[0-9a-f]{7}.*",                          ignorever: true } # git commit
 - { name: vlc,                                                       family: kaos,         ignorever: true } # fakes like 2.2.85 where actual version is 2.2.8
