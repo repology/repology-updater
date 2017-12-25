@@ -821,6 +821,10 @@
 - { namepat: "swig[0-9._-]+",          setname: swig }
 - { namepat: "swig-(.*)", family: macports, setname: swig, addflavor: "$1" } # split by supported language
 
+- { namepat: "syslog-ng[0-9._-]+",     setname: syslog-ng }
+- { name: [syslog-ng-afamqp,syslog-ng-geoip,syslog-ng-http,syslog-ng-json,syslog-ng-mongodb,syslog-ng-redis,syslog-ng-smtp,syslog-ng-sql], setname: syslog-ng, addflavor: yes }
+- { name: syslog-ng-nosystemd, setname: syslog-ng, addflavor: nosystemd }
+
 - { namepat: "tcl8[0-9._-]+",          setname: tcl }
 - { name: tcl, verpat: ".*20[0-9]{6}.*", ignorever: true } # 8.7 snapshots
 
