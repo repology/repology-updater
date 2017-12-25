@@ -529,6 +529,10 @@
 
 - { namepat: "llvm[0-9.-]+",           setname: llvm }
 
+- { name: mediawiki, category: app-emacs, setname: emacs-mediawiki }
+- { namepat: "mediawiki[0-9._-]+",     setname: mediawiki }
+- { name: mediawiki-lts,               setname: mediawiki }
+
 - { namepat: "msynctool[0-9]+",        setname: msynctool }
 
 - { namepat: "libmediaart[0-9._-]+",   setname: libmediaart }

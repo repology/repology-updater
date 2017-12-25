@@ -582,6 +582,7 @@
 - { name: kdiff3-qt,                   setname: kdiff3                    }
 - { name: [kid3-qt, kid3-qt4, kid3-qt5, kid4-qt, kid3-cli], setname: kid3 }
 - { name: kiki-the-nano-bot,           setname: kiki                      }
+- { name: [knot-dns,knot-lts,knot1,knot2], setname: knot }
 - { name: krita3,                      setname: krita                     }
 - { name: kyoto-cabinet,               setname: kyotocabinet              }
 - { name: kyoto-tycoon,                setname: kyototycoon               }
