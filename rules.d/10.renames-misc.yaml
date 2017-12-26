@@ -854,6 +854,8 @@
 
 # P
 - { name: pacmanarena,                 setname: pacman-arena              }
+- { name: palemoon-26,                 setname: palemoon }
+- { name: palemoon-bin,                setname: palemoon, addflavor: bin }
 - { name: panoply-nodesktop,           setname: panoply, addflavor: nodesktop }
 - { name: [pasystray-gtk2,pasystray-gtk2-standalone,pasystray-gtk3-standalone], setname: pasystray }
 - { name: perlbrew,                    setname: "perl:app-perlbrew"       }
