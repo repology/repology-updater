@@ -503,6 +503,7 @@
 - { name: getopt,                      setname: java-getopt, wwwpart: urbanophile.com }
 - { name: getopt,                      setname: java-getopt, family: sisyphus }
 - { name: gnupg1compat,                setname: gnupg                     }
+- { name: [godot-pulse, godot-tools],  setname: godot, addflavor: true }
 - { name: google-breakpad,             setname: breakpad                  }
 - { name: golden-cheetah,              setname: goldencheetah             }
 - { name: [google-gflags,libgflags],   setname: gflags                    }
