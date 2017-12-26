@@ -101,7 +101,7 @@ def graph_repo_metapackages_newest(repo):
 
 @ViewRegistrar('/graph/repo/<repo>/metapackages_newest_percent.svg')
 def graph_repo_metapackages_newest_percent(repo):
-    return graph_repo_generic(repo, lambda s: safe_percent(s['num_metapackages_newest'], s['num_metapackages'] - s['num_metapackages_unique']), '#5cb85c', '%')
+    return graph_repo_generic(repo, lambda s: safe_percent(s['num_metapackages_newest'], s['num_metapackages_newest'] + s['num_metapackages_outdated']), '#5cb85c', '%')
 
 
 @ViewRegistrar('/graph/repo/<repo>/metapackages_outdated.svg')
@@ -111,7 +111,7 @@ def graph_repo_metapackages_outdated(repo):
 
 @ViewRegistrar('/graph/repo/<repo>/metapackages_outdated_percent.svg')
 def graph_repo_metapackages_outdated_percent(repo):
-    return graph_repo_generic(repo, lambda s: safe_percent(s['num_metapackages_outdated'], s['num_metapackages'] - s['num_metapackages_unique']), '#d9534f', '%')
+    return graph_repo_generic(repo, lambda s: safe_percent(s['num_metapackages_outdated'], s['num_metapackages_newest'] + s['num_metapackages_outdated']), '#d9534f', '%')
 
 
 @ViewRegistrar('/graph/repo/<repo>/metapackages_unique.svg')
