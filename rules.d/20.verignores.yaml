@@ -159,6 +159,7 @@
 - { name: epydoc,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # fedora garbage
 - { name: erlang-cl,                   verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: ethtool,                     verpat: "6.*",                                      ignorever: true } # XXX: check if https://www.kernel.org/pub/software/network/ethtool/ and ethtool from https://sourceforge.net/projects/gkernel/ are the same project. Anyway, the former is fresh and the latter is ancient crap from 2007
+- { name: eventlog,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: evolution,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: evolution-data-server,       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: evolution-ews,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
