@@ -65,6 +65,9 @@ class RepositoryManager:
             if 'sortname' not in repo:
                 repo['sortname'] = repo['name']
 
+            if 'singular' not in repo:
+                repo['singular'] = repo['desc'] + ' package'
+
         self.statedir = statedir
         self.fetch_retries = fetch_retries
         self.fetch_retry_delay = fetch_retry_delay
@@ -313,6 +316,7 @@ class RepositoryManager:
                 'packagelinks': repository.get('packagelinks', []),
                 'family': repository['family'],
                 'desc': repository['desc'],
+                'singular': repository['singular'],
                 'type': repository['type'],
                 'color': repository.get('color'),
             } for repository in self.__GetRepositories(reponames)

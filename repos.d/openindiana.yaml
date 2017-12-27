@@ -4,6 +4,7 @@
 - name: openindiana
   type: repository
   desc: OpenIndiana packages
+  singular: OpenIndiana package
   family: openindiana
   sources:
     - name: [hipster, hipster-encumbered]

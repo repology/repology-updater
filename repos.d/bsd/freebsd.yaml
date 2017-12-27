@@ -4,6 +4,7 @@
 - name: freebsd
   type: repository
   desc: FreeBSD Ports
+  singular: FreeBSD port
   family: freebsd
   color: '990000'
   sources:

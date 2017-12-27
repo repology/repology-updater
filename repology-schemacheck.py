@@ -80,6 +80,7 @@ schemas = {
         {
             Required('name'): str,
             'sortname': str,
+            'singular': str,
             Required('type'): Any('repository', 'site', 'modules'),
             Required('desc'): str,
             Required('family'): Any(*families),
