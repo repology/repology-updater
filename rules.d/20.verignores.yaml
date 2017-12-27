@@ -411,6 +411,7 @@
 - { name: pciids,                                                    family: sisyphus,     ignorever: true } # ALT pick random date instead of official date version
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignorever: true }
 - { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
+- { name: pilot-link,                  ver: "0.12.15",               family: gobolinux,    ignorever: true } # gobolinux fake
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignorever: true }
 - { name: pingus,                      verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: pmount,                      ver: "0.9.99",                                      setver: "0.9.99_alpha" }
