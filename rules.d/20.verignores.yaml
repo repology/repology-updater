@@ -89,6 +89,7 @@
 - { name: ca-certificates,                                           family: [alpine,crux], ignorever: true } # see https://hg.mozilla.org/projects/nss/log/tip/lib/ckfw/builtins/certdata.txt for valid dates
 - { name: calf,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # slackbuilds garbage
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
+- { name: cdrtools,                    ver: "3.02",                  family: [debuntu,rosa], ignorever: true } # fake, it's alpha
 - { name: cegui,                       verpat: "6\\..*",                                   setver: "0.$0" } # it's 0.6.2!
 - { name: cfr,                         verpat: "[0-9]{3}",                                 setver: "0_$0" } # blackarch, broken schema
 - { name: cfssl,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
@@ -393,6 +394,7 @@
 - { name: openssh,                     verpat: "([0-9]+\\.[0-9]+)\\.([0-9]+)",             setver: "$1p$2" } # pkgrc: it's X.YpZ!
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignorever: true } # freshcode, pZ part missing
 - { name: openxcom,                    verpat: ".*201[789].*",                             ignorever: true } # git snapshots
+- { name: opus,                        ver: "1.3",                   family: fedora,       ignorever: true } # fake, it's beta
 - { name: orbit2,                      ver: "2.14.20",               family: sisyphus,     ignorever: true } # alt fake
 - { name: oxygen-gtk3,                 verlonger: 3,                 family: kaos,         ignorever: true }
 
