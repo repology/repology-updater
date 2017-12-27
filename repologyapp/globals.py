@@ -21,17 +21,28 @@ from repology.config import config
 from repology.database import Database
 from repology.repoman import RepositoryManager
 
+from repologyapp.fontmeasurer import FontMeasurer
+
 
 __all__ = [
     'get_db',
+    'get_text_width',
     'repometadata',
-    'reponames'
+    'reponames',
 ]
+
 
 
 repoman = RepositoryManager(config['REPOS_DIR'], 'dummy')
 repometadata = repoman.GetMetadata(config['REPOSITORIES'])
 reponames = repoman.GetNames(config['REPOSITORIES'])
+
+
+__fontmeasurer = FontMeasurer(config['BADGE_FONT'], 11)
+
+
+def get_text_width(text):
+    return __fontmeasurer.GetDimensions(str(text))[0]
 
 
 def get_db():

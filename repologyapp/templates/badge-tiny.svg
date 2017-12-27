@@ -1,5 +1,5 @@
-{% set leftwidth = 94 %}
-{% set rightwidth = 26 %}
+{% set leftwidth = "in repositories"|text_width + 10 %}
+{% set rightwidth = num_families|text_width + 10 %}
 {% set height = 20 %}
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ leftwidth + rightwidth }}" height="{{ height }}">
 	<clipPath id="clip">

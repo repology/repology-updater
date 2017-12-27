@@ -1,5 +1,5 @@
-{% set repo_colwidth = 190 %}
-{% set version_colwidth = 90 %}
+{% set version_colwidth = entries|map(attribute='package.version')|map('text_width')|max + 10 %}
+{% set repo_colwidth = [entries|map(attribute='repo.desc')|map('text_width')|max + 10, 160 - version_colwidth]|max %}
 {% set rowheight = 20 %}
 {% set hdrheight = 25 %}
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ repo_colwidth + version_colwidth }}" height="{{ hdrheight + entries|length * rowheight }}">
@@ -44,9 +44,8 @@
 				<text x="{{ repo_colwidth - 5 }}" y="{{ hdrheight + rowheight * loop.index0 + 14 }}">{{ repo.desc }}</text>
 			</g>
 			<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-				{%- set truncatedver = package.version|escape|truncate(13, True, "...", 0) -%}
-				<text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ hdrheight + rowheight * loop.index0 + 15 }}" fill="#010101" fill-opacity=".3">{{ truncatedver }}</text>
-				<text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ hdrheight + rowheight * loop.index0 + 14 }}">{{ truncatedver }}</text>
+				<text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ hdrheight + rowheight * loop.index0 + 15 }}" fill="#010101" fill-opacity=".3">{{ package.version }}</text>
+				<text x="{{ repo_colwidth + version_colwidth/2.0 }}" y="{{ hdrheight + rowheight * loop.index0 + 14 }}">{{ package.version }}</text>
 			</g>
 		{% endfor %}
 	</g>

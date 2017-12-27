@@ -19,7 +19,7 @@ import sys
 
 import flask
 
-from repologyapp.globals import get_db, repometadata, reponames
+from repologyapp.globals import get_db, get_text_width, repometadata, reponames
 from repologyapp.template_helpers import css_for_versionclass, maintainer_to_links, maintainers_to_group_mailto
 from repologyapp.template_helpers import for_page, is_fallback_maintainer, pkg_format, url_for_self
 from repologyapp.views import Registry as ViewRegistry
@@ -45,6 +45,7 @@ app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['css_for_versionclass'] = css_for_versionclass
 app.jinja_env.filters['maintainer_to_links'] = maintainer_to_links
 app.jinja_env.filters['maintainers_to_group_mailto'] = maintainers_to_group_mailto
+app.jinja_env.filters['text_width'] = get_text_width
 
 # templates: custom tests
 app.jinja_env.tests['for_page'] = for_page
