@@ -70,6 +70,7 @@
 - { name: "perl:bucardo",              setname: bucardo }
 - { name: "perl:get_iplayer",          setname: get_iplayer }
 - { name: "perl:mail-spamassassin",    setname: spamassassin }
+- { name: "perl:pilot-link",           setname: pilot-link }
 - { name: "perl:spamassassin",         setname: spamassassin }
 - { name: "perl:unburden-home-dir",    setname: unburden-home-dir }
 - { name: "perl:dns-ldns", wwwpart: nlnetlabs, setname: ldns, addflavor: perl } # part of

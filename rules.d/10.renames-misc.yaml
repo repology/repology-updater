@@ -861,6 +861,7 @@
 - { name: [pasystray-gtk2,pasystray-gtk2-standalone,pasystray-gtk3-standalone], setname: pasystray }
 - { name: perlbrew,                    setname: "perl:app-perlbrew"       }
 - { name: pioneerspacesim,             setname: pioneer                   }
+- { name: pilot-link-libs,             setname: pilot-link, addflavor: libs }
 - { name: pdns-common,                 setname: pdns }
 - { name: [pdnsrec,powerdns-recursor], setname: pdns }
 - { name: pgplot5,                     setname: pgplot }
