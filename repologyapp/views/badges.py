@@ -88,6 +88,7 @@ def badge_version_for_repo(repo, name):
         {'Content-type': 'image/svg+xml'}
     )
 
+
 @ViewRegistrar('/badge/version-only-for-repo/<repo>/<name>.svg')
 def badge_version_only_for_repo(repo, name):
     packages = get_db().GetMetapackage(name)

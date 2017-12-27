@@ -17,11 +17,11 @@
 
 import flask
 
+from repologyapp.fontmeasurer import FontMeasurer
+
 from repology.config import config
 from repology.database import Database
 from repology.repoman import RepositoryManager
-
-from repologyapp.fontmeasurer import FontMeasurer
 
 
 __all__ = [
@@ -30,7 +30,6 @@ __all__ = [
     'repometadata',
     'reponames',
 ]
-
 
 
 repoman = RepositoryManager(config['REPOS_DIR'], 'dummy')
