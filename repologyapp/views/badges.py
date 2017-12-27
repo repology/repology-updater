@@ -74,3 +74,20 @@ def badge_version_for_repo(repo, name):
         ),
         {'Content-type': 'image/svg+xml'}
     )
+
+@ViewRegistrar('/badge/version-only-for-repo/<repo>/<name>.svg')
+def badge_version_only_for_repo(repo, name):
+    best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
+
+    if repo not in best_pkg_by_repo:
+        flask.abort(404)
+
+    return (
+        flask.render_template(
+            'badge-tiny-version-only.svg',
+            repo=repo,
+            version=best_pkg_by_repo[repo].version,
+            versionclass=best_pkg_by_repo[repo].versionclass,
+        ),
+        {'Content-type': 'image/svg+xml'}
+    )

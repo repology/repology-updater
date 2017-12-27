@@ -74,6 +74,26 @@
 
 </section>
 
+<section>
+
+<h2>Tiny per-repository badges with version only</h2>
+
+<p>These show version in specific repository. Repository name is not included, so these are useful if you already have table or other formatting with repository names.</p>
+
+<table class="table">
+	<tr><th>Repository</th><th>Sample</th><th>Markdown code</th><th>HTML code</th></tr>
+	{% for repo in repos %}
+	<tr>
+		<td>{{ repometadata[repo].desc }}</td>
+		<td><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for('badge_version_only_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}"></a></td>
+		<td><code>[![{{ repometadata[repo].singular }}]({{ REPOLOGY_HOME }}{{ url_for('badge_version_only_for_repo', name=name, repo=repo) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})</code></td>
+		<td><code>&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_version_only_for_repo', name=name, repo=repo)}}&quot; alt=&quot;{{ repometadata[repo].singular }}&quot;&gt;<br>&lt;/a&gt;</code></td>
+	</tr>
+	{% endfor %}
+</table>
+
+</section>
+
 </article>
 
 </div> {#- container #}
