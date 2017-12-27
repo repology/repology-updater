@@ -1,5 +1,6 @@
+{% set version_trim = 20 %}
 {% set leftwidth = repometadata[repo].singular|text_width + 10 %}
-{% set rightwidth = version|text_width + 10 %}
+{% set rightwidth = version|truncate(version_trim, True, "...", 0)|escape|text_width + 10 %}
 {% set height = 20 %}
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ leftwidth + rightwidth }}" height="{{ height }}">
 	<clipPath id="clip">
@@ -16,8 +17,8 @@
 			<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
 				<text x="{{ leftwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ repometadata[repo].singular }}</text>
 				<text x="{{ leftwidth / 2.0 }}" y="14">{{ repometadata[repo].singular }}</text>
-				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ version }}</text>
-				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="14">{{ version }}</text>
+				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="15" fill="#010101" fill-opacity=".3">{{ version|truncate(version_trim, True, "...", 0)|escape }}</text>
+				<text x="{{ leftwidth + rightwidth / 2.0 }}" y="14">{{ version|truncate(version_trim, True, "...", 0)|escape }}</text>
 			</g>
 		</g>
 	</a>
