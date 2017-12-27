@@ -26,6 +26,8 @@
 
 <article>
 
+<section>
+
 <h2>Big badge</h2>
 
 <p>This shows versions and up to date status of this package in all known repositories.</p>
@@ -41,20 +43,36 @@
 &lt;/a&gt;
 </pre>
 
+</section>
+
+<section>
+
 <h2>Tiny badge with number of repositories</h2>
 
 <p>This shows total number of repository families featuring this package. Repository family is an aggregation of related repositories, e.g. Debian Stable, Testing, Unstable and Experimental all belong to a single family and are thus only counted once.</p>
 
 {{ badge_example('badge_tiny_repos') }}
 
+</section>
+
+<section>
+
 <h2>Tiny per-repository badges with version</h2>
 
 <p>These show version in specific repository. Pick as many as you want!</p>
 
-{% for repo in repos %}
-<h3>{{ repometadata[repo].desc }}</h3>
-{{ badge_example('badge_version_for_repo', alt=repometadata[repo].desc + " package", badge_args={"repo":repo}) }}
-{% endfor %}
+<table class="table">
+	<tr><th>Sample</th><th>Markdown code</th><th>HTML code</th></tr>
+	{% for repo in repos %}
+	<tr>
+		<td><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for('badge_version_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}"></a></td>
+		<td><code>[![{{ repometadata[repo].singular }}]({{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repo) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})</code></td>
+		<td><code>&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repo)}}&quot; alt=&quot;{{ repometadata[repo].singular }}&quot;&gt;<br>&lt;/a&gt;</code></td>
+	</tr>
+	{% endfor %}
+</table>
+
+</section>
 
 </article>
 
