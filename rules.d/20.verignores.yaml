@@ -555,7 +555,7 @@
 # W
 - { name: w3m,                         verlonger: 3,                                       ignorever: true }
 - { name: w3m,                         verpat: ".*20[0-9]{6}.*",                           ignorever: true }
-- { name: warsow,                      ver: "2.10",                  family: debuntu,      ignorever: true } # playdeb weirdnes
+- { name: [warsow,warsow-data],        ver: "2.10",                  family: debuntu,      ignorever: true } # playdeb weirdnes
 - { name: widelands,                   verpat: "(?:b|build|0\\.)?([0-9]{2})(?:\\.0)?",     setver: "build$1" }
 - { name: widelands,                   verpat: "[^b].*",                                   ignorever: true }
 - { name: winexe,                      ver: "1.1",                   family: debuntu,      ignorever: true } # snapshot
