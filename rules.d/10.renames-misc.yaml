@@ -76,6 +76,7 @@
 - { name: [atlas-cpp,atlascpp,libatlascpp], setname: atlas-c++            }
 - { name: [atlas,atlas-devel],         setname: atlas-c++, category: devel, family: [ freebsd, openbsd ] } # don't mix with math/atlas
 - { name: [atlas-with-lapack,atlas-lapack], setname: atlas                }
+- { name: atop, family: freebsd,       setname: atop-freebsd              } # fork
 - { namepat: "ats2(.*)",               setname: "ats$1"                   }
 - { name: apache-archiva,              setname: archiva                   }
 - { name: apache-arrow,                setname: arrow                     }
