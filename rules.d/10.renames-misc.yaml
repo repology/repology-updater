@@ -15,6 +15,7 @@
 # A
 - { name: aap,                         setname: a-a-p                     }
 - { name: abuse_sdl,                   setname: abuse                     }
+- { name: abuse-free,                  setname: abuse, addflavor: free }
 - { name: abbaye,                      setname: abbaye-des-morts          }
 - { name: abbayedesmorts,              setname: abbaye-des-morts          }
 - { name: abbayedesmorts-gpl,          setname: abbaye-des-morts          }
@@ -120,7 +121,7 @@
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
 - { name: bash-bats,                   setname: bats }
 - { name: bash-interactive,            setname: bash, addflavor: interactive }
-- { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch ] }
+- { name: bass,                        setname: beneath-a-steel-sky,      family: [ freebsd, gentoo, openbsd, arch, opensuse ] }
 - { name: bazaar,                      setname: bzr                       }
 - { name: bcel5_3,                     setname: bcel                      }
 - { name: beastbse,                    setname: beast                     }
@@ -271,6 +272,7 @@
 - { name: cssh,                        setname: clusterssh                }
 - { name: ctpp,                        setname: ctpp2                     }
 - { name: ctypes-sh,                   setname: ctypes.sh                 }
+- { name: cubosphere-data,             setname: cubosphere, addflavor: data }
 - { name: cuneiform-linux,             setname: cuneiform                 }
 - { name: cutecom-legacy,              setname: cutecom                   }
 - { name: [curl-ca-bundle,curl-http2,curl-openssl], setname: curl, addflavor: true }
@@ -357,8 +359,8 @@
 - { name: emotiongenericplayers,       setname: emotion-generic-players   }
 - { name: emulation-station,           setname: emulationstation          }
 - { name: enblend,                     setname: enblend-enfuse            }
-- { name: endgame-singularity,         setname: singularity,              family: [ freebsd ] }
-- { name: endgame-singularity-music,   setname: singularity-music,        family: [ freebsd ] } # for consistency
+- { name: endgame-singularity,         setname: singularity               }
+- { name: endgame-singularity-music,   setname: singularity-music         }
 - { name: enemyterritory,              setname: enemy-territory           }
 - { name: enigma_sdl,                  setname: enigma                    }
 - { name: entagged-tageditor,          setname: entagged,                 family: [ gentoo ]  }
@@ -439,6 +441,7 @@
 - { name: freeplane-srcbuild,          setname: freeplane                 }
 - { name: [freeradius-server, freeradius3], setname: freeradius           }
 - { name: frozenbubble2,               setname: frozen-bubble             }
+- { name: fuzzylite5,                  setname: fuzzylite                 }
 
 # G
 - { name: g++,                         setname: gcc, addflavor: true }
@@ -587,6 +590,7 @@
 - { name: [kid3-qt, kid3-qt4, kid3-qt5, kid4-qt, kid3-cli], setname: kid3 }
 - { name: kiki-the-nano-bot,           setname: kiki                      }
 - { name: [knot-dns,knot-lts,knot1,knot2], setname: knot }
+- { name: kobo-deluxe,                 setname: kobodeluxe                }
 - { name: krita3,                      setname: krita                     }
 - { name: kyoto-cabinet,               setname: kyotocabinet              }
 - { name: kyoto-tycoon,                setname: kyototycoon               }
@@ -637,7 +641,7 @@
 - { name: libgeoip,                    setname: geoip                     }
 - { name: [libgeotiff-dfsg,libgeotiff-epsg], setname: libgeotiff          }
 - { name: libgetopt-java,              setname: java-getopt               }
-- { name: libglpng,                    setname: glpng                     }
+- { name: [libglpng1,libglpng],        setname: glpng                     }
 - { name: libgnurl,                    setname: gnurl                     }
 - { name: libgom,                      setname: gom                       }
 - { name: libgranite,                  setname: granite                   }
@@ -966,6 +970,7 @@
 - { namepat: "speeddreams(-data)?",    setname: "speed-dreams$1"          }
 - { name: spotify-client,              setname: spotify, addflavor: client }
 - { name: [spotify-stable,spotify094], setname: spotify }
+- { name: springrts,                   setname: spring }
 - { name: stellarium-qt4,              setname: stellarium                }
 - { name: stepmania-devel,             setname: stepmania,                family: [ freebsd ] }
 - { namepat: "stonesoup(?:-sdl)?",     setname: stone-soup                }

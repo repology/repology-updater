@@ -13,6 +13,7 @@
 - { name: [0ad,0ad-data],                                                                  devel: true }
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignorever: true } # opensuse
 - { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignorever: true } # pkgsrc
+- { name: 7kaa-music,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # opensuse games
 
 # A
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5", "1.4p5" ],        ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
@@ -26,12 +27,14 @@
 - { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
 - { name: agda-stdlib,                                               family: gentoo,       ignorever: true } # documented broken versioning
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
+- { name: [alienarena, alienarena-data], verpat: ".*20[0-9]{6}.*",                         ignorever: true }
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { name: amule,                       ver: "2.4.0",                 family: [ mageia, debuntu ], ignorever: true } # unreleased
 - { name: amule,                       verlonger: 3,                 family: [ kaos ],     ignorever: true } # fake
 - { name: amule,                       verpat: ".*git.*",                                  ignorever: true } # snapshot
 - { name: android-tools,               verpat: "[0-9]{4,}.*",                              ignorever: true } # fake
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
+- { name: asc,                         verpat: "[0-9]+\\.[0-9]+\\.[0-9]{3,}\\.[0-9]+",     devel: true } # http://terdon.asc-hq.org/asc/builds/
 - { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
 - { name: appmenu-qt,                  verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: apr,                         verlonger: 3,                                       ignorever: true } # FreeBSD
@@ -64,6 +67,7 @@
 
 # B
 - { name: baloo,                       ver: "15.04.26",                                    ignorever: true }
+- { name: bass,                        verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: bastet,                      ver: "0.43.1.2015083000",                           ignorever: true }
 - { name: bats,                        ver: "1.0",                   family: sisyphus,     ignorever: true } # totally fake
 - { name: biniax2,                     ver: "2.1.30",                                      ignorever: true } # 2 is not part of the version
@@ -91,6 +95,7 @@
 - { name: calf,                        verpat: "20[0-9]{6}.*",                             ignorever: true } # slackbuilds garbage
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: cdrtools,                    ver: "3.02",                  family: [debuntu,rosa], ignorever: true } # fake, it's alpha
+- { name: ceferino,                    verpat: ".*svn.*",                                  ignorever: true }
 - { name: cegui,                       verpat: "6\\..*",                                   setver: "0.$0" } # it's 0.6.2!
 - { name: cfr,                         verpat: "[0-9]{3}",                                 setver: "0_$0" } # blackarch, broken schema
 - { name: cfssl,                       verpat: "20[0-9]{6}.*",                             ignorever: true }
@@ -172,6 +177,7 @@
 # F
 - { name: f3,                          verpat: ".*unstable",                               ignorever: true } # nix garbage
 - { name: faifa,                       verpat: ".*svn.*",            family: debuntu,      ignorever: true }
+- { name: fairymax,                    verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: fann,                        verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: fatrat,                      verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: fdupes,                      verpat: "1\\.[0-9]{2}",                             ignorever: true } # it has switched to 3 componennts (e.g. 1.51 -> 1.6.0 -> 1.6.1)
@@ -181,6 +187,7 @@
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
 - { name: firmware-mod-kit,            verpat: "0([1-9][0-9]*)",                           setver: "0.$1" } # blackarch, broken schema
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
+- { name: flight-of-the-amazon-queen,  verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: flvstreamer,                 ver: "2.1.c.1",                                     setver: "2.1c1" }
 - { name: flvstreamer,                 ver: "2.1c",                                        setver: "2.1c0" }
 - { name: fontconfig,                  verpat: "[0-9]+\\.[0-9]+\\.9[0-9]+",                devel: true }
@@ -233,6 +240,8 @@
 - { name: gnome-tweak-tool,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnat-util-gcc,               verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: gnuastro,                    verlonger: 2,                                       devel: true } # alphas
+- { name: gnubg,                       verpat: "20[0-9]{6}",                               ignorever: true }
+- { name: gnushogi,                    verpat: ".*git.*",                                  ignorever: true }
 - { name: goldencheetah,               verpat: ".*dev.*",                                  ignorever: true }
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignorever: true }
 - { name: gsettings-desktop-schemas,   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -269,6 +278,7 @@
 - { name: iputils,                     verpat: "[0-9]{8}\\.[0-9a-f]{7,}",                  ignorever: true } # arch: commit id in version
 
 # J
+- { name: ja2-stracciatella,           verpat: ".*[0-9]{4}.*",                             ignorever: true } # year and 8296.9202397c2 from aur
 - { name: jade,                        verpat: "1\\.2\\.1-[0-9]{2}.*",                     ignorever: true } # nix, adds debian patchlevel
 - { name: john,                        verpat: "1.8.0.2",            family: sisyphus,     ignorever: true } # ldv@altlinux.org
 - { name: josm,                        verpat: "0\\.0\\.svn([0-9]+)",                      setver: "$1" }
@@ -285,6 +295,8 @@
 - { name: kicad,                       verpat: "20[0-9][0-9].*",                           ignorever: true }
 - { name: kismet,                      verpat: "2008.*",                                   ignorever: true } # XXX: transform + problem
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignorever: true }
+- { name: kqlives,                     verpat: "20[0-9]{6}",                               ignorever: true }
+- { name: krank,                       ver: "20[0-9]{6}.*",                             ignorever: true }
 - { name: krename,                     verpat: "20[0-9]{6}.*",                             ignorever: true }
 
 # L
@@ -392,6 +404,7 @@
 - { name: opencollada,                 verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: openjade,                    verpat: ".*(p|pre|devel)[0-9]*",                    devel: true }
 - { name: openjade,                    ver: "1.3.3",                 family: [pclinuxos,mageia], ignorever: true } # fake, it's 1.3.3pre1
+- { name: openjk,                      verpat: "[0-9]{10}.*",                              ignorever: true }
 - { name: openlierox,                  ver: "0.58",                  family: [fedora,debuntu], ignorever: true } # there's no 0.58, only 0.58beta3
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignorever: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignorever: true }
@@ -423,6 +436,7 @@
 - { name: polari,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignorever: true } # third component is a build number, it's not a part of official version
 - { name: powertop,                    verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
+- { name: prboom-plus,                 verpat: ".*svn.*",                                  ignorever: true }
 - { name: procmail,                    verpat: "[0-9]+",                                   ignorever: true } # homebrew
 - { name: properties-cpp,              verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: proxychains-ng,              verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
@@ -442,6 +456,7 @@
 - { name: qgis,                                                      family: kaos,         ignorever: true } # snapshot with random version
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignorever: true } # uses unofficial fork (dead as well)
 - { name: qt5-webkit,                  ver: "5.212.0",               family: fedora,       ignorever: true } # lie, it's 5.212.0alpha2
+- { name: quadra,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: quota,                       verpat: "20[0-9]{6}.*",                             ignorever: true } # crux
 - { name: qupzilla,                                                  family: kaos,         ignorever: true } # snapshot with random version
 
@@ -467,6 +482,11 @@
 - { name: rust,                        verpat: ".*dev",                                    ignorever: true } # haikuports garbage
 
 # S
+- { name: s25rttr,                     verpat: "20[0-9]{6}",                               devel: true } # official nightlies
+- { name: sauerbraten,                 verpat: "(?:0\\.)*(20[0-9]{2})[^0-9]?([0-9]{2})[^0-9]?([0-9]{2})(.*)", setver: "$1_$2_$3$4" } # fix version
+- { name: sauerbraten,                 verpat: "(20[0-9]{2}_[0-9]{2}_[0-9]{2})[a-z_-]+",   setver: "$1" } # remove release name (like _collect_edition)
+- { name: sauerbraten,                 verpat: "20[0-9]{2}_[0-9]{2}_[0-9]{2}",             last: true } # good format
+- { name: sauerbraten,                                                                     ignorever: true } # otherwise, garbage (e.g. 2013.02.03.20161112 from chocolatey)
 - { name: sbcl,                        verpat: ".*20[0-9]{6}.*",                           ignorever: true } # nixpkgs garbage
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: scite,                       ver: "375",                                         ignorever: true } # pclinuxos
