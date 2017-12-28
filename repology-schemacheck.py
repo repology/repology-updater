@@ -97,7 +97,8 @@ schemas = {
                     'subrepo': str,
 
                     'compression': Any('xz', 'bz2', 'gz'),
-                    'sparse_checkout': [str]
+                    'sparse_checkout': [str],
+                    'allowed_archs': [str],
                 }
             ],
             'shadow': bool,
