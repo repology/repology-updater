@@ -135,6 +135,8 @@
 - { name: bicyclerepair-py27,          setname: bicyclerepair             }
 - { name: billard-gl,                  setname: billardgl                 }
 - { name: [bird-v6,bird6],             setname: bird                      }
+- { name: blackshades-elite-svn,       setname: blackshadeselite, ignorever: true }
+- { name: blackshades-svn,             setname: blackshades, ignorever: true }
 - { name: [blas-reference,blas-docs],  setname: blas, addflavor: docs     }
 - { name: blas-tmg,                    setname: blas                      }
 - { name: blasphemer-wad,              setname: blasphemer                }
