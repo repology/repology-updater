@@ -16,6 +16,8 @@
     - desc: openSUSE:Games wiki page
       url: https://en.opensuse.org/openSUSE:Games
   packagelinks:
-    - desc: Package details
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/games/{name}'
+    - desc: Package details on software.opensuse.org
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]

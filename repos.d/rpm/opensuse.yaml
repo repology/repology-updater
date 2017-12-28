@@ -35,7 +35,10 @@
     - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
-    - desc: Package details
+    # NOTE: openSUSE:Leap:42.2:Update automatically inherits openSUSE:Leap:42.3
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:42.2:Update/{name}'
+    - desc: Package details on software.opensuse.org
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]
 
@@ -73,7 +76,10 @@
     - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
-    - desc: Package details
+    # NOTE: openSUSE:Leap:42.3:Update automatically inherits openSUSE:Leap:42.3
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:42.3:Update/{name}'
+    - desc: Package details on software.opensuse.org
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]
 
@@ -98,6 +104,8 @@
     - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
-    - desc: Package details
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/openSUSE:Factory/{name}'
+    - desc: Package details on software.opensuse.org
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]
