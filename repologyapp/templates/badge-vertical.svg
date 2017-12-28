@@ -1,5 +1,5 @@
-{% set version_trim = 15 %}
-{% set version_colwidth = entries|map(attribute='package.version')|map('truncate', version_trim, True, "...", 0)|map('escape')|map('text_width')|max + 10 if entries else 0 %}
+{% set version_trim = 13 %}
+{% set version_colwidth = [entries|map(attribute='package.version')|map('truncate', version_trim, True, "...", 0)|map('escape')|map('text_width')|max + 10, 60]|max if entries else 0 %}
 {% set repo_colwidth = [entries|map(attribute='repo.desc')|map('text_width')|max + 10, 160 - version_colwidth]|max if entries else 210 %}
 {% set rowheight = 20 %}
 {% set hdrheight = 25 %}
