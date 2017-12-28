@@ -1,4 +1,4 @@
-{% set version_trim = 20 %}
+{% set version_trim = 30 %}
 {% set width = version|truncate(version_trim, True, "...", 0)|escape|text_width + 10 %}
 {% set height = 20 %}
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ width }}" height="{{ height }}">
