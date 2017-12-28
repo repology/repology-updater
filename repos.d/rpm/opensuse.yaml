@@ -17,6 +17,11 @@
       parser: Repodata
       url: http://download.opensuse.org/source/distribution/leap/42.2/repo/non-oss/suse/
       subrepo: main/non-oss
+    # NOTE:
+    # I suspect that corresponding update repositories should be added there,
+    # however I couldn't find them on download.opensuse.org.
+    # http://download.opensuse.org/source/update/leap/42.2/oss/ is empty and
+    # http://download.opensuse.org/update/leap/42.2/oss/ is binary packages we can't use
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -43,6 +48,11 @@
       parser: Repodata
       url: http://download.opensuse.org/source/distribution/leap/42.3/repo/non-oss/suse/
       subrepo: main/non-oss
+    # NOTE:
+    # I suspect that corresponding update repositories should be added there,
+    # however I couldn't find them on download.opensuse.org.
+    # http://download.opensuse.org/source/update/leap/42.3/oss/ is empty and
+    # http://download.opensuse.org/update/leap/42.3/oss/ is binary packages we can't use
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -59,6 +69,11 @@
   family: opensuse
   color: '6da741'
   sources:
+    # NOTE1: there are two url schemes, apparently with same contents
+    # http://download.opensuse.org/source/tumbleweed/repo/oss/suse/
+    # http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
+    # NOTE2: this lacks non-oss repo, but the corresponding repositories
+    # are incomplete, lacking repodata directory
     - name: data
       fetcher: Repodata
       parser: Repodata
