@@ -105,7 +105,7 @@ def FillPackagesetVersions(packages):
     packages = PackagesetSortByVersions(packages)
 
     # branch prototypes
-    default_branchproto = BranchPrototype(VersionClass.newest, lambda package: not package.devel)
+    default_branchproto = BranchPrototype(VersionClass.newest, lambda package: True)
 
     branchprotos = [
         BranchPrototype(VersionClass.devel, lambda package: package.devel),
@@ -136,6 +136,10 @@ def FillPackagesetVersions(packages):
                 if branchprotos[branchproto_idx].Check(package):
                     matching_branchproto_indexes.add(branchproto_idx)
 
+        # if there's at least one package with a non-default branch, that branch is a candidate
+        # if there's only one such candidate branch (not counting the default branch), choose it
+        # this works when there are 1.0r1 (devel=False) and 1.0rc1 (devel=True) versions
+        matching_branchproto_indexes.discard(default_branchproto_idx)
         final_branchproto_idx = list(matching_branchproto_indexes)[0] if len(matching_branchproto_indexes) == 1 else default_branchproto_idx
 
         if final_branchproto_idx == current_branchproto_idx:
