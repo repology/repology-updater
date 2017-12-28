@@ -1,6 +1,6 @@
 {% set version_trim = 15 %}
-{% set version_colwidth = entries|map(attribute='package.version')|map('truncate', version_trim, True, "...", 0)|map('escape')|map('text_width')|max + 10 %}
-{% set repo_colwidth = [entries|map(attribute='repo.desc')|map('text_width')|max + 10, 160 - version_colwidth]|max %}
+{% set version_colwidth = entries|map(attribute='package.version')|map('truncate', version_trim, True, "...", 0)|map('escape')|map('text_width')|max + 10 if entries else 0 %}
+{% set repo_colwidth = [entries|map(attribute='repo.desc')|map('text_width')|max + 10, 160 - version_colwidth]|max if entries else 210 %}
 {% set rowheight = 20 %}
 {% set hdrheight = 25 %}
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ repo_colwidth + version_colwidth }}" height="{{ hdrheight + entries|length * rowheight }}">
@@ -17,13 +17,13 @@
 
 		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="15" font-weight="bold">
 			<a xlink:href="{{ REPOLOGY_HOME }}{{ url_for('metapackage_packages', name=name ) }}">
-				{% if entries %}
-					<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">Packaging status</text>
-					<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">Packaging status</text>
-				{% else %}
-					<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">No known packages yet</text>
-					<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">No known packages yet</text>
-				{% endif %}
+			{% if entries %}
+				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">Packaging status</text>
+				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">Packaging status</text>
+			{% else %}
+				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">No known packages yet</text>
+				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">No known packages yet</text>
+			{% endif %}
 			</a>
 		</g>
 
