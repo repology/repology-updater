@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import sys
 import xml.etree.ElementTree
 
 from repology.package import Package
@@ -35,16 +36,23 @@ def SanitizeVersion(version):
 
 
 class RepodataParser():
-    def __init__(self):
-        pass
+    def __init__(self, allowed_archs=None):
+        self.allowed_archs = allowed_archs
 
     def Parse(self, path):
         result = []
 
         root = xml.etree.ElementTree.parse(path)
 
+        skipped_archs = {}
+
         for entry in root.findall('{http://linux.duke.edu/metadata/common}package'):
             pkg = Package()
+
+            arch = entry.find('{http://linux.duke.edu/metadata/common}arch').text
+            if self.allowed_archs and arch not in self.allowed_archs:
+                skipped_archs[arch] = skipped_archs.get(arch, 0) + 1
+                continue
 
             pkg.name = entry.find('{http://linux.duke.edu/metadata/common}name').text
             version = entry.find('{http://linux.duke.edu/metadata/common}version').attrib['ver']
@@ -61,5 +69,8 @@ class RepodataParser():
                 pkg.maintainers = GetMaintainers(packager)
 
             result.append(pkg)
+
+        for arch, numpackages in sorted(skipped_archs.items()):
+            print('WARNING: skipping {} packages(s) with disallowed architecture {}'.format(numpackages, arch), file=sys.stderr)
 
         return result
