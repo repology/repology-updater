@@ -186,6 +186,8 @@
 - { name: node, family: pclinuxos, setname: nodejs }
 - { name: node, warning: "please classify me" }
 
+- { name: nml, wwwpart: ropas, setname: "$0-lang" }
+
 - { name: nvi, verpat: "2\\..*",       setname: nvi2 }
 
 - { name: omi,                         setname: omi-ftpmirror, category: ftp } # vs. Open Management Infrastructure
