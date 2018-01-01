@@ -201,6 +201,7 @@
 - { name: "fonts:quattrocento",        ver: "2.000",                 family: arch,         ignorever: true } # webpage says it's 1.1
 - { name: "fonts:ubuntu",              ver: "1.0",                   family: pclinuxos,    ignorever: true } # no such version on the website
 - { name: foomatic,                    verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
+- { name: fplll,                       verpat: ".*git.*",                                  ignorever: true }
 - { name: freecad,                     ver: "0.17.12018",            family: freebsd,      ignorever: true }
 - { name: freeciv,                     ver: "2.6.0",                 family: fedora,       ignorever: true }
 - { name: freeminer,                   verlonger: 4,                 family: fdroid,       ignorever: true }
@@ -335,6 +336,7 @@
 - { name: libpng,                      verpat: "1\\.7\\.0beta.*",    family: freshcode,    ignorever: true }
 - { name: libsndfile,                  ver: "1.0.29",                family: vcpkg,        ignorever: true }
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignorever: true } # pkgsrc, gobo
+- { name: libssh,                      ver: "0.8.0",                 family: debuntu,      ignorever: true }
 - { name: libtheora,                   ver: "1.2.0",                 family: openmandriva, ignorever: true } # lie, not released yet
 - { name: libtorrent,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # nix fake
 - { name: libunwind,                   verpat: "20[0-9]{6}.*",                             ignorever: true } # freebsd snapshot

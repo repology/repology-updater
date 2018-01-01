@@ -82,6 +82,7 @@
     - pylint-plugin-utils
     - pyode
     - pypoppler
+    - pyprind
     - pyproj
     - pyqt4
     - pyqt5
@@ -108,6 +109,7 @@
     - pyviennacl
     - pyxdg
     - rabbyt
+    - rawkit
     - redis-py
     - redis-py-cluster
     - robotframework
@@ -228,6 +230,7 @@
 - { name: "python:axolotl-curve25519", setname: "python:python-axolotl-curve25519" }
 - { name: "python:proj", verpat: "1\\.9\\..*", setname: "python:pyproj"   }
 - { name: ["python:dbus", "python:dbus-common"], setname: "python:dbus-python" }
+- { name: "python:colour", wwwpart: colour-science, setname: "python:colour-science" }
 
 # These are more applications than modules, so rename
 - { name: ["python:ampy",ampy,"python:adafruit-ampy",adafruit-ampy], wwwpart: adafruit, setname: ampy }
