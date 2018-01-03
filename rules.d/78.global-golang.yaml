@@ -6,3 +6,6 @@
 
 # modules
 - { name: [ mmark, "go:github-miekg-mmark" ], setname: "go:mmark" }
+
+# ungo
+- { name: "go:hugo", setname: "hugo-sitegen" }
