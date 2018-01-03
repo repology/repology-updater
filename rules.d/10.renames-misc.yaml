@@ -347,6 +347,7 @@
 - { name: cloud-watch,                 setname: aws-cw-tools              }
 - { name: [clozure-cl,clozurecl],      setname: ccl                       }
 - { name: code,                        setname: vscode, family: sisyphus } # XXX: problem!
+- { name: coin-or-ipopt,               setname: ipopt }
 - { name: collector-sidecar,           setname: graylog-collector-sidecar }
 - { name: color-code,                  setname: colorcode                 }
 - { name: couchpotatoserver,           setname: couchpotato               }
@@ -815,6 +816,7 @@
 - { name: libsdl2,                     setname: sdl2 }
 - { name: libsdl_gfx13,                setname: sdl-gfx }
 - { name: [compat-sfml16],             setname: sfml                      }
+- { name: libspeexdsp,                 setname: speexdsp }
 - { name: [libstfl,libstfl0],          setname: stfl                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libsysstat-qt5,              setname: libsysstat                }
