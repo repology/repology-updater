@@ -134,6 +134,7 @@ class TestFlask(unittest.TestCase):
 
     def test_maintaners(self):
         self.checkurl_html('/maintainers/a/', has=['amdmi3@freebsd.org'])
+        self.checkurl_html('/maintainers/?search=%20AMDmi3%20', has=['amdmi3@freebsd.org'])
 
     def test_maintaner(self):
         self.checkurl_html('/maintainer/amdmi3@freebsd.org', has=['mailto:amdmi3@freebsd.org', 'kiconvtool'])
@@ -157,6 +158,7 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/metapackages/..l/', has=['kiconvtool', 'chromium-bsu'], hasnot=['virtualbox'])
 
         self.checkurl_html('/metapackages/?search=iconv', has=['kiconvtool'], hasnot=['chromium-bsu'])
+        self.checkurl_html('/metapackages/?search=%20ICONV%20', has=['kiconvtool'], hasnot=['chromium-bsu'])
         self.checkurl_html('/metapackages/?category=games-action', has=['chromium-bsu'], hasnot=['kiconvtool'])
         self.checkurl_html('/metapackages/?inrepo=freebsd', has=['kiconvtool'], hasnot=['oracle-xe'])
         self.checkurl_html('/metapackages/?notinrepo=freebsd', has=['oracle-xe'], hasnot=['kiconvtool'])

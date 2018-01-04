@@ -55,19 +55,19 @@ class MetapackagesFilterInfo:
     def GetRequest(self):
         request = MetapackageRequest()
         if 'search' in self.args:
-            request.NameSubstring(self.args['search'])
+            request.NameSubstring(self.args['search'].strip().lower())
         if 'maintainer' in self.args:
-            request.Maintainer(self.args['maintainer'])
+            request.Maintainer(self.args['maintainer'].strip().lower())
         if 'category' in self.args:
-            request.Category(self.args['category'])
+            request.Category(self.args['category'].strip())  # case sensitive (yet)
         if 'inrepo' in self.args:
-            request.InRepo(self.args['inrepo'])
+            request.InRepo(self.args['inrepo'].strip().lower())
         if 'notinrepo' in self.args:
-            request.NotInRepo(self.args['notinrepo'])
+            request.NotInRepo(self.args['notinrepo'].strip().lower())
         if 'minspread' in self.args:
-            request.MinFamilies(self.args['minspread'])
+            request.MinFamilies(self.args['minspread'].strip().lower())
         if 'maxspread' in self.args:
-            request.MaxFamilies(self.args['maxspread'])
+            request.MaxFamilies(self.args['maxspread'].strip().lower())
         if 'outdated' in self.args:
             request.Outdated()
 

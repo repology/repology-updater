@@ -34,7 +34,7 @@ def maintainers(bound=None):
         bound = bound[:-2]
 
     search = flask.request.args.to_dict().get('search')
-    search = None if search is None else search.strip()
+    search = None if search is None else search.strip().lower()
 
     minmaintainer, maxmaintainer = get_db().GetMaintainersRange()
 
