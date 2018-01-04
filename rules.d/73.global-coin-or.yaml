@@ -17,3 +17,5 @@
 - { name: coindylp, setname: coin-or-dylp }
 - { name: coinflopcpp, setname: coin-or-flopc++ }
 - { name: coinlemon, setname: coin-or-lemon }
+
+- { name: coin-or-ipopt, setname: ipopt }

@@ -347,7 +347,6 @@
 - { name: cloud-watch,                 setname: aws-cw-tools              }
 - { name: [clozure-cl,clozurecl],      setname: ccl                       }
 - { name: code,                        setname: vscode, family: sisyphus } # XXX: problem!
-- { name: coin-or-ipopt,               setname: ipopt }
 - { name: collector-sidecar,           setname: graylog-collector-sidecar }
 - { name: color-code,                  setname: colorcode                 }
 - { name: couchpotatoserver,           setname: couchpotato               }
