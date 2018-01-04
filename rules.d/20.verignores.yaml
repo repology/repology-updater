@@ -517,7 +517,7 @@
 - { name: solvespace,                  verpat: ".*[0-9]{8}.*",                             ignorever: true } # nix garbage
 - { name: speex,                       verlonger: 3,                 family: openindiana,  ignorever: true }
 - { name: speexdsp,                    ver: "1.2.0.3",                                     ignorever: true } # it's 1.2rc3
-- { name: speexdsp,                    ver: "1.2",                   family: [fedora,mageia,openmandriva], ignorever: true } # it's 1.2rc3
+- { name: speexdsp,                    ver: "1.2",                   family: [fedora,mageia,openmandriva,sisyphus], ignorever: true } # it's 1.2rc3
 - { name: sqlite2,                     verpat: ".*_[0-9]+",                                ignorever: true } # slackbuilds using debian patch
 - { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             ignorever: true }
 - { name: sqlninja,                    ver: ["0.2.999"],                                   ignorever: true } # it's 0.2.999-alpha1
