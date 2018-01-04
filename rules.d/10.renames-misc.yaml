@@ -1122,6 +1122,7 @@
 - { name: theora,                      setname: libtheora }
 - { name: thttpd,                      setname: sthttpd, family: gentoo } # actually fork of thttpd; XXX: problem
 - { name: tigervnc-devel,              setname: tigervnc, ignorever: true }
+- { name: tint-tetris,                 setname: tint }
 - { name: [tintin,tintinxx],           setname: tintin++                  }
 - { name: [tiled-java,tiled-qt],       setname: tiled                     }
 - { name: timidity, verpat: "2\\..*",  setname: timidity++                }

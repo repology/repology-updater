@@ -257,6 +257,8 @@
 # GNU time vs. xemacs module
 - { name: time, setname: xemacs-time, wwwpart: xemacs } # gentoo
 
+- { name: tint, category: Graphics, setname: tint-photo-editor }
+
 - { name: tg, wwwpart: vysheng/tg, setname: telegram-cli }
 
 - { name: tracker, setname: tracker-modplayer, category: audio }
