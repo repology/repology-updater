@@ -65,9 +65,9 @@ class MetapackagesFilterInfo:
         if 'notinrepo' in self.args:
             request.NotInRepo(self.args['notinrepo'].strip().lower())
         if 'minspread' in self.args:
-            request.MinFamilies(self.args['minspread'].strip().lower())
+            request.MinFamilies(self.args['minspread'])
         if 'maxspread' in self.args:
-            request.MaxFamilies(self.args['maxspread'].strip().lower())
+            request.MaxFamilies(self.args['maxspread'])
         if 'outdated' in self.args:
             request.Outdated()
 
