@@ -358,6 +358,8 @@
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
 
 # M
+- { name: m17n-db,                     ver: "1.8.0",                 family: fedora,       ignorever: true }
+- { name: m17n-lib,                    ver: "1.8.0",                 family: fedora,       ignorever: true }
 - { name: mame,                        ver: "0153s",                                       ignorever: true } # pclinuxos
 - { name: magic,                       verpat: "8\\.2\\..*",                               devel: true }
 - { name: magic,                       verpat: "[0-9]\\.[0-9]\\.[0-9]{3}",                 unignorever: true } # unignore some good -devel's
