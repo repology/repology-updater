@@ -435,6 +435,7 @@
 - { name: pilot-link,                  ver: "0.12.15",               family: gobolinux,    ignorever: true } # gobolinux fake
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignorever: true }
 - { name: pingus,                      verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
+- { name: plowshare-modules,                                                               ignorever: true } # no official releases
 - { name: pmount,                      ver: "0.9.99",                                      setver: "0.9.99_alpha" }
 - { name: pmount,                      verpat: "0\\.9\\.99.*",                             devel: true }
 - { name: polari,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
