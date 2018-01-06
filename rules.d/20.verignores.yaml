@@ -387,7 +387,7 @@
 - { name: mygui,                       verpat: ".*git.*",                                  ignorever: true }
 
 # N
-- { name: ncurses,                     verpat: "6\\.0-20[0-9]{6}.*",                       ignorever: true } # macports
+- { name: ncurses,                     verpat: ".*20[0-9]{6}.*",                           ignorever: true }
 - { name: net-tools,                   verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: netcat-openbsd,              verpat: "20[0-9]{6}.*",                             ignorever: true } # pkgsrc garbage
 - { name: netpbm,                      verpat: "[0-9]{4}",                                 ignorever: true } # aosc garbage

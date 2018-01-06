@@ -929,6 +929,8 @@
 # N
 - { name: nbd-server,                  setname: nbd                       }
 - { name: ncbi-blast-plus,             setname: ncbi-blast+               }
+- { name: ncurses5,                    setname: ncurses }
+- { name: [ncurses-full,ncurses-with-gpm,ncursesw], setname: ncurses, addflavor: true }
 - { name: netlogo-bin,                 setname: netlogo, addflavor: bin }
 - { name: neverball-data,              setname: neverball, addflavor: data }
 - { name: [libnettle,nettle4],         setname: nettle                    }
