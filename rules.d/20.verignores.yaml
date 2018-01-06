@@ -352,6 +352,7 @@
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignorever: true }
 - { name: llvm,                        verpat: ".*git",                                    ignorever: true }
 - { name: llvm,                        verpat: ".*r.*",                                    ignorever: true } # macports fake 6.0
+- { name: llvm-6.0,                    verpat: ".*r.*",                                    ignorever: true } # XXX
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignorever: true } # fake
 - { name: lz4,                         verpat: "[0-9]+",                                   ignorever: true }
