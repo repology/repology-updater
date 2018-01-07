@@ -277,6 +277,7 @@
 - { name: inotify-tools,               ver: ["3.14.01","3.14pl0"],                         ignorever: true } # fake
 - { name: iozone,                      verpat: "[0-9]{3}",                                 ignorever: true } # aosc fake
 - { name: iputils,                     verpat: "[0-9]{8}\\.[0-9a-f]{7,}",                  ignorever: true } # arch: commit id in version
+- { name: iverilog,                    verpat: ".*20[0-9]{2}\\.?[0-9]{2}\\.?[0-9]{2}.*",   ignorever: true } # nixpkgs garbage
 
 # J
 - { name: ja2-stracciatella,           verpat: ".*[0-9]{4}.*",                             ignorever: true } # year and 8296.9202397c2 from aur
