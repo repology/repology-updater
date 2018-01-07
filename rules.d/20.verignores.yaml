@@ -564,7 +564,7 @@
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignorever: true } # not yet released
 - { name: unicode-ucd,                 verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: unrar,                       verpat: "5\\.50.*",                                 ignorever: true } # it uses 5.5.X schema
-- { name: unzip,                       ver: "6.10c11",                                     ignorever: true } # haikuports
+- { name: unzip,                       verpat: ".*c.*",                                    ignorever: true } # haikuports
 - { name: urlview,                     ver: ["20131023","0.9.20131021"],                   ignorever: true }
 - { name: urw-fonts,                   verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      ignorever: true } # fake
