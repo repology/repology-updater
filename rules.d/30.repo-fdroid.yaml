@@ -10,6 +10,7 @@
 - { name: i2p,                                                       family: [ fdroid ], unignore: true }
 - { name: kouchat,                                                   family: [ fdroid ], unignore: true }
 - { name: linphone,                                                  family: [ fdroid ], unignore: true }
+- { name: minilens,                                                  family: [ fdroid ], unignore: true }
 - { name: mupdf,                                                     family: [ fdroid ], unignore: true }
 - { name: onscripter,                                                family: [ fdroid ], unignore: true }
 - { name: reicast,                                                   family: [ fdroid ], unignore: true }
