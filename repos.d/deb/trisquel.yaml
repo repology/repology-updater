@@ -1,0 +1,104 @@
+###########################################################################
+# Trisquel
+###########################################################################
+- name: trisquel_6_0
+  type: repository
+  desc: Trisquel 6.0
+  family: debuntu
+  color: '669fe7'
+  sources:
+    - name: [ toutatis/main, toutatis-updates/main ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  tags: [ all, production, trisquel ]
+
+- name: trisquel_6_0_backports
+  type: repository
+  desc: Trisquel 6.0 backports
+  family: debuntu
+  color: '669fe7'
+  sources:
+    - name: [ toutatis-backports/main ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  tags: [ all, production, trisquel ]
+
+- name: trisquel_7_0
+  type: repository
+  desc: Trisquel 7.0
+  family: debuntu
+  color: '669fe7'
+  sources:
+    - name: [ belenos/main, belenos-updates/main ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  tags: [ all, production, trisquel ]
+
+- name: trisquel_7_0_backports
+  type: repository
+  desc: Trisquel 7.0 backports
+  family: debuntu
+  color: '669fe7'
+  sources:
+    - name: [ belenos-backports/main ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  tags: [ all, production, trisquel ]
+
+- name: trisquel_8_0
+  type: repository
+  desc: Trisquel 8.0
+  family: debuntu
+  color: '669fe7'
+  sources:
+    - name: [ flidas/main, flidas-updates/main ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  tags: [ all, production, trisquel ]
+
+- name: trisquel_8_0_backports
+  type: repository
+  desc: Trisquel 8.0 backports
+  family: debuntu
+  color: '669fe7'
+  sources:
+    - name: [ flidas-backports/main ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Trisquel home
+      url: https://trisquel.info/
+  tags: [ all, production, trisquel ]
