@@ -666,6 +666,8 @@
 - { name: hannah,                      setname: help-hannahs-horse,       family: [ debuntu ]  } # recheck
 - { name: hashdeep,                    setname: md5deep }
 - { name: hashcat-legacy,              setname: hashcat }
+- { name: haxe2,                       setname: haxe }
+- { name: haxe_bin,                    setname: haxe, addflavor: bin }
 - { name: hedgewars-server,            setname: hedgewars, addflavor: server }
 - { name: hg-flow,                     setname: hgflow }
 - { name: [hostapd-rtl,hostapd-rtl871xdrv,hostapd1], setname: hostapd }
