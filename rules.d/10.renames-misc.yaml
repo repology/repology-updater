@@ -1065,6 +1065,7 @@
 # S
 - { name: s3-backer,                   setname: s3backer                  }
 - { name: [saga-gis,saga-gis-ltr],     setname: saga                      }
+- { name: sauerbraten-data,            setname: sauerbraten, addflavor: data }
 - { name: [s3fs,s3fs-fuse],            setname: "fusefs:s3fs"             }
 - { name: schism,                      setname: schismtracker             }
 - { name: sdl_lopan,                   setname: sdllopan                  }
