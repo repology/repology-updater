@@ -750,6 +750,7 @@
 
 - { namepat: "(?:lib)?readline[0-9._-]*", setname: readline }
 
+- { namepat: "ruby-doc",               setname: ruby, addflavor: doc }
 - { namepat: "ruby-?[0-9.]+",          setname: ruby }
 
 - { name: [samba-docs],                setname: samba, addflavor: docs }
