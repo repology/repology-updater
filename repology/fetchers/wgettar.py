@@ -34,6 +34,6 @@ class WgetTarFetcher():
 
         with StateDir(statepath) as statedir:
             tarpath = os.path.join(statedir, '.temporary.tar')
-            RunSubprocess(['wget', '--timeout=60', '-O', tarpath, self.url], logger)
+            RunSubprocess(['wget', '--timeout=60', '--tries=1', '-O', tarpath, self.url], logger)
             RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
             os.remove(tarpath)
