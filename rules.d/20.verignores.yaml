@@ -255,6 +255,7 @@
 
 # H
 - { name: hashcat,                     verpat: "3\\.[1-9][0-9]",                           ignorever: true } # it uses X.Y.Z scheme
+- { name: haxe,                        verpat: "4\\..*",             family: freshcode,    ignorever: true } # there's no 4.0.0
 - { name: hex2bin,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR snapshot
 - { name: hostapd,                     verpat: "20[0-9]{2}.*",       family: openwrt,      ignorever: true }
 - { name: hmmer,                       verpat: ".*b.*",                                    devel: true }
