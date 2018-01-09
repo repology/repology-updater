@@ -751,13 +751,6 @@
 - { namepat: "(?:lib)?readline[0-9._-]*", setname: readline }
 
 - { namepat: "ruby-?[0-9.]+",          setname: ruby }
-- { name: ruby, verpat: "1\\.8.*",     setname: ruby18 }
-- { name: ruby, verpat: "1\\.9.*",     setname: ruby19 }
-- { name: ruby, verpat: "2\\.0.*",     setname: ruby20 }
-- { name: ruby, verpat: "2\\.1.*",     setname: ruby21 }
-- { name: ruby, verpat: "2\\.2.*",     setname: ruby22 }
-- { name: ruby, verpat: "2\\.3.*",     setname: ruby23 }
-- { name: ruby, verpat: "2\\.4.*",     setname: ruby24 }
 
 - { name: [samba-docs],                setname: samba, addflavor: docs }
 - { namepat: "samba[0-9.-]+",          setname: samba }
