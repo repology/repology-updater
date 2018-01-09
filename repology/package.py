@@ -193,7 +193,7 @@ class Package:
         CheckBool(self.devel, 'devel')
         CheckBool(self.verfixed, 'verfixed')
 
-        CheckList(self.flavors, 'flavors', Alphanumeric, Lowercase)
+        CheckList(self.flavors, 'flavors', NoNewlines, Stripped, NonEmpty)
 
         CheckDict(self.extrafields, 'extrafields', NoWhitespace, NonEmpty)
 
