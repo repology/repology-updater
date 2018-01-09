@@ -71,6 +71,7 @@
     - pycassa
     - pycha
     - pychart
+    - pydocstyle
     - pyexcelerator
     - pygeoip
     - pygraphviz
