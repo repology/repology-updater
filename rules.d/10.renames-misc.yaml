@@ -1055,6 +1055,7 @@
 - { name: redeclipse-data,             setname: redeclipse, addflavor: data }
 - { name: renpy6,                      setname: renpy }
 - { name: [renpy-demos,renpy-sdk],     setname: renpy, addflavor: true }
+- { name: resynthesizer,               setname: gimp-resynthesizer }
 - { name: ringo,                       setname: ringojs                   }
 - { name: [rox-term,roxterm-gtk2],     setname: roxterm                   }
 - { name: rrdtool12,                   setname: rrdtool                   }
