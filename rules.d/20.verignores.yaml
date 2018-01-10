@@ -186,6 +186,7 @@
 - { name: fetch,                                                     family: ravenports,   ignorever: true } # fake
 - { namepat: "firebird[0-9._-]*",      verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.[0-9]{5,}.*", setver: "$1" }
 - { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignorever: true } # openbsd, chocolatey, pkgsrc
+- { name: figlet,                      ver: "222",                                         ignorever: true } # haikuports
 - { name: firmware-mod-kit,            verpat: "0([1-9][0-9]*)",                           setver: "0.$1" } # blackarch, broken schema
 - { name: flare,                       ver: "15.1",                                        ignorever: true } # actually old 0.15
 - { name: flight-of-the-amazon-queen,  verpat: "20[0-9]{6}",                               ignorever: true }
