@@ -30,20 +30,28 @@ class FDroidParser():
         root = xml.etree.ElementTree.parse(path)
 
         for application in root.findall('application'):
-            pkg = Package()
-            pkg.name = application.find('name').text
-            pkg.version = application.find('marketversion').text
-            pkg.licenses.append(application.find('license').text)
-            pkg.category = application.find('category').text
-
+            name = application.find('name').text
+            license_ = application.find('license').text
+            category = application.find('category').text
             www = application.find('web').text
+            appid = application.find('id').text
 
-            if www:
-                pkg.homepage = www
+            upstream_version_code = int(application.find('marketvercode').text)
+            for package in application.findall('package'):
+                version_code = int(package.find('versioncode').text)
+                version = package.find('version').text
 
-            pkg.extrafields['id'] = application.find('id').text
-
-            if pkg.name and pkg.version:
-                result.append(pkg)
+                if name and version:
+                    result.append(
+                        Package(
+                            name=name.strip(),
+                            version=version,
+                            licenses=[license_],
+                            category=category,
+                            homepage=www if www else None,
+                            extrafields={'id': appid},
+                            devel=version_code > upstream_version_code,
+                        )
+                    )
 
         return result
