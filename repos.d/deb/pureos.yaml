@@ -1,0 +1,34 @@
+###########################################################################
+# PureOS
+###########################################################################
+- name: pureos_green
+  type: repository
+  desc: PureOS green
+  family: debuntu
+  color: '000000'
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: 'http://repo.pureos.net/pureos/dists/green/main/source/Sources.xz'
+      compression: xz
+  repolinks:
+    - desc: PureOS home
+      url: https://pureos.net/
+  tags: [ all, production, pureos ]
+
+- name: pureos_landing
+  type: repository
+  desc: PureOS landing
+  family: debuntu
+  color: '000000'
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: 'http://repo.pureos.net/pureos/dists/landing/main/source/Sources.xz'
+      compression: xz
+  repolinks:
+    - desc: PureOS home
+      url: https://pureos.net/
+  tags: [ all, production, pureos ]
