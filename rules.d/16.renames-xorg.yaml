@@ -49,7 +49,7 @@
 
 # utils
 - { namepat: "xkeyboard-config-(?:chromebook|hhk|rub)", setname: xkeyboard-config }
-- { namepat: "(?:xorg-|x11-)+(bdftopcf|beforelight|editres|gccmakedep|imake|luit|makedepend|mkfontdir|mkfontscale|setxkbmap|transset|twm|xauth|xcb-util-cursor|xcb-util-image|xcb-util-keysyms|xcb-util-renderutil|xcb-util-wm|xcb-util-xrm|xfontsel|xkeyboard-config|xprop|xset|xsetmode|xsetpointer|xsetroot|xtrans)", setname: "$1" }
+- { namepat: "(?:xorg-|x11-)+(bdftopcf|beforelight|editres|gccmakedep|imake|luit|makedepend|mkfontdir|mkfontscale|setxkbmap|transset|twm|xauth|xcb-util-cursor|xcb-util-image|xcb-util-keysyms|xcb-util-renderutil|xcb-util-wm|xcb-util-xrm|xfontsel|xkeyboard-config|xprop|xset|xsetmode|xsetpointer|xsetroot|xtrans|xmessage)", setname: "$1" }
 - { namepat: "(?:xorg-|x11-)+(xtrans)-devel", setname: "$1", ignorever: true }
 - { name: xorg-xtransproto, setname: xtrans } # ravenports manually split this out of xtrans
 - { name: [fontutil,font-util,x11-font-util,xorg-font-util,xorg-fontutil], setname: font-util, last: true } # XXX: save from font rules converting it to fonts:util

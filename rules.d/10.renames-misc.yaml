@@ -659,6 +659,7 @@
 - { name: gucharmap-gtk2,              setname: gucharmap, addflavor: gtk2 }
 - { name: gucharmap7,                  setname: gucharmap                 }
 - { name: [gvim,gvim-gtk2],            setname: vim, addflavor: true }
+- { name: gxmessage-gtk2,              setname: gxmessage, addflavor: gtk2 }
 - { namepat: "gzdoom[0-9.-]+",         setname: gzdoom                    }
 
 # H
