@@ -9,7 +9,7 @@
 
 - { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns)[0-9]*", verpat: "4\\..*", setname: "qt4-$1" }
 - { namepat: "(qt.*)-opensource-src(-gles)?", setname: "$1", addflavor: "$2" }
-- { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns|webkit|widgets|qml|base|graphicaleffects|webchannel|qttools|qtlocation)[0-9]*(-docs|-examples)?", verpat: "5\\..*", setname: "qt5-$1", addflavor: "$2" }
+- { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns|webkit|widgets|qml|base|graphicaleffects|webchannel|qttools|location)[0-9]*(-docs|-examples)?", verpat: "5\\..*", setname: "qt5-$1", addflavor: "$2" }
 - { name: [qtbase-opensource-src, qtbase-opensource-src-gles, qt5-base-nosystemd], verpat: "5\\..*", setname: qt5-base }
 - { name: [qtgraphicaleffects-opensource-src,qtgraphicaleffects-docindex,qtgraphicaleffects-html,qtgraphicaleffects-qch], verpat: "5\\..*", setname: qt5-graphicaleffects }
 - { name: [qt5-base-dev], verpat: "5\\..*", setname: qt5-base, ignorever: True }
