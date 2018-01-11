@@ -28,6 +28,7 @@
 - { name: agda-stdlib,                                               family: gentoo,       ignorever: true } # documented broken versioning
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
 - { name: [alienarena, alienarena-data], verpat: ".*20[0-9]{6}.*",                         ignorever: true }
+- { name: amarok,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # nix garbage
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
 - { name: amule,                       ver: "2.4.0",                 family: [ mageia, debuntu ], ignorever: true } # unreleased
 - { name: amule,                       verlonger: 3,                 family: [ kaos ],     ignorever: true } # fake
@@ -88,6 +89,7 @@
 - { name: brotli,                      verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: brickout,                    verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # it's clearly 2002.06.09 as stated on the website
 - { name: bully,                       verpat: "1\\.1.+",                                  ignorever: true } # snapshots, latest is 1.1
+- { name: busybox,                     ver: "1.28.0",                                      devel: true }
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignorever: true } # nix fake; real version is 1.0.6
 
 # C
@@ -228,6 +230,7 @@
 - { name: geocode-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glade,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glib-networking,             verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: glibc,                       verlonger: 2,                                       ignorever: true } # assorted garbage
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignorever: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignorever: true } # not released yet
 - { name: gnash,                       verpat: ".*git.*",                                  ignorever: true } # snapshots
