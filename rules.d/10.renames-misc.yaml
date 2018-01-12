@@ -907,7 +907,7 @@
 - { name: mesa-libglu,                 setname: libglu                    }
 - { namepat: "mesa-lts-.*",            setname: mesa                      }
 - { name: [glw,mesa-glw,mesa-libglw],  setname: libglw                    }
-- { name: [microcode-intel,microcode-data-intel], setname: intel-microcode }
+- { name: [microcode-intel,microcode-data-intel,intel-microcode-netbsd], setname: intel-microcode }
 - { name: microcode, family: [mageia, rosa], setname: intel-microcode } # limit family for safely
 - { name: mirrormagic-sdl,             setname: mirrormagic               }
 - { name: moonlander,                  setname: moon-lander,              family: [ freebsd, openbsd ] }
