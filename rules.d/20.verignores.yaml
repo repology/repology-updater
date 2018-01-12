@@ -1,5 +1,9 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+# fix versions which separate qualifier and number; limit number with 2 digits
+# to only catch `real` beta versions, not revision numbers and snapshot dates
+- { verpat: "(.*(?:alpha|beta|rc|prerelease|patch|pl))[^a-z0-9]([0-9]{1,2})",              setver: "$1$2" }
+
 # global devel rule
 - { verpat: ".*(?:alpha|beta|dev|rc|prerelease|pre)[0-9._-]*",                             devel: true }
 
