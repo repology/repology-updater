@@ -1,0 +1,148 @@
+###########################################################################
+# Wikidata
+#
+# This dumps the data on software projects with arch package defined
+###########################################################################
+- name: wikidata
+  type: site
+  desc: Wikidata
+  family: wikidata
+  color: "339966"
+  sources:
+    - name: result.json
+      fetcher: File
+      parser: WikidataJson
+      url: 'https://query.wikidata.org/sparql'
+      post:
+        format: json
+        query: |
+          # SPARQL request to get software information
+          #
+          # It's nested: while the inner request gathers information
+          # for each version of specific software item, outer one aggregates
+          # versions for each software project
+          #
+          # You may paste this into https://query.wikidata.org to play with the query
+          SELECT
+            ?project
+            ?projectLabel
+            ?projectDescription
+            (
+              # concatenate all versions
+              GROUP_CONCAT(DISTINCT
+                # append flags to each version
+                CONCAT(
+                  $version,
+                  IF(BOUND(?versionTypes), ?versionTypes, ''),
+                  IF(BOUND(?versionOSes), ?versionOSes, '')
+                ); separator=', '
+              )
+              AS ?versions
+            )
+            (SAMPLE(?websites) as ?websites)
+            #(SAMPLE(?debian_packages) as ?debian_packages)
+            #(SAMPLE(?ubuntu_packages) as ?ubuntu_packages)
+            (SAMPLE(?arch_packages) as ?arch_packages)
+            #(SAMPLE(?gentoo_packages) as ?gentoo_packages)
+            #(SAMPLE(?fedora_packages) as ?fedora_packages)
+            (SAMPLE(?licenses) as ?licenses)
+          WHERE {
+            {
+              SELECT DISTINCT
+                ?project
+                ?projectLabel  # produced with wikibase:label SERVICE
+                ?projectDescription  # produced with wikibase:label SERVICE
+                ?version
+                (GROUP_CONCAT(DISTINCT ?versionType; separator='') as ?versionTypes)
+                (GROUP_CONCAT(DISTINCT ?versionOS; separator='') as ?versionOSes)
+                (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
+                # These are not currently used and disable for speed
+                # But you may include them into manual request
+                #(GROUP_CONCAT(DISTINCT ?debian_package; separator=', ') as ?debian_packages)
+                #(GROUP_CONCAT(DISTINCT ?ubuntu_package; separator=', ') as ?ubuntu_packages)
+                (GROUP_CONCAT(DISTINCT ?arch_package; separator=', ') as ?arch_packages)
+                #(GROUP_CONCAT(DISTINCT ?gentoo_package; separator=', ') as ?gentoo_packages)
+                #(GROUP_CONCAT(DISTINCT ?fedora_package; separator=', ') as ?fedora_packages)
+                (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
+              WHERE {
+                # Require Arch package as we take the name from it
+                # Also, without it the query times out as it has to
+                # process to much data
+                ?project wdt:P3454 ?dummy .
+
+                # Versions for specific project
+                ?project p:P348 ?versionItem .
+
+                # Version number
+                ?versionItem ps:P348 $version .
+
+                # Version type (stable, unstable, ...)
+                # we reduce it to just two flags which indicate
+                # whether there's stable or unstable types
+                OPTIONAL {
+                  ?versionItem pq:P548 ?versionTypeItem .
+                  BIND(
+                    IF(
+                      ?versionTypeItem = wd:Q2804309 ||
+                      ?versionTypeItem = wd:Q15726348 ||
+                      ?versionTypeItem = wd:Q18434478 ||
+                      ?versionTypeItem = wd:Q20631656,
+                      '|S',
+                      '|U'
+                    )
+                    AS ?versionType
+                  )
+                  # You may use this in manual request to get label of actual version type
+                  #?versionTypeItem rdfs:label ?versionType .
+                  #FILTER (LANG(?versionType) = 'en')
+                }
+                # Version os
+                # See VLC package; there's different versioning schemas for different OSes
+                # and we need to filter out e.g. iOS releases
+                # As with version types, we reduct this to just two flags: where there was
+                # Linux release and whether there were non-Linux release. When parsing, we'll
+                # ignore versions with OS defined, but no Linux
+                OPTIONAL {
+                  ?versionItem pq:P306 ?versionOSItem  .
+                  BIND(
+                    IF(
+                      ?versionOSItem = wd:Q388,
+                      '|L',
+                      '|O'
+                    )
+                    AS ?versionType
+                  )
+                  # You may use this in manual request to get label of actual version os
+                  #?versionOSItem rdfs:label ?versionOS .
+                  #FILTER (LANG(?versionOS) = 'en')
+                }
+
+                # Websites
+                OPTIONAL { ?project wdt:P856 ?website . }
+
+                # Licenses, resolved to labels (e.g. human readable names)
+                OPTIONAL {
+                  ?project wdt:P275 ?licenseItem .
+                  ?licenseItem rdfs:label ?license .
+                  FILTER (LANG(?license) = 'en')
+                }
+                #OPTIONAL { ?project wdt:P3442 ?debian_package . }
+                #OPTIONAL { ?project wdt:P3473 ?ubuntu_package . }
+                OPTIONAL { ?project wdt:P3454 ?arch_package . }
+                #OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
+                #OPTIONAL { ?project wdt:P3463 ?fedora_package . }
+
+                # Provides projectLabel and projectDescription fields
+                SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. }
+              }
+              GROUP BY ?project ?projectLabel ?projectDescription ?version
+            }
+          }
+          GROUP BY ?project ?projectLabel ?projectDescription
+  repolinks:
+    - desc: Wikidata home
+      url: "https://wikidata.org/"
+  packagelinks:
+    - desc: Wikidata entity
+      url: "https://www.wikidata.org/wiki/{entity}"
+  tags: [ all, production ]
