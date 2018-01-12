@@ -10,3 +10,4 @@
 
 - { name: [lua-luabitop, lua-luabitop, lua5.2-bitop, luabitop, lua-bitop], setname: "lua:bitop" }
 - { name: lua-ada, setname: "lua:ada" }
+- { name: [lua-mpack,lua5.2-libmpack,lua-libmpack,libmpack-lua,"lua:-mpack","lua:libmpack"], setname: "lua:mpack" } # XXX: de-mess
