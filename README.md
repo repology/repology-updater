@@ -76,6 +76,7 @@ version are always parsed.
 | SlackBuilds                      |         | ✔       | ✔     | ✔     |         | ✔        |
 | Stackage                         | ✔       |         |       |       |         |          |
 | Vcpkg                            | ✔       |         |       |       |         |          |
+| Wikidata                         | ✔       |         |       | ✔     | ✔       |          |
 | YACP                             |         |         |       |       |         |          |
 
 (1) Gentoo support is not complete, complex cases like condional downloads and licenses
