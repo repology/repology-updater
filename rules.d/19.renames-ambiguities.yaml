@@ -133,6 +133,8 @@
 
 - { name: libelf,                      wwwpart: elfutils, setname: elfutils } # Arch: XXX: problem
 
+- { name: libmpc,                      wwwpart: multiprecision, setname: gnumpc }
+
 - { name: libtorrent,                  family: vcpkg, setname: arvidn-libtorrent  }
 
 - { name: libunwind,                   wwwpart: llvm, setname: llvm-libunwind }
@@ -173,6 +175,7 @@
 - { name: mpc, wwwpart: multiprecision.org, setname: gnumpc }
 - { name: mpc, category: dev-libs, setname: gnumpc }
 - { name: mpc, family: rudix, setname: gnumpc }
+- { name: mpc, family: aosc, category: libs, setname: gnumpc }
 - { name: mpc, warning: "please classify me" } # nothing should be left here
 - { name: musicpc, setname: mpc } # still use more canonical name
 

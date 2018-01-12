@@ -791,7 +791,7 @@
 - { name: libcminpack,                 setname: minpack                   }
 - { name: libm17n-db,                  setname: m17n-db                   }
 - { name: [libmowgli-2,libmowgli2,mowgli], setname: libmowgli             }
-- { name: libmpc3,                     setname: libmpc }
+- { name: libmpc3,                     setname: mpc }
 - { name: libmpcdec5,                  setname: libmpcdec                 }
 - { name: libmxml,                     setname: minixml }
 - { name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework], setname: ngspice }
@@ -924,7 +924,7 @@
 - { name: mdv,                         setname: terminal_markdown_viewer }
 - { name: media-info,                  setname: mediainfo }
 - { name: [mp4v2,libmp4v2-2,libmp4v2-3], setname: libmp4v2 }
-- { name: mpc, family: aosc, category: libs, setname: libmpc }
+- { name: [mpc1,mpclib,mpclib3,mpcomplex], setname: gnumpc }
 - { name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], setname: mpd, addflavor: true }
 - { name: mpd-mpc,                     setname: mpc }
 - { name: [mpfr3,mpfr4,libmpfr],       setname: mpfr }
