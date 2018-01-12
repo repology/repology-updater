@@ -93,12 +93,19 @@ schemas = {
                     Required('fetcher'): str,
                     Required('parser'): str,
                     'url': str,  # not Url(), as there may be rsync or cvs addresses
+
+                    # git fetcher args
                     'branch': str,
                     'subrepo': str,
-
-                    'compression': Any('xz', 'bz2', 'gz'),
                     'sparse_checkout': [str],
+
+                    # arch parser
                     'allowed_archs': [str],
+
+                    # file fetcher
+                    'compression': Any('xz', 'bz2', 'gz'),
+                    'post': {str: str},
+                    'headers': {str: str},
                 }
             ],
             'shadow': bool,
