@@ -34,6 +34,7 @@
 - { name: amule,                       verlonger: 3,                 family: [ kaos ],     ignorever: true } # fake
 - { name: amule,                       verpat: ".*git.*",                                  ignorever: true } # snapshot
 - { name: android-tools,               verpat: "[0-9]{4,}.*",                              ignorever: true } # fake
+- { name: anki,                        ver: "2.1.0",                 family: debuntu,      ignorever: true } # fake
 - { namepat: "apache2?-mod_php5",      verpat: ".*201[67].*",        family: [ sisyphus ], ignorever: true }
 - { name: asc,                         verpat: "[0-9]+\\.[0-9]+\\.[0-9]{3,}\\.[0-9]+",     devel: true } # http://terdon.asc-hq.org/asc/builds/
 - { name: aspcud,                      ver: "2011.03.17",                                  ignorever: true }
