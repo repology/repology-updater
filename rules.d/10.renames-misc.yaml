@@ -736,6 +736,7 @@
 - { name: luxrender14,                 setname: luxrender }
 
 # LIB
+- { name: liba52,                      setname: a52dec, addflavor: true }
 - { name: libagg,                      setname: agg                       }
 - { name: [liballegroogg,allegroogg],  setname: alogg                     }
 - { name: libargon2,                   setname: argon2                    }

@@ -16,6 +16,8 @@
 - { name: 7kaa-music,                  verpat: "20[0-9]{6}.*",                             ignorever: true } # opensuse games
 
 # A
+- { name: a52dec,                      ver: "0.7.5",                 family: [openbsd, opensuse], ignorever: true }
+- { name: a52dec,                      ver: "0.7.4.1",               family: [kaos],       ignorever: true }
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5", "1.4p5" ],        ignorever: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: abcmidi,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
 - { name: abuse,                       ver: "2.0",                   family: pkgsrc,       ignorever: true }
