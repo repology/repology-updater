@@ -249,6 +249,7 @@
 - { name: gnome-shell-extensions,      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-software,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-sudoku,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-system-monitor,        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-tweak-tool,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnat-util-gcc,               verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: gnuastro,                    verlonger: 2,                                       devel: true } # alphas
@@ -264,6 +265,7 @@
 - { name: gts,                         verpat: "[0-9]{6,}.*",                              ignorever: true } # aosc, gentoo
 
 # H
+- { name: handbrake,                   verpat: "[0-9]{4}.*",                               ignorever: true } # trisquel
 - { name: hashcat,                     verpat: "3\\.[1-9][0-9]",                           ignorever: true } # it uses X.Y.Z scheme
 - { name: haxe,                        verpat: "4\\..*",             family: freshcode,    ignorever: true } # there's no 4.0.0
 - { name: hex2bin,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # AUR snapshot
@@ -275,6 +277,7 @@
 - { name: hunspell-it,                 ver: "2016.2.13",                                   ignorever: true } # the real version is 2016.02.10, see #298
 - { name: hunspell-pt-br,              ver: "20131017",                                    ignorever: true }
 - { name: hunspell-pt_br,              ver: "2013.10.30",                                  setver: "3.2" } # see report
+- { name: hydrogen,                    verpat: "20[0-9]{6}.*",                             ignorever: true } # gobolinux
 
 # I
 - { name: i7z,                         verpat: "93.*",               family: [ gentoo ],   ignorever: true } # Snapshot version, based on svn r93
