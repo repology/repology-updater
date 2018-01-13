@@ -24,13 +24,13 @@ from repology.repoman import RepositoryManager
 from repology.transformer import PackageTransformer
 
 
-repoman = RepositoryManager(repostext='''
+repoman = RepositoryManager(repostext="""
 [
     { name: foo, desc: foo, family: foo, sources: [] },
     { name: bar, desc: bar, family: bar, sources: [] },
     { name: baz, desc: baz, family: baz, sources: [] }
 ]
-''')
+""")
 
 
 class TestPackageTransformer(unittest.TestCase):
