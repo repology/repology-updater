@@ -53,6 +53,15 @@ class RepositoryManager:
             if 'singular' not in repo:
                 repo['singular'] = repo['desc'] + ' package'
 
+            # XXX: legacy, ruleset will be required
+            if 'ruleset' not in repo:
+                repo['ruleset'] = [repo['family']]
+
+            if not isinstance(repo['ruleset'], list):
+                repo['ruleset'] = [repo['ruleset']]
+
+            repo['ruleset'] = set(repo['ruleset'])
+
             self.repo_by_name[repo['name']] = repo
 
     def GetRepository(self, reponame):
