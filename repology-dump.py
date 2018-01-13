@@ -26,6 +26,7 @@ from repology.logger import *
 from repology.package import *
 from repology.packageproc import *
 from repology.repoman import RepositoryManager
+from repology.repoproc import RepositoryProcessor
 
 
 def VersionClass2Letter(value):
@@ -95,7 +96,8 @@ def Main():
     if not options.no_shadow:
         filters.append(ShadowFilter())
 
-    repoman = RepositoryManager(options.repos_dir, options.statedir)
+    repoman = RepositoryManager(options.repos_dir)
+    repoproc = RepositoryProcessor(repoman, options.statedir)
 
     def PackageProcessor(packageset):
         FillPackagesetVersions(packageset)
@@ -125,10 +127,10 @@ def Main():
 
     if options.mode == 'stream':
         logger.Log('dumping...')
-        repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
+        repoproc.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
     else:
         logger.Log('loading packages...')
-        all_packages = repoman.DeserializeMulti(reponames=options.reponames, logger=logger)
+        all_packages = repoproc.DeserializeMulti(reponames=options.reponames, logger=logger)
         logger.Log('merging packages...')
         metapackages = PackagesToMetapackages(all_packages)
         logger.Log('dumping...')
