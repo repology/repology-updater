@@ -26,17 +26,29 @@ from repology.logger import NoopLogger
 
 
 class FileFetcher():
-    def __init__(self, url, compression=None):
+    def __init__(self, url, compression=None, post=None, headers=None):
         self.url = url
         self.compression = compression
+        self.post = post
+        self.headers = headers
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
 
-        logger.Log('fetching ' + self.url)
-        data = Fetch(self.url).content
+        fetching_what = [self.url]
+        if isinstance(self.post, dict):
+            fetching_what.append('{} fields of form data'.format(len(self.post)))
+        elif self.post:
+            fetching_what.append('{} bytes of post data'.format(len(self.post)))
+
+        if self.headers:
+            fetching_what.append('{} extra headers'.format(len(self.headers)))
+
+        logger.Log('fetching ' + ', with '.join(fetching_what))
+
+        data = Fetch(self.url, post=self.post, headers=self.headers).content
 
         logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 

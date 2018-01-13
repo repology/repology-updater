@@ -20,8 +20,17 @@ import requests
 USER_AGENT = 'Repology/0'
 
 
-def Fetch(url, check_status=True, timeout=60):
-    r = requests.get(url, headers={'user-agent': USER_AGENT}, timeout=timeout)
+def Fetch(url, check_status=True, timeout=60, post=None, headers=None):
+    headers = headers.copy() if headers else {}
+    headers['user-agent'] = USER_AGENT
+
+    response = None
+    if post:
+        response = requests.post(url, headers=headers, timeout=timeout, data=post)
+    else:
+        response = requests.get(url, headers=headers, timeout=timeout)
+
     if check_status:
-        r.raise_for_status()
-    return r
+        response.raise_for_status()
+
+    return response
