@@ -22,13 +22,17 @@ import unittest
 from repology.config import config
 from repology.package import Package
 from repology.repoman import RepositoryManager
+from repology.repoproc import RepositoryProcessor
+
+
+repoman = RepositoryManager(config['REPOS_DIR'])
+repoproc = RepositoryProcessor(repoman, 'testdata')
 
 
 class TestParsers(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        repoman = RepositoryManager(config['REPOS_DIR'], 'testdata')
-        self.packages = repoman.ParseMulti(reponames=['have_testdata'])
+        self.packages = repoproc.ParseMulti(reponames=['have_testdata'])
 
     def check_package(self, name, reference):
         reference_with_default = {
