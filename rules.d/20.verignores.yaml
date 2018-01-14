@@ -561,6 +561,7 @@
 - { name: svn2git,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # macports
 - { name: swell-foop,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: sword,                       ver: "1.7.5",                 family: mageia,       ignorever: true } # fake
+- { name: syncthing-gtk,               ver: "0.14.36",                                     ignorever: true } # sisyphus fake
 - { name: synfigstudio,                verpat: "1\\.3\\..*",                               devel: true } # openindiana garbage
 - { name: sysstat,                     ver: "20151012",                                    ignorever: true } # openindiana garbage
 
