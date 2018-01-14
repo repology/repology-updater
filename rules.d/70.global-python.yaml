@@ -281,6 +281,7 @@
 - { name: "python:boost",              setname: boost, addflavor: python }
 - { name: "python:ddgr",               setname: ddgr, addflavor: python }
 - { name: "python:ldns",               setname: ldns, addflavor: python }
+- { name: "python:planet",             setname: planet, wwwpart: planetplanet }
 
 - { name: "python:backports", ver: "4.0.0", ignorever: true            } # opensuse fake
 - { name: "python:pyspatialite", ver: "3.0.1", ignorever: true            }
