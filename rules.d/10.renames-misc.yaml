@@ -825,6 +825,8 @@
 - { name: [libstfl,libstfl0],          setname: stfl                      }
 - { name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis], setname: suitesparse          }
 - { name: libsysstat-qt5,              setname: libsysstat                }
+- { name: libtalloc,                   setname: talloc }
+- { name: libtdb,                      setname: tdb }
 - { name: [libtiff,libtiff3,libtiff4], setname: tiff                      }
 - { name: [libtorrent-ipv6,libtorrent-extended], setname: libtorrent, addflavor: true }
 - { name: libtre,                      setname: tre                       } # XXX: reverse?
@@ -1129,6 +1131,8 @@
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
 - { name: [tiger-vnc,tigervnc-viewer], setname: tigervnc }
 - { name: talk-filters,                setname: talkfilters }
+- { name: talloc-man,                  setname: talloc, addflavor: man }
+- { name: talloc-static,               setname: talloc, addflavor: static }
 - { name: tecla,                       setname: libtecla }
 - { name: tex-whizzytex,               setname: whizzytex }
 - { name: theora,                      setname: libtheora }
