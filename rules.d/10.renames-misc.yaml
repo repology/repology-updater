@@ -1153,6 +1153,7 @@
 - { name: [tubo,libtubo0],             setname: libtubo }
 - { name: two-lame,                    setname: twolame }
 - { name: twoping,                     setname: 2ping }
+- { name: tor-unstable,                setname: tor, devel: true }
 
 # U
 - { name: [uade123,uade2],             setname: uade                      }
