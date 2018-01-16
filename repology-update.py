@@ -28,23 +28,24 @@ from repology.database import Database
 from repology.logger import *
 from repology.packageproc import FillPackagesetVersions
 from repology.repoman import RepositoryManager
+from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
 
 
-def ProcessRepositories(options, logger, repoman, transformer):
+def ProcessRepositories(options, logger, repoproc, transformer, reponames):
     repositories_updated = []
     repositories_not_updated = []
 
-    for reponame in repoman.GetNames(reponames=options.reponames):
+    for reponame in reponames:
         repo_logger = logger.GetPrefixed(reponame + ': ')
         repo_logger.Log('started')
         try:
             if options.fetch:
-                repoman.Fetch(reponame, update=options.update, logger=repo_logger.GetIndented())
+                repoproc.Fetch(reponame, update=options.update, logger=repo_logger.GetIndented())
             if options.parse:
-                repoman.ParseAndSerialize(reponame, transformer=transformer, logger=repo_logger.GetIndented())
+                repoproc.ParseAndSerialize(reponame, transformer=transformer, logger=repo_logger.GetIndented())
             elif options.reprocess:
-                repoman.Reprocess(reponame, transformer=transformer, logger=repo_logger.GetIndented())
+                repoproc.Reprocess(reponame, transformer=transformer, logger=repo_logger.GetIndented())
         except KeyboardInterrupt:
             logger.Log('interrupted')
             return 1
@@ -66,7 +67,7 @@ def ProcessRepositories(options, logger, repoman, transformer):
     return repositories_updated, repositories_not_updated
 
 
-def ProcessDatabase(options, logger, repoman, repositories_updated):
+def ProcessDatabase(options, logger, repoproc, repositories_updated):
     logger.Log('connecting to database')
 
     db_logger = logger.GetIndented()
@@ -99,7 +100,7 @@ def ProcessDatabase(options, logger, repoman, repositories_updated):
                 db_logger.Log('  pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
 
         db_logger.Log('pushing packages to database')
-        repoman.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
+        repoproc.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
 
         # process what's left in the queue
         database.AddPackages(package_queue)
@@ -160,13 +161,14 @@ def Main():
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
     options = parser.parse_args()
 
-    repoman = RepositoryManager(options.repos_dir, options.statedir)
+    repoman = RepositoryManager(options.repos_dir)
+    repoproc = RepositoryProcessor(repoman, options.statedir)
 
     if options.list:
-        print('\n'.join(repoman.GetNames(reponames=options.reponames)))
+        print('\n'.join(repoproc.GetNames(reponames=options.reponames)))
         return 0
 
-    transformer = PackageTransformer(options.rules_dir)
+    transformer = PackageTransformer(repoman, options.rules_dir)
 
     logger = StderrLogger()
     if options.logfile:
@@ -177,10 +179,10 @@ def Main():
 
     start = timer()
     if options.fetch or options.parse or options.reprocess:
-        repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoman=repoman, transformer=transformer)
+        repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoproc=repoproc, transformer=transformer, reponames=repoman.GetNames(reponames=options.reponames))
 
     if options.initdb or options.database:
-        ProcessDatabase(options=options, logger=logger, repoman=repoman, repositories_updated=repositories_updated)
+        ProcessDatabase(options=options, logger=logger, repoproc=repoproc, repositories_updated=repositories_updated)
 
     if (options.parse or options.reprocess) and (options.show_unmatched_rules):
         ShowUnmatchedRules(options=options, logger=logger, transformer=transformer, reliable=repositories_not_updated == [])

@@ -20,13 +20,22 @@
 import unittest
 
 from repology.package import Package
+from repology.repoman import RepositoryManager
 from repology.transformer import PackageTransformer
+
+
+repoman = RepositoryManager(repostext="""
+[
+    { name: foo, desc: foo, family: foo, sources: [] },
+    { name: bar, desc: bar, family: bar, sources: [] },
+    { name: baz, desc: baz, family: baz, sources: [] }
+]
+""")
 
 
 class TestPackageTransformer(unittest.TestCase):
     def check_transformer(self, rulestext, *packages):
-        transformer = PackageTransformer(rulestext=rulestext)
-
+        transformer = PackageTransformer(repoman, rulestext=rulestext)
         for packagedict in packages:
             create_params = {}
             expected_params = {}
@@ -263,12 +272,12 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p8', 'version': '1.0', 'homepage': 'HOMEPAGE4', 'expect_effname': 'ok4'},
         )
 
-    def test_match_family(self):
+    def test_match_ruleset(self):
         self.check_transformer(
-            '[ { family: foo, setname: quux }, { family: [ baz ], setname: bat } ]',
-            {'name': 'p1', 'version': '1.0', 'family': 'foo', 'expect_effname': 'quux'},
-            {'name': 'p2', 'version': '2.0', 'family': 'bar', 'expect_effname': 'p2'},
-            {'name': 'p3', 'version': '3.0', 'family': 'baz', 'expect_effname': 'bat'}
+            '[ { ruleset: foo, setname: quux }, { ruleset: [ baz ], setname: bat } ]',
+            {'name': 'p1', 'version': '1.0', 'repo': 'foo', 'expect_effname': 'quux'},
+            {'name': 'p2', 'version': '2.0', 'repo': 'bar', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '3.0', 'repo': 'baz', 'expect_effname': 'bat'}
         )
 
     def test_match_category(self):

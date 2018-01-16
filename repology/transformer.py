@@ -32,7 +32,9 @@ class RuleApplyResult:
 
 
 class PackageTransformer:
-    def __init__(self, rulesdir=None, rulestext=None):
+    def __init__(self, repoman, rulesdir=None, rulestext=None):
+        self.repoman = repoman
+
         self.dollar0 = re.compile('\$0', re.ASCII)
         self.dollarN = re.compile('\$([0-9]+)', re.ASCII)
 
@@ -55,9 +57,18 @@ class PackageTransformer:
             rule['pretty'] = pp.pformat(rule)
 
             # convert some fields to lists
-            for field in ['name', 'ver', 'category', 'family', 'wwwpart']:
+            for field in ['name', 'ver', 'category', 'family', 'ruleset', 'wwwpart']:
                 if field in rule and not isinstance(rule[field], list):
                     rule[field] = [rule[field]]
+
+            # support legacy
+            if 'family' in rule and 'ruleset' in rule:
+                raise RuntimeError('both ruleset and family in rule!')
+            elif 'family' in rule and 'ruleset' not in rule:
+                rule['ruleset'] = rule.pop('family')
+
+            if 'ruleset' in rule:
+                rule['ruleset'] = set(rule['ruleset'])
 
             # convert some fields to lowercase
             for field in ['category', 'wwwpart']:
@@ -88,8 +99,8 @@ class PackageTransformer:
         ver_match = None
 
         # match family
-        if 'family' in rule:
-            if package.family not in rule['family']:
+        if 'ruleset' in rule:
+            if self.repoman.GetRepository(package.repo)['ruleset'].isdisjoint(rule['ruleset']):
                 return RuleApplyResult.unmatched
 
         # match categories
