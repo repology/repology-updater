@@ -168,6 +168,8 @@
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignorever: true }
 - { name: ebtables,                    verpat: "20[0-9]{2}.*",                             ignorever: true } # LEDE year
 - { name: egoboo,                      ver: "2.81",                                        setver: "2.8.1" }
+- { name: eiskaltdcpp,                 verpat: ".*g.*",                                    ignorever: true }
+- { name: eiskaltdcpp,                 ver: "2.2.11",                family: fedora,       ignorever: true } # fake
 - { name: empathy,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: elftoolchain,                                              family: ravenports,   ignorever: true } # fake
 - { name: enventor,                    verpat: "20[0-9]{6}",                               ignorever: true } # aosc snapshot
@@ -524,6 +526,7 @@
 - { name: sauerbraten,                 verpat: "20[0-9]{2}_[0-9]{2}_[0-9]{2}",             last: true } # good format
 - { name: sauerbraten,                                                                     ignorever: true } # otherwise, garbage (e.g. 2013.02.03.20161112 from chocolatey)
 - { name: sbcl,                        verpat: ".*20[0-9]{6}.*",                           ignorever: true } # nixpkgs garbage
+- { name: scantailor,                  verpat: "2016.*",                                   ignorever: true }
 - { name: schismtracker,               ver: "20150911005204",                              ignorever: true }
 - { name: scite,                       ver: "375",                                         ignorever: true } # pclinuxos
 - { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignorever: true } # not yet
@@ -654,6 +657,7 @@
 
 # Z
 - { name: zathura,                     ver: "20101104",                                    ignorever: true }
+- { name: zcad,                        ver: "0.9.8",                                       ignorever: true } # FreeBSD fake
 - { name: zeromq,                      verpat: "20[0-9]{6}.*",                             ignorever: true } # vcpkg snapshot
 - { name: zpaq,                        verpat: "[0-9]+",                                   ignorever: true }
 - { name: zsh-syntax-highlighting,     verpat: "20[0-9]{6}.*",                             ignorever: true } # FreeBSD

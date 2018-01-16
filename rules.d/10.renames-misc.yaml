@@ -336,6 +336,8 @@
 - { name: chakaracore,                 setname: chakracore } # AUR misspell
 - { name: chefdk,                      setname: chef-dk }
 - { name: cgoban1,                     setname: cgoban }
+- { name: [cin,cinelerra-cv],          setname: cinelerra }
+- { name: cinelerra-heroine,           setname: cinelerra, addflavor: heroine }
 - { name: clanbomber2,                 setname: clanbomber                }
 - { name: clementine-free,             setname: clementine                }
 - { name: cl-asdf,                     setname: asdf                      }
