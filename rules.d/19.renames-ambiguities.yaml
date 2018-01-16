@@ -46,6 +46,8 @@
 
 - { name: dino, wwwpart: [dino.im, github.com/dino/dino], setname: dino-im }
 
+- { name: discord, wwwpart: xnblank, setname: discord-linux }
+
 # game vs. fuzzer
 - { name: dizzy, wwwpart: c0decafe.de, setname: dizzy-fuzzer }
 
@@ -208,6 +210,8 @@
 - { name: packer, setname: "pacman-packer", family: arch  }
 
 - { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
+
+- { name: picard,                      setname: java-picard, wwwpart: picard.sourceforge.net }
 
 # python package manager vs. program wrapper (which was renamed to pipo upstream)
 # XXX: generate problem from this

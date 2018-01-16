@@ -153,7 +153,6 @@
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignorever: true } # no such release
 - { name: dia,                         verpat: ".*[0-9]{8}.*",                             ignorever: true } # snapshot
 - { name: discord,                                                   family: chocolatey,   ignorever: true } # windows version has different versioning
-- { name: discord,                                                   family: debuntu,      ignorever: true } # XXX: (deepin actually)
 - { name: distorm,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # freebsd garbage
 - { name: djvulibre,                   ver: "3.5.27.1",                                    ignorever: true }
 - { name: dnscap,                      verpat: "[0-9]{3,}",                                ignorever: true }

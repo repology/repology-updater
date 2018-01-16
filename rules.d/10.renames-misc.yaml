@@ -428,6 +428,7 @@
 - { name: iodoom3-dhewm3,              setname: dhewm3                    }
 - { name: dgen,                        setname: dgen-sdl                  }
 - { name: dino-unstable,               setname: dino, ignorever: true }
+- { name: discord-bin,                 setname: discord }
 - { name: divideandsucceed,            setname: divide-and-succeed        }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
 - { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools,djvu], setname: djvulibre }
@@ -435,7 +436,7 @@
 - { name: [docbook-dsssl-doc,docbook-style-dsssl-doc], setname: docbook-dsssl }
 - { name: docbook-xml-simple,          setname: sdocbook-xml              } # ravenports
 - { name: [dosbox-sdl2,dosbox-debug,dosbox-multilib-patched], setname: dosbox }
-- { name: [doublecmd-gtk2,doublecmd-qt], setname: doublecmd }
+- { name: [doublecmd-gtk2,doublecmd-qt,doublecmd-qt4,doublecmd-qt5], setname: doublecmd }
 - { name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], setname: doxygen, addflavor: true }
 - { name: drpython-py27,               setname: drpython                  }
 - { name: dr14_tmeter,                 setname: dr14tmeter                }
