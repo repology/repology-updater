@@ -102,7 +102,6 @@ class Package:
 
         self.extrafields = extrafields if extrafields else {}
 
-
     def CheckSanity(self, transformed=True):
         # checks
         def NoNewlines(value):
