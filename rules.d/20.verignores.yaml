@@ -208,6 +208,7 @@
 - { name: "fonts:eeyek",               ver: "20091204",                                    ignorever: true }
 - { name: "fonts:fira-sans",           verpat: "20[0-9]{6}",                               ignorever: true } # openbsd garbage
 - { name: "fonts:gentium-basic",       ver: "1102",                                        setver: "1.102" }
+- { name: "fonts:linuxlibertine",      verpat: ".*2012.*",                                 ignorever: true } # gentoo and haikuports snapshots
 - { name: "fonts:mikachan",            ver: "9.1.2006.08.09",                              ignorever: true } # openSUSE garbage
 - { name: "fonts:oldstandard",         ver: "2.2really",                                   ignorever: true } # debian garbage
 - { name: "fonts:quattrocento",        ver: "2.000",                 family: arch,         ignorever: true } # webpage says it's 1.1
