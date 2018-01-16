@@ -43,45 +43,44 @@ class WikidataJsonParser():
         for packagedata in SimplifyResult(jsondata):
             entity = packagedata['project'].rsplit('/', 1)[-1]  # this is URL, take only the ID from it
 
-            # use Arch package names as a name, as they are most non-ambigous
-            names = packagedata['arch_packages']
+            # use Arch and AUR package names as a name, as they are most non-ambigous
+            names = []
+            for field in ['arch_packages', 'aur_packages']:
+                if packagedata[field]:
+                    names += packagedata[field].split(', ')
 
-            # require exactly one name; XXX: however, multiple names may also be supported
-            if not names or ', ' in names:
-                print('WARNING: {} ({}) skipped, bad arch packages list "{}" which we rely on'.format(packagedata['projectLabel'], entity, names), file=sys.stderr)
-                continue
+            # generate a package for each package name; these will be merged anyway
+            for name in set(names):
+                # generate a package for each version
+                for version in packagedata['versions'].split(', '):
+                    version, *flags = version.split('|')
 
-            # generate a package for each version
-            for version in packagedata['versions'].split(', '):
-                version, *flags = version.split('|')
+                    is_devel = 'U' in flags
+                    is_foreign_os_release = 'O' in flags and 'L' not in flags
 
-                is_devel = 'U' in flags
-                is_foreign_os_release = 'O' in flags and 'L' not in flags
+                    if is_foreign_os_release:
+                        print('WARNING: {} ({}) version {} skipped as non-linux release'.format(packagedata['projectLabel'], entity, version), file=sys.stderr)
+                        continue
 
-                if is_foreign_os_release:
-                    print('WARNING: {} ({}) version {} skipped as non-linux release'.format(packagedata['projectLabel'], entity, version), file=sys.stderr)
-                    continue
+                    pkg = Package()
 
-                pkg = Package()
+                    pkg.devel = is_devel
 
-                pkg.devel = is_devel
+                    pkg.name = entity
+                    pkg.effname = name
+                    pkg.version = version
 
-                pkg.name = names
-                pkg.version = version
+                    if 'projectDescription' in packagedata:
+                        pkg.comment = packagedata['projectDescription']
+                    else:
+                        pkg.comment = packagedata['projectLabel']
 
-                if 'projectDescription' in packagedata:
-                    pkg.comment = packagedata['projectDescription']
-                else:
-                    pkg.comment = packagedata['projectLabel']
+                    if packagedata['licenses']:
+                        pkg.licenses = packagedata['licenses'].split(', ')
 
-                if packagedata['licenses']:
-                    pkg.licenses = packagedata['licenses'].split(', ')
+                    if packagedata['websites']:
+                        pkg.homepage = packagedata['websites'].split(', ')[0]  # XXX: use all websites when supported
 
-                if packagedata['websites']:
-                    pkg.homepage = packagedata['websites'].split(', ')[0]  # XXX: use all websites when supported
-
-                pkg.extrafields['entity'] = entity
-
-                result.append(pkg)
+                    result.append(pkg)
 
         return result

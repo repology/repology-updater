@@ -44,6 +44,7 @@
             #(SAMPLE(?debian_packages) as ?debian_packages)
             #(SAMPLE(?ubuntu_packages) as ?ubuntu_packages)
             (SAMPLE(?arch_packages) as ?arch_packages)
+            (SAMPLE(?aur_packages) as ?aur_packages)
             #(SAMPLE(?gentoo_packages) as ?gentoo_packages)
             #(SAMPLE(?fedora_packages) as ?fedora_packages)
             (SAMPLE(?licenses) as ?licenses)
@@ -62,15 +63,11 @@
                 #(GROUP_CONCAT(DISTINCT ?debian_package; separator=', ') as ?debian_packages)
                 #(GROUP_CONCAT(DISTINCT ?ubuntu_package; separator=', ') as ?ubuntu_packages)
                 (GROUP_CONCAT(DISTINCT ?arch_package; separator=', ') as ?arch_packages)
+                (GROUP_CONCAT(DISTINCT ?aur_package; separator=', ') as ?aur_packages)
                 #(GROUP_CONCAT(DISTINCT ?gentoo_package; separator=', ') as ?gentoo_packages)
                 #(GROUP_CONCAT(DISTINCT ?fedora_package; separator=', ') as ?fedora_packages)
                 (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
               WHERE {
-                # Require Arch package as we take the name from it
-                # Also, without it the query times out as it has to
-                # process to much data
-                ?project wdt:P3454 ?dummy .
-
                 # Versions for specific project
                 ?project p:P348 ?versionItem .
 
@@ -130,8 +127,14 @@
                 #OPTIONAL { ?project wdt:P3442 ?debian_package . }
                 #OPTIONAL { ?project wdt:P3473 ?ubuntu_package . }
                 OPTIONAL { ?project wdt:P3454 ?arch_package . }
+                OPTIONAL { ?project wdt:P4162 ?aur_package . }
                 #OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
                 #OPTIONAL { ?project wdt:P3463 ?fedora_package . }
+
+                # Require Arch package as we take the name from it
+                # Also, without it the query times out as it has to
+                # process to much data
+                FILTER(BOUND(?arch_package) || BOUND(?aur_package))
 
                 # Provides projectLabel and projectDescription fields
                 SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. }
@@ -145,5 +148,5 @@
       url: "https://wikidata.org/"
   packagelinks:
     - desc: Wikidata entity
-      url: "https://www.wikidata.org/wiki/{entity}"
+      url: "https://www.wikidata.org/wiki/{name}"
   tags: [ all, production ]
