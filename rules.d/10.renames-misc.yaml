@@ -779,6 +779,7 @@
 - { name: libiksemel,                  setname: iksemel                   }
 - { name: libintl,                     setname: gettext                   }
 - { name: libjansson,                  setname: jansson                   }
+- { name: libjson-glib,                setname: json-glib                 }
 - { name: [libfreetype,freetype1,freetype2], setname: freetype            }
 - { name: [freetype2-infinality, libfreetype-infinality], setname: freetype-infinality }
 - { name: liblapack,                   setname: lapack                    }
