@@ -24,7 +24,7 @@
 - { name: cdf3,                        setname: cdf                       } # Common Data Format lib
 - { name: cdf, verpat: "0.*",          setname: cdf-df                    } # split out colorized df
 
-- { name: cogl, ver: "1.22.5",         setname: deepin-cogl               } # XXX: needs concrete repository match (not family)
+- { name: cogl, ruleset: deepin,       setname: deepin-cogl } # fork?
 
 - { name: chess, wwwpart: gnu.org,     setname: gnuchess                  }
 - { name: chess, category: Games/Boards, setname: gnuchess                  }

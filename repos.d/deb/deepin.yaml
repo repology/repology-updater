@@ -8,6 +8,7 @@
   type: repository
   desc: Deepin
   family: debuntu
+  ruleset: [ debuntu, deepin ]
   color: '949393'
   sources:
     - name: [ contrib, main, non-free ]

@@ -77,6 +77,7 @@ families = [
 ]
 
 rulesets = families + [
+    'deepin',
 ]
 
 schemas = {
