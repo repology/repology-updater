@@ -195,6 +195,8 @@
 
 - { name: nml, wwwpart: ropas, setname: "$0-lang" }
 
+- { name: nstat, family: freebsd, setname: nstat-netflix }
+
 - { name: nvi, verpat: "2\\..*",       setname: nvi2 }
 
 - { name: omi,                         setname: omi-ftpmirror, category: ftp } # vs. Open Management Infrastructure
