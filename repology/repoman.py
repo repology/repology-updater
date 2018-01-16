@@ -234,13 +234,20 @@ class RepositoryManager:
 
             package.Normalize()
 
-        if transformer:
-            packages = sorted(packages, key=lambda package: package.effname)
-
         # XXX: in future, ignored packages will not be dropped here, but
         # ignored in summary and version calcualtions, but shown in
         # package listing
         packages = [package for package in packages if not package.ignore]
+
+        logger.Log('processing complete, {} packages, deduplicating'.format(len(packages)))
+
+        packages = PackagesetDeduplicate(packages)
+
+        if transformer:
+            logger.Log('processing complete, {} packages, sorting'.format(len(packages)))
+
+            packages = sorted(packages, key=lambda package: package.effname)
+
         logger.Log('processing complete, {} packages'.format(len(packages)))
 
         return packages
