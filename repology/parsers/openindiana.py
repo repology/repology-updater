@@ -76,7 +76,11 @@ class OpenIndianaSummaryJsonParser():
         if 'info.source-url' in variables:
             pkg.downloads = variables['info.source-url']
 
-        if pkg.name and pkg.version:
+        # Regarding comment requirement: there are some packages which lack it,
+        # however for ALL of them is a counterpart with comment and some
+        # additional fields (category, homepage, downloads). Packages without
+        # comment look like legacy, and it's OK and desirable to drop them here
+        if pkg.name and pkg.version and pkg.comment:
             return pkg
 
         return None

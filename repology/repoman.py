@@ -28,7 +28,7 @@ import yaml
 from repology.fetchers import Factory as FetcherFactory
 from repology.logger import NoopLogger
 from repology.package import PackageSanityCheckFailure, PackageSanityCheckProblem
-from repology.packageproc import PackagesMerge
+from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Factory as ParserFactory
 
 
@@ -205,11 +205,11 @@ class RepositoryManager:
         for source in repository['sources']:
             packages += self.__ParseSource(repository, source, logger.GetIndented())
 
-        logger.Log('parsing complete, {} packages, merging'.format(len(packages)))
+        logger.Log('parsing complete, {} packages, deduplicating'.format(len(packages)))
 
-        packages = PackagesMerge(packages)
+        packages = PackagesetDeduplicate(packages)
 
-        logger.Log('merging complete, {} packages'.format(len(packages)))
+        logger.Log('parsing complete, {} packages'.format(len(packages)))
 
         return packages
 
@@ -234,13 +234,20 @@ class RepositoryManager:
 
             package.Normalize()
 
-        if transformer:
-            packages = sorted(packages, key=lambda package: package.effname)
-
         # XXX: in future, ignored packages will not be dropped here, but
         # ignored in summary and version calcualtions, but shown in
         # package listing
         packages = [package for package in packages if not package.ignore]
+
+        logger.Log('processing complete, {} packages, deduplicating'.format(len(packages)))
+
+        packages = PackagesetDeduplicate(packages)
+
+        if transformer:
+            logger.Log('processing complete, {} packages, sorting'.format(len(packages)))
+
+            packages = sorted(packages, key=lambda package: package.effname)
+
         logger.Log('processing complete, {} packages'.format(len(packages)))
 
         return packages

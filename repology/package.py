@@ -102,20 +102,6 @@ class Package:
 
         self.extrafields = extrafields if extrafields else {}
 
-    def TryMerge(self, other):
-        for slot in self.__slots__:
-            self_val = getattr(self, slot)
-            other_val = getattr(other, slot)
-
-            if self_val is None or self_val == [] or self_val == {}:
-                setattr(self, slot, other_val)
-            elif other_val is None or other_val == [] or other_val == {}:
-                pass
-            elif self_val != other_val:
-                return False
-
-        return True
-
     def CheckSanity(self, transformed=True):
         # checks
         def NoNewlines(value):
@@ -224,3 +210,6 @@ class Package:
     @property
     def __dict__(self):
         return {slot: getattr(self, slot) for slot in self.__slots__}
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
