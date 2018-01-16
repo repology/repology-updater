@@ -7,7 +7,7 @@
   type: site
   desc: Wikidata
   family: wikidata
-  ruleset: arch
+  ruleset: [ arch, wikidata ]
   color: "339966"
   sources:
     - name: result.json

@@ -151,6 +151,7 @@ schemas = {
             'setname': str,
             'setver': str,
             'addflavor': Any(bool, str, [str]),
+            'resetflavors': bool,
             'ignorever': bool,
             'unignorever': bool,
             'ignore': bool,

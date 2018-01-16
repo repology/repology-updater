@@ -216,6 +216,9 @@ class PackageTransformer:
 
             package.flavors += [flavor for flavor in flavors if flavor]
 
+        if 'resetflavors' in rule:
+            package.flavors = []
+
         if 'setname' in rule:
             if name_match:
                 package.effname = self.dollarN.sub(lambda x: name_match.group(int(x.group(1))), rule['setname'])
