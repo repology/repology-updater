@@ -111,6 +111,8 @@
 - { name: hermes,                      setname: hermes-auth, wwwpart: ralt/hermes }
 # otherwise, (dead?) pixel format convertsion library
 
+- { name: hexer,                       wwwpart: hoby, setname: hexer-hoby }
+
 - { name: hugo,                        setname: hugo-interactive-fiction, verpat: "3\\..*" }
 - { name: hugo,                        setname: hugo-emulator, verpat: "2\\..*" }
 - { name: hugo,                        setname: hugo-sitegen }
