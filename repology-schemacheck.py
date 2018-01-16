@@ -77,6 +77,7 @@ families = [
 ]
 
 rulesets = families + [
+    'aur',
     'deb_multimedia',
     'deepin',
 ]

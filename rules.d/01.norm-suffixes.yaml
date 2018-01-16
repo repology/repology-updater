@@ -15,8 +15,8 @@
 
 - { ruleset: deb_multimedia, namepat: "(.*)-dmo", setname: "$1" }
 
-# XXX: should only affect AUR
-#- { family: arch, name: php-svn, setname: "php:svn" } # XXX: hack to save from following rule
-#- { family: arch, namepat: "(.*)-(cvs|svn|hg|darcs|bzr|git|bin)", setname: "$1", ignorever: true }
+- { ruleset: aur, name: php-svn, setname: "php:svn" } # XXX: hack to save from following rule
+- { ruleset: aur, namepat: "(.*)-(cvs|svn|hg|darcs|bzr|git)", setname: "$1", ignorever: true }
+- { ruleset: aur, namepat: "(.*)-bin", setname: "$1" } # XXX: addflavor: bin
 
 # XXX: handle -devel for freebsd?
