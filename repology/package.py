@@ -103,16 +103,21 @@ class Package:
         self.extrafields = extrafields if extrafields else {}
 
     def TryMerge(self, other):
+        merges = {}
+
         for slot in self.__slots__:
             self_val = getattr(self, slot)
             other_val = getattr(other, slot)
 
             if self_val is None or self_val == [] or self_val == {}:
-                setattr(self, slot, other_val)
+                merges[slot] = other_val
             elif other_val is None or other_val == [] or other_val == {}:
                 pass
             elif self_val != other_val:
                 return False
+
+        for key, val in merges.items():
+            setattr(self, key, val)
 
         return True
 
