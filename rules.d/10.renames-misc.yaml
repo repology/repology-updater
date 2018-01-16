@@ -713,7 +713,7 @@
 - { name: jboss-forge-offline,         setname: jboss-forge               }
 - { name: josm-latest,                 setname: josm, ignorever: true     }
 - { name: json-c12,                    setname: json-c                    }
-- { name: [junit4,java-junit],         setname: junit }
+- { name: [junit4,java-junit,junit5],  setname: junit }
 
 # K
 - { name: kdiff3-qt,                   setname: kdiff3                    }
