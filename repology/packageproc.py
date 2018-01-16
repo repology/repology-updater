@@ -22,31 +22,6 @@ from repology.package import *
 from repology.version import VersionCompare
 
 
-def PackagesMerge(packages):
-    aggregated = {}
-
-    # aggregate by subrepo/name/version
-    # this is just to make merging faster, as packages
-    # with same subrepo/name/version may or may not merge
-    for package in packages:
-        key = (package.subrepo, package.name, package.version)
-        aggregated.setdefault(key, []).append(package)
-
-    outpkgs = []
-    for packages in aggregated.values():
-        while packages:
-            nextpackages = []
-            merged = packages[0]
-            for package in packages[1:]:
-                if not merged.TryMerge(package):
-                    nextpackages.append(package)
-
-            outpkgs.append(merged)
-            packages = nextpackages
-
-    return outpkgs
-
-
 def PackagesetDeduplicate(packages):
     aggregated = {}
 
