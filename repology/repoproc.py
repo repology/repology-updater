@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,14 +16,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
-import inspect
 import os
 import pickle
 import sys
 import time
 import traceback
-
-import yaml
 
 from repology.fetchers import Factory as FetcherFactory
 from repology.logger import NoopLogger
@@ -37,37 +34,9 @@ class StateFileFormatCheckProblem(Exception):
         Exception.__init__(self, 'Illegal package format in {}. Please run `repology-update.py --parse` on all repositories to update the format.'.format(where))
 
 
-class RepositoryManager:
-    def __init__(self, reposdir, statedir, fetch_retries=3, fetch_retry_delay=30):
-        self.repositories = []
-
-        for root, dirs, files in os.walk(reposdir):
-            for filename in filter(lambda f: f.endswith('.yaml'), files):
-                with open(os.path.join(root, filename)) as reposfile:
-                    self.repositories += yaml.safe_load(reposfile)
-
-        # process source loops
-        for repo in self.repositories:
-            newsources = []
-            for source in repo['sources']:
-                if isinstance(source['name'], list):
-                    for name in source['name']:
-                        newsource = source.copy()
-                        for key in newsource.keys():
-                            if isinstance(newsource[key], str):
-                                newsource[key] = newsource[key].replace('{source}', name)
-                        newsource['name'] = name
-                        newsources.append(newsource)
-                else:
-                    newsources.append(source)
-            repo['sources'] = newsources
-
-            if 'sortname' not in repo:
-                repo['sortname'] = repo['name']
-
-            if 'singular' not in repo:
-                repo['singular'] = repo['desc'] + ' package'
-
+class RepositoryProcessor:
+    def __init__(self, repoman, statedir, fetch_retries=3, fetch_retry_delay=30):
+        self.repoman = repoman
         self.statedir = statedir
         self.fetch_retries = fetch_retries
         self.fetch_retry_delay = fetch_retry_delay
@@ -81,35 +50,9 @@ class RepositoryManager:
     def __GetSerializedPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.packages')
 
-    def __GetRepository(self, reponame):
-        for repository in self.repositories:
-            if repository['name'] == reponame:
-                return repository
-
-        raise KeyError('No such repository ' + reponame)
-
     def __CheckRepositoryOutdatedness(self, repository, logger):
         if 'valid_till' in repository and datetime.date.today() >= repository['valid_till']:
             logger.Log('WARNING: Repository {} has reached EoL, please update configs'.format(repository['name']))
-
-    def __GetRepositories(self, reponames=None):
-        if reponames is None:
-            return []
-
-        filtered_repositories = []
-        for repository in self.repositories:
-            match = False
-            for reponame in reponames:
-                if reponame == repository['name']:
-                    match = True
-                    break
-                if reponame in repository['tags']:
-                    match = True
-                    break
-            if match:
-                filtered_repositories.append(repository)
-
-        return filtered_repositories
 
     # Private methods which provide single actions on sources
     def __FetchSource(self, update, repository, source, logger):
@@ -304,41 +247,16 @@ class RepositoryManager:
                 self.count -= 1
             return current
 
-    # Helpers to retrieve data on repositories
-    def GetNames(self, reponames=None):
-        def GetName(repo):
-            return repo['name']
-
-        def GetSortName(repo):
-            return repo['sortname']
-
-        return list(map(GetName, sorted(self.__GetRepositories(reponames), key=GetSortName)))
-
-    def GetMetadata(self, reponames=None):
-        return {
-            repository['name']: {
-                'incomplete': repository.get('incomplete', False),
-                'shadow': repository.get('shadow', False),
-                'repolinks': repository.get('repolinks', []),
-                'packagelinks': repository.get('packagelinks', []),
-                'family': repository['family'],
-                'desc': repository['desc'],
-                'singular': repository['singular'],
-                'type': repository['type'],
-                'color': repository.get('color'),
-            } for repository in self.__GetRepositories(reponames)
-        }
-
     # Single repo methods
     def Fetch(self, reponame, update=True, logger=NoopLogger()):
-        repository = self.__GetRepository(reponame)
+        repository = self.repoman.GetRepository(reponame)
 
         self.__CheckRepositoryOutdatedness(repository, logger)
 
         self.__Fetch(update, repository, logger)
 
     def Parse(self, reponame, transformer, logger=NoopLogger()):
-        repository = self.__GetRepository(reponame)
+        repository = self.repoman.GetRepository(reponame)
 
         packages = self.__Parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -346,7 +264,7 @@ class RepositoryManager:
         return packages
 
     def ParseAndSerialize(self, reponame, transformer, logger=NoopLogger()):
-        repository = self.__GetRepository(reponame)
+        repository = self.repoman.GetRepository(reponame)
 
         packages = self.__Parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -355,12 +273,12 @@ class RepositoryManager:
         return packages
 
     def Deserialize(self, reponame, logger=NoopLogger()):
-        repository = self.__GetRepository(reponame)
+        repository = self.repoman.GetRepository(reponame)
 
         return self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
 
     def Reprocess(self, reponame, transformer=None, logger=NoopLogger()):
-        repository = self.__GetRepository(reponame)
+        repository = self.repoman.GetRepository(reponame)
 
         packages = self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -372,7 +290,7 @@ class RepositoryManager:
     def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
         packages = []
 
-        for repo in self.__GetRepositories(reponames):
+        for repo in self.repoman.GetRepositories(reponames):
             packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ': '))
 
         return packages
@@ -380,14 +298,14 @@ class RepositoryManager:
     def DeserializeMulti(self, reponames=None, logger=NoopLogger()):
         packages = []
 
-        for repo in self.__GetRepositories(reponames):
+        for repo in self.repoman.GetRepositories(reponames):
             packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ': '))
 
         return packages
 
     def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
         deserializers = []
-        for repo in self.__GetRepositories(reponames):
+        for repo in self.repoman.GetRepositories(reponames):
             deserializers.append(self.__StreamDeserializer(self.__GetSerializedPath(repo)))
 
         while True:

@@ -32,12 +32,11 @@ __all__ = [
 ]
 
 
-repoman = RepositoryManager(config['REPOS_DIR'], 'dummy')
-repometadata = repoman.GetMetadata(config['REPOSITORIES'])
-reponames = repoman.GetNames(config['REPOSITORIES'])
-
-
+__repoman = RepositoryManager(config['REPOS_DIR'])
 __fontmeasurer = FontMeasurer(config['BADGE_FONT'], 11)
+
+repometadata = __repoman.GetMetadata(config['REPOSITORIES'])
+reponames = __repoman.GetNames(config['REPOSITORIES'])
 
 
 def get_text_width(text):
