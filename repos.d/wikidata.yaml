@@ -150,3 +150,10 @@
     - desc: Wikidata entity
       url: "https://www.wikidata.org/wiki/{name}"
   tags: [ all, production ]
+
+# Some additional useful requests
+#
+# - List all software which is available for Linux or Unix-Like OSes with their package names
+#   Use this to find missing package names
+#
+# https://query.wikidata.org/#SELECT%0A %3Fproject%0A %3FprojectLabel%0A (GROUP_CONCAT(DISTINCT %3Farch) AS %3Farch)%0A (GROUP_CONCAT(DISTINCT %3Faur) AS %3Faur)%0A (GROUP_CONCAT(DISTINCT %3Fdebian) AS %3Fdebian)%0A (GROUP_CONCAT(DISTINCT %3Ffedora) AS %3Ffedora)%0A (GROUP_CONCAT(DISTINCT %3Fgentoo) AS %3Fgentoo)%0A (GROUP_CONCAT(DISTINCT %3Fubuntu) AS %3Fubuntu)%0AWHERE {%0A %3Fproject wdt%3AP348 %3Fversion . %23 Require version%0A %3Fproject wdt%3AP306 %3Fos . %23 Require OS%0A %0A FILTER(%3Fos %3D wd%3AQ14646 || %3Fos %3D wd%3AQ388) %23 Require OS to be "Unix-like" or "Linux"%0A%0A OPTIONAL { %3Fproject wdt%3AP3454 %3Farch . }%0A OPTIONAL { %3Fproject wdt%3AP4162 %3Faur . }%0A OPTIONAL { %3Fproject wdt%3AP3442 %3Fdebian . }%0A OPTIONAL { %3Fproject wdt%3AP3463 %3Ffedora . }%0A OPTIONAL { %3Fproject wdt%3AP3499 %3Fgentoo . }%0A OPTIONAL { %3Fproject wdt%3AP3473 %3Fubuntu . }%0A %0A SERVICE wikibase%3Alabel { bd%3AserviceParam wikibase%3Alanguage 'en'. }%0A}%0AGROUP BY %3Fproject %3FprojectLabel%0AORDER BY %3FprojectLabel
