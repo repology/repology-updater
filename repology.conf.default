@@ -123,3 +123,8 @@ REPOLOGY_HOME = 'https://repology.org'
 # YYYY-MM-DD' (date interval) format
 #
 STAFF_AFK = []
+
+#
+# Metapackages for which reports are disabled to counter spam or inadequate reporters
+#
+DISABLED_REPORTS = []

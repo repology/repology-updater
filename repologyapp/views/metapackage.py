@@ -169,7 +169,13 @@ def metapackage_badges(name):
 def metapackage_report(name):
     name = name.lower()
 
+    reports_disabled = name in config['DISABLED_REPORTS']
+
     if flask.request.method == 'POST':
+        if reports_disabled:
+            flask.flash('Could not add report: new reports for this metapackage are disabled', 'warning')
+            return flask.redirect(flask.url_for('metapackage_report', name=name))
+
         if get_db().GetReportsCount(name) >= config['MAX_REPORTS']:
             flask.flash('Could not add report: too many reports for this metapackage', 'danger')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
@@ -206,5 +212,6 @@ def metapackage_report(name):
         'metapackage-report.html',
         reports=get_db().GetReports(name),
         name=name,
-        afk_till=AFKChecker(config['STAFF_AFK']).GetAFKEnd()
+        afk_till=AFKChecker(config['STAFF_AFK']).GetAFKEnd(),
+        reports_disabled=reports_disabled
     )
