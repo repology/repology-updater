@@ -260,6 +260,26 @@
   setname: "fonts:croscore"
 
 - name:
+    - caladea
+    - crosextrafonts-caladea
+    - fonts-crosextra-caladea
+    - fonts-ttf-google-crosextra-caladea
+    - google-caladea-fonts
+    - google-crosextra-caladea-fonts
+    - ttf-caladea
+  setname: "fonts:crosextra-caladea"
+
+- name:
+    - carlito
+    - crosextrafonts-carlito
+    - fonts-crosextra-carlito
+    - fonts-ttf-google-crosextra-carlito
+    - google-carlito-fonts
+    - google-crosextra-carlito-fonts
+    - ttf-carlito
+  setname: "fonts:crosextra-carlito"
+
+- name:
     - culmus
     - culmus-ancient-semitic-fonts
     - culmus-fancy
