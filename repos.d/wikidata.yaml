@@ -108,7 +108,7 @@
                       '|L',
                       '|O'
                     )
-                    AS ?versionType
+                    AS ?versionOS
                   )
                   # You may use this in manual request to get label of actual version os
                   #?versionOSItem rdfs:label ?versionOS .
