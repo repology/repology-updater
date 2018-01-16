@@ -88,7 +88,7 @@ schemas = {
             Required('type'): Any('repository', 'site', 'modules'),
             Required('desc'): str,
             Required('family'): Any(*families),
-            'ruleset': Any(Any(*families), [Any(*families)]),  # XXX: make required
+            'ruleset': Any(Any(*rulesets), [Any(*rulesets)]),  # XXX: make required
             'color': str,
             'valid_till': date,
             'default_maintainer': str,
@@ -140,7 +140,7 @@ schemas = {
             'wwwpart': Any(str, [str]),
             'wwwpat': str,
             'family': Any(Any(*families), [Any(*families)]),  # XXX: legacy; remove after rules converted to ruleset
-            'ruleset': Any(Any(*families), [Any(*families)]),
+            'ruleset': Any(Any(*rulesets), [Any(*rulesets)]),
             'category': Any(str, [str]),
             'verlonger': int,
             'vergt': str,
