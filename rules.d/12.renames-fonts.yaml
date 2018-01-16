@@ -404,7 +404,11 @@
 - name:
     - emojione-color-font
     - emojione-color-font-ttf
+    - eosrei-emojione-fonts
+    - fonts-emojione-color
+    - fonts-emojione-svginot
     - ttf-emojione-color
+    - twemoji-color-font
   setname: "fonts:emojione-color" # check this isn't this the same as fonts:emojione
 
 - name:
@@ -576,6 +580,7 @@
   setname: "fonts:gdouros-symbola"
 
 - name:
+    - fonts-gentium-basic
     - fonts-sil-gentium-basic
     - fonts-ttf-sil-gentium-basic
     - gentium-book-basic
