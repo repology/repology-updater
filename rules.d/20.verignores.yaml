@@ -33,6 +33,7 @@
 - { name: agedu,                       ver: "20160920.853cea9",                            ignorever: true }
 - { name: agda-stdlib,                                               family: gentoo,       ignorever: true } # documented broken versioning
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignorever: true }
+- { name: airspy,                      verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: [alienarena, alienarena-data], verpat: ".*20[0-9]{6}.*",                         ignorever: true }
 - { name: amarok,                      verpat: ".*20[0-9]{6}.*",                           ignorever: true } # nix garbage
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignorever: true } # revision
