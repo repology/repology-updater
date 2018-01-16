@@ -465,7 +465,7 @@
 - { name: eclipse-java,                setname: eclipse                   }
 - { name: ecmtools,                    setname: ecm-tools                 }
 - { name: ecrire-git,                  setname: ecrire                    }
-- { name: [ectags,exctags],            setname: exuberant-ctags           }
+- { name: [ectags,exctags,exuberant-ctags], setname: ctags                } # exuberant and universal are split later
 - { name: ee-editor,                   setname: ee                        }
 - { name: eekboard-gtk2,               setname: eekboard                  }
 - { name: eid-viewer-bin,              setname: eid-viewer                }
@@ -1169,6 +1169,7 @@
 - { name: [ufoai-data,ufoai-maps,ufoai-music], setname: ufoai, addflavor: true }
 - { name: [util-linux-aes,util-linux-minimal,util-linux-nosystemd,util-linux-nosystemd-debug,util-linux-selinux,util-linux-systemd], setname: util-linux, addflavor: true }
 - { name: uncrustify0.60,              setname: uncrustify }
+- { name: universal-ctags,             setname: ctags } # exuberant and universal are split later
 - { name: [uqm_3domusic,uqm-3domusic,uqm-content,uqm_voice,uqm-voice], setname: uqm, addflavor: true }
 
 # V

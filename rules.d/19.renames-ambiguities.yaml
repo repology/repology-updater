@@ -32,6 +32,11 @@
 - { name: ck,                          setname: ck-tcl, family: gentoo, category: dev-tcltk }
 - { name: [ck,concurrency-kit,libck],  setname: concurrencykit }
 
+- { name: ctags, wwwpart: sourceforge, setname: exuberant-ctags }
+- { name: ctags, verpat: "5\\.8.*",    setname: exuberant-ctags }
+- { name: ctags, wwwpart: universal,   setname: universal-ctags }
+- { name: ctags,                       warning: "please classify me" }
+
 - { name: cutter, verpat: "1\\.0[0-9].*", setname: cutter-tcp             } # TCP/IP Connection Cutter
 - { name: [cutter,cutter-test_framework,cutter-testing-framework], setname: cutter-unittest } # C++ testing framework
 
