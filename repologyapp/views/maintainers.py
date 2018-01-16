@@ -60,6 +60,8 @@ def maintainers(bound=None):
 
 @ViewRegistrar('/maintainer/<maintainer>')
 def maintainer(maintainer):
+    maintainer = maintainer.lower()
+
     maintainer_info = get_db().GetMaintainerInformation(maintainer)
     metapackages = get_db().GetMaintainerMetapackages(maintainer, 500)
     similar_maintainers = get_db().GetMaintainerSimilarMaintainers(maintainer, 50)
@@ -87,6 +89,8 @@ def maintainer(maintainer):
 
 @ViewRegistrar('/maintainer/<maintainer>/problems')
 def maintainer_problems(maintainer):
+    maintainer = maintainer.lower()
+
     return flask.render_template(
         'maintainer-problems.html',
         maintainer=maintainer,

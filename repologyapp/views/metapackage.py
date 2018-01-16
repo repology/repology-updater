@@ -30,12 +30,16 @@ from repology.packageproc import PackagesetAggregateByVersions, PackagesetSortBy
 
 @ViewRegistrar('/metapackage/<name>')
 def metapackage(name):
+    name = name.lower()
+
     # metapackage landing page; just redirect to packages, may change in future
     return flask.redirect(flask.url_for('metapackage_versions', name=name), 303)
 
 
 @ViewRegistrar('/metapackage/<name>/versions')
 def metapackage_versions(name):
+    name = name.lower()
+
     packages_by_repo = {}
     for package in get_db().GetMetapackage(name):
         if package.repo not in packages_by_repo:
@@ -55,6 +59,8 @@ def metapackage_versions(name):
 
 @ViewRegistrar('/metapackage/<name>/packages')
 def metapackage_packages(name):
+    name = name.lower()
+
     packages_by_repo = {}
 
     for package in get_db().GetMetapackage(name):
@@ -75,6 +81,8 @@ def metapackage_packages(name):
 
 @ViewRegistrar('/metapackage/<name>/information')
 def metapackage_information(name):
+    name = name.lower()
+
     packages = get_db().GetMetapackage(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
 
@@ -130,6 +138,8 @@ def metapackage_information(name):
 
 @ViewRegistrar('/metapackage/<name>/related')
 def metapackage_related(name):
+    name = name.lower()
+
     packages = get_db().GetRelatedMetapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
@@ -148,6 +158,8 @@ def metapackage_related(name):
 
 @ViewRegistrar('/metapackage/<name>/badges')
 def metapackage_badges(name):
+    name = name.lower()
+
     repos_present_in = set([package.repo for package in get_db().GetMetapackage(name)])
     repos = [repo for repo in reponames if repo in repos_present_in]
     return flask.render_template('metapackage-badges.html', name=name, repos=repos)
@@ -155,6 +167,8 @@ def metapackage_badges(name):
 
 @ViewRegistrar('/metapackage/<name>/report', methods=['GET', 'POST'])
 def metapackage_report(name):
+    name = name.lower()
+
     if flask.request.method == 'POST':
         if get_db().GetReportsCount(name) >= config['MAX_REPORTS']:
             flask.flash('Could not add report: too many reports for this metapackage', 'danger')
