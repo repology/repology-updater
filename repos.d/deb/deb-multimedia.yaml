@@ -1,0 +1,23 @@
+###########################################################################
+# Debian multimedia
+###########################################################################
+- name: deb_multimedia_unstable
+  type: repository
+  desc: Deb Multimedia Unstable
+  family: debuntu
+  ruleset: [ debuntu, deb_multimedia ]
+  color: 'c70036'
+  sources:
+    - name: [ main, non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://www.deb-multimedia.org/dists/unstable/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Deb Multimedia home
+      url: http://www.deb-multimedia.org/
+  packagelinks:
+    - desc: Package details on deb-multimedia.org (amd64)
+      url: 'http://www.deb-multimedia.org/dists/unstable/{subrepo}/binary-amd64/package/{name}'
+  tags: [ all, production, deb_multimedia ]
