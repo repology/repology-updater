@@ -47,6 +47,28 @@ def PackagesMerge(packages):
     return outpkgs
 
 
+def PackagesetDeduplicate(packages):
+    aggregated = {}
+
+    # aggregate by subset of fields to make O(n²) merge below faster
+    for package in packages:
+        key = (package.repo, package.subrepo, package.name, package.version)
+        aggregated.setdefault(key, []).append(package)
+
+    outpkgs = []
+    for packages in aggregated.values():
+        while packages:
+            nextpackages = []
+            for package in packages[1:]:
+                if package != packages[0]:
+                    nextpackages.append(package)
+
+            outpkgs.append(packages[0])
+            packages = nextpackages
+
+    return outpkgs
+
+
 def PackagesetCheckFilters(packages, *filters):
     for filt in filters:
         if not filt.Check(packages):

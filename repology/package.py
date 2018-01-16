@@ -229,3 +229,6 @@ class Package:
     @property
     def __dict__(self):
         return {slot: getattr(self, slot) for slot in self.__slots__}
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
