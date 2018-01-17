@@ -118,6 +118,7 @@
 - { name: "ruby:t",                 setname: "t" }
 
 - { name: "ruby:rash",              setname: "ruby:rash-alt", ruleset: sisyphus } # fork
+- { name: "ruby:bcrypt-ruby",       setname: "ruby:bcrypt", ruleset: gentoo } # bcrypt-ruby != bcrypt
 
 # don't allow replacing _ with - to fix _/- clashes
 - { namepat: "ruby:dm_core", last: true }
