@@ -291,6 +291,7 @@
 - { name: "python:pycrypto", verpat: "3.*", family: nix, setname: "python:pycryptodome" } # different package
 - { name: "python:pycrypto", ver: "2.7", family: sisyphus, ignorever: true } # it's 2.7a1
 - { name: "python:pyode", verpat: ".*2010.*", ignorever: true }
+- { name: "python:leveldb", ver: "0.193", ignorever: true } # seems like an older version than latest 0.20 # XXX: make outdated (see #398)
 
 - { name: "python:pygobject", verpat: "2.*", setname: "python:pygobject2" }
 - { name: "python:pygobject", verpat: "3.*", setname: "python:pygobject3" }
