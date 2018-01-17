@@ -348,6 +348,7 @@
 - { name: cloog-ppl-gcc4,              setname: cloog-ppl, addflavor: gcc4 }
 - { name: cloud-watch,                 setname: aws-cw-tools              }
 - { name: [clozure-cl,clozurecl],      setname: ccl                       }
+- { name: cmis-client,                 setname: libcmis, addflavor: client }
 - { name: code,                        setname: vscode, family: sisyphus } # XXX: problem!
 - { name: collector-sidecar,           setname: graylog-collector-sidecar }
 - { name: color-code,                  setname: colorcode                 }
@@ -372,7 +373,7 @@
 - { name: [clamav-server,clamav-light], setname: clamav                    }
 - { name: [clearlooks-phenix-gtk-theme,clearlooks-phenix-theme,gtk3-theme-clearlooks-phenix], setname: clearlooks-phenix }
 - { name: cln6,                        setname: cln                       }
-- { name: [clucene09,clucene-core],    setname: clucene                   }
+- { name: [clucene09,clucene-core,libclucene,libclucene-core], setname: clucene }
 - { name: clutter-1.0,                 setname: clutter                   }
 - { name: clutter-gtk0.10,             setname: clutter-gtk               }
 - { name: [cockatrice-client,cockatrice-server], setname: cockatrice      }

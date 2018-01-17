@@ -478,6 +478,8 @@
 
 - { namepat: "libmm[0-9._-]+",         setname: libmm }
 
+- { namepat: "libmspub[0-9._-]+",      setname: libmspub }
+
 - { namepat: "libnet[0-9.]+",          setname: libnet }
 
 - { name: libnl-doc,                   setname: libnl }
