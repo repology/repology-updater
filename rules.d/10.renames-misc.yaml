@@ -147,6 +147,7 @@
 - { name: [blobby2,blobby-volley],     setname: blobby                    }
 - { name: [blockout2,blockoutii],      setname: blockout                  }
 - { name: bluedevil5,                  setname: bluedevil                 }
+- { name: bmp-esound,                  setname: bmp, addflavor: esound    }
 - { name: bnd1.50,                     setname: bnd                       }
 - { name: boaconstructor,              setname: boa-constructor           }
 - { name: bochs-gdb,                   setname: bochs, addflavor: gdb }
