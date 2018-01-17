@@ -86,6 +86,7 @@
 - { name: biogenesis,                  ver: "0.8.1.42.1",                                  ignorever: true } # mageia garbage
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignorever: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignorever: true } # totally fake
+- { name: blender,                     verpat: "([0-9]+\\.[0-9]+)\\.([a-z])",              setver: "$1$2" } # it's e.g. 2.78c, not 2.78.c
 - { name: bloodfrontier,               ver: "0.85",                                        setver: b2 }
 - { name: bluej,                       verpat: "[0-9]+",                                   ignorever: true }
 - { name: boost,                       ver: "3.1.18",                                      ignorever: true }
