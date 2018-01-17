@@ -117,5 +117,7 @@
 - { name: "ruby:tmuxinator",        setname: "tmuxinator" }
 - { name: "ruby:t",                 setname: "t" }
 
+- { name: "ruby:rash",              setname: "ruby:rash-alt", ruleset: sisyphus } # fork
+
 # don't allow replacing _ with - to fix _/- clashes
 - { namepat: "ruby:dm_core", last: true }
