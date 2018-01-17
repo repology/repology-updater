@@ -464,6 +464,7 @@
 - { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignorever: true }
 - { name: patchelf,                    verpat: ".*pre.*",                                  ignorever: true } # nix
 - { name: pciids,                                                    family: sisyphus,     ignorever: true } # ALT pick random date instead of official date version
+- { name: pcre2,                       ver: "10.31",                 family: fedora,       ignorever: true } # fake, not released
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignorever: true }
 - { name: perl-yaml-libyaml,           ver: "0.71",                  family: [ sisyphus ], ignorever: true } # 0.71 wasn't an authorised release
 - { name: pilot-link,                  ver: "0.12.15",               family: gobolinux,    ignorever: true } # gobolinux fake
