@@ -158,6 +158,7 @@
 - { name: distorm,                     verpat: "20[0-9]{6}.*",                             ignorever: true } # freebsd garbage
 - { name: djvulibre,                   ver: "3.5.27.1",                                    ignorever: true }
 - { name: dnscap,                      verpat: "[0-9]{3,}",                                ignorever: true }
+- { name: dmake,                       verpat: ".*20[0-9]{6}",                             ignorever: true } # freebsd snapshot
 - { name: dosbox,                      verpat: "0\\.74\\.[4r].*",                          ignorever: true }
 - { name: dosemu,                      verpat: "2013.*",                                   ignorever: true }
 - { name: dosemu,                      verpat: "1\\.4\\.1.*",        family: [sisyphus,gentoo], ignorever: true }

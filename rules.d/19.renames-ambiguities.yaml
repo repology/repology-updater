@@ -12,6 +12,12 @@
 
 - { name: bos, wwwpart: boswars,       setname: boswars }
 
+- { name: borg, wwwpart: borg-calendar, setname: borg-calendar }
+- { name: borg, wwwpart: ok-borg,      setname: ok-borg }
+- { name: borg, wwwpart: borgbackup,   setname: borgbackup }
+- { name: borg, family: [sisyphus],    setname: borgbackup }
+- { name: borg,                        warning: "please classify me" }
+
 - { name: cde,                         setname: cdesktopenv, wwwpart: cdesktopenv } # desktop env. vs packaging tool
 
 - { name: clementine,                  setname: clementine-player                            } # clementine player vs. window manager

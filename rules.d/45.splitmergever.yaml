@@ -448,9 +448,13 @@
 - { name: [lcms,lcms1,lcms2,little-cms,little-cms2,lcms-python,liblcms,liblcms2], setname: lcms }
 - { name: lcms, verpat: "2.*",         setname: lcms2 }
 
+- { namepat: "libcdr[0-9._-]+",        setname: libcdr }
+
 - { namepat: "libchamplain[0-9.-]+",   setname: libchamplain }
 
 - { namepat: "libdvbpsi[0-9.-]+",      setname: libdvbpsi }
+
+- { namepat: "libetonyek[0-9._-]+",    setname: libetonyek }
 
 - { namepat: "libgdamm[0-9._-]+",      setname: libgdamm }
 - { name: "libgdamm-docs",             setname: libgdamm, addflavor: docs }
@@ -498,6 +502,8 @@
 - { namepat: "libtorrent-rasterbar[0-9._-]+", setname: libtorrent-rasterbar }
 
 - { namepat: "libwpd[0-9.-]+",         setname: libwpd }
+
+- { namepat: "libwpg[0-9.-]+",         setname: libwpg }
 
 - { namepat: "libwps[0-9.-]+",         setname: libwps }
 
@@ -580,6 +586,8 @@
 
 - { namepat: "mariadb[0-9.-]*(?:-client|-server)?", setname: mariadb }
 - { name: mariadb, verge: "10.3", devel: true } # https://downloads.mariadb.org/
+
+- { namepat: "mdds[0-9._-]+",          setname: mdds }
 
 - { namepat: "mozjs[0-9._-]+",     setname: mozjs }
 - { name: libmozjs,                setname: mozjs }
