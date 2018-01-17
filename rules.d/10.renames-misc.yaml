@@ -1096,6 +1096,7 @@
 - { name: sfk,                         setname: swissfileknife            }
 - { name: sha1dc,                      setname: sha1collisiondetection    }
 - { name: signon-glib,                 setname: libsignon-glib            }
+- { name: silgraphite2.0,              setname: silgraphite }
 - { name: [silgraphite-ft,silgraphite-xft], setname: silgraphite, addflavor: true }
 - { name: simple-scan-3.12,            setname: simple-scan }
 - { name: simple-scan-trunk,           setname: simple-scan, ignorever: true }
