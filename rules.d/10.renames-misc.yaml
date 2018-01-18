@@ -52,6 +52,7 @@
 - { name: arxlibertatis,               setname: arx-libertatis            }
 - { name: albatross, verpat: "1\\.7.*", setname: albatross-gtk-theme      }
 - { name: albatross-themes,            setname: albatross-gtk-theme       }
+- { name: [alien-package-converter,alien_package_converter], setname: alien }
 - { name: alienarena,                  setname: alien-arena               }
 - { name: alienarena-data,             setname: alien-arena-data          }
 - { name: [alsa,libalsa,libalsa2,alsa-lib-noassertion], setname: alsa-lib }
@@ -436,6 +437,7 @@
 - { name: divideandsucceed,            setname: divide-and-succeed        }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
 - { name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools,djvu], setname: djvulibre }
+- { name: dkms-sorted,                 setname: dkms, addflavor: sorted }
 - { name: [docbook-dsssl-stylesheets,docbook-style-dsssl], setname: docbook-dsssl }
 - { name: [docbook-dsssl-doc,docbook-style-dsssl-doc], setname: docbook-dsssl }
 - { name: docbook-xml-simple,          setname: sdocbook-xml              } # ravenports
@@ -951,6 +953,8 @@
 - { name: [ncurses-full,ncurses-with-gpm,ncursesw], setname: ncurses, addflavor: true }
 - { name: netlogo-bin,                 setname: netlogo, addflavor: bin }
 - { name: neverball-data,              setname: neverball, addflavor: data }
+- { name: newsbeuter-dev,              setname: newsbeuter, ignorever: true }
+- { name: newsbeuter2.8,               setname: newsbeuter }
 - { name: [libnettle,nettle4],         setname: nettle                    }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
 - { namepat: "network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine)", setname: "networkmanager-$1" }
