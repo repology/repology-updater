@@ -24,14 +24,46 @@ from repology.packageproc import PackagesetSortByVersions
 
 class MetapackagesFilterInfo:
     fields = {
-        'search':     {'type': str,  'advanced': False},  # noqa: E241
-        'maintainer': {'type': str,  'advanced': True},   # noqa: E241
-        'category':   {'type': str,  'advanced': True},   # noqa: E241
-        'inrepo':     {'type': str,  'advanced': True},   # noqa: E241
-        'notinrepo':  {'type': str,  'advanced': True},   # noqa: E241
-        'minspread':  {'type': int,  'advanced': True},   # noqa: E241
-        'maxspread':  {'type': int,  'advanced': True},   # noqa: E241
-        'outdated':   {'type': bool, 'advanced': True},   # noqa: E241
+        'search': {
+            'type': str,
+            'advanced': False,
+            'action': lambda request, value: request.NameSubstring(value.strip().lower()),
+        },
+        'maintainer': {
+            'type': str,
+            'advanced': True,
+            'action': lambda request, value: request.Maintainer(value.strip().lower()),
+        },
+        'category': {
+            'type': str,
+            'advanced': True,
+            'action': lambda request, value: request.Category(value.strip()),  # case sensitive (yet)
+        },
+        'inrepo': {
+            'type': str,
+            'advanced': True,
+            'action': lambda request, value: request.InRepo(value.strip().lower()),
+        },
+        'notinrepo': {
+            'type': str,
+            'advanced': True,
+            'action': lambda request, value: request.NotInRepo(value.strip().lower()),
+        },
+        'minspread': {
+            'type': int,
+            'advanced': True,
+            'action': lambda request, value: request.MinFamilies(value),
+        },
+        'maxspread': {
+            'type': int,
+            'advanced': True,
+            'action': lambda request, value: request.MaxFamilies(value),
+        },
+        'outdated': {
+            'type': bool,
+            'advanced': True,
+            'action': lambda request, value: request.Outdated(),
+        },
     }
 
     def __init__(self):
@@ -54,22 +86,9 @@ class MetapackagesFilterInfo:
 
     def GetRequest(self):
         request = MetapackageRequest()
-        if 'search' in self.args:
-            request.NameSubstring(self.args['search'].strip().lower())
-        if 'maintainer' in self.args:
-            request.Maintainer(self.args['maintainer'].strip().lower())
-        if 'category' in self.args:
-            request.Category(self.args['category'].strip())  # case sensitive (yet)
-        if 'inrepo' in self.args:
-            request.InRepo(self.args['inrepo'].strip().lower())
-        if 'notinrepo' in self.args:
-            request.NotInRepo(self.args['notinrepo'].strip().lower())
-        if 'minspread' in self.args:
-            request.MinFamilies(self.args['minspread'])
-        if 'maxspread' in self.args:
-            request.MaxFamilies(self.args['maxspread'])
-        if 'outdated' in self.args:
-            request.Outdated()
+        for fieldname, fieldinfo in MetapackagesFilterInfo.fields.items():
+            if fieldname in self.args:
+                fieldinfo['action'](request, self.args[fieldname])
 
         return request
 
