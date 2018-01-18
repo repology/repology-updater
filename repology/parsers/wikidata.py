@@ -47,7 +47,8 @@ class WikidataJsonParser():
             names = []
             for field in ['arch_packages', 'aur_packages']:
                 if packagedata[field]:
-                    names += packagedata[field].split(', ')
+                    names = packagedata[field].split(', ')
+                    break
 
             # generate a package for each package name; these will be merged anyway
             for name in set(names):
