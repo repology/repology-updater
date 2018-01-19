@@ -19,7 +19,7 @@ import json
 import sys
 
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 
 
 def SimplifyResult(injson):
@@ -65,7 +65,7 @@ class WikidataJsonParser():
 
                     pkg = Package()
 
-                    pkg.devel = is_devel
+                    pkg.SetFlag(PackageFlags.devel, is_devel)
 
                     pkg.name = entity
                     pkg.effname = name

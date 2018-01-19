@@ -1,5 +1,5 @@
-- { family: macports, namepat: "(.*)-devel", setname: "$1", ignorever: true }
-#- { family: msys2, namepat: "(.*)-git", setname: "$1", ignorever: true }
+- { family: macports, namepat: "(.*)-devel", setname: "$1", ignore: true }
+#- { family: msys2, namepat: "(.*)-git", setname: "$1", ignore: true }
 
 - { family: chocolatey, namepat: "(.*)\\.(install|portable|commandline)", setname: "$1", addflavor: "$2" }
 - { family: kaos, namepat: "(.*)-debug", setname: "$1", addflavor: debug }
@@ -16,7 +16,7 @@
 - { ruleset: deb_multimedia, namepat: "(.*)-dmo", setname: "$1" }
 
 - { ruleset: aur, name: php-svn, setname: "php:svn" } # XXX: hack to save from following rule
-- { ruleset: aur, namepat: "(.*)-(cvs|svn|hg|darcs|bzr|git)", setname: "$1", ignorever: true }
+- { ruleset: aur, namepat: "(.*)-(cvs|svn|hg|darcs|bzr|git)", setname: "$1", ignore: true }
 - { ruleset: aur, namepat: "(.*)-bin", setname: "$1" } # XXX: addflavor: bin
 
 # XXX: handle -devel for freebsd?

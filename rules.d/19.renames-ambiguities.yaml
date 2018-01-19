@@ -289,7 +289,7 @@
 
 # tales of majeyal vs. troubles of middle earth
 - { name: [t-engine4,tales-of-majeyal,tome4,tome4-data,tome-ah], setname: tome }
-- { name: [tome4-beta], setname: tome, ignorever: true }
+- { name: [tome4-beta], setname: tome, ignore: true }
 - { name: tome, verpat: "1\\..*", setname: tales-of-majeyal }
 - { name: tome, verpat: "2\\..*", setname: tome2 }
 - { name: tome, wwwpart: tome.te4.org, setname: tales-of-majeyal } # aur garbage

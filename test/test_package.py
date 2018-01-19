@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.package import Package, PackageSanityCheckFailure, PackageSanityCheckProblem
+from repology.package import Package, PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
 
 
 class TestParsers(unittest.TestCase):
@@ -72,11 +72,9 @@ class TestParsers(unittest.TestCase):
         with self.assertRaises(PackageSanityCheckFailure):
             Package(repo='r', family='f', name='n', effname='e', version='0', downloads='foo').CheckSanity()
         with self.assertRaises(PackageSanityCheckFailure):
-            Package(repo='r', family='f', name='n', effname='e', version='0', ignore=1).CheckSanity()
+            Package(repo='r', family='f', name='n', effname='e', version='0', flags='foo').CheckSanity()
         with self.assertRaises(PackageSanityCheckFailure):
             Package(repo='r', family='f', name='n', effname='e', version='0', shadow=1).CheckSanity()
-        with self.assertRaises(PackageSanityCheckFailure):
-            Package(repo='r', family='f', name='n', effname='e', version='0', ignoreversion=1).CheckSanity()
 
     def test_sanity_essential_fields_bad_format(self):
         with self.assertRaises(PackageSanityCheckProblem):

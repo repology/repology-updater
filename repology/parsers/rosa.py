@@ -19,7 +19,7 @@ import re
 import sys
 import xml.etree.ElementTree
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 
 
 class RosaInfoXmlParser():
@@ -53,7 +53,7 @@ class RosaInfoXmlParser():
             # and mark version as ignored with non-trivial ROSAREV,
             # as it it likely a snapshot and trus cannot be trusted
             if not re.fullmatch('[0-9]+\\.src', fn[2]):
-                pkg.ignoreversion = True
+                pkg.SetFlag(PackageFlags.ignore)
                 match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', fn[2].lower())
                 if match:
                     pkg.version += match.group(0)

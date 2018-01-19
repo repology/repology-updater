@@ -54,10 +54,8 @@ class TestParsers(unittest.TestCase):
             'licenses': [],
             'downloads': [],
 
-            'ignore': False,
+            'flags': 0,
             'shadow': False,
-            'ignoreversion': False,
-            'devel': False,
             'verfixed': False,
 
             'flavors': [],

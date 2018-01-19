@@ -57,7 +57,7 @@
 - { name: alienarena-data,             setname: alien-arena-data          }
 - { name: [alsa,libalsa,libalsa2,alsa-lib-noassertion], setname: alsa-lib }
 - { name: [american-fuzzy-lop,afl-fuzz], setname: afl                     }
-- { name: amule-devel,                 setname: amule, ignorever: true }
+- { name: amule-devel,                 setname: amule, ignore: true }
 - { name: amule-daemon,                setname: amule, addflavor: daemon }
 - { name: amule-gui,                   setname: amule, addflavor: gui }
 - { name: anacron, verpat: "2\\.[4-9].*", setname: anacron2               } # different project (a fork?)
@@ -88,7 +88,7 @@
 - { name: apache-jena,                 setname: jena                      }
 - { name: apache-jena-fuseki,          setname: jena                      }
 - { name: apache-openoffice,           setname: openoffice                }
-- { name: apache-openoffice-devel,     setname: openoffice, ignorever: true }
+- { name: apache-openoffice-devel,     setname: openoffice, ignore: true }
 - { name: [apcupsd-x11,apcupsd-cgi],   setname: apcupsd                   }
 - { name: aptanastudio,                setname: aptana-studio }
 - { name: [aqbanking5,aqbanking5-gtk,aqbanking5-svn], setname: aqbanking }
@@ -106,7 +106,7 @@
 - { name: audacious2-plugins,          setname: audacious-plugins         }
 - { name: audacity-freeworld,          setname: audacity                  }
 - { name: autotools-wrappers,          setname: autotools                 } # ravenports
-- { name: autotools-dev,               setname: autotools, ignorever: true }
+- { name: autotools-dev,               setname: autotools, ignore: true }
 - { name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4], setname: avidemux }
 - { name: avr8-burn-omat,              setname: avr8-burn-o-mat           }
 - { name: avro-cpp,                    setname: avro-c++                  }
@@ -116,7 +116,7 @@
 # B
 - { name: b2-tools,                    setname: backblaze-b2 }
 - { name: [backintime-cli,backintime-common,backintime-qt4], setname: backintime, addflavor: true }
-- { name: backuppc-devel,              setname: backuppc, ignorever: true }
+- { name: backuppc-devel,              setname: backuppc, ignore: true }
 - { name: backuppc4,                   setname: backuppc                  }
 - { name: balsa-gtk2,                  setname: balsa                     }
 - { name: barcode, category: app-officeext, setname: libreoffice-extension-barcode, family: [ gentoo ] }
@@ -137,8 +137,8 @@
 - { name: bicyclerepair-py27,          setname: bicyclerepair             }
 - { name: billard-gl,                  setname: billardgl                 }
 - { name: [bird-v6,bird6],             setname: bird                      }
-- { name: blackshades-elite-svn,       setname: blackshadeselite, ignorever: true }
-- { name: blackshades-svn,             setname: blackshades, ignorever: true }
+- { name: blackshades-elite-svn,       setname: blackshadeselite, ignore: true }
+- { name: blackshades-svn,             setname: blackshades, ignore: true }
 - { name: [blas-reference,blas-docs],  setname: blas, addflavor: docs     }
 - { name: blas-tmg,                    setname: blas                      }
 - { name: blasphemer-wad,              setname: blasphemer                }
@@ -332,7 +332,7 @@
 - { name: cdemu,                       setname: cdemu-client, family: gentoo }
 - { name: ceti-2-themes,               setname: ceti-2-theme              }
 - { name: [center-im,centerim5],       setname: centerim                  }
-- { name: centerim-devel,              setname: centerim, ignorever: true }
+- { name: centerim-devel,              setname: centerim, ignore: true }
 - { name: cfr-decompiler,              setname: cfr }
 - { name: chakra,                      setname: chakracore, family: homebrew }
 - { name: chakaracore,                 setname: chakracore } # AUR misspell
@@ -369,7 +369,7 @@
 - { name: [chexedit, ncurses-hexedit], setname: curses-hexedit            }
 - { name: [chipmunk6,chipmunkphysics,libchipmunk], setname: chipmunk      }
 - { name: [chromium-browser,chromium-browser-stable,chromium-gtk2], setname: chromium }
-- { name: [chromium-beta,chromium-dev,chromium-browser-dev], setname: chromium, ignorever: true }
+- { name: [chromium-beta,chromium-dev,chromium-browser-dev], setname: chromium, ignore: true }
 - { name: chromiumbsu,                 setname: chromium-bsu }
 - { name: ckeditor3,                   setname: ckeditor                  }
 - { name: [clamav-server,clamav-light], setname: clamav                    }
@@ -396,7 +396,7 @@
 - { name: crimsonfields,               setname: crimson-fields            }
 - { name: crimson, verpat: "0\\.5.*",  setname: crimson-fields            } # XXX: MUST be renamed upstream
 - { name: critter,                     setname: criticalmass              }
-- { name: crypto++-562,                ignore: true                       } # specific version from AUR
+- { name: crypto++-562,                setname: crypto++                  }
 - { name: csharp-mode,                 setname: csharp-mode.el            }
 - { name: cssh,                        setname: clusterssh                }
 - { name: ctpp,                        setname: ctpp2                     }
@@ -424,7 +424,7 @@
 - { name: dbus-cplusplus,              setname: dbus-c++                  }
 - { name: d-conf,                      setname: dconf                     }
 - { name: dcc-dccd,                    setname: dcc                       }
-- { name: dconf-editor-3.20,           ignore: true                       } # AUR specific versions
+- { name: dconf-editor-3.20,           setname: dconf-editor              }
 - { name: ddclient-ipv6,               setname: ddclient                  }
 - { name: deadbeef-with-plugins,       setname: deadbeef                  }
 - { name: [dealii,dealii-openmpi,deal-ii], setname: deal.ii               }
@@ -432,7 +432,7 @@
 - { name: [doom-freedoom,freedoom-freedm], setname: freedoom              }
 - { name: iodoom3-dhewm3,              setname: dhewm3                    }
 - { name: dgen,                        setname: dgen-sdl                  }
-- { name: dino-unstable,               setname: dino, ignorever: true }
+- { name: dino-unstable,               setname: dino, ignore: true }
 - { name: discord-bin,                 setname: discord }
 - { name: divideandsucceed,            setname: divide-and-succeed        }
 - { name: [djview,djview-qt4,djview4,djvulibre-djview4], setname: djview4 } # should be merged with djvulibre or not?
@@ -448,9 +448,9 @@
 - { name: dr14_tmeter,                 setname: dr14tmeter                }
 - { name: devedeng,                    setname: devede                    }
 - { name: [docker-io,docker.io],       setname: docker                    }
-- { name: docker-git-x86,              setname: docker, ignorever: true   } # ignore version just for the cause, because of suspicious name
+- { name: docker-git-x86,              setname: docker, ignore: true   } # ignore version just for the cause, because of suspicious name
 - { name: [dogecoind,dogecoin-qt,dogecoin-daemon], setname: dogecoin      }
-- { name: drbl-experimental,           setname: drbl, ignorever: true     }
+- { name: drbl-experimental,           setname: drbl, ignore: true     }
 - { name: dsniff-nox11,                setname: dsniff                    }
 - { name: [dspam-mysql,dspam-pgsql,dspam-web], setname: dspam             }
 - { name: dungeoncrawl,                setname: dungeon-crawl             }
@@ -486,7 +486,7 @@
 - { name: emacs-mmm,                   setname: emacs-mmm-mode            }
 - { name: embree-isa,                  setname: embree                    }
 - { name: emby-server,                 setname: emby                      }
-- { name: emby-server-beta,            setname: emby, ignorever: true     }
+- { name: emby-server-beta,            setname: emby, ignore: true     }
 - { name: emotiongenericplayers,       setname: emotion-generic-players   }
 - { name: emulation-station,           setname: emulationstation          }
 - { name: enblend,                     setname: enblend-enfuse            }
@@ -496,9 +496,9 @@
 - { name: enigma_sdl,                  setname: enigma                    }
 - { name: entagged-tageditor,          setname: entagged,                 family: [ gentoo ]  }
 - { name: eot-utilities,               setname: eot-utils }
-- { name: ephoto-git,                  setname: ephoto, ignorever: true }
+- { name: ephoto-git,                  setname: ephoto, ignore: true }
 - { name: epiphany-browser,            setname: epiphany                  }
-- { name: epiphany-unstable,           setname: epiphany, ignorever: true }
+- { name: epiphany-unstable,           setname: epiphany, ignore: true }
 - { name: epl.el,                      setname: epl,                      family: [ freebsd ] }
 - { name: epsxe1.9,                    setname: epsxe                     }
 - { name: [eric4,eric5,eric6],         setname: eric                      }
@@ -512,7 +512,7 @@
 - { name: evopedia_qt,                 setname: evopedia                  }
 - { name: exactimage,                  setname: exact-image               }
 - { name: [exercism, golang-github-exercism-cli], setname: exercism-cli   }
-- { name: exaile-devel,                setname: exaile, ignorever: true }
+- { name: exaile-devel,                setname: exaile, ignore: true }
 - { name: exim4,                       setname: exim                      }
 - { name: expat21,                     setname: expat                     }
 - { name: eye-d3,                      setname: eyed3                     }
@@ -524,7 +524,7 @@
 - { name: factor-lang,                 setname: factor                    }
 - { name: fail2ban6,                   setname: fail2ban                  }
 - { namepat: "farstream[0-9.-]+",      setname: farstream                 }
-- { name: fastd-devel,                 setname: fastd, ignorever: true    }
+- { name: fastd-devel,                 setname: fastd, ignore: true    }
 - { name: fasta3,                      setname: fasta                     }
 - { name: fb-folly,                    setname: folly                     }
 - { name: [fifengine,py27-fife],       setname: fife                      }
@@ -553,7 +553,7 @@
 - { name: fofix-dfsg,                  setname: fofix                     }
 - { name: foldingathome-noroot,        setname: foldingathome             }
 - { name: [fomp-lv2,lv2-fomp-plugins], setname: fomp                      }
-- { name: foo2zjs-nightly,             setname: foo2js, ignorever: true   }
+- { name: foo2zjs-nightly,             setname: foo2js, ignore: true   }
 - { name: foobillardplus,              setname: foobillard++              }
 - { name: fon-flash-cli,               setname: fon-flash }
 - { name: fotaq,                       setname: flight-of-the-amazon-queen }
@@ -603,7 +603,7 @@
 - { name: gkrellm2,                    setname: gkrellm                   }
 - { name: gl117,                       setname: gl-117                    }
 - { name: [gmrun-multihead,gmrun-xdg], setname: gmrun }
-- { name: gnash-git,                   setname: gnash, ignorever: true }
+- { name: gnash-git,                   setname: gnash, ignore: true }
 - { namepat: "gnat(cross-binutils.*)", setname: "$1", addflavor: gnat }
 - { name: [gnomephotoprinter,gnome-photo-print], setname: gnome-photo-printer }
 - { name: gnome-games-aisleriot,       setname: aisleriot }
@@ -650,7 +650,7 @@
 - { name: [googletest,libgtest],       setname: gtest                     }
 - { name: google-glog,                 setname: glog                      }
 - { name: gopro-vrplayer,              setname: gopro-vr-player           }
-- { name: gopro-vr-player-beta,        setname: gopro-vr-player, ignorever: true }
+- { name: gopro-vr-player-beta,        setname: gopro-vr-player, ignore: true }
 - { name: gpg-agent,                   setname: gnupg                     }
 - { namepat: "grafana[0-9]+",          setname: grafana                   }
 - { name: grafana-bin,                 setname: grafana                   }
@@ -695,15 +695,15 @@
 - { name: icon-lang,                   setname: icon                      }
 - { name: [intel-tbb,libtbb],          setname: tbb                       }
 - { name: ir.lv2,                      setname: ir-lv2                    }
-- { name: ircii-current,               setname: ircii, ignorever: true }
+- { name: ircii-current,               setname: ircii, ignore: true }
 - { name: isc-kea,                     setname: kea }
 - { name: iso_8879,                    setname: iso8879 }
-- { name: ingen-unstable,              setname: ingen, ignorever: true }
+- { name: ingen-unstable,              setname: ingen, ignore: true }
 - { name: inotify-tools-inc,           setname: inotify-tools, addflavor: inc }
 - { name: [intellij-idea-ce, idea-community, intellij-idea-community-edition,intellij], setname: intellij-idea-community }
-- { name: intellij-idea-ce-eap,        setname: intellij-idea-community, ignorever: true }
+- { name: intellij-idea-ce-eap,        setname: intellij-idea-community, ignore: true }
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre,intellij-ultimate], setname: intellij-idea-ultimate }
-- { name: intellij-idea-ue-eap,        setname: intellij-idea-ultimate, ignorever: true }
+- { name: intellij-idea-ue-eap,        setname: intellij-idea-ultimate, ignore: true }
 - { name: intellij-pycharm,            setname: pycharm          }
 - { name: iproute2-cake,               setname: iproute2, addflavor: cake }
 - { name: iproute2-doc,                setname: iproute2, addflavor: doc }
@@ -720,7 +720,7 @@
 - { name: jenkins-lts,                 setname: jenkins                   }
 - { name: jbig-kit,                    setname: jbigkit                   }
 - { name: jboss-forge-offline,         setname: jboss-forge               }
-- { name: josm-latest,                 setname: josm, ignorever: true     }
+- { name: josm-latest,                 setname: josm, ignore: true     }
 - { name: json-c12,                    setname: json-c                    }
 - { name: [junit4,java-junit,junit5],  setname: junit }
 
@@ -752,7 +752,7 @@
 - { name: libagg,                      setname: agg                       }
 - { name: [liballegroogg,allegroogg],  setname: alogg                     }
 - { name: libargon2,                   setname: argon2                    }
-- { name: [libasr-devel,libasr-snapshot], setname: libasr, ignorever: true }
+- { name: [libasr-devel,libasr-snapshot], setname: libasr, ignore: true }
 - { name: libatlas3,                   setname: atlas                     }
 - { name: libaudiofile,                setname: audiofile                 }
 - { name: libbullet,                   setname: bullet                    }
@@ -823,7 +823,7 @@
 - { name: libproj,                     setname: proj                      }
 - { name: libquicktime-lame,           setname: libquicktime, addflavor: lame }
 - { name: libquicktime111,             setname: libquicktime              }
-- { name: libressl-devel,              setname: libressl, ignorever: true }
+- { name: libressl-devel,              setname: libressl, ignore: true }
 - { name: libressl-netcat,             setname: libressl, addflavor: netcat }
 - { name: librfm5,                     setname: librfm                    }
 - { name: librlog,                     setname: rlog }
@@ -854,7 +854,7 @@
 - { name: [libx264,lib264-142],        setname: x264                      }
 - { name: libx264-10bit,               setname: x264, addflavor: 10bit }
 - { name: libx264-all,                 setname: x264, addflavor: all }
-- { name: libx264-devel,               setname: x264, ignorever: true }
+- { name: libx264-devel,               setname: x264, ignore: true }
 - { name: libxml2-reference,           setname: libxml2, addflavor: reference }
 - { name: libxml2-linenum,             setname: libxml2, addflavor: linenum }
 - { name: libxmp-lite,                 setname: libxmp                    }
@@ -878,14 +878,14 @@
 - { name: [man-pages,linux-man-pages,linux-manpages], setname: manpages                  }
 - { name: mate-brisk-menu,             setname: brisk-menu                }
 - { name: [magit-emacs25,emacs-magit], setname: magit                     }
-- { name: [magit-svn,emacs-magit-git], setname: magit, ignorever: true    }
+- { name: [magit-svn,emacs-magit-git], setname: magit, ignore: true    }
 - { name: mbmon,                       setname: xmbmon                    }
 - { name: mc46,                        setname: mc                        }
 - { name: mcron2,                      setname: mcron                     }
 - { name: mdocml,                      setname: mandoc                    } # mdocml is an old name (schwarze@openbsd.org)
 - { name: mednaffe-gtk2,               setname: mednaffe                  }
 - { name: [meld-gtk2],                 setname: meld                      }
-- { name: meld-dev,                    setname: meld, ignorever: true     }
+- { name: meld-dev,                    setname: meld, ignore: true     }
 - { name: memtestplus,                 setname: memtest86+                }
 - { name: [mesa-demo,mesademos],       setname: mesa-demos                }
 - name:
@@ -955,7 +955,7 @@
 - { name: [ncurses-full,ncurses-with-gpm,ncursesw], setname: ncurses, addflavor: true }
 - { name: netlogo-bin,                 setname: netlogo, addflavor: bin }
 - { name: neverball-data,              setname: neverball, addflavor: data }
-- { name: newsbeuter-dev,              setname: newsbeuter, ignorever: true }
+- { name: newsbeuter-dev,              setname: newsbeuter, ignore: true }
 - { name: newsbeuter2.8,               setname: newsbeuter }
 - { name: [libnettle,nettle4],         setname: nettle                    }
 - { name: [nicotine, nicotine-plus],   setname: nicotine+                 }
@@ -976,7 +976,7 @@
 - { name: oggz,                        setname: liboggz                   }
 - { name: [openal-static,openal-examples], setname: openal, addflavor: true }
 - { name: openastromenace,             setname: astromenace               }
-- { name: openastromenace-devel,       setname: astromenace, ignorever: true }
+- { name: openastromenace-devel,       setname: astromenace, ignore: true }
 - { name: [openblas-lapack,openblas-lapack-ilp64], setname: openblas      }
 - { name: opencv2,                     setname: opencv                    }
 - { name: [openjp2, libopenjpeg2.0],   setname: openjpeg2                 }
@@ -1027,13 +1027,13 @@
 - { name: powerdns,                    setname: pdns }
 - { name: [powerdns-geoip,powerdns-ldap,powerdns-mysql,powerdns-odbc,powerdns-pgsql], setname: pdns }
 - { name: pkg-bsd,                     setname: pkg,                      family: ravenports }
-- { name: pkg-devel,                   setname: pkg, ignorever: true,     family: freebsd }
+- { name: pkg-devel,                   setname: pkg, ignore: true,     family: freebsd }
 - { name: pkgconfig,                   setname: pkgconf,                  family: ravenports } # XXX
 - { name: pnp4nagios-cgi,              setname: pnp4nagios }
 - { name: postfix-postfwd,             setname: postfwd,                  family: [ freebsd ] }
 - { name: postgresql-libpqxx,          setname: libpqxx                   }
 - { name: [postgresql-pglogical,pglogical2], setname: pglogical }
-- { name: poudriere-devel,             setname: poudriere, ignorever: true }
+- { name: poudriere-devel,             setname: poudriere, ignore: true }
 - { namepat: "povray[0-9]+",           setname: povray,                   family: [ freebsd ] }
 - { name: powder, wwwpart: powder.hardwired.org.uk, setname: powder-toy } # rosa 2014 brokenness
 - { name: [powdertoy,the-powder-toy,thepowdertoy], setname: powder-toy }
@@ -1069,7 +1069,7 @@
 - { name: randomize-lines,             setname: rl                        } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
 - { name: rb_libtorrent,               setname: libtorrent-rasterbar      }
 - { name: rawtherapee-gtk2,            setname: rawtherapee               }
-- { name: rawtherapee-unstable,        setname: rawtherapee, ignorever: true }
+- { name: rawtherapee-unstable,        setname: rawtherapee, ignore: true }
 - { name: [remmina-appindicator,remmina-gtk2,remmina-plugin-gnome,remmina-plugin-nx,remmina-plugin-rdp,remmina-plugin-telepathy,remmina-plugin-vnc,remmina-plugin-xdmcp,remmina-plugins,remmina-xfce], setname: remmina, addflavor: true }
 - { name: rdkafka,                     setname: librdkafka                }
 - { name: red-eclipse,                 setname: redeclipse }
@@ -1107,7 +1107,7 @@
 - { name: silgraphite2.0,              setname: silgraphite }
 - { name: [silgraphite-ft,silgraphite-xft], setname: silgraphite, addflavor: true }
 - { name: simple-scan-3.12,            setname: simple-scan }
-- { name: simple-scan-trunk,           setname: simple-scan, ignorever: true }
+- { name: simple-scan-trunk,           setname: simple-scan, ignore: true }
 - { name: simplescreenrecorder-lib,    setname: simplescreenrecorder      }
 - { name: singularityviewer-alpha,     setname: singularityviewer, devel: true }
 - { name: sisc-scheme,                 setname: sisc }
@@ -1141,7 +1141,7 @@
 
 # T
 - { name: [telegram-desktop-bin,telegram-desktop-systemqt,telegram-desktop-systemqt-emojione,telegram-desktop-systemqt-notoemoji], setname: telegram-desktop }
-- { name: [telegram-desktop-bin-dev,telegram-desktop-dev], setname: telegram-desktop, ignorever: true }
+- { name: [telegram-desktop-bin-dev,telegram-desktop-dev], setname: telegram-desktop, ignore: true }
 - { name: [libtelepathy-farstream, telepathy-farstream-0.4], setname: telepathy-farstream }
 - { name: [tetrinet-x,tetrinet-server], setname: tetrinetx                }
 - { name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy], setname: tidy }
@@ -1153,7 +1153,7 @@
 - { name: tex-whizzytex,               setname: whizzytex }
 - { name: theora,                      setname: libtheora }
 - { name: thttpd,                      setname: sthttpd, family: gentoo } # actually fork of thttpd; XXX: problem
-- { name: tigervnc-devel,              setname: tigervnc, ignorever: true }
+- { name: tigervnc-devel,              setname: tigervnc, ignore: true }
 - { name: tint-tetris,                 setname: tint }
 - { name: [tintin,tintinxx],           setname: tintin++                  }
 - { name: [tiled-java,tiled-qt],       setname: tiled                     }
@@ -1193,16 +1193,16 @@
 - { name: [libv4l,v4l-utils,v4l_compat], setname: video4linux }
 - { name: valyria-tear,                setname: valyriatear               }
 - { name: [varnish4,varnish5],         setname: varnish                   }
-- { name: vdr-devel,                   setname: vdr, ignorever: true      }
+- { name: vdr-devel,                   setname: vdr, ignore: true      }
 - { name: vertx,                       setname: vert.x }
 - { name: [libvidstab,vid-stab,vidstab], setname: vid.stab }
 - { name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw,vim-gvim], setname: vim, addflavor: true }
 - { name: vim-vint,                    setname: vint }
 - { name: [virtuoso-6,virtuoso-7,virtuoso-opensource,virtuoso-ose,virtuoso6], setname: virtuoso }
 - { name: [visual-studio-code,visual-studio-code-oss,visualstudiocode], setname: vscode }
-- { name: visual-studio-code-insiders, setname: vscode, ignorever: true }
-- { name: vlc-nightly,                 setname: vlc, ignorever: true      }
-- { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignorever: true }
+- { name: visual-studio-code-insiders, setname: vscode, ignore: true }
+- { name: vlc-nightly,                 setname: vlc, ignore: true      }
+- { name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], setname: vlc, ignore: true }
 - { name: [vsftpd-ssl,vsftpd-ext],     setname: vsftpd                    }
 
 # W
@@ -1232,7 +1232,7 @@
 
 # X
 - { name: x-moto,                      setname: xmoto                     }
-- { name: x264-devel,                  setname: x264, ignorever: true }
+- { name: x264-devel,                  setname: x264, ignore: true }
 - { name: x2vnc-no-xinerama,           setname: x2vnc, addflavor: true }
 - { name: xa65,                        setname: xa }
 - { name: [xalanc,xalan-c++],          setname: xalan-c }
@@ -1241,10 +1241,10 @@
 - { name: [xfce4-conf,xfce4-config,xfconf4.12,xfce4-conf,xfce4-config], setname: xfconf }
 - { name: xfconf-gtk3,                 setname: xfconf, addflavor: gtk3 }
 - { name: libxfconf,                   setname: xfconf, addflavor: lib }
-- { name: xfconf-devel,                setname: xfconf, ignorever: true }
+- { name: xfconf-devel,                setname: xfconf, ignore: true }
 - { name: [xarchiver-assume-name,xarchiver-gtk2], setname: xarchiver, addflavor: true }
 - { name: xfdesktop-gtk3,              setname: xfdesktop, addflavor: gtk3 }
-- { name: xfdesktop-devel,             setname: xfdesktop, ignorever: true }
+- { name: xfdesktop-devel,             setname: xfdesktop, ignore: true }
 - { name: [xfdesktop4,xfce4-desktop],  setname: xfdesktop }
 - { name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock], setname: xdg-utils }
 - { name: [xdelta1,xdelta3],           setname: xdelta }
@@ -1259,7 +1259,7 @@
 - { name: xmlbird,                     setname: libxmlbird                }
 - { name: xmltooling-c,                setname: xmltooling                }
 - { name: xonotic-data,                setname: xonotic, addflavor: true }
-- { name: xrdp-devel,                  setname: xrdp, ignorever: true }
+- { name: xrdp-devel,                  setname: xrdp, ignore: true }
 
 # Y
 - { name: [yabause-gtk,yabause-qt,yabause-qt5], setname: yabause, addflavor: true }
@@ -1273,14 +1273,14 @@
 - { name: zef-without-alacryd,         setname: zef, addflavor: without-alacryd }
 - { name: zeroad,                      setname: 0ad                       }
 - { name: zeroballistics,              setname: zero-ballistics           }
-- { name: zeronet-git,                 setname: zeronet, ignorever: true  }
+- { name: zeronet-git,                 setname: zeronet, ignore: true  }
 - { name: [zerotier,zerotier-one-with-controller], setname: zerotier-one  }
 - { name: zetacoin-nox11,              setname: zetacoin, addflavor: nox11 }
 - { name: zim-wiki,                    setname: zim                       }
 - { name: [zint-gui,zint-qt],          setname: zint                      }
 - { name: zlib-static,                 setname: zlib, addflavor: static }
 - { name: zookeeper-c,                 setname: zookeeper,                family: [ gentoo ]  }
-- { name: zoneminder-h264,             setname: zoneminder, ignorever: true }
+- { name: zoneminder-h264,             setname: zoneminder, ignore: true }
 - { name: zookeeper-bin,               setname: zookeeper                 }
 - { name: [zstandard,zstd-static],     setname: zstd                      }
 - { name: zthreads,                    setname: zthread                   }
@@ -1296,7 +1296,7 @@
 - { namepat: "open(?:gfx|sfx)", setname: "openttd-$0"           }
 - { namepat: "openmsx", wwwpart: openttd, setname: "openttd-$0" }
 - { namepat: "openttd[-_](gfx|sfx|msx)", setname: "openttd-open$1" }
-- { name: openttd-opengfx-snapshot, setname: "openttd-opengfx", ignorever: true }
+- { name: openttd-opengfx-snapshot, setname: "openttd-opengfx", ignore: true }
 - { namepat: "(?:lib)?sdl[_-]([a-z]+)1\\.2",      setname: "sdl-$1"                  }
 - { namepat: "(?:lib)?sdl[_-]([a-z]+)2\\.0",      setname: "sdl2-$1"                 }
 - { namepat: "(?:lib)?(?:sdl1(.*))",   setname: "sdl$1" }

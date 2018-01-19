@@ -19,7 +19,7 @@ import os
 import re
 import sys
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 
 
 def SanitizeVersion(version):
@@ -58,7 +58,7 @@ class VcpkgGitParser():
                         match = re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version)
                         if match:
                             pkg.version = version
-                            pkg.ignoreversion = True
+                            pkg.SetFlag(PackageFlags.ignore)
                         else:
                             pkg.version, pkg.origversion = SanitizeVersion(line[8:].strip())
                     elif line.startswith('Description:'):

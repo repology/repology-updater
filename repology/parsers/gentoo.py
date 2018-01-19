@@ -18,7 +18,7 @@
 import os
 import xml.etree.ElementTree
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 from repology.util import GetMaintainers
 from repology.version import VersionCompare
 
@@ -114,7 +114,7 @@ class GentooGitParser():
 
                     if pkg.version.endswith('9999'):
                         # ignore versions for snapshots
-                        pkg.ignoreversion = True
+                        pkg.SetFlag(PackageFlags.ignore)
 
                     metadata_path = os.path.join(
                         path,

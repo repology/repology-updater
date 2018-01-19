@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.package import Package, VersionClass
+from repology.package import Package, PackageFlags, VersionClass
 from repology.packageproc import FillPackagesetVersions
 
 
@@ -27,32 +27,32 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclasses_big(self):
         packages = [
             # Reference repo
-            (Package(repo='1', family='1', name='a', version='2.2.20990101', ignoreversion=True), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', devel=True, ignoreversion=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1', devel=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.ignore), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.devel|PackageFlags.ignore), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
             # see #338. There are multiple possible ways to ignored version between branches,
             # we go with ignored for now
-            (Package(repo='1', family='1', name='a', version='2.1.20990101', ignoreversion=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.1.20990101', flags=PackageFlags.ignore), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0.20990101', ignoreversion=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.0.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
 
-            (Package(repo='1', family='1', name='a', version='1.2.20990101', ignoreversion=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.2beta1', devel=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.2alpha1.20990101', devel=True, ignoreversion=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.2alpha1', devel=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.1.20990101', ignoreversion=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.2.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.2beta1', flags=PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.2alpha1.20990101', flags=PackageFlags.devel|PackageFlags.ignore), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.1.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='1.1'), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.0.20990101', ignoreversion=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.0.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='1.0'), VersionClass.legacy),
 
             # devel + legacy
-            (Package(repo='2', family='2', name='a', version='2.2beta1', devel=True), VersionClass.devel),
+            (Package(repo='2', family='2', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
             (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.outdated),
 
             # devel + newest + legacy
-            (Package(repo='3', family='3', name='a', version='2.2beta1', devel=True), VersionClass.devel),
+            (Package(repo='3', family='3', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
             (Package(repo='3', family='3', name='a', version='2.1'), VersionClass.newest),
             (Package(repo='3', family='3', name='a', version='2.0'), VersionClass.legacy),
 
@@ -65,23 +65,23 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='5', family='5', name='a', version='1.0'), VersionClass.legacy),
 
             # outdated outdated/ignored + legacy
-            (Package(repo='6', family='6', name='a', version='1.1.20990101', ignoreversion=True), VersionClass.outdated),
+            (Package(repo='6', family='6', name='a', version='1.1.20990101', flags=PackageFlags.ignore), VersionClass.outdated),
             (Package(repo='6', family='6', name='a', version='1.1'), VersionClass.legacy),
             (Package(repo='6', family='6', name='a', version='1.0'), VersionClass.legacy),
 
             # ignored classes are unignored when they are backed with real classes
-            (Package(repo='8', family='8', name='a', version='2.2beta1', devel=True, ignoreversion=True), VersionClass.devel),
+            (Package(repo='8', family='8', name='a', version='2.2beta1', flags=PackageFlags.devel|PackageFlags.ignore), VersionClass.devel),
 
-            (Package(repo='9', family='9', name='a', version='2.1', ignoreversion=True), VersionClass.newest),
+            (Package(repo='9', family='9', name='a', version='2.1', flags=PackageFlags.ignore), VersionClass.newest),
 
-            (Package(repo='10', family='10', name='a', version='2.0', ignoreversion=True), VersionClass.outdated),
-            (Package(repo='10', family='10', name='a', version='1.9', ignoreversion=True), VersionClass.legacy),
+            (Package(repo='10', family='10', name='a', version='2.0', flags=PackageFlags.ignore), VersionClass.outdated),
+            (Package(repo='10', family='10', name='a', version='1.9', flags=PackageFlags.ignore), VersionClass.legacy),
 
             # version between newest and devel should be outdated when there's no devel
-            (Package(repo='11', family='11', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
+            (Package(repo='11', family='11', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.outdated),
 
             # outdated in devel and normal at the same time
-            (Package(repo='12', family='12', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
+            (Package(repo='12', family='12', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.outdated),
             (Package(repo='12', family='12', name='a', version='2.0'), VersionClass.outdated),
         ]
 
@@ -93,9 +93,9 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_single_branch1(self):
         packages = [
             # here we only have default branch
-            (Package(repo='1', family='1', name='a', version='2.2.20990101', ignoreversion=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.ignore), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0.20990101', ignoreversion=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.0.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
 
             (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
@@ -112,15 +112,15 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_single_branch2(self):
         packages = [
             # here we only have devel branch
-            (Package(repo='1', family='1', name='a', version='2.2rc1.20990101', ignoreversion=True, devel=True), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', ignoreversion=True, devel=True), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1', devel=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2rc1.20990101', flags=PackageFlags.ignore|PackageFlags.devel), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.ignore|PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
 
-            (Package(repo='2', family='2', name='a', version='2.2beta1', devel=True), VersionClass.devel),
-            (Package(repo='2', family='2', name='a', version='2.2alpha1', devel=True), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
+            (Package(repo='2', family='2', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
 
-            (Package(repo='3', family='3', name='a', version='2.2alpha1', devel=True), VersionClass.outdated),
+            (Package(repo='3', family='3', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.outdated),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -132,8 +132,8 @@ class TestPackageProc(unittest.TestCase):
         packages = [
             # same version is both devel and default in different packages
             # this should be consistently aggregated
-            (Package(repo='1', family='1', name='a', version='2.1', devel=True), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.0', devel=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.devel), VersionClass.devel),
+            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.devel), VersionClass.legacy),
 
             (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.devel),
             (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
@@ -148,10 +148,10 @@ class TestPackageProc(unittest.TestCase):
         packages = [
             # devel package < normal package
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0', devel=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.devel), VersionClass.legacy),
 
             (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='2', family='2', name='a', version='2.0', devel=True), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.0', flags=PackageFlags.devel), VersionClass.legacy),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -162,7 +162,7 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_unignored_really_unignored(self):
         packages = [
             # ignored package should be fully unignored with the same non-ignored version in another repo
-            (Package(repo='1', family='1', name='a', version='2.1', ignoreversion=True), VersionClass.newest),
+            (Package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.ignore), VersionClass.newest),
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
 
             (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
@@ -176,7 +176,7 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_unique(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.0alpha1', devel=True), VersionClass.unique),
+            (Package(repo='1', family='1', name='a', version='2.0alpha1', flags=PackageFlags.devel), VersionClass.unique),
             (Package(repo='2', family='1', name='a', version='1.2'), VersionClass.unique),
             (Package(repo='3', family='1', name='a', version='1.1'), VersionClass.outdated),
             (Package(repo='3', family='1', name='a', version='1.0'), VersionClass.legacy),
@@ -189,11 +189,11 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_branch_bounds(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.2beta1', devel=True), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', ignoreversion=True, devel=True), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', flags=PackageFlags.ignore|PackageFlags.devel), VersionClass.legacy),
             # see #338. There are multiple possible ways to ignored version between branches,
             # we go with ignored for now
-            (Package(repo='1', family='1', name='a', version='2.1.9999', ignoreversion=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.1.9999', flags=PackageFlags.ignore), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
 
@@ -207,8 +207,8 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_ignoredignored(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.2.99999999', ignoreversion=True), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.2.9999', ignoreversion=True), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2.99999999', flags=PackageFlags.ignore), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2.9999', flags=PackageFlags.ignore), VersionClass.ignored),
             # this one should be outdated, not legacy, e.g. ignored's should not be counted
             # as first packages in the branch
             (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.outdated),

@@ -18,7 +18,7 @@
 import json
 import sys
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 from repology.util import GetMaintainers
 
 
@@ -59,7 +59,7 @@ class AoscPkgsParser():
                 pkg.maintainers = GetMaintainers(package['committer'])
 
                 if pkg.version == '999':
-                    pkg.ignoreversion = True
+                    pkg.SetFlag(PackageFlags.ignore)
 
                 result.append(pkg)
 

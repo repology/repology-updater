@@ -17,7 +17,7 @@
 
 import xml.etree.ElementTree
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 
 
 class FDroidParser():
@@ -50,7 +50,7 @@ class FDroidParser():
                             category=category,
                             homepage=www if www else None,
                             extrafields={'id': appid},
-                            devel=version_code > upstream_version_code,
+                            flags=PackageFlags.devel if version_code > upstream_version_code else 0,
                         )
                     )
 

@@ -163,34 +163,34 @@ Examples:
 
 TODO
 
-### ignore
+### remove
 
-Completely ignore package. It will not appear anywhere in repology.
+Completely remove package. It will not appear anywhere in repology.
 
 Example:
 
 ```
 # Fedora-specific packages, will not appear in any other repository,
 # so we may just drop them
-- { namepat: "fedora-.*", family: [ fedora ], ignore: true }
+- { namepat: "fedora-.*", family: [ fedora ], remove: true }
 ```
 
-### unignore
+### unremove
 
-Undo ```ignore``` possibly applied by earlier rules.
+Undo ```remove``` possibly applied by earlier rules.
 
 Example:
 
 ```
-# F-Droid contains a lot of android-only packages, so ignore
+# F-Droid contains a lot of android-only packages, so remove
 # everything from this repository by default
-- { family: fdroid, ignore: true }
+- { family: fdroid, remove: true }
 
 # But allow cross-platform packages
-- { family: fdroid, name: busybox, unignore: true }
+- { family: fdroid, name: busybox, unremove: true }
 ```
 
-### ignorever
+### ignore
 
 Never treat a version from this package as the newest. This is
 useful when we know the package version is fake, or transformed
@@ -202,10 +202,10 @@ Example:
 ```
 # openxcom actual version is 1.0. Don't make fake versions
 # like 2015.01.01 or 20150101 appear as newer
-- { name: openxcom, verpat: "2015.*", ignorever: true }
+- { name: openxcom, verpat: "2015.*", ignore: true }
 ```
 
-### unignorever
+### unignore
 
 TODO
 

@@ -24,7 +24,7 @@ import traceback
 
 from repology.fetchers import Factory as FetcherFactory
 from repology.logger import NoopLogger
-from repology.package import PackageSanityCheckFailure, PackageSanityCheckProblem
+from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Factory as ParserFactory
 
@@ -180,7 +180,7 @@ class RepositoryProcessor:
         # XXX: in future, ignored packages will not be dropped here, but
         # ignored in summary and version calcualtions, but shown in
         # package listing
-        packages = [package for package in packages if not package.ignore]
+        packages = [package for package in packages if not package.HasFlag(PackageFlags.remove)]
 
         logger.Log('processing complete, {} packages, deduplicating'.format(len(packages)))
 

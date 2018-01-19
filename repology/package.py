@@ -28,6 +28,17 @@ class VersionClass:
     legacy = 6
 
 
+class PackageFlags:
+    # remove package
+    remove = 1 << 0
+
+    # devel version
+    devel = 1 << 1
+
+    # ignored variants
+    ignore = 1 << 2
+
+
 class PackageSanityCheckProblem(Exception):
     pass
 
@@ -56,10 +67,8 @@ class Package:
         'licenses',
         'downloads',
 
-        'ignore',
+        'flags',
         'shadow',
-        'ignoreversion',
-        'devel',
         'verfixed',
 
         'flavors',
@@ -71,7 +80,7 @@ class Package:
                  name=None, effname=None,
                  version=None, origversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
-                 ignore=False, shadow=False, ignoreversion=False, devel=False, verfixed=False,
+                 flags=0, shadow=False, verfixed=False,
                  flavors=None,
                  extrafields=None):
         self.repo = repo
@@ -92,10 +101,8 @@ class Package:
         self.licenses = licenses if licenses else []
         self.downloads = downloads if downloads else []
 
-        self.ignore = ignore
+        self.flags = flags
         self.shadow = shadow
-        self.ignoreversion = ignoreversion
-        self.devel = devel
         self.verfixed = verfixed
 
         self.flavors = flavors if flavors else []
@@ -150,6 +157,10 @@ class Package:
             for element in value.values():
                 CheckStr(element, name, *checks)
 
+        def CheckInt(value, name):
+            if not isinstance(value, int):
+                raise PackageSanityCheckFailure('{}: {} is not an int'.format(self.name, name))
+
         CheckStr(self.repo, 'repo', NoNewlines, Stripped, Alphanumeric, Lowercase)
         CheckStr(self.family, 'family', NoNewlines, Stripped, Alphanumeric, Lowercase)
         if self.subrepo is not None:
@@ -173,10 +184,8 @@ class Package:
         CheckList(self.licenses, 'licenses', NoNewlines, Stripped, NonEmpty)
         CheckList(self.downloads, 'downloads', NoWhitespace, NoNewlines, NonEmpty)
 
-        CheckBool(self.ignore, 'ignore')
+        CheckInt(self.flags, 'flags')
         CheckBool(self.shadow, 'shadow')
-        CheckBool(self.ignoreversion, 'ignoreversion')
-        CheckBool(self.devel, 'devel')
         CheckBool(self.verfixed, 'verfixed')
 
         CheckList(self.flavors, 'flavors', NoNewlines, Stripped, NonEmpty)
@@ -206,6 +215,17 @@ class Package:
                 return False
 
         return True
+
+    # setters
+    def SetFlag(self, flag, isset=True):
+        if isset:
+            self.flags |= flag
+        else:
+            self.flags &= ~flag
+
+    # getters
+    def HasFlag(self, flag):
+        return self.flags & flag
 
     @property
     def __dict__(self):

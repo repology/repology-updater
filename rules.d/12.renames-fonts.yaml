@@ -1293,7 +1293,7 @@
     - wqy_zenhei
     - zh-wqy-zenhei-ttf
   setname: "fonts:wqy-zenhei"
-- { name: "wqy-zenhei-nightly_build", setname: "fonts:wqy-zenhei", ignorever: true }
+- { name: "wqy-zenhei-nightly_build", setname: "fonts:wqy-zenhei", ignore: true }
 
 # X
 - { namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" } # xorg

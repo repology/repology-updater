@@ -20,7 +20,7 @@ import os
 import re
 import sys
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 from repology.util import GetMaintainers
 
 
@@ -77,14 +77,14 @@ class NixJsonParser():
 
                 if pkg.name.endswith('-git'):
                     pkg.name = pkg.name[:-4]
-                    pkg.ignoreversion = True
+                    pkg.SetFlag(PackageFlags.ignore)
 
                 if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
-                    pkg.ignoreversion = True
+                    pkg.SetFlag(PackageFlags.ignore)
 
                 if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
                     print('ignoring version which looks like commit hash: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
-                    pkg.ignoreversion = True
+                    pkg.SetFlag(PackageFlags.ignore)
 
                 meta = packagedata['meta']
 

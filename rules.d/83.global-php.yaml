@@ -9,7 +9,7 @@
 - { namepat: "php([0-9]*)-(.*)",       setname: "php$1:$2", family: [ freebsd, pkgsrc, openbsd, macports, ravenports ] }
 - { namepat: "php([0-9]+)-(.*)",       setname: "php$1:$2", family: [ arch ] } # AUR
 - { namepat: "php-(.*)",               setname: "php:$1", family: [ arch, fedora, debuntu, slackbuilds, crux, pclinuxos ] }
-- { namepat: "php5-(.*)",              setname: "php56:$1", family: [ sisyphus ], "ignorever": true }
+- { namepat: "php5-(.*)",              setname: "php56:$1", family: [ sisyphus ], ignore: true }
 - { namepat: "php5-(.*)",              setname: "php56:$1", family: [ opensuse ] }
 - { namepat: "php-5_6-ext-(.*)",       setname: "php56:$1", family: [ openindiana ] }
 - { namepat: "php-7\\.0-ext-(.*)",     setname: "php70:$1", family: [ openindiana ] }

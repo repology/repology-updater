@@ -350,10 +350,8 @@ class Database:
                     licenses text[],
                     downloads text[],
 
-                    ignore bool not null,
+                    flags smallint not null,
                     shadow bool not null,
-                    ignoreversion bool not null,
-                    devel bool not null,
                     verfixed bool not null,
 
                     flavors text[],
@@ -701,10 +699,8 @@ class Database:
                     licenses,
                     downloads,
 
-                    ignore,
+                    flags,
                     shadow,
-                    ignoreversion,
-                    devel,
                     verfixed,
 
                     flavors,
@@ -729,8 +725,6 @@ class Database:
                     %s,
                     %s,
 
-                    %s,
-                    %s,
                     %s,
                     %s,
                     %s,
@@ -760,10 +754,8 @@ class Database:
                         package.licenses,
                         package.downloads,
 
-                        package.ignore,
+                        package.flags,
                         package.shadow,
-                        package.ignoreversion,
-                        package.devel,
                         package.verfixed,
 
                         package.flavors,
@@ -1041,10 +1033,8 @@ class Database:
                 licenses,
                 downloads,
 
-                ignore,
+                flags,
                 shadow,
-                ignoreversion,
-                devel,
                 verfixed,
 
                 flavors,
@@ -1082,10 +1072,8 @@ class Database:
                 licenses,
                 downloads,
 
-                ignore,
+                flags,
                 shadow,
-                ignoreversion,
-                devel,
                 verfixed,
 
                 flavors,
@@ -1121,10 +1109,8 @@ class Database:
                 licenses,
                 downloads,
 
-                ignore,
+                flags,
                 shadow,
-                ignoreversion,
-                devel,
                 verfixed,
 
                 flavors,

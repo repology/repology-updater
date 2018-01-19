@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 from repology.repoman import RepositoryManager
 from repology.transformer import PackageTransformer
 
@@ -51,46 +51,46 @@ class TestPackageTransformer(unittest.TestCase):
             for field, value in expected_params.items():
                 self.assertEqual(package.__dict__[field], value)
 
+    def test_remove(self):
+        self.check_transformer(
+            '[ { name: p1, remove: true } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.remove},
+            {'name': 'p2', 'version': '1.0', 'expect_flags': 0}
+        )
+
+    def test_unremove(self):
+        self.check_transformer(
+            '[ { name: p1, unremove: true } ]',
+            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.remove, 'expect_flags': 0},
+            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.remove, 'expect_flags': PackageFlags.remove}
+        )
+
     def test_ignore(self):
         self.check_transformer(
             '[ { name: p1, ignore: true } ]',
-            {'name': 'p1', 'version': '1.0', 'expect_ignore': True},
-            {'name': 'p2', 'version': '1.0', 'expect_ignore': False}
+            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.ignore},
+            {'name': 'p2', 'version': '1.0', 'expect_flags': 0}
         )
 
     def test_unignore(self):
         self.check_transformer(
             '[ { name: p1, unignore: true } ]',
-            {'name': 'p1', 'version': '1.0', 'ignore': True, 'expect_ignore': False},
-            {'name': 'p2', 'version': '1.0', 'ignore': True, 'expect_ignore': True}
-        )
-
-    def test_ignorever(self):
-        self.check_transformer(
-            '[ { name: p1, ignorever: true } ]',
-            {'name': 'p1', 'version': '1.0', 'expect_ignoreversion': True},
-            {'name': 'p2', 'version': '1.0', 'expect_ignoreversion': False}
-        )
-
-    def test_unignorever(self):
-        self.check_transformer(
-            '[ { name: p1, unignorever: true } ]',
-            {'name': 'p1', 'version': '1.0', 'ignoreversion': True, 'expect_ignoreversion': False},
-            {'name': 'p2', 'version': '1.0', 'ignoreversion': True, 'expect_ignoreversion': True}
+            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.ignore, 'expect_flags': 0},
+            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.ignore, 'expect_flags': PackageFlags.ignore}
         )
 
     def test_devel(self):
         self.check_transformer(
             '[ { name: p1, devel: true } ]',
-            {'name': 'p1', 'version': '1.0', 'expect_devel': True},
-            {'name': 'p2', 'version': '1.0', 'expect_devel': False}
+            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.devel},
+            {'name': 'p2', 'version': '1.0', 'expect_flags': 0}
         )
 
     def test_undevel(self):
         self.check_transformer(
             '[ { name: p1, undevel: true } ]',
-            {'name': 'p1', 'version': '1.0', 'devel': True, 'expect_devel': False},
-            {'name': 'p2', 'version': '1.0', 'devel': True, 'expect_devel': True}
+            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': 0},
+            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': PackageFlags.devel}
         )
 
     def test_setname(self):

@@ -22,6 +22,7 @@ import sys
 
 import yaml
 
+from repology.package import PackageFlags
 from repology.version import VersionCompare
 
 
@@ -175,23 +176,23 @@ class PackageTransformer:
 
         rule['matches'] += 1
 
+        if 'remove' in rule:
+            package.SetFlag(PackageFlags.remove)
+
+        if 'unremove' in rule:
+            package.SetFlag(PackageFlags.remove, False)
+
         if 'ignore' in rule:
-            package.ignore = True
+            package.SetFlag(PackageFlags.ignore)
 
         if 'unignore' in rule:
-            package.ignore = False
-
-        if 'ignorever' in rule:
-            package.ignoreversion = True
-
-        if 'unignorever' in rule:
-            package.ignoreversion = False
+            package.SetFlag(PackageFlags.ignore, False)
 
         if 'devel' in rule:
-            package.devel = True
+            package.SetFlag(PackageFlags.devel)
 
         if 'undevel' in rule:
-            package.devel = False
+            package.SetFlag(PackageFlags.devel, False)
 
         if 'last' in rule:
             result = RuleApplyResult.last

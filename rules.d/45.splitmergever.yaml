@@ -214,7 +214,7 @@
 - { namepat: "elasticsearch[0-9]+",    setname: "elasticsearch" }
 
 - { name: [emacs-24bit, emacs-nox, emacs-nox11], setname: emacs }
-- { name: [emacs-devel, emacs-git],    setname: emacs, ignorever: yes }
+- { name: [emacs-devel, emacs-git],    setname: emacs, ignore: yes }
 - { namepat: "emacs[0-9.-]+(?:-nox11|-non-dfsg)?", setname: emacs }
 
 - { name: enlightenment, verpat: "1\\.0.*", setname: enlightenment16 }
@@ -261,7 +261,7 @@
 - { name: freerdp, verpat: "1\\..*", setname: freerdp1 }
 
 - { namepat: "gcc[0-9.-]+",            setname: gcc }
-- { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignorever: yes }
+- { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignore: yes }
 - { name: gcc, verpat: "[0-9]+\\.0\\..*", devel: true }
 - { name: gcc, verpat: "[0-9]+\\.[0-9]+\\.[1-9].*", devel: true }
 
@@ -275,12 +275,12 @@
 - { namepat: "geos[0-9._-]+",          setname: geos }
 
 - { name: [gimp-app,gimp-devel,gimp-with-plugins,gimp2,gimp2-devel], setname: gimp }
-- { name: [gimp3-devel,gimp-git,gimp3,gimp-gtk3], setname: gimp-devel, ignorever: true }
+- { name: [gimp3-devel,gimp-git,gimp3,gimp-gtk3], setname: gimp-devel, ignore: true }
 - { name: gimp, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", setname: gimp-devel }
 
 - { namepat: "glade[0-9._-]*",         setname: glade }
 - { name: glade-gtk2,                  setname: glade }
-- { name: glade-dev,                   setname: glade, ignorever: yes }
+- { name: glade-dev,                   setname: glade, ignore: yes }
 - { name: glade, verpat: "2\\..*",     setname: glade2 }
 
 - { namepat: "(?:lib)?glew[0-9.-]*",   setname: glew }
@@ -609,7 +609,7 @@
 - { namepat: "mysql-clients[0-9.-]*", setname: mysql }
 - { name: mysql, verpat: "8\\..*", setname: mysql8 }
 
-- { namepat: "mpich-devel(?:-clang|-gcc|-llvm)?[0-9._-]*", setname: mpich, ignorever: true }
+- { namepat: "mpich-devel(?:-clang|-gcc|-llvm)?[0-9._-]*", setname: mpich, ignore: true }
 - { namepat: "mpich(?:-clang|-gcc|-llvm)?[0-9._-]*", setname: mpich }
 - { name: [mpich-default], setname: mpich }
 - { name: mpich, verpat: "1\\..*", setname: mpich2 }
@@ -623,14 +623,14 @@
 - { namepat: "node(?:js)?[0-9._-]+", setname: nodejs }
 - { name: node, setname: nodejs }
 - { name: [nodejs-bigger-heap,nodejs-slim], setname: nodejs }
-- { name: nodejs-current, setname: nodejs, ignorever: true }
+- { name: nodejs-current, setname: nodejs, ignore: true }
 
 - { namepat: "npm[0-9._-]+", setname: npm }
 - { name: npm, ver: ["5.5.0", "5.5.1"], devel: true } # should be updated manually
 
 - { namepat: "(?:dkms|linux-rt.*|linux[0-9]+)-nvidiabl", setname: nvidiabl }
 
-- { namepat: "nvidia-settings-experimental.*", setname: nvidia-settings, ignorever: true }
+- { namepat: "nvidia-settings-experimental.*", setname: nvidia-settings, ignore: true }
 - { namepat: "nvidia-settings-.*", setname: nvidia-settings }
 - { namepat: "nvidia-[0-9._-]*-settings", setname: nvidia-settings }
 
@@ -638,15 +638,15 @@
 #- { namepat: "nvidia[0-9._-]+xx.*", setname: nvidia }
 - { namepat: "nvidia[0-9._-]+", setname: nvidia }
 - { namepat: "nvidia-drivers?[0-9._-]*", setname: nvidia }
-- { name: nvidia-graphics-drivers-tegra, setname: nvidia, ignorever: true, addflavor: tegra }
+- { name: nvidia-graphics-drivers-tegra, setname: nvidia, ignore: true, addflavor: tegra }
 - { namepat: "nvidia-graphics-drivers[0-9._-]*", setname: nvidia }
 - { namepat: "nvidia-graphics-drivers[0-9._-]*-updates", setname: nvidia, addflavor: updates }
 - { namepat: "nvidia-graphics-drivers-legacy[x0-9._-]*", setname: nvidia }
-- { namepat: "nvidia-graphics-drivers-experimental[x0-9._-]*", setname: nvidia, ignorever: true }
+- { namepat: "nvidia-graphics-drivers-experimental[x0-9._-]*", setname: nvidia, ignore: true }
 - { name: nvidia-graphics-drivers-updates, setname: nvidia, addflavor: updates }
 - { namepat: "nvidia-legacy.*", setname: nvidia }
-#- { namepat: "nvidia-libgl.*beta.*", setname: nvidia, ignorever: true, addflavor: libgl }
-#- { namepat: "nvidia-glx.*beta.*", setname: nvidia, ignorever: true, addflavor: glx }
+#- { namepat: "nvidia-libgl.*beta.*", setname: nvidia, ignore: true, addflavor: libgl }
+#- { namepat: "nvidia-glx.*beta.*", setname: nvidia, ignore: true, addflavor: glx }
 - { namepat: "nvidia_glx_src[0-9._-]*", setname: nvidia, addflavor: glx }
 - { name: nvidia_glx_common, setname: nvidia, addflavor: glx }
 - { namepat: "xorg-x11-drv-nvidia[x0-9._-]*", setname: nvidia }
@@ -654,8 +654,8 @@
 - { namepat: "nvidia-bfq[x0-9._-]*", setname: nvidia, addflavor: bfq }
 - { name: [nvidia-driver,nvidia-drivers,driver-graphics-nvidia], setname: nvidia }
 - { name: [nvidia-kernel,nvidia-kmod,nvidia-graphics-modules], setname: nvidia, addflavor: kmod }
-- { name: [nvidia-beta,nvidia-beta-all,nvidia-current,nvidia-full-beta,nvidia-full-beta-all], setname: nvidia, ignorever: true }
-- { name: nvidia-beta-dkms, setname: nvidia, ignorever: true, addflavor: dkms }
+- { name: [nvidia-beta,nvidia-beta-all,nvidia-current,nvidia-full-beta,nvidia-full-beta-all], setname: nvidia, ignore: true }
+- { name: nvidia-beta-dkms, setname: nvidia, ignore: true, addflavor: dkms }
 # we slice versions; note that versions in conditions are +1 to real versions
 - { name: nvidia, verlt: "71.87", setname: nvidia-lagacy-71.86 }
 - { name: nvidia, verlt: "96.44", setname: nvidia-legacy-96.43 }
@@ -668,7 +668,7 @@
 
 - { namepat: "ogre[0-9._-]+", setname: ogre }
 - { name: [ogre-docs,ogre-samples], setname: ogre }
-- { name: ogre, verpat: "2.*", ignorever: true }
+- { name: ogre, verpat: "2.*", ignore: true }
 
 - { namepat: "openjade[0-9._-]+", setname: openjade }
 
@@ -694,7 +694,7 @@
     - openssl-stream
     - openssl-tls1.3
   setname: openssl
-  ignorever: true
+  ignore: true
 - { namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?", setname: openssl }
 
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph }
@@ -741,20 +741,20 @@
 - { namepat: "postgresql[0-9.-]*-beta.*", setname: postgresql, devel: true }
 - { namepat: "postgresql[0-9.-]*-lts.*", setname: postgresql }
 - { name: postgresql, verpat: "11.*", devel: true }
-- { name: postgresql, ver: ["11","11.0"], ignorever: true }
+- { name: postgresql, ver: ["11","11.0"], ignore: true }
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
 
 - { namepat: "postgresql[0-9._-]*-(plr|orafce|plv8|plv8js|pgroonga|tds_fdw|zhparser|pg_dirtyread|pg_repack|cstore_fdw|mysql[_-]fdw|plpgsql_check)", setname: "$1" }
 - { name: plv8js, setname: plv8 }
 
-- { name: [python,python2,python3], family: freebsd, ignore: true } # ignore metaports
+- { name: [python,python2,python3], family: freebsd, remove: true } # remove metaports
 - { namepat: "python[._-]?[23][0-9._-]*", setname: python }
 - { name: python, verpat: "2\\..*",    setname: python2 }
 - { name: python, verpat: "3\\..*",    setname: python3 }
 - { name: python, ver: "999", family: aosc, setname: python2 }
 - { name: python3, verpat: ".*a.*",    devel: true }
-- { name: python3, ver: "3.7.0", family: fedora, ignorever: true } # fedora fake, no such version
+- { name: python3, ver: "3.7.0", family: fedora, ignore: true } # fedora fake, no such version
 
 - { namepat: "(?:lib)?readline[0-9._-]*", setname: readline }
 
@@ -799,7 +799,7 @@
 - { namepat: "spidermonkey[0-9]+",     setname: spidermonkey }
 
 - { name: [squid-ldap,squid-ntlm], family: openbsd, setname: squid }
-- { name: [squid-devel], setname: squid, ignorever: true }
+- { name: [squid-devel], setname: squid, ignore: true }
 - { namepat: "squid[0-9._-]+", setname: squid }
 - { name: squid, verpat: "4\\..*", devel: true }
 
@@ -828,7 +828,7 @@
 - { name: syslog-ng-nosystemd, setname: syslog-ng, addflavor: nosystemd }
 
 - { namepat: "tcl8[0-9._-]+",          setname: tcl }
-- { name: tcl, verpat: ".*20[0-9]{6}.*", ignorever: true } # 8.7 snapshots
+- { name: tcl, verpat: ".*20[0-9]{6}.*", ignore: true } # 8.7 snapshots
 
 - { namepat: "tk8[0-9._-]+",           setname: tk } # don't mix with tk2, tk5, tk707 which are unrelated projects
 
@@ -841,15 +841,15 @@
 - { name: thunderbird-ru, setname: thunderbird, addflavor: ru }
 - { name: thunderbird-l10n-xpi, setname: thunderbird, addflavor: l10n }
 - { name: thunderbird-i18n, setname: thunderbird, addflavor: i18n }
-- { namepat: "thunderbird-beta(.*)", setname: thunderbird, addflavor: "$1", ignorever: true }
-- { namepat: "thunderbird-nightly(.*)", setname: thunderbird, addflavor: "$1", ignorever: true }
+- { namepat: "thunderbird-beta(.*)", setname: thunderbird, addflavor: "$1", ignore: true }
+- { namepat: "thunderbird-nightly(.*)", setname: thunderbird, addflavor: "$1", ignore: true }
 - { namepat: "thunderbird-(i18n-.*)", setname: thunderbird, family: [ openbsd, arch, kaos ], addflavor: "$1" }
 - { name: thunderbird, verpat: ".*[ab].*", devel: true }
 
 - { name: tor-devel,                   setname: tor }
 - { name: tor, verge: "0.3.3",         devel: true }
 
-- { name: unison-devel,                setname: unison, ignorever: true }
+- { name: unison-devel,                setname: unison, ignore: true }
 - { name: unison-nox11,                setname: unison, addflavor: true }
 - { namepat: "unison[0-9.-]+(?:-compat)?", setname: unison }
 
@@ -859,7 +859,7 @@
 - { name: [vte-common,vte-gtk2-compat,vte-gtk2-xfce,vte-gtk3,vte-reference], setname: vte, addflavor: true }
 
 - { namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*", setname: webkitgtk }
-- { namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*-unstable", setname: webkitgtk, ignorever: true }
+- { namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*-unstable", setname: webkitgtk, ignore: true }
 - { namepat: "webkit[0-9._-]", setname: webkitgtk }  # assuming gtk
 - { name: [webkitgtk-gtk2], setname: webkitgtk }
 - { name: webkitgtk,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -905,7 +905,7 @@
 - { name: xerces, family: [openbsd, slackbuilds], setname: xerces-j }
 - { name: xerces-c, verpat: "2\\..*",       setname: xerces-c2 }
 
-- { name: xulrunner-devel,             setname: xulrunner, ignorever: true }
+- { name: xulrunner-devel,             setname: xulrunner, ignore: true }
 - { namepat: "xulrunner[0-9.-]+",      setname: xulrunner }
 
 - { namepat: "(?:lib)?yaml-cpp[0-9.-]*", setname: yaml-cpp }

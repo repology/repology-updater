@@ -2,18 +2,18 @@
 
 # F-Droid is too alien, even if package names match in most cases it's entirely different application
 # So use whitelist
-- {                                                                  family: [ fdroid ], ignore: true }
-- { name: "andor's trail",                                           family: [ fdroid ], unignore: true } # as an exception, allow android project (present in f-droid and libregamewiki)
-- { name: busybox,                                                   family: [ fdroid ], unignore: true }
-- { name: freeminer,                                                 family: [ fdroid ], unignore: true }
-- { name: hyperrogue,                                                family: [ fdroid ], unignore: true }
-- { name: i2p,                                                       family: [ fdroid ], unignore: true }
-- { name: kouchat,                                                   family: [ fdroid ], unignore: true }
-- { name: linphone,                                                  family: [ fdroid ], unignore: true }
-- { name: minilens,                                                  family: [ fdroid ], unignore: true }
-- { name: mupdf,                                                     family: [ fdroid ], unignore: true }
-- { name: onscripter,                                                family: [ fdroid ], unignore: true }
-- { name: reicast,                                                   family: [ fdroid ], unignore: true }
-- { name: scummvm,                                                   family: [ fdroid ], unignore: true }
-- { name: snapcast,                                                  family: [ fdroid ], unignore: true }
-- { name: yabause,                                                   family: [ fdroid ], unignore: true }
+- {                                                                  family: [ fdroid ], remove: true }
+- { name: "andor's trail",                                           family: [ fdroid ], unremove: true } # as an exception, allow android project (present in f-droid and libregamewiki)
+- { name: busybox,                                                   family: [ fdroid ], unremove: true }
+- { name: freeminer,                                                 family: [ fdroid ], unremove: true }
+- { name: hyperrogue,                                                family: [ fdroid ], unremove: true }
+- { name: i2p,                                                       family: [ fdroid ], unremove: true }
+- { name: kouchat,                                                   family: [ fdroid ], unremove: true }
+- { name: linphone,                                                  family: [ fdroid ], unremove: true }
+- { name: minilens,                                                  family: [ fdroid ], unremove: true }
+- { name: mupdf,                                                     family: [ fdroid ], unremove: true }
+- { name: onscripter,                                                family: [ fdroid ], unremove: true }
+- { name: reicast,                                                   family: [ fdroid ], unremove: true }
+- { name: scummvm,                                                   family: [ fdroid ], unremove: true }
+- { name: snapcast,                                                  family: [ fdroid ], unremove: true }
+- { name: yabause,                                                   family: [ fdroid ], unremove: true }
