@@ -177,22 +177,13 @@ class PackageTransformer:
         rule['matches'] += 1
 
         if 'remove' in rule:
-            package.SetFlag(PackageFlags.remove)
-
-        if 'unremove' in rule:
-            package.SetFlag(PackageFlags.remove, False)
+            package.SetFlag(PackageFlags.remove, rule['remove'])
 
         if 'ignore' in rule:
-            package.SetFlag(PackageFlags.ignore)
-
-        if 'unignore' in rule:
-            package.SetFlag(PackageFlags.ignore, False)
+            package.SetFlag(PackageFlags.ignore, rule['ignore'])
 
         if 'devel' in rule:
-            package.SetFlag(PackageFlags.devel)
-
-        if 'undevel' in rule:
-            package.SetFlag(PackageFlags.devel, False)
+            package.SetFlag(PackageFlags.devel, rule['devel'])
 
         if 'last' in rule:
             result = RuleApplyResult.last

@@ -163,7 +163,7 @@ Examples:
 
 TODO
 
-### remove
+### remove: true
 
 Completely remove package. It will not appear anywhere in repology.
 
@@ -175,7 +175,7 @@ Example:
 - { namepat: "fedora-.*", family: [ fedora ], remove: true }
 ```
 
-### unremove
+### remove: false
 
 Undo ```remove``` possibly applied by earlier rules.
 
@@ -190,7 +190,7 @@ Example:
 - { family: fdroid, name: busybox, unremove: true }
 ```
 
-### ignore
+### ignore: true
 
 Never treat a version from this package as the newest. This is
 useful when we know the package version is fake, or transformed
@@ -205,15 +205,15 @@ Example:
 - { name: openxcom, verpat: "2015.*", ignore: true }
 ```
 
-### unignore
+### ignore: false
 
 TODO
 
-### devel
+### devel: true
 
 TODO
 
-### undevel
+### devel: false
 
 TODO
 

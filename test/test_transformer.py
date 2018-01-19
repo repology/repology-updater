@@ -60,7 +60,7 @@ class TestPackageTransformer(unittest.TestCase):
 
     def test_unremove(self):
         self.check_transformer(
-            '[ { name: p1, unremove: true } ]',
+            '[ { name: p1, remove: false } ]',
             {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.remove, 'expect_flags': 0},
             {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.remove, 'expect_flags': PackageFlags.remove}
         )
@@ -74,7 +74,7 @@ class TestPackageTransformer(unittest.TestCase):
 
     def test_unignore(self):
         self.check_transformer(
-            '[ { name: p1, unignore: true } ]',
+            '[ { name: p1, ignore: false } ]',
             {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.ignore, 'expect_flags': 0},
             {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.ignore, 'expect_flags': PackageFlags.ignore}
         )
@@ -88,7 +88,7 @@ class TestPackageTransformer(unittest.TestCase):
 
     def test_undevel(self):
         self.check_transformer(
-            '[ { name: p1, undevel: true } ]',
+            '[ { name: p1, devel: false } ]',
             {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': 0},
             {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': PackageFlags.devel}
         )

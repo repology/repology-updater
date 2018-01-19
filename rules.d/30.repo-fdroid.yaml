@@ -3,17 +3,17 @@
 # F-Droid is too alien, even if package names match in most cases it's entirely different application
 # So use whitelist
 - {                                                                  family: [ fdroid ], remove: true }
-- { name: "andor's trail",                                           family: [ fdroid ], unremove: true } # as an exception, allow android project (present in f-droid and libregamewiki)
-- { name: busybox,                                                   family: [ fdroid ], unremove: true }
-- { name: freeminer,                                                 family: [ fdroid ], unremove: true }
-- { name: hyperrogue,                                                family: [ fdroid ], unremove: true }
-- { name: i2p,                                                       family: [ fdroid ], unremove: true }
-- { name: kouchat,                                                   family: [ fdroid ], unremove: true }
-- { name: linphone,                                                  family: [ fdroid ], unremove: true }
-- { name: minilens,                                                  family: [ fdroid ], unremove: true }
-- { name: mupdf,                                                     family: [ fdroid ], unremove: true }
-- { name: onscripter,                                                family: [ fdroid ], unremove: true }
-- { name: reicast,                                                   family: [ fdroid ], unremove: true }
-- { name: scummvm,                                                   family: [ fdroid ], unremove: true }
-- { name: snapcast,                                                  family: [ fdroid ], unremove: true }
-- { name: yabause,                                                   family: [ fdroid ], unremove: true }
+- { name: "andor's trail",                                           family: [ fdroid ], remove: false } # as an exception, allow android project (present in f-droid and libregamewiki)
+- { name: busybox,                                                   family: [ fdroid ], remove: false }
+- { name: freeminer,                                                 family: [ fdroid ], remove: false }
+- { name: hyperrogue,                                                family: [ fdroid ], remove: false }
+- { name: i2p,                                                       family: [ fdroid ], remove: false }
+- { name: kouchat,                                                   family: [ fdroid ], remove: false }
+- { name: linphone,                                                  family: [ fdroid ], remove: false }
+- { name: minilens,                                                  family: [ fdroid ], remove: false }
+- { name: mupdf,                                                     family: [ fdroid ], remove: false }
+- { name: onscripter,                                                family: [ fdroid ], remove: false }
+- { name: reicast,                                                   family: [ fdroid ], remove: false }
+- { name: scummvm,                                                   family: [ fdroid ], remove: false }
+- { name: snapcast,                                                  family: [ fdroid ], remove: false }
+- { name: yabause,                                                   family: [ fdroid ], remove: false }
