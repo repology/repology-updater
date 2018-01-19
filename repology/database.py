@@ -384,10 +384,10 @@ class Database:
             CREATE MATERIALIZED VIEW metapackage_repocounts AS
                 SELECT
                     effname,
-                    count(DISTINCT repo) AS num_repos,
-                    count(DISTINCT family) AS num_families,
-                    count(DISTINCT repo) FILTER (WHERE versionclass = 1) AS num_repos_newest,
-                    count(DISTINCT family) FILTER (WHERE versionclass = 1) AS num_families_newest,
+                    count(DISTINCT repo)::smallint AS num_repos,
+                    count(DISTINCT family)::smallint AS num_families,
+                    count(DISTINCT repo) FILTER (WHERE versionclass = 1)::smallint AS num_repos_newest,
+                    count(DISTINCT family) FILTER (WHERE versionclass = 1)::smallint AS num_families_newest,
                     bool_and(shadow) AS shadow_only
                 FROM packages
                 GROUP BY effname
@@ -407,13 +407,13 @@ class Database:
                     SELECT
                         repo,
                         effname,
-                        count(*) AS num_packages,
-                        count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
-                        count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
-                        count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
-                        count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
-                        count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
-                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy,
+                        count(*)::smallint AS num_packages,
+                        count(*) FILTER (WHERE versionclass = 1)::smallint AS num_packages_newest,
+                        count(*) FILTER (WHERE versionclass = 2)::smallint AS num_packages_outdated,
+                        count(*) FILTER (WHERE versionclass = 3)::smallint AS num_packages_ignored,
+                        count(*) FILTER (WHERE versionclass = 4)::smallint AS num_packages_unique,
+                        count(*) FILTER (WHERE versionclass = 5)::smallint AS num_packages_devel,
+                        count(*) FILTER (WHERE versionclass = 6)::smallint AS num_packages_legacy,
                         max(num_families) = 1 as unique
                     FROM packages INNER JOIN metapackage_repocounts USING(effname)
                     WHERE NOT shadow_only
@@ -490,15 +490,15 @@ class Database:
                 (
                     SELECT
                         unnest(maintainers) AS maintainer,
-                        count(1) AS num_packages,
-                        count(DISTINCT effname) AS num_metapackages,
-                        count(DISTINCT effname) FILTER(WHERE versionclass = 2) AS num_metapackages_outdated,
-                        count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
-                        count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
-                        count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
-                        count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
-                        count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
-                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy
+                        count(1)::integer AS num_packages,
+                        count(DISTINCT effname)::integer AS num_metapackages,
+                        count(DISTINCT effname) FILTER(WHERE versionclass = 2)::integer AS num_metapackages_outdated,
+                        count(*) FILTER (WHERE versionclass = 1)::integer AS num_packages_newest,
+                        count(*) FILTER (WHERE versionclass = 2)::integer AS num_packages_outdated,
+                        count(*) FILTER (WHERE versionclass = 3)::integer AS num_packages_ignored,
+                        count(*) FILTER (WHERE versionclass = 4)::integer AS num_packages_unique,
+                        count(*) FILTER (WHERE versionclass = 5)::integer AS num_packages_devel,
+                        count(*) FILTER (WHERE versionclass = 6)::integer AS num_packages_legacy
                     FROM packages
                     GROUP BY maintainer
                 ) AS packages_subreq
