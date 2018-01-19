@@ -351,7 +351,7 @@ class Database:
                     licenses text[],
                     downloads text[],
 
-                    ignorepackage bool not null,
+                    ignore bool not null,
                     shadow bool not null,
                     ignoreversion bool not null,
                     devel bool not null,
@@ -702,7 +702,7 @@ class Database:
                     licenses,
                     downloads,
 
-                    ignorepackage,
+                    ignore,
                     shadow,
                     ignoreversion,
                     devel,
@@ -1042,7 +1042,7 @@ class Database:
                 licenses,
                 downloads,
 
-                ignorepackage,
+                ignore,
                 shadow,
                 ignoreversion,
                 devel,
@@ -1115,7 +1115,7 @@ class Database:
                 licenses,
                 downloads,
 
-                ignorepackage,
+                ignore,
                 shadow,
                 ignoreversion,
                 devel,
@@ -1186,7 +1186,7 @@ class Database:
                 licenses,
                 downloads,
 
-                ignorepackage,
+                ignore,
                 shadow,
                 ignoreversion,
                 devel,
