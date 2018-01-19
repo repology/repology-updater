@@ -480,11 +480,15 @@
 
 - { namepat: "libmspub[0-9._-]+",      setname: libmspub }
 
+- { namepat: "libmwaw[0-9._-]+",       setname: libmwaw }
+
 - { namepat: "libnet[0-9.]+",          setname: libnet }
 
 - { name: libnl-doc,                   setname: libnl }
 - { namepat: "libnl[0-9._-]+",         setname: libnl }
 - { name: libnl, verpat: "1\\..*",     setname: libnl1 }
+
+- { namepat: "libodfgen[0-9._-]+",     setname: libodfgen }
 
 - { namepat: "(?:lib)?serf[0-9._-]*",  setname: serf }
 
@@ -502,6 +506,8 @@
 - { namepat: "libtorrent[0-9._-]+",    setname: libtorrent}
 
 - { namepat: "libtorrent-rasterbar[0-9._-]+", setname: libtorrent-rasterbar }
+
+- { namepat: "libvisio[0-9._-]+",      setname: libvisio }
 
 - { namepat: "libwpd[0-9.-]+",         setname: libwpd }
 

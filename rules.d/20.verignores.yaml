@@ -423,6 +423,7 @@
 - { name: mutter,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: mygui,                       verpat: "20[0-9]{6}",                               ignorever: true }
 - { name: mygui,                       verpat: ".*git.*",                                  ignorever: true }
+- { name: mythes-fr,                   verpat: "20[0-9]{6}",                               ignorever: true }
 
 # N
 - { name: ncurses,                     verpat: ".*20[0-9]{6}.*",                           ignorever: true }
