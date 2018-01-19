@@ -259,7 +259,6 @@ class Database:
     def __init__(self, dsn, readonly=True, autocommit=False):
         self.db = psycopg2.connect(dsn)
         self.db.set_session(readonly=readonly, autocommit=autocommit)
-        self.cursor = self.db.cursor()
 
     def Request(self, query, *args):
         with self.db.cursor() as cursor:
@@ -1021,7 +1020,7 @@ class Database:
         self.db.commit()
 
     def GetMetapackage(self, names):
-        self.cursor.execute(
+        return self.RequestManyAsPackages(
             """
             SELECT
                 repo,
@@ -1054,47 +1053,15 @@ class Database:
             FROM packages
             WHERE effname {}
             """.format('= ANY (%s)' if isinstance(names, list) else '= %s'),
-            (names,)
+            names
         )
-
-        return [
-            Package(
-                repo=row[0],
-                family=row[1],
-                subrepo=row[2],
-
-                name=row[3],
-                effname=row[4],
-
-                version=row[5],
-                origversion=row[6],
-                versionclass=row[7],
-
-                maintainers=row[8],
-                category=row[9],
-                comment=row[10],
-                homepage=row[11],
-                licenses=row[12],
-                downloads=row[13],
-
-                ignore=row[14],
-                shadow=row[15],
-                ignoreversion=row[16],
-                devel=row[17],
-                verfixed=row[18],
-
-                flavors=row[19],
-
-                extrafields=row[20],
-            ) for row in self.cursor.fetchall()
-        ]
 
     def GetMetapackages(self, request, limit=500):
         request.Limit(limit)
 
         query, args = request.GetQuery()
 
-        self.cursor.execute(
+        return self.RequestManyAsPackages(
             """
             SELECT
                 repo,
@@ -1129,43 +1096,11 @@ class Database:
                 {}
             )
             """.format(query),
-            args
+            *args
         )
 
-        return [
-            Package(
-                repo=row[0],
-                family=row[1],
-                subrepo=row[2],
-
-                name=row[3],
-                effname=row[4],
-
-                version=row[5],
-                origversion=row[6],
-                versionclass=row[7],
-
-                maintainers=row[8],
-                category=row[9],
-                comment=row[10],
-                homepage=row[11],
-                licenses=row[12],
-                downloads=row[13],
-
-                ignore=row[14],
-                shadow=row[15],
-                ignoreversion=row[16],
-                devel=row[17],
-                verfixed=row[18],
-
-                flavors=row[19],
-
-                extrafields=row[20],
-            ) for row in self.cursor.fetchall()
-        ]
-
     def GetRelatedMetapackages(self, name, limit=500):
-        self.cursor.execute(
+        return self.RequestManyAsPackages(
             """
             SELECT
                 repo,
@@ -1218,77 +1153,33 @@ class Database:
                 LIMIT %s
             )
             """,
-            (name, limit)
+            name,
+            limit
         )
 
-        return [
-            Package(
-                repo=row[0],
-                family=row[1],
-                subrepo=row[2],
-
-                name=row[3],
-                effname=row[4],
-
-                version=row[5],
-                origversion=row[6],
-                versionclass=row[7],
-
-                maintainers=row[8],
-                category=row[9],
-                comment=row[10],
-                homepage=row[11],
-                licenses=row[12],
-                downloads=row[13],
-
-                ignore=row[14],
-                shadow=row[15],
-                ignoreversion=row[16],
-                devel=row[17],
-                verfixed=row[18],
-
-                flavors=row[19],
-
-                extrafields=row[20],
-            ) for row in self.cursor.fetchall()
-        ]
-
     def GetPackagesCount(self):
-        self.cursor.execute("""SELECT num_packages FROM statistics LIMIT 1""")
-
-        return self.cursor.fetchall()[0][0]
+        return self.RequestSingleValue('SELECT num_packages FROM statistics LIMIT 1')
 
     def GetMetapackagesCount(self):
-        self.cursor.execute("""SELECT num_metapackages FROM statistics LIMIT 1""")
-
-        return self.cursor.fetchall()[0][0]
+        return self.RequestSingleValue('SELECT num_metapackages FROM statistics LIMIT 1')
 
     def GetMaintainersCount(self):
-        self.cursor.execute("""SELECT num_maintainers FROM statistics LIMIT 1""")
-
-        return self.cursor.fetchall()[0][0]
+        return self.RequestSingleValue('SELECT num_maintainers FROM statistics LIMIT 1')
 
     def GetMaintainersRange(self):
-        # should use min/max here, but these are slower on pgsql 9.6
-        self.cursor.execute('SELECT maintainer FROM maintainers ORDER BY maintainer LIMIT 1')
-        min_ = self.cursor.fetchall()[0][0]
-        self.cursor.execute('SELECT maintainer FROM maintainers ORDER BY maintainer DESC LIMIT 1')
-        max_ = self.cursor.fetchall()[0][0]
-        return (min_, max_)
+        # could use min/max here, but these are slower on pgsql 9.6
+        return (
+            self.RequestSingleValue('SELECT maintainer FROM maintainers ORDER BY maintainer LIMIT 1'),
+            self.RequestSingleValue('SELECT maintainer FROM maintainers ORDER BY maintainer DESC LIMIT 1')
+        )
 
     def GetMaintainers(self, bound=None, reverse=False, search=None, limit=500):
         where = []
-        order = 'maintainer'
+        tail = ''
 
-        query = """
-            SELECT
-                maintainer,
-                num_packages,
-                num_metapackages,
-                num_metapackages_outdated
-            FROM maintainers
-        """
         args = []
+
+        order = 'maintainer'
 
         if bound:
             if reverse:
@@ -1303,29 +1194,37 @@ class Database:
             where.append('maintainer LIKE %s')
             args.append('%' + search + '%')
 
-        if where:
-            query += ' WHERE ' + ' AND '.join(where)
-
-        if order:
-            query += ' ORDER BY ' + order
-
         if limit:
-            query += ' LIMIT %s'
+            tail = 'LIMIT %s'
             args.append(limit)
 
-        self.cursor.execute(query, args)
-
-        return sorted([
-            {
-                'maintainer': row[0],
-                'num_packages': row[1],
-                'num_metapackages': row[2],
-                'num_metapackages_outdated': row[3]
-            } for row in self.cursor.fetchall()
-        ], key=lambda m: m['maintainer'])
+        return self.RequestManyAsDicts(
+            """
+            SELECT
+                *
+            FROM
+            (
+                SELECT
+                    maintainer,
+                    num_packages,
+                    num_metapackages,
+                    num_metapackages_outdated
+                FROM maintainers
+                {}
+                ORDER BY {}
+                {}
+            ) AS tmp
+            ORDER BY maintainer
+            """.format(
+                'WHERE ' + ' AND '.join(where) if where else '',
+                order,
+                tail
+            ),
+            *args
+        )
 
     def GetMaintainerInformation(self, maintainer):
-        self.cursor.execute(
+        return self.RequestSingleAsDict(
             """
             SELECT
                 num_packages,
@@ -1343,31 +1242,11 @@ class Database:
             FROM maintainers
             WHERE maintainer = %s
             """,
-            (maintainer,)
+            maintainer
         )
 
-        rows = self.cursor.fetchall()
-
-        if not rows:
-            return None
-
-        return {
-            'num_packages': rows[0][0],
-            'num_packages_newest': rows[0][1],
-            'num_packages_outdated': rows[0][2],
-            'num_packages_ignored': rows[0][3],
-            'num_packages_unique': rows[0][4],
-            'num_packages_devel': rows[0][5],
-            'num_packages_legacy': rows[0][6],
-            'num_metapackages': rows[0][7],
-            'num_metapackages_outdated': rows[0][8],
-            'repository_package_counts': rows[0][9],
-            'repository_metapackage_counts': rows[0][10],
-            'category_metapackage_counts': rows[0][11],
-        }
-
     def GetMaintainerMetapackages(self, maintainer, limit=1000):
-        self.cursor.execute(
+        return self.RequestManyAsSingleColumnArray(
             """
             SELECT
                 effname
@@ -1376,10 +1255,9 @@ class Database:
             ORDER BY effname
             LIMIT %s
             """,
-            (maintainer, limit)
+            maintainer,
+            limit
         )
-
-        return [row[0] for row in self.cursor.fetchall()]
 
     def GetMaintainerSimilarMaintainers(self, maintainer, limit=100):
         # this obscure request needs some clarification
@@ -1397,18 +1275,18 @@ class Database:
         # - num_metapackages is |C|
         # - sub-select just gets |M|
         # - the divisor thus is |M⋃C| = |M| + |C| - |M⋂C|
-        self.cursor.execute(
+        return self.RequestManyAsDicts(
             """
             SELECT
                 maintainer,
-                num_metapackages_common,
+                num_metapackages_common AS count,
                 100.0 * num_metapackages_common / (
                     num_metapackages - num_metapackages_common + (
                         SELECT num_metapackages
                         FROM maintainers
                         WHERE maintainer=%s
                     )
-                ) AS score
+                ) AS match
             FROM
                 (
                     SELECT
@@ -1427,22 +1305,18 @@ class Database:
                     GROUP BY maintainer
                 ) AS intersecting_counts
                 INNER JOIN maintainers USING(maintainer)
-            ORDER BY score DESC
+            ORDER BY match DESC
             LIMIT %s
             """,
-            (maintainer, maintainer, maintainer, limit)
+            maintainer,
+            maintainer,
+            maintainer,
+            limit
         )
 
-        return [
-            {
-                'maintainer': row[0],
-                'count': row[1],
-                'match': row[2],
-            } for row in self.cursor.fetchall()
-        ]
-
     def GetRepositories(self):
-        self.cursor.execute("""
+        return self.RequestManyAsDicts(
+            """
             SELECT
                 name,
                 num_packages,
@@ -1456,37 +1330,15 @@ class Database:
                 num_metapackages_unique,
                 num_metapackages_newest,
                 num_metapackages_outdated,
-                last_update at time zone 'UTC',
-                now() - last_update,
+                last_update at time zone 'UTC' AS last_update_utc,
+                now() - last_update AS since_last_update,
                 num_problems,
                 num_maintainers
             FROM repositories
         """)
 
-        return [
-            {
-                'name': row[0],
-                'num_packages': row[1],
-                'num_packages_newest': row[2],
-                'num_packages_outdated': row[3],
-                'num_packages_ignored': row[4],
-                'num_packages_unique': row[5],
-                'num_packages_devel': row[6],
-                'num_packages_legacy': row[7],
-                'num_metapackages': row[8],
-                'num_metapackages_unique': row[9],
-                'num_metapackages_newest': row[10],
-                'num_metapackages_outdated': row[11],
-                'last_update_utc': row[12],
-                'since_last_update': row[13],
-                'num_problems': row[14],
-                'num_maintainers': row[15],
-            } for row in self.cursor.fetchall()
-        ]
-
     def GetRepository(self, repo):
-        # XXX: remove duplication with GetRepositories()
-        self.cursor.execute(
+        return self.RequestSingleAsDict(
             """
             SELECT
                 num_packages,
@@ -1500,61 +1352,22 @@ class Database:
                 num_metapackages_unique,
                 num_metapackages_newest,
                 num_metapackages_outdated,
-                last_update at time zone 'UTC',
-                now() - last_update,
+                last_update at time zone 'UTC' AS last_update_utc,
+                now() - last_update AS since_last_update,
                 num_problems,
                 num_maintainers
             FROM repositories
             WHERE name = %s
             """,
-            (repo,)
+            repo,
         )
 
-        rows = self.cursor.fetchall()
-
-        if rows:
-            row = rows[0]
-            return {
-                'num_packages': row[0],
-                'num_packages_newest': row[1],
-                'num_packages_outdated': row[2],
-                'num_packages_ignored': row[3],
-                'num_packages_unique': row[4],
-                'num_packages_devel': row[5],
-                'num_packages_legacy': row[6],
-                'num_metapackages': row[7],
-                'num_metapackages_unique': row[8],
-                'num_metapackages_newest': row[9],
-                'num_metapackages_outdated': row[10],
-                'last_update_utc': row[11],
-                'since_last_update': row[12],
-                'num_problems': row[13],
-                'num_maintainers': row[14],
-            }
-        else:
-            return {
-                'num_packages': 0,
-                'num_packages_newest': 0,
-                'num_packages_outdated': 0,
-                'num_packages_ignored': 0,
-                'num_packages_unique': 0,
-                'num_packages_devel': 0,
-                'num_packages_legacy': 0,
-                'num_metapackages': 0,
-                'num_metapackages_unique': 0,
-                'num_metapackages_newest': 0,
-                'num_metapackages_outdated': 0,
-                'last_update_utc': None,
-                'since_last_update': None,
-                'num_problems': 0,
-                'num_maintainers': 0,
-            }
-
     def GetRepositoriesHistoryAgo(self, seconds=60 * 60 * 24):
-        self.cursor.execute("""
+        return self.RequestSingleAsDict(
+            """
             SELECT
-                ts,
-                now() - ts,
+                ts AS timestamp,
+                now() - ts AS timedelta,
                 snapshot
             FROM repositories_history
             WHERE ts IN (
@@ -1565,16 +1378,9 @@ class Database:
                 ORDER BY ts DESC
                 LIMIT 1
             )
-        """, (datetime.timedelta(seconds=seconds),)
+            """,
+            datetime.timedelta(seconds=seconds),
         )
-
-        row = self.cursor.fetchall()[0]
-
-        return {
-            'timestamp': row[0],
-            'timedelta': row[1],
-            **row[2]
-        }
 
     def GetRepositoriesHistoryPeriod(self, seconds=60 * 60 * 24, repo=None):
         repopath = ''
@@ -1584,54 +1390,41 @@ class Database:
             repopath = '#>%s'
             repoargs = ('{' + repo + '}', )
 
-        self.cursor.execute("""
+        return self.RequestManyAsDicts(
+            """
             SELECT
-                ts,
-                now() - ts,
+                ts AS timestamp,
+                now() - ts AS timedelta,
                 snapshot{}
             FROM repositories_history
             WHERE ts >= now() - INTERVAL %s
             ORDER BY ts
             """.format(repopath),
-            repoargs + (datetime.timedelta(seconds=seconds),)
+            *repoargs,
+            datetime.timedelta(seconds=seconds)
         )
 
-        return [
-            {
-                'timestamp': row[0],
-                'timedelta': row[1],
-                'snapshot': row[2]
-            }
-            for row in self.cursor.fetchall()
-        ]
-
     def GetStatisticsHistoryPeriod(self, seconds=60 * 60 * 24):
-        self.cursor.execute("""
+        return self.RequestManyAsDicts(
+            """
             SELECT
-                ts,
-                now() - ts,
+                ts AS timestamp,
+                now() - ts AS timedelta,
                 snapshot
             FROM statistics_history
             WHERE ts >= now() - INTERVAL %s
             ORDER BY ts
-        """, (datetime.timedelta(seconds=seconds),)
+            """,
+            datetime.timedelta(seconds=seconds)
         )
 
-        return [
-            {
-                'timestamp': row[0],
-                'timedelta': row[1],
-                'snapshot': row[2]
-            }
-            for row in self.cursor.fetchall()
-        ]
-
     def Query(self, query, *args):
-        self.cursor.execute(query, args)
-        return self.cursor.fetchall()
+        with self.db.cursor() as cursor:
+            cursor.execute(query, args)
+            return cursor.fetchall()
 
     def SnapshotHistory(self):
-        self.cursor.execute(
+        self.Request(
             """
             INSERT
             INTO repositories_history(
@@ -1655,7 +1448,7 @@ class Database:
            """
         )
 
-        self.cursor.execute(
+        self.Request(
             """
             INSERT
             INTO statistics_history(
@@ -1674,7 +1467,7 @@ class Database:
         )
 
     def ExtractLinks(self):
-        self.cursor.execute(
+        self.Request(
             """
             INSERT
             INTO links(
@@ -1742,7 +1535,7 @@ class Database:
             limit_expr = 'LIMIT %s'
             args.append(limit)
 
-        self.cursor.execute(
+        return self.RequestManyAsSingleColumnArray(
             """
             SELECT
                 url
@@ -1751,10 +1544,8 @@ class Database:
             ORDER BY url
             {}
             """.format(conditions_expr, limit_expr),
-            args
+            *args
         )
-
-        return [row[0] for row in self.cursor.fetchall()]
 
     linkcheck_status_timeout = -1
     linkcheck_status_too_many_redirects = -2
@@ -1766,7 +1557,7 @@ class Database:
     def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
         success = status == 200
 
-        self.cursor.execute(
+        self.Request(
             """
             UPDATE links
             SET
@@ -1779,19 +1570,17 @@ class Database:
                 location = %s
             WHERE url = %s
             """,
-            (
-                success,
-                not success,
-                status,
-                redirect,
-                size,
-                location,
-                url
-            )
+            success,
+            not success,
+            status,
+            redirect,
+            size,
+            location,
+            url
         )
 
     def GetMetapackageLinkStatuses(self, name):
-        self.cursor.execute(
+        return self.RequestManyAsDictOfDicts(
             """
             SELECT
                 url,
@@ -1821,21 +1610,9 @@ class Database:
                 ) AS tmp
             )
             """,
-            (name, name)
+            name,
+            name
         )
-
-        return {
-            row[0]: {
-                'last_checked': row[1],
-                'last_success': row[2],
-                'last_failure': row[3],
-                'status': row[4],
-                'redirect': row[5],
-                'size': row[6],
-                'location': row[7]
-            }
-            for row in self.cursor.fetchall()
-        }
 
     def GetProblemsCount(self, repo=None, effname=None, maintainer=None):
         where_expr = ''
@@ -1856,16 +1633,14 @@ class Database:
         if conditions:
             where_expr = 'WHERE ' + ' AND '.join(conditions)
 
-        self.cursor.execute(
+        return self.RequestSingleValue(
             """
             SELECT count(*)
             FROM problems
             {}
             """.format(where_expr),
-            args
+            *args
         )
-
-        return self.cursor.fetchall()[0][0]
 
     def GetProblems(self, repo=None, effname=None, maintainer=None, limit=None):
         # XXX: eliminate duplication with GetProblemsCount()
@@ -1891,7 +1666,7 @@ class Database:
             limit_expr = 'LIMIT %s'
             args.append(limit)
 
-        self.cursor.execute(
+        return self.RequestManyAsDicts(
             """
             SELECT
                 repo,
@@ -1904,22 +1679,11 @@ class Database:
             ORDER by repo, effname, maintainer
             {}
             """.format(where_expr, limit_expr),
-            args
+            *args
         )
 
-        return [
-            {
-                'repo': row[0],
-                'name': row[1],
-                'effname': row[2],
-                'maintainer': row[3],
-                'problem': row[4],
-            }
-            for row in self.cursor.fetchall()
-        ]
-
     def AddReport(self, effname, need_verignore, need_split, need_merge, comment):
-        self.cursor.execute(
+        self.Request(
             """
             INSERT
             INTO reports (
@@ -1938,25 +1702,22 @@ class Database:
                 %s
             )
             """,
-            (
-                effname,
-                need_verignore,
-                need_split,
-                need_merge,
-                comment
-            )
+            effname,
+            need_verignore,
+            need_split,
+            need_merge,
+            comment
         )
 
     def GetReportsCount(self, effname):
-        self.cursor.execute('SELECT count(*) FROM reports WHERE effname = %s', (effname, ))
-        return self.cursor.fetchall()[0][0]
+        return self.RequestSingleValue('SELECT count(*) FROM reports WHERE effname = %s', effname)
 
     def GetReports(self, effname):
-        self.cursor.execute(
+        return self.RequestManyAsDicts(
             """
             SELECT
                 id,
-                now() - created,
+                now() - created AS created_ago,
                 effname,
                 need_verignore,
                 need_split,
@@ -1966,22 +1727,7 @@ class Database:
                 accepted
             FROM reports
             WHERE effname = %s
-            ORDER BY created desc
+            ORDER BY created DESC
             """,
-            (effname, )
+            effname
         )
-
-        return [
-            {
-                'id': row[0],
-                'created_ago': row[1],
-                'effname': row[2],
-                'need_verignore': row[3],
-                'need_split': row[4],
-                'need_merge': row[5],
-                'comment': row[6],
-                'reply': row[7],
-                'accepted': row[8],
-            }
-            for row in self.cursor.fetchall()
-        ]
