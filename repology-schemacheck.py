@@ -80,6 +80,7 @@ rulesets = families + [
     'aur',
     'deb_multimedia',
     'deepin',
+    'hyperbola',
 ]
 
 schemas = {

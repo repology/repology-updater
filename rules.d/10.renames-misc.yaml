@@ -705,6 +705,8 @@
 - { name: [idea-ultimate, intellij-idea-ultimate-edition, intellij-idea-ue-bundled-jre,intellij-ultimate], setname: intellij-idea-ultimate }
 - { name: intellij-idea-ue-eap,        setname: intellij-idea-ultimate, ignorever: true }
 - { name: intellij-pycharm,            setname: pycharm          }
+- { name: iproute2-cake,               setname: iproute2, addflavor: cake }
+- { name: iproute2-doc,                setname: iproute2, addflavor: doc }
 
 # J
 - { name: ja2,                         setname: ja2-stracciatella         }

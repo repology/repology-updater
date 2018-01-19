@@ -133,6 +133,7 @@
 - { name: containerd,                  verpat: "[0-9a-f]{7}",                              ignorever: true } # crux garbage
 - { name: cowsay,                      ver: "3.04.01",                                     ignorever: true }
 - { name: cpufreqd,                    ver: "2.4.3",                 family: sisyphus,     ignorever: true } # fake
+- { name: cpulimit,                    verpat: "20[0-8]{6}.*",                             ignorever: true } # hyperbola
 - { name: crack-attack,                ver: "1.1.15_cvs_01",                               ignorever: true }
 - { name: creduce,                     verpat: "2\\.7.*",            family: debuntu,      ignorever: true }
 - { name: crda,                        ver: "3.18_2016.02.08",                             ignorever: true }

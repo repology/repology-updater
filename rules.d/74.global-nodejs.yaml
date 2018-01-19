@@ -10,6 +10,8 @@
     - nativefier
   setname: "node:$0"
 
+- { name: pulp, wwwpart: bodil, setname: "node:$0" }
+
 # manual programs
 - { name: "node:svgo", setname: svgo }
 - { name: "node:gitter-cli", setname: gitter-cli }

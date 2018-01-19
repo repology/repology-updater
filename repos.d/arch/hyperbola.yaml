@@ -1,0 +1,24 @@
+###########################################################################
+# Hyperbola (arch derivative)
+###########################################################################
+- name: hyperbola
+  type: repository
+  desc: Hyperbola
+  family: arch
+  ruleset: [arch, hyperbola]
+  color: 'c0c0c0'
+  sources:
+    - name: [ core, extra, community ]
+      fetcher: WgetTar
+      parser: ArchDB
+      url: 'https://repo.hyperbola.info:50012/gnu-plus-linux-libre/stable/{source}/os/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Hyperbola GNU/Linux-libre home
+      url: https://www.hyperbola.info
+    - desc: Hyperbola Packages
+      url: https://www.hyperbola.info/packages/
+  packagelinks:
+    - desc: Package search on hyperbola.info.nu
+      url: 'https://hyperbola.info/packages/?q={name}'
+  tags: [ all, production ]
