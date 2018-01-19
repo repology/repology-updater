@@ -22,13 +22,15 @@
 </ul>
 {% endif %}
 
+{# note that we have to deal with undefined repo_info here! #}
+
 <h2>Packages</h2>
 <div class="row">
 	<div class="col-md-3">
 		<div class="panel panel-primary">
 			<div class="panel-heading"><h3>Total</h3></div>
 			<div class="panel-body">
-				{{ repo_info.num_packages }}
+				{{ repo_info.num_packages|default(0) }}
 			</div>
 		</div>
 	</div>
@@ -36,7 +38,7 @@
 		<div class="panel panel-success">
 			<div class="panel-heading"><h3>Newest</h3></div>
 			<div class="panel-body">
-				{{ repo_info.num_packages_newest }}
+				{{ repo_info.num_packages_newest|default(0) }}
 			</div>
 		</div>
 	</div>
@@ -44,7 +46,7 @@
 		<div class="panel panel-danger">
 			<div class="panel-heading"><h3>Outdated</h3></div>
 			<div class="panel-body">
-				{{ repo_info.num_packages_outdated }}
+				{{ repo_info.num_packages_outdated|default(0) }}
 			</div>
 		</div>
 	</div>
@@ -52,7 +54,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3>Ignored</h3></div>
 			<div class="panel-body">
-				{{ repo_info.num_packages_ignored }}
+				{{ repo_info.num_packages_ignored|default(0) }}
 			</div>
 		</div>
 	</div>
@@ -65,7 +67,7 @@
 			<div class="panel-heading"><h3>Total</h3></div>
 			<div class="panel-body">
 				<a href="{{ url_for('metapackages', inrepo=repo) }}">
-					{{ repo_info.num_metapackages }}
+					{{ repo_info.num_metapackages|default(0) }}
 				</a>
 			</div>
 		</div>
@@ -74,7 +76,7 @@
 		<div class="panel panel-success">
 			<div class="panel-heading"><h3>Newest</h3></div>
 			<div class="panel-body">
-				{{ repo_info.num_metapackages_newest }}
+				{{ repo_info.num_metapackages_newest|default(0) }}
 			</div>
 		</div>
 	</div>
@@ -83,7 +85,7 @@
 			<div class="panel-heading"><h3>Outdated</h3></div>
 			<div class="panel-body">
 				<a href="{{ url_for('metapackages', inrepo=repo, outdated=1) }}">
-					{{ repo_info.num_metapackages_outdated }}
+					{{ repo_info.num_metapackages_outdated|default(0) }}
 				</a>
 			</div>
 		</div>
@@ -93,7 +95,7 @@
 			<div class="panel-heading"><h3>Unique</h3></div>
 			<div class="panel-body">
 				<a href="{{ url_for('metapackages', inrepo=repo, maxspread=1) }}">
-					{{ repo_info.num_metapackages_unique }}
+					{{ repo_info.num_metapackages_unique|default(0) }}
 				</a>
 			</div>
 		</div>
@@ -102,7 +104,7 @@
 
 <h2>Maintainers</h2>
 
-<p>There are {{ repo_info.num_maintainers }} maintainers for this repository</p>
+<p>There are {{ repo_info.num_maintainers|default('no known') }} maintainers for this repository</p>
 
 {% if repo_info.num_problems %}
 <h2>Problems</h2>
