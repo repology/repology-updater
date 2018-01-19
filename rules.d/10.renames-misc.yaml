@@ -1167,6 +1167,8 @@
 - { name: [tubo,libtubo0],             setname: libtubo }
 - { name: two-lame,                    setname: twolame }
 - { name: twoping,                     setname: 2ping }
+- { name: tomahawk-player,             setname: tomahawk }
+- { name: tomahawk-qt5,                setname: tomahawk, addflavor: qt5 }
 - { name: tor-unstable,                setname: tor, devel: true }
 
 # U
