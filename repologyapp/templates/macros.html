@@ -1,6 +1,6 @@
 {%- macro format_time_interval(value) -%}
 	{%- with seconds = value.total_seconds() | int -%}
-	{%- if seconds == 1 -%}
+	{%- if seconds <= 1 -%}
 		a second
 	{%- elif seconds < 60 -%}
 		{{ seconds }} seconds
@@ -14,8 +14,14 @@
 		{{ seconds // (60 * 60) }} hours
 	{%- elif seconds // (60 * 60 * 24) == 1 -%}
 		a day
-	{%- else -%}
+	{%- elif seconds // (60 * 60 * 24) < 60 -%}
 		{{ seconds // (60 * 60 * 24) }} days
+	{%- elif seconds // (60 * 60 * 24) < 365 -%}
+		{{ seconds // (60 * 60 * 24 * 30)}} months
+	{%- elif seconds // (60 * 60 * 24 * 365) == 1 -%}
+		more than a year
+	{%- else -%}
+		more than {{ seconds // (60 * 60 * 24 * 365) }} years
 	{%- endif -%}
 	{%- endwith -%}
 {%- endmacro -%}
