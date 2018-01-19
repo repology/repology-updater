@@ -110,19 +110,19 @@ Metapackages
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" name="outdated"{% if search.outdated %} checked="checked"{% endif %}> Outdated
-							{% if not search.inrepo and not search.maintainer %}<span class="text-danger">(only useful when repository or maintainer selected!)</span>{% endif %}
+							{% if search.outdated and not search.inrepo and not search.maintainer %}<span class="text-danger">(only useful when repository or maintainer selected!)</span>{% endif %}
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" name="newestsinglerepo"{% if search.newestsinglerepo %} checked="checked"{% endif %}> Newest in single repository only
-							{% if not search.inrepo %}<span class="text-danger">(only useful when repository selected!)</span>{% endif %}
+							{% if search.newestsinglerepo and not search.inrepo %}<span class="text-danger">(only useful when repository selected!)</span>{% endif %}
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" name="newestsinglefamily"{% if search.newestsinglefamily %} checked="checked"{% endif %}> Newest in single family only
-							{% if not search.inrepo %}<span class="text-danger">(only useful when repository selected!)</span>{% endif %}
+							{% if search.newestsinglefamily and not search.inrepo %}<span class="text-danger">(only useful when repository selected!)</span>{% endif %}
 						</label>
 					</div>
 				</div>
