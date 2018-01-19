@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -93,6 +93,8 @@ class MetapackageRequest:
 
         # flags
         self.outdated = None
+        self.newest_single_repo = None
+        self.newest_single_family = None
 
         # other
         self.limit = None
@@ -165,6 +167,12 @@ class MetapackageRequest:
     def Outdated(self):
         self.outdated = True
 
+    def NewestSingleFamily(self):
+        self.newest_single_family = True
+
+    def NewestSingleRepo(self):
+        self.newest_single_repo = True
+
     def GetQuery(self):
         tables = set()
         where = AndQuery()
@@ -194,6 +202,16 @@ class MetapackageRequest:
             if self.outdated:
                 where.Append('repo_metapackages.num_packages_outdated > 0')
                 outdated_handled = True
+            if self.newest_single_family:
+                where.Append('repo_metapackages.num_packages_newest > 0')
+
+                tables.add('metapackage_repocounts')
+                where.Append('metapackage_repocounts.num_families_newest = 1')
+            if self.newest_single_repo:
+                where.Append('repo_metapackages.num_packages_newest > 0')
+
+                tables.add('metapackage_repocounts')
+                where.Append('metapackage_repocounts.num_repos_newest = 1')
 
         if self.notinrepo:
             tables.add('repo_metapackages as repo_metapackages1')
@@ -368,6 +386,8 @@ class Database:
                     effname,
                     count(DISTINCT repo) AS num_repos,
                     count(DISTINCT family) AS num_families,
+                    count(DISTINCT repo) FILTER (WHERE versionclass = 1) AS num_repos_newest,
+                    count(DISTINCT family) FILTER (WHERE versionclass = 1) AS num_families_newest,
                     bool_and(shadow) AS shadow_only
                 FROM packages
                 GROUP BY effname

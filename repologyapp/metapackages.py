@@ -64,6 +64,16 @@ class MetapackagesFilterInfo:
             'advanced': True,
             'action': lambda request, value: request.Outdated(),
         },
+        'newestsinglerepo': {
+            'type': bool,
+            'advanced': True,
+            'action': lambda request, value: request.NewestSingleRepo(),
+        },
+        'newestsinglefamily': {
+            'type': bool,
+            'advanced': True,
+            'action': lambda request, value: request.NewestSingleFamily(),
+        },
     }
 
     def __init__(self):
