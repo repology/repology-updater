@@ -261,6 +261,64 @@ class Database:
         self.db.set_session(readonly=readonly, autocommit=autocommit)
         self.cursor = self.db.cursor()
 
+    def Request(self, query, *args):
+        with self.db.cursor() as cursor:
+            cursor.execute(query, args)
+
+    def RequestSingleValue(self, query, *args):
+        with self.db.cursor() as cursor:
+            cursor.execute(query, args)
+
+            row = cursor.fetchone()
+
+            if row is None:
+                return None
+
+            return row[0]
+
+    def RequestSingleAsDict(self, query, *args):
+        with self.db.cursor() as cursor:
+            cursor.execute(query, args)
+
+            row = cursor.fetchone()
+
+            if row is None:
+                return None
+
+            names = [desc.name for desc in cursor.description]
+
+            return dict(zip(names, row))
+
+    def RequestManyAsSingleColumnArray(self, query, *args):
+        with self.db.cursor() as cursor:
+            cursor.execute(query, args)
+
+            return [row[0] for row in cursor.fetchall()]
+
+    def RequestManyAsDictOfDicts(self, query, *args):
+        with self.db.cursor() as cursor:
+            cursor.execute(query, args)
+
+            names = [desc.name for desc in cursor.description]
+
+            return {row[0]: dict(zip(names[1:], row[1:])) for row in cursor.fetchall()}
+
+    def RequestManyAsDicts(self, query, *args):
+        with self.db.cursor() as cursor:
+            cursor.execute(query, args)
+
+            names = [desc.name for desc in cursor.description]
+
+            return [dict(zip(names, row)) for row in cursor.fetchall()]
+
+    def RequestManyAsPackages(self, query, *args):
+        with self.db.cursor() as cursor:
+            cursor.execute(query, args)
+
+            names = [desc.name for desc in cursor.description]
+
+            return [Package(**dict(zip(names, row))) for row in cursor.fetchall()]
+
     def CreateSchema(self):
         self.cursor.execute('DROP TABLE IF EXISTS packages CASCADE')
         self.cursor.execute('DROP TABLE IF EXISTS repositories CASCADE')
