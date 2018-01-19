@@ -591,7 +591,7 @@
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignorever: true } # 2.15.0 was not released yet
 - { name: thrift,                      verpat: "[0-9]{7}.*",                               ignorever: true } # vcpkg and macports garbage
 - { name: [tomahawk,tomahawk-player],  verpat: "0\\.8\\.99.*",                             ignorever: true } # fake
-- { name: tt-rss,                      verpat: "201[67].*",                                ignorever: true } # it has proper versioning
+- { name: tt-rss,                                                                          ignorever: true } # no upstream versioning scheme
 - { name: tome2,                       ver: "235",                                         ignorever: true }
 - { name: [tor,tor-devel],             verpat: "(.*)[._-][ar].*",                          setver: "$1" } # version is self-sufficient; remove redundant alpha/rc suffix
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignorever: true }
