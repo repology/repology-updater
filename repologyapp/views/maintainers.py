@@ -40,20 +40,13 @@ def maintainers(bound=None):
 
     maintainers = get_db().GetMaintainers(bound, reverse, search, config['MAINTAINERS_PER_PAGE'])
 
-    firstpage, lastpage = False, False
-    for maintainer in maintainers:
-        if maintainer['maintainer'] == minmaintainer:
-            firstpage = True
-        if maintainer['maintainer'] == maxmaintainer:
-            lastpage = True
-
     return flask.render_template(
         'maintainers.html',
         search=search,
         minmaintainer=minmaintainer,
         maxmaintainer=maxmaintainer,
-        firstpage=firstpage,
-        lastpage=lastpage,
+        firstpage=maintainers[0]['maintainer'] == minmaintainer,
+        lastpage=maintainers[-1]['maintainer'] == maxmaintainer,
         maintainers=maintainers
     )
 
