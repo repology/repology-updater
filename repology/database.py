@@ -304,9 +304,7 @@ class Database:
             )
         """)
 
-        self.cursor.execute("""
-            CREATE INDEX ON packages(effname)
-        """)
+        self.cursor.execute('CREATE INDEX ON packages(effname)')
 
         # This should be used in queries instead of packages table
         # everywhere where shadow metapackages need to be ignored
@@ -421,17 +419,9 @@ class Database:
                 WITH DATA
         """)
 
-        self.cursor.execute("""
-            CREATE UNIQUE INDEX ON repo_metapackages(repo, effname)
-        """)
-
-        self.cursor.execute("""
-            CREATE INDEX ON repo_metapackages(effname)
-        """)
-
-        self.cursor.execute("""
-            CREATE INDEX repo_metapackages_effname_trgm ON repo_metapackages USING gin (effname gin_trgm_ops)
-        """)
+        self.cursor.execute('CREATE UNIQUE INDEX ON repo_metapackages(repo, effname)')
+        self.cursor.execute('CREATE INDEX ON repo_metapackages(effname)')
+        self.cursor.execute('CREATE INDEX repo_metapackages_effname_trgm ON repo_metapackages USING gin (effname gin_trgm_ops)')
 
         # metapackages per category
         self.cursor.execute("""
@@ -447,13 +437,8 @@ class Database:
                 WITH DATA
         """)
 
-        self.cursor.execute("""
-            CREATE UNIQUE INDEX ON category_metapackages(category, effname)
-        """)
-
-        self.cursor.execute("""
-            CREATE INDEX ON category_metapackages(effname)
-        """)
+        self.cursor.execute('CREATE UNIQUE INDEX ON category_metapackages(category, effname)')
+        self.cursor.execute('CREATE INDEX ON category_metapackages(effname)')
 
         # maintainer_metapackages
         self.cursor.execute("""
@@ -462,25 +447,20 @@ class Database:
                     SELECT
                         unnest(maintainers) as maintainer,
                         effname,
-                        count(1) AS num_packages,
-                        count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
-                        count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
-                        count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
-                        count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
-                        count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
-                        count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy
+                        count(1)::smallint AS num_packages,
+                        count(*) FILTER (WHERE versionclass = 1)::smallint AS num_packages_newest,
+                        count(*) FILTER (WHERE versionclass = 2)::smallint AS num_packages_outdated,
+                        count(*) FILTER (WHERE versionclass = 3)::smallint AS num_packages_ignored,
+                        count(*) FILTER (WHERE versionclass = 4)::smallint AS num_packages_unique,
+                        count(*) FILTER (WHERE versionclass = 5)::smallint AS num_packages_devel,
+                        count(*) FILTER (WHERE versionclass = 6)::smallint AS num_packages_legacy
                     FROM packages
                     GROUP BY maintainer, effname
                 WITH DATA
         """)
 
-        self.cursor.execute("""
-            CREATE UNIQUE INDEX ON maintainer_metapackages(maintainer, effname)
-        """)
-
-        self.cursor.execute("""
-            CREATE INDEX ON maintainer_metapackages(effname)
-        """)
+        self.cursor.execute('CREATE UNIQUE INDEX ON maintainer_metapackages(maintainer, effname)')
+        self.cursor.execute('CREATE INDEX ON maintainer_metapackages(effname)')
 
         # maintainers
         self.cursor.execute("""
@@ -542,9 +522,7 @@ class Database:
             WITH DATA
         """)
 
-        self.cursor.execute("""
-            CREATE UNIQUE INDEX ON maintainers(maintainer)
-        """)
+        self.cursor.execute('CREATE UNIQUE INDEX ON maintainers(maintainer)')
 
         # links for link checker
         self.cursor.execute("""
