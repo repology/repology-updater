@@ -238,7 +238,7 @@ class Package:
         return VersionCompare(
             self.version,
             other.version,
-            ((self.flags & PackageFlags.p_is_patch) and P_IS_PATCH_LEFT) or
+            ((self.flags & PackageFlags.p_is_patch) and P_IS_PATCH_LEFT) |
             ((other.flags & PackageFlags.p_is_patch) and P_IS_PATCH_RIGHT)
         )
 

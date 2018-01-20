@@ -174,6 +174,11 @@ class TestParsers(unittest.TestCase):
         pkg.Normalize()
         self.assertEqual(pkg.homepage, 'http://example.com/FoO')
 
+    def test_version_compare(self):
+        self.assertEqual(Package(version='1.0p1').VersionCompare(Package(version='1.0p1')), 0)
+        self.assertEqual(Package(version='1.0p1', flags=PackageFlags.p_is_patch).VersionCompare(Package(version='1.0p1')), 1)
+        self.assertEqual(Package(version='1.0p1').VersionCompare(Package(version='1.0p1', flags=PackageFlags.p_is_patch)), -1)
+        self.assertEqual(Package(version='1.0p1', flags=PackageFlags.p_is_patch).VersionCompare(Package(version='1.0p1', flags=PackageFlags.p_is_patch)), 0)
 
 if __name__ == '__main__':
     unittest.main()
