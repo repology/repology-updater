@@ -25,11 +25,12 @@ static PyObject* VersionCompare(PyObject *self, PyObject *args) {
 
 	const char *v1;
 	const char *v2;
+	int flags = 0;
 
-	if (!PyArg_ParseTuple(args, "ss", &v1, &v2))
+	if (!PyArg_ParseTuple(args, "ss|i", &v1, &v2, &flags))
 		return NULL;
 
-	return PyLong_FromLong(version_compare_simple(v1, v2));
+	return PyLong_FromLong(version_compare_flags(v1, v2, flags));
 }
 
 static PyMethodDef module_methods[] = {
@@ -50,5 +51,14 @@ static struct PyModuleDef module_definition = {
 };
 
 PyMODINIT_FUNC PyInit_version(void) {
-	return PyModule_Create(&module_definition);
+	PyObject* m = PyModule_Create(&module_definition);
+
+	if (m == NULL)
+		return NULL;
+
+	PyModule_AddIntConstant(m, "P_IS_PATCH", VERSIONFLAG_P_IS_PATCH);
+	PyModule_AddIntConstant(m, "P_IS_PATCH_LEFT", VERSIONFLAG_P_IS_PATCH_LEFT);
+	PyModule_AddIntConstant(m, "P_IS_PATCH_RIGHT", VERSIONFLAG_P_IS_PATCH_RIGHT);
+
+	return m;
 }

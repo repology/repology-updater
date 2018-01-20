@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.version import VersionCompare
+from repology.version import *
 
 
 class TestVersionComparison(unittest.TestCase):
@@ -191,6 +191,12 @@ class TestVersionComparison(unittest.TestCase):
     def test_case_insensitivity(self):
         self.assertEqual(VersionCompare('1.0A', '1.0a'), 0)
         self.assertEqual(VersionCompare('1.0ALPHA', '1.0alpha'), 0)
+
+    def test_p_is_patch(self):
+        self.assertEqual(VersionCompare('1.0p1', '1.0p1', 0), 0)
+        self.assertEqual(VersionCompare('1.0p1', '1.0p1', P_IS_PATCH), 0)
+        self.assertEqual(VersionCompare('1.0p1', '1.0p1', P_IS_PATCH_LEFT), 1)
+        self.assertEqual(VersionCompare('1.0p1', '1.0p1', P_IS_PATCH_RIGHT), -1)
 
 
 if __name__ == '__main__':
