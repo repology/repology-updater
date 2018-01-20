@@ -174,11 +174,17 @@ class TestParsers(unittest.TestCase):
         pkg.Normalize()
         self.assertEqual(pkg.homepage, 'http://example.com/FoO')
 
-    def test_version_compare(self):
+    def test_flag_p_is_patch(self):
         self.assertEqual(Package(version='1.0p1').VersionCompare(Package(version='1.0p1')), 0)
         self.assertEqual(Package(version='1.0p1', flags=PackageFlags.p_is_patch).VersionCompare(Package(version='1.0p1')), 1)
         self.assertEqual(Package(version='1.0p1').VersionCompare(Package(version='1.0p1', flags=PackageFlags.p_is_patch)), -1)
         self.assertEqual(Package(version='1.0p1', flags=PackageFlags.p_is_patch).VersionCompare(Package(version='1.0p1', flags=PackageFlags.p_is_patch)), 0)
+
+    def test_flag_outdated(self):
+        self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0')), 0)
+        self.assertEqual(Package(version='1.0', flags=PackageFlags.outdated).VersionCompare(Package(version='1.0')), -1)
+        self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0', flags=PackageFlags.outdated)), 1)
+        self.assertEqual(Package(version='1.0', flags=PackageFlags.outdated).VersionCompare(Package(version='1.0', flags=PackageFlags.outdated)), 0)
 
 if __name__ == '__main__':
     unittest.main()

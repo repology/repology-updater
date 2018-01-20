@@ -41,6 +41,9 @@ class PackageFlags:
     # ignored variants
     ignore = 1 << 2
 
+    # forced classes
+    outdated = 1 << 8
+
     # special flags
     p_is_patch = 1 << 10
 
@@ -235,6 +238,11 @@ class Package:
 
     # other helper methods
     def VersionCompare(self, other):
+        if self.flags & PackageFlags.outdated and not other.flags & PackageFlags.outdated:
+            return -1
+        if not self.flags & PackageFlags.outdated and other.flags & PackageFlags.outdated:
+            return 1
+
         return VersionCompare(
             self.version,
             other.version,

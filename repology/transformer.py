@@ -188,6 +188,9 @@ class PackageTransformer:
         if 'p_is_patch' in rule:
             package.SetFlag(PackageFlags.p_is_patch, rule['p_is_patch'])
 
+        if 'outdated' in rule:
+            package.SetFlag(PackageFlags.outdated, rule['outdated'])
+
         if 'last' in rule:
             result = RuleApplyResult.last
 

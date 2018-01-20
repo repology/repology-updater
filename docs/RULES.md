@@ -221,7 +221,15 @@ TODO
 
 TODO
 
-### dis_patch: false
+### p_is_patch: false
+
+TODO
+
+### outdated: true
+
+TODO
+
+### outdated: false
 
 TODO
 
