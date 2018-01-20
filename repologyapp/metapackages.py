@@ -19,7 +19,7 @@ import flask
 
 from repology.database import MetapackageRequest
 from repology.package import VersionClass
-from repology.packageproc import PackagesetSortByVersions
+from repology.packageproc import PackagesetSortByVersion
 
 
 class MetapackagesFilterInfo:
@@ -144,7 +144,7 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
         families = set()
 
         # gather summaries
-        for package in PackagesetSortByVersions(packages):
+        for package in PackagesetSortByVersion(packages):
             families.add(package.family)
 
             key = (package.version, package.versionclass)

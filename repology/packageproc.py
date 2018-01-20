@@ -18,8 +18,7 @@
 import sys
 from functools import cmp_to_key
 
-from repology.package import *
-from repology.version import VersionCompare
+from repology.package import Package, PackageFlags, VersionClass
 
 
 def PackagesetDeduplicate(packages):
@@ -59,7 +58,7 @@ def FillPackagesetVersions(packages):
         for package in packages:
             if current is None:
                 current = [package]
-            elif VersionCompare(current[0].version, package.version) == 0:
+            elif current[0].VersionCompare(package) == 0:
                 current.append(package)
             else:
                 yield current
@@ -78,28 +77,28 @@ def FillPackagesetVersions(packages):
         def Check(self, package):
             return self.check(package)
 
-        def CreateBranch(self, bestversion=None):
-            return Branch(self.versionclass, bestversion)
+        def CreateBranch(self, bestpackage=None):
+            return Branch(self.versionclass, bestpackage)
 
     class Branch:
-        __slots__ = ['versionclass', 'bestversion', 'lastversion']
+        __slots__ = ['versionclass', 'bestpackage', 'lastpackage']
 
-        def __init__(self, versionclass, bestversion=None):
+        def __init__(self, versionclass, bestpackage=None):
             self.versionclass = versionclass
-            self.bestversion = bestversion
-            self.lastversion = bestversion
+            self.bestpackage = bestpackage
+            self.lastpackage = bestpackage
 
-        def SetLastVersion(self, lastversion):
-            self.lastversion = lastversion
+        def SetLastPackage(self, lastpackage):
+            self.lastpackage = lastpackage
 
-        def BestVersionCompare(self, version):
-            return VersionCompare(version, self.bestversion) if self.bestversion is not None else 1
+        def BestPackageCompare(self, package):
+            return package.VersionCompare(self.bestpackage) if self.bestpackage is not None else 1
 
-        def IsAfterBranch(self, version):
-            return VersionCompare(version, self.lastversion) == -1 if self.lastversion is not None else False
+        def IsAfterBranch(self, package):
+            return package.VersionCompare(self.lastpackage) == -1 if self.lastpackage is not None else False
 
     # we always work on packages sorted by version
-    packages = PackagesetSortByVersions(packages)
+    packages = PackagesetSortByVersion(packages)
 
     # branch prototypes
     default_branchproto = BranchPrototype(VersionClass.newest, lambda package: True)
@@ -140,9 +139,9 @@ def FillPackagesetVersions(packages):
         final_branchproto_idx = list(matching_branchproto_indexes)[0] if len(matching_branchproto_indexes) == 1 else default_branchproto_idx
 
         if final_branchproto_idx == current_branchproto_idx:
-            branches[-1].SetLastVersion(verpackages[0].version)
+            branches[-1].SetLastPackage(verpackages[0])
         elif (current_branchproto_idx is None or final_branchproto_idx > current_branchproto_idx) and has_non_ignored:
-            branches.append(branchprotos[final_branchproto_idx].CreateBranch(verpackages[0].version))
+            branches.append(branchprotos[final_branchproto_idx].CreateBranch(verpackages[0]))
             current_branchproto_idx = final_branchproto_idx
 
     # handle unique package
@@ -157,16 +156,16 @@ def FillPackagesetVersions(packages):
     #
     for repo, repo_packages in packages_by_repo.items():
         current_branch_idx = 0
-        first_version_in_branch_per_flavor = {}
+        first_package_in_branch_per_flavor = {}
 
         for package in repo_packages:  # these are still sorted by version
             # switch to next branch when the current one is over, but not past the last branch
-            while current_branch_idx < len(branches) - 1 and branches[current_branch_idx].IsAfterBranch(package.version):
+            while current_branch_idx < len(branches) - 1 and branches[current_branch_idx].IsAfterBranch(package):
                 current_branch_idx += 1
-                first_version_in_branch_per_flavor = {}
+                first_package_in_branch_per_flavor = {}
 
             # chose version class based on comparison to branch best version
-            current_comparison = branches[current_branch_idx].BestVersionCompare(package.version)
+            current_comparison = branches[current_branch_idx].BestPackageCompare(package)
 
             if current_comparison > 0:
                 package.versionclass = VersionClass.ignored
@@ -176,26 +175,26 @@ def FillPackagesetVersions(packages):
                 if current_comparison == 0:
                     package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch_idx].versionclass
                 else:
-                    non_first_in_branch = flavor in first_version_in_branch_per_flavor and VersionCompare(first_version_in_branch_per_flavor[flavor], package.version) != 0
+                    non_first_in_branch = flavor in first_package_in_branch_per_flavor and first_package_in_branch_per_flavor[flavor].VersionCompare(package) != 0
                     package.versionclass = VersionClass.legacy if non_first_in_branch else VersionClass.outdated
 
-                if flavor not in first_version_in_branch_per_flavor:
-                    first_version_in_branch_per_flavor[flavor] = package.version
+                if flavor not in first_package_in_branch_per_flavor:
+                    first_package_in_branch_per_flavor[flavor] = package
 
 
 def PackagesetToBestByRepo(packages):
     state_by_repo = {}
 
-    for package in PackagesetSortByVersions(packages):
+    for package in PackagesetSortByVersion(packages):
         if package.repo not in state_by_repo or (state_by_repo[package.repo].versionclass == VersionClass.ignored and package.versionclass != VersionClass.ignored):
             state_by_repo[package.repo] = package
 
     return state_by_repo
 
 
-def PackagesetSortByVersions(packages):
+def PackagesetSortByVersion(packages):
     def compare(p1, p2):
-        return VersionCompare(p2.version, p1.version)
+        return p2.VersionCompare(p1)
 
     return sorted(packages, key=cmp_to_key(compare))
 
@@ -206,7 +205,7 @@ def PackagesetSortByNameVersion(packages):
             return -1
         if p1.name > p2.name:
             return 1
-        return VersionCompare(p2.version, p1.version)
+        return p2.VersionCompare(p1)
 
     return sorted(packages, key=cmp_to_key(compare))
 
@@ -215,24 +214,36 @@ def PackagesetToFamilies(packages):
     return set([package.family for package in packages])
 
 
-def PackagesetAggregateByVersions(packages, classmap={}):
-    def MapClass(versionclass):
-        return classmap.get(versionclass, versionclass)
+def PackagesetAggregateByVersion(packages, classmap={}):
+    def CreateVersionAggregation(packages):
+        aggregated = {}
 
-    versions = {}
-    for package in packages:
-        key = (package.version, MapClass(package.versionclass))
-        if key not in versions:
-            versions[key] = []
-        versions[key].append(package)
+        for package in packages:
+            aggregated.setdefault(
+                (package.version, classmap.get(package.versionclass, package.versionclass)),
+                []
+            ).append(package)
 
-    def key_cmp_reverse(v1, v2):
-        return VersionCompare(v2[0], v1[0])
+        for (version, versionclass), packages in sorted(aggregated.items()):
+            yield {
+                'version': version,
+                'versionclass': versionclass,
+                'numfamilies': len(set([package.family for package in packages]))
+            }
 
-    return [
-        {
-            'version': key[0],
-            'versionclass': key[1],
-            'packages': versions[key]
-        } for key in sorted(versions.keys(), key=cmp_to_key(key_cmp_reverse))
-    ]
+    def PostSortSameVersion(versions):
+        return sorted(versions, key=lambda v: (v['numfamilies'], v['version'], v['versionclass']), reverse=True)
+
+    def AggregateByVersion(packages):
+        current = []
+        for package in PackagesetSortByVersion(packages):
+            if not current or current[0].VersionCompare(package) == 0:
+                current.append(package)
+            else:
+                yield PostSortSameVersion(CreateVersionAggregation(current))
+                current = [package]
+
+        if current:
+            yield PostSortSameVersion(CreateVersionAggregation(current))
+
+    return sum(AggregateByVersion(packages), [])

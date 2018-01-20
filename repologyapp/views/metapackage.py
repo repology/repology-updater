@@ -25,7 +25,7 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
-from repology.packageproc import PackagesetAggregateByVersions, PackagesetSortByNameVersion, PackagesetSortByVersions, PackagesetToFamilies
+from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByNameVersion, PackagesetSortByVersion, PackagesetToFamilies
 
 
 @ViewRegistrar('/metapackage/<name>')
@@ -47,7 +47,7 @@ def metapackage_versions(name):
         packages_by_repo[package.repo].append(package)
 
     for repo, packages in packages_by_repo.items():
-        packages_by_repo[repo] = PackagesetSortByVersions(packages)
+        packages_by_repo[repo] = PackagesetSortByVersion(packages)
 
     return flask.render_template(
         'metapackage-versions.html',
@@ -122,10 +122,7 @@ def metapackage_information(name):
             for reponame in reponames if reponame in information['repos']
         ]
 
-    versions = PackagesetAggregateByVersions(packages, {VersionClass.legacy: VersionClass.outdated})
-
-    for version in versions:
-        version['families'] = list(sorted(PackagesetToFamilies(version['packages'])))
+    versions = PackagesetAggregateByVersion(packages, {VersionClass.legacy: VersionClass.outdated})
 
     return flask.render_template(
         'metapackage-information.html',

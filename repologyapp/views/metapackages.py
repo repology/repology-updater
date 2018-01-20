@@ -24,7 +24,7 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
-from repology.packageproc import PackagesetSortByVersions
+from repology.packageproc import PackagesetSortByVersion
 
 
 @ViewRegistrar('/metapackages/')

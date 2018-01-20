@@ -27,7 +27,7 @@
 			<ul class="list-sparse">
 			{% for versioninfo in versions %}
 				<li>
-					<span class="version version-big version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span> <b>({{ versioninfo.families|length }})</b>
+					<span class="version version-big version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span> <b>({{ versioninfo.numfamilies }})</b>
 				</li>
 			{% endfor %}
 			</ul>
