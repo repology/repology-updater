@@ -29,7 +29,7 @@ class TestPackageProc(unittest.TestCase):
             # Reference repo
             (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.ignore), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.devel|PackageFlags.ignore), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.devel | PackageFlags.ignore), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
             # see #338. There are multiple possible ways to ignored version between branches,
             # we go with ignored for now
@@ -40,7 +40,7 @@ class TestPackageProc(unittest.TestCase):
 
             (Package(repo='1', family='1', name='a', version='1.2.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='1.2beta1', flags=PackageFlags.devel), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.2alpha1.20990101', flags=PackageFlags.devel|PackageFlags.ignore), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.2alpha1.20990101', flags=PackageFlags.devel | PackageFlags.ignore), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='1.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='1.1.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='1.1'), VersionClass.legacy),
@@ -70,7 +70,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='6', family='6', name='a', version='1.0'), VersionClass.legacy),
 
             # ignored classes are unignored when they are backed with real classes
-            (Package(repo='8', family='8', name='a', version='2.2beta1', flags=PackageFlags.devel|PackageFlags.ignore), VersionClass.devel),
+            (Package(repo='8', family='8', name='a', version='2.2beta1', flags=PackageFlags.devel | PackageFlags.ignore), VersionClass.devel),
 
             (Package(repo='9', family='9', name='a', version='2.1', flags=PackageFlags.ignore), VersionClass.newest),
 
@@ -112,9 +112,9 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_single_branch2(self):
         packages = [
             # here we only have devel branch
-            (Package(repo='1', family='1', name='a', version='2.2rc1.20990101', flags=PackageFlags.ignore|PackageFlags.devel), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2rc1.20990101', flags=PackageFlags.ignore | PackageFlags.devel), VersionClass.ignored),
             (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.ignore|PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.ignore | PackageFlags.devel), VersionClass.legacy),
             (Package(repo='1', family='1', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
 
             (Package(repo='2', family='2', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
@@ -190,7 +190,7 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_branch_bounds(self):
         packages = [
             (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', flags=PackageFlags.ignore|PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', flags=PackageFlags.ignore | PackageFlags.devel), VersionClass.legacy),
             # see #338. There are multiple possible ways to ignored version between branches,
             # we go with ignored for now
             (Package(repo='1', family='1', name='a', version='2.1.9999', flags=PackageFlags.ignore), VersionClass.ignored),

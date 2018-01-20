@@ -19,7 +19,7 @@
 import re
 
 
-from repology.version import VersionCompare, P_IS_PATCH_LEFT, P_IS_PATCH_RIGHT
+from repology.version import P_IS_PATCH_LEFT, P_IS_PATCH_RIGHT, VersionCompare
 
 
 class VersionClass:
