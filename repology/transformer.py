@@ -185,6 +185,9 @@ class PackageTransformer:
         if 'devel' in rule:
             package.SetFlag(PackageFlags.devel, rule['devel'])
 
+        if 'p_is_patch' in rule:
+            package.SetFlag(PackageFlags.p_is_patch, rule['p_is_patch'])
+
         if 'last' in rule:
             result = RuleApplyResult.last
 

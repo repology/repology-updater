@@ -76,6 +76,7 @@
 
 # B
 - { name: baloo,                       ver: "15.04.26",                                    ignore: true }
+- { name: bash,                                                                            p_is_patch: true }
 - { name: bass,                        verpat: "20[0-9]{6}",                               ignore: true }
 - { name: bastet,                      ver: "0.43.1.2015083000",                           ignore: true }
 - { name: bats,                        ver: "1.0",                   family: sisyphus,     ignore: true } # totally fake
@@ -513,6 +514,7 @@
 - { name: racer,                       ver: "2.07",                                        ignore: true }
 - { name: rage,                        ver: "0.3.0.042",                                   ignore: true }
 - { name: rawstudio,                   verpat: ".*git.*",                                  ignore: true }
+- { name: readline,                                                                        p_is_patch: true }
 - { name: recode,                      ver: "3.7-2fd838565",                               ignore: true }
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignore: true }
 - { name: reptyr,                      ver: "0.6.3a",                                      ignore: true } # freebsd; fake

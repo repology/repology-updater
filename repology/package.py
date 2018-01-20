@@ -41,6 +41,9 @@ class PackageFlags:
     # ignored variants
     ignore = 1 << 2
 
+    # special flags
+    p_is_patch = 1 << 10
+
 
 class PackageSanityCheckProblem(Exception):
     pass

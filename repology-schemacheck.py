@@ -159,6 +159,7 @@ schemas = {
             'remove': bool,
             'ignore': bool,
             'devel': bool,
+            'p_is_patch': bool,
             'last': bool,
             'tolowername': bool,
             'replaceinname': dict,
