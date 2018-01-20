@@ -34,7 +34,7 @@ before_install:
   - sudo /etc/init.d/postgresql restart
   - export PGPORT=5433
 
-  - wget -qO- https://github.com/repology/libversion/archive/2.2.0.tar.gz | tar -xzf- && ( cd libversion-2.2.0 && cmake . && make && sudo make install )
+  - wget -qO- https://github.com/repology/libversion/archive/2.4.0.tar.gz | tar -xzf- && ( cd libversion-2.4.0 && cmake . && make && sudo make install )
 
   - git clone --depth=1 https://github.com/htacg/tidy-html5.git && ( cd tidy-html5 && cmake . && make && sudo make install )
   - sudo ldconfig
