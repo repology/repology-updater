@@ -19,6 +19,9 @@
 import re
 
 
+from repology.version import VersionCompare, P_IS_PATCH_LEFT, P_IS_PATCH_RIGHT
+
+
 class VersionClass:
     newest = 1
     outdated = 2
@@ -226,6 +229,15 @@ class Package:
     # getters
     def HasFlag(self, flag):
         return self.flags & flag
+
+    # other helper methods
+    def VersionCompare(self, other):
+        return VersionCompare(
+            self.version,
+            other.version,
+            ((self.flags & PackageFlags.p_is_patch) and P_IS_PATCH_LEFT) or
+            ((other.flags & PackageFlags.p_is_patch) and P_IS_PATCH_RIGHT)
+        )
 
     @property
     def __dict__(self):
