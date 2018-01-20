@@ -20,7 +20,6 @@ import xml.etree.ElementTree
 
 from repology.package import Package, PackageFlags
 from repology.util import GetMaintainers
-from repology.version import VersionCompare
 
 
 def ParseConditionalExpr(string):
