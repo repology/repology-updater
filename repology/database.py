@@ -1381,7 +1381,7 @@ class Database:
             SELECT
                 ts AS timestamp,
                 now() - ts AS timedelta,
-                snapshot{}
+                snapshot{} AS snapshot
             FROM repositories_history
             WHERE ts >= now() - INTERVAL %s
             ORDER BY ts
