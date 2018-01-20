@@ -570,6 +570,7 @@
 - { name: sqlninja,                    ver: ["0.2.999"],                                   ignore: true } # it's 0.2.999-alpha1
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignore: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
 - { name: sudo,                                                      family: fedora,       ignore: true } # accused in dropping prerelease suffix
+- { name: sudo,                                                                            p_is_patch: true }
 - { name: sunpinyin,                   ver: "3.0.0",                                       ignore: true } # aosc fake, it's rc1
 - { name: sunxi-tools,                 verpat: "20[0-9]{6}",                               ignore: true }
 - { name: supertransball2,             verpat: "2\\.[0-9]+\\.[0-9]+",                      ignore: true } # 2 is port of the project name, not version
