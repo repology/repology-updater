@@ -42,6 +42,14 @@ def VersionClass2Letter(value):
         return 'L'
     elif value == VersionClass.outdated:
         return 'O'
+    elif value == VersionClass.incorrect:
+        return 'X'
+    elif value == VersionClass.untrusted:
+        return 'T'
+    elif value == VersionClass.noscheme:
+        return '*'
+    elif value == VersionClass.rolling:
+        return '+'
     else:
         return '?'
 

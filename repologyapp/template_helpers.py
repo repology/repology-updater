@@ -89,6 +89,14 @@ def css_for_versionclass(value):
         return 'legacy'
     elif value == VersionClass.outdated:
         return 'outdated'
+    elif value == VersionClass.incorrect:
+        return 'incorrect'
+    elif value == VersionClass.untrusted:
+        return 'untrusted'
+    elif value == VersionClass.noscheme:
+        return 'noscheme'
+    elif value == VersionClass.rolling:
+        return 'rolling'
 
 
 def url_for_self(**args):

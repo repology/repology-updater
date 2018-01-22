@@ -150,6 +150,22 @@
     background-color: #d9534f;
 }
 
+.version-incorrect {
+    background-color: #b35d20;
+}
+
+.version-untrusted {
+    background-color: #2a2730;
+}
+
+.version-noscheme {
+    background-color: #cc52cc;
+}
+
+.version-rolling {
+    background-color: #c0c0c0;
+}
+
 .version-property-fixed {
     font-style: italic;
 }
@@ -263,22 +279,22 @@
 
 /* copied from panel-* */
 .panel-version-ignored {
-  border-color: #ddd;
+  border-color: #a0a0a0;
 }
 .panel-version-ignored > .panel-heading {
   color: #333;
-  background-color: #f5f5f5;
-  border-color: #ddd;
+  background-color: #d0d0d0;
+  border-color: #a0a0a0;
 }
 .panel-version-ignored > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #ddd;
+  border-top-color: #a0a0a0;
 }
 .panel-version-ignored > .panel-heading .badge {
-  color: #f5f5f5;
+  color: #d0d0d0;
   background-color: #333;
 }
 .panel-version-ignored > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #ddd;
+  border-bottom-color: #a0a0a0;
 }
 
 .panel-version-devel {
@@ -374,4 +390,84 @@
 }
 .panel-version-outdated > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #ebccd1;
+}
+
+
+.panel-version-incorrect {
+  border-color: #e6cbb8;
+}
+.panel-version-incorrect > .panel-heading {
+  color: #333;
+  background-color: #e6dbd3;
+  border-color: #e6cbb8;
+}
+.panel-version-incorrect > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #e6cbb8;
+}
+.panel-version-incorrect > .panel-heading .badge {
+  color: #e6dbd3;
+  background-color: #333;
+}
+.panel-version-incorrect > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #e6cbb8;
+}
+
+
+.panel-version-untrusted {
+  border-color: #000000;
+}
+.panel-version-untrusted > .panel-heading {
+  color: #99979C;
+  background-color: #2a2730;
+  border-color: #000000;
+}
+.panel-version-untrusted > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #2a2730;
+}
+.panel-version-untrusted > .panel-heading .badge {
+  color: #d0d0d0;
+  background-color: #333;
+}
+.panel-version-untrusted > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #000000;
+}
+
+
+.panel-version-noscheme {
+  border-color: #e6b8e6;
+}
+.panel-version-noscheme > .panel-heading {
+  color: #333;
+  background-color: #f2dff2;
+  border-color: #e6b8e6;
+}
+.panel-version-noscheme > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #e6b8e6;
+}
+.panel-version-noscheme > .panel-heading .badge {
+  color: #f5f5f5;
+  background-color: #333;
+}
+.panel-version-noscheme > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #e6b8e6;
+}
+
+
+.panel-version-rolling {
+  border-color: #ddd;
+}
+.panel-version-rolling > .panel-heading {
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+.panel-version-rolling > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #ddd;
+}
+.panel-version-rolling > .panel-heading .badge {
+  color: #f5f5f5;
+  background-color: #333;
+}
+.panel-version-rolling > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #ddd;
 }
