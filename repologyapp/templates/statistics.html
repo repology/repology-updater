@@ -38,7 +38,7 @@
 		<tr>
 			<th class="text-right" rowspan="2">Repository</th>
 			<th class="text-center" colspan="6">Metapackages</th>
-			<th class="text-center" colspan="7">Packages</th>
+			<th class="text-center" colspan="11">Packages</th>
 			<th class="text-center" rowspan="2"><abbr title="Number of maintainers">Mnt.</abbr></th>
 			<th class="text-center" rowspan="2"><abbr title="Number of problems">Prb.</abbr></th>
 			<th class="text-center" rowspan="2"><abbr title="Last updated this time ago">Upd.</abbr></th>
@@ -50,12 +50,17 @@
 			<th class="text-center" colspan="2">Unique</th>
 
 			<th class="text-center">Total</th>
-			<th class="text-center"><abbr title="Ignored">Ign.</abbr></th>
-			<th class="text-center"><abbr title="Unique">Unq.</abbr></th>
-			<th class="text-center"><abbr title="Devel">Dev.</abbr></th>
 			<th class="text-center"><abbr title="Newest">New.</abbr></th>
-			<th class="text-center"><abbr title="Legacy">Leg.</abbr></th>
+			<th class="text-center"><abbr title="Devel">Dev.</abbr></th>
+			<th class="text-center"><abbr title="Unique">Unq.</abbr></th>
 			<th class="text-center"><abbr title="Outdated">Out.</abbr></th>
+			<th class="text-center"><abbr title="Legacy">Leg.</abbr></th>
+
+			<th class="text-center"><abbr title="Rolling">Rol.</abbr></th>
+			<th class="text-center"><abbr title="No upstream version scheme">Nov.</abbr></th>
+			<th class="text-center"><abbr title="Incorrect">Inc.</abbr></th>
+			<th class="text-center"><abbr title="Untrusted">Unt.</abbr></th>
+			<th class="text-center"><abbr title="Ignored">Ign.</abbr></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -112,12 +117,18 @@
 			</td>
 
 			<td class="text-center">{{ repostat.num_packages }}</td>
-			<td class="text-center version-cell version-big version-ignored">{{ repostat.num_packages_ignored }}</td>
-			<td class="text-center version-cell version-big version-unique">{{ repostat.num_packages_unique }}</td>
-			<td class="text-center version-cell version-big version-devel">{{ repostat.num_packages_devel }}</td>
+
 			<td class="text-center version-cell version-big version-newest">{{ repostat.num_packages_newest }}</td>
-			<td class="text-center version-cell version-big version-legacy">{{ repostat.num_packages_legacy }}</td>
+			<td class="text-center version-cell version-big version-devel">{{ repostat.num_packages_devel }}</td>
+			<td class="text-center version-cell version-big version-unique">{{ repostat.num_packages_unique }}</td>
 			<td class="text-center version-cell version-big version-outdated">{{ repostat.num_packages_outdated }}</td>
+			<td class="text-center version-cell version-big version-legacy">{{ repostat.num_packages_legacy }}</td>
+
+			<td class="text-center version-cell version-big version-rolling">{{ repostat.num_packages_rolling }}</td>
+			<td class="text-center version-cell version-big version-noscheme">{{ repostat.num_packages_noscheme }}</td>
+			<td class="text-center version-cell version-big version-incorrect">{{ repostat.num_packages_incorrect }}</td>
+			<td class="text-center version-cell version-big version-untrusted">{{ repostat.num_packages_untrusted }}</td>
+			<td class="text-center version-cell version-big version-ignored">{{ repostat.num_packages_ignored }}</td>
 
 			<td class="text-center">
 			{%- if repostat.num_maintainers -%}

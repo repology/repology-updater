@@ -390,6 +390,10 @@ class Database:
                     num_packages_unique integer not null default 0,
                     num_packages_devel integer not null default 0,
                     num_packages_legacy integer not null default 0,
+                    num_packages_incorrect integer not null default 0,
+                    num_packages_untrusted integer not null default 0,
+                    num_packages_noscheme integer not null default 0,
+                    num_packages_rolling integer not null default 0,
 
                     num_metapackages integer not null default 0,
                     num_metapackages_unique integer not null default 0,
@@ -468,6 +472,10 @@ class Database:
                             count(*) FILTER (WHERE versionclass = 4)::smallint AS num_packages_unique,
                             count(*) FILTER (WHERE versionclass = 5)::smallint AS num_packages_devel,
                             count(*) FILTER (WHERE versionclass = 6)::smallint AS num_packages_legacy,
+                            count(*) FILTER (WHERE versionclass = 7)::smallint AS num_packages_incorrect,
+                            count(*) FILTER (WHERE versionclass = 8)::smallint AS num_packages_untrusted,
+                            count(*) FILTER (WHERE versionclass = 9)::smallint AS num_packages_noscheme,
+                            count(*) FILTER (WHERE versionclass = 10)::smallint AS num_packages_rolling,
                             max(num_families) = 1 as unique
                         FROM packages INNER JOIN metapackage_repocounts USING(effname)
                         WHERE NOT shadow_only
@@ -509,7 +517,11 @@ class Database:
                             count(*) FILTER (WHERE versionclass = 3)::smallint AS num_packages_ignored,
                             count(*) FILTER (WHERE versionclass = 4)::smallint AS num_packages_unique,
                             count(*) FILTER (WHERE versionclass = 5)::smallint AS num_packages_devel,
-                            count(*) FILTER (WHERE versionclass = 6)::smallint AS num_packages_legacy
+                            count(*) FILTER (WHERE versionclass = 6)::smallint AS num_packages_legacy,
+                            count(*) FILTER (WHERE versionclass = 7)::smallint AS num_packages_incorrect,
+                            count(*) FILTER (WHERE versionclass = 8)::smallint AS num_packages_untrusted,
+                            count(*) FILTER (WHERE versionclass = 9)::smallint AS num_packages_noscheme,
+                            count(*) FILTER (WHERE versionclass = 10)::smallint AS num_packages_rolling
                         FROM packages
                         GROUP BY maintainer, effname
                     WITH DATA
@@ -534,7 +546,11 @@ class Database:
                             count(*) FILTER (WHERE versionclass = 3)::integer AS num_packages_ignored,
                             count(*) FILTER (WHERE versionclass = 4)::integer AS num_packages_unique,
                             count(*) FILTER (WHERE versionclass = 5)::integer AS num_packages_devel,
-                            count(*) FILTER (WHERE versionclass = 6)::integer AS num_packages_legacy
+                            count(*) FILTER (WHERE versionclass = 6)::integer AS num_packages_legacy,
+                            count(*) FILTER (WHERE versionclass = 7)::integer AS num_packages_incorrect,
+                            count(*) FILTER (WHERE versionclass = 8)::integer AS num_packages_untrusted,
+                            count(*) FILTER (WHERE versionclass = 9)::integer AS num_packages_noscheme,
+                            count(*) FILTER (WHERE versionclass = 10)::integer AS num_packages_rolling
                         FROM packages
                         GROUP BY maintainer
                     ) AS packages_subreq
@@ -656,6 +672,10 @@ class Database:
                     num_packages_unique = 0,
                     num_packages_devel = 0,
                     num_packages_legacy = 0,
+                    num_packages_incorrect = 0,
+                    num_packages_untrusted = 0,
+                    num_packages_noscheme = 0,
+                    num_packages_rolling = 0,
                     num_metapackages = 0,
                     num_metapackages_unique = 0,
                     num_metapackages_newest = 0,
@@ -804,7 +824,11 @@ class Database:
                         num_packages_ignored,
                         num_packages_unique,
                         num_packages_devel,
-                        num_packages_legacy
+                        num_packages_legacy,
+                        num_packages_incorrect,
+                        num_packages_untrusted,
+                        num_packages_noscheme,
+                        num_packages_rolling
                     ) SELECT
                         repo,
                         sum(num_packages),
@@ -813,7 +837,11 @@ class Database:
                         sum(num_packages_ignored),
                         sum(num_packages_unique),
                         sum(num_packages_devel),
-                        sum(num_packages_legacy)
+                        sum(num_packages_legacy),
+                        sum(num_packages_incorrect),
+                        sum(num_packages_untrusted),
+                        sum(num_packages_noscheme),
+                        sum(num_packages_rolling)
                     FROM repo_metapackages
                     GROUP BY repo
                     ON CONFLICT (name)
@@ -824,7 +852,11 @@ class Database:
                         num_packages_ignored = EXCLUDED.num_packages_ignored,
                         num_packages_unique = EXCLUDED.num_packages_unique,
                         num_packages_devel = EXCLUDED.num_packages_devel,
-                        num_packages_legacy = EXCLUDED.num_packages_legacy
+                        num_packages_legacy = EXCLUDED.num_packages_legacy,
+                        num_packages_incorrect = EXCLUDED.num_packages_incorrect,
+                        num_packages_untrusted = EXCLUDED.num_packages_untrusted,
+                        num_packages_noscheme = EXCLUDED.num_packages_noscheme,
+                        num_packages_rolling = EXCLUDED.num_packages_rolling
             """)
 
             cursor.execute("""
@@ -1220,6 +1252,10 @@ class Database:
                 num_packages_unique,
                 num_packages_devel,
                 num_packages_legacy,
+                num_packages_incorrect,
+                num_packages_untrusted,
+                num_packages_noscheme,
+                num_packages_rolling,
                 num_metapackages,
                 num_metapackages_outdated,
                 repository_package_counts,
@@ -1312,6 +1348,10 @@ class Database:
                 num_packages_unique,
                 num_packages_devel,
                 num_packages_legacy,
+                num_packages_incorrect,
+                num_packages_untrusted,
+                num_packages_noscheme,
+                num_packages_rolling,
                 num_metapackages,
                 num_metapackages_unique,
                 num_metapackages_newest,
@@ -1334,6 +1374,10 @@ class Database:
                 num_packages_unique,
                 num_packages_devel,
                 num_packages_legacy,
+                num_packages_incorrect,
+                num_packages_untrusted,
+                num_packages_noscheme,
+                num_packages_rolling,
                 num_metapackages,
                 num_metapackages_unique,
                 num_metapackages_newest,
