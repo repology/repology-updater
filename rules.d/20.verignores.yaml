@@ -8,7 +8,7 @@
 - { verpat: ".*(?:alpha|beta|dev|rc|prerelease|pre)[0-9._-]*",                             devel: true }
 
 # other global rules
-- { verpat: ".*\\.[0-9]+\\.[0-9]+\\.[0-9a-f]{4,}",                   family: sisyphus,     ignore: true } # personal rule for ldv@altlinux.org
+- { verpat: ".*\\.[0-9]+\\.[0-9]+\\.[0-9a-f]{4,}",                   family: sisyphus,     untrusted: true } # personal rule for ldv@altlinux.org
 - { verpat: "[0-9]+\\..*[0-9a-f]{7}",                                family: arch,         ignore: true } # primarily blackarch snapshots
 
 # 0-9
@@ -22,7 +22,7 @@
 # A
 - { name: a52dec,                      ver: "0.7.5",                 family: [openbsd, opensuse], ignore: true }
 - { name: a52dec,                      ver: "0.7.4.1",               family: [kaos],       ignore: true }
-- { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5", "1.4p5" ],        ignore: true } # never really released, 1.4.0.5 @ pkgsrc fake
+- { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5", "1.4p5" ],        incorrect: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: abcmidi,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
 - { name: abuse,                       ver: "2.0",                   family: pkgsrc,       ignore: true }
 - { name: acl,                         verpat: "20[0-9]{6}.*",                             ignore: true }
@@ -31,14 +31,14 @@
 - { name: afdko,                       verpat: "([0-9]+\\.[0-9]+)\\.b?([0-9]+).*?",        setver: "$1.$2" }
 - { name: aften,                       ver: [ "0.05", "0.08" ],                            ignore: true }
 - { name: agedu,                       ver: "20160920.853cea9",                            ignore: true }
-- { name: agda-stdlib,                                               family: gentoo,       ignore: true } # documented broken versioning
+- { name: agda-stdlib,                 verlonger: 2,                 family: gentoo,       incorrect: true } # documented broken versioning (other project's version is prepended)
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignore: true }
 - { name: airspy,                      verpat: "20[0-9]{6}",                               ignore: true }
 - { name: [alienarena, alienarena-data], verpat: ".*20[0-9]{6}.*",                         ignore: true }
 - { name: amarok,                      verpat: ".*20[0-9]{6}.*",                           ignore: true } # nix garbage
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignore: true } # revision
-- { name: amule,                       ver: "2.4.0",                 family: [ mageia, debuntu ], ignore: true } # unreleased
-- { name: amule,                       verlonger: 3,                 family: [ kaos ],     ignore: true } # fake
+- { name: amule,                       verpat: "2\\.4\\.0.*",        family: [ mageia, debuntu ], incorrect: true } # unreleased
+- { name: amule,                       verlonger: 3,                 family: [ kaos ],     incorrect: true } # fake
 - { name: amule,                       verpat: ".*git.*",                                  ignore: true } # snapshot
 - { name: android-tools,               verpat: "[0-9]{4,}.*",                              ignore: true } # fake
 - { name: anki,                        ver: "2.1.0",                 family: debuntu,      ignore: true } # fake
@@ -351,7 +351,7 @@
 - { name: libcaca,                     ver: "0.99", family: [sisyphus,fedora,mageia,pclinuxos], ignore: true } # it's 0.99.betaX!
 - { name: libcaca,                     verpat: "0.99.[0-9]+.*",                            ignore: true } # it.s 0.99.betaX, not 0.99.X
 - { name: libcdio-paranoia,            verpat: "[0-9]+\\.[0-9]+\\.[0-9]+", family: kaos,   ignore: true } # bad versioning
-- { name: libclc,                                                                          ignore: true } # no single versioning scheme at all
+- { name: libclc,                                                                          noscheme: true }
 - { name: libcpuid,                    ver: "0.21",                                        setver: "0.2.1" } # deepin crap
 - { name: libdvdread,                  ver: "5.0.4",                 family: [arch,openindiana], ignore: true } # fake
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignore: true } # FreeBSD is using git snapshot
@@ -377,10 +377,9 @@
 - { name: libtorrent,                  verpat: "20[0-9]{6}.*",                             ignore: true } # nix fake
 - { name: libunwind,                   verpat: "20[0-9]{6}.*",                             ignore: true } # freebsd snapshot
 - { name: libusbmuxd,                  verpat: "1\\.1\\.0.*",        family: [openwrt,debuntu], ignore: true } # fake
-- { name: libzen,                      verpat: "0\\.7.*",            family: freebsd,      ignore: true } # version from mediainfo is used, while libzen has its own version scheme
 - { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignore: true }
 - { name: libx86emu,                   verlonger: 2,                 family: kaos,         ignore: true } # uses some opensuse package with mangled version
-- { name: libzen,                      verpat: "1[789]\\..*",        family: freebsd,      ignore: true }
+- { name: libzen,                      verpat: "1\\.7.*",            family: freebsd,      incorrect: true } # version from mediainfo is used, while libzen has its own version scheme
 
 # L (continued)
 - { name: litecoin,                    ver: "0.15.0.1",              family: sisyphus,     ignore: true } # it's 0.15.0.1rc1
@@ -517,7 +516,7 @@
 - { name: readline,                                                                        p_is_patch: true }
 - { name: recode,                      ver: "3.7-2fd838565",                               ignore: true }
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignore: true }
-- { name: reptyr,                      ver: "0.6.3a",                                      ignore: true } # freebsd; fake
+- { name: reptyr,                      ver: "0.6.3a",                family: freebsd,      incorrect: true } # fake, no such tag
 - { name: remmina,                     verpat: "(.*?)([^0-9]*r[^0-9]*)(.*?)",              setver: "$1-rcgit.$3", devel: true } # r, rc, rcgit, etc.
 - { name: remmina,                     ver: "1.2.0",                 family: [alpine,sisyphus,debuntu,fedora,mageia,rosa], ignore: true } # liars
 - { name: rinetd,                      ver: "0.62.1sam",                                   ignore: true } # debian garbage
@@ -558,9 +557,9 @@
 - { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignore: true } # not yet released
 - { name: slime,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: slime,                       ver: "2.20.2.gef68a0b4",                            ignore: true }
-- { name: smtp-fuzz,                                                                       ignore: true } # no official versioning scheme
+- { name: smtp-fuzz,                                                                       noscheme: true }
 - { name: sndio,                       ver: ["20161106","1.2.0_2"],                        ignore: true }
-- { name: snmpenum,                                                                        ignore: true } # no official versioning scheme
+- { name: snmpenum,                                                                        noscheme: true }
 - { name: solvespace,                  verpat: ".*[0-9]{8}.*",                             ignore: true } # nix garbage
 - { name: speex,                       verlonger: 3,                 family: openindiana,  ignore: true }
 - { name: speexdsp,                    ver: "1.2.0.3",                                     ignore: true } # it's 1.2rc3
@@ -645,7 +644,7 @@
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignore: true }
 
 # X
-- { name: x264,                                                                            ignore: true } # no single versioning scheme at all
+- { name: x264,                                                                            noscheme: true }
 - { name: x86info,                     verpat: ".*[sp].*",                                 ignore: true } # snapshots
 - { name: x86info,                     verpat: "1\\.[0-9]+\\..*",                          ignore: true } # snapshots
 - { name: xalan-c,                     verpat: "1\\.11_[0-9]{5}.*",                        ignore: true } # slackbuilds garbage
@@ -658,7 +657,7 @@
 - { name: xl2tpd,                      ver: "20140214",                                    ignore: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   ignore: true }
 - { name: xmoto,                       ver: "0.5.12",                family: [ rosa ],     ignore: true } # no such version
-- { name: "xorg:video-intel",          verpat: ".*20[0-9]{2}.*",                           ignore: true } # upstream does not release versions since 2014, so it's a mess
+- { name: "xorg:video-intel",          verpat: ".*20[0-9]{2}.*",                           noscheme: true }
 - { name: "xorg:video-intel",          verlonger: 3,                                       ignore: true }
 - { name: xorg-server,                 verlonger: 3,                 family: crux,         ignore: true } # bogus siffux
 - { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignore: true }
@@ -668,7 +667,7 @@
 - { name: yelp-xsl,                    verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: you-get,                     verpat: "20[0-9]{2}.*",                             ignore: true } # deepin garbage
 - { name: youtube-dl,                  verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # canonical version is period-separated
-- { name: ytnef,                       ver: "2.6",                                         setver: "oldschema.$0" } # see https://github.com/Yeraze/ytnef/blob/master/ChangeLog; latest is 1.9.2, rename it so it's outdated
+- { name: ytnef,                       ver: "2.6",                                         outdated: true } # see https://github.com/Yeraze/ytnef/blob/master/ChangeLog; latest is 1.9.2, rename it so it's outdated
 
 # Z
 - { name: zathura,                     ver: "20101104",                                    ignore: true }

@@ -3,38 +3,38 @@
 # Chocolatey has no sane policy on version numbering so ignorever by default, and ignore conflicting names
 # Whitelist of unignorever's is possible (with constraints on versions too), but it's too hard to maintain
 # Chocolatey developers, PLEASE USE UPSTREAM VERSIONS.
-- {                                                                  family: [ chocolatey ], ignore: true }
-- { name: ace,                                                       family: [ chocolatey ], remove: true }
-- { name: acm,                                                       family: [ chocolatey ], remove: true }
-- { name: acr,                                                       family: [ chocolatey ], remove: true }
-- { name: autocomplete,                                              family: [ chocolatey ], remove: true }
-- { name: awake,                                                     family: [ chocolatey ], remove: true }
-- { name: beacon,                                                    family: [ chocolatey ], remove: true }
-- { name: bing,                                                      family: [ chocolatey ], remove: true }
-- { name: blat,                                                      family: [ chocolatey ], remove: true }
-- { name: charles,                                                   family: [ chocolatey ], remove: true }
-- { name: clover,                                                    family: [ chocolatey ], remove: true }
-- { name: composer,                                                  family: [ chocolatey ], remove: true }
-- { name: duck,                                                      family: [ chocolatey ], remove: true }
-- { name: err,                                                       family: [ chocolatey ], remove: true }
-- { name: expresso,                                                  family: [ chocolatey ], remove: true }
-- { name: ffe,                                                       family: [ chocolatey ], remove: true }
-- { name: gatling,                                                   family: [ chocolatey ], remove: true }
-- { name: getopt,                                                    family: [ chocolatey ], remove: true }
-- { name: hdparm,                                                    family: [ chocolatey ], remove: true }
-- { name: hotswap,                                                   family: [ chocolatey ], remove: true }
-- { name: hxd,                                                       family: [ chocolatey ], remove: true }
-- { name: logrotate,                                                 family: [ chocolatey ], remove: true }
-- { name: nautilus,                                                  family: [ chocolatey ], remove: true }
-- { name: nbfc,                                                      family: [ chocolatey ], remove: true }
-- { name: newt,                                                      family: [ chocolatey ], remove: true }
-- { name: openssh,                                                   family: [ chocolatey ], remove: true }
-- { name: pal,                                                       family: [ chocolatey ], remove: true }
-- { name: papercut,                                                  family: [ chocolatey ], remove: true }
-- { name: passwordsafe,                                              family: [ chocolatey ], remove: true }
-- { name: pvm,                                                       family: [ chocolatey ], remove: true }
-- { name: pwgen,                                                     family: [ chocolatey ], remove: true }
-- { name: rsync,                                                     family: [ chocolatey ], remove: true }
+- {                                                                  family: chocolatey, untrusted: true }
+- { name: ace,                                                       family: chocolatey, remove: true }
+- { name: acm,                                                       family: chocolatey, remove: true }
+- { name: acr,                                                       family: chocolatey, remove: true }
+- { name: autocomplete,                                              family: chocolatey, remove: true }
+- { name: awake,                                                     family: chocolatey, remove: true }
+- { name: beacon,                                                    family: chocolatey, remove: true }
+- { name: bing,                                                      family: chocolatey, remove: true }
+- { name: blat,                                                      family: chocolatey, remove: true }
+- { name: charles,                                                   family: chocolatey, remove: true }
+- { name: clover,                                                    family: chocolatey, remove: true }
+- { name: composer,                                                  family: chocolatey, remove: true }
+- { name: duck,                                                      family: chocolatey, remove: true }
+- { name: err,                                                       family: chocolatey, remove: true }
+- { name: expresso,                                                  family: chocolatey, remove: true }
+- { name: ffe,                                                       family: chocolatey, remove: true }
+- { name: gatling,                                                   family: chocolatey, remove: true }
+- { name: getopt,                                                    family: chocolatey, remove: true }
+- { name: hdparm,                                                    family: chocolatey, remove: true }
+- { name: hotswap,                                                   family: chocolatey, remove: true }
+- { name: hxd,                                                       family: chocolatey, remove: true }
+- { name: logrotate,                                                 family: chocolatey, remove: true }
+- { name: nautilus,                                                  family: chocolatey, remove: true }
+- { name: nbfc,                                                      family: chocolatey, remove: true }
+- { name: newt,                                                      family: chocolatey, remove: true }
+- { name: openssh,                                                   family: chocolatey, remove: true }
+- { name: pal,                                                       family: chocolatey, remove: true }
+- { name: papercut,                                                  family: chocolatey, remove: true }
+- { name: passwordsafe,                                              family: chocolatey, remove: true }
+- { name: pvm,                                                       family: chocolatey, remove: true }
+- { name: pwgen,                                                     family: chocolatey, remove: true }
+- { name: rsync,                                                     family: chocolatey, remove: true }
 - { name: sumo,                                                      family: [ chocolatey ], remove: true }
 - { name: sysmon,                                                    family: [ chocolatey ], remove: true }
 - { name: tcc,                                                       family: [ chocolatey ], remove: true }

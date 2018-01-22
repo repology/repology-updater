@@ -16,7 +16,7 @@
 - { ruleset: deb_multimedia, namepat: "(.*)-dmo", setname: "$1" }
 
 - { ruleset: aur, name: php-svn, setname: "php:svn" } # XXX: hack to save from following rule
-- { ruleset: aur, namepat: "(.*)-(cvs|svn|hg|darcs|bzr|git)", setname: "$1", ignore: true }
+- { ruleset: aur, namepat: "(.*)-(cvs|svn|hg|darcs|bzr|git)", setname: "$1", rolling: true }
 - { ruleset: aur, namepat: "(.*)-bin", setname: "$1" } # XXX: addflavor: bin
 
 # XXX: handle -devel for freebsd?

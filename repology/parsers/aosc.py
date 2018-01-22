@@ -59,7 +59,7 @@ class AoscPkgsParser():
                 pkg.maintainers = GetMaintainers(package['committer'])
 
                 if pkg.version == '999':
-                    pkg.SetFlag(PackageFlags.ignore)
+                    pkg.SetFlag(PackageFlags.ignore)  # XXX: rolling? revisit
 
                 result.append(pkg)
 

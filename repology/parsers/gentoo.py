@@ -113,7 +113,7 @@ class GentooGitParser():
 
                     if pkg.version.endswith('9999'):
                         # ignore versions for snapshots
-                        pkg.SetFlag(PackageFlags.ignore)
+                        pkg.SetFlag(PackageFlags.rolling)
 
                     metadata_path = os.path.join(
                         path,
