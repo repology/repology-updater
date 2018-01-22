@@ -108,10 +108,14 @@
 - { name: bbpager, verpat: "0\\.3.*",  setname: bbpager03, family: [ pkgsrc ] }
 - { name: bbpager04, setname: bbpager, family: [ pkgsrc ] }
 
-- { namepat: "bind[0-9]+",             setname: bind }
-- { name: bind, verpat: "9\\.9\\..*",  setname: bind99 }
-- { name: bind, verpat: "9\\.10\\..*", setname: bind910 }
-- { name: bind, verpat: "9\\.11\\..*", setname: bind911 }
+- { name: bind-rl,                     setname: bind, addflavor: rl }
+- { name: bind-tools,                  setname: bind, addflavor: tools }
+- { name: bind-toolsonly,              setname: bind, addflavor: toolsonly }
+- { name: bindutils,                   setname: bind, addflavor: utils }
+- { name: bind9-devel,                 setname: bind, ignore: true }
+- { namepat: "bind[0-9_.-]+",          setname: bind }
+- { name: bind,                        p_is_patch: true }
+- { name: bind, verlt: "9.10",         setname: bind99 }
 
 - { namepat: "blender[0-9._-]+",       setname: blender }
 
