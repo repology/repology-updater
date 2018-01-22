@@ -29,6 +29,17 @@ class VersionClass:
     unique = 4
     devel = 5
     legacy = 6
+    incorrect = 7
+    untrusted = 8
+    noscheme = 9
+    rolling = 10
+
+    def IsIgnored(cl):
+        """Return whether a specified class is equivalent to ignored."""
+        return (cl == VersionClass.ignored or
+                cl == VersionClass.incorrect or
+                cl == VersionClass.untrusted or
+                cl == VersionClass.noscheme)
 
 
 class PackageFlags:
@@ -40,6 +51,13 @@ class PackageFlags:
 
     # ignored variants
     ignore = 1 << 2
+    incorrect = 1 << 3
+    untrusted = 1 << 4
+    noscheme = 1 << 5
+
+    any_ignored = ignore | incorrect | untrusted | noscheme
+
+    rolling = 1 << 7  # is processed differently than other ignoreds
 
     # forced classes
     outdated = 1 << 8
