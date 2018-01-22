@@ -585,7 +585,7 @@
 - { name: gaul-devel,                  setname: gaul,                     family: [ gentoo ]  }
 - { name: [gdal1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4], setname: gdal }
 - { name: gchemutils,                  setname: gnome-chemistry-utils }
-- { name: gcompris-qt,                 setname: gcompris-qt, addflavor: qt }
+- { name: gcompris-qt,                 setname: gcompris, addflavor: qt }
 - { name: [gearmand-devel,gearman],    setname: gearmand                  }
 - { name: geki2-kxl,                   setname: geki2,                    family: [ gentoo ]  } # XXX: recheck
 - { name: geki3-kxl,                   setname: geki3,                    family: [ gentoo ]  } # XXX: recheck
