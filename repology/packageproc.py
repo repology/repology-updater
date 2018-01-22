@@ -134,7 +134,7 @@ def FillPackagesetVersions(packages):
             families.add(package.family)
             packages_by_repo.setdefault(package.repo, []).append(package)
 
-            if not package.HasFlag(PackageFlags.ignore):
+            if not package.HasFlag(PackageFlags.any_ignored):
                 has_non_ignored = True
 
             for branchproto_idx in range(0, len(branchprotos)):
@@ -177,7 +177,20 @@ def FillPackagesetVersions(packages):
             current_comparison = branches[current_branch_idx].BestPackageCompare(package)
 
             if current_comparison > 0:
-                package.versionclass = VersionClass.ignored
+                # Note that the order here determines class priority when multiple
+                # flags are present
+                # - noscheme beats everything else - if there's no versioning scheme,
+                #   it's meaningless to talk about any kind of version correctness
+                # - incorrect beats untrusted as more specific
+                # - everything else is generic ignored
+                if package.HasFlag(PackageFlags.noscheme):
+                    package.versionclass = VersionClass.noscheme
+                elif package.HasFlag(PackageFlags.incorrect):
+                    package.versionclass = VersionClass.incorrect
+                elif package.HasFlag(PackageFlags.untrusted):
+                    package.versionclass = VersionClass.untrusted
+                else:
+                    package.versionclass = VersionClass.ignored
             else:
                 flavor = '_'.join(package.flavors)
 
@@ -195,7 +208,7 @@ def PackagesetToBestByRepo(packages):
     state_by_repo = {}
 
     for package in PackagesetSortByVersion(packages):
-        if package.repo not in state_by_repo or (state_by_repo[package.repo].versionclass == VersionClass.ignored and package.versionclass != VersionClass.ignored):
+        if package.repo not in state_by_repo or (VersionClass.IsIgnored(state_by_repo[package.repo].versionclass) and not VersionClass.IsIgnored(package.versionclass)):
             state_by_repo[package.repo] = package
 
     return state_by_repo
