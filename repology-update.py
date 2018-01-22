@@ -165,7 +165,7 @@ def Main():
     repoproc = RepositoryProcessor(repoman, options.statedir)
 
     if options.list:
-        print('\n'.join(repoproc.GetNames(reponames=options.reponames)))
+        print('\n'.join(repoman.GetNames(reponames=options.reponames)))
         return 0
 
     transformer = PackageTransformer(repoman, options.rules_dir)
