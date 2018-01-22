@@ -65,6 +65,20 @@ class PackageFlags:
     # special flags
     p_is_patch = 1 << 10
 
+    def GetMetaorder(cl):
+        """Return a higher order version sorting key based on flags.
+
+        E.g. rolling versions always precede normal versions,
+        and normal versions always precede outdated versions
+
+        Within a specific metaorder versions are compared normally
+        """
+        if cl & PackageFlags.rolling:
+            return 1
+        if cl & PackageFlags.outdated:
+            return -1
+        return 0
+
 
 class PackageSanityCheckProblem(Exception):
     pass
@@ -256,9 +270,12 @@ class Package:
 
     # other helper methods
     def VersionCompare(self, other):
-        if self.flags & PackageFlags.outdated and not other.flags & PackageFlags.outdated:
+        self_metaorder = PackageFlags.GetMetaorder(self.flags)
+        other_metaorder = PackageFlags.GetMetaorder(other.flags)
+
+        if self_metaorder < other_metaorder:
             return -1
-        if not self.flags & PackageFlags.outdated and other.flags & PackageFlags.outdated:
+        if self_metaorder > other_metaorder:
             return 1
 
         return VersionCompare(

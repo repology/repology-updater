@@ -186,5 +186,12 @@ class TestParsers(unittest.TestCase):
         self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0', flags=PackageFlags.outdated)), 1)
         self.assertEqual(Package(version='1.0', flags=PackageFlags.outdated).VersionCompare(Package(version='1.0', flags=PackageFlags.outdated)), 0)
 
+    def test_flag_rolling(self):
+        self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0')), 0)
+        self.assertEqual(Package(version='1.0', flags=PackageFlags.rolling).VersionCompare(Package(version='1.0')), 1)
+        self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0', flags=PackageFlags.rolling)), -1)
+        self.assertEqual(Package(version='1.0', flags=PackageFlags.rolling).VersionCompare(Package(version='1.0', flags=PackageFlags.rolling)), 0)
+
+
 if __name__ == '__main__':
     unittest.main()
