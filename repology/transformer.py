@@ -191,6 +191,22 @@ class PackageTransformer:
         if 'outdated' in rule:
             package.SetFlag(PackageFlags.outdated, rule['outdated'])
 
+        if 'incorrect' in rule:
+            package.SetFlag(PackageFlags.incorrect, rule['incorrect'])
+
+        if 'untrusted' in rule:
+            package.SetFlag(PackageFlags.untrusted, rule['untrusted'])
+
+        if 'noscheme' in rule:
+            package.SetFlag(PackageFlags.noscheme, rule['noscheme'])
+
+        if 'snapshot' in rule:
+            # XXX: the same as ignored for now
+            package.SetFlag(PackageFlags.ignore, rule['snapshot'])
+
+        if 'rolling' in rule:
+            package.SetFlag(PackageFlags.rolling, rule['rolling'])
+
         if 'last' in rule:
             result = RuleApplyResult.last
 
