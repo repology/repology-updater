@@ -598,7 +598,7 @@
 - { name: [tomahawk,tomahawk-player],  verpat: "0\\.8\\.99.*",                             ignore: true } # fake
 - { name: tt-rss,                                                                          ignore: true } # no upstream versioning scheme
 - { name: tome2,                       ver: "235",                                         ignore: true }
-- { name: [tor,tor-devel],             verpat: "(.*)[._-][ar].*",                          setver: "$1" } # version is self-sufficient; remove redundant alpha/rc suffix
+- { name: [tor,tor-devel],             verpat: "(.*)[._-][ar].*",                          setver: "$1", devel: true } # version is self-sufficient; remove redundant alpha/rc suffix, but set devel
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: tre,                         verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: tuxmath,                     ver: "20010907",                                    ignore: true }
