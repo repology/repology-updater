@@ -97,8 +97,17 @@ def FillPackagesetVersions(packages):
         def IsAfterBranch(self, package):
             return package.VersionCompare(self.lastpackage) == -1 if self.lastpackage is not None else False
 
+    # preprocessing: rolling versions
+    packages_to_process = []
+
+    for package in packages:
+        if package.flags & PackageFlags.rolling:
+            package.versionclass = VersionClass.rolling
+        else:
+            packages_to_process.append(package)
+
     # we always work on packages sorted by version
-    packages = PackagesetSortByVersion(packages)
+    packages = PackagesetSortByVersion(packages_to_process)
 
     # branch prototypes
     default_branchproto = BranchPrototype(VersionClass.newest, lambda package: True)
