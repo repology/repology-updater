@@ -27,6 +27,7 @@ from repology.logger import NoopLogger
 from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Factory as ParserFactory
+from repology.resourceusage import ResourceUsageMonitor
 
 
 class StateFileFormatCheckProblem(Exception):
@@ -101,6 +102,8 @@ class RepositoryProcessor:
 
         logger.Log('parsing source {} started'.format(source['name']))
 
+        usage = ResourceUsageMonitor()
+
         # parse
         packages = ParserFactory.Spawn(
             source['parser'],
@@ -123,7 +126,7 @@ class RepositoryProcessor:
                 else:
                     package.maintainers = ['fallback-mnt-{}@repology'.format(repository['name'])]
 
-        logger.Log('parsing source {} complete'.format(source['name']))
+        logger.Log('parsing source {} complete, resource usage: {}'.format(source['name'], usage.GetStr()))
 
         return packages
 
