@@ -202,16 +202,6 @@ class MetapackageRequest:
             if self.outdated:
                 where.Append('repo_metapackages.num_packages_outdated > 0')
                 outdated_handled = True
-            if self.newest_single_family:
-                where.Append('repo_metapackages.num_packages_newest > 0')
-
-                tables.add('metapackage_repocounts')
-                where.Append('metapackage_repocounts.num_families_newest = 1')
-            if self.newest_single_repo:
-                where.Append('repo_metapackages.num_packages_newest > 0')
-
-                tables.add('metapackage_repocounts')
-                where.Append('metapackage_repocounts.num_repos_newest = 1')
 
         if self.notinrepo:
             tables.add('repo_metapackages as repo_metapackages1')
@@ -220,6 +210,14 @@ class MetapackageRequest:
         if self.category:
             tables.add('category_metapackages')
             where.Append('category_metapackages.category = %s', self.category)
+
+        if self.newest_single_family:
+            tables.add('metapackage_repocounts')
+            where.Append('metapackage_repocounts.num_families_newest = 1')
+
+        if self.newest_single_repo:
+            tables.add('metapackage_repocounts')
+            where.Append('metapackage_repocounts.num_repos_newest = 1')
 
         if self.outdated and not outdated_handled:
             tables.add('repo_metapackages')
