@@ -930,6 +930,8 @@ class Database:
                             (NOT repo_metapackages.unique AND (num_packages_newest > 0 OR num_packages_devel > 0) AND num_packages_outdated = 0) OR
                             -- outdated
                             (num_packages_outdated > 0) OR
+                            -- problematic subset
+                            (num_packages_incorrect > 0)
                         )
                     FROM repo_metapackages
                     GROUP BY repo
