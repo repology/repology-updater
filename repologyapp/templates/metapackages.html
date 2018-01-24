@@ -109,6 +109,11 @@ Metapackages
 				<div class="col-sm-offset-2 col-sm-10">
 					<div class="checkbox">
 						<label>
+							<input type="checkbox" name="newest"{% if search.newest %} checked="checked"{% endif %}> Newest
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
 							<input type="checkbox" name="outdated"{% if search.outdated %} checked="checked"{% endif %}> Outdated
 						</label>
 					</div>
@@ -120,6 +125,11 @@ Metapackages
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" name="newestsinglefamily"{% if search.newestsinglefamily %} checked="checked"{% endif %}> Newest in single family only
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="problematic"{% if search.problematic %} checked="checked"{% endif %}> Problematic
 						</label>
 					</div>
 				</div>

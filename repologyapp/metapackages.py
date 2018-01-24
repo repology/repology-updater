@@ -59,6 +59,11 @@ class MetapackagesFilterInfo:
             'advanced': True,
             'action': lambda request, value: request.MaxFamilies(value),
         },
+        'newest': {
+            'type': bool,
+            'advanced': True,
+            'action': lambda request, value: request.Newest(),
+        },
         'outdated': {
             'type': bool,
             'advanced': True,
@@ -73,6 +78,11 @@ class MetapackagesFilterInfo:
             'type': bool,
             'advanced': True,
             'action': lambda request, value: request.NewestSingleFamily(),
+        },
+        'problematic': {
+            'type': bool,
+            'advanced': True,
+            'action': lambda request, value: request.Problematic(),
         },
     }
 

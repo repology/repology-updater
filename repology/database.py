@@ -92,9 +92,11 @@ class MetapackageRequest:
         self.category = None
 
         # flags
+        self.newest = None
         self.outdated = None
         self.newest_single_repo = None
         self.newest_single_family = None
+        self.problematic = None
 
         # other
         self.limit = None
@@ -164,8 +166,14 @@ class MetapackageRequest:
             raise RuntimeError('duplicate limit')
         self.limit = limit
 
+    def Newest(self):
+        self.newest = True
+
     def Outdated(self):
         self.outdated = True
+
+    def Problematic(self):
+        self.problematic = True
 
     def NewestSingleFamily(self):
         self.newest_single_family = True
@@ -178,15 +186,23 @@ class MetapackageRequest:
         where = AndQuery()
         having = AndQuery()
 
+        newest_handled = False
         outdated_handled = False
+        problematic_handled = False
 
         # table joins and conditions
         if self.maintainer:
             tables.add('maintainer_metapackages')
             where.Append('maintainer_metapackages.maintainer = %s', self.maintainer)
+            if self.newest:
+                where.Append('maintainer_metapackages.num_packages_newest > 0 OR maintainer_metapackages.num_packages_devel > 0')
+                newest_handled = True
             if self.outdated:
                 outdated_handled = True
                 where.Append('maintainer_metapackages.num_packages_outdated > 0')
+            if self.problematic:
+                problematic_handled = True
+                where.Append('maintainer_metapackages.num_packages_ignored > 0 OR maintainer_metapackages.num_packages_incorrect > 0 OR maintainer_metapackages.num_packages_untrusted > 0')
 
         if self.minfamilies:
             tables.add('metapackage_repocounts')
@@ -199,9 +215,15 @@ class MetapackageRequest:
         if self.inrepo:
             tables.add('repo_metapackages')
             where.Append('repo_metapackages.repo = %s', self.inrepo)
+            if self.newest:
+                where.Append('repo_metapackages.num_packages_newest > 0 OR repo_metapackages.num_packages_devel > 0')
+                newest_handled = True
             if self.outdated:
                 where.Append('repo_metapackages.num_packages_outdated > 0')
                 outdated_handled = True
+            if self.problematic:
+                problematic_handled = True
+                where.Append('repo_metapackages.num_packages_ignored > 0 OR repo_metapackages.num_packages_incorrect > 0 OR repo_metapackages.num_packages_untrusted > 0')
 
         if self.notinrepo:
             tables.add('repo_metapackages as repo_metapackages1')
@@ -219,9 +241,17 @@ class MetapackageRequest:
             tables.add('metapackage_repocounts')
             where.Append('metapackage_repocounts.num_repos_newest = 1')
 
+        if self.newest and not newest_handled:
+            tables.add('repo_metapackages')
+            where.Append('repo_metapackages.num_packages_newest > 0 OR repo_metapackages.num_packages_devel > 0')
+
         if self.outdated and not outdated_handled:
             tables.add('repo_metapackages')
             where.Append('repo_metapackages.num_packages_outdated > 0')
+
+        if self.problematic and not problematic_handled:
+            tables.add('repo_metapackages')
+            where.Append('repo_metapackages.num_packages_ignored > 0 OR repo_metapackages.num_packages_incorrect > 0 OR repo_metapackages.num_packages_untrusted > 0')
 
         # effname conditions
         if self.namecond and self.namebound:
