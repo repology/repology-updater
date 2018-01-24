@@ -161,6 +161,7 @@ schemas = {
             'devel': bool,
             'p_is_patch': bool,
             'outdated': bool,
+            'legacy': bool,
             'incorrect': bool,
             'untrusted': bool,
             'noscheme': bool,

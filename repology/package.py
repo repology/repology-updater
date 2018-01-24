@@ -61,6 +61,7 @@ class PackageFlags:
 
     # forced classes
     outdated = 1 << 8
+    legacy = 1 << 9
 
     # special flags
     p_is_patch = 1 << 10

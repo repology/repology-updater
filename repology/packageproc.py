@@ -198,7 +198,11 @@ def FillPackagesetVersions(packages):
                     package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch_idx].versionclass
                 else:
                     non_first_in_branch = flavor in first_package_in_branch_per_flavor and first_package_in_branch_per_flavor[flavor].VersionCompare(package) != 0
-                    package.versionclass = VersionClass.legacy if non_first_in_branch else VersionClass.outdated
+
+                    if non_first_in_branch or package.HasFlag(PackageFlags.legacy):
+                        package.versionclass = VersionClass.legacy
+                    else:
+                        package.versionclass = VersionClass.outdated
 
                 if flavor not in first_package_in_branch_per_flavor:
                     first_package_in_branch_per_flavor[flavor] = package

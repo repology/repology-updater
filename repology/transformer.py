@@ -191,6 +191,9 @@ class PackageTransformer:
         if 'outdated' in rule:
             package.SetFlag(PackageFlags.outdated, rule['outdated'])
 
+        if 'legacy' in rule:
+            package.SetFlag(PackageFlags.legacy, rule['legacy'])
+
         if 'incorrect' in rule:
             package.SetFlag(PackageFlags.incorrect, rule['incorrect'])
 
