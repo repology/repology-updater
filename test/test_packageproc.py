@@ -276,6 +276,32 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
+    def test_versionclass_outdated(self):
+        packages = [
+            (Package(repo='1', family='1', name='a', version='1.0'), VersionClass.newest),
+
+            (Package(repo='2', family='2', name='a', version='1.0', flags=PackageFlags.outdated), VersionClass.outdated),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_versionclass_lefacy(self):
+        packages = [
+            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.newest),
+
+            (Package(repo='2', family='2', name='a', version='1.0'), VersionClass.outdated),
+
+            (Package(repo='3', family='3', name='a', version='1.0', flags=PackageFlags.legacy), VersionClass.legacy),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
 
 if __name__ == '__main__':
     unittest.main()
