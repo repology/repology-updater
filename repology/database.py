@@ -427,6 +427,7 @@ class Database:
                     num_metapackages_unique integer not null default 0,
                     num_metapackages_newest integer not null default 0,
                     num_metapackages_outdated integer not null default 0,
+                    num_metapackages_comparable integer not null default 0,
 
                     last_update timestamp with time zone,
 
@@ -708,6 +709,7 @@ class Database:
                     num_metapackages_unique = 0,
                     num_metapackages_newest = 0,
                     num_metapackages_outdated = 0,
+                    num_metapackages_comparable = 0,
                     num_problems = 0,
                     num_maintainers = 0
                 """
@@ -915,13 +917,20 @@ class Database:
                         num_metapackages,
                         num_metapackages_unique,
                         num_metapackages_newest,
-                        num_metapackages_outdated
+                        num_metapackages_outdated,
+                        num_metapackages_comparable
                     ) SELECT
                         repo,
                         count(*),
                         count(*) FILTER (WHERE repo_metapackages.unique),
                         count(*) FILTER (WHERE NOT repo_metapackages.unique AND (num_packages_newest > 0 OR num_packages_devel > 0) AND num_packages_outdated = 0),
-                        count(*) FILTER (WHERE num_packages_outdated > 0)
+                        count(*) FILTER (WHERE num_packages_outdated > 0),
+                        count(*) FILTER (WHERE
+                            -- newest
+                            (NOT repo_metapackages.unique AND (num_packages_newest > 0 OR num_packages_devel > 0) AND num_packages_outdated = 0) OR
+                            -- outdated
+                            (num_packages_outdated > 0) OR
+                        )
                     FROM repo_metapackages
                     GROUP BY repo
                     ON CONFLICT (name)
@@ -929,7 +938,8 @@ class Database:
                         num_metapackages = EXCLUDED.num_metapackages,
                         num_metapackages_unique = EXCLUDED.num_metapackages_unique,
                         num_metapackages_newest = EXCLUDED.num_metapackages_newest,
-                        num_metapackages_outdated = EXCLUDED.num_metapackages_outdated
+                        num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
+                        num_metapackages_comparable = EXCLUDED.num_metapackages_comparable
             """)
 
             # problems
@@ -1384,6 +1394,7 @@ class Database:
                 num_metapackages_unique,
                 num_metapackages_newest,
                 num_metapackages_outdated,
+                num_metapackages_comparable,
                 last_update at time zone 'UTC' AS last_update_utc,
                 now() - last_update AS since_last_update,
                 num_problems,
@@ -1410,6 +1421,7 @@ class Database:
                 num_metapackages_unique,
                 num_metapackages_newest,
                 num_metapackages_outdated,
+                num_metapackages_comparable,
                 last_update at time zone 'UTC' AS last_update_utc,
                 now() - last_update AS since_last_update,
                 num_problems,
@@ -1499,6 +1511,7 @@ class Database:
                     num_metapackages_unique,
                     num_metapackages_newest,
                     num_metapackages_outdated,
+                    num_metapackages_comparable,
                     num_problems,
                     num_maintainers
                 FROM repositories

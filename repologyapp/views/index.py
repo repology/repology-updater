@@ -58,9 +58,9 @@ def index():
         'by_pnewest': [
             {
                 'name': repo['name'],
-                'value': '{:.2f}%'.format(safe_percent(repo['num_metapackages_newest'], repo['num_metapackages_newest'] + repo['num_metapackages_outdated'])),
+                'value': '{:.2f}%'.format(safe_percent(repo['num_metapackages_newest'], repo['num_metapackages_comparable'])),
             }
-            for repo in sorted(repostats, key=lambda repo: safe_percent(repo['num_metapackages_newest'], repo['num_metapackages_newest'] + repo['num_metapackages_outdated']), reverse=True)
+            for repo in sorted(repostats, key=lambda repo: safe_percent(repo['num_metapackages_newest'], repo['num_metapackages_comparable']), reverse=True)
             if repo['num_metapackages'] > 1000
         ][:8]
     }
