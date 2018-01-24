@@ -39,14 +39,22 @@ class RepodataParser():
     def __init__(self, allowed_archs=None):
         self.allowed_archs = allowed_archs
 
+    def ParsePackagesEntriesFromXml(self, path):
+        """Return all <package> elements from XML.
+
+        The purpose is to clear the element after processing, so
+        processed elements don't fill up the memory
+        """
+        for _, elem in xml.etree.ElementTree.iterparse(path):
+            if elem.tag == '{http://linux.duke.edu/metadata/common}package':
+                yield elem
+                elem.clear()
+
     def Parse(self, path):
         result = []
-
-        root = xml.etree.ElementTree.parse(path)
-
         skipped_archs = {}
 
-        for entry in root.findall('{http://linux.duke.edu/metadata/common}package'):
+        for entry in self.ParsePackagesEntriesFromXml(path):
             pkg = Package()
 
             arch = entry.find('{http://linux.duke.edu/metadata/common}arch').text
