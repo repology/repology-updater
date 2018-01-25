@@ -38,7 +38,8 @@
 # extra rules
 - { name: mknfonts.tool, setname: gnustep-mknfonts }
 - { name: gnustep-agenda, setname: gnustep-simpleagenda }
-- { name: gnustep-sogo3, setname: sogo3 }
+- { name: gnustep-sogo, setname: sogo }
+- { name: gnustep-sogo3, setname: sogo }
 - { name: addresses-for-gnustep, setname: gnustep-addresses }
 - { name: volume-app, setname: gnustep-volume }
 

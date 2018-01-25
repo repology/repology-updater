@@ -3,18 +3,12 @@
 - { name: adwaita-icon-theme, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "allegro[0-9.]*(?:-devel)?", setname: allegro }
-- { name: allegro, verpat: "4\\..*",   setname: allegro4, last: true }
-- { name: allegro, verpat: "5\\..*",   setname: allegro5, last: true }
-- { name: allegro, warning: "please classify me" }
 
 - { namepat: "angelscript-?[0-9._-]+", setname: angelscript }
 
 - { namepat: "ant[0-9.]+",             setname: ant }
 
 - { namepat: "antlr[0-9.]+",           setname: antlr }
-- { name: antlr, verpat: "2\\..*",     setname: antlr2 }
-- { name: antlr, verpat: "3\\..*",     setname: antlr3 }
-- { name: antlr, verpat: "4\\..*",     setname: antlr4 }
 
 - { name: [apache-httpd,httpd],        setname: apache }
 - { name: apache-html-manual,          setname: apache, addflavor: html-manual }
@@ -27,7 +21,6 @@
 - { name: apr, verpat: "2\\..*",       devel: true }
 
 - { namepat: "(?:lib)?apr-util[0-9._-]*", setname: apr-util }
-- { name: apr-util, verpat: "0\\..*",  setname: apr-util0 }
 
 - { namepat: "ardour[0-9]+",           setname: ardour }
 
@@ -48,10 +41,8 @@
 - { name: atkmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "autoconf[_-]?[0-9.]+",    setname: autoconf }
-- { name: autoconf, verpat: "2\\.13.*", setname: autoconf213 } # do we need more splits for this?
 
 - { namepat: "automoc[0-9]+",          setname: automoc }
-- { name: automoc, verpat: "0\\..*",   setname: automoc4 }
 
 - { namepat: "automake[_-]?[0-9.]+",   setname: automake } # do we need splits for this?
 
@@ -103,7 +94,6 @@
   addflavor: true
 
 - { namepat: "bash[0-9]+",             setname: bash }
-- { name: bash, verpat: "3\\..*",      setname: bash3 }
 
 - { name: bbpager, verpat: "0\\.3.*",  setname: bbpager03, family: [ pkgsrc ] }
 - { name: bbpager04, setname: bbpager, family: [ pkgsrc ] }
@@ -126,7 +116,6 @@
   addflavor: true
 
 - { name: bowtie2,                     setname: bowtie }
-- { name: bowtie, verpat: "2\\..*",    setname: bowtie2 }
 
 - { name: cairo, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
@@ -135,13 +124,11 @@
 - { name: cairomm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "cassandra[0-9]+",        setname: cassandra }
-- { name: cassandra, verpat: "2\\..*", setname: cassandra2 }
 
 - { namepat: "cegui-?[0-9.]+",         setname: cegui }
 
 - { namepat: "celt[0-9._-]+",          setname: celt }
 
-- { name: centerim, verpat: "5\\..*",  setname: centerim5 }
 
 - { namepat: "cfengine[0-9]+",         setname: cfengine } # XXX: split?
 - { namepat: "cfengine-masterfiles[0-9]+", setname: cfengine-masterfiles }
@@ -151,7 +138,6 @@
 - { namepat: "clanlib-?[0-9.]+",       setname: clanlib } # XXX: split?
 
 - { namepat: "clutter-gst[0-9.-]+",    setname: clutter-gst }
-- { name: clutter-gst, verpat: "2\\..*", setname: clutter-gst2 }
 
 - { namepat: "clojure[0-9.]+",         setname: clojure }
 
@@ -169,12 +155,9 @@
 
 - { name: [compiz-core,compiz-gtk],    setname: compiz }
 - { namepat: "compiz[0-9._-]+",        setname: compiz }
-- { name: compiz, verpat: "0\\.8.*",   setname: compiz08 }
 
 - { namepat: "cryptominisat[0-9]+",    setname: cryptominisat }
 
-- { name: csound, verpat: "5\\..*",    setname: csound5 }
-- { name: csound, verpat: "6\\..*",    setname: csound6 }
 
 - { namepat: "cuda-?[0-9.]+",          setname: cuda }
 - { name: cudatoolkit,                 setname: cuda }
@@ -185,19 +168,10 @@
 
 - { namepat: "cyrus-imapd[0-9.-]+",    setname: cyrus-imapd }
 - { name: cyrus-imapd-ldap,            setname: cyrus-imapd }
-- { name: cyrus-imapd, verpat: "2\\..*", setname: cyrus-imapd2 }
-- { name: cyrus-imapd, verpat: "3\\..*", setname: cyrus-imapd3 }
 
 - { name: berkeley-db,                 setname: db }
 - { namepat: "libdb[0-9._-]*",         setname: db }
 - { namepat: "db[0-9.]+",              setname: db }
-- { name: db, verpat: "6\\..*",        setname: db6 }
-- { name: db, verpat: "5\\..*",        setname: db5 }
-- { name: db, verpat: "4\\..*",        setname: db4 }
-- { name: db, verpat: "3\\..*",        setname: db3 }
-- { name: db, verpat: "2\\..*",        setname: db2 }
-- { name: db, verpat: "1\\..*",        setname: db1 }
-- { name: db, warning: "please classify me"         }
 
 - { name: dbus-1, setname: dbus }
 - { name: [dbus-1-x11,dbus-docs,dbus-docs-selinux,dbus-nosystemd,dbus-x11,dbus-selinux], setname: dbus, addflavor: true }
@@ -210,10 +184,6 @@
 - { namepat: "drbd[0-9]+",             setname: drbd }
 
 - { namepat: "eigen[0-9._-]+",         setname: eigen }
-- { name: eigen, verpat: "1\\..*",     setname: eigen1 }
-- { name: eigen, verpat: "2\\..*",     setname: eigen2 }
-- { name: eigen, verpat: "3\\..*",     setname: eigen3 }
-- { name: eigen, warning: "please classify me"         }
 
 - { namepat: "elasticsearch[0-9]+",    setname: "elasticsearch" }
 
@@ -221,7 +191,6 @@
 - { name: [emacs-devel, emacs-git],    setname: emacs, ignore: yes }
 - { namepat: "emacs[0-9.-]+(?:-nox11|-non-dfsg)?", setname: emacs }
 
-- { name: enlightenment, verpat: "1\\.0.*", setname: enlightenment16 }
 
 - name:
     - ffmpeg-compat
@@ -240,7 +209,6 @@
 
 - { namepat: "(?:lib)?fftw[0-9.-]*(?:-double|-float|-long-double|-quad|-single|-long|-mpi|-mpich|-openmpi|-common)?", setname: fftw }
 - { name: fftwf, setname: fftw }
-- { name: fftw, verpat: "2\\..*",    setname: fftw2 }
 
 - { namepat: "firebird[0-9.-]*(?:-client|-server)?", setname: firebird }
 
@@ -254,15 +222,10 @@
 
 - { name: [fox-devel, fox-toolkit, fox-toolkit-devel], setname: fox }
 - { namepat: "fox[0-9.-]+",            setname: fox }
-- { name: fox, verpat: "1\\.4\\..*", setname: fox14 }
-- { name: fox, verpat: "1\\.6\\..*", setname: fox16 }
-- { name: fox, verpat: "1\\.7\\..*", last: true }
-- { name: fox, warning: "please classify me" }
 
 - { namepat: "(?:lib)?fmod(?:ex|api)?[0-9._-]*", setname: fmod }
 
 - { namepat: "freerdp[0-9.-]+", setname: freerdp }
-- { name: freerdp, verpat: "1\\..*", setname: freerdp1 }
 
 - { namepat: "gcc[0-9.-]+",            setname: gcc }
 - { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignore: yes }
@@ -274,7 +237,6 @@
 - { namepat: "(?:lib)?geoclue[0-9._-]*", setname: geoclue }
 
 - { namepat: "(?:lib)?gdk-pixbuf[0-9._-]*(\\+svg|-jasper|-xlib)?", setname: gdk-pixbuf }
-- { name: gdk-pixbuf, verpat: "0.*",   setname: gdk-pixbuf0 }
 
 - { namepat: "geos[0-9._-]+",          setname: geos }
 
@@ -285,36 +247,25 @@
 - { namepat: "glade[0-9._-]*",         setname: glade }
 - { name: glade-gtk2,                  setname: glade }
 - { name: glade-dev,                   setname: glade, ignore: yes }
-- { name: glade, verpat: "2\\..*",     setname: glade2 }
 
 - { namepat: "(?:lib)?glew[0-9.-]*",   setname: glew }
 
 - { name: [glfw-doc,glfw-wayland,glfw-x11], setname: glfw }
 - { namepat: "(?:lib)?glfw[0-9._-]*",  setname: glfw }
-- { name: glfw, verpat: "2\\..*",      setname: glfw2 }
 
 - { name: glusterfs3,                  setname: glusterfs }
 
 - { namepat: "(?:lib)?gmime[0-9._-]*", setname: gmime }
-- { name: gmime, verpat: "2\\.2\\..*", setname: gmime22 }
-- { name: gmime, verpat: "2\\.4\\..*", setname: gmime24 }
-- { name: gmime, verpat: "2\\.6\\..*", setname: gmime26 }
-- { name: gmime, verpat: "3\\..*",     setname: gmime3 }
 
 - { namepat: "(?:lib)?gmime[0-9._-]*-sharp", setname: gmime-sharp }
-- { name: gmime-sharp, verpat: "2\\.2\\..*", setname: gmime22-sharp }
-- { name: gmime-sharp, verpat: "2\\.4\\..*", setname: gmime24-sharp }
-- { name: gmime-sharp, verpat: "2\\.6\\..*", setname: gmime26-sharp }
 
 - { namepat: "gnats[0-9]+",            setname: gnats }
 
 - { namepat: "gnet[0-9]+",             setname: gnet }
-- { name: gnet, verpat: "1\\..*",      setname: gnet1 }
 
 - { namepat: "gpg[0-9]+",              setname: gnupg }
 - { namepat: "gnupg[0-9]+",            setname: gnupg }
 - { name: gnupg, category: app-vim, family: gentoo, setname: vim-gnupg }
-- { name: gnupg, verpat: "1\\..*",     setname: gnupg1 }
 
 - { namepat: "gpgme[0-9._-]+",         setname: gpgme }
 
@@ -337,7 +288,6 @@
 - { namepat: "guile[0-9._-]+",         setname: guile }
 
 - { namepat: "libftdi[0-9._-]+",       setname: libftdi }
-- { name: libftdi, verpat: "0\\..*",   setname: libftdi0 }
 
 - { namepat: "(?:lib)?gconfmm[0-9._-]*", setname: gconfmm }
 - { namepat: "(?:lib)?gconfmm[0-9._-]*(-docs)", setname: gconfmm, addflavor: docs }
@@ -345,7 +295,6 @@
 - { namepat: "(?:lib)?glib[0-9._-]*", setname: glib }
 - { name: [glib-reference,glib2-docs,glib2-patched-thumbnailer,glib2-quiet,glib2-static], setname: glib, addflavor: true }
 - { name: glib, verpat: "[2-9][0-9]*\\.[0-9]*[13579]\\..*", devel: true }
-- { name: glib, verpat: "1\\..*", setname: glib12 }
 
 - { name: glib2-networking, setname: glib-networking }
 
@@ -354,36 +303,18 @@
 - { name: glibmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "gstreamer[0-9._-]+",     setname: gstreamer }
-- { name: gstreamer, verpat: "0\\..*", setname: gstreamer0 }
-- { name: gstreamer, verpat: "1\\..*", setname: gstreamer1 }
-- { name: gstreamer, warning: "please classify me"         }
 
 - { namepat: "(?:lib)?gtk[0-9._+-]*",  setname: gtk }
-- { name: gtk, verpat: "(4|3\\.9[0-9]+)\\..*", setname: gtk4 }
-- { name: gtk, verpat: "3\\..*",       setname: gtk3 }
-- { name: gtk, verpat: "2\\..*",       setname: gtk2 }
-- { name: gtk, verpat: "1\\..*",       setname: gtk1 }
 
 - { namepat: "(?:lib)?gtkmm[0-9._-]*", setname: gtkmm }
 - { namepat: "(?:lib)?gtkmm[0-9._-]*(-docs|-documentation|-reference)", setname: gtkmm, addflavor: docs }
 - { name: gtkmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
-- { name: gtkmm, verpat: "4\\..*",     setname: gtkmm4 }
-- { name: gtkmm, verpat: "3\\.9[0-9]+\\..*", setname: gtkmm4 }
-- { name: gtkmm, verpat: "3\\..*",     setname: gtkmm3 }
-- { name: gtkmm, verpat: "2\\..*",     setname: gtkmm2 }
 
 - { namepat: "(?:lib)?gtksourceview[0-9._-]*", setname: gtksourceview }
-- { name: gtksourceview, verpat: "(4|3\\.99)\\..*", setname: gtksourceview4 }
-- { name: gtksourceview, verpat: "3\\..*", setname: gtksourceview3 }
-- { name: gtksourceview, verpat: "2\\..*", setname: gtksourceview2 }
-- { name: gtksourceview, verpat: "1\\..*", setname: gtksourceview1 }
 
 - { namepat: "(?:lib)?gtksourceviewmm[0-9._-]*", setname: gtksourceviewmm2 }
-- { name: gtksourceviewmm2, verpat: "3\\..*", setname: gtksourceviewmm3 }
 
 - { namepat: "(?:lib)?gtkspell[0-9._-]*", setname: gtkspell }
-- { name: gtkspell, verpat: "2\\..*", setname: gtkspell2 }
-- { name: gtkspell, verpat: "3\\..*", setname: gtkspell3 }
 
 - { namepat: "(?:lib)?gtkspellmm[0-9._-]*", setname: gtkspellmm }
 
@@ -392,7 +323,6 @@
 - { namepat: "hsqldb[0-9._-]+",        setname: hsqldb }
 
 - { namepat: "ices[0-9]+",             setname: ices }
-- { name: ices, verpat: "0\\..*",      setname: ices0 }
 
 - { name: [icu-docs],                  setname: icu, addflavor: docs }
 - { namepat: "icu[0-9.-]+",            setname: icu }
@@ -400,58 +330,41 @@
 - { namepat: "icu4j[0-9.-]+",          setname: icu4j }
 
 - { namepat: "igal[0-9]+",             setname: igal }
-- { name: igal, verpat: "1\\..*",      setname: igal1 }
 
 - { namepat: "inn[0-9]+",              setname: inn }
-- { name: inn, verpat: "1\\..*",       setname: inn1 }
 
 - { name: [insighttoolkit4,insight-toolkit], setname: insighttoolkit }
 
 - { namepat: "italc[0-9]+",            setname: italc }
-- { name: italc, verpat: "1\\..*",     setname: italc1 }
-- { name: italc, verpat: "2\\..*",     setname: italc2 }
 
 - { namepat: "itcl[0-9]+",             setname: itcl }
-- { name: itcl, verpat: "3\\..*",      setname: itcl3 }
 
 - { namepat: "itk[0-9]+",              setname: itk }
-- { name: itk, verpat: "3\\..*",       setname: itk3 }
 
 - { name: iperf3,                      setname: iperf }
-- { name: iperf, verpat: "3\\..*",     setname: iperf3 }
 
 - { name: jabberd2,                    setname: jabberd }
 
 - { namepat: "jdeparser[0-9]+",        setname: jdeparser }
-- { name: jdeparser, verpat: "1\\..*", setname: jdeparser1 }
 
 - { namepat: "jdom[0-9]+",             setname: jdom }
-- { name: jdom, verpat: "1\\..*",      setname: jdom1 }
 
 - { namepat: "jersey[0-9]+",           setname: jersey }
-- { name: jersey, verpat: "1\\..*",    setname: jersey1 }
 
 - { name: [jpeg,libjpeg,jpeg-turbo,libjpeg-turbo,turbojpeg], setname: jpeg }
 - { namepat: "libjpeg[0-9]+([a-z]|-turbo)?", setname: jpeg }
-- { name: jpeg, verpat: "1\\..*",      setname: libjpeg-turbo }
 
 - { namepat: "kdelibs[0-9]+",          setname: kdelibs }
-- { name: kdelibs, verpat: "3\\..*",   setname: kdelibs3 }
-- { name: kdelibs, verpat: "4\\..*",   setname: kdelibs4 }
 
 - { name: keepass2,                    setname: keepass }
 
 - { name: keepassx-devel,              setname: keepassx, family: [ freebsd ] }
 - { namepat: "keepassx[0-9]*",         setname: keepassx }
-- { name: keepassx, verpat: "0\\..*",  setname: keepassx0 }
-- { name: keepassx, verpat: "2\\..*",  setname: keepassx2 }
 
 - { name: kibana-bin,                  setname: kibana }
 - { namepat: "kibana[0-9]+",           setname: kibana }
 
 - { name: [lcms,lcms1,lcms2,little-cms,little-cms2,lcms-python,liblcms,liblcms2], setname: lcms }
-- { name: lcms, verpat: "2.*",         setname: lcms2 }
-
 - { namepat: "libcdr[0-9._-]+",        setname: libcdr }
 
 - { namepat: "libchamplain[0-9.-]+",   setname: libchamplain }
@@ -490,7 +403,6 @@
 
 - { name: libnl-doc,                   setname: libnl }
 - { namepat: "libnl[0-9._-]+",         setname: libnl }
-- { name: libnl, verpat: "1\\..*",     setname: libnl1 }
 
 - { namepat: "libodfgen[0-9._-]+",     setname: libodfgen }
 
@@ -501,8 +413,6 @@
 - { name: libsigc++-docs, setname: libsigc++, addflavor: docs }
 - { name: libsigc++-legacy12, setname: libsigc++ }
 - { namepat: "libsigc(\\+\\+|xx|pp)[0-9.-]+", setname: libsigc++ }
-- { name: libsigc++, verpat: "1\\..*",  setname: libsigc++12 }
-- { name: libsigc++, verpat: "(2\\.99|3).*", setname: libsigc++3 } # 3.x not really in the wild yet
 
 - { name: [libtool-base,libtool-fortran,libtool-info,libtool-lts], setname: libtool }
 - { namepat: "libtool[0-9._-]+",       setname: libtool }
@@ -522,28 +432,15 @@
 - { namepat: "libzdb-(mariadb|mysql|oracle|percona|postgresql|sqlite)[0-9._-]*", setname: libzdb }
 
 - { name: [links1,links2,links+,links-g-directfb,links-gui], setname: links }
-- { name: links, verpat: "1\\..*",     setname: links1 }
 
 - { namepat: "love(?:-legacy)?[0-9._-]+", setname: love }
-- { name: love, verpat: "0\\.10\\..*", setname: love10, last: true }
-- { name: love, verpat: "0\\.9\\..*",  setname: love09, last: true }
-- { name: love, verpat: "0\\.8\\..*",  setname: love08, last: true }
-- { name: love, verpat: "0\\.7\\..*",  setname: love07, last: true }
-- { name: love, verpat: "0\\.5\\..*",  setname: love05, last: true }
-- { name: love, warning: "please classify me" }
 
-- { name: lua, verpat: "5\\.1\\..*",  setname: lua51 }
-- { name: lua, verpat: "5\\.2\\..*",  setname: lua52 }
-- { name: lua, verpat: "5\\.3\\..*",  setname: lua53 }
-- { namepat: "lua([0-9])\\.([0-9])",  setname: "lua$1$2" }
 
 - { name: [libevent2,libevent1],       setname: libevent }
-- { name: libevent, verpat: "1.*",     setname: libevent1 }
 
 - { namepat: "libgcrypt[0-9_.-]+",     setname: libgcrypt }
 
 - { name: [libxfont,libxfont1,libxfont2,xorg-libxfont,xorg-libxfont2,xorg-xfont,xorg-xfont2], setname: libxfont }
-- { name: libxfont, verpat: "2\\..*", setname: libxfont2 }
 
 - { namepat: "llvm[0-9.-]+",           setname: llvm }
 
@@ -556,27 +453,17 @@
 - { namepat: "libmediaart[0-9._-]+",   setname: libmediaart }
 
 - { namepat: "(?:lib)?musicbrainz[0-9._-]*", setname: libmusicbrainz }
-- { name: libmusicbrainz, verpat: "2\\..*", setname: libmusicbrainz2 }
-- { name: libmusicbrainz, verpat: "3\\..*", setname: libmusicbrainz3 }
-- { name: libmusicbrainz, verpat: "4\\..*", setname: libmusicbrainz4 }
-- { name: libmusicbrainz, verpat: "5\\..*", setname: libmusicbrainz5 }
-- { name: libmusicbrainz, warning: "please classify me" }
 
 - { name: [librsvg-stable,librsvg2], setname: librsvg }
 - { name: librsvg, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "libunique[0-9]+", setname: libunique }
-- { name: libunique, verpat: "1\\..*", setname: libunique1 }
-- { name: libunique, verpat: "3\\..*", setname: libunique3 }
-- { name: libunique, warning: "please classify me" }
 
 - { namepat: "libvpx[0-9._-]+", setname: libvpx }
 
 - { name: libwnck-gtk3,                setname: libwnck }
 - { name: [libwnck-sticky,libwnck-reference], setname: libwnck, addflavor: true }
 - { namepat: "libwnck[0-9._-]+",       setname: libwnck }
-- { name: libwnck, verpat: "2\\..*",   setname: libwnck2 }
-- { name: libwnck, verpat: "3\\..*",   setname: libwnck3 }
 
 - { name: libxml,                      setname: libxml2 }
 
@@ -596,6 +483,8 @@
 - { name: lldb-assert,                 setname: lldb, addflavor: assert }
 - { name: lldb-polly,                  setname: lldb, addflavor: polly }
 
+- { namepat: "lua[0-9._-]+",           setname: lua }
+
 - { namepat: "mariadb[0-9.-]*(?:-client|-server)?", setname: mariadb }
 - { name: mariadb, verge: "10.3", devel: true } # https://downloads.mariadb.org/
 
@@ -611,12 +500,10 @@
 - { namepat: "libmysqlclient", family: haikuports, setname: mysql-connector-c } # not really libmysqlclient from mysql
 - { namepat: "libmysqlclient[0-9.-]*", setname: mysql }
 - { namepat: "mysql-clients[0-9.-]*", setname: mysql }
-- { name: mysql, verpat: "8\\..*", setname: mysql8 }
 
 - { namepat: "mpich-devel(?:-clang|-gcc|-llvm)?[0-9._-]*", setname: mpich, ignore: true }
 - { namepat: "mpich(?:-clang|-gcc|-llvm)?[0-9._-]*", setname: mpich }
 - { name: [mpich-default], setname: mpich }
-- { name: mpich, verpat: "1\\..*", setname: mpich2 }
 
 - { namepat: "netatalk[0-9.-]+",       setname: netatalk }
 
@@ -678,13 +565,8 @@
 
 # XXX: more merges needed here
 - { namepat: "openjdk[0-9._-]*(?:-doc)?", setname: openjdk }
-- { name: openjdk, verpat: "9.*", setname: openjdk9 }
-- { name: openjdk, verpat: "8.*", setname: openjdk8 }
-- { name: openjdk, verpat: "7.*", setname: openjdk7 }
-- { name: openjdk, verpat: "6.*", setname: openjdk6 }
 
 - { namepat: "(?:lib)?openjpeg[0-9]*", setname: openjpeg }
-- { name: openjpeg, verpat: "1\\.5\\..*", setname: openjpeg15 }
 
 - name:
     - openssl-1.0-chacha20
@@ -711,7 +593,6 @@
 
 - { namepat: "(?:lib)?pcre[0-9._-]*",          setname: pcre }
 - { name: [pcre-static,pcre-cpp],      setname: pcre }
-- { name: pcre, verpat: "[0-9]{2}\\..*", setname: pcre2 }
 
 - { namepat: "pdfstudio[0-9]+",        setname: pdfstudio }
 
@@ -727,7 +608,6 @@
 - { namepat: "libpng(?:-legacy)?[0-9.-]*", setname: libpng }
 
 - { name: [postfix-current,postfix-current-sasl,postfix211,postfix211-sasl], setname: postfix }
-- { name: postfix, verpat: ".*20[0-9]{6}.*",  setname: postfix-experimental }
 
 - { namepat: "postgis[0-9._-]+",     setname: postgis }
 - { namepat: "postgresql[0-9._-]*-postgis", setname: postgis }
@@ -767,7 +647,6 @@
 
 - { name: [samba-docs],                setname: samba, addflavor: docs }
 - { namepat: "samba[0-9.-]+",          setname: samba }
-- { name: samba, verpat: "3\\..*",     setname: samba3 }
 
 - { name: [sdl12,"libsdl1.2"],         setname: sdl }
 - { name: sdl, verpat: "2.*",          setname: sdl2 }
@@ -775,12 +654,10 @@
 - { name: sdl_image, verpat: "2.*",    setname: sdl2-image }
 
 - { namepat: "(?:lib)?sfml[0-9._-]*",  setname: sfml }
-- { name: sfml, verpat: "1\\..*",      setname: sfml1 }
 
 - { namepat: "shibboleth-sp[0-9]+",    setname: shibboleth-sp }
 
 - { namepat: "sidplay[0-9]+",          setname: sidplay }
-- { name: sidplay, verpat: "1\\..*",   setname: sidplay1 }
 
 - { namepat: "sip[0-9]+",              setname: sip }
 
@@ -789,16 +666,8 @@
 - { namepat: "smstools[0-9]+",         setname: smstools }
 
 - { namepat: "socat[0-9]+",            setname: socat }
-- { name: socat, verpat: "1\\..*",     setname: socat1 }
 
 - { namepat: "softhsm[0-9]+",          setname: softhsm }
-- { name: softhsm, verpat: "1\\..*",   setname: softhsm1 }
-
-- { name: sogo, verpat: "2\\..*",      setname: sogo2 }
-- { name: sogo, verpat: "3\\..*",      setname: sogo3 }
-
-- { name: sope, verpat: "2\\..*",      setname: sope2 }
-- { name: sope, verpat: "3\\..*",      setname: sope3 }
 
 - { namepat: "spidermonkey[0-9]+",     setname: spidermonkey }
 
@@ -807,14 +676,10 @@
 - { namepat: "squid[0-9._-]+", setname: squid }
 - { name: squid, verpat: "4\\..*", devel: true }
 
-- { name: sqlite, verpat: "2\\..*",    setname: sqlite2 }
-- { name: sqlite, verpat: "3\\..*",    setname: sqlite3 }
 
 - { namepat: "streamtuner[0-9]+",        setname: streamtuner }
-- { name: streamtuner, verpat: "0\\..*", setname: streamtuner0 }
 
 - { namepat: "stringtemplate[0-9]+",        setname: stringtemplate }
-- { name: stringtemplate, verpat: "3\\..*", setname: stringtemplate3 }
 
 - { name: stunnel4,                    setname: stunnel }
 
@@ -822,7 +687,6 @@
 - { name: [sugar-toolkit-gtk2, sugar-toolkit-gtk3], setname: sugar-toolkit }
 
 - { name: [supertux,supertux1,supertux2,supertux-old,supertux-stable], setname: supertux }
-- { name: supertux, verpat: "0\\.[^1]\\..*", setname: supertux2 }
 
 - { namepat: "swig[0-9._-]+",          setname: swig }
 - { namepat: "swig-(.*)", family: macports, setname: swig, addflavor: "$1" } # split by supported language
@@ -890,8 +754,6 @@
 # some distros use tarballs from wxpython (for instance, gentoo because "they include the full wxGTK sources and docs, and are released more frequently than wxGTK")
 # so the version may be broken
 - { name: wxwidgets, ver: "2.8.12.1",          setver: "2.8.12" }
-- { name: wxwidgets, verpat: "2\\..*",         setname: wxwidgets28 }
-- { name: wxwidgets28, verpat: "2\\.9\\..*",   setname: wxwidets }  # belongs to 3.x - prerelease branch of
 
 - { namepat: "xapian[0-9._-]*-bindings[0-9._-]*", setname: xapian-bindings }
 - { namepat: "xapian-bindings-(perl|python)",     setname: xapian-bindings, addflavor: "$1" }
@@ -907,19 +769,14 @@
 - { namepat: "(?:lib)?xerces2?-?j(?:ava)?[0-9-]*", setname: xerces-j }
 - { name: xerces, family: gentoo, category: dev-java, setname: xerces-j }
 - { name: xerces, family: [openbsd, slackbuilds], setname: xerces-j }
-- { name: xerces-c, verpat: "2\\..*",       setname: xerces-c2 }
 
 - { name: xulrunner-devel,             setname: xulrunner, ignore: true }
 - { namepat: "xulrunner[0-9.-]+",      setname: xulrunner }
 
 - { namepat: "(?:lib)?yaml-cpp[0-9.-]*", setname: yaml-cpp }
-- { name: yaml-cpp, verpat: "0\\.3\\..*", setname: yaml-cpp03 }
 
 - { namepat: "zabbix[0-9.-]+",         setname: zabbix }
 
 - { namepat: "zendframework[0-9._-]+", setname: zendframework }
-- { name: zendframework, verpat: "1\\..*", setname: zendframework1 }
 
 - { namepat: "(zeromq|zmq|libzmq)[0-9._-]*",  setname: zeromq }
-- { name: zeromq, verpat: "2\\..*",    setname: zeromq2 }
-- { name: zeromq, verpat: "3\\..*",    setname: zeromq3 }

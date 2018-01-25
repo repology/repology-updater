@@ -75,6 +75,4 @@
 - { name: "perl:unburden-home-dir",    setname: unburden-home-dir }
 - { name: "perl:dns-ldns", wwwpart: nlnetlabs, setname: ldns, addflavor: perl } # part of
 
-- { namepat: "perl:(.*)",              replaceinname: { "_": "-" }, last: true } # save from false ".*font" match below
-
-- { family: cpan, last: true } # don't replace _ with - !
+- { namepat: "perl:(.*font.*)",        replaceinname: { "_": "-" }, last: true } # save from false ".*font" matches afterwarts; XXX: remove this hack
