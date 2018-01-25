@@ -53,8 +53,8 @@
 - { name: albatross, verpat: "1\\.7.*", setname: albatross-gtk-theme      }
 - { name: albatross-themes,            setname: albatross-gtk-theme       }
 - { name: [alien-package-converter,alien_package_converter], setname: alien }
-- { name: alienarena,                  setname: alien-arena               }
-- { name: alienarena-data,             setname: alien-arena-data          }
+- { name: alien-arena,                 setname: alienarena                }
+- { name: alien-arena-data,            setname: alienarena-data           }
 - { name: [alsa,libalsa,libalsa2,alsa-lib-noassertion], setname: alsa-lib }
 - { name: [american-fuzzy-lop,afl-fuzz], setname: afl                     }
 - { name: amule-devel,                 setname: amule, ignore: true }
