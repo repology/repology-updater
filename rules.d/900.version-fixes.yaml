@@ -28,6 +28,7 @@
 - { name: acl,                         verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: acl,                         verlonger: 3,                                       ignore: true }
 - { name: ack,                                                       family: mageia,       ignore: true }
+- { name: adwaita-icon-theme,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: afdko,                       verpat: "([0-9]+\\.[0-9]+)\\.b?([0-9]+).*?",        setver: "$1.$2" }
 - { name: aften,                       ver: [ "0.05", "0.08" ],                            ignore: true }
 - { name: agedu,                       ver: "20160920.853cea9",                            ignore: true }
@@ -44,9 +45,11 @@
 - { name: anki,                        ver: "2.1.0",                 family: debuntu,      ignore: true } # fake
 - { name: asc,                         verpat: "[0-9]+\\.[0-9]+\\.[0-9]{3,}\\.[0-9]+",     devel: true } # http://terdon.asc-hq.org/asc/builds/
 - { name: aspcud,                      ver: "2011.03.17",                                  ignore: true }
+- { name: apache,                      verpat: "2\\.[0-9]*[13579]\\..*",                   devel: true }
 - { name: appmenu-qt,                  verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: apr,                         verlonger: 3,                                       ignore: true } # FreeBSD
 - { name: apr,                         verpat: ".*20[0-9]{6}.*",                           ignore: true }
+- { name: apr,                         verpat: "2\\..*",                                   devel: true }
 - { name: arduino,                     ver: "0021",                                        ignore: true } # EPEL 6
 - { name: arptables,                   verpat: "20[0-9]{2}",                               ignore: true } # LEDE year
 - { name: arpwatch,                    ver: "2.1.15",                                      setver: "2.1a15" }
@@ -68,6 +71,10 @@
 - { name: aspell-sr,                   ver: ["0.60.0", "0.60"],                            ignore: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/sr/
 - { name: aspell-te,                   ver: "0.60.0",                                      ignore: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/te/
 - { name: aspell-tet,                  ver: "0.50.0",                                      ignore: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/tet/
+- { name: at-spi2-atk,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: at-spi2-core,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: atk,                         verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: atkmm,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: attr,                        verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: autoconf,                    ver: "2.13.000227",                                 ignore: true }
 - { name: autoconf-archive,            verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
@@ -104,6 +111,8 @@
 # C
 - { name: ca-certificates,             verlonger: 1,                                       ignore: true } # no need to append NSS version
 - { name: ca-certificates,                                           family: [alpine,crux], ignore: true } # see https://hg.mozilla.org/projects/nss/log/tip/lib/ckfw/builtins/certdata.txt for valid dates
+- { name: cairo,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: cairomm,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: calf,                        verpat: "20[0-9]{6}.*",                             ignore: true } # slackbuilds garbage
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: cdrtools,                    ver: "3.02",                  family: [debuntu,rosa], ignore: true } # fake, it's alpha
@@ -147,6 +156,7 @@
 - { name: cwm,                         ver: "6.2.9",                                       ignore: true } # FreeBSD fake
 
 # D
+- { name: dbus,                        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: dbus-cpp,                    verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: dconf-editor,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: dee-qt,                      verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
@@ -203,7 +213,7 @@
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignore: true }
 - { name: fetch,                                                     family: ravenports,   ignore: true } # fake
 - { name: firebird,                    verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.[0-9]{5,}.*", setver: "$1" }
-- { name: [ffmpeg,ffmpeg010],          verpat: ".*20[0-9]{6}.*",                           ignore: true } # openbsd, chocolatey, pkgsrc
+- { name: ffmpeg,                      verpat: ".*20[0-9]{6}.*",                           ignore: true } # openbsd, chocolatey, pkgsrc
 - { name: figlet,                      ver: "222",                                         ignore: true } # haikuports
 - { name: firmware-mod-kit,            verpat: "0([1-9][0-9]*)",                           setver: "0.$1" } # blackarch, broken schema
 - { name: flare,                       ver: "15.1",                                        ignore: true } # actually old 0.15
@@ -238,7 +248,8 @@
 # G
 - { name: gcc,                         verpat: ".*20[0-9]{2}.*",                           ignore: true } # snapshots
 - { name: gcc,                         verpat: ".*r.*",                                    ignore: true } # snapshots
-- { name: gcc,                         verpat: "(5|6|7|8|9|[1-9][0-9]+)\\.[0-9]+\\.[1-9].*", ignore: true } # since gcc 5, release is X.Y (or X.Y.0). X.Y.(Z!=0) is thus a fake
+- { name: gcc,                         verpat: "(5|6|7|8|9|[1-9][0-9]+)\\.[0-9]+\\.[1-9].*", ignore: true } # since gcc 5, release is X.(Y>0). X.0 and X.Y.(Z!=0) are thus incorrect
+- { name: gcc,                         verpat: "[0-9]+\\.0+\\..*",                         ignore: true }
 - { name: gcc,                         verpat: "[0-9]+",                                   ignore: true }
 - { name: gcc,                                                       ruleset: mageia,      untrusted: true }
 - { name: gdb,                         verpat: ".*20[0-9]{2}.*",                           ignore: true }
@@ -249,6 +260,8 @@
 - { name: gettext,                     ver: "2",                                           ignore: true } # libintl from LEDE
 - { name: geocode-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glade,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: glib,                        verpat: "[2-9][0-9]*\\.[0-9]*[13579]\\..*",         devel: true }
+- { name: glibmm,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glib-networking,             verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glibc,                       verlonger: 2,                                       ignore: true } # assorted garbage
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignore: true } # not released yet
@@ -273,11 +286,14 @@
 - { name: gnubg,                       verpat: "20[0-9]{6}",                               ignore: true }
 - { name: gnushogi,                    verpat: ".*git.*",                                  ignore: true }
 - { name: go,                          ver: "1.10",                  family: fedora,       ignore: true } # fake
+- { name: gobject-introspection,       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: goldencheetah,               verpat: ".*dev.*",                                  ignore: true }
+- { name: goocanvasmm,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignore: true }
 - { name: gsettings-desktop-schemas,   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: "gstreamer1plugins:mpg123",  verpat: "20[0-9]{6}",                               ignore: true } # AUR
 - { name: gtest,                       verlonger: 3,                                       ignore: true } # freebsd garbage
+- { name: gtkmm,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gtk-doc,                     verlonger: 2,                                       ignore: true } # sisyphus fake
 - { name: gts,                         verpat: "[0-9]{6,}.*",                              ignore: true } # aosc, gentoo
 
@@ -370,6 +386,7 @@
 - { name: libpaper,                    ver: "1.1.24",                                      setver: "$0nmu0" }
 - { name: libpaper,                    verpat: "(1\\.1\\.24)[^0-9]+([0-9]+)",              setver: "$1nmu$2" } # they all take from debian and there's num suffix
 - { name: libpng,                      verpat: "1\\.7\\.0beta.*",    family: freshcode,    ignore: true }
+- { name: librsvg,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: libsndfile,                  ver: "1.0.29",                family: vcpkg,        ignore: true }
 - { name: libssh,                      ver: ["0.73", "0.11", "2014"],                      ignore: true } # pkgsrc, gobo
 - { name: libssh,                      ver: "0.8.0",                 family: debuntu,      ignore: true }
@@ -382,12 +399,12 @@
 - { name: libzen,                      verpat: "1\\.7.*",            family: freebsd,      incorrect: true } # version from mediainfo is used, while libzen has its own version scheme
 
 # L (continued)
+- { name: lilypond,                    verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: litecoin,                    ver: "0.15.0.1",              family: sisyphus,     ignore: true } # it's 0.15.0.1rc1
 - { name: live555,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # alt; it's dot-separated, dummies!
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignore: true }
 - { name: llvm,                        verpat: ".*git",                                    ignore: true }
 - { name: llvm,                        verpat: ".*r.*",                                    ignore: true } # macports fake 6.0
-- { name: llvm-6.0,                    verpat: ".*r.*",                                    ignore: true } # XXX
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignore: true } # fake
 - { name: lz4,                         verpat: "[0-9]+",                                   ignore: true }
@@ -398,6 +415,7 @@
 - { name: mame,                        ver: "0153s",                                       ignore: true } # pclinuxos
 - { name: magic,                       verpat: "8\\.2\\..*",                               devel: true }
 - { name: magic,                       verpat: "[0-9]\\.[0-9]\\.[0-9]{3}",                 ignore: false } # unignore some good -devel's
+- { name: mariadb,                     verge: "10.3",                                      devel: true } # https://downloads.mariadb.org/
 - { name: matreshka,                   ver: "0.8.0",                 family: fedora,       ignore: true } # fake (see report)
 - { name: mesa,                        verpat: "[^a-z]+",            family: [fedora,mageia], ignore: true } # accused in ignoring rc suffix
 - { name: mesa,                        verpat: "[0-9]+\\.[0-9]+\\.0",                      devel: true } # .0 are devel releases, example: https://www.mesa3d.org/relnotes/17.2.0.html
@@ -434,10 +452,12 @@
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: npapi-vlc,                   ver: "2.2.7",                 family: fedora,       ignore: true } # no such tag on https://code.videolan.org/videolan/npapi-vlc/tags
 - { name: nss_ldap,                    verpat: "1\\.([0-9]{3,})",                          setver: "$1" } # FreeBSD garbage
+- { name: npm,                         ver: ["5.5.0", "5.5.1"],                            devel: true } # should be updated manually
 - { name: ntp,                         verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.([0-9]+)",    setver: "$1p$2" }
 
 # O
 - { name: octomap,                     verpat: "[0-9a-f]{40}",                             ignore: true } # commit
+- { name: ogre,                        verpat: "2.*",                                      ignore: true }
 - { name: ollydbg,                     verpat: "[0-9]{3}",                                 ignore: true } # aosc garbage
 - { name: onioncat,                    verpat: "0\\.2\\.2.*",                              ignore: true }  # \  force correct
 - { name: onioncat,                    verpat: "0\\.2\\.2\\.r[0-9]+.*",                    ignore: false } # / version schema
@@ -452,6 +472,7 @@
 - { name: openlierox,                  ver: "0.58",                  family: [fedora,debuntu], ignore: true } # there's no 0.58, only 0.58beta3
 - { name: openmortal,                  ver: "0.7.1",                 family: [ sisyphus ], ignore: true }
 - { name: openntpd,                    ver: "20080406p",                                   ignore: true }
+- { name: openscenegraph,              verpat: "3\\.[0-9]*[13579]\\..*",                   devel: true }
 - { name: openssh,                     verpat: "([0-9]+\\.[0-9]+)\\.([0-9]+)",             setver: "$1p$2" } # pkgrc: it's X.YpZ!
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignore: true } # freshcode, pZ part missing
 - { name: openxcom,                    verpat: ".*201[789].*",                             ignore: true } # git snapshots
@@ -460,18 +481,18 @@
 - { name: oxygen-gtk3,                 verlonger: 3,                 family: kaos,         ignore: true }
 
 # P
-- { name: "perl:catalyst-plugin-authentication", ver: "0.100230",                          ignore: true }
-- { name: "perl:device-serialport",    ver: "1.040000",                                    ignore: true }
-- { name: "perl:net-whois-ripe",       ver: "2.005005",                                    ignore: true } # < 2.006
 - { name: pachi,                       verpat: "11.*",                                     ignore: true }
 - { name: pam_ldap,                    verpat: "([0-9]+)\\.([0-9]+)\\.([0-9]+)",           setver: "$1$2$3" } # FreeBSD garbage
 - { name: pam-u2f,                     verpat: "(.*)\\.20[0-9]{6}",                        setver: "$1" } # aosc snapshot
-- { name: "perl:xml-parser",           ver: "2.44.01",                                     devel: true } # marked as developer release on cpan
 - { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignore: true }
 - { name: patchelf,                    verpat: ".*pre.*",                                  ignore: true } # nix
 - { name: pciids,                                                    family: sisyphus,     ignore: true } # ALT pick random date instead of official date version
 - { name: pcre,                        ver: "10.31",                 family: fedora,       ignore: true } # fake, not released
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignore: true }
+- { name: "perl:catalyst-plugin-authentication", ver: "0.100230",                          ignore: true }
+- { name: "perl:device-serialport",    ver: "1.040000",                                    ignore: true }
+- { name: "perl:net-whois-ripe",       ver: "2.005005",                                    ignore: true } # < 2.006
+- { name: "perl:xml-parser",           ver: "2.44.01",                                     devel: true } # marked as developer release on cpan
 - { name: "perl:yaml-libyaml",         ver: "0.71",                  family: [ sisyphus ], ignore: true } # 0.71 wasn't an authorised release
 - { name: pilot-link,                  ver: "0.12.15",               family: gobolinux,    ignore: true } # gobolinux fake
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignore: true }
@@ -480,6 +501,8 @@
 - { name: pmount,                      ver: "0.9.99",                                      setver: "0.9.99_alpha" }
 - { name: pmount,                      verpat: "0\\.9\\.99.*",                             devel: true }
 - { name: polari,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: postgresql,                  verpat: "11.*",                                     devel: true }
+- { name: postgresql,                  ver: ["11","11.0"],                                 ignore: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignore: true } # third component is a build number, it's not a part of official version
 - { name: powertop,                    verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: prboom-plus,                 verpat: ".*svn.*",                                  ignore: true }
@@ -488,10 +511,12 @@
 - { name: proxychains-ng,              verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: psi-plus,                    verpat: "20[0-9]{6}.*",                             ignore: true } # opensuse garbage
 - { name: psi-plus,                    verlonger: 3,                                       ignore: true } # aur garbage
-- { name: "python:py-cpuinfo",         verpat: "201.*",                                    ignore: true }
 - { name: pycharm,                     verpat: "[0-9]+\\.[0-9]\\.[0-9]{3,}\\.[0-9]{4,}\\.[0-9]+", devel: true } # e.g. 2017.2.172.2103.19 - assuming EAP (early access) version
 - { name: pycharm,                     verpat: ".*20[0-9]{6}",                             ignore: true }
+- { name: python,                      verpat: ".*a.*",                                    devel: true }
+- { name: python,                      ver: "3.7.0",                 family: fedora,       ignore: true } # fedora fake, no such version
 - { name: "python:progressbar",        ver: "2.4",                   family: sisyphus,     ignore: true } # fake
+- { name: "python:py-cpuinfo",         verpat: "201.*",                                    ignore: true }
 - { name: pytrainer,                   ver: ["1.10.1", "1.10.2"],    family: debuntu,      ignore: true }
 
 # Q
@@ -567,6 +592,7 @@
 - { name: sqlite2,                     verpat: ".*_[0-9]+",                                ignore: true } # slackbuilds using debian patch
 - { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             ignore: true }
 - { name: sqlninja,                    ver: ["0.2.999"],                                   ignore: true } # it's 0.2.999-alpha1
+- { name: squid,                       verpat: "4\\..*",                                   devel: true }
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignore: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
 - { name: sudo,                                                      family: fedora,       ignore: true } # accused in dropping prerelease suffix
 - { name: sudo,                                                                            p_is_patch: true }
@@ -587,6 +613,7 @@
 - { name: tar,                         ver: "1.29b",                                       ignore: true } # debian garbage http://metadata.ftp-master.debian.org/changelogs/main/t/tar/tar_1.29b-2_changelog
 - { name: tcc,                         verpat: "20[0-9]{2}.*",                             ignore: true } # freebsd
 - { name: tcl,                         verpat: ".*a[0-9]+",                                devel: true } # freebsd
+- { name: tcl,                         verpat: ".*20[0-9]{6}.*",                           ignore: true } # 8.7 snapshots
 - { name: tdb,                         ver: "3.6.0",                                       ignore: true } # pclinuxos wtf
 - { name: tesseract-game,              verpat: "(20[0-9]{2})[^0-9]?([0-9]{2})[^0-9]?([0-9]{2})", setver: "$1_$2_$3" }
 - { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignore: true } # obsoleted
@@ -594,10 +621,12 @@
 - { name: tidy,                        verpat: ".*git.*",                                  ignore: true } # garbage
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignore: true } # 2.15.0 was not released yet
 - { name: thrift,                      verpat: "[0-9]{7}.*",                               ignore: true } # vcpkg and macports garbage
-- { name: [tomahawk,tomahawk-player],  verpat: "0\\.8\\.99.*",                             ignore: true } # fake
+- { name: thunderbird,                 verpat: ".*[ab].*", devel: true }
+- { name: tomahawk,                    verpat: "0\\.8\\.99.*",                             ignore: true } # fake
 - { name: tt-rss,                                                                          ignore: true } # no upstream versioning scheme
 - { name: tome2,                       ver: "235",                                         ignore: true }
-- { name: [tor,tor-devel],             verpat: "(.*)[._-][ar].*",                          setver: "$1", devel: true } # version is self-sufficient; remove redundant alpha/rc suffix, but set devel
+- { name: tor,                         verpat: "(.*)[._-][ar].*",                          setver: "$1", devel: true } # version is self-sufficient; remove redundant alpha/rc suffix, but set devel
+- { name: tor,                         verge: "0.3.3",                                     devel: true }
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: tre,                         verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: tuxmath,                     ver: "20010907",                                    ignore: true }
@@ -636,12 +665,16 @@
 - { name: [warsow,warsow-data],        ver: "2.10",                  family: debuntu,      ignore: true } # playdeb weirdnes
 - { name: widelands,                   verpat: "(?:b|build|0\\.)?([0-9]{2})(?:\\.0)?",     setver: "build$1" }
 - { name: widelands,                   verpat: "[^b].*",                                   ignore: true }
+- { name: wine,                        verpat: "[0-9]+\\.0*[1-9].*",                       devel: true }
+- { name: wine,                        verpat: ".*r.*",                                    devel: true }
 - { name: winexe,                      ver: "1.1",                   family: debuntu,      ignore: true } # snapshot
 - { name: wire,                        verpat: "20[0-9]{6}",                               ignore: true } # aur snapshot
 - { name: wireless-regdb,              verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/refs/
 - { name: whatweb,                     vergt: "0.4.7",               family: [debuntu,openbsd,gentoo,freebsd], ignore: true } # 0.4.8 has never been released
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], ignore: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignore: true }
+- { name: wxwidgets,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: wxwidgets,                   ver: "2.8.12.1",                                    setver: "2.8.12" } # some distros use tarballs from wxpython (for instance, gentoo because "they include the full wxGTK sources and docs, and are released more frequently than wxGTK") so the version may be broken
 
 # X
 - { name: x264,                                                                            noscheme: true }

@@ -187,6 +187,11 @@
 
 - { name: postfix, verpat: ".*20[0-9]{6}.*",  setname: postfix-experimental }
 
+- { name: python, verpat: "2\\..*",    setname: python2 }
+- { name: python, verpat: "3\\..*",    setname: python3 }
+- { name: python, ver: "999", family: aosc, setname: python2 }
+- { name: python, warning: "please classify me" }
+
 - { name: samba, verpat: "3\\..*",     setname: samba3 }
 
 - { name: sfml, verpat: "1\\..*",      setname: sfml1 }

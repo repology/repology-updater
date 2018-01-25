@@ -1,6 +1,5 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-- { name: adwaita-icon-theme, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "allegro[0-9.]*(?:-devel)?", setname: allegro }
 
@@ -15,10 +14,8 @@
 - { name: apache-tools,                setname: apache, addflavor: tools }
 - { name: htdigest,                    setname: apache, addflavor: htdigest }
 - { namepat: "apache[0-9.]+",          setname: apache }
-- { name: apache, verpat: "2\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?apr[0-9._-]*",    setname: apr }
-- { name: apr, verpat: "2\\..*",       devel: true }
 
 - { namepat: "(?:lib)?apr-util[0-9._-]*", setname: apr-util }
 
@@ -28,17 +25,11 @@
 
 - { namepat: "asterisk[0-9.]+",        setname: asterisk }
 
-- { name: at-spi2-atk, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
-
-- { name: at-spi2-core, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
-
 - { name: [atk-reference,atk-docs], setname: atk, addflavor: docs }
 - { name: libatk, setname: atk }
-- { name: atk, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?atkmm[0-9._-]*", setname: atkmm }
 - { namepat: "(?:lib)?atkmm[0-9._-]*(-docs)", setname: atkmm, addflavor: docs }
-- { name: atkmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "autoconf[_-]?[0-9.]+",    setname: autoconf }
 
@@ -117,11 +108,8 @@
 
 - { name: bowtie2,                     setname: bowtie }
 
-- { name: cairo, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
-
 - { namepat: "(?:lib)?cairomm[0-9._-]*", setname: cairomm }
 - { namepat: "(?:lib)?cairomm[0-9._-]*(-docs)?", setname: cairomm, addflavor: docs }
-- { name: cairomm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "cassandra[0-9]+",        setname: cassandra }
 
@@ -175,7 +163,6 @@
 
 - { name: dbus-1, setname: dbus }
 - { name: [dbus-1-x11,dbus-docs,dbus-docs-selinux,dbus-nosystemd,dbus-x11,dbus-selinux], setname: dbus, addflavor: true }
-- { name: dbus, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { name: dmd2,                        setname: dmd }
 
@@ -229,8 +216,6 @@
 
 - { namepat: "gcc[0-9.-]+",            setname: gcc }
 - { namepat: "gcc[0-9.-]+-devel",      setname: gcc, ignore: yes }
-- { name: gcc, verpat: "[0-9]+\\.0\\..*", devel: true }
-- { name: gcc, verpat: "[0-9]+\\.[0-9]+\\.[1-9].*", devel: true }
 
 - { namepat: "gccgo[0-9.-]+",          setname: gccgo }
 
@@ -270,7 +255,6 @@
 - { namepat: "gpgme[0-9._-]+",         setname: gpgme }
 
 - { name: [gobject-introspection-common,gobject-introspection-runtime], setname: gobject-introspection }
-- { name: gobject-introspection, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { name: goffice-light,               setname: goffice }
 - { namepat: "goffice[0-9._-]+",       setname: goffice }
@@ -281,7 +265,6 @@
 - { namepat: "(?:lib)?goocanvas[0-9._-]*", setname: goocanvas }
 
 - { namepat: "(?:lib)?goocanvasmm[0-9._-]*", setname: goocanvasmm }
-- { name: goocanvasmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "grass[0-9._-]+",         setname: grass }
 
@@ -294,13 +277,11 @@
 
 - { namepat: "(?:lib)?glib[0-9._-]*", setname: glib }
 - { name: [glib-reference,glib2-docs,glib2-patched-thumbnailer,glib2-quiet,glib2-static], setname: glib, addflavor: true }
-- { name: glib, verpat: "[2-9][0-9]*\\.[0-9]*[13579]\\..*", devel: true }
 
 - { name: glib2-networking, setname: glib-networking }
 
 - { namepat: "(?:lib)?glibmm[0-9._-]*", setname: glibmm }
 - { namepat: "(?:lib)?glibmm[0-9._-]*(-docs|-reference)", setname: glibmm, addflavor: docs }
-- { name: glibmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "gstreamer[0-9._-]+",     setname: gstreamer }
 
@@ -308,7 +289,6 @@
 
 - { namepat: "(?:lib)?gtkmm[0-9._-]*", setname: gtkmm }
 - { namepat: "(?:lib)?gtkmm[0-9._-]*(-docs|-documentation|-reference)", setname: gtkmm, addflavor: docs }
-- { name: gtkmm, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?gtksourceview[0-9._-]*", setname: gtksourceview }
 
@@ -455,7 +435,6 @@
 - { namepat: "(?:lib)?musicbrainz[0-9._-]*", setname: libmusicbrainz }
 
 - { name: [librsvg-stable,librsvg2], setname: librsvg }
-- { name: librsvg, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "libunique[0-9]+", setname: libunique }
 
@@ -474,7 +453,6 @@
 
 - { name: lilypond-devel, setname: lilypond }
 - { name: [lilypond-devel-docs,lilypond-doc,lilypond-docs], setname: lilypond, addflavor: docs }
-- { name: lilypond, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "linux-kernel(?:-lts)?[0-9._-]*", setname: linux }
 
@@ -486,7 +464,6 @@
 - { namepat: "lua[0-9._-]+",           setname: lua }
 
 - { namepat: "mariadb[0-9.-]*(?:-client|-server)?", setname: mariadb }
-- { name: mariadb, verge: "10.3", devel: true } # https://downloads.mariadb.org/
 
 - { namepat: "mdds[0-9._-]+",          setname: mdds }
 
@@ -517,7 +494,6 @@
 - { name: nodejs-current, setname: nodejs, ignore: true }
 
 - { namepat: "npm[0-9._-]+", setname: npm }
-- { name: npm, ver: ["5.5.0", "5.5.1"], devel: true } # should be updated manually
 
 - { namepat: "(?:dkms|linux-rt.*|linux[0-9]+)-nvidiabl", setname: nvidiabl }
 
@@ -559,7 +535,6 @@
 
 - { namepat: "ogre[0-9._-]+", setname: ogre }
 - { name: [ogre-docs,ogre-samples], setname: ogre }
-- { name: ogre, verpat: "2.*", ignore: true }
 
 - { namepat: "openjade[0-9._-]+", setname: openjade }
 
@@ -586,7 +561,6 @@
 - { namepat: "osg(?:-devel)?",         setname: openscenegraph }
 - { namepat: "openscenegraph[0-9.-]+", setname: openscenegraph }
 - { name: [openscenegraph-qt,openscenegraph-qt4,open-scene-graph], setname: openscenegraph }
-- { name: openscenegraph, verpat: "3\\.[0-9]*[13579]\\..*", devel: true }
 
 - { namepat: "(?:lib)?pangomm[0-9._-]*", setname: pangomm }
 - { namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", setname: pangomm, addflavor: docs }
@@ -624,8 +598,6 @@
 - { namepat: "postgresql[0-9.-]*[_-]server", setname: postgresql, addflavor: server }
 - { namepat: "postgresql[0-9.-]*-beta.*", setname: postgresql, devel: true }
 - { namepat: "postgresql[0-9.-]*-lts.*", setname: postgresql }
-- { name: postgresql, verpat: "11.*", devel: true }
-- { name: postgresql, ver: ["11","11.0"], ignore: true }
 
 - { namepat: "postgresql[0-9.-]+-1c", setname: postgresql-1c }
 
@@ -634,11 +606,6 @@
 
 - { name: [python,python2,python3], family: freebsd, remove: true } # remove metaports
 - { namepat: "python[._-]?[23][0-9._-]*", setname: python }
-- { name: python, verpat: "2\\..*",    setname: python2 }
-- { name: python, verpat: "3\\..*",    setname: python3 }
-- { name: python, ver: "999", family: aosc, setname: python2 }
-- { name: python3, verpat: ".*a.*",    devel: true }
-- { name: python3, ver: "3.7.0", family: fedora, ignore: true } # fedora fake, no such version
 
 - { namepat: "(?:lib)?readline[0-9._-]*", setname: readline }
 
@@ -674,8 +641,6 @@
 - { name: [squid-ldap,squid-ntlm], family: openbsd, setname: squid }
 - { name: [squid-devel], setname: squid, ignore: true }
 - { namepat: "squid[0-9._-]+", setname: squid }
-- { name: squid, verpat: "4\\..*", devel: true }
-
 
 - { namepat: "streamtuner[0-9]+",        setname: streamtuner }
 
@@ -696,7 +661,6 @@
 - { name: syslog-ng-nosystemd, setname: syslog-ng, addflavor: nosystemd }
 
 - { namepat: "tcl8[0-9._-]+",          setname: tcl }
-- { name: tcl, verpat: ".*20[0-9]{6}.*", ignore: true } # 8.7 snapshots
 
 - { namepat: "tk8[0-9._-]+",           setname: tk } # don't mix with tk2, tk5, tk707 which are unrelated projects
 
@@ -712,10 +676,8 @@
 - { namepat: "thunderbird-beta(.*)", setname: thunderbird, addflavor: "$1", ignore: true }
 - { namepat: "thunderbird-nightly(.*)", setname: thunderbird, addflavor: "$1", ignore: true }
 - { namepat: "thunderbird-(i18n-.*)", setname: thunderbird, family: [ openbsd, arch, kaos ], addflavor: "$1" }
-- { name: thunderbird, verpat: ".*[ab].*", devel: true }
 
 - { name: tor-devel,                   setname: tor }
-- { name: tor, verge: "0.3.3",         devel: true }
 
 - { name: unison-devel,                setname: unison, ignore: true }
 - { name: unison-nox11,                setname: unison, addflavor: true }
@@ -738,8 +700,6 @@
 - { namepat: "wine[0-9.-]+",           setname: wine }
 - { name: wine-ivb, addflavor: true }
 - { name: [wine-devel,wine-development,wine-vanilla,wine-stable,wine-ivb], setname: wine }
-- { name: wine, verpat: "[0-9]+\\.0*[1-9].*", devel: true }
-- { name: wine, verpat: ".*r.*", devel: true }
 
 - { namepat: "wine-gecko([0-9.-]+|-devel|-stable)", setname: wine-gecko }
 
@@ -750,10 +710,6 @@
 - { name: [wxmac,wxx11,wxmsw], setname: wxwidgets }
 - { name: [wxwidgets-3.0-cxx11,wxwidgets-ansi,wxwidgets-media,wxwidgets-wxcontainer,wxwidgets-wxcontainer24c], setname: wxwidgets }
 - { namepat: "(?:wx|wxgtk|wxwidgets|wxcommon|wxbase)[0-9._-]*((?:-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*)", setname: wxwidgets, addflavor: "$1" }
-- { name: wxwidgets, verpat: "[0-9]+\\.[0-9]*[13579]\\..*", devel: true }
-# some distros use tarballs from wxpython (for instance, gentoo because "they include the full wxGTK sources and docs, and are released more frequently than wxGTK")
-# so the version may be broken
-- { name: wxwidgets, ver: "2.8.12.1",          setver: "2.8.12" }
 
 - { namepat: "xapian[0-9._-]*-bindings[0-9._-]*", setname: xapian-bindings }
 - { namepat: "xapian-bindings-(perl|python)",     setname: xapian-bindings, addflavor: "$1" }
