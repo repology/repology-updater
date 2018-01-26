@@ -334,6 +334,13 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'foo', 'version': '1.0', 'expect_flavors': []}
         )
 
+    def test_flags(self):
+        self.check_transformer(
+            '[ { name: p1, addflag: xyz }, { flag: xyz, setname: bar }, { noflag: xyz, setname: baz } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'baz'},
+        )
+
     def test_rule_chain(self):
         self.check_transformer(
             '[ { name: aaa, setname: bbb }, { name: bbb, setname: ccc }, { name: eee, setname: fff }, { name: ddd, setname: eee } ]',

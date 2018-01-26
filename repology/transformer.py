@@ -32,6 +32,25 @@ class RuleApplyResult:
     last = 3
 
 
+class PackageTransformationContext:
+    __slots__ = ['flags']
+
+    def __init__(self):
+        self.flags = set()
+
+    def SetFlag(self, name, value=True):
+        if value:
+            self.flags.add(name)
+        else:
+            self.flags.discard(name)
+
+    def HasFlag(self, name):
+        return name in self.flags
+
+    def HasFlags(self, names):
+        return not self.flags.isdisjoint(names)
+
+
 class PackageTransformer:
     def __init__(self, repoman, rulesdir=None, rulestext=None):
         self.repoman = repoman
@@ -58,7 +77,7 @@ class PackageTransformer:
             rule['pretty'] = pp.pformat(rule)
 
             # convert some fields to lists
-            for field in ['name', 'ver', 'category', 'family', 'ruleset', 'wwwpart']:
+            for field in ['name', 'ver', 'category', 'family', 'ruleset', 'wwwpart', 'flag', 'noflag', 'addflag']:
                 if field in rule and not isinstance(rule[field], list):
                     rule[field] = [rule[field]]
 
@@ -70,6 +89,12 @@ class PackageTransformer:
 
             if 'ruleset' in rule:
                 rule['ruleset'] = set(rule['ruleset'])
+
+            if 'flag' in rule:
+                rule['flag'] = set(rule['flag'])
+
+            if 'noflag' in rule:
+                rule['noflag'] = set(rule['noflag'])
 
             # convert some fields to lowercase
             for field in ['category', 'wwwpart']:
@@ -94,7 +119,7 @@ class PackageTransformer:
             else:
                 self.slowrules.append(rule)
 
-    def ApplyRule(self, rule, package):
+    def ApplyRule(self, rule, package, context):
         # pattern matches are reused when rule applies
         name_match = None
         ver_match = None
@@ -171,6 +196,14 @@ class PackageTransformer:
             if not matched:
                 return RuleApplyResult.unmatched
 
+        if 'flag' in rule:
+            if not context.HasFlags(rule['flag']):
+                return RuleApplyResult.unmatched
+
+        if 'noflag' in rule:
+            if context.HasFlags(rule['noflag']):
+                return RuleApplyResult.unmatched
+
         # rule matches, apply effects!
         result = RuleApplyResult.matched
 
@@ -236,6 +269,10 @@ class PackageTransformer:
         if 'resetflavors' in rule:
             package.flavors = []
 
+        if 'addflag' in rule:
+            for flag in rule['addflag']:
+                context.SetFlag(flag)
+
         if 'setname' in rule:
             if name_match:
                 package.effname = self.dollarN.sub(lambda x: name_match.group(int(x.group(1))), rule['setname'])
@@ -285,17 +322,18 @@ class PackageTransformer:
         nextfastrule = self.GetFastRule(package)
 
         # walk the slow rules sequentionally
+        context = PackageTransformationContext()
         for slowrule in self.slowrules:
             result = None
 
             # apply fast rules
             while nextfastrule and nextfastrule['number'] < slowrule['number']:
-                if self.ApplyRule(nextfastrule, package) == RuleApplyResult.last:
+                if self.ApplyRule(nextfastrule, package, context) == RuleApplyResult.last:
                     return
                 nextfastrule = self.GetFastRule(package, nextfastrule['number'])
 
             # apply slow rule
-            result = self.ApplyRule(slowrule, package)
+            result = self.ApplyRule(slowrule, package, context)
             if result == RuleApplyResult.matched:
                 nextfastrule = self.GetFastRule(package, slowrule['number'])
             elif result == RuleApplyResult.last:
@@ -303,7 +341,7 @@ class PackageTransformer:
 
         # apply remaining fast rules
         while nextfastrule:
-            if self.ApplyRule(nextfastrule, package) == RuleApplyResult.last:
+            if self.ApplyRule(nextfastrule, package, context) == RuleApplyResult.last:
                 return
             nextfastrule = self.GetFastRule(package, nextfastrule['number'])
 
