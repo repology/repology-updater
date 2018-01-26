@@ -83,6 +83,11 @@ rulesets = families + [
     'hyperbola',
 ]
 
+customflags = [
+    'preserve_underscore',
+    'nowildcard',
+]
+
 schemas = {
     'repos': [
         {
@@ -151,6 +156,8 @@ schemas = {
             'verge': str,
             'verlt': str,
             'verle': str,
+            'flag': Any(Any(*customflags), [Any(*customflags)]),
+            'noflag': Any(Any(*customflags), [Any(*customflags)]),
 
             'setname': str,
             'setver': str,
@@ -167,6 +174,7 @@ schemas = {
             'noscheme': bool,
             'snapshot': bool,
             'rolling': bool,
+            'addflag': Any(Any(*customflags), [Any(*customflags)]),
             'last': bool,
             'tolowername': bool,
             'replaceinname': dict,
