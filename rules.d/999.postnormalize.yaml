@@ -3,4 +3,5 @@
 - { ruleset: wikidata, resetflavors: true }
 
 # finalize, catch-all rule
-- { tolowername: true, replaceinname: { "_": "-" } }
+- { tolowername: true }
+- { noflag: preserve_underscore, replaceinname: { "_": "-" } }

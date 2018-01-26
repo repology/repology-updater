@@ -6,11 +6,9 @@
 # and blacklist ports which are not python modules
 - family: aosc
   category: python
-  name:
-    - python2
-    - python3
-  last: true
-- { family: aosc, category: python,    setname: "python:$0" }
+  name: python
+  addflag: nowildcard
+- { family: aosc, category: python,    setname: "python:$0", noflag: nowildcard }
 
 - { family: [ pypi ],                  setname: "python:$0" }
 # some rules may merge modules for different python version into single entry; this is intended
