@@ -1,21 +1,21 @@
-# vim: tabstop=39 expandtab softtabstop=39
+# vim: tabstop=29 expandtab softtabstop=29
 
 # mail client vs. asynchronous synthesis system
-- { name: balsa,                       setname: balsa-synthesis,          category: sci-electronics }
+- { name: balsa, category: sci-electronics,               setname: balsa-synthesis }
 
-- { name: bats, wwwpart: github.com/cdown/bats, setname: bats-battery-status }
+- { name: bats, wwwpart: github.com/cdown/bats,           setname: bats-battery-status }
 
-- { name: beanshell,                   setname: beanshell2, family: kaos }
+- { name: beanshell, family: kaos,                        setname: beanshell2 }
 
-- { name: beast,                       setname: beast-mcmc, wwwpart: beast.bio.ed.ac.uk }
-- { name: beast,                       setname: boost-beast, family: vcpkg }
+- { name: beast, wwwpart: beast.bio.ed.ac.uk,             setname: beast-mcmc }
+- { name: beast, family: vcpkg,                           setname: boost-beast }
 
-- { name: bos, wwwpart: boswars,       setname: boswars }
+- { name: bos, wwwpart: boswars,                          setname: boswars }
 
-- { name: borg, wwwpart: borg-calendar, setname: borg-calendar }
-- { name: borg, wwwpart: ok-borg,      setname: ok-borg }
-- { name: borg, wwwpart: borgbackup,   setname: borgbackup }
-- { name: borg, family: [sisyphus],    setname: borgbackup }
+- { name: borg, wwwpart: borg-calendar,                   setname: borg-calendar }
+- { name: borg, wwwpart: ok-borg,                         setname: ok-borg }
+- { name: borg, wwwpart: borgbackup,                      setname: borgbackup }
+- { name: borg, family: sisyphus,                         setname: borgbackup }
 - { name: borg,                        warning: "please classify me" }
 
 - { name: cde,                         setname: cdesktopenv, wwwpart: cdesktopenv } # desktop env. vs packaging tool
@@ -98,7 +98,7 @@
 - { name: fswatch, verpat: "1.*",      setname: fswatch-mon }
 
 - { name: fts, wwwpart: musl-fts, setname: musl-fts } # file tree traversal for musl
-- { name: fts, wwwpart: gonicus, setname: fuse-fts } # fuse TFTP supplicant
+- { name: fts, wwwpart: gonicus, setname: "fusefs:fts" } # fuse TFTP supplicant
 # otherwise fts3, "File Transfer Service V3"
 
 - { name: fuse, wwwpart: fuse-emulator, setname: fuse-emulator }
@@ -173,8 +173,6 @@
 - { name: mars,                        wwwpart: courses.missouristate.edu, setname: mars-mips }
 - { name: mars,                        warning: "please classify me" }
 
-- { name: meld3,                       wwwpart: meldmerge, setname: meld } # XXX: create problem; this is wrongly named
-
 - { name: mog,                         setname: mog-cat, family: freebsd }
 - { name: mog,                         setname: mog-game, family: slackbuilds }
 - { name: mog,                         warning: "please classify me" }
@@ -200,13 +198,11 @@
 # another is `nice editor`, but I don't feel like renaming it as it's `ne` everywhere
 - { name: ne, wwwpart: wordprocessing/unix/ne, setname: ne-cam }
 
-- { name: node, wwwpart: ax25, setname: node-ax25 }
-- { name: node, category: [universe/hamradio,lang,Development/Tools,hamradio], setname: node-ax25 }
-- { name: node, wwwpart: nodejs, setname: nodejs }
-- { name: node, family: pclinuxos, setname: nodejs }
-- { name: node, warning: "please classify me" }
-
 - { name: nml, wwwpart: ropas, setname: "$0-lang" }
+
+#
+- { name: nodejs, wwwpart: ax25, setname: node-ax25 }
+- { name: nodejs, category: [universe/hamradio,lang,Development/Tools,hamradio], setname: node-ax25 }
 
 - { name: nstat, family: freebsd, setname: nstat-netflix }
 
@@ -224,10 +220,9 @@
 
 - { name: picard,                      setname: java-picard, wwwpart: picard.sourceforge.net }
 
-# python package manager vs. program wrapper (which was renamed to pipo upstream)
-# XXX: generate problem from this
-- { name: pip,                         setname: pipo,                     family: arch }
-- { name: pip,                         setname: pipo,                     family: gentoo, category: app-misc }
+# https://github.com/PHPOffice/PHPExcel vs. https://github.com/iliaal/php_excel
+- { name: "php56:excel", wwwpart: php_excel,           setname: "php56:php_excel" }
+- { name: "php56:excel", wwwpart: phpoffice,           setname: "php56:phpexcel" }
 
 - { name: polly, verpat: "4\\..*",     setname: polly-llvm-opt            } # polyhedral optimizationa for llvm
 - { name: polly, verpat: "0\\.93\\..*", setname: polly-twitter-client     } # twitter client
@@ -288,8 +283,6 @@
 - { name: tracker, setname: tracker-modplayer, category: audio }
 
 # tales of majeyal vs. troubles of middle earth
-- { name: [t-engine4,tales-of-majeyal,tome4,tome4-data,tome-ah], setname: tome }
-- { name: [tome4-beta], setname: tome, ignore: true }
 - { name: tome, verpat: "1\\..*", setname: tales-of-majeyal }
 - { name: tome, verpat: "2\\..*", setname: tome2 }
 - { name: tome, wwwpart: tome.te4.org, setname: tales-of-majeyal } # aur garbage
@@ -331,25 +324,4 @@
 - { name: zap, family: openbsd, setname: zap-process-killer }
 - { name: zap, warning: "please classify me" }
 
-- { name: zed, wwwpart: [ocamlcore, github.com/diml/zed], setname: ocaml-zed }
-
-# TODO
-# - flare engine/game vs. flare database; known, but database doesn't seem
-# to be widely packaged (had FreeBSD port which was removed)
-# - elixir vs. elixir-lang (investigate)
-# - emma vs. emma-coverage
-
-# TODO
-# - ace vs. ace-of-penguins
-# - crimson vs. crimson-fields
-# - critterding version
-# - pkgsrc: enigma
-# - empty vs. empty-expect
-# - emotion-generic-players vs. emotion-generic-players-vlc
-# - enblend vs. enblend-enfuse
-# - enemy-territory vs. etqw
-# - engauge vs. engauge-digitizer
-# - fbg vs fbg2
-# - fcgi vs. fcgi-devkit
-# - filebeat/filebeat-bin
-# - fira* (font)
+- { name: zed, wwwpart: [ocamlcore, github.com/diml/zed], setname: "ocaml:zed" }

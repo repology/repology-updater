@@ -1,8 +1,8 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Nodejs
-- { namepat: "node-(.*)",              setname: "node:$1", family: [ debuntu ] }
-- { namepat: "nodejs-(.*)",            setname: "node:$1", family: [ fedora, mageia, arch, rosa, sisyphus ] } # sisyphus=autoimports
+- { namepat: "node-(.*)",              setname: "node:$1", family: [ debuntu ], noflag: nowildcard, addflag: nowildcard }
+- { namepat: "nodejs-(.*)",            setname: "node:$1", family: [ fedora, mageia, arch, rosa, sisyphus ], noflag: nowildcard, addflag: nowildcard } # sisyphus=autoimports
 
 # manual modules
 - name:

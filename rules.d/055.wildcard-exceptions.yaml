@@ -1,0 +1,6 @@
+- { name: meld3,                       wwwpart: meldmerge, setname: meld } # XXX: create problem; this is wrongly named
+
+# python package manager vs. program wrapper (which was renamed to pipo upstream)
+# XXX: generate problem from this
+- { name: pip,                         setname: pipo,                     family: arch }
+- { name: pip,                         setname: pipo,                     family: gentoo, category: app-misc }

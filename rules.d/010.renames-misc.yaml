@@ -1305,3 +1305,5 @@
 - { namepat: "xpilot-ng-(client|server)", setname: xpilot-ng, addflavor: "$1" }
 - { namepat: "munin-(master|node|server|common)",  setname: munin, addflavor: "$1" }
 - { namepat: "zabbix[0-9]*[_-](agent|agentd|frontend|frontend-php|proxy|server|common|proxy-sqlite|server-mysql|web)[0-9.-]*", setname: zabbix, addflavor: "$1" }
+- { name: [t-engine4,tales-of-majeyal,tome4,tome4-data,tome-ah], setname: tome }
+- { name: [tome4-beta], setname: tome, ignore: true }
