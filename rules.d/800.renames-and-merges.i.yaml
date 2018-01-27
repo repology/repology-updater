@@ -10,6 +10,9 @@
 - { setname: icewm,                    name: icewm2 }
 - { setname: icon,                     name: icon-lang }
 - { setname: iksemel,                  name: libiksemel }
+- { setname: imhangul,                 name: imhangul-gtk2, addflavor: gtk2 }
+- { setname: imhangul,                 name: imhangul-gtk3, addflavor: gtk3 }
+- { setname: imhangul,                 name: imhangul3 }
 - { setname: indent,                   name: [gnu-indent,gindent] }
 - { setname: ingen,                    name: ingen-unstable, ignore: true }
 - { setname: inotify-tools,            name: inotify-tools-inc, addflavor: inc }

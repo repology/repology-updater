@@ -1,5 +1,6 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: namazu,                   name: namazu2 }
 - { setname: nawk,                     name: awk, family: homebrew }
 - { setname: nbd,                      name: nbd-server }
 - { setname: ncbi-blast+,              name: ncbi-blast-plus }

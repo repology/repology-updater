@@ -24,13 +24,6 @@
   setname: "fonts:adobe-source-code-pro"
 
 - name:
-    - alee-fonts
-    - alee-ttf
-    - fonts-alee
-    - ttf-alee
-  setname: "fonts:alee"
-
-- name:
     - alef
     - alef-fonts
     - alef-webfont

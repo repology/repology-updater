@@ -9,6 +9,9 @@
 - { setname: garmintools,              name: garmin-forerunner-tools }
 - { setname: gaul,                     name: gaul-devel, family: gentoo }
 - { setname: gcc,                      name: g++, addflavor: true }
+- { setname: gcin,                     name: gcin-gtk3, addflavor: gtk3 }
+- { setname: gcin,                     name: gcin-qt4, addflavor: qt4 }
+- { setname: gcin,                     name: gcin-qt5, addflavor: qt5 }
 - { setname: gcompris,                 name: gcompris-qt, addflavor: qt }
 - { setname: gdal,                     name: [gdal1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4] }
 - { setname: gdal-grass,               name: libgdal-grass }

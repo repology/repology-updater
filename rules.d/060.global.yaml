@@ -2,7 +2,31 @@
 
 # FreeBSD: localized categories (XXX: fix this, contains useful packages)
 - { namepat: "([a-z]{2}|ast|csb|grc|hil|hsb|nds|tet|de-alt|pt_br|pt_pt)-aspell", setname: "aspell-$1", family: [ freebsd ] }
-- { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", remove: yes, family: [ freebsd ] }
+
+- { name: de-dict, family: freebsd, addflag: nowildcard }
+- { name: exuberant-ctags, family: freebsd, addflag: nowildcard }
+- { name: ja-a2ps, family: freebsd, addflag: nowildcard }
+- { name: ja-ack, family: freebsd, addflag: nowildcard }
+- { name: ja-ctags, family: freebsd, addflag: nowildcard }
+- { name: ja-gawk, family: freebsd, addflag: nowildcard }
+- { name: ja-groff, family: freebsd, addflag: nowildcard }
+- { name: ja-jed, family: freebsd, addflag: nowildcard }
+- { name: ja-jvim, family: freebsd, addflag: nowildcard }
+- { name: ja-less, family: freebsd, addflag: nowildcard }
+- { name: ja-libslang, family: freebsd, addflag: nowildcard }
+- { name: ja-ls, family: freebsd, addflag: nowildcard }
+- { name: ja-mailman, family: freebsd, addflag: nowildcard }
+- { name: ja-man, family: freebsd, addflag: nowildcard }
+- { name: ja-mg, family: freebsd, addflag: nowildcard }
+- { name: ja-ming, family: freebsd, addflag: nowildcard }
+- { name: ja-mutt, family: freebsd, addflag: nowildcard }
+- { name: ja-slang, family: freebsd, addflag: nowildcard }
+- { name: ja-slrn, family: freebsd, addflag: nowildcard }
+- { name: uk-postcodes, family: freebsd, addflag: nowildcard }
+- { name: zh-dictd-database, family: freebsd, addflag: nowildcard }
+- { name: zh-docproj, family: freebsd, addflag: nowildcard }
+- { namepat: ".*-(hunspell|hyphen|mythes|phone|zipcodes)", family: freebsd, addflag: nowildcard }
+- { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-(.*)", setname: $2, addflavor: $1, family: freebsd, noflag: nowildcard  }
 
 # FreeBSD: linux binary ports
 - { namepat: "linux-(baudline)", setname: "$1", family: freebsd }
