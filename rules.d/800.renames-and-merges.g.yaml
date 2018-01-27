@@ -1,0 +1,88 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: gambas3-gb-modules,       namepat: "gambas3-gb-.*", family: arch }
+- { setname: gambit-c,                 name: gambc }
+- { setname: garcon,                   name: [garcon-gtk3,libgarcon,xfce4-garcon], addflavor: true }
+- { setname: garden-of-coloured-lights, name: garden }
+- { setname: gargoyle,                 name: gargoyle-free }
+- { setname: garlic,                   name: garlic-doc }
+- { setname: garmintools,              name: garmin-forerunner-tools }
+- { setname: gaul,                     name: gaul-devel, family: gentoo }
+- { setname: gcc,                      name: g++, addflavor: true }
+- { setname: gcompris,                 name: gcompris-qt, addflavor: qt }
+- { setname: gdal,                     name: [gdal1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4] }
+- { setname: gdal-grass,               name: libgdal-grass }
+- { setname: geany-plugins,            namepat: "geany-plugin-.*", family: freebsd }
+- { setname: gearmand,                 name: [gearmand-devel,gearman] }
+- { setname: geki2,                    name: geki2-kxl, family: gentoo } # XXX: recheck
+- { setname: geki3,                    name: geki3-kxl, family: gentoo } # XXX: recheck
+- { setname: geocode-glib,             name: libgeocode-glib }
+- { setname: geoip,                    name: libgeoip }
+- { setname: getopt,                   name: [gnugetopt,gnu-getopt,gnu.getopt] }
+- { setname: gettext,                  name: libintl }
+- { setname: gflags,                   name: [google-gflags,libgflags] }
+- { setname: giflib,                   name: gif, family: ravenports }
+- { setname: giflib,                   name: giflib-util }
+- { setname: giflib,                   name: giflib4 }
+- { setname: giflib,                   name: libungif } # former name
+- { setname: gimp-$1,                  namepat: "gimp2-(.*)" }
+- { setname: gimp-docs,                namepat: "gimp-docs-.*" }
+- { setname: gimp-help,                namepat: ".*gimp-help.*" }
+- { setname: gimp-resynthesizer,       name: resynthesizer }
+- { setname: git,                      name: [git-base,git-docs,git-gitk,git-contrib,git-lite,git-gui,git-bashcompletion,gitweb,git-minimal,git-with-svn], addflavor: true }
+- { setname: gitflow,                  name: [git-flow,git_flow] }
+- { setname: gitg,                     name: gitg0, family: freebsd }
+- { setname: gitter,                   name: gitter-bin }
+- { setname: gkrellm,                  name: gkrellm2 }
+- { setname: gl-117,                   name: gl117 }
+- { setname: glog,                     name: google-glog }
+- { setname: glpng,                    name: [libglpng1,libglpng] }
+- { setname: gmock,                    name: [google-mock,googlemock,libgmock] }
+- { setname: gmrun,                    name: [gmrun-multihead,gmrun-xdg] }
+- { setname: gnash,                    name: gnash-git, ignore: true }
+- { setname: gnome-chemistry-utils,    name: gchemutils }
+- { setname: gnome-chess,              name: gnome-games-chess }
+- { setname: gnome-mahjongg,           name: gnome-games-mahjongg }
+- { setname: gnome-mines,              name: gnome-games-mines }
+- { setname: gnome-mines,              name: gnome-mines-3.12.2 }
+- { setname: gnome-nibbles,            name: gnome-games-nibbles }
+- { setname: gnome-photo-printer,      name: [gnomephotoprinter,gnome-photo-print] }
+- { setname: gnome-robots,             name: gnome-games-robots }
+- { setname: gnome-sudoku,             name: gnome-games-sudoku }
+- { setname: gnome-taquin,             name: gnome-games-taquin }
+- { setname: gnome-tetravex,           name: gnome-games-tetravex }
+- { setname: gnuchess,                 name: [gnu-chess,gnuchess4] }
+- { setname: gnugo,                    name: gnu-go }
+- { setname: gnumpc,                   name: [mpc1,mpclib,mpclib3,mpcomplex] }
+- { setname: gnupg,                    name: gnupg1compat }
+- { setname: gnupg,                    name: gpg-agent }
+- { setname: gnurl,                    name: libgnurl }
+- { setname: gnushogi,                 name: gnu-shogi }
+- { setname: godot,                    name: [godot-pulse,godot-tools], addflavor: true }
+- { setname: goldencheetah,            name: golden-cheetah }
+- { setname: gom,                      name: libgom }
+- { setname: gopro-vr-player,          name: gopro-vr-player-beta, ignore: true }
+- { setname: gopro-vr-player,          name: gopro-vrplayer }
+- { setname: gprolog,                  name: gnu-prolog }
+- { setname: grafana,                  name: grafana-bin }
+- { setname: grafana,                  namepat: "grafana[0-9]+" }
+- { setname: granite,                  name: libgranite }
+- { setname: graphite2,                name: [graphite,libgraphite2] }
+- { setname: graphviz,                 name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui] }
+- { setname: graylog-collector-sidecar, name: collector-sidecar }
+- { setname: greed,                    name: greed-game }
+- { setname: groovy,                   name: groovy-docs, addflavor: docs }
+- { setname: groovy,                   name: groovysdk }
+- { setname: groovy,                   namepat: "groovy[0-9._-]+" }
+- { setname: grub,                     name: grub2 } # since grub legacy is obsoleted, just let grub2 eat it away
+- { setname: gsl,                      name: gsl-doc, addflavor: doc }
+- { setname: gssproxy,                 name: gss-proxy }
+- { setname: gtest,                    name: [googletest,libgtest] }
+- { setname: gtk-doc,                  name: gtk-doc-am, addflavor: am }
+- { setname: gtkdatabox,               name: libgtkdatabox }
+- { setname: gtypist,                  name: gnu-typist }
+- { setname: gucharmap,                name: gucharmap-gtk2, addflavor: gtk2 }
+- { setname: gucharmap,                name: gucharmap7 }
+- { setname: gwt,                      name: webtoolkit-java-sdk }
+- { setname: gxmessage,                name: gxmessage-gtk2, addflavor: gtk2 }
+- { setname: gzdoom,                   namepat: "gzdoom[0-9.-]+" }

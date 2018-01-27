@@ -1,0 +1,73 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: s3backer,                 name: s3-backer }
+- { setname: saga,                     name: [saga-gis,saga-gis-ltr] }
+- { setname: sauerbraten,              name: sauerbraten-data, addflavor: data }
+- { setname: scalapack,                name: libscalapack }
+- { setname: scamp,                    name: astromatic-scamp }
+- { setname: schismtracker,            name: schism }
+- { setname: sdl$1,                    namepat: "(?:lib)?(?:sdl1(.*))" }
+- { setname: sdl$1,                    namepat: "(?:lib)?sdl(2?[_-](?:image|mixer|net|sound|ttf|gfx|console|sge|pango))" }
+- { setname: sdl,                      name: libsdl }
+- { setname: sdl-$1,                   namepat: "(?:lib)?sdl[_-]([a-z]+)1\\.2" }
+- { setname: sdl-gfx,                  name: libsdl_gfx13 }
+- { setname: sdl-pango,                name: sdlpango, family: debuntu }
+- { setname: sdl2,                     name: controllermap, addflavor: controllermap }
+- { setname: sdl2,                     name: libsdl2 }
+- { setname: sdl2-$1,                  namepat: "(?:lib)?sdl[_-]([a-z]+)2\\.0" }
+- { setname: sdl2-gfx,                 name: sdlgfx, family: debuntu }
+- { setname: sdl_ttf2,                 name: sdl_ttf, family: kaos }
+- { setname: sdllopan,                 name: sdl_lopan }
+- { setname: sdlmame,                  name: sdlmame-wout-toolkits, addflavor: wout-toolkits }
+- { setname: sdocbook-xml,             name: docbook-xml-simple } # ravenports
+- { setname: seamonkey-i18n,           namepat: "seamonkey-i18n-.*", family: openbsd }
+- { setname: searx,                    name: searx-py3 }
+- { setname: sed,                      name: [gnu-sed,gnused,gsed] }
+- { setname: sendmail,                 namepat: "sendmail\\+.*", family: freebsd }
+- { setname: sextractor,               name: astromatic-sextractor }
+- { setname: sfml,                     name: compat-sfml16 }
+- { setname: sgt-puzzles,              name: puzzles } # not completely safe, but other puzzles were not encountered yet
+- { setname: sha1collisiondetection,   name: sha1dc }
+- { setname: silgraphite,              name: [silgraphite-ft,silgraphite-xft], addflavor: true }
+- { setname: silgraphite,              name: silgraphite2.0 }
+- { setname: simple-scan,              name: simple-scan-3.12 }
+- { setname: simple-scan,              name: simple-scan-trunk, ignore: true }
+- { setname: simplescreenrecorder,     name: simplescreenrecorder-lib }
+- { setname: singularity,              name: endgame-singularity }
+- { setname: singularity-music,        name: endgame-singularity-music }
+- { setname: singularityviewer,        name: singularityviewer-alpha, devel: true }
+- { setname: sisc,                     name: sisc-scheme }
+- { setname: slang,                    name: [libslang,libslang2,s-lang,slang2,slang1] }
+- { setname: slashem,                  name: slashem-tty }
+- { setname: smplayer,                 name: smplayer-qt4, addflavor: qt4 }
+- { setname: sni-qt,                   name: sni-qt4 }
+- { setname: snorenotify,              name: snorenotify-qt5 }
+- { setname: sopwith,                  namepat: "sdl-?sopwith" }
+- { setname: soundtouch,               name: [libsoundtouch,sound-touch] }
+- { setname: spacearyarya,             name: spacearyarya-kxl, family: gentoo } # XXX: recheck
+- { setname: spamassassin,             name: spamassassin-rules, addflavor: rules }
+- { setname: spamassassin,             name: spamassassin-spamc, addflavor: rules }
+- { setname: sparsehash,               name: google-sparsehash }
+- { setname: speed-dreams$1,           namepat: "speeddreams(-data)?" }
+- { setname: speexdsp,                 name: libspeexdsp }
+- { setname: spotify,                  name: [spotify-stable,spotify094] }
+- { setname: spotify,                  name: spotify-client, addflavor: client }
+- { setname: spring,                   name: springrts }
+- { setname: squirrelmail-$1,          namepat: "squirrelmail-(.*)-plugin", family: freebsd }
+- { setname: stellarium,               name: stellarium-qt4 }
+- { setname: stepmania,                name: stepmania-devel, family: freebsd }
+- { setname: stfl,                     name: [libstfl,libstfl0] }
+- { setname: sthttpd,                  name: thttpd, family: gentoo } # actually fork of thttpd; XXX: problem
+- { setname: stone-soup,               name: stone-soup-ncurses }
+- { setname: stone-soup,               namepat: "stonesoup(?:-sdl)?" }
+- { setname: structuresynth,           name: structure-synth }
+- { setname: stuntrally,               name: stunt-rally }
+- { setname: suitesparse,              name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis] }
+- { setname: suitesparse,              name: suite-sparse }
+- { setname: suitesparseconfig,        name: [ufconfig,suitesparse-common-devel] } # from report: ufconfig is an old name for suitesparseconfig
+- { setname: supertransball2,          name: [stransball2,super_transball] }
+- { setname: svmlight,                 name: svm_light }
+- { setname: swarp,                    name: astromatic-swarp }
+- { setname: sweethome3d,              name: [sweet-home-3d,sweethome3d-application] }
+- { setname: swissfileknife,           name: sfk }
+- { setname: switchboard-plug-networking, name: switchboard-plug-network }

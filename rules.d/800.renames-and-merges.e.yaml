@@ -1,0 +1,64 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: e2fsprogs,                name: [e2fsprogs-libblkid,e2fsprogs-libs,e2fsprogs-libss,e2fsprogs-libuuid,e2fsprogs1.41] }
+- { setname: easy-rsa,                 name: [easyrsa,easy-rsa2] }
+- { setname: easygit,                  name: [easy-git,eg] }
+- { setname: easyrpg-player,           name: easyrpg, family: openbsd }
+- { setname: easysoap++,               name: easysoap }
+- { setname: easyspice,                name: easy_spice }
+- { setname: easytag,                  name: [easytag24,easytag-gtk2] }
+- { setname: easytag,                  name: easy-tag }
+- { setname: eawpats,                  name: [timidity-eaw-patches,timidity-eawpatches,eawpatches] }
+- { setname: eclipse,                  name: eclipse-java }
+- { setname: ecm-tools,                name: ecmtools }
+- { setname: ecrire,                   name: ecrire-git }
+- { setname: ee,                       name: ee-editor }
+- { setname: eekboard,                 name: eekboard-gtk2 }
+- { setname: eid-mw,                   name: [beid-middleware,beid,libbeid] }
+- { setname: eid-viewer,               name: eid-viewer-bin }
+- { setname: einstein,                 name: einstein-puzzle, family: pkgsrc }
+- { setname: eiskaltdcpp,              namepat: eiskaltdcpp-(cli|daemon|data|gtk|lib|qt|core) }
+- { setname: elbcli,                   name: elb-tools }
+- { setname: electricfence,            name: electric-fence }
+- { setname: elftoolchain,             name: libexecinfo, family: ravenports, addflavor: $0 }
+- { setname: elvis,                    name: elvis-x11 }
+- { setname: emacs-lua-mode,           name: emacs-lua }
+- { setname: emacs-mmm-mode,           name: emacs-mmm }
+- { setname: embree,                   name: embree-isa }
+- { setname: emby,                     name: emby-server }
+- { setname: emby,                     name: emby-server-beta, ignore: true }
+- { setname: emotion-generic-players,  name: emotiongenericplayers }
+- { setname: emulationstation,         name: emulation-station }
+- { setname: enblend-enfuse,           name: enblend }
+- { setname: enemy-territory,          name: enemyterritory }
+- { setname: enet,                     name: [libenet,enet1.2] }
+- { setname: enigma,                   name: enigma_sdl }
+- { setname: enscript,                 namepat: "enscript-.*", family: freebsd } # enscript-a4, enscript-letter, enscript-letterdj
+- { setname: entagged,                 name: entagged-tageditor, family: gentoo }
+- { setname: eot-utils,                name: eot-utilities }
+- { setname: ephoto,                   name: ephoto-git, ignore: true }
+- { setname: epiphany,                 name: epiphany-browser }
+- { setname: epiphany,                 name: epiphany-unstable, ignore: true }
+- { setname: epl,                      name: epl.el, family: freebsd }
+- { setname: epsxe,                    name: epsxe1.9 }
+- { setname: eric,                     name: "python:eric" }
+- { setname: eric,                     name: [eric-common,eric-i18n] }
+- { setname: eric,                     name: [eric4,eric5,eric6] }
+- { setname: eric,                     namepat: "[a-z]{2}-eric6" } # freebsd l10n ports
+- { setname: eric,                     namepat: "eric-i18n-.*" }
+- { setname: etcd,                     name: [coreos-etcd,coreos-etcd3] }
+- { setname: eternal-lands$1,          namepat: "eternallands(.*)" }
+- { setname: eternal-lands,            name: el, family: freebsd }
+- { setname: eternal-lands-data,       name: el-data, family: freebsd }
+- { setname: ettercap,                 name: ettercap-gtk }
+- { setname: eventlog,                 name: libevtlog }
+- { setname: evince,                   name: [evince-light,evince-lite,evince2,evince2-light,evince-no-gnome,evince-lcdfilter] }
+- { setname: evolus-pencil,            name: evoluspencil }
+- { setname: evopedia,                 name: evopedia_qt }
+- { setname: exact-image,              name: exactimage }
+- { setname: exaile,                   name: exaile-devel, ignore: true }
+- { setname: exercism-cli,             name: [exercism,"go:github-exercism-cli"] }
+- { setname: exim,                     name: exim4 }
+- { setname: expat,                    name: expat21 }
+- { setname: extreme-tuxracer,         name: [etracer,extremetuxracer] }
+- { setname: eyed3,                    name: eye-d3 }

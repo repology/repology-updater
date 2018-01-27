@@ -4,10 +4,12 @@
 - name:
     - adblock-plus
     - adblock_plus
+    - adblockplus-firefox
     - firefox-adblock-plus
     - firefox-adblock_plus
     - firefox-ext-adblock-plus
     - mozilla-adblockplus
+    - xpi-adblock_plus
   setname: "ffplugin:adblock-plus"
 
 # F

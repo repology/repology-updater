@@ -1,0 +1,27 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: i3,                       name: [i3-kde,i3-lazy,i3-wm-iconpatch], addflavor: true }
+- { setname: i3,                       name: [i3-wm,i3wm] }
+- { setname: i3status,                 name: i3status-manjaro, addflavor: manjaro }
+- { setname: iagno,                    name: gnome-games-iagno }
+- { setname: icecast,                  name: icecast2 }
+- { setname: icecat,                   name: icecat-debug, addflavor: debug }
+- { setname: icecat,                   namepat: "icecat-(l10n.*)", addflavor: $1 }
+- { setname: icewm,                    name: icewm2 }
+- { setname: icon,                     name: icon-lang }
+- { setname: iksemel,                  name: libiksemel }
+- { setname: indent,                   name: [gnu-indent,gindent] }
+- { setname: ingen,                    name: ingen-unstable, ignore: true }
+- { setname: inotify-tools,            name: inotify-tools-inc, addflavor: inc }
+- { setname: intel-microcode,          name: [microcode-intel,microcode-data-intel,intel-microcode-netbsd] }
+- { setname: intel-microcode,          name: microcode, family: [mageia,rosa] } # limit family for safely
+- { setname: intellij-idea-community,  name: [intellij-idea-ce,idea-community,intellij-idea-community-edition,intellij] }
+- { setname: intellij-idea-community,  name: intellij-idea-ce-eap, ignore: true }
+- { setname: intellij-idea-ultimate,   name: [idea-ultimate,intellij-idea-ultimate-edition,intellij-idea-ue-bundled-jre,intellij-ultimate] }
+- { setname: intellij-idea-ultimate,   name: intellij-idea-ue-eap, ignore: true }
+- { setname: iproute2,                 name: iproute2-cake, addflavor: cake }
+- { setname: iproute2,                 name: iproute2-doc, addflavor: doc }
+- { setname: ir-lv2,                   name: ir.lv2 }
+- { setname: ircii,                    name: ircii-current, ignore: true }
+- { setname: iso8879,                  name: iso_8879 }
+- { setname: ispell-uk,                name: aspell-uk, ver: ["1.6.5","1.8.0"] } # see ftp://ftp.gnu.org/gnu/aspell/dict/uk/

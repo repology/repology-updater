@@ -1,0 +1,27 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: waterfox,                 name: waterfox-kde, addflavor: kde }
+- { setname: wcalc,                    name: w-calc }
+- { setname: wcmcommander,             name: walcommander } # old name
+- { setname: wcmcommander,             name: wcm-commander }
+- { setname: websocketpp,              name: websocket++ }
+- { setname: which,                    name: [gnu-which,gwhich] }
+- { setname: whizzytex,                name: tex-whizzytex }
+- { setname: windowmaker,              name: wmaker }
+- { setname: wine-etersoft,            name: wine, family: sisyphus } # WATCH ORDER # counterfeit
+- { setname: wine,                     name: [wine-d3d9,wine-any,wine-gaming-nine,wine-rt,wine-staging-ivb,wine-ivb], addflavor: true }
+- { setname: wine,                     name: [wine-next,wine-staging,wine-devel,wine-development,wine-vanilla,wine-stable] }
+- { setname: wine,                     namepat: "wine[0-9.-]+" }
+- { setname: wine-gecko,               namepat: "wine-gecko([0-9.-]+|-devel|-stable)" }
+- { setname: wine-mono,                namepat: "wine-mono([0-9.-]+|-devel)" }
+- { setname: winewizard,               name: wine-wizard }
+- { setname: wings3d,                  name: wings }
+- { setname: wire,                     name: wire-desktop }
+- { setname: wire,                     name: wire-desktop-beta, devel: true }
+- { setname: wireless-regdb,           name: wireless-regdb-pentest, addflavor: pentest }
+- { setname: wireshark,                name: [wireshark-cli,wireshark-common,wireshark-gtk,wireshark-gtk2,wireshark-headers,wireshark-lite,wireshark-qt,wireshark-qt5], addflavor: true }
+- { setname: wireshark,                name: [wireshark2,wireshark22] }
+- { setname: wirouterkeyrec,           name: wirouter_keyrec }
+- { setname: wiznote,                  name: wiznote-qt4, addflavor: true }
+- { setname: wormsofprey,              name: wop }
+- { setname: wpa_supplicant,           name: wpasupplicant }

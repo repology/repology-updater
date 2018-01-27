@@ -1,0 +1,123 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: c-ares,                   name: [libcares,libcares2] }
+- { setname: cacti-spine,              name: cacti-cactid } # cactid renamed to spine upstream
+- { setname: cairo-clock,              name: cairo-clock-ccw }
+- { setname: cairo-dock-plugins,       name: cairo-dock-plug-ins }
+- { setname: calligra-l10n,            namepat: "calligra-l10n-.*", family: sisyphus }
+- { setname: capnproto,                name: [capnp,capnproto-0.6] }
+- { setname: cassandra,                name: [apache-cassandra,cassandra2] }
+- { setname: catch,                    name: libcatch-cpp-headers }
+- { setname: cattle,                   name: cattle-1.0 }
+- { setname: cavezofphear,             name: cavez-of-phear }
+- { setname: cbatticon,                name: cbatticon-gtk2, addflavor: gtk2 }
+- { setname: cblas,                    name: cblas-reference, addflavor: docs }
+- { setname: cblas,                    name: cblas-tmg, addflavor: tmg }
+- { setname: ccache,                   name: [ccache-memcached,ccache-memcached-static,ccache-static], addflavor: true } # freebsd subpackages
+- { setname: ccaudio2,                 name: libccaudio2 }
+- { setname: ccl,                      name: [clozure-cl,clozurecl] }
+- { setname: cdemu-client,             name: cdemu, family: gentoo }
+- { setname: cdesktopenv,              name: cde-desktop }
+- { setname: cdogs-sdl,                name: cdogs }
+- { setname: cdogs-sdl,                name: cyberdogs_sdl }
+- { setname: cdparanoia,               name: cdparanoia-iii }
+- { setname: cdparanoia,               name: cdparanoia-overread, addflavor: overread }
+- { setname: ce,                       name: ce-x11, addflavor: x11 }
+- { setname: cegui,                    name: [cegui-mk2,cegui_mk-2] }
+- { setname: celestia,                 name: celestia-nonfree, addflavor: nonfree }
+- { setname: celestia,                 namepat: "celestia-.*", family: freebsd } # merges glut/gnome/gtk, just GUI variants
+- { setname: centerim,                 name: [center-im,centerim5] }
+- { setname: centerim,                 name: centerim-devel, ignore: true }
+- { setname: ceti-2-theme,             name: ceti-2-themes }
+- { setname: cfitsio,                  name: cfitsio3 }
+- { setname: cfr,                      name: cfr-decompiler }
+- { setname: cglib,                    name: cglib3 }
+- { setname: cgoban,                   name: cgoban1 }
+- { setname: chakracore,               name: chakaracore } # AUR misspell
+- { setname: chakracore,               name: chakra, family: homebrew }
+- { setname: charls,                   name: charls1 }
+- { setname: chef-dk,                  name: chefdk }
+- { setname: chipmunk,                 name: [chipmunk6,chipmunkphysics,libchipmunk] }
+- { setname: chromium,                 name: [chromium-beta,chromium-dev,chromium-browser-dev], ignore: true }
+- { setname: chromium,                 name: [chromium-browser,chromium-browser-stable,chromium-gtk2] }
+- { setname: chromium-bsu,             name: chromiumbsu }
+- { setname: cinelerra,                name: [cin,cinelerra-cv] }
+- { setname: cinelerra,                name: cinelerra-heroine, addflavor: heroine }
+- { setname: ckeditor,                 name: ckeditor3 }
+- { setname: ckermit,                  name: [c-kermit,kermit] }
+- { setname: clamav,                   name: [clamav-server,clamav-light] }
+- { setname: clanbomber,               name: clanbomber2 }
+- { setname: clearlooks-phenix,        name: [clearlooks-phenix-gtk-theme,clearlooks-phenix-theme,gtk3-theme-clearlooks-phenix] }
+- { setname: clementine,               name: clementine-free }
+- { setname: clipit,                   name: clipit-gtk3, addflavor: gtk3 }
+- { setname: cln,                      name: cln6 }
+- { setname: cloog,                    name: [cloog-isl,cloog-isl14], addflavor: isl }
+- { setname: cloog,                    name: cloog-lts }
+- { setname: cloog-ppl,                name: cloog-ppl-gcc4, addflavor: gcc4 }
+- { setname: clucene,                  name: [clucene09,clucene-core,libclucene,libclucene-core] }
+- { setname: clusterssh,               name: cssh }
+- { setname: clutter,                  name: clutter-1.0 }
+- { setname: clutter-gtk,              name: clutter-gtk0.10 }
+- { setname: cmrt,                     name: libcmrt }
+- { setname: cockatrice,               name: [cockatrice-client,cockatrice-server] }
+- { setname: codec2,                   name: libcodec2 }
+- { setname: coffee-script,            name: coffeescript } # XXX: problem
+- { setname: cogl,                     name: cogl-amdgpu-pro }
+- { setname: cogl,                     name: libcogl }
+- { setname: collectd,                 name: collectd5 }
+- { setname: colorcode,                name: color-code }
+- { setname: comedilib,                name: libcomedi }
+- { setname: commoncpp2,               name: commoncpp }
+- { setname: complexity,               name: gnu-complexity }
+- { setname: conserver,                name: conserver8 }
+- { setname: consolekit,               name: consolekit2 }
+- { setname: coolreader3,              name: coolreader }
+- { setname: corsixth,                 name: [corsix-th,corsix_th] }
+- { setname: couchpotato,              name: couchpotatoserver }
+- { setname: cpmtools,                 name: cpmtools2 }
+- { setname: cppcheck,                 name: [cppcheck-nogui,cppcheck-nox,cppcheck-gui] }
+- { setname: cpprestsdk,               name: [cpprest,casablanca] }
+- { setname: cpptest,                  name: libcpptest }
+- { setname: cracklib,                 name: cracklib2 }
+- { setname: creduce,                  name: c-reduce }
+- { setname: crimson-fields,           name: crimson, verpat: "0\\.5.*" } # XXX: MUST be renamed upstream
+- { setname: crimson-fields,           name: crimsonfields }
+- { setname: criticalmass,             name: critter }
+- { setname: cross-binutils$1,         namepat: "gnatcross-binutils(.*)", addflavor: gnat }
+- { setname: crypto++,                 name: crypto++-562 }
+- { setname: csfml,                    name: libcsfml }
+- { setname: csharp-mode.el,           name: csharp-mode }
+- { setname: ctags,                    name: [ectags,exctags,exuberant-ctags] } # exuberant and universal are split later
+- { setname: ctags,                    name: universal-ctags } # exuberant and universal are split later
+- { setname: ctpp2,                    name: ctpp }
+- { setname: ctypes.sh,                name: ctypes-sh }
+- { setname: cubosphere,               name: cubosphere-data, addflavor: data }
+- { setname: cuneiform,                name: cuneiform-linux }
+- { setname: curl,                     name: [curl-ca-bundle,curl-http2,curl-openssl], addflavor: true }
+- { setname: curl,                     name: [libcurl-compat,libcurl-compat-nostatic,libcurl-gnutls,libcurl-openssl-1.0], addflavor: true }
+- { setname: curseofwar,               name: curseofwar-sdl }
+- { setname: curses-hexedit,           name: [chexedit,ncurses-hexedit] }
+- { setname: cutecom,                  name: cutecom-legacy }
+- { setname: cvs,                      name: cvs-devel }
+- { setname: cvsweb,                   name: cvsweb3 }
+- { setname: cyphesis,                 name: cyphesis-cpp, family: debuntu }
+- { setname: cyrus-imapd,              name: cyrus5-imapd }
+- { setname: cython,                   name: cython2 }
+- { setname: cython-kivy,              name: cython2-kivy }
+
+- setname: cairo
+  name:
+    - cairo-coloredemoji
+    - cairo-dfb
+    - cairo-gobject
+    - cairo-infinality
+    - cairo-infinality-lcdfilter
+    - cairo-infinality-ultimate
+    - cairo-infinality-ultimate-with-colored-emoji
+    - cairo-minimal
+    - cairo-nomesa
+    - cairo-reference
+    - cairo-ubuntu
+    - cairo-xcb
+    - libcairo
+  addflavor: true

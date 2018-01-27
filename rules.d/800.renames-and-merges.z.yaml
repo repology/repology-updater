@@ -1,0 +1,21 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: zabbix,                   namepat: "zabbix[0-9]*[_-](agent|agentd|frontend|frontend-php|proxy|server|common|proxy-sqlite|server-mysql|web)[0-9.-]*", addflavor: $1 }
+- { setname: zef,                      name: zef-without-alacryd, addflavor: without-alacryd }
+- { setname: zenity,                   name: zenity-gtk2 }
+- { setname: zenxml,                   name: libzenxml }
+- { setname: zero-ballistics,          name: zeroballistics }
+- { setname: zeronet,                  name: zeronet-git, ignore: true }
+- { setname: zerotier-one,             name: [zerotier,zerotier-one-with-controller] }
+- { setname: zetacoin,                 name: zetacoin-nox11, addflavor: nox11 }
+- { setname: zim,                      name: zim-wiki }
+- { setname: zint,                     name: [zint-gui,zint-qt] }
+- { setname: zlib,                     name: zlib-static, addflavor: static }
+- { setname: zoneminder,               name: zoneminder-h264, ignore: true }
+- { setname: zookeeper,                name: zookeeper-bin }
+- { setname: zookeeper,                name: zookeeper-c, family: gentoo }
+- { setname: zsh,                      name: zsh-doc, addflavor: doc }
+- { setname: zstd,                     name: [zstandard,zstd-static] }
+- { setname: zstd,                     name: libzstd }
+- { setname: zthread,                  name: zthreads }
+- { setname: zziplib,                  name: libzzip }

@@ -1,0 +1,234 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: backblaze-b2,             name: b2-tools }
+- { setname: backintime,               name: [backintime-cli,backintime-common,backintime-qt4], addflavor: true }
+- { setname: backuppc,                 name: backuppc-devel, ignore: true }
+- { setname: backuppc,                 name: backuppc4 }
+- { setname: bakery,                   name: bakery2.6 }
+- { setname: balsa,                    name: balsa-gtk2 }
+- { setname: barbie-seahorse-adventures, name: seahorse-adventures }
+- { setname: barcode,                  name: gnu-barcode }
+- { setname: base,                     name: acidbase }
+- { setname: bash,                     name: bash-interactive, addflavor: interactive }
+- { setname: bats,                     name: bash-bats }
+- { setname: bcel,                     name: bcel5_3 }
+- { setname: beast,                    name: beastbse }
+- { setname: beneath-a-steel-sky,      name: bass, family: [freebsd,gentoo,openbsd,arch,opensuse] }
+- { setname: beneath-a-steel-sky,      name: beneath-a-steel-sky-cd }
+- { setname: beneath-a-steel-sky,      name: scummvm-bass }
+- { setname: bibtool,                  name: bib-tool }
+- { setname: bicyclerepair,            name: bicyclerepair-py27 }
+- { setname: billardgl,                name: billard-gl }
+- { setname: bird,                     name: [bird-v6,bird6] }
+- { setname: bison,                    name: [bison-doc,bison-runtime], addflavor: true }
+- { setname: bison,                    name: bison27 }
+- { setname: bisonc++,                 name: bisoncpp }
+- { setname: blackshades,              name: blackshades-svn, ignore: true }
+- { setname: blackshadeselite,         name: blackshades-elite-svn, ignore: true }
+- { setname: blas,                     name: [blas-reference,blas-docs], addflavor: docs }
+- { setname: blas,                     name: blas-tmg }
+- { setname: blasphemer,               name: blasphemer-wad }
+- { setname: blender,                  name: blender-binaries }
+- { setname: blitz++,                  name: blitz, family: [gentoo,fedora,opensuse] } # XXX: recheck
+- { setname: blobby,                   name: [blobby2,blobby-volley] }
+- { setname: blockout,                 name: [blockout2,blockoutii] }
+- { setname: bluedevil,                name: bluedevil5 }
+- { setname: bmp,                      name: bmp-esound, addflavor: esound }
+- { setname: bnd,                      name: bnd1.50 }
+- { setname: boa-constructor,          name: boaconstructor }
+- { setname: bochs,                    name: bochs-gdb, addflavor: gdb }
+- { setname: boehm-gc,                 name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect,boehm_garbage_collector,bdw-gc,gc] }
+- { setname: boehm-gc,                 name: libgc }
+- { setname: boinc,                    name: [boinc-client,boinc-nox] } # or to boinc-client?
+- { setname: bombono-dvd,              name: bombono }
+- { setname: boost,                    namepat: "boost-mpi-source[0-9-.]+", addflavor: boost-mpi }
+- { setname: boost,                    namepat: "boost[0-9_.]+" }
+- { setname: botan,                    namepat: "botan[0-9.]+" }
+- { setname: botan,                    namepat: "libbotan[0-9.]*" }
+- { setname: bouncycastle,             name: bouncycastle15 }
+- { setname: bpython,                  name: [bpython-py27,bpython2] }
+- { setname: brasero,                  name: [brasero2,brasero-dvdcssfix] }
+- { setname: breakpad,                 name: google-breakpad }
+- { setname: brisk-menu,               name: mate-brisk-menu }
+- { setname: bsh,                      name: bsh2 }
+- { setname: btanks,                   name: battle-tanks }
+- { setname: btanks,                   name: btanks-data, addflavor: data }
+- { setname: bubbros,                  name: bub-n-bros, family: gentoo } # XXX: recheck
+- { setname: bugs-everywhere,          name: bugseverywhere }
+- { setname: bugzilla,                 name: bugzilla50 }
+- { setname: bullet,                   name: bullet-docs, addflavor: docs }
+- { setname: bullet,                   name: bullet3 }
+- { setname: bullet,                   name: libbullet }
+- { setname: byaccj,                   name: byacc-j, family: debuntu }
+- { setname: bzflag,                   name: bzflag-server, addflavor: server }
+- { setname: bzr,                      name: bazaar }
+- { setname: bzrtools,                 name: bzr-tools }
+
+- setname: bareos
+  name:
+    - bareos-bat
+    - bareos-bconsole
+    - bareos-client
+    - bareos-client-static
+    - bareos-common
+    - bareos-database-common
+    - bareos-database-mysql
+    - bareos-database-postgresql
+    - bareos-database-sqlite3
+    - bareos-database-tools
+    - bareos-devel
+    - bareos-director
+    - bareos-director-python-plugin
+    - bareos-docs
+    - bareos-filedaemon
+    - bareos-filedaemon-python-plugin
+    - bareos-server
+    - bareos-storage
+    - bareos-storage-fifo
+    - bareos-storage-python-plugin
+    - bareos-storage-tape
+    - bareos-tools
+    - bareos-traymonitor
+    - bareos-webui
+  addflavor: true
+
+- setname: boost
+  name:
+    - boost-all
+    - boost-libs
+    - boost-headers
+    - boost-python-libs
+    - boost-python
+    - boost-mpi
+    - boost-bcp
+    - boost-libraries
+    - boost-python3-libs
+    - boost-63-compat
+    - boost-docs
+    - boost-jam
+  addflavor: true
+
+- setname: boost
+  name:
+    - boost-algorithm
+    - boost-align
+    - boost-any
+    - boost-array
+    - boost-asio
+    - boost-assert
+    - boost-assign
+    - boost-atomic
+    - boost-beast
+    - boost-bimap
+    - boost-bind
+    - boost-callable-traits
+    - boost-chrono
+    - boost-circular-buffer
+    - boost-compatibility
+    - boost-compute
+    - boost-concept-check
+    - boost-config
+    - boost-container
+    - boost-contextboost-conversion
+    - boost-convert
+    - boost-core
+    - boost-coroutine
+    - boost-coroutine2
+    - boost-crc
+    - boost-date-time
+    - boost-detail
+    - boost-disjoint-sets
+    - boost-dll
+    - boost-dynamic-bitset
+    - boost-endian
+    - boost-exception
+    - boost-fiber
+    - boost-filesystem
+    - boost-flyweightboost-foreach
+    - boost-format
+    - boost-function
+    - boost-function-typesboost-functional
+    - boost-fusion
+    - boost-geometry
+    - boost-gil
+    - boost-graph
+    - boost-graph-parallel
+    - boost-hana
+    - boost-heap
+    - boost-icl
+    - boost-integer
+    - boost-interprocess
+    - boost-interval
+    - boost-intrusive
+    - boost-io
+    - boost-iostreams
+    - boost-iterator
+    - boost-lambda
+    - boost-lexical-cast
+    - boost-local-function
+    - boost-locale
+    - boost-lockfree
+    - boost-log
+    - boost-logic
+    - boost-math
+    - boost-metaparse
+    - boost-moveboost-mp11
+    - boost-mpl
+    - boost-msm
+    - boost-multi-array
+    - boost-multi-index
+    - boost-multiprecision
+    - boost-numeric-conversion
+    - boost-odeint
+    - boost-optional
+    - boost-parameter
+    - boost-phoenix
+    - boost-poly-collection
+    - boost-polygon
+    - boost-pool
+    - boost-predef
+    - boost-preprocessor
+    - boost-process
+    - boost-program-options
+    - boost-property-map
+    - boost-property-treeboost-proto
+    - boost-ptr-container
+    - boost-qvm
+    - boost-random
+    - boost-range
+    - boost-ratio
+    - boost-rational
+    - boost-regex
+    - boost-scope-exit
+    - boost-serialization
+    - boost-signals
+    - boost-signals2
+    - boost-smart-ptr
+    - boost-sort
+    - boost-spirit
+    - boost-stacktrace
+    - boost-statechart
+    - boost-static-assert
+    - boost-system
+    - boost-test
+    - boost-thread
+    - boost-throw-exception
+    - boost-timer
+    - boost-tokenizer
+    - boost-tti
+    - boost-tuple
+    - boost-type-erasure
+    - boost-type-index
+    - boost-type-traits
+    - boost-typeof
+    - boost-ublas
+    - boost-units
+    - boost-unordered
+    - boost-utility
+    - boost-uuid
+    - boost-variant
+    - boost-vmd
+    - boost-wave
+    - boost-winapi
+    - boost-xpressive
+  addflavor: true

@@ -1,0 +1,21 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: v4l2loopback,             name: v4l2loopback-dkms }
+- { setname: valyriatear,              name: valyria-tear }
+- { setname: varnish,                  name: [varnish4,varnish5] }
+- { setname: vdr,                      name: vdr-devel, ignore: true }
+- { setname: vert.x,                   name: vertx }
+- { setname: vid.stab,                 name: [libvidstab,vid-stab,vidstab] }
+- { setname: video4linux,              name: [libv4l,v4l-utils,v4l_compat] }
+- { setname: vim,                      name: [gvim,gvim-gtk2], addflavor: true }
+- { setname: vim,                      name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw,vim-gvim], addflavor: true }
+- { setname: vim-spell,                namepat: "vim-spell-.*", family: [openbsd,gentoo,arch] }
+- { setname: vint,                     name: vim-vint }
+- { setname: virtualbox-$1,            namepat: "virtualbox-ose-(.*)", family: freebsd }
+- { setname: virtuoso,                 name: [virtuoso-6,virtuoso-7,virtuoso-opensource,virtuoso-ose,virtuoso6] }
+- { setname: vlc,                      name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], ignore: true }
+- { setname: vlc,                      name: vlc-nightly, ignore: true }
+- { setname: vscode,                   name: [visual-studio-code,visual-studio-code-oss,visualstudiocode] }
+- { setname: vscode,                   name: code, family: sisyphus } # XXX: problem!
+- { setname: vscode,                   name: visual-studio-code-insiders, ignore: true }
+- { setname: vsftpd,                   name: [vsftpd-ssl,vsftpd-ext] }

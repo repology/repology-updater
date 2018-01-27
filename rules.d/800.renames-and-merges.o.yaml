@@ -1,0 +1,48 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: ogre,                     name: ogre-1.9 }
+- { setname: ogre,                     name: ogre3d }
+- { setname: open-vm-tools,            name: [open-vm-tools-dkms,open-vm-tools-lts-trusty,open-vm-tools-nox11], addflavor: true }
+- { setname: openal,                   name: [openal-static,openal-examples], addflavor: true }
+- { setname: openbabel,                name: open-babel }
+- { setname: openblas,                 name: [openblas-lapack,openblas-lapack-ilp64] }
+- { setname: opencollada,              name: libopencollada }
+- { setname: opencv,                   name: opencv2 }
+- { setname: opendkim,                 name: libopendkim }
+- { setname: openjade,                 name: jade, family: aosc }
+- { setname: openjpeg,                 name: [openjp2,libopenjpeg2.0] }
+- { setname: openmesh,                 name: open-mesh }
+- { setname: openmpi,                  name: open-mpi }
+- { setname: openocd,                  name: open-ocd }
+- { setname: openoffice,               name: apache-openoffice }
+- { setname: openoffice,               name: apache-openoffice-devel, ignore: true }
+- { setname: openoffice,               name: openoffice-bin, addflavor: bin }
+- { setname: openoffice,               name: openoffice.org }
+- { setname: openshot,                 name: openshot-qt, addflavor: qt }
+- { setname: opensmtpd-extras,         namepat: "opensmtpd-extras-.*", family: [freebsd,openbsd] }
+- { setname: openssh,                  name: openssh-portable }
+- { setname: openssh,                  name: ssh-copy-id, addflavor: ssh-copy-id }
+- { setname: openttd-$0,               namepat: "open(?:gfx|sfx)" }
+- { setname: openttd-$0,               namepat: openmsx, wwwpart: openttd }
+- { setname: openttd-open$1,           namepat: "openttd[-_](gfx|sfx|msx)" }
+- { setname: openttd-opengfx,          name: openttd-opengfx-snapshot, ignore: true }
+- { setname: opentyrian,               name: open-tyrian }
+- { setname: openvpn,                  name: [openvpn-mbedtls,openvpn-polarssl,openvpn2,openvpn23] }
+- { setname: openzwave,                name: open-zwave }
+- { setname: opus,                     name: libopus }
+- { setname: opusfile,                 name: libopusfile }
+
+- setname: openssh
+  name:
+    - gsi-openssh
+    - openssh-gssapi
+    - openssh-knock
+    - openssh-krb5
+    - openssh-multiple-bindaddress
+    - openssh-secp256k1
+    - openssh-selinux
+    - openssh-ssh1
+    - openssh-ubuntu
+    - openssh-with-hpn
+    - openssh-with-kerberos
+  addflavor: true

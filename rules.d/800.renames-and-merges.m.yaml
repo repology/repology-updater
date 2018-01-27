@@ -1,0 +1,73 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: m.a.r.s.,                 name: [marsshooter,mars-shooter] }
+- { setname: m17n-db,                  name: libm17n-db }
+- { setname: magit,                    name: [magit-emacs25,emacs-magit] }
+- { setname: magit,                    name: [magit-svn,emacs-magit-git], ignore: true }
+- { setname: mandoc,                   name: mdocml } # mdocml is an old name (schwarze@openbsd.org)
+- { setname: manpages,                 name: [man-pages,linux-man-pages,linux-manpages] }
+- { setname: mariadb-mytop,            name: mytop, family: arch }
+- { setname: maven-shell,              name: mvnsh }
+- { setname: mc,                       name: [mc-contrib,midnight-commander,midnightcommander] }
+- { setname: mc,                       name: mc46 }
+- { setname: mcron,                    name: mcron2 }
+- { setname: md5deep,                  name: hashdeep }
+- { setname: mediainfo,                name: media-info }
+- { setname: mednaffe,                 name: mednaffe-gtk2 }
+- { setname: meld,                     name: meld-dev, ignore: true }
+- { setname: meld,                     name: meld-gtk2 }
+- { setname: memtest86+,               name: memtestplus }
+- { setname: mesa,                     namepat: "mesa-lts-.*" }
+- { setname: mesa-demos,               name: [mesa-demo,mesademos] }
+- { setname: mgltools,                 namepat: "mgltools-.*", family: debuntu }
+- { setname: minixml,                  name: libmxml }
+- { setname: minpack,                  name: libcminpack }
+- { setname: mirrormagic,              name: mirrormagic-sdl }
+- { setname: moc,                      name: mocp }
+- { setname: moon-lander,              name: moonlander, family: [freebsd,openbsd] }
+- { setname: mozilla-dicts,            namepat: "mozilla-dicts-.*", family: openbsd }
+- { setname: mpc,                      name: libmpc3 }
+- { setname: mpc,                      name: mpd-mpc }
+- { setname: mpd,                      name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], addflavor: true }
+- { setname: mpfr,                     name: [mpfr3,mpfr4,libmpfr] }
+- { setname: ms-gsl,                   name: [guidelines-support-library,microsoft-gsl,microsoft_gsl] }
+- { setname: msgpack,                  name: [msgpack-c,msgpack_c_cpp,libmsgpack,msgpack1] } # c/cpp by default
+- { setname: mstflint,                 name: mstflint4 }
+- { setname: multivalent,              name: [multivalent-tool-pdf,multivalent-pdf-tools] }
+- { setname: munin,                    namepat: munin-(master|node|server|common), addflavor: $1 }
+- { setname: mutt,                     name: [mutt-lite,mutt-devel,mutt14,mutt14-lite,mutt-patched,mutt-slang,mutt-kiss] }
+- { setname: mygui,                    namepat: "mygui-(docs|dummy|gl|opengl|ogre[0-9._-]*)", addflavor: $1 }
+- { setname: mysql-connector-c++,      name: libmysqlconnectorcpp }
+- { setname: mysql-connector-c++,      namepat: "mysql[0-9]*-connector-cpp" }
+
+- setname: mesa
+  name:
+    - libosmesa
+    - libva-mesa-driver
+    - libva-mesa-driver-noglvnd
+    - libva-mesa-driver-vanilla
+    - mesa+dri1
+    - mesa-dri
+    - mesa-dri1-drivers
+    - mesa-headers
+    - mesa-hybris
+    - mesa-hybris-libgl
+    - mesa-hybris-wayland-egl
+    - mesa-libgl-noglvnd
+    - mesa-libgl-vanilla
+    - mesa-libs
+    - mesa-noglu
+    - mesa-noglvnd
+    - mesa-nowayland
+    - mesa-progs
+    - mesa-utils
+    - mesa-vanilla
+    - mesa-vdpau
+    - mesa-vdpau-noglvnd
+    - mesa-vdpau-vanilla
+    - mesa3d
+    - mesalib
+    - mesalib7
+    - opencl-mesa
+    - opencl-mesa-noglvnd
+    - opencl-mesa-vanilla

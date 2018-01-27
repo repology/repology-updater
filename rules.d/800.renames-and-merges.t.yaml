@@ -1,0 +1,39 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: tali,                     name: gnome-games-tali }
+- { setname: talkfilters,              name: talk-filters }
+- { setname: talloc,                   name: libtalloc }
+- { setname: talloc,                   name: talloc-man, addflavor: man }
+- { setname: talloc,                   name: talloc-static, addflavor: static }
+- { setname: tbb,                      name: [intel-tbb,libtbb] }
+- { setname: tdb,                      name: libtdb }
+- { setname: telegram-desktop,         name: [telegram-desktop-bin,telegram-desktop-systemqt,telegram-desktop-systemqt-emojione,telegram-desktop-systemqt-notoemoji] }
+- { setname: telegram-desktop,         name: [telegram-desktop-bin-dev,telegram-desktop-dev], ignore: true }
+- { setname: telepathy-farstream,      name: [libtelepathy-farstream,telepathy-farstream-0.4] }
+- { setname: terminal_markdown_viewer, name: mdv }
+- { setname: tesseract-ocr-data,       namepat: "tesseract(?:-ocr|-data)*-[a-z]{3}(?:-.*)?" }
+- { setname: tetrinetx,                name: [tetrinet-x,tetrinet-server] }
+- { setname: texlive-documentation,    namepat: "texlive-documentation-.*", family: gentoo }
+- { setname: tidy,                     name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy] }
+- { setname: tiff,                     name: [libtiff,libtiff3,libtiff4] }
+- { setname: tigervnc,                 name: [tiger-vnc,tigervnc-viewer] }
+- { setname: tigervnc,                 name: tigervnc-devel, ignore: true }
+- { setname: tiled,                    name: [tiled-java,tiled-qt] }
+- { setname: time,                     name: [gnu-time,gtime] }
+- { setname: timidity++,               name: [timidity++-emacs,timidity++-gtk,timidity++-motif,timidity++-slang,timidity++-tcltk,timidity++-xaw,timidity++-xskin] }
+- { setname: timidity++,               name: timidity, verpat: "2\\..*" }
+- { setname: tint,                     name: tint-tetris }
+- { setname: tintin++,                 name: [tintin,tintinxx] }
+- { setname: tokyocabinet,             name: tokyo-cabinet }
+- { setname: tokyodystopia,            name: tokyo-dystopia }
+- { setname: tomahawk,                 name: tomahawk-player }
+- { setname: tomahawk,                 name: tomahawk-qt5, addflavor: qt5 }
+- { setname: tome,                     name: [t-engine4,tales-of-majeyal,tome4,tome4-data,tome-ah] }
+- { setname: tome,                     name: tome4-beta, ignore: true }
+- { setname: tomee,                    name: [tomee-jax-rs,tomee-plume,tomee-plus,tomee-webprofile] }
+- { setname: tor,                      name: tor-unstable, devel: true }
+- { setname: tre,                      name: libtre } # XXX: reverse?
+- { setname: tremor,                   name: libtremor }
+- { setname: trigger-rally,            name: trigger, family: gentoo }
+- { setname: tripwire,                 name: [tripwire-131,tripwire12] }
+- { setname: twolame,                  name: two-lame }

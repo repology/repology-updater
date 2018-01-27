@@ -1,0 +1,34 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: x264,                     name: [libx264,lib264-142] }
+- { setname: x264,                     name: libx264-10bit, addflavor: 10bit }
+- { setname: x264,                     name: libx264-all, addflavor: all }
+- { setname: x264,                     name: libx264-devel, ignore: true }
+- { setname: x264,                     name: x264-devel, ignore: true }
+- { setname: x2vnc,                    name: x2vnc-no-xinerama, addflavor: true }
+- { setname: xa,                       name: xa65 }
+- { setname: xalan-c,                  name: [xalanc,xalan-c++] }
+- { setname: xar,                      name: xar-mackyle }
+- { setname: xarchiver,                name: [xarchiver-assume-name,xarchiver-gtk2], addflavor: true }
+- { setname: xarchiver,                name: xfce4-xarchiver }
+- { setname: xdelta,                   name: [xdelta1,xdelta3] }
+- { setname: xdg-utils,                name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock] }
+- { setname: xfce4-dict,               name: xfce4-dict-plugin, family: freebsd }
+- { setname: xfconf,                   name: [xfce4-conf,xfce4-config,xfconf4.12,xfce4-conf,xfce4-config] }
+- { setname: xfconf,                   name: libxfconf, addflavor: lib }
+- { setname: xfconf,                   name: xfconf-devel, ignore: true }
+- { setname: xfconf,                   name: xfconf-gtk3, addflavor: gtk3 }
+- { setname: xfdesktop,                name: [xfdesktop4,xfce4-desktop] }
+- { setname: xfdesktop,                name: xfdesktop-devel, ignore: true }
+- { setname: xfdesktop,                name: xfdesktop-gtk3, addflavor: gtk3 }
+- { setname: xine-lib,                 name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2] }
+- { setname: xine-ui,                  name: [xine,xine-ui2] }
+- { setname: xmbmon,                   name: mbmon }
+- { setname: xmltooling,               name: xmltooling-c }
+- { setname: xmobar,                   name: [xmobar-alsa,xmobar-volume] }
+- { setname: xmoto,                    name: x-moto }
+- { setname: xonotic,                  name: xonotic-data, addflavor: true }
+- { setname: xpilot-ng,                namepat: xpilot-ng-(client|server), addflavor: $1 }
+- { setname: xrdp,                     name: xrdp-devel, ignore: true }
+- { setname: xsel,                     name: xsel-conrad }
+- { setname: xvidcore,                 name: [xvid,libxvid] }

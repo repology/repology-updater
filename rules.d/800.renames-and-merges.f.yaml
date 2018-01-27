@@ -1,0 +1,75 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: faad2,                    name: faad }
+- { setname: facter,                   name: facter2 }
+- { setname: factor,                   name: factor-lang }
+- { setname: fail2ban,                 name: fail2ban6 }
+- { setname: fail2ban,                 name: "python:fail2ban" }
+- { setname: falcons-eye,              name: falconseye }
+- { setname: farstream,                namepat: "farstream[0-9.-]+" }
+- { setname: fasta,                    name: fasta3 }
+- { setname: fastd,                    name: fastd-devel, ignore: true }
+- { setname: fcitx,                    name: [fcitx-gtk2,fcitx-gtk3] }
+- { setname: fdk-aac,                  name: libfdk-aac }
+- { setname: fdkaac,                   name: fdk-aac-encoder }
+- { setname: fetch-crl,                name: fetch-crl3 }
+- { setname: fife,                     name: [fifengine,"python:fife"] }
+- { setname: fillets-ng,               name: fish-fillets }
+- { setname: fillets-ng,               name: fish-fillets-ng }
+- { setname: firebase-cli,             name: firebase-tools }
+- { setname: firefox-beta-i18n,        namepat: "firefox-beta-i18n-.*" }
+- { setname: firefox-esr-i18n,         namepat: "firefox-esr-i18n-.*" }
+- { setname: firefox-i18n,             namepat: "firefox-(i18n|l10n)-.*" }
+- { setname: firefox-kde-i18n,         namepat: "firefox-kde-i18n-.*" }
+- { setname: five-or-more,             name: gnome-games-five-or-more }
+- { setname: flare,                    name: [flare-engine,flare-game] } # these are actually distinct packages, but too many repos merge them together
+- { setname: fleet,                    name: fleetctl }
+- { setname: flight-of-the-amazon-queen, name: fotaq }
+- { setname: flight-of-the-amazon-queen, name: scummvm-fotaq }
+- { setname: flim,                     name: [flim-xemacs,flim-emacs25,emacs-flim] }
+- { setname: flipit,                   name: flipit-x10 }
+- { setname: flite,                    name: [flite1,flite-fpic] }
+- { setname: florence,                 name: florence05 }
+- { setname: florist,                  name: florist-gpl }
+- { setname: flow-tools,               name: flow-tools-ng }
+- { setname: flrig,                    name: flrig-docs, addflavor: true }
+- { setname: fltk,                     name: [fltk-docs,fltk-editor,fltk-games], addflavor: true }
+- { setname: fltk,                     name: fltk11 }
+- { setname: fltk,                     namepat: "fltk[0-9.]+", family: debuntu }
+- { setname: fluidsynth,               name: fluid-synth }
+- { setname: flume,                    name: apache-flume-ng }
+- { setname: fluxbox,                  name: [fluxbox-wm,fluxbox-noslit] }
+- { setname: flwm,                     name: flwm-tc }
+- { setname: fmt,                      name: [fmtlib,libfmt,cppformat] } # cppformat is the former name, see http://fmtlib.net
+- { setname: fofix,                    name: fofix-dfsg }
+- { setname: foldingathome,            name: foldingathome-noroot }
+- { setname: folly,                    name: fb-folly }
+- { setname: fomp,                     name: [fomp-lv2,lv2-fomp-plugins] }
+- { setname: fon-flash,                name: fon-flash-cli }
+- { setname: foo2js,                   name: foo2zjs-nightly, ignore: true }
+- { setname: foobillard++,             name: foobillardplus }
+- { setname: fop,                      name: [apache-fop,fop2,xmlgraphics-fop] }
+- { setname: fossology,                name: fossology-nomos-standalone } # part of fossology
+- { setname: four-in-a-row,            name: gnome-games-four-in-a-row }
+- { setname: foxyproxy,                name: xpi-foxyproxy, family: freebsd }
+- { setname: fpc,                      name: [fpc-source,fpc-src] } # part of fossology
+- { setname: fpc-modules,              namepat: "fpc-.*", family: freebsd }
+- { setname: fping,                    name: [fping3,fping6] }
+- { setname: free42,                   name: free42-nologo, family: debuntu }
+- { setname: freeciv,                  name: [freeciv-nox11,freeciv-gtk,freeciv-sdl] }
+- { setname: freeciv,                  namepat: "freeciv-(?:client|server|share)", family: [pkgsrc,openbsd] }
+- { setname: freedink,                 name: freedink-engine }
+- { setname: freedoom,                 name: [doom-freedoom,freedoom-freedm] }
+- { setname: freefoom,                 name: [freedoom1,freedoom2] }
+- { setname: freeglut,                 name: libfreeglut }
+- { setname: freemedforms,             name: freemedforms-project }
+- { setname: freepats,                 name: [timidity-freepats,timidity-patch-freepats] }
+- { setname: freeplane,                name: freeplane-srcbuild }
+- { setname: freeradius,               name: [freeradius-server,freeradius3] }
+- { setname: freetype,                 name: [libfreetype,freetype1,freetype2] }
+- { setname: freetype-infinality,      name: [freetype2-infinality,libfreetype-infinality] }
+- { setname: friently-find,            name: ffind }
+- { setname: frozen-bubble,            name: frozenbubble2 }
+- { setname: fsv,                      name: fsv2 }
+- { setname: "fusefs:s3fs",            name: [s3fs,s3fs-fuse] }
+- { setname: fuzzylite,                name: fuzzylite5 }

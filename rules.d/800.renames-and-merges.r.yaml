@@ -1,0 +1,22 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: rabbitmq-server,          name: rabbitmq }
+- { setname: racket,                   name: [minimal-racket,racket-minimal], addflavor: minimal }
+- { setname: racket,                   name: racket-docs, addflavor: docs }
+- { setname: rawtherapee,              name: rawtherapee-gtk2 }
+- { setname: rawtherapee,              name: rawtherapee-unstable, ignore: true }
+- { setname: redeclipse,               name: red-eclipse }
+- { setname: redeclipse,               name: redeclipse-data, addflavor: data }
+- { setname: remmina,                  name: [remmina-appindicator,remmina-gtk2,remmina-plugin-gnome,remmina-plugin-nx,remmina-plugin-rdp,remmina-plugin-telepathy,remmina-plugin-vnc,remmina-plugin-xdmcp,remmina-plugins,remmina-xfce], addflavor: true }
+- { setname: renpy,                    name: [renpy-demos,renpy-sdk], addflavor: true }
+- { setname: renpy,                    name: renpy6 }
+- { setname: reposurgeon,              name: cyreposurgeon }
+- { setname: ringojs,                  name: ringo }
+- { setname: rl,                       name: randomize-lines } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
+- { setname: rlog,                     name: librlog }
+- { setname: roxterm,                  name: [rox-term,roxterm-gtk2] }
+- { setname: rrdtool,                  name: rrdtool12 }
+- { setname: rss2email,                name: r2e }
+- { setname: rtaudio,                  name: rt-audio }
+- { setname: rtorrent,                 name: [rtorrent-cdl,rtorrent-color,rtorrent-ipv6,rtorrent-vi-color], addflavor: true }
+- { setname: rtv,                      name: rtv-py36, addflavor: py36 }

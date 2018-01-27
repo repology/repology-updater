@@ -1,7 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # FreeBSD: localized categories (XXX: fix this, contains useful packages)
-- { namepat: "([a-z]{2,3}|de-alt|pt_br|pt_pt)-aspell", setname: "aspell-$1", family: [ freebsd ] }
+- { namepat: "([a-z]{2}|ast|csb|grc|hil|hsb|nds|tet|de-alt|pt_br|pt_pt)-aspell", setname: "aspell-$1", family: [ freebsd ] }
 - { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-.*", remove: yes, family: [ freebsd ] }
 
 # FreeBSD: linux binary ports

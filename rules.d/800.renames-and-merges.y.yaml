@@ -1,0 +1,9 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: yabause,                  name: [yabause-gtk,yabause-qt,yabause-qt5], addflavor: true }
+- { setname: yajl,                     name: [libyajl,libyajl1,libyajl2] }
+- { setname: yaze-ag,                  name: yaze }
+- { setname: yofrankie,                name: yofrankie-bge }
+- { setname: youtube-dl-gui,           name: youtube-dlg }
+- { setname: ytnef,                    name: libytnef } # see https://github.com/Yeraze/ytnef/blob/master/ChangeLog
+- { setname: yuicompressor,            name: yui-compressor }

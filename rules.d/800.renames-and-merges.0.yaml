@@ -1,0 +1,9 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: 0ad,                      name: zeroad }
+- { setname: 2048-cli,                 name: "2048", family: freebsd } # differentiate from 2048-qt
+- { setname: 2048.c,                   name: c2048 }
+- { setname: 2ping,                    name: twoping }
+- { setname: 3dc,                      name: 3dchess, family: debuntu }
+- { setname: 4store,                   name: fourstore }
+- { setname: 7kaa,                     name: seven-kingdoms }

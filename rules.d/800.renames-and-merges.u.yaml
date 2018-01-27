@@ -1,0 +1,17 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: uade,                     name: [uade123,uade2] }
+- { setname: uchardet,                 name: libuchardet }
+- { setname: ufoai,                    name: [ufoai-data,ufoai-maps,ufoai-music], addflavor: true }
+- { setname: ufoai,                    name: ufo-ai, family: gentoo }
+- { setname: ultimatestunts,           name: ultimate-stunts }
+- { setname: unace,                    name: [unace-bin,unace-nonfree] }
+- { setname: unarr,                    name: libunarr }
+- { setname: uncrustify,               name: uncrustify0.60 }
+- { setname: units,                    name: [gnu-units,gunits] }
+- { setname: unrar,                    name: [libunrar,libunrar5] }
+- { setname: uqm,                      name: [uqm_3domusic,uqm-3domusic,uqm-content,uqm_voice,uqm-voice], addflavor: true }
+- { setname: util-linux,               name: [libutil-linux-aarch64,libutil-linux-nosystemd,libutil-linux-nosystemd-debug,libutil-linux-selinux], addflavor: true }
+- { setname: util-linux,               name: [util-linux-aes,util-linux-minimal,util-linux-nosystemd,util-linux-nosystemd-debug,util-linux-selinux,util-linux-systemd], addflavor: true }
+- { setname: util-linux,               name: getopt, family: openwrt }
+- { setname: uucp,                     name: freebsd-uucp, family: freebsd }

@@ -1,0 +1,42 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: dash.el,                  name: dash-el }
+- { setname: dbench4,                  name: dbench4 }
+- { setname: dbmail,                   name: dbmail22 }
+- { setname: dboxfe,                   name: dboxfe2 }
+- { setname: dbus-c++,                 name: dbus-cplusplus }
+- { setname: dcc,                      name: dcc-dccd }
+- { setname: dconf,                    name: d-conf }
+- { setname: dconf-editor,             name: dconf-editor-3.20 }
+- { setname: ddclient,                 name: ddclient-ipv6 }
+- { setname: deadbeef,                 name: deadbeef-with-plugins }
+- { setname: deal.ii,                  name: [dealii,dealii-openmpi,deal-ii] }
+- { setname: deis,                     name: [deis-client,deisctl] }
+- { setname: dejagnu,                  name: deja-gnu }
+- { setname: devede,                   name: devedeng }
+- { setname: dgen-sdl,                 name: dgen }
+- { setname: dhewm3,                   name: iodoom3-dhewm3 }
+- { setname: dino,                     name: dino-unstable, ignore: true }
+- { setname: discord,                  name: discord-bin }
+- { setname: divide-and-succeed,       name: divideandsucceed }
+- { setname: djview4,                  name: [djview,djview-qt4,djview4,djvulibre-djview4] } # should be merged with djvulibre or not?
+- { setname: djvulibre,                name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools,djvu] }
+- { setname: dkms,                     name: dkms-sorted, addflavor: sorted }
+- { setname: docbook-dsssl,            name: [docbook-dsssl-doc,docbook-style-dsssl-doc] }
+- { setname: docbook-dsssl,            name: [docbook-dsssl-stylesheets,docbook-style-dsssl] }
+- { setname: docker,                   name: [docker-io,docker.io] }
+- { setname: docker,                   name: docker-git-x86, ignore: true } # ignore version just for the cause, because of suspicious name
+- { setname: dogecoin,                 name: [dogecoind,dogecoin-qt,dogecoin-daemon] }
+- { setname: dosbox,                   name: [dosbox-sdl2,dosbox-debug,dosbox-multilib-patched] }
+- { setname: doublecmd,                name: [doublecmd-gtk2,doublecmd-qt,doublecmd-qt4,doublecmd-qt5] }
+- { setname: doxygen,                  name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], addflavor: true }
+- { setname: dr14tmeter,               name: dr14_tmeter }
+- { setname: drbl,                     name: drbl-experimental, ignore: true }
+- { setname: drpython,                 name: drpython-py27 }
+- { setname: dsniff,                   name: dsniff-nox11 }
+- { setname: dspam,                    name: [dspam-mysql,dspam-pgsql,dspam-web] }
+- { setname: dungeon-crawl,            name: dungeoncrawl }
+- { setname: dwarf-fortress,           name: dwarffortress }
+- { setname: dwarf-fortress,           name: linux-dwarffortress }
+- { setname: dynamips,                 name: dynamips-community, family: freebsd }
+- { setname: dzen,                     name: dzen2 }

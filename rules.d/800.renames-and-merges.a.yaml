@@ -1,0 +1,146 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: a-a-p,                    name: aap }
+- { setname: a52dec,                   name: liba52, addflavor: true }
+- { setname: abbaye-des-morts,         name: abbaye }
+- { setname: abbaye-des-morts,         name: abbayedesmorts }
+- { setname: abbaye-des-morts,         name: abbayedesmorts-gpl }
+- { setname: abiword,                  name: [abiword-x11,abiword-gtk2,abiword-minimal] }
+- { setname: abuse,                    name: abuse-free, addflavor: free }
+- { setname: abuse,                    name: abuse-sdl }
+- { setname: abuse,                    name: abuse_sdl }
+- { setname: accounts-qt,              name: accounts-qt5, family: sisyphus }
+- { setname: ace-of-penguins,          name: ace, category: games-board, family: gentoo }
+- { setname: ace-of-penguins,          name: ace, family: [openbsd,slackbuilds] }
+- { setname: acetoneiso,               name: acetoneiso2, family: [arch,sisyphus] }
+- { setname: acetoneiso6,              name: acetoneiso, verpat: "6.*", family: fedora }
+- { setname: ack,                      name: ack-grep, family: debuntu }
+- { setname: acpica,                   namepat: "acpica-(?:tools|unix|utils)" }
+- { setname: acroread,                 name: [adobereader,adobe-reader] }
+- { setname: acroread,                 namepat: "acroread[0-9.]*" }
+- { setname: acroread-asianfonts,      namepat: "acroread9-.*font.*", family: pkgsrc }
+- { setname: acroread7-asianfonts,     namepat: "acroread7-.*font.*", family: pkgsrc }
+- { setname: actiona,                  name: actionaz, family: chocolatey }
+- { setname: activeio,                 name: activemq-activeio }
+- { setname: adabooch,                 name: [booch95,gnat-booch95] }
+- { setname: adblock-plus,             name: adblockplus-firefox, family: chocolatey }
+- { setname: adobeps,                  name: adobeps-win, family: pkgsrc }
+- { setname: adodb,                    name: adodb5 }
+- { setname: adolc,                    name: adol-c }
+- { setname: adwaita-icon-theme,       name: icon-theme-adwaita }
+- { setname: adwaita-qt,               name: [adwaita-qt4,adwaita-qt5,adwaita-common] }
+- { setname: adzapper,                 name: adzap }
+- { setname: aescrypt,                 name: aescrypt-packetizer }
+- { setname: afay,                     name: aflex-ayacc } # ravenports
+- { setname: afl,                      name: [american-fuzzy-lop,afl-fuzz] }
+- { setname: afterstep,                name: afterstep1 }
+- { setname: agg,                      name: antigraingeometry }
+- { setname: agg,                      name: libagg }
+- { setname: aisleriot,                name: gnome-games-aisleriot }
+- { setname: albatross-gtk-theme,      name: albatross, verpat: "1\\.7.*" }
+- { setname: albatross-gtk-theme,      name: albatross-themes }
+- { setname: alien,                    name: [alien-package-converter,alien_package_converter] }
+- { setname: alienarena,               name: alien-arena }
+- { setname: alienarena-data,          name: alien-arena-data }
+- { setname: allegro,                  namepat: "allegro[0-9.]*(?:-devel)?" }
+- { setname: alogg,                    name: [liballegroogg,allegroogg] }
+- { setname: alsa-lib,                 name: [alsa,libalsa,libalsa2,alsa-lib-noassertion] }
+- { setname: amule,                    name: amule-daemon, addflavor: daemon }
+- { setname: amule,                    name: amule-devel, ignore: true }
+- { setname: amule,                    name: amule-gui, addflavor: gui }
+- { setname: anacron2,                 name: anacron, verpat: "2\\.[4-9].*" } # different project (a fork?)
+- { setname: android-tools,            name: adb, family: openbsd }
+- { setname: android-tools,            namepat: "android-tools-[^-]+", family: [freebsd,pkgsrc] }
+- { setname: android-tools,            namepat: android-platform-system-(core|extras), family: debuntu }
+- { setname: angelscript,              namepat: "angelscript-?[0-9._-]+"}
+- { setname: angular.js,               name: angularjs }
+- { setname: ansible,                  namepat: "ansible[0-9]+" }
+- { setname: ant,                      namepat: "ant[0-9.]+" }
+- { setname: antimicro,                name: antimicro-qt4 }
+- { setname: antlr,                    namepat: "antlr[0-9.]+" }
+- { setname: apache,                   name: [apache-httpd,httpd] }
+- { setname: apache,                   name: apache-html-manual, addflavor: html-manual }
+- { setname: apache,                   name: apache-tools, addflavor: tools }
+- { setname: apache,                   name: htdigest, addflavor: htdigest }
+- { setname: apache,                   namepat: "apache[0-9.]+" }
+- { setname: apcupsd,                  name: [apcupsd-x11,apcupsd-cgi] }
+- { setname: apq,                      name: apq-base } # ravenports
+- { setname: apr,                      namepat: "(?:lib)?apr[0-9._-]*" }
+- { setname: apr-util,                 name: aprutil1 }
+- { setname: apr-util,                 namepat: "(?:lib)?apr-util[0-9._-]*" }
+- { setname: aptana-studio,            name: aptanastudio }
+- { setname: aqbanking,                name: [aqbanking5,aqbanking5-gtk,aqbanking5-svn] }
+- { setname: archipel-agents,          namepat: "archipel-agent-.*", family: debuntu }
+- { setname: archiva,                  name: apache-archiva }
+- { setname: ardour,                   namepat: "ardour[0-9]+" }
+- { setname: arduino,                  namepat: "arduino[0-9._-]+" }
+- { setname: argon2,                   name: libargon2 }
+- { setname: argus,                    name: argus-sasl, family: freebsd }
+- { setname: argyllcms,                name: [argyll,argyll-cms] }
+- { setname: armagetronad,             name: armagetron }
+- { setname: armagetronad,             name: armagetronad-server, addflavor: server } # merge
+- { setname: arpack-ng,                name: [arpack-ng-mpich,arpack-ng-openmpi,libarpack-ng] }
+- { setname: arpack-ng,                name: arpack, verpat: "[34]\\..*" }
+- { setname: arping,                   name: arping2 }
+- { setname: arrow,                    name: apache-arrow }
+- { setname: artefetcher,              namepat: "artefetcher-qt[45]" }
+- { setname: arx-libertatis,           name: arx }
+- { setname: arx-libertatis,           name: arxlibertatis }
+- { setname: asdf,                     name: cl-asdf }
+- { setname: asdf,                     name: uiop, addflavor: true }
+- { setname: asf,                      name: archi-steam-farm }
+- { setname: aspell-$1,                namepat: "aspell-dict-(.*)", family: [guix,nix] }
+- { setname: asterisk,                 namepat: "asterisk[0-9.]+" }
+- { setname: asterisk-core-sounds,     namepat: "asterisk-core-sounds-.*", family: openbsd }
+- { setname: asterisk-extra-sounds,    namepat: "asterisk-extra-sounds-.*", family: openbsd }
+- { setname: astromenace,              name: openastromenace }
+- { setname: astromenace,              name: openastromenace-devel, ignore: true }
+- { setname: astrometry,               name: [astrometrynet,astrometry.net] }
+- { setname: asylum,                   name: sdl-asylum }
+- { setname: atk,                      name: [atk-reference,atk-docs], addflavor: docs }
+- { setname: atk,                      name: atk1.0 }
+- { setname: atk,                      name: libatk }
+- { setname: atkmm,                    name: atk2mm }
+- { setname: atkmm,                    namepat: "(?:lib)?atkmm[0-9._-]*" }
+- { setname: atkmm,                    namepat: "(?:lib)?atkmm[0-9._-]*(-docs)", addflavor: docs }
+- { setname: atlas,                    name: [atlas-with-lapack,atlas-lapack] }
+- { setname: atlas,                    name: libatlas3 }
+- { setname: atlas-c++,                name: [atlas,atlas-devel], category: devel, family: [freebsd,openbsd] } # don't mix with math/atlas
+- { setname: atlas-c++,                name: [atlas-cpp,atlascpp,libatlascpp] }
+- { setname: atomix,                   name: gnome-games-atomix }
+- { setname: atop-freebsd,             name: atop, family: freebsd } # fork
+- { setname: ats$1,                    namepat: "ats2(.*)" }
+- { setname: attica,                   name: [attica-kf5,attica-qt4,attica-qt5,libattica] }
+- { setname: audacious,                name: [audacious-gtk3,audacious-core,audacious-qt5,audacious2,audacious-itself] }
+- { setname: audacious-plugins,        name: audacious2-plugins }
+- { setname: audacity,                 name: audacity-freeworld }
+- { setname: audiofile,                name: libaudiofile }
+- { setname: autoconf,                 namepat: "autoconf[_-]?[0-9.]+" }
+- { setname: automake,                 namepat: "automake[_-]?[0-9.]+" } # do we need splits for this?
+- { setname: automoc,                  namepat: "automoc[0-9]+" }
+- { setname: autotools,                name: autotools-dev, ignore: true }
+- { setname: autotools,                name: autotools-wrappers } # ravenports
+- { setname: avidemux,                 name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4] }
+- { setname: avr8-burn-o-mat,          name: avr8-burn-omat }
+- { setname: avrdude,                  name: arduino-avrdude, addflavor: adruino }
+- { setname: avro-c++,                 name: avro-cpp }
+- { setname: awesome,                  namepat: "awesome[0-9._-]+" }
+- { setname: aws-cw-tools,             name: cloud-watch }
+- { setname: awscli,                   name: aws-cli }
+
+- setname: avahi
+  name:
+    - avahi-app
+    - avahi-autoipd
+    - avahi-glib2
+    - avahi-gtk
+    - avahi-gtk2
+    - avahi-gtk3
+    - avahi-header
+    - avahi-libdns
+    - avahi-mono
+    - avahi-nosystemd
+    - avahi-qt4
+    - avahi-sharp
+    - avahi-ui
+  addflavor: true

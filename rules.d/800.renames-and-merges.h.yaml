@@ -1,0 +1,14 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: hadoop,                   name: hadoop2 }
+- { setname: hashcat,                  name: hashcat-legacy }
+- { setname: haxe,                     name: haxe2 }
+- { setname: haxe,                     name: haxe_bin, addflavor: bin }
+- { setname: hedgewars,                name: hedgewars-server, addflavor: server }
+- { setname: help-hannahs-horse,       name: hannah, family: debuntu } # recheck
+- { setname: hermes,                   name: libhermes }
+- { setname: hgflow,                   name: hg-flow }
+- { setname: hitori,                   name: gnome-games-hitori }
+- { setname: hostapd,                  name: [hostapd-rtl,hostapd-rtl871xdrv,hostapd1] }
+- { setname: html2text,                name: html2text-with-utf8 }
+- { setname: hugin,                    name: [hugin-app,hugin-tools], addflavor: true }

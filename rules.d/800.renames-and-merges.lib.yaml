@@ -1,0 +1,56 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: libasr,                   name: [libasr-devel,libasr-snapshot], ignore: true }
+- { setname: libatomic-ops,            name: atomic_ops }
+- { setname: libcmis,                  name: cmis-client, addflavor: client }
+- { setname: libconfuse,               name: libconfuse0 }
+- { setname: libcpuid,                 name: libcpuid11 }
+- { setname: libejdb,                  name: ejdb }
+- { setname: libelf,                   name: libelf0 }
+- { setname: libfm,                    name: [libfm-directory_thumbnails,libfm-extra,libfm-gtk2,libfm-gtk3] }
+- { setname: libgeotiff,               name: [libgeotiff-dfsg,libgeotiff-epsg] }
+- { setname: libgeotiff,               name: geotiff }
+- { setname: libglu,                   name: mesa-libglu }
+- { setname: libglw,                   name: [glw,mesa-glw,mesa-libglw] }
+- { setname: liblas,                   name: liblas12 }
+- { setname: liblastfm,                name: liblastfm0 }
+- { setname: liblqr,                   name: liblqr-1 } # XXX: reverse?
+- { setname: libm4ri,                  name: m4ri }
+- { setname: libm4rie,                 name: m4rie }
+- { setname: libmikmod,                name: libmikmod2 }
+- { setname: libmowgli,                name: [libmowgli-2,libmowgli2,mowgli] }
+- { setname: libmp4v2,                 name: [mp4v2,libmp4v2-2,libmp4v2-3] }
+- { setname: libmpcdec,                name: libmpcdec5 }
+- { setname: libnsl,                   name: libnsl2 }
+- { setname: liboggz,                  name: oggz }
+- { setname: liborcus,                 name: [orcus,orcus0.12] }
+- { setname: libosmium,                name: osmium }
+- { setname: libosmpbf,                name: osmpbf }
+- { setname: libpaper,                 name: libpaper1 }
+- { setname: libpqxx,                  name: postgresql-libpqxx }
+- { setname: libquicktime,             name: libquicktime-lame, addflavor: lame }
+- { setname: libquicktime,             name: libquicktime111 }
+- { setname: librdkafka,               name: rdkafka }
+- { setname: librfm,                   name: librfm5 }
+- { setname: libsdl2pp,                name: sdl2pp }
+- { setname: libsignon-glib,           name: signon-glib }
+- { setname: libsodium,                name: [sodium,libsodium-static] }
+- { setname: libspatialite,            name: spatialite }
+- { setname: libsysstat,               name: libsysstat-qt5 }
+- { setname: libtecla,                 name: tecla }
+- { setname: libtheora,                name: theora }
+- { setname: libtorrent,               name: [libtorrent-ipv6,libtorrent-extended], addflavor: true }
+- { setname: libtorrent-rasterbar,     name: rb_libtorrent }
+- { setname: libtsm,                   name: [libtsm-asciinema,libtsm-patched] }
+- { setname: libtubo,                  name: [tubo,libtubo0] }
+- { setname: libunistring,             name: libunistring2 }
+- { setname: libupnp,                  name: [libupnp1.8,libupnp4] }
+- { setname: libupnp,                  name: upnp, family: freebsd }
+- { setname: libuv,                    name: libuv1 }
+- { setname: libwebp,                  name: [webp,libwebp6] }
+- { setname: libwmf,                   name: [libwmf-nox11,libwmf-docs], addflavor: true }
+- { setname: libxml2,                  name: libxml2-linenum, addflavor: linenum }
+- { setname: libxml2,                  name: libxml2-reference, addflavor: reference }
+- { setname: libxmlbird,               name: xmlbird }
+- { setname: libxmp,                   name: libxmp-lite }
+- { setname: libzen,                   name: libzen0 }
