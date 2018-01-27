@@ -7,24 +7,35 @@
 - { setname: icecast,                  name: icecast2 }
 - { setname: icecat,                   name: icecat-debug, addflavor: debug }
 - { setname: icecat,                   namepat: "icecat-(l10n.*)", addflavor: $1 }
+- { setname: ices,                     namepat: "ices[0-9]+" }
 - { setname: icewm,                    name: icewm2 }
 - { setname: icon,                     name: icon-lang }
+- { setname: icu,                      name: icu-docs, addflavor: docs }
+- { setname: icu,                      namepat: "icu[0-9.-]+" }
+- { setname: icu4j,                    namepat: "icu4j[0-9.-]+" }
+- { setname: igal,                     namepat: "igal[0-9]+" }
 - { setname: iksemel,                  name: libiksemel }
 - { setname: imhangul,                 name: imhangul-gtk2, addflavor: gtk2 }
 - { setname: imhangul,                 name: imhangul-gtk3, addflavor: gtk3 }
 - { setname: imhangul,                 name: imhangul3 }
 - { setname: indent,                   name: [gnu-indent,gindent] }
 - { setname: ingen,                    name: ingen-unstable, ignore: true }
+- { setname: inn,                      namepat: "inn[0-9]+" }
 - { setname: inotify-tools,            name: inotify-tools-inc, addflavor: inc }
+- { setname: insighttoolkit,           name: [insighttoolkit4,insight-toolkit] }
 - { setname: intel-microcode,          name: [microcode-intel,microcode-data-intel,intel-microcode-netbsd] }
 - { setname: intel-microcode,          name: microcode, family: [mageia,rosa] } # limit family for safely
 - { setname: intellij-idea-community,  name: [intellij-idea-ce,idea-community,intellij-idea-community-edition,intellij] }
 - { setname: intellij-idea-community,  name: intellij-idea-ce-eap, ignore: true }
 - { setname: intellij-idea-ultimate,   name: [idea-ultimate,intellij-idea-ultimate-edition,intellij-idea-ue-bundled-jre,intellij-ultimate] }
 - { setname: intellij-idea-ultimate,   name: intellij-idea-ue-eap, ignore: true }
+- { setname: iperf,                    name: iperf3 }
 - { setname: iproute2,                 name: iproute2-cake, addflavor: cake }
 - { setname: iproute2,                 name: iproute2-doc, addflavor: doc }
 - { setname: ir-lv2,                   name: ir.lv2 }
 - { setname: ircii,                    name: ircii-current, ignore: true }
 - { setname: iso8879,                  name: iso_8879 }
 - { setname: ispell-uk,                name: aspell-uk, ver: ["1.6.5","1.8.0"] } # see ftp://ftp.gnu.org/gnu/aspell/dict/uk/
+- { setname: italc,                    namepat: "italc[0-9]+" }
+- { setname: itcl,                     namepat: "itcl[0-9]+" }
+- { setname: itk,                      namepat: "itk[0-9]+" }

@@ -16,6 +16,8 @@
 
 - { name: bash,              verpat: "3\\..*",            setname: bash3 }
 
+- { name: bind,              verlt: "9.10",               setname: bind99 }
+
 - { name: bowtie,            verpat: "2\\..*",            setname: bowtie2 }
 
 - { name: cassandra,         verpat: "2\\..*",            setname: cassandra2 }

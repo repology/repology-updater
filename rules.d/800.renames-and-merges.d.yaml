@@ -1,9 +1,14 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 - { setname: dash.el,                  name: dash-el }
+- { setname: db,                       name: berkeley-db }
+- { setname: db,                       namepat: "db[0-9.]+" }
+- { setname: db,                       namepat: "libdb[0-9._-]*" }
 - { setname: dbench4,                  name: dbench4 }
 - { setname: dbmail,                   name: dbmail22 }
 - { setname: dboxfe,                   name: dboxfe2 }
+- { setname: dbus,                     name: [dbus-1-x11,dbus-docs,dbus-docs-selinux,dbus-nosystemd,dbus-x11,dbus-selinux], addflavor: true }
+- { setname: dbus,                     name: dbus-1 }
 - { setname: dbus-c++,                 name: dbus-cplusplus }
 - { setname: dcc,                      name: dcc-dccd }
 - { setname: dconf,                    name: d-conf }
@@ -22,6 +27,7 @@
 - { setname: djview4,                  name: [djview,djview-qt4,djview4,djvulibre-djview4] } # should be merged with djvulibre or not?
 - { setname: djvulibre,                name: [djvulibre-lib,djvulibre_qt4,djvulibre-tools,djvu] }
 - { setname: dkms,                     name: dkms-sorted, addflavor: sorted }
+- { setname: dmd,                      name: dmd2 }
 - { setname: docbook-dsssl,            name: [docbook-dsssl-doc,docbook-style-dsssl-doc] }
 - { setname: docbook-dsssl,            name: [docbook-dsssl-stylesheets,docbook-style-dsssl] }
 - { setname: docker,                   name: [docker-io,docker.io] }
@@ -29,8 +35,10 @@
 - { setname: dogecoin,                 name: [dogecoind,dogecoin-qt,dogecoin-daemon] }
 - { setname: dosbox,                   name: [dosbox-sdl2,dosbox-debug,dosbox-multilib-patched] }
 - { setname: doublecmd,                name: [doublecmd-gtk2,doublecmd-qt,doublecmd-qt4,doublecmd-qt5] }
+- { setname: dovecot,                  namepat: "dovecot[0-9]+" }
 - { setname: doxygen,                  name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], addflavor: true }
 - { setname: dr14tmeter,               name: dr14_tmeter }
+- { setname: drbd,                     namepat: "drbd[0-9]+" }
 - { setname: drbl,                     name: drbl-experimental, ignore: true }
 - { setname: drpython,                 name: drpython-py27 }
 - { setname: dsniff,                   name: dsniff-nox11 }

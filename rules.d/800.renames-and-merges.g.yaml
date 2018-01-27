@@ -9,18 +9,26 @@
 - { setname: garmintools,              name: garmin-forerunner-tools }
 - { setname: gaul,                     name: gaul-devel, family: gentoo }
 - { setname: gcc,                      name: g++, addflavor: true }
+- { setname: gcc,                      namepat: "gcc[0-9.-]+" }
+- { setname: gcc,                      namepat: "gcc[0-9.-]+-devel", ignore: true }
+- { setname: gccgo,                    namepat: "gccgo[0-9.-]+" }
 - { setname: gcin,                     name: gcin-gtk3, addflavor: gtk3 }
 - { setname: gcin,                     name: gcin-qt4, addflavor: qt4 }
 - { setname: gcin,                     name: gcin-qt5, addflavor: qt5 }
 - { setname: gcompris,                 name: gcompris-qt, addflavor: qt }
+- { setname: gconfmm,                  namepat: "(?:lib)?gconfmm[0-9._-]*" }
+- { setname: gconfmm,                  namepat: "(?:lib)?gconfmm[0-9._-]*(-docs)", addflavor: docs }
 - { setname: gdal,                     name: [gdal1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4] }
 - { setname: gdal-grass,               name: libgdal-grass }
+- { setname: gdk-pixbuf,               namepat: "(?:lib)?gdk-pixbuf[0-9._-]*(\\+svg|-jasper|-xlib)?" }
 - { setname: geany-plugins,            namepat: "geany-plugin-.*", family: freebsd }
 - { setname: gearmand,                 name: [gearmand-devel,gearman] }
 - { setname: geki2,                    name: geki2-kxl, family: gentoo } # XXX: recheck
 - { setname: geki3,                    name: geki3-kxl, family: gentoo } # XXX: recheck
+- { setname: geoclue,                  namepat: "(?:lib)?geoclue[0-9._-]*" }
 - { setname: geocode-glib,             name: libgeocode-glib }
 - { setname: geoip,                    name: libgeoip }
+- { setname: geos,                     namepat: "geos[0-9._-]+" }
 - { setname: getopt,                   name: [gnugetopt,gnu-getopt,gnu.getopt] }
 - { setname: gettext,                  name: libintl }
 - { setname: gflags,                   name: [google-gflags,libgflags] }
@@ -28,6 +36,8 @@
 - { setname: giflib,                   name: giflib-util }
 - { setname: giflib,                   name: giflib4 }
 - { setname: giflib,                   name: libungif } # former name
+- { setname: gimp,                     name: [gimp-app,gimp-devel,gimp-with-plugins,gimp2,gimp2-devel] }
+- { setname: gimp,                     name: [gimp3-devel,gimp-git,gimp3,gimp-gtk3], ignore: true }
 - { setname: gimp-$1,                  namepat: "gimp2-(.*)" }
 - { setname: gimp-docs,                namepat: "gimp-docs-.*" }
 - { setname: gimp-help,                namepat: ".*gimp-help.*" }
@@ -38,11 +48,27 @@
 - { setname: gitter,                   name: gitter-bin }
 - { setname: gkrellm,                  name: gkrellm2 }
 - { setname: gl-117,                   name: gl117 }
+- { setname: glade,                    name: glade-dev, ignore: true }
+- { setname: glade,                    name: glade-gtk2 }
+- { setname: glade,                    namepat: "glade[0-9._-]*" }
+- { setname: glew,                     namepat: "(?:lib)?glew[0-9.-]*" }
+- { setname: glfw,                     name: [glfw-doc,glfw-wayland,glfw-x11] }
+- { setname: glfw,                     namepat: "(?:lib)?glfw[0-9._-]*" }
+- { setname: glib,                     name: [glib-reference,glib2-docs,glib2-patched-thumbnailer,glib2-quiet,glib2-static], addflavor: true }
+- { setname: glib,                     namepat: "(?:lib)?glib[0-9._-]*" }
+- { setname: glib-networking,          name: glib2-networking }
+- { setname: glibmm,                   namepat: "(?:lib)?glibmm[0-9._-]*" }
+- { setname: glibmm,                   namepat: "(?:lib)?glibmm[0-9._-]*(-docs|-reference)", addflavor: docs }
 - { setname: glog,                     name: google-glog }
 - { setname: glpng,                    name: [libglpng1,libglpng] }
+- { setname: glusterfs,                name: glusterfs3 }
+- { setname: gmime,                    namepat: "(?:lib)?gmime[0-9._-]*" }
+- { setname: gmime-sharp,              namepat: "(?:lib)?gmime[0-9._-]*-sharp" }
 - { setname: gmock,                    name: [google-mock,googlemock,libgmock] }
 - { setname: gmrun,                    name: [gmrun-multihead,gmrun-xdg] }
 - { setname: gnash,                    name: gnash-git, ignore: true }
+- { setname: gnats,                    namepat: "gnats[0-9]+" }
+- { setname: gnet,                     namepat: "gnet[0-9]+" }
 - { setname: gnome-chemistry-utils,    name: gchemutils }
 - { setname: gnome-chess,              name: gnome-games-chess }
 - { setname: gnome-mahjongg,           name: gnome-games-mahjongg }
@@ -59,19 +85,29 @@
 - { setname: gnumpc,                   name: [mpc1,mpclib,mpclib3,mpcomplex] }
 - { setname: gnupg,                    name: gnupg1compat }
 - { setname: gnupg,                    name: gpg-agent }
+- { setname: gnupg,                    namepat: "gnupg[0-9]+" }
+- { setname: gnupg,                    namepat: "gpg[0-9]+" }
 - { setname: gnurl,                    name: libgnurl }
 - { setname: gnushogi,                 name: gnu-shogi }
+- { setname: gobject-introspection,    name: [gobject-introspection-common,gobject-introspection-runtime] }
 - { setname: godot,                    name: [godot-pulse,godot-tools], addflavor: true }
+- { setname: goffice,                  name: goffice-light }
+- { setname: goffice,                  namepat: "goffice[0-9._-]+" }
 - { setname: goldencheetah,            name: golden-cheetah }
 - { setname: gom,                      name: libgom }
+- { setname: goocanvas,                namepat: "(?:lib)?goocanvas[0-9._-]*" }
+- { setname: goocanvasmm,              namepat: "(?:lib)?goocanvasmm[0-9._-]*" }
 - { setname: gopro-vr-player,          name: gopro-vr-player-beta, ignore: true }
 - { setname: gopro-vr-player,          name: gopro-vrplayer }
+- { setname: gpgme,                    namepat: "gpgme[0-9._-]+" }
+- { setname: gphoto2,                  namepat: "(?:lib)?gphoto2?" }
 - { setname: gprolog,                  name: gnu-prolog }
 - { setname: grafana,                  name: grafana-bin }
 - { setname: grafana,                  namepat: "grafana[0-9]+" }
 - { setname: granite,                  name: libgranite }
 - { setname: graphite2,                name: [graphite,libgraphite2] }
 - { setname: graphviz,                 name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui] }
+- { setname: grass,                    namepat: "grass[0-9._-]+" }
 - { setname: graylog-collector-sidecar, name: collector-sidecar }
 - { setname: greed,                    name: greed-game }
 - { setname: groovy,                   name: groovy-docs, addflavor: docs }
@@ -81,11 +117,19 @@
 - { setname: gsl,                      name: gsl-doc, addflavor: doc }
 - { setname: gssproxy,                 name: gss-proxy }
 - { setname: gtest,                    name: [googletest,libgtest] }
+- { setname: gtk,                      namepat: "(?:lib)?gtk[0-9._+-]*" }
 - { setname: gtk-doc,                  name: gtk-doc-am, addflavor: am }
 - { setname: gtkdatabox,               name: libgtkdatabox }
+- { setname: gtkmm,                    namepat: "(?:lib)?gtkmm[0-9._-]*" }
+- { setname: gtkmm,                    namepat: "(?:lib)?gtkmm[0-9._-]*(-docs|-documentation|-reference)", addflavor: docs }
+- { setname: gtksourceview,            namepat: "(?:lib)?gtksourceview[0-9._-]*" }
+- { setname: gtksourceviewmm2,         namepat: "(?:lib)?gtksourceviewmm[0-9._-]*" }
+- { setname: gtkspell,                 namepat: "(?:lib)?gtkspell[0-9._-]*" }
+- { setname: gtkspellmm,               namepat: "(?:lib)?gtkspellmm[0-9._-]*" }
 - { setname: gtypist,                  name: gnu-typist }
 - { setname: gucharmap,                name: gucharmap-gtk2, addflavor: gtk2 }
 - { setname: gucharmap,                name: gucharmap7 }
+- { setname: guile,                    namepat: "guile[0-9._-]+" }
 - { setname: gwt,                      name: webtoolkit-java-sdk }
 - { setname: gxmessage,                name: gxmessage-gtk2, addflavor: gtk2 }
 - { setname: gzdoom,                   namepat: "gzdoom[0-9.-]+" }

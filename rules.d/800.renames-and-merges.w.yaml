@@ -4,11 +4,16 @@
 - { setname: wcalc,                    name: w-calc }
 - { setname: wcmcommander,             name: walcommander } # old name
 - { setname: wcmcommander,             name: wcm-commander }
+- { setname: webkitgtk,                name: webkitgtk-gtk2 }
+- { setname: webkitgtk,                namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*" }
+- { setname: webkitgtk,                namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*-unstable", ignore: true }
+- { setname: webkitgtk,                namepat: "webkit[0-9._-]" } # assuming gtk
 - { setname: websocketpp,              name: websocket++ }
+- { setname: wesnoth,                  name: wesnoth-devel }
+- { setname: wesnoth,                  namepat: "wesnoth[0-9.-]+" }
 - { setname: which,                    name: [gnu-which,gwhich] }
 - { setname: whizzytex,                name: tex-whizzytex }
 - { setname: windowmaker,              name: wmaker }
-- { setname: wine-etersoft,            name: wine, family: sisyphus } # WATCH ORDER # counterfeit
 - { setname: wine,                     name: [wine-d3d9,wine-any,wine-gaming-nine,wine-rt,wine-staging-ivb,wine-ivb], addflavor: true }
 - { setname: wine,                     name: [wine-next,wine-staging,wine-devel,wine-development,wine-vanilla,wine-stable] }
 - { setname: wine,                     namepat: "wine[0-9.-]+" }
@@ -25,3 +30,7 @@
 - { setname: wiznote,                  name: wiznote-qt4, addflavor: true }
 - { setname: wormsofprey,              name: wop }
 - { setname: wpa_supplicant,           name: wpasupplicant }
+- { setname: wxqt,                     namepat: "wxqt[0-9._-]+" }
+- { setname: wxwidgets,                name: [wxmac,wxx11,wxmsw] }
+- { setname: wxwidgets,                name: [wxwidgets-3.0-cxx11,wxwidgets-ansi,wxwidgets-media,wxwidgets-wxcontainer,wxwidgets-wxcontainer24c] }
+- { setname: wxwidgets,                namepat: "(?:wx|wxgtk|wxwidgets|wxcommon|wxbase)[0-9._-]*((?:-light|-gtk3|-gtk2|-contrib|-doc|-docs|-common|-libcxx|-nostl)*)", addflavor: $1 }

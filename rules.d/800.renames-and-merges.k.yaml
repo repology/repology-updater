@@ -2,8 +2,14 @@
 
 - { setname: kde-i18n,                 namepat: "kde-(i18n|l10n)-.*" }
 - { setname: kde4-l10n,                namepat: "kde4-l10n-.*", family: pkgsrc }
+- { setname: kdelibs,                  namepat: "kdelibs[0-9]+" }
 - { setname: kdiff3,                   name: kdiff3-qt }
 - { setname: kea,                      name: isc-kea }
+- { setname: keepass,                  name: keepass2 }
+- { setname: keepassx,                 name: keepassx-devel, family: freebsd }
+- { setname: keepassx,                 namepat: "keepassx[0-9]*" }
+- { setname: kibana,                   name: kibana-bin }
+- { setname: kibana,                   namepat: "kibana[0-9]+" }
 - { setname: kid3,                     name: [kid3-qt,kid3-qt4,kid3-qt5,kid4-qt,kid3-cli] }
 - { setname: kiki,                     name: kiki-the-nano-bot }
 - { setname: kipi-plugins,             namepat: "kipi-plugin-.*", family: freebsd }

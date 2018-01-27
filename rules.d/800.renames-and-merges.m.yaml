@@ -6,13 +6,17 @@
 - { setname: magit,                    name: [magit-svn,emacs-magit-git], ignore: true }
 - { setname: mandoc,                   name: mdocml } # mdocml is an old name (schwarze@openbsd.org)
 - { setname: manpages,                 name: [man-pages,linux-man-pages,linux-manpages] }
+- { setname: mariadb,                  namepat: "mariadb[0-9.-]*(?:-client|-server)?" }
 - { setname: mariadb-mytop,            name: mytop, family: arch }
 - { setname: maven-shell,              name: mvnsh }
 - { setname: mc,                       name: [mc-contrib,midnight-commander,midnightcommander] }
 - { setname: mc,                       name: mc46 }
 - { setname: mcron,                    name: mcron2 }
 - { setname: md5deep,                  name: hashdeep }
+- { setname: mdds,                     namepat: "mdds[0-9._-]+" }
 - { setname: mediainfo,                name: media-info }
+- { setname: mediawiki,                name: mediawiki-lts }
+- { setname: mediawiki,                namepat: "mediawiki[0-9._-]+" }
 - { setname: mednaffe,                 name: mednaffe-gtk2 }
 - { setname: meld,                     name: meld-dev, ignore: true }
 - { setname: meld,                     name: meld-gtk2 }
@@ -24,19 +28,29 @@
 - { setname: minpack,                  name: libcminpack }
 - { setname: mirrormagic,              name: mirrormagic-sdl }
 - { setname: moc,                      name: mocp }
+- { setname: moodle,                   namepat: "moodle[0-9._-]+" }
 - { setname: moon-lander,              name: moonlander, family: [freebsd,openbsd] }
 - { setname: mozilla-dicts,            namepat: "mozilla-dicts-.*", family: openbsd }
+- { setname: mozjs,                    name: libmozjs }
+- { setname: mozjs,                    namepat: "mozjs[0-9._-]+" }
 - { setname: mpc,                      name: libmpc3 }
 - { setname: mpc,                      name: mpd-mpc }
 - { setname: mpd,                      name: [mpd-light,mpd-light-pulse,mpd-minimal,mpd-server-minimal], addflavor: true }
 - { setname: mpfr,                     name: [mpfr3,mpfr4,libmpfr] }
+- { setname: mpich,                    name: mpich-default }
+- { setname: mpich,                    namepat: "mpich(?:-clang|-gcc|-llvm)?[0-9._-]*" }
+- { setname: mpich,                    namepat: "mpich-devel(?:-clang|-gcc|-llvm)?[0-9._-]*", ignore: true }
 - { setname: ms-gsl,                   name: [guidelines-support-library,microsoft-gsl,microsoft_gsl] }
 - { setname: msgpack,                  name: [msgpack-c,msgpack_c_cpp,libmsgpack,msgpack1] } # c/cpp by default
 - { setname: mstflint,                 name: mstflint4 }
+- { setname: msynctool,                namepat: "msynctool[0-9]+" }
 - { setname: multivalent,              name: [multivalent-tool-pdf,multivalent-pdf-tools] }
 - { setname: munin,                    namepat: munin-(master|node|server|common), addflavor: $1 }
 - { setname: mutt,                     name: [mutt-lite,mutt-devel,mutt14,mutt14-lite,mutt-patched,mutt-slang,mutt-kiss] }
 - { setname: mygui,                    namepat: "mygui-(docs|dummy|gl|opengl|ogre[0-9._-]*)", addflavor: $1 }
+- { setname: mysql,                    namepat: "libmysqlclient[0-9.-]*" }
+- { setname: mysql,                    namepat: "mysql-clients[0-9.-]*" }
+- { setname: mysql,                    namepat: "mysql[0-9.-]*(?:-client|-server)?" }
 - { setname: mysql-connector-c++,      name: libmysqlconnectorcpp }
 - { setname: mysql-connector-c++,      namepat: "mysql[0-9]*-connector-cpp" }
 

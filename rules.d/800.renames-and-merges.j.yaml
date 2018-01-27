@@ -1,6 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 - { setname: ja2-stracciatella,        name: ja2 }
+- { setname: jabberd,                  name: jabberd2 }
 - { setname: jack,                     name: [jackit,jack-audio-connection-kit,jack1,jack-cd-ripper] } # jack needs untangling anyway, so dump everything into jakc and untangle it later
 - { setname: jack,                     name: jack-dbus, addflavor: dbus }
 - { setname: jack2,                    name: [jackd2,libjack2] }
@@ -12,11 +13,16 @@
 - { setname: java-getopt,              name: libgetopt-java }
 - { setname: jbigkit,                  name: jbig-kit }
 - { setname: jboss-forge,              name: jboss-forge-offline }
+- { setname: jdeparser,                namepat: "jdeparser[0-9]+" }
+- { setname: jdom,                     namepat: "jdom[0-9]+" }
 - { setname: jena,                     name: apache-jena }
 - { setname: jena,                     name: apache-jena-fuseki }
 - { setname: jenkins,                  name: jenkins-bin, addflavor: bin }
 - { setname: jenkins,                  name: jenkins-lts }
+- { setname: jersey,                   namepat: "jersey[0-9]+" }
 - { setname: josm,                     name: josm-latest, ignore: true }
+- { setname: jpeg,                     name: [jpeg,libjpeg,jpeg-turbo,libjpeg-turbo,turbojpeg] }
+- { setname: jpeg,                     namepat: "libjpeg[0-9]+([a-z]|-turbo)?" }
 - { setname: json-c,                   name: json-c12 }
 - { setname: json-glib,                name: libjson-glib }
 - { setname: junit,                    name: [junit4,java-junit,junit5] }

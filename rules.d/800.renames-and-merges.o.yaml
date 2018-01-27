@@ -1,7 +1,8 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-- { setname: ogre,                     name: ogre-1.9 }
+- { setname: ogre,                     name: [ogre-docs,ogre-samples], addflavor: true }
 - { setname: ogre,                     name: ogre3d }
+- { setname: ogre,                     namepat: "ogre[0-9._-]+" }
 - { setname: open-vm-tools,            name: [open-vm-tools-dkms,open-vm-tools-lts-trusty,open-vm-tools-nox11], addflavor: true }
 - { setname: openal,                   name: [openal-static,openal-examples], addflavor: true }
 - { setname: openbabel,                name: open-babel }
@@ -10,7 +11,10 @@
 - { setname: opencv,                   name: opencv2 }
 - { setname: opendkim,                 name: libopendkim }
 - { setname: openjade,                 name: jade, family: aosc }
+- { setname: openjade,                 namepat: "openjade[0-9._-]+" }
+- { setname: openjdk,                  namepat: "openjdk[0-9._-]*(?:-doc)?" }
 - { setname: openjpeg,                 name: [openjp2,libopenjpeg2.0] }
+- { setname: openjpeg,                 namepat: "(?:lib)?openjpeg[0-9]*" }
 - { setname: openmesh,                 name: open-mesh }
 - { setname: openmpi,                  name: open-mpi }
 - { setname: openocd,                  name: open-ocd }
@@ -18,6 +22,9 @@
 - { setname: openoffice,               name: apache-openoffice-devel, ignore: true }
 - { setname: openoffice,               name: openoffice-bin, addflavor: bin }
 - { setname: openoffice,               name: openoffice.org }
+- { setname: openscenegraph,           name: [openscenegraph-qt,openscenegraph-qt4,open-scene-graph] }
+- { setname: openscenegraph,           namepat: "openscenegraph[0-9.-]+" }
+- { setname: openscenegraph,           namepat: "osg(?:-devel)?" }
 - { setname: openshot,                 name: openshot-qt, addflavor: qt }
 - { setname: opensmtpd-extras,         namepat: "opensmtpd-extras-.*", family: [freebsd,openbsd] }
 - { setname: openssh,                  name: openssh-portable }
@@ -31,6 +38,7 @@
 - { setname: openzwave,                name: open-zwave }
 - { setname: opus,                     name: libopus }
 - { setname: opusfile,                 name: libopusfile }
+- { setname: openssl,                  namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?" }
 
 - setname: openssh
   name:
@@ -46,3 +54,18 @@
     - openssh-with-hpn
     - openssh-with-kerberos
   addflavor: true
+
+- setname: openssl
+  name:
+    - openssl-1.0-chacha20
+    - openssl-chacha
+    - openssl-chacha20
+    - openssl-devel
+    - openssl-no-aesni
+    - openssl-pre
+    - openssl-purify
+    - openssl-static
+    - openssl-stream
+    - openssl-tls1.3
+  addflavor: true
+  ignore: true # XXX: why?

@@ -8,6 +8,9 @@
 - { setname: unace,                    name: [unace-bin,unace-nonfree] }
 - { setname: unarr,                    name: libunarr }
 - { setname: uncrustify,               name: uncrustify0.60 }
+- { setname: unison,                   name: unison-devel, ignore: true }
+- { setname: unison,                   name: unison-nox11, addflavor: true }
+- { setname: unison,                   namepat: "unison[0-9.-]+(?:-compat)?" }
 - { setname: units,                    name: [gnu-units,gunits] }
 - { setname: unrar,                    name: [libunrar,libunrar5] }
 - { setname: uqm,                      name: [uqm_3domusic,uqm-3domusic,uqm-content,uqm_voice,uqm-voice], addflavor: true }

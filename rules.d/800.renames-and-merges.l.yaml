@@ -10,6 +10,7 @@
 - { setname: lapack,                   name: lapack-tmg, addflavor: tmg } # component of
 - { setname: lapack,                   name: liblapack }
 - { setname: lapacke,                  name: lapacke-tmg, addflavor: tmg } # component of
+- { setname: lcms,                     name: [lcms,lcms1,lcms2,little-cms,little-cms2,lcms-python,liblcms,liblcms2] }
 - { setname: ldb,                      name: [libldb,ldb12,ldb13] }
 - { setname: ldns,                     name: [ldns-tools,ldns-utils] }
 - { setname: liberal-crime-squad,      name: lcs }
@@ -23,9 +24,20 @@
 - { setname: libressl,                 name: libressl-netcat, addflavor: netcat }
 - { setname: lightsoff,                name: gnome-games-lightsoff }
 - { setname: lightyears,               name: 20kly }
+- { setname: lilypond,                 name: [lilypond-devel-docs,lilypond-doc,lilypond-docs], addflavor: docs }
+- { setname: lilypond,                 name: lilypond-devel }
+- { setname: links,                    name: [links1,links2,links+,links-g-directfb,links-gui] }
+- { setname: linux,                    namepat: "linux-kernel(?:-lts)?[0-9._-]*" }
 - { setname: liquidwar,                name: liquidwar5 }
+- { setname: lldb,                     name: lldb-assert, addflavor: assert }
+- { setname: lldb,                     name: lldb-polly, addflavor: polly }
+- { setname: lldb,                     namepat: "lldb[0-9._-]*-split", addflavor: split }
+- { setname: lldb,                     namepat: "lldb[0-9._-]+" }
+- { setname: llvm,                     namepat: "llvm[0-9.-]+" }
 - { setname: lostpixels,               name: blinkensisters-with-addons }
+- { setname: love,                     namepat: "love(?:-legacy)?[0-9._-]+" }
 - { setname: lsof-freebsd,             name: lsof, family: freebsd } # patched version with own versioning
+- { setname: lua,                      namepat: "lua[0-9._-]+" }
 - { setname: luxrender,                name: luxrender14 }
 - { setname: lxc,                      name: lxc-selinux }
 - { setname: lxd,                      name: lxc, family: homebrew } # misname

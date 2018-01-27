@@ -6,6 +6,7 @@
 - { setname: talloc,                   name: talloc-man, addflavor: man }
 - { setname: talloc,                   name: talloc-static, addflavor: static }
 - { setname: tbb,                      name: [intel-tbb,libtbb] }
+- { setname: tcl,                      namepat: "tcl8[0-9._-]+" }
 - { setname: tdb,                      name: libtdb }
 - { setname: telegram-desktop,         name: [telegram-desktop-bin,telegram-desktop-systemqt,telegram-desktop-systemqt-emojione,telegram-desktop-systemqt-notoemoji] }
 - { setname: telegram-desktop,         name: [telegram-desktop-bin-dev,telegram-desktop-dev], ignore: true }
@@ -14,6 +15,18 @@
 - { setname: tesseract-ocr-data,       namepat: "tesseract(?:-ocr|-data)*-[a-z]{3}(?:-.*)?" }
 - { setname: tetrinetx,                name: [tetrinet-x,tetrinet-server] }
 - { setname: texlive-documentation,    namepat: "texlive-documentation-.*", family: gentoo }
+- { setname: thunderbird,              name: [mozilla-thunderbird,mozillathunderbird] }
+- { setname: thunderbird,              name: [thunderbird-45-gtk2,thunderbird-gtk2], addflavor: gtk2 }
+- { setname: thunderbird,              name: mozilla-thunderbird-l10n, addflavor: l10n }
+- { setname: thunderbird,              name: thunderbird-bin, addflavor: bin }
+- { setname: thunderbird,              name: thunderbird-i18n, addflavor: i18n }
+- { setname: thunderbird,              name: thunderbird-l10n-xpi, addflavor: l10n }
+- { setname: thunderbird,              name: thunderbird-ru, addflavor: ru }
+- { setname: thunderbird,              namepat: "thunderbird-(i18n-.*)", family: [openbsd,arch,kaos], addflavor: $1 }
+- { setname: thunderbird,              namepat: "thunderbird-beta(.*)", addflavor: $1, ignore: true }
+- { setname: thunderbird,              namepat: "thunderbird-nightly(.*)", addflavor: $1, ignore: true }
+- { setname: thunderbird,              namepat: "thunderbird[0-9.-]*" }
+- { setname: thunderbird,              namepat: "thunderbird[0-9.-]*-l10n", addflavor: l10n }
 - { setname: tidy,                     name: [html-tidy,htmltidy,tidy-devel,tidy-html,tidy-html5,tidy-lib,tidy4,tidyhtml,tidy] }
 - { setname: tiff,                     name: [libtiff,libtiff3,libtiff4] }
 - { setname: tigervnc,                 name: [tiger-vnc,tigervnc-viewer] }
@@ -24,6 +37,7 @@
 - { setname: timidity++,               name: timidity, verpat: "2\\..*" }
 - { setname: tint,                     name: tint-tetris }
 - { setname: tintin++,                 name: [tintin,tintinxx] }
+- { setname: tk,                       namepat: "tk8[0-9._-]+" } # don't mix with tk2, tk5, tk707 which are unrelated projects
 - { setname: tokyocabinet,             name: tokyo-cabinet }
 - { setname: tokyodystopia,            name: tokyo-dystopia }
 - { setname: tomahawk,                 name: tomahawk-player }
@@ -31,6 +45,7 @@
 - { setname: tome,                     name: [t-engine4,tales-of-majeyal,tome4,tome4-data,tome-ah] }
 - { setname: tome,                     name: tome4-beta, ignore: true }
 - { setname: tomee,                    name: [tomee-jax-rs,tomee-plume,tomee-plus,tomee-webprofile] }
+- { setname: tor,                      name: tor-devel }
 - { setname: tor,                      name: tor-unstable, devel: true }
 - { setname: tre,                      name: libtre } # XXX: reverse?
 - { setname: tremor,                   name: libtremor }

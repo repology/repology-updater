@@ -1,10 +1,13 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: zabbix,                   namepat: "zabbix[0-9.-]+" }
 - { setname: zabbix,                   namepat: "zabbix[0-9]*[_-](agent|agentd|frontend|frontend-php|proxy|server|common|proxy-sqlite|server-mysql|web)[0-9.-]*", addflavor: $1 }
 - { setname: zef,                      name: zef-without-alacryd, addflavor: without-alacryd }
+- { setname: zendframework,            namepat: "zendframework[0-9._-]+" }
 - { setname: zenity,                   name: zenity-gtk2 }
 - { setname: zenxml,                   name: libzenxml }
 - { setname: zero-ballistics,          name: zeroballistics }
+- { setname: zeromq,                   namepat: "(zeromq|zmq|libzmq)[0-9._-]*" }
 - { setname: zeronet,                  name: zeronet-git, ignore: true }
 - { setname: zerotier-one,             name: [zerotier,zerotier-one-with-controller] }
 - { setname: zetacoin,                 name: zetacoin-nox11, addflavor: nox11 }

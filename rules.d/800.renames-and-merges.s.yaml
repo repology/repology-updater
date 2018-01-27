@@ -6,17 +6,29 @@
 - { setname: scalapack,                name: libscalapack }
 - { setname: scamp,                    name: astromatic-scamp }
 - { setname: schismtracker,            name: schism }
-- { setname: sdl$1,                    namepat: "(?:lib)?(?:sdl1(.*))" }
-- { setname: sdl$1,                    namepat: "(?:lib)?sdl(2?[_-](?:image|mixer|net|sound|ttf|gfx|console|sge|pango))" }
-- { setname: sdl,                      name: libsdl }
-- { setname: sdl-$1,                   namepat: "(?:lib)?sdl[_-]([a-z]+)1\\.2" }
-- { setname: sdl-gfx,                  name: libsdl_gfx13 }
-- { setname: sdl-pango,                name: sdlpango, family: debuntu }
-- { setname: sdl2,                     name: controllermap, addflavor: controllermap }
-- { setname: sdl2,                     name: libsdl2 }
-- { setname: sdl2-$1,                  namepat: "(?:lib)?sdl[_-]([a-z]+)2\\.0" }
-- { setname: sdl2-gfx,                 name: sdlgfx, family: debuntu }
-- { setname: sdl_ttf2,                 name: sdl_ttf, family: kaos }
+- { setname: sdl,                      name: [libsdl,sdl1] }
+- { setname: sdl2,                     name: [libsdl2] }
+- { setname: sdl2_$1,                  namepat: "(?:lib)?sdl[_-]*(image|mixer|net|ttf|gfx)2[0-9._-]*" }
+- { setname: sdl2_$1,                  namepat: "(?:lib)?sdl2[0-9._-]*(image|mixer|net|ttf|gfx)" }
+- { setname: sdl_$1,                   namepat: "(?:lib)?sdl(?:1[0-9.]*)?[_-]*(image|mixer|net|ttf|gfx)(?:1[0-9._-]*)?" }
+- { setname: sdl_pango,                name: [libsdl_pango,sdlpango] }
+- { setname: sdl_sge,                  name: [libsdl_sge,libsdl-sge] }
+- { setname: sdl_sound,                name: sdl_sound-patched, addflavor: patched }
+- { setname: sdl_sound,                namepat: "(?:lib)?sdl[0-9._-]*sound[0-9._-]*" }
+- { setname: sdlconsole,               name: [libsdl-console,sdl_console] }
+
+  #- { setname: sdl$1,                    namepat: "(?:lib)?(?:sdl1(.*))" }
+  #- { setname: sdl$1,                    namepat: "(?:lib)?sdl(2?[_-](?:image|mixer|net|sound|ttf|gfx|console|sge|pango))" }
+  #- { setname: sdl,                      name: libsdl }
+  #- { setname: sdl-$1,                   namepat: "(?:lib)?sdl[_-]([a-z]+)1\\.2" }
+  #- { setname: sdl-gfx,                  name: libsdl_gfx13 }
+  #- { setname: sdl-pango,                name: sdlpango, family: debuntu }
+  #- { setname: sdl2,                     name: controllermap, addflavor: controllermap }
+  #- { setname: sdl2,                     name: libsdl2 }
+  #- { setname: sdl2-$1,                  namepat: "(?:lib)?sdl[_-]([a-z]+)2\\.0" }
+  #- { setname: sdl2-gfx,                 name: sdlgfx, family: debuntu }
+  #- { setname: sdl_ttf2,                 name: sdl_ttf, family: kaos }
+
 - { setname: sdllopan,                 name: sdl_lopan }
 - { setname: sdlmame,                  name: sdlmame-wout-toolkits, addflavor: wout-toolkits }
 - { setname: sdocbook-xml,             name: docbook-xml-simple } # ravenports
@@ -71,3 +83,29 @@
 - { setname: sweethome3d,              name: [sweet-home-3d,sweethome3d-application] }
 - { setname: swissfileknife,           name: sfk }
 - { setname: switchboard-plug-networking, name: switchboard-plug-network }
+- { setname: samba,                    name: samba-docs, addflavor: docs }
+- { setname: samba,                    namepat: "samba[0-9.-]+" }
+- { setname: sdl,                      name: [sdl12,libsdl1.2] }
+- { setname: sdl2-image,               name: sdl_image, verpat: "2.*" }
+- { setname: serf,                     namepat: "(?:lib)?serf[0-9._-]*" }
+- { setname: sfml,                     namepat: "(?:lib)?sfml[0-9._-]*" }
+- { setname: shibboleth-sp,            namepat: "shibboleth-sp[0-9]+" }
+- { setname: sidplay,                  namepat: "sidplay[0-9]+" }
+- { setname: sip,                      namepat: "sip[0-9]+" }
+- { setname: slony1,                   namepat: "slony1(?:-2|v2)" }
+- { setname: smstools,                 namepat: "smstools[0-9]+" }
+- { setname: socat,                    namepat: "socat[0-9]+" }
+- { setname: softhsm,                  namepat: "softhsm[0-9]+" }
+- { setname: spidermonkey,             namepat: "spidermonkey[0-9]+" }
+- { setname: squid,                    name: [squid-ldap,squid-ntlm], family: openbsd }
+- { setname: squid,                    name: squid-devel, ignore: true }
+- { setname: squid,                    namepat: "squid[0-9._-]+" }
+- { setname: streamtuner,              namepat: "streamtuner[0-9]+" }
+- { setname: stringtemplate,           namepat: "stringtemplate[0-9]+" }
+- { setname: stunnel,                  name: stunnel4 }
+- { setname: supertux,                 name: [supertux,supertux1,supertux2,supertux-old,supertux-stable] }
+- { setname: swig,                     namepat: "swig-(.*)", family: macports, addflavor: $1 } # split by supported language
+- { setname: swig,                     namepat: "swig[0-9._-]+" }
+- { setname: syslog-ng,                name: [syslog-ng-afamqp,syslog-ng-geoip,syslog-ng-http,syslog-ng-json,syslog-ng-mongodb,syslog-ng-redis,syslog-ng-smtp,syslog-ng-sql], addflavor: true }
+- { setname: syslog-ng,                name: syslog-ng-nosystemd, addflavor: nosystemd }
+- { setname: syslog-ng,                namepat: "syslog-ng[0-9._-]+" }

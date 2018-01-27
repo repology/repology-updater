@@ -6,7 +6,10 @@
 - { setname: ncbi-blast+,              name: ncbi-blast-plus }
 - { setname: ncurses,                  name: [ncurses-full,ncurses-with-gpm,ncursesw], addflavor: true }
 - { setname: ncurses,                  name: ncurses5 }
+- { setname: netatalk,                 namepat: "netatalk[0-9.-]+" }
 - { setname: netbeans,                 namepat: "netbeans-.*", family: gentoo }
+- { setname: nethack,                  name: [nethack-all,nethack-lib,nethack-patch,nethack-qt,nethack-tty,nethack-x11] }
+- { setname: nethack,                  namepat: "nethack[._-]*(?:[23][0-9._-]*)?(?:-nox11)?" }
 - { setname: netlogo,                  name: netlogo-bin, addflavor: bin }
 - { setname: nettle,                   name: [libnettle,nettle4] }
 - { setname: networkmanager-$1,        namepat: network-manager-(openvpn|openconnect|pptp|ssh|strongswan|vpnc|iodine) }
@@ -24,4 +27,9 @@
 - { setname: ngspice,                  name: [libngspice,ng-spice,ngspice,ngspice-docs,ngspice-rework] }
 - { setname: nicotine+,                name: [nicotine,nicotine-plus] }
 - { setname: notion,                   name: notion-3 } # XXX: also has version problems
+- { setname: npm,                      namepat: "npm[0-9._-]+" }
 - { setname: nss-ldap,                 name: libnss-ldap }
+- { setname: nvidia-settings,          namepat: "nvidia-[0-9._-]*-settings" }
+- { setname: nvidia-settings,          namepat: "nvidia-settings-.*" }
+- { setname: nvidia-settings,          namepat: "nvidia-settings-experimental.*", ignore: true }
+- { setname: nvidiabl,                 namepat: "(?:dkms|linux-rt.*|linux[0-9]+)-nvidiabl" }

@@ -1,0 +1,10 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# A
+- name:
+    - alee-fonts
+    - alee-ttf
+    - aleefonts-ttf
+    - fonts-alee
+    - ttf-alee
+  setname: "fonts:alee"

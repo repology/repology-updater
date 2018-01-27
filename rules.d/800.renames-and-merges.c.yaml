@@ -4,9 +4,12 @@
 - { setname: cacti-spine,              name: cacti-cactid } # cactid renamed to spine upstream
 - { setname: cairo-clock,              name: cairo-clock-ccw }
 - { setname: cairo-dock-plugins,       name: cairo-dock-plug-ins }
+- { setname: cairomm,                  namepat: "(?:lib)?cairomm[0-9._-]*" }
+- { setname: cairomm,                  namepat: "(?:lib)?cairomm[0-9._-]*-docs", addflavor: docs }
 - { setname: calligra-l10n,            namepat: "calligra-l10n-.*", family: sisyphus }
 - { setname: capnproto,                name: [capnp,capnproto-0.6] }
 - { setname: cassandra,                name: [apache-cassandra,cassandra2] }
+- { setname: cassandra,                namepat: "cassandra[0-9._-]+" }
 - { setname: catch,                    name: libcatch-cpp-headers }
 - { setname: cattle,                   name: cattle-1.0 }
 - { setname: cavezofphear,             name: cavez-of-phear }
@@ -24,11 +27,15 @@
 - { setname: cdparanoia,               name: cdparanoia-overread, addflavor: overread }
 - { setname: ce,                       name: ce-x11, addflavor: x11 }
 - { setname: cegui,                    name: [cegui-mk2,cegui_mk-2] }
+- { setname: cegui,                    namepat: "cegui[0-9._-]+" }
 - { setname: celestia,                 name: celestia-nonfree, addflavor: nonfree }
 - { setname: celestia,                 namepat: "celestia-.*", family: freebsd } # merges glut/gnome/gtk, just GUI variants
+- { setname: celt,                     namepat: "celt[0-9._-]+" }
 - { setname: centerim,                 name: [center-im,centerim5] }
 - { setname: centerim,                 name: centerim-devel, ignore: true }
 - { setname: ceti-2-theme,             name: ceti-2-themes }
+- { setname: cfengine,                 namepat: "cfengine[0-9]+" } # XXX: split?
+- { setname: cfengine-masterfiles,     namepat: "cfengine-masterfiles[0-9]+" }
 - { setname: cfitsio,                  name: cfitsio3 }
 - { setname: cfr,                      name: cfr-decompiler }
 - { setname: cglib,                    name: cglib3 }
@@ -47,17 +54,22 @@
 - { setname: ckermit,                  name: [c-kermit,kermit] }
 - { setname: clamav,                   name: [clamav-server,clamav-light] }
 - { setname: clanbomber,               name: clanbomber2 }
+- { setname: clang,                    namepat: "clang[0-9.-]+" }
+- { setname: clanlib,                  namepat: "clanlib-?[0-9.]+" } # XXX: split?
 - { setname: clearlooks-phenix,        name: [clearlooks-phenix-gtk-theme,clearlooks-phenix-theme,gtk3-theme-clearlooks-phenix] }
 - { setname: clementine,               name: clementine-free }
 - { setname: clipit,                   name: clipit-gtk3, addflavor: gtk3 }
 - { setname: cln,                      name: cln6 }
+- { setname: clojure,                  namepat: "clojure[0-9.]+" }
 - { setname: cloog,                    name: [cloog-isl,cloog-isl14], addflavor: isl }
 - { setname: cloog,                    name: cloog-lts }
 - { setname: cloog-ppl,                name: cloog-ppl-gcc4, addflavor: gcc4 }
 - { setname: clucene,                  name: [clucene09,clucene-core,libclucene,libclucene-core] }
 - { setname: clusterssh,               name: cssh }
 - { setname: clutter,                  name: clutter-1.0 }
+- { setname: clutter-gst,              namepat: "clutter-gst[0-9.-]+" }
 - { setname: clutter-gtk,              name: clutter-gtk0.10 }
+- { setname: cmake,                    namepat: "cmake-?[0-9.]+" }
 - { setname: cmrt,                     name: libcmrt }
 - { setname: cockatrice,               name: [cockatrice-client,cockatrice-server] }
 - { setname: codec2,                   name: libcodec2 }
@@ -68,6 +80,8 @@
 - { setname: colorcode,                name: color-code }
 - { setname: comedilib,                name: libcomedi }
 - { setname: commoncpp2,               name: commoncpp }
+- { setname: compiz,                   name: [compiz-core,compiz-gtk] }
+- { setname: compiz,                   namepat: "compiz[0-9._-]+" }
 - { setname: complexity,               name: gnu-complexity }
 - { setname: conserver,                name: conserver8 }
 - { setname: consolekit,               name: consolekit2 }
@@ -85,6 +99,7 @@
 - { setname: criticalmass,             name: critter }
 - { setname: cross-binutils$1,         namepat: "gnatcross-binutils(.*)", addflavor: gnat }
 - { setname: crypto++,                 name: crypto++-562 }
+- { setname: cryptominisat,            namepat: "cryptominisat[0-9]+" }
 - { setname: csfml,                    name: libcsfml }
 - { setname: csharp-mode.el,           name: csharp-mode }
 - { setname: ctags,                    name: [ectags,exctags,exuberant-ctags] } # exuberant and universal are split later
@@ -92,6 +107,10 @@
 - { setname: ctpp2,                    name: ctpp }
 - { setname: ctypes.sh,                name: ctypes-sh }
 - { setname: cubosphere,               name: cubosphere-data, addflavor: data }
+- { setname: cuda,                     name: cudatoolkit }
+- { setname: cuda,                     name: nvidia-cuda-sdk }
+- { setname: cuda,                     name: nvidia-cuda-toolkit }
+- { setname: cuda,                     namepat: "cuda-?[0-9.]+" }
 - { setname: cuneiform,                name: cuneiform-linux }
 - { setname: curl,                     name: [curl-ca-bundle,curl-http2,curl-openssl], addflavor: true }
 - { setname: curl,                     name: [libcurl-compat,libcurl-compat-nostatic,libcurl-gnutls,libcurl-openssl-1.0], addflavor: true }
@@ -99,9 +118,12 @@
 - { setname: curses-hexedit,           name: [chexedit,ncurses-hexedit] }
 - { setname: cutecom,                  name: cutecom-legacy }
 - { setname: cvs,                      name: cvs-devel }
+- { setname: cvsps,                    namepat: "cvsps[0-9]+" }
 - { setname: cvsweb,                   name: cvsweb3 }
 - { setname: cyphesis,                 name: cyphesis-cpp, family: debuntu }
+- { setname: cyrus-imapd,              name: cyrus-imapd-ldap }
 - { setname: cyrus-imapd,              name: cyrus5-imapd }
+- { setname: cyrus-imapd,              namepat: "cyrus-imapd[0-9.-]+" }
 - { setname: cython,                   name: cython2 }
 - { setname: cython-kivy,              name: cython2-kivy }
 
@@ -120,4 +142,15 @@
     - cairo-ubuntu
     - cairo-xcb
     - libcairo
+  addflavor: true
+
+- setname: cmake
+  name:
+    - cmake-cursesui
+    - cmake-cursesui-qt4ui
+    - cmake-cursesui-qt5ui
+    - cmake-doc
+    - cmake-doc-qch
+    - cmake-gui
+    - cmake-modules
   addflavor: true

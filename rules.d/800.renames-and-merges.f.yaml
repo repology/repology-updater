@@ -3,8 +3,8 @@
 - { setname: faad2,                    name: faad }
 - { setname: facter,                   name: facter2 }
 - { setname: factor,                   name: factor-lang }
-- { setname: fail2ban,                 name: fail2ban6 }
 - { setname: fail2ban,                 name: "python:fail2ban" }
+- { setname: fail2ban,                 name: fail2ban6 }
 - { setname: falcons-eye,              name: falconseye }
 - { setname: farstream,                namepat: "farstream[0-9.-]+" }
 - { setname: fasta,                    name: fasta3 }
@@ -13,12 +13,22 @@
 - { setname: fdk-aac,                  name: libfdk-aac }
 - { setname: fdkaac,                   name: fdk-aac-encoder }
 - { setname: fetch-crl,                name: fetch-crl3 }
+- { setname: ffmpeg,                   namepat: "ffmpeg[0-9.-]+" }
+- { setname: fftw,                     name: fftwf }
+- { setname: fftw,                     namepat: "(?:lib)?fftw[0-9.-]*(?:-double|-float|-long-double|-quad|-single|-long|-mpi|-mpich|-openmpi|-common)?" }
 - { setname: fife,                     name: [fifengine,"python:fife"] }
 - { setname: fillets-ng,               name: fish-fillets }
 - { setname: fillets-ng,               name: fish-fillets-ng }
 - { setname: firebase-cli,             name: firebase-tools }
+- { setname: firebird,                 namepat: "firebird[0-9.-]*(?:-client|-server)?" }
+- { setname: firefox,                  namepat: "firefox-developer(.*)", addflavor: $1, devel: true }
+- { setname: firefox,                  namepat: "firefox-developer-edition(.*)", addflavor: $1, devel: true }
+- { setname: firefox,                  namepat: "firefox[0-9.-]*" }
 - { setname: firefox-beta-i18n,        namepat: "firefox-beta-i18n-.*" }
+- { setname: firefox-esr,              namepat: "firefox-esr[0-9.-]*" }
+- { setname: firefox-esr,              namepat: "firefox-esr[0-9.-]*(-gtk2|-privacy|-unwrapped)" }
 - { setname: firefox-esr-i18n,         namepat: "firefox-esr-i18n-.*" }
+- { setname: firefox-esr-l10n,         namepat: "firefox-esr[0-9.-]*-l10n" }
 - { setname: firefox-i18n,             namepat: "firefox-(i18n|l10n)-.*" }
 - { setname: firefox-kde-i18n,         namepat: "firefox-kde-i18n-.*" }
 - { setname: five-or-more,             name: gnome-games-five-or-more }
@@ -40,6 +50,7 @@
 - { setname: flume,                    name: apache-flume-ng }
 - { setname: fluxbox,                  name: [fluxbox-wm,fluxbox-noslit] }
 - { setname: flwm,                     name: flwm-tc }
+- { setname: fmod,                     namepat: "(?:lib)?fmod(?:ex|api)?[0-9._-]*" }
 - { setname: fmt,                      name: [fmtlib,libfmt,cppformat] } # cppformat is the former name, see http://fmtlib.net
 - { setname: fofix,                    name: fofix-dfsg }
 - { setname: foldingathome,            name: foldingathome-noroot }
@@ -51,6 +62,8 @@
 - { setname: fop,                      name: [apache-fop,fop2,xmlgraphics-fop] }
 - { setname: fossology,                name: fossology-nomos-standalone } # part of fossology
 - { setname: four-in-a-row,            name: gnome-games-four-in-a-row }
+- { setname: fox,                      name: [fox-devel,fox-toolkit,fox-toolkit-devel] }
+- { setname: fox,                      namepat: "fox[0-9.-]+" }
 - { setname: foxyproxy,                name: xpi-foxyproxy, family: freebsd }
 - { setname: fpc,                      name: [fpc-source,fpc-src] } # part of fossology
 - { setname: fpc-modules,              namepat: "fpc-.*", family: freebsd }
@@ -66,6 +79,7 @@
 - { setname: freepats,                 name: [timidity-freepats,timidity-patch-freepats] }
 - { setname: freeplane,                name: freeplane-srcbuild }
 - { setname: freeradius,               name: [freeradius-server,freeradius3] }
+- { setname: freerdp,                  namepat: "freerdp[0-9.-]+" }
 - { setname: freetype,                 name: [libfreetype,freetype1,freetype2] }
 - { setname: freetype-infinality,      name: [freetype2-infinality,libfreetype-infinality] }
 - { setname: friently-find,            name: ffind }
@@ -73,3 +87,18 @@
 - { setname: fsv,                      name: fsv2 }
 - { setname: "fusefs:s3fs",            name: [s3fs,s3fs-fuse] }
 - { setname: fuzzylite,                name: fuzzylite5 }
+
+- setname: ffmpeg
+  name:
+    - ffmpeg-compat
+    - ffmpeg-decklink
+    - ffmpeg-full
+    - ffmpeg-full-nvenc
+    - ffmpeg-headless
+    - ffmpeg-headless2.8
+    - ffmpeg-nvenc
+    - ffmpeg-nvenc-manjaro
+    - ffplay1
+    - ffplay2
+    - ffplay3
+  addflavor: true

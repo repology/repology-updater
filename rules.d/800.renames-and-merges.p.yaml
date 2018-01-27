@@ -5,18 +5,26 @@
 - { setname: palemoon,                 name: palemoon-bin, addflavor: bin }
 - { setname: pam-ccreds,               name: libpam-ccreds }
 - { setname: pam-ldap,                 name: libpam-ldap }
+- { setname: pangomm,                  namepat: "(?:lib)?pangomm[0-9._-]*" }
+- { setname: pangomm,                  namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", addflavor: docs }
 - { setname: panoply,                  name: panoply-nodesktop, addflavor: nodesktop }
 - { setname: pasystray,                name: [pasystray-gtk2,pasystray-gtk2-standalone,pasystray-gtk3-standalone] }
 - { setname: pcre++,                   name: [libpcre++,pcrexx] }
+- { setname: pcre,                     name: [pcre-static,pcre-cpp] }
+- { setname: pcre,                     namepat: "(?:lib)?pcre[0-9._-]*" }
+- { setname: pdfstudio,                namepat: "pdfstudio[0-9]+" }
 - { setname: pdns,                     name: [pdnsrec,powerdns-recursor] }
 - { setname: pdns,                     name: [powerdns-geoip,powerdns-ldap,powerdns-mysql,powerdns-odbc,powerdns-pgsql] }
 - { setname: pdns,                     name: pdns-common }
 - { setname: pdns,                     name: powerdns }
-- { setname: "perl:app-perlbrew",      name: perlbrew }
 - { setname: pglogical,                name: [postgresql-pglogical,pglogical2] }
 - { setname: pgplot,                   name: pgplot5 }
+- { setname: pgpool,                   name: [pgpool2,postgresql-pgpool-ii] }
+- { setname: pgpool,                   namepat: "pgpool-ii[0-9._-]*" }
+- { setname: pgpool,                   namepat: "postgresql[0-9._-]*-pgpool[0-9._-]*" }
 - { setname: phash,                    name: libphash }
 - { setname: phoenix-emu,              name: phoenix-emu-project }
+- { setname: php,                      namepat: "php[0-9._-]*" }
 - { setname: physfs,                   name: libphysfs }
 - { setname: pilot-link,               name: pilot-link-libs, addflavor: libs }
 - { setname: pioneer,                  name: pioneerspacesim }
@@ -26,7 +34,23 @@
 - { setname: pnp4nagios,               name: pnp4nagios-cgi }
 - { setname: polyclipping,             name: clipperlib }
 - { setname: polyclipping,             name: libpolyclipping }
+- { setname: postfix,                  name: [postfix-current,postfix-current-sasl,postfix211,postfix211-sasl] }
 - { setname: postfwd,                  name: postfix-postfwd, family: freebsd }
+- { setname: postgis,                  name: [postgis-src,postgis-sfcgal,liblwgeom] }
+- { setname: postgis,                  namepat: "postgis[0-9._-]+" }
+- { setname: postgis,                  namepat: "postgresql[0-9._-]*-postgis" }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*" }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-beta.*", devel: true }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-client", addflavor: client }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-contrib", addflavor: contrib }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-docs?", addflavor: docs }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-libs", addflavor: libs }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-lts.*" }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-plperl", addflavor: plperl }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-plpython", addflavor: plpython }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*-pltcl", addflavor: pltcl }
+- { setname: postgresql,               namepat: "postgresql[0-9.-]*[_-]server", addflavor: server }
+- { setname: postgresql-1c,            namepat: "postgresql[0-9.-]+-1c" }
 - { setname: postgresql-multicorn,     name: multicorn }
 - { setname: poudriere,                name: poudriere-devel, ignore: true }
 - { setname: povray,                   namepat: "povray[0-9]+", family: freebsd }
@@ -46,3 +70,4 @@
 - { setname: pycharm,                  name: intellij-pycharm }
 - { setname: pycharm,                  name: pycharm-eap } # EAP versions handled with other rules
 - { setname: pycharm,                  name: pycharm-professional, addflavor: professional }
+- { setname: python,                   namepat: "python[._-]?[23][0-9._-]*" }

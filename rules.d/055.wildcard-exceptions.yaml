@@ -1,6 +1,22 @@
-- { name: meld3,                       wwwpart: meldmerge, setname: meld } # XXX: create problem; this is wrongly named
+- { setname: go,                       namepat: "go-?1[0-9._-]+" } # don't mix with e.g. go2, go4
+- { setname: go,                       namepat: "golang[0-9.-]*" }
+
+- { setname: gstreamer,                namepat: "gstreamer[0-9._-]+" }
+
+- { setname: meld,                     name: meld3, wwwpart: meldmerge } # XXX: create problem; this is wrongly named
+
+- { setname: nodejs,                   name: [nodejs-bigger-heap,nodejs-slim] }
+- { setname: nodejs,                   name: node }
+- { setname: nodejs,                   name: nodejs-current, ignore: true }
+- { setname: nodejs,                   namepat: "node(?:js)?[0-9._-]+" }
+- { setname: nodejs,                   namepat: "nodejs-lts.*" }
+
+- { setname: perl,                     namepat: "perl-?5[0-9.]*" }
 
 # python package manager vs. program wrapper (which was renamed to pipo upstream)
 # XXX: generate problem from this
-- { name: pip,                         setname: pipo,                     family: arch }
-- { name: pip,                         setname: pipo,                     family: gentoo, category: app-misc }
+- { setname: pipo,                     name: pip, family: arch }
+- { setname: pipo,                     name: pip, family: gentoo, category: app-misc }
+
+- { setname: ruby,                     namepat: "ruby-?[0-9.]+" }
+- { setname: ruby,                     namepat: ruby-doc, addflavor: doc }

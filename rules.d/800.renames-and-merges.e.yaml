@@ -17,13 +17,19 @@
 - { setname: eekboard,                 name: eekboard-gtk2 }
 - { setname: eid-mw,                   name: [beid-middleware,beid,libbeid] }
 - { setname: eid-viewer,               name: eid-viewer-bin }
+- { setname: eigen,                    namepat: "eigen[0-9._-]+" }
 - { setname: einstein,                 name: einstein-puzzle, family: pkgsrc }
 - { setname: eiskaltdcpp,              namepat: eiskaltdcpp-(cli|daemon|data|gtk|lib|qt|core) }
+- { setname: elasticsearch,            namepat: "elasticsearch[0-9]+" }
 - { setname: elbcli,                   name: elb-tools }
 - { setname: electricfence,            name: electric-fence }
 - { setname: elftoolchain,             name: libexecinfo, family: ravenports, addflavor: $0 }
 - { setname: elvis,                    name: elvis-x11 }
+- { setname: emacs,                    name: [emacs-24bit,emacs-nox,emacs-nox11] }
+- { setname: emacs,                    name: [emacs-devel,emacs-git], ignore: true }
+- { setname: emacs,                    namepat: "emacs[0-9.-]+(?:-nox11|-non-dfsg)?" }
 - { setname: emacs-lua-mode,           name: emacs-lua }
+- { setname: emacs-mediawiki,          name: mediawiki, category: app-emacs }
 - { setname: emacs-mmm-mode,           name: emacs-mmm }
 - { setname: embree,                   name: embree-isa }
 - { setname: emby,                     name: emby-server }

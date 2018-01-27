@@ -10,7 +10,9 @@
 - { setname: barcode,                  name: gnu-barcode }
 - { setname: base,                     name: acidbase }
 - { setname: bash,                     name: bash-interactive, addflavor: interactive }
+- { setname: bash,                     namepat: "bash[0-9]+" }
 - { setname: bats,                     name: bash-bats }
+- { setname: bbpager,                  name: [bbpager03,bbpager04] }
 - { setname: bcel,                     name: bcel5_3 }
 - { setname: beast,                    name: beastbse }
 - { setname: beneath-a-steel-sky,      name: bass, family: [freebsd,gentoo,openbsd,arch,opensuse] }
@@ -19,6 +21,12 @@
 - { setname: bibtool,                  name: bib-tool }
 - { setname: bicyclerepair,            name: bicyclerepair-py27 }
 - { setname: billardgl,                name: billard-gl }
+- { setname: bind,                     name: bind-rl, addflavor: rl }
+- { setname: bind,                     name: bind-tools, addflavor: tools }
+- { setname: bind,                     name: bind-toolsonly, addflavor: toolsonly }
+- { setname: bind,                     name: bind9-devel, ignore: true }
+- { setname: bind,                     name: bindutils, addflavor: utils }
+- { setname: bind,                     namepat: "bind[0-9_.-]+" }
 - { setname: bird,                     name: [bird-v6,bird6] }
 - { setname: bison,                    name: [bison-doc,bison-runtime], addflavor: true }
 - { setname: bison,                    name: bison27 }
@@ -29,6 +37,7 @@
 - { setname: blas,                     name: blas-tmg }
 - { setname: blasphemer,               name: blasphemer-wad }
 - { setname: blender,                  name: blender-binaries }
+- { setname: blender,                  namepat: "blender[0-9._-]+" }
 - { setname: blitz++,                  name: blitz, family: [gentoo,fedora,opensuse] } # XXX: recheck
 - { setname: blobby,                   name: [blobby2,blobby-volley] }
 - { setname: blockout,                 name: [blockout2,blockoutii] }
@@ -39,6 +48,7 @@
 - { setname: bochs,                    name: bochs-gdb, addflavor: gdb }
 - { setname: boehm-gc,                 name: [boehmgc,boehm-gc-threaded,boehm-gc-redirect,boehm_garbage_collector,bdw-gc,gc] }
 - { setname: boehm-gc,                 name: libgc }
+- { setname: bogofilter,               name: [bogofilter-sqlite,bogofilter-tc], addflavor: true }
 - { setname: boinc,                    name: [boinc-client,boinc-nox] } # or to boinc-client?
 - { setname: bombono-dvd,              name: bombono }
 - { setname: boost,                    namepat: "boost-mpi-source[0-9-.]+", addflavor: boost-mpi }
@@ -46,6 +56,7 @@
 - { setname: botan,                    namepat: "botan[0-9.]+" }
 - { setname: botan,                    namepat: "libbotan[0-9.]*" }
 - { setname: bouncycastle,             name: bouncycastle15 }
+- { setname: bowtie,                   name: bowtie2 }
 - { setname: bpython,                  name: [bpython-py27,bpython2] }
 - { setname: brasero,                  name: [brasero2,brasero-dvdcssfix] }
 - { setname: breakpad,                 name: google-breakpad }

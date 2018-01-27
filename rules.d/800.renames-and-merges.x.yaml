@@ -8,11 +8,21 @@
 - { setname: x2vnc,                    name: x2vnc-no-xinerama, addflavor: true }
 - { setname: xa,                       name: xa65 }
 - { setname: xalan-c,                  name: [xalanc,xalan-c++] }
+- { setname: xapian-bindings,          name: [xapian-tcl-bindings,tcl-xapian], addflavor: tcl }
+- { setname: xapian-bindings,          name: "perl:xapian", addflavor: perl }
+- { setname: xapian-bindings,          namepat: "xapian[0-9._-]*-bindings[0-9._-]*" }
+- { setname: xapian-bindings,          namepat: xapian-bindings-(perl|python), addflavor: $1 }
+- { setname: xapian-core,              namepat: "xapian[0-9._-]*-core[0-9._-]*" }
+- { setname: xapian-omega,             namepat: "xapian-omega[0-9._-]*" }
 - { setname: xar,                      name: xar-mackyle }
 - { setname: xarchiver,                name: [xarchiver-assume-name,xarchiver-gtk2], addflavor: true }
 - { setname: xarchiver,                name: xfce4-xarchiver }
 - { setname: xdelta,                   name: [xdelta1,xdelta3] }
 - { setname: xdg-utils,                name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock] }
+- { setname: xerces-c,                 namepat: "(?:lib)?xerces-?c[0-9.+-]*" }
+- { setname: xerces-j,                 name: xerces, family: [openbsd,slackbuilds] }
+- { setname: xerces-j,                 name: xerces, family: gentoo, category: dev-java }
+- { setname: xerces-j,                 namepat: "(?:lib)?xerces2?-?j(?:ava)?[0-9-]*" }
 - { setname: xfce4-dict,               name: xfce4-dict-plugin, family: freebsd }
 - { setname: xfconf,                   name: [xfce4-conf,xfce4-config,xfconf4.12,xfce4-conf,xfce4-config] }
 - { setname: xfconf,                   name: libxfconf, addflavor: lib }
@@ -31,4 +41,6 @@
 - { setname: xpilot-ng,                namepat: xpilot-ng-(client|server), addflavor: $1 }
 - { setname: xrdp,                     name: xrdp-devel, ignore: true }
 - { setname: xsel,                     name: xsel-conrad }
+- { setname: xulrunner,                name: xulrunner-devel, ignore: true }
+- { setname: xulrunner,                namepat: "xulrunner[0-9.-]+" }
 - { setname: xvidcore,                 name: [xvid,libxvid] }
