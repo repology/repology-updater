@@ -35,6 +35,8 @@
 - { name: agda-stdlib,                 verlonger: 2,                 family: gentoo,       incorrect: true } # documented broken versioning (other project's version is prepended)
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignore: true }
 - { name: airspy,                      verpat: "20[0-9]{6}",                               ignore: true }
+- { name: aldo,                                                      ruleset: aur,         untrusted: true }
+- { name: aldo,                        ver: "0.7.8",                 ruleset: aur,         incorrect: true }
 - { name: [alienarena, alienarena-data], verpat: ".*20[0-9]{6}.*",                         ignore: true }
 - { name: amarok,                      verpat: ".*20[0-9]{6}.*",                           ignore: true } # nix garbage
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignore: true } # revision
@@ -87,6 +89,8 @@
 - { name: bass,                        verpat: "20[0-9]{6}",                               ignore: true }
 - { name: bastet,                      ver: "0.43.1.2015083000",                           ignore: true }
 - { name: bats,                        ver: "1.0",                   family: sisyphus,     ignore: true } # totally fake
+- { name: betty,                                                     ruleset: aur,         untrusted: true }
+- { name: betty,                       ver: "0.1.8",                 ruleset: aur,         incorrect: true }
 - { name: bind,                                                                            p_is_patch: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignore: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignore: true } # debian weirdness
@@ -109,6 +113,8 @@
 - { name: bully,                       verpat: "1\\.1.+",                                  ignore: true } # snapshots, latest is 1.1
 - { name: busybox,                     ver: "1.28.0",                                      devel: true }
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignore: true } # nix fake; real version is 1.0.6
+- { name: bzr-rewrite,                                               ruleset: aur,         untrusted: true }
+- { name: bzr-rewrite,                 ver: "0.1.8",                 ruleset: aur,         incorrect: true }
 
 # C
 - { name: ca-certificates,             verlonger: 1,                                       ignore: true } # no need to append NSS version
