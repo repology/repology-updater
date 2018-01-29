@@ -85,3 +85,4 @@
     - opencl-mesa
     - opencl-mesa-noglvnd
     - opencl-mesa-vanilla
+- { setname: meson,                    name: "python:meson" }

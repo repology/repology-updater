@@ -1,5 +1,6 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: waf,                      name: "python:waf" }
 - { setname: waterfox,                 name: waterfox-kde, addflavor: kde }
 - { setname: wcalc,                    name: w-calc }
 - { setname: wcmcommander,             name: walcommander } # old name

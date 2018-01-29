@@ -12,6 +12,7 @@
 - { setname: vim,                      name: [vim-console,vim-core,vim-full,vim-gnome,vim-gtk2,vim-gtk3,vim-light,vim-lite,vim-minimal,vim-motif,vim-runtime,vim-share,vim-x11,vim-xaw,vim-gvim], addflavor: true }
 - { setname: vim-gnupg,                name: gnupg, category: app-vim, family: gentoo }
 - { setname: vim-spell,                namepat: "vim-spell-.*", family: [openbsd,gentoo,arch] }
+- { setname: vint,                     name: "python:vint" }
 - { setname: vint,                     name: vim-vint }
 - { setname: virtualbox-$1,            namepat: "virtualbox-ose-(.*)", family: freebsd }
 - { setname: virtuoso,                 name: [virtuoso-6,virtuoso-7,virtuoso-opensource,virtuoso-ose,virtuoso6] }

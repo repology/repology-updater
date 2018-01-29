@@ -12,6 +12,8 @@
 - { setname: lapacke,                  name: lapacke-tmg, addflavor: tmg } # component of
 - { setname: lcms,                     name: [lcms,lcms1,lcms2,little-cms,little-cms2,lcms-python,liblcms,liblcms2] }
 - { setname: ldb,                      name: [libldb,ldb12,ldb13] }
+- { setname: ldns,                     name: "perl:dns-ldns", wwwpart: nlnetlabs, addflavor: perl } # part of
+- { setname: ldns,                     name: "python:ldns", addflavor: python }
 - { setname: ldns,                     name: [ldns-tools,ldns-utils] }
 - { setname: liberal-crime-squad,      name: lcs }
 - { setname: libreoffice-extension-barcode, name: barcode, family: gentoo, category: app-officeext }

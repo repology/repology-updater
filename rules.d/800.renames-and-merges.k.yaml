@@ -20,5 +20,6 @@
 - { setname: koffice-l10n,             namepat: "koffice-l10n-.*", family: pkgsrc }
 - { setname: kompozer-i18n,            namepat: "kompozer-i18n-.*", family: arch }
 - { setname: krita,                    name: krita3 }
+- { setname: kye,                      name: "python:kye" }
 - { setname: kyotocabinet,             name: kyoto-cabinet }
 - { setname: kyototycoon,              name: kyoto-tycoon }

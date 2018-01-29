@@ -71,6 +71,7 @@
 - { setname: clutter-gtk,              name: clutter-gtk0.10 }
 - { setname: cmake,                    namepat: "cmake-?[0-9.]+" }
 - { setname: cmrt,                     name: libcmrt }
+- { setname: cntk,                     name: "python:cntk" }
 - { setname: cockatrice,               name: [cockatrice-client,cockatrice-server] }
 - { setname: codec2,                   name: libcodec2 }
 - { setname: coffee-script,            name: coffeescript } # XXX: problem

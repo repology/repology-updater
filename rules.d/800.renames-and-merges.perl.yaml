@@ -1,1 +1,8 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: "perl:app-cpanminus",     name: cpanminus }
 - { setname: "perl:app-perlbrew",      name: perlbrew }
+- { setname: "perl:backuppc-xs",       name: backuppc-xs }
+- { setname: "perl:build",             name: perl-build }
+- { setname: "perl:cddb_get",          name: cddb_get }
+- { setname: "perl:gearman-server",    name: gearman-server }

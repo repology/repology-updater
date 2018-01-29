@@ -1,5 +1,6 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: t,                        name: "ruby:t" }
 - { setname: tali,                     name: gnome-games-tali }
 - { setname: talkfilters,              name: talk-filters }
 - { setname: talloc,                   name: libtalloc }
@@ -38,6 +39,7 @@
 - { setname: tint,                     name: tint-tetris }
 - { setname: tintin++,                 name: [tintin,tintinxx] }
 - { setname: tk,                       namepat: "tk8[0-9._-]+" } # don't mix with tk2, tk5, tk707 which are unrelated projects
+- { setname: tmuxinator,               name: "ruby:tmuxinator" }
 - { setname: tokyocabinet,             name: tokyo-cabinet }
 - { setname: tokyodystopia,            name: tokyo-dystopia }
 - { setname: tomahawk,                 name: tomahawk-player }

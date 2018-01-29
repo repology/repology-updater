@@ -14,6 +14,7 @@
 - { setname: ace-of-penguins,          name: ace, family: [openbsd,slackbuilds] }
 - { setname: acetoneiso,               name: acetoneiso2, family: [arch,sisyphus] }
 - { setname: acetoneiso6,              name: acetoneiso, verpat: "6.*", family: fedora }
+- { setname: ack,                      name: "perl:ack" }
 - { setname: ack,                      name: ack-grep, family: debuntu }
 - { setname: acpica,                   namepat: "acpica-(?:tools|unix|utils)" }
 - { setname: acroread,                 name: [adobereader,adobe-reader] }
@@ -54,6 +55,7 @@
 - { setname: android-tools,            namepat: android-platform-system-(core|extras), family: debuntu }
 - { setname: angelscript,              namepat: "angelscript-?[0-9._-]+"}
 - { setname: angular.js,               name: angularjs }
+- { setname: ansible,                  name: "python:ansible" }
 - { setname: ansible,                  namepat: "ansible[0-9]+" }
 - { setname: ant,                      namepat: "ant[0-9.]+" }
 - { setname: antimicro,                name: antimicro-qt4 }
@@ -119,6 +121,7 @@
 - { setname: autoconvert,              name: zh-autoconvert }
 - { setname: automake,                 namepat: "automake[_-]?[0-9.]+" } # do we need splits for this?
 - { setname: automoc,                  namepat: "automoc[0-9]+" }
+- { setname: autopep8,                 name: "python:autopep8" }
 - { setname: autotools,                name: autotools-dev, ignore: true }
 - { setname: autotools,                name: autotools-wrappers } # ravenports
 - { setname: avidemux,                 name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4] }
@@ -127,7 +130,9 @@
 - { setname: avro-c++,                 name: avro-cpp }
 - { setname: awesome,                  namepat: "awesome[0-9._-]+" }
 - { setname: aws-cw-tools,             name: cloud-watch }
+- { setname: awscli,                   name: "python:awscli" }
 - { setname: awscli,                   name: aws-cli }
+- { setname: awstats,                  name: "perl:awstats" }
 
 - setname: avahi
   name:

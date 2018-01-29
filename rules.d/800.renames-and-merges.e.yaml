@@ -48,6 +48,7 @@
 - { setname: epiphany,                 name: epiphany-unstable, ignore: true }
 - { setname: epl,                      name: epl.el, family: freebsd }
 - { setname: epsxe,                    name: epsxe1.9 }
+- { setname: epydoc,                   name: "python:epydoc" }
 - { setname: eric,                     name: "python:eric" }
 - { setname: eric,                     name: [eric-common,eric-i18n] }
 - { setname: eric,                     name: [eric4,eric5,eric6] }
@@ -68,4 +69,5 @@
 - { setname: exim,                     name: exim4 }
 - { setname: expat,                    name: expat21 }
 - { setname: extreme-tuxracer,         name: [etracer,extremetuxracer] }
+- { setname: eyed3,                    name: "python:eyed3" }
 - { setname: eyed3,                    name: eye-d3 }

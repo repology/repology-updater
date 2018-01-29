@@ -29,6 +29,8 @@
 - { setname: geocode-glib,             name: libgeocode-glib }
 - { setname: geoip,                    name: libgeoip }
 - { setname: geos,                     namepat: "geos[0-9._-]+" }
+- { setname: get_iplayer,              name: "perl:get_iplayer" }
+- { setname: getdns,                   name: "python:getdns" }
 - { setname: getopt,                   name: [gnugetopt,gnu-getopt,gnu.getopt] }
 - { setname: gettext,                  name: libintl }
 - { setname: gflags,                   name: [google-gflags,libgflags] }
@@ -45,7 +47,9 @@
 - { setname: git,                      name: [git-base,git-docs,git-gitk,git-contrib,git-lite,git-gui,git-bashcompletion,gitweb,git-minimal,git-with-svn], addflavor: true }
 - { setname: gitflow,                  name: [git-flow,git_flow] }
 - { setname: gitg,                     name: gitg0, family: freebsd }
+- { setname: gitinspector,             name: "python:gitinspector" }
 - { setname: gitter,                   name: gitter-bin }
+- { setname: gixy,                     name: "python:gixy" }
 - { setname: gkrellm,                  name: gkrellm2 }
 - { setname: gl-117,                   name: gl117 }
 - { setname: glade,                    name: glade-dev, ignore: true }
@@ -95,6 +99,7 @@
 - { setname: goffice,                  namepat: "goffice[0-9._-]+" }
 - { setname: goldencheetah,            name: golden-cheetah }
 - { setname: gom,                      name: libgom }
+- { setname: goobook,                  name: "python:goobook" }
 - { setname: goocanvas,                namepat: "(?:lib)?goocanvas[0-9._-]*" }
 - { setname: goocanvasmm,              namepat: "(?:lib)?goocanvasmm[0-9._-]*" }
 - { setname: gopro-vr-player,          name: gopro-vr-player-beta, ignore: true }

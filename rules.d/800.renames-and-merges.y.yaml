@@ -2,9 +2,10 @@
 
 - { setname: yabause,                  name: [yabause-gtk,yabause-qt,yabause-qt5], addflavor: true }
 - { setname: yajl,                     name: [libyajl,libyajl1,libyajl2] }
+- { setname: yaml-cpp,                 namepat: "(?:lib)?yaml-cpp[0-9.-]*" }
 - { setname: yaze-ag,                  name: yaze }
 - { setname: yofrankie,                name: yofrankie-bge }
+- { setname: youtube-dl,               name: "python:youtube-dl" }
 - { setname: youtube-dl-gui,           name: youtube-dlg }
 - { setname: ytnef,                    name: libytnef } # see https://github.com/Yeraze/ytnef/blob/master/ChangeLog
 - { setname: yuicompressor,            name: yui-compressor }
-- { setname: yaml-cpp,                 namepat: "(?:lib)?yaml-cpp[0-9.-]*" }

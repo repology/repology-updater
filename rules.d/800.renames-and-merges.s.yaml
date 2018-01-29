@@ -2,33 +2,24 @@
 
 - { setname: s3backer,                 name: s3-backer }
 - { setname: saga,                     name: [saga-gis,saga-gis-ltr] }
+- { setname: samba,                    name: samba-docs, addflavor: docs }
+- { setname: samba,                    namepat: "samba[0-9.-]+" }
 - { setname: sauerbraten,              name: sauerbraten-data, addflavor: data }
 - { setname: scalapack,                name: libscalapack }
 - { setname: scamp,                    name: astromatic-scamp }
 - { setname: schismtracker,            name: schism }
 - { setname: sdl,                      name: [libsdl,sdl1] }
+- { setname: sdl,                      name: [sdl12,libsdl1.2] }
 - { setname: sdl2,                     name: [libsdl2] }
-- { setname: sdl2_$1,                  namepat: "(?:lib)?sdl[_-]*(image|mixer|net|ttf|gfx)2[0-9._-]*" }
+- { setname: sdl2-image,               name: sdl_image, verpat: "2.*" }
 - { setname: sdl2_$1,                  namepat: "(?:lib)?sdl2[0-9._-]*(image|mixer|net|ttf|gfx)" }
+- { setname: sdl2_$1,                  namepat: "(?:lib)?sdl[_-]*(image|mixer|net|ttf|gfx)2[0-9._-]*" }
 - { setname: sdl_$1,                   namepat: "(?:lib)?sdl(?:1[0-9.]*)?[_-]*(image|mixer|net|ttf|gfx)(?:1[0-9._-]*)?" }
 - { setname: sdl_pango,                name: [libsdl_pango,sdlpango] }
 - { setname: sdl_sge,                  name: [libsdl_sge,libsdl-sge] }
 - { setname: sdl_sound,                name: sdl_sound-patched, addflavor: patched }
 - { setname: sdl_sound,                namepat: "(?:lib)?sdl[0-9._-]*sound[0-9._-]*" }
 - { setname: sdlconsole,               name: [libsdl-console,sdl_console] }
-
-  #- { setname: sdl$1,                    namepat: "(?:lib)?(?:sdl1(.*))" }
-  #- { setname: sdl$1,                    namepat: "(?:lib)?sdl(2?[_-](?:image|mixer|net|sound|ttf|gfx|console|sge|pango))" }
-  #- { setname: sdl,                      name: libsdl }
-  #- { setname: sdl-$1,                   namepat: "(?:lib)?sdl[_-]([a-z]+)1\\.2" }
-  #- { setname: sdl-gfx,                  name: libsdl_gfx13 }
-  #- { setname: sdl-pango,                name: sdlpango, family: debuntu }
-  #- { setname: sdl2,                     name: controllermap, addflavor: controllermap }
-  #- { setname: sdl2,                     name: libsdl2 }
-  #- { setname: sdl2-$1,                  namepat: "(?:lib)?sdl[_-]([a-z]+)2\\.0" }
-  #- { setname: sdl2-gfx,                 name: sdlgfx, family: debuntu }
-  #- { setname: sdl_ttf2,                 name: sdl_ttf, family: kaos }
-
 - { setname: sdllopan,                 name: sdl_lopan }
 - { setname: sdlmame,                  name: sdlmame-wout-toolkits, addflavor: wout-toolkits }
 - { setname: sdocbook-xml,             name: docbook-xml-simple } # ravenports
@@ -36,10 +27,14 @@
 - { setname: searx,                    name: searx-py3 }
 - { setname: sed,                      name: [gnu-sed,gnused,gsed] }
 - { setname: sendmail,                 namepat: "sendmail\\+.*", family: freebsd }
+- { setname: serf,                     namepat: "(?:lib)?serf[0-9._-]*" }
 - { setname: sextractor,               name: astromatic-sextractor }
 - { setname: sfml,                     name: compat-sfml16 }
+- { setname: sfml,                     namepat: "(?:lib)?sfml[0-9._-]*" }
 - { setname: sgt-puzzles,              name: puzzles } # not completely safe, but other puzzles were not encountered yet
 - { setname: sha1collisiondetection,   name: sha1dc }
+- { setname: shibboleth-sp,            namepat: "shibboleth-sp[0-9]+" }
+- { setname: sidplay,                  namepat: "sidplay[0-9]+" }
 - { setname: silgraphite,              name: [silgraphite-ft,silgraphite-xft], addflavor: true }
 - { setname: silgraphite,              name: silgraphite2.0 }
 - { setname: simple-scan,              name: simple-scan-3.12 }
@@ -48,23 +43,34 @@
 - { setname: singularity,              name: endgame-singularity }
 - { setname: singularity-music,        name: endgame-singularity-music }
 - { setname: singularityviewer,        name: singularityviewer-alpha, devel: true }
+- { setname: sip,                      namepat: "sip[0-9]+" }
 - { setname: sisc,                     name: sisc-scheme }
 - { setname: slang,                    name: [libslang,libslang2,s-lang,slang2,slang1] }
 - { setname: slashem,                  name: slashem-tty }
+- { setname: slony1,                   namepat: "slony1(?:-2|v2)" }
 - { setname: smplayer,                 name: smplayer-qt4, addflavor: qt4 }
+- { setname: smstools,                 namepat: "smstools[0-9]+" }
 - { setname: sni-qt,                   name: sni-qt4 }
 - { setname: snorenotify,              name: snorenotify-qt5 }
+- { setname: socat,                    namepat: "socat[0-9]+" }
+- { setname: softhsm,                  namepat: "softhsm[0-9]+" }
 - { setname: sopwith,                  namepat: "sdl-?sopwith" }
 - { setname: soundtouch,               name: [libsoundtouch,sound-touch] }
 - { setname: spacearyarya,             name: spacearyarya-kxl, family: gentoo } # XXX: recheck
+- { setname: spamassassin,             name: "perl:mail-spamassassin" }
+- { setname: spamassassin,             name: "perl:spamassassin" }
 - { setname: spamassassin,             name: spamassassin-rules, addflavor: rules }
 - { setname: spamassassin,             name: spamassassin-spamc, addflavor: rules }
 - { setname: sparsehash,               name: google-sparsehash }
 - { setname: speed-dreams$1,           namepat: "speeddreams(-data)?" }
 - { setname: speexdsp,                 name: libspeexdsp }
+- { setname: spidermonkey,             namepat: "spidermonkey[0-9]+" }
 - { setname: spotify,                  name: [spotify-stable,spotify094] }
 - { setname: spotify,                  name: spotify-client, addflavor: client }
 - { setname: spring,                   name: springrts }
+- { setname: squid,                    name: [squid-ldap,squid-ntlm], family: openbsd }
+- { setname: squid,                    name: squid-devel, ignore: true }
+- { setname: squid,                    namepat: "squid[0-9._-]+" }
 - { setname: squirrelmail-$1,          namepat: "squirrelmail-(.*)-plugin", family: freebsd }
 - { setname: stellarium,               name: stellarium-qt4 }
 - { setname: stepmania,                name: stepmania-devel, family: freebsd }
@@ -72,40 +78,24 @@
 - { setname: sthttpd,                  name: thttpd, family: gentoo } # actually fork of thttpd; XXX: problem
 - { setname: stone-soup,               name: stone-soup-ncurses }
 - { setname: stone-soup,               namepat: "stonesoup(?:-sdl)?" }
+- { setname: stormssh,                 name: "python:stormssh" }
+- { setname: streamtuner,              namepat: "streamtuner[0-9]+" }
+- { setname: stringtemplate,           namepat: "stringtemplate[0-9]+" }
 - { setname: structuresynth,           name: structure-synth }
+- { setname: stunnel,                  name: stunnel4 }
 - { setname: stuntrally,               name: stunt-rally }
 - { setname: suitesparse,              name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis] }
 - { setname: suitesparse,              name: suite-sparse }
 - { setname: suitesparseconfig,        name: [ufconfig,suitesparse-common-devel] } # from report: ufconfig is an old name for suitesparseconfig
 - { setname: supertransball2,          name: [stransball2,super_transball] }
+- { setname: supertux,                 name: [supertux,supertux1,supertux2,supertux-old,supertux-stable] }
 - { setname: svmlight,                 name: svm_light }
 - { setname: swarp,                    name: astromatic-swarp }
 - { setname: sweethome3d,              name: [sweet-home-3d,sweethome3d-application] }
-- { setname: swissfileknife,           name: sfk }
-- { setname: switchboard-plug-networking, name: switchboard-plug-network }
-- { setname: samba,                    name: samba-docs, addflavor: docs }
-- { setname: samba,                    namepat: "samba[0-9.-]+" }
-- { setname: sdl,                      name: [sdl12,libsdl1.2] }
-- { setname: sdl2-image,               name: sdl_image, verpat: "2.*" }
-- { setname: serf,                     namepat: "(?:lib)?serf[0-9._-]*" }
-- { setname: sfml,                     namepat: "(?:lib)?sfml[0-9._-]*" }
-- { setname: shibboleth-sp,            namepat: "shibboleth-sp[0-9]+" }
-- { setname: sidplay,                  namepat: "sidplay[0-9]+" }
-- { setname: sip,                      namepat: "sip[0-9]+" }
-- { setname: slony1,                   namepat: "slony1(?:-2|v2)" }
-- { setname: smstools,                 namepat: "smstools[0-9]+" }
-- { setname: socat,                    namepat: "socat[0-9]+" }
-- { setname: softhsm,                  namepat: "softhsm[0-9]+" }
-- { setname: spidermonkey,             namepat: "spidermonkey[0-9]+" }
-- { setname: squid,                    name: [squid-ldap,squid-ntlm], family: openbsd }
-- { setname: squid,                    name: squid-devel, ignore: true }
-- { setname: squid,                    namepat: "squid[0-9._-]+" }
-- { setname: streamtuner,              namepat: "streamtuner[0-9]+" }
-- { setname: stringtemplate,           namepat: "stringtemplate[0-9]+" }
-- { setname: stunnel,                  name: stunnel4 }
-- { setname: supertux,                 name: [supertux,supertux1,supertux2,supertux-old,supertux-stable] }
 - { setname: swig,                     namepat: "swig-(.*)", family: macports, addflavor: $1 } # split by supported language
 - { setname: swig,                     namepat: "swig[0-9._-]+" }
+- { setname: swissfileknife,           name: sfk }
+- { setname: switchboard-plug-networking, name: switchboard-plug-network }
 - { setname: syslog-ng,                name: [syslog-ng-afamqp,syslog-ng-geoip,syslog-ng-http,syslog-ng-json,syslog-ng-mongodb,syslog-ng-redis,syslog-ng-smtp,syslog-ng-sql], addflavor: true }
 - { setname: syslog-ng,                name: syslog-ng-nosystemd, addflavor: nosystemd }
 - { setname: syslog-ng,                namepat: "syslog-ng[0-9._-]+" }

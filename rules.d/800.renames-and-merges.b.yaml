@@ -51,6 +51,7 @@
 - { setname: bogofilter,               name: [bogofilter-sqlite,bogofilter-tc], addflavor: true }
 - { setname: boinc,                    name: [boinc-client,boinc-nox] } # or to boinc-client?
 - { setname: bombono-dvd,              name: bombono }
+- { setname: boost,                    name: "python:boost", addflavor: python }
 - { setname: boost,                    namepat: "boost-mpi-source[0-9-.]+", addflavor: boost-mpi }
 - { setname: boost,                    namepat: "boost[0-9_.]+" }
 - { setname: botan,                    namepat: "botan[0-9.]+" }
@@ -65,6 +66,7 @@
 - { setname: btanks,                   name: battle-tanks }
 - { setname: btanks,                   name: btanks-data, addflavor: data }
 - { setname: bubbros,                  name: bub-n-bros, family: gentoo } # XXX: recheck
+- { setname: bucardo,                  name: "perl:bucardo" }
 - { setname: bugs-everywhere,          name: bugseverywhere }
 - { setname: bugzilla,                 name: bugzilla50 }
 - { setname: bullet,                   name: bullet-docs, addflavor: docs }
@@ -73,6 +75,7 @@
 - { setname: byaccj,                   name: byacc-j, family: debuntu }
 - { setname: bzflag,                   name: bzflag-server, addflavor: server }
 - { setname: bzr,                      name: bazaar }
+- { setname: bzrtools,                 name: "python:bzrtools" }
 - { setname: bzrtools,                 name: bzr-tools }
 
 - setname: bareos

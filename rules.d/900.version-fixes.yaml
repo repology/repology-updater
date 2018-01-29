@@ -78,6 +78,7 @@
 - { name: attr,                        verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: autoconf,                    ver: "2.13.000227",                                 ignore: true }
 - { name: autoconf-archive,            verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
+- { name: autopep8,                    verpat: "2.*",                ruleset: hyperbola,   ignore: true }
 - { name: avinfo,                      ver: "1.0",                   family: [ sisyphus ], ignore: true }
 
 # B
@@ -492,9 +493,49 @@
 - { name: pciids,                                                    family: sisyphus,     ignore: true } # ALT pick random date instead of official date version
 - { name: pcre,                        ver: "10.31",                 family: fedora,       ignore: true } # fake, not released
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignore: true }
+- { name: "perl:anyevent",             ver: "7.70.0",                                      ignore: true }
+- { name: "perl:anyevent",             verpat: "7\\.[0-9]{3}.*",                           ignore: true }
+- { name: "perl:app-tlsme",            ver: "0.110000",                                    ignore: true }
+- { name: "perl:array-diff",           ver: ["0.05002", "0.07000"],                        ignore: true }
+- { name: "perl:authen-sasl",          ver: [ "2.150", "2.160", "2.1500", "2.1600" ],      ignore: true }
+- { name: "perl:bio-asn1-entrezgene",  verpat: "1\\.[0-9]{3}",                             ignore: true }
 - { name: "perl:catalyst-plugin-authentication", ver: "0.100230",                          ignore: true }
+- { name: "perl:catmandu-store-mongodb", ver: ["0.0501","0.0403"],                         ignore: true }
+- { name: "perl:cbor-xs",              ver: [ "1.60", "1.50", "1.30" ],                    ignore: true }
+- { name: "perl:cgi-formbuilder",      ver: [ "3.1000", "3.0900", "3.90.0", "3.90.0", "3.0501", "3.0800", "3.100.0" ], ignore: true }
+- { name: "perl:chi",                  ver: "0.580",                                       ignore: true }
+- { name: "perl:compress-lzf",         verpat: "3.[789]0",                                 ignore: true }
+- { name: "perl:convert-ber",          ver: ["1.3200","1.3101"],                           ignore: true }
+- { name: "perl:convert-uulib",        ver: "1.50",                                        ignore: true }
+- { name: "perl:cpan",                 ver: "2.1600",                                      ignore: true }
+- { name: "perl:cpan-meta-requirements", verpat: "2\\.[0-9]{6}.*",                         ignore: true }
+- { name: "perl:curses-ui-poe",        ver: ["0.04000","0.40.0","0.035","0.35.0"],         ignore: true }
+- { name: "perl:dancer-session-memcached", ver: ["0.2020"],                                ignore: true }
+- { name: "perl:data-compare",         ver: ["1.2200","1.2102","1.2101","1.250.0","1.240.0"], ignore: true }
+- { name: "perl:datetime",             verpat: "1\\.[0-9]{3,}.*",                          ignore: true }
+- { name: "perl:datetime-locale",      verpat: "1\\.[0-9]{3,}.*",                          ignore: true }
+- { name: "perl:devel-stacktrace",     verpat: "2\\.[0-9]{3,}.*",                          ignore: true }
+- { name: "perl:devel-stacktrace",     verpat: "2\\.[1-9][0-9].*",                         ignore: true }
+- { name: "perl:devel-symdump",        verpat: "2\\.[0-9]{3,}.*",                          ignore: true }
 - { name: "perl:device-serialport",    ver: "1.040000",                                    ignore: true }
+- { name: "perl:enum",                 verpat: "1\\.[0-9]{3,}.*",                          ignore: true }
+- { name: "perl:extutils-pkgconfig",   verpat: "1\\.[0-9]{3,}.*",                          ignore: true }
+- { name: "perl:extutils-xspp",        verpat: "0\\.[0-9]{3,}.*",                          ignore: true }
+- { name: "perl:json-xs",              verpat: "3\\.[0-9]{3,}.*",                          ignore: true }
+- { name: "perl:json-xs",              verpat: "3\\.[1-9]0.*",                             ignore: true }
+- { name: "perl:math-polygon-tree",    ver: "0.0691",                                      ignore: true } # 0.0691 < 0.08 (CPAN versioning brokenness)
+- { name: "perl:module-build",         verpat: "0\\.[0-9]{5,}.*",                          ignore: true }
+- { name: "perl:module-starter",       verpat: "1\\.[0-9]{3,}.*",                          ignore: true }
 - { name: "perl:net-whois-ripe",       ver: "2.005005",                                    ignore: true } # < 2.006
+- { name: "perl:opengl",               verpat: "0\\.[0-9]{3,}",                            ignore: true }
+- { name: "perl:readonly",             ver: "2.050",                                       ignore: true }
+- { name: "perl:redis",                verpat: "1\\.[0-9]{4,}",                            ignore: true }
+- { name: "perl:test-differences",     verpat: "0\\.[0-9]{3,}",                            ignore: true }
+- { name: "perl:test-exception",       ver: [ "0.430000", "0.400", "0.320" ],              ignore: true }
+- { name: "perl:test-exception",       verpat: "0\\.[0-9]{3,}",                            ignore: true }
+- { name: "perl:test-number-delta",    verpat: "1\\.[0-9]{3,}",                            ignore: true }
+- { name: "perl:time-duration",        ver: "1.200000",                                    ignore: true }
+- { name: "perl:timedate",             verpat: "2\\.[0-9]{3,}",                            ignore: true }
 - { name: "perl:xml-parser",           ver: "2.44.01",                                     devel: true } # marked as developer release on cpan
 - { name: "perl:yaml-libyaml",         ver: "0.71",                  family: [ sisyphus ], ignore: true } # 0.71 wasn't an authorised release
 - { name: pilot-link,                  ver: "0.12.15",               family: gobolinux,    ignore: true } # gobolinux fake
@@ -518,8 +559,16 @@
 - { name: pycharm,                     verpat: ".*20[0-9]{6}",                             ignore: true }
 - { name: python,                      verpat: ".*a.*",                                    devel: true }
 - { name: python,                      ver: "3.7.0",                 family: fedora,       ignore: true } # fedora fake, no such version
+- { name: "python:backports",          ver: "4.0.0",                                       ignore: true } # opensuse fake
+- { name: "python:leveldb",            ver: "0.193",                                       ignore: true } # seems like an older version than latest 0.20 # XXX: make outdated (see #398)
 - { name: "python:progressbar",        ver: "2.4",                   family: sisyphus,     ignore: true } # fake
 - { name: "python:py-cpuinfo",         verpat: "201.*",                                    ignore: true }
+- { name: "python:pycha",              ver: "279",                                         ignore: true }
+- { name: "python:pycrypto",           ver: "2.7",                   family: sisyphus,     ignore: true } # it's 2.7a1
+- { name: "python:pycrypto",           verpat: "3.*",                family: nix,          setname: "python:pycryptodome" } # different package
+- { name: "python:pyode",              verpat: ".*2010.*",                                 ignore: true }
+- { name: "python:pyspatialite",       ver: "3.0.1",                 noruleset: pypi,      incorrect: true } # it's 3.0.1-alpha-0
+- { name: "python:pyspatialite",       verpat: "(.*)(?:[_-]alpha[_-])(.*)",                setver: "$1alpha$2" }
 - { name: pytrainer,                   ver: ["1.10.1", "1.10.2"],    family: debuntu,      ignore: true }
 
 # Q

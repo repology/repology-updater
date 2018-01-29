@@ -11,6 +11,7 @@
 - { setname: zeronet,                  name: zeronet-git, ignore: true }
 - { setname: zerotier-one,             name: [zerotier,zerotier-one-with-controller] }
 - { setname: zetacoin,                 name: zetacoin-nox11, addflavor: nox11 }
+- { setname: zim,                      name: "python:zim" }
 - { setname: zim,                      name: zim-wiki }
 - { setname: zint,                     name: [zint-gui,zint-qt] }
 - { setname: zlib,                     name: zlib-static, addflavor: static }

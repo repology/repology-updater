@@ -32,6 +32,7 @@
 - { setname: iperf,                    name: iperf3 }
 - { setname: iproute2,                 name: iproute2-cake, addflavor: cake }
 - { setname: iproute2,                 name: iproute2-doc, addflavor: doc }
+- { setname: ipython,                  name: ["python:ipython",ipython,ipython2,ipython3,python2-ipython] }
 - { setname: ir-lv2,                   name: ir.lv2 }
 - { setname: ircii,                    name: ircii-current, ignore: true }
 - { setname: iso8879,                  name: iso_8879 }

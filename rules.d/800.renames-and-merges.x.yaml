@@ -8,8 +8,9 @@
 - { setname: x2vnc,                    name: x2vnc-no-xinerama, addflavor: true }
 - { setname: xa,                       name: xa65 }
 - { setname: xalan-c,                  name: [xalanc,xalan-c++] }
-- { setname: xapian-bindings,          name: [xapian-tcl-bindings,tcl-xapian], addflavor: tcl }
+- { setname: xandikos,                 name: "python:xandikos" }
 - { setname: xapian-bindings,          name: "perl:xapian", addflavor: perl }
+- { setname: xapian-bindings,          name: [xapian-tcl-bindings,tcl-xapian], addflavor: tcl }
 - { setname: xapian-bindings,          namepat: "xapian[0-9._-]*-bindings[0-9._-]*" }
 - { setname: xapian-bindings,          namepat: xapian-bindings-(perl|python), addflavor: $1 }
 - { setname: xapian-core,              namepat: "xapian[0-9._-]*-core[0-9._-]*" }
@@ -19,6 +20,7 @@
 - { setname: xarchiver,                name: xfce4-xarchiver }
 - { setname: xdelta,                   name: [xdelta1,xdelta3] }
 - { setname: xdg-utils,                name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock] }
+- { setname: xdot,                     name: "python:xdot" }
 - { setname: xerces-c,                 namepat: "(?:lib)?xerces-?c[0-9.+-]*" }
 - { setname: xerces-j,                 name: xerces, family: [openbsd,slackbuilds] }
 - { setname: xerces-j,                 name: xerces, family: gentoo, category: dev-java }

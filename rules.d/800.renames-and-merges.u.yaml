@@ -7,6 +7,7 @@
 - { setname: ultimatestunts,           name: ultimate-stunts }
 - { setname: unace,                    name: [unace-bin,unace-nonfree] }
 - { setname: unarr,                    name: libunarr }
+- { setname: unburden-home-dir,        name: "perl:unburden-home-dir" }
 - { setname: uncrustify,               name: uncrustify0.60 }
 - { setname: unison,                   name: unison-devel, ignore: true }
 - { setname: unison,                   name: unison-nox11, addflavor: true }
@@ -18,3 +19,5 @@
 - { setname: util-linux,               name: [util-linux-aes,util-linux-minimal,util-linux-nosystemd,util-linux-nosystemd-debug,util-linux-selinux,util-linux-systemd], addflavor: true }
 - { setname: util-linux,               name: getopt, family: openwrt }
 - { setname: uucp,                     name: freebsd-uucp, family: freebsd }
+- { setname: uwsgi,                    name: "python:uwsgi" }
+- { setname: uwsgitop,                 name: "python:uwsgitop" }

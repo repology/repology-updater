@@ -14,6 +14,7 @@
 - { setname: dconf,                    name: d-conf }
 - { setname: dconf-editor,             name: dconf-editor-3.20 }
 - { setname: ddclient,                 name: ddclient-ipv6 }
+- { setname: ddgr,                     name: "python:ddgr", addflavor: python }
 - { setname: deadbeef,                 name: deadbeef-with-plugins }
 - { setname: deal.ii,                  name: [dealii,dealii-openmpi,deal-ii] }
 - { setname: deis,                     name: [deis-client,deisctl] }
@@ -21,6 +22,7 @@
 - { setname: devede,                   name: devedeng }
 - { setname: dgen-sdl,                 name: dgen }
 - { setname: dhewm3,                   name: iodoom3-dhewm3 }
+- { setname: diffoscope,               name: "python:diffoscope" }
 - { setname: dino,                     name: dino-unstable, ignore: true }
 - { setname: discord,                  name: discord-bin }
 - { setname: divide-and-succeed,       name: divideandsucceed }
@@ -40,6 +42,7 @@
 - { setname: dr14tmeter,               name: dr14_tmeter }
 - { setname: drbd,                     namepat: "drbd[0-9]+" }
 - { setname: drbl,                     name: drbl-experimental, ignore: true }
+- { setname: dreampie,                 name: "python:dreampie" }
 - { setname: drpython,                 name: drpython-py27 }
 - { setname: dsniff,                   name: dsniff-nox11 }
 - { setname: dspam,                    name: [dspam-mysql,dspam-pgsql,dspam-web] }

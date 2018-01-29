@@ -194,6 +194,9 @@
 - { name: python,            ver: "999", family: aosc,    setname: python2 }
 - { name: python,            warning: "please classify me" }
 
+- { name: "python:pygobject", verpat: "2.*",              setname: "python:pygobject2" }
+- { name: "python:pygobject", verpat: "3.*",              setname: "python:pygobject3" }
+
 - { name: samba,             verpat: "3\\..*",            setname: samba3 }
 
 - { name: sfml,              verpat: "1\\..*",            setname: sfml1 }

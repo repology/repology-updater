@@ -1,0 +1,59 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: "python:backports.shutil-get-terminal-size", name: shutil_get_terminal_size }
+- { setname: "python:backports.shutil_get_terminal_size", namepat: "python:backports[_-]shutil[_-]get[_-]terminal[_-]size" }
+- { setname: "python:backports.shutil_which", name: "python:backports-shutil_which" }
+- { setname: "python:backports.shutil_which", name: shutil_which }
+- { setname: "python:backports.ssl_match_hostname", namepat: "(?:python:)?backports?[_-]ssl[_-]match[_-]hostname" }
+- { setname: "python:cherrypy",        name: "python:cherrypy-old" }
+- { setname: "python:cherrypy",        name: "python:cherrypy2" }
+- { setname: "python:cherrypy",        name: cherrypy3 }
+- { setname: "python:cld2",            name: pycld2 }
+- { setname: "python:colorama",        name: "python:colorama-0.3.3" }
+- { setname: "python:dbus-python",     name: ["python:dbus","python:dbus-common"] } # as per PyPi
+- { setname: "python:dbus-python",     name: [dbus-python,dbus-python-common] }
+- { setname: "python:dbus-python",     namepat: "dbus-python[0-9]+" }
+- { setname: "python:django",          name: [django,django12,django14] }
+- { setname: "python:django-$1",       namepat: "django-(.*)" }
+- { setname: "python:dyndnsc",         name: [dyndnsc,dyndnsc-py2] }
+- { setname: "python:flake8$1",        namepat: "flake8(.*)" }
+- { setname: "python:flask$1",         namepat: "flask(.*)" }
+- { setname: "python:geographiclib",   name: geographiclib-python }
+- { setname: "python:ipykernel",       name: ["python:jupyter-ipykernel","python:jupyter_ipykernel","python:jupyter_ipykernel-doc",ipykernel,jupyter-ipykernel] }
+- { setname: "python:ipyparallel",     name: [ipyparallel,ipython-ipyparallel,ipython2-ipyparallel] }
+- { setname: "python:ipython_genutils", name: [ipython-genutils,ipython_genutils] }
+- { setname: "python:ipywidgets",      name: ["python:jupyter_ipywidgets","python:jupyter_ipywidgets-doc",ipywidgets,jupyter-ipywidgets] }
+- { setname: "python:markdown",        name: python-markdown }
+- { setname: "python:meld3",           name: meld3 }
+- { setname: "python:nbdime",          name: jupyter-nbdime }
+- { setname: "python:nbsphinx",        name: ["python:jupyter_nbsphinx",nbsphinx] }
+- { setname: "python:numpy",           name: "python:numpy-1-13-3-gnu-hpc", addflavor: gnuhpc }
+- { setname: "python:numpy",           name: "python:numpy-docs-devhelp", addflavor: devhelp }
+- { setname: "python:numpy",           name: "python:numpy-mkl", addflavor: mkl }
+- { setname: "python:numpy",           name: "python:numpy-next", addflavor: next }
+- { setname: "python:numpy",           name: "python:numpy-openblas", addflavor: openblas }
+- { setname: "python:numpy",           name: ["python:numpy-doc","python:numpy-documentation"], addflavor: docs }
+- { setname: "python:numpy",           name: [numpy-legacy,numpy-legacy3,numpy3] }
+- { setname: "python:py-cpuinfo",      name: "python:cpuinfo" }
+- { setname: "python:py-jack",         name: pyjack }
+- { setname: "python:pyalsaaudio",     name: "python:alsaaudio" } # use pypi name!
+- { setname: "python:pyaudio",         name: "python:python-pyaudio" }
+- { setname: "python:pygtk",           name: ["python:gtk","python:gtk2","python:pygtk","python:pygtk2",pygtk,pygtk2,pygtk2.0] }
+- { setname: "python:pylint",          name: [pylint-gui,pylint-py27,pylint3,pylint3-gui] }
+- { setname: "python:pyode",           name: "python:ode" }
+- { setname: "python:pypoppler",       name: ["python:poppler","python:python-poppler"] }
+- { setname: "python:python-axolotl",  name: "python:axolotl" } # as per PyPi
+- { setname: "python:python-axolotl-curve25519", name: "python:axolotl-curve25519" } # as per PyPi
+- { setname: "python:python-djvulibre", name: "python:djvulibre" } # correct name on PyPi
+- { setname: "python:pytidylib",       name: ["python:pytidylib6","python:tidylib"] }
+- { setname: "python:pyusb",           name: "python:usb" } # create problem!
+- { setname: "python:pywebkitgtk",     name: ["python:webkitgtk",pywebkitgtk] }
+- { setname: "python:pyxdg",           name: "python:xdg" } # create problem!
+- { setname: "python:redis",           name: "python:redis-py" }
+- { setname: "python:robotframework",  name: robot-framework }
+- { setname: "python:scikits.$1",      namepat: "python:scikits-(.*)" }
+- { setname: "python:scikits.$1",      namepat: "scikits[_-](bootstrap|optimization|timeseries)" }
+- { setname: "python:sphinx",          name: "python:sphinx10" }
+- { setname: "python:sphinx",          name: sphinx, wwwpart: [pocoo.org,sphinx-doc.org] }
+- { setname: "python:sphinxcontrib-websupport", name: sphinxcontrib-websupport }
+- { setname: "python:twine",           name: twine-pypi }
