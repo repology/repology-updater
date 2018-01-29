@@ -7,6 +7,8 @@
 - { setname: cairomm,                  namepat: "(?:lib)?cairomm[0-9._-]*" }
 - { setname: cairomm,                  namepat: "(?:lib)?cairomm[0-9._-]*-docs", addflavor: docs }
 - { setname: calligra-l10n,            namepat: "calligra-l10n-.*", family: sisyphus }
+- { setname: camlp5,                   name: "ocaml:camlp5" }
+- { setname: camlp5,                   name: camlp5-transitional }
 - { setname: capnproto,                name: [capnp,capnproto-0.6] }
 - { setname: cassandra,                name: [apache-cassandra,cassandra2] }
 - { setname: cassandra,                namepat: "cassandra[0-9._-]+" }
