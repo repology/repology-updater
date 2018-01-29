@@ -28,6 +28,7 @@
 - { setname: minpack,                  name: libcminpack }
 - { setname: mirrormagic,              name: mirrormagic-sdl }
 - { setname: moc,                      name: mocp }
+- { setname: moc,                      name: moc-pulse, addflavor: pulse }
 - { setname: moodle,                   namepat: "moodle[0-9._-]+" }
 - { setname: moon-lander,              name: moonlander, family: [freebsd,openbsd] }
 - { setname: mozilla-dicts,            namepat: "mozilla-dicts-.*", family: openbsd }
