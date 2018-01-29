@@ -496,6 +496,7 @@
 - { name: openxcom,                    verpat: ".*201[789].*",                             ignore: true } # git snapshots
 - { name: opus,                        ver: "1.3",                   family: fedora,       ignore: true } # fake, it's beta
 - { name: orbit2,                      ver: "2.14.20",               family: sisyphus,     ignore: true } # alt fake
+- { name: osquery,                     ver: "3.0.0",                                       devel: true }
 - { name: oxygen-gtk3,                 verlonger: 3,                 family: kaos,         ignore: true }
 
 # P
