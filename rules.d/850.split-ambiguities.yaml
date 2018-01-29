@@ -342,6 +342,6 @@
 - { name: zap, family: openbsd, setname: zap-process-killer }
 - { name: zap, warning: "please classify me" }
 
-- { name: zoom, wwwpart: zoom.us, setname: zoom-videoconverence }
+- { name: zoom, wwwpart: zoom.us, setname: zoom-videoconference }
 
 - { name: zed, wwwpart: [ocamlcore, github.com/diml/zed], setname: "ocaml:zed" }
