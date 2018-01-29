@@ -752,6 +752,8 @@
 - { name: whatweb,                     vergt: "0.4.7",               family: [debuntu,openbsd,gentoo,freebsd], ignore: true } # 0.4.8 has never been released
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], incorrect: true }
 - { name: wpa-supplicant,              verpat: "201[0-9]+.*",        family: openwrt,      ignore: true }
+- { name: wslay,                       ver: "1.0.1",                 family: debuntu,      incorrect: true }
+- { name: wslay,                                                     family: debuntu,      untrusted: true }
 - { name: wxwidgets,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: wxwidgets,                   ver: "2.8.12.1",                                    setver: "2.8.12" } # some distros use tarballs from wxpython (for instance, gentoo because "they include the full wxGTK sources and docs, and are released more frequently than wxGTK") so the version may be broken
 
