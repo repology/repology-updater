@@ -117,7 +117,7 @@
 - { name: busybox,                     ver: "1.28.0",                                      devel: true }
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignore: true } # nix fake; real version is 1.0.6
 - { name: bzr-rewrite,                                               ruleset: aur,         untrusted: true }
-- { name: bzr-rewrite,                 ver: "0.1.8",                 ruleset: aur,         incorrect: true }
+- { name: bzr-rewrite,                 ver: "0.6.4",                 ruleset: aur,         incorrect: true }
 
 # C
 - { name: ca-certificates,             verlonger: 1,                                       ignore: true } # no need to append NSS version
