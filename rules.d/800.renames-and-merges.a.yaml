@@ -55,6 +55,7 @@
 - { setname: android-tools,            namepat: android-platform-system-(core|extras), family: debuntu }
 - { setname: angelscript,              namepat: "angelscript-?[0-9._-]+"}
 - { setname: angular.js,               name: angularjs }
+- { setname: anki,                     name: [anki12,anki20] }
 - { setname: ansible,                  name: "python:ansible" }
 - { setname: ansible,                  namepat: "ansible[0-9]+" }
 - { setname: ant,                      namepat: "ant[0-9.]+" }
