@@ -12,6 +12,7 @@
 - { setname: telegram-desktop,         name: [telegram-desktop-bin,telegram-desktop-systemqt,telegram-desktop-systemqt-emojione,telegram-desktop-systemqt-notoemoji] }
 - { setname: telegram-desktop,         name: [telegram-desktop-bin-dev,telegram-desktop-dev], ignore: true }
 - { setname: telepathy-farstream,      name: [libtelepathy-farstream,telepathy-farstream-0.4] }
+- { setname: template-glib,            name: libtemplate-glib }
 - { setname: terminal_markdown_viewer, name: mdv }
 - { setname: tesseract-ocr-data,       namepat: "tesseract(?:-ocr|-data)*-[a-z]{3}(?:-.*)?" }
 - { setname: tetrinetx,                name: [tetrinet-x,tetrinet-server] }

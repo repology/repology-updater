@@ -91,6 +91,7 @@
 - { name: bats,                        ver: "1.0",                   family: sisyphus,     ignore: true } # totally fake
 - { name: betty,                                                     ruleset: aur,         untrusted: true }
 - { name: betty,                       ver: "0.1.8",                 ruleset: aur,         incorrect: true }
+- { name: bijiben,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: bind,                                                                            p_is_patch: true }
 - { name: biniax2,                     ver: "2.1.30",                                      ignore: true } # 2 is not part of the version
 - { name: binutils,                    verlonger: 3,                                       ignore: true } # debian weirdness
@@ -279,6 +280,7 @@
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
 - { name: gnash,                       verpat: ".*git.*",                                  ignore: true } # snapshots
 - { name: gnome-boxes,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-builder,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-disk-utility,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # see "select distinct effname from packages where version like '3.27.%' and devel=false;"
 - { name: gnome-keyring,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-logs,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -349,6 +351,7 @@
 - { name: john,                        verpat: "1.8.0.2",            family: sisyphus,     ignore: true } # ldv@altlinux.org
 - { name: josm,                        verpat: "0\\.0\\.svn([0-9]+)",                      setver: "$1" }
 - { name: json-c,                      verpat: ".*20[0-9]{6}.*",                           ignore: true } # macports garbage
+- { name: jsonrpc-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: jwm,                         verpat: "[0-9]+",                                   ignore: true }
 - { name: jzintv,                      verpat: "r.*",                                      ignore: true }
 
@@ -382,6 +385,7 @@
 - { name: libcdio-paranoia,            verpat: "[0-9]+\\.[0-9]+\\.[0-9]+", family: kaos,   ignore: true } # bad versioning
 - { name: libclc,                                                                          noscheme: true }
 - { name: libcpuid,                    ver: "0.21",                                        setver: "0.2.1" } # deepin crap
+- { name: libdazzle,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: libdvdread,                  ver: "5.0.4",                 family: [arch,openindiana], ignore: true } # fake
 - { name: libfaketime,                 verpat: ".*201[67].*",                              ignore: true } # FreeBSD is using git snapshot
 - { name: libffi,                      ver: "3.3",                   family: debuntu,      ignore: true } # snapshot of nonexisting version
@@ -675,9 +679,10 @@
 - { name: talloc,                      ver: "3.6.0",                                       ignore: true } # pclinuxos wtf
 - { name: tar,                         ver: "1.29b",                                       ignore: true } # debian garbage http://metadata.ftp-master.debian.org/changelogs/main/t/tar/tar_1.29b-2_changelog
 - { name: tcc,                         verpat: "20[0-9]{2}.*",                             ignore: true } # freebsd
-- { name: tcl,                         verpat: ".*a[0-9]+",                                devel: true } # freebsd
 - { name: tcl,                         verpat: ".*20[0-9]{6}.*",                           ignore: true } # 8.7 snapshots
+- { name: tcl,                         verpat: ".*a[0-9]+",                                devel: true } # freebsd
 - { name: tdb,                         ver: "3.6.0",                                       ignore: true } # pclinuxos wtf
+- { name: template-glib,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: tesseract-game,              verpat: "(20[0-9]{2})[^0-9]?([0-9]{2})[^0-9]?([0-9]{2})", setver: "$1_$2_$3" }
 - { name: testdisk,                    ver: "7.1",                                         devel: true }
 - { name: testdisk,                    verpat: ".*git.*",                                  ignore: true }
