@@ -370,8 +370,9 @@
 - { name: kismet,                      verpat: "2008.*",                                   ignore: true } # XXX: transform + problem
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignore: true }
 - { name: kqlives,                     verpat: "20[0-9]{6}",                               ignore: true }
-- { name: krank,                       ver: "20[0-9]{6}.*",                             ignore: true }
+- { name: krank,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: krename,                     verpat: "20[0-9]{6}.*",                             ignore: true }
+- { name: krusader,                    verpat: "16\\..*",                                  incorrect: true } # pclinuxos; it uses e.g. 2.6.0 scheme
 
 # L
 - { name: lbd,                         verpat: "20[0-9]{6}",                               ignore: true } # BlackArch snap
