@@ -712,12 +712,15 @@
 - { name: tvheadend,                   verpat: "[0-9]+\\.[0-9]*[13579](?:\\..*)?",         devel: true } # https://tvheadend.org/projects/tvheadend/wiki/download
 
 # U
+- { name: u-boot-tools,                verpat: "20[0-9]{6}.*",                             ignore: true }
+- { name: u-boot-tools,                verpat: "201[23]{4}.*",                             outdated: true }
 - { name: ufoai,                       ver: "2.5.0+20150216",                              ignore: true } # homebrew
 - { name: unace,                       ver: "2.50",                                        setver: "2.5" }
 - { name: unarr,                       verpat: "20[0-9]{6}.*",                             ignore: true } # slackbuilds
 - { name: unpaper,                     verpat: "20[0-9]{6}.*",                             ignore: true } # aosc
 - { name: uniconvertor,                ver: "2.0",                   family: [fedora,mageia,rosa], incorrect: true } # not yet released
 - { name: unicode-ucd,                 verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
+- { name: unison,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # XXX: assumed, not confirmed; http://www.cis.upenn.edu/~bcpierce/unison/download.html
 - { name: unrar,                       verpat: "5\\.50.*",                                 ignore: true } # it uses 5.5.X schema
 - { name: unzip,                       verpat: ".*c.*",                                    ignore: true } # haikuports
 - { name: urlview,                     ver: ["20131023","0.9.20131021"],                   ignore: true }
