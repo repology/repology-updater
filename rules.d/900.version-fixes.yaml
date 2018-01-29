@@ -18,6 +18,7 @@
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignore: true } # opensuse
 - { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignore: true } # pkgsrc
 - { name: 7kaa-music,                  verpat: "20[0-9]{6}.*",                             ignore: true } # opensuse games
+- { name: 9base,                       verpat: "20[0-9]{6}.*",                             ignore: true } # freebsd, pkgsrc snapshots
 
 # A
 - { name: a52dec,                      ver: "0.7.5",                 family: [openbsd, opensuse], ignore: true }
