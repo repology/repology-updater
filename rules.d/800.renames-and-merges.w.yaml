@@ -9,6 +9,8 @@
 - { setname: webkitgtk,                namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*" }
 - { setname: webkitgtk,                namepat: "(?:lib)?webkit[0-9._-]*gtk[0-9._-]*-unstable", ignore: true }
 - { setname: webkitgtk,                namepat: "webkit[0-9._-]" } # assuming gtk
+- { setname: weboob,                   name: "python:weboob" }
+- { setname: weboob,                   name: weboob-headless, addflavor: headless }
 - { setname: websocketpp,              name: websocket++ }
 - { setname: wesnoth,                  name: wesnoth-devel }
 - { setname: wesnoth,                  namepat: "wesnoth[0-9.-]+" }
