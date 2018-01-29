@@ -18,6 +18,7 @@
 - { setname: xar,                      name: xar-mackyle }
 - { setname: xarchiver,                name: [xarchiver-assume-name,xarchiver-gtk2], addflavor: true }
 - { setname: xarchiver,                name: xfce4-xarchiver }
+- { setname: xbase,                    name: [libxbase,xbase64] }
 - { setname: xdelta,                   name: [xdelta1,xdelta3] }
 - { setname: xdg-utils,                name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock] }
 - { setname: xdot,                     name: "python:xdot" }

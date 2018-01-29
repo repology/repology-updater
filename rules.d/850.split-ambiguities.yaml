@@ -325,6 +325,8 @@
 - { name: words, family: sisyphus, setname: words-ibiblio } # not sure what this is
 - { name: words, warning: "please classify me" }
 
+- { name: xbase, setname: xbase-graywolf, wwwpart: graywolf }
+
 - { name: xclip, setname: emacs-xclip, family: gentoo, category: app-emacs }
 
 - { name: xdrfile, family: arch, verpat: "2\\..*", setname: xdrfile-wesbarnett } # fork
@@ -333,5 +335,7 @@
 - { name: zap, wwwpart: jehops, setname: zap-zfs }
 - { name: zap, family: openbsd, setname: zap-process-killer }
 - { name: zap, warning: "please classify me" }
+
+- { name: zoom, wwwpart: zoom.us, setname: zoom-videoconverence }
 
 - { name: zed, wwwpart: [ocamlcore, github.com/diml/zed], setname: "ocaml:zed" }

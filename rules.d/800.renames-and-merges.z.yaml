@@ -18,6 +18,7 @@
 - { setname: zoneminder,               name: zoneminder-h264, ignore: true }
 - { setname: zookeeper,                name: zookeeper-bin }
 - { setname: zookeeper,                name: zookeeper-c, family: gentoo }
+- { setname: zoom-player,              name: zoom }
 - { setname: zsh,                      name: zsh-doc, addflavor: doc }
 - { setname: zstd,                     name: [zstandard,zstd-static] }
 - { setname: zstd,                     name: libzstd }
