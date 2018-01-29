@@ -737,6 +737,7 @@
 - { name: w3m,                         verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: [warsow,warsow-data],        ver: "2.10",                  family: debuntu,      ignore: true } # playdeb weirdnes
 - { name: webkitgtk,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: weboob,                      ver: 9998,                                          ignore: true } # another gentoo rolling
 - { name: wesnoth,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: widelands,                   verpat: "(?:b|build|0\\.)?([0-9]{2})(?:\\.0)?",     setver: "build$1" }
 - { name: widelands,                   verpat: "[^b].*",                                   ignore: true }
