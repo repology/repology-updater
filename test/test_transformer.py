@@ -280,6 +280,14 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p3', 'version': '3.0', 'repo': 'baz', 'expect_effname': 'bat'}
         )
 
+    def test_match_noruleset(self):
+        self.check_transformer(
+            '[ { noruleset: baz, setname: bat } ]',
+            {'name': 'p1', 'version': '1.0', 'repo': 'foo', 'expect_effname': 'bat'},
+            {'name': 'p2', 'version': '2.0', 'repo': 'bar', 'expect_effname': 'bat'},
+            {'name': 'p3', 'version': '3.0', 'repo': 'baz', 'expect_effname': 'p3'}
+        )
+
     def test_match_category(self):
         self.check_transformer(
             '[ { category: foo, setname: quux }, { category: [ baz ], setname: bat } ]',

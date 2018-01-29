@@ -77,7 +77,7 @@ class PackageTransformer:
             rule['pretty'] = pp.pformat(rule)
 
             # convert some fields to lists
-            for field in ['name', 'ver', 'category', 'family', 'ruleset', 'wwwpart', 'flag', 'noflag', 'addflag']:
+            for field in ['name', 'ver', 'category', 'family', 'ruleset', 'noruleset', 'wwwpart', 'flag', 'noflag', 'addflag']:
                 if field in rule and not isinstance(rule[field], list):
                     rule[field] = [rule[field]]
 
@@ -87,14 +87,10 @@ class PackageTransformer:
             elif 'family' in rule and 'ruleset' not in rule:
                 rule['ruleset'] = rule.pop('family')
 
-            if 'ruleset' in rule:
-                rule['ruleset'] = set(rule['ruleset'])
-
-            if 'flag' in rule:
-                rule['flag'] = set(rule['flag'])
-
-            if 'noflag' in rule:
-                rule['noflag'] = set(rule['noflag'])
+            # convert some fields to sets
+            for field in ['ruleset', 'noruleset', 'flag', 'noflag']:
+                if field in rule:
+                    rule[field] = set(rule[field])
 
             # convert some fields to lowercase
             for field in ['category', 'wwwpart']:
@@ -127,6 +123,10 @@ class PackageTransformer:
         # match family
         if 'ruleset' in rule:
             if self.repoman.GetRepository(package.repo)['ruleset'].isdisjoint(rule['ruleset']):
+                return RuleApplyResult.unmatched
+
+        if 'noruleset' in rule:
+            if not self.repoman.GetRepository(package.repo)['ruleset'].isdisjoint(rule['noruleset']):
                 return RuleApplyResult.unmatched
 
         # match categories
