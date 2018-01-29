@@ -723,6 +723,7 @@
 - { name: vbindiff,                    ver: "3.0",                   family: [fedora,mageia], ignore: true } # fake, it's 3.0beta5
 - { name: vcdimager,                   ver: "0.7.24cvs",                                   ignore: true } # opensuse garbage
 - { name: vid.stab,                    verpat: ".*[0-9a-f]{7}.*",                          ignore: true } # git commit
+- { name: vis,                         verpat: "[0-9]{4,}",                                ignore: true } # LEDE
 - { name: vlc,                                                       family: kaos,         ignore: true } # fakes like 2.2.85 where actual version is 2.2.8
 - { name: vlc,                         verpat: "[34].*",                                   ignore: true } # 3 and 4 are devel branches, no announced releaes
 - { name: vlc,                         verpat: "3\\.0\\.0[^0-9a-z]?rc[0-9]+",              ignore: false, devel: true } # except for this one
