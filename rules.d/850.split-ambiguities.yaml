@@ -226,6 +226,8 @@
 
 - { name: "python:planet", setname: planet, wwwpart: planetplanet }
 
+- { name: "python:eventlib", setname: "python:eventlib-icanblink", wwwpart: icanblink }
+
 - { name: polly, verpat: "4\\..*",     setname: polly-llvm-opt            } # polyhedral optimizationa for llvm
 - { name: polly, verpat: "0\\.93\\..*", setname: polly-twitter-client     } # twitter client
 - { name: polly, warning: "please classify me" }
