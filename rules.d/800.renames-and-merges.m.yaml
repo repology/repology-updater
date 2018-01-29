@@ -24,6 +24,7 @@
 - { setname: mesa,                     namepat: "mesa-lts-.*" }
 - { setname: mesa-demos,               name: [mesa-demo,mesademos] }
 - { setname: mgltools,                 namepat: "mgltools-.*", family: debuntu }
+- { setname: midori,                   name: [midori-granite,midori-gtk2,midori-no-zeitgeist], addflavor: true }
 - { setname: minixml,                  name: libmxml }
 - { setname: minpack,                  name: libcminpack }
 - { setname: mirrormagic,              name: mirrormagic-sdl }
