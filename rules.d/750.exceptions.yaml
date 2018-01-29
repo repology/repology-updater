@@ -1,4 +1,5 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-- { setname: mysql-connector-c,        namepat: libmysqlclient, family: haikuports } # not really libmysqlclient from mysql
-- { name: wine, setname: wine-etersoft, family: sisyphus } # counterfeit
+- { setname: mysql-connector-c,        name: libmysqlclient, family: haikuports } # not really libmysqlclient from mysql
+- { setname: "perl:html-formatter",    name: "perl:html-format", family: fedora } # XXX: problem
+- { setname: wine-etersoft,            name: wine, family: sisyphus } # counterfeit
