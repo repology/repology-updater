@@ -702,6 +702,7 @@
 - { name: ufoai,                       ver: "2.5.0+20150216",                              ignore: true } # homebrew
 - { name: unace,                       ver: "2.50",                                        setver: "2.5" }
 - { name: unarr,                       verpat: "20[0-9]{6}.*",                             ignore: true } # slackbuilds
+- { name: unpaper,                     verpat: "20[0-9]{6}.*",                             ignore: true } # aosc
 - { name: uniconvertor,                ver: "2.0", family: [ arch, gentoo, rosa ],         ignore: true } # not yet released
 - { name: unicode-ucd,                 verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: unrar,                       verpat: "5\\.50.*",                                 ignore: true } # it uses 5.5.X schema
