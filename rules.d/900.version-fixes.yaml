@@ -538,6 +538,7 @@
 - { name: "perl:timedate",             verpat: "2\\.[0-9]{3,}",                            ignore: true }
 - { name: "perl:xml-parser",           ver: "2.44.01",                                     devel: true } # marked as developer release on cpan
 - { name: "perl:yaml-libyaml",         ver: "0.71",                  family: [ sisyphus ], ignore: true } # 0.71 wasn't an authorised release
+- { name: "perl:xml-rss-feed",         ver: "2.212",                                       outdated: true } # 2.212 < 2.4
 - { name: pilot-link,                  ver: "0.12.15",               family: gobolinux,    ignore: true } # gobolinux fake
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignore: true }
 - { name: pingus,                      verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
