@@ -104,6 +104,7 @@
 - { name: blender,                     verpat: "([0-9]+\\.[0-9]+)\\.([a-z])",              setver: "$1$2" } # it's e.g. 2.78c, not 2.78.c
 - { name: bloodfrontier,               ver: "0.85",                                        setver: b2 }
 - { name: bluej,                       verpat: "[0-9]+",                                   ignore: true }
+- { name: bonnie++,                    verpat: "1\\.9[0-9]+.*",                            devel: true } # https://doc.coker.com.au/projects/bonnie/; 2.0 will be stable
 - { name: boost,                       ver: "3.1.18",                                      ignore: true }
 - { name: boost,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: boost-build,                 verpat: "20[0-9]{2}.*",                             ignore: true }
