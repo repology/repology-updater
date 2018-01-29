@@ -536,6 +536,7 @@
 - { name: "perl:opengl",               verpat: "0\\.[0-9]{3,}",                            ignore: true }
 - { name: "perl:readonly",             ver: "2.050",                                       ignore: true }
 - { name: "perl:redis",                verpat: "1\\.[0-9]{4,}",                            ignore: true }
+- { name: "perl:sphinx-search",        verpat: "0\\.[0-9]{3,}",                            ignore: true }
 - { name: "perl:test-differences",     verpat: "0\\.[0-9]{3,}",                            ignore: true }
 - { name: "perl:test-exception",       ver: [ "0.430000", "0.400", "0.320" ],              ignore: true }
 - { name: "perl:test-exception",       verpat: "0\\.[0-9]{3,}",                            ignore: true }
