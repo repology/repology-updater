@@ -442,6 +442,8 @@
 - { name: matreshka,                   ver: "0.8.0",                 family: fedora,       ignore: true } # fake (see report)
 - { name: mesa,                        verpat: "[^a-z]+",            family: [fedora,mageia], ignore: true } # accused in ignoring rc suffix
 - { name: mesa,                        verpat: "[0-9]+\\.[0-9]+\\.0",                      devel: true } # .0 are devel releases, example: https://www.mesa3d.org/relnotes/17.2.0.html
+- { name: midori,                      ver: "0.5.12",                family: [fedora,aosc], incorrect: true } # not released
+- { name: midori,                                                    family: [fedora,aosc], untrusted: true }
 - { name: minio,                       verpat: "[0-9]+",                                   ignore: true } # should use separators
 - { name: mimikatz,                    verpat: ".*20[0-9]{6}",                             ignore: true } # BlackArch snap
 - { name: minimodem,                   verpat: ".*-[0-9]+",                                ignore: true } # -1 is not part of the version
