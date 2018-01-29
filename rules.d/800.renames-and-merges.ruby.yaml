@@ -57,8 +57,9 @@
 - { namepat: "(ruby:minitest)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:moneta)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:multipart-post)[0-9._-]+", setname: "$1" }
-- { namepat: "(ruby:mustermann)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:mustache)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:mustermann)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:mysql)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-http-persistent)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-scp)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:net-ssh)[0-9._-]+", setname: "$1" }
