@@ -743,6 +743,7 @@
 # W
 - { name: w3m,                         verlonger: 3,                                       ignore: true }
 - { name: w3m,                         verpat: ".*20[0-9]{6}.*",                           ignore: true }
+- { name: wakeonlan,                   verlonger: 3,                 family: sisyphus,     ignore: true }
 - { name: [warsow,warsow-data],        ver: "2.10",                  family: debuntu,      incorrect: true } # playdeb weirdnes
 - { name: webkitgtk,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: weboob,                      ver: "9998",                                        ignore: true } # another gentoo rolling
