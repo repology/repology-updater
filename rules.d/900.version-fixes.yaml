@@ -603,6 +603,8 @@
 - { name: python,                      verpat: ".*a.*",                                    devel: true }
 - { name: python,                      ver: "3.7.0",                 family: fedora,       ignore: true } # fedora fake, no such version
 - { name: "python:backports",          ver: "4.0.0",                                       ignore: true } # opensuse fake
+- { name: "python:elixir",             ver: "0.8.0",                 family: sisyphus,     incorrect: true } # fake
+- { name: "python:elixir",                                           family: sisyphus,     untrusted: true }
 - { name: "python:leveldb",            ver: "0.193",                                       ignore: true } # seems like an older version than latest 0.20 # XXX: make outdated (see #398)
 - { name: "python:progressbar",        ver: "2.4",                   family: sisyphus,     ignore: true } # fake
 - { name: "python:py-cpuinfo",         verpat: "201.*",                                    ignore: true }
