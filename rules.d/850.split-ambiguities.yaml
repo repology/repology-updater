@@ -10,6 +10,8 @@
 - { name: beast, wwwpart: beast.bio.ed.ac.uk,             setname: beast-mcmc }
 - { name: beast, family: vcpkg,                           setname: boost-beast }
 
+- { name: bandcamp-dl, wwwpart: bandcamp-downloader,      setname: bandcamp-downloader }
+
 - { name: bos, wwwpart: boswars,                          setname: boswars }
 
 - { name: borg, wwwpart: borg-calendar,                   setname: borg-calendar }
