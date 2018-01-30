@@ -15,6 +15,7 @@
 - { setname: template-glib,            name: libtemplate-glib }
 - { setname: terminal_markdown_viewer, name: mdv }
 - { setname: tesseract-ocr-data,       namepat: "tesseract(?:-ocr|-data)*-[a-z]{3}(?:-.*)?" }
+- { setname: testdisk,                 name: testdisk-wip, ignore: true }
 - { setname: tetrinetx,                name: [tetrinet-x,tetrinet-server] }
 - { setname: texlive-documentation,    namepat: "texlive-documentation-.*", family: gentoo }
 - { setname: thunderbird,              name: [mozilla-thunderbird,mozillathunderbird] }
