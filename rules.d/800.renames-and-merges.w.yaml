@@ -2,6 +2,7 @@
 
 - { setname: waf,                      name: "python:waf" }
 - { setname: waterfox,                 name: waterfox-kde, addflavor: kde }
+- { setname: watson,                   name: td-watson }
 - { setname: wcalc,                    name: w-calc }
 - { setname: wcmcommander,             name: walcommander } # old name
 - { setname: wcmcommander,             name: wcm-commander }
