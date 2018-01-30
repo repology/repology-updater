@@ -301,7 +301,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_lefacy(self):
+    def test_versionclass_legacy(self):
         packages = [
             (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.newest),
 
