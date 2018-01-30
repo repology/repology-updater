@@ -48,6 +48,8 @@
 - { name: anki,                        ver: "2.1.0",                 family: debuntu,      ignore: true } # fake
 - { name: asc,                         verpat: "[0-9]+\\.[0-9]+\\.[0-9]{3,}\\.[0-9]+",     devel: true } # http://terdon.asc-hq.org/asc/builds/
 - { name: aspcud,                      ver: "2011.03.17",                                  ignore: true }
+- { name: assaultcube,                 ver: "1.2.0.3",               family: fedora,       incorrect: true } # rpmfusion actually, but we don't trust whole fedora
+- { name: assaultcube,                                               family: fedora,       untrusted: true }
 - { name: apache,                      verpat: "2\\.[0-9]*[13579]\\..*",                   devel: true }
 - { name: appmenu-qt,                  verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: apr,                         verlonger: 3,                                       ignore: true } # FreeBSD
