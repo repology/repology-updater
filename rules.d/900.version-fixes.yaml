@@ -742,6 +742,8 @@
 # V
 - { name: vbindiff,                    ver: "3.0",                   family: [fedora,mageia], incorrect: true } # fake, it's 3.0beta5
 - { name: vbindiff,                                                  family: [fedora,mageia], untrusted: true }
+- { name: vcsh,                        ver: "1.20170226",                                  incorrect: true } # nix fake
+- { name: vcsh,                                                      family: nix,          untrusted: true }
 - { name: vcdimager,                   ver: "0.7.24cvs",                                   ignore: true } # opensuse garbage
 - { name: vgmstream,                   verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: vid.stab,                    verpat: ".*[0-9a-f]{7}.*",                          ignore: true } # git commit
