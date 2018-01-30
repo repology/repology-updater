@@ -8,6 +8,7 @@
 - { setname: manpages,                 name: [man-pages,linux-man-pages,linux-manpages] }
 - { setname: mariadb,                  namepat: "mariadb[0-9.-]*(?:-client|-server)?" }
 - { setname: mariadb-mytop,            name: mytop, family: arch }
+- { setname: mastodon,                 name: mastodon-docker, addflavor: docker }
 - { setname: maven-shell,              name: mvnsh }
 - { setname: mc,                       name: [mc-contrib,midnight-commander,midnightcommander] }
 - { setname: mc,                       name: mc46 }
