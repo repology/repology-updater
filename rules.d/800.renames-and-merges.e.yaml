@@ -24,6 +24,7 @@
 - { setname: elbcli,                   name: elb-tools }
 - { setname: electricfence,            name: electric-fence }
 - { setname: elftoolchain,             name: libexecinfo, family: ravenports, addflavor: $0 }
+- { setname: elixir,                   name: elixir-lang}
 - { setname: elvis,                    name: elvis-x11 }
 - { setname: emacs,                    name: [emacs-24bit,emacs-nox,emacs-nox11] }
 - { setname: emacs,                    name: [emacs-devel,emacs-git], ignore: true }
