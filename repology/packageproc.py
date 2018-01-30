@@ -50,6 +50,17 @@ def PackagesetCheckFilters(packages, *filters):
     return True
 
 
+def packageset_is_unique(packages):
+    if len(packages) <= 1:
+        return True
+
+    for package in packages[1:]:
+        if package.family != packages[0].family:
+            return False
+
+    return True
+
+
 def FillPackagesetVersions(packages):
     # helpers
     def AggregateBySameVersion(packages):
@@ -118,11 +129,13 @@ def FillPackagesetVersions(packages):
 
     default_branchproto_idx = branchprotos.index(default_branchproto)
 
+    # handle unique package
+    metapackage_is_unique = packageset_is_unique(packages)
+
     #
     # Pass 1: discover branches
     #
     branches = []
-    families = set()
     packages_by_repo = {}
     current_branchproto_idx = None
     for verpackages in AggregateBySameVersion(packages):
@@ -130,7 +143,6 @@ def FillPackagesetVersions(packages):
         matching_branchproto_indexes = set()
 
         for package in verpackages:
-            families.add(package.family)
             packages_by_repo.setdefault(package.repo, []).append(package)
 
             if not package.HasFlag(PackageFlags.any_ignored):
@@ -151,9 +163,6 @@ def FillPackagesetVersions(packages):
         elif (current_branchproto_idx is None or final_branchproto_idx > current_branchproto_idx) and has_non_ignored:
             branches.append(branchprotos[final_branchproto_idx].CreateBranch(verpackages[0]))
             current_branchproto_idx = final_branchproto_idx
-
-    # handle unique package
-    metapackage_is_unique = len(families) == 1
 
     # we should always have at least one branch
     if not branches:

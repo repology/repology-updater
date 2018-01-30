@@ -20,10 +20,23 @@
 import unittest
 
 from repology.package import Package, PackageFlags, VersionClass
-from repology.packageproc import FillPackagesetVersions
+from repology.packageproc import FillPackagesetVersions, packageset_is_unique
 
 
 class TestPackageProc(unittest.TestCase):
+    def test_packageset_is_unique(self):
+        packages = []
+        self.assertEqual(packageset_is_unique(packages), True)
+
+        packages = [Package(family='foo')]
+        self.assertEqual(packageset_is_unique(packages), True)
+
+        packages = [Package(family='foo'), Package(family='foo')]
+        self.assertEqual(packageset_is_unique(packages), True)
+
+        packages = [Package(family='foo'), Package(family='bar')]
+        self.assertEqual(packageset_is_unique(packages), False)
+
     def test_versionclasses_big(self):
         packages = [
             # Reference repo
