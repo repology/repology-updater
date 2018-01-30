@@ -190,6 +190,8 @@
 - { name: dosemu,                      verpat: "2013.*",                                   ignore: true }
 - { name: dosemu,                      verpat: "1\\.4\\.1.*",        family: [sisyphus,gentoo], ignore: true }
 - { name: dolphin-emu,                 verpat: "[0-9]{4,}.*",                              ignore: true }
+- { name: doublecmd,                                                                       devel: false } # they state all version to be beta: https://sourceforge.net/p/doublecmd/news/, this is pointless
+- { name: doublecmd,                   verpat: ".*svn.*",                                  ignore: true }
 - { name: dsniff,                      ver: "2.4",                   family: [sisyphus,fedora,mageia], ignore: true } # it's 2.4beta1
 - { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignore: true }
 
