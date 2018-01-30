@@ -311,6 +311,9 @@
 - { name: gnuastro,                    verlonger: 2,                                       devel: true } # alphas
 - { name: gnubg,                       verpat: "20[0-9]{6}",                               ignore: true }
 - { name: gnunet,                      verpat: "0\\.10\\.2.*",       family: openwrt,      ignore: true }
+- { name: gnuradio,                    ver: "3.7.11.1",              family: nix,          incorrect: true }
+- { name: gnuradio,                                                  family: nix,          untrusted: true }
+- { name: gnuradio,                    verpat: ".*git",                                    ignore: true } # strange tag, wikidata picks it
 - { name: gnushogi,                    verpat: ".*git.*",                                  ignore: true }
 - { name: go,                          ver: "1.10",                  family: fedora,       ignore: true } # fake
 - { name: "go:bindata",                verpat: "20[0-9]{6}.*",                             ignore: true }
