@@ -177,6 +177,9 @@
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignore: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignore: true } # no such release
 - { name: dia,                         verpat: ".*[0-9]{8}.*",                             ignore: true } # snapshot
+- { name: dietlibc,                    verpat: ".*(pre|cvs|20[0-9]{6}).*",                 ignore: true }
+- { name: dietlibc,                    ver: "0.34",                  family: [fedora,mageia], incorrect: true }
+- { name: dietlibc,                                                  family: [fedora,mageia], untrusted: true }
 - { name: discord,                                                   family: chocolatey,   ignore: true } # windows version has different versioning
 - { name: distorm,                     verpat: "20[0-9]{6}.*",                             ignore: true } # freebsd garbage
 - { name: djvulibre,                   ver: "3.5.27.1",                                    ignore: true }
