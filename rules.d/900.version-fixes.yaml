@@ -370,6 +370,8 @@
 - { name: kdiff3,                      verpat: ".*201[789].*",                             ignore: true } # nix snapshot
 - { name: kicad,                       verpat: "20[0-9][0-9].*",                           ignore: true }
 - { name: kismet,                      verpat: "2008.*",                                   ignore: true } # XXX: transform + problem
+- { name: knights,                     ver: "2.5.85",                                      incorrect: true } # kaos
+- { name: knights,                     verpat: ".*20[0-9]{6}.*",                           ignore: true } # gentoo
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignore: true }
 - { name: kqlives,                     verpat: "20[0-9]{6}",                               ignore: true }
 - { name: krank,                       verpat: "20[0-9]{6}.*",                             ignore: true }

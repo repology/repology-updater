@@ -146,6 +146,8 @@
 
 - { name: kiki, category: [python,universe/python], setname: kiki-re }
 
+- { name: knights, wwwpart: knightsgame.org.uk, setname: knightsgame }
+
 - { name: libelf,                      wwwpart: elfutils, setname: elfutils } # Arch: XXX: problem
 
 - { name: libmpc,                      wwwpart: multiprecision, setname: gnumpc }
