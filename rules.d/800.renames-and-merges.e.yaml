@@ -36,6 +36,7 @@
 - { setname: emby,                     name: emby-server }
 - { setname: emby,                     name: emby-server-beta, ignore: true }
 - { setname: emotion-generic-players,  name: emotiongenericplayers }
+- { setname: empty,                    name: empty-expect }
 - { setname: emulationstation,         name: emulation-station }
 - { setname: enblend-enfuse,           name: enblend }
 - { setname: enemy-territory,          name: enemyterritory }
