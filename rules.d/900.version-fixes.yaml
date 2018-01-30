@@ -748,6 +748,8 @@
 - { name: vgmstream,                   verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: vid.stab,                    verpat: ".*[0-9a-f]{7}.*",                          ignore: true } # git commit
 - { name: vis,                         verpat: "[0-9]{4,}",                                ignore: true } # LEDE
+- { name: visitors,                    ver: "1.1",                   family: rosa,         ignore: true }
+- { name: visitors,                                                  family: rosa,         untrusted: true }
 - { name: vit,                         verpat: "1\\.3.*20[0-9]{6}.*",                      ignore: true }
 - { name: vlc,                                                       family: kaos,         ignore: true } # fakes like 2.2.85 where actual version is 2.2.8
 - { name: vlc,                         verpat: "[34].*",                                   ignore: true } # 3 and 4 are devel branches, no announced releaes
