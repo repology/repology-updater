@@ -87,6 +87,8 @@
 - { setname: gnuchess,                 name: [gnu-chess,gnuchess4] }
 - { setname: gnugo,                    name: gnu-go }
 - { setname: gnumpc,                   name: [mpc1,mpclib,mpclib3,mpcomplex] }
+- { setname: gnunet,                   name: [gnunet-fuse,gnunet-gtk,gnunet-qt], addflavor: true }
+- { setname: gnunet,                   name: gnunet-svn, ignore: true }
 - { setname: gnupg,                    name: gnupg1compat }
 - { setname: gnupg,                    name: gpg-agent }
 - { setname: gnupg,                    namepat: "gnupg[0-9]+" }
