@@ -111,7 +111,7 @@ def FillPackagesetVersions(packages):
     packages_to_process = []
 
     for package in packages:
-        if package.flags & PackageFlags.rolling:
+        if package.HasFlag(PackageFlags.rolling):
             package.versionclass = VersionClass.rolling
         else:
             packages_to_process.append(package)
