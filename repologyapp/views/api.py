@@ -25,6 +25,7 @@ from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
+from repology.package import VersionClass
 
 
 def api_v1_package_to_json(package):
@@ -35,6 +36,7 @@ def api_v1_package_to_json(package):
             'name',
             'version',
             'origversion',
+            #'status',
             'maintainers',
             #'category',
             #'comment',
@@ -51,6 +53,8 @@ def api_v1_package_to_json(package):
         output['summary'] = package.comment
     if package.category:
         output['categories'] = [package.category]
+
+    output['status'] = VersionClass.ToString(package.versionclass)
 
     return output
 

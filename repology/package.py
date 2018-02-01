@@ -41,6 +41,21 @@ class VersionClass:
                 cl == VersionClass.untrusted or
                 cl == VersionClass.noscheme)
 
+    def ToString(cl):
+        """Return string representation of a version class."""
+        return {
+            VersionClass.newest: 'newest',
+            VersionClass.outdated: 'outdated',
+            VersionClass.ignored: 'ignored',
+            VersionClass.unique: 'unique',
+            VersionClass.devel: 'devel',
+            VersionClass.legacy: 'legacy',
+            VersionClass.incorrect: 'incorrect',
+            VersionClass.untrusted: 'untrusted',
+            VersionClass.noscheme: 'noscheme',
+            VersionClass.rolling: 'rolling',
+        }[cl]
+
 
 class PackageFlags:
     # remove package

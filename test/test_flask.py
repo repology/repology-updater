@@ -179,6 +179,7 @@ class TestFlask(unittest.TestCase):
                     'name': 'kiconvtool',
                     'version': '0.97',
                     'origversion': '0.97_1',
+                    'status': 'unique',
                     'categories': ['sysutils'],
                     'summary': 'Tool to preload kernel iconv charset tables',
                     'maintainers': ['amdmi3@freebsd.org'],
