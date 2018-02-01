@@ -7,6 +7,9 @@
 # global devel rule
 - { verpat: ".*(?:alpha|beta|dev|rc|prerelease|pre)[0-9._-]*",                             devel: true }
 
+# global vcs snapshot ignore
+- { verpat: ".*(?:svn|cvs|git|bzr|hg|darcs).*",                                            ignore: true }
+
 # other global rules
 - { verpat: ".*\\.[0-9]+\\.[0-9]+\\.[0-9a-f]{4,}",                   family: sisyphus,     untrusted: true } # personal rule for ldv@altlinux.org
 - { verpat: "20[0-9]{2}",                                            family: openwrt,      untrusted: true } # there are a lot of them
@@ -44,7 +47,6 @@
 - { name: amule,                       verpat: "[0-9]{5}",                                 ignore: true } # revision
 - { name: amule,                       verpat: "2\\.4\\.0.*",        family: [ mageia, debuntu ], incorrect: true } # unreleased
 - { name: amule,                       verlonger: 3,                 family: [ kaos ],     incorrect: true } # fake
-- { name: amule,                       verpat: ".*git.*",                                  ignore: true } # snapshot
 - { name: android-tools,               verpat: "[0-9]{4,}.*",                              ignore: true } # fake
 - { name: anki,                        ver: "2.1.0",                 family: debuntu,      ignore: true } # fake
 - { name: asc,                         verpat: "[0-9]+\\.[0-9]+\\.[0-9]{3,}\\.[0-9]+",     devel: true } # http://terdon.asc-hq.org/asc/builds/
@@ -178,7 +180,7 @@
 - { name: cryptsetup,                  ver: "2.0.0",                 family: fedora,       ignore: true } # 2.0.0rc1
 - { name: cvs,                         ver: "1.20120905",                                  ignore: true }
 - { name: cvs,                         ver: "1.12.13.1",                                   ignore: true } # respin for Windows *only* to fix carriage returns, it does not make sense to list it
-- { name: cwiid,                       ver: ["20110107","0.6.01","2010-02-21-git"],        ignore: true } # abandonware; a lot of snapshots
+- { name: cwiid,                       ver: ["20110107","0.6.01"],                         ignore: true } # abandonware; a lot of snapshots
 - { name: cwm,                         ver: "6.2.9",                                       ignore: true } # FreeBSD fake
 
 # D
@@ -212,7 +214,7 @@
 - { name: doublecmd,                                                                       devel: false } # they state all version to be beta: https://sourceforge.net/p/doublecmd/news/, this is pointless
 - { name: doublecmd,                   verpat: ".*svn.*",                                  ignore: true }
 - { name: dsniff,                      ver: "2.4",                   family: [sisyphus,fedora,mageia], ignore: true } # it's 2.4beta1
-- { name: dzen,                        verpat: "([0-9]{10}|.*git)",                        ignore: true }
+- { name: dzen,                        verpat: "[0-9]{10}",                                ignore: true }
 
 # E
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignore: true }
@@ -279,7 +281,6 @@
 - { name: "fonts:quattrocento",        ver: "2.000",                 family: arch,         ignore: true } # webpage says it's 1.1
 - { name: "fonts:ubuntu",              ver: "1.0",                   family: pclinuxos,    ignore: true } # no such version on the website
 - { name: foomatic,                    verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
-- { name: fplll,                       verpat: ".*git.*",                                  ignore: true }
 - { name: freecad,                     ver: "0.17.12018",            family: freebsd,      ignore: true }
 - { name: freeciv,                     ver: "2.6.0",                 family: fedora,       ignore: true }
 - { name: freeminer,                   verlonger: 4,                 family: fdroid,       ignore: true }
@@ -288,7 +289,6 @@
 - { name: freetds,                     vergt: "1.0.80",                                    devel: true } # http://www.freetds.org/files/stable/
 - { name: frescobaldi,                 ver: "3.0.1",                 family: sisyphus,     ignore: true } # fake
 - { name: frescobaldi,                 verpat: "3\\..*",                                   devel: true }
-- { name: fsearch,                     verpat: ".*git.*",                                  ignore: true }
 - { name: ftgl,                        ver: "2.1.3",                                       ignore: true } # it's 2.1.3-rc5; 2.1.3 was never released
 - { name: ftp,                         verpat: "20[0-9]{6}.*",                             ignore: true } # haiku snapshot
 - { name: ftp,                         ver: "0.18",                  family: sisyphus,     ignore: true } # fake; actually 0.18pre1
@@ -321,7 +321,6 @@
 - { name: glm,                         verpat: ".*a.*",                                    devel: true }
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignore: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
-- { name: gnash,                       verpat: ".*git.*",                                  ignore: true } # snapshots
 - { name: gnome-boxes,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-builder,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-disk-utility,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # see "select distinct effname from packages where version like '3.27.%' and devel=false;"
@@ -344,8 +343,6 @@
 - { name: gnunet,                      verpat: "0\\.10\\.2.*",       family: openwrt,      ignore: true }
 - { name: gnuradio,                    ver: "3.7.11.1",              family: nix,          incorrect: true }
 - { name: gnuradio,                                                  family: nix,          untrusted: true }
-- { name: gnuradio,                    verpat: ".*git",                                    ignore: true } # strange tag, wikidata picks it
-- { name: gnushogi,                    verpat: ".*git.*",                                  ignore: true }
 - { name: gnutls,                      verpat: "3\\.6\\..*",                               devel: true } # stable-next branch; it's claimed to be stable but undertested, but in fact it is widely used already, so `devel' is not entirely correct here, but use it to allow 3.6 and 3.5 coexist for now
 - { name: go,                          ver: "1.10",                  family: fedora,       ignore: true } # fake
 - { name: "go:bindata",                verpat: "20[0-9]{6}.*",                             ignore: true }
@@ -444,7 +441,6 @@
 - { name: linkchecker,                 ver: "9.4",                   ruleset: aur,         incorrect: true } # not released
 - { name: litecoin,                    ver: "0.15.0.1",              family: sisyphus,     ignore: true } # it's 0.15.0.1rc1
 - { name: live555,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # alt; it's dot-separated, dummies!
-- { name: llvm,                        verpat: ".*git",                                    ignore: true }
 - { name: llvm,                        verpat: ".*r[0-9]{6,}",                             ignore: true } # ignore revisions, allow release candidates
 - { name: llvm,                        verpat: ".*r.*",                                    devel: true }
 - { name: llvm,                        ver: "6.0.0",                 family: fedora,       incorrect: true }
@@ -481,7 +477,6 @@
 - { name: libiconv,                    verpat: "[0-9]",                                    ignore: true } # lede/openwrt strange version
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignore: true } # fake
 - { name: libimobiledevice,            verlonger: 3,                 family: kaos,         ignore: true } # fake
-- { name: libimobiledevice,            verpat: ".*git.*",                                  ignore: true } # snapshot
 - { name: libkvkontakte,               verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: libmediawiki,                verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: liblqr,                      verpat: "1-.*",                                     ignore: true } # "1" is not part of the version
@@ -536,10 +531,8 @@
 - { name: mumble,                                                    family: kaos,         ignore: true } # snapshot with random version
 - { name: multimon-ng,                 verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: munin,                       verpat: "[0-9]+\\.999.*",                           devel: true }
-- { name: musescore,                   verpat: ".*git.*",                                  ignore: true } # haiku
 - { name: mutter,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: mygui,                       verpat: "20[0-9]{6}",                               ignore: true }
-- { name: mygui,                       verpat: ".*git.*",                                  ignore: true }
 - { name: mythes-fr,                   verpat: "20[0-9]{6}",                               ignore: true }
 
 # N
@@ -683,7 +676,6 @@
 # Q
 - { name: qca,                         ver: "2.2.0",                 family: vcpkg,        ignore: true } # not released yet
 - { name: qdjango,                     verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
-- { name: qemu,                        verpat: ".*git.*",                                  ignore: true } # haikuports snapshot
 - { name: qemu,                        ver: "2.11.0",                family: fedora,       ignore: true } # fake, it's 2.11.0-rc2
 - { name: qgis,                                                      family: kaos,         ignore: true } # snapshot with random version
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignore: true } # uses unofficial fork (dead as well)
@@ -698,7 +690,6 @@
 - { name: "r:waveslim",                ver: "1.12",                  family: rosa,         ignore: true } # fake
 - { name: racer,                       ver: "2.07",                                        ignore: true }
 - { name: rage,                        ver: "0.3.0.042",                                   ignore: true }
-- { name: rawstudio,                   verpat: ".*git.*",                                  ignore: true }
 - { name: rdesktop,                    ver: "1.8.4",                 family: mageia,       incorrect: true }
 - { name: rdesktop,                                                  family: mageia,       untrusted: true }
 - { name: readline,                                                                        p_is_patch: true }
@@ -706,7 +697,7 @@
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignore: true }
 - { name: recode,                      verge: "3.7",                                       successor: true } # fork
 - { name: reptyr,                      ver: "0.6.3a",                family: freebsd,      incorrect: true } # fake, no such tag
-- { name: remmina,                     verpat: "(.*?)([^0-9]*r[^0-9]*)(.*?)",              setver: "$1-rcgit.$3", devel: true } # r, rc, rcgit, etc.
+- { name: remmina,                     verpat: "(.*?)([^0-9]*r[^0-9]*)(.*?)",              setver: "$1-rcgit.$3", devel: true, ignore: false } # r, rc, rcgit, etc.
 - { name: remmina,                     ver: "1.2.0",                 family: [alpine,sisyphus,debuntu,fedora,mageia,rosa], ignore: true } # liars
 - { name: rinetd,                      ver: "0.62.1sam",                                   ignore: true } # debian garbage
 - { name: rpcgen,                                                    family: ravenports,   ignore: true } # fake
@@ -745,7 +736,6 @@
 - { name: shotcut,                     verpat: "[0-9]{6,}.*",                              incorrect: true } # aur; it's not 180102, but 18.01
 - { name: signon-ui,                   verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: simh,                        verpat: ".*20[0-9]{6}.*",                           ignore: true }
-- { name: simh,                        verpat: ".*git.*",                                  ignore: true }
 - { name: simple-scan,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: simplescreenrecorder,        verlonger: 3,                                       ignore: true } # FreeBSD fake
 - { name: sipp,                        verpat: "3\\.6[_-]?[a-z]+",                         setver: "3.6", devel: true } # 3.6-dev
@@ -791,11 +781,9 @@
 - { name: teem,                        ver: "1.12.0",                family: debuntu,      ignore: true }
 - { name: tesseract-game,              verpat: "(20[0-9]{2})[^0-9]?([0-9]{2})[^0-9]?([0-9]{2})", setver: "$1_$2_$3" }
 - { name: testdisk,                    ver: "7.1",                                         devel: true }
-- { name: testdisk,                    verpat: ".*git.*",                                  ignore: true }
 - { name: texlive-core,                verpat: "(20[0-9]{2}).[0-9]{5,}",                   ignore: true }
 - { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignore: true } # obsoleted
 - { name: tidy,                        ver: "090315.c",                                    ignore: true } # obsoleted
-- { name: tidy,                        verpat: ".*git.*",                                  ignore: true } # garbage
 - { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignore: true } # 2.15.0 was not released yet
 - { name: thrift,                      verpat: "[0-9]{7}.*",                               ignore: true } # vcpkg and macports garbage
 - { name: thunderbird,                 verpat: ".*[ab].*", devel: true }
