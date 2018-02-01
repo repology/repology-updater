@@ -61,6 +61,21 @@ def packageset_is_unique(packages):
     return True
 
 
+def packageset_may_be_unignored(packages):
+    if len(packages) <= 1:
+        return True
+
+    for package in packages:
+        # condition 1: must be unique
+        if package.family != packages[0].family:
+            return False
+        # condition 2: must consist of ignored packages only
+        if not package.HasFlag(PackageFlags.any_ignored):
+            return False
+
+    return True
+
+
 def FillPackagesetVersions(packages):
     # helpers
     def AggregateBySameVersion(packages):
@@ -107,6 +122,9 @@ def FillPackagesetVersions(packages):
         def IsAfterBranch(self, package):
             return package.VersionCompare(self.lastpackage) == -1 if self.lastpackage is not None else False
 
+    # global flags #1
+    metapackage_is_unique = packageset_is_unique(packages)
+
     # preprocessing: rolling versions
     packages_to_process = []
 
@@ -119,6 +137,23 @@ def FillPackagesetVersions(packages):
     # we always work on packages sorted by version
     packages = PackagesetSortByVersion(packages_to_process)
 
+    # global flags #2
+
+    # The idea here is that if package versions are compared only within a single family
+    # (so this is calculated after rolling packages are removed, since they do not
+    # participate in comparison), and all versions are ignored, it makes sence to unignore
+    # them, because unique/latest/outdated versions are more informative than just ignored
+    # (the best part is actually a possibility of outdated packages)
+    #
+    # Actually, this is a hack to partially revert the effect of global ignore of .*git.*
+    # versions. That is why I couldn't decide on whether only `ignored` status or all ignored-
+    # like statuses may be unignored.
+    #
+    # The proper solution would be to allow rules decide whether they may be unignored. This,
+    # however, brings in more complex flag handling, as in `soft` and `hard` ignores, so I'd
+    # like to postpone it for now
+    metapackage_should_unignore = packageset_may_be_unignored(packages)
+
     # branch prototypes
     default_branchproto = BranchPrototype(VersionClass.newest, lambda package: True)
 
@@ -129,9 +164,6 @@ def FillPackagesetVersions(packages):
 
     default_branchproto_idx = branchprotos.index(default_branchproto)
 
-    # handle unique package
-    metapackage_is_unique = packageset_is_unique(packages)
-
     #
     # Pass 1: discover branches
     #
@@ -139,14 +171,17 @@ def FillPackagesetVersions(packages):
     packages_by_repo = {}
     current_branchproto_idx = None
     for verpackages in AggregateBySameVersion(packages):
-        has_non_ignored = False
+        version_totally_ignored = True
         matching_branchproto_indexes = set()
+
+        if metapackage_should_unignore:
+            version_totally_ignored = False
 
         for package in verpackages:
             packages_by_repo.setdefault(package.repo, []).append(package)
 
             if not package.HasFlag(PackageFlags.any_ignored):
-                has_non_ignored = True
+                version_totally_ignored = False
 
             for branchproto_idx in range(0, len(branchprotos)):
                 if branchprotos[branchproto_idx].Check(package):
@@ -160,7 +195,7 @@ def FillPackagesetVersions(packages):
 
         if final_branchproto_idx == current_branchproto_idx:
             branches[-1].SetLastPackage(verpackages[0])
-        elif (current_branchproto_idx is None or final_branchproto_idx > current_branchproto_idx) and has_non_ignored:
+        elif (current_branchproto_idx is None or final_branchproto_idx > current_branchproto_idx) and not version_totally_ignored:
             branches.append(branchprotos[final_branchproto_idx].CreateBranch(verpackages[0]))
             current_branchproto_idx = final_branchproto_idx
 
