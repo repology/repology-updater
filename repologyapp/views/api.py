@@ -35,6 +35,7 @@ def api_v1_package_to_json(package):
             'name',
             'version',
             'origversion',
+            'versionclass',
             'maintainers',
             #'category',
             #'comment',
