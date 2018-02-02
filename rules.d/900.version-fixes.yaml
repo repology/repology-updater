@@ -690,6 +690,7 @@
 - { name: shairplay,                   verpat: ".*20[0-8]{2}.*",                           ignore: true } # \
 - { name: shairplay,                   verpat: "0\\.9.*",                                  ignore: true } #  > se report on shairplay; latest is 0.1.1 of github.com/qasim fork
 - { name: shairplay,                   verpat: "1\\.0.*",                                  ignore: true } # /
+- { name: shflags,                     ver: "2012",                                        incorrect: true } # openwrt
 - { name: shotcut,                     verpat: "[0-9]{6,}.*",                              incorrect: true } # aur; it's not 180102, but 18.01
 - { name: signon-ui,                   verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: simh,                        verpat: ".*20[0-9]{6}.*",                           ignore: true }
