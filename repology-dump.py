@@ -29,31 +29,6 @@ from repology.repoman import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
 
-def VersionClass2Letter(value):
-    if value == VersionClass.ignored:
-        return 'I'
-    elif value == VersionClass.unique:
-        return 'U'
-    elif value == VersionClass.devel:
-        return 'D'
-    elif value == VersionClass.newest:
-        return 'N'
-    elif value == VersionClass.legacy:
-        return 'L'
-    elif value == VersionClass.outdated:
-        return 'O'
-    elif value == VersionClass.incorrect:
-        return 'X'
-    elif value == VersionClass.untrusted:
-        return 'T'
-    elif value == VersionClass.noscheme:
-        return '*'
-    elif value == VersionClass.rolling:
-        return '+'
-    else:
-        return '?'
-
-
 def ParseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
@@ -122,7 +97,8 @@ def Main():
                 print(
                     options.field_separator.join(
                         [
-                            str(getattr(package, field)) for field in options.fields
+                            VersionClass.ToString(package.versionclass) if field == 'versionclass' else str(getattr(package, field))
+                            for field in options.fields
                         ]
                     )
                 )
@@ -134,7 +110,7 @@ def Main():
                     print('  {}: {} ({})'.format(
                         reponame,
                         best_pkg_by_repo[reponame].version,
-                        VersionClass2Letter(best_pkg_by_repo[reponame].versionclass)
+                        VersionClass.ToString(best_pkg_by_repo[reponame].versionclass)
                     ))
 
     logger.Log('dumping...')
