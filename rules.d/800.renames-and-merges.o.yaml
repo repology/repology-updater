@@ -39,6 +39,7 @@
 - { setname: opus,                     name: libopus }
 - { setname: opusfile,                 name: libopusfile }
 - { setname: openssl,                  namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?" }
+- { setname: openssl,                  name: openssl-devel }
 
 - setname: openssh
   name:
@@ -60,7 +61,6 @@
     - openssl-1.0-chacha20
     - openssl-chacha
     - openssl-chacha20
-    - openssl-devel
     - openssl-no-aesni
     - openssl-pre
     - openssl-purify
