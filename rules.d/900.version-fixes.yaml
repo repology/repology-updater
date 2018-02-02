@@ -553,6 +553,7 @@
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignore: true }
 - { name: "perl:anyevent",             ver: "7.70.0",                                      ignore: true }
 - { name: "perl:anyevent",             verpat: "7\\.[0-9]{3}.*",                           ignore: true }
+- { name: "perl:app-perlbrew",         verpat: "0\\.[0-9]{3,}.*",                          ignore: true }
 - { name: "perl:app-tlsme",            ver: "0.110000",                                    ignore: true }
 - { name: "perl:array-diff",           ver: ["0.05002", "0.07000"],                        ignore: true }
 - { name: "perl:authen-sasl",          ver: [ "2.150", "2.160", "2.1500", "2.1600" ],      ignore: true }
