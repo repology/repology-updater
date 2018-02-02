@@ -17,7 +17,6 @@
 
 import json
 import os
-import shutil
 
 from repology.fetchers.helpers.fetch import Fetch
 from repology.fetchers.helpers.state import StateDir

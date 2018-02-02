@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
 from functools import cmp_to_key
 
 from repology.package import Package, PackageFlags, VersionClass

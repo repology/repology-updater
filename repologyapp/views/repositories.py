@@ -17,7 +17,7 @@
 
 import flask
 
-from repologyapp.globals import *
+from repologyapp.globals import get_db, repometadata
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config

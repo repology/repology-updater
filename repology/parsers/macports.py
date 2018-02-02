@@ -21,7 +21,6 @@ import subprocess
 
 from repology.config import config
 from repology.package import Package
-from repology.util import SplitPackageNameVersion
 
 
 def SanitizeVersion(version):
