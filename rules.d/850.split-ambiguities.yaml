@@ -152,6 +152,8 @@
 
 - { name: libelf,                      wwwpart: elfutils, setname: elfutils } # Arch: XXX: problem
 
+- { name: libidn,                      verpat: "2.*", setname: libidn2 } # Haikuports: XXX: problem, different libraries
+
 - { name: libmpc,                      wwwpart: multiprecision, setname: gnumpc }
 
 - { name: libtorrent,                  family: vcpkg, setname: arvidn-libtorrent  }
