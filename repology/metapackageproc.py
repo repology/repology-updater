@@ -15,45 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.packageproc import *
 
-
-def PackagesToMetapackages(*packagess):
+def PackagesToMetapackages(*packagesets):
     metapackages = {}
 
-    for packages in packagess:
+    for packages in packagesets:
         for package in packages:
-            if package.effname not in metapackages:
-                metapackages[package.effname] = []
-            metapackages[package.effname].append(package)
+            metapackages.setdefault(package.effname, []).append(package)
 
     return metapackages
-
-
-def FilterMetapackages(metapackages, *filters):
-    filtered_metapackages = {}
-
-    for name, packages in metapackages.items():
-        passes = True
-        for filt in filters:
-            if not filt.Check(packages):
-                passes = False
-                break
-        if passes:
-            filtered_metapackages[name] = packages
-
-    return filtered_metapackages
-
-
-def FillMetapackagesVersions(metapackages):
-    for packageset in metapackages.values():
-        FillVersionInfos(packageset)
-
-
-def MetapackagesToMetasummaries(metapackages):
-    metasummaries = {}
-
-    for metapackage_name, packageset in metapackages.items():
-        metasummaries[metapackage_name] = PackagesetToSummaries(packageset)
-
-    return metasummaries
