@@ -39,7 +39,8 @@ class VersionClass:
         return (cl == VersionClass.ignored or
                 cl == VersionClass.incorrect or
                 cl == VersionClass.untrusted or
-                cl == VersionClass.noscheme)
+                cl == VersionClass.noscheme or
+                cl == VersionClass.rolling)
 
     def ToString(cl):
         """Return string representation of a version class."""
