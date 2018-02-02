@@ -378,6 +378,9 @@
 - { name: jzintv,                      verpat: "r.*",                                      ignore: true }
 
 # K
+- { name: kbibtex,                     ver: "0.8",                   ruleset: debuntu,     ignore: true } # actually 0.8~20170819git31a77b27e8e83836e which cannot be parsed properly
+- { name: kbibtex,                     ver: "0.8",                   ruleset: mageia,      incorrect: true }
+- { name: kbibtex,                                                   ruleset: mageia,      untrusted: true }
 - { name: kbuild,                      verlonger: 3,                                       ignore: true } # 0.1.9998.8.2814.25 @ pkgsrc
 - { name: kbuild,                      verpat: ".*[rs].*",                                 ignore: true } # 0.1.9998.r2813 | 0.1.9998svn2814
 - { name: kdnssd,                      verpat: "1[6789]\\..*",                             ignore: true }
