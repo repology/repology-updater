@@ -128,6 +128,7 @@
 - { name: cairomm,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: calf,                        verpat: "20[0-9]{6}.*",                             ignore: true } # slackbuilds garbage
 - { name: camlp5,                      verpat: "[0-9]{3}",                                 incorrect: true } # XXX: add problem
+- { name: can-utils,                                                                       noscheme: true }
 - { name: cblas,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: cdrtools,                    ver: "3.02",                  family: [debuntu,rosa], ignore: true } # fake, it's alpha
 - { name: ceferino,                    verpat: ".*svn.*",                                  ignore: true }
