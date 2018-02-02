@@ -29,6 +29,7 @@
 - { setname: notion,                   name: notion-3 }
 - { setname: npapi-vlc,                name: npapi-vlc-gtk3 }
 - { setname: npm,                      namepat: "npm[0-9._-]+" }
+- { setname: npth,                     name: libnpth }
 - { setname: nss-ldap,                 name: libnss-ldap }
 - { setname: nvidia-settings,          namepat: "nvidia-[0-9._-]*-settings" }
 - { setname: nvidia-settings,          namepat: "nvidia-settings-.*" }
