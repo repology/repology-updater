@@ -724,6 +724,7 @@
 - { name: syncthing-gtk,               ver: "0.14.36",                                     ignore: true } # sisyphus fake
 - { name: synfigstudio,                verpat: "1\\.3\\..*",                               devel: true } # openindiana garbage
 - { name: sysstat,                     ver: "20151012",                                    ignore: true } # openindiana garbage
+- { name: systemd,                     verlonger: 1,                 family: arch,         incorrect: true }
 
 # T
 - { name: taisei,                      verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
