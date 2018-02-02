@@ -292,7 +292,7 @@
 - { name: glibmm,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glib-networking,             verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glibc,                       verlonger: 2,                                       ignore: true } # assorted garbage
-- { name: glm,                         ver: ".*a.*",                                       devel: true }
+- { name: glm,                         verpat: ".*a.*",                                    devel: true }
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignore: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
 - { name: gnash,                       verpat: ".*git.*",                                  ignore: true } # snapshots
