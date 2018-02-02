@@ -60,5 +60,9 @@ PyMODINIT_FUNC PyInit_version(void) {
 	PyModule_AddIntConstant(m, "P_IS_PATCH_LEFT", VERSIONFLAG_P_IS_PATCH_LEFT);
 	PyModule_AddIntConstant(m, "P_IS_PATCH_RIGHT", VERSIONFLAG_P_IS_PATCH_RIGHT);
 
+	PyModule_AddIntConstant(m, "ANY_IS_PATCH", VERSIONFLAG_ANY_IS_PATCH);
+	PyModule_AddIntConstant(m, "ANY_IS_PATCH_LEFT", VERSIONFLAG_ANY_IS_PATCH_LEFT);
+	PyModule_AddIntConstant(m, "ANY_IS_PATCH_RIGHT", VERSIONFLAG_ANY_IS_PATCH_RIGHT);
+
 	return m;
 }
