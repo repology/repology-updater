@@ -260,6 +260,7 @@
 - { name: freecad,                     ver: "0.17.12018",            family: freebsd,      ignore: true }
 - { name: freeciv,                     ver: "2.6.0",                 family: fedora,       ignore: true }
 - { name: freeminer,                   verlonger: 4,                 family: fdroid,       ignore: true }
+- { name: freetds,                     vergt: "1.0.80",                                    devel: true } # http://www.freetds.org/files/stable/
 - { name: frescobaldi,                 ver: "3.0.1",                 family: sisyphus,     ignore: true } # fake
 - { name: frescobaldi,                 verpat: "3\\..*",                                   devel: true }
 - { name: fsearch,                     verpat: ".*git.*",                                  ignore: true }
