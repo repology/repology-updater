@@ -59,7 +59,6 @@ def Main():
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-E', '--repos-dir', default=config['REPOS_DIR'], help='path directory with reposotory configs')
-    parser.add_argument('-M', '--mode', choices=['batch', 'stream'], default='stream', help='processing mode')
 
     filters_grp = parser.add_argument_group('Filters')
     filters_grp.add_argument('--no-shadow', action='store_true', help='treat shadow repositories as normal')
@@ -133,17 +132,8 @@ def Main():
                         VersionClass2Letter(best_pkg_by_repo[reponame].versionclass)
                     ))
 
-    if options.mode == 'stream':
-        logger.Log('dumping...')
-        repoproc.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
-    else:
-        logger.Log('loading packages...')
-        all_packages = repoproc.DeserializeMulti(reponames=options.reponames, logger=logger)
-        logger.Log('merging packages...')
-        metapackages = PackagesToMetapackages(all_packages)
-        logger.Log('dumping...')
-        for metapackage_name, packageset in sorted(metapackages.items()):
-            PackageProcessor(packageset)
+    logger.Log('dumping...')
+    repoproc.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
 
     return 0
 
