@@ -18,6 +18,7 @@
   type: repository
   desc: Parrot
   family: debuntu
+  ruleset: [ debuntu, parrot ]
   color: '95b8c8'
   sources:
     - name: [ main, contrib, non-free ]

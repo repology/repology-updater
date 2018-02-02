@@ -82,6 +82,7 @@ rulesets = families + [
     'deb_multimedia',
     'deepin',
     'hyperbola',
+    'parrot',
 ]
 
 customflags = [
