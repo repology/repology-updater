@@ -667,6 +667,8 @@
 - { name: rtmpdump,                    verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: rtmpdump,                    verlonger: 2,                                       ignore: true }
 - { name: "ruby:io-like",              ver: "0.3.0.20130301",                              ignore: true } # freebsd
+- { name: "ruby:net-ldap",             ver: "1.1.0",                 family: sisyphus,     incorrect: true }
+- { name: "ruby:net-ldap",                                           family: sisyphus,     untrusted: true }
 - { name: rust,                        verpat: ".*dev",                                    ignore: true } # haikuports garbage
 
 # S
