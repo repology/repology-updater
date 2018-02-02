@@ -39,7 +39,6 @@ def SanitizeVersion(version):
 class MacPortsParser():
     def __init__(self):
         self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
-        pass
 
     def Parse(self, path):
         result = []

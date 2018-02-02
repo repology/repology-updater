@@ -28,7 +28,6 @@ from repology.logger import NoopLogger
 class RepodataFetcher():
     def __init__(self, url):
         self.url = url
-        pass
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:

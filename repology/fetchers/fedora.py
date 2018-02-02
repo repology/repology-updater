@@ -27,7 +27,6 @@ class FedoraFetcher():
     def __init__(self, apiurl, giturl):
         self.apiurl = apiurl
         self.giturl = giturl
-        pass
 
     def LoadSpec(self, package, statedir, logger):
         specurl = self.giturl + '/{0}.git/plain/{0}.spec'.format(package)
