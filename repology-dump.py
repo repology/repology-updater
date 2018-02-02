@@ -21,10 +21,10 @@ import argparse
 import os
 
 from repology.config import config
-from repology.filters import *
-from repology.logger import *
-from repology.package import *
-from repology.packageproc import *
+from repology.filters import CategoryFilter, FamilyCountFilter, InRepoFilter, MaintainerFilter, NotInRepoFilter, OutdatedInRepoFilter, ShadowFilter
+from repology.logger import FileLogger, StderrLogger
+from repology.package import Package, VersionClass
+from repology.packageproc import FillPackagesetVersions, PackagesetCheckFilters, PackagesetToBestByRepo
 from repology.repoman import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
