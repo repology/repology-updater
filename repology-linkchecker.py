@@ -145,7 +145,7 @@ def LinkUpdatingWorker(queue, options, logger):
         logger.Log('Updated {} url(s) ({} .. {})'.format(len(pack), pack[0][0], pack[-1][0]))
 
 
-def Main():
+def ParseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('--logfile', help='path to log file (log to stderr by default)')
@@ -162,7 +162,12 @@ def Main():
     parser.add_argument('--failed', action='store_true', help='only process links that were checked and failed')
     parser.add_argument('--succeeded', action='store_true', help='only process links that were checked and failed')
     parser.add_argument('--prefix', help='only process links with specified prefix')
-    options = parser.parse_args()
+
+    return parser.parse_args()
+
+
+def Main():
+    options = ParseArguments()
 
     logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
     database = Database(options.dsn, readonly=True, autocommit=True)

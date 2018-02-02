@@ -136,7 +136,7 @@ def ShowUnmatchedRules(options, logger, transformer, reliable):
             wlogger.Log(rule)
 
 
-def Main():
+def ParseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
@@ -159,7 +159,12 @@ def Main():
     actions_grp.add_argument('-r', '--show-unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
-    options = parser.parse_args()
+
+    return parser.parse_args()
+
+
+def Main():
+    options = ParseArguments()
 
     repoman = RepositoryManager(options.repos_dir)
     repoproc = RepositoryProcessor(repoman, options.statedir)

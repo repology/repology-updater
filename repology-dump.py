@@ -54,7 +54,7 @@ def VersionClass2Letter(value):
         return '?'
 
 
-def Main():
+def ParseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
@@ -75,7 +75,12 @@ def Main():
     parser.add_argument('-s', '--field-separator', default=' ', help='field separator')
 
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
-    options = parser.parse_args()
+
+    return parser.parse_args()
+
+
+def Main():
+    options = ParseArguments()
 
     logger = StderrLogger()
     if options.logfile:

@@ -27,7 +27,7 @@ from repology.config import config
 from repology.database import Database
 
 
-def Main():
+def ParseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
 
@@ -37,7 +37,11 @@ def Main():
     parser.add_argument('--main', action='store_true', help='generate maintainers sitemap')
     parser.add_argument('--metapackages', action='store_true', help='generate maintainers sitemap')
 
-    options = parser.parse_args()
+    return parser.parse_args()
+
+
+def Main():
+    options = ParseArguments()
 
     database = Database(options.dsn, readonly=True)
 

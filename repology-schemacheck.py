@@ -193,11 +193,16 @@ def GetYaml(path):
         return yaml.safe_load(yamlfile)
 
 
-def Main():
+def ParseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-s', '--schema', choices=schemas.keys(), required=True, help='schema to use')
     parser.add_argument('files', metavar='file', nargs='*', help='files to check')
-    options = parser.parse_args()
+
+    return parser.parse_args()
+
+
+def Main():
+    options = ParseArguments()
 
     errors = 0
 
