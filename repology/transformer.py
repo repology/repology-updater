@@ -221,6 +221,9 @@ class PackageTransformer:
         if 'p_is_patch' in rule:
             package.SetFlag(PackageFlags.p_is_patch, rule['p_is_patch'])
 
+        if 'any_is_patch' in rule:
+            package.SetFlag(PackageFlags.any_is_patch, rule['any_is_patch'])
+
         if 'outdated' in rule:
             package.SetFlag(PackageFlags.outdated, rule['outdated'])
 

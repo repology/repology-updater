@@ -169,6 +169,7 @@ schemas = {
             'ignore': bool,
             'devel': bool,
             'p_is_patch': bool,
+            'any_is_patch': bool,
             'outdated': bool,
             'legacy': bool,
             'incorrect': bool,

@@ -19,7 +19,7 @@
 import re
 
 
-from repology.version import P_IS_PATCH_LEFT, P_IS_PATCH_RIGHT, VersionCompare
+from repology.version import ANY_IS_PATCH_LEFT, ANY_IS_PATCH_RIGHT, P_IS_PATCH_LEFT, P_IS_PATCH_RIGHT, VersionCompare
 
 
 class VersionClass:
@@ -80,6 +80,7 @@ class PackageFlags:
 
     # special flags
     p_is_patch = 1 << 10
+    any_is_patch = 1 << 11
 
     def GetMetaorder(cl):
         """Return a higher order version sorting key based on flags.
@@ -298,7 +299,9 @@ class Package:
             self.version,
             other.version,
             ((self.flags & PackageFlags.p_is_patch) and P_IS_PATCH_LEFT) |
-            ((other.flags & PackageFlags.p_is_patch) and P_IS_PATCH_RIGHT)
+            ((other.flags & PackageFlags.p_is_patch) and P_IS_PATCH_RIGHT) |
+            ((self.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH_LEFT) |
+            ((other.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH_RIGHT)
         )
 
     @property
