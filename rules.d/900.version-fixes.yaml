@@ -316,6 +316,7 @@
 - { name: gnuradio,                                                  family: nix,          untrusted: true }
 - { name: gnuradio,                    verpat: ".*git",                                    ignore: true } # strange tag, wikidata picks it
 - { name: gnushogi,                    verpat: ".*git.*",                                  ignore: true }
+- { name: gnutls,                      verpat: "3\\.6\\..*",                               devel: true } # stable-next branch; it's claimed to be stable but undertested, but in fact it is widely used already, so `devel' is not entirely correct here, but use it to allow 3.6 and 3.5 coexist for now
 - { name: go,                          ver: "1.10",                  family: fedora,       ignore: true } # fake
 - { name: "go:bindata",                verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: "go:bindata",                ver: "3.1.0",                 family: freebsd,      incorrect: true }
