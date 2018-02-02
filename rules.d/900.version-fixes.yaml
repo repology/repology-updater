@@ -431,6 +431,7 @@
 - { name: libglw,                      verpat: "20[0-9]{6}",                               ignore: true }
 - { name: libgnomeui,                  ver: "2.24.6",                family: opensuse,     ignore: true }
 - { name: libhangul,                   verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
+- { name: libhid,                      ver: "0.2.17",                ruleset: [fedora,rosa], incorrect: true } # nonexisting release
 - { name: libiconv,                    verpat: "[0-9]",                                    ignore: true } # lede/openwrt strange version
 - { name: libimobiledevice,            ver: "1.2.1",                 family: openwrt,      ignore: true } # fake
 - { name: libimobiledevice,            verlonger: 3,                 family: kaos,         ignore: true } # fake
