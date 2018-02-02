@@ -221,6 +221,7 @@
 - { name: evolution-mapi,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: exaile,                      ver: "4.0.0",                 family: mageia,       ignore: true } # no such release, there's beta2
 - { name: exifprobe,                   ver: "2.0.2",                 family: [ yacp ],     ignore: true } # no such release
+- { name: exiftool,                    vergt: "10.55",                                     devel: true } # https://www.sno.phy.queensu.ca/~phil/exiftool/history.html
 - { name: exiv2,                       verpat: "[0-9a-f]{40}",                             ignore: true } # commit
 
 # F
