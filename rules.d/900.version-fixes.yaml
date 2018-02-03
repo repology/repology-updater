@@ -670,6 +670,7 @@
 - { name: readline,                                                                        p_is_patch: true }
 - { name: recode,                      ver: "3.7-2fd838565",                               ignore: true }
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignore: true }
+- { name: recode,                      verge: "3.7",                                       devel: true } # fork
 - { name: reptyr,                      ver: "0.6.3a",                family: freebsd,      incorrect: true } # fake, no such tag
 - { name: remmina,                     verpat: "(.*?)([^0-9]*r[^0-9]*)(.*?)",              setver: "$1-rcgit.$3", devel: true } # r, rc, rcgit, etc.
 - { name: remmina,                     ver: "1.2.0",                 family: [alpine,sisyphus,debuntu,fedora,mageia,rosa], ignore: true } # liars
