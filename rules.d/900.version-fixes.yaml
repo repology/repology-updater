@@ -773,6 +773,8 @@
 - { name: uniconvertor,                ver: "2.0",                   family: [fedora,mageia,rosa], incorrect: true } # not yet released
 - { name: unicode-ucd,                 verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: unison,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # XXX: assumed, not confirmed; http://www.cis.upenn.edu/~bcpierce/unison/download.html
+- { name: unnethack,                   ver: "5.3.1",                 family: nix,          incorrect: true }
+- { name: unnethack,                                                 family: nix,          untrusted: true }
 - { name: unrar,                       verpat: "5\\.50.*",                                 ignore: true } # it uses 5.5.X schema
 - { name: unzip,                       verpat: ".*c.*",                                    ignore: true } # haikuports
 - { name: urlview,                     ver: ["20131023","0.9.20131021"],                   ignore: true }
