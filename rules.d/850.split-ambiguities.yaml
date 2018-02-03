@@ -255,6 +255,8 @@
 
 - { name: scramble, wwwpart: xffm, setname: scramble-xffm } # wtf is that
 
+- { name: scratch, wwwpart: launchpad.net/scratch, setname: scratch-text-editor }
+
 - { name: sdl, verge: "2", setname: sdl2 }
 
 - { name: sdl_ttf, ruleset: kaos, setname: sdl2_ttf }
