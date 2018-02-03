@@ -73,6 +73,7 @@
 - { setname: squid,                    namepat: "squid[0-9._-]+" }
 - { setname: squirrelmail-$1,          namepat: "squirrelmail-(.*)-plugin", family: freebsd }
 - { setname: staruml,                  name: staruml-bin, addflavor: bin }
+- { setname: staruml,                  name: staruml2 }
 - { setname: stellarium,               name: stellarium-qt4 }
 - { setname: stepmania,                name: stepmania-devel, family: freebsd }
 - { setname: stfl,                     name: [libstfl,libstfl0] }
