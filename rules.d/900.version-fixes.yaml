@@ -509,6 +509,8 @@
 
 # N
 - { name: ncurses,                     verpat: ".*20[0-9]{6}.*",                           ignore: true }
+- { name: neovim-qt,                   ver: "0.2.9",                 ruleset: aur,         incorrect: true }
+- { name: neovim-qt,                                                 ruleset: aur,         untrusted: true }
 - { name: net-tools,                   verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: netcat-openbsd,              verpat: "20[0-9]{6}.*",                             ignore: true } # pkgsrc garbage
 - { name: netpbm,                      verpat: "[0-9]{4}",                                 ignore: true } # aosc garbage
