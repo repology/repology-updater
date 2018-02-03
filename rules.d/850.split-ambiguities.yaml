@@ -291,7 +291,10 @@
 
 - { name: tesseract, setname: tesseract-game, wwwpart: tesseract.gg }
 - { name: tesseract, setname: tesseract-game, category: games }
-- { name: tesseract, setname: tesseract-ocr, wwwpart: tesseract-ocr }
+- { name: tesseract, setname: tesseract-ocr, wwwpart: tesseract-ocr } # fallthrough
+- { name: tesseract, setname: tesseract-ocr, category: [graphics,app-text,libs] }
+- { name: tesseract, setname: tesseract-ocr, ruleset: [vcpkg] }
+- { name: tesseract, warning: "please classify me" }
 
 # GNU time vs. xemacs module
 - { name: time, setname: xemacs-time, wwwpart: xemacs } # gentoo
