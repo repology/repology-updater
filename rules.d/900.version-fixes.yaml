@@ -140,6 +140,7 @@
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignore: true }
 - { name: chakracore,                  wwwpart: cauldrondevelopmentllc,                    ignore: true } # fork with different versioning
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignore: true } # AUR
+- { name: cherokee,                    verpat: "20[0-9]{6}.*",                             incorrect: true } # slackware
 - { name: ckermit,                     ver: "302",                                         setver: "9.0.$0" }
 - { name: ckermit,                     ver: "9.0.304",                                     devel: true }
 - { name: cld2,                        ver: "20160820",                                    ignore: true } # aosc fake (there were no commits to cld2 since 2015)
