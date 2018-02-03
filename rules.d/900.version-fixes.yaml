@@ -261,6 +261,8 @@
 - { name: freecad,                     ver: "0.17.12018",            family: freebsd,      ignore: true }
 - { name: freeciv,                     ver: "2.6.0",                 family: fedora,       ignore: true }
 - { name: freeminer,                   verlonger: 4,                 family: fdroid,       ignore: true }
+- { name: freerdp,                     ver: "2.0.0",                 family: [sisyphus,fedora,mageia,rosa], incorrect: true } # it's -rc[01] ATOW
+- { name: freerdp,                                                   family: [sisyphus,fedora,mageia,rosa], untrusted: true }
 - { name: freetds,                     vergt: "1.0.80",                                    devel: true } # http://www.freetds.org/files/stable/
 - { name: frescobaldi,                 ver: "3.0.1",                 family: sisyphus,     ignore: true } # fake
 - { name: frescobaldi,                 verpat: "3\\..*",                                   devel: true }
