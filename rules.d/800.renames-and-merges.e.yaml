@@ -41,6 +41,7 @@
 - { setname: enblend-enfuse,           name: enblend }
 - { setname: enemy-territory,          name: enemyterritory }
 - { setname: enet,                     name: [libenet,enet1.2] }
+- { setname: engauge,                  name: [engauge-digitizer,engauge-samples], addflavor: true }
 - { setname: enigma,                   name: enigma_sdl }
 - { setname: enscript,                 namepat: "enscript-.*", family: freebsd } # enscript-a4, enscript-letter, enscript-letterdj
 - { setname: entagged,                 name: entagged-tageditor, family: gentoo }
