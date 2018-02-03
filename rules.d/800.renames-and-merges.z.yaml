@@ -16,8 +16,8 @@
 - { setname: zint,                     name: [zint-gui,zint-qt] }
 - { setname: zlib,                     name: zlib-static, addflavor: static }
 - { setname: zoneminder,               name: zoneminder-h264, ignore: true }
-- { setname: zookeeper,                name: zookeeper-bin }
-- { setname: zookeeper,                name: zookeeper-c, family: gentoo }
+- { setname: zookeeper,                name: [zookeeper-bin, libzookeeper, zookeeper-c], addflavor: true }
+- { setname: zookeeper,                name: apache-zookeeper }
 - { setname: zoom,                     name: zoom-player }
 - { setname: zsh,                      name: zsh-doc, addflavor: doc }
 - { setname: zstd,                     name: [zstandard,zstd-static] }
