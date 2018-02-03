@@ -81,3 +81,18 @@
 - { setname: pypy,                     name: ["python:pypy","python:pypy-bin"] }
 - { setname: pypy3,                    name: ["python:pypy3","python:pypy3-bin"] }
 - { setname: python,                   namepat: "python[._-]?[23][0-9._-]*" }
+
+- setname: pinentry
+  name:
+    - pinentry-base
+    - pinentry-curses
+    - pinentry-fltk
+    - pinentry-gnome
+    - pinentry-gnome3
+    - pinentry-gtk2
+    - pinentry-libsecret
+    - pinentry-qt
+    - pinentry-qt4
+    - pinentry-qt5
+    - pinentry-tty
+  addflavor: true
