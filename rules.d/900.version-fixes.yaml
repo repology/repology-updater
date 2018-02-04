@@ -339,6 +339,8 @@
 - { name: goldencheetah,               verpat: ".*dev.*",                                  ignore: true }
 - { name: goocanvasmm,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignore: true }
+- { name: gprolog,                     ver: "1.4.5",                 family: debuntu,      incorrect: true }
+- { name: gprolog,                                                   family: debuntu,      untrusted: true }
 - { name: gsettings-desktop-schemas,   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: "gstreamer1plugins:mpg123",  verpat: "20[0-9]{6}",                               ignore: true } # AUR
 - { name: gtest,                       verlonger: 3,                                       ignore: true } # freebsd garbage
