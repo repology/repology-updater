@@ -404,6 +404,7 @@
 - { name: kdnssd,                      verpat: "1[6789]\\..*",                             ignore: true }
 - { name: kdiff3,                      verpat: "1\\.7\\.0-[0-8a-f]{7}.*",                  ignore: true } # nix snapshot
 - { name: kdiff3,                      verpat: ".*201[789].*",                             ignore: true } # nix snapshot
+- { name: kget,                        verpat: "20[0-9]{6}",                               ignore: true } # nix snapshot
 - { name: kicad,                       verpat: "20[0-9][0-9].*",                           ignore: true }
 - { name: kismet,                      verpat: "2008.*",                                   ignore: true } # XXX: transform + problem
 - { name: knights,                     ver: "2.5.85",                                      incorrect: true } # kaos
