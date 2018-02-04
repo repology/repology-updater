@@ -424,6 +424,7 @@
 - { name: llvm,                        verpat: ".*git",                                    ignore: true }
 - { name: llvm,                        verpat: ".*r.*",                                    ignore: true } # macports fake 6.0
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
+- { name: lrzsz,                       verge: "0.12.21",                                   devel: true } # debian fork? (needs investigation)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignore: true } # fake
 - { name: luajit,                      ver: ["2.1", "2.1.0"],        family: [sisyphus,fedora], incorrect: true } # it's 2.1.0 betaN
 - { name: luajit,                                                    family: [sisyphus,fedora], untrusted: true }
