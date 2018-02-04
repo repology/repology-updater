@@ -9,6 +9,8 @@
 - { setname: farstream,                namepat: "farstream[0-9.-]+" }
 - { setname: fasta,                    name: fasta3 }
 - { setname: fastd,                    name: fastd-devel, ignore: true }
+- { setname: fcgi,                     name: [fcgi-devkit,libfcgi] }
+- { setname: fcgi-cgi,                 name: fcgi-cgi-static, addflavor: static }
 - { setname: fcitx,                    name: [fcitx-gtk2,fcitx-gtk3] }
 - { setname: fdk-aac,                  name: libfdk-aac }
 - { setname: fdkaac,                   name: fdk-aac-encoder }
