@@ -241,6 +241,7 @@
 - { name: fdupes,                      verpat: "1\\.[0-9]{2}",                             outdated: true } # it has switched to 3 componennts (e.g. 1.51 -> 1.6.0 -> 1.6.1)
 - { name: fdupes,                      verpat: "[0-9]+",                                   ignore: true }
 - { name: fetch,                                                     family: ravenports,   ignore: true } # fake
+- { name: ffms2,                       ver: "2.23.1",                                      setver: "2.23" } # https://github.com/repology/repology/issues/496
 - { name: firebird,                    verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.[0-9]{5,}.*", setver: "$1" }
 - { name: firefox,                     verpat: ".*[ab].*",                                 devel: true }
 - { name: ffmpeg,                      verpat: ".*20[0-9]{6}.*",                           ignore: true } # openbsd, chocolatey, pkgsrc
