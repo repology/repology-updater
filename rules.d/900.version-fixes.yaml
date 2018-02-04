@@ -879,6 +879,7 @@
 - { name: zbar,                        ver: ".*20[0-9]{2}.*",                              ignore: true }
 - { name: zcad,                        ver: "0.9.8",                                       ignore: true } # FreeBSD fake
 - { name: zeromq,                      verpat: "20[0-9]{6}.*",                             ignore: true } # vcpkg snapshot
+- { name: zookeper,                    ver: "3.4.11",                                      outdated: true } # buggy version recalled by upstream
 - { name: zpaq,                        verpat: "[0-9]+",                                   ignore: true }
 - { name: zsh-syntax-highlighting,     verpat: "20[0-9]{6}.*",                             ignore: true } # FreeBSD
 - { name: zshdb,                       verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
