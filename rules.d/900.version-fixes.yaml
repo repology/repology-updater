@@ -735,7 +735,7 @@
 - { name: slime,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: slime,                       ver: "2.20.2.gef68a0b4",                            ignore: true }
 - { name: smtp-fuzz,                                                                       noscheme: true }
-- { name: sndio,                       ver: ["20161106","1.2.0_2"],                        ignore: true }
+- { name: sndio,                       verpat: "20[0-9]{6}",                               ignore: true }
 - { name: snmpenum,                                                                        noscheme: true }
 - { name: solvespace,                  verpat: ".*[0-9]{8}.*",                             ignore: true } # nix garbage
 - { name: speex,                       verlonger: 3,                 family: openindiana,  ignore: true }
