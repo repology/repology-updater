@@ -875,6 +875,7 @@
 # Z
 - { name: zathura,                     ver: "20101104",                                    ignore: true }
 - { name: zbar,                        verge: "0.20",                                      devel: true } # linuxtv.org fork
+- { name: zbar,                        ver: ".*20[0-9]{2}.*",                              ignore: true }
 - { name: zcad,                        ver: "0.9.8",                                       ignore: true } # FreeBSD fake
 - { name: zeromq,                      verpat: "20[0-9]{6}.*",                             ignore: true } # vcpkg snapshot
 - { name: zpaq,                        verpat: "[0-9]+",                                   ignore: true }
