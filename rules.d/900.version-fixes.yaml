@@ -426,7 +426,9 @@
 - { name: litecoin,                    ver: "0.15.0.1",              family: sisyphus,     ignore: true } # it's 0.15.0.1rc1
 - { name: live555,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # alt; it's dot-separated, dummies!
 - { name: llvm,                        verpat: ".*git",                                    ignore: true }
-- { name: llvm,                        verpat: ".*r.*",                                    ignore: true } # macports fake 6.0
+- { name: llvm,                        verpat: ".*r[0-9]{6,}",                             ignore: true } # ignore revisions, allow release candidates
+- { name: llvm,                        ver: "6.0.0",                 family: fedora,       incorrect: true }
+- { name: llvm,                                                      family: fedora,       untrusted: true }
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
 - { name: lrzsz,                       verge: "0.12.21",                                   devel: true } # debian fork? (needs investigation)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignore: true } # fake
