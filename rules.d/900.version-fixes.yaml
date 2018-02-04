@@ -210,7 +210,7 @@
 - { name: empathy,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: elftoolchain,                ver: "100",                   family: ravenports,   incorrect: true } # fake
 - { name: elinks,                      vergt: "0.12pre6",                                  untrusted: true } # too many snapshots
-- { name: elinks,                      ver: ["0.11.996","0.12.3.2"],                       incorrect: true }
+- { name: elinks,                      ver: ["0.11.996","0.12.3.2","0.12rc6"],             incorrect: true }
 - { name: elinks,                      ver: "0.12", family: [sisyphus,centos,fedora,mageia,openmandriva,rosa], incorrect: true }
 - { name: elinks,                      ver: "0.13", family: [alpine,arch,rudix],           incorrect: true }
 - { name: elinks,                      verpat: "20[0-9]{6}.*",                             ignore: true }
