@@ -124,7 +124,7 @@
 
 - { name: jersey,            verpat: "1\\..*",            setname: jersey1 }
 
-- { name: jpeg,              verpat: "1\\..*",            setname: libjpeg-turbo }
+- { name: jpeg,              verpat: "[01]\\..*",         setname: libjpeg-turbo }
 
 - { name: kdelibs,           verpat: "3\\..*",            setname: kdelibs3 }
 - { name: kdelibs,           verpat: "4\\..*",            setname: kdelibs4 }
