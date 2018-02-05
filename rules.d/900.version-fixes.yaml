@@ -497,8 +497,8 @@
 - { name: magic,                       verpat: "8\\.2\\..*",                               devel: true }
 - { name: magic,                       verpat: "[0-9]\\.[0-9]\\.[0-9]{3}",                 ignore: false } # unignore some good -devel's
 - { name: mariadb,                     verge: "10.3",                                      devel: true } # https://downloads.mariadb.org/
-- { name: mario,                       ver: "1.6.1",                 family: fedora,       incorrect: true } # rpmfusion
-- { name: mario,                                                     family: fedora,       untrusted: true }
+- { name: mari0,                       ver: "1.6.1",                 family: fedora,       incorrect: true } # rpmfusion
+- { name: mari0,                                                     family: fedora,       untrusted: true }
 - { name: matreshka,                   ver: "0.8.0",                 family: fedora,       ignore: true } # fake (see report)
 - { name: mesa,                        verpat: "[^a-z]+",            family: [fedora,mageia], ignore: true } # accused in ignoring rc suffix
 - { name: mesa,                        verpat: "[0-9]+\\.[0-9]+\\.0",                      devel: true } # .0 are devel releases, example: https://www.mesa3d.org/relnotes/17.2.0.html
