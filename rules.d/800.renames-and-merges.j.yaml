@@ -21,7 +21,7 @@
 - { setname: jenkins,                  name: jenkins-lts }
 - { setname: jersey,                   namepat: "jersey[0-9]+" }
 - { setname: josm,                     name: josm-latest, ignore: true }
-- { setname: jpeg,                     name: [jpeg,libjpeg,jpeg-turbo,libjpeg-turbo,turbojpeg] }
+- { setname: jpeg,                     name: [jpeg,libjpeg,jpeg-turbo,libjpeg-turbo,turbojpeg,libjpeg+legacy,libjpeg6-ijg] }
 - { setname: jpeg,                     namepat: "libjpeg[0-9]+([a-z]|-turbo)?" }
 - { setname: json-c,                   name: json-c12 }
 - { setname: json-glib,                name: libjson-glib }
