@@ -7,7 +7,7 @@
 - { setname: sauerbraten,              name: sauerbraten-data, addflavor: data }
 - { setname: scala,                    namepat: "scala[0-9._-]+" }
 - { setname: scala,                    namepat: "scala[0-9._-]+-docs", addflavor: docs }
-- { setname: scala,                    namepat: "scala-docs[0-9._-]+", addflavor: docs }
+- { setname: scala,                    namepat: "scala-docs[0-9._-]*", addflavor: docs }
 - { setname: scalapack,                name: libscalapack }
 - { setname: scamp,                    name: astromatic-scamp }
 - { setname: schismtracker,            name: schism }
