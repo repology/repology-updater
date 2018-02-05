@@ -315,6 +315,29 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
+    def test_suppress_ignored(self):
+        packages = [
+            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.ignore), VersionClass.unique),
+            (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.ignore), VersionClass.outdated),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_suppress_ignored_rolling(self):
+        packages = [
+            (Package(repo='0', family='0', name='a', version='3.0', flags=PackageFlags.rolling), VersionClass.rolling),
+            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.ignore), VersionClass.newest),
+            (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.ignore), VersionClass.outdated),
+        ]
+
+        FillPackagesetVersions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
 
 if __name__ == '__main__':
     unittest.main()
