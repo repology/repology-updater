@@ -80,6 +80,7 @@
 - { setname: cogl,                     name: cogl-amdgpu-pro }
 - { setname: cogl,                     name: libcogl }
 - { setname: collectd,                 name: collectd5 }
+- { setname: collectd,                 name: [collectd-amqp,collectd-curl,collectd-data,collectd-dbi,collectd-dnscollectd-lua,collectd-memcached,collectd-mysql,collectd-network,collectd-notify-email,collectd-postgresql95,collectd-riemann,collectd-rrdtool,collectd-snmp,collectd-write-prometheus,libcollectdclient,"perl:collectd","python:collectd"], addflavor: true }
 - { setname: colorcode,                name: color-code }
 - { setname: comedilib,                name: libcomedi }
 - { setname: commoncpp2,               name: commoncpp }

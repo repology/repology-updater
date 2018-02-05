@@ -8,7 +8,7 @@
 - { setname: garlic,                   name: garlic-doc }
 - { setname: garmintools,              name: garmin-forerunner-tools }
 - { setname: gaul,                     name: gaul-devel, family: gentoo }
-- { setname: gcc,                      name: g++, addflavor: true }
+- { setname: gcc,                      name: [g++,gcc3-c,gcc3-c++,gcc3-f77,gcc3-objc,gcc48-libs,gcc49-libs,gcc5-libs], addflavor: true }
 - { setname: gcc,                      namepat: "gcc[0-9.-]+" }
 - { setname: gcc,                      namepat: "gcc[0-9.-]+-devel", ignore: true }
 - { setname: gccgo,                    namepat: "gccgo[0-9.-]+" }
