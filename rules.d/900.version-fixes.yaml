@@ -190,6 +190,7 @@
 - { name: dietlibc,                                                  family: [fedora,mageia], untrusted: true }
 - { name: discord,                                                   family: chocolatey,   ignore: true } # windows version has different versioning
 - { name: distcc,                      ver: "3.2",                   family: pkgsrc,       incorrect: true }
+- { name: distcc,                      ver: "3.2.0rc1",                                    incorrect: true } # it's 3.2rc1
 - { name: distcc,                                                    family: pkgsrc,       untrusted: true }
 - { name: distorm,                     verpat: "20[0-9]{6}.*",                             ignore: true } # freebsd garbage
 - { name: djvulibre,                   ver: "3.5.27.1",                                    ignore: true }
