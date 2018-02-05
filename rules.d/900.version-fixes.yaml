@@ -412,7 +412,7 @@
 - { name: kget,                        verpat: "20[0-9]{6}",                               ignore: true } # nix snapshot
 - { name: kicad,                       verpat: "20[0-9][0-9].*",                           ignore: true }
 - { name: kismet,                      verpat: "2008.*",                                   outdated: true } # XXX: version format problem
-- { name: kismet,                      verpat: "([0-9]{4})\\.([0-9]+)\\.([0-9]+)",         setver: $1-$2-R$2 }
+- { name: kismet,                      verpat: "([0-9]{4})\\.([0-9]+)\\.([0-9]+)",         setver: $1-$2-R$3 }
 - { name: knights,                     ver: "2.5.85",                                      incorrect: true } # kaos
 - { name: knights,                     verpat: ".*20[0-9]{6}.*",                           ignore: true } # gentoo
 - { name: kodi,                        verpat: "18.*alpha.*",        family: guix,         ignore: true }
