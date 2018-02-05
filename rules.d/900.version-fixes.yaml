@@ -817,6 +817,7 @@
 - { name: utfcpp,                      verpat: "2012.*",                                   ignore: true } # slackbuilds
 
 # V
+- { name: v,                           verpat: "[0-9]+",                                   ignore: true } # aur; correct versions is 1.1
 - { name: vbindiff,                    ver: "3.0",                   family: [fedora,mageia], incorrect: true } # fake, it's 3.0beta5
 - { name: vbindiff,                                                  family: [fedora,mageia], untrusted: true }
 - { name: vcsh,                        ver: "1.20170226",                                  incorrect: true } # nix fake

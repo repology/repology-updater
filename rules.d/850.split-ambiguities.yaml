@@ -326,6 +326,8 @@
 - { name: unicorn, setname: unicorn-emulator, family: gentoo }
 - { name: unicorn, warning: "please classify me" }
 
+- { name: v, wwwpart: vgui, setname: vgui }
+
 - { name: vapor, family: nix, setname: love-vapor }
 
 - { name: wakeonlan, family: slackbuilds, setname: "python:wakeonlan" }
