@@ -257,6 +257,8 @@
 
 - { name: "ruby:rash", setname: "ruby:rash-alt", ruleset: sisyphus } # fork
 
+- { name: scala, ruleset: yacp, setname: scala-ccp4 }
+
 - { name: scamp, wwwpart: sourceforge.net/projects/scamp, setname: scamp-clamav }
 
 - { name: scramble, wwwpart: xffm, setname: scramble-xffm } # wtf is that
