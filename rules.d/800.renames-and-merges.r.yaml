@@ -3,6 +3,7 @@
 - { setname: rabbitmq-server,          name: rabbitmq }
 - { setname: racket,                   name: [minimal-racket,racket-minimal], addflavor: minimal }
 - { setname: racket,                   name: racket-docs, addflavor: docs }
+- { setname: raptor,                   name: [raptor1,raptor2] }
 - { setname: rawtherapee,              name: rawtherapee-gtk2 }
 - { setname: rawtherapee,              name: rawtherapee-unstable, ignore: true }
 - { setname: readline,                 namepat: "(?:lib)?readline[0-9._-]*" }
