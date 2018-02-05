@@ -210,6 +210,8 @@
 # another is `nice editor`, but I don't feel like renaming it as it's `ne` everywhere
 - { name: ne, wwwpart: wordprocessing/unix/ne, setname: ne-cam }
 
+- { name: newsbeuter, wwwpart: newsboat, setname: newsboat } # XXX: problem; newsboat is a fork of newsbeuter, package should be renamed
+
 - { name: nml, wwwpart: ropas, setname: "$0-lang" }
 
 #
