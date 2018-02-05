@@ -436,6 +436,7 @@
 - { name: live555,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # alt; it's dot-separated, dummies!
 - { name: llvm,                        verpat: ".*git",                                    ignore: true }
 - { name: llvm,                        verpat: ".*r[0-9]{6,}",                             ignore: true } # ignore revisions, allow release candidates
+- { name: llvm,                        verpat: ".*r.*",                                    devel: true }
 - { name: llvm,                        ver: "6.0.0",                 family: fedora,       incorrect: true }
 - { name: llvm,                                                      family: fedora,       untrusted: true }
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
