@@ -96,7 +96,8 @@
 - { setname: gnurl,                    name: libgnurl }
 - { setname: gnushogi,                 name: gnu-shogi }
 - { setname: gobject-introspection,    name: [gobject-introspection-common,gobject-introspection-runtime] }
-- { setname: godot,                    name: [godot-pulse,godot-tools], addflavor: true }
+- { setname: godot,                    name: [godot-pulse,godot-tools,godot-mono], addflavor: true }
+- { setname: godot,                    name: godot2 }
 - { setname: goffice,                  name: goffice-light }
 - { setname: goffice,                  namepat: "goffice[0-9._-]+" }
 - { setname: goldencheetah,            name: golden-cheetah }

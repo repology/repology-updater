@@ -79,6 +79,8 @@
 
 - { name: gnupg,             verpat: "1\\..*",            setname: gnupg1 }
 
+- { name: godot,             verpat: "2\\..*",            setname: godot2 }
+
 - { name: gstreamer,         verpat: "0\\..*",            setname: gstreamer0 }
 - { name: gstreamer,         verpat: "1\\..*",            setname: gstreamer1 }
 - { name: gstreamer,         warning: "please classify me"         }
