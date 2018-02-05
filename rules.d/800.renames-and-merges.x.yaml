@@ -37,6 +37,7 @@
 - { setname: xine-lib,                 name: [xine-lib-1.2,xine-lib1.2,libxine,libxine2] }
 - { setname: xine-ui,                  name: [xine,xine-ui2] }
 - { setname: xmbmon,                   name: mbmon }
+- { setname: xmlrpc-c,                 name: xmlrpc-c-ss } # "super stable"
 - { setname: xmltooling,               name: xmltooling-c }
 - { setname: xmobar,                   name: [xmobar-alsa,xmobar-volume] }
 - { setname: xmoto,                    name: x-moto }
