@@ -513,8 +513,8 @@
 - { name: mimikatz,                    verpat: ".*20[0-9]{6}",                             ignore: true } # BlackArch snap
 - { name: minimodem,                   verpat: ".*-[0-9]+",                                ignore: true } # -1 is not part of the version
 - { name: minimodem,                   ver: "0.24.1",                family: gentoo,       ignore: true } # actually, pentoo. it's normalized 0.24-1 which is incorrect, see prev. rule
-- { name: mixxx,                       ver: "2.1.0",                 family: [aosc,fedora], incorrect: true } # actually unitedrpms, but knowing fedora I won't trust it whole
-- { name: mixxx,                                                     family: [aosc,fedora], untrusted: true }
+- { name: mixxx,                       verpat: "2\\.1\\.[0-9]+",     ruleset: [aosc,fedora,kaos], incorrect: true } # actually unitedrpms, but knowing fedora I won't trust it whole
+- { name: mixxx,                                                     ruleset: [aosc,fedora,kaos], untrusted: true }
 - { name: mkgmap,                      verpat: "0\\.0\\.0svn([0-9]{4,})",                  setver: "r$1" }
 - { name: mkgmap,                      verpat: "[0-9]{4,}",                                setver: "r$0" }
 - { name: mkgmap-splitter,             verpat: "0\\.0\\.0svn([0-9]{3,})",                  setver: "r$1" }
