@@ -83,6 +83,8 @@
 - { setname: freeradius,               name: [freeradius-server,freeradius3] }
 - { setname: freeradius,               name: [freeradius-freetds,freeradius-iodbc,freeradius-krb5,freeradius-ldap,freeradius-memcached,freeradius-mysql,freeradius-perl,freeradius-pgsql,freeradius-python,freeradius-rest,freeradius-sqlite3,freeradius-unixodbc,freeradius-wpe,freeradius-yubikey], addflavor: true }
 - { setname: freerdp,                  namepat: "freerdp[0-9.-]+" }
+- { setname: freetds,                  name: freetds-devel, untrusted: true }
+- { setname: freetds,                  name: freetds-patched-enum, addflavor: patched-enum }
 - { setname: freetype,                 name: [libfreetype,freetype1,freetype2] }
 - { setname: freetype-infinality,      name: [freetype2-infinality,libfreetype-infinality] }
 - { setname: friently-find,            name: ffind }
