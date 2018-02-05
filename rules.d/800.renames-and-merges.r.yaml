@@ -8,6 +8,8 @@
 - { setname: readline,                 namepat: "(?:lib)?readline[0-9._-]*" }
 - { setname: redeclipse,               name: red-eclipse }
 - { setname: redeclipse,               name: redeclipse-data, addflavor: data }
+- { setname: redland,                  name: [libredland,redland-mysql,redland-pgsql,redland-storage-mysql,redland-storage-postgresql,redland-storage-sqlite,redland-storage-virtuoso], addflavor: true }
+- { setname: redland-bindings,         name: "python:redland", addflavor: python }
 - { setname: remmina,                  name: [remmina-appindicator,remmina-gtk2,remmina-plugin-gnome,remmina-plugin-nx,remmina-plugin-rdp,remmina-plugin-telepathy,remmina-plugin-vnc,remmina-plugin-xdmcp,remmina-plugins,remmina-xfce], addflavor: true }
 - { setname: renpy,                    name: "python:renpy" }
 - { setname: renpy,                    name: [renpy-demos,renpy-sdk], addflavor: true }
