@@ -321,6 +321,8 @@
 - { name: tome, wwwpart: tome.te4.org, setname: tales-of-majeyal } # aur garbage
 - { name: tome, warning: "please classify me" }
 
+- { name: udptunnel, wwwpart: lennox, setname: udptunnel-lennox }
+
 # emulator vs. ruby-rack http server
 - { name: unicorn, setname: unicorn-emulator, wwwpart: unicorn-engine.org }
 - { name: unicorn, setname: "ruby:unicorn", wwwpart: bogomips.org }
