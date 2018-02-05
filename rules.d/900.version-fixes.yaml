@@ -144,6 +144,10 @@
 - { name: cherokee,                    verpat: "20[0-9]{6}.*",                             incorrect: true } # slackware
 - { name: ckermit,                     ver: "302",                                         setver: "9.0.$0" }
 - { name: ckermit,                     ver: "9.0.304",                                     devel: true }
+- { name: clang,                       verpat: ".*r[0-9]{6,}",                             ignore: true } # ignore revisions, allow release candidates
+- { name: clang,                       verpat: ".*r.*",                                    devel: true }
+- { name: clang,                       ver: "6.0.0",                 family: fedora,       incorrect: true }
+- { name: clang,                                                     family: fedora,       untrusted: true }
 - { name: cld2,                        ver: "20160820",                                    ignore: true } # aosc fake (there were no commits to cld2 since 2015)
 - { name: clementine-player,           verlonger: 3,                 family: kaos,         ignore: true }
 - { name: clonekeen,                   verpat: "0\\.(.*)",                                 setver: "$1" }
