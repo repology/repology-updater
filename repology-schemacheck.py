@@ -88,6 +88,7 @@ rulesets = families + [
 customflags = [
     'preserve_underscore',
     'nowildcard',
+    'theiling',
 ]
 
 schemas = {

@@ -3,6 +3,12 @@
 # mail client vs. asynchronous synthesis system
 - { name: balsa, category: sci-electronics,               setname: balsa-synthesis }
 
+# http://www.theiling.de/projects/bar.html vs http://clpbar.sourceforge.net
+# some of the latter lack WWWs, while all of the former do have them
+- { name: bar, wwwpart: clp,                              setname: clpbar }
+- { name: bar, wwwpart: theiling,                         addflag: theiling }
+- { name: bar, noflag: theiling,                          setname: clpbar }
+
 - { name: bats, wwwpart: github.com/cdown/bats,           setname: bats-battery-status }
 
 - { name: beanshell, family: kaos,                        setname: beanshell2 }
