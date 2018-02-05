@@ -72,6 +72,7 @@
 - { setname: clutter-gst,              namepat: "clutter-gst[0-9.-]+" }
 - { setname: clutter-gtk,              name: clutter-gtk0.10 }
 - { setname: cmake,                    namepat: "cmake-?[0-9.]+" }
+- { setname: cmigemo,                  name: cmigemo-dict, addflavor: dict }
 - { setname: cmrt,                     name: libcmrt }
 - { setname: cntk,                     name: "python:cntk" }
 - { setname: cockatrice,               name: [cockatrice-client,cockatrice-server] }

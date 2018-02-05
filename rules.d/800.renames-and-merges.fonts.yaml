@@ -8,3 +8,21 @@
     - fonts-alee
     - ttf-alee
   setname: "fonts:alee"
+
+# C
+- name:
+    - cjkuni-fonts
+    - cjkunifonts
+  setname: "fonts:cjkuni"
+
+- name:
+    - cjkuni-ukai-fonts
+    - fonts-ttf-cjkuni-ukai
+  addflavor: ukai
+  setname: "fonts:cjkuni"
+
+- name:
+    - cjkuni-uming-fonts
+    - fonts-ttf-cjkuni-uming
+  addflavor: uming
+  setname: "fonts:cjkuni"
