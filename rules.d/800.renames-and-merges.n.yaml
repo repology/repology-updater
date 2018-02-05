@@ -31,6 +31,9 @@
 - { setname: npm,                      namepat: "npm[0-9._-]+" }
 - { setname: npth,                     name: libnpth }
 - { setname: nss-ldap,                 name: libnss-ldap }
+- { setname: ntfs-3g,                  name: [ntfs-3g-ar,ntfs-3g-advanced], addflavor: ar }
+- { setname: ntfs-3g,                  name: ["fusefs:ntfs","fusefs:ntfs-3g",ntfs-3g-fuse,ntfs-3g-ntfsprogs,ntfsprogs,ntfs3g,libntfs-3g]}
+- { setname: ntfs-3g,                  name: ntfs-3g-wimlib-patched, addflavor: wimlib }
 - { setname: nvidia-settings,          namepat: "nvidia-[0-9._-]*-settings" }
 - { setname: nvidia-settings,          namepat: "nvidia-settings-.*" }
 - { setname: nvidia-settings,          namepat: "nvidia-settings-experimental.*", ignore: true }
