@@ -253,6 +253,8 @@
 - { name: psi, wwwpart: psicode.org, setname: psi4 }
 - { name: psi4, verpat: "3\\.4.*", setname: psicode }
 
+- { name: pwsafe, wwwpart: passwordsafe, setname: passwordsafe }
+
 - { name: "ruby:bcrypt-ruby", setname: "ruby:bcrypt", ruleset: gentoo } # bcrypt-ruby != bcrypt
 
 - { name: "ruby:mysql", setname: "ruby:mysql-tmtm", wwwpart: tmtm } # fork
