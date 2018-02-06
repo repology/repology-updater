@@ -893,6 +893,7 @@
 - { name: "xorg:video-intel",          verpat: ".*20[0-9]{2}.*",                           noscheme: true }
 - { name: "xorg:video-intel",          verlonger: 3,                                       ignore: true }
 - { name: xorg-server,                 verlonger: 3,                 family: crux,         ignore: true } # bogus suffux
+- { name: xpdf,                        ver: "4.02",                  family: freebsd,      incorrect: true }
 - { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignore: true }
 - { name: xz-utils,                    ver: "5.03",                                        incorrect: true } # gobolinux garbage
 

@@ -42,6 +42,7 @@
 - { setname: xmobar,                   name: [xmobar-alsa,xmobar-volume] }
 - { setname: xmoto,                    name: x-moto }
 - { setname: xonotic,                  name: xonotic-data, addflavor: true }
+- { setname: xpdf,                     name: [xpdf3,xpdf4] }
 - { setname: xpilot-ng,                namepat: xpilot-ng-(client|server), addflavor: $1 }
 - { setname: xrdp,                     name: xrdp-devel, ignore: true }
 - { setname: xsel,                     name: xsel-conrad }
