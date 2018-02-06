@@ -7,5 +7,6 @@
 - { setname: yofrankie,                name: yofrankie-bge }
 - { setname: youtube-dl,               name: "python:youtube-dl" }
 - { setname: youtube-dl-gui,           name: youtube-dlg }
+- { setname: yq,                       name: "python:yq" }
 - { setname: ytnef,                    name: libytnef } # see https://github.com/Yeraze/ytnef/blob/master/ChangeLog
 - { setname: yuicompressor,            name: yui-compressor }

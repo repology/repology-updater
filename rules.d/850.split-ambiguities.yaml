@@ -369,6 +369,8 @@
 
 - { name: xdrfile, family: arch, verpat: "2\\..*", setname: xdrfile-wesbarnett } # fork
 
+- { name: yq, wwwpart: mikefarah, setname: yq-mikefarah }
+
 - { name: zap, wwwpart: owasp, setname: zaproxy }
 - { name: zap, wwwpart: jehops, setname: zap-zfs }
 - { name: zap, family: openbsd, setname: zap-process-killer }
