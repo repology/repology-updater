@@ -380,5 +380,7 @@
 
 - { name: zed, wwwpart: [ocamlcore, github.com/diml/zed], setname: "ocaml:zed" }
 
+- { name: z, wwwpart: kinzler, setname: comprez }
+
 # emulator vs. (deprecated) scala compiler
 - { name: zinc, wwwpart: logiqx, setname: zinc-emulator }
