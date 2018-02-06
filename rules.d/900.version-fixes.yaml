@@ -150,6 +150,7 @@
 - { name: clang,                                                     family: fedora,       untrusted: true }
 - { name: cld2,                        ver: "20160820",                                    ignore: true } # aosc fake (there were no commits to cld2 since 2015)
 - { name: clementine-player,           verlonger: 3,                 family: kaos,         ignore: true }
+- { name: clisp,                       verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: clonekeen,                   verpat: "0\\.(.*)",                                 setver: "$1" }
 - { name: cloog,                       ver: "0.18.5",                family: [haikuports, aosc, arch], ignore: true } # unofficial fork
 - { name: clojure,                     verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]{3,}",     incorrect: true } # homebrew and nix garbage
