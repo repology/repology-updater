@@ -21,6 +21,7 @@
 - { setname: zookeeper,                name: [zookeeper-bin, libzookeeper, zookeeper-c], addflavor: true }
 - { setname: zookeeper,                name: apache-zookeeper }
 - { setname: zoom,                     name: zoom-player }
+- { setname: zork,                     name: [zork1,zork2,zork3] }
 - { setname: zsh,                      name: zsh-doc, addflavor: doc }
 - { setname: zstd,                     name: [zstandard,zstd-static] }
 - { setname: zstd,                     name: libzstd }
