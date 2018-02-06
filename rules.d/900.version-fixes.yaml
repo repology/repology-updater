@@ -444,7 +444,7 @@
 - { name: llvm,                        ver: "6.0.0",                 family: fedora,       incorrect: true }
 - { name: llvm,                                                      family: fedora,       untrusted: true }
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
-- { name: lrzsz,                       verge: "0.12.21",                                   devel: true } # debian fork? (needs investigation)
+- { name: lrzsz,                       verge: "0.12.21",                                   successor: true } # debian fork? (needs investigation)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignore: true } # fake
 - { name: luajit,                      ver: ["2.1", "2.1.0"],        family: [sisyphus,fedora], incorrect: true } # it's 2.1.0 betaN
 - { name: luajit,                                                    family: [sisyphus,fedora], untrusted: true }
@@ -550,7 +550,7 @@
 - { name: npapi-vlc,                                                 family: fedora,       untrusted: true }
 - { name: nss_ldap,                    verpat: "1\\.([0-9]{3,})",                          setver: "$1" } # FreeBSD garbage
 - { name: npm,                         ver: ["5.5.0", "5.5.1"],                            devel: true } # should be updated manually
-- { name: ntfs-3g,                     verpat: ".*ar.*",                                   devel: true } # http://jp-andre.pagesperso-orange.fr/advanced-ntfs-3g.html
+- { name: ntfs-3g,                     verpat: ".*ar.*",                                   successor: true } # http://jp-andre.pagesperso-orange.fr/advanced-ntfs-3g.html
 - { name: ntp,                         verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.([0-9]+)",    setver: "$1p$2" }
 
 # O
@@ -695,7 +695,7 @@
 - { name: readline,                                                                        p_is_patch: true }
 - { name: recode,                      ver: "3.7-2fd838565",                               ignore: true }
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignore: true }
-- { name: recode,                      verge: "3.7",                                       devel: true } # fork
+- { name: recode,                      verge: "3.7",                                       successor: true } # fork
 - { name: reptyr,                      ver: "0.6.3a",                family: freebsd,      incorrect: true } # fake, no such tag
 - { name: remmina,                     verpat: "(.*?)([^0-9]*r[^0-9]*)(.*?)",              setver: "$1-rcgit.$3", devel: true } # r, rc, rcgit, etc.
 - { name: remmina,                     ver: "1.2.0",                 family: [alpine,sisyphus,debuntu,fedora,mageia,rosa], ignore: true } # liars
@@ -776,7 +776,7 @@
 - { name: tcc,                         verpat: "20[0-9]{2}.*",                             ignore: true } # freebsd
 - { name: tcl,                         verpat: ".*20[0-9]{6}.*",                           ignore: true } # 8.7 snapshots
 - { name: tcl,                         verpat: ".*a[0-9]+",                                devel: true }
-- { name: tcptrack,                    wwwpart: bchretien,                                 devel: true } # fork
+- { name: tcptrack,                    wwwpart: bchretien,                                 successor: true } # fork
 - { name: tdb,                         ver: "3.6.0",                                       ignore: true } # pclinuxos wtf
 - { name: template-glib,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: teem,                        ver: "1.12.0",                family: debuntu,      ignore: true }
@@ -849,7 +849,7 @@
 - { name: wakeonlan,                   verlonger: 3,                 family: sisyphus,     ignore: true }
 - { name: [warsow,warsow-data],        ver: "2.10",                  family: debuntu,      incorrect: true } # playdeb weirdnes
 - { name: webalizer,                   verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.([0-9]+)",    setver: $1.rb$2 }
-- { name: webalizer,                   verpat: ".*rb.*",                                   devel: true, any_is_patch: true }
+- { name: webalizer,                   verpat: ".*rb.*",                                   successor: true, any_is_patch: true } # patchset
 - { name: webkitgtk,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: weboob,                      ver: "9998",                                        ignore: true } # another gentoo rolling
 - { name: wego,                        verpat: "20[0-9]{2}.*",                             ignore: true } # nix
@@ -901,7 +901,7 @@
 
 # Z
 - { name: zathura,                     ver: "20101104",                                    ignore: true }
-- { name: zbar,                        verge: "0.20",                                      devel: true } # linuxtv.org fork
+- { name: zbar,                        verge: "0.20",                                      successor: true } # linuxtv.org fork
 - { name: zbar,                        verpat: ".*20[0-9]{2}.*",                           ignore: true }
 - { name: zcad,                        ver: "0.9.8",                                       ignore: true } # FreeBSD fake
 - { name: zenity,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }

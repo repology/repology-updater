@@ -243,6 +243,10 @@ class PackageTransformer:
             # XXX: the same as ignored for now
             package.SetFlag(PackageFlags.ignore, rule['snapshot'])
 
+        if 'successor' in rule:
+            # XXX: the same as devel for now
+            package.SetFlag(PackageFlags.devel, rule['successor'])
+
         if 'rolling' in rule:
             package.SetFlag(PackageFlags.rolling, rule['rolling'])
 

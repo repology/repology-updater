@@ -178,6 +178,7 @@ schemas = {
             'untrusted': bool,
             'noscheme': bool,
             'snapshot': bool,
+            'successor': bool,
             'rolling': bool,
             'addflag': Any(Any(*customflags), [Any(*customflags)]),
             'last': bool,
