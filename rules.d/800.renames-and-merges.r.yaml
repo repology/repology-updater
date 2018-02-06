@@ -6,6 +6,7 @@
 - { setname: raptor,                   name: [raptor1,raptor2] }
 - { setname: rawtherapee,              name: rawtherapee-gtk2 }
 - { setname: rawtherapee,              name: rawtherapee-unstable, ignore: true }
+- { setname: rdesktop,                 name: rdesktop-legacy }
 - { setname: readline,                 namepat: "(?:lib)?readline[0-9._-]*" }
 - { setname: redeclipse,               name: red-eclipse }
 - { setname: redeclipse,               name: redeclipse-data, addflavor: data }

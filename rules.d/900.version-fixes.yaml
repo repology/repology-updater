@@ -694,6 +694,8 @@
 - { name: racer,                       ver: "2.07",                                        ignore: true }
 - { name: rage,                        ver: "0.3.0.042",                                   ignore: true }
 - { name: rawstudio,                   verpat: ".*git.*",                                  ignore: true }
+- { name: rdesktop,                    ver: "1.8.4",                 family: mageia,       incorrect: true }
+- { name: rdesktop,                                                  family: mageia,       untrusted: true }
 - { name: readline,                                                                        p_is_patch: true }
 - { name: recode,                      ver: "3.7-2fd838565",                               ignore: true }
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignore: true }
