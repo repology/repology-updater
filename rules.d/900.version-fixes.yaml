@@ -436,6 +436,7 @@
 - { name: lcms,                        verpat: "2.2[0-9]",                                 ignore: true } # gobolinux brokenness
 - { name: less,                        vergt: "487",                                       devel: true } # http://www.greenwoodsoftware.com/less/
 - { name: libreoffice,                 ver: "6.0.0.0",               family: fedora,       ignore: true } # fake, it's 6.0.0.0alpha1
+- { name: lightdm-gtk-greeter,         verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignore: true }
 - { name: lilypond,                    verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: linkchecker,                 ver: "9.4",                   ruleset: aur,         incorrect: true } # not released

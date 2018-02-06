@@ -24,6 +24,12 @@
 - { setname: libreoffice-still-l10n,   namepat: "libreoffice-still-.*", family: arch }
 - { setname: libressl,                 name: libressl-devel, ignore: true }
 - { setname: libressl,                 name: libressl-netcat, addflavor: netcat }
+- { setname: lightdm,                  namepat: "liblightdm(?:-qt4|-qt5|-ubuntu)*", addflavor: true }
+- { setname: lightdm,                  namepat: "(liblightdm(?:-qt4|-qt5)*)-devel", addflavor: $1, untrusted: true }
+- { setname: lightdm,                  name: lightdm-devel, untrusted: true }
+- { setname: lightdm,                  name: lightdm-ubuntu, addflavor: ubuntu }
+- { setname: lightdm-gtk-greeter,      name: lightdm-gtk }
+- { setname: lightdm-gtk-greeter,      name: lightdm-gtk-greeter-devel, untrusted: true }
 - { setname: lightsoff,                name: gnome-games-lightsoff }
 - { setname: lightyears,               name: 20kly }
 - { setname: lilypond,                 name: [lilypond-devel-docs,lilypond-doc,lilypond-docs], addflavor: docs }
