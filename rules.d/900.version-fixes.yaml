@@ -425,6 +425,7 @@
 - { name: krank,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: krename,                     verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: krusader,                    verpat: "16\\..*",                                  incorrect: true } # pclinuxos; it uses e.g. 2.6.0 scheme
+- { name: kstars,                      verpat: "(4|15|16|17)\\..*",                        outdated: true } # switched from yy.mm.rev to x.y.z: https://cgit.kde.org/kstars.git/refs/
 - { name: kuickshow,                   verge: "0.10.0",                                    devel: true } # gentoo fork?
 - { name: kuickshow,                   ver: "0.9.2",                                       incorrect: true } # rosa garbage
 
