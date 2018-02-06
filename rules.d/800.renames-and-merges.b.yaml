@@ -73,6 +73,8 @@
 - { setname: bullet,                   name: bullet-docs, addflavor: docs }
 - { setname: bullet,                   name: bullet3 }
 - { setname: bullet,                   name: libbullet }
+- { setname: burp,                     name: burp-backup }
+- { setname: burp,                     name: burp-backup-dev, untrusted: true }
 - { setname: byaccj,                   name: byacc-j, family: debuntu }
 - { setname: bzflag,                   name: bzflag-server, addflavor: server }
 - { setname: bzr,                      name: bazaar }
