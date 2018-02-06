@@ -15,6 +15,7 @@
 - { setname: zetacoin,                 name: zetacoin-nox11, addflavor: nox11 }
 - { setname: zim,                      name: "python:zim" }
 - { setname: zim,                      name: zim-wiki }
+- { setname: zimg,                     name: sekrit-twc-zimg }
 - { setname: zint,                     name: [zint-gui,zint-qt] }
 - { setname: zlib,                     name: zlib-static, addflavor: static }
 - { setname: zoneminder,               name: zoneminder-h264, ignore: true }

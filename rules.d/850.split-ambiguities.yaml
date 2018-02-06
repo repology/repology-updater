@@ -382,5 +382,7 @@
 
 - { name: z, wwwpart: kinzler, setname: comprez }
 
+- { name: zimg, wwwpart: zimg.sourceforge.net, setname: zimg-vis }
+
 # emulator vs. (deprecated) scala compiler
 - { name: zinc, wwwpart: logiqx, setname: zinc-emulator }
