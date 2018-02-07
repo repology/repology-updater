@@ -224,7 +224,7 @@ class RepositoryProcessor:
 
         return packages
 
-    class __StreamDeserializer:
+    class StreamDeserializer:
         def __init__(self, path):
             self.unpickler = pickle.Unpickler(open(path, 'rb'))
             self.count = self.unpickler.load()
@@ -309,7 +309,7 @@ class RepositoryProcessor:
     def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
         deserializers = []
         for repo in self.repoman.GetRepositories(reponames):
-            deserializers.append(self.__StreamDeserializer(self.__GetSerializedPath(repo)))
+            deserializers.append(self.StreamDeserializer(self.__GetSerializedPath(repo)))
 
         while True:
             # remove EOFed repos
