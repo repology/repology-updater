@@ -1,0 +1,9 @@
+{%- macro color_for_versionclass(versionclass) -%}
+	{%- if versionclass == 2 or versionclass == 6 -%}{#- outdated or legacy -#}
+		#e05d44
+	{%- elif versionclass == 1 or versionclass == 4 or versionclass == 5 -%}{#- newest or devel or unique -#}
+		#4c1
+	{%- else -%}{#- ignored -#}
+		#9f9f9f
+	{%- endif -%}
+{%- endmacro -%}
