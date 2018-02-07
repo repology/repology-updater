@@ -5,6 +5,7 @@
 - { setname: libcdr,                   namepat: "libcdr[0-9._-]+" }
 - { setname: libchamplain,             namepat: "libchamplain[0-9.-]+" }
 - { setname: libcmis,                  name: cmis-client, addflavor: client }
+- { setname: libcompizconfig,          name: libcompizconfig0.8 }
 - { setname: libconfuse,               name: libconfuse0 }
 - { setname: libcpuid,                 name: libcpuid11 }
 - { setname: libdvbpsi,                namepat: "libdvbpsi[0-9.-]+" }
