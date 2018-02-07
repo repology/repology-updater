@@ -17,7 +17,7 @@
 
 from functools import cmp_to_key
 
-from repology.package import Package, PackageFlags, VersionClass
+from repology.package import PackageFlags, VersionClass
 
 
 def PackagesetDeduplicate(packages):

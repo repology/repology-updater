@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import shutil
 
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess

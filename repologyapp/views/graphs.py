@@ -24,8 +24,6 @@ from repologyapp.graphprocessor import GraphProcessor
 from repologyapp.math import safe_percent
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.config import config
-
 
 def graph_generic(getgraph, color, suffix=''):
     # use autoscaling until history is filled

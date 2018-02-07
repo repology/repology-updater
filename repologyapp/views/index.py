@@ -22,7 +22,6 @@ from repologyapp.math import safe_percent
 from repologyapp.metapackages import metapackages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 
 
