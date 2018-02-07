@@ -21,6 +21,7 @@
 - { name: [0ad,0ad-data],                                                                  devel: true }
 - { name: 2ping,                       verpat: "[0-9]{10}.*",                              ignore: true } # opensuse
 - { name: 2bwm,                        verpat: "[0-9]{8}.*",                               ignore: true } # pkgsrc
+- { name: 3270font,                    verpat: "[0-9]{3}\\..*",                            incorrect: true } # it has normal versioning schema
 - { name: 7kaa-music,                  verpat: "20[0-9]{6}.*",                             ignore: true } # opensuse games
 - { name: 9base,                       verpat: "20[0-9]{6}.*",                             ignore: true } # freebsd, pkgsrc snapshots
 
