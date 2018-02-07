@@ -34,6 +34,7 @@
 - { setname: "python:numpy",           name: "python:numpy-openblas", addflavor: openblas }
 - { setname: "python:numpy",           name: ["python:numpy-doc","python:numpy-documentation"], addflavor: docs }
 - { setname: "python:numpy",           name: [numpy-legacy,numpy-legacy3,numpy3] }
+- { setname: "python:pep8-naming",     name: [flake-pep8-naming,pep8-naming,"python:flake8-pep8-naming"] }
 - { setname: "python:py-cpuinfo",      name: "python:cpuinfo" }
 - { setname: "python:py-jack",         name: pyjack }
 - { setname: "python:pyalsaaudio",     name: "python:alsaaudio" } # use pypi name!
