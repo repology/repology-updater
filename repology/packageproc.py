@@ -279,10 +279,6 @@ def PackagesetSortByNameVersion(packages):
     return sorted(packages, key=cmp_to_key(compare))
 
 
-def PackagesetToFamilies(packages):
-    return set([package.family for package in packages])
-
-
 def PackagesetAggregateByVersion(packages, classmap={}):
     def CreateVersionAggregation(packages):
         aggregated = {}
