@@ -354,6 +354,10 @@
 - { name: gprbuild,                    verpat: "[0-9]{5,}.*",                              ignore: true }
 - { name: gprolog,                     ver: "1.4.5",                 family: debuntu,      incorrect: true }
 - { name: gprolog,                                                   family: debuntu,      untrusted: true }
+- { name: grive2,                      ver: "0.5.1",                 family: pclinuxos,    incorrect: true }
+- { name: grive2,                                                    family: pclinuxos,    untrusted: true }
+- { name: grub-customizer,             ver: "5.0.7",                 family: debuntu,      incorrect: true } # mx and sparky, actually
+- { name: grub-customizer,                                           family: debuntu,      untrusted: true }
 - { name: gsettings-desktop-schemas,   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: "gstreamer1plugins:mpg123",  verpat: "20[0-9]{6}",                               ignore: true } # AUR
 - { name: gtest,                       verlonger: 3,                                       ignore: true } # freebsd garbage
@@ -528,6 +532,7 @@
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignore: true } # fake
 - { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignore: true } # it's x.y.z, ignore all revisions and dates
 - { name: mplayer,                     ver: "5.1.4",                                       ignore: true } # pclinuxos garbage
+- { name: ms-gsl,                                                                          noscheme: true }
 - { name: mtree,                                                     family: ravenports,   ignore: true } # fake
 - { name: mumble,                                                    family: kaos,         ignore: true } # snapshot with random version
 - { name: multimon-ng,                 verpat: "20[0-9]{6}.*",                             ignore: true }
@@ -744,6 +749,7 @@
 - { name: slime,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: slime,                       ver: "2.20.2.gef68a0b4",                            ignore: true }
 - { name: smtp-fuzz,                                                                       noscheme: true }
+- { name: smplayer-skins,              verpat: "20[0-9]{6}",                               ignore: true }
 - { name: sndio,                       verpat: "20[0-9]{6}",                               ignore: true }
 - { name: snmpenum,                                                                        noscheme: true }
 - { name: solvespace,                  verpat: ".*[0-9]{8}.*",                             ignore: true } # nix garbage
