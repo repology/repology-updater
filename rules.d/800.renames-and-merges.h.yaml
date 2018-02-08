@@ -9,6 +9,7 @@
 - { setname: hermes,                   name: libhermes }
 - { setname: hgflow,                   name: hg-flow }
 - { setname: hitori,                   name: gnome-games-hitori }
+- { setname: home-assistant,           name: homeassistant }
 - { setname: hostapd,                  name: [hostapd-rtl,hostapd-rtl871xdrv,hostapd1] }
 - { setname: hsqldb,                   namepat: "hsqldb[0-9._-]+" }
 - { setname: html2text,                name: html2text-with-utf8 }
