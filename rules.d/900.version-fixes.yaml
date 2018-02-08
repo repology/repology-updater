@@ -282,6 +282,7 @@
 - { name: "fonts:quattrocento",        ver: "2.000",                 family: arch,         ignore: true } # webpage says it's 1.1
 - { name: "fonts:ubuntu",              ver: "1.0",                   family: pclinuxos,    ignore: true } # no such version on the website
 - { name: foomatic,                    verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
+- { name: four-in-a-row,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: freecad,                     ver: "0.17.12018",            family: freebsd,      ignore: true }
 - { name: freeciv,                     ver: "2.6.0",                 family: fedora,       ignore: true }
 - { name: freeminer,                   verlonger: 4,                 family: fdroid,       ignore: true }
@@ -311,6 +312,7 @@
 - { name: gcr,                         verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: geary,                       ver: "0.12",                  family: debuntu,      ignore: true } # not released yet
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignore: true } # not released yet
+- { name: gedit,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gettext,                     ver: "2",                                           ignore: true } # libintl from LEDE
 - { name: geocode-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gimp,                        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -324,6 +326,7 @@
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
 - { name: gnome-boxes,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-builder,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-calculator,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-disk-utility,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # see "select distinct effname from packages where version like '3.27.%' and devel=false;"
 - { name: gnome-keyring,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-logs,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
