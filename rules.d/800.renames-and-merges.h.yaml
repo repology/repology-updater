@@ -2,6 +2,7 @@
 
 - { setname: hadoop,                   name: hadoop2 }
 - { setname: hashcat,                  name: hashcat-legacy }
+- { setname: "haskell:pandoc-citeproc", name: pandoc-citeproc }
 - { setname: haxe,                     name: haxe2 }
 - { setname: haxe,                     name: haxe_bin, addflavor: bin }
 - { setname: hedgewars,                name: hedgewars-server, addflavor: server }
