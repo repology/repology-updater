@@ -1,0 +1,28 @@
+# vim: tabstop=30 expandtab softtabstop=30
+
+- {                           namepat: "libx32-(.*)", setname: "$1", addflavor: libx32 }
+
+- { ruleset: aosc,            namepat: "(.*)\\+32", setname: "$1", addflavor: "32" }
+
+- { ruleset: arch,            namepat: "lib32-(.*)", setname: "$1", addflavor: lib32 }
+- { ruleset: arch,            namepat: "(.*)-multilib", setname: "$1", addflavor: multilib }
+
+- { ruleset: aur,             name: php-svn, setname: "php:svn" } # save from following rule
+- { ruleset: aur,             namepat: "(.*)-(cvs|svn|hg|darcs|bzr|git)", setname: "$1", rolling: true }
+- { ruleset: aur,             namepat: "(.*)-bin", setname: "$1" } # XXX: addflavor: bin
+
+- { ruleset: chocolatey,      namepat: "(.*)\\.(install|portable|commandline)", setname: "$1", addflavor: "$2" }
+
+- { ruleset: deb_multimedia,  namepat: "(.*)-dmo", setname: "$1" }
+
+# XXX: handle (.*)-devel for freebsd?
+- { ruleset: freebsd,         namepat: "(.*)-(py27|py36)", setname: "$1", addflavor: "$2" }
+
+# XXX: expand this onto whole haiku-apps category
+- { ruleset: haikuports,      setname: "haiku-$0", category: haiku-apps, name: [peek, rename] }
+
+- { ruleset: kaos,            namepat: "(.*)-debug", setname: "$1", addflavor: debug }
+
+- { ruleset: macports,        namepat: "(.*)-devel", setname: "$1", ignore: true }
+
+#- { ruleset: msys2, namepat: "(.*)-git", setname: "$1", ignore: true }

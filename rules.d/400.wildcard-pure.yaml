@@ -1,0 +1,19 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+#
+# Part of wildcard ruleset which unconditionally process complete
+# repositories, e.g. module collections.
+#
+# The idea is to process these early, because these contain a lot of
+# packages with arbitrary names which may be incorrectly caught with
+# unrelated rules
+#
+
+# XXX: may consider adding e.g. gentoo and haikuports categories here
+
+- { setname: "haskell:$0",             family: hackage }
+- { setname: "perl:$0",                family: cpan }
+- { setname: "python:$0",              family: pypi }
+- { setname: "r:$0",                   family: cran }
+- { setname: "ruby:$0",                family: rubygems }
+- { setname: "rust:$0",                family: crates_io }

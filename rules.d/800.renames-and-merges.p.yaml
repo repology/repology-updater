@@ -33,6 +33,8 @@
 - { setname: pilot-link,               name: pilot-link-libs, addflavor: libs }
 - { setname: pioneer,                  name: pioneerspacesim }
 - { setname: pipenv,                   name: "python:pipenv" }
+- { setname: pixman,                   name: [libpixman,xorg-libpixman,xorg-pixman] }
+- { setname: pixman,                   name: pixman-static, addflavor: static }
 - { setname: pkg,                      name: pkg-bsd, family: ravenports }
 - { setname: pkg,                      name: pkg-devel, ignore: true, family: freebsd }
 - { setname: pkgconf,                  name: pkgconfig, family: ravenports } # XXX

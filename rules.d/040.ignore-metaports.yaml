@@ -1,5 +1,0 @@
-# vim: tabstop=39 expandtab softtabstop=39
-
-- { name: docbook,                       family: [ freebsd, ravenports ], remove: true } # metaports
-- { name: alias-font,                    family: freebsd, remove: true }
-- { name: [python,python2,python3], family: freebsd, remove: true } # remove metaports

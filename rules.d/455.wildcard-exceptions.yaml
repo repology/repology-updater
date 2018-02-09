@@ -1,0 +1,60 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+#
+# Process stuff which may be incorrectly caught by wildcard rules
+# this would mainly be corresponding programming languages and their
+# parts (e.g. ocaml-doc is ocaml documentation, not doc module)
+#
+
+- { setname: erlang,                   namepat: "erlang[0-9._-]+" }
+- { setname: erlang,                   name: erlang-doc, addflavor: doc }
+- { setname: erlang,                   name: erlang-man, addflavor: man }
+- { setname: erlang,                   name: [erlang-nox,erlang-nox-r17], addflavor: nox }
+- { setname: erlang,                   name: erlang-otp }
+- { setname: erlang,                   namepat: "erlang-runtime[0-9._-]+", addflavor: runtime }
+
+- { setname: fuse,                     name: [fuse2,fuse3,fusefs] }
+- { setname: fuse,                     name: [fuse-common,fusefs-fusexmp_fh,fusefs-libs,fusefs-libs3,libfuse], addflavor: true }
+- { addflag: not_fusefs,               namepat: "fuse-emulator.*" }
+
+- { setname: go,                       namepat: "go-?1[0-9._-]+" } # don't mix with e.g. go2, go4
+- { setname: go,                       namepat: "golang[0-9.-]*" }
+- { setname: go,                       namepat: "golang[0-9.-]*" }
+
+- { setname: gstreamer,                namepat: "gstreamer[0-9._-]+" }
+
+- { setname: meld,                     name: meld3, wwwpart: meldmerge } # XXX: create problem; this is wrongly named
+
+- { setname: nodejs,                   name: [nodejs-bigger-heap,nodejs-slim] }
+- { setname: nodejs,                   name: node }
+- { setname: nodejs,                   name: nodejs-current, ignore: true }
+- { setname: nodejs,                   namepat: "node(?:js)?[0-9._-]+" }
+- { setname: nodejs,                   namepat: "nodejs-lts.*" }
+
+- { setname: ocaml,                    name: ocaml3 }
+- { setname: ocaml,                    name: ocaml-nox11, addflavor: nox11 }
+
+- { setname: perl,                     namepat: "perl-?5[0-9.]*" }
+
+# in python category as python modules
+- { setname: python,                   family: aosc, addflag: not_python }
+
+# python package manager vs. program wrapper (which was renamed to pipo upstream)
+# XXX: generate problem from this
+- { setname: pipo,                     name: pip, family: arch }
+- { setname: pipo,                     name: pip, family: gentoo, category: app-misc }
+
+- { setname: ruby,                     namepat: "ruby-?[0-9.]+" }
+- { setname: ruby,                     namepat: ruby-doc, addflavor: doc }
+
+- { setname: rust$1,                   namepat: "rust-nightly(.*)", ignore: true }
+- { setname: rust,                     name: rust-always-nightly, ignore: true }
+- { setname: rust,                     name: [rust-analysis,rust-bin,rust-doc,rust-docs,rust-ms,rust-src,rustc,rustc-stage0], addflavor: true }
+- { addflag: not_rust,                 name: rust-doom }
+- { addflag: not_rust,                 name: rust-dwm-status }
+- { addflag: not_rust,                 name: rust-mode }
+- { addflag: not_rust,                 name: rust-packaging }
+- { addflag: not_rust,                 name: rust-rpm-macros }
+- { addflag: not_rust,                 name: rust-srpm-macros }
+- { addflag: not_rust,                 name: rust-vim }
+- { addflag: not_rust,                 name: rust-zshcomp }

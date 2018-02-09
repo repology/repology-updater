@@ -3,3 +3,5 @@
 # Zope; needs to be before python
 - { namepat: "py[0-9][0-9]-zope\\.(.*)", setname: "zope:$1", family: [ freebsd ] }
 - { namepat: "zope\\.(.*)",              setname: "zope:$1", family: [ debuntu, slackbuilds ] }
+
+# XXX: merge into python:

@@ -500,6 +500,7 @@
 - { name: libunwind,                   verpat: "20[0-9]{6}.*",                             ignore: true } # freebsd snapshot
 - { name: libusbmuxd,                  verpat: "1\\.1\\.0.*",        family: [openwrt,debuntu], ignore: true } # fake
 - { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignore: true }
+- { name: libx11,                      verpat: "7\\.[4567].*",                             ignore: true } # uses version from Xorg, not its own # XXX: ->incorrect
 - { name: libx86emu,                   verlonger: 2,                 family: kaos,         ignore: true } # uses some opensuse package with mangled version
 - { name: libzen,                      verpat: "1\\.7.*",            family: freebsd,      incorrect: true } # version from mediainfo is used, while libzen has its own version scheme
 
@@ -595,6 +596,7 @@
 - { name: pciids,                                                    family: sisyphus,     ignore: true } # ALT pick random date instead of official date version
 - { name: pcre,                        ver: "10.31",                 family: fedora,       ignore: true } # fake, not released
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignore: true }
+- { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports, pclinuxos, openmandriva ], ignore: true } # perl module name manging
 - { name: "perl:anyevent",             ver: "7.70.0",                                      ignore: true }
 - { name: "perl:anyevent",             verpat: "7\\.[0-9]{3}.*",                           ignore: true }
 - { name: "perl:app-perlbrew",         verpat: "0\\.[0-9]{3,}.*",                          ignore: true }

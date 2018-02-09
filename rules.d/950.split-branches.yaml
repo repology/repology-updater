@@ -8,6 +8,9 @@
 - { name: antlr,             verpat: "3\\..*",            setname: antlr3 }
 - { name: antlr,             verpat: "4\\..*",            setname: antlr4 }
 
+- { name: "apmod:php",       verpat: "5\\..*",            setname: "apmod:php5" } # XXX: kill these
+- { name: "apmod:php",       verpat: "7\\..*",            setname: "apmod:php7" }
+
 - { name: apr-util,          verpat: "0\\..*",            setname: apr-util0 }
 
 - { name: autoconf,          verpat: "2\\.13.*",          setname: autoconf213 } # do we need more splits for this?

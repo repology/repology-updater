@@ -1,12 +1,5 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-# merge ocaml itself
-- { name: ocaml3, setname: ocaml }
-- { name: ocaml-nox11, setname: ocaml, addflavor: nox11 }
-
-# modules
-- { namepat: "ocaml([0-9.]*)-(.*)", setname: "ocaml:$2", addflavor: "$1" }
-
 # modules (manual)
 # XXX: merge everything from gentoo's dev-ml (but with care)
 - name:

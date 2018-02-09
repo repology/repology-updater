@@ -26,7 +26,6 @@
   setname: "perl:$0"
   family: openindiana
   category: Development/Perl
-- { name: libwww-perl, setname: "perl:libwww" }
 
 # XXX: need review
 - name:

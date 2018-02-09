@@ -1,5 +1,10 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+#
+# List of splits which meed to be processed before merges, as it'd be
+# hard to split these afterwards
+#
+
 - { setname: mysql-connector-c,        name: libmysqlclient, family: haikuports } # not really libmysqlclient from mysql
 - { setname: "perl:html-formatter",    name: "perl:html-format", family: fedora } # XXX: problem
 - { setname: wine-etersoft,            name: wine, family: sisyphus } # counterfeit

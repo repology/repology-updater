@@ -1,7 +1,6 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # Haskell
-- {                                    setname: "haskell:$0", family: [ hackage ] }
 - { namepat: "haskell-(.*)",           setname: "haskell:$1", family: [ debuntu, arch, slackbuilds, gobolinux ] }
 - { namepat: "hs-(.*)",                setname: "haskell:$1", family: [ freebsd, pkgsrc, openbsd, macports ] }
 - { namepat: "ghc-(.*)",               setname: "haskell:$1", family: [ opensuse, fedora, guix, rosa ] }

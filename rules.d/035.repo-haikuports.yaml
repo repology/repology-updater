@@ -1,6 +1,0 @@
-# XXX: should we instead rename everything under haiku-apps to avoid clashes?
-- name:
-    - peek
-    - rename
-  category: haiku-apps
-  setname: "haiku-$1"

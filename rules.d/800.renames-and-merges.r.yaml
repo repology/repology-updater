@@ -27,3 +27,4 @@
 - { setname: rtaudio,                  name: rt-audio }
 - { setname: rtorrent,                 name: [rtorrent-cdl,rtorrent-color,rtorrent-ipv6,rtorrent-vi-color], addflavor: true }
 - { setname: rtv,                      name: rtv-py36, addflavor: py36 }
+- { setname: rust-dwm-status,          name: "rust:rust-dwm-status" }

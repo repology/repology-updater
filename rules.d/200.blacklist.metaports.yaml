@@ -1,0 +1,31 @@
+# vim: tabstop=20 expandtab softtabstop=20
+
+- { remove: true,   name: alias-font,   family: freebsd }
+
+- { remove: true,   name: docbook,      family: [ freebsd, ravenports ] }
+
+# these are metaports pointing to "current" version of python (which is named pythonX.Y)
+- { remove: true,   name: python,       family: freebsd }
+- { remove: true,   name: python2,      family: freebsd }
+- { remove: true,   name: python3,      family: freebsd }
+
+- { remove: true,   name: rust-base,    family: aosc }
+
+# X11 metaports
+- { remove: true,   name: x11-app }
+- { remove: true,   name: x11-base }
+- { remove: true,   name: x11-font }
+- { remove: true,   name: x11-lib }
+- { remove: true,   name: x11-proto }
+- { remove: true,   name: xorg-app }
+- { remove: true,   name: xorg-apps }
+- { remove: true,   name: xorg-driver }
+- { remove: true,   name: xorg-drivers }
+- { remove: true,   name: xorg-font }
+- { remove: true,   name: xorg-fonts }
+- { remove: true,   name: xorg-fonts-miscbitmaps }
+- { remove: true,   name: xorg-fonts-truetype }
+- { remove: true,   name: xorg-lib }
+- { remove: true,   name: xorg-libraries }
+- { remove: true,   name: xorg-misc-bitmap-fonts }
+- { remove: true,   name: xorg-truetype-fonts }

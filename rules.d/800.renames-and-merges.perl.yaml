@@ -6,3 +6,4 @@
 - { setname: "perl:build",             name: perl-build }
 - { setname: "perl:cddb_get",          name: cddb_get }
 - { setname: "perl:gearman-server",    name: gearman-server }
+- { setname: "perl:libwww",            name: libwww-perl }

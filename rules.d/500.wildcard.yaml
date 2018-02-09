@@ -1,19 +1,23 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+#
+# Wildcard rules catching specific classes of packages, mostly language modules
+#
+
 # Apache
-- { setname: "apmod:$1", noflag: not_apache, namepat: "ap[0-9]+-(?:mod_)?(.*?)", family: [freebsd,openbsd,pkgsrc] }
-- { setname: "apmod:$1", noflag: not_apache, namepat: "mod_(.*)", category: www-apache, family: gentoo }
-- { setname: "apmod:$1", noflag: not_apache, namepat: "mod-(.*)", family: debuntu }
-- { setname: "apmod:$1", noflag: not_apache, namepat: "mod_(.*)", family: [arch,centos,fedora,freebsd,gobolinux,macports,openindiana,sisyphus,slackbuilds] }
+- { setname: "apmod:$1", noflag: not_apache, namepat: "ap[0-9]+-(?:mod_)?(.*?)", ruleset: [freebsd,openbsd,pkgsrc] }
+- { setname: "apmod:$1", noflag: not_apache, namepat: "mod_(.*)", category: www-apache, ruleset: gentoo }
+- { setname: "apmod:$1", noflag: not_apache, namepat: "mod-(.*)", ruleset: debuntu }
+- { setname: "apmod:$1", noflag: not_apache, namepat: "mod_(.*)", ruleset: [arch,centos,fedora,freebsd,gobolinux,macports,openindiana,sisyphus,slackbuilds] }
 - { setname: "apmod:$1", noflag: not_apache, namepat: "(?:lib)?apache2?-mod[_-](.*)" }
 
 # Cursors
-- { setname: "cursors:$1", noflag: not_cursors, namepat: "(.*)-cursor-theme", family: [ debuntu ] }
-- { setname: "cursors:$1", noflag: not_cursors, namepat: "(.*)-xcursors", family: [ gentoo ] }
-- { setname: "cursors:$1", noflag: not_cursors, namepat: "cursor-(.*)", family: [ freebsd ] }
+- { setname: "cursors:$1", noflag: not_cursors, namepat: "(.*)-cursor-theme", ruleset: [ debuntu ] }
+- { setname: "cursors:$1", noflag: not_cursors, namepat: "(.*)-xcursors", ruleset: [ gentoo ] }
+- { setname: "cursors:$1", noflag: not_cursors, namepat: "cursor-(.*)", ruleset: [ freebsd ] }
 
 # Erlang
-- { setname: "erlang:$0", noflag: not_arlang, category: dev-erlang, family: gentoo }
+- { setname: "erlang:$0", noflag: not_arlang, category: dev-erlang, ruleset: gentoo }
 - { setname: "erlang:$1", noflag: not_arlang, namepat: "erlang-(.*)" }
 
 # Fortunes
@@ -29,27 +33,48 @@
 - { setname: "go:$1", noflag: not_go, namepat: "go-(.*)" }
 - { setname: "go:$1", noflag: not_go, namepat: "golang-(.*)" }
 
+# GStreamer
+# XXX: sort out 0/1 versions; some plugins are third party and do not use this scheme
+- { setname: "gstreamer1plugins:$1",   namepat: "gst-plugins-(.*)-compat", family: crux }
+- { setname: "gstreamer1plugins:$1",   namepat: "gst(?:reamer)?[0-9._-]*(?:(?:-gst)?-plugins?[01.-]*)?-(.*?)[01.-]*(?:-plugins)?" }
+- { setname: "gstreamer0plugins:$1",   namepat: "gstreamer1plugins:(.*)", verpat: "0.*" }
+- { setname: "gstreamer1plugins:$1",   namepat: "gst_(?:plugins_)?(.*)", verpat: "1.*", family: haikuports }
+- { setname: "gstreamer0plugins:$1",   namepat: "gst_(?:plugins_)?(.*)", verpat: "0.*", family: haikuports }
+
 # MinGW
 - { setname: "mingw:$1", noflag: not_mingw, namepat: "mingw-(.*)",   ruleset: [ fedora, mageia ] }
 - { setname: "mingw:$1", noflag: not_mingw, namepat: "mingw32-(.*)", ruleset: [ sisyphus ] }
 
 # Nodejs
-- { setname: "node:$1", noflag: not_node, namepat: "node-(.*)", family: debuntu }
-- { setname: "node:$1", noflag: not_node, namepat: "nodejs-(.*)", family: [arch,fedora,mageia,rosa,sisyphus] }
+- { setname: "node:$1", noflag: not_node, namepat: "node-(.*)", ruleset: debuntu }
+- { setname: "node:$1", noflag: not_node, namepat: "nodejs-(.*)", ruleset: [arch,fedora,mageia,rosa,sisyphus] }
+
+# Ocaml
+- { namepat: "ocaml([0-9.]*)-(.*)", noflag: not_ocaml, setname: "ocaml:$2", addflavor: "$1" }
 
 # Octave
-- { setname: "octave:$1", noflag: not_octave, namepat: "octave-forge-(.*)", family: [ freebsd, opensuse ] }
-- { setname: "octave:$1", noflag: not_octave, namepat: "octave-(.*)", family: [ arch, debuntu, fedora, macports, rosa, sisyphus ] }
+- { setname: "octave:$1", noflag: not_octave, namepat: "octave-forge-(.*)", ruleset: [ freebsd, opensuse ] }
+- { setname: "octave:$1", noflag: not_octave, namepat: "octave-(.*)", ruleset: [ arch, debuntu, fedora, macports, rosa, sisyphus ] }
+
+# Perl
+- { setname: "perl:$1", noflag: not_perl, namepat: "p5-(.*)", ruleset: [crux,freebsd,macports,openbsd,pkgsrc] }
+- { setname: "perl:$1", noflag: not_perl, namepat: "p5.[0-9]+-(.*)", ruleset: macports }
+- { setname: "perl:$1", noflag: not_perl, namepat: "lib(.*)-perl", ruleset: debuntu }
+- { setname: "perl:$1", noflag: not_perl, namepat: "perl-(.*)", ruleset: [alpine,aosc,arch,centos,fedora,gobolinux,guix,kaos,mageia,msys2,nix,openmandriva,opensuse,pclinuxos,ravenports,rosa,sisyphus,slackbuilds] }
+- { setname: "perl:$0", noflag: not_perl, category: dev-perl, ruleset: [gentoo,haikuports] }
+- { setname: "perl:$0", noflag: not_perl, category: perl-core, ruleset: gentoo }
 
 # R
-- { setname: "r:$0",                                        family: cran }
-- { setname: "r:$1", noflag: not_r, namepat: "r-cran-(.*)", family: [ freebsd, debuntu, arch, pclinuxos, mageia ] }
-- { setname: "r:$1", noflag: not_r, namepat: "r-bioc-(.*)", family: [ debuntu ] }
-- { setname: "r:$1", noflag: not_r, namepat: "r-(.*)",      family: [ pkgsrc, fedora, guix, arch, debuntu, rosa, sisyphus ] }
+- { setname: "r:$1", noflag: not_r, namepat: "r-cran-(.*)", ruleset: [ freebsd, debuntu, arch, pclinuxos, mageia ] }
+- { setname: "r:$1", noflag: not_r, namepat: "r-bioc-(.*)", ruleset: [ debuntu ] }
+- { setname: "r:$1", noflag: not_r, namepat: "r-(.*)",      ruleset: [ pkgsrc, fedora, guix, arch, debuntu, rosa, sisyphus ] }
 
 # ROS
 - { setname: "ros:$0", noflag: not_ros, category: dev-ros,   ruleset: [ gentoo ] }
 - { setname: "ros:$1", noflag: not_ros, namepat: "ros-(.*)", ruleset: [ debuntu, arch ] }
+
+# Rust
+- { setname: "rust:$1", noflag: not_rust, namepat: "rust-(.*)", family: [ arch, fedora, nix, sisyphus ] }
 
 # VDR
 - { setname: "vdr:$1", noflag: not_vdr, namepat: "vdr-plugin-(.*)" }

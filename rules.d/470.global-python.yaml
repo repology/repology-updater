@@ -10,7 +10,8 @@
   addflag: nowildcard
 - { family: aosc, category: python,    setname: "python:$0", noflag: nowildcard }
 
-- { family: [ pypi ],                  setname: "python:$0" }
+# XXX: merge pypy- and pypy3-
+
 # some rules may merge modules for different python version into single entry; this is intended
 - { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", family: [ freebsd, pkgsrc ] }
 - { namepat: "py3?-(.*)",              setname: "python:$1", family: [ openbsd ] }
