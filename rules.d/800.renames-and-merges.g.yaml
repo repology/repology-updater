@@ -38,7 +38,9 @@
 - { setname: giflib,                   name: giflib-util }
 - { setname: giflib,                   name: giflib4 }
 - { setname: giflib,                   name: libungif } # former name
-- { setname: gimp,                     name: [gimp-app,gimp-devel,gimp-with-plugins,gimp2,gimp2-devel] }
+- { setname: gimp,                     name: [gimp-app,gimp-with-plugins,"python:gimp"], addflavor: true }
+- { setname: gimp,                     name: [gimp-devel,gimp2-devel], ignore: true }
+- { setname: gimp,                     name: [gimp2] }
 - { setname: gimp,                     name: [gimp3-devel,gimp-git,gimp3,gimp-gtk3], ignore: true }
 - { setname: gimp-$1,                  namepat: "gimp2-(.*)" }
 - { setname: gimp-docs,                namepat: "gimp-docs-.*" }
@@ -49,8 +51,27 @@
 - { setname: gitg,                     name: gitg0, family: freebsd }
 - { setname: gitinspector,             name: "python:gitinspector" }
 - { setname: gitter,                   name: gitter-bin }
+- { setname: gitter-cli,               name: "node:gitter-cli" }
 - { setname: gixy,                     name: "python:gixy" }
+- { setname: gkrellaclock,             name: gkrellm-aclock }
+- { setname: gkrellflynn,              name: gkrellm-flynn }
+- { setname: gkrellkam,                name: gkrellkam2 }
 - { setname: gkrellm,                  name: gkrellm2 }
+- { setname: gkrellm-cpufreq,          name: gkrellm2-cpufreq }
+- { setname: gkrellm-launch,           name: [gkrellmlaunch,gkrellmlaunch2] }
+- { setname: gkrellm-mailwatch,        name: [gkrellmmailwatch,gkrellmmailwatch2] }
+- { setname: gkrellm-multiping,        name: gkrellm2-multiping }
+- { setname: gkrellm-reminder,         name: gkrellmreminder }
+- { setname: gkrellm-show_ip,          name: gkrellm2-show_ip }
+- { setname: gkrellm-volume,           name: [gkrellmvolume,gkrellmvolume2] }
+- { setname: gkrellmbgchg,             name: [gkrellm-bgchanger,gkrellmbgchg2] }
+- { setname: gkrellmms,                name: gkrellmms2 }
+- { setname: gkrellmoon,               name: gkrellmoon2 }
+- { setname: gkrellmwireless,          name: gkrellm-wireless }
+- { setname: gkrellshoot,              name: gkrellm-shoot }
+- { setname: gkrellsun,                name: gkrellm-sun }
+- { setname: gkrelltop,                name: gkrellm-top }
+- { setname: gkrellweather,            name: gkrellm-weather }
 - { setname: gl-117,                   name: gl117 }
 - { setname: glade,                    name: glade-dev, ignore: true }
 - { setname: glade,                    name: glade-gtk2 }
@@ -95,6 +116,7 @@
 - { setname: gnupg,                    namepat: "gpg[0-9]+" }
 - { setname: gnurl,                    name: libgnurl }
 - { setname: gnushogi,                 name: gnu-shogi }
+- { setname: "go:mmark",               name: ["go:github-miekg-mmark",mmark] }
 - { setname: gobject-introspection,    name: [gobject-introspection-common,gobject-introspection-runtime] }
 - { setname: godot,                    name: [godot-pulse,godot-tools,godot-mono], addflavor: true }
 - { setname: godot,                    name: godot2 }

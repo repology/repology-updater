@@ -1,9 +1,0 @@
-# vim: tabstop=39 expandtab softtabstop=39
-
-# R libs
-- {                                    setname: "r:$0", family: [ cran ] }
-- { namepat: "r-cran-(.*)",            setname: "r:$1", family: [ freebsd, debuntu, arch, pclinuxos, mageia ] }
-- { namepat: "r-(.*)",                 setname: "r:$1", family: [ pkgsrc, fedora, guix, arch, debuntu, rosa, sisyphus ] } # sisyphus=autoimports
-
-# Debian uses bioc- prefix for these, no one else does
-- { namepat: "r:bioc-(.*)",            setname: "r:$1" }

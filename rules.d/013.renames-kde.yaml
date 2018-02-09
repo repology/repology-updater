@@ -1,12 +1,5 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-# qt
-- { name: [qt, qt1, qt3, qt4, qt5], setname: qt }
-- { name: qt, verpat: "1\\..*", setname: qt1 }
-- { name: qt, verpat: "3\\..*", setname: qt3 }
-- { name: qt, verpat: "4\\..*", setname: qt4 }
-- { name: qt, verpat: "5\\..*", setname: qt5 }
-
 - { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns)[0-9]*", verpat: "4\\..*", setname: "qt4-$1" }
 - { namepat: "(qt.*)-opensource-src(-gles|-touch)?", setname: "$1", addflavor: "$2" }
 - { namepat: "(?:lib)?qt[0-9]*-?(?:qt)?(multimedia|opengl|network|linguist|linguisttools|gui|svg|xml|xmlpatterns|webkit|widgets|qml|base|graphicaleffects|webchannel|tools|location)[0-9]*(-docs|-examples)?", verpat: "5\\..*", setname: "qt5-$1", addflavor: "$2" }
@@ -20,6 +13,3 @@
 # XXX: god, we really need a loop support here!
 - { namepat: "(?:kde-|kde4-|kde5-|plasma5-|kde-?(?:edu|graphics|utils|multimedia|sdk)-|kf5-)?(kio|kdelibs4support|kalarm|kalarmcal|kanagram|extra-cmake-modules|kcalc|kcalcore|kalgebra|kmime|digikam|krusader|kteatime|ktorrent|libktorrent|kstars|kontact|kontactinterface|konversation|kmines|kaffeine|kate|kolourpaint|knetwalk|kmail|kmailtransport|okular|konsole|bovo|poxml|yakuake|okular|akonadi|akonadi-calendar|akonadi-contacts|akonadi-mime|akonadi-notes|akonadi-search|akonadi-calendar-tools|akonadi-import-wizard|akonadiconsole|akregator|analitza|ark|baloo-widgets|gwenview|katomic|kblog|kgeography|kleopatra|knotes|kompare|libkomparediff2|kmix|dolphin|dolphin-plugins|marble|kmines|blogilo|calendarsupport|cantor|ffmpegthumbs|filelight|k3b|kaddressbook|kamera|kbruch|kcalutils|kcharselect|kcontacts|kcron|kdf|khangman|khelpcenter|kholidays|kid3|kidentitymanagement|kig|kimap|kldap|kmbox|kmplot|knavalbattle|korganizer|kpat|kpimtextedit|krfb|kross-interpreters|kruler|kshisen|ktimer|ktnef|ktuberling|kturtle|kwalletmanager|kwordquiz|minuet|okteta|parley|skanlite|syndication|umbrello|akonadi-server|amarok|ktp-accounts-kcm|ktp-approver|ktp-auth-handler|ktp-common-internals|ktp-contact-list|ktp-contact-runner|ktp-desktop-applets|ktp-filetransfer-handler|attica|baloo|basket|colibri|breeze-gtk|eventviews|grantlee-editor|grantleetheme|incidenceeditor|kaccounts-integration|kaccounts-providers|kapptemplate|kio-extras|kio-gdrive|kipi-plugins|kmail-account-wizard|ktp-kded-module|ktp-send-file|ktp-text-ui|libkcddb|libkdcraw|ktexteditor|kwallet|kscreen|libkscreen|kscreenlocker|libksane|ksaneplugin|plasma-desktop|kde-gtk-config|bluedevil|kactivitymanagerd|kde-cli-tools|kdecoration|kdeplasma-addons|kgamma|ksshaskpass|kwayland-integration|kwin|milou|polkit-kde-agent-1|powerdevil|sddm-kcm|prison|kdiff3|krename|kinfocenter)(?:4|5|-kde4|-kde5|-kf5|-light|-qt5)?", setname: "$1" }
 
-- { name: libksane0, setname: libksane }
-- { name: libkdcraw23, setname: libkdcraw }
-- { name: libkscreen2, setname: libkscreen }

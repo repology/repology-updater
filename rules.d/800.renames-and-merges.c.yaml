@@ -81,8 +81,23 @@
 - { setname: coffee-script,            name: coffeescript } # XXX: problem
 - { setname: cogl,                     name: cogl-amdgpu-pro }
 - { setname: cogl,                     name: libcogl }
-- { setname: collectd,                 name: collectd5 }
+- { setname: coin-or-$1,               namepat: "coinor-(.*)" } # XXX: problem
+- { setname: coin-or-alps,             name: coinalps }
+- { setname: coin-or-bcp,              name: coinbcp }
+- { setname: coin-or-bcps,             name: coinbcps }
+- { setname: coin-or-blis,             name: coinblis }
+- { setname: coin-or-bonmin,           name: coinbonmin }
+- { setname: coin-or-cbc,              name: coincbc }
+- { setname: coin-or-cgl,              name: coincgl }
+- { setname: coin-or-clp,              name: coinclp }
+- { setname: coin-or-couenne,          name: coincouenne }
+- { setname: coin-or-csdp,             name: coincsdp }
+- { setname: coin-or-dip,              name: coindip }
+- { setname: coin-or-dylp,             name: coindylp }
+- { setname: coin-or-flopc++,          name: coinflopcpp }
+- { setname: coin-or-lemon,            name: coinlemon }
 - { setname: collectd,                 name: [collectd-amqp,collectd-curl,collectd-data,collectd-dbi,collectd-dns,collectd-lua,collectd-memcached,collectd-mysql,collectd-network,collectd-notify-email,collectd-postgresql95,collectd-riemann,collectd-rrdtool,collectd-snmp,collectd-write-prometheus,collectd-write_prometheus,libcollectdclient,"perl:collectd","python:collectd"], addflavor: true }
+- { setname: collectd,                 name: collectd5 }
 - { setname: colorcode,                name: color-code }
 - { setname: comedilib,                name: libcomedi }
 - { setname: commoncpp2,               name: commoncpp }

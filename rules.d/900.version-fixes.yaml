@@ -6,6 +6,7 @@
 
 # global devel rule
 - { verpat: ".*(?:alpha|beta|dev|rc|prerelease|pre)[0-9._-]*",                             devel: true }
+- { verpat: ".*9999",                                                family: gentoo,       rolling: true }
 
 # global vcs snapshot ignore
 - { verpat: ".*(?:svn|cvs|git|bzr|hg|darcs).*",                                            ignore: true }
@@ -716,6 +717,7 @@
 - { name: "ruby:net-ldap",             ver: "1.1.0",                 family: sisyphus,     incorrect: true }
 - { name: "ruby:net-ldap",                                           family: sisyphus,     untrusted: true }
 - { name: rust,                        verpat: ".*dev",                                    ignore: true } # haikuports garbage
+- { name: rust,                        verpat: ".*20[0-9]{2}.*",                           ignore: true }
 
 # S
 - { name: s25rttr,                     verpat: "20[0-9]{6}",                               devel: true } # official nightlies

@@ -95,6 +95,7 @@
 - { setname: suitesparseconfig,        name: [ufconfig,suitesparse-common-devel] } # from report: ufconfig is an old name for suitesparseconfig
 - { setname: supertransball2,          name: [stransball2,super_transball] }
 - { setname: supertux,                 name: [supertux,supertux1,supertux2,supertux-old,supertux-stable] }
+- { setname: svgo,                     name: "node:svgo" }
 - { setname: svmlight,                 name: svm_light }
 - { setname: swarp,                    name: astromatic-swarp }
 - { setname: sweethome3d,              name: [sweet-home-3d,sweethome3d-application] }

@@ -27,6 +27,3 @@
 - { name: zh-docproj, family: freebsd, addflag: nowildcard }
 - { namepat: ".*-(hunspell|hyphen|mythes|phone|zipcodes)", family: freebsd, addflag: nowildcard }
 - { namepat: "(ar|zh|fr|de|iw|hu|ja|ko|pl|pt|ru|uk|vi)-(.*)", setname: $2, addflavor: $1, family: freebsd, noflag: nowildcard  }
-
-# FreeBSD: linux binary ports
-- { namepat: "linux-(baudline)", setname: "$1", family: freebsd }

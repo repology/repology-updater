@@ -31,6 +31,9 @@
 - { setname: libgnomemm,               namepat: "(?:lib)?gnomemm[0-9._-]*" }
 - { setname: libgnomeuimm,             namepat: "(?:lib)?gnomeuimm[0-9._-]*" }
 - { setname: libidn2,                  namepat: "libidn2[0-9._-]+" }
+- { setname: libkdcraw,                name: libkdcraw23 }
+- { setname: libksane,                 name: libksane0 }
+- { setname: libkscreen,               name: libkscreen2 }
 - { setname: liblas,                   name: liblas12 }
 - { setname: liblastfm,                name: liblastfm0 }
 - { setname: liblqr,                   name: liblqr-1 } # XXX: reverse?

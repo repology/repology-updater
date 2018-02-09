@@ -1,0 +1,56 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+# Apache
+- { setname: "apmod:$1", noflag: not_apache, namepat: "ap[0-9]+-(?:mod_)?(.*?)", family: [freebsd,openbsd,pkgsrc] }
+- { setname: "apmod:$1", noflag: not_apache, namepat: "mod_(.*)", category: www-apache, family: gentoo }
+- { setname: "apmod:$1", noflag: not_apache, namepat: "mod-(.*)", family: debuntu }
+- { setname: "apmod:$1", noflag: not_apache, namepat: "mod_(.*)", family: [arch,centos,fedora,freebsd,gobolinux,macports,openindiana,sisyphus,slackbuilds] }
+- { setname: "apmod:$1", noflag: not_apache, namepat: "(?:lib)?apache2?-mod[_-](.*)" }
+
+# Cursors
+- { setname: "cursors:$1", noflag: not_cursors, namepat: "(.*)-cursor-theme", family: [ debuntu ] }
+- { setname: "cursors:$1", noflag: not_cursors, namepat: "(.*)-xcursors", family: [ gentoo ] }
+- { setname: "cursors:$1", noflag: not_cursors, namepat: "cursor-(.*)", family: [ freebsd ] }
+
+# Erlang
+- { setname: "erlang:$0", noflag: not_arlang, category: dev-erlang, family: gentoo }
+- { setname: "erlang:$1", noflag: not_arlang, namepat: "erlang-(.*)" }
+
+# Fortunes
+- { setname: "fortunes:$1", noflag: not_fortunes, namepat: "fortune-mod-(.*)" }
+- { setname: "fortunes:$1", noflag: not_fortunes, namepat: "fortunes-(.*)" }
+- { setname: "fortunes:$1", noflag: not_fortunes, namepat: "fortune-(.*)" }
+- { setname: "fortunes:$1", noflag: not_fortunes, namepat: "fortune_(.*)" }
+
+# Fuse
+- { setname: "fusefs:$1", noflag: not_fusefs, namepat: "fuse(?:fs)?-(.*)" }
+
+# Go
+- { setname: "go:$1", noflag: not_go, namepat: "go-(.*)" }
+- { setname: "go:$1", noflag: not_go, namepat: "golang-(.*)" }
+
+# MinGW
+- { setname: "mingw:$1", noflag: not_mingw, namepat: "mingw-(.*)",   ruleset: [ fedora, mageia ] }
+- { setname: "mingw:$1", noflag: not_mingw, namepat: "mingw32-(.*)", ruleset: [ sisyphus ] }
+
+# Nodejs
+- { setname: "node:$1", noflag: not_node, namepat: "node-(.*)", family: debuntu }
+- { setname: "node:$1", noflag: not_node, namepat: "nodejs-(.*)", family: [arch,fedora,mageia,rosa,sisyphus] }
+
+# Octave
+- { setname: "octave:$1", noflag: not_octave, namepat: "octave-forge-(.*)", family: [ freebsd, opensuse ] }
+- { setname: "octave:$1", noflag: not_octave, namepat: "octave-(.*)", family: [ arch, debuntu, fedora, macports, rosa, sisyphus ] }
+
+# R
+- { setname: "r:$0",                                        family: cran }
+- { setname: "r:$1", noflag: not_r, namepat: "r-cran-(.*)", family: [ freebsd, debuntu, arch, pclinuxos, mageia ] }
+- { setname: "r:$1", noflag: not_r, namepat: "r-bioc-(.*)", family: [ debuntu ] }
+- { setname: "r:$1", noflag: not_r, namepat: "r-(.*)",      family: [ pkgsrc, fedora, guix, arch, debuntu, rosa, sisyphus ] }
+
+# ROS
+- { setname: "ros:$0", noflag: not_ros, category: dev-ros,   ruleset: [ gentoo ] }
+- { setname: "ros:$1", noflag: not_ros, namepat: "ros-(.*)", ruleset: [ debuntu, arch ] }
+
+# VDR
+- { setname: "vdr:$1", noflag: not_vdr, namepat: "vdr-plugin-(.*)" }
+- { setname: "vdr:$1", noflag: not_vdr, namepat: "vdr-(.*)", ruleset: [ fedora, gentoo ] }

@@ -17,6 +17,7 @@
 - { setname: tesseract-ocr-data,       namepat: "tesseract(?:-ocr|-data)*-[a-z]{3}(?:-.*)?" }
 - { setname: testdisk,                 name: testdisk-wip, ignore: true }
 - { setname: tetrinetx,                name: [tetrinet-x,tetrinet-server] }
+- { setname: tex-$1,                   namepat: "tex-(.*)-doc", addflavor: doc }
 - { setname: texlive-documentation,    namepat: "texlive-documentation-.*", family: gentoo }
 - { setname: thunderbird,              name: [mozilla-thunderbird,mozillathunderbird] }
 - { setname: thunderbird,              name: [thunderbird-45-gtk2,thunderbird-gtk2], addflavor: gtk2 }

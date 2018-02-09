@@ -13,6 +13,7 @@
 - { setname: hsqldb,                   namepat: "hsqldb[0-9._-]+" }
 - { setname: html2text,                name: html2text-with-utf8 }
 - { setname: hugin,                    name: [hugin-app,hugin-tools], addflavor: true }
+- { setname: hugo-sitegen,             name: "go:hugo" }
 
 - setname: heirloom
   name:

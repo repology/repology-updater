@@ -12,6 +12,7 @@
 - { setname: bash,                     name: bash-interactive, addflavor: interactive }
 - { setname: bash,                     namepat: "bash[0-9]+" }
 - { setname: bats,                     name: bash-bats }
+- { setname: baudline,                 name: linux-baudline, family: freebsd }
 - { setname: bbpager,                  name: [bbpager03,bbpager04] }
 - { setname: bcel,                     name: bcel5_3 }
 - { setname: bcfg2,                    name: "python:bcfg2" }

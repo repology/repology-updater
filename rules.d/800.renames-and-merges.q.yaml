@@ -6,6 +6,7 @@
 - { setname: qbzr,                     name: "python:qbzr" }
 - { setname: qmmp,                     name: [qmmp1,qmmp-qt5] }
 - { setname: qr_mumps,                 name: qrmumps }
+- { setname: qt,                       name: [qt,qt1,qt3,qt4,qt5] }
 - { setname: qtcreator,                name: [qt_creator,qt-creator,qt-creator-qt4,qt-creator2,qt4-creator,qtcreator-src,qtcreator-prerelease,libqt5-creator,qt5-qtcreator,qt5-qtcreator-docs], addflavor: true }
 - { setname: qtcreator,                namepat: "qt-?creator[0-9]*", addflavor: true }
 - { setname: qtkeychain,               name: [qt4-qtkeychain,qt5-qtkeychain,qt5keychain,qtkeychain-qt4,qtkeychain-qt5], addflavor: true }

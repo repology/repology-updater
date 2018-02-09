@@ -1,11 +1,10 @@
-- { name: [gimp-liquid-rescale,gimp-lqr,gimp-plugin-lqr,lqr-plugin,gimp-lqr-plugin], setname: "gimp:lqr-plugin" }
+- { setname: "gimp:lqr-plugin",        name: [gimp-liquid-rescale,gimp-lqr,gimp-lqr-plugin,gimp-plugin-lqr,lqr-plugin] }
+- { setname: "gimp:lensfun",           name: gimplensfun }
+- { setname: "gimp:focusblur",         name: focusblur }
+- { setname: "gimp:resynthesizer",     name: gimp-plugin-resynthesizer-git, ignore: true }
 
-- { name: gimplensfun, setname: "gimp:lensfun" }
-- { name: focusblur, setname: "gimp:$0" }
-- { name: gimp-plugin-resynthesizer-git, setname: "gimp:resynthesizer", ignore: true }
+- { setname: "gimp:$1", noflag: not_gimp, namepat: "gimp-plugin-(.*)" }
+- { setname: "gimp:$1", noflag: not_gimp, namepat: "gimp-script-(.*)" }
+- { setname: "gimp:$1", noflag: not_gimp, namepat: "gimp-(.*)-plugin" }
 
-- { namepat: "gimp-plugin-(.*)", setname: "gimp:$1" }
-- { namepat: "gimp-script-(.*)", setname: "gimp:$1" }
-- { namepat: "gimp-(.*)-plugin", setname: "gimp:$1" }
-
-- { namepat: "gimp:(.*)", setname: "gimp-$1" } # flush instead of matching individual plugins
+- { setname: gimp-$1, namepat: "gimp:(.*)" } # normalize instead of isolating

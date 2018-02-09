@@ -1,14 +1,9 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # merge rust itself
-- { namepat: "rust-nightly(.*)", setname: "rust$1", ignore: true }
-- { name: rust-always-nightly, setname: rust, ignore: true }
-- { name: [rust-analysis,rust-bin,rust-ms,rust-src,rust-doc,rust-docs,rustc,rustc-stage0], setname: rust, addflavor: true }
-- { name: rust, verpat: ".*20[0-9]{2}.*", ignore: true }
-
-# merge cargo
-- { name: cargo-nightly, setname: cargo, ignore: true }
-- { name: [cargo-completion,cargo-standalone], setname: cargo, addflavor: true }
+- { setname: rust$1,                   namepat: "rust-nightly(.*)", ignore: true }
+- { setname: rust,                     name: rust-always-nightly, ignore: true }
+- { setname: rust,                     name: [rust-analysis,rust-bin,rust-doc,rust-docs,rust-ms,rust-src,rustc,rustc-stage0], addflavor: true }
 
 # save from wildcard
 - name:
@@ -21,13 +16,15 @@
     - rust-srpm-macros
     - rust-vim
     - rust-zshcom
-  last: true
+  addflag: not_rust
 
 # global rule
-- { family: crates_io,    setname: "rust:$0" }
-- { namepat: "rust-(.*)", setname: "rust:$1", family: [arch, nix, fedora, sisyphus] }
+- { setname: "rust:$0", noflag: not_rust,               family: crates_io }
+- { setname: "rust:$1", noflag: not_rust,               namepat: "rust-(.*)", family: [ arch, fedora, nix, sisyphus ] }
 
 # unrust
-- { name: "rust:cargo", setname: cargo }
-- { name: "rust:exa", setname: exa }
-- { name: "rust:systemd-manager", setname: systemd-manager }
+- { setname: cargo,                    name: "rust:cargo" }
+- { setname: cargo,                    name: cargo-nightly, ignore: true }
+- { setname: cargo,                    name: [cargo-completion,cargo-standalone], addflavor: true }
+- { setname: exa,                      name: "rust:exa" }
+- { setname: systemd-manager,          name: "rust:systemd-manager" }

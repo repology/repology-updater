@@ -58,6 +58,7 @@
 - { setname: eric,                     name: [eric4,eric5,eric6] }
 - { setname: eric,                     namepat: "[a-z]{2}-eric6" } # freebsd l10n ports
 - { setname: eric,                     namepat: "eric-i18n-.*" }
+- { setname: "erlang:esdl",            name: ["erlang:sdl",esdl] }
 - { setname: etcd,                     name: [coreos-etcd,coreos-etcd3] }
 - { setname: eternal-lands$1,          namepat: "eternallands(.*)" }
 - { setname: eternal-lands,            name: el, family: freebsd }

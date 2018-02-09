@@ -90,6 +90,8 @@
 - { setname: friently-find,            name: ffind }
 - { setname: frozen-bubble,            name: frozenbubble2 }
 - { setname: fsv,                      name: fsv2 }
+- { setname: "fusefs:curlftpfs",       name: curlftpfs }
+- { setname: "fusefs:encfs",           name: [encfs,encfs18] }
 - { setname: "fusefs:s3fs",            name: [s3fs,s3fs-fuse] }
 - { setname: fuzzylite,                name: fuzzylite5 }
 

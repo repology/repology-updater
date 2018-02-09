@@ -1,7 +1,0 @@
-# vim: tabstop=39 expandtab softtabstop=39
-
-# fortunes
-- { namepat: "fortune-mod-(.*)",       setname: "fortunes:$1" }
-- { namepat: "fortunes-(.*)",          setname: "fortunes:$1" }
-- { namepat: "fortune-(.*)",           setname: "fortunes:$1" }
-- { namepat: "fortune_(.*)",           setname: "fortunes:$1" }
