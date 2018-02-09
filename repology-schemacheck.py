@@ -85,12 +85,6 @@ rulesets = families + [
     'parrot',
 ]
 
-customflags = [
-    'preserve_underscore',
-    'nowildcard',
-    'theiling',
-]
-
 schemas = {
     'repos': [
         {
@@ -160,8 +154,8 @@ schemas = {
             'verge': str,
             'verlt': str,
             'verle': str,
-            'flag': Any(Any(*customflags), [Any(*customflags)]),
-            'noflag': Any(Any(*customflags), [Any(*customflags)]),
+            'flag': str,
+            'noflag': str,
 
             'setname': str,
             'setver': str,
@@ -180,7 +174,7 @@ schemas = {
             'snapshot': bool,
             'successor': bool,
             'rolling': bool,
-            'addflag': Any(Any(*customflags), [Any(*customflags)]),
+            'addflag': str,
             'last': bool,
             'tolowername': bool,
             'replaceinname': dict,
