@@ -18,6 +18,7 @@
 - { setname: renpy,                    name: renpy6 }
 - { setname: reposurgeon,              name: cyreposurgeon }
 - { setname: ringojs,                  name: ringo }
+- { setname: "rust:xsv",               name: xsv-rs }
 - { setname: rl,                       name: randomize-lines } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
 - { setname: rlog,                     name: librlog }
 - { setname: roxterm,                  name: [rox-term,roxterm-gtk2] }

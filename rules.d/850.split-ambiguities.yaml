@@ -372,6 +372,8 @@
 
 - { name: xdrfile, family: arch, verpat: "2\\..*", setname: xdrfile-wesbarnett } # fork
 
+- { name: xsv, wwwpart: burntsushi, setname: "rust:xsv" }
+
 - { name: xtitle, wwwpart: kinzler, setname: xtitle-kinzler }
 
 - { name: yq, wwwpart: mikefarah, setname: yq-mikefarah }
