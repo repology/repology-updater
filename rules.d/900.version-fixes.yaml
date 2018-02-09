@@ -896,6 +896,7 @@
 - { name: xl2tpd,                      ver: "20140214",                                    ignore: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   incorrect: true }
 - { name: xml-coreutils,               ver: "0.8a",                                        outdated: true }
+- { name: xmltoman,                    verge: "0.5",                                       successor: true }
 - { name: xmoto,                       ver: "0.5.12",                family: [ rosa ],     incorrect: true } # no such version
 - { name: "xorg:video-intel",          verpat: ".*20[0-9]{2}.*",                           noscheme: true }
 - { name: "xorg:video-intel",          verlonger: 3,                                       ignore: true }
