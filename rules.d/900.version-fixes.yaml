@@ -891,6 +891,7 @@
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignore: true }
 - { name: xdot,                        ver: "20121124",                                    ignore: true }
 - { name: xdotool,                     ver: "20110530.1",                                  ignore: true }
+- { name: xhyve,                       verpat: "20[0-9]{6}",                               ignore: true } # macports
 - { name: xmbmon,                      verpat: "[0-9]{3}",                                 incorrect: true } # it's 2.05, not 205. Also not 2.0.5.
 - { name: xmlrpc-c,                    vergt: "1.39.12",                                   devel: true } # http://xmlrpc-c.sourceforge.net/change_super_stable.html
 - { name: xl2tpd,                      ver: "20140214",                                    ignore: true } # pkgsrc is using snapshot; Others are using versions with dots
