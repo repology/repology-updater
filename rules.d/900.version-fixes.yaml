@@ -902,6 +902,8 @@
 - { name: xorg-server,                 verlonger: 3,                 family: crux,         ignore: true } # bogus suffux
 - { name: xpdf,                        ver: "4.02",                  family: freebsd,      incorrect: true }
 - { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignore: true }
+- { name: xtitle,                      verpat: "20[0-9]{6}",                               ignore: true }
+- { name: xtitle,                      ver: "20170206",                                    outdated: true } # 0.4.3 which is latest normal version ls from feb 15, e.g. newer
 - { name: xz-utils,                    ver: "5.03",                                        incorrect: true } # gobolinux garbage
 
 # Y
