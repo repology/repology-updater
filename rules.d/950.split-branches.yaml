@@ -52,6 +52,8 @@
 
 - { name: enlightenment,     verpat: "1\\.0.*",           setname: enlightenment16 }
 
+- { name: "fonts:liberation", verpat: "2\\..*",           setname: "fonts:liberation2" }
+
 - { name: fftw,              verpat: "2\\..*",            setname: fftw2 }
 
 - { name: fox,               verpat: "1\\.4\\..*",        setname: fox14 }

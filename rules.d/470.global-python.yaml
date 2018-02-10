@@ -4,10 +4,10 @@
 
 # AOSC does not identify python modules by a prefix, so we need to rely on category
 # and blacklist ports which are not python modules
-- family: aosc
-  category: python
-  name: python
-  addflag: nowildcard
+#- family: aosc
+#  category: python
+#  name: python
+#  addflag: nowildcard
 - { family: aosc, category: python,    setname: "python:$0", noflag: nowildcard }
 
 # XXX: merge pypy- and pypy3-

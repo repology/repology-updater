@@ -33,11 +33,14 @@
 
 - { setname: ocaml,                    name: ocaml3 }
 - { setname: ocaml,                    name: ocaml-nox11, addflavor: nox11 }
+- { addflag: not_ocaml,                name: ocaml-mode }
+- { addflag: not_ocaml,                name: ocaml-mode.el }
 
 - { setname: perl,                     namepat: "perl-?5[0-9.]*" }
+- { addflag: not_perl,                 name: libwww-perl }
 
 # in python category as python modules
-- { setname: python,                   family: aosc, addflag: not_python }
+- { addflag: not_python,               name: python, family: aosc }
 
 # python package manager vs. program wrapper (which was renamed to pipo upstream)
 # XXX: generate problem from this

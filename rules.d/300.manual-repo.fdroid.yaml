@@ -1,19 +1,22 @@
-# vim: tabstop=39 expandtab softtabstop=39
+# vim: tabstop=50 expandtab softtabstop=50
 
+#
 # F-Droid is too alien, even if package names match in most cases it's entirely different application
 # So use whitelist
-- {                                                                  family: [ fdroid ], remove: true }
-- { name: "andor's trail",                                           family: [ fdroid ], remove: false } # as an exception, allow android project (present in f-droid and libregamewiki)
-- { name: busybox,                                                   family: [ fdroid ], remove: false }
-- { name: freeminer,                                                 family: [ fdroid ], remove: false }
-- { name: hyperrogue,                                                family: [ fdroid ], remove: false }
-- { name: i2p,                                                       family: [ fdroid ], remove: false }
-- { name: kouchat,                                                   family: [ fdroid ], remove: false }
-- { name: linphone,                                                  family: [ fdroid ], remove: false }
-- { name: minilens,                                                  family: [ fdroid ], remove: false }
-- { name: mupdf,                                                     family: [ fdroid ], remove: false }
-- { name: onscripter,                                                family: [ fdroid ], remove: false }
-- { name: reicast,                                                   family: [ fdroid ], remove: false }
-- { name: scummvm,                                                   family: [ fdroid ], remove: false }
-- { name: snapcast,                                                  family: [ fdroid ], remove: false }
-- { name: yabause,                                                   family: [ fdroid ], remove: false }
+#
+
+- { ruleset: fdroid,                              remove: true }
+- { ruleset: fdroid, name: "andor's trail",       remove: false } # as an exception, allow android project (present in f-droid and libregamewiki)
+- { ruleset: fdroid, name: busybox,               remove: false }
+- { ruleset: fdroid, name: freeminer,             remove: false }
+- { ruleset: fdroid, name: hyperrogue,            remove: false }
+- { ruleset: fdroid, name: i2p,                   remove: false }
+- { ruleset: fdroid, name: kouchat,               remove: false }
+- { ruleset: fdroid, name: linphone,              remove: false }
+- { ruleset: fdroid, name: minilens,              remove: false }
+- { ruleset: fdroid, name: mupdf,                 remove: false }
+- { ruleset: fdroid, name: onscripter,            remove: false }
+- { ruleset: fdroid, name: reicast,               remove: false }
+- { ruleset: fdroid, name: scummvm,               remove: false }
+- { ruleset: fdroid, name: snapcast,              remove: false }
+- { ruleset: fdroid, name: yabause,               remove: false }

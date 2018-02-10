@@ -227,6 +227,11 @@
 - { name: openal, family: [pkgsrc,chocolatey,freebsd,macports], setname: openal-creative }
 - { name: openal, setname: openal-soft } # most openal's are openal-soft, even if they erroneously list openal.org as a website
 
+- { name: overpass, wwwpart: [font,redhatbrand], setname: "fonts:overpass" }
+- { name: overpass, wwwpart: api, setname: "python:overpass" }
+- { name: overpass, category: [fonts,media-fonts], setname: "fonts:overpass" }
+- { name: overpass, warning: "please classify me" }
+
 # "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
 - { name: packer, setname: "pacman-packer", family: arch  }
 

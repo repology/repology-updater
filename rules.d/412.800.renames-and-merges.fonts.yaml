@@ -1,17 +1,18 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # A
-- name:
+- setname: "fonts:adf-gillius"
+  name:
     - adf-gillius-fonts
     - fonts-otf-adf-gillius
-  setname: "fonts:adf-gillius"
 
-- name:
+- setname: "fonts:adf-tribun"
+  name:
     - adf-tribun-fonts
     - fonts-ttf-adf-tribun
-  setname: "fonts:adf-tribun"
 
-- name:
+- setname: "fonts:adobe-source-code-pro"
+  name:
     - adobe-source-code-pro
     - adobe-source-code-pro-font
     - adobe-source-code-pro-fonts
@@ -21,44 +22,52 @@
     - source-code-pro
     - sourcecodepro-fonts
     - sourcecodepro-ttf
-  setname: "fonts:adobe-source-code-pro"
 
-- name:
+- setname: "fonts:alee"
+  name:
+    - alee-fonts
+    - alee-ttf
+    - aleefonts-ttf
+    - fonts-alee
+    - ttf-alee
+
+- setname: "fonts:alef"
+  name:
     - alef
     - alef-fonts
     - alef-webfont
     - fonts-ttf-alef
     - ttf-alef
-  setname: "fonts:alef"
 
-- name:
+- setname: "fonts:alegreya"
+  name:
     - alegreya
     - fonts-otf-ht-alegreya
     - google-alegreya-fonts
     - ht-alegreya-fonts
     - otf-alegreya
     - ttf-alegreya-ibx
-  setname: "fonts:alegreya"
 
-- name:
+- setname: "fonts:alegreya-sans"
+  name:
     - alegreya-sans
     - otf-alegreya-sans
     - ttf-alegreya-sans-ibx
-  setname: "fonts:alegreya-sans"
 
-- name:
+- setname: "fonts:allerta"
+  name:
     - google-allerta-fonts
     - otf-allerta
-  setname: "fonts:allerta"
 
-- name:
+- setname: "fonts:amiri"
+  name:
     - amiri-fonts
     - fonts-hosny-amiri
     - fonts-ttf-amiri
     - ttf-amiri
-  setname: "fonts:amiri"
 
-- name:
+- setname: "fonts:anonymouspro"
+  name:
     - anonymous-pro
     - anonymous_pro
     - anonymouspro
@@ -68,102 +77,110 @@
     - google-anonymouspro-fonts
     - msimonson-anonymouspro-fonts
     - ttf-anonymous-pro
-  setname: "fonts:anonymouspro"
 
-- name:
+- setname: "fonts:arabeyes"
+  name:
     - arabeyes-fonts
     - arabeyes-ttf
     - arabeyes_fonts
     - fonts-arabeyes
     - fonts-ttf-arabic-arabeyes
     - ttf-arabeyes-fonts
-  setname: "fonts:arabeyes"
 
-- name:
+- setname: "fonts:arkpandora"
+  name:
     - arkpandora
     - fonts-arkpandora
-  setname: "fonts:arkpandora"
 
-- { namepat: "artwiz.*", setname: "fonts:artwiz-aleczapka" } # hopefully it's not too broad
-- { name: fonts-bitmap-artwiz-aleczapka, setname: "fonts:artwiz-aleczapka" }
+- setname: "fonts:artwiz-aleczapka"
+  name:
+    - artwiz-aleczapka
+    - artwiz-aleczapka-de
+    - artwiz-aleczapka-en
+    - artwiz-aleczapka-fonts
+    - artwiz-aleczapka-se
+    - artwiz-cursor
+    - artwiz-fonts
+    - fonts-bitmap-artwiz-aleczapka
 
-- name:
+- setname: "fonts:asana-math"
+  name:
     - fonts-oflb-asana-math
     - fonts-otf-asana-math
     - fonts-otf-oflb-asana-math
     - oflb-asana-math-fonts
     - otf-asana-math
     - ttf-asana-math
-  setname: "fonts:asana-math"
 
-- name:
+- setname: "fonts:atarismall"
+  name:
     - ttf-atarismall
     - fonts-atarismall
-  setname: "fonts:atarismall"
 
 # B
-- name:
+- setname: "fonts:babelstone-han"
+  name:
     - babelstone-han
     - babelstone-han-fonts
     - fonts-babelstone-han
     - ttf-babelstone-han
-  setname: "fonts:babelstone-han"
 
-- name:
+- setname: "fonts:babelstone-modern"
+  name:
     - babelstone-modern-fonts
     - fonts-babelstone-modern
-  setname: "fonts:babelstone-modern"
 
-- { name: babelstone-marchen-fonts, setname: "fonts:babelstone-marchen" }
-- { name: babelstone-ogham-fonts, setname: "fonts:babelstone-ogham" }
-- { name: babelstone-phags-pa-fonts, setname: "fonts:babelstone-phags-pa" }
-- { name: babelstone-runic-fonts, setname: "fonts:babelstone-runic" }
+- { setname: "fonts:babelstone-marchen", name: babelstone-marchen-fonts }
+- { setname: "fonts:babelstone-ogham", name: babelstone-ogham-fonts }
+- { setname: "fonts:babelstone-phags-pa", name: babelstone-phags-pa-fonts }
+- { setname: "fonts:babelstone-runic", name: babelstone-runic-fonts }
 
-- name:
+- setname: "fonts:baekmuk"
+  name:
     - baekmuk-bdf-fonts
     - baekmuk-bitmap-fonts
     - bdf-baekmuk
     - fonts-bitmap-baekmuk
-  setname: "fonts:baekmuk"
   addflavor: bdf
 
-- name:
+- setname: "fonts:baekmuk"
+  name:
     - baekmuk-ttf
     - baekmuk-ttf-fonts
     - fonts-ttf-baekmuk
     - ko-baekmuk-ttf
     - ttf-baekmuk
-  setname: "fonts:baekmuk"
   addflavor: ttf
 
-- name:
+- setname: "fonts:baekmuk"
+  name:
     - baekmuk-fonts
     - fonts-baekmuk
     - ko-baekmuk
     - ko-baekmuk-fonts
     - xfonts-baekmuk
-  setname: "fonts:baekmuk"
 
-- name:
+- setname: "fonts:beteckna"
+  name:
     - beteckna-fonts
     - fonts-beteckna
     - fonts-otf-beteckna
     - ttf-beteckna
-  setname: "fonts:beteckna"
 
-- name:
+- setname: "fonts:bitstream-speedo"
+  name:
     - font-bitstream-speedo
     - x11-font-bitstream-speedo
     - xorg-font-bitstream-speedo
-  setname: "fonts:bitstream-speedo"
 
-- name:
+- setname: "fonts:bitstream-type1"
+  name:
     - font-bitstream-type1
     - x11-font-bitstream-type1
     - xorg-font-bitstream-type1
-  setname: "fonts:bitstream-type1"
 
-- name:
+- setname: "fonts:bitstream-vera"
+  name:
     - bitstream-vera
     - bitstream-vera-fonts
     - bitstream-vera-ttf
@@ -174,10 +191,10 @@
     - ttf-bitstream-vera-dummy
     - vera-ttf
     - xorg-font-bitstream-vera
-  setname: "fonts:bitstream-vera"
 
 # C
-- name:
+- setname: "fonts:cantarell"
+  name:
     - abattis-cantarell-fonts
     - cantarell
     - cantarell-fonts
@@ -185,74 +202,91 @@
     - fonts-cantarell
     - fonts-otf-abattis-cantarell
     - ttf-cantarell
-  setname: "fonts:cantarell"
 
-- name:
+- setname: "fonts:cardo" # needs post-split (google vs. scgolarsfonts)
+  name:
     - cardo
     - fonts-ttf-scholarsfonts-cardo
     - google-cardo-fonts
     - scholarsfonts-cardo-fonts
     - ttf-cardo
-  setname: "fonts:cardo" # needs post-split (google vs. scgolarsfonts)
 
-- name:
+- setname: "fonts:cjkuni"
+  name:
+    - cjkuni-fonts
+    - cjkunifonts
+
+- setname: "fonts:cjkuni"
+  name:
+    - cjkuni-ukai-fonts
+    - fonts-ttf-cjkuni-ukai
+  addflavor: ukai
+
+- setname: "fonts:cjkuni"
+  name:
+    - cjkuni-uming-fonts
+    - fonts-ttf-cjkuni-uming
+  addflavor: uming
+
+- setname: "fonts:cheapskate"
+  name:
     - ttf-cheapskate
     - cheapskatefonts
-  setname: "fonts:cheapskate"
 
-- name:
+- setname: "fonts:chinese-opendesktop"
+  name:
     - fonts-ttf-chinese-opendesktop
-  setname: "fonts:chinese-opendesktop"
 
-- name:
+- setname: "fonts:clearsans"
+  name:
     - clear_sans
     - clearsans
     - ttf-clear-sans
-  setname: "fonts:clearsans"
 
-- name:
+- setname: "fonts:cm-unicode"
+  name:
     - cm-unicode
     - cm-unicode-fonts
     - otf-cm-unicode
     - ttf-cm-unicode
-  setname: "fonts:cm-unicode"
 
-- name:
+- setname: "fonts:comfortaa"
+  name:
     - aajohan-comfortaa-fonts
     - comfortaa
     - comfortaa-ttf
     - fonts-comfortaa
     - fonts-ttf-aajohan-comfortaa
     - ttf-comfortaa
-  setname: "fonts:comfortaa"
 
-- name:
+- setname: "fonts:comic-neue"
+  name:
     - comic-neue
     - comic-neue-fonts
     - comic_neue
     - font-comic-neue
     - fonts-otf-comic-neue
     - ttf-comic-neue
-  setname: "fonts:comic-neue"
 
-- name:
+- setname: "fonts:consolamono"
+  name:
     - consolamono-ttf
     - fonts-ttf-consolamono
-  setname: "fonts:consolamono"
 
-- name:
+- setname: "fonts:cronyx-cyrillic"
+  name:
     - font-cronyx-cyrillic
     - x11-font-cronyx-cyrillic
     - xorg-font-cronyx-cyrillic
-  setname: "fonts:cronyx-cyrillic"
 
-- name:
+- setname: "fonts:croscore"
+  name:
     - croscorefonts
     - google-croscore-fonts
     - ttf-crosscorefonts # XXX: should be renamed to ttf-crosscorefonts in SlackBuilds (it's CrOS (as in Chrome OS), not cross)
-  setname: "fonts:croscore"
 
-- name:
+- setname: "fonts:crosextra-caladea"
+  name:
     - caladea
     - crosextrafonts-caladea
     - fonts-crosextra-caladea
@@ -260,9 +294,9 @@
     - google-caladea-fonts
     - google-crosextra-caladea-fonts
     - ttf-caladea
-  setname: "fonts:crosextra-caladea"
 
-- name:
+- setname: "fonts:crosextra-carlito"
+  name:
     - carlito
     - crosextrafonts-carlito
     - fonts-crosextra-carlito
@@ -270,30 +304,30 @@
     - google-carlito-fonts
     - google-crosextra-carlito-fonts
     - ttf-carlito
-  setname: "fonts:crosextra-carlito"
 
-- name:
+- setname: "fonts:culmus"
+  name:
     - culmus
     - culmus-ancient-semitic-fonts
     - culmus-fancy
     - culmus-fonts
     - fonts-ttf-culmus
-  setname: "fonts:culmus"
 
-- name:
+- setname: "fonts:cyberbit"
+  name:
     - bitstream-cyberbit
     - cyberbit-ttf
     - cyberbit-ttfonts
-  setname: "fonts:cyberbit"
 
 # D
-- name:
+- setname: "fonts:dai-banna"
+  name:
     - dai-banna
     - dai-banna-fonts
     - fonts-sil-dai-banna
-  setname: "fonts:dai-banna"
 
-- name:
+- setname: "fonts:dejavu"
+  name:
     - dejavu
     - dejavu-fonts
     - dejavu-fonts-ttf
@@ -303,28 +337,28 @@
     - fonts-ttf-dejavu
     - ttf-dejavu
     - xorg-font-dejavu-ttf
-  setname: "fonts:dejavu"
 
-- name:
+- setname: "fonts:dejavu-lgc"
+  name:
     - dejavu-lgc-fonts
     - fonts-ttf-dejavu-lgc
-  setname: "fonts:dejavu-lgc"
 
-- name:
+- setname: "fonts:dina"
+  name:
     - dina
     - dina-bitmap-fonts
     - dina-font
     - dina-font-pcf
     - dina-fonts
-  setname: "fonts:dina"
 
-- name:
+- setname: "fonts:dosis"
+  name:
     - dosis
     - fonts-dosis
     - ttf-impallari-dosis
-  setname: "fonts:dosis"
 
-- name:
+- setname: "fonts:droid"
+  name:
     - droid-fonts-ttf
     - droid-ttf
     - font-droid
@@ -332,24 +366,24 @@
     - fonts-ttf-droid
     - fonts-ttf-google-droid
     - fonts-ttf-google-droid
-  setname: "fonts:droid"
 
-- name:
+- setname: "fonts:dustin-dustismo"
+  name:
     - dustin-dustismo-fonts
     - fonts-ttf-dustin-dustismo
-  setname: "fonts:dustin-dustismo"
 
-- name:
+- setname: "fonts:dseg"
+  name:
     - fonts-dseg
     - ttf-dseg
-  setname: "fonts:dseg"
 
-- name:
+- setname: "fonts:dustismo"
+  name:
     - fonts-ttf-dustismo
-  setname: "fonts:dustismo"
 
 # E
-- name:
+- setname: "fonts:eb-garamond"
+  name:
     - eb-garamond
     - eb-garamond-fonts
     - ebgaramond
@@ -357,44 +391,44 @@
     - fonts-ttf-ebgaramond
     - otf-eb-garamond
     - ttf-ebgaramond
-  setname: "fonts:eb-garamond"
 
-- name:
+- setname: "fonts:ecofont"
+  name:
     - ecofont
     - ecofont-ttf
     - fonts-ttf-ecofont
     - spranq-ecofont-ttf
-  setname: "fonts:ecofont"
 
-- name:
+- setname: "fonts:ecolier-court"
+  name:
     - ecolier-court-fonts
     - ecoliercourt-fonts
     - fonts-ecolier-court
     - fonts-ecolier-lignes-court # XXX: does it belong here?
     - fonts-ttf-ecolier-court
-  setname: "fonts:ecolier-court"
 
-- name:
+- setname: "fonts:eeyek"
+  name:
     - eeyek-fonts
     - fonts-eeyek
     - fonts-ttf-tabish-eeyek
     - tabish-eeyek-fonts
-  setname: "fonts:eeyek"
 
-- name:
+- setname: "fonts:efont-unicode"
+  name:
     - efont-unicode
     - efont-unicode-bdf
     - efont-unicode-bitmap-fonts
     - fonts-bitmap-efont-unicode
     - xfonts-efont-unicode
-  setname: "fonts:efont-unicode"
 
-- name:
+- setname: "fonts:emojione"
+  name:
     - emojione
     - fonts-emojione
-  setname: "fonts:emojione"
 
-- name:
+- setname: "fonts:emojione-color" # check this isn't this the same as fonts:emojione
+  name:
     - emojione-color-font
     - emojione-color-font-ttf
     - eosrei-emojione-fonts
@@ -402,46 +436,46 @@
     - fonts-emojione-svginot
     - ttf-emojione-color
     - twemoji-color-font
-  setname: "fonts:emojione-color" # check this isn't this the same as fonts:emojione
 
-- name:
+- setname: "fonts:essays1743"
+  name:
     - essays1743
     - essays-1743
     - fonts-ttf-essays1743
     - fonts-ttf-essays1743
     - otf-essays-1743
     - ttf-essays
-  setname: "fonts:essays1743"
 
 # F
-- name:
+- setname: "fonts:fanwood"
+  name:
     - fonts-fanwood
     - ttf-fanwood
-  setname: "fonts:fanwood"
 
-- name:
+- setname: "fonts:farsi"
+  name:
     - farsi-fonts
     - farsi_fonts
     - farsifonts
     - farsifonts-ttf
     - fonts-farsiweb
     - fonts-ttf-arabic-farsi
-  setname: "fonts:farsi"
 
-- name:
+- setname: "fonts:fifth-leg"
+  name:
     - fifth-leg
     - fifth-leg-font
     - otf-fifthleg
-  setname: "fonts:fifth-leg"
 
-- name:
+- setname: "fonts:fira-mono"
+  name:
     - fira-mono
     - font-fira-mono
     - otf-fira-mono
     - ttf-fira-mono
-  setname: "fonts:fira-mono"
 
-- name:
+- setname: "fonts:fira-sans"
+  name:
     - fira
     - fira-fonts
     - fira-sans
@@ -449,17 +483,17 @@
     - mozilla-fira-fonts
     - otf-fira-sans
     - ttf-fira-sans
-  setname: "fonts:fira-sans"
 
-- name:
+- setname: "fonts:firacode"
+  name:
     - fira-code
     - firacode
     - fonts-firacode
     - otf-fira-code
     - ttf-fira-code
-  setname: "fonts:firacode"
 
-- name:
+- setname: "fonts:fontawesome"
+  name:
     - awesome-ttf
     - font-awesome
     - fontawesome
@@ -469,99 +503,100 @@
     - otf-font-awesome
     - otf-fontawesome
     - ttf-font-awesome
-  setname: "fonts:fontawesome"
 
-- name:
+- setname: "fonts:freefarsi"
+  name:
     - fonts-freefarsi
     - freefarsi-ttf
-  setname: "fonts:freefarsi"
 
 # G
 #- { namepat: "(?:fonts-)?(?:[ot]tf-)?(gdouros-.+?)(?:-fonts)?", setname: "fonts:$1" }
-- name:
+
+- setname: "fonts:gdouros-aegean"
+  name:
     - aegean-ttf
     - fonts-otf-aegean
     - fonts-otf-gdouros-aegean
     - gdouros-aegean-fonts
-  setname: "fonts:gdouros-aegean"
 
-- name:
+- setname: "fonts:gdouros-aegyptus"
+  name:
     - aegyptus
     - aegyptus-ttf
     - fonts-otf-aegyptus
     - fonts-otf-gdouros-aegyptus
     - gdouros-aegyptus-fonts
-  setname: "fonts:gdouros-aegyptus"
 
-- name:
+- setname: "fonts:gdouros-akkadian"
+  name:
     - akkadian
     - akkadian-ttf
     - fonts-otf-akkadian
     - fonts-otf-gdouros-akkadian
     - gdouros-akkadian-fonts
-  setname: "fonts:gdouros-akkadian"
 
-- name:
+- setname: "fonts:gdouros-alexander"
+  name:
     - fonts-otf-alexander
     - fonts-otf-gdouros-alexander
     - gdouros-alexander-fonts
-  setname: "fonts:gdouros-alexander"
 
-- name:
+- setname: "fonts:gdouros-alfios"
+  name:
     - fonts-otf-alfios
     - gdouros-alfios-fonts
-  setname: "fonts:gdouros-alfios"
 
-- name:
+- setname: "fonts:gdouros-anaktoria"
+  name:
     - fonts-otf-anaktoria
     - fonts-ttf-gdouros-anaktoria
     - gdouros-anaktoria-fonts
-  setname: "fonts:gdouros-anaktoria"
 
-- name:
+- setname: "fonts:gdouros-analecta"
+  name:
     - analecta
     - fonts-otf-analecta
     - fonts-otf-gdouros-analecta
     - gdouros-analecta-fonts
-  setname: "fonts:gdouros-analecta"
 
-- name:
+- setname: "fonts:gdouros-anatolian"
+  name:
     - anatolian
     - anatolian-ttf
     - gdouros-anatolian-fonts
-  setname: "fonts:gdouros-anatolian"
 
-- name:
+- setname: "fonts:gdouros-aroania"
+  name:
     - fonts-otf-aroania
     - fonts-ttf-gdouros-aroania
     - gdouros-aroania-fonts
-  setname: "fonts:gdouros-aroania"
 
-- name:
+- setname: "fonts:gdouros-asea"
+  name:
     - asea-ttf
     - fonts-ttf-gdouros-asea
     - gdouros-asea-fonts
-  setname: "fonts:gdouros-asea"
 
-- name:
+- setname: "fonts:gdouros-atavyros"
+  name:
     - fonts-otf-atavyros
     - gdouros-atavyros-fonts
-  setname: "fonts:gdouros-atavyros"
 
-- name:
+- setname: "fonts:gdouros-avdira"
+  name:
     - fonts-otf-avdira
     - fonts-ttf-gdouros-avdira
     - gdouros-avdira-fonts
-  setname: "fonts:gdouros-avdira"
 
-- name:
+- setname: "fonts:gdouros-musica"
+  name:
     - fonts-otf-gdouros-musica
     - fonts-otf-musica
     - gdouros-musica-fonts
     - musica
-  setname: "fonts:gdouros-musica"
 
-- name:
+- setname: "fonts:gdouros-symbola"
+  name:
     - fonts-otf-gdouros-symbola
     - fonts-otf-symbola
     - gdouros-symbola-fonts
@@ -570,9 +605,9 @@
     - symbola-ttf
     - ttf-symbola
     - ttf-symbola-ib
-  setname: "fonts:gdouros-symbola"
 
-- name:
+- setname: "fonts:gentium-basic"
+  name:
     - fonts-gentium-basic
     - fonts-sil-gentium-basic
     - fonts-ttf-sil-gentium-basic
@@ -580,9 +615,13 @@
     - gentiumbasic
     - sil-gentium-basic-fonts
     - ttf-gentium-basic
-  setname: "fonts:gentium-basic"
 
-- name:
+# unspecified (not basic, not plus) gentium packages seems to be
+# outdated as their homepages point to a redirect page; we stick
+# them into gentium plus which has version higher than any of them
+# to make them outdated
+- setname: "fonts:gentium-plus"
+  name:
     - fonts-sil-gentium
     - fonts-ttf-gentium
     - fonts-ttf-sil-gentium
@@ -591,49 +630,45 @@
     - sil-gentium
     - sil-gentium-fonts
     - ttf-gentium
-  setname: "fonts:gentium-plus" # stick these into gentium-plus
-# actually, unspecified gentium packages seems to be outdated as
-# their homepages point to a redirect page; we stick them into
-# gentium plus which has version higher than any of them to make
-# them outdated
 
-- name:
+- setname: "fonts:gentium-plus"
+  name:
     - fonts-sil-gentiumplus
     - fonts-sil-gentiumplus-compact
     - gentiumplus
     - ttf-gentium-plus
-  setname: "fonts:gentium-plus"
 
-- name:
+- setname: "fonts:gfs-bodoni"
+  name:
     - fonts-otf-gfs-bodoni
     - gfs-bodoni-fonts
-  setname: "fonts:gfs-bodoni"
 
 # GFS-*
-- name:
+- setname: "fonts:gfs-ambrosia"
+  name:
     - fonts-otf-gfs-ambrosia
     - gfs-ambrosia-fonts
-  setname: "fonts:gfs-ambrosia"
 
-- name:
+- setname: "fonts:gfs-artemisia"
+  name:
     - fonts-gfs-artemisia
     - fonts-otf-gfs-artemisia
     - gfs-artemisia-fonts
-  setname: "fonts:gfs-artemisia"
 
-- name:
+- setname: "fonts:gfs-bodoni-classic"
+  name:
     - fonts-gfs-bodoni-classic
     - fonts-otf-gfs-bodoni-classic
     - gfs-bodoni-classic-fonts
-  setname: "fonts:gfs-bodoni-classic"
 
-- name:
+- setname: "fonts:georgewilliams"
+  name:
     - gw-fonts-ttf
     - fonts-georgewilliams
     - ttf-georgewilliams
-  setname: "fonts:georgewilliams"
 
-- name:
+- setname: "fonts:gnu-freefont"
+  name:
     - font-gnu-freefont-ttf
     - fonts-freefont
     - fonts-ttf-freefont
@@ -643,20 +678,20 @@
     - freefont-ttf
     - gnu-free-fonts
     - ttf-freefont
-  setname: "fonts:gnu-freefont"
 
-- name:
+- setname: "fonts:goudybookletter"
+  name:
     - fonts-goudybookletter
     - ttf-goudybookletter
-  setname: "fonts:goudybookletter"
 
-- name:
+- setname: "fonts:grimmer-proggy-tinysz"
+  name:
     - fonts-ttf-grimmer-proggy-tinysz
     - grimmer-proggy-tinysz-fonts
-  setname: "fonts:grimmer-proggy-tinysz"
 
 # H
-- name:
+- setname: "fonts:hack"
+  name:
     - font-hack
     - fonts-hack
     - fonts-otf-hack
@@ -670,9 +705,9 @@
     - otf-hack
     - ttf-hack
     - ttf-hack-ibx
-  setname: "fonts:hack"
 
-- name:
+- setname: "fonts:hanazono"
+  name:
     - fonts-hanazono
     - fonts-ttf-hanazono
     - hanazono
@@ -680,63 +715,64 @@
     - hanazono-fonts-ttf
     - ttf-hanazono
     - ttf-sazanami-hanazono
-  setname: "fonts:hanazono"
 
-- name:
+- setname: "fonts:hermit"
+  name:
     - fonts-ttf-pcaro-hermit
     - hermit
     - hermit-font
     - otf-hermit
     - pcaro-hermit-fonts
-  setname: "fonts:hermit"
 
-- name:
+- setname: "fonts:humor-sans"
+  name:
     - fonts-humor-sans
     - humor-sans
     - humor_sans
     - ttf-humor-sans
-  setname: "fonts:humor-sans"
 
 # I
-- name:
+- setname: "fonts:iosevka"
+  name:
     - font-iosevka
     - iosevka
     - iosevka-fonts
     - ttf-inziu-iosevka
     - ttf-inziu-iosevka-ttfs
     - ttf-iosevka
-  setname: "fonts:iosevka"
-- { namepat: "ttf-iosevka-(.*)", setname: "fonts:iosevka" }
 
-- name:
+- { setname: "fonts:iosevka",          namepat: "ttf-iosevka-(.*)" }
+
+- setname: "fonts:impallari-lobster"
+  name:
     - fonts-otf-impallari-lobster
     - impallari-lobster-fonts
     - ttf-impallari-lobster-font
-  setname: "fonts:impallari-lobster"
 
-- name:
+- setname: "fonts:isabella"
+  name:
     - fonts-isabella
     - isabella-ttf
     - otf-isabella
     - ttf-isabella
-  setname: "fonts:isabella"
 
-- name:
+- setname: "fonts:isas-misc"
+  name:
     - x11-font-isas-misc
     - xorg-font-isas-misc
     - font-isas-misc
-  setname: "fonts:isas-misc"
 
 # J
-- name:
+- setname: "fonts:junicode"
+  name:
     - fonts-junicode
     - fonts-ttf-junicode
     - junicode
     - ttf-junicode
-  setname: "fonts:junicode"
 
 # K
-- name:
+- setname: "fonts:kanjistrokeorders"
+  name:
     - fonts-kanjistrokeorders
     - fonts-ttf-kanjistrokeorders
     - ja-kanjistrokeorders-ttf
@@ -745,32 +781,32 @@
     - kanjistrokeorders-ttf
     - kanjistrokeorders-ttf
     - ttf-kanjistrokeorders
-  setname: "fonts:kanjistrokeorders"
 
-- name:
+- setname: "fonts:kochi"
+  name:
     - kochi-ttf
     - kochi-substitute
     - ttf-kochi
     - ttf-kochi-naga10
     - ttf-kochi-substitute
-  setname: "fonts:kochi"
 
-- name:
+- setname: "fonts:koruri"
+  name:
     - koruri
     - koruri-ttf
     - ttf-koruri
-  setname: "fonts:koruri"
 
 # L
-- name:
+- setname: "fonts:lateef"
+  name:
     - fonts-sil-lateef
     - fonts-ttf-sil-lateef
     - lateef_font
     - sil-lateef-fonts
     - ttf-sil-lateef
-  setname: "fonts:lateef"
 
-- name:
+- setname: "fonts:liberation"
+  name:
     - font-liberation
     - fonts-liberation
     - fonts-liberation2
@@ -784,16 +820,14 @@
     - liberationsansnarrow
     - ttf-liberation
     - ttf-liberation-sans-narrow
-  setname: "fonts:liberation"
 
-- { name: "fonts:liberation", verpat: "2\\..*", setname: "fonts:liberation2" }
-
-- name:
+- setname: "fonts:linex"
+  name:
     - fonts-linex
     - ttf-linex-fonts
-  setname: "fonts:linex"
 
-- name:
+- setname: "fonts:linuxlibertine"
+  name:
     - fonts-linuxlibertine
     - fonts-ttf-libertine
     - fonts-ttf-linuxlibertine
@@ -805,32 +839,33 @@
     - linuxlibertine-fonts-otf
     - linuxlibertine-fonts-ttf
     - ttf-linux-libertine
-  setname: "fonts:linuxlibertine"
-- { name: libertine, category: media-fonts, setname: "fonts:linuxlibertine" }
-- { name: [ttf-linux-libertine-g,linuxlibertine-g], setname: "fonts:linuxlibertine-g" }
 
-- name:
+- { setname: "fonts:linuxlibertine",   name: libertine, category: media-fonts }
+- { setname: "fonts:linuxlibertine-g", name: [linuxlibertine-g,ttf-linux-libertine-g] }
+
+- setname: "fonts:lklug-sinhala"
+  name:
     - fonts-lklug-sinhala
     - sinhala-lklug-font-ttf
-  setname: "fonts:lklug-sinhala"
 
-- name:
+- setname: "fonts:lobstertwo"
+  name:
     - fonts-lobstertwo
     - lobstertwo
     - ttf-impallari-lobstertwo
-  setname: "fonts:lobstertwo"
 
-- { namepat: "(?:fonts-)?(?:ttf-)?(lohit-.+?)(?:-fonts)?", setname: "fonts:$1", last: true }
-- { name: [ fonts-ttf-lohit, lohit ], setname: "fonts:lohit" }
+- { setname: "fonts:$1",               namepat: "(?:fonts-)?(?:ttf-)?(lohit-.+?)(?:-fonts)?", last: true }
+- { setname: "fonts:lohit",            name: [fonts-ttf-lohit,lohit] }
 
 # M
-- name:
+- setname: "fonts:micro-misc"
+  name:
     - font-micro-misc
     - x11-font-micro-misc
     - xorg-font-micro-misc
-  setname: "fonts:micro-misc"
 
-- name:
+- setname: "fonts:mikachan"
+  name:
     - fonts-mikachan
     - mikachan-font-otf
     - mikachan-font-ttc
@@ -838,82 +873,82 @@
     - mikachan-fonts
     - mikachanfont
     - ttf-mikachan
-  setname: "fonts:mikachan"
 
-- name:
+- setname: "fonts:montecarlo"
+  name:
     - montecarlo
     - montecarlo-font
     - montecarlo_fonts
-  setname: "fonts:montecarlo"
 
-- name:
+- setname: "fonts:mplus" # XXX: e.g. debian gas fonts-mplus 062 and xfonts-mplus 2.2.4. What's the difference?
+  name:
     - fonts-mplus
     - fonts-ttf-mplus
     - mplus
     - mplus-font
     - mplus-fonts
     - ttf-mplus
-  setname: "fonts:mplus" # XXX: e.g. debian gas fonts-mplus 062 and xfonts-mplus 2.2.4. What's the difference?
 
-- name:
+- setname: "fonts:mutt-misc"
+  name:
     - font-mutt-misc
     - x11-font-mutt-misc
     - xorg-font-mutt-misc
-  setname: "fonts:mutt-misc"
 
 # N
-- name:
+- setname: "fonts:nafees-nastaleeq"
+  name:
     - fonts-ttf-nafees-nastaleeq
     - nafees-nastaleeq-fonts
     - nafees_nastaleeq
-  setname: "fonts:nafees-nastaleeq"
 
-- name:
+- setname: "fonts:nafees-naskh"
+  name:
     - fonts-ttf-nafees-naskh
     - nafees-naskh-fonts
-  setname: "fonts:nafees-naskh"
 
-- name:
+- setname: "fonts:nafees-pakistani-naskh"
+  name:
     - fonts-ttf-nafees-pakistani-naskh
     - nafees-pakistani-naskh-fonts
-  setname: "fonts:nafees-pakistani-naskh"
 
-- name:
+- setname: "fonts:nafees-pakistani-web-naskh"
+  name:
     - fonts-ttf-nafees-pakistani-web-naskh
     - nafees-pakistani-web-naskh-fonts
-  setname: "fonts:nafees-pakistani-web-naskh"
 
-- name:
+- setname: "fonts:nafees-riqa"
+  name:
     - fonts-ttf-nafees-riqa
     - nafees-riqa-fonts
     - nafees_riqa
-  setname: "fonts:nafees-riqa"
 
-- name:
+- setname: "fonts:nafees-tehreer-naskh"
+  name:
     - nafees-tehreer-naskh-fonts
     - fonts-ttf-nafees-tehreer-naskh
-  setname: "fonts:nafees-tehreer-naskh"
 
 # O
-- name:
+- setname: "fonts:ohruri"
+  name:
     - ohruri-ttf
     - ttf-ohruri
-  setname: "fonts:ohruri"
 
-- name:
+- setname: "fonts:oldstandard"
+  name:
     - fonts-oldstandard
     - fonts-otf-oldstandard
     - fonts-ttf-oldstandard
     - oldstandard
     - oldstandard-sfd-fonts
     - thessalonica-oldstandard-fonts
-  setname: "fonts:oldstandard"
 
-- name:
+- setname: "fonts:opendesktop"
+  name:
     - opendesktop-fonts
-  setname: "fonts:opendesktop"
 
-- name:
+- setname: "fonts:opendyslexic"
+  name:
     - font-open-dyslexic
     - fonts-ttf-open-dyslexic
     - fonts-opendyslexic
@@ -921,33 +956,33 @@
     - open-dyslexic
     - open-dyslexic-fonts
     - opendyslexic-fonts
-  setname: "fonts:opendyslexic"
 
-- name:
+- setname: "fonts:opensans"
+  name:
     - fonts-ttf-opensans
     - google-opensans-fonts
     - opensans-ttf
     - ttf-opensans
-  setname: "fonts:opensans"
 
-- name:
+- setname: "fonts:overpass"
+  name:
     - fonts-ttf-overpass
     - otf-overpass
     - overpass
     - overpass-desktop-fonts
     - overpass-fonts
     - overpass-webfonts
-  setname: "fonts:overpass"
-- { name: "fonts:overpass", wwwpart: overpass-api-python-wrapper, setname: "python:overpass" } # don't mix up
+    - ttf-overpass
 
-- name:
+- setname: "fonts:oxygen"
+  name:
     - fonts-ttf-oxygen
     - oxygen-fonts
     - ttf-oxygen
-  setname: "fonts:oxygen"
 
 # P
-- name:
+- setname: "fonts:paratype"
+  name:
     - fonts-pt
     - fonts-ttf-paratype
     - fonts-ttf-paratype-pt-mono
@@ -962,64 +997,64 @@
     - ttf-paratype
     - ttf-paratype-pt-fonts
     - ttf-pt-fonts
-  setname: "fonts:paratype"
 
-- name:
+- setname: "fonts:pecita"
+  name:
     - fonts-pecita
     - otf-pecita
     - otf-pecita-font-stable
     - pecita
-  setname: "fonts:pecita"
 
-- name:
+- setname: "fonts:poltawski-antiqua"
+  name:
     - fonts-otf-poltawski-antiqua
     - fonts-ttf-poltawski-antiqua
-  setname: "fonts:poltawski-antiqua"
 
-- name:
+- setname: "fonts:pothana2000"
+  name:
     - fonts-ttf-pothana2000
     - pothana2000-fonts
     - pothana2k
-  setname: "fonts:pothana2000"
 
-- name:
+- setname: "fonts:proggy"
+  name:
     - proggy-fonts
     - proggyfonts
     - proggy_fonts-ttf
     - proggy_fonts
     - proggy-fonts
-  setname: "fonts:proggy"
 
 # Q
-- name:
+- setname: "fonts:quattrocento"
+  name:
     - fonts-quattrocento
     - quattrocento
     - ttf-impallari-quattrocento
-  setname: "fonts:quattrocento"
 
-- name:
+- setname: "fonts:quattrocento-sans"
+  name:
     - quattrocento-sans
     - ttf-impallari-quattrocento-sans
-  setname: "fonts:quattrocento-sans"
 
 # R
-- name:
+- setname: "fonts:radisnoir"
+  name:
     - fonts-radisnoir
     - ttf-radisnoir
-  setname: "fonts:radisnoir"
 
 # S
-- name:
+- setname: "fonts:sawarabi-gothic"
+  name:
     - fonts-sawarabi-gothic
     - ttf-sawarabi-gothic
-  setname: "fonts:sawarabi-gothic"
 
-- name:
+- setname: "fonts:sawarabi-mincho"
+  name:
     - fonts-sawarabi-mincho
     - ttf-sawarabi-mincho
-  setname: "fonts:sawarabi-mincho"
 
-- name:
+- setname: "fonts:sazanami"
+  name:
     - fonts-ttf-sazanami
     - ja-sazanami-ttf
     - sazanami
@@ -1027,22 +1062,22 @@
     - sazanami-fonts
     - sazanami-fonts-ttf
     - ttf-sazanami
-  setname: "fonts:sazanami"
 
-- name:
+- setname: "fonts:scheherazade"
+  name:
     - fonts-sil-scheherazade
     - fonts-ttf-sil-scheherazade
     - scheherazade_font
     - sil-scheherazade-fonts
     - ttf-sil-scheherazade
-  setname: "fonts:scheherazade"
 
-- name:
+- setname: "fonts:sgi"
+  name:
     - sgi-fonts
     - sgifonts
-  setname: "fonts:sgi"
 
-- name:
+- setname: "fonts:sil-abyssinica"
+  name:
     - abyssinica
     - abyssinica-fonts
     - fonts-sil-abyssinica
@@ -1050,17 +1085,17 @@
     - sil-abyssinica
     - sil-abyssinica-fonts
     - ttf-sil-abyssinica
-  setname: "fonts:sil-abyssinica"
 
-- name:
+- setname: "fonts:sil-andika"
+  name:
     - andika
     - fonts-sil-andika
     - fonts-ttf-sil-andika
     - sil-andika-fonts
     - ttf-andika
-  setname: "fonts:sil-andika"
 
-- name:
+- setname: "fonts:sil-charis"
+  name:
     - charis
     - charissil
     - fonts-sil-charis
@@ -1068,16 +1103,16 @@
     - fonts-ttf-sil-charis
     - sil-charis
     - sil-charis-fonts
-  setname: "fonts:sil-charis"
 
-- name:
+- setname: "fonts:sil-charis-compact"
+  name:
     - charissilcompact
     - fonts-sil-charis-compact
     - fonts-ttf-sil-charis-compact
     - sil-charis-compact-fonts
-  setname: "fonts:sil-charis-compact"
 
-- name:
+- setname: "fonts:sil-doulos"
+  name:
     - doulos
     - doulossil
     - fonts-sil-doulos
@@ -1085,67 +1120,67 @@
     - fonts-ttf-sil-doulos
     - sil-doulos
     - sil-doulos-fonts
-  setname: "fonts:sil-doulos"
 
-- name:
+- setname: "fonts:sil-doulos-compact"
+  name:
     - doulossilcompact
     - fonts-sil-doulos-compact
-  setname: "fonts:sil-doulos-compact"
 
-- name:
+- setname: "fonts:sil-ezra"
+  name:
     - fonts-sil-ezra
     - sil-ezra
     - ttf-sil-ezra
-  setname: "fonts:sil-ezra"
 
-- name:
+- setname: "fonts:sil-galatia"
+  name:
     - fonts-sil-galatia
     - sil-galatia
-  setname: "fonts:sil-galatia"
 
-- name:
+- setname: "fonts:sil-mingzat"
+  name:
     - fonts-ttf-mingzat
     - fonts-ttf-sil-mingzat
     - mingzat-fonts
     - sil-mingzat-fonts
-  setname: "fonts:sil-mingzat"
 
-- name:
+- setname: "fonts:sil-mondulkiri"
+  name:
     - fonts-sil-mondulkiri
     - mondulkiri
-  setname: "fonts:sil-mondulkiri"
 
-- name:
+- setname: "fonts:sil-mondulkiri-extra"
+  name:
     - fonts-sil-mondulkiri-extra
-  setname: "fonts:sil-mondulkiri-extra"
 
-- name:
+- setname: "fonts:sil-nuosu"
+  name:
     - fonts-sil-nuosusil
     - fonts-ttf-sil-nuosu
     - nuosu-fonts
     - nuosu-sil
     - sil-nuosu-fonts
-  setname: "fonts:sil-nuosu"
 
-- name:
+- setname: "fonts:sil-padauk"
+  name:
     - fonts-sil-padauk
     - fonts-ttf-sil-padauk
     - padauk
     - sil-padauk
     - sil-padauk-fonts
-  setname: "fonts:sil-padauk"
 
-- name:
+- setname: "fonts:sophia-nubian"
+  name:
     - fonts-sil-sophia-nubian
     - sophia-nubian
-  setname: "fonts:sophia-nubian"
 
-- name:
+- setname: "fonts:silkscreen"
+  name:
     - fonts-ttf-silkscreen
     - silkscreen-fonts
-  setname: "fonts:silkscreen"
 
-- name:
+- setname: "fonts:stix"
+  name:
     - fonts-otf-stix
     - fonts-stix
     - otf-stix
@@ -1153,53 +1188,53 @@
     - stix-otf
     - stix-two
     - stixfonts
-  setname: "fonts:stix"
 
 # T
-- name:
+- setname: "fonts:tamzen"
+  name:
     - font-tamzen
     - tamzen-font
-  setname: "fonts:tamzen"
 
-- name:
+- setname: "fonts:tagbanwa"
+  name:
     - tagbanwa-fonts
     - ttf-tagbanwa
-  setname: "fonts:tagbanwa"
 
-- name:
+- setname: "fonts:terminus"
+  name:
     - fonts-bitmap-terminus
     - xfonts-terminus
     - terminus-bitmap-fonts
     - terminus-cyrillic
-  setname: "fonts:terminus"
 
-- name:
+- setname: "fonts:terminus-ttf"
+  name:
     - terminus-font-ttf
     - terminus-ttf
     - terminus_ttf
-  setname: "fonts:terminus-ttf"
 
-- name:
+- setname: "fonts:tiresias"
+  name:
     - fonts-tiresias
     - fonts-ttf-tiresias
     - tiresias-fonts
     - ttf-tiresias
-  setname: "fonts:tiresias"
 
-- name:
+- setname: "fonts:thibault"
+  name:
     - fonts-ttf-thibault
     - thibault-fonts
-  setname: "fonts:thibault"
 
-- name:
+- setname: "fonts:tulrich-tuffy"
+  name:
     - fonts-ttf-tulrich-tuffy
     - fonts-tuffy
     - ttf-tuffy
     - tulrich-tuffy-fonts
-  setname: "fonts:tulrich-tuffy"
 
 # U
-- name:
+- setname: "fonts:ubuntu"
+  name:
     - font-ubuntu
     - fonts-ttf-ubuntu
     - fonts-ttf-ubuntu-font-family
@@ -1212,36 +1247,36 @@
     - ubuntu-fonts
     - ubuntu.font
     - ubuntu_font_family
-  setname: "fonts:ubuntu"
 
-- name:
+- setname: "fonts:ubuntu-title"
+  name:
     - fonts-ttf-ubuntu-title
     - fonts-ubuntu-title
     - ttf-ubuntu-title
     - ubuntu-title-fonts
-  setname: "fonts:ubuntu-title"
 
-- name:
+- setname: "fonts:ukij-tuz"
+  name:
     - fonts-ttf-ukij-tuz
     - ukij-tuz-fonts
-  setname: "fonts:ukij-tuz"
 
-- name:
+- setname: "fonts:univga"
+  name:
     - fonts-bitmap-univga
     - uni-vga
     - univga
     - univga-font
-  setname: "fonts:univga"
 
-- name:
+- setname: "fonts:umefont"
+  name:
     - fonts-horai-umefont
     - horai-ume-fonts
     - ttf-ume
     - umefont-ttf
-  setname: "fonts:umefont"
 
 # V
-- name:
+- setname: "fonts:vlgothic"
+  name:
     - fonts-ttf-japanese-vlgothic
     - fonts-ttf-vlgothic
     - fonts-vlgothic
@@ -1251,19 +1286,19 @@
     - vlgothic
     - vlgothic-fonts
     - vlgothic-ttf
-  setname: "fonts:vlgothic"
 
-- name:
+- setname: "fonts:vdrsymbols"
+  name:
     - ttf-vdrsymbols
     - vdrsymbols-ttf
-  setname: "fonts:vdrsymbols"
 
-- name:
+- setname: "fonts:vemana2000"
+  name:
     - fonts-ttf-vemana2000
     - vemana2000-fonts
-  setname: "fonts:vemana2000"
 
-- name:
+- setname: "fonts:vollkorn"
+  name:
     - font-vollkorn
     - fonts-otf-vollkorn
     - fonts-vollkorn
@@ -1271,10 +1306,10 @@
     - vollkorn
     - vollkorn-fonts
     - vollkorn-ttf
-  setname: "fonts:vollkorn"
 
 # W
-- name:
+- setname: "fonts:wqy-zenhei"
+  name:
     - font-wqy-zenhei
     - fonts-ttf-wqy-zenhei
     - fonts-wqy-zenhei
@@ -1285,20 +1320,20 @@
     - wqy-zenhei-fonts
     - wqy_zenhei
     - zh-wqy-zenhei-ttf
-  setname: "fonts:wqy-zenhei"
-- { name: "wqy-zenhei-nightly_build", setname: "fonts:wqy-zenhei", ignore: true }
+
+- { setname: "fonts:wqy-zenhei",       name: wqy-zenhei-nightly_build, ignore: true }
 
 # X
-- { namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)", setname: "fonts:$1-$2" } # xorg
+- { setname: "fonts:$1-$2",            namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)" } # xorg
 
 # Y
-- name:
+- setname: "fonts:yanone-kaffeesatz"
+  name:
     - fonts-ttf-yanone-kaffeesatz
     - fonts-yanone-kaffeesatz
     - otf-yanone-kaffeesatz
     - otf-yanone-kaffeesatz-ibx
     - ttf-yanone-kaffeesatz-ibx
     - yanone-kaffeesatz-fonts
-  setname: "fonts:yanone-kaffeesatz"
 
 # Z

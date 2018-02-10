@@ -58,7 +58,3 @@
     - xstrp4
     - zarith
   setname: "ocaml:$0"
-
-# recover non-modules
-- { name: "ocaml:mode", setname: "ocaml-mode" }
-- { name: "ocaml:mode.el", setname: "ocaml-mode.el" }
