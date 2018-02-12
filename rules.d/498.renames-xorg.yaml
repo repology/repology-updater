@@ -52,7 +52,7 @@
 - { namepat: "(?:xorg-|x11-)+(bdftopcf|beforelight|editres|gccmakedep|imake|luit|makedepend|mkfontdir|mkfontscale|setxkbmap|transset|twm|xauth|xcb-util-cursor|xcb-util-image|xcb-util-keysyms|xcb-util-renderutil|xcb-util-wm|xcb-util-xrm|xfontsel|xkeyboard-config|xprop|xset|xsetmode|xsetpointer|xsetroot|xtrans|xmessage|xtrap)", setname: "$1" }
 - { namepat: "(?:xorg-|x11-)+(xtrans)-devel", setname: "$1", ignore: true }
 - { name: xorg-xtransproto, setname: xtrans } # ravenports manually split this out of xtrans
-- { name: [fontutil,font-util,x11-font-util,xorg-font-util,xorg-fontutil], setname: font-util, last: true } # XXX: save from font rules converting it to fonts:util
+- { name: [fontutil,font-util,x11-font-util,xorg-font-util,xorg-fontutil], setname: font-util }
 
 # libs
 - { namepat: "(?:xorg-|x11-)+(?:lib)?(fontenc|ice|fs|oldx|pciaccess|sm|x11|xau|xaw|xcb|xcomposite|xcursor|xdamage|xdmcp|xevie|xext|xfixes|xfontcache|xft|xi|xinerama|xkbfile|xkbui|xmu|xp|xpm|xrandr|xrender|xres|xscrnsaver|xshmfence|xt|xtrans|xtrap|xtst|xv|xvmc|xxf86dga|xxf86misc|xxf86vm)", setname: "lib$1" }
