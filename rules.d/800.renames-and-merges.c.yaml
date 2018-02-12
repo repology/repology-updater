@@ -117,6 +117,7 @@
 - { setname: cpprestsdk,               name: [cpprest,casablanca] }
 - { setname: cpptest,                  name: libcpptest }
 - { setname: cracklib,                 name: cracklib2 }
+- { setname: crashplan,                name: linux-crashplan, family: freebsd }
 - { setname: creduce,                  name: c-reduce }
 - { setname: crimson-fields,           name: crimson, verpat: "0\\.5.*" } # XXX: MUST be renamed upstream
 - { setname: crimson-fields,           name: crimsonfields }

@@ -25,6 +25,7 @@
 - { setname: gearmand,                 name: [gearmand-devel,gearman] }
 - { setname: geki2,                    name: geki2-kxl, family: gentoo } # XXX: recheck
 - { setname: geki3,                    name: geki3-kxl, family: gentoo } # XXX: recheck
+- { setname: genpuid,                  name: linux-genpuid, family: freebsd }
 - { setname: geoclue,                  namepat: "(?:lib)?geoclue[0-9._-]*" }
 - { setname: geocode-glib,             name: libgeocode-glib }
 - { setname: geoip,                    name: libgeoip }

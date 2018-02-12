@@ -9,6 +9,8 @@
 - { setname: unarr,                    name: libunarr }
 - { setname: unburden-home-dir,        name: "perl:unburden-home-dir" }
 - { setname: uncrustify,               name: uncrustify0.60 }
+- { setname: unigine-heaven,           name: linux-unigine-heaven, family: freebsd }
+- { setname: unigine-valley,           name: linux-unigine-valley, family: freebsd }
 - { setname: unison,                   name: unison-devel, ignore: true }
 - { setname: unison,                   name: unison-nox11, addflavor: true }
 - { setname: unison,                   namepat: "unison[0-9.-]+(?:-compat)?" }

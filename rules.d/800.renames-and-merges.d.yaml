@@ -17,6 +17,7 @@
 - { setname: ddgr,                     name: "python:ddgr", addflavor: python }
 - { setname: deadbeef,                 name: deadbeef-with-plugins }
 - { setname: deal.ii,                  name: [dealii,dealii-openmpi,deal-ii] }
+- { setname: defcon,                   name: linux-defcon, family: freebsd }
 - { setname: deis,                     name: [deis-client,deisctl] }
 - { setname: dejagnu,                  name: deja-gnu }
 - { setname: devede,                   name: devedeng }
@@ -49,5 +50,6 @@
 - { setname: dungeon-crawl,            name: dungeoncrawl }
 - { setname: dwarf-fortress,           name: dwarffortress }
 - { setname: dwarf-fortress,           name: linux-dwarffortress }
+- { setname: dwarf-fortress,           name: linux-dwarffortress, family: freebsd }
 - { setname: dynamips,                 name: dynamips-community, family: freebsd }
 - { setname: dzen,                     name: dzen2 }

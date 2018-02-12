@@ -11,6 +11,8 @@
 - { setname: tdb,                      name: libtdb }
 - { setname: telegram-desktop,         name: [telegram-desktop-bin,telegram-desktop-systemqt,telegram-desktop-systemqt-emojione,telegram-desktop-systemqt-notoemoji] }
 - { setname: telegram-desktop,         name: [telegram-desktop-bin-dev,telegram-desktop-dev], ignore: true }
+- { setname: telegram-desktop,         name: linux-telegram-desktop, family: freebsd }
+- { setname: telegram-desktop,         name: telegram-desktop-beta }
 - { setname: telepathy-farstream,      name: [libtelepathy-farstream,telepathy-farstream-0.4] }
 - { setname: template-glib,            name: libtemplate-glib }
 - { setname: terminal_markdown_viewer, name: mdv }
@@ -56,4 +58,5 @@
 - { setname: tremor,                   name: libtremor }
 - { setname: trigger-rally,            name: trigger, family: gentoo }
 - { setname: tripwire,                 name: [tripwire-131,tripwire12] }
+- { setname: tsmuxer,                  name: linux-tsmuxer, family: freebsd }
 - { setname: twolame,                  name: two-lame }
