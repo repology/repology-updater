@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-import os
 
 from repology.package import Package
 from repology.version import VersionCompare

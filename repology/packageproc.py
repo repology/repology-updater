@@ -17,7 +17,7 @@
 
 from functools import cmp_to_key
 
-from repology.package import Package, PackageFlags, VersionClass
+from repology.package import PackageFlags, VersionClass
 
 
 def PackagesetDeduplicate(packages):
@@ -277,10 +277,6 @@ def PackagesetSortByNameVersion(packages):
         return p2.VersionCompare(p1)
 
     return sorted(packages, key=cmp_to_key(compare))
-
-
-def PackagesetToFamilies(packages):
-    return set([package.family for package in packages])
 
 
 def PackagesetAggregateByVersion(packages, classmap={}):

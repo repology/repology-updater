@@ -87,6 +87,7 @@
 - { setname: "apmod:survey",           name: mod_survey }
 - { setname: "apmod:wsgi",             name: mod_wsgi }
 - { setname: "apmod:wsgi",             namepat: "apmod:wsgi[0-9]+" }
+- { setname: appstream-glib,           name: libappstream-glib }
 - { setname: apq,                      name: apq-base } # ravenports
 - { setname: apr,                      namepat: "(?:lib)?apr[0-9._-]*" }
 - { setname: apr-util,                 name: aprutil1 }

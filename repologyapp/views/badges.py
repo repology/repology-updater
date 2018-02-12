@@ -20,7 +20,6 @@ import flask
 from repologyapp.globals import *
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.config import config
 from repology.packageproc import PackagesetToBestByRepo
 
 

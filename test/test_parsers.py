@@ -20,7 +20,6 @@
 import unittest
 
 from repology.config import config
-from repology.package import Package
 from repology.repoman import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 

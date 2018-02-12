@@ -41,7 +41,7 @@ profile-reparse::
 	python3 -c 'import pstats; stats = pstats.Stats("_profile"); stats.sort_stats("time"); stats.print_stats()' | less
 
 flake8:
-	${FLAKE8} --ignore=E501,F401,F405,F403,E265,D10,E722 --application-import-names=repology *.py repology repologyapp test
+	${FLAKE8} --ignore=E501,F405,F403,E265,D10,E722,N802 --application-import-names=repology *.py repology repologyapp test
 
 flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test

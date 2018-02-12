@@ -52,7 +52,7 @@ def Main():
         urls.extend(map(lambda row: '/maintainer/' + row[0], database.Query('SELECT maintainer FROM maintainers')))
         urls.extend(map(lambda row: '/repository/' + row[0], database.Query('SELECT name FROM repositories')))
     elif options.metapackages:
-        LINKS_PER_METAPACKAGE = 3
+        links_per_metapackage = 3
 
         print('Guessing threshold for important metapackages', file=sys.stderr)
 
@@ -63,7 +63,7 @@ def Main():
                 num_repos
             )[0][0]
 
-            num_urls_total = len(urls) + num_metapackages * LINKS_PER_METAPACKAGE
+            num_urls_total = len(urls) + num_metapackages * links_per_metapackage
 
             print('Threshold = {}, {} metapackages, {} total urls'.format(num_repos, num_metapackages, num_urls_total), file=sys.stderr)
 
@@ -81,7 +81,7 @@ def Main():
         for row in database.Query(
                 'SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families >= %s LIMIT %s',
                 num_repos,
-                (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE):
+                (options.max_urls - len(urls)) // links_per_metapackage):
             urls.append('/metapackage/' + row[0] + '/versions')
             urls.append('/metapackage/' + row[0] + '/packages')
             urls.append('/metapackage/' + row[0] + '/information')
@@ -90,7 +90,7 @@ def Main():
         for row in database.Query(
                 'SELECT DISTINCT effname FROM metapackage_repocounts WHERE num_families = %s LIMIT %s',
                 num_repos - 1,
-                (options.max_urls - len(urls)) // LINKS_PER_METAPACKAGE):
+                (options.max_urls - len(urls)) // links_per_metapackage):
             urls.append('/metapackage/' + row[0] + '/versions')
             urls.append('/metapackage/' + row[0] + '/packages')
             urls.append('/metapackage/' + row[0] + '/information')

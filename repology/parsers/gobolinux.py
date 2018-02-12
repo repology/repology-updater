@@ -24,13 +24,13 @@ from repology.version import VersionCompare
 
 
 def ExpandDownloadUrlTemplates(url):
-    httpSourceforge = 'http://downloads.sourceforge.net'
-    ftpGnu = 'ftp://ftp.gnu.org/gnu'
-    return url.replace('$httpSourceforge', httpSourceforge) \
-              .replace('${httpSourceforge}', httpSourceforge) \
-              .replace('$ftpGnu', ftpGnu) \
-              .replace('${ftpGnu}', ftpGnu) \
-              .replace('$ftpAlphaGnu', ftpGnu)
+    http_sourceforge = 'http://downloads.sourceforge.net'
+    ftp_gnu = 'ftp://ftp.gnu.org/gnu'
+    return url.replace('$httpSourceforge', http_sourceforge) \
+              .replace('${httpSourceforge}', http_sourceforge) \
+              .replace('$ftpGnu', ftp_gnu) \
+              .replace('${ftpGnu}', ftp_gnu) \
+              .replace('$ftpAlphaGnu', ftp_gnu)
 
 
 class GoboLinuxGitParser():

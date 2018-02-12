@@ -34,6 +34,7 @@ class VersionClass:
     noscheme = 9
     rolling = 10
 
+    @staticmethod
     def IsIgnored(cl):
         """Return whether a specified class is equivalent to ignored."""
         return (cl == VersionClass.ignored or
@@ -42,6 +43,7 @@ class VersionClass:
                 cl == VersionClass.noscheme or
                 cl == VersionClass.rolling)
 
+    @staticmethod
     def ToString(cl):
         """Return string representation of a version class."""
         return {
@@ -83,6 +85,7 @@ class PackageFlags:
     p_is_patch = 1 << 10
     any_is_patch = 1 << 11
 
+    @staticmethod
     def GetMetaorder(cl):
         """Return a higher order version sorting key based on flags.
 

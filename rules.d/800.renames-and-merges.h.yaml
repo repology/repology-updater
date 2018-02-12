@@ -2,6 +2,8 @@
 
 - { setname: hadoop,                   name: hadoop2 }
 - { setname: hashcat,                  name: hashcat-legacy }
+- { setname: "haskell:pandoc-citeproc", name: pandoc-citeproc }
+- { setname: "haskell:pandoc-citeproc-preamble", name: pandoc-citeproc-preamble }
 - { setname: haxe,                     name: haxe2 }
 - { setname: haxe,                     name: haxe_bin, addflavor: bin }
 - { setname: hedgewars,                name: hedgewars-server, addflavor: server }
@@ -9,6 +11,7 @@
 - { setname: hermes,                   name: libhermes }
 - { setname: hgflow,                   name: hg-flow }
 - { setname: hitori,                   name: gnome-games-hitori }
+- { setname: home-assistant,           name: homeassistant }
 - { setname: hostapd,                  name: [hostapd-rtl,hostapd-rtl871xdrv,hostapd1] }
 - { setname: hsqldb,                   namepat: "hsqldb[0-9._-]+" }
 - { setname: html2text,                name: html2text-with-utf8 }

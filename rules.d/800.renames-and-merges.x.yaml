@@ -38,6 +38,8 @@
 - { setname: xine-ui,                  name: [xine,xine-ui2] }
 - { setname: xmbmon,                   name: mbmon }
 - { setname: xmlrpc-c,                 name: xmlrpc-c-ss } # "super stable"
+- { setname: xmlsec,                   name: [xmlsec1,libxmlsec1] }
+- { setname: xmlsec,                   name: xmlsec-docs, addflavor: docs }
 - { setname: xmltooling,               name: xmltooling-c }
 - { setname: xmobar,                   name: [xmobar-alsa,xmobar-volume] }
 - { setname: xmoto,                    name: x-moto }

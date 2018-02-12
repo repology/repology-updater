@@ -284,6 +284,7 @@
 - { name: "fonts:quattrocento",        ver: "2.000",                 family: arch,         ignore: true } # webpage says it's 1.1
 - { name: "fonts:ubuntu",              ver: "1.0",                   family: pclinuxos,    ignore: true } # no such version on the website
 - { name: foomatic,                    verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
+- { name: four-in-a-row,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: freecad,                     ver: "0.17.12018",            family: freebsd,      ignore: true }
 - { name: freeciv,                     ver: "2.6.0",                 family: fedora,       ignore: true }
 - { name: freeminer,                   verlonger: 4,                 family: fdroid,       ignore: true }
@@ -315,6 +316,7 @@
 - { name: gcr,                         verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: geary,                       ver: "0.12",                  family: debuntu,      ignore: true } # not released yet
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignore: true } # not released yet
+- { name: gedit,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gettext,                     ver: "2",                                           ignore: true } # libintl from LEDE
 - { name: geocode-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gimp,                        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -328,6 +330,7 @@
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
 - { name: gnome-boxes,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-builder,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-calculator,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-disk-utility,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # see "select distinct effname from packages where version like '3.27.%' and devel=false;"
 - { name: gnome-keyring,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-logs,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -373,6 +376,7 @@
 # H
 - { name: handbrake,                   verpat: "[0-9]{4}.*",                               ignore: true } # trisquel
 - { name: hashcat,                     verpat: "3\\.[1-9][0-9]",                           ignore: true } # it uses X.Y.Z scheme
+- { name: "haskell:pandoc-citeproc",                                 ruleset: aur,         incorrect: true } # it's actually pandoc, not pandoc-cityproc
 - { name: haxe,                        verpat: "4\\..*",             family: freshcode,    ignore: true } # there's no 4.0.0
 - { name: hex2bin,                     verpat: "20[0-9]{6}.*",                             ignore: true } # AUR snapshot
 - { name: hitori,                      ver: "3.24.1",                family: nix,          incorrect: true }
@@ -856,6 +860,7 @@
 - { name: vorbis-tools,                verlonger: 3,                 family: kaos,         incorrect: true } # fake
 - { name: vpnc,                        ver: "0.5.3.3",               family: kaos,         incorrect: true } # fake
 - { name: vpnc,                        verpat: "0.5.3.*post.*",                            ignore: true } # nix
+- { name: vte,                         verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 
 # W
 - { name: w3m,                         verlonger: 3,                                       ignore: true }
@@ -874,6 +879,7 @@
 - { name: wine,                        verpat: ".*r.*",                                    devel: true }
 - { name: winexe,                      ver: "1.1",                   family: debuntu,      incorrect: true } # snapshot
 - { name: wire,                        verpat: "20[0-9]{6}",                               ignore: true } # aur snapshot
+- { name: wireshark,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # assuming odd versions are devel
 - { name: wireless-regdb,              verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/refs/
 - { name: whatweb,                     vergt: "0.4.7",               family: [debuntu,openbsd,gentoo,freebsd], ignore: true } # 0.4.8 has never been released
 - { name: wordwarvi,                   ver: "1.1",                   family: [ sisyphus, fedora ], incorrect: true }
@@ -894,20 +900,25 @@
 - { name: xdg-utils,                   verpat: "[0-9]+",                                   ignore: true }
 - { name: xdot,                        ver: "20121124",                                    ignore: true }
 - { name: xdotool,                     ver: "20110530.1",                                  ignore: true }
+- { name: xhyve,                       verpat: "20[0-9]{6}",                               ignore: true } # macports
 - { name: xmbmon,                      verpat: "[0-9]{3}",                                 incorrect: true } # it's 2.05, not 205. Also not 2.0.5.
 - { name: xmlrpc-c,                    vergt: "1.39.12",                                   devel: true } # http://xmlrpc-c.sourceforge.net/change_super_stable.html
 - { name: xl2tpd,                      ver: "20140214",                                    ignore: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   incorrect: true }
 - { name: xml-coreutils,               ver: "0.8a",                                        outdated: true }
+- { name: xmltoman,                    verge: "0.5",                                       successor: true }
 - { name: xmoto,                       ver: "0.5.12",                family: [ rosa ],     incorrect: true } # no such version
 - { name: "xorg:video-intel",          verpat: ".*20[0-9]{2}.*",                           noscheme: true }
 - { name: "xorg:video-intel",          verlonger: 3,                                       ignore: true }
 - { name: xorg-server,                 verlonger: 3,                 family: crux,         ignore: true } # bogus suffux
 - { name: xpdf,                        ver: "4.02",                  family: freebsd,      incorrect: true }
 - { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignore: true }
+- { name: xtitle,                      verpat: "20[0-9]{6}",                               ignore: true }
+- { name: xtitle,                      ver: "20170206",                                    outdated: true } # 0.4.3 which is latest normal version ls from feb 15, e.g. newer
 - { name: xz-utils,                    ver: "5.03",                                        incorrect: true } # gobolinux garbage
 
 # Y
+- { name: yelp-tools,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: yelp-xsl,                    verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: yosys,                       verpat: "20[0-9]{2}.*",                             ignore: true } # nix
 - { name: you-get,                     verpat: "20[0-9]{2}.*",                             ignore: true } # deepin garbage
@@ -916,6 +927,8 @@
 
 # Z
 - { name: z,                           ver: "1.11",                                        ignore: true } # https://github.com/rupa/z/issues/205
+- { name: zabbix,                      ver: "3.4.7",                 family: sisyphus,     incorrect: true }
+- { name: zabbix,                                                    family: sisyphus,     untrusted: true }
 - { name: zathura,                     ver: "20101104",                                    ignore: true }
 - { name: zbar,                        verge: "0.20",                                      successor: true } # linuxtv.org fork
 - { name: zbar,                        verpat: ".*20[0-9]{2}.*",                           ignore: true }

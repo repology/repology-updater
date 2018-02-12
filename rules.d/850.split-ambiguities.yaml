@@ -338,6 +338,9 @@
 - { name: tome, wwwpart: tome.te4.org, setname: tales-of-majeyal } # aur garbage
 - { name: tome, warning: "please classify me" }
 
+- { name: trash, wwwpart: andreafrancia, setname: trash-cli }
+- { name: trash, wwwpart: [hasseg,ali-rantakari], setname: trash-osx }
+
 - { name: udptunnel, wwwpart: lennox, setname: udptunnel-lennox }
 - { name: udptunnel, ruleset: openbsd, setname: udptunnel-lennox }
 
@@ -379,6 +382,10 @@
 - { name: xclip, setname: emacs-xclip, family: gentoo, category: app-emacs }
 
 - { name: xdrfile, family: arch, verpat: "2\\..*", setname: xdrfile-wesbarnett } # fork
+
+- { name: xsv, wwwpart: burntsushi, setname: "rust:xsv" }
+
+- { name: xtitle, wwwpart: kinzler, setname: xtitle-kinzler }
 
 - { name: yq, wwwpart: mikefarah, setname: yq-mikefarah }
 
