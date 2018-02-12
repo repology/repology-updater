@@ -268,10 +268,22 @@
     - fonts-otf-comic-neue
     - ttf-comic-neue
 
+- setname: "fonts:cns11643"
+  name:
+    - cns11643-font
+    - font-cns11643
+    - font-cns11643-swjz
+    - fonts-cns11643
+
 - setname: "fonts:consolamono"
   name:
     - consolamono-ttf
     - fonts-ttf-consolamono
+
+- setname: "fonts:cronyx"
+  name:
+    - cronyx-fonts
+    - xfonts-cronyx
 
 - setname: "fonts:cronyx-cyrillic"
   name:
@@ -381,6 +393,11 @@
   name:
     - fonts-ttf-dustismo
 
+- setname: "fonts:dzongkha"
+  name:
+    - dzongkha-fonts
+    - fonts-dzongkha
+
 # E
 - setname: "fonts:eb-garamond"
   name:
@@ -447,6 +464,19 @@
     - ttf-essays
 
 # F
+- setname: "fonts:fantasque-sans"
+  name:
+    - fantasque-sans
+    - font-fantasque-sans
+    - fonts-fantasque-sans
+    - ttf-fantasque-sans
+
+- setname: "fonts:fantasque-sans-mono"
+  name:
+    - fantasque-sans-mono
+    - otf-fantasque-sans-mono
+    - ttf-fantasque-sans-mono
+
 - setname: "fonts:fanwood"
   name:
     - fonts-fanwood
@@ -679,6 +709,15 @@
     - gnu-free-fonts
     - ttf-freefont
 
+- setname: "fonts:go"
+  name:
+    - font-go
+    - fonts-go
+    - go-font
+    - go-fonts
+    - go-ttf
+    - gofonts
+
 - setname: "fonts:goudybookletter"
   name:
     - fonts-goudybookletter
@@ -732,6 +771,33 @@
     - ttf-humor-sans
 
 # I
+- setname: "fonts:inconsolata"
+  name:
+    - font-inconsolata
+    - fonts-inconsolata
+    - fonts-otf-inconsolata
+    - fonts-ttf-inconsolata
+    - google-inconsolata-fonts
+    - inconsolata-font
+    - inconsolata-fonts
+    - inconsolata-ttf
+
+- setname: "fonts:inconsolata-g"
+  name:
+    - inconsolata-g
+    - ttf-inconsolata-g
+
+- setname: "fonts:inconsolata-hellenic"
+  name:
+    - inconsolata-hellenic
+    - ttf-inconsolata-hellenic
+
+- setname: "fonts:inconsolata-lgc"
+  name:
+    - inconsolata-lgc
+    - otf-inconsolata-lgc
+    - ttf-inconsolata-lgc
+
 - setname: "fonts:iosevka"
   name:
     - font-iosevka
@@ -749,6 +815,30 @@
     - impallari-lobster-fonts
     - ttf-impallari-lobster-font
 
+- setname: "fonts:ipa"
+  name:
+    - font-ipa
+    - font-ipa-uigothic
+    - font-ipaex
+    - fonts-ipaexfont
+    - fonts-ipafont
+    - ipa-bolditalic-fonts
+    - ipa-ex-fonts
+    - ipa-ex-gothic-fonts
+    - ipa-ex-mincho-fonts
+    - ipa-fonts
+    - ipa-gothic-fonts
+    - ipa-mincho-fonts
+    - ipa-pgothic-fonts
+    - ipa-pmincho-fonts
+    - ipa-uigothic-fonts
+    - ipaex
+    - ipaexfont
+    - ipafont
+    - ja-ipafonts
+    - otf-ipaexfont
+    - otf-ipafont
+
 - setname: "fonts:isabella"
   name:
     - fonts-isabella
@@ -763,6 +853,14 @@
     - font-isas-misc
 
 # J
+- setname: "fonts:jisx0213"
+  name:
+    - font-jisx0213
+    - ja-font-jisx0213
+    - jisx0213-fonts
+    - jisx0213fonts
+    - xfonts-jisx0213
+
 - setname: "fonts:junicode"
   name:
     - fonts-junicode
@@ -770,7 +868,26 @@
     - junicode
     - ttf-junicode
 
+- setname: "fonts:jura"
+  name:
+    - fonts-jura
+    - fonts-ttf-jura
+
 # K
+- setname: "fonts:kacst"
+  name:
+    - fonts-kacst
+    - fonts-kacst-one
+    - fonts-ttf-arabic-kacst
+    - fonts-ttf-kacst
+    - kacst-fonts
+
+- setname: "fonts:kappa20"
+  name:
+    - font-kappa20
+    - ja-kappa20
+    - xfonts-kappa20
+
 - setname: "fonts:kanjistrokeorders"
   name:
     - fonts-kanjistrokeorders
@@ -782,6 +899,11 @@
     - kanjistrokeorders-ttf
     - ttf-kanjistrokeorders
 
+- setname: "fonts:kiloji"
+  name:
+    - fonts-kiloji
+    - kiloji-ttf
+
 - setname: "fonts:kochi"
   name:
     - kochi-ttf
@@ -789,6 +911,11 @@
     - ttf-kochi
     - ttf-kochi-naga10
     - ttf-kochi-substitute
+
+- setname: "fonts:konatu"
+  name:
+    - fonts-konatu
+    - konatu-ttf
 
 - setname: "fonts:koruri"
   name:
@@ -804,6 +931,16 @@
     - lateef_font
     - sil-lateef-fonts
     - ttf-sil-lateef
+
+- setname: "fonts:lato"
+  name:
+    - font-lato
+    - fonts-lato
+    - fonts-ttf-google-lato
+    - google-lato-fonts
+    - lato
+    - lato-ttf
+    - ttf-lato
 
 - setname: "fonts:liberation"
   name:
@@ -828,6 +965,7 @@
 
 - setname: "fonts:linuxlibertine"
   name:
+    - font-linuxlibertine
     - fonts-linuxlibertine
     - fonts-ttf-libertine
     - fonts-ttf-linuxlibertine
@@ -858,11 +996,39 @@
 - { setname: "fonts:lohit",            name: [fonts-ttf-lohit,lohit] }
 
 # M
+- setname: "fonts:marumoji"
+  name:
+    - font-marumoji
+    - ja-font-marumoji
+    - xfonts-marumoji
+
+- setname: "fonts:mathematica"
+  name:
+    - font-mathematica
+    - mathematica-fonts
+
 - setname: "fonts:micro-misc"
   name:
     - font-micro-misc
     - x11-font-micro-misc
     - xorg-font-micro-misc
+
+- setname: "fonts:migmix"
+  name:
+    - font-migmix
+    - fonts-migmix
+    - ja-font-migmix
+    - migmix
+    - ttf-migmix
+
+- setname: "fonts:migu"
+  name:
+    - font-migu
+    - fonts-ttf-japanese-migu
+    - ja-font-migu
+    - migu
+    - migu-ttf
+    - ttf-migu
 
 - setname: "fonts:mikachan"
   name:
@@ -873,6 +1039,20 @@
     - mikachan-fonts
     - mikachanfont
     - ttf-mikachan
+
+- setname: "fonts:mona"
+  name:
+    - font-mona
+    - font-mona-ipa
+    - font-mona-ttf
+    - fonts-bitmap-mona
+    - ipamonafont
+    - monafont
+    - monafont-ttf
+    - monafonts
+    - monafonts-ttf
+    - ttf-mona
+    - xfonts-mona
 
 - setname: "fonts:montecarlo"
   name:
@@ -889,6 +1069,12 @@
     - mplus-fonts
     - ttf-mplus
 
+- setname: "fonts:mplus-outline"
+  name:
+    - font-mplus-outline
+    - ja-font-mplus-outline
+    - mplus-outline-fonts
+
 - setname: "fonts:mutt-misc"
   name:
     - font-mutt-misc
@@ -896,6 +1082,34 @@
     - xorg-font-mutt-misc
 
 # N
+- setname: "fonts:nanum"
+  name:
+    - fonts-nanum
+    - fonts-nanum-coding
+    - fonts-nanum-eco
+    - fonts-nanum-gothic-light
+    - fonts-ttf-naver-nanum
+    - fonts-ttf-nhn-nanum-gothic-coding
+    - fonts-ttf-nhn-nanum-gothic-light
+    - nanum
+    - nanum-coding-fonts-ttf
+    - nanum-fonts
+    - nanum-fonts-ttf
+    - nanum-ttf
+    - nanumcoding-ttf
+    - nanumfont
+    - nanumfonts-otf
+    - nanumfonts-ttf
+    - naver-nanum-fonts
+    - naver-nanum-gothic-coding-fonts
+    - nhn-nanum-fonts
+    - nhn-nanum-gothic-coding-fonts
+    - nhn-nanum-gothic-light-fonts
+    - tex-nanumtype1
+    - texlive-nanumtype1
+    - ttf-nanum
+    - ttf-nanumgothic-coding
+
 - setname: "fonts:nafees-nastaleeq"
   name:
     - fonts-ttf-nafees-nastaleeq
@@ -927,6 +1141,47 @@
   name:
     - nafees-tehreer-naskh-fonts
     - fonts-ttf-nafees-tehreer-naskh
+
+- setname: "fonts:naga10"
+  name:
+    - bdf-naga10
+    - xfonts-naga10
+    - ja-font-naga10
+    - ja-naga10
+
+- setname: "fonts:noto" # probably overmerge, may split later
+  name:
+    - font-google-noto
+    - font-noto
+    - font-noto-emoji
+    - font-notosanscjktc
+    - fonts-noto
+    - fonts-noto-cjk
+    - google-noto-cjk-fonts
+    - google-noto-emoji-fonts
+    - google-noto-fonts
+    - google-noto-sans-cjk-fonts
+    - google-noto-serif-cjk-fonts
+    - noto
+    - noto-cfk
+    - noto-emoji-ttf
+    - noto-fonts
+    - noto-fonts-cjk
+    - noto-fonts-cjk-otf
+    - noto-fonts-emoji
+    - noto-fonts-emoji-blob
+    - noto-fonts-emoji-lollipop
+    - noto-fonts-extra
+    - noto-fonts-lite
+    - noto-fonts-main
+    - noto-fonts-sc
+    - noto-lite
+    - noto-ttf
+    - notosanscjktc
+    - ttf-noto
+    - ttf-noto-fonts-emoji-ib
+    - ttf-noto-fonts-ib
+    - ttf-noto-fonts-simple
 
 # O
 - setname: "fonts:ohruri"
@@ -1042,6 +1297,14 @@
     - fonts-radisnoir
     - ttf-radisnoir
 
+- setname: "fonts:ricty"
+  name:
+    - font-ricty
+    - ja-font-ricty
+    - ricty
+    - ricty-ttf
+    - ttf-ricty
+
 # S
 - setname: "fonts:sawarabi-gothic"
   name:
@@ -1075,6 +1338,13 @@
   name:
     - sgi-fonts
     - sgifonts
+
+- setname: "fonts:shinonome"
+  name:
+    - font-shinonome
+    - ja-font-shinonome
+    - shinonome
+    - xfonts-shinonome
 
 - setname: "fonts:sil-abyssinica"
   name:
@@ -1169,6 +1439,46 @@
     - sil-padauk
     - sil-padauk-fonts
 
+- setname: "fonts:source-han-sans"
+  name:
+    - adobe-source-han-sans
+    - adobe-source-han-sans-cn-fonts
+    - adobe-source-han-sans-fonts
+    - adobe-source-han-sans-jp-fonts
+    - adobe-source-han-sans-kr-fonts
+    - adobe-source-han-sans-otc-fonts
+    - adobe-source-han-sans-tw-fonts
+    - adobe-source-han-sans-twhk-fonts
+    - font-adobe-source-han-sans
+    - fonts-adobe-source-han-sans
+    - fonts-otf-adobe-source-han-sans-cn
+    - fonts-otf-adobe-source-han-sans-jp
+    - fonts-otf-adobe-source-han-sans-kr
+    - fonts-otf-adobe-source-han-sans-tw
+    - fonts-otf-source-han
+    - source-han-sans
+    - source-han-sans-japanese
+    - source-han-sans-korean
+    - source-han-sans-simplified-chinese
+    - source-han-sans-traditional-chinese
+
+- setname: "fonts:source-han-serif"
+  name:
+    - adobe-source-han-serif
+    - adobe-source-han-serif-cn-fonts
+    - adobe-source-han-serif-jp-fonts
+    - adobe-source-han-serif-kr-fonts
+    - adobe-source-han-serif-otc-fonts
+    - adobe-source-han-serif-tw-fonts
+    - fonts-otf-adobe-source-han-serif-cn
+    - fonts-otf-adobe-source-han-serif-jp
+    - fonts-otf-adobe-source-han-serif-kr
+    - fonts-otf-adobe-source-han-serif-tw
+    - source-han-serif-japanese
+    - source-han-serif-korean
+    - source-han-serif-simplified-chinese
+    - source-han-serif-traditional-chinese
+
 - setname: "fonts:sophia-nubian"
   name:
     - fonts-sil-sophia-nubian
@@ -1190,6 +1500,19 @@
     - stixfonts
 
 # T
+- setname: "fonts:takao"
+  name:
+    - font-takao
+    - fonts-takao
+    - ja-font-takao
+    - takao-fonts
+    - takao-fonts-ttf
+
+- setname: "fonts:takaoex"
+  name:
+    - otf-takaoex
+    - takao-ex-fonts-ttf
+
 - setname: "fonts:tamzen"
   name:
     - font-tamzen
@@ -1274,6 +1597,20 @@
     - ttf-ume
     - umefont-ttf
 
+- setname: "fonts:umeplus"
+  name:
+    - fonts-umeplus
+    - ttf-umeplus
+    - ttf-umeplus-cl
+    - ttf-umeplus-ibx
+    - umeplus-fonts
+
+- setname: "fonts:uralic"
+  name:
+    - fonts-ttf-uralic
+    - fonts-uralic
+    - uralic-ttf
+
 # V
 - setname: "fonts:vlgothic"
   name:
@@ -1308,6 +1645,21 @@
     - vollkorn-ttf
 
 # W
+- setname: "fonts:wqy-microhei"
+  name:
+    - font-wqy-microhei
+    - fonts-ttf-wqy-microhei
+    - fonts-wqy-microhei
+    - ttf-wqy-microhei
+    - ttf-wqy-microhei-ibx
+    - wqy-microhei
+    - wqy-microhei-font-ttf
+    - wqy-microhei-fonts
+    - wqy-microhei-kr-patched
+    - wqy-microhei-lite
+    - wqy_microhei
+- { setname: "fonts:wqy-microhei", name: wqy-microhei-nightly_build, ignore: true }
+
 - setname: "fonts:wqy-zenhei"
   name:
     - font-wqy-zenhei
@@ -1318,10 +1670,10 @@
     - wqy-zenhei
     - wqy-zenhei-font-ttf
     - wqy-zenhei-fonts
+    - wqy-zenhei-ttf
     - wqy_zenhei
     - zh-wqy-zenhei-ttf
-
-- { setname: "fonts:wqy-zenhei",       name: wqy-zenhei-nightly_build, ignore: true }
+- { setname: "fonts:wqy-zenhei", name: wqy-zenhei-nightly_build, ignore: true }
 
 # X
 - { setname: "fonts:$1-$2",            namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)" } # xorg

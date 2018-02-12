@@ -278,7 +278,9 @@
 
 - { name: sdl, verge: "2", setname: sdl2 }
 
-- { name: sdl_ttf, ruleset: kaos, setname: sdl2_ttf }
+- { name: sdl_ttf, ruleset: kaos, setname: sdl2_ttf } # XXX: problem
+
+- { name: shinonome, wwwpart: openlab, setname: "fonts:shinonome" }
 
 - { name: singularity, wwwpart: singularity.lbl.gov, setname: singularity-container }
 - { name: singularity, wwwpart: ingularityviewer, setname: singularityviewer }
