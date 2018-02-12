@@ -20,6 +20,7 @@
 - { setname: go,                       namepat: "go-?1[0-9._-]+" } # don't mix with e.g. go2, go4
 - { setname: go,                       namepat: "golang[0-9.-]*" }
 - { setname: go,                       namepat: "golang[0-9.-]*" }
+- { addflag: not_go,                   name: [go-font,go-fonts,go-for-it,go-ttf,go-tool] }
 
 - { setname: gstreamer,                namepat: "gstreamer[0-9._-]+" }
 
