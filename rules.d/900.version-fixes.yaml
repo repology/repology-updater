@@ -533,6 +533,8 @@
 - { name: moc,                         ver: ["2.6","2.6.0"],         family: [sisyphus,fedora], ignore: true } # 2.6alpha3
 - { name: moc,                         verpat: "2\\.6\\.0r.*",                             ignore: true }
 - { name: moc,                         verpat: "(2\\.6)\\.0(a.*)",                         setver: "$1$2" } # there's no third numeric component for alpha
+- { name: mono,                        ver: "5.10.0.79",             family: aosc,         incorrect: true }
+- { name: mono,                                                      family: aosc,         untrusted: true }
 - { name: mpfr,                        verlonger: 3,                                       ignore: true } # openbsd, openindiana fakes
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignore: true } # fake
 - { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignore: true } # it's x.y.z, ignore all revisions and dates
