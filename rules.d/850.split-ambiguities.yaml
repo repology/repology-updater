@@ -109,6 +109,8 @@
 - { name: fts, wwwpart: gonicus, setname: "fusefs:fts" } # fuse TFTP supplicant
 # otherwise fts3, "File Transfer Service V3"
 
+- { name: frozen-bubble, verpat: "[0-9]+\\.[0-9]{3}.*", setname: "perl:games-frozenbubble" } # XXX: branches usecase?
+
 - { name: fuse, wwwpart: fuse-emulator, setname: fuse-emulator }
 - { name: fuse, category: [emulators,app-emulation], setname: fuse-emulator }
 

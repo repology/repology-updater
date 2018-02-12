@@ -89,6 +89,7 @@
 - { setname: freetype-infinality,      name: [freetype2-infinality,libfreetype-infinality] }
 - { setname: friently-find,            name: ffind }
 - { setname: frozen-bubble,            name: frozenbubble2 }
+- { setname: frozen-bubble,            name: frozen-bubble-server, addflavor: server }
 - { setname: fsv,                      name: fsv2 }
 - { setname: "fusefs:curlftpfs",       name: curlftpfs }
 - { setname: "fusefs:encfs",           name: [encfs,encfs18] }
