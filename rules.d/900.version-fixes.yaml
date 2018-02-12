@@ -56,6 +56,7 @@
 - { name: assaultcube,                 ver: "1.2.0.3",               family: fedora,       incorrect: true } # rpmfusion actually, but we don't trust whole fedora
 - { name: assaultcube,                                               family: fedora,       untrusted: true }
 - { name: apache,                      verpat: "2\\.[0-9]*[13579]\\..*",                   devel: true }
+- { name: "apmod:rpaf",                verpat: "2015.*",             family: [ arch ],     ignore: true }
 - { name: appmenu-qt,                  verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: apr,                         verlonger: 3,                                       ignore: true } # FreeBSD
 - { name: apr,                         verpat: ".*20[0-9]{6}.*",                           ignore: true }
@@ -532,7 +533,6 @@
 - { name: moc,                         ver: ["2.6","2.6.0"],         family: [sisyphus,fedora], ignore: true } # 2.6alpha3
 - { name: moc,                         verpat: "2\\.6\\.0r.*",                             ignore: true }
 - { name: moc,                         verpat: "(2\\.6)\\.0(a.*)",                         setver: "$1$2" } # there's no third numeric component for alpha
-- { name: "apmod:rpaf",                verpat: "2015.*",             family: [ arch ],     ignore: true }
 - { name: mpfr,                        verlonger: 3,                                       ignore: true } # openbsd, openindiana fakes
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignore: true } # fake
 - { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignore: true } # it's x.y.z, ignore all revisions and dates
