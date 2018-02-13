@@ -99,6 +99,8 @@
 - { setname: svmlight,                 name: svm_light }
 - { setname: swarp,                    name: astromatic-swarp }
 - { setname: sweethome3d,              name: [sweet-home-3d,sweethome3d-application] }
+- { setname: swi-prolog,               name: swi-prolog-devel }
+- { setname: swi-prolog,               name: [swi-prolog-doc,swi-prolog-jpl,swi-prolog-lite,swi-prolog-packages], addflavor: true }
 - { setname: swig,                     namepat: "swig-(.*)", family: macports, addflavor: $1 } # split by supported language
 - { setname: swig,                     namepat: "swig[0-9._-]+" }
 - { setname: swissfileknife,           name: sfk }

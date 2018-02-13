@@ -782,6 +782,7 @@
 - { name: sutils,                      verpat: "[0-9][0-9]",                               ignore: true } # manjaro, aur snapshots
 - { name: svn2git,                     verpat: "20[0-9]{6}.*",                             ignore: true } # macports
 - { name: swell-foop,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: swi-prolog,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # assumed even/odd scheme; http://www.swi-prolog.org/Download.html
 - { name: sword,                       ver: "1.7.5",                 family: mageia,       ignore: true } # fake
 - { name: syncthing-gtk,               ver: "0.14.36",                                     ignore: true } # sisyphus fake
 - { name: synfigstudio,                verpat: "1\\.3\\..*",                               devel: true } # openindiana garbage
