@@ -117,7 +117,7 @@
 - { setname: gnupg,                    namepat: "gpg[0-9]+" }
 - { setname: gnurl,                    name: libgnurl }
 - { setname: gnushogi,                 name: gnu-shogi }
-- { setname: "go:mmark",               name: ["go:github-miekg-mmark",mmark] }
+- { setname: "go:github-miekg-mmark",  name: ["go:mmark",mmark] }
 - { setname: "go:github-rakyll-statik", name: ["go:statik"] }
 - { setname: gobject-introspection,    name: [gobject-introspection-common,gobject-introspection-runtime] }
 - { setname: godot,                    name: [godot-pulse,godot-tools,godot-mono], addflavor: true }
