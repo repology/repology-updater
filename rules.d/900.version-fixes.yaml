@@ -470,8 +470,8 @@
 - { name: llvm,                        verpat: ".*r.*",                                    devel: true }
 - { name: llvm,                        ver: "6.0.0",                 family: fedora,       incorrect: true }
 - { name: llvm,                                                      family: fedora,       untrusted: true }
-- { name: lmms,                        ver: "1.2.0",                 family: [sisyphus,mageia], incorrect: true } # it's 1.2.0rc5
-- { name: lmms,                                                      family: [sisyphus,mageia], untrusted: true }
+- { name: lmms,                        ver: ["1.1.95","1.2.0"],      ruleset: [sisyphus,mageia,kaos], incorrect: true } # it's 1.2.0rc5
+- { name: lmms,                                                      ruleset: [sisyphus,mageia,kaos], untrusted: true }
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
 - { name: lrzsz,                       verge: "0.12.21",                                   successor: true } # debian fork? (needs investigation)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignore: true } # fake
