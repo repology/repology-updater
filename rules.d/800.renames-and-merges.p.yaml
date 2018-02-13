@@ -9,6 +9,7 @@
 - { setname: pangomm,                  namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", addflavor: docs }
 - { setname: panoply,                  name: panoply-nodesktop, addflavor: nodesktop }
 - { setname: pasystray,                name: [pasystray-gtk2,pasystray-gtk2-standalone,pasystray-gtk3-standalone] }
+- { setname: patch,                    name: gpatch }
 - { setname: pcre++,                   name: [libpcre++,pcrexx] }
 - { setname: pcre,                     name: [pcre-static,pcre-cpp] }
 - { setname: pcre,                     namepat: "(?:lib)?pcre[0-9._-]*" }
