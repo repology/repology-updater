@@ -476,6 +476,8 @@
 - { name: libcaca,                     verpat: "0.99.[0-9]+.*",                            ignore: true } # it.s 0.99.betaX, not 0.99.X
 - { name: libcdio-paranoia,            verpat: "[0-9]+\\.[0-9]+\\.[0-9]+", family: kaos,   ignore: true } # bad versioning
 - { name: libclc,                                                                          noscheme: true }
+- { name: libcmis,                     ver: "0.5.2",                 family: sisyphus,     incorrect: true }
+- { name: libcmis,                                                   family: sisyphus,     untrusted: true }
 - { name: libcpuid,                    ver: "0.21",                                        setver: "0.2.1" } # deepin crap
 - { name: libdazzle,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: libdvdread,                  ver: "5.0.4",                 family: [arch,openindiana], ignore: true } # fake
