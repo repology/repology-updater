@@ -19,6 +19,8 @@
 - { setname: fftw,                     name: fftwf }
 - { setname: fftw,                     namepat: "(?:lib)?fftw[0-9.-]*(?:-double|-float|-long-double|-quad|-single|-long|-mpi|-mpich|-openmpi|-common)?" }
 - { setname: fife,                     name: [fifengine,"python:fife"] }
+- { setname: file-roller,              name: legacy-file-roller }
+- { setname: file-roller,              name: [file-roller-ja,file-roller-tmp,file-roller2-nn], addflavor: true }
 - { setname: fillets-ng,               name: fish-fillets }
 - { setname: fillets-ng,               name: fish-fillets-ng }
 - { setname: firebase-cli,             name: firebase-tools }

@@ -55,6 +55,7 @@
 - { name: aspcud,                      ver: "2011.03.17",                                  ignore: true }
 - { name: assaultcube,                 ver: "1.2.0.3",               family: fedora,       incorrect: true } # rpmfusion actually, but we don't trust whole fedora
 - { name: assaultcube,                                               family: fedora,       untrusted: true }
+- { name: assaultcube,                 verpat: "[0-9]{8}",                                 ignore: true }
 - { name: apache,                      verpat: "2\\.[0-9]*[13579]\\..*",                   devel: true }
 - { name: "apmod:rpaf",                verpat: "2015.*",             family: [ arch ],     ignore: true }
 - { name: appmenu-qt,                  verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
@@ -141,6 +142,8 @@
 - { name: cdrtools,                    ver: "3.02",                  family: [debuntu,rosa], ignore: true } # fake, it's alpha
 - { name: ceferino,                    verpat: ".*svn.*",                                  ignore: true }
 - { name: cegui,                       verpat: "6\\..*",                                   setver: "0.$0" } # it's 0.6.2!
+- { name: ceph,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]{4}.*",    incorrect: true } # opensuse garbage
+- { name: ceph,                        verpat: "[0-9]+[13579]\\..*",                       devel: true } # assumed
 - { name: cfr,                         verpat: "[0-9]{3}",                                 setver: "0_$0" } # blackarch, broken schema
 - { name: cfssl,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: cfitsio,                     verpat: "[0-9]{4}",                                 ignore: true }
@@ -267,8 +270,11 @@
 - { name: ffmpeg,                      ver: ["3.4.2","3.5"],         family: fedora,       incorrect: true } # fpmfusion and unitedrpms seem to inherit fedora willingness to fake versions
 - { name: ffmpeg,                                                    family: fedora,       untrusted: true }
 - { name: figlet,                      ver: "222",                                         ignore: true } # haikuports
+- { name: file-roller,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: firmware-mod-kit,            verpat: "0([1-9][0-9]*)",                           setver: "0.$1" } # blackarch, broken schema
 - { name: flare,                       ver: "15.1",                                        ignore: true } # actually old 0.15
+- { name: flatpak,                     ver: "0.10.3.1",              ruleset: deepin,      incorrect: true } # fake
+- { name: flatpak,                                                   ruleset: deepin,      untrusted: true }
 - { name: flight-of-the-amazon-queen,  verpat: "20[0-9]{6}",                               ignore: true }
 - { name: flvstreamer,                 ver: "2.1.c.1",                                     setver: "2.1c1" }
 - { name: flvstreamer,                 ver: "2.1c",                                        setver: "2.1c0" }
@@ -328,9 +334,11 @@
 - { name: glm,                         verpat: ".*a.*",                                    devel: true }
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignore: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
+- { name: gnome-backgrounds,           verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-boxes,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-builder,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-calculator,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-calendar,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-disk-utility,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # see "select distinct effname from packages where version like '3.27.%' and devel=false;"
 - { name: gnome-keyring,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-logs,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -342,8 +350,10 @@
 - { name: gnome-shell,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-shell-extensions,      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-software,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-sound-recorder,        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-sudoku,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-system-monitor,        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-todo,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-tweak-tool,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnat-util-gcc,               verpat: "20[0-9]{6}",                               ignore: true }
 - { name: gnuastro,                    verlonger: 2,                                       devel: true } # alphas
@@ -459,6 +469,8 @@
 - { name: llvm,                        verpat: ".*r.*",                                    devel: true }
 - { name: llvm,                        ver: "6.0.0",                 family: fedora,       incorrect: true }
 - { name: llvm,                                                      family: fedora,       untrusted: true }
+- { name: lmms,                        ver: "1.2.0",                 family: [sisyphus,mageia], incorrect: true } # it's 1.2.0rc5
+- { name: lmms,                                                      family: [sisyphus,mageia], untrusted: true }
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
 - { name: lrzsz,                       verge: "0.12.21",                                   successor: true } # debian fork? (needs investigation)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignore: true } # fake
@@ -485,6 +497,7 @@
 - { name: libffi,                      ver: "3.3",                   family: debuntu,      ignore: true } # snapshot of nonexisting version
 - { name: libglw,                      verpat: "20[0-9]{6}",                               ignore: true }
 - { name: libgnomeui,                  ver: "2.24.6",                family: opensuse,     ignore: true }
+- { name: libgweather,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: libhangul,                   verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: libhid,                      ver: "0.2.17",                ruleset: [fedora,rosa], incorrect: true } # nonexisting release
 - { name: libhid,                                                    ruleset: [fedora,rosa], untrusted: true }
@@ -733,6 +746,8 @@
 
 # S
 - { name: s25rttr,                     verpat: "20[0-9]{6}",                               devel: true } # official nightlies
+- { name: samba,                       ver: "4.8.0",                 family: fedora,       incorrect: true } # it's 4.8.0rc2
+- { name: samba,                                                     family: fedora,       untrusted: true }
 - { name: sauerbraten,                 verpat: "(?:0\\.)*(20[0-9]{2})[^0-9]?([0-9]{2})[^0-9]?([0-9]{2})(.*)", setver: "$1_$2_$3$4" } # fix version
 - { name: sauerbraten,                 verpat: "(20[0-9]{2}_[0-9]{2}_[0-9]{2})[a-z_-]+",   setver: "$1" } # remove release name (like _collect_edition)
 - { name: sauerbraten,                 ver: "2014_03_02",            family: debuntu,      ignore: true } # debian fake
