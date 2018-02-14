@@ -164,4 +164,5 @@
 - { setname: guile,                    namepat: "guile[0-9._-]+" }
 - { setname: gwt,                      name: webtoolkit-java-sdk }
 - { setname: gxmessage,                name: gxmessage-gtk2, addflavor: gtk2 }
+- { setname: gyp,                      name: "python:gyp" }
 - { setname: gzdoom,                   namepat: "gzdoom[0-9.-]+" }
