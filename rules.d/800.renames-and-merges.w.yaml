@@ -13,6 +13,7 @@
 - { setname: weboob,                   name: "python:weboob" }
 - { setname: weboob,                   name: weboob-headless, addflavor: headless }
 - { setname: websocketpp,              name: websocket++ }
+- { setname: webvfx,                   name: webvfx-qt5, addflavor: qt5 }
 - { setname: wesnoth,                  name: wesnoth-devel }
 - { setname: wesnoth,                  namepat: "wesnoth[0-9.-]+" }
 - { setname: which,                    name: [gnu-which,gwhich] }
