@@ -617,6 +617,7 @@
 - { name: openscenegraph,              verpat: "3\\.[0-9]*[13579]\\..*",                   devel: true }
 - { name: openssh,                     verpat: "([0-9]+\\.[0-9]+)\\.([0-9]+)",             setver: "$1p$2" } # pkgrc: it's X.YpZ!
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignore: true } # freshcode, pZ part missing
+- { name: openssh,                                                                         p_is_patch: true }
 - { name: openxcom,                    verpat: ".*201[789].*",                             ignore: true } # git snapshots
 - { name: opus,                        ver: "1.3",                   family: fedora,       ignore: true } # fake, it's beta
 - { name: orbit2,                      ver: "2.14.20",               family: sisyphus,     ignore: true } # alt fake
