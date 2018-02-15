@@ -1,0 +1,19 @@
+###########################################################################
+# Entware-ng
+###########################################################################
+- name: entware_ng
+  type: repository
+  desc: Entware-ng
+  family: openwrt
+  sources:
+    - name: [ mipsel, armv5, armv7, x86-32, x86-64 ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://pkg.entware.net/binaries/{source}/Packages.gz'
+      compression: gz
+      subrepo: '{source}'
+  shadow: true
+  repolinks:
+    - desc: Entware-ng repository on GitHub
+      url: https://github.com/Entware-ng
+  tags: [ all, production ]
