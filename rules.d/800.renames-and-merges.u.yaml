@@ -2,6 +2,9 @@
 
 - { setname: uade,                     name: [uade123,uade2] }
 - { setname: uchardet,                 name: libuchardet }
+- { setname: udiskie,                  name: "python:udiskie" }
+- { setname: udisks,                   name: [udisks-2,udisks2] }
+- { setname: udisks,                   name: [udisks2-elogind,udisks2-nosystemd], addflavor: true }
 - { setname: ufoai,                    name: [ufoai-data,ufoai-maps,ufoai-music], addflavor: true }
 - { setname: ufoai,                    name: ufo-ai, family: gentoo }
 - { setname: ultimatestunts,           name: ultimate-stunts }

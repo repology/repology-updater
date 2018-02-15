@@ -234,6 +234,8 @@
 
 - { name: supertux,          verpat: "0\\.[^1]\\..*",     setname: supertux2 }
 
+- { name: udisks,            verpat: "2\\..*",            setname: udisks2 }
+
 - { name: wxwidgets,         verpat: "2\\..*",            setname: wxwidgets28 }
 - { name: wxwidgets28,       verpat: "2\\.9\\..*",        setname: wxwidets }  # belongs to 3.x - prerelease branch of
 
