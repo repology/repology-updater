@@ -264,6 +264,9 @@
 
 - { name: pwsafe, wwwpart: passwordsafe, setname: passwordsafe }
 
+- { name: racer, wwwpart: hippo, setname: racer-game }
+- { name: racer, setname: "rust:racer" }
+
 - { name: "ruby:bcrypt-ruby", setname: "ruby:bcrypt", ruleset: gentoo } # bcrypt-ruby != bcrypt
 
 - { name: "ruby:mysql", setname: "ruby:mysql-tmtm", wwwpart: tmtm } # fork

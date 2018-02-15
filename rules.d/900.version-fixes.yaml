@@ -725,8 +725,7 @@
 - { name: "r:nws",                     ver: "2.0.0.3",               family: debuntu,      ignore: true } # fake
 - { name: "r:hexbin",                  ver: "1.27.1-1",                                    ignore: true } # guix fake
 - { name: "r:waveslim",                ver: "1.12",                  family: rosa,         ignore: true } # fake
-- { name: racer,                       ver: "2.07",                                        ignore: true }
-- { name: rage,                        ver: "0.3.0.042",                                   ignore: true }
+- { name: rage,                        verlonger: 3,                                       devel: true } # snapshots
 - { name: rdesktop,                    ver: "1.8.4",                 family: mageia,       incorrect: true }
 - { name: rdesktop,                                                  family: mageia,       untrusted: true }
 - { name: readline,                                                                        p_is_patch: true }
@@ -735,7 +734,8 @@
 - { name: recode,                      verge: "3.7",                                       successor: true } # fork
 - { name: reptyr,                      ver: "0.6.3a",                family: freebsd,      incorrect: true } # fake, no such tag
 - { name: remmina,                     verpat: "(.*?)([^0-9]*r[^0-9]*)(.*?)",              setver: "$1-rcgit.$3", devel: true, ignore: false } # r, rc, rcgit, etc.
-- { name: remmina,                     ver: "1.2.0",                 family: [alpine,sisyphus,debuntu,fedora,mageia,rosa], ignore: true } # liars
+- { name: remmina,                     ver: "1.2.0",                 family: [alpine,sisyphus,debuntu,fedora,mageia,rosa], incorrect: true } # liars, it's at 1.2.0-rcgit.XX stage
+- { name: remmina,                                                   family: [alpine,sisyphus,debuntu,fedora,mageia,rosa], untrusted: true } # liars
 - { name: rinetd,                      ver: "0.62.1sam",                                   ignore: true } # debian garbage
 - { name: rpcgen,                                                    family: ravenports,   ignore: true } # fake
 - { name: rtl8812au,                   verpat: "201[56].*",                                ignore: true }
@@ -760,10 +760,12 @@
 - { name: sbcl,                        verpat: ".*20[0-9]{6}.*",                           ignore: true } # nixpkgs garbage
 - { name: scantailor,                  verpat: "2016.*",                                   ignore: true }
 - { name: schismtracker,               ver: "20150911005204",                              ignore: true }
-- { name: scite,                       ver: "375",                                         ignore: true } # pclinuxos
-- { name: sdcc,                        ver: "3.6.2",                 family: [ mageia ],   ignore: true } # not yet
+- { name: scite,                       verpat: "[0-9]{3}",                                 incorrect: true } # pclinuxos; it's x.y.z
+- { name: sdcc,                        ver: "3.6.2",                 family: mageia,       incorrect: true } # there's not even 3.6.1!
+- { name: sdcc,                                                      family: mageia,       untrusted: true }
 - { name: sddm,                        verpat: "[0-9]{4,}.*",        family: kaos,         ignore: true } # snapshot with random version
-- { name: serf,                        ver: "1.4.0",                 family: mageia,       ignore: true } # nonexisting
+- { name: serf,                        ver: "1.4.0",                 family: mageia,       incorrect: true } # nonexisting; https://svn.apache.org/repos/asf/serf/tags/
+- { name: serf,                                                      family: mageia,       untrusted: true }
 - { name: sgt-puzzles,                 verpat: "([0-9]{8})\\.[0-9a-fr]+",                  setver: "$1" } # remove commit hashes and revisions
 - { name: sgt-puzzles,                 verpat: "([0-9]{4})\\.([0-9]{2})\\.([0-9]{2})",     setver: "$1$2$3" } # fix version
 - { name: sgt-puzzles,                 verpat: "20[0-9]{6}",                               ignore: false } # unignores chocolatey if it has correct version, it's often newest
@@ -777,49 +779,50 @@
 - { name: signon-ui,                   verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: simh,                        verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: simple-scan,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
-- { name: simplescreenrecorder,        verlonger: 3,                                       ignore: true } # FreeBSD fake
 - { name: sipp,                        verpat: "3\\.6[_-]?[a-z]+",                         setver: "3.6", devel: true } # 3.6-dev
-- { name: sk1libs,                     ver: "0.9.2", family: [ arch ],                     ignore: true } # not yet released
+- { name: sk1libs,                     ver: "0.9.2",                 family: [arch,aosc],  incorrect: true }
+- { name: sk1libs,                                                   family: [arch,aosc],  untrusted: true }
 - { name: slime,                       verpat: "20[0-9]{6}.*",                             ignore: true }
-- { name: slime,                       ver: "2.20.2.gef68a0b4",                            ignore: true }
 - { name: smtp-fuzz,                                                                       noscheme: true }
 - { name: smplayer-skins,              verpat: "20[0-9]{6}",                               ignore: true }
-- { name: sndio,                       verpat: "20[0-9]{6}",                               ignore: true }
+- { name: sndio,                       verpat: "20[0-9]{6}",                               incorrect: true } # last version month ago, snapshots are not justified
 - { name: snmpenum,                                                                        noscheme: true }
 - { name: solvespace,                  verpat: ".*[0-9]{8}.*",                             ignore: true } # nix garbage
 - { name: spek,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+_[0-9a-f]{10}",    ignore: true }
 - { name: speex,                       verlonger: 3,                 family: openindiana,  ignore: true }
-- { name: speexdsp,                    ver: "1.2.0.3",                                     ignore: true } # it's 1.2rc3
-- { name: speexdsp,                    ver: "1.2",                   family: [fedora,mageia,openmandriva,sisyphus], ignore: true } # it's 1.2rc3
+- { name: speexdsp,                    ver: "1.2.0.3",                                     incorrect: true } # it's 1.2rc3
+- { name: speexdsp,                    ver: "1.2",                   family: [fedora,mageia,openmandriva,sisyphus], incorrect: true } # it's 1.2rc3
+- { name: speexdsp,                                                  family: [fedora,mageia,openmandriva,sisyphus], untrusted: true }
 - { name: sqlite2,                     verpat: ".*_[0-9]+",                                ignore: true } # slackbuilds using debian patch
-- { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             ignore: true }
-- { name: sqlninja,                    ver: ["0.2.999"],                                   ignore: true } # it's 0.2.999-alpha1
+- { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             incorrect: true }
+- { name: sqlninja,                    ver: "0.2.999",                                     incorrect: true } # it's 0.2.999-alpha1
 - { name: squid,                       verpat: "4\\..*",                                   devel: true }
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignore: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
-- { name: sudo,                                                      family: fedora,       ignore: true } # accused in dropping prerelease suffix
+- { name: sudo,                                                      family: fedora,       untrusted: true } # accused in dropping prerelease suffix
 - { name: sudo,                                                                            p_is_patch: true }
-- { name: sunpinyin,                   ver: "3.0.0",                                       ignore: true } # aosc fake, it's rc1
+- { name: sunpinyin,                   ver: "3.0.0",                 family: aosc,         incorrect: true } # aosc fake, it's rc1
+- { name: sunpinyin,                                                 family: aosc,         untrusted: true }
 - { name: sunxi-tools,                 verpat: "20[0-9]{6}",                               ignore: true }
-- { name: supertransball2,             verpat: "2\\.[0-9]+\\.[0-9]+",                      ignore: true } # 2 is port of the project name, not version
+- { name: supertransball2,             verpat: "2\\.[0-9]+\\.[0-9]+",                      incorrect: true } # 2 is port of the project name, not version
 - { name: sutils,                      verpat: "[0-9][0-9]",                               ignore: true } # manjaro, aur snapshots
 - { name: svn2git,                     verpat: "20[0-9]{6}.*",                             ignore: true } # macports
 - { name: swell-foop,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: swi-prolog,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # assumed even/odd scheme; http://www.swi-prolog.org/Download.html
-- { name: sword,                       ver: "1.7.5",                 family: mageia,       ignore: true } # fake
-- { name: syncthing-gtk,               ver: "0.14.36",                                     ignore: true } # sisyphus fake
+- { name: sword,                                                     family: mageia,       untrusted: true } # accused of fake 1.7.5
+- { name: syncthing-gtk,               verpat: "0\\.14\\..*",                              incorrect: true } # sisyphus fake (uses syncthing version?)
 - { name: synfigstudio,                verpat: "1\\.3\\..*",                               devel: true } # openindiana garbage
 - { name: sysstat,                     ver: "20151012",                                    ignore: true } # openindiana garbage
 - { name: systemd,                     verlonger: 1,                 family: arch,         incorrect: true }
 
 # T
 - { name: taisei,                      verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
-- { name: talloc,                      ver: "3.6.0",                                       ignore: true } # pclinuxos wtf
+- { name: talloc,                      ver: "3.6.0",                                       incorrect: true } # pclinuxos wtf; https://www.samba.org/ftp/talloc/
 - { name: tar,                         ver: "1.29b",                                       ignore: true } # debian garbage http://metadata.ftp-master.debian.org/changelogs/main/t/tar/tar_1.29b-2_changelog
 - { name: tcc,                         verpat: "20[0-9]{2}.*",                             ignore: true } # freebsd
 - { name: tcl,                         verpat: ".*20[0-9]{6}.*",                           ignore: true } # 8.7 snapshots
 - { name: tcl,                         verpat: ".*a[0-9]+",                                devel: true }
 - { name: tcptrack,                    wwwpart: bchretien,                                 successor: true } # fork
-- { name: tdb,                         ver: "3.6.0",                                       ignore: true } # pclinuxos wtf
+- { name: tdb,                         ver: "3.6.0",                                       incorrect: true } # pclinuxos wtf; https://www.samba.org/ftp/tdb/
 - { name: template-glib,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: teem,                        ver: "1.12.0",                family: debuntu,      ignore: true }
 - { name: tesseract-game,              verpat: "(20[0-9]{2})[^0-9]?([0-9]{2})[^0-9]?([0-9]{2})", setver: "$1_$2_$3" }
@@ -828,12 +831,13 @@
 - { name: texlive-core,                verpat: "(20[0-9]{2}).[0-9]{5,}",                   ignore: true }
 - { name: tidy,                        verpat: "20[0-9]{6}.*",                             ignore: true } # obsoleted
 - { name: tidy,                        ver: "090315.c",                                    ignore: true } # obsoleted
-- { name: timidity++,                  ver: "2.15.0",                family: [ rosa ],     ignore: true } # 2.15.0 was not released yet
+- { name: timidity++,                  ver: "2.15.0",                family: rosa,         incorrect: true } # 2.15.0 was not released yet
+- { name: timidity++,                                                family: rosa,         untrusted: true }
 - { name: thrift,                      verpat: "[0-9]{7}.*",                               ignore: true } # vcpkg and macports garbage
-- { name: thunderbird,                 verpat: ".*[ab].*", devel: true }
+- { name: thunderbird,                 verpat: ".*[ab].*",                                 devel: true }
 - { name: tomahawk,                    verpat: "0\\.8\\.99.*",                             ignore: true } # fake
-- { name: tt-rss,                                                                          ignore: true } # no upstream versioning scheme
-- { name: tome2,                       ver: "235",                                         ignore: true }
+- { name: tt-rss,                                                                          noscheme: true }
+- { name: tome2,                       ver: "235",                                         incorrect: true }
 - { name: tor,                         verpat: "(.*)[._-][ar].*",                          setver: "$1", devel: true } # version is self-sufficient; remove redundant alpha/rc suffix, but set devel
 - { name: tor,                         verge: "0.3.3",                                     devel: true }
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignore: true }

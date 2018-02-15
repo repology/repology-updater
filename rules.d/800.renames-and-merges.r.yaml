@@ -3,6 +3,8 @@
 - { setname: rabbitmq-server,          name: rabbitmq }
 - { setname: racket,                   name: [minimal-racket,racket-minimal], addflavor: minimal }
 - { setname: racket,                   name: racket-docs, addflavor: docs }
+- { setname: ragel,                    name: ragel-dev, ignore: true }
+- { setname: ragel,                    name: ragel-6 }
 - { setname: raptor,                   name: [raptor1,raptor2] }
 - { setname: rawtherapee,              name: rawtherapee-gtk2 }
 - { setname: rawtherapee,              name: rawtherapee-unstable, ignore: true }

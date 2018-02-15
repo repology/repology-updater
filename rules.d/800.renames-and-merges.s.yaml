@@ -43,12 +43,13 @@
 - { setname: silgraphite,              name: silgraphite2.0 }
 - { setname: simple-scan,              name: simple-scan-3.12 }
 - { setname: simple-scan,              name: simple-scan-trunk, ignore: true }
-- { setname: simplescreenrecorder,     name: simplescreenrecorder-lib }
+- { setname: simplescreenrecorder,     name: [simplescreenrecorder-lib, simplescreenrecorder-qt5], addflavor: true }
 - { setname: singularity,              name: endgame-singularity }
 - { setname: singularity-music,        name: endgame-singularity-music }
 - { setname: singularityviewer,        name: singularityviewer-alpha, devel: true }
 - { setname: sip,                      namepat: "sip[0-9]+" }
 - { setname: sisc,                     name: sisc-scheme }
+- { setname: sk1libs,                  name: "python:sk1libs" }
 - { setname: slang,                    name: [libslang,libslang2,s-lang,slang2,slang1] }
 - { setname: slashem,                  name: slashem-tty }
 - { setname: slony1,                   namepat: "slony1(?:-2|v2)" }
@@ -105,6 +106,8 @@
 - { setname: swig,                     namepat: "swig[0-9._-]+" }
 - { setname: swissfileknife,           name: sfk }
 - { setname: switchboard-plug-networking, name: switchboard-plug-network }
+- { setname: syncthing,                name: [syncthing-0.14,syncthing13] }
+- { setname: syncthing-gtk,            name: "python:syncthing-gtk" }
 - { setname: syslog-ng,                name: [syslog-ng-afamqp,syslog-ng-geoip,syslog-ng-http,syslog-ng-json,syslog-ng-mongodb,syslog-ng-redis,syslog-ng-smtp,syslog-ng-sql], addflavor: true }
 - { setname: syslog-ng,                name: syslog-ng-nosystemd, addflavor: nosystemd }
 - { setname: syslog-ng,                namepat: "syslog-ng[0-9._-]+" }
