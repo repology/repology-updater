@@ -741,6 +741,7 @@
 - { name: ragel,                       verpat: "7\\..*",                                   devel: true } # http://www.colm.net/open-source/ragel/
 - { name: rdesktop,                    ver: "1.8.4",                 family: mageia,       incorrect: true }
 - { name: rdesktop,                                                  family: mageia,       untrusted: true }
+- { name: readline,                    verpat: "([0-9]+\\.[0-9]+)\\.([0-9]+)",             setver: $1p$2 }
 - { name: readline,                                                                        p_is_patch: true }
 - { name: recode,                      ver: "3.7-2fd838565",                               ignore: true }
 - { name: recode,                      verpat: ".*20[0-9]{4}.*",                           ignore: true }
