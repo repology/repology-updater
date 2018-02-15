@@ -737,6 +737,7 @@
 - { name: "r:waveslim",                ver: "1.12",                  family: rosa,         ignore: true } # fake
 - { name: racer-game,                  ver: "1.1.64",                                      incorrect: true } # it's 1.1 64bit version
 - { name: rage,                        verlonger: 3,                                       devel: true } # snapshots
+- { name: ragel,                       verpat: "7\\..*",                                   devel: true } # http://www.colm.net/open-source/ragel/
 - { name: rdesktop,                    ver: "1.8.4",                 family: mageia,       incorrect: true }
 - { name: rdesktop,                                                  family: mageia,       untrusted: true }
 - { name: readline,                                                                        p_is_patch: true }
