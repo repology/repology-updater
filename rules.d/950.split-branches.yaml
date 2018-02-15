@@ -63,7 +63,7 @@
 
 - { name: freerdp,           verpat: "1\\..*",            setname: freerdp1 }
 
-- { name: gdk-pixbuf,        verpat: "0.*",               setname: gdk-pixbuf0 }
+- { name: gdk-pixbuf,        verpat: "0\\..*",            setname: gdk-pixbuf0 }
 
 - { name: glade,             verpat: "2\\..*",            setname: glade2 }
 
@@ -71,18 +71,13 @@
 
 - { name: glib,              verpat: "1\\..*",            setname: glib12 }
 
-- { name: gmime,             verpat: "2\\.2\\..*",        setname: gmime22 }
-- { name: gmime,             verpat: "2\\.4\\..*",        setname: gmime24 }
-- { name: gmime,             verpat: "2\\.6\\..*",        setname: gmime26 }
-- { name: gmime,             verpat: "3\\..*",            setname: gmime3 }
-
-- { name: gmime-sharp,       verpat: "2\\.2\\..*",        setname: gmime22-sharp }
-- { name: gmime-sharp,       verpat: "2\\.4\\..*",        setname: gmime24-sharp }
-- { name: gmime-sharp,       verpat: "2\\.6\\..*",        setname: gmime26-sharp }
+- { name: gmime,             verpat: "2\\..*",            setname: gmime2 }
 
 - { name: gnet,              verpat: "1\\..*",            setname: gnet1 }
 
 - { name: gnupg,             verpat: "1\\..*",            setname: gnupg1 }
+
+- { name: gnome-desktop,     verpat: "2\\..*",            setname: gnome-desktop2 }
 
 - { name: godot,             verpat: "2\\..*",            setname: godot2 }
 
