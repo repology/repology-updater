@@ -3,14 +3,33 @@
 ###########################################################################
 
 - name: antix_jessie
+  sortname: antix_16
   type: repository
-  desc: AntiX Jessie
+  desc: antiX-16
   family: debuntu
+  ruleset: [ debuntu, antix ]
   sources:
     - name: [ dev, main, nosystemd ]
       fetcher: File
       parser: DebianSources
       url: 'http://nl.mxrepo.com/antix/jessie/dists/jessie/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: AntiX home
+      url: http://antix.mepis.org/index.php?title=Main_Page
+  tags: [ all, production, antix ]
+
+- name: antix_17
+  type: repository
+  desc: antiX-17
+  family: debuntu
+  ruleset: [ debuntu, antix ]
+  sources:
+    - name: [ dev, main, nosystemd ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://nl.mxrepo.com/antix/stretch/dists/stretch/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
