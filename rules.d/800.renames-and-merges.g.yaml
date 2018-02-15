@@ -97,6 +97,9 @@
 - { setname: gnet,                     namepat: "gnet[0-9]+" }
 - { setname: gnome-chemistry-utils,    name: gchemutils }
 - { setname: gnome-chess,              name: gnome-games-chess }
+- { setname: gnome-desktop,            name: [gnome-desktop2, gnome-desktop2, compat-gnome-desktop38, compat-gnome-desktop314] }
+- { setname: gnome-desktop,            name: "python:pygnome-desktop", addflavor: python }
+- { setname: gnome-desktop,            name: gnome-desktop-reference, addflavor: reference }
 - { setname: gnome-mahjongg,           name: gnome-games-mahjongg }
 - { setname: gnome-mines,              name: gnome-games-mines }
 - { setname: gnome-mines,              name: gnome-mines-3.12.2 }
