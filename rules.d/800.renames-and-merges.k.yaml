@@ -14,6 +14,7 @@
 - { setname: kiki,                     name: kiki-the-nano-bot }
 - { setname: kipi-plugins,             namepat: "kipi-plugin-.*", family: freebsd }
 - { setname: klotski,                  name: gnome-games-klotski }
+- { setname: knock,                    name: knockd }
 - { setname: knot,                     name: [knot-dns,knot-lts,knot1,knot2] }
 - { setname: kobodeluxe,               name: kobo-deluxe }
 - { setname: kobodeluxe,               name: skobo } # old name

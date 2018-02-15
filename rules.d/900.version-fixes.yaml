@@ -328,6 +328,7 @@
 - { name: geary,                       ver: "0.12",                  family: debuntu,      ignore: true } # not released yet
 - { name: geary,                       ver: "0.12.0",                family: fedora,       ignore: true } # not released yet
 - { name: gedit,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: geeknote,                                                                        noscheme: true }
 - { name: gettext,                     ver: "2",                                           ignore: true } # libintl from LEDE
 - { name: geocode-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gimp,                        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -570,6 +571,8 @@
 - { name: moc,                         verpat: "(2\\.6)\\.0(a.*)",                         setver: "$1$2" } # there's no third numeric component for alpha
 - { name: mono,                        ver: "5.10.0.79",             family: aosc,         incorrect: true }
 - { name: mono,                                                      family: aosc,         untrusted: true }
+- { name: mpdscribble,                 ver: "0.23",                  family: openwrt,      incorrect: true } # entware
+- { name: mpdscribble,                                               family: openwrt,      untrusted: true } # entware
 - { name: mpfr,                        verlonger: 3,                                       ignore: true } # openbsd, openindiana fakes
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignore: true } # fake
 - { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignore: true } # it's x.y.z, ignore all revisions and dates
@@ -870,6 +873,8 @@
 - { name: ufoai,                       ver: "2.5.0+20150216",                              ignore: true } # homebrew
 - { name: unace,                       ver: "2.50",                                        setver: "2.5" }
 - { name: unarr,                       verpat: "20[0-9]{6}.*",                             ignore: true } # slackbuilds
+- { name: unfs3,                       ver: "0.9.23",                family: openwrt,      incorrect: true } # entware
+- { name: unfs3,                                                     family: openwrt,      untrusted: true } # entware
 - { name: unpaper,                     verpat: "20[0-9]{6}.*",                             ignore: true } # aosc
 - { name: uniconvertor,                ver: "2.0",                   family: [fedora,mageia,rosa], incorrect: true } # not yet released
 - { name: unicode-ucd,                 verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
@@ -882,6 +887,7 @@
 - { name: urw-fonts,                   verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: usbmuxd,                     ver: "1.1.1",                 family: openwrt,      incorrect: true } # fake
 - { name: usbview,                     ver: "2.0.1",                 family: rosa,         incorrect: true }
+- { name: usbrelay,                    verpat: "20[0-9]{6}",                               ignore: true }
 - { name: utfcpp,                      verpat: "2012.*",                                   ignore: true } # slackbuilds
 
 # V

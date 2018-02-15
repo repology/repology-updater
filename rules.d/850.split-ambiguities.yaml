@@ -158,6 +158,8 @@
 
 - { name: knights, wwwpart: knightsgame.org.uk, setname: knightsgame }
 
+- { name: knock,                       wwwpart: guelfoweb, setname: knockpy } # XXX: problem
+
 - { name: libelf,                      wwwpart: elfutils, setname: elfutils } # Arch: XXX: problem
 
 - { name: libidn,                      verpat: "2.*", setname: libidn2 } # Haikuports: XXX: problem, different libraries

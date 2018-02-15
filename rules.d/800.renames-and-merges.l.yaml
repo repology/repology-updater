@@ -15,6 +15,7 @@
 - { setname: ldns,                     name: "perl:dns-ldns", wwwpart: nlnetlabs, addflavor: perl } # part of
 - { setname: ldns,                     name: "python:ldns", addflavor: python }
 - { setname: ldns,                     name: [ldns-tools,ldns-utils] }
+- { setname: libleptonica,             name: liblibleptonica }
 - { setname: liberal-crime-squad,      name: lcs }
 - { setname: libreoffice-extension-barcode, name: barcode, family: gentoo, category: app-officeext }
 - { setname: libreoffice-fresh-l10n,   namepat: "libreoffice-fresh-.*", family: arch }
