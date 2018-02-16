@@ -28,6 +28,7 @@
 - { setname: bind,                     name: bind-toolsonly, addflavor: toolsonly }
 - { setname: bind,                     name: bind9-devel, ignore: true }
 - { setname: bind,                     name: bindutils, addflavor: utils }
+- { setname: bind,                     name: dig, addflavor: dig }
 - { setname: bind,                     namepat: "bind[0-9_.-]+" }
 - { setname: bird,                     name: [bird-v6,bird6] }
 - { setname: bison,                    name: [bison-doc,bison-runtime], addflavor: true }

@@ -22,6 +22,10 @@
 - { setname: dejagnu,                  name: deja-gnu }
 - { setname: devede,                   name: devedeng }
 - { setname: dgen-sdl,                 name: dgen }
+- { setname: dhcp,                     name: [dhclient,isc-dhclient,isc-dhcp], addflavor: client }
+- { setname: dhcp,                     name: [isc-dhcpd], addflavor: server }
+- { setname: dhcp,                     name: [isc-dhcrelay], addflavor: relay }
+- { setname: dhcp,                     namepat: "isc-dhcp[0-9]*-(client|server|relay)", addflavor: $1 }
 - { setname: dhewm3,                   name: iodoom3-dhewm3 }
 - { setname: diffoscope,               name: "python:diffoscope" }
 - { setname: dino,                     name: dino-unstable, ignore: true }
