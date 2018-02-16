@@ -74,6 +74,7 @@ version are always parsed.
 | Ravenports                       | ✔       |         | ✔     | ✔     |         |          |
 | RubyGems                         |         |         |       | ✔ (2) |         |          |
 | Rudix                            | ✔       |         |       |       | ✔       |          |
+| Scoop                            |         |         |       | ✔     | ✔       | ✔        |
 | SlackBuilds                      |         | ✔       | ✔     | ✔     |         | ✔        |
 | Stackage                         | ✔       |         |       |       |         |          |
 | Vcpkg                            | ✔       |         |       |       |         |          |
