@@ -239,7 +239,7 @@
 # "A tool for building identical machine images" vs "Bash wrapper for pacman and aur"
 - { name: packer, setname: "pacman-packer", family: arch  }
 
-- { name: pachi, wwwpart: pachi.or.cz, setname: pachi-go,              family: [ debuntu ] } # package manager vs. some game
+- { name: pachi, wwwpart: pachi.or.cz, setname: pachi-go }
 
 - { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
 
