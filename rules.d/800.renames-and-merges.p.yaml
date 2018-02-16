@@ -1,5 +1,6 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: pachi,                    name: martian }
 - { setname: pacman-arena,             name: pacmanarena }
 - { setname: palemoon,                 name: palemoon-26 }
 - { setname: palemoon,                 name: palemoon-bin, addflavor: bin }

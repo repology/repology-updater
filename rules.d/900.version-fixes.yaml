@@ -633,7 +633,6 @@
 - { name: oxygen-gtk3,                 verlonger: 3,                 family: kaos,         ignore: true }
 
 # P
-- { name: pachi,                       verpat: "11.*",                                     ignore: true }
 - { name: pam_ldap,                    verpat: "([0-9]+)\\.([0-9]+)\\.([0-9]+)",           setver: "$1$2$3" } # FreeBSD garbage
 - { name: pam-u2f,                     verpat: "(.*)\\.20[0-9]{6}",                        setver: "$1" } # aosc snapshot
 - { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignore: true }
