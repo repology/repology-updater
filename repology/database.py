@@ -473,8 +473,8 @@ class Database:
                         effname,
                         count(DISTINCT repo)::smallint AS num_repos,
                         count(DISTINCT family)::smallint AS num_families,
-                        count(DISTINCT repo) FILTER (WHERE versionclass = 1)::smallint AS num_repos_newest,
-                        count(DISTINCT family) FILTER (WHERE versionclass = 1)::smallint AS num_families_newest,
+                        count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5)::smallint AS num_repos_newest,
+                        count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5)::smallint AS num_families_newest,
                         bool_and(shadow) AS shadow_only
                     FROM packages
                     GROUP BY effname
