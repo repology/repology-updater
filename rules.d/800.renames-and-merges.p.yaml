@@ -82,9 +82,10 @@
 - { setname: pycharm,                  name: pycharm-professional, addflavor: professional }
 - { setname: pygtksourceview,          name: ["python:gtksourceview","python:pygtksourceview","python:pygtksourceview2",pygtksourceview,pygtksourceview2] }
 - { setname: pypanel,                  name: "python:pypanel" }
-- { setname: pypy,                     name: ["python:pypy","python:pypy-bin"] }
+- { setname: pypy,                     name: ["python:pypy","python:pypy-bin",pypy2] }
 - { setname: pypy3,                    name: ["python:pypy3","python:pypy3-bin"] }
 - { setname: python,                   namepat: "python[._-]?[23][0-9._-]*" }
+- { setname: python,                   name: python-exp } # scoop
 
 - setname: pinentry
   name:

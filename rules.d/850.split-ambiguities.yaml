@@ -102,6 +102,8 @@
 # swf extractor vs. game engine
 - { name: flare, wwwpart: nowrap.de, setname: flare-swf-extractor }
 
+- { name: forge, wwwpart: fsharp, setname: forge-fsharp }
+
 # file change monitor vs. file system checksum checker
 - { name: fswatch, verpat: "1.*",      setname: fswatch-mon }
 
@@ -226,6 +228,8 @@
 
 - { name: nvi, verpat: "2\\..*",       setname: nvi2 }
 
+- { name: nvm, wwwpart: coreybutler, setname: nvm-windows }
+
 - { name: omi,                         setname: omi-ftpmirror, category: ftp } # vs. Open Management Infrastructure
 
 - { name: openal, family: [pkgsrc,chocolatey,freebsd,macports], setname: openal-creative }
@@ -242,6 +246,8 @@
 - { name: pachi, wwwpart: pachi.or.cz, setname: pachi-go }
 
 - { name: pacman,                      setname: pacman-game,              family: [ debuntu ] } # package manager vs. some game
+
+- { name: perl, wwwpart: strawberry, setname: strawberryperl }
 
 - { name: picard,                      setname: java-picard, wwwpart: picard.sourceforge.net }
 
@@ -266,10 +272,12 @@
 
 - { name: pulp, wwwpart: bodil, setname: "node:pulp" }
 
-- { name: pwsafe, wwwpart: passwordsafe, setname: passwordsafe }
+- { name: pwsafe, wwwpart: [passwordsafe,pwsafe.org], setname: passwordsafe }
 
 - { name: racer, wwwpart: hippo, setname: racer-game }
 - { name: racer, setname: "rust:racer" }
+
+- { name: rsync, wwwpart: cwrsync, setname: cwrsync }
 
 - { name: "ruby:bcrypt-ruby", setname: "ruby:bcrypt", ruleset: gentoo } # bcrypt-ruby != bcrypt
 
@@ -334,6 +342,7 @@
 
 # GNU time vs. xemacs module
 - { name: time, setname: xemacs-time, wwwpart: xemacs } # gentoo
+- { name: time, setname: psutils-time, wwwpart: lukesampson }
 
 - { name: tint, category: Graphics, setname: tint-photo-editor }
 

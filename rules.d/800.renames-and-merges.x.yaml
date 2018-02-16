@@ -1,8 +1,9 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-- { setname: x264,                     name: [libx264,lib264-142] }
-- { setname: x264,                     name: libx264-10bit, addflavor: 10bit }
+- { setname: x264,                     name: [libx264,lib264-142,libx264-142] }
+- { setname: x264,                     name: [libx264-10bit,x264-10bit], addflavor: 10bit }
 - { setname: x264,                     name: libx264-all, addflavor: all }
+- { setname: x264,                     name: x264-encoder, addflavor: encoder }
 - { setname: x264,                     name: libx264-devel, ignore: true }
 - { setname: x264,                     name: x264-devel, ignore: true }
 - { setname: x2vnc,                    name: x2vnc-no-xinerama, addflavor: true }

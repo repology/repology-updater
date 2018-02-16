@@ -1,0 +1,31 @@
+###########################################################################
+# Scoop
+###########################################################################
+- name: scoop
+  type: repository
+  desc: Scoop
+  family: scoop
+  sources:
+    - name: scoop
+      fetcher: Git
+      parser: ScoopGit
+      url: https://github.com/lukesampson/scoop.git
+      sparse_checkout: [ 'bucket/*.json' ]
+      subrepo: scoop
+    - name: scoop-extras
+      fetcher: Git
+      parser: ScoopGit
+      url: https://github.com/lukesampson/scoop-extras.git
+      sparse_checkout: [ '*.json' ]
+      subrepo: scoop-extras
+  repolinks:
+    - desc: Scoop home
+      url: http://scoop.sh/
+    - desc: Scoop main repository on GitHub
+      url: https://github.com/lukesampson/scoop
+    - desc: Scoop extras repository on GitHub
+      url: https://github.com/lukesampson/scoop-extras
+  packagelinks:
+    - desc: Package json
+      url: 'https://github.com/lukesampson/{subrepo}/blob/master/{path}'
+  tags: [ all, production ]

@@ -52,7 +52,7 @@
 - { setname: tome,                     name: [t-engine4,tales-of-majeyal,tome4,tome4-data,tome-ah] }
 - { setname: tome,                     name: tome4-beta, ignore: true }
 - { setname: tomee,                    name: [tomee-jax-rs,tomee-plume,tomee-plus,tomee-webprofile] }
-- { setname: tor,                      name: tor-devel }
+- { setname: tor,                      name: [tor-devel,tor-expert] }
 - { setname: tor,                      name: tor-unstable, devel: true }
 - { setname: tre,                      name: libtre } # XXX: reverse?
 - { setname: tremor,                   name: libtremor }

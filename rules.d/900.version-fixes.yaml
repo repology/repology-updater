@@ -38,6 +38,7 @@
 - { name: adwaita-icon-theme,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: afdko,                       verpat: "([0-9]+\\.[0-9]+)\\.b?([0-9]+).*?",        setver: "$1.$2" }
 - { name: aften,                       ver: [ "0.05", "0.08" ],                            ignore: true }
+- { name: ag,                          verlonger: 3,                                       ignore: true } # windows-only
 - { name: agedu,                       ver: "20160920.853cea9",                            ignore: true }
 - { name: agda-stdlib,                 verlonger: 2,                 family: gentoo,       incorrect: true } # documented broken versioning (other project's version is prepended)
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignore: true }
@@ -127,7 +128,7 @@
 - { name: brotli,                      verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: brickout,                    verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # it's clearly 2002.06.09 as stated on the website
 - { name: bully,                       verpat: "1\\.1.+",                                  ignore: true } # snapshots, latest is 1.1
-- { name: busybox,                     ver: "1.28.0",                                      devel: true }
+- { name: busybox,                     verpat: "[0-9]{4}.*",                               incorrect: true } # scoop
 - { name: bzip2,                       ver: "1.0.6.0.1",                                   ignore: true } # nix fake; real version is 1.0.6
 - { name: bzr-rewrite,                                               ruleset: aur,         untrusted: true }
 - { name: bzr-rewrite,                 ver: "0.6.4",                 ruleset: aur,         incorrect: true }
@@ -153,6 +154,7 @@
 - { name: chakracore,                  wwwpart: cauldrondevelopmentllc,                    ignore: true } # fork with different versioning
 - { name: checkbashisms,               verpat: "20[0-9]{6}.*",                             ignore: true } # AUR
 - { name: cherokee,                    verpat: "20[0-9]{6}.*",                             incorrect: true } # slackware
+- { name: chromium,                    verpat: ".*-r[0-9]+",                               ignore: true } # scoop
 - { name: ckermit,                     ver: "302",                                         setver: "9.0.$0" }
 - { name: ckermit,                     ver: "9.0.304",                                     devel: true }
 - { name: clang,                       verpat: ".*r[0-9]{6,}",                             ignore: true } # ignore revisions, allow release candidates
@@ -205,6 +207,7 @@
 - { name: dietlibc,                    verpat: ".*(pre|cvs|20[0-9]{6}).*",                 ignore: true }
 - { name: dietlibc,                    ver: "0.34",                  family: [fedora,mageia], incorrect: true }
 - { name: dietlibc,                                                  family: [fedora,mageia], untrusted: true }
+- { name: diff-pdf,                    verpat: "20[0-9-]{6}.*",                            ignore: true }
 - { name: diffpdf,                     verge: "2.1.3.1",                                   successor: true }
 - { name: discord,                                                   family: chocolatey,   ignore: true } # windows version has different versioning
 - { name: distcc,                      ver: "3.2",                   family: pkgsrc,       incorrect: true }
@@ -228,6 +231,7 @@
 # E
 - { category: "Graphical desktop/Enlightenment", verpat: "20[0-9]{6}.*", family: pclinuxos, ignore: true }
 - { name: ebtables,                    verpat: "20[0-9]{2}.*",                             ignore: true } # LEDE year
+- { namepat: "eclipse.*",              verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\-20[0-9]{10}",   ignore: true } # scoop
 - { name: egoboo,                      ver: "2.81",                                        setver: "2.8.1" }
 - { name: eiskaltdcpp,                 verpat: ".*g.*",                                    ignore: true }
 - { name: eiskaltdcpp,                 ver: "2.2.11",                family: fedora,       ignore: true } # fake
@@ -490,6 +494,7 @@
 - { name: loic,                        verpat: ".*9.*9.*9.*",                              devel: true } # prerelease (2.9.9.99)
 - { name: lrzsz,                       verge: "0.12.21",                                   successor: true } # debian fork? (needs investigation)
 - { name: lsscsi,                      ver: "0.29",                  family: opensuse,     ignore: true } # fake
+- { name: lua,                         verpat: "[0-9]+\\.[0-9]+\\.[0-9]+[.-].*",           incorrect: true } # scoop, chocolatey
 - { name: luajit,                      ver: ["2.1", "2.1.0"],        family: [sisyphus,fedora], incorrect: true } # it's 2.1.0 betaN
 - { name: luajit,                                                    family: [sisyphus,fedora], untrusted: true }
 - { name: luajit,                      verpat: "20[0-9]{2}.*",                             ignore: true }
@@ -594,6 +599,8 @@
 - { name: net-tools,                   verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: netcat-openbsd,              verpat: "20[0-9]{6}.*",                             ignore: true } # pkgsrc garbage
 - { name: netpbm,                      verpat: "[0-9]{4}",                                 ignore: true } # aosc garbage
+- { name: ngrok,                       ver: [stable,4VmDzA7iaHb],    ruleset: scoop,       incorrect: true }
+- { name: ngrok,                                                     ruleset: scoop,       untrusted: true }
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: nkf,                         verpat: "2\\.[0-9]{2}",                             incorrect: true } # it's X.Y.Z, not X.YZ
 - { name: notion,                      verpat: "20[0-9]{6}.*",                             incorrect: true } # it's 3-YYYYMMDD, not just date
@@ -624,6 +631,7 @@
 - { name: openscenegraph,              verpat: "3\\.[0-9]*[13579]\\..*",                   devel: true }
 - { name: openssh,                     verpat: "([0-9]+\\.[0-9]+)\\.([0-9]+)",             setver: "$1p$2" } # pkgrc: it's X.YpZ!
 - { name: openssh,                     verpat: "[0-9]+\\.[0-9]+",                          ignore: true } # freshcode, pZ part missing
+- { name: openssh,                     verpat: "20[0-9-]{6}.*",                            ignore: true } # scoop
 - { name: openssh,                                                                         p_is_patch: true }
 - { name: openxcom,                    verpat: ".*201[789].*",                             ignore: true } # git snapshots
 - { name: opus,                        ver: "1.3",                   family: fedora,       ignore: true } # fake, it's beta
@@ -690,6 +698,7 @@
 - { name: "perl:yaml-libyaml",         ver: "0.71",                  family: [ sisyphus ], ignore: true } # 0.71 wasn't an authorised release
 - { name: "perl:xml-rss-feed",         ver: "2.212",                                       outdated: true } # 2.212 < 2.4
 - { name: "perl:xml-rss-feed",         ver: "2.40",                                        incorrect: true } # it's 2.4
+- { name: php-xdebug,                  verpat: "(.*)-[0-9]+\\.[0-9]+", family: scoop,      setver: "$1" } # the suffix seem to encode php version?
 - { name: pilot-link,                  ver: "0.12.15",               family: gobolinux,    ignore: true } # gobolinux fake
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignore: true }
 - { name: pingus,                      verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
