@@ -14,6 +14,9 @@
 - { setname: bats,                     name: bash-bats }
 - { setname: baudline,                 name: linux-baudline, family: freebsd }
 - { setname: bbpager,                  name: [bbpager03,bbpager04] }
+- { setname: bcc,                      name: bpfcc }
+- { setname: bcc,                      name: "python:bcc", addflavor: python } # split in 850
+- { setname: bcc,                      name: bcc-tools, addflavor: tools }
 - { setname: bcel,                     name: bcel5_3 }
 - { setname: bcfg2,                    name: "python:bcfg2" }
 - { setname: beast,                    name: beastbse }

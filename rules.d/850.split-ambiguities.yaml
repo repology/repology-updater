@@ -18,6 +18,10 @@
 
 - { name: bandcamp-dl, wwwpart: bandcamp-downloader,      setname: bandcamp-downloader }
 
+- { name: bcc, wwwpart: iovisor, setname: bcc-bpf }
+- { name: bcc, ruleset: [freebsd,pkgsrc,openindiana], setname: bcc-bruceevans }
+- { name: bcc, warning: "please classify me" }
+
 - { name: bos, wwwpart: boswars,                          setname: boswars }
 
 - { name: borg, wwwpart: borg-calendar,                   setname: borg-calendar }
@@ -315,6 +319,11 @@
 - { name: ssr, family: pclinuxos, setname: simplescreenrecorder }
 
 - { name: smem, verpat: "2007.*", family: gentoo, setname: smem.pl } # unrelated python script
+
+- { name: spigot, wwwpart: spigotmc, setname: spigot-minecraft }
+- { name: spigot, wwwpart: sgtatham, setname: spigot-calculator }
+- { name: spigot, ruleset: freebsd, setname: spigot-videocapture }
+- { name: spigot, warning: "please classify me" }
 
 - { name: statik, wwwpart: rakyll, setname: "go:github-rakyll-statik" }
 

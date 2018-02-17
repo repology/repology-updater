@@ -503,6 +503,7 @@
 - { name: lz4,                         verpat: "[0-9]+",                                   ignore: true }
 
 # LIB*
+- { name: libadacrypt,                                                                     noscheme: true }
 - { name: libasr,                      verpat: "[0-9]{8}.*",                               ignore: true } # guix crap
 - { name: libcaca,                     ver: "0.99", family: [sisyphus,fedora,mageia,openmandriva,pclinuxos,rosa], incorrect: true } # it's 0.99.betaX!
 - { name: libcaca,                     ver: "0.99",                                        untrusted: true }
@@ -645,6 +646,8 @@
 - { name: pam-u2f,                     verpat: "(.*)\\.20[0-9]{6}",                        setver: "$1" } # aosc snapshot
 - { name: pangox-compat,               verlonger: 3,                 family: rosa,         ignore: true }
 - { name: patchelf,                    verpat: ".*pre.*",                                  ignore: true } # nix
+- { name: pcc,                         verpat: "20[0-9]{6}",                               ignore: true }
+- { name: pcc-libs,                    verpat: "20[0-9]{6}",                               ignore: true }
 - { name: pciids,                                                    family: sisyphus,     ignore: true } # ALT pick random date instead of official date version
 - { name: pcre,                        ver: "10.31",                 family: fedora,       ignore: true } # fake, not released
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignore: true }
@@ -702,6 +705,7 @@
 - { name: pilot-link,                  ver: "0.12.15",               family: gobolinux,    ignore: true } # gobolinux fake
 - { name: pingus,                      verpat: "0\\.8\\.0-[0-9]{8}",                       ignore: true }
 - { name: pingus,                      verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
+- { name: pkg,                         verpat: "[0-9]+\\.[0-9]+\\.99.*",                   incorrect: true }
 - { name: plowshare-modules,                                                               ignore: true } # no official releases
 - { name: pmount,                      ver: "0.9.99",                                      setver: "0.9.99_alpha" }
 - { name: pmount,                      verpat: "0\\.9\\.99.*",                             devel: true }
@@ -710,6 +714,7 @@
 - { name: postgresql,                  ver: ["11","11.0"],                                 ignore: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignore: true } # third component is a build number, it's not a part of official version
 - { name: powertop,                    verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
+- { name: pragmarc,                                                                        noscheme: true }
 - { name: prboom-plus,                 verpat: ".*svn.*",                                  ignore: true }
 - { name: processing,                  verpat: "[0-9]{4}.*",                               incorrect: true } # gobolinux garbage
 - { name: procmail,                    verpat: "[0-9]+",                                   ignore: true } # homebrew
@@ -734,6 +739,8 @@
 - { name: "python:pyode",              verpat: ".*2010.*",                                 ignore: true }
 - { name: "python:pyspatialite",       ver: "3.0.1",                 noruleset: pypi,      incorrect: true } # it's 3.0.1-alpha-0
 - { name: "python:pyspatialite",       verpat: "(.*)(?:[_-]alpha[_-])(.*)",                setver: "$1alpha$2" }
+- { name: "python:sphinx-rtd-theme",   verpat: ".*[ab].*",                                 devel: true }
+- { name: "python:tornado",            verpat: ".*[ab].*",                                 devel: true }
 - { name: pytrainer,                   ver: ["1.10.1", "1.10.2"],    family: debuntu,      ignore: true }
 
 # Q
