@@ -10,7 +10,7 @@
     - name: [ toutatis/main, toutatis-updates/main ]
       fetcher: File
       parser: DebianSources
-      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -27,7 +27,7 @@
     - name: [ toutatis-backports/main ]
       fetcher: File
       parser: DebianSources
-      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -44,7 +44,7 @@
     - name: [ belenos/main, belenos-updates/main ]
       fetcher: File
       parser: DebianSources
-      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -61,7 +61,7 @@
     - name: [ belenos-backports/main ]
       fetcher: File
       parser: DebianSources
-      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -78,7 +78,7 @@
     - name: [ flidas/main, flidas-updates/main ]
       fetcher: File
       parser: DebianSources
-      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -95,7 +95,7 @@
     - name: [ flidas-backports/main ]
       fetcher: File
       parser: DebianSources
-      url: 'http://packages.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
+      url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
