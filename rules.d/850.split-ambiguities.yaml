@@ -283,6 +283,8 @@
 
 - { name: rsync, wwwpart: cwrsync, setname: cwrsync }
 
+- { name: ruby, wwwpart: rubyinstaller, setname: rubyinstaller }
+
 - { name: "ruby:bcrypt-ruby", setname: "ruby:bcrypt", ruleset: gentoo } # bcrypt-ruby != bcrypt
 
 - { name: "ruby:mysql", setname: "ruby:mysql-tmtm", wwwpart: tmtm } # fork
