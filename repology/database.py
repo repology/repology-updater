@@ -21,6 +21,7 @@ import json
 import psycopg2
 
 from repology.package import Package
+from repology.querymgr import QueryManager
 
 
 class Query:
@@ -284,9 +285,10 @@ class MetapackageRequest:
 
 
 class Database:
-    def __init__(self, dsn, readonly=True, autocommit=False):
+    def __init__(self, dsn, queriesdir, readonly=True, autocommit=False):
         self.db = psycopg2.connect(dsn)
         self.db.set_session(readonly=readonly, autocommit=autocommit)
+        self.querymgr = QueryManager(queriesdir, self.db)
 
     def Request(self, query, *args):
         with self.db.cursor() as cursor:

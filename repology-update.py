@@ -72,7 +72,7 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
 
     db_logger = logger.GetIndented()
 
-    database = Database(options.dsn, readonly=False)
+    database = Database(options.dsn, options.sql_dir, readonly=False)
     if options.initdb:
         db_logger.Log('(re)initializing database schema')
         database.CreateSchema()
@@ -142,6 +142,7 @@ def ParseArguments():
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-E', '--repos-dir', default=config['REPOS_DIR'], help='path to directory with repository configs')
     parser.add_argument('-U', '--rules-dir', default=config['RULES_DIR'], help='path to directory with rules')
+    parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
 
     actions_grp = parser.add_argument_group('Actions')

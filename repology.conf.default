@@ -44,6 +44,14 @@ REPOS_DIR = "repos.d"
 RULES_DIR = "rules.d"
 
 #
+# Path to directory containing SQL queries
+#
+# Use by repology-update and repology-app
+# Overridable with --sql-dir command line arg
+#
+SQL_DIR = "sql.d"
+
+#
 # Array of repository names or tags to work with
 #
 # Used by repology-update and repology-dump
