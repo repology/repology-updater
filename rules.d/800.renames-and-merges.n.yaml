@@ -36,6 +36,28 @@
 - { setname: ntfs-3g,                  name: [ntfs-3g-ar,ntfs-3g-advanced], addflavor: ar }
 - { setname: ntfs-3g,                  name: ["fusefs:ntfs","fusefs:ntfs-3g",ntfs-3g-fuse,ntfs-3g-ntfsprogs,ntfs-3g_ntfsprogs,ntfsprogs,ntfs3g,libntfs-3g,libntfs] }
 - { setname: ntfs-3g,                  name: ntfs-3g-wimlib-patched, addflavor: wimlib }
+- { setname: nvidia,                   namepat: "(linux[0-9]+)-nvidia[x0-9._-]*", addflavor: $1 }
+#- { setname: nvidia,                   namepat: "nvidia[0-9._-]+xx.*" }
+- { setname: nvidia,                   namepat: "nvidia[0-9._-]+" }
+- { setname: nvidia,                   namepat: "nvidia-drivers?[0-9._-]*" }
+- { setname: nvidia,                   name: nvidia-graphics-drivers-tegra, ignore: true, addflavor: tegra }
+- { setname: nvidia,                   namepat: "nvidia-graphics-drivers[0-9._-]*" }
+- { setname: nvidia,                   namepat: "nvidia-graphics-drivers[0-9._-]*-updates", addflavor: updates }
+- { setname: nvidia,                   namepat: "nvidia-graphics-drivers-legacy[x0-9._-]*" }
+- { setname: nvidia,                   namepat: "nvidia-graphics-drivers-experimental[x0-9._-]*", ignore: true }
+- { setname: nvidia,                   name: nvidia-graphics-drivers-updates, addflavor: updates }
+- { setname: nvidia,                   namepat: "nvidia-legacy.*" }
+#- { setname: nvidia,                   namepat: "nvidia-libgl.*beta.*", ignore: true, addflavor: libgl }
+#- { setname: nvidia,                   namepat: "nvidia-glx.*beta.*", ignore: true, addflavor: glx }
+- { setname: nvidia,                   namepat: "nvidia_glx_src[0-9._-]*", addflavor: glx }
+- { setname: nvidia,                   name: nvidia_glx_common, addflavor: glx }
+- { setname: nvidia,                   namepat: "xorg-x11-drv-nvidia[x0-9._-]*" }
+- { setname: nvidia,                   namepat: "(mhwd|khd)-nvidia[x0-9._-]*", addflavor: $1 }
+- { setname: nvidia,                   namepat: "nvidia-bfq[x0-9._-]*", addflavor: bfq }
+- { setname: nvidia,                   name: [driver-graphics-nvidia,nvidia-driver,nvidia-drivers] }
+- { setname: nvidia,                   name: [nvidia-graphics-modules,nvidia-kernel,nvidia-kmod], addflavor: kmod }
+- { setname: nvidia,                   name: [nvidia-beta,nvidia-beta-all,nvidia-current,nvidia-full-beta,nvidia-full-beta-all], ignore: true }
+- { setname: nvidia,                   name: nvidia-beta-dkms, ignore: true, addflavor: dkms }
 - { setname: nvidia-settings,          namepat: "nvidia-[0-9._-]*-settings" }
 - { setname: nvidia-settings,          namepat: "nvidia-settings-.*" }
 - { setname: nvidia-settings,          namepat: "nvidia-settings-experimental.*", ignore: true }

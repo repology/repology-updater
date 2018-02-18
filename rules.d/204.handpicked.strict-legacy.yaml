@@ -1,0 +1,4 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { name: ruby-mini_magick-4.5, ruleset: aur, legacy: true }
+- { name: ruby-slack-notifier-1, ruleset: aur, legacy: true }

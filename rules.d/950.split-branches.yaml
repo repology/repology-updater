@@ -180,6 +180,16 @@
 
 - { name: mysql,             verpat: "8\\..*",            setname: mysql8 }
 
+# note that versions in conditions are +1 to real versions
+- { name: nvidia, verlt: "71.87", setname: nvidia-lagacy-71.86 }
+- { name: nvidia, verlt: "96.44", setname: nvidia-legacy-96.43 }
+- { name: nvidia, verlt: "173.15", setname: nvidia-legacy-173.14 }
+- { name: nvidia, verlt: "305", setname: nvidia-legacy-304 }
+#- { name: nvidia, verlt: "341", setname: nvidia-legacy-340 }
+#- { name: nvidia, verlt: "385", setname: nvidia-384.xx }
+#- { name: nvidia, verpat: "387", setname: nvidia-387.xx }
+# (see http://www.nvidia.com/object/unix.html)
+
 - { name: openjdk,           verpat: "9.*",               setname: openjdk9 }
 - { name: openjdk,           verpat: "8.*",               setname: openjdk8 }
 - { name: openjdk,           verpat: "7.*",               setname: openjdk7 }

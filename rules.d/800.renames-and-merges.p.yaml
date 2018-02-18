@@ -21,12 +21,15 @@
 - { setname: pdns,                     name: powerdns }
 - { setname: pdumpfs,                  name: "ruby:pdumpfs" }
 - { setname: pelican,                  name: "python:pelican" }
+- { setname: pg_dirtyread,             namepat: "(postgresql[0-9._-]*)-pg_dirtyread", addflavor: $1 }
+- { setname: pg_repack,                namepat: "(postgresql[0-9._-]*)-pg_repack", addflavor: $1 }
 - { setname: pgcli,                    name: "python:pgcli" }
 - { setname: pglogical,                name: [postgresql-pglogical,pglogical2] }
 - { setname: pgplot,                   name: pgplot5 }
 - { setname: pgpool,                   name: [pgpool2,postgresql-pgpool-ii] }
 - { setname: pgpool,                   namepat: "pgpool-ii[0-9._-]*" }
 - { setname: pgpool,                   namepat: "postgresql[0-9._-]*-pgpool[0-9._-]*" }
+- { setname: pgroonga,                 namepat: "(postgresql[0-9._-]*)-pgroonga", addflavor: $1 }
 - { setname: phash,                    name: libphash }
 - { setname: phoenix-emu,              name: phoenix-emu-project }
 - { setname: php,                      namepat: "php[0-9._-]*" }
@@ -40,6 +43,9 @@
 - { setname: pkg,                      name: pkg-bsd, family: ravenports }
 - { setname: pkg,                      name: pkg-devel, ignore: true, family: freebsd }
 - { setname: pkgconf,                  name: pkgconfig, family: ravenports } # XXX
+- { setname: plpgsql_check,            namepat: "(postgresql[0-9._-]*)-plpgsql_check", addflavor: $1 }
+- { setname: plr,                      namepat: "(postgresql[0-9._-]*)-plr", addflavor: $1 }
+- { setname: plv8,                     namepat: "(postgresql[0-9._-]*)-plv8(js)?", addflavor: $1 }
 - { setname: pnp4nagios,               name: pnp4nagios-cgi }
 - { setname: polyclipping,             name: clipperlib }
 - { setname: polyclipping,             name: libpolyclipping }
@@ -84,8 +90,8 @@
 - { setname: pypanel,                  name: "python:pypanel" }
 - { setname: pypy,                     name: ["python:pypy","python:pypy-bin",pypy2] }
 - { setname: pypy3,                    name: ["python:pypy3","python:pypy3-bin"] }
-- { setname: python,                   namepat: "python[._-]?[23][0-9._-]*" }
 - { setname: python,                   name: python-exp } # scoop
+- { setname: python,                   namepat: "python[._-]?[23][0-9._-]*" }
 
 - setname: pinentry
   name:

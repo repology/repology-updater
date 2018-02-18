@@ -12,6 +12,7 @@
 - { ruleset: aur,             namepat: "(.*)-bin", setname: "$1" } # XXX: addflavor: bin
 
 - { ruleset: chocolatey,      namepat: "(.*)\\.(install|portable|commandline)", setname: "$1", addflavor: "$2" }
+- { ruleset: chocolatey,      untrusted: true } # nuget is terminally broken and can't handle arbitrary version schemes, so most are garbage
 
 - { ruleset: deb_multimedia,  namepat: "(.*)-dmo", setname: "$1" }
 

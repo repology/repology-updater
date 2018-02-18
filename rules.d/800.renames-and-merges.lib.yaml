@@ -100,7 +100,12 @@
 - { setname: libwpd,                   namepat: "libwpd[0-9.-]+" }
 - { setname: libwpg,                   namepat: "libwpg[0-9.-]+" }
 - { setname: libwps,                   namepat: "libwps[0-9.-]+" }
+- { setname: libx11,                   name: libx11-nokeyboardgrab }
+- { setname: libxcb,                   name: [libx32-libxcb,mingw-w64-libxcb,xorg-libxcb] }
 - { setname: libxfont,                 name: [libxfont,libxfont1,libxfont2,xorg-libxfont,xorg-libxfont2,xorg-xfont,xorg-xfont2] }
+- { setname: libxkbcommon,             name: libxkbcommon-doc, addflavor: doc }
+- { setname: libxkbcommon,             name: libxkbcommon-x11, addflavor: x11 }
+- { setname: libxkbcommon,             name: xkbcommon }
 - { setname: libxml++,                 name: [libxml++-reference,libxml++-docs], addflavor: true }
 - { setname: libxml++,                 name: [libxmlpp,libxmlxx,libxmlxx2] }
 - { setname: libxml++,                 namepat: "libxml\\+\\+[0-9._-]+" }
@@ -110,5 +115,6 @@
 - { setname: libxml2,                  name: libxml2-reference, addflavor: reference }
 - { setname: libxmlbird,               name: xmlbird }
 - { setname: libxmp,                   name: libxmp-lite }
+- { setname: libxrender,               name: [libx32-libxrender,xorg-libxrender,xrender] }
 - { setname: libzdb,                   namepat: "libzdb-(mariadb|mysql|oracle|percona|postgresql|sqlite)[0-9._-]*" }
 - { setname: libzen,                   name: libzen0 }

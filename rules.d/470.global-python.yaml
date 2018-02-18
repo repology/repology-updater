@@ -8,23 +8,23 @@
 #  category: python
 #  name: python
 #  addflag: nowildcard
-- { family: aosc, category: python,    setname: "python:$0", noflag: nowildcard }
+- { setname: "python:$0",              family: aosc, category: python, noflag: nowildcard }
 
 # XXX: merge pypy- and pypy3-
 
 # some rules may merge modules for different python version into single entry; this is intended
-- { namepat: "py[0-9][0-9]-(.*)",      setname: "python:$1", family: [ freebsd, pkgsrc ] }
-- { namepat: "py3?-(.*)",              setname: "python:$1", family: [ openbsd ] }
-- { namepat: "python-(.*)",            setname: "python:$1", family: [ debuntu, centos, mageia, gobolinux, pclinuxos, ravenports, rudix ] }
-- { namepat: "python3?-module-(.*)",   setname: "python:$1", family: [ sisyphus ] }
-- { namepat: "python2?-(.*)",          setname: "python:$1", family: [ arch, guix, openmandriva ] }
-#- { namepat: "python2-(.*)",           setname: "python:$1", family: [ msys2 ] }
-- { namepat: "python3?-(.*)",          setname: "python:$1", family: [ fedora, opensuse, slackbuilds, rosa, crux ] }
-- { namepat: "python[0-9]\\.[0-9]-(.*)", setname: "python:$1", family: [ nix ] }
-- { namepat: "py[23]?-(.*)",           setname: "python:$1", family: [ alpine ] }
-- { namepat: "py[0-9]*-(.*)",          setname: "python:$1", family: [ macports ] }
-- { namepat: "python[23]?-(.*)",       setname: "python:$1", family: [ kaos ] }
-- { category: dev-python,              setname: "python:$0", family: [ gentoo, haikuports ] }
+- { setname: "python:$1",              namepat: "py[0-9][0-9]-(.*)", family: [freebsd,pkgsrc] }
+- { setname: "python:$1",              namepat: "py3?-(.*)", family: openbsd }
+- { setname: "python:$1",              namepat: "python-(.*)", family: [centos,debuntu,gobolinux,mageia,pclinuxos,ravenports,rudix] }
+- { setname: "python:$1",              namepat: "python3?-module-(.*)", family: sisyphus }
+- { setname: "python:$1",              namepat: "python2?-(.*)", family: [arch,guix,openmandriva] }
+#- { setname: "python:$1",              namepat: "python2-(.*)", family: msys2 }
+- { setname: "python:$1",              namepat: "python3?-(.*)", family: [crux,fedora,opensuse,rosa,slackbuilds] }
+- { setname: "python:$1",              namepat: "python[0-9]\\.[0-9]-(.*)", family: nix }
+- { setname: "python:$1",              namepat: "py[23]?-(.*)", family: alpine }
+- { setname: "python:$1",              namepat: "py[0-9]*-(.*)", family: macports }
+- { setname: "python:$1",              namepat: "python[23]?-(.*)", family: kaos }
+- { setname: "python:$0",              category: dev-python, family: [gentoo,haikuports] }
 
 # turn python modules into such
 - name:
@@ -154,14 +154,14 @@
     - werkzeug
   setname: "python:$0"
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
-- { name: html2text,                   setname: "python:$0", family: slackbuilds }
+- { name: html2text,                   setname: "python:html2text", family: slackbuilds }
 - { name: "python:graphviz", verpat: "1\\.[34].*", setname: "python:pygraphviz" } # use pypi name!!!
 - { name: scikits_learn, family: gentoo, setname: "python:scikit-learn" } # XXX: problem
 - { name: scikits_image, family: gentoo, setname: "python:scikit-image" } # XXX: problem
 - { name: "python:pygeoip",            setname: "python:geoip", family: aosc }
 - { name: "python:geoip",              setname: "python:pygeoip", family: alpine }
 - { name: "python:geoip-python",       setname: "python:geoip" }
-- { name: numeric,                     setname: "python:$0", family: [crux,gobolinux] }
+- { name: numeric,                     setname: "python:numeric", family: [crux,gobolinux] }
 
 - { name: bleach, family: slackbuilds, setname: "python:bleach"           }
 - { name: geohash, family: slackbuilds, setname: "python:geohash"         }

@@ -1,12 +1,5 @@
 # vim: tabstop=50 expandtab softtabstop=50
 
-#
-# Chocolatey has no sane policy on version numbering so ignorever by default, and ignore conflicting names
-# Whitelist of unignorever's is possible (with constraints on versions too), but it's too hard to maintain
-# Chocolatey developers, PLEASE USE UPSTREAM VERSIONS.
-#
-
-- { ruleset: chocolatey,                          untrusted: true }
 - { ruleset: chocolatey, name: ace,               remove: true }
 - { ruleset: chocolatey, name: acm,               remove: true }
 - { ruleset: chocolatey, name: acr,               remove: true }

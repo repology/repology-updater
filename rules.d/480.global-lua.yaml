@@ -1,13 +1,12 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # lua
-- { namepat: ".*luassert",             setname: "lua:luassert", last: true } # save
-- { namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", setname: "lua:$1", family: [ freebsd, pkgsrc, openbsd, arch, debuntu, fedora, mageia, opensuse, gobolinux ] }
-- { namepat: "lua[0-9]{2}(?:lua)?(.+?)", setname: "lua:$1", family: [ openbsd ] }
-- { namepat: "lua(?:[0-9]\\.[0-9])?-(?:lua)?(.+?)", setname: "lua:$1", family: [ nix, alpine ] }
-- { category: dev-lua, name: luabitop, setname: "lua:bitop", last: true, family: [ gentoo ] }
-- { category: dev-lua, namepat: "(?:lua[_-]?)?(.+?)", setname: "lua:$1", family: [ gentoo, haikuports ] }
+- { setname: "lua:luassert",           namepat: ".*luassert", last: true } # save
+- { setname: "lua:$1",                 namepat: "lua[0-9]{0,2}-(?:lua)?(.+?)", family: [arch,debuntu,fedora,freebsd,gobolinux,mageia,openbsd,opensuse,pkgsrc] }
+- { setname: "lua:$1",                 namepat: "lua[0-9]{2}(?:lua)?(.+?)", family: openbsd }
+- { setname: "lua:$1",                 namepat: "lua(?:[0-9]\\.[0-9])?-(?:lua)?(.+?)", family: [alpine,nix] }
+- { setname: "lua:$1",                 namepat: "(?:lua[_-]?)?(.+?)", category: dev-lua, family: [gentoo,haikuports] }
 
-- { name: [lua-luabitop, lua-luabitop, lua5.2-bitop, luabitop, lua-bitop], setname: "lua:bitop" }
-- { name: lua-ada, setname: "lua:ada" }
-- { name: [lua-mpack,lua5.2-libmpack,lua-libmpack,libmpack-lua,"lua:-mpack","lua:libmpack"], setname: "lua:mpack" } # XXX: de-mess
+- { setname: "lua:bitop",              name: [lua-bitop,lua-luabitop,lua-luabitop,lua5.2-bitop,luabitop] }
+- { setname: "lua:ada",                name: lua-ada }
+- { setname: "lua:mpack",              name: ["lua:-mpack","lua:libmpack",libmpack-lua,lua-libmpack,lua-mpack,lua5.2-libmpack] } # XXX: de-mess
