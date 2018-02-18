@@ -220,6 +220,7 @@
 - { name: sope,              verpat: "2\\..*",            setname: sope2 }
 - { name: sope,              verpat: "3\\..*",            setname: sope3 }
 
+- { name: sqlite,            verpat: "1\\..*",            setname: sqlite1 }
 - { name: sqlite,            verpat: "2\\..*",            setname: sqlite2 }
 - { name: sqlite,            verpat: "3\\..*",            setname: sqlite3 }
 

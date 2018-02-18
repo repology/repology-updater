@@ -147,6 +147,9 @@
 - { setname: autotools,                name: autotools-dev, ignore: true }
 - { setname: autotools,                name: autotools-wrappers } # ravenports
 - { setname: avidemux,                 name: [avidemux2.6,avidemux-cli,avidemux-core,avidemux-plugins,avidemux-qt,avidemux-qt4] }
+- { setname: avogadro2,                name: avogadro2-libs, addflavor: libs }
+- { setname: avogadro2,                name: avogadroapp, addflavor: app }
+- { setname: avogadro2,                name: avogadrolibs, addflavor: libs }
 - { setname: avr8-burn-o-mat,          name: avr8-burn-omat }
 - { setname: avrdude,                  name: arduino-avrdude, addflavor: adruino }
 - { setname: avro-c++,                 name: avro-cpp }

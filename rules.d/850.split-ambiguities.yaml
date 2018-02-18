@@ -1,5 +1,7 @@
 # vim: tabstop=29 expandtab softtabstop=29
 
+- { name: avogadro, verge: "1.8", setname: avogadro2 } # actually it starts with 1.90, but also cover strange 1.9 from KDE Neon
+
 # mail client vs. asynchronous synthesis system
 - { name: balsa, category: sci-electronics,               setname: balsa-synthesis }
 
@@ -105,6 +107,9 @@
 
 # swf extractor vs. game engine
 - { name: flare, wwwpart: nowrap.de, setname: flare-swf-extractor }
+
+- { name: flock, wwwpart: flock.com, setname: flock-browser }
+# need more flock splits
 
 - { name: forge, wwwpart: fsharp, setname: forge-fsharp }
 

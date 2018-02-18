@@ -112,6 +112,8 @@
 - { name: binutils,                    verpat: ".*r.*",                                    ignore: true } # snapshots
 - { name: binutils,                    verpat: ".*[0-9]{4}.*",                             ignore: true } # snapshots and GUIX 2281 garbage
 - { name: biogenesis,                  ver: "0.8.1.42.1",                                  ignore: true } # mageia garbage
+- { name: bitbake,                     ver: "1.34",                  ruleset: aur,         incorrect: true }
+- { name: bitbake,                                                   ruleset: aur,         untrusted: true }
 - { name: blackbox,                    verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: blas,                        verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: blas,                        ver: "3.9.2",                 family: sisyphus,     ignore: true } # totally fake
@@ -833,6 +835,9 @@
 - { name: sqlite3,                     verpat: "3\\.[0-9]{4}",                             incorrect: true }
 - { name: sqlninja,                    ver: "0.2.999",                                     incorrect: true } # it's 0.2.999-alpha1
 - { name: squid,                       verpat: "4\\..*",                                   devel: true }
+- { name: squrrelmail,                 verpat: "20[0-9]{6}.*",                             ignore: true } # freebsd snapshot
+- { name: squrrelmail,                 verpat: ".*pre[0-9]{5}",                            ignore: true } # pkgsrc snapshot
+- { name: squrrelmail,                 ver: "1.4.23",                family: rosa,         incorrect: true } # no such release
 - { name: sudo,                        verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+",        ignore: true } # it's mangled A.B.CpD; XXX: also has a problem of 1.2.3p1 which follows 1.2.3
 - { name: sudo,                                                      family: fedora,       untrusted: true } # accused in dropping prerelease suffix
 - { name: sudo,                                                                            p_is_patch: true }
