@@ -585,6 +585,7 @@
 - { name: mphidflash,                  verpat: "20[0-9]{6}.*",                             ignore: true } # fake
 - { name: [mplayer,mencoder],          verpat: ".*[0-9]{4}.*",                             ignore: true } # it's x.y.z, ignore all revisions and dates
 - { name: mplayer,                     ver: "5.1.4",                                       ignore: true } # pclinuxos garbage
+- { name: mpv,                         verpat: "20[0-9]{2}[.-][0-9]{2}[.-][0-9]{2}",       ignore: true } # chocolatey and scoop
 - { name: ms-gsl,                                                                          noscheme: true }
 - { name: mtree,                                                     family: ravenports,   ignore: true } # fake
 - { name: mumble,                                                    family: kaos,         ignore: true } # snapshot with random version
