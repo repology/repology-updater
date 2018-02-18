@@ -28,18 +28,18 @@ DSN = "dbname=repology user=repology password=repology"
 STATE_DIR = "_state"
 
 #
-# Path to YAML file containing repository configuration
+# Path to directory containing repository configuration YAML files
 #
 # Used by repology-update, repology-app, repology-dump
-# Overridable via --repos-path command line arg
+# Overridable via --repos-dir command line arg
 #
 REPOS_DIR = "repos.d"
 
 #
-# Path to YAML file containing package transformation rules
+# Path to directory containing package transformation rules YAML files
 #
 # Used by repology-update
-# Overridable via --rules-path command line arg
+# Overridable via --rules-dir command line arg
 #
 RULES_DIR = "rules.d"
 
