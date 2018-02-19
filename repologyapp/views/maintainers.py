@@ -65,7 +65,7 @@ def maintainer(maintainer):
     maintainer_info = get_db().GetMaintainerInformation(maintainer)
     metapackages = get_db().GetMaintainerMetapackages(maintainer, 500)
     similar_maintainers = get_db().GetMaintainerSimilarMaintainers(maintainer, 50)
-    numproblems = get_db().GetProblemsCount(maintainer=maintainer)
+    numproblems = get_db().GetMaintainerProblemsCount(maintainer)
 
     if not maintainer_info:
         flask.abort(404)
@@ -94,8 +94,8 @@ def maintainer_problems(maintainer):
     return flask.render_template(
         'maintainer-problems.html',
         maintainer=maintainer,
-        problems=get_db().GetProblems(
-            maintainer=maintainer,
-            limit=config['PROBLEMS_PER_PAGE']
+        problems=get_db().GetMaintainerProblems(
+            maintainer,
+            config['PROBLEMS_PER_PAGE']
         )
     )

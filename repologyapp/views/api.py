@@ -157,7 +157,7 @@ def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
 @ViewRegistrar('/api/v1/repository/<repo>/problems')
 def api_v1_repository_problems(repo):
     return (
-        json.dumps(get_db().GetProblems(repo=repo)),
+        json.dumps(get_db().GetRepositoryProblems(repo)),
         {'Content-type': 'application/json'}
     )
 
@@ -165,7 +165,7 @@ def api_v1_repository_problems(repo):
 @ViewRegistrar('/api/v1/maintainer/<maintainer>/problems')
 def api_v1_maintainer_problems(maintainer):
     return (
-        json.dumps(get_db().GetProblems(maintainer=maintainer)),
+        json.dumps(get_db().GetMaintainerProblems(maintainer)),
         {'Content-type': 'application/json'}
     )
 

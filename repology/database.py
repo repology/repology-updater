@@ -998,73 +998,15 @@ class Database:
             name
         )
 
-    def GetProblemsCount(self, repo=None, effname=None, maintainer=None):
-        where_expr = ''
-        args = []
 
-        conditions = []
+    def GetMaintainerProblemsCount(self, maintainer):
+        return self.querymgr.get_maintainer_problems_count(maintainer)
 
-        if repo:
-            conditions.append('repo = %s')
-            args.append(repo)
-        if effname:
-            conditions.append('effname = %s')
-            args.append(effname)
-        if maintainer:
-            conditions.append('maintainer = %s')
-            args.append(maintainer)
+    def GetMaintainerProblems(self, maintainer, limit=None):
+        return self.querymgr.get_maintainer_problems(maintainer, limit)
 
-        if conditions:
-            where_expr = 'WHERE ' + ' AND '.join(conditions)
-
-        return self.RequestSingleValue(
-            """
-            SELECT count(*)
-            FROM problems
-            {}
-            """.format(where_expr),
-            *args
-        )
-
-    def GetProblems(self, repo=None, effname=None, maintainer=None, limit=None):
-        # XXX: eliminate duplication with GetProblemsCount()
-        where_expr = ''
-        limit_expr = ''
-        args = []
-
-        conditions = []
-
-        if repo:
-            conditions.append('repo = %s')
-            args.append(repo)
-        if effname:
-            conditions.append('effname = %s')
-            args.append(effname)
-        if maintainer:
-            conditions.append('maintainer = %s')
-            args.append(maintainer)
-
-        if conditions:
-            where_expr = 'WHERE ' + ' AND '.join(conditions)
-        if limit:
-            limit_expr = 'LIMIT %s'
-            args.append(limit)
-
-        return self.RequestManyAsDicts(
-            """
-            SELECT
-                repo,
-                name,
-                effname,
-                maintainer,
-                problem
-            FROM problems
-            {}
-            ORDER by repo, effname, maintainer
-            {}
-            """.format(where_expr, limit_expr),
-            *args
-        )
+    def GetRepositoryProblems(self, repo, limit=None):
+        return self.querymgr.get_repository_problems(repo, limit)
 
     def AddReport(self, effname, need_verignore, need_split, need_merge, comment):
         self.Request(
