@@ -545,60 +545,7 @@ class Database:
         )
 
     def GetRelatedMetapackages(self, name, limit=500):
-        return self.RequestManyAsPackages(
-            """
-            SELECT
-                repo,
-                family,
-                subrepo,
-
-                name,
-                effname,
-
-                version,
-                origversion,
-                versionclass,
-
-                maintainers,
-                category,
-                comment,
-                homepage,
-                licenses,
-                downloads,
-
-                flags,
-                shadow,
-                verfixed,
-
-                flavors,
-
-                extrafields
-            FROM packages
-            WHERE effname IN (
-                WITH RECURSIVE r AS (
-                        SELECT
-                            effname,
-                            url
-                        FROM url_relations
-                        WHERE effname=%s
-                    UNION
-                        SELECT
-                            url_relations.effname,
-                            url_relations.url
-                        FROM url_relations
-                        JOIN r ON
-                            url_relations.effname = r.effname OR url_relations.url = r.url
-                )
-                SELECT DISTINCT
-                    effname
-                FROM r
-                ORDER BY effname
-                LIMIT %s
-            )
-            """,
-            name,
-            limit
-        )
+        return self.querymgr.get_metapackage_related_metapackages(name, limit)
 
     def GetPackagesCount(self):
         return self.querymgr.get_packages_count()
