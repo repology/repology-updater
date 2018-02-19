@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import functools
 import os
 import re
-import types
 
 
 from repology.package import Package
@@ -131,8 +131,8 @@ class QueryMetadata:
 
 
 class QueryManager:
-    def __init__(self, queriesdir, db):
-        self.db = db
+    def __init__(self, queriesdir):
+        self.queries = {}
 
         for filename in os.listdir(queriesdir):
             if filename.endswith('.sql'):
@@ -160,7 +160,7 @@ class QueryManager:
                 self.__register_query(current_query)
 
     def __register_query(self, query):
-        def do_query(self, *args, **kwargs):
+        def do_query(db, *args, **kwargs):
             args_by_name = {}
             args_for_query = []
 
@@ -183,7 +183,7 @@ class QueryManager:
                 args_by_name[argname] = args_for_query[-1]
                 narg += 1
 
-            with self.db.cursor() as cursor:
+            with db.cursor() as cursor:
                 # call
                 cursor.execute(query.query, args_for_query)
 
@@ -218,4 +218,15 @@ class QueryManager:
                     names = [desc.name for desc in cursor.description]
                     return {row[0]: dict(zip(names[1:], row[1:])) for row in cursor.fetchall()}
 
-        setattr(self, query.name, types.MethodType(do_query, self))
+        self.queries[query.name] = do_query
+
+    def GetQueries(self, db):
+        class Queries:
+            pass
+
+        queries = Queries()
+
+        for name, function in self.queries.items():
+            setattr(queries, name, functools.partial(function, db))
+
+        return queries

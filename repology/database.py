@@ -21,7 +21,6 @@ import json
 import psycopg2
 
 from repology.package import Package
-from repology.querymgr import QueryManager
 
 
 class Query:
@@ -285,10 +284,10 @@ class MetapackageRequest:
 
 
 class Database:
-    def __init__(self, dsn, queriesdir, readonly=True, autocommit=False):
+    def __init__(self, dsn, querymgr, readonly=True, autocommit=False):
         self.db = psycopg2.connect(dsn)
         self.db.set_session(readonly=readonly, autocommit=autocommit)
-        self.querymgr = QueryManager(queriesdir, self.db)
+        self.queries = querymgr.GetQueries(self.db)
 
     def Request(self, query, *args):
         with self.db.cursor() as cursor:
@@ -349,10 +348,10 @@ class Database:
             return [Package(**dict(zip(names, row))) for row in cursor.fetchall()]
 
     def CreateSchema(self):
-        self.querymgr.create_schema()
+        self.queries.create_schema()
 
     def Clear(self):
-        self.querymgr.clear()
+        self.queries.clear()
 
     def AddPackages(self, packages):
         with self.db.cursor() as cursor:
@@ -463,7 +462,7 @@ class Database:
             )
 
     def UpdateViews(self):
-        self.querymgr.update_views()
+        self.queries.update_views()
 
     def Commit(self):
         self.db.commit()
@@ -545,19 +544,19 @@ class Database:
         )
 
     def GetRelatedMetapackages(self, name, limit=500):
-        return self.querymgr.get_metapackage_related_metapackages(name, limit)
+        return self.queries.get_metapackage_related_metapackages(name, limit)
 
     def GetPackagesCount(self):
-        return self.querymgr.get_packages_count()
+        return self.queries.get_packages_count()
 
     def GetMetapackagesCount(self):
-        return self.querymgr.get_metapackages_count()
+        return self.queries.get_metapackages_count()
 
     def GetMaintainersCount(self):
-        return self.querymgr.get_maintainers_count()
+        return self.queries.get_maintainers_count()
 
     def GetMaintainersRange(self):
-        return self.querymgr.get_maintainers_range()
+        return self.queries.get_maintainers_range()
 
     def GetMaintainers(self, bound=None, reverse=False, search=None, limit=500):
         where = []
@@ -610,28 +609,28 @@ class Database:
         )
 
     def GetMaintainerInformation(self, maintainer):
-        return self.querymgr.get_maintainer_information(maintainer)
+        return self.queries.get_maintainer_information(maintainer)
 
     def GetMaintainerMetapackages(self, maintainer, limit=1000):
-        return self.querymgr.get_maintainer_metapackages(maintainer, limit)
+        return self.queries.get_maintainer_metapackages(maintainer, limit)
 
     def GetMaintainerSimilarMaintainers(self, maintainer, limit=100):
-        return self.querymgr.get_maintainer_similar_maintainers(maintainer, limit)
+        return self.queries.get_maintainer_similar_maintainers(maintainer, limit)
 
     def GetRepositories(self):
-        return self.querymgr.get_repositories()
+        return self.queries.get_repositories()
 
     def GetRepository(self, repo):
-        return self.querymgr.get_repository(repo)
+        return self.queries.get_repository(repo)
 
     def GetRepositoriesHistoryAgo(self, ago):
-        return self.querymgr.get_repositories_from_past(ago)
+        return self.queries.get_repositories_from_past(ago)
 
     def GetRepositoryHistoryPeriod(self, repo, since):
-        return self.querymgr.get_repository_history_since(repo, since)
+        return self.queries.get_repository_history_since(repo, since)
 
     def GetStatisticsHistoryPeriod(self, since):
-        return self.querymgr.get_statistics_history_since(since)
+        return self.queries.get_statistics_history_since(since)
 
     def Query(self, query, *args):
         with self.db.cursor() as cursor:
@@ -703,25 +702,25 @@ class Database:
     def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
         success = status == 200
 
-        self.querymgr.update_link_status(success, status, redirect, size, location, url)
+        self.queries.update_link_status(success, status, redirect, size, location, url)
 
     def GetMetapackageLinkStatuses(self, name):
-        return self.querymgr.get_metapackage_link_statuses(name)
+        return self.queries.get_metapackage_link_statuses(name)
 
     def GetMaintainerProblemsCount(self, maintainer):
-        return self.querymgr.get_maintainer_problems_count(maintainer)
+        return self.queries.get_maintainer_problems_count(maintainer)
 
     def GetMaintainerProblems(self, maintainer, limit=None):
-        return self.querymgr.get_maintainer_problems(maintainer, limit)
+        return self.queries.get_maintainer_problems(maintainer, limit)
 
     def GetRepositoryProblems(self, repo, limit=None):
-        return self.querymgr.get_repository_problems(repo, limit)
+        return self.queries.get_repository_problems(repo, limit)
 
     def AddReport(self, effname, need_verignore, need_split, need_merge, comment):
-        self.querymgr.add_report(effname, need_verignore, need_split, need_merge, comment)
+        self.queries.add_report(effname, need_verignore, need_split, need_merge, comment)
 
     def GetReportsCount(self, effname):
-        return self.querymgr.get_reports_count(effname)
+        return self.queries.get_reports_count(effname)
 
     def GetReports(self, effname):
-        return self.querymgr.get_reports(effname)
+        return self.queries.get_reports(effname)

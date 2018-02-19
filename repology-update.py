@@ -27,6 +27,7 @@ from repology.config import config
 from repology.database import Database
 from repology.logger import *
 from repology.packageproc import FillPackagesetVersions
+from repology.querymgr import QueryManager
 from repology.repoman import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
@@ -72,7 +73,8 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
 
     db_logger = logger.GetIndented()
 
-    database = Database(options.dsn, options.sql_dir, readonly=False)
+    querymgr = QueryManager(options.sql_dir)
+    database = Database(options.dsn, querymgr, readonly=False)
     if options.initdb:
         db_logger.Log('(re)initializing database schema')
         database.CreateSchema()

@@ -21,6 +21,7 @@ from repologyapp.fontmeasurer import FontMeasurer
 
 from repology.config import config
 from repology.database import Database
+from repology.querymgr import QueryManager
 from repology.repoman import RepositoryManager
 
 
@@ -37,6 +38,7 @@ __fontmeasurer = FontMeasurer(config['BADGE_FONT'], 11)
 
 repometadata = __repoman.GetMetadata(config['REPOSITORIES'])
 reponames = __repoman.GetNames(config['REPOSITORIES'])
+querymgr = QueryManager(config['SQL_DIR'])
 
 
 def get_text_width(text):
@@ -46,5 +48,5 @@ def get_text_width(text):
 def get_db():
     # XXX: this is not really a persistent DB connection!
     if not hasattr(flask.g, 'database'):
-        flask.g.database = Database(config['DSN'], config['SQL_DIR'], readonly=False, autocommit=True)
+        flask.g.database = Database(config['DSN'], querymgr, readonly=False, autocommit=True)
     return flask.g.database
