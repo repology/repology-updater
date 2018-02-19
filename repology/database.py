@@ -601,20 +601,16 @@ class Database:
         )
 
     def GetPackagesCount(self):
-        return self.RequestSingleValue('SELECT num_packages FROM statistics LIMIT 1')
+        return self.querymgr.get_packages_count()
 
     def GetMetapackagesCount(self):
-        return self.RequestSingleValue('SELECT num_metapackages FROM statistics LIMIT 1')
+        return self.querymgr.get_metapackages_count()
 
     def GetMaintainersCount(self):
-        return self.RequestSingleValue('SELECT num_maintainers FROM statistics LIMIT 1')
+        return self.querymgr.get_maintainers_count()
 
     def GetMaintainersRange(self):
-        # could use min/max here, but these are slower on pgsql 9.6
-        return (
-            self.RequestSingleValue('SELECT maintainer FROM maintainers ORDER BY maintainer LIMIT 1'),
-            self.RequestSingleValue('SELECT maintainer FROM maintainers ORDER BY maintainer DESC LIMIT 1')
-        )
+        return self.querymgr.get_maintainers_range()
 
     def GetMaintainers(self, bound=None, reverse=False, search=None, limit=500):
         where = []
