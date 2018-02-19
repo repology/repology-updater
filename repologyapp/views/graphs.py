@@ -61,7 +61,7 @@ def graph_repo_generic(repo, getvalue, color, suffix=''):
     def GetGraph(period):
         graph = GraphProcessor()
 
-        for histentry in get_db().GetRepositoriesHistoryPeriod(period, repo):
+        for histentry in get_db().GetRepositoryHistoryPeriod(repo, datetime.timedelta(seconds=period)):
             try:
                 graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot']))
             except:
@@ -76,7 +76,7 @@ def graph_total_generic(getvalue, color, suffix=''):
     def GetGraph(period):
         graph = GraphProcessor()
 
-        for histentry in get_db().GetStatisticsHistoryPeriod(period):
+        for histentry in get_db().GetStatisticsHistoryPeriod(datetime.timedelta(seconds=period)):
             try:
                 graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot']))
             except:

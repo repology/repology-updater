@@ -624,61 +624,14 @@ class Database:
     def GetRepository(self, repo):
         return self.querymgr.get_repository(repo)
 
-    def GetRepositoriesHistoryAgo(self, seconds=60 * 60 * 24):
-        return self.RequestSingleAsDict(
-            """
-            SELECT
-                ts AS timestamp,
-                now() - ts AS timedelta,
-                snapshot
-            FROM repositories_history
-            WHERE ts IN (
-                SELECT
-                    ts
-                FROM repositories_history
-                WHERE ts < now() - INTERVAL %s
-                ORDER BY ts DESC
-                LIMIT 1
-            )
-            """,
-            datetime.timedelta(seconds=seconds),
-        )
+    def GetRepositoriesHistoryAgo(self, ago):
+        return self.querymgr.get_repositories_from_past(ago)
 
-    def GetRepositoriesHistoryPeriod(self, seconds=60 * 60 * 24, repo=None):
-        repopath = ''
-        repoargs = ()
+    def GetRepositoryHistoryPeriod(self, repo, since):
+        return self.querymgr.get_repository_history_since(since)
 
-        if repo:
-            repopath = '#>%s'
-            repoargs = ('{' + repo + '}', )
-
-        return self.RequestManyAsDicts(
-            """
-            SELECT
-                ts AS timestamp,
-                now() - ts AS timedelta,
-                snapshot{} AS snapshot
-            FROM repositories_history
-            WHERE ts >= now() - INTERVAL %s
-            ORDER BY ts
-            """.format(repopath),
-            *repoargs,
-            datetime.timedelta(seconds=seconds)
-        )
-
-    def GetStatisticsHistoryPeriod(self, seconds=60 * 60 * 24):
-        return self.RequestManyAsDicts(
-            """
-            SELECT
-                ts AS timestamp,
-                now() - ts AS timedelta,
-                snapshot
-            FROM statistics_history
-            WHERE ts >= now() - INTERVAL %s
-            ORDER BY ts
-            """,
-            datetime.timedelta(seconds=seconds)
-        )
+    def GetStatisticsHistoryPeriod(self, since):
+        return self.querymgr.get_statistics_history_since(since)
 
     def Query(self, query, *args):
         with self.db.cursor() as cursor:
