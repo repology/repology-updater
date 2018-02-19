@@ -25,11 +25,13 @@ from random import shuffle
 
 from repology.config import config
 from repology.database import Database
+from repology.querymgr import QueryManager
 
 
 def ParseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
+    parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
 
     parser.add_argument('-w', '--www-home', default=config['REPOLOGY_HOME'], help='repology www home')
     parser.add_argument('-m', '--max-urls', default=50000, help='max number of urls to generate')
@@ -43,7 +45,8 @@ def ParseArguments():
 def Main():
     options = ParseArguments()
 
-    database = Database(options.dsn, readonly=True)
+    querymgr = QueryManager(options.sql_dir)
+    database = Database(options.dsn, querymgr, readonly=True)
 
     urls = []
     if options.main:

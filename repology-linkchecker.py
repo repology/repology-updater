@@ -30,6 +30,7 @@ import requests
 from repology.config import config
 from repology.database import Database
 from repology.logger import FileLogger, StderrLogger
+from repology.querymgr import QueryManager
 
 
 def GetHTTPLinkStatus(url, timeout):
@@ -125,8 +126,8 @@ def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
         logger.Log('Done processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
 
 
-def LinkUpdatingWorker(queue, options, logger):
-    database = Database(options.dsn, readonly=False)
+def LinkUpdatingWorker(queue, options, querymgr, logger):
+    database = Database(options.dsn, querymgr, readonly=False)
 
     logger = logger.GetPrefixed('writer: ')
 
@@ -149,6 +150,7 @@ def ParseArguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('--logfile', help='path to log file (log to stderr by default)')
+    parser.add_argument('--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
 
     parser.add_argument('--timeout', type=float, default=60.0, help='timeout for link requests in seconds')
     parser.add_argument('--delay', type=float, default=3.0, help='delay between requests to one host')
@@ -170,12 +172,13 @@ def Main():
     options = ParseArguments()
 
     logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
-    database = Database(options.dsn, readonly=True, autocommit=True)
+    querymgr = QueryManager(options.qsl_dir)
+    database = Database(options.dsn, querymgr, readonly=True, autocommit=True)
 
     readqueue = multiprocessing.Queue(10)
     writequeue = multiprocessing.Queue(10)
 
-    writer = multiprocessing.Process(target=LinkUpdatingWorker, args=(writequeue, options, logger))
+    writer = multiprocessing.Process(target=LinkUpdatingWorker, args=(writequeue, options, querymgr, logger))
     writer.start()
 
     processpool = [multiprocessing.Process(target=LinkProcessingWorker, args=(readqueue, writequeue, i, options, logger)) for i in range(options.jobs)]
