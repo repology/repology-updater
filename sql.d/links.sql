@@ -1,0 +1,59 @@
+-- Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+--
+-- This file is part of repology
+--
+-- repology is free software: you can redistribute it and/or modify
+-- it under the terms of the GNU General Public License as published by
+-- the Free Software Foundation, either version 3 of the License, or
+-- (at your option) any later version.
+--
+-- repology is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
+--
+-- You should have received a copy of the GNU General Public License
+-- along with repology.  If not, see <http://www.gnu.org/licenses/>.
+
+-- !!update_link_status(success, =success, status, redirect=None, size=None, location=None, url)
+UPDATE links
+SET
+	last_checked = now(),
+	last_success = CASE WHEN %s THEN now() ELSE last_success END,
+	last_failure = CASE WHEN NOT %s THEN now() ELSE last_failure END,
+	status = %s,
+	redirect = %s,
+	size = %s,
+	location = %s
+WHERE url = %s;
+
+-- !!get_metapackage_link_statuses(effname, =effname) -> dict of dicts
+SELECT
+	url,
+	last_checked,
+	last_success,
+	last_failure,
+	status,
+	redirect,
+	size,
+	location
+FROM links
+WHERE url in (
+	-- this additional wrap seem to fix query planner somehow
+	-- to use index scan on links instead of seq scan, which
+	-- makes the query 100x faster; XXX: recheck with postgres 10
+	-- or report this?
+	SELECT DISTINCT
+		url
+	FROM (
+		SELECT
+			unnest(downloads) AS url
+		FROM packages
+		WHERE effname = %s
+		UNION
+		SELECT
+			homepage AS url
+		FROM packages
+		WHERE homepage IS NOT NULL AND effname = %s
+	) AS tmp
+);

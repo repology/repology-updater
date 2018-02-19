@@ -610,157 +610,19 @@ class Database:
         )
 
     def GetMaintainerInformation(self, maintainer):
-        return self.RequestSingleAsDict(
-            """
-            SELECT
-                num_packages,
-                num_packages_newest,
-                num_packages_outdated,
-                num_packages_ignored,
-                num_packages_unique,
-                num_packages_devel,
-                num_packages_legacy,
-                num_packages_incorrect,
-                num_packages_untrusted,
-                num_packages_noscheme,
-                num_packages_rolling,
-                num_metapackages,
-                num_metapackages_outdated,
-                repository_package_counts,
-                repository_metapackage_counts,
-                category_metapackage_counts
-            FROM maintainers
-            WHERE maintainer = %s
-            """,
-            maintainer
-        )
+        return self.querymgr.get_maintainer_information(maintainer)
 
     def GetMaintainerMetapackages(self, maintainer, limit=1000):
-        return self.RequestManyAsSingleColumnArray(
-            """
-            SELECT
-                effname
-            FROM maintainer_metapackages
-            WHERE maintainer = %s
-            ORDER BY effname
-            LIMIT %s
-            """,
-            maintainer,
-            limit
-        )
+        return self.querymgr.get_maintainer_metapackages(maintainer, limit)
 
     def GetMaintainerSimilarMaintainers(self, maintainer, limit=100):
-        # this obscure request needs some clarification
-        #
-        # what we calculate as score here is actually Jaccard index
-        # (see wikipedia) for two sets (of metapackages maintained by
-        # two maintainers)
-        #
-        # let M = set of metapackages for maintainer passed to this function
-        # let C = set of metapackages for other maintainer we test for similarity
-        #
-        # score = |M⋂C| / |M⋃C| = |M⋂C| / (|M| + |C| - |M⋂C|)
-        #
-        # - num_metapackages_common is |M⋂C|
-        # - num_metapackages is |C|
-        # - sub-select just gets |M|
-        # - the divisor thus is |M⋃C| = |M| + |C| - |M⋂C|
-        return self.RequestManyAsDicts(
-            """
-            SELECT
-                maintainer,
-                num_metapackages_common AS count,
-                100.0 * num_metapackages_common / (
-                    num_metapackages - num_metapackages_common + (
-                        SELECT num_metapackages
-                        FROM maintainers
-                        WHERE maintainer=%s
-                    )
-                ) AS match
-            FROM
-                (
-                    SELECT
-                        maintainer,
-                        count(*) AS num_metapackages_common
-                    FROM
-                        maintainer_metapackages
-                    WHERE
-                        maintainer != %s AND
-                        effname IN (
-                            SELECT
-                                effname
-                            FROM maintainer_metapackages
-                            WHERE maintainer=%s
-                        )
-                    GROUP BY maintainer
-                ) AS intersecting_counts
-                INNER JOIN maintainers USING(maintainer)
-            ORDER BY match DESC
-            LIMIT %s
-            """,
-            maintainer,
-            maintainer,
-            maintainer,
-            limit
-        )
+        return self.querymgr.get_maintainer_similar_maintainers(maintainer, limit)
 
     def GetRepositories(self):
-        return self.RequestManyAsDicts(
-            """
-            SELECT
-                name,
-                num_packages,
-                num_packages_newest,
-                num_packages_outdated,
-                num_packages_ignored,
-                num_packages_unique,
-                num_packages_devel,
-                num_packages_legacy,
-                num_packages_incorrect,
-                num_packages_untrusted,
-                num_packages_noscheme,
-                num_packages_rolling,
-                num_metapackages,
-                num_metapackages_unique,
-                num_metapackages_newest,
-                num_metapackages_outdated,
-                num_metapackages_comparable,
-                last_update at time zone 'UTC' AS last_update_utc,
-                now() - last_update AS since_last_update,
-                num_problems,
-                num_maintainers
-            FROM repositories
-        """)
+        return self.querymgr.get_repositories()
 
     def GetRepository(self, repo):
-        return self.RequestSingleAsDict(
-            """
-            SELECT
-                num_packages,
-                num_packages_newest,
-                num_packages_outdated,
-                num_packages_ignored,
-                num_packages_unique,
-                num_packages_devel,
-                num_packages_legacy,
-                num_packages_incorrect,
-                num_packages_untrusted,
-                num_packages_noscheme,
-                num_packages_rolling,
-                num_metapackages,
-                num_metapackages_unique,
-                num_metapackages_newest,
-                num_metapackages_outdated,
-                num_metapackages_comparable,
-                last_update at time zone 'UTC' AS last_update_utc,
-                now() - last_update AS since_last_update,
-                num_problems,
-                num_maintainers
-            FROM repositories
-            WHERE name = %s
-            """,
-            repo,
-        )
+        return self.querymgr.get_repository(repo)
 
     def GetRepositoriesHistoryAgo(self, seconds=60 * 60 * 24):
         return self.RequestSingleAsDict(
@@ -888,63 +750,10 @@ class Database:
     def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
         success = status == 200
 
-        self.Request(
-            """
-            UPDATE links
-            SET
-                last_checked = now(),
-                last_success = CASE WHEN %s THEN now() ELSE last_success END,
-                last_failure = CASE WHEN %s THEN now() ELSE last_failure END,
-                status = %s,
-                redirect = %s,
-                size = %s,
-                location = %s
-            WHERE url = %s
-            """,
-            success,
-            not success,
-            status,
-            redirect,
-            size,
-            location,
-            url
-        )
+        self.querymgr.update_link_status(success, status, redirect, size, location, url)
 
     def GetMetapackageLinkStatuses(self, name):
-        return self.RequestManyAsDictOfDicts(
-            """
-            SELECT
-                url,
-                last_checked,
-                last_success,
-                last_failure,
-                status,
-                redirect,
-                size,
-                location
-            FROM links
-            WHERE url in (
-                -- this additional wrap seem to fix query planner somehow
-                -- to use index scan on links instead of seq scan, which
-                -- makes the query 100x faster; XXX: recheck with postgres 10
-                -- or report this?
-                SELECT DISTINCT url from (
-                    SELECT
-                        unnest(downloads) as url
-                    FROM packages
-                    WHERE effname = %s
-                    UNION
-                    SELECT
-                        homepage as url
-                    FROM packages
-                    WHERE homepage IS NOT NULL and effname = %s
-                ) AS tmp
-            )
-            """,
-            name,
-            name
-        )
-
+        return self.querymgr.get_metapackage_link_statuses(name)
 
     def GetMaintainerProblemsCount(self, maintainer):
         return self.querymgr.get_maintainer_problems_count(maintainer)
