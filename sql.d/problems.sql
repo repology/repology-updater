@@ -15,13 +15,13 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
--- !!get_repo_problems_count(repo) -> single value
+-- !!get_repository_problems_count(repo) -> single value
 SELECT
 	count(*)
 FROM problems
 WHERE repo = %s;
 
--- !!get_repo_problems(repo, limit=None) -> array of dicts
+-- !!get_repository_problems(repo, limit=None) -> array of dicts
 SELECT
 	repo,
 	name,
