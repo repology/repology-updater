@@ -20,6 +20,7 @@
 - { setname: xarchiver,                name: [xarchiver-assume-name,xarchiver-gtk2], addflavor: true }
 - { setname: xarchiver,                name: xfce4-xarchiver }
 - { setname: xbase,                    name: [libxbase,xbase64] }
+- { setname: xcb-util-renderutil,      name: [lib32-xcb-util-renderutil,libxcb-render-util,xorg-xcb-render-util] }
 - { setname: xdelta,                   name: [xdelta1,xdelta3] }
 - { setname: xdg-utils,                name: [xdg-utils-mimeo,xdg-utils-no-open,xdg-utils-patched,xdg-utils-slock] }
 - { setname: xdot,                     name: "python:xdot" }
@@ -42,7 +43,8 @@
 - { setname: xmlsec,                   name: [xmlsec1,libxmlsec1] }
 - { setname: xmlsec,                   name: xmlsec-docs, addflavor: docs }
 - { setname: xmltooling,               name: xmltooling-c }
-- { setname: xmobar,                   name: [xmobar-alsa,xmobar-volume] }
+- { setname: xmobar,                   name: [xmobar-alsa,xmobar-volume,"haskell:xmobar"] }
+- { setname: xmonad,                   name: "haskell:xmonad" }
 - { setname: xmoto,                    name: x-moto }
 - { setname: xonotic,                  name: xonotic-data, addflavor: true }
 - { setname: xpdf,                     name: [xpdf3,xpdf4] }

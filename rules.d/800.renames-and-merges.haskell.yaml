@@ -1,0 +1,12 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: "haskell:haskelldb$1",    namepat: "haskelldb(.*)" }
+- { setname: "haskell:haxml",          name: haxml }
+- { setname: "haskell:hledger-lib",    name: hledger-lib  }
+- { setname: "haskell:hpc-coveralls",  name: hpc-coveralls }
+- { setname: "haskell:hspec-discover", name: hspec-discover }
+- { setname: "haskell:hspec-setup",    name: hspec-setup }
+- { setname: "haskell:lentil-setup",   name: lentil-setup }
+- { setname: "haskell:pandoc-citeproc", name: pandoc-citeproc }
+- { setname: "haskell:pandoc-citeproc-preamble", name: pandoc-citeproc-preamble }
+- { setname: "haskell:yackage",        name: yackage }

@@ -128,6 +128,7 @@
 - { setname: cryptominisat,            namepat: "cryptominisat[0-9]+" }
 - { setname: csfml,                    name: libcsfml }
 - { setname: csharp-mode.el,           name: csharp-mode }
+- { setname: cstore_fdw,               namepat: "(postgresql[0-9._-]*)-cstore_fdw", addflavor: $1 }
 - { setname: ctags,                    name: [ectags,exctags,exuberant-ctags] } # exuberant and universal are split later
 - { setname: ctags,                    name: universal-ctags } # exuberant and universal are split later
 - { setname: ctpp2,                    name: ctpp }

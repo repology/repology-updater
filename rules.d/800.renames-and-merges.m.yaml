@@ -24,6 +24,7 @@
 - { setname: memtest86+,               name: memtestplus }
 - { setname: mesa,                     namepat: "mesa-lts-.*" }
 - { setname: mesa-demos,               name: [mesa-demo,mesademos] }
+- { setname: meson,                    name: "python:meson" }
 - { setname: mgltools,                 namepat: "mgltools-.*", family: debuntu }
 - { setname: midori,                   name: [midori-granite,midori-gtk2,midori-no-zeitgeist], addflavor: true }
 - { setname: minixml,                  name: libmxml }
@@ -56,6 +57,7 @@
 - { setname: mysql,                    namepat: "mysql[0-9.-]*(?:-client|-server)?" }
 - { setname: mysql-connector-c++,      name: libmysqlconnectorcpp }
 - { setname: mysql-connector-c++,      namepat: "mysql[0-9]*-connector-cpp" }
+- { setname: mysql_fdw,                namepat: "(postgresql[0-9._-]*)-mysql[_-]fdw", addflavor: $1 }
 
 - setname: mesa
   name:
@@ -88,4 +90,3 @@
     - opencl-mesa
     - opencl-mesa-noglvnd
     - opencl-mesa-vanilla
-- { setname: meson,                    name: "python:meson" }

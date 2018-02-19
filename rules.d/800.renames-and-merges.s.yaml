@@ -5,10 +5,10 @@
 - { setname: samba,                    name: samba-docs, addflavor: docs }
 - { setname: samba,                    namepat: "samba[0-9.-]+" }
 - { setname: sauerbraten,              name: sauerbraten-data, addflavor: data }
-- { setname: scala,                    namepat: "scala[0-9._-]+" }
-- { setname: scala,                    namepat: "scala[0-9._-]+-docs", addflavor: docs }
 - { setname: scala,                    namepat: "scala-docs[0-9._-]*", addflavor: docs }
 - { setname: scala,                    namepat: "scala-sources[0-9._-]*", addflavor: sources }
+- { setname: scala,                    namepat: "scala[0-9._-]+" }
+- { setname: scala,                    namepat: "scala[0-9._-]+-docs", addflavor: docs }
 - { setname: scalapack,                name: libscalapack }
 - { setname: scamp,                    name: astromatic-scamp }
 - { setname: schismtracker,            name: schism }
@@ -91,6 +91,17 @@
 - { setname: structuresynth,           name: structure-synth }
 - { setname: stunnel,                  name: stunnel4 }
 - { setname: stuntrally,               name: stunt-rally }
+- { setname: sugar,                    namepat: "sugar[0-9._-]+" }
+- { setname: sugar-activity,           namepat: "sugar-activity[0-9._-]+" }
+- { setname: sugar-artwork,            namepat: "sugar-artwork[0-9._-]+" }
+- { setname: sugar-base,               namepat: "sugar-base[0-9._-]+" }
+- { setname: sugar-browse-activity,    namepat: "sugar-browse-activity[0-9._-]+" }
+- { setname: sugar-chat-activity,      namepat: "sugar-chat-activity[0-9._-]+" }
+- { setname: sugar-datastore,          namepat: "sugar-datastore[0-9._-]+" }
+- { setname: sugar-presence-service,   namepat: "sugar-presence-service[0-9._-]+" }
+- { setname: sugar-toolkit,            name: [sugar-toolkit-gtk2,sugar-toolkit-gtk3], addflavor: true }
+- { setname: sugar-toolkit,            namepat: "sugar-toolkit[0-9._-]+" }
+- { setname: sugar-write-activity,     namepat: "sugar-write-activity[0-9._-]+" }
 - { setname: suitesparse,              name: [libsuitesparse,libsuitesparse3,suitesparse-mkl,suitesparse-metis] }
 - { setname: suitesparse,              name: suite-sparse }
 - { setname: suitesparseconfig,        name: [ufconfig,suitesparse-common-devel] } # from report: ufconfig is an old name for suitesparseconfig
@@ -100,8 +111,8 @@
 - { setname: svmlight,                 name: svm_light }
 - { setname: swarp,                    name: astromatic-swarp }
 - { setname: sweethome3d,              name: [sweet-home-3d,sweethome3d-application] }
-- { setname: swi-prolog,               name: swi-prolog-devel }
 - { setname: swi-prolog,               name: [swi-prolog-doc,swi-prolog-jpl,swi-prolog-lite,swi-prolog-packages], addflavor: true }
+- { setname: swi-prolog,               name: swi-prolog-devel }
 - { setname: swig,                     namepat: "swig-(.*)", family: macports, addflavor: $1 } # split by supported language
 - { setname: swig,                     namepat: "swig[0-9._-]+" }
 - { setname: swissfileknife,           name: sfk }

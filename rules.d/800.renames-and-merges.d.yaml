@@ -1,6 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 - { setname: dash.el,                  name: dash-el }
+- { setname: darcs,                    name: "haskell:darcs" }
 - { setname: db,                       name: berkeley-db }
 - { setname: db,                       namepat: "db[0-9.]+" }
 - { setname: db,                       namepat: "libdb[0-9._-]*" }

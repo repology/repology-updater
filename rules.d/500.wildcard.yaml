@@ -35,11 +35,18 @@
 
 # GStreamer
 # XXX: sort out 0/1 versions; some plugins are third party and do not use this scheme
-- { setname: "gstreamer1plugins:$1",   namepat: "gst-plugins-(.*)-compat", family: crux }
-- { setname: "gstreamer1plugins:$1",   namepat: "gst(?:reamer)?[0-9._-]*(?:(?:-gst)?-plugins?[01.-]*)?-(.*?)[01.-]*(?:-plugins)?" }
-- { setname: "gstreamer0plugins:$1",   namepat: "gstreamer1plugins:(.*)", verpat: "0.*" }
-- { setname: "gstreamer1plugins:$1",   namepat: "gst_(?:plugins_)?(.*)", verpat: "1.*", family: haikuports }
-- { setname: "gstreamer0plugins:$1",   namepat: "gst_(?:plugins_)?(.*)", verpat: "0.*", family: haikuports }
+- { setname: "gstreamer1plugins:$1", noflag: not_gstreamer, namepat: "gst-plugins-(.*)-compat", family: crux }
+- { setname: "gstreamer1plugins:$1", noflag: not_gstreamer, namepat: "gst(?:reamer)?[0-9._-]*(?:(?:-gst)?-plugins?[01.-]*)?-(.*?)[01.-]*(?:-plugins)?" }
+- { setname: "gstreamer0plugins:$1", noflag: not_gstreamer, namepat: "gstreamer1plugins:(.*)", verpat: "0.*" }
+- { setname: "gstreamer1plugins:$1", noflag: not_gstreamer, namepat: "gst_(?:plugins_)?(.*)", verpat: "1.*", family: haikuports }
+- { setname: "gstreamer0plugins:$1", noflag: not_gstreamer, namepat: "gst_(?:plugins_)?(.*)", verpat: "0.*", family: haikuports }
+
+# Haskell
+- { setname: "haskell:$1", noflag: not_haskell, namepat: "haskell-(.*)", family: [arch,debuntu,gobolinux,slackbuilds] }
+- { setname: "haskell:$1", noflag: not_haskell, namepat: "hs-(.*)", family: [freebsd,macports,openbsd,pkgsrc] }
+- { setname: "haskell:$1", noflag: not_haskell, namepat: "ghc-(.*)", family: [fedora,guix,opensuse,rosa] }
+- { setname: "haskell:$0", noflag: not_haskell, category: dev-haskell, family: gentoo }
+- { setname: "haskell:$1", noflag: not_haskell, namepat: "ghc[0-9.]+-(.*)", family: sisyphus }
 
 # MinGW
 - { setname: "mingw:$1", noflag: not_mingw, namepat: "mingw-(.*)",   ruleset: [ fedora, mageia ] }
@@ -64,6 +71,20 @@
 - { setname: "perl:$0", noflag: not_perl, category: dev-perl, ruleset: [gentoo,haikuports] }
 - { setname: "perl:$0", noflag: not_perl, category: perl-core, ruleset: gentoo }
 
+# PHP
+#- { setname: "php:$0", noflag: not_php, family: gentoo, category: dev-php }
+- { setname: "php:$1", noflag: not_php, namepat: "(?:pear-|pecl-|php-)*(.*?)", family: gentoo, category: dev-php }
+- { setname: "php:$1", noflag: not_php, namepat: "(?:pear|pecl)-(.*)", family: [freebsd,macports,openbsd,pkgsrc,sisyphus] }
+- { setname: "php:$1", noflag: not_php, namepat: "php[0-9]+-(?:pear|pecl)-(.*)", family: [freebsd,mageia,pkgsrc] }
+- { setname: "php:$1", noflag: not_php, namepat: "php-(?:(?:pear|pecl)-)?(.*)", family: [mageia,rosa] }
+- { setname: "php$1:$2", noflag: not_php, namepat: "php([0-9]*)-(.*)", family: [freebsd,macports,openbsd,pkgsrc,ravenports] }
+- { setname: "php$1:$2", noflag: not_php, namepat: "php([0-9]+)-(.*)", family: arch } # AUR
+- { setname: "php:$1", noflag: not_php, namepat: "php-(.*)", family: [arch,crux,debuntu,fedora,pclinuxos,slackbuilds] }
+- { setname: "php56:$1", noflag: not_php, namepat: "php5-(.*)", family: sisyphus, ignore: true } # XXX: why ignore?
+- { setname: "php56:$1", noflag: not_php, namepat: "php5-(.*)", family: opensuse }
+- { setname: "php56:$1", noflag: not_php, namepat: "php-5_6-ext-(.*)", family: openindiana }
+- { setname: "php70:$1", noflag: not_php, namepat: "php-7\\.0-ext-(.*)", family: openindiana }
+
 # R
 - { setname: "r:$1", noflag: not_r, namepat: "r-cran-(.*)", ruleset: [ freebsd, debuntu, arch, pclinuxos, mageia ] }
 - { setname: "r:$1", noflag: not_r, namepat: "r-bioc-(.*)", ruleset: [ debuntu ] }
@@ -72,6 +93,14 @@
 # ROS
 - { setname: "ros:$0", noflag: not_ros, category: dev-ros,   ruleset: [ gentoo ] }
 - { setname: "ros:$1", noflag: not_ros, namepat: "ros-(.*)", ruleset: [ debuntu, arch ] }
+
+# Ruby
+- { setname: "ruby:$1", noflag: not_ruby, namepat: "ruby-(.*)", family: [aosc,arch,debuntu,fedora,guix,mageia,ravenports,rosa,sisyphus] }
+- { setname: "ruby:$1", noflag: not_ruby, namepat: "rubygem-(.*)", family: [centos,fedora,freebsd,opensuse,pclinuxos,rosa,slackbuilds] }
+- { setname: "ruby:$1", noflag: not_ruby, namepat: "ruby[0-9][0-9]-(.*)", family: [freebsd,openbsd,pkgsrc] }
+- { setname: "ruby:$1", noflag: not_ruby, namepat: "rb[0-9]*-(.*)", family: macports }
+- { setname: "ruby:$1", noflag: not_ruby, namepat: "lib(.*)-ruby", family: debuntu } # old Ubuntu Precise
+- { setname: "ruby:$0", noflag: not_ruby, category: dev-ruby, family: gentoo }
 
 # Rust
 - { setname: "rust:$1", noflag: not_rust, namepat: "rust-(.*)", family: [ arch, fedora, nix, sisyphus ] }

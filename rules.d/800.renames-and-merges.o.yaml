@@ -40,6 +40,7 @@
 - { setname: opusfile,                 name: libopusfile }
 - { setname: openssl,                  namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?" }
 - { setname: openssl,                  name: openssl-devel }
+- { setname: orafce,                   namepat: "(postgresql[0-9._-]*)-orafce", addflavor: $1 }
 
 - setname: openssh
   name:
