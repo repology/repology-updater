@@ -548,7 +548,8 @@
 - { name: libmpsse,                    verpat: "20[0-9]{6}.*",       family: sisyphus,     ignore: true }
 - { name: libx11,                      verpat: "7\\.[4567].*",                             ignore: true } # uses version from Xorg, not its own # XXX: ->incorrect
 - { name: libx86emu,                   verlonger: 2,                 family: kaos,         ignore: true } # uses some opensuse package with mangled version
-- { name: libzen,                      verpat: "1\\.7.*",            family: freebsd,      incorrect: true } # version from mediainfo is used, while libzen has its own version scheme
+- { name: libzen,                      verpat: "17\\..*",            family: freebsd,      incorrect: true } # version from mediainfo is used, while libzen has its own version scheme
+- { name: libzen,                                                    family: freebsd,      untrusted: true }
 
 # M
 - { name: m17n-db,                     ver: "1.8.0",                 family: fedora,       ignore: true }
