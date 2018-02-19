@@ -16,16 +16,118 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import types
+
+
+from repology.package import Package
 
 
 __all__ = ['QueryManager']
 
 
-class QueryData:
-    def __init__(self, name):
-        self.name = name
+class QueryMetadataParsingError(RuntimeError):
+    pass
+
+
+class QueryLoadingError(RuntimeError):
+    pass
+
+
+class QueryMetadata:
+    RET_NONE = 1
+    RET_SINGLE_VALUE = 2
+    RET_SINGLE_DICT = 3
+    RET_SINGLE_TUPLE = 4
+    RET_ARRAY_OF_VALUES = 5
+    RET_ARRAY_OF_DICTS = 6
+    RET_ARRAY_OF_PACKAGES = 7
+    RET_DICT_AS_DICTS = 8
+
+    def __init__(self):
+        self.name = None
         self.query = ''
+        self.args = []
+        self.argdefaults = {}
+        self.rettype = QueryMetadata.RET_NONE
+
+    @staticmethod
+    def parse_from_string(string):
+        """Parse query metadata from the string definition.
+
+        Input examples:
+
+            - funcname()
+            Takes no arguments, returns nothing
+
+            - funcname(arg)
+            Takes single argument, returns nothing
+
+            - funcname(arg1, arg2=True, arg3=False, arg4=123, arg5="str") -> scalar
+            Takes 5 arguments, some with default values, returns single value
+
+            - funcname(arg, =arg)
+            Takes 1 argument, but uses it two times in the query
+        """
+        match = re.match('\s*([a-z][a-z0-9_]*)\s*\(([^)]*)\)(?:\s*->\s*([a-z ]+))?', string)
+        if match is None:
+            raise QueryMetadataParsingError('Cannot parse query metadata "{}"'.format(string))
+
+        metadata = QueryMetadata()
+        metadata.name = match.group(1).strip()
+
+        for arg in match.group(2).split(','):
+            arg = arg.strip()
+
+            if not arg:
+                continue
+
+            argname = None
+            argdefault = None
+            if arg.startswith('=') or '=' not in arg:
+                argname = arg
+            else:
+                argname, argdefault = [s.strip() for s in arg.split('=', 1)]
+
+            metadata.args.append(argname)
+
+            if argdefault is None:
+                pass
+            elif argdefault.isdecimal():
+                metadata.argdefaults[argname] = int(argdefault)
+            elif argdefault.startswith('\''):
+                metadata.argdefaults[argname] = argdefault.strip('\'')
+            elif argdefault.startswith('\"'):
+                metadata.argdefaults[argname] = argdefault.strip('\"')
+            elif argdefault == 'True':
+                metadata.argdefaults[argname] = True
+            elif argdefault == 'False':
+                metadata.argdefaults[argname] = False
+            elif argdefault == 'None':
+                metadata.argdefaults[argname] = None
+            else:
+                raise QueryMetadataParsingError('Cannot query metadata "{}", bad default value for argument "{}"'.format(string, argname))
+
+        if not match.group(3):
+            metadata.rettype = QueryMetadata.RET_NONE
+        elif match.group(3) == 'single value':
+            metadata.rettype = QueryMetadata.RET_SINGLE_VALUE
+        elif match.group(3) == 'single dict':
+            metadata.rettype = QueryMetadata.RET_SINGLE_DICT
+        elif match.group(3) == 'single tuple':
+            metadata.rettype = QueryMetadata.RET_SINGLE_TUPLE
+        elif match.group(3) == 'array of values':
+            metadata.rettype = QueryMetadata.RET_ARRAY_OF_VALUES
+        elif match.group(3) == 'array of dicts':
+            metadata.rettype = QueryMetadata.RET_ARRAY_OF_DICTS
+        elif match.group(3) == 'array of packages':
+            metadata.rettype = QueryMetadata.RET_ARRAY_OF_PACKAGES
+        elif match.group(3) == 'dict of dicts':
+            metadata.rettype = QueryMetadata.RET_DICT_AS_DICTS
+        else:
+            raise QueryMetadataParsingError('Cannot query metadata "{}", bad return specification'.format(string))
+
+        return metadata
 
 
 class QueryManager:
@@ -34,28 +136,86 @@ class QueryManager:
 
         for filename in os.listdir(queriesdir):
             if filename.endswith('.sql'):
-                self.__load_file(os.path.join(queriesdir, filename))
+                try:
+                    self.__load_file(os.path.join(queriesdir, filename))
+                except QueryMetadataParsingError as e:
+                    raise QueryLoadingError('Cannot load SQL queries from {}: {}'.format(filename, str(e)))
 
     def __load_file(self, path):
         current_query = None
 
-        with open(path, 'r') as sqlfile:
+        with open(path, 'r', encoding='utf-8') as sqlfile:
             for line in sqlfile:
-                if line.startswith('-- name:'):
+                match = re.match('--\s*!!(.*)', line)
+                if match:
                     if current_query is not None:
                         self.__register_query(current_query)
-                    current_query = QueryData(line[8:].strip())
 
-                else:
-                    if current_query is not None:
-                        current_query.query += line
+                    current_query = QueryMetadata.parse_from_string(match.group(1))
+
+                if current_query is not None:
+                    current_query.query += line
 
             if current_query is not None:
                 self.__register_query(current_query)
 
     def __register_query(self, query):
-        def do_query(self):
+        def do_query(self, *args, **kwargs):
+            args_by_name = {}
+            args_for_query = []
+
+            # prepare arguments
+            narg = 0
+            for argname in query.args:
+                if argname.startswith('='):
+                    args_for_query.append(args_by_name[argname[1:]])
+                    continue
+
+                if narg < len(args):
+                    args_for_query.append(args[narg])
+                elif argname in kwargs:
+                    args_for_query.append(kwargs[argname])
+                elif argname in query.argdefaults:
+                    args_for_query.append(query.argdefaults[argname])
+                else:
+                    raise RuntimeError('Required argument "{}" for query "{}" not specified'.format(argname, query.name))
+
+                args_by_name[argname] = args_for_query[-1]
+                narg += 1
+
             with self.db.cursor() as cursor:
-                cursor.execute(query.query)
+                # call
+                cursor.execute(query.query, args_for_query)
+
+                # handle return type
+                if query.rettype == QueryMetadata.RET_SINGLE_VALUE:
+                    row = cursor.fetchone()
+                    return None if row is None else row[0]
+
+                elif query.rettype == QueryMetadata.RET_SINGLE_DICT:
+                    row = cursor.fetchone()
+                    if row is None:
+                        return None
+                    names = [desc.name for desc in cursor.description]
+
+                    return dict(zip(names, row))
+
+                elif query.rettype == QueryMetadata.RET_SINGLE_TUPLE:
+                    return cursor.fetchone()
+
+                elif query.rettype == QueryMetadata.RET_ARRAY_OF_VALUES:
+                    return [row[0] for row in cursor.fetchall()]
+
+                elif query.rettype == QueryMetadata.RET_ARRAY_OF_DICTS:
+                    names = [desc.name for desc in cursor.description]
+                    return [dict(zip(names, row)) for row in cursor.fetchall()]
+
+                elif query.rettype == QueryMetadata.RET_ARRAY_OF_PACKAGES:
+                    names = [desc.name for desc in cursor.description]
+                    return [Package(**dict(zip(names, row))) for row in cursor.fetchall()]
+
+                elif query.rettype == QueryMetadata.RET_DICT_AS_DICTS:
+                    names = [desc.name for desc in cursor.description]
+                    return {row[0]: dict(zip(names[1:], row[1:])) for row in cursor.fetchall()}
 
         setattr(self, query.name, types.MethodType(do_query, self))

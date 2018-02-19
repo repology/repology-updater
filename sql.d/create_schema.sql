@@ -15,7 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
--- name: create_schema
+-- !!create_schema()
 
 DROP TABLE IF EXISTS packages CASCADE;
 DROP TABLE IF EXISTS repositories CASCADE;
