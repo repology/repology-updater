@@ -34,7 +34,7 @@ WHERE ts IN (
 SELECT
 	ts AS timestamp,
 	now() - ts AS timedelta,
-	snapshot#>{%s} AS snapshot
+	snapshot#>ARRAY[%s] AS snapshot
 FROM repositories_history
 WHERE ts >= now() - INTERVAL %s
 ORDER BY ts;
