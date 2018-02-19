@@ -1009,51 +1009,10 @@ class Database:
         return self.querymgr.get_repository_problems(repo, limit)
 
     def AddReport(self, effname, need_verignore, need_split, need_merge, comment):
-        self.Request(
-            """
-            INSERT
-            INTO reports (
-                created,
-                effname,
-                need_verignore,
-                need_split,
-                need_merge,
-                comment
-            ) VALUES (
-                now(),
-                %s,
-                %s,
-                %s,
-                %s,
-                %s
-            )
-            """,
-            effname,
-            need_verignore,
-            need_split,
-            need_merge,
-            comment
-        )
+        self.querymgr.add_report(effname, need_verignore, need_split, need_merge, comment)
 
     def GetReportsCount(self, effname):
-        return self.RequestSingleValue('SELECT count(*) FROM reports WHERE effname = %s', effname)
+        return self.querymgr.get_reports_count(effname)
 
     def GetReports(self, effname):
-        return self.RequestManyAsDicts(
-            """
-            SELECT
-                id,
-                now() - created AS created_ago,
-                effname,
-                need_verignore,
-                need_split,
-                need_merge,
-                comment,
-                reply,
-                accepted
-            FROM reports
-            WHERE effname = %s
-            ORDER BY created DESC
-            """,
-            effname
-        )
+        return self.querymgr.get_reports(effname)
