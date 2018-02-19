@@ -628,7 +628,7 @@ class Database:
         return self.querymgr.get_repositories_from_past(ago)
 
     def GetRepositoryHistoryPeriod(self, repo, since):
-        return self.querymgr.get_repository_history_since(since)
+        return self.querymgr.get_repository_history_since(repo, since)
 
     def GetStatisticsHistoryPeriod(self, since):
         return self.querymgr.get_statistics_history_since(since)
