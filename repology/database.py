@@ -880,12 +880,6 @@ class Database:
             cursor.execute(query, args)
             return cursor.fetchall()
 
-    def SnapshotHistory(self):
-        self.querymgr.snapshot_history()
-
-    def ExtractLinks(self):
-        self.querymgr.extract_links()
-
     def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None, unchecked_only=False, checked_only=False, failed_only=False, succeeded_only=False):
         conditions = []
         args = []

@@ -15,27 +15,37 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
--- !!extract_links()
+-- !!clear()
+DELETE
+FROM packages;
 
-INSERT INTO links(
-	url,
-	first_extracted,
-	last_extracted
-)
-SELECT
-	unnest(downloads),
-	now(),
-	now()
-FROM packages
-UNION
-SELECT
-	homepage,
-	now(),
-	now()
-FROM packages
-WHERE
-	homepage IS NOT NULL AND
-	repo NOT IN('cpan', 'pypi', 'rubygems', 'hackage', 'cran')
-ON CONFLICT (url)
-DO UPDATE SET
-	last_extracted = now();
+UPDATE repositories
+SET
+	num_packages = 0,
+	num_packages_newest = 0,
+	num_packages_outdated = 0,
+	num_packages_ignored = 0,
+	num_packages_unique = 0,
+	num_packages_devel = 0,
+	num_packages_legacy = 0,
+	num_packages_incorrect = 0,
+	num_packages_untrusted = 0,
+	num_packages_noscheme = 0,
+	num_packages_rolling = 0,
+	num_metapackages = 0,
+	num_metapackages_unique = 0,
+	num_metapackages_newest = 0,
+	num_metapackages_outdated = 0,
+	num_metapackages_comparable = 0,
+	num_problems = 0,
+	num_maintainers = 0;
+
+DELETE
+FROM problems;
+
+UPDATE statistics
+SET
+	num_packages = 0,
+	num_metapackages = 0,
+	num_problems = 0,
+	num_maintainers = 0;

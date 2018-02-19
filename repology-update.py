@@ -113,10 +113,6 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
 
         db_logger.Log('updating views')
         database.UpdateViews()
-        database.ExtractLinks()
-
-        db_logger.Log('updating history')
-        database.SnapshotHistory()
 
         db_logger.Log('committing changes')
         database.Commit()

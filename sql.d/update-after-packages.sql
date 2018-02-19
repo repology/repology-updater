@@ -16,7 +16,6 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 -- !!update_views()
-
 REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts;
 REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;
@@ -185,8 +184,8 @@ SELECT DISTINCT
 	'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
 FROM packages
 WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%)?' OR
-	homepage SIMILAR TO 'https?://code.google.com(/%)?';
+	homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
+	homepage SIMILAR TO 'https?://code.google.com(/%%)?';
 
 INSERT INTO problems(repo, name, effname, maintainer, problem)
 SELECT DISTINCT
@@ -197,7 +196,7 @@ SELECT DISTINCT
 	'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
 FROM packages
 WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%)?';
+	homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?';
 
 INSERT INTO problems(repo, name, effname, maintainer, problem)
 SELECT DISTINCT
@@ -208,7 +207,7 @@ SELECT DISTINCT
 	'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
 FROM packages
 WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%)?';
+	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
 
 INSERT INTO repositories (
 	name,
@@ -233,3 +232,61 @@ SET
 
 -- cleanup stale links
 DELETE FROM links WHERE last_extracted < now() - INTERVAL '1' MONTH;
+
+-- extract links
+INSERT INTO links(
+	url,
+	first_extracted,
+	last_extracted
+)
+SELECT
+	unnest(downloads),
+	now(),
+	now()
+FROM packages
+UNION
+SELECT
+	homepage,
+	now(),
+	now()
+FROM packages
+WHERE
+	homepage IS NOT NULL AND
+	repo NOT IN('cpan', 'pypi', 'rubygems', 'hackage', 'cran')
+ON CONFLICT (url)
+DO UPDATE SET
+	last_extracted = now();
+
+-- snapshot history
+INSERT INTO repositories_history (
+	ts,
+	snapshot
+)
+SELECT
+	now(),
+	jsonb_object_agg(snapshot.name, to_jsonb(snapshot) - 'name')
+FROM (
+	SELECT
+		name,
+		num_metapackages,
+		num_metapackages_unique,
+		num_metapackages_newest,
+		num_metapackages_outdated,
+		num_metapackages_comparable,
+		num_problems,
+		num_maintainers
+	FROM repositories
+) AS snapshot;
+
+INSERT INTO statistics_history (
+	ts,
+	snapshot
+)
+SELECT
+	now(),
+	to_jsonb(snapshot)
+FROM (
+	SELECT
+		*
+	FROM statistics
+) AS snapshot;

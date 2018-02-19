@@ -16,7 +16,6 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 -- !!create_schema()
-
 DROP TABLE IF EXISTS packages CASCADE;
 DROP TABLE IF EXISTS repositories CASCADE;
 DROP TABLE IF EXISTS repositories_history CASCADE;
