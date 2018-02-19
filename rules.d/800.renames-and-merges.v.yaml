@@ -1,7 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 - { setname: v4l2loopback,             name: v4l2loopback-dkms }
-- { setname: v8,                       namepat: "(?:lib)?v8(?:-[0-9._-]+)" }
+- { setname: v8,                       namepat: "(?:lib)?v8(?:-[0-9._-]+)?" }
 - { setname: v8,                       name: v8-devel }
 - { setname: v8,                       name: v8-nodejs, addflavor: nodejs }
 - { setname: v8,                       name: [v8-static-gyp,v8-static-gyp-5.4], addflavor: static-gyp }
