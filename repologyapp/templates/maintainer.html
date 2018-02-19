@@ -118,6 +118,7 @@
 {%- endif -%}
 </p>
 
+{% if similar_maintainers %}
 <h2>Similar maintainers</h2>
 
 <div class="row">
@@ -146,6 +147,7 @@
 {% endif %}
 {% endfor %}
 </div>
+{% endif %}
 
 </div>
 {% endblock %}
