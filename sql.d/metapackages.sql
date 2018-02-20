@@ -64,3 +64,23 @@ WHERE effname IN (
 	ORDER BY effname
 	LIMIT %s
 );
+
+-- !!get_all_metapackage_names_by_min_spread_count(spread) -> single value
+SELECT
+	count(DISTINCT effname)
+FROM metapackage_repocounts
+WHERE num_families >= %s;
+
+-- !!get_all_metapackage_names_by_min_spread(spread, limit=None) -> array of values
+SELECT DISTINCT
+	effname
+FROM metapackage_repocounts
+WHERE num_families >= %s
+LIMIT %s;
+
+-- !!get_all_metapackage_names_by_spread(spread, limit=None) -> array of values
+SELECT DISTINCT
+	effname
+FROM metapackage_repocounts
+WHERE num_families = %s
+LIMIT %s;

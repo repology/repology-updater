@@ -64,3 +64,9 @@ SELECT
 	num_maintainers
 FROM repositories
 WHERE name = %s;
+
+-- !!get_all_repository_names(limit=None) -> array of values
+SELECT
+	name
+FROM repositories
+LIMIT %s;

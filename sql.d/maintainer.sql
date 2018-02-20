@@ -91,3 +91,9 @@ SELECT
 	category_metapackage_counts
 FROM maintainers
 WHERE maintainer = %s;
+
+-- !!get_all_maintainer_names(limit=None) -> array of values
+SELECT
+	maintainer
+FROM maintainers
+LIMIT %s;
