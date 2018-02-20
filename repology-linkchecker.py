@@ -172,7 +172,7 @@ def Main():
     options = ParseArguments()
 
     logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
-    querymgr = QueryManager(options.qsl_dir)
+    querymgr = QueryManager(options.sql_dir)
     database = Database(options.dsn, querymgr, readonly=True, autocommit=True)
 
     readqueue = multiprocessing.Queue(10)
