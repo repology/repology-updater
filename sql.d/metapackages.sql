@@ -49,7 +49,7 @@ WHERE effname IN (
 			effname,
 			url
 		FROM url_relations
-		WHERE effname=%s
+		WHERE effname = %(effname)s
 		UNION
 		SELECT
 			url_relations.effname,
@@ -62,25 +62,25 @@ WHERE effname IN (
 		effname
 	FROM r
 	ORDER BY effname
-	LIMIT %s
+	LIMIT %(limit)s
 );
 
 -- !!get_all_metapackage_names_by_min_spread_count(spread) -> single value
 SELECT
 	count(DISTINCT effname)
 FROM metapackage_repocounts
-WHERE num_families >= %s;
+WHERE num_families >= %(spread)s;
 
 -- !!get_all_metapackage_names_by_min_spread(spread, limit=None) -> array of values
 SELECT DISTINCT
 	effname
 FROM metapackage_repocounts
-WHERE num_families >= %s
-LIMIT %s;
+WHERE num_families >= %(spread)s
+LIMIT %(limit)s;
 
 -- !!get_all_metapackage_names_by_spread(spread, limit=None) -> array of values
 SELECT DISTINCT
 	effname
 FROM metapackage_repocounts
-WHERE num_families = %s
-LIMIT %s;
+WHERE num_families = %(spread)s
+LIMIT %(limit)s;

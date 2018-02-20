@@ -25,7 +25,7 @@ WHERE ts IN (
 	SELECT
 		ts
 	FROM repositories_history
-	WHERE ts < now() - INTERVAL %s
+	WHERE ts < now() - INTERVAL %(ago)s
 	ORDER BY ts DESC
 	LIMIT 1
 );
@@ -34,9 +34,9 @@ WHERE ts IN (
 SELECT
 	ts AS timestamp,
 	now() - ts AS timedelta,
-	snapshot#>ARRAY[%s] AS snapshot
+	snapshot#>ARRAY[%(repo)s] AS snapshot
 FROM repositories_history
-WHERE ts >= now() - INTERVAL %s
+WHERE ts >= now() - INTERVAL %(since)s
 ORDER BY ts;
 
 -- !!get_statistics_history_since(since) -> array of dicts
@@ -45,5 +45,5 @@ SELECT
 	now() - ts AS timedelta,
 	snapshot
 FROM statistics_history
-WHERE ts >= now() - INTERVAL %s
+WHERE ts >= now() - INTERVAL %(since)s
 ORDER BY ts;

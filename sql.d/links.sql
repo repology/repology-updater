@@ -15,19 +15,19 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
--- !!update_link_status(success, =success, status, redirect=None, size=None, location=None, url)
+-- !!update_link_status(success, status, redirect=None, size=None, location=None, url)
 UPDATE links
 SET
 	last_checked = now(),
-	last_success = CASE WHEN %s THEN now() ELSE last_success END,
-	last_failure = CASE WHEN NOT %s THEN now() ELSE last_failure END,
-	status = %s,
-	redirect = %s,
-	size = %s,
-	location = %s
-WHERE url = %s;
+	last_success = CASE WHEN %(success)s THEN now() ELSE last_success END,
+	last_failure = CASE WHEN NOT %(success)s THEN now() ELSE last_failure END,
+	status = %(status)s,
+	redirect = %(redirect)s,
+	size = %(size)s,
+	location = %(location)s
+WHERE url = %(url)s;
 
--- !!get_metapackage_link_statuses(effname, =effname) -> dict of dicts
+-- !!get_metapackage_link_statuses(effname) -> dict of dicts
 SELECT
 	url,
 	last_checked,
@@ -49,11 +49,11 @@ WHERE url in (
 		SELECT
 			unnest(downloads) AS url
 		FROM packages
-		WHERE effname = %s
+		WHERE effname = %(effname)s
 		UNION
 		SELECT
 			homepage AS url
 		FROM packages
-		WHERE homepage IS NOT NULL AND effname = %s
+		WHERE homepage IS NOT NULL AND effname = %(effname)s
 	) AS tmp
 );

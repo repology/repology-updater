@@ -25,18 +25,18 @@ INSERT INTO reports (
 	comment
 ) VALUES (
 	now(),
-	%s,
-	%s,
-	%s,
-	%s,
-	%s
+	%(effname)s,
+	%(need_verignore)s,
+	%(need_split)s,
+	%(need_merge)s,
+	%(comment)s
 );
 
 -- !!get_reports_count(effname) -> single value
 SELECT
 	count(*)
 FROM reports
-WHERE effname = %s;
+WHERE effname = %(effname)s;
 
 -- !!get_reports(effname) -> array of dicts
 SELECT
@@ -50,5 +50,5 @@ SELECT
 	reply,
 	accepted
 FROM reports
-WHERE effname = %s
+WHERE effname = %(effname)s
 ORDER BY created DESC;

@@ -63,10 +63,10 @@ SELECT
 	num_problems,
 	num_maintainers
 FROM repositories
-WHERE name = %s;
+WHERE name = %(reponame)s;
 
 -- !!get_all_repository_names(limit=None) -> array of values
 SELECT
 	name
 FROM repositories
-LIMIT %s;
+LIMIT %(limit)s;

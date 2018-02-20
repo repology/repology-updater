@@ -19,11 +19,11 @@
 SELECT
 	effname
 FROM maintainer_metapackages
-WHERE maintainer = %s
+WHERE maintainer = %(maintainer)s
 ORDER BY effname
-LIMIT %s;
+LIMIT %(limit)s;
 
--- !!get_maintainer_similar_maintainers(maintainer, =maintainer, =maintainer, limit) -> array of dicts
+-- !!get_maintainer_similar_maintainers(maintainer, limit) -> array of dicts
 
 -- this obscure request needs some clarification
 --
@@ -47,7 +47,7 @@ SELECT
 		num_metapackages - num_metapackages_common + (
 			SELECT num_metapackages
 			FROM maintainers
-			WHERE maintainer = %s
+			WHERE maintainer = %(maintainer)s
 		)
 	) AS match
 FROM
@@ -58,18 +58,18 @@ FROM
 		FROM
 			maintainer_metapackages
 		WHERE
-			maintainer != %s AND
+			maintainer != %(maintainer)s AND
 			effname IN (
 				SELECT
 					effname
 				FROM maintainer_metapackages
-				WHERE maintainer = %s
+				WHERE maintainer = %(maintainer)s
 			)
 		GROUP BY maintainer
 	) AS intersecting_counts
 	INNER JOIN maintainers USING(maintainer)
 ORDER BY match DESC
-LIMIT %s;
+LIMIT %(limit)s;
 
 -- !!get_maintainer_information(maintainer) -> single dict
 SELECT
@@ -90,10 +90,10 @@ SELECT
 	repository_metapackage_counts,
 	category_metapackage_counts
 FROM maintainers
-WHERE maintainer = %s;
+WHERE maintainer = %(maintainer)s;
 
 -- !!get_all_maintainer_names(limit=None) -> array of values
 SELECT
 	maintainer
 FROM maintainers
-LIMIT %s;
+LIMIT %(limit)s;

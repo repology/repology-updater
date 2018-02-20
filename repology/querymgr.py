@@ -65,9 +65,6 @@ class QueryMetadata:
 
             - funcname(arg1, arg2=True, arg3=False, arg4=123, arg5="str") -> scalar
             Takes 5 arguments, some with default values, returns single value
-
-            - funcname(arg, =arg)
-            Takes 1 argument, but uses it two times in the query
         """
         match = re.match('\s*([a-z][a-z0-9_]*)\s*\(([^)]*)\)(?:\s*->\s*([a-z ]+))?', string)
         if match is None:
@@ -82,12 +79,12 @@ class QueryMetadata:
             if not arg:
                 continue
 
-            argname = None
-            argdefault = None
-            if arg.startswith('=') or '=' not in arg:
-                argname = arg
-            else:
-                argname, argdefault = [s.strip() for s in arg.split('=', 1)]
+            argname, *argdefault = [s.strip() for s in arg.split('=', 1)]
+
+            argdefault = argdefault[0] if argdefault else None
+
+            if not argname:
+                raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad arguments'.format(string, argname))
 
             metadata.args.append(argname)
 
@@ -106,7 +103,7 @@ class QueryMetadata:
             elif argdefault == 'None':
                 metadata.argdefaults[argname] = None
             else:
-                raise QueryMetadataParsingError('Cannot query metadata "{}", bad default value for argument "{}"'.format(string, argname))
+                raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad default value for argument "{}"'.format(string, argname))
 
         if not match.group(3):
             metadata.rettype = QueryMetadata.RET_NONE
@@ -125,7 +122,7 @@ class QueryMetadata:
         elif match.group(3) == 'dict of dicts':
             metadata.rettype = QueryMetadata.RET_DICT_AS_DICTS
         else:
-            raise QueryMetadataParsingError('Cannot query metadata "{}", bad return specification'.format(string))
+            raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad return specification'.format(string))
 
         return metadata
 
@@ -161,27 +158,18 @@ class QueryManager:
 
     def __register_query(self, query):
         def do_query(db, *args, **kwargs):
-            args_by_name = {}
-            args_for_query = []
+            args_for_query = {}
 
             # prepare arguments
-            narg = 0
-            for argname in query.args:
-                if argname.startswith('='):
-                    args_for_query.append(args_by_name[argname[1:]])
-                    continue
-
+            for narg, argname in enumerate(query.args):
                 if narg < len(args):
-                    args_for_query.append(args[narg])
+                    args_for_query[argname] = args[narg]
                 elif argname in kwargs:
-                    args_for_query.append(kwargs[argname])
+                    args_for_query[argname] = kwargs[argname]
                 elif argname in query.argdefaults:
-                    args_for_query.append(query.argdefaults[argname])
+                    args_for_query[argname] = query.argdefaults[argname]
                 else:
                     raise RuntimeError('Required argument "{}" for query "{}" not specified'.format(argname, query.name))
-
-                args_by_name[argname] = args_for_query[-1]
-                narg += 1
 
             with db.cursor() as cursor:
                 # call

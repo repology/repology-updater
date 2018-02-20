@@ -19,7 +19,7 @@
 SELECT
 	count(*)
 FROM problems
-WHERE repo = %s;
+WHERE repo = %(repo)s;
 
 -- !!get_repository_problems(repo, limit=None) -> array of dicts
 SELECT
@@ -29,15 +29,15 @@ SELECT
 	maintainer,
 	problem
 FROM problems
-WHERE repo = %s
+WHERE repo = %(repo)s
 ORDER BY repo, effname, maintainer
-LIMIT %s;
+LIMIT %(limit)s;
 
 -- !!get_maintainer_problems_count(repo) -> single value
 SELECT
 	count(*)
 FROM problems
-WHERE repo = %s;
+WHERE repo = %(repo)s;
 
 -- !!get_maintainer_problems(maintaner, limit=None) -> array of dicts
 SELECT
@@ -47,6 +47,6 @@ SELECT
 	maintainer,
 	problem
 FROM problems
-WHERE maintainer = %s
+WHERE maintainer = %(maintainer)s
 ORDER BY repo, effname, maintainer
-LIMIT %s;
+LIMIT %(limit)s;
