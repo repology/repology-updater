@@ -15,7 +15,11 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+--
 -- !!get_repositories_from_past(ago) -> single dict
+--
+--------------------------------------------------------------------------------
 SELECT
 	ts AS timestamp,
 	now() - ts AS timedelta,
@@ -30,7 +34,12 @@ WHERE ts IN (
 	LIMIT 1
 );
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_repository_history_since(repo, since) -> array of dicts
+--
+--------------------------------------------------------------------------------
 SELECT
 	ts AS timestamp,
 	now() - ts AS timedelta,
@@ -39,7 +48,12 @@ FROM repositories_history
 WHERE ts >= now() - INTERVAL %(since)s
 ORDER BY ts;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_statistics_history_since(since) -> array of dicts
+--
+--------------------------------------------------------------------------------
 SELECT
 	ts AS timestamp,
 	now() - ts AS timedelta,

@@ -15,14 +15,33 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+--
 -- !!get_packages_count() -> single value
+--
+--------------------------------------------------------------------------------
 SELECT num_packages FROM statistics LIMIT 1;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_metapackages_count() -> single value
+--
+--------------------------------------------------------------------------------
 SELECT num_metapackages FROM statistics LIMIT 1;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_maintainers_count() -> single value
+--
+--------------------------------------------------------------------------------
 SELECT num_maintainers FROM statistics LIMIT 1;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_maintainers_range() -> single tuple
+--
+--------------------------------------------------------------------------------
 SELECT min(maintainer), max(maintainer) FROM maintainers;

@@ -15,7 +15,11 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+--
 -- !!get_maintainer_metapackages(maintainer, limit) -> array of values
+--
+--------------------------------------------------------------------------------
 SELECT
 	effname
 FROM maintainer_metapackages
@@ -23,7 +27,12 @@ WHERE maintainer = %(maintainer)s
 ORDER BY effname
 LIMIT %(limit)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_maintainer_similar_maintainers(maintainer, limit) -> array of dicts
+--
+--------------------------------------------------------------------------------
 
 -- this obscure request needs some clarification
 --
@@ -71,7 +80,12 @@ FROM
 ORDER BY match DESC
 LIMIT %(limit)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_maintainer_information(maintainer) -> single dict
+--
+--------------------------------------------------------------------------------
 SELECT
 	num_packages,
 	num_packages_newest,
@@ -92,13 +106,23 @@ SELECT
 FROM maintainers
 WHERE maintainer = %(maintainer)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_all_maintainer_names(limit=None) -> array of values
+--
+--------------------------------------------------------------------------------
 SELECT
 	maintainer
 FROM maintainers
 LIMIT %(limit)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_maintainers(pivot=None, reverse=False, search=None, limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
 SELECT
 	*
 FROM

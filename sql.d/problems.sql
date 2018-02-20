@@ -15,13 +15,22 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+--
 -- !!get_repository_problems_count(repo) -> single value
+--
+--------------------------------------------------------------------------------
 SELECT
 	count(*)
 FROM problems
 WHERE repo = %(repo)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_repository_problems(repo, limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
 SELECT
 	repo,
 	name,
@@ -33,13 +42,23 @@ WHERE repo = %(repo)s
 ORDER BY repo, effname, maintainer
 LIMIT %(limit)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_maintainer_problems_count(repo) -> single value
+--
+--------------------------------------------------------------------------------
 SELECT
 	count(*)
 FROM problems
 WHERE repo = %(repo)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_maintainer_problems(maintainer, limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
 SELECT
 	repo,
 	name,

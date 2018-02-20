@@ -15,7 +15,11 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+--
 -- !!add_report(effname, need_verignore, need_split, need_merge, comment)
+--
+--------------------------------------------------------------------------------
 INSERT INTO reports (
 	created,
 	effname,
@@ -32,13 +36,23 @@ INSERT INTO reports (
 	%(comment)s
 );
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_reports_count(effname) -> single value
+--
+--------------------------------------------------------------------------------
 SELECT
 	count(*)
 FROM reports
 WHERE effname = %(effname)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_reports(effname) -> array of dicts
+--
+--------------------------------------------------------------------------------
 SELECT
 	id,
 	now() - created AS created_ago,

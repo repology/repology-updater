@@ -15,7 +15,15 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+--
 -- !!update_finish()
+--
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+-- Refresh views
+--------------------------------------------------------------------------------
 REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts;
 REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;
@@ -23,7 +31,11 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers;
 REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations;
 
--- package stats
+--------------------------------------------------------------------------------
+-- Update statistics
+--------------------------------------------------------------------------------
+
+-- per-repository package counts
 INSERT INTO repositories (
 	name,
 	num_packages,
@@ -67,6 +79,7 @@ DO UPDATE SET
 	num_packages_noscheme = EXCLUDED.num_packages_noscheme,
 	num_packages_rolling = EXCLUDED.num_packages_rolling;
 
+-- per-repository maintainer counts
 INSERT INTO repositories (
 	name,
 	num_maintainers
@@ -85,7 +98,7 @@ ON CONFLICT (name)
 DO UPDATE SET
 	num_maintainers = EXCLUDED.num_maintainers;
 
--- metapackage stats
+-- per-repository metapackage counts
 INSERT INTO repositories (
 	name,
 	num_metapackages,
@@ -118,7 +131,16 @@ DO UPDATE SET
 	num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
 	num_metapackages_comparable = EXCLUDED.num_metapackages_comparable;
 
--- problems
+-- global statistics
+UPDATE statistics SET
+	num_packages = (SELECT count(*) FROM packages),
+	num_metapackages = (SELECT count(*) FROM metapackage_repocounts WHERE NOT shadow_only),
+	num_problems = (SELECT count(*) FROM problems),
+	num_maintainers = (SELECT count(*) FROM maintainers);
+
+--------------------------------------------------------------------------------
+-- Update problems
+--------------------------------------------------------------------------------
 INSERT INTO problems (
 	repo,
 	name,
@@ -222,18 +244,14 @@ ON CONFLICT (name)
 DO UPDATE SET
 	num_problems = EXCLUDED.num_problems;
 
--- statistics
-UPDATE statistics
-SET
-	num_packages = (SELECT count(*) FROM packages),
-	num_metapackages = (SELECT count(*) FROM metapackage_repocounts WHERE NOT shadow_only),
-	num_problems = (SELECT count(*) FROM problems),
-	num_maintainers = (SELECT count(*) FROM maintainers);
+--------------------------------------------------------------------------------
+-- Update links
+--------------------------------------------------------------------------------
 
--- cleanup stale links
+-- cleanup stale
 DELETE FROM links WHERE last_extracted < now() - INTERVAL '1' MONTH;
 
--- extract links
+-- extract fresh
 INSERT INTO links(
 	url,
 	first_extracted,
@@ -257,7 +275,11 @@ ON CONFLICT (url)
 DO UPDATE SET
 	last_extracted = now();
 
--- snapshot history
+--------------------------------------------------------------------------------
+-- History snapshot
+--------------------------------------------------------------------------------
+
+-- per-repository counters
 INSERT INTO repositories_history (
 	ts,
 	snapshot
@@ -278,6 +300,7 @@ FROM (
 	FROM repositories
 ) AS snapshot;
 
+-- global statistics
 INSERT INTO statistics_history (
 	ts,
 	snapshot
@@ -291,7 +314,12 @@ FROM (
 	FROM statistics
 ) AS snapshot;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!mark_repositories_updated(many values)
+--
+--------------------------------------------------------------------------------
 INSERT INTO repositories (
 	name,
 	last_update

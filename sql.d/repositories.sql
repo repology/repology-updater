@@ -15,7 +15,11 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+--
 -- !!get_repositories() -> array of dicts
+--
+--------------------------------------------------------------------------------
 SELECT
 	name,
 	num_packages,
@@ -40,7 +44,12 @@ SELECT
 	num_maintainers
 FROM repositories;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_repository(reponame) -> single dict
+--
+--------------------------------------------------------------------------------
 SELECT
 	num_packages,
 	num_packages_newest,
@@ -65,7 +74,12 @@ SELECT
 FROM repositories
 WHERE name = %(reponame)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_all_repository_names(limit=None) -> array of values
+--
+--------------------------------------------------------------------------------
 SELECT
 	name
 FROM repositories

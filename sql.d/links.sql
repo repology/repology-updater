@@ -15,7 +15,11 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+--------------------------------------------------------------------------------
+--
 -- !!update_link_status(success, status, redirect=None, size=None, location=None, url)
+--
+--------------------------------------------------------------------------------
 UPDATE links
 SET
 	last_checked = now(),
@@ -27,7 +31,12 @@ SET
 	location = %(location)s
 WHERE url = %(url)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_links_for_check(after=None, prefix=None, recheck_age=None, limit=None, unchecked_only=False, checked_only=False, failed_only=False, succeeded_only=False) -> array of values
+--
+--------------------------------------------------------------------------------
 SELECT
 	url
 FROM links
@@ -66,7 +75,12 @@ WHERE
 ORDER BY url
 LIMIT %(limit)s;
 
+
+--------------------------------------------------------------------------------
+--
 -- !!get_metapackage_link_statuses(effname) -> dict of dicts
+--
+--------------------------------------------------------------------------------
 SELECT
 	url,
 	last_checked,
