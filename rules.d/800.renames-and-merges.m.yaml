@@ -52,6 +52,7 @@
 - { setname: munin,                    namepat: munin-(master|node|server|common), addflavor: $1 }
 - { setname: mutt,                     name: [mutt-lite,mutt-devel,mutt14,mutt14-lite,mutt-patched,mutt-slang,mutt-kiss] }
 - { setname: mygui,                    namepat: "mygui-(docs|dummy|gl|opengl|ogre[0-9._-]*)", addflavor: $1 }
+- { setname: myrepos,                  name: mr }
 - { setname: mysql,                    namepat: "libmysqlclient[0-9.-]*" }
 - { setname: mysql,                    namepat: "mysql-clients[0-9.-]*" }
 - { setname: mysql,                    namepat: "mysql[0-9.-]*(?:-client|-server)?" }
