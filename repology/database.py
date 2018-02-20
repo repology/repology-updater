@@ -287,7 +287,8 @@ class Database:
     def __init__(self, dsn, querymgr, readonly=True, autocommit=False):
         self.db = psycopg2.connect(dsn)
         self.db.set_session(readonly=readonly, autocommit=autocommit)
-        self.queries = querymgr.GetQueries(self.db)
+        querymgr.InjectQueries(self, self.db)
+        self.queries = self  # XXX: switch to calling queries directly and remove
 
     def Request(self, query, *args):
         with self.db.cursor() as cursor:

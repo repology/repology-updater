@@ -220,13 +220,6 @@ class QueryManager:
 
         self.queries[query.name] = do_query
 
-    def GetQueries(self, db):
-        class Queries:
-            pass
-
-        queries = Queries()
-
+    def InjectQueries(self, target, db):
         for name, function in self.queries.items():
-            setattr(queries, name, functools.partial(function, db))
-
-        return queries
+            setattr(target, name, functools.partial(function, db))
