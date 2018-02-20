@@ -633,11 +633,6 @@ class Database:
     def GetStatisticsHistoryPeriod(self, since):
         return self.queries.get_statistics_history_since(since)
 
-    def Query(self, query, *args):
-        with self.db.cursor() as cursor:
-            cursor.execute(query, args)
-            return cursor.fetchall()
-
     def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None, unchecked_only=False, checked_only=False, failed_only=False, succeeded_only=False):
         conditions = []
         args = []
