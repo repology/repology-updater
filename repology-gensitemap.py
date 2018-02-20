@@ -46,7 +46,7 @@ def Main():
     options = ParseArguments()
 
     querymgr = QueryManager(options.sql_dir)
-    database = Database(options.dsn, querymgr, readonly=True)
+    database = Database(options.dsn, querymgr, readonly=True, application_name='repology-gensitemap')
 
     urls = []
     if options.main:

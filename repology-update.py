@@ -74,7 +74,7 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
     db_logger = logger.GetIndented()
 
     querymgr = QueryManager(options.sql_dir)
-    database = Database(options.dsn, querymgr, readonly=False)
+    database = Database(options.dsn, querymgr, readonly=False, application_name='repology-update')
     if options.initdb:
         db_logger.Log('(re)initializing database schema')
         database.create_schema()

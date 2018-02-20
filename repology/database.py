@@ -284,8 +284,8 @@ class MetapackageRequest:
 
 
 class Database:
-    def __init__(self, dsn, querymgr, readonly=True, autocommit=False):
-        self.db = psycopg2.connect(dsn)
+    def __init__(self, dsn, querymgr, readonly=True, autocommit=False, application_name=None):
+        self.db = psycopg2.connect(dsn, application_name=application_name)
         self.db.set_session(readonly=readonly, autocommit=autocommit)
         querymgr.InjectQueries(self, self.db)
         self.queries = self  # XXX: switch to calling queries directly and remove

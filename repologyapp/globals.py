@@ -48,5 +48,5 @@ def get_text_width(text):
 def get_db():
     # XXX: this is not really a persistent DB connection!
     if not hasattr(flask.g, 'database'):
-        flask.g.database = Database(config['DSN'], querymgr, readonly=False, autocommit=True)
+        flask.g.database = Database(config['DSN'], querymgr, readonly=False, autocommit=True, application_name='repology-app')
     return flask.g.database

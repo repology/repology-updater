@@ -127,7 +127,7 @@ def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
 
 
 def LinkUpdatingWorker(queue, options, querymgr, logger):
-    database = Database(options.dsn, querymgr, readonly=False)
+    database = Database(options.dsn, querymgr, readonly=False, application_name='repology-linkchecker/writer')
 
     logger = logger.GetPrefixed('writer: ')
 
@@ -173,7 +173,7 @@ def Main():
 
     logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
     querymgr = QueryManager(options.sql_dir)
-    database = Database(options.dsn, querymgr, readonly=True, autocommit=True)
+    database = Database(options.dsn, querymgr, readonly=True, autocommit=True, application_name='repology-linkchecker/reader')
 
     readqueue = multiprocessing.Queue(10)
     writequeue = multiprocessing.Queue(10)
