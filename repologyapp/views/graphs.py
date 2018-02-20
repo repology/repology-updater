@@ -62,7 +62,7 @@ def graph_repo_generic(repo, getvalue, color, suffix=''):
     def GetGraph(period):
         graph = GraphProcessor()
 
-        for histentry in get_db().GetRepositoryHistoryPeriod(repo, datetime.timedelta(seconds=period)):
+        for histentry in get_db().get_repository_history_since(repo, datetime.timedelta(seconds=period)):
             try:
                 graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot']))
             except:
@@ -77,7 +77,7 @@ def graph_total_generic(getvalue, color, suffix=''):
     def GetGraph(period):
         graph = GraphProcessor()
 
-        for histentry in get_db().GetStatisticsHistoryPeriod(datetime.timedelta(seconds=period)):
+        for histentry in get_db().get_statistics_history_since(datetime.timedelta(seconds=period)):
             try:
                 graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot']))
             except:
@@ -173,11 +173,11 @@ def clever_ceil(value):
 
 def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
     snapshots = [
-        #get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 30)
+        #get_db().get_repositories_from_past(60 * 60 * 24 * 30)
     ]
 
     points = []
-    for repo in get_db().GetRepositories():
+    for repo in get_db().get_repositories():
         if not repo['name'] in reponames:
             continue
 

@@ -25,7 +25,7 @@ from repologyapp.view_registry import ViewRegistrar
 @ViewRegistrar('/statistics')
 @ViewRegistrar('/statistics/<sorting>')
 def statistics(sorting=None):
-    repostats = {repostat['name']: repostat for repostat in get_db().GetRepositories()}
+    repostats = {repostat['name']: repostat for repostat in get_db().get_repositories()}
     repostats = [repostats[reponame] for reponame in reponames if reponame in repostats]
     showmedals = True
 
@@ -49,5 +49,5 @@ def statistics(sorting=None):
         repostats=repostats,
         showmedals=showmedals,
         repostats_old={},  # {repo['name']: repo for repo in get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 7)},
-        num_metapackages=get_db().GetMetapackagesCount()
+        num_metapackages=get_db().get_metapackages_count()
     )

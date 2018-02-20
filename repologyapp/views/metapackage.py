@@ -75,7 +75,7 @@ def metapackage_packages(name):
         'metapackage-packages.html',
         packages=packages,
         name=name,
-        link_statuses=get_db().GetMetapackageLinkStatuses(name)
+        link_statuses=get_db().get_metapackage_link_statuses(name)
     )
 
 
@@ -129,7 +129,7 @@ def metapackage_information(name):
         information=information,
         versions=versions,
         name=name,
-        link_statuses=get_db().GetMetapackageLinkStatuses(name)
+        link_statuses=get_db().get_metapackage_link_statuses(name)
     )
 
 
@@ -137,7 +137,7 @@ def metapackage_information(name):
 def metapackage_related(name):
     name = name.lower()
 
-    packages = get_db().GetRelatedMetapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
+    packages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
 

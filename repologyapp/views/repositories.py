@@ -36,7 +36,7 @@ def repository(repo):
     return flask.render_template(
         'repository.html',
         repo=repo,
-        repo_info=get_db().GetRepository(repo)
+        repo_info=get_db().get_repository(repo)
     )
 
 
@@ -45,4 +45,4 @@ def repository_problems(repo):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.render_template('repository-problems.html', repo=repo, problems=get_db().GetRepositoryProblems(repo, config['PROBLEMS_PER_PAGE']))
+    return flask.render_template('repository-problems.html', repo=repo, problems=get_db().get_repository_problems(repo, config['PROBLEMS_PER_PAGE']))

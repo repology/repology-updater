@@ -499,45 +499,6 @@ class Database:
             *args
         )
 
-    def GetRelatedMetapackages(self, name, limit=500):
-        return self.queries.get_metapackage_related_metapackages(name, limit)
-
-    def GetPackagesCount(self):
-        return self.queries.get_packages_count()
-
-    def GetMetapackagesCount(self):
-        return self.queries.get_metapackages_count()
-
-    def GetMaintainersCount(self):
-        return self.queries.get_maintainers_count()
-
-    def GetMaintainersRange(self):
-        return self.queries.get_maintainers_range()
-
-    def GetMaintainerInformation(self, maintainer):
-        return self.queries.get_maintainer_information(maintainer)
-
-    def GetMaintainerMetapackages(self, maintainer, limit=1000):
-        return self.queries.get_maintainer_metapackages(maintainer, limit)
-
-    def GetMaintainerSimilarMaintainers(self, maintainer, limit=100):
-        return self.queries.get_maintainer_similar_maintainers(maintainer, limit)
-
-    def GetRepositories(self):
-        return self.queries.get_repositories()
-
-    def GetRepository(self, repo):
-        return self.queries.get_repository(repo)
-
-    def GetRepositoriesHistoryAgo(self, ago):
-        return self.queries.get_repositories_from_past(ago)
-
-    def GetRepositoryHistoryPeriod(self, repo, since):
-        return self.queries.get_repository_history_since(repo, since)
-
-    def GetStatisticsHistoryPeriod(self, since):
-        return self.queries.get_statistics_history_since(since)
-
     def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None, unchecked_only=False, checked_only=False, failed_only=False, succeeded_only=False):
         conditions = []
         args = []
@@ -604,15 +565,3 @@ class Database:
         success = status == 200
 
         self.queries.update_link_status(success, status, redirect, size, location, url)
-
-    def GetMetapackageLinkStatuses(self, name):
-        return self.queries.get_metapackage_link_statuses(name)
-
-    def GetMaintainerProblemsCount(self, maintainer):
-        return self.queries.get_maintainer_problems_count(maintainer)
-
-    def GetMaintainerProblems(self, maintainer, limit=None):
-        return self.queries.get_maintainer_problems(maintainer, limit)
-
-    def GetRepositoryProblems(self, repo, limit=None):
-        return self.queries.get_repository_problems(repo, limit)

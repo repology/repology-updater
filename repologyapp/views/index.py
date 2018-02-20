@@ -28,7 +28,7 @@ from repology.metapackageproc import PackagesToMetapackages
 @ViewRegistrar('/')
 def index():
     repostats = [
-        repo for repo in get_db().GetRepositories()
+        repo for repo in get_db().get_repositories()
         if repo['name'] in reponames and repometadata[repo['name']]['type'] == 'repository'
     ]
 

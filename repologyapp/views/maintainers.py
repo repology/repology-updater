@@ -36,7 +36,7 @@ def maintainers(bound=None):
     search = flask.request.args.to_dict().get('search')
     search = None if search is None else search.strip().lower()
 
-    minmaintainer, maxmaintainer = get_db().GetMaintainersRange()
+    minmaintainer, maxmaintainer = get_db().get_maintainers_range()
 
     maintainers = get_db().get_maintainers(bound, reverse, search, config['MAINTAINERS_PER_PAGE'])
 
@@ -62,10 +62,10 @@ def maintainers(bound=None):
 def maintainer(maintainer):
     maintainer = maintainer.lower()
 
-    maintainer_info = get_db().GetMaintainerInformation(maintainer)
-    metapackages = get_db().GetMaintainerMetapackages(maintainer, 500)
-    similar_maintainers = get_db().GetMaintainerSimilarMaintainers(maintainer, 50)
-    numproblems = get_db().GetMaintainerProblemsCount(maintainer)
+    maintainer_info = get_db().get_maintainer_information(maintainer)
+    metapackages = get_db().get_maintainer_metapackages(maintainer, 500)
+    similar_maintainers = get_db().get_maintainer_similar_maintainers(maintainer, 50)
+    numproblems = get_db().get_maintainer_problems_count(maintainer)
 
     if not maintainer_info:
         flask.abort(404)
@@ -94,7 +94,7 @@ def maintainer_problems(maintainer):
     return flask.render_template(
         'maintainer-problems.html',
         maintainer=maintainer,
-        problems=get_db().GetMaintainerProblems(
+        problems=get_db().get_maintainer_problems(
             maintainer,
             config['PROBLEMS_PER_PAGE']
         )
