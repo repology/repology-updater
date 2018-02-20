@@ -97,3 +97,32 @@ SELECT
 	maintainer
 FROM maintainers
 LIMIT %(limit)s;
+
+-- !!get_maintainers(pivot=None, reverse=False, search=None, limit=None) -> array of dicts
+SELECT
+	*
+FROM
+(
+	SELECT
+		maintainer,
+		num_packages,
+		num_metapackages,
+		num_metapackages_outdated
+	FROM maintainers
+	WHERE
+		(
+			-- pivot condition
+			%(pivot)s IS NULL OR
+			(NOT %(reverse)s AND maintainer >= %(pivot)s) OR
+			(%(reverse)s AND maintainer <= %(pivot)s)
+		) AND (
+			-- search condition
+			%(search)s IS NULL OR
+			maintainer LIKE ('%%' || %(search)s || '%%')
+		)
+	ORDER BY
+		CASE WHEN NOT %(reverse)s THEN maintainer ELSE NULL END,
+		CASE WHEN %(reverse)s THEN maintainer ELSE NULL END DESC
+	LIMIT %(limit)s
+) AS tmp
+ORDER BY maintainer;

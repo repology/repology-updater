@@ -514,56 +514,6 @@ class Database:
     def GetMaintainersRange(self):
         return self.queries.get_maintainers_range()
 
-    def GetMaintainers(self, bound=None, reverse=False, search=None, limit=500):
-        where = []
-        tail = ''
-
-        args = []
-
-        order = 'maintainer'
-
-        if bound:
-            if reverse:
-                where.append('maintainer <= %s')
-                order = 'maintainer DESC'
-                args.append(bound)
-            else:
-                where.append('maintainer >= %s')
-                args.append(bound)
-
-        if search:
-            where.append('maintainer LIKE %s')
-            args.append('%' + search + '%')
-
-        if limit:
-            tail = 'LIMIT %s'
-            args.append(limit)
-
-        return self.RequestManyAsDicts(
-            """
-            SELECT
-                *
-            FROM
-            (
-                SELECT
-                    maintainer,
-                    num_packages,
-                    num_metapackages,
-                    num_metapackages_outdated
-                FROM maintainers
-                {}
-                ORDER BY {}
-                {}
-            ) AS tmp
-            ORDER BY maintainer
-            """.format(
-                'WHERE ' + ' AND '.join(where) if where else '',
-                order,
-                tail
-            ),
-            *args
-        )
-
     def GetMaintainerInformation(self, maintainer):
         return self.queries.get_maintainer_information(maintainer)
 
