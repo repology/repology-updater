@@ -290,3 +290,15 @@ FROM (
 		*
 	FROM statistics
 ) AS snapshot;
+
+-- !!mark_repositories_updated(many values)
+INSERT INTO repositories (
+	name,
+	last_update
+) VALUES (
+	%s,
+	now()
+)
+ON CONFLICT (name)
+DO UPDATE SET
+	last_update = now();

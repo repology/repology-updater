@@ -400,25 +400,6 @@ class Database:
                 ]
             )
 
-    def MarkRepositoriesUpdated(self, reponames):
-        with self.db.cursor() as cursor:
-            cursor.executemany(
-                """
-                INSERT
-                    INTO repositories (
-                        name,
-                        last_update
-                    ) VALUES (
-                        %s,
-                        now()
-                    )
-                    ON CONFLICT (name)
-                    DO UPDATE SET
-                        last_update = now()
-                """,
-                [[name] for name in reponames]
-            )
-
     def Commit(self):
         self.db.commit()
 

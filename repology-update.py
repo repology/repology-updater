@@ -109,7 +109,7 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
 
         if options.fetch and options.update and options.parse:
             db_logger.Log('recording repo updates')
-            database.MarkRepositoriesUpdated(repositories_updated)
+            database.mark_repositories_updated(repositories_updated)
         else:
             db_logger.Log('not recording repo updates, need --fetch --update --parse')
 
