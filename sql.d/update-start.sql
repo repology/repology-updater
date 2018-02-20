@@ -15,7 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
--- !!clear()
+-- !!update_start()
 DELETE
 FROM packages;
 

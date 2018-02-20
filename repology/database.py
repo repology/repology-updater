@@ -348,12 +348,6 @@ class Database:
 
             return [Package(**dict(zip(names, row))) for row in cursor.fetchall()]
 
-    def CreateSchema(self):
-        self.queries.create_schema()
-
-    def Clear(self):
-        self.queries.clear()
-
     def AddPackages(self, packages):
         with self.db.cursor() as cursor:
             cursor.executemany(
@@ -461,9 +455,6 @@ class Database:
                 """,
                 [[name] for name in reponames]
             )
-
-    def UpdateViews(self):
-        self.queries.update_views()
 
     def Commit(self):
         self.db.commit()

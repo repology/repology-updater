@@ -15,7 +15,7 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
--- !!update_views()
+-- !!update_finish()
 REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts;
 REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;

@@ -77,14 +77,14 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
     database = Database(options.dsn, querymgr, readonly=False)
     if options.initdb:
         db_logger.Log('(re)initializing database schema')
-        database.CreateSchema()
+        database.create_schema()
 
         db_logger.Log('committing changes')
         database.Commit()
 
     if options.database:
         db_logger.Log('clearing the database')
-        database.Clear()
+        database.update_start()
 
         package_queue = []
         num_pushed = 0
@@ -114,7 +114,7 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
             db_logger.Log('not recording repo updates, need --fetch --update --parse')
 
         db_logger.Log('updating views')
-        database.UpdateViews()
+        database.update_finish()
 
         db_logger.Log('committing changes')
         database.Commit()
