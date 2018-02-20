@@ -18,6 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
+import datetime
 import multiprocessing
 import os
 import re
@@ -192,11 +193,11 @@ def Main():
     while True:
         # Get pack of links
         logger.Log('Requesting pack of urls')
-        urls = database.GetLinksForCheck(
+        urls = database.get_links_for_check(
             after=prev_url,
             prefix=options.prefix,  # no limit by default
             limit=options.packsize,
-            recheck_age=options.age * 60 * 60 * 24,
+            recheck_age=datetime.timedelta(seconds=options.age * 60 * 60 * 24),
             unchecked_only=options.unchecked,
             checked_only=options.checked,
             failed_only=options.failed,
@@ -210,10 +211,10 @@ def Main():
         # that all urls for one hostname get into a same large pack
         match = re.match('([a-z]+://[^/]+/)', urls[-1])
         if match:
-            urls += database.GetLinksForCheck(
+            urls += database.get_links_for_check(
                 after=urls[-1],
                 prefix=match.group(1),
-                recheck_age=options.age * 60 * 60 * 24,
+                recheck_age=datetime.timedelta(seconds=options.age * 60 * 60 * 24),
                 unchecked_only=options.unchecked,
                 checked_only=options.checked,
                 failed_only=options.failed,

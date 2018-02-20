@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import datetime
 import json
 
 import psycopg2
@@ -461,61 +460,6 @@ class Database:
                 {}
             )
             """.format(query),
-            *args
-        )
-
-    def GetLinksForCheck(self, after=None, prefix=None, recheck_age=None, limit=None, unchecked_only=False, checked_only=False, failed_only=False, succeeded_only=False):
-        conditions = []
-        args = []
-
-        # reduce the noise while linkchecker code doesn't support other schemas
-        conditions.append('(url LIKE %s OR url LIKE %s)')
-        args.append('http://%')
-        args.append('https://%')
-
-        if after is not None:
-            conditions.append('url > %s')
-            args.append(after)
-
-        if prefix is not None:
-            conditions.append('url LIKE %s')
-            args.append(prefix + '%')
-
-        if recheck_age is not None:
-            conditions.append('(last_checked IS NULL OR last_checked <= now() - INTERVAL %s)')
-            args.append(datetime.timedelta(seconds=recheck_age))
-
-        if unchecked_only:
-            conditions.append('last_checked IS NULL')
-
-        if checked_only:
-            conditions.append('last_checked IS NOT NULL')
-
-        if failed_only:
-            conditions.append('status != 200')
-
-        if succeeded_only:
-            conditions.append('status = 200')
-
-        conditions_expr = ''
-        limit_expr = ''
-
-        if conditions:
-            conditions_expr = 'WHERE ' + ' AND '.join(conditions)
-
-        if limit:
-            limit_expr = 'LIMIT %s'
-            args.append(limit)
-
-        return self.RequestManyAsSingleColumnArray(
-            """
-            SELECT
-                url
-            FROM links
-            {}
-            ORDER BY url
-            {}
-            """.format(conditions_expr, limit_expr),
             *args
         )
 

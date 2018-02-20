@@ -27,6 +27,45 @@ SET
 	location = %(location)s
 WHERE url = %(url)s;
 
+-- !!get_links_for_check(after=None, prefix=None, recheck_age=None, limit=None, unchecked_only=False, checked_only=False, failed_only=False, succeeded_only=False) -> array of values
+SELECT
+	url
+FROM links
+WHERE
+	(
+		-- we are currently only able to check HTTP(s) urls
+		url LIKE 'https://%%' OR
+		url LIKE 'http://%%'
+	) AND (
+		-- pagination condition
+		%(after)s IS NULL OR
+		url > %(after)s
+	) AND (
+		-- prefix condition
+		%(prefix)s IS NULL OR
+		url LIKE (%(prefix)s || '%%')
+	) AND (
+		-- age condition
+		%(recheck_age)s IS NULL OR
+		last_checked IS NULL OR
+		last_checked <= now() - INTERVAL %(recheck_age)s
+	) AND (
+		-- boolean expressions
+		NOT %(unchecked_only)s OR
+		last_checked IS NULL
+	) AND (
+		NOT %(checked_only)s OR
+		last_checked IS NOT NULL
+	) AND (
+		NOT %(failed_only)s OR
+		status != 200
+	) AND (
+		NOT %(succeeded_only)s OR
+		status = 200
+	)
+ORDER BY url
+LIMIT %(limit)s;
+
 -- !!get_metapackage_link_statuses(effname) -> dict of dicts
 SELECT
 	url,
