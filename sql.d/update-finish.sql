@@ -24,6 +24,7 @@
 --------------------------------------------------------------------------------
 -- Refresh views
 --------------------------------------------------------------------------------
+
 REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts;
 REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;
@@ -32,8 +33,161 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers;
 REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations;
 
 --------------------------------------------------------------------------------
+-- Update problems
+--------------------------------------------------------------------------------
+
+-- pre-cleanup
+DELETE
+FROM problems;
+
+-- add different kinds of problems
+INSERT INTO problems (
+	repo,
+	name,
+	effname,
+	maintainer,
+	problem
+)
+SELECT DISTINCT
+	packages.repo,
+	packages.name,
+	packages.effname,
+	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	'Homepage link "' ||
+		links.url ||
+		'" is dead (' ||
+		CASE
+			WHEN links.status=-1 THEN 'connect timeout'
+			WHEN links.status=-2 THEN 'too many redirects'
+			WHEN links.status=-4 THEN 'cannot connect'
+			WHEN links.status=-5 THEN 'invalid url'
+			WHEN links.status=-6 THEN 'DNS problem'
+			ELSE 'HTTP error ' || links.status
+		END ||
+		') for more than a month.'
+FROM packages
+INNER JOIN links ON (packages.homepage = links.url)
+WHERE
+	(links.status IN (-1, -2, -4, -5, -6, 400, 404) OR links.status >= 500) AND
+	(
+		(links.last_success IS NULL AND links.first_extracted < now() - INTERVAL '30' DAY) OR
+		links.last_success < now() - INTERVAL '30' DAY
+	);
+
+INSERT INTO problems (
+	repo,
+	name,
+	effname,
+	maintainer,
+	problem
+)
+SELECT DISTINCT
+	packages.repo,
+	packages.name,
+	packages.effname,
+	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	'Homepage link "' ||
+		links.url ||
+		'" is a permanent redirect to "' ||
+		links.location ||
+		'" and should be updated'
+FROM packages
+INNER JOIN links ON (packages.homepage = links.url)
+WHERE
+	links.redirect = 301 AND
+	replace(links.url, 'http://', 'https://') = links.location;
+
+INSERT INTO problems(repo, name, effname, maintainer, problem)
+SELECT DISTINCT
+	repo,
+	name,
+	effname,
+	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
+FROM packages
+WHERE
+	homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
+	homepage SIMILAR TO 'https?://code.google.com(/%%)?';
+
+INSERT INTO problems(repo, name, effname, maintainer, problem)
+SELECT DISTINCT
+	repo,
+	name,
+	effname,
+	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
+FROM packages
+WHERE
+	homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?';
+
+INSERT INTO problems(repo, name, effname, maintainer, problem)
+SELECT DISTINCT
+	repo,
+	name,
+	effname,
+	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
+FROM packages
+WHERE
+	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
+
+--------------------------------------------------------------------------------
+-- Update links
+--------------------------------------------------------------------------------
+
+-- cleanup stale
+DELETE FROM links
+WHERE last_extracted < now() - INTERVAL '1' MONTH;
+
+-- extract fresh
+INSERT INTO links(
+	url,
+	first_extracted,
+	last_extracted
+)
+SELECT
+	unnest(downloads),
+	now(),
+	now()
+FROM packages
+UNION
+SELECT
+	homepage,
+	now(),
+	now()
+FROM packages
+WHERE
+	homepage IS NOT NULL AND
+	repo NOT IN('cpan', 'pypi', 'rubygems', 'hackage', 'cran')
+ON CONFLICT (url)
+DO UPDATE SET
+	last_extracted = now();
+
+--------------------------------------------------------------------------------
 -- Update statistics
 --------------------------------------------------------------------------------
+
+-- pre-cleanup
+UPDATE repositories
+SET
+    num_packages = 0,
+    num_packages_newest = 0,
+    num_packages_outdated = 0,
+    num_packages_ignored = 0,
+    num_packages_unique = 0,
+    num_packages_devel = 0,
+    num_packages_legacy = 0,
+    num_packages_incorrect = 0,
+    num_packages_untrusted = 0,
+    num_packages_noscheme = 0,
+    num_packages_rolling = 0,
+    num_metapackages = 0,
+    num_metapackages_unique = 0,
+    num_metapackages_newest = 0,
+    num_metapackages_outdated = 0,
+    num_metapackages_comparable = 0,
+    num_problems = 0,
+    num_maintainers = 0;
 
 -- per-repository package counts
 INSERT INTO repositories (
@@ -131,106 +285,7 @@ DO UPDATE SET
 	num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
 	num_metapackages_comparable = EXCLUDED.num_metapackages_comparable;
 
--- global statistics
-UPDATE statistics SET
-	num_packages = (SELECT count(*) FROM packages),
-	num_metapackages = (SELECT count(*) FROM metapackage_repocounts WHERE NOT shadow_only),
-	num_problems = (SELECT count(*) FROM problems),
-	num_maintainers = (SELECT count(*) FROM maintainers);
-
---------------------------------------------------------------------------------
--- Update problems
---------------------------------------------------------------------------------
-INSERT INTO problems (
-	repo,
-	name,
-	effname,
-	maintainer,
-	problem
-)
-SELECT DISTINCT
-	packages.repo,
-	packages.name,
-	packages.effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' ||
-		links.url ||
-		'" is dead (' ||
-		CASE
-			WHEN links.status=-1 THEN 'connect timeout'
-			WHEN links.status=-2 THEN 'too many redirects'
-			WHEN links.status=-4 THEN 'cannot connect'
-			WHEN links.status=-5 THEN 'invalid url'
-			WHEN links.status=-6 THEN 'DNS problem'
-			ELSE 'HTTP error ' || links.status
-		END ||
-		') for more than a month.'
-FROM packages
-INNER JOIN links ON (packages.homepage = links.url)
-WHERE
-	(links.status IN (-1, -2, -4, -5, -6, 400, 404) OR links.status >= 500) AND
-	(
-		(links.last_success IS NULL AND links.first_extracted < now() - INTERVAL '30' DAY) OR
-		links.last_success < now() - INTERVAL '30' DAY
-	);
-
-INSERT INTO problems (
-	repo,
-	name,
-	effname,
-	maintainer,
-	problem
-)
-SELECT DISTINCT
-	packages.repo,
-	packages.name,
-	packages.effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' ||
-		links.url ||
-		'" is a permanent redirect to "' ||
-		links.location ||
-		'" and should be updated'
-FROM packages
-INNER JOIN links ON (packages.homepage = links.url)
-WHERE
-	links.redirect = 301 AND
-	replace(links.url, 'http://', 'https://') = links.location;
-
-INSERT INTO problems(repo, name, effname, maintainer, problem)
-SELECT DISTINCT
-	repo,
-	name,
-	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
-FROM packages
-WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
-	homepage SIMILAR TO 'https?://code.google.com(/%%)?';
-
-INSERT INTO problems(repo, name, effname, maintainer, problem)
-SELECT DISTINCT
-	repo,
-	name,
-	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
-FROM packages
-WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?';
-
-INSERT INTO problems(repo, name, effname, maintainer, problem)
-SELECT DISTINCT
-	repo,
-	name,
-	effname,
-	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
-	'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
-FROM packages
-WHERE
-	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
-
+-- per-repository problem counts
 INSERT INTO repositories (
 	name,
 	num_problems
@@ -244,36 +299,12 @@ ON CONFLICT (name)
 DO UPDATE SET
 	num_problems = EXCLUDED.num_problems;
 
---------------------------------------------------------------------------------
--- Update links
---------------------------------------------------------------------------------
-
--- cleanup stale
-DELETE FROM links WHERE last_extracted < now() - INTERVAL '1' MONTH;
-
--- extract fresh
-INSERT INTO links(
-	url,
-	first_extracted,
-	last_extracted
-)
-SELECT
-	unnest(downloads),
-	now(),
-	now()
-FROM packages
-UNION
-SELECT
-	homepage,
-	now(),
-	now()
-FROM packages
-WHERE
-	homepage IS NOT NULL AND
-	repo NOT IN('cpan', 'pypi', 'rubygems', 'hackage', 'cran')
-ON CONFLICT (url)
-DO UPDATE SET
-	last_extracted = now();
+-- global statistics
+UPDATE statistics SET
+	num_packages = (SELECT count(*) FROM packages),
+	num_metapackages = (SELECT count(*) FROM metapackage_repocounts WHERE NOT shadow_only),
+	num_problems = (SELECT count(*) FROM problems),
+	num_maintainers = (SELECT count(*) FROM maintainers);
 
 --------------------------------------------------------------------------------
 -- History snapshot
