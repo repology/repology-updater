@@ -39,7 +39,7 @@ SELECT
 FROM problems
 WHERE repo = %(repo)s;
 
--- !!get_maintainer_problems(maintaner, limit=None) -> array of dicts
+-- !!get_maintainer_problems(maintainer, limit=None) -> array of dicts
 SELECT
 	repo,
 	name,
