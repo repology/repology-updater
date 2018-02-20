@@ -52,8 +52,10 @@
 - { setname: "python:pyxdg",           name: "python:xdg" } # create problem!
 - { setname: "python:redis",           name: "python:redis-py" }
 - { setname: "python:robotframework",  name: robot-framework }
-- { setname: "python:scikits.$1",      namepat: "python:scikits-(.*)" }
-- { setname: "python:scikits.$1",      namepat: "scikits[_-](bootstrap|optimization|timeseries)" }
+#- { setname: "python:scikits.$1",      namepat: "python:scikits-(.*)" }
+#- { setname: "python:scikits.$1",      namepat: "scikits[_-](bootstrap|optimization|timeseries)" }
+- { setname: "python:scikit-learn",    name: ["python:scikits_learn", scikit-learn ] }
+#- { setname: "python:scikit-image",    name: scikits_image } # XXX: problem
 - { setname: "python:sphinx",          name: "python:sphinx10" }
 - { setname: "python:sphinx",          name: sphinx, wwwpart: [pocoo.org,sphinx-doc.org] }
 - { setname: "python:sqlalchemy",      name: sqlalchemy }

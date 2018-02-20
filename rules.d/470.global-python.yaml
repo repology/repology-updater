@@ -156,8 +156,6 @@
 - { name: albatross, ver: "1.36",      setname: "python:albatross"        } # old debian and ubuntu weirdness
 - { name: html2text,                   setname: "python:html2text", family: slackbuilds }
 - { name: "python:graphviz", verpat: "1\\.[34].*", setname: "python:pygraphviz" } # use pypi name!!!
-- { name: scikits_learn, family: gentoo, setname: "python:scikit-learn" } # XXX: problem
-- { name: scikits_image, family: gentoo, setname: "python:scikit-image" } # XXX: problem
 - { name: "python:pygeoip",            setname: "python:geoip", family: aosc }
 - { name: "python:geoip",              setname: "python:pygeoip", family: alpine }
 - { name: "python:geoip-python",       setname: "python:geoip" }
