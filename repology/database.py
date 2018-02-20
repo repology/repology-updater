@@ -423,42 +423,7 @@ class Database:
     def Commit(self):
         self.db.commit()
 
-    def GetMetapackage(self, names):
-        return self.RequestManyAsPackages(
-            """
-            SELECT
-                repo,
-                family,
-                subrepo,
-
-                name,
-                effname,
-
-                version,
-                origversion,
-                versionclass,
-
-                maintainers,
-                category,
-                comment,
-                homepage,
-                licenses,
-                downloads,
-
-                flags,
-                shadow,
-                verfixed,
-
-                flavors,
-
-                extrafields
-            FROM packages
-            WHERE effname {}
-            """.format('= ANY (%s)' if isinstance(names, list) else '= %s'),
-            names
-        )
-
-    def GetMetapackages(self, request, limit=500):
+    def QueryMetapackages(self, request, limit=500):
         request.Limit(limit)
 
         query, args = request.GetQuery()

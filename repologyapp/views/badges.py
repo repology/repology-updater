@@ -25,7 +25,7 @@ from repology.packageproc import PackagesetToBestByRepo
 
 @ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name):
-    best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
+    best_pkg_by_repo = PackagesetToBestByRepo(get_db().get_metapackage_packages(name))
 
     entries = [
         {
@@ -46,7 +46,7 @@ def badge_vertical_allrepos(name):
 
 @ViewRegistrar('/badge/tiny-repos/<name>.svg')
 def badge_tiny_repos(name):
-    num_families = len(set([package.family for package in get_db().GetMetapackage(name)]))
+    num_families = len(set([package.family for package in get_db().get_metapackage_packages(name)]))
 
     return (
         flask.render_template(
@@ -60,7 +60,7 @@ def badge_tiny_repos(name):
 
 @ViewRegistrar('/badge/version-for-repo/<repo>/<name>.svg')
 def badge_version_for_repo(repo, name):
-    best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
+    best_pkg_by_repo = PackagesetToBestByRepo(get_db().get_metapackage_packages(name))
 
     if repo not in best_pkg_by_repo:
         flask.abort(404)
@@ -78,7 +78,7 @@ def badge_version_for_repo(repo, name):
 
 @ViewRegistrar('/badge/version-only-for-repo/<repo>/<name>.svg')
 def badge_version_only_for_repo(repo, name):
-    best_pkg_by_repo = PackagesetToBestByRepo(get_db().GetMetapackage(name))
+    best_pkg_by_repo = PackagesetToBestByRepo(get_db().get_metapackage_packages(name))
 
     if repo not in best_pkg_by_repo:
         flask.abort(404)

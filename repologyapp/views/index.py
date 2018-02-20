@@ -179,7 +179,7 @@ def index():
         'zsh',
     ]
 
-    packages = get_db().GetMetapackage(important_packages)
+    packages = get_db().get_metapackages_packages(important_packages)
 
     metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
 

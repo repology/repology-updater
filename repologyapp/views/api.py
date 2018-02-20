@@ -68,7 +68,7 @@ def api_v1_metapackages(bound=None):
     request = filterinfo.GetRequest()
     request.Bound(bound)
 
-    packages = get_db().GetMetapackages(request, limit=config['METAPACKAGES_PER_PAGE'])
+    packages = get_db().QueryMetapackages(request, limit=config['METAPACKAGES_PER_PAGE'])
 
     metapackages = PackagesToMetapackages(packages)
 
@@ -94,7 +94,7 @@ def api_v1_metapackage(name):
     return (
         json.dumps(list(map(
             api_v1_package_to_json,
-            get_db().GetMetapackage(name)
+            get_db().get_metapackage_packages(name)
         ))),
         {'Content-type': 'application/json'}
     )

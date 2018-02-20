@@ -41,7 +41,7 @@ def metapackage_versions(name):
     name = name.lower()
 
     packages_by_repo = {}
-    for package in get_db().GetMetapackage(name):
+    for package in get_db().get_metapackage_packages(name):
         if package.repo not in packages_by_repo:
             packages_by_repo[package.repo] = []
         packages_by_repo[package.repo].append(package)
@@ -63,7 +63,7 @@ def metapackage_packages(name):
 
     packages_by_repo = {}
 
-    for package in get_db().GetMetapackage(name):
+    for package in get_db().get_metapackage_packages(name):
         packages_by_repo.setdefault(package.repo, []).append(package)
 
     packages = []
@@ -83,7 +83,7 @@ def metapackage_packages(name):
 def metapackage_information(name):
     name = name.lower()
 
-    packages = get_db().GetMetapackage(name)
+    packages = get_db().get_metapackage_packages(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
 
     information = {}
@@ -157,7 +157,7 @@ def metapackage_related(name):
 def metapackage_badges(name):
     name = name.lower()
 
-    repos_present_in = set([package.repo for package in get_db().GetMetapackage(name)])
+    repos_present_in = set([package.repo for package in get_db().get_metapackage_packages(name)])
     repos = [repo for repo in reponames if repo in repos_present_in]
     return flask.render_template('metapackage-badges.html', name=name, repos=repos)
 

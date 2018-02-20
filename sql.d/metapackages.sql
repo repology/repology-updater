@@ -15,6 +15,66 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+-- !!get_metapackage_packages(effname) -> array of packages
+SELECT
+	repo,
+	family,
+	subrepo,
+
+	name,
+	effname,
+
+	version,
+	origversion,
+	versionclass,
+
+	maintainers,
+	category,
+	comment,
+	homepage,
+	licenses,
+	downloads,
+
+	flags,
+	shadow,
+	verfixed,
+
+	flavors,
+
+	extrafields
+FROM packages
+WHERE effname = %(effname)s;
+
+-- !!get_metapackages_packages(effnames) -> array of packages
+SELECT
+	repo,
+	family,
+	subrepo,
+
+	name,
+	effname,
+
+	version,
+	origversion,
+	versionclass,
+
+	maintainers,
+	category,
+	comment,
+	homepage,
+	licenses,
+	downloads,
+
+	flags,
+	shadow,
+	verfixed,
+
+	flavors,
+
+	extrafields
+FROM packages
+WHERE effname = ANY(%(effnames)s);
+
 -- !!get_metapackage_related_metapackages(effname, limit) -> array of packages
 SELECT
 	repo,
