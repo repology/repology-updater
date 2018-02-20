@@ -702,12 +702,3 @@ class Database:
 
     def GetRepositoryProblems(self, repo, limit=None):
         return self.queries.get_repository_problems(repo, limit)
-
-    def AddReport(self, effname, need_verignore, need_split, need_merge, comment):
-        self.queries.add_report(effname, need_verignore, need_split, need_merge, comment)
-
-    def GetReportsCount(self, effname):
-        return self.queries.get_reports_count(effname)
-
-    def GetReports(self, effname):
-        return self.queries.get_reports(effname)

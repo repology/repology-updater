@@ -173,7 +173,7 @@ def metapackage_report(name):
             flask.flash('Could not add report: new reports for this metapackage are disabled', 'warning')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
 
-        if get_db().GetReportsCount(name) >= config['MAX_REPORTS']:
+        if get_db().get_reports_count(name) >= config['MAX_REPORTS']:
             flask.flash('Could not add report: too many reports for this metapackage', 'danger')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
 
@@ -194,7 +194,7 @@ def metapackage_report(name):
             flask.flash('Spammers not welcome, HTML not allowed', 'danger')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
 
-        get_db().AddReport(
+        get_db().add_report(
             name,
             need_verignore,
             need_split,
@@ -207,7 +207,7 @@ def metapackage_report(name):
 
     return flask.render_template(
         'metapackage-report.html',
-        reports=get_db().GetReports(name),
+        reports=get_db().get_reports(name),
         name=name,
         afk_till=AFKChecker(config['STAFF_AFK']).GetAFKEnd(),
         reports_disabled=reports_disabled
