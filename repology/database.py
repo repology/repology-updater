@@ -290,47 +290,11 @@ class Database:
         querymgr.InjectQueries(self, self.db)
         self.queries = self  # XXX: switch to calling queries directly and remove
 
-    def Request(self, query, *args):
-        with self.db.cursor() as cursor:
-            cursor.execute(query, args)
-
-    def RequestSingleValue(self, query, *args):
-        with self.db.cursor() as cursor:
-            cursor.execute(query, args)
-
-            row = cursor.fetchone()
-
-            if row is None:
-                return None
-
-            return row[0]
-
-    def RequestSingleAsDict(self, query, *args):
-        with self.db.cursor() as cursor:
-            cursor.execute(query, args)
-
-            row = cursor.fetchone()
-
-            if row is None:
-                return None
-
-            names = [desc.name for desc in cursor.description]
-
-            return dict(zip(names, row))
-
     def RequestManyAsSingleColumnArray(self, query, *args):
         with self.db.cursor() as cursor:
             cursor.execute(query, args)
 
             return [row[0] for row in cursor.fetchall()]
-
-    def RequestManyAsDictOfDicts(self, query, *args):
-        with self.db.cursor() as cursor:
-            cursor.execute(query, args)
-
-            names = [desc.name for desc in cursor.description]
-
-            return {row[0]: dict(zip(names[1:], row[1:])) for row in cursor.fetchall()}
 
     def RequestManyAsDicts(self, query, *args):
         with self.db.cursor() as cursor:
