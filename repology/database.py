@@ -289,24 +289,10 @@ class Database:
         querymgr.InjectQueries(self, self.db)
         self.queries = self  # XXX: switch to calling queries directly and remove
 
-    def RequestManyAsSingleColumnArray(self, query, *args):
-        with self.db.cursor() as cursor:
-            cursor.execute(query, args)
-
-            return [row[0] for row in cursor.fetchall()]
-
-    def RequestManyAsDicts(self, query, *args):
-        with self.db.cursor() as cursor:
-            cursor.execute(query, args)
-
-            names = [desc.name for desc in cursor.description]
-
-            return [dict(zip(names, row)) for row in cursor.fetchall()]
-
     def commit(self):
         self.db.commit()
 
-    def RequestManyAsPackages(self, query, *args):
+    def _request_many_as_packages(self, query, *args):
         with self.db.cursor() as cursor:
             cursor.execute(query, args)
 
@@ -408,7 +394,7 @@ class Database:
 
         query, args = request.GetQuery()
 
-        return self.RequestManyAsPackages(
+        return self._request_many_as_packages(
             """
             SELECT
                 repo,
