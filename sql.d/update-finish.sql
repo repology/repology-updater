@@ -22,17 +22,25 @@
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
--- Update tables derived from packages
+-- Refresh views #1
 --------------------------------------------------------------------------------
 
--- update metapackages
+REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations;
+
+--------------------------------------------------------------------------------
+-- Update tables derived from packages and/or views
+--------------------------------------------------------------------------------
+
+-- reset metapackages
 UPDATE metapackages
 SET
 	num_repos = 0,
 	num_families = 0,
 	num_repos_newest = 0,
-	num_families_newest = 0;
+	num_families_newest = 0
+	has_related = false;
 
+-- update metapackages: main counters
 INSERT
 INTO metapackages (
 	effname,
@@ -63,6 +71,20 @@ DO UPDATE SET
 	num_families_newest = EXCLUDED.num_families_newest,
 	shadow_only = EXCLUDED.shadow_only,
 	last_seen = now();
+
+-- update metapackages: related
+UPDATE metapackages
+SET
+	has_related = true
+WHERE
+	effname IN (
+		SELECT DISTINCT  -- XXX: is DISTINCT needed here?
+			url_relations.effname
+		FROM url_relations
+		INNER JOIN url_relations AS url_relations2
+		USING (url)
+		WHERE url_relations2.effname != url_relations.effname
+	);
 
 -- handle metapackage resurrections
 WITH resurrected_metapackages AS (
@@ -117,7 +139,7 @@ DO UPDATE SET
 	last_seen = greatest(dead_metapackages.last_seen, EXCLUDED.last_seen);
 
 --------------------------------------------------------------------------------
--- Refresh views
+-- Refresh views #2
 --------------------------------------------------------------------------------
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts;
@@ -125,7 +147,6 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers;
-REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations;
 
 --------------------------------------------------------------------------------
 -- Update problems

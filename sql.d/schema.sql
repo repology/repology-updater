@@ -20,6 +20,23 @@
 -- !!create_schema()
 --
 --------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+-- functions
+--------------------------------------------------------------------------------
+
+-- Simplifies given url so https://www.foo.com and foo.com are the same
+-- - Removes schema
+-- - Removes www
+-- - Removes parameters
+-- XXX: should lowercase as well?
+CREATE OR REPLACE FUNCTION simplify_url(url text) RETURNS text AS $$
+BEGIN
+	RETURN regexp_replace(regexp_replace(url, '/?([#?].*)?$', ''), '^https?://(www\\.)?', '');
+END;
+$$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+
+-- tables
 DROP TABLE IF EXISTS packages CASCADE;
 DROP TABLE IF EXISTS repositories CASCADE;
 DROP TABLE IF EXISTS repositories_history CASCADE;
@@ -152,7 +169,7 @@ CREATE TABLE metapackages (
 	num_repos_newest smallint NOT NULL,
 	num_families_newest smallint NOT NULL,
 	shadow_only boolean NOT NULL,
-	--has_related boolean NOT NULL, -- TODO
+	has_related boolean NOT NULL,
 	first_seen timestamp with time zone NOT NULL,
 	last_seen timestamp with time zone NOT NULL
 );
@@ -338,7 +355,7 @@ CREATE INDEX ON reports(effname);
 CREATE MATERIALIZED VIEW url_relations AS
 SELECT DISTINCT
 	effname,
-	regexp_replace(regexp_replace(homepage, '/?([#?].*)?$', ''), '^https?://(www\\.)?', '') AS url
+	simplify_url(homepage) AS url
 FROM packages
 WHERE homepage ~ '^https?://'
 WITH DATA;
