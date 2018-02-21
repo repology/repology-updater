@@ -303,6 +303,9 @@ class Database:
 
             return [dict(zip(names, row)) for row in cursor.fetchall()]
 
+    def commit(self):
+        self.db.commit()
+
     def RequestManyAsPackages(self, query, *args):
         with self.db.cursor() as cursor:
             cursor.execute(query, args)
@@ -399,9 +402,6 @@ class Database:
                     ) for package in packages
                 ]
             )
-
-    def Commit(self):
-        self.db.commit()
 
     def QueryMetapackages(self, request, limit=500):
         request.Limit(limit)

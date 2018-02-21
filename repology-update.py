@@ -80,7 +80,7 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
         database.create_schema()
 
         db_logger.Log('committing changes')
-        database.Commit()
+        database.commit()
 
     if options.database:
         db_logger.Log('clearing the database')
@@ -117,7 +117,7 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
         database.update_finish()
 
         db_logger.Log('committing changes')
-        database.Commit()
+        database.commit()
 
     logger.Log('database processing complete')
 
