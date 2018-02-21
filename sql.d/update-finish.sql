@@ -37,7 +37,7 @@ SET
 	num_repos = 0,
 	num_families = 0,
 	num_repos_newest = 0,
-	num_families_newest = 0
+	num_families_newest = 0,
 	has_related = false;
 
 -- update metapackages: main counters
