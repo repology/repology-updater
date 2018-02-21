@@ -21,31 +21,7 @@
 --
 --------------------------------------------------------------------------------
 SELECT
-	repo,
-	family,
-	subrepo,
-
-	name,
-	effname,
-
-	version,
-	origversion,
-	versionclass,
-
-	maintainers,
-	category,
-	comment,
-	homepage,
-	licenses,
-	downloads,
-
-	flags,
-	shadow,
-	verfixed,
-
-	flavors,
-
-	extrafields
+	*
 FROM packages
 WHERE effname = %(effname)s;
 
@@ -56,31 +32,7 @@ WHERE effname = %(effname)s;
 --
 --------------------------------------------------------------------------------
 SELECT
-	repo,
-	family,
-	subrepo,
-
-	name,
-	effname,
-
-	version,
-	origversion,
-	versionclass,
-
-	maintainers,
-	category,
-	comment,
-	homepage,
-	licenses,
-	downloads,
-
-	flags,
-	shadow,
-	verfixed,
-
-	flavors,
-
-	extrafields
+	*
 FROM packages
 WHERE effname = ANY(%(effnames)s);
 

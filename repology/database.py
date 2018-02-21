@@ -397,31 +397,7 @@ class Database:
         return self._request_many_as_packages(
             """
             SELECT
-                repo,
-                family,
-                subrepo,
-
-                name,
-                effname,
-
-                version,
-                origversion,
-                versionclass,
-
-                maintainers,
-                category,
-                comment,
-                homepage,
-                licenses,
-                downloads,
-
-                flags,
-                shadow,
-                verfixed,
-
-                flavors,
-
-                extrafields
+                *
             FROM packages
             WHERE effname IN (
                 {}
