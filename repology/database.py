@@ -406,7 +406,7 @@ class Database:
             *args
         )
 
-    def query_packages_light(self, request, limit=500):
+    def query_packages_rfevm(self, request, limit=500):
         request.Limit(limit)
 
         query, args = request.GetQuery()

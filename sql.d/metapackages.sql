@@ -28,6 +28,28 @@ WHERE effname = %(effname)s;
 
 --------------------------------------------------------------------------------
 --
+-- !!get_metapackage_packages_rv(effname) -> array of packages
+--
+--------------------------------------------------------------------------------
+SELECT
+	repo,
+
+	version,
+	versionclass
+FROM packages
+WHERE effname = %(effname)s;
+
+
+--------------------------------------------------------------------------------
+--
+-- !!get_metapackage_families_count(effname) -> single value
+--
+--------------------------------------------------------------------------------
+SELECT count(DISTINCT family) FROM packages WHERE effname = %(effname)s;
+
+
+--------------------------------------------------------------------------------
+--
 -- !!get_metapackages_packages(effnames) -> array of packages
 --
 --------------------------------------------------------------------------------
@@ -39,7 +61,7 @@ WHERE effname = ANY(%(effnames)s);
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackages_packages_extralight(effnames) -> array of packages
+-- !!get_metapackages_packages_fev(effnames) -> array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
@@ -55,7 +77,7 @@ WHERE effname = ANY(%(effnames)s);
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackage_related_metapackages_extralight(effname, limit) -> array of packages
+-- !!get_metapackage_related_metapackages_fev(effname, limit) -> array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
