@@ -22,6 +22,94 @@
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
+-- Update tables derived from packages
+--------------------------------------------------------------------------------
+
+-- update metapackages
+INSERT
+INTO metapackages (
+	effname,
+	num_repos,
+	num_families,
+	num_repos_newest,
+	num_families_newest,
+	shadow_only,
+	first_seen,
+	last_seen
+)
+SELECT
+    effname,
+    count(DISTINCT repo),
+    count(DISTINCT family),
+    count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5),
+    count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5),
+    bool_and(shadow),
+	now(),
+	now()
+FROM packages
+GROUP BY effname
+ON CONFLICT (effname)
+DO UPDATE SET
+	num_repos = EXCLUDED.num_repos,
+	num_families = EXCLUDED.num_families,
+	num_repos_newest = EXCLUDED.num_repos_newest,
+	num_families_newest = EXCLUDED.num_families_newest,
+	shadow_only = EXCLUDED.shadow_only,
+	last_seen = now();
+
+-- handle metapackage resurrections
+WITH resurrected_metapackages AS (
+	DELETE
+	FROM dead_metapackages
+	WHERE
+		effname IN (
+			SELECT effname FROM metapackages
+		)
+	RETURNING
+		effname,
+		first_seen,
+		last_seen
+)
+INSERT
+INTO metapackages (
+	effname,
+	first_seen,
+	last_seen
+)
+SELECT
+	*
+FROM resurrected_metapackages
+ON CONFLICT (effname)
+DO UPDATE SET
+	first_seen = least(metapackages.first_seen, EXCLUDED.first_seen),
+	last_seen = greatest(metapackages.last_seen, EXCLUDED.last_seen);
+
+-- handle metapackages deaths
+WITH deceased_metapackages AS (
+	DELETE
+	FROM metapackages
+	WHERE
+		last_seen != now()
+	RETURNING
+		effname,
+		first_seen,
+		last_seen
+)
+INSERT
+INTO dead_metapackages (
+	effname,
+	first_seen,
+	last_seen
+)
+SELECT
+	*
+FROM deceased_metapackages
+ON CONFLICT (effname)
+DO UPDATE SET
+	first_seen = least(dead_metapackages.first_seen, EXCLUDED.first_seen),
+	last_seen = greatest(dead_metapackages.last_seen, EXCLUDED.last_seen);
+
+--------------------------------------------------------------------------------
 -- Refresh views
 --------------------------------------------------------------------------------
 

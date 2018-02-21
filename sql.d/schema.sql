@@ -144,6 +144,32 @@ CREATE INDEX ON metapackage_repocounts(num_repos);
 CREATE INDEX ON metapackage_repocounts(num_families);
 CREATE INDEX ON metapackage_repocounts(shadow_only, num_families);
 
+-- table replacement for the former
+CREATE TABLE metapackages (
+	effname text NOT NULL PRIMARY KEY,
+	num_repos smallint NOT NULL,
+	num_families smallint NOT NULL,
+	num_repos_newest smallint NOT NULL,
+	num_families_newest smallint NOT NULL,
+	shadow_only boolean NOT NULL,
+	--has_related boolean NOT NULL, -- TODO
+	first_seen timestamp with time zone NOT NULL,
+	last_seen timestamp with time zone NOT NULL
+);
+
+CREATE INDEX ON metapackages(num_repos);
+CREATE INDEX ON metapackages(num_families);
+CREATE INDEX ON metapackages(shadow_only, num_families);
+CREATE INDEX ON metapackages(first_seen);
+
+CREATE TABLE dead_metapackages (
+	effname text NOT NULL PRIMARY KEY,
+	first_seen timestamp with time zone NOT NULL,
+	last_seen timestamp with time zone NOT NULL
+);
+
+CREATE INDEX ON dead_metapackages(last_seen);
+
 -- package class counts aggregated for each metapackage/repo
 CREATE MATERIALIZED VIEW repo_metapackages AS
 SELECT
