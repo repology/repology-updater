@@ -450,8 +450,3 @@ class Database:
     linkcheck_status_cannot_connect = -4
     linkcheck_status_invalid_url = -5
     linkcheck_status_dns_error = -6
-
-    def UpdateLinkStatus(self, url, status, redirect=None, size=None, location=None):
-        success = status == 200
-
-        self.queries.update_link_status(success, status, redirect, size, location, url)

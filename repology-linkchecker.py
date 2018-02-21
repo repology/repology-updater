@@ -141,7 +141,7 @@ def LinkUpdatingWorker(queue, options, querymgr, logger):
             return
 
         for url, status, redirect, size, location in pack:
-            database.UpdateLinkStatus(url=url, status=status, redirect=redirect, size=size, location=location)
+            database.update_link_status(url=url, status=status, redirect=redirect, size=size, location=location)
 
         database.commit()
         logger.Log('Updated {} url(s) ({} .. {})'.format(len(pack), pack[0][0], pack[-1][0]))

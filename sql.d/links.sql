@@ -17,14 +17,14 @@
 
 --------------------------------------------------------------------------------
 --
--- !!update_link_status(success, status, redirect=None, size=None, location=None, url)
+-- !!update_link_status(url, status, redirect=None, size=None, location=None)
 --
 --------------------------------------------------------------------------------
 UPDATE links
 SET
 	last_checked = now(),
-	last_success = CASE WHEN %(success)s THEN now() ELSE last_success END,
-	last_failure = CASE WHEN NOT %(success)s THEN now() ELSE last_failure END,
+	last_success = CASE WHEN %(status)s = 200 THEN now() ELSE last_success END,
+	last_failure = CASE WHEN %(status)s != 200 THEN now() ELSE last_failure END,
 	status = %(status)s,
 	redirect = %(redirect)s,
 	size = %(size)s,
