@@ -314,7 +314,7 @@ class Database:
 
             return [Package(**dict(zip(names, row))) for row in cursor.fetchall()]
 
-    def AddPackages(self, packages):
+    def add_packages(self, packages):
         with self.db.cursor() as cursor:
             cursor.executemany(
                 """

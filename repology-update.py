@@ -96,7 +96,7 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
             package_queue.extend(packageset)
 
             if len(package_queue) >= 10000:
-                database.AddPackages(package_queue)
+                database.add_packages(package_queue)
                 num_pushed += len(package_queue)
                 package_queue = []
                 db_logger.Log('  pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
@@ -105,7 +105,7 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
         repoproc.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
 
         # process what's left in the queue
-        database.AddPackages(package_queue)
+        database.add_packages(package_queue)
 
         if options.fetch and options.update and options.parse:
             db_logger.Log('recording repo updates')
