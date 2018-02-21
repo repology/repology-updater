@@ -181,6 +181,7 @@ CREATE INDEX ON metapackages(first_seen);
 
 CREATE TABLE dead_metapackages (
 	effname text NOT NULL PRIMARY KEY,
+	shadow_only boolean NOT NULL,
 	first_seen timestamp with time zone NOT NULL,
 	last_seen timestamp with time zone NOT NULL
 );

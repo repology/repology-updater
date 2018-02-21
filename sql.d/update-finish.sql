@@ -121,12 +121,14 @@ WITH deceased_metapackages AS (
 		num_repos = 0
 	RETURNING
 		effname,
+		shadow_only,
 		first_seen,
 		last_seen
 )
 INSERT
 INTO dead_metapackages (
 	effname,
+	shadow_only,
 	first_seen,
 	last_seen
 )
