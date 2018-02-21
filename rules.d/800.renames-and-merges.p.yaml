@@ -49,6 +49,7 @@
 - { setname: pnp4nagios,               name: pnp4nagios-cgi }
 - { setname: polyclipping,             name: clipperlib }
 - { setname: polyclipping,             name: libpolyclipping }
+- { setname: poppler,                  name: compat-poppler022 }
 - { setname: postfix,                  name: [postfix-current,postfix-current-sasl,postfix211,postfix211-sasl] }
 - { setname: postfwd,                  name: postfix-postfwd, family: freebsd }
 - { setname: postgis,                  name: [postgis-src,postgis-sfcgal,liblwgeom] }
@@ -106,4 +107,20 @@
     - pinentry-qt4
     - pinentry-qt5
     - pinentry-tty
+  addflavor: true
+
+- setname: poppler
+  name:
+    - poppler-cpp
+    - poppler-glib
+    - poppler-glib-lcdfilter
+    - poppler-includes
+    - poppler-lcdfilter
+    - poppler-min
+    - poppler-minimal
+    - poppler-qt
+    - poppler-qt4
+    - poppler-qt4-mac
+    - poppler-qt5
+    - poppler-utils
   addflavor: true
