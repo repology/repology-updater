@@ -389,7 +389,7 @@ class Database:
                 ]
             )
 
-    def QueryMetapackages(self, request, limit=500):
+    def query_packages(self, request, limit=500):
         request.Limit(limit)
 
         query, args = request.GetQuery()
@@ -422,6 +422,31 @@ class Database:
                 flavors,
 
                 extrafields
+            FROM packages
+            WHERE effname IN (
+                {}
+            )
+            """.format(query),
+            *args
+        )
+
+    def query_packages_light(self, request, limit=500):
+        request.Limit(limit)
+
+        query, args = request.GetQuery()
+
+        return self._request_many_as_packages(
+            """
+            SELECT
+                repo,
+                family,
+
+                effname,
+
+                version,
+                versionclass,
+
+                maintainers
             FROM packages
             WHERE effname IN (
                 {}

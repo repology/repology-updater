@@ -87,6 +87,25 @@ WHERE effname = ANY(%(effnames)s);
 
 --------------------------------------------------------------------------------
 --
+-- !!get_metapackages_packages_light(effnames) -> array of packages
+--
+--------------------------------------------------------------------------------
+SELECT
+	repo,
+	family,
+
+	effname,
+
+	version,
+	versionclass,
+
+	maintainers
+FROM packages
+WHERE effname = ANY(%(effnames)s);
+
+
+--------------------------------------------------------------------------------
+--
 -- !!get_metapackage_related_metapackages(effname, limit) -> array of packages
 --
 --------------------------------------------------------------------------------
