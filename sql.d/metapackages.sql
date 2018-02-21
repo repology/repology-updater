@@ -39,54 +39,32 @@ WHERE effname = ANY(%(effnames)s);
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackages_packages_light(effnames) -> array of packages
+-- !!get_metapackages_packages_extralight(effnames) -> array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
-	repo,
 	family,
 
 	effname,
 
 	version,
-	versionclass,
-
-	maintainers
+	versionclass
 FROM packages
 WHERE effname = ANY(%(effnames)s);
 
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackage_related_metapackages(effname, limit) -> array of packages
+-- !!get_metapackage_related_metapackages_extralight(effname, limit) -> array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
-	repo,
 	family,
-	subrepo,
 
-	name,
 	effname,
 
 	version,
-	origversion,
-	versionclass,
-
-	maintainers,
-	category,
-	comment,
-	homepage,
-	licenses,
-	downloads,
-
-	flags,
-	shadow,
-	verfixed,
-
-	flavors,
-
-	extrafields
+	versionclass
 FROM packages
 WHERE effname IN (
 	WITH RECURSIVE r AS (

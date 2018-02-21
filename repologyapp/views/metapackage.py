@@ -137,7 +137,7 @@ def metapackage_information(name):
 def metapackage_related(name):
     name = name.lower()
 
-    packages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
+    packages = get_db().get_metapackage_related_metapackages_extralight(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
 
