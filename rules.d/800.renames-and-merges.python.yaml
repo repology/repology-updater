@@ -52,10 +52,16 @@
 - { setname: "python:pyxdg",           name: "python:xdg" } # create problem!
 - { setname: "python:redis",           name: "python:redis-py" }
 - { setname: "python:robotframework",  name: robot-framework }
-#- { setname: "python:scikits.$1",      namepat: "python:scikits-(.*)" }
-#- { setname: "python:scikits.$1",      namepat: "scikits[_-](bootstrap|optimization|timeseries)" }
-- { setname: "python:scikit-learn",    name: ["python:scikits_learn", scikit-learn ] }
-#- { setname: "python:scikit-image",    name: scikits_image } # XXX: problem
+- { setname: "python:scikit-cude",     name: scikits-cuda }
+- { setname: "python:scikit-image",    name: [scikit-image,scikits_image] }
+- { setname: "python:scikit-learn",    name: ["python:scikits_learn",scikit-learn,scikits_learn,"python:scikits-learn"] }
+- { setname: "python:scikit-sparse",   name: "python:scikits.sparse" } # both present on PyPi but the former supercedes the latter
+- { setname: "python:scikits.audiolab", name: "python:scikits-audiolab" }
+- { setname: "python:scikits.bootstrap", name: ["python:scikits-bootstrap",scikits-bootstrap] }
+- { setname: "python:scikits.optimization", name: scikits_optimization }
+- { setname: "python:scikits.samplerate", name: "python:scikits-samplerate" }
+- { setname: "python:scikits.talkbox", name: "python:scikits-talkbox" }
+- { setname: "python:scikits.timeseries", name: ["python:scikits-timeseries",scikits_timeseries] }
 - { setname: "python:sphinx",          name: "python:sphinx10" }
 - { setname: "python:sphinx",          name: sphinx, wwwpart: [pocoo.org,sphinx-doc.org] }
 - { setname: "python:sqlalchemy",      name: sqlalchemy }
