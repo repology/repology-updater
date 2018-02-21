@@ -26,6 +26,13 @@
 --------------------------------------------------------------------------------
 
 -- update metapackages
+UPDATE metapackages
+SET
+	num_repos = 0,
+	num_families = 0,
+	num_repos_newest = 0,
+	num_families_newest = 0;
+
 INSERT
 INTO metapackages (
 	effname,
@@ -89,7 +96,7 @@ WITH deceased_metapackages AS (
 	DELETE
 	FROM metapackages
 	WHERE
-		last_seen != now()
+		num_repos = 0
 	RETURNING
 		effname,
 		first_seen,
