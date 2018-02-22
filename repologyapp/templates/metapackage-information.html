@@ -13,7 +13,7 @@
 {% else %}
 <div class="row">
 	<div class="col-md-4">
-		<section>
+		<section id="Package names">
 			<h2>Package names</h2>
 			<ul>
 			{% for name,families in information.names|dictsort(case_sensitive=True) %}
@@ -22,7 +22,7 @@
 			</ul>
 		</section>
 
-		<section>
+		<section id="Versions">
 			<h2>Versions</h2>
 			<ul class="list-sparse">
 			{% for versioninfo in versions %}
@@ -33,7 +33,7 @@
 			</ul>
 		</section>
 
-		<section>
+		<section id="Repositories">
 			<h2>Repositories</h2>
 			<ul>
 			{% for reponame,families in information.repos %}
@@ -43,7 +43,7 @@
 		</section>
 
 		{% if information.categories %}
-		<section>
+		<section id="Categories">
 			<h2>Categories</h2>
 			<ul>
 			{% for category,families in information.categories|dictsort(case_sensitive=True) %}
@@ -54,7 +54,7 @@
 		{% endif %}
 
 		{% if information.licenses %}
-		<section>
+		<section id="Licenses">
 			<h2>Licenses</h2>
 			<ul>
 			{% for license,families in information.licenses|dictsort(case_sensitive=True) %}
@@ -67,7 +67,7 @@
 	<div class="col-md-8">
 
 		{% if information.summaries %}
-		<section>
+		<section id="Summaries">
 			<h2>Summaries</h2>
 			<ul>
 			{% for summary,families in information.summaries|dictsort(case_sensitive=True) %}
@@ -78,7 +78,7 @@
 		{% endif %}
 
 		{% if information.maintainers %}
-		<section>
+		<section id="Maintainers">
 			<h2>Maintainers</h2>
 			<ul>
 			{% for maintainer,families in information.maintainers|dictsort(case_sensitive=True) %}
@@ -97,7 +97,7 @@
 		{% endif %}
 
 		{% if information.homepages %}
-		<section>
+		<section id="Homepages">
 			<h2>Homepages</h2>
 			<ul>
 			{% for homepage,families in information.homepages|dictsort(case_sensitive=True) %}
@@ -108,7 +108,7 @@
 		{% endif %}
 
 		{% if information.downloads %}
-		<section>
+		<section id="Downloads">
 			<h2>Downloads</h2>
 			<ul>
 			{% for download,families in information.downloads|dictsort(case_sensitive=True) %}
