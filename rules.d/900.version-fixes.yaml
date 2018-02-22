@@ -694,6 +694,7 @@
 - { name: "perl:data-compare",         ver: ["1.2200","1.2102","1.2101","1.250.0","1.240.0"], ignore: true }
 - { name: "perl:datetime",             verpat: "1\\.[0-9]{3,}.*",                          ignore: true }
 - { name: "perl:datetime-locale",      verpat: "1\\.[0-9]{3,}.*",                          ignore: true }
+- { name: "perl:dbd-sqlite",           verpat: ".*_.*",                                    devel: true }
 - { name: "perl:devel-stacktrace",     verpat: "2\\.[0-9]{3,}.*",                          ignore: true }
 - { name: "perl:devel-stacktrace",     verpat: "2\\.[1-9][0-9].*",                         ignore: true }
 - { name: "perl:devel-symdump",        verpat: "2\\.[0-9]{3,}.*",                          ignore: true }
