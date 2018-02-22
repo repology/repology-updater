@@ -109,7 +109,7 @@ class DebianSourcesParser():
                     continue
 
                 # key - value pair
-                match = re.match('([A-Za-z0-9-]+):(.*?)$', line)
+                match = re.fullmatch('([A-Za-z0-9-]+):(.*?)', line)
                 if match:
                     key = match.group(1)
                     value = match.group(2).strip()
@@ -118,7 +118,7 @@ class DebianSourcesParser():
                     continue
 
                 # continuation of previous key
-                match = re.match(' (.*)$', line)
+                match = re.fullmatch(' (.*)', line)
                 if match:
                     value = match.group(1).strip()
                     if not isinstance(current_data[last_key], list):
