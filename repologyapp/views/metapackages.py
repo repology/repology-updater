@@ -36,14 +36,14 @@ def metapackages(bound=None):
     request.Bound(bound)
 
     # get packages
-    packages = get_db().query_packages_rfevm(request, limit=config['METAPACKAGES_PER_PAGE'])
+    packages = get_db().query_metapackages_rfevm(**request.__dict__, limit=config['METAPACKAGES_PER_PAGE'])
 
     # on empty result, fallback to show first, last set of results
     if not packages:
         request = filterinfo.GetRequest()
         if bound and bound.startswith('..'):
             request.NameTo(None)
-        packages = get_db().query_packages_rfevm(request, limit=config['METAPACKAGES_PER_PAGE'])
+        packages = get_db().query_metapackages_rfevm(**request.__dict__, limit=config['METAPACKAGES_PER_PAGE'])
 
     firstname, lastname = get_packages_name_range(packages)
 

@@ -19,69 +19,21 @@ import json
 
 import psycopg2
 
-from repology.package import Package
-
-
-class Query:
-    def __init__(self, query=None, *args):
-        self.parts = [query] if query else []
-        self.args = list(args)
-
-    def GetQuery(self):
-        return ' '.join(filter(None.__ne__, self.parts))
-
-    def GetArgs(self):
-        return self.args
-
-    def Append(self, other, *args):
-        if isinstance(other, str):
-            self.parts += [other]
-            self.args += list(args)
-        else:
-            self.parts.append(other.GetQuery())
-            self.args += other.GetArgs()
-        return self
-
-    def __bool__(self):
-        return not not self.parts
-
-
-class AndQuery(Query):
-    def __init__(self, query=None, *args):
-        Query.__init__(self, query, *args)
-
-    def GetQuery(self):
-        if not self.parts:
-            return None
-        return ' AND '.join(map(lambda x: '(' + x + ')', filter(None.__ne__, self.parts)))
-
-
-class OrQuery(Query):
-    def __init__(self, query=None, *args):
-        Query.__init__(self, query, *args)
-
-    def GetQuery(self):
-        if not self.parts:
-            return None
-        return ' OR '.join(map(lambda x: '(' + x + ')', filter(None.__ne__, self.parts)))
-
 
 class MetapackageRequest:
     def __init__(self):
         # effname filtering
-        self.namecond = None
-        self.namebound = None
-        self.nameorder = None
+        self.pivot = None
+        self.reverse = False
 
-        self.name_substring = None
+        self.search = None
 
         # maintainer (maintainer_metapackages)
         self.maintainer = None
-        self.maintainer_outdated = False
 
         # num families (metapackage_repocounts)
-        self.minfamilies = None
-        self.maxfamilies = None
+        self.minspread = None
+        self.maxspread = None
 
         # repos (repo_metapackages)
         self.inrepo = None
@@ -91,14 +43,11 @@ class MetapackageRequest:
         self.category = None
 
         # flags
-        self.newest = None
-        self.outdated = None
-        self.newest_single_repo = None
-        self.newest_single_family = None
-        self.problematic = None
-
-        # other
-        self.limit = None
+        self.newest = False
+        self.outdated = False
+        self.newest_single_repo = False
+        self.newest_single_family = False
+        self.problematic = False
 
     def Bound(self, bound):
         if not bound:
@@ -109,25 +58,23 @@ class MetapackageRequest:
             self.NameFrom(bound)
 
     def NameFrom(self, name):
-        if self.namecond:
+        if self.pivot:
             raise RuntimeError('duplicate effname condition')
         if name is not None:
-            self.namecond = '>='
-            self.namebound = name
-        self.nameorder = 'ASC'
+            self.pivot = name
+            self.reverse = False
 
     def NameTo(self, name):
-        if self.namecond:
+        if self.pivot:
             raise RuntimeError('duplicate effname condition')
         if name is not None:
-            self.namecond = '<='
-            self.namebound = name
-        self.nameorder = 'DESC'
+            self.pivot = name
+            self.reverse = True
 
     def NameSubstring(self, substring):
-        if self.name_substring:
+        if self.search:
             raise RuntimeError('duplicate effname substring condition')
-        self.name_substring = substring
+        self.search = substring
 
     def Maintainer(self, maintainer):
         if self.maintainer:
@@ -137,7 +84,6 @@ class MetapackageRequest:
     def InRepo(self, repo):
         if self.inrepo:
             raise RuntimeError('duplicate repository condition')
-
         self.inrepo = repo
 
     def NotInRepo(self, repo):
@@ -151,19 +97,14 @@ class MetapackageRequest:
         self.category = category
 
     def MinFamilies(self, num):
-        if self.minfamilies:
+        if self.minspread:
             raise RuntimeError('duplicate more families condition')
-        self.minfamilies = num
+        self.minspread = num
 
     def MaxFamilies(self, num):
-        if self.maxfamilies:
+        if self.maxspread:
             raise RuntimeError('duplicate less families condition')
-        self.maxfamilies = num
-
-    def Limit(self, limit):
-        if self.limit:
-            raise RuntimeError('duplicate limit')
-        self.limit = limit
+        self.maxspread = num
 
     def Newest(self):
         self.newest = True
@@ -180,107 +121,6 @@ class MetapackageRequest:
     def NewestSingleRepo(self):
         self.newest_single_repo = True
 
-    def GetQuery(self):
-        tables = set()
-        where = AndQuery()
-        having = AndQuery()
-
-        newest_handled = False
-        outdated_handled = False
-        problematic_handled = False
-
-        # table joins and conditions
-        if self.maintainer:
-            tables.add('maintainer_metapackages')
-            where.Append('maintainer_metapackages.maintainer = %s', self.maintainer)
-            if self.newest:
-                where.Append('maintainer_metapackages.num_packages_newest > 0 OR maintainer_metapackages.num_packages_devel > 0')
-                newest_handled = True
-            if self.outdated:
-                outdated_handled = True
-                where.Append('maintainer_metapackages.num_packages_outdated > 0')
-            if self.problematic:
-                problematic_handled = True
-                where.Append('maintainer_metapackages.num_packages_ignored > 0 OR maintainer_metapackages.num_packages_incorrect > 0 OR maintainer_metapackages.num_packages_untrusted > 0')
-
-        if self.minfamilies:
-            tables.add('metapackage_repocounts')
-            where.Append('metapackage_repocounts.num_families >= %s', self.minfamilies)
-
-        if self.maxfamilies:
-            tables.add('metapackage_repocounts')
-            where.Append('metapackage_repocounts.num_families <= %s', self.maxfamilies)
-
-        if self.inrepo:
-            tables.add('repo_metapackages')
-            where.Append('repo_metapackages.repo = %s', self.inrepo)
-            if self.newest:
-                where.Append('repo_metapackages.num_packages_newest > 0 OR repo_metapackages.num_packages_devel > 0')
-                newest_handled = True
-            if self.outdated:
-                where.Append('repo_metapackages.num_packages_outdated > 0')
-                outdated_handled = True
-            if self.problematic:
-                problematic_handled = True
-                where.Append('repo_metapackages.num_packages_ignored > 0 OR repo_metapackages.num_packages_incorrect > 0 OR repo_metapackages.num_packages_untrusted > 0')
-
-        if self.notinrepo:
-            tables.add('repo_metapackages as repo_metapackages1')
-            having.Append('count(*) FILTER (WHERE repo_metapackages1.repo = %s) = 0', self.notinrepo)
-
-        if self.category:
-            tables.add('category_metapackages')
-            where.Append('category_metapackages.category = %s', self.category)
-
-        if self.newest_single_family:
-            tables.add('metapackage_repocounts')
-            where.Append('metapackage_repocounts.num_families_newest = 1')
-
-        if self.newest_single_repo:
-            tables.add('metapackage_repocounts')
-            where.Append('metapackage_repocounts.num_repos_newest = 1')
-
-        if self.newest and not newest_handled:
-            tables.add('repo_metapackages')
-            where.Append('repo_metapackages.num_packages_newest > 0 OR repo_metapackages.num_packages_devel > 0')
-
-        if self.outdated and not outdated_handled:
-            tables.add('repo_metapackages')
-            where.Append('repo_metapackages.num_packages_outdated > 0')
-
-        if self.problematic and not problematic_handled:
-            tables.add('repo_metapackages')
-            where.Append('repo_metapackages.num_packages_ignored > 0 OR repo_metapackages.num_packages_incorrect > 0 OR repo_metapackages.num_packages_untrusted > 0')
-
-        # effname conditions
-        if self.namecond and self.namebound:
-            where.Append('effname ' + self.namecond + ' %s', self.namebound)
-
-        if self.name_substring:
-            where.Append('effname LIKE %s', '%' + self.name_substring + '%')
-
-        # construct query
-        query = Query('SELECT DISTINCT effname FROM')
-        query.Append(tables.pop() if tables else 'repo_metapackages')
-        for table in tables:
-            query.Append('INNER JOIN ' + table + ' USING(effname)')
-
-        if where:
-            query.Append('WHERE').Append(where)
-
-        if having:
-            query.Append('GROUP BY effname HAVING').Append(having)
-
-        if self.nameorder:
-            query.Append('ORDER BY effname ' + self.nameorder)
-        else:
-            query.Append('ORDER BY effname ASC')
-
-        if self.limit:
-            query.Append('LIMIT %s', self.limit)
-
-        return (query.GetQuery(), query.GetArgs())
-
 
 class Database:
     def __init__(self, dsn, querymgr, readonly=True, autocommit=False, application_name=None):
@@ -291,14 +131,6 @@ class Database:
 
     def commit(self):
         self.db.commit()
-
-    def _request_many_as_packages(self, query, *args):
-        with self.db.cursor() as cursor:
-            cursor.execute(query, args)
-
-            names = [desc.name for desc in cursor.description]
-
-            return [Package(**dict(zip(names, row))) for row in cursor.fetchall()]
 
     def add_packages(self, packages):
         with self.db.cursor() as cursor:
@@ -388,48 +220,6 @@ class Database:
                     ) for package in packages
                 ]
             )
-
-    def query_packages(self, request, limit=500):
-        request.Limit(limit)
-
-        query, args = request.GetQuery()
-
-        return self._request_many_as_packages(
-            """
-            SELECT
-                *
-            FROM packages
-            WHERE effname IN (
-                {}
-            )
-            """.format(query),
-            *args
-        )
-
-    def query_packages_rfevm(self, request, limit=500):
-        request.Limit(limit)
-
-        query, args = request.GetQuery()
-
-        return self._request_many_as_packages(
-            """
-            SELECT
-                repo,
-                family,
-
-                effname,
-
-                version,
-                versionclass,
-
-                maintainers
-            FROM packages
-            WHERE effname IN (
-                {}
-            )
-            """.format(query),
-            *args
-        )
 
     linkcheck_status_timeout = -1
     linkcheck_status_too_many_redirects = -2
