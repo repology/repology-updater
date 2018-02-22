@@ -45,13 +45,13 @@ LIMIT %(limit)s;
 
 --------------------------------------------------------------------------------
 --
--- !!get_maintainer_problems_count(repo) -> single value
+-- !!get_maintainer_problems_count(maintainer) -> single value
 --
 --------------------------------------------------------------------------------
 SELECT
 	count(*)
 FROM problems
-WHERE repo = %(repo)s;
+WHERE maintainer = %(maintainer)s;
 
 
 --------------------------------------------------------------------------------
