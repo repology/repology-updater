@@ -205,6 +205,7 @@
 - { name: dconf-editor,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: dee-qt,                      verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: deja-dup,                    verpat: "[0-9]*[13579]\\..*",                       devel: true }
+- { name: devhelp,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: dff,                         verpat: "(.*)\\.20[0-9]{6}",                        setver: "$1" } # aosc snapshot
 - { name: dhewm3,                      ver: "1.4.2",                 family: [ fedora ],   ignore: true } # no such version (rpmfusion)
 - { name: dia,                         ver: "0.97.4",                family: [ sisyphus ], ignore: true } # no such release
@@ -257,6 +258,7 @@
 - { name: "erlang:cl",                 verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: ethtool,                     verpat: "6.*",                                      ignore: true } # XXX: check if https://www.kernel.org/pub/software/network/ethtool/ and ethtool from https://sourceforge.net/projects/gkernel/ are the same project. Anyway, the former is fresh and the latter is ancient crap from 2007
 - { name: eventlog,                    verpat: "20[0-9]{6}.*",                             ignore: true }
+- { name: evince,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: evolution,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: evolution-data-server,       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: evolution-ews,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -342,6 +344,7 @@
 - { name: geocode-glib,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gimp,                        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: git-bzr-ng,                                                                      noscheme: true }
+- { name: gjs,                         verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glade,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: glib,                        verpat: "[2-9][0-9]*\\.[0-9]*[13579]\\..*",         devel: true }
 - { name: glibmm,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -351,12 +354,15 @@
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignore: true } # not released yet
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
 - { name: gnome-backgrounds,           verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-bluetooth,             verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-boxes,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-builder,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-calculator,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-calendar,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-chess,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-clocks,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-contacts,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-control-center,        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-desktop,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-disk-utility,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-documents,             verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -368,12 +374,15 @@
 - { name: gnome-music,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-online-accounts,       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-photos,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-session,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-settings-daemon,       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-shell,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-shell-extensions,      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-software,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-sound-recorder,        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-sudoku,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-system-monitor,        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: gnome-terminal,              verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-todo,                  verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-tweak-tool,            verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-tweaks,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -485,6 +494,7 @@
 - { name: less,                        vergt: "487",                                       devel: true } # http://www.greenwoodsoftware.com/less/
 - { name: libreoffice,                 ver: "6.0.0.0",               family: fedora,       ignore: true } # fake, it's 6.0.0.0alpha1
 - { name: lightdm-gtk-greeter,         verpat: "20[0-9]{6}.*",                             ignore: true }
+- { name: lightsoff,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: lightworks,                  verlonger: 3,                 family: kaos,         ignore: true }
 - { name: lilypond,                    verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: linkchecker,                 ver: "9.4",                   ruleset: aur,         incorrect: true } # not released
