@@ -72,6 +72,9 @@ class DebianSourcesParser():
 
                 # empty line, dump package
                 if line == '':
+                    if not current_data:
+                        continue  # may happen on empty package list
+
                     pkg = Package()
 
                     def GetField(key, type_=str, default=None):
