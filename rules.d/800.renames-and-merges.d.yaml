@@ -1,7 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
-- { setname: dash.el,                  name: dash-el }
 - { setname: darcs,                    name: "haskell:darcs" }
+- { setname: dash.el,                  name: dash-el }
 - { setname: db,                       name: berkeley-db }
 - { setname: db,                       namepat: "db[0-9.]+" }
 - { setname: db,                       namepat: "libdb[0-9._-]*" }
@@ -22,6 +22,7 @@
 - { setname: deis,                     name: [deis-client,deisctl] }
 - { setname: dejagnu,                  name: deja-gnu }
 - { setname: devede,                   name: devedeng }
+- { setname: devhelp,                  name: devhelp-gtk2, addflavor: gtk2 }
 - { setname: dgen-sdl,                 name: dgen }
 - { setname: dhcp,                     name: [dhclient,isc-dhclient,isc-dhcp], addflavor: client }
 - { setname: dhcp,                     name: [isc-dhcpd], addflavor: server }
