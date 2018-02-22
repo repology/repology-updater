@@ -98,6 +98,7 @@
 - { setname: gnet,                     namepat: "gnet[0-9]+" }
 - { setname: gnome-chemistry-utils,    name: gchemutils }
 - { setname: gnome-chess,              name: gnome-games-chess }
+- { setname: gnome-control-center,     name: control-center }
 - { setname: gnome-desktop,            name: [gnome-desktop2, gnome-desktop3, compat-gnome-desktop38, compat-gnome-desktop314] }
 - { setname: gnome-desktop,            name: "python:pygnome-desktop", addflavor: python }
 - { setname: gnome-desktop,            name: gnome-desktop-reference, addflavor: reference }

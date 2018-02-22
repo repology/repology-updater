@@ -15,6 +15,7 @@
 - { setname: dconf,                    name: d-conf }
 - { setname: dconf-editor,             name: dconf-editor-3.20 }
 - { setname: ddclient,                 name: ddclient-ipv6 }
+- { setname: dde-control-center,       name: deepin-control-center }
 - { setname: ddgr,                     name: "python:ddgr", addflavor: python }
 - { setname: deadbeef,                 name: deadbeef-with-plugins }
 - { setname: deal.ii,                  name: [dealii,dealii-openmpi,deal-ii] }

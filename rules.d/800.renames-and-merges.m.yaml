@@ -9,6 +9,8 @@
 - { setname: mariadb,                  namepat: "mariadb[0-9.-]*(?:-client|-server)?" }
 - { setname: mariadb-mytop,            name: mytop, family: arch }
 - { setname: mastodon,                 name: mastodon-docker, addflavor: docker }
+- { setname: mate-control-center,      name: mate-control-center-dev }
+- { setname: mate-control-center,      name: mate-control-center-gtk2, addflavor: gtk2 }
 - { setname: maven-shell,              name: mvnsh }
 - { setname: mc,                       name: [mc-contrib,midnight-commander,midnightcommander] }
 - { setname: mc,                       name: mc46 }
