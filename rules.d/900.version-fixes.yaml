@@ -730,6 +730,7 @@
 - { name: pmount,                      ver: "0.9.99",                                      setver: "0.9.99_alpha" }
 - { name: pmount,                      verpat: "0\\.9\\.99.*",                             devel: true }
 - { name: polari,                      verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: postfix,                     verpat: ".*r.*",                                    devel: true }
 - { name: postgresql,                  verpat: "11.*",                                     devel: true }
 - { name: postgresql,                  ver: ["11","11.0"],                                 ignore: true }
 - { name: powder-toy,                  verlonger: 2,                                       ignore: true } # third component is a build number, it's not a part of official version
@@ -839,6 +840,7 @@
 - { name: sk1libs,                     ver: "0.9.2",                 family: [arch,aosc],  incorrect: true }
 - { name: sk1libs,                                                   family: [arch,aosc],  untrusted: true }
 - { name: slime,                       verpat: "20[0-9]{6}.*",                             ignore: true }
+- { name: smartmontools,               verpat: "([0-9]+\\.[0-9]+)[.-][0-9]+",              setver: $1 }
 - { name: smtp-fuzz,                                                                       noscheme: true }
 - { name: smplayer-skins,              verpat: "20[0-9]{6}",                               ignore: true }
 - { name: sndio,                       verpat: "20[0-9]{6}",                               incorrect: true } # last version month ago, snapshots are not justified
