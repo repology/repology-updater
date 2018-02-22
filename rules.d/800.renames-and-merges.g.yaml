@@ -109,6 +109,8 @@
 - { setname: gnome-nibbles,            name: gnome-games-nibbles }
 - { setname: gnome-photo-printer,      name: [gnomephotoprinter,gnome-photo-print] }
 - { setname: gnome-robots,             name: gnome-games-robots }
+- { setname: gnome-settings-daemon,    name: [gnome-settings-daemon-120dpi,gnome-settings-daemon-elementary,gnome-settings-daemon-shutdown,gnome-settings-daemon-ubuntu,gnome-settings-daemon-volume-step-patch], addflavor: true }
+- { setname: gnome-settings-daemon,    name: gnome-settings-daemon-compat }
 - { setname: gnome-sudoku,             name: gnome-games-sudoku }
 - { setname: gnome-taquin,             name: gnome-games-taquin }
 - { setname: gnome-tetravex,           name: gnome-games-tetravex }
