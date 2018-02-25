@@ -81,7 +81,7 @@
 - { setname: psi-plus,                 name: psi+ }
 - { setname: psi4,                     name: psicode }
 - { setname: psimedia,                 name: [psi+-plugins-psimediaplugin,psi-plus-plugin-psimedia] }
-- { setname: puppet,                   name: puppet4, family: freebsd }
+- { setname: puppet,                   namepat: "puppet[0-9_.-]+" }
 - { setname: pyalsa,                   name: ["python:alsa","python:pyalsa"], addflavor: python }
 - { setname: pycharm,                  name: [pycharm-ce,pycharm-community,pycharm-community-eap,pycharm-community-edition], addflavor: community }
 - { setname: pycharm,                  name: intellij-pycharm }

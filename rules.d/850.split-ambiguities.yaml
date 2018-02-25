@@ -81,6 +81,8 @@
 - { name: docker,                      wwwpart: icculus.org,              setname: docker-tray }
 - { name: docker,                      family: gobolinux,                 setname: docker-tray }
 
+- { name: doit, wwwpart: sgtatham, setname: doit-sgtatham }
+
 - { name: dolphin,                     setname: dolphin-emu,              wwwpart: dolphin-emu.org }
 
 - { name: dragon,                      setname: dragon-scannerparser,     family: [ freebsd ] }
