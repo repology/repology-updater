@@ -67,6 +67,7 @@
 - { setname: spamassassin,             name: spamassassin-rules, addflavor: rules }
 - { setname: spamassassin,             name: spamassassin-spamc, addflavor: rules }
 - { setname: sparsehash,               name: google-sparsehash }
+- { setname: spatialite-gui,           name: spatialite-gui-devel, ignore: true }
 - { setname: speed-dreams$1,           namepat: "speeddreams(-data)?" }
 - { setname: speexdsp,                 name: libspeexdsp }
 - { setname: spidermonkey,             namepat: "spidermonkey[0-9]+" }
