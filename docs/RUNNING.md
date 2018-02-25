@@ -7,6 +7,7 @@ Needed for core:
 - [Python](https://www.python.org/) 3.6+
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [requests](http://python-requests.org/)
+- Python module [Jinja2](http://jinja.pocoo.org/)
 - [libversion](https://github.com/repology/libversion) library 2.4+
 
 Needed for fetching/parsing specific repository data:

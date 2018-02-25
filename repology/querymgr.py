@@ -19,6 +19,7 @@ import functools
 import os
 import re
 
+import jinja2
 
 from repology.package import Package
 
@@ -50,6 +51,7 @@ class QueryMetadata:
     def __init__(self):
         self.name = None
         self.query = ''
+        self.template = None
         self.args = []
         self.argdefaults = {}
         self.rettype = QueryMetadata.RET_NONE
@@ -172,6 +174,8 @@ class QueryManager:
                 self.__register_query(current_query)
 
     def __register_query(self, query):
+        query.template = jinja2.Template(query.query)
+
         def prepare_arguments_for_query(args, kwargs):
             if query.argsmode == QueryMetadata.ARGSMODE_MANY_VALUES:
                 return [[value] for value in args[0]]
@@ -226,10 +230,12 @@ class QueryManager:
             with db.cursor() as cursor:
                 arguments = prepare_arguments_for_query(args, kwargs)
 
+                render = query.template.render(arguments)
+
                 if query.argsmode == QueryMetadata.ARGSMODE_NORMAL:
-                    cursor.execute(query.query, arguments)
+                    cursor.execute(render, arguments)
                 else:
-                    cursor.executemany(query.query, arguments)
+                    cursor.executemany(render, arguments)
 
                 return process_results_of_query(cursor)
 
