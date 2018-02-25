@@ -99,6 +99,12 @@
 
 - { name: etcd, verpat: "1.*", setname: "etcd-player" } # Enhanced Tiny CD, a simple ncurses-based CD player vs. coreos etcd
 
+- { name: elm, wwwpart: instinct.org, setname: elm-mua }
+- { name: elm, family: openbsd, setname: elm-mua }
+- { name: elm, wwwpart: elm-lang, setname: elm-lang }
+- { name: elm, family: nix, setname: elm-lang }
+- { name: elm, warning: "please classify me" }
+
 - { name: emma,                        setname: emma-coverage, family: [sisyphus, fedora, gentoo, mageia, rosa, nix] }
 - { name: emma,                        setname: emma-mysql, family: [arch, freebsd, debuntu] }
 - { name: emma,                        warning: "please classify me" }
