@@ -465,6 +465,7 @@
 - { name: jzintv,                      verpat: "r.*",                                      ignore: true }
 
 # K
+- { name: kbfs,                        verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: kbibtex,                     ver: "0.8",                   ruleset: debuntu,     ignore: true } # actually 0.8~20170819git31a77b27e8e83836e which cannot be parsed properly
 - { name: kbibtex,                     ver: "0.8",                   ruleset: mageia,      incorrect: true }
 - { name: kbibtex,                                                   ruleset: mageia,      untrusted: true }
