@@ -37,32 +37,38 @@ WHERE effname IN (
 	WHERE
 		(
 			true --NOT shadow_only
+{% if pivot %}
 		) AND (
 			-- pivot condition
-			%(pivot)s IS NULL OR
 			(NOT %(reverse)s AND effname >= %(pivot)s) OR
 			(%(reverse)s AND effname <= %(pivot)s)
+{% endif %}
+{% if search %}
 		) AND (
 			-- search condition
-			%(search)s IS NULL OR
 			effname LIKE ('%%' || %(search)s || '%%')
+{% endif %}
+{% if minspread is not none %}
 		) AND (
 			-- spread conditions
-			%(minspread)s IS NULL OR
 			num_families >= %(minspread)s
+{% endif %}
+{% if maxspread is not none %}
 		) AND (
-			%(maxspread)s IS NULL OR
 			num_families <= %(maxspread)s
+{% endif %}
+{% if newest_single_repo %}
 		) AND (
 			-- single newest conditions
-			NOT %(newest_single_repo)s OR
 			num_repos_newest = 1
+{% endif %}
+{% if newest_single_family %}
 		) AND (
-			NOT %(newest_single_family)s OR
 			num_families_newest = 1
+{% endif %}
+{% if inrepo %}
 		) AND (
 			-- in repo condition
-			%(inrepo)s IS NULL OR
 			effname IN (
 				SELECT
 					effname
@@ -84,9 +90,10 @@ WHERE effname IN (
 						num_packages_untrusted > 0
 					)
 			)
+{% endif %}
+{% if notinrepo %}
 		) AND (
 			-- not in repo condition
-			%(notinrepo)s IS NULL OR
 			effname IN (
 				SELECT
 					effname
@@ -94,9 +101,10 @@ WHERE effname IN (
 				GROUP BY effname
 				HAVING count(*) FILTER (WHERE repo = %(notinrepo)s) = 0
 			)
+{% endif %}
+{% if maintainer %}
 		) AND (
 			-- maintainer condition
-			%(maintainer)s IS NULL OR
 			effname IN (
 				SELECT
 					effname
@@ -118,20 +126,20 @@ WHERE effname IN (
 						num_packages_untrusted > 0
 					)
 			)
+{% endif %}
+{% if category %}
 		) AND (
 			-- category condition
-			%(category)s IS NULL OR
 			effname IN (
 				SELECT
 					effname
 				FROM category_metapackages
 				WHERE category = %(category)s
 			)
+{% endif %}
+{% if not maintainer and not repo and newest %}
 		) AND (
 			-- newest not handled for either maintainer or repo
-			NOT %(newest)s OR
-			%(inrepo)s IS NOT NULL OR
-			%(maintainer)s IS NOT NULL OR
 			effname IN (
 				SELECT
 					effname
@@ -142,11 +150,10 @@ WHERE effname IN (
 						num_packages_devel > 0
 					)
 			)
+{% endif %}
+{% if not maintainer and not repo and outdated %}
 		) AND (
 			-- outdated not handled for either maintainer or repo
-			NOT %(outdated)s OR
-			%(inrepo)s IS NOT NULL OR
-			%(maintainer)s IS NOT NULL OR
 			effname IN (
 				SELECT
 					effname
@@ -156,11 +163,10 @@ WHERE effname IN (
 						num_packages_outdated > 0
 					)
 			)
+{% endif %}
+{% if not maintainer and not repo and problematic %}
 		) AND (
 			-- problematic not handled for either maintainer or repo
-			NOT %(problematic)s OR
-			%(inrepo)s IS NOT NULL OR
-			%(maintainer)s IS NOT NULL OR
 			effname IN (
 				SELECT
 					effname
@@ -172,6 +178,7 @@ WHERE effname IN (
 						num_packages_untrusted > 0
 					)
 			)
+{% endif %}
 		)
 	ORDER BY
 		CASE WHEN NOT %(reverse)s THEN effname ELSE NULL END,
