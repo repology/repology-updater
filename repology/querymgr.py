@@ -230,7 +230,7 @@ class QueryManager:
             with db.cursor() as cursor:
                 arguments = prepare_arguments_for_query(args, kwargs)
 
-                render = query.template.render(arguments)
+                render = query.template.render(**arguments)
 
                 if query.argsmode == QueryMetadata.ARGSMODE_NORMAL:
                     cursor.execute(render, arguments)
