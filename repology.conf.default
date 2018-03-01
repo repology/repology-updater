@@ -101,6 +101,11 @@ TCLSH = "tclsh"
 PROFILE = False
 
 #
+# Enable pretty and deterministic JSON in API
+#
+PRETTY_JSON = False
+
+#
 # Items per page
 #
 METAPACKAGES_PER_PAGE = 200

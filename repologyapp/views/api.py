@@ -59,6 +59,13 @@ def api_v1_package_to_json(package):
     return output
 
 
+def dump_json(data):
+    if config['PRETTY_JSON']:
+        return json.dumps(data, indent=1, sort_keys=True)
+    else:
+        return json.dumps(data, separators=(',', ':'))
+
+
 @ViewRegistrar('/api/v1/metapackages/')
 @ViewRegistrar('/api/v1/metapackages/<bound>/')
 def api_v1_metapackages(bound=None):
@@ -78,7 +85,7 @@ def api_v1_metapackages(bound=None):
     }
 
     return (
-        json.dumps(metapackages),
+        dump_json(metapackages),
         {'Content-type': 'application/json'}
     )
 
@@ -92,7 +99,7 @@ def api_v1():
 @ViewRegistrar('/api/v1/metapackage/<name>')
 def api_v1_metapackage(name):
     return (
-        json.dumps(list(map(
+        dump_json(list(map(
             api_v1_package_to_json,
             get_db().get_metapackage_packages(name)
         ))),
@@ -157,7 +164,7 @@ def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
 @ViewRegistrar('/api/v1/repository/<repo>/problems')
 def api_v1_repository_problems(repo):
     return (
-        json.dumps(get_db().get_repository_problems(repo)),
+        dump_json(get_db().get_repository_problems(repo)),
         {'Content-type': 'application/json'}
     )
 
@@ -165,7 +172,7 @@ def api_v1_repository_problems(repo):
 @ViewRegistrar('/api/v1/maintainer/<maintainer>/problems')
 def api_v1_maintainer_problems(maintainer):
     return (
-        json.dumps(get_db().get_maintainer_problems(maintainer)),
+        dump_json(get_db().get_maintainer_problems(maintainer)),
         {'Content-type': 'application/json'}
     )
 
@@ -174,7 +181,7 @@ def api_v1_maintainer_problems(maintainer):
 #def api_v1_maintainer_problems():
 #    get_db().GetRepositoriesHistoryPeriod(seconds = 365
 #    return (
-#        json.dumps(get_db().GetProblems(maintainer=maintainer)),
+#        dump_json(get_db().GetProblems(maintainer=maintainer)),
 #        {'Content-type': 'application/json'}
 #    )
 
@@ -182,6 +189,6 @@ def api_v1_maintainer_problems(maintainer):
 #@ViewRegistrar('/api/v1/history/statistics')
 #def api_v1_maintainer_problems(repo):
 #    return (
-#        json.dumps(get_db().GetProblems(maintainer=maintainer)),
+#        dump_json(get_db().GetProblems(maintainer=maintainer)),
 #        {'Content-type': 'application/json'}
 #    )
