@@ -6,6 +6,8 @@
 - { setname: palemoon,                 name: palemoon-bin, addflavor: bin }
 - { setname: pam-ccreds,               name: libpam-ccreds }
 - { setname: pam-ldap,                 name: libpam-ldap }
+- { setname: pango,                    namepat: "(?:lib)?pango[0-9._-]*" }
+- { setname: pango,                    name: pango-reference, addflavor: reference }
 - { setname: pangomm,                  namepat: "(?:lib)?pangomm[0-9._-]*" }
 - { setname: pangomm,                  namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", addflavor: docs }
 - { setname: panoply,                  name: panoply-nodesktop, addflavor: nodesktop }
