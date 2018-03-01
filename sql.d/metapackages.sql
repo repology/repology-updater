@@ -29,7 +29,7 @@ SELECT
 FROM packages
 WHERE effname IN (
 	SELECT effname
-	FROM metapackage_repocounts
+	FROM metapackages
 	WHERE
 		(
 			NOT shadow_only
