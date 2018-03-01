@@ -154,6 +154,7 @@
 - { setname: avrdude,                  name: arduino-avrdude, addflavor: adruino }
 - { setname: avro-c++,                 name: avro-cpp }
 - { setname: awesome,                  namepat: "awesome[0-9._-]+" }
+- { setname: awesome,                  name: awesome-luajit, addflavor: jit }
 - { setname: aws-cw-tools,             name: cloud-watch }
 - { setname: awscli,                   name: "python:awscli" }
 - { setname: awscli,                   name: aws-cli }
