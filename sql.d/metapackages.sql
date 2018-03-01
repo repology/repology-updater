@@ -32,7 +32,7 @@ WHERE effname IN (
 	FROM metapackage_repocounts
 	WHERE
 		(
-			true --NOT shadow_only
+			NOT shadow_only
 {% if pivot %}
 		) AND (
 			-- pivot condition
