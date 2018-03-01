@@ -35,7 +35,7 @@
     - desc: openSUSE package search
       url: https://software.opensuse.org/
   packagelinks:
-    # NOTE: openSUSE:Leap:42.2:Update automatically inherits openSUSE:Leap:42.3
+    # NOTE: openSUSE:Leap:42.2:Update automatically inherits openSUSE:Leap:42.2
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/openSUSE:Leap:42.2:Update/{name}'
     - desc: Package details on software.opensuse.org
