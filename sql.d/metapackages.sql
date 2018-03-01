@@ -55,7 +55,7 @@ WHERE effname = ANY(%(effnames)s);
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackage_related_metapackages_fev(effname, limit) -> array of packages
+-- !!get_metapackage_related_metapackages(effname, limit) -> array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
