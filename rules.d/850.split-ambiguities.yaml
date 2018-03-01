@@ -2,6 +2,12 @@
 
 - { name: avogadro, verge: "1.8", setname: avogadro2 } # actually it starts with 1.90, but also cover strange 1.9 from KDE Neon
 
+- { name: arb, wwwpart: [fredrikj,arblib], setname: arb-fp }
+- { name: arb, verpat: "2.*", setname: arb-fp }
+- { name: arb, wwwpart: arb-home, setname: arb-dna }
+- { name: arb, verpat: "6.*", setname: arb-dna }
+- { name: arb, warning: "please classify me" }
+
 # mail client vs. asynchronous synthesis system
 - { name: balsa, category: sci-electronics,               setname: balsa-synthesis }
 

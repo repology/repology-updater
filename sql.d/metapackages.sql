@@ -345,25 +345,15 @@ WHERE effname IN (
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackage_packages(effname) -> array of packages
+-- !!get_metapackage_packages(effname, fields=None) -> array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
+{% if fields %}
+	{{ fields | join(',') }}
+{% else %}
 	*
-FROM packages
-WHERE effname = %(effname)s;
-
-
---------------------------------------------------------------------------------
---
--- !!get_metapackage_packages_rv(effname) -> array of packages
---
---------------------------------------------------------------------------------
-SELECT
-	repo,
-
-	version,
-	versionclass
+{% endif %}
 FROM packages
 WHERE effname = %(effname)s;
 
@@ -378,43 +368,30 @@ SELECT count(DISTINCT family) FROM packages WHERE effname = %(effname)s;
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackages_packages(effnames) -> array of packages
+-- !!get_metapackages_packages(effnames, fields=None) -> array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
+{% if fields %}
+	{{ fields | join(',') }}
+{% else %}
 	*
+{% endif %}
 FROM packages
 WHERE effname = ANY(%(effnames)s);
 
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackages_packages_fev(effnames) -> array of packages
+-- !!get_metapackage_related_metapackages(effname, limit) -> array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
-	family,
-
-	effname,
-
-	version,
-	versionclass
-FROM packages
-WHERE effname = ANY(%(effnames)s);
-
-
---------------------------------------------------------------------------------
---
--- !!get_metapackage_related_metapackages_fev(effname, limit) -> array of packages
---
---------------------------------------------------------------------------------
-SELECT
-	family,
-
-	effname,
-
-	version,
-	versionclass
+{% if fields %}
+	{{ fields | join(',') }}
+{% else %}
+	*
+{% endif %}
 FROM packages
 WHERE effname IN (
 	WITH RECURSIVE r AS (

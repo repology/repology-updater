@@ -99,19 +99,13 @@ WITH resurrected_metapackages AS (
 		first_seen,
 		last_seen
 )
-INSERT
-INTO metapackages (
-	effname,
-	first_seen,
-	last_seen
-)
-SELECT
-	*
+UPDATE metapackages
+SET
+	first_seen = least(metapackages.first_seen, resurrected_metapackages.first_seen),
+	last_seen = greatest(metapackages.last_seen, resurrected_metapackages.last_seen)
 FROM resurrected_metapackages
-ON CONFLICT (effname)
-DO UPDATE SET
-	first_seen = least(metapackages.first_seen, EXCLUDED.first_seen),
-	last_seen = greatest(metapackages.last_seen, EXCLUDED.last_seen);
+WHERE
+	metapackages.effname = resurrected_metapackages.effname;
 
 -- handle metapackages deaths
 WITH deceased_metapackages AS (

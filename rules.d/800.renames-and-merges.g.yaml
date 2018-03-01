@@ -163,7 +163,7 @@
 - { setname: gtkmm,                    namepat: "(?:lib)?gtkmm[0-9._-]*" }
 - { setname: gtkmm,                    namepat: "(?:lib)?gtkmm[0-9._-]*(-docs|-documentation|-reference)", addflavor: docs }
 - { setname: gtksourceview,            namepat: "(?:lib)?gtksourceview[0-9._-]*" }
-- { setname: gtksourceviewmm2,         namepat: "(?:lib)?gtksourceviewmm[0-9._-]*" }
+- { setname: gtksourceviewmm,          namepat: "(?:lib)?gtksourceviewmm[0-9._-]*" }
 - { setname: gtkspell,                 namepat: "(?:lib)?gtkspell[0-9._-]*" }
 - { setname: gtkspellmm,               namepat: "(?:lib)?gtkspellmm[0-9._-]*" }
 - { setname: gtypist,                  name: gnu-typist }

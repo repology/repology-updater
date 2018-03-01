@@ -1040,6 +1040,12 @@
     - mikachanfont
     - ttf-mikachan
 
+- setname: "fonts:misc-cyrillic"
+  name:
+    - font-misc-cyrillic
+    - x11-font-misc-cyrillic
+    - xorg-font-misc-cyrillic
+
 - setname: "fonts:mona"
   name:
     - font-mona
@@ -1333,6 +1339,12 @@
     - scheherazade_font
     - sil-scheherazade-fonts
     - ttf-sil-scheherazade
+
+- setname: "fonts:screen-cyrillic"
+  name:
+    - font-screen-cyrillic
+    - x11-font-screen-cyrillic
+    - xorg-font-screen-cyrillic
 
 - setname: "fonts:sgi"
   name:
@@ -1645,6 +1657,12 @@
     - vollkorn-ttf
 
 # W
+- setname: "fonts:winitzki-cyrillic"
+  name:
+    - font-winitzki-cyrillic
+    - x11-font-winitzki-cyrillic
+    - xorg-font-winitzki-cyrillic
+
 - setname: "fonts:wqy-microhei"
   name:
     - font-wqy-microhei
