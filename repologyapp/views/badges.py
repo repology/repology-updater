@@ -25,7 +25,7 @@ from repology.packageproc import PackagesetToBestByRepo
 
 @ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name):
-    packages = get_db().get_metapackage_packages(name, fields=['repo','version','versionclass'])
+    packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
     entries = [
@@ -59,7 +59,7 @@ def badge_tiny_repos(name):
 
 @ViewRegistrar('/badge/version-for-repo/<repo>/<name>.svg')
 def badge_version_for_repo(repo, name):
-    packages = get_db().get_metapackage_packages(name, fields=['repo','version','versionclass'])
+    packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
     if repo not in best_pkg_by_repo:
@@ -78,7 +78,7 @@ def badge_version_for_repo(repo, name):
 
 @ViewRegistrar('/badge/version-only-for-repo/<repo>/<name>.svg')
 def badge_version_only_for_repo(repo, name):
-    packages = get_db().get_metapackage_packages(name, fields=['repo','version','versionclass'])
+    packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
     if repo not in best_pkg_by_repo:
