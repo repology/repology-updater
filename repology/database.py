@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
-
 import psycopg2
 
 
@@ -127,100 +125,11 @@ class Database:
         self.db = psycopg2.connect(dsn, application_name=application_name)
         self.db.set_session(readonly=readonly, autocommit=autocommit)
         querymgr.InjectQueries(self, self.db)
-        self.queries = self  # XXX: switch to calling queries directly and remove
 
     def commit(self):
         self.db.commit()
 
-    def add_packages(self, packages):
-        with self.db.cursor() as cursor:
-            cursor.executemany(
-                """
-                INSERT INTO packages(
-                    repo,
-                    family,
-                    subrepo,
-
-                    name,
-                    effname,
-
-                    version,
-                    origversion,
-                    versionclass,
-
-                    maintainers,
-                    category,
-                    comment,
-                    homepage,
-                    licenses,
-                    downloads,
-
-                    flags,
-                    shadow,
-                    verfixed,
-
-                    flavors,
-
-                    extrafields
-                ) VALUES (
-                    %s,
-                    %s,
-                    %s,
-
-                    %s,
-                    %s,
-
-                    %s,
-                    %s,
-                    %s,
-
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-
-                    %s,
-                    %s,
-                    %s,
-
-                    %s,
-
-                    %s
-                )
-                """,
-                [
-                    (
-                        package.repo,
-                        package.family,
-                        package.subrepo,
-
-                        package.name,
-                        package.effname,
-
-                        package.version,
-                        package.origversion,
-                        package.versionclass,
-
-                        package.maintainers,
-                        package.category,
-                        package.comment,
-                        package.homepage,
-                        package.licenses,
-                        package.downloads,
-
-                        package.flags,
-                        package.shadow,
-                        package.verfixed,
-
-                        package.flavors,
-
-                        json.dumps(package.extrafields),
-                    ) for package in packages
-                ]
-            )
-
+    # XXX: move these away from here
     linkcheck_status_timeout = -1
     linkcheck_status_too_many_redirects = -2
     linkcheck_status_unknown_error = -3

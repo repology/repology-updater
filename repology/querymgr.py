@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import functools
+import json
 import os
 import re
 
@@ -47,6 +48,7 @@ class QueryMetadata:
 
     ARGSMODE_NORMAL = 0
     ARGSMODE_MANY_VALUES = 1
+    ARGSMODE_MANY_PACKAGES = 2
 
     def __init__(self):
         self.name = None
@@ -85,6 +87,10 @@ class QueryMetadata:
 
         if string == 'many values':
             self.argsmode = QueryMetadata.ARGSMODE_MANY_VALUES
+            return
+
+        if string == 'many packages':
+            self.argsmode = QueryMetadata.ARGSMODE_MANY_PACKAGES
             return
 
         for arg in string.split(','):
@@ -176,9 +182,17 @@ class QueryManager:
     def __register_query(self, query):
         query.template = jinja2.Template(query.query)
 
+        def package_to_argument(package):
+            d = package.__dict__
+            d['extrafields'] = json.dumps(d['extrafields'])
+            return d
+
         def prepare_arguments_for_query(args, kwargs):
             if query.argsmode == QueryMetadata.ARGSMODE_MANY_VALUES:
                 return [[value] for value in args[0]]
+
+            if query.argsmode == QueryMetadata.ARGSMODE_MANY_PACKAGES:
+                return [package_to_argument(package) for package in args[0]]
 
             assert(query.argsmode == QueryMetadata.ARGSMODE_NORMAL)
 

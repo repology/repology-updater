@@ -289,3 +289,63 @@ SELECT DISTINCT
 FROM metapackage_repocounts
 WHERE num_families = %(spread)s
 LIMIT %(limit)s;
+
+
+--------------------------------------------------------------------------------
+--
+-- !!add_packages(many packages)
+--
+--------------------------------------------------------------------------------
+INSERT INTO packages(
+	repo,
+	family,
+	subrepo,
+
+	name,
+	effname,
+
+	version,
+	origversion,
+	versionclass,
+
+	maintainers,
+	category,
+	comment,
+	homepage,
+	licenses,
+	downloads,
+
+	flags,
+	shadow,
+	verfixed,
+
+	flavors,
+
+	extrafields
+) VALUES (
+	%(repo)s,
+	%(family)s,
+	%(subrepo)s,
+
+	%(name)s,
+	%(effname)s,
+
+	%(version)s,
+	%(origversion)s,
+	%(versionclass)s,
+
+	%(maintainers)s,
+	%(category)s,
+	%(comment)s,
+	%(homepage)s,
+	%(licenses)s,
+	%(downloads)s,
+
+	%(flags)s,
+	%(shadow)s,
+	%(verfixed)s,
+
+	%(flavors)s,
+
+	%(extrafields)s
+)
