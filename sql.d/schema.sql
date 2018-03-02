@@ -32,7 +32,7 @@
 -- XXX: should lowercase as well?
 CREATE OR REPLACE FUNCTION simplify_url(url text) RETURNS text AS $$
 BEGIN
-	RETURN regexp_replace(regexp_replace(url, '/?([#?].*)?$', ''), '^https?://(www\\.)?', '');
+	RETURN regexp_replace(regexp_replace(url, '/?([#?].*)?$', ''), '^https?://(www\.)?', '');
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
