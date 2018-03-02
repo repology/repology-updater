@@ -97,7 +97,7 @@
   family: fedora
   color: '294172'
   sources:
-    - name: data
+    - name: development
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/development/rawhide/Everything/source/tree/
