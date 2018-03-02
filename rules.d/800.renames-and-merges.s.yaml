@@ -31,6 +31,7 @@
 - { setname: searx,                    name: searx-py3 }
 - { setname: sed,                      name: [gnu-sed,gnused,gsed] }
 - { setname: sendmail,                 namepat: "sendmail\\+.*", family: freebsd }
+- { setname: sequencer64,              name: sequencer64-next, ignore: true }
 - { setname: serf,                     namepat: "(?:lib)?serf[0-9._-]*" }
 - { setname: sextractor,               name: astromatic-sextractor }
 - { setname: sfml,                     name: compat-sfml16 }

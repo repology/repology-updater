@@ -21,6 +21,7 @@
 - { setname: renpy,                    name: renpy6 }
 - { setname: reposurgeon,              name: cyreposurgeon }
 - { setname: ringojs,                  name: ringo }
+- { setname: "rust:cargo-asm",         name: cargo-asm }
 - { setname: "rust:xsv",               name: xsv-rs }
 - { setname: rl,                       name: randomize-lines } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
 - { setname: rlog,                     name: librlog }
