@@ -24,7 +24,7 @@ import jinja2
 from repology.package import Package
 
 
-__all__ = ['QueryManager']
+__all__ = ['QueryLoadingError', 'QueryMetadataParsingError', 'QueryManager']
 
 
 class QueryMetadataParsingError(RuntimeError):
