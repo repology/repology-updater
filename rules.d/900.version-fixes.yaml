@@ -651,6 +651,7 @@
 - { name: open-vm-tools,               ver: [ "1280544", "2011.12.20" ],                   ignore: true }
 - { name: openal-creative,             ver: "20060211",                                    ignore: true } # freebsd (should probably be 0.0.8)
 - { name: opencity,                    ver: "0.0.6.5stable",                               ignore: true } # 0.0.6.5; "stable" is not a part of the version
+- { name: opencl,                                                                          noscheme: true } # GH/KhronosGroup/OpenCL-Headers w/o releases or mix of OpenCL-Headers with OpenCL-CLHPP
 - { name: opencollada,                 verpat: ".*3335ac.*",                               ignore: true }
 - { name: opencollada,                 verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: openjade,                    verpat: ".*(p|pre|devel)[0-9]*",                    devel: true }
