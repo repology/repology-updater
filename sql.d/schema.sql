@@ -180,6 +180,7 @@ CREATE INDEX ON metapackages(num_repos);
 CREATE INDEX ON metapackages(num_families);
 CREATE INDEX ON metapackages(shadow_only, num_families);
 CREATE INDEX ON metapackages(first_seen);
+CREATE INDEX metapackages_effname_trgm ON metapackages USING gin (effname gin_trgm_ops);
 
 CREATE TABLE dead_metapackages (
 	effname text NOT NULL PRIMARY KEY,
@@ -214,7 +215,6 @@ WITH DATA;
 
 CREATE UNIQUE INDEX ON repo_metapackages(repo, effname);
 CREATE INDEX ON repo_metapackages(effname);
-CREATE INDEX repo_metapackages_effname_trgm ON repo_metapackages USING gin (effname gin_trgm_ops);
 
 -- metapackages per category
 CREATE MATERIALIZED VIEW category_metapackages AS
