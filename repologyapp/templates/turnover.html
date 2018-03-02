@@ -18,7 +18,7 @@
 			<tbody>
 			{% for package in added %}
 				<tr>
-					<td>{{ macros.format_time_interval(package.ago) }}</td>
+					<td>{{ macros.format_time_interval(package.ago) }} ago</td>
 					<td>
 						<a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
 					{%- if package.has_related -%}
@@ -40,7 +40,7 @@
 			<tbody>
 			{% for package in removed %}
 				<tr>
-					<td>{{ macros.format_time_interval(package.ago) }}</td>
+					<td>{{ macros.format_time_interval(package.ago) }} ago</td>
 					<td>{{ package.effname }}</td>
 				</tr>
 			{% endfor %}
