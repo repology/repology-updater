@@ -263,7 +263,7 @@ WHERE effname IN (
 --------------------------------------------------------------------------------
 SELECT
 	count(DISTINCT effname)
-FROM metapackage_repocounts
+FROM metapackages
 WHERE num_families >= %(spread)s;
 
 
@@ -274,7 +274,7 @@ WHERE num_families >= %(spread)s;
 --------------------------------------------------------------------------------
 SELECT DISTINCT
 	effname
-FROM metapackage_repocounts
+FROM metapackages
 WHERE num_families >= %(spread)s
 LIMIT %(limit)s;
 
@@ -286,7 +286,7 @@ LIMIT %(limit)s;
 --------------------------------------------------------------------------------
 SELECT DISTINCT
 	effname
-FROM metapackage_repocounts
+FROM metapackages
 WHERE num_families = %(spread)s
 LIMIT %(limit)s;
 

@@ -144,26 +144,7 @@ CREATE TABLE statistics_history (
 	snapshot jsonb NOT NULL
 );
 
--- repo counts per metapackage
-CREATE MATERIALIZED VIEW metapackage_repocounts AS
-SELECT
-	effname,
-	count(DISTINCT repo)::smallint AS num_repos,
-	count(DISTINCT family)::smallint AS num_families,
-	count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5)::smallint AS num_repos_newest,
-	count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5)::smallint AS num_families_newest,
-	bool_and(shadow) AS shadow_only
-FROM packages
-GROUP BY effname
-ORDER BY effname
-WITH DATA;
-
-CREATE UNIQUE INDEX ON metapackage_repocounts(effname);
-CREATE INDEX ON metapackage_repocounts(num_repos);
-CREATE INDEX ON metapackage_repocounts(num_families);
-CREATE INDEX ON metapackage_repocounts(shadow_only, num_families);
-
--- table replacement for the former
+-- metapackages
 CREATE TABLE metapackages (
 	effname text NOT NULL PRIMARY KEY,
 	num_repos smallint NOT NULL,
@@ -208,7 +189,7 @@ SELECT
 	count(*) FILTER (WHERE versionclass = 9)::smallint AS num_packages_noscheme,
 	count(*) FILTER (WHERE versionclass = 10)::smallint AS num_packages_rolling,
 	max(num_families) = 1 AS unique
-FROM packages INNER JOIN metapackage_repocounts USING(effname)
+FROM packages INNER JOIN metapackages USING(effname)
 WHERE NOT shadow_only
 GROUP BY effname,repo
 WITH DATA;
@@ -222,7 +203,7 @@ SELECT
 	category,
 	effname,
 	max(num_families) = 1 AS unique
-FROM packages INNER JOIN metapackage_repocounts USING(effname)
+FROM packages INNER JOIN metapackages USING(effname)
 WHERE NOT shadow_only
 GROUP BY effname,category
 WITH DATA;

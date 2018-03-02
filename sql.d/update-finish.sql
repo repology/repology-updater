@@ -138,9 +138,8 @@ DO UPDATE SET
 -- Refresh views #2
 --------------------------------------------------------------------------------
 
-REFRESH MATERIALIZED VIEW CONCURRENTLY metapackage_repocounts;
-REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;
-REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;
+REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;  -- depends on metapackages
+REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;  -- depends on metapackages
 REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages;
 REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers;
 
@@ -414,7 +413,7 @@ DO UPDATE SET
 -- global statistics
 UPDATE statistics SET
 	num_packages = (SELECT count(*) FROM packages),
-	num_metapackages = (SELECT count(*) FROM metapackage_repocounts WHERE NOT shadow_only),
+	num_metapackages = (SELECT count(*) FROM metapackages WHERE NOT shadow_only),
 	num_problems = (SELECT count(*) FROM problems),
 	num_maintainers = (SELECT count(*) FROM maintainers);
 
