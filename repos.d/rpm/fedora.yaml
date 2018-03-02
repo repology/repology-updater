@@ -67,7 +67,7 @@
   family: fedora
   color: '294172'
   sources:
-    - name: development
+    - name: development  # XXX: update to release when it's ready
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/development/28/Everything/source/tree/
