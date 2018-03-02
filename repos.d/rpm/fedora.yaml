@@ -11,12 +11,12 @@
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/releases/26/Everything/source/tree/
-      subrepo: release
+      subrepo: '{source}'
     - name: updates
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/updates/26/SRPMS/
-      subrepo: updates
+      subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
@@ -41,12 +41,12 @@
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/releases/27/Everything/source/tree/
-      subrepo: release
+      subrepo: '{source}'
     - name: updates
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/updates/27/SRPMS/
-      subrepo: updates
+      subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
@@ -71,12 +71,12 @@
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/development/28/Everything/source/tree/
-      subrepo: development
+      subrepo: '{source}'
     - name: updates
       fetcher: Repodata
       parser: Repodata
       url: https://download.fedoraproject.org/pub/fedora/linux/updates/28/SRPMS/
-      subrepo: updates
+      subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
