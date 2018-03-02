@@ -185,6 +185,34 @@ WHERE effname IN (
 
 --------------------------------------------------------------------------------
 --
+-- !!get_recently_added_metapackages(limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
+SELECT
+	now() - first_seen AS ago,
+	effname
+FROM metapackages
+WHERE NOT shadow_only
+ORDER BY first_seen DESC, effname
+LIMIT %(limit)s;
+
+
+--------------------------------------------------------------------------------
+--
+-- !!get_recently_removed_metapackages(limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
+SELECT
+	now() - last_seen AS ago,
+	effname
+FROM dead_metapackages
+WHERE NOT shadow_only
+ORDER BY last_seen DESC, effname
+LIMIT %(limit)s;
+
+
+--------------------------------------------------------------------------------
+--
 -- !!get_metapackage_packages(effname, fields=None) -> array of packages
 --
 --------------------------------------------------------------------------------
