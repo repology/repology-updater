@@ -10,6 +10,7 @@
 - { setname: rawtherapee,              name: rawtherapee-unstable, ignore: true }
 - { setname: rdesktop,                 name: rdesktop-legacy }
 - { setname: readline,                 namepat: "(?:lib)?readline[0-9._-]*" }
+- { setname: rear,                     name: [rear118a,relax-and-recover] }
 - { setname: redeclipse,               name: red-eclipse }
 - { setname: redeclipse,               name: redeclipse-data, addflavor: data }
 - { setname: redland,                  name: [libredland,redland-mysql,redland-pgsql,redland-storage-mysql,redland-storage-postgresql,redland-storage-sqlite,redland-storage-virtuoso], addflavor: true }

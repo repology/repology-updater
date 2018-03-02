@@ -6,6 +6,7 @@
 - { setname: talloc,                   name: libtalloc }
 - { setname: talloc,                   name: talloc-man, addflavor: man }
 - { setname: talloc,                   name: talloc-static, addflavor: static }
+- { setname: tautulli,                 name: tautulli-beta, ignore: true }
 - { setname: tbb,                      name: [intel-tbb,libtbb] }
 - { setname: tcl,                      namepat: "tcl8[0-9._-]+" }
 - { setname: tdb,                      name: libtdb }

@@ -150,6 +150,8 @@
 - { setname: grass,                    namepat: "grass[0-9._-]+" }
 - { setname: graylog-collector-sidecar, name: collector-sidecar }
 - { setname: greed,                    name: greed-game }
+- { setname: greenbone-security-assistant, namepat: "greenbone-security-assistant[0-9._-]+" }
+- { setname: greenbone-security-assistant, name: greenbone-security-assistant-alternative, addflavor: alternative }
 - { setname: groovy,                   name: groovy-docs, addflavor: docs }
 - { setname: groovy,                   name: groovysdk }
 - { setname: groovy,                   namepat: "groovy[0-9._-]+" }

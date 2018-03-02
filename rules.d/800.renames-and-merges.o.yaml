@@ -3,6 +3,7 @@
 - { setname: ogre,                     name: [ogre-docs,ogre-samples], addflavor: true }
 - { setname: ogre,                     name: ogre3d }
 - { setname: ogre,                     namepat: "ogre[0-9._-]+" }
+- { setname: onehouronelife,           namepat: onehouronelife-latest, rolling: true }
 - { setname: open-vm-tools,            name: [open-vm-tools-dkms,open-vm-tools-lts-trusty,open-vm-tools-nox11], addflavor: true }
 - { setname: openal,                   name: [openal-static,openal-examples], addflavor: true }
 - { setname: openbabel,                name: open-babel }
@@ -38,10 +39,10 @@
 - { setname: opentyrian,               name: open-tyrian }
 - { setname: openvpn,                  name: [openvpn-mbedtls,openvpn-polarssl,openvpn2,openvpn23] }
 - { setname: openzwave,                name: open-zwave }
-- { setname: opus,                     name: libopus }
-- { setname: opusfile,                 name: libopusfile }
 - { setname: openssl,                  namepat: "(?:lib)?openssl(?:[0-9._-]*|[0-9._-]+[a-z]?)?" }
 - { setname: openssl,                  name: openssl-devel }
+- { setname: opus,                     name: libopus }
+- { setname: opusfile,                 name: libopusfile }
 - { setname: orafce,                   namepat: "(postgresql[0-9._-]*)-orafce", addflavor: $1 }
 
 - setname: openssh

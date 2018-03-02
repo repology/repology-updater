@@ -4,12 +4,20 @@
 - { setname: hashcat,                  name: hashcat-legacy }
 - { setname: haxe,                     name: haxe2 }
 - { setname: haxe,                     name: haxe_bin, addflavor: bin }
+- { setname: hdf,                      name: hdf4 }
+- { setname: hdf,                      name: [hdf4-alt,hdf4-nonetcdf], addflavor: true }
+- { setname: hdf5,                     namepat: "hdf5-[0-9._-]*(gnu.*)", addflavor: $1 }
+- { setname: hdf5,                     name: [libhdf5,hdf5-18] }
+- { setname: hdf5,                     name: hdf5-18 }
+- { setname: hdf5,                     name: hdf5-18-cpp-fortran, addflavor: cpp-fortran }
+- { setname: hdf5,                     name: [hdf5-c++,hdf5-cpp,hdf5-cpp-fortran,hdf5-fortran,hdf5-mpi,hdf5-mvapich2,hdf5-openmpi,hdf5-openmpi-java,hdf5-parallel-openmpi,hdf5-salome,hdf5-threadsafe], addflavor: true }
 - { setname: hedgewars,                name: hedgewars-server, addflavor: server }
 - { setname: help-hannahs-horse,       name: hannah, family: debuntu } # recheck
 - { setname: hermes,                   name: libhermes }
 - { setname: hgflow,                   name: hg-flow }
 - { setname: hitori,                   name: gnome-games-hitori }
 - { setname: hledger$1,                namepat: "haskell:hledger(.*)" } # note: has overlapping reverse rule in 800.renames-and-merges.haskell
+- { setname: hmmer,                    namepat: "hmmer[0-9._-]+" }
 - { setname: home-assistant,           name: homeassistant }
 - { setname: hostapd,                  name: [hostapd-rtl,hostapd-rtl871xdrv,hostapd1] }
 - { setname: hsqldb,                   namepat: "hsqldb[0-9._-]+" }
