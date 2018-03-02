@@ -9,7 +9,9 @@
 - { setname: barbie-seahorse-adventures, name: seahorse-adventures }
 - { setname: barcode,                  name: gnu-barcode }
 - { setname: base,                     name: acidbase }
-- { setname: bash,                     name: bash-interactive, addflavor: interactive }
+- { setname: bash,                     name: [bash-interactive,bash-minimal,bash-static], addflavor: true }
+- { setname: bash,                     name: bash-devel, ignore: true }
+- { setname: bash,                     name: bash-devel-static, ignore: true, addflavor: bash-static }
 - { setname: bash,                     namepat: "bash[0-9]+" }
 - { setname: bats,                     name: bash-bats }
 - { setname: baudline,                 name: linux-baudline, family: freebsd }
