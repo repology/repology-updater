@@ -19,7 +19,12 @@
 			{% for package in added %}
 				<tr>
 					<td>{{ macros.format_time_interval(package.ago) }}</td>
-					<td><a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a></td>
+					<td>
+						<a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
+					{%- if package.has_related -%}
+						<a href="{{ url_for("metapackage_related", name=package.effname) }}">∗</a>
+					{% endif %}
+					</td>
 				</tr>
 			{% endfor %}
 			</tbody>

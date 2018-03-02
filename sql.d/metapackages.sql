@@ -190,7 +190,8 @@ WHERE effname IN (
 --------------------------------------------------------------------------------
 SELECT
 	now() - first_seen AS ago,
-	effname
+	effname,
+	has_related
 FROM metapackages
 WHERE NOT shadow_only
 ORDER BY first_seen DESC, effname
