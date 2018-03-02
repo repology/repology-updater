@@ -49,5 +49,5 @@ def statistics(sorting=None):
         repostats=repostats,
         showmedals=showmedals,
         repostats_old={},  # {repo['name']: repo for repo in get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 7)},
-        num_metapackages=get_db().get_metapackages_count()
+        counts=get_db().get_counts()
     )
