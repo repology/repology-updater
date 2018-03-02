@@ -215,7 +215,6 @@ WITH DATA;
 
 CREATE UNIQUE INDEX ON repo_metapackages(repo, effname);
 CREATE INDEX ON repo_metapackages(effname);
-CREATE INDEX repo_metapackages_effname_trgm ON repo_metapackages USING gin (effname gin_trgm_ops);
 
 -- metapackages per category
 CREATE MATERIALIZED VIEW category_metapackages AS
