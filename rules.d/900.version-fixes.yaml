@@ -683,7 +683,9 @@
 - { name: pcc,                         verpat: "20[0-9]{6}",                               ignore: true }
 - { name: pcc-libs,                    verpat: "20[0-9]{6}",                               ignore: true }
 - { name: pciids,                                                    family: sisyphus,     ignore: true } # ALT pick random date instead of official date version
-- { name: pcre,                        ver: "10.31",                 family: fedora,       ignore: true } # fake, not released
+- { name: pcre,                        ver: "8.42",                  family: fedora,       incorrect: true } # fake, not released
+- { name: pcre,                                                      family: fedora,       untrusted: true }
+- { name: pcre2,                                                     family: fedora,       untrusted: true }
 - { name: pcsx2,                       verpat: ".*[0-9]{4,}.*",                            ignore: true }
 - { namepat: "perl:(.*)",              family: [ gentoo, mageia, rosa, macports, pclinuxos, openmandriva ], ignore: true } # perl module name manging
 - { name: "perl:anyevent",             ver: "7.70.0",                                      ignore: true }
