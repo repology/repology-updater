@@ -30,6 +30,7 @@
 - { setname: rss2email,                name: "python:rss2email" }
 - { setname: rss2email,                name: r2e }
 - { setname: rtaudio,                  name: rt-audio }
+- { setname: rtl8814au,                name: rtl8814au-dkms, addflavor: dkms }
 - { setname: rtorrent,                 name: [rtorrent-cdl,rtorrent-color,rtorrent-ipv6,rtorrent-vi-color], addflavor: true }
 - { setname: rtv,                      name: rtv-py36, addflavor: py36 }
 - { setname: rust-dwm-status,          name: "rust:rust-dwm-status" }

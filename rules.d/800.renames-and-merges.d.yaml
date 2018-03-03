@@ -31,6 +31,7 @@
 - { setname: dhcp,                     namepat: "isc-dhcp[0-9]*-(client|server|relay)", addflavor: $1 }
 - { setname: dhewm3,                   name: iodoom3-dhewm3 }
 - { setname: diffoscope,               name: "python:diffoscope" }
+- { setname: digitalbitbox,            name: [dbb-app,dbb-cli,digital-bitbox-app] }
 - { setname: dino,                     name: dino-unstable, ignore: true }
 - { setname: discord,                  name: discord-bin }
 - { setname: divide-and-succeed,       name: divideandsucceed }

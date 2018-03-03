@@ -23,6 +23,8 @@
 - { setname: gdk-pixbuf,               namepat: "(?:lib)?gdk-pixbuf[0-9._-]*(\\+svg|-jasper|-xlib)?" }
 - { setname: geany-plugins,            namepat: "geany-plugin-.*", family: freebsd }
 - { setname: gearmand,                 name: [gearmand-devel,gearman] }
+- { setname: geckodriver,              name: geckodriver-unstable, ignore: true }
+- { setname: geckodriver,              name: selenium-gecko-driver }
 - { setname: geeknote,                 name: "python:geeknote" }
 - { setname: geki2,                    name: geki2-kxl, family: gentoo } # XXX: recheck
 - { setname: geki3,                    name: geki3-kxl, family: gentoo } # XXX: recheck

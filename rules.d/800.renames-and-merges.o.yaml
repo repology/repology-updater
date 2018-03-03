@@ -1,5 +1,6 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: octave,                   namepat: "octave[0-9._-]+" }
 - { setname: ogre,                     name: [ogre-docs,ogre-samples], addflavor: true }
 - { setname: ogre,                     name: ogre3d }
 - { setname: ogre,                     namepat: "ogre[0-9._-]+" }
@@ -36,6 +37,7 @@
 - { setname: openttd-$0,               namepat: openmsx, wwwpart: openttd }
 - { setname: openttd-open$1,           namepat: "openttd[-_](gfx|sfx|msx)" }
 - { setname: openttd-opengfx,          name: openttd-opengfx-snapshot, ignore: true }
+- { setname: opentx,                   name: [opentx-companion,opentx-companion21] }
 - { setname: opentyrian,               name: open-tyrian }
 - { setname: openvpn,                  name: [openvpn-mbedtls,openvpn-polarssl,openvpn2,openvpn23] }
 - { setname: openzwave,                name: open-zwave }
