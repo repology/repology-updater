@@ -52,4 +52,5 @@
 - { setname: lxc,                      name: lxc-selinux }
 - { setname: lxd,                      name: lxc, family: homebrew } # misname
 - { setname: lxd,                      name: lxd-lts }
+- { setname: lyx,                      name: lyx1 }
 - { setname: lz4,                      name: liblz4 } # XXX: reverse?
