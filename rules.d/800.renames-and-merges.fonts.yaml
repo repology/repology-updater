@@ -23,6 +23,12 @@
     - sourcecodepro-fonts
     - sourcecodepro-ttf
 
+- setname: "fonts:adobe-utopia-type1"
+  name:
+    - font-adobe-utopia-type1
+    - x11-font-adobe-utopia-type1
+    - xorg-font-adobe-utopia-type1
+
 - setname: "fonts:alee"
   name:
     - alee-fonts
@@ -86,6 +92,12 @@
     - fonts-arabeyes
     - fonts-ttf-arabic-arabeyes
     - ttf-arabeyes-fonts
+
+- setname: "fonts:arabic-misc"
+  name:
+    - font-arabic-misc
+    - x11-font-arabic-misc
+    - xorg-font-arabic-misc
 
 - setname: "fonts:arkpandora"
   name:
@@ -166,6 +178,12 @@
     - fonts-beteckna
     - fonts-otf-beteckna
     - ttf-beteckna
+
+- setname: "fonts:bh-type1"
+  name:
+    - font-bh-type1
+    - x11-font-bh-type1
+    - xorg-font-bh-type1
 
 - setname: "fonts:bitstream-speedo"
   name:
@@ -771,6 +789,12 @@
     - ttf-humor-sans
 
 # I
+- setname: "fonts:ibm-type1"
+  name:
+    - font-ibm-type1
+    - x11-font-ibm-type1
+    - xorg-font-ibm-type1
+
 - setname: "fonts:inconsolata"
   name:
     - font-inconsolata
@@ -1695,6 +1719,12 @@
 
 # X
 - { setname: "fonts:$1-$2",            namepat: "(?:font-|fonts-|x11-font-|xorg-font-)(adobe|adobe-utopia|bh|bh-lucidatypewriter|bitstream)-?((?:75|100)dpi)" } # xorg
+
+- setname: "fonts:xfree86-type1"
+  name:
+    - font-xfree86-type1
+    - x11-font-xfree86-type1
+    - xorg-font-xfree86-type1
 
 # Y
 - setname: "fonts:yanone-kaffeesatz"
