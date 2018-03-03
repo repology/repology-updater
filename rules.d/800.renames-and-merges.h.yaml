@@ -6,7 +6,7 @@
 - { setname: haxe,                     name: haxe_bin, addflavor: bin }
 - { setname: hdf,                      name: hdf4 }
 - { setname: hdf,                      name: [hdf4-alt,hdf4-nonetcdf], addflavor: true }
-- { setname: hdf5,                     namepat: "hdf5-[0-9._-]*(gnu.*)", addflavor: $1 }
+- { setname: hdf5,                     namepat: "hdf5[0-9._-]*(gnu.*)", addflavor: $1 }
 - { setname: hdf5,                     name: [libhdf5,hdf5-18] }
 - { setname: hdf5,                     name: hdf5-18 }
 - { setname: hdf5,                     name: hdf5-18-cpp-fortran, addflavor: cpp-fortran }
