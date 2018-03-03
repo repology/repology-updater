@@ -37,16 +37,14 @@ class RepositoryManager:
         for repo in self.repositories:
             newsources = []
             for source in repo['sources']:
-                if isinstance(source['name'], list):
-                    for name in source['name']:
-                        newsource = source.copy()
-                        for key in newsource.keys():
-                            if isinstance(newsource[key], str):
-                                newsource[key] = newsource[key].replace('{source}', name)
-                        newsource['name'] = name
-                        newsources.append(newsource)
-                else:
-                    newsources.append(source)
+                names = source['name'] if isinstance(source['name'], list) else [source['name']]
+                for name in names:
+                    newsource = source.copy()
+                    for key in newsource.keys():
+                        if isinstance(newsource[key], str):
+                            newsource[key] = newsource[key].replace('{source}', name)
+                    newsource['name'] = name
+                    newsources.append(newsource)
 
             repo['sources'] = newsources
 
