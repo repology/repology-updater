@@ -14,6 +14,7 @@
 - { setname: hedgewars,                name: hedgewars-server, addflavor: server }
 - { setname: help-hannahs-horse,       name: hannah, family: debuntu } # recheck
 - { setname: hermes,                   name: libhermes }
+- { setname: hexchat,                  name: hexchat-python2, addflavor: python2 }
 - { setname: hgflow,                   name: hg-flow }
 - { setname: hitori,                   name: gnome-games-hitori }
 - { setname: hledger$1,                namepat: "haskell:hledger(.*)" } # note: has overlapping reverse rule in 800.renames-and-merges.haskell
