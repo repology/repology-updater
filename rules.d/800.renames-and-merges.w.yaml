@@ -28,6 +28,9 @@
 - { setname: wings3d,                  name: wings }
 - { setname: wire,                     name: wire-desktop }
 - { setname: wire,                     name: wire-desktop-beta, devel: true }
+- { setname: wireguard,                name: wg }
+- { setname: wireguard,                name: [wireguard-dkms,wireguard-tools,wireguard-module-arch], addflavor: true }
+- { setname: wireguard,                name: wireguard-vanilla }
 - { setname: wireless-regdb,           name: wireless-regdb-pentest, addflavor: pentest }
 - { setname: wireshark,                name: [wireshark-cli,wireshark-common,wireshark-gtk,wireshark-gtk2,wireshark-headers,wireshark-lite,wireshark-qt,wireshark-qt5,tshark,tshark-lite], addflavor: true }
 - { setname: wireshark,                name: [wireshark2,wireshark22] }
