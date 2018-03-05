@@ -300,6 +300,8 @@
 - { name: racer, wwwpart: hippo, setname: racer-game }
 - { name: racer, setname: "rust:racer" }
 
+- { name: roundup, wwwpart: mizerany, setname: sh-roundup } # taken name already used in parabola/hyperbola
+
 - { name: rsync, wwwpart: cwrsync, setname: cwrsync }
 
 - { name: ruby, wwwpart: rubyinstaller, setname: rubyinstaller }
