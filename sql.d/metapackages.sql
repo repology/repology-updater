@@ -32,7 +32,7 @@ WHERE effname IN (
 	FROM metapackages
 	WHERE
 		(
-			NOT shadow_only
+			num_repos_nonshadow > 0
 {% if pivot %}
 		) AND (
 			-- pivot condition
@@ -193,7 +193,7 @@ SELECT
 	effname,
 	has_related
 FROM metapackages
-WHERE NOT shadow_only
+WHERE num_repos_nonshadow > 0
 ORDER BY first_seen DESC, effname
 LIMIT %(limit)s;
 
@@ -206,8 +206,8 @@ LIMIT %(limit)s;
 SELECT
 	now() - last_seen AS ago,
 	effname
-FROM dead_metapackages
-WHERE NOT shadow_only
+FROM metapackages
+WHERE num_repos = 0
 ORDER BY last_seen DESC, effname
 LIMIT %(limit)s;
 
@@ -293,7 +293,7 @@ WHERE effname IN (
 SELECT
 	count(DISTINCT effname)
 FROM metapackages
-WHERE num_families >= %(spread)s;
+WHERE num_repos_nonshadow > 0 AND num_families >= %(spread)s;
 
 
 --------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ WHERE num_families >= %(spread)s;
 SELECT DISTINCT
 	effname
 FROM metapackages
-WHERE num_families >= %(spread)s
+WHERE num_repos_nonshadow > 0 AND num_families >= %(spread)s
 LIMIT %(limit)s;
 
 
@@ -316,7 +316,7 @@ LIMIT %(limit)s;
 SELECT DISTINCT
 	effname
 FROM metapackages
-WHERE num_families = %(spread)s
+WHERE num_repos_nonshadow > 0 AND num_families = %(spread)s
 LIMIT %(limit)s;
 
 

@@ -48,7 +48,6 @@ DROP TABLE IF EXISTS links CASCADE;
 DROP TABLE IF EXISTS problems CASCADE;
 DROP TABLE IF EXISTS reports CASCADE;
 DROP TABLE IF EXISTS metapackages CASCADE;
-DROP TABLE IF EXISTS dead_metapackages CASCADE;
 
 --------------------------------------------------------------------------------
 -- Main packages table
@@ -89,29 +88,25 @@ CREATE INDEX ON packages(effname);
 CREATE TABLE metapackages (
 	effname text NOT NULL PRIMARY KEY,
 	num_repos smallint NOT NULL,
+	num_repos_nonshadow smallint NOT NULL,
 	num_families smallint NOT NULL,
 	num_repos_newest smallint NOT NULL,
 	num_families_newest smallint NOT NULL,
-	shadow_only boolean NOT NULL,
 	has_related boolean NOT NULL DEFAULT false,
 	first_seen timestamp with time zone NOT NULL,
 	last_seen timestamp with time zone NOT NULL
 );
 
-CREATE INDEX ON metapackages(num_repos);
-CREATE INDEX ON metapackages(num_families);
-CREATE INDEX ON metapackages(shadow_only, num_families);
-CREATE INDEX ON metapackages(first_seen);
-CREATE INDEX metapackages_effname_trgm ON metapackages USING gin (effname gin_trgm_ops);
+-- indexes for metapackage quries
+CREATE INDEX ON metapackages(num_repos) WHERE (num_repos_nonshadow > 0);
+CREATE INDEX ON metapackages(num_families) WHERE (num_repos_nonshadow > 0);
+CREATE INDEX metapackages_effname_trgm ON metapackages USING gin (effname gin_trgm_ops) WHERE (num_repos_nonshadow > 0);
 
-CREATE TABLE dead_metapackages (
-	effname text NOT NULL PRIMARY KEY,
-	shadow_only boolean NOT NULL,
-	first_seen timestamp with time zone NOT NULL,
-	last_seen timestamp with time zone NOT NULL
-);
+-- index for recently_added
+CREATE INDEX ON metapackages(first_seen) WHERE (num_repos_nonshadow > 0);
 
-CREATE INDEX ON dead_metapackages(last_seen);
+-- index for recently_removed
+CREATE INDEX ON metapackages(last_seen) WHERE (num_repos = 0);
 
 --------------------------------------------------------------------------------
 -- Metapackages by repo/category/maintainer
@@ -135,7 +130,7 @@ SELECT
 	count(*) FILTER (WHERE versionclass = 10)::smallint AS num_packages_rolling,
 	max(num_families) = 1 AS unique
 FROM packages INNER JOIN metapackages USING(effname)
-WHERE NOT shadow_only
+WHERE num_repos_nonshadow > 0
 GROUP BY effname,repo
 WITH DATA;
 
@@ -149,7 +144,7 @@ SELECT
 	effname,
 	max(num_families) = 1 AS unique
 FROM packages INNER JOIN metapackages USING(effname)
-WHERE NOT shadow_only
+WHERE num_repos_nonshadow > 0
 GROUP BY effname,category
 WITH DATA;
 

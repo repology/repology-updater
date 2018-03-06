@@ -35,6 +35,7 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations;
 UPDATE metapackages
 SET
 	num_repos = 0,
+	num_repos_nonshadow = 0,
 	num_families = 0,
 	num_repos_newest = 0,
 	num_families_newest = 0,
@@ -45,20 +46,20 @@ INSERT
 INTO metapackages (
 	effname,
 	num_repos,
+	num_repos_nonshadow,
 	num_families,
 	num_repos_newest,
 	num_families_newest,
-	shadow_only,
 	first_seen,
 	last_seen
 )
 SELECT
     effname,
     count(DISTINCT repo),
+    count(DISTINCT repo) FILTER (WHERE NOT shadow),
     count(DISTINCT family),
     count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5),
     count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5),
-    bool_and(shadow),
 	now(),
 	now()
 FROM packages
@@ -66,10 +67,10 @@ GROUP BY effname
 ON CONFLICT (effname)
 DO UPDATE SET
 	num_repos = EXCLUDED.num_repos,
+	num_repos_nonshadow = EXCLUDED.num_repos_nonshadow,
 	num_families = EXCLUDED.num_families,
 	num_repos_newest = EXCLUDED.num_repos_newest,
 	num_families_newest = EXCLUDED.num_families_newest,
-	shadow_only = EXCLUDED.shadow_only,
 	last_seen = now();
 
 -- update metapackages: related
@@ -85,54 +86,6 @@ WHERE
 		USING (url)
 		WHERE url_relations2.effname != url_relations.effname
 	);
-
--- handle metapackage resurrections
-WITH resurrected_metapackages AS (
-	DELETE
-	FROM dead_metapackages
-	WHERE
-		effname IN (
-			SELECT effname FROM metapackages
-		)
-	RETURNING
-		effname,
-		first_seen,
-		last_seen
-)
-UPDATE metapackages
-SET
-	first_seen = least(metapackages.first_seen, resurrected_metapackages.first_seen),
-	last_seen = greatest(metapackages.last_seen, resurrected_metapackages.last_seen)
-FROM resurrected_metapackages
-WHERE
-	metapackages.effname = resurrected_metapackages.effname;
-
--- handle metapackages deaths
-WITH deceased_metapackages AS (
-	DELETE
-	FROM metapackages
-	WHERE
-		num_repos = 0
-	RETURNING
-		effname,
-		shadow_only,
-		first_seen,
-		last_seen
-)
-INSERT
-INTO dead_metapackages (
-	effname,
-	shadow_only,
-	first_seen,
-	last_seen
-)
-SELECT
-	*
-FROM deceased_metapackages
-ON CONFLICT (effname)
-DO UPDATE SET
-	first_seen = least(dead_metapackages.first_seen, EXCLUDED.first_seen),
-	last_seen = greatest(dead_metapackages.last_seen, EXCLUDED.last_seen);
 
 --------------------------------------------------------------------------------
 -- Refresh views #2
@@ -413,7 +366,7 @@ DO UPDATE SET
 -- global statistics
 UPDATE statistics SET
 	num_packages = (SELECT count(*) FROM packages),
-	num_metapackages = (SELECT count(*) FROM metapackages WHERE NOT shadow_only),
+	num_metapackages = (SELECT count(*) FROM metapackages WHERE num_repos_nonshadow > 0),
 	num_problems = (SELECT count(*) FROM problems),
 	num_maintainers = (SELECT count(*) FROM maintainers);
 
