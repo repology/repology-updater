@@ -126,7 +126,7 @@
 - { setname: gnupg,                    namepat: "gnupg[0-9]+" }
 - { setname: gnupg,                    namepat: "gpg[0-9]+" }
 - { setname: gnuplot,                  namepat: "gnuplot[0-9._-]+" }
-- { setname: gnuplot,                  name: [gnuplot-caca,gnuplot-headless,gnuplot-litegnuplot-nogui,gnuplot-tex-extras], addflavor: true }
+- { setname: gnuplot,                  name: [gnuplot-caca,gnuplot-headless,gnuplot-lite,gnuplot-nogui,gnuplot-tex-extras], addflavor: true }
 - { setname: gnuplot,                  name: gnuplot-cvs-pdflib, ignore: true }
 - { setname: gnurl,                    name: libgnurl }
 - { setname: gnushogi,                 name: gnu-shogi }
