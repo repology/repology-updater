@@ -36,7 +36,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
--- tables
+--------------------------------------------------------------------------------
+-- DROPs
+--------------------------------------------------------------------------------
 DROP TABLE IF EXISTS packages CASCADE;
 DROP TABLE IF EXISTS repositories CASCADE;
 DROP TABLE IF EXISTS repositories_history CASCADE;
@@ -48,6 +50,9 @@ DROP TABLE IF EXISTS reports CASCADE;
 DROP TABLE IF EXISTS metapackages CASCADE;
 DROP TABLE IF EXISTS dead_metapackages CASCADE;
 
+--------------------------------------------------------------------------------
+-- Main packages table
+--------------------------------------------------------------------------------
 CREATE TABLE packages (
 	repo text NOT NULL,
 	family text NOT NULL,
@@ -78,72 +83,9 @@ CREATE TABLE packages (
 
 CREATE INDEX ON packages(effname);
 
--- This should be used in queries instead of packages table
--- everywhere where shadow metapackages need to be ignored
---
--- XXX: may also investigate using NOT IN (HAVING bool_and())
--- variant of this query
-CREATE VIEW packages_ns AS
-SELECT *
-FROM PACKAGES
-WHERE effname IN (
-	SELECT effname
-	FROM packages
-	GROUP BY effname
-	HAVING NOT bool_and(shadow)
-);
-
--- repositories
-CREATE TABLE repositories (
-	name text NOT NULL PRIMARY KEY,
-
-	num_packages integer NOT NULL DEFAULT 0,
-	num_packages_newest integer NOT NULL DEFAULT 0,
-	num_packages_outdated integer NOT NULL DEFAULT 0,
-	num_packages_ignored integer NOT NULL DEFAULT 0,
-	num_packages_unique integer NOT NULL DEFAULT 0,
-	num_packages_devel integer NOT NULL DEFAULT 0,
-	num_packages_legacy integer NOT NULL DEFAULT 0,
-	num_packages_incorrect integer NOT NULL DEFAULT 0,
-	num_packages_untrusted integer NOT NULL DEFAULT 0,
-	num_packages_noscheme integer NOT NULL DEFAULT 0,
-	num_packages_rolling integer NOT NULL DEFAULT 0,
-
-	num_metapackages integer NOT NULL DEFAULT 0,
-	num_metapackages_unique integer NOT NULL DEFAULT 0,
-	num_metapackages_newest integer NOT NULL DEFAULT 0,
-	num_metapackages_outdated integer NOT NULL DEFAULT 0,
-	num_metapackages_comparable integer NOT NULL DEFAULT 0,
-
-	last_update timestamp with time zone,
-
-	num_problems integer NOT NULL DEFAULT 0,
-	num_maintainers integer NOT NULL DEFAULT 0
-);
-
--- repository_history
-CREATE TABLE repositories_history (
-	ts timestamp with time zone NOT NULL PRIMARY KEY,
-	snapshot jsonb NOT NULL
-);
-
--- statistics
-CREATE TABLE statistics (
-	num_packages integer NOT NULL DEFAULT 0,
-	num_metapackages integer NOT NULL DEFAULT 0,
-	num_problems integer NOT NULL DEFAULT 0,
-	num_maintainers integer NOT NULL DEFAULT 0
-);
-
-INSERT INTO statistics VALUES(DEFAULT);
-
--- statistics_history
-CREATE TABLE statistics_history (
-	ts timestamp with time zone NOT NULL PRIMARY KEY,
-	snapshot jsonb NOT NULL
-);
-
--- metapackages
+--------------------------------------------------------------------------------
+-- Metapackages
+--------------------------------------------------------------------------------
 CREATE TABLE metapackages (
 	effname text NOT NULL PRIMARY KEY,
 	num_repos smallint NOT NULL,
@@ -171,7 +113,11 @@ CREATE TABLE dead_metapackages (
 
 CREATE INDEX ON dead_metapackages(last_seen);
 
--- package class counts aggregated for each metapackage/repo
+--------------------------------------------------------------------------------
+-- Metapackages by repo/category/maintainer
+--------------------------------------------------------------------------------
+
+-- per-repository
 CREATE MATERIALIZED VIEW repo_metapackages AS
 SELECT
 	repo,
@@ -196,7 +142,7 @@ WITH DATA;
 CREATE UNIQUE INDEX ON repo_metapackages(repo, effname);
 CREATE INDEX ON repo_metapackages(effname);
 
--- metapackages per category
+-- per-category
 CREATE MATERIALIZED VIEW category_metapackages AS
 SELECT
 	category,
@@ -210,7 +156,7 @@ WITH DATA;
 CREATE UNIQUE INDEX ON category_metapackages(category, effname);
 CREATE INDEX ON category_metapackages(effname);
 
--- maintainer_metapackages
+-- per-maintainer
 CREATE MATERIALIZED VIEW maintainer_metapackages AS
 SELECT
 	unnest(maintainers) as maintainer,
@@ -233,7 +179,11 @@ WITH DATA;
 CREATE UNIQUE INDEX ON maintainer_metapackages(maintainer, effname);
 CREATE INDEX ON maintainer_metapackages(effname);
 
--- maintainers
+--------------------------------------------------------------------------------
+-- Maintainers
+--------------------------------------------------------------------------------
+
+-- XXX: kill this in favor of table
 CREATE MATERIALIZED VIEW maintainers AS
 SELECT *
 FROM (
@@ -292,7 +242,61 @@ WITH DATA;
 
 CREATE UNIQUE INDEX ON maintainers(maintainer);
 
--- links for link checker
+--------------------------------------------------------------------------------
+-- Per-repository and global statistics and their history
+--------------------------------------------------------------------------------
+CREATE TABLE repositories (
+	name text NOT NULL PRIMARY KEY,
+
+	num_packages integer NOT NULL DEFAULT 0,
+	num_packages_newest integer NOT NULL DEFAULT 0,
+	num_packages_outdated integer NOT NULL DEFAULT 0,
+	num_packages_ignored integer NOT NULL DEFAULT 0,
+	num_packages_unique integer NOT NULL DEFAULT 0,
+	num_packages_devel integer NOT NULL DEFAULT 0,
+	num_packages_legacy integer NOT NULL DEFAULT 0,
+	num_packages_incorrect integer NOT NULL DEFAULT 0,
+	num_packages_untrusted integer NOT NULL DEFAULT 0,
+	num_packages_noscheme integer NOT NULL DEFAULT 0,
+	num_packages_rolling integer NOT NULL DEFAULT 0,
+
+	num_metapackages integer NOT NULL DEFAULT 0,
+	num_metapackages_unique integer NOT NULL DEFAULT 0,
+	num_metapackages_newest integer NOT NULL DEFAULT 0,
+	num_metapackages_outdated integer NOT NULL DEFAULT 0,
+	num_metapackages_comparable integer NOT NULL DEFAULT 0,
+
+	last_update timestamp with time zone,
+
+	num_problems integer NOT NULL DEFAULT 0,
+	num_maintainers integer NOT NULL DEFAULT 0
+);
+
+-- repository_history
+CREATE TABLE repositories_history (
+	ts timestamp with time zone NOT NULL PRIMARY KEY,
+	snapshot jsonb NOT NULL
+);
+
+-- statistics
+CREATE TABLE statistics (
+	num_packages integer NOT NULL DEFAULT 0,
+	num_metapackages integer NOT NULL DEFAULT 0,
+	num_problems integer NOT NULL DEFAULT 0,
+	num_maintainers integer NOT NULL DEFAULT 0
+);
+
+INSERT INTO statistics VALUES(DEFAULT);
+
+-- statistics_history
+CREATE TABLE statistics_history (
+	ts timestamp with time zone NOT NULL PRIMARY KEY,
+	snapshot jsonb NOT NULL
+);
+
+--------------------------------------------------------------------------------
+-- Links
+--------------------------------------------------------------------------------
 CREATE TABLE links (
 	url text NOT NULL PRIMARY KEY,
 	first_extracted timestamp with time zone NOT NULL,
@@ -306,7 +310,9 @@ CREATE TABLE links (
 	location text
 );
 
--- problems
+--------------------------------------------------------------------------------
+-- Problems
+--------------------------------------------------------------------------------
 CREATE TABLE problems (
 	repo text NOT NULL,
 	name text NOT NULL,
@@ -319,7 +325,9 @@ CREATE INDEX ON problems(effname);
 CREATE INDEX ON problems(repo, effname);
 CREATE INDEX ON problems(maintainer);
 
--- reports
+--------------------------------------------------------------------------------
+-- Reports
+--------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS reports (
 	id integer GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
 	created timestamp with time zone NOT NULL,
@@ -334,7 +342,9 @@ CREATE TABLE IF NOT EXISTS reports (
 
 CREATE INDEX ON reports(effname);
 
--- url_relations
+--------------------------------------------------------------------------------
+-- Url relations
+--------------------------------------------------------------------------------
 CREATE MATERIALIZED VIEW url_relations AS
 SELECT DISTINCT
 	effname,
