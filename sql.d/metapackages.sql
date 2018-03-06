@@ -239,7 +239,7 @@ SELECT
 	(num_families-1)/extract(epoch FROM now() - first_seen) * 60 * 60 * 24 * 7 AS perday
 FROM metapackages
 WHERE
-	num_families > 1 AND num_families < 5
+	num_families > 1 AND num_families < 4
 ORDER BY perday DESC, effname
 LIMIT %(limit)s;
 
