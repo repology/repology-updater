@@ -40,7 +40,7 @@ def metapackages(bound=None):
         return get_db().query_metapackages(
             **request.__dict__,
             limit=config['METAPACKAGES_PER_PAGE'],
-            fields=['repo', 'family', 'effname', 'version', 'versionclass', 'maintainers']
+            fields=['repo', 'family', 'effname', 'version', 'versionclass', 'maintainers', 'flags']
         )
 
     packages = get_packages(request)
