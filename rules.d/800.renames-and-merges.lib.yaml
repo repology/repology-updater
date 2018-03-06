@@ -58,6 +58,7 @@
 - { setname: liborcus,                 name: [orcus,orcus0.12] }
 - { setname: libosmium,                name: osmium }
 - { setname: libosmpbf,                name: osmpbf }
+- { setname: libp11,                   name: libp11-openssl1.1, addflavor: true }
 - { setname: libpaper,                 name: libpaper1 }
 - { setname: libpng,                   name: [png,libpng-apng] }
 - { setname: libpng,                   namepat: "libpng(?:-legacy)?[0-9.-]*" }

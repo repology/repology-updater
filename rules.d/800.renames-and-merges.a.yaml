@@ -98,6 +98,7 @@
 - { setname: archiva,                  name: apache-archiva }
 - { setname: ardour,                   namepat: "ardour[0-9]+" }
 - { setname: arduino,                  namepat: "arduino[0-9._-]+" }
+- { setname: arena-tracker,            name: arenatracker }
 - { setname: argon2,                   name: libargon2 }
 - { setname: argus,                    name: argus-sasl, family: freebsd }
 - { setname: argyllcms,                name: [argyll,argyll-cms] }

@@ -4,6 +4,7 @@
 - { setname: ogre,                     name: [ogre-docs,ogre-samples], addflavor: true }
 - { setname: ogre,                     name: ogre3d }
 - { setname: ogre,                     namepat: "ogre[0-9._-]+" }
+- { setname: ombi,                     name: [ombi-beta,ombi-dev] }
 - { setname: onehouronelife,           namepat: onehouronelife-latest, rolling: true }
 - { setname: open-vm-tools,            name: [open-vm-tools-dkms,open-vm-tools-lts-trusty,open-vm-tools-nox11], addflavor: true }
 - { setname: openal,                   name: [openal-static,openal-examples], addflavor: true }
@@ -26,6 +27,8 @@
 - { setname: openoffice,               name: apache-openoffice-devel, ignore: true }
 - { setname: openoffice,               name: openoffice-bin, addflavor: bin }
 - { setname: openoffice,               name: openoffice.org }
+- { setname: opensc,                   namepat: "opensc[0-9._-]+" }
+- { setname: opensc,                   name: opensc-openct, addflavor: openct }
 - { setname: openscenegraph,           name: [openscenegraph-qt,openscenegraph-qt4,open-scene-graph] }
 - { setname: openscenegraph,           namepat: "openscenegraph[0-9.-]+" }
 - { setname: openscenegraph,           namepat: "osg(?:-devel)?" }

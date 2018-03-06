@@ -307,6 +307,7 @@
 - { name: "fonts:ubuntu",              ver: "1.0",                   family: pclinuxos,    ignore: true } # no such version on the website
 - { name: foomatic,                    verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: four-in-a-row,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
+- { name: fotowall,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: freecad,                     ver: "0.17.12018",            family: freebsd,      ignore: true }
 - { name: freeciv,                     ver: "2.6.0",                 family: fedora,       ignore: true }
 - { name: freeminer,                   verlonger: 4,                 family: fdroid,       ignore: true }
@@ -656,6 +657,8 @@
 - { name: opencl,                                                                          noscheme: true } # GH/KhronosGroup/OpenCL-Headers w/o releases or mix of OpenCL-Headers with OpenCL-CLHPP
 - { name: opencollada,                 verpat: ".*3335ac.*",                               ignore: true }
 - { name: opencollada,                 verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
+- { name: opendkim,                    ver: "2.11.0",                ruleset: fedora,      incorrect: true }
+- { name: opendkim,                                                  ruleset: fedora,      untrusted: true }
 - { name: openjade,                    verpat: ".*(p|pre|devel)[0-9]*",                    devel: true }
 - { name: openjade,                    ver: "1.3.3",                 family: [pclinuxos,mageia], ignore: true } # fake, it's 1.3.3pre1
 - { name: openjk,                      verpat: "[0-9]{10}.*",                              ignore: true }
@@ -924,7 +927,7 @@
 - { name: tomahawk,                    verpat: "0\\.8\\.99.*",                             ignore: true } # fake
 - { name: tt-rss,                                                                          noscheme: true }
 - { name: tome2,                       ver: "235",                                         incorrect: true }
-- { name: tor,                         verpat: "(.*)[._-][ar].*",                          setver: "$1", devel: true } # version is self-sufficient; remove redundant alpha/rc suffix, but set devel
+- { name: tor,                         verpat: "(.*)[._-][abr].*",                         setver: "$1", devel: true } # version is self-sufficient; remove redundant alpha/rc suffix, but set devel
 - { name: tor,                         verge: "0.3.3",                                     devel: true }
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: tre,                         verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
@@ -1000,7 +1003,7 @@
 - { name: winexe,                      ver: "1.1",                   family: debuntu,      incorrect: true } # snapshot
 - { name: wire,                        verpat: "20[0-9]{6}",                               ignore: true } # aur snapshot
 - { name: wireguard,                   verpat: "20[0-9]{6}",                               incorrect: true } # it's 0.0.20YYMMDD
-- { name: wireguard,                   verpat: "14.*",                                     incorrect: true } # it's 0.0.20YYMMDD
+- { name: wireguard,                   verpat: "4.*",                                      incorrect: true } # it's 0.0.20YYMMDD
 - { name: wireshark,                   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true } # assuming odd versions are devel
 - { name: wireless-regdb,              verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/refs/
 - { name: whatweb,                     vergt: "0.4.7",               family: [debuntu,openbsd,gentoo,freebsd], ignore: true } # 0.4.8 has never been released
@@ -1033,6 +1036,7 @@
 - { name: "xorg:video-intel",          verpat: ".*20[0-9]{2}.*",                           noscheme: true }
 - { name: "xorg:video-intel",          verlonger: 3,                                       ignore: true }
 - { name: xorg-server,                 verlonger: 3,                 family: crux,         ignore: true } # bogus suffux
+- { name: xorg-server,                 verpat: "[0-9]+\\.[0-9]+\\.99.*",                   devel: true }
 - { name: xpdf,                        ver: "4.02",                  family: freebsd,      incorrect: true }
 - { name: xsel,                        verpat: "1\\.2\\.0\\.20[0-9]{6}.*",                 ignore: true }
 - { name: xtitle,                      verpat: "20[0-9]{6}",                               ignore: true }
