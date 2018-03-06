@@ -562,6 +562,7 @@
 - { name: libnss-mysql,                ver: "1.6",                   family: sisyphus,     incorrect: true }
 - { name: libnss-mysql,                                              family: sisyphus,     untrusted: true }
 - { name: libogg,                      ver: "1.3.5",                 family: rudix,        ignore: true }
+- { name: libp11,                      verpat: "20[0-9]{6}",                               ignore: true }
 - { name: libpaper,                    ver: "1.1.24",                                      setver: "$0nmu0" }
 - { name: libpaper,                    verpat: "(1\\.1\\.24)[^0-9]+([0-9]+)",              setver: "$1nmu$2" } # they all take from debian and there's num suffix
 - { name: libpng,                      verpat: "1\\.7\\.0beta.*",    family: freshcode,    ignore: true }

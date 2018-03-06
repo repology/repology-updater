@@ -57,7 +57,7 @@
 - { setname: cinelerra,                name: cinelerra-heroine, addflavor: heroine }
 - { setname: ckeditor,                 name: ckeditor3 }
 - { setname: ckermit,                  name: [c-kermit,kermit] }
-- { setname: clamav,                   name: [clamav-server,clamav-light] }
+- { setname: clamav,                   name: [clamav-server,clamav-light,clamav-doc,clamav-milter,clamav-nodb], addflavor: true }
 - { setname: clanbomber,               name: clanbomber2 }
 - { setname: clang,                    namepat: "clang[0-9.-]+" }
 - { setname: clanlib,                  namepat: "clanlib-?[0-9.]+" } # XXX: split?

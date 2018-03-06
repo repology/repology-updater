@@ -51,6 +51,9 @@
 - { setname: doxygen,                  name: [doxygen-gui,doxygen-docs,doxygen-doc,doxywizard], addflavor: true }
 - { setname: dr14tmeter,               name: dr14_tmeter }
 - { setname: drbd,                     namepat: "drbd[0-9]+" }
+- { setname: drbd,                     name: [drbd-doc,drbd-kernel,drbd-kmod], addflavor: true }
+- { setname: drbd,                     name: drbd90-kmod, addflavor: drbd-kmod }
+- { setname: drbd-utils,               name: drbd90-utils }
 - { setname: drbl,                     name: drbl-experimental, ignore: true }
 - { setname: dreampie,                 name: "python:dreampie" }
 - { setname: drpython,                 name: drpython-py27 }
