@@ -41,6 +41,8 @@
 - { setname: akode,                    name: [akode-plugins-alsa,akode-plugins-jack,akode-plugins-mpc,akode-plugins-mpeg,akode-plugins-oss,akode-plugins-pulseaudio,akode-plugins-resampler,akode-plugins-sun,akode-plugins-xiph], addflavor: true }
 - { setname: albatross-gtk-theme,      name: albatross, verpat: "1\\.7.*" }
 - { setname: albatross-gtk-theme,      name: albatross-themes }
+- { setname: alberta,                  name: alberta-wo-fem, addflavor: true }
+- { setname: alberta,                  name: libalberta2 }
 - { setname: alien,                    name: [alien-package-converter,alien_package_converter] }
 - { setname: alienarena,               name: alien-arena }
 - { setname: alienarena-data,          name: alien-arena-data }

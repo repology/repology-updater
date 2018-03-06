@@ -30,6 +30,7 @@
 - { setname: "node:n",                 name: n }
 - { setname: "node:nativefier",        name: nativefier }
 - { setname: notion,                   name: notion-3 }
+- { setname: nova-agent,               name: rax-nova-agent }
 - { setname: npapi-vlc,                name: npapi-vlc-gtk3 }
 - { setname: npm,                      namepat: "npm[0-9._-]+" }
 - { setname: npth,                     name: libnpth }
