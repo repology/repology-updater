@@ -23,10 +23,24 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.config import config
 
 
-@ViewRegistrar('/turnover')
+@ViewRegistrar('/experimental/')
+def experimental():
+    return flask.render_template('experimental.html')
+
+
+@ViewRegistrar('/experimental/turnover')
 def turnover():
     return flask.render_template(
         'turnover.html',
         added=get_db().get_recently_added_metapackages(config['METAPACKAGES_PER_PAGE']),
         removed=get_db().get_recently_removed_metapackages(config['METAPACKAGES_PER_PAGE'])
+    )
+
+
+@ViewRegistrar('/experimental/raising')
+def raising():
+    return flask.render_template(
+        'raising.html',
+        packages1=get_db().get_raising_metapackages1(config['METAPACKAGES_PER_PAGE']),
+        packages2=get_db().get_raising_metapackages2(config['METAPACKAGES_PER_PAGE']),
     )

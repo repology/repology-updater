@@ -214,6 +214,38 @@ LIMIT %(limit)s;
 
 --------------------------------------------------------------------------------
 --
+-- !!get_raising_metapackages1(limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
+SELECT
+	effname,
+	num_families,
+	(num_families-1)/extract(epoch FROM now() - first_seen) * 60 * 60 * 24 * 7 AS perday
+FROM metapackages
+WHERE
+	num_families > 1 AND first_seen != '2018-03-01 17:40:52.539797+03'
+ORDER BY perday DESC, effname
+LIMIT %(limit)s;
+
+
+--------------------------------------------------------------------------------
+--
+-- !!get_raising_metapackages2(limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
+SELECT
+	effname,
+	num_families,
+	(num_families-1)/extract(epoch FROM now() - first_seen) * 60 * 60 * 24 * 7 AS perday
+FROM metapackages
+WHERE
+	num_families > 1 AND num_families < 5
+ORDER BY perday DESC, effname
+LIMIT %(limit)s;
+
+
+--------------------------------------------------------------------------------
+--
 -- !!get_metapackage_packages(effname, fields=None) -> array of packages
 --
 --------------------------------------------------------------------------------

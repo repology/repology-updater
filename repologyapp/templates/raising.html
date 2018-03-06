@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ super() }}: raising metapackages{% endblock %}
+{% block header %}Raising metapackages{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<div class="row">
+	<div class="col-md-6">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th colspan="2">Method 1</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for package in packages1 %}
+				<tr>
+					<td>{{ package.perday|round(2) }}</td>
+					<td><a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="col-md-6">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th colspan="2">Method 2</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for package in packages2 %}
+				<tr>
+					<td>{{ package.perday|round(2) }}</td>
+					<td><a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div> {#- row #}
+
+</div> {#- container #}
+{% endblock %}

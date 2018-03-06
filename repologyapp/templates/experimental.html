@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ super() }}: experimental features{% endblock %}
+{% block header %}Experimental features{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<ul>
+	<li><a href="{{ url_for('turnover') }}">Turnover</a> - lists of metapackages added and removed recently.
+		<ul>
+			<li>More or less usable.</li>
+			<li>Contains links to related metapackages, which it would be nice to add to normal metapackage views first.</li>
+			<li>Needs to gather some history of removed metapackages.</li>
+		</ul>
+	</li>
+	<li><a href="{{ url_for('raising') }}">Raising</a> - list of metapackages added to many repositories recently.
+		<ul>
+			<li>Does not work correctly yet, because it treats old (not really raising) metapackages recently merged by the rules as raising.</li>
+			<li>Needs <a href="https://github.com/repology/repology/issues/527">#527</a> implemented to work correctly.</li>
+			<li>Needs at least several weeks of history accumulated.</li>
+		</ul>
+	</li>
+</ul>
+
+</div> {#- container #}
+{% endblock %}
