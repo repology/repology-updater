@@ -103,10 +103,10 @@ CREATE INDEX ON metapackages(num_families) WHERE (num_repos_nonshadow > 0);
 CREATE INDEX metapackages_effname_trgm ON metapackages USING gin (effname gin_trgm_ops) WHERE (num_repos_nonshadow > 0);
 
 -- index for recently_added
-CREATE INDEX ON metapackages(first_seen) WHERE (num_repos_nonshadow > 0);
+CREATE INDEX metapackages_recently_added_idx ON metapackages(first_seen DESC, effname) WHERE (num_repos_nonshadow > 0);
 
 -- index for recently_removed
-CREATE INDEX ON metapackages(last_seen) WHERE (num_repos = 0);
+CREATE INDEX metapackages_recently_removed_idx ON metapackages(last_seen DESC, effname) WHERE (num_repos = 0);
 
 --------------------------------------------------------------------------------
 -- Metapackages by repo/category/maintainer
