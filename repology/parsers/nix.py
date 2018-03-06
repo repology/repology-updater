@@ -23,6 +23,21 @@ from repology.package import Package, PackageFlags
 from repology.util import GetMaintainers
 
 
+def ExtractMaintainers(items):
+    for item in items:
+        # old format, currently used in stable; parse email out of 'name <email>' string
+        # items without closing '>' are quite common, just skip them
+        if isinstance(item, str):
+            for maintainer in GetMaintainers(item):
+                if '<' not in maintainer:
+                    yield maintainer
+        elif isinstance(item, dict):
+            yield item['email'].lower()
+            # do we need these?
+            #if 'github' in item:
+            #    yield item['github'].lower() + '@github'
+
+
 def ExtractLicenses(whatever):
     if isinstance(whatever, str):
         return [whatever]
@@ -92,16 +107,14 @@ class NixJsonParser():
                     if isinstance(pkg.homepage, list):  # XXX: remove after adding support for homepages array
                         pkg.homepage = pkg.homepage[0]
 
-                if 'description' in meta:
+                if 'description' in meta and meta['description']:
                     pkg.comment = meta['description']
 
                 if 'maintainers' in meta:
-                    maintainers = meta['maintainers']
                     if not isinstance(meta['maintainers'], list):
                         print('maintainers is not a list: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
                     else:
-                        maintainers = ', '.join(maintainers)
-                    pkg.maintainers = GetMaintainers(maintainers)
+                        pkg.maintainers += list(ExtractMaintainers(meta['maintainers']))
 
                 if 'license' in meta:
                     pkg.licenses = ExtractLicenses(meta['license'])
