@@ -10,7 +10,7 @@
     - name: srpms
       fetcher: File
       parser: SrcList
-      url: http://mirrors.standaloneinstaller.com/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
+      url: https://ftp.heanet.ie/mirrors/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
       compression: bz2
   repolinks:
     - desc: PCLinuxOS home
