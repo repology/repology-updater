@@ -151,6 +151,7 @@
 - { setname: grafana,                  namepat: "grafana[0-9]+" }
 - { setname: granite,                  name: libgranite }
 - { setname: graphite2,                name: [graphite,libgraphite2] }
+- { setname: graphicsmagick,           name: [graphicsmagick-q8,graphicsmagick-q16] }
 - { setname: graphviz,                 name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui] }
 - { setname: grass,                    namepat: "grass[0-9._-]+" }
 - { setname: graylog-collector-sidecar, name: collector-sidecar }
