@@ -20,7 +20,7 @@
 			<tbody>
 			{% for package in packages1 %}
 				<tr>
-					<td>{{ package.perday|round(2) }}</td>
+					<td>{{ package.rate|round(2) }}</td>
 					<td><a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
 				</tr>
 			{% endfor %}
@@ -39,7 +39,7 @@
 			<tbody>
 			{% for package in packages2 %}
 				<tr>
-					<td>{{ package.perday|round(2) }}</td>
+					<td>{{ package.rate|round(2) }}</td>
 					<td><a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
 				</tr>
 			{% endfor %}

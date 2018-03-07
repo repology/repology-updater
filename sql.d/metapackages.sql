@@ -220,11 +220,11 @@ LIMIT %(limit)s;
 SELECT
 	effname,
 	num_families,
-	(num_families-1)/extract(epoch FROM now() - first_seen) * 60 * 60 * 24 * 7 AS perday
+	(num_families-1)/extract(epoch FROM now() - first_seen) * 60 * 60 * 24 * 7 AS rate
 FROM metapackages
 WHERE
 	num_families > 1 AND first_seen != '2018-03-01 17:40:52.539797+03'
-ORDER BY perday DESC, effname
+ORDER BY rate DESC, effname
 LIMIT %(limit)s;
 
 
@@ -236,11 +236,11 @@ LIMIT %(limit)s;
 SELECT
 	effname,
 	num_families,
-	(num_families-1)/extract(epoch FROM now() - first_seen) * 60 * 60 * 24 * 7 AS perday
+	(num_families-1)/extract(epoch FROM now() - first_seen) * 60 * 60 * 24 * 7 AS rate
 FROM metapackages
 WHERE
 	num_families > 1 AND num_families < 4
-ORDER BY perday DESC, effname
+ORDER BY rate DESC, effname
 LIMIT %(limit)s;
 
 
