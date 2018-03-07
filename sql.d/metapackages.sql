@@ -36,8 +36,11 @@ WHERE effname IN (
 {% if pivot %}
 		) AND (
 			-- pivot condition
-			(NOT %(reverse)s AND effname >= %(pivot)s) OR
-			(%(reverse)s AND effname <= %(pivot)s)
+	{% if reverse %}
+			effname <= %(pivot)s
+	{% else %}
+			effname >= %(pivot)s
+	{% endif %}
 {% endif %}
 {% if search %}
 		) AND (
@@ -72,18 +75,18 @@ WHERE effname IN (
 				WHERE
 					(
 						repo = %(inrepo)s
+	{% if newest %}
 					) AND (
-						NOT %(newest)s OR
-						num_packages_newest > 0 OR
-						num_packages_devel > 0
+						num_packages_newest > 0 OR num_packages_devel > 0
+	{% endif %}
+	{% if outdated %}
 					) AND (
-						NOT %(outdated)s OR
 						num_packages_outdated > 0
+	{% endif %}
+	{% if problematic %}
 					) AND (
-						NOT %(problematic)s OR
-						num_packages_ignored > 0 OR
-						num_packages_incorrect > 0 OR
-						num_packages_untrusted > 0
+						num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
+	{% endif %}
 					)
 			)
 {% endif %}
@@ -108,18 +111,18 @@ WHERE effname IN (
 				WHERE
 					(
 						maintainer = %(maintainer)s
+	{% if newest %}
 					) AND (
-						NOT %(newest)s OR
-						num_packages_newest > 0 OR
-						num_packages_devel > 0
+						num_packages_newest > 0 OR num_packages_devel > 0
+	{% endif %}
+	{% if outdated %}
 					) AND (
-						NOT %(outdated)s OR
 						num_packages_outdated > 0
+	{% endif %}
+	{% if problematic %}
 					) AND (
-						NOT %(problematic)s OR
-						num_packages_ignored > 0 OR
-						num_packages_incorrect > 0 OR
-						num_packages_untrusted > 0
+						num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
+	{% endif %}
 					)
 			)
 {% endif %}
@@ -140,11 +143,7 @@ WHERE effname IN (
 				SELECT
 					effname
 				FROM repo_metapackages
-				WHERE
-					(
-						num_packages_newest > 0 OR
-						num_packages_devel > 0
-					)
+				WHERE num_packages_newest > 0 OR num_packages_devel > 0
 			)
 {% endif %}
 {% if not maintainer and not repo and outdated %}
@@ -154,10 +153,7 @@ WHERE effname IN (
 				SELECT
 					effname
 				FROM repo_metapackages
-				WHERE
-					(
-						num_packages_outdated > 0
-					)
+				WHERE num_packages_outdated > 0
 			)
 {% endif %}
 {% if not maintainer and not repo and problematic %}
@@ -167,18 +163,12 @@ WHERE effname IN (
 				SELECT
 					effname
 				FROM repo_metapackages
-				WHERE
-					(
-						num_packages_ignored > 0 OR
-						num_packages_incorrect > 0 OR
-						num_packages_untrusted > 0
-					)
+				WHERE num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
 			)
 {% endif %}
 		)
 	ORDER BY
-		CASE WHEN NOT %(reverse)s THEN effname ELSE NULL END,
-		CASE WHEN %(reverse)s THEN effname ELSE NULL END DESC
+		effname{% if reverse %} DESC{% endif %}
 	LIMIT %(limit)s
 );
 
