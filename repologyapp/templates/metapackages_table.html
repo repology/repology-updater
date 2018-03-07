@@ -23,7 +23,7 @@
 			<td>
 				<a href="{{ url_for("metapackage_versions", name=metapackagename) }}">{{ metapackagename }}</a>
 				{%- if metapackage.has_related -%}
-				<a href="{{ url_for("metapackage_related", name=metapackagename) }}">∗</a>
+				<a class="has-related-mark" href="{{ url_for("metapackage_related", name=metapackagename) }}">∗</a>
 				{% endif %}
 			</td>
 
