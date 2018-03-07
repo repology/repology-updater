@@ -17,12 +17,14 @@
 - { setname: ldns,                     name: [ldns-tools,ldns-utils] }
 - { setname: libleptonica,             name: liblibleptonica }
 - { setname: liberal-crime-squad,      name: lcs }
+- { setname: libreoffice,              name: [libreoffice-bin,libreoffice-bin-debug,libreoffice-gtk3], addflavor: true }
+- { setname: libreoffice,              name: [libreoffice-dev,libreoffice-fresh,libreoffice-oldstable,libreoffice-still] }
+- { setname: libreoffice,              namepat: "([^-]+)-libreoffice", family: freebsd, addflavor: $1 }
+- { setname: libreoffice,              namepat: "libreoffice-((?:i18n|l10n).*)", addflavor: $1 }
+- { setname: libreoffice,              namepat: "libreoffice-(.*)", family: kaos, addflavor: $1 }
+- { setname: libreoffice,              namepat: "libreoffice-fresh-(.*)", family: arch, addflavor: $1 }
+- { setname: libreoffice,              namepat: "libreoffice-still-(.*)", family: arch, addflavor: $1 }
 - { setname: libreoffice-extension-barcode, name: barcode, family: gentoo, category: app-officeext }
-- { setname: libreoffice-fresh-l10n,   namepat: "libreoffice-fresh-.*", family: arch }
-- { setname: libreoffice-i18n,         namepat: "[^-]+-libreoffice", family: freebsd }
-- { setname: libreoffice-i18n,         namepat: "libreoffice-(i18n|l10n)-.*" }
-- { setname: libreoffice-l10n,         namepat: "libreoffice-.*", family: kaos }
-- { setname: libreoffice-still-l10n,   namepat: "libreoffice-still-.*", family: arch }
 - { setname: libressl,                 name: libressl-devel, ignore: true }
 - { setname: libressl,                 name: libressl-netcat, addflavor: netcat }
 - { setname: lightdm,                  namepat: "liblightdm(?:-qt4|-qt5|-ubuntu)*", addflavor: true }
