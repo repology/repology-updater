@@ -3,6 +3,7 @@
 	<thead>
 	{% for metapackagename,data in metapackagedata|dictsort %}
 	{% set headerevery = 50 %}
+	{% set metapackage = metapackages[metapackagename] %}
 	{% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
 		<tr>
 			<th>Metapackage</th>
@@ -19,7 +20,13 @@
 	{% if loop.first %}</thead><tbody>{% endif %}
 	{% endif %}
 		<tr>
-			<td><a href="{{ url_for("metapackage_versions", name=metapackagename) }}">{{ metapackagename }}</a></td>
+			<td>
+				<a href="{{ url_for("metapackage_versions", name=metapackagename) }}">{{ metapackagename }}</a>
+				{%- if metapackage.has_related -%}
+				<a href="{{ url_for("metapackage_related", name=metapackagename) }}">∗</a>
+				{% endif %}
+			</td>
+
 			{% if repo or maintainer %}
 			<td>
 			{% for versioninfo in data.explicit %}
@@ -30,7 +37,7 @@
 			{% endfor %}
 			</td>
 			{% endif %}
-			<td class="text-center"><b>{{ data.families|length }}</b></td>
+			<td class="text-center"><b>{{ metapackage.num_families }}</b></td>
 			<td>
 			{% for versioninfo in data.newest %}
 				<span class="version version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span>

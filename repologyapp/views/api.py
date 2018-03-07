@@ -75,7 +75,9 @@ def api_v1_metapackages(bound=None):
     request = filterinfo.GetRequest()
     request.Bound(bound)
 
-    packages = get_db().query_metapackages(**request.__dict__, limit=config['METAPACKAGES_PER_PAGE'])
+    metapackages = get_db().query_metapackages(**request.__dict__, limit=config['METAPACKAGES_PER_PAGE'])
+
+    packages = get_db().get_metapackages_packages(list(metapackages.keys()))
 
     metapackages = PackagesToMetapackages(packages)
 

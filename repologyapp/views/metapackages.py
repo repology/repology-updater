@@ -37,20 +37,26 @@ def metapackages(bound=None):
 
     # get packages
     def get_packages(request):
-        return get_db().query_metapackages(
+        metapackages = get_db().query_metapackages(
             **request.__dict__,
             limit=config['METAPACKAGES_PER_PAGE'],
+        )
+
+        packages = get_db().get_metapackages_packages(
+            list(metapackages.keys()),
             fields=['repo', 'family', 'effname', 'version', 'versionclass', 'maintainers', 'flags']
         )
 
-    packages = get_packages(request)
+        return metapackages, packages
+
+    metapackages, packages = get_packages(request)
 
     # on empty result, fallback to show first, last set of results
     if not packages:
         request = filterinfo.GetRequest()
         if bound and bound.startswith('..'):
             request.NameTo(None)
-        packages = get_packages(request)
+        metapackages, packages = get_packages(request)
 
     firstname, lastname = get_packages_name_range(packages)
 
@@ -62,6 +68,7 @@ def metapackages(bound=None):
         lastname=lastname,
         search=filterinfo.GetDict(),
         advanced=filterinfo.IsAdvanced(),
+        metapackages=metapackages,
         metapackagedata=metapackagedata,
         repo=filterinfo.GetRepo(),
         maintainer=filterinfo.GetMaintainer()

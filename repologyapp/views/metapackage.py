@@ -137,7 +137,9 @@ def metapackage_information(name):
 def metapackage_related(name):
     name = name.lower()
 
-    packages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'], fields=['family', 'effname', 'version', 'versionclass', 'flags'])
+    metapackages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
+
+    packages = get_db().get_metapackages_packages(list(metapackages.keys()), fields=['family', 'effname', 'version', 'versionclass', 'flags'])
 
     metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
 
@@ -148,6 +150,7 @@ def metapackage_related(name):
     return flask.render_template(
         'metapackage-related.html',
         name=name,
+        metapackages=metapackages,
         metapackagedata=metapackagedata,
         too_many_warning=too_many_warning
     )

@@ -151,12 +151,8 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
             } for sumtype in ['explicit', 'newest', 'outdated', 'ignored']
         }
 
-        families = set()
-
         # gather summaries
         for package in PackagesetSortByVersion(packages):
-            families.add(package.family)
-
             key = (package.version, package.versionclass)
             target = None
 
@@ -186,7 +182,6 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
             ]
 
         metapackagedata[metapackagename] = {
-            'families': families,
             **summaries
         }
 

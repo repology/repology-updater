@@ -15,162 +15,169 @@
 -- You should have received a copy of the GNU General Public License
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+
 --------------------------------------------------------------------------------
 --
--- !!query_metapackages(pivot=None, reverse=False, search=None, maintainer=None, inrepo=None, notinrepo=None, minspread=None, maxspread=None, category=None, newest=False, outdated=False, newest_single_repo=False, newest_single_family=False, problematic=False, limit=None, fields=None) -> array of packages
+-- !!get_metapackages(effnames) -> dict of dicts
 --
 --------------------------------------------------------------------------------
 SELECT
-{% if fields %}
-	{{ fields | join(',') }}
-{% else %}
-	*
-{% endif %}
-FROM packages
-WHERE effname IN (
-	SELECT effname
-	FROM metapackages
-	WHERE
-		(
-			num_repos_nonshadow > 0
-{% if pivot %}
-		) AND (
-			-- pivot condition
-	{% if reverse %}
-			effname <= %(pivot)s
-	{% else %}
-			effname >= %(pivot)s
+	effname,
+	num_families,
+	has_related
+FROM metapackages
+WHERE effname = ANY(%(effnames)s);
+
+--------------------------------------------------------------------------------
+--
+-- !!query_metapackages(pivot=None, reverse=False, search=None, maintainer=None, inrepo=None, notinrepo=None, minspread=None, maxspread=None, category=None, newest=False, outdated=False, newest_single_repo=False, newest_single_family=False, problematic=False, limit=None) -> dict of dicts
+--
+--------------------------------------------------------------------------------
+SELECT
+	effname,
+	num_families,
+	has_related
+FROM metapackages
+WHERE
+	(
+		num_repos_nonshadow > 0
+	{% if pivot %}
+	) AND (
+		-- pivot condition
+		{% if reverse %}
+		effname <= %(pivot)s
+		{% else %}
+		effname >= %(pivot)s
+		{% endif %}
 	{% endif %}
-{% endif %}
-{% if search %}
-		) AND (
-			-- search condition
-			effname LIKE ('%%' || %(search)s || '%%')
-{% endif %}
-{% if minspread is not none %}
-		) AND (
-			-- spread conditions
-			num_families >= %(minspread)s
-{% endif %}
-{% if maxspread is not none %}
-		) AND (
-			num_families <= %(maxspread)s
-{% endif %}
-{% if newest_single_repo %}
-		) AND (
-			-- single newest conditions
-			num_repos_newest = 1
-{% endif %}
-{% if newest_single_family %}
-		) AND (
-			num_families_newest = 1
-{% endif %}
-{% if inrepo %}
-		) AND (
-			-- in repo condition
-			effname IN (
-				SELECT
-					effname
-				FROM repo_metapackages
-				WHERE
-					(
-						repo = %(inrepo)s
-	{% if newest %}
-					) AND (
-						num_packages_newest > 0 OR num_packages_devel > 0
+	{% if search %}
+	) AND (
+		-- search condition
+		effname LIKE ('%%' || %(search)s || '%%')
 	{% endif %}
-	{% if outdated %}
-					) AND (
-						num_packages_outdated > 0
+	{% if minspread is not none %}
+	) AND (
+		-- spread conditions
+		num_families >= %(minspread)s
 	{% endif %}
-	{% if problematic %}
-					) AND (
-						num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
+	{% if maxspread is not none %}
+	) AND (
+		num_families <= %(maxspread)s
 	{% endif %}
-					)
-			)
-{% endif %}
-{% if notinrepo %}
-		) AND (
-			-- not in repo condition
-			effname IN (
-				SELECT
-					effname
-				FROM repo_metapackages
-				GROUP BY effname
-				HAVING count(*) FILTER (WHERE repo = %(notinrepo)s) = 0
-			)
-{% endif %}
-{% if maintainer %}
-		) AND (
-			-- maintainer condition
-			effname IN (
-				SELECT
-					effname
-				FROM maintainer_metapackages
-				WHERE
-					(
-						maintainer = %(maintainer)s
-	{% if newest %}
-					) AND (
-						num_packages_newest > 0 OR num_packages_devel > 0
+	{% if newest_single_repo %}
+	) AND (
+		-- single newest conditions
+		num_repos_newest = 1
 	{% endif %}
-	{% if outdated %}
-					) AND (
-						num_packages_outdated > 0
+	{% if newest_single_family %}
+	) AND (
+		num_families_newest = 1
 	{% endif %}
-	{% if problematic %}
-					) AND (
-						num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
-	{% endif %}
-					)
-			)
-{% endif %}
-{% if category %}
-		) AND (
-			-- category condition
-			effname IN (
-				SELECT
-					effname
-				FROM category_metapackages
-				WHERE category = %(category)s
-			)
-{% endif %}
-{% if not maintainer and not repo and newest %}
-		) AND (
-			-- newest not handled for either maintainer or repo
-			effname IN (
-				SELECT
-					effname
-				FROM repo_metapackages
-				WHERE num_packages_newest > 0 OR num_packages_devel > 0
-			)
-{% endif %}
-{% if not maintainer and not repo and outdated %}
-		) AND (
-			-- outdated not handled for either maintainer or repo
-			effname IN (
-				SELECT
-					effname
-				FROM repo_metapackages
-				WHERE num_packages_outdated > 0
-			)
-{% endif %}
-{% if not maintainer and not repo and problematic %}
-		) AND (
-			-- problematic not handled for either maintainer or repo
-			effname IN (
-				SELECT
-					effname
-				FROM repo_metapackages
-				WHERE num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
-			)
-{% endif %}
+	{% if inrepo %}
+	) AND (
+		-- in repo condition
+		effname IN (
+			SELECT
+				effname
+			FROM repo_metapackages
+			WHERE
+				(
+					repo = %(inrepo)s
+				{% if newest %}
+				) AND (
+					num_packages_newest > 0 OR num_packages_devel > 0
+				{% endif %}
+				{% if outdated %}
+				) AND (
+					num_packages_outdated > 0
+				{% endif %}
+				{% if problematic %}
+				) AND (
+					num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
+				{% endif %}
+				)
 		)
-	ORDER BY
-		effname{% if reverse %} DESC{% endif %}
-	LIMIT %(limit)s
-);
+	{% endif %}
+	{% if notinrepo %}
+	) AND (
+		-- not in repo condition
+		effname IN (
+			SELECT
+				effname
+			FROM repo_metapackages
+			GROUP BY effname
+			HAVING count(*) FILTER (WHERE repo = %(notinrepo)s) = 0
+		)
+	{% endif %}
+	{% if maintainer %}
+	) AND (
+		-- maintainer condition
+		effname IN (
+			SELECT
+				effname
+			FROM maintainer_metapackages
+			WHERE
+				(
+					maintainer = %(maintainer)s
+				{% if newest %}
+				) AND (
+					num_packages_newest > 0 OR num_packages_devel > 0
+				{% endif %}
+				{% if outdated %}
+				) AND (
+					num_packages_outdated > 0
+				{% endif %}
+				{% if problematic %}
+				) AND (
+					num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
+				{% endif %}
+				)
+		)
+	{% endif %}
+	{% if category %}
+	) AND (
+		-- category condition
+		effname IN (
+			SELECT
+				effname
+			FROM category_metapackages
+			WHERE category = %(category)s
+		)
+	{% endif %}
+	{% if not maintainer and not repo and newest %}
+	) AND (
+		-- newest not handled for either maintainer or repo
+		effname IN (
+			SELECT
+				effname
+			FROM repo_metapackages
+			WHERE num_packages_newest > 0 OR num_packages_devel > 0
+		)
+	{% endif %}
+	{% if not maintainer and not repo and outdated %}
+	) AND (
+		-- outdated not handled for either maintainer or repo
+		effname IN (
+			SELECT
+				effname
+			FROM repo_metapackages
+			WHERE num_packages_outdated > 0
+		)
+	{% endif %}
+	{% if not maintainer and not repo and problematic %}
+	) AND (
+		-- problematic not handled for either maintainer or repo
+		effname IN (
+			SELECT
+				effname
+			FROM repo_metapackages
+			WHERE num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
+		)
+	{% endif %}
+	)
+ORDER BY
+	effname{% if reverse %} DESC{% endif %}
+LIMIT %(limit)s;
 
 
 --------------------------------------------------------------------------------
@@ -236,21 +243,6 @@ LIMIT %(limit)s;
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackage_packages(effname, fields=None) -> array of packages
---
---------------------------------------------------------------------------------
-SELECT
-{% if fields %}
-	{{ fields | join(',') }}
-{% else %}
-	*
-{% endif %}
-FROM packages
-WHERE effname = %(effname)s;
-
-
---------------------------------------------------------------------------------
---
 -- !!get_metapackage_families_count(effname) -> single value
 --
 --------------------------------------------------------------------------------
@@ -259,31 +251,14 @@ SELECT count(DISTINCT family) FROM packages WHERE effname = %(effname)s;
 
 --------------------------------------------------------------------------------
 --
--- !!get_metapackages_packages(effnames, fields=None) -> array of packages
+-- !!get_metapackage_related_metapackages(effname, limit) -> dict of dicts
 --
 --------------------------------------------------------------------------------
 SELECT
-{% if fields %}
-	{{ fields | join(',') }}
-{% else %}
-	*
-{% endif %}
-FROM packages
-WHERE effname = ANY(%(effnames)s);
-
-
---------------------------------------------------------------------------------
---
--- !!get_metapackage_related_metapackages(effname, limit, fields=None) -> array of packages
---
---------------------------------------------------------------------------------
-SELECT
-{% if fields %}
-	{{ fields | join(',') }}
-{% else %}
-	*
-{% endif %}
-FROM packages
+	effname,
+	num_families,
+	has_related
+FROM metapackages
 WHERE effname IN (
 	WITH RECURSIVE r AS (
 		SELECT
@@ -302,7 +277,6 @@ WHERE effname IN (
 	SELECT DISTINCT
 		effname
 	FROM r
-	ORDER BY effname
 	LIMIT %(limit)s
 );
 
@@ -340,63 +314,3 @@ SELECT DISTINCT
 FROM metapackages
 WHERE num_repos_nonshadow > 0 AND num_families = %(spread)s
 LIMIT %(limit)s;
-
-
---------------------------------------------------------------------------------
---
--- !!add_packages(many packages)
---
---------------------------------------------------------------------------------
-INSERT INTO packages(
-	repo,
-	family,
-	subrepo,
-
-	name,
-	effname,
-
-	version,
-	origversion,
-	versionclass,
-
-	maintainers,
-	category,
-	comment,
-	homepage,
-	licenses,
-	downloads,
-
-	flags,
-	shadow,
-	verfixed,
-
-	flavors,
-
-	extrafields
-) VALUES (
-	%(repo)s,
-	%(family)s,
-	%(subrepo)s,
-
-	%(name)s,
-	%(effname)s,
-
-	%(version)s,
-	%(origversion)s,
-	%(versionclass)s,
-
-	%(maintainers)s,
-	%(category)s,
-	%(comment)s,
-	%(homepage)s,
-	%(licenses)s,
-	%(downloads)s,
-
-	%(flags)s,
-	%(shadow)s,
-	%(verfixed)s,
-
-	%(flavors)s,
-
-	%(extrafields)s
-)

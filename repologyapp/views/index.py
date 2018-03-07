@@ -179,6 +179,8 @@ def index():
         'zsh',
     ]
 
+    metapackages = get_db().get_metapackages(important_packages)
+
     packages = get_db().get_metapackages_packages(important_packages, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
 
     metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
@@ -186,5 +188,6 @@ def index():
     return flask.render_template(
         'index.html',
         top_repos=top_repos,
+        metapackages=metapackages,
         metapackagedata=metapackagedata
     )
