@@ -417,7 +417,7 @@
 - { name: grub-customizer,                                           family: debuntu,      untrusted: true }
 - { name: gsettings-desktop-schemas,   verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: "gstreamer1plugins:mpg123",  verpat: "20[0-9]{6}",                               ignore: true } # AUR
-- { namepat: "gstreamer1.*",           verpat: "1\\.13\\.9[0-9]+",                         devel: true }
+- { namepat: "gstreamer.*",            verpat: "1\\.13\\.9[0-9]+",                         devel: true }
 - { name: gtest,                       verlonger: 3,                                       ignore: true } # freebsd garbage
 - { name: gtkmm,                       verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gtksourceview,               verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
