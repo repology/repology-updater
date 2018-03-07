@@ -2,6 +2,10 @@
 
 - { name: avogadro, verge: "1.8", setname: avogadro2 } # actually it starts with 1.90, but also cover strange 1.9 from KDE Neon
 
+- { name: alure, wwwpart: allureofthestars, setname: allureofthestars }
+- { name: alure, wwwpart: allure-framework/allure2, setname: allure-report }
+- { name: alure, warning: "please classify me" }
+
 - { name: arb, wwwpart: [fredrikj,arblib], setname: arb-fp }
 - { name: arb, verpat: "2.*", setname: arb-fp }
 - { name: arb, wwwpart: arb-home, setname: arb-dna }
@@ -299,6 +303,8 @@
 
 - { name: racer, wwwpart: hippo, setname: racer-game }
 - { name: racer, setname: "rust:racer" }
+
+- { name: rescue, wwwpart: rescue.sourceforge.net, setname: rescue-max }
 
 - { name: roundup, wwwpart: mizerany, setname: sh-roundup } # taken name already used in parabola/hyperbola
 

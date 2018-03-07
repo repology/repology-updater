@@ -49,6 +49,7 @@
 - { setname: allegro,                  namepat: "allegro[0-9.]*(?:-devel)?" }
 - { setname: alogg,                    name: [liballegroogg,allegroogg] }
 - { setname: alsa-lib,                 name: [alsa,libalsa,libalsa2,alsa-lib-noassertion] }
+- { setname: allureofthestars,         name: "haskell:alure" }
 - { setname: amule,                    name: amule-daemon, addflavor: daemon }
 - { setname: amule,                    name: amule-devel, ignore: true }
 - { setname: amule,                    name: amule-gui, addflavor: gui }

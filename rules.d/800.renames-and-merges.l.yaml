@@ -1,5 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: lambdahack,               name: "haskell:lambdahack" }
+- { setname: lantern,                  name: lantern-headless }
 - { setname: language-pack-gnome,      namepat: "language-pack-gnome-.*", family: debuntu }
 - { setname: language-pack-kde,        namepat: "language-pack-kde-.*", family: debuntu }
 - { setname: lantern,                  name: lantern-headless }

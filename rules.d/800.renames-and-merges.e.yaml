@@ -66,6 +66,7 @@
 - { setname: eternal-lands,            name: el, family: freebsd }
 - { setname: eternal-lands-data,       name: el-data, family: freebsd }
 - { setname: ettercap,                 name: ettercap-gtk }
+- { setname: etw,                      name: etw-data, addflavor: data }
 - { setname: eventlog,                 name: libevtlog }
 - { setname: evince,                   name: [evince-light,evince-lite,evince2,evince2-light,evince-no-gnome,evince-lcdfilter] }
 - { setname: evolus-pencil,            name: evoluspencil }
