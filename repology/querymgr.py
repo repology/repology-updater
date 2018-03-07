@@ -16,11 +16,12 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import functools
-import json
 import os
 import re
 
 import jinja2
+
+import psycopg2.extras
 
 from repology.package import Package
 
@@ -184,7 +185,7 @@ class QueryManager:
 
         def package_to_argument(package):
             d = package.__dict__
-            d['extrafields'] = json.dumps(d['extrafields'])
+            d['extrafields'] = psycopg2.extras.Json(d['extrafields'])
             return d
 
         def prepare_arguments_for_query(args, kwargs):
