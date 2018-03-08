@@ -185,7 +185,7 @@
 - { name: cons,                        ver: "2.3.0.1",                                     ignore: true } # debian uses this to revert to 2.2.0. http://metadata.ftp-master.debian.org/changelogs/main/c/cons/cons_2.3.0.1+2.2.0-2_changelog "The odd version string is to avoid using epochs" <- that's what epochs are for, dammit
 - { name: containerd,                  verpat: "[0-9a-f]{7}",                              ignore: true } # crux garbage
 - { name: coolkey,                     verpat: "[0-9]+\\.[0-9]+\\.[0-9]+_[0-9]+",          incorrect: true } # AUR using fedora package revision
-- { name: coursier,                    ver: "1.0.2",                                       ignore: true } # Known bad version https://github.com/coursier/coursier/commit/2cb42444cdbd6ad2a50f963378ff27259a4fb1a7
+- { name: coursier,                    ver: "1.0.2",                                       outdated: true } # Known bad version https://github.com/coursier/coursier/commit/2cb42444cdbd6ad2a50f963378ff27259a4fb1a7
 - { name: cowsay,                      ver: "3.04.01",                                     ignore: true }
 - { name: cpufreqd,                    ver: "2.4.3",                 family: sisyphus,     ignore: true } # fake
 - { name: cpulimit,                    verpat: "20[0-8]{6}.*",                             ignore: true } # hyperbola
