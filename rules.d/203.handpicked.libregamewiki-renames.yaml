@@ -52,6 +52,7 @@
 - { ruleset: libregamewiki, name: "necklace of the eye",                        setname: noteye }
 - { ruleset: libregamewiki, name: "not pacman",                                 setname: notpacman }
 - { ruleset: libregamewiki, name: "numpty physics",                             setname: numptyphysics }
+- { ruleset: libregamewiki, name: "pasang emas",                                setname: pasang-emas }
 - { ruleset: libregamewiki, name: "pink pony",                                  setname: pink-pony }
 - { ruleset: libregamewiki, name: "powder toy",                                 setname: powder-toy }
 - { ruleset: libregamewiki, name: "red eclipse",                                setname: redeclipse }
@@ -75,5 +76,5 @@
 - { ruleset: libregamewiki, name: "vega strike",                                setname: vegastrike }
 - { ruleset: libregamewiki, name: "vulture's eye",                              setname: vultures-eye }
 - { ruleset: libregamewiki, name: "warp rogue",                                 setname: wrogue }
-- { ruleset: libregamewiki, name: "warzone 2000",                               setname: warzone2000 }
+- { ruleset: libregamewiki, name: "warzone 2100",                               setname: warzone2000 }
 - { ruleset: libregamewiki, name: "yo frankie!",                                setname: yofrankie }

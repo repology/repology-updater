@@ -9,6 +9,7 @@
 - { setname: zenity,                   name: zenity-gtk2 }
 - { setname: zenxml,                   name: libzenxml }
 - { setname: zero-ballistics,          name: zeroballistics }
+- { setname: zero-k,                   name: [spring-zero-k,springrts-zero-k] }
 - { setname: zeromq,                   namepat: "(zeromq|zmq|libzmq)[0-9._-]*" }
 - { setname: zeronet,                  name: zeronet-git, ignore: true }
 - { setname: zerotier-one,             name: [zerotier,zerotier-one-with-controller] }
