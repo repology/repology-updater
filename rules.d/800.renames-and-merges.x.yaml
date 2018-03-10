@@ -47,6 +47,7 @@
 - { setname: xmonad,                   name: "haskell:xmonad" }
 - { setname: xmoto,                    name: x-moto }
 - { setname: xonotic,                  name: xonotic-data, addflavor: true }
+- { setname: xournal,                  name: xournal-gtk3, addflavor: gtk3 }
 - { setname: xpdf,                     name: [xpdf3,xpdf4] }
 - { setname: xpilot-ng,                namepat: xpilot-ng-(client|server), addflavor: $1 }
 - { setname: xrdp,                     name: xrdp-devel, ignore: true }
