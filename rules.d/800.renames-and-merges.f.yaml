@@ -15,9 +15,10 @@
 - { setname: fdk-aac,                  name: libfdk-aac }
 - { setname: fdkaac,                   name: fdk-aac-encoder }
 - { setname: fetch-crl,                name: fetch-crl3 }
+- { setname: fetchmail,                name: fetchmailconf, addflavor: fetchmailconf }
 - { setname: ffmpeg,                   namepat: "ffmpeg[0-9.-]+" }
-- { setname: fftw,                     name: fftwf }
-- { setname: fftw,                     namepat: "(?:lib)?fftw[0-9.-]*(?:-double|-float|-long-double|-quad|-single|-long|-mpi|-mpich|-openmpi|-common)?" }
+- { setname: fftw,                     name: [fftwf,fftw-avx,fftw-static] }
+- { setname: fftw,                     namepat: "(?:lib)?fftw[0-9._-]*(-double|-float|-long-double|-quad|-single|-long|-mpi|-mpich|-openmpi|-common|-gnu-.*)?", addflavor: $1 }
 - { setname: fife,                     name: [fifengine,"python:fife"] }
 - { setname: file-roller,              name: legacy-file-roller }
 - { setname: file-roller,              name: [file-roller-ja,file-roller-tmp,file-roller2-nn], addflavor: true }

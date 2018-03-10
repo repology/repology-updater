@@ -61,6 +61,7 @@
 - { setname: dsniff,                   name: dsniff-nox11 }
 - { setname: dspam,                    name: [dspam-mysql,dspam-pgsql,dspam-web] }
 - { setname: dungeon-crawl,            name: dungeoncrawl }
+- { setname: "dvd+rw-tools",           name: dvdrw-tools }
 - { setname: dwarf-fortress,           name: dwarffortress }
 - { setname: dwarf-fortress,           name: linux-dwarffortress }
 - { setname: dwarf-fortress,           name: linux-dwarffortress, family: freebsd }
