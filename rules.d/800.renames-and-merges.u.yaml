@@ -15,8 +15,9 @@
 - { setname: unigine-heaven,           name: linux-unigine-heaven, family: freebsd }
 - { setname: unigine-valley,           name: linux-unigine-valley, family: freebsd }
 - { setname: unison,                   name: unison-devel, ignore: true }
-- { setname: unison,                   name: unison-nox11, addflavor: true }
+- { setname: unison,                   name: unison-nox11, addflavor: nox11 }
 - { setname: unison,                   namepat: "unison[0-9.-]+(?:-compat)?" }
+- { setname: unison,                   name: unison248-nox11, addflavor: nox11 }
 - { setname: units,                    name: [gnu-units,gunits] }
 - { setname: unrar,                    name: [libunrar,libunrar5] }
 - { setname: uqm,                      name: [uqm_3domusic,uqm-3domusic,uqm-content,uqm_voice,uqm-voice], addflavor: true }
