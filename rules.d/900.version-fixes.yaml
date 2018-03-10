@@ -1031,6 +1031,8 @@
 - { name: xhyve,                       verpat: "20[0-9]{6}",                               ignore: true } # macports
 - { name: xmbmon,                      verpat: "[0-9]{3}",                                 incorrect: true } # it's 2.05, not 205. Also not 2.0.5.
 - { name: xmlrpc-c,                    vergt: "1.39.12",                                   devel: true } # http://xmlrpc-c.sourceforge.net/change_super_stable.html
+- { name: xmove,                       ver: "2.0",                   ruleset: [sisyphus,mageia], incorrect: true } # it's 2.0beta2
+- { name: xmove,                                                     ruleset: [sisyphus,mageia], untrusted: true }
 - { name: xl2tpd,                      ver: "20140214",                                    ignore: true } # pkgsrc is using snapshot; Others are using versions with dots
 - { name: xmahjongg,                   ver: "3.70",                  family: [ pkgsrc ],   incorrect: true }
 - { name: xml-coreutils,               ver: "0.8a",                                        outdated: true }
