@@ -62,6 +62,7 @@
 - { setname: "python:scikits.samplerate", name: "python:scikits-samplerate" }
 - { setname: "python:scikits.talkbox", name: "python:scikits-talkbox" }
 - { setname: "python:scikits.timeseries", name: ["python:scikits-timeseries",scikits_timeseries] }
+- { setname: "python:social-auth-core", name: social-auth-core }
 - { setname: "python:sphinx",          name: "python:sphinx10" }
 - { setname: "python:sphinx",          name: sphinx, wwwpart: [pocoo.org,sphinx-doc.org] }
 - { setname: "python:sqlalchemy",      name: sqlalchemy }
