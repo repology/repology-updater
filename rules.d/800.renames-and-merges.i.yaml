@@ -36,6 +36,8 @@
 - { setname: ipython,                  name: ["python:ipython",ipython,ipython2,ipython3,python2-ipython] }
 - { setname: ir-lv2,                   name: ir.lv2 }
 - { setname: ircii,                    name: ircii-current, ignore: true }
+- { setname: isl,                      name: isl-lts }
+- { setname: isl,                      namepat: "isl[0-9._-]+" }
 - { setname: iso8879,                  name: iso_8879 }
 - { setname: ispell-uk,                name: aspell-uk, ver: ["1.6.5","1.8.0"] } # see ftp://ftp.gnu.org/gnu/aspell/dict/uk/
 - { setname: italc,                    namepat: "italc[0-9]+" }
