@@ -25,6 +25,7 @@
 - { setname: "rust:xsv",               name: xsv-rs }
 - { setname: rl,                       name: randomize-lines } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
 - { setname: rlog,                     name: librlog }
+- { setname: roguebox-adventures,      name: rogueboxadventures }
 - { setname: roundup,                  name: "python:roundup" }
 - { setname: roxterm,                  name: [rox-term,roxterm-gtk2] }
 - { setname: rrdtool,                  name: rrdtool12 }

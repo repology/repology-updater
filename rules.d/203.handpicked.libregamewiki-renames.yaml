@@ -58,6 +58,7 @@
 - { ruleset: libregamewiki, name: "red eclipse",                                setname: redeclipse }
 - { ruleset: libregamewiki, name: "rescue! max",                                setname: rescue-max }
 - { ruleset: libregamewiki, name: "rigs of rods",                               setname: rigsofrods }
+- { ruleset: libregamewiki, name: "roguebox adventures",                        setname: roguebox-adventures }
 - { ruleset: libregamewiki, name: "sdl sopwith",                                setname: sopwith }
 - { ruleset: libregamewiki, name: "secret maryo chronicles",                    setname: smc }
 - { ruleset: libregamewiki, name: "seven kingdoms: ancient adversaries",        setname: 7kaa }
@@ -68,6 +69,7 @@
 - { ruleset: libregamewiki, name: "the battle for wesnoth",                     setname: wesnoth }
 - { ruleset: libregamewiki, name: "the legend of edgar",                        setname: edgar }
 - { ruleset: libregamewiki, name: "the mana world",                             setname: tmw }
+- { ruleset: libregamewiki, name: "the secret chronicles of dr. m.",            setname: tsc }
 - { ruleset: libregamewiki, name: "thunder&lightning",                          setname: thunder-and-lightning }
 - { ruleset: libregamewiki, name: "tile world",                                 setname: tile-world }
 - { ruleset: libregamewiki, name: "tux paint",                                  setname: tuxpaint }
@@ -76,5 +78,5 @@
 - { ruleset: libregamewiki, name: "vega strike",                                setname: vegastrike }
 - { ruleset: libregamewiki, name: "vulture's eye",                              setname: vultures-eye }
 - { ruleset: libregamewiki, name: "warp rogue",                                 setname: wrogue }
-- { ruleset: libregamewiki, name: "warzone 2100",                               setname: warzone2000 }
+- { ruleset: libregamewiki, name: "warzone 2100",                               setname: warzone2100 }
 - { ruleset: libregamewiki, name: "yo frankie!",                                setname: yofrankie }

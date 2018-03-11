@@ -95,6 +95,7 @@
 - { setname: gmime-sharp,              namepat: "(?:lib)?gmime[0-9._-]*-sharp" }
 - { setname: gmock,                    name: [google-mock,googlemock,libgmock] }
 - { setname: gmrun,                    name: [gmrun-multihead,gmrun-xdg] }
+- { setname: gmsynth.lv2,              name: gmsynth-lv2 }
 - { setname: gnash,                    name: gnash-git, ignore: true }
 - { setname: gnats,                    namepat: "gnats[0-9]+" }
 - { setname: gnet,                     namepat: "gnet[0-9]+" }
