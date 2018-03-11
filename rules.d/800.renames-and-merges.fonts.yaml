@@ -923,6 +923,11 @@
     - kanjistrokeorders-ttf
     - ttf-kanjistrokeorders
 
+- setname: "fonts:kawbab-mono"
+  name:
+    - kawkab-mono
+    - ttf-sil-kawkab-mono
+
 - setname: "fonts:kiloji"
   name:
     - fonts-kiloji
