@@ -154,7 +154,7 @@ CREATE INDEX ON category_metapackages(effname);
 -- per-maintainer
 CREATE MATERIALIZED VIEW maintainer_metapackages AS
 SELECT
-	unnest(maintainers) as maintainer,
+	unnest(maintainers) AS maintainer,
 	effname,
 	count(1)::smallint AS num_packages,
 	count(*) FILTER (WHERE versionclass = 1)::smallint AS num_packages_newest,
