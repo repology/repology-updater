@@ -203,7 +203,7 @@ CREATE TABLE maintainers (
 );
 
 -- indexes for maintainer queries
-CREATE UNIQUE INDEX maintainer_active_idx ON maintainers(maintainer) WHERE (num_packages > 0);
+CREATE UNIQUE INDEX maintainers_active_idx ON maintainers(maintainer) WHERE (num_packages > 0);
 CREATE INDEX maintainers_maintainer_trgm ON maintainers USING gin (maintainer gin_trgm_ops) WHERE (num_packages > 0);
 
 -- index for recently_added
