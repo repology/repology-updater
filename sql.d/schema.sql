@@ -48,6 +48,7 @@ DROP TABLE IF EXISTS links CASCADE;
 DROP TABLE IF EXISTS problems CASCADE;
 DROP TABLE IF EXISTS reports CASCADE;
 DROP TABLE IF EXISTS metapackages CASCADE;
+DROP TABLE IF EXISTS maintainers CASCADE;
 
 --------------------------------------------------------------------------------
 -- Main packages table
@@ -178,64 +179,27 @@ CREATE INDEX ON maintainer_metapackages(effname);
 -- Maintainers
 --------------------------------------------------------------------------------
 
--- XXX: kill this in favor of table
-CREATE MATERIALIZED VIEW maintainers AS
-SELECT *
-FROM (
-	SELECT
-		unnest(maintainers) AS maintainer,
-		count(1)::integer AS num_packages,
-		count(DISTINCT effname)::integer AS num_metapackages,
-		count(DISTINCT effname) FILTER(WHERE versionclass = 2)::integer AS num_metapackages_outdated,
-		count(*) FILTER (WHERE versionclass = 1)::integer AS num_packages_newest,
-		count(*) FILTER (WHERE versionclass = 2)::integer AS num_packages_outdated,
-		count(*) FILTER (WHERE versionclass = 3)::integer AS num_packages_ignored,
-		count(*) FILTER (WHERE versionclass = 4)::integer AS num_packages_unique,
-		count(*) FILTER (WHERE versionclass = 5)::integer AS num_packages_devel,
-		count(*) FILTER (WHERE versionclass = 6)::integer AS num_packages_legacy,
-		count(*) FILTER (WHERE versionclass = 7)::integer AS num_packages_incorrect,
-		count(*) FILTER (WHERE versionclass = 8)::integer AS num_packages_untrusted,
-		count(*) FILTER (WHERE versionclass = 9)::integer AS num_packages_noscheme,
-		count(*) FILTER (WHERE versionclass = 10)::integer AS num_packages_rolling
-	FROM packages
-	GROUP BY maintainer
-) AS packages_subreq
-LEFT JOIN (
-	SELECT
-		maintainer,
-		json_object_agg(repo, numrepopkg) AS repository_package_counts,
-		json_object_agg(repo, numrepometapkg) AS repository_metapackage_counts
-	FROM (
-		SELECT
-			unnest(maintainers) AS maintainer,
-			repo,
-			count(*) AS numrepopkg,
-			count(DISTINCT effname) AS numrepometapkg
-		FROM packages
-		GROUP BY maintainer, repo
-	) AS repositories_subreq_inner
-	GROUP BY maintainer
-) AS repositories_subreq
-USING(maintainer)
-LEFT JOIN (
-	SELECT
-		maintainer,
-		json_object_agg(category, numcatmetapkg) AS category_metapackage_counts
-	FROM (
-		SELECT
-			unnest(maintainers) AS maintainer,
-			category,
-			count(DISTINCT effname) AS numcatmetapkg
-		FROM packages
-		WHERE category IS NOT NULL
-		GROUP BY maintainer, category
-	) AS categories_subreq_innser
-	GROUP BY maintainer
-) AS categories_subreq
-USING(maintainer)
-WITH DATA;
-
-CREATE UNIQUE INDEX ON maintainers(maintainer);
+CREATE TABLE maintainers (
+	maintainer text NOT NULL PRIMARY KEY,
+	num_packages integer NOT NULL,
+	num_packages_newest integer NOT NULL,
+	num_packages_outdated integer NOT NULL,
+	num_packages_ignored integer NOT NULL,
+	num_packages_unique integer NOT NULL,
+	num_packages_devel integer NOT NULL,
+	num_packages_legacy integer NOT NULL,
+	num_packages_incorrect integer NOT NULL,
+	num_packages_untrusted integer NOT NULL,
+	num_packages_noscheme integer NOT NULL,
+	num_packages_rolling integer NOT NULL,
+	num_metapackages integer NOT NULL,
+	num_metapackages_outdated integer NOT NULL,
+	repository_package_counts jsonb NOT NULL DEFAULT '{}',
+	repository_metapackage_counts jsonb NOT NULL DEFAULT '{}',
+	category_metapackage_counts jsonb NOT NULL DEFAULT '{}',
+	first_seen timestamp with time zone NOT NULL,
+	last_seen timestamp with time zone NOT NULL
+);
 
 --------------------------------------------------------------------------------
 -- Per-repository and global statistics and their history

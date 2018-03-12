@@ -94,7 +94,135 @@ WHERE
 REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;  -- depends on metapackages
 REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;  -- depends on metapackages
 REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages;
-REFRESH MATERIALIZED VIEW CONCURRENTLY maintainers;
+
+--------------------------------------------------------------------------------
+-- Update maintainers
+--------------------------------------------------------------------------------
+
+-- reset maintainers
+UPDATE maintainers
+SET
+    num_packages = 0,
+    num_packages_newest = 0,
+    num_packages_outdated = 0,
+    num_packages_ignored = 0,
+    num_packages_unique = 0,
+    num_packages_devel = 0,
+    num_packages_legacy = 0,
+    num_packages_incorrect = 0,
+    num_packages_untrusted = 0,
+    num_packages_noscheme = 0,
+    num_packages_rolling = 0,
+    num_metapackages = 0,
+    num_metapackages_outdated = 0,
+    repository_package_counts = '{}',
+    repository_metapackage_counts = '{}',
+    category_metapackage_counts = '{}';
+
+INSERT
+INTO maintainers (
+	maintainer,
+
+	num_packages,
+    num_packages_newest,
+    num_packages_outdated,
+    num_packages_ignored,
+    num_packages_unique,
+    num_packages_devel,
+    num_packages_legacy,
+    num_packages_incorrect,
+    num_packages_untrusted,
+    num_packages_noscheme,
+    num_packages_rolling,
+
+    num_metapackages,
+    num_metapackages_outdated,
+
+	first_seen,
+	last_seen
+)
+SELECT
+	unnest(maintainers) AS maintainer,
+
+	count(1),
+	count(*) FILTER (WHERE versionclass = 1),
+	count(*) FILTER (WHERE versionclass = 2),
+	count(*) FILTER (WHERE versionclass = 3),
+	count(*) FILTER (WHERE versionclass = 4),
+	count(*) FILTER (WHERE versionclass = 5),
+	count(*) FILTER (WHERE versionclass = 6),
+	count(*) FILTER (WHERE versionclass = 7),
+	count(*) FILTER (WHERE versionclass = 8),
+	count(*) FILTER (WHERE versionclass = 9),
+	count(*) FILTER (WHERE versionclass = 10),
+
+	count(DISTINCT effname),
+	count(DISTINCT effname) FILTER(WHERE versionclass = 2),
+
+	now(),
+	now()
+FROM packages
+GROUP BY maintainer
+ON CONFLICT (maintainer)
+DO UPDATE SET
+	num_packages = EXCLUDED.num_packages,
+    num_packages_newest = EXCLUDED.num_packages_newest,
+    num_packages_outdated = EXCLUDED.num_packages_outdated,
+    num_packages_ignored = EXCLUDED.num_packages_ignored,
+    num_packages_unique = EXCLUDED.num_packages_unique,
+    num_packages_devel = EXCLUDED.num_packages_devel,
+    num_packages_legacy = EXCLUDED.num_packages_legacy,
+    num_packages_incorrect = EXCLUDED.num_packages_incorrect,
+    num_packages_untrusted = EXCLUDED.num_packages_untrusted,
+    num_packages_noscheme = EXCLUDED.num_packages_noscheme,
+    num_packages_rolling = EXCLUDED.num_packages_rolling,
+
+    num_metapackages = EXCLUDED.num_metapackages,
+    num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
+
+    last_seen = now();
+
+UPDATE maintainers
+SET
+	repository_package_counts = tmp.repository_package_counts,
+	repository_metapackage_counts = tmp.repository_metapackage_counts
+FROM (
+	SELECT
+		maintainer,
+		json_object_agg(repo, numrepopkg) AS repository_package_counts,
+		json_object_agg(repo, numrepometapkg) AS repository_metapackage_counts
+	FROM (
+		SELECT
+			unnest(maintainers) AS maintainer,
+			repo,
+			count(*) AS numrepopkg,
+			count(DISTINCT effname) AS numrepometapkg
+		FROM packages
+		GROUP BY maintainer, repo
+	) AS sub
+	GROUP BY maintainer
+) AS tmp
+WHERE maintainers.maintainer = tmp.maintainer;
+
+UPDATE maintainers
+SET
+	category_metapackage_counts = tmp.category_metapackage_counts
+FROM (
+	SELECT
+		maintainer,
+		json_object_agg(category, numcatmetapkg) AS category_metapackage_counts
+	FROM (
+		SELECT
+			unnest(maintainers) AS maintainer,
+			category,
+			count(DISTINCT effname) AS numcatmetapkg
+		FROM packages
+		WHERE category IS NOT NULL
+		GROUP BY maintainer, category
+	) AS sub
+	GROUP BY maintainer
+) AS tmp
+WHERE maintainers.maintainer = tmp.maintainer;
 
 --------------------------------------------------------------------------------
 -- Update problems
