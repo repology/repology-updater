@@ -7,11 +7,16 @@
 <div class="container">
 
 <ul>
-	<li><a href="{{ url_for('turnover') }}">Turnover</a> - lists of metapackages added and removed recently.
+	<li><a href="{{ url_for('metapackages_turnover') }}">Metapackages turnover</a> - lists of metapackages added and removed recently.
 		<ul>
 			<li>More or less usable.</li>
 			<li>Contains links to related metapackages, which it would be nice to add to normal metapackage views first.</li>
 			<li>Needs to gather some history of removed metapackages.</li>
+		</ul>
+	</li>
+	<li><a href="{{ url_for('maintainers_turnover') }}">Maintainers turnover</a> - lists of maintainers added and removed recently.
+		<ul>
+			<li>Needs to gather some history of removed maintainers.</li>
 		</ul>
 	</li>
 	<li><a href="{{ url_for('raising') }}">Raising</a> - list of metapackages added to many repositories recently.

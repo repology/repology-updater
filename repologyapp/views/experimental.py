@@ -28,12 +28,21 @@ def experimental():
     return flask.render_template('experimental.html')
 
 
-@ViewRegistrar('/experimental/turnover')
-def turnover():
+@ViewRegistrar('/experimental/turnover/metapackages')
+def metapackages_turnover():
     return flask.render_template(
-        'turnover.html',
-        added=get_db().get_recently_added_metapackages(config['METAPACKAGES_PER_PAGE']),
-        removed=get_db().get_recently_removed_metapackages(config['METAPACKAGES_PER_PAGE'])
+        'metapackages-turnover.html',
+        added=get_db().get_recently_added_metapackages(config['TURNOVER_PER_PAGE']),
+        removed=get_db().get_recently_removed_metapackages(config['TURNOVER_PER_PAGE'])
+    )
+
+
+@ViewRegistrar('/experimental/turnover')
+def maintainers_turnover():
+    return flask.render_template(
+        'maintainers-turnover.html',
+        added=get_db().get_recently_added_maintainers(config['TURNOVER_PER_PAGE']),
+        removed=get_db().get_recently_removed_maintainers(config['TURNOVER_PER_PAGE'])
     )
 
 
