@@ -102,8 +102,8 @@
 - { setname: gnome-chemistry-utils,    name: gchemutils }
 - { setname: gnome-chess,              name: gnome-games-chess }
 - { setname: gnome-control-center,     name: control-center }
-- { setname: gnome-desktop,            name: [gnome-desktop2, gnome-desktop3, compat-gnome-desktop38, compat-gnome-desktop314] }
 - { setname: gnome-desktop,            name: "python:pygnome-desktop", addflavor: python }
+- { setname: gnome-desktop,            name: [gnome-desktop2, gnome-desktop3, compat-gnome-desktop38, compat-gnome-desktop314] }
 - { setname: gnome-desktop,            name: gnome-desktop-reference, addflavor: reference }
 - { setname: gnome-desktop-sharp,      name: gnome-desktop-sharp2 }
 - { setname: gnome-mahjongg,           name: gnome-games-mahjongg }
@@ -126,12 +126,32 @@
 - { setname: gnupg,                    name: gpg-agent }
 - { setname: gnupg,                    namepat: "gnupg[0-9]+" }
 - { setname: gnupg,                    namepat: "gpg[0-9]+" }
-- { setname: gnuplot,                  namepat: "gnuplot[0-9._-]+" }
 - { setname: gnuplot,                  name: [gnuplot-caca,gnuplot-headless,gnuplot-lite,gnuplot-nogui,gnuplot-tex-extras], addflavor: true }
 - { setname: gnuplot,                  name: gnuplot-cvs-pdflib, ignore: true }
+- { setname: gnuplot,                  namepat: "gnuplot[0-9._-]+" }
 - { setname: gnurl,                    name: libgnurl }
 - { setname: gnushogi,                 name: gnu-shogi }
+- { setname: gnustep-addresses,        name: addresses-for-gnustep }
+- { setname: gnustep-affiche,          name: affiche }
+- { setname: gnustep-batmon,           name: batmon }
+- { setname: gnustep-biococoa,         name: biococoa }
+- { setname: gnustep-cynthiune,        name: cynthiune }
 - { setname: gnustep-fisicalab,        name: fisicalab }
+- { setname: gnustep-gnumail,          name: gnumail }
+- { setname: gnustep-gorm,             name: gorm }
+- { setname: gnustep-gridlock,         name: gridlock }
+- { setname: gnustep-gworkspace,       name: gworkspace }
+- { setname: gnustep-mknfonts,         name: [mknfonts,mknfonts.tool] }
+- { setname: gnustep-pikopixel,        name: pikopixel }
+- { setname: gnustep-price,            name: price }
+- { setname: gnustep-projectcenter,    name: projectcenter }
+- { setname: gnustep-simpleagenda,     name: [gnustep-agenda,simpleagenda] }
+- { setname: gnustep-steptalk,         name: steptalk }
+- { setname: gnustep-system-preferences, name: system-preferences }
+- { setname: gnustep-systempreferences, name: systempreferences }
+- { setname: gnustep-talksoup,         name: talksoup }
+- { setname: gnustep-timemon,          name: timemon }
+- { setname: gnustep-volume,           name: volume-app }
 - { setname: "go:github-miekg-mmark",  name: ["go:mmark",mmark] }
 - { setname: "go:github-rakyll-statik", name: ["go:statik"] }
 - { setname: gobject-introspection,    name: [gobject-introspection-common,gobject-introspection-runtime] }
@@ -152,14 +172,14 @@
 - { setname: grafana,                  name: grafana-bin }
 - { setname: grafana,                  namepat: "grafana[0-9]+" }
 - { setname: granite,                  name: libgranite }
-- { setname: graphite2,                name: [graphite,libgraphite2] }
 - { setname: graphicsmagick,           name: [graphicsmagick-q8,graphicsmagick-q16] }
+- { setname: graphite2,                name: [graphite,libgraphite2] }
 - { setname: graphviz,                 name: [graphviz-frozen,graphviz-gvedit,graphviz-plugins,graphviz-smyrna,graphviz-gui] }
 - { setname: grass,                    namepat: "grass[0-9._-]+" }
 - { setname: graylog-collector-sidecar, name: collector-sidecar }
 - { setname: greed,                    name: greed-game }
-- { setname: greenbone-security-assistant, namepat: "greenbone-security-assistant[0-9._-]+" }
 - { setname: greenbone-security-assistant, name: greenbone-security-assistant-alternative, addflavor: alternative }
+- { setname: greenbone-security-assistant, namepat: "greenbone-security-assistant[0-9._-]+" }
 - { setname: groovy,                   name: groovy-docs, addflavor: docs }
 - { setname: groovy,                   name: groovysdk }
 - { setname: groovy,                   namepat: "groovy[0-9._-]+" }

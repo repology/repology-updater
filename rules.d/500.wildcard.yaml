@@ -29,6 +29,11 @@
 # Fuse
 - { setname: "fusefs:$1", noflag: not_fusefs, namepat: "fuse(?:fs)?-(.*)" }
 
+# Gnustep
+- { setname: "gnustep-$1", noflag: not_gnustep, namepat: "([a-z]+)\\.app" }
+- { setname: "gnustep-$0", noflag: not_gnustep, family: gentoo, category: gnustep-apps }
+- { setname: "gnustep-$0", noflag: not_gnustep, family: openbsd, category: x11/gnustep }
+
 # Go
 - { setname: "go:$1", noflag: not_go, namepat: "go-(.*)" }
 - { setname: "go:$1", noflag: not_go, namepat: "golang-(.*)" }

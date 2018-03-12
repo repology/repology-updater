@@ -1,5 +1,9 @@
 # vim: tabstop=29 expandtab softtabstop=29
 
+- { name: aclock, family: freebsd, setname: gnustep-aclock } # gnustep; may be not ambiguity (yet), but too generic name for sure
+
+- { name: addresses, family: [freebsd,openbsd,pkgsrc], setname: gnustep-addresses } # gnustep; may be not ambiguity (yet), but too generic name for sure
+
 - { name: avogadro, verge: "1.8", setname: avogadro2 } # actually it starts with 1.90, but also cover strange 1.9 from KDE Neon
 
 - { name: alure, wwwpart: allureofthestars, setname: allureofthestars }
@@ -41,6 +45,8 @@
 - { name: borg, wwwpart: borgbackup,                      setname: borgbackup }
 - { name: borg, family: sisyphus,                         setname: borgbackup }
 - { name: borg,                        warning: "please classify me" }
+
+- { name: camera, family: [freebsd,openbsd], setname: gnustep-camera } # gnustep; may be not ambiguity (yet), but too generic name for sure
 
 - { name: cde,                         setname: cdesktopenv, wwwpart: cdesktopenv } # desktop env. vs packaging tool
 
@@ -134,6 +140,8 @@
 # file change monitor vs. file system checksum checker
 - { name: fswatch, verpat: "1.*",      setname: fswatch-mon }
 
+- { name: ftp, family: openbsd, setname: gnustep-ftp } # gnustep; may be not ambiguity (yet), but too generic name for sure
+
 - { name: fts, wwwpart: musl-fts, setname: musl-fts } # file tree traversal for musl
 - { name: fts, wwwpart: gonicus, setname: "fusefs:fts" } # fuse TFTP supplicant
 # otherwise fts3, "File Transfer Service V3"
@@ -150,6 +158,8 @@
 - { name: gambit,                      verpat: "4\\..*", setname: gambit-c }
 
 - { name: gom,                         category: [sound,media-sound,universe/sound], setname: gom-mixer }
+
+- { name: gomoku, family: [freebsd,macports,openbsd], setname: gnustep-gomoku } # gnustep; may be not ambiguity (yet), but too generic name for sure
 
 - { name: git_fame,                    setname: git-fame-rb, wwwpart: oleander.io }
 
@@ -282,9 +292,7 @@
 - { name: "php56:excel", wwwpart: php_excel,           setname: "php56:php_excel" }
 - { name: "php56:excel", wwwpart: phpoffice,           setname: "php56:phpexcel" }
 
-- { name: "python:planet", setname: planet, wwwpart: planetplanet }
-
-- { name: "python:eventlib", setname: "python:eventlib-icanblink", wwwpart: icanblink }
+- { name: preferences, family: freebsd, setname: gnustep-preferences } # gnustep; may be not ambiguity (yet), but too generic name for sure
 
 - { name: polly, verpat: "4\\..*",     setname: polly-llvm-opt            } # polyhedral optimizationa for llvm
 - { name: polly, verpat: "0\\.93\\..*", setname: polly-twitter-client     } # twitter client
@@ -300,6 +308,10 @@
 - { name: pulp, wwwpart: bodil, setname: "node:pulp" }
 
 - { name: pwsafe, wwwpart: [passwordsafe,pwsafe.org], setname: passwordsafe }
+
+- { name: "python:planet", setname: planet, wwwpart: planetplanet }
+
+- { name: "python:eventlib", setname: "python:eventlib-icanblink", wwwpart: icanblink }
 
 - { name: racer, wwwpart: hippo, setname: racer-game }
 - { name: racer, setname: "rust:racer" }
@@ -460,3 +472,5 @@
 
 # emulator vs. (deprecated) scala compiler
 - { name: zinc, wwwpart: logiqx, setname: zinc-emulator }
+
+- { name: zipper, family: freebsd, setname: gnustep-zipper } # gnustep; may be not ambiguity (yet), but too generic name for sure

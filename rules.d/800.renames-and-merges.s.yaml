@@ -61,6 +61,7 @@
 - { setname: snorenotify,              name: snorenotify-qt5 }
 - { setname: socat,                    namepat: "socat[0-9]+" }
 - { setname: softhsm,                  namepat: "softhsm[0-9]+" }
+- { setname: sogo,                     name: [gnustep-sogo,gnustep-sogo3] }
 - { setname: sopwith,                  namepat: "sdl-?sopwith" }
 - { setname: soundtouch,               name: [libsoundtouch,sound-touch] }
 - { setname: spacearyarya,             name: spacearyarya-kxl, family: gentoo } # XXX: recheck
