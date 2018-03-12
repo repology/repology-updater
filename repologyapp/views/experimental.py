@@ -37,7 +37,7 @@ def metapackages_turnover():
     )
 
 
-@ViewRegistrar('/experimental/turnover')
+@ViewRegistrar('/experimental/turnover/maintainers')
 def maintainers_turnover():
     return flask.render_template(
         'maintainers-turnover.html',
