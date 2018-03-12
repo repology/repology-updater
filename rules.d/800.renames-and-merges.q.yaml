@@ -4,6 +4,8 @@
 - { setname: qbittorrent,              name: [qbittorrent-nox,qbittorrent-nox11,qbittorrent-qt4,qbittorrent-qt5,qbittorrent-dark,qbittorrent-nogui,qbittorrent-stable], addflavor: true }
 - { setname: qbs,                      name: qbs-docs, addflavor: docs }
 - { setname: qbzr,                     name: "python:qbzr" }
+- { setname: qgis,                     namepat: "qgis[0-9._-]+" }
+- { setname: qgis,                     name: qgis-ltr }
 - { setname: qmmp,                     name: [qmmp1,qmmp-qt5] }
 - { setname: qr_mumps,                 name: qrmumps }
 - { setname: qt,                       name: [qt,qt1,qt3,qt4,qt5] }

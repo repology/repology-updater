@@ -792,7 +792,9 @@
 - { name: qca,                         ver: "2.2.0",                 family: vcpkg,        ignore: true } # not released yet
 - { name: qdjango,                     verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: qemu,                        verpat: ".*pre[0-9]{5}.*",                          ignore: true }
-- { name: qgis,                                                      family: kaos,         ignore: true } # snapshot with random version
+- { name: qgis,                                                      family: kaos,         untrusted: true } # snapshot with random version
+- { name: qgis,                        verpat: "[0-9]{5}.*",                               ignore: true }
+- { name: qgis,                        verpat: ".*unstable",                               ignore: true }
 - { name: qrfcview,                    ver: "1.0.0",                 family: openbsd,      ignore: true } # uses unofficial fork (dead as well)
 - { name: qt5-webkit,                  ver: "5.212.0",               family: fedora,       ignore: true } # lie, it's 5.212.0alpha2
 - { name: quadra,                      verpat: ".*20[0-9]{6}.*",                           ignore: true }
