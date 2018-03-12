@@ -1,0 +1,4 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: "node:n",                 name: n }
+- { setname: "node:nativefier",        name: nativefier }

@@ -1,0 +1,4 @@
+# vim: tabstop=39 expandtab softtabstop=39
+
+- { setname: "go:github-miekg-mmark",  name: ["go:mmark",mmark] }
+- { setname: "go:github-rakyll-statik", name: ["go:statik"] }

@@ -38,5 +38,3 @@
 - { setname: rtorrent,                 name: [rtorrent-cdl,rtorrent-color,rtorrent-ipv6,rtorrent-vi-color], addflavor: true }
 - { setname: rtv,                      name: rtv-py36, addflavor: py36 }
 - { setname: rust-dwm-status,          name: "rust:rust-dwm-status" }
-- { setname: "rust:cargo-asm",         name: cargo-asm }
-- { setname: "rust:xsv",               name: xsv-rs }

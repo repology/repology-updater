@@ -154,8 +154,6 @@
 - { setname: gnustep-talksoup,         name: talksoup }
 - { setname: gnustep-timemon,          name: timemon }
 - { setname: gnustep-volume,           name: volume-app }
-- { setname: "go:github-miekg-mmark",  name: ["go:mmark",mmark] }
-- { setname: "go:github-rakyll-statik", name: ["go:statik"] }
 - { setname: gobject-introspection,    name: [gobject-introspection-common,gobject-introspection-runtime] }
 - { setname: godot,                    name: [godot-pulse,godot-tools,godot-mono], addflavor: true }
 - { setname: godot,                    name: godot2 }
