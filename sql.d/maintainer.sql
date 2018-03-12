@@ -135,19 +135,23 @@ FROM (
 	WHERE
 		(
 			num_packages > 0
+		{% if pivot %}
 		) AND (
 			-- pivot condition
-			%(pivot)s IS NULL OR
-			(NOT %(reverse)s AND maintainer >= %(pivot)s) OR
-			(%(reverse)s AND maintainer <= %(pivot)s)
+			{% if reverse %}
+			maintainer <= %(pivot)s
+			{% else %}
+			maintainer >= %(pivot)s
+			{% endif %}
+		{% endif %}
+		{% if search %}
 		) AND (
 			-- search condition
-			%(search)s IS NULL OR
 			maintainer LIKE ('%%' || %(search)s || '%%')
+		{% endif %}
 		)
 	ORDER BY
-		CASE WHEN NOT %(reverse)s THEN maintainer ELSE NULL END,
-		CASE WHEN %(reverse)s THEN maintainer ELSE NULL END DESC
+		maintainer{% if reverse %} DESC{% endif %}
 	LIMIT %(limit)s
 ) AS tmp
 ORDER BY maintainer;
