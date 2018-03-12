@@ -134,6 +134,8 @@ FROM (
 	FROM maintainers
 	WHERE
 		(
+			num_packages > 0
+		) AND (
 			-- pivot condition
 			%(pivot)s IS NULL OR
 			(NOT %(reverse)s AND maintainer >= %(pivot)s) OR
