@@ -1490,6 +1490,7 @@
     - adobe-source-han-sans-otc-fonts
     - adobe-source-han-sans-tw-fonts
     - adobe-source-han-sans-twhk-fonts
+    - adobe-sourcehansans-fonts
     - font-adobe-source-han-sans
     - fonts-adobe-source-han-sans
     - fonts-otf-adobe-source-han-sans-cn
@@ -1502,6 +1503,7 @@
     - source-han-sans-korean
     - source-han-sans-simplified-chinese
     - source-han-sans-traditional-chinese
+    - sourcehansans-fonts
 
 - setname: "fonts:source-han-serif"
   name:
@@ -1511,6 +1513,7 @@
     - adobe-source-han-serif-kr-fonts
     - adobe-source-han-serif-otc-fonts
     - adobe-source-han-serif-tw-fonts
+    - adobe-sourcehanserif-fonts
     - fonts-otf-adobe-source-han-serif-cn
     - fonts-otf-adobe-source-han-serif-jp
     - fonts-otf-adobe-source-han-serif-kr
