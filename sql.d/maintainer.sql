@@ -155,3 +155,31 @@ FROM (
 	LIMIT %(limit)s
 ) AS tmp
 ORDER BY maintainer;
+
+
+--------------------------------------------------------------------------------
+--
+-- !!get_recently_added_maintainers(limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
+SELECT
+    now() - first_seen AS ago,
+    maintainer
+FROM maintainers
+WHERE num_packages > 0
+ORDER BY first_seen DESC, maintainer
+LIMIT %(limit)s;
+
+
+--------------------------------------------------------------------------------
+--
+-- !!get_recently_removed_maintainers(limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
+SELECT
+    now() - last_seen AS ago,
+    maintainer
+FROM maintainers
+WHERE num_packages = 0
+ORDER BY last_seen DESC, maintainer
+LIMIT %(limit)s;

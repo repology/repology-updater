@@ -201,6 +201,16 @@ CREATE TABLE maintainers (
 	last_seen timestamp with time zone NOT NULL
 );
 
+-- indexes for maintainer queries
+CREATE UNIQUE INDEX maintainer_active_idx ON maintainers(maintainer) WHERE (num_packages > 0);
+CREATE INDEX maintainers_maintainer_trgm ON maintainers USING gin (maintainer gin_trgm_ops) WHERE (num_packages > 0);
+
+-- index for recently_added
+CREATE INDEX maintainers_recently_added_idx ON maintainers(first_seen DESC, maintainer) WHERE (num_packages > 0);
+
+-- index for recently_removed
+CREATE INDEX maintainers_recently_removed_idx ON maintainers(last_seen DESC, maintainer) WHERE (num_packages = 0);
+
 --------------------------------------------------------------------------------
 -- Per-repository and global statistics and their history
 --------------------------------------------------------------------------------
