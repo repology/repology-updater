@@ -125,8 +125,7 @@ LIMIT %(limit)s;
 --------------------------------------------------------------------------------
 SELECT
 	*
-FROM
-(
+FROM (
 	SELECT
 		maintainer,
 		num_packages,
