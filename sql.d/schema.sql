@@ -98,7 +98,8 @@ CREATE TABLE metapackages (
 	last_seen timestamp with time zone NOT NULL
 );
 
--- indexes for metapackage quries
+-- indexes for metapackage queries
+CREATE UNIQUE INDEX metapackages_active_idx ON metapackages(effname) WHERE (num_repos_nonshadow > 0);
 CREATE INDEX ON metapackages(num_repos) WHERE (num_repos_nonshadow > 0);
 CREATE INDEX ON metapackages(num_families) WHERE (num_repos_nonshadow > 0);
 CREATE INDEX metapackages_effname_trgm ON metapackages USING gin (effname gin_trgm_ops) WHERE (num_repos_nonshadow > 0);
