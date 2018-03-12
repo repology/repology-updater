@@ -126,45 +126,65 @@
   desc: RPM Fusion Fedora 27
   family: fedora
   sources:
-    - name: free-branched
+    - name: free-release
       fetcher: Repodata
       parser: Repodata
-      url: https://download1.rpmfusion.org/free/fedora/development/27/Everything/source/SRPMS/
+      url: https://download1.rpmfusion.org/free/fedora/releases/27/Everything/source/SRPMS/
       subrepo: free/release
-#    - name: free-release
-#      fetcher: Repodata
-#      parser: Repodata
-#      url: https://download1.rpmfusion.org/free/fedora/releases/27/Everything/source/SRPMS/
-#      subrepo: free/release
-#    - name: free-updates
-#      fetcher: Repodata
-#      parser: Repodata
-#      url: https://download1.rpmfusion.org/free/fedora/updates/27/SRPMS/
-#      subrepo: free/updates
+    - name: free-updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/free/fedora/updates/27/SRPMS/
+      subrepo: free/updates
     - name: free-updates-testing
       fetcher: Repodata
       parser: Repodata
       url: https://download1.rpmfusion.org/free/fedora/updates/testing/27/SRPMS/
       subrepo: free/updates-testing
-    - name: nonfree-branched
+    - name: nonfree-release
       fetcher: Repodata
       parser: Repodata
-      url: https://download1.rpmfusion.org/nonfree/fedora/development/27/Everything/source/SRPMS/
-      subrepo: free/release
-#    - name: nonfree-release
-#      fetcher: Repodata
-#      parser: Repodata
-#      url: https://download1.rpmfusion.org/nonfree/fedora/releases/27/Everything/source/SRPMS/
-#      subrepo: nonfree/release
-#    - name: nonfree-updates
-#      fetcher: Repodata
-#      parser: Repodata
-#      url: https://download1.rpmfusion.org/nonfree/fedora/updates/27/SRPMS/
-#      subrepo: nonfree/updates
+      url: https://download1.rpmfusion.org/nonfree/fedora/releases/27/Everything/source/SRPMS/
+      subrepo: nonfree/release
+    - name: nonfree-updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/nonfree/fedora/updates/27/SRPMS/
+      subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher: Repodata
       parser: Repodata
       url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/27/SRPMS/
+      subrepo: nonfree/updates-testing
+  repolinks:
+    - desc: RPM Fusion home
+      url: https://rpmfusion.org/
+  tags: [ all, production, rpmfusion ]
+
+- name: rpmfusion_fedora_28
+  type: repository
+  desc: RPM Fusion Fedora 28
+  family: fedora
+  sources:
+    - name: free-branched
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/free/fedora/development/28/Everything/source/SRPMS/
+      subrepo: free/release
+    - name: free-updates-testing
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/free/fedora/updates/testing/28/SRPMS/
+      subrepo: free/updates-testing
+    - name: nonfree-branched
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/nonfree/fedora/development/28/Everything/source/SRPMS/
+      subrepo: free/release
+    - name: nonfree-updates-testing
+      fetcher: Repodata
+      parser: Repodata
+      url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/28/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
