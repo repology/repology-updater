@@ -6,6 +6,7 @@
 - { setname: talloc,                   name: libtalloc }
 - { setname: talloc,                   name: talloc-man, addflavor: man }
 - { setname: talloc,                   name: talloc-static, addflavor: static }
+- { setname: tanks-of-freedom,         name: "tanks of freedom" }
 - { setname: tautulli,                 name: tautulli-beta, ignore: true }
 - { setname: tbb,                      name: [intel-tbb,libtbb] }
 - { setname: tcl,                      namepat: "tcl8[0-9._-]+" }
@@ -24,6 +25,7 @@
 - { setname: tetrinetx,                name: [tetrinet-x,tetrinet-server] }
 - { setname: tex-$1,                   namepat: "tex-(.*)-doc", addflavor: doc }
 - { setname: texlive-documentation,    namepat: "texlive-documentation-.*", family: gentoo }
+- { setname: thunder-and-lightning,    name: "thunder&lightning" }
 - { setname: thunderbird,              name: [mozilla-thunderbird,mozillathunderbird] }
 - { setname: thunderbird,              name: [thunderbird-45-gtk2,thunderbird-gtk2], addflavor: gtk2 }
 - { setname: thunderbird,              name: mozilla-thunderbird-l10n, addflavor: l10n }
@@ -40,6 +42,7 @@
 - { setname: tiff,                     name: [libtiff,libtiff3,libtiff4] }
 - { setname: tigervnc,                 name: [tiger-vnc,tigervnc-viewer] }
 - { setname: tigervnc,                 name: tigervnc-devel, ignore: true }
+- { setname: tile-world,               name: "tile world" }
 - { setname: tiled,                    name: [tiled-java,tiled-qt] }
 - { setname: time,                     name: [gnu-time,gtime] }
 - { setname: timidity++,               name: [timidity++-emacs,timidity++-gtk,timidity++-motif,timidity++-slang,timidity++-tcltk,timidity++-xaw,timidity++-xskin] }
@@ -48,6 +51,7 @@
 - { setname: tintin++,                 name: [tintin,tintinxx] }
 - { setname: tk,                       namepat: "tk8[0-9._-]+" } # don't mix with tk2, tk5, tk707 which are unrelated projects
 - { setname: tmuxinator,               name: "ruby:tmuxinator" }
+- { setname: tmw,                      name: "the mana world" }
 - { setname: tokyocabinet,             name: tokyo-cabinet }
 - { setname: tokyodystopia,            name: tokyo-dystopia }
 - { setname: tomahawk,                 name: tomahawk-player }
@@ -61,5 +65,7 @@
 - { setname: tremor,                   name: libtremor }
 - { setname: trigger-rally,            name: trigger, family: gentoo }
 - { setname: tripwire,                 name: [tripwire-131,tripwire12] }
+- { setname: tsc,                      name: "the secret chronicles of dr. m." }
 - { setname: tsmuxer,                  name: linux-tsmuxer, family: freebsd }
+- { setname: tuxpaint,                 name: "tux paint" }
 - { setname: twolame,                  name: two-lame }

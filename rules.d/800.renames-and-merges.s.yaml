@@ -36,6 +36,7 @@
 - { setname: sextractor,               name: astromatic-sextractor }
 - { setname: sfml,                     name: compat-sfml16 }
 - { setname: sfml,                     namepat: "(?:lib)?sfml[0-9._-]*" }
+- { setname: sgt-puzzles,              name: "simon tatham's portable puzzle collection" }
 - { setname: sgt-puzzles,              name: puzzles } # not completely safe, but other puzzles were not encountered yet
 - { setname: sha1collisiondetection,   name: sha1dc }
 - { setname: shibboleth-sp,            namepat: "shibboleth-sp[0-9]+" }
@@ -45,6 +46,8 @@
 - { setname: simple-scan,              name: simple-scan-3.12 }
 - { setname: simple-scan,              name: simple-scan-trunk, ignore: true }
 - { setname: simplescreenrecorder,     name: [simplescreenrecorder-lib, simplescreenrecorder-qt5], addflavor: true }
+- { setname: simplesok,                name: "simple sokoban" }
+- { setname: singularity,              name: "endgame: singularity" }
 - { setname: singularity,              name: endgame-singularity }
 - { setname: singularity-music,        name: endgame-singularity-music }
 - { setname: singularityviewer,        name: singularityviewer-alpha, devel: true }
@@ -55,6 +58,7 @@
 - { setname: slang,                    name: [libslang,libslang2,s-lang,slang2,slang1] }
 - { setname: slashem,                  name: slashem-tty }
 - { setname: slony1,                   namepat: "slony1(?:-2|v2)" }
+- { setname: smc,                      name: "secret maryo chronicles" }
 - { setname: smplayer,                 name: smplayer-qt4, addflavor: qt4 }
 - { setname: smstools,                 namepat: "smstools[0-9]+" }
 - { setname: sni-qt,                   name: sni-qt4 }
@@ -62,6 +66,7 @@
 - { setname: socat,                    namepat: "socat[0-9]+" }
 - { setname: softhsm,                  namepat: "softhsm[0-9]+" }
 - { setname: sogo,                     name: [gnustep-sogo,gnustep-sogo3] }
+- { setname: sopwith,                  name: "sdl sopwith" }
 - { setname: sopwith,                  namepat: "sdl-?sopwith" }
 - { setname: soundtouch,               name: [libsoundtouch,sound-touch] }
 - { setname: spacearyarya,             name: spacearyarya-kxl, family: gentoo } # XXX: recheck
@@ -72,6 +77,7 @@
 - { setname: sparsehash,               name: google-sparsehash }
 - { setname: spatialite-gui,           name: spatialite-gui-devel, ignore: true }
 - { setname: speed-dreams$1,           namepat: "speeddreams(-data)?" }
+- { setname: speed-dreams,             name: "speed dreams" }
 - { setname: speexdsp,                 name: libspeexdsp }
 - { setname: spidermonkey,             namepat: "spidermonkey[0-9]+" }
 - { setname: spotify,                  name: [spotify-stable,spotify094] }
@@ -87,6 +93,7 @@
 - { setname: stepmania,                name: stepmania-devel, family: freebsd }
 - { setname: stfl,                     name: [libstfl,libstfl0] }
 - { setname: sthttpd,                  name: thttpd, family: gentoo } # actually fork of thttpd; XXX: problem
+- { setname: stone-soup,               name: "dungeon crawl stone soup" }
 - { setname: stone-soup,               name: stone-soup-ncurses }
 - { setname: stone-soup,               namepat: "stonesoup(?:-sdl)?" }
 - { setname: stormssh,                 name: "python:stormssh" }

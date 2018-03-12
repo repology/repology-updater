@@ -5,6 +5,7 @@
 - { setname: factor,                   name: factor-lang }
 - { setname: fail2ban,                 name: "python:fail2ban" }
 - { setname: fail2ban,                 name: fail2ban6 }
+- { setname: falcons-eye,              name: "falcon's eye" }
 - { setname: falcons-eye,              name: falconseye }
 - { setname: farstream,                namepat: "farstream[0-9.-]+" }
 - { setname: fasta,                    name: fasta3 }
@@ -20,8 +21,9 @@
 - { setname: fftw,                     name: [fftwf,fftw-avx,fftw-static] }
 - { setname: fftw,                     namepat: "(?:lib)?fftw[0-9._-]*(-double|-float|-long-double|-quad|-single|-long|-mpi|-mpich|-openmpi|-common|-gnu-.*)?", addflavor: $1 }
 - { setname: fife,                     name: [fifengine,"python:fife"] }
-- { setname: file-roller,              name: legacy-file-roller }
 - { setname: file-roller,              name: [file-roller-ja,file-roller-tmp,file-roller2-nn], addflavor: true }
+- { setname: file-roller,              name: legacy-file-roller }
+- { setname: fillets-ng,               name: "fish fillets - next generation" }
 - { setname: fillets-ng,               name: fish-fillets }
 - { setname: fillets-ng,               name: fish-fillets-ng }
 - { setname: firebase-cli,             name: firebase-tools }
@@ -79,21 +81,23 @@
 - { setname: freeciv,                  namepat: "freeciv-(?:client|server|share)", family: [pkgsrc,openbsd] }
 - { setname: freedink,                 name: freedink-engine }
 - { setname: freedoom,                 name: [doom-freedoom,freedoom-freedm] }
+- { setname: freedroidrpg,             name: "freedroid rpg" }
 - { setname: freefoom,                 name: [freedoom1,freedoom2] }
 - { setname: freeglut,                 name: libfreeglut }
 - { setname: freemedforms,             name: freemedforms-project }
 - { setname: freepats,                 name: [timidity-freepats,timidity-patch-freepats] }
 - { setname: freeplane,                name: freeplane-srcbuild }
-- { setname: freeradius,               name: [freeradius-server,freeradius3] }
 - { setname: freeradius,               name: [freeradius-freetds,freeradius-iodbc,freeradius-krb5,freeradius-ldap,freeradius-memcached,freeradius-mysql,freeradius-perl,freeradius-pgsql,freeradius-python,freeradius-rest,freeradius-sqlite3,freeradius-unixodbc,freeradius-wpe,freeradius-yubikey], addflavor: true }
+- { setname: freeradius,               name: [freeradius-server,freeradius3] }
 - { setname: freerdp,                  namepat: "freerdp[0-9.-]+" }
 - { setname: freetds,                  name: freetds-devel, untrusted: true }
 - { setname: freetds,                  name: freetds-patched-enum, addflavor: patched-enum }
 - { setname: freetype,                 name: [libfreetype,freetype1,freetype2] }
 - { setname: freetype-infinality,      name: [freetype2-infinality,libfreetype-infinality] }
+- { setname: fretsonfire,              name: "frets on fire" }
 - { setname: friently-find,            name: ffind }
-- { setname: frozen-bubble,            name: frozenbubble2 }
 - { setname: frozen-bubble,            name: frozen-bubble-server, addflavor: server }
+- { setname: frozen-bubble,            name: frozenbubble2 }
 - { setname: fselect,                  name: "rust:fselect" }
 - { setname: fsv,                      name: fsv2 }
 - { setname: "fusefs:curlftpfs",       name: curlftpfs }

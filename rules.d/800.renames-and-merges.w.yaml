@@ -1,6 +1,7 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 - { setname: waf,                      name: "python:waf" }
+- { setname: warzone2100,              name: "warzone 2100" }
 - { setname: waterfox,                 name: waterfox-kde, addflavor: kde }
 - { setname: watson,                   name: td-watson }
 - { setname: wcalc,                    name: w-calc }
@@ -14,6 +15,7 @@
 - { setname: weboob,                   name: weboob-headless, addflavor: headless }
 - { setname: websocketpp,              name: websocket++ }
 - { setname: webvfx,                   name: webvfx-qt5, addflavor: qt5 }
+- { setname: wesnoth,                  name: "the battle for wesnoth" }
 - { setname: wesnoth,                  name: wesnoth-devel }
 - { setname: wesnoth,                  namepat: "wesnoth[0-9.-]+" }
 - { setname: which,                    name: [gnu-which,gwhich] }
@@ -28,8 +30,8 @@
 - { setname: wings3d,                  name: wings }
 - { setname: wire,                     name: wire-desktop }
 - { setname: wire,                     name: wire-desktop-beta, devel: true }
-- { setname: wireguard,                name: wg }
 - { setname: wireguard,                name: [wireguard-dkms,wireguard-hardened,wireguard-tools,wireguard-module-arch], addflavor: true }
+- { setname: wireguard,                name: wg }
 - { setname: wireguard,                name: wireguard-vanilla }
 - { setname: wireless-regdb,           name: wireless-regdb-pentest, addflavor: pentest }
 - { setname: wireshark,                name: [wireshark-cli,wireshark-common,wireshark-gtk,wireshark-gtk2,wireshark-headers,wireshark-lite,wireshark-qt,wireshark-qt5,tshark,tshark-lite], addflavor: true }
@@ -38,6 +40,7 @@
 - { setname: wiznote,                  name: wiznote-qt4, addflavor: true }
 - { setname: wormsofprey,              name: wop }
 - { setname: wpa_supplicant,           name: wpasupplicant }
+- { setname: wrogue,                   name: "warp rogue" }
 - { setname: wxqt,                     namepat: "wxqt[0-9._-]+" }
 - { setname: wxwidgets,                name: [wxmac,wxx11,wxmsw] }
 - { setname: wxwidgets,                name: [wxwidgets-3.0-cxx11,wxwidgets-ansi,wxwidgets-media,wxwidgets-wxcontainer,wxwidgets-wxcontainer24c] }

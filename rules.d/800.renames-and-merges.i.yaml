@@ -19,6 +19,7 @@
 - { setname: imhangul,                 name: imhangul-gtk3, addflavor: gtk3 }
 - { setname: imhangul,                 name: imhangul3 }
 - { setname: indent,                   name: [gnu-indent,gindent] }
+- { setname: infon,                    name: "infon battle arena" }
 - { setname: ingen,                    name: ingen-unstable, ignore: true }
 - { setname: inn,                      namepat: "inn[0-9]+" }
 - { setname: inotify-tools,            name: inotify-tools-inc, addflavor: inc }
@@ -43,3 +44,4 @@
 - { setname: italc,                    namepat: "italc[0-9]+" }
 - { setname: itcl,                     namepat: "itcl[0-9]+" }
 - { setname: itk,                      namepat: "itk[0-9]+" }
+- { setname: ivan,                     name: "iter vehemens ad necem" }

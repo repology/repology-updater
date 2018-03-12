@@ -5,6 +5,7 @@
 - { setname: backuppc,                 name: backuppc-devel, ignore: true }
 - { setname: backuppc,                 name: backuppc4 }
 - { setname: bakery,                   name: bakery2.6 }
+- { setname: balazar3,                 name: "balazar iii" }
 - { setname: balsa,                    name: balsa-gtk2 }
 - { setname: barbie-seahorse-adventures, name: seahorse-adventures }
 - { setname: barcode,                  name: gnu-barcode }
@@ -16,15 +17,16 @@
 - { setname: bats,                     name: bash-bats }
 - { setname: baudline,                 name: linux-baudline, family: freebsd }
 - { setname: bbpager,                  name: [bbpager03,bbpager04] }
-- { setname: bcc,                      name: bpfcc }
 - { setname: bcc,                      name: "python:bcc", addflavor: python } # split in 850
 - { setname: bcc,                      name: bcc-tools, addflavor: tools }
+- { setname: bcc,                      name: bpfcc }
 - { setname: bcel,                     name: bcel5_3 }
 - { setname: bcfg2,                    name: "python:bcfg2" }
 - { setname: beast,                    name: beastbse }
 - { setname: beneath-a-steel-sky,      name: bass, family: [freebsd,gentoo,openbsd,arch,opensuse] }
 - { setname: beneath-a-steel-sky,      name: beneath-a-steel-sky-cd }
 - { setname: beneath-a-steel-sky,      name: scummvm-bass }
+- { setname: berusky2,                 name: "berusky ii" }
 - { setname: bibtool,                  name: bib-tool }
 - { setname: bicyclerepair,            name: bicyclerepair-py27 }
 - { setname: billardgl,                name: billard-gl }
@@ -47,7 +49,9 @@
 - { setname: blender,                  name: blender-binaries }
 - { setname: blender,                  namepat: "blender[0-9._-]+" }
 - { setname: blitz++,                  name: blitz, family: [gentoo,fedora,opensuse] } # XXX: recheck
+- { setname: blobby,                   name: "blobby volley 2" }
 - { setname: blobby,                   name: [blobby2,blobby-volley] }
+- { setname: blockattack,              name: "block attack - rise of the blocks" }
 - { setname: blockout,                 name: [blockout2,blockoutii] }
 - { setname: bluedevil,                name: bluedevil5 }
 - { setname: bmp,                      name: bmp-esound, addflavor: esound }
@@ -62,6 +66,7 @@
 - { setname: boost,                    name: "python:boost", addflavor: python }
 - { setname: boost,                    namepat: "boost-mpi-source[0-9-.]+", addflavor: boost-mpi }
 - { setname: boost,                    namepat: "boost[0-9_.]+" }
+- { setname: boswars,                  name: "bos wars" }
 - { setname: botan,                    namepat: "botan[0-9.]+" }
 - { setname: botan,                    namepat: "libbotan[0-9.]*" }
 - { setname: bouncycastle,             name: bouncycastle15 }

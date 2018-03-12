@@ -12,8 +12,10 @@
 - { setname: hdf5,                     name: hdf5_18-cpp-fortran, addflavor: cpp-fortran }
 - { setname: hdf5,                     name: [hdf5-c++,hdf5-cpp,hdf5-cpp-fortran,hdf5-fortran,hdf5-mpi,hdf5-mvapich2,hdf5-openmpi,hdf5-openmpi-java,hdf5-parallel-openmpi,hdf5-salome,hdf5-threadsafe], addflavor: true }
 - { setname: hedgewars,                name: hedgewars-server, addflavor: server }
+- { setname: help-hannahs-horse,       name: "help hannah's horse" }
 - { setname: help-hannahs-horse,       name: hannah, family: debuntu } # recheck
 - { setname: hermes,                   name: libhermes }
+- { setname: heroes-of-wesnoth,        name: "heroes of wesnoth" }
 - { setname: hexchat,                  name: hexchat-python2, addflavor: python2 }
 - { setname: hgflow,                   name: hg-flow }
 - { setname: hitori,                   name: gnome-games-hitori }

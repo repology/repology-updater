@@ -6,11 +6,12 @@
 - { setname: palemoon,                 name: palemoon-bin, addflavor: bin }
 - { setname: pam-ccreds,               name: libpam-ccreds }
 - { setname: pam-ldap,                 name: libpam-ldap }
-- { setname: pango,                    namepat: "(?:lib)?pango[0-9._-]*" }
 - { setname: pango,                    name: pango-reference, addflavor: reference }
+- { setname: pango,                    namepat: "(?:lib)?pango[0-9._-]*" }
 - { setname: pangomm,                  namepat: "(?:lib)?pangomm[0-9._-]*" }
 - { setname: pangomm,                  namepat: "(?:lib)?pangomm[0-9._-]*(-docs)", addflavor: docs }
 - { setname: panoply,                  name: panoply-nodesktop, addflavor: nodesktop }
+- { setname: pasang-emas,              name: "pasang emas" }
 - { setname: pasystray,                name: [pasystray-gtk2,pasystray-gtk2-standalone,pasystray-gtk3-standalone] }
 - { setname: patch,                    name: gpatch }
 - { setname: pcre++,                   name: [libpcre++,pcrexx] }
@@ -38,6 +39,7 @@
 - { setname: physfs,                   name: libphysfs }
 - { setname: pilot-link,               name: "perl:pilot-link" }
 - { setname: pilot-link,               name: pilot-link-libs, addflavor: libs }
+- { setname: pink-pony,                name: "pink pony" }
 - { setname: pioneer,                  name: pioneerspacesim }
 - { setname: pipenv,                   name: "python:pipenv" }
 - { setname: pixman,                   name: [libpixman,xorg-libpixman,xorg-pixman] }
@@ -72,6 +74,7 @@
 - { setname: postgresql-multicorn,     name: multicorn }
 - { setname: poudriere,                name: poudriere-devel, ignore: true }
 - { setname: povray,                   namepat: "povray[0-9]+", family: freebsd }
+- { setname: powder-toy,               name: "powder toy" }
 - { setname: powder-toy,               name: [powdertoy,the-powder-toy,thepowdertoy] }
 - { setname: powder-toy,               name: powder, wwwpart: powder.hardwired.org.uk } # rosa 2014 brokenness
 - { setname: powder-toy,               name: powder-toy-static, addflavor: static }

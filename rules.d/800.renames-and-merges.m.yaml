@@ -18,6 +18,7 @@
 - { setname: mcron,                    name: mcron2 }
 - { setname: md5deep,                  name: hashdeep }
 - { setname: mdds,                     namepat: "mdds[0-9._-]+" }
+- { setname: meandmyshadow,            name: "me and my shadow" }
 - { setname: mediainfo,                name: media-info }
 - { setname: mediawiki,                name: mediawiki-lts }
 - { setname: mediawiki,                namepat: "mediawiki[0-9._-]+" }

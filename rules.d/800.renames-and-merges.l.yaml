@@ -1,9 +1,9 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 - { setname: lambdahack,               name: "haskell:lambdahack" }
-- { setname: lantern,                  name: lantern-headless }
 - { setname: language-pack-gnome,      namepat: "language-pack-gnome-.*", family: debuntu }
 - { setname: language-pack-kde,        namepat: "language-pack-kde-.*", family: debuntu }
+- { setname: lantern,                  name: lantern-headless }
 - { setname: lantern,                  name: lantern-headless }
 - { setname: lapack++,                 name: lapackpp }
 - { setname: lapack,                   name: [lapack-docs,lapack-reference], addflavor: docs }
@@ -17,8 +17,9 @@
 - { setname: ldns,                     name: "perl:dns-ldns", wwwpart: nlnetlabs, addflavor: perl } # part of
 - { setname: ldns,                     name: "python:ldns", addflavor: python }
 - { setname: ldns,                     name: [ldns-tools,ldns-utils] }
-- { setname: libleptonica,             name: liblibleptonica }
 - { setname: liberal-crime-squad,      name: lcs }
+- { setname: liberation-circuit,       name: "liberation circuit" }
+- { setname: libleptonica,             name: liblibleptonica }
 - { setname: libreoffice,              name: [libreoffice-bin,libreoffice-bin-debug,libreoffice-gtk3], addflavor: true }
 - { setname: libreoffice,              name: [libreoffice-dev,libreoffice-fresh,libreoffice-oldstable,libreoffice-still] }
 - { setname: libreoffice,              namepat: "([^-]+)-libreoffice", family: freebsd, addflavor: $1 }
@@ -29,10 +30,10 @@
 - { setname: libreoffice-extension-barcode, name: barcode, family: gentoo, category: app-officeext }
 - { setname: libressl,                 name: libressl-devel, ignore: true }
 - { setname: libressl,                 name: libressl-netcat, addflavor: netcat }
-- { setname: lightdm,                  namepat: "liblightdm(?:-qt4|-qt5|-ubuntu)*", addflavor: true }
-- { setname: lightdm,                  namepat: "(liblightdm(?:-qt4|-qt5)*)-devel", addflavor: $1, untrusted: true }
 - { setname: lightdm,                  name: lightdm-devel, untrusted: true }
 - { setname: lightdm,                  name: lightdm-ubuntu, addflavor: ubuntu }
+- { setname: lightdm,                  namepat: "(liblightdm(?:-qt4|-qt5)*)-devel", addflavor: $1, untrusted: true }
+- { setname: lightdm,                  namepat: "liblightdm(?:-qt4|-qt5|-ubuntu)*", addflavor: true }
 - { setname: lightdm-gtk-greeter,      name: lightdm-gtk }
 - { setname: lightdm-gtk-greeter,      name: lightdm-gtk-greeter-devel, untrusted: true }
 - { setname: lightsoff,                name: gnome-games-lightsoff }
@@ -41,12 +42,15 @@
 - { setname: lilypond,                 name: lilypond-devel }
 - { setname: links,                    name: [links1,links2,links+,links-g-directfb,links-gui] }
 - { setname: linux,                    namepat: "linux-kernel(?:-lts)?[0-9._-]*" }
+- { setname: lipsofsuna,               name: "lips of suna" }
 - { setname: liquidwar,                name: liquidwar5 }
+- { setname: liquidwar6,               name: "liquid war 6" }
 - { setname: lldb,                     name: lldb-assert, addflavor: assert }
 - { setname: lldb,                     name: lldb-polly, addflavor: polly }
 - { setname: lldb,                     namepat: "lldb[0-9._-]*-split", addflavor: split }
 - { setname: lldb,                     namepat: "lldb[0-9._-]+" }
 - { setname: llvm,                     namepat: "llvm[0-9.-]+" }
+- { setname: lordsawar,                name: "lordsawar!" }
 - { setname: lostpixels,               name: blinkensisters-with-addons }
 - { setname: love,                     namepat: "love(?:-legacy)?[0-9._-]+" }
 - { setname: lsof-freebsd,             name: lsof, family: freebsd } # patched version with own versioning

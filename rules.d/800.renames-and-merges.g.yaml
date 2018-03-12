@@ -22,6 +22,7 @@
 - { setname: gdal-grass,               name: libgdal-grass }
 - { setname: gdk-pixbuf,               namepat: "(?:lib)?gdk-pixbuf[0-9._-]*(\\+svg|-jasper|-xlib)?" }
 - { setname: geany-plugins,            namepat: "geany-plugin-.*", family: freebsd }
+- { setname: gearhead2,                name: "gearhead 2" }
 - { setname: gearmand,                 name: [gearmand-devel,gearman] }
 - { setname: geckodriver,              name: geckodriver-unstable, ignore: true }
 - { setname: geckodriver,              name: selenium-gecko-driver }
@@ -88,6 +89,7 @@
 - { setname: glib-networking,          name: glib2-networking }
 - { setname: glibmm,                   namepat: "(?:lib)?glibmm[0-9._-]*" }
 - { setname: glibmm,                   namepat: "(?:lib)?glibmm[0-9._-]*(-docs|-reference)", addflavor: docs }
+- { setname: globulation2,             name: "globulation 2" }
 - { setname: glog,                     name: google-glog }
 - { setname: glpng,                    name: [libglpng1,libglpng] }
 - { setname: glusterfs,                name: glusterfs3 }
@@ -200,6 +202,7 @@
 - { setname: gucharmap,                name: gucharmap-gtk2, addflavor: gtk2 }
 - { setname: gucharmap,                name: gucharmap7 }
 - { setname: guile,                    namepat: "guile[0-9._-]+" }
+- { setname: gvrng,                    name: "guido van robot" }
 - { setname: gwt,                      name: webtoolkit-java-sdk }
 - { setname: gxmessage,                name: gxmessage-gtk2, addflavor: gtk2 }
 - { setname: gyp,                      name: "python:gyp" }

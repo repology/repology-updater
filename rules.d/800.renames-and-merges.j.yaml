@@ -26,4 +26,5 @@
 - { setname: json-c,                   name: json-c12 }
 - { setname: json-glib,                name: libjson-glib }
 - { setname: jsonrpc-glib,             name: libjsonrpc-glib }
+- { setname: jumpnbump,                name: "jump n bump" }
 - { setname: junit,                    name: [junit4,java-junit,junit5] }

@@ -3,14 +3,15 @@
 - { setname: rabbitmq-server,          name: rabbitmq }
 - { setname: racket,                   name: [minimal-racket,racket-minimal], addflavor: minimal }
 - { setname: racket,                   name: racket-docs, addflavor: docs }
-- { setname: ragel,                    name: ragel-dev, ignore: true }
 - { setname: ragel,                    name: ragel-6 }
+- { setname: ragel,                    name: ragel-dev, ignore: true }
 - { setname: raptor,                   name: [raptor1,raptor2] }
 - { setname: rawtherapee,              name: rawtherapee-gtk2 }
 - { setname: rawtherapee,              name: rawtherapee-unstable, ignore: true }
 - { setname: rdesktop,                 name: rdesktop-legacy }
 - { setname: readline,                 namepat: "(?:lib)?readline[0-9._-]*" }
 - { setname: rear,                     name: [rear118a,relax-and-recover] }
+- { setname: redeclipse,               name: "red eclipse" }
 - { setname: redeclipse,               name: red-eclipse }
 - { setname: redeclipse,               name: redeclipse-data, addflavor: data }
 - { setname: redland,                  name: [libredland,redland-mysql,redland-pgsql,redland-storage-mysql,redland-storage-postgresql,redland-storage-sqlite,redland-storage-virtuoso], addflavor: true }
@@ -20,9 +21,10 @@
 - { setname: renpy,                    name: [renpy-demos,renpy-sdk], addflavor: true }
 - { setname: renpy,                    name: renpy6 }
 - { setname: reposurgeon,              name: cyreposurgeon }
+- { setname: rescue-max,               name: "rescue! max" }
+- { setname: rigsofrods,               name: "rigs of rods" }
 - { setname: ringojs,                  name: ringo }
-- { setname: "rust:cargo-asm",         name: cargo-asm }
-- { setname: "rust:xsv",               name: xsv-rs }
+- { setname: roguebox-adventures,      name: "roguebox adventures" }
 - { setname: rl,                       name: randomize-lines } # it's too short to be unambigous, but there are no clashet (yet) and it's more canonical
 - { setname: rlog,                     name: librlog }
 - { setname: roguebox-adventures,      name: rogueboxadventures }
@@ -36,3 +38,5 @@
 - { setname: rtorrent,                 name: [rtorrent-cdl,rtorrent-color,rtorrent-ipv6,rtorrent-vi-color], addflavor: true }
 - { setname: rtv,                      name: rtv-py36, addflavor: py36 }
 - { setname: rust-dwm-status,          name: "rust:rust-dwm-status" }
+- { setname: "rust:cargo-asm",         name: cargo-asm }
+- { setname: "rust:xsv",               name: xsv-rs }

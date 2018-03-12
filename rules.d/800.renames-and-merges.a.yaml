@@ -46,10 +46,12 @@
 - { setname: alien,                    name: [alien-package-converter,alien_package_converter] }
 - { setname: alienarena,               name: alien-arena }
 - { setname: alienarena-data,          name: alien-arena-data }
+- { setname: allacrost,                name: "hero of allacrost" }
 - { setname: allegro,                  namepat: "allegro[0-9.]*(?:-devel)?" }
+- { setname: allureofthestars,         name: "allure of the stars" }
+- { setname: allureofthestars,         name: "haskell:alure" }
 - { setname: alogg,                    name: [liballegroogg,allegroogg] }
 - { setname: alsa-lib,                 name: [alsa,libalsa,libalsa2,alsa-lib-noassertion] }
-- { setname: allureofthestars,         name: "haskell:alure" }
 - { setname: amule,                    name: amule-daemon, addflavor: daemon }
 - { setname: amule,                    name: amule-devel, ignore: true }
 - { setname: amule,                    name: amule-gui, addflavor: gui }
@@ -60,6 +62,7 @@
 - { setname: angelscript,              namepat: "angelscript-?[0-9._-]+"}
 - { setname: angular.js,               name: angularjs }
 - { setname: anki,                     name: [anki12,anki20,"python:anki2"] }
+- { setname: annex,                    name: "annex: conquer the world" }
 - { setname: ansible,                  name: "python:ansible" }
 - { setname: ansible,                  namepat: "ansible[0-9]+" }
 - { setname: ant,                      namepat: "ant[0-9.]+" }
@@ -105,6 +108,7 @@
 - { setname: argon2,                   name: libargon2 }
 - { setname: argus,                    name: argus-sasl, family: freebsd }
 - { setname: argyllcms,                name: [argyll,argyll-cms] }
+- { setname: armagetronad,             name: "armagetron advanced" }
 - { setname: armagetronad,             name: armagetron }
 - { setname: armagetronad,             name: armagetronad-server, addflavor: server } # merge
 - { setname: arpack-ng,                name: [arpack-ng-mpich,arpack-ng-openmpi,libarpack-ng] }
@@ -114,6 +118,7 @@
 - { setname: artefetcher,              namepat: "artefetcher-qt[45]" }
 - { setname: arx-libertatis,           name: arx }
 - { setname: arx-libertatis,           name: arxlibertatis }
+- { setname: asc,                      name: "advanced strategic command" }
 - { setname: asdf,                     name: cl-asdf }
 - { setname: asdf,                     name: uiop, addflavor: true }
 - { setname: asf,                      name: archi-steam-farm }
@@ -158,8 +163,8 @@
 - { setname: avr8-burn-o-mat,          name: avr8-burn-omat }
 - { setname: avrdude,                  name: arduino-avrdude, addflavor: adruino }
 - { setname: avro-c++,                 name: avro-cpp }
-- { setname: awesome,                  namepat: "awesome[0-9._-]+" }
 - { setname: awesome,                  name: awesome-luajit, addflavor: jit }
+- { setname: awesome,                  namepat: "awesome[0-9._-]+" }
 - { setname: aws-cw-tools,             name: cloud-watch }
 - { setname: awscli,                   name: "python:awscli" }
 - { setname: awscli,                   name: aws-cli }
