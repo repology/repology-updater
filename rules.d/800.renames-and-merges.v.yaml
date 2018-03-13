@@ -24,6 +24,7 @@
 - { setname: virtuoso,                 name: [virtuoso-6,virtuoso-7,virtuoso-opensource,virtuoso-ose,virtuoso6] }
 - { setname: vlc,                      name: [vlc-qt,vlc-qt4,vlc-qt5,vlc-nox,vlc-decklink], ignore: true }
 - { setname: vlc,                      name: vlc-nightly, ignore: true }
+- { setname: vms-empire,               name: "vms empire" }
 - { setname: vscode,                   name: [visual-studio-code,visual-studio-code-oss,visualstudiocode] }
 - { setname: vscode,                   name: code, family: sisyphus } # XXX: problem!
 - { setname: vscode,                   name: visual-studio-code-insiders, ignore: true }
