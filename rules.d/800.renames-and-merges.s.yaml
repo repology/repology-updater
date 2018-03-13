@@ -15,6 +15,7 @@
 - { setname: sdl,                      name: [libsdl,sdl1] }
 - { setname: sdl,                      name: [sdl12,libsdl1.2] }
 - { setname: sdl2,                     name: [libsdl2] }
+- { setname: sdl2,                     name: [sdl2-nox,sdl2-rbp], addflavor: true }
 - { setname: sdl2-image,               name: sdl_image, verpat: "2.*" }
 - { setname: sdl2_$1,                  namepat: "(?:lib)?sdl2[0-9._-]*(image|mixer|net|ttf|gfx)" }
 - { setname: sdl2_$1,                  namepat: "(?:lib)?sdl[_-]*(image|mixer|net|ttf|gfx)2[0-9._-]*" }
