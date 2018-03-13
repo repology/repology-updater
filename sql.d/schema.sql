@@ -22,6 +22,22 @@
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
+-- DROPs
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS packages CASCADE;
+DROP TABLE IF EXISTS repositories CASCADE;
+DROP TABLE IF EXISTS repositories_history CASCADE;
+DROP TABLE IF EXISTS statistics CASCADE;
+DROP TABLE IF EXISTS statistics_history CASCADE;
+DROP TABLE IF EXISTS links CASCADE;
+DROP TABLE IF EXISTS problems CASCADE;
+DROP TABLE IF EXISTS reports CASCADE;
+DROP TABLE IF EXISTS metapackages CASCADE;
+DROP TABLE IF EXISTS maintainers CASCADE;
+DROP TABLE IF EXISTS metapackages_state CASCADE;
+DROP TABLE IF EXISTS metapackages_events CASCADE;
+
+--------------------------------------------------------------------------------
 -- functions
 --------------------------------------------------------------------------------
 
@@ -36,19 +52,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
---------------------------------------------------------------------------------
--- DROPs
---------------------------------------------------------------------------------
-DROP TABLE IF EXISTS packages CASCADE;
-DROP TABLE IF EXISTS repositories CASCADE;
-DROP TABLE IF EXISTS repositories_history CASCADE;
-DROP TABLE IF EXISTS statistics CASCADE;
-DROP TABLE IF EXISTS statistics_history CASCADE;
-DROP TABLE IF EXISTS links CASCADE;
-DROP TABLE IF EXISTS problems CASCADE;
-DROP TABLE IF EXISTS reports CASCADE;
-DROP TABLE IF EXISTS metapackages CASCADE;
-DROP TABLE IF EXISTS maintainers CASCADE;
 
 --------------------------------------------------------------------------------
 -- Main packages table
