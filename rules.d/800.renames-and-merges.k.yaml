@@ -22,6 +22,11 @@
 - { setname: koffice-l10n,             namepat: "koffice-l10n-.*", family: pkgsrc }
 - { setname: kompozer-i18n,            namepat: "kompozer-i18n-.*", family: arch }
 - { setname: krita,                    name: krita3 }
+- { setname: kubernetes,               name: [kube-apiserver,kube-controller-manager,kube-proxy,kube-scheduler], addflavor: true }
+- { setname: kubernetes,               name: [kubeadm,kubeadm-beta], addflavor: kubeadm }
+- { setname: kubernetes,               name: [kubectl,kubectl-beta,kubernetes-kubectl], addflavor: kubectl }
+- { setname: kubernetes,               name: [kubelet,kubelet-beta], addflavor: kubelet }
+- { setname: kubernetes,               name: kubernetes-cli, addflavor: cli }
 - { setname: kye,                      name: "python:kye" }
 - { setname: kyotocabinet,             name: kyoto-cabinet }
 - { setname: kyototycoon,              name: kyoto-tycoon }

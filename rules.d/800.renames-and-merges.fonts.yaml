@@ -789,6 +789,15 @@
     - ttf-humor-sans
 
 # I
+- setname: "fonts:ibm-plex"
+  name:
+    - font-ibm-plex
+    - ibm-plex
+    - ibm-plex-fonts
+    - ibm_plex
+    - otf-ibm-plex
+    - ttf-ibm-plex
+
 - setname: "fonts:ibm-type1"
   name:
     - font-ibm-type1
