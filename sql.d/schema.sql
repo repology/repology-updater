@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS maintainers CASCADE;
 DROP TABLE IF EXISTS metapackages_state CASCADE;
 DROP TABLE IF EXISTS metapackages_events CASCADE;
 
-DROP TYPE metapackage_event_type CASCADE;
+DROP TYPE IF EXISTS metapackage_event_type CASCADE;
 
 --------------------------------------------------------------------------------
 -- types
