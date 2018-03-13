@@ -93,8 +93,22 @@ BEGIN
 		RETURN NULL;
 	END IF;
 
-	-- we exclude repos which have just appeared to not duplicate 'catch up' and 'added' events
-	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos) INTERSECT SELECT unnest(OLD.all_repos)));
+	IF (OLD.all_repos != NEW.all_repos) THEN
+		repos_added := (SELECT array(SELECT unnest(NEW.all_repos) EXCEPT SELECT unnest(OLD.all_repos)));
+		repos_removed := (SELECT array(SELECT unnest(OLD.all_repos) EXCEPT SELECT unnest(NEW.all_repos)));
+		INSERT INTO metapackages_events (
+			effname,
+			ts,
+			type,
+			data
+		) SELECT
+			NEW.effname,
+			now(),
+			'repos_update',
+			jsonb_build_object('repos_added', repos_added, 'repos_removed', repos_removed);
+	END IF;
+
+	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos)));
 
 	IF (OLD.newest_versions != NEW.newest_versions OR OLD.devel_versions != NEW.devel_versions OR OLD.unique_versions != NEW.unique_versions) THEN
 		INSERT INTO metapackages_events (
@@ -123,21 +137,6 @@ BEGIN
 			now(),
 			'catch_up',
 			jsonb_build_object('repos', catch_up);
-	END IF;
-
-	IF (OLD.all_repos != NEW.all_repos) THEN
-		repos_added := (SELECT array(SELECT unnest(NEW.all_repos) EXCEPT SELECT unnest(OLD.all_repos)));
-		repos_removed := (SELECT array(SELECT unnest(OLD.all_repos) EXCEPT SELECT unnest(NEW.all_repos)));
-		INSERT INTO metapackages_events (
-			effname,
-			ts,
-			type,
-			data
-		) SELECT
-			NEW.effname,
-			now(),
-			'repos_update',
-			jsonb_build_object('repos_added', repos_added, 'repos_removed', repos_removed);
 	END IF;
 
 	RETURN NULL;
