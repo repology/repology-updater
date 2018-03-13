@@ -10,12 +10,12 @@
 
 <table class="table table-striped">
 	<tr>
-		<th>Ago</th>
+		<th class="text-center">Ago</th>
 		<th class="text-center">Event</th>
 	</tr>
 {% for entry in history %}
 	<tr>
-		<td>{{ macros.format_time_interval(entry.ago) }} ago</td>
+		<td class="text-nowrap">{{ macros.format_time_interval(entry.ago) }} ago</td>
 		<td>
 		{%- if entry.type == 'history_start' -%}
 			{%- set numversions = entry.data.unique_versions|length + entry.data.devel_versions|length + entry.data.newest_versions|length -%}
