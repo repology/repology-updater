@@ -10,6 +10,7 @@
 - { setname: openal,                   name: [openal-static,openal-examples], addflavor: true }
 - { setname: openbabel,                name: open-babel }
 - { setname: openblas,                 name: [openblas-lapack,openblas-lapack-ilp64] }
+- { setname: opencc,                   name: opencc-doc, addflavor: doc }
 - { setname: opencollada,              name: libopencollada }
 - { setname: opencv,                   name: opencv2 }
 - { setname: opendkim,                 name: libopendkim }

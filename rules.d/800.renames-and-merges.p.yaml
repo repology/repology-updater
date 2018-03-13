@@ -14,6 +14,7 @@
 - { setname: pasang-emas,              name: "pasang emas" }
 - { setname: pasystray,                name: [pasystray-gtk2,pasystray-gtk2-standalone,pasystray-gtk3-standalone] }
 - { setname: patch,                    name: gpatch }
+- { setname: pcmanx,                   name: [pcmanx-gtk2, pcmanx-gtk3], addflavor: true }
 - { setname: pcre++,                   name: [libpcre++,pcrexx] }
 - { setname: pcre,                     name: [pcre-static,pcre-cpp] }
 - { setname: pcre,                     namepat: "(?:lib)?pcre[0-9._-]*" }
