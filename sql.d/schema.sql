@@ -45,9 +45,9 @@ DROP TYPE IF EXISTS metapackage_event_type CASCADE;
 
 CREATE TYPE metapackage_event_type AS enum(
 	'history_start',
+	'repos_update',
 	'version_update',
-	'catch_up',
-	'repos_update'
+	'catch_up'
 );
 
 --------------------------------------------------------------------------------
