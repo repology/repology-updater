@@ -94,7 +94,7 @@ BEGIN
 	END IF;
 
 	-- we exclude repos which have just appeared to not duplicate 'catch up' and 'added' events
-	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos)) INTERSECT SELECT unnest(OLD.all_repos));
+	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos) INTERSECT SELECT unnest(OLD.all_repos)));
 
 	IF (OLD.newest_versions != NEW.newest_versions OR OLD.devel_versions != NEW.devel_versions OR OLD.unique_versions != NEW.unique_versions) THEN
 		INSERT INTO metapackages_events (
