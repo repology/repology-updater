@@ -136,7 +136,10 @@ BEGIN
 			NEW.effname,
 			now(),
 			'catch_up',
-			jsonb_build_object('repos', catch_up);
+			jsonb_build_object(
+				'repos', catch_up,
+				'lag', now() - OLD.last_actual_versions_update
+			);
 	END IF;
 
 	RETURN NULL;
@@ -211,6 +214,7 @@ CREATE TABLE metapackages_state (
 	newest_versions text[],
 	devel_versions text[],
 	unique_versions text[],
+	last_actual_versions_update timestamp with time zone,
 	actual_repos text[],
 	all_repos text[]
 );

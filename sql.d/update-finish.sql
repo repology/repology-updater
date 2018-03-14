@@ -105,6 +105,7 @@ INTO metapackages_state (
     newest_versions,
     devel_versions,
     unique_versions,
+	last_actual_versions_update,
     actual_repos,
     all_repos
 ) SELECT
@@ -112,6 +113,7 @@ INTO metapackages_state (
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1),
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5),
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 4),
+	now(),
 	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass IN (1,4,5)),
 	array_agg(DISTINCT repo ORDER BY repo)
 FROM packages
@@ -121,6 +123,14 @@ DO UPDATE SET
 	newest_versions = EXCLUDED.newest_versions,
 	devel_versions = EXCLUDED.devel_versions,
 	unique_versions = EXCLUDED.unique_versions,
+	last_actual_versions_update =
+		CASE WHEN
+				metapackages_state.newest_versions != EXCLUDED.newest_versions OR
+				metapackages_state.devel_versions != EXCLUDED.devel_versions OR
+				metapackages_state.unique_versions != EXCLUDED.unique_versions
+			THEN now()
+			ELSE EXCLUDED.last_actual_versions_update
+		END,
 	actual_repos = EXCLUDED.actual_repos,
 	all_repos = EXCLUDED.all_repos
 WHERE
