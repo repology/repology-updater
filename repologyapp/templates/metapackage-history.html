@@ -20,6 +20,7 @@
 		<td class="text-nowrap">{{ macros.format_time_interval(entry.ago) }} ago</td>
 		<td>
 		{%- if entry.type == 'history_start' -%}
+			<b>
 			{%- set numversions = entry.data.unique_versions|length + entry.data.devel_versions|length + entry.data.newest_versions|length -%}
 			History start
 			{%- if numversions -%}
@@ -50,6 +51,7 @@
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
 			{%- endfor %}
 			{% endif %}
+			</b>
 		{%- elif entry.type == 'version_update' -%}
 			<b>
 			{%- set numversions = entry.data.unique_versions|length + entry.data.devel_versions|length + entry.data.newest_versions|length -%}
