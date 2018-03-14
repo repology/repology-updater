@@ -51,6 +51,7 @@
 			{%- endfor %}
 			{% endif %}
 		{%- elif entry.type == 'version_update' -%}
+			<b>
 			{%- set numversions = entry.data.unique_versions|length + entry.data.devel_versions|length + entry.data.newest_versions|length -%}
 			{% if numversions %}
 			Latest version{% if numversions > 1 %}s{% endif %} updated to
@@ -74,6 +75,7 @@
 			{% else %}
 			There's no more latest version
 			{% endif %}
+			</b>
 		{%- elif entry.type == 'catch_up' -%}
 			{% for repo in entry.data.repos -%}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
