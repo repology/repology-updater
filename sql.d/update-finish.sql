@@ -96,6 +96,41 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;  -- depends on met
 REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages;
 
 --------------------------------------------------------------------------------
+-- Update metapackage state
+--------------------------------------------------------------------------------
+
+INSERT
+INTO metapackages_state (
+	effname,
+    newest_versions,
+    devel_versions,
+    unique_versions,
+    actual_repos,
+    all_repos
+) SELECT
+	effname,
+	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1),
+	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5),
+	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 4),
+	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass IN (1,4,5)),
+	array_agg(DISTINCT repo ORDER BY repo)
+FROM packages
+GROUP BY effname
+ON CONFLICT (effname)
+DO UPDATE SET
+	newest_versions = EXCLUDED.newest_versions,
+	devel_versions = EXCLUDED.devel_versions,
+	unique_versions = EXCLUDED.unique_versions,
+	actual_repos = EXCLUDED.actual_repos,
+	all_repos = EXCLUDED.all_repos
+WHERE
+	metapackages_state.newest_versions != EXCLUDED.newest_versions OR
+	metapackages_state.devel_versions != EXCLUDED.devel_versions OR
+	metapackages_state.unique_versions != EXCLUDED.unique_versions OR
+	metapackages_state.actual_repos != EXCLUDED.actual_repos OR
+	metapackages_state.all_repos != EXCLUDED.all_repos;
+
+--------------------------------------------------------------------------------
 -- Update maintainers
 --------------------------------------------------------------------------------
 

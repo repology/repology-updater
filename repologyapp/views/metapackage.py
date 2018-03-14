@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from functools import cmp_to_key
+
 import flask
 
 from repologyapp.globals import *
@@ -26,6 +28,7 @@ from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
 from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByNameVersion, PackagesetSortByVersion
+from repology.version import VersionCompare
 
 
 @ViewRegistrar('/metapackage/<name>')
@@ -130,6 +133,63 @@ def metapackage_information(name):
         versions=versions,
         name=name,
         link_statuses=get_db().get_metapackage_link_statuses(name)
+    )
+
+
+@ViewRegistrar('/metapackage/<name>/history')
+def metapackage_history(name):
+    name = name.lower()
+
+    actual_reponames = set(reponames)
+
+    def prepare_repos(repos):
+        # leave only actual repos
+        return sorted(set(repos) & actual_reponames)
+
+    def prepare_versions(versions):
+        if not versions:
+            return []
+
+        def version_compare_rev(v1, v2):
+            return VersionCompare(v2, v1)
+
+        return sorted(versions, key=cmp_to_key(version_compare_rev))
+
+    def postprocess_history(history):
+        for entry in history:
+            if entry['type'] == 'history_start':
+                entry['data']['newest_versions'] = prepare_versions(entry['data']['newest_versions'])
+                entry['data']['devel_versions'] = prepare_versions(entry['data']['devel_versions'])
+                entry['data']['unique_versions'] = prepare_versions(entry['data']['unique_versions'])
+                entry['data']['actual_repos'] = prepare_repos(entry['data']['actual_repos'])
+                entry['data']['all_repos'] = prepare_repos(entry['data']['all_repos'])
+                entry['data']['old_repos'] = set(entry['data']['all_repos']) - set(entry['data']['actual_repos'])
+                yield entry
+
+            elif entry['type'] == 'version_update':
+                entry['data']['newest_versions'] = prepare_versions(entry['data']['newest_versions'])
+                entry['data']['devel_versions'] = prepare_versions(entry['data']['devel_versions'])
+                entry['data']['unique_versions'] = prepare_versions(entry['data']['unique_versions'])
+                entry['data']['actual_repos'] = prepare_repos(entry['data']['actual_repos'])
+                yield entry
+
+            elif entry['type'] == 'catch_up':
+                entry['data']['repos'] = prepare_repos(entry['data']['repos'])
+
+                if entry['data']['repos']:
+                    yield entry
+
+            elif entry['type'] == 'repos_update':
+                entry['data']['repos_added'] = prepare_repos(entry['data']['repos_added'])
+                entry['data']['repos_removed'] = prepare_repos(entry['data']['repos_removed'])
+
+                if entry['data']['repos_added'] or entry['data']['repos_removed']:
+                    yield entry
+
+    return flask.render_template(
+        'metapackage-history.html',
+        name=name,
+        history=list(postprocess_history(get_db().get_metapackage_history(name)))
     )
 
 

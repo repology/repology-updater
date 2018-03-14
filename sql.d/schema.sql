@@ -22,6 +22,35 @@
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
+-- DROPs
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS packages CASCADE;
+DROP TABLE IF EXISTS repositories CASCADE;
+DROP TABLE IF EXISTS repositories_history CASCADE;
+DROP TABLE IF EXISTS statistics CASCADE;
+DROP TABLE IF EXISTS statistics_history CASCADE;
+DROP TABLE IF EXISTS links CASCADE;
+DROP TABLE IF EXISTS problems CASCADE;
+DROP TABLE IF EXISTS reports CASCADE;
+DROP TABLE IF EXISTS metapackages CASCADE;
+DROP TABLE IF EXISTS maintainers CASCADE;
+DROP TABLE IF EXISTS metapackages_state CASCADE;
+DROP TABLE IF EXISTS metapackages_events CASCADE;
+
+DROP TYPE IF EXISTS metapackage_event_type CASCADE;
+
+--------------------------------------------------------------------------------
+-- types
+--------------------------------------------------------------------------------
+
+CREATE TYPE metapackage_event_type AS enum(
+	'history_start',
+	'repos_update',
+	'version_update',
+	'catch_up'
+);
+
+--------------------------------------------------------------------------------
 -- functions
 --------------------------------------------------------------------------------
 
@@ -36,19 +65,83 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
---------------------------------------------------------------------------------
--- DROPs
---------------------------------------------------------------------------------
-DROP TABLE IF EXISTS packages CASCADE;
-DROP TABLE IF EXISTS repositories CASCADE;
-DROP TABLE IF EXISTS repositories_history CASCADE;
-DROP TABLE IF EXISTS statistics CASCADE;
-DROP TABLE IF EXISTS statistics_history CASCADE;
-DROP TABLE IF EXISTS links CASCADE;
-DROP TABLE IF EXISTS problems CASCADE;
-DROP TABLE IF EXISTS reports CASCADE;
-DROP TABLE IF EXISTS metapackages CASCADE;
-DROP TABLE IF EXISTS maintainers CASCADE;
+-- Creates events on metapackage version state changes
+CREATE OR REPLACE FUNCTION metapackage_create_events() RETURNS trigger AS $metapackage_create_events$
+DECLARE
+	catch_up text[];
+	repos_added text[];
+	repos_removed text[];
+BEGIN
+	IF (TG_OP = 'INSERT') THEN
+		INSERT INTO metapackages_events (
+			effname,
+			ts,
+			type,
+			data
+		) SELECT
+			NEW.effname,
+			now(),
+			'history_start',
+			jsonb_build_object(
+				'newest_versions', NEW.newest_versions,
+				'devel_versions', NEW.devel_versions,
+				'unique_versions', NEW.unique_versions,
+				'actual_repos', NEW.actual_repos,
+				'all_repos', NEW.all_repos
+			);
+
+		RETURN NULL;
+	END IF;
+
+	IF (OLD.all_repos != NEW.all_repos) THEN
+		repos_added := (SELECT array(SELECT unnest(NEW.all_repos) EXCEPT SELECT unnest(OLD.all_repos)));
+		repos_removed := (SELECT array(SELECT unnest(OLD.all_repos) EXCEPT SELECT unnest(NEW.all_repos)));
+		INSERT INTO metapackages_events (
+			effname,
+			ts,
+			type,
+			data
+		) SELECT
+			NEW.effname,
+			now(),
+			'repos_update',
+			jsonb_build_object('repos_added', repos_added, 'repos_removed', repos_removed);
+	END IF;
+
+	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos)));
+
+	IF (OLD.newest_versions != NEW.newest_versions OR OLD.devel_versions != NEW.devel_versions OR OLD.unique_versions != NEW.unique_versions) THEN
+		INSERT INTO metapackages_events (
+			effname,
+			ts,
+			type,
+			data
+		) SELECT
+			NEW.effname,
+			now(),
+			'version_update',
+			jsonb_build_object(
+				'newest_versions', NEW.newest_versions,
+				'devel_versions', NEW.devel_versions,
+				'unique_versions', NEW.unique_versions,
+				'actual_repos', NEW.actual_repos
+			);
+	ELSIF (catch_up != '{}') THEN
+		INSERT INTO metapackages_events (
+			effname,
+			ts,
+			type,
+			data
+		) SELECT
+			NEW.effname,
+			now(),
+			'catch_up',
+			jsonb_build_object('repos', catch_up);
+	END IF;
+
+	RETURN NULL;
+END;
+$metapackage_create_events$ LANGUAGE plpgsql;
 
 --------------------------------------------------------------------------------
 -- Main packages table
@@ -109,6 +202,37 @@ CREATE INDEX metapackages_recently_added_idx ON metapackages(first_seen DESC, ef
 
 -- index for recently_removed
 CREATE INDEX metapackages_recently_removed_idx ON metapackages(last_seen DESC, effname) WHERE (num_repos = 0);
+
+--------------------------------------------------------------------------------
+-- Metapackages state and events
+--------------------------------------------------------------------------------
+CREATE TABLE metapackages_state (
+	effname text NOT NULL PRIMARY KEY,
+	newest_versions text[],
+	devel_versions text[],
+	unique_versions text[],
+	actual_repos text[],
+	all_repos text[]
+);
+
+CREATE TABLE metapackages_events (
+	effname text NOT NULL,
+	ts timestamp with time zone NOT NULL,
+	type metapackage_event_type NOT NULL,
+	data jsonb NOT NULL,
+	UNIQUE (effname, ts, type),
+	UNIQUE (ts, effname, type)
+);
+
+CREATE TRIGGER metapackages_state_create
+	AFTER INSERT ON metapackages_state
+	FOR EACH ROW
+EXECUTE PROCEDURE metapackage_create_events();
+
+CREATE TRIGGER metapackages_state_update
+	AFTER UPDATE ON metapackages_state
+	FOR EACH ROW WHEN (OLD.* IS DISTINCT FROM NEW.*)
+EXECUTE PROCEDURE metapackage_create_events();
 
 --------------------------------------------------------------------------------
 -- Metapackages by repo/category/maintainer

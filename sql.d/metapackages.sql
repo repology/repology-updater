@@ -18,6 +18,21 @@
 
 --------------------------------------------------------------------------------
 --
+-- !!get_metapackage_history(effname, limit=None) -> array of dicts
+--
+--------------------------------------------------------------------------------
+SELECT
+	now() - ts AS ago,
+	type,
+	data
+FROM metapackages_events
+WHERE effname = %(effname)s
+ORDER BY ts, type
+LIMIT %(limit)s;
+
+
+--------------------------------------------------------------------------------
+--
 -- !!get_metapackages(effnames) -> dict of dicts
 --
 --------------------------------------------------------------------------------

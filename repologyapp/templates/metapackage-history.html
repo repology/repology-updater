@@ -1,0 +1,107 @@
+{% extends "metapackage.html" %}
+{% import "macros.html" as macros %}
+
+{% block title %}{{ super() }}: history for {{ name }}{% endblock %}
+{% block header %}History for <strong>{{ name }}</strong>{% endblock %}
+{% block description %}History of package versions for metapackage {{ name }} in all repositories{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<table class="table table-striped">
+	<tr>
+		<th class="text-center">Ago</th>
+		<th class="text-center">Event</th>
+	</tr>
+{% for entry in history %}
+	<tr>
+		<td class="text-nowrap">{{ macros.format_time_interval(entry.ago) }} ago</td>
+		<td>
+		{%- if entry.type == 'history_start' -%}
+			{%- set numversions = entry.data.unique_versions|length + entry.data.devel_versions|length + entry.data.newest_versions|length -%}
+			History start
+			{%- if numversions -%}
+			, latest {% if numversions == 1 %}version is{% else %}versions are{% endif %}
+			{% for version in entry.data.unique_versions %}
+			<span class="version version-unique">{{ version }}</span>
+			{%- endfor %}
+			{% for version in entry.data.devel_versions %}
+			<span class="version version-devel">{{ version }}</span>
+			{%- endfor %}
+			{% for version in entry.data.newest_versions %}
+			<span class="version version-newest">{{ version }}</span>
+			{%- endfor %}
+			{% endif %}
+
+			{%- if entry.data.actual_repos -%}
+			, up to date repositor{% if entry.data.actual_repos|length == 1%}y is{% else %}ies are{% endif %}
+
+			{% for repo in entry.data.actual_repos %}
+			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+			{%- endfor %}
+			{% endif %}
+
+			{%- if entry.data.old_repos -%}
+			, also present in
+
+			{% for repo in entry.data.old_repos %}
+			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+			{%- endfor %}
+			{% endif %}
+		{%- elif entry.type == 'version_update' -%}
+			{%- set numversions = entry.data.unique_versions|length + entry.data.devel_versions|length + entry.data.newest_versions|length -%}
+			{% if numversions %}
+			Latest version{% if numversions > 1 %}s{% endif %} updated to
+			{% for version in entry.data.unique_versions %}
+			<span class="version version-unique">{{ version }}</span>
+			{%- endfor %}
+			{% for version in entry.data.devel_versions %}
+			<span class="version version-devel">{{ version }}</span>
+			{%- endfor %}
+			{% for version in entry.data.newest_versions %}
+			<span class="version version-newest">{{ version }}</span>
+			{%- endfor %}
+
+			{% if entry.data.actual_repos %}
+			by repositor{% if entry.data.actual_repos|length == 1%}y{% else %}ies{% endif %}
+
+			{% for repo in entry.data.actual_repos %}
+			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+			{%- endfor %}
+			{% endif %}
+			{% else %}
+			There's no more latest version
+			{% endif %}
+		{%- elif entry.type == 'catch_up' -%}
+			Repositor{% if entry.data.repos|length == 1 %}y{% else %}ies{% endif %}
+
+			{% for repo in entry.data.repos -%}
+			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+			{%- endfor %}
+
+			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up
+		{%- elif entry.type == 'repos_update' -%}
+			{% if entry.data.repos_added %}
+			Project added to repositor{% if entry.data.repos_added|length == 1 %}y{% else %}ies{% endif %}
+
+			{% for repo in entry.data.repos_added %}
+			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+			{%- endfor %}
+			{% endif %}
+
+			{% if entry.data.repos_removed %}
+			{% if entry.data.repos_added %}, and{% else %}Project{% endif %}
+			removed from repositor{% if entry.data.repos_removed|length == 1 %}y{% else %}ies{% endif %}
+
+			{% for repo in entry.data.repos_removed %}
+			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+			{%- endfor %}
+			{% endif %}
+		{%- endif -%}
+		</td>
+	</tr>
+{% endfor %}
+</table>
+
+</div> {#- container #}
+{% endblock %}
