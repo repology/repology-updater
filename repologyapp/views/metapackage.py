@@ -140,11 +140,11 @@ def metapackage_information(name):
 def metapackage_history(name):
     name = name.lower()
 
-    actual_reponames = set(reponames)
-
     def prepare_repos(repos):
-        # leave only actual repos
-        return sorted(set(repos) & actual_reponames)
+        srepos = set(repos)
+
+        # leave only known repos and ensude correct order
+        return [name for name in reponames if name in srepos]
 
     def prepare_versions(versions):
         if not versions:
