@@ -163,7 +163,7 @@ def metapackage_history(name):
                 entry['data']['unique_versions'] = prepare_versions(entry['data']['unique_versions'])
                 entry['data']['actual_repos'] = prepare_repos(entry['data']['actual_repos'])
                 entry['data']['all_repos'] = prepare_repos(entry['data']['all_repos'])
-                entry['data']['old_repos'] = set(entry['data']['all_repos']) - set(entry['data']['actual_repos'])
+                entry['data']['old_repos'] = prepare_repos(set(entry['data']['all_repos']) - set(entry['data']['actual_repos']))
                 yield entry
 
             elif entry['type'] == 'version_update':
