@@ -163,8 +163,8 @@ ORDER BY maintainer;
 --
 --------------------------------------------------------------------------------
 SELECT
-    now() - first_seen AS ago,
-    maintainer
+	now() - first_seen AS ago,
+	maintainer
 FROM maintainers
 WHERE num_packages > 0
 ORDER BY first_seen DESC, maintainer
@@ -177,8 +177,8 @@ LIMIT %(limit)s;
 --
 --------------------------------------------------------------------------------
 SELECT
-    now() - last_seen AS ago,
-    maintainer
+	now() - last_seen AS ago,
+	maintainer
 FROM maintainers
 WHERE num_packages = 0
 ORDER BY last_seen DESC, maintainer

@@ -54,12 +54,12 @@ INTO metapackages (
 	last_seen
 )
 SELECT
-    effname,
-    count(DISTINCT repo),
-    count(DISTINCT repo) FILTER (WHERE NOT shadow),
-    count(DISTINCT family),
-    count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5),
-    count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5),
+	effname,
+	count(DISTINCT repo),
+	count(DISTINCT repo) FILTER (WHERE NOT shadow),
+	count(DISTINCT family),
+	count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5),
+	count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5),
 	now(),
 	now()
 FROM packages
@@ -102,12 +102,12 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages;
 INSERT
 INTO metapackages_state (
 	effname,
-    newest_versions,
-    devel_versions,
-    unique_versions,
+	newest_versions,
+	devel_versions,
+	unique_versions,
 	last_actual_versions_update,
-    actual_repos,
-    all_repos
+	actual_repos,
+	all_repos
 ) SELECT
 	effname,
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1),
@@ -147,41 +147,41 @@ WHERE
 -- reset maintainers
 UPDATE maintainers
 SET
-    num_packages = 0,
-    num_packages_newest = 0,
-    num_packages_outdated = 0,
-    num_packages_ignored = 0,
-    num_packages_unique = 0,
-    num_packages_devel = 0,
-    num_packages_legacy = 0,
-    num_packages_incorrect = 0,
-    num_packages_untrusted = 0,
-    num_packages_noscheme = 0,
-    num_packages_rolling = 0,
-    num_metapackages = 0,
-    num_metapackages_outdated = 0,
-    repository_package_counts = '{}',
-    repository_metapackage_counts = '{}',
-    category_metapackage_counts = '{}';
+	num_packages = 0,
+	num_packages_newest = 0,
+	num_packages_outdated = 0,
+	num_packages_ignored = 0,
+	num_packages_unique = 0,
+	num_packages_devel = 0,
+	num_packages_legacy = 0,
+	num_packages_incorrect = 0,
+	num_packages_untrusted = 0,
+	num_packages_noscheme = 0,
+	num_packages_rolling = 0,
+	num_metapackages = 0,
+	num_metapackages_outdated = 0,
+	repository_package_counts = '{}',
+	repository_metapackage_counts = '{}',
+	category_metapackage_counts = '{}';
 
 INSERT
 INTO maintainers (
 	maintainer,
 
 	num_packages,
-    num_packages_newest,
-    num_packages_outdated,
-    num_packages_ignored,
-    num_packages_unique,
-    num_packages_devel,
-    num_packages_legacy,
-    num_packages_incorrect,
-    num_packages_untrusted,
-    num_packages_noscheme,
-    num_packages_rolling,
+	num_packages_newest,
+	num_packages_outdated,
+	num_packages_ignored,
+	num_packages_unique,
+	num_packages_devel,
+	num_packages_legacy,
+	num_packages_incorrect,
+	num_packages_untrusted,
+	num_packages_noscheme,
+	num_packages_rolling,
 
-    num_metapackages,
-    num_metapackages_outdated,
+	num_metapackages,
+	num_metapackages_outdated,
 
 	first_seen,
 	last_seen
@@ -211,21 +211,21 @@ GROUP BY maintainer
 ON CONFLICT (maintainer)
 DO UPDATE SET
 	num_packages = EXCLUDED.num_packages,
-    num_packages_newest = EXCLUDED.num_packages_newest,
-    num_packages_outdated = EXCLUDED.num_packages_outdated,
-    num_packages_ignored = EXCLUDED.num_packages_ignored,
-    num_packages_unique = EXCLUDED.num_packages_unique,
-    num_packages_devel = EXCLUDED.num_packages_devel,
-    num_packages_legacy = EXCLUDED.num_packages_legacy,
-    num_packages_incorrect = EXCLUDED.num_packages_incorrect,
-    num_packages_untrusted = EXCLUDED.num_packages_untrusted,
-    num_packages_noscheme = EXCLUDED.num_packages_noscheme,
-    num_packages_rolling = EXCLUDED.num_packages_rolling,
+	num_packages_newest = EXCLUDED.num_packages_newest,
+	num_packages_outdated = EXCLUDED.num_packages_outdated,
+	num_packages_ignored = EXCLUDED.num_packages_ignored,
+	num_packages_unique = EXCLUDED.num_packages_unique,
+	num_packages_devel = EXCLUDED.num_packages_devel,
+	num_packages_legacy = EXCLUDED.num_packages_legacy,
+	num_packages_incorrect = EXCLUDED.num_packages_incorrect,
+	num_packages_untrusted = EXCLUDED.num_packages_untrusted,
+	num_packages_noscheme = EXCLUDED.num_packages_noscheme,
+	num_packages_rolling = EXCLUDED.num_packages_rolling,
 
-    num_metapackages = EXCLUDED.num_metapackages,
-    num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
+	num_metapackages = EXCLUDED.num_metapackages,
+	num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
 
-    last_seen = now();
+	last_seen = now();
 
 UPDATE maintainers
 SET
@@ -407,24 +407,24 @@ DO UPDATE SET
 -- pre-cleanup
 UPDATE repositories
 SET
-    num_packages = 0,
-    num_packages_newest = 0,
-    num_packages_outdated = 0,
-    num_packages_ignored = 0,
-    num_packages_unique = 0,
-    num_packages_devel = 0,
-    num_packages_legacy = 0,
-    num_packages_incorrect = 0,
-    num_packages_untrusted = 0,
-    num_packages_noscheme = 0,
-    num_packages_rolling = 0,
-    num_metapackages = 0,
-    num_metapackages_unique = 0,
-    num_metapackages_newest = 0,
-    num_metapackages_outdated = 0,
-    num_metapackages_comparable = 0,
-    num_problems = 0,
-    num_maintainers = 0;
+	num_packages = 0,
+	num_packages_newest = 0,
+	num_packages_outdated = 0,
+	num_packages_ignored = 0,
+	num_packages_unique = 0,
+	num_packages_devel = 0,
+	num_packages_legacy = 0,
+	num_packages_incorrect = 0,
+	num_packages_untrusted = 0,
+	num_packages_noscheme = 0,
+	num_packages_rolling = 0,
+	num_metapackages = 0,
+	num_metapackages_unique = 0,
+	num_metapackages_newest = 0,
+	num_metapackages_outdated = 0,
+	num_metapackages_comparable = 0,
+	num_problems = 0,
+	num_maintainers = 0;
 
 -- per-repository package counts
 INSERT INTO repositories (
