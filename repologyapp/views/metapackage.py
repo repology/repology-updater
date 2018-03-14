@@ -189,7 +189,7 @@ def metapackage_history(name):
     return flask.render_template(
         'metapackage-history.html',
         name=name,
-        history=list(postprocess_history(get_db().get_metapackage_history(name)))
+        history=list(postprocess_history(get_db().get_metapackage_history(name), limit=config['HISTORY_PER_PAGE']))
     )
 
 
