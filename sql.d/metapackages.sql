@@ -27,7 +27,7 @@ SELECT
 	data
 FROM metapackages_events
 WHERE effname = %(effname)s
-ORDER BY ts, type
+ORDER BY ts DESC, type DESC
 LIMIT %(limit)s;
 
 

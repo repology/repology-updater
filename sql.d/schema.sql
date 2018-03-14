@@ -220,8 +220,7 @@ CREATE TABLE metapackages_events (
 	ts timestamp with time zone NOT NULL,
 	type metapackage_event_type NOT NULL,
 	data jsonb NOT NULL,
-	UNIQUE (effname, ts, type),
-	UNIQUE (ts, effname, type)
+	UNIQUE (effname, ts DESC, type DESC),
 );
 
 CREATE TRIGGER metapackages_state_create
