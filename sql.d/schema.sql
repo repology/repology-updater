@@ -219,9 +219,10 @@ CREATE TABLE metapackages_events (
 	effname text NOT NULL,
 	ts timestamp with time zone NOT NULL,
 	type metapackage_event_type NOT NULL,
-	data jsonb NOT NULL,
-	UNIQUE (effname, ts DESC, type DESC),
+	data jsonb NOT NULL
 );
+
+CREATE INDEX ON metapackages_events(effname, ts DESC, type DESC);
 
 CREATE TRIGGER metapackages_state_create
 	AFTER INSERT ON metapackages_state
