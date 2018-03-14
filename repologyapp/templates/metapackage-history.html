@@ -36,7 +36,7 @@
 			{% endif %}
 
 			{%- if entry.data.actual_repos -%}
-			, up to date repositor{% if entry.data.actual_repos|length == 1%}y is{% else %}ies are{% endif %}
+			, up to date in
 
 			{% for repo in entry.data.actual_repos %}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
@@ -65,7 +65,7 @@
 			{%- endfor %}
 
 			{% if entry.data.actual_repos %}
-			by repositor{% if entry.data.actual_repos|length == 1%}y{% else %}ies{% endif %}
+			by
 
 			{% for repo in entry.data.actual_repos %}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
@@ -75,8 +75,6 @@
 			There's no more latest version
 			{% endif %}
 		{%- elif entry.type == 'catch_up' -%}
-			Repositor{% if entry.data.repos|length == 1 %}y{% else %}ies{% endif %}
-
 			{% for repo in entry.data.repos -%}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
 			{%- endfor %}
@@ -84,7 +82,7 @@
 			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up
 		{%- elif entry.type == 'repos_update' -%}
 			{% if entry.data.repos_added %}
-			Project added to repositor{% if entry.data.repos_added|length == 1 %}y{% else %}ies{% endif %}
+			Project added to
 
 			{% for repo in entry.data.repos_added %}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
@@ -93,7 +91,7 @@
 
 			{% if entry.data.repos_removed %}
 			{% if entry.data.repos_added %}, and{% else %}Project{% endif %}
-			removed from repositor{% if entry.data.repos_removed|length == 1 %}y{% else %}ies{% endif %}
+			removed from
 
 			{% for repo in entry.data.repos_removed %}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
