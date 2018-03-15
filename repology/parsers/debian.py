@@ -63,7 +63,7 @@ class DebianSourcesParser():
     def Parse(self, path):
         result = []
 
-        with open(path, encoding='utf-8') as file:
+        with open(path, encoding='utf-8', errors='ignore') as file:
             current_data = {}
             last_key = None
 
