@@ -202,6 +202,9 @@
 - { name: cwm,                         ver: "6.2.9",                                       ignore: true } # FreeBSD fake
 
 # D
+- { name: darcs,                       verpat: ".*20[0-9]{6}.*",                           ignore: true }
+- { name: darcs,                       ver: "2.13.0",                family: fedora,       incorrect: true } # fake
+- { name: darcs,                                                     family: fedora,       untrusted: true }
 - { name: dbus,                        verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: dbus-cpp,                    verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: dconf-editor,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
