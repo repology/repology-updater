@@ -645,6 +645,8 @@
 - { name: ngrok,                                                     ruleset: scoop,       untrusted: true }
 - { name: nitrogen,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: nkf,                         verpat: "2\\.[0-9]{2}",                             incorrect: true } # it's X.Y.Z, not X.YZ
+- { name: nomacs,                      ver: "3.8.1",                 ruleset: fedora,      incorrect: true } # fake
+- { name: nomacs,                                                    ruleset: fedora,      untrusted: true }
 - { name: notion,                      verpat: "20[0-9]{6}.*",                             incorrect: true } # it's 3-YYYYMMDD, not just date
 - { name: npapi-vlc,                   ver: "2.2.7",                 family: fedora,       ignore: true } # no such tag on https://code.videolan.org/videolan/npapi-vlc/tags
 - { name: npapi-vlc,                                                 family: fedora,       untrusted: true }
@@ -777,11 +779,12 @@
 - { name: pycharm,                     verpat: "[0-9]+\\.[0-9]\\.[0-9]{3,}\\.[0-9]{4,}\\.[0-9]+", devel: true } # e.g. 2017.2.172.2103.19 - assuming EAP (early access) version
 - { name: pycharm,                     verpat: ".*20[0-9]{6}",                             ignore: true }
 - { name: python,                      verpat: ".*[ab].*",                                 devel: true }
-- { name: python,                      ver: "3.7.0",                 family: fedora,       ignore: true } # fedora fake, no such version
+- { name: python,                      ver: "3.7.0",                 family: [fedora,openmandriva], incorrect: true } # fake, not released yet
+- { name: python,                                                    family: [fedora,openmandriva], untrusted: true }
 - { name: "python:backports",          ver: "4.0.0",                                       ignore: true } # opensuse fake
 - { name: "python:elixir",             ver: "0.8.0",                 family: sisyphus,     incorrect: true } # fake
 - { name: "python:elixir",                                           family: sisyphus,     untrusted: true }
-- { name: "python:leveldb",            ver: "0.193",                                       ignore: true } # seems like an older version than latest 0.20 # XXX: make outdated (see #398)
+- { name: "python:leveldb",            ver: "0.193",                                       outdated: true }
 - { name: "python:progressbar",        ver: "2.4",                   family: sisyphus,     ignore: true } # fake
 - { name: "python:py-cpuinfo",         verpat: "201.*",                                    ignore: true }
 - { name: "python:pycha",              ver: "279",                                         ignore: true }
@@ -814,6 +817,8 @@
 - { name: racer-game,                  ver: "1.1.64",                                      incorrect: true } # it's 1.1 64bit version
 - { name: rage,                        verlonger: 3,                                       devel: true } # snapshots
 - { name: ragel,                       verpat: "7\\..*",                                   devel: true } # http://www.colm.net/open-source/ragel/
+- { name: rawtherapee,                 ver: "5.4",                   ruleset: fedora,      incorrect: true } # fake, it's 5.4rc3
+- { name: rawtherapee,                                               ruleset: fedora,      untrusted: true }
 - { name: rdesktop,                    ver: "1.8.4",                 family: mageia,       incorrect: true }
 - { name: rdesktop,                                                  family: mageia,       untrusted: true }
 - { name: readline,                    verpat: "([0-9]+\\.[0-9]+)\\.([0-9]+)",             setver: $1p$2 }
