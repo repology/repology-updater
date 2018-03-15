@@ -129,7 +129,7 @@ DO UPDATE SET
 				metapackages_state.devel_versions != EXCLUDED.devel_versions OR
 				metapackages_state.unique_versions != EXCLUDED.unique_versions
 			THEN now()
-			ELSE EXCLUDED.last_actual_versions_update
+			ELSE last_actual_versions_update
 		END,
 	actual_repos = EXCLUDED.actual_repos,
 	all_repos = EXCLUDED.all_repos
