@@ -29,8 +29,10 @@
 - { setname: elm-format,               namepat: "elm-format[0-9._-]+(?:-exp)?" }
 - { setname: elm-mua,                  name: elm-me, addflavor: me }
 - { setname: elvis,                    name: elvis-x11 }
-- { setname: emacs,                    name: [emacs-24bit,emacs-nox,emacs-nox11] }
+- { setname: emacs,                    name: [emacs-24bit,emacs-nox,emacs-nox11,emacs-docs,emacs-minimal,emacs-no-x-toolkit,emacs-nox-24bit,emacs-canna], addflavor: true }
 - { setname: emacs,                    name: [emacs-devel,emacs-git], ignore: true }
+- { setname: emacs,                    name: [emacs-devel_nox11], addflavor: nox11, ignore: true }
+- { setname: emacs,                    name: emacs-git-gtk2, addflavor: gtk2, ignore: true }
 - { setname: emacs,                    namepat: "emacs[0-9.-]+(?:-nox11|-non-dfsg)?" }
 - { setname: emacs-lua-mode,           name: emacs-lua }
 - { setname: emacs-mediawiki,          name: mediawiki, category: app-emacs }
