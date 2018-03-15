@@ -136,10 +136,10 @@ BEGIN
 			NEW.effname,
 			now(),
 			'catch_up',
-			jsonb_build_object(
+			jsonb_strip_nulls(jsonb_build_object(
 				'repos', catch_up,
-				'lag', now() - OLD.last_actual_versions_update
-			);
+				'lag', extract(epoch FROM now() - OLD.last_actual_versions_update)
+			));
 	END IF;
 
 	RETURN NULL;

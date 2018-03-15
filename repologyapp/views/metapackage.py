@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from datetime import timedelta
 from functools import cmp_to_key
 
 import flask
@@ -174,6 +175,9 @@ def metapackage_history(name):
                 yield entry
 
             elif entry['type'] == 'catch_up':
+                if 'lag' in entry['data'] and entry['data']['lag'] is not None:
+                    entry['data']['lag'] = timedelta(seconds=entry['data']['lag'])
+
                 entry['data']['repos'] = prepare_repos(entry['data']['repos'])
 
                 if entry['data']['repos']:
