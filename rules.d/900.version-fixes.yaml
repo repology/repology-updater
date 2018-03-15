@@ -173,8 +173,8 @@
 - { name: cloog,                       ver: "0.18.5",                family: [haikuports, aosc, arch], ignore: true } # unofficial fork
 - { name: clojure,                     verpat: "[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]{3,}",     incorrect: true } # homebrew and nix garbage
 - { name: clusterssh,                                                family: gentoo,       ignore: true } # perl module version mangling rules apply here
-- { name: cmake,                       ver: "3.11.0",                family: mageia,       incorrect: true } # mistagged rc's
-- { name: cmake,                                                     family: mageia,       untrusted: true } # rc
+- { name: cmake,                       ver: "3.11.0",                family: [mageia,openmandriva], incorrect: true } # mistagged rc's
+- { name: cmake,                                                     family: [mageia,openmandriva], untrusted: true } # rc
 - { name: cmst,                        verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # manjaro
 - { name: cmus,                        verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: cmus,                        ver: "2.8.0",                 family: fedora,       ignore: true } # it's rc0
