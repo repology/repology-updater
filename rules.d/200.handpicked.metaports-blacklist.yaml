@@ -34,3 +34,4 @@
 - { remove: true,   name: [xorg-100dpi-fonts,xorg-fonts-100dpi], ruleset: [ freebsd, ravenports ] }
 - { remove: true,   name: [xorg-75dpi-fonts,xorg-fonts-75dpi], ruleset: [ freebsd, ravenports ] }
 - { remove: true,   name: [xorg-cyrillic-fonts,xorg-fonts-cyrillic], ruleset: [ freebsd, ravenports ] }
+- { remove: true,   name: [xorg-type1-fonts,xorg-fonts-type1], ruleset: [ freebsd, ravenports ] }

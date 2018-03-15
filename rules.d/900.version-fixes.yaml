@@ -72,7 +72,8 @@
 - { name: arora,                       verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: asdf,                        verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: asp2php,                     ver: "20080813",                                    ignore: true }
-- { name: aspell,                      ver: "0.60.7",                family: debuntu,      ignore: true } # snapshot actually
+- { name: aspell,                      ver: "0.60.7",                family: [debuntu,openmandriva], incorrect: true } # snapshot actually
+- { name: aspell,                                                    family: [debuntu,openmandriva], untrusted: true }
 - { name: aspell-be,                   ver: ["0.50.0", "0.60"],                            ignore: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/be/
 - { name: aspell-bn,                   ver: "0.02",                  family: arch,         ignore: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/bn/
 - { name: aspell-br,                   ver: "0.60.2",                                      ignore: true } # see ftp://ftp.gnu.org/gnu/aspell/dict/br/
