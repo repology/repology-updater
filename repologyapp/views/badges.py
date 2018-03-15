@@ -63,7 +63,7 @@ def badge_version_for_repo(repo, name):
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
     if repo not in best_pkg_by_repo:
-        flask.abort(404)
+        return (flask.render_template('badge-tiny-string.svg', string='Unknown repository'), 404, {'Content-type': 'image/svg+xml'})
 
     return (
         flask.render_template(
@@ -82,7 +82,7 @@ def badge_version_only_for_repo(repo, name):
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
     if repo not in best_pkg_by_repo:
-        flask.abort(404)
+        return (flask.render_template('badge-tiny-string.svg', string='-'), 404, {'Content-type': 'image/svg+xml'})
 
     return (
         flask.render_template(
