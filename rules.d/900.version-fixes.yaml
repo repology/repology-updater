@@ -283,8 +283,8 @@
 - { name: firebird,                    verpat: "([0-9]+\\.[0-9]+\\.[0-9]+)\\.[0-9]{5,}.*", setver: "$1" }
 - { name: firefox,                     verpat: ".*[ab].*",                                 devel: true }
 - { name: ffmpeg,                      verpat: ".*20[0-9]{6}.*",                           ignore: true } # openbsd, chocolatey, pkgsrc
-- { name: ffmpeg,                      ver: ["3.4.2","3.5"],         family: fedora,       incorrect: true } # fpmfusion and unitedrpms seem to inherit fedora willingness to fake versions
-- { name: ffmpeg,                                                    family: fedora,       untrusted: true }
+- { name: ffmpeg,                      ver: ["3.5","3.5.0"],         family: [fedora,openmandriva], incorrect: true } # fpmfusion and unitedrpms seem to inherit fedora willingness to fake versions
+- { name: ffmpeg,                                                    family: [fedora,openmandriva], untrusted: true }
 - { name: figlet,                      ver: "222",                                         ignore: true } # haikuports
 - { name: file-roller,                 verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: firmware-mod-kit,            verpat: "0([1-9][0-9]*)",                           setver: "0.$1" } # blackarch, broken schema
