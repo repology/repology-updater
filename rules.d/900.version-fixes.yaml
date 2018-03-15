@@ -454,6 +454,7 @@
 - { name: i7z,                         verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: iaxclient,                   ver: "2.1",                   family: fedora,       ignore: true } # there's beta only
 - { name: ibus-sunpinyin,              ver: "3.0.0",                                       ignore: true } # aosc fake, it's rc1
+- { name: icewm,                       ver: ["1.4.3","1.4.3.0"],     ruleset: [debuntu,distrowatch], incorrect: true } # no such release
 - { name: icon,                        verpat: "[0-9]{3}",                                 ignore: true } # XXX: transform + problem
 - { name: icebreaker,                  ver: "1.21",                                        setver: "1.2.1" }
 - { name: icecat,                                                                          setver: "$0gnu1" } # it uses gnu suffix, in most cases it's gnu1, but there were gnu2 as well
