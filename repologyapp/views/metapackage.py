@@ -145,7 +145,8 @@ def metapackage_history(name):
         srepos = set(repos)
 
         # leave only known repos and ensude correct order
-        return [name for name in reponames if name in srepos]
+        # also remove LEDE which is too noisy
+        return [name for name in reponames if name in srepos and not name.startswith('lede_')]
 
     def prepare_versions(versions):
         if not versions:
