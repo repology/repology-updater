@@ -30,7 +30,8 @@
 - { setname: openoffice,               name: openoffice.org }
 - { setname: opensc,                   namepat: "opensc[0-9._-]+" }
 - { setname: opensc,                   name: opensc-openct, addflavor: openct }
-- { setname: openscenegraph,           name: [openscenegraph-qt,openscenegraph-qt4,open-scene-graph] }
+- { setname: openscenegraph,           name: [openscenegraph-qt,openscenegraph-qt4,openscenegraph-data], addflavor: true }
+- { setname: openscenegraph,           name: open-scene-graph }
 - { setname: openscenegraph,           namepat: "openscenegraph[0-9.-]+" }
 - { setname: openscenegraph,           namepat: "osg(?:-devel)?" }
 - { setname: openshot,                 name: openshot-qt, addflavor: qt }
