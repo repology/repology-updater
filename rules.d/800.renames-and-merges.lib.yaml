@@ -2,12 +2,14 @@
 
 - { setname: libasr,                   name: [libasr-devel,libasr-snapshot], ignore: true }
 - { setname: libatomic-ops,            name: atomic_ops }
+- { setname: libcap,                   name: libcap2 }
 - { setname: libcdr,                   namepat: "libcdr[0-9._-]+" }
 - { setname: libchamplain,             namepat: "libchamplain[0-9.-]+" }
 - { setname: libcmis,                  name: cmis-client, addflavor: client }
 - { setname: libcompizconfig,          name: libcompizconfig0.8 }
 - { setname: libconfuse,               name: libconfuse0 }
 - { setname: libcpuid,                 name: libcpuid11 }
+- { setname: libdc1394,                namepat: "libdc1394[_-][0-9._-]+" }
 - { setname: libdvbpsi,                namepat: "libdvbpsi[0-9.-]+" }
 - { setname: libejdb,                  name: ejdb }
 - { setname: libelf,                   name: libelf0 }
@@ -69,6 +71,8 @@
 - { setname: librfm,                   name: librfm5 }
 - { setname: librsvg,                  name: [librsvg-stable,librsvg2] }
 - { setname: libsdl2pp,                name: sdl2pp }
+- { setname: libsoup,                  name: [libsoup-gnome,libsoup-reference], addflavor: true }
+- { setname: libsoup,                  namepat: "libsoup[0-9._-]+" }
 - { setname: libsigc++,                name: libsigc++-docs, addflavor: docs }
 - { setname: libsigc++,                name: libsigc++-legacy12 }
 - { setname: libsigc++,                namepat: "libsigc(\\+\\+|xx|pp)[0-9.-]+" }
@@ -76,6 +80,7 @@
 - { setname: libsodium,                name: [sodium,libsodium-static] }
 - { setname: libspatialite,            name: spatialite }
 - { setname: libsysstat,               name: libsysstat-qt5 }
+- { setname: libtasn1,                 namepat: "libtasn1[_-][0-9._-]+" }
 - { setname: libtecla,                 name: tecla }
 - { setname: libtheora,                name: theora }
 - { setname: libtool,                  name: [libtool-base,libtool-fortran,libtool-info,libtool-lts] }
