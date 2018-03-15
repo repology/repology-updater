@@ -440,6 +440,7 @@
 - { name: hitori,                                                    family: nix,          untrusted: true }
 - { name: hostapd,                     verpat: "20[0-9]{2}.*",       family: openwrt,      ignore: true }
 - { name: hmmer,                       verpat: ".*b.*",                                    devel: true }
+- { name: hping,                                                                           noscheme: true }
 - { name: httprint,                    verpat: "[0-9]{3}",                                 setver: "0.$0" } # it's 0.301, said in the readme
 - { name: hunspell-en,                 verpat: "20[0-9]{6}.*",                             ignore: true } # ALT
 - { name: hunspell-es,                 verpat: "20[0-9]{2}.*",                             ignore: true } # actual version is 2.2

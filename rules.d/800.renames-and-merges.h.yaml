@@ -23,6 +23,7 @@
 - { setname: hmmer,                    namepat: "hmmer[0-9._-]+" }
 - { setname: home-assistant,           name: homeassistant }
 - { setname: hostapd,                  name: [hostapd-rtl,hostapd-rtl871xdrv,hostapd1] }
+- { setname: hping,                    name: [hping2,hping3] }
 - { setname: hsqldb,                   namepat: "hsqldb[0-9._-]+" }
 - { setname: html2text,                name: html2text-with-utf8 }
 - { setname: hugin,                    name: [hugin-app,hugin-tools], addflavor: true }
