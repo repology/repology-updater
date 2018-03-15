@@ -38,7 +38,7 @@ def maintainers(bound=None):
 
     minmaintainer, maxmaintainer = get_db().get_maintainers_range()
 
-    maintainers = get_db().get_maintainers(bound, reverse, search, config['MAINTAINERS_PER_PAGE'])
+    maintainers = get_db().query_maintainers(bound, reverse, search, config['MAINTAINERS_PER_PAGE'])
 
     firstpage, lastpage = False, False
     for maintainer in maintainers:

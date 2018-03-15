@@ -120,7 +120,7 @@ LIMIT %(limit)s;
 
 --------------------------------------------------------------------------------
 --
--- !!get_maintainers(pivot=None, reverse=False, search=None, limit=None) -> array of dicts
+-- !!query_maintainers(pivot=None, reverse=False, search=None, limit=None) -> array of dicts
 --
 --------------------------------------------------------------------------------
 SELECT
