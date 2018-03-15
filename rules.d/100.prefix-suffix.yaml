@@ -26,4 +26,6 @@
 
 - { ruleset: macports,        namepat: "(.*)-devel", setname: "$1", ignore: true }
 
+- { ruleset: nix,             namepat: "(.*)-unstable", setname: "$1", ignore: true }
+
 #- { ruleset: msys2, namepat: "(.*)-git", setname: "$1", ignore: true }
