@@ -70,7 +70,7 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
 -- Creates events on metapackage version state changes
-CREATE OR REPLACE FUNCTION metapackage_create_event(effname text, type text, data jsonb) RETURNS void AS $$
+CREATE OR REPLACE FUNCTION metapackage_create_event(effname text, type metapackage_event_type, data jsonb) RETURNS void AS $$
 BEGIN
 	INSERT INTO metapackages_events (
 		effname,
