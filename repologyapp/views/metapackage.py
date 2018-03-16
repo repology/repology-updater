@@ -173,6 +173,8 @@ def metapackage_history(name):
                 entry['data']['devel_versions'] = prepare_versions(entry['data']['devel_versions'])
                 entry['data']['unique_versions'] = prepare_versions(entry['data']['unique_versions'])
                 entry['data']['actual_repos'] = prepare_repos(entry['data']['actual_repos'])
+                if 'since_previous' in entry['data'] and entry['data']['since_previous'] is not None:
+                    entry['data']['since_previous'] = timedelta(seconds=entry['data']['since_previous'])
                 yield entry
 
             elif entry['type'] == 'catch_up':

@@ -78,6 +78,10 @@
 			There's no more latest version
 			{% endif %}
 			</b>
+
+			{% if entry.data.since_previous %}
+			in {{ macros.format_time_interval(entry.data.since_previous) }} since previous update
+			{% endif %}
 		{%- elif entry.type == 'catch_up' -%}
 			{% for repo in entry.data.repos -%}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
