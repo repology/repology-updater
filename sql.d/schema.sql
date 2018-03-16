@@ -92,7 +92,7 @@ DECLARE
 	repos_removed text[];
 BEGIN
 	IF (TG_OP = 'INSERT') THEN
-		PERFORM metapackage_create_event(NEW.effname, 'history_start',
+		PERFORM metapackage_create_event(NEW.effname, 'history_start'::metapackage_event_type,
 			jsonb_build_object(
 				'newest_versions', NEW.newest_versions,
 				'devel_versions', NEW.devel_versions,
@@ -109,7 +109,7 @@ BEGIN
 		repos_added := (SELECT array(SELECT unnest(NEW.all_repos) EXCEPT SELECT unnest(OLD.all_repos)));
 		repos_removed := (SELECT array(SELECT unnest(OLD.all_repos) EXCEPT SELECT unnest(NEW.all_repos)));
 
-		PERFORM metapackage_create_event(NEW.effname, 'repos_update',
+		PERFORM metapackage_create_event(NEW.effname, 'repos_update'::metapackage_event_type,
 			jsonb_build_object(
 				'repos_added', repos_added,
 				'repos_removed', repos_removed
@@ -120,7 +120,7 @@ BEGIN
 	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos)));
 
 	IF (OLD.newest_versions != NEW.newest_versions OR OLD.devel_versions != NEW.devel_versions OR OLD.unique_versions != NEW.unique_versions) THEN
-		PERFORM metapackage_create_event(NEW.effname, 'version_update',
+		PERFORM metapackage_create_event(NEW.effname, 'version_update'::metapackage_event_type,
 			jsonb_build_object(
 				'newest_versions', NEW.newest_versions,
 				'devel_versions', NEW.devel_versions,
@@ -130,7 +130,7 @@ BEGIN
 			)
 		);
 	ELSIF (catch_up != '{}') THEN
-		PERFORM metapackage_create_event(NEW.effname, 'catch_up',
+		PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
 			jsonb_build_object(
 				'repos', catch_up,
 				'lag', extract(epoch FROM now() - OLD.last_version_update)
