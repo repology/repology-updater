@@ -113,7 +113,7 @@ INTO metapackages_state (
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1),
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5),
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 4),
-	now(),
+	NULL,
 	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass IN (1,4,5)),
 	array_agg(DISTINCT repo ORDER BY repo)
 FROM packages
