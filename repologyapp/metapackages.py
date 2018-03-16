@@ -49,15 +49,25 @@ class MetapackagesFilterInfo:
             'advanced': True,
             'action': lambda request, value: request.NotInRepo(value.strip().lower()),
         },
-        'minspread': {
-            'type': int,
+        'repos': {
+            'type': str,
             'advanced': True,
-            'action': lambda request, value: request.MinFamilies(value),
+            'action': lambda request, value: request.Repos(value),
         },
-        'maxspread': {
-            'type': int,
+        'families': {
+            'type': str,
             'advanced': True,
-            'action': lambda request, value: request.MaxFamilies(value),
+            'action': lambda request, value: request.Families(value),
+        },
+        'repos_newest': {
+            'type': str,
+            'advanced': True,
+            'action': lambda request, value: request.ReposNewest(value),
+        },
+        'families_newest': {
+            'type': str,
+            'advanced': True,
+            'action': lambda request, value: request.FamiliesNewest(value),
         },
         'newest': {
             'type': bool,
@@ -68,16 +78,6 @@ class MetapackagesFilterInfo:
             'type': bool,
             'advanced': True,
             'action': lambda request, value: request.Outdated(),
-        },
-        'newestsinglerepo': {
-            'type': bool,
-            'advanced': True,
-            'action': lambda request, value: request.NewestSingleRepo(),
-        },
-        'newestsinglefamily': {
-            'type': bool,
-            'advanced': True,
-            'action': lambda request, value: request.NewestSingleFamily(),
         },
         'problematic': {
             'type': bool,

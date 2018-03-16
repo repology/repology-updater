@@ -94,15 +94,27 @@ Metapackages
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="minspread" class="col-sm-2 control-label">Min. spread</label>
+				<label for="repos" class="col-sm-2 control-label">Repositories</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="minspread" name="minspread" value="{{ search.minspread|default('', true) }}" placeholder="e.g. &quot;2&quot; to get non-unique metapackages">
+					<input type="text" class="form-control" id="repos" name="repos" value="{{ search.repos|default('', true) }}" placeholder="e.g. 1 (unique) or 2- (non-unique) or 3-5">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="maxspread" class="col-sm-2 control-label">Max. spread</label>
+				<label for="spread" class="col-sm-2 control-label">Families (spread)</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="maxspread" name="maxspread" value="{{ search.maxspread|default('', true) }}" placeholder="e.g. &quot;1&quot; to get unique metapackages">
+					<input type="text" class="form-control" id="families" name="families" value="{{ search.families|default('', true) }}" placeholder="e.g. 1 or 2- or 3-5">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="repos" class="col-sm-2 control-label">Repositories newest</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="repos_newest" name="repos_newest" value="{{ search.repos_newest|default('', true) }}" placeholder="e.g. 1 or 2- or 3-5">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="spread" class="col-sm-2 control-label">Families newest</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="families_newest" name="families_newest" value="{{ search.families_newest|default('', true) }}" placeholder="e.g. 1 or 2- or 3-5">
 				</div>
 			</div>
 			<div class="form-group">
@@ -115,16 +127,6 @@ Metapackages
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" name="outdated"{% if search.outdated %} checked="checked"{% endif %}> Outdated
-						</label>
-					</div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" name="newestsinglerepo"{% if search.newestsinglerepo %} checked="checked"{% endif %}> Newest in single repository only
-						</label>
-					</div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" name="newestsinglefamily"{% if search.newestsinglefamily %} checked="checked"{% endif %}> Newest in single family only
 						</label>
 					</div>
 					<div class="checkbox">

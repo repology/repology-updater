@@ -45,7 +45,7 @@ WHERE effname = ANY(%(effnames)s);
 
 --------------------------------------------------------------------------------
 --
--- !!query_metapackages(pivot=None, reverse=False, search=None, maintainer=None, inrepo=None, notinrepo=None, minspread=None, maxspread=None, category=None, newest=False, outdated=False, newest_single_repo=False, newest_single_family=False, problematic=False, limit=None) -> dict of dicts
+-- !!query_metapackages(pivot=None, reverse=False, search=None, maintainer=None, inrepo=None, notinrepo=None, min_repos=None, max_repos=None, min_families=None, max_families=None, min_repos_newest=None, max_repos_newest=None, min_families_newest=None, max_families_newest=None, category=None, newest=False, outdated=False, problematic=False, limit=None) -> dict of dicts
 --
 --------------------------------------------------------------------------------
 SELECT
@@ -70,24 +70,40 @@ WHERE
 		-- search condition
 		effname LIKE ('%%' || %(search)s || '%%')
 	{% endif %}
-	{% if minspread is not none %}
+
+	{% if min_repos is not none %}
 	) AND (
-		-- spread conditions
-		num_families >= %(minspread)s
+		num_repos >= %(min_repos)s
 	{% endif %}
-	{% if maxspread is not none %}
+	{% if max_repos is not none %}
 	) AND (
-		num_families <= %(maxspread)s
+		num_repos <= %(max_repos)s
 	{% endif %}
-	{% if newest_single_repo %}
+	{% if min_families is not none %}
 	) AND (
-		-- single newest conditions
-		num_repos_newest = 1
+		num_families >= %(min_families)s
 	{% endif %}
-	{% if newest_single_family %}
+	{% if max_families is not none %}
 	) AND (
-		num_families_newest = 1
+		num_families <= %(max_families)s
 	{% endif %}
+	{% if min_repos_newest is not none %}
+	) AND (
+		num_repos_newest >= %(min_repos_newest)s
+	{% endif %}
+	{% if max_repos_newest is not none %}
+	) AND (
+		num_repos_newest <= %(max_repos_newest)s
+	{% endif %}
+	{% if min_families_newest is not none %}
+	) AND (
+		num_families_newest >= %(min_families_newest)s
+	{% endif %}
+	{% if max_families_newest is not none %}
+	) AND (
+		num_families_newest <= %(max_families_newest)s
+	{% endif %}
+
 	{% if inrepo %}
 	) AND (
 		-- in repo condition
@@ -113,6 +129,7 @@ WHERE
 				)
 		)
 	{% endif %}
+
 	{% if notinrepo %}
 	) AND (
 		-- not in repo condition
@@ -124,6 +141,7 @@ WHERE
 			HAVING count(*) FILTER (WHERE repo = %(notinrepo)s) = 0
 		)
 	{% endif %}
+
 	{% if maintainer %}
 	) AND (
 		-- maintainer condition
@@ -149,6 +167,7 @@ WHERE
 				)
 		)
 	{% endif %}
+
 	{% if category %}
 	) AND (
 		-- category condition
@@ -159,6 +178,7 @@ WHERE
 			WHERE category = %(category)s
 		)
 	{% endif %}
+
 	{% if not maintainer and not repo and newest %}
 	) AND (
 		-- newest not handled for either maintainer or repo

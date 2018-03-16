@@ -18,6 +18,13 @@
 import psycopg2
 
 
+def split_range(s):
+    comps = s.split('-', 1)
+    if len(comps) == 1:
+        comps.append(comps[0])
+    return tuple(int(comp) if comp.isdecimal() else None for comp in comps)
+
+
 class MetapackageRequest:
     def __init__(self):
         # effname filtering
@@ -29,9 +36,15 @@ class MetapackageRequest:
         # maintainer (maintainer_metapackages)
         self.maintainer = None
 
-        # num families (metapackage_repocounts)
-        self.minspread = None
-        self.maxspread = None
+        # numbers (metapackages table)
+        self.min_repos = None
+        self.max_repos = None
+        self.min_families = None
+        self.max_families = None
+        self.min_repos_newest = None
+        self.max_repos_newest = None
+        self.min_families_newest = None
+        self.max_families_newest = None
 
         # repos (repo_metapackages)
         self.inrepo = None
@@ -43,8 +56,6 @@ class MetapackageRequest:
         # flags
         self.newest = False
         self.outdated = False
-        self.newest_single_repo = False
-        self.newest_single_family = False
         self.problematic = False
 
     def Bound(self, bound):
@@ -94,15 +105,17 @@ class MetapackageRequest:
             raise RuntimeError('duplicate category condition')
         self.category = category
 
-    def MinFamilies(self, num):
-        if self.minspread:
-            raise RuntimeError('duplicate more families condition')
-        self.minspread = num
+    def Repos(self, rng):
+        self.min_repos, self.max_repos = split_range(rng)
 
-    def MaxFamilies(self, num):
-        if self.maxspread:
-            raise RuntimeError('duplicate less families condition')
-        self.maxspread = num
+    def Families(self, rng):
+        self.min_families, self.max_families = split_range(rng)
+
+    def ReposNewest(self, rng):
+        self.min_repos_newest, self.max_repos_newest = split_range(rng)
+
+    def FamiliesNewest(self, rng):
+        self.min_families_newest, self.max_families_newest = split_range(rng)
 
     def Newest(self):
         self.newest = True
@@ -112,12 +125,6 @@ class MetapackageRequest:
 
     def Problematic(self):
         self.problematic = True
-
-    def NewestSingleFamily(self):
-        self.newest_single_family = True
-
-    def NewestSingleRepo(self):
-        self.newest_single_repo = True
 
 
 class Database:
