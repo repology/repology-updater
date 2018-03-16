@@ -128,7 +128,7 @@ BEGIN
 				'devel_versions', NEW.devel_versions,
 				'unique_versions', NEW.unique_versions,
 				'actual_repos', NEW.actual_repos,
-				'since_previous', extract(epoch FROM now() - OLD.last_actual_versions_update)
+				'since_previous', extract(epoch FROM now() - OLD.last_version_update)
 			));
 	ELSIF (catch_up != '{}') THEN
 		INSERT INTO metapackages_events (
@@ -142,7 +142,7 @@ BEGIN
 			'catch_up',
 			jsonb_strip_nulls(jsonb_build_object(
 				'repos', catch_up,
-				'lag', extract(epoch FROM now() - OLD.last_actual_versions_update)
+				'lag', extract(epoch FROM now() - OLD.last_version_update)
 			));
 	END IF;
 
@@ -218,7 +218,7 @@ CREATE TABLE metapackages_state (
 	newest_versions text[],
 	devel_versions text[],
 	unique_versions text[],
-	last_actual_versions_update timestamp with time zone,
+	last_version_update timestamp with time zone,
 	actual_repos text[],
 	all_repos text[]
 );

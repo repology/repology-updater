@@ -105,7 +105,7 @@ INTO metapackages_state (
 	newest_versions,
 	devel_versions,
 	unique_versions,
-	last_actual_versions_update,
+	last_version_update,
 	actual_repos,
 	all_repos
 ) SELECT
@@ -123,13 +123,13 @@ DO UPDATE SET
 	newest_versions = EXCLUDED.newest_versions,
 	devel_versions = EXCLUDED.devel_versions,
 	unique_versions = EXCLUDED.unique_versions,
-	last_actual_versions_update =
+	last_version_update =
 		CASE WHEN
 				metapackages_state.newest_versions != EXCLUDED.newest_versions OR
 				metapackages_state.devel_versions != EXCLUDED.devel_versions OR
 				metapackages_state.unique_versions != EXCLUDED.unique_versions
 			THEN now()
-			ELSE metapackages_state.last_actual_versions_update
+			ELSE metapackages_state.last_version_update
 		END,
 	actual_repos = EXCLUDED.actual_repos,
 	all_repos = EXCLUDED.all_repos
