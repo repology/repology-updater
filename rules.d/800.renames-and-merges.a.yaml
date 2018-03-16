@@ -131,6 +131,7 @@
 - { setname: audiofile,                name: libaudiofile }
 - { setname: autoconf,                 namepat: "autoconf[_-]?[0-9.]+" }
 - { setname: autoconvert,              name: zh-autoconvert }
+- { setname: autofs,                   name: autofs5 }
 - { setname: automake,                 namepat: "automake[_-]?[0-9.]+" } # do we need splits for this?
 - { setname: automoc,                  namepat: "automoc[0-9]+" }
 - { setname: autopep8,                 name: "python:autopep8" }
