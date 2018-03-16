@@ -35,15 +35,16 @@
 - { name: aalib,                       ver: [ "1.4.0", "1.4", "1.4.0.5", "1.4p5" ],        incorrect: true } # never really released, 1.4.0.5 @ pkgsrc fake
 - { name: abcmidi,                     verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
 - { name: abuse,                       ver: "2.0",                   family: pkgsrc,       ignore: true }
-- { name: acl,                         verpat: "20[0-9]{6}.*",                             ignore: true }
-- { name: acl,                         verlonger: 3,                                       ignore: true }
 - { name: ack,                                                       family: mageia,       ignore: true }
+- { name: acl,                         verlonger: 3,                                       ignore: true }
+- { name: acl,                         verpat: "20[0-9]{6}.*",                             ignore: true }
+- { name: acpi-call,                   verpat: "4\\..*",             family: nix,          incorrect: true } # uses kernel versions instead of software's
 - { name: adwaita-icon-theme,          verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: afdko,                       verpat: "([0-9]+\\.[0-9]+)\\.b?([0-9]+).*?",        setver: "$1.$2" }
 - { name: aften,                       ver: [ "0.05", "0.08" ],                            ignore: true }
 - { name: ag,                          verlonger: 3,                                       ignore: true } # windows-only
-- { name: agedu,                       ver: "20160920.853cea9",                            ignore: true }
 - { name: agda-stdlib,                 verlonger: 2,                 family: gentoo,       incorrect: true } # documented broken versioning (other project's version is prepended)
+- { name: agedu,                       ver: "20160920.853cea9",                            ignore: true }
 - { name: aircrack-ng,                 ver: "1.2",                   family: [ fedora, debuntu, gentoo, mageia, openwrt, rosa ], ignore: true }
 - { name: airspy,                      verpat: "20[0-9]{6}",                               ignore: true }
 - { name: aldo,                                                      ruleset: aur,         untrusted: true }
@@ -947,6 +948,7 @@
 - { name: tor,                         verge: "0.3.3",                                     devel: true }
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: tre,                         verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
+- { name: treesheets,                  verpat: ".*20[0-9]{2}.*",                           incorrect: true } # it has recent 1.0.0 release, see https://github.com/aardappel/treesheets/releases
 - { name: tuxmath,                     ver: "20010907",                                    ignore: true }
 - { name: tuxpaint-stamps,             verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" }
 - { name: tvheadend,                   verpat: "[0-9]+\\.[0-9]*[13579](?:\\..*)?",         devel: true } # https://tvheadend.org/projects/tvheadend/wiki/download
