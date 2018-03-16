@@ -82,13 +82,13 @@ BEGIN
 			NEW.effname,
 			now(),
 			'history_start',
-			jsonb_build_object(
+			jsonb_strip_nulls(jsonb_build_object(
 				'newest_versions', NEW.newest_versions,
 				'devel_versions', NEW.devel_versions,
 				'unique_versions', NEW.unique_versions,
 				'actual_repos', NEW.actual_repos,
 				'all_repos', NEW.all_repos
-			);
+			));
 
 		RETURN NULL;
 	END IF;
@@ -105,10 +105,10 @@ BEGIN
 			NEW.effname,
 			now(),
 			'repos_update',
-			jsonb_build_object(
+			jsonb_strip_nulls)jsonb_build_object(
 				'repos_added', repos_added,
 				'repos_removed', repos_removed
-			);
+			));
 	END IF;
 
 	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos)));
