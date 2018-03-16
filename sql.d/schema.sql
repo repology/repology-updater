@@ -105,7 +105,10 @@ BEGIN
 			NEW.effname,
 			now(),
 			'repos_update',
-			jsonb_build_object('repos_added', repos_added, 'repos_removed', repos_removed);
+			jsonb_build_object(
+				'repos_added', repos_added,
+				'repos_removed', repos_removed
+			);
 	END IF;
 
 	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos)));
