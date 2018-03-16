@@ -1,0 +1,53 @@
+###########################################################################
+# Raspbian
+###########################################################################
+- name: raspbian_oldstable
+  type: repository
+  desc: Raspbian Oldstable
+  family: debuntu
+  color: 'd6264f'
+  sources:
+    - name: [contrib,firmware,main,non-free,rpi]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.raspbian.org/raspbian/dists/oldstable/{source}/source/Sources.xz'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Raspbian home
+      url: http://raspbian.org/
+  tags: [ all, production, raspbian ]
+
+- name: raspbian_stable
+  type: repository
+  desc: Raspbian Stable
+  family: debuntu
+  color: 'd6264f'
+  sources:
+    - name: [contrib,firmware,main,non-free,rpi]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.raspbian.org/raspbian/dists/stable/{source}/source/Sources.xz'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Raspbian home
+      url: http://raspbian.org/
+  tags: [ all, production, raspbian ]
+
+- name: raspbian_testing
+  type: repository
+  desc: Raspbian Testing
+  family: debuntu
+  color: 'd6264f'
+  sources:
+    - name: [contrib,firmware,main,non-free,rpi]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://archive.raspbian.org/raspbian/dists/testing/{source}/source/Sources.xz'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Raspbian home
+      url: http://raspbian.org/
+  tags: [ all, production, raspbian ]

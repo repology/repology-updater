@@ -2,6 +2,7 @@
 
 - { setname: m.a.r.s.,                 name: [marsshooter,mars-shooter] }
 - { setname: m17n-db,                  name: libm17n-db }
+- { setname: maelstrom,                name: maelstrom-sdl }
 - { setname: magic-wormhole-transit-relay, name: "python:magic-wormhole-transit-relay" }
 - { setname: magit,                    name: [magit-emacs25,emacs-magit] }
 - { setname: magit,                    name: [magit-svn,emacs-magit-git], ignore: true }

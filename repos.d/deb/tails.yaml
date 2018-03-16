@@ -1,0 +1,36 @@
+###########################################################################
+# Tails
+###########################################################################
+- name: tails_stable
+  sortname: tails_0
+  type: repository
+  desc: Tails stable
+  family: debuntu
+  color: '56347c'
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: 'http://deb.tails.boum.org/dists/stable/main/source/Sources.bz2'
+      compression: bz2
+  repolinks:
+    - desc: Tails home
+      url: https://tails.boum.org/
+  tags: [ all, production, tails ]
+
+- name: tails_devel
+  sortname: tails_1
+  type: repository
+  desc: Tails devel
+  family: debuntu
+  color: '56347c'
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: 'http://deb.tails.boum.org/dists/devel/main/source/Sources.bz2'
+      compression: bz2
+  repolinks:
+    - desc: Tails home
+      url: https://tails.boum.org/
+  tags: [ all, production, tails ]

@@ -7,6 +7,20 @@
 <div class="container">
 
 <article>
+	<h3 id="2018-03-17">2018-03-17</h3>
+	<ul>
+		<li>A bunch of repositories for Debian derivatives added:
+			<a href="{{ url_for('repository', repo='maemo_fremantle') }}">Maemo</a>,
+			<a href="{{ url_for('repository', repo='pardus') }}">Pardus</a>,
+			<a href="{{ url_for('repository', repo='raspbian_stable') }}">Raspbian</a>,
+			<a href="{{ url_for('repository', repo='steamos_brewmaster') }}">SteamOS</a>,
+			<a href="{{ url_for('repository', repo='tails_stable') }}">Tails</a>.
+		</li>
+		<li>Extended metapackage filtering capabilities. Filtering by number of repositories, families, up to date repositories and up to date families is now possible. Now you can, for example, get a list of metapackages outdated in your repository, but up to date in 3 or more families, like <a href="{{ url_for('metapackages', inrepo='freebsd', outdated=true, families_newest='3-') }}">this</a>, which lowers the chance of false positive outdated package report.</li>
+	</ul>
+</article>
+
+<article>
 	<h3 id="2018-03-12">2018-03-12</h3>
 	<ul>
 		<li>Presence of related metapackages is now indicated in the metapackage list.</li>

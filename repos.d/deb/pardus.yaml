@@ -1,0 +1,40 @@
+###########################################################################
+# Pardus
+###########################################################################
+- name: pardus
+  type: repository
+  desc: Pardus
+  family: debuntu
+  ruleset: [debuntu, pardus]
+  color: 'ffcc00'
+  sources:
+    - name: [main,contrib,non-free]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://depo.pardus.org.tr/pardus/dists/onyedi/{source}/source/Sources.bz2'
+      compression: bz2
+      subrepo: '{source}'
+      # taken from https://wiki.debian.org/Derivatives/Census/Pardus,
+      # otherwise it's unclear how 'guvenlik' is updates to 'pardus'
+    - name: updates-main
+      fetcher: File
+      parser: DebianSources
+      url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/main/source/Sources.bz2'
+      compression: bz2
+      subrepo: 'updates/main'
+    - name: updates-contrib
+      fetcher: File
+      parser: DebianSources
+      url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/contrib/source/Sources.bz2'
+      compression: bz2
+      subrepo: 'updates/contrib'
+    - name: updates-non-free
+      fetcher: File
+      parser: DebianSources
+      url: 'http://depo.pardus.org.tr/guvenlik/dists/onyedi/non-free/source/Sources.bz2'
+      compression: bz2
+      subrepo: 'updates/non-free'
+  repolinks:
+    - desc: Pardus home
+      url: https://www.pardus.org.tr/
+  tags: [ all, production ]

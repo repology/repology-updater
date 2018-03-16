@@ -67,6 +67,7 @@
 - { name: apr,                         verlonger: 3,                                       ignore: true } # FreeBSD
 - { name: apr,                         verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: apr,                         verpat: "2\\..*",                                   devel: true }
+- { name: aptly,                       verpat: "2010.*",                                   incorrect: true }
 - { name: arduino,                     ver: "0021",                                        ignore: true } # EPEL 6
 - { name: arptables,                   verpat: "20[0-9]{2}",                               ignore: true } # LEDE year
 - { name: arpwatch,                    ver: "2.1.15",                                      setver: "2.1a15" }
@@ -180,6 +181,8 @@
 - { name: cmst,                        verpat: "(20[0-9]{2})([0-9]{2})([0-9]{2})",         setver: "$1.$2.$3" } # manjaro
 - { name: cmus,                        verpat: ".*20[0-9]{6}.*",                           ignore: true }
 - { name: cmus,                        ver: "2.8.0",                 family: fedora,       ignore: true } # it's rc0
+- { name: cogl,                        ver: "1.22.5",                ruleset: pardus,      incorrect: true }
+- { name: cogl,                                                      ruleset: pardus,      untrusted: true }
 - { name: colormake,                   verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: colormake,                   ver: ["2.1.0", "0.9.20140504", "0.9.20170221"],     ignore: true }
 - { name: comedilib,                   ver: "140410",                                      ignore: true } # pclinuxos weirdness
@@ -211,6 +214,8 @@
 - { name: dbus-cpp,                    verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
 - { name: dconf-editor,                verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: dee-qt,                      verpat: "(.*)\\+.*",                                setver: "$1" } # aosc snapshot
+- { name: deepin-sound-theme,          ver: "17.07.31",              ruleset: pardus,      ignore: true }
+- { name: deepin-utils,                                                                    noscheme: true }
 - { name: deja-dup,                    verpat: "[0-9]*[13579]\\..*",                       devel: true }
 - { name: devhelp,                     verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: dff,                         verpat: "(.*)\\.20[0-9]{6}",                        setver: "$1" } # aosc snapshot
@@ -363,6 +368,7 @@
 - { name: glibc,                       verlonger: 2,                                       ignore: true } # assorted garbage
 - { name: glm,                         verpat: ".*a.*",                                    devel: true }
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignore: true } # not released yet
+- { name: gltron,                      verpat: "(.*)final",                                setname: $1 } # Maemo
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
 - { name: gnome-backgrounds,           verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-bluetooth,             verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
@@ -626,6 +632,7 @@
 - { name: mplayer,                     ver: "5.1.4",                                       ignore: true } # pclinuxos garbage
 - { name: mpv,                         verpat: "20[0-9]{2}[.-][0-9]{2}[.-][0-9]{2}",       ignore: true } # chocolatey and scoop
 - { name: ms-gsl,                                                                          noscheme: true }
+- { name: mtd-utils,                                                 ruleset: maemo,       ignore: true } # fork?
 - { name: mtree,                                                     family: ravenports,   ignore: true } # fake
 - { name: mumble,                                                    family: kaos,         ignore: true } # snapshot with random version
 - { name: multimon-ng,                 verpat: "20[0-9]{6}.*",                             ignore: true }
@@ -946,6 +953,7 @@
 - { name: tome2,                       ver: "235",                                         incorrect: true }
 - { name: tor,                         verpat: "(.*)[._-][abr].*",                         setver: "$1", devel: true } # version is self-sufficient; remove redundant alpha/rc suffix, but set devel
 - { name: tor,                         verge: "0.3.3",                                     devel: true }
+- { name: tolua++,                     ver: "1.0.94",                ruleset: maemo,       ignore: true }
 - { name: transset,                    verpat: "20[0-9]{6}.*",                             ignore: true }
 - { name: tre,                         verpat: "20[0-9]{6}",                               ignore: true } # aosc snapshot
 - { name: treesheets,                  verpat: ".*20[0-9]{2}.*",                           incorrect: true } # it has recent 1.0.0 release, see https://github.com/aardappel/treesheets/releases

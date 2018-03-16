@@ -160,6 +160,8 @@
 - { name: gambit,                      category: games-board, setname: gambitchess }
 - { name: gambit,                      verpat: "4\\..*", setname: gambit-c }
 
+- { name: gonvert, ruleset: maemo, setname: gonvert-maemo }
+
 - { name: gom,                         category: [sound,media-sound,universe/sound], setname: gom-mixer }
 
 - { name: gomoku, family: [freebsd,macports,openbsd], setname: gnustep-gomoku } # gnustep; may be not ambiguity (yet), but too generic name for sure
@@ -221,6 +223,8 @@
 # there are two branches, see http://invisible-island.net/luit/
 - { name: luit,                        verpat: "2\\..*", setname: luit-xterm }
 
+- { name: maelstrom, ruleset: maemo, setname: maelstrom-maemo }
+
 - { name: man, wwwpart: man-db,        setname: man-db }
 
 - { name: mars,                        category: games, setname: m.a.r.s. }
@@ -275,6 +279,8 @@
 - { name: openal, family: [pkgsrc,chocolatey,freebsd,macports], setname: openal-creative }
 - { name: openal, setname: openal-soft } # most openal's are openal-soft, even if they erroneously list openal.org as a website
 
+- { name: orrery, ruleset: maemo, setname: orrery-maemo }
+
 - { name: overpass, wwwpart: [font,redhatbrand], setname: "fonts:overpass" }
 - { name: overpass, wwwpart: api, setname: "python:overpass" }
 - { name: overpass, category: [fonts,media-fonts], setname: "fonts:overpass" }
@@ -310,6 +316,7 @@
 
 - { name: pulp, wwwpart: bodil, setname: "node:pulp" }
 
+- { name: pwsafe, ruleset: maemo, setname: pwsafe-maemo }
 - { name: pwsafe, wwwpart: [passwordsafe,pwsafe.org], setname: passwordsafe }
 
 - { name: "python:planet", setname: planet, wwwpart: planetplanet }
@@ -320,6 +327,8 @@
 - { name: racer, setname: "rust:racer" }
 
 - { name: rescue, wwwpart: rescue.sourceforge.net, setname: rescue-max }
+
+- { name: rootsh, ruleset: maemo, setname: rootsh-maemo }
 
 - { name: roundup, wwwpart: mizerany, setname: sh-roundup } # taken name already used in parabola/hyperbola
 
@@ -346,6 +355,8 @@
 - { name: sdl_ttf, ruleset: kaos, setname: sdl2_ttf } # XXX: problem
 
 - { name: shinonome, wwwpart: openlab, setname: "fonts:shinonome" }
+
+- { name: shutter, ruleset: maemo, setname: shutter-maemo }
 
 - { name: singularity, wwwpart: singularity.lbl.gov, setname: singularity-container }
 - { name: singularity, wwwpart: ingularityviewer, setname: singularityviewer }

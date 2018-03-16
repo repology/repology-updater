@@ -57,6 +57,8 @@
 - { setname: tmw,                      name: "the mana world" }
 - { setname: tokyocabinet,             name: tokyo-cabinet }
 - { setname: tokyodystopia,            name: tokyo-dystopia }
+- { setname: tolua++,                  name: [toluapp,"lua:toluapp"] }
+- { setname: tolua++,                  namepat: "tolua\\+\\+[0-9._-]+" }
 - { setname: tomahawk,                 name: tomahawk-player }
 - { setname: tomahawk,                 name: tomahawk-qt5, addflavor: qt5 }
 - { setname: tome,                     name: [t-engine4,tales-of-majeyal,tome4,tome4-data,tome-ah] }
@@ -65,7 +67,7 @@
 - { setname: tor,                      name: [tor-devel,tor-expert] }
 - { setname: tor,                      name: tor-unstable, devel: true }
 - { setname: tre,                      name: libtre } # XXX: reverse?
-- { setname: tremor,                   name: libtremor }
+- { setname: tremor,                   name: [libtremor, libvorbisidec] }
 - { setname: trigger-rally,            name: trigger, family: gentoo }
 - { setname: tripwire,                 name: [tripwire-131,tripwire12] }
 - { setname: tsc,                      name: "the secret chronicles of dr. m." }

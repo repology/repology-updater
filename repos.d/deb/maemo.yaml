@@ -1,0 +1,22 @@
+###########################################################################
+# Maemo
+###########################################################################
+- name: maemo_fremantle
+  type: repository
+  desc: Maemo Fremantle
+  family: debuntu
+  ruleset: [debuntu,maemo]
+  color: 'f68500'
+  sources:
+    - name: free
+      fetcher: File
+      parser: DebianSources
+      url: 'http://repository.maemo.org/extras/dists/fremantle/free/source/Sources.bz2'
+      compression: bz2
+  repolinks:
+    - desc: Maemo home
+      url: http://maemo.org/
+  packagelinks:
+    - desc: Maemo package entry
+      url: "http://maemo.org/downloads/product/Maemo5/{name}/"
+  tags: [ all, production, maemo ]

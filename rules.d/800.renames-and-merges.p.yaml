@@ -55,6 +55,7 @@
 - { setname: polyclipping,             name: clipperlib }
 - { setname: polyclipping,             name: libpolyclipping }
 - { setname: poppler,                  name: compat-poppler022 }
+- { setname: poppler,                  namepat: "poppler[0-9._-]+" }
 - { setname: postfix,                  name: [postfix-current,postfix-current-sasl,postfix211,postfix211-sasl] }
 - { setname: postfwd,                  name: postfix-postfwd, family: freebsd }
 - { setname: postgis,                  name: [postgis-src,postgis-sfcgal,liblwgeom] }
