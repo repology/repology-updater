@@ -18,7 +18,7 @@
 - { setname: gcompris,                 name: gcompris-qt, addflavor: qt }
 - { setname: gconfmm,                  namepat: "(?:lib)?gconfmm[0-9._-]*" }
 - { setname: gconfmm,                  namepat: "(?:lib)?gconfmm[0-9._-]*(-docs)", addflavor: docs }
-- { setname: gd,                       name: [gf2, libgd, libgd2] }
+- { setname: gd,                       name: [gd2, libgd, libgd2] }
 - { setname: gdal,                     name: [gdal1,gdal-curl,gdal-filegdb,gdal-lib,gdal-hdf4] }
 - { setname: gdal-grass,               name: libgdal-grass }
 - { setname: gdk-pixbuf,               namepat: "(?:lib)?gdk-pixbuf[0-9._-]*(\\+svg|-jasper|-xlib)?" }
