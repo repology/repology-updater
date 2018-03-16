@@ -123,12 +123,13 @@ BEGIN
 			NEW.effname,
 			now(),
 			'version_update',
-			jsonb_build_object(
+			jsonb_strip_nulls(jsonb_build_object(
 				'newest_versions', NEW.newest_versions,
 				'devel_versions', NEW.devel_versions,
 				'unique_versions', NEW.unique_versions,
-				'actual_repos', NEW.actual_repos
-			);
+				'actual_repos', NEW.actual_repos,
+				'since_previous', extract(epoch FROM now() - OLD.last_actual_versions_update)
+			));
 	ELSIF (catch_up != '{}') THEN
 		INSERT INTO metapackages_events (
 			effname,
