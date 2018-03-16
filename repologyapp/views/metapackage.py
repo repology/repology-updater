@@ -157,38 +157,42 @@ def metapackage_history(name):
 
         return sorted(versions, key=cmp_to_key(version_compare_rev))
 
+    def timedelta_from_seconds(seconds):
+        return timedelta(seconds=seconds)
+
+    def apply_to_field(datadict, key, func):
+        if key in datadict and datadict[key] is not None:
+            datadict[key] = func(datadict[key])
+
     def postprocess_history(history):
         for entry in history:
             if entry['type'] == 'history_start':
-                entry['data']['newest_versions'] = prepare_versions(entry['data']['newest_versions'])
-                entry['data']['devel_versions'] = prepare_versions(entry['data']['devel_versions'])
-                entry['data']['unique_versions'] = prepare_versions(entry['data']['unique_versions'])
-                entry['data']['actual_repos'] = prepare_repos(entry['data']['actual_repos'])
-                entry['data']['all_repos'] = prepare_repos(entry['data']['all_repos'])
+                apply_to_field(entry['data'], 'newest_versions', prepare_versions)
+                apply_to_field(entry['data'], 'devel_versions', prepare_versions)
+                apply_to_field(entry['data'], 'unique_versions', prepare_versions)
+                apply_to_field(entry['data'], 'actual_repos', prepare_repos)
+                apply_to_field(entry['data'], 'all_repos', prepare_repos)
                 entry['data']['old_repos'] = prepare_repos(set(entry['data']['all_repos']) - set(entry['data']['actual_repos']))
                 yield entry
 
             elif entry['type'] == 'version_update':
-                entry['data']['newest_versions'] = prepare_versions(entry['data']['newest_versions'])
-                entry['data']['devel_versions'] = prepare_versions(entry['data']['devel_versions'])
-                entry['data']['unique_versions'] = prepare_versions(entry['data']['unique_versions'])
-                entry['data']['actual_repos'] = prepare_repos(entry['data']['actual_repos'])
-                if 'since_previous' in entry['data'] and entry['data']['since_previous'] is not None:
-                    entry['data']['since_previous'] = timedelta(seconds=entry['data']['since_previous'])
+                apply_to_field(entry['data'], 'newest_versions', prepare_versions)
+                apply_to_field(entry['data'], 'devel_versions', prepare_versions)
+                apply_to_field(entry['data'], 'unique_versions', prepare_versions)
+                apply_to_field(entry['data'], 'actual_repos', prepare_repos)
+                apply_to_field(entry['data'], 'since_previous', timedelta_from_seconds)
                 yield entry
 
             elif entry['type'] == 'catch_up':
-                if 'lag' in entry['data'] and entry['data']['lag'] is not None:
-                    entry['data']['lag'] = timedelta(seconds=entry['data']['lag'])
-
-                entry['data']['repos'] = prepare_repos(entry['data']['repos'])
+                apply_to_field(entry['data'], 'lag', timedelta_from_seconds)
+                apply_to_field(entry['data'], 'repos', prepare_repos)
 
                 if entry['data']['repos']:
                     yield entry
 
             elif entry['type'] == 'repos_update':
-                entry['data']['repos_added'] = prepare_repos(entry['data']['repos_added'])
-                entry['data']['repos_removed'] = prepare_repos(entry['data']['repos_removed'])
+                apply_to_field(entry['data'], 'repos_added', prepare_repos)
+                apply_to_field(entry['data'], 'repos_removed', prepare_repos)
 
                 if entry['data']['repos_added'] or entry['data']['repos_removed']:
                     yield entry
