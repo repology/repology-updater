@@ -155,6 +155,7 @@
 - { setname: gnustep-talksoup,         name: talksoup }
 - { setname: gnustep-timemon,          name: timemon }
 - { setname: gnustep-volume,           name: volume-app }
+- { setname: gnutls,                   name: [gnutls-dane,gnutls-openssl,gnutls-tiny], addflavor: true }
 - { setname: gnutls,                   namepat: "(?:lib)?gnutls[0-9._-]*" }
 - { setname: gobject-introspection,    name: [gobject-introspection-common,gobject-introspection-runtime] }
 - { setname: godot,                    name: [godot-pulse,godot-tools,godot-mono], addflavor: true }
