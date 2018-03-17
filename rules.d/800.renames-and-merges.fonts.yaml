@@ -229,6 +229,11 @@
     - scholarsfonts-cardo-fonts
     - ttf-cardo
 
+- setname: "fonts:cica"
+  name:
+    - font-cica
+    - ttf-cica
+
 - setname: "fonts:cjkuni"
   name:
     - cjkuni-fonts
@@ -831,6 +836,11 @@
     - otf-inconsolata-lgc
     - ttf-inconsolata-lgc
 
+- setname: "fonts:inter-ui"
+  name:
+    - inter-ui
+    - ttf-inter-ui
+
 - setname: "fonts:iosevka"
   name:
     - font-iosevka
@@ -1297,6 +1307,11 @@
     - ttf-paratype-pt-fonts
     - ttf-pt-fonts
 
+- setname: "fonts:paratype-astra"
+  name:
+    - fonts-ttf-paratype-astra
+    - paratype-astra
+
 - setname: "fonts:pecita"
   name:
     - fonts-pecita
@@ -1395,6 +1410,11 @@
     - ja-font-shinonome
     - shinonome
     - xfonts-shinonome
+
+- setname: "fonts:siji"
+  name:
+    - siji
+    - siji-font
 
 - setname: "fonts:sil-abyssinica"
   name:

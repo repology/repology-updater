@@ -8,7 +8,7 @@
 - { setname: vala,                     namepat: "vala[0-9.-]+" }
 - { setname: valyriatear,              name: "valyria tear" }
 - { setname: valyriatear,              name: valyria-tear }
-- { setname: varnish,                  name: [varnish4,varnish5] }
+- { setname: varnish,                  namepat: "varnish[0-9._-]+" }
 - { setname: vdr,                      name: vdr-devel, ignore: true }
 - { setname: vegastrike,               name: "vega strike" }
 - { setname: vert.x,                   name: vertx }

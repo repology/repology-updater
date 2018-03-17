@@ -69,4 +69,6 @@
 - { setname: "python:sqlalchemy",      name: ["python:sqlalchemy-doc","python:sqlalchemy-kilo","python:sqlalchemy-openstack"], addflavor: true }
 - { setname: "python:sqlalchemy",      namepat: "python:sqlalchemy[0-9._-]+" }
 - { setname: "python:sphinxcontrib-websupport", name: sphinxcontrib-websupport }
+- { setname: "python:tornado",         name: [tornado,tornadoweb] }
+- { setname: "python:tornado",         namepat: "python:tornado[0-9._-]+" }
 - { setname: "python:twine",           name: twine-pypi }

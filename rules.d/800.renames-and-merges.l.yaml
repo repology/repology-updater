@@ -50,6 +50,7 @@
 - { setname: lldb,                     namepat: "lldb[0-9._-]*-split", addflavor: split }
 - { setname: lldb,                     namepat: "lldb[0-9._-]+" }
 - { setname: llvm,                     namepat: "llvm[0-9.-]+" }
+- { setname: logmein-hamachi,          name: logmein-hamachi-beta, devel: true }
 - { setname: lordsawar,                name: "lordsawar!" }
 - { setname: lostpixels,               name: blinkensisters-with-addons }
 - { setname: love,                     namepat: "love(?:-legacy)?[0-9._-]+" }

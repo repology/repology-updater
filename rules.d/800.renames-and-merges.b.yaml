@@ -4,6 +4,7 @@
 - { setname: backintime,               name: [backintime-cli,backintime-common,backintime-qt4], addflavor: true }
 - { setname: backuppc,                 name: backuppc-devel, ignore: true }
 - { setname: backuppc,                 name: backuppc4 }
+- { setname: badtouch,                 name: "rust:badtouch" }
 - { setname: bakery,                   name: bakery2.6 }
 - { setname: balazar3,                 name: "balazar iii" }
 - { setname: balsa,                    name: balsa-gtk2 }
@@ -15,6 +16,7 @@
 - { setname: bash,                     name: bash-devel-static, ignore: true, addflavor: bash-static }
 - { setname: bash,                     namepat: "bash[0-9]+" }
 - { setname: bats,                     name: bash-bats }
+- { setname: bazel-buildtools,         name: buildifier, addflavor: true }
 - { setname: baudline,                 name: linux-baudline, family: freebsd }
 - { setname: bbpager,                  name: [bbpager03,bbpager04] }
 - { setname: bcc,                      name: "python:bcc", addflavor: python } # split in 850
