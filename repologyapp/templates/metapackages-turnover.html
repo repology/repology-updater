@@ -13,14 +13,14 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan>Added ago</th>
-					<th colspan>Metapackage</th>
+					<th>Added ago</th>
+					<th>Metapackage</th>
 				</tr>
 			</thead>
 			<tbody>
 			{% for package in added %}
 				<tr>
-					<td>{{ macros.format_time_interval(package.ago) }} ago</td>
+					<td class="text-nowrap">{{ macros.format_time_interval(package.ago) }} ago</td>
 					<td>
 						<a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
 					{%- if package.has_related -%}
@@ -37,14 +37,14 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan>Removed ago</th>
-					<th colspan>Metapackage</th>
+					<th>Removed ago</th>
+					<th>Metapackage</th>
 				</tr>
 			</thead>
 			<tbody>
 			{% for package in removed %}
 				<tr>
-					<td>{{ macros.format_time_interval(package.ago) }} ago</td>
+					<td class="text-nowrap">{{ macros.format_time_interval(package.ago) }} ago</td>
 					<td>{{ package.effname }}</td>
 				</tr>
 			{% endfor %}

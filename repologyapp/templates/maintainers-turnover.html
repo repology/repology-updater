@@ -13,14 +13,14 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan>Added ago</th>
-					<th colspan>Maintainer</th>
+					<th>Added ago</th>
+					<th>Maintainer</th>
 				</tr>
 			</thead>
 			<tbody>
 			{% for maintainer in added %}
 				<tr>
-					<td>{{ macros.format_time_interval(maintainer.ago) }} ago</td>
+					<td class="text-nowrap">{{ macros.format_time_interval(maintainer.ago) }} ago</td>
 					<td>
 						<a href="{{ url_for("maintainer", maintainer=maintainer.maintainer) }}">{{ maintainer.maintainer }}</a>
 					</td>
@@ -34,14 +34,14 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan>Removed ago</th>
-					<th colspan>Maintainer</th>
+					<th>Removed ago</th>
+					<th>Maintainer</th>
 				</tr>
 			</thead>
 			<tbody>
 			{% for maintainer in removed %}
 				<tr>
-					<td>{{ macros.format_time_interval(maintainer.ago) }} ago</td>
+					<td class="text-nowrap">{{ macros.format_time_interval(maintainer.ago) }} ago</td>
 					<td>{{ maintainer.maintainer }}</td>
 				</tr>
 			{% endfor %}
