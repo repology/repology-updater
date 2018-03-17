@@ -80,7 +80,7 @@
 			</b>
 
 			{% if entry.data.since_previous %}
-			in {{ macros.format_time_interval(entry.data.since_previous) }} since previous update
+			in {{ macros.format_time_interval(entry.data.since_previous) }} since the last update
 			{% endif %}
 		{%- elif entry.type == 'catch_up' -%}
 			{% for repo in entry.data.repos -%}
@@ -90,7 +90,7 @@
 			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up
 
 			{% if entry.data.lag %}
-			after {{ macros.format_time_interval(entry.data.lag) }}
+			in {{ macros.format_time_interval(entry.data.lag) }}
 			{% endif %}
 		{%- elif entry.type == 'repos_update' -%}
 			{% if entry.data.repos_added %}
