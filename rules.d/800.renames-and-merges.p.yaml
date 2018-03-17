@@ -83,6 +83,7 @@
 - { setname: presto,                   name: presto-cli }
 - { setname: proj,                     name: [proj4,proj.4,proj47] }
 - { setname: proj,                     name: libproj }
+- { setname: prometheus,               name: prometheus1 }
 - { setname: psfex,                    name: astromatic-psfex }
 - { setname: psi,                      name: psi-im }
 - { setname: psi-plus,                 name: psi+ }
