@@ -12,6 +12,10 @@
 - { setname: tcl,                      namepat: "tcl8[0-9._-]+" }
 - { setname: tdb,                      name: libtdb }
 - { setname: tds_fdw,                  namepat: "(postgresql[0-9._-]*)-tds_fdw", addflavor: $1 }
+- { setname: teamviewer,               namepat: "teamviewer[0-9._-]+" }
+- { setname: teamviewer,               name: teamviewer-beta }
+- { setname: teamviewer-host,          name: teamviewer.host }
+- { setname: teamviewer-quicksupport,  name: teamviewer-quicksupport-beta }
 - { setname: tectonic,                 name: "rust:tectonic" }
 - { setname: teg,                      name: "tenes empanadas graciela" }
 - { setname: telegram-desktop,         name: [telegram-desktop-bin,telegram-desktop-systemqt,telegram-desktop-systemqt-emojione,telegram-desktop-systemqt-notoemoji] }

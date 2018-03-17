@@ -65,10 +65,11 @@
 - { setname: "python:social-auth-core", name: social-auth-core }
 - { setname: "python:sphinx",          name: "python:sphinx10" }
 - { setname: "python:sphinx",          name: sphinx, wwwpart: [pocoo.org,sphinx-doc.org] }
-- { setname: "python:sqlalchemy",      name: sqlalchemy }
-- { setname: "python:sqlalchemy",      name: ["python:sqlalchemy-doc","python:sqlalchemy-kilo","python:sqlalchemy-openstack"], addflavor: true }
-- { setname: "python:sqlalchemy",      namepat: "python:sqlalchemy[0-9._-]+" }
 - { setname: "python:sphinxcontrib-websupport", name: sphinxcontrib-websupport }
+- { setname: "python:sqlalchemy",      name: ["python:sqlalchemy-doc","python:sqlalchemy-kilo","python:sqlalchemy-openstack"], addflavor: true }
+- { setname: "python:sqlalchemy",      name: sqlalchemy }
+- { setname: "python:sqlalchemy",      namepat: "python:sqlalchemy[0-9._-]+" }
+- { setname: "python:tldextract",      name: tldextract }
 - { setname: "python:tornado",         name: [tornado,tornadoweb] }
 - { setname: "python:tornado",         namepat: "python:tornado[0-9._-]+" }
 - { setname: "python:twine",           name: twine-pypi }
