@@ -17,6 +17,7 @@
 - { namepat: "(ruby:arel)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:blankslate)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:builder)[0-9._-]+", setname: "$1" }
+- { namepat: "(ruby:clamp)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:coffee-rails)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:colorator)[0-9._-]+", setname: "$1" }
 - { namepat: "(ruby:commander)[0-9._-]+", setname: "$1" }
