@@ -40,6 +40,7 @@
 - { setname: getopt,                   name: [gnugetopt,gnu-getopt,gnu.getopt] }
 - { setname: gettext,                  name: libintl }
 - { setname: gflags,                   name: [google-gflags,libgflags] }
+- { setname: gifcurry,                 name: "haskell:gifcurry" }
 - { setname: giflib,                   name: gif, family: ravenports }
 - { setname: giflib,                   name: giflib-util }
 - { setname: giflib,                   name: giflib4 }
