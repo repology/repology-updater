@@ -159,8 +159,9 @@
 - { setname: gnutls,                   name: [gnutls-dane,gnutls-openssl,gnutls-tiny], addflavor: true }
 - { setname: gnutls,                   namepat: "(?:lib)?gnutls[0-9._-]*" }
 - { setname: gobject-introspection,    name: [gobject-introspection-common,gobject-introspection-runtime] }
-- { setname: godot,                    name: [godot-pulse,godot-tools,godott2-tools,godot-mono,godot-engine], addflavor: true }
+- { setname: godot,                    name: [godot-pulse,godot-tools,godot-mono,godot-engine], addflavor: true }
 - { setname: godot,                    name: godot2 }
+- { setname: godot,                    name: godot2-tools, addflavor: godot-tools }
 - { setname: goffice,                  name: goffice-light }
 - { setname: goffice,                  namepat: "goffice[0-9._-]+" }
 - { setname: goldencheetah,            name: golden-cheetah }
