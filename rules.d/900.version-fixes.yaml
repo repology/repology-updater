@@ -368,7 +368,7 @@
 - { name: glibc,                       verlonger: 2,                                       ignore: true } # assorted garbage
 - { name: glm,                         verpat: ".*a.*",                                    devel: true }
 - { name: globulation2,                ver: "0.9.4.5",               family: rosa,         ignore: true } # not released yet
-- { name: gltron,                      verpat: "(.*)final",                                setname: $1 } # Maemo
+- { name: gltron,                      verpat: "(.*)final",                                setver: $1 } # Maemo
 - { name: gnash,                       ver: "0.8.11",                family: debuntu,      ignore: true } # not released yet
 - { name: gnome-backgrounds,           verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
 - { name: gnome-bluetooth,             verpat: "[0-9]+\\.[0-9]*[13579]\\..*",              devel: true }
