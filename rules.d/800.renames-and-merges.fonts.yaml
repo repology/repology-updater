@@ -1238,6 +1238,12 @@
     - ttf-noto-fonts-simple
 
 # O
+- setname: "fonts:ocr-a"
+  name:
+    - fonts-ocr-a
+    - otf-ocr-a
+    - ttf-ocr-a
+
 - setname: "fonts:ohruri"
   name:
     - ohruri-ttf

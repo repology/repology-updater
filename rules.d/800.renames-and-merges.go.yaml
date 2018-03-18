@@ -2,3 +2,4 @@
 
 - { setname: "go:github-miekg-mmark",  name: ["go:mmark",mmark] }
 - { setname: "go:github-rakyll-statik", name: ["go:statik"] }
+- { setname: "go:gopkg-sourcemap", name: "go:gopkg-sourcemap-1" }

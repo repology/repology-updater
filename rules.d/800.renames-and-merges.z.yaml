@@ -15,6 +15,7 @@
 - { setname: zerotier-one,             name: [zerotier,zerotier-one-with-controller] }
 - { setname: zetacoin,                 name: zetacoin-nox11, addflavor: nox11 }
 - { setname: zhparser,                 namepat: "(postgresql[0-9._-]*)-zhparser", addflavor: $1 }
+- { setname: zig,                      name: ziglang }
 - { setname: zim,                      name: "python:zim" }
 - { setname: zim,                      name: zim-wiki }
 - { setname: zimg,                     name: sekrit-twc-zimg }

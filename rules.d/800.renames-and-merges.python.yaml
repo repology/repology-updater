@@ -1,5 +1,6 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: "python:argparse",        name: argparse }
 - { setname: "python:backports.shutil-get-terminal-size", name: shutil_get_terminal_size }
 - { setname: "python:backports.shutil_get_terminal_size", namepat: "python:backports[_-]shutil[_-]get[_-]terminal[_-]size" }
 - { setname: "python:backports.shutil_which", name: "python:backports-shutil_which" }
@@ -19,6 +20,7 @@
 - { setname: "python:flake8$1",        namepat: "flake8(.*)" }
 - { setname: "python:flask$1",         namepat: "flask(.*)" }
 - { setname: "python:geographiclib",   name: geographiclib-python }
+- { setname: "python:importlib",       name: importlib }
 - { setname: "python:ipykernel",       name: ["python:jupyter-ipykernel","python:jupyter_ipykernel","python:jupyter_ipykernel-doc",ipykernel,jupyter-ipykernel] }
 - { setname: "python:ipyparallel",     name: [ipyparallel,ipython-ipyparallel,ipython2-ipyparallel] }
 - { setname: "python:ipython_genutils", name: [ipython-genutils,ipython_genutils] }

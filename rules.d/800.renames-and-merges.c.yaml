@@ -33,6 +33,7 @@
 - { setname: cdparanoia,               name: cdparanoia-iii }
 - { setname: cdparanoia,               name: cdparanoia-overread, addflavor: overread }
 - { setname: ce,                       name: ce-x11, addflavor: x11 }
+- { setname: cef,                      name: [cef-minimal,cef-standard], addflavor: true }
 - { setname: cegui,                    name: [cegui-mk2,cegui_mk-2] }
 - { setname: cegui,                    namepat: "cegui[0-9._-]+" }
 - { setname: celestia,                 name: celestia-nonfree, addflavor: nonfree }
