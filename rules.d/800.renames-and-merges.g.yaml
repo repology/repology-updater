@@ -203,6 +203,8 @@
 - { setname: gtkspell,                 namepat: "(?:lib)?gtkspell[0-9._-]*" }
 - { setname: gtkspellmm,               namepat: "(?:lib)?gtkspellmm[0-9._-]*" }
 - { setname: gtypist,                  name: gnu-typist }
+- { setname: guava,                    namepat: "guava(?:-libraries)?[0-9._-]+" }
+- { setname: guava,                    name: [google-guava, java-guava] }
 - { setname: gucharmap,                name: gucharmap-gtk2, addflavor: gtk2 }
 - { setname: gucharmap,                name: gucharmap7 }
 - { setname: guile,                    namepat: "guile[0-9._-]+" }
