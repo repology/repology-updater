@@ -121,6 +121,7 @@
 - { setname: gnome-sudoku,             name: gnome-games-sudoku }
 - { setname: gnome-taquin,             name: gnome-games-taquin }
 - { setname: gnome-tetravex,           name: gnome-games-tetravex }
+- { setname: gnome-themes-extra,       name: gnome-themes-standard }
 - { setname: gnuchess,                 name: [gnu-chess,gnuchess4] }
 - { setname: gnugo,                    name: gnu-go }
 - { setname: gnumpc,                   name: [mpc1,mpclib,mpclib3,mpcomplex] }
