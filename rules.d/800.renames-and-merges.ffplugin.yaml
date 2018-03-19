@@ -27,6 +27,12 @@
     - xpi-greasemonkey
   setname: "ffplugin:greasemonkey"
 
+# I
+- name:
+    - imagezoom
+    - xpi-imagezoom
+  setname: "ffplugin:imagezoom"
+
 # N
 - name:
     - firefox-ext-noscript
