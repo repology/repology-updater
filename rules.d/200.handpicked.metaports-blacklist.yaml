@@ -15,6 +15,7 @@
 
 # X11 metaports
 - { remove: true,   name: x11-app }
+- { remove: true,   name: x11-apps }
 - { remove: true,   name: x11-base }
 - { remove: true,   name: x11-font }
 - { remove: true,   name: x11-lib }
@@ -31,6 +32,7 @@
 - { remove: true,   name: xorg-libraries }
 - { remove: true,   name: xorg-misc-bitmap-fonts }
 - { remove: true,   name: xorg-truetype-fonts }
+- { remove: true,   name: xorg-x11-apps }
 - { remove: true,   name: [xorg-100dpi-fonts,xorg-fonts-100dpi], ruleset: [ freebsd, ravenports ] }
 - { remove: true,   name: [xorg-75dpi-fonts,xorg-fonts-75dpi], ruleset: [ freebsd, ravenports ] }
 - { remove: true,   name: [xorg-cyrillic-fonts,xorg-fonts-cyrillic], ruleset: [ freebsd, ravenports ] }
