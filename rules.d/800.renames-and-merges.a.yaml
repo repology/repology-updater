@@ -17,6 +17,7 @@
 - { setname: ack,                      name: "perl:ack" }
 - { setname: ack,                      name: ack-grep, family: debuntu }
 - { setname: acpica,                   namepat: "acpica-(?:tools|unix|utils)" }
+- { setname: acpi_call,                name: [acpi_call-ck-fbcondecor,acpi_call-dkms,acpi_call-lts,acpi_call-pf], addflavor: true }
 - { setname: acroread,                 name: [adobereader,adobe-reader] }
 - { setname: acroread,                 namepat: "acroread[0-9.]*" }
 - { setname: acroread-asianfonts,      namepat: "acroread9-.*font.*", family: pkgsrc }
