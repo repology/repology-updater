@@ -1,7 +1,8 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
 # A
-- name:
+- setname: "ffplugin:adblock-plus"
+  name:
     - adblock-plus
     - adblock_plus
     - adblockplus-firefox
@@ -10,31 +11,37 @@
     - firefox-ext-adblock-plus
     - mozilla-adblockplus
     - xpi-adblock_plus
-  setname: "ffplugin:adblock-plus"
 
 # F
-- name:
+- setname: "ffplugin:foxyproxy"
+  name:
     - firefox-extension-foxyproxy
     - firefox-foxyproxy-standard
     - foxyproxy
-  setname: "ffplugin:foxyproxy"
 
 # G
-- name:
+- setname: "ffplugin:greasemonkey"
+  name:
     - firefox-ext-greasemonkey
     - firefox-extension-greasemonkey
     - greasemonkey
     - xpi-greasemonkey
-  setname: "ffplugin:greasemonkey"
 
 # I
-- name:
+- setname: "ffplugin:imagezoom"
+  name:
     - imagezoom
     - xpi-imagezoom
-  setname: "ffplugin:imagezoom"
+
+# L
+- setname: "ffplugin:linky"
+  name:
+    - iceweasel-linky
+    - linky
 
 # N
-- name:
+- setname: "ffplugin:noscript"
+  name:
     - firefox-ext-noscript
     - firefox-noscript
     - icecat-noscript
@@ -43,10 +50,10 @@
     - noscript
     - palemoon-noscript
     - xpi-noscript
-  setname: "ffplugin:noscript"
 
 # U
-- name:
+- setname: "ffplugin:ublock-origin"
+  name:
     - firefox-extension-ublock
     - firefox-ublock-origin
     - icecat-ublock-origin
@@ -54,4 +61,3 @@
     - ublock
     - ublock-origin
     - xpi-ublock_origin
-  setname: "ffplugin:ublock-origin"
