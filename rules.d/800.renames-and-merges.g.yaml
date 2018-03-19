@@ -1,5 +1,6 @@
 # vim: tabstop=39 expandtab softtabstop=39
 
+- { setname: galaxy-forces-v2,         name: ["galaxy forces v2", galaxy-forces, galaxyv2] }
 - { setname: gambas3-gb-modules,       namepat: "gambas3-gb-.*", family: arch }
 - { setname: gambit-c,                 name: gambc }
 - { setname: garcon,                   name: [garcon-gtk3,libgarcon,xfce4-garcon], addflavor: true }
