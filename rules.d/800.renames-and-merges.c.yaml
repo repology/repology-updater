@@ -46,6 +46,8 @@
 - { setname: cfengine-masterfiles,     namepat: "cfengine-masterfiles[0-9]+" }
 - { setname: cfitsio,                  name: cfitsio3 }
 - { setname: cfr,                      name: cfr-decompiler }
+- { setname: cgal,                     name: cgal-ipelets, addflavor: ipelets }
+- { setname: cgal,                     name: cgal9 }
 - { setname: cglib,                    name: cglib3 }
 - { setname: cgoban,                   name: cgoban1 }
 - { setname: chakracore,               name: chakaracore } # AUR misspell
