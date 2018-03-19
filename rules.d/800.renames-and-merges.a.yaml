@@ -51,7 +51,7 @@
 - { setname: allacrost,                name: "hero of allacrost" }
 - { setname: allegro,                  namepat: "allegro[0-9.]*(?:-devel)?" }
 - { setname: allureofthestars,         name: "allure of the stars" }
-- { setname: allureofthestars,         name: "haskell:alure" }
+- { setname: allureofthestars,         name: "haskell:allure" }
 - { setname: alogg,                    name: [liballegroogg,allegroogg] }
 - { setname: alsa-lib,                 name: [alsa,libalsa,libalsa2,alsa-lib-noassertion] }
 - { setname: amule,                    name: amule-daemon, addflavor: daemon }
