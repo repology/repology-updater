@@ -145,6 +145,7 @@
 - { setname: cuda,                     name: nvidia-cuda-sdk }
 - { setname: cuda,                     name: nvidia-cuda-toolkit }
 - { setname: cuda,                     namepat: "cuda-?[0-9.]+" }
+- { setname: cumulus,                  name: cumuluslanguagede, addflavor: de }
 - { setname: cuneiform,                name: cuneiform-linux }
 - { setname: curl,                     name: [curl-ca-bundle,curl-http2,curl-openssl,libcurl-compat,libcurl-compat-nostatic,libcurl-gnutls,libcurl-openssl-1.0], addflavor: true }
 - { setname: curl,                     name: curl3 }
