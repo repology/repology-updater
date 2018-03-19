@@ -37,10 +37,11 @@
 - { setname: minixml,                  name: libmxml }
 - { setname: minpack,                  name: libcminpack }
 - { setname: mirrormagic,              name: mirrormagic-sdl }
-- { setname: moc,                      name: mocp }
 - { setname: moc,                      name: moc-pulse, addflavor: pulse }
+- { setname: moc,                      name: mocp }
 - { setname: moodle,                   namepat: "moodle[0-9._-]+" }
 - { setname: moon-lander,              name: moonlander, family: [freebsd,openbsd] }
+- { setname: mouserserver,             name: necta-wifi-mouse }
 - { setname: mozilla-dicts,            namepat: "mozilla-dicts-.*", family: openbsd }
 - { setname: mozjs,                    name: libmozjs }
 - { setname: mozjs,                    namepat: "mozjs[0-9._-]+" }
