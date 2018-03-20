@@ -38,6 +38,8 @@ before_install:
 
   - git clone --depth=1 https://github.com/htacg/tidy-html5.git && ( cd tidy-html5 && cmake . && make && sudo make install )
   - sudo ldconfig
+
+  - git clone --depth=1 https://github.com/repology/repology-rules.git rules.d
 before_script:
   - psql -U postgres -c "CREATE DATABASE repology_test;"
   - psql -U postgres -c "CREATE USER repology_test WITH PASSWORD 'repology_test'"

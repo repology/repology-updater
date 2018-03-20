@@ -47,5 +47,4 @@ flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test
 
 check:
-	python3 repology-schemacheck.py -s rules $$(find rules.d -name "*.yaml")
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")
