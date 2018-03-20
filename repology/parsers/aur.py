@@ -65,8 +65,8 @@ class AURParser():
                     pkg.homepage = result['URL']
 
                     if 'License' in result:
-                        for license in result['License']:
-                            pkg.licenses.append(license)
+                        for license_ in result['License']:
+                            pkg.licenses.append(license_)
 
                     if 'Maintainer' in result and result['Maintainer']:
                         pkg.maintainers += GetMaintainers(result['Maintainer'] + '@aur')
