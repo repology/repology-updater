@@ -48,6 +48,17 @@ You need librpm and pkg-config.
 
 ## Usage
 
+### Preparing
+
+Since repology rules live in separate repository you'll need to
+clone it first. The location may be arbitrary, but `rules.d`
+subdirectory is what default config points to, so using it is
+the most simple way.
+
+```
+git clone https://github.com/repology/repology-rules.git rules.d
+```
+
 ### Configuration
 
 First, you may need to tune settings which are shared by all repology

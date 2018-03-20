@@ -89,7 +89,7 @@ are ignored for now.
 ## Documentation
 
 - How to [run](docs/RUNNING.md) repology tools on your own
-- How to extend or fix [rules](docs/RULES.md) for package matching
+- How to extend or fix [rules](https://github.com/repology/repology-rules/blob/master/README.md) for package matching
 - How repology [compares versions](https://github.com/repology/libversion/blob/master/doc/ALGORITHM.md)
 
 ## Author
