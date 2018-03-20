@@ -116,8 +116,8 @@ def metapackage_information(name):
             append_info('homepages', package.homepage, package)
         for download in package.downloads:
             append_info('downloads', download, package)
-        for license in package.licenses:
-            append_info('licenses', license, package)
+        for license_ in package.licenses:
+            append_info('licenses', license_, package)
 
     if 'repos' in information:
         # preserve repos order
