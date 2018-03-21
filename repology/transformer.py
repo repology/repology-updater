@@ -63,13 +63,15 @@ class PackageTransformer:
         if rulestext:
             self.rules = yaml.safe_load(rulestext)
         else:
-            for filename in sorted(os.listdir(rulesdir)):
-                rulespath = os.path.join(rulesdir, filename)
-                if not os.path.isfile(rulespath) or not rulespath.endswith('.yaml'):
-                    continue
+            rulefiles = []
 
-                with open(rulespath) as rulesfile:
-                    self.rules += yaml.safe_load(rulesfile)
+            for root, dirs, files in os.walk(rulesdir):
+                rulefiles += [os.path.join(root, f) for f in files if f.endswith('.yaml')]
+                dirs[:] = [d for d in dirs if not d.startswith('.')]
+
+            for rulefile in sorted(rulefiles):
+                with open(rulefile) as data:
+                    self.rules += yaml.safe_load(data)
 
         pp = pprint.PrettyPrinter(width=10000)
         for rulenum, rule in enumerate(self.rules):
