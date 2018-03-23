@@ -83,6 +83,7 @@ rulesets = families + [
     'deepin',
     'hyperbola',
     'maemo',
+    'manjaro',
     'pardus',
     'parrot',
 ]

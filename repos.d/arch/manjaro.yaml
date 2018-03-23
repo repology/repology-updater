@@ -5,6 +5,7 @@
   type: repository
   desc: Manjaro Stable
   family: arch
+  ruleset: [arch, manjaro]
   color: '34be5b'
   sources:
     - name: [ community, core, extra ]
@@ -21,6 +22,7 @@
   type: repository
   desc: Manjaro Testing
   family: arch
+  ruleset: [arch, manjaro]
   color: '34be5b'
   sources:
     - name: [ community, core, extra ]
@@ -37,6 +39,7 @@
   type: repository
   desc: Manjaro Unstable
   family: arch
+  ruleset: [arch, manjaro]
   color: '34be5b'
   sources:
     - name: [ community, core, extra ]
@@ -54,6 +57,7 @@
   type: repository
   desc: Manjaro Xperimental
   family: arch
+  ruleset: [arch, manjaro]
   color: '34be5b'
   sources:
     - name: [ community, core, extra ]
