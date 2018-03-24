@@ -57,6 +57,7 @@ class MetapackageRequest:
         self.newest = False
         self.outdated = False
         self.problematic = False
+        self.has_related = False
 
     def Bound(self, bound):
         if not bound:
@@ -125,6 +126,9 @@ class MetapackageRequest:
 
     def Problematic(self):
         self.problematic = True
+
+    def HasRelated(self):
+        self.has_related = True
 
 
 class Database:

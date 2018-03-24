@@ -45,7 +45,7 @@ WHERE effname = ANY(%(effnames)s);
 
 --------------------------------------------------------------------------------
 --
--- !!query_metapackages(pivot=None, reverse=False, search=None, maintainer=None, inrepo=None, notinrepo=None, min_repos=None, max_repos=None, min_families=None, max_families=None, min_repos_newest=None, max_repos_newest=None, min_families_newest=None, max_families_newest=None, category=None, newest=False, outdated=False, problematic=False, limit=None) -> dict of dicts
+-- !!query_metapackages(pivot=None, reverse=False, search=None, maintainer=None, inrepo=None, notinrepo=None, min_repos=None, max_repos=None, min_families=None, max_families=None, min_repos_newest=None, max_repos_newest=None, min_families_newest=None, max_families_newest=None, category=None, newest=False, outdated=False, problematic=False, has_related=False, limit=None) -> dict of dicts
 --
 --------------------------------------------------------------------------------
 SELECT
@@ -102,6 +102,11 @@ WHERE
 	{% if max_families_newest is not none %}
 	) AND (
 		num_families_newest <= %(max_families_newest)s
+	{% endif %}
+
+	{% if has_related %}
+	) AND (
+		has_related
 	{% endif %}
 
 	{% if inrepo %}

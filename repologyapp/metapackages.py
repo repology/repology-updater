@@ -84,6 +84,11 @@ class MetapackagesFilterInfo:
             'advanced': True,
             'action': lambda request, value: request.Problematic(),
         },
+        'has_related': {
+            'type': bool,
+            'advanced': True,
+            'action': lambda request, value: request.HasRelated(),
+        },
     }
 
     def __init__(self):
