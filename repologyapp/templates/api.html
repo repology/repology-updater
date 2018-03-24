@@ -110,13 +110,18 @@ and then replace <code>{{ url_for('metapackages') }}</code> URL prefix with
 	<dt>category</dt><dd>return metapackages with specified category</dd>
 	<dt>inrepo</dt><dd>return metapackages present in specified repository</dd>
 	<dt>notinrepo</dt><dd>return metapackages absent in specified repository</dd>
-	<dt>minspread</dt><dd>return metapackages present in at least specified number of repository families (for instance, use 2 to get non-unique metapackages)</dd>
-	<dt>maxspread</dt><dd>return metapackages present in at most specified number of repository families (for instance, use 1 to get unique metapackages)</dd>
+	<dt>repos</dt><dd>return metapackages present in specified number of repositories (exact values and open/closed ranges are allowed, e.g. <code>1</code>, <code>5-</code>, <code>-5</code>, <code>2-7</code></dd>
+	<dt>families</dt><dd>return metapackages present in specified number of repository families (for instance, use <code>1</code> to get unique metapackages)</dd>
+	<dt>repos_newest</dt><dd>return metapackages which are up to date in specified number of repositories</dd>
+	<dt>families_newest</dt><dd>return metapackages which are up to date in specified number of repository families</dd>
+	<dt>newest</dt><dd>return newest metapackages only</dd>
+	<dt>outdated</dt><dd>return outdated metapackages only</dd>
+	<dt>problematic</dt><dd>return problematic metapackages only</dd>
 </dl>
 
 <p>Example: get unique outdated metapackages not present in FreeBSD maintainer by foo@bar.com</p>
 <pre>
-{{ url_for('api_v1_metapackages', notinrepo='freebsd', maintainer='foo@bar.com', maxspread=1, outdated=1) }}
+{{ url_for('api_v1_metapackages', notinrepo='freebsd', maintainer='foo@bar.com', families=1, outdated=1) }}
 </pre>
 
 <h3>Problems</h3>

@@ -94,7 +94,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading"><h3>Unique</h3></div>
 			<div class="panel-body">
-				<a href="{{ url_for('metapackages', inrepo=repo, maxspread=1) }}">
+				<a href="{{ url_for('metapackages', inrepo=repo, families=1) }}">
 					{{ repo_info.num_metapackages_unique|default(0) }}
 				</a>
 			</div>

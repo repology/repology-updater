@@ -103,7 +103,7 @@
 			{% if repometadata[repostat.name].shadow %}
 				<span title="This is a shadow repo, e.g. unique packages in it are ignored">n/a</span>
 			{% else %}
-				<a href="{{ url_for('metapackages', inrepo=repostat.name, maxspread=1) }}">
+				<a href="{{ url_for('metapackages', inrepo=repostat.name, families=1) }}">
 					{{- macros.value_with_delta(repostat.num_metapackages_unique, old_repostat.num_metapackages_unique) -}}
 				</a>
 			{% endif %}

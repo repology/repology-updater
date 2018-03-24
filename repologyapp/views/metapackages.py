@@ -84,13 +84,13 @@ def metapackages_all(bound=None):
 @ViewRegistrar('/metapackages/unique/')
 @ViewRegistrar('/metapackages/unique/<bound>/')
 def metapackages_unique(bound=None):
-    return flask.redirect(flask.url_for('metapackages', bound=bound, maxspread=1, search=flask.request.args.to_dict().get('search')), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, families=1, search=flask.request.args.to_dict().get('search')), 301)
 
 
 @ViewRegistrar('/metapackages/widespread/')
 @ViewRegistrar('/metapackages/widespread/<bound>/')
 def metapackages_widespread(bound=None):
-    return flask.redirect(flask.url_for('metapackages', bound=bound, minspread=10, search=flask.request.args.to_dict().get('search')), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, families='10-', search=flask.request.args.to_dict().get('search')), 301)
 
 
 @ViewRegistrar('/metapackages/in-repo/<repo>/')
@@ -126,7 +126,7 @@ def metapackages_candidates_for_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, minspread=5, search=flask.request.args.to_dict().get('search')), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, families='5-', search=flask.request.args.to_dict().get('search')), 301)
 
 
 @ViewRegistrar('/metapackages/unique-in-repo/<repo>/')
@@ -135,7 +135,7 @@ def metapackages_unique_in_repo(repo, bound=None):
     if not repo or repo not in repometadata:
         flask.abort(404)
 
-    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, maxspread=1, search=flask.request.args.to_dict().get('search')), 301)
+    return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, families=1, search=flask.request.args.to_dict().get('search')), 301)
 
 
 @ViewRegistrar('/metapackages/by-maintainer/<maintainer>/')

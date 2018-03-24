@@ -118,7 +118,7 @@ def api_v1_metapackages_all(bound=None):
 @ViewRegistrar('/api/v1/metapackages/unique/')
 @ViewRegistrar('/api/v1/metapackages/unique/<bound>/')
 def api_v1_metapackages_unique(bound=None):
-    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, maxspread=1), 301)
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, families=1), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/in-repo/<repo>/')
@@ -142,13 +142,13 @@ def api_v1_metapackages_not_in_repo(repo, bound=None):
 @ViewRegistrar('/api/v1/metapackages/candidates-in-repo/<repo>/')
 @ViewRegistrar('/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_candidates_in_repo(repo, bound=None):
-    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, minspread=5), 301)
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, families='5-'), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/unique-in-repo/<repo>/')
 @ViewRegistrar('/api/v1/metapackages/unique-in-repo/<repo>/<bound>/')
 def api_v1_metapackages_unique_in_repo(repo, bound=None):
-    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, maxspread=1), 301)
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, families=1), 301)
 
 
 @ViewRegistrar('/api/v1/metapackages/by-maintainer/<maintainer>/')
