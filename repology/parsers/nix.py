@@ -119,6 +119,11 @@ class NixJsonParser():
                 if 'license' in meta:
                     pkg.licenses = ExtractLicenses(meta['license'])
 
+                if 'position' in meta:
+                    posfile, posline = meta['position'].rsplit(':', 1)
+                    pkg.extrafields['posfile'] = posfile
+                    pkg.extrafields['posline'] = posline
+
                 result.append(pkg)
 
         return result
