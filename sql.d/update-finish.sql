@@ -279,6 +279,7 @@ FROM problems;
 
 -- add different kinds of problems
 INSERT INTO problems (
+	package_id,
 	repo,
 	name,
 	effname,
@@ -286,6 +287,7 @@ INSERT INTO problems (
 	problem
 )
 SELECT DISTINCT
+	packages.id,
 	packages.repo,
 	packages.name,
 	packages.effname,
@@ -312,6 +314,7 @@ WHERE
 	);
 
 INSERT INTO problems (
+	package_id,
 	repo,
 	name,
 	effname,
@@ -319,6 +322,7 @@ INSERT INTO problems (
 	problem
 )
 SELECT DISTINCT
+	packages.id,
 	packages.repo,
 	packages.name,
 	packages.effname,
@@ -334,8 +338,9 @@ WHERE
 	links.redirect = 301 AND
 	replace(links.url, 'http://', 'https://') = links.location;
 
-INSERT INTO problems(repo, name, effname, maintainer, problem)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
 SELECT DISTINCT
+	id,
 	repo,
 	name,
 	effname,
@@ -346,8 +351,9 @@ WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?googlecode.com(/%%)?' OR
 	homepage SIMILAR TO 'https?://code.google.com(/%%)?';
 
-INSERT INTO problems(repo, name, effname, maintainer, problem)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
 SELECT DISTINCT
+	id,
 	repo,
 	name,
 	effname,
@@ -357,8 +363,9 @@ FROM packages
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?codeplex.com(/%%)?';
 
-INSERT INTO problems(repo, name, effname, maintainer, problem)
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
 SELECT DISTINCT
+	id,
 	repo,
 	name,
 	effname,

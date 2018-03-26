@@ -31,14 +31,13 @@ WHERE repo = %(repo)s;
 -- !!get_repository_problems(repo, limit=None) -> array of dicts
 --
 --------------------------------------------------------------------------------
-SELECT
-	repo,
-	name,
-	effname,
+SELECT 
+	packages.*,
 	maintainer,
 	problem
 FROM problems
-WHERE repo = %(repo)s
+INNER JOIN packages ON packages.id = problems.package_id
+WHERE packages.repo = %(repo)s
 ORDER BY repo, effname, maintainer
 LIMIT %(limit)s;
 
