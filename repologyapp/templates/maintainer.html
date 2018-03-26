@@ -69,6 +69,25 @@
 	</div>
 </div>
 
+<h2>Metapackage lists</h2>
+
+<p>Metapackage filtering in Repology is very flexible, so you can combine all kinds of conditions. But here are some preset queries to start with:</p>
+
+<ul>
+	<li><a href="{{ url_for('metapackages', maintainer=maintainer) }}">All metapackages</a> for this maintainer.</li>
+	<li><a href="{{ url_for('metapackages', maintainer=maintainer, newest=1) }}">Up to date</a> metapackages for this maintainer.</li>
+	<li><a href="{{ url_for('metapackages', maintainer=maintainer, outdated=1) }}">Outdated</a> metapackages for this maintainer.</li>
+	<li><a href="{{ url_for('metapackages', maintainer=maintainer, outdated=1, families_newest='2-') }}">Outdated</a> metapackages for this maintainer, but newest in 2+ families. Compared to the previous query this has smaller possibility of false positives.</li>
+</ul>
+<ul>
+	<li>Metapackages for this maintainer which <a href="{{ url_for('metapackages', maintainer=maintainer, problematic=1) }}">have ignored versions</a>. There may be incorrect versions which needs fixing among these.</li>
+	<li>Metapackages for this maintainer which are up to date <a href="{{ url_for('metapackages', maintainer=maintainer, newest=1, families_newest=1) }}">only in a single repository family</a>. There may be incorrect versions which needs fixing among these.</li>
+	<li>Metapackages for this maintainer which <a href="{{ url_for('metapackages', maintainer=maintainer, has_related=1) }}">have related ones</a> (with the same homepage). There may be metapackages which require merging these.</li>
+</ul>
+<ul>
+	<li>Unique metapackages present <a href="{{ url_for('metapackages', maintainer=maintainer, families=1) }}">only in a single repository family</a>.</li>
+	<li>Unique metapackages present <a href="{{ url_for('metapackages', maintainer=maintainer, repos=1) }}">only in a single repository</a>.</li>
+</ul>
 
 {% if numproblems %}
 <h2>Problems</h2>

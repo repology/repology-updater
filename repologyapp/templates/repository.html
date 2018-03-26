@@ -102,6 +102,30 @@
 	</div>
 </div>
 
+<h2>Metapackage lists</h2>
+
+<p>Metapackage filtering in Repology is very flexible, so you can combine all kinds of conditions. But here are some preset queries to start with:</p>
+
+<ul>
+	<li><a href="{{ url_for('metapackages', inrepo=repo) }}">All metapackages</a> present in this repository.</li>
+	<li>Metapackages which are <a href="{{ url_for('metapackages', inrepo=repo, newest=1) }}">up to date</a> in this repository.</li>
+	<li>Metapackages which are <a href="{{ url_for('metapackages', inrepo=repo, outdated=1) }}">outdated</a> in this repository.</li>
+	<li>Metapackages which are <a href="{{ url_for('metapackages', inrepo=repo, outdated=1, families_newest='2-') }}">outdated</a> in this repository, but newest in 2+ families. Compared to the previous query this has smaller possibility of false positives.</li>
+</ul>
+<ul>
+	<li>Metapackages which <a href="{{ url_for('metapackages', inrepo=repo, problematic=1) }}">have ignored versions</a> in this repository. There may be incorrect versions which needs fixing among these.</li>
+	<li>Metapackages which are up to date <a href="{{ url_for('metapackages', inrepo=repo, newest=1, families_newest=1) }}">only in this repository family</a>. There may be incorrect versions which needs fixing among these.</li>
+	<li>Metapackages which <a href="{{ url_for('metapackages', inrepo=repo, has_related) }}">have related ones</a> (with the same homepage). There may be metapackages which require merging these.</li>
+</ul>
+<ul>
+	<li>Unique metapackages present <a href="{{ url_for('metapackages', inrepo=repo, families=1) }}">only in this repository family</a>.</li>
+	<li>Unique metapackages present <a href="{{ url_for('metapackages', inrepo=repo, repos=1) }}">only in this repository</a>.</li>
+</ul>
+<ul>
+	<li>Metapackages from other repositories <a href="{{ url_for('metapackages', notinrepo=repo) }}">not present in this one</a>.</li>
+	<li>Popular metapackages <a href="{{ url_for('metapackages', notinrepo=repo, families='5-') }}">present in 5+ repository families</a>, but absent in this one - likely good candidates for inclusion.</li>
+</ul>
+
 <h2>Maintainers</h2>
 
 <p>There are {{ repo_info.num_maintainers|default('no known') }} maintainers for this repository</p>
