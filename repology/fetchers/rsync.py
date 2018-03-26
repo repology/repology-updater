@@ -22,13 +22,14 @@ from repology.subprocess import RunSubprocess
 
 
 class RsyncFetcher():
-    def __init__(self, url):
+    def __init__(self, url, fetch_timeout=60):
         self.url = url
+        self.fetch_timeout = fetch_timeout
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
 
-        command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', '--timeout=60', self.url, statepath]
+        command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', '--timeout', str(self.fetch_timeout), self.url, statepath]
         RunSubprocess(command, logger)

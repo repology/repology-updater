@@ -24,8 +24,9 @@ from repology.logger import NoopLogger
 
 
 class AURFetcher():
-    def __init__(self, url):
+    def __init__(self, url, fetch_timeout=5):
         self.url = url
+        self.fetch_timeout = fetch_timeout
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
@@ -61,4 +62,4 @@ class AURFetcher():
                 logger.GetIndented().Log('fetching page {}/{}'.format(page + 1, len(package_names) // pagesize + 1))
 
                 with open(os.path.join(statedir, '{}.json'.format(page)), 'wb') as statefile:
-                    statefile.write(Fetch(url, timeout=5).content)
+                    statefile.write(Fetch(url, timeout=self.fetch_timeout).content)

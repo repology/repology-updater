@@ -24,8 +24,9 @@ from repology.logger import NoopLogger
 
 
 class ChocolateyFetcher():
-    def __init__(self, url):
+    def __init__(self, url, fetch_timeout=5):
         self.url = url
+        self.fetch_timeout = fetch_timeout
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
@@ -38,7 +39,7 @@ class ChocolateyFetcher():
             while True:
                 logger.Log('getting ' + nextpageurl)
 
-                text = Fetch(nextpageurl, timeout=5).text
+                text = Fetch(nextpageurl, timeout=self.fetch_timeout).text
                 with open(os.path.join(statedir, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                     pagefile.write(text)
 

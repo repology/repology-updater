@@ -23,8 +23,9 @@ from repology.subprocess import RunSubprocess
 
 
 class WgetTarFetcher():
-    def __init__(self, url):
+    def __init__(self, url, fetch_timeout=60):
         self.url = url
+        self.fetch_timeout = fetch_timeout
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
@@ -33,6 +34,6 @@ class WgetTarFetcher():
 
         with StateDir(statepath) as statedir:
             tarpath = os.path.join(statedir, '.temporary.tar')
-            RunSubprocess(['wget', '--timeout=60', '--tries=1', '-O', tarpath, self.url], logger)
+            RunSubprocess(['wget', '--timeout', str(self.fetch_timeout), '--tries', '1', '-O', tarpath, self.url], logger)
             RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
             os.remove(tarpath)
