@@ -113,6 +113,9 @@ schemas = {
                     'subrepo': str,
                     'sparse_checkout': [str],
 
+                    # some common fetcher args
+                    'fetch_timeout': int,
+
                     # arch parser
                     'allowed_archs': [str],
 
