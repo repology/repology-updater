@@ -24,7 +24,7 @@
 						<a href="{{ url_for('metapackages', inrepo=reponame) }}">Present</a>
 						<a href="{{ url_for('metapackages', notinrepo=reponame) }}">Absent</a>
 						<a href="{{ url_for('metapackages', inrepo=reponame, outdated=1) }}">Outdated</a>
-						<a href="{{ url_for('metapackages', noinrepo=reponame, families='5-') }}">Candidates</a>
+						<a href="{{ url_for('metapackages', notinrepo=reponame, families='5-') }}">Candidates</a>
 						<a href="{{ url_for('metapackages', inrepo=reponame, families=1) }}">Unique</a>
 					</td>
 				</tr>
