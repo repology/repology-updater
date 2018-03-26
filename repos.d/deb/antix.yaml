@@ -1,7 +1,6 @@
 ###########################################################################
 # AntiX
 ###########################################################################
-
 - name: antix_jessie
   sortname: antix_16
   type: repository
@@ -12,7 +11,8 @@
     - name: [ dev, main, nosystemd ]
       fetcher: File
       parser: DebianSources
-      url: 'http://nl.mxrepo.com/antix/jessie/dists/jessie/{source}/source/Sources.gz'
+      #url: 'http://nl.mxrepo.com/antix/jessie/dists/jessie/{source}/source/Sources.gz'
+      url: 'http://ftp.cc.uoc.gr/mirrors/linux/mx/antix/jessie/dists/jessie/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -29,7 +29,8 @@
     - name: [ dev, main, nosystemd ]
       fetcher: File
       parser: DebianSources
-      url: 'http://nl.mxrepo.com/antix/stretch/dists/stretch/{source}/source/Sources.gz'
+      #url: 'http://nl.mxrepo.com/antix/stretch/dists/stretch/{source}/source/Sources.gz'
+      url: 'http://ftp.cc.uoc.gr/mirrors/linux/mx/antix/stretch/dists/stretch/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
