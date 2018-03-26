@@ -135,14 +135,16 @@
   color: '6da741'
   sources:
     # NOTE1: there are two url schemes, apparently with same contents
-    # http://download.opensuse.org/source/tumbleweed/repo/oss/suse/
-    # http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
-    # NOTE2: this lacks non-oss repo, but the corresponding repositories
-    # are incomplete, lacking repodata directory
-    - name: data
+    # http://download.opensuse.org/source/tumbleweed/repo/oss/
+    # http://download.opensuse.org/tumbleweed/repo/src-oss/
+    - name: src-oss
       fetcher: Repodata
       parser: Repodata
-      url: http://download.opensuse.org/tumbleweed/repo/src-oss/suse/
+      url: http://download.opensuse.org/tumbleweed/repo/src-oss/
+    - name: src-non-oss
+      fetcher: Repodata
+      parser: Repodata
+      url: http://download.opensuse.org/tumbleweed/repo/src-non-oss/
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
