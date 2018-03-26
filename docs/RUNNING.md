@@ -35,7 +35,7 @@ Optional, for checking schemas of configuration files:
 
 Optional, for python code linding:
 - Python module [flake8](https://pypi.python.org/pypi/flake8)
-- Python module [flake8-buildins](https://pypi.python.org/pypi/flake8-builtins)
+- Python module [flake8-builtins](https://pypi.python.org/pypi/flake8-builtins)
 - Python module [flake8-import-order](https://pypi.python.org/pypi/flake8-import-order)
 - Python module [flake8-quotes](https://pypi.python.org/pypi/flake8-quotes)
 
