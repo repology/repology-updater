@@ -9,6 +9,7 @@
   sources:
     - name: crates.io
       fetcher: CratesIO
+      fetch_timeout: 15
       parser: CratesIO
       url: https://crates.io/api/v1/crates
   shadow: true

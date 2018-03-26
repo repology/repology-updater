@@ -24,9 +24,10 @@ from repology.logger import NoopLogger
 
 
 class CratesIOFetcher():
-    def __init__(self, url, per_page=100):
+    def __init__(self, url, per_page=100, fetch_timeout=5):
         self.url = url
         self.per_page = per_page
+        self.fetch_timeout = fetch_timeout
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
@@ -39,7 +40,7 @@ class CratesIOFetcher():
                 url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
                 logger.Log('getting ' + url)
 
-                text = Fetch(url, timeout=5).text
+                text = Fetch(url, timeout=self.fetch_timeout).text
                 with open(os.path.join(statedir, '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                     pagefile.write(text)
 
