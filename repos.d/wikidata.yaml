@@ -35,7 +35,8 @@
                 CONCAT(
                   $version,
                   IF(BOUND(?versionTypes), ?versionTypes, ''),
-                  IF(BOUND(?versionOSes), ?versionOSes, '')
+                  IF(BOUND(?versionOSes), ?versionOSes, ''),
+                  IF(BOUND(?versionPlatforms), ?versionPlatforms, '')
                 ); separator=', '
               )
               AS ?versions
@@ -57,6 +58,7 @@
                 ?version
                 (GROUP_CONCAT(DISTINCT ?versionType; separator='') as ?versionTypes)
                 (GROUP_CONCAT(DISTINCT ?versionOS; separator='') as ?versionOSes)
+                (GROUP_CONCAT(DISTINCT ?versionPlatform; separator='') as ?versionPlatforms)
                 (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
                 # These are not currently used and disable for speed
                 # But you may include them into manual request
@@ -104,15 +106,48 @@
                   ?versionItem pq:P306 ?versionOSItem  .
                   BIND(
                     IF(
-                      ?versionOSItem = wd:Q388,
-                      '|L',
-                      '|O'
+                      ?versionOSItem = wd:Q388,  # Linux
+                      '|O',
+                      '|o'
                     )
                     AS ?versionOS
                   )
                   # You may use this in manual request to get label of actual version os
                   #?versionOSItem rdfs:label ?versionOS .
                   #FILTER (LANG(?versionOS) = 'en')
+                }
+                # same for platform
+                # we go blacklist way here though as people use too much unrelated stuff
+                # as platform (hardware platforms, operating systems, gui toolkits etc)
+                OPTIONAL {
+                  ?versionItem pq:P400 ?versionPlatformItem  .
+                  BIND(
+                    CONCAT(
+                      # blacklist
+                      IF(
+                        ?versionPlatformItem = wd:Q189210 ||   # web application
+                        ?versionPlatformItem = wd:Q4885200 ||  # Windows Phone
+                        ?versionPlatformItem = wd:Q14116 ||    # macOS
+                        ?versionPlatformItem = wd:Q1406 ||     # Microsoft Windows
+                        ?versionPlatformItem = wd:Q94 ||       # Android
+                        ?versionPlatformItem = wd:Q48493 ||    # iOS
+                        ?versionPlatformItem = wd:Q2766 ||     # iPhone
+                        ?versionPlatformItem = wd:Q2796,       # iPad
+                        '|p',
+                        ''
+                      ),
+                      # whitelist
+                      IF(
+                        ?versionPlatformItem = wd:Q388,        # Linux
+                        '|P',
+                        ''
+                      )
+                    )
+                    AS ?versionPlatform
+                  )
+                  # You may use this in manual request to get label of actual version os
+                  #?versionPlatformSItem rdfs:label ?versionPlatform .
+                  #FILTER (LANG(?versionPlatform) = 'en')
                 }
 
                 # Websites

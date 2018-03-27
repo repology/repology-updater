@@ -57,10 +57,15 @@ class WikidataJsonParser():
                     version, *flags = version.split('|')
 
                     is_devel = 'U' in flags
-                    is_foreign_os_release = 'O' in flags and 'L' not in flags
+                    is_foreign_os_release = 'o' in flags and 'O' not in flags
+                    is_foreign_platform_release = 'p' in flags and 'P' not in flags
 
                     if is_foreign_os_release:
-                        print('WARNING: {} ({}) version {} skipped as non-linux release'.format(packagedata['projectLabel'], entity, version), file=sys.stderr)
+                        print('WARNING: {} ({}) version {} skipped due to bad OS'.format(packagedata['projectLabel'], entity, version), file=sys.stderr)
+                        continue
+
+                    if is_foreign_platform_release:
+                        print('WARNING: {} ({}) version {} skipped due to bad Platform'.format(packagedata['projectLabel'], entity, version), file=sys.stderr)
                         continue
 
                     pkg = Package()
