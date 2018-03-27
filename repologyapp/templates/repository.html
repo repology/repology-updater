@@ -115,7 +115,7 @@
 <ul>
 	<li>Metapackages which <a href="{{ url_for('metapackages', inrepo=repo, problematic=1) }}">have ignored versions</a> in this repository. There may be incorrect versions which needs fixing among these.</li>
 	<li>Metapackages which are up to date <a href="{{ url_for('metapackages', inrepo=repo, newest=1, families_newest=1) }}">only in this repository family</a>. There may be incorrect versions which needs fixing among these.</li>
-	<li>Metapackages which <a href="{{ url_for('metapackages', inrepo=repo, has_related) }}">have related ones</a> (with the same homepage). There may be metapackages which require merging these.</li>
+	<li>Metapackages which <a href="{{ url_for('metapackages', inrepo=repo, has_related=1) }}">have related ones</a> (with the same homepage). There may be metapackages which require merging these.</li>
 </ul>
 <ul>
 	<li>Unique metapackages present <a href="{{ url_for('metapackages', inrepo=repo, families=1) }}">only in this repository family</a>.</li>
