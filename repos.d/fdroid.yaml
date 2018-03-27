@@ -1,3 +1,7 @@
+###########################################################################
+# F-Droid android repository
+# we only take a few projects from here which have compatible versioning scheme
+###########################################################################
 - name: fdroid
   type: repository
   desc: F-Droid

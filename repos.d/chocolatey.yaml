@@ -1,3 +1,6 @@
+###########################################################################
+# Chocolatey
+###########################################################################
 - name: chocolatey
   type: repository
   desc: Chocolatey
@@ -16,6 +19,7 @@
       url: 'https://chocolatey.org/packages/{name}'
   tags: [ all, production ]
 
+# it's similar, but contains too many packages, with the same verioning problems
 - name: nuget
   type: repository
   desc: NuGet
