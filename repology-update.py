@@ -168,7 +168,7 @@ def Main():
     options = ParseArguments()
 
     repoman = RepositoryManager(options.repos_dir)
-    repoproc = RepositoryProcessor(repoman, options.statedir, not options.no_safety_checks)
+    repoproc = RepositoryProcessor(repoman, options.statedir, safety_checks=not options.no_safety_checks)
 
     if options.list:
         print('\n'.join(repoman.GetNames(reponames=options.reponames)))
