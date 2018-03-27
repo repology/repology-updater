@@ -19,7 +19,10 @@ import xml.etree.cElementTree as ElementTree
 from typing import Iterable, List
 
 
-def iter_xml_elements_at_level(path: str, level: int, tags: List[str]) -> Iterable[ElementTree.Element]:
+XmlElement = ElementTree.Element
+
+
+def iter_xml_elements_at_level(path: str, level: int, tags: List[str]) -> Iterable[XmlElement]:
     """Iterate all specified elements from XML at given nesting level.
 
     Processed elements are cleared so large XML files may be processed

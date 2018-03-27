@@ -51,6 +51,7 @@ families = [
     'fink',
     'freebsd',
     'freshcode',
+    'fsd',
     'gentoo',
     'gobolinux',
     'guix',
