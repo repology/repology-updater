@@ -35,15 +35,15 @@ class SrcListParser():
 
         with subprocess.Popen([self.helperpath, path], errors='ignore', stdout=subprocess.PIPE, universal_newlines=True) as proc:
             for line in proc.stdout:
-                fields = line.strip().split('|')
+                name, version, release, packager, group, summary = line.strip().split('|', 5)
 
                 pkg = Package()
 
-                pkg.name = fields[0]
-                pkg.version = fields[1]
-                pkg.maintainers = GetMaintainers(fields[2])  # XXX: may have multiple maintainers
-                pkg.category = fields[3]
-                pkg.comment = fields[4]
+                pkg.name = name
+                pkg.version = version  # XXX: handle release
+                pkg.maintainers = GetMaintainers(packager)  # XXX: may have multiple maintainers
+                pkg.category = group
+                pkg.comment = summary
 
                 result.append(pkg)
 
