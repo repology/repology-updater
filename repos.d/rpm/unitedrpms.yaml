@@ -6,6 +6,7 @@
   desc: UnitedRPMs Fedora 28
   family: fedora
   color: '261d22'
+  minpackages: 100
   sources:
     - name: repo
       fetcher: Repodata
@@ -24,6 +25,7 @@
   desc: UnitedRPMs Fedora 27
   family: fedora
   color: '261d22'
+  minpackages: 100
   sources:
     - name: repo
       fetcher: Repodata
@@ -42,6 +44,7 @@
   desc: UnitedRPMs Fedora 26
   family: fedora
   color: '261d22'
+  minpackages: 100
   sources:
     - name: repo
       fetcher: Repodata
@@ -60,6 +63,7 @@
   desc: UnitedRPMs Fedora 25
   family: fedora
   color: '261d22'
+  minpackages: 100
   sources:
     - name: repo
       fetcher: Repodata
@@ -78,6 +82,7 @@
   desc: UnitedRPMs Fedora 24
   family: fedora
   color: '261d22'
+  minpackages: 100
   sources:
     - name: repo
       fetcher: Repodata

@@ -5,6 +5,7 @@
   type: repository
   desc: Antergos Main
   family: arch
+  minpackages: 200
   sources:
     - name: antergos
       fetcher: WgetTar
@@ -28,6 +29,7 @@
   type: repository
   desc: Antergos Staging
   family: arch
+  minpackages: 1
   sources:
     - name: antergos-staging
       fetcher: WgetTar

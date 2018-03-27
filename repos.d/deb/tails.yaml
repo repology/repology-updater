@@ -7,6 +7,7 @@
   desc: Tails stable
   family: debuntu
   color: '56347c'
+  minpackages: 20
   sources:
     - name: main
       fetcher: File
@@ -24,6 +25,7 @@
   desc: Tails devel
   family: debuntu
   color: '56347c'
+  minpackages: 20
   sources:
     - name: main
       fetcher: File

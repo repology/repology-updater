@@ -5,6 +5,7 @@
   type: repository
   desc: Rudix
   family: rudix
+  minpackages: 200
   sources:
     - name: rudix
       fetcher: File

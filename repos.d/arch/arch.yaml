@@ -6,6 +6,7 @@
   desc: Arch
   family: arch
   color: '0088cc'
+  minpackages: 9500
   sources:
     - name: [ core, extra, community, multilib ]
       fetcher: WgetTar
@@ -32,6 +33,7 @@
   desc: Arch Testing
   family: arch
   color: '0088cc'
+  minpackages: 100
   sources:
     - name: [ testing, community-testing, multilib-testing ]
       fetcher: WgetTar

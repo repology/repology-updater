@@ -6,6 +6,7 @@
   desc: openSUSE Games Tumbleweed
   family: opensuse
   color: '6da741'
+  minpackages: 500
   sources:
     - name: data
       fetcher: Repodata

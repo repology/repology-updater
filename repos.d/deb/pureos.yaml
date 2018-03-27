@@ -6,6 +6,7 @@
   desc: PureOS green
   family: debuntu
   color: '000000'
+  minpackages: 26000
   sources:
     - name: main
       fetcher: File
@@ -22,6 +23,7 @@
   desc: PureOS landing
   family: debuntu
   color: '000000'
+  minpackages: 26000
   sources:
     - name: main
       fetcher: File

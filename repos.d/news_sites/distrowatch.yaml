@@ -5,6 +5,7 @@
   type: site
   desc: DistroWatch.com
   family: distrowatch
+  minpackages: 200
   sources:
     - name: packages.php
       fetcher: File

@@ -6,6 +6,7 @@
   desc: Parabola
   family: arch
   color: '787dab'
+  minpackages: 10000
   sources:
     - name: [ core, extra, community, libre, pcr ]
       fetcher: WgetTar
@@ -28,6 +29,7 @@
   desc: Parabola Testing
   family: arch
   color: '787dab'
+  minpackages: 10
   sources:
     - name: [ testing, libre-testing ]
       fetcher: WgetTar

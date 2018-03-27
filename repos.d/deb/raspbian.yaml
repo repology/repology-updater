@@ -6,6 +6,7 @@
   desc: Raspbian Oldstable
   family: debuntu
   color: 'd6264f'
+  minpackages: 22000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
       fetcher: File
@@ -23,6 +24,7 @@
   desc: Raspbian Stable
   family: debuntu
   color: 'd6264f'
+  minpackages: 28000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
       fetcher: File
@@ -40,6 +42,7 @@
   desc: Raspbian Testing
   family: debuntu
   color: 'd6264f'
+  minpackages: 31000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
       fetcher: File

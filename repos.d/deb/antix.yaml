@@ -7,6 +7,7 @@
   desc: antiX-16
   family: debuntu
   ruleset: [ debuntu, antix ]
+  minpackages: 100
   sources:
     - name: [ dev, main, nosystemd ]
       fetcher: File
@@ -25,6 +26,7 @@
   desc: antiX-17
   family: debuntu
   ruleset: [ debuntu, antix ]
+  minpackages: 200
   sources:
     - name: [ dev, main, nosystemd ]
       fetcher: File

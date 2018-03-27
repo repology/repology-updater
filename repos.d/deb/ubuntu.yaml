@@ -7,6 +7,7 @@
   family: debuntu
   color: 'e95420'
   valid_till: 2017-04-26
+  minpackages: 21000
   sources:
     - name: [ precise/main, precise/multiverse, precise/restricted, precise/universe, precise-updates/main, precise-updates/multiverse, precise-updates/restricted, precise-updates/universe ]
       fetcher: File
@@ -34,6 +35,7 @@
   family: debuntu
   color: 'e95420'
   valid_till: 2019-05-01
+  minpackages: 23000
   sources:
     - name: [ trusty/main, trusty/multiverse, trusty/restricted, trusty/universe, trusty-updates/main, trusty-updates/multiverse, trusty-updates/restricted, trusty-updates/universe ]
       fetcher: File
@@ -63,6 +65,7 @@
   family: debuntu
   color: 'e95420'
   valid_till: 2021-05-01
+  minpackages: 26000
   sources:
     - name: [ xenial/main, xenial/multiverse, xenial/restricted, xenial/universe, xenial-updates/main, xenial-updates/multiverse, xenial-updates/restricted, xenial-updates/universe ]
       fetcher: File
@@ -92,6 +95,7 @@
   family: debuntu
   color: 'e95420'
   valid_till: 2018-08-01
+  minpackages: 28000
   sources:
     - name: [ artful/main, artful/multiverse, artful/restricted, artful/universe, artful-updates/main, artful-updates/multiverse, artful-updates/restricted, artful-updates/universe ]
       fetcher: File
@@ -121,6 +125,7 @@
   family: debuntu
   color: 'e95420'
   valid_till: 2023-04-01
+  minpackages: 29000
   sources:
     - name: [ bionic/main, bionic/multiverse, bionic/restricted, bionic/universe, bionic-updates/main, bionic-updates/multiverse, bionic-updates/restricted, bionic-updates/universe ]
       fetcher: File
@@ -149,6 +154,7 @@
   desc: Ubuntu 18.04 Proposed
   family: debuntu
   color: 'e95420'
+  minpackages: 10
   sources:
     - name: [ bionic-proposed/main, bionic-proposed/multiverse, bionic-proposed/restricted, bionic-proposed/universe ]
       fetcher: File

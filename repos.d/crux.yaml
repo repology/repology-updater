@@ -5,6 +5,7 @@
   type: repository
   desc: CRUX 3.2
   family: crux
+  minpackages: 1000
   sources:
     - name: [ core, opt, xorg, contrib ]
       fetcher: Rsync
@@ -27,6 +28,7 @@
   type: repository
   desc: CRUX 3.3
   family: crux
+  minpackages: 1000
   sources:
     - name: [ core, opt, xorg, contrib ]
       fetcher: Rsync

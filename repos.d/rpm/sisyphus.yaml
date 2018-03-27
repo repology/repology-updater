@@ -6,6 +6,7 @@
   desc: ALT Sisyphus
   family: sisyphus
   color: 'baccdd'
+  minpackages: 17500
   sources:
     - name: [ noarch, x86_64 ]
       fetcher: File
@@ -29,6 +30,7 @@
   desc: ALT Sisyphus Autoimports
   family: sisyphus
   color: 'baccdd'
+  minpackages: 1  # XXX: unknown
   sources:
     - name: [ noarch, x86_64 ]
       fetcher: File

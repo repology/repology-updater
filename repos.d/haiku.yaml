@@ -7,6 +7,7 @@
   desc: HaikuPorts release
   family: haikuports
   color: "ffc245"
+  minpackages: 500
   sources:
     - name: haikuports
       fetcher: Git
@@ -27,6 +28,7 @@
   desc: HaikuPorts master
   family: haikuports
   color: "ffc245"
+  minpackages: 2000
   sources:
     - name: haikuports
       fetcher: Git

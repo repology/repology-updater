@@ -10,6 +10,7 @@
   desc: Sparky
   family: debuntu
   color: '949393'
+  minpackages: 10
   sources:
     - name: Sources
       fetcher: File

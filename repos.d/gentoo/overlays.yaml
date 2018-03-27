@@ -6,6 +6,7 @@
   desc: Gentoo overlay Pentoo
   family: gentoo
   color: '62548f'  # or own color 285c73?
+  minpackages: 800
   sources:
     - name: pentoo-overlay
       fetcher: Git
@@ -30,6 +31,7 @@
   type: repository
   desc: Gentoo Overlay Games
   family: gentoo
+  minpackages: 1  #XXX: unknown
   sources:
     - name: games-overlay
       fetcher: Git
@@ -45,6 +47,7 @@
   type: repository
   desc: Gentoo Overlay Gamerlay
   family: gentoo
+  minpackages: 1  #XXX: unknown
   sources:
     - name: gamerlay
       fetcher: Git

@@ -5,6 +5,7 @@
   type: repository
   desc: RPM Fusion Fedora 24
   family: fedora
+  minpackages: 350
   sources:
     - name: free-release
       fetcher: Repodata
@@ -45,6 +46,7 @@
   type: repository
   desc: RPM Fusion Fedora 25
   family: fedora
+  minpackages: 400
   sources:
     - name: free-release
       fetcher: Repodata
@@ -85,6 +87,7 @@
   type: repository
   desc: RPM Fusion Fedora 26
   family: fedora
+  minpackages: 400
   sources:
     - name: free-release
       fetcher: Repodata
@@ -125,6 +128,7 @@
   type: repository
   desc: RPM Fusion Fedora 27
   family: fedora
+  minpackages: 400
   sources:
     - name: free-release
       fetcher: Repodata
@@ -165,6 +169,7 @@
   type: repository
   desc: RPM Fusion Fedora 28
   family: fedora
+  minpackages: 300
   sources:
     - name: free-branched
       fetcher: Repodata
@@ -195,6 +200,7 @@
   type: repository
   desc: RPM Fusion Fedora Rawhide
   family: fedora
+  minpackages: 300
   sources:
     - name: free-development
       fetcher: Repodata
@@ -218,6 +224,7 @@
   type: repository
   desc: RPM Fusion EL 6
   family: fedora
+  minpackages: 50
   sources:
     - name: free-updates
       fetcher: Repodata
@@ -248,6 +255,7 @@
   type: repository
   desc: RPM Fusion EL 7
   family: fedora
+  minpackages: 100
   sources:
     - name: free-updates
       fetcher: Repodata

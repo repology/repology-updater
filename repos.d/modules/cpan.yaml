@@ -5,6 +5,7 @@
   type: modules
   desc: CPAN
   family: cpan
+  minpackages: 30000
   sources:
     - name: CPAN
       fetcher: File

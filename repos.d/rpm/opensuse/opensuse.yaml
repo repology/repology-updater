@@ -6,6 +6,7 @@
   desc: openSUSE Leap 42.2
   family: opensuse
   color: '6da741'
+  minpackages: 10000
   sources:
     - name: oss
       fetcher: Repodata
@@ -47,6 +48,7 @@
   desc: openSUSE Leap 42.3
   family: opensuse
   color: '6da741'
+  minpackages: 10000
   sources:
     - name: oss
       fetcher: Repodata
@@ -89,6 +91,7 @@
   desc: openSUSE Leap 15.0
   family: opensuse
   color: '6da741'
+  minpackages: 11000
   sources:
     - name: oss
       fetcher: Repodata
@@ -133,6 +136,7 @@
   desc: openSUSE Tumbleweed
   family: opensuse
   color: '6da741'
+  minpackages: 12000
   sources:
     # NOTE1: there are two url schemes, apparently with same contents
     # http://download.opensuse.org/source/tumbleweed/repo/oss/

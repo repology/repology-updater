@@ -101,7 +101,7 @@ schemas = {
             'color': str,
             'valid_till': date,
             'default_maintainer': str,
-            'minpackages': int,
+            Required('minpackages'): int,
             Required('sources'): [
                 {
                     Required('name'): Any(str, [str]),

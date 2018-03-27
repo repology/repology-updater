@@ -6,6 +6,7 @@
   desc: Ravenports
   family: ravenports
   color: "00bcd4"
+  minpackages: 1700
   sources:
     - name: repology.json
       fetcher: File

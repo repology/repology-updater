@@ -20,6 +20,7 @@
   family: debuntu
   ruleset: [ debuntu, parrot ]
   color: '95b8c8'
+  minpackages: 28000
   sources:
     - name: [ main, contrib, non-free ]
       fetcher: File

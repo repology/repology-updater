@@ -6,6 +6,7 @@
   desc: EPEL 6
   family: fedora
   color: 'ff0000'
+  minpackages: 5000
   sources:
     - name: data
       fetcher: Repodata
@@ -21,6 +22,7 @@
   desc: EPEL 7
   family: fedora
   color: 'ff0000'
+  minpackages: 6000
   sources:
     - name: data
       fetcher: Repodata

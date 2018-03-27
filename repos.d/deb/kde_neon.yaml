@@ -5,6 +5,7 @@
   type: repository
   desc: KDE neon User
   family: debuntu
+  minpackages: 1700
   sources:
     - name: main
       fetcher: File
@@ -25,6 +26,7 @@
   type: repository
   desc: KDE neon User LTS
   family: debuntu
+  minpackages: 1700
   sources:
     - name: main
       fetcher: File
@@ -45,6 +47,7 @@
   type: repository
   desc: KDE neon Dev Stable
   family: debuntu
+  minpackages: 400
   sources:
     - name: main
       fetcher: File
@@ -65,6 +68,7 @@
   type: repository
   desc: KDE neon Dev Unstable
   family: debuntu
+  minpackages: 400
   sources:
     - name: main
       fetcher: File

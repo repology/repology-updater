@@ -5,6 +5,7 @@
   type: repository
   desc: GNU Guix
   family: guix
+  minpackages: 7000
   sources:
     - name: guix
       fetcher: Guix

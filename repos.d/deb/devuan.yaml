@@ -6,6 +6,7 @@
   desc: Devuan Stable
   family: debuntu
   color: '88839c'
+  minpackages: 20000
   sources:
     - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
       fetcher: File
@@ -23,6 +24,7 @@
   desc: Devuan Testing
   family: debuntu
   color: '88839c'
+  minpackages: 25000
   sources:
     - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
       fetcher: File
@@ -40,6 +42,7 @@
   desc: Devuan Unstable
   family: debuntu
   color: '88839c'
+  minpackages: 32000
   sources:
     - name: [ unstable/main, unstable/contrib, unstable/non-free ]
       fetcher: File

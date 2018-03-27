@@ -6,6 +6,7 @@
   desc: OpenWrt 15.05.01 x86
   family: openwrt
   color: '5d6993'
+  minpackages: 4000
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
       fetcher: File
@@ -24,6 +25,7 @@
   desc: OpenWrt trunk x86
   family: openwrt
   color: '5d6993'
+  minpackages: 4000
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
       fetcher: File
@@ -42,6 +44,7 @@
   desc: OpenWrt 15.05.01 ar71xx
   family: openwrt
   color: '5d6993'
+  minpackages: 4000
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
       fetcher: File
@@ -60,6 +63,7 @@
   desc: OpenWrt trunk ar71xx
   family: openwrt
   color: '5d6993'
+  minpackages: 4000
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
       fetcher: File

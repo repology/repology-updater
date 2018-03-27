@@ -2,6 +2,7 @@
   type: repository
   desc: MSYS2 mingw
   family: msys2
+  minpackages: 1  # XXX: unknown
   sources:
     - name: mingw64.db
       fetcher: WgetTar
@@ -23,6 +24,7 @@
   type: repository
   desc: MSYS2 msys2
   family: msys2
+  minpackages: 1  # XXX: unknown
   sources:
     - name: msys.db
       fetcher: WgetTar

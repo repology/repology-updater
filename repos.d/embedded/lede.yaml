@@ -6,6 +6,7 @@
   desc: LEDE trunk x86_64
   family: openwrt
   color: '8f5902'
+  minpackages: 4500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: File
@@ -24,6 +25,7 @@
   desc: LEDE 17.01 x86_64
   family: openwrt
   color: '8f5902'
+  minpackages: 3500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: File
@@ -43,6 +45,7 @@
   desc: LEDE trunk AArch64 generic
   family: openwrt
   color: '8f5902'
+  minpackages: 4500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: File
@@ -61,6 +64,7 @@
   desc: LEDE trunk ARM Cortex A9 VFPv3
   family: openwrt
   color: '8f5902'
+  minpackages: 4500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: File
@@ -79,6 +83,7 @@
   desc: LEDE trunk ARM XScale
   family: openwrt
   color: '8f5902'
+  minpackages: 4500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: File
@@ -97,6 +102,7 @@
   desc: LEDE trunk MIPS 24Kc
   family: openwrt
   color: '8f5902'
+  minpackages: 4500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: File

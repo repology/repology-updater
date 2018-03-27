@@ -9,6 +9,7 @@
   desc: Kali Linux Rolling
   family: debuntu
   color: '32638f'
+  minpackages: 27000
   sources:
     - name: [ contrib, main, non-free ]
       fetcher: File

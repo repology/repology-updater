@@ -6,6 +6,7 @@
   desc: nixpkgs stable
   family: nix
   color: '7eb2dd'
+  minpackages: 12000
   sources:
     - name: packages.json
       fetcher: File
@@ -30,6 +31,7 @@
   desc: nixpkgs unstable
   family: nix
   color: '7eb2dd'
+  minpackages: 13000
   sources:
     - name: packages-unstable.json
       fetcher: File

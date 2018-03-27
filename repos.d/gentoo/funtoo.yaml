@@ -6,6 +6,7 @@
   desc: Funtoo
   family: gentoo
   color: '4e4e71'
+  minpackages: 35000
   sources:
     - name: [ core-hw-kit, core-kit, desktop-kit, dev-kit, editors-kit, games-kit, gnome-kit, java-kit, kde-kit, media-kit, net-kit, nokit, perl-kit, php-kit, python-kit, science-kit, security-kit, text-kit, xorg-kit ]
       fetcher: Git

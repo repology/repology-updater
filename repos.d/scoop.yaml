@@ -5,6 +5,7 @@
   type: repository
   desc: Scoop
   family: scoop
+  minpackages: 600
   sources:
     - name: scoop
       fetcher: Git

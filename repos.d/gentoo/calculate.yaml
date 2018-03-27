@@ -5,6 +5,7 @@
   type: repository
   desc: Calculate
   family: gentoo
+  minpackages: 100
   sources:
     - name: calculate
       fetcher: Git

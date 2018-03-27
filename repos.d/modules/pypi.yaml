@@ -5,6 +5,7 @@
   type: modules
   desc: PyPi
   family: pypi
+  minpackages: 10000  # XXX: unknown
   sources:
     - name: PyPi
       fetcher: File

@@ -6,6 +6,7 @@
   desc: MacPorts
   family: macports
   color: '1f79e9'
+  minpackages: 15000
   sources:
     - name: PortIndex
       fetcher: Rsync

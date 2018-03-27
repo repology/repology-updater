@@ -6,6 +6,7 @@
   desc: BlackArch
   family: arch
   color: '000000'
+  minpackages: 2300
   sources:
     - name: blackarch
       fetcher: WgetTar

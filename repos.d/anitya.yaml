@@ -5,6 +5,7 @@
   type: site
   desc: release-monitoring.org
   family: anitya
+  minpackages: 1  # XXX: unknown
   sources:
     - name: release-monitoring.org
       fetcher: File

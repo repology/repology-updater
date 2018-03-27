@@ -5,6 +5,7 @@
   type: modules
   desc: CRAN
   family: cran
+  minpackages: 14000
   sources:
     - name: CRAN
       fetcher: File

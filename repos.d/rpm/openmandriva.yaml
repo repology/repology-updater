@@ -6,6 +6,7 @@
   desc: OpenMandriva 3.x
   family: openmandriva
   color: '045e9d'
+  minpackages: 1400
   sources:
     # - name: [ main/release, main/updates, main/testing, contrib/release, contrib/updates, contrib/testing, non-free/release, non-free/updates, non-free/testing, restricted/release, restricted/updates, restricted/testing ]
     - name: [ main/release, contrib/release ]
@@ -26,6 +27,7 @@
   desc: OpenMandriva Cooker
   family: openmandriva
   color: '045e9d'
+  minpackages: 5000
   sources:
     # - name: [ main/release, main/updates, main/testing, contrib/release, contrib/updates, contrib/testing, non-free/release, non-free/updates, non-free/testing, restricted/release, restricted/updates, restricted/testing ]
     - name: [ main/release, contrib/release ]

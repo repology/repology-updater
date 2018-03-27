@@ -6,6 +6,7 @@
   desc: Fedora 26
   family: fedora
   color: '294172'
+  minpackages: 21000
   sources:
     - name: release
       fetcher: Repodata
@@ -36,6 +37,7 @@
   desc: Fedora 27
   family: fedora
   color: '294172'
+  minpackages: 22000
   sources:
     - name: release
       fetcher: Repodata
@@ -66,6 +68,7 @@
   desc: Fedora 28
   family: fedora
   color: '294172'
+  minpackages: 20000
   sources:
     - name: development  # XXX: update to release when it's ready
       fetcher: Repodata
@@ -97,6 +100,7 @@
   desc: Fedora Rawhide
   family: fedora
   color: '294172'
+  minpackages: 20000
   sources:
     - name: development
       fetcher: Repodata

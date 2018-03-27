@@ -6,6 +6,7 @@
   desc: SteamOS alchemist
   family: debuntu
   color: 'd6264f'
+  minpackages: 600
   sources:
     - name: [main, contrib, non-free]
       fetcher: File
@@ -23,6 +24,7 @@
   desc: SteamOS alchemist beta
   family: debuntu
   color: 'd6264f'
+  minpackages: 600
   sources:
     - name: [main, contrib, non-free]
       fetcher: File
@@ -40,6 +42,7 @@
   desc: SteamOS brewmaster
   family: debuntu
   color: 'd6264f'
+  minpackages: 900
   sources:
     - name: [main, contrib, non-free]
       fetcher: File
@@ -57,6 +60,7 @@
   desc: SteamOS brewmaster beta
   family: debuntu
   color: 'd6264f'
+  minpackages: 900
   sources:
     - name: [main, contrib, non-free]
       fetcher: File

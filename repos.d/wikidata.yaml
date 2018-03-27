@@ -9,6 +9,7 @@
   family: wikidata
   ruleset: [ arch, aur, wikidata ]
   color: "339966"
+  minpackages: 11000
   sources:
     - name: result.json
       fetcher: File

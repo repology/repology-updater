@@ -6,6 +6,7 @@
   desc: Trisquel 6.0
   family: debuntu
   color: '669fe7'
+  minpackages: 20000
   sources:
     - name: [ toutatis/main, toutatis-updates/main ]
       fetcher: File
@@ -23,6 +24,7 @@
   desc: Trisquel 6.0 backports
   family: debuntu
   color: '669fe7'
+  minpackages: 50
   sources:
     - name: [ toutatis-backports/main ]
       fetcher: File
@@ -40,6 +42,7 @@
   desc: Trisquel 7.0
   family: debuntu
   color: '669fe7'
+  minpackages: 23000
   sources:
     - name: [ belenos/main, belenos-updates/main ]
       fetcher: File
@@ -57,6 +60,7 @@
   desc: Trisquel 7.0 backports
   family: debuntu
   color: '669fe7'
+  minpackages: 50
   sources:
     - name: [ belenos-backports/main ]
       fetcher: File
@@ -74,6 +78,7 @@
   desc: Trisquel 8.0
   family: debuntu
   color: '669fe7'
+  minpackages: 26000
   sources:
     - name: [ flidas/main, flidas-updates/main ]
       fetcher: File
@@ -91,6 +96,7 @@
   desc: Trisquel 8.0 backports
   family: debuntu
   color: '669fe7'
+  minpackages: 20
   sources:
     - name: [ flidas-backports/main ]
       fetcher: File

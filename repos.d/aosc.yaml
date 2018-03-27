@@ -5,6 +5,7 @@
   type: repository
   desc: AOSC
   family: aosc
+  minpackages: 4500
   sources:
     - name: staging
       fetcher: File

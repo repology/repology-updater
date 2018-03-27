@@ -5,6 +5,7 @@
   type: repository
   desc: Vcpkg
   family: vcpkg
+  minpackages: 600
   sources:
     - name: vcpkg
       fetcher: Git
