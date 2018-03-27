@@ -157,6 +157,8 @@ def ParseArguments():
 
     actions_grp.add_argument('-r', '--show-unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
+    actions_grp.add_argument('--no-safety-checks', action='store_true', help='disable safety checks on processed repository data')
+
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
 
     return parser.parse_args()
@@ -166,7 +168,7 @@ def Main():
     options = ParseArguments()
 
     repoman = RepositoryManager(options.repos_dir)
-    repoproc = RepositoryProcessor(repoman, options.statedir)
+    repoproc = RepositoryProcessor(repoman, options.statedir, not options.no_safety_checks)
 
     if options.list:
         print('\n'.join(repoman.GetNames(reponames=options.reponames)))

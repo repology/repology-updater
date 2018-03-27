@@ -58,7 +58,7 @@ script:
   - make flake8
 
   # fill database with test data
-  - ./repology-update.py --parse --initdb --database
+  - ./repology-update.py --parse --initdb --database --no-safety-checks
 
   # smoke test bit
   - ./repology-dump.py --help
