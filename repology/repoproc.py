@@ -35,6 +35,11 @@ class StateFileFormatCheckProblem(Exception):
         Exception.__init__(self, 'Illegal package format in {}. Please run `repology-update.py --parse` on all repositories to update the format.'.format(where))
 
 
+class TooLittlePackages(Exception):
+    def __init__(self, numpackages, minpackages):
+        Exception.__init__(self, 'Unexpectedly small number of packages: {} when expected no less than {}'.format(numpackages, minpackages))
+
+
 class RepositoryProcessor:
     def __init__(self, repoman, statedir, fetch_retries=3, fetch_retry_delay=30):
         self.repoman = repoman
@@ -154,6 +159,9 @@ class RepositoryProcessor:
         logger.Log('parsing complete, {} packages, deduplicating'.format(len(packages)))
 
         packages = PackagesetDeduplicate(packages)
+
+        if len(packages) < repository['minpackages']:
+            raise TooLittlePackages(len(packages), repository['minpackages'])
 
         logger.Log('parsing complete, {} packages'.format(len(packages)))
 

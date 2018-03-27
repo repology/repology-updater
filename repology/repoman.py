@@ -61,6 +61,9 @@ class RepositoryManager:
             if not isinstance(repo['ruleset'], list):
                 repo['ruleset'] = [repo['ruleset']]
 
+            if 'minpackages' not in repo:
+                repo['minpackages'] = 0
+
             repo['ruleset'] = set(repo['ruleset'])
 
             self.repo_by_name[repo['name']] = repo

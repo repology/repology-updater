@@ -5,6 +5,7 @@
   type: site
   desc: freshcode.club
   family: freshcode
+  minpackages: 1400
   sources:
     - name: feed
       fetcher: File

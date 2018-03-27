@@ -6,6 +6,7 @@
   desc: PCLinuxOS
   family: pclinuxos
   color: '1c5482'
+  minpackages: 10500
   sources:
     - name: srpms
       fetcher: File
