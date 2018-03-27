@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,10 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 import sys
 import xml.etree.ElementTree
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 from repology.util import GetMaintainers
 
 
@@ -64,7 +65,20 @@ class RepodataParser():
 
             pkg.name = entry.find('{http://linux.duke.edu/metadata/common}name').text
             version = entry.find('{http://linux.duke.edu/metadata/common}version').attrib['ver']
+            release = entry.find('{http://linux.duke.edu/metadata/common}version').attrib['rel']
+
+            match = re.match('0\\.[0-9]+\\.((?:alpha|beta|rc)[0-9]+)\\.', release)
+            if match:
+                # known pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Prerelease_versions
+                version += '-' + match.group(1)
+            elif release < '1':
+                # unknown pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Some_definitions
+                # most likely a snapshot
+                pkg.SetFlag(PackageFlags.ignore)
+
             pkg.version, pkg.origversion = SanitizeVersion(version)
+            # XXX: append origversion with release
+
             pkg.comment = entry.find('{http://linux.duke.edu/metadata/common}summary').text
             pkg.homepage = entry.find('{http://linux.duke.edu/metadata/common}url').text
             pkg.category = entry.find('{http://linux.duke.edu/metadata/common}format/'
