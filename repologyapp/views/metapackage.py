@@ -142,11 +142,14 @@ def metapackage_history(name):
     name = name.lower()
 
     def prepare_repos(repos):
-        srepos = set(repos)
+        if not repos:
+            return []
+
+        repos = set(repos)
 
         # leave only known repos and ensude correct order
         # also remove LEDE which is too noisy
-        return [name for name in reponames if name in srepos and not name.startswith('lede_')]
+        return [name for name in reponames if name in repos and not name.startswith('lede_')]
 
     def prepare_versions(versions):
         if not versions:
@@ -166,35 +169,41 @@ def metapackage_history(name):
 
     def postprocess_history(history):
         for entry in history:
+            data = entry['data']
+
             if entry['type'] == 'history_start':
-                apply_to_field(entry['data'], 'newest_versions', prepare_versions)
-                apply_to_field(entry['data'], 'devel_versions', prepare_versions)
-                apply_to_field(entry['data'], 'unique_versions', prepare_versions)
-                apply_to_field(entry['data'], 'actual_repos', prepare_repos)
-                apply_to_field(entry['data'], 'all_repos', prepare_repos)
-                entry['data']['old_repos'] = prepare_repos(set(entry['data']['all_repos']) - set(entry['data']['actual_repos']))
+                apply_to_field(data, 'newest_versions', prepare_versions)
+                apply_to_field(data, 'devel_versions', prepare_versions)
+                apply_to_field(data, 'unique_versions', prepare_versions)
+                apply_to_field(data, 'actual_repos', prepare_repos)
+                apply_to_field(data, 'all_repos', prepare_repos)
+
+                data['old_repos'] = prepare_repos(
+                    set(data.get('all_repos', [])) - set(data.get('actual_repos', []))
+                )
+
                 yield entry
 
             elif entry['type'] == 'version_update':
-                apply_to_field(entry['data'], 'newest_versions', prepare_versions)
-                apply_to_field(entry['data'], 'devel_versions', prepare_versions)
-                apply_to_field(entry['data'], 'unique_versions', prepare_versions)
-                apply_to_field(entry['data'], 'actual_repos', prepare_repos)
-                apply_to_field(entry['data'], 'since_previous', timedelta_from_seconds)
+                apply_to_field(data, 'newest_versions', prepare_versions)
+                apply_to_field(data, 'devel_versions', prepare_versions)
+                apply_to_field(data, 'unique_versions', prepare_versions)
+                apply_to_field(data, 'actual_repos', prepare_repos)
+                apply_to_field(data, 'since_previous', timedelta_from_seconds)
                 yield entry
 
             elif entry['type'] == 'catch_up':
-                apply_to_field(entry['data'], 'lag', timedelta_from_seconds)
-                apply_to_field(entry['data'], 'repos', prepare_repos)
+                apply_to_field(data, 'lag', timedelta_from_seconds)
+                apply_to_field(data, 'repos', prepare_repos)
 
-                if entry['data']['repos']:
+                if data['repos']:
                     yield entry
 
             elif entry['type'] == 'repos_update':
-                apply_to_field(entry['data'], 'repos_added', prepare_repos)
-                apply_to_field(entry['data'], 'repos_removed', prepare_repos)
+                apply_to_field(data, 'repos_added', prepare_repos)
+                apply_to_field(data, 'repos_removed', prepare_repos)
 
-                if entry['data']['repos_added'] or entry['data']['repos_removed']:
+                if data['repos_added'] or data['repos_removed']:
                     yield entry
 
     return flask.render_template(
