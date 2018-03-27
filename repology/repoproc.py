@@ -41,11 +41,12 @@ class TooLittlePackages(Exception):
 
 
 class RepositoryProcessor:
-    def __init__(self, repoman, statedir, fetch_retries=3, fetch_retry_delay=30):
+    def __init__(self, repoman, statedir, fetch_retries=3, fetch_retry_delay=30, safety_checks=True):
         self.repoman = repoman
         self.statedir = statedir
         self.fetch_retries = fetch_retries
         self.fetch_retry_delay = fetch_retry_delay
+        self.safety_checks = safety_checks
 
     def __GetRepoPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.state')
@@ -160,7 +161,7 @@ class RepositoryProcessor:
 
         packages = PackagesetDeduplicate(packages)
 
-        if len(packages) < repository['minpackages']:
+        if self.safety_checks and len(packages) < repository['minpackages']:
             raise TooLittlePackages(len(packages), repository['minpackages'])
 
         logger.Log('parsing complete, {} packages'.format(len(packages)))

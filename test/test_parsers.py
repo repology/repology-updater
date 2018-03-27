@@ -25,7 +25,7 @@ from repology.repoproc import RepositoryProcessor
 
 
 repoman = RepositoryManager(config['REPOS_DIR'])
-repoproc = RepositoryProcessor(repoman, 'testdata')
+repoproc = RepositoryProcessor(repoman, 'testdata', safety_checks=False)
 
 
 class TestParsers(unittest.TestCase):
