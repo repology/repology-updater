@@ -6,7 +6,7 @@
   desc: LEDE trunk x86_64
   family: openwrt
   color: '8f5902'
-  minpackages: 4500
+  minpackages: 4000
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: File
