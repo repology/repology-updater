@@ -179,6 +179,33 @@ def api_v1_maintainer_problems(maintainer):
     )
 
 
+@ViewRegistrar('/api/experimental/distromap')
+def api_experimental_distromap():
+    args = flask.request.args.to_dict()
+
+    expand = bool(args.get('expand'))
+    plaintext = args.get('format') == 'plaintext'
+
+    distromap = None
+
+    if expand:
+        distromap = get_db().get_distromap_expanded(args.get('fromrepo'), args.get('torepo'))
+
+        if plaintext:
+            lines = ['\t'.join(pair) for pair in distromap]
+            text = '\n'.join(lines + [''])
+            return (text, {'Content-type': 'text/plain'})
+    else:
+        distromap = get_db().get_distromap(args.get('fromrepo'), args.get('torepo'))
+
+        if plaintext:
+            lines = [','.join(fromnames) + '\t' + ','.join(tonames) for fromnames, tonames in distromap]
+            text = '\n'.join(lines + [''])
+            return (text, {'Content-type': 'text/plain'})
+
+    return (dump_json(distromap), {'Content-type': 'application/json'})
+
+
 #@ViewRegistrar('/api/v1/history/repository/<repo>')
 #def api_v1_maintainer_problems():
 #    get_db().GetRepositoriesHistoryPeriod(seconds = 365

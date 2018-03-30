@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ super() }}: distromap{% endblock %}
+{% block header %}Distromap{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<form class="form-horizontal" action="{{ url_for('api_experimental_distromap') }}" method="GET">
+	<div class="form-group">
+		<label for="fromrepo" class="col-sm-2 control-label">From repo</label>
+		<div class="col-sm-8">
+			<select class="form-control" id="fromrepo" name="fromrepo">
+			{% for reponame in reponames %}
+				<option value="{{ reponame }}">{{ repometadata[reponame].desc }}</option>
+			{% endfor %}
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="torepo" class="col-sm-2 control-label">To repo</label>
+		<div class="col-sm-8">
+			<select class="form-control" id="torepo" name="torepo">
+			{% for reponame in reponames %}
+				<option value="{{ reponame }}">{{ repometadata[reponame].desc }}</option>
+			{% endfor %}
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="expand"> Expand arrays
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary" name="format" value="json">Get JSON</button>
+			<button type="submit" class="btn btn-primary" name="format" value="plaintext">Get plaintext</button>
+		</div>
+	</div>
+</form>
+
+</div> {#- container #}
+{% endblock %}
+

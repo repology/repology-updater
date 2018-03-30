@@ -53,3 +53,8 @@ def raising():
         packages1=get_db().get_raising_metapackages1(config['METAPACKAGES_PER_PAGE']),
         packages2=get_db().get_raising_metapackages2(config['METAPACKAGES_PER_PAGE']),
     )
+
+
+@ViewRegistrar('/experimental/distromap')
+def distromap():
+    return flask.render_template('distromap.html')
