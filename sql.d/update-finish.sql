@@ -50,6 +50,8 @@ INTO metapackages (
 	num_families,
 	num_repos_newest,
 	num_families_newest,
+	max_repos,
+	max_families,
 	first_seen,
 	last_seen
 )
@@ -60,6 +62,8 @@ SELECT
 	count(DISTINCT family),
 	count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5),
 	count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5),
+	count(DISTINCT repo),
+	count(DISTINCT family),
 	now(),
 	now()
 FROM packages
@@ -71,6 +75,8 @@ DO UPDATE SET
 	num_families = EXCLUDED.num_families,
 	num_repos_newest = EXCLUDED.num_repos_newest,
 	num_families_newest = EXCLUDED.num_families_newest,
+	max_repos = greatest(metapackages.max_repos, EXCLUDED.num_repos),
+	max_families = greatest(metapackages.max_families, EXCLUDED.num_families),
 	last_seen = now();
 
 -- update metapackages: related

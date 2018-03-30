@@ -186,6 +186,8 @@ CREATE TABLE metapackages (
 	num_families smallint NOT NULL,
 	num_repos_newest smallint NOT NULL,
 	num_families_newest smallint NOT NULL,
+	max_repos smallint NOT NULL,
+	max_families smallint NOT NULL,
 	has_related boolean NOT NULL DEFAULT false,
 	first_seen timestamp with time zone NOT NULL,
 	last_seen timestamp with time zone NOT NULL
