@@ -44,8 +44,9 @@ class QueryMetadata:
     RET_SINGLE_TUPLE = 3
     RET_ARRAY_OF_VALUES = 4
     RET_ARRAY_OF_DICTS = 5
-    RET_ARRAY_OF_PACKAGES = 6
-    RET_DICT_AS_DICTS = 7
+    RET_ARRAY_OF_TUPLES = 6
+    RET_ARRAY_OF_PACKAGES = 7
+    RET_DICT_AS_DICTS = 8
 
     ARGSMODE_NORMAL = 0
     ARGSMODE_MANY_VALUES = 1
@@ -134,6 +135,8 @@ class QueryMetadata:
             self.rettype = QueryMetadata.RET_ARRAY_OF_VALUES
         elif string == 'array of dicts':
             self.rettype = QueryMetadata.RET_ARRAY_OF_DICTS
+        elif string == 'array of tuples':
+            self.rettype = QueryMetadata.RET_ARRAY_OF_TUPLES
         elif string == 'array of packages':
             self.rettype = QueryMetadata.RET_ARRAY_OF_PACKAGES
         elif string == 'dict of dicts':
@@ -212,6 +215,9 @@ class QueryManager:
             elif query.rettype == QueryMetadata.RET_ARRAY_OF_DICTS:
                 names = [desc.name for desc in cursor.description]
                 return [dict(zip(names, row)) for row in cursor.fetchall()]
+
+            elif query.rettype == QueryMetadata.RET_ARRAY_OF_TUPLES:
+                return cursor.fetchall()
 
             elif query.rettype == QueryMetadata.RET_ARRAY_OF_PACKAGES:
                 names = [desc.name for desc in cursor.description]
