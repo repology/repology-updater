@@ -17,6 +17,7 @@
 
 import string
 
+from repology.package import Package
 
 __all__ = ['PackageFormatter']
 
@@ -29,28 +30,27 @@ class PackageFormatter(string.Formatter):
     }
 
     def get_value(self, key, args, kwargs):
-        pkg = args[0]
-
+        pkgdata = args[0].__dict__ if isinstance(args[0], Package) else args[0]
         key, *requested_filters = key.split('|')
 
         value = ''
 
         if key == 'name':
-            value = pkg.name
+            value = pkgdata['name']
         elif key == 'subrepo':
-            value = pkg.subrepo
+            value = pkgdata['subrepo']
         elif key == 'version':
-            value = pkg.version
+            value = pkgdata['version']
         elif key == 'origversion':
-            value = pkg.origversion if pkg.origversion is not None else pkg.version
+            value = pkgdata['origversion'] if pkgdata['origversion'] is not None else pkgdata['version']
         elif key == 'category':
-            value = pkg.category if pkg.category is not None else ''
+            value = pkgdata['category'] if pkgdata['category'] is not None else ''
         elif key == 'archrepo':
-            value = 'community' if pkg.subrepo.startswith('community') else 'packages'
+            value = 'community' if pkgdata['subrepo'].startswith('community') else 'packages'
         elif key == 'archbase':
-            value = pkg.extrafields['base'] if 'base' in pkg.extrafields else pkg.name
-        elif key in pkg.extrafields:
-            value = pkg.extrafields[key]
+            value = pkgdata['extrafields']['base'] if 'base' in pkgdata['extrafields'] else pkgdata['name']
+        elif key in pkgdata['extrafields']:
+            value = pkgdata['extrafields'][key]
 
         for filtername in requested_filters:
             if filtername in self.filters:

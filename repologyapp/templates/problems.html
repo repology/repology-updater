@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "macros.html" as macros %}
 
 {% block title %}Repology: problems{% endblock %}
 {% block header %}Problems{% endblock %}
@@ -22,7 +23,7 @@
 		<tr>
 			<td class="text-right"><a href="{{ url_for('repository', repo=problem.repo) }}">{{ repometadata[problem.repo].desc }}</a></td>
 			<td class="text-center"><a href="{{ url_for('metapackage', name=problem.effname) }}">{{ problem.effname }}</a></td>
-			<td class="text-center">{{ problem.name }}</td>
+			<td class="text-center">{{ macros.package_link(problem, problem.name) }}</td>
 			<td class="text-center">
 			{%- if problem.maintainer -%}
 				<a href="{{ url_for('maintainer', maintainer=problem.maintainer) }}">{{ problem.maintainer }}</a>

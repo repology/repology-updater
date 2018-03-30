@@ -25,7 +25,31 @@ SELECT
 {% if fields %}
 	{{ fields | join(',') }}
 {% else %}
-	*
+	repo,
+	family,
+	subrepo,
+
+	name,
+	effname,
+
+	version,
+	origversion,
+	versionclass,
+
+	maintainers,
+	category,
+	comment,
+	homepage,
+	licenses,
+	downloads,
+
+	flags,
+	shadow,
+	verfixed,
+
+	flavors,
+
+	extrafields
 {% endif %}
 FROM packages
 WHERE effname = %(effname)s;
@@ -40,7 +64,31 @@ SELECT
 {% if fields %}
 	{{ fields | join(',') }}
 {% else %}
-	*
+	repo,
+	family,
+	subrepo,
+
+	name,
+	effname,
+
+	version,
+	origversion,
+	versionclass,
+
+	maintainers,
+	category,
+	comment,
+	homepage,
+	licenses,
+	downloads,
+
+	flags,
+	shadow,
+	verfixed,
+
+	flavors,
+
+	extrafields
 {% endif %}
 FROM packages
 WHERE effname = ANY(%(effnames)s);
