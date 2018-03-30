@@ -22,10 +22,15 @@
       url: http://pkg.openindiana.org/hipster-encumbered/en/index.shtml
     - desc: GitHub repository
       url: https://github.com/OpenIndiana/oi-userland
-   # XXX: package 'path' is not the same as path in github repo, so most times these don't work
+   # XXX: fmri is not the same as path in github repo, so most times these don't work
 #  packagelinks:
 #    - desc: Package source
-#      url: 'https://github.com/OpenIndiana/oi-userland/tree/oi/hipster/components/{path}'
+#      url: 'https://github.com/OpenIndiana/oi-userland/tree/oi/hipster/components/{fmri}'
 #    - desc: Makefile
-#      url: 'https://github.com/OpenIndiana/oi-userland/blob/oi/hipster/components/{path}/Makefile'
+#      url: 'https://github.com/OpenIndiana/oi-userland/blob/oi/hipster/components/{fmri}/Makefile'
+#      #
+  # but we can fallback to github search
+  packagelinks:
+    - desc: GitHub search in the source repository
+      url: 'https://github.com/OpenIndiana/oi-userland/search?q={name}+filename%3AMakefile&type=Code'
   tags: [ all, production ]
