@@ -45,7 +45,7 @@
 			{% endif %}
 
 			{%- if entry.data.old_repos -%}
-			, also present in
+			, {% if entry.data.actual_repos %}also {% endif %}present in
 
 			{% for repo in entry.data.old_repos %}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
