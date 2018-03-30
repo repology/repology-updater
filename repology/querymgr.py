@@ -79,7 +79,6 @@ class QueryMetadata:
             - funcname(arg1, arg2=True, arg3=False, arg4=123, arg5="str") -> scalar
             Takes 5 arguments, some with default values, returns single value
         """
-
         annkey, annvalue = string.split(None, 1)
 
         if annkey == '@param':
