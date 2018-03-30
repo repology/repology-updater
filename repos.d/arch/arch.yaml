@@ -33,7 +33,7 @@
   desc: Arch Testing
   family: arch
   color: '0088cc'
-  minpackages: 100
+  minpackages: 1
   sources:
     - name: [ testing, community-testing, multilib-testing ]
       fetcher: WgetTar
