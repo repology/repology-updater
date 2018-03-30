@@ -29,6 +29,6 @@ SELECT
 	problem
 FROM problems
 INNER JOIN packages ON packages.id = problems.package_id
-WHERE packages.repo = %(repo)s
-ORDER BY repo, effname, maintainer
+WHERE problems.repo = %(repo)s
+ORDER BY problems.repo, problems.effname, problems.maintainer
 LIMIT %(limit)s;
