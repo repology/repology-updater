@@ -411,7 +411,7 @@ CREATE TABLE links (
 -- Problems
 --------------------------------------------------------------------------------
 CREATE TABLE problems (
-	package_id int NOT NULL,
+	package_id integer NOT NULL,
 	repo text NOT NULL,
 	name text NOT NULL,
 	effname text NOT NULL,
