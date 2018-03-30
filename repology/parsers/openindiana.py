@@ -26,7 +26,7 @@ class OpenIndianaSummaryJsonParser():
     def __init__(self):
         pass
 
-    def ParsePackage(self, pkgpath, pkgdata):
+    def ParsePackage(self, fmri, pkgdata):
         variables = {}
         for action in pkgdata['actions']:
             tokens = shlex.split(action)
@@ -54,7 +54,7 @@ class OpenIndianaSummaryJsonParser():
 
         pkg = Package()
 
-        pkg.extrafields['path'] = pkgpath
+        pkg.extrafields['fmri'] = fmri
 
         if 'com.oracle.info.name' in variables:
             pkg.name = variables['com.oracle.info.name'][0]
@@ -98,9 +98,9 @@ class OpenIndianaSummaryJsonParser():
                 # else summary_key is someting like "openindiana.org"
                 # or "hipster-encumbered"
 
-                for pkgpath, pkgdatas in summary_json[summary_key].items():
+                for fmri, pkgdatas in summary_json[summary_key].items():
                     for pkgdata in pkgdatas:
-                        pkg = self.ParsePackage(pkgpath, pkgdata)
+                        pkg = self.ParsePackage(fmri, pkgdata)
 
                         if pkg:
                             result.append(pkg)
