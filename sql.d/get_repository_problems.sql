@@ -17,54 +17,18 @@
 
 --------------------------------------------------------------------------------
 --
--- !!get_repository_problems_count(repo) -> single value
+-- @param repo
+-- @param limit=None
+--
+-- @returns array of dicts
 --
 --------------------------------------------------------------------------------
 SELECT
-	count(*)
-FROM problems
-WHERE repo = %(repo)s;
-
-
---------------------------------------------------------------------------------
---
--- !!get_repository_problems(repo, limit=None) -> array of dicts
---
---------------------------------------------------------------------------------
-SELECT 
 	packages.*,
 	maintainer,
 	problem
 FROM problems
 INNER JOIN packages ON packages.id = problems.package_id
 WHERE packages.repo = %(repo)s
-ORDER BY repo, effname, maintainer
-LIMIT %(limit)s;
-
-
---------------------------------------------------------------------------------
---
--- !!get_maintainer_problems_count(maintainer) -> single value
---
---------------------------------------------------------------------------------
-SELECT
-	count(*)
-FROM problems
-WHERE maintainer = %(maintainer)s;
-
-
---------------------------------------------------------------------------------
---
--- !!get_maintainer_problems(maintainer, limit=None) -> array of dicts
---
---------------------------------------------------------------------------------
-SELECT
-	repo,
-	name,
-	effname,
-	maintainer,
-	problem
-FROM problems
-WHERE maintainer = %(maintainer)s
 ORDER BY repo, effname, maintainer
 LIMIT %(limit)s;

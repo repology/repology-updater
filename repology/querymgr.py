@@ -51,16 +51,21 @@ class QueryMetadata:
     ARGSMODE_MANY_VALUES = 1
     ARGSMODE_MANY_PACKAGES = 2
 
-    def __init__(self):
-        self.name = None
-        self.query = ''
+    def __init__(self, name, query):
+        self.name = name
+        self.query = query
         self.template = None
         self.args = []
         self.argdefaults = {}
         self.rettype = QueryMetadata.RET_NONE
         self.argsmode = QueryMetadata.ARGSMODE_NORMAL
 
-    def parse(self, string):
+        for line in query.split('\n'):
+            match = re.fullmatch('\s*--\s*(@.*?)\s*', line)
+            if match:
+                self.__parse_annotation(match.group(1))
+
+    def __parse_annotation(self, string):
         """Parse query metadata from the string definition.
 
         Input examples:
@@ -74,18 +79,15 @@ class QueryMetadata:
             - funcname(arg1, arg2=True, arg3=False, arg4=123, arg5="str") -> scalar
             Takes 5 arguments, some with default values, returns single value
         """
-        match = re.match('\s*([a-z][a-z0-9_]*)\s*\(([^)]*)\)(?:\s*->\s*([a-z ]+))?', string)
-        if match is None:
-            raise QueryMetadataParsingError('Cannot parse query metadata "{}"'.format(string))
 
-        self.name = match.group(1).strip()
-        self.parse_arguments(match.group(2))
-        self.parse_return_type(match.group(3))
+        annkey, annvalue = string.split(None, 1)
 
-    def parse_arguments(self, string):
-        if string:
-            string = string.strip()
+        if annkey == '@param':
+            self.__parse_argument(annvalue)
+        elif annkey == '@returns':
+            self.__parse_return_type(annvalue)
 
+    def __parse_argument(self, string):
         if string == 'many values':
             self.argsmode = QueryMetadata.ARGSMODE_MANY_VALUES
             return
@@ -94,42 +96,33 @@ class QueryMetadata:
             self.argsmode = QueryMetadata.ARGSMODE_MANY_PACKAGES
             return
 
-        for arg in string.split(','):
-            arg = arg.strip()
+        argname, *argdefault = [s.strip() for s in string.split('=', 1)]
 
-            if not arg:
-                continue
+        argdefault = argdefault[0] if argdefault else None
 
-            argname, *argdefault = [s.strip() for s in arg.split('=', 1)]
+        if not argname:
+            raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad arguments'.format(string, argname))
 
-            argdefault = argdefault[0] if argdefault else None
+        self.args.append(argname)
 
-            if not argname:
-                raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad arguments'.format(string, argname))
+        if argdefault is None:
+            pass
+        elif argdefault.isdecimal():
+            self.argdefaults[argname] = int(argdefault)
+        elif argdefault.startswith('\''):
+            self.argdefaults[argname] = argdefault.strip('\'')
+        elif argdefault.startswith('\"'):
+            self.argdefaults[argname] = argdefault.strip('\"')
+        elif argdefault == 'True':
+            self.argdefaults[argname] = True
+        elif argdefault == 'False':
+            self.argdefaults[argname] = False
+        elif argdefault == 'None':
+            self.argdefaults[argname] = None
+        else:
+            raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad default value for argument "{}"'.format(string, argname))
 
-            self.args.append(argname)
-
-            if argdefault is None:
-                pass
-            elif argdefault.isdecimal():
-                self.argdefaults[argname] = int(argdefault)
-            elif argdefault.startswith('\''):
-                self.argdefaults[argname] = argdefault.strip('\'')
-            elif argdefault.startswith('\"'):
-                self.argdefaults[argname] = argdefault.strip('\"')
-            elif argdefault == 'True':
-                self.argdefaults[argname] = True
-            elif argdefault == 'False':
-                self.argdefaults[argname] = False
-            elif argdefault == 'None':
-                self.argdefaults[argname] = None
-            else:
-                raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad default value for argument "{}"'.format(string, argname))
-
-    def parse_return_type(self, string):
-        if string:
-            string = string.strip()
-
+    def __parse_return_type(self, string):
         if not string:
             self.rettype = QueryMetadata.RET_NONE
         elif string == 'single value':
@@ -154,31 +147,19 @@ class QueryManager:
     def __init__(self, queriesdir):
         self.queries = {}
 
-        for filename in os.listdir(queriesdir):
-            if filename.endswith('.sql'):
+        for root, dirs, files in os.walk(queriesdir):
+            for filename in files:
+                if not filename.endswith('.sql'):
+                    continue
+
                 try:
-                    self.__load_file(os.path.join(queriesdir, filename))
+                    with open(os.path.join(root, filename), 'r', encoding='utf-8') as sqlfile:
+                        self.__register_query(QueryMetadata(
+                            filename[:-4],
+                            sqlfile.read()
+                        ))
                 except QueryMetadataParsingError as e:
-                    raise QueryLoadingError('Cannot load SQL queries from {}: {}'.format(filename, str(e)))
-
-    def __load_file(self, path):
-        current_query = None
-
-        with open(path, 'r', encoding='utf-8') as sqlfile:
-            for line in sqlfile:
-                match = re.match('--\s*!!(.*)', line)
-                if match:
-                    if current_query is not None:
-                        self.__register_query(current_query)
-
-                    current_query = QueryMetadata()
-                    current_query.parse(match.group(1))
-
-                if current_query is not None:
-                    current_query.query += line
-
-            if current_query is not None:
-                self.__register_query(current_query)
+                    raise QueryLoadingError('Cannot load SQL query from {}: {}'.format(filename, str(e)))
 
     def __register_query(self, query):
         query.template = jinja2.Template(query.query)

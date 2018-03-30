@@ -17,24 +17,16 @@
 
 --------------------------------------------------------------------------------
 --
--- !!update_link_status(url, status, redirect=None, size=None, location=None)
+-- @param after=None
+-- @param prefix=None
+-- @param recheck_age=None
+-- @param limit=None
+-- @param unchecked_only=False
+-- @param checked_only=False
+-- @param failed_only=False
+-- @param succeeded_only=False
 --
---------------------------------------------------------------------------------
-UPDATE links
-SET
-	last_checked = now(),
-	last_success = CASE WHEN %(status)s = 200 THEN now() ELSE last_success END,
-	last_failure = CASE WHEN %(status)s != 200 THEN now() ELSE last_failure END,
-	status = %(status)s,
-	redirect = %(redirect)s,
-	size = %(size)s,
-	location = %(location)s
-WHERE url = %(url)s;
-
-
---------------------------------------------------------------------------------
---
--- !!get_links_for_check(after=None, prefix=None, recheck_age=None, limit=None, unchecked_only=False, checked_only=False, failed_only=False, succeeded_only=False) -> array of values
+-- @returns array of values
 --
 --------------------------------------------------------------------------------
 SELECT
@@ -74,39 +66,3 @@ WHERE
 	)
 ORDER BY url
 LIMIT %(limit)s;
-
-
---------------------------------------------------------------------------------
---
--- !!get_metapackage_link_statuses(effname) -> dict of dicts
---
---------------------------------------------------------------------------------
-SELECT
-	url,
-	last_checked,
-	last_success,
-	last_failure,
-	status,
-	redirect,
-	size,
-	location
-FROM links
-WHERE url in (
-	-- this additional wrap seem to fix query planner somehow
-	-- to use index scan on links instead of seq scan, which
-	-- makes the query 100x faster; XXX: recheck with postgres 10
-	-- or report this?
-	SELECT DISTINCT
-		url
-	FROM (
-		SELECT
-			unnest(downloads) AS url
-		FROM packages
-		WHERE effname = %(effname)s
-		UNION
-		SELECT
-			homepage AS url
-		FROM packages
-		WHERE homepage IS NOT NULL AND effname = %(effname)s
-	) AS tmp
-);

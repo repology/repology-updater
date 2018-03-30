@@ -17,37 +17,9 @@
 
 --------------------------------------------------------------------------------
 --
--- !!get_repositories() -> array of dicts
+-- @param reponame
 --
---------------------------------------------------------------------------------
-SELECT
-	name,
-	num_packages,
-	num_packages_newest,
-	num_packages_outdated,
-	num_packages_ignored,
-	num_packages_unique,
-	num_packages_devel,
-	num_packages_legacy,
-	num_packages_incorrect,
-	num_packages_untrusted,
-	num_packages_noscheme,
-	num_packages_rolling,
-	num_metapackages,
-	num_metapackages_unique,
-	num_metapackages_newest,
-	num_metapackages_outdated,
-	num_metapackages_comparable,
-	last_update at time zone 'UTC' AS last_update_utc,
-	now() - last_update AS since_last_update,
-	num_problems,
-	num_maintainers
-FROM repositories;
-
-
---------------------------------------------------------------------------------
---
--- !!get_repository(reponame) -> single dict
+-- @returns single dict
 --
 --------------------------------------------------------------------------------
 SELECT
@@ -73,14 +45,3 @@ SELECT
 	num_maintainers
 FROM repositories
 WHERE name = %(reponame)s;
-
-
---------------------------------------------------------------------------------
---
--- !!get_all_repository_names(limit=None) -> array of values
---
---------------------------------------------------------------------------------
-SELECT
-	name
-FROM repositories
-LIMIT %(limit)s;

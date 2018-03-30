@@ -17,15 +17,15 @@
 
 --------------------------------------------------------------------------------
 --
--- !!get_counts() -> single dict
+-- @param limit=None
+--
+-- @returns array of dicts
 --
 --------------------------------------------------------------------------------
-SELECT * FROM statistics LIMIT 1;
-
-
---------------------------------------------------------------------------------
---
--- !!get_maintainers_range() -> single tuple
---
---------------------------------------------------------------------------------
-SELECT min(maintainer), max(maintainer) FROM maintainers;
+SELECT
+	now() - last_seen AS ago,
+	maintainer
+FROM maintainers
+WHERE num_packages = 0
+ORDER BY last_seen DESC, maintainer
+LIMIT %(limit)s;

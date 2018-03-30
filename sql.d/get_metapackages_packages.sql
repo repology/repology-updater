@@ -17,52 +17,41 @@
 
 --------------------------------------------------------------------------------
 --
--- !!add_report(effname, need_verignore, need_split, need_merge, comment)
+-- @param effnames
+-- @param fields=None
 --
---------------------------------------------------------------------------------
-INSERT INTO reports (
-	created,
-	effname,
-	need_verignore,
-	need_split,
-	need_merge,
-	comment
-) VALUES (
-	now(),
-	%(effname)s,
-	%(need_verignore)s,
-	%(need_split)s,
-	%(need_merge)s,
-	%(comment)s
-);
-
-
---------------------------------------------------------------------------------
---
--- !!get_reports_count(effname) -> single value
+-- @returns array of packages
 --
 --------------------------------------------------------------------------------
 SELECT
-	count(*)
-FROM reports
-WHERE effname = %(effname)s;
+{% if fields %}
+	{{ fields | join(',') }}
+{% else %}
+	repo,
+	family,
+	subrepo,
 
-
---------------------------------------------------------------------------------
---
--- !!get_reports(effname) -> array of dicts
---
---------------------------------------------------------------------------------
-SELECT
-	id,
-	now() - created AS created_ago,
+	name,
 	effname,
-	need_verignore,
-	need_split,
-	need_merge,
+
+	version,
+	origversion,
+	versionclass,
+
+	maintainers,
+	category,
 	comment,
-	reply,
-	accepted
-FROM reports
-WHERE effname = %(effname)s
-ORDER BY created DESC;
+	homepage,
+	licenses,
+	downloads,
+
+	flags,
+	shadow,
+	verfixed,
+
+	flavors,
+
+	extrafields
+{% endif %}
+FROM packages
+WHERE effname = ANY(%(effnames)s);

@@ -17,41 +17,9 @@
 
 --------------------------------------------------------------------------------
 --
--- !!get_repositories_from_past(ago) -> single dict
+-- @param since
 --
---------------------------------------------------------------------------------
-SELECT
-	ts AS timestamp,
-	now() - ts AS timedelta,
-	snapshot
-FROM repositories_history
-WHERE ts IN (
-	SELECT
-		ts
-	FROM repositories_history
-	WHERE ts < now() - INTERVAL %(ago)s
-	ORDER BY ts DESC
-	LIMIT 1
-);
-
-
---------------------------------------------------------------------------------
---
--- !!get_repository_history_since(repo, since) -> array of dicts
---
---------------------------------------------------------------------------------
-SELECT
-	ts AS timestamp,
-	now() - ts AS timedelta,
-	snapshot#>ARRAY[%(repo)s] AS snapshot
-FROM repositories_history
-WHERE ts >= now() - INTERVAL %(since)s
-ORDER BY ts;
-
-
---------------------------------------------------------------------------------
---
--- !!get_statistics_history_since(since) -> array of dicts
+-- @returns array of dicts
 --
 --------------------------------------------------------------------------------
 SELECT
