@@ -24,12 +24,11 @@
 --
 --------------------------------------------------------------------------------
 SELECT
-	repo,
-	name,
-	effname,
-	maintainer,
-	problem
+    packages.*,
+    maintainer,
+    problem
 FROM problems
-WHERE maintainer = %(maintainer)s
-ORDER BY repo, effname, maintainer
+INNER JOIN packages ON packages.id = problems.package_id
+WHERE problems.maintainer = %(maintainer)s
+ORDER BY problems.repo, problems.effname
 LIMIT %(limit)s;
