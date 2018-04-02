@@ -19,8 +19,9 @@ import os
 import re
 import sys
 
+from libversion import version_compare
+
 from repology.package import Package
-from repology.version import VersionCompare
 
 
 class HackageParser():
@@ -83,7 +84,7 @@ class HackageParser():
                 if versiondir == 'preferred-versions':
                     continue
 
-                if maxversion is None or VersionCompare(versiondir, maxversion) > 0:
+                if maxversion is None or version_compare(versiondir, maxversion) > 0:
                     maxversion = versiondir
                     cabalpath = os.path.join(path, moduledir, maxversion, moduledir + '.cabal')
 
@@ -95,7 +96,7 @@ class HackageParser():
 
             cabaldata = self.ParseCabal(cabalpath)
 
-            if cabaldata['name'] == pkg.name and VersionCompare(cabaldata['version'], pkg.version) == 0:
+            if cabaldata['name'] == pkg.name and version_compare(cabaldata['version'], pkg.version) == 0:
                 if 'synopsis' in cabaldata and cabaldata['synopsis']:
                     pkg.comment = cabaldata['synopsis'].strip()
                 # XXX: leave for later, need extra postprocessing, too much obfuscation

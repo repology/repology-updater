@@ -1,19 +1,6 @@
 #!/usr/bin/env python3
 
-import subprocess
-from distutils.core import Extension, setup
-
-
-def pkgconfig(package):
-    result = {}
-    for token in subprocess.check_output(['pkg-config', '--libs', '--cflags', package]).decode('utf-8').split():
-        if token.startswith('-I'):
-            result.setdefault('include_dirs', []).append(token[2:])
-        elif token.startswith('-L'):
-            result.setdefault('library_dirs', []).append(token[2:])
-        elif token.startswith('-l'):
-            result.setdefault('libraries', []).append(token[2:])
-    return result
+from distutils.core import setup
 
 
 setup(
@@ -22,7 +9,7 @@ setup(
     description='Compare package versions in many repositories',
     author='Dmitry Marakasov',
     author_email='amdmi3@amdmi3.ru',
-    url='http://repology.org/',
+    url='https://repology.org/',
     packages=[
         'repology',
         'repology.fetchers',
@@ -45,12 +32,5 @@ setup(
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: C',
-    ],
-    ext_modules=[
-        Extension(
-            'repology.version',
-            sources=['repology/version.c'],
-            **pkgconfig('libversion')
-        )
     ]
 )

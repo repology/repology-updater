@@ -17,8 +17,9 @@
 
 import json
 
+from libversion import version_compare
+
 from repology.package import Package
-from repology.version import VersionCompare
 
 
 class FreshcodeParser():
@@ -66,7 +67,7 @@ class FreshcodeParser():
                 #if download
                 #    pkg.downloads = [download]
 
-                if pkg.name not in result or VersionCompare(pkg.version, result[pkg.name].version) > 0:
+                if pkg.name not in result or version_compare(pkg.version, result[pkg.name].version) > 0:
                     result[pkg.name] = pkg
 
         return result.values()

@@ -19,8 +19,9 @@ import os
 import re
 import sys
 
+from libversion import version_compare
+
 from repology.package import Package
-from repology.version import VersionCompare
 
 
 def ExpandDownloadUrlTemplates(url):
@@ -46,7 +47,7 @@ class GoboLinuxGitParser():
 
             maxversion = None
             for version_name in os.listdir(package_path):
-                if maxversion is None or VersionCompare(version_name, maxversion) > 0:
+                if maxversion is None or version_compare(version_name, maxversion) > 0:
                     maxversion = version_name
 
             if maxversion is None:

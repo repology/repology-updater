@@ -1,10 +1,17 @@
 language: python
 sudo: true
-dist: trusty
-services:
-  - postgresql
 addons:
-  postgresql: "9.6"
+  postgresql: "10"
+  apt:
+    packages:
+      - postgresql-10
+      - postgresql-client-10
+      - postgresql-server-dev-10
+      - librpm-dev
+env:
+  global:
+    - PGPORT=5433
+    - REPOLOGY_CONFIG=repology-test.conf.default
 python:
   - 3.6
 before_install:
@@ -24,31 +31,23 @@ before_install:
   - pip install rubymarshal
   - pip install voluptuous
 
-  - sudo /etc/init.d/postgresql stop
-  - wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  - sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs 2>/dev/null)-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq librpm-dev
-  - sudo apt-get install -qq postgresql-10 postgresql-client-10
-  - sudo cp /etc/postgresql/9.6/main/pg_hba.conf /etc/postgresql/10/main/pg_hba.conf
-  - sudo /etc/init.d/postgresql restart
-  - export PGPORT=5433
+  - wget -qO- https://github.com/repology/libversion/archive/master.tar.gz | tar -xzf- && ( cd libversion-master && cmake . && make && sudo make install && sudo ldconfig )
+  - pip install libversion
 
-  - wget -qO- https://github.com/repology/libversion/archive/2.5.0.tar.gz | tar -xzf- && ( cd libversion-2.5.0 && cmake . && make && sudo make install )
-
-  - git clone --depth=1 https://github.com/htacg/tidy-html5.git && ( cd tidy-html5 && cmake . && make && sudo make install )
-  - sudo ldconfig
+  - wget -qO- https://github.com/htacg/tidy-html5/archive/master.tar.gz | tar -xzf- && ( cd tidy-html5-master && cmake . && make && sudo make install && sudo ldconfig )
+  - wget -qO- https://github.com/repology/postgresql-libversion/archive/master.tar.gz | tar -xzf- && ( cd postgresql-libversion-master && sudo make install )
 
   - git clone --depth=1 https://github.com/repology/repology-rules.git rules.d
 before_script:
-  - psql -U postgres -c "CREATE DATABASE repology_test;"
-  - psql -U postgres -c "CREATE USER repology_test WITH PASSWORD 'repology_test'"
-  - psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test"
-  - psql -U postgres -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
-  - export REPOLOGY_CONFIG=repology-test.conf.default
+  - sudo -u postgres psql -c "CREATE DATABASE repology_test;"
+  - sudo -u postgres psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test'"
+  - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test"
+  - sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
+  - sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS libversion"
   - echo "BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'" >> repology-test.conf.default
+  - sed -i -e 's|dbname=repology_test|& port=5433 host=localhost|' repology-test.conf.default
 script:
-  # test buidling C utils
+  # test building C utils
   - make
 
   # check yaml schemas

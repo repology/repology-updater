@@ -20,6 +20,8 @@ from functools import cmp_to_key
 
 import flask
 
+from libversion import version_compare
+
 from repologyapp.globals import *
 from repologyapp.metapackages import metapackages_to_summary_items
 from repologyapp.template_helpers import AFKChecker
@@ -29,7 +31,6 @@ from repology.config import config
 from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
 from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByNameVersion, PackagesetSortByVersion
-from repology.version import VersionCompare
 
 
 @ViewRegistrar('/metapackage/<name>')
@@ -156,7 +157,7 @@ def metapackage_history(name):
             return []
 
         def version_compare_rev(v1, v2):
-            return VersionCompare(v2, v1)
+            return version_compare(v2, v1)
 
         return sorted(versions, key=cmp_to_key(version_compare_rev))
 

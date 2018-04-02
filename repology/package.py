@@ -19,7 +19,7 @@
 import re
 
 
-from repology.version import ANY_IS_PATCH_LEFT, ANY_IS_PATCH_RIGHT, P_IS_PATCH_LEFT, P_IS_PATCH_RIGHT, VersionCompare
+from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
 
 class VersionClass:
@@ -299,13 +299,13 @@ class Package:
         if self_metaorder > other_metaorder:
             return 1
 
-        return VersionCompare(
+        return version_compare(
             self.version,
             other.version,
-            ((self.flags & PackageFlags.p_is_patch) and P_IS_PATCH_LEFT) |
-            ((other.flags & PackageFlags.p_is_patch) and P_IS_PATCH_RIGHT) |
-            ((self.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH_LEFT) |
-            ((other.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH_RIGHT)
+            ((self.flags & PackageFlags.p_is_patch) and P_IS_PATCH) |
+            ((self.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH),
+            ((other.flags & PackageFlags.p_is_patch) and P_IS_PATCH) |
+            ((other.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH)
         )
 
     @property

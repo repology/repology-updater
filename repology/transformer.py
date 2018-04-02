@@ -20,10 +20,11 @@ import pprint
 import re
 import sys
 
+from libversion import version_compare
+
 import yaml
 
 from repology.package import PackageFlags
-from repology.version import VersionCompare
 
 
 class RuleApplyResult:
@@ -168,19 +169,19 @@ class PackageTransformer:
 
         # compare versions
         if 'vergt' in rule:
-            if VersionCompare(package.version, rule['vergt']) <= 0:
+            if version_compare(package.version, rule['vergt']) <= 0:
                 return RuleApplyResult.unmatched
 
         if 'verge' in rule:
-            if VersionCompare(package.version, rule['verge']) < 0:
+            if version_compare(package.version, rule['verge']) < 0:
                 return RuleApplyResult.unmatched
 
         if 'verlt' in rule:
-            if VersionCompare(package.version, rule['verlt']) >= 0:
+            if version_compare(package.version, rule['verlt']) >= 0:
                 return RuleApplyResult.unmatched
 
         if 'verle' in rule:
-            if VersionCompare(package.version, rule['verle']) > 0:
+            if version_compare(package.version, rule['verle']) > 0:
                 return RuleApplyResult.unmatched
 
         # match name patterns

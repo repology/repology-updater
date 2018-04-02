@@ -18,10 +18,11 @@
 import json
 import os
 
+from libversion import version_compare
+
 from repology.fetchers.helpers.fetch import Fetch
 from repology.fetchers.helpers.state import StateFile
 from repology.logger import NoopLogger
-from repology.version import VersionCompare
 
 
 class FreshcodeFetcher():
@@ -57,7 +58,7 @@ class FreshcodeFetcher():
             if entry['name'] in state:
                 oldentry = state[entry['name']]
 
-                if VersionCompare(entry['version'], oldentry['version']) > 0:
+                if version_compare(entry['version'], oldentry['version']) > 0:
                     logger.Log('replacing entry "{}", version changed {} -> {}'.format(entry['name'], oldentry['version'], entry['version']))
                     state[entry['name']] = entry
             else:
