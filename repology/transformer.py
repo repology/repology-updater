@@ -102,7 +102,8 @@ class PackageTransformer:
             # compile regexps
             for field in ['namepat', 'verpat', 'wwwpat']:
                 if field in rule:
-                    rule[field] = re.compile(rule[field], re.ASCII)
+                    # replace here handles multiline regexps
+                    rule[field] = re.compile(rule[field].replace('\n', ''), re.ASCII)
 
             rule['matches'] = 0
             rule['number'] = rulenum
