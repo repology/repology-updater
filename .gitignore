@@ -3,7 +3,6 @@ _state
 build
 helpers/rpmcat/rpmcat
 repology.conf
-repology/version.so
 repologyapp/static/*.gz
 rules.d
 testdata/*.packages
