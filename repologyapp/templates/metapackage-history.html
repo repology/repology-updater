@@ -21,13 +21,10 @@
 		<td>
 		{%- if entry.type == 'history_start' -%}
 			<b>
-			{%- set numversions = entry.data.unique_versions|length + entry.data.devel_versions|length + entry.data.newest_versions|length -%}
+			{%- set numversions = entry.data.devel_versions|length + entry.data.newest_versions|length -%}
 			History start
 			{%- if numversions -%}
 			, latest {% if numversions == 1 %}version is{% else %}versions are{% endif %}
-			{% for version in entry.data.unique_versions %}
-			<span class="version version-unique">{{ version }}</span>
-			{%- endfor %}
 			{% for version in entry.data.devel_versions %}
 			<span class="version version-devel">{{ version }}</span>
 			{%- endfor %}
@@ -54,12 +51,9 @@
 			</b>
 		{%- elif entry.type == 'version_update' -%}
 			<b>
-			{%- set numversions = entry.data.unique_versions|length + entry.data.devel_versions|length + entry.data.newest_versions|length -%}
+			{%- set numversions = entry.data.versions|length -%}
 			{% if numversions %}
-			Latest version{% if numversions > 1 %}s{% endif %} updated to
-			{% for version in entry.data.unique_versions %}
-			<span class="version version-unique">{{ version }}</span>
-			{%- endfor %}
+			{{ entry.data.branch|capitalize }} version{% if numversions > 1 %}s{% endif %} updated to
 			{% for version in entry.data.devel_versions %}
 			<span class="version version-devel">{{ version }}</span>
 			{%- endfor %}
@@ -67,19 +61,19 @@
 			<span class="version version-newest">{{ version }}</span>
 			{%- endfor %}
 
-			{% if entry.data.actual_repos %}
+			{% if entry.data.repos %}
 			by
 
-			{% for repo in entry.data.actual_repos %}
+			{% for repo in entry.data.repos %}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
 			{%- endfor %}
 			{% endif %}
-			{% else %}
+			{% else %}{# not numversions #}
 			There's no more latest version
 			{% endif %}
 
-			{%- if entry.data.since_previous -%}
-			, in {{ macros.format_time_interval(entry.data.since_previous) }} since the last update
+			{%- if entry.data.passed -%}
+			, in {{ macros.format_time_interval(entry.data.passed) }} since the last update
 			{% endif %}
 
 			</b>
@@ -88,7 +82,7 @@
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
 			{%- endfor %}
 
-			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up
+			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up to {{ entry.data.branch }}
 
 			{% if entry.data.lag %}
 			in {{ macros.format_time_interval(entry.data.lag) }}
@@ -109,6 +103,12 @@
 			{% for repo in entry.data.repos_removed %}
 			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
 			{%- endfor %}
+			{% endif %}
+		{%- elif entry.type == 'history_end' -%}
+			History ends, there are no longer packages for this project in any repositories known to repology
+
+			{%- if entry.data.last_repo %}
+			, last repository was <a href="{{ url_for('repository', repo=entry.data.last_repo) }}">{{ repometadata[entry.data.last_repo].desc }}</a>
 			{% endif %}
 		{%- endif -%}
 		</td>

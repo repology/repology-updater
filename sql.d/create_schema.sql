@@ -49,7 +49,8 @@ CREATE TYPE metapackage_event_type AS enum(
 	'history_start',
 	'repos_update',
 	'version_update',
-	'catch_up'
+	'catch_up',
+	'history_end'
 );
 
 --------------------------------------------------------------------------------
@@ -66,6 +67,18 @@ BEGIN
 	RETURN regexp_replace(regexp_replace(url, '/?([#?].*)?$', ''), '^https?://(www\.)?', '');
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+
+-- Checks whether version set has effectively changed
+CREATE OR REPLACE FUNCTION version_set_changed(old text[], new text[]) RETURNS bool AS $$
+BEGIN
+	RETURN
+		(
+			old IS NOT NULL AND
+			new IS NOT NULL AND
+			version_compare_simple(old[1], new[1]) != 0
+		) OR (old IS NULL) != (new IS NULL);
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
 
 -- Creates events on metapackage version state changes
 CREATE OR REPLACE FUNCTION metapackage_create_event(effname text, type metapackage_event_type, data jsonb) RETURNS void AS $$
@@ -89,13 +102,14 @@ DECLARE
 	repos_added text[];
 	repos_removed text[];
 BEGIN
-	IF (TG_OP = 'INSERT') THEN
+	-- history_start
+	IF (TG_OP = 'INSERT' OR OLD.all_repos IS NULL) THEN
 		PERFORM metapackage_create_event(NEW.effname, 'history_start'::metapackage_event_type,
 			jsonb_build_object(
-				'newest_versions', NEW.newest_versions,
 				'devel_versions', NEW.devel_versions,
-				'unique_versions', NEW.unique_versions,
-				'actual_repos', NEW.actual_repos,
+				'newest_versions', NEW.newest_versions,
+				'devel_repos', NEW.devel_repos,
+				'newest_repos', NEW.newest_repos,
 				'all_repos', NEW.all_repos
 			)
 		);
@@ -103,6 +117,7 @@ BEGIN
 		RETURN NULL;
 	END IF;
 
+	-- repos_update
 	IF (OLD.all_repos != NEW.all_repos) THEN
 		repos_added := (SELECT array(SELECT unnest(NEW.all_repos) EXCEPT SELECT unnest(OLD.all_repos)));
 		repos_removed := (SELECT array(SELECT unnest(OLD.all_repos) EXCEPT SELECT unnest(NEW.all_repos)));
@@ -115,23 +130,57 @@ BEGIN
 		);
 	END IF;
 
-	catch_up := (SELECT array(SELECT unnest(NEW.actual_repos) EXCEPT SELECT unnest(OLD.actual_repos)));
-
-	IF (OLD.newest_versions != NEW.newest_versions OR OLD.devel_versions != NEW.devel_versions OR OLD.unique_versions != NEW.unique_versions) THEN
+	-- version_update & catch_up for devel
+	IF (version_set_changed(OLD.devel_versions, NEW.devel_versions)) THEN
 		PERFORM metapackage_create_event(NEW.effname, 'version_update'::metapackage_event_type,
 			jsonb_build_object(
-				'newest_versions', NEW.newest_versions,
-				'devel_versions', NEW.devel_versions,
-				'unique_versions', NEW.unique_versions,
-				'actual_repos', NEW.actual_repos,
-				'since_previous', extract(epoch FROM now() - OLD.last_version_update)
+				'branch', 'devel',
+				'versions', NEW.devel_versions,
+				'repos', NEW.devel_repos,
+				'passed', extract(epoch FROM now() - OLD.devel_version_update)
 			)
 		);
-	ELSIF (catch_up != '{}') THEN
-		PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
+	ELSE
+		catch_up := (SELECT array(SELECT unnest(NEW.devel_repos) EXCEPT SELECT unnest(OLD.devel_repos)));
+		IF (catch_up != '{}') THEN
+			PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
+				jsonb_build_object(
+					'branch', 'devel',
+					'repos', catch_up,
+					'lag', extract(epoch FROM now() - OLD.devel_version_update)
+				)
+			);
+		END IF;
+	END IF;
+
+	-- version_update & catch_up for newest
+	IF (version_set_changed(OLD.newest_versions, NEW.newest_versions)) THEN
+		PERFORM metapackage_create_event(NEW.effname, 'version_update'::metapackage_event_type,
 			jsonb_build_object(
-				'repos', catch_up,
-				'lag', extract(epoch FROM now() - OLD.last_version_update)
+				'branch', 'newest',
+				'versions', NEW.newest_versions,
+				'repos', NEW.newest_repos,
+				'passed', extract(epoch FROM now() - OLD.newest_version_update)
+			)
+		);
+	ELSE
+		catch_up := (SELECT array(SELECT unnest(NEW.newest_repos) EXCEPT SELECT unnest(OLD.newest_repos)));
+		IF (catch_up != '{}') THEN
+			PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
+				jsonb_build_object(
+					'branch', 'newest',
+					'repos', catch_up,
+					'lag', extract(epoch FROM now() - OLD.newest_version_update)
+				)
+			);
+		END IF;
+	END IF;
+
+	-- history_end
+	IF (NEW.num_repos = 0) THEN
+		PERFORM metapackage_create_event(NEW.effname, 'history_end'::metapackage_event_type,
+			jsonb_build_object(
+				'last_repos', OLD.all_repos
 			)
 		);
 	END IF;
@@ -188,7 +237,17 @@ CREATE TABLE metapackages (
 	max_families smallint NOT NULL,
 	has_related boolean NOT NULL DEFAULT false,
 	first_seen timestamp with time zone NOT NULL,
-	last_seen timestamp with time zone NOT NULL
+	last_seen timestamp with time zone NOT NULL,
+
+	devel_versions text[],
+	devel_repos text[],
+	devel_version_update timestamp with time zone,
+
+	newest_versions text[],
+	newest_repos text[],
+	newest_version_update timestamp with time zone,
+
+	all_repos text[]
 );
 
 -- indexes for metapackage queries
@@ -205,19 +264,7 @@ CREATE INDEX metapackages_recently_added_idx ON metapackages(first_seen DESC, ef
 -- index for recently_removed
 CREATE INDEX metapackages_recently_removed_idx ON metapackages(last_seen DESC, effname) WHERE (num_repos = 0);
 
---------------------------------------------------------------------------------
--- Metapackages state and events
---------------------------------------------------------------------------------
-CREATE TABLE metapackages_state (
-	effname text NOT NULL PRIMARY KEY,
-	newest_versions text[],
-	devel_versions text[],
-	unique_versions text[],
-	last_version_update timestamp with time zone,
-	actual_repos text[],
-	all_repos text[]
-);
-
+-- events
 CREATE TABLE metapackages_events (
 	effname text NOT NULL,
 	ts timestamp with time zone NOT NULL,
@@ -227,13 +274,14 @@ CREATE TABLE metapackages_events (
 
 CREATE INDEX ON metapackages_events(effname, ts DESC, type DESC);
 
-CREATE TRIGGER metapackages_state_create
-	AFTER INSERT ON metapackages_state
+-- triggers
+CREATE TRIGGER metapackage_create
+	AFTER INSERT ON metapackages
 	FOR EACH ROW
 EXECUTE PROCEDURE metapackage_create_events_trigger();
 
-CREATE TRIGGER metapackages_state_update
-	AFTER UPDATE ON metapackages_state
+CREATE TRIGGER metapackage_update
+	AFTER UPDATE ON metapackages
 	FOR EACH ROW WHEN (OLD.* IS DISTINCT FROM NEW.*)
 EXECUTE PROCEDURE metapackage_create_events_trigger();
 

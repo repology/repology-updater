@@ -173,29 +173,34 @@ def metapackage_history(name):
             data = entry['data']
 
             if entry['type'] == 'history_start':
-                apply_to_field(data, 'newest_versions', prepare_versions)
-                apply_to_field(data, 'devel_versions', prepare_versions)
-                apply_to_field(data, 'unique_versions', prepare_versions)
-                apply_to_field(data, 'actual_repos', prepare_repos)
-                apply_to_field(data, 'all_repos', prepare_repos)
+                devel_repos = set(data.get('devel_repos', []))
+                newest_repos = set(data.get('newest_repos', []))
+                all_repos = set(data.get('all_repos', []))
 
-                data['old_repos'] = prepare_repos(
-                    set(data.get('all_repos', [])) - set(data.get('actual_repos', []))
-                )
+                actual_repos = devel_repos | newest_repos
+                old_repos = all_repos - actual_repos
+
+                apply_to_field(data, 'devel_versions', prepare_versions)
+                apply_to_field(data, 'newest_versions', prepare_versions)
+
+                data['devel_repos'] = prepare_repos(devel_repos)
+                data['newest_repos'] = prepare_repos(newest_repos)
+                data['all_repos'] = prepare_repos(all_repos)
+
+                data['actual_repos'] = prepare_repos(actual_repos)
+                data['old_repos'] = prepare_repos(old_repos)
 
                 yield entry
 
             elif entry['type'] == 'version_update':
-                apply_to_field(data, 'newest_versions', prepare_versions)
-                apply_to_field(data, 'devel_versions', prepare_versions)
-                apply_to_field(data, 'unique_versions', prepare_versions)
-                apply_to_field(data, 'actual_repos', prepare_repos)
-                apply_to_field(data, 'since_previous', timedelta_from_seconds)
+                apply_to_field(data, 'versions', prepare_versions)
+                apply_to_field(data, 'repos', prepare_repos)
+                apply_to_field(data, 'passed', timedelta_from_seconds)
                 yield entry
 
             elif entry['type'] == 'catch_up':
-                apply_to_field(data, 'lag', timedelta_from_seconds)
                 apply_to_field(data, 'repos', prepare_repos)
+                apply_to_field(data, 'lag', timedelta_from_seconds)
 
                 if data['repos']:
                     yield entry
@@ -206,6 +211,13 @@ def metapackage_history(name):
 
                 if data['repos_added'] or data['repos_removed']:
                     yield entry
+
+            elif entry['type'] == 'history_end':
+                apply_to_field(data, 'last_repos', prepare_repos)
+                if data.get('last_repos'):
+                    data['last_repo'] = data['last_repos'][0]
+
+                yield entry
 
     return flask.render_template(
         'metapackage-history.html',

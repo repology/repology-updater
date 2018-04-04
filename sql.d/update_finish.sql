@@ -51,7 +51,17 @@ INTO metapackages (
 	max_repos,
 	max_families,
 	first_seen,
-	last_seen
+	last_seen,
+
+	devel_versions,
+    devel_repos,
+    devel_version_update,
+
+    newest_versions,
+    newest_repos,
+    newest_version_update,
+
+	all_repos
 )
 SELECT
 	effname,
@@ -63,7 +73,19 @@ SELECT
 	count(DISTINCT repo),
 	count(DISTINCT family),
 	now(),
-	now()
+	now(),
+
+	-- XXX: technical dept warning: since we don't distinguish "newest unique" and "newest devel" statuses, we have
+	-- to use flags here. Better solution should be implemented in future
+	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
+	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
+	CASE WHEN count(*) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)) > 0 THEN now() ELSE NULL END,
+
+	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1),
+	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1),
+	CASE WHEN count(*) FILTER(WHERE versionclass = 1) > 0 THEN now() ELSE NULL END,
+
+	array_agg(DISTINCT repo ORDER BY repo)
 FROM packages
 GROUP BY effname
 ON CONFLICT (effname)
@@ -75,7 +97,35 @@ DO UPDATE SET
 	num_families_newest = EXCLUDED.num_families_newest,
 	max_repos = greatest(metapackages.max_repos, EXCLUDED.num_repos),
 	max_families = greatest(metapackages.max_families, EXCLUDED.num_families),
-	last_seen = now();
+	last_seen = now(),
+
+	devel_versions = EXCLUDED.devel_versions,
+	devel_repos = EXCLUDED.devel_repos,
+	devel_version_update =
+		CASE WHEN
+				EXCLUDED.devel_versions IS NOT NULL AND
+				(
+					metapackages.devel_versions IS NULL OR
+					version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) != 0
+				)
+			THEN now()
+			ELSE metapackages.devel_version_update
+		END,
+
+	newest_versions = EXCLUDED.newest_versions,
+	newest_repos = EXCLUDED.newest_repos,
+	newest_version_update =
+		CASE WHEN
+				EXCLUDED.newest_versions IS NOT NULL AND
+				(
+					metapackages.newest_versions IS NULL OR
+					version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) != 0
+				)
+			THEN now()
+			ELSE metapackages.newest_version_update
+		END,
+
+	all_repos = EXCLUDED.all_repos;
 
 -- update metapackages: related
 UPDATE metapackages
@@ -98,51 +148,6 @@ WHERE
 REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;  -- depends on metapackages
 REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;  -- depends on metapackages
 REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages;
-
---------------------------------------------------------------------------------
--- Update metapackage state
---------------------------------------------------------------------------------
-
-INSERT
-INTO metapackages_state (
-	effname,
-	newest_versions,
-	devel_versions,
-	unique_versions,
-	last_version_update,
-	actual_repos,
-	all_repos
-) SELECT
-	effname,
-	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1),
-	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5),
-	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 4),
-	NULL,
-	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass IN (1,4,5)),
-	array_agg(DISTINCT repo ORDER BY repo)
-FROM packages
-GROUP BY effname
-ON CONFLICT (effname)
-DO UPDATE SET
-	newest_versions = EXCLUDED.newest_versions,
-	devel_versions = EXCLUDED.devel_versions,
-	unique_versions = EXCLUDED.unique_versions,
-	last_version_update =
-		CASE WHEN
-				metapackages_state.newest_versions != EXCLUDED.newest_versions OR
-				metapackages_state.devel_versions != EXCLUDED.devel_versions OR
-				metapackages_state.unique_versions != EXCLUDED.unique_versions
-			THEN now()
-			ELSE metapackages_state.last_version_update
-		END,
-	actual_repos = EXCLUDED.actual_repos,
-	all_repos = EXCLUDED.all_repos
-WHERE
-	metapackages_state.newest_versions != EXCLUDED.newest_versions OR
-	metapackages_state.devel_versions != EXCLUDED.devel_versions OR
-	metapackages_state.unique_versions != EXCLUDED.unique_versions OR
-	metapackages_state.actual_repos != EXCLUDED.actual_repos OR
-	metapackages_state.all_repos != EXCLUDED.all_repos;
 
 --------------------------------------------------------------------------------
 -- Update maintainers
