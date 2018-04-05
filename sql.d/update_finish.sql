@@ -69,11 +69,11 @@ SELECT
 	-- to use flags here. Better solution should be implemented in future
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
 	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
-	CASE WHEN count(*) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)) > 0 THEN now() ELSE NULL END,
+	NULL,  -- first time we see this metapackag, time of version update is not known yet
 
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1),
 	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1),
-	CASE WHEN count(*) FILTER(WHERE versionclass = 1) > 0 THEN now() ELSE NULL END,
+	NULL,
 
 	array_agg(DISTINCT repo ORDER BY repo)
 FROM packages
