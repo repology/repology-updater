@@ -17,6 +17,7 @@
 
 --------------------------------------------------------------------------------
 --
+-- @param client
 -- @param effname
 -- @param need_verignore
 -- @param need_split
@@ -26,6 +27,7 @@
 --------------------------------------------------------------------------------
 INSERT INTO reports (
 	created,
+	client,
 	effname,
 	need_verignore,
 	need_split,
@@ -33,6 +35,7 @@ INSERT INTO reports (
 	comment
 ) VALUES (
 	now(),
+	%(client)s,
 	%(effname)s,
 	%(need_verignore)s,
 	%(need_split)s,

@@ -291,6 +291,7 @@ def metapackage_report(name):
             return flask.redirect(flask.url_for('metapackage_report', name=name))
 
         get_db().add_report(
+            flask.request.remote_addr,
             name,
             need_verignore,
             need_split,
