@@ -110,6 +110,7 @@ psql --username postgres -c "CREATE DATABASE repology"
 psql --username postgres -c "CREATE USER repology WITH PASSWORD 'repology'"
 psql --username postgres -c "GRANT ALL ON DATABASE repology TO repology"
 psql --username postgres --dbname repology -c "CREATE EXTENSION pg_trgm"
+psql --username postgres --dbname repology -c "CREATE EXTENSION libversion"
 ```
 
 now you can create database schema (tables, indexes etc.) with:
