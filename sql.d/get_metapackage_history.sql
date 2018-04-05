@@ -24,7 +24,7 @@
 --
 --------------------------------------------------------------------------------
 SELECT
-	now() - ts AS ago,
+	ts,
 	type,
 	data
 FROM metapackages_events
