@@ -114,7 +114,7 @@ WHERE
 					repo = %(inrepo)s
 				{% if newest %}
 				) AND (
-					num_packages_newest > 0 OR num_packages_devel > 0
+					num_packages_newest > 0 OR num_packages_devel > 0 OR num_packages_unique > 0
 				{% endif %}
 				{% if outdated %}
 				) AND (
@@ -152,7 +152,7 @@ WHERE
 					maintainer = %(maintainer)s
 				{% if newest %}
 				) AND (
-					num_packages_newest > 0 OR num_packages_devel > 0
+					num_packages_newest > 0 OR num_packages_devel > 0 OR num_packages_unique > 0
 				{% endif %}
 				{% if outdated %}
 				) AND (
@@ -184,7 +184,7 @@ WHERE
 			SELECT
 				effname
 			FROM repo_metapackages
-			WHERE num_packages_newest > 0 OR num_packages_devel > 0
+			WHERE num_packages_newest > 0 OR num_packages_devel > 0 OR num_packages_unique > 0
 		)
 	{% endif %}
 	{% if not maintainer and not repo and outdated %}
