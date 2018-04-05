@@ -19,6 +19,8 @@ import sys
 
 import flask
 
+from pytz import timezone, utc
+
 from repologyapp.globals import get_text_width, repometadata, reponames
 from repologyapp.template_helpers import css_for_versionclass, maintainer_to_links, maintainers_to_group_mailto
 from repologyapp.template_helpers import for_page, is_fallback_maintainer, pkg_format, url_for_self
@@ -59,5 +61,7 @@ app.jinja_env.globals['REPOLOGY_HOME'] = config['REPOLOGY_HOME']
 app.jinja_env.globals['repometadata'] = repometadata
 app.jinja_env.globals['reponames'] = reponames
 app.jinja_env.globals['config'] = config
+app.jinja_env.globals['tz'] = timezone(config['DEFAULT_TIMEZONE'])
+app.jinja_env.globals['utc'] = utc
 
 ViewRegistry.RegisterInFlask(app)

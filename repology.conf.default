@@ -143,3 +143,9 @@ STAFF_AFK = []
 # Metapackages for which reports are disabled to counter spam or inadequate reporters
 #
 DISABLED_REPORTS = []
+
+#
+# Default timezone to use in the web interface
+# The webapp tries to replace this to user's local timezone with javascript
+#
+DEFAULT_TIMEZONE = 'UTC'

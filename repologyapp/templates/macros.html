@@ -1,3 +1,11 @@
+{%- macro timezone_abbr(datetime) -%}
+	<span class="tzfix_zone"> ({{ tz.zone }})</span>
+{%- endmacro -%}
+
+{%- macro format_absolute_time(datetime) -%}
+	<time class="tzfix_time" datetime="{{ datetime.astimezone(tz).isoformat('T', 'minutes') }}">{{ datetime.astimezone(tz).strftime('%Y-%m-%d %H:%M') }}</time>
+{%- endmacro -%}
+
 {%- macro format_time_interval(value) -%}
 	{%- with seconds = value.total_seconds() | int -%}
 	{%- if seconds <= 1 -%}
