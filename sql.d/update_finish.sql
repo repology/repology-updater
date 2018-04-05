@@ -29,16 +29,6 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations;
 -- Update tables derived from packages and/or views
 --------------------------------------------------------------------------------
 
--- reset metapackages
-UPDATE metapackages
-SET
-	num_repos = 0,
-	num_repos_nonshadow = 0,
-	num_families = 0,
-	num_repos_newest = 0,
-	num_families_newest = 0,
-	has_related = false;
-
 -- update metapackages: main counters
 INSERT
 INTO metapackages (
@@ -140,6 +130,19 @@ WHERE
 		USING (url)
 		WHERE url_relations2.effname != url_relations.effname
 	);
+
+-- reset orphan metapackages
+-- XXX: this won't work well with partial updates
+UPDATE metapackages
+SET
+	num_repos = 0,
+	num_repos_nonshadow = 0,
+	num_families = 0,
+	num_repos_newest = 0,
+	num_families_newest = 0,
+	has_related = false
+WHERE
+	last_seen != now();
 
 --------------------------------------------------------------------------------
 -- Refresh views #2
