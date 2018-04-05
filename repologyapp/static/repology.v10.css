@@ -252,6 +252,11 @@
 	user-select: none;
 }
 
+.minimal-column {
+	white-space: nowrap;
+	width: 1%;
+}
+
 /* XXX: check if bootstrap h1.pageheader margin is always 40px */
 .pageheader-right {
 	float: right;

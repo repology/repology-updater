@@ -17,7 +17,7 @@
 	</tr>
 {% for entry in history %}
 	<tr>
-		<td class="text-nowrap">{{ macros.format_time_interval(entry.ago) }} ago</td>
+		<td class="minimal-column">{{ macros.format_absolute_time(entry.ts) }}</td>
 		<td>
 		{%- if entry.type == 'history_start' -%}
 			<b>
