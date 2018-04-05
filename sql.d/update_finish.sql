@@ -71,8 +71,8 @@ SELECT
 	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
 	NULL,  -- first time we see this metapackag, time of version update is not known yet
 
-	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1),
-	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1),
+	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)),
+	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)),
 	NULL,
 
 	array_agg(DISTINCT repo ORDER BY repo)
