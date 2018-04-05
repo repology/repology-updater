@@ -84,10 +84,11 @@
                   ?versionItem pq:P548 ?versionTypeItem .
                   BIND(
                     IF(
-                      ?versionTypeItem = wd:Q2804309 ||
-                      ?versionTypeItem = wd:Q15726348 ||
-                      ?versionTypeItem = wd:Q18434478 ||
-                      ?versionTypeItem = wd:Q20631656,
+                      ?versionTypeItem = wd:Q2804309 ||   # stable version
+                      ?versionTypeItem = wd:Q15726348 ||  # long-term support version
+                      ?versionTypeItem = wd:Q18434478 ||  # maintenance version
+                      ?versionTypeItem = wd:Q20631656 ||  # release
+                      ?versionTypeItem = wd:Q48028851,    # patch version
                       '|S',
                       '|U'
                     )
