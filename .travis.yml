@@ -30,6 +30,7 @@ before_install:
   - pip install requests
   - pip install rubymarshal
   - pip install voluptuous
+  - pip install pytz
 
   - wget -qO- https://github.com/repology/libversion/archive/master.tar.gz | tar -xzf- && ( cd libversion-master && cmake . && make && sudo make install && sudo ldconfig )
   - pip install libversion
