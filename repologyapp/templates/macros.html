@@ -29,7 +29,7 @@
 	{%- elif seconds // (60 * 60 * 24 * 365) == 1 -%}
 		more than a year
 	{%- else -%}
-		more than {{ seconds // (60 * 60 * 24 * 365) }} years
+		{{ seconds // (60 * 60 * 24 * 365) }} years
 	{%- endif -%}
 	{%- endwith -%}
 {%- endmacro -%}
