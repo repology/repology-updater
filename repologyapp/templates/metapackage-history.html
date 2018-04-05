@@ -30,93 +30,100 @@ removed from all repositories.</p>
 			<b>
 			{%- set numversions = entry.data.devel_versions|length + entry.data.newest_versions|length -%}
 			History start
+
 			{%- if numversions -%}
-			, latest {% if numversions == 1 %}version is{% else %}versions are{% endif %}
-			{% for version in entry.data.devel_versions %}
-			<span class="version version-devel">{{ version }}</span>
-			{%- endfor %}
-			{% for version in entry.data.newest_versions %}
-			<span class="version version-newest">{{ version }}</span>
-			{%- endfor %}
-			{% endif %}
+				, latest {% if numversions == 1 %}version is{% else %}versions are{% endif %}
+				{% for version in entry.data.devel_versions %}
+					<span class="version version-big version-devel">{{ version }}</span>
+				{%- endfor %}
+				{% for version in entry.data.newest_versions %}
+					<span class="version version-big version-newest">{{ version }}</span>
+				{%- endfor %}
+			{%- else -%}
+				, no known latest or devel versions for this project
+			{%- endif -%}
 
 			{%- if entry.data.actual_repos -%}
-			, up to date in
+				, up to date in
 
-			{% for repo in entry.data.actual_repos %}
-			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
-			{%- endfor %}
+				{% for repo in entry.data.actual_repos %}
+					{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+				{%- endfor %}
 			{% endif %}
 
 			{%- if entry.data.old_repos -%}
-			, {% if entry.data.actual_repos %}also {% endif %}present in
+				, {% if entry.data.actual_repos %}also {% endif %}present in
 
-			{% for repo in entry.data.old_repos %}
-			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
-			{%- endfor %}
+				{% for repo in entry.data.old_repos %}
+					{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+				{%- endfor %}
 			{% endif %}
 			</b>
 		{%- elif entry.type == 'version_update' -%}
 			<b>
 			{%- set numversions = entry.data.versions|length -%}
 			{% if numversions %}
-			{{ entry.data.branch|capitalize }} version{% if numversions > 1 %}s{% endif %} updated to
-			{% for version in entry.data.devel_versions %}
-			<span class="version version-devel">{{ version }}</span>
-			{%- endfor %}
-			{% for version in entry.data.newest_versions %}
-			<span class="version version-newest">{{ version }}</span>
-			{%- endfor %}
+				{{ entry.data.branch|capitalize }} version{% if numversions > 1 %}s{% endif %} updated to
+				{% for version in entry.data.devel_versions %}
+					<span class="version version-big version-devel">{{ version }}</span>
+				{%- endfor %}
+				{% for version in entry.data.newest_versions %}
+					<span class="version version-big version-newest">{{ version }}</span>
+				{%- endfor %}
 
-			{% if entry.data.repos %}
-			by
+				{% if entry.data.repos %}
+					by
 
-			{% for repo in entry.data.repos %}
-			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
-			{%- endfor %}
-			{% endif %}
-			{% else %}{# not numversions #}
-			There's no more latest version
+					{% for repo in entry.data.repos %}
+						{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+					{%- endfor %}
+				{% endif %}
+			{%- else -%}
+				There's no more {{ entry.data.branch }} version
 			{% endif %}
 
 			{%- if entry.data.passed -%}
-			, in {{ macros.format_time_interval(entry.data.passed) }} since the last update
+				, in {{ macros.format_time_interval(entry.data.passed) }} since the last update
 			{% endif %}
 
 			</b>
 		{%- elif entry.type == 'catch_up' -%}
 			{% for repo in entry.data.repos -%}
-			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+				{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
 			{%- endfor %}
 
-			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up to {{ entry.data.branch }}
+			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up to <span class="version version-big version-{{ entry.data.branch }}">{{ entry.data.branch }}</span>
 
 			{% if entry.data.lag %}
-			in {{ macros.format_time_interval(entry.data.lag) }}
+				in {{ macros.format_time_interval(entry.data.lag) }}
 			{% endif %}
 		{%- elif entry.type == 'repos_update' -%}
+			Project
 			{% if entry.data.repos_added %}
-			Project added to
+				added to
 
-			{% for repo in entry.data.repos_added %}
-			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
-			{%- endfor %}
+				{% for repo in entry.data.repos_added %}
+					{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+				{%- endfor %}
 			{% endif %}
 
-			{%- if entry.data.repos_removed %}
-			{% if entry.data.repos_added %}, and{% else %}Project{% endif %}
-			removed from
+			{%- if entry.data.repos_added and entry.data.repos_removed -%}, and{% endif %}
 
-			{% for repo in entry.data.repos_removed %}
-			{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
-			{%- endfor %}
+			{% if entry.data.repos_removed %}
+				removed from
+
+				{% for repo in entry.data.repos_removed %}
+					{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+				{%- endfor %}
 			{% endif %}
 		{%- elif entry.type == 'history_end' -%}
+			<b>
 			History ends, there are no longer packages for this project in any repositories known to repology
 
-			{%- if entry.data.last_repo %}
-			, last repository was <a href="{{ url_for('repository', repo=entry.data.last_repo) }}">{{ repometadata[entry.data.last_repo].desc }}</a>
+			{%- if entry.data.last_repo -%}
+				, last repository was <a href="{{ url_for('repository', repo=entry.data.last_repo) }}">{{ repometadata[entry.data.last_repo].desc }}</a>
 			{% endif %}
+			</b>
 		{%- endif -%}
 		</td>
 	</tr>
