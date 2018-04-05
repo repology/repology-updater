@@ -201,7 +201,7 @@ INTO maintainers (
 SELECT
 	unnest(maintainers) AS maintainer,
 
-	count(1),
+	count(*),
 	count(*) FILTER (WHERE versionclass = 1),
 	count(*) FILTER (WHERE versionclass = 2),
 	count(*) FILTER (WHERE versionclass = 3),
