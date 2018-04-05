@@ -158,12 +158,97 @@ WHERE
 	last_seen != now();
 
 --------------------------------------------------------------------------------
--- Refresh views #2
+-- Update derived tables
 --------------------------------------------------------------------------------
 
-REFRESH MATERIALIZED VIEW CONCURRENTLY repo_metapackages;  -- depends on metapackages
-REFRESH MATERIALIZED VIEW CONCURRENTLY category_metapackages;  -- depends on metapackages
-REFRESH MATERIALIZED VIEW CONCURRENTLY maintainer_metapackages;
+-- per-repository
+DELETE FROM repo_metapackages;
+
+INSERT INTO repo_metapackages(
+	repo,
+    effname,
+    num_packages,
+    num_packages_newest,
+    num_packages_outdated,
+    num_packages_ignored,
+    num_packages_unique,
+    num_packages_devel,
+    num_packages_legacy,
+    num_packages_incorrect,
+    num_packages_untrusted,
+    num_packages_noscheme,
+    num_packages_rolling,
+    "unique"
+)
+SELECT
+	repo,
+	effname,
+	count(*),
+	count(*) FILTER (WHERE versionclass = 1),
+	count(*) FILTER (WHERE versionclass = 2),
+	count(*) FILTER (WHERE versionclass = 3),
+	count(*) FILTER (WHERE versionclass = 4),
+	count(*) FILTER (WHERE versionclass = 5),
+	count(*) FILTER (WHERE versionclass = 6),
+	count(*) FILTER (WHERE versionclass = 7),
+	count(*) FILTER (WHERE versionclass = 8),
+	count(*) FILTER (WHERE versionclass = 9),
+	count(*) FILTER (WHERE versionclass = 10),
+	max(num_families) = 1
+FROM packages INNER JOIN metapackages USING(effname)
+WHERE num_repos_nonshadow > 0
+GROUP BY effname,repo;
+
+-- per-category
+DELETE FROM category_metapackages;
+
+INSERT INTO category_metapackages (
+	category,
+	effname,
+	"unique"
+)
+SELECT
+	category,
+	effname,
+	max(num_families) = 1
+FROM packages INNER JOIN metapackages USING(effname)
+WHERE category IS NOT NULL AND num_repos_nonshadow > 0
+GROUP BY effname, category;
+
+-- per-maintainer
+DELETE FROM maintainer_metapackages;
+
+INSERT INTO maintainer_metapackages (
+	maintainer,
+    effname,
+    num_packages,
+    num_packages_newest,
+    num_packages_outdated,
+    num_packages_ignored,
+    num_packages_unique,
+    num_packages_devel,
+    num_packages_legacy, -- not used?
+    num_packages_incorrect,
+    num_packages_untrusted,
+    num_packages_noscheme, -- not used?
+    num_packages_rolling -- not used?
+)
+SELECT
+    unnest(maintainers),
+    effname,
+    count(*),
+    count(*) FILTER (WHERE versionclass = 1),
+    count(*) FILTER (WHERE versionclass = 2),
+    count(*) FILTER (WHERE versionclass = 3),
+    count(*) FILTER (WHERE versionclass = 4),
+    count(*) FILTER (WHERE versionclass = 5),
+    count(*) FILTER (WHERE versionclass = 6),
+    count(*) FILTER (WHERE versionclass = 7),
+    count(*) FILTER (WHERE versionclass = 8),
+    count(*) FILTER (WHERE versionclass = 9),
+    count(*) FILTER (WHERE versionclass = 10)
+FROM packages
+GROUP BY unnest(maintainers), effname;
 
 --------------------------------------------------------------------------------
 -- Update maintainers

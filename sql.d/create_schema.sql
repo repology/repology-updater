@@ -34,10 +34,14 @@ DROP TABLE IF EXISTS metapackages CASCADE;
 DROP TABLE IF EXISTS maintainers CASCADE;
 DROP TABLE IF EXISTS metapackages_state CASCADE;
 DROP TABLE IF EXISTS metapackages_events CASCADE;
+DROP TABLE IF EXISTS repo_metapackages CASCADE;
+DROP TABLE IF EXISTS category_metapackages CASCADE;
+DROP TABLE IF EXISTS maintainer_metapackages CASCADE;
 
 DROP TYPE IF EXISTS metapackage_event_type CASCADE;
 
 DROP FUNCTION IF EXISTS simplify_url CASCADE;
+DROP FUNCTION IF EXISTS version_set_changed CASCADE;
 DROP FUNCTION IF EXISTS metapackage_create_event CASCADE;
 DROP FUNCTION IF EXISTS metapackage_create_events_trigger CASCADE;
 
@@ -322,65 +326,54 @@ EXECUTE PROCEDURE metapackage_create_events_trigger();
 --------------------------------------------------------------------------------
 
 -- per-repository
-CREATE MATERIALIZED VIEW repo_metapackages AS
-SELECT
-	repo,
-	effname,
-	count(*)::smallint AS num_packages,
-	count(*) FILTER (WHERE versionclass = 1)::smallint AS num_packages_newest,
-	count(*) FILTER (WHERE versionclass = 2)::smallint AS num_packages_outdated,
-	count(*) FILTER (WHERE versionclass = 3)::smallint AS num_packages_ignored,
-	count(*) FILTER (WHERE versionclass = 4)::smallint AS num_packages_unique,
-	count(*) FILTER (WHERE versionclass = 5)::smallint AS num_packages_devel,
-	count(*) FILTER (WHERE versionclass = 6)::smallint AS num_packages_legacy,
-	count(*) FILTER (WHERE versionclass = 7)::smallint AS num_packages_incorrect,
-	count(*) FILTER (WHERE versionclass = 8)::smallint AS num_packages_untrusted,
-	count(*) FILTER (WHERE versionclass = 9)::smallint AS num_packages_noscheme,
-	count(*) FILTER (WHERE versionclass = 10)::smallint AS num_packages_rolling,
-	max(num_families) = 1 AS unique
-FROM packages INNER JOIN metapackages USING(effname)
-WHERE num_repos_nonshadow > 0
-GROUP BY effname,repo
-WITH DATA;
+CREATE TABLE repo_metapackages (
+	repo text NOT NULL,
+	effname text NOT NULL,
+	num_packages smallint NOT NULL,
+	num_packages_newest smallint NOT NULL,
+	num_packages_outdated smallint NOT NULL,
+	num_packages_ignored smallint NOT NULL,
+	num_packages_unique smallint NOT NULL,
+	num_packages_devel smallint NOT NULL,
+	num_packages_legacy smallint NOT NULL,
+	num_packages_incorrect smallint NOT NULL,
+	num_packages_untrusted smallint NOT NULL,
+	num_packages_noscheme smallint NOT NULL,
+	num_packages_rolling smallint NOT NULL,
+	"unique" boolean NOT NULL,
+	PRIMARY KEY(repo, effname)
+);
 
-CREATE UNIQUE INDEX ON repo_metapackages(repo, effname);
 CREATE INDEX ON repo_metapackages(effname);
 
 -- per-category
-CREATE MATERIALIZED VIEW category_metapackages AS
-SELECT
-	category,
-	effname,
-	max(num_families) = 1 AS unique
-FROM packages INNER JOIN metapackages USING(effname)
-WHERE num_repos_nonshadow > 0
-GROUP BY effname,category
-WITH DATA;
+CREATE TABLE category_metapackages (
+	category text NOT NULL,
+	effname text NOT NULL,
+	"unique" boolean NOT NULL,
+	PRIMARY KEY(category, effname)
+);
 
-CREATE UNIQUE INDEX ON category_metapackages(category, effname);
 CREATE INDEX ON category_metapackages(effname);
 
 -- per-maintainer
-CREATE MATERIALIZED VIEW maintainer_metapackages AS
-SELECT
-	unnest(maintainers) AS maintainer,
-	effname,
-	count(1)::smallint AS num_packages,
-	count(*) FILTER (WHERE versionclass = 1)::smallint AS num_packages_newest,
-	count(*) FILTER (WHERE versionclass = 2)::smallint AS num_packages_outdated,
-	count(*) FILTER (WHERE versionclass = 3)::smallint AS num_packages_ignored,
-	count(*) FILTER (WHERE versionclass = 4)::smallint AS num_packages_unique,
-	count(*) FILTER (WHERE versionclass = 5)::smallint AS num_packages_devel,
-	count(*) FILTER (WHERE versionclass = 6)::smallint AS num_packages_legacy,
-	count(*) FILTER (WHERE versionclass = 7)::smallint AS num_packages_incorrect,
-	count(*) FILTER (WHERE versionclass = 8)::smallint AS num_packages_untrusted,
-	count(*) FILTER (WHERE versionclass = 9)::smallint AS num_packages_noscheme,
-	count(*) FILTER (WHERE versionclass = 10)::smallint AS num_packages_rolling
-FROM packages
-GROUP BY maintainer, effname
-WITH DATA;
+CREATE TABLE maintainer_metapackages (
+	maintainer text NOT NULL,
+	effname text NOT NULL,
+	num_packages smallint NOT NULL,
+	num_packages_newest smallint NOT NULL,
+	num_packages_outdated smallint NOT NULL,
+	num_packages_ignored smallint NOT NULL,
+	num_packages_unique smallint NOT NULL,
+	num_packages_devel smallint NOT NULL,
+	num_packages_legacy smallint NOT NULL,
+	num_packages_incorrect smallint NOT NULL,
+	num_packages_untrusted smallint NOT NULL,
+	num_packages_noscheme smallint NOT NULL,
+	num_packages_rolling smallint NOT NULL,
+	PRIMARY KEY(maintainer, effname)
+);
 
-CREATE UNIQUE INDEX ON maintainer_metapackages(maintainer, effname);
 CREATE INDEX ON maintainer_metapackages(effname);
 
 --------------------------------------------------------------------------------
