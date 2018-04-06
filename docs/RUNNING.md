@@ -8,7 +8,8 @@ Needed for core:
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [requests](http://python-requests.org/)
 - Python module [Jinja2](http://jinja.pocoo.org/)
-- [libversion](https://github.com/repology/libversion) library 2.4+
+- Python module [libversion](https://pypi.python.org/pypi/libversion)
+- PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
 Needed for fetching/parsing specific repository data:
 
