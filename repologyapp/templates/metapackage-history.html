@@ -64,11 +64,8 @@ removed from all repositories.</p>
 			{%- set numversions = entry.data.versions|length -%}
 			{% if numversions %}
 				{{ entry.data.branch|capitalize }} version{% if numversions > 1 %}s{% endif %} updated to
-				{% for version in entry.data.devel_versions %}
-					<span class="version version-big version-devel">{{ version }}</span>
-				{%- endfor %}
-				{% for version in entry.data.newest_versions %}
-					<span class="version version-big version-newest">{{ version }}</span>
+				{% for version in entry.data.versions %}
+					<span class="version version-big version-{{ entry.data.branch }}">{{ version }}</span>
 				{%- endfor %}
 
 				{% if entry.data.repos %}
@@ -92,7 +89,7 @@ removed from all repositories.</p>
 				{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
 			{%- endfor %}
 
-			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up to <span class="version version-big version-{{ entry.data.branch }}">{{ entry.data.branch }}</span>
+			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up to {{ entry.data.branch }}
 
 			{% if entry.data.lag %}
 				in {{ macros.format_time_interval(entry.data.lag) }}
