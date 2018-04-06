@@ -29,9 +29,9 @@
 
 			{% if repo or maintainer %}
 			<td>
-			{% for versioninfo in data.explicit %}
-				<span class="version version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.families|length %}{% if count > 1 %}<sup>{{ count }}</sup>{% endif %}
+			{% for versiontuple in data.explicit %}
+				<span class="version version-{{ versiontuple[1]|css_for_versionclass }}">{{ versiontuple[0] }}</span>
+				{%- set count = versiontuple[2] %}{% if count > 1 %}<sup>{{ count }}</sup>{% endif %}
 			{% else %}
 				-
 			{% endfor %}
@@ -39,21 +39,21 @@
 			{% endif %}
 			<td class="text-center"><b>{{ metapackage.num_families }}</b></td>
 			<td>
-			{% for versioninfo in data.newest %}
-				<span class="version version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.families|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+			{% for versiontuple in data.newest %}
+				<span class="version version-{{ versiontuple[1]|css_for_versionclass }}">{{ versiontuple[0] }}</span>
+				{%- if versiontuple[2] > 1 %}<sup>{{ versiontuple[2] }}</sup>{% endif %}
 			{% endfor %}
 			</td>
 			<td>
-			{% for versioninfo in data.outdated %}
-				<span class="version version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.families|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+			{% for versiontuple in data.outdated %}
+				<span class="version version-{{ versiontuple[1]|css_for_versionclass }}">{{ versiontuple[0] }}</span>
+				{%- if versiontuple[2] > 1 %}<sup>{{ versiontuple[2] }}</sup>{% endif %}
 			{% endfor %}
 			</td>
 			<td>
-			{% for versioninfo in data.ignored %}
-				<span class="version version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span>
-				{%- set count = versioninfo.families|length %}{% if count>1 %}<sup>{{ count }}</sup>{% endif %}
+			{% for versiontuple in data.ignored %}
+				<span class="version version-{{ versiontuple[1]|css_for_versionclass }}">{{ versiontuple[0] }}</span>
+				{%- if versiontuple[2] > 1 %}<sup>{{ versiontuple[2] }}</sup>{% endif %}
 			{% endfor %}
 			</td>
 		</tr>

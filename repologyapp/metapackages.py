@@ -179,11 +179,11 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
         # convert summaries
         for sumtype, summary in summaries.items():
             summaries[sumtype] = [
-                {
-                    'version': key[0],
-                    'versionclass': key[1],
-                    'families': summary['families_by_key'][key]
-                } for key in summary['keys']
+                (
+                    key[0],  # version
+                    key[1],  # status
+                    len(summary['families_by_key'][key])  # num_families
+                ) for key in summary['keys']
             ]
 
         metapackagedata[metapackagename] = {
