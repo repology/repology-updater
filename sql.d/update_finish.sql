@@ -69,7 +69,7 @@ SELECT
 	-- to use flags here. Better solution should be implemented in future
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
 	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
-	NULL,  -- first time we see this metapackag, time of version update is not known yet
+	NULL,  -- first time we see this metapackage, time of version update is not known yet
 
 	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)),
 	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)),
@@ -92,27 +92,40 @@ DO UPDATE SET
 	devel_versions = EXCLUDED.devel_versions,
 	devel_repos = EXCLUDED.devel_repos,
 	devel_version_update =
-		CASE WHEN
-				EXCLUDED.devel_versions IS NOT NULL AND
-				(
-					metapackages.devel_versions IS NULL OR
-					version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) != 0
-				)
+		-- We want version update time to be as reliable as possible so
+		-- the policy is that it's better to have no known last update time
+		-- than to have an incorrect one.
+		--
+		-- For instance, we want to ignore addition of new repo which has
+		-- the greated version than we know and don't record this as an
+		-- update, because actual update could've happened long ago.
+		CASE
+			WHEN
+				-- no change (both defined and equal)
+				version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) = 0
+			THEN metapackages.devel_version_update
+			WHEN
+				-- trusted update (both should be defined)
+				version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) > 0 AND
+				EXISTS (SELECT unnest(EXCLUDED.devel_repos) INTERSECT SELECT unnest(metapackages.all_repos))
 			THEN now()
-			ELSE metapackages.devel_version_update
+			ELSE NULL -- else reset
 		END,
 
 	newest_versions = EXCLUDED.newest_versions,
 	newest_repos = EXCLUDED.newest_repos,
 	newest_version_update =
-		CASE WHEN
-				EXCLUDED.newest_versions IS NOT NULL AND
-				(
-					metapackages.newest_versions IS NULL OR
-					version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) != 0
-				)
+		CASE
+			WHEN
+				-- no change (both defined and equal)
+				version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) = 0
+			THEN metapackages.newest_version_update
+			WHEN
+				-- trusted update (both should be defined)
+				version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) > 0 AND
+				EXISTS (SELECT unnest(EXCLUDED.newest_repos) INTERSECT SELECT unnest(metapackages.all_repos))
 			THEN now()
-			ELSE metapackages.newest_version_update
+			ELSE NULL -- else reset
 		END,
 
 	all_repos = EXCLUDED.all_repos;

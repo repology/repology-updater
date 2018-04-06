@@ -137,7 +137,15 @@ BEGIN
 				'branch', 'devel',
 				'versions', NEW.devel_versions,
 				'repos', NEW.devel_repos,
-				'passed', extract(epoch FROM now() - OLD.devel_version_update)
+				'passed',
+					CASE
+						WHEN
+							-- only account if the repository hasn't just appeared
+							EXISTS (SELECT unnest(NEW.devel_repos) INTERSECT SELECT unnest(OLD.all_repos))
+						THEN
+							extract(epoch FROM now() - OLD.devel_version_update)
+						ELSE NULL
+					END
 			)
 		);
 	ELSE
@@ -147,7 +155,15 @@ BEGIN
 				jsonb_build_object(
 					'branch', 'devel',
 					'repos', catch_up,
-					'lag', extract(epoch FROM now() - OLD.devel_version_update)
+					'lag',
+						CASE
+							WHEN
+								-- only account if the repository hasn't just appeared
+								EXISTS (SELECT unnest(NEW.devel_repos) INTERSECT SELECT unnest(OLD.all_repos))
+							THEN
+								extract(epoch FROM now() - OLD.devel_version_update)
+							ELSE NULL
+						END
 				)
 			);
 		END IF;
@@ -160,7 +176,15 @@ BEGIN
 				'branch', 'newest',
 				'versions', NEW.newest_versions,
 				'repos', NEW.newest_repos,
-				'passed', extract(epoch FROM now() - OLD.newest_version_update)
+				'passed',
+					CASE
+						WHEN
+							-- only account if the repository hasn't just appeared
+							EXISTS (SELECT unnest(NEW.newest_repos) INTERSECT SELECT unnest(OLD.all_repos))
+						THEN
+							extract(epoch FROM now() - OLD.newest_version_update)
+						ELSE NULL
+					END
 			)
 		);
 	ELSE
@@ -170,7 +194,15 @@ BEGIN
 				jsonb_build_object(
 					'branch', 'newest',
 					'repos', catch_up,
-					'lag', extract(epoch FROM now() - OLD.newest_version_update)
+					'lag',
+						CASE
+							WHEN
+								-- only account if the repository hasn't just appeared
+								EXISTS (SELECT unnest(NEW.newest_repos) INTERSECT SELECT unnest(OLD.all_repos))
+							THEN
+								extract(epoch FROM now() - OLD.newest_version_update)
+							ELSE NULL
+						END
 				)
 			);
 		END IF;
