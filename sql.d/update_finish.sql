@@ -44,12 +44,12 @@ INTO metapackages (
 	last_seen,
 
 	devel_versions,
-    devel_repos,
-    devel_version_update,
+	devel_repos,
+	devel_version_update,
 
-    newest_versions,
-    newest_repos,
-    newest_version_update,
+	newest_versions,
+	newest_repos,
+	newest_version_update,
 
 	all_repos
 )
@@ -166,19 +166,19 @@ DELETE FROM repo_metapackages;
 
 INSERT INTO repo_metapackages(
 	repo,
-    effname,
-    num_packages,
-    num_packages_newest,
-    num_packages_outdated,
-    num_packages_ignored,
-    num_packages_unique,
-    num_packages_devel,
-    num_packages_legacy,
-    num_packages_incorrect,
-    num_packages_untrusted,
-    num_packages_noscheme,
-    num_packages_rolling,
-    "unique"
+	effname,
+	num_packages,
+	num_packages_newest,
+	num_packages_outdated,
+	num_packages_ignored,
+	num_packages_unique,
+	num_packages_devel,
+	num_packages_legacy,
+	num_packages_incorrect,
+	num_packages_untrusted,
+	num_packages_noscheme,
+	num_packages_rolling,
+	"unique"
 )
 SELECT
 	repo,
@@ -220,33 +220,33 @@ DELETE FROM maintainer_metapackages;
 
 INSERT INTO maintainer_metapackages (
 	maintainer,
-    effname,
-    num_packages,
-    num_packages_newest,
-    num_packages_outdated,
-    num_packages_ignored,
-    num_packages_unique,
-    num_packages_devel,
-    num_packages_legacy, -- not used?
-    num_packages_incorrect,
-    num_packages_untrusted,
-    num_packages_noscheme, -- not used?
-    num_packages_rolling -- not used?
+	effname,
+	num_packages,
+	num_packages_newest,
+	num_packages_outdated,
+	num_packages_ignored,
+	num_packages_unique,
+	num_packages_devel,
+	num_packages_legacy, -- not used?
+	num_packages_incorrect,
+	num_packages_untrusted,
+	num_packages_noscheme, -- not used?
+	num_packages_rolling -- not used?
 )
 SELECT
-    unnest(maintainers),
-    effname,
-    count(*),
-    count(*) FILTER (WHERE versionclass = 1),
-    count(*) FILTER (WHERE versionclass = 2),
-    count(*) FILTER (WHERE versionclass = 3),
-    count(*) FILTER (WHERE versionclass = 4),
-    count(*) FILTER (WHERE versionclass = 5),
-    count(*) FILTER (WHERE versionclass = 6),
-    count(*) FILTER (WHERE versionclass = 7),
-    count(*) FILTER (WHERE versionclass = 8),
-    count(*) FILTER (WHERE versionclass = 9),
-    count(*) FILTER (WHERE versionclass = 10)
+	unnest(maintainers),
+	effname,
+	count(*),
+	count(*) FILTER (WHERE versionclass = 1),
+	count(*) FILTER (WHERE versionclass = 2),
+	count(*) FILTER (WHERE versionclass = 3),
+	count(*) FILTER (WHERE versionclass = 4),
+	count(*) FILTER (WHERE versionclass = 5),
+	count(*) FILTER (WHERE versionclass = 6),
+	count(*) FILTER (WHERE versionclass = 7),
+	count(*) FILTER (WHERE versionclass = 8),
+	count(*) FILTER (WHERE versionclass = 9),
+	count(*) FILTER (WHERE versionclass = 10)
 FROM packages
 GROUP BY unnest(maintainers), effname;
 

@@ -24,9 +24,9 @@
 --
 --------------------------------------------------------------------------------
 SELECT
-    packages.*,
-    maintainer,
-    problem
+	packages.*,
+	maintainer,
+	problem
 FROM problems
 INNER JOIN packages ON packages.id = problems.package_id
 WHERE problems.maintainer = %(maintainer)s
