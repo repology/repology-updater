@@ -152,15 +152,15 @@ WHERE
 					maintainer = %(maintainer)s
 				{% if newest %}
 				) AND (
-					num_packages_newest > 0 OR num_packages_devel > 0 OR num_packages_unique > 0
+					newest
 				{% endif %}
 				{% if outdated %}
 				) AND (
-					num_packages_outdated > 0
+					outdated
 				{% endif %}
 				{% if problematic %}
 				) AND (
-					num_packages_ignored > 0 OR num_packages_incorrect > 0 OR num_packages_untrusted > 0
+					problematic
 				{% endif %}
 				)
 		)
