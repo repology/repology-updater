@@ -133,16 +133,15 @@ DO UPDATE SET
 -- update metapackages: related
 UPDATE metapackages
 SET
-	has_related = true
-WHERE
-	effname IN (
-		SELECT DISTINCT  -- XXX: is DISTINCT needed here?
-			url_relations.effname
+    has_related = EXISTS (
+		SELECT effname  -- returns other effnames for these urls
 		FROM url_relations
-		INNER JOIN url_relations AS url_relations2
-		USING (url)
-		WHERE url_relations2.effname != url_relations.effname
-	);
+		WHERE url IN (
+			SELECT url  -- returns urls for this effname
+			FROM url_relations
+			WHERE effname = metapackages.effname
+		) AND effname != metapackages.effname
+    );
 
 -- reset orphan metapackages
 -- XXX: this won't work well with partial updates
