@@ -5,7 +5,7 @@
   type: site
   desc: Libregamewiki
   family: libregamewiki
-  minpackages: 250
+  minpackages: 200
   sources:
     - name: newreleases
       fetcher: File
