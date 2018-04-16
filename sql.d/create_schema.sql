@@ -417,18 +417,11 @@ CREATE TABLE repo_metapackages (
 	repo text NOT NULL,
 	effname text NOT NULL,
 
-	num_packages smallint NOT NULL,
-	num_packages_newest smallint NOT NULL,
-	num_packages_outdated smallint NOT NULL,
-	num_packages_ignored smallint NOT NULL,
-	num_packages_unique smallint NOT NULL,
-	num_packages_devel smallint NOT NULL,
-	num_packages_legacy smallint NOT NULL,
-	num_packages_incorrect smallint NOT NULL,
-	num_packages_untrusted smallint NOT NULL,
-	num_packages_noscheme smallint NOT NULL,
-	num_packages_rolling smallint NOT NULL,
+	newest boolean NOT NULL,
+	outdated boolean NOT NULL,
+	problematic boolean NOT NULL,
 	"unique" boolean NOT NULL,
+
 	PRIMARY KEY(repo, effname)
 );
 
@@ -439,6 +432,7 @@ CREATE TABLE category_metapackages (
 	category text NOT NULL,
 	effname text NOT NULL,
 	"unique" boolean NOT NULL,
+
 	PRIMARY KEY(category, effname)
 );
 
@@ -448,6 +442,7 @@ CREATE INDEX ON category_metapackages(effname);
 CREATE TABLE maintainer_metapackages (
 	maintainer text NOT NULL,
 	effname text NOT NULL,
+
 	newest boolean NOT NULL,
 	outdated boolean NOT NULL,
 	problematic boolean NOT NULL,
