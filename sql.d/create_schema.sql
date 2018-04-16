@@ -518,13 +518,10 @@ CREATE INDEX ON reports(effname);
 --------------------------------------------------------------------------------
 -- Url relations
 --------------------------------------------------------------------------------
-CREATE MATERIALIZED VIEW url_relations AS
-SELECT DISTINCT
-	effname,
-	simplify_url(homepage) AS url
-FROM packages
-WHERE homepage ~ '^https?://'
-WITH DATA;
+CREATE TABLE url_relations (
+	effname text NOT NULL,
+	url text NOT NULL,
+	PRIMARY KEY(effname, url)
+);
 
-CREATE UNIQUE INDEX ON url_relations(effname, url);  -- we only need url here because we need unique index for concurrent refresh
-CREATE INDEX ON url_relations(url);
+CREATE INDEX ON url_relations(url, effname);

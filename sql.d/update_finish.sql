@@ -20,10 +20,19 @@
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
--- Refresh views #1
+-- Extract urls
 --------------------------------------------------------------------------------
 
-REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations;
+DELETE
+FROM url_relations;
+
+INSERT
+INTO url_relations
+SELECT DISTINCT
+	effname,
+	simplify_url(homepage) AS url
+FROM packages
+WHERE homepage ~ '^https?://';
 
 ANALYZE url_relations;
 
