@@ -550,7 +550,9 @@ INSERT INTO repositories (
 	num_packages_incorrect,
 	num_packages_untrusted,
 	num_packages_noscheme,
-	num_packages_rolling
+	num_packages_rolling,
+	first_seen,
+	last_seen
 )
 SELECT
 	repo,
@@ -564,7 +566,9 @@ SELECT
 	sum(num_packages_incorrect),
 	sum(num_packages_untrusted),
 	sum(num_packages_noscheme),
-	sum(num_packages_rolling)
+	sum(num_packages_rolling),
+	now(),
+	now()
 FROM repo_metapackages
 GROUP BY repo
 ON CONFLICT (name)
@@ -579,7 +583,9 @@ DO UPDATE SET
 	num_packages_incorrect = EXCLUDED.num_packages_incorrect,
 	num_packages_untrusted = EXCLUDED.num_packages_untrusted,
 	num_packages_noscheme = EXCLUDED.num_packages_noscheme,
-	num_packages_rolling = EXCLUDED.num_packages_rolling;
+	num_packages_rolling = EXCLUDED.num_packages_rolling,
+
+	last_seen = now();
 
 -- per-repository maintainer counts
 INSERT INTO repositories (

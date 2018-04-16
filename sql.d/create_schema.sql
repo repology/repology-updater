@@ -394,7 +394,10 @@ CREATE TABLE repositories (
 	last_update timestamp with time zone,
 
 	num_problems integer NOT NULL DEFAULT 0,
-	num_maintainers integer NOT NULL DEFAULT 0
+	num_maintainers integer NOT NULL DEFAULT 0,
+
+	first_seen timestamp with time zone NOT NULL,
+	last_seen timestamp with time zone NOT NULL
 );
 
 CREATE UNIQUE INDEX ON repositories(name);
