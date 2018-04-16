@@ -37,6 +37,7 @@ DROP TABLE IF EXISTS metapackages_events CASCADE;
 DROP TABLE IF EXISTS repo_metapackages CASCADE;
 DROP TABLE IF EXISTS category_metapackages CASCADE;
 DROP TABLE IF EXISTS maintainer_metapackages CASCADE;
+DROP TABLE IF EXISTS url_relations CASCADE;
 
 DROP TYPE IF EXISTS metapackage_event_type CASCADE;
 
