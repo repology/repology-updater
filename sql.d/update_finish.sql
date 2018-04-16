@@ -37,10 +37,8 @@ WHERE homepage ~ '^https?://';
 ANALYZE url_relations;
 
 --------------------------------------------------------------------------------
--- Update tables derived from packages and/or views
+-- Update aggregate tables: metapackages
 --------------------------------------------------------------------------------
-
--- update metapackages: main counters
 INSERT
 INTO metapackages (
 	effname,
@@ -141,7 +139,7 @@ DO UPDATE SET
 
 	all_repos = EXCLUDED.all_repos;
 
--- update metapackages: related
+-- related
 UPDATE metapackages
 SET
 	has_related = EXISTS (
@@ -154,8 +152,7 @@ SET
 		) AND effname != metapackages.effname
 	);
 
--- reset orphan metapackages
--- XXX: this won't work well with partial updates
+-- reset (XXX: this won't work well with partial updates)
 UPDATE metapackages
 SET
 	num_repos = 0,
@@ -168,7 +165,283 @@ WHERE
 	last_seen != now();
 
 --------------------------------------------------------------------------------
--- Update derived tables
+-- Update aggregate tables: maintainers
+--------------------------------------------------------------------------------
+INSERT
+INTO maintainers (
+	maintainer,
+
+	num_packages,
+	num_packages_newest,
+	num_packages_outdated,
+	num_packages_ignored,
+	num_packages_unique,
+	num_packages_devel,
+	num_packages_legacy,
+	num_packages_incorrect,
+	num_packages_untrusted,
+	num_packages_noscheme,
+	num_packages_rolling,
+
+	num_metapackages,
+	num_metapackages_outdated,
+
+	first_seen,
+	last_seen
+)
+SELECT
+	unnest(maintainers) AS maintainer,
+
+	count(*),
+	count(*) FILTER (WHERE versionclass = 1),
+	count(*) FILTER (WHERE versionclass = 2),
+	count(*) FILTER (WHERE versionclass = 3),
+	count(*) FILTER (WHERE versionclass = 4),
+	count(*) FILTER (WHERE versionclass = 5),
+	count(*) FILTER (WHERE versionclass = 6),
+	count(*) FILTER (WHERE versionclass = 7),
+	count(*) FILTER (WHERE versionclass = 8),
+	count(*) FILTER (WHERE versionclass = 9),
+	count(*) FILTER (WHERE versionclass = 10),
+
+	count(DISTINCT effname),
+	count(DISTINCT effname) FILTER(WHERE versionclass = 2),
+
+	now(),
+	now()
+FROM packages
+GROUP BY maintainer
+ON CONFLICT (maintainer)
+DO UPDATE SET
+	num_packages = EXCLUDED.num_packages,
+	num_packages_newest = EXCLUDED.num_packages_newest,
+	num_packages_outdated = EXCLUDED.num_packages_outdated,
+	num_packages_ignored = EXCLUDED.num_packages_ignored,
+	num_packages_unique = EXCLUDED.num_packages_unique,
+	num_packages_devel = EXCLUDED.num_packages_devel,
+	num_packages_legacy = EXCLUDED.num_packages_legacy,
+	num_packages_incorrect = EXCLUDED.num_packages_incorrect,
+	num_packages_untrusted = EXCLUDED.num_packages_untrusted,
+	num_packages_noscheme = EXCLUDED.num_packages_noscheme,
+	num_packages_rolling = EXCLUDED.num_packages_rolling,
+
+	num_metapackages = EXCLUDED.num_metapackages,
+	num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
+
+	last_seen = now();
+
+-- per-repo package counts
+UPDATE maintainers
+SET
+	repository_package_counts = tmp.repository_package_counts,
+	repository_metapackage_counts = tmp.repository_metapackage_counts
+FROM (
+	SELECT
+		maintainer,
+		json_object_agg(repo, numrepopkg) AS repository_package_counts,
+		json_object_agg(repo, numrepometapkg) AS repository_metapackage_counts
+	FROM (
+		SELECT
+			unnest(maintainers) AS maintainer,
+			repo,
+			count(*) AS numrepopkg,
+			count(DISTINCT effname) AS numrepometapkg
+		FROM packages
+		GROUP BY maintainer, repo
+	) AS sub
+	GROUP BY maintainer
+) AS tmp
+WHERE maintainers.maintainer = tmp.maintainer;
+
+-- per-category package counts
+UPDATE maintainers
+SET
+	category_metapackage_counts = tmp.category_metapackage_counts
+FROM (
+	SELECT
+		maintainer,
+		json_object_agg(category, numcatmetapkg) AS category_metapackage_counts
+	FROM (
+		SELECT
+			unnest(maintainers) AS maintainer,
+			category,
+			count(DISTINCT effname) AS numcatmetapkg
+		FROM packages
+		WHERE category IS NOT NULL
+		GROUP BY maintainer, category
+	) AS sub
+	GROUP BY maintainer
+) AS tmp
+WHERE maintainers.maintainer = tmp.maintainer;
+
+-- reset (XXX: this won't work well with partial updates)
+UPDATE maintainers
+SET
+	num_packages = 0,
+	num_packages_newest = 0,
+	num_packages_outdated = 0,
+	num_packages_ignored = 0,
+	num_packages_unique = 0,
+	num_packages_devel = 0,
+	num_packages_legacy = 0,
+	num_packages_incorrect = 0,
+	num_packages_untrusted = 0,
+	num_packages_noscheme = 0,
+	num_packages_rolling = 0,
+	num_metapackages = 0,
+	num_metapackages_outdated = 0,
+
+	repository_package_counts = '{}',
+	repository_metapackage_counts = '{}',
+
+	category_metapackage_counts = '{}'
+WHERE
+	last_seen != now();
+
+--------------------------------------------------------------------------------
+-- Update aggregate tables: repositories
+--------------------------------------------------------------------------------
+INSERT
+INTO repositories (
+	name,
+
+	num_packages,
+	num_packages_newest,
+	num_packages_outdated,
+	num_packages_ignored,
+	num_packages_unique,
+	num_packages_devel,
+	num_packages_legacy,
+	num_packages_incorrect,
+	num_packages_untrusted,
+	num_packages_noscheme,
+	num_packages_rolling,
+
+	num_metapackages,
+	num_metapackages_unique,
+	num_metapackages_newest,
+	num_metapackages_outdated,
+	num_metapackages_comparable,
+
+	first_seen,
+	last_seen
+)
+SELECT
+	repo,
+
+	sum(num_packages),
+	sum(num_packages_newest),
+	sum(num_packages_outdated),
+	sum(num_packages_ignored),
+	sum(num_packages_unique),
+	sum(num_packages_devel),
+	sum(num_packages_legacy),
+	sum(num_packages_incorrect),
+	sum(num_packages_untrusted),
+	sum(num_packages_noscheme),
+	sum(num_packages_rolling),
+
+	count(*),
+	count(*) FILTER (WHERE "unique"),
+	count(*) FILTER (WHERE NOT "unique" AND (num_packages_newest > 0 OR num_packages_devel > 0) AND num_packages_outdated = 0),
+	count(*) FILTER (WHERE num_packages_outdated > 0),
+	count(*) FILTER (WHERE
+		-- newest
+		(NOT "unique" AND (num_packages_newest > 0 OR num_packages_devel > 0) AND num_packages_outdated = 0) OR
+		-- outdated
+		(num_packages_outdated > 0) OR
+		-- problematic subset
+		(num_packages_incorrect > 0)
+	),
+
+	now(),
+	now()
+FROM (
+	SELECT
+		repo,
+		effname,
+		count(*) AS num_packages,
+		count(*) FILTER (WHERE versionclass = 1) AS num_packages_newest,
+		count(*) FILTER (WHERE versionclass = 2) AS num_packages_outdated,
+		count(*) FILTER (WHERE versionclass = 3) AS num_packages_ignored,
+		count(*) FILTER (WHERE versionclass = 4) AS num_packages_unique,
+		count(*) FILTER (WHERE versionclass = 5) AS num_packages_devel,
+		count(*) FILTER (WHERE versionclass = 6) AS num_packages_legacy,
+		count(*) FILTER (WHERE versionclass = 7) AS num_packages_incorrect,
+		count(*) FILTER (WHERE versionclass = 8) AS num_packages_untrusted,
+		count(*) FILTER (WHERE versionclass = 9) AS num_packages_noscheme,
+		count(*) FILTER (WHERE versionclass = 10) AS num_packages_rolling,
+		max(num_families) = 1 AS "unique"
+	FROM packages INNER JOIN metapackages USING(effname)
+	WHERE num_repos_nonshadow > 0
+	GROUP BY effname, repo
+) AS tmp
+GROUP BY repo
+ON CONFLICT (name)
+DO UPDATE SET
+	num_packages = EXCLUDED.num_packages,
+	num_packages_newest = EXCLUDED.num_packages_newest,
+	num_packages_outdated = EXCLUDED.num_packages_outdated,
+	num_packages_ignored = EXCLUDED.num_packages_ignored,
+	num_packages_unique = EXCLUDED.num_packages_unique,
+	num_packages_devel = EXCLUDED.num_packages_devel,
+	num_packages_legacy = EXCLUDED.num_packages_legacy,
+	num_packages_incorrect = EXCLUDED.num_packages_incorrect,
+	num_packages_untrusted = EXCLUDED.num_packages_untrusted,
+	num_packages_noscheme = EXCLUDED.num_packages_noscheme,
+	num_packages_rolling = EXCLUDED.num_packages_rolling,
+
+	num_metapackages = EXCLUDED.num_metapackages,
+	num_metapackages_unique = EXCLUDED.num_metapackages_unique,
+	num_metapackages_newest = EXCLUDED.num_metapackages_newest,
+	num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
+	num_metapackages_comparable = EXCLUDED.num_metapackages_comparable,
+
+	last_seen = now();
+
+-- maintainer counts
+UPDATE repositories
+SET
+	num_maintainers = (
+		SELECT
+			count(DISTINCT maintainer)
+		FROM (
+			SELECT
+				unnest(maintainers) AS maintainer
+			FROM packages
+			WHERE repo = repositories.name
+		) as TMP
+	);
+
+-- reset (XXX: this won't work well with partial updates)
+UPDATE repositories
+SET
+	num_packages = 0,
+	num_packages_newest = 0,
+	num_packages_outdated = 0,
+	num_packages_ignored = 0,
+	num_packages_unique = 0,
+	num_packages_devel = 0,
+	num_packages_legacy = 0,
+	num_packages_incorrect = 0,
+	num_packages_untrusted = 0,
+	num_packages_noscheme = 0,
+	num_packages_rolling = 0,
+
+	num_metapackages = 0,
+	num_metapackages_unique = 0,
+	num_metapackages_newest = 0,
+	num_metapackages_outdated = 0,
+	num_metapackages_comparable = 0,
+
+	num_problems = 0,
+
+	num_maintainers = 0
+WHERE
+	last_seen != now();
+
+--------------------------------------------------------------------------------
+-- Update binding tables
 --------------------------------------------------------------------------------
 
 -- per-repository
@@ -243,135 +516,6 @@ SELECT
 	count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0
 FROM packages
 GROUP BY unnest(maintainers), effname;
-
---------------------------------------------------------------------------------
--- Update maintainers
---------------------------------------------------------------------------------
-
--- reset maintainers
-UPDATE maintainers
-SET
-	num_packages = 0,
-	num_packages_newest = 0,
-	num_packages_outdated = 0,
-	num_packages_ignored = 0,
-	num_packages_unique = 0,
-	num_packages_devel = 0,
-	num_packages_legacy = 0,
-	num_packages_incorrect = 0,
-	num_packages_untrusted = 0,
-	num_packages_noscheme = 0,
-	num_packages_rolling = 0,
-	num_metapackages = 0,
-	num_metapackages_outdated = 0,
-	repository_package_counts = '{}',
-	repository_metapackage_counts = '{}',
-	category_metapackage_counts = '{}';
-
-INSERT
-INTO maintainers (
-	maintainer,
-
-	num_packages,
-	num_packages_newest,
-	num_packages_outdated,
-	num_packages_ignored,
-	num_packages_unique,
-	num_packages_devel,
-	num_packages_legacy,
-	num_packages_incorrect,
-	num_packages_untrusted,
-	num_packages_noscheme,
-	num_packages_rolling,
-
-	num_metapackages,
-	num_metapackages_outdated,
-
-	first_seen,
-	last_seen
-)
-SELECT
-	unnest(maintainers) AS maintainer,
-
-	count(*),
-	count(*) FILTER (WHERE versionclass = 1),
-	count(*) FILTER (WHERE versionclass = 2),
-	count(*) FILTER (WHERE versionclass = 3),
-	count(*) FILTER (WHERE versionclass = 4),
-	count(*) FILTER (WHERE versionclass = 5),
-	count(*) FILTER (WHERE versionclass = 6),
-	count(*) FILTER (WHERE versionclass = 7),
-	count(*) FILTER (WHERE versionclass = 8),
-	count(*) FILTER (WHERE versionclass = 9),
-	count(*) FILTER (WHERE versionclass = 10),
-
-	count(DISTINCT effname),
-	count(DISTINCT effname) FILTER(WHERE versionclass = 2),
-
-	now(),
-	now()
-FROM packages
-GROUP BY maintainer
-ON CONFLICT (maintainer)
-DO UPDATE SET
-	num_packages = EXCLUDED.num_packages,
-	num_packages_newest = EXCLUDED.num_packages_newest,
-	num_packages_outdated = EXCLUDED.num_packages_outdated,
-	num_packages_ignored = EXCLUDED.num_packages_ignored,
-	num_packages_unique = EXCLUDED.num_packages_unique,
-	num_packages_devel = EXCLUDED.num_packages_devel,
-	num_packages_legacy = EXCLUDED.num_packages_legacy,
-	num_packages_incorrect = EXCLUDED.num_packages_incorrect,
-	num_packages_untrusted = EXCLUDED.num_packages_untrusted,
-	num_packages_noscheme = EXCLUDED.num_packages_noscheme,
-	num_packages_rolling = EXCLUDED.num_packages_rolling,
-
-	num_metapackages = EXCLUDED.num_metapackages,
-	num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
-
-	last_seen = now();
-
-UPDATE maintainers
-SET
-	repository_package_counts = tmp.repository_package_counts,
-	repository_metapackage_counts = tmp.repository_metapackage_counts
-FROM (
-	SELECT
-		maintainer,
-		json_object_agg(repo, numrepopkg) AS repository_package_counts,
-		json_object_agg(repo, numrepometapkg) AS repository_metapackage_counts
-	FROM (
-		SELECT
-			unnest(maintainers) AS maintainer,
-			repo,
-			count(*) AS numrepopkg,
-			count(DISTINCT effname) AS numrepometapkg
-		FROM packages
-		GROUP BY maintainer, repo
-	) AS sub
-	GROUP BY maintainer
-) AS tmp
-WHERE maintainers.maintainer = tmp.maintainer;
-
-UPDATE maintainers
-SET
-	category_metapackage_counts = tmp.category_metapackage_counts
-FROM (
-	SELECT
-		maintainer,
-		json_object_agg(category, numcatmetapkg) AS category_metapackage_counts
-	FROM (
-		SELECT
-			unnest(maintainers) AS maintainer,
-			category,
-			count(DISTINCT effname) AS numcatmetapkg
-		FROM packages
-		WHERE category IS NOT NULL
-		GROUP BY maintainer, category
-	) AS sub
-	GROUP BY maintainer
-) AS tmp
-WHERE maintainers.maintainer = tmp.maintainer;
 
 --------------------------------------------------------------------------------
 -- Update problems
@@ -479,6 +623,11 @@ FROM packages
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
 
+-- update per-repository problem counts
+UPDATE repositories
+SET
+	num_problems = (SELECT count(DISTINCT effname) FROM problems WHERE repo = repositories.name);
+
 --------------------------------------------------------------------------------
 -- Update links
 --------------------------------------------------------------------------------
@@ -512,148 +661,8 @@ DO UPDATE SET
 	last_extracted = now();
 
 --------------------------------------------------------------------------------
--- Update statistics
+-- Update global statistics
 --------------------------------------------------------------------------------
-
--- pre-cleanup
-UPDATE repositories
-SET
-	num_packages = 0,
-	num_packages_newest = 0,
-	num_packages_outdated = 0,
-	num_packages_ignored = 0,
-	num_packages_unique = 0,
-	num_packages_devel = 0,
-	num_packages_legacy = 0,
-	num_packages_incorrect = 0,
-	num_packages_untrusted = 0,
-	num_packages_noscheme = 0,
-	num_packages_rolling = 0,
-	num_metapackages = 0,
-	num_metapackages_unique = 0,
-	num_metapackages_newest = 0,
-	num_metapackages_outdated = 0,
-	num_metapackages_comparable = 0,
-	num_problems = 0,
-	num_maintainers = 0;
-
--- per-repository package counts
-INSERT INTO repositories (
-	name,
-	num_packages,
-	num_packages_newest,
-	num_packages_outdated,
-	num_packages_ignored,
-	num_packages_unique,
-	num_packages_devel,
-	num_packages_legacy,
-	num_packages_incorrect,
-	num_packages_untrusted,
-	num_packages_noscheme,
-	num_packages_rolling,
-	first_seen,
-	last_seen
-)
-SELECT
-	repo,
-	sum(num_packages),
-	sum(num_packages_newest),
-	sum(num_packages_outdated),
-	sum(num_packages_ignored),
-	sum(num_packages_unique),
-	sum(num_packages_devel),
-	sum(num_packages_legacy),
-	sum(num_packages_incorrect),
-	sum(num_packages_untrusted),
-	sum(num_packages_noscheme),
-	sum(num_packages_rolling),
-	now(),
-	now()
-FROM repo_metapackages
-GROUP BY repo
-ON CONFLICT (name)
-DO UPDATE SET
-	num_packages = EXCLUDED.num_packages,
-	num_packages_newest = EXCLUDED.num_packages_newest,
-	num_packages_outdated = EXCLUDED.num_packages_outdated,
-	num_packages_ignored = EXCLUDED.num_packages_ignored,
-	num_packages_unique = EXCLUDED.num_packages_unique,
-	num_packages_devel = EXCLUDED.num_packages_devel,
-	num_packages_legacy = EXCLUDED.num_packages_legacy,
-	num_packages_incorrect = EXCLUDED.num_packages_incorrect,
-	num_packages_untrusted = EXCLUDED.num_packages_untrusted,
-	num_packages_noscheme = EXCLUDED.num_packages_noscheme,
-	num_packages_rolling = EXCLUDED.num_packages_rolling,
-
-	last_seen = now();
-
--- per-repository maintainer counts
-INSERT INTO repositories (
-	name,
-	num_maintainers
-)
-SELECT
-	repo,
-	count(DISTINCT maintainer)
-FROM (
-	SELECT
-		repo,
-		unnest(maintainers) AS maintainer
-	FROM packages
-) AS temp
-GROUP BY repo
-ON CONFLICT (name)
-DO UPDATE SET
-	num_maintainers = EXCLUDED.num_maintainers;
-
--- per-repository metapackage counts
-INSERT INTO repositories (
-	name,
-	num_metapackages,
-	num_metapackages_unique,
-	num_metapackages_newest,
-	num_metapackages_outdated,
-	num_metapackages_comparable
-)
-SELECT
-	repo,
-	count(*),
-	count(*) FILTER (WHERE repo_metapackages.unique),
-	count(*) FILTER (WHERE NOT repo_metapackages.unique AND (num_packages_newest > 0 OR num_packages_devel > 0) AND num_packages_outdated = 0),
-	count(*) FILTER (WHERE num_packages_outdated > 0),
-	count(*) FILTER (WHERE
-		-- newest
-		(NOT repo_metapackages.unique AND (num_packages_newest > 0 OR num_packages_devel > 0) AND num_packages_outdated = 0) OR
-		-- outdated
-		(num_packages_outdated > 0) OR
-		-- problematic subset
-		(num_packages_incorrect > 0)
-	)
-FROM repo_metapackages
-GROUP BY repo
-ON CONFLICT (name)
-DO UPDATE SET
-	num_metapackages = EXCLUDED.num_metapackages,
-	num_metapackages_unique = EXCLUDED.num_metapackages_unique,
-	num_metapackages_newest = EXCLUDED.num_metapackages_newest,
-	num_metapackages_outdated = EXCLUDED.num_metapackages_outdated,
-	num_metapackages_comparable = EXCLUDED.num_metapackages_comparable;
-
--- per-repository problem counts
-INSERT INTO repositories (
-	name,
-	num_problems
-)
-SELECT
-	repo,
-	count(distinct effname)
-FROM problems
-GROUP BY repo
-ON CONFLICT (name)
-DO UPDATE SET
-	num_problems = EXCLUDED.num_problems;
-
--- global statistics
 UPDATE statistics SET
 	num_packages = (SELECT count(*) FROM packages),
 	num_metapackages = (SELECT count(*) FROM metapackages WHERE num_repos_nonshadow > 0),
