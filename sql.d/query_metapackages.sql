@@ -105,12 +105,12 @@ WHERE
 	{% if inrepo %}
 	) AND (
 		-- in repo condition
-		effname IN (
-			SELECT
-				effname
+		EXISTS (
+			SELECT *
 			FROM repo_metapackages
 			WHERE
 				(
+					effname = metapackages.effname AND
 					repository_id = (SELECT id FROM repositories WHERE name = %(inrepo)s)
 				{% if newest %}
 				) AND (
@@ -131,24 +131,24 @@ WHERE
 	{% if notinrepo %}
 	) AND (
 		-- not in repo condition
-		effname IN (
-			SELECT
-				effname
+		NOT EXISTS (
+			SELECT *
 			FROM repo_metapackages
-			GROUP BY effname
-			HAVING count(*) FILTER (WHERE repository_id = (SELECT id FROM repositories WHERE name = %(notinrepo)s)) = 0
+			WHERE
+				effname = metapackages.effname AND
+				repository_id = (SELECT id FROM repositories WHERE name = %(notinrepo)s)
 		)
 	{% endif %}
 
 	{% if maintainer %}
 	) AND (
 		-- maintainer condition
-		effname IN (
-			SELECT
-				effname
+		EXISTS (
+			SELECT *
 			FROM maintainer_metapackages
 			WHERE
 				(
+					effname = metapackages.effname AND
 					maintainer_id = (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s)
 				{% if newest %}
 				) AND (
@@ -180,32 +180,17 @@ WHERE
 	{% if not maintainer and not repo and newest %}
 	) AND (
 		-- newest not handled for either maintainer or repo
-		effname IN (
-			SELECT
-				effname
-			FROM repo_metapackages
-			WHERE newest
-		)
+		EXISTS (SELECT * FROM repo_metapackages WHERE effname = metapackages.effname AND newest)
 	{% endif %}
 	{% if not maintainer and not repo and outdated %}
 	) AND (
 		-- outdated not handled for either maintainer or repo
-		effname IN (
-			SELECT
-				effname
-			FROM repo_metapackages
-			WHERE outdated
-		)
+		EXISTS (SELECT * FROM repo_metapackages WHERE effname = metapackages.effname AND outdated)
 	{% endif %}
 	{% if not maintainer and not repo and problematic %}
 	) AND (
 		-- problematic not handled for either maintainer or repo
-		effname IN (
-			SELECT
-				effname
-			FROM repo_metapackages
-			WHERE problematic
-		)
+		EXISTS (SELECT * FROM repo_metapackages WHERE effname = metapackages.effname AND problematic)
 	{% endif %}
 	)
 ORDER BY
