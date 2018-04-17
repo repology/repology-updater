@@ -448,7 +448,7 @@ WHERE
 DELETE FROM repo_metapackages;
 
 INSERT INTO repo_metapackages(
-	repo,
+	repository_id,
 	effname,
 
 	newest,
@@ -458,7 +458,7 @@ INSERT INTO repo_metapackages(
 	"unique"
 )
 SELECT
-	repo,
+	(SELECT id FROM repositories WHERE name = repo),
 	effname,
 
 	count(*) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) > 0,
@@ -468,7 +468,7 @@ SELECT
 	max(num_families) = 1
 FROM packages INNER JOIN metapackages USING(effname)
 WHERE num_repos_nonshadow > 0
-GROUP BY effname,repo;
+GROUP BY effname, repo;
 
 -- per-category
 DELETE FROM category_metapackages;
@@ -490,20 +490,31 @@ GROUP BY effname, category;
 DELETE FROM maintainer_metapackages;
 
 INSERT INTO maintainer_metapackages (
-	maintainer,
+	maintainer_id,
 	effname,
+
 	newest,
 	outdated,
 	problematic
 )
 SELECT
-	unnest(maintainers),
+	(SELECT id FROM maintainers WHERE maintainer = tmp.maintainer),
 	effname,
-	count(*) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) > 0,
-	count(*) FILTER (WHERE versionclass = 2) > 0,
-	count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0
-FROM packages
-GROUP BY unnest(maintainers), effname;
+
+	newest,
+	outdated,
+	problematic
+FROM
+(
+	SELECT
+		unnest(maintainers) AS maintainer,
+		effname,
+		count(*) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) > 0 AS newest,
+		count(*) FILTER (WHERE versionclass = 2) > 0 AS outdated,
+		count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0 AS problematic
+	FROM packages
+	GROUP BY unnest(maintainers), effname
+) AS tmp;
 
 --------------------------------------------------------------------------------
 -- Update problems

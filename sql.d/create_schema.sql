@@ -414,7 +414,7 @@ CREATE TABLE repositories_history (
 
 -- per-repository
 CREATE TABLE repo_metapackages (
-	repo text NOT NULL,
+	repository_id smallint NOT NULL,
 	effname text NOT NULL,
 
 	newest boolean NOT NULL,
@@ -422,7 +422,7 @@ CREATE TABLE repo_metapackages (
 	problematic boolean NOT NULL,
 	"unique" boolean NOT NULL,
 
-	PRIMARY KEY(repo, effname)
+	PRIMARY KEY(repository_id, effname)
 );
 
 CREATE INDEX ON repo_metapackages(effname);
@@ -440,13 +440,13 @@ CREATE INDEX ON category_metapackages(effname);
 
 -- per-maintainer
 CREATE TABLE maintainer_metapackages (
-	maintainer text NOT NULL,
+	maintainer_id integer NOT NULL,
 	effname text NOT NULL,
 
 	newest boolean NOT NULL,
 	outdated boolean NOT NULL,
 	problematic boolean NOT NULL,
-	PRIMARY KEY(maintainer, effname)
+	PRIMARY KEY(maintainer_id, effname)
 );
 
 CREATE INDEX ON maintainer_metapackages(effname);

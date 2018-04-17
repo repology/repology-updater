@@ -52,20 +52,20 @@ SELECT
 FROM
 	(
 		SELECT
-			maintainer,
+			maintainer_id,
 			count(*) AS num_metapackages_common
 		FROM
 			maintainer_metapackages
 		WHERE
-			maintainer != %(maintainer)s AND
+			maintainer_id != (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s) AND
 			effname IN (
 				SELECT
 					effname
 				FROM maintainer_metapackages
-				WHERE maintainer = %(maintainer)s
+				WHERE maintainer_id = (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s)
 			)
-		GROUP BY maintainer
+		GROUP BY maintainer_id
 	) AS intersecting_counts
-	INNER JOIN maintainers USING(maintainer)
+	INNER JOIN maintainers ON(maintainer_id = maintainers.id)
 ORDER BY match DESC
 LIMIT %(limit)s;

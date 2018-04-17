@@ -111,7 +111,7 @@ WHERE
 			FROM repo_metapackages
 			WHERE
 				(
-					repo = %(inrepo)s
+					repository_id = (SELECT id FROM repositories WHERE name = %(inrepo)s)
 				{% if newest %}
 				) AND (
 					newest
@@ -136,7 +136,7 @@ WHERE
 				effname
 			FROM repo_metapackages
 			GROUP BY effname
-			HAVING count(*) FILTER (WHERE repo = %(notinrepo)s) = 0
+			HAVING count(*) FILTER (WHERE repository_id = (SELECT id FROM repositories WHERE name = %(notinrepo)s)) = 0
 		)
 	{% endif %}
 
@@ -149,7 +149,7 @@ WHERE
 			FROM maintainer_metapackages
 			WHERE
 				(
-					maintainer = %(maintainer)s
+					maintainer_id = (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s)
 				{% if newest %}
 				) AND (
 					newest

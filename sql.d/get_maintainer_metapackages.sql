@@ -26,6 +26,6 @@
 SELECT
 	effname
 FROM maintainer_metapackages
-WHERE maintainer = %(maintainer)s
+WHERE maintainer_id = (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s)
 ORDER BY effname
 LIMIT %(limit)s;
