@@ -1,5 +1,5 @@
 ###########################################################################
-# pkgscr
+# pkgsrc
 ###########################################################################
 - name: pkgsrc_2017_1
   type: repository
@@ -102,7 +102,7 @@
   desc: pkgsrc-2017Q4
   family: pkgsrc
   color: 'ff6600'
-  valid_till: 2018-04-01
+  valid_till: 2021-01-01
   minpackages: 15000
   sources:
     - name: INDEX
@@ -134,7 +134,7 @@
   desc: pkgsrc-2018Q1
   family: pkgsrc
   color: 'ff6600'
-  valid_till: 2018-08-01
+  valid_till: 2018-07-01
   minpackages: 15000
   sources:
     - name: INDEX
