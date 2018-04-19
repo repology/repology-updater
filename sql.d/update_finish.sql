@@ -20,34 +20,6 @@
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
--- Extract urls
---------------------------------------------------------------------------------
-
-DELETE
-FROM url_relations;
-
-INSERT
-INTO url_relations
-SELECT
-	(SELECT id FROM metapackages WHERE effname = tmp.effname),
-	urlhash
-FROM (
-	SELECT DISTINCT
-		effname,
-		(
-			'x' || left(
-				md5(
-					simplify_url(homepage)
-				), 16
-			)
-		)::bit(64)::bigint AS urlhash
-	FROM packages
-	WHERE homepage ~ '^https?://'
-) AS tmp;
-
-ANALYZE url_relations;
-
---------------------------------------------------------------------------------
 -- Update aggregate tables: metapackages
 --------------------------------------------------------------------------------
 INSERT
@@ -149,19 +121,6 @@ DO UPDATE SET
 		END,
 
 	all_repos = EXCLUDED.all_repos;
-
--- related
-UPDATE metapackages
-SET
-	has_related = EXISTS (
-		SELECT *  -- returns other effnames for these urls
-		FROM url_relations
-		WHERE urlhash IN (
-			SELECT urlhash  -- returns urls for this effname
-			FROM url_relations
-			WHERE metapackage_id = metapackages.id
-		) AND metapackage_id != metapackages.id
-	);
 
 -- reset (XXX: this won't work well with partial updates)
 UPDATE metapackages
@@ -528,6 +487,46 @@ FROM
 ) AS tmp;
 
 --------------------------------------------------------------------------------
+-- Update related urls
+--------------------------------------------------------------------------------
+DELETE
+FROM url_relations;
+
+INSERT
+INTO url_relations
+SELECT
+	(SELECT id FROM metapackages WHERE effname = tmp.effname),
+	urlhash
+FROM (
+	SELECT DISTINCT
+		effname,
+		(
+			'x' || left(
+				md5(
+					simplify_url(homepage)
+				), 16
+			)
+		)::bit(64)::bigint AS urlhash
+	FROM packages
+	WHERE homepage ~ '^https?://'
+) AS tmp;
+
+ANALYZE url_relations;
+
+-- update flags for metapackages
+UPDATE metapackages
+SET
+	has_related = EXISTS (
+		SELECT *  -- returns other effnames for these urls
+		FROM url_relations
+		WHERE urlhash IN (
+			SELECT urlhash  -- returns urls for this effname
+			FROM url_relations
+			WHERE metapackage_id = metapackages.id
+		) AND metapackage_id != metapackages.id
+	);
+
+--------------------------------------------------------------------------------
 -- Update problems
 --------------------------------------------------------------------------------
 
@@ -633,7 +632,7 @@ FROM packages
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
 
--- update per-repository problem counts
+-- update counts for repositories
 UPDATE repositories
 SET
 	num_problems = (SELECT count(DISTINCT effname) FROM problems WHERE repo = repositories.name);
