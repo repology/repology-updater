@@ -243,7 +243,21 @@ class QueryManager:
 
                 return process_results_of_query(cursor)
 
+        def do_explain_query(db, *args, **kwargs):
+            with db.cursor() as cursor:
+                arguments = prepare_arguments_for_query(args, kwargs)
+
+                if isinstance(arguments, dict):
+                    render = query.template.render(**arguments)
+                else:
+                    render = query.template.render()
+
+                cursor.execute('EXPLAIN ANALYZE ' + render, arguments)
+
+                return '\n'.join(map(lambda row: row[0], cursor.fetchall()))
+
         self.queries[query.name] = do_query
+        self.queries['explain_' + query.name] = do_explain_query
 
     def InjectQueries(self, target, db):
         for name, function in self.queries.items():
