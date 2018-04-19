@@ -293,10 +293,11 @@ CREATE TABLE metapackages (
 CREATE UNIQUE INDEX ON metapackages(effname);
 CREATE UNIQUE INDEX metapackages_active_idx ON metapackages(effname) WHERE (num_repos_nonshadow > 0);
 CREATE INDEX metapackages_effname_trgm ON metapackages USING gin (effname gin_trgm_ops) WHERE (num_repos_nonshadow > 0);
-CREATE INDEX ON metapackages(num_repos) WHERE (num_repos_nonshadow > 0);
-CREATE INDEX ON metapackages(num_families) WHERE (num_repos_nonshadow > 0);
-CREATE INDEX ON metapackages(num_repos_newest) WHERE (num_repos_nonshadow > 0);
-CREATE INDEX ON metapackages(num_families_newest) WHERE (num_repos_nonshadow > 0);
+-- note that the following indexes exclude the most selective values - scan by metapackages_active_idx will be faster for these values anyway
+CREATE INDEX ON metapackages(num_repos) WHERE (num_repos_nonshadow > 0 AND num_repos >= 5);
+CREATE INDEX ON metapackages(num_families) WHERE (num_repos_nonshadow > 0 AND num_families >= 5);
+CREATE INDEX ON metapackages(num_repos_newest) WHERE (num_repos_nonshadow > 0 AND num_repos_newest >= 1);
+CREATE INDEX ON metapackages(num_families_newest) WHERE (num_repos_nonshadow > 0 AND num_families_newest >= 1);
 
 -- index for recently_added
 CREATE INDEX metapackages_recently_added_idx ON metapackages(first_seen DESC, effname) WHERE (num_repos_nonshadow > 0);
