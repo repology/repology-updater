@@ -1,6 +1,10 @@
 {% extends "metapackage.html" %}
 {% import "macros.html" as macros %}
 
+{% block extrameta %}
+	<meta http-equiv="refresh" content="3600">
+{% endblock %}
+
 {% block title %}{{ super() }}: history for {{ name }}{% endblock %}
 {% block header %}History for <strong>{{ name }}</strong>{% endblock %}
 {% block description %}History of package versions for metapackage {{ name }} in all repositories{% endblock %}
