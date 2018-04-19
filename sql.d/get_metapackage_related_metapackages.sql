@@ -28,23 +28,23 @@ SELECT
 	num_families,
 	has_related
 FROM metapackages
-WHERE effname IN (
+WHERE id IN (
 	WITH RECURSIVE r AS (
 		SELECT
-			effname,
+			metapackage_id,
 			url
 		FROM url_relations
-		WHERE effname = %(effname)s
+		WHERE metapackage_id = (SELECT id FROM metapackages WHERE effname = %(effname)s)
 		UNION
 		SELECT
-			url_relations.effname,
+			url_relations.metapackage_id,
 			url_relations.url
 		FROM url_relations
 		JOIN r ON
-			url_relations.effname = r.effname OR url_relations.url = r.url
+			url_relations.metapackage_id = r.metapackage_id OR url_relations.url = r.url
 	)
 	SELECT DISTINCT
-		effname
+		metapackage_id
 	FROM r
 	LIMIT %(limit)s
 );

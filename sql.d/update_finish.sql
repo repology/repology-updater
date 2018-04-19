@@ -28,11 +28,16 @@ FROM url_relations;
 
 INSERT
 INTO url_relations
-SELECT DISTINCT
-	effname,
-	simplify_url(homepage) AS url
-FROM packages
-WHERE homepage ~ '^https?://';
+SELECT
+	(SELECT id FROM metapackages WHERE effname = tmp.effname),
+	url
+FROM (
+	SELECT DISTINCT
+		effname,
+		simplify_url(homepage) AS url
+	FROM packages
+	WHERE homepage ~ '^https?://'
+) AS tmp;
 
 ANALYZE url_relations;
 
@@ -143,13 +148,13 @@ DO UPDATE SET
 UPDATE metapackages
 SET
 	has_related = EXISTS (
-		SELECT effname  -- returns other effnames for these urls
+		SELECT *  -- returns other effnames for these urls
 		FROM url_relations
 		WHERE url IN (
 			SELECT url  -- returns urls for this effname
 			FROM url_relations
-			WHERE effname = metapackages.effname
-		) AND effname != metapackages.effname
+			WHERE metapackage_id = metapackages.id
+		) AND metapackage_id != metapackages.id
 	);
 
 -- reset (XXX: this won't work well with partial updates)
