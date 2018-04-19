@@ -19,6 +19,7 @@ import bz2
 import gzip
 import lzma
 import os
+import time
 
 from repology.fetchers.helpers.fetch import Fetch
 from repology.fetchers.helpers.state import StateFile
@@ -26,11 +27,18 @@ from repology.logger import NoopLogger
 
 
 class FileFetcher():
-    def __init__(self, url, compression=None, post=None, headers=None):
+    def __init__(self, url, compression=None, post=None, headers=None, cachehack=False):
         self.url = url
         self.compression = compression
         self.post = post
         self.headers = headers
+
+        # add paramater to avoid cached content
+        if cachehack:
+            if '?' in self.url:
+                self.url += '&cachehack=' + str(int(time.time()))
+            else:
+                self.url += '?cachehack=' + str(int(time.time()))
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:

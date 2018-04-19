@@ -172,6 +172,7 @@
       fetcher: File
       parser: PkgsrcIndex
       url: https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
+      cachehack: true
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/

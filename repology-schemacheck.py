@@ -124,6 +124,7 @@ schemas = {
                     'compression': Any('xz', 'bz2', 'gz'),
                     'post': {str: str},
                     'headers': {str: str},
+                    'cachehack': bool,
                 }
             ],
             'shadow': bool,
