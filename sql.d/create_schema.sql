@@ -525,8 +525,8 @@ CREATE INDEX ON reports(effname);
 --------------------------------------------------------------------------------
 CREATE TABLE url_relations (
 	metapackage_id integer NOT NULL,
-	url text NOT NULL,
-	PRIMARY KEY(metapackage_id, url)
+	urlhash bigint NOT NULL,
+	PRIMARY KEY(metapackage_id, urlhash)
 );
 
-CREATE INDEX ON url_relations(url, metapackage_id);
+CREATE INDEX ON url_relations(urlhash, metapackage_id);

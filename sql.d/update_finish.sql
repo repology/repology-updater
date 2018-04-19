@@ -30,11 +30,17 @@ INSERT
 INTO url_relations
 SELECT
 	(SELECT id FROM metapackages WHERE effname = tmp.effname),
-	url
+	urlhash
 FROM (
 	SELECT DISTINCT
 		effname,
-		simplify_url(homepage) AS url
+		(
+			'x' || left(
+				md5(
+					simplify_url(homepage)
+				), 16
+			)
+		)::bit(64)::bigint AS urlhash
 	FROM packages
 	WHERE homepage ~ '^https?://'
 ) AS tmp;
@@ -150,8 +156,8 @@ SET
 	has_related = EXISTS (
 		SELECT *  -- returns other effnames for these urls
 		FROM url_relations
-		WHERE url IN (
-			SELECT url  -- returns urls for this effname
+		WHERE urlhash IN (
+			SELECT urlhash  -- returns urls for this effname
 			FROM url_relations
 			WHERE metapackage_id = metapackages.id
 		) AND metapackage_id != metapackages.id

@@ -32,16 +32,16 @@ WHERE id IN (
 	WITH RECURSIVE r AS (
 		SELECT
 			metapackage_id,
-			url
+			urlhash
 		FROM url_relations
 		WHERE metapackage_id = (SELECT id FROM metapackages WHERE effname = %(effname)s)
 		UNION
 		SELECT
 			url_relations.metapackage_id,
-			url_relations.url
+			url_relations.urlhash
 		FROM url_relations
 		JOIN r ON
-			url_relations.metapackage_id = r.metapackage_id OR url_relations.url = r.url
+			url_relations.metapackage_id = r.metapackage_id OR url_relations.urlhash = r.urlhash
 	)
 	SELECT DISTINCT
 		metapackage_id
