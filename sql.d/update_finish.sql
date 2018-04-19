@@ -25,6 +25,8 @@
 
 REFRESH MATERIALIZED VIEW CONCURRENTLY url_relations;
 
+ANALYZE url_relations;
+
 --------------------------------------------------------------------------------
 -- Update tables derived from packages and/or views
 --------------------------------------------------------------------------------
