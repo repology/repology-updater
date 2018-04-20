@@ -440,6 +440,8 @@ FROM packages INNER JOIN metapackages USING(effname)
 WHERE num_repos_nonshadow > 0
 GROUP BY effname, repo;
 
+ANALYZE repo_metapackages;
+
 -- per-category
 DELETE FROM category_metapackages;
 
@@ -455,6 +457,8 @@ SELECT
 FROM packages INNER JOIN metapackages USING(effname)
 WHERE category IS NOT NULL AND num_repos_nonshadow > 0
 GROUP BY effname, category;
+
+ANALYZE category_metapackages;
 
 -- per-maintainer
 DELETE FROM maintainer_metapackages;
@@ -485,6 +489,8 @@ FROM
 	FROM packages
 	GROUP BY unnest(maintainers), effname
 ) AS tmp;
+
+ANALYZE maintainer_metapackages;
 
 --------------------------------------------------------------------------------
 -- Update related urls
