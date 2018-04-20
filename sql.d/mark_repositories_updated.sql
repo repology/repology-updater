@@ -20,13 +20,8 @@
 -- @param many values
 --
 --------------------------------------------------------------------------------
-INSERT INTO repositories (
-	name,
-	last_update
-) VALUES (
-	%s,
-	now()
-)
-ON CONFLICT (name)
-DO UPDATE SET
-	last_update = now();
+UPDATE repositories
+SET
+	last_update = now()
+WHERE
+	name = %s;
