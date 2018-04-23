@@ -312,7 +312,14 @@ EXECUTE PROCEDURE metapackage_create_events_trigger();
 
 CREATE TRIGGER metapackage_update
 	AFTER UPDATE ON metapackages
-	FOR EACH ROW WHEN (OLD.* IS DISTINCT FROM NEW.*)
+	FOR EACH ROW WHEN (
+		OLD.devel_versions IS DISTINCT FROM NEW.devel_versions OR
+		OLD.devel_repos IS DISTINCT FROM NEW.devel_repos OR
+		OLD.newest_versions IS DISTINCT FROM NEW.newest_versions OR
+		OLD.newest_repos IS DISTINCT FROM NEW.newest_repos OR
+		OLD.all_repos IS DISTINCT FROM NEW.all_repos OR
+		NEW.num_repos = 0
+	)
 EXECUTE PROCEDURE metapackage_create_events_trigger();
 
 --------------------------------------------------------------------------------
