@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>Repology.org feed for {{ maintainer }}</title>
+	<link href="{{ REPOLOGY_HOME }}" />
+	<author>Repology</author>
+	<id>{{ url_for_self() }}</id>
+{% for entry in history %}
+	{% if loop.first %}
+	<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'minutes') }}</updated>
+	{% endif %}
+	<entry>
+		<link href="{{ url_for('metapackage', name=entry.effname) }}" />
+		<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'minutes') }}</updated>
+		<id>{{ entry.id }}</id>
+		{% if entry.type == 'added' %}
+		<title>{{ entry.effname }} added</title>
+		<content>Package for {{ entry.effname }} added</content>
+		{% elif entry.type == 'removed' %}
+		<title>{{ entry.effname }} removed</title>
+		<content>Package for {{ entry.effname }} removed</content>
+		{% elif entry.type == 'uptodate' %}
+		<title>{{ entry.effname }} {{ entry.data.version }} is up to date</title>
+		<content>Package {{ entry.effname }} version {{ entry.data.version }} is up to date</content>
+		{% elif entry.type == 'outdated' %}
+		<title>{{ entry.effname }} {{ entry.data.version }} is outdated</title>
+		<content>Package {{ entry.effname }} version {{ entry.data.version }} is outdated</content>
+		{% elif entry.type == 'ignored' %}
+		<title>{{ entry.effname }} {{ entry.data.version }} is ignored</title>
+		<content>Package {{ entry.effname }} version {{ entry.data.version }} is ignored</content>
+		{% endif %}
+	</entry>
+{% else %}
+	<updated>0000-00-00T00:00:00Z</updated>
+{% endfor %}
+</feed>

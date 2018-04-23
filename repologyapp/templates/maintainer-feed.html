@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% import "macros.html" as macros %}
+
+{% block extrameta %}
+	<meta http-equiv="refresh" content="3600">
+{% endblock %}
+
+{% block title %}{{ super() }}: feed for {{ maintainer }} in {{ repo }}{% endblock %}
+{% block header %}Feed for <strong>{{ maintainer }}</strong> in  <strong>{{ repo }}</strong>{% endblock %}
+{% block description %}Feed for maintainer {{ maintainer }} in repository {{ repo }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<table class="table table-striped">
+	<tr>
+		<th class="text-center">Date{{ macros.timezone_abbr() }}</th>
+		<th class="text-center">Event</th>
+	</tr>
+{% for entry in history %}
+	<tr>
+		<td class="minimal-column">{{ macros.format_absolute_time(entry.ts) }}</td>
+		<td>
+		{% if entry.type == 'added' %}
+			Package for <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> added
+		{% elif entry.type == 'removed' %}
+			Package for <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> removed
+		{% elif entry.type == 'uptodate' %}
+			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-newest">{{ entry.data.version }}</span> is up to date
+		{% elif entry.type == 'outdated' %}
+			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-outdated">{{ entry.data.version }}</span> is outdated
+		{% elif entry.type == 'ignored' %}
+			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-ignored">{{ entry.data.version }}</span> is ignored
+		{% endif %}
+		</td>
+	</tr>
+{% endfor %}
+</table>
+
+</div> {#- container #}
+{% endblock %}
