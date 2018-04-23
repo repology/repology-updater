@@ -33,6 +33,16 @@ CREATE TYPE metapackage_event_type AS enum(
 	'history_end'
 );
 
+DROP TYPE IF EXISTS maintainer_repo_metapackages_event_type CASCADE;
+
+CREATE TYPE maintainer_repo_metapackages_event_type AS enum(
+	'added',
+	'uptodate',
+	'outdated',
+	'ignored',
+	'removed'
+);
+
 --------------------------------------------------------------------------------
 -- functions
 --------------------------------------------------------------------------------
@@ -196,6 +206,61 @@ BEGIN
 			jsonb_build_object(
 				'last_repos', OLD.all_repos
 			)
+		);
+	END IF;
+
+	RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION maintainer_repo_metapackages_create_event(maintainer_id integer, repository_id smallint, metapackage_id integer, type maintainer_repo_metapackages_event_type, data jsonb) RETURNS void AS $$
+BEGIN
+	INSERT INTO maintainer_repo_metapackages_events (
+		maintainer_id,
+		repository_id,
+		ts,
+		metapackage_id,
+		type,
+		data
+	) SELECT
+		maintainer_id,
+		repository_id,
+		now(),
+		metapackage_id,
+		type,
+		jsonb_strip_nulls(data);
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION maintainer_repo_metapackages_create_events_trigger() RETURNS trigger AS $$
+BEGIN
+	-- remove
+	IF (TG_OP = 'DELETE') THEN
+		PERFORM maintainer_repo_metapackages_create_event(OLD.maintainer_id, OLD.repository_id, OLD.metapackage_id, 'removed'::maintainer_repo_metapackages_event_type, '{}'::jsonb);
+		RETURN NULL;
+	END IF;
+
+	-- add
+	IF (TG_OP = 'INSERT') THEN
+		PERFORM maintainer_repo_metapackages_create_event(NEW."maintainer_id", NEW.repository_id, NEW.metapackage_id, 'added'::maintainer_repo_metapackages_event_type, '{}'::jsonb);
+	END IF;
+
+	-- update
+	IF (NEW.versions_uptodate IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.versions_uptodate[1] IS DISTINCT FROM NEW.versions_uptodate[1])) THEN
+		PERFORM maintainer_repo_metapackages_create_event(NEW.maintainer_id, NEW.repository_id, NEW.metapackage_id, 'uptodate'::maintainer_repo_metapackages_event_type,
+			jsonb_build_object('version', NEW.versions_uptodate[1])
+		);
+	END IF;
+
+	IF (NEW.versions_outdated IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.versions_outdated[1] IS DISTINCT FROM NEW.versions_outdated[1])) THEN
+		PERFORM maintainer_repo_metapackages_create_event(NEW.maintainer_id, NEW.repository_id, NEW.metapackage_id, 'outdated'::maintainer_repo_metapackages_event_type,
+			jsonb_build_object('version', NEW.versions_outdated[1])
+		);
+	END IF;
+
+	IF (NEW.versions_ignored IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.versions_ignored[1] IS DISTINCT FROM NEW.versions_ignored[1])) THEN
+		PERFORM maintainer_repo_metapackages_create_event(NEW.maintainer_id, NEW.repository_id, NEW.metapackage_id, 'ignored'::maintainer_repo_metapackages_event_type,
+			jsonb_build_object('version', NEW.versions_ignored[1])
 		);
 	END IF;
 
@@ -453,6 +518,57 @@ CREATE TABLE maintainer_metapackages (
 );
 
 CREATE INDEX ON maintainer_metapackages(effname);
+
+--------------------------------------------------------------------------------
+-- Additional derived tables
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS maintainer_repo_metapackages CASCADE;
+
+CREATE TABLE maintainer_repo_metapackages (
+    maintainer_id integer NOT NULL,
+    repository_id smallint NOT NULL,
+    metapackage_id integer NOT NULL,
+
+    first_seen timestamp with time zone NOT NULL,
+    last_seen timestamp with time zone NOT NULL,
+
+    versions_uptodate text[],
+    versions_outdated text[],
+    versions_ignored text[],
+
+	PRIMARY KEY(maintainer_id, repository_id, metapackage_id)
+);
+
+-- events
+DROP TABLE IF EXISTS maintainer_repo_metapackages_events CASCADE;
+
+CREATE TABLE maintainer_repo_metapackages_events (
+    maintainer_id integer NOT NULL,
+    repository_id smallint NOT NULL,
+
+	ts timestamp with time zone NOT NULL,
+
+    metapackage_id integer NOT NULL,
+	type maintainer_repo_metapackages_event_type NOT NULL,
+	data jsonb NOT NULL
+);
+
+CREATE INDEX ON maintainer_repo_metapackages_events(maintainer_id, repository_id, ts DESC, type DESC);
+
+-- triggers
+CREATE TRIGGER maintainer_repo_metapackage_addremove
+	AFTER INSERT OR DELETE ON maintainer_repo_metapackages
+	FOR EACH ROW
+EXECUTE PROCEDURE maintainer_repo_metapackages_create_events_trigger();
+
+CREATE TRIGGER maintainer_repo_metapackage_update
+	AFTER UPDATE ON maintainer_repo_metapackages
+	FOR EACH ROW WHEN (
+		OLD.versions_uptodate IS DISTINCT FROM NEW.versions_uptodate OR
+		OLD.versions_outdated IS DISTINCT FROM NEW.versions_outdated OR
+		OLD.versions_ignored IS DISTINCT FROM NEW.versions_ignored
+	)
+EXECUTE PROCEDURE maintainer_repo_metapackages_create_events_trigger();
 
 --------------------------------------------------------------------------------
 -- Statistics

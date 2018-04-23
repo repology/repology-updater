@@ -116,7 +116,12 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
         db_logger.Log('updating views')
         database.update_finish()
 
-        db_logger.Log('committing changes')
+        database.commit()
+
+    if options.postupdate:
+        db_logger.Log('performing database post-update actions')
+        database.update_post()
+
         database.commit()
 
     logger.Log('database processing complete')
@@ -154,6 +159,7 @@ def ParseArguments():
     actions_grp.add_argument('-P', '--reprocess', action='store_true', help='reprocess repository data')
     actions_grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
     actions_grp.add_argument('-d', '--database', action='store_true', help='store in the database')
+    actions_grp.add_argument('-o', '--postupdate', action='store_true', help='perform post-update actions')
 
     actions_grp.add_argument('-r', '--show-unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
@@ -187,7 +193,7 @@ def Main():
     if options.fetch or options.parse or options.reprocess:
         repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoproc=repoproc, transformer=transformer, reponames=repoman.GetNames(reponames=options.reponames))
 
-    if options.initdb or options.database:
+    if options.initdb or options.database or options.postupdate:
         ProcessDatabase(options=options, logger=logger, repoproc=repoproc, repositories_updated=repositories_updated)
 
     if (options.parse or options.reprocess) and (options.show_unmatched_rules):
