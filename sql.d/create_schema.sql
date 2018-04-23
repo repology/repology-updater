@@ -51,8 +51,6 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
 -- Checks whether version set has effectively changed
-DROP FUNCTION IF EXISTS version_set_changed CASCADE;
-
 CREATE OR REPLACE FUNCTION version_set_changed(old text[], new text[]) RETURNS bool AS $$
 BEGIN
 	RETURN
@@ -65,8 +63,6 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
 -- Creates events on metapackage version state changes
-DROP FUNCTION IF EXISTS metapackage_create_event CASCADE;
-
 CREATE OR REPLACE FUNCTION metapackage_create_event(effname text, type metapackage_event_type, data jsonb) RETURNS void AS $$
 BEGIN
 	INSERT INTO metapackages_events (
@@ -81,8 +77,6 @@ BEGIN
 		jsonb_strip_nulls(data);
 END;
 $$ LANGUAGE plpgsql;
-
-DROP FUNCTION IF EXISTS metapackage_create_events_trigger CASCADE;
 
 CREATE OR REPLACE FUNCTION metapackage_create_events_trigger() RETURNS trigger AS $$
 DECLARE
