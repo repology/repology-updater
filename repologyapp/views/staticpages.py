@@ -28,3 +28,8 @@ def news():
 @ViewRegistrar('/about')
 def about():
     return flask.render_template('about.html')
+
+
+@ViewRegistrar('/bots')
+def bots():
+    return flask.render_template('bots.html')

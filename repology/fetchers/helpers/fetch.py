@@ -17,7 +17,9 @@
 
 import requests
 
-USER_AGENT = 'Repology/0'
+from repology import config
+
+USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
 
 
 def Fetch(url, check_status=True, timeout=60, post=None, headers=None):
