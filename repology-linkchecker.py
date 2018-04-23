@@ -39,11 +39,11 @@ USER_AGENT = 'repology-linkchecker/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
 
 def GetHTTPLinkStatus(url, timeout):
     try:
-        response = requests.head(url, allow_redirects=True, headers={'user-agent': USER_AGENT}, timeout=timeout)
+        response = requests.head(url, allow_redirects=True, headers={'User-Agent': USER_AGENT}, timeout=timeout)
 
         # fallback to GET
         if response.status_code != 200:
-            response = requests.get(url, allow_redirects=True, headers={'user-agent': USER_AGENT}, timeout=timeout)
+            response = requests.get(url, allow_redirects=True, headers={'User-Agent': USER_AGENT}, timeout=timeout)
 
         redirect = None
         size = None
