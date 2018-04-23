@@ -25,6 +25,7 @@
 --
 --------------------------------------------------------------------------------
 SELECT
+	id,
 	ts,
 	(SELECT effname FROM metapackages WHERE id = metapackage_id) AS effname,
 	type,
