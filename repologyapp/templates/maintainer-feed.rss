@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<title>Repology.org feed for {{ maintainer }}</title>
-	<link href="{{ REPOLOGY_HOME }}" />
-	<author>Repology</author>
+	<title>Repology.org feed for {{ maintainer }} in {{ repometadata[repo].desc }}</title>
+	<link href="{{ REPOLOGY_HOME }}" rel="alternate" type="text/html" />
+	<link href="{{ REPOLOGY_HOME }}{{ url_for_self() }}" rel="self" type="application/atom+xml"/>
+	<author><name>Repology</name><uri>{{ REPOLOGY_HOME }}</uri></author>
 	<id>{{ url_for_self() }}</id>
 {% for entry in history %}
 	{% if loop.first %}
@@ -14,19 +15,24 @@
 		<id>{{ entry.id }}</id>
 		{% if entry.type == 'added' %}
 		<title>{{ entry.effname }} added</title>
-		<content>Package for {{ entry.effname }} added</content>
+		<content>Package for {{ entry.effname }} was added to {{ repometadata[repo].desc }}</content>
+		<category term="added" label="Package was added" />
 		{% elif entry.type == 'removed' %}
 		<title>{{ entry.effname }} removed</title>
-		<content>Package for {{ entry.effname }} removed</content>
+		<content>Package for {{ entry.effname }} was removed from {{ repometadata[repo].desc }}</content>
+		<category term="removed" label="Package was removed" />
 		{% elif entry.type == 'uptodate' %}
 		<title>{{ entry.effname }} {{ entry.data.version }} is up to date</title>
-		<content>Package {{ entry.effname }} version {{ entry.data.version }} is up to date</content>
+		<content>Package {{ entry.effname }} version {{ entry.data.version }} in {{ repometadata[repo].desc }} is up to date</content>
+		<category term="uptodate" label="Package is up to date" />
 		{% elif entry.type == 'outdated' %}
 		<title>{{ entry.effname }} {{ entry.data.version }} is outdated</title>
-		<content>Package {{ entry.effname }} version {{ entry.data.version }} is outdated</content>
+		<content>Package {{ entry.effname }} version {{ entry.data.version }} in {{ repometadata[repo].desc }} is outdated</content>
+		<category term="uptodate" label="Package is outdated" />
 		{% elif entry.type == 'ignored' %}
 		<title>{{ entry.effname }} {{ entry.data.version }} is ignored</title>
-		<content>Package {{ entry.effname }} version {{ entry.data.version }} is ignored</content>
+		<content>Package {{ entry.effname }} version {{ entry.data.version }} in {{ repometadata[repo].desc }} is ignored</content>
+		<category term="uptodate" label="Package is ignored" />
 		{% endif %}
 	</entry>
 {% else %}
