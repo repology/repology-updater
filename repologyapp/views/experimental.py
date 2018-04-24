@@ -58,3 +58,23 @@ def raising():
 @ViewRegistrar('/experimental/distromap')
 def distromap():
     return flask.render_template('distromap.html')
+
+
+@ViewRegistrar('/experimental/maintainer_feed/<maintainer>/<repo>')
+def maintainer_feed_html(maintainer, repo):
+    return flask.render_template(
+        'maintainer-feed.html',
+        maintainer=maintainer,
+        repo=repo,
+        history=get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE'])
+    )
+
+
+@ViewRegistrar('/experimental/maintainer_feed_rss/<maintainer>/<repo>')
+def maintainer_feed_rss(maintainer, repo):
+    return flask.render_template(
+        'maintainer-feed.rss',
+        maintainer=maintainer,
+        repo=repo,
+        history=get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE'])
+    )
