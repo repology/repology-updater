@@ -15,11 +15,16 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from functools import cmp_to_key
+
 import flask
+
+from libversion import version_compare
 
 from repologyapp.globals import *
 from repologyapp.view_registry import ViewRegistrar
 
+from repology.package import VersionClass
 from repology.packageproc import PackagesetToBestByRepo
 
 
@@ -90,6 +95,36 @@ def badge_version_only_for_repo(repo, name):
             repo=repo,
             version=best_pkg_by_repo[repo].version,
             versionclass=best_pkg_by_repo[repo].versionclass,
+        ),
+        {'Content-type': 'image/svg+xml'}
+    )
+
+
+@ViewRegistrar('/badge/latest-versions/<name>.svg')
+def badge_latest_versions(name):
+    def version_compare_rev(v1, v2):
+        return version_compare(v2, v1)
+
+    versions = sorted(set([
+        package.version
+        for package in get_db().get_metapackage_packages(name, fields=['version', 'versionclass'])
+        if package.versionclass in (VersionClass.newest, VersionClass.devel, VersionClass.unique)
+    ]), key=cmp_to_key(version_compare_rev))
+
+    caption = 'latest packaged version'
+
+    if versions:
+        if len(versions) > 1:
+            caption += 's'
+        versions = ', '.join(versions)
+    else:
+        versions = '-'
+
+    return (
+        flask.render_template(
+            'badge-tiny.svg',
+            left=caption,
+            right=versions
         ),
         {'Content-type': 'image/svg+xml'}
     )
