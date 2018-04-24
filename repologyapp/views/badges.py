@@ -49,7 +49,7 @@ def badge_vertical_allrepos(name):
 def badge_tiny_repos(name):
     return (
         flask.render_template(
-            'badge-tiny.svg',
+            'badge-tiny-numrepos.svg',
             name=name,
             num_families=get_db().get_metapackage_families_count(name)
         ),
