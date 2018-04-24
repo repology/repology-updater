@@ -54,9 +54,10 @@ def badge_vertical_allrepos(name):
 def badge_tiny_repos(name):
     return (
         flask.render_template(
-            'badge-tiny-numrepos.svg',
+            'badge-tiny-blue.svg',
             name=name,
-            num_families=get_db().get_metapackage_families_count(name)
+            caption='in repositories',
+            text=get_db().get_metapackage_families_count(name)
         ),
         {'Content-type': 'image/svg+xml'}
     )
@@ -122,9 +123,10 @@ def badge_latest_versions(name):
 
     return (
         flask.render_template(
-            'badge-tiny.svg',
-            left=caption,
-            right=versions
+            'badge-tiny-blue.svg',
+            name=name,
+            caption=caption,
+            text=versions
         ),
         {'Content-type': 'image/svg+xml'}
     )
