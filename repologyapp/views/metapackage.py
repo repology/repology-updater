@@ -37,7 +37,7 @@ from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByN
 def metapackage(name):
     name = name.lower()
 
-    # metapackage landing page; just redirect to packages, may change in future
+    # metapackage landing page; just redirect to versions, may change in future
     return flask.redirect(flask.url_for('metapackage_versions', name=name), 303)
 
 
