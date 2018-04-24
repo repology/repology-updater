@@ -17,7 +17,7 @@
 
 import requests
 
-from repology import config
+from repology.config import config
 
 USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
 
