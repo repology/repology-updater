@@ -27,18 +27,18 @@ from repology.logger import NoopLogger
 
 
 class FileFetcher():
-    def __init__(self, url, compression=None, post=None, headers=None, cachehack=False):
+    def __init__(self, url, compression=None, post=None, headers=None, nocache=False):
         self.url = url
         self.compression = compression
         self.post = post
         self.headers = headers
 
-        # add paramater to avoid cached content
-        if cachehack:
+        # cache bypass
+        if nocache:
             if '?' in self.url:
-                self.url += '&cachehack=' + str(int(time.time()))
+                self.url += '&nocache=' + str(int(time.time()))
             else:
-                self.url += '?cachehack=' + str(int(time.time()))
+                self.url += '?nocache=' + str(int(time.time()))
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:

@@ -13,6 +13,7 @@
       fetcher: File
       parser: PkgsrcIndex
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q1/pkgsrc/INDEX
+      nocache: true
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
@@ -45,6 +46,7 @@
       fetcher: File
       parser: PkgsrcIndex
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q2/pkgsrc/INDEX
+      nocache: true
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
@@ -77,6 +79,7 @@
       fetcher: File
       parser: PkgsrcIndex
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q3/pkgsrc/INDEX
+      nocache: true
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
@@ -109,6 +112,7 @@
       fetcher: File
       parser: PkgsrcIndex
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q4/pkgsrc/INDEX
+      nocache: true
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
@@ -141,6 +145,7 @@
       fetcher: File
       parser: PkgsrcIndex
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q1/pkgsrc/INDEX
+      nocache: true
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
@@ -172,7 +177,7 @@
       fetcher: File
       parser: PkgsrcIndex
       url: https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
-      cachehack: true
+      nocache: true
   repolinks:
     - desc: pkgsrc home
       url: https://www.pkgsrc.org/
