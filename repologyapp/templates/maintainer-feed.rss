@@ -4,7 +4,7 @@ tag:repology.org,2018-04-25:maintainer-repo:{{ maintainer }}:{{ repo }}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<title>Repology feed for {{ maintainer }}</title>
-	<link href="{{ url_for_self() }}" rel="self" type="application/atom+xml" />
+	<link href="{{ REPOLOGY_HOME }}{{ url_for_self() }}" rel="self" type="application/atom+xml" />
 	<link href="{{ url_for('maintainer_repo_feed', maintainer=maintainer, repo=repo) }}" rel="alternate" type="text/html" />
 	<author><name>Repology</name><uri>{{ REPOLOGY_HOME }}</uri></author>
 	<id>{{ feed_id() }}</id>
