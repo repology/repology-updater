@@ -99,3 +99,26 @@ def maintainer_problems(maintainer):
             config['PROBLEMS_PER_PAGE']
         )
     )
+
+
+@ViewRegistrar('/maintainer/<maintainer>/feed-for-repo/<repo>')
+def maintainer_repo_feed(maintainer, repo):
+    return flask.render_template(
+        'maintainer-repo-feed.html',
+        maintainer=maintainer,
+        repo=repo,
+        history=get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE'])
+    )
+
+
+@ViewRegistrar('/maintainer/<maintainer>/feed-for-repo/<repo>/rss')
+def maintainer_repo_feed_rss(maintainer, repo):
+    return (
+        flask.render_template(
+            'maintainer-repo-feed.rss',
+            maintainer=maintainer,
+            repo=repo,
+            history=get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE'])
+        ),
+        {'Content-type': 'application/atom+xml'}
+    )
