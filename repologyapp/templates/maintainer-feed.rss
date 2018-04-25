@@ -10,11 +10,11 @@ tag:repology.org,2018-04-25:maintainer-repo:{{ maintainer }}:{{ repo }}
 	<id>{{ feed_id() }}</id>
 {% for entry in history %}
 	{% if loop.first %}
-	<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'minutes') }}</updated>
+	<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'seconds') }}</updated>
 	{% endif %}
 	<entry>
 		<id>{{ feed_id() }}:{{ entry.id }}</id>
-		<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'minutes') }}</updated>
+		<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'seconds') }}</updated>
 		<link href="{{ url_for('metapackage_versions', name=entry.effname) }}#{{ repo }}" />
 		{% if entry.type == 'added' %}
 		<title>{{ entry.effname }} added</title>
