@@ -39,9 +39,9 @@ tag:repology.org,2018-04-25:maintainer-repo:{{ maintainer }}:{{ repo }}
 		{% endif %}
 	</entry>
 {% else %}
-	<updated>2000-00-00T00:00:00Z</updated>
+	<updated>2000-01-01T00:00:00Z</updated>
 	<entry>
-		<updated>2000-00-00T00:00:00Z</updated>
+		<updated>2000-01-01T00:00:00Z</updated>
 		<id>{{ feed_id() }}:-1</id>
 		<title>No events yet</title>
 		<content>No events in this feed yet</content>
