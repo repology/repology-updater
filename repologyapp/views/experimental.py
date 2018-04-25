@@ -72,9 +72,12 @@ def maintainer_feed_html(maintainer, repo):
 
 @ViewRegistrar('/experimental/maintainer_feed_rss/<maintainer>/<repo>')
 def maintainer_feed_rss(maintainer, repo):
-    return flask.render_template(
-        'maintainer-feed.rss',
-        maintainer=maintainer,
-        repo=repo,
-        history=get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE'])
+    return (
+        flask.render_template(
+            'maintainer-feed.rss',
+            maintainer=maintainer,
+            repo=repo,
+            history=get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE'])
+        ),
+        {'Content-type': 'application/atom+xml'}
     )
