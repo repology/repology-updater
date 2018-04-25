@@ -6,9 +6,9 @@
     <link href="{{ url_for('maintainer_repo_feed_rss', maintainer=maintainer, repo=repo) }}" rel="alternate" type="application/atom+xml" />
 {% endblock %}
 
-{% block title %}{{ super() }}: feed for {{ maintainer }} in {{ repo }}{% endblock %}
-{% block header %}Feed for <strong>{{ maintainer }}</strong> in  <strong>{{ repo }}</strong>{% endblock %}
-{% block description %}Feed for maintainer {{ maintainer }} in repository {{ repo }}{% endblock %}
+{% block title %}{{ super() }}: feed for {{ maintainer }} in {{ repometadata[repo].desc }}{% endblock %}
+{% block header %}Feed for <strong>{{ maintainer }}</strong> in  <strong>{{ repometadata[repo].desc }}</strong>{% endblock %}
+{% block description %}Feed for maintainer {{ maintainer }} in repository {{ repometadata[repo].desc }}{% endblock %}
 
 {% block content %}
 <div class="container">
