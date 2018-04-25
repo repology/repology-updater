@@ -32,11 +32,11 @@ tag:repology.org,2018-04-25:maintainer-repo:{{ maintainer }}:{{ repo }}
 		{% elif entry.type == 'outdated' %}
 		<title>{{ entry.effname }} {{ entry.data.version }} is outdated</title>
 		<content>Package {{ entry.effname }} version {{ entry.data.version }} in {{ repometadata[repo].desc }} is outdated</content>
-		<category term="uptodate" label="Package is outdated" />
+		<category term="outdated" label="Package is outdated" />
 		{% elif entry.type == 'ignored' %}
 		<title>{{ entry.effname }} {{ entry.data.version }} is ignored</title>
 		<content>Package {{ entry.effname }} version {{ entry.data.version }} in {{ repometadata[repo].desc }} is ignored</content>
-		<category term="uptodate" label="Package is ignored" />
+		<category term="ignored" label="Package is ignored" />
 		{% endif %}
 	</entry>
 {% else %}
