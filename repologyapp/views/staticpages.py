@@ -33,3 +33,8 @@ def about():
 @ViewRegistrar('/bots')
 def bots():
     return flask.render_template('bots.html')
+
+
+@ViewRegistrar('/favicon.ico')
+def favicon():
+    return flask.current_app.send_static_file('repology.v1.ico')
