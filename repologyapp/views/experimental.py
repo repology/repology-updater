@@ -61,7 +61,7 @@ def distromap():
 
 
 @ViewRegistrar('/experimental/maintainer_feed/<maintainer>/<repo>')
-def maintainer_feed_html(maintainer, repo):
+def maintainer_repo_feed(maintainer, repo):
     return flask.render_template(
         'maintainer-feed.html',
         maintainer=maintainer,
@@ -71,7 +71,7 @@ def maintainer_feed_html(maintainer, repo):
 
 
 @ViewRegistrar('/experimental/maintainer_feed_rss/<maintainer>/<repo>')
-def maintainer_feed_rss(maintainer, repo):
+def maintainer_repo_feed_rss(maintainer, repo):
     return (
         flask.render_template(
             'maintainer-feed.rss',

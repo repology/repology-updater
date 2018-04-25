@@ -1,18 +1,21 @@
+{%- macro feed_id() -%}
+tag:repology.org,2018-04-25:maintainer-repo:{{ maintainer }}:{{ repo }}
+{%- endmacro -%}
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<title>Repology.org feed for {{ maintainer }} in {{ repometadata[repo].desc }}</title>
-	<link href="{{ REPOLOGY_HOME }}" rel="alternate" type="text/html" />
-	<link href="{{ REPOLOGY_HOME }}{{ url_for_self() }}" rel="self" type="application/atom+xml"/>
+	<title>Repology feed for {{ maintainer }}</title>
+	<link href="{{ url_for_self() }}" rel="self" type="application/atom+xml" />
+	<link href="{{ url_for('maintainer_repo_feed', maintainer=maintainer, repo=repo) }}" rel="alternate" type="text/html" />
 	<author><name>Repology</name><uri>{{ REPOLOGY_HOME }}</uri></author>
-	<id>{{ url_for_self() }}</id>
+	<id>{{ feed_id() }}</id>
 {% for entry in history %}
 	{% if loop.first %}
 	<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'minutes') }}</updated>
 	{% endif %}
 	<entry>
-		<link href="{{ url_for('metapackage_versions', name=entry.effname) }}#{{ repo }}" />
+		<id>{{ feed_id() }}:{{ entry.id }}</id>
 		<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'minutes') }}</updated>
-		<id>{{ entry.id }}</id>
+		<link href="{{ url_for('metapackage_versions', name=entry.effname) }}#{{ repo }}" />
 		{% if entry.type == 'added' %}
 		<title>{{ entry.effname }} added</title>
 		<content>Package for {{ entry.effname }} was added to {{ repometadata[repo].desc }}</content>
@@ -36,6 +39,12 @@
 		{% endif %}
 	</entry>
 {% else %}
-	<updated>0000-00-00T00:00:00Z</updated>
+	<updated>2000-00-00T00:00:00Z</updated>
+	<entry>
+		<updated>2000-00-00T00:00:00Z</updated>
+		<id>{{ feed_id() }}:-1</id>
+		<title>No events yet</title>
+		<content>No events in this feed yet</content>
+	</entry>
 {% endfor %}
 </feed>
