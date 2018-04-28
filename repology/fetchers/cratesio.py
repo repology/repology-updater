@@ -17,6 +17,7 @@
 
 import json
 import os
+import time
 
 from repology.fetchers.helpers.fetch import Fetch
 from repology.fetchers.helpers.state import StateDir
@@ -24,7 +25,7 @@ from repology.logger import NoopLogger
 
 
 class CratesIOFetcher():
-    def __init__(self, url, per_page=100, fetch_timeout=5):
+    def __init__(self, url, per_page=100, fetch_timeout=5, fetch_delay=1):
         self.url = url
         self.per_page = per_page
         self.fetch_timeout = fetch_timeout
@@ -50,3 +51,4 @@ class CratesIOFetcher():
                     return
 
                 numpage += 1
+                time.sleep(1)
