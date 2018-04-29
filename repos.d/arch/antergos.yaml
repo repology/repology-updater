@@ -5,7 +5,7 @@
   type: repository
   desc: Antergos Main
   family: arch
-  minpackages: 200
+  minpackages: 150
   sources:
     - name: antergos
       fetcher: WgetTar
