@@ -116,7 +116,6 @@ schemas = {
 
                     # some common fetcher args
                     'fetch_timeout': int,
-                    'fetch_delay': int,
 
                     # arch parser
                     'allowed_archs': [str],
@@ -126,6 +125,9 @@ schemas = {
                     'post': {str: str},
                     'headers': {str: str},
                     'nocache': bool,
+
+                    # crates_io fetcher
+                    'fetch_delay': int,
                 }
             ],
             'shadow': bool,
