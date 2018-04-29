@@ -29,7 +29,7 @@
   desc: Parabola Testing
   family: arch
   color: '787dab'
-  minpackages: 10
+  minpackages: 1
   sources:
     - name: [ testing, libre-testing ]
       fetcher: WgetTar
