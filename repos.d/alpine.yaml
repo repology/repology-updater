@@ -17,4 +17,7 @@
       url: https://alpinelinux.org/
     - desc: Alpine packages
       url: https://pkgs.alpinelinux.org/packages
+  packagelinks:
+    - desc: Package details
+      url: https://pkgs.alpinelinux.org/packages?name={name}
   tags: [ all, production ]
