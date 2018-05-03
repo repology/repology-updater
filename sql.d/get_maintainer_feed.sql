@@ -19,6 +19,7 @@
 --
 -- @param maintainer
 -- @param repo
+-- @param timespan=None
 -- @param limit=None
 --
 -- @returns array of dicts
@@ -34,5 +35,8 @@ FROM maintainer_repo_metapackages_events
 WHERE
 	maintainer_id = (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s) AND
 	repository_id = (SELECT id FROM repositories WHERE name = %(repo)s)
+{% if timespan %}
+	AND ts >= now() - %(timespan)s
+{% endif %}
 ORDER BY ts DESC, type DESC
 LIMIT %(limit)s;
