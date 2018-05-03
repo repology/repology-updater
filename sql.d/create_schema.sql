@@ -254,7 +254,10 @@ BEGIN
 
 	IF (NEW.versions_outdated IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.versions_outdated[1] IS DISTINCT FROM NEW.versions_outdated[1])) THEN
 		PERFORM maintainer_repo_metapackages_create_event(NEW.maintainer_id, NEW.repository_id, NEW.metapackage_id, 'outdated'::maintainer_repo_metapackages_event_type,
-			jsonb_build_object('version', NEW.versions_outdated[1])
+			jsonb_build_object(
+				'version', NEW.versions_outdated[1],
+				'newest_versions', (SELECT newest_versions FROM metapackages WHERE id = NEW.metapackage_id)
+			)
 		);
 	END IF;
 

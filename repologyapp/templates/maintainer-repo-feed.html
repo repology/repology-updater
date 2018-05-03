@@ -30,6 +30,7 @@
 			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-newest">{{ entry.data.version }}</span> is up to date
 		{% elif entry.type == 'outdated' %}
 			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-outdated">{{ entry.data.version }}</span> is outdated
+			{% if entry.data.newest_versions %}by {% for version in entry.data.newest_versions %}<span class="version version-newest">{{ version }}</span>{% endfor %}{% endif %}
 		{% elif entry.type == 'ignored' %}
 			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-ignored">{{ entry.data.version }}</span> is ignored
 		{% endif %}
