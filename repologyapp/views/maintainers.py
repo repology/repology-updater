@@ -17,6 +17,7 @@
 
 import flask
 
+from repologyapp.feed_helpers import smear_timestamps
 from repologyapp.globals import *
 from repologyapp.view_registry import ViewRegistrar
 
@@ -107,7 +108,7 @@ def maintainer_repo_feed(maintainer, repo):
         'maintainer-repo-feed.html',
         maintainer=maintainer,
         repo=repo,
-        history=get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE'])
+        history=smear_timestamps(get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE']))
     )
 
 
@@ -118,7 +119,7 @@ def maintainer_repo_feed_rss(maintainer, repo):
             'maintainer-repo-feed.rss',
             maintainer=maintainer,
             repo=repo,
-            history=get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE'])
+            history=smear_timestamps(get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE']))
         ),
         {'Content-type': 'application/atom+xml'}
     )
