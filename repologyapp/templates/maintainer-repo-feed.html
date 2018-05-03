@@ -3,7 +3,7 @@
 
 {% block extrameta %}
 	<meta http-equiv="refresh" content="3600">
-	<link rel="alternate" href="{{ url_for('maintainer_repo_feed_rss', maintainer=maintainer, repo=repo) }}" type="application/atom+xml" />
+	<link rel="alternate" href="{{ url_for('maintainer_repo_feed_atom', maintainer=maintainer, repo=repo) }}" type="application/atom+xml" />
 {% endblock %}
 
 {% block title %}{{ super() }}: feed for {{ maintainer }} in {{ repometadata[repo].desc }}{% endblock %}

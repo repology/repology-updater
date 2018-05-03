@@ -112,11 +112,11 @@ def maintainer_repo_feed(maintainer, repo):
     )
 
 
-@ViewRegistrar('/maintainer/<maintainer>/feed-for-repo/<repo>/rss')
-def maintainer_repo_feed_rss(maintainer, repo):
+@ViewRegistrar('/maintainer/<maintainer>/feed-for-repo/<repo>/atom')
+def maintainer_repo_feed_atom(maintainer, repo):
     return (
         flask.render_template(
-            'maintainer-repo-feed.rss',
+            'maintainer-repo-feed-atom.xml',
             maintainer=maintainer,
             repo=repo,
             history=smear_timestamps(get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE']))
