@@ -154,7 +154,7 @@
   desc: Ubuntu 18.04 Proposed
   family: debuntu
   color: 'e95420'
-  minpackages: 10
+  minpackages: 0
   sources:
     - name: [ bionic-proposed/main, bionic-proposed/multiverse, bionic-proposed/restricted, bionic-proposed/universe ]
       fetcher: File
