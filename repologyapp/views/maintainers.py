@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
+
 import flask
 
 from repologyapp.feed_helpers import smear_timestamps
@@ -108,7 +110,13 @@ def maintainer_repo_feed(maintainer, repo):
         'maintainer-repo-feed.html',
         maintainer=maintainer,
         repo=repo,
-        history=smear_timestamps(get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE']))
+        history=smear_timestamps(
+            get_db().get_maintainer_feed(
+                maintainer=maintainer,
+                repo=repo,
+                limit=config['HISTORY_PER_PAGE']
+            )
+        )
     )
 
 
@@ -119,7 +127,14 @@ def maintainer_repo_feed_atom(maintainer, repo):
             'maintainer-repo-feed-atom.xml',
             maintainer=maintainer,
             repo=repo,
-            history=smear_timestamps(get_db().get_maintainer_feed(maintainer=maintainer, repo=repo, limit=config['HISTORY_PER_PAGE']))
+            history=smear_timestamps(
+                get_db().get_maintainer_feed(
+                    maintainer=maintainer,
+                    repo=repo,
+                    timespan=datetime.timedelta(weeks=4),
+                    limit=config['HISTORY_PER_PAGE']
+                )
+            )
         ),
         {'Content-type': 'application/atom+xml'}
     )
