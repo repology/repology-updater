@@ -74,17 +74,16 @@
   color: '294172'
   minpackages: 20000
   sources:
-    - name: development  # XXX: update to release when it's ready
+    - name: release
       fetcher: Repodata
       parser: Repodata
-      url: https://mirror.yandex.ru/fedora/linux/development/28/Everything/source/tree/
+      url: https://mirror.yandex.ru/fedora/linux/releases/28/Everything/source/tree/
       subrepo: '{source}'
-# not there yet?
-#    - name: updates
-#      fetcher: Repodata
-#      parser: Repodata
-#      url: https://mirror.yandex.ru/fedora/linux/updates/28/SRPMS/
-#      subrepo: '{source}'
+    - name: updates
+      fetcher: Repodata
+      parser: Repodata
+      url: https://mirror.yandex.ru/fedora/linux/updates/28/SRPMS/
+      subrepo: '{source}'
   repolinks:
     - desc: Fedora home
       url: https://getfedora.org/
