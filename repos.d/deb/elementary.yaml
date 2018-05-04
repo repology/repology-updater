@@ -1,0 +1,45 @@
+###########################################################################
+# Elementary OS
+#
+# DISABLED: uses incompatible version mangling (adds rXXX)
+# TODO: repolinks, packagelinks, colors
+###########################################################################
+
+- name: elementary_stable
+  type: repository
+  desc: Elementary OS Stable
+  family: debuntu
+  minpackages: 0
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ppa.launchpad.net/elementary-os/stable/ubuntu/dists/xenial/main/source/Sources.xz'
+      compression: xz
+  tags: [ all, elementary ]
+
+- name: elementary_daily
+  type: repository
+  desc: Elementary OS Daily
+  family: debuntu
+  minpackages: 0
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ppa.launchpad.net/elementary-os/daily/ubuntu/dists/xenial/main/source/Sources.xz'
+      compression: xz
+  tags: [ all, elementary ]
+
+- name: elementary_patches
+  type: repository
+  desc: Elementary OS Patches
+  family: debuntu
+  minpackages: 0
+  sources:
+    - name: main
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ppa.launchpad.net/elementary-os/os-patches/ubuntu/dists/xenial/main/source/Sources.xz'
+      compression: xz
+  tags: [ all, elementary ]
