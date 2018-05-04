@@ -89,12 +89,6 @@
 	<li>Unique metapackages present <a href="{{ url_for('metapackages', maintainer=maintainer, repos=1) }}">only in a single repository</a>.</li>
 </ul>
 
-{% if numproblems %}
-<h2>Problems</h2>
-
-<p>There are <a href="{{ url_for('maintainer_problems', maintainer=maintainer) }}">{{ numproblems }} known problems</a> for packages maintained by <strong>{{ maintainer }}</strong></p>
-{% endif %}
-
 {% if maintainer_info.repository_package_counts %}
 <h2>Repositories</h2>
 
@@ -110,6 +104,12 @@
 	</li>
 	{% endfor %}
 </ul>
+{% endif %}
+
+{% if numproblems %}
+<h2>Problems</h2>
+
+<p>There are <a href="{{ url_for('maintainer_problems', maintainer=maintainer) }}">{{ numproblems }} known problems</a> for packages maintained by <strong>{{ maintainer }}</strong></p>
 {% endif %}
 
 {% if maintainer_info.category_metapackage_counts %}
