@@ -14,10 +14,9 @@ in <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo
 {% block content %}
 <div class="container">
 
-<p>
-	This feed in also available in <a href="{{ url_for('maintainer_repo_feed_atom', maintainer=maintainer, repo=repo) }}">atom<img src="{{ url_for('static', filename='feed.v1.svg') }}" width="16" height="16"></a> format
-</p>
+<p>This feed in also available in <a href="{{ url_for('maintainer_repo_feed_atom', maintainer=maintainer, repo=repo) }}">atom<img src="{{ url_for('static', filename='feed.v1.svg') }}" width="16" height="16"></a> format</p>
 
+{% if history %}
 <table class="table table-striped">
 	<tr>
 		<th class="text-center">Date{{ macros.timezone_abbr() }}</th>
@@ -43,6 +42,9 @@ in <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo
 	</tr>
 {% endfor %}
 </table>
+{% else %}
+<div class="alert alert-warning" role="alert">No events in this feed yet</div>
+{% endif %}
 
 </div> {#- container #}
 {% endblock %}
