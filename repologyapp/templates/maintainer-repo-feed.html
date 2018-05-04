@@ -28,9 +28,9 @@ in <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo
 		<td class="minimal-column">{{ macros.format_absolute_time(entry.ts) }}</td>
 		<td>
 		{% if entry.type == 'added' %}
-			Package for <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> added
+			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> added
 		{% elif entry.type == 'removed' %}
-			Package for <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> removed
+			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> removed
 		{% elif entry.type == 'uptodate' %}
 			Package <a href="{{ url_for('metapackage_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-newest">{{ entry.data.version }}</span> is up to date
 		{% elif entry.type == 'outdated' %}
