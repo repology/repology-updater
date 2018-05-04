@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block title %}{{ super() }}: feed for {{ maintainer }} in {{ repometadata[repo].desc }}{% endblock %}
-{% block header %}Feed for <strong>{{ maintainer }}</strong> in  <strong>{{ repometadata[repo].desc }}</strong>{% endblock %}
+{% block header %}Feed for <strong><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a></strong>
+in <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong>{% endblock %}
 {% block description %}Feed for maintainer {{ maintainer }} in repository {{ repometadata[repo].desc }}{% endblock %}
 
 {% block content %}
