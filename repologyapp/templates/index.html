@@ -72,8 +72,14 @@
 		<div class="row">
 			<div class="col-md-4">
 				<ul class="list-unstyled">
+					<li><time class="news-summary-time" datetime="2018-05-04">2018-05-04</time>
+						per-maintainer <a href="{{ url_for('maintainer_repo_feed', maintainer='amdmi3@freebsd.org', repo='freebsd') }}">feeds</a> are available</li>
 					<li><time class="news-summary-time" datetime="2018-04-14">2018-04-14</time>
-						Per-metapackage <a href="{{ url_for('metapackage_history', name='vim') }}">history</a> is avaiable</li>
+						per-metapackage <a href="{{ url_for('metapackage_history', name='vim') }}">history</a> is avaiable</li>
+				</ul>
+			</div>
+			<div class="col-md-4">
+				<ul class="list-unstyled">
 					<li><time class="news-summary-time" datetime="2018-03-17">2018-03-17</time>
 						<a href="{{ url_for('repository', repo='maemo_fremantle') }}">Maemo</a>,
 						<a href="{{ url_for('repository', repo='pardus') }}">Pardus</a>,
@@ -81,22 +87,16 @@
 						<a href="{{ url_for('repository', repo='steamos_brewmaster') }}">SteamOS</a>,
 						<a href="{{ url_for('repository', repo='tails_stable') }}">Tails</a>
 					</li>
-				</ul>
-			</div>
-			<div class="col-md-4">
-				<ul class="list-unstyled">
 					<li><time class="news-summary-time" datetime="2018-03-17">2018-03-17</time>
 						metapackage filtering improvements</li>
-					<li><time class="news-summary-time" datetime="2018-02-16">2018-02-16</time>
-						added <a href="{{ url_for('repository', repo='scoop') }}">Scoop</a> repository</li>
 				</ul>
 			</div>
 			<div class="col-md-4">
 				<ul class="list-unstyled">
 					<li><time class="news-summary-time" datetime="2018-02-16">2018-02-16</time>
+						added <a href="{{ url_for('repository', repo='scoop') }}">Scoop</a> repository</li>
+					<li><time class="news-summary-time" datetime="2018-02-16">2018-02-16</time>
 						added <a href="{{ url_for('repository', repo='entware_ng') }}">Entware-ng</a> repository</li>
-					<li><time class="news-summary-time" datetime="2018-01-24">2018-01-24</time>
-						implemented new package statuses
 				</ul>
 			</div>
 		</div>
