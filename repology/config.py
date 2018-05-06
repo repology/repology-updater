@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -22,21 +22,21 @@ __all__ = ['config']
 config = {}
 
 
-def __load_config(path):
+def _load_config(path):
     with open(path) as f:
         exec(compile(f.read(), path, 'exec'), globals(), config)
 
 
-def __load_configs():
+def _load_configs():
     default_config_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', 'repology.conf.default'))
     custom_config_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', 'repology.conf'))
     runtime_config_path = os.environ['REPOLOGY_CONFIG'] if 'REPOLOGY_CONFIG' in os.environ else None
 
-    __load_config(default_config_path)
+    _load_config(default_config_path)
     if os.path.isfile(custom_config_path):
-        __load_config(custom_config_path)
+        _load_config(custom_config_path)
     if runtime_config_path and os.path.isfile(runtime_config_path):
-        __load_config(runtime_config_path)
+        _load_config(runtime_config_path)
 
 
-__load_configs()
+_load_configs()
