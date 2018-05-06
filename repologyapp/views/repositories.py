@@ -1,4 +1,5 @@
 # Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018 Paul Wise <pabs3@bonedaddy.net>
 #
 # This file is part of repology
 #
@@ -93,3 +94,11 @@ def repositories_graphs():
         'repositories-graphs.html',
         autorefresh=autorefresh
     )
+
+
+@ViewRegistrar('/repository/<repo>/package/<package>/problems')
+def package_problems(repo, package):
+    if not repo or repo not in repometadata:
+        flask.abort(404)
+
+    return flask.render_template('package-problems.html', repo=repo, package=package, problems=get_db().get_package_problems(repo, package, config['PROBLEMS_PER_PAGE']))
