@@ -82,7 +82,7 @@
     - name: updates
       fetcher: Repodata
       parser: Repodata
-      url: https://mirror.yandex.ru/fedora/linux/updates/28/SRPMS/
+      url: https://mirror.yandex.ru/fedora/linux/updates/28/Everything/SRPMS/
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
