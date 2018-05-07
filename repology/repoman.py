@@ -102,7 +102,6 @@ class RepositoryManager:
     def GetMetadata(self, reponames=None):
         return {
             repository['name']: {
-                'incomplete': repository.get('incomplete', False),
                 'shadow': repository.get('shadow', False),
                 'repolinks': repository.get('repolinks', []),
                 'packagelinks': repository.get('packagelinks', []),
