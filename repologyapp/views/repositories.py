@@ -46,3 +46,11 @@ def repository_problems(repo):
         flask.abort(404)
 
     return flask.render_template('repository-problems.html', repo=repo, problems=get_db().get_repository_problems(repo, config['PROBLEMS_PER_PAGE']))
+
+
+@ViewRegistrar('/repository/<repo>/problems/<package>')
+def package_problems(repo, package):
+    if not repo or repo not in repometadata:
+        flask.abort(404)
+
+    return flask.render_template('package-problems.html', repo=repo, package=package, problems=get_db().get_package_problems(repo, package, config['PROBLEMS_PER_PAGE']))
