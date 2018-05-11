@@ -1,0 +1,20 @@
+###########################################################################
+# OpenPKG
+###########################################################################
+- name: openpkg_current
+  type: repository
+  desc: OpenPKG
+  family: openpkg
+  minpackages: 0
+  sources:
+    - name: 00INDEX
+      fetcher: File
+      parser: OpenPkgRdf
+      url: http://download.openpkg.org/packages/current/source/00INDEX.rdf.bz2
+      compression: bz2
+  repolinks:
+    - desc: OpenPKG Project
+      url: http://www.openpkg.org/
+  tags: [ all, production, openpkg ]
+
+# XXX: there are also release and testing repositories, but they are empty

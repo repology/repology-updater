@@ -58,6 +58,7 @@ families = [
     'openbsd',
     'openindiana',
     'openmandriva',
+    'openpkg',
     'opensuse',
     'openwrt',
     'pclinuxos',
