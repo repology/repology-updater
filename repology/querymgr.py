@@ -51,6 +51,7 @@ class QueryMetadata:
     ARGSMODE_NORMAL = 0
     ARGSMODE_MANY_VALUES = 1
     ARGSMODE_MANY_PACKAGES = 2
+    ARGSMODE_MANY_DICTS = 3
 
     def __init__(self, name, query):
         self.name = name
@@ -94,6 +95,10 @@ class QueryMetadata:
 
         if string == 'many packages':
             self.argsmode = QueryMetadata.ARGSMODE_MANY_PACKAGES
+            return
+
+        if string == 'many dicts':
+            self.argsmode = QueryMetadata.ARGSMODE_MANY_DICTS
             return
 
         argname, *argdefault = [s.strip() for s in string.split('=', 1)]
@@ -166,17 +171,28 @@ class QueryManager:
     def __register_query(self, query):
         query.template = jinja2.Template(query.query)
 
-        def package_to_argument(package):
-            d = package.__dict__
-            d['extrafields'] = psycopg2.extras.Json(d['extrafields'])
-            return d
+        def adapt_dict_argument(data):
+            if isinstance(data, dict):
+                return psycopg2.extras.Json(data)
+            elif isinstance(data, list) and data and isinstance(data[0], dict):
+                return psycopg2.extras.Json(data)
+            return data
+
+        def adapt_dict_arguments(data):
+            return {
+                key: adapt_dict_argument(value)
+                for key, value in data.items()
+            }
 
         def prepare_arguments_for_query(args, kwargs):
             if query.argsmode == QueryMetadata.ARGSMODE_MANY_VALUES:
                 return [[value] for value in args[0]]
 
             if query.argsmode == QueryMetadata.ARGSMODE_MANY_PACKAGES:
-                return [package_to_argument(package) for package in args[0]]
+                return [adapt_dict_arguments(package.__dict__) for package in args[0]]
+
+            if query.argsmode == QueryMetadata.ARGSMODE_MANY_DICTS:
+                return [adapt_dict_arguments(item) for item in args[0]]
 
             assert(query.argsmode == QueryMetadata.ARGSMODE_NORMAL)
 
