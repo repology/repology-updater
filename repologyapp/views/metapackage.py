@@ -22,6 +22,7 @@ import flask
 
 from libversion import version_compare
 
+from repologyapp.db import get_db
 from repologyapp.globals import *
 from repologyapp.metapackages import metapackages_to_summary_items
 from repologyapp.template_helpers import AFKChecker

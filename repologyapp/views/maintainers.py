@@ -19,6 +19,7 @@ import datetime
 
 import flask
 
+from repologyapp.db import get_db
 from repologyapp.feed_helpers import smear_timestamps
 from repologyapp.globals import *
 from repologyapp.view_registry import ViewRegistrar

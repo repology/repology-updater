@@ -21,6 +21,7 @@ import flask
 
 from libversion import version_compare
 
+from repologyapp.db import get_db
 from repologyapp.globals import *
 from repologyapp.view_registry import ViewRegistrar
 

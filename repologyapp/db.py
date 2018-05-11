@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,25 +17,21 @@
 
 import flask
 
-from repologyapp.fontmeasurer import FontMeasurer
-
 from repology.config import config
-from repology.repoman import RepositoryManager
+from repology.database import Database
+from repology.querymgr import QueryManager
 
 
 __all__ = [
-    'get_text_width',
-    'repometadata',
-    'reponames',
+    'get_db',
 ]
 
 
-__repoman = RepositoryManager(config['REPOS_DIR'])
-__fontmeasurer = FontMeasurer(config['BADGE_FONT'], 11)
-
-repometadata = __repoman.GetMetadata(config['REPOSITORIES'])
-reponames = __repoman.GetNames(config['REPOSITORIES'])
+_querymgr = QueryManager(config['SQL_DIR'])
 
 
-def get_text_width(text):
-    return __fontmeasurer.GetDimensions(str(text))[0]
+def get_db():
+    # XXX: this is not really a persistent DB connection!
+    if not hasattr(flask.g, 'database'):
+        flask.g.database = Database(config['DSN'], _querymgr, readonly=False, autocommit=True, application_name='repology-app')
+    return flask.g.database
