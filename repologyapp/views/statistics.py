@@ -26,7 +26,7 @@ from repologyapp.view_registry import ViewRegistrar
 @ViewRegistrar('/statistics')
 @ViewRegistrar('/statistics/<sorting>')
 def statistics(sorting=None):
-    repostats = {repostat['name']: repostat for repostat in get_db().get_repositories()}
+    repostats = {repostat['name']: repostat for repostat in get_db().get_active_repositories()}
     repostats = [repostats[reponame] for reponame in reponames if reponame in repostats]
     showmedals = True
 

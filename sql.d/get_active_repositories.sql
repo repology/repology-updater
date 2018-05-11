@@ -42,4 +42,5 @@ SELECT
 	now() - last_update AS since_last_update,
 	num_problems,
 	num_maintainers
-FROM repositories;
+FROM repositories
+WHERE num_packages > 0;

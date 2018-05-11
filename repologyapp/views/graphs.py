@@ -178,7 +178,7 @@ def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
     ]
 
     points = []
-    for repo in get_db().get_repositories():
+    for repo in get_db().get_active_repositories():
         if not repo['name'] in reponames:
             continue
 
