@@ -30,12 +30,12 @@ __all__ = [
 ]
 
 
-__repoman = RepositoryManager(config['REPOS_DIR'])
-__fontmeasurer = FontMeasurer(config['BADGE_FONT'], 11)
+_repoman = RepositoryManager(config['REPOS_DIR'])
+_fontmeasurer = FontMeasurer(config['BADGE_FONT'], 11)
 
-repometadata = __repoman.GetMetadata(config['REPOSITORIES'])
-reponames = __repoman.GetNames(config['REPOSITORIES'])
+repometadata = _repoman.GetMetadata(config['REPOSITORIES'])
+reponames = _repoman.GetNames(config['REPOSITORIES'])
 
 
 def get_text_width(text):
-    return __fontmeasurer.GetDimensions(str(text))[0]
+    return _fontmeasurer.GetDimensions(str(text))[0]
