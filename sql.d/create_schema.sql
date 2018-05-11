@@ -460,7 +460,18 @@ CREATE TABLE repositories (
 	num_maintainers integer NOT NULL DEFAULT 0,
 
 	first_seen timestamp with time zone NOT NULL,
-	last_seen timestamp with time zone NOT NULL
+	last_seen timestamp with time zone NOT NULL,
+
+	-- metadata
+	sortname text NOT NULL,
+	"type" text NOT NULL,
+	"desc" text NOT NULL,
+	singular text NOT NULL,
+	family text NOT NULL,
+	color text,
+	shadow boolean NOT NULL,
+	repolinks jsonb NOT NULL,
+	packagelinks jsonb NOT NULL
 );
 
 CREATE UNIQUE INDEX ON repositories(name);

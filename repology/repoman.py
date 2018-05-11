@@ -112,3 +112,19 @@ class RepositoryManager:
                 'color': repository.get('color'),
             } for repository in self.GetRepositories(reponames)
         }
+
+    def GetMetadatas(self, reponames=None):
+        return [
+            {
+                'name': repository['name'],
+                'sortname': repository['sortname'],
+                'shadow': repository.get('shadow', False),
+                'repolinks': repository.get('repolinks', []),
+                'packagelinks': repository.get('packagelinks', []),
+                'family': repository['family'],
+                'desc': repository['desc'],
+                'singular': repository['singular'],
+                'type': repository['type'],
+                'color': repository.get('color'),
+            } for repository in self.GetRepositories(reponames)
+        ]

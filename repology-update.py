@@ -68,7 +68,7 @@ def ProcessRepositories(options, logger, repoproc, transformer, reponames):
     return repositories_updated, repositories_not_updated
 
 
-def ProcessDatabase(options, logger, repoproc, repositories_updated):
+def ProcessDatabase(options, logger, repoman, repoproc, repositories_updated, reponames):
     logger.Log('connecting to database')
 
     db_logger = logger.GetIndented()
@@ -85,6 +85,9 @@ def ProcessDatabase(options, logger, repoproc, repositories_updated):
     if options.database:
         db_logger.Log('clearing the database')
         database.update_start()
+
+        db_logger.Log('updating repository metadata')
+        database.add_repositories(repoman.GetMetadatas(reponames))
 
         package_queue = []
         num_pushed = 0
@@ -194,7 +197,7 @@ def Main():
         repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoproc=repoproc, transformer=transformer, reponames=repoman.GetNames(reponames=options.reponames))
 
     if options.initdb or options.database or options.postupdate:
-        ProcessDatabase(options=options, logger=logger, repoproc=repoproc, repositories_updated=repositories_updated)
+        ProcessDatabase(options=options, logger=logger, repoman=repoman, repoproc=repoproc, repositories_updated=repositories_updated, reponames=repoman.GetNames(reponames=options.reponames))
 
     if (options.parse or options.reprocess) and (options.show_unmatched_rules):
         ShowUnmatchedRules(options=options, logger=logger, transformer=transformer, reliable=repositories_not_updated == [])
