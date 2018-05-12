@@ -357,6 +357,7 @@ CREATE TABLE packages (
 );
 
 CREATE INDEX ON packages(effname);
+CREATE INDEX ON packages(repo, name);
 
 --------------------------------------------------------------------------------
 -- Metapackages

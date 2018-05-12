@@ -22,6 +22,7 @@ from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.math import safe_percent
 from repologyapp.view_registry import ViewRegistrar
+from werkzeug.routing import BuildError
 
 
 @ViewRegistrar('/repositories/statistics')
@@ -102,3 +103,30 @@ def package_problems(repo, package):
         flask.abort(404)
 
     return flask.render_template('package-problems.html', repo=repo, package=package, problems=get_db().get_package_problems(repo, package, config['PROBLEMS_PER_PAGE']))
+
+
+@ViewRegistrar('/repository/<repo>/package/<package>/<page>')
+def package_metapackage(repo, package, page=None):
+    if not repo or repo not in repometadata or not package:
+        flask.abort(404)
+
+    metapackages = get_db().get_package_metapackage(package)
+    metapackage_count = len(metapackages)
+
+    if metapackage_count == 0:
+        flask.abort(404)
+    elif metapackage_count == 1:
+        page_base = 'metapackage'
+        if page:
+            page = '_' + page
+        else:
+            page = ''
+        page_type = page_base + page
+        metapackage = metapackages[0]
+        try:
+            url = flask.url_for(page_type, name=metapackage)
+        except BuildError:
+            flask.abort(404)
+    else:
+        url = flask.url_for('metapackages', repo=repo, package=package)
+    return flask.redirect(url, 307)
