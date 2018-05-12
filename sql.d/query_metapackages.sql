@@ -20,6 +20,7 @@
 -- @param pivot=None
 -- @param reverse=False
 -- @param search=None
+-- @param package=None
 -- @param maintainer=None
 -- @param inrepo=None
 -- @param notinrepo=None
@@ -62,6 +63,19 @@ WHERE
 	) AND (
 		-- search condition
 		effname ILIKE ('%%' || %(search)s || '%%')
+	{% endif %}
+
+	{% if package %}
+	) AND (
+		-- package condition
+		EXISTS (
+			SELECT *
+			FROM package
+			WHERE
+				(
+					name LIKE ('%%' || %(search)s || '%%') AND
+					maintainer_id = (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s)
+		)
 	{% endif %}
 
 	{% if min_repos is not none %}

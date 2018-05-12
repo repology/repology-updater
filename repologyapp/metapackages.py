@@ -32,6 +32,11 @@ class MetapackagesFilterInfo:
             'advanced': False,
             'action': lambda request, value: request.NameSubstring(value.strip().lower()),
         },
+        'package': {
+            'type': str,
+            'advanced': True,
+            'action': lambda request, value: request.Package(value.strip()),
+        },
         'maintainer': {
             'type': str,
             'advanced': True,

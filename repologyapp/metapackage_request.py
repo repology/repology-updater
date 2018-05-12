@@ -31,6 +31,9 @@ class MetapackageRequest:
 
         self.search = None
 
+        # package (packages table)
+        self.package = None
+
         # maintainer (maintainer_metapackages)
         self.maintainer = None
 
@@ -83,6 +86,11 @@ class MetapackageRequest:
         if self.search:
             raise RuntimeError('duplicate effname substring condition')
         self.search = substring
+
+    def Package(self, substring):
+        if self.package:
+            raise RuntimeError('duplicate package substring condition')
+        self.package = substring
 
     def Maintainer(self, maintainer):
         if self.maintainer:

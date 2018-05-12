@@ -55,6 +55,12 @@
 		<input type="checkbox" class="hidden" id="advanced-search-toggle"{% if advanced %} checked="checked"{% endif %}>
 		<div class="advanced-search">
 			<div class="form-group">
+				<label for="package" class="col-sm-2 control-label">Package</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="package" name="package" value="{{ search.package|default('', true) }}" placeholder="e.g. &quot;firefox&quot;">
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="maintainer" class="col-sm-2 control-label">Maintainer</label>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" id="maintainer" name="maintainer" value="{{ search.maintainer|default('', true) }}" placeholder="e.g. &quot;foo@bar.com&quot;">
