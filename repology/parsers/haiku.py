@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 import sys
 
 from repology.package import Package
@@ -58,6 +59,14 @@ class HaikuPortsFilenamesParser():
                         print('WARNING: mismatch for package directory and recipe name: {} != {}'.format(package, name), file=sys.stderr)
 
                     pkg.version = version
+
+                    # XXX: we rely on the fact that no substitutions happen in these
+                    # variables. That's true as of 2018-05-14.
+                    with open(os.path.join(category_path, package, recipe)) as recipefile:
+                        match = re.search('^HOMEPAGE="([^"]+)"', recipefile.read(), re.MULTILINE)
+                        if match:
+                            pkg.homepage = match.group(1).split()[0]  # XXX: use all homepages
+                            print(pkg.homepage)
 
                     result.append(pkg)
 
