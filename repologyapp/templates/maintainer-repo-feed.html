@@ -14,7 +14,7 @@ in <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo
 {% block content %}
 <div class="container">
 
-<p>This feed in also available in <a href="{{ url_for('maintainer_repo_feed_atom', maintainer=maintainer, repo=repo) }}">atom<img src="{{ url_for('static', filename='feed.v1.svg') }}" width="16" height="16"></a> format</p>
+<p>This feed in also available in <a href="{{ url_for('maintainer_repo_feed_atom', maintainer=maintainer, repo=repo) }}">atom<img src="{{ url_for('static', filename='feed.v1.svg') }}" width="16" height="16" alt="Atom feed"></a> format</p>
 
 {% if history %}
 <table class="table table-striped">

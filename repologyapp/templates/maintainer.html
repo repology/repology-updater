@@ -100,7 +100,7 @@
 		<strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong>
 		(<a href="{{ url_for('metapackages', inrepo=repo, maintainer=maintainer) }}">{{ num }}</a>)
 		(feeds: <a href="{{ url_for('maintainer_repo_feed', repo=repo, maintainer=maintainer) }}">html</a>,
-		<a href="{{ url_for('maintainer_repo_feed_atom', repo=repo, maintainer=maintainer) }}">atom<img src="{{ url_for('static', filename='feed.v1.svg') }}" width="16" height="16"></a>)
+		<a href="{{ url_for('maintainer_repo_feed_atom', repo=repo, maintainer=maintainer) }}">atom<img src="{{ url_for('static', filename='feed.v1.svg') }}" width="16" height="16" alt="Atom feed"></a>)
 	</li>
 	{% endfor %}
 </ul>
