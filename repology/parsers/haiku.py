@@ -62,7 +62,7 @@ class HaikuPortsFilenamesParser():
 
                     # XXX: we rely on the fact that no substitutions happen in these
                     # variables. That's true as of 2018-05-14.
-                    with open(os.path.join(category_path, package, recipe)) as recipefile:
+                    with open(os.path.join(category_path, package, recipe), 'r', encoding='utf-8') as recipefile:
                         match = re.search('^HOMEPAGE="([^"]+)"', recipefile.read(), re.MULTILINE)
                         if match:
                             pkg.homepage = match.group(1).split()[0]  # XXX: use all homepages
