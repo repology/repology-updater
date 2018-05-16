@@ -83,11 +83,11 @@ class NixJsonParser():
                         pkg.name += '-' + prefix
                         pkg.version = pkg.version[len(prefix) + 1:]
 
-                for pkgname in ('liblqr', ):
-                    if pkg.name == pkgname:
-                        dashpos = pkg.version.find('-')
-                        pkg.name = pkg.name + '-' + pkg.version[0:dashpos]
-                        pkg.version = pkg.version[dashpos + 1:]
+                merged = pkg.name + '-' + pkg.version
+                for pkgname in ['liblqr-1', 'python2.7-3to2', 'python3.6-3to2']:
+                    if merged.startswith(pkgname):
+                        pkg.name = pkgname
+                        pkg.version = merged[len(pkgname) + 1:]
 
                 if pkg.name.endswith('-git'):
                     pkg.name = pkg.name[:-4]
