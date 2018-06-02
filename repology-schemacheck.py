@@ -79,6 +79,7 @@ families = [
 rulesets = families + [
     'antix',
     'aur',
+    'blackarch',
     'deb_multimedia',
     'deepin',
     'hyperbola',

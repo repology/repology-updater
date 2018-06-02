@@ -5,6 +5,7 @@
   type: repository
   desc: BlackArch
   family: arch
+  ruleset: [ arch, blackarch ]
   color: '000000'
   minpackages: 2300
   sources:
