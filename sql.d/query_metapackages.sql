@@ -61,7 +61,7 @@ WHERE
 	{% if search %}
 	) AND (
 		-- search condition
-		effname LIKE ('%%' || %(search)s || '%%')
+		effname ILIKE ('%%' || %(search)s || '%%')
 	{% endif %}
 
 	{% if min_repos is not none %}

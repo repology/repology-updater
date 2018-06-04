@@ -35,16 +35,12 @@ from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByN
 
 @ViewRegistrar('/metapackage/<name>')
 def metapackage(name):
-    name = name.lower()
-
     # metapackage landing page; just redirect to versions, may change in future
     return flask.redirect(flask.url_for('metapackage_versions', name=name), 303)
 
 
 @ViewRegistrar('/metapackage/<name>/versions')
 def metapackage_versions(name):
-    name = name.lower()
-
     packages_by_repo = {}
     for package in get_db().get_metapackage_packages(name):
         if package.repo not in packages_by_repo:
@@ -64,8 +60,6 @@ def metapackage_versions(name):
 
 @ViewRegistrar('/metapackage/<name>/packages')
 def metapackage_packages(name):
-    name = name.lower()
-
     packages_by_repo = {}
 
     for package in get_db().get_metapackage_packages(name):
@@ -86,8 +80,6 @@ def metapackage_packages(name):
 
 @ViewRegistrar('/metapackage/<name>/information')
 def metapackage_information(name):
-    name = name.lower()
-
     packages = get_db().get_metapackage_packages(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
 
@@ -140,8 +132,6 @@ def metapackage_information(name):
 
 @ViewRegistrar('/metapackage/<name>/history')
 def metapackage_history(name):
-    name = name.lower()
-
     def prepare_repos(repos):
         if not repos:
             return []
@@ -228,8 +218,6 @@ def metapackage_history(name):
 
 @ViewRegistrar('/metapackage/<name>/related')
 def metapackage_related(name):
-    name = name.lower()
-
     metapackages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     packages = get_db().get_metapackages_packages(list(metapackages.keys()), fields=['family', 'effname', 'version', 'versionclass', 'flags'])
@@ -251,8 +239,6 @@ def metapackage_related(name):
 
 @ViewRegistrar('/metapackage/<name>/badges')
 def metapackage_badges(name):
-    name = name.lower()
-
     repos_present_in = set([package.repo for package in get_db().get_metapackage_packages(name)])
     repos = [repo for repo in reponames if repo in repos_present_in]
     return flask.render_template('metapackage-badges.html', name=name, repos=repos)
@@ -260,8 +246,6 @@ def metapackage_badges(name):
 
 @ViewRegistrar('/metapackage/<name>/report', methods=['GET', 'POST'])
 def metapackage_report(name):
-    name = name.lower()
-
     reports_disabled = name in config['DISABLED_REPORTS']
 
     if flask.request.method == 'POST':
