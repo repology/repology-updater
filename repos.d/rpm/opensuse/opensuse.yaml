@@ -136,7 +136,7 @@
   desc: openSUSE Tumbleweed
   family: opensuse
   color: '6da741'
-  minpackages: 12000
+  minpackages: 10000
   sources:
     # NOTE1: there are two url schemes, apparently with same contents
     # http://download.opensuse.org/source/tumbleweed/repo/oss/
