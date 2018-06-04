@@ -89,6 +89,10 @@ class NixJsonParser():
                         pkg.name = pkgname
                         pkg.version = merged[len(pkgname) + 1:]
 
+                keyparts = key.split('.')
+                if len(keyparts) > 1:
+                    pkg.category = keyparts[0]
+
                 if pkg.name.endswith('-git'):
                     pkg.name = pkg.name[:-4]
                     pkg.SetFlag(PackageFlags.ignore)
