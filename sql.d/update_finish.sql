@@ -726,7 +726,9 @@ FROM (
 --------------------------------------------------------------------------------
 -- Hack: avoid sequence overflows (especially for repositories table)
 --------------------------------------------------------------------------------
-SELECT setval(pg_get_serial_sequence('packages', 'id'), (select max(id) + 1 FROM packages));
+-- XXX: this one is not really helpful currently as packages are INSERTed, not UPSERTed
+-- if packages id overflow becomes problem, we may enable CYCLE on packages id sequence
+--SELECT setval(pg_get_serial_sequence('packages', 'id'), (select max(id) + 1 FROM packages));
 SELECT setval(pg_get_serial_sequence('metapackages', 'id'), (select max(id) + 1 FROM metapackages));
 SELECT setval(pg_get_serial_sequence('repositories', 'id'), (select max(id) + 1 FROM repositories));
 SELECT setval(pg_get_serial_sequence('maintainers', 'id'), (select max(id) + 1 FROM maintainers));
