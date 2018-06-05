@@ -31,10 +31,10 @@ tag:repology.org,2018-04-25:maintainer-repo:{{ maintainer }}:{{ repo }}
 		<category term="uptodate" label="Package is up to date" />
 		{% elif entry.type == 'outdated' %}
 		<title>{{ entry.effname }} {{ entry.data.version }} is outdated
-		{% if entry.data.newest_versions %}by {{ entry.data.newest_versions|join(', ') }}{% endif %}
+		{%- if entry.data.newest_versions %} by {{ entry.data.newest_versions|join(', ') }}{% endif -%}
 		</title>
 		<content>Package {{ entry.effname }} version {{ entry.data.version }} in {{ repometadata[repo].desc }} is outdated
-		{% if entry.data.newest_versions %}by {{ entry.data.newest_versions|join(', ') }}{% endif %}
+		{%- if entry.data.newest_versions %} by {{ entry.data.newest_versions|join(', ') }}{% endif -%}
 		</content>
 		<category term="outdated" label="Package is outdated" />
 		{% elif entry.type == 'ignored' %}
