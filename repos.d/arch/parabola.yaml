@@ -5,6 +5,7 @@
   type: repository
   desc: Parabola
   family: arch
+  ruleset: [ arch, parabola ]
   color: '787dab'
   minpackages: 10000
   sources:
@@ -28,6 +29,7 @@
   type: repository
   desc: Parabola Testing
   family: arch
+  ruleset: [ arch, parabola ]
   color: '787dab'
   minpackages: 1
   sources:
