@@ -155,6 +155,11 @@ STAFF_AFK = []
 DISABLED_REPORTS = []
 
 #
+# IPs to display invitation to join the project to
+#
+INVITED_IPS = []
+
+#
 # Default timezone to use in the web interface
 # The webapp tries to replace this to user's local timezone with javascript
 #

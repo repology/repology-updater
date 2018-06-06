@@ -66,6 +66,12 @@
 
 {% else %}
 
+{% if show_invitation %}
+
+<div class="alert alert-info" role="alert">Hey! You seem to have submitted a lot of useful reports, would you like to commit to repology rules repository directly? This way we could avoid the double work and also push rule updates faster. If so, please drop <a href="{{ config['REPOLOGY_RULES_REPO_URL'] }}">an issue in the repology-rules repository</a>.</div>
+
+{% endif %}
+
 {% if reports|length >= config['MAX_REPORTS'] %}
 <div class="alert alert-warning" role="alert">There are a lot of reports for this metapackage already, so adding new ones is disabled.</div>
 {% else %}

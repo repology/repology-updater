@@ -291,5 +291,6 @@ def metapackage_report(name):
         reports=get_db().get_reports(name),
         name=name,
         afk_till=AFKChecker(config['STAFF_AFK']).GetAFKEnd(),
-        reports_disabled=reports_disabled
+        reports_disabled=reports_disabled,
+        show_invitation=flask.request.remote_addr in config['INVITED_IPS']
     )
