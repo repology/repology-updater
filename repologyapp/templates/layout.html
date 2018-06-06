@@ -77,7 +77,7 @@
 		<ul class="footer-links">
 			<li><a href="{{ url_for('about') }}">About</a></li>
 			<li><a href="{{ url_for('api_v1') }}">API</a></li>
-			<li class="footer-links-right"><a href="https://github.com/repology/repology">GitHub</a></li>
+			<li class="footer-links-right"><a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}">GitHub</a></li>
 		</ul>
 		<p>
 			Copyright (C) 2016-2018 Dmitry Marakasov &lt;<a href="mailto:amdmi3@amdmi3.ru">amdmi3@amdmi3.ru</a>&gt;.<br>

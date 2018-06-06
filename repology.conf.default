@@ -125,6 +125,16 @@ MAX_REPORTS = 20
 REPOLOGY_HOME = 'https://repology.org'
 
 #
+# Address of Repology main repository
+#
+REPOLOGY_MAIN_REPO_URL = 'https://github.com/repology/repology'
+
+#
+# Address of Repology rules repository
+#
+REPOLOGY_RULES_REPO_URL = 'https://github.com/repology/repology-rules'
+
+#
 # Path to DejaVuSans.ttf
 #
 # This is used to calculate SVG badge sizes
