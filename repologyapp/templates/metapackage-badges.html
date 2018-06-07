@@ -43,6 +43,13 @@
 &lt;/a&gt;
 </pre>
 
+<p>You may customize badge header with the <code>header=...</code> HTTP parameter. For instance, you may use localized message or remove the header completely by specifying empty value.</p>
+
+<pre>
+{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name) }}<strong>?header=Packages</strong>
+{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name) }}<strong>?header=</strong>
+</pre>
+
 </section>
 
 <section>

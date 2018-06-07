@@ -33,6 +33,8 @@ def badge_vertical_allrepos(name):
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
+    header = flask.request.args.to_dict().get('header', 'Packaging status')
+
     entries = [
         {
             'repo': repometadata[reponame],
@@ -40,11 +42,15 @@ def badge_vertical_allrepos(name):
         } for reponame in reponames if reponame in repometadata and reponame in best_pkg_by_repo
     ]
 
+    if not entries:
+        header = 'No known packages'
+
     return (
         flask.render_template(
             'badge-vertical.svg',
             entries=entries,
-            name=name
+            name=name,
+            header=header
         ),
         {'Content-type': 'image/svg+xml'}
     )

@@ -4,7 +4,7 @@
 {% set version_colwidth = [entries|map(attribute='package.version')|map('truncate', version_trim, True, "...", 0)|map('escape')|map('text_width')|max + 10, 60]|max if entries else 0 %}
 {% set repo_colwidth = [entries|map(attribute='repo.desc')|map('text_width')|max + 10, 160 - version_colwidth]|max if entries else 210 %}
 {% set rowheight = 20 %}
-{% set hdrheight = 25 %}
+{% set hdrheight = 25 if header else 0 %}
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{{ repo_colwidth + version_colwidth }}" height="{{ hdrheight + entries|length * rowheight }}">
 	<clipPath id="clip">
 		<rect rx="3" width="100%" height="100%" fill="#000"/>
@@ -19,12 +19,9 @@
 
 		<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="15" font-weight="bold">
 			<a xlink:href="{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name ) }}">
-			{% if entries %}
-				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">Packaging status</text>
-				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">Packaging status</text>
-			{% else %}
-				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">No known packages yet</text>
-				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">No known packages yet</text>
+			{% if header %}
+				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="18" fill="#010101" fill-opacity=".3">{{ header|escape }}</text>
+				<text x="{{ (repo_colwidth + version_colwidth) / 2.0 }}" y="17">{{ header|escape }}</text>
 			{% endif %}
 			</a>
 		</g>
