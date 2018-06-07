@@ -69,7 +69,14 @@ def badge_version_for_repo(repo, name):
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
     if repo not in best_pkg_by_repo:
-        return (flask.render_template('badge-tiny-string.svg', string='Unknown repository'), 404, {'Content-type': 'image/svg+xml'})
+        # XXX: display this as normal "pill" badge with correct repository name
+        return (
+            flask.render_template('badge-tiny-string.svg', string='No package'),
+            # XXX: it's more correct to return 404 with content
+            # here, but some browsers (e.g. Firefox) won't display
+            # the image in that case
+            {'Content-type': 'image/svg+xml'}
+        )
 
     return (
         flask.render_template(
@@ -88,7 +95,13 @@ def badge_version_only_for_repo(repo, name):
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
     if repo not in best_pkg_by_repo:
-        return (flask.render_template('badge-tiny-string.svg', string='-'), 404, {'Content-type': 'image/svg+xml'})
+        return (
+            flask.render_template('badge-tiny-string.svg', string='-'),
+            # XXX: it's more correct to return 404 with content
+            # here, but some browsers (e.g. Firefox) won't display
+            # the image in that case
+            {'Content-type': 'image/svg+xml'}
+        )
 
     return (
         flask.render_template(
