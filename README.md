@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/repology/repology.svg?branch=master)](https://travis-ci.org/repology/repology)
 [![Coverage Status](https://coveralls.io/repos/github/repology/repology/badge.svg?branch=master)](https://coveralls.io/github/repology/repology?branch=master)
-[![Code Health](https://landscape.io/github/repology/repology/master/landscape.svg?style=flat)](https://landscape.io/github/repology/repology/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d37aa15aab350994ab90/maintainability)](https://codeclimate.com/github/repology/repology/maintainability)
 
 Repology tracks and compares package versions in more than 120
