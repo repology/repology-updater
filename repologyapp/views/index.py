@@ -18,7 +18,7 @@
 import flask
 
 from repologyapp.db import get_db
-from repologyapp.globals import *
+from repologyapp.globals import repometadata
 from repologyapp.math import safe_percent
 from repologyapp.metapackages import metapackages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
