@@ -40,7 +40,7 @@ def badge_vertical_allrepos(name):
         {
             'repo': repometadata[reponame],
             'package': best_pkg_by_repo[reponame]
-        } for reponame in reponames if reponame in repometadata and reponame in best_pkg_by_repo
+        } for reponame in repometadata.active_names() if reponame in best_pkg_by_repo
     ]
 
     if not entries:

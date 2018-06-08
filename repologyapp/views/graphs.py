@@ -57,7 +57,7 @@ def graph_generic(getgraph, color, suffix=''):
 
 
 def graph_repo_generic(repo, getvalue, color, suffix=''):
-    if repo not in reponames:
+    if repo not in repometadata.active_names():
         flask.abort(404)
 
     def GetGraph(period):
@@ -179,9 +179,6 @@ def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
 
     points = []
     for repo in get_db().get_active_repositories():
-        if not repo['name'] in reponames:
-            continue
-
         point = {
             'text': repometadata[repo['name']]['desc'],
             'coords': list(map(repo2coords, [repo] + [snapshot[repo['name']] for snapshot in snapshots if repo['name'] in snapshot]))

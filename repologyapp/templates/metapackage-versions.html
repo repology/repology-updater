@@ -20,7 +20,7 @@
 		<th class="text-center">Category</th>
 		<th class="text-left">Maintainer(s)</th>
 	</tr>
-{% for reponame in reponames %}
+{% for reponame in repometadata.active_names() %}
 {% set packages = packages_by_repo[reponame] %}
 {% set numpackages = packages|length %}
 {% for package in packages %}

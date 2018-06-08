@@ -76,7 +76,7 @@ Metapackages
 				<div class="col-sm-8">
 					<select class="form-control" id="inrepo" name="inrepo">
 						<option value="">-</option>
-					{% for reponame in reponames %}
+					{% for reponame in repometadata.active_names() %}
 						<option value="{{ reponame }}"{% if reponame == search.inrepo %} selected{% endif %}>{{ repometadata[reponame].desc }}</option>
 					{% endfor %}
 					</select>
@@ -87,7 +87,7 @@ Metapackages
 				<div class="col-sm-8">
 					<select class="form-control" id="notinrepo" name="notinrepo">
 						<option value="">-</option>
-					{% for reponame in reponames %}
+					{% for reponame in repometadata.active_names() %}
 						<option value="{{ reponame }}"{% if reponame == search.notinrepo %} selected{% endif %}>{{ repometadata[reponame].desc }}</option>
 					{% endfor %}
 					</select>

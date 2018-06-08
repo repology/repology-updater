@@ -97,7 +97,7 @@ def metapackages_widespread(bound=None):
 @ViewRegistrar('/metapackages/in-repo/<repo>/')
 @ViewRegistrar('/metapackages/in-repo/<repo>/<bound>/')
 def metapackages_in_repo(repo, bound=None):
-    if not repo or repo not in repometadata:
+    if repo not in repometadata.active_names():
         flask.abort(404)
 
     return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, search=flask.request.args.to_dict().get('search')), 301)
@@ -106,7 +106,7 @@ def metapackages_in_repo(repo, bound=None):
 @ViewRegistrar('/metapackages/outdated-in-repo/<repo>/')
 @ViewRegistrar('/metapackages/outdated-in-repo/<repo>/<bound>/')
 def metapackages_outdated_in_repo(repo, bound=None):
-    if not repo or repo not in repometadata:
+    if repo not in repometadata.active_names():
         flask.abort(404)
 
     return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, outdated=1, search=flask.request.args.to_dict().get('search')), 301)
@@ -115,7 +115,7 @@ def metapackages_outdated_in_repo(repo, bound=None):
 @ViewRegistrar('/metapackages/not-in-repo/<repo>/')
 @ViewRegistrar('/metapackages/not-in-repo/<repo>/<bound>/')
 def metapackages_not_in_repo(repo, bound=None):
-    if not repo or repo not in repometadata:
+    if repo not in repometadata.active_names():
         flask.abort(404)
 
     return flask.redirect(flask.url_for('metapackages', bound=bound, notinrepo=repo, search=flask.request.args.to_dict().get('search')), 301)
@@ -124,7 +124,7 @@ def metapackages_not_in_repo(repo, bound=None):
 @ViewRegistrar('/metapackages/candidates-for-repo/<repo>/')
 @ViewRegistrar('/metapackages/candidates-for-repo/<repo>/<bound>/')
 def metapackages_candidates_for_repo(repo, bound=None):
-    if not repo or repo not in repometadata:
+    if repo not in repometadata.active_names():
         flask.abort(404)
 
     return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, families='5-', search=flask.request.args.to_dict().get('search')), 301)
@@ -133,7 +133,7 @@ def metapackages_candidates_for_repo(repo, bound=None):
 @ViewRegistrar('/metapackages/unique-in-repo/<repo>/')
 @ViewRegistrar('/metapackages/unique-in-repo/<repo>/<bound>/')
 def metapackages_unique_in_repo(repo, bound=None):
-    if not repo or repo not in repometadata:
+    if repo not in repometadata.active_names():
         flask.abort(404)
 
     return flask.redirect(flask.url_for('metapackages', bound=bound, inrepo=repo, families=1, search=flask.request.args.to_dict().get('search')), 301)

@@ -18,23 +18,20 @@
 import flask
 
 from repologyapp.fontmeasurer import FontMeasurer
+from repologyapp.repometadata import RepositoryMetadata
 
 from repology.config import config
-from repology.repoman import RepositoryManager
 
 
 __all__ = [
     'get_text_width',
     'repometadata',
-    'reponames',
 ]
 
 
-_repoman = RepositoryManager(config['REPOS_DIR'])
 _fontmeasurer = FontMeasurer(config['BADGE_FONT'], 11)
 
-repometadata = _repoman.GetMetadata(config['REPOSITORIES'])
-reponames = _repoman.GetNames(config['REPOSITORIES'])
+repometadata = RepositoryMetadata()
 
 
 def get_text_width(text):

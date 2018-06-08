@@ -20,7 +20,7 @@ cartesian product into all possible package name pairs.
 		<label for="fromrepo" class="col-sm-2 control-label">From repo</label>
 		<div class="col-sm-8">
 			<select class="form-control" id="fromrepo" name="fromrepo">
-			{% for reponame in reponames %}
+			{% for reponame in repometadata.active_names() %}
 				<option value="{{ reponame }}">{{ repometadata[reponame].desc }}</option>
 			{% endfor %}
 			</select>
@@ -30,7 +30,7 @@ cartesian product into all possible package name pairs.
 		<label for="torepo" class="col-sm-2 control-label">To repo</label>
 		<div class="col-sm-8">
 			<select class="form-control" id="torepo" name="torepo">
-			{% for reponame in reponames %}
+			{% for reponame in repometadata.active_names() %}
 				<option value="{{ reponame }}">{{ repometadata[reponame].desc }}</option>
 			{% endfor %}
 			</select>

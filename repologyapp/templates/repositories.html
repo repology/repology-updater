@@ -7,7 +7,7 @@
 <div class="container">
 
 <div class="row">
-{% for column in reponames|slice(2) %}
+{% for column in repometadata.active_names()|slice(2) %}
 	<div class="col-md-6">
 		<table class="table table-striped">
 			<thead>

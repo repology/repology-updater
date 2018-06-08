@@ -30,7 +30,7 @@ from repology.metapackageproc import PackagesToMetapackages
 def index():
     repostats = [
         repo for repo in get_db().get_active_repositories()
-        if repo['name'] in reponames and repometadata[repo['name']]['type'] == 'repository'
+        if repometadata[repo['name']]['type'] == 'repository'
     ]
 
     top_repos = {

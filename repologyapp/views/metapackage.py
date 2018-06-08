@@ -53,7 +53,7 @@ def metapackage_versions(name):
 
     return flask.render_template(
         'metapackage-versions.html',
-        reponames_absent=[reponame for reponame in reponames if reponame not in packages_by_repo],
+        reponames_absent=[reponame for reponame in repometadata.active_names() if reponame not in packages_by_repo],
         packages_by_repo=packages_by_repo,
         name=name
     )
@@ -67,7 +67,7 @@ def metapackage_packages(name):
         packages_by_repo.setdefault(package.repo, []).append(package)
 
     packages = []
-    for repo in reponames:
+    for repo in repometadata.active_names():
         if repo in packages_by_repo:
             packages.extend(PackagesetSortByNameVersion(packages_by_repo[repo]))
 
@@ -117,7 +117,7 @@ def metapackage_information(name):
         # preserve repos order
         information['repos'] = [
             (reponame, information['repos'][reponame])
-            for reponame in reponames if reponame in information['repos']
+            for reponame in repometadata.active_names() if reponame in information['repos']
         ]
 
     versions = PackagesetAggregateByVersion(packages, {VersionClass.legacy: VersionClass.outdated})
@@ -141,7 +141,7 @@ def metapackage_history(name):
 
         # leave only known repos and ensure correct order
         # also remove LEDE which is too noisy
-        return [name for name in reponames if name in repos and not name.startswith('lede_')]
+        return [name for name in repometadata.active_names() if name in repos and not name.startswith('lede_')]
 
     def prepare_versions(versions):
         if not versions:
@@ -241,7 +241,7 @@ def metapackage_related(name):
 @ViewRegistrar('/metapackage/<name>/badges')
 def metapackage_badges(name):
     repos_present_in = set([package.repo for package in get_db().get_metapackage_packages(name)])
-    repos = [repo for repo in reponames if repo in repos_present_in]
+    repos = [repo for repo in repometadata.active_names() if repo in repos_present_in]
     return flask.render_template('metapackage-badges.html', name=name, repos=repos)
 
 

@@ -31,7 +31,7 @@ def repositories():
 
 @ViewRegistrar('/repository/<repo>')
 def repository(repo):
-    if not repo or repo not in repometadata:
+    if repo not in repometadata.active_names():
         flask.abort(404)
 
     return flask.render_template(
@@ -43,7 +43,7 @@ def repository(repo):
 
 @ViewRegistrar('/repository/<repo>/problems')
 def repository_problems(repo):
-    if not repo or repo not in repometadata:
+    if repo not in repometadata.active_names():
         flask.abort(404)
 
     return flask.render_template('repository-problems.html', repo=repo, problems=get_db().get_repository_problems(repo, config['PROBLEMS_PER_PAGE']))
