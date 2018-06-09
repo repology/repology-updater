@@ -43,4 +43,4 @@ SELECT
 	num_problems,
 	num_maintainers
 FROM repositories
-WHERE num_packages > 0;
+WHERE state = 'active'::repository_state;

@@ -20,8 +20,13 @@
 -- @param many dicts
 --
 --------------------------------------------------------------------------------
+UPDATE repositories
+SET
+	state = 'legacy'::repository_state;
+
 INSERT INTO repositories(
     name,
+	state,
 
     first_seen,
     last_seen,
@@ -37,6 +42,7 @@ INSERT INTO repositories(
     packagelinks
 ) VALUES (
 	%(name)s,
+	'new'::repository_state,
 
 	now(),
 	now(),
@@ -53,6 +59,7 @@ INSERT INTO repositories(
 )
 ON CONFLICT (name)
 DO UPDATE SET
+	state = 'active'::repository_state,
 	sortname = EXCLUDED.sortname,
 	"type" = EXCLUDED."type",
 	"desc" = EXCLUDED."desc",
