@@ -51,7 +51,7 @@ removed from all repositories.</p>
 				, up to date in
 
 				{% for repo in entry.data.actual_repos %}
-					{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+					{% if loop.index0 %}, {% endif %}{{ macros.repository_link(repo) }}
 				{%- endfor %}
 			{% endif %}
 
@@ -59,7 +59,7 @@ removed from all repositories.</p>
 				, {% if entry.data.actual_repos %}also {% endif %}present in
 
 				{% for repo in entry.data.old_repos %}
-					{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+					{% if loop.index0 %}, {% endif %}{{ macros.repository_link(repo) }}
 				{%- endfor %}
 			{% endif %}
 			</b>
@@ -76,7 +76,7 @@ removed from all repositories.</p>
 					by
 
 					{% for repo in entry.data.repos %}
-						{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+						{% if loop.index0 %}, {% endif %}{{ macros.repository_link(repo) }}
 					{%- endfor %}
 				{% endif %}
 			{%- else -%}
@@ -90,7 +90,7 @@ removed from all repositories.</p>
 			</b>
 		{%- elif entry.type == 'catch_up' -%}
 			{% for repo in entry.data.repos -%}
-				{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+				{% if loop.index0 %}, {% endif %}{{ macros.repository_link(repo) }}
 			{%- endfor %}
 
 			{% if entry.data.repos|length == 1 %}has{% else %}have{% endif %} caught up with the {{ entry.data.branch }} version
@@ -104,7 +104,7 @@ removed from all repositories.</p>
 				added to
 
 				{% for repo in entry.data.repos_added %}
-					{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+					{% if loop.index0 %}, {% endif %}{{ macros.repository_link(repo) }}
 				{%- endfor %}
 			{% endif %}
 
@@ -114,7 +114,7 @@ removed from all repositories.</p>
 				removed from
 
 				{% for repo in entry.data.repos_removed %}
-					{% if loop.index0 %}, {% endif %}<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+					{% if loop.index0 %}, {% endif %}{{ macros.repository_link(repo) }}
 				{%- endfor %}
 			{% endif %}
 		{%- elif entry.type == 'history_end' -%}
@@ -122,7 +122,7 @@ removed from all repositories.</p>
 			History ends, there are no longer packages for this project in any repositories known to repology
 
 			{%- if entry.data.last_repo -%}
-				, last repository was <a href="{{ url_for('repository', repo=entry.data.last_repo) }}">{{ repometadata[entry.data.last_repo].desc }}</a>
+				, last repository was {{ macros.repository_link(entry.data.last_repo) }}
 			{% endif %}
 			</b>
 		{%- endif -%}

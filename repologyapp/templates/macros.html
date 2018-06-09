@@ -6,6 +6,14 @@
 	<time class="tzfix_time" datetime="{{ datetime.astimezone(tz).isoformat('T', 'minutes') }}">{{ datetime.astimezone(tz).strftime('%Y-%m-%d %H:%M') }}</time>
 {%- endmacro -%}
 
+{%- macro repository_link(repo) -%}
+{%- if repo in repometadata.active_names() -%}
+	<a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a>
+{%- else -%}
+	<span class="legacy-repository">{{ repometadata[repo].desc }}</span>
+{%- endif -%}
+{%- endmacro -%}
+
 {%- macro format_time_interval(value) -%}
 	{%- with seconds = value.total_seconds() | int -%}
 	{%- if seconds <= 1 -%}

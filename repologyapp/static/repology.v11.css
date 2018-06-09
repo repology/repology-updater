@@ -257,6 +257,11 @@
 	width: 1%;
 }
 
+.legacy-repository {
+	font-weight: bold;
+	text-decoration: line-through;
+}
+
 /* XXX: check if bootstrap h1.pageheader margin is always 40px */
 .pageheader-right {
 	float: right;
