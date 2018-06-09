@@ -119,8 +119,8 @@ BEGIN
 
 	-- repos_update
 	IF (OLD.all_repos != NEW.all_repos) THEN
-		repos_added := (SELECT array(SELECT unnest(NEW.all_repos) EXCEPT SELECT unnest(OLD.all_repos)));
-		repos_removed := (SELECT array(SELECT unnest(OLD.all_repos) EXCEPT SELECT unnest(NEW.all_repos)));
+		repos_added := (SELECT array((SELECT unnest(NEW.all_repos) EXCEPT SELECT unnest(OLD.all_repos)) INTERSECT SELECT name FROM repositories WHERE state = 'active'));
+		repos_removed := (SELECT array((SELECT unnest(OLD.all_repos) EXCEPT SELECT unnest(NEW.all_repos)) INTERSECT SELECT name FROM repositories WHERE state = 'active'));
 
 		PERFORM metapackage_create_event(NEW.effname, 'repos_update'::metapackage_event_type,
 			jsonb_build_object(
@@ -149,7 +149,7 @@ BEGIN
 			)
 		);
 	ELSE
-		catch_up := (SELECT array(SELECT unnest(NEW.devel_repos) EXCEPT SELECT unnest(OLD.devel_repos)));
+		catch_up := (SELECT array((SELECT unnest(NEW.devel_repos) EXCEPT SELECT unnest(OLD.devel_repos)) INTERSECT SELECT name FROM repositories WHERE state = 'active'));
 		IF (catch_up != '{}') THEN
 			PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
 				jsonb_build_object(
@@ -188,7 +188,7 @@ BEGIN
 			)
 		);
 	ELSE
-		catch_up := (SELECT array(SELECT unnest(NEW.newest_repos) EXCEPT SELECT unnest(OLD.newest_repos)));
+		catch_up := (SELECT array((SELECT unnest(NEW.newest_repos) EXCEPT SELECT unnest(OLD.newest_repos)) INTERSECT SELECT name FROM repositories WHERE state = 'active'));
 		IF (catch_up != '{}') THEN
 			PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
 				jsonb_build_object(
