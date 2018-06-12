@@ -19,5 +19,9 @@
 --
 --------------------------------------------------------------------------------
 
+UPDATE repositories
+SET
+	state = 'legacy'::repository_state;
+
 DELETE
 FROM packages;

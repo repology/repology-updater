@@ -20,10 +20,6 @@
 -- @param many dicts
 --
 --------------------------------------------------------------------------------
-UPDATE repositories
-SET
-	state = 'legacy'::repository_state;
-
 INSERT INTO repositories(
     name,
 	state,

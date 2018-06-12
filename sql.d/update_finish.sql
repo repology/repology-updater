@@ -707,3 +707,12 @@ FROM (
 SELECT setval(pg_get_serial_sequence('metapackages', 'id'), (select max(id) + 1 FROM metapackages));
 SELECT setval(pg_get_serial_sequence('repositories', 'id'), (select max(id) + 1 FROM repositories));
 SELECT setval(pg_get_serial_sequence('maintainers', 'id'), (select max(id) + 1 FROM maintainers));
+
+--------------------------------------------------------------------------------
+-- End of update: activate newly added repositories
+--------------------------------------------------------------------------------
+UPDATE repositories
+SET
+	state = 'active'::repository_state
+WHERE
+	state = 'new'::repository_state;
