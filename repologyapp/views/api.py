@@ -20,7 +20,6 @@ import json
 import flask
 
 from repologyapp.db import get_db
-from repologyapp.globals import repometadata
 from repologyapp.metapackages import MetapackagesFilterInfo
 from repologyapp.view_registry import ViewRegistrar
 

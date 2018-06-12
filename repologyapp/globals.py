@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import flask
-
 from repologyapp.fontmeasurer import FontMeasurer
 from repologyapp.repometadata import RepositoryMetadata
 
