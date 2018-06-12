@@ -25,7 +25,7 @@ __all__ = [
 
 
 class RepositoryMetadata:
-    AUTOREFRESH_PERIOD = datetime.timedelta(seconds=60*60)
+    AUTOREFRESH_PERIOD = datetime.timedelta(seconds=3600)
 
     def __init__(self):
         self.repos = []
@@ -34,17 +34,17 @@ class RepositoryMetadata:
 
     def update(self):
         self.repos = get_db().get_repositories_metadata()  # already sorted by sortname
-        self.by_name = { repo['name']: repo for repo in self.repos }
+        self.by_name = {repo['name']: repo for repo in self.repos}
         self.update_time = datetime.datetime.now()
 
     def is_stale(self):
         return self.update_time is None or datetime.datetime.now() - self.update_time > RepositoryMetadata.AUTOREFRESH_PERIOD
 
     def __getitem__(self, reponame):
-        if not reponame in self.by_name or self.is_stale():
+        if reponame not in self.by_name or self.is_stale():
             self.update()
 
-            if not reponame in self.by_name:
+            if reponame not in self.by_name:
                 raise KeyError('No metadata for repository ' + reponame)
 
         return self.by_name[reponame]
