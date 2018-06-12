@@ -1,6 +1,8 @@
 ###########################################################################
 # Devuan
 ###########################################################################
+#XXX: add oldstable
+
 - name: devuan_stable
   type: repository
   desc: Devuan Stable
@@ -11,7 +13,7 @@
     - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
       fetcher: File
       parser: DebianSources
-      url: 'http://auto.mirror.devuan.org/merged/dists/{source}/source/Sources.gz'
+      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -29,7 +31,7 @@
     - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
       fetcher: File
       parser: DebianSources
-      url: 'http://auto.mirror.devuan.org/merged/dists/{source}/source/Sources.gz'
+      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -47,7 +49,7 @@
     - name: [ unstable/main, unstable/contrib, unstable/non-free ]
       fetcher: File
       parser: DebianSources
-      url: 'http://auto.mirror.devuan.org/merged/dists/{source}/source/Sources.gz'
+      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
