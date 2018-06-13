@@ -1,5 +1,7 @@
 ###########################################################################
 # Linux Mint
+#
+# See https://www.linuxmint.com/download_all.php
 ###########################################################################
 - name: linux_mint_17
   type: repository
@@ -138,6 +140,24 @@
       fetcher: File
       parser: DebianSources
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sylvia/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
+
+- name: linux_mint_19
+  type: repository
+  desc: Linux Mint 19
+  family: debuntu
+  color: '87cf3e'
+  minpackages: 100
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tara/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
