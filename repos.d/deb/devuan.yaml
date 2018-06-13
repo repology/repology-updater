@@ -60,7 +60,7 @@
   desc: Devuan Unstable
   family: debuntu
   color: '88839c'
-  minpackages: 32000
+  minpackages: 25000
   sources:
     - name: [ unstable/main, unstable/contrib, unstable/non-free ]
       fetcher: File
