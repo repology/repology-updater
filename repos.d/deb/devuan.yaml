@@ -1,7 +1,23 @@
 ###########################################################################
 # Devuan
 ###########################################################################
-#XXX: add oldstable
+- name: devuan_oldstable
+  type: repository
+  desc: Devuan Oldstable
+  family: debuntu
+  color: '88839c'
+  minpackages: 20000
+  sources:
+    - name: [ oldstable/main, oldstable/contrib, oldstable/non-free, oldstable-updates/main, oldstable-updates/contrib, oldstable-updates/non-free ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Devuan home
+      url: https://devuan.org/
+  tags: [ all, production, devuan ]
 
 - name: devuan_stable
   type: repository
