@@ -2,6 +2,7 @@
 # openSUSE
 ###########################################################################
 - name: opensuse_leap_42_2
+  sortname: opensuse_leap_13_0
   type: repository
   desc: openSUSE Leap 42.2
   family: opensuse
@@ -44,6 +45,7 @@
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_42_3
+  sortname: opensuse_leap_14_0
   type: repository
   desc: openSUSE Leap 42.3
   family: opensuse
@@ -86,7 +88,6 @@
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_0
-  sortname: opensuse_leap_42_4
   type: repository
   desc: openSUSE Leap 15.0
   family: opensuse
