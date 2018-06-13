@@ -99,13 +99,12 @@
       url: http://download.opensuse.org/source/distribution/leap/15.0/repo/oss/
       subrepo: main/oss
       allowed_archs: [ src ]
-#      XXX: non-oss is empty
-#    - name: non-oss
-#      fetcher: Repodata
-#      parser: Repodata
-#      url: http://download.opensuse.org/source/distribution/leap/15.0/repo/non-oss/
-#      subrepo: main/non-oss
-#      allowed_archs: [ src ]
+    - name: non-oss
+      fetcher: Repodata
+      parser: Repodata
+      url: http://download.opensuse.org/source/distribution/leap/15.0/repo/non-oss/
+      subrepo: main/non-oss
+      allowed_archs: [ src ]
     - name: updates-oss
       fetcher: Repodata
       parser: Repodata
