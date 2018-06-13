@@ -101,7 +101,7 @@ class QueryMetadata:
         argdefault = argdefault[0] if argdefault else None
 
         if not argname:
-            raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad arguments'.format(string, argname))
+            raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad arguments'.format(string))
 
         self.args.append(argname)
 
