@@ -5,7 +5,7 @@
   type: repository
   desc: Sabayon
   family: gentoo
-  minpackages: 800
+  minpackages: 500
   sources:
     - name: sabayon
       fetcher: Git
