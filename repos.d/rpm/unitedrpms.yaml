@@ -1,9 +1,9 @@
 ###########################################################################
 # UnitedRPMs
 ###########################################################################
-- name: unitedrpms_28
+- name: unitedrpms_26
   type: repository
-  desc: UnitedRPMs Fedora 28
+  desc: UnitedRPMs Fedora 26
   family: fedora
   color: '261d22'
   minpackages: 100
@@ -11,7 +11,7 @@
     - name: repo
       fetcher: Repodata
       parser: Repodata
-      url: https://downloads.sourceforge.net/project/unitedrpms/28/srpm/
+      url: https://downloads.sourceforge.net/project/unitedrpms/26/srpm/
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
@@ -39,9 +39,9 @@
       url: https://github.com/UnitedRPMs
   tags: [ all, production, unitedrpms, rpm ]
 
-- name: unitedrpms_26
+- name: unitedrpms_28
   type: repository
-  desc: UnitedRPMs Fedora 26
+  desc: UnitedRPMs Fedora 28
   family: fedora
   color: '261d22'
   minpackages: 100
@@ -49,7 +49,7 @@
     - name: repo
       fetcher: Repodata
       parser: Repodata
-      url: https://downloads.sourceforge.net/project/unitedrpms/26/srpm/
+      url: https://downloads.sourceforge.net/project/unitedrpms/28/srpm/
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
