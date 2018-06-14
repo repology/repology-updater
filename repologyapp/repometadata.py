@@ -25,7 +25,7 @@ __all__ = [
 
 
 class RepositoryMetadata:
-    AUTOREFRESH_PERIOD = datetime.timedelta(seconds=3600)
+    AUTOREFRESH_PERIOD = datetime.timedelta(seconds=300)
 
     def __init__(self):
         self.repos = []
