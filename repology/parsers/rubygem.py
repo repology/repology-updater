@@ -25,10 +25,10 @@ class RubyGemParser():
         pass
 
     def force_decode(self, var):
-        if type(var) is not str:
-            return str(var, 'UTF-8')
-        else:
+        if isinstance(var, str):
             return var
+        else:
+            return str(var, 'UTF-8')
 
     def Parse(self, path):
         packages = {}
