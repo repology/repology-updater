@@ -80,6 +80,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
+-- Returns repositories which should be added to oldrepos to get newrepos and filters active ones
+CREATE OR REPLACE FUNCTION get_added_active_repos(oldrepos text[], newrepos text[]) RETURNS text[] AS $$
+BEGIN
+	RETURN array((SELECT unnest(newrepos) EXCEPT SELECT unnest(oldrepos)) INTERSECT SELECT name FROM repositories WHERE state = 'active');
+END;
+$$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
+
 -- Creates events on metapackage version state changes
 CREATE OR REPLACE FUNCTION metapackage_create_event(effname text, type metapackage_event_type, data jsonb) RETURNS void AS $$
 BEGIN
@@ -118,10 +125,9 @@ BEGIN
 	END IF;
 
 	-- repos_update
-	IF (OLD.all_repos != NEW.all_repos) THEN
-		repos_added := (SELECT array((SELECT unnest(NEW.all_repos) EXCEPT SELECT unnest(OLD.all_repos)) INTERSECT SELECT name FROM repositories WHERE state = 'active'));
-		repos_removed := (SELECT array((SELECT unnest(OLD.all_repos) EXCEPT SELECT unnest(NEW.all_repos)) INTERSECT SELECT name FROM repositories WHERE state = 'active'));
-
+	repos_added := (SELECT get_added_active_repos(OLD.all_repos, NEW.all_repos));
+	repos_removed := (SELECT get_added_active_repos(NEW.all_repos, OLD.all_repos));
+	IF (repos_added != repos_removed) THEN
 		PERFORM metapackage_create_event(NEW.effname, 'repos_update'::metapackage_event_type,
 			jsonb_build_object(
 				'repos_added', repos_added,
@@ -149,7 +155,7 @@ BEGIN
 			)
 		);
 	ELSE
-		catch_up := (SELECT array((SELECT unnest(NEW.devel_repos) EXCEPT SELECT unnest(OLD.devel_repos)) INTERSECT SELECT name FROM repositories WHERE state = 'active'));
+		catch_up := (SELECT get_added_active_repos(OLD.devel_repos, NEW.devel_repos));
 		IF (catch_up != '{}') THEN
 			PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
 				jsonb_build_object(
@@ -188,7 +194,7 @@ BEGIN
 			)
 		);
 	ELSE
-		catch_up := (SELECT array((SELECT unnest(NEW.newest_repos) EXCEPT SELECT unnest(OLD.newest_repos)) INTERSECT SELECT name FROM repositories WHERE state = 'active'));
+		catch_up := (SELECT get_added_active_repos(OLD.newest_repos, NEW.newest_repos));
 		IF (catch_up != '{}') THEN
 			PERFORM metapackage_create_event(NEW.effname, 'catch_up'::metapackage_event_type,
 				jsonb_build_object(
