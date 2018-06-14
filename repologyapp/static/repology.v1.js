@@ -23,7 +23,7 @@ function tzfix() {
 	$(".tzfix_time").each(function() {
 		$(this).text(
 			moment($(this).attr('datetime'))
-				.format('YYYY-MM-DD HH:mm');
+				.format('YYYY-MM-DD HH:mm')
 		)
 	});
 }
