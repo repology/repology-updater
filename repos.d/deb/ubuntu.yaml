@@ -316,7 +316,7 @@
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
 
-- name: ubuntu_18_10 backports
+- name: ubuntu_18_10_backports
   type: repository
   desc: Ubuntu 18.10 Backports
   family: debuntu
