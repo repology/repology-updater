@@ -175,3 +175,59 @@
     - desc: Package builds on launchpad
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
+
+- name: ubuntu_18_10
+  type: repository
+  desc: Ubuntu 18.10
+  family: debuntu
+  color: 'e95420'
+  minpackages: 29000
+  sources:
+    - name: [ cosmic/main, cosmic/multiverse, cosmic/restricted, cosmic/universe, cosmic-updates/main, cosmic-updates/multiverse, cosmic-updates/restricted, cosmic-updates/universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in cosmic
+      url: https://packages.ubuntu.com/cosmic/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'https://packages.ubuntu.com/source/cosmic/{name}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_18_10_proposed
+  type: repository
+  desc: Ubuntu 18.10 Proposed
+  family: debuntu
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ cosmic-proposed/main, cosmic-proposed/multiverse, cosmic-proposed/restricted, cosmic-proposed/universe ]
+      fetcher: File
+      parser: DebianSources
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in cosmic
+      url: https://packages.ubuntu.com/cosmic/
+  packagelinks:
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
