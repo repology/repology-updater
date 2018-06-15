@@ -181,6 +181,7 @@
   desc: Ubuntu 18.10
   family: debuntu
   color: 'e95420'
+  valid_till: 2019-07-01
   minpackages: 29000
   sources:
     - name: [ cosmic/main, cosmic/multiverse, cosmic/restricted, cosmic/universe, cosmic-updates/main, cosmic-updates/multiverse, cosmic-updates/restricted, cosmic-updates/universe ]
