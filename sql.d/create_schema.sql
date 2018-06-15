@@ -250,7 +250,13 @@ CREATE OR REPLACE FUNCTION maintainer_repo_metapackages_create_events_trigger() 
 BEGIN
 	-- remove
 	IF (TG_OP = 'DELETE') THEN
-		PERFORM maintainer_repo_metapackages_create_event(OLD.maintainer_id, OLD.repository_id, OLD.metapackage_id, 'removed'::maintainer_repo_metapackages_event_type, '{}'::jsonb);
+		IF (EXISTS (SELECT * FROM repositories WHERE id = OLD.repository_id AND state = 'active'::repository_state)) THEN
+			PERFORM maintainer_repo_metapackages_create_event(OLD.maintainer_id, OLD.repository_id, OLD.metapackage_id, 'removed'::maintainer_repo_metapackages_event_type, '{}'::jsonb);
+		END IF;
+		RETURN NULL;
+	END IF;
+
+	IF (NOT EXISTS (SELECT * FROM repositories WHERE id = NEW.repository_id AND state = 'active'::repository_state)) THEN
 		RETURN NULL;
 	END IF;
 
