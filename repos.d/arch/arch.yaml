@@ -19,9 +19,9 @@
     - desc: Arch Linux Packages
       url: https://www.archlinux.org/packages/
   packagelinks:
-    # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
     - desc: Package details on www.archlinux.org
       url: 'https://www.archlinux.org/packages/?q={name}'
+    # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
     - desc: Git repository
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{archbase}'
     - desc: PKGBUILD
@@ -48,6 +48,8 @@
     - desc: Arch Linux Packages
       url: https://www.archlinux.org/packages/
   packagelinks:
+    - desc: Package details on www.archlinux.org
+      url: 'https://www.archlinux.org/packages/?q={name}'
     # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
     - desc: Git repository
       url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{archbase}'
