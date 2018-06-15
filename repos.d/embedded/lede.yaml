@@ -1,5 +1,9 @@
 ###########################################################################
-# OpenWRT
+# LEDE
+#
+# XXX: these are disabled because of misbehavior:
+# packages constantly bounce in and out of repositories,
+# polluting logs and firing package count thresholds
 ###########################################################################
 - name: lede_trunk_x86_64
   type: repository
@@ -18,7 +22,7 @@
   repolinks:
     - desc: LEDE Project home
       url: https://lede-project.org/
-  tags: [ all, production, lede ]
+  tags: [ all, lede ]
 
 - name: lede_17_01_x86_64
   type: repository
@@ -37,7 +41,7 @@
   repolinks:
     - desc: LEDE Project home
       url: https://lede-project.org/
-  tags: [ all, production, lede ]
+  tags: [ all, lede ]
 
 # let's just pick some most popular non-x86 trunk repos based on http://downloads.lede-project.org/stats/
 - name: lede_trunk_aarch64_generic
@@ -57,7 +61,7 @@
   repolinks:
     - desc: LEDE Project home
       url: https://lede-project.org/
-  tags: [ all, production, lede ]
+  tags: [ all, lede ]
 
 - name: lede_trunk_arm_cortex_a9_vfpv3
   type: repository
@@ -76,7 +80,7 @@
   repolinks:
     - desc: LEDE Project home
       url: https://lede-project.org/
-  tags: [ all, production, lede ]
+  tags: [ all, lede ]
 
 - name: lede_trunk_arm_xscale
   type: repository
@@ -95,7 +99,7 @@
   repolinks:
     - desc: LEDE Project home
       url: https://lede-project.org/
-  tags: [ all, production, lede ]
+  tags: [ all, lede ]
 
 - name: lede_trunk_mips_24kc
   type: repository
@@ -114,4 +118,4 @@
   repolinks:
     - desc: LEDE Project home
       url: https://lede-project.org/
-  tags: [ all, production, lede ]
+  tags: [ all, lede ]
