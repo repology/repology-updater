@@ -60,6 +60,9 @@ script:
   # fill database with test data
   - ./repology-update.py --parse --initdb --database --postupdate --no-safety-checks
 
+  # and once again to activate new repositories
+  - ./repology-update.py --parse --database --postupdate --no-safety-checks
+
   # smoke test bit
   - ./repology-dump.py --help
 

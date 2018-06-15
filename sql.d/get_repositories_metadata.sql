@@ -33,6 +33,6 @@ SELECT
 	repolinks,
 	packagelinks,
 
-	num_packages > 0 AS active
+	state = 'active' AS active
 FROM repositories
 ORDER BY sortname;

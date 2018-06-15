@@ -22,7 +22,6 @@
 --------------------------------------------------------------------------------
 UPDATE repositories
 SET
-	last_update = now(),
-	state = 'active'
+	last_update = now()
 WHERE
 	name = %s;
