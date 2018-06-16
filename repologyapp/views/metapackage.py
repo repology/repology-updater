@@ -140,8 +140,7 @@ def metapackage_history(name):
         repos = set(repos)
 
         # ensure correct ordering
-        # also remove LEDE which is too noisy
-        return [name for name in repometadata.all_names() if name in repos and not name.startswith('lede_')]
+        return [name for name in repometadata.all_names() if name in repos]
 
     def prepare_versions(versions):
         if not versions:
