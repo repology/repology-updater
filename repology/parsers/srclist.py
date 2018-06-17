@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,36 +15,33 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import subprocess
+import rpm
 
-from repology.config import config
 from repology.package import Package
 from repology.util import GetMaintainers
 
 
 class SrcListParser():
     def __init__(self):
-        self.helperpath = os.path.join(config['HELPERS_DIR'], 'rpmcat', 'rpmcat')
-
-        if not os.path.exists(self.helperpath):
-            raise RuntimeError('{} does not exist, please run `make\' in project root directory to build it'.format(self.helperpath))
+        pass
 
     def Parse(self, path):
         result = []
 
-        with subprocess.Popen([self.helperpath, path], errors='ignore', stdout=subprocess.PIPE, universal_newlines=True) as proc:
-            for line in proc.stdout:
-                name, version, release, packager, group, summary = line.strip().split('|', 5)
+        for header in rpm.readHeaderListFromFile(path):
+            fields = {
+                key: str(header[key], 'utf-8')
+                for key in ['name', 'version', 'release', 'packager', 'group', 'summary']
+            }
 
-                pkg = Package()
+            pkg = Package()
 
-                pkg.name = name
-                pkg.version = version  # XXX: handle release
-                pkg.maintainers = GetMaintainers(packager)  # XXX: may have multiple maintainers
-                pkg.category = group
-                pkg.comment = summary
+            pkg.name = fields['name']
+            pkg.version = fields['version']  # XXX: handle release
+            pkg.maintainers = GetMaintainers(fields['packager'])  # XXX: may have multiple maintainers
+            pkg.category = fields['group']
+            pkg.comment = fields['summary']
 
-                result.append(pkg)
+            result.append(pkg)
 
         return result

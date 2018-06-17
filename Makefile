@@ -1,21 +1,11 @@
 FLAKE8?=	flake8
 
-CC?=		gcc
-CFLAGS?=	-O3
-CFLAGS+=	-Wall -Wextra
-
-CPPFLAGS+=	`pkg-config --cflags rpm`
-LDFLAGS+=	`pkg-config --libs rpm`
-
 STATICDIR=	repologyapp/static
 
-all: helpers/rpmcat/rpmcat gzip-static
+all: gzip-static
 
 gzip-static:
 	gzip -9 -f -k -v ${STATICDIR}/*.css ${STATICDIR}/*.js ${STATICDIR}/*.ico ${STATICDIR}/*.svg
-
-helpers/rpmcat/rpmcat: helpers/rpmcat/rpmcat.c
-	${CC} helpers/rpmcat/rpmcat.c -o helpers/rpmcat/rpmcat ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}
 
 clean:
 	rm -f helpers/rpmcat/rpmcat

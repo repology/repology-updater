@@ -8,6 +8,7 @@ addons:
       - postgresql-client-10
       - postgresql-server-dev-10
       - librpm-dev
+      - python3-rpm
 env:
   global:
     - PGPORT=5433
@@ -48,7 +49,7 @@ before_script:
   - echo "BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'" >> repology-test.conf.default
   - sed -i -e 's|dbname=repology_test|& port=5433 host=localhost|' repology-test.conf.default
 script:
-  # test building C utils
+  # test all target
   - make
 
   # check yaml schemas

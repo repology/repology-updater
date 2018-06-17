@@ -15,10 +15,10 @@ Needed for fetching/parsing specific repository data:
 
 - Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
 - Python module [lxml](http://lxml.de/)
+- Python module [rpm](http://rpm.org/) (comes with RPM package manager)
 - [wget](https://www.gnu.org/software/wget/)
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
-- [librpm](http://www.rpm.org/) and [pkg-config](https://www.freedesktop.org/wiki/Software/pkg-config/)
 - [tclsh](https://www.tcl.tk/) and [tcllib](https://www.tcl.tk/)
 
 Needed for web-application:
@@ -40,13 +40,6 @@ Optional, for python code linding:
 - Python module [flake8-builtins](https://pypi.python.org/pypi/flake8-builtins)
 - Python module [flake8-import-order](https://pypi.python.org/pypi/flake8-import-order)
 - Python module [flake8-quotes](https://pypi.python.org/pypi/flake8-quotes)
-
-## Building
-
-Though repology is mostly a Python project, it contains C utility to
-read binary rpm format, which is used for parsing ALT Sisyphus
-repository. To build the utility, run ```make``` in project root.
-You need librpm and pkg-config.
 
 ## Usage
 
