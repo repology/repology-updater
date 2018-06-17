@@ -87,7 +87,9 @@
 			</td>
 
 			<td class="text-center version-cell version-big version-newest">
-				{{- macros.value_with_delta(repostat.num_metapackages_newest, old_repostat.num_metapackages_newest) -}}
+				<a href="{{ url_for('metapackages', inrepo=repostat.name, newest=1) }}">
+					{{- macros.value_with_delta(repostat.num_metapackages_newest, old_repostat.num_metapackages_newest) -}}
+				</a>
 			</td>
 			<td class="text-center version-cell version-big version-newest">
 				{{- macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages_newest + repostat.num_metapackages_outdated) -}}
