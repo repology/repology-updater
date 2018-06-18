@@ -7,6 +7,13 @@
 <div class="container">
 
 <article>
+	<h3 id="2018-06-17">2018-06-17</h3>
+	<ul>
+		<li>Added <a href="{{ url_for('repository', repo='openpkg_current') }}">OpenPKG</a> repository.</li>
+	</ul>
+</article>
+
+<article>
 	<h3 id="2018-05-04">2018-05-04</h3>
 	<ul>
 		<li>Feeds of package state changes (e.g. when package is updated or gets oudated) are finally available. Both <a href="{{ url_for('maintainer_repo_feed', maintainer='amdmi3@freebsd.org', repo='freebsd') }}">HTML</a> and <a href="{{ url_for('maintainer_repo_feed_atom', maintainer='amdmi3@freebsd.org', repo='freebsd') }}">Atom</a> formats. See maintainer pages for links to these feeds.</li>
