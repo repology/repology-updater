@@ -262,6 +262,10 @@
 	text-decoration: line-through;
 }
 
+.unsupported-repository {
+	text-decoration: line-through;
+}
+
 /* XXX: check if bootstrap h1.pageheader margin is always 40px */
 .pageheader-right {
 	float: right;
