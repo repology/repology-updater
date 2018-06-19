@@ -6,7 +6,7 @@
   desc: Exherbo
   family: exherbo
   color: 'a1da91'
-  minpackages: 0  # XXX
+  minpackages: 5000
   sources:
     # There are also [ gstreamer, mozilla ], but they are deprecated and empty
     - name: [ arbor, bikeshed, desktop, emacs, enlightenment, games, gnome, hardware, haskell, java, kde, lisp, media, mono, net, office, perl, php, python, ruby, rust, scientific, selinux, tcl, texlive, vim, virtualization, x11, xfce ]
