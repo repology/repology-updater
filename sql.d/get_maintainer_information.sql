@@ -38,6 +38,10 @@ SELECT
 	num_metapackages_outdated,
 	repository_package_counts,
 	repository_metapackage_counts,
-	category_metapackage_counts
+	category_metapackage_counts,
+	first_seen,
+	last_seen,
+	now() - first_seen AS first_seen_ago,
+	now() - last_seen AS last_seen_ago
 FROM maintainers
 WHERE maintainer = %(maintainer)s;

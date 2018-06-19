@@ -70,8 +70,8 @@ def maintainer(maintainer):
     similar_maintainers = get_db().get_maintainer_similar_maintainers(maintainer, 50)
     numproblems = get_db().get_maintainer_problems_count(maintainer)
 
-    if not maintainer_info:
-        return (flask.render_template('maintainer-404.html', maintainer=maintainer), 404)
+    if not maintainer_info or maintainer_info['num_packages'] == 0:
+        return (flask.render_template('maintainer-404.html', maintainer=maintainer, maintainer_info=maintainer_info), 404)
 
     for key in ('repository_package_counts', 'repository_metapackage_counts', 'category_metapackage_counts'):
         if maintainer_info[key]:
