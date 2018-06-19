@@ -8,10 +8,7 @@ gzip-static:
 	gzip -9 -f -k -v ${STATICDIR}/*.css ${STATICDIR}/*.js ${STATICDIR}/*.ico ${STATICDIR}/*.svg
 
 clean:
-	rm -f helpers/rpmcat/rpmcat
 	rm -f ${STATICDIR}/*.gz
-	rm -rf build
-	rm -f repology/version.so
 
 test::
 	python3 -m unittest discover
