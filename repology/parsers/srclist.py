@@ -22,15 +22,15 @@ from repology.util import GetMaintainers
 
 
 class SrcListParser():
-    def __init__(self):
-        pass
+    def __init__(self, encoding='utf-8'):
+        self.encoding = encoding
 
     def Parse(self, path):
         result = []
 
         for header in rpm.readHeaderListFromFile(path):
             fields = {
-                key: str(header[key], 'utf-8')
+                key: str(header[key], self.encoding)
                 for key in ['name', 'version', 'release', 'packager', 'group', 'summary']
             }
 

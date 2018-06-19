@@ -124,6 +124,9 @@ schemas = {
                     # arch parser
                     'allowed_archs': [str],
 
+                    # srclist parser
+                    'encoding': Any('utf-8', 'cp1251'),
+
                     # file fetcher
                     'compression': Any('xz', 'bz2', 'gz'),
                     'post': {str: str},

@@ -15,6 +15,7 @@
       #url: https://ftp.heanet.ie/mirrors/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
       url: http://ftp.nluug.nl/pub/os/Linux/distr/pclinuxos/pclinuxos/srpms/base/srclist.pclos.bz2
       compression: bz2
+      encoding: 'cp1251'
   repolinks:
     - desc: PCLinuxOS home
       url: http://www.pclinuxos.com/
