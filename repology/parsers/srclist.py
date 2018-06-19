@@ -30,7 +30,7 @@ class SrcListParser():
 
         for header in rpm.readHeaderListFromFile(path):
             fields = {
-                key: str(header[key], self.encoding)
+                key: str(header[key], self.encoding) if header[key] is not None else None
                 for key in ['name', 'version', 'release', 'packager', 'group', 'summary']
             }
 
@@ -38,7 +38,10 @@ class SrcListParser():
 
             pkg.name = fields['name']
             pkg.version = fields['version']  # XXX: handle release
-            pkg.maintainers = GetMaintainers(fields['packager'])  # XXX: may have multiple maintainers
+
+            if fields['packager']:
+                pkg.maintainers = GetMaintainers(fields['packager'])  # XXX: may have multiple maintainers
+
             pkg.category = fields['group']
             pkg.comment = fields['summary']
 
