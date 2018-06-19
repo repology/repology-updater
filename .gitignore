@@ -1,7 +1,5 @@
 __pycache__
 _state
-build
-helpers/rpmcat/rpmcat
 repology.conf
 repologyapp/static/*.gz
 rules.d
