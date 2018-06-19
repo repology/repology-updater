@@ -71,7 +71,7 @@ def maintainer(maintainer):
     numproblems = get_db().get_maintainer_problems_count(maintainer)
 
     if not maintainer_info:
-        flask.abort(404)
+        return (flask.render_template('maintainer-404.html', maintainer=maintainer), 404)
 
     for key in ('repository_package_counts', 'repository_metapackage_counts', 'category_metapackage_counts'):
         if maintainer_info[key]:

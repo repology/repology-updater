@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block extrameta %}
+	<meta http-equiv="robots" content="noindex">
+{% endblock %}
+
+{% block title %}Repology: unknown maintainer {{ maintainer }}{% endblock %}
+{% block header %}Unknown maintainer <strong>{{ maintainer }}</strong>{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<div class="alert alert-warning" role="alert">
+	<p>Sorry, but Repology doesn't know anything about <strong>{{ maintainer }}</strong>.</p>
+	<p>Some of the reasons which may have caused this:</p>
+	<ul>
+		<li>The maintainer no longer maintains any packages.</li>
+		<li>Repology does not support any repositories this maintainer is active in. Check <a href="{{ url_for('statistics') }}">the list</a>.</li>
+		<li>The maintainer identifier (email) is misspelled, or have changed. Try <a href="{{ url_for('maintainers') }}">searching</a>. It is quite common for only domain part to change.</li>
+		<li>Repology is unable to parse maintainer information for repositories this maintainer is active in. Check <a href="https://github.com/repology/repology#repository-support">repository support table</a>. This can be fixed if repositories in question setup a more complete dump of information on their packages.</li>
+	</ul>
+</div>
+
+</div>
+{% endblock %}
