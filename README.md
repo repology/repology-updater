@@ -50,6 +50,7 @@ version are always parsed.
 | CRUX                             | ✔       | ✔       |       | ✔     |         |          |
 | Debian, Ubuntu, other deb-based  |         | ✔       | ✔     | ✔     |         |          |
 | DistroWatch.com                  | ✔       |         |       | ✔     |         | ✔        |
+| Exherbo                          |         |         | ✔     |       |         |          |
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
 | FreeBSD                          | ✔       | ✔       | ✔     | ✔     |         |          |
 | freshcode.club                   | ✔       |         |       | ✔     | ✔       |          |

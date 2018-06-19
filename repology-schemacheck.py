@@ -39,6 +39,7 @@ families = [
     'crux',
     'debuntu',
     'distrowatch',
+    'exherbo',
     'fdroid',
     'fedora',
     'freebsd',

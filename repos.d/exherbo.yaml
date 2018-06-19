@@ -1,0 +1,30 @@
+###########################################################################
+# Exherbo
+###########################################################################
+- name: exherbo
+  type: repository
+  desc: Exherbo
+  family: exherbo
+  color: 'a1da91'
+  minpackages: 0  # XXX
+  sources:
+    # There are also [ gstreamer, mozilla ], but they are deprecated and empty
+    - name: [ arbor, bikeshed, desktop, emacs, enlightenment, games, gnome, hardware, haskell, java, kde, lisp, media, mono, net, office, perl, php, python, ruby, rust, scientific, selinux, tcl, texlive, vim, virtualization, x11, xfce ]
+      fetcher: Git
+      parser: ExherboGit
+      url: 'git://git.exherbo.org/{source}.git'
+      sparse_checkout: [ '**/*.exheres-0' ]
+      subrepo: '{source}'
+  repolinks:
+    - desc: Exherbo home
+      url: http://exherbo.org/
+    - desc: Exherbo packages
+      url: http://git.exherbo.org/summer/
+  packagelinks:
+    - desc: Package details
+      url: 'https://git.exherbo.org/summer/packages/{category}/{name}/index.html'
+    - desc: Package repository
+      url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{category}/{name}'
+    - desc: Exheres file
+      url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{category}/{name}/{name}-{origversion}.exheres-0'
+  tags: [ all, production ]
