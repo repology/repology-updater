@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container">
 
-<p>You're likely seeing this because your site has been visited by Repology.</p>
+<p>You're likely seeing this because your site had been visited by Repology.</p>
 
 <h3>What's repology</h3>
 
@@ -31,13 +31,13 @@ web API. The robot visits a site on each update cycle (~2-3 hours currently) and
 fetches files it needs sequentially (e.g. it never does parallel requests).</p>
 
 <p>You may find metadata on which repositories are fetched
-<a href="https://github.com/repology/repology/tree/master/repos.d">here</a>
+<a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}/tree/master/repos.d">here</a>
 and the fetcher code
-<a href="https://github.com/repology/repology/tree/master/repology/fetchers">here</a>.
+<a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}/tree/master/repology/fetchers">here</a>.
 </p>
 
 <p>If you think the robot creates excess load on your site, feel free to drop an
-<a href="https://github.com/repology/repology/issues/new">issue</a> in the GitHub.
+<a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}/issues/new">issue</a> in the GitHub.
 If Repology gets information on your repository through web API, we'd greatly
 appreciate if you provide a regular dump of package information from your repository
 (data used by Repology include package name, version, one-line summary, list of maintainers,
@@ -64,7 +64,7 @@ using only marginal amount of web traffic. Also, there's a delay of 3 seconds be
 consecutive requests to a single hostname, to ensure no excess site load is generated.</p>
 
 <p>You may see the link checker source code
-<a href="https://github.com/repology/repology/blob/master/repology-linkchecker.py">here</a>.</p>
+<a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}/blob/master/repology-linkchecker.py">here</a>.</p>
 
 <h3>robots.txt policy</h3>
 
