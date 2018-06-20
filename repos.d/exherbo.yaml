@@ -8,8 +8,38 @@
   color: 'a1da91'
   minpackages: 5000
   sources:
-    # There are also [ gstreamer, mozilla ], but they are deprecated and empty
-    - name: [ arbor, bikeshed, desktop, emacs, enlightenment, games, gnome, hardware, haskell, java, kde, lisp, media, mono, net, office, perl, php, python, ruby, rust, scientific, selinux, tcl, texlive, vim, virtualization, x11, xfce ]
+    - name:
+        - arbor
+        - bikeshed
+        - desktop
+        - emacs
+        - enlightenment
+        - games
+        - gnome
+        #- gstreamer  # deprecated & empty
+        - hardware
+        - haskell
+        - java
+        - kde
+        - lisp
+        - media
+        - mono
+        #- mozilla  # deprecated & empty
+        - net
+        - office
+        - perl
+        - php
+        - python
+        - ruby
+        - rust
+        - scientific
+        - selinux
+        - tcl
+        - texlive
+        - vim
+        - virtualization
+        - x11
+        - xfce
       fetcher: Git
       parser: ExherboGit
       url: 'git://git.exherbo.org/{source}.git'
