@@ -8,6 +8,7 @@
   color: 'a1da91'
   minpackages: 5000
   sources:
+    # see https://git.exherbo.org/ (Exheres section)
     - name:
         - arbor
         - bikeshed
