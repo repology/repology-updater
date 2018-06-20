@@ -61,7 +61,7 @@ class ExherboGitParser():
                     pkg.name = package
                     pkg.version, pkg.origversion = SanitizeVersion(exheres[len(package) + 1:-10])
 
-                    if pkg.version == 'scm' or (pkg.origversion and pkg.origversion.endswith('-scm')):
+                    if pkg.version == 'scm' or pkg.version.endswith('-scm'):
                         pkg.SetFlag(PackageFlags.rolling)
 
                     result.append(pkg)
