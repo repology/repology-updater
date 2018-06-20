@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import re
 
 from repology.package import Package, PackageFlags
 
@@ -23,9 +24,7 @@ from repology.package import Package, PackageFlags
 def SanitizeVersion(version):
     origversion = version
 
-    pos = version.find('-')
-    if pos != -1:
-        version = version[0:pos]
+    version = re.sub('-r[0-9]+$', '', version)
 
     if version != origversion:
         return version, origversion
