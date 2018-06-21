@@ -78,7 +78,7 @@
       fetcher: Git
       parser: ExherboGit
       url: 'git://git.exherbo.org/{source}.git'
-      sparse_checkout: [ '**/*.exheres-0' ]
+      sparse_checkout: [ 'metadata/about.conf', '**/*.exheres-0' ]
       subrepo: '{source}'
   repolinks:
     - desc: Exherbo home

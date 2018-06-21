@@ -19,6 +19,7 @@ import os
 import re
 
 from repology.package import Package, PackageFlags
+from repology.util import GetMaintainers
 
 
 def SanitizeVersion(version):
@@ -38,6 +39,16 @@ class ExherboGitParser():
 
     def Parse(self, path):
         result = []
+
+        maintainers = []
+
+        with open(os.path.join(path, 'metadata/about.conf')) as metadata:
+            for line in metadata:
+                if '=' in line:
+                    key, value = map(lambda s: s.strip(), line.split('=', 1))
+
+                    if key == 'owner':
+                        maintainers = GetMaintainers(value)
 
         packages_path = os.path.join(path, 'packages')
 
@@ -60,6 +71,7 @@ class ExherboGitParser():
                     pkg.category = category
                     pkg.name = package
                     pkg.version, pkg.origversion = SanitizeVersion(exheres[len(package) + 1:-10])
+                    pkg.maintainers = maintainers
 
                     if pkg.version == 'scm' or pkg.version.endswith('-scm'):
                         pkg.SetFlag(PackageFlags.rolling)
