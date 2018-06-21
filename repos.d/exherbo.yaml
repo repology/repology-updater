@@ -41,6 +41,40 @@
         - virtualization
         - x11
         - xfce
+        # Exherbo dev repos. These also contain exhereses and are official
+        # in the sense that they receive as much QA as the other repos do
+        - dev/alip
+        - dev/arkanoid
+        - dev/berniyh
+        - dev/ciaranm
+        - dev/cogitri
+        - dev/compnerd
+        - dev/dleverton
+        - dev/ferdy
+        - dev/heirecka
+        - dev/ingmar
+        - dev/keruspe
+        - dev/kimrhh
+        - dev/marv
+        - dev/mixi
+        - dev/moben
+        - dev/mrothe
+        - dev/olesalscheider
+        - dev/philantrop
+        - dev/pioto
+        - dev/pipping
+        - dev/pyro
+        - dev/rbrown
+        - dev/replica
+        - dev/sejo
+        - dev/sepek
+        - dev/somasis
+        - dev/spbecker
+        - dev/spoonb
+        - dev/tanderson
+        - dev/tridactyla
+        - dev/woutershep
+        - dev/zlin
       fetcher: Git
       parser: ExherboGit
       url: 'git://git.exherbo.org/{source}.git'
