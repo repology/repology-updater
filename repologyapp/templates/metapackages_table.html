@@ -20,7 +20,7 @@
 	{% if loop.first %}</thead><tbody>{% endif %}
 	{% endif %}
 		<tr>
-			<td>
+			<td class="text-nowrap">
 				<a href="{{ url_for("metapackage_versions", name=metapackagename) }}">{{ metapackagename }}</a>
 				{%- if metapackage.has_related -%}
 				<a class="has-related-mark" href="{{ url_for("metapackage_related", name=metapackagename) }}">∗</a>
