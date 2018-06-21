@@ -73,6 +73,7 @@ families = [
     'sisyphus',
     'slackbuilds',
     'snap',
+    'termux',
     'vcpkg',
     'wikidata',
     'yacp',

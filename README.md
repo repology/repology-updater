@@ -78,6 +78,7 @@ version are always parsed.
 | Scoop                            |         |         |       | ✔     | ✔       | ✔        |
 | SlackBuilds                      |         | ✔       | ✔     | ✔     |         | ✔        |
 | Stackage                         | ✔       |         |       |       |         |          |
+| Termux                           | ✔       |         |       | ✔     |         | ✔        |
 | Vcpkg                            | ✔       |         |       |       |         |          |
 | Wikidata                         | ✔       |         |       | ✔     | ✔       |          |
 | YACP                             |         |         |       |       |         |          |

@@ -1,0 +1,25 @@
+###########################################################################
+# Termux
+###########################################################################
+- name: termux
+  type: repository
+  desc: Termux
+  family: termux
+  color: '000000'
+  minpackages: 450
+  sources:
+    - name: termux-packages.json
+      fetcher: File
+      parser: TermuxJson
+      url: https://fornwall.net/termux-packages.json  # XXX: termporary test subject, wait for real URL to enable
+  repolinks:
+    - desc: Termux home
+      url: https://termux.com/
+    - desc: Packages repository
+      url: https://github.com/termux/termux-packages
+  packagelinks:
+    - desc: Package directory
+      url: 'https://github.com/termux/termux-packages/tree/master/packages/{name}'
+    - desc: Package build script
+      url: 'https://github.com/termux/termux-packages/blob/master/packages/{name}/build.sh'
+  tags: [ all ]
