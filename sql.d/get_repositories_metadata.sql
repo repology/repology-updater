@@ -33,6 +33,6 @@ SELECT
 	repolinks,
 	packagelinks,
 
-	state = 'active' AS active
+	state != 'legacy'::repository_state AS active
 FROM repositories
 ORDER BY sortname;

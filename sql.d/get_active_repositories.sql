@@ -43,4 +43,4 @@ SELECT
 	num_problems,
 	num_maintainers
 FROM repositories
-WHERE state = 'active'::repository_state;
+WHERE state != 'legacy'::repository_state;
