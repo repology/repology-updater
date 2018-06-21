@@ -6,7 +6,7 @@
   desc: Exherbo
   family: exherbo
   color: 'a1da91'
-  minpackages: 5000
+  minpackages: 6000
   sources:
     # see https://git.exherbo.org/ (Exheres section)
     - name:
