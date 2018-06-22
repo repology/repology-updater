@@ -43,34 +43,25 @@ class TermuxJsonParser():
 
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for packagedata in json.load(jsonfile):
+                if not packagedata['version']:
+                    print('ERROR: package {} has no version defined'.format(pkg.name), file=sys.stderr)
+                    continue
+
                 pkg = Package()
                 pkg.name = packagedata['name']
-                pkg.version = packagedata['version']
+                pkg.version, pkg.origversion = SanitizeVersion(packagedata['version'])
 
-                if packagedata['description']:
-                    pkg.comment = packagedata['description']
-                else:
-                    print('WARNING: package {} has no description defined'.format(pkg.name), file=sys.stderr)
+                pkg.comment = packagedata['description']
+                pkg.homepage = packagedata['homepage']
 
-                if packagedata['homepage']:
-                    pkg.homepage = packagedata['homepage']
-                else:
-                    print('WARNING: package {} has no homepage defined'.format(pkg.name), file=sys.stderr)
-
-                if packagedata['srcurl']:
+                if 'srcurl' in packagedata:
                     pkg.downloads = [packagedata['srcurl']]
-                else:
-                    print('WARNING: package {} has no srcurl defined'.format(pkg.name), file=sys.stderr)
 
                 match = re.search(' @([^ ]+)$', packagedata['maintainer'])
                 if match:
                     pkg.maintainers = [match.group(1).lower() + '@termux']
                 else:
                     pkg.maintainers = GetMaintainers(packagedata['maintainer'])
-
-                if not pkg.version:
-                    print('ERROR: package {} has no version defined'.format(pkg.name), file=sys.stderr)
-                    continue
 
                 result.append(pkg)
 
