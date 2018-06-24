@@ -10,7 +10,7 @@
   sources:
     - name: crates.io
       fetcher: CratesIO
-      fetch_timeout: 15
+      fetch_timeout: 30
       fetch_delay: 1
       parser: CratesIO
       url: https://crates.io/api/v1/crates
