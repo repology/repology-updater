@@ -43,10 +43,6 @@ class TermuxJsonParser():
 
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for packagedata in json.load(jsonfile):
-                if not packagedata['version']:
-                    print('ERROR: package {} has no version defined'.format(pkg.name), file=sys.stderr)
-                    continue
-
                 pkg = Package()
                 pkg.name = packagedata['name']
                 pkg.version, pkg.origversion = SanitizeVersion(packagedata['version'])
