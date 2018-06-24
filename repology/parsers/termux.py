@@ -17,7 +17,6 @@
 
 import json
 import re
-import sys
 
 from repology.package import Package
 from repology.util import GetMaintainers
