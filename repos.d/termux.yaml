@@ -8,10 +8,10 @@
   color: '000000'
   minpackages: 450
   sources:
-    - name: termux-packages.json
+    - name: packages.json
       fetcher: File
       parser: TermuxJson
-      url: https://fornwall.net/termux-packages.json  # XXX: termporary test subject, wait for real URL to enable
+      url: https://termux.net/dists/stable/packages.json
   repolinks:
     - desc: Termux home
       url: https://termux.com/
@@ -22,4 +22,4 @@
       url: 'https://github.com/termux/termux-packages/tree/master/packages/{name}'
     - desc: Package build script
       url: 'https://github.com/termux/termux-packages/blob/master/packages/{name}/build.sh'
-  tags: [ all ]
+  tags: [ all, production ]
