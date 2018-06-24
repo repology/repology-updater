@@ -40,6 +40,10 @@ class TooLittlePackages(Exception):
         Exception.__init__(self, 'Unexpectedly small number of packages: {} when expected no less than {}'.format(numpackages, minpackages))
 
 
+class InconsistentPackage(Exception):
+    pass
+
+
 class RepositoryProcessor:
     def __init__(self, repoman, statedir, fetch_retries=3, fetch_retry_delay=30, safety_checks=True):
         self.repoman = repoman
@@ -131,6 +135,16 @@ class RepositoryProcessor:
                     package.maintainers = [repository['default_maintainer']]
                 else:
                     package.maintainers = ['fallback-mnt-{}@repology'.format(repository['name'])]
+
+            if not package.name:
+                raise InconsistentPackage('package with no name')
+
+            if not package.version:
+                # XXX: this currently fires on kdepim in dports; it's pretty fatal on
+                # one hand, but shouldn't stop whole repo from updating on another. In
+                # future, it should be logged as some kind of very serious repository
+                # update error
+                logger.Log('ERROR: package with empty version'.format(package.name))
 
         logger.Log('parsing source {} complete, resource usage: {}'.format(source['name'], usage.GetStr()))
 
