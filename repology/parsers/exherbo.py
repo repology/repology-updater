@@ -42,7 +42,7 @@ class ExherboGitParser():
 
         maintainers = []
 
-        with open(os.path.join(path, 'metadata/about.conf')) as metadata:
+        with open(os.path.join(path, 'metadata/about.conf'), 'r', encoding='utf-8') as metadata:
             for line in metadata:
                 if '=' in line:
                     key, value = map(lambda s: s.strip(), line.split('=', 1))
