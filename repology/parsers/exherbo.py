@@ -56,6 +56,8 @@ class ExherboGitParser():
             category_path = os.path.join(packages_path, category)
             if not os.path.isdir(category_path):
                 continue
+            if category == 'virtual' or category == 'metadata':
+                continue
 
             for package in os.listdir(category_path):
                 package_path = os.path.join(category_path, package)
