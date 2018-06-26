@@ -64,6 +64,7 @@ families = [
     'openwrt',
     'pclinuxos',
     'pkgsrc',
+    'pld',
     'pypi',
     'ravenports',
     'rosa',

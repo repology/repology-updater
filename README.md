@@ -72,6 +72,7 @@ version are always parsed.
 | PCLinuxOS                        | ✔       | ✔       | ✔     |       |         |          |
 | pkgsrc                           | ✔       | ✔       | ✔     |       |         |          |
 | PyPi                             | ✔       |         |       | ✔ (2) |         |          |
+| PLD                              |         |         |       |       |         |          |
 | Ravenports                       | ✔       |         | ✔     | ✔     |         |          |
 | RubyGems                         |         |         |       | ✔ (2) |         |          |
 | Rudix                            | ✔       |         |       |       | ✔       |          |

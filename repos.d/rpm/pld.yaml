@@ -1,0 +1,21 @@
+###########################################################################
+# PLD Linux
+###########################################################################
+- name: pld
+  type: repository
+  desc: PLD Linux
+  family: pld
+  color: '000000'
+  minpackages: 11000
+  sources:
+    - name: dist-src.html
+      fetcher: File
+      parser: SophieHTML
+      url: http://sophie.zarb.org/distrib/PLD/th/x86_64/media/dist-src
+  repolinks:
+    - desc: PLD Linux home
+      url: https://pld-linux.org/
+  packagelinks:
+    - desc: Package git repository
+      url: https://git.pld-linux.org/?p=packages/{name}.git;a=summary
+  tags: [ all, production ]
