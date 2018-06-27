@@ -18,12 +18,12 @@ tag:repology.org,2018-04-25:maintainer-repo:{{ maintainer }}:{{ repo }}
 		<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'seconds') }}</updated>
 		<link href="{{ url_for('metapackage_versions', name=entry.effname) }}#{{ repo }}" />
 		{% if entry.type == 'added' %}
-		<title>{{ entry.effname }} added</title>
-		<content>Package for {{ entry.effname }} was added to {{ repometadata[repo].desc }}</content>
+		<title>{{ entry.effname }} is now tracked</title>
+		<content>Package for {{ entry.effname }} was added to {{ repometadata[repo].desc }} and/or assigned to {{ maintainer }}</content>
 		<category term="added" label="Package was added" />
 		{% elif entry.type == 'removed' %}
-		<title>{{ entry.effname }} removed</title>
-		<content>Package for {{ entry.effname }} was removed from {{ repometadata[repo].desc }}</content>
+		<title>{{ entry.effname }} is no longer tracked</title>
+		<content>Package for {{ entry.effname }} is no longer maintained by {{ maintainer }} and/or was removed from {{ repometadata[repo].desc }}</content>
 		<category term="removed" label="Package was removed" />
 		{% elif entry.type == 'uptodate' %}
 		<title>{{ entry.effname }} {{ entry.data.version }} is up to date</title>
