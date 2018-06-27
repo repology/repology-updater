@@ -1,49 +1,6 @@
 ###########################################################################
 # openSUSE
 ###########################################################################
-- name: opensuse_leap_42_2
-  sortname: opensuse_leap_13_0
-  type: repository
-  desc: openSUSE Leap 42.2
-  family: opensuse
-  color: '6da741'
-  minpackages: 10000
-  sources:
-    - name: oss
-      fetcher: Repodata
-      parser: Repodata
-      url: http://download.opensuse.org/source/distribution/leap/42.2/repo/oss/suse/
-      subrepo: main/oss
-    - name: non-oss
-      fetcher: Repodata
-      parser: Repodata
-      url: http://download.opensuse.org/source/distribution/leap/42.2/repo/non-oss/suse/
-      subrepo: main/non-oss
-    - name: updates-oss
-      fetcher: Repodata
-      parser: Repodata
-      url: http://download.opensuse.org/update/leap/42.2/oss/
-      subrepo: updates/oss
-      allowed_archs: [ src ]
-    - name: updates-non-oss
-      fetcher: Repodata
-      parser: Repodata
-      url: http://download.opensuse.org/update/leap/42.2/non-oss/
-      subrepo: updates/non-oss
-      allowed_archs: [ src ]
-  repolinks:
-    - desc: openSUSE home
-      url: https://www.opensuse.org/
-    - desc: openSUSE package search
-      url: https://software.opensuse.org/
-  packagelinks:
-    # NOTE: openSUSE:Leap:42.2:Update automatically inherits openSUSE:Leap:42.2
-    - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:42.2:Update/{name}'
-    - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
-  tags: [ all, production, opensuse, rpm ]
-
 - name: opensuse_leap_42_3
   sortname: opensuse_leap_14_0
   type: repository
