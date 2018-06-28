@@ -1,0 +1,18 @@
+###########################################################################
+# Scientific Linux
+###########################################################################
+- name: scientific_7x
+  type: repository
+  desc: Scientific Linux 7.x
+  family: centos
+  color: '000096'
+  minpackages: 4000
+  sources:
+    - name: main
+      fetcher: Repodata
+      parser: Repodata
+      url: 'http://ftp.scientificlinux.org/linux/scientific/7x/SRPMS/'
+  repolinks:
+    - desc: Scientific Linux home
+      url: http://scientificlinux.org/
+  tags: [ all, production, scientific ]
