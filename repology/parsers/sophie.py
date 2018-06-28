@@ -18,6 +18,7 @@
 import lxml.html
 
 from repology.package import Package
+from repology.parsers.helpers.nevra import filename2nevra
 
 
 class SophieHTMLParser():
@@ -28,16 +29,12 @@ class SophieHTMLParser():
         result = []
 
         for item in lxml.html.parse(path).getroot().xpath('.//div[@id="rpms_list"]/ul/li/a'):
-            rpminfo, arch, ext = item.text.rsplit('.', 2)
-
-            name, versioninfo, revision = rpminfo.rsplit('-', 2)
-
-            version = versioninfo.rsplit(':', 2)[-1]
+            nevra = filename2nevra(item.text)
 
             pkg = Package()
 
-            pkg.name = name
-            pkg.version = version
+            pkg.name = nevra[0]
+            pkg.version = nevra[2]
 
             result.append(pkg)
 
