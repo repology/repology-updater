@@ -2,7 +2,7 @@
 {% import "macros.html" as macros %}
 
 {% block extrameta %}
-	<meta http-equiv="refresh" content="3600">
+	<meta http-equiv="refresh" content="{{ 3600 + randrange(60) }}">
 {% endblock %}
 
 {% block title %}{{ super() }}: statistics{% endblock %}
