@@ -22,7 +22,7 @@ class ResourceUsageMonitor:
     def __init__(self):
         self.start_usage = resource.getrusage(resource.RUSAGE_SELF)
 
-    def Get(self, restart=False):
+    def get_usage_data(self, restart=False):
         """Get difference of start and current usage.
 
         See https://docs.python.org/3/library/resource.html for field descriptions
@@ -40,7 +40,7 @@ class ResourceUsageMonitor:
             current_usage.ru_maxrss
         )
 
-    def GetStr(self, restart=False):
-        usage = self.Get(restart)
+    def get_usage_str(self, restart=False):
+        usage = self.get_usage_data(restart)
 
         return '{:.2f}s user, {:.2f}s system, {:+.2f}MB rss to {:.2f}MB'.format(usage[0], usage[1], usage[2] / 1024.0, usage[3] / 1024.0)

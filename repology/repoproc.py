@@ -146,7 +146,7 @@ class RepositoryProcessor:
                 # update error
                 logger.Log('ERROR: package with empty version'.format(package.name))
 
-        logger.Log('parsing source {} complete, resource usage: {}'.format(source['name'], usage.GetStr()))
+        logger.Log('parsing source {} complete, resource usage: {}'.format(source['name'], usage.get_usage_str()))
 
         return packages
 
