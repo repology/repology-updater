@@ -33,11 +33,14 @@ class ResourceUsageMonitor:
         if restart:
             self.start_usage = current_usage
 
-        return list(
-            map(lambda pair: pair[1] - pair[0], zip(start_usage, current_usage))
+        return (
+            current_usage.ru_utime - self.start_usage.ru_utime,
+            current_usage.ru_stime - self.start_usage.ru_stime,
+            current_usage.ru_maxrss - self.start_usage.ru_maxrss,
+            current_usage.ru_maxrss
         )
 
     def GetStr(self, restart=False):
         usage = self.Get(restart)
 
-        return '{:.2f}s user, {:.2f}s system, {:+.2f}MB rss'.format(usage[0], usage[1], usage[2] / 1024.0)
+        return '{:.2f}s user, {:.2f}s system, {:+.2f}MB rss to {:.2f}MB'.format(usage[0], usage[1], usage[2] / 1024.0, usage[3] / 1024.0)
