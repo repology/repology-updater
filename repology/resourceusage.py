@@ -27,7 +27,6 @@ class ResourceUsageMonitor:
 
         See https://docs.python.org/3/library/resource.html for field descriptions
         """
-        start_usage = self.start_usage
         current_usage = resource.getrusage(resource.RUSAGE_SELF)
 
         if restart:
