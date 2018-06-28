@@ -2,13 +2,13 @@
 
 ## Dependencies
 
-Needed for core:
+Needed for the core:
 
 - [Python](https://www.python.org/) 3.6+
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [requests](http://python-requests.org/)
 - Python module [Jinja2](http://jinja.pocoo.org/)
-- Python module [libversion](https://pypi.python.org/pypi/libversion)
+- Python module [libversion](https://pypi.python.org/pypi/libversion) (also requires [libversion](https://github.com/repology/libversion) C library)
 - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
 Needed for fetching/parsing specific repository data:
