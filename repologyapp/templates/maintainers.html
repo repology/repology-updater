@@ -85,7 +85,16 @@
 	{% endfor %}
 	</div>
 {% else %}
-<div class="alert alert-warning" role="alert">No maintainers found matching the criteria</div>
+<div class="alert alert-warning" role="alert">
+	<p>No maintainers found matching the criteria. Some of the reasons which may have caused this:</p>
+	<ul>
+		<li>The maintainer you are looking for no longer maintains any packages.</li>
+		<li>The maintainer you are looking for obfuscates his email in package metadata, so repology cannot parse it.</li>
+		<li>Repology does not support or no longer supports any repositories the maintainer you are looking for is active in. Check <a href="{{ url_for('statistics') }}">the list</a> of supported repositoris.</li>
+		<li>The maintainer identifier (email) is misspelled, or have changed.{% if search and '@' in search %} It is quite common for only domain part to change, so try <a href="{{ url_for_self(search=search.split('@')[0]) }}">searching</a> without domain name.{% endif %}</li>
+		<li>Repology is unable or no longer able to parse maintainer information for repositories this maintainer is active in. Check <a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}#repository-support">repository support table</a>. This can be fixed if repositories in question setup a more complete dump of information on their packages.</li>
+	</ul>
+</div>
 {% endif %}
 
 </div>
