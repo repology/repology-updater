@@ -23,7 +23,7 @@ Metapackages
 		{% for letter in "abcdefghijklmnopqrstuvwxyz" %}
 			<li{% if firstname is for_page(letter) %} class="active"{% endif %}>
 				<a href="{{ url_for_self(bound=letter, **search) }}">
-					{{ letter|upper }}
+					{{- letter|upper -}}
 				</a>
 			</li>
 		{% endfor %}
