@@ -1,0 +1,20 @@
+###########################################################################
+# AIX Open Source Packages
+###########################################################################
+- name: aix_osp
+  type: repository
+  desc: AIX Open Source Packages
+  family: aix
+  minpackages: 0
+  sources:
+    - name: LIST
+      fetcher: FTPList
+      parser: RPMFTPList
+      url: ftp://www.oss4aix.org/everything/SRPMS
+  repolinks:
+    - desc: AIX Open Source Packages
+      url: http://www.perzl.org/aix/index.php?n=Main.HomePage
+  packagelinks:
+    - desc: Spec file
+      url: 'ftp://www.oss4aix.org/SPECS/{nevr}.spec'
+  tags: [ all, production ]

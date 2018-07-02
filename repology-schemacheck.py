@@ -27,6 +27,7 @@ import yaml
 
 
 families = [
+    'aix',
     'alpine',
     'anitya',
     'aosc',
