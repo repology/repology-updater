@@ -1,0 +1,23 @@
+###########################################################################
+# Buckaroo
+###########################################################################
+- name: buckaroo
+  type: repository
+  desc: Buckaroo
+  family: buckaroo
+  minpackages: 0
+  sources:
+    - name: buckaroo-recipes
+      fetcher: Git
+      parser: BuckarooGit
+      url: https://github.com/LoopPerfect/buckaroo-recipes.git
+      sparse_checkout: [ 'recipes/**/*.json' ]
+  repolinks:
+    - desc: Buckaroo Home
+      url: https://www.buckaroo.pm/
+    - desc: Buckaroo recipes repository
+      url: https://github.com/LoopPerfect/buckaroo-recipes
+  packagelinks:
+    - desc: Buckaroo recipe
+      url: 'https://github.com/LoopPerfect/buckaroo-recipes/blob/master/{recipe}'
+  tags: [ all, production ]

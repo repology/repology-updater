@@ -43,6 +43,7 @@ version are always parsed.
 | ALT Sisyphus                     | ✔       | ✔       | ✔     |       |         |          |
 | AOSC                             | ✔       |         | ✔     |       |         |          |
 | Arch, Parabola, Manjaro          | ✔       | ✔       |       | ✔     | ✔       |          |
+| Buckaroo                         |         |         |       | ✔     | ✔       |          |
 | CentOS, Fedora, Mageia, OpenSUSE | ✔       |         | ✔     | ✔     | ✔       |          |
 | Chocolatey                       | ✔       |         |       | ✔     |         |          |
 | CPAN                             |         | ✔       |       | ✔ (2) |         |          |

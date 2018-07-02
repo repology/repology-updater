@@ -32,6 +32,7 @@ families = [
     'anitya',
     'aosc',
     'arch',
+    'buckaroo',
     'centos',
     'chocolatey',
     'cpan',
