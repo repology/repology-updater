@@ -1,0 +1,18 @@
+###########################################################################
+# NST (Network Security Toolkit)
+###########################################################################
+- name: nst_28
+  type: repository
+  desc: Network Security Toolkit 28
+  family: fedora
+  color: '3333ff'
+  minpackages: 0
+  sources:
+    - name: pkgs
+      fetcher: SVN
+      parser: NSTPkgInfoXML
+      url: 'https://svn.code.sf.net/p/nst/code/repo/28/yum/pkgs'
+  repolinks:
+    - desc: Network Security Toolkit home
+      url: http://www.networksecuritytoolkit.org/nst/index.html
+  tags: [ nst ]  # disabled, no way to parse it
