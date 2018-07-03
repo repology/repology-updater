@@ -17,6 +17,7 @@
 
 import os
 
+from repology.fetchers.helpers.state import StateDir
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
@@ -46,9 +47,10 @@ class GitFetcher():
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
-            RunSubprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statepath], logger=logger)
-            self.__SetupSparseCheckout(statepath, logger)
-            RunSubprocess(['git', 'checkout'], cwd=statepath, logger=logger)
+            with StateDir(statepath) as statedir:
+                RunSubprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statedir], logger=logger)
+                self.__SetupSparseCheckout(statedir, logger)
+                RunSubprocess(['git', 'checkout'], cwd=statedir, logger=logger)
         elif update:
             RunSubprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statepath, logger=logger)
             RunSubprocess(['git', 'checkout'], cwd=statepath, logger=logger)  # needed for reset to not fail on changed sparse checkout
