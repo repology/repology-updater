@@ -8,10 +8,10 @@
   color: '000000'
   minpackages: 11000
   sources:
-    - name: dist-src.html
-      fetcher: File
-      parser: SophieHTML
-      url: http://sophie.zarb.org/distrib/PLD/th/x86_64/media/dist-src
+    - name: LIST
+      fetcher: FTPList
+      parser: RPMFTPList
+      url: ftp://ftp.pld-linux.org/dists/th/PLD/SRPMS/RPMS
   repolinks:
     - desc: PLD Linux home
       url: https://pld-linux.org/
