@@ -277,6 +277,22 @@
     word-wrap: break-word;
 }
 
+.dynamic-overflow {
+    overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.dynamic-overflow:hover {
+	background-color: #e0e0e0;
+	padding: 5px;
+	left: -5px;
+	z-index: 1;
+	position: relative;
+	display: inline;
+	border-radius: 4px;
+}
+
 .navbar-brand img {
     margin: -10px -10px -10px 0px;
 }
