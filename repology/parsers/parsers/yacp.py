@@ -20,7 +20,6 @@ import re
 import sys
 
 from repology.package import Package
-from repology.util import SplitPackageNameVersion
 
 
 def SanitizeVersion(version):
@@ -60,7 +59,7 @@ class YACPGitParser():
                     continue
 
                 pkg = Package()
-                pkg.name, version = SplitPackageNameVersion(match.group(1))
+                pkg.name, version = match.group(1).rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
 
                 result.append(pkg)

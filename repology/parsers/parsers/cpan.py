@@ -18,7 +18,7 @@
 import re
 
 from repology.package import Package
-from repology.util import GetMaintainers, SplitPackageNameVersion
+from repology.util import GetMaintainers
 
 
 class CPANPackagesParser():
@@ -73,7 +73,7 @@ class CPANPackagesParser():
                     # Bad package name; XXX: log?
                     continue
 
-                package_name, package_version = SplitPackageNameVersion(package_name)
+                package_name, package_version = package_name.rsplit('-', 1)
                 if package_version.startswith('v') or package_version.startswith('V'):
                     package_version = package_version[1:]
 

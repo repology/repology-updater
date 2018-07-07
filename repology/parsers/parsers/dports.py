@@ -18,7 +18,7 @@
 import sys
 
 from repology.package import Package
-from repology.util import GetMaintainers, SplitPackageNameVersion
+from repology.util import GetMaintainers
 
 
 def SanitizeVersion(version):
@@ -55,7 +55,7 @@ class DPortsIndexParser():
 
                 pkg = Package()
 
-                pkg.name, version = SplitPackageNameVersion(fields[0])
+                pkg.name, version = fields[0].rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
                 pkg.comment = fields[3]
                 pkg.maintainers = GetMaintainers(fields[5])

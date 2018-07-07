@@ -19,7 +19,7 @@ import csv
 import re
 
 from repology.package import Package
-from repology.util import GetMaintainers, SplitPackageNameVersion
+from repology.util import GetMaintainers
 
 
 def SanitizeVersion(version):
@@ -58,7 +58,7 @@ class OpenBSDIndexParser():
                 if match is not None:
                     pkgname = match.group(1)
 
-                pkg.name, version = SplitPackageNameVersion(pkgname)
+                pkg.name, version = pkgname.rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
                 pkg.comment = row[3]
                 pkg.maintainers = GetMaintainers(row[5])

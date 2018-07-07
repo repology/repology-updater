@@ -18,15 +18,6 @@
 import re
 
 
-def SplitPackageNameVersion(pkgname):
-    hyphen_pos = pkgname.rindex('-')
-
-    name = pkgname[0:hyphen_pos]
-    version = pkgname[hyphen_pos + 1:]
-
-    return name, version
-
-
 def GetMaintainers(input_):
     def looks_like_email(s):
         return re.fullmatch('[^<> \t]+@[^<> \t]+', s)
