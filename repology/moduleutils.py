@@ -35,7 +35,6 @@ class ModuleEnumerator:
 
         for modfile in os.listdir(pkgdir):
             modname = inspect.getmodulename(os.path.join(pkgdir, modfile))
-            print(modname)
             if modname and modname != '__init__':
                 self.modules.append(importlib.import_module(pkgname + '.' + modname))
 
