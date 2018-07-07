@@ -46,8 +46,8 @@ class InconsistentPackage(Exception):
 
 
 class RepositoryProcessor:
-    def __init__(self, repoman, statedir, fetch_retries=3, fetch_retry_delay=30, safety_checks=True):
-        self.repoman = repoman
+    def __init__(self, repomgr, statedir, fetch_retries=3, fetch_retry_delay=30, safety_checks=True):
+        self.repomgr = repomgr
         self.statedir = statedir
         self.fetch_retries = fetch_retries
         self.fetch_retry_delay = fetch_retry_delay
@@ -279,14 +279,14 @@ class RepositoryProcessor:
 
     # Single repo methods
     def Fetch(self, reponame, update=True, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         self.__CheckRepositoryOutdatedness(repository, logger)
 
         self.__Fetch(update, repository, logger)
 
     def Parse(self, reponame, transformer, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         packages = self.__Parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -294,7 +294,7 @@ class RepositoryProcessor:
         return packages
 
     def ParseAndSerialize(self, reponame, transformer, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         packages = self.__Parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -303,12 +303,12 @@ class RepositoryProcessor:
         return packages
 
     def Deserialize(self, reponame, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         return self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
 
     def Reprocess(self, reponame, transformer=None, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         packages = self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -320,7 +320,7 @@ class RepositoryProcessor:
     def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
         packages = []
 
-        for repo in self.repoman.GetRepositories(reponames):
+        for repo in self.repomgr.GetRepositories(reponames):
             packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ': '))
 
         return packages
@@ -328,14 +328,14 @@ class RepositoryProcessor:
     def DeserializeMulti(self, reponames=None, logger=NoopLogger()):
         packages = []
 
-        for repo in self.repoman.GetRepositories(reponames):
+        for repo in self.repomgr.GetRepositories(reponames):
             packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ': '))
 
         return packages
 
     def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
         deserializers = []
-        for repo in self.repoman.GetRepositories(reponames):
+        for repo in self.repomgr.GetRepositories(reponames):
             deserializers.append(self.StreamDeserializer(self.__GetSerializedPath(repo)))
 
         while True:
