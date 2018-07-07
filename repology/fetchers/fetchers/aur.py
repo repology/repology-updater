@@ -19,7 +19,7 @@ import os
 import urllib
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import Fetch
+from repology.fetchers.fetch import fetch
 
 
 class AURFetcher(ScratchDirFetcher):
@@ -30,7 +30,7 @@ class AURFetcher(ScratchDirFetcher):
     def do_fetch(self, statedir, logger):
         packages_url = self.url + 'packages.gz'
         logger.GetIndented().Log('fetching package list from ' + packages_url)
-        data = Fetch(packages_url).text  # autogunzipped?
+        data = fetch(packages_url).text  # autogunzipped?
 
         package_names = []
 
@@ -56,4 +56,4 @@ class AURFetcher(ScratchDirFetcher):
             logger.GetIndented().Log('fetching page {}/{}'.format(page + 1, len(package_names) // pagesize + 1))
 
             with open(os.path.join(statedir, '{}.json'.format(page)), 'wb') as statefile:
-                statefile.write(Fetch(url, timeout=self.fetch_timeout).content)
+                statefile.write(fetch(url, timeout=self.fetch_timeout).content)

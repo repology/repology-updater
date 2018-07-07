@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -21,17 +21,17 @@ from contextlib import contextmanager
 
 
 @contextmanager
-def StateDir(path):
+def state_dir(path):
     new_path = path + '.new'
     old_path = path + '.old'
 
-    def Cleanup():
+    def cleanup():
         if os.path.exists(new_path):
             shutil.rmtree(new_path)
         if os.path.exists(old_path):
             shutil.rmtree(old_path)
 
-    Cleanup()
+    cleanup()
 
     os.mkdir(new_path)
 
@@ -41,18 +41,18 @@ def StateDir(path):
             os.rename(path, old_path)
         os.rename(new_path, path)
     finally:
-        Cleanup()
+        cleanup()
 
 
 @contextmanager
-def StateFile(path, *args, **kwargs):
+def state_file(path, *args, **kwargs):
     new_path = path + '.new'
 
-    def Cleanup():
+    def cleanup():
         if os.path.exists(new_path):
             os.remove(new_path)
 
-    Cleanup()
+    cleanup()
 
     statefile = open(new_path, *args, **kwargs)
 
@@ -61,4 +61,4 @@ def StateFile(path, *args, **kwargs):
             yield statefile
         os.replace(new_path, path)
     finally:
-        Cleanup()
+        cleanup()

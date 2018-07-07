@@ -22,7 +22,7 @@ from repology.config import config
 USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
 
 
-def Fetch(url, check_status=True, timeout=60, post=None, headers=None):
+def fetch(url, check_status=True, timeout=60, post=None, headers=None):
     headers = headers.copy() if headers else {}
     headers['User-Agent'] = USER_AGENT
 

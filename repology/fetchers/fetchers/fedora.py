@@ -19,7 +19,7 @@ import json
 import os
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import Fetch
+from repology.fetchers.fetch import fetch
 
 
 class FedoraFetcher(ScratchDirFetcher):
@@ -32,10 +32,10 @@ class FedoraFetcher(ScratchDirFetcher):
 
         logger.GetIndented().Log('getting spec from {}'.format(specurl))
 
-        r = Fetch(specurl, check_status=False)
+        r = fetch(specurl, check_status=False)
         if r.status_code != 200:
             deadurl = self.giturl + '/{0}.git/plain/dead.package'.format(package)
-            dr = Fetch(deadurl, check_status=False)
+            dr = fetch(deadurl, check_status=False)
             if dr.status_code == 200:
                 logger.GetIndented(2).Log('dead: ' + ';'.join(dr.text.split('\n')))
             else:
@@ -51,7 +51,7 @@ class FedoraFetcher(ScratchDirFetcher):
         while True:
             pageurl = self.apiurl + 'packages/?page={}'.format(page)
             logger.Log('getting page {} from {}'.format(page, pageurl))
-            pagedata = json.loads(Fetch(pageurl).text)
+            pagedata = json.loads(fetch(pageurl).text)
 
             for package in pagedata['packages']:
                 self._load_spec(package['name'], statedir, logger)

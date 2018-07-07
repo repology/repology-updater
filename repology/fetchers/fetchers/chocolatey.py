@@ -19,7 +19,7 @@ import os
 import xml.etree.ElementTree
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import Fetch
+from repology.fetchers.fetch import fetch
 
 
 class ChocolateyFetcher(ScratchDirFetcher):
@@ -33,7 +33,7 @@ class ChocolateyFetcher(ScratchDirFetcher):
         while True:
             logger.Log('getting ' + nextpageurl)
 
-            text = Fetch(nextpageurl, timeout=self.fetch_timeout).text
+            text = fetch(nextpageurl, timeout=self.fetch_timeout).text
             with open(os.path.join(statedir, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
 

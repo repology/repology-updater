@@ -21,7 +21,7 @@ from string import ascii_uppercase
 import lxml.html
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import Fetch
+from repology.fetchers.fetch import fetch
 
 
 class GuixFetcher(ScratchDirFetcher):
@@ -38,7 +38,7 @@ class GuixFetcher(ScratchDirFetcher):
                 pageurl = '{}/{}/page/{}/'.format(self.url, letter, page)
 
                 # fetch HTML
-                response = Fetch(pageurl)
+                response = fetch(pageurl)
                 response.encoding = 'utf-8'  # is not detected properly
                 text = response.text
 

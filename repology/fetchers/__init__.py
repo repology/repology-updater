@@ -17,7 +17,7 @@
 
 import os
 
-from repology.fetchers.state import StateDir, StateFile
+from repology.fetchers.state import state_dir, state_file
 from repology.logger import NoopLogger
 
 
@@ -34,7 +34,7 @@ class PersistentDirFetcher(Fetcher):
 
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
-            with StateDir(statepath) as statedir:
+            with state_dir(statepath) as statedir:
                 self.do_fetch(statedir, logger)
         elif update:
             self.do_update(statepath, logger)
@@ -51,7 +51,7 @@ class ScratchDirFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return
 
-        with StateDir(statepath) as statedir:
+        with state_dir(statepath) as statedir:
             self.do_fetch(statedir, logger)
 
 
@@ -64,5 +64,5 @@ class ScratchFileFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return
 
-        with StateFile(statepath, 'w', encoding='utf-8') as statefile:
+        with state_file(statepath, 'w', encoding='utf-8') as statefile:
             self.do_fetch(statefile, logger)

@@ -20,7 +20,7 @@ import lzma
 import xml.etree.ElementTree
 
 from repology.fetchers import ScratchFileFetcher
-from repology.fetchers.fetch import Fetch
+from repology.fetchers.fetch import fetch
 
 
 class RepodataFetcher(ScratchFileFetcher):
@@ -31,13 +31,13 @@ class RepodataFetcher(ScratchFileFetcher):
         # Get and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)
-        repomd_content = Fetch(repomd_url, check_status=True).text
+        repomd_content = fetch(repomd_url, check_status=True).text
         repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
 
         repodata_url = self.url + repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location').attrib['href']
 
         logger.Log('fetching ' + repodata_url)
-        data = Fetch(repodata_url).content
+        data = fetch(repodata_url).content
 
         logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 

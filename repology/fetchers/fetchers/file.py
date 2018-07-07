@@ -21,7 +21,7 @@ import lzma
 import time
 
 from repology.fetchers import ScratchFileFetcher
-from repology.fetchers.fetch import Fetch
+from repology.fetchers.fetch import fetch
 
 
 class FileFetcher(ScratchFileFetcher):
@@ -50,7 +50,7 @@ class FileFetcher(ScratchFileFetcher):
 
         logger.Log('fetching ' + ', with '.join(fetching_what))
 
-        data = Fetch(self.url, post=self.post, headers=self.headers).content
+        data = fetch(self.url, post=self.post, headers=self.headers).content
 
         logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 

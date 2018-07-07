@@ -20,7 +20,7 @@ import os
 import time
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import Fetch
+from repology.fetchers.fetch import fetch
 
 
 class CratesIOFetcher(ScratchDirFetcher):
@@ -35,7 +35,7 @@ class CratesIOFetcher(ScratchDirFetcher):
             url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
             logger.Log('getting ' + url)
 
-            text = Fetch(url, timeout=self.fetch_timeout).text
+            text = fetch(url, timeout=self.fetch_timeout).text
             with open(os.path.join(statedir, '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
 
