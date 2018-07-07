@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,23 +17,21 @@
 
 import os
 
-from repology.fetchers.helpers.state import StateDir
+from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
 
-class WgetTarFetcher():
-    def __init__(self, url, fetch_timeout=60):
+class SVNFetcher():
+    def __init__(self, url, fetch_timeout=600):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
+        if not os.path.isdir(statepath):
+            with StateDir(statepath) as statedir:
+                RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'checkout', self.url, statedir], logger=logger)
+        elif update:
+            RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statepath], logger=logger)
+        else:
             logger.Log('no update requested, skipping')
-            return
-
-        with StateDir(statepath) as statedir:
-            tarpath = os.path.join(statedir, '.temporary.tar')
-            RunSubprocess(['wget', '--timeout', str(self.fetch_timeout), '--tries', '1', '-O', tarpath, self.url], logger)
-            RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
-            os.remove(tarpath)

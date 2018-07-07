@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,8 +16,10 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import importlib
+import importlib.util
 import inspect
 import os
+import pkgutil
 
 
 __all__ = [
@@ -30,10 +32,11 @@ class ModuleEnumerator:
     def __init__(self, pkgname, pkgfile):
         self.modules = []
 
-        pkgdir = os.path.dirname(pkgfile)
+        pkgdir = os.path.join(os.path.dirname(pkgfile), relpath)
 
         for modfile in os.listdir(pkgdir):
             modname = inspect.getmodulename(os.path.join(pkgdir, modfile))
+            print(modname)
             if modname and modname != '__init__':
                 self.modules.append(importlib.import_module(pkgname + '.' + modname))
 
@@ -43,20 +46,30 @@ class ModuleEnumerator:
 
 
 class ClassFactory:
-    def __init__(self, suffix):
-        caller_frame = inspect.stack()[1].frame
-        caller_module = inspect.getmodule(caller_frame).__name__
-        caller_path = inspect.getfile(caller_frame)
+    @staticmethod
+    def enumerate_all_submodules(module):
+        for location in importlib.util.find_spec(module).submodule_search_locations:
+            for dirpath, dirnames, filenames in os.walk(location):
+                for filename in filenames:
+                    fullpath = os.path.join(dirpath, filename)
+                    relpath = os.path.relpath(fullpath, location)
 
-        self.modules = {}
+                    if not filename.endswith('.py'):
+                        continue
 
-        for module in ModuleEnumerator(caller_module, caller_path).Enumerate():
-            for name, member in inspect.getmembers(module):
+                    yield '.'.join([module] + relpath[:-3].split(os.sep))
+
+    def __init__(self, modulename, suffix):
+        self.classes = {}
+
+        for submodulename in self.enumerate_all_submodules(modulename):
+            submodule = importlib.import_module(submodulename)
+            for name, member in inspect.getmembers(submodule):
                 if name.endswith(suffix) and inspect.isclass(member):
-                    self.modules[name[:-len(suffix)]] = member
+                    self.classes[name[:-len(suffix)]] = member
 
     def Spawn(self, name, kwargs):
-        class_ = self.modules[name]
+        class_ = self.classes[name]
 
         filtered_kwargs = {
             key: value for key, value in kwargs.items() if key in inspect.getfullargspec(class_.__init__).args

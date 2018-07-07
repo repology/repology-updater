@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -18,4 +18,4 @@
 from repology.moduleutils import ClassFactory
 
 
-Factory = ClassFactory('Fetcher')
+Factory = ClassFactory('repology.fetchers.fetchers', 'Fetcher')

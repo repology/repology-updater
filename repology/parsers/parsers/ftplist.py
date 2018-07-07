@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from repology.package import Package
-from repology.parsers.helpers.nevra import filename2nevra
+from repology.parsers.nevra import filename2nevra
 
 
 class RPMFTPListParser():

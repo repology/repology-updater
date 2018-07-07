@@ -15,27 +15,24 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import lxml.html
+# flake8: noqa
+
+import xml.etree.ElementTree
 
 from repology.package import Package
-from repology.parsers.helpers.nevra import filename2nevra
+from repology.parsers.walk import walk_tree
 
 
-class SophieHTMLParser():
+class NSTPkgInfoXMLParser():
     def __init__(self):
         pass
 
     def Parse(self, path):
         result = []
 
-        for item in lxml.html.parse(path).getroot().xpath('.//div[@id="rpms_list"]/ul/li/a'):
-            nevra = filename2nevra(item.text)
-
-            pkg = Package()
-
-            pkg.name = nevra[0]
-            pkg.version = nevra[2]
-
-            result.append(pkg)
+        for filename in walk_tree(path, suffix='pkginfo.xml'):
+            root = xml.etree.ElementTree.parse(filename)
+            # XXX: fails on unknown entity NST_RELEASE_SUFFIX
+            # and dtd is not usable as it needs preprocessing
 
         return result

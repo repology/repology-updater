@@ -19,7 +19,7 @@ import json
 import os
 
 from repology.package import Package
-from repology.parsers.helpers.walk import walk_tree
+from repology.parsers.walk import walk_tree
 
 
 class BuckarooGitParser():

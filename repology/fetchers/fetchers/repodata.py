@@ -15,63 +15,46 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import bz2
 import gzip
 import lzma
 import os
-import time
+import xml.etree.ElementTree
 
-from repology.fetchers.helpers.fetch import Fetch
-from repology.fetchers.helpers.state import StateFile
+from repology.fetchers.fetch import Fetch
+from repology.fetchers.state import StateFile
 from repology.logger import NoopLogger
 
 
-class FileFetcher():
-    def __init__(self, url, compression=None, post=None, headers=None, nocache=False):
+class RepodataFetcher():
+    def __init__(self, url):
         self.url = url
-        self.compression = compression
-        self.post = post
-        self.headers = headers
-
-        # cache bypass
-        if nocache:
-            if '?' in self.url:
-                self.url += '&nocache=' + str(int(time.time()))
-            else:
-                self.url += '?nocache=' + str(int(time.time()))
 
     def Fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
             return
 
-        fetching_what = [self.url]
-        if isinstance(self.post, dict):
-            fetching_what.append('{} fields of form data'.format(len(self.post)))
-        elif self.post:
-            fetching_what.append('{} bytes of post data'.format(len(self.post)))
+        # Get and parse repomd.xml
+        repomd_url = self.url + 'repodata/repomd.xml'
+        logger.Log('fetching metadata from ' + repomd_url)
+        repomd_content = Fetch(repomd_url, check_status=True).text
+        repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
 
-        if self.headers:
-            fetching_what.append('{} extra headers'.format(len(self.headers)))
+        repodata_url = self.url + repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location').attrib['href']
 
-        logger.Log('fetching ' + ', with '.join(fetching_what))
-
-        data = Fetch(self.url, post=self.post, headers=self.headers).content
+        logger.Log('fetching ' + repodata_url)
+        data = Fetch(repodata_url).content
 
         logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 
-        if self.compression == 'gz':
+        if repodata_url.endswith('gz'):
             logger.GetIndented().Log('decompressing with gzip')
             data = gzip.decompress(data)
-        elif self.compression == 'bz2':
-            logger.GetIndented().Log('decompressing with bz2')
-            data = bz2.decompress(data)
-        elif self.compression == 'xz':
+        elif repodata_url.endswith('xz'):
             logger.GetIndented().Log('decompressing with xz')
             data = lzma.LZMADecompressor().decompress(data)
 
-        if self.compression:
-            logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
+        logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
 
         logger.GetIndented().Log('saving')
 

@@ -20,8 +20,8 @@ import os
 
 from libversion import version_compare
 
-from repology.fetchers.helpers.fetch import Fetch
-from repology.fetchers.helpers.state import StateFile
+from repology.fetchers.fetch import Fetch
+from repology.fetchers.state import StateFile
 from repology.logger import NoopLogger
 
 

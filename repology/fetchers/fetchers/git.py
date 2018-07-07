@@ -17,7 +17,7 @@
 
 import os
 
-from repology.fetchers.helpers.state import StateDir
+from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 

@@ -20,8 +20,8 @@ from string import ascii_uppercase
 
 import lxml.html
 
-from repology.fetchers.helpers.fetch import Fetch
-from repology.fetchers.helpers.state import StateDir
+from repology.fetchers.fetch import Fetch
+from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 
 
