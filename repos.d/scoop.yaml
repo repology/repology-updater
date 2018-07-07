@@ -8,14 +8,14 @@
   minpackages: 600
   sources:
     - name: scoop
-      fetcher: Git
-      parser: ScoopGit
+      fetcher: GitFetcher
+      parser: ScoopGitParser
       url: https://github.com/lukesampson/scoop.git
       sparse_checkout: [ 'bucket/*.json' ]
       subrepo: scoop
     - name: scoop-extras
-      fetcher: Git
-      parser: ScoopGit
+      fetcher: GitFetcher
+      parser: ScoopGitParser
       url: https://github.com/lukesampson/scoop-extras.git
       sparse_checkout: [ '*.json' ]
       subrepo: scoop-extras

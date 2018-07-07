@@ -8,8 +8,8 @@
   minpackages: 3500
   sources:
     - name: [ main, contrib, non-free]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

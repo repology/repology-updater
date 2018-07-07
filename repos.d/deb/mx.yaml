@@ -9,8 +9,8 @@
   minpackages: 100
   sources:
     - name: [ main, non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mxrepo.com/mx/repo/dists/mx15/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -34,8 +34,8 @@
   minpackages: 100
   sources:
     - name: [ test ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mxrepo.com/mx/testrepo/dists/mx15/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -59,8 +59,8 @@
   minpackages: 50
   sources:
     - name: [ main, non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mxrepo.com/mx/repo/dists/mx16/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -84,8 +84,8 @@
   minpackages: 100
   sources:
     - name: [ main, non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mxrepo.com/mx/repo/dists/stretch/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -107,8 +107,8 @@
   minpackages: 100
   sources:
     - name: [ test ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mxrepo.com/mx/testrepo/dists/stretch/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

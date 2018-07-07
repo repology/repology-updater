@@ -9,8 +9,8 @@
   minpackages: 2000
   sources:
     - name: [ os, updates ]
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: 'http://vault.centos.org/centos/6/{source}/Source/'
       subrepo: '{source}'
   repolinks:
@@ -31,8 +31,8 @@
   minpackages: 2500
   sources:
     - name: [ os, updates, extras ]
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: 'http://vault.centos.org/centos/7/{source}/Source/'
       subrepo: '{source}'
   repolinks:

@@ -65,7 +65,7 @@ class ClassFactory:
             submodule = importlib.import_module(submodulename)
             for name, member in inspect.getmembers(submodule):
                 if name.endswith(suffix) and inspect.isclass(member):
-                    self.classes[name[:-len(suffix)]] = member
+                    self.classes[name] = member
 
     def Spawn(self, name, *args, **kwargs):
         return self.classes[name](*args, **kwargs)

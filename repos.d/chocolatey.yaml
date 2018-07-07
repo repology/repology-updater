@@ -8,8 +8,8 @@
   minpackages: 5000
   sources:
     - name: chocolatey
-      fetcher: Chocolatey
-      parser: Chocolatey
+      fetcher: ChocolateyFetcher
+      parser: ChocolateyParser
       url: https://chocolatey.org/api/v2/
   shadow: true
   repolinks:
@@ -28,8 +28,8 @@
   minpackages: 1  # XXX: unknown
   sources:
     - name: nuget
-      fetcher: Chocolatey
-      parser: Chocolatey
+      fetcher: ChocolateyFetcher
+      parser: ChocolateyParser
       url: https://www.nuget.org/api/v2/
   shadow: true
   tags: [ all ]

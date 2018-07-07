@@ -10,8 +10,8 @@
   minpackages: 500
   sources:
     - name: haikuports
-      fetcher: Git
-      parser: HaikuPortsFilenames
+      fetcher: GitFetcher
+      parser: HaikuPortsFilenamesParser
       url: https://github.com/haikuports/haikuports.git
       sparse_checkout: [ '**/*.recipe' ]
       branch: release
@@ -31,8 +31,8 @@
   minpackages: 2000
   sources:
     - name: haikuports
-      fetcher: Git
-      parser: HaikuPortsFilenames
+      fetcher: GitFetcher
+      parser: HaikuPortsFilenamesParser
       url: https://github.com/haikuports/haikuports.git
       sparse_checkout: [ '**/*.recipe' ]
   repolinks:

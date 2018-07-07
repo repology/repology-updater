@@ -9,8 +9,8 @@
   minpackages: 1700
   sources:
     - name: repology.json
-      fetcher: File
-      parser: RavenportsJson
+      fetcher: FileFetcher
+      parser: RavenportsJsonParser
       url: https://raw.githubusercontent.com/jrmarino/Ravenports/master/Mk/Misc/repology.json
   repolinks:
     - desc: Ravenports Catalog

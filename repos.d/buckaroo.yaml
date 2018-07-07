@@ -8,8 +8,8 @@
   minpackages: 0
   sources:
     - name: buckaroo-recipes
-      fetcher: Git
-      parser: BuckarooGit
+      fetcher: GitFetcher
+      parser: BuckarooGitParser
       url: https://github.com/LoopPerfect/buckaroo-recipes.git
       sparse_checkout: [ 'recipes/**/*.json' ]
   repolinks:

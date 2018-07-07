@@ -9,8 +9,8 @@
   minpackages: 15000
   sources:
     - name: PortIndex
-      fetcher: Rsync
-      parser: MacPorts
+      fetcher: RsyncFetcher
+      parser: MacPortsParser
       url: rsync://rsync.macports.org/macports//trunk/dports/PortIndex_darwin_16_i386/PortIndex
   repolinks:
     - desc: MacPorts home

@@ -10,8 +10,8 @@
   minpackages: 15000
   sources:
     - name: INDEX
-      fetcher: File
-      parser: PkgsrcIndex
+      fetcher: FileFetcher
+      parser: PkgsrcIndexParser
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q1/pkgsrc/INDEX
       nocache: true
   repolinks:
@@ -43,8 +43,8 @@
   minpackages: 15000
   sources:
     - name: INDEX
-      fetcher: File
-      parser: PkgsrcIndex
+      fetcher: FileFetcher
+      parser: PkgsrcIndexParser
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q2/pkgsrc/INDEX
       nocache: true
   repolinks:
@@ -76,8 +76,8 @@
   minpackages: 15000
   sources:
     - name: INDEX
-      fetcher: File
-      parser: PkgsrcIndex
+      fetcher: FileFetcher
+      parser: PkgsrcIndexParser
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q3/pkgsrc/INDEX
       nocache: true
   repolinks:
@@ -109,8 +109,8 @@
   minpackages: 15000
   sources:
     - name: INDEX
-      fetcher: File
-      parser: PkgsrcIndex
+      fetcher: FileFetcher
+      parser: PkgsrcIndexParser
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q4/pkgsrc/INDEX
       nocache: true
   repolinks:
@@ -142,8 +142,8 @@
   minpackages: 15000
   sources:
     - name: INDEX
-      fetcher: File
-      parser: PkgsrcIndex
+      fetcher: FileFetcher
+      parser: PkgsrcIndexParser
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q1/pkgsrc/INDEX
       nocache: true
   repolinks:
@@ -174,8 +174,8 @@
   minpackages: 15000
   sources:
     - name: INDEX
-      fetcher: File
-      parser: PkgsrcIndex
+      fetcher: FileFetcher
+      parser: PkgsrcIndexParser
       url: https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
       nocache: true
   repolinks:

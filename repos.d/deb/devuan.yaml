@@ -9,8 +9,8 @@
   minpackages: 20000
   sources:
     - name: [ oldstable/main, oldstable/contrib, oldstable/non-free, oldstable-updates/main, oldstable-updates/contrib, oldstable-updates/non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -27,8 +27,8 @@
   minpackages: 20000
   sources:
     - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -45,8 +45,8 @@
   minpackages: 25000
   sources:
     - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -63,8 +63,8 @@
   minpackages: 25000
   sources:
     - name: [ unstable/main, unstable/contrib, unstable/non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

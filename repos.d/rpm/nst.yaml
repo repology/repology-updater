@@ -9,8 +9,8 @@
   minpackages: 0
   sources:
     - name: pkgs
-      fetcher: SVN
-      parser: NSTPkgInfoXML
+      fetcher: SVNFetcher
+      parser: NSTPkgInfoXMLParser
       url: 'https://svn.code.sf.net/p/nst/code/repo/28/yum/pkgs'
   repolinks:
     - desc: Network Security Toolkit home

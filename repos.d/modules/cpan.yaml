@@ -8,8 +8,8 @@
   minpackages: 30000
   sources:
     - name: CPAN
-      fetcher: File
-      parser: CPANPackages
+      fetcher: FileFetcher
+      parser: CPANPackagesParser
       url: http://mirror.yandex.ru/mirrors/cpan/modules/02packages.details.txt.gz
       compression: gz
   shadow: true

@@ -8,8 +8,8 @@
   minpackages: 7000
   sources:
     - name: guix
-      fetcher: Guix
-      parser: Guix
+      fetcher: GuixFetcher
+      parser: GuixParser
       url: https://www.gnu.org/software/guix/packages/
   repolinks:
     - desc: GNU Guix home

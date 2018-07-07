@@ -8,8 +8,8 @@
   minpackages: 200
   sources:
     - name: newreleases
-      fetcher: File
-      parser: LibreGameWiki
+      fetcher: FileFetcher
+      parser: LibreGameWikiParser
       url: https://libregamewiki.org/New_games_and_releases
   repolinks:
     - desc: Libregamewiki

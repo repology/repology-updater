@@ -10,8 +10,8 @@
   minpackages: 1900
   sources:
     - name: [ apps, core, main ]
-      fetcher: File
-      parser: KaOSHTML
+      fetcher: FileFetcher
+      parser: KaOSHTMLParser
       url: "http://kaosx.tk/packages/index.php?subdir={source}&sortby=name"
       subrepo: "{source}"
   repolinks:
@@ -34,8 +34,8 @@
   minpackages: 10
   sources:
     - name: [ build ]
-      fetcher: File
-      parser: KaOSHTML
+      fetcher: FileFetcher
+      parser: KaOSHTMLParser
       url: "http://kaosx.tk/packages/index.php?subdir={source}&sortby=name"
       subrepo: "{source}"
   repolinks:

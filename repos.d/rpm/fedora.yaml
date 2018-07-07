@@ -13,13 +13,13 @@
   minpackages: 21000
   sources:
     - name: release
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://mirror.yandex.ru/fedora/linux/releases/26/Everything/source/tree/
       subrepo: '{source}'
     - name: updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://mirror.yandex.ru/fedora/linux/updates/26/SRPMS/
       subrepo: '{source}'
   repolinks:
@@ -44,13 +44,13 @@
   minpackages: 22000
   sources:
     - name: release
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://mirror.yandex.ru/fedora/linux/releases/27/Everything/source/tree/
       subrepo: '{source}'
     - name: updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://mirror.yandex.ru/fedora/linux/updates/27/SRPMS/
       subrepo: '{source}'
   repolinks:
@@ -75,13 +75,13 @@
   minpackages: 20000
   sources:
     - name: release
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://mirror.yandex.ru/fedora/linux/releases/28/Everything/source/tree/
       subrepo: '{source}'
     - name: updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://mirror.yandex.ru/fedora/linux/updates/28/Everything/SRPMS/
       subrepo: '{source}'
   repolinks:
@@ -106,8 +106,8 @@
   minpackages: 20000
   sources:
     - name: development
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://mirror.yandex.ru/fedora/linux/development/rawhide/Everything/source/tree/
   repolinks:
     - desc: Fedora home

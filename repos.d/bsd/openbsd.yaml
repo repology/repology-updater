@@ -10,8 +10,8 @@
   minpackages: 9000
   sources:
     - name: INDEX
-      fetcher: File
-      parser: OpenBSDIndex
+      fetcher: FileFetcher
+      parser: OpenBSDIndexParser
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
   repolinks:
     - desc: 'OpenBSD FAQ: Packages and Ports'

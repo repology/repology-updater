@@ -8,8 +8,8 @@
   minpackages: 0
   sources:
     - name: 00INDEX
-      fetcher: File
-      parser: OpenPkgRdf
+      fetcher: FileFetcher
+      parser: OpenPkgRdfParser
       url: http://download.openpkg.org/packages/current/source/00INDEX.rdf.bz2
       compression: bz2
   repolinks:

@@ -9,8 +9,8 @@
   minpackages: 100
   sources:
     - name: repo
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://downloads.sourceforge.net/project/unitedrpms/26/srpm/
       subrepo: release
   repolinks:
@@ -28,8 +28,8 @@
   minpackages: 100
   sources:
     - name: repo
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://downloads.sourceforge.net/project/unitedrpms/27/srpm/
       subrepo: release
   repolinks:
@@ -47,8 +47,8 @@
   minpackages: 100
   sources:
     - name: repo
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://downloads.sourceforge.net/project/unitedrpms/28/srpm/
       subrepo: release
   repolinks:
@@ -66,8 +66,8 @@
   minpackages: 100
   sources:
     - name: repo
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://downloads.sourceforge.net/project/unitedrpms/29/srpm/
       subrepo: release
   repolinks:

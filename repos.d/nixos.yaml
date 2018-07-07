@@ -9,8 +9,8 @@
   minpackages: 12000
   sources:
     - name: packages.json
-      fetcher: File
-      parser: NixJson
+      fetcher: FileFetcher
+      parser: NixJsonParser
       url: https://nixos.org/nixpkgs/packages.json.gz
   repolinks:
     - desc: NixOS home
@@ -34,8 +34,8 @@
   minpackages: 13000
   sources:
     - name: packages-unstable.json
-      fetcher: File
-      parser: NixJson
+      fetcher: FileFetcher
+      parser: NixJsonParser
       url: https://nixos.org/nixpkgs/packages-unstable.json.gz
   repolinks:
     - desc: NixOS home

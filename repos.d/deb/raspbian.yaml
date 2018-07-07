@@ -9,8 +9,8 @@
   minpackages: 22000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.raspbian.org/raspbian/dists/oldstable/{source}/source/Sources.xz'
       compression: xz
       subrepo: '{source}'
@@ -27,8 +27,8 @@
   minpackages: 28000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.raspbian.org/raspbian/dists/stable/{source}/source/Sources.xz'
       compression: xz
       subrepo: '{source}'
@@ -45,8 +45,8 @@
   minpackages: 31000
   sources:
     - name: [contrib,firmware,main,non-free,rpi]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.raspbian.org/raspbian/dists/testing/{source}/source/Sources.xz'
       compression: xz
       subrepo: '{source}'

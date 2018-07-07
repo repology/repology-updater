@@ -9,8 +9,8 @@
   minpackages: 4000
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.openwrt.org/chaos_calmer/15.05.1/x86/generic/packages/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'
@@ -28,8 +28,8 @@
   minpackages: 4000
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.openwrt.org/snapshots/trunk/x86/generic/packages/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'
@@ -47,8 +47,8 @@
   minpackages: 4000
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/packages/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'
@@ -66,8 +66,8 @@
   minpackages: 4000
   sources:
     - name: [ base, luci, management, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.openwrt.org/snapshots/trunk/ar71xx/generic/packages/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'

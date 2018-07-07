@@ -10,8 +10,8 @@
   minpackages: 31000
   sources:
     - name: INDEX-11
-      fetcher: File
-      parser: FreeBSDIndex
+      fetcher: FileFetcher
+      parser: FreeBSDIndexParser
       url: http://www.FreeBSD.org/ports/INDEX-11.bz2
       compression: bz2
   repolinks:
@@ -49,8 +49,8 @@
   minpackages: 28000
   sources:
     - name: INDEX
-      fetcher: File
-      parser: DPortsIndex
+      fetcher: FileFetcher
+      parser: DPortsIndexParser
       url: http://muscles.dragonflybsd.org/INDEX.bz2
       compression: bz2
   repolinks:

@@ -23,8 +23,8 @@
   minpackages: 27000
   sources:
     - name: [ main, contrib, non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://deb.parrotsec.org/parrot/dists/stable/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

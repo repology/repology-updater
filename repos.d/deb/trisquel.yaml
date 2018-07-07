@@ -9,8 +9,8 @@
   minpackages: 20000
   sources:
     - name: [ toutatis/main, toutatis-updates/main ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -27,8 +27,8 @@
   minpackages: 50
   sources:
     - name: [ toutatis-backports/main ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -45,8 +45,8 @@
   minpackages: 23000
   sources:
     - name: [ belenos/main, belenos-updates/main ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -63,8 +63,8 @@
   minpackages: 50
   sources:
     - name: [ belenos-backports/main ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -81,8 +81,8 @@
   minpackages: 26000
   sources:
     - name: [ flidas/main, flidas-updates/main ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -99,8 +99,8 @@
   minpackages: 20
   sources:
     - name: [ flidas-backports/main ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.trisquel.info/trisquel/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

@@ -8,8 +8,8 @@
   minpackages: 500
   sources:
     - name: sabayon
-      fetcher: Git
-      parser: GentooGit
+      fetcher: GitFetcher
+      parser: GentooGitParser
       url: https://github.com/Sabayon/sabayon-distro.git
   repolinks:
     - desc: Sabayon Linux home
@@ -28,8 +28,8 @@
   minpackages: 100
   sources:
     - name: sabayon
-      fetcher: Git
-      parser: GentooGit
+      fetcher: GitFetcher
+      parser: GentooGitParser
       url: https://github.com/Sabayon/for-gentoo.git
   repolinks:
     - desc: Sabayon Linux home

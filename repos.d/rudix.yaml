@@ -8,8 +8,8 @@
   minpackages: 40
   sources:
     - name: rudix
-      fetcher: File
-      parser: RudixHTML
+      fetcher: FileFetcher
+      parser: RudixHTMLParser
       url: http://rudix.org/packages/index.html
   repolinks:
     - desc: Rudix home

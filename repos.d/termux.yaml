@@ -9,8 +9,8 @@
   minpackages: 450
   sources:
     - name: packages.json
-      fetcher: File
-      parser: TermuxJson
+      fetcher: FileFetcher
+      parser: TermuxJsonParser
       url: https://termux.net/dists/stable/packages.json
   repolinks:
     - desc: Termux home

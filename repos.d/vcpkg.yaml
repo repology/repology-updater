@@ -8,8 +8,8 @@
   minpackages: 600
   sources:
     - name: vcpkg
-      fetcher: Git
-      parser: VcpkgGit
+      fetcher: GitFetcher
+      parser: VcpkgGitParser
       url: https://github.com/Microsoft/vcpkg.git
       sparse_checkout: [ 'ports/*/CONTROL' ]
   repolinks:

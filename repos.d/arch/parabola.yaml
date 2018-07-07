@@ -10,8 +10,8 @@
   minpackages: 10000
   sources:
     - name: [ core, extra, community, libre, pcr ]
-      fetcher: WgetTar
-      parser: ArchDB
+      fetcher: WgetTarFetcher
+      parser: ArchDBParser
       #url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
       url: 'https://mirror.yandex.ru/mirrors/parabola/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
@@ -34,8 +34,8 @@
   minpackages: 1
   sources:
     - name: [ testing, libre-testing ]
-      fetcher: WgetTar
-      parser: ArchDB
+      fetcher: WgetTarFetcher
+      parser: ArchDBParser
       #url: 'https://repomirror.parabola.nu/{source}/os/x86_64/{source}.db.tar.gz'
       url: 'https://mirror.yandex.ru/mirrors/parabola/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
