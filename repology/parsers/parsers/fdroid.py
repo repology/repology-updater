@@ -18,9 +18,10 @@
 import xml.etree.ElementTree
 
 from repology.package import Package, PackageFlags
+from repology.parsers import Parser
 
 
-class FDroidParser():
+class FDroidParser(Parser):
     def __init__(self):
         pass
 

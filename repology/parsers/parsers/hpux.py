@@ -16,9 +16,10 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class HPPADepothelperListParser():
+class HPPADepothelperListParser(Parser):
     def __init__(self):
         pass
 

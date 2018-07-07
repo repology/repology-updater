@@ -20,12 +20,13 @@ import lzma
 import os
 import xml.etree.ElementTree
 
+from repology.fetchers import Fetcher
 from repology.fetchers.fetch import Fetch
 from repology.fetchers.state import StateFile
 from repology.logger import NoopLogger
 
 
-class RepodataFetcher():
+class RepodataFetcher(Fetcher):
     def __init__(self, url):
         self.url = url
 

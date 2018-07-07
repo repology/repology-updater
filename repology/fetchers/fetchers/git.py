@@ -17,12 +17,13 @@
 
 import os
 
+from repology.fetchers import Fetcher
 from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
 
-class GitFetcher():
+class GitFetcher(Fetcher):
     def __init__(self, url, branch='master', sparse_checkout=None, fetch_timeout=600):
         self.url = url
         self.branch = branch

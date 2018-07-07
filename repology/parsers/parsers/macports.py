@@ -21,6 +21,7 @@ import subprocess
 
 from repology.config import config
 from repology.package import Package
+from repology.parsers import Parser
 
 
 def SanitizeVersion(version):
@@ -36,7 +37,7 @@ def SanitizeVersion(version):
         return version, None
 
 
-class MacPortsParser():
+class MacPortsParser(Parser):
     def __init__(self):
         self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
 

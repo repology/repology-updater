@@ -18,10 +18,11 @@
 import rpm
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
-class SrcListParser():
+class SrcListParser(Parser):
     def __init__(self, encoding='utf-8'):
         self.encoding = encoding
 

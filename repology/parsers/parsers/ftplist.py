@@ -16,10 +16,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.nevra import filename2nevra
 
 
-class RPMFTPListParser():
+class RPMFTPListParser(Parser):
     def __init__(self):
         pass
 

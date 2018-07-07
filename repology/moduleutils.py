@@ -70,7 +70,7 @@ class ClassFactory:
                     suitable &= name.endswith(suffix)
 
                 if superclass is not None:
-                    suitable &= issubclass(member, superclass)
+                    suitable &= inspect.isclass(member) and issubclass(member, superclass)
 
                 if suitable:
                     self.classes[name] = member

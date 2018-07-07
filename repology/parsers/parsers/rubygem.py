@@ -18,9 +18,10 @@
 import rubymarshal.reader
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class RubyGemParser():
+class RubyGemParser(Parser):
     def __init__(self):
         pass
 

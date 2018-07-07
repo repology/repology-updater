@@ -20,10 +20,11 @@
 import xml.etree.ElementTree
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 
 
-class NSTPkgInfoXMLParser():
+class NSTPkgInfoXMLParser(Parser):
     def __init__(self):
         pass
 

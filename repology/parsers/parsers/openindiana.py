@@ -20,9 +20,10 @@ import shlex
 import sys
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class OpenIndianaSummaryJsonParser():
+class OpenIndianaSummaryJsonParser(Parser):
     def __init__(self):
         pass
 

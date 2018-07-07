@@ -18,12 +18,13 @@
 import json
 import os
 
+from repology.fetchers import Fetcher
 from repology.fetchers.fetch import Fetch
 from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 
 
-class FedoraFetcher():
+class FedoraFetcher(Fetcher):
     def __init__(self, apiurl, giturl):
         self.apiurl = apiurl
         self.giturl = giturl

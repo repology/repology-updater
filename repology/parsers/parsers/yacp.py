@@ -20,6 +20,7 @@ import re
 import sys
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
 def SanitizeVersion(version):
@@ -35,7 +36,7 @@ def SanitizeVersion(version):
         return version, None
 
 
-class YACPGitParser():
+class YACPGitParser(Parser):
     def __init__(self):
         pass
 

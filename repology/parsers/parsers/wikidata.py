@@ -20,6 +20,7 @@ import sys
 
 
 from repology.package import Package, PackageFlags
+from repology.parsers import Parser
 
 
 def SimplifyResult(injson):
@@ -29,7 +30,7 @@ def SimplifyResult(injson):
         }
 
 
-class WikidataJsonParser():
+class WikidataJsonParser(Parser):
     def __init__(self):
         pass
 

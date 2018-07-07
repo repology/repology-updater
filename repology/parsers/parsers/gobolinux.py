@@ -22,6 +22,7 @@ import sys
 from libversion import version_compare
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
 def ExpandDownloadUrlTemplates(url):
@@ -34,7 +35,7 @@ def ExpandDownloadUrlTemplates(url):
               .replace('$ftpAlphaGnu', ftp_gnu)
 
 
-class GoboLinuxGitParser():
+class GoboLinuxGitParser(Parser):
     def __init__(self):
         pass
 

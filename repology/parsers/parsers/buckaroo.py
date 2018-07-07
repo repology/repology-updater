@@ -19,10 +19,11 @@ import json
 import os
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 
 
-class BuckarooGitParser():
+class BuckarooGitParser(Parser):
     def __init__(self):
         pass
 

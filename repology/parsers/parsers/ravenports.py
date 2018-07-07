@@ -19,9 +19,10 @@ import json
 
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class RavenportsJsonParser():
+class RavenportsJsonParser(Parser):
     def __init__(self):
         pass
 

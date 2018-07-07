@@ -18,10 +18,11 @@
 import re
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
-class CPANPackagesParser():
+class CPANPackagesParser(Parser):
     def __init__(self):
         pass
 

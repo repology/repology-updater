@@ -18,9 +18,10 @@
 import lxml.html
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class KaOSHTMLParser():
+class KaOSHTMLParser(Parser):
     def __init__(self):
         pass
 

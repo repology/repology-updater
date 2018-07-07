@@ -22,10 +22,11 @@ import sys
 from libversion import version_compare
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
-class HackageParser():
+class HackageParser(Parser):
     def __init__(self):
         pass
 

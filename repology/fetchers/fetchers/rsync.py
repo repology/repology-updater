@@ -17,11 +17,12 @@
 
 import os
 
+from repology.fetchers import Fetcher
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
 
-class RsyncFetcher():
+class RsyncFetcher(Fetcher):
     def __init__(self, url, fetch_timeout=60):
         self.url = url
         self.fetch_timeout = fetch_timeout

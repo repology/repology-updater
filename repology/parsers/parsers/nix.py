@@ -20,6 +20,7 @@ import re
 import sys
 
 from repology.package import Package, PackageFlags
+from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
@@ -54,7 +55,7 @@ def ExtractLicenses(whatever):
         return []
 
 
-class NixJsonParser():
+class NixJsonParser(Parser):
     def __init__(self):
         pass
 

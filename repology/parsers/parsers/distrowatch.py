@@ -18,9 +18,10 @@
 import lxml.html
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class DistrowatchPackagesParser():
+class DistrowatchPackagesParser(Parser):
     def __init__(self):
         pass
 

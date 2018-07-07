@@ -18,12 +18,13 @@
 import os
 import urllib
 
+from repology.fetchers import Fetcher
 from repology.fetchers.fetch import Fetch
 from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 
 
-class AURFetcher():
+class AURFetcher(Fetcher):
     def __init__(self, url, fetch_timeout=5):
         self.url = url
         self.fetch_timeout = fetch_timeout

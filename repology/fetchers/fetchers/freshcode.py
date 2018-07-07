@@ -20,12 +20,13 @@ import os
 
 from libversion import version_compare
 
+from repology.fetchers import Fetcher
 from repology.fetchers.fetch import Fetch
 from repology.fetchers.state import StateFile
 from repology.logger import NoopLogger
 
 
-class FreshcodeFetcher():
+class FreshcodeFetcher(Fetcher):
     def __init__(self, url):
         self.url = url
 

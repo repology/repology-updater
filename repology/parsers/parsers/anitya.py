@@ -19,9 +19,10 @@ import json
 import sys
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class AnityaApiParser():
+class AnityaApiParser(Parser):
     def __init__(self):
         pass
 

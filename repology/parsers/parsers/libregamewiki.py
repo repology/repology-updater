@@ -19,9 +19,10 @@ import re
 import xml.etree.ElementTree
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class LibreGameWikiParser():
+class LibreGameWikiParser(Parser):
     def __init__(self):
         pass
 

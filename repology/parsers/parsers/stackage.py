@@ -18,9 +18,10 @@
 import lxml.html
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class StackageHTMLParser():
+class StackageHTMLParser(Parser):
     def __init__(self):
         pass
 

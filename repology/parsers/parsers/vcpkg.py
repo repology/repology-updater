@@ -20,6 +20,7 @@ import re
 import sys
 
 from repology.package import Package, PackageFlags
+from repology.parsers import Parser
 
 
 def SanitizeVersion(version):
@@ -36,7 +37,7 @@ def SanitizeVersion(version):
         return version, None
 
 
-class VcpkgGitParser():
+class VcpkgGitParser(Parser):
     def __init__(self):
         pass
 

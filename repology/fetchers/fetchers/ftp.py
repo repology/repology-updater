@@ -19,11 +19,12 @@ import ftplib
 import os
 import urllib
 
+from repology.fetchers import Fetcher
 from repology.fetchers.state import StateFile
 from repology.logger import NoopLogger
 
 
-class FTPListFetcher():
+class FTPListFetcher(Fetcher):
     def __init__(self, url, fetch_timeout=60):
         self.url = urllib.parse.urlparse(url, scheme='ftp', allow_fragments=False)
         assert(self.url.scheme == 'ftp')

@@ -19,9 +19,10 @@ import json
 import os
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class CratesIOParser():
+class CratesIOParser(Parser):
     def __init__(self):
         pass
 

@@ -19,6 +19,7 @@ import re
 import sys
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
@@ -35,7 +36,7 @@ def SanitizeVersion(version):
         return version, None
 
 
-class PkgsrcIndexParser():
+class PkgsrcIndexParser(Parser):
     def __init__(self):
         pass
 

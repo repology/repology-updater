@@ -18,12 +18,13 @@
 import os
 import xml.etree.ElementTree
 
+from repology.fetchers import Fetcher
 from repology.fetchers.fetch import Fetch
 from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 
 
-class ChocolateyFetcher():
+class ChocolateyFetcher(Fetcher):
     def __init__(self, url, fetch_timeout=5):
         self.url = url
         self.fetch_timeout = fetch_timeout

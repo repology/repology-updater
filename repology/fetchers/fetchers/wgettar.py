@@ -17,12 +17,13 @@
 
 import os
 
+from repology.fetchers import Fetcher
 from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 from repology.subprocess import RunSubprocess
 
 
-class WgetTarFetcher():
+class WgetTarFetcher(Fetcher):
     def __init__(self, url, fetch_timeout=60):
         self.url = url
         self.fetch_timeout = fetch_timeout

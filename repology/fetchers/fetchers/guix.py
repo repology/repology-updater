@@ -20,12 +20,13 @@ from string import ascii_uppercase
 
 import lxml.html
 
+from repology.fetchers import Fetcher
 from repology.fetchers.fetch import Fetch
 from repology.fetchers.state import StateDir
 from repology.logger import NoopLogger
 
 
-class GuixFetcher():
+class GuixFetcher(Fetcher):
     def __init__(self, url):
         self.url = url
 

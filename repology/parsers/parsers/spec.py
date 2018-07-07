@@ -19,9 +19,10 @@ import os
 import sys
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class SpecParser():
+class SpecParser(Parser):
     def __init__(self):
         pass
 

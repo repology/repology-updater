@@ -18,10 +18,11 @@
 import lxml.html
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.nevra import filename2nevra
 
 
-class SophieHTMLParser():
+class SophieHTMLParser(Parser):
     def __init__(self):
         pass
 

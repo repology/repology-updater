@@ -20,9 +20,10 @@ import sys
 import xml.etree.ElementTree
 
 from repology.package import Package, PackageFlags
+from repology.parsers import Parser
 
 
-class RosaInfoXmlParser():
+class RosaInfoXmlParser(Parser):
     def __init__(self):
         pass
 

@@ -20,6 +20,7 @@ import sys
 import xml.etree.ElementTree
 
 from repology.package import Package, PackageFlags
+from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
@@ -36,7 +37,7 @@ def SanitizeVersion(version):
         return version, None
 
 
-class RepodataParser():
+class RepodataParser(Parser):
     def __init__(self, allowed_archs=None):
         self.allowed_archs = allowed_archs
 

@@ -19,9 +19,10 @@ import re
 import sys
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class PyPiHTMLParser():
+class PyPiHTMLParser(Parser):
     def __init__(self):
         pass
 

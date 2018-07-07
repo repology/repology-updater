@@ -18,9 +18,10 @@
 import re
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
-class CRANCheckSummaryParser():
+class CRANCheckSummaryParser(Parser):
     def __init__(self):
         pass
 

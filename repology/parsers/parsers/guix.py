@@ -21,6 +21,7 @@ import re
 import lxml.html
 
 from repology.package import Package
+from repology.parsers import Parser
 
 
 def SanitizeVersion(version):
@@ -36,7 +37,7 @@ def SanitizeVersion(version):
         return version, None
 
 
-class GuixParser():
+class GuixParser(Parser):
     def __init__(self):
         pass
 

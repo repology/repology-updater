@@ -21,12 +21,13 @@ import lzma
 import os
 import time
 
+from repology.fetchers import Fetcher
 from repology.fetchers.fetch import Fetch
 from repology.fetchers.state import StateFile
 from repology.logger import NoopLogger
 
 
-class FileFetcher():
+class FileFetcher(Fetcher):
     def __init__(self, url, compression=None, post=None, headers=None, nocache=False):
         self.url = url
         self.compression = compression

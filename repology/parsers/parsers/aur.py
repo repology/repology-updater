@@ -19,6 +19,7 @@ import json
 import os
 
 from repology.package import Package
+from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
@@ -43,7 +44,7 @@ def SanitizeVersion(version):
         return version, None
 
 
-class AURParser():
+class AURParser(Parser):
     def __init__(self):
         pass
 

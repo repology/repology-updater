@@ -22,10 +22,12 @@ import sys
 import time
 import traceback
 
+from repology.fetchers import Fetcher
 from repology.logger import NoopLogger
 from repology.moduleutils import ClassFactory
 from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
 from repology.packageproc import PackagesetDeduplicate
+from repology.parsers import Parser
 from repology.resourceusage import ResourceUsageMonitor
 
 
@@ -51,8 +53,8 @@ class RepositoryProcessor:
         self.fetch_retry_delay = fetch_retry_delay
         self.safety_checks = safety_checks
 
-        self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', suffix='Fetcher')
-        self.parser_factory = ClassFactory('repology.parsers.parsers', suffix='Parser')
+        self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', superclass=Fetcher)
+        self.parser_factory = ClassFactory('repology.parsers.parsers', superclass=Parser)
 
     def __GetRepoPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.state')
