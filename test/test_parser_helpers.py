@@ -19,8 +19,8 @@
 
 import unittest
 
-from repology.parsers.nevra import filename2nevra
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.nevra import filename2nevra
 
 
 class TestNevra(unittest.TestCase):
