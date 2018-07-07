@@ -31,7 +31,7 @@ class ModuleEnumerator:
     def __init__(self, pkgname, pkgfile):
         self.modules = []
 
-        pkgdir = os.path.join(os.path.dirname(pkgfile), relpath)
+        pkgdir = os.path.dirname(pkgfile)
 
         for modfile in os.listdir(pkgdir):
             modname = inspect.getmodulename(os.path.join(pkgdir, modfile))
