@@ -31,8 +31,12 @@ def repositories():
 
 @ViewRegistrar('/repository/<repo>')
 def repository(repo):
-    if repo not in repometadata.active_names():
+    if repo not in repometadata.all_names():
         flask.abort(404)
+        #return (flask.render_template('repository-404.html', repo=repo), 404)
+    if repo not in repometadata.active_names():
+        # HTTP code is intentionally 404
+        return (flask.render_template('repository-410.html', repo=repo, repo_info=get_db().get_repository(repo)), 404)
 
     return flask.render_template(
         'repository.html',

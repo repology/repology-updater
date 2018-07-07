@@ -11,20 +11,15 @@
 {% block content %}
 <div class="container">
 
-{% set never = not maintainer_info %}
-
 <div class="alert alert-warning" role="alert">
-	<p>Sorry, but Repology {% if never %}doesn't know{% else %}no longer knows{% endif %} anything about <strong>{{ maintainer }}</strong>.</p>
-	{% if not never %}
-	<p>Last time Repology has seen any packages maintained by this maintainer was {{ macros.format_absolute_time(maintainer_info.last_seen) }}{{ macros.timezone_abbr() }} ({{ macros.format_time_interval(maintainer_info.last_seen_ago) }} ago).</p>
-	{% endif %}
+	<p>Sorry, but Repology doesn't know anything about <strong>{{ maintainer }}</strong>.</p>
 	<p>Some of the reasons which may have caused this:</p>
 	<ul>
 		<li>The maintainer no longer maintains any packages.</li>
 		<li>The maintainer obfuscates his email in package metadata, so repology cannot parse it.</li>
-		<li>Repology {% if never %}does not support{% else %}no longer supports{% endif %} any repositories this maintainer is active in. Check <a href="{{ url_for('statistics') }}">the list</a>.</li>
+		<li>Repology does not support any repositories this maintainer is active in. Check <a href="{{ url_for('statistics') }}">the list</a>.</li>
 		<li>The maintainer identifier (email) is misspelled, or have changed. Try <a href="{{ url_for('maintainers') }}">searching</a>. It is quite common for only domain part to change.</li>
-		<li>Repology is {% if never %}unable{% else %}no longer able{% endif %} to parse maintainer information for repositories this maintainer is active in. Check <a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}#repository-support">repository support table</a>. This can be fixed if repositories in question setup a more complete dump of information on their packages.</li>
+		<li>Repology is unable to parse maintainer information for repositories this maintainer is active in. Check <a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}#repository-support">repository support table</a>. This can be fixed if repositories in question setup a more complete dump of information on their packages.</li>
 	</ul>
 </div>
 

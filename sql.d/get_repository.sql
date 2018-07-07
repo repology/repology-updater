@@ -42,6 +42,9 @@ SELECT
 	last_update at time zone 'UTC' AS last_update_utc,
 	now() - last_update AS since_last_update,
 	num_problems,
-	num_maintainers
+	first_seen,
+	last_seen,
+	now() - first_seen AS first_seen_ago,
+	now() - last_seen AS last_seen_ago
 FROM repositories
 WHERE name = %(reponame)s;

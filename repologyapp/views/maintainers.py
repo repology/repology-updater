@@ -66,12 +66,16 @@ def maintainer(maintainer):
     maintainer = maintainer.lower()
 
     maintainer_info = get_db().get_maintainer_information(maintainer)
+
+    if not maintainer_info:
+        return (flask.render_template('maintainer-404.html', maintainer=maintainer, maintainer_info=maintainer_info), 404)
+    elif maintainer_info['num_packages'] == 0:
+        # HTTP code is intentionally 404
+        return (flask.render_template('maintainer-410.html', maintainer=maintainer, maintainer_info=maintainer_info), 404)
+
     metapackages = get_db().get_maintainer_metapackages(maintainer, 500)
     similar_maintainers = get_db().get_maintainer_similar_maintainers(maintainer, 50)
     numproblems = get_db().get_maintainer_problems_count(maintainer)
-
-    if not maintainer_info or maintainer_info['num_packages'] == 0:
-        return (flask.render_template('maintainer-404.html', maintainer=maintainer, maintainer_info=maintainer_info), 404)
 
     for key in ('repository_package_counts', 'repository_metapackage_counts', 'category_metapackage_counts'):
         if maintainer_info[key]:
