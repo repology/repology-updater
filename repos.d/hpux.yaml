@@ -19,4 +19,4 @@
   packagelinks:
     - desc: Package page
       url: 'http://hpux.connect.org.uk/hppd{path}/{name}-{version}/'
-  tags: [ all, experimental, hpux ]
+  tags: [ all, production, hpux ]
