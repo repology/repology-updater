@@ -43,10 +43,14 @@ class ModuleEnumerator:
 
 
 class ClassFactory:
-    def __init__(self, pkgname, pkgfile, suffix):
+    def __init__(self, suffix):
+        caller_frame = inspect.stack()[1].frame
+        caller_module = inspect.getmodule(caller_frame).__name__
+        caller_path = inspect.getfile(caller_frame)
+
         self.modules = {}
 
-        for module in ModuleEnumerator(pkgname, pkgfile).Enumerate():
+        for module in ModuleEnumerator(caller_module, caller_path).Enumerate():
             for name, member in inspect.getmembers(module):
                 if name.endswith(suffix) and inspect.isclass(member):
                     self.modules[name[:-len(suffix)]] = member

@@ -18,4 +18,4 @@
 from repology.moduleutils import ClassFactory
 
 
-Factory = ClassFactory(__name__, __file__, 'Fetcher')
+Factory = ClassFactory('Fetcher')
