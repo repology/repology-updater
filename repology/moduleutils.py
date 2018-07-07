@@ -68,7 +68,10 @@ class ClassFactory:
                 if name.endswith(suffix) and inspect.isclass(member):
                     self.classes[name[:-len(suffix)]] = member
 
-    def Spawn(self, name, kwargs):
+    def Spawn(self, name, *args, **kwargs):
+        return self.classes[name](*args, **kwargs)
+
+    def SpawnWithKnownArgs(self, name, kwargs):
         class_ = self.classes[name]
 
         filtered_kwargs = {

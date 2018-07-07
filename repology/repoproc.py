@@ -71,7 +71,7 @@ class RepositoryProcessor:
             logger.Log('fetching source {} not supported'.format(source['name']))
             return
 
-        fetcher = FetcherFactory.Spawn(source['fetcher'], source)
+        fetcher = FetcherFactory.SpawnWithKnownArgs(source['fetcher'], source)
 
         ntry = 1
         while ntry <= self.fetch_retries:
@@ -115,7 +115,7 @@ class RepositoryProcessor:
         usage = ResourceUsageMonitor()
 
         # parse
-        packages = ParserFactory.Spawn(
+        packages = ParserFactory.SpawnWithKnownArgs(
             source['parser'],
             source
         ).Parse(
