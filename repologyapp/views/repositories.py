@@ -36,12 +36,12 @@ def repository(repo):
         #return (flask.render_template('repository-404.html', repo=repo), 404)
     if repo not in repometadata.active_names():
         # HTTP code is intentionally 404
-        return (flask.render_template('repository-410.html', repo=repo, repo_info=get_db().get_repository(repo)), 404)
+        return (flask.render_template('repository-410.html', repo=repo, repo_info=get_db().get_repository_information(repo)), 404)
 
     return flask.render_template(
         'repository.html',
         repo=repo,
-        repo_info=get_db().get_repository(repo)
+        repo_info=get_db().get_repository_information(repo)
     )
 
 
