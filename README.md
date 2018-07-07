@@ -62,6 +62,7 @@ version are always parsed.
 | Hackage                          | ✔       | ✔ (3)   | ✔     | ✔     | ✔       |          |
 | HaikuPorts                       |         |         | ✔     |       |         |          |
 | Homebrew                         | ✔       |         |       | ✔     |         |          |
+| HP-UX                            |         |         |       |       |         |          |
 | KaOS                             |         |         |       |       |         |          |
 | Linuxbrew                        | ✔       |         |       | ✔     |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |

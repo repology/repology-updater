@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -52,6 +52,7 @@ families = [
     'hackage',
     'haikuports',
     'homebrew',
+    'hpux',
     'kaos',
     'libregamewiki',
     'macports',

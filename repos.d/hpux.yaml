@@ -1,0 +1,22 @@
+###########################################################################
+# HP-UX
+###########################################################################
+- name: hpux_11_31
+  type: repository
+  desc: HP-UX 11.31
+  family: hpux
+  minpackages: 1500
+  sources:
+    - name: [ hppa_32, ia64_32, ia64_64 ]
+      fetcher: File
+      parser: HPPADepothelperList
+      url: 'http://hpux.connect.org.uk/ftp/depothelper/packages-{source}-11.31.bz2'
+      compression: bz2
+      subrepo: '{source}'
+  repolinks:
+    - desc: HP-UX Porting and Archive Centere
+      url: http://hpux.connect.org.uk/
+  packagelinks:
+    - desc: Package page
+      url: 'http://hpux.connect.org.uk/hppd{path}/{name}-{version}/'
+  tags: [ all, experimental, hpux ]
