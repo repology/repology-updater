@@ -20,7 +20,7 @@ import re
 import sys
 
 from repology.package import Package, PackageFlags
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def ExtractMaintainers(items):
@@ -28,7 +28,7 @@ def ExtractMaintainers(items):
         # old format, currently used in stable; parse email out of 'name <email>' string
         # items without closing '>' are quite common, just skip them
         if isinstance(item, str):
-            for maintainer in GetMaintainers(item):
+            for maintainer in extract_maintainers(item):
                 if '<' not in maintainer:
                     yield maintainer
         elif isinstance(item, dict):

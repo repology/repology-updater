@@ -19,7 +19,7 @@ import os
 import re
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -62,7 +62,7 @@ class ApkIndexParser():
                     pkg.licenses = [state['L']]
 
                     if 'm' in state:
-                        pkg.maintainers = GetMaintainers(state['m'])
+                        pkg.maintainers = extract_maintainers(state['m'])
 
                     packages.append(pkg)
 

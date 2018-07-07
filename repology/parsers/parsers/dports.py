@@ -18,7 +18,7 @@
 import sys
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -58,7 +58,7 @@ class DPortsIndexParser():
                 pkg.name, version = fields[0].rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
                 pkg.comment = fields[3]
-                pkg.maintainers = GetMaintainers(fields[5])
+                pkg.maintainers = extract_maintainers(fields[5])
                 pkg.category = fields[6].split(' ')[0]
 
                 if fields[12]:

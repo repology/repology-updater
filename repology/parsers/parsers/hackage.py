@@ -22,7 +22,7 @@ import sys
 from libversion import version_compare
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 class HackageParser():
@@ -101,7 +101,7 @@ class HackageParser():
                 if 'synopsis' in cabaldata and cabaldata['synopsis']:
                     pkg.comment = cabaldata['synopsis'].strip()
                 if 'maintainer' in cabaldata:
-                    pkg.maintainers = GetMaintainers(cabaldata['maintainer'])
+                    pkg.maintainers = extract_maintainers(cabaldata['maintainer'])
                 if 'license' in cabaldata:
                     pkg.licenses = [cabaldata['license']]
                 if 'homepage' in cabaldata and (cabaldata['homepage'].startswith('http://') or cabaldata['homepage'].startswith('https://')):

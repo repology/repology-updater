@@ -19,7 +19,7 @@ import os
 import sys
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 class SlackBuildsParser():
@@ -79,7 +79,7 @@ class SlackBuildsParser():
                     pkg.name = variables['PRGNAM']
                     pkg.version = variables['VERSION']
                     pkg.homepage = variables['HOMEPAGE']
-                    pkg.maintainers = GetMaintainers(variables['EMAIL'])
+                    pkg.maintainers = extract_maintainers(variables['EMAIL'])
                     for key in ['DOWNLOAD', 'DOWNLOAD_x86_64']:
                         if variables[key] not in ['', 'UNSUPPORTED', 'UNTESTED']:
                             pkg.downloads.extend(variables[key].split())

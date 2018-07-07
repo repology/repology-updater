@@ -20,7 +20,7 @@ import sys
 import xml.etree.ElementTree
 
 from repology.package import Package, PackageFlags
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -88,7 +88,7 @@ class RepodataParser():
 
             packager = entry.find('{http://linux.duke.edu/metadata/common}packager').text
             if packager:
-                pkg.maintainers = GetMaintainers(packager)
+                pkg.maintainers = extract_maintainers(packager)
 
             result.append(pkg)
 

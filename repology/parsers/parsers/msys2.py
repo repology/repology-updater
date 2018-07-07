@@ -19,7 +19,7 @@ import os
 import sys
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -77,7 +77,7 @@ class MSYS2Parser():
                 if 'LICENSE' in data:
                     pkg.licenses = data['LICENSE']
 
-                pkg.maintainers = sum(map(GetMaintainers, data['PACKAGER']), [])
+                pkg.maintainers = sum(map(extract_maintainers, data['PACKAGER']), [])
 
                 if 'GROUPS' in data:
                     pkg.category = data['GROUPS'][0]

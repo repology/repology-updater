@@ -19,7 +19,7 @@ import json
 import re
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -56,7 +56,7 @@ class TermuxJsonParser():
                 if match:
                     pkg.maintainers = [match.group(1).lower() + '@termux']
                 else:
-                    pkg.maintainers = GetMaintainers(packagedata['maintainer'])
+                    pkg.maintainers = extract_maintainers(packagedata['maintainer'])
 
                 result.append(pkg)
 

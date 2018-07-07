@@ -19,7 +19,7 @@ import json
 import sys
 
 from repology.package import Package, PackageFlags
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -56,7 +56,7 @@ class AoscPkgsParser():
                 pkg.origversion = package['full_version']
                 pkg.category = package['pkg_section'] or package['section']
                 pkg.comment = package['description']
-                pkg.maintainers = GetMaintainers(package['committer'])
+                pkg.maintainers = extract_maintainers(package['committer'])
 
                 if pkg.version == '999':
                     pkg.SetFlag(PackageFlags.ignore)  # XXX: rolling? revisit

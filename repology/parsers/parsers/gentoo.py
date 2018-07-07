@@ -19,7 +19,7 @@ import os
 import xml.etree.ElementTree
 
 from repology.package import Package, PackageFlags
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def ParseConditionalExpr(string):
@@ -97,7 +97,7 @@ class GentooGitParser():
                             email_node = entry.find('email')
 
                             if email_node is not None and email_node.text is not None:
-                                maintainers += GetMaintainers(email_node.text)
+                                maintainers += extract_maintainers(email_node.text)
 
                 for ebuild in os.listdir(package_path):
                     if not ebuild.endswith('.ebuild'):

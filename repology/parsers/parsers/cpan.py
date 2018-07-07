@@ -18,7 +18,7 @@
 import re
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 class CPANPackagesParser():
@@ -89,7 +89,7 @@ class CPANPackagesParser():
                 pkg.name = package_name
                 pkg.version = package_version
 
-                pkg.maintainers = GetMaintainers(package_path.split('/')[2].lower() + '@cpan')
+                pkg.maintainers = extract_maintainers(package_path.split('/')[2].lower() + '@cpan')
                 pkg.homepage = 'http://search.cpan.org/dist/' + package_name + '/'
 
                 result.append(pkg)

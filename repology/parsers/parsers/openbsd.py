@@ -19,7 +19,7 @@ import csv
 import re
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -61,7 +61,7 @@ class OpenBSDIndexParser():
                 pkg.name, version = pkgname.rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
                 pkg.comment = row[3]
-                pkg.maintainers = GetMaintainers(row[5])
+                pkg.maintainers = extract_maintainers(row[5])
                 pkg.category = row[6].split(' ')[0].strip()
 
                 origin = row[1].rsplit(',', 1)[0]

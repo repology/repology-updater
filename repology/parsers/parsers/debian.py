@@ -19,7 +19,7 @@ import re
 import sys
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -89,8 +89,8 @@ class DebianSourcesParser():
 
                     pkg.name = GetField('Package')
                     pkg.version, pkg.origversion = SanitizeVersion(GetField('Version'))
-                    pkg.maintainers += GetMaintainers(GetField('Maintainer', default=''))
-                    pkg.maintainers += GetMaintainers(GetField('Uploaders', default=''))
+                    pkg.maintainers += extract_maintainers(GetField('Maintainer', default=''))
+                    pkg.maintainers += extract_maintainers(GetField('Uploaders', default=''))
                     pkg.category = GetField('Section')
                     pkg.homepage = GetField('Homepage')
 

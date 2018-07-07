@@ -19,7 +19,7 @@ import os
 import sys
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -76,7 +76,7 @@ class CRUXParser():
                         maintainer = line[13:].strip()
                         if ',' in maintainer:
                             _, email = line[13:].strip().split(',', 1)
-                            pkg.maintainers += GetMaintainers(email)
+                            pkg.maintainers += extract_maintainers(email)
                         else:
                             print('WARNING: bad Maintainer format for {}'.format(pkgdir), file=sys.stderr)
 

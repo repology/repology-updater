@@ -19,7 +19,7 @@ import os
 import sys
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -79,7 +79,7 @@ class ArchDBParser():
                     elif tag == 'LICENSE':
                         pkg.licenses.append(line)
                     elif tag == 'PACKAGER':
-                        pkg.maintainers += GetMaintainers(line)
+                        pkg.maintainers += extract_maintainers(line)
                     elif tag == 'BASE':
                         pkg.extrafields['base'] = line
                     elif line.startswith('%') and line.endswith('%'):

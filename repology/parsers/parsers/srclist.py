@@ -18,7 +18,7 @@
 import rpm
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 class SrcListParser():
@@ -40,7 +40,7 @@ class SrcListParser():
             pkg.version = fields['version']  # XXX: handle release
 
             if fields['packager']:
-                pkg.maintainers = GetMaintainers(fields['packager'])  # XXX: may have multiple maintainers
+                pkg.maintainers = extract_maintainers(fields['packager'])  # XXX: may have multiple maintainers
 
             pkg.category = fields['group']
             pkg.comment = fields['summary']

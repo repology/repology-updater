@@ -19,7 +19,7 @@ import os
 import re
 
 from repology.package import Package, PackageFlags
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -48,7 +48,7 @@ class ExherboGitParser():
                     key, value = map(lambda s: s.strip(), line.split('=', 1))
 
                     if key == 'owner':
-                        maintainers = GetMaintainers(value)
+                        maintainers = extract_maintainers(value)
 
         packages_path = os.path.join(path, 'packages')
 

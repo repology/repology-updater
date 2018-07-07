@@ -19,7 +19,7 @@ import re
 import sys
 
 from repology.package import Package
-from repology.util import GetMaintainers
+from repology.parsers.maintainers import extract_maintainers
 
 
 def SanitizeVersion(version):
@@ -62,7 +62,7 @@ class PkgsrcIndexParser():
 
                 # sometimes OWNER variable is used in which case
                 # there's no MAINTAINER OWNER doesn't get to INDEX
-                pkg.maintainers = GetMaintainers(fields[5])
+                pkg.maintainers = extract_maintainers(fields[5])
 
                 pkg.category = fields[6].split(' ')[0]
 
