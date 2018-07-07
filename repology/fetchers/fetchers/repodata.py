@@ -17,24 +17,17 @@
 
 import gzip
 import lzma
-import os
 import xml.etree.ElementTree
 
-from repology.fetchers import Fetcher
+from repology.fetchers import ScratchFileFetcher
 from repology.fetchers.fetch import Fetch
-from repology.fetchers.state import StateFile
-from repology.logger import NoopLogger
 
 
-class RepodataFetcher(Fetcher):
+class RepodataFetcher(ScratchFileFetcher):
     def __init__(self, url):
         self.url = url
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isfile(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
-
+    def do_fetch(self, statefile, logger):
         # Get and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)
@@ -59,5 +52,4 @@ class RepodataFetcher(Fetcher):
 
         logger.GetIndented().Log('saving')
 
-        with StateFile(statepath, 'wb') as statefile:
-            statefile.write(data)
+        statefile.write(data)

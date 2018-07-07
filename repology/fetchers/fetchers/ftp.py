@@ -16,25 +16,18 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import ftplib
-import os
 import urllib
 
-from repology.fetchers import Fetcher
-from repology.fetchers.state import StateFile
-from repology.logger import NoopLogger
+from repology.fetchers import ScratchFileFetcher
 
 
-class FTPListFetcher(Fetcher):
+class FTPListFetcher(ScratchFileFetcher):
     def __init__(self, url, fetch_timeout=60):
         self.url = urllib.parse.urlparse(url, scheme='ftp', allow_fragments=False)
         assert(self.url.scheme == 'ftp')
         self.fetch_timeout = fetch_timeout
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isfile(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
-
+    def do_fetch(self, statefile, logger):
         ftp = ftplib.FTP(
             host=self.url.hostname,
             user=self.url.username or '',
@@ -46,7 +39,6 @@ class FTPListFetcher(Fetcher):
 
         ftp.cwd(self.url.path)
 
-        with StateFile(statepath, 'w') as statefile:
-            ftp.retrlines('LIST', callback=lambda line: print(line, file=statefile))
+        ftp.retrlines('LIST', callback=lambda line: print(line, file=statefile))
 
         ftp.quit()

@@ -15,6 +15,54 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
+
+from repology.fetchers.state import StateDir, StateFile
+from repology.logger import NoopLogger
+
 
 class Fetcher:
     pass
+
+
+class PersistentDirFetcher(Fetcher):
+    def do_fetch(self, statedir, logger):
+        raise RuntimeError('pure virtual method called')
+
+    def do_update(self, statedir, logger):
+        raise RuntimeError('pure virtual method called')
+
+    def fetch(self, statepath, update=True, logger=NoopLogger()):
+        if not os.path.isdir(statepath):
+            with StateDir(statepath) as statedir:
+                self.do_fetch(statedir, logger)
+        elif update:
+            self.do_update(statepath, logger)
+        else:
+            logger.Log('no update requested, skipping')
+
+
+class ScratchDirFetcher(Fetcher):
+    def do_fetch(self, statedir, logger):
+        raise RuntimeError('pure virtual method called')
+
+    def fetch(self, statepath, update=True, logger=NoopLogger()):
+        if os.path.isdir(statepath) and not update:
+            logger.Log('no update requested, skipping')
+            return
+
+        with StateDir(statepath) as statedir:
+            self.do_fetch(statedir, logger)
+
+
+class ScratchFileFetcher(Fetcher):
+    def do_fetch(self, statefile, logger):
+        raise RuntimeError('pure virtual method called')
+
+    def fetch(self, statepath, update=True, logger=NoopLogger()):
+        if os.path.isfile(statepath) and not update:
+            logger.Log('no update requested, skipping')
+            return
+
+        with StateFile(statepath, 'w', encoding='utf-8') as statefile:
+            self.do_fetch(statefile, logger)

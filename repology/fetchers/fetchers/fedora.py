@@ -18,18 +18,16 @@
 import json
 import os
 
-from repology.fetchers import Fetcher
+from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.fetch import Fetch
-from repology.fetchers.state import StateDir
-from repology.logger import NoopLogger
 
 
-class FedoraFetcher(Fetcher):
+class FedoraFetcher(ScratchDirFetcher):
     def __init__(self, apiurl, giturl):
         self.apiurl = apiurl
         self.giturl = giturl
 
-    def LoadSpec(self, package, statedir, logger):
+    def _load_spec(self, package, statedir, logger):
         specurl = self.giturl + '/{0}.git/plain/{0}.spec'.format(package)
 
         logger.GetIndented().Log('getting spec from {}'.format(specurl))
@@ -47,23 +45,18 @@ class FedoraFetcher(Fetcher):
         with open(os.path.join(statedir, package + '.spec'), 'wb') as file:
             file.write(r.content)
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
+    def do_fetch(self, statedir, logger):
+        page = 1
 
-        with StateDir(statepath) as statedir:
-            page = 1
+        while True:
+            pageurl = self.apiurl + 'packages/?page={}'.format(page)
+            logger.Log('getting page {} from {}'.format(page, pageurl))
+            pagedata = json.loads(Fetch(pageurl).text)
 
-            while True:
-                pageurl = self.apiurl + 'packages/?page={}'.format(page)
-                logger.Log('getting page {} from {}'.format(page, pageurl))
-                pagedata = json.loads(Fetch(pageurl).text)
+            for package in pagedata['packages']:
+                self._load_spec(package['name'], statedir, logger)
 
-                for package in pagedata['packages']:
-                    self.LoadSpec(package['name'], statedir, logger)
+            page += 1
 
-                page += 1
-
-                if page > pagedata['page_total']:
-                    break
+            if page > pagedata['page_total']:
+                break

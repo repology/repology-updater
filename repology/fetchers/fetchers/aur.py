@@ -18,49 +18,42 @@
 import os
 import urllib
 
-from repology.fetchers import Fetcher
+from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.fetch import Fetch
-from repology.fetchers.state import StateDir
-from repology.logger import NoopLogger
 
 
-class AURFetcher(Fetcher):
+class AURFetcher(ScratchDirFetcher):
     def __init__(self, url, fetch_timeout=5):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
+    def do_fetch(self, statedir, logger):
+        packages_url = self.url + 'packages.gz'
+        logger.GetIndented().Log('fetching package list from ' + packages_url)
+        data = Fetch(packages_url).text  # autogunzipped?
 
-        with StateDir(statepath) as statedir:
-            packages_url = self.url + 'packages.gz'
-            logger.GetIndented().Log('fetching package list from ' + packages_url)
-            data = Fetch(packages_url).text  # autogunzipped?
+        package_names = []
 
-            package_names = []
+        for line in data.split('\n'):
+            line = line.strip()
+            if line.startswith('#') or line == '':
+                continue
+            package_names.append(line)
 
-            for line in data.split('\n'):
-                line = line.strip()
-                if line.startswith('#') or line == '':
-                    continue
-                package_names.append(line)
+        if not package_names:
+            raise RuntimeError('Empty package list received, refusing to continue')
 
-            if not package_names:
-                raise RuntimeError('Empty package list received, refusing to continue')
+        logger.GetIndented().Log('{} package name(s) parsed'.format(len(package_names)))
 
-            logger.GetIndented().Log('{} package name(s) parsed'.format(len(package_names)))
+        pagesize = 100
 
-            pagesize = 100
+        for page in range(0, len(package_names) // pagesize + 1):
+            ifrom = page * pagesize
+            ito = (page + 1) * pagesize
+            url = '&'.join(['arg[]=' + urllib.parse.quote(name) for name in package_names[ifrom:ito]])
+            url = self.url + '/rpc/?v=5&type=info&' + url
 
-            for page in range(0, len(package_names) // pagesize + 1):
-                ifrom = page * pagesize
-                ito = (page + 1) * pagesize
-                url = '&'.join(['arg[]=' + urllib.parse.quote(name) for name in package_names[ifrom:ito]])
-                url = self.url + '/rpc/?v=5&type=info&' + url
+            logger.GetIndented().Log('fetching page {}/{}'.format(page + 1, len(package_names) // pagesize + 1))
 
-                logger.GetIndented().Log('fetching page {}/{}'.format(page + 1, len(package_names) // pagesize + 1))
-
-                with open(os.path.join(statedir, '{}.json'.format(page)), 'wb') as statefile:
-                    statefile.write(Fetch(url, timeout=self.fetch_timeout).content)
+            with open(os.path.join(statedir, '{}.json'.format(page)), 'wb') as statefile:
+                statefile.write(Fetch(url, timeout=self.fetch_timeout).content)

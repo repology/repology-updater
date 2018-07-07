@@ -19,37 +19,30 @@ import json
 import os
 import time
 
-from repology.fetchers import Fetcher
+from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.fetch import Fetch
-from repology.fetchers.state import StateDir
-from repology.logger import NoopLogger
 
 
-class CratesIOFetcher(Fetcher):
+class CratesIOFetcher(ScratchDirFetcher):
     def __init__(self, url, per_page=100, fetch_timeout=5, fetch_delay=1):
         self.url = url
         self.per_page = per_page
         self.fetch_timeout = fetch_timeout
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
+    def do_fetch(self, statedir, logger):
+        numpage = 1
+        while True:
+            url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
+            logger.Log('getting ' + url)
 
-        with StateDir(statepath) as statedir:
-            numpage = 1
-            while True:
-                url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
-                logger.Log('getting ' + url)
+            text = Fetch(url, timeout=self.fetch_timeout).text
+            with open(os.path.join(statedir, '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
+                pagefile.write(text)
 
-                text = Fetch(url, timeout=self.fetch_timeout).text
-                with open(os.path.join(statedir, '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
-                    pagefile.write(text)
+            # parse next page
+            if not json.loads(text)['crates']:
+                logger.Log('last page detected')
+                return
 
-                # parse next page
-                if not json.loads(text)['crates']:
-                    logger.Log('last page detected')
-                    return
-
-                numpage += 1
-                time.sleep(1)
+            numpage += 1
+            time.sleep(1)

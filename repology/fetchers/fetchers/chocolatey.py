@@ -18,39 +18,32 @@
 import os
 import xml.etree.ElementTree
 
-from repology.fetchers import Fetcher
+from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.fetch import Fetch
-from repology.fetchers.state import StateDir
-from repology.logger import NoopLogger
 
 
-class ChocolateyFetcher(Fetcher):
+class ChocolateyFetcher(ScratchDirFetcher):
     def __init__(self, url, fetch_timeout=5):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
+    def do_fetch(self, statedir, logger):
+        numpage = 0
+        nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
+        while True:
+            logger.Log('getting ' + nextpageurl)
 
-        with StateDir(statepath) as statedir:
-            numpage = 0
-            nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
-            while True:
-                logger.Log('getting ' + nextpageurl)
+            text = Fetch(nextpageurl, timeout=self.fetch_timeout).text
+            with open(os.path.join(statedir, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
+                pagefile.write(text)
 
-                text = Fetch(nextpageurl, timeout=self.fetch_timeout).text
-                with open(os.path.join(statedir, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
-                    pagefile.write(text)
+            # parse next page
+            logger.Log('parsing ' + nextpageurl)
+            root = xml.etree.ElementTree.fromstring(text)
 
-                # parse next page
-                logger.Log('parsing ' + nextpageurl)
-                root = xml.etree.ElementTree.fromstring(text)
+            next_link = root.find('{http://www.w3.org/2005/Atom}link[@rel="next"]')
+            if next_link is None:
+                break
 
-                next_link = root.find('{http://www.w3.org/2005/Atom}link[@rel="next"]')
-                if next_link is None:
-                    break
-
-                nextpageurl = next_link.attrib['href']
-                numpage += 1
+            nextpageurl = next_link.attrib['href']
+            numpage += 1

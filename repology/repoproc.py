@@ -82,7 +82,7 @@ class RepositoryProcessor:
             logger.Log('fetching source {} try {} started'.format(source['name'], ntry))
 
             try:
-                fetcher.Fetch(
+                fetcher.fetch(
                     self.__GetSourcePath(repository, source),
                     update=update,
                     logger=logger.GetIndented()

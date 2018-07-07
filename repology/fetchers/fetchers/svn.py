@@ -15,24 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-
-from repology.fetchers import Fetcher
-from repology.fetchers.state import StateDir
-from repology.logger import NoopLogger
+from repology.fetchers import PersistentDirFetcher
 from repology.subprocess import RunSubprocess
 
 
-class SVNFetcher(Fetcher):
+class SVNFetcher(PersistentDirFetcher):
     def __init__(self, url, fetch_timeout=600):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if not os.path.isdir(statepath):
-            with StateDir(statepath) as statedir:
-                RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'checkout', self.url, statedir], logger=logger)
-        elif update:
-            RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statepath], logger=logger)
-        else:
-            logger.Log('no update requested, skipping')
+    def do_fetch(self, statedir, logger):
+        RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'checkout', self.url, statedir], logger=logger)
+
+    def do_update(self, statedir, logger):
+        RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statedir], logger=logger)

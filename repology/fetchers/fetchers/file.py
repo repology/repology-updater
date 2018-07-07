@@ -18,16 +18,13 @@
 import bz2
 import gzip
 import lzma
-import os
 import time
 
-from repology.fetchers import Fetcher
+from repology.fetchers import ScratchFileFetcher
 from repology.fetchers.fetch import Fetch
-from repology.fetchers.state import StateFile
-from repology.logger import NoopLogger
 
 
-class FileFetcher(Fetcher):
+class FileFetcher(ScratchFileFetcher):
     def __init__(self, url, compression=None, post=None, headers=None, nocache=False):
         self.url = url
         self.compression = compression
@@ -41,11 +38,7 @@ class FileFetcher(Fetcher):
             else:
                 self.url += '?nocache=' + str(int(time.time()))
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isfile(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
-
+    def do_fetch(self, statefile, logger):
         fetching_what = [self.url]
         if isinstance(self.post, dict):
             fetching_what.append('{} fields of form data'.format(len(self.post)))
@@ -76,5 +69,4 @@ class FileFetcher(Fetcher):
 
         logger.GetIndented().Log('saving')
 
-        with StateFile(statepath, 'wb') as statefile:
-            statefile.write(data)
+        statefile.write(data)

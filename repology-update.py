@@ -28,7 +28,7 @@ from repology.database import Database
 from repology.logger import *
 from repology.packageproc import FillPackagesetVersions
 from repology.querymgr import QueryManager
-from repology.repoman import RepositoryManager
+from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
 
@@ -68,7 +68,7 @@ def ProcessRepositories(options, logger, repoproc, transformer, reponames):
     return repositories_updated, repositories_not_updated
 
 
-def ProcessDatabase(options, logger, repoman, repoproc, repositories_updated, reponames):
+def ProcessDatabase(options, logger, repomgr, repoproc, repositories_updated, reponames):
     logger.Log('connecting to database')
 
     db_logger = logger.GetIndented()
@@ -87,7 +87,7 @@ def ProcessDatabase(options, logger, repoman, repoproc, repositories_updated, re
         database.update_start()
 
         db_logger.Log('updating repository metadata')
-        database.add_repositories(repoman.GetMetadatas(reponames))
+        database.add_repositories(repomgr.GetMetadatas(reponames))
 
         package_queue = []
         num_pushed = 0
@@ -176,14 +176,14 @@ def ParseArguments():
 def Main():
     options = ParseArguments()
 
-    repoman = RepositoryManager(options.repos_dir)
-    repoproc = RepositoryProcessor(repoman, options.statedir, safety_checks=not options.no_safety_checks)
+    repomgr = RepositoryManager(options.repos_dir)
+    repoproc = RepositoryProcessor(repomgr, options.statedir, safety_checks=not options.no_safety_checks)
 
     if options.list:
-        print('\n'.join(repoman.GetNames(reponames=options.reponames)))
+        print('\n'.join(repomgr.GetNames(reponames=options.reponames)))
         return 0
 
-    transformer = PackageTransformer(repoman, options.rules_dir)
+    transformer = PackageTransformer(repomgr, options.rules_dir)
 
     logger = StderrLogger()
     if options.logfile:
@@ -194,10 +194,10 @@ def Main():
 
     start = timer()
     if options.fetch or options.parse or options.reprocess:
-        repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoproc=repoproc, transformer=transformer, reponames=repoman.GetNames(reponames=options.reponames))
+        repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoproc=repoproc, transformer=transformer, reponames=repomgr.GetNames(reponames=options.reponames))
 
     if options.initdb or options.database or options.postupdate:
-        ProcessDatabase(options=options, logger=logger, repoman=repoman, repoproc=repoproc, repositories_updated=repositories_updated, reponames=repoman.GetNames(reponames=options.reponames))
+        ProcessDatabase(options=options, logger=logger, repomgr=repomgr, repoproc=repoproc, repositories_updated=repositories_updated, reponames=repomgr.GetNames(reponames=options.reponames))
 
     if (options.parse or options.reprocess) and (options.show_unmatched_rules):
         ShowUnmatchedRules(options=options, logger=logger, transformer=transformer, reliable=repositories_not_updated == [])

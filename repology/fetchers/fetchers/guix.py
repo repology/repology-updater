@@ -20,47 +20,40 @@ from string import ascii_uppercase
 
 import lxml.html
 
-from repology.fetchers import Fetcher
+from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.fetch import Fetch
-from repology.fetchers.state import StateDir
-from repology.logger import NoopLogger
 
 
-class GuixFetcher(Fetcher):
+class GuixFetcher(ScratchDirFetcher):
     def __init__(self, url):
         self.url = url
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
+    def do_fetch(self, statedir, logger):
+        for letter in ['0-9'] + [l for l in ascii_uppercase]:
+            page = 1
+            numpages = 1
+            while True:
+                logger.Log('fetching {} page {}'.format(letter, page))
 
-        with StateDir(statepath) as statedir:
-            for letter in ['0-9'] + [l for l in ascii_uppercase]:
-                page = 1
-                numpages = 1
-                while True:
-                    logger.Log('fetching {} page {}'.format(letter, page))
+                pageurl = '{}/{}/page/{}/'.format(self.url, letter, page)
 
-                    pageurl = '{}/{}/page/{}/'.format(self.url, letter, page)
+                # fetch HTML
+                response = Fetch(pageurl)
+                response.encoding = 'utf-8'  # is not detected properly
+                text = response.text
 
-                    # fetch HTML
-                    response = Fetch(pageurl)
-                    response.encoding = 'utf-8'  # is not detected properly
-                    text = response.text
+                # get number of pages, if there are more than 1 of them
+                if numpages == 1:
+                    for pagebutton in lxml.html.document_fromstring(text).xpath('.//nav[@class="page-selector"]/a'):
+                        numpages = max(numpages, int(pagebutton.text))
 
-                    # get number of pages, if there are more than 1 of them
-                    if numpages == 1:
-                        for pagebutton in lxml.html.document_fromstring(text).xpath('.//nav[@class="page-selector"]/a'):
-                            numpages = max(numpages, int(pagebutton.text))
+                # save HTML
+                with open(os.path.join(statedir, '{}-{}.html'.format(letter, page)), 'w', encoding='utf-8') as pagefile:
+                    pagefile.write(text)
 
-                    # save HTML
-                    with open(os.path.join(statedir, '{}-{}.html'.format(letter, page)), 'w', encoding='utf-8') as pagefile:
-                        pagefile.write(text)
+                # end if that was last (or only) page
+                if page >= numpages:
+                    break
 
-                    # end if that was last (or only) page
-                    if page >= numpages:
-                        break
-
-                    # proceed with the next page
-                    page += 1
+                # proceed with the next page
+                page += 1

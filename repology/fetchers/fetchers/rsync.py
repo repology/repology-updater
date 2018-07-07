@@ -15,22 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-
-from repology.fetchers import Fetcher
-from repology.logger import NoopLogger
+from repology.fetchers import PersistentDirFetcher
 from repology.subprocess import RunSubprocess
 
 
-class RsyncFetcher(Fetcher):
+class RsyncFetcher(PersistentDirFetcher):
     def __init__(self, url, fetch_timeout=60):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
-
-        command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', '--timeout', str(self.fetch_timeout), self.url, statepath]
+    def do_fetch(self, statedir, logger):
+        command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', '--timeout', str(self.fetch_timeout), self.url, statedir]
         RunSubprocess(command, logger)
+
+    def do_update(self, statedir, logger):
+        self.do_fetch(statedir, logger)

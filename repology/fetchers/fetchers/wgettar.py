@@ -17,24 +17,17 @@
 
 import os
 
-from repology.fetchers import Fetcher
-from repology.fetchers.state import StateDir
-from repology.logger import NoopLogger
+from repology.fetchers import ScratchDirFetcher
 from repology.subprocess import RunSubprocess
 
 
-class WgetTarFetcher(Fetcher):
+class WgetTarFetcher(ScratchDirFetcher):
     def __init__(self, url, fetch_timeout=60):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def Fetch(self, statepath, update=True, logger=NoopLogger()):
-        if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
-            return
-
-        with StateDir(statepath) as statedir:
-            tarpath = os.path.join(statedir, '.temporary.tar')
-            RunSubprocess(['wget', '--timeout', str(self.fetch_timeout), '--tries', '1', '-O', tarpath, self.url], logger)
-            RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
-            os.remove(tarpath)
+    def do_fetch(self, statedir, logger):
+        tarpath = os.path.join(statedir, '.temporary.tar')
+        RunSubprocess(['wget', '--timeout', str(self.fetch_timeout), '--tries', '1', '-O', tarpath, self.url], logger)
+        RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
+        os.remove(tarpath)
