@@ -14,7 +14,7 @@
       compression: bz2
       subrepo: '{source}'
   repolinks:
-    - desc: HP-UX Porting and Archive Centere
+    - desc: HP-UX Porting and Archive Centre
       url: http://hpux.connect.org.uk/
   packagelinks:
     - desc: Package page
