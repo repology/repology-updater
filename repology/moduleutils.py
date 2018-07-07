@@ -58,13 +58,21 @@ class ClassFactory:
 
                     yield '.'.join([module] + relpath[:-3].split(os.sep))
 
-    def __init__(self, modulename, suffix):
+    def __init__(self, modulename, suffix=None, superclass=None):
         self.classes = {}
 
         for submodulename in self.enumerate_all_submodules(modulename):
             submodule = importlib.import_module(submodulename)
             for name, member in inspect.getmembers(submodule):
-                if name.endswith(suffix) and inspect.isclass(member):
+                suitable = True
+
+                if suffix is not None:
+                    suitable &= name.endswith(suffix)
+
+                if superclass is not None:
+                    suitable &= issubclass(member, superclass)
+
+                if suitable:
                     self.classes[name] = member
 
     def Spawn(self, name, *args, **kwargs):

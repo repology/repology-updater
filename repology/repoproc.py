@@ -22,11 +22,10 @@ import sys
 import time
 import traceback
 
-from repology.fetchers import Factory as FetcherFactory
 from repology.logger import NoopLogger
+from repology.moduleutils import ClassFactory
 from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
 from repology.packageproc import PackagesetDeduplicate
-from repology.parsers import Factory as ParserFactory
 from repology.resourceusage import ResourceUsageMonitor
 
 
@@ -52,6 +51,9 @@ class RepositoryProcessor:
         self.fetch_retry_delay = fetch_retry_delay
         self.safety_checks = safety_checks
 
+        self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', suffix='Fetcher')
+        self.parser_factory = ClassFactory('repology.parsers.parsers', suffix='Parser')
+
     def __GetRepoPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.state')
 
@@ -71,7 +73,7 @@ class RepositoryProcessor:
             logger.Log('fetching source {} not supported'.format(source['name']))
             return
 
-        fetcher = FetcherFactory.SpawnWithKnownArgs(source['fetcher'], source)
+        fetcher = self.fetcher_factory.SpawnWithKnownArgs(source['fetcher'], source)
 
         ntry = 1
         while ntry <= self.fetch_retries:
@@ -115,7 +117,7 @@ class RepositoryProcessor:
         usage = ResourceUsageMonitor()
 
         # parse
-        packages = ParserFactory.SpawnWithKnownArgs(
+        packages = self.parser_factory.SpawnWithKnownArgs(
             source['parser'],
             source
         ).Parse(
