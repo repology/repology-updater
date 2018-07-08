@@ -25,6 +25,8 @@ from repology.fetchers.fetch import fetch
 
 class RepodataFetcher(ScratchFileFetcher):
     def __init__(self, url):
+        super(RepodataFetcher, self).__init__(binary=True)
+
         self.url = url
 
     def do_fetch(self, statefile, logger):

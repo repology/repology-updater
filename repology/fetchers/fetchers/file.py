@@ -26,6 +26,8 @@ from repology.fetchers.fetch import fetch
 
 class FileFetcher(ScratchFileFetcher):
     def __init__(self, url, compression=None, post=None, headers=None, nocache=False):
+        super(FileFetcher, self).__init__(binary=True)
+
         self.url = url
         self.compression = compression
         self.post = post

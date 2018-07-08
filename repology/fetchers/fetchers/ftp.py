@@ -23,6 +23,8 @@ from repology.fetchers import ScratchFileFetcher
 
 class FTPListFetcher(ScratchFileFetcher):
     def __init__(self, url, fetch_timeout=60):
+        super(FTPListFetcher, self).__init__()
+
         self.url = urllib.parse.urlparse(url, scheme='ftp', allow_fragments=False)
         assert(self.url.scheme == 'ftp')
         self.fetch_timeout = fetch_timeout

@@ -56,6 +56,9 @@ class ScratchDirFetcher(Fetcher):
 
 
 class ScratchFileFetcher(Fetcher):
+    def __init__(self, binary=False):
+        self.binary = binary
+
     def do_fetch(self, statefile, logger):
         raise RuntimeError('pure virtual method called')
 
@@ -64,5 +67,7 @@ class ScratchFileFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return
 
-        with state_file(statepath, 'w', encoding='utf-8') as statefile:
+        args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8' }
+
+        with state_file(statepath, **args) as statefile:
             self.do_fetch(statefile, logger)
