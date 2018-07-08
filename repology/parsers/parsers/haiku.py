@@ -67,7 +67,6 @@ class HaikuPortsFilenamesParser(Parser):
                         match = re.search('^HOMEPAGE="([^"]+)"', recipefile.read(), re.MULTILINE)
                         if match:
                             pkg.homepage = match.group(1).split()[0]  # XXX: use all homepages
-                            print(pkg.homepage)
 
                     result.append(pkg)
 
