@@ -67,7 +67,7 @@ class ScratchFileFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return
 
-        args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8' }
+        args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8'}
 
         with state_file(statepath, **args) as statefile:
             self.do_fetch(statefile, logger)
