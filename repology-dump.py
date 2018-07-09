@@ -86,7 +86,7 @@ def main():
     repoman = RepositoryManager(options.repos_dir)
     repoproc = RepositoryProcessor(repoman, options.statedir)
 
-    def PackageProcessor(packageset):
+    def package_processor(packageset):
         FillPackagesetVersions(packageset)
 
         if not PackagesetCheckFilters(packageset, *filters):
@@ -114,7 +114,7 @@ def main():
                     ))
 
     logger.Log('dumping...')
-    repoproc.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
+    repoproc.StreamDeserializeMulti(processor=package_processor, reponames=options.reponames)
 
     return 0
 
