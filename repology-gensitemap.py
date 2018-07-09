@@ -28,7 +28,7 @@ from repology.database import Database
 from repology.querymgr import QueryManager
 
 
-def ParseArguments():
+def parse_arguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
@@ -42,8 +42,8 @@ def ParseArguments():
     return parser.parse_args()
 
 
-def Main():
-    options = ParseArguments()
+def main():
+    options = parse_arguments()
 
     querymgr = QueryManager(options.sql_dir)
     database = Database(options.dsn, querymgr, readonly=True, application_name='repology-gensitemap')
@@ -106,4 +106,4 @@ def Main():
 
 
 if __name__ == '__main__':
-    os.sys.exit(Main())
+    os.sys.exit(main())
