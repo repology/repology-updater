@@ -207,12 +207,12 @@ schemas = {
 }
 
 
-def GetYaml(path):
+def get_yaml(path):
     with open(path) as yamlfile:
         return yaml.safe_load(yamlfile)
 
 
-def ParseArguments():
+def parse_arguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-s', '--schema', choices=schemas.keys(), required=True, help='schema to use')
     parser.add_argument('files', metavar='file', nargs='*', help='files to check')
@@ -220,14 +220,14 @@ def ParseArguments():
     return parser.parse_args()
 
 
-def Main():
-    options = ParseArguments()
+def main():
+    options = parse_arguments()
 
     errors = 0
 
     for path in options.files:
         try:
-            Schema(schemas[options.schema])(GetYaml(path))
+            Schema(schemas[options.schema])(get_yaml(path))
         except MultipleInvalid as e:
             print('Bad schema for {}: {}'.format(path, str(e)))
             errors += 1
@@ -236,4 +236,4 @@ def Main():
 
 
 if __name__ == '__main__':
-    os.sys.exit(Main())
+    os.sys.exit(main())
