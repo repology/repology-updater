@@ -135,7 +135,7 @@ class Database:
     def __init__(self, dsn, querymgr, readonly=True, autocommit=False, application_name=None):
         self.db = psycopg2.connect(dsn, application_name=application_name)
         self.db.set_session(readonly=readonly, autocommit=autocommit)
-        querymgr.InjectQueries(self, self.db)
+        querymgr.inject_queries(self, self.db)
 
     def commit(self):
         self.db.commit()

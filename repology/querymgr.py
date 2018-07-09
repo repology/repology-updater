@@ -65,9 +65,9 @@ class QueryMetadata:
         for line in query.split('\n'):
             match = re.fullmatch('\s*--\s*(@.*?)\s*', line)
             if match:
-                self.__parse_annotation(match.group(1))
+                self._parse_annotation(match.group(1))
 
-    def __parse_annotation(self, string):
+    def _parse_annotation(self, string):
         """Parse query metadata from the string definition.
 
         Input examples:
@@ -84,11 +84,11 @@ class QueryMetadata:
         annkey, annvalue = string.split(None, 1)
 
         if annkey == '@param':
-            self.__parse_argument(annvalue)
+            self._parse_argument(annvalue)
         elif annkey == '@returns':
-            self.__parse_return_type(annvalue)
+            self._parse_return_type(annvalue)
 
-    def __parse_argument(self, string):
+    def _parse_argument(self, string):
         if string == 'many values':
             self.argsmode = QueryMetadata.ARGSMODE_MANY_VALUES
             return
@@ -127,7 +127,7 @@ class QueryMetadata:
         else:
             raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad default value for argument "{}"'.format(string, argname))
 
-    def __parse_return_type(self, string):
+    def _parse_return_type(self, string):
         if not string:
             self.rettype = QueryMetadata.RET_NONE
         elif string == 'single value':
@@ -161,14 +161,14 @@ class QueryManager:
 
                 try:
                     with open(os.path.join(root, filename), 'r', encoding='utf-8') as sqlfile:
-                        self.__register_query(QueryMetadata(
+                        self._register_query(QueryMetadata(
                             filename[:-4],
                             sqlfile.read()
                         ))
                 except QueryMetadataParsingError as e:
                     raise QueryLoadingError('Cannot load SQL query from {}: {}'.format(filename, str(e)))
 
-    def __register_query(self, query):
+    def _register_query(self, query):
         query.template = jinja2.Template(query.query)
 
         def adapt_dict_argument(data):
@@ -275,6 +275,6 @@ class QueryManager:
         self.queries[query.name] = do_query
         self.queries['explain_' + query.name] = do_explain_query
 
-    def InjectQueries(self, target, db):
+    def inject_queries(self, target, db):
         for name, function in self.queries.items():
             setattr(target, name, functools.partial(function, db))
