@@ -29,7 +29,7 @@ from repology.repoman import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
 
-def ParseArguments():
+def parse_arguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
@@ -54,8 +54,8 @@ def ParseArguments():
     return parser.parse_args()
 
 
-def Main():
-    options = ParseArguments()
+def main():
+    options = parse_arguments()
 
     logger = StderrLogger()
     if options.logfile:
@@ -120,4 +120,4 @@ def Main():
 
 
 if __name__ == '__main__':
-    os.sys.exit(Main())
+    os.sys.exit(main())
