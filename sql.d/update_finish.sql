@@ -613,6 +613,18 @@ FROM packages
 WHERE
 	homepage SIMILAR TO 'https?://([^/]+.)?gna.org(/%%)?';
 
+INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
+SELECT DISTINCT
+	id,
+	repo,
+	name,
+	effname,
+	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
+	'Homepage link "' || homepage || '" points to CPAN which was discontinued. The link should be updated to https://metacpan.org (probably along with download URLs). See https://www.perl.com/article/saying-goodbye-to-search-cpan-org/ for details.'
+FROM packages
+WHERE
+	homepage SIMILAR TO 'https?://search.cpan.org(/%%)?';
+
 -- update counts for repositories
 UPDATE repositories
 SET
