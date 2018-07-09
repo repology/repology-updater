@@ -29,8 +29,8 @@ class FontMeasurerTest(unittest.TestCase):
     def test_fontmeasurer(self):
         fontmeas = FontMeasurer(config['BADGE_FONT'], 11)
 
-        first_result = fontmeas.GetDimensions('The quick brown fox jumps over the lazy dog')
-        cached_result = fontmeas.GetDimensions('The quick brown fox jumps over the lazy dog')
+        first_result = fontmeas.get_text_dimensions('The quick brown fox jumps over the lazy dog')
+        cached_result = fontmeas.get_text_dimensions('The quick brown fox jumps over the lazy dog')
 
         self.assertEqual(first_result, cached_result)
 

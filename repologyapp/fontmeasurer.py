@@ -25,7 +25,7 @@ class FontMeasurer:
         self.maxcachesize = maxcachesize
         self.generation = 0
 
-    def GetDimensions(self, text):
+    def get_text_dimensions(self, text):
         self.generation += 1
 
         if text in self.cache:

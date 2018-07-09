@@ -33,4 +33,4 @@ repometadata = RepositoryMetadata()
 
 
 def get_text_width(text):
-    return _fontmeasurer.GetDimensions(str(text))[0]
+    return _fontmeasurer.get_text_dimensions(str(text))[0]
