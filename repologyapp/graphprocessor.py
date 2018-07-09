@@ -25,7 +25,7 @@ class GraphProcessor:
         self.points = []
         self.float = False
 
-    def AddPoint(self, time, value):
+    def add_point(self, time, value):
         # minor optimization of merging straight lines
         if len(self.points) >= 2 and value == self.points[-1][1] and value == self.points[-2][1]:
             del(self.points[-1])
@@ -36,7 +36,7 @@ class GraphProcessor:
         if isinstance(value, float):
             self.float = True
 
-    def GetPoints(self, period):
+    def get_points(self, period):
         if self.minval is None:
             return []
 
@@ -59,7 +59,7 @@ class GraphProcessor:
             ) for point in self.points
         ]
 
-    def GetYTicks(self, suffix=''):
+    def get_y_ticks(self, suffix=''):
         if self.minval is None:
             return []
 

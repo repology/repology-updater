@@ -45,8 +45,8 @@ def graph_generic(getgraph, color, suffix=''):
             height=height,
             gwidth=gwidth,
             gheight=gheight,
-            points=graph.GetPoints(period),
-            yticks=graph.GetYTicks(suffix),
+            points=graph.get_points(period),
+            yticks=graph.get_y_ticks(suffix),
             color=color,
             numdays=numdays,
             x=lambda x: int((1.0 - x) * gwidth) + 0.5,
@@ -60,33 +60,33 @@ def graph_repo_generic(repo, getvalue, color, suffix=''):
     if repo not in repometadata.active_names():
         flask.abort(404)
 
-    def GetGraph(period):
+    def get_graph(period):
         graph = GraphProcessor()
 
         for histentry in get_db().get_repository_history_since(repo, datetime.timedelta(seconds=period)):
             try:
-                graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot']))
+                graph.add_point(histentry['timedelta'], getvalue(histentry['snapshot']))
             except:
                 pass  # ignore missing keys, division errors etc.
 
         return graph
 
-    return graph_generic(GetGraph, color, suffix)
+    return graph_generic(get_graph, color, suffix)
 
 
 def graph_total_generic(getvalue, color, suffix=''):
-    def GetGraph(period):
+    def get_graph(period):
         graph = GraphProcessor()
 
         for histentry in get_db().get_statistics_history_since(datetime.timedelta(seconds=period)):
             try:
-                graph.AddPoint(histentry['timedelta'], getvalue(histentry['snapshot']))
+                graph.add_point(histentry['timedelta'], getvalue(histentry['snapshot']))
             except:
                 pass  # ignore missing keys, division errors etc.
 
         return graph
 
-    return graph_generic(GetGraph, color, suffix)
+    return graph_generic(get_graph, color, suffix)
 
 
 @ViewRegistrar('/graph/repo/<repo>/metapackages_total.svg')
