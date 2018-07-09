@@ -26,10 +26,8 @@ flake8:
 	# E265 - Block comment should start with '# '
 	# E501 - Line too long
 	# E722 - Do not use bare except
-	# F403 - Import problem
-	# F405 - Import problem
 	# N802 - Bad function name
-	${FLAKE8} --ignore=D10,E265,E501,E722,F403,F405,N802 --application-import-names=repology *.py repology repologyapp test
+	${FLAKE8} --ignore=D10,E265,E501,E722,N802 --application-import-names=repology *.py repology repologyapp test
 
 flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test

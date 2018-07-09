@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -25,7 +25,7 @@ from timeit import default_timer as timer
 
 from repology.config import config
 from repology.database import Database
-from repology.logger import *
+from repology.logger import FileLogger, StderrLogger
 from repology.packageproc import FillPackagesetVersions
 from repology.querymgr import QueryManager
 from repology.repoman import RepositoryManager
