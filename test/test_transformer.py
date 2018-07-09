@@ -20,11 +20,11 @@
 import unittest
 
 from repology.package import Package, PackageFlags
-from repology.repoman import RepositoryManager
+from repology.repomgr import RepositoryManager
 from repology.transformer import PackageTransformer
 
 
-repoman = RepositoryManager(repostext="""
+repomgr = RepositoryManager(repostext="""
 [
     { name: foo, desc: foo, family: foo, sources: [] },
     { name: bar, desc: bar, family: bar, sources: [] },
@@ -35,7 +35,7 @@ repoman = RepositoryManager(repostext="""
 
 class TestPackageTransformer(unittest.TestCase):
     def check_transformer(self, rulestext, *packages):
-        transformer = PackageTransformer(repoman, rulestext=rulestext)
+        transformer = PackageTransformer(repomgr, rulestext=rulestext)
         for packagedict in packages:
             create_params = {}
             expected_params = {}
