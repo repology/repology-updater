@@ -120,8 +120,10 @@ script:
   # and once again to activate new repositories
   - ./repology-update.py --parse --database --postupdate --no-safety-checks
 
-  # smoke test bit
+  # smoke test bits
   - ./repology-dump.py --help
+  - ./repology-gensitemap.py --main > sitemap-main.xml
+  - ./repology-gensitemap.py --metapackages > sitemap-metapackages.xml
 
   # run unit tests with coverage
   - coverage run --source="repology,repologyapp" --omit="repology/fetchers/*" -m unittest discover
