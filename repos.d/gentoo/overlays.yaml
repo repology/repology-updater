@@ -9,8 +9,8 @@
   minpackages: 800
   sources:
     - name: pentoo-overlay
-      fetcher: Git
-      parser: GentooGit
+      fetcher: GitFetcher
+      parser: GentooGitParser
       url: git://github.com/pentoo/pentoo-overlay.git
   repolinks:
     - desc: Home page
@@ -34,8 +34,8 @@
   minpackages: 1  #XXX: unknown
   sources:
     - name: games-overlay
-      fetcher: Git
-      parser: GentooGit
+      fetcher: GitFetcher
+      parser: GentooGitParser
       url: https://github.com/hasufell/games-overlay.git
   repolinks:
     - desc: Git repository
@@ -50,8 +50,8 @@
   minpackages: 1  #XXX: unknown
   sources:
     - name: gamerlay
-      fetcher: Git
-      parser: GentooGit
+      fetcher: GitFetcher
+      parser: GentooGitParser
       url: https://anongit.gentoo.org/git/proj/gamerlay.git
   repolinks:
     - desc: Git repository

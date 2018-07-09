@@ -10,8 +10,8 @@
   minpackages: 2300
   sources:
     - name: blackarch
-      fetcher: WgetTar
-      parser: ArchDB
+      fetcher: WgetTarFetcher
+      parser: ArchDBParser
       url: 'https://www.mirrorservice.org/sites/blackarch.org/blackarch/blackarch/os/x86_64/blackarch.db.tar.gz'
   repolinks:
     - desc: BlackArch Linux home

@@ -12,8 +12,8 @@
   minpackages: 27000
   sources:
     - name: [ contrib, main, non-free ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://http.kali.org/kali/dists/kali-rolling/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

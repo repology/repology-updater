@@ -9,8 +9,8 @@
   minpackages: 500
   sources:
     - name: data
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/
       allowed_archs: ['src']
   repolinks:

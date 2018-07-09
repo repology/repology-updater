@@ -13,8 +13,8 @@
   minpackages: 10
   sources:
     - name: Sources
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://sparkylinux.org/repo/dists/testing/main/source/Sources.gz'
   repolinks:
     - desc: SparkyLinux home

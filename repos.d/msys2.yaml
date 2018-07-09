@@ -5,8 +5,8 @@
   minpackages: 1  # XXX: unknown
   sources:
     - name: mingw64.db
-      fetcher: WgetTar
-      parser: MSYS2
+      fetcher: WgetTarFetcher
+      parser: MSYS2Parser
       url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.gz
   repolinks:
     - desc: MSYS2 homepage
@@ -27,8 +27,8 @@
   minpackages: 1  # XXX: unknown
   sources:
     - name: msys.db
-      fetcher: WgetTar
-      parser: MSYS2
+      fetcher: WgetTarFetcher
+      parser: MSYS2Parser
       url: http://repo.msys2.org/msys/x86_64/msys.db.tar.gz
   repolinks:
     - desc: MSYS2 homepage

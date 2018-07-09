@@ -10,8 +10,8 @@
   minpackages: 48000
   sources:
     - name: aur
-      fetcher: AUR
-      parser: AUR
+      fetcher: AURFetcher
+      parser: AURParser
       url: https://aur.archlinux.org/
   repolinks:
     - desc: AUR Home

@@ -8,8 +8,8 @@
   minpackages: 1  # XXX: unknown
   sources:
     - name: release-monitoring.org
-      fetcher: File
-      parser: AnityaApi
+      fetcher: FileFetcher
+      parser: AnityaApiParser
       url: https://release-monitoring.org/api/projects
   repolinks:
     - desc: release-monitoring.org

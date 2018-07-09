@@ -9,8 +9,8 @@
   minpackages: 12000
   sources:
     - name: hackage
-      fetcher: WgetTar
-      parser: Hackage
+      fetcher: WgetTarFetcher
+      parser: HackageParser
       url: https://hackage.haskell.org/packages/index.tar.gz
   shadow: true
   repolinks:
@@ -31,8 +31,8 @@
   minpackages: 1500
   sources:
     - name: nightly
-      fetcher: File
-      parser: StackageHTML
+      fetcher: FileFetcher
+      parser: StackageHTMLParser
       url: https://www.stackage.org/nightly
   shadow: true
   repolinks:
@@ -53,8 +53,8 @@
   minpackages: 2000
   sources:
     - name: lts
-      fetcher: File
-      parser: StackageHTML
+      fetcher: FileFetcher
+      parser: StackageHTMLParser
       url: https://www.stackage.org/lts
   shadow: true
   repolinks:

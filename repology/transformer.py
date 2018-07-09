@@ -53,8 +53,8 @@ class PackageTransformationContext:
 
 
 class PackageTransformer:
-    def __init__(self, repoman, rulesdir=None, rulestext=None):
-        self.repoman = repoman
+    def __init__(self, repomgr, rulesdir=None, rulestext=None):
+        self.repomgr = repomgr
 
         self.dollar0 = re.compile('\$0', re.ASCII)
         self.dollarN = re.compile('\$([0-9]+)', re.ASCII)
@@ -129,11 +129,11 @@ class PackageTransformer:
 
         # match family
         if 'ruleset' in rule:
-            if self.repoman.GetRepository(package.repo)['ruleset'].isdisjoint(rule['ruleset']):
+            if self.repomgr.GetRepository(package.repo)['ruleset'].isdisjoint(rule['ruleset']):
                 return RuleApplyResult.unmatched
 
         if 'noruleset' in rule:
-            if not self.repoman.GetRepository(package.repo)['ruleset'].isdisjoint(rule['noruleset']):
+            if not self.repomgr.GetRepository(package.repo)['ruleset'].isdisjoint(rule['noruleset']):
                 return RuleApplyResult.unmatched
 
         # match categories

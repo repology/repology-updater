@@ -9,8 +9,8 @@
   minpackages: 11000
   sources:
     - name: LIST
-      fetcher: FTPList
-      parser: RPMFTPList
+      fetcher: FTPListFetcher
+      parser: RPMFTPListParser
       url: ftp://ftp.pld-linux.org/dists/th/PLD/SRPMS/RPMS
   repolinks:
     - desc: PLD Linux home

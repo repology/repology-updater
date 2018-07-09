@@ -11,8 +11,8 @@
   minpackages: 100
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/qiana/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -29,8 +29,8 @@
   minpackages: 300
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rebecca/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -47,8 +47,8 @@
   minpackages: 300
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rafaela/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -65,8 +65,8 @@
   minpackages: 300
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/rosa/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -83,8 +83,8 @@
   minpackages: 100
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sarah/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -101,8 +101,8 @@
   minpackages: 100
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/serena/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -119,8 +119,8 @@
   minpackages: 100
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sonya/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -137,8 +137,8 @@
   minpackages: 100
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/sylvia/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -155,8 +155,8 @@
   minpackages: 100
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tara/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

@@ -10,8 +10,8 @@
   minpackages: 100
   sources:
     - name: [ dev, main, nosystemd ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       #url: 'http://nl.mxrepo.com/antix/jessie/dists/jessie/{source}/source/Sources.gz'
       url: 'http://ftp.cc.uoc.gr/mirrors/linux/mx/antix/jessie/dists/jessie/{source}/source/Sources.gz'
       compression: gz
@@ -29,8 +29,8 @@
   minpackages: 200
   sources:
     - name: [ dev, main, nosystemd ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       #url: 'http://nl.mxrepo.com/antix/stretch/dists/stretch/{source}/source/Sources.gz'
       url: 'http://ftp.cc.uoc.gr/mirrors/linux/mx/antix/stretch/dists/stretch/{source}/source/Sources.gz'
       compression: gz

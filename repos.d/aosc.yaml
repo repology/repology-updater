@@ -8,8 +8,8 @@
   minpackages: 4500
   sources:
     - name: staging
-      fetcher: File
-      parser: AoscPkgs
+      fetcher: FileFetcher
+      parser: AoscPkgsParser
       url: https://packages.aosc.io/list.json
   repolinks:
     - desc: AOSC OS home

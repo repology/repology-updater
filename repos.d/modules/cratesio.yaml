@@ -9,10 +9,10 @@
   minpackages: 14000
   sources:
     - name: crates.io
-      fetcher: CratesIO
+      fetcher: CratesIOFetcher
       fetch_timeout: 30
       fetch_delay: 1
-      parser: CratesIO
+      parser: CratesIOParser
       url: https://crates.io/api/v1/crates
   shadow: true
   repolinks:

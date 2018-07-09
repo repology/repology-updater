@@ -8,33 +8,33 @@
   minpackages: 400
   sources:
     - name: free-release
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/releases/26/Everything/source/SRPMS/
       subrepo: free/release
     - name: free-updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/updates/26/SRPMS/
       subrepo: free/updates
     - name: free-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/updates/testing/26/SRPMS/
       subrepo: free/updates-testing
     - name: nonfree-release
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/releases/26/Everything/source/SRPMS/
       subrepo: nonfree/release
     - name: nonfree-updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/updates/26/SRPMS/
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/26/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:
@@ -49,33 +49,33 @@
   minpackages: 400
   sources:
     - name: free-release
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/releases/27/Everything/source/SRPMS/
       subrepo: free/release
     - name: free-updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/updates/27/SRPMS/
       subrepo: free/updates
     - name: free-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/updates/testing/27/SRPMS/
       subrepo: free/updates-testing
     - name: nonfree-release
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/releases/27/Everything/source/SRPMS/
       subrepo: nonfree/release
     - name: nonfree-updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/updates/27/SRPMS/
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/27/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:
@@ -90,23 +90,23 @@
   minpackages: 300
   sources:
     - name: free-branched
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/development/28/Everything/source/SRPMS/
       subrepo: free/release
     - name: free-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/updates/testing/28/SRPMS/
       subrepo: free/updates-testing
     - name: nonfree-branched
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/development/28/Everything/source/SRPMS/
       subrepo: free/release
     - name: nonfree-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/28/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:
@@ -121,13 +121,13 @@
   minpackages: 300
   sources:
     - name: free-development
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/development/rawhide/Everything/source/SRPMS/
       subrepo: free/release
     - name: nonfree-development
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/development/rawhide/Everything/source/SRPMS/
       subrepo: nonfree/release
   repolinks:
@@ -145,23 +145,23 @@
   minpackages: 50
   sources:
     - name: free-updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/el/updates/6/SRPMS/
       subrepo: free/updates
     - name: free-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/el/updates/testing/6/SRPMS/
       subrepo: free/updates-testing
     - name: nonfree-updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/el/updates/6/SRPMS/
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/el/updates/testing/6/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:
@@ -176,23 +176,23 @@
   minpackages: 100
   sources:
     - name: free-updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/el/updates/7/SRPMS/
       subrepo: free/updates
     - name: free-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/free/el/updates/testing/7/SRPMS/
       subrepo: free/updates-testing
     - name: nonfree-updates
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/el/updates/7/SRPMS/
       subrepo: nonfree/updates
     - name: nonfree-updates-testing
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/el/updates/testing/7/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:

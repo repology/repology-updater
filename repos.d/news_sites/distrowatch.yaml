@@ -8,8 +8,8 @@
   minpackages: 200
   sources:
     - name: packages.php
-      fetcher: File
-      parser: DistrowatchPackages
+      fetcher: FileFetcher
+      parser: DistrowatchPackagesParser
       url: https://distrowatch.com/packages.php
   repolinks:
     - desc: DistroWatch.com

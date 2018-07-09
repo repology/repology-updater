@@ -12,8 +12,8 @@
   minpackages: 11000
   sources:
     - name: result.json
-      fetcher: File
-      parser: WikidataJson
+      fetcher: FileFetcher
+      parser: WikidataJsonParser
       url: 'https://query.wikidata.org/sparql'
       post:
         format: json

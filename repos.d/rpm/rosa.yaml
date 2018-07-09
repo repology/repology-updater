@@ -9,8 +9,8 @@
   minpackages: 27000
   sources:
     - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
-      fetcher: File
-      parser: RosaInfoXml
+      fetcher: FileFetcher
+      parser: RosaInfoXmlParser
       url: 'http://mirror.rosalab.ru/rosa/rosa2014.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
       compression: xz
       subrepo: '{source}'
@@ -27,8 +27,8 @@
   minpackages: 26000
   sources:
     - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
-      fetcher: File
-      parser: RosaInfoXml
+      fetcher: FileFetcher
+      parser: RosaInfoXmlParser
       url: 'http://mirror.rosalab.ru/rosa/rosa2016.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
       compression: xz
       subrepo: '{source}'
@@ -45,8 +45,8 @@
   minpackages: 2500
   sources:
     - name: [ base/release, base/updates, contrib/release, contrib/updates, extra/release, extra/updates ]
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: 'http://mirror.rosalab.ru/rosa/server/6.9/repository/SRPMS/{source}/'
       subrepo: '{source}'
   repolinks:
@@ -62,8 +62,8 @@
   minpackages: 2500
   sources:
     - name: [ base/release, extra/release ]
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: 'http://mirror.rosalab.ru/rosa/server/7.3/repository/SRPMS/{source}/'
       subrepo: '{source}'
   repolinks:

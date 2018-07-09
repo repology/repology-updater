@@ -9,8 +9,8 @@
   minpackages: 4300
   sources:
     - name: homebrew.json
-      fetcher: File
-      parser: HomebrewJson
+      fetcher: FileFetcher
+      parser: HomebrewJsonParser
       url: https://formulae.brew.sh/api/formula.json
   repolinks:
     - desc: Homebrew home

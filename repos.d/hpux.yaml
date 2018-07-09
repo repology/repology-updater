@@ -8,8 +8,8 @@
   minpackages: 1500
   sources:
     - name: [ hppa_32, ia64_32, ia64_64 ]
-      fetcher: File
-      parser: HPPADepothelperList
+      fetcher: FileFetcher
+      parser: HPPADepothelperListParser
       url: 'http://hpux.connect.org.uk/ftp/depothelper/packages-{source}-11.31.bz2'
       compression: bz2
       subrepo: '{source}'

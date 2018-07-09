@@ -10,8 +10,8 @@
   minpackages: 21000
   sources:
     - name: [ precise/main, precise/multiverse, precise/restricted, precise/universe, precise-updates/main, precise-updates/multiverse, precise-updates/restricted, precise-updates/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -38,8 +38,8 @@
   minpackages: 0
   sources:
     - name: [ precise-backports/main, precise-backports/multiverse, precise-backports/restricted, precise-backports/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -66,8 +66,8 @@
   minpackages: 23000
   sources:
     - name: [ trusty/main, trusty/multiverse, trusty/restricted, trusty/universe, trusty-updates/main, trusty-updates/multiverse, trusty-updates/restricted, trusty-updates/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -96,8 +96,8 @@
   minpackages: 0
   sources:
     - name: [ trusty-backports/main, trusty-backports/multiverse, trusty-backports/restricted, trusty-backports/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -124,8 +124,8 @@
   minpackages: 26000
   sources:
     - name: [ xenial/main, xenial/multiverse, xenial/restricted, xenial/universe, xenial-updates/main, xenial-updates/multiverse, xenial-updates/restricted, xenial-updates/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -153,8 +153,8 @@
   minpackages: 0
   sources:
     - name: [ xenial-backports/main, xenial-backports/multiverse, xenial-backports/restricted, xenial-backports/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -181,8 +181,8 @@
   minpackages: 28000
   sources:
     - name: [ artful/main, artful/multiverse, artful/restricted, artful/universe, artful-updates/main, artful-updates/multiverse, artful-updates/restricted, artful-updates/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -210,8 +210,8 @@
   minpackages: 0
   sources:
     - name: [ artful-backports/main, artful-backports/multiverse, artful-backports/restricted, artful-backports/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -238,8 +238,8 @@
   minpackages: 29000
   sources:
     - name: [ bionic/main, bionic/multiverse, bionic/restricted, bionic/universe, bionic-updates/main, bionic-updates/multiverse, bionic-updates/restricted, bionic-updates/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -267,8 +267,8 @@
   minpackages: 0
   sources:
     - name: [ bionic-backports/main, bionic-backports/multiverse, bionic-backports/restricted, bionic-backports/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -295,8 +295,8 @@
   minpackages: 29000
   sources:
     - name: [ cosmic/main, cosmic/multiverse, cosmic/restricted, cosmic/universe, cosmic-updates/main, cosmic-updates/multiverse, cosmic-updates/restricted, cosmic-updates/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -324,8 +324,8 @@
   minpackages: 0
   sources:
     - name: [ cosmic-backports/main, cosmic-backports/multiverse, cosmic-backports/restricted, cosmic-backports/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -351,8 +351,8 @@
   minpackages: 0
   sources:
     - name: [ cosmic-proposed/main, cosmic-proposed/multiverse, cosmic-proposed/restricted, cosmic-proposed/universe ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

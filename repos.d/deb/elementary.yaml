@@ -12,8 +12,8 @@
   minpackages: 0
   sources:
     - name: main
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ppa.launchpad.net/elementary-os/stable/ubuntu/dists/xenial/main/source/Sources.xz'
       compression: xz
   tags: [ all, elementary ]
@@ -25,8 +25,8 @@
   minpackages: 0
   sources:
     - name: main
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ppa.launchpad.net/elementary-os/daily/ubuntu/dists/xenial/main/source/Sources.xz'
       compression: xz
   tags: [ all, elementary ]
@@ -38,8 +38,8 @@
   minpackages: 0
   sources:
     - name: main
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://ppa.launchpad.net/elementary-os/os-patches/ubuntu/dists/xenial/main/source/Sources.xz'
       compression: xz
   tags: [ all, elementary ]

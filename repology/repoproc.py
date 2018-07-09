@@ -22,11 +22,12 @@ import sys
 import time
 import traceback
 
-from repology.fetchers import Factory as FetcherFactory
+from repology.fetchers import Fetcher
 from repology.logger import NoopLogger
+from repology.moduleutils import ClassFactory
 from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
 from repology.packageproc import PackagesetDeduplicate
-from repology.parsers import Factory as ParserFactory
+from repology.parsers import Parser
 from repology.resourceusage import ResourceUsageMonitor
 
 
@@ -45,12 +46,15 @@ class InconsistentPackage(Exception):
 
 
 class RepositoryProcessor:
-    def __init__(self, repoman, statedir, fetch_retries=3, fetch_retry_delay=30, safety_checks=True):
-        self.repoman = repoman
+    def __init__(self, repomgr, statedir, fetch_retries=3, fetch_retry_delay=30, safety_checks=True):
+        self.repomgr = repomgr
         self.statedir = statedir
         self.fetch_retries = fetch_retries
         self.fetch_retry_delay = fetch_retry_delay
         self.safety_checks = safety_checks
+
+        self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', superclass=Fetcher)
+        self.parser_factory = ClassFactory('repology.parsers.parsers', superclass=Parser)
 
     def __GetRepoPath(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.state')
@@ -71,14 +75,14 @@ class RepositoryProcessor:
             logger.Log('fetching source {} not supported'.format(source['name']))
             return
 
-        fetcher = FetcherFactory.Spawn(source['fetcher'], source)
+        fetcher = self.fetcher_factory.SpawnWithKnownArgs(source['fetcher'], source)
 
         ntry = 1
         while ntry <= self.fetch_retries:
             logger.Log('fetching source {} try {} started'.format(source['name'], ntry))
 
             try:
-                fetcher.Fetch(
+                fetcher.fetch(
                     self.__GetSourcePath(repository, source),
                     update=update,
                     logger=logger.GetIndented()
@@ -115,7 +119,7 @@ class RepositoryProcessor:
         usage = ResourceUsageMonitor()
 
         # parse
-        packages = ParserFactory.Spawn(
+        packages = self.parser_factory.SpawnWithKnownArgs(
             source['parser'],
             source
         ).Parse(
@@ -275,14 +279,14 @@ class RepositoryProcessor:
 
     # Single repo methods
     def Fetch(self, reponame, update=True, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         self.__CheckRepositoryOutdatedness(repository, logger)
 
         self.__Fetch(update, repository, logger)
 
     def Parse(self, reponame, transformer, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         packages = self.__Parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -290,7 +294,7 @@ class RepositoryProcessor:
         return packages
 
     def ParseAndSerialize(self, reponame, transformer, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         packages = self.__Parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -299,12 +303,12 @@ class RepositoryProcessor:
         return packages
 
     def Deserialize(self, reponame, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         return self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
 
     def Reprocess(self, reponame, transformer=None, logger=NoopLogger()):
-        repository = self.repoman.GetRepository(reponame)
+        repository = self.repomgr.GetRepository(reponame)
 
         packages = self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
@@ -316,7 +320,7 @@ class RepositoryProcessor:
     def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
         packages = []
 
-        for repo in self.repoman.GetRepositories(reponames):
+        for repo in self.repomgr.GetRepositories(reponames):
             packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ': '))
 
         return packages
@@ -324,14 +328,14 @@ class RepositoryProcessor:
     def DeserializeMulti(self, reponames=None, logger=NoopLogger()):
         packages = []
 
-        for repo in self.repoman.GetRepositories(reponames):
+        for repo in self.repomgr.GetRepositories(reponames):
             packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ': '))
 
         return packages
 
     def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
         deserializers = []
-        for repo in self.repoman.GetRepositories(reponames):
+        for repo in self.repomgr.GetRepositories(reponames):
             deserializers.append(self.StreamDeserializer(self.__GetSerializedPath(repo)))
 
         while True:

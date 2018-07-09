@@ -8,8 +8,8 @@
   minpackages: 10000  # XXX: unknown
   sources:
     - name: PyPi
-      fetcher: File
-      parser: PyPiHTML
+      fetcher: FileFetcher
+      parser: PyPiHTMLParser
       url: https://pypi.python.org/pypi/
   shadow: true
   repolinks:

@@ -9,8 +9,8 @@
   minpackages: 600
   sources:
     - name: [main, contrib, non-free]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://repo.steamstatic.com/steamos/dists/alchemist/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -27,8 +27,8 @@
   minpackages: 600
   sources:
     - name: [main, contrib, non-free]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://repo.steamstatic.com/steamos/dists/alchemist_beta/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -45,8 +45,8 @@
   minpackages: 900
   sources:
     - name: [main, contrib, non-free]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://repo.steamstatic.com/steamos/dists/brewmaster/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
@@ -63,8 +63,8 @@
   minpackages: 900
   sources:
     - name: [main, contrib, non-free]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://repo.steamstatic.com/steamos/dists/brewmaster_beta/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'

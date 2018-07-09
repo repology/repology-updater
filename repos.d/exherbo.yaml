@@ -75,8 +75,8 @@
         - dev/tridactyla
         - dev/woutershep
         - dev/zlin
-      fetcher: Git
-      parser: ExherboGit
+      fetcher: GitFetcher
+      parser: ExherboGitParser
       url: 'git://git.exherbo.org/{source}.git'
       sparse_checkout: [ 'metadata/about.conf', '**/*.exheres-0' ]
       subrepo: '{source}'

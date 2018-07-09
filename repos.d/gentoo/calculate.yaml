@@ -8,8 +8,8 @@
   minpackages: 100
   sources:
     - name: calculate
-      fetcher: Git
-      parser: GentooGit
+      fetcher: GitFetcher
+      parser: GentooGitParser
       url: https://github.com/calculatelinux/calculate.git
   repolinks:
     - desc: Calculate Linux home

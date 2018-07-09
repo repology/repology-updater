@@ -1,4 +1,4 @@
-# Copyright (C) 2016 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.moduleutils import ClassFactory
 
-
-Factory = ClassFactory(__name__, __file__, 'Parser')
+class Parser:
+    pass

@@ -8,8 +8,8 @@
   minpackages: 1850
   sources:
     - name: yacp
-      fetcher: Git
-      parser: YACPGit
+      fetcher: GitFetcher
+      parser: YACPGitParser
       url: https://github.com/fd00/yacp.git
   repolinks:
     - desc: Yet Another Cygwin Ports GitHub repository

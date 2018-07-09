@@ -8,8 +8,8 @@
   minpackages: 1700
   sources:
     - name: main
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: http://archive.neon.kde.org/user/dists/xenial/main/source/Sources.gz
       compression: gz
       subrepo: main
@@ -29,8 +29,8 @@
   minpackages: 1700
   sources:
     - name: main
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: http://archive.neon.kde.org/user/lts/dists/xenial/main/source/Sources.gz
       compression: gz
       subrepo: main
@@ -50,8 +50,8 @@
   minpackages: 400
   sources:
     - name: main
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: http://archive.neon.kde.org/dev/stable/dists/xenial/main/source/Sources.gz
       compression: gz
       subrepo: main
@@ -71,8 +71,8 @@
   minpackages: 400
   sources:
     - name: main
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: http://archive.neon.kde.org/dev/unstable/dists/xenial/main/source/Sources.gz
       compression: gz
       subrepo: main

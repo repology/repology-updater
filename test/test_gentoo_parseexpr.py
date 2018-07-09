@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.parsers.gentoo import ParseConditionalExpr
+from repology.parsers.parsers.gentoo import ParseConditionalExpr
 
 
 class TestGentooParseExpr(unittest.TestCase):

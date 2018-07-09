@@ -11,24 +11,24 @@
   minpackages: 10000
   sources:
     - name: oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/42.3/repo/oss/suse/
       subrepo: main/oss
     - name: non-oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/42.3/repo/non-oss/suse/
       subrepo: main/non-oss
     - name: updates-oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/update/leap/42.3/oss/
       subrepo: updates/oss
       allowed_archs: [ src ]
     - name: updates-non-oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/update/leap/42.3/non-oss/
       subrepo: updates/non-oss
       allowed_archs: [ src ]
@@ -54,26 +54,26 @@
   minpackages: 11000
   sources:
     - name: oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/15.0/repo/oss/
       subrepo: main/oss
       allowed_archs: [ src ]
     - name: non-oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/15.0/repo/non-oss/
       subrepo: main/non-oss
       allowed_archs: [ src ]
     - name: updates-oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/update/leap/15.0/oss/
       subrepo: updates/oss
       allowed_archs: [ src ]
     - name: updates-non-oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/update/leap/15.0/non-oss/
       subrepo: updates/non-oss
       allowed_archs: [ src ]
@@ -101,12 +101,12 @@
     # http://download.opensuse.org/source/tumbleweed/repo/oss/
     # http://download.opensuse.org/tumbleweed/repo/src-oss/
     - name: src-oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/tumbleweed/repo/src-oss/
     - name: src-non-oss
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: http://download.opensuse.org/tumbleweed/repo/src-non-oss/
   repolinks:
     - desc: openSUSE home

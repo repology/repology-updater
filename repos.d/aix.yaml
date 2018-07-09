@@ -8,8 +8,8 @@
   minpackages: 0
   sources:
     - name: LIST
-      fetcher: FTPList
-      parser: RPMFTPList
+      fetcher: FTPListFetcher
+      parser: RPMFTPListParser
       url: ftp://www.oss4aix.org/everything/SRPMS
   repolinks:
     - desc: AIX Open Source Packages

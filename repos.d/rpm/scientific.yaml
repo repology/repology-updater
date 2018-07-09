@@ -9,8 +9,8 @@
   minpackages: 4000
   sources:
     - name: main
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: 'http://ftp.scientificlinux.org/linux/scientific/7x/SRPMS/'
   repolinks:
     - desc: Scientific Linux home

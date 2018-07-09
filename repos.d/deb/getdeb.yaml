@@ -10,8 +10,8 @@
   minpackages: 100
   sources:
     - name: Sources
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb/apps/source/Sources.gz'
       compression: gz
   repolinks:
@@ -29,8 +29,8 @@
   minpackages: 1
   sources:
     - name: Sources
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb-testing/apps/source/Sources.gz'
       compression: gz
   repolinks:
@@ -48,8 +48,8 @@
   minpackages: 100
   sources:
     - name: apps
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb/games/source/Sources.gz'
       compression: gz
   repolinks:
@@ -67,8 +67,8 @@
   minpackages: 1
   sources:
     - name: apps
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb-testing/games/source/Sources.gz'
       compression: gz
   repolinks:
@@ -87,8 +87,8 @@
   minpackages: 100
   sources:
     - name: Sources
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb/apps/source/Sources.gz'
       compression: gz
   repolinks:
@@ -106,8 +106,8 @@
   minpackages: 1
   sources:
     - name: Sources
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb-testing/apps/source/Sources.gz'
       compression: gz
   repolinks:
@@ -125,8 +125,8 @@
   minpackages: 100
   sources:
     - name: apps
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb/games/source/Sources.gz'
       compression: gz
   repolinks:
@@ -144,8 +144,8 @@
   minpackages: 1
   sources:
     - name: apps
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb-testing/games/source/Sources.gz'
       compression: gz
   repolinks:
@@ -164,8 +164,8 @@
   minpackages: 100
   sources:
     - name: Sources
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb/apps/source/Sources.gz'
       compression: gz
   repolinks:
@@ -183,8 +183,8 @@
   minpackages: 1
   sources:
     - name: Sources
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb-testing/apps/source/Sources.gz'
       compression: gz
   repolinks:
@@ -202,8 +202,8 @@
   minpackages: 100
   sources:
     - name: apps
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb/games/source/Sources.gz'
       compression: gz
   repolinks:
@@ -221,8 +221,8 @@
   minpackages: 1
   sources:
     - name: apps
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb-testing/games/source/Sources.gz'
       compression: gz
   repolinks:

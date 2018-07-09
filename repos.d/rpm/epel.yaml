@@ -9,8 +9,8 @@
   minpackages: 5000
   sources:
     - name: data
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://dl.fedoraproject.org/pub/epel/6/SRPMS/
   repolinks:
     - desc: EPEL wiki page
@@ -25,8 +25,8 @@
   minpackages: 6000
   sources:
     - name: data
-      fetcher: Repodata
-      parser: Repodata
+      fetcher: RepodataFetcher
+      parser: RepodataParser
       url: https://dl.fedoraproject.org/pub/epel/7/SRPMS/
   repolinks:
     - desc: EPEL wiki page

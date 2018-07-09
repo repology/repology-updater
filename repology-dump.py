@@ -25,7 +25,7 @@ from repology.filters import CategoryFilter, FamilyCountFilter, InRepoFilter, Ma
 from repology.logger import FileLogger, StderrLogger
 from repology.package import Package, VersionClass
 from repology.packageproc import FillPackagesetVersions, PackagesetCheckFilters, PackagesetToBestByRepo
-from repology.repoman import RepositoryManager
+from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
 
@@ -83,8 +83,8 @@ def main():
     if not options.no_shadow:
         filters.append(ShadowFilter())
 
-    repoman = RepositoryManager(options.repos_dir)
-    repoproc = RepositoryProcessor(repoman, options.statedir)
+    repomgr = RepositoryManager(options.repos_dir)
+    repoproc = RepositoryProcessor(repomgr, options.statedir)
 
     def package_processor(packageset):
         FillPackagesetVersions(packageset)
@@ -105,7 +105,7 @@ def main():
         if options.dump == 'summaries':
             print(packageset[0].effname)
             best_pkg_by_repo = PackagesetToBestByRepo(packageset)
-            for reponame in repoman.GetNames(options.reponames):
+            for reponame in repomgr.GetNames(options.reponames):
                 if reponame in best_pkg_by_repo:
                     print('  {}: {} ({})'.format(
                         reponame,

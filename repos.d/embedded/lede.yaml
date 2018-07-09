@@ -13,8 +13,8 @@
   minpackages: 4000
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.lede-project.org/snapshots/packages/x86_64/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'
@@ -32,8 +32,8 @@
   minpackages: 3500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.lede-project.org/releases/packages-17.01/x86_64/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'
@@ -52,8 +52,8 @@
   minpackages: 4000
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.lede-project.org/snapshots/packages/aarch64_generic/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'
@@ -71,8 +71,8 @@
   minpackages: 4500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.lede-project.org/snapshots/packages/arm_cortex-a9_vfpv3/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'
@@ -90,8 +90,8 @@
   minpackages: 4500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.lede-project.org/snapshots/packages/arm_xscale/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'
@@ -109,8 +109,8 @@
   minpackages: 4500
   sources:
     - name: [ base, luci, packages, routing, telephony ]
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'https://downloads.lede-project.org/snapshots/packages/mips_24kc/{source}/Packages.gz'
       compression: gz
       subrepo: '{source}'

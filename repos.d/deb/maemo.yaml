@@ -10,8 +10,8 @@
   minpackages: 1900
   sources:
     - name: free
-      fetcher: File
-      parser: DebianSources
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
       url: 'http://repository.maemo.org/extras/dists/fremantle/free/source/Sources.bz2'
       compression: bz2
   repolinks:

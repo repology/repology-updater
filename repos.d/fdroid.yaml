@@ -9,8 +9,8 @@
   minpackages: 3000
   sources:
     - name: F-Droid
-      fetcher: File
-      parser: FDroid
+      fetcher: FileFetcher
+      parser: FDroidParser
       url: https://f-droid.org/repo/index.xml
   shadow: true
   repolinks:

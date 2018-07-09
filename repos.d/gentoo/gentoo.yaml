@@ -10,8 +10,8 @@
   minpackages: 35000
   sources:
     - name: gentoo
-      fetcher: Git
-      parser: GentooGit
+      fetcher: GitFetcher
+      parser: GentooGitParser
       url: https://github.com/gentoo-mirror/gentoo.git
       sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
       branch: stable
