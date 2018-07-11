@@ -17,6 +17,7 @@
 
 import json
 import os
+import sys
 
 from repology.package import Package
 from repology.parsers import Parser
@@ -51,7 +52,12 @@ class ScoopGitParser(Parser):
                     pkg.homepage = jsondata['homepage']
 
                 if 'license' in jsondata:
-                    pkg.licenses = [jsondata['license']]
+                    if isinstance(jsondata['license'], str):
+                        pkg.licenses = [jsondata['license']]
+                    elif isinstance(jsondata['license'], dict) and 'identifier' in jsondata['license']:
+                        pkg.licenses = [jsondata['license']['identifier']]
+                    else:
+                        print('WARNING: unsupporte license format for {}'.format(pkg.name), file=sys.stderr)
 
                 pkg.extrafields = {'path': os.path.relpath(jsonpath, path)}
 
