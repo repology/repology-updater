@@ -9,6 +9,7 @@
   sources:
     - name: chocolatey
       fetcher: ChocolateyFetcher
+      fetch_timeout: 30
       parser: ChocolateyParser
       url: https://chocolatey.org/api/v2/
   shadow: true
