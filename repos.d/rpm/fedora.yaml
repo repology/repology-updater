@@ -2,25 +2,24 @@
 # Fedora
 ###########################################################################
 
-# XXX: we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
-# here because download.fedoraproject.org always redirects and may redirect to some dead or outdated
-# mirrors,
+# Note that these are archived
 - name: fedora_26
   type: repository
   desc: Fedora 26
   family: fedora
   color: '294172'
   minpackages: 21000
+  valid_till: 2018-05-29
   sources:
     - name: release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/releases/26/Everything/source/tree/
+      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/26/Everything/source/tree/
       subrepo: '{source}'
     - name: updates
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://mirror.yandex.ru/fedora/linux/updates/26/SRPMS/
+      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/26/SRPMS/
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
@@ -36,6 +35,9 @@
       url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
 
+# Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
+# here because download.fedoraproject.org always redirects and may redirect to some dead or outdated
+# mirrors
 - name: fedora_27
   type: repository
   desc: Fedora 27
