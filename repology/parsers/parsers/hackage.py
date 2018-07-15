@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -89,6 +89,10 @@ class HackageParser(Parser):
                 if maxversion is None or version_compare(versiondir, maxversion) > 0:
                     maxversion = versiondir
                     cabalpath = os.path.join(path, moduledir, maxversion, moduledir + '.cabal')
+
+            if maxversion is None:
+                print('WARNING: cannot determine max version for {}'.format(moduledir), file=sys.stderr)
+                continue
 
             pkg = Package()
 
