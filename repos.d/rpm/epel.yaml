@@ -5,6 +5,7 @@
   type: repository
   desc: EPEL 6
   family: fedora
+  ruleset: [fedora, epel]
   color: 'ff0000'
   minpackages: 5000
   sources:
@@ -21,6 +22,7 @@
   type: repository
   desc: EPEL 7
   family: fedora
+  ruleset: [fedora, epel]
   color: 'ff0000'
   minpackages: 6000
   sources:
