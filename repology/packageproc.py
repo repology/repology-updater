@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,18 +15,19 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from collections import defaultdict
 from functools import cmp_to_key
 
 from repology.package import PackageFlags, VersionClass
 
 
 def PackagesetDeduplicate(packages):
-    aggregated = {}
+    aggregated = defaultdict(list)
 
     # aggregate by subset of fields to make O(n²) merge below faster
     for package in packages:
         key = (package.repo, package.subrepo, package.name, package.version)
-        aggregated.setdefault(key, []).append(package)
+        aggregated[key].append(package)
 
     outpkgs = []
     for packages in aggregated.values():
@@ -168,7 +169,7 @@ def FillPackagesetVersions(packages):
     # Pass 1: discover branches
     #
     branches = []
-    packages_by_repo = {}
+    packages_by_repo = defaultdict(list)
     current_branchproto_idx = None
     for verpackages in AggregateBySameVersion(packages):
         version_totally_ignored = True
@@ -178,7 +179,7 @@ def FillPackagesetVersions(packages):
             version_totally_ignored = False
 
         for package in verpackages:
-            packages_by_repo.setdefault(package.repo, []).append(package)
+            packages_by_repo[package.repo].append(package)
 
             if not package.HasFlag(PackageFlags.any_ignored):
                 version_totally_ignored = False
@@ -281,13 +282,12 @@ def PackagesetSortByNameVersion(packages):
 
 def PackagesetAggregateByVersion(packages, classmap={}):
     def CreateVersionAggregation(packages):
-        aggregated = {}
+        aggregated = defaultdict(list)
 
         for package in packages:
-            aggregated.setdefault(
-                (package.version, classmap.get(package.versionclass, package.versionclass)),
-                []
-            ).append(package)
+            aggregated[
+                (package.version, classmap.get(package.versionclass, package.versionclass))
+            ].append(package)
 
         for (version, versionclass), packages in sorted(aggregated.items()):
             yield {

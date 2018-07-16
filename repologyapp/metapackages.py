@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -14,6 +14,8 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
+
+from collections import defaultdict
 
 import flask
 
@@ -152,7 +154,7 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
         summaries = {
             sumtype: {
                 'keys': [],
-                'families_by_key': {}
+                'families_by_key': defaultdict(set)
             } for sumtype in ['explicit', 'newest', 'outdated', 'ignored']
         }
 
@@ -174,7 +176,7 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
             if key not in target['families_by_key']:
                 target['keys'].append(key)
 
-            target['families_by_key'].setdefault(key, set()).add(package.family)
+            target['families_by_key'][key].add(package.family)
 
         # convert summaries
         for sumtype, summary in summaries.items():

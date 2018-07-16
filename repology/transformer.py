@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -19,6 +19,7 @@ import os
 import pprint
 import re
 import sys
+from collections import defaultdict
 
 from libversion import version_compare
 
@@ -112,13 +113,13 @@ class PackageTransformer:
             rule['matches'] = 0
             rule['number'] = rulenum
 
-        self.fastrules = {}
+        self.fastrules = defaultdict(list)
         self.slowrules = []
 
         for rule in self.rules:
             if 'name' in rule:
                 for name in rule['name']:
-                    self.fastrules.setdefault(name, []).append(rule)
+                    self.fastrules[name].append(rule)
             else:
                 self.slowrules.append(rule)
 

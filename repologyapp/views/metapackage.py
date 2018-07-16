@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from collections import defaultdict
 from datetime import timedelta
 from functools import cmp_to_key
 
@@ -42,10 +43,8 @@ def metapackage(name):
 
 @ViewRegistrar('/metapackage/<name>/versions')
 def metapackage_versions(name):
-    packages_by_repo = {}
+    packages_by_repo = defaultdict(list)
     for package in get_db().get_metapackage_packages(name):
-        if package.repo not in packages_by_repo:
-            packages_by_repo[package.repo] = []
         packages_by_repo[package.repo].append(package)
 
     for repo, packages in packages_by_repo.items():
@@ -61,10 +60,10 @@ def metapackage_versions(name):
 
 @ViewRegistrar('/metapackage/<name>/packages')
 def metapackage_packages(name):
-    packages_by_repo = {}
+    packages_by_repo = defaultdict(list)
 
     for package in get_db().get_metapackage_packages(name):
-        packages_by_repo.setdefault(package.repo, []).append(package)
+        packages_by_repo[package.repo].append(package)
 
     packages = []
     for repo in repometadata.active_names():
