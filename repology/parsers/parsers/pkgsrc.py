@@ -40,9 +40,7 @@ class PkgsrcIndexParser(Parser):
     def __init__(self):
         pass
 
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 fields = line.strip().split('|')
@@ -70,6 +68,4 @@ class PkgsrcIndexParser(Parser):
                 pkg.extrafields['portname'] = fields[1].split('/')[-1]
                 pkg.extrafields['origin'] = fields[1]
 
-                result.append(pkg)
-
-        return result
+                yield pkg
