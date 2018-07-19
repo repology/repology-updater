@@ -109,50 +109,41 @@ class RepositoryProcessor:
 
         logger.Log('fetching source {} complete with {} tries'.format(source['name'], ntry))
 
-    def __ParseSource(self, repository, source, logger):
-        if 'parser' not in source:
-            logger.Log('parsing source {} not supported'.format(source['name']))
-            return []
+    def _iter_parse_source(self, repository, source, logger):
+        def postprocess_parsed_packages(packages_iter):
+            for package in packages_iter:
+                # fill subrepos
+                if 'subrepo' in source:
+                    package.subrepo = source['subrepo']
 
-        logger.Log('parsing source {} started'.format(source['name']))
+                # fill default maintainer
+                if not package.maintainers:
+                    if 'default_maintainer' in repository:
+                        package.maintainers = [repository['default_maintainer']]
+                    else:
+                        package.maintainers = ['fallback-mnt-{}@repology'.format(repository['name'])]
 
-        usage = ResourceUsageMonitor()
+                # sanity
+                if not package.name:
+                    raise InconsistentPackage('encountered package with no name')
 
-        # parse
-        packages = self.parser_factory.SpawnWithKnownArgs(
-            source['parser'],
-            source
-        ).Parse(
-            self.__GetSourcePath(repository, source)
+                if not package.version:
+                    # XXX: this currently fires on kdepim in dports; it's pretty fatal on
+                    # one hand, but shouldn't stop whole repo from updating on another. In
+                    # future, it should be logged as some kind of very serious repository
+                    # update error
+                    logger.Log('ERROR: package with empty version'.format(package.name))
+                    continue
+
+                yield package
+
+        return postprocess_parsed_packages(
+            self.parser_factory.SpawnWithKnownArgs(
+                source['parser'], source
+            ).iter_parse(
+                self.__GetSourcePath(repository, source)
+            )
         )
-
-        logger.Log('parsing source {} postprocessing'.format(source['name']))
-
-        for package in packages:
-            # - fill subrepos
-            if 'subrepo' in source:
-                package.subrepo = source['subrepo']
-
-            # - fill default maintainer
-            if not package.maintainers:
-                if 'default_maintainer' in repository:
-                    package.maintainers = [repository['default_maintainer']]
-                else:
-                    package.maintainers = ['fallback-mnt-{}@repology'.format(repository['name'])]
-
-            if not package.name:
-                raise InconsistentPackage('package with no name')
-
-            if not package.version:
-                # XXX: this currently fires on kdepim in dports; it's pretty fatal on
-                # one hand, but shouldn't stop whole repo from updating on another. In
-                # future, it should be logged as some kind of very serious repository
-                # update error
-                logger.Log('ERROR: package with empty version'.format(package.name))
-
-        logger.Log('parsing source {} complete, resource usage: {}'.format(source['name'], usage.get_usage_str()))
-
-        return packages
 
     # Private methods which provide single actions on repos
     def __Fetch(self, update, repository, logger):
@@ -168,12 +159,19 @@ class RepositoryProcessor:
 
         logger.Log('fetching complete')
 
-    def __Parse(self, repository, logger):
-        packages = []
+    def _parse(self, repository, logger):
         logger.Log('parsing started')
 
+        packages = []
+
         for source in repository['sources']:
-            packages += self.__ParseSource(repository, source, logger.GetIndented())
+            usage = ResourceUsageMonitor()
+
+            logger.Log('parsing source {} started'.format(source['name']))
+
+            packages.extend(self._iter_parse_source(repository, source, logger.GetIndented()))
+
+            logger.Log('parsing source {} complete, resource usage: {}'.format(source['name'], usage.get_usage_str()))
 
         logger.Log('parsing complete, {} packages, deduplicating'.format(len(packages)))
 
@@ -288,7 +286,7 @@ class RepositoryProcessor:
     def Parse(self, reponame, transformer, logger=NoopLogger()):
         repository = self.repomgr.GetRepository(reponame)
 
-        packages = self.__Parse(repository, logger)
+        packages = self._parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
 
         return packages
@@ -296,7 +294,7 @@ class RepositoryProcessor:
     def ParseAndSerialize(self, reponame, transformer, logger=NoopLogger()):
         repository = self.repomgr.GetRepository(reponame)
 
-        packages = self.__Parse(repository, logger)
+        packages = self._parse(repository, logger)
         packages = self.__Transform(packages, transformer, repository, logger)
         self.__Serialize(packages, self.__GetSerializedPath(repository), repository, logger)
 
