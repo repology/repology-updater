@@ -18,3 +18,7 @@
 
 class Parser:
     pass
+
+    def iter_parse(self, path):
+        # compatibility shim
+        yield from self.Parse(path)
