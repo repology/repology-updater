@@ -222,6 +222,10 @@ class PackageTransformer:
         if 'ignore' in rule:
             package.SetFlag(PackageFlags.ignore, rule['ignore'])
 
+        if 'weak_devel' in rule:
+            # XXX: currently sets ignore; change to set non-viral variant of devel (#654)
+            package.SetFlag(PackageFlags.ignore, rule['weak_devel'])
+
         if 'devel' in rule:
             package.SetFlag(PackageFlags.devel, rule['devel'])
 
