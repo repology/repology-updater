@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import time
 import urllib
 
 from repology.fetchers import ScratchDirFetcher
@@ -23,9 +24,10 @@ from repology.fetchers.fetch import fetch
 
 
 class AURFetcher(ScratchDirFetcher):
-    def __init__(self, url, fetch_timeout=5):
+    def __init__(self, url, fetch_timeout=5, fetch_delay=None):
         self.url = url
         self.fetch_timeout = fetch_timeout
+        self.fetch_delay = fetch_delay
 
     def do_fetch(self, statedir, logger):
         packages_url = self.url + 'packages.gz'
@@ -57,3 +59,6 @@ class AURFetcher(ScratchDirFetcher):
 
             with open(os.path.join(statedir, '{}.json'.format(page)), 'wb') as statefile:
                 statefile.write(fetch(url, timeout=self.fetch_timeout).content)
+
+            if self.fetch_delay:
+                time.sleep(self.fetch_delay)
