@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import datetime
-
 import flask
 
 from repology.package import VersionClass
@@ -101,25 +99,3 @@ def css_for_versionclass(value):
 
 def url_for_self(**args):
     return flask.url_for(flask.request.endpoint, **dict(flask.request.view_args, **args))
-
-
-class AFKChecker:
-    def __init__(self, intervals=[]):
-        self.intervals = []
-        for interval in intervals:
-            start, *rest = [
-                datetime.date(*map(int, date.split('-', 2)))
-                for date in interval.split(' ', 1)
-            ]
-
-            self.intervals.append((start, rest[0] if rest else start))
-
-    def GetAFKEnd(self, today=None):
-        if today is None:
-            today = datetime.date.today()
-
-        for interval in self.intervals:
-            if today >= interval[0] and today <= interval[1]:
-                return interval[1]
-
-        return None

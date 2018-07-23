@@ -22,10 +22,10 @@ import flask
 
 from libversion import version_compare
 
+from repologyapp.afk import AFKChecker
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.metapackages import metapackages_to_summary_items
-from repologyapp.template_helpers import AFKChecker
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
@@ -290,7 +290,7 @@ def metapackage_report(name):
         'metapackage-report.html',
         reports=get_db().get_reports(name),
         name=name,
-        afk_till=AFKChecker(config['STAFF_AFK']).GetAFKEnd(),
+        afk_till=AFKChecker(config['STAFF_AFK']).get_afk_end(),
         reports_disabled=reports_disabled,
         show_invitation=flask.request.remote_addr in config['INVITED_IPS']
     )
