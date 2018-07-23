@@ -23,8 +23,9 @@ import flask
 from pytz import timezone, utc
 
 from repologyapp.globals import get_text_width, repometadata
-from repologyapp.template_helpers import css_for_versionclass, maintainer_to_links, maintainers_to_group_mailto
-from repologyapp.template_helpers import for_page, is_fallback_maintainer, pkg_format, url_for_self
+from repologyapp.template_filters import css_for_versionclass, maintainer_to_links, maintainers_to_group_mailto, pkg_format
+from repologyapp.template_functions import url_for_self
+from repologyapp.template_tests import for_page, is_fallback_maintainer
 from repologyapp.views import Registry as ViewRegistry
 
 from repology.config import config

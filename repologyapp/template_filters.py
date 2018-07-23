@@ -15,10 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import flask
-
 from repology.package import VersionClass
 from repology.packageformatter import PackageFormatter
+
+
+__all__ = ['maintainer_to_links', 'maintainers_to_group_mailto', 'pkg_format', 'css_for_versionclass']
 
 
 def maintainer_to_links(maintainer):
@@ -44,10 +45,6 @@ def maintainer_to_links(maintainer):
     return links
 
 
-def is_fallback_maintainer(maintainer):
-    return maintainer.startswith('fallback-mnt-') and maintainer.endswith('@repology')
-
-
 def maintainers_to_group_mailto(maintainers, subject=None):
     emails = []
 
@@ -59,15 +56,6 @@ def maintainers_to_group_mailto(maintainers, subject=None):
         return None
 
     return 'mailto:' + ','.join(sorted(emails)) + ('?subject=' + subject if subject else '')
-
-
-def for_page(value, letter=None):
-    if letter is None or letter == '0':
-        return not value or value < 'a'
-    elif letter >= 'z':
-        return value and value >= 'z'
-    else:
-        return value and value >= letter and value < chr(ord(letter) + 1)
 
 
 def pkg_format(value, pkg):
@@ -95,7 +83,3 @@ def css_for_versionclass(value):
         return 'noscheme'
     elif value == VersionClass.rolling:
         return 'rolling'
-
-
-def url_for_self(**args):
-    return flask.url_for(flask.request.endpoint, **dict(flask.request.view_args, **args))
