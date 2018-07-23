@@ -24,10 +24,11 @@ from repology.fetchers.fetch import fetch
 
 
 class CratesIOFetcher(ScratchDirFetcher):
-    def __init__(self, url, per_page=100, fetch_timeout=5, fetch_delay=1):
+    def __init__(self, url, per_page=100, fetch_timeout=5, fetch_delay=None):
         self.url = url
         self.per_page = per_page
         self.fetch_timeout = fetch_timeout
+        self.fetch_delay = fetch_delay
 
     def do_fetch(self, statedir, logger):
         numpage = 1
@@ -45,4 +46,6 @@ class CratesIOFetcher(ScratchDirFetcher):
                 return
 
             numpage += 1
-            time.sleep(1)
+
+            if self.fetch_delay:
+                time.sleep(self.fetch_delay)
