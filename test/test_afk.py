@@ -20,41 +20,41 @@
 import unittest
 from datetime import date
 
-from repologyapp.template_helpers import AFKChecker
+from repologyapp.afk import AFKChecker
 
 
 class TestAFK(unittest.TestCase):
     def test_empty(self):
         afk = AFKChecker()
 
-        self.assertEqual(afk.GetAFKEnd(), None)
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 1)), None)
+        self.assertEqual(afk.get_afk_end(), None)
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 1)), None)
 
     def test_day(self):
         afk = AFKChecker(['2017-01-02'])
 
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 1)), None)
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 2)), date(2017, 1, 2))
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 3)), None)
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 1)), None)
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 2)), date(2017, 1, 2))
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 3)), None)
 
     def test_range(self):
         afk = AFKChecker(['2017-01-02 2017-01-04'])
 
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 1)), None)
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 2)), date(2017, 1, 4))
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 3)), date(2017, 1, 4))
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 4)), date(2017, 1, 4))
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 5)), None)
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 1)), None)
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 2)), date(2017, 1, 4))
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 3)), date(2017, 1, 4))
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 4)), date(2017, 1, 4))
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 5)), None)
 
     def test_multi(self):
         afk = AFKChecker(['2017-01-02', '2017-01-04 2017-01-05'])
 
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 1)), None)
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 2)), date(2017, 1, 2))
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 3)), None)
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 4)), date(2017, 1, 5))
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 5)), date(2017, 1, 5))
-        self.assertEqual(afk.GetAFKEnd(date(2017, 1, 6)), None)
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 1)), None)
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 2)), date(2017, 1, 2))
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 3)), None)
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 4)), date(2017, 1, 5))
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 5)), date(2017, 1, 5))
+        self.assertEqual(afk.get_afk_end(date(2017, 1, 6)), None)
 
 
 if __name__ == '__main__':
