@@ -22,8 +22,8 @@
 			{% else %}
 				<a href="{{ url_for_self(bound=None) }}" class="btn btn-default {% if firstpage %} disabled{% endif %}">&laquo;&laquo;</a>
 				{% if maintainers %}
-				<a href="{{ url_for_self(bound=".."+(maintainers|first).maintainer, search=search) }}" class="btn btn-default{% if firstpage %} disabled{% endif %}">&laquo;</a>
-				<a href="{{ url_for_self(bound=(maintainers|last).maintainer+"..", search=search) }}" class="btn btn-default{% if lastpage %} disabled{% endif %}">&raquo;</a>
+				<a href="{{ url_for_self(bound=".."+(maintainers|first).maintainer, search=search) }}" class="btn btn-default{% if firstpage %} disabled{% endif %}" rel="prev">&laquo;</a>
+				<a href="{{ url_for_self(bound=(maintainers|last).maintainer+"..", search=search) }}" class="btn btn-default{% if lastpage %} disabled{% endif %}" rel="next">&raquo;</a>
 				{% endif %}
 				<a href="{{ url_for_self(bound=".."+maxmaintainer) }}" class="btn btn-default {% if lastpage %} disabled{% endif %}">&raquo;&raquo;</a>
 			{% endif %}

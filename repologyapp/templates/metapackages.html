@@ -14,7 +14,7 @@ Metapackages
 	<ul class="pagination">
 		<li{% if not firstname %} class="disabled"{% endif %}>
 		{% if firstname %}
-			<a href="{{ url_for_self(bound=".."+firstname, **search) }}">&laquo;</a>
+			<a href="{{ url_for_self(bound=".."+firstname, **search) }}" rel="prev">&laquo;</a>
 		{% else %}
 			<span>&laquo;</span>
 		{% endif %}
@@ -29,7 +29,7 @@ Metapackages
 		{% endfor %}
 		<li{% if not lastname %} class="disabled"{% endif %}>
 		{% if lastname %}
-			<a href="{{ url_for_self(bound=lastname, **search) }}">&raquo;</a>
+			<a href="{{ url_for_self(bound=lastname, **search) }}" rel="next">&raquo;</a>
 		{% else %}
 			<span>&raquo;</span>
 		{% endif %}
