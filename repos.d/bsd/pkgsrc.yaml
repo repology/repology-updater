@@ -1,18 +1,18 @@
 ###########################################################################
 # pkgsrc
 ###########################################################################
-- name: pkgsrc_2017_1
+- name: pkgsrc_2018_2
   type: repository
-  desc: pkgsrc-2017Q1
+  desc: pkgsrc-2018Q2
   family: pkgsrc
   color: 'ff6600'
-  valid_till: 2017-07-01
+  valid_till: 2018-10-01
   minpackages: 15000
   sources:
     - name: INDEX
       fetcher: FileFetcher
       parser: PkgsrcIndexParser
-      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q1/pkgsrc/INDEX
+      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q2/pkgsrc/INDEX
       nocache: true
   repolinks:
     - desc: pkgsrc home
@@ -27,144 +27,12 @@
     - desc: Port CVS directory
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
     - desc: Port CVS directory (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2017Q1'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2018Q2'
     - desc: Port Makefile
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
     - desc: Port Makefile (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q1'
+      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2018Q2'
   tags: [ all, production, pkgsrc ]
-
-- name: pkgsrc_2017_2
-  type: repository
-  desc: pkgsrc-2017Q2
-  family: pkgsrc
-  color: 'ff6600'
-  valid_till: 2017-10-01
-  minpackages: 15000
-  sources:
-    - name: INDEX
-      fetcher: FileFetcher
-      parser: PkgsrcIndexParser
-      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q2/pkgsrc/INDEX
-      nocache: true
-  repolinks:
-    - desc: pkgsrc home
-      url: https://www.pkgsrc.org/
-    - desc: pkgsrc.se
-      url: http://pkgsrc.se/
-    - desc: pkgsrc CVS repository
-      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
-  packagelinks:
-    - desc: pkgsrc.se page
-      url: 'http://pkgsrc.se/{origin}'
-    - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
-    - desc: Port CVS directory (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2017Q2'
-    - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
-    - desc: Port Makefile (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q2'
-  tags: [ all, production, pkgsrc ]
-
-- name: pkgsrc_2017_3
-  type: repository
-  desc: pkgsrc-2017Q3
-  family: pkgsrc
-  color: 'ff6600'
-  valid_till: 2018-01-01
-  minpackages: 15000
-  sources:
-    - name: INDEX
-      fetcher: FileFetcher
-      parser: PkgsrcIndexParser
-      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q3/pkgsrc/INDEX
-      nocache: true
-  repolinks:
-    - desc: pkgsrc home
-      url: https://www.pkgsrc.org/
-    - desc: pkgsrc.se
-      url: http://pkgsrc.se/
-    - desc: pkgsrc CVS repository
-      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
-  packagelinks:
-    - desc: pkgsrc.se page
-      url: 'http://pkgsrc.se/{origin}'
-    - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
-    - desc: Port CVS directory (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2017Q3'
-    - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
-    - desc: Port Makefile (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q3'
-  tags: [ all, production, pkgsrc ]
-
-- name: pkgsrc_2017_4
-  type: repository
-  desc: pkgsrc-2017Q4
-  family: pkgsrc
-  color: 'ff6600'
-  valid_till: 2021-01-01
-  minpackages: 15000
-  sources:
-    - name: INDEX
-      fetcher: FileFetcher
-      parser: PkgsrcIndexParser
-      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2017Q4/pkgsrc/INDEX
-      nocache: true
-  repolinks:
-    - desc: pkgsrc home
-      url: https://www.pkgsrc.org/
-    - desc: pkgsrc.se
-      url: http://pkgsrc.se/
-    - desc: pkgsrc CVS repository
-      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
-  packagelinks:
-    - desc: pkgsrc.se page
-      url: 'http://pkgsrc.se/{origin}'
-    - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
-    - desc: Port CVS directory (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2017Q4'
-    - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
-    - desc: Port Makefile (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2017Q4'
-  tags: [ all, production, pkgsrc ]
-
-- name: pkgsrc_2018_01
-  type: repository
-  desc: pkgsrc-2018Q1
-  family: pkgsrc
-  color: 'ff6600'
-  valid_till: 2018-07-01
-  minpackages: 15000
-  sources:
-    - name: INDEX
-      fetcher: FileFetcher
-      parser: PkgsrcIndexParser
-      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q1/pkgsrc/INDEX
-      nocache: true
-  repolinks:
-    - desc: pkgsrc home
-      url: https://www.pkgsrc.org/
-    - desc: pkgsrc.se
-      url: http://pkgsrc.se/
-    - desc: pkgsrc CVS repository
-      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
-  packagelinks:
-    - desc: pkgsrc.se page
-      url: 'http://pkgsrc.se/{origin}'
-    - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
-    - desc: Port CVS directory (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2018Q1'
-    - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
-    - desc: Port Makefile (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2018Q1'
-  tags: [ all, pkgsrc ]  # disabled; no INDEX (generation is broken) in https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q1/pkgsrc/, and nobody cares
 
 - name: pkgsrc_current
   type: repository
