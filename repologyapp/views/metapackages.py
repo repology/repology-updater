@@ -19,11 +19,10 @@ import flask
 
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
-from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_range, metapackages_to_summary_items
+from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_range, metapackages_to_summary_items, packages_to_metapackages
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
-from repology.metapackageproc import PackagesToMetapackages
 
 
 @ViewRegistrar('/metapackages/')
@@ -61,7 +60,7 @@ def metapackages(bound=None):
 
     firstname, lastname = get_packages_name_range(packages)
 
-    metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages), filterinfo.GetRepo(), filterinfo.GetMaintainer())
+    metapackagedata = metapackages_to_summary_items(packages_to_metapackages(packages), filterinfo.GetRepo(), filterinfo.GetMaintainer())
 
     return flask.render_template(
         'metapackages.html',

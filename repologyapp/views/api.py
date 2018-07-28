@@ -20,11 +20,10 @@ import json
 import flask
 
 from repologyapp.db import get_db
-from repologyapp.metapackages import MetapackagesFilterInfo
+from repologyapp.metapackages import MetapackagesFilterInfo, packages_to_metapackages
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
-from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
 
 
@@ -79,7 +78,7 @@ def api_v1_metapackages(bound=None):
 
     packages = get_db().get_metapackages_packages(list(metapackages.keys()))
 
-    metapackages = PackagesToMetapackages(packages)
+    metapackages = packages_to_metapackages(packages)
 
     metapackages = {
         metapackage_name: [api_v1_package_to_json(package) for package in packageset]

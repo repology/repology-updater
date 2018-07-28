@@ -193,3 +193,13 @@ def metapackages_to_summary_items(metapackages, repo=None, maintainer=None):
         }
 
     return metapackagedata
+
+
+def packages_to_metapackages(*packagesets):
+    metapackages = defaultdict(list)
+
+    for packages in packagesets:
+        for package in packages:
+            metapackages[package.effname].append(package)
+
+    return metapackages

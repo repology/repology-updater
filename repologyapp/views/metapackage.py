@@ -26,11 +26,10 @@ from libversion import version_compare
 from repologyapp.afk import AFKChecker
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
-from repologyapp.metapackages import metapackages_to_summary_items
+from repologyapp.metapackages import metapackages_to_summary_items, packages_to_metapackages
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
-from repology.metapackageproc import PackagesToMetapackages
 from repology.package import VersionClass
 from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByNameVersion, PackagesetSortByVersion
 
@@ -221,7 +220,7 @@ def metapackage_related(name):
 
     packages = get_db().get_metapackages_packages(list(metapackages.keys()), fields=['family', 'effname', 'version', 'versionclass', 'flags'])
 
-    metapackagedata = metapackages_to_summary_items(PackagesToMetapackages(packages))
+    metapackagedata = metapackages_to_summary_items(packages_to_metapackages(packages))
 
     too_many_warning = None
     if len(metapackagedata) == config['METAPACKAGES_PER_PAGE']:
