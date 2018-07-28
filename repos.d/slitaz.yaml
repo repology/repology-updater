@@ -21,4 +21,4 @@
       url: 'http://pkg.slitaz.org/?info={name}'
     - desc: Package receipt
       url: 'http://pkg.slitaz.org/?receipt={name}'
-  tags: [ all, experimental, slitaz ]
+  tags: [ all, production, slitaz ]
