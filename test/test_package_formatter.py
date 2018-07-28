@@ -19,8 +19,9 @@
 
 import unittest
 
+from repologyapp.packageformatter import PackageFormatter
+
 from repology.package import Package
-from repology.packageformatter import PackageFormatter
 
 
 class TestVersionComparison(unittest.TestCase):

@@ -15,8 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from repologyapp.packageformatter import PackageFormatter
+
 from repology.package import VersionClass
-from repology.packageformatter import PackageFormatter
 
 
 __all__ = ['maintainer_to_links', 'maintainers_to_group_mailto', 'pkg_format', 'css_for_versionclass']
