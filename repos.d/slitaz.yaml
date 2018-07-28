@@ -1,0 +1,24 @@
+###########################################################################
+# SliTaz
+###########################################################################
+- name: slitaz_cooking
+  type: repository
+  desc: SliTaz
+  family: slitaz
+  minpackages: 5200
+  sources:
+    - name: packages.info
+      fetcher: FileFetcher
+      parser: SliTazInfoParser
+      url: http://mirror.slitaz.org/packages/cooking/packages.info
+  repolinks:
+    - desc: SliTaz home
+      url: http://www.slitaz.org/
+    - desc: SliTaz packages
+      url: http://pkg.slitaz.org/
+  packagelinks:
+    - desc: Package information
+      url: 'http://pkg.slitaz.org/?info={name}'
+    - desc: Package receipt
+      url: 'http://pkg.slitaz.org/?receipt={name}'
+  tags: [ all, experimental, slitaz ]
