@@ -59,9 +59,7 @@ class NixJsonParser(Parser):
     def __init__(self):
         pass
 
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for key, packagedata in sorted(json.load(jsonfile)['packages'].items()):
                 # see how Nix parses 'derivative' names in
@@ -129,6 +127,4 @@ class NixJsonParser(Parser):
                     pkg.extrafields['posfile'] = posfile
                     pkg.extrafields['posline'] = posline
 
-                result.append(pkg)
-
-        return result
+                yield pkg
