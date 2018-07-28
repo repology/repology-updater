@@ -24,7 +24,7 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
-def ExtractMaintainers(items):
+def extract_nix_maintainers(items):
     for item in items:
         # old format, currently used in stable; parse email out of 'name <email>' string
         # items without closing '>' are quite common, just skip them
@@ -39,11 +39,11 @@ def ExtractMaintainers(items):
             #    yield item['github'].lower() + '@github'
 
 
-def ExtractLicenses(whatever):
+def extract_nix_licenses(whatever):
     if isinstance(whatever, str):
         return [whatever]
     elif isinstance(whatever, list):
-        return sum(map(ExtractLicenses, whatever), [])
+        return sum(map(extract_nix_licenses, whatever), [])
     elif isinstance(whatever, dict) and 'spdxId' in whatever:
         return [whatever['spdxId']]
     elif isinstance(whatever, dict) and 'fullName' in whatever:
@@ -119,10 +119,10 @@ class NixJsonParser(Parser):
                     if not isinstance(meta['maintainers'], list):
                         print('maintainers is not a list: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
                     else:
-                        pkg.maintainers += list(ExtractMaintainers(meta['maintainers']))
+                        pkg.maintainers += list(extract_nix_maintainers(meta['maintainers']))
 
                 if 'license' in meta:
-                    pkg.licenses = ExtractLicenses(meta['license'])
+                    pkg.licenses = extract_nix_licenses(meta['license'])
 
                 if 'position' in meta:
                     posfile, posline = meta['position'].rsplit(':', 1)
