@@ -61,7 +61,7 @@ class NixJsonParser(Parser):
 
     def iter_parse(self, path):
         with open(path, 'r', encoding='utf-8') as jsonfile:
-            for key, packagedata in sorted(json.load(jsonfile)['packages'].items()):
+            for key, packagedata in json.load(jsonfile)['packages'].items():
                 # see how Nix parses 'derivative' names in
                 # https://github.com/NixOS src/libexpr/names.cc, DrvName::DrvName
                 # it just splits on dash followed by non-letter
