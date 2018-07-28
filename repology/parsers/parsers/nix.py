@@ -111,7 +111,7 @@ class NixJsonParser(Parser):
                         pkg.homepage = pkg.homepage[0]
 
                 if 'description' in meta and meta['description']:
-                    pkg.comment = meta['description']
+                    pkg.comment = meta['description'].replace('\n', ' ').strip()
 
                 if 'maintainers' in meta:
                     if not isinstance(meta['maintainers'], list):
