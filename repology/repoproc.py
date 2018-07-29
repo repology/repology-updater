@@ -190,8 +190,10 @@ class RepositoryProcessor:
         for package in packages:
             package.repo = repository['name']
             package.family = repository['family']
-            if 'shadow' in repository and repository['shadow']:
+
+            if repository.get('shadow', False):
                 package.shadow = True
+
             if transformer:
                 transformer.Process(package)
 
