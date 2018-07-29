@@ -197,6 +197,14 @@ class RepositoryProcessor:
             if transformer:
                 transformer.Process(package)
 
+            # strip leading project name from flavor
+            def strip_flavor(flavor):
+                if flavor.startswith(package.effname + '-'):
+                    return flavor[len(package.effname) + 1:]
+                return flavor
+
+            package.flavors = sorted(set(map(strip_flavor, package.flavors)))
+
             try:
                 package.CheckSanity(transformed=transformer is not None)
             except PackageSanityCheckFailure as err:

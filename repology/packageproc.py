@@ -236,7 +236,7 @@ def FillPackagesetVersions(packages):
                 else:
                     package.versionclass = VersionClass.ignored
             else:
-                flavor = '_'.join(package.flavors)  # XXX: sorted(set(flavors))?
+                flavor = '_'.join(package.flavors)  # already sorted and unicalized in RepoProcessor
 
                 if current_comparison == 0:
                     package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch_idx].versionclass
