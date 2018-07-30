@@ -33,7 +33,7 @@ class LibreGameWikiParser(Parser):
 
         content = root.find('.//div[@id="mw-content-text"]')
 
-        for item in content.findall('./div[@style="float:left; width:25.3em; height:8.5em; border:1px solid #ccc; padding:0.1em; margin-bottom: 2em; margin-right: 1em; overflow:hidden"]'):
+        for item in content.findall('.//div[@style="float:left; width:25.3em; height:8.5em; border:1px solid #ccc; padding:0.1em; margin-bottom: 2em; margin-right: 1em; overflow:hidden"]'):
             pkg = Package()
 
             # name
