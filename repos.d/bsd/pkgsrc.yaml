@@ -32,7 +32,7 @@
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
     - desc: Port Makefile (quarterly branch)
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2018Q2'
-  tags: [ all, production, pkgsrc ]
+  tags: [ all, pkgsrc ]  # disabled due to constantly broken INDEX
 
 - name: pkgsrc_current
   type: repository
