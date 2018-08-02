@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,45 +20,60 @@ import sys
 import time
 
 
-class NoopLogger:
-    def __init__(self):
+class Logger():
+    NOTICE = 1
+    WARNING = 2
+    ERROR = 3
+
+    def log(self, message, severity=NOTICE):
         pass
 
+    def get_prefixed(self, prefix):
+        return LoggerProxy(self, prefix=prefix)
+
+    def get_indented(self, indent=1):
+        return LoggerProxy(self, indent=indent)
+
+    # XXX: compatibility shims
     def Log(self, message):
-        pass
+        return self.log(message, severity=Logger.NOTICE)
 
-    def GetPrefixed(self, prefix):
-        return NoopLogger()
+    def GetPrefixed(self, *args, **kwargs):
+        return self.get_prefixed(*args, **kwargs)
 
-    def GetIndented(self, level=1):
-        return self.GetPrefixed('  ' * level)
+    def GetIndented(self, *args, **kwargs):
+        return self.get_indented(*args, **kwargs)
 
 
-class FileLogger(NoopLogger):
-    def __init__(self, path, prefix=None):
+class LoggerProxy(Logger):
+    def __init__(self, parent, prefix='', indent=0):
+        if isinstance(parent, LoggerProxy):
+            self.parent = parent.parent
+            self.prefix = parent.prefix + prefix
+            self.indent = parent.indent + indent
+        else:
+            self.parent = parent
+            self.prefix = prefix
+            self.indent = indent
+
+    def log(self, message, severity=Logger.NOTICE):
+        self.parent.log(self.prefix + '  ' * self.indent + message, severity)
+
+
+class NoopLogger(Logger):
+    pass
+
+
+class FileLogger(Logger):
+    def __init__(self, path):
         self.path = path
-        self.prefix = prefix
 
-    def Log(self, message):
-        prefixstr = self.prefix if self.prefix else ''
+    def log(self, message, severity=Logger.NOTICE):
         with open(self.path, 'a', encoding='utf-8') as logfile:
             fcntl.flock(logfile, fcntl.LOCK_EX)
-            print(time.strftime('%b %d %T ') + prefixstr + message,
-                  file=logfile)
-
-    def GetPrefixed(self, prefix):
-        return FileLogger(self.path,
-                          self.prefix + prefix if self.prefix else prefix)
+            print(time.strftime('%b %d %T ') + message, file=logfile)
 
 
-class StderrLogger(NoopLogger):
-    def __init__(self, prefix=None):
-        self.prefix = prefix
-
-    def Log(self, message):
-        prefixstr = self.prefix if self.prefix else ''
-        print(time.strftime('%b %d %T ') + prefixstr + message,
-              file=sys.stderr)
-
-    def GetPrefixed(self, prefix):
-        return StderrLogger(self.prefix + prefix if self.prefix else prefix)
+class StderrLogger(Logger):
+    def log(self, message, severity=Logger.NOTICE):
+        print(time.strftime('%b %d %T ') + message, file=sys.stderr)
