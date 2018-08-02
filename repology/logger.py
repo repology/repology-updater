@@ -74,6 +74,20 @@ class FileLogger(Logger):
             print(time.strftime('%b %d %T ') + message, file=logfile)
 
 
+class FastFileLogger(Logger):
+    def __init__(self, path):
+        self.path = path
+
+    def __enter__(self):
+        self.fd = open(self.path, 'a', encoding='utf-8')
+
+    def __exit__(self):
+        self.fd.close()
+
+    def log(self, message, severity=Logger.NOTICE):
+        print(time.strftime('%b %d %T ') + message, file=self.fd)
+
+
 class StderrLogger(Logger):
     def log(self, message, severity=Logger.NOTICE):
         print(time.strftime('%b %d %T ') + message, file=sys.stderr)
