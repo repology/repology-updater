@@ -132,7 +132,7 @@ class RepositoryProcessor:
                     # one hand, but shouldn't stop whole repo from updating on another. In
                     # future, it should be logged as some kind of very serious repository
                     # update error
-                    logger.Log('ERROR: package with empty version'.format(package.name))
+                    logger.Log('ERROR: package with empty version: {}'.format(package.name))
                     continue
 
                 yield package
