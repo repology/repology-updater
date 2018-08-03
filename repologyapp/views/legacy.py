@@ -94,3 +94,14 @@ def metapackages_by_maintainer(maintainer, bound=None):
 @ViewRegistrar('/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def metapackages_outdated_by_maintainer(maintainer, bound=None):
     return flask.redirect(flask.url_for('metapackages', bound=bound, maintainer=maintainer, outdated=1, search=flask.request.args.to_dict().get('search')), 301)
+
+
+@ViewRegistrar('/repositories/')
+def legacy_repositories():
+    return flask.redirect(flask.url_for('repositories_statistics'), 301)
+
+
+@ViewRegistrar('/statistics')
+@ViewRegistrar('/statistics/<sorting>')
+def legacy_statistics(sorting=None):
+    return flask.redirect(flask.url_for('repositories_statistics', sorting=sorting), 301)
