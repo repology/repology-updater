@@ -127,6 +127,7 @@ def database_update_pre(env):
     database = env.get_main_database_connection()
 
     logger.log('updating repositories metadata')
+    database.deprecate_repositories()
     database.add_repositories(env.get_repo_manager().GetMetadatas(env.get_repo_names()))
 
     logger.log('committing changes')

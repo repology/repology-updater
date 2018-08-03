@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -18,6 +18,6 @@
 --------------------------------------------------------------------------------
 --
 --------------------------------------------------------------------------------
-
-DELETE
-FROM packages;
+UPDATE repositories
+SET
+	state = 'legacy'::repository_state;
