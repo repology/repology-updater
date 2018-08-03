@@ -1,12 +1,12 @@
-{% extends "layout.html" %}
+{% extends "repositories.html" %}
 {% import "macros.html" as macros %}
 
 {% block extrameta %}
     <meta http-equiv="refresh" content="{{ 60 + randrange(5) }}">
 {% endblock %}
 
-{% block title %}Repositories update status - Repology{% endblock %}
-{% block header %}Repositories update status{% endblock %}
+{% block title %}Update status - Repology{% endblock %}
+{% block header %}Update status{% endblock %}
 
 {% macro update_run_info(run_id, ago, errors, warnings) -%}
 {%- if run_id -%}
