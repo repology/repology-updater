@@ -67,7 +67,7 @@ class RepositoryProcessor:
 
     def __CheckRepositoryOutdatedness(self, repository, logger):
         if 'valid_till' in repository and datetime.date.today() >= repository['valid_till']:
-            logger.log('repository {} has reached EoL, please update configs'.format(repository['name']), severity=Logger.WARNING)
+            logger.log('repository {} has reached EoL, consider updating configs'.format(repository['name']), severity=Logger.WARNING)
 
     # Private methods which provide single actions on sources
     def __FetchSource(self, update, repository, source, logger):
