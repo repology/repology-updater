@@ -62,7 +62,7 @@
   desc: Ubuntu 14.04
   family: debuntu
   color: 'e95420'
-  valid_till: 2019-05-01
+  valid_till: 2019-04-01
   minpackages: 23000
   sources:
     - name: [ trusty/main, trusty/multiverse, trusty/restricted, trusty/universe, trusty-updates/main, trusty-updates/multiverse, trusty-updates/restricted, trusty-updates/universe ]
@@ -92,7 +92,7 @@
   desc: Ubuntu 14.04 Backports
   family: debuntu
   color: 'e95420'
-  valid_till: 2017-04-26
+  valid_till: 2019-04-01
   minpackages: 0
   sources:
     - name: [ trusty-backports/main, trusty-backports/multiverse, trusty-backports/restricted, trusty-backports/universe ]
@@ -120,7 +120,7 @@
   desc: Ubuntu 16.04
   family: debuntu
   color: 'e95420'
-  valid_till: 2021-05-01
+  valid_till: 2021-04-01
   minpackages: 26000
   sources:
     - name: [ xenial/main, xenial/multiverse, xenial/restricted, xenial/universe, xenial-updates/main, xenial-updates/multiverse, xenial-updates/restricted, xenial-updates/universe ]
@@ -150,6 +150,7 @@
   desc: Ubuntu 16.04 Backports
   family: debuntu
   color: 'e95420'
+  valid_till: 2021-04-01
   minpackages: 0
   sources:
     - name: [ xenial-backports/main, xenial-backports/multiverse, xenial-backports/restricted, xenial-backports/universe ]
@@ -177,7 +178,7 @@
   desc: Ubuntu 17.10
   family: debuntu
   color: 'e95420'
-  valid_till: 2018-08-01
+  valid_till: 2018-07-19
   minpackages: 28000
   sources:
     - name: [ artful/main, artful/multiverse, artful/restricted, artful/universe, artful-updates/main, artful-updates/multiverse, artful-updates/restricted, artful-updates/universe ]
@@ -207,6 +208,7 @@
   desc: Ubuntu 17.10 Backports
   family: debuntu
   color: 'e95420'
+  valid_till: 2018-07-19
   minpackages: 0
   sources:
     - name: [ artful-backports/main, artful-backports/multiverse, artful-backports/restricted, artful-backports/universe ]
@@ -264,6 +266,7 @@
   desc: Ubuntu 18.04 Backports
   family: debuntu
   color: 'e95420'
+  valid_till: 2023-04-01
   minpackages: 0
   sources:
     - name: [ bionic-backports/main, bionic-backports/multiverse, bionic-backports/restricted, bionic-backports/universe ]
@@ -321,6 +324,7 @@
   desc: Ubuntu 18.10 Backports
   family: debuntu
   color: 'e95420'
+  valid_till: 2019-07-01
   minpackages: 0
   sources:
     - name: [ cosmic-backports/main, cosmic-backports/multiverse, cosmic-backports/restricted, cosmic-backports/universe ]
