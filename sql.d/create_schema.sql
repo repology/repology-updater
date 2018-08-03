@@ -51,6 +51,14 @@ CREATE TYPE repository_state AS enum(
 	'legacy'
 );
 
+DROP TYPE IF EXISTS log_severity CASCADE;
+
+CREATE TYPE log_severity AS enum(
+	'notice',
+	'warning',
+	'error'
+);
+
 --------------------------------------------------------------------------------
 -- functions
 --------------------------------------------------------------------------------
@@ -446,6 +454,22 @@ CREATE INDEX maintainers_recently_added_idx ON maintainers(first_seen DESC, main
 
 -- index for recently_removed
 CREATE INDEX maintainers_recently_removed_idx ON maintainers(last_seen DESC, maintainer) WHERE (num_packages = 0);
+
+--------------------------------------------------------------------------------
+-- Logs
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS log_lines CASCADE;
+
+CREATE TABLE log_lines (
+	run_id integer NOT NULL,
+	lineno integer NOT NULL,
+
+	timestamp timestamp with time zone NOT NULL,
+	severity log_severity NOT NULL,
+	message text NOT NULL,
+
+	PRIMARY KEY(run_id, lineno, timestamp, severity)
+);
 
 --------------------------------------------------------------------------------
 -- Repositories
