@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% import "macros.html" as macros %}
+
+{% block extrameta %}
+    <meta http-equiv="refresh" content="{{ 60 + randrange(5) }}">
+{% endblock %}
+
+{% block title %}Repositories update status - Repology{% endblock %}
+{% block header %}Repositories update status{% endblock %}
+
+{% macro update_run_info(run_id, ago, errors, warnings) -%}
+{%- if run_id -%}
+	<b><a href="{{ url_for('log', run_id=run_id) }}">{{ macros.format_time_interval_short(ago) }}</a> ago</b>
+	{%- if errors %}, <span class="text-danger">{{ errors }} err</span>{% endif -%}
+	{%- if warnings %}, <span class="text-warning">{{ warnings }} warn</span>{% endif -%}
+{%- else -%}
+	-
+{%- endif -%}
+{%- endmacro %}
+
+{% block content %}
+<div class="container">
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th class="text-right" rowspan="2">Repository</th>
+			<th class="text-center" rowspan="2">Current run</th>
+			<th class="text-center" colspan="2">Fetch</th>
+			<th class="text-center" colspan="2">Parse</th>
+		</tr>
+		<tr>
+			<th class="text-center">Last success</th>
+			<th class="text-center">Last failure</th>
+			<th class="text-center">Last success</th>
+			<th class="text-center">Last failure</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for repo in repos %}
+		<tr id="{{ repo.name }}"
+				{%- if repo.current_run_id -%}
+					{#- #} class="info"
+				{%- elif repo.last_failed_fetch_ago and (not repo.last_successful_fetch_ago or repo.last_failed_fetch_ago < repo.last_successful_fetch_ago) -%}
+					{#- #} class="danger"
+				{%- elif repo.last_failed_parse_ago and (not repo.last_successful_parse_ago or repo.last_failed_parse_ago < repo.last_successful_parse_ago) -%}
+					{#- #} class="danger"
+				{%- endif -%}
+			>
+			<td class="text-right"><a href="{{ url_for('repository', repo=repo.name) }}">{{ repometadata[repo.name].desc }}</a></td>
+			<td class="text-center">{% if repo.current_run_id %}<b><a href="{{ url_for('log', run_id=repo.current_run_id) }}">{{ repo.current_run_type }}, {{ macros.format_time_interval_short(repo.current_run_duration) }}</a></b>{% else %}-{% endif %}</td>
+			<td class="text-center">{{ update_run_info(repo.last_successful_fetch_run_id, repo.last_successful_fetch_ago, repo.last_successful_fetch_errors, repo.last_successful_fetch_warnings) }}</td>
+			<td class="text-center">{{ update_run_info(repo.last_failed_fetch_run_id, repo.last_failed_fetch_ago, repo.last_failed_fetch_errors, repo.last_failed_fetch_warnings) }}</td>
+			<td class="text-center">{{ update_run_info(repo.last_successful_parse_run_id, repo.last_successful_parse_ago, repo.last_successful_parse_errors, repo.last_successful_parse_warnings) }}</td>
+			<td class="text-center">{{ update_run_info(repo.last_failed_parse_run_id, repo.last_failed_parse_ago, repo.last_failed_parse_errors, repo.last_failed_parse_warnings) }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+</div> {#- container #}
+{% endblock %}

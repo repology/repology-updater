@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -51,3 +51,11 @@ def repository_problems(repo):
         flask.abort(404)
 
     return flask.render_template('repository-problems.html', repo=repo, problems=get_db().get_repository_problems(repo, config['PROBLEMS_PER_PAGE']))
+
+
+@ViewRegistrar('/repositories/updates')
+def repositories_updates():
+    return flask.render_template(
+        'repositories-updates.html',
+        repos=get_db().get_repositories_update_statistics()
+    )
