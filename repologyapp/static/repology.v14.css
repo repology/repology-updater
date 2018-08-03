@@ -38,8 +38,12 @@
     background-color: #2A2730;
     color: #99979C;
     margin-top: 100px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.footer p {
+	margin: 0;
 }
 
 .footer a:link, .footer-links a:visited {
