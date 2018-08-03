@@ -19,13 +19,12 @@
 
 import argparse
 import os
-import sys
-import traceback
 from timeit import default_timer as timer
 
 from repology.config import config
 from repology.database import Database
-from repology.logger import FileLogger, StderrLogger
+from repology.dblogger import LogRunManager
+from repology.logger import FileLogger, Logger, StderrLogger
 from repology.packageproc import FillPackagesetVersions
 from repology.querymgr import QueryManager
 from repology.repomgr import RepositoryManager
@@ -33,116 +32,160 @@ from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
 
 
-def ProcessRepositories(options, logger, repoproc, transformer, reponames):
-    repositories_updated = []
-    repositories_not_updated = []
+def cached_method(method):
+    def wrapper(self, *args, **kwargs):
+        name = '_' + method.__name__ + '_state'
 
-    for reponame in reponames:
-        repo_logger = logger.GetPrefixed(reponame + ': ')
-        repo_logger.Log('started')
-        try:
-            if options.fetch:
-                repoproc.Fetch(reponame, update=options.update, logger=repo_logger.GetIndented())
-            if options.parse:
-                repoproc.ParseAndSerialize(reponame, transformer=transformer, logger=repo_logger.GetIndented())
-            elif options.reprocess:
-                repoproc.Reprocess(reponame, transformer=transformer, logger=repo_logger.GetIndented())
-        except KeyboardInterrupt:
-            logger.Log('interrupted')
-            return 1
-        except:
-            repo_logger.Log('failed, exception follows')
-            for item in traceback.format_exception(*sys.exc_info()):
-                for line in item.split('\n'):
-                    if line:
-                        repo_logger.GetIndented().Log(line)
-            repositories_not_updated.append(reponame)
-        else:
-            repo_logger.Log('complete')
-            repositories_updated.append(reponame)
+        res = getattr(self, name, None)
+        if res is None:
+            res = method(self, *args, **kwargs)
+            setattr(self, name, res)
 
-    logger.Log('{}/{} repositories processed successfully'.format(len(repositories_updated), len(repositories_updated) + len(repositories_not_updated)))
-    if repositories_not_updated:
-        logger.Log('  failed repositories: {}'.format(', '.join(sorted(repositories_not_updated))))
+        return res
 
-    return repositories_updated, repositories_not_updated
+    return wrapper
 
 
-def ProcessDatabase(options, logger, repomgr, repoproc, repositories_updated, reponames):
-    logger.Log('connecting to database')
+class Environment:
+    def __init__(self, options):
+        self.options = options
 
-    db_logger = logger.GetIndented()
+    @cached_method
+    def get_query_manager(self):
+        return QueryManager(self.options.sql_dir)
 
-    querymgr = QueryManager(options.sql_dir)
-    database = Database(options.dsn, querymgr, readonly=False, application_name='repology-update')
-    if options.initdb:
-        db_logger.Log('(re)initializing database schema')
-        database.create_schema()
+    @cached_method
+    def get_main_database_connection(self):
+        self.get_main_logger().log('connecting to database (main connection)')
+        return Database(self.options.dsn, self.get_query_manager(), readonly=False, application_name='repology-update')
 
-        db_logger.Log('committing changes')
-        database.commit()
+    @cached_method
+    def get_logging_database_connection(self):
+        self.get_main_logger().log('connecting to database (realtime logging connection)')
+        return Database(self.options.dsn, self.get_query_manager(), readonly=False, autocommit=True, application_name='repology-update-logging')
 
-    if options.database:
-        db_logger.Log('clearing the database')
-        database.update_start()
+    @cached_method
+    def get_repo_manager(self):
+        return RepositoryManager(self.options.repos_dir)
 
-        db_logger.Log('updating repository metadata')
-        database.add_repositories(repomgr.GetMetadatas(reponames))
+    @cached_method
+    def get_repo_processor(self):
+        return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, safety_checks=not self.options.no_safety_checks)
 
-        package_queue = []
-        num_pushed = 0
-        start_time = timer()
+    @cached_method
+    def get_package_transformer(self):
+        return PackageTransformer(self.get_repo_manager(), self.options.rules_dir)
 
-        def PackageProcessor(packageset):
-            nonlocal package_queue, num_pushed, start_time
-            FillPackagesetVersions(packageset)
-            package_queue.extend(packageset)
+    @cached_method
+    def get_repo_names(self):
+        return self.get_repo_manager().GetNames(reponames=self.options.reponames)
 
-            if len(package_queue) >= 10000:
-                database.add_packages(package_queue)
-                num_pushed += len(package_queue)
-                package_queue = []
-                db_logger.Log('  pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
+    @cached_method
+    def get_main_logger(self):
+        return FileLogger(self.options.logfile) if self.options.logfile else StderrLogger()
 
-        db_logger.Log('pushing packages to database')
-        repoproc.StreamDeserializeMulti(processor=PackageProcessor, reponames=options.reponames)
-
-        # process what's left in the queue
-        database.add_packages(package_queue)
-
-        if options.fetch and options.update and options.parse:
-            db_logger.Log('recording repo updates')
-            database.mark_repositories_updated(repositories_updated)
-        else:
-            db_logger.Log('not recording repo updates, need --fetch --update --parse')
-
-        db_logger.Log('updating views')
-        database.update_finish()
-
-        database.commit()
-
-    if options.postupdate:
-        db_logger.Log('performing database post-update actions')
-        database.update_post()
-
-        database.commit()
-
-    logger.Log('database processing complete')
+    def get_options(self):
+        return self.options
 
 
-def ShowUnmatchedRules(options, logger, transformer, reliable):
-    unmatched = transformer.GetUnmatchedRules()
-    if len(unmatched):
-        wlogger = logger.GetPrefixed('WARNING: ')
-        wlogger.Log('unmatched rules detected!')
-        if not reliable:
-            wlogger.Log('this information is not reliable because not all repositories were updated!')
+def process_repositories(env):
+    for reponame in env.get_repo_names():
+        env.get_main_logger().log('start processing ' + reponame)
 
-        for rule in unmatched:
-            wlogger.Log(rule)
+        if env.get_options().fetch:
+            with LogRunManager(env, reponame, 'fetch') as logger:
+                env.get_repo_processor().Fetch(reponame, update=env.get_options().update, logger=logger)
+        if env.get_options().parse:
+            with LogRunManager(env, reponame, 'parse') as logger:
+                env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
+        elif env.get_options().reprocess:
+            with LogRunManager(env, reponame, 'parse') as logger:
+                env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
+
+        env.get_main_logger().log('done processing ' + reponame)
 
 
-def ParseArguments():
+def database_init(env):
+    logger = env.get_main_logger().get_indented()
+    database = env.get_main_database_connection()
+
+    logger.log('(re)initializing database schema')
+    database.create_schema()
+
+    logger.log('committing changes')
+    database.commit()
+
+
+def database_update_pre(env):
+    logger = env.get_main_logger().get_indented()
+    database = env.get_main_database_connection()
+
+    logger.log('updating repositories metadata')
+    database.add_repositories(env.get_repo_manager().GetMetadatas(env.get_repo_names()))
+
+    logger.log('committing changes')
+    database.commit()
+
+
+def database_update(env):
+    logger = env.get_main_logger().get_indented()
+    database = env.get_main_database_connection()
+
+    logger.log('clearing the database')
+    database.update_start()
+
+    package_queue = []
+    num_pushed = 0
+    start_time = timer()
+
+    def package_processor(packageset):
+        nonlocal package_queue, num_pushed, start_time
+        FillPackagesetVersions(packageset)
+        package_queue.extend(packageset)
+
+        if len(package_queue) >= 10000:
+            database.add_packages(package_queue)
+            num_pushed += len(package_queue)
+            package_queue = []
+            logger.log('  pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
+
+    logger.log('pushing packages to database')
+    env.get_repo_processor().StreamDeserializeMulti(processor=package_processor, reponames=env.get_repo_names())
+
+    # process what's left in the queue
+    database.add_packages(package_queue)
+
+    logger.log('updating views')
+    database.update_finish()
+
+    logger.log('committing changes')
+    database.commit()
+
+
+def database_update_post(env):
+    logger = env.get_main_logger().get_indented()
+    database = env.get_main_database_connection()
+
+    logger.log('performing database post-update actions')
+    database.update_post()
+
+    logger.log('committing changes')
+    database.commit()
+
+
+def show_unmatched_rules(env):
+    unmatched = env.get_package_transformer().GetUnmatchedRules()
+    if not unmatched:
+        return
+
+    logger = env.get_main_logger.get_prefixed('WARNING: ')
+    logger.log('unmatched rules detected!', severity=Logger.WARNING)
+
+    for rule in unmatched:
+        logger.log(rule, severity=Logger.WARNING)
+
+
+def parse_arguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
@@ -173,39 +216,39 @@ def ParseArguments():
     return parser.parse_args()
 
 
-def Main():
-    options = ParseArguments()
+def main():
+    options = parse_arguments()
 
-    repomgr = RepositoryManager(options.repos_dir)
-    repoproc = RepositoryProcessor(repomgr, options.statedir, safety_checks=not options.no_safety_checks)
+    env = Environment(options)
 
     if options.list:
-        print('\n'.join(repomgr.GetNames(reponames=options.reponames)))
+        print('\n'.join(env.get_repo_names()))
         return 0
 
-    transformer = PackageTransformer(repomgr, options.rules_dir)
-
-    logger = StderrLogger()
-    if options.logfile:
-        logger = FileLogger(options.logfile)
-
-    repositories_updated = []
-    repositories_not_updated = []
-
     start = timer()
+
+    if options.initdb:
+        database_init(env)
+
+    if options.fetch or options.parse or options.reprocess or options.database or options.postupdate:
+        database_update_pre(env)
+
     if options.fetch or options.parse or options.reprocess:
-        repositories_updated, repositories_not_updated = ProcessRepositories(options=options, logger=logger, repoproc=repoproc, transformer=transformer, reponames=repomgr.GetNames(reponames=options.reponames))
+        process_repositories(env)
 
-    if options.initdb or options.database or options.postupdate:
-        ProcessDatabase(options=options, logger=logger, repomgr=repomgr, repoproc=repoproc, repositories_updated=repositories_updated, reponames=repomgr.GetNames(reponames=options.reponames))
+    if options.database:
+        database_update(env)
 
-    if (options.parse or options.reprocess) and (options.show_unmatched_rules):
-        ShowUnmatchedRules(options=options, logger=logger, transformer=transformer, reliable=repositories_not_updated == [])
+    if options.postupdate:
+        database_update_post(env)
 
-    logger.Log('total time taken: {:.2f} seconds'.format((timer() - start)))
+    if options.show_unmatched_rules:
+        show_unmatched_rules(env)
 
-    return 1 if repositories_not_updated else 0
+    env.get_main_logger().log('total time taken: {:.2f} seconds'.format((timer() - start)))
+
+    return 0
 
 
 if __name__ == '__main__':
-    os.sys.exit(Main())
+    os.sys.exit(main())
