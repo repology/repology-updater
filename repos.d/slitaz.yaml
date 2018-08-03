@@ -10,7 +10,7 @@
     - name: packages.info
       fetcher: FileFetcher
       parser: SliTazInfoParser
-      url: http://mirror.slitaz.org/packages/cooking/packages.info
+      url: http://mirror1.slitaz.org/packages/cooking/packages.info
   repolinks:
     - desc: SliTaz home
       url: http://www.slitaz.org/
