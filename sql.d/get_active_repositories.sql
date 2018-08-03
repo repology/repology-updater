@@ -38,8 +38,6 @@ SELECT
 	num_metapackages_newest,
 	num_metapackages_outdated,
 	num_metapackages_comparable,
-	last_update at time zone 'UTC' AS last_update_utc,
-	now() - last_update AS since_last_update,
 	num_problems,
 	num_maintainers
 FROM repositories

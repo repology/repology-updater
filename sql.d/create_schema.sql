@@ -526,8 +526,6 @@ CREATE TABLE repositories (
 	num_metapackages_outdated integer NOT NULL DEFAULT 0,
 	num_metapackages_comparable integer NOT NULL DEFAULT 0,
 
-	last_update timestamp with time zone,
-
 	num_problems integer NOT NULL DEFAULT 0,
 	num_maintainers integer NOT NULL DEFAULT 0,
 
