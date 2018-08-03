@@ -24,9 +24,25 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.config import config
 
 
-@ViewRegistrar('/repositories/updates')
-def repositories_updates():
+@ViewRegistrar('/repository/<repo>')
+def repository(repo):
+    if repo not in repometadata.all_names():
+        flask.abort(404)
+        #return (flask.render_template('repository-404.html', repo=repo), 404)
+    if repo not in repometadata.active_names():
+        # HTTP code is intentionally 404
+        return (flask.render_template('repository-410.html', repo=repo, repo_info=get_db().get_repository_information(repo)), 404)
+
     return flask.render_template(
-        'repositories-updates.html',
-        repos=get_db().get_repositories_update_statistics()
+        'repository.html',
+        repo=repo,
+        repo_info=get_db().get_repository_information(repo)
     )
+
+
+@ViewRegistrar('/repository/<repo>/problems')
+def repository_problems(repo):
+    if repo not in repometadata.active_names():
+        flask.abort(404)
+
+    return flask.render_template('repository-problems.html', repo=repo, problems=get_db().get_repository_problems(repo, config['PROBLEMS_PER_PAGE']))
