@@ -30,3 +30,8 @@ def repositories_updates():
         'repositories-updates.html',
         repos=get_db().get_repositories_update_statistics()
     )
+
+
+@ViewRegistrar('/repositories/graphs')
+def repositories_graphs():
+    return flask.render_template('repositories-graphs.html')

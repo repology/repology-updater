@@ -28,8 +28,6 @@
 {% block content %}
 <div class="container">
 
-<h2>Repository statistics</h2>
-
 <p>Total metapackages: <b>{{ counts.num_metapackages }}</b>, total individual packages: <b>{{ counts.num_packages }}</b>.</p>
 
 <div class="table-responsive">
@@ -153,17 +151,6 @@
 	</tbody>
 </table>
 </div>
-
-<h2 id="graphs">Graphs</h2>
-
-<h3 id="freshness_map">Repository size/freshness map</h3>
-<img src="{{ url_for('graph_map_repo_size_fresh') }}" alt="Repository size/freshness map">
-
-<h3 id="metapackages_graph">Metapackages</h3>
-<img src="{{ url_for('graph_total_metapackages') }}" alt="Metapackages graph">
-
-<h3 id="maintainers_graph">Maintainers</h3>
-<img src="{{ url_for('graph_total_maintainers') }}" alt="Maintainers graph">
 
 </div> {#- container #}
 {% endblock %}
