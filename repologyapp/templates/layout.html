@@ -17,12 +17,6 @@
 	<link rel="search" type="application/opensearchdescription+xml" title="Repology maintainers" href="{{ url_for("opensearch_maintainer") }}">
 </head>
 <body>
-{% macro classactive_if_endpoint(endpoint) -%}
-	{%- if request.endpoint == endpoint %} class="active"{%- endif -%}
-{%- endmacro %}
-{% macro active_if_endpoint(endpoint) -%}
-	{%- if request.endpoint == endpoint %} active{%- endif -%}
-{%- endmacro %}
 
 <nav class="navbar navbar-default navbar-static-top">
 	<div class="container">
@@ -40,12 +34,14 @@
 
 		<div class="collapse navbar-collapse" id="repology-navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li{{ classactive_if_endpoint('metapackages') }}><a href="{{ url_for('metapackages') }}">Metapackages</a></li>
-				<li{{ classactive_if_endpoint('maintainers') }}><a href="{{ url_for('maintainers') }}">Maintainers</a></li>
-				<li{{ classactive_if_endpoint('repositories_statistics') }}><a href="{{ url_for('repositories_statistics') }}">Repositories</a></li>
+				<li{% if endpoint_like('metapackages', 'metapackage_*') %} class="active"{% endif %}><a href="{{ url_for('metapackages') }}">Metapackages</a></li>
+				<li{% if endpoint_like('maintainers', 'maintainer') %} class="active"{% endif %}><a href="{{ url_for('maintainers') }}">Maintainers</a></li>
+				<li{% if endpoint_like('repositories_*', 'repository') %} class="active"{% endif %}><a href="{{ url_for('repositories_statistics') }}">Repositories</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li{{ classactive_if_endpoint('news') }}><a href="{{ url_for('news') }}">News</a></li>
+				<li{% if endpoint_like('news') %} class="active"{% endif %}><a href="{{ url_for('news') }}">News</a></li>
+				<li{% if endpoint_like('about') %} class="active"{% endif %}><a href="{{ url_for('about') }}">About</a></li>
+				<li{% if endpoint_like('api_v1') %} class="active"{% endif %}><a href="{{ url_for('api_v1') }}">API</a></li>
 			</ul>
 		</div>
 	</div>
@@ -74,8 +70,6 @@
 <footer class="footer">
 	<div class="container">
 		<ul class="footer-links">
-			<li><a href="{{ url_for('about') }}">About</a></li>
-			<li><a href="{{ url_for('api_v1') }}">API</a></li>
 			<li class="footer-links-right"><a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}">GitHub</a></li>
 		</ul>
 		<p>
