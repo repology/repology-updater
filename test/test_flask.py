@@ -88,10 +88,6 @@ class TestFlask(unittest.TestCase):
     def test_titlepage(self):
         self.checkurl('/', has=['FreeBSD', 'virtualbox'])
 
-    def test_statistics(self):
-        self.checkurl('/statistics', has=['FreeBSD'])
-        self.checkurl('/statistics?sorting=newest', has=['FreeBSD'])
-
     def test_badges(self):
         self.checkurl_svg('/badge/vertical-allrepos/kiconvtool.svg', has=['<svg', 'FreeBSD'])
         self.checkurl_svg('/badge/vertical-allrepos/nonexistent.svg', has=['<svg', 'No known packages'])
@@ -144,7 +140,13 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/maintainer/amdmi3@freebsd.org/problems')
 
     def test_repositories(self):
-        self.checkurl_html('/repositories/', has=['FreeBSD'])
+        self.checkurl_html('/repositories/statistics', has=['FreeBSD'])
+        self.checkurl_html('/repositories/statistics/newest', has=['FreeBSD'])
+        self.checkurl_html('/repositories/graphs')
+        self.checkurl_html('/repositories/updates', has=['FreeBSD'])
+
+    def test_log(self):
+        self.checkurl_html('/log/1', has=['successful'])
 
     def test_repository(self):
         self.checkurl_html('/repository/freebsd', has=['FreeBSD'])
