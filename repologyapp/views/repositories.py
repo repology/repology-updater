@@ -19,9 +19,41 @@ import flask
 
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
+from repologyapp.math import safe_percent
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
+
+
+@ViewRegistrar('/repositories/statistics')
+@ViewRegistrar('/repositories/statistics/<sorting>')
+def repositories_statistics(sorting=None):
+    repostats = {repostat['name']: repostat for repostat in get_db().get_active_repositories()}
+    repostats = [repostats[reponame] for reponame in repometadata.active_names() if reponame in repostats]
+    showmedals = True
+
+    if sorting == 'newest':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages_newest'], reverse=True)
+    elif sorting == 'pnewest':
+        repostats = sorted(repostats, key=lambda s: safe_percent(s['num_metapackages_newest'], s['num_metapackages_comparable']), reverse=True)
+    elif sorting == 'outdated':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages_outdated'], reverse=True)
+    elif sorting == 'poutdated':
+        repostats = sorted(repostats, key=lambda s: safe_percent(s['num_metapackages_outdated'], s['num_metapackages_comparable']), reverse=True)
+    elif sorting == 'total':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages'], reverse=True)
+    else:
+        sorting = 'name'
+        showmedals = False
+
+    return flask.render_template(
+        'repositories-statistics.html',
+        sorting=sorting,
+        repostats=repostats,
+        showmedals=showmedals,
+        repostats_old={},  # {repo['name']: repo for repo in get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 7)},
+        counts=get_db().get_counts()
+    )
 
 
 @ViewRegistrar('/repositories/updates')

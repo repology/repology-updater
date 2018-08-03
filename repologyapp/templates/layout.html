@@ -42,10 +42,10 @@
 			<ul class="nav navbar-nav">
 				<li{{ classactive_if_endpoint('metapackages') }}><a href="{{ url_for('metapackages') }}">Metapackages</a></li>
 				<li{{ classactive_if_endpoint('maintainers') }}><a href="{{ url_for('maintainers') }}">Maintainers</a></li>
+				<li{{ classactive_if_endpoint('repositories_statistics') }}><a href="{{ url_for('repositories_statistics') }}">Repositories</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li{{ classactive_if_endpoint('news') }}><a href="{{ url_for('news') }}">News</a></li>
-				<li{{ classactive_if_endpoint('statistics') }}><a href="{{ url_for('statistics') }}">Statistics</a></li>
 			</ul>
 		</div>
 	</div>
