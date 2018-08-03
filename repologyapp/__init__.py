@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 import random
 import sys
 
@@ -64,6 +65,7 @@ app.jinja_env.globals['repometadata'] = repometadata
 app.jinja_env.globals['config'] = config
 app.jinja_env.globals['tz'] = timezone(config['DEFAULT_TIMEZONE'])
 app.jinja_env.globals['utc'] = utc
+app.jinja_env.globals['now'] = lambda: datetime.datetime.now(utc)
 app.jinja_env.globals['randrange'] = random.randrange
 
 ViewRegistry.RegisterInFlask(app)
