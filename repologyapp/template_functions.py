@@ -23,3 +23,15 @@ __all__ = ['url_for_self']
 
 def url_for_self(**args):
     return flask.url_for(flask.request.endpoint, **dict(flask.request.view_args, **args))
+
+
+def endpoint_like(*variants):
+    endpoint = flask.request.endpoint
+
+    for variant in variants:
+        if endpoint == variant:
+            return True
+        elif variant.endswith('*') and endpoint.startswith(variant[:-1]):
+            return True
+
+    return False

@@ -25,7 +25,7 @@ from pytz import timezone, utc
 
 from repologyapp.globals import get_text_width, repometadata
 from repologyapp.template_filters import css_for_versionclass, maintainer_to_links, maintainers_to_group_mailto, pkg_format
-from repologyapp.template_functions import url_for_self
+from repologyapp.template_functions import endpoint_like, url_for_self
 from repologyapp.template_tests import for_page, is_fallback_maintainer
 from repologyapp.views import Registry as ViewRegistry
 
@@ -67,5 +67,6 @@ app.jinja_env.globals['tz'] = timezone(config['DEFAULT_TIMEZONE'])
 app.jinja_env.globals['utc'] = utc
 app.jinja_env.globals['now'] = lambda: datetime.datetime.now(utc)
 app.jinja_env.globals['randrange'] = random.randrange
+app.jinja_env.globals['endpoint_like'] = endpoint_like
 
 ViewRegistry.RegisterInFlask(app)
