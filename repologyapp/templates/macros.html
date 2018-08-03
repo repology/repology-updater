@@ -42,6 +42,22 @@
 	{%- endwith -%}
 {%- endmacro -%}
 
+{%- macro format_time_interval_short(value) -%}
+	{%- with seconds = value.total_seconds() | int -%}
+	{%- if seconds < 60 -%}
+		{{ seconds }}s
+	{%- elif seconds < 60 * 60 -%}
+		{{ seconds // 60 }}m
+	{%- elif seconds < 60 * 60 * 24 -%}
+		{{ seconds // (60 * 60) }}h
+	{%- elif seconds // (60 * 60 * 24) < 60 -%}
+		{{ seconds // (60 * 60 * 24) }}d
+	{%- else -%}
+		{{ seconds // (60 * 60 * 24 * 365) }}y
+	{%- endif -%}
+	{%- endwith -%}
+{%- endmacro -%}
+
 {%- macro package_link(package, text) -%}
 	{%- if repometadata[package.repo].packagelinks -%}
 		<a href="{{ repometadata[package.repo].packagelinks[0].url|pkg_format(package) }}">{{ text }}</a>
