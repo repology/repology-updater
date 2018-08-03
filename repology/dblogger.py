@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+import traceback
 
 from repology.logger import Logger
 
@@ -68,3 +69,36 @@ class PostponedDatabaseLogger(Logger):
                 _severity_to_sql(severity),
                 message
             )
+
+
+class LogRunManager:
+    def __init__(self, env, reponame, run_type):
+        self.env = env
+        self.reponame = reponame
+        self.run_type = run_type
+
+    def __enter__(self):
+        database = self.env.get_logging_database_connection()
+
+        self.run_id = database.start_run(self.reponame, self.run_type)
+        self.logger = RealtimeDatabaseLogger(database, self.run_id)
+
+        database.update_repository_run_id(self.reponame, self.run_id, 'current')
+
+        return self.logger
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        database = self.env.get_logging_database_connection()
+        success = not exc_tb
+
+        if exc_tb:
+            self.logger.log('run failed, exception follows:', severity=Logger.ERROR)
+
+            for item in traceback.format_exception(exc_type, exc_val, exc_tb):
+                for line in item.split('\n'):
+                    if line:
+                        self.logger.log(line, severity=Logger.ERROR)
+
+        database.finish_run(self.run_id, success)
+        database.update_repository_run_id(self.reponame, None, 'current')
+        database.update_repository_run_id(self.reponame, self.run_id, self.run_type, success)
