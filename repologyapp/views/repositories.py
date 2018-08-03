@@ -24,11 +24,6 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.config import config
 
 
-@ViewRegistrar('/repositories/')
-def repositories():
-    return flask.render_template('repositories.html')
-
-
 @ViewRegistrar('/repository/<repo>')
 def repository(repo):
     if repo not in repometadata.all_names():
