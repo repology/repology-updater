@@ -90,19 +90,25 @@ class Environment:
 
 def process_repositories(env):
     for reponame in env.get_repo_names():
-        env.get_main_logger().log('start processing ' + reponame)
+        env.get_main_logger().log(reponame + ' start')
 
-        if env.get_options().fetch:
-            with LogRunManager(env, reponame, 'fetch') as logger:
-                env.get_repo_processor().Fetch(reponame, update=env.get_options().update, logger=logger)
-        if env.get_options().parse:
-            with LogRunManager(env, reponame, 'parse') as logger:
-                env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
-        elif env.get_options().reprocess:
-            with LogRunManager(env, reponame, 'parse') as logger:
-                env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
+        try:
+            if env.get_options().fetch:
+                with LogRunManager(env, reponame, 'fetch') as logger:
+                    env.get_repo_processor().Fetch(reponame, update=env.get_options().update, logger=logger)
+            if env.get_options().parse:
+                with LogRunManager(env, reponame, 'parse') as logger:
+                    env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
+            elif env.get_options().reprocess:
+                with LogRunManager(env, reponame, 'parse') as logger:
+                    env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
 
-        env.get_main_logger().log('done processing ' + reponame)
+            env.get_main_logger().log(reponame + ' done')
+        except KeyboardInterrupt:
+            raise
+        except:
+            env.get_main_logger().log(reponame + ' failed')
+            pass
 
 
 def database_init(env):
