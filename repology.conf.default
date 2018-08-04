@@ -59,6 +59,14 @@ SQL_DIR = "sql.d"
 #
 REPOSITORIES = ['production']
 
+#
+# Enable safety checks, such as check for minimal package count
+#
+# Used by repology-update
+# Overridable via free command line args
+#
+ENABLE_SAFETY_CHECKS = True
+
 ############################################################################
 # UPDATE SETTINGS
 ############################################################################

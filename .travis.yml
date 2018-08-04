@@ -115,10 +115,10 @@ script:
   - make flake8
 
   # fill database with test data
-  - ./repology-update.py --parse --initdb --database --postupdate --no-safety-checks
+  - ./repology-update.py --parse --initdb --database --postupdate
 
   # and once again to activate new repositories
-  - ./repology-update.py --parse --database --postupdate --no-safety-checks
+  - ./repology-update.py --parse --database --postupdate
 
   # smoke test bits
   - ./repology-dump.py --help

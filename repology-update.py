@@ -70,7 +70,7 @@ class Environment:
 
     @cached_method
     def get_repo_processor(self):
-        return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, safety_checks=not self.options.no_safety_checks)
+        return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, safety_checks=self.options.enable_safety_checks)
 
     @cached_method
     def get_package_transformer(self):
@@ -216,7 +216,9 @@ def parse_arguments():
 
     actions_grp.add_argument('-r', '--show-unmatched-rules', action='store_true', help='show unmatched rules when parsing')
 
-    actions_grp.add_argument('--no-safety-checks', action='store_true', help='disable safety checks on processed repository data')
+    flags_grp = parser.add_argument_group('Flags')
+    flags_grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
+    flags_grp.add_argument('--disable-safety-checks', action='store_false', dest='enable_safety_checks', default=not config['ENABLE_SAFETY_CHECKS'], help='disable safety checks on processed repository data')
 
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
 
