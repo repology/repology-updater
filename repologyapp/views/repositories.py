@@ -22,8 +22,6 @@ from repologyapp.globals import repometadata
 from repologyapp.math import safe_percent
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.config import config
-
 
 @ViewRegistrar('/repositories/statistics')
 @ViewRegistrar('/repositories/statistics/<sorting>')
