@@ -75,8 +75,13 @@ class Environment:
         return PackageTransformer(self.get_repo_manager(), self.options.rules_dir)
 
     @cached_method
-    def get_repo_names(self):
-        return self.get_repo_manager().GetNames(reponames=self.options.reponames)
+    def get_enabled_repo_names(self):
+        return self.get_repo_manager().GetNames(reponames=self.options.enabled_repositories)
+
+    @cached_method
+    def get_processable_repo_names(self):
+        enabled = set(self.get_enabled_repo_names())
+        return [reponame for reponame in self.get_repo_manager().GetNames(reponames=self.options.reponames) if reponame in enabled]
 
     @cached_method
     def get_main_logger(self):
@@ -126,7 +131,7 @@ def database_update_pre(env):
 
     logger.log('updating repositories metadata')
     database.deprecate_repositories()
-    database.add_repositories(env.get_repo_manager().GetMetadatas(env.get_repo_names()))
+    database.add_repositories(env.get_repo_manager().GetMetadatas(env.get_enabled_repo_names()))
 
     logger.log('committing changes')
     database.commit()
@@ -155,7 +160,7 @@ def database_update(env):
             logger.log('  pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
 
     logger.log('pushing packages to database')
-    env.get_repo_processor().StreamDeserializeMulti(processor=package_processor, reponames=env.get_repo_names())
+    env.get_repo_processor().StreamDeserializeMulti(processor=package_processor, reponames=env.get_enabled_repo_names(), logger=logger)
 
     # process what's left in the queue
     database.add_packages(package_queue)
@@ -198,6 +203,7 @@ def parse_arguments():
     parser.add_argument('-U', '--rules-dir', default=config['RULES_DIR'], help='path to directory with rules')
     parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
+    parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|tag', help='repository or tag name(s) which are enabled and shown in repology')
 
     actions_grp = parser.add_argument_group('Actions')
     actions_grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
@@ -218,7 +224,7 @@ def parse_arguments():
     flags_grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
     flags_grp.add_argument('--disable-safety-checks', action='store_false', dest='enable_safety_checks', default=not config['ENABLE_SAFETY_CHECKS'], help='disable safety checks on processed repository data')
 
-    parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
+    parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) to process')
 
     return parser.parse_args()
 
@@ -229,7 +235,7 @@ def main():
     env = Environment(options)
 
     if options.list:
-        print('\n'.join(env.get_repo_names()))
+        print('\n'.join(env.get_processable_repo_names()))
         return 0
 
     start = timer()
