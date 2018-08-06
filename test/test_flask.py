@@ -117,6 +117,16 @@ class TestFlask(unittest.TestCase):
 
         self.checkurl_svg('/graph/map_repo_size_fresh.svg')
 
+        self.checkurl_svg('/graph/repo/freebsd/metapackages_total.svg')
+        self.checkurl_svg('/graph/repo/freebsd/metapackages_newest.svg')
+        self.checkurl_svg('/graph/repo/freebsd/metapackages_newest_percent.svg')
+        self.checkurl_svg('/graph/repo/freebsd/metapackages_outdated.svg')
+        self.checkurl_svg('/graph/repo/freebsd/metapackages_outdated_percent.svg')
+        self.checkurl_svg('/graph/repo/freebsd/metapackages_unique.svg')
+        self.checkurl_svg('/graph/repo/freebsd/metapackages_unique_percent.svg')
+        self.checkurl_svg('/graph/repo/freebsd/maintainers.svg')
+        self.checkurl_svg('/graph/repo/freebsd/problems.svg')
+
     def test_metapackage(self):
         self.checkurl('/metapackage/kiconvtool', status_code=303)
 
