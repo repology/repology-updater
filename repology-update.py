@@ -87,8 +87,8 @@ class Environment:
 
 
 def process_repositories(env):
-    for reponame in env.get_repo_names():
-        env.get_main_logger().log(reponame + ' start')
+    for reponame in env.get_processable_repo_names():
+        env.get_main_logger().log('processing {}'.format(reponame))
 
         try:
             if env.get_options().fetch:
@@ -101,11 +101,11 @@ def process_repositories(env):
                 with LogRunManager(env, reponame, 'parse') as logger:
                     env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
 
-            env.get_main_logger().log(reponame + ' done')
+            env.get_main_logger().log('processing {} done'.format(reponame))
         except KeyboardInterrupt:
             raise
         except:
-            env.get_main_logger().log(reponame + ' failed', severity=Logger.ERROR)
+            env.get_main_logger().log('processing {} failed'.format(reponame), severity=Logger.ERROR)
             pass
 
 
@@ -240,16 +240,18 @@ def main():
     if options.parse or options.reprocess:
         # preload them here, otherwise they will lazy load at the start of first repo parsing,
         # and this will look loke a hang, and parse run duration will be incorrect
-        env.get_main_logger().log('preloading rules')
+        env.get_main_logger().log('loading rules')
         env.get_repo_processor()
 
     if options.fetch or options.parse or options.reprocess or options.database or options.postupdate:
+        env.get_main_logger().log('preparing')
         database_update_pre(env)
 
     if options.fetch or options.parse or options.reprocess:
         process_repositories(env)
 
     if options.database:
+        env.get_main_logger().log('database processing')
         database_update(env)
 
     if options.postupdate:
