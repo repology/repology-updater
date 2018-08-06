@@ -239,6 +239,12 @@ def main():
     if options.initdb:
         database_init(env)
 
+    if options.parse or options.reprocess:
+        # preload them here, otherwise they will lazy load at the start of first repo parsing,
+        # and this will look loke a hang, and parse run duration will be incorrect
+        env.get_main_logger().log('preloading rules')
+        env.get_repo_processor()
+
     if options.fetch or options.parse or options.reprocess or options.database or options.postupdate:
         database_update_pre(env)
 
