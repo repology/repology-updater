@@ -38,7 +38,7 @@ class RealtimeDatabaseLogger(Logger):
         self.run_id = run_id
         self.lineno = 1
 
-    def log(self, message, severity=Logger.NOTICE):
+    def _write_log(self, message, severity):
         self.db.add_log_line(
             self.run_id,
             self.lineno,
@@ -53,7 +53,7 @@ class PostponedDatabaseLogger(Logger):
     def __init__(self):
         self.lines = []
 
-    def log(self, message, severity=Logger.NOTICE):
+    def _write_log(self, message, severity):
         self.lines.append((
             datetime.datetime.now(),
             severity,

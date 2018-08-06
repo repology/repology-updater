@@ -26,13 +26,21 @@ class Logger():
     ERROR = 3
 
     def log(self, message, severity=NOTICE):
-        pass
+        if severity == Logger.ERROR:
+            message = 'ERROR: ' + message
+        if severity == Logger.WARNING:
+            message = 'WARNING: ' + message
+
+        self._write_log(message, severity)
 
     def get_prefixed(self, prefix):
         return LoggerProxy(self, prefix=prefix)
 
     def get_indented(self, indent=1):
         return LoggerProxy(self, indent=indent)
+
+    def _write_log(self, message, severity):
+        pass
 
     # XXX: compatibility shims
     def Log(self, message):
@@ -56,8 +64,8 @@ class LoggerProxy(Logger):
             self.prefix = prefix
             self.indent = indent
 
-    def log(self, message, severity=Logger.NOTICE):
-        self.parent.log(self.prefix + '  ' * self.indent + message, severity)
+    def _write_log(self, message, severity):
+        self.parent._write_log(self.prefix + '  ' * self.indent + message, severity)
 
 
 class NoopLogger(Logger):
@@ -68,7 +76,7 @@ class FileLogger(Logger):
     def __init__(self, path):
         self.path = path
 
-    def log(self, message, severity=Logger.NOTICE):
+    def _write_log(self, message, severity):
         with open(self.path, 'a', encoding='utf-8') as logfile:
             fcntl.flock(logfile, fcntl.LOCK_EX)
             print(time.strftime('%b %d %T ') + message, file=logfile)
@@ -84,10 +92,10 @@ class FastFileLogger(Logger):
     def __exit__(self):
         self.fd.close()
 
-    def log(self, message, severity=Logger.NOTICE):
+    def _write_log(self, message, severity):
         print(time.strftime('%b %d %T ') + message, file=self.fd)
 
 
 class StderrLogger(Logger):
-    def log(self, message, severity=Logger.NOTICE):
+    def _write_log(self, message, severity):
         print(time.strftime('%b %d %T ') + message, file=sys.stderr)
