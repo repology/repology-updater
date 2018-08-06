@@ -260,9 +260,14 @@ class RepositoryProcessor:
         return packages
 
     class StreamDeserializer:
-        def __init__(self, path):
-            self.unpickler = pickle.Unpickler(open(path, 'rb'))
-            self.count = self.unpickler.load()
+        def __init__(self, path, logger):
+            try:
+                self.unpickler = pickle.Unpickler(open(path, 'rb'))
+                self.count = self.unpickler.load()
+            except FileNotFoundError:
+                logger.log('parsed package data file {} does not exist, treating repository as empty'.format(path), severity=Logger.ERROR)
+                self.count = 0
+
             self.current = None
 
             self.Get()
@@ -344,7 +349,7 @@ class RepositoryProcessor:
     def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
         deserializers = []
         for repo in self.repomgr.GetRepositories(reponames):
-            deserializers.append(self.StreamDeserializer(self.__GetSerializedPath(repo)))
+            deserializers.append(self.StreamDeserializer(self.__GetSerializedPath(repo), logger))
 
         while True:
             # remove EOFed repos
