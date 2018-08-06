@@ -22,3 +22,43 @@
     - desc: CPAN page
       url: 'http://search.cpan.org/dist/{name}'
   tags: [ all, production, have_testdata ]
+
+- name: metacpan
+  sortname: cpan_  # XXX: for easier comparison with CPAN; remove along with cpan entry
+  type: modules
+  desc: MetaCPAN
+  family: cpan
+  minpackages: 30000
+  sources:
+    - name: metacpan.org
+      fetcher: ElasticSearchFetcher
+      url: https://fastapi.metacpan.org/v1/release/_search
+      scroll_url: https://fastapi.metacpan.org/_search/scroll
+      es_scroll: 1m
+      es_size: 5000
+      es_filter:
+        or:
+          - { term: { status: latest } }
+          - { term: { maturity: developer } }
+      es_fields:
+        - abstract
+        - author
+        - distribution
+        - download_url
+        - license
+        - maturity
+        - resources.homepage
+        - status
+        - version
+      fetch_delay: 1
+      parser: MetacpanAPIParser
+  shadow: true
+  repolinks:
+    - desc: CPAN
+      url: http://cpan.org/
+    - desc: MetaCPAN
+      url: https://metacpan.org/
+  packagelinks:
+    - desc: MetaCPAN release page
+      url: 'https://metacpan.org/release/{name}'
+  tags: [ all, production ]
