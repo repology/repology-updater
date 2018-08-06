@@ -134,6 +134,13 @@ schemas = {
                     # srclist parser
                     'encoding': Any('utf-8', 'cp1251'),
 
+                    # elasticsearch fetcher
+                    'scroll_url': str,
+                    'es_scroll': str,
+                    'es_size': int,
+                    'es_filter': dict,
+                    'es_fields': [str],
+
                     # file fetcher
                     'compression': Any('xz', 'bz2', 'gz'),
                     'post': {str: str},
