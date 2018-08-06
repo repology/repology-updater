@@ -26,7 +26,11 @@ import xml.etree.ElementTree
 from repologyapp import app
 
 
+TIDY_OPTIONS = {'drop-empty-elements': False}
+
+
 html_validation = True
+
 
 try:
     from tidylib import tidy_document
@@ -64,7 +68,7 @@ class TestFlask(unittest.TestCase):
         if not html_validation:
             return document
 
-        errors = [error for error in tidy_document(document)[1].split('\n') if error and error.find('trimming empty <span>') == -1]
+        errors = [error for error in tidy_document(document, options=TIDY_OPTIONS)[1].split('\n') if error and error.find('trimming empty <span>') == -1]
         for error in errors:
             print('HTML error in ' + url + ': ' + error, file=sys.stderr)
         self.assertTrue(not errors)
