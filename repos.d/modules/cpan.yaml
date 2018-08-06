@@ -16,11 +16,6 @@
   repolinks:
     - desc: CPAN
       url: http://cpan.org/
-    - desc: CPAN search
-      url: http://search.cpan.org/
-  packagelinks:
-    - desc: CPAN page
-      url: 'http://search.cpan.org/dist/{name}'
   tags: [ all, production, have_testdata ]
 
 - name: metacpan
