@@ -95,11 +95,20 @@ class TestFlask(unittest.TestCase):
     def test_badges(self):
         self.checkurl_svg('/badge/vertical-allrepos/kiconvtool.svg', has=['<svg', 'FreeBSD'])
         self.checkurl_svg('/badge/vertical-allrepos/nonexistent.svg', has=['<svg', 'No known packages'])
-        self.checkurl_404('/badge/vertical-allrepos/nonexistent')
 
         self.checkurl_svg('/badge/tiny-repos/kiconvtool.svg', has=['<svg', '>1<'])
         self.checkurl_svg('/badge/tiny-repos/nonexistent.svg', has=['<svg', '>0<'])
-        self.checkurl_404('/badge/tiny-repos/nonexistent')
+
+        self.checkurl_svg('/badge/version-for-repo/freebsd/kiconvtool.svg', has=['<svg', '>0.97<'])
+        self.checkurl_svg('/badge/version-for-repo/freebsd/nonexistent.svg', has=['<svg', '>No package<'])
+        self.checkurl_404('/badge/version-for-repo/nonexistent/kiconvtool.svg')
+
+        self.checkurl_svg('/badge/version-only-for-repo/freebsd/kiconvtool.svg', has=['<svg', '>0.97<'])
+        self.checkurl_svg('/badge/version-only-for-repo/freebsd/nonexistent.svg', has=['<svg', '>-<'])
+        self.checkurl_404('/badge/version-only-for-repo/nonexistent/kiconvtool.svg')
+
+        self.checkurl_svg('/badge/latest-versions/kiconvtool.svg', has=['<svg', '>0.97<'])
+        self.checkurl_svg('/badge/latest-versions/nonexistent.svg', has=['<svg', '>-<'])
 
     def test_graphs(self):
         self.checkurl_svg('/graph/total/metapackages.svg')
