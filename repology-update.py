@@ -115,30 +115,30 @@ def process_repositories(env):
 
 
 def database_init(env):
-    logger = env.get_main_logger().get_indented()
+    logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
     logger.log('(re)initializing database schema')
     database.create_schema()
 
-    logger.log('committing changes')
+    logger.get_indented().log('committing changes')
     database.commit()
 
 
 def database_update_pre(env):
-    logger = env.get_main_logger().get_indented()
+    logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
     logger.log('updating repositories metadata')
     database.deprecate_repositories()
     database.add_repositories(env.get_repo_manager().GetMetadatas(env.get_enabled_repo_names()))
 
-    logger.log('committing changes')
+    logger.get_indented().log('committing changes')
     database.commit()
 
 
 def database_update(env):
-    logger = env.get_main_logger().get_indented()
+    logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
     logger.log('clearing the database')
@@ -157,7 +157,7 @@ def database_update(env):
             database.add_packages(package_queue)
             num_pushed += len(package_queue)
             package_queue = []
-            logger.log('  pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
+            logger.get_indented().log('pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
 
     logger.log('pushing packages to database')
     env.get_repo_processor().StreamDeserializeMulti(processor=package_processor, reponames=env.get_enabled_repo_names(), logger=logger)
@@ -173,13 +173,13 @@ def database_update(env):
 
 
 def database_update_post(env):
-    logger = env.get_main_logger().get_indented()
+    logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
     logger.log('performing database post-update actions')
     database.update_post()
 
-    logger.log('committing changes')
+    logger.get_indented().log('committing changes')
     database.commit()
 
 
@@ -188,7 +188,7 @@ def show_unmatched_rules(env):
     if not unmatched:
         return
 
-    logger = env.get_main_logger.get_prefixed('WARNING: ')
+    logger = env.get_main_logger()
     logger.log('unmatched rules detected!', severity=Logger.WARNING)
 
     for rule in unmatched:
@@ -250,14 +250,12 @@ def main():
         env.get_repo_processor()
 
     if options.fetch or options.parse or options.reprocess or options.database or options.postupdate:
-        env.get_main_logger().log('preparing')
         database_update_pre(env)
 
     if options.fetch or options.parse or options.reprocess:
         process_repositories(env)
 
     if options.database:
-        env.get_main_logger().log('database processing')
         database_update(env)
 
     if options.postupdate:
