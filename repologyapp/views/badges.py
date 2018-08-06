@@ -72,6 +72,9 @@ def badge_tiny_repos(name):
 
 @ViewRegistrar('/badge/version-for-repo/<repo>/<name>.svg')
 def badge_version_for_repo(repo, name):
+    if repo not in repometadata.all_names():
+        flask.abort(404)
+
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
@@ -98,6 +101,9 @@ def badge_version_for_repo(repo, name):
 
 @ViewRegistrar('/badge/version-only-for-repo/<repo>/<name>.svg')
 def badge_version_only_for_repo(repo, name):
+    if repo not in repometadata.all_names():
+        flask.abort(404)
+
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
