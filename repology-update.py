@@ -203,7 +203,7 @@ def parse_arguments():
     parser.add_argument('-U', '--rules-dir', default=config['RULES_DIR'], help='path to directory with rules')
     parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
-    parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|tag', help='repository or tag name(s) which are enabled and shown in repology')
+    parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) which are enabled and shown in repology')
 
     actions_grp = parser.add_argument_group('Actions')
     actions_grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
