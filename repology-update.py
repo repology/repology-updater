@@ -56,12 +56,10 @@ class Environment:
 
     @cached_method
     def get_main_database_connection(self):
-        self.get_main_logger().log('connecting to database (main connection)')
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, application_name='repology-update')
 
     @cached_method
     def get_logging_database_connection(self):
-        self.get_main_logger().log('connecting to database (realtime logging connection)')
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, autocommit=True, application_name='repology-update-logging')
 
     @cached_method
