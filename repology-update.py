@@ -107,7 +107,7 @@ def process_repositories(env):
         except KeyboardInterrupt:
             raise
         except:
-            env.get_main_logger().log(reponame + ' failed')
+            env.get_main_logger().log(reponame + ' failed', severity=Logger.ERROR)
             pass
 
 
