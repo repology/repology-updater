@@ -102,9 +102,6 @@ def process_repositories(env):
             if env.get_options().parse:
                 with LogRunManager(env, reponame, 'parse') as logger:
                     env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
-            elif env.get_options().reprocess:
-                with LogRunManager(env, reponame, 'parse') as logger:
-                    env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
 
             env.get_main_logger().log('processing {} done'.format(reponame))
         except KeyboardInterrupt:
@@ -213,7 +210,6 @@ def parse_arguments():
     actions_grp.add_argument('-p', '--parse', action='store_true', help='parse, process and serialize repository data')
 
     # XXX: this is dangerous as long as ignored packages are removed from dumps
-    actions_grp.add_argument('-P', '--reprocess', action='store_true', help='reprocess repository data')
     actions_grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
     actions_grp.add_argument('-d', '--database', action='store_true', help='store in the database')
     actions_grp.add_argument('-o', '--postupdate', action='store_true', help='perform post-update actions')
@@ -243,16 +239,16 @@ def main():
     if options.initdb:
         database_init(env)
 
-    if options.parse or options.reprocess:
+    if options.parse:
         # preload them here, otherwise they will lazy load at the start of first repo parsing,
         # and this will look loke a hang, and parse run duration will be incorrect
         env.get_main_logger().log('loading rules')
         env.get_repo_processor()
 
-    if options.fetch or options.parse or options.reprocess or options.database or options.postupdate:
+    if options.fetch or options.parse or options.database or options.postupdate:
         database_update_pre(env)
 
-    if options.fetch or options.parse or options.reprocess:
+    if options.fetch or options.parse:
         process_repositories(env)
 
     if options.database:

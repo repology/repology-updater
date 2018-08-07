@@ -320,15 +320,6 @@ class RepositoryProcessor:
 
         return self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
 
-    def Reprocess(self, reponame, transformer=None, logger=NoopLogger()):
-        repository = self.repomgr.GetRepository(reponame)
-
-        packages = self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
-        packages = self.__Transform(packages, transformer, repository, logger)
-        self.__Serialize(packages, self.__GetSerializedPath(repository), repository, logger)
-
-        return packages
-
     # Multi repo methods
     def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
         packages = []
