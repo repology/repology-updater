@@ -40,7 +40,7 @@ class PkgsrcIndexParser(Parser):
     def __init__(self):
         pass
 
-    def iter_parse(self, path):
+    def iter_parse(self, path, logger):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 fields = line.strip().split('|')

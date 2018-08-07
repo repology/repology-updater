@@ -96,7 +96,7 @@ class MetacpanAPIParser(Parser):
                 pkg.SetFlag(PackageFlags.devel)
                 yield pkg
 
-    def iter_parse(self, path):
+    def iter_parse(self, path, logger):
         latest_versions = {}
 
         # Pass 1: process latest versions
