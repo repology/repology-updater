@@ -141,7 +141,8 @@ class RepositoryProcessor:
             self.parser_factory.SpawnWithKnownArgs(
                 source['parser'], source
             ).iter_parse(
-                self.__GetSourcePath(repository, source)
+                self.__GetSourcePath(repository, source),
+                logger=logger.GetIndented()
             )
         )
 

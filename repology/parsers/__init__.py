@@ -15,10 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from repology.logger import NoopLogger
+
 
 class Parser:
     pass
 
-    def iter_parse(self, path):
+    def iter_parse(self, path, logger=NoopLogger()):
         # compatibility shim
         yield from self.Parse(path)
