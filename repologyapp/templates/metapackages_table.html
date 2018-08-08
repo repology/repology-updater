@@ -1,4 +1,6 @@
 {% if metapackagedata %}
+<p><b>{{ metapackagedata|length }}</b> item(s) on this page</p>
+
 <table class="table table-striped table-condensed">
 	<thead>
 	{% for metapackagename,data in metapackagedata|dictsort %}
