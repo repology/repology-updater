@@ -3,7 +3,7 @@
 ###########################################################################
 - name: slitaz_cooking
   type: repository
-  desc: SliTaz
+  desc: SliTaz Cooking
   family: slitaz
   minpackages: 5200
   sources:
@@ -22,4 +22,29 @@
       url: 'http://pkg.slitaz.org/?info={name}'
     - desc: Package receipt
       url: 'http://pkg.slitaz.org/?receipt={name}'
+  tags: [ all, production, slitaz ]
+
+- name: slitaz_next
+  type: repository
+  desc: SliTaz Next
+  family: slitaz
+  minpackages: 5200
+  sources:
+    - name: packages.info
+      fetcher: FileFetcher
+      parser: SliTazInfoParser
+      url: http://mirror1.slitaz.org/packages/next/packages.info
+      numfields: 10
+  repolinks:
+    - desc: SliTaz home
+      url: http://www.slitaz.org/
+    - desc: SliTaz packages
+      url: http://pkg.slitaz.org/
+  packagelinks:
+    - desc: Package information
+      url: 'http://cook.slitaz.org/next/{name}'
+    - desc: Package receipt
+      url: 'http://cook.slitaz.org/next/{name}/receipt'
+    - desc: Build log
+      url: 'http://cook.slitaz.org/next/{name}/log/'
   tags: [ all, production, slitaz ]
