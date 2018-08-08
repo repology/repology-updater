@@ -478,21 +478,30 @@ FROM url_relations;
 INSERT
 INTO url_relations
 SELECT
-	(SELECT id FROM metapackages WHERE effname = tmp.effname),
+	metapackage_id,
 	urlhash
-FROM (
-	SELECT DISTINCT
-		effname,
-		(
-			'x' || left(
-				md5(
-					simplify_url(homepage)
-				), 16
-			)
-		)::bit(64)::bigint AS urlhash
-	FROM packages
-	WHERE homepage ~ '^https?://'
-) AS tmp;
+FROM
+(
+	SELECT
+		metapackage_id,
+		urlhash,
+		count(*) OVER (PARTITION BY urlhash) AS metapackages_for_url
+	FROM
+	(
+		SELECT DISTINCT
+			(SELECT id FROM metapackages WHERE metapackages.effname = packages.effname) AS metapackage_id,
+			(
+				'x' || left(
+					md5(
+						simplify_url(homepage)
+					), 16
+				)
+			)::bit(64)::bigint AS urlhash
+		FROM packages
+		WHERE homepage ~ '^https?://'
+	) AS tmp2
+) AS tmp1
+WHERE metapackages_for_url > 1;
 
 ANALYZE url_relations;
 
