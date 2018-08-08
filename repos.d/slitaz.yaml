@@ -11,6 +11,7 @@
       fetcher: FileFetcher
       parser: SliTazInfoParser
       url: http://mirror1.slitaz.org/packages/cooking/packages.info
+      numfields: 9
   repolinks:
     - desc: SliTaz home
       url: http://www.slitaz.org/

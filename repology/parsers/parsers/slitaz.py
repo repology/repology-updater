@@ -22,8 +22,8 @@ from repology.parsers import Parser
 
 
 class SliTazInfoParser(Parser):
-    def __init__(self):
-        pass
+    def __init__(self, numfields):
+        self.numfields = numfields
 
     def iter_parse(self, path, logger):
         result = []
@@ -31,7 +31,7 @@ class SliTazInfoParser(Parser):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 fields = line.split('\t')
-                if len(fields) != 9:
+                if len(fields) != self.numfields:
                     print('WARNING: package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), file=sys.stderr)
                     continue
 
