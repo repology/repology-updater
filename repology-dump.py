@@ -86,7 +86,8 @@ def main():
     repomgr = RepositoryManager(options.repos_dir)
     repoproc = RepositoryProcessor(repomgr, options.statedir)
 
-    def package_processor(packageset):
+    logger.Log('dumping...')
+    for packageset in repoproc.StreamDeserializeMulti(reponames=options.reponames):
         FillPackagesetVersions(packageset)
 
         if not PackagesetCheckFilters(packageset, *filters):
@@ -112,9 +113,6 @@ def main():
                         best_pkg_by_repo[reponame].version,
                         VersionClass.ToString(best_pkg_by_repo[reponame].versionclass)
                     ))
-
-    logger.Log('dumping...')
-    repoproc.StreamDeserializeMulti(processor=package_processor, reponames=options.reponames)
 
     return 0
 

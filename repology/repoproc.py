@@ -338,7 +338,7 @@ class RepositoryProcessor:
 
         return packages
 
-    def StreamDeserializeMulti(self, processor, reponames=None, logger=NoopLogger()):
+    def StreamDeserializeMulti(self, reponames=None, logger=NoopLogger()):
         deserializers = []
         for repo in self.repomgr.GetRepositories(reponames):
             deserializers.append(self.StreamDeserializer(self.__GetSerializedPath(repo), logger))
@@ -362,4 +362,4 @@ class RepositoryProcessor:
                 while not ds.EOF() and ds.Peek().effname == thiskey:
                     packageset.append(ds.Get())
 
-            processor(packageset)
+            yield packageset

@@ -145,8 +145,8 @@ def database_update(env):
     num_pushed = 0
     start_time = timer()
 
-    def package_processor(packageset):
-        nonlocal package_queue, num_pushed, start_time
+    logger.log('pushing packages to database')
+    for packageset in env.get_repo_processor().StreamDeserializeMulti(reponames=env.get_enabled_repo_names(), logger=logger):
         FillPackagesetVersions(packageset)
         package_queue.extend(packageset)
 
@@ -155,9 +155,6 @@ def database_update(env):
             num_pushed += len(package_queue)
             package_queue = []
             logger.get_indented().log('pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
-
-    logger.log('pushing packages to database')
-    env.get_repo_processor().StreamDeserializeMulti(processor=package_processor, reponames=env.get_enabled_repo_names(), logger=logger)
 
     # process what's left in the queue
     database.add_packages(package_queue)
