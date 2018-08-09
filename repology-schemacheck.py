@@ -97,6 +97,7 @@ rulesets = families + [
     'parabola',
     'pardus',
     'parrot',
+    'whonix',
 ]
 
 schemas = {
