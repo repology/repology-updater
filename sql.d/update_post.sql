@@ -68,3 +68,30 @@ DELETE
 FROM maintainer_repo_metapackages
 WHERE
 	last_seen != now();
+
+--------------------------------------------------------------------------------
+-- Clean up unreferenced runs and logs
+--------------------------------------------------------------------------------
+WITH removed_runs AS (
+	DELETE
+	FROM runs
+	WHERE
+		NOT EXISTS (
+			SELECT
+				*
+			FROM repositories
+			WHERE
+				current_run_id = runs.id OR
+				last_successful_fetch_run_id = runs.id OR
+				last_failed_fetch_run_id = runs.id OR
+				last_successful_parse_run_id = runs.id OR
+				last_failed_parse_run_id = runs.id
+		)
+	RETURNING
+		id
+)
+DELETE
+FROM log_lines
+WHERE run_id IN (
+	SELECT id FROM removed_runs
+);
