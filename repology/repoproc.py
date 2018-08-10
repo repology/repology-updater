@@ -46,11 +46,9 @@ class InconsistentPackage(Exception):
 
 
 class RepositoryProcessor:
-    def __init__(self, repomgr, statedir, fetch_retries=3, fetch_retry_delay=30, safety_checks=True):
+    def __init__(self, repomgr, statedir, safety_checks=True):
         self.repomgr = repomgr
         self.statedir = statedir
-        self.fetch_retries = fetch_retries
-        self.fetch_retry_delay = fetch_retry_delay
         self.safety_checks = safety_checks
 
         self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', superclass=Fetcher)
@@ -75,39 +73,17 @@ class RepositoryProcessor:
             logger.log('fetching source {} not supported'.format(source['name']))
             return
 
-        fetcher = self.fetcher_factory.SpawnWithKnownArgs(source['fetcher'], source)
+        logger.log('fetching source {} started'.format(source['name']))
 
-        ntry = 1
-        while ntry <= self.fetch_retries:
-            logger.log('fetching source {} try {} started'.format(source['name'], ntry))
+        self.fetcher_factory.SpawnWithKnownArgs(
+            source['fetcher'], source
+        ).fetch(
+            self.__GetSourcePath(repository, source),
+            update=update,
+            logger=logger.GetIndented()
+        )
 
-            try:
-                fetcher.fetch(
-                    self.__GetSourcePath(repository, source),
-                    update=update,
-                    logger=logger.GetIndented()
-                )
-
-                break
-            except KeyboardInterrupt:
-                raise
-            except:
-                if ntry >= self.fetch_retries:
-                    raise
-
-                logger.log('fetching source {} try {} failed:'.format(source['name'], ntry))
-                for item in traceback.format_exception(*sys.exc_info()):
-                    for line in item.split('\n'):
-                        if line:
-                            logger.GetIndented().log(line, severity=Logger.ERROR)
-
-                logger.log('waiting {} seconds before retry'.format(self.fetch_retry_delay), severity=Logger.WARNING)
-                if self.fetch_retry_delay:
-                    time.sleep(self.fetch_retry_delay)
-
-            ntry += 1
-
-        logger.log('fetching source {} complete with {} tries'.format(source['name'], ntry))
+        logger.log('fetching source {} complete'.format(source['name']))
 
     def _iter_parse_source(self, repository, source, logger):
         def postprocess_parsed_packages(packages_iter):
