@@ -18,9 +18,6 @@
 import datetime
 import os
 import pickle
-import sys
-import time
-import traceback
 
 from repology.fetchers import Fetcher
 from repology.logger import Logger, NoopLogger
