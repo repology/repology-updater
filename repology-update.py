@@ -93,29 +93,29 @@ class Environment:
 
 def process_repositories(env):
     for reponame in env.get_processable_repo_names():
-        env.get_main_logger().log('processing {}'.format(reponame))
-
         if env.get_options().fetch:
+            env.get_main_logger().log('fetching {}'.format(reponame))
             try:
                 with LogRunManager(env, reponame, 'fetch') as logger:
                     env.get_repo_processor().Fetch(reponame, update=env.get_options().update, logger=logger)
+                env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:
                 raise
             except:
-                env.get_main_logger().log('fetching {} failed'.format(reponame), severity=Logger.ERROR)
+                env.get_main_logger().get_indented().log('failed', severity=Logger.ERROR)
                 pass
 
         if env.get_options().parse:
+            env.get_main_logger().log('parsing {}'.format(reponame))
             try:
                 with LogRunManager(env, reponame, 'parse') as logger:
                     env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
+                env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:
                 raise
             except:
-                env.get_main_logger().log('parsing {} failed'.format(reponame), severity=Logger.ERROR)
+                env.get_main_logger().get_indented().log('failed', severity=Logger.ERROR)
                 pass
-
-        env.get_main_logger().log('processing {} done'.format(reponame))
 
 
 def database_init(env):
