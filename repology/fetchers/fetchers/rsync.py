@@ -32,5 +32,5 @@ class RsyncFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return
 
-        command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', '--timeout', str(self.fetch_timeout), self.url, statepath]
+        command = ['rsync', '--verbose', '--archive', '--compress', '--delete', '--delete-excluded', '--safe-links', '--timeout', str(self.fetch_timeout), self.url, statepath]
         RunSubprocess(command, logger)
