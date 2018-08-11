@@ -67,6 +67,16 @@ class VcpkgGitParser(Parser):
                         if comment:
                             pkg.comment = comment
 
+            # pretty much a hack to shut a bunch of fake versions up
+            portfilepath = os.path.join(path, 'ports', pkgdir, 'portfile.cmake')
+            if os.path.exists(portfilepath):
+                with open(portfilepath, 'r', encoding='utf-8', errors='ignore') as portfile:
+                    for line in portfile:
+                        if 'libimobiledevice-win32' in line:
+                            print('WARNING: marking version for {} as untrusted, https://github.com/libimobiledevice-win32 accused of version faking'.format(pkg.name), file=sys.stderr)
+                            pkg.SetFlag(PackageFlags.untrusted)
+                            break
+
             if not pkg.version:
                 print('WARNING: unable to parse port {}: no version'.format(pkgdir), file=sys.stderr)
                 continue

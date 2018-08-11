@@ -11,7 +11,7 @@
       fetcher: GitFetcher
       parser: VcpkgGitParser
       url: https://github.com/Microsoft/vcpkg.git
-      sparse_checkout: [ 'ports/*/CONTROL' ]
+      sparse_checkout: [ 'ports/*/CONTROL', 'ports/*/portfile.cmake' ]
   repolinks:
     - desc: Vcpkg GitHub repository
       url: https://github.com/Microsoft/vcpkg
