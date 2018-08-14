@@ -104,6 +104,13 @@ TCLSH = "tclsh"
 #SECRET_KEY = ''
 
 #
+# Admin password
+#
+# There's no default value, meaning that admin login is disabled
+#
+ADMIN_PASSWORD = None
+
+#
 # Enable webapp profiling
 #
 PROFILE = False
@@ -121,6 +128,7 @@ MAINTAINERS_PER_PAGE = 500
 PROBLEMS_PER_PAGE = 500
 TURNOVER_PER_PAGE = 350
 HISTORY_PER_PAGE = 500
+REPORTS_PER_PAGE = 100
 
 #
 # Max reports for metapackage
