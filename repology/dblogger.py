@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+import resource
 import traceback
 
 from repology.logger import Logger
@@ -85,20 +86,31 @@ class LogRunManager:
 
         database.update_repository_run_id(self.reponame, self.run_id, 'current')
 
+        self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         return self.logger
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        end_rusage = resource.getrusage(resource.RUSAGE_SELF)
+
         database = self.env.get_logging_database_connection()
-        success = not exc_tb
 
-        if exc_tb:
-            self.logger.log('run failed, exception follows:', severity=Logger.ERROR)
+        success = True
+        trace = None
 
-            for item in traceback.format_exception(exc_type, exc_val, exc_tb):
-                for line in item.split('\n'):
-                    if line:
-                        self.logger.log(line, severity=Logger.ERROR)
+        if exc_type:
+            self.logger.log('{}: {}'.format(exc_type.__name__, exc_val), severity=Logger.ERROR)
+            success = False
+            trace = traceback.format_exception(exc_type, exc_val, exc_tb)
 
-        database.finish_run(self.run_id, success)
+        database.finish_run(
+            self.run_id,
+            success,
+            utime=datetime.timedelta(seconds=end_rusage.ru_utime - self.start_rusage.ru_utime),
+            stime=datetime.timedelta(seconds=end_rusage.ru_stime - self.start_rusage.ru_stime),
+            maxrss=end_rusage.ru_maxrss,
+            maxrss_delta=end_rusage.ru_maxrss - self.start_rusage.ru_maxrss,
+            traceback=trace
+        )
+
         database.update_repository_run_id(self.reponame, None, 'current')
         database.update_repository_run_id(self.reponame, self.run_id, self.run_type, success)

@@ -19,6 +19,11 @@
 --
 -- @param id
 -- @param successful
+-- @param utime=None
+-- @param stime=None
+-- @param maxrss=None
+-- @param maxrss_delta=None
+-- @param traceback=None
 --
 --------------------------------------------------------------------------------
 UPDATE runs
@@ -28,5 +33,12 @@ SET
 
 	num_lines = (SELECT count(*) FROM log_lines WHERE run_id = id),
 	num_warnings = (SELECT count(*) FROM log_lines WHERE run_id = id AND severity='warning'),
-	num_errors = (SELECT count(*) FROM log_lines WHERE run_id = id AND severity='error')
+	num_errors = (SELECT count(*) FROM log_lines WHERE run_id = id AND severity='error'),
+
+	utime = %(utime)s,
+	stime = %(stime)s,
+	maxrss = %(maxrss)s,
+	maxrss_delta = %(maxrss_delta)s,
+
+	traceback = %(traceback)s
 WHERE id = %(id)s;

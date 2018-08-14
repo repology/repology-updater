@@ -482,7 +482,14 @@ CREATE TABLE runs (
 
 	num_lines integer NULL,
 	num_warnings integer NULL,
-	num_errors integer NULL
+	num_errors integer NULL,
+
+	utime interval NULL,
+	stime interval NULL,
+	maxrss integer NULL,
+	maxrss_delta integer NULL,
+
+	traceback text NULL
 );
 
 DROP TABLE IF EXISTS log_lines CASCADE;
