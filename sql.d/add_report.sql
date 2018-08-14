@@ -27,6 +27,7 @@
 --------------------------------------------------------------------------------
 INSERT INTO reports (
 	created,
+	updated,
 	client,
 	effname,
 	need_verignore,
@@ -34,6 +35,7 @@ INSERT INTO reports (
 	need_merge,
 	comment
 ) VALUES (
+	now(),
 	now(),
 	%(client)s,
 	%(effname)s,
