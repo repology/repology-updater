@@ -747,7 +747,9 @@ CREATE TABLE IF NOT EXISTS reports (
 	accepted boolean
 );
 
-CREATE INDEX ON reports(effname);
+CREATE INDEX ON reports(effname, created DESC);
+CREATE INDEX ON reports(created DESC) WHERE (accepted IS NULL);
+CREATE INDEX ON reports(updated DESC);
 
 --------------------------------------------------------------------------------
 -- Url relations
