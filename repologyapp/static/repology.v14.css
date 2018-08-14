@@ -274,6 +274,7 @@
 .pageheader-right {
 	float: right;
 	margin-top: 40px;
+	margin-left: 5px;
 }
 
 .break-word {
