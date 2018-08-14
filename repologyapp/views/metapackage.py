@@ -53,6 +53,7 @@ def metapackage_versions(name):
         'metapackage-versions.html',
         reponames_absent=[reponame for reponame in repometadata.active_names() if reponame not in packages_by_repo],
         packages_by_repo=packages_by_repo,
+        metapackage=get_db().get_metapackage(name),
         name=name
     )
 
@@ -72,6 +73,7 @@ def metapackage_packages(name):
     return flask.render_template(
         'metapackage-packages.html',
         packages=packages,
+        metapackage=get_db().get_metapackage(name),
         name=name,
         link_statuses=get_db().get_metapackage_link_statuses(name)
     )
@@ -124,6 +126,7 @@ def metapackage_information(name):
         'metapackage-information.html',
         information=information,
         versions=versions,
+        metapackage=get_db().get_metapackage(name),
         name=name,
         link_statuses=get_db().get_metapackage_link_statuses(name)
     )
@@ -209,6 +212,7 @@ def metapackage_history(name):
 
     return flask.render_template(
         'metapackage-history.html',
+        metapackage=get_db().get_metapackage(name),
         name=name,
         history=list(postprocess_history(get_db().get_metapackage_history(name, limit=config['HISTORY_PER_PAGE'])))
     )
@@ -228,6 +232,7 @@ def metapackage_related(name):
 
     return flask.render_template(
         'metapackage-related.html',
+        metapackage=get_db().get_metapackage(name),
         name=name,
         metapackages=metapackages,
         metapackagedata=metapackagedata,
@@ -239,7 +244,12 @@ def metapackage_related(name):
 def metapackage_badges(name):
     repos_present_in = set([package.repo for package in get_db().get_metapackage_packages(name)])
     repos = [repo for repo in repometadata.active_names() if repo in repos_present_in]
-    return flask.render_template('metapackage-badges.html', name=name, repos=repos)
+    return flask.render_template(
+        'metapackage-badges.html',
+        metapackage=get_db().get_metapackage(name),
+        name=name,
+        repos=repos
+    )
 
 
 @ViewRegistrar('/metapackage/<name>/report', methods=['GET', 'POST'])
@@ -287,6 +297,7 @@ def metapackage_report(name):
     return flask.render_template(
         'metapackage-report.html',
         reports=get_db().get_metapackage_reports(name),
+        metapackage=get_db().get_metapackage(name),
         name=name,
         afk_till=AFKChecker(config['STAFF_AFK']).get_afk_end(),
         reports_disabled=reports_disabled,
