@@ -7,7 +7,7 @@
   family: debuntu
   ruleset: [debuntu, pardus]
   color: 'ffcc00'
-  minpackages: 26000
+  minpackages: 25000
   sources:
     - name: [main,contrib,non-free]
       fetcher: FileFetcher
