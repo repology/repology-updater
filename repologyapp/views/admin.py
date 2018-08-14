@@ -31,12 +31,17 @@ def unauthorized():
 @ViewRegistrar('/admin', methods=['GET', 'POST'])
 def admin():
     if flask.request.method == 'POST':
-        if not flask.request.form.get('password'):
+        if config['ADMIN_PASSWORD'] is None:
+            flask.flash('Admin login disabled', 'danger')
+        elif flask.request.form.get('password') is None:
             flask.session['admin'] = False
-        elif config['ADMIN_PASSWORD'] is not None and flask.request.form.get('password', '') == config['ADMIN_PASSWORD']:
+            flask.flash('Logged out successfully', 'success')
+        elif flask.request.form.get('password') == config['ADMIN_PASSWORD']:
             flask.session['admin'] = True
+            flask.flash('Logged in successfully', 'success')
         else:
             flask.flash('Incorrect admin password', 'danger')
+
         return flask.redirect(flask.url_for('admin'), 301)
 
     return flask.render_template('admin.html')
