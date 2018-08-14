@@ -25,7 +25,6 @@ from repology.moduleutils import ClassFactory
 from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Parser
-from repology.resourceusage import ResourceUsageMonitor
 
 
 class StateFileFormatCheckProblem(Exception):
@@ -139,13 +138,11 @@ class RepositoryProcessor:
         packages = []
 
         for source in repository['sources']:
-            usage = ResourceUsageMonitor()
-
             logger.log('parsing source {} started'.format(source['name']))
 
             packages.extend(self._iter_parse_source(repository, source, logger.GetIndented()))
 
-            logger.log('parsing source {} complete, resource usage: {}'.format(source['name'], usage.get_usage_str()))
+            logger.log('parsing source {} complete'.format(source['name']))
 
         logger.log('parsing complete, {} packages, deduplicating'.format(len(packages)))
 
