@@ -89,4 +89,7 @@ def admin_updates():
     if not flask.session.get('admin'):
         return unauthorized()
 
-    return flask.render_template('admin-updates.html')
+    return flask.render_template(
+        'admin-updates.html',
+        repos=get_db().get_repositories_update_diagnostics()
+    )
