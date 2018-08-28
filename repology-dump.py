@@ -91,7 +91,7 @@ def main():
         FillPackagesetVersions(packageset)
 
         if not PackagesetCheckFilters(packageset, *filters):
-            return
+            continue
 
         if options.dump == 'packages':
             for package in packageset:
