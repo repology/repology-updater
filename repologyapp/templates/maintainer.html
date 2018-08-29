@@ -131,7 +131,7 @@
 <p>
 {%- for metapackage in metapackages -%}
 	{%- if not loop.first %}, {% endif -%}
-	<a href="{{ url_for('metapackage', name=metapackage) }}">
+	<a href="{{ url_for('metapackage_versions', name=metapackage) }}">
 		{{- metapackage -}}
 	</a>
 {%- endfor -%}

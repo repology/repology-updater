@@ -6,16 +6,16 @@
 {% block keywords %}{{ super() }}, badge{% endblock %}
 
 {% macro badge_example(badge_type, alt="Packaging status", badge_args={}) %}
-<p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for(badge_type, name=name, **badge_args) }}" alt="{{ alt }}"></a></p>
+<p><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }}"><img src="{{ url_for(badge_type, name=name, **badge_args) }}" alt="{{ alt }}"></a></p>
 
 <p>Markdown code:</p>
 <pre>
-[![{{ alt }}]({{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})
+[![{{ alt }}]({{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }})
 </pre>
 
 <p>HTML code:</p>
 <pre>
-&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }}&quot;&gt;
     &lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for(badge_type, name=name, **badge_args)}}&quot; alt=&quot;{{ alt }}&quot;&gt;
 &lt;/a&gt;
 </pre>
@@ -38,7 +38,7 @@
 
 <p>HTML code for right-aligned badge:</p>
 <pre>
-&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;
+&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }}&quot;&gt;
     &lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name)}}&quot; alt=&quot;Packaging status&quot; <strong>align=&quot;right&quot;</strong>&gt;
 &lt;/a&gt;
 </pre>
@@ -82,9 +82,9 @@
 	<tr><th>Sample</th><th>Markdown code</th><th>HTML code</th></tr>
 	{% for repo in repos %}
 	<tr>
-		<td><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for('badge_version_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}"></a></td>
-		<td><code>[![{{ repometadata[repo].singular }}]({{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repo) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})</code></td>
-		<td><code>&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repo)}}&quot; alt=&quot;{{ repometadata[repo].singular }}&quot;&gt;<br>&lt;/a&gt;</code></td>
+		<td><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }}"><img src="{{ url_for('badge_version_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}"></a></td>
+		<td><code>[![{{ repometadata[repo].singular }}]({{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repo) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }})</code></td>
+		<td><code>&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }}&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repo)}}&quot; alt=&quot;{{ repometadata[repo].singular }}&quot;&gt;<br>&lt;/a&gt;</code></td>
 	</tr>
 	{% endfor %}
 </table>
@@ -102,9 +102,9 @@
 	{% for repo in repos %}
 	<tr>
 		<td>{{ repometadata[repo].desc }}</td>
-		<td><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}"><img src="{{ url_for('badge_version_only_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}"></a></td>
-		<td><code>[![{{ repometadata[repo].singular }}]({{ REPOLOGY_HOME }}{{ url_for('badge_version_only_for_repo', name=name, repo=repo) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }})</code></td>
-		<td><code>&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage', name=name) }}&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_version_only_for_repo', name=name, repo=repo)}}&quot; alt=&quot;{{ repometadata[repo].singular }}&quot;&gt;<br>&lt;/a&gt;</code></td>
+		<td><a href="{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }}"><img src="{{ url_for('badge_version_only_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}"></a></td>
+		<td><code>[![{{ repometadata[repo].singular }}]({{ REPOLOGY_HOME }}{{ url_for('badge_version_only_for_repo', name=name, repo=repo) }})]({{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }})</code></td>
+		<td><code>&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }}&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_version_only_for_repo', name=name, repo=repo)}}&quot; alt=&quot;{{ repometadata[repo].singular }}&quot;&gt;<br>&lt;/a&gt;</code></td>
 	</tr>
 	{% endfor %}
 </table>

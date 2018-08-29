@@ -34,12 +34,6 @@ from repology.package import VersionClass
 from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByNameVersion, PackagesetSortByVersion
 
 
-@ViewRegistrar('/metapackage/<name>')
-def metapackage(name):
-    # metapackage landing page; just redirect to versions, may change in future
-    return flask.redirect(flask.url_for('metapackage_versions', name=name), 303)
-
-
 @ViewRegistrar('/metapackage/<name>/versions')
 def metapackage_versions(name):
     packages_by_repo = defaultdict(list)

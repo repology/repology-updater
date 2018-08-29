@@ -105,3 +105,8 @@ def legacy_repositories():
 @ViewRegistrar('/statistics/<sorting>')
 def legacy_statistics(sorting=None):
     return flask.redirect(flask.url_for('repositories_statistics', sorting=sorting), 301)
+
+
+@ViewRegistrar('/metapackage/<name>')
+def metapackage(name):
+    return flask.redirect(flask.url_for('metapackage_versions', name=name), 301)
