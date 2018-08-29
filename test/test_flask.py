@@ -128,7 +128,7 @@ class TestFlask(unittest.TestCase):
         self.checkurl_svg('/graph/repo/freebsd/problems.svg')
 
     def test_metapackage(self):
-        self.checkurl('/metapackage/kiconvtool', status_code=303)
+        self.checkurl('/metapackage/kiconvtool', status_code=301)
 
         self.checkurl_html('/metapackage/kiconvtool/versions', has=['FreeBSD', '0.97', 'amdmi3'])
         self.checkurl_html('/metapackage/nonexistent/versions', has=['No data found'])
