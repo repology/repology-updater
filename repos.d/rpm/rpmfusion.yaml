@@ -1,5 +1,7 @@
 ###########################################################################
 # RPM Fusion Fedora
+#
+# See https://rpmfusion.org/#Browse_available_packages
 ###########################################################################
 - name: rpmfusion_fedora_26
   type: repository
