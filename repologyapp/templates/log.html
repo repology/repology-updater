@@ -2,6 +2,7 @@
 {% import "macros.html" as macros %}
 
 {% block extrameta %}
+	<meta name="robots" content="noindex">
 {% if not run.finish_ts %}
 	<meta http-equiv="refresh" content="5">
 {% endif %}
