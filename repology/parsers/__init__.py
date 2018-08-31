@@ -19,6 +19,4 @@ from repology.logger import NoopLogger
 
 
 class Parser:
-    def iter_parse(self, path, logger=NoopLogger()):
-        # compatibility shim
-        yield from self.Parse(path)
+    pass
