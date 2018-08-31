@@ -45,9 +45,6 @@ def SanitizeVersion(version):
 
 
 class AURParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         packages = []
 

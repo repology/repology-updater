@@ -23,9 +23,6 @@ from repology.parsers import Parser
 
 
 class SpecParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         result = []
 

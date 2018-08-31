@@ -24,9 +24,6 @@ from repology.parsers.walk import walk_tree
 
 
 class BuckarooGitParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         result = []
 

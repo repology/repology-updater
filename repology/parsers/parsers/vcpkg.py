@@ -38,9 +38,6 @@ def SanitizeVersion(version):
 
 
 class VcpkgGitParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         packages = []
 

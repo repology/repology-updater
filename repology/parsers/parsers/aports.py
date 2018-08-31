@@ -37,9 +37,6 @@ def SanitizeVersion(version):
 
 
 class ApkIndexParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         packages = []
 

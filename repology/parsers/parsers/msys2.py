@@ -37,9 +37,6 @@ def SanitizeVersion(version):
 
 
 class MSYS2Parser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         packages = []
 

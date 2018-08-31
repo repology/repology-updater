@@ -43,9 +43,6 @@ def ensure_list(v):
 
 
 class MetacpanAPIParser(Parser):
-    def __init__(self):
-        pass
-
     @staticmethod
     def parse_package(fields):
         pkg = Package()

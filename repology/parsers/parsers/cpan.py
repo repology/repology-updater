@@ -23,9 +23,6 @@ from repology.parsers.maintainers import extract_maintainers
 
 
 class CPANPackagesParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         # Since data we get from CPAN is somewhat lacking, we need
         # somewhat complex parsing. Here's the example of what we get

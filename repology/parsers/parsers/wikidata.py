@@ -31,9 +31,6 @@ def SimplifyResult(injson):
 
 
 class WikidataJsonParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         result = []
 

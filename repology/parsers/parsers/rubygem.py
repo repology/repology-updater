@@ -22,9 +22,6 @@ from repology.parsers import Parser
 
 
 class RubyGemParser(Parser):
-    def __init__(self):
-        pass
-
     def force_decode(self, var):
         if isinstance(var, str):
             return var

@@ -23,9 +23,6 @@ from repology.parsers.nevra import filename2nevra
 
 
 class SophieHTMLParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         result = []
 

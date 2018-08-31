@@ -37,9 +37,6 @@ def SanitizeVersion(version):
 
 
 class AoscPkgsParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         result = []
 

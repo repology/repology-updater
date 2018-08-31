@@ -23,9 +23,6 @@ from repology.parsers import Parser
 
 
 class PyPiHTMLParser(Parser):
-    def __init__(self):
-        pass
-
     def Parse(self, path):
         packages = {}
 

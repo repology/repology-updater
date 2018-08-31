@@ -27,9 +27,6 @@ from repology.parsers.maintainers import extract_maintainers
 
 
 class HackageParser(Parser):
-    def __init__(self):
-        pass
-
     def ParseCabal(self, path):
         cabaldata = {}
         offset = None

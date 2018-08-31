@@ -24,9 +24,6 @@ from repology.parsers import Parser
 
 
 class OpenIndianaSummaryJsonParser(Parser):
-    def __init__(self):
-        pass
-
     def ParsePackage(self, fmri, pkgdata):
         variables = {}
         for action in pkgdata['actions']:
