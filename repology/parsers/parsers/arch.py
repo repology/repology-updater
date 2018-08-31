@@ -45,9 +45,7 @@ def SanitizeVersion(version):
 
 
 class ArchDBParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for package in os.listdir(path):
             desc_path = os.path.join(path, package, 'desc')
             if not os.path.isfile(desc_path):
@@ -84,8 +82,6 @@ class ArchDBParser(Parser):
                         tag = line[1:-1]
 
                 if pkg.name is not None and pkg.version is not None:
-                    result.append(pkg)
+                    yield pkg
                 else:
                     print('WARNING: %s skipped, likely due to parsing problems' % package, file=sys.stderr)
-
-        return result

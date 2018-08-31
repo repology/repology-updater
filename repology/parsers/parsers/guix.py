@@ -38,9 +38,7 @@ def SanitizeVersion(version):
 
 
 class GuixParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for filename in os.listdir(path):
             if not filename.endswith('.html'):
                 continue
@@ -69,6 +67,4 @@ class GuixParser(Parser):
                     elif key == 'Package source:':
                         pkg.extrafields['source'] = cell.xpath('./a')[0].text
 
-                result.append(pkg)
-
-        return result
+                yield pkg

@@ -24,9 +24,7 @@ from repology.parsers import Parser
 
 
 class HaikuPortsFilenamesParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for category in os.listdir(path):
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):
@@ -65,6 +63,4 @@ class HaikuPortsFilenamesParser(Parser):
                         if match:
                             pkg.homepage = match.group(1).split()[0]  # XXX: use all homepages
 
-                    result.append(pkg)
-
-        return result
+                    yield pkg

@@ -26,9 +26,7 @@ class SrcListParser(Parser):
     def __init__(self, encoding='utf-8'):
         self.encoding = encoding
 
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for header in rpm.readHeaderListFromFile(path):
             fields = {
                 key: str(header[key], self.encoding) if header[key] is not None else None
@@ -46,6 +44,4 @@ class SrcListParser(Parser):
             pkg.category = fields['group']
             pkg.comment = fields['summary']
 
-            result.append(pkg)
-
-        return result
+            yield pkg

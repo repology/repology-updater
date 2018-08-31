@@ -23,9 +23,7 @@ from repology.parsers.nevra import filename2nevra
 
 
 class SophieHTMLParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for item in lxml.html.parse(path).getroot().xpath('.//div[@id="rpms_list"]/ul/li/a'):
             nevra = filename2nevra(item.text)
 
@@ -34,6 +32,4 @@ class SophieHTMLParser(Parser):
             pkg.name = nevra[0]
             pkg.version = nevra[2]
 
-            result.append(pkg)
-
-        return result
+            yield pkg

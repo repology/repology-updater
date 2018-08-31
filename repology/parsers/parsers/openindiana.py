@@ -83,9 +83,7 @@ class OpenIndianaSummaryJsonParser(Parser):
 
         return None
 
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             summary_json = json.load(jsonfile)
 
@@ -101,6 +99,4 @@ class OpenIndianaSummaryJsonParser(Parser):
                         pkg = self.ParsePackage(fmri, pkgdata)
 
                         if pkg:
-                            result.append(pkg)
-
-        return result
+                            yield pkg

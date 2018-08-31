@@ -52,8 +52,7 @@ class RepodataParser(Parser):
                 yield elem
                 elem.clear()
 
-    def Parse(self, path):
-        result = []
+    def iter_parse(self, path, logger):
         skipped_archs = {}
 
         for entry in self.ParsePackagesEntriesFromXml(path):
@@ -91,9 +90,7 @@ class RepodataParser(Parser):
             if packager:
                 pkg.maintainers = extract_maintainers(packager)
 
-            result.append(pkg)
+            yield pkg
 
         for arch, numpackages in sorted(skipped_archs.items()):
             print('WARNING: skipping {} packages(s) with disallowed architecture {}'.format(numpackages, arch), file=sys.stderr)
-
-        return result

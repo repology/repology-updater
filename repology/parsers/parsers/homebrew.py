@@ -22,9 +22,7 @@ from repology.parsers import Parser
 
 
 class HomebrewJsonParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for package in json.load(jsonfile):
                 pkg = Package()
@@ -38,6 +36,4 @@ class HomebrewJsonParser(Parser):
                 pkg.homepage = package['homepage']
 
                 if pkg.name and pkg.version:
-                    result.append(pkg)
-
-        return result
+                    yield pkg

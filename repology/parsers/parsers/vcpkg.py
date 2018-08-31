@@ -38,9 +38,7 @@ def SanitizeVersion(version):
 
 
 class VcpkgGitParser(Parser):
-    def Parse(self, path):
-        packages = []
-
+    def iter_parse(self, path, logger):
         for pkgdir in os.listdir(os.path.join(path, 'ports')):
             controlpath = os.path.join(path, 'ports', pkgdir, 'CONTROL')
             if not os.path.exists(controlpath):
@@ -78,6 +76,4 @@ class VcpkgGitParser(Parser):
                 print('WARNING: unable to parse port {}: no version'.format(pkgdir), file=sys.stderr)
                 continue
 
-            packages.append(pkg)
-
-        return packages
+            yield pkg

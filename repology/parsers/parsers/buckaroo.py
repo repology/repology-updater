@@ -24,9 +24,7 @@ from repology.parsers.walk import walk_tree
 
 
 class BuckarooGitParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for filename in walk_tree(path, suffix='.json'):
             data = json.load(open(filename, encoding='utf-8', errors='ignore'))
 
@@ -53,6 +51,4 @@ class BuckarooGitParser(Parser):
                 #else:
                 #    pkg.downloads = [versiondata['source']['url']]
 
-            result.append(pkg)
-
-        return result
+            yield pkg

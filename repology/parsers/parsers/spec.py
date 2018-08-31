@@ -23,9 +23,7 @@ from repology.parsers import Parser
 
 
 class SpecParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for root, _, files in os.walk(path):
             for filename in files:
                 if not filename.endswith('.spec'):
@@ -54,8 +52,6 @@ class SpecParser(Parser):
                             pkg.comment = line[8:].strip()
 
                     if pkg.name is not None and pkg.version is not None:
-                        result.append(pkg)
+                        yield pkg
                     else:
                         print('WARNING: %s skipped, likely due to parsing problems' % filename, file=sys.stderr)
-
-        return result

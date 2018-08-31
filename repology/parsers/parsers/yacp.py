@@ -37,9 +37,7 @@ def SanitizeVersion(version):
 
 
 class YACPGitParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for package in os.listdir(path):
             package_path = os.path.join(path, package)
             if not os.path.isdir(package_path):
@@ -60,6 +58,4 @@ class YACPGitParser(Parser):
                 pkg.name, version = match.group(1).rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
 
-                result.append(pkg)
-
-        return result
+                yield pkg

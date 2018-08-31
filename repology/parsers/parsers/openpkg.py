@@ -22,9 +22,7 @@ from repology.parsers import Parser
 
 
 class OpenPkgRdfParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         root = xml.etree.ElementTree.parse(path)
 
         repository = root.find('{http://www.openpkg.org/xml-rdf-index/0.9}Repository')
@@ -48,6 +46,4 @@ class OpenPkgRdfParser(Parser):
             if pkg.version.endswith(release):
                 pkg.SetFlag(PackageFlags.untrusted)
 
-            result.append(pkg)
-
-        return result
+            yield pkg

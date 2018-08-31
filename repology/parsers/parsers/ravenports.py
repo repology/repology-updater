@@ -23,9 +23,7 @@ from repology.parsers import Parser
 
 
 class RavenportsJsonParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         jsondata = None
         with open(path, 'r', encoding='utf-8') as jsonfile:
             jsondata = json.load(jsonfile)
@@ -45,6 +43,4 @@ class RavenportsJsonParser(Parser):
             pkg.extrafields['bucket'] = packagedata['bucket']
             pkg.extrafields['variant'] = packagedata['variants'][0]['label']
 
-            result.append(pkg)
-
-        return result
+            yield pkg

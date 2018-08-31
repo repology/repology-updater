@@ -24,9 +24,7 @@ from repology.parsers import Parser
 
 
 class RosaInfoXmlParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         root = xml.etree.ElementTree.parse(path)
 
         for info in root.findall('./info'):
@@ -64,6 +62,4 @@ class RosaInfoXmlParser(Parser):
             license_ = info.attrib['license']
             pkg.licenses = [license_]
 
-            result.append(pkg)
-
-        return result
+            yield pkg

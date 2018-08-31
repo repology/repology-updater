@@ -37,9 +37,7 @@ def SanitizeVersion(version):
 
 
 class AoscPkgsParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for package in json.load(jsonfile)['packages']:
                 pkg = Package()
@@ -59,6 +57,4 @@ class AoscPkgsParser(Parser):
                 if pkg.version == '999':
                     pkg.SetFlag(PackageFlags.ignore)  # XXX: rolling? revisit
 
-                result.append(pkg)
-
-        return result
+                yield pkg

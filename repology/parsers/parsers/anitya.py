@@ -23,9 +23,7 @@ from repology.parsers import Parser
 
 
 class AnityaApiParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for project in json.load(jsonfile)['projects']:
                 pkg = Package()
@@ -46,6 +44,4 @@ class AnityaApiParser(Parser):
                 elif project['backend'] == 'Rubygems':
                     pkg.name = 'ruby:' + pkg.name
 
-                result.append(pkg)
-
-        return result
+                yield pkg

@@ -22,9 +22,7 @@ from repology.parsers import Parser
 
 
 class KaOSHTMLParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="ctable"]')[0].xpath('./form/tr[position()>3 and position()<last()-3]'):
             pkg = Package()
 
@@ -34,6 +32,4 @@ class KaOSHTMLParser(Parser):
             pkg.origversion = version + '-' + revision
             pkg.version = version.split(':', 1)[-1]  # drop epoch
 
-            result.append(pkg)
-
-        return result
+            yield pkg

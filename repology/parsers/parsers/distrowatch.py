@@ -22,9 +22,7 @@ from repology.parsers import Parser
 
 
 class DistrowatchPackagesParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="Auto"]')[0].xpath('./tr[position()>1]'):
             pkg = Package()
 
@@ -42,6 +40,4 @@ class DistrowatchPackagesParser(Parser):
             cell = row.xpath('./td[2]')[0]
             pkg.comment = cell.text
 
-            result.append(pkg)
-
-        return result
+            yield pkg

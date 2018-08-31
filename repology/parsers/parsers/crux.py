@@ -45,9 +45,7 @@ def SanitizeVersion(version):
 
 
 class CRUXParser(Parser):
-    def Parse(self, path):
-        packages = []
-
+    def iter_parse(self, path, logger):
         for pkgdir in os.listdir(path):
             pkgpath = os.path.join(path, pkgdir, 'Pkgfile')
             if not os.path.exists(pkgpath):
@@ -92,6 +90,4 @@ class CRUXParser(Parser):
                     print('WARNING: unable to parse port form {}: name or version contain variables'.format(pkgdir), file=sys.stderr)
                     continue
 
-                packages.append(pkg)
-
-        return packages
+                yield pkg

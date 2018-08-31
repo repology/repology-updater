@@ -22,9 +22,7 @@ from repology.parsers import Parser
 
 
 class FDroidParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         root = xml.etree.ElementTree.parse(path)
 
         for application in root.findall('application'):
@@ -40,8 +38,7 @@ class FDroidParser(Parser):
                 version = package.find('version').text
 
                 if name and version:
-                    result.append(
-                        Package(
+                    yield Package(
                             name=name.strip(),
                             version=version,
                             licenses=[license_],
@@ -50,6 +47,3 @@ class FDroidParser(Parser):
                             extrafields={'id': appid},
                             flags=PackageFlags.devel if version_code > upstream_version_code else 0,
                         )
-                    )
-
-        return result

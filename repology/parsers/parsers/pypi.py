@@ -23,7 +23,7 @@ from repology.parsers import Parser
 
 
 class PyPiHTMLParser(Parser):
-    def Parse(self, path):
+    def iter_parse(self, path, logger):
         packages = {}
 
         with open(path, 'r', encoding='utf-8') as htmlfile:
@@ -44,4 +44,4 @@ class PyPiHTMLParser(Parser):
 
                 packages[pkg.name] = pkg
 
-        return [package for package in packages.values()]
+        yield from packages.values()

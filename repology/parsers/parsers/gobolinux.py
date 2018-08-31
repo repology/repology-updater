@@ -36,9 +36,7 @@ def ExpandDownloadUrlTemplates(url):
 
 
 class GoboLinuxGitParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         trunk_path = os.path.join(path, 'trunk')
         for package_name in os.listdir(trunk_path):
             package_path = os.path.join(trunk_path, package_name)
@@ -96,6 +94,4 @@ class GoboLinuxGitParser(Parser):
                     if 'Homepage' in data:
                         pkg.homepage = data['Homepage'].strip('"')
 
-            result.append(pkg)
-
-        return result
+            yield pkg

@@ -41,9 +41,7 @@ def SanitizeVersion(version):
 
 
 class DPortsIndexParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 fields = line.strip().split('|')
@@ -67,6 +65,4 @@ class DPortsIndexParser(Parser):
                 pkg.extrafields['portname'] = path[-1]
                 pkg.extrafields['origin'] = '/'.join(path[-2:])
 
-                result.append(pkg)
-
-        return result
+                yield pkg

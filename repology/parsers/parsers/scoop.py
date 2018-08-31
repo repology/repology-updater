@@ -24,9 +24,7 @@ from repology.parsers import Parser
 
 
 class ScoopGitParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for root, dirs, files in os.walk(path):
             for filename in files:
                 jsonpath = os.path.join(root, filename)
@@ -58,6 +56,4 @@ class ScoopGitParser(Parser):
 
                 pkg.extrafields = {'path': os.path.relpath(jsonpath, path)}
 
-                result.append(pkg)
-
-        return result
+                yield pkg

@@ -22,9 +22,7 @@ from repology.parsers import Parser
 
 
 class RudixHTMLParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for row in lxml.html.parse(path).getroot().xpath('.//table')[0].xpath('./tbody/tr'):
             pkg = Package()
 
@@ -33,6 +31,4 @@ class RudixHTMLParser(Parser):
             pkg.comment = row.xpath('./td[3]')[0].text
             pkg.licenses = [row.xpath('./td[4]')[0].text]
 
-            result.append(pkg)
-
-        return result
+            yield pkg

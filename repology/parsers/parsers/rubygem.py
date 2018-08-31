@@ -28,7 +28,7 @@ class RubyGemParser(Parser):
         else:
             return str(var, 'UTF-8')
 
-    def Parse(self, path):
+    def iter_parse(self, path, logger):
         packages = {}
 
         with open(path, 'rb') as fd:
@@ -42,4 +42,4 @@ class RubyGemParser(Parser):
                     pkg.homepage = 'https://rubygems.org/gems/' + pkg.name
                     packages[pkg.name] = pkg
 
-        return [package for package in packages.values()]
+        yield from packages.values()

@@ -25,12 +25,8 @@ from repology.parsers.walk import walk_tree
 
 
 class NSTPkgInfoXMLParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for filename in walk_tree(path, suffix='pkginfo.xml'):
             root = xml.etree.ElementTree.parse(filename)
             # XXX: fails on unknown entity NST_RELEASE_SUFFIX
             # and dtd is not usable as it needs preprocessing
-
-        return result

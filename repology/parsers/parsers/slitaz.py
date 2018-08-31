@@ -26,8 +26,6 @@ class SliTazInfoParser(Parser):
         self.numfields = numfields
 
     def iter_parse(self, path, logger):
-        result = []
-
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 fields = line.split('\t')
@@ -43,6 +41,4 @@ class SliTazInfoParser(Parser):
                 pkg.comment = fields[3]
                 pkg.homepage = fields[4]
 
-                result.append(pkg)
-
-        return result
+                yield pkg

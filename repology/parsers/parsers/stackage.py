@@ -22,9 +22,7 @@ from repology.parsers import Parser
 
 
 class StackageHTMLParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for row in lxml.html.parse(path).getroot().xpath('.//div[@class="packages"]/table/tbody/tr'):
             pkg = Package()
 
@@ -35,6 +33,4 @@ class StackageHTMLParser(Parser):
             if synopsis:
                 pkg.comment = synopsis.replace('\n', ' ')
 
-            result.append(pkg)
-
-        return result
+            yield pkg

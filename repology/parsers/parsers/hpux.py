@@ -20,9 +20,7 @@ from repology.parsers import Parser
 
 
 class HPPADepothelperListParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 pkgname, pkgpath = line.strip().split('|')[:2]
@@ -33,6 +31,4 @@ class HPPADepothelperListParser(Parser):
 
                 pkg.extrafields['path'] = pkgpath
 
-                result.append(pkg)
-
-        return result
+                yield pkg

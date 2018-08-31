@@ -58,9 +58,7 @@ def SanitizeVersion(version):
 
 
 class DebianSourcesParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, encoding='utf-8', errors='ignore') as file:
             current_data = {}
             last_key = None
@@ -98,7 +96,7 @@ class DebianSourcesParser(Parser):
                     #    pkg.comment = ' '.join(pkg.comment)
 
                     if pkg.name and pkg.version:
-                        result.append(pkg)
+                        yield pkg
                     else:
                         print('WARNING: unable to parse package {}'.format(str(current_data)), file=sys.stderr)
 
@@ -125,5 +123,3 @@ class DebianSourcesParser(Parser):
                     continue
 
                 print('WARNING: unable to parse line: {}'.format(line), file=sys.stderr)
-
-        return result

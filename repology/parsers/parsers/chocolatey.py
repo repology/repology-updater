@@ -23,9 +23,7 @@ from repology.parsers import Parser
 
 
 class ChocolateyParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for pagepath in os.listdir(path):
             if not pagepath.endswith('.xml'):
                 continue
@@ -42,6 +40,4 @@ class ChocolateyParser(Parser):
                 if commentnode is not None:
                     pkg.comment = commentnode.text
 
-                result.append(pkg)
-
-        return result
+                yield pkg

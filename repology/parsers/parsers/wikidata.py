@@ -31,9 +31,7 @@ def SimplifyResult(injson):
 
 
 class WikidataJsonParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         jsondata = None
         with open(path, 'r', encoding='utf-8') as jsonfile:
             jsondata = json.load(jsonfile)
@@ -85,6 +83,4 @@ class WikidataJsonParser(Parser):
                     if packagedata['websites']:
                         pkg.homepage = packagedata['websites'].split(', ')[0]  # XXX: use all websites when supported
 
-                    result.append(pkg)
-
-        return result
+                    yield pkg

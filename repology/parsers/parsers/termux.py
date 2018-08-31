@@ -35,9 +35,7 @@ def SanitizeVersion(version):
 
 
 class TermuxJsonParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for packagedata in json.load(jsonfile):
                 pkg = Package()
@@ -56,6 +54,4 @@ class TermuxJsonParser(Parser):
                 else:
                     pkg.maintainers = extract_maintainers(packagedata['maintainer'])
 
-                result.append(pkg)
-
-        return result
+                yield pkg

@@ -41,9 +41,7 @@ def SanitizeVersion(version):
 
 
 class OpenBSDIndexParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, encoding='utf-8') as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
@@ -66,6 +64,4 @@ class OpenBSDIndexParser(Parser):
                 pkg.extrafields['portname'] = origin.split('/')[1]
                 pkg.extrafields['origin'] = origin
 
-                result.append(pkg)
-
-        return result
+                yield pkg

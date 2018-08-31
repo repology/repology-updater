@@ -24,9 +24,7 @@ from repology.parsers.maintainers import extract_maintainers
 
 
 class SlackBuildsParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for category in os.listdir(path):
             if category.startswith('.'):
                 continue
@@ -83,8 +81,6 @@ class SlackBuildsParser(Parser):
                             pkg.downloads.extend(variables[key].split())
 
                     if pkg.name is not None and pkg.version is not None:
-                        result.append(pkg)
+                        yield pkg
                     else:
                         print('WARNING: {} skipped, likely due to parsing problems'.format(info_path), file=sys.stderr)
-
-        return result

@@ -37,9 +37,7 @@ def SanitizeVersion(version):
 
 
 class MSYS2Parser(Parser):
-    def Parse(self, path):
-        packages = []
-
+    def iter_parse(self, path, logger):
         for packagedir in os.listdir(path):
             with open(os.path.join(path, packagedir, 'desc'), 'r', encoding='utf-8') as descfile:
                 key = None
@@ -80,6 +78,4 @@ class MSYS2Parser(Parser):
                 if 'GROUPS' in data:
                     pkg.category = data['GROUPS'][0]
 
-                packages.append(pkg)
-
-        return packages
+                yield pkg

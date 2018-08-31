@@ -35,9 +35,7 @@ def SanitizeVersion(version):
 
 
 class ExherboGitParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         maintainers = []
 
         with open(os.path.join(path, 'metadata/about.conf'), 'r', encoding='utf-8') as metadata:
@@ -76,6 +74,4 @@ class ExherboGitParser(Parser):
                     if pkg.version == 'scm' or pkg.version.endswith('-scm'):
                         pkg.SetFlag(PackageFlags.rolling)
 
-                    result.append(pkg)
-
-        return result
+                    yield pkg

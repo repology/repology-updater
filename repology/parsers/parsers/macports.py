@@ -41,9 +41,7 @@ class MacPortsParser(Parser):
     def __init__(self):
         self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
 
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with subprocess.Popen(
             [config['TCLSH'], self.helperpath, path],
             errors='ignore',
@@ -95,6 +93,4 @@ class MacPortsParser(Parser):
                 pkg.extrafields['portdir'] = pkgdata['portdir']
                 pkg.extrafields['portname'] = pkgdata['portdir'].split('/')[1]
 
-                result.append(pkg)
-
-        return result
+                yield pkg

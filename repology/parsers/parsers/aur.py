@@ -45,9 +45,7 @@ def SanitizeVersion(version):
 
 
 class AURParser(Parser):
-    def Parse(self, path):
-        packages = []
-
+    def iter_parse(self, path, logger):
         for filename in os.listdir(path):
             if not filename.endswith('.json'):
                 continue
@@ -69,6 +67,4 @@ class AURParser(Parser):
                     if 'Maintainer' in result and result['Maintainer']:
                         pkg.maintainers += extract_maintainers(result['Maintainer'] + '@aur')
 
-                    packages.append(pkg)
-
-        return packages
+                    yield pkg

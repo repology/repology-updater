@@ -67,9 +67,7 @@ def SanitizeVersion(version):
 
 
 class GentooGitParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for category in os.listdir(path):
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):
@@ -140,6 +138,4 @@ class GentooGitParser(Parser):
                                 elif key == 'SRC_URI':
                                     pkg.downloads += ParseConditionalExpr(value)
 
-                    result.append(pkg)
-
-        return result
+                    yield pkg

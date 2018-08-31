@@ -21,9 +21,7 @@ from repology.parsers.nevra import filename2nevra
 
 
 class RPMFTPListParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path) as listfile:
             for line in listfile:
                 filename = line.strip().split()[-1]
@@ -37,6 +35,4 @@ class RPMFTPListParser(Parser):
 
                 pkg.extrafields['nevr'] = filename.rsplit('.', 2)[0]
 
-                result.append(pkg)
-
-        return result
+                yield pkg

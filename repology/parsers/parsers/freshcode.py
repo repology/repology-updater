@@ -24,7 +24,7 @@ from repology.parsers import Parser
 
 
 class FreshcodeParser(Parser):
-    def Parse(self, path):
+    def iter_parse(self, path, logger):
         result = {}
 
         # note that we actually parse database prepared by
@@ -68,4 +68,4 @@ class FreshcodeParser(Parser):
                 if pkg.name not in result or version_compare(pkg.version, result[pkg.name].version) > 0:
                     result[pkg.name] = pkg
 
-        return result.values()
+        yield from result.values()

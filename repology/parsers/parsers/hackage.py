@@ -70,9 +70,7 @@ class HackageParser(Parser):
 
         return cabaldata
 
-    def Parse(self, path):
-        packages = []
-
+    def iter_parse(self, path, logger):
         for moduledir in os.listdir(path):
             modulepath = os.path.join(path, moduledir)
 
@@ -113,6 +111,4 @@ class HackageParser(Parser):
             else:
                 print('WARNING: cabal data sanity check failed for {}, ignoring cabal data'.format(cabalpath), file=sys.stderr)
 
-            packages.append(pkg)
-
-        return packages
+            yield pkg

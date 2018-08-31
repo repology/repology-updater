@@ -22,9 +22,7 @@ from repology.parsers import Parser
 
 
 class CRANCheckSummaryParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         with open(path, 'r', encoding='utf-8') as htmlfile:
             for match in re.findall('<tr> <td> <a href="[^"]+">([^<>]+)</a> </td> <td>[ ]*([^ <>]+)[ ]*</td>', htmlfile.read()):
                 pkg = Package()
@@ -32,6 +30,4 @@ class CRANCheckSummaryParser(Parser):
                 pkg.version = match[1]
                 pkg.homepage = 'https://cran.r-project.org/web/packages/{}/index.html'.format(match[0])
 
-                result.append(pkg)
-
-        return result
+                yield pkg

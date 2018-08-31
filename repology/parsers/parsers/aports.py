@@ -37,9 +37,7 @@ def SanitizeVersion(version):
 
 
 class ApkIndexParser(Parser):
-    def Parse(self, path):
-        packages = []
-
+    def iter_parse(self, path, logger):
         with open(os.path.join(path, 'APKINDEX'), 'r', encoding='utf-8') as apkindex:
             state = {}
             for line in apkindex:
@@ -62,8 +60,6 @@ class ApkIndexParser(Parser):
                     if 'm' in state:
                         pkg.maintainers = extract_maintainers(state['m'])
 
-                    packages.append(pkg)
+                    yield pkg
 
                 state = {}
-
-        return packages

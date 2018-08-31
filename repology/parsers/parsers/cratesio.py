@@ -23,9 +23,7 @@ from repology.parsers import Parser
 
 
 class CratesIOParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         for pagefilename in os.listdir(path):
             if not pagefilename.endswith('.json'):
                 continue
@@ -47,6 +45,4 @@ class CratesIOParser(Parser):
                     elif crate['repository']:
                         pkg.homepage = crate['repository']
 
-                    result.append(pkg)
-
-        return result
+                    yield pkg

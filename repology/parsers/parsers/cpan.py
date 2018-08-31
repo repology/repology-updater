@@ -23,7 +23,7 @@ from repology.parsers.maintainers import extract_maintainers
 
 
 class CPANPackagesParser(Parser):
-    def Parse(self, path):
+    def iter_parse(self, path, logger):
         # Since data we get from CPAN is somewhat lacking, we need
         # somewhat complex parsing. Here's the example of what we get
         # in 02packages.details.txt package index downloaded from CPAN:
@@ -43,8 +43,6 @@ class CPANPackagesParser(Parser):
         # equal to package name. Some entries are lost, some entries
         # are not even in 02packages.details.txt, some are unparsable
         # (no version, or garbage in version) but these are negligible.
-        result = []
-
         with open(path) as packagesfile:
             parsing = False
             for line in packagesfile:
@@ -90,6 +88,4 @@ class CPANPackagesParser(Parser):
                 pkg.maintainers = extract_maintainers(package_path.split('/')[2].lower() + '@cpan')
                 pkg.homepage = 'http://search.cpan.org/dist/' + package_name + '/'
 
-                result.append(pkg)
-
-        return result
+                yield pkg

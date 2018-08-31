@@ -23,9 +23,7 @@ from repology.parsers import Parser
 
 
 class LibreGameWikiParser(Parser):
-    def Parse(self, path):
-        result = []
-
+    def iter_parse(self, path, logger):
         root = xml.etree.ElementTree.parse(path)
 
         content = root.find('.//div[@id="mw-content-text"]')
@@ -61,6 +59,4 @@ class LibreGameWikiParser(Parser):
             # category
             pkg.category = 'games'
 
-            result.append(pkg)
-
-        return result
+            yield pkg
