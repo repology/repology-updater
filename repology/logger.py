@@ -99,3 +99,18 @@ class FastFileLogger(Logger):
 class StderrLogger(Logger):
     def _write_log(self, message, severity):
         print(time.strftime('%b %d %T ') + message, file=sys.stderr)
+
+
+class AccumulatingLogger(Logger):
+    def __init__(self):
+        self.entries = []
+
+    def _write_log(self, message, severity):
+        self.entries.append((message, severity))
+
+    def get(self):
+        return self.entries
+
+    def forward(self, otherlogger):
+        for message, severity in self.entries:
+            otherlogger.log(message, severity)
