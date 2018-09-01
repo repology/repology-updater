@@ -1,0 +1,23 @@
+###########################################################################
+# Adélie Linux packages
+###########################################################################
+- name: adelie_current
+  type: repository
+  desc: Adélie Linux current
+  family: adelie
+  ruleset: adelie
+  color: '#880000'
+  minpackages: 900
+  sources:
+    - name: [ system, user ]
+      fetcher: WgetTarFetcher
+      parser: ApkIndexParser
+      url: 'https://distfiles.adelielinux.org/adelie/current/{source}/ppc64/APKINDEX.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Adélie Linux home
+      url: https://adelielinux.org/
+  packagelinks:
+    - desc: APKBUILD
+      url: 'https://code.foxkit.us/adelie/packages/blob/master/{subrepo}/{name}/APKBUILD'
+  tags: [ all, production, adelie ]
