@@ -38,6 +38,7 @@ version are always parsed.
 
 | Repository                       | Summary | Maint-r | Categ | WWW   | License | Download |
 |----------------------------------|:-------:|:-------:|:-----:|:-----:|:-------:|:--------:|
+| Adélie                           | ✔       | ✔       |       | ✔     | ✔       |          |
 | AIX Open Source Packages         |         |         |       |       |         |          |
 | Alpine                           | ✔       | ✔       |       | ✔     | ✔       |          |
 | ALT Sisyphus                     | ✔       | ✔       | ✔     |       |         |          |
