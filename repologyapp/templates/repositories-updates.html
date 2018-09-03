@@ -50,7 +50,7 @@
 				{%- endif -%}
 			>
 			<td class="text-right"><a href="{{ url_for('repository', repo=repo.name) }}">{{ repometadata[repo.name].desc }}</a></td>
-			<td class="text-center">{% if repo.current_run_id %}<b><a href="{{ url_for('log', run_id=repo.current_run_id) }}">{{ repo.current_run_type }}, {{ macros.format_time_interval_short(repo.current_run_duration) }}</a></b>{% else %}-{% endif %}</td>
+			<td class="text-center">{% if repo.current_run_id %}<b><a href="{{ url_for('log', run_id=repo.current_run_id) }}" rel="noindex,nofollow">{{ repo.current_run_type }}, {{ macros.format_time_interval_short(repo.current_run_duration) }}</a></b>{% else %}-{% endif %}</td>
 			<td class="text-center">{{ update_run_info(repo.last_successful_fetch_run_id, repo.last_successful_fetch_ago, repo.last_successful_fetch_errors, repo.last_successful_fetch_warnings) }}</td>
 			<td class="text-center">{{ update_run_info(repo.last_failed_fetch_run_id, repo.last_failed_fetch_ago, repo.last_failed_fetch_errors, repo.last_failed_fetch_warnings) }}</td>
 			<td class="text-center">{{ update_run_info(repo.last_successful_parse_run_id, repo.last_successful_parse_ago, repo.last_successful_parse_errors, repo.last_successful_parse_warnings) }}</td>
