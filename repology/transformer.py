@@ -188,6 +188,14 @@ class PackageTransformer:
             if version_compare(package.version, rule['verle']) > 0:
                 return RuleApplyResult.unmatched
 
+        if 'vereq' in rule:
+            if version_compare(package.version, rule['vereq']) != 0:
+                return RuleApplyResult.unmatched
+
+        if 'verne' in rule:
+            if version_compare(package.version, rule['verne']) == 0:
+                return RuleApplyResult.unmatched
+
         # match name patterns
         if 'wwwpat' in rule:
             if not package.homepage or not rule['wwwpat'].fullmatch(package.homepage):

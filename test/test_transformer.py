@@ -242,6 +242,22 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p3', 'version': '1.1', 'expect_effname': 'p3'}
         )
 
+    def test_match_vereq(self):
+        self.check_transformer(
+            '[ { vereq: "1.0", setname: bar } ]',
+            {'name': 'p1', 'version': '0.9', 'expect_effname': 'p1'},
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'bar'},
+            {'name': 'p3', 'version': '1.1', 'expect_effname': 'p3'}
+        )
+
+    def test_match_verne(self):
+        self.check_transformer(
+            '[ { verne: "1.0", setname: bar } ]',
+            {'name': 'p1', 'version': '0.9', 'expect_effname': 'bar'},
+            {'name': 'p2', 'version': '1.0', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '1.1', 'expect_effname': 'bar'}
+        )
+
     def test_match_wwwpat(self):
         self.check_transformer(
             '[ { wwwpat: "https?://foo\\\\.com/.*", setname: bar } ]',
