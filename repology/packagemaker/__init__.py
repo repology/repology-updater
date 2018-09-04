@@ -18,7 +18,7 @@
 from copy import deepcopy
 from functools import wraps
 
-from repology.logger import Logger, NoopLogger
+from repology.logger import Logger
 from repology.package import Package
 from repology.packagemaker import normalizers as nzs
 
@@ -93,7 +93,7 @@ class PackageMakerBase:
 
 
 class PackageMaker(PackageMakerBase):
-    def __init__(self, logger=NoopLogger()):
+    def __init__(self, logger):
         super(PackageMaker, self).__init__(logger)
         self.package = Package()
 
