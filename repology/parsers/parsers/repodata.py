@@ -16,9 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import sys
 import xml.etree.ElementTree
 
+from repology.logger import Logger
 from repology.package import Package, PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -93,4 +93,4 @@ class RepodataParser(Parser):
             yield pkg
 
         for arch, numpackages in sorted(skipped_archs.items()):
-            print('WARNING: skipping {} packages(s) with disallowed architecture {}'.format(numpackages, arch), file=sys.stderr)
+            logger.log('skipping {} packages(s) with disallowed architecture {}'.format(numpackages, arch), severity=Logger.ERROR)

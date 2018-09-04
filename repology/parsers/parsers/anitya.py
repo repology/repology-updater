@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 
@@ -33,7 +33,7 @@ class AnityaApiParser(Parser):
                 pkg.homepage = project['homepage']
 
                 if pkg.version is None:
-                    print('no version: {}'.format(pkg.name), file=sys.stderr)
+                    logger.log('no version: {}'.format(pkg.name), severity=Logger.ERROR)
                     continue
 
                 if pkg.version.startswith('v'):

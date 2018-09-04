@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -78,7 +78,7 @@ class DebianSourcesParser(Parser):
                             if type_ is None or isinstance(current_data[key], type_):
                                 return current_data[key]
                             else:
-                                print('WARNING: unable to parse field {}'.format(key), file=sys.stderr)
+                                logger.log('unable to parse field {}'.format(key), severity=Logger.ERROR)
                                 return default
                         else:
                             return default
@@ -98,7 +98,7 @@ class DebianSourcesParser(Parser):
                     if pkg.name and pkg.version:
                         yield pkg
                     else:
-                        print('WARNING: unable to parse package {}'.format(str(current_data)), file=sys.stderr)
+                        logger.log('unable to parse package {}'.format(str(current_data)), severity=Logger.ERROR)
 
                     current_data = {}
                     last_key = None
@@ -122,4 +122,4 @@ class DebianSourcesParser(Parser):
                     current_data[last_key].append(value)
                     continue
 
-                print('WARNING: unable to parse line: {}'.format(line), file=sys.stderr)
+                logger.log('unable to parse line: {}'.format(line), severity=Logger.ERROR)

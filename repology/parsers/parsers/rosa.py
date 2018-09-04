@@ -16,9 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import sys
 import xml.etree.ElementTree
 
+from repology.logger import Logger
 from repology.package import Package, PackageFlags
 from repology.parsers import Parser
 
@@ -33,7 +33,7 @@ class RosaInfoXmlParser(Parser):
             # derive names and versions from fn field
             fn = info.attrib['fn'].rsplit('-', 2)
             if len(fn) < 3:
-                print('WARNING: unable to parse fn: {}'.format(fn), file=sys.stderr)
+                logger.log('unable to parse fn: {}'.format(fn), severity=Logger.ERROR)
                 continue
 
             pkg.name = fn[0]

@@ -15,8 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
-
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -46,7 +45,7 @@ class FreeBSDIndexParser(Parser):
             for line in indexfile:
                 fields = line.strip().split('|')
                 if len(fields) != 13:
-                    print('WARNING: package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), file=sys.stderr)
+                    logger.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
                     continue
 
                 pkg = Package()

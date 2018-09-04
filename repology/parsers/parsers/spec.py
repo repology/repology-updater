@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 
@@ -54,4 +54,4 @@ class SpecParser(Parser):
                     if pkg.name is not None and pkg.version is not None:
                         yield pkg
                     else:
-                        print('WARNING: %s skipped, likely due to parsing problems' % filename, file=sys.stderr)
+                        logger.log('%s skipped, likely due to parsing problems' % filename, severity=Logger.ERROR)

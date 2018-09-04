@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -40,7 +40,7 @@ class SlackBuildsParser(Parser):
 
                 info_path = os.path.join(category_path, package, package + '.info')
                 if not os.path.isfile(info_path):
-                    print('WARNING: {} does not exist, package skipped'.format(info_path), file=sys.stderr)
+                    logger.log('{} does not exist, package skipped'.format(info_path), severity=Logger.ERROR)
                     continue
 
                 with open(info_path, encoding='utf-8', errors='ignore') as infofile:
@@ -83,4 +83,4 @@ class SlackBuildsParser(Parser):
                     if pkg.name is not None and pkg.version is not None:
                         yield pkg
                     else:
-                        print('WARNING: {} skipped, likely due to parsing problems'.format(info_path), file=sys.stderr)
+                        logger.log('{} skipped, likely due to parsing problems'.format(info_path), severity=Logger.ERROR)

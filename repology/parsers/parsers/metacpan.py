@@ -17,10 +17,10 @@
 
 import json
 import os
-import sys
 
 from libversion import version_compare
 
+from repology.logger import Logger
 from repology.package import Package, PackageFlags
 from repology.parsers import Parser
 
@@ -69,7 +69,7 @@ class MetacpanAPIParser(Parser):
             pkg = MetacpanAPIParser.parse_package(fields)
 
             if not pkg.version:
-                print('{}: empty version {}'.format(pkg.name, pkg.version), file=sys.stderr)
+                logger.log('{}: empty version {}'.format(pkg.name, pkg.version), severity=Logger.ERROR)
                 continue
 
             latest_versions[pkg.name] = pkg.version
@@ -86,7 +86,7 @@ class MetacpanAPIParser(Parser):
             pkg = MetacpanAPIParser.parse_package(fields)
 
             if not pkg.version:
-                print('{}: empty version {}'.format(pkg.name, pkg.version), file=sys.stderr)
+                logger.log('{}: empty version {}'.format(pkg.name, pkg.version), severity=Logger.ERROR)
                 continue
 
             if version_compare(pkg.version, latest_versions.get(pkg.name, '0')) > 0:

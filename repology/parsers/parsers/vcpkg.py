@@ -17,8 +17,8 @@
 
 import os
 import re
-import sys
 
+from repology.logger import Logger
 from repology.package import Package, PackageFlags
 from repology.parsers import Parser
 
@@ -68,12 +68,12 @@ class VcpkgGitParser(Parser):
                 with open(portfilepath, 'r', encoding='utf-8', errors='ignore') as portfile:
                     for line in portfile:
                         if 'libimobiledevice-win32' in line:
-                            print('WARNING: marking version for {} as untrusted, https://github.com/libimobiledevice-win32 accused of version faking'.format(pkg.name), file=sys.stderr)
+                            logger.log('marking version for {} as untrusted, https://github.com/libimobiledevice-win32 accused of version faking'.format(pkg.name), severity=Logger.ERROR)
                             pkg.SetFlag(PackageFlags.untrusted)
                             break
 
             if not pkg.version:
-                print('WARNING: unable to parse port {}: no version'.format(pkgdir), file=sys.stderr)
+                logger.log('unable to parse port {}: no version'.format(pkgdir), severity=Logger.ERROR)
                 continue
 
             yield pkg

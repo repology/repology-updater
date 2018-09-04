@@ -17,8 +17,8 @@
 
 import json
 import shlex
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 
@@ -30,7 +30,7 @@ class OpenIndianaSummaryJsonParser(Parser):
             tokens = shlex.split(action)
 
             if not tokens or tokens.pop(0) != 'set':
-                print('WARNING: unrecognized action ' + action, file=sys.stderr)
+                logger.log('unrecognized action ' + action, severity=Logger.ERROR)
                 continue
 
             key = None
@@ -44,7 +44,7 @@ class OpenIndianaSummaryJsonParser(Parser):
                 elif token.startswith('last-fmri='):
                     pass
                 else:
-                    print('WARNING: unrecognized token ' + token, file=sys.stderr)
+                    logger.log('unrecognized token ' + token, severity=Logger.ERROR)
                     continue
 
             if key and value:

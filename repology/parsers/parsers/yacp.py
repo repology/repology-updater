@@ -17,8 +17,8 @@
 
 import os
 import re
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 
@@ -51,7 +51,7 @@ class YACPGitParser(Parser):
                 match = re.match('(.*)-[0-9]+bl[0-9]+\.cygport$', cygport)
 
                 if not match:
-                    print('WARNING: unable to parse cygport: {}'.format(cygport), file=sys.stderr)
+                    logger.log('unable to parse cygport: {}'.format(cygport), severity=Logger.ERROR)
                     continue
 
                 pkg = Package()

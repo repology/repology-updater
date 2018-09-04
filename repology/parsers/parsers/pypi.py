@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 
@@ -34,9 +34,9 @@ class PyPiHTMLParser(Parser):
 
                 comment = match[2].strip()
                 if comment == '':
-                    print('{}: summary is empty'.format(pkg.name), file=sys.stderr)
+                    logger.log('{}: summary is empty'.format(pkg.name), severity=Logger.ERROR)
                 elif '\n' in comment:
-                    print('{}: summary is multiline'.format(pkg.name), file=sys.stderr)
+                    logger.log('{}: summary is multiline'.format(pkg.name), severity=Logger.ERROR)
                 else:
                     pkg.comment = comment
 

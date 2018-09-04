@@ -17,8 +17,8 @@
 
 import os
 import re
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 
@@ -52,7 +52,7 @@ class HaikuPortsFilenamesParser(Parser):
                     name, version = recipe[:-7].split('-', 1)
 
                     if package.replace('-', '_') != name:
-                        print('WARNING: mismatch for package directory and recipe name: {} != {}'.format(package, name), file=sys.stderr)
+                        logger.log('mismatch for package directory and recipe name: {} != {}'.format(package, name), severity=Logger.WARNING)
 
                     pkg.version = version
 

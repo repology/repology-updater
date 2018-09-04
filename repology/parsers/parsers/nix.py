@@ -17,8 +17,8 @@
 
 import json
 import re
-import sys
 
+from repology.logger import Logger
 from repology.package import Package, PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -51,7 +51,7 @@ def extract_nix_licenses(whatever):
     elif isinstance(whatever, dict) and 'fullname' in whatever:
         return [whatever['fullname']]
     else:
-        print('unable to parse license {}'.format(whatever), file=sys.stderr)
+        logger.log('unable to parse license {}'.format(whatever), severity=Logger.ERROR)
         return []
 
 
@@ -66,7 +66,7 @@ class NixJsonParser(Parser):
                 # this doesn't work well on 100% cases, it's an upstream problem
                 match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
                 if not match:
-                    print('cannot extract version: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
+                    logger.log('cannot extract version: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
                     continue
 
                 pkg = Package()
@@ -97,7 +97,7 @@ class NixJsonParser(Parser):
                     pkg.SetFlag(PackageFlags.ignore)
 
                 if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
-                    print('ignoring version which looks like commit hash: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
+                    logger.log('ignoring version which looks like commit hash: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
                     pkg.SetFlag(PackageFlags.ignore)
 
                 meta = packagedata['meta']
@@ -112,7 +112,7 @@ class NixJsonParser(Parser):
 
                 if 'maintainers' in meta:
                     if not isinstance(meta['maintainers'], list):
-                        print('maintainers is not a list: {}/{}'.format(key, packagedata['name']), file=sys.stderr)
+                        logger.log('maintainers is not a list: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
                     else:
                         pkg.maintainers += list(extract_nix_maintainers(meta['maintainers']))
 

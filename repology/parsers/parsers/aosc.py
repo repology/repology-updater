@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-import sys
 
+from repology.logger import Logger
 from repology.package import Package, PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -45,7 +45,7 @@ class AoscPkgsParser(Parser):
                 pkg.name = package['name']
 
                 if package['version'] is None:
-                    print('no version: {}'.format(pkg.name), file=sys.stderr)
+                    logger.log('no version: {}'.format(pkg.name), severity=Logger.ERROR)
                     continue
 
                 pkg.version, _ = SanitizeVersion(package['version'])

@@ -16,9 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-import sys
 
-
+from repology.logger import Logger
 from repology.package import Package, PackageFlags
 from repology.parsers import Parser
 
@@ -57,11 +56,11 @@ class WikidataJsonParser(Parser):
                     is_foreign_platform_release = 'p' in flags and 'P' not in flags
 
                     if is_foreign_os_release:
-                        print('WARNING: {} ({}) version {} skipped due to bad OS'.format(packagedata['projectLabel'], entity, version), file=sys.stderr)
+                        logger.log('{} ({}) version {} skipped due to bad OS'.format(packagedata['projectLabel'], entity, version), severity=Logger.WARNING)
                         continue
 
                     if is_foreign_platform_release:
-                        print('WARNING: {} ({}) version {} skipped due to bad Platform'.format(packagedata['projectLabel'], entity, version), file=sys.stderr)
+                        logger.log('{} ({}) version {} skipped due to bad Platform'.format(packagedata['projectLabel'], entity, version), severity=Logger.WARNING)
                         continue
 
                     pkg = Package()

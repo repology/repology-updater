@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -56,7 +56,7 @@ class MSYS2Parser(Parser):
                         value.append(line)
 
                 if 'BASE' in data and data['NAME'][0] != data['BASE'][0]:
-                    print('{} skipped, subpackage'.format(data['NAME'][0]), file=sys.stderr)
+                    logger.log('{} skipped, subpackage'.format(data['NAME'][0]), severity=Logger.WARNING)
                     continue
 
                 pkg = Package()

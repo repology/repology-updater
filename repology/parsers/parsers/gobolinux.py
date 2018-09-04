@@ -17,10 +17,10 @@
 
 import os
 import re
-import sys
 
 from libversion import version_compare
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 
@@ -47,7 +47,7 @@ class GoboLinuxGitParser(Parser):
                     maxversion = version_name
 
             if maxversion is None:
-                print('WARNING: no usable versions for package {}'.format(package_name), file=sys.stderr)
+                logger.log('no usable versions for package {}'.format(package_name), severity=Logger.ERROR)
                 continue
 
             recipe_path = os.path.join(package_path, maxversion, 'Recipe')
@@ -67,7 +67,7 @@ class GoboLinuxGitParser(Parser):
                             if '$' not in download:
                                 pkg.downloads.append(download.strip('"'))
                             else:
-                                print('WARNING: Recipe for {}/{} skipped, unhandled URL substitude found'.format(package_name, maxversion), file=sys.stderr)
+                                logger.log('Recipe for {}/{} skipped, unhandled URL substitude found'.format(package_name, maxversion), severity=Logger.ERROR)
 
             if os.path.isfile(description_path):
                 with open(description_path, 'r', encoding='utf-8', errors='ignore') as description:
@@ -80,7 +80,7 @@ class GoboLinuxGitParser(Parser):
                             current_tag = match.group(1)
                             data[current_tag] = match.group(2)
                         elif current_tag is None:
-                            print('WARNING: Description for {}/{} skipped, dumb format'.format(package_name, maxversion), file=sys.stderr)
+                            logger.log('Description for {}/{} skipped, dumb format'.format(package_name, maxversion), severity=Logger.ERROR)
                             break
                         elif line:
                             if data[current_tag]:

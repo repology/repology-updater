@@ -16,8 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import sys
 
+from repology.logger import Logger
 from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -42,10 +42,10 @@ class PkgsrcIndexParser(Parser):
             for line in indexfile:
                 fields = line.strip().split('|')
                 if len(fields) != 12:
-                    print('WARNING: package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), file=sys.stderr)
+                    logger.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
                     continue
                 if not fields[0]:
-                    print('WARNING: line {} bogus, critical fields are empty'.format(line.strip()), file=sys.stderr)
+                    logger.log('line {} bogus, critical fields are empty'.format(line.strip()), severity=Logger.ERROR)
                     continue
 
                 pkg = Package()
