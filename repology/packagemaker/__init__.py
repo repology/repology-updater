@@ -182,11 +182,11 @@ class PackageMaker(PackageMakerBase):
         assert(isinstance(value, str))
         self.package.extrafields[key] = value
 
-    def get_package(self):
+    def unwrap(self):
         return self.package
 
-    def get_package_copy(self):
-        return deepcopy(self.package)
+    def clone(self):
+        return deepcopy(self)
 
     def check_sanity(self, verbose=False):
         if not self.package.name:
