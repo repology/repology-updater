@@ -203,3 +203,9 @@ class PackageMaker(PackageMakerBase):
 
     def __getattr__(self, key):
         return getattr(self.package, key)
+
+    # XXX: compatibility shim
+    def __setattr__(self, key, value):
+        if key in ['package', 'logger', 'ident']:
+            return super(PackageMaker, self).__setattr__(key, value)
+        return setattr(self.package, key, value)
