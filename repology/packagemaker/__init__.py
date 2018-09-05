@@ -23,7 +23,7 @@ from repology.package import Package
 from repology.packagemaker import normalizers as nzs
 
 
-__all__ = ['PackageMaker']
+__all__ = ['PackageFactory', 'PackageMaker']
 
 
 class PackageMakerBase:
@@ -209,3 +209,16 @@ class PackageMaker(PackageMakerBase):
         if key in ['package', 'logger', 'ident']:
             return super(PackageMaker, self).__setattr__(key, value)
         return setattr(self.package, key, value)
+
+
+class PackageFactory:
+    def __init__(self, logger):
+        self.logger = logger
+        self.itemno = 0
+
+    def begin(self, ident=None):
+        self.itemno += 1
+        return PackageMaker(self.logger, ident or 'item #{}'.format(self.itemno))
+
+    def log(self, message, severity=Logger.NOTICE):
+        self.logger.log(message, severity)
