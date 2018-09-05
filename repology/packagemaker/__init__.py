@@ -33,7 +33,7 @@ class PackageMakerBase:
     def _get_package_ident(self):
         return '?'
 
-    def log_for_package(self, message, severity):
+    def log(self, message, severity=Logger.NOTICE):
         self.logger.log(self._get_package_ident() + ': ' + message, severity)
 
     @staticmethod
@@ -51,7 +51,7 @@ class PackageMakerBase:
             value, error = normalizer(value)
 
             if error is not None:
-                self.log_for_package('{}: "{}" {}'.format(fieldname, origvalue, error), Logger.ERROR if value is None else Logger.WARNING)
+                self.log('{}: "{}" {}'.format(fieldname, origvalue, error), Logger.ERROR if value is None else Logger.WARNING)
 
             if value is None:
                 return None
@@ -62,7 +62,7 @@ class PackageMakerBase:
         output = []
         for arg in PackageMakerBase._flatten_args(args):
             if not isinstance(arg, want_type):
-                self.log_for_package('{}: "{}" expected type {}, got {}'.format(fieldname, arg, want_type.__name__, arg.__class__.__name__))
+                self.log('{}: "{}" expected type {}, got {}'.format(fieldname, arg, want_type.__name__, arg.__class__.__name__))
                 return None
 
             value = self._apply_normalizers(arg, fieldname, normalizers)
@@ -182,11 +182,11 @@ class PackageMaker(PackageMakerBase):
 
     def check_sanity(self):
         if not self.package.name:
-            self.log_for_package('package with no name', severity=Logger.ERROR)
+            self.log('package with no name', severity=Logger.ERROR)
             return False
 
         if not self.package.version:
-            self.log_for_package('package with no version', severity=Logger.ERROR)
+            self.log('package with no version', severity=Logger.ERROR)
             return False
 
         return True
