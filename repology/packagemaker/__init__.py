@@ -30,11 +30,11 @@ class PackageMakerBase:
     def __init__(self, logger):
         self.logger = logger
 
-    def _get_package_ident(self):
+    def _get_ident(self):
         return '?'
 
     def log(self, message, severity=Logger.NOTICE):
-        self.logger.log(self._get_package_ident() + ': ' + message, severity)
+        self.logger.log(self._get_ident() + ': ' + message, severity)
 
     @staticmethod
     def _flatten_args(args):
@@ -93,12 +93,13 @@ class PackageMakerBase:
 
 
 class PackageMaker(PackageMakerBase):
-    def __init__(self, logger):
+    def __init__(self, logger, ident):
         super(PackageMaker, self).__init__(logger)
         self.package = Package()
+        self.ident = ident
 
-    def _get_package_ident(self):
-        return self.package.extrafields.get('origin', None) or self.package.name or {k: v for k, v in self.package.__dict__.items() if v} or '?'
+    def _get_ident(self):
+        return self.package.extrafields.get('origin', None) or self.package.name or self.ident
 
     @PackageMakerBase._simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
     def set_origin(self, origin):
