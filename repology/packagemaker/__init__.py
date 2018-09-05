@@ -180,13 +180,15 @@ class PackageMaker(PackageMakerBase):
     def get_package_copy(self):
         return deepcopy(self.package)
 
-    def check_sanity(self):
+    def check_sanity(self, verbose=False):
         if not self.package.name:
-            self.log('package with no name', severity=Logger.ERROR)
+            if verbose:
+                self.log('package with no name', severity=Logger.ERROR)
             return False
 
         if not self.package.version:
-            self.log('package with no version', severity=Logger.ERROR)
+            if verbose:
+                self.log('package with no version', severity=Logger.ERROR)
             return False
 
         return True
