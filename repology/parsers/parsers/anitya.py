@@ -18,22 +18,21 @@
 import json
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class AnityaApiParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for project in json.load(jsonfile)['projects']:
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = project['name']
                 pkg.version = project['version']
                 pkg.homepage = project['homepage']
 
                 if pkg.version is None:
-                    logger.log('no version: {}'.format(pkg.name), severity=Logger.ERROR)
+                    factory.log('no version: {}'.format(pkg.name), severity=Logger.ERROR)
                     continue
 
                 if pkg.version.startswith('v'):

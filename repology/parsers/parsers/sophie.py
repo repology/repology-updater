@@ -17,17 +17,16 @@
 
 import lxml.html
 
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.nevra import filename2nevra
 
 
 class SophieHTMLParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for item in lxml.html.parse(path).getroot().xpath('.//div[@id="rpms_list"]/ul/li/a'):
             nevra = filename2nevra(item.text)
 
-            pkg = Package()
+            pkg = factory.begin()
 
             pkg.name = nevra[0]
             pkg.version = nevra[2]

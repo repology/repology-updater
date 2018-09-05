@@ -17,12 +17,12 @@
 
 import xml.etree.ElementTree
 
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
 class FDroidParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         root = xml.etree.ElementTree.parse(path)
 
         for application in root.findall('application'):
@@ -38,12 +38,14 @@ class FDroidParser(Parser):
                 version = package.find('version').text
 
                 if name and version:
-                    yield Package(
-                            name=name.strip(),
-                            version=version,
-                            licenses=[license_],
-                            category=category,
-                            homepage=www if www else None,
-                            extrafields={'id': appid},
-                            flags=PackageFlags.devel if version_code > upstream_version_code else 0,
-                        )
+                    pkg = factory.begin()
+
+                    pkg.name=name.strip()
+                    pkg.version=version
+                    pkg.licenses=[license_]
+                    pkg.category=category
+                    pkg.homepage=www if www else None
+                    pkg.extrafields={'id': appid}
+                    pkg.flags=PackageFlags.devel if version_code > upstream_version_code else 0
+
+                    yield pkg

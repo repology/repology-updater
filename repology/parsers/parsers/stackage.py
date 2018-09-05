@@ -17,14 +17,13 @@
 
 import lxml.html
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class StackageHTMLParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for row in lxml.html.parse(path).getroot().xpath('.//div[@class="packages"]/table/tbody/tr'):
-            pkg = Package()
+            pkg = factory.begin()
 
             pkg.name, pkg.version = row.xpath('./td[1]/a')[0].text.rsplit('-', 1)
 

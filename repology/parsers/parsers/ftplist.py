@@ -15,20 +15,19 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.nevra import filename2nevra
 
 
 class RPMFTPListParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path) as listfile:
             for line in listfile:
                 filename = line.strip().split()[-1]
 
                 nevra = filename2nevra(filename)
 
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = nevra[0]
                 pkg.version = nevra[2]

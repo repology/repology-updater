@@ -19,19 +19,18 @@ import json
 
 from libversion import version_compare
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class FreshcodeParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         result = {}
 
         # note that we actually parse database prepared by
         # fetcher, not the file we've downloaded
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for entry in json.load(jsonfile)['releases']:
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = entry['name']
                 pkg.version = entry['version']

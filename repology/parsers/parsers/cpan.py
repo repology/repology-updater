@@ -17,13 +17,12 @@
 
 import re
 
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
 class CPANPackagesParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         # Since data we get from CPAN is somewhat lacking, we need
         # somewhat complex parsing. Here's the example of what we get
         # in 02packages.details.txt package index downloaded from CPAN:
@@ -81,7 +80,7 @@ class CPANPackagesParser(Parser):
                     # Submodules not really needed
                     continue
 
-                pkg = Package()
+                pkg = factory.begin()
                 pkg.name = package_name
                 pkg.version = package_version
 

@@ -18,7 +18,6 @@
 import os
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -45,14 +44,14 @@ def SanitizeVersion(version):
 
 
 class ArchDBParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for package in os.listdir(path):
             desc_path = os.path.join(path, package, 'desc')
             if not os.path.isfile(desc_path):
                 continue
 
             with open(desc_path, encoding='utf-8') as file:
-                pkg = Package()
+                pkg = factory.begin()
 
                 tag = None
                 for line in file:
@@ -84,4 +83,4 @@ class ArchDBParser(Parser):
                 if pkg.name is not None and pkg.version is not None:
                     yield pkg
                 else:
-                    logger.log('{} skipped, likely due to parsing problems'.format(package), severity=Logger.ERROR)
+                    factory.log('{} skipped, likely due to parsing problems'.format(package), severity=Logger.ERROR)

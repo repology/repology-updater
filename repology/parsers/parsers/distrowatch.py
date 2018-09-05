@@ -17,14 +17,13 @@
 
 import lxml.html
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class DistrowatchPackagesParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="Auto"]')[0].xpath('./tr[position()>1]'):
-            pkg = Package()
+            pkg = factory.begin()
 
             # name + version
             cell = row.xpath('./th[1]/a[@href]')[0]

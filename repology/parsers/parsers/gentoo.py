@@ -18,7 +18,7 @@
 import os
 import xml.etree.ElementTree
 
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -67,7 +67,7 @@ def SanitizeVersion(version):
 
 
 class GentooGitParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for category in os.listdir(path):
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):
@@ -99,7 +99,7 @@ class GentooGitParser(Parser):
                     if not ebuild.endswith('.ebuild'):
                         continue
 
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     pkg.name = package
                     pkg.category = category

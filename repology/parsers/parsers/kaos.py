@@ -17,14 +17,13 @@
 
 import lxml.html
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class KaOSHTMLParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="ctable"]')[0].xpath('./form/tr[position()>3 and position()<last()-3]'):
-            pkg = Package()
+            pkg = factory.begin()
 
             name, version, revision = row.xpath('./td[1]/a')[0].text.rsplit('-', 2)
 

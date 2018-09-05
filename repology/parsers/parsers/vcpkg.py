@@ -19,7 +19,7 @@ import os
 import re
 
 from repology.logger import Logger
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
@@ -38,13 +38,14 @@ def SanitizeVersion(version):
 
 
 class VcpkgGitParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for pkgdir in os.listdir(os.path.join(path, 'ports')):
             controlpath = os.path.join(path, 'ports', pkgdir, 'CONTROL')
             if not os.path.exists(controlpath):
                 continue
 
-            pkg = Package(name=pkgdir)
+            pkg = factory.begin()
+            pkg.set_name(pkgdir)
 
             with open(controlpath, 'r', encoding='utf-8', errors='ignore') as controlfile:
                 for line in controlfile:
@@ -68,12 +69,12 @@ class VcpkgGitParser(Parser):
                 with open(portfilepath, 'r', encoding='utf-8', errors='ignore') as portfile:
                     for line in portfile:
                         if 'libimobiledevice-win32' in line:
-                            logger.log('marking version for {} as untrusted, https://github.com/libimobiledevice-win32 accused of version faking'.format(pkg.name), severity=Logger.ERROR)
+                            factory.log('marking version for {} as untrusted, https://github.com/libimobiledevice-win32 accused of version faking'.format(pkg.name), severity=Logger.ERROR)
                             pkg.SetFlag(PackageFlags.untrusted)
                             break
 
             if not pkg.version:
-                logger.log('unable to parse port {}: no version'.format(pkgdir), severity=Logger.ERROR)
+                factory.log('unable to parse port {}: no version'.format(pkgdir), severity=Logger.ERROR)
                 continue
 
             yield pkg

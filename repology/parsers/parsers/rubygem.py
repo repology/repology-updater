@@ -17,7 +17,6 @@
 
 import rubymarshal.reader
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
@@ -28,13 +27,13 @@ class RubyGemParser(Parser):
         else:
             return str(var, 'UTF-8')
 
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         packages = {}
 
         with open(path, 'rb') as fd:
             content = rubymarshal.reader.load(fd)
             for gem in content:
-                pkg = Package()
+                pkg = factory.begin()
                 gemplat = self.force_decode(gem[2])
                 if gemplat == 'ruby':
                     pkg.name = self.force_decode(gem[0])

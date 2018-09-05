@@ -19,7 +19,7 @@ import re
 import xml.etree.ElementTree
 
 from repology.logger import Logger
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -52,11 +52,11 @@ class RepodataParser(Parser):
                 yield elem
                 elem.clear()
 
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         skipped_archs = {}
 
         for entry in self.ParsePackagesEntriesFromXml(path):
-            pkg = Package()
+            pkg = factory.begin()
 
             arch = entry.find('{http://linux.duke.edu/metadata/common}arch').text
             if self.allowed_archs and arch not in self.allowed_archs:
@@ -93,4 +93,4 @@ class RepodataParser(Parser):
             yield pkg
 
         for arch, numpackages in sorted(skipped_archs.items()):
-            logger.log('skipping {} packages(s) with disallowed architecture {}'.format(numpackages, arch), severity=Logger.ERROR)
+            factory.log('skipping {} packages(s) with disallowed architecture {}'.format(numpackages, arch), severity=Logger.ERROR)

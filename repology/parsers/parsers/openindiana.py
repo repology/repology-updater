@@ -19,18 +19,17 @@ import json
 import shlex
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class OpenIndianaSummaryJsonParser(Parser):
-    def ParsePackage(self, fmri, pkgdata):
+    def ParsePackage(self, fmri, pkgdata, factory):
         variables = {}
         for action in pkgdata['actions']:
             tokens = shlex.split(action)
 
             if not tokens or tokens.pop(0) != 'set':
-                logger.log('unrecognized action ' + action, severity=Logger.ERROR)
+                factory.log('unrecognized action ' + action, severity=Logger.ERROR)
                 continue
 
             key = None
@@ -44,13 +43,13 @@ class OpenIndianaSummaryJsonParser(Parser):
                 elif token.startswith('last-fmri='):
                     pass
                 else:
-                    logger.log('unrecognized token ' + token, severity=Logger.ERROR)
+                    factory.log('unrecognized token ' + token, severity=Logger.ERROR)
                     continue
 
             if key and value:
                 variables[key] = value
 
-        pkg = Package()
+        pkg = factory.begin()
 
         pkg.extrafields['fmri'] = fmri
 
@@ -83,7 +82,7 @@ class OpenIndianaSummaryJsonParser(Parser):
 
         return None
 
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             summary_json = json.load(jsonfile)
 
@@ -96,7 +95,7 @@ class OpenIndianaSummaryJsonParser(Parser):
 
                 for fmri, pkgdatas in summary_json[summary_key].items():
                     for pkgdata in pkgdatas:
-                        pkg = self.ParsePackage(fmri, pkgdata)
+                        pkg = self.ParsePackage(fmri, pkgdata, factory)
 
                         if pkg:
                             yield pkg

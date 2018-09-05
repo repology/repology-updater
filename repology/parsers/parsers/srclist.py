@@ -17,7 +17,6 @@
 
 import rpm
 
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -26,14 +25,14 @@ class SrcListParser(Parser):
     def __init__(self, encoding='utf-8'):
         self.encoding = encoding
 
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for header in rpm.readHeaderListFromFile(path):
             fields = {
                 key: str(header[key], self.encoding) if header[key] is not None else None
                 for key in ['name', 'version', 'release', 'packager', 'group', 'summary']
             }
 
-            pkg = Package()
+            pkg = factory.begin()
 
             pkg.name = fields['name']
             pkg.version = fields['version']  # XXX: handle release

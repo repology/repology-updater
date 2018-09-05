@@ -18,7 +18,6 @@
 import re
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -37,18 +36,18 @@ def SanitizeVersion(version):
 
 
 class PkgsrcIndexParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 fields = line.strip().split('|')
                 if len(fields) != 12:
-                    logger.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
+                    factory.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
                     continue
                 if not fields[0]:
-                    logger.log('line {} bogus, critical fields are empty'.format(line.strip()), severity=Logger.ERROR)
+                    factory.log('line {} bogus, critical fields are empty'.format(line.strip()), severity=Logger.ERROR)
                     continue
 
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name, version = fields[0].rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)

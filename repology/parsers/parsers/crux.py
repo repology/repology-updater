@@ -18,7 +18,6 @@
 import os
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -45,14 +44,14 @@ def SanitizeVersion(version):
 
 
 class CRUXParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for pkgdir in os.listdir(path):
             pkgpath = os.path.join(path, pkgdir, 'Pkgfile')
             if not os.path.exists(pkgpath):
                 continue
 
             with open(pkgpath, 'r', encoding='utf-8', errors='ignore') as pkgfile:
-                pkg = Package()
+                pkg = factory.begin()
 
                 for line in pkgfile:
                     line = line.strip()
@@ -60,13 +59,13 @@ class CRUXParser(Parser):
                         if not pkg.comment:
                             pkg.comment = line[14:].strip()
                         else:
-                            logger.log('duplicate Description for {}'.format(pkgdir), severity=Logger.ERROR)
+                            factory.log('duplicate Description for {}'.format(pkgdir), severity=Logger.ERROR)
 
                     if line.startswith('# URL:'):
                         if not pkg.homepage:
                             pkg.homepage = line[6:].strip()
                         else:
-                            logger.log('duplicate URL for {}'.format(pkgdir), severity=Logger.ERROR)
+                            factory.log('duplicate URL for {}'.format(pkgdir), severity=Logger.ERROR)
 
                     if line.startswith('# Maintainer:'):
                         maintainer = line[13:].strip()
@@ -74,7 +73,7 @@ class CRUXParser(Parser):
                             _, email = line[13:].strip().split(',', 1)
                             pkg.maintainers += extract_maintainers(email)
                         else:
-                            logger.log('unexpected Maintainer format for {}'.format(pkgdir), severity=Logger.ERROR)
+                            factory.log('unexpected Maintainer format for {}'.format(pkgdir), severity=Logger.ERROR)
 
                     if line.startswith('name=') and not pkg.name:
                         pkg.name = line[5:]
@@ -83,11 +82,11 @@ class CRUXParser(Parser):
                         pkg.version = line[8:]
 
                 if not pkg.name or not pkg.version:
-                    logger.log('unable to parse port form {}: no name or version'.format(pkgdir), severity=Logger.ERROR)
+                    factory.log('unable to parse port form {}: no name or version'.format(pkgdir), severity=Logger.ERROR)
                     continue
 
                 if '$' in pkg.name or '$' in pkg.version:
-                    logger.log('unable to parse port form {}: name or version contain variables'.format(pkgdir), severity=Logger.ERROR)
+                    factory.log('unable to parse port form {}: name or version contain variables'.format(pkgdir), severity=Logger.ERROR)
                     continue
 
                 yield pkg

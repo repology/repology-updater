@@ -19,7 +19,6 @@ import os
 import re
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
@@ -37,7 +36,7 @@ def SanitizeVersion(version):
 
 
 class YACPGitParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for package in os.listdir(path):
             package_path = os.path.join(path, package)
             if not os.path.isdir(package_path):
@@ -51,10 +50,10 @@ class YACPGitParser(Parser):
                 match = re.match('(.*)-[0-9]+bl[0-9]+\.cygport$', cygport)
 
                 if not match:
-                    logger.log('unable to parse cygport: {}'.format(cygport), severity=Logger.ERROR)
+                    factory.log('unable to parse cygport: {}'.format(cygport), severity=Logger.ERROR)
                     continue
 
-                pkg = Package()
+                pkg = factory.begin()
                 pkg.name, version = match.group(1).rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)
 

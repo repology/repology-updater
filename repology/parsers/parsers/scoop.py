@@ -19,12 +19,11 @@ import json
 import os
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class ScoopGitParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for root, dirs, files in os.walk(path):
             for filename in files:
                 jsonpath = os.path.join(root, filename)
@@ -35,7 +34,7 @@ class ScoopGitParser(Parser):
                 with open(jsonpath, 'r', encoding='utf-8') as jsonfile:
                     jsondata = json.load(jsonfile, strict=False)
 
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = filename[:-5]
                 pkg.version = jsondata['version']
@@ -52,7 +51,7 @@ class ScoopGitParser(Parser):
                     elif isinstance(jsondata['license'], dict) and 'identifier' in jsondata['license']:
                         pkg.licenses = [jsondata['license']['identifier']]
                     else:
-                        logger.log('unsupported license format for {}'.format(pkg.name), severity=Logger.ERROR)
+                        factory.log('unsupported license format for {}'.format(pkg.name), severity=Logger.ERROR)
 
                 pkg.extrafields = {'path': os.path.relpath(jsonpath, path)}
 

@@ -18,7 +18,6 @@
 import csv
 import re
 
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -41,11 +40,11 @@ def SanitizeVersion(version):
 
 
 class OpenBSDIndexParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, encoding='utf-8') as file:
             reader = csv.reader(file, delimiter='|')
             for row in reader:
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkgname = row[0]
 

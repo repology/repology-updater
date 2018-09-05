@@ -18,7 +18,6 @@
 import re
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -58,7 +57,7 @@ def SanitizeVersion(version):
 
 
 class DebianSourcesParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, encoding='utf-8', errors='ignore') as file:
             current_data = {}
             last_key = None
@@ -71,14 +70,14 @@ class DebianSourcesParser(Parser):
                     if not current_data:
                         continue  # may happen on empty package list
 
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     def GetField(key, type_=str, default=None):
                         if key in current_data:
                             if type_ is None or isinstance(current_data[key], type_):
                                 return current_data[key]
                             else:
-                                logger.log('unable to parse field {}'.format(key), severity=Logger.ERROR)
+                                factory.log('unable to parse field {}'.format(key), severity=Logger.ERROR)
                                 return default
                         else:
                             return default
@@ -98,7 +97,7 @@ class DebianSourcesParser(Parser):
                     if pkg.name and pkg.version:
                         yield pkg
                     else:
-                        logger.log('unable to parse package {}'.format(str(current_data)), severity=Logger.ERROR)
+                        factory.log('unable to parse package {}'.format(str(current_data)), severity=Logger.ERROR)
 
                     current_data = {}
                     last_key = None
@@ -122,4 +121,4 @@ class DebianSourcesParser(Parser):
                     current_data[last_key].append(value)
                     continue
 
-                logger.log('unable to parse line: {}'.format(line), severity=Logger.ERROR)
+                factory.log('unable to parse line: {}'.format(line), severity=Logger.ERROR)

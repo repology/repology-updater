@@ -18,7 +18,6 @@
 import os
 import re
 
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -37,7 +36,7 @@ def SanitizeVersion(version):
 
 
 class ApkIndexParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(os.path.join(path, 'APKINDEX'), 'r', encoding='utf-8') as apkindex:
             state = {}
             for line in apkindex:
@@ -48,7 +47,7 @@ class ApkIndexParser(Parser):
 
                 # empty line, we can flush our state
                 if state and state['P'] == state['o']:
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     pkg.name = state['P']
                     pkg.version, pkg.origversion = SanitizeVersion(state['V'])

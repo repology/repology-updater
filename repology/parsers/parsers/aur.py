@@ -18,7 +18,6 @@
 import json
 import os
 
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -45,14 +44,14 @@ def SanitizeVersion(version):
 
 
 class AURParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for filename in os.listdir(path):
             if not filename.endswith('.json'):
                 continue
 
             with open(os.path.join(path, filename), 'r') as jsonfile:
                 for result in json.load(jsonfile)['results']:
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     pkg.name = result['Name']
 

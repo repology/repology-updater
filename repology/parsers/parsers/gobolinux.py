@@ -21,7 +21,6 @@ import re
 from libversion import version_compare
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
@@ -36,7 +35,7 @@ def ExpandDownloadUrlTemplates(url):
 
 
 class GoboLinuxGitParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         trunk_path = os.path.join(path, 'trunk')
         for package_name in os.listdir(trunk_path):
             package_path = os.path.join(trunk_path, package_name)
@@ -47,13 +46,13 @@ class GoboLinuxGitParser(Parser):
                     maxversion = version_name
 
             if maxversion is None:
-                logger.log('no usable versions for package {}'.format(package_name), severity=Logger.ERROR)
+                factory.log('no usable versions for package {}'.format(package_name), severity=Logger.ERROR)
                 continue
 
             recipe_path = os.path.join(package_path, maxversion, 'Recipe')
             description_path = os.path.join(package_path, maxversion, 'Resources', 'Description')
 
-            pkg = Package()
+            pkg = factory.begin()
 
             pkg.name = package_name
             pkg.version = maxversion
@@ -67,7 +66,7 @@ class GoboLinuxGitParser(Parser):
                             if '$' not in download:
                                 pkg.downloads.append(download.strip('"'))
                             else:
-                                logger.log('Recipe for {}/{} skipped, unhandled URL substitude found'.format(package_name, maxversion), severity=Logger.ERROR)
+                                factory.log('Recipe for {}/{} skipped, unhandled URL substitude found'.format(package_name, maxversion), severity=Logger.ERROR)
 
             if os.path.isfile(description_path):
                 with open(description_path, 'r', encoding='utf-8', errors='ignore') as description:
@@ -80,7 +79,7 @@ class GoboLinuxGitParser(Parser):
                             current_tag = match.group(1)
                             data[current_tag] = match.group(2)
                         elif current_tag is None:
-                            logger.log('Description for {}/{} skipped, dumb format'.format(package_name, maxversion), severity=Logger.ERROR)
+                            factory.log('Description for {}/{} skipped, dumb format'.format(package_name, maxversion), severity=Logger.ERROR)
                             break
                         elif line:
                             if data[current_tag]:

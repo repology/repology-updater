@@ -18,7 +18,7 @@
 import json
 
 from repology.logger import Logger
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
@@ -30,7 +30,7 @@ def SimplifyResult(injson):
 
 
 class WikidataJsonParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         jsondata = None
         with open(path, 'r', encoding='utf-8') as jsonfile:
             jsondata = json.load(jsonfile)
@@ -56,14 +56,14 @@ class WikidataJsonParser(Parser):
                     is_foreign_platform_release = 'p' in flags and 'P' not in flags
 
                     if is_foreign_os_release:
-                        logger.log('{} ({}) version {} skipped due to bad OS'.format(packagedata['projectLabel'], entity, version), severity=Logger.WARNING)
+                        factory.log('{} ({}) version {} skipped due to bad OS'.format(packagedata['projectLabel'], entity, version), severity=Logger.WARNING)
                         continue
 
                     if is_foreign_platform_release:
-                        logger.log('{} ({}) version {} skipped due to bad Platform'.format(packagedata['projectLabel'], entity, version), severity=Logger.WARNING)
+                        factory.log('{} ({}) version {} skipped due to bad Platform'.format(packagedata['projectLabel'], entity, version), severity=Logger.WARNING)
                         continue
 
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     pkg.SetFlag(PackageFlags.devel, is_devel)
 

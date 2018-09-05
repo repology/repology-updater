@@ -18,13 +18,12 @@
 import json
 import os
 
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 
 
 class BuckarooGitParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for filename in walk_tree(path, suffix='.json'):
             data = json.load(open(filename, encoding='utf-8', errors='ignore'))
 
@@ -32,7 +31,7 @@ class BuckarooGitParser(Parser):
                 continue
 
             for version, versiondata in data['versions'].items():
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = data['name']
 

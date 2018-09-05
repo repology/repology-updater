@@ -18,12 +18,11 @@
 import os
 import xml.etree.ElementTree
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class ChocolateyParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for pagepath in os.listdir(path):
             if not pagepath.endswith('.xml'):
                 continue
@@ -31,7 +30,7 @@ class ChocolateyParser(Parser):
             root = xml.etree.ElementTree.parse(os.path.join(path, pagepath))
 
             for entry in root.findall('{http://www.w3.org/2005/Atom}entry'):
-                pkg = Package()
+                pkg = factory.begin()
                 pkg.name = entry.find('{http://www.w3.org/2005/Atom}title').text
                 pkg.version = entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Version').text
                 pkg.homepage = entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}ProjectUrl').text

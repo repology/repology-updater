@@ -17,15 +17,14 @@
 
 import json
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class HomebrewJsonParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for package in json.load(jsonfile):
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = package['name']
                 atpos = pkg.name.find('@')

@@ -15,17 +15,16 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class HPPADepothelperListParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 pkgname, pkgpath = line.strip().split('|')[:2]
 
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name, pkg.version = pkgname.rsplit('-', 1)
 

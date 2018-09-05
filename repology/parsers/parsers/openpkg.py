@@ -17,18 +17,18 @@
 
 import xml.etree.ElementTree
 
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
 class OpenPkgRdfParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         root = xml.etree.ElementTree.parse(path)
 
         repository = root.find('{http://www.openpkg.org/xml-rdf-index/0.9}Repository')
 
         for item in repository.findall('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description'):
-            pkg = Package()
+            pkg = factory.begin()
 
             pkg.name = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Name').text
             pkg.version = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Version').text

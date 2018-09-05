@@ -18,12 +18,11 @@
 import json
 import os
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class CratesIOParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for pagefilename in os.listdir(path):
             if not pagefilename.endswith('.json'):
                 continue
@@ -32,7 +31,7 @@ class CratesIOParser(Parser):
 
             with open(pagepath, 'r', encoding='utf-8', errors='ignore') as pagedata:
                 for crate in json.load(pagedata)['crates']:
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     pkg.name = crate['id']
                     pkg.version = crate['max_version']

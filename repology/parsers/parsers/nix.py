@@ -19,7 +19,7 @@ import json
 import re
 
 from repology.logger import Logger
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -51,12 +51,12 @@ def extract_nix_licenses(whatever):
     elif isinstance(whatever, dict) and 'fullname' in whatever:
         return [whatever['fullname']]
     else:
-        logger.log('unable to parse license {}'.format(whatever), severity=Logger.ERROR)
+        #factory.log('unable to parse license {}'.format(whatever), severity=Logger.ERROR)
         return []
 
 
 class NixJsonParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for key, packagedata in json.load(jsonfile)['packages'].items():
                 # see how Nix parses 'derivative' names in
@@ -66,10 +66,10 @@ class NixJsonParser(Parser):
                 # this doesn't work well on 100% cases, it's an upstream problem
                 match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
                 if not match:
-                    logger.log('cannot extract version: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
+                    factory.log('cannot extract version: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
                     continue
 
-                pkg = Package()
+                pkg = factory.begin()
                 pkg.name = match.group(1)
                 pkg.version = match.group(2)
 
@@ -97,7 +97,7 @@ class NixJsonParser(Parser):
                     pkg.SetFlag(PackageFlags.ignore)
 
                 if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
-                    logger.log('ignoring version which looks like commit hash: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
+                    factory.log('ignoring version which looks like commit hash: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
                     pkg.SetFlag(PackageFlags.ignore)
 
                 meta = packagedata['meta']
@@ -112,7 +112,7 @@ class NixJsonParser(Parser):
 
                 if 'maintainers' in meta:
                     if not isinstance(meta['maintainers'], list):
-                        logger.log('maintainers is not a list: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
+                        factory.log('maintainers is not a list: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
                     else:
                         pkg.maintainers += list(extract_nix_maintainers(meta['maintainers']))
 

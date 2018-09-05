@@ -18,7 +18,6 @@
 import os
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -37,7 +36,7 @@ def SanitizeVersion(version):
 
 
 class MSYS2Parser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for packagedir in os.listdir(path):
             with open(os.path.join(path, packagedir, 'desc'), 'r', encoding='utf-8') as descfile:
                 key = None
@@ -56,10 +55,10 @@ class MSYS2Parser(Parser):
                         value.append(line)
 
                 if 'BASE' in data and data['NAME'][0] != data['BASE'][0]:
-                    logger.log('{} skipped, subpackage'.format(data['NAME'][0]), severity=Logger.WARNING)
+                    factory.log('{} skipped, subpackage'.format(data['NAME'][0]), severity=Logger.WARNING)
                     continue
 
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = data['NAME'][0]
                 pkg.version, pkg.origversion = SanitizeVersion(data['VERSION'][0])

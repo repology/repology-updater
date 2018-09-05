@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
@@ -24,15 +23,15 @@ class SliTazInfoParser(Parser):
     def __init__(self, numfields):
         self.numfields = numfields
 
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 fields = line.split('\t')
                 if len(fields) != self.numfields:
-                    logger.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
+                    factory.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
                     continue
 
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = fields[0]
                 pkg.version = fields[1]

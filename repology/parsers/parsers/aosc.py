@@ -18,7 +18,7 @@
 import json
 
 from repology.logger import Logger
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -37,15 +37,15 @@ def SanitizeVersion(version):
 
 
 class AoscPkgsParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for package in json.load(jsonfile)['packages']:
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = package['name']
 
                 if package['version'] is None:
-                    logger.log('no version: {}'.format(pkg.name), severity=Logger.ERROR)
+                    factory.log('no version: {}'.format(pkg.name), severity=Logger.ERROR)
                     continue
 
                 pkg.version, _ = SanitizeVersion(package['version'])

@@ -19,12 +19,11 @@ import os
 import re
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class HaikuPortsFilenamesParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for category in os.listdir(path):
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):
@@ -39,7 +38,7 @@ class HaikuPortsFilenamesParser(Parser):
                     if not recipe.endswith('.recipe'):
                         continue
 
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     pkg.name = package
                     pkg.category = category
@@ -52,7 +51,7 @@ class HaikuPortsFilenamesParser(Parser):
                     name, version = recipe[:-7].split('-', 1)
 
                     if package.replace('-', '_') != name:
-                        logger.log('mismatch for package directory and recipe name: {} != {}'.format(package, name), severity=Logger.WARNING)
+                        factory.log('mismatch for package directory and recipe name: {} != {}'.format(package, name), severity=Logger.WARNING)
 
                     pkg.version = version
 

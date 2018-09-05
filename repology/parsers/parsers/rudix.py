@@ -17,14 +17,13 @@
 
 import lxml.html
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class RudixHTMLParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for row in lxml.html.parse(path).getroot().xpath('.//table')[0].xpath('./tbody/tr'):
-            pkg = Package()
+            pkg = factory.begin()
 
             pkg.name = row.xpath('./td[1]/a')[0].text
             pkg.version = row.xpath('./td[2]')[0].text

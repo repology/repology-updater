@@ -21,7 +21,6 @@ import re
 from libversion import version_compare
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -70,7 +69,7 @@ class HackageParser(Parser):
 
         return cabaldata
 
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for moduledir in os.listdir(path):
             modulepath = os.path.join(path, moduledir)
 
@@ -86,10 +85,10 @@ class HackageParser(Parser):
                     cabalpath = os.path.join(path, moduledir, maxversion, moduledir + '.cabal')
 
             if maxversion is None:
-                logger.log('cannot determine max version for {}'.format(moduledir), severity=Logger.ERROR)
+                factory.log('cannot determine max version for {}'.format(moduledir), severity=Logger.ERROR)
                 continue
 
-            pkg = Package()
+            pkg = factory.begin()
 
             pkg.name = moduledir
             pkg.version = maxversion
@@ -109,6 +108,6 @@ class HackageParser(Parser):
                 if 'category' in cabaldata:
                     pkg.category = cabaldata['category']
             else:
-                logger.log('cabal data sanity check failed for {}, ignoring cabal data'.format(cabalpath), severity=Logger.ERROR)
+                factory.log('cabal data sanity check failed for {}, ignoring cabal data'.format(cabalpath), severity=Logger.ERROR)
 
             yield pkg

@@ -18,13 +18,12 @@
 import os
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
 class SlackBuildsParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for category in os.listdir(path):
             if category.startswith('.'):
                 continue
@@ -40,7 +39,7 @@ class SlackBuildsParser(Parser):
 
                 info_path = os.path.join(category_path, package, package + '.info')
                 if not os.path.isfile(info_path):
-                    logger.log('{} does not exist, package skipped'.format(info_path), severity=Logger.ERROR)
+                    factory.log('{} does not exist, package skipped'.format(info_path), severity=Logger.ERROR)
                     continue
 
                 with open(info_path, encoding='utf-8', errors='ignore') as infofile:
@@ -69,7 +68,7 @@ class SlackBuildsParser(Parser):
                             key = None
                             total_value = []
 
-                    pkg = Package()
+                    pkg = factory.begin()
                     pkg.category = category
 
                     pkg.name = variables['PRGNAM']
@@ -83,4 +82,4 @@ class SlackBuildsParser(Parser):
                     if pkg.name is not None and pkg.version is not None:
                         yield pkg
                     else:
-                        logger.log('{} skipped, likely due to parsing problems'.format(info_path), severity=Logger.ERROR)
+                        factory.log('{} skipped, likely due to parsing problems'.format(info_path), severity=Logger.ERROR)

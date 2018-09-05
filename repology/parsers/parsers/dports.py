@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -40,15 +39,15 @@ def SanitizeVersion(version):
 
 
 class DPortsIndexParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 fields = line.strip().split('|')
                 if len(fields) != 13:
-                    logger.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
+                    factory.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
                     continue
 
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name, version = fields[0].rsplit('-', 1)
                 pkg.version, pkg.origversion = SanitizeVersion(version)

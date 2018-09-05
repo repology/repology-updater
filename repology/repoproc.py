@@ -23,6 +23,7 @@ from repology.fetchers import Fetcher
 from repology.logger import Logger, NoopLogger
 from repology.moduleutils import ClassFactory
 from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Parser
 
@@ -84,6 +85,25 @@ class RepositoryProcessor:
     def _iter_parse_source(self, repository, source, logger):
         def postprocess_parsed_packages(packages_iter):
             for package in packages_iter:
+                if isinstance(package, PackageMaker):
+                    # unwrap packagemaker
+                    if not package.check_sanity(True):
+                        continue
+
+                    package = package.unwrap()
+                else:
+                    # XXX: compatibility shim for parsers still returning raw packages
+                    if not package.name:
+                        raise InconsistentPackage('encountered package with no name')
+
+                    if not package.version:
+                        # XXX: this currently fires on kdepim in dports; it's pretty fatal on
+                        # one hand, but shouldn't stop whole repo from updating on another. In
+                        # future, it should be logged as some kind of very serious repository
+                        # update error
+                        logger.log('package with empty version: {}'.format(package.name), severity=Logger.ERROR)
+                        continue
+
                 # fill subrepos
                 if 'subrepo' in source:
                     package.subrepo = source['subrepo']
@@ -95,18 +115,6 @@ class RepositoryProcessor:
                     else:
                         package.maintainers = ['fallback-mnt-{}@repology'.format(repository['name'])]
 
-                # sanity
-                if not package.name:
-                    raise InconsistentPackage('encountered package with no name')
-
-                if not package.version:
-                    # XXX: this currently fires on kdepim in dports; it's pretty fatal on
-                    # one hand, but shouldn't stop whole repo from updating on another. In
-                    # future, it should be logged as some kind of very serious repository
-                    # update error
-                    logger.log('package with empty version: {}'.format(package.name), severity=Logger.ERROR)
-                    continue
-
                 yield package
 
         return postprocess_parsed_packages(
@@ -114,7 +122,7 @@ class RepositoryProcessor:
                 source['parser'], source
             ).iter_parse(
                 self.__GetSourcePath(repository, source),
-                logger=logger.GetIndented()
+                PackageFactory(logger)
             )
         )
 

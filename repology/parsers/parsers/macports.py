@@ -20,7 +20,6 @@ import os
 import subprocess
 
 from repology.config import config
-from repology.package import Package
 from repology.parsers import Parser
 
 
@@ -41,7 +40,7 @@ class MacPortsParser(Parser):
     def __init__(self):
         self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
 
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         with subprocess.Popen(
             [config['TCLSH'], self.helperpath, path],
             errors='ignore',
@@ -49,7 +48,7 @@ class MacPortsParser(Parser):
             universal_newlines=True
         ) as macportsjson:
             for pkgdata in json.load(macportsjson.stdout):
-                pkg = Package()
+                pkg = factory.begin()
 
                 pkg.name = pkgdata['name']
                 pkg.version = pkgdata['version']

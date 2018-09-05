@@ -18,18 +18,17 @@
 import json
 
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class RavenportsJsonParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         jsondata = None
         with open(path, 'r', encoding='utf-8') as jsonfile:
             jsondata = json.load(jsonfile)
 
         for packagedata in jsondata['ravenports']:
-            pkg = Package()
+            pkg = factory.begin()
 
             pkg.name = packagedata['namebase']
             pkg.version = packagedata['version']

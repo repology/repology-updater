@@ -18,19 +18,18 @@
 import os
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class SpecParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for root, _, files in os.walk(path):
             for filename in files:
                 if not filename.endswith('.spec'):
                     continue
 
                 with open(os.path.join(root, filename), encoding='utf-8', errors='ignore') as specfile:
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     for line in specfile:
                         line = line.strip()
@@ -54,4 +53,4 @@ class SpecParser(Parser):
                     if pkg.name is not None and pkg.version is not None:
                         yield pkg
                     else:
-                        logger.log('%s skipped, likely due to parsing problems' % filename, severity=Logger.ERROR)
+                        factory.log('%s skipped, likely due to parsing problems' % filename, severity=Logger.ERROR)

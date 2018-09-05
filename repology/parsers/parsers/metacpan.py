@@ -21,7 +21,7 @@ import os
 from libversion import version_compare
 
 from repology.logger import Logger
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
@@ -44,8 +44,8 @@ def ensure_list(v):
 
 class MetacpanAPIParser(Parser):
     @staticmethod
-    def parse_package(fields):
-        pkg = Package()
+    def parse_package(fields, factory):
+        pkg = factory.begin()
 
         pkg.name = ensure_str(fields['distribution'])
         pkg.version = ensure_str(fields['version'])
@@ -58,7 +58,7 @@ class MetacpanAPIParser(Parser):
         return pkg
 
     @staticmethod
-    def parse_latest_packages(hits, latest_versions):
+    def parse_latest_packages(hits, latest_versions, factory):
         for hit in hits:
             fields = hit['fields']
 
@@ -66,34 +66,34 @@ class MetacpanAPIParser(Parser):
             if ensure_str(fields['status']) != 'latest':
                 continue
 
-            pkg = MetacpanAPIParser.parse_package(fields)
+            pkg = MetacpanAPIParser.parse_package(fields, factory)
 
             if not pkg.version:
-                logger.log('{}: empty version {}'.format(pkg.name, pkg.version), severity=Logger.ERROR)
+                factory.log('{}: empty version {}'.format(pkg.name, pkg.version), severity=Logger.ERROR)
                 continue
 
             latest_versions[pkg.name] = pkg.version
             yield pkg
 
     @staticmethod
-    def parse_devel_packages(hits, latest_versions):
+    def parse_devel_packages(hits, latest_versions, factory):
         for hit in hits:
             fields = hit['fields']
 
             if ensure_str(fields['maturity']) != 'developer':
                 continue
 
-            pkg = MetacpanAPIParser.parse_package(fields)
+            pkg = MetacpanAPIParser.parse_package(fields, factory)
 
             if not pkg.version:
-                logger.log('{}: empty version {}'.format(pkg.name, pkg.version), severity=Logger.ERROR)
+                factory.log('{}: empty version {}'.format(pkg.name, pkg.version), severity=Logger.ERROR)
                 continue
 
             if version_compare(pkg.version, latest_versions.get(pkg.name, '0')) > 0:
                 pkg.SetFlag(PackageFlags.devel)
                 yield pkg
 
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         latest_versions = {}
 
         # Pass 1: process latest versions
@@ -102,7 +102,7 @@ class MetacpanAPIParser(Parser):
                 continue
 
             with open(os.path.join(path, filename), 'r') as jsonfile:
-                yield from MetacpanAPIParser.parse_latest_packages(json.load(jsonfile), latest_versions)
+                yield from MetacpanAPIParser.parse_latest_packages(json.load(jsonfile), latest_versions, factory)
 
         # Pass 2: process devel versions
         for filename in os.listdir(path):
@@ -110,4 +110,4 @@ class MetacpanAPIParser(Parser):
                 continue
 
             with open(os.path.join(path, filename), 'r') as jsonfile:
-                yield from MetacpanAPIParser.parse_devel_packages(json.load(jsonfile), latest_versions)
+                yield from MetacpanAPIParser.parse_devel_packages(json.load(jsonfile), latest_versions, factory)

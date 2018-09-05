@@ -18,25 +18,24 @@
 import re
 
 from repology.logger import Logger
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class PyPiHTMLParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         packages = {}
 
         with open(path, 'r', encoding='utf-8') as htmlfile:
             for match in re.findall('<td><a href="/pypi/([^"]+)/([^"]+)">[^<>]*</a></td>[ \n]*<td>([^<>]*)</td>', htmlfile.read(), flags=re.MULTILINE):
-                pkg = Package()
+                pkg = factory.begin()
                 pkg.name = match[0]
                 pkg.version = match[1]
 
                 comment = match[2].strip()
                 if comment == '':
-                    logger.log('{}: summary is empty'.format(pkg.name), severity=Logger.ERROR)
+                    factory.log('{}: summary is empty'.format(pkg.name), severity=Logger.ERROR)
                 elif '\n' in comment:
-                    logger.log('{}: summary is multiline'.format(pkg.name), severity=Logger.ERROR)
+                    factory.log('{}: summary is multiline'.format(pkg.name), severity=Logger.ERROR)
                 else:
                     pkg.comment = comment
 

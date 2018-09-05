@@ -20,7 +20,6 @@ import re
 
 import lxml.html
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
@@ -38,7 +37,7 @@ def SanitizeVersion(version):
 
 
 class GuixParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         for filename in os.listdir(path):
             if not filename.endswith('.html'):
                 continue
@@ -48,7 +47,7 @@ class GuixParser(Parser):
                 root = lxml.html.document_fromstring(htmlfile.read())
 
             for row in root.xpath('.//div[@class="package-preview"]'):
-                pkg = Package()
+                pkg = factory.begin()
 
                 # header
                 cell = row.xpath('./h3[@class="package-name"]')[0]

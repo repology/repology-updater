@@ -18,18 +18,17 @@
 import re
 import xml.etree.ElementTree
 
-from repology.package import Package
 from repology.parsers import Parser
 
 
 class LibreGameWikiParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         root = xml.etree.ElementTree.parse(path)
 
         content = root.find('.//div[@id="mw-content-text"]')
 
         for item in content.findall('.//div[@style="float:left; width:25.3em; height:8.5em; border:1px solid #ccc; padding:0.1em; margin-bottom: 2em; margin-right: 1em; overflow:hidden"]'):
-            pkg = Package()
+            pkg = factory.begin()
 
             # name
             cell = item.find('./p[1]/b[1]/a[1]')

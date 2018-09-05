@@ -19,21 +19,21 @@ import re
 import xml.etree.ElementTree
 
 from repology.logger import Logger
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
 class RosaInfoXmlParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         root = xml.etree.ElementTree.parse(path)
 
         for info in root.findall('./info'):
-            pkg = Package()
+            pkg = factory.begin()
 
             # derive names and versions from fn field
             fn = info.attrib['fn'].rsplit('-', 2)
             if len(fn) < 3:
-                logger.log('unable to parse fn: {}'.format(fn), severity=Logger.ERROR)
+                factory.log('unable to parse fn: {}'.format(fn), severity=Logger.ERROR)
                 continue
 
             pkg.name = fn[0]

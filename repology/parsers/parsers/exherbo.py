@@ -18,7 +18,7 @@
 import os
 import re
 
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -35,7 +35,7 @@ def SanitizeVersion(version):
 
 
 class ExherboGitParser(Parser):
-    def iter_parse(self, path, logger):
+    def iter_parse(self, path, factory):
         maintainers = []
 
         with open(os.path.join(path, 'metadata/about.conf'), 'r', encoding='utf-8') as metadata:
@@ -64,7 +64,7 @@ class ExherboGitParser(Parser):
                     if not exheres.startswith(package + '-') and not exheres.endswith('.exheres-0'):
                         continue
 
-                    pkg = Package()
+                    pkg = factory.begin()
 
                     pkg.category = category
                     pkg.name = package
