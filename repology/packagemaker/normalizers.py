@@ -19,7 +19,7 @@ import re
 
 
 def require_url(value):
-    if not re.match('(ftp|https?|mirror|git)://', value):
+    if not re.match('(ftp|https?|mirror|git|svn|hg|bzr|cvs)://', value):
         return None, 'does not look like an URL'
     return value, None
 
