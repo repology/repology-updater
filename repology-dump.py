@@ -29,6 +29,14 @@ from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
 
+def format_package_field(key, value):
+    if key == 'versionclass':
+        return VersionClass.ToString(value)
+    if isinstance(value, dict):
+        return str({k: v for k, v in sorted(value.items())})
+    return str(value)
+
+
 def parse_arguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
@@ -97,10 +105,9 @@ def main():
             for package in packageset:
                 print(
                     options.field_separator.join(
-                        [
-                            VersionClass.ToString(package.versionclass) if field == 'versionclass' else str(getattr(package, field))
-                            for field in options.fields
-                        ]
+                        (
+                            format_package_field(field, getattr(package, field)) for field in options.fields
+                        )
                     )
                 )
         if options.dump == 'summaries':
