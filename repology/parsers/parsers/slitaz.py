@@ -15,8 +15,33 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import json
+
 from repology.logger import Logger
 from repology.parsers import Parser
+
+
+class SliTazJsonParser(Parser):
+    def iter_parse(self, path, factory):
+        with open(path, encoding='utf-8') as jsonfile:
+            for item in json.load(jsonfile)['items']:
+                pkg = factory.begin()
+
+                pkg.set_effname(item['meta'])
+                pkg.set_version(item['ver'])
+                pkg.add_maintainers(item['maintainer'])
+                pkg.add_licenses(item['license'])
+                pkg.add_homepages(item['home'])
+                pkg.add_downloads(item.get('src'))
+
+                for subitem in item['pkgs']:
+                    subpkg = pkg.clone()
+
+                    subpkg.add_categories(subitem['cat'])
+                    subpkg.set_summary(subitem['desc'])
+                    subpkg.set_name(subitem['name'])
+
+                    yield subpkg
 
 
 class SliTazInfoParser(Parser):

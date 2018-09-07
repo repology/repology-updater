@@ -9,9 +9,9 @@
   sources:
     - name: packages.info
       fetcher: FileFetcher
-      parser: SliTazInfoParser
-      url: http://mirror1.slitaz.org/packages/cooking/packages.info
-      numfields: 9
+      parser: SliTazJsonParser
+      url: http://mirror1.slitaz.org/packages/cooking/repo.json.gz
+      compression: gz
   repolinks:
     - desc: SliTaz home
       url: http://www.slitaz.org/
