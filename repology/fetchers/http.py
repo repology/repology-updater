@@ -25,7 +25,7 @@ USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
 
 
 # XXX: post argument is a compatibility shim
-def do_http(url, method=None, check_status=True, timeout=60, data=None, json=None, post=None, headers=None):
+def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None, post=None, headers=None):
     headers = headers.copy() if headers else {}
     headers['User-Agent'] = USER_AGENT
 
