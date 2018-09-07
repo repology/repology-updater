@@ -195,7 +195,9 @@ class PackageMaker(PackageMakerBase):
         return self.package
 
     def clone(self):
-        return deepcopy(self)
+        offspring = PackageMaker(self.logger, self.ident)
+        offspring.package = deepcopy(self.package)
+        return offspring
 
     def check_sanity(self, verbose=False):
         if not self.package.name:
