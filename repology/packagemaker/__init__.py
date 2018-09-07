@@ -99,12 +99,21 @@ class PackageMaker(PackageMakerBase):
         self.ident = ident
 
     def _get_ident(self):
-        return self.package.extrafields.get('origin', None) or self.package.name or self.ident
+        return self.package.extrafields.get('origin', None) or self.package.name or self.ident or self.package.effname
 
     @PackageMakerBase._simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
     def set_origin(self, origin):
         # XXX: convert to dedicated field
         self.set_extra_field('origin', origin)
+
+    @PackageMakerBase._simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
+    def set_effname(self, effname):
+        # XXX: this should be refactored
+        # It's OK for parsers to set both effname and name, the example case
+        # is setting effname to <project> name and <name>s to package names
+        # However this erases strict boundary between fields parsed from
+        # data and fields calculated based on them. It should be fixed.
+        self.package.effname = effname
 
     @PackageMakerBase._simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
     def set_name(self, name):
