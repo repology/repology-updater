@@ -40,12 +40,12 @@ class FDroidParser(Parser):
                 if name and version:
                     pkg = factory.begin()
 
-                    pkg.name=name.strip()
-                    pkg.version=version
-                    pkg.licenses=[license_]
-                    pkg.category=category
-                    pkg.homepage=www if www else None
-                    pkg.extrafields={'id': appid}
-                    pkg.flags=PackageFlags.devel if version_code > upstream_version_code else 0
+                    pkg.name = name.strip()
+                    pkg.version = version
+                    pkg.licenses = [license_]
+                    pkg.category = category
+                    pkg.homepage = www if www else None
+                    pkg.extrafields = {'id': appid}
+                    pkg.flags = PackageFlags.devel if version_code > upstream_version_code else 0
 
                     yield pkg
