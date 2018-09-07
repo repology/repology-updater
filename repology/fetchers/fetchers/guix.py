@@ -16,17 +16,20 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import time
 from string import ascii_uppercase
 
 import lxml.html
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import fetch
+from repology.fetchers.http import do_http
 
 
 class GuixFetcher(ScratchDirFetcher):
-    def __init__(self, url):
+    def __init__(self, url, fetch_timeout=5, fetch_delay=0):
         self.url = url
+        self.fetch_timeout = fetch_timeout
+        self.fetch_delay = fetch_delay
 
     def do_fetch(self, statedir, logger):
         for letter in ['0-9'] + [l for l in ascii_uppercase]:
@@ -38,7 +41,7 @@ class GuixFetcher(ScratchDirFetcher):
                 pageurl = '{}/{}/page/{}/'.format(self.url, letter, page)
 
                 # fetch HTML
-                response = fetch(pageurl)
+                response = do_http(pageurl, timeout=self.fetch_timeout)
                 response.encoding = 'utf-8'  # is not detected properly
                 text = response.text
 
@@ -57,3 +60,6 @@ class GuixFetcher(ScratchDirFetcher):
 
                 # proceed with the next page
                 page += 1
+
+                if self.fetch_delay:
+                    time.sleep(self.fetch_delay)
