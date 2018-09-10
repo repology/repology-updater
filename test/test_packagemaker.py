@@ -19,14 +19,15 @@
 
 import unittest
 
-from repology.logger import AccumulatingLogger
-from repology.packagemaker import PackageMaker
+from repology.logger import AccumulatingLogger, NoopLogger
+from repology.packagemaker import PackageFactory
 
 
 class TestPackageMaker(unittest.TestCase):
     def test_all_fields(self):
-        maker = PackageMaker()
+        factory = PackageFactory(NoopLogger())
 
+        maker = factory.begin()
         maker.set_name_and_version('foo-1.0')
         maker.set_origin('/foo')
         maker.set_summary('foo package')
@@ -38,8 +39,7 @@ class TestPackageMaker(unittest.TestCase):
         maker.add_licenses(['GPLv2', 'GPLv3'])
         maker.add_licenses('MIT')
         maker.add_downloads(None, [None, 'http://baz'], ['ftp://quux'])
-
-        pkg = maker.get_package()
+        pkg = maker.unwrap()
 
         self.assertEqual(pkg.name, 'foo')
         self.assertEqual(pkg.version, '1.0')
@@ -52,19 +52,24 @@ class TestPackageMaker(unittest.TestCase):
 
     def test_validate_urls(self):
         logger = AccumulatingLogger()
-        maker = PackageMaker(logger)
+        factory = PackageFactory(logger)
+
+        maker = factory.begin()
         maker.add_downloads('http://www.valid', 'https://www.valid/some', 'ftp://ftp.valid', 'invalid')
-        pkg = maker.get_package()
+        pkg = maker.unwrap()
 
         self.assertEqual(pkg.downloads, ['http://www.valid', 'https://www.valid/some', 'ftp://ftp.valid'])
         self.assertEqual(len(logger.get()), 1)
         self.assertTrue('invalid' in logger.get()[0][0])
 
     def test_strip(self):
-        maker = PackageMaker()
-        maker.set_summary('       some package foo      ')
+        factory = PackageFactory(NoopLogger())
 
-        self.assertEqual(maker.get_package().comment, 'some package foo')
+        maker = factory.begin()
+        maker.set_summary('       some package foo      ')
+        pkg = maker.unwrap()
+
+        self.assertEqual(pkg.comment, 'some package foo')
 
 
 if __name__ == '__main__':
