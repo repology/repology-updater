@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -21,17 +21,18 @@ import lzma
 import time
 
 from repology.fetchers import ScratchFileFetcher
-from repology.fetchers.fetch import fetch
+from repology.fetchers.http import do_http
 
 
 class FileFetcher(ScratchFileFetcher):
-    def __init__(self, url, compression=None, post=None, headers=None, nocache=False):
+    def __init__(self, url, compression=None, post=None, headers=None, nocache=False, fetch_timeout=5):
         super(FileFetcher, self).__init__(binary=True)
 
         self.url = url
         self.compression = compression
         self.post = post
         self.headers = headers
+        self.fetch_timeout = fetch_timeout
 
         # cache bypass
         if nocache:
@@ -52,7 +53,7 @@ class FileFetcher(ScratchFileFetcher):
 
         logger.Log('fetching ' + ', with '.join(fetching_what))
 
-        data = fetch(self.url, post=self.post, headers=self.headers).content
+        data = do_http(self.url, data=self.post, headers=self.headers, timeout=self.fetch_timeout).content
 
         logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 
