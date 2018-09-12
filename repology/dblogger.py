@@ -122,6 +122,10 @@ class LogRunManager:
         success = True
         trace = None
 
+        if exc_type is KeyboardInterrupt:
+            database.update_repository_run_id(self.reponame, None, 'current')
+            return
+
         if exc_type:
             self.logger.log('{}: {}'.format(exc_type.__name__, exc_val), severity=Logger.ERROR)
             success = False
