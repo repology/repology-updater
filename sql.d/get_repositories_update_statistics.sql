@@ -46,7 +46,10 @@ SELECT
 
 	now() - last_failed_parse_run.finish_ts AS last_failed_parse_ago,
 	last_failed_parse_run.num_warnings AS last_failed_parse_warnings,
-	last_failed_parse_run.num_errors AS last_failed_parse_errors
+	last_failed_parse_run.num_errors AS last_failed_parse_errors,
+
+	CASE WHEN length(fetch_history) = 0 THEN 0.0 ELSE 100.0 * length(replace(fetch_history, 's', '')) / length(fetch_history) END AS fetch_failure_rate,
+	CASE WHEN length(parse_history) = 0 THEN 0.0 ELSE 100.0 * length(replace(parse_history, 's', '')) / length(parse_history) END AS parse_failure_rate
 FROM repositories
 LEFT JOIN runs AS current_run ON (current_run.id = current_run_id)
 LEFT JOIN runs AS last_successful_fetch_run ON (last_successful_fetch_run.id = last_successful_fetch_run_id)

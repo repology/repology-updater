@@ -37,5 +37,10 @@ SET
     last_failed_parse_run_id
 {% endif %}
 		= %(run_id)s
+{% if run_type == 'fetch' %}
+	, fetch_history = left(CASE WHEN %(success)s THEN 's' ELSE 'f' END || fetch_history, 10)
+{% elif run_type == 'parse' %}
+	, parse_history = left(CASE WHEN %(success)s THEN 's' ELSE 'f' END || parse_history, 10)
+{% endif %}
 WHERE
 	name = %(reponame)s;
