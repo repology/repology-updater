@@ -87,6 +87,7 @@ WITH removed_runs AS (
 				last_successful_parse_run_id = runs.id OR
 				last_failed_parse_run_id = runs.id
 		)
+		AND finish_ts < now() - INTERVAL '7' DAY
 	RETURNING
 		id
 )
