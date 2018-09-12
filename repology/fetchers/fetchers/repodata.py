@@ -20,26 +20,27 @@ import lzma
 import xml.etree.ElementTree
 
 from repology.fetchers import ScratchFileFetcher
-from repology.fetchers.fetch import fetch
+from repology.fetchers.http import do_http
 
 
 class RepodataFetcher(ScratchFileFetcher):
-    def __init__(self, url):
+    def __init__(self, url, fetch_timeout=60):
         super(RepodataFetcher, self).__init__(binary=True)
 
         self.url = url
+        self.fetch_timeout = fetch_timeout
 
     def do_fetch(self, statefile, logger):
         # Get and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)
-        repomd_content = fetch(repomd_url, check_status=True).text
+        repomd_content = do_http(repomd_url, check_status=True, timeout=self.fetch_timeout).text
         repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
 
         repodata_url = self.url + repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location').attrib['href']
 
         logger.Log('fetching ' + repodata_url)
-        data = fetch(repodata_url).content
+        data = do_http(repodata_url, timeout=self.fetch_timeout).content
 
         logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
 
