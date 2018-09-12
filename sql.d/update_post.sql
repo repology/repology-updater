@@ -70,6 +70,35 @@ WHERE
 	last_seen != now();
 
 --------------------------------------------------------------------------------
+-- Expire too old failed runs
+--------------------------------------------------------------------------------
+UPDATE
+	repositories
+SET
+	last_failed_fetch_run_id = NULL
+WHERE
+	EXISTS (
+		SELECT *
+		FROM runs
+		WHERE
+			runs.id = last_failed_fetch_run_id
+			AND runs.finish_ts < now() - INTERVAL '31' DAY
+	);
+
+UPDATE
+	repositories
+SET
+	last_failed_parse_run_id = NULL
+WHERE
+	EXISTS (
+		SELECT *
+		FROM runs
+		WHERE
+			runs.id = last_failed_parse_run_id
+			AND runs.finish_ts < now() - INTERVAL '31' DAY
+	);
+
+--------------------------------------------------------------------------------
 -- Clean up unreferenced runs and logs
 --------------------------------------------------------------------------------
 WITH removed_runs AS (
@@ -86,6 +115,10 @@ WITH removed_runs AS (
 				last_failed_fetch_run_id = runs.id OR
 				last_successful_parse_run_id = runs.id OR
 				last_failed_parse_run_id = runs.id
+		)
+		AND (
+			(successful AND finish_ts < now() - INTERVAL '7' DAY) OR
+			(finish_ts < now() - INTERVAL '31' DAY)
 		)
 	RETURNING
 		id

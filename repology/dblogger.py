@@ -34,27 +34,52 @@ def _severity_to_sql(severity):
 
 
 class RealtimeDatabaseLogger(Logger):
-    def __init__(self, db, run_id):
+    def __init__(self, db, run_id, maxlines=2500):
         self.db = db
         self.run_id = run_id
-        self.lineno = 1
+        self.numlines = 0
+        self.maxlines = maxlines
 
     def _write_log(self, message, severity):
+        if self.numlines == self.maxlines:
+            self.db.add_log_line(
+                self.run_id,
+                self.numlines + 1,
+                None,
+                _severity_to_sql(Logger.ERROR),
+                'Log trimmed at {} lines'.format(self.maxlines)
+            )
+            self.numlines += 1
+
+        if self.numlines >= self.maxlines:
+            return
+
         self.db.add_log_line(
             self.run_id,
-            self.lineno,
+            self.numlines + 1,
             None,
             _severity_to_sql(severity),
             message
         )
-        self.lineno += 1
+        self.numlines += 1
 
 
 class PostponedDatabaseLogger(Logger):
-    def __init__(self):
+    def __init__(self, maxlines=2500):
         self.lines = []
+        self.maxlines = maxlines
 
     def _write_log(self, message, severity):
+        if len(self.lines) == self.maxlines:
+            self.lines.append((
+                datetime.datetime.now(),
+                Logger.ERROR,
+                'Log trimmed at {} lines'.format(self.maxlines)
+            ))
+
+        if len(self.lines) >= self.maxlines:
+            return
+
         self.lines.append((
             datetime.datetime.now(),
             severity,
@@ -96,6 +121,10 @@ class LogRunManager:
 
         success = True
         trace = None
+
+        if exc_type is KeyboardInterrupt:
+            database.update_repository_run_id(self.reponame, None, 'current')
+            return
 
         if exc_type:
             self.logger.log('{}: {}'.format(exc_type.__name__, exc_val), severity=Logger.ERROR)

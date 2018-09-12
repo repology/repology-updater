@@ -10,7 +10,7 @@
 
 {% macro update_run_info(run_id, ago, errors, warnings) -%}
 {%- if run_id -%}
-	<b><a href="{{ url_for('log', run_id=run_id) }}">{{ macros.format_time_interval_short(ago) }}</a> ago</b>
+	<b><a href="{{ url_for('log', run_id=run_id) }}" rel="nofollow">{{ macros.format_time_interval_short(ago) }}</a> ago</b>
 	{%- if errors %}, <span class="text-danger">{{ errors }} err</span>{% endif -%}
 	{%- if warnings %}, <span class="text-warning">{{ warnings }} warn</span>{% endif -%}
 {%- else -%}
@@ -28,14 +28,16 @@
 		<tr>
 			<th class="text-right" rowspan="2">Repository</th>
 			<th class="text-center" rowspan="2">Current run</th>
-			<th class="text-center" colspan="2">Fetch</th>
-			<th class="text-center" colspan="2">Parse</th>
+			<th class="text-center" colspan="3">Fetch</th>
+			<th class="text-center" colspan="3">Parse</th>
 		</tr>
 		<tr>
 			<th class="text-center">Last success</th>
 			<th class="text-center">Last failure</th>
+			<th class="text-center">Fail rate</th>
 			<th class="text-center">Last success</th>
 			<th class="text-center">Last failure</th>
+			<th class="text-center">Fail rate</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -51,10 +53,14 @@
 			>
 			<td class="text-right"><a href="{{ url_for('repository', repo=repo.name) }}">{{ repometadata[repo.name].desc }}</a></td>
 			<td class="text-center">{% if repo.current_run_id %}<b><a href="{{ url_for('log', run_id=repo.current_run_id) }}" rel="noindex,nofollow">{{ repo.current_run_type }}, {{ macros.format_time_interval_short(repo.current_run_duration) }}</a></b>{% else %}-{% endif %}</td>
+
 			<td class="text-center">{{ update_run_info(repo.last_successful_fetch_run_id, repo.last_successful_fetch_ago, repo.last_successful_fetch_errors, repo.last_successful_fetch_warnings) }}</td>
 			<td class="text-center">{{ update_run_info(repo.last_failed_fetch_run_id, repo.last_failed_fetch_ago, repo.last_failed_fetch_errors, repo.last_failed_fetch_warnings) }}</td>
+			<td class="text-center">{% if repo.fetch_failure_rate %}<b>{{ repo.fetch_failure_rate|round }}%</b>{% else %}-{% endif %}</td>
+
 			<td class="text-center">{{ update_run_info(repo.last_successful_parse_run_id, repo.last_successful_parse_ago, repo.last_successful_parse_errors, repo.last_successful_parse_warnings) }}</td>
 			<td class="text-center">{{ update_run_info(repo.last_failed_parse_run_id, repo.last_failed_parse_ago, repo.last_failed_parse_errors, repo.last_failed_parse_warnings) }}</td>
+			<td class="text-center">{% if repo.parse_failure_rate %}<b>{{ repo.parse_failure_rate|round }}%</b>{% else %}-{% endif %}</td>
 		</tr>
 	{% endfor %}
 	</tbody>

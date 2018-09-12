@@ -101,8 +101,8 @@ def process_repositories(env):
                 env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:
                 raise
-            except:
-                env.get_main_logger().get_indented().log('failed', severity=Logger.ERROR)
+            except Exception as e:
+                env.get_main_logger().get_indented().log('failed: ' + str(e), severity=Logger.ERROR)
                 pass
 
         if env.get_options().parse:
@@ -113,8 +113,8 @@ def process_repositories(env):
                 env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:
                 raise
-            except:
-                env.get_main_logger().get_indented().log('failed', severity=Logger.ERROR)
+            except Exception as e:
+                env.get_main_logger().get_indented().log('failed: ' + str(e), severity=Logger.ERROR)
                 pass
 
 
