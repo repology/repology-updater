@@ -10,7 +10,7 @@
 
 {% macro update_run_info(run_id, ago, errors, warnings) -%}
 {%- if run_id -%}
-	<b><a href="{{ url_for('log', run_id=run_id) }}">{{ macros.format_time_interval_short(ago) }}</a> ago</b>
+	<b><a href="{{ url_for('log', run_id=run_id) }}" rel="nofollow">{{ macros.format_time_interval_short(ago) }}</a> ago</b>
 	{%- if errors %}, <span class="text-danger">{{ errors }} err</span>{% endif -%}
 	{%- if warnings %}, <span class="text-warning">{{ warnings }} warn</span>{% endif -%}
 {%- else -%}
