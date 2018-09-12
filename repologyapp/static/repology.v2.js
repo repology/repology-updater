@@ -26,6 +26,13 @@ function tzfix() {
 				.format('YYYY-MM-DD HH:mm')
 		)
 	});
+
+	$(".tzfix_time_sec").each(function() {
+		$(this).text(
+			moment($(this).attr('datetime'))
+				.format('YYYY-MM-DD HH:mm:ss')
+		)
+	});
 }
 
 $(document).ready(function() {
