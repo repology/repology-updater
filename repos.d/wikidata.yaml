@@ -15,7 +15,6 @@
       fetcher: FileFetcher
       parser: WikidataJsonParser
       url: 'https://query.wikidata.org/sparql'
-      fetch_timeout: 60
       post:
         format: json
         query: |
