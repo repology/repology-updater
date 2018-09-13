@@ -38,9 +38,9 @@ SET
 {% endif %}
 		= %(run_id)s
 {% if run_type == 'fetch' %}
-	, fetch_history = left(CASE WHEN %(success)s THEN 's' ELSE 'f' END || fetch_history, 10)
+	, fetch_history = right(fetch_history || CASE WHEN %(success)s THEN 's' ELSE 'f' END, 10)
 {% elif run_type == 'parse' %}
-	, parse_history = left(CASE WHEN %(success)s THEN 's' ELSE 'f' END || parse_history, 10)
+	, parse_history = right(parse_history || CASE WHEN %(success)s THEN 's' ELSE 'f' END, 10)
 {% endif %}
 WHERE
 	name = %(reponame)s;
