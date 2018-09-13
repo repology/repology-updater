@@ -259,6 +259,9 @@ class PackageTransformer:
         if 'noscheme' in rule:
             package.SetFlag(PackageFlags.noscheme, rule['noscheme'])
 
+        if 'rolling' in rule:
+            package.SetFlag(PackageFlags.rolling, rule['rolling'])
+
         if 'snapshot' in rule:
             # XXX: the same as ignored for now
             package.SetFlag(PackageFlags.ignore, rule['snapshot'])
@@ -267,8 +270,9 @@ class PackageTransformer:
             # XXX: the same as devel for now
             package.SetFlag(PackageFlags.devel, rule['successor'])
 
-        if 'rolling' in rule:
-            package.SetFlag(PackageFlags.rolling, rule['rolling'])
+        if 'generated' in rule:
+            # XXX: the same as rolling for now
+            package.SetFlag(PackageFlags.rolling, rule['generated'])
 
         if 'last' in rule:
             result = RuleApplyResult.last
