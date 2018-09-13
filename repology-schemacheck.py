@@ -92,6 +92,7 @@ rulesets = families + [
     'deb_multimedia',
     'deepin',
     'epel',
+    'frugalware',
     'hyperbola',
     'maemo',
     'manjaro',
