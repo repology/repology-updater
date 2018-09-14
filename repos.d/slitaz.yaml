@@ -7,7 +7,7 @@
   family: slitaz
   minpackages: 5200
   sources:
-    - name: packages.info
+    - name: repo.json
       fetcher: FileFetcher
       parser: SliTazJsonParser
       url: http://mirror1.slitaz.org/packages/cooking/repo.json.gz
