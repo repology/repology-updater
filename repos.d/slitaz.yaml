@@ -30,11 +30,11 @@
   family: slitaz
   minpackages: 5200
   sources:
-    - name: packages.info
+    - name: repo.json
       fetcher: FileFetcher
-      parser: SliTazInfoParser
-      url: http://mirror1.slitaz.org/packages/next/packages.info
-      numfields: 10
+      parser: SliTazJsonParser
+      url: http://mirror1.slitaz.org/packages/next/repo.json.gz
+      compression: gz
   repolinks:
     - desc: SliTaz home
       url: http://www.slitaz.org/
