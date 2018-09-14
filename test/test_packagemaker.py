@@ -71,6 +71,41 @@ class TestPackageMaker(unittest.TestCase):
 
         self.assertEqual(pkg.comment, 'some package foo')
 
+    def test_redefine(self):
+        factory = PackageFactory(NoopLogger())
+
+        maker = factory.begin()
+        maker.set_name('foo')
+        maker.set_name('bar')
+        maker.set_version('1.0')
+        maker.set_version('1.1')
+        maker.set_summary('Foo')
+        maker.set_summary('Bar')
+        pkg = maker.unwrap()
+
+        self.assertEqual(pkg.name, 'bar')
+        self.assertEqual(pkg.version, '1.1')
+        self.assertEqual(pkg.comment, 'Bar')
+
+    def test_nulls(self):
+        factory = PackageFactory(NoopLogger())
+
+        maker = factory.begin()
+        maker.set_name('foo')
+        maker.set_name('')
+        maker.set_name(None)
+        maker.set_version('1.0')
+        maker.set_version('')
+        maker.set_version(None)
+        maker.set_summary('Foo')
+        maker.set_summary('')
+        maker.set_summary(None)
+        pkg = maker.unwrap()
+
+        self.assertEqual(pkg.name, 'foo')
+        self.assertEqual(pkg.version, '1.0')
+        self.assertEqual(pkg.comment, 'Foo')
+
 
 if __name__ == '__main__':
     unittest.main()
