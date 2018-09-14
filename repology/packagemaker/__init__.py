@@ -48,13 +48,13 @@ class PackageMakerBase:
         origvalue = value
 
         for normalizer in normalizers:
+            if value is None:
+                break
+
             value, error = normalizer(value)
 
             if error is not None:
                 self.log('{}: "{}" {}'.format(fieldname, origvalue, error), Logger.ERROR if value is None else Logger.WARNING)
-
-            if value is None:
-                return None
 
         return value
 
