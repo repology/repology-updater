@@ -117,15 +117,10 @@ class PackageMaker(PackageMakerBase):
 
     @PackageMakerBase._simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
     def set_name(self, name):
-        if self.package.name:
-            self.log('duplicate name: "{}" after "{}"'.format(name, self.package.name), severity=Logger.ERROR)
         self.package.name = name
 
     @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_version(self, version, version_normalizer=None):
-        if self.package.version:
-            self.log_package('duplicate version: "{}" after "{}"'.format(version, self.package.version), severity=Logger.ERROR)
-
         if version_normalizer is None:
             self.package.version = version
         else:
@@ -153,8 +148,6 @@ class PackageMaker(PackageMakerBase):
 
     @PackageMakerBase._simple_setter('summary', str, nzs.strip)
     def set_summary(self, summary):
-        if self.package.comment:
-            self.log_package('duplicate summary: "{}" after "{}"'.format(summary, self.package.comment), severity=Logger.ERROR)
         self.package.comment = summary
 
     @PackageMakerBase._omnivorous_setter('maintainer', str, nzs.strip, nzs.forbid_newlines)
