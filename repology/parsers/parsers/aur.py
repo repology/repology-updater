@@ -66,4 +66,7 @@ class AURParser(Parser):
                     if 'Maintainer' in result and result['Maintainer']:
                         pkg.maintainers += extract_maintainers(result['Maintainer'] + '@aur')
 
+                    if 'PackageBase' in result and result['PackageBase']:
+                        pkg.effname = result['PackageBase']
+
                     yield pkg
