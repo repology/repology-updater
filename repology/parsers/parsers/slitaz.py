@@ -18,6 +18,7 @@
 import json
 
 from repology.logger import Logger
+from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
@@ -34,12 +35,16 @@ class SliTazJsonParser(Parser):
                 pkg.add_homepages(item['home'])
                 pkg.add_downloads(item.get('src'))
 
+                if pkg.version == 'latest':
+                    pkg.set_flags(PackageFlags.rolling)
+
                 for subitem in item['pkgs']:
                     subpkg = pkg.clone()
 
                     subpkg.add_categories(subitem['cat'])
                     subpkg.set_summary(subitem['desc'])
                     subpkg.set_name(subitem['name'])
+                    subpkg.set_version(subitem.get('ver'))
 
                     yield subpkg
 
