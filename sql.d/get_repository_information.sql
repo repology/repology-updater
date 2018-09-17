@@ -40,6 +40,7 @@ SELECT
 	num_metapackages_outdated,
 	num_metapackages_comparable,
 	num_problems,
+	num_maintainers,
 	first_seen,
 	last_seen,
 	now() - first_seen AS first_seen_ago,
