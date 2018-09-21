@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,7 +17,6 @@
 
 import json
 
-
 from repology.parsers import Parser
 
 
@@ -30,16 +29,15 @@ class RavenportsJsonParser(Parser):
         for packagedata in jsondata['ravenports']:
             pkg = factory.begin()
 
-            pkg.name = packagedata['namebase']
-            pkg.version = packagedata['version']
-            pkg.category = packagedata['keywords'][0]
-            if 'homepage' in packagedata:
-                pkg.homepage = packagedata['homepage']
+            pkg.set_name(packagedata['namebase'])
+            pkg.set_version(packagedata['version'])
+            pkg.add_categories(packagedata['keywords'])
+            pkg.add_homepages(packagedata.get('homepage'))
 
-            pkg.downloads = packagedata['distfile']
-            pkg.comment = packagedata['variants'][0]['sdesc']
+            pkg.add_downloads(packagedata['distfile'])
+            pkg.set_summary(packagedata['variants'][0]['sdesc'])
 
-            pkg.extrafields['bucket'] = packagedata['bucket']
-            pkg.extrafields['variant'] = packagedata['variants'][0]['label']
+            pkg.set_extra_field('bucket', packagedata['bucket'])
+            pkg.set_extra_field('variant', packagedata['variants'][0]['label'])
 
             yield pkg

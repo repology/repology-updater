@@ -29,9 +29,9 @@ class RPMFTPListParser(Parser):
 
                 pkg = factory.begin()
 
-                pkg.name = nevra[0]
-                pkg.version = nevra[2]
+                pkg.set_name(nevra[0])
+                pkg.set_version(nevra[2])
 
-                pkg.extrafields['nevr'] = filename.rsplit('.', 2)[0]
+                pkg.set_extra_field('nevr', filename.rsplit('.', 2)[0])
 
                 yield pkg

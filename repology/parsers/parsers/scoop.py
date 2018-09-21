@@ -36,23 +36,20 @@ class ScoopGitParser(Parser):
 
                 pkg = factory.begin()
 
-                pkg.name = filename[:-5]
-                pkg.version = jsondata['version']
+                pkg.set_name(filename[:-5])
+                pkg.set_version(jsondata['version'])
 
-                if 'url' in jsondata:
-                    pkg.downloads = jsondata['url'] if isinstance(jsondata['url'], list) else [jsondata['url']]
-
-                if 'homepage' in jsondata:
-                    pkg.homepage = jsondata['homepage']
+                pkg.add_downloads(jsondata.get('url'))
+                pkg.add_homepages(jsondata.get('homepage'))
 
                 if 'license' in jsondata:
                     if isinstance(jsondata['license'], str):
-                        pkg.licenses = [jsondata['license']]
+                        pkg.add_licenses(jsondata['license'])
                     elif isinstance(jsondata['license'], dict) and 'identifier' in jsondata['license']:
-                        pkg.licenses = [jsondata['license']['identifier']]
+                        pkg.add_licenses(jsondata['license']['identifier'])
                     else:
-                        factory.log('unsupported license format for {}'.format(pkg.name), severity=Logger.ERROR)
+                        pkg.log('unsupported license format for {}'.format(pkg.name), severity=Logger.ERROR)
 
-                pkg.extrafields = {'path': os.path.relpath(jsonpath, path)}
+                pkg.set_extra_field('path', os.path.relpath(jsonpath, path))
 
                 yield pkg

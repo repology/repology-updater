@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -21,19 +21,7 @@ import subprocess
 
 from repology.config import config
 from repology.parsers import Parser
-
-
-def SanitizeVersion(version):
-    origversion = version
-
-    pos = version.rfind('+')
-    if pos != -1:
-        version = version[0:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+from repology.parsers.versions import VersionStripper
 
 
 class MacPortsParser(Parser):
@@ -41,6 +29,8 @@ class MacPortsParser(Parser):
         self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
 
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right('+')
+
         with subprocess.Popen(
             [config['TCLSH'], self.helperpath, path],
             errors='ignore',
@@ -50,46 +40,39 @@ class MacPortsParser(Parser):
             for pkgdata in json.load(macportsjson.stdout):
                 pkg = factory.begin()
 
-                pkg.name = pkgdata['name']
-                pkg.version = pkgdata['version']
+                pkg.set_name(pkgdata['name'])
+                pkg.set_version(pkgdata['version'], normalize_version)
 
                 # drop obsolete ports (see #235)
                 if 'replaced_by' in pkgdata:
                     continue
 
-                if 'description' in pkgdata:
-                    pkg.comment = pkgdata['description']
-
-                if 'homepage' in pkgdata:
-                    pkg.homepage = pkgdata['homepage']
-
-                if 'categories' in pkgdata:
-                    pkg.category = pkgdata['categories'].split()[0]
-
-                if 'license' in pkgdata:
-                    pkg.licenses = [pkgdata['license']]  # XXX: properly handle braces
+                pkg.set_summary(pkgdata.get('description'))
+                pkg.add_homepages(pkgdata.get('homepage'))
+                pkg.add_categories(pkgdata.get('categories', '').split())
+                pkg.add_licenses(pkgdata.get('license'))  # XXX: properly handle braces
 
                 if 'maintainers' in pkgdata:
                     for maintainer in pkgdata['maintainers'].replace('{', '').replace('}', '').lower().split():
                         if maintainer.startswith('@'):
                             # @foo means github user foo
-                            pkg.maintainers.append(maintainer[1:] + '@github')
+                            pkg.add_maintainers(maintainer[1:] + '@github')
                         elif '@' in maintainer:
                             # plain email
-                            pkg.maintainers.append(maintainer)
+                            pkg.add_maintainers(maintainer)
                         elif ':' in maintainer:
                             # foo.com:bar means bar@foo.com
                             host, user = maintainer.split(':', 1)
-                            pkg.maintainers.append(user + '@' + host)
+                            pkg.add_maintainers(user + '@' + host)
                         elif maintainer == 'openmaintainer':
                             # ignore, this is a flag that minor changes to a port
                             # are allowed without involving the maintainer
                             pass
                         else:
                             # otherwise it's username@macports.org
-                            pkg.maintainers.append(maintainer + '@macports.org')
+                            pkg.add_maintainers(maintainer + '@macports.org')
 
-                pkg.extrafields['portdir'] = pkgdata['portdir']
-                pkg.extrafields['portname'] = pkgdata['portdir'].split('/')[1]
+                pkg.set_extra_field('portdir', pkgdata['portdir'])
+                pkg.set_extra_field('portname', pkgdata['portdir'].split('/')[1])
 
                 yield pkg
