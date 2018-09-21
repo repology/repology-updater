@@ -29,8 +29,7 @@ from repology.package import PackageFlags
 
 
 class RuleApplyResult:
-    unmatched = 1
-    matched = 2
+    default = 1
     last = 3
 
 
@@ -51,6 +50,14 @@ class PackageContext:
 
     def HasFlags(self, names):
         return not self.flags.isdisjoint(names)
+
+
+class MatchContext:
+    __slots__ = ['name_match', 'ver_match']
+
+    def __init__(self):
+        self.name_match = None
+        self.ver_match = None
 
 
 class PackageTransformer:
@@ -123,107 +130,107 @@ class PackageTransformer:
             else:
                 self.slowrules.append(rule)
 
-    def ApplyRule(self, rule, package, package_context):
-        # pattern matches are reused when rule applies
-        name_match = None
-        ver_match = None
+    def _match_rule(self, rule, package, package_context):
+        match_context = MatchContext()
 
         # match family
         if 'ruleset' in rule:
             if self.repomgr.GetRepository(package.repo)['ruleset'].isdisjoint(rule['ruleset']):
-                return RuleApplyResult.unmatched
+                return None
 
         if 'noruleset' in rule:
             if not self.repomgr.GetRepository(package.repo)['ruleset'].isdisjoint(rule['noruleset']):
-                return RuleApplyResult.unmatched
+                return None
 
         # match categories
         if 'category' in rule:
             if not package.category:
-                return RuleApplyResult.unmatched
+                return None
             if package.category.lower() not in rule['category']:
-                return RuleApplyResult.unmatched
+                return None
 
         # match name
         if 'name' in rule:
             if package.effname not in rule['name']:
-                return RuleApplyResult.unmatched
+                return None
 
         # match name patterns
         if 'namepat' in rule:
-            name_match = rule['namepat'].fullmatch(package.effname)
-            if not name_match:
-                return RuleApplyResult.unmatched
+            match_context.name_match = rule['namepat'].fullmatch(package.effname)
+            if not match_context.name_match:
+                return None
 
         # match version
         if 'ver' in rule:
             if package.version not in rule['ver']:
-                return RuleApplyResult.unmatched
+                return None
 
         # match version patterns
         if 'verpat' in rule:
-            ver_match = rule['verpat'].fullmatch(package.version.lower())
-            if not ver_match:
-                return RuleApplyResult.unmatched
+            match_context.ver_match = rule['verpat'].fullmatch(package.version.lower())
+            if not match_context.ver_match:
+                return None
 
         # match number of version components
         if 'verlonger' in rule:
             if not len(re.split('[^a-zA-Z0-9]', package.version)) > rule['verlonger']:
-                return RuleApplyResult.unmatched
+                return None
 
         # compare versions
         if 'vergt' in rule:
             if version_compare(package.version, rule['vergt']) <= 0:
-                return RuleApplyResult.unmatched
+                return None
 
         if 'verge' in rule:
             if version_compare(package.version, rule['verge']) < 0:
-                return RuleApplyResult.unmatched
+                return None
 
         if 'verlt' in rule:
             if version_compare(package.version, rule['verlt']) >= 0:
-                return RuleApplyResult.unmatched
+                return None
 
         if 'verle' in rule:
             if version_compare(package.version, rule['verle']) > 0:
-                return RuleApplyResult.unmatched
+                return None
 
         if 'vereq' in rule:
             if version_compare(package.version, rule['vereq']) != 0:
-                return RuleApplyResult.unmatched
+                return None
 
         if 'verne' in rule:
             if version_compare(package.version, rule['verne']) == 0:
-                return RuleApplyResult.unmatched
+                return None
 
         # match name patterns
         if 'wwwpat' in rule:
             if not package.homepage or not rule['wwwpat'].fullmatch(package.homepage):
-                return RuleApplyResult.unmatched
+                return None
 
         if 'wwwpart' in rule:
             if not package.homepage:
-                return RuleApplyResult.unmatched
+                return None
             matched = False
             for wwwpart in rule['wwwpart']:
                 if wwwpart in package.homepage.lower():
                     matched = True
                     break
             if not matched:
-                return RuleApplyResult.unmatched
+                return None
 
         if 'flag' in rule:
             if not package_context.HasFlags(rule['flag']):
-                return RuleApplyResult.unmatched
+                return None
 
         if 'noflag' in rule:
             if package_context.HasFlags(rule['noflag']):
-                return RuleApplyResult.unmatched
-
-        # rule matches, apply effects!
-        result = RuleApplyResult.matched
+                return None
 
         rule['matches'] += 1
+
+        return match_context
+
+    def _apply_rule(self, rule, package, package_context, match_context):
+        last = False
 
         if 'remove' in rule:
             package.SetFlag(PackageFlags.remove, rule['remove'])
@@ -275,7 +282,7 @@ class PackageTransformer:
             package.SetFlag(PackageFlags.rolling, rule['generated'])
 
         if 'last' in rule:
-            result = RuleApplyResult.last
+            last = True
 
         if 'addflavor' in rule:
             flavors = []
@@ -288,8 +295,8 @@ class PackageTransformer:
             else:
                 raise RuntimeError('addflavor must be boolean or str or list')
 
-            if name_match:
-                flavors = [self.dollarN.sub(lambda x: name_match.group(int(x.group(1))), flavor) for flavor in flavors]
+            if match_context.name_match:
+                flavors = [self.dollarN.sub(lambda x: match_context.name_match.group(int(x.group(1))), flavor) for flavor in flavors]
             else:
                 flavors = [self.dollar0.sub(package.effname, flavor) for flavor in flavors]
 
@@ -305,8 +312,8 @@ class PackageTransformer:
                 package_context.SetFlag(flag)
 
         if 'setname' in rule:
-            if name_match:
-                package.effname = self.dollarN.sub(lambda x: name_match.group(int(x.group(1))), rule['setname'])
+            if match_context.name_match:
+                package.effname = self.dollarN.sub(lambda x: match_context.name_match.group(int(x.group(1))), rule['setname'])
             else:
                 package.effname = self.dollar0.sub(package.effname, rule['setname'])
 
@@ -316,8 +323,8 @@ class PackageTransformer:
             if package.origversion is None:
                 package.origversion = package.version
 
-            if ver_match:
-                package.version = self.dollarN.sub(lambda x: ver_match.group(int(x.group(1))), rule['setver'])
+            if match_context.ver_match:
+                package.version = self.dollarN.sub(lambda x: match_context.ver_match.group(int(x.group(1))), rule['setver'])
             else:
                 package.version = self.dollar0.sub(package.version, rule['setver'])
 
@@ -333,7 +340,10 @@ class PackageTransformer:
         if 'warning' in rule:
             print('Rule warning for {} in {}: {}'.format(package.name, package.repo, rule['warning']), file=sys.stderr)
 
-        return result
+        if last:
+            return RuleApplyResult.last
+
+        return RuleApplyResult.default
 
     def _get_fast_rule(self, package, lownumber=-1):
         for fastrule in self.fastrules[package.effname]:
@@ -372,8 +382,10 @@ class PackageTransformer:
         package_context = PackageContext()
 
         for rule in self._iter_package_rules(package):
-            if self.ApplyRule(rule, package, package_context) == RuleApplyResult.last:
-                return
+            match_context = self._match_rule(rule, package, package_context)
+            if match_context:
+                if self._apply_rule(rule, package, package_context, match_context) == RuleApplyResult.last:
+                    return
 
     def GetUnmatchedRules(self):
         result = []
