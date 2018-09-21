@@ -34,7 +34,7 @@ class RuleApplyResult:
     last = 3
 
 
-class PackageTransformationContext:
+class PackageContext:
     __slots__ = ['flags']
 
     def __init__(self):
@@ -123,7 +123,7 @@ class PackageTransformer:
             else:
                 self.slowrules.append(rule)
 
-    def ApplyRule(self, rule, package, context):
+    def ApplyRule(self, rule, package, package_context):
         # pattern matches are reused when rule applies
         name_match = None
         ver_match = None
@@ -213,11 +213,11 @@ class PackageTransformer:
                 return RuleApplyResult.unmatched
 
         if 'flag' in rule:
-            if not context.HasFlags(rule['flag']):
+            if not package_context.HasFlags(rule['flag']):
                 return RuleApplyResult.unmatched
 
         if 'noflag' in rule:
-            if context.HasFlags(rule['noflag']):
+            if package_context.HasFlags(rule['noflag']):
                 return RuleApplyResult.unmatched
 
         # rule matches, apply effects!
@@ -302,7 +302,7 @@ class PackageTransformer:
 
         if 'addflag' in rule:
             for flag in rule['addflag']:
-                context.SetFlag(flag)
+                package_context.SetFlag(flag)
 
         if 'setname' in rule:
             if name_match:
@@ -353,7 +353,7 @@ class PackageTransformer:
         nextfastrule = self.GetFastRule(package)
 
         # walk the slow rules sequentionally
-        context = PackageTransformationContext()
+        context = PackageContext()
         for slowrule in self.slowrules:
             result = None
 
