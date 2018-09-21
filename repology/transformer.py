@@ -335,46 +335,45 @@ class PackageTransformer:
 
         return result
 
-    def GetFastRule(self, package, lownumber=-1):
-        for fastrule in self.fastrules.get(package.effname, []):
+    def _get_fast_rule(self, package, lownumber=-1):
+        for fastrule in self.fastrules[package.effname]:
             if fastrule['number'] > lownumber:
                 return fastrule
 
         return None
+
+    def _iter_package_rules(self, package):
+        # keep the next fast rule that will match
+        # it will be racalculated as soon as it's reached or
+        # as soon as any slow rule matches (as it may change effname)
+        nextfastrule = self._get_fast_rule(package)
+
+        # iterate slow rules
+        for slowrule in self.slowrules:
+            # yield fast rules before current slow one
+            while nextfastrule and nextfastrule['number'] < slowrule['number']:
+                yield nextfastrule
+                nextfastrule = self._get_fast_rule(package, nextfastrule['number'])
+
+            # iterate slow rule
+            yield slowrule
+            nextfastrule = self._get_fast_rule(package, slowrule['number'])
+
+        # yield remaining fast rules
+        while nextfastrule:
+            yield nextfastrule
+            nextfastrule = self._get_fast_rule(package, nextfastrule['number'])
 
     def Process(self, package):
         # start with package.name as is, if it was not already set
         if package.effname is None:
             package.effname = package.name
 
-        # keep the next fast rule that will match
-        # it will be racalculated as soon as it's reached or
-        # as soon as any slow rule matches (as it may change effname)
-        nextfastrule = self.GetFastRule(package)
+        package_context = PackageContext()
 
-        # walk the slow rules sequentionally
-        context = PackageContext()
-        for slowrule in self.slowrules:
-            result = None
-
-            # apply fast rules
-            while nextfastrule and nextfastrule['number'] < slowrule['number']:
-                if self.ApplyRule(nextfastrule, package, context) == RuleApplyResult.last:
-                    return
-                nextfastrule = self.GetFastRule(package, nextfastrule['number'])
-
-            # apply slow rule
-            result = self.ApplyRule(slowrule, package, context)
-            if result == RuleApplyResult.matched:
-                nextfastrule = self.GetFastRule(package, slowrule['number'])
-            elif result == RuleApplyResult.last:
+        for rule in self._iter_package_rules(package):
+            if self.ApplyRule(rule, package, package_context) == RuleApplyResult.last:
                 return
-
-        # apply remaining fast rules
-        while nextfastrule:
-            if self.ApplyRule(nextfastrule, package, context) == RuleApplyResult.last:
-                return
-            nextfastrule = self.GetFastRule(package, nextfastrule['number'])
 
     def GetUnmatchedRules(self):
         result = []
