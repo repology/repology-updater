@@ -24,7 +24,7 @@ from repology.logger import Logger
 from repology.parsers import Parser
 
 
-def ExpandDownloadUrlTemplates(url):
+def _expand_mirrors(url):
     http_sourceforge = 'http://downloads.sourceforge.net'
     ftp_gnu = 'ftp://ftp.gnu.org/gnu'
     return url.replace('$httpSourceforge', http_sourceforge) \
@@ -62,7 +62,7 @@ class GoboLinuxGitParser(Parser):
                     for line in recipe:
                         line = line.strip()
                         if line.startswith('url='):
-                            download = ExpandDownloadUrlTemplates(line[4:])
+                            download = _expand_mirrors(line[4:])
                             if '$' not in download:
                                 pkg.downloads.append(download.strip('"'))
                             else:
