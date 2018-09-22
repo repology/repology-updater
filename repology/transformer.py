@@ -60,6 +60,52 @@ class MatchContext:
         self.ver_match = None
 
 
+class RuleBlock:
+    TYPE_SIMPLE = 1
+    TYPE_NAME_MAP = 2
+
+    def __init__(self):
+        self.type = None
+        self.simple_rules = []
+        self.name_map = defaultdict(list)
+
+    def add_rule(self, rule):
+        rule_type = RuleBlock.TYPE_SIMPLE
+        if 'name' in rule:
+            rule_type = RuleBlock.TYPE_NAME_MAP
+
+        if self.type is None:
+            self.type = rule_type
+        elif self.type != rule_type:
+            return False
+
+        if rule_type == RuleBlock.TYPE_SIMPLE:
+            self.simple_rules.append(rule)
+        elif rule_type == RuleBlock.TYPE_NAME_MAP:
+            for name in rule['name']:
+                self.name_map[name].append(rule)
+
+        return True
+
+    def iter_rules(self, package):
+        if self.type == RuleBlock.TYPE_SIMPLE:
+            yield from self.simple_rules
+        elif self.type == RuleBlock.TYPE_NAME_MAP:
+            min_rule_num = 0
+            while True:
+                rules = self.name_map[package.effname]
+                found = False
+                for rule in rules:
+                    if rule['number'] >= min_rule_num:
+                        yield rule
+                        min_rule_num = rule['number'] + 1
+                        found = True
+                        break
+
+                if not found:
+                    return
+
+
 class PackageTransformer:
     def __init__(self, repomgr, rulesdir=None, rulestext=None):
         self.repomgr = repomgr
@@ -120,15 +166,12 @@ class PackageTransformer:
             rule['matches'] = 0
             rule['number'] = rulenum
 
-        self.fastrules = defaultdict(list)
-        self.slowrules = []
+        self.ruleblocks = [RuleBlock()]
 
         for rule in self.rules:
-            if 'name' in rule:
-                for name in rule['name']:
-                    self.fastrules[name].append(rule)
-            else:
-                self.slowrules.append(rule)
+            if not self.ruleblocks[-1].add_rule(rule):
+                self.ruleblocks.append(RuleBlock())
+                self.ruleblocks[-1].add_rule(rule)
 
     def _match_rule(self, rule, package, package_context):
         match_context = MatchContext()
@@ -345,34 +388,9 @@ class PackageTransformer:
 
         return RuleApplyResult.default
 
-    def _get_fast_rule(self, package, lownumber=-1):
-        for fastrule in self.fastrules[package.effname]:
-            if fastrule['number'] > lownumber:
-                return fastrule
-
-        return None
-
     def _iter_package_rules(self, package):
-        # keep the next fast rule that will match
-        # it will be racalculated as soon as it's reached or
-        # as soon as any slow rule matches (as it may change effname)
-        nextfastrule = self._get_fast_rule(package)
-
-        # iterate slow rules
-        for slowrule in self.slowrules:
-            # yield fast rules before current slow one
-            while nextfastrule and nextfastrule['number'] < slowrule['number']:
-                yield nextfastrule
-                nextfastrule = self._get_fast_rule(package, nextfastrule['number'])
-
-            # iterate slow rule
-            yield slowrule
-            nextfastrule = self._get_fast_rule(package, slowrule['number'])
-
-        # yield remaining fast rules
-        while nextfastrule:
-            yield nextfastrule
-            nextfastrule = self._get_fast_rule(package, nextfastrule['number'])
+        for ruleblock in self.ruleblocks:
+            yield from ruleblock.iter_rules(package)
 
     def Process(self, package):
         # start with package.name as is, if it was not already set
