@@ -70,6 +70,9 @@ class SingleRuleBlock:
     def iter_all_rules(self):
         yield self.rule
 
+    def get_rule_range(self):
+        return self.rule['number'], self.rule['number']
+
 
 class NameMapRuleBlock:
     def __init__(self, rules):
@@ -105,6 +108,9 @@ class NameMapRuleBlock:
     def iter_all_rules(self):
         yield from self.rules
 
+    def get_rule_range(self):
+        return self.rules[0]['number'], self.rules[-1]['number']
+
 
 class CoveringRuleBlock:
     def __init__(self, blocks):
@@ -132,6 +138,9 @@ class CoveringRuleBlock:
     def iter_all_rules(self):
         for block in self.blocks:
             yield from block.iter_all_rules()
+
+    def get_rule_range(self):
+        return self.blocks[0].get_rule_range()[0], self.blocks[-1].get_rule_range()[-1]
 
 
 class PackageTransformer:
