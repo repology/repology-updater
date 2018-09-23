@@ -225,7 +225,7 @@ class PackageTransformer:
                     has_unconditional = True
                     break
 
-            THRESHOLD = 0.01
+            THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
             if has_unconditional or max_matches >= self.packages_processed * THRESHOLD:
                 if current_lowfreq_blocks:
                     self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
