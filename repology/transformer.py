@@ -86,7 +86,11 @@ class NameMapRuleBlock:
     def iter_rules(self, package):
         min_rule_num = 0
         while True:
+            if package.effname not in self.name_map:
+                return
+
             rules = self.name_map[package.effname]
+
             found = False
             for rule in rules:
                 if rule['number'] >= min_rule_num:
