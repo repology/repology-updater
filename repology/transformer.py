@@ -60,50 +60,74 @@ class MatchContext:
         self.ver_match = None
 
 
-class RuleBlock:
-    TYPE_SIMPLE = 1
-    TYPE_NAME_MAP = 2
+class SingleRuleBlock:
+    def __init__(self, rule):
+        self.rule = rule
 
-    def __init__(self):
-        self.type = None
-        self.simple_rules = []
+    def iter_rules(self, package):
+        yield self.rule
+
+    def iter_all_rules(self):
+        yield self.rule
+
+
+class NameMapRuleBlock:
+    def __init__(self, rules):
+        self.rules = rules
         self.name_map = defaultdict(list)
 
-    def add_rule(self, rule):
-        rule_type = RuleBlock.TYPE_SIMPLE
-        if 'name' in rule:
-            rule_type = RuleBlock.TYPE_NAME_MAP
+        for rule in rules:
+            if 'name' not in rule:
+                raise RuntimeError('unexpected rule kind for NameMapRuleBlock')
 
-        if self.type is None:
-            self.type = rule_type
-        elif self.type != rule_type:
-            return False
-
-        if rule_type == RuleBlock.TYPE_SIMPLE:
-            self.simple_rules.append(rule)
-        elif rule_type == RuleBlock.TYPE_NAME_MAP:
             for name in rule['name']:
                 self.name_map[name].append(rule)
 
-        return True
+    def iter_rules(self, package):
+        min_rule_num = 0
+        while True:
+            rules = self.name_map[package.effname]
+            found = False
+            for rule in rules:
+                if rule['number'] >= min_rule_num:
+                    yield rule
+                    min_rule_num = rule['number'] + 1
+                    found = True
+                    break
+
+            if not found:
+                return
+
+    def iter_all_rules(self):
+        yield from self.rules
+
+
+class CoveringRuleBlock:
+    def __init__(self, blocks):
+        self.names = set()
+
+        megaregexp_parts = []
+        for block in blocks:
+            for rule in block.iter_all_rules():
+                if 'name' in rule:
+                    for name in rule['name']:
+                        self.names.add(name)
+                elif 'namepat' in rule:
+                    megaregexp_parts.append('(?:' + rule['namepat'].pattern + ')')
+                else:
+                    raise RuntimeError('unexpected rule kind for CoveringRuleBlock')
+
+        self.megaregexp = re.compile('|'.join(megaregexp_parts), re.ASCII)
+        self.blocks = blocks
 
     def iter_rules(self, package):
-        if self.type == RuleBlock.TYPE_SIMPLE:
-            yield from self.simple_rules
-        elif self.type == RuleBlock.TYPE_NAME_MAP:
-            min_rule_num = 0
-            while True:
-                rules = self.name_map[package.effname]
-                found = False
-                for rule in rules:
-                    if rule['number'] >= min_rule_num:
-                        yield rule
-                        min_rule_num = rule['number'] + 1
-                        found = True
-                        break
+        if package.effname in self.names or self.megaregexp.fullmatch(package.effname):
+            for block in self.blocks:
+                yield from block.iter_rules(package)
 
-                if not found:
-                    return
+    def iter_all_rules(self):
+        for block in self.blocks:
+            yield from block.iter_all_rules()
 
 
 class PackageTransformer:
@@ -166,12 +190,49 @@ class PackageTransformer:
             rule['matches'] = 0
             rule['number'] = rulenum
 
-        self.ruleblocks = [RuleBlock()]
+        self.ruleblocks = []
+        current_name_rules = []
 
         for rule in self.rules:
-            if not self.ruleblocks[-1].add_rule(rule):
-                self.ruleblocks.append(RuleBlock())
-                self.ruleblocks[-1].add_rule(rule)
+            if 'name' in rule:
+                current_name_rules.append(rule)
+            else:
+                if current_name_rules:
+                    self.ruleblocks.append(NameMapRuleBlock(current_name_rules))
+                    current_name_rules = []
+                self.ruleblocks.append(SingleRuleBlock(rule))
+
+        if current_name_rules:
+            self.ruleblocks.append(NameMapRuleBlock(current_name_rules))
+
+        self.optruleblocks = self.ruleblocks
+        self.packages_processed = 0
+
+    def _recalc_opt_ruleblocks(self):
+        self.optruleblocks = []
+
+        current_lowfreq_blocks = []
+        for block in self.ruleblocks:
+            max_matches = 0
+            has_unconditional = False
+            for rule in block.iter_all_rules():
+                max_matches = max(max_matches, rule['matches'])
+                if 'name' not in rule and 'namepat' not in rule:
+                    has_unconditional = True
+                    break
+
+            THRESHOLD = 0.01
+            if has_unconditional or max_matches >= self.packages_processed * THRESHOLD:
+                if current_lowfreq_blocks:
+                    self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
+                    current_lowfreq_blocks = []
+                self.optruleblocks.append(block)
+                continue
+
+            current_lowfreq_blocks.append(block)
+
+        if current_lowfreq_blocks:
+            self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
 
     def _match_rule(self, rule, package, package_context):
         match_context = MatchContext()
@@ -389,10 +450,15 @@ class PackageTransformer:
         return RuleApplyResult.default
 
     def _iter_package_rules(self, package):
-        for ruleblock in self.ruleblocks:
+        for ruleblock in self.optruleblocks:
             yield from ruleblock.iter_rules(package)
 
     def Process(self, package):
+        self.packages_processed += 1
+
+        if self.packages_processed == 1000 or self.packages_processed == 10000 or self.packages_processed == 100000 or self.packages_processed == 1000000:
+            self._recalc_opt_ruleblocks()
+
         # start with package.name as is, if it was not already set
         if package.effname is None:
             package.effname = package.name
