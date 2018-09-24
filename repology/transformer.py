@@ -34,10 +34,11 @@ class RuleApplyResult:
 
 
 class PackageContext:
-    __slots__ = ['flags']
+    __slots__ = ['flags', 'rulesets']
 
-    def __init__(self):
+    def __init__(self, rulesets):
         self.flags = set()
+        self.rulesets = set(rulesets)
 
     def SetFlag(self, name, value=True):
         if value:
@@ -50,6 +51,9 @@ class PackageContext:
 
     def HasFlags(self, names):
         return not self.flags.isdisjoint(names)
+
+    def has_rulesets(self, rulesets):
+        return not self.rulesets.isdisjoint(rulesets)
 
 
 class MatchContext:
@@ -264,11 +268,11 @@ class PackageTransformer:
 
         # match family
         if 'ruleset' in rule:
-            if self.repomgr.GetRepository(package.repo)['ruleset'].isdisjoint(rule['ruleset']):
+            if not package_context.has_rulesets(rule['ruleset']):
                 return None
 
         if 'noruleset' in rule:
-            if not self.repomgr.GetRepository(package.repo)['ruleset'].isdisjoint(rule['noruleset']):
+            if package_context.has_rulesets(rule['noruleset']):
                 return None
 
         # match categories
@@ -488,7 +492,7 @@ class PackageTransformer:
         if package.effname is None:
             package.effname = package.name
 
-        package_context = PackageContext()
+        package_context = PackageContext(self.repomgr.GetRepository(package.repo)['ruleset'])
 
         for rule in self._iter_package_rules(package):
             match_context = self._match_rule(rule, package, package_context)
