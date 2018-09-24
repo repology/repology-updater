@@ -30,7 +30,7 @@ class SingleRuleBlock:
         return [self.rule]
 
     def get_rule_range(self):
-        return self.rule['number'], self.rule['number']
+        return self.rule.number, self.rule.number
 
 
 class NameMapRuleBlock:
@@ -39,10 +39,10 @@ class NameMapRuleBlock:
         self.name_map = defaultdict(list)
 
         for rule in rules:
-            if 'name' not in rule:
+            if not rule.names:
                 raise RuntimeError('unexpected rule kind for NameMapRuleBlock')
 
-            for name in rule['name']:
+            for name in rule.names:
                 self.name_map[name].append(rule)
 
     def iter_rules(self, package):
@@ -55,9 +55,9 @@ class NameMapRuleBlock:
 
             found = False
             for rule in rules:
-                if rule['number'] >= min_rule_num:
+                if rule.number >= min_rule_num:
                     yield rule
-                    min_rule_num = rule['number'] + 1
+                    min_rule_num = rule.number + 1
                     found = True
                     break
 
@@ -78,11 +78,11 @@ class CoveringRuleBlock:
         megaregexp_parts = []
         for block in blocks:
             for rule in block.iter_all_rules():
-                if 'name' in rule:
-                    for name in rule['name']:
+                if rule.names:
+                    for name in rule.names:
                         self.names.add(name)
-                elif 'namepat' in rule:
-                    megaregexp_parts.append('(?:' + rule['namepat'].pattern + ')')
+                elif rule.namepat:
+                    megaregexp_parts.append('(?:' + rule.namepat + ')')
                 else:
                     raise RuntimeError('unexpected rule kind for CoveringRuleBlock')
 

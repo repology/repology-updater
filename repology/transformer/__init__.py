@@ -16,13 +16,12 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import pprint
 import re
 
 import yaml
 
 from repology.transformer.blocks import CoveringRuleBlock, NameMapRuleBlock, SingleRuleBlock
-from repology.transformer.rule import PackageContext, Rule, RuleApplyResult
+from repology.transformer.rule import PackageContext, Rule
 
 
 RULE_LOWFREQ_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
@@ -33,11 +32,12 @@ NAMEMAP_BLOCK_MIN_SIZE = 1  # XXX: test > 1 after rule optimizations
 class PackageTransformer:
     def __init__(self, repomgr, rulesdir=None, rulestext=None):
         self.repomgr = repomgr
-
         self.rules = []
 
+        inrules = []
+
         if rulestext:
-            self.rules = yaml.safe_load(rulestext)
+            inrules = yaml.safe_load(rulestext)
         else:
             rulefiles = []
 
@@ -47,47 +47,40 @@ class PackageTransformer:
 
             for rulefile in sorted(rulefiles):
                 with open(rulefile) as data:
-                    self.rules += yaml.safe_load(data)
+                    inrules += yaml.safe_load(data)
 
-        pp = pprint.PrettyPrinter(width=10000)
-        for rulenum, rule in enumerate(self.rules):
-            # save pretty-print before all transformations
-            rule['pretty'] = pp.pformat(rule)
-
+        for rulenum, ruledata in enumerate(inrules):
             # convert some fields to lists
             for field in ['name', 'ver', 'category', 'family', 'ruleset', 'noruleset', 'wwwpart', 'flag', 'noflag', 'addflag']:
-                if field in rule and not isinstance(rule[field], list):
-                    rule[field] = [rule[field]]
+                if field in ruledata and not isinstance(ruledata[field], list):
+                    ruledata[field] = [ruledata[field]]
 
             # support legacy
-            if 'family' in rule and 'ruleset' in rule:
+            if 'family' in ruledata and 'ruleset' in ruledata:
                 raise RuntimeError('both ruleset and family in rule!')
-            elif 'family' in rule and 'ruleset' not in rule:
-                rule['ruleset'] = rule.pop('family')
+            elif 'family' in ruledata and 'ruleset' not in ruledata:
+                ruledata['ruleset'] = ruledata.pop('family')
 
             # convert some fields to sets
             for field in ['ruleset', 'noruleset', 'flag', 'noflag']:
-                if field in rule:
-                    rule[field] = set(rule[field])
+                if field in ruledata:
+                    ruledata[field] = set(ruledata[field])
 
             # convert some fields to lowercase
             for field in ['category', 'wwwpart']:
-                if field in rule:
-                    rule[field] = [s.lower() for s in rule[field]]
+                if field in ruledata:
+                    ruledata[field] = [s.lower() for s in ruledata[field]]
 
             # compile regexps (replace here handles multiline regexps)
             for field in ['namepat', 'wwwpat']:
-                if field in rule:
-                    rule[field] = re.compile(rule[field].replace('\n', ''), re.ASCII)
+                if field in ruledata:
+                    ruledata[field] = re.compile(ruledata[field].replace('\n', ''), re.ASCII)
 
             for field in ['verpat']:
-                if field in rule:  # verpat is case insensitive
-                    rule[field] = re.compile(rule[field].lower().replace('\n', ''), re.ASCII)
+                if field in ruledata:  # verpat is case insensitive
+                    ruledata[field] = re.compile(ruledata[field].lower().replace('\n', ''), re.ASCII)
 
-            rule['matches'] = 0
-            rule['number'] = rulenum
-
-        self.rules = [Rule(ruledata) for ruledata in self.rules]
+            self.rules.append(Rule(rulenum, ruledata))
 
         self.ruleblocks = []
 
@@ -102,7 +95,7 @@ class PackageTransformer:
             current_name_rules = []
 
         for rule in self.rules:
-            if 'name' in rule:
+            if rule.names:
                 current_name_rules.append(rule)
             else:
                 flush_current_name_rules()
@@ -130,8 +123,8 @@ class PackageTransformer:
             max_matches = 0
             has_unconditional = False
             for rule in block.iter_all_rules():
-                max_matches = max(max_matches, rule['matches'])
-                if 'name' not in rule and 'namepat' not in rule:
+                max_matches = max(max_matches, rule.matches)
+                if not rule.names and not rule.namepat:
                     has_unconditional = True
                     break
 
@@ -162,15 +155,17 @@ class PackageTransformer:
 
         for rule in self._iter_package_rules(package):
             match_context = rule.match(package, package_context)
-            if match_context:
-                if rule.apply(package, package_context, match_context) == RuleApplyResult.last:
-                    return
+            if not match_context:
+                continue
+            rule.apply(package, package_context, match_context)
+            if match_context.last:
+                return
 
     def GetUnmatchedRules(self):
         result = []
 
         for rule in self.rules:
-            if rule['matches'] == 0:
-                result.append(rule['pretty'])
+            if rule.matches == 0:
+                result.append(rule.pretty)
 
         return result
