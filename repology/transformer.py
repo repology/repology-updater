@@ -208,36 +208,47 @@ class PackageTransformer:
             rule['number'] = rulenum
 
         self.ruleblocks = []
+
+        NAMEMAP_BLOCK_MIN_SIZE = 1  # XXX: test > 1 after rule optimizations
+
         current_name_rules = []
 
-        NAMEMAP_BLOCK_MIN_RULES = 1  # XXX: test > 1 after rule optimizations
+        def flush_current_name_rules():
+            nonlocal current_name_rules
+            if len(current_name_rules) >= NAMEMAP_BLOCK_MIN_SIZE:
+                self.ruleblocks.append(NameMapRuleBlock(current_name_rules))
+            elif current_name_rules:
+                self.ruleblocks.extend([SingleRuleBlock(rule) for rule in current_name_rules])
+            current_name_rules = []
 
         for rule in self.rules:
             if 'name' in rule:
                 current_name_rules.append(rule)
             else:
-                if len(current_name_rules) >= NAMEMAP_BLOCK_MIN_RULES:
-                    self.ruleblocks.append(NameMapRuleBlock(current_name_rules))
-                elif current_name_rules:
-                    self.ruleblocks.extend([SingleRuleBlock(rule) for rule in current_name_rules])
-                current_name_rules = []
+                flush_current_name_rules()
                 self.ruleblocks.append(SingleRuleBlock(rule))
 
-        if len(current_name_rules) >= NAMEMAP_BLOCK_MIN_RULES:
-            self.ruleblocks.append(NameMapRuleBlock(current_name_rules))
-        elif current_name_rules:
-            self.ruleblocks.extend([SingleRuleBlock(rule) for rule in current_name_rules])
+        flush_current_name_rules()
 
         self.optruleblocks = self.ruleblocks
         self.packages_processed = 0
 
     def _recalc_opt_ruleblocks(self):
-        LOWFREQ_RULE_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
-        MIN_COVERING_BLOCK_SIZE = 2  # covering block over low number of blocks impose unneeded overhead
-
         self.optruleblocks = []
 
+        RULE_LOWFREQ_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
+        COVERING_BLOCK_MIN_SIZE = 2  # covering block over single block impose extra overhead
+
         current_lowfreq_blocks = []
+
+        def flush_current_lowfreq_blocks():
+            nonlocal current_lowfreq_blocks
+            if len(current_lowfreq_blocks) >= COVERING_BLOCK_MIN_SIZE:
+                self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
+            elif current_lowfreq_blocks:
+                self.optruleblocks.extend(current_lowfreq_blocks)
+            current_lowfreq_blocks = []
+
         for block in self.ruleblocks:
             max_matches = 0
             has_unconditional = False
@@ -247,21 +258,14 @@ class PackageTransformer:
                     has_unconditional = True
                     break
 
-            if has_unconditional or max_matches >= self.packages_processed * LOWFREQ_RULE_THRESHOLD:
-                if len(current_lowfreq_blocks) >= MIN_COVERING_BLOCK_SIZE:
-                    self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
-                elif current_lowfreq_blocks:
-                    self.optruleblocks.extend(current_lowfreq_blocks)
-                current_lowfreq_blocks = []
+            if has_unconditional or max_matches >= self.packages_processed * RULE_LOWFREQ_THRESHOLD:
+                flush_current_lowfreq_blocks()
                 self.optruleblocks.append(block)
                 continue
 
             current_lowfreq_blocks.append(block)
 
-        if len(current_lowfreq_blocks) >= MIN_COVERING_BLOCK_SIZE:
-            self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
-        elif current_lowfreq_blocks:
-            self.optruleblocks.extend([SingleRuleBlock(block) for block in current_lowfreq_blocks])
+        flush_current_lowfreq_blocks()
 
     def _match_rule(self, rule, package, package_context):
         match_context = MatchContext()
