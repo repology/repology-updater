@@ -32,6 +32,9 @@ RULE_LOWFREQ_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
 COVERING_BLOCK_MIN_SIZE = 2  # covering block over single block impose extra overhead
 NAMEMAP_BLOCK_MIN_SIZE = 1  # XXX: test > 1 after rule optimizations
 
+DOLLAR0 = re.compile('\$0', re.ASCII)
+DOLLARN = re.compile('\$([0-9]+)', re.ASCII)
+
 
 class RuleApplyResult:
     default = 1
@@ -67,6 +70,226 @@ class MatchContext:
     def __init__(self):
         self.name_match = None
         self.ver_match = None
+
+
+class Rule(dict):
+    def __init__(self, ruledata):
+        self.update(ruledata)
+
+    def match(self, package, package_context):
+        match_context = MatchContext()
+
+        # match family
+        if 'ruleset' in self:
+            if not package_context.has_rulesets(self['ruleset']):
+                return None
+
+        if 'noruleset' in self:
+            if package_context.has_rulesets(self['noruleset']):
+                return None
+
+        # match categories
+        if 'category' in self:
+            if not package.category:
+                return None
+            if package.category.lower() not in self['category']:
+                return None
+
+        # match name
+        if 'name' in self:
+            if package.effname not in self['name']:
+                return None
+
+        # match name patterns
+        if 'namepat' in self:
+            match_context.name_match = self['namepat'].fullmatch(package.effname)
+            if not match_context.name_match:
+                return None
+
+        # match version
+        if 'ver' in self:
+            if package.version not in self['ver']:
+                return None
+
+        # match version patterns
+        if 'verpat' in self:
+            match_context.ver_match = self['verpat'].fullmatch(package.version.lower())
+            if not match_context.ver_match:
+                return None
+
+        # match number of version components
+        if 'verlonger' in self:
+            if not len(re.split('[^a-zA-Z0-9]', package.version)) > self['verlonger']:
+                return None
+
+        # compare versions
+        if 'vergt' in self:
+            if version_compare(package.version, self['vergt']) <= 0:
+                return None
+
+        if 'verge' in self:
+            if version_compare(package.version, self['verge']) < 0:
+                return None
+
+        if 'verlt' in self:
+            if version_compare(package.version, self['verlt']) >= 0:
+                return None
+
+        if 'verle' in self:
+            if version_compare(package.version, self['verle']) > 0:
+                return None
+
+        if 'vereq' in self:
+            if version_compare(package.version, self['vereq']) != 0:
+                return None
+
+        if 'verne' in self:
+            if version_compare(package.version, self['verne']) == 0:
+                return None
+
+        # match name patterns
+        if 'wwwpat' in self:
+            if not package.homepage or not self['wwwpat'].fullmatch(package.homepage):
+                return None
+
+        if 'wwwpart' in self:
+            if not package.homepage:
+                return None
+            matched = False
+            for wwwpart in self['wwwpart']:
+                if wwwpart in package.homepage.lower():
+                    matched = True
+                    break
+            if not matched:
+                return None
+
+        if 'flag' in self:
+            if not package_context.HasFlags(self['flag']):
+                return None
+
+        if 'noflag' in self:
+            if package_context.HasFlags(self['noflag']):
+                return None
+
+        self['matches'] += 1
+
+        return match_context
+
+    def apply(self, package, package_context, match_context):
+        last = False
+
+        if 'remove' in self:
+            package.SetFlag(PackageFlags.remove, self['remove'])
+
+        if 'ignore' in self:
+            package.SetFlag(PackageFlags.ignore, self['ignore'])
+
+        if 'weak_devel' in self:
+            # XXX: currently sets ignore; change to set non-viral variant of devel (#654)
+            package.SetFlag(PackageFlags.ignore, self['weak_devel'])
+
+        if 'devel' in self:
+            package.SetFlag(PackageFlags.devel, self['devel'])
+
+        if 'p_is_patch' in self:
+            package.SetFlag(PackageFlags.p_is_patch, self['p_is_patch'])
+
+        if 'any_is_patch' in self:
+            package.SetFlag(PackageFlags.any_is_patch, self['any_is_patch'])
+
+        if 'outdated' in self:
+            package.SetFlag(PackageFlags.outdated, self['outdated'])
+
+        if 'legacy' in self:
+            package.SetFlag(PackageFlags.legacy, self['legacy'])
+
+        if 'incorrect' in self:
+            package.SetFlag(PackageFlags.incorrect, self['incorrect'])
+
+        if 'untrusted' in self:
+            package.SetFlag(PackageFlags.untrusted, self['untrusted'])
+
+        if 'noscheme' in self:
+            package.SetFlag(PackageFlags.noscheme, self['noscheme'])
+
+        if 'rolling' in self:
+            package.SetFlag(PackageFlags.rolling, self['rolling'])
+
+        if 'snapshot' in self:
+            # XXX: the same as ignored for now
+            package.SetFlag(PackageFlags.ignore, self['snapshot'])
+
+        if 'successor' in self:
+            # XXX: the same as devel for now
+            package.SetFlag(PackageFlags.devel, self['successor'])
+
+        if 'generated' in self:
+            # XXX: the same as rolling for now
+            package.SetFlag(PackageFlags.rolling, self['generated'])
+
+        if 'last' in self:
+            last = True
+
+        if 'addflavor' in self:
+            flavors = []
+            if isinstance(self['addflavor'], bool):
+                flavors = [package.effname]
+            elif isinstance(self['addflavor'], str):
+                flavors = [self['addflavor']]
+            elif isinstance(self['addflavor'], list):
+                flavors = self['addflavor']
+            else:
+                raise RuntimeError('addflavor must be boolean or str or list')
+
+            if match_context.name_match:
+                flavors = [DOLLARN.sub(lambda x: match_context.name_match.group(int(x.group(1))), flavor) for flavor in flavors]
+            else:
+                flavors = [DOLLAR0.sub(package.effname, flavor) for flavor in flavors]
+
+            flavors = [flavor.strip('-') for flavor in flavors]
+
+            package.flavors += [flavor for flavor in flavors if flavor]
+
+        if 'resetflavors' in self:
+            package.flavors = []
+
+        if 'addflag' in self:
+            for flag in self['addflag']:
+                package_context.SetFlag(flag)
+
+        if 'setname' in self:
+            if match_context.name_match:
+                package.effname = DOLLARN.sub(lambda x: match_context.name_match.group(int(x.group(1))), self['setname'])
+            else:
+                package.effname = DOLLAR0.sub(package.effname, self['setname'])
+
+        if 'setver' in self:
+            version_before_fix = package.version
+
+            if package.origversion is None:
+                package.origversion = package.version
+
+            if match_context.ver_match:
+                package.version = DOLLARN.sub(lambda x: match_context.ver_match.group(int(x.group(1))), self['setver'])
+            else:
+                package.version = DOLLAR0.sub(package.version, self['setver'])
+
+            package.verfixed = package.version != version_before_fix
+
+        if 'replaceinname' in self:
+            for pattern, replacement in self['replaceinname'].items():
+                package.effname = package.effname.replace(pattern, replacement)
+
+        if 'tolowername' in self:
+            package.effname = package.effname.lower()
+
+        if 'warning' in self:
+            print('Rule warning for {} in {}: {}'.format(package.name, package.repo, self['warning']), file=sys.stderr)
+
+        if last:
+            return RuleApplyResult.last
+
+        return RuleApplyResult.default
 
 
 class SingleRuleBlock:
@@ -156,9 +379,6 @@ class PackageTransformer:
     def __init__(self, repomgr, rulesdir=None, rulestext=None):
         self.repomgr = repomgr
 
-        self.dollar0 = re.compile('\$0', re.ASCII)
-        self.dollarN = re.compile('\$([0-9]+)', re.ASCII)
-
         self.rules = []
 
         if rulestext:
@@ -211,6 +431,8 @@ class PackageTransformer:
 
             rule['matches'] = 0
             rule['number'] = rulenum
+
+        self.rules = [Rule(ruledata) for ruledata in self.rules]
 
         self.ruleblocks = []
 
@@ -267,221 +489,6 @@ class PackageTransformer:
 
         flush_current_lowfreq_blocks()
 
-    def _match_rule(self, rule, package, package_context):
-        match_context = MatchContext()
-
-        # match family
-        if 'ruleset' in rule:
-            if not package_context.has_rulesets(rule['ruleset']):
-                return None
-
-        if 'noruleset' in rule:
-            if package_context.has_rulesets(rule['noruleset']):
-                return None
-
-        # match categories
-        if 'category' in rule:
-            if not package.category:
-                return None
-            if package.category.lower() not in rule['category']:
-                return None
-
-        # match name
-        if 'name' in rule:
-            if package.effname not in rule['name']:
-                return None
-
-        # match name patterns
-        if 'namepat' in rule:
-            match_context.name_match = rule['namepat'].fullmatch(package.effname)
-            if not match_context.name_match:
-                return None
-
-        # match version
-        if 'ver' in rule:
-            if package.version not in rule['ver']:
-                return None
-
-        # match version patterns
-        if 'verpat' in rule:
-            match_context.ver_match = rule['verpat'].fullmatch(package.version.lower())
-            if not match_context.ver_match:
-                return None
-
-        # match number of version components
-        if 'verlonger' in rule:
-            if not len(re.split('[^a-zA-Z0-9]', package.version)) > rule['verlonger']:
-                return None
-
-        # compare versions
-        if 'vergt' in rule:
-            if version_compare(package.version, rule['vergt']) <= 0:
-                return None
-
-        if 'verge' in rule:
-            if version_compare(package.version, rule['verge']) < 0:
-                return None
-
-        if 'verlt' in rule:
-            if version_compare(package.version, rule['verlt']) >= 0:
-                return None
-
-        if 'verle' in rule:
-            if version_compare(package.version, rule['verle']) > 0:
-                return None
-
-        if 'vereq' in rule:
-            if version_compare(package.version, rule['vereq']) != 0:
-                return None
-
-        if 'verne' in rule:
-            if version_compare(package.version, rule['verne']) == 0:
-                return None
-
-        # match name patterns
-        if 'wwwpat' in rule:
-            if not package.homepage or not rule['wwwpat'].fullmatch(package.homepage):
-                return None
-
-        if 'wwwpart' in rule:
-            if not package.homepage:
-                return None
-            matched = False
-            for wwwpart in rule['wwwpart']:
-                if wwwpart in package.homepage.lower():
-                    matched = True
-                    break
-            if not matched:
-                return None
-
-        if 'flag' in rule:
-            if not package_context.HasFlags(rule['flag']):
-                return None
-
-        if 'noflag' in rule:
-            if package_context.HasFlags(rule['noflag']):
-                return None
-
-        rule['matches'] += 1
-
-        return match_context
-
-    def _apply_rule(self, rule, package, package_context, match_context):
-        last = False
-
-        if 'remove' in rule:
-            package.SetFlag(PackageFlags.remove, rule['remove'])
-
-        if 'ignore' in rule:
-            package.SetFlag(PackageFlags.ignore, rule['ignore'])
-
-        if 'weak_devel' in rule:
-            # XXX: currently sets ignore; change to set non-viral variant of devel (#654)
-            package.SetFlag(PackageFlags.ignore, rule['weak_devel'])
-
-        if 'devel' in rule:
-            package.SetFlag(PackageFlags.devel, rule['devel'])
-
-        if 'p_is_patch' in rule:
-            package.SetFlag(PackageFlags.p_is_patch, rule['p_is_patch'])
-
-        if 'any_is_patch' in rule:
-            package.SetFlag(PackageFlags.any_is_patch, rule['any_is_patch'])
-
-        if 'outdated' in rule:
-            package.SetFlag(PackageFlags.outdated, rule['outdated'])
-
-        if 'legacy' in rule:
-            package.SetFlag(PackageFlags.legacy, rule['legacy'])
-
-        if 'incorrect' in rule:
-            package.SetFlag(PackageFlags.incorrect, rule['incorrect'])
-
-        if 'untrusted' in rule:
-            package.SetFlag(PackageFlags.untrusted, rule['untrusted'])
-
-        if 'noscheme' in rule:
-            package.SetFlag(PackageFlags.noscheme, rule['noscheme'])
-
-        if 'rolling' in rule:
-            package.SetFlag(PackageFlags.rolling, rule['rolling'])
-
-        if 'snapshot' in rule:
-            # XXX: the same as ignored for now
-            package.SetFlag(PackageFlags.ignore, rule['snapshot'])
-
-        if 'successor' in rule:
-            # XXX: the same as devel for now
-            package.SetFlag(PackageFlags.devel, rule['successor'])
-
-        if 'generated' in rule:
-            # XXX: the same as rolling for now
-            package.SetFlag(PackageFlags.rolling, rule['generated'])
-
-        if 'last' in rule:
-            last = True
-
-        if 'addflavor' in rule:
-            flavors = []
-            if isinstance(rule['addflavor'], bool):
-                flavors = [package.effname]
-            elif isinstance(rule['addflavor'], str):
-                flavors = [rule['addflavor']]
-            elif isinstance(rule['addflavor'], list):
-                flavors = rule['addflavor']
-            else:
-                raise RuntimeError('addflavor must be boolean or str or list')
-
-            if match_context.name_match:
-                flavors = [self.dollarN.sub(lambda x: match_context.name_match.group(int(x.group(1))), flavor) for flavor in flavors]
-            else:
-                flavors = [self.dollar0.sub(package.effname, flavor) for flavor in flavors]
-
-            flavors = [flavor.strip('-') for flavor in flavors]
-
-            package.flavors += [flavor for flavor in flavors if flavor]
-
-        if 'resetflavors' in rule:
-            package.flavors = []
-
-        if 'addflag' in rule:
-            for flag in rule['addflag']:
-                package_context.SetFlag(flag)
-
-        if 'setname' in rule:
-            if match_context.name_match:
-                package.effname = self.dollarN.sub(lambda x: match_context.name_match.group(int(x.group(1))), rule['setname'])
-            else:
-                package.effname = self.dollar0.sub(package.effname, rule['setname'])
-
-        if 'setver' in rule:
-            version_before_fix = package.version
-
-            if package.origversion is None:
-                package.origversion = package.version
-
-            if match_context.ver_match:
-                package.version = self.dollarN.sub(lambda x: match_context.ver_match.group(int(x.group(1))), rule['setver'])
-            else:
-                package.version = self.dollar0.sub(package.version, rule['setver'])
-
-            package.verfixed = package.version != version_before_fix
-
-        if 'replaceinname' in rule:
-            for pattern, replacement in rule['replaceinname'].items():
-                package.effname = package.effname.replace(pattern, replacement)
-
-        if 'tolowername' in rule:
-            package.effname = package.effname.lower()
-
-        if 'warning' in rule:
-            print('Rule warning for {} in {}: {}'.format(package.name, package.repo, rule['warning']), file=sys.stderr)
-
-        if last:
-            return RuleApplyResult.last
-
-        return RuleApplyResult.default
-
     def _iter_package_rules(self, package):
         for ruleblock in self.optruleblocks:
             yield from ruleblock.iter_rules(package)
@@ -499,9 +506,9 @@ class PackageTransformer:
         package_context = PackageContext(self.repomgr.GetRepository(package.repo)['ruleset'])
 
         for rule in self._iter_package_rules(package):
-            match_context = self._match_rule(rule, package, package_context)
+            match_context = rule.match(package, package_context)
             if match_context:
-                if self._apply_rule(rule, package, package_context, match_context) == RuleApplyResult.last:
+                if rule.apply(package, package_context, match_context) == RuleApplyResult.last:
                     return
 
     def GetUnmatchedRules(self):
