@@ -74,10 +74,10 @@ class SingleRuleBlock:
         self.rule = rule
 
     def iter_rules(self, package):
-        yield self.rule
+        return [self.rule]
 
     def iter_all_rules(self):
-        yield self.rule
+        return [self.rule]
 
     def get_rule_range(self):
         return self.rule['number'], self.rule['number']
