@@ -206,17 +206,23 @@ class PackageTransformer:
         self.ruleblocks = []
         current_name_rules = []
 
+        NAMEMAP_BLOCK_MIN_RULES = 1  # XXX: test > 1 after rule optimizations
+
         for rule in self.rules:
             if 'name' in rule:
                 current_name_rules.append(rule)
             else:
-                if current_name_rules:
+                if len(current_name_rules) >= NAMEMAP_BLOCK_MIN_RULES:
                     self.ruleblocks.append(NameMapRuleBlock(current_name_rules))
-                    current_name_rules = []
+                elif current_name_rules:
+                    self.ruleblocks.extend([SingleRuleBlock(rule) for rule in current_name_rules])
+                current_name_rules = []
                 self.ruleblocks.append(SingleRuleBlock(rule))
 
-        if current_name_rules:
+        if len(current_name_rules) >= NAMEMAP_BLOCK_MIN_RULES:
             self.ruleblocks.append(NameMapRuleBlock(current_name_rules))
+        elif current_name_rules:
+            self.ruleblocks.extend([SingleRuleBlock(rule) for rule in current_name_rules])
 
         self.optruleblocks = self.ruleblocks
         self.packages_processed = 0
