@@ -222,6 +222,9 @@ class PackageTransformer:
         self.packages_processed = 0
 
     def _recalc_opt_ruleblocks(self):
+        LOWFREQ_RULE_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
+        MIN_COVERING_BLOCK_SIZE = 2  # covering block over low number of blocks impose unneeded overhead
+
         self.optruleblocks = []
 
         current_lowfreq_blocks = []
@@ -234,18 +237,21 @@ class PackageTransformer:
                     has_unconditional = True
                     break
 
-            THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
-            if has_unconditional or max_matches >= self.packages_processed * THRESHOLD:
-                if current_lowfreq_blocks:
+            if has_unconditional or max_matches >= self.packages_processed * LOWFREQ_RULE_THRESHOLD:
+                if len(current_lowfreq_blocks) >= MIN_COVERING_BLOCK_SIZE:
                     self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
-                    current_lowfreq_blocks = []
+                elif current_lowfreq_blocks:
+                    self.optruleblocks.extend(current_lowfreq_blocks)
+                current_lowfreq_blocks = []
                 self.optruleblocks.append(block)
                 continue
 
             current_lowfreq_blocks.append(block)
 
-        if current_lowfreq_blocks:
+        if len(current_lowfreq_blocks) >= MIN_COVERING_BLOCK_SIZE:
             self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
+        elif current_lowfreq_blocks:
+            self.optruleblocks.extend([SingleRuleBlock(block) for block in current_lowfreq_blocks])
 
     def _match_rule(self, rule, package, package_context):
         match_context = MatchContext()
