@@ -28,6 +28,11 @@ import yaml
 from repology.package import PackageFlags
 
 
+RULE_LOWFREQ_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
+COVERING_BLOCK_MIN_SIZE = 2  # covering block over single block impose extra overhead
+NAMEMAP_BLOCK_MIN_SIZE = 1  # XXX: test > 1 after rule optimizations
+
+
 class RuleApplyResult:
     default = 1
     last = 3
@@ -209,8 +214,6 @@ class PackageTransformer:
 
         self.ruleblocks = []
 
-        NAMEMAP_BLOCK_MIN_SIZE = 1  # XXX: test > 1 after rule optimizations
-
         current_name_rules = []
 
         def flush_current_name_rules():
@@ -235,9 +238,6 @@ class PackageTransformer:
 
     def _recalc_opt_ruleblocks(self):
         self.optruleblocks = []
-
-        RULE_LOWFREQ_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
-        COVERING_BLOCK_MIN_SIZE = 2  # covering block over single block impose extra overhead
 
         current_lowfreq_blocks = []
 
