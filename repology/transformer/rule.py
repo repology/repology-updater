@@ -18,7 +18,6 @@
 import pprint
 import re
 import sys
-
 from copy import deepcopy
 
 from libversion import version_compare
@@ -133,6 +132,7 @@ class Rule:
 
             if len(names) == 1:
                 name = names.pop()
+
                 def matcher(package, package_context, match_context):
                     return package.effname == name
 
@@ -161,6 +161,7 @@ class Rule:
 
             if len(versions) == 1:
                 version = versions.pop()
+
                 def matcher(package, package_context, match_context):
                     return package.version == version
 
