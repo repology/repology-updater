@@ -117,8 +117,13 @@ class Rule:
             self.matchers.append(matcher)
 
         if 'name' in ruledata:
-            self.names = as_list(ruledata['name'])
-            names = as_set(ruledata['name'])
+            names = as_list(ruledata['name'])
+
+            if 'setname' in ruledata:
+                names = [DOLLAR0.sub(ruledata['setname'], name) for name in names]
+
+            self.names = names
+            names = set(names)
 
             if len(names) == 1:
                 name = names.pop()
@@ -134,8 +139,13 @@ class Rule:
                 self.matchers.append(matcher)
 
         if 'namepat' in ruledata:
-            namepat = re.compile(ruledata['namepat'].replace('\n', ''), re.ASCII)
-            self.namepat = namepat.pattern
+            namepat = ruledata['namepat'].replace('\n', '')
+
+            if 'setname' in ruledata:
+                namepat = DOLLAR0.sub(ruledata['setname'], namepat)
+
+            self.namepat = namepat
+            namepat = re.compile(namepat, re.ASCII)
 
             def matcher(package, package_context, match_context):
                 match = namepat.fullmatch(package.effname)

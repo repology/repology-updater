@@ -111,6 +111,21 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'foo', 'version': '1.0', 'expect_name': 'foo', 'expect_effname': 'bar_foo'}
         )
 
+    def test_setname_reverse_subst(self):
+        self.check_transformer(
+            '[ { setname: foo, name: [ $0-client, $0-server ] } ]',
+            {'name': 'foo-client', 'version': '1.0', 'expect_effname': 'foo'},
+            {'name': 'foo-server', 'version': '1.0', 'expect_effname': 'foo'},
+            {'name': 'foo-other', 'version': '1.0', 'expect_effname': 'foo-other'},
+        )
+
+        self.check_transformer(
+            '[ { setname: foo, namepat: "$0-(client|server)" } ]',
+            {'name': 'foo-client', 'version': '1.0', 'expect_effname': 'foo'},
+            {'name': 'foo-server', 'version': '1.0', 'expect_effname': 'foo'},
+            {'name': 'foo-other', 'version': '1.0', 'expect_effname': 'foo-other'},
+        )
+
     def test_setver(self):
         self.check_transformer(
             '[ { setver: "2.0" } ]',
