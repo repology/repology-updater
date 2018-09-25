@@ -18,6 +18,8 @@
 import os
 import re
 
+from copy import deepcopy
+
 import yaml
 
 from repology.transformer.blocks import CoveringRuleBlock, NameMapRuleBlock, SingleRuleBlock
@@ -27,6 +29,7 @@ from repology.transformer.rule import PackageContext, Rule
 RULE_LOWFREQ_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
 COVERING_BLOCK_MIN_SIZE = 2  # covering block over single block impose extra overhead
 NAMEMAP_BLOCK_MIN_SIZE = 1  # XXX: test > 1 after rule optimizations
+SPLIT_MULTI_NAME_RULES = True
 
 
 class PackageTransformer:
@@ -74,7 +77,13 @@ class PackageTransformer:
         self.packages_processed = 0
 
     def _add_rule(self, ruledata):
-        self.rules.append(Rule(len(self.rules), ruledata))
+        if SPLIT_MULTI_NAME_RULES and 'name' in ruledata and isinstance(ruledata['name'], list):
+            for name in ruledata['name']:
+                modified_ruledata = deepcopy(ruledata)
+                modified_ruledata['name'] = name
+                self.rules.append(Rule(len(self.rules), modified_ruledata))
+        else:
+            self.rules.append(Rule(len(self.rules), ruledata))
 
     def _recalc_opt_ruleblocks(self):
         self.optruleblocks = []
