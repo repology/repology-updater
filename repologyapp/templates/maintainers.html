@@ -25,7 +25,9 @@
 				<a href="{{ url_for_self(bound=".."+(maintainers|first).maintainer, search=search) }}" class="btn btn-default{% if firstpage %} disabled{% endif %}" rel="prev">&laquo;</a>
 				<a href="{{ url_for_self(bound=(maintainers|last).maintainer+"..", search=search) }}" class="btn btn-default{% if lastpage %} disabled{% endif %}" rel="next">&raquo;</a>
 				{% endif %}
+				{% if maxmaintainer %}
 				<a href="{{ url_for_self(bound=".."+maxmaintainer) }}" class="btn btn-default {% if lastpage %} disabled{% endif %}">&raquo;&raquo;</a>
+				{% endif %}
 			{% endif %}
 			</div>
 			<div class="input-group">
