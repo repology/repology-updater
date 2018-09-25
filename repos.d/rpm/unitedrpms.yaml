@@ -5,6 +5,7 @@
   type: repository
   desc: UnitedRPMs Fedora 26
   family: fedora
+  ruleset: [fedora, unitedrpms]
   color: '261d22'
   minpackages: 100
   sources:
@@ -24,6 +25,7 @@
   type: repository
   desc: UnitedRPMs Fedora 27
   family: fedora
+  ruleset: [fedora, unitedrpms]
   color: '261d22'
   minpackages: 100
   sources:
@@ -43,6 +45,7 @@
   type: repository
   desc: UnitedRPMs Fedora 28
   family: fedora
+  ruleset: [fedora, unitedrpms]
   color: '261d22'
   minpackages: 100
   sources:
@@ -62,6 +65,7 @@
   type: repository
   desc: UnitedRPMs Fedora 29
   family: fedora
+  ruleset: [fedora, unitedrpms]
   color: '261d22'
   minpackages: 100
   sources:

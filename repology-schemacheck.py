@@ -99,6 +99,7 @@ rulesets = families + [
     'parabola',
     'pardus',
     'parrot',
+    'unitedrpms',
     'whonix',
 ]
 
