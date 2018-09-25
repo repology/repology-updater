@@ -34,10 +34,9 @@ class PackageTransformer:
         self.repomgr = repomgr
         self.rules = []
 
-        inrules = []
-
         if rulestext:
-            inrules = yaml.safe_load(rulestext)
+            for ruledata in yaml.safe_load(rulestext):
+                self._add_rule(ruledata)
         else:
             rulefiles = []
 
@@ -47,40 +46,8 @@ class PackageTransformer:
 
             for rulefile in sorted(rulefiles):
                 with open(rulefile) as data:
-                    inrules += yaml.safe_load(data)
-
-        for rulenum, ruledata in enumerate(inrules):
-            # convert some fields to lists
-            for field in ['name', 'ver', 'category', 'family', 'ruleset', 'noruleset', 'wwwpart', 'flag', 'noflag', 'addflag']:
-                if field in ruledata and not isinstance(ruledata[field], list):
-                    ruledata[field] = [ruledata[field]]
-
-            # support legacy
-            if 'family' in ruledata and 'ruleset' in ruledata:
-                raise RuntimeError('both ruleset and family in rule!')
-            elif 'family' in ruledata and 'ruleset' not in ruledata:
-                ruledata['ruleset'] = ruledata.pop('family')
-
-            # convert some fields to sets
-            for field in ['ruleset', 'noruleset', 'flag', 'noflag']:
-                if field in ruledata:
-                    ruledata[field] = set(ruledata[field])
-
-            # convert some fields to lowercase
-            for field in ['category', 'wwwpart']:
-                if field in ruledata:
-                    ruledata[field] = [s.lower() for s in ruledata[field]]
-
-            # compile regexps (replace here handles multiline regexps)
-            for field in ['namepat', 'wwwpat']:
-                if field in ruledata:
-                    ruledata[field] = re.compile(ruledata[field].replace('\n', ''), re.ASCII)
-
-            for field in ['verpat']:
-                if field in ruledata:  # verpat is case insensitive
-                    ruledata[field] = re.compile(ruledata[field].lower().replace('\n', ''), re.ASCII)
-
-            self.rules.append(Rule(rulenum, ruledata))
+                    for ruledata in yaml.safe_load(data):
+                        self._add_rule(ruledata)
 
         self.ruleblocks = []
 
@@ -105,6 +72,9 @@ class PackageTransformer:
 
         self.optruleblocks = self.ruleblocks
         self.packages_processed = 0
+
+    def _add_rule(self, ruledata):
+        self.rules.append(Rule(len(self.rules), ruledata))
 
     def _recalc_opt_ruleblocks(self):
         self.optruleblocks = []
