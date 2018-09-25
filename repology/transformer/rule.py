@@ -31,9 +31,8 @@ DOLLARN = re.compile('\$([0-9]+)', re.ASCII)
 class PackageContext:
     __slots__ = ['flags', 'rulesets']
 
-    def __init__(self, rulesets):
+    def __init__(self):
         self.flags = set()
-        self.rulesets = set(rulesets)
 
     def SetFlag(self, name, value=True):
         if value:
@@ -49,6 +48,9 @@ class PackageContext:
 
     def has_rulesets(self, rulesets):
         return not self.rulesets.isdisjoint(rulesets)
+
+    def set_rulesets(self, rulesets):
+        self.rulesets = set(rulesets)
 
 
 class MatchContext:

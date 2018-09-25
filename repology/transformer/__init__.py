@@ -121,7 +121,9 @@ class PackageTransformer:
         if package.effname is None:
             package.effname = package.name
 
-        package_context = PackageContext(self.repomgr.GetRepository(package.repo)['ruleset'])
+        package_context = PackageContext()
+        if package.repo:
+            package_context.set_rulesets(self.repomgr.GetRepository(package.repo)['ruleset'])
 
         for rule in self._iter_package_rules(package):
             match_context = rule.match(package, package_context)
