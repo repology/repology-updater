@@ -18,7 +18,6 @@
 import pprint
 import re
 import sys
-from copy import deepcopy
 
 from libversion import version_compare
 
@@ -86,13 +85,6 @@ class Rule:
 
         def as_lowercase_set(val):
             return set(as_lowercase_list(val))
-
-        # legacy
-        if 'family' in ruledata and 'ruleset' in ruledata:
-            raise RuntimeError('both ruleset and family in rule!')
-        elif 'family' in ruledata:
-            ruledata = deepcopy(ruledata)
-            ruledata['ruleset'] = ruledata.pop('family')
 
         # These conditional blocks use local variables which are then captured by
         # nested functions. MAKE SURE that names for all these are unique, because
