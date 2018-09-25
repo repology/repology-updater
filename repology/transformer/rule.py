@@ -19,6 +19,8 @@ import pprint
 import re
 import sys
 
+from copy import deepcopy
+
 from libversion import version_compare
 
 from repology.package import PackageFlags
@@ -92,6 +94,7 @@ class Rule:
         if 'family' in ruledata and 'ruleset' in ruledata:
             raise RuntimeError('both ruleset and family in rule!')
         elif 'family' in ruledata:
+            ruledata = deepcopy(ruledata)
             ruledata['ruleset'] = ruledata.pop('family')
 
         # matchers
