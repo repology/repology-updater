@@ -93,6 +93,12 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': PackageFlags.devel}
         )
 
+    def test_multiflags(self):
+        self.check_transformer(
+            '[ { devel: true, ignore: false, noscheme: true }, { ignore: true, noscheme: false } ]',
+            {'name': 'aaa', 'version': '1.0', 'expect_flags': PackageFlags.devel | PackageFlags.ignore}
+        )
+
     def test_setname(self):
         self.check_transformer(
             '[ { setname: "bar" } ]',
