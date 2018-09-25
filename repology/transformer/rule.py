@@ -97,6 +97,11 @@ class Rule:
             ruledata = deepcopy(ruledata)
             ruledata['ruleset'] = ruledata.pop('family')
 
+        # These conditional blocks use local variables which are then captured by
+        # nested functions. MAKE SURE that names for all these are unique, because
+        # they are common to the whole function, and reusing the name for multiple
+        # conditions or actions will break formerly defined ones
+
         # matchers
         if 'ruleset' in ruledata:
             rulesets = as_set(ruledata['ruleset'])
@@ -187,50 +192,50 @@ class Rule:
             self.matchers.append(matcher)
 
         if 'vergt' in ruledata:
-            ver = ruledata['vergt']
+            vergt = ruledata['vergt']
 
             def matcher(package, package_context, match_context):
-                return version_compare(package.version, ver) > 0
+                return version_compare(package.version, vergt) > 0
 
             self.matchers.append(matcher)
 
         if 'verge' in ruledata:
-            ver = ruledata['verge']
+            verge = ruledata['verge']
 
             def matcher(package, package_context, match_context):
-                return version_compare(package.version, ver) >= 0
+                return version_compare(package.version, verge) >= 0
 
             self.matchers.append(matcher)
 
         if 'verlt' in ruledata:
-            ver = ruledata['verlt']
+            verlt = ruledata['verlt']
 
             def matcher(package, package_context, match_context):
-                return version_compare(package.version, ver) < 0
+                return version_compare(package.version, verlt) < 0
 
             self.matchers.append(matcher)
 
         if 'verle' in ruledata:
-            ver = ruledata['verle']
+            verle = ruledata['verle']
 
             def matcher(package, package_context, match_context):
-                return version_compare(package.version, ver) <= 0
+                return version_compare(package.version, verle) <= 0
 
             self.matchers.append(matcher)
 
         if 'vereq' in ruledata:
-            ver = ruledata['vereq']
+            vereq = ruledata['vereq']
 
             def matcher(package, package_context, match_context):
-                return version_compare(package.version, ver) == 0
+                return version_compare(package.version, vereq) == 0
 
             self.matchers.append(matcher)
 
         if 'verne' in ruledata:
-            ver = ruledata['verne']
+            verne = ruledata['verne']
 
             def matcher(package, package_context, match_context):
-                return version_compare(package.version, ver) != 0
+                return version_compare(package.version, verne) != 0
 
             self.matchers.append(matcher)
 
@@ -273,126 +278,126 @@ class Rule:
 
         # actions
         if 'remove' in ruledata:
-            flagval = ruledata['remove']
+            remove_flag = ruledata['remove']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.remove, flagval)
+                package.SetFlag(PackageFlags.remove, remove_flag)
 
             self.actions.append(action)
 
         if 'ignore' in ruledata:
-            flagval = ruledata['ignore']
+            ignore_flag = ruledata['ignore']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.ignore, flagval)
+                package.SetFlag(PackageFlags.ignore, ignore_flag)
 
             self.actions.append(action)
 
         if 'weak_devel' in ruledata:
-            flagval = ruledata['weak_devel']
+            weak_devel_flag = ruledata['weak_devel']
 
             def action(package, package_context, match_context):
                 # XXX: currently sets ignore; change to set non-viral variant of devel (#654)
-                package.SetFlag(PackageFlags.ignore, flagval)
+                package.SetFlag(PackageFlags.ignore, weak_devel_flag)
 
             self.actions.append(action)
 
         if 'devel' in ruledata:
-            flagval = ruledata['devel']
+            devel_flag = ruledata['devel']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.devel, flagval)
+                package.SetFlag(PackageFlags.devel, devel_flag)
 
             self.actions.append(action)
 
         if 'p_is_patch' in ruledata:
-            flagval = ruledata['p_is_patch']
+            p_is_patch_flag = ruledata['p_is_patch']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.p_is_patch, flagval)
+                package.SetFlag(PackageFlags.p_is_patch, p_is_patch_flag)
 
             self.actions.append(action)
 
         if 'any_is_patch' in ruledata:
-            flagval = ruledata['any_is_patch']
+            any_is_patch_flag = ruledata['any_is_patch']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.any_is_patch, flagval)
+                package.SetFlag(PackageFlags.any_is_patch, any_is_patch_flag)
 
             self.actions.append(action)
 
         if 'outdated' in ruledata:
-            flagval = ruledata['outdated']
+            outdated_flag = ruledata['outdated']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.outdated, flagval)
+                package.SetFlag(PackageFlags.outdated, outdated_flag)
 
             self.actions.append(action)
 
         if 'legacy' in ruledata:
-            flagval = ruledata['legacy']
+            legacy_flag = ruledata['legacy']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.legacy, flagval)
+                package.SetFlag(PackageFlags.legacy, legacy_flag)
 
             self.actions.append(action)
 
         if 'incorrect' in ruledata:
-            flagval = ruledata['incorrect']
+            incorrect_flag = ruledata['incorrect']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.incorrect, flagval)
+                package.SetFlag(PackageFlags.incorrect, incorrect_flag)
 
             self.actions.append(action)
 
         if 'untrusted' in ruledata:
-            flagval = ruledata['untrusted']
+            untrusted_flag = ruledata['untrusted']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.untrusted, flagval)
+                package.SetFlag(PackageFlags.untrusted, untrusted_flag)
 
             self.actions.append(action)
 
         if 'noscheme' in ruledata:
-            flagval = ruledata['noscheme']
+            noscheme_flag = ruledata['noscheme']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.noscheme, flagval)
+                package.SetFlag(PackageFlags.noscheme, noscheme_flag)
 
             self.actions.append(action)
 
         if 'rolling' in ruledata:
-            flagval = ruledata['rolling']
+            rolling_flag = ruledata['rolling']
 
             def action(package, package_context, match_context):
-                package.SetFlag(PackageFlags.rolling, flagval)
+                package.SetFlag(PackageFlags.rolling, rolling_flag)
 
             self.actions.append(action)
 
         if 'snapshot' in ruledata:
-            flagval = ruledata['snapshot']
+            snapshot_flag = ruledata['snapshot']
 
             def action(package, package_context, match_context):
                 # XXX: the same as ignored for now
-                package.SetFlag(PackageFlags.ignore, flagval)
+                package.SetFlag(PackageFlags.ignore, snapshot_flag)
 
             self.actions.append(action)
 
         if 'successor' in ruledata:
-            flagval = ruledata['successor']
+            successor_flag = ruledata['successor']
 
             def action(package, package_context, match_context):
                 # XXX: the same as devel for now
-                package.SetFlag(PackageFlags.devel, flagval)
+                package.SetFlag(PackageFlags.devel, successor_flag)
 
             self.actions.append(action)
 
         if 'generated' in ruledata:
-            flagval = ruledata['generated']
+            generated_flag = ruledata['generated']
 
             def action(package, package_context, match_context):
                 # XXX: the same as rolling for now
-                package.SetFlag(PackageFlags.rolling, flagval)
+                package.SetFlag(PackageFlags.rolling, generated_flag)
 
             self.actions.append(action)
 
@@ -470,10 +475,10 @@ class Rule:
             self.actions.append(action)
 
         if 'replaceinname' in ruledata:
-            items = list(ruledata['replaceinname'].items())
+            replace_items = list(ruledata['replaceinname'].items())
 
             def action(package, package_context, match_context):
-                for pattern, replacement in items:
+                for pattern, replacement in replace_items:
                     package.effname = package.effname.replace(pattern, replacement)
 
             self.actions.append(action)
