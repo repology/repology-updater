@@ -34,17 +34,15 @@ class PackageContext:
 
     def __init__(self):
         self.flags = set()
+        self.rulesets = set()
 
-    def SetFlag(self, name, value=True):
-        if value:
-            self.flags.add(name)
-        else:
-            self.flags.discard(name)
+    def add_flag(self, name):
+        self.flags.add(name)
 
-    def HasFlag(self, name):
+    def has_flag(self, name):
         return name in self.flags
 
-    def HasFlags(self, names):
+    def has_flags(self, names):
         return not self.flags.isdisjoint(names)
 
     def has_rulesets(self, rulesets):
@@ -265,7 +263,7 @@ class Rule:
             flags = as_set(ruledata['flag'])
 
             def matcher(package, package_context, match_context):
-                return package_context.HasFlags(flags)
+                return package_context.has_flags(flags)
 
             self.matchers.append(matcher)
 
@@ -273,7 +271,7 @@ class Rule:
             noflags = as_set(ruledata['noflag'])
 
             def matcher(package, package_context, match_context):
-                return not package_context.HasFlags(noflags)
+                return not package_context.has_flags(noflags)
 
             self.matchers.append(matcher)
 
@@ -442,7 +440,7 @@ class Rule:
 
             def action(package, package_context, match_context):
                 for flag in addflags:
-                    package_context.SetFlag(flag)
+                    package_context.add_flag(flag)
 
             self.actions.append(action)
 

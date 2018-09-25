@@ -118,7 +118,7 @@ class PackageTransformer:
         for ruleblock in self.optruleblocks:
             yield from ruleblock.iter_rules(package)
 
-    def Process(self, package):
+    def process(self, package):
         self.packages_processed += 1
 
         if self.packages_processed == 1000 or self.packages_processed == 10000 or self.packages_processed == 100000 or self.packages_processed == 1000000:
@@ -140,7 +140,7 @@ class PackageTransformer:
             if match_context.last:
                 return
 
-    def GetUnmatchedRules(self):
+    def get_unmatched_rules(self):
         result = []
 
         for rule in self.rules:

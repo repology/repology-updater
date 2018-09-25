@@ -187,7 +187,7 @@ def database_update_post(env):
 
 
 def show_unmatched_rules(env):
-    unmatched = env.get_package_transformer().GetUnmatchedRules()
+    unmatched = env.get_package_transformer().get_unmatched_rules()
     if not unmatched:
         return
 

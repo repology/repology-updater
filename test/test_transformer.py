@@ -46,7 +46,7 @@ class TestPackageTransformer(unittest.TestCase):
                     create_params[field] = value
 
             package = Package(**create_params)
-            transformer.Process(package)
+            transformer.process(package)
 
             for field, value in expected_params.items():
                 self.assertEqual(package.__dict__[field], value)

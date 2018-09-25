@@ -174,7 +174,7 @@ class RepositoryProcessor:
                 package.shadow = True
 
             if transformer:
-                transformer.Process(package)
+                transformer.process(package)
 
             # strip leading project name from flavor
             def strip_flavor(flavor):
