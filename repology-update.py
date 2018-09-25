@@ -103,7 +103,8 @@ def process_repositories(env):
                 raise
             except Exception as e:
                 env.get_main_logger().get_indented().log('failed: ' + str(e), severity=Logger.ERROR)
-                pass
+                if env.get_options().fatal:
+                    raise
 
         if env.get_options().parse:
             env.get_main_logger().log('parsing {}'.format(reponame))
@@ -115,7 +116,8 @@ def process_repositories(env):
                 raise
             except Exception as e:
                 env.get_main_logger().get_indented().log('failed: ' + str(e), severity=Logger.ERROR)
-                pass
+                if env.get_options().fatal:
+                    raise
 
 
 def database_init(env):
@@ -223,6 +225,8 @@ def parse_arguments():
     flags_grp = parser.add_argument_group('Flags')
     flags_grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
     flags_grp.add_argument('--disable-safety-checks', action='store_false', dest='enable_safety_checks', default=not config['ENABLE_SAFETY_CHECKS'], help='disable safety checks on processed repository data')
+
+    flags_grp.add_argument('--fatal', action='store_true', help='treat single repository processing failure as fatal')
 
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) to process')
 
