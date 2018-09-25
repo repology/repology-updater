@@ -46,7 +46,7 @@ class TestPackageTransformer(unittest.TestCase):
                     create_params[field] = value
 
             package = Package(**create_params)
-            transformer.Process(package)
+            transformer.process(package)
 
             for field, value in expected_params.items():
                 self.assertEqual(package.__dict__[field], value)
@@ -91,6 +91,12 @@ class TestPackageTransformer(unittest.TestCase):
             '[ { name: p1, devel: false } ]',
             {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': 0},
             {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': PackageFlags.devel}
+        )
+
+    def test_multiflags(self):
+        self.check_transformer(
+            '[ { devel: true, ignore: false, noscheme: true }, { ignore: true, noscheme: false } ]',
+            {'name': 'aaa', 'version': '1.0', 'expect_flags': PackageFlags.devel | PackageFlags.ignore}
         )
 
     def test_setname(self):
