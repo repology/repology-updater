@@ -6,7 +6,7 @@
 	<link rel="alternate" href="{{ url_for('maintainer_repo_feed_atom', maintainer=maintainer, repo=repo) }}" type="application/atom+xml" />
 {% endblock %}
 
-{% block title %}{{ super() }}: feed for {{ maintainer }} in {{ repometadata[repo].desc }}{% endblock %}
+{% block title %}Feed for {{ maintainer }} in {{ repometadata[repo].desc }} - Repology{% endblock %}
 {% block header %}Feed for <strong><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a></strong>
 in <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong>{% endblock %}
 {% block description %}Feed for maintainer {{ maintainer }} in repository {{ repometadata[repo].desc }}{% endblock %}

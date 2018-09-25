@@ -5,7 +5,7 @@
 	<meta http-equiv="refresh" content="{{ 3600 + randrange(60) }}">
 {% endblock %}
 
-{% block title %}Repology: repository {{ repometadata[repo].desc }}{% endblock %}
+{% block title %}{{ repometadata[repo].desc }} repository information - Repology{% endblock %}
 {% block header %}Repository <strong>{{ repometadata[repo].desc }}</strong>{% endblock %}
 {% block description %}Information on repository {{ repometadata[repo].desc }}{% endblock %}
 {% block keywords %}{{ super()}}, repository{% endblock %}

@@ -5,7 +5,7 @@
 	<meta http-equiv="refresh" content="{{ 3600 + randrange(60) }}">
 {% endblock %}
 
-{% block title %}{{ super() }}: history for {{ name }}{% endblock %}
+{% block title %}{{ name }} packaging history - Repology{% endblock %}
 {% block header %}History for <strong>{{ name }}</strong>{% endblock %}
 {% block description %}History of package versions for metapackage {{ name }} in all repositories{% endblock %}
 
