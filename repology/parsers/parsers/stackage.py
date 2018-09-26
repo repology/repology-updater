@@ -26,6 +26,6 @@ class StackageHTMLParser(Parser):
             pkg = factory.begin()
 
             pkg.set_name_and_version(row.xpath('./td[1]/a')[0].text)
-            pkg.set_summary(row.xpath('./td[2]')[0].text.replace('\n', ' '))
+            pkg.set_summary((row.xpath('./td[2]')[0].text or '').replace('\n', ' '))
 
             yield pkg
