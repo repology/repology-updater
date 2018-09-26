@@ -21,9 +21,10 @@ import xml.etree.ElementTree
 from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.versions import VersionStripper
 
 
-def ParseConditionalExpr(string):
+def parse_conditional_expr(string):
     words = string.split()
     result = []
 
@@ -53,21 +54,10 @@ def ParseConditionalExpr(string):
     return result
 
 
-def SanitizeVersion(version):
-    origversion = version
-
-    pos = version.find('-')
-    if pos != -1:
-        version = version[0:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
-
-
 class GentooGitParser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right_greedy('-')
+
         for category in os.listdir(path):
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):
@@ -101,15 +91,15 @@ class GentooGitParser(Parser):
 
                     pkg = factory.begin()
 
-                    pkg.name = package
-                    pkg.category = category
-                    pkg.maintainers = maintainers
+                    pkg.set_name(package)
+                    pkg.add_categories(category)
+                    pkg.add_maintainers(maintainers)
 
-                    pkg.version, pkg.origversion = SanitizeVersion(ebuild[len(package) + 1:-7])
+                    pkg.set_version(ebuild[len(package) + 1:-7], normalize_version)
 
                     if pkg.version.endswith('9999'):
                         # ignore versions for snapshots
-                        pkg.SetFlag(PackageFlags.rolling)
+                        pkg.set_flags(PackageFlags.rolling)
 
                     metadata_path = os.path.join(
                         path,
@@ -125,17 +115,17 @@ class GentooGitParser(Parser):
                                 key, value = line.split('=', 1)
 
                                 if key == 'DESCRIPTION':
-                                    pkg.comment = value
+                                    pkg.set_summary(value)
                                 elif key == 'HOMEPAGE':
-                                    pkg.homepage = value.split(' ')[0]  # XXX: save all urls
+                                    pkg.add_homepages(value.split(' '))
                                 elif key == 'LICENSE':
                                     if '(' in value:
                                         # XXX: conditionals and OR's: need more
                                         # complex parsing and backend support
-                                        pkg.licenses.append(value)
+                                        pkg.add_licenses(value)
                                     else:
-                                        pkg.licenses += value.split(' ')
+                                        pkg.add_licenses(value.split(' '))
                                 elif key == 'SRC_URI':
-                                    pkg.downloads += ParseConditionalExpr(value)
+                                    pkg.add_downloads(parse_conditional_expr(value))
 
                     yield pkg

@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -36,26 +36,28 @@ class LibreGameWikiParser(Parser):
             if cell is None or not cell.text:
                 continue
 
-            pkg.name = cell.text
+            pkg.set_name(cell.text)
 
             # version
             cell = item.find('./p[2]')
             if cell is None or not cell.text:
                 continue
 
-            pkg.version = cell.text
+            version = cell.text
 
-            match = re.match('(.*) \(.*\)$', pkg.version)
+            match = re.match('(.*) \(.*\)$', version)
             if match:
-                pkg.origversion = pkg.version
-                pkg.version = match.group(1)
+                pkg.set_version(match.group(1))
+                pkg.set_origversion(version)
+            else:
+                pkg.set_version(version)
 
             # www
             for a in item.findall('./p[2]/a'):
                 if a.text == 'Website':
-                    pkg.homepage = a.attrib['href']
+                    pkg.add_homepages(a.attrib['href'])
 
             # category
-            pkg.category = 'games'
+            pkg.add_categories('games')
 
             yield pkg

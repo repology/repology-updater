@@ -1,4 +1,5 @@
 # Copyright (C) 2017 Dingyuan Wang <gumblex@aosc.io>
+# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,44 +18,32 @@
 
 import json
 
-from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-
-
-def SanitizeVersion(version):
-    origversion = version
-
-    pos = version.rfind(':')
-    if pos != -1:
-        version = version[pos + 1:]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+from repology.parsers.versions import VersionStripper
 
 
 class AoscPkgsParser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_left(':')
+
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for package in json.load(jsonfile)['packages']:
                 pkg = factory.begin()
 
-                pkg.name = package['name']
+                pkg.set_name(package['name'])
+                pkg.set_version(package['version'], normalize_version)
 
-                if package['version'] is None:
-                    factory.log('no version: {}'.format(pkg.name), severity=Logger.ERROR)
+                if not pkg.check_sanity(verbose=True):
                     continue
 
-                pkg.version, _ = SanitizeVersion(package['version'])
-                pkg.origversion = package['full_version']
-                pkg.category = package['pkg_section'] or package['section']
-                pkg.comment = package['description']
-                pkg.maintainers = extract_maintainers(package['committer'])
+                pkg.set_origversion(package['full_version'])
+                pkg.add_categories(package['pkg_section'], package['section'])
+                pkg.set_summary(package['description'])
+                pkg.add_maintainers(extract_maintainers(package['committer']))
 
                 if pkg.version == '999':
-                    pkg.SetFlag(PackageFlags.ignore)  # XXX: rolling? revisit
+                    pkg.set_flags(PackageFlags.ignore)  # XXX: rolling? revisit
 
                 yield pkg
