@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -23,24 +23,19 @@ from repology.parsers import Parser
 
 class PyPiHTMLParser(Parser):
     def iter_parse(self, path, factory):
-        packages = {}
-
         with open(path, 'r', encoding='utf-8') as htmlfile:
             for match in re.findall('<td><a href="/pypi/([^"]+)/([^"]+)">[^<>]*</a></td>[ \n]*<td>([^<>]*)</td>', htmlfile.read(), flags=re.MULTILINE):
                 pkg = factory.begin()
-                pkg.name = match[0]
-                pkg.version = match[1]
+
+                pkg.set_name(match[0])
+                pkg.set_version(match[1])
 
                 comment = match[2].strip()
-                if comment == '':
-                    factory.log('{}: summary is empty'.format(pkg.name), severity=Logger.ERROR)
-                elif '\n' in comment:
-                    factory.log('{}: summary is multiline'.format(pkg.name), severity=Logger.ERROR)
+                if '\n' in comment:
+                    pkg.log('{}: summary is multiline'.format(pkg.name), severity=Logger.WARNING)
                 else:
-                    pkg.comment = comment
+                    pkg.set_summary(comment)
 
-                pkg.homepage = 'https://pypi.python.org/pypi/{}/{}'.format(match[0], match[1])
+                pkg.add_homepages('https://pypi.python.org/pypi/{}/{}'.format(match[0], match[1]))
 
-                packages[pkg.name] = pkg
-
-        yield from packages.values()
+                yield pkg
