@@ -1,5 +1,5 @@
 ###########################################################################
-# release_monitoring.org (disabled)
+# release-monitoring.org (disabled)
 ###########################################################################
 - name: release_monitoring
   type: site
@@ -19,4 +19,3 @@
       url: 'https://release-monitoring.org/project/{name}/'
   shadow: true
   tags: []
-
