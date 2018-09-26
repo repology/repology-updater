@@ -30,7 +30,7 @@
   color: "293845"
   minpackages: 1500
   sources:
-    - name: nightly
+    - name: nightly.html
       fetcher: FileFetcher
       parser: StackageHTMLParser
       url: https://www.stackage.org/nightly
@@ -52,7 +52,7 @@
   color: "293845"
   minpackages: 2000
   sources:
-    - name: lts
+    - name: lts.html
       fetcher: FileFetcher
       parser: StackageHTMLParser
       url: https://www.stackage.org/lts
