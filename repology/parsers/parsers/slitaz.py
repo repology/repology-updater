@@ -17,7 +17,6 @@
 
 import json
 
-from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.parsers import Parser
 
@@ -47,26 +46,3 @@ class SliTazJsonParser(Parser):
                     subpkg.set_version(subitem.get('ver'))
 
                     yield subpkg
-
-
-class SliTazInfoParser(Parser):
-    def __init__(self, numfields):
-        self.numfields = numfields
-
-    def iter_parse(self, path, factory):
-        with open(path, encoding='utf-8') as indexfile:
-            for line in indexfile:
-                fields = line.split('\t')
-                if len(fields) != self.numfields:
-                    factory.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
-                    continue
-
-                pkg = factory.begin()
-
-                pkg.name = fields[0]
-                pkg.version = fields[1]
-                pkg.category = fields[2]
-                pkg.comment = fields[3]
-                pkg.homepage = fields[4]
-
-                yield pkg
