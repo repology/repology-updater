@@ -33,16 +33,13 @@ class BuckarooGitParser(Parser):
             for version, versiondata in data['versions'].items():
                 pkg = factory.begin()
 
-                pkg.name = data['name']
+                pkg.set_name(data['name'])
+                pkg.set_version(version)
 
-                if data['license']:
-                    pkg.licenses = [data['license']]
+                pkg.add_licenses(data['license'])
+                pkg.add_homepages(data['url'])
 
-                pkg.homepage = data['url']
-
-                pkg.version = version
-
-                pkg.extrafields['recipe'] = os.path.relpath(filename, path)
+                pkg.set_extra_field('recipe', os.path.relpath(filename, path))
 
                 # garbage: links to git:// or specific commits
                 #if isinstance(versiondata['source'], str):
@@ -50,4 +47,4 @@ class BuckarooGitParser(Parser):
                 #else:
                 #    pkg.downloads = [versiondata['source']['url']]
 
-            yield pkg
+                yield pkg
