@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,7 +17,6 @@
 
 import json
 
-from repology.logger import Logger
 from repology.parsers import Parser
 
 
@@ -27,20 +26,18 @@ class AnityaApiParser(Parser):
             for project in json.load(jsonfile)['projects']:
                 pkg = factory.begin()
 
-                pkg.name = project['name']
-                pkg.version = project['version']
-                pkg.homepage = project['homepage']
+                pkg.set_name(project['name'])
+                pkg.set_version(project['version'])
 
-                if pkg.version is None:
-                    factory.log('no version: {}'.format(pkg.name), severity=Logger.ERROR)
+                if not pkg.check_sanity(verbose=True):
                     continue
 
-                if pkg.version.startswith('v'):
-                    pkg.version = pkg.version[1:]
+                pkg.add_homepages(project['homepage'])
+                pkg.set_version(pkg.version[1:])
 
                 if project['backend'] == 'CPAN (perl)':
-                    pkg.name = 'perl:' + pkg.name
+                    pkg.prefix_name('perl:')
                 elif project['backend'] == 'Rubygems':
-                    pkg.name = 'ruby:' + pkg.name
+                    pkg.prefix_name('ruby:')
 
                 yield pkg
