@@ -119,6 +119,9 @@ class PackageMaker(PackageMakerBase):
     def set_name(self, name):
         self.package.name = name
 
+    def prefix_name(self, prefix):
+        self.package.name = prefix + self.package.name
+
     @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_version(self, version, version_normalizer=None):
         if version_normalizer is None:
