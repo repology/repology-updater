@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -31,12 +31,13 @@ class ChocolateyParser(Parser):
 
             for entry in root.findall('{http://www.w3.org/2005/Atom}entry'):
                 pkg = factory.begin()
-                pkg.name = entry.find('{http://www.w3.org/2005/Atom}title').text
-                pkg.version = entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Version').text
-                pkg.homepage = entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}ProjectUrl').text
+
+                pkg.set_name(entry.find('{http://www.w3.org/2005/Atom}title').text)
+                pkg.set_version(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Version').text)
+                pkg.add_homepages(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}ProjectUrl').text)
 
                 commentnode = entry.find('{http://www.w3.org/2005/Atom}summary')
                 if commentnode is not None:
-                    pkg.comment = commentnode.text
+                    pkg.set_summary(commentnode.text)
 
                 yield pkg
