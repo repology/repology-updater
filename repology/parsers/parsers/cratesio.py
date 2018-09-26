@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -33,15 +33,12 @@ class CratesIOParser(Parser):
                 for crate in json.load(pagedata)['crates']:
                     pkg = factory.begin()
 
-                    pkg.name = crate['id']
-                    pkg.version = crate['max_version']
+                    pkg.set_name(crate['id'])
+                    pkg.set_version(crate['max_version'])
 
-                    if crate['description']:
-                        pkg.comment = crate['description'].strip()
+                    pkg.set_summary(crate['description'])
 
-                    if crate['homepage']:
-                        pkg.homepage = crate['homepage']
-                    elif crate['repository']:
-                        pkg.homepage = crate['repository']
+                    pkg.add_homepages(crate['homepage'])
+                    pkg.add_homepages(crate['repository'])
 
                     yield pkg

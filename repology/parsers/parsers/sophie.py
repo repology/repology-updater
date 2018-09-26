@@ -28,7 +28,7 @@ class SophieHTMLParser(Parser):
 
             pkg = factory.begin()
 
-            pkg.name = nevra[0]
-            pkg.version = nevra[2]
+            pkg.set_name(nevra[0])
+            pkg.set_version(nevra[2])
 
             yield pkg

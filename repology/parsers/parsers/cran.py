@@ -25,8 +25,9 @@ class CRANCheckSummaryParser(Parser):
         with open(path, 'r', encoding='utf-8') as htmlfile:
             for match in re.findall('<tr> <td> <a href="[^"]+">([^<>]+)</a> </td> <td>[ ]*([^ <>]+)[ ]*</td>', htmlfile.read()):
                 pkg = factory.begin()
-                pkg.name = match[0]
-                pkg.version = match[1]
-                pkg.homepage = 'https://cran.r-project.org/web/packages/{}/index.html'.format(match[0])
+
+                pkg.set_name(match[0])
+                pkg.set_version(match[1])
+                pkg.add_homepages('https://cran.r-project.org/web/packages/{}/index.html'.format(match[0]))
 
                 yield pkg

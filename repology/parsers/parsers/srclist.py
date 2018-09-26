@@ -34,13 +34,13 @@ class SrcListParser(Parser):
 
             pkg = factory.begin()
 
-            pkg.name = fields['name']
-            pkg.version = fields['version']  # XXX: handle release
+            pkg.set_name(fields['name'])
+            pkg.set_version(fields['version'])  # XXX: handle release
 
             if fields['packager']:
-                pkg.maintainers = extract_maintainers(fields['packager'])  # XXX: may have multiple maintainers
+                pkg.add_maintainers(extract_maintainers(fields['packager']))  # XXX: may have multiple maintainers
 
-            pkg.category = fields['group']
-            pkg.comment = fields['summary']
+            pkg.add_categories(fields['group'])
+            pkg.set_summary(fields['summary'])
 
             yield pkg

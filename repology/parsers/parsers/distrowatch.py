@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -27,16 +27,16 @@ class DistrowatchPackagesParser(Parser):
 
             # name + version
             cell = row.xpath('./th[1]/a[@href]')[0]
-            pkg.name = cell.text
-            pkg.homepage = cell.attrib['href']
+            pkg.set_name(cell.text)
+            pkg.add_homepages(cell.attrib['href'])
 
             # summary
             cell = row.xpath('./td[1]/a')[0]
-            pkg.version = cell.text
-            pkg.downloads = [cell.attrib['href']]
+            pkg.set_version(cell.text)
+            pkg.add_downloads(cell.attrib['href'])
 
             # summary
             cell = row.xpath('./td[2]')[0]
-            pkg.comment = cell.text
+            pkg.set_summary(cell.text)
 
             yield pkg

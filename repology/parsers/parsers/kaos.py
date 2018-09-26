@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -27,8 +27,8 @@ class KaOSHTMLParser(Parser):
 
             name, version, revision = row.xpath('./td[1]/a')[0].text.rsplit('-', 2)
 
-            pkg.name = name
-            pkg.origversion = version + '-' + revision
-            pkg.version = version.split(':', 1)[-1]  # drop epoch
+            pkg.set_name(name)
+            pkg.set_version(version.split(':', 1)[-1])
+            pkg.set_origversion(version + '-' + revision)
 
             yield pkg

@@ -22,12 +22,11 @@ class HPPADepothelperListParser(Parser):
     def iter_parse(self, path, factory):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
-                pkgname, pkgpath = line.strip().split('|')[:2]
-
                 pkg = factory.begin()
 
-                pkg.name, pkg.version = pkgname.rsplit('-', 1)
+                pkgname, pkgpath = line.strip().split('|')[:2]
 
-                pkg.extrafields['path'] = pkgpath
+                pkg.set_name_and_version(pkgname)
+                pkg.set_extra_field('path', pkgpath)
 
                 yield pkg
