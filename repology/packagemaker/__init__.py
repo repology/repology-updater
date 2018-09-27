@@ -195,13 +195,13 @@ class PackageMaker(PackageMakerBase):
         offspring.package = deepcopy(self.package)
         return offspring
 
-    def check_sanity(self, verbose=False):
-        if not self.package.name:
+    def check_sanity(self, require_name=True, require_version=True, verbose=False):
+        if require_name and not self.package.name:
             if verbose:
                 self.log('package with no name', severity=Logger.ERROR)
             return False
 
-        if not self.package.version:
+        if require_version and not self.package.version:
             if verbose:
                 self.log('package with no version', severity=Logger.ERROR)
             return False
