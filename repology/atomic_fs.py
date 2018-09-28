@@ -28,7 +28,9 @@ def atomic_dir(path):
     def cleanup():
         if os.path.exists(new_path):
             shutil.rmtree(new_path)
-        if os.path.exists(old_path):
+        if os.path.isfile(old_path):
+            os.remove(old_path)
+        elif os.path.exists(old_path):
             shutil.rmtree(old_path)
 
     cleanup()
