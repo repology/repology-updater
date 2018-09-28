@@ -21,7 +21,7 @@ from contextlib import contextmanager
 
 
 @contextmanager
-def state_dir(path):
+def atomic_dir(path):
     new_path = path + '.new'
     old_path = path + '.old'
 
@@ -45,7 +45,7 @@ def state_dir(path):
 
 
 @contextmanager
-def state_file(path, *args, **kwargs):
+def atomic_file(path, *args, **kwargs):
     new_path = path + '.new'
 
     def cleanup():
