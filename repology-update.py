@@ -97,7 +97,7 @@ def process_repositories(env):
             env.get_main_logger().log('fetching {}'.format(reponame))
             try:
                 with LogRunManager(env, reponame, 'fetch') as logger:
-                    env.get_repo_processor().Fetch(reponame, update=env.get_options().update, logger=logger)
+                    env.get_repo_processor().fetch(reponame, update=env.get_options().update, logger=logger)
                 env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:
                 raise
@@ -110,7 +110,7 @@ def process_repositories(env):
             env.get_main_logger().log('parsing {}'.format(reponame))
             try:
                 with LogRunManager(env, reponame, 'parse') as logger:
-                    env.get_repo_processor().ParseAndSerialize(reponame, transformer=env.get_package_transformer(), logger=logger)
+                    env.get_repo_processor().parse(reponame, transformer=env.get_package_transformer(), logger=logger)
                 env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:
                 raise
@@ -155,7 +155,7 @@ def database_update(env):
     start_time = timer()
 
     logger.log('pushing packages to database')
-    for packageset in env.get_repo_processor().StreamDeserializeMulti(reponames=env.get_enabled_repo_names(), logger=logger):
+    for packageset in env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger):
         FillPackagesetVersions(packageset)
         package_queue.extend(packageset)
 

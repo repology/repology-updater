@@ -17,8 +17,8 @@
 
 import datetime
 import os
-import pickle
 
+from repology.atomic_fs import atomic_dir
 from repology.fetchers import Fetcher
 from repology.logger import Logger, NoopLogger
 from repology.moduleutils import ClassFactory
@@ -26,6 +26,10 @@ from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSan
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Parser
+from repology.repoproc.serialization import heap_deserializer, serialize
+
+
+MAX_PACKAGES_PER_CHUNK = 10240
 
 
 class StateFileFormatCheckProblem(Exception):
@@ -51,21 +55,24 @@ class RepositoryProcessor:
         self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', superclass=Fetcher)
         self.parser_factory = ClassFactory('repology.parsers.parsers', superclass=Parser)
 
-    def __GetRepoPath(self, repository):
+    def _get_state_path(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.state')
 
-    def __GetSourcePath(self, repository, source):
-        return os.path.join(self.__GetRepoPath(repository), source['name'].replace('/', '_'))
+    def _get_state_source_path(self, repository, source):
+        return os.path.join(self._get_state_path(repository), source['name'].replace('/', '_'))
 
-    def __GetSerializedPath(self, repository):
+    def _get_parsed_path(self, repository):
         return os.path.join(self.statedir, repository['name'] + '.packages')
 
-    def __CheckRepositoryOutdatedness(self, repository, logger):
-        if 'valid_till' in repository and datetime.date.today() >= repository['valid_till']:
-            logger.log('repository {} has reached EoL, consider updating configs'.format(repository['name']), severity=Logger.WARNING)
+    def _get_parsed_chunk_paths(self, repository):
+        dirpath = self._get_parsed_path(repository)
+        return [
+            os.path.join(dirpath, filename)
+            for filename in os.listdir(dirpath)
+        ] if os.path.isdir(dirpath) else []
 
-    # Private methods which provide single actions on sources
-    def __FetchSource(self, update, repository, source, logger):
+    # source level private methods
+    def _fetch_source(self, update, repository, source, logger):
         if 'fetcher' not in source:
             logger.log('fetching source {} not supported'.format(source['name']))
             return
@@ -75,14 +82,14 @@ class RepositoryProcessor:
         self.fetcher_factory.SpawnWithKnownArgs(
             source['fetcher'], source
         ).fetch(
-            self.__GetSourcePath(repository, source),
+            self._get_state_source_path(repository, source),
             update=update,
             logger=logger.GetIndented()
         )
 
         logger.log('fetching source {} complete'.format(source['name']))
 
-    def _iter_parse_source(self, repository, source, logger):
+    def _iter_parse_source(self, repository, source, transformer, logger):
         def postprocess_parsed_packages(packages_iter):
             for package in packages_iter:
                 if isinstance(package, PackageMaker):
@@ -104,16 +111,48 @@ class RepositoryProcessor:
                         logger.log('package with empty version: {}'.format(package.name), severity=Logger.ERROR)
                         continue
 
-                # fill subrepos
+                # fill repository-specific fields
+                package.repo = repository['name']
+                package.family = repository['family']
+
                 if 'subrepo' in source:
                     package.subrepo = source['subrepo']
 
-                # fill default maintainer
+                if repository.get('shadow', False):
+                    package.shadow = True
+
                 if not package.maintainers:
                     if 'default_maintainer' in repository:
                         package.maintainers = [repository['default_maintainer']]
                     else:
                         package.maintainers = ['fallback-mnt-{}@repology'.format(repository['name'])]
+
+                # transform
+                if transformer:
+                    transformer.process(package)
+
+                # skip removed packages
+                if package.HasFlag(PackageFlags.remove):
+                    continue
+
+                # postprocess
+                def strip_flavor(flavor):
+                    if flavor.startswith(package.effname + '-'):
+                        return flavor[len(package.effname) + 1:]
+                    return flavor
+
+                package.flavors = sorted(set(map(strip_flavor, package.flavors)))
+
+                # legacy sanity checking
+                try:
+                    package.CheckSanity(transformed=transformer is not None)
+                except PackageSanityCheckFailure as err:
+                    logger.log('sanity error: {}'.format(err), severity=Logger.ERROR)
+                    raise
+                except PackageSanityCheckProblem as err:
+                    logger.log('sanity warning: {}'.format(err), severity=Logger.WARNING)
+
+                package.Normalize()
 
                 yield package
 
@@ -121,223 +160,79 @@ class RepositoryProcessor:
             self.parser_factory.SpawnWithKnownArgs(
                 source['parser'], source
             ).iter_parse(
-                self.__GetSourcePath(repository, source),
+                self._get_state_source_path(repository, source),
                 PackageFactory(logger)
             )
         )
 
-    # Private methods which provide single actions on repos
-    def __Fetch(self, update, repository, logger):
+    def _iter_parse_all_sources(self, repository, transformer, logger):
+        for source in repository['sources']:
+            logger.log('parsing source {} started'.format(source['name']))
+            yield from self._iter_parse_source(repository, source, transformer, logger.GetIndented())
+            logger.log('parsing source {} complete'.format(source['name']))
+
+    # repository level private methods
+    def _fetch(self, update, repository, logger):
         logger.log('fetching started')
 
         if not os.path.isdir(self.statedir):
             os.mkdir(self.statedir)
 
         for source in repository['sources']:
-            if not os.path.isdir(self.__GetRepoPath(repository)):
-                os.mkdir(self.__GetRepoPath(repository))
-            self.__FetchSource(update, repository, source, logger.GetIndented())
+            if not os.path.isdir(self._get_state_path(repository)):
+                os.mkdir(self._get_state_path(repository))
+            self._fetch_source(update, repository, source, logger.GetIndented())
 
         logger.log('fetching complete')
 
-    def _parse(self, repository, logger):
+    def _parse(self, repository, transformer, logger):
         logger.log('parsing started')
 
         packages = []
+        chunknum = 0
+        num_packages = 0
 
-        for source in repository['sources']:
-            logger.log('parsing source {} started'.format(source['name']))
+        def flush_packages():
+            nonlocal packages, chunknum
 
-            packages.extend(self._iter_parse_source(repository, source, logger.GetIndented()))
+            if packages:
+                packages = sorted(packages, key=lambda package: package.effname)
+                serialize(packages, os.path.join(state_dir, str(chunknum)))
+                packages = []
+                chunknum += 1
 
-            logger.log('parsing source {} complete'.format(source['name']))
+        with atomic_dir(self._get_parsed_path(repository)) as state_dir:
+            for package in self._iter_parse_all_sources(repository, transformer, logger):
+                packages.append(package)
+                num_packages += 1
 
-        logger.log('parsing complete, {} packages, deduplicating'.format(len(packages)))
+                if len(packages) >= MAX_PACKAGES_PER_CHUNK:
+                    flush_packages()
 
-        packages = PackagesetDeduplicate(packages)
+            flush_packages()
 
-        if self.safety_checks and len(packages) < repository['minpackages']:
-            raise TooLittlePackages(len(packages), repository['minpackages'])
+        if self.safety_checks and num_packages < repository['minpackages']:
+            raise TooLittlePackages(num_package, repository['minpackages'])
 
-        logger.log('parsing complete, {} packages'.format(len(packages)))
+        logger.log('parsing complete')
 
-        return packages
+    # public methods
+    def fetch(self, reponame, update=True, logger=NoopLogger()):
+        self._fetch(update, self.repomgr.GetRepository(reponame), logger)
 
-    def __Transform(self, packages, transformer, repository, logger):
-        logger.log('processing started')
-        sanitylogger = logger.GetIndented()
-        for package in packages:
-            package.repo = repository['name']
-            package.family = repository['family']
+    def parse(self, reponame, transformer, logger=NoopLogger()):
+        self._parse(self.repomgr.GetRepository(reponame), transformer, logger)
 
-            if repository.get('shadow', False):
-                package.shadow = True
+    def iter_parsed(self, reponames=None, logger=NoopLogger()):
+        def get_sources():
+            for repository in self.repomgr.GetRepositories(reponames):
+                sources = self._get_parsed_chunk_paths(repository)
+                if not sources:
+                    logger.log('parsed packages for repository {} are missing, treating repository as empty'.format(repository['desc']), severity=Logger.ERROR)
+                yield from sources
 
-            if transformer:
-                transformer.process(package)
+        with heap_deserializer(get_sources(), lambda package: package.effname) as heap:
+            for packageset in heap():
+                packageset = PackagesetDeduplicate(packageset)
 
-            # strip leading project name from flavor
-            def strip_flavor(flavor):
-                if flavor.startswith(package.effname + '-'):
-                    return flavor[len(package.effname) + 1:]
-                return flavor
-
-            package.flavors = sorted(set(map(strip_flavor, package.flavors)))
-
-            try:
-                package.CheckSanity(transformed=transformer is not None)
-            except PackageSanityCheckFailure as err:
-                sanitylogger.log('sanity error: {}'.format(err), severity=Logger.ERROR)
-                raise
-            except PackageSanityCheckProblem as err:
-                sanitylogger.log('sanity warning: {}'.format(err), severity=Logger.WARNING)
-
-            package.Normalize()
-
-        # XXX: in future, ignored packages will not be dropped here, but
-        # ignored in summary and version calcualtions, but shown in
-        # package listing
-        packages = [package for package in packages if not package.HasFlag(PackageFlags.remove)]
-
-        logger.log('processing complete, {} packages, deduplicating'.format(len(packages)))
-
-        packages = PackagesetDeduplicate(packages)
-
-        if transformer:
-            logger.log('processing complete, {} packages, sorting'.format(len(packages)))
-
-            packages = sorted(packages, key=lambda package: package.effname)
-
-        logger.log('processing complete, {} packages'.format(len(packages)))
-
-        return packages
-
-    def __Serialize(self, packages, path, repository, logger):
-        tmppath = path + '.tmp'
-
-        logger.log('saving started')
-        with open(tmppath, 'wb') as outfile:
-            pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
-            pickler.fast = True  # deprecated, but I don't see any alternatives
-            pickler.dump(len(packages))
-            for package in packages:
-                pickler.dump(package)
-        os.replace(tmppath, path)
-        logger.log('saving complete, {} packages'.format(len(packages)))
-
-    def __Deserialize(self, path, repository, logger):
-        packages = []
-        logger.log('loading started')
-        with open(path, 'rb') as infile:
-            unpickler = pickle.Unpickler(infile)
-            numpackages = unpickler.load()
-            packages = [unpickler.load() for num in range(0, numpackages)]
-            if packages and not packages[0].CheckFormat():
-                raise StateFileFormatCheckProblem(path)
-        logger.log('loading complete, {} packages'.format(len(packages)))
-
-        return packages
-
-    class StreamDeserializer:
-        def __init__(self, path, logger):
-            try:
-                self.unpickler = pickle.Unpickler(open(path, 'rb'))
-                self.count = self.unpickler.load()
-            except FileNotFoundError:
-                logger.log('parsed package data file {} does not exist, treating repository as empty'.format(path), severity=Logger.ERROR)
-                self.count = 0
-
-            self.current = None
-
-            self.Get()
-
-            if self.current and not self.current.CheckFormat():
-                raise StateFileFormatCheckProblem(path)
-
-        def Peek(self):
-            return self.current
-
-        def EOF(self):
-            return self.current is None
-
-        def Get(self):
-            current = self.current
-            if self.count == 0:
-                self.current = None
-            else:
-                self.current = self.unpickler.load()
-                self.count -= 1
-            return current
-
-    # Single repo methods
-    def Fetch(self, reponame, update=True, logger=NoopLogger()):
-        repository = self.repomgr.GetRepository(reponame)
-
-        self.__CheckRepositoryOutdatedness(repository, logger)
-
-        self.__Fetch(update, repository, logger)
-
-    def Parse(self, reponame, transformer, logger=NoopLogger()):
-        repository = self.repomgr.GetRepository(reponame)
-
-        packages = self._parse(repository, logger)
-        packages = self.__Transform(packages, transformer, repository, logger)
-
-        return packages
-
-    def ParseAndSerialize(self, reponame, transformer, logger=NoopLogger()):
-        repository = self.repomgr.GetRepository(reponame)
-
-        packages = self._parse(repository, logger)
-        packages = self.__Transform(packages, transformer, repository, logger)
-        self.__Serialize(packages, self.__GetSerializedPath(repository), repository, logger)
-
-        return packages
-
-    def Deserialize(self, reponame, logger=NoopLogger()):
-        repository = self.repomgr.GetRepository(reponame)
-
-        return self.__Deserialize(self.__GetSerializedPath(repository), repository, logger)
-
-    # Multi repo methods
-    def ParseMulti(self, reponames=None, transformer=None, logger=NoopLogger()):
-        packages = []
-
-        for repo in self.repomgr.GetRepositories(reponames):
-            packages += self.Parse(repo['name'], transformer=transformer, logger=logger.GetPrefixed(repo['name'] + ': '))
-
-        return packages
-
-    def DeserializeMulti(self, reponames=None, logger=NoopLogger()):
-        packages = []
-
-        for repo in self.repomgr.GetRepositories(reponames):
-            packages += self.Deserialize(repo['name'], logger=logger.GetPrefixed(repo['name'] + ': '))
-
-        return packages
-
-    def StreamDeserializeMulti(self, reponames=None, logger=NoopLogger()):
-        deserializers = []
-        for repo in self.repomgr.GetRepositories(reponames):
-            deserializers.append(self.StreamDeserializer(self.__GetSerializedPath(repo), logger))
-
-        while True:
-            # remove EOFed repos
-            deserializers = [ds for ds in deserializers if not ds.EOF()]
-
-            # stop when all deserializers are empty
-            if not deserializers:
-                break
-
-            # find lowest key (effname)
-            thiskey = deserializers[0].Peek().effname
-            for ds in deserializers[1:]:
-                thiskey = min(thiskey, ds.Peek().effname)
-
-            # fetch all packages with given key from all deserializers
-            packageset = []
-            for ds in deserializers:
-                while not ds.EOF() and ds.Peek().effname == thiskey:
-                    packageset.append(ds.Get())
-
-            yield packageset
+                yield packageset
