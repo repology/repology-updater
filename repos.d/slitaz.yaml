@@ -28,6 +28,7 @@
   type: repository
   desc: SliTaz Next
   family: slitaz
+  ruleset: [slitaz,slitaz_next]
   minpackages: 5200
   sources:
     - name: repo.json
