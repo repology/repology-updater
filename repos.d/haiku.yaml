@@ -1,28 +1,6 @@
 ###########################################################################
 # HaikuPorts
 ###########################################################################
-- name: haikuports_release
-  sortname: haikuports_
-  type: repository
-  desc: HaikuPorts release
-  family: haikuports
-  color: "ffc245"
-  minpackages: 500
-  sources:
-    - name: haikuports
-      fetcher: GitFetcher
-      parser: HaikuPortsFilenamesParser
-      url: https://github.com/haikuports/haikuports.git
-      sparse_checkout: [ '**/*.recipe' ]
-      branch: release
-  repolinks:
-    - desc: HaikuPorts repository
-      url: https://github.com/haikuports/haikuports
-  packagelinks:
-    - desc: Port directory in git repo
-      url: 'https://github.com/haikuports/haikuports/tree/master/{category}/{name}'
-  tags: [ all, production, haiku ]
-
 - name: haikuports_master
   type: repository
   desc: HaikuPorts master
