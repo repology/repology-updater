@@ -6,7 +6,7 @@
   type: repository
   desc: F-Droid
   family: fdroid
-  minpackages: 3000
+  minpackages: 10
   sources:
     - name: F-Droid
       fetcher: FileFetcher
