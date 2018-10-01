@@ -19,29 +19,29 @@
 
 import unittest
 
-from repology.parsers.parsers.gentoo import ParseConditionalExpr
+from repology.parsers.parsers.gentoo import parse_conditional_expr
 
 
 class TestGentooParseExpr(unittest.TestCase):
     def test_simple(self):
-        self.assertEqual(ParseConditionalExpr('http://foo'), ['http://foo'])
+        self.assertEqual(parse_conditional_expr('http://foo'), ['http://foo'])
 
     def test_multiple(self):
-        self.assertEqual(ParseConditionalExpr('http://foo http://bar'), ['http://foo', 'http://bar'])
+        self.assertEqual(parse_conditional_expr('http://foo http://bar'), ['http://foo', 'http://bar'])
 
     def test_rename(self):
-        self.assertEqual(ParseConditionalExpr('http://foo/file.tgz -> file.tar.gz'), ['http://foo/file.tgz'])
+        self.assertEqual(parse_conditional_expr('http://foo/file.tgz -> file.tar.gz'), ['http://foo/file.tgz'])
 
     def test_condition(self):
-        self.assertEqual(ParseConditionalExpr('!http? ( http://foo )'), ['http://foo'])
-        self.assertEqual(ParseConditionalExpr('!http? ( http://foo ) !ftp? ( http://bar )'), ['http://foo', 'http://bar'])
+        self.assertEqual(parse_conditional_expr('!http? ( http://foo )'), ['http://foo'])
+        self.assertEqual(parse_conditional_expr('!http? ( http://foo ) !ftp? ( http://bar )'), ['http://foo', 'http://bar'])
 
     def test_nested_condition(self):
-        self.assertEqual(ParseConditionalExpr('!http? ( !ftp? ( http://foo ) )'), ['http://foo'])
+        self.assertEqual(parse_conditional_expr('!http? ( !ftp? ( http://foo ) )'), ['http://foo'])
 
     def test_realworld(self):
         self.assertEqual(
-            ParseConditionalExpr(
+            parse_conditional_expr(
                 'mirror://sourceforge/free-doko/FreeDoko_0.7.14.src.zip backgrounds? '
                 '( mirror://sourceforge/free-doko/backgrounds.zip -> freedoko-backgrounds.zip ) '
                 'kdecards? ( mirror://sourceforge/free-doko/kdecarddecks.zip ) xskatcards? '
