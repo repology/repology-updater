@@ -71,7 +71,7 @@ class RepositoryProcessor:
         ] if os.path.isdir(dirpath) else []
 
     # source level private methods
-    def _fetch_source(self, update, repository, source, logger):
+    def _fetch_source(self, repository, update, source, logger):
         if 'fetcher' not in source:
             logger.log('fetching source {} not supported'.format(source['name']))
             return
@@ -171,7 +171,7 @@ class RepositoryProcessor:
             logger.log('parsing source {} complete'.format(source['name']))
 
     # repository level private methods
-    def _fetch(self, update, repository, logger):
+    def _fetch(self, repository, update, logger):
         logger.log('fetching started')
 
         if not os.path.isdir(self.statedir):
@@ -180,7 +180,7 @@ class RepositoryProcessor:
         for source in repository['sources']:
             if not os.path.isdir(self._get_state_path(repository)):
                 os.mkdir(self._get_state_path(repository))
-            self._fetch_source(update, repository, source, logger.GetIndented())
+            self._fetch_source(repository, update, source, logger.GetIndented())
 
         logger.log('fetching complete')
 
