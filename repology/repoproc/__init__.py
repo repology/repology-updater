@@ -216,11 +216,17 @@ class RepositoryProcessor:
         logger.log('parsing complete')
 
     # public methods
-    def fetch(self, reponame, update=True, logger=NoopLogger()):
-        self._fetch(update, self.repomgr.GetRepository(reponame), logger)
+    def fetch(self, reponames, update=True, logger=NoopLogger()):
+        for repository in self.repomgr.GetRepositories(reponames):
+            self._fetch(repository, update, logger)
 
-    def parse(self, reponame, transformer, logger=NoopLogger()):
-        self._parse(self.repomgr.GetRepository(reponame), transformer, logger)
+    def parse(self, reponames, transformer=None, logger=NoopLogger()):
+        for repository in self.repomgr.GetRepositories(reponames):
+            self._parse(repository, transformer, logger)
+
+    def iter_parse(self, reponames, transformer=None, logger=NoopLogger()):
+        for repository in self.repomgr.GetRepositories(reponames):
+            yield from self._iter_parse_all_sources(repository, transformer, logger)
 
     def iter_parsed(self, reponames=None, logger=NoopLogger()):
         def get_sources():

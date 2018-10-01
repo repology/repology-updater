@@ -31,7 +31,7 @@ repoproc = RepositoryProcessor(repomgr, 'testdata', safety_checks=False)
 class TestParsers(unittest.TestCase):
     def setUp(self):
         self.maxDiff = None
-        self.packages = repoproc.ParseMulti(reponames=['have_testdata'])
+        self.packages = list(repoproc.iter_parse(reponames=['have_testdata']))
 
     def check_package(self, name, reference):
         reference_with_default = {
