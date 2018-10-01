@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import datetime
 import os
 
 from repology.atomic_fs import atomic_dir
@@ -212,7 +211,7 @@ class RepositoryProcessor:
             flush_packages()
 
         if self.safety_checks and num_packages < repository['minpackages']:
-            raise TooLittlePackages(num_package, repository['minpackages'])
+            raise TooLittlePackages(num_packages, repository['minpackages'])
 
         logger.log('parsing complete')
 
