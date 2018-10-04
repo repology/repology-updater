@@ -39,10 +39,12 @@ class PackageMakerBase:
     @staticmethod
     def _flatten_args(args):
         for arg in args:
-            if isinstance(arg, list):
+            if arg is None or arg == '':
+                pass  # skip
+            elif isinstance(arg, (str, int, float, bool)):
+                yield arg  # scalar
+            else:  # iterate
                 yield from PackageMakerBase._flatten_args(arg)
-            elif arg is not None and arg != '':
-                yield arg
 
     def _apply_normalizers(self, value, fieldname, normalizers):
         origvalue = value
