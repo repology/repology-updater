@@ -106,6 +106,22 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.version, '1.0')
         self.assertEqual(pkg.comment, 'Foo')
 
+    def test_iter(self):
+        def iter_maintainers():
+            yield 'a@com'
+            yield ['b@com', None, '', 'c@com']
+            yield None
+            yield ''
+            yield 'd@com'
+
+        factory = PackageFactory(NoopLogger())
+
+        maker = factory.begin()
+        maker.add_maintainers(iter_maintainers())
+        pkg = maker.unwrap()
+
+        self.assertEqual(pkg.maintainers, ['a@com', 'b@com', 'c@com', 'd@com'])
+
 
 if __name__ == '__main__':
     unittest.main()
