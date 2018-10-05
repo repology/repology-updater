@@ -155,7 +155,7 @@ class PackageMaker(PackageMakerBase):
     def set_summary(self, summary):
         self.package.comment = summary
 
-    @PackageMakerBase._omnivorous_setter('maintainer', str, nzs.strip, nzs.forbid_newlines)
+    @PackageMakerBase._omnivorous_setter('maintainer', str, nzs.strip, nzs.forbid_newlines, nzs.tolower)
     def add_maintainers(self, *args):
         self.package.maintainers.extend(args)
 

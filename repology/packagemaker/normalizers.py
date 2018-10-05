@@ -28,6 +28,10 @@ def strip(value):
     return value.strip(), None
 
 
+def tolower(value):
+    return value.lower(), None
+
+
 def warn_whitespace(value):
     if ' ' in value or '\t' in value:
         return value, 'contains whitespace'
