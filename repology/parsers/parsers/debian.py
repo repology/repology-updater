@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -22,9 +22,7 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
-def SanitizeVersion(version):
-    origversion = version
-
+def normalize_version(version):
     # epoch
     pos = version.find(':')
     if pos != -1:
@@ -50,10 +48,7 @@ def SanitizeVersion(version):
 
     version += '.'.join(good_suffixes)
 
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+    return version
 
 
 class DebianSourcesParser(Parser):
@@ -72,32 +67,29 @@ class DebianSourcesParser(Parser):
 
                     pkg = factory.begin()
 
-                    def GetField(key, type_=str, default=None):
+                    def get_field(key, type_=str, default=None):
                         if key in current_data:
                             if type_ is None or isinstance(current_data[key], type_):
                                 return current_data[key]
                             else:
-                                factory.log('unable to parse field {}'.format(key), severity=Logger.ERROR)
+                                pkg.log('unable to parse field {}'.format(key), severity=Logger.ERROR)
                                 return default
                         else:
                             return default
 
-                    pkg.name = GetField('Package')
-                    pkg.version, pkg.origversion = SanitizeVersion(GetField('Version'))
-                    pkg.maintainers += extract_maintainers(GetField('Maintainer', default=''))
-                    pkg.maintainers += extract_maintainers(GetField('Uploaders', default=''))
-                    pkg.category = GetField('Section')
-                    pkg.homepage = GetField('Homepage')
+                    pkg.set_name(get_field('Package'))
+                    pkg.set_version(get_field('Version'), normalize_version)
+                    pkg.add_maintainers(extract_maintainers(get_field('Maintainer', default='')))
+                    pkg.add_maintainers(extract_maintainers(get_field('Uploaders', default='')))
+                    pkg.add_categories(get_field('Section'))
+                    pkg.add_homepages(get_field('Homepage'))
 
                     # This is long description
-                    #pkg.comment = GetField('Description', type_=None)
+                    #pkg.comment = get_field('Description', type_=None)
                     #if isinstance(pkg.comment, list):
-                    #    pkg.comment = ' '.join(pkg.comment)
+                    #    pkg.set_summary(' '.join(pkg.comment))
 
-                    if pkg.name and pkg.version:
-                        yield pkg
-                    else:
-                        factory.log('unable to parse package {}'.format(str(current_data)), severity=Logger.ERROR)
+                    yield pkg
 
                     current_data = {}
                     last_key = None
