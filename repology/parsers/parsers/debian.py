@@ -89,6 +89,10 @@ class DebianSourcesParser(Parser):
                     #if isinstance(pkg.comment, list):
                     #    pkg.set_summary(' '.join(pkg.comment))
 
+                    source = get_field('Source')
+                    if source:
+                        pkg.set_extra_field('source', source)
+
                     yield pkg
 
                     current_data = {}
