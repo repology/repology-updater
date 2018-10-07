@@ -18,44 +18,34 @@
 import re
 import xml.etree.ElementTree
 
-from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.versions import VersionStripper
 
 
-def SanitizeVersion(version):
-    origversion = version
+def _iter_package_entries(path):
+    """Return all <package> elements from XML.
 
-    pos = version.find('+')
-    if pos != -1:
-        version = version[:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+    The purpose is to clear the element after processing, so
+    processed elements don't fill up the memory
+    """
+    for _, elem in xml.etree.ElementTree.iterparse(path):
+        if elem.tag == '{http://linux.duke.edu/metadata/common}package':
+            yield elem
+            elem.clear()
 
 
 class RepodataParser(Parser):
     def __init__(self, allowed_archs=None):
         self.allowed_archs = allowed_archs
 
-    def ParsePackagesEntriesFromXml(self, path):
-        """Return all <package> elements from XML.
-
-        The purpose is to clear the element after processing, so
-        processed elements don't fill up the memory
-        """
-        for _, elem in xml.etree.ElementTree.iterparse(path):
-            if elem.tag == '{http://linux.duke.edu/metadata/common}package':
-                yield elem
-                elem.clear()
-
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right_greedy('+')
+
         skipped_archs = {}
 
-        for entry in self.ParsePackagesEntriesFromXml(path):
+        for entry in _iter_package_entries(path):
             pkg = factory.begin()
 
             arch = entry.find('{http://linux.duke.edu/metadata/common}arch').text
@@ -63,7 +53,7 @@ class RepodataParser(Parser):
                 skipped_archs[arch] = skipped_archs.get(arch, 0) + 1
                 continue
 
-            pkg.name = entry.find('{http://linux.duke.edu/metadata/common}name').text
+            pkg.set_name(entry.find('{http://linux.duke.edu/metadata/common}name').text)
             version = entry.find('{http://linux.duke.edu/metadata/common}version').attrib['ver']
             release = entry.find('{http://linux.duke.edu/metadata/common}version').attrib['rel']
 
@@ -74,23 +64,23 @@ class RepodataParser(Parser):
             elif release < '1':
                 # unknown pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Some_definitions
                 # most likely a snapshot
-                pkg.SetFlag(PackageFlags.ignore)
+                pkg.set_flags(PackageFlags.ignore)
 
-            pkg.version, pkg.origversion = SanitizeVersion(version)
+            pkg.set_version(version, normalize_version)
             # XXX: append origversion with release
 
-            pkg.comment = entry.find('{http://linux.duke.edu/metadata/common}summary').text
-            pkg.homepage = entry.find('{http://linux.duke.edu/metadata/common}url').text
-            pkg.category = entry.find('{http://linux.duke.edu/metadata/common}format/'
-                                      '{http://linux.duke.edu/metadata/rpm}group').text
-            pkg.licenses.append(entry.find('{http://linux.duke.edu/metadata/common}format/'
-                                           '{http://linux.duke.edu/metadata/rpm}license').text)
+            pkg.set_summary(entry.find('{http://linux.duke.edu/metadata/common}summary').text)
+            pkg.add_homepages(entry.find('{http://linux.duke.edu/metadata/common}url').text)
+            pkg.add_categories(entry.find('{http://linux.duke.edu/metadata/common}format/'
+                                          '{http://linux.duke.edu/metadata/rpm}group').text)
+            pkg.add_licenses(entry.find('{http://linux.duke.edu/metadata/common}format/'
+                                        '{http://linux.duke.edu/metadata/rpm}license').text)
 
             packager = entry.find('{http://linux.duke.edu/metadata/common}packager').text
             if packager:
-                pkg.maintainers = extract_maintainers(packager)
+                pkg.add_maintainers(extract_maintainers(packager))
 
             yield pkg
 
         for arch, numpackages in sorted(skipped_archs.items()):
-            factory.log('skipping {} packages(s) with disallowed architecture {}'.format(numpackages, arch), severity=Logger.ERROR)
+            factory.log('skipped {} packages(s) with disallowed architecture {}'.format(numpackages, arch))

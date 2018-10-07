@@ -33,12 +33,12 @@ class RosaInfoXmlParser(Parser):
             # derive names and versions from fn field
             fn = info.attrib['fn'].rsplit('-', 2)
             if len(fn) < 3:
-                factory.log('unable to parse fn: {}'.format(fn), severity=Logger.ERROR)
+                pkg.log('unable to parse fn: {}'.format(fn), severity=Logger.ERROR)
                 continue
 
-            pkg.name = fn[0]
-            pkg.origversion = '-'.join(fn[1:])
-            pkg.version = fn[1]
+            pkg.set_name(fn[0])
+            pkg.set_version(fn[1])
+            pkg.set_origversion('-'.join(fn[1:]))
 
             # Rosa packages are named like PKGNAME-PKGVER-ROSAREV
             # where ROSAREV is most commonly in the form of N.src, but
@@ -49,17 +49,12 @@ class RosaInfoXmlParser(Parser):
             # and mark version as ignored with non-trivial ROSAREV,
             # as it it likely a snapshot and trus cannot be trusted
             if not re.fullmatch('[0-9]+\\.src', fn[2]):
-                pkg.SetFlag(PackageFlags.ignore)
+                pkg.set_flags(PackageFlags.ignore)
                 match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', fn[2].lower())
                 if match:
-                    pkg.version += match.group(0)
+                    pkg.package.version += match.group(0)  # XXX: encapsulation violation
 
-            # process url and license
-            url = info.attrib['url']
-            if url:
-                pkg.homepage = url
-
-            license_ = info.attrib['license']
-            pkg.licenses = [license_]
+            pkg.add_homepages(info.attrib['url'])
+            pkg.add_licenses(info.attrib['license'])
 
             yield pkg
