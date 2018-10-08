@@ -112,7 +112,7 @@
   sortname: packman_opensuse_leap_14_0
   type: repository
   desc: PackMan openSUSE Leap 42.3
-  family: opensuse
+  family: opensuse  # XXX: own family?
   ruleset: [opensuse, packman]
   color: 'dbda04'
   minpackages: 900
@@ -133,7 +133,7 @@
 - name: packman_opensuse_leap_15_0
   type: repository
   desc: PackMan openSUSE Leap 15.0
-  family: opensuse
+  family: opensuse  # XXX: own family?
   ruleset: [opensuse, packman]
   color: 'dbda04'
   minpackages: 600
@@ -154,7 +154,7 @@
 - name: packman_opensuse_tumbleweed
   type: repository
   desc: PackMan openSUSE Tumbleweed
-  family: opensuse
+  family: opensuse  # XXX: own family?
   ruleset: [opensuse, packman]
   color: 'dbda04'
   minpackages: 450
@@ -175,7 +175,7 @@
 - name: packman_sle_12
   type: repository
   desc: PackMan SLE 12
-  family: opensuse
+  family: opensuse  # XXX: own family?
   ruleset: [opensuse, packman]
   color: 'dbda04'
   minpackages: 600
@@ -196,7 +196,7 @@
 - name: packman_sle_15
   type: repository
   desc: PackMan SLE 15
-  family: opensuse
+  family: opensuse  # XXX: own family?
   ruleset: [opensuse, packman]
   color: 'dbda04'
   minpackages: 300
