@@ -2,6 +2,8 @@
 
 ## Dependencies
 
+### For running
+
 Needed for the core:
 
 - [Python](https://www.python.org/) 3.6+
@@ -28,6 +30,8 @@ Needed for web-application:
 - Python module [psycopg](http://initd.org/psycopg/)
 - Python module [pytz](https://pypi.python.org/pypi/pytz)
 - [PostgreSQL database](https://www.postgresql.org/) 10.0+
+
+### For development
 
 Optional, for doing HTML validation when running tests:
 - Python module [pytidylib](https://pypi.python.org/pypi/pytidylib) and [tidy-html5](http://www.html-tidy.org/) library
