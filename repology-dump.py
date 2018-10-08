@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -21,10 +21,9 @@ import argparse
 import os
 
 from repology.config import config
-from repology.filters import CategoryFilter, FamilyCountFilter, InRepoFilter, MaintainerFilter, NotInRepoFilter, OutdatedInRepoFilter, ShadowFilter
 from repology.logger import FileLogger, StderrLogger
 from repology.package import Package, VersionClass
-from repology.packageproc import FillPackagesetVersions, PackagesetCheckFilters, PackagesetToBestByRepo
+from repology.packageproc import FillPackagesetVersions, PackagesetToBestByRepo
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
@@ -42,16 +41,6 @@ def parse_arguments():
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-E', '--repos-dir', default=config['REPOS_DIR'], help='path directory with reposotory configs')
-
-    filters_grp = parser.add_argument_group('Filters')
-    filters_grp.add_argument('--no-shadow', action='store_true', help='treat shadow repositories as normal')
-    filters_grp.add_argument('--maintainer', help='filter by maintainer')
-    filters_grp.add_argument('--category', help='filter by category')
-    filters_grp.add_argument('--less-repos', help='filter by number of repos')
-    filters_grp.add_argument('--more-repos', help='filter by number of repos')
-    filters_grp.add_argument('--in-repository', help='filter by presence in repository')
-    filters_grp.add_argument('--not-in-repository', help='filter by absence in repository')
-    filters_grp.add_argument('--outdated-in-repository', help='filter by outdatedness in repository')
 
     parser.add_argument('-D', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
     parser.add_argument('-f', '--fields', default='repo,effname,version', help='fields to list for the package')
@@ -74,32 +63,12 @@ def main():
     else:
         options.fields = options.fields.split(',')
 
-    # Set up filters
-    filters = []
-    if options.maintainer:
-        filters.append(MaintainerFilter(options.maintainer))
-    if options.category:
-        filters.append(CategoryFilter(options.maintainer))
-    if options.more_repos is not None or options.less_repos is not None:
-        filters.append(FamilyCountFilter(more=options.more_repos, less=options.less_repos))
-    if options.in_repository:
-        filters.append(InRepoFilter(options.in_repository))
-    if options.not_in_repository:
-        filters.append(NotInRepoFilter(options.not_in_repository))
-    if options.outdated_in_repository:
-        filters.append(OutdatedInRepoFilter(options.not_in_repository))
-    if not options.no_shadow:
-        filters.append(ShadowFilter())
-
     repomgr = RepositoryManager(options.repos_dir)
     repoproc = RepositoryProcessor(repomgr, options.statedir)
 
     logger.Log('dumping...')
     for packageset in repoproc.iter_parsed(reponames=options.reponames):
         FillPackagesetVersions(packageset)
-
-        if not PackagesetCheckFilters(packageset, *filters):
-            continue
 
         if options.dump == 'packages':
             for package in packageset:

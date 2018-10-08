@@ -43,14 +43,6 @@ def PackagesetDeduplicate(packages):
     return outpkgs
 
 
-def PackagesetCheckFilters(packages, *filters):
-    for filt in filters:
-        if not filt.Check(packages):
-            return False
-
-    return True
-
-
 def packageset_is_unique(packages):
     if len(packages) <= 1:
         return True
