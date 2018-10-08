@@ -46,9 +46,19 @@ def parse_arguments():
     parser.add_argument('-f', '--fields', default='repo,effname,version', help='fields to list for the package')
     parser.add_argument('-s', '--field-separator', default=' ', help='field separator')
 
+    parser.add_argument('-a', '--all', action='store_true', help='dump all projects including shadow-only')
+
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
 
     return parser.parse_args()
+
+
+def packageset_is_shadow_only(packages):
+    for package in packages:
+        if not package.shadow:
+            return False
+
+    return True
 
 
 def main():
@@ -69,6 +79,9 @@ def main():
     logger.Log('dumping...')
     for packageset in repoproc.iter_parsed(reponames=options.reponames):
         FillPackagesetVersions(packageset)
+
+        if not options.all and packageset_is_shadow_only(packageset):
+            continue
 
         if options.dump == 'packages':
             for package in packageset:
