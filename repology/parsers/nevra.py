@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 
-__all__ = ['filename2nevra']
+__all__ = ['filename2nevra', 'construct_evr']
 
 
 def filename2nevra(filename):
@@ -30,3 +30,18 @@ def filename2nevra(filename):
         epoch, version = version.rsplit(':', 1)
 
     return (name, epoch, version, revision, architecture)
+
+
+def construct_evr(epoch, version, release):
+    if not version:
+        raise RuntimeError('no version provided`')
+
+    evr = version
+
+    if epoch and str(epoch) != '0':
+        evr = str(epoch) + ':' + evr
+
+    if release:
+        evr = evr + '-' + release
+
+    return evr

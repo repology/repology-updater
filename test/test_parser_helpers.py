@@ -20,13 +20,30 @@
 import unittest
 
 from repology.parsers.maintainers import extract_maintainers
-from repology.parsers.nevra import filename2nevra
+from repology.parsers.nevra import construct_evr, filename2nevra
 
 
 class TestNevra(unittest.TestCase):
     def test_filename2nevra(self):
         self.assertEqual(filename2nevra('foo-1.2.3-1.i386.rpm'), ('foo', '', '1.2.3', '1', 'i386'))
         self.assertEqual(filename2nevra('foo-bar-baz-999:1.2.3-1.src.rpm'), ('foo-bar-baz', '999', '1.2.3', '1', 'src'))
+
+
+class TestConstructEvr(unittest.TestCase):
+    def test_filename2nevra(self):
+        self.assertEqual(construct_evr('1', '1.2.3', 'fc.14'), '1:1.2.3-fc.14')
+        self.assertEqual(construct_evr(1, '1.2.3', 'fc.14'), '1:1.2.3-fc.14')
+
+        self.assertEqual(construct_evr(None, '1.2.3', 'fc.14'), '1.2.3-fc.14')
+        self.assertEqual(construct_evr('', '1.2.3', 'fc.14'), '1.2.3-fc.14')
+        self.assertEqual(construct_evr('0', '1.2.3', 'fc.14'), '1.2.3-fc.14')
+        self.assertEqual(construct_evr(0, '1.2.3', 'fc.14'), '1.2.3-fc.14')
+
+        self.assertEqual(construct_evr('1', '1.2.3', None), '1:1.2.3')
+        self.assertEqual(construct_evr('1', '1.2.3', ''), '1:1.2.3')
+
+        self.assertEqual(construct_evr(None, '1.2.3', None), '1.2.3')
+        self.assertEqual(construct_evr(0, '1.2.3', ''), '1.2.3')
 
 
 class TestSplitMaintainers(unittest.TestCase):
