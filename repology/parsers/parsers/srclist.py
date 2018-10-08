@@ -19,6 +19,7 @@ import rpm
 
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.nevra import construct_evr
 
 
 class SrcListParser(Parser):
@@ -36,6 +37,7 @@ class SrcListParser(Parser):
 
             pkg.set_name(fields['name'])
             pkg.set_version(fields['version'])  # XXX: handle release
+            pkg.set_origversion(construct_evr(header['epoch'], fields['version'], fields['release']))
 
             if fields['packager']:
                 pkg.add_maintainers(extract_maintainers(fields['packager']))  # XXX: may have multiple maintainers
