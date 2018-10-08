@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -32,38 +32,21 @@ class FreshcodeParser(Parser):
             for entry in json.load(jsonfile)['releases']:
                 pkg = factory.begin()
 
-                pkg.name = entry['name']
-                pkg.version = entry['version']
+                pkg.set_name(entry['name'])
+                pkg.set_version(entry['version'])
 
-                if not pkg.name or not pkg.version:
+                if not pkg.check_sanity(verbose=False):
                     continue
 
-                homepage = entry.get('homepage')
-                summary = entry.get('summary')
-                description = entry.get('description')
-                #submitter = entry.get('submitter')
-                #download = entry.get('download')
-                license_ = entry.get('license')
+                pkg.add_homepages(entry.get('homepage'))
+                pkg.set_summary(entry.get('summary'))
+                if not pkg.comment:
+                    pkg.set_summary(entry.get('description'))  # multiline
+                #pkg.add_maintainers(entry.get('submitter') + '@freshcode')  # unfiltered garbage
+                #pkg.add_downloads(entry.get('download'))  # ignore for now, may contain download page urls instead of file urls
+                pkg.add_licenses(entry.get('license'))
 
-                if homepage:
-                    pkg.homepage = homepage
-
-                if summary:
-                    pkg.comment = summary
-                elif description:
-                    pkg.comment = description  # multiline
-
-                if license_:
-                    pkg.licenses = [license_]
-
-                # unfiltered garbage
-                #if submitter:
-                #    pkg.maintainers = [submitter + '@freshcode']
-
-                # ignore for now, may contain download page urls instead of file urls
-                #if download
-                #    pkg.downloads = [download]
-
+                # take latest known versions
                 if pkg.name not in result or version_compare(pkg.version, result[pkg.name].version) > 0:
                     result[pkg.name] = pkg
 
