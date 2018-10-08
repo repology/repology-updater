@@ -1,0 +1,215 @@
+###########################################################################
+# PackMan
+#
+# Some repositories are disabled due to ridiculously small number of packages
+###########################################################################
+- name: packman_fedora_26
+  type: repository
+  desc: PackMan Fedora 26
+  family: fedora
+  ruleset: [fedora, packman]
+  color: 'dbda04'
+  minpackages: 0
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/fedora/26/SRPMS/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, packman]  # 7 packages
+
+- name: packman_fedora_27
+  type: repository
+  desc: PackMan Fedora 27
+  family: fedora
+  ruleset: [fedora, packman]
+  color: 'dbda04'
+  minpackages: 0
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/fedora/27/SRPMS/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, packman]  # 7 packages
+
+- name: packman_fedora_28
+  type: repository
+  desc: PackMan Fedora 28
+  family: fedora
+  ruleset: [fedora, packman]
+  color: 'dbda04'
+  minpackages: 0
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/fedora/28/SRPMS/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, packman]  # 6 packages
+
+- name: packman_fedora_29
+  type: repository
+  desc: PackMan Fedora 29
+  family: fedora
+  ruleset: [fedora, packman]
+  color: 'dbda04'
+  minpackages: 0
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/fedora/29/SRPMS/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, packman]  # 6 packages
+
+- name: packman_factory
+  type: repository
+  desc: PackMan Factory
+  family: opensuse
+  ruleset: [opensuse, packman]
+  color: 'dbda04'
+  minpackages: 0
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/suse/factory/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, packman]  # 3 packages
+
+- name: packman_opensuse_leap_42_3
+  sortname: packman_opensuse_leap_14_0
+  type: repository
+  desc: PackMan openSUSE Leap 42.3
+  family: opensuse
+  ruleset: [opensuse, packman]
+  color: 'dbda04'
+  minpackages: 900
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_42.3/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, experimental, packman]
+
+- name: packman_opensuse_leap_15_0
+  type: repository
+  desc: PackMan openSUSE Leap 15.0
+  family: opensuse
+  ruleset: [opensuse, packman]
+  color: 'dbda04'
+  minpackages: 600
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.0/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, experimental, packman]
+
+- name: packman_opensuse_tumbleweed
+  type: repository
+  desc: PackMan openSUSE Tumbleweed
+  family: opensuse
+  ruleset: [opensuse, packman]
+  color: 'dbda04'
+  minpackages: 450
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Tumbleweed/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, experimental, packman]
+
+- name: packman_sle_12
+  type: repository
+  desc: PackMan SLE 12
+  family: opensuse
+  ruleset: [opensuse, packman]
+  color: 'dbda04'
+  minpackages: 600
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_12/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, experimental, packman]
+
+- name: packman_sle_15
+  type: repository
+  desc: PackMan SLE 15
+  family: opensuse
+  ruleset: [opensuse, packman]
+  color: 'dbda04'
+  minpackages: 300
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_15/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, experimental, packman]
