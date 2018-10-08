@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from repology.parsers import Parser
-from repology.parsers.nevra import filename2nevra
+from repology.parsers.nevra import nevra_parse
 
 
 class RPMFTPListParser(Parser):
@@ -25,7 +25,7 @@ class RPMFTPListParser(Parser):
             for line in listfile:
                 filename = line.strip().split()[-1]
 
-                nevra = filename2nevra(filename)
+                nevra = nevra_parse(filename)
 
                 pkg = factory.begin()
 

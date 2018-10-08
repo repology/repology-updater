@@ -21,7 +21,7 @@ import xml.etree.ElementTree
 from repology.package import PackageFlags
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.parsers.nevra import construct_evr
+from repology.parsers.nevra import nevra_construct
 from repology.parsers.versions import VersionStripper
 
 
@@ -69,7 +69,7 @@ class RepodataParser(Parser):
                 pkg.set_flags(PackageFlags.ignore)
 
             pkg.set_version(version, normalize_version)
-            pkg.set_origversion(construct_evr(epoch, version, release))
+            pkg.set_origversion(nevra_construct(None, epoch, version, release))
 
             pkg.set_summary(entry.find('{http://linux.duke.edu/metadata/common}summary').text)
             pkg.add_homepages(entry.find('{http://linux.duke.edu/metadata/common}url').text)

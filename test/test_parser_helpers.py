@@ -20,30 +20,97 @@
 import unittest
 
 from repology.parsers.maintainers import extract_maintainers
-from repology.parsers.nevra import construct_evr, filename2nevra
+from repology.parsers.nevra import EpochMode, nevra_construct, nevra_parse
 
 
-class TestNevra(unittest.TestCase):
-    def test_filename2nevra(self):
-        self.assertEqual(filename2nevra('foo-1.2.3-1.i386.rpm'), ('foo', '', '1.2.3', '1', 'i386'))
-        self.assertEqual(filename2nevra('foo-bar-baz-999:1.2.3-1.src.rpm'), ('foo-bar-baz', '999', '1.2.3', '1', 'src'))
+class TestNevraConstruct(unittest.TestCase):
+    def test_basic(self):
+        self.assertEqual(nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', 'src'), 'foo-1:1.2.3-fc34.git20181111.src')
+
+    def test_epoch_mode_preserve(self):
+        self.assertEqual(nevra_construct('foo', None, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE), 'foo-1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', 0, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE), 'foo-0:1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE), 'foo-1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '0', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE), 'foo-0:1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PRESERVE), 'foo-1:1.2.3-fc34.git20181111.src')
+
+    def test_epoch_mode_provide(self):
+        self.assertEqual(nevra_construct('foo', None, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE), 'foo-0:1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', 0, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE), 'foo-0:1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE), 'foo-0:1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '0', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE), 'foo-0:1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.PROVIDE), 'foo-1:1.2.3-fc34.git20181111.src')
+
+    def test_epoch_mode_trim(self):
+        self.assertEqual(nevra_construct('foo', None, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM), 'foo-1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', 0, '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM), 'foo-1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM), 'foo-1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '0', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM), 'foo-1.2.3-fc34.git20181111.src')
+        self.assertEqual(nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', 'src', epoch_mode=EpochMode.TRIM), 'foo-1:1.2.3-fc34.git20181111.src')
+
+    def test_partial(self):
+        self.assertEqual(nevra_construct(None, '1', '1.2.3', 'fc34.git20181111', 'src'), '1:1.2.3-fc34.git20181111.src')
+
+        self.assertEqual(nevra_construct('foo', None, '1.2.3', 'fc34.git20181111', 'src'), 'foo-1.2.3-fc34.git20181111.src')
+
+        with self.assertRaises(RuntimeError):
+            nevra_construct('foo', '1', None, 'fc34.git20181111', 'src')
+
+        self.assertEqual(nevra_construct('foo', '1', '1.2.3', None, 'src'), 'foo-1:1.2.3.src')
+
+        self.assertEqual(nevra_construct('foo', '1', '1.2.3', 'fc34.git20181111', None), 'foo-1:1.2.3-fc34.git20181111')
 
 
-class TestConstructEvr(unittest.TestCase):
-    def test_filename2nevra(self):
-        self.assertEqual(construct_evr('1', '1.2.3', 'fc.14'), '1:1.2.3-fc.14')
-        self.assertEqual(construct_evr(1, '1.2.3', 'fc.14'), '1:1.2.3-fc.14')
+class TestNevraParse(unittest.TestCase):
+    def test_basic(self):
+        self.assertEqual(nevra_parse('foo-1.2.3-1.i386'), ('foo', None, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-bar-baz-999:1.2.3-1.src'), ('foo-bar-baz', '999', '1.2.3', '1', 'src'))
 
-        self.assertEqual(construct_evr(None, '1.2.3', 'fc.14'), '1.2.3-fc.14')
-        self.assertEqual(construct_evr('', '1.2.3', 'fc.14'), '1.2.3-fc.14')
-        self.assertEqual(construct_evr('0', '1.2.3', 'fc.14'), '1.2.3-fc.14')
-        self.assertEqual(construct_evr(0, '1.2.3', 'fc.14'), '1.2.3-fc.14')
+    def test_filename(self):
+        self.assertEqual(nevra_parse('foo-1.2.3-1.i386.rpm'), ('foo', None, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-bar-baz-999:1.2.3-1.src.rpm'), ('foo-bar-baz', '999', '1.2.3', '1', 'src'))
 
-        self.assertEqual(construct_evr('1', '1.2.3', None), '1:1.2.3')
-        self.assertEqual(construct_evr('1', '1.2.3', ''), '1:1.2.3')
+    def test_epoch_mode_str_preserve(self):
+        self.assertEqual(nevra_parse('foo-1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PRESERVE), ('foo', None, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-0:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PRESERVE), ('foo', '0', '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-1:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PRESERVE), ('foo', '1', '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-x:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PRESERVE), ('foo', 'x', '1.2.3', '1', 'i386'))
 
-        self.assertEqual(construct_evr(None, '1.2.3', None), '1.2.3')
-        self.assertEqual(construct_evr(0, '1.2.3', ''), '1.2.3')
+    def test_epoch_mode_str_provide(self):
+        self.assertEqual(nevra_parse('foo-1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PROVIDE), ('foo', '0', '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-0:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PROVIDE), ('foo', '0', '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-1:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PROVIDE), ('foo', '1', '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-x:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.PROVIDE), ('foo', 'x', '1.2.3', '1', 'i386'))
+
+    def test_epoch_type_str_trim(self):
+        self.assertEqual(nevra_parse('foo-1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.TRIM), ('foo', None, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-0:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.TRIM), ('foo', None, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-1:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.TRIM), ('foo', '1', '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-x:1.2.3-1.i386', epoch_type=str, epoch_mode=EpochMode.TRIM), ('foo', 'x', '1.2.3', '1', 'i386'))
+
+    def test_epoch_mode_int_preserve(self):
+        self.assertEqual(nevra_parse('foo-1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PRESERVE), ('foo', None, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-0:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PRESERVE), ('foo', 0, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-1:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PRESERVE), ('foo', 1, '1.2.3', '1', 'i386'))
+
+        with self.assertRaises(ValueError):
+            nevra_parse('foo-x:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PRESERVE)
+
+    def test_epoch_type_int_provide(self):
+        self.assertEqual(nevra_parse('foo-1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PROVIDE), ('foo', 0, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-0:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PROVIDE), ('foo', 0, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-1:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PROVIDE), ('foo', 1, '1.2.3', '1', 'i386'))
+
+        with self.assertRaises(ValueError):
+            nevra_parse('foo-x:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.PROVIDE)
+
+    def test_epoch_type_int_trim(self):
+        self.assertEqual(nevra_parse('foo-1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.TRIM), ('foo', None, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-0:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.TRIM), ('foo', None, '1.2.3', '1', 'i386'))
+        self.assertEqual(nevra_parse('foo-1:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.TRIM), ('foo', 1, '1.2.3', '1', 'i386'))
+
+        with self.assertRaises(ValueError):
+            nevra_parse('foo-x:1.2.3-1.i386', epoch_type=int, epoch_mode=EpochMode.TRIM)
 
 
 class TestSplitMaintainers(unittest.TestCase):

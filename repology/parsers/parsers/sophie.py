@@ -18,13 +18,13 @@
 import lxml.html
 
 from repology.parsers import Parser
-from repology.parsers.nevra import filename2nevra
+from repology.parsers.nevra import nevra_parse
 
 
 class SophieHTMLParser(Parser):
     def iter_parse(self, path, factory):
         for item in lxml.html.parse(path).getroot().xpath('.//div[@id="rpms_list"]/ul/li/a'):
-            nevra = filename2nevra(item.text)
+            nevra = nevra_parse(item.text)
 
             pkg = factory.begin()
 
