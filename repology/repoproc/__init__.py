@@ -213,7 +213,7 @@ class RepositoryProcessor:
         if self.safety_checks and num_packages < repository['minpackages']:
             raise TooLittlePackages(num_packages, repository['minpackages'])
 
-        logger.log('parsing complete')
+        logger.log('parsing complete, {} packages'.format(num_packages))
 
     # public methods
     def fetch(self, reponames, update=True, logger=NoopLogger()):
