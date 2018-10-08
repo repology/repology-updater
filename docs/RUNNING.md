@@ -8,13 +8,16 @@ Needed for the core:
 
 - [Python](https://www.python.org/) 3.6+
 - Python module [pyyaml](http://pyyaml.org/)
-- Python module [requests](http://python-requests.org/)
 - Python module [Jinja2](http://jinja.pocoo.org/)
 - Python module [libversion](https://pypi.python.org/pypi/libversion) (also requires [libversion](https://github.com/repology/libversion) C library)
+- Python module [psycopg](http://initd.org/psycopg/)
+
+- [PostgreSQL](https://www.postgresql.org/) 10.0+
 - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
-Needed for fetching/parsing specific repository data:
+Needed for fetching/parsing repository data:
 
+- Python module [requests](http://python-requests.org/)
 - Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
 - Python module [lxml](http://lxml.de/)
 - Python module [rpm](http://rpm.org/) (comes with RPM package manager)
@@ -27,9 +30,7 @@ Needed for web-application:
 
 - Python module [flask](http://flask.pocoo.org/)
 - Python module [pillow](https://pypi.python.org/pypi/Pillow)
-- Python module [psycopg](http://initd.org/psycopg/)
 - Python module [pytz](https://pypi.python.org/pypi/pytz)
-- [PostgreSQL database](https://www.postgresql.org/) 10.0+
 
 ### For development
 
