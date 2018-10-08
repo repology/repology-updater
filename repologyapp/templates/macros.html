@@ -54,7 +54,7 @@
 		{{ seconds // 60 }}m
 	{%- elif seconds < 60 * 60 * 24 -%}
 		{{ seconds // (60 * 60) }}h
-	{%- elif seconds // (60 * 60 * 24) < 60 -%}
+	{%- elif seconds // (60 * 60 * 24) < 365 -%}
 		{{ seconds // (60 * 60 * 24) }}d
 	{%- else -%}
 		{{ seconds // (60 * 60 * 24 * 365) }}y
