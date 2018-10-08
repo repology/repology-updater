@@ -20,7 +20,7 @@
 <div class="container">
 
 {% if session.admin %}
-<p>Logged in successfully</p>
+<p>Administrative access granted</p>
 {% else %}
 <form class="form-inline" action="{{ url_for_self() }}" method="POST">
     <div class="form-group">
