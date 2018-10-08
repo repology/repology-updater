@@ -25,7 +25,7 @@ from repology.package import PackageFlags
 
 
 DOLLAR0 = re.compile('\$0', re.ASCII)
-DOLLARN = re.compile('\$([0-9]+)', re.ASCII)
+DOLLARN = re.compile('\$([0-9])', re.ASCII)
 
 
 class PackageContext:
