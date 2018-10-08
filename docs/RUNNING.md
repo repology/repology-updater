@@ -39,7 +39,7 @@ Optional, for doing HTML validation when running tests:
 Optional, for checking schemas of configuration files:
 - Python module [voluptuous](https://pypi.python.org/pypi/voluptuous)
 
-Optional, for python code linding:
+Optional, for python code linting:
 - Python module [flake8](https://pypi.python.org/pypi/flake8)
 - Python module [flake8-builtins](https://pypi.python.org/pypi/flake8-builtins)
 - Python module [flake8-import-order](https://pypi.python.org/pypi/flake8-import-order)
