@@ -122,6 +122,42 @@ class TestPackageMaker(unittest.TestCase):
 
         self.assertEqual(pkg.maintainers, ['a@com', 'b@com', 'c@com', 'd@com'])
 
+    def test_clone(self):
+        factory = PackageFactory(NoopLogger())
+
+        pkg1 = factory.begin('pkg1')
+        pkg1.add_maintainers('foo')
+
+        pkg2 = pkg1.clone('pkg2')
+        pkg2.add_maintainers('bar')
+
+        pkg3 = pkg1.clone(append_ident='pkg3')
+        pkg3.add_maintainers('baz')
+
+        self.assertEqual(pkg1.maintainers, ['foo'])
+        self.assertEqual(pkg2.maintainers, ['foo', 'bar'])
+        self.assertEqual(pkg3.maintainers, ['foo', 'baz'])
+
+    def test_ident(self):
+        logger = AccumulatingLogger()
+
+        factory = PackageFactory(logger)
+
+        pkg1 = factory.begin('pkg1')
+        pkg1.log('')
+        pkg2 = pkg1.clone('pkg2')
+        pkg2.log('')
+        pkg3 = pkg1.clone(append_ident='pkg3')
+        pkg3.log('')
+
+        self.assertTrue('pkg1' in logger.get()[0][0])
+
+        self.assertTrue('pkg2' in logger.get()[1][0])
+        self.assertTrue('pkg1' not in logger.get()[1][0])
+
+        self.assertTrue('pkg1pkg3' in logger.get()[2][0])
+        self.assertTrue('pkg2' not in logger.get()[2][0])
+
 
 if __name__ == '__main__':
     unittest.main()
