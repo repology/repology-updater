@@ -95,13 +95,14 @@ class PackageMakerBase:
 
 
 class PackageMaker(PackageMakerBase):
-    def __init__(self, logger, ident):
+    def __init__(self, logger, ident, itemno):
         super(PackageMaker, self).__init__(logger)
         self.package = Package()
         self.ident = ident
+        self.itemno = itemno
 
     def _get_ident(self):
-        return self.package.extrafields.get('origin', None) or self.package.name or self.ident or self.package.effname
+        return self.ident or self.package.extrafields.get('origin', None) or self.package.name or self.package.effname or 'item #{}'.format(self.itemno)
 
     @PackageMakerBase._simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
     def set_origin(self, origin):
@@ -199,7 +200,7 @@ class PackageMaker(PackageMakerBase):
         elif append_ident is not None:
             offspring_ident += append_ident
 
-        offspring = PackageMaker(self.logger, offspring_ident)
+        offspring = PackageMaker(self.logger, offspring_ident, self.itemno)
         offspring.package = deepcopy(self.package)
 
         return offspring
@@ -222,7 +223,7 @@ class PackageMaker(PackageMakerBase):
 
     # XXX: compatibility shim
     def __setattr__(self, key, value):
-        if key in ['package', 'logger', 'ident']:
+        if key in ['package', 'logger', 'ident', 'itemno']:
             return super(PackageMaker, self).__setattr__(key, value)
         return setattr(self.package, key, value)
 
@@ -234,7 +235,7 @@ class PackageFactory:
 
     def begin(self, ident=None):
         self.itemno += 1
-        return PackageMaker(self.logger, ident or 'item #{}'.format(self.itemno))
+        return PackageMaker(self.logger, ident, self.itemno)
 
     def log(self, message, severity=Logger.NOTICE):
         self.logger.log(message, severity)
