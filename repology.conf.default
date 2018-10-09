@@ -28,6 +28,14 @@ DSN = "dbname=repology user=repology password=repology"
 STATE_DIR = "_state"
 
 #
+# Directory to store parsed repository data in
+#
+# Used in repology-update and repology-dump
+# Overridable via --parseddir command line arg
+#
+PARSED_DIR = "_parsed"
+
+#
 # Path to directory containing repository configuration YAML files
 #
 # Used by repology-update, repology-app, repology-dump

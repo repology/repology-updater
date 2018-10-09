@@ -68,7 +68,7 @@ class Environment:
 
     @cached_method
     def get_repo_processor(self):
-        return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, safety_checks=self.options.enable_safety_checks)
+        return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, self.options.parseddir, safety_checks=self.options.enable_safety_checks)
 
     @cached_method
     def get_package_transformer(self):
@@ -201,6 +201,7 @@ def show_unmatched_rules(env):
 def parse_arguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
+    parser.add_argument('-P', '--parseddir', default=config['PARSED_DIR'], help='path to directory with parsed repository data')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-E', '--repos-dir', default=config['REPOS_DIR'], help='path to directory with repository configs')
     parser.add_argument('-U', '--rules-dir', default=config['RULES_DIR'], help='path to directory with rules')

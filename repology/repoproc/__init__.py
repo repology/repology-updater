@@ -46,9 +46,10 @@ class InconsistentPackage(Exception):
 
 
 class RepositoryProcessor:
-    def __init__(self, repomgr, statedir, safety_checks=True):
+    def __init__(self, repomgr, statedir, parseddir, safety_checks=True):
         self.repomgr = repomgr
         self.statedir = statedir
+        self.parseddir = parseddir
         self.safety_checks = safety_checks
 
         self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', superclass=Fetcher)
@@ -61,7 +62,7 @@ class RepositoryProcessor:
         return os.path.join(self._get_state_path(repository), source['name'].replace('/', '_'))
 
     def _get_parsed_path(self, repository):
-        return os.path.join(self.statedir, repository['name'] + '.packages')
+        return os.path.join(self.parseddir, repository['name'] + '.parsed')
 
     def _get_parsed_chunk_paths(self, repository):
         dirpath = self._get_parsed_path(repository)
@@ -186,6 +187,9 @@ class RepositoryProcessor:
 
     def _parse(self, repository, transformer, logger):
         logger.log('parsing started')
+
+        if not os.path.isdir(self.parseddir):
+            os.mkdir(self.parseddir)
 
         packages = []
         chunknum = 0

@@ -39,6 +39,7 @@ def format_package_field(key, value):
 def parse_arguments():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
+    parser.add_argument('-P', '--parseddir', default=config['PARSED_DIR'], help='path to directory with parsed repository data')
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-E', '--repos-dir', default=config['REPOS_DIR'], help='path directory with reposotory configs')
 
@@ -74,7 +75,7 @@ def main():
         options.fields = options.fields.split(',')
 
     repomgr = RepositoryManager(options.repos_dir)
-    repoproc = RepositoryProcessor(repomgr, options.statedir)
+    repoproc = RepositoryProcessor(repomgr, options.statedir, options.parseddir)
 
     logger.Log('dumping...')
     for packageset in repoproc.iter_parsed(reponames=options.reponames):
