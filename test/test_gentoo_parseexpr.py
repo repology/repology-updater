@@ -19,7 +19,11 @@
 
 import unittest
 
-from repology.parsers.parsers.gentoo import parse_conditional_expr
+from repology.parsers.parsers.gentoo import _parse_conditional_expr
+
+
+def parse_conditional_expr(*args, **kwargs):
+    return list(_parse_conditional_expr(*args, **kwargs))
 
 
 class TestGentooParseExpr(unittest.TestCase):
