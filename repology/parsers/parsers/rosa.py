@@ -18,9 +18,9 @@
 import re
 import xml.etree.ElementTree
 
-from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.parsers import Parser
+from repology.parsers.nevra import nevra_construct, nevra_parse
 
 
 class RosaInfoXmlParser(Parser):
@@ -30,27 +30,18 @@ class RosaInfoXmlParser(Parser):
         for info in root.findall('./info'):
             pkg = factory.begin()
 
-            # derive names and versions from fn field
-            fn = info.attrib['fn'].rsplit('-', 2)
-            if len(fn) < 3:
-                pkg.log('unable to parse fn: {}'.format(fn), severity=Logger.ERROR)
-                continue
+            nevra = nevra_parse(info.attrib['fn'])
 
-            pkg.set_name(fn[0])
-            pkg.set_version(fn[1])
-            pkg.set_origversion('-'.join(fn[1:]))
+            pkg.set_name(nevra[0])
+            pkg.set_version(nevra[2])
+            pkg.set_origversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
 
-            # Rosa packages are named like PKGNAME-PKGVER-ROSAREV
-            # where ROSAREV is most commonly in the form of N.src, but
-            # may contain other components, such as prerelease stuff
-            # like alpha/beta/rc/pre/... and snapshot revisions/dates
-            #
             # What we do here is we try to extract prerelease part
             # and mark version as ignored with non-trivial ROSAREV,
             # as it it likely a snapshot and trus cannot be trusted
-            if not re.fullmatch('[0-9]+\\.src', fn[2]):
+            if not nevra[3].isdecimal():
                 pkg.set_flags(PackageFlags.ignore)
-                match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', fn[2].lower())
+                match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', nevra[3].lower())
                 if match:
                     pkg.package.version += match.group(0)  # XXX: encapsulation violation
 

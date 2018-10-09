@@ -18,7 +18,7 @@
 import lxml.html
 
 from repology.parsers import Parser
-from repology.parsers.nevra import nevra_parse
+from repology.parsers.nevra import nevra_construct, nevra_parse
 
 
 class SophieHTMLParser(Parser):
@@ -30,5 +30,6 @@ class SophieHTMLParser(Parser):
 
             pkg.set_name(nevra[0])
             pkg.set_version(nevra[2])
+            pkg.set_origversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
 
             yield pkg

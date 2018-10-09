@@ -16,21 +16,22 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from repology.parsers import Parser
-from repology.parsers.nevra import nevra_parse
+from repology.parsers.nevra import nevra_construct, nevra_parse
 
 
 class RPMFTPListParser(Parser):
     def iter_parse(self, path, factory):
         with open(path) as listfile:
             for line in listfile:
+                pkg = factory.begin()
+
                 filename = line.strip().split()[-1]
 
                 nevra = nevra_parse(filename)
 
-                pkg = factory.begin()
-
                 pkg.set_name(nevra[0])
                 pkg.set_version(nevra[2])
+                pkg.set_origversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
 
                 pkg.set_extra_field('nevr', filename.rsplit('.', 2)[0])
 
