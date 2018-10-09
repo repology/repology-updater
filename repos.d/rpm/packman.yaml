@@ -128,7 +128,7 @@
   packagelinks:
     - desc: PackMan package page
       url: 'http://packman.links2linux.org/package/{name}'
-  tags: [all, experimental, packman]
+  tags: [all, production, packman]
 
 - name: packman_opensuse_leap_15_0
   type: repository
@@ -149,7 +149,7 @@
   packagelinks:
     - desc: PackMan package page
       url: 'http://packman.links2linux.org/package/{name}'
-  tags: [all, experimental, packman]
+  tags: [all, production, packman]
 
 - name: packman_opensuse_tumbleweed
   type: repository
@@ -170,7 +170,7 @@
   packagelinks:
     - desc: PackMan package page
       url: 'http://packman.links2linux.org/package/{name}'
-  tags: [all, experimental, packman]
+  tags: [all, production, packman]
 
 - name: packman_sle_12
   type: repository
@@ -191,7 +191,7 @@
   packagelinks:
     - desc: PackMan package page
       url: 'http://packman.links2linux.org/package/{name}'
-  tags: [all, experimental, packman]
+  tags: [all, production, packman]
 
 - name: packman_sle_15
   type: repository
@@ -212,4 +212,4 @@
   packagelinks:
     - desc: PackMan package page
       url: 'http://packman.links2linux.org/package/{name}'
-  tags: [all, experimental, packman]
+  tags: [all, production, packman]
