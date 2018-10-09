@@ -192,9 +192,16 @@ class PackageMaker(PackageMakerBase):
     def unwrap(self):
         return self.package
 
-    def clone(self):
-        offspring = PackageMaker(self.logger, self.ident)
+    def clone(self, ident=None, append_ident=None):
+        offspring_ident = self.ident
+        if ident is not None:
+            offspring_ident = ident
+        elif append_ident is not None:
+            offspring_ident += append_ident
+
+        offspring = PackageMaker(self.logger, offspring_ident)
         offspring.package = deepcopy(self.package)
+
         return offspring
 
     def check_sanity(self, require_name=True, require_version=True, verbose=False):
