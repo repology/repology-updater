@@ -137,6 +137,9 @@ schemas = {
                     # arch parser
                     'allowed_archs': [str],
 
+                    # debian parser
+                    'project_name_from_source': bool,
+
                     # srclist parser
                     'encoding': Any('utf-8', 'cp1251'),
 

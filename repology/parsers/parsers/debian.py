@@ -52,6 +52,9 @@ def normalize_version(version):
 
 
 class DebianSourcesParser(Parser):
+    def __init__(self, project_name_from_source=False):
+        self.project_name_from_source = project_name_from_source
+
     def iter_parse(self, path, factory):
         with open(path, encoding='utf-8', errors='ignore') as file:
             current_data = {}
@@ -92,6 +95,13 @@ class DebianSourcesParser(Parser):
                     source = get_field('Source')
                     if source:
                         pkg.set_extra_field('source', source)
+
+                        # XXX: this is only used in OpenWRT ATM
+                        # We assume that Source field is a package name or something path-like
+                        if self.project_name_from_source:
+                            srcname = source.split('/')[-1]
+                            pkg.set_effname(srcname)
+                            pkg.set_extra_field('srcname', srcname)
 
                     yield pkg
 
