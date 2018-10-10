@@ -89,7 +89,7 @@ class FastFileLogger(Logger):
     def __enter__(self):
         self.fd = open(self.path, 'a', encoding='utf-8')
 
-    def __exit__(self):
+    def __exit__(self, exc_type, exc_val, exc_tb):
         self.fd.close()
 
     def _write_log(self, message, severity):
