@@ -50,6 +50,12 @@
 {{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name) }}<strong>?header=</strong>
 </pre>
 
+<p>You may also specify minimal version with the <code>minversion=...</code> HTTP parameter, to make versions lower than that highlighed with bright red.</p>
+
+<pre>
+{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name) }}<strong>?minversion=1.0.0</strong>
+</pre>
+
 </section>
 
 <section>
@@ -66,7 +72,7 @@
 
 <h2>Tiny badge with latest packaged versions</h2>
 
-<p>This shows latest version(s) known to repology. There may be multiple versions, for example devel and newest, or multiple variations of the same version encountered in some repositories (e.g.<code>1.0.0</code> and <code>1.0</code>).</p>
+<p>This shows latest version(s) known to repology. There may be multiple versions, for example devel and newest, or multiple variations of the same version encountered in some repositories (e.g.<code>1.0.0</code> and <code>1.0</code>). These badges also support <code>minversion=</code> parameter.</p>
 
 {{ badge_example('badge_latest_versions', alt='latest packaged version(s)') }}
 
@@ -95,7 +101,7 @@
 
 <h2>Tiny per-repository badges with version only</h2>
 
-<p>These show version in specific repository. Repository name is not included, so these are useful if you already have table or other formatting with repository names.</p>
+<p>These show version in specific repository. Repository name is not included, so these are useful if you already have table or other formatting with repository names. These badges also support <code>minversion=</code> parameter.</p>
 
 <table class="table">
 	<tr><th>Repository</th><th>Sample</th><th>Markdown code</th><th>HTML code</th></tr>

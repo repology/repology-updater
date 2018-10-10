@@ -35,11 +35,13 @@ def badge_vertical_allrepos(name):
     best_pkg_by_repo = PackagesetToBestByRepo(packages)
 
     header = flask.request.args.to_dict().get('header', 'Packaging status')
+    minversion = flask.request.args.to_dict().get('minversion')
 
     entries = [
         {
             'repo': repometadata[reponame],
-            'package': best_pkg_by_repo[reponame]
+            'package': best_pkg_by_repo[reponame],
+            'unsatisfying': version_compare(best_pkg_by_repo[reponame].version, minversion) < 0 if minversion else False,
         } for reponame in repometadata.active_names() if reponame in best_pkg_by_repo
     ]
 
@@ -88,12 +90,16 @@ def badge_version_for_repo(repo, name):
             {'Content-type': 'image/svg+xml'}
         )
 
+    minversion = flask.request.args.to_dict().get('minversion')
+    unsatisfying = version_compare(best_pkg_by_repo[repo].version, minversion) < 0 if minversion else False
+
     return (
         flask.render_template(
             'badge-tiny-version.svg',
             repo=repo,
             version=best_pkg_by_repo[repo].version,
             versionclass=best_pkg_by_repo[repo].versionclass,
+            unsatisfying=unsatisfying,
         ),
         {'Content-type': 'image/svg+xml'}
     )
@@ -116,12 +122,16 @@ def badge_version_only_for_repo(repo, name):
             {'Content-type': 'image/svg+xml'}
         )
 
+    minversion = flask.request.args.to_dict().get('minversion')
+    unsatisfying = version_compare(best_pkg_by_repo[repo].version, minversion) < 0 if minversion else False
+
     return (
         flask.render_template(
             'badge-tiny-version-only.svg',
             repo=repo,
             version=best_pkg_by_repo[repo].version,
             versionclass=best_pkg_by_repo[repo].versionclass,
+            unsatisfying=unsatisfying,
         ),
         {'Content-type': 'image/svg+xml'}
     )
