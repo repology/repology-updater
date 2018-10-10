@@ -70,7 +70,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
         except requests.exceptions.HTTPError as e:
             # we don't care too much if removing the scroll fails, it'll timeout anyway
             # XXX: but log this
-            logger.log('failed to DELETE scroll, server reply follows:'.format(e.response.text), severity=Logger.ERROR)
+            logger.log('failed to DELETE scroll, server reply follows:\n' + e.response.text, severity=Logger.ERROR)
             logger.log(e.response.text, severity=Logger.ERROR)
             pass
 
@@ -79,6 +79,6 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             self.do_fetch_scroll(statedir, logger)
         except requests.exceptions.HTTPError as e:
             # show server reply as it contains the failure cause
-            logger.log('request failed, server reply follows:'.format(e.response.text), severity=Logger.ERROR)
+            logger.log('request failed, server reply follows:\n' + e.response.text, severity=Logger.ERROR)
             logger.log(e.response.text, serverity=Logger.ERROR)
             raise
