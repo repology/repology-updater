@@ -1,40 +1,45 @@
 ###########################################################################
 # OpenWRT
 ###########################################################################
-- name: openwrt_15_05_01_x86
+- name: openwrt_18_06_01_x86
   type: repository
-  desc: OpenWrt 15.05.01 x86
+  desc: OpenWrt 18.06.01 x86
   family: openwrt
   color: '5d6993'
-  minpackages: 4000
+  minpackages: 4500
   sources:
-    - name: [ base, luci, management, packages, routing, telephony ]
+    - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'https://downloads.openwrt.org/chaos_calmer/15.05.1/x86/generic/packages/{source}/Packages.gz'
-      compression: gz
+      url: 'https://downloads.openwrt.org/releases/18.06.1/packages/x86_64/{source}/Packages.manifest'
       subrepo: '{source}'
-  shadow: true
+      project_name_from_source: true
   repolinks:
     - desc: OpenWrt home
       url: https://openwrt.org/
+  packagelinks:
+    - desc: OpenWrt package page
+      url: 'https://openwrt.org/packages/pkgdata/{name}'
   tags: [ all, production, openwrt ]
 
-- name: openwrt_15_05_01_ar71xx
+- name: openwrt_snapshot_x86_64
   type: repository
-  desc: OpenWrt 15.05.01 ar71xx
+  desc: OpenWrt snapshot x86_64
   family: openwrt
   color: '5d6993'
-  minpackages: 4000
+  minpackages: 0
   sources:
-    - name: [ base, luci, management, packages, routing, telephony ]
+    - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'https://downloads.openwrt.org/chaos_calmer/15.05.1/ar71xx/generic/packages/{source}/Packages.gz'
-      compression: gz
+      url: 'https://downloads.openwrt.org/snapshots/packages/x86_64/{source}/Packages.manifest'
       subrepo: '{source}'
+      project_name_from_source: true
   shadow: true
   repolinks:
     - desc: OpenWrt home
       url: https://openwrt.org/
-  tags: [ all, production, openwrt ]
+  packagelinks:
+    - desc: OpenWrt package page
+      url: 'https://openwrt.org/packages/pkgdata/{name}'
+  tags: [ all, openwrt ]  # disabled: like LEDE, it's too blinky
