@@ -18,16 +18,16 @@
 function tzfix() {
 	// this fixes contents of elements marked with 'tzfix_*'
 	// classes to be aware of user's local timezone
-	$(".tzfix_zone").remove();
+	$('.tzfix_zone').remove();
 
-	$(".tzfix_time").each(function() {
+	$('.tzfix_time').each(function() {
 		$(this).text(
 			moment($(this).attr('datetime'))
 				.format('YYYY-MM-DD HH:mm')
 		)
 	});
 
-	$(".tzfix_time_sec").each(function() {
+	$('.tzfix_time_sec').each(function() {
 		$(this).text(
 			moment($(this).attr('datetime'))
 				.format('YYYY-MM-DD HH:mm:ss')
@@ -37,4 +37,4 @@ function tzfix() {
 
 $(document).ready(function() {
 	tzfix();
-})
+});
