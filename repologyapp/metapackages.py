@@ -20,7 +20,7 @@ from collections import defaultdict
 import flask
 
 from repology.database import MetapackageRequest
-from repology.package import VersionClass
+from repology.package import UserVisibleVersionInfo, VersionClass
 
 
 class MetapackagesFilterInfo:
@@ -148,64 +148,51 @@ def packages_to_summary_items(packages, repo=None, maintainer=None):
     if repo is not None:
         maintainer = None
 
+    sumtypes = ('explicit', 'newest', 'outdated', 'ignored')
+
     def summary_factory():
         return {
-            sumtype: []
-            for sumtype in ['explicit', 'newest', 'outdated', 'ignored']
+            sumtype: defaultdict(set)
+            for sumtype in sumtypes
         }
 
-    # pass1: gather packages under summaries[<effname>][<explicit|newest|outdated|ignored>]
     summaries = defaultdict(summary_factory)
 
+    # pass 1: gather summaries in the intermediate format:
+    # dict by metapackage name -> dict by summary type (e.g. table columns) -> hash by versioninfo of sets of families
     for package in packages:
         target = None
+
+        versioninfo = package.get_user_visible_version()
 
         if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
             target = summaries[package.effname]['explicit']
         elif package.versionclass in [VersionClass.outdated, VersionClass.legacy]:
             target = summaries[package.effname]['outdated']
+            versioninfo.versionclass = VersionClass.outdated  # we don't need to differentiate legacy and outdated here
         elif package.versionclass in [VersionClass.devel, VersionClass.newest, VersionClass.unique]:
             target = summaries[package.effname]['newest']
         else:
             target = summaries[package.effname]['ignored']
 
-        target.append(package)
+        target[versioninfo].add(package.family)
 
-    # pass2: convert package lists into lists of version infos
-    def condense_version_families(tuples):
-        if not tuples:
-            return
-
-        current_key = tuples[0][0]
-        current_values = set([tuples[0][1]])
-
-        for key, value in tuples[1:]:
-            if key != current_key:
-                yield (current_key, len(current_values))
-                current_key = key
-                current_values = set()
-
-            current_values.add(value)
-
-        yield (current_key, len(current_values))
-
-    final_summaries = defaultdict(summary_factory)
-
-    for metapackagename, summary in summaries.items():
-        for sumtype, packages in summary.items():
-            final_summaries[metapackagename][sumtype] = list(
-                condense_version_families(
-                    sorted(
-                        [
-                            (package.get_user_visible_version().flatten_legacy(), package.family)
-                            for package in packages
-                        ],
-                        reverse=True
-                    )
+    # pass 2: count families and convert to final format:
+    # dict by metapackage name -> dict by summary type (e.g. table columns) -> list of versioninfos (with filled numfamilies)
+    for summary in summaries.values():
+        for sumtype in sumtypes:
+            summary[sumtype] = sorted([
+                UserVisibleVersionInfo(
+                    versioninfo.version,
+                    versioninfo.versionclass,
+                    versioninfo.metaorder,
+                    versioninfo.versionflags,
+                    len(families)
                 )
-            )
+                for versioninfo, families in summary[sumtype].items()
+            ], reverse=True)
 
-    return final_summaries
+    return summaries
 
 
 def packages_to_metapackages(*packagesets):

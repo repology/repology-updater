@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -62,19 +62,21 @@ class VersionClass:
 
 @total_ordering
 class UserVisibleVersionInfo:
-    __slots__ = ['version', 'versionclass', 'metaorder', 'versionflags']
+    __slots__ = ['version', 'versionclass', 'metaorder', 'versionflags', 'numfamilies']
 
-    def __init__(self, version, versionclass, metaorder=0, versionflags=0):
+    def __init__(self, version, versionclass, metaorder=0, versionflags=0, numfamilies=1):
         self.version = version
         self.versionclass = versionclass
         self.metaorder = metaorder
         self.versionflags = versionflags
+        self.numfamilies = numfamilies
 
     def __eq__(self, other):
         return (self.metaorder == other.metaorder and
                 self.versionclass == other.versionclass and
                 self.version == other.version and
-                version_compare(self.version, other.version, self.versionflags, other.versionflags) == 0)
+                version_compare(self.version, other.version, self.versionflags, other.versionflags) == 0 and
+                self.numfamilies == other.numfamilies)
 
     def __lt__(self, other):
         if self.metaorder < other.metaorder:
@@ -99,13 +101,15 @@ class UserVisibleVersionInfo:
         if self.versionclass > other.versionclass:
             return False
 
+        if self.numfamilies < other.numfamilies:
+            return True
+        if self.numfamilies > other.numfamilies:
+            return False
+
         return self.version < other.version
 
-    def flatten_legacy(self):
-        if self.versionclass == VersionClass.legacy:
-            self.versionclass = VersionClass.outdated
-
-        return self
+    def __hash__(self):
+        return hash((self.metaorder, self.versionclass, self.version, self.numfamilies, self.versionflags))
 
 
 class PackageFlags:
