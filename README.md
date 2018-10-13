@@ -82,6 +82,7 @@ version are always parsed.
 | Rudix                            | ✔       |         |       |       | ✔       |          |
 | Scoop                            |         |         |       | ✔     | ✔       | ✔        |
 | SlackBuilds                      |         | ✔ (3)   | ✔     | ✔     |         | ✔        |
+| Slackware                        |         |         |       |       |         |          |
 | SliTaz                           | ✔       |         | ✔     | ✔     |         |          |
 | Stackage                         | ✔       |         |       |       |         |          |
 | Termux                           | ✔       |         |       | ✔     |         | ✔        |
