@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -38,6 +38,10 @@ class GoboLinuxGitParser(Parser):
     def iter_parse(self, path, factory):
         trunk_path = os.path.join(path, 'trunk')
         for package_name in os.listdir(trunk_path):
+            pkg = factory.begin()
+
+            pkg.set_name(package_name)
+
             package_path = os.path.join(trunk_path, package_name)
 
             maxversion = None
@@ -46,16 +50,13 @@ class GoboLinuxGitParser(Parser):
                     maxversion = version_name
 
             if maxversion is None:
-                factory.log('no usable versions for package {}'.format(package_name), severity=Logger.ERROR)
+                pkg.log('no usable versions found', severity=Logger.ERROR)
                 continue
+
+            pkg.set_version(maxversion)
 
             recipe_path = os.path.join(package_path, maxversion, 'Recipe')
             description_path = os.path.join(package_path, maxversion, 'Resources', 'Description')
-
-            pkg = factory.begin()
-
-            pkg.name = package_name
-            pkg.version = maxversion
 
             if os.path.isfile(recipe_path):
                 with open(recipe_path, 'r', encoding='utf-8', errors='ignore') as recipe:
@@ -64,7 +65,7 @@ class GoboLinuxGitParser(Parser):
                         if line.startswith('url='):
                             download = _expand_mirrors(line[4:])
                             if '$' not in download:
-                                pkg.downloads.append(download.strip('"'))
+                                pkg.add_downloads(download.strip('"'))
                             else:
                                 factory.log('Recipe for {}/{} skipped, unhandled URL substitude found'.format(package_name, maxversion), severity=Logger.ERROR)
 
@@ -86,11 +87,8 @@ class GoboLinuxGitParser(Parser):
                                 data[current_tag] += ' '
                             data[current_tag] += line
 
-                    if 'Summary' in data:
-                        pkg.comment = data['Summary']
-                    if 'License' in data:
-                        pkg.licenses = [data['License']]
-                    if 'Homepage' in data:
-                        pkg.homepage = data['Homepage'].strip('"')
+                    pkg.set_summary(data.get('Summary'))
+                    pkg.add_licenses(data.get('License'))
+                    pkg.add_homepages(data.get('Homepage', '').strip('"'))
 
             yield pkg

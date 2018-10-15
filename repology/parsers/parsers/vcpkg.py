@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -23,18 +23,13 @@ from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
-def SanitizeVersion(version):
-    origversion = version
-
+def normalize_version(version):
     version = re.sub('[^0-9]*vcpkg.*$', '', version)  # vcpkg stuff
     version = re.sub('(alpha|beta|rc|patch)-([0-9]+)$', '\\1\\2', version)  # save from the following rule
     version = re.sub('-[0-9]+$', '', version)  # cut off revision
     version = re.sub('-[0-9a-f]{6,}$', '', version)  # drop commits
 
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+    return version
 
 
 class VcpkgGitParser(Parser):
@@ -45,6 +40,8 @@ class VcpkgGitParser(Parser):
                 continue
 
             pkg = factory.begin()
+
+            pkg.set_origin(pkgdir)
             pkg.set_name(pkgdir)
 
             with open(controlpath, 'r', encoding='utf-8', errors='ignore') as controlfile:
@@ -52,16 +49,13 @@ class VcpkgGitParser(Parser):
                     line = line.strip()
                     if line.startswith('Version:'):
                         version = line[8:].strip()
-                        match = re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version)
-                        if match:
-                            pkg.version = version
-                            pkg.SetFlag(PackageFlags.ignore)
+                        if re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version):
+                            pkg.set_version(version)
+                            pkg.set_flags(PackageFlags.ignore)
                         else:
-                            pkg.version, pkg.origversion = SanitizeVersion(line[8:].strip())
+                            pkg.set_version(version, normalize_version)
                     elif line.startswith('Description:'):
-                        comment = line[12:].strip()
-                        if comment:
-                            pkg.comment = comment
+                        pkg.set_summary(line[12:])
 
             # pretty much a hack to shut a bunch of fake versions up
             portfilepath = os.path.join(path, 'ports', pkgdir, 'portfile.cmake')
@@ -69,12 +63,8 @@ class VcpkgGitParser(Parser):
                 with open(portfilepath, 'r', encoding='utf-8', errors='ignore') as portfile:
                     for line in portfile:
                         if 'libimobiledevice-win32' in line:
-                            factory.log('marking version for {} as untrusted, https://github.com/libimobiledevice-win32 accused of version faking'.format(pkg.name), severity=Logger.ERROR)
-                            pkg.SetFlag(PackageFlags.untrusted)
+                            pkg.log('marking as untrusted, https://github.com/libimobiledevice-win32 accused of version faking', severity=Logger.WARNING)
+                            pkg.set_flags(PackageFlags.untrusted)
                             break
-
-            if not pkg.version:
-                factory.log('unable to parse port {}: no version'.format(pkgdir), severity=Logger.ERROR)
-                continue
 
             yield pkg

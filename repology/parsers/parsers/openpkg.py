@@ -30,20 +30,20 @@ class OpenPkgRdfParser(Parser):
         for item in repository.findall('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description'):
             pkg = factory.begin()
 
-            pkg.name = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Name').text
-            pkg.version = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Version').text
-            pkg.licenses = [item.find('{http://www.openpkg.org/xml-rdf-index/0.9}License').text]
-            pkg.comment = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Summary').text
-            pkg.category = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Group').text
-            pkg.homepage = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}URL').text
+            pkg.set_name(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Name').text)
+            pkg.set_version(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Version').text)
+            pkg.add_licenses(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}License').text)
+            pkg.set_summary(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Summary').text)
+            pkg.add_categories(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Group').text)
+            pkg.add_homepages(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}URL').text)
 
             for source in item.findall('./{http://www.openpkg.org/xml-rdf-index/0.9}Source/{http://www.w3.org/1999/02/22-rdf-syntax-ns#}bag/{http://www.w3.org/1999/02/22-rdf-syntax-ns#}li'):
                 text = source.text
                 if (text.startswith('https://') or text.startswith('http://') or text.startswith('ftp://')) and 'openpkg.org' not in text:
-                    pkg.downloads.append(text)
+                    pkg.add_downloads(text)
 
             release = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Release').text
             if pkg.version.endswith(release):
-                pkg.SetFlag(PackageFlags.untrusted)
+                pkg.set_flags(PackageFlags.untrusted)
 
             yield pkg

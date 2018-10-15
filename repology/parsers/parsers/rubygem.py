@@ -1,4 +1,5 @@
 # Copyright (C) 2017 Steve Wills <steve@mouf.net>
+# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,25 +21,26 @@ import rubymarshal.reader
 from repology.parsers import Parser
 
 
+def _force_decode(var):
+    if isinstance(var, str):
+        return var
+    else:
+        return str(var, 'UTF-8')
+
+
 class RubyGemParser(Parser):
-    def force_decode(self, var):
-        if isinstance(var, str):
-            return var
-        else:
-            return str(var, 'UTF-8')
-
     def iter_parse(self, path, factory):
-        packages = {}
-
         with open(path, 'rb') as fd:
-            content = rubymarshal.reader.load(fd)
-            for gem in content:
+            for gem in rubymarshal.reader.load(fd):
                 pkg = factory.begin()
-                gemplat = self.force_decode(gem[2])
-                if gemplat == 'ruby':
-                    pkg.name = self.force_decode(gem[0])
-                    pkg.version = self.force_decode(gem[1].values[0])
-                    pkg.homepage = 'https://rubygems.org/gems/' + pkg.name
-                    packages[pkg.name] = pkg
 
-        yield from packages.values()
+                pkg.set_name(_force_decode(gem[0]))
+
+                if _force_decode(gem[2]) != 'ruby':
+                    pkg.log('skipped, gemplat != ruby')
+                    continue
+
+                pkg.set_version(_force_decode(gem[1].values[0]))
+                pkg.add_homepages('https://rubygems.org/gems/' + pkg.name)
+
+                yield pkg

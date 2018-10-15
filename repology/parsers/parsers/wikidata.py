@@ -22,21 +22,20 @@ from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
-def SimplifyResult(injson):
-    for item in injson['results']['bindings']:
-        yield {
-            key: item[key]['value'] for key in item.keys()
-        }
+def _iter_packages(path):
+        with open(path, 'r', encoding='utf-8') as jsonfile:
+            for item in json.load(jsonfile)['results']['bindings']:
+                yield {
+                    key: item[key]['value'] for key in item.keys()
+                }
 
 
 class WikidataJsonParser(Parser):
     def iter_parse(self, path, factory):
-        jsondata = None
-        with open(path, 'r', encoding='utf-8') as jsonfile:
-            jsondata = json.load(jsonfile)
-
-        for packagedata in SimplifyResult(jsondata):
+        for packagedata in _iter_packages(path):
             entity = packagedata['project'].rsplit('/', 1)[-1]  # this is URL, take only the ID from it
+
+            pkg = factory.begin(entity)
 
             # use Arch and AUR package names as a name, as they are most non-ambigous
             names = []
@@ -56,30 +55,30 @@ class WikidataJsonParser(Parser):
                     is_foreign_platform_release = 'p' in flags and 'P' not in flags
 
                     if is_foreign_os_release:
-                        factory.log('{} ({}) version {} skipped due to bad OS'.format(packagedata['projectLabel'], entity, version), severity=Logger.WARNING)
+                        pkg.log('version {} skipped due to bad OS'.format(version), severity=Logger.WARNING)
                         continue
 
                     if is_foreign_platform_release:
-                        factory.log('{} ({}) version {} skipped due to bad Platform'.format(packagedata['projectLabel'], entity, version), severity=Logger.WARNING)
+                        pkg.log('version {} skipped due to bad Platform'.format(version), severity=Logger.WARNING)
                         continue
 
-                    pkg = factory.begin()
+                    subpkg = pkg.clone()
 
-                    pkg.SetFlag(PackageFlags.devel, is_devel)
+                    subpkg.set_flags(PackageFlags.devel, is_devel)
 
-                    pkg.name = entity
-                    pkg.effname = name
-                    pkg.version = version
+                    subpkg.set_name(entity)
+                    subpkg.set_effname(name)
+                    subpkg.set_version(version)
 
                     if 'projectDescription' in packagedata:
-                        pkg.comment = packagedata['projectDescription']
+                        subpkg.set_summary(packagedata['projectDescription'])
                     else:
-                        pkg.comment = packagedata['projectLabel']
+                        subpkg.set_summary(packagedata['projectLabel'])
 
                     if packagedata['licenses']:
-                        pkg.licenses = packagedata['licenses'].split(', ')
+                        subpkg.add_licenses(packagedata['licenses'].split(', '))
 
                     if packagedata['websites']:
-                        pkg.homepage = packagedata['websites'].split(', ')[0]  # XXX: use all websites when supported
+                        subpkg.add_homepages(packagedata['websites'].split(', '))
 
-                    yield pkg
+                    yield subpkg

@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -26,26 +26,23 @@ class FDroidParser(Parser):
         root = xml.etree.ElementTree.parse(path)
 
         for application in root.findall('application'):
-            name = application.find('name').text
-            license_ = application.find('license').text
-            category = application.find('category').text
-            www = application.find('web').text
-            appid = application.find('id').text
+            app = factory.begin()
+
+            app.set_name(application.find('name').text)
+            app.add_licenses(application.find('license').text)
+            app.add_categories(application.find('category').text)
+            app.add_homepages(application.find('web').text)
+            app.set_extra_field('id', application.find('id').text)
 
             upstream_version_code = int(application.find('marketvercode').text)
             for package in application.findall('package'):
                 version_code = int(package.find('versioncode').text)
                 version = package.find('version').text
 
-                if name and version:
-                    pkg = factory.begin()
+                if version:
+                    pkg = app.clone()
 
-                    pkg.name = name.strip()
                     pkg.version = version
-                    pkg.licenses = [license_]
-                    pkg.category = category
-                    pkg.homepage = www if www else None
-                    pkg.extrafields = {'id': appid}
                     pkg.flags = PackageFlags.devel if version_code > upstream_version_code else 0
 
                     yield pkg

@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,23 +20,13 @@ import re
 
 from repology.logger import Logger
 from repology.parsers import Parser
-
-
-def SanitizeVersion(version):
-    origversion = version
-
-    pos = version.rfind('+')
-    if pos != -1:
-        version = version[0:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+from repology.parsers.versions import VersionStripper
 
 
 class YACPGitParser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right('+')
+
         for package in os.listdir(path):
             package_path = os.path.join(path, package)
             if not os.path.isdir(package_path):
@@ -46,15 +36,14 @@ class YACPGitParser(Parser):
                 if not cygport.endswith('.cygport'):
                     continue
 
+                pkg = factory.begin(cygport)
+
                 # XXX: save *bl* to origversion
                 match = re.match('(.*)-[0-9]+bl[0-9]+\.cygport$', cygport)
-
                 if not match:
-                    factory.log('unable to parse cygport: {}'.format(cygport), severity=Logger.ERROR)
+                    pkg.log('unable to parse cygport name: {}'.format(cygport), severity=Logger.ERROR)
                     continue
 
-                pkg = factory.begin()
-                pkg.name, version = match.group(1).rsplit('-', 1)
-                pkg.version, pkg.origversion = SanitizeVersion(version)
+                pkg.set_name_and_version(match.group(1), normalize_version)
 
                 yield pkg

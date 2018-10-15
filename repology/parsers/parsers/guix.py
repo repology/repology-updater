@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -23,17 +23,11 @@ import lxml.html
 from repology.parsers import Parser
 
 
-def SanitizeVersion(version):
-    origversion = version
-
-    match = re.match('(.*)-[0-9]+\\.[0-9a-f]{7,}$', origversion)
+def normalize_version(version):
+    match = re.match('(.*)-[0-9]+\\.[0-9a-f]{7,}$', version)
     if match:
-        version = match.group(1)
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+        return match.group(1)
+    return version
 
 
 class GuixParser(Parser):
@@ -51,19 +45,22 @@ class GuixParser(Parser):
 
                 # header
                 cell = row.xpath('./h3[@class="package-name"]')[0]
-                pkg.name, version = cell.text.split(' ', 1)
-                pkg.version, pkg.origversion = SanitizeVersion(version.strip())
-                pkg.comment = cell.xpath('./span[@class="package-synopsis"]')[0].text.strip().strip('—').strip() or None
+
+                name, version = cell.text.split(None, 1)
+                pkg.set_name(name)
+                pkg.set_version(version, normalize_version)
+
+                pkg.set_summary(cell.xpath('./span[@class="package-synopsis"]')[0].text.strip().strip('—'))
 
                 # details
                 for cell in row.xpath('./ul[@class="package-info"]/li'):
                     key = cell.xpath('./b')[0].text
 
                     if key == 'License:':
-                        pkg.licenses = [a.text for a in cell.xpath('./a')]
+                        pkg.add_licenses([a.text for a in cell.xpath('./a')])
                     elif key == 'Website:':
-                        pkg.homepage = cell.xpath('./a')[0].attrib['href']
+                        pkg.add_homepages(cell.xpath('./a')[0].attrib['href'])
                     elif key == 'Package source:':
-                        pkg.extrafields['source'] = cell.xpath('./a')[0].text
+                        pkg.set_extra_field('source', cell.xpath('./a')[0].text)
 
                 yield pkg

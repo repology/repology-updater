@@ -22,80 +22,77 @@ from repology.logger import Logger
 from repology.parsers import Parser
 
 
-class OpenIndianaSummaryJsonParser(Parser):
-    def ParsePackage(self, fmri, pkgdata, factory):
-        variables = {}
-        for action in pkgdata['actions']:
-            tokens = shlex.split(action)
+def _iter_packages(path):
+    with open(path, 'r', encoding='utf-8') as jsonfile:
+        summary_json = json.load(jsonfile)
 
-            if not tokens or tokens.pop(0) != 'set':
-                factory.log('unrecognized action ' + action, severity=Logger.ERROR)
+        for summary_key in summary_json.keys():
+            if summary_key.startswith('_'):  # _SIGNATURE
                 continue
 
-            key = None
-            value = []
+            # else summary_key is someting like "openindiana.org"
+            # or "hipster-encumbered"
 
-            for token in tokens:
-                if token.startswith('name='):
-                    key = token[5:]
-                elif token.startswith('value='):
-                    value.append(token[6:])
-                elif token.startswith('last-fmri='):
-                    pass
-                else:
-                    factory.log('unrecognized token ' + token, severity=Logger.ERROR)
-                    continue
+            for fmri, pkgdatas in summary_json[summary_key].items():
+                for pkgdata in pkgdatas:
+                    yield fmri, pkgdata
 
-            if key and value:
-                variables[key] = value
 
-        pkg = factory.begin()
-
-        pkg.extrafields['fmri'] = fmri
-
-        if 'com.oracle.info.name' in variables:
-            pkg.name = variables['com.oracle.info.name'][0]
-
-        if 'com.oracle.info.version' in variables:
-            pkg.version = variables['com.oracle.info.version'][0]
-
-        if 'pkg.summary' in variables:
-            pkg.comment = variables['pkg.summary'][0]
-
-        if 'info.classification' in variables:
-            pkg.category = variables['info.classification'][0]
-            if pkg.category.startswith('org.opensolaris.category.2008:'):
-                pkg.category = pkg.category.split(':', 1)[1]
-
-        if 'info.upstream-url' in variables:
-            pkg.homepage = variables['info.upstream-url'][0]
-
-        if 'info.source-url' in variables:
-            pkg.downloads = variables['info.source-url']
-
-        # Regarding comment requirement: there are some packages which lack it,
-        # however for ALL of them is a counterpart with comment and some
-        # additional fields (category, homepage, downloads). Packages without
-        # comment look like legacy, and it's OK and desirable to drop them here
-        if pkg.name and pkg.version and pkg.comment:
-            return pkg
-
-        return None
-
+class OpenIndianaSummaryJsonParser(Parser):
     def iter_parse(self, path, factory):
-        with open(path, 'r', encoding='utf-8') as jsonfile:
-            summary_json = json.load(jsonfile)
+        for fmri, pkgdata in _iter_packages(path):
+            pkg = factory.begin(fmri)
 
-            for summary_key in summary_json.keys():
-                if summary_key.startswith('_'):  # _SIGNATURE
+            pkg.set_extra_field('fmri', fmri)
+
+            variables = {}
+            for action in pkgdata['actions']:
+                tokens = shlex.split(action)
+
+                if not tokens or tokens.pop(0) != 'set':
+                    factory.log('unrecognized action ' + action, severity=Logger.ERROR)
                     continue
 
-                # else summary_key is someting like "openindiana.org"
-                # or "hipster-encumbered"
+                key = None
+                value = []
 
-                for fmri, pkgdatas in summary_json[summary_key].items():
-                    for pkgdata in pkgdatas:
-                        pkg = self.ParsePackage(fmri, pkgdata, factory)
+                for token in tokens:
+                    if token.startswith('name='):
+                        key = token[5:]
+                    elif token.startswith('value='):
+                        value.append(token[6:])
+                    elif token.startswith('last-fmri='):
+                        pass
+                    else:
+                        factory.log('unrecognized token ' + token, severity=Logger.ERROR)
+                        continue
 
-                        if pkg:
-                            yield pkg
+                if key and value:
+                    variables[key] = value
+
+            if 'com.oracle.info.name' in variables:
+                pkg.set_name(variables['com.oracle.info.name'][0])
+
+            if 'com.oracle.info.version' in variables:
+                pkg.set_version(variables['com.oracle.info.version'][0])
+
+            if 'pkg.summary' in variables:
+                pkg.set_summary(variables['pkg.summary'][0])
+
+            if 'info.classification' in variables:
+                category = variables['info.classification'][0]
+                if category.startswith('org.opensolaris.category.2008:'):
+                    pkg.add_categories(category.split(':', 1)[1])
+
+            if 'info.upstream-url' in variables:
+                pkg.add_homepages(variables['info.upstream-url'])
+
+            if 'info.source-url' in variables:
+                pkg.add_downloads(variables['info.source-url'])
+
+            # Regarding comment requirement: there are some packages which lack it,
+            # however for ALL of them have counterparts with comment and some
+            # additional fields (category, homepage, downloads). Packages without
+            # comment look like legacy, and it's OK and desirable to drop them here
+            if pkg.comment:
+                yield pkg

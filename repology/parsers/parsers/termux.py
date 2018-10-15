@@ -20,37 +20,28 @@ import re
 
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-
-
-def SanitizeVersion(version):
-    origversion = version
-
-    version = version.rsplit(':', 1)[-1]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+from repology.parsers.versions import VersionStripper
 
 
 class TermuxJsonParser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_left_greedy(':')
+
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for packagedata in json.load(jsonfile):
                 pkg = factory.begin()
-                pkg.name = packagedata['name']
-                pkg.version, pkg.origversion = SanitizeVersion(packagedata['version'])
 
-                pkg.comment = packagedata['description']
-                pkg.homepage = packagedata['homepage']
+                pkg.set_name(packagedata['name'])
+                pkg.set_version(packagedata['version'], normalize_version)
 
-                if 'srcurl' in packagedata:
-                    pkg.downloads = [packagedata['srcurl']]
+                pkg.set_summary(packagedata['description'])
+                pkg.add_homepages(packagedata['homepage'])
+                pkg.add_downloads(packagedata.get('srcurl'))
 
                 match = re.search(' @([^ ]+)$', packagedata['maintainer'])
                 if match:
-                    pkg.maintainers = [match.group(1).lower() + '@termux']
+                    pkg.add_maintainers(match.group(1).lower() + '@termux')
                 else:
-                    pkg.maintainers = extract_maintainers(packagedata['maintainer'])
+                    pkg.add_maintainers(extract_maintainers(packagedata['maintainer']))
 
                 yield pkg

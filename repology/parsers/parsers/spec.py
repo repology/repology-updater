@@ -17,7 +17,6 @@
 
 import os
 
-from repology.logger import Logger
 from repology.parsers import Parser
 
 
@@ -29,7 +28,7 @@ class SpecParser(Parser):
                     continue
 
                 with open(os.path.join(root, filename), encoding='utf-8', errors='ignore') as specfile:
-                    pkg = factory.begin()
+                    pkg = factory.begin(filename)
 
                     for line in specfile:
                         line = line.strip()
@@ -38,19 +37,16 @@ class SpecParser(Parser):
                             continue
 
                         if line.startswith('Name:') and not pkg.name:
-                            pkg.name = line[5:].strip()
+                            pkg.set_name(line.split(':', 1)[1])
                         elif line.startswith('Version:') and not pkg.version:
-                            pkg.version = line[8:].strip()
+                            pkg.set_version(line.split(':', 1)[1])
                         elif line.startswith('Url:') and not pkg.homepage:
-                            pkg.homepage = line[4:].strip()
+                            pkg.add_homepages(line.split(':', 1)[1])
                         elif line.startswith('License:') and not pkg.license:
-                            pkg.license = line[8:].strip()
+                            pkg.add_licenses(line.split(':', 1)[1])
                         elif line.startswith('Group:') and not pkg.category:
-                            pkg.category = line[6:].strip().lower()
+                            pkg.add_categories(line.split(':', 1)[1])
                         elif line.startswith('Summary:') and not pkg.comment:
-                            pkg.comment = line[8:].strip()
+                            pkg.set_summary(line.split(':', 1)[1])
 
-                    if pkg.name is not None and pkg.version is not None:
-                        yield pkg
-                    else:
-                        factory.log('%s skipped, likely due to parsing problems' % filename, severity=Logger.ERROR)
+                    yield pkg
