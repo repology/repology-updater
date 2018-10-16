@@ -277,6 +277,14 @@ class Rule:
 
             self.matchers.append(matcher)
 
+        if 'is_p_is_patch' in ruledata:
+            is_p_is_patch = ruledata['is_p_is_patch']
+
+            def matcher(package, package_context, match_context):
+                return package.HasFlag(PackageFlags.p_is_patch) == is_p_is_patch
+
+            self.matchers.append(matcher)
+
         # actions
         if 'remove' in ruledata:
             remove_flag = ruledata['remove']
