@@ -12,6 +12,7 @@
     - name: aur
       fetcher: AURFetcher
       fetch_delay: 1
+      fetch_timeout: 10
       parser: AURParser
       url: https://aur.archlinux.org/
   repolinks:
