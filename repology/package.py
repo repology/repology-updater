@@ -339,7 +339,7 @@ class Package:
 
     # getters
     def HasFlag(self, flag):
-        return self.flags & flag
+        return bool(self.flags & flag)
 
     # other helper methods
     def VersionCompare(self, other):
