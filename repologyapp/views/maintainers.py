@@ -19,11 +19,10 @@ import datetime
 
 import flask
 
+from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.feed_helpers import smear_timestamps
 from repologyapp.view_registry import ViewRegistrar
-
-from repology.config import config
 
 
 @ViewRegistrar('/maintainers/')

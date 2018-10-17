@@ -17,11 +17,10 @@
 
 import flask
 
+from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.view_registry import ViewRegistrar
-
-from repology.config import config
 
 
 @ViewRegistrar('/repository/<repo>')

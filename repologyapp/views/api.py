@@ -19,11 +19,11 @@ import json
 
 import flask
 
+from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.metapackages import MetapackagesFilterInfo, packages_to_metapackages
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.config import config
 from repology.package import VersionClass
 
 

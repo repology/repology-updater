@@ -23,13 +23,12 @@ import flask
 
 from pytz import timezone, utc
 
+from repologyapp.config import config
 from repologyapp.globals import get_text_width, repometadata
 from repologyapp.template_filters import css_for_versionclass, maintainer_to_links, maintainers_to_group_mailto, pkg_format
 from repologyapp.template_functions import endpoint_like, url_for_self
 from repologyapp.template_tests import for_page, is_fallback_maintainer
 from repologyapp.views import Registry as ViewRegistry
-
-from repology.config import config
 
 # create application and handle configuration
 app = flask.Flask(__name__)

@@ -17,11 +17,10 @@
 
 import flask
 
+from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.template_functions import url_for_self
 from repologyapp.view_registry import ViewRegistrar
-
-from repology.config import config
 
 
 def unauthorized():

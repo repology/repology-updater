@@ -17,7 +17,8 @@
 
 import flask
 
-from repology.config import config
+from repologyapp.config import config
+
 from repology.database import Database
 from repology.querymgr import QueryManager
 

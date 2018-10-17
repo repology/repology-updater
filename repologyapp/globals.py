@@ -15,10 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from repologyapp.config import config
 from repologyapp.fontmeasurer import FontMeasurer
 from repologyapp.repometadata import RepositoryMetadata
-
-from repology.config import config
 
 
 __all__ = [

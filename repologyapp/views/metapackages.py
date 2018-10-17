@@ -17,11 +17,10 @@
 
 import flask
 
+from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_range, packages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
-
-from repology.config import config
 
 
 @ViewRegistrar('/metapackages/')

@@ -24,12 +24,12 @@ import flask
 from libversion import version_compare
 
 from repologyapp.afk import AFKChecker
+from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.metapackages import packages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.config import config
 from repology.package import VersionClass
 from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByVersion
 
