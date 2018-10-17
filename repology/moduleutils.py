@@ -22,25 +22,8 @@ import os
 
 
 __all__ = [
-    'ModuleEnumerator',
     'ClassFactory',
 ]
-
-
-class ModuleEnumerator:
-    def __init__(self, pkgname, pkgfile):
-        self.modules = []
-
-        pkgdir = os.path.dirname(pkgfile)
-
-        for modfile in os.listdir(pkgdir):
-            modname = inspect.getmodulename(os.path.join(pkgdir, modfile))
-            if modname and modname != '__init__':
-                self.modules.append(importlib.import_module(pkgname + '.' + modname))
-
-    def Enumerate(self):
-        for module in self.modules:
-            yield module
 
 
 class ClassFactory:

@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,16 +15,25 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import importlib
 import inspect
+import os
 
-from repology.moduleutils import ModuleEnumerator
+
+def _enumerate_modules(pkgname, pkgfile):
+    pkgdir = os.path.dirname(pkgfile)
+
+    for modfile in os.listdir(pkgdir):
+        modname = inspect.getmodulename(os.path.join(pkgdir, modfile))
+        if modname and modname != '__init__':
+            yield importlib.import_module(pkgname + '.' + modname)
 
 
 class ViewRegistry():
     def __init__(self, pkgname, pkgfile):
         self.registrants = []
 
-        for module in ModuleEnumerator(pkgname, pkgfile).Enumerate():
+        for module in _enumerate_modules(pkgname, pkgfile):
             for name, member in inspect.getmembers(module):
                 if isinstance(member, ViewRegistrant):
                     self.registrants.append(member)
