@@ -19,9 +19,8 @@
 
 import unittest
 
+from repologyapp.config import config
 from repologyapp.fontmeasurer import FontMeasurer
-
-from repology.config import config
 
 
 @unittest.skipIf('BADGE_FONT' not in config, 'font measurer test requires BADGE_FONT configuration directive defined')
