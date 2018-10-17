@@ -17,6 +17,7 @@
 
 import re
 
+from repology.logger import Logger
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -43,29 +44,29 @@ class CPANPackagesParser(Parser):
         # are not even in 02packages.details.txt, some are unparsable
         # (no version, or garbage in version) but these are negligible.
         with open(path) as packagesfile:
-            parsing = False
+            skipping_header = True
             for line in packagesfile:
                 line = line.strip()
 
-                if not parsing:
+                if skipping_header:
                     if line == '':
-                        parsing = True
+                        skipping_header = False
                     continue
+
+                pkg = factory.begin(line)
 
                 module, version, package = re.split(r'[ \t]+', line)
 
                 package_path, package_file = package.rsplit('/', 1)
                 package_name = None
 
-                if package_file.endswith('.tar.gz'):
-                    package_name = package_file[0:-7]
-                elif package_file.endswith('.tar.bz2'):
-                    package_name = package_file[0:-8]
-                elif package_file.endswith('.zip') or package_file.endswith('.tgz'):
-                    package_name = package_file[0:-4]
+                for ext in ['.tar.gz', '.tar.bz2', '.zip', '.tgz']:
+                    if package_file.endswith(ext):
+                        package_name = package_file[0:-len(ext)]
+                        break
 
                 if package_name is None or '-' not in package_name:
-                    # Bad package name; XXX: log?
+                    pkg.log('unable to parse package name', Logger.ERROR)
                     continue
 
                 package_name, package_version = package_name.rsplit('-', 1)
@@ -73,18 +74,17 @@ class CPANPackagesParser(Parser):
                     package_version = package_version[1:]
 
                 if not re.match('[0-9]', package_version):
-                    # Bad version; XXX: log?
+                    pkg.log('skipping bad version {}'.format(package_version), Logger.ERROR)
                     continue
 
                 if module.replace('::', '-').lower() != package_name.lower():
-                    # Submodules not really needed
+                    pkg.log('skipping submodule {}'.format(module), Logger.WARNING)
                     continue
 
-                pkg = factory.begin()
-                pkg.name = package_name
-                pkg.version = package_version
+                pkg.set_name(package_name)
+                pkg.set_version(package_version)
 
-                pkg.maintainers = extract_maintainers(package_path.split('/')[2].lower() + '@cpan')
-                pkg.homepage = 'http://search.cpan.org/dist/' + package_name + '/'
+                pkg.add_maintainers(extract_maintainers(package_path.split('/')[2].lower() + '@cpan'))
+                pkg.add_homepages('http://search.cpan.org/dist/' + package_name + '/')
 
                 yield pkg

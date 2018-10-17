@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,61 +20,52 @@ import os
 from repology.logger import Logger
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.versions import VersionStripper
 
 
-def SanitizeVersion(version):
-    origversion = version
+def _parse_descfile(path):
+    data = {}
+    with open(path, 'r', encoding='utf-8') as descfile:
+        key = None
+        value = []
 
-    pos = version.rfind('-')
-    if pos != -1:
-        version = version[0:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+        for line in descfile:
+            line = line.strip()
+            if line.startswith('%') and line.endswith('%'):
+                key = line[1:-1]
+                value = []
+            elif line == '':
+                data[key] = value
+            else:
+                value.append(line)
 
 
 class MSYS2Parser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right('-')
+
         for packagedir in os.listdir(path):
-            with open(os.path.join(path, packagedir, 'desc'), 'r', encoding='utf-8') as descfile:
-                key = None
-                value = []
+            pkg = factory.begin(packagedir)
 
-                data = {}
+            data = _parse_descfile(os.path.join(path, packagedir, 'desc'))
 
-                for line in descfile:
-                    line = line.strip()
-                    if line.startswith('%') and line.endswith('%'):
-                        key = line[1:-1]
-                        value = []
-                    elif line == '':
-                        data[key] = value
-                    else:
-                        value.append(line)
+            if 'BASE' in data and data['NAME'][0] != data['BASE'][0]:
+                pkg.log('skipped, subpackage', severity=Logger.WARNING)
+                # XXX: include subpackages
+                continue
 
-                if 'BASE' in data and data['NAME'][0] != data['BASE'][0]:
-                    factory.log('{} skipped, subpackage'.format(data['NAME'][0]), severity=Logger.WARNING)
-                    continue
+            pkg.set_name(data['NAME'][0])
+            pkg.set_version(data['VERSION'][0], normalize_version)
 
-                pkg = factory.begin()
+            if 'DESC' in data:
+                pkg.set_summary(data['DESC'][0])
 
-                pkg.name = data['NAME'][0]
-                pkg.version, pkg.origversion = SanitizeVersion(data['VERSION'][0])
+            pkg.add_homepages(data.get('URL'))
 
-                if 'DESC' in data:
-                    pkg.comment = data['DESC'][0]
+            pkg.add_licenses(data.get('LICENSE'))
 
-                if 'URL' in data:
-                    pkg.homepage = data['URL'][0]
+            pkg.add_maintainers(map(extract_maintainers, data['PACKAGER']))
 
-                if 'LICENSE' in data:
-                    pkg.licenses = data['LICENSE']
+            pkg.add_categories(data.get('GROUPS'))
 
-                pkg.maintainers = sum(map(extract_maintainers, data['PACKAGER']), [])
-
-                if 'GROUPS' in data:
-                    pkg.category = data['GROUPS'][0]
-
-                yield pkg
+            yield pkg

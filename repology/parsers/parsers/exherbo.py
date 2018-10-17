@@ -23,55 +23,55 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
-def SanitizeVersion(version):
-    origversion = version
+def _normalize_version(version):
+    return re.sub('-r[0-9]+$', '', version)
 
-    version = re.sub('-r[0-9]+$', '', version)
 
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+def _iter_exheres(path):
+    for category in os.listdir(path):
+        category_path = os.path.join(path, category)
+        if not os.path.isdir(category_path):
+            continue
+        if category == 'virtual' or category == 'metadata':
+            continue
+
+        for package in os.listdir(category_path):
+            package_path = os.path.join(category_path, package)
+            if not os.path.isdir(package_path):
+                continue
+
+            for exheres in os.listdir(package_path):
+                if not exheres.startswith(package + '-') and not exheres.endswith('.exheres-0'):
+                    continue
+
+                yield category, package, exheres
+
+
+def _get_repo_maintainers(path):
+    with open(os.path.join(path, 'metadata/about.conf'), 'r', encoding='utf-8') as metadata:
+        for line in metadata:
+            if '=' in line:
+                key, value = map(lambda s: s.strip(), line.split('=', 1))
+
+                if key == 'owner':
+                    return extract_maintainers(value)
+
+    return []
 
 
 class ExherboGitParser(Parser):
     def iter_parse(self, path, factory):
-        maintainers = []
+        maintainers = _get_repo_maintainers(path)
 
-        with open(os.path.join(path, 'metadata/about.conf'), 'r', encoding='utf-8') as metadata:
-            for line in metadata:
-                if '=' in line:
-                    key, value = map(lambda s: s.strip(), line.split('=', 1))
+        for category, package, exheres in _iter_exheres(os.path.join(path, 'packages')):
+            pkg = factory.begin('/'.join((category, package, exheres)))
 
-                    if key == 'owner':
-                        maintainers = extract_maintainers(value)
+            pkg.set_name(package)
+            pkg.set_version(exheres[len(package) + 1:-10], _normalize_version)
+            pkg.add_categories(category)
+            pkg.add_maintainers(maintainers)
 
-        packages_path = os.path.join(path, 'packages')
+            if pkg.version == 'scm' or pkg.version.endswith('-scm'):
+                pkg.set_flags(PackageFlags.rolling)
 
-        for category in os.listdir(packages_path):
-            category_path = os.path.join(packages_path, category)
-            if not os.path.isdir(category_path):
-                continue
-            if category == 'virtual' or category == 'metadata':
-                continue
-
-            for package in os.listdir(category_path):
-                package_path = os.path.join(category_path, package)
-                if not os.path.isdir(package_path):
-                    continue
-
-                for exheres in os.listdir(package_path):
-                    if not exheres.startswith(package + '-') and not exheres.endswith('.exheres-0'):
-                        continue
-
-                    pkg = factory.begin()
-
-                    pkg.category = category
-                    pkg.name = package
-                    pkg.version, pkg.origversion = SanitizeVersion(exheres[len(package) + 1:-10])
-                    pkg.maintainers = maintainers
-
-                    if pkg.version == 'scm' or pkg.version.endswith('-scm'):
-                        pkg.SetFlag(PackageFlags.rolling)
-
-                    yield pkg
+            yield pkg

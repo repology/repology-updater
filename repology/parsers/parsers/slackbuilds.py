@@ -22,64 +22,74 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
+def _iter_packages(path):
+    for category in os.listdir(path):
+        if category.startswith('.'):
+            continue
+
+        category_path = os.path.join(path, category)
+        if not os.path.isdir(category_path):
+            continue
+
+        for package in os.listdir(category_path):
+            package_path = os.path.join(category_path, package)
+            if not os.path.isdir(package_path):
+                continue
+
+            yield category, package
+
+
+def _parse_infofile(path):
+    variables = {}
+
+    with open(path, encoding='utf-8', errors='ignore') as infofile:
+        key = None
+        total_value = []
+
+        for line in infofile:
+            line = line.strip()
+            if not line:
+                continue
+
+            value = None
+            if key:  # continued
+                value = line
+            else:  # new variable
+                key, value = line.split('=', 1)
+                value = value.lstrip('"').lstrip()
+
+            if value.endswith('\\'):  # will continue
+                total_value.append(value.rstrip('\\').rstrip())
+            elif not value or value.endswith('"'):
+                total_value.append(value.rstrip('"').rstrip())
+                variables[key] = ' '.join(total_value)
+                key = None
+                total_value = []
+
+    return variables
+
+
 class SlackBuildsParser(Parser):
     def iter_parse(self, path, factory):
-        for category in os.listdir(path):
-            if category.startswith('.'):
+        for category, pkgname in _iter_packages(path):
+            pkg = factory.begin(category + '/' + pkgname)
+
+            info_path = os.path.join(path, category, pkgname, pkgname + '.info')
+            if not os.path.isfile(info_path):
+                pkg.log('.info file does not exist', severity=Logger.ERROR)
                 continue
 
-            category_path = os.path.join(path, category)
-            if not os.path.isdir(category_path):
-                continue
+            pkg.add_categories(category)
 
-            for package in os.listdir(category_path):
-                package_path = os.path.join(category_path, package)
-                if not os.path.isdir(package_path):
-                    continue
+            variables = _parse_infofile(info_path)
 
-                info_path = os.path.join(category_path, package, package + '.info')
-                if not os.path.isfile(info_path):
-                    factory.log('{} does not exist, package skipped'.format(info_path), severity=Logger.ERROR)
-                    continue
+            pkg.set_name(variables['PRGNAM'])
+            pkg.set_version(variables['VERSION'])
+            pkg.add_homepages(variables['HOMEPAGE'])
+            pkg.add_maintainers(extract_maintainers(variables['EMAIL']))
 
-                with open(info_path, encoding='utf-8', errors='ignore') as infofile:
-                    variables = {}
+            for key in ['DOWNLOAD', 'DOWNLOAD_x86_64']:
+                if variables[key] not in ['', 'UNSUPPORTED', 'UNTESTED']:
+                    pkg.add_downloads(variables[key].split())
 
-                    key = None
-                    total_value = []
-
-                    for line in infofile:
-                        line = line.strip()
-                        if not line:
-                            continue
-
-                        value = None
-                        if key:  # continued
-                            value = line
-                        else:  # new variable
-                            key, value = line.split('=', 1)
-                            value = value.lstrip('"').lstrip()
-
-                        if value.endswith('\\'):  # will continue
-                            total_value.append(value.rstrip('\\').rstrip())
-                        elif not value or value.endswith('"'):
-                            total_value.append(value.rstrip('"').rstrip())
-                            variables[key] = ' '.join(total_value)
-                            key = None
-                            total_value = []
-
-                    pkg = factory.begin()
-                    pkg.category = category
-
-                    pkg.name = variables['PRGNAM']
-                    pkg.version = variables['VERSION']
-                    pkg.homepage = variables['HOMEPAGE']
-                    pkg.maintainers = extract_maintainers(variables['EMAIL'])
-                    for key in ['DOWNLOAD', 'DOWNLOAD_x86_64']:
-                        if variables[key] not in ['', 'UNSUPPORTED', 'UNTESTED']:
-                            pkg.downloads.extend(variables[key].split())
-
-                    if pkg.name is not None and pkg.version is not None:
-                        yield pkg
-                    else:
-                        factory.log('{} skipped, likely due to parsing problems'.format(info_path), severity=Logger.ERROR)
+            yield pkg

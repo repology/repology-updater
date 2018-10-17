@@ -80,9 +80,9 @@ class OpenIndianaSummaryJsonParser(Parser):
                 pkg.set_summary(variables['pkg.summary'][0])
 
             if 'info.classification' in variables:
-                category = variables['info.classification'][0]
-                if category.startswith('org.opensolaris.category.2008:'):
-                    pkg.add_categories(category.split(':', 1)[1])
+                for category in variables['info.classification']:
+                    if category.startswith('org.opensolaris.category.2008:'):
+                        pkg.add_categories(category.split(':', 1)[1])
 
             if 'info.upstream-url' in variables:
                 pkg.add_homepages(variables['info.upstream-url'])

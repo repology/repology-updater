@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -22,17 +22,12 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
-def SanitizeVersion(version):
-    origversion = version
-
+def normalize_version(version):
     match = re.match('(.*)-r[0-9]+$', version)
     if match is not None:
         version = match.group(1)
 
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+    return version
 
 
 class ApkIndexParser(Parser):
@@ -49,15 +44,14 @@ class ApkIndexParser(Parser):
                 if state and state['P'] == state['o']:
                     pkg = factory.begin()
 
-                    pkg.name = state['P']
-                    pkg.version, pkg.origversion = SanitizeVersion(state['V'])
+                    pkg.set_name(state['P'])
+                    pkg.set_version(state['V'], normalize_version)
 
-                    pkg.comment = state['T']
-                    pkg.homepage = state['U']  # XXX: switch to homepages, split
-                    pkg.licenses = [state['L']]
+                    pkg.set_summary(state['T'])
+                    pkg.add_homepages(state['U'])  # XXX: split?
+                    pkg.add_licenses(state['L'])
 
-                    if 'm' in state:
-                        pkg.maintainers = extract_maintainers(state['m'])
+                    pkg.add_maintainers(extract_maintainers(state.get('m')))
 
                     yield pkg
 
