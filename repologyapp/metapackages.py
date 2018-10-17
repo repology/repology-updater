@@ -19,8 +19,10 @@ from collections import defaultdict
 
 import flask
 
+from repologyapp.version import UserVisibleVersionInfo
+
 from repology.database import MetapackageRequest
-from repology.package import UserVisibleVersionInfo, VersionClass
+from repology.package import VersionClass
 
 
 class MetapackagesFilterInfo:
@@ -163,7 +165,7 @@ def packages_to_summary_items(packages, repo=None, maintainer=None):
     for package in packages:
         target = None
 
-        versioninfo = package.get_user_visible_version()
+        versioninfo = UserVisibleVersionInfo(package)
 
         if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
             target = summaries[package.effname]['explicit']
@@ -178,18 +180,11 @@ def packages_to_summary_items(packages, repo=None, maintainer=None):
         target[versioninfo].add(package.family)
 
     # pass 2: count families and convert to final format:
-    # dict by metapackage name -> dict by summary type (e.g. table columns) -> list of versioninfos (with filled numfamilies)
+    # dict by metapackage name -> dict by summary type (e.g. table columns) -> list of versioninfos (with filled spread)
     for summary in summaries.values():
         for sumtype in sumtypes:
             summary[sumtype] = sorted([
-                UserVisibleVersionInfo(
-                    versioninfo.version,
-                    versioninfo.versionclass,
-                    versioninfo.metaorder,
-                    versioninfo.versionflags,
-                    len(families)
-                )
-                for versioninfo, families in summary[sumtype].items()
+                versioninfo.as_with_spread(len(families)) for versioninfo, families in summary[sumtype].items()
             ], reverse=True)
 
     return summaries

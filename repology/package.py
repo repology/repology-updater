@@ -17,7 +17,6 @@
 
 
 import re
-from functools import total_ordering
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
@@ -58,58 +57,6 @@ class VersionClass:
             VersionClass.noscheme: 'noscheme',
             VersionClass.rolling: 'rolling',
         }[cl]
-
-
-@total_ordering
-class UserVisibleVersionInfo:
-    __slots__ = ['version', 'versionclass', 'metaorder', 'versionflags', 'numfamilies']
-
-    def __init__(self, version, versionclass, metaorder=0, versionflags=0, numfamilies=1):
-        self.version = version
-        self.versionclass = versionclass
-        self.metaorder = metaorder
-        self.versionflags = versionflags
-        self.numfamilies = numfamilies
-
-    def __eq__(self, other):
-        return (self.metaorder == other.metaorder and
-                self.versionclass == other.versionclass and
-                self.version == other.version and
-                version_compare(self.version, other.version, self.versionflags, other.versionflags) == 0 and
-                self.numfamilies == other.numfamilies)
-
-    def __lt__(self, other):
-        if self.metaorder < other.metaorder:
-            return True
-        if self.metaorder > other.metaorder:
-            return False
-
-        res = version_compare(
-            self.version,
-            other.version,
-            self.versionflags,
-            other.versionflags
-        )
-
-        if res < 0:
-            return True
-        if res > 0:
-            return False
-
-        if self.versionclass < other.versionclass:
-            return True
-        if self.versionclass > other.versionclass:
-            return False
-
-        if self.numfamilies < other.numfamilies:
-            return True
-        if self.numfamilies > other.numfamilies:
-            return False
-
-        return self.version < other.version
-
-    def __hash__(self):
-        return hash((self.metaorder, self.versionclass, self.version, self.numfamilies, self.versionflags))
 
 
 class PackageFlags:
@@ -358,15 +305,6 @@ class Package:
             ((self.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH),
             ((other.flags & PackageFlags.p_is_patch) and P_IS_PATCH) |
             ((other.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH)
-        )
-
-    def get_user_visible_version(self):
-        return UserVisibleVersionInfo(
-            self.version,
-            self.versionclass,
-            PackageFlags.GetMetaorder(self.flags),
-            ((self.flags & PackageFlags.p_is_patch) and P_IS_PATCH) |
-            ((self.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH)
         )
 
     @property
