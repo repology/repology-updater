@@ -261,17 +261,6 @@ def PackagesetSortByVersion(packages):
     return sorted(packages, key=cmp_to_key(compare))
 
 
-def PackagesetSortByNameVersion(packages):
-    def compare(p1, p2):
-        if p1.name < p2.name:
-            return -1
-        if p1.name > p2.name:
-            return 1
-        return p2.VersionCompare(p1)
-
-    return sorted(packages, key=cmp_to_key(compare))
-
-
 def PackagesetAggregateByVersion(packages, classmap={}):
     def CreateVersionAggregation(packages):
         aggregated = defaultdict(list)

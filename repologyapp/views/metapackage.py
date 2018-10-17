@@ -31,7 +31,7 @@ from repologyapp.view_registry import ViewRegistrar
 
 from repology.config import config
 from repology.package import VersionClass
-from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByNameVersion, PackagesetSortByVersion
+from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByVersion
 
 
 @ViewRegistrar('/metapackage/<name>/versions')
@@ -59,10 +59,20 @@ def metapackage_packages(name):
     for package in get_db().get_metapackage_packages(name):
         packages_by_repo[package.repo].append(package)
 
+    def _packageset_sort_by_name_version(packages):
+        def compare(p1, p2):
+            if p1.name < p2.name:
+                return -1
+            if p1.name > p2.name:
+                return 1
+            return p2.VersionCompare(p1)
+
+        return sorted(packages, key=cmp_to_key(compare))
+
     packages = []
     for repo in repometadata.active_names():
         if repo in packages_by_repo:
-            packages.extend(PackagesetSortByNameVersion(packages_by_repo[repo]))
+            packages.extend(_packageset_sort_by_name_version(packages_by_repo[repo]))
 
     return flask.render_template(
         'metapackage-packages.html',
