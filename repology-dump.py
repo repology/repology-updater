@@ -23,7 +23,7 @@ import os
 from repology.config import config
 from repology.logger import FileLogger, StderrLogger
 from repology.package import Package, VersionClass
-from repology.packageproc import FillPackagesetVersions, PackagesetToBestByRepo
+from repology.packageproc import FillPackagesetVersions
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
@@ -43,7 +43,6 @@ def parse_arguments():
     parser.add_argument('-L', '--logfile', help='path to log file (log to stderr by default)')
     parser.add_argument('-E', '--repos-dir', default=config['REPOS_DIR'], help='path directory with reposotory configs')
 
-    parser.add_argument('-D', '--dump', choices=['packages', 'summaries'], default='packages', help='dump mode')
     parser.add_argument('-f', '--fields', default='repo,effname,version', help='fields to list for the package')
     parser.add_argument('-s', '--field-separator', default=' ', help='field separator')
 
@@ -84,25 +83,14 @@ def main():
         if not options.all and packageset_is_shadow_only(packageset):
             continue
 
-        if options.dump == 'packages':
-            for package in packageset:
-                print(
-                    options.field_separator.join(
-                        (
-                            format_package_field(field, getattr(package, field)) for field in options.fields
-                        )
+        for package in packageset:
+            print(
+                options.field_separator.join(
+                    (
+                        format_package_field(field, getattr(package, field)) for field in options.fields
                     )
                 )
-        if options.dump == 'summaries':
-            print(packageset[0].effname)
-            best_pkg_by_repo = PackagesetToBestByRepo(packageset)
-            for reponame in repomgr.GetNames(options.reponames):
-                if reponame in best_pkg_by_repo:
-                    print('  {}: {} ({})'.format(
-                        reponame,
-                        best_pkg_by_repo[reponame].version,
-                        VersionClass.ToString(best_pkg_by_repo[reponame].versionclass)
-                    ))
+            )
 
     return 0
 

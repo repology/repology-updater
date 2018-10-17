@@ -244,16 +244,6 @@ def FillPackagesetVersions(packages):
                     first_package_in_branch_per_flavor[flavor] = package
 
 
-def PackagesetToBestByRepo(packages):
-    state_by_repo = {}
-
-    for package in PackagesetSortByVersion(packages):
-        if package.repo not in state_by_repo or (VersionClass.IsIgnored(state_by_repo[package.repo].versionclass) and not VersionClass.IsIgnored(package.versionclass)):
-            state_by_repo[package.repo] = package
-
-    return state_by_repo
-
-
 def PackagesetSortByVersion(packages):
     def compare(p1, p2):
         return p2.VersionCompare(p1)
