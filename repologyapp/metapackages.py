@@ -20,8 +20,8 @@ from collections import defaultdict
 import flask
 
 from repologyapp.version import UserVisibleVersionInfo
+from repologyapp.metapackage_request import MetapackageRequest
 
-from repology.database import MetapackageRequest
 from repology.package import VersionClass
 
 
