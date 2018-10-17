@@ -82,8 +82,8 @@ class DebianSourcesParser(Parser):
 
                     pkg.set_name(get_field('Package'))
                     pkg.set_version(get_field('Version'), normalize_version)
-                    pkg.add_maintainers(extract_maintainers(get_field('Maintainer', default='')))
-                    pkg.add_maintainers(extract_maintainers(get_field('Uploaders', default='')))
+                    pkg.add_maintainers(extract_maintainers(get_field('Maintainer')))
+                    pkg.add_maintainers(extract_maintainers(get_field('Uploaders')))
                     pkg.add_categories(get_field('Section'))
                     pkg.add_homepages(get_field('Homepage'))
 
