@@ -259,37 +259,3 @@ def PackagesetSortByVersion(packages):
         return p2.VersionCompare(p1)
 
     return sorted(packages, key=cmp_to_key(compare))
-
-
-def PackagesetAggregateByVersion(packages, classmap={}):
-    def CreateVersionAggregation(packages):
-        aggregated = defaultdict(list)
-
-        for package in packages:
-            aggregated[
-                (package.version, classmap.get(package.versionclass, package.versionclass))
-            ].append(package)
-
-        for (version, versionclass), packages in sorted(aggregated.items()):
-            yield {
-                'version': version,
-                'versionclass': versionclass,
-                'numfamilies': len(set([package.family for package in packages]))
-            }
-
-    def PostSortSameVersion(versions):
-        return sorted(versions, key=lambda v: (v['numfamilies'], v['version'], v['versionclass']), reverse=True)
-
-    def AggregateByVersion(packages):
-        current = []
-        for package in PackagesetSortByVersion(packages):
-            if not current or current[0].VersionCompare(package) == 0:
-                current.append(package)
-            else:
-                yield PostSortSameVersion(CreateVersionAggregation(current))
-                current = [package]
-
-        if current:
-            yield PostSortSameVersion(CreateVersionAggregation(current))
-
-    return sum(AggregateByVersion(packages), [])

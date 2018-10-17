@@ -28,10 +28,10 @@ from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.metapackages import packages_to_summary_items
+from repologyapp.packageproc import packageset_aggregate_by_version, packageset_sort_by_name_version, packageset_sort_by_version
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.package import VersionClass
-from repology.packageproc import PackagesetAggregateByVersion, PackagesetSortByVersion
 
 
 @ViewRegistrar('/metapackage/<name>/versions')
@@ -41,7 +41,7 @@ def metapackage_versions(name):
         packages_by_repo[package.repo].append(package)
 
     for repo, packages in packages_by_repo.items():
-        packages_by_repo[repo] = PackagesetSortByVersion(packages)
+        packages_by_repo[repo] = packageset_sort_by_version(packages)
 
     return flask.render_template(
         'metapackage-versions.html',
@@ -59,20 +59,10 @@ def metapackage_packages(name):
     for package in get_db().get_metapackage_packages(name):
         packages_by_repo[package.repo].append(package)
 
-    def _packageset_sort_by_name_version(packages):
-        def compare(p1, p2):
-            if p1.name < p2.name:
-                return -1
-            if p1.name > p2.name:
-                return 1
-            return p2.VersionCompare(p1)
-
-        return sorted(packages, key=cmp_to_key(compare))
-
     packages = []
     for repo in repometadata.active_names():
         if repo in packages_by_repo:
-            packages.extend(_packageset_sort_by_name_version(packages_by_repo[repo]))
+            packages.extend(packageset_sort_by_name_version(packages_by_repo[repo]))
 
     return flask.render_template(
         'metapackage-packages.html',
@@ -124,7 +114,7 @@ def metapackage_information(name):
             for reponame in repometadata.active_names() if reponame in information['repos']
         ]
 
-    versions = PackagesetAggregateByVersion(packages, {VersionClass.legacy: VersionClass.outdated})
+    versions = packageset_aggregate_by_version(packages, {VersionClass.legacy: VersionClass.outdated})
 
     return flask.render_template(
         'metapackage-information.html',

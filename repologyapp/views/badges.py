@@ -23,16 +23,16 @@ from libversion import version_compare
 
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
+from repologyapp.packageproc import packageset_to_best_by_repo
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.package import VersionClass
-from repology.packageproc import PackagesetToBestByRepo
 
 
 @ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name):
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
-    best_pkg_by_repo = PackagesetToBestByRepo(packages)
+    best_pkg_by_repo = packageset_to_best_by_repo(packages)
 
     header = flask.request.args.to_dict().get('header', 'Packaging status')
     minversion = flask.request.args.to_dict().get('minversion')
@@ -78,7 +78,7 @@ def badge_version_for_repo(repo, name):
         flask.abort(404)
 
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
-    best_pkg_by_repo = PackagesetToBestByRepo(packages)
+    best_pkg_by_repo = packageset_to_best_by_repo(packages)
 
     if repo not in best_pkg_by_repo:
         # XXX: display this as normal "pill" badge with correct repository name
@@ -111,7 +111,7 @@ def badge_version_only_for_repo(repo, name):
         flask.abort(404)
 
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
-    best_pkg_by_repo = PackagesetToBestByRepo(packages)
+    best_pkg_by_repo = packageset_to_best_by_repo(packages)
 
     if repo not in best_pkg_by_repo:
         return (
