@@ -19,6 +19,9 @@ import re
 
 
 def extract_maintainers(input_):
+    if not input_:
+        return []
+
     def looks_like_email(s):
         return re.fullmatch('[^<> \t]+@[^<> \t]+', s)
 
