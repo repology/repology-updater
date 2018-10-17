@@ -17,7 +17,6 @@
 
 import os
 
-from repology.logger import Logger
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
@@ -81,7 +80,4 @@ class ArchDBParser(Parser):
                     elif line.startswith('%') and line.endswith('%'):
                         tag = line[1:-1]
 
-                if pkg.name is not None and pkg.version is not None:
-                    yield pkg
-                else:
-                    factory.log('{} skipped, likely due to parsing problems'.format(package), severity=Logger.ERROR)
+                yield pkg
