@@ -17,7 +17,7 @@
 			<h2>Package names</h2>
 			<ul>
 			{% for name,families in information.names|dictsort(case_sensitive=True) %}
-				<li>{{ name }} <b>({{ families|length }})</b></li>
+				<li>{{ name }}{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 		</section>
@@ -26,9 +26,7 @@
 			<h2>Versions</h2>
 			<ul class="list-sparse">
 			{% for versioninfo in versions %}
-				<li>
-					<span class="version version-big version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span> <b>({{ versioninfo.numfamilies }})</b>
-				</li>
+				<li><span class="version version-big version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span>{% if versioninfo.numfamilies > 1 %} <b>({{ versioninfo.numfamilies }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 		</section>
@@ -47,7 +45,7 @@
 			<h2>Categories</h2>
 			<ul>
 			{% for category,families in information.categories|dictsort(case_sensitive=True) %}
-				<li>{{ category }} <b>({{ families|length }})</b></li>
+				<li>{{ category }}{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 		</section>
@@ -58,7 +56,7 @@
 			<h2>Licenses</h2>
 			<ul>
 			{% for license,families in information.licenses|dictsort(case_sensitive=True) %}
-				<li>{{ license }} <b>({{ families|length }})</b></li>
+				<li>{{ license }}{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 		</section>
@@ -71,7 +69,7 @@
 			<h2>Summaries</h2>
 			<ul>
 			{% for summary,families in information.summaries|dictsort(case_sensitive=True) %}
-				<li>{{ summary }} <b>({{ families|length }})</b></li>
+				<li>{{ summary }}{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 		</section>
@@ -82,15 +80,13 @@
 			<h2>Maintainers</h2>
 			<ul>
 			{% for maintainer,families in information.maintainers|dictsort(case_sensitive=True) %}
-				<li><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a> <b>({{ families|length }})</b></li>
+				<li><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a>{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 
 			{% if information.maintainers|maintainers_to_group_mailto %}
 			<ul>
-				<li>
-					<a href="{{ information.maintainers|maintainers_to_group_mailto('%5Brepology%5D%20' + name + '%20package') }}">Group email</a>
-				</li>
+				<li><a href="{{ information.maintainers|maintainers_to_group_mailto('%5Brepology%5D%20' + name + '%20package') }}">Group email</a></li>
 			</ul>
 			{% endif %}
 		</section>
@@ -101,7 +97,7 @@
 			<h2>Homepages</h2>
 			<ul>
 			{% for homepage,families in information.homepages|dictsort(case_sensitive=True) %}
-				<li><a href="{{ homepage }}">{{ homepage }}</a>{{ macros.link_status(homepage, link_statuses) }} <b>({{ families|length }})</b></li>
+				<li><a href="{{ homepage }}">{{ homepage }}</a>{{ macros.link_status(homepage, link_statuses) }}{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 		</section>
@@ -112,7 +108,7 @@
 			<h2>Downloads</h2>
 			<ul>
 			{% for download,families in information.downloads|dictsort(case_sensitive=True) %}
-				<li class="break-word"><a href="{{ download }}">{{ download }}</a>{{ macros.link_status(download, link_statuses) }} <b>({{ families|length }})</b></li>
+				<li class="break-word"><a href="{{ download }}">{{ download }}</a>{{ macros.link_status(download, link_statuses) }}{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 		</section>
