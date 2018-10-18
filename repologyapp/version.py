@@ -81,4 +81,4 @@ class UserVisibleVersionInfo:
         return self.version < other.version
 
     def __hash__(self):
-        return hash((self.metaorder, self.versionclass, self.version, self.spread, self.versionflags))
+        return hash((self.metaorder, self.versionclass, self.version, self.spread))
