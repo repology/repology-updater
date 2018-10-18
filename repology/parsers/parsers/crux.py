@@ -22,27 +22,6 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 
 
-def SanitizeVersion(version):
-    origversion = version
-
-    pos = version.find('-')
-    if pos != -1:
-        version = version[:pos]
-
-    pos = version.find(':')
-    if pos != -1:
-        version = version[pos + 1:]
-
-    pos = version.find('+')
-    if pos != -1:
-        version = version[:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
-
-
 class CRUXParser(Parser):
     def iter_parse(self, path, factory):
         for pkgdir in os.listdir(path):
@@ -53,40 +32,36 @@ class CRUXParser(Parser):
             with open(pkgpath, 'r', encoding='utf-8', errors='ignore') as pkgfile:
                 pkg = factory.begin()
 
+                pkg.set_origin(pkgdir)
+
                 for line in pkgfile:
                     line = line.strip()
                     if line.startswith('# Description:'):
-                        if not pkg.comment:
-                            pkg.comment = line[14:].strip()
-                        else:
-                            factory.log('duplicate Description for {}'.format(pkgdir), severity=Logger.ERROR)
+                        pkg.set_summary(line.split(':', 1)[1])
 
                     if line.startswith('# URL:'):
-                        if not pkg.homepage:
-                            pkg.homepage = line[6:].strip()
-                        else:
-                            factory.log('duplicate URL for {}'.format(pkgdir), severity=Logger.ERROR)
+                        pkg.add_homepages(line.split(':', 1)[1])
 
                     if line.startswith('# Maintainer:'):
-                        maintainer = line[13:].strip()
+                        maintainer = line.split(':', 1)[1].strip()
                         if ',' in maintainer:
-                            _, email = line[13:].strip().split(',', 1)
-                            pkg.maintainers += extract_maintainers(email)
+                            _, email = maintainer.split(',', 1)
+                            pkg.add_maintainers(extract_maintainers(email))
                         else:
-                            factory.log('unexpected Maintainer format for {}'.format(pkgdir), severity=Logger.ERROR)
+                            pkg.log('unexpected Maintainer format "{}"'.format(maintainer), severity=Logger.ERROR)
 
                     if line.startswith('name=') and not pkg.name:
-                        pkg.name = line[5:]
+                        pkg.set_name(line.split('=', 1)[1])
 
                     if line.startswith('version=') and not pkg.version:
-                        pkg.version = line[8:]
+                        pkg.set_version(line.split('=', 1)[1])
 
-                if not pkg.name or not pkg.version:
-                    factory.log('unable to parse port form {}: no name or version'.format(pkgdir), severity=Logger.ERROR)
+                if pkg.name and '$' in pkg.name:
+                    pkg.log('name contains variables, unable to parse: {}'.format(pkg.name), severity=Logger.ERROR)
                     continue
 
-                if '$' in pkg.name or '$' in pkg.version:
-                    factory.log('unable to parse port form {}: name or version contain variables'.format(pkgdir), severity=Logger.ERROR)
+                if pkg.version and '$' in pkg.version:
+                    pkg.log('version contains variables, unable to parse: {}'.format(pkg.version), severity=Logger.ERROR)
                     continue
 
                 yield pkg

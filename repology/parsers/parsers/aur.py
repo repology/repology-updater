@@ -20,31 +20,13 @@ import os
 
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-
-
-def SanitizeVersion(version):
-    origversion = version
-
-    pos = version.find('-')
-    if pos != -1:
-        version = version[:pos]
-
-    pos = version.find(':')
-    if pos != -1:
-        version = version[pos + 1:]
-
-    pos = version.find('+')
-    if pos != -1:
-        version = version[:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+from repology.parsers.versions import VersionStripper
 
 
 class AURParser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right_greedy('-').strip_left(':').strip_right_greedy('+')
+
         for filename in os.listdir(path):
             if not filename.endswith('.json'):
                 continue
@@ -53,20 +35,17 @@ class AURParser(Parser):
                 for result in json.load(jsonfile)['results']:
                     pkg = factory.begin()
 
-                    pkg.name = result['Name']
+                    pkg.set_name(result['Name'])
 
-                    pkg.version, pkg.origversion = SanitizeVersion(result['Version'])
-                    pkg.comment = result['Description']
-                    pkg.homepage = result['URL']
-
-                    if 'License' in result:
-                        for license_ in result['License']:
-                            pkg.licenses.append(license_)
+                    pkg.set_version(result['Version'], normalize_version)
+                    pkg.set_summary(result['Description'])
+                    pkg.add_homepages(result['URL'])
+                    pkg.add_licenses(result.get('License'))
 
                     if 'Maintainer' in result and result['Maintainer']:
-                        pkg.maintainers += extract_maintainers(result['Maintainer'] + '@aur')
+                        pkg.add_maintainers(extract_maintainers(result['Maintainer'] + '@aur'))
 
                     if 'PackageBase' in result and result['PackageBase']:
-                        pkg.effname = result['PackageBase']
+                        pkg.set_effname(result['PackageBase'])
 
                     yield pkg

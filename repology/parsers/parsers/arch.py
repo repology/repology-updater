@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -19,38 +19,22 @@ import os
 
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-
-
-def SanitizeVersion(version):
-    origversion = version
-
-    pos = version.find('-')
-    if pos != -1:
-        version = version[:pos]
-
-    pos = version.find(':')
-    if pos != -1:
-        version = version[pos + 1:]
-
-    pos = version.find('+')
-    if pos != -1:
-        version = version[:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+from repology.parsers.versions import VersionStripper
 
 
 class ArchDBParser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right_greedy('-').strip_left(':').strip_right_greedy('+')
+
         for package in os.listdir(path):
             desc_path = os.path.join(path, package, 'desc')
             if not os.path.isfile(desc_path):
                 continue
 
             with open(desc_path, encoding='utf-8') as file:
-                pkg = factory.begin()
+                pkg = factory.begin(package)
+
+                comment = None
 
                 tag = None
                 for line in file:
@@ -59,25 +43,27 @@ class ArchDBParser(Parser):
                     if line == '':
                         tag = None
                     elif tag == 'NAME':
-                        pkg.name = line
+                        pkg.set_name(line)
                     elif tag == 'VERSION':
-                        pkg.version, pkg.origversion = SanitizeVersion(line)
+                        pkg.set_version(line, normalize_version)
                     elif tag == 'DESC':
-                        if pkg.comment is None:
-                            pkg.comment = ''
-                        if pkg.comment != '':
-                            pkg.comment += '\n'
-                        pkg.comment += line
+                        if comment is None:
+                            comment = ''
+                        if comment != '':
+                            comment += '\n'
+                        comment += line
                     elif tag == 'URL':
-                        pkg.homepage = line
+                        pkg.add_homepages(line)
                     elif tag == 'LICENSE':
-                        pkg.licenses.append(line)
+                        pkg.add_licenses(line)
                     elif tag == 'PACKAGER':
-                        pkg.maintainers += extract_maintainers(line)
+                        pkg.add_maintainers(extract_maintainers(line))
                     elif tag == 'BASE':
-                        pkg.extrafields['base'] = line
-                        pkg.effname = line
+                        pkg.set_extra_field('base', line)
+                        pkg.set_effname(line)
                     elif line.startswith('%') and line.endswith('%'):
                         tag = line[1:-1]
+
+                pkg.set_summary(comment)
 
                 yield pkg

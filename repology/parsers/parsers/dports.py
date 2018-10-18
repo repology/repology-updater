@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -18,49 +18,31 @@
 from repology.logger import Logger
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-
-
-def SanitizeVersion(version):
-    origversion = version
-
-    pos = version.rfind(',')
-    if pos != -1:
-        version = version[0:pos]
-
-    pos = version.rfind('_')
-
-    if pos != -1:
-        version = version[0:pos]
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+from repology.parsers.versions import VersionStripper
 
 
 class DPortsIndexParser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right(',').strip_right('_')
+
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
-                fields = line.strip().split('|')
-                if len(fields) != 13:
-                    factory.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
-                    continue
-
                 pkg = factory.begin()
 
-                pkg.name, version = fields[0].rsplit('-', 1)
-                pkg.version, pkg.origversion = SanitizeVersion(version)
-                pkg.comment = fields[3]
-                pkg.maintainers = extract_maintainers(fields[5])
-                pkg.category = fields[6].split(' ')[0]
+                fields = line.strip().split('|')
+                if len(fields) != 13:
+                    pkg.log('skipping, unexpected number of fields {}'.format(len(fields)), severity=Logger.ERROR)
+                    continue
 
-                if fields[12]:
-                    pkg.homepage = fields[12]
+                pkg.set_name_and_version(fields[0], normalize_version)
+                pkg.set_summary(fields[3])
+                pkg.add_maintainers(extract_maintainers(fields[5]))
+                pkg.add_categories(fields[6].split())
+                pkg.add_homepages(fields[12])
 
                 path = fields[1].split('/')
 
-                pkg.extrafields['portname'] = path[-1]
-                pkg.extrafields['origin'] = '/'.join(path[-2:])
+                pkg.set_extra_field('portname', path[-1])
+                pkg.set_origin('/'.join(path[-2:]))
 
                 yield pkg

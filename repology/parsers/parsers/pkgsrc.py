@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,53 +15,39 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
-
 from repology.logger import Logger
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-
-
-def SanitizeVersion(version):
-    origversion = version
-
-    match = re.match('(.*)nb[0-9]+$', version)
-    if match is not None:
-        version = match.group(1)
-
-    if version != origversion:
-        return version, origversion
-    else:
-        return version, None
+from repology.parsers.versions import VersionStripper
 
 
 class PkgsrcIndexParser(Parser):
     def iter_parse(self, path, factory):
+        normalize_version = VersionStripper().strip_right('nb')
+
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
-                fields = line.strip().split('|')
-                if len(fields) != 12:
-                    factory.log('package {} skipped, incorrect number of fields in INDEX'.format(fields[0]), severity=Logger.ERROR)
-                    continue
-                if not fields[0]:
-                    factory.log('line {} bogus, critical fields are empty'.format(line.strip()), severity=Logger.ERROR)
-                    continue
-
                 pkg = factory.begin()
 
-                pkg.name, version = fields[0].rsplit('-', 1)
-                pkg.version, pkg.origversion = SanitizeVersion(version)
-                pkg.comment = fields[3]
-                if fields[11]:
-                    pkg.homepage = fields[11]
+                fields = line.strip().split('|')
+                if len(fields) != 12:
+                    pkg.log('skipping, unexpected number of fields {}'.format(len(fields)), severity=Logger.ERROR)
+                    continue
+                if not fields[0]:
+                    pkg.log('skipping, empty first field', severity=Logger.ERROR)
+                    continue
+
+                pkg.set_name_and_version(fields[0], normalize_version)
+                pkg.set_summary(fields[3])
 
                 # sometimes OWNER variable is used in which case
                 # there's no MAINTAINER OWNER doesn't get to INDEX
-                pkg.maintainers = extract_maintainers(fields[5])
+                pkg.add_maintainers(extract_maintainers(fields[5]))
 
-                pkg.category = fields[6].split(' ')[0]
+                pkg.add_categories(fields[6].split())
+                pkg.add_homepages(fields[11])
 
-                pkg.extrafields['portname'] = fields[1].split('/')[-1]
-                pkg.extrafields['origin'] = fields[1]
+                pkg.set_extra_field('portname', fields[1].split('/')[-1])
+                pkg.set_origin(fields[1])
 
                 yield pkg

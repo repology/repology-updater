@@ -26,13 +26,9 @@ class HomebrewJsonParser(Parser):
             for package in json.load(jsonfile):
                 pkg = factory.begin()
 
-                pkg.name = package['name']
-                atpos = pkg.name.find('@')
-                if atpos != -1:
-                    pkg.name = pkg.name[:atpos]
-                pkg.version = package['versions']['stable']
-                pkg.comment = package['desc']
-                pkg.homepage = package['homepage']
+                pkg.set_name(package['name'].split('@', 1)[0])
+                pkg.set_version(package['versions']['stable'])
+                pkg.set_summary(package['desc'])
+                pkg.add_homepages(package['homepage'])
 
-                if pkg.name and pkg.version:
-                    yield pkg
+                yield pkg

@@ -25,7 +25,7 @@ from repology.package import PackageFlags
 from repology.parsers import Parser
 
 
-def ensure_str(v):
+def _as_str(v):
     if v is None:
         return None
     if isinstance(v, list):
@@ -34,7 +34,7 @@ def ensure_str(v):
     return str(v)
 
 
-def ensure_list(v):
+def _as_list(v):
     if v is None:
         return []
     if not isinstance(v, list):
@@ -42,72 +42,62 @@ def ensure_list(v):
     return v
 
 
-class MetacpanAPIParser(Parser):
-    @staticmethod
-    def parse_package(fields, factory):
-        pkg = factory.begin()
+def _iter_packages(path):
+    for filename in os.listdir(path):
+        if not filename.endswith('.json'):
+            continue
 
-        pkg.name = ensure_str(fields['distribution'])
-        pkg.version = ensure_str(fields['version'])
-        pkg.maintainers = [ensure_str(fields['author']).lower() + '@cpan']
-        pkg.licenses = ensure_list(fields['license'])
-        pkg.comment = ensure_str(fields.get('abstract'))
-        pkg.homepage = ensure_str(fields.get('resources.homepage'))
-        pkg.downloads = ensure_list(fields.get('download_url'))
+        with open(os.path.join(path, filename), 'r') as jsonfile:
+            yield from (hit['fields'] for hit in json.load(jsonfile))
 
-        return pkg
 
-    @staticmethod
-    def parse_latest_packages(hits, latest_versions, factory):
-        for hit in hits:
-            fields = hit['fields']
+def _parse_package(pkg, fields):
+    pkg.set_name(_as_str(fields['distribution']))
+    pkg.set_version(_as_str(fields['version']))
+    pkg.add_maintainers(_as_str(fields['author']).lower() + '@cpan')
+    pkg.add_licenses(_as_list(fields['license']))
+    pkg.set_summary(_as_str(fields.get('abstract')))
+    pkg.add_homepages(_as_str(fields.get('resources.homepage')))
+    pkg.add_downloads(_as_list(fields.get('download_url')))
 
-            # only take latest versions (there's only one of them per distribution)
-            if ensure_str(fields['status']) != 'latest':
-                continue
+    return pkg
 
-            pkg = MetacpanAPIParser.parse_package(fields, factory)
 
-            if not pkg.version:
-                factory.log('{}: empty version {}'.format(pkg.name, pkg.version), severity=Logger.ERROR)
-                continue
+def _parse_latest_packages(packages, latest_versions, factory):
+    for fields in packages:
+        # only take latest versions (there's only one of them per distribution)
+        if _as_str(fields['status']) != 'latest':
+            continue
 
-            latest_versions[pkg.name] = pkg.version
+        pkg = _parse_package(factory.begin(), fields)
+
+        if not pkg.version:
+            pkg.log('empty version', severity=Logger.ERROR)
+            continue
+
+        latest_versions[pkg.name] = pkg.version
+        yield pkg
+
+
+def _parse_devel_packages(packages, latest_versions, factory):
+    for fields in packages:
+        if _as_str(fields['maturity']) != 'developer':
+            continue
+
+        pkg = _parse_package(factory.begin(), fields)
+
+        if not pkg.version:
+            pkg.log('empty version', severity=Logger.ERROR)
+            continue
+
+        if version_compare(pkg.version, latest_versions.get(pkg.name, '0')) > 0:
+            pkg.set_flags(PackageFlags.devel)
             yield pkg
 
-    @staticmethod
-    def parse_devel_packages(hits, latest_versions, factory):
-        for hit in hits:
-            fields = hit['fields']
 
-            if ensure_str(fields['maturity']) != 'developer':
-                continue
-
-            pkg = MetacpanAPIParser.parse_package(fields, factory)
-
-            if not pkg.version:
-                factory.log('{}: empty version {}'.format(pkg.name, pkg.version), severity=Logger.ERROR)
-                continue
-
-            if version_compare(pkg.version, latest_versions.get(pkg.name, '0')) > 0:
-                pkg.SetFlag(PackageFlags.devel)
-                yield pkg
-
+class MetacpanAPIParser(Parser):
     def iter_parse(self, path, factory):
         latest_versions = {}
 
-        # Pass 1: process latest versions
-        for filename in os.listdir(path):
-            if not filename.endswith('.json'):
-                continue
-
-            with open(os.path.join(path, filename), 'r') as jsonfile:
-                yield from MetacpanAPIParser.parse_latest_packages(json.load(jsonfile), latest_versions, factory)
-
-        # Pass 2: process devel versions
-        for filename in os.listdir(path):
-            if not filename.endswith('.json'):
-                continue
-
-            with open(os.path.join(path, filename), 'r') as jsonfile:
-                yield from MetacpanAPIParser.parse_devel_packages(json.load(jsonfile), latest_versions, factory)
+        yield from _parse_latest_packages(_iter_packages(path), latest_versions, factory)
+        yield from _parse_devel_packages(_iter_packages(path), latest_versions, factory)

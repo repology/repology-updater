@@ -42,7 +42,7 @@ class FDroidParser(Parser):
                 if version:
                     pkg = app.clone()
 
-                    pkg.version = version
-                    pkg.flags = PackageFlags.devel if version_code > upstream_version_code else 0
+                    pkg.set_version(version)
+                    pkg.set_flags(PackageFlags.devel if version_code > upstream_version_code else 0)
 
                     yield pkg
