@@ -140,10 +140,6 @@ class PackageMaker(PackageMakerBase):
         else:
             normalized_version = version_normalizer(version)
 
-            # XXX: compatibility shim to allow old style SanitizeVesion returning version and origversion
-            if isinstance(normalized_version, tuple):
-                normalized_version = normalized_version[0]
-
             if normalized_version == version:
                 self.package.version = version
             else:
@@ -228,12 +224,6 @@ class PackageMaker(PackageMakerBase):
 
     def __getattr__(self, key):
         return getattr(self.package, key)
-
-    # XXX: compatibility shim
-    def __setattr__(self, key, value):
-        if key in ['package', 'logger', 'ident', 'itemno']:
-            return super(PackageMaker, self).__setattr__(key, value)
-        return setattr(self.package, key, value)
 
 
 class PackageFactory:

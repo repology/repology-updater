@@ -21,8 +21,8 @@ from repology.atomic_fs import atomic_dir
 from repology.fetchers import Fetcher
 from repology.logger import Logger, NoopLogger
 from repology.moduleutils import ClassFactory
-from repology.package import PackageFlags, PackageSanityCheckFailure, PackageSanityCheckProblem
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.package import PackageFlags
+from repology.packagemaker import PackageFactory
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Parser
 from repology.repoproc.serialization import heap_deserializer, serialize
@@ -92,24 +92,11 @@ class RepositoryProcessor:
     def _iter_parse_source(self, repository, source, transformer, logger):
         def postprocess_parsed_packages(packages_iter):
             for package in packages_iter:
-                if isinstance(package, PackageMaker):
-                    # unwrap packagemaker
-                    if not package.check_sanity(True):
-                        continue
+                # unwrap packagemaker
+                if not package.check_sanity(verbose=True):
+                    continue
 
-                    package = package.unwrap()
-                else:
-                    # XXX: compatibility shim for parsers still returning raw packages
-                    if not package.name:
-                        raise InconsistentPackage('encountered package with no name')
-
-                    if not package.version:
-                        # XXX: this currently fires on kdepim in dports; it's pretty fatal on
-                        # one hand, but shouldn't stop whole repo from updating on another. In
-                        # future, it should be logged as some kind of very serious repository
-                        # update error
-                        logger.log('package with empty version: {}'.format(package.name), severity=Logger.ERROR)
-                        continue
+                package = package.unwrap()
 
                 # fill repository-specific fields
                 package.repo = repository['name']
@@ -142,17 +129,6 @@ class RepositoryProcessor:
                     return flavor
 
                 package.flavors = sorted(set(map(strip_flavor, package.flavors)))
-
-                # legacy sanity checking
-                try:
-                    package.CheckSanity(transformed=transformer is not None)
-                except PackageSanityCheckFailure as err:
-                    logger.log('sanity error: {}'.format(err), severity=Logger.ERROR)
-                    raise
-                except PackageSanityCheckProblem as err:
-                    logger.log('sanity warning: {}'.format(err), severity=Logger.WARNING)
-
-                package.Normalize()
 
                 yield package
 

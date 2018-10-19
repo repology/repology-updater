@@ -16,8 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import re
-
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
 
@@ -100,14 +98,6 @@ class PackageFlags:
         return 0
 
 
-class PackageSanityCheckProblem(Exception):
-    pass
-
-
-class PackageSanityCheckFailure(PackageSanityCheckProblem):
-    pass
-
-
 class Package:
     __slots__ = [
         'repo',
@@ -169,105 +159,6 @@ class Package:
         self.flavors = flavors if flavors else []
 
         self.extrafields = extrafields if extrafields else {}
-
-    def CheckSanity(self, transformed=True):
-        # checks
-        def NoNewlines(value):
-            return 'contains newlines' if '\n' in value else ''
-
-        def NoSlashes(value):
-            return 'contains slashes' if '/' in value else ''
-
-        def Stripped(value):
-            return 'is not stripped' if value != value.strip() else ''
-
-        def Alphanumeric(value):
-            return 'contains not allowed symbols' if not re.fullmatch('[a-zA-Z0-9_-]+', value) else ''
-
-        def Lowercase(value):
-            return 'is not lowercase' if value != value.lower() else ''
-
-        def NoWhitespace(value):
-            return 'contains whitespace' if re.search('[ \t\n\r]', value) else ''
-
-        def NonEmpty(value):
-            return 'is empty' if value == '' else ''
-
-        # checkers
-        def CheckBool(value, name):
-            if not isinstance(value, bool):
-                raise PackageSanityCheckFailure('{}: {} is not a boolean'.format(self.name, name))
-
-        def CheckStr(value, name, *checks):
-            if not isinstance(value, str):
-                raise PackageSanityCheckFailure('{}: {} is not a string'.format(self.name, name))
-            for check in checks:
-                result = check(value)
-                if result:
-                    raise PackageSanityCheckProblem('{}: {} {}: "{}"'.format(self.name, name, result, value))
-
-        def CheckList(value, name, *checks):
-            if not isinstance(value, list):
-                raise PackageSanityCheckFailure('{}: {} is not a list'.format(self.name, name))
-            for element in value:
-                CheckStr(element, name, *checks)
-
-        def CheckDict(value, name, *checks):
-            if not isinstance(value, dict):
-                raise PackageSanityCheckFailure('{}: {} is not a dict'.format(self.name, name))
-            for element in value.values():
-                CheckStr(element, name, *checks)
-
-        def CheckInt(value, name):
-            if not isinstance(value, int):
-                raise PackageSanityCheckFailure('{}: {} is not an int'.format(self.name, name))
-
-        CheckStr(self.repo, 'repo', NoNewlines, Stripped, Alphanumeric, Lowercase)
-        CheckStr(self.family, 'family', NoNewlines, Stripped, Alphanumeric, Lowercase)
-        if self.subrepo is not None:
-            CheckStr(self.subrepo, 'subrepo', NoNewlines, Stripped)
-
-        CheckStr(self.name, 'name', NoNewlines, Stripped, NonEmpty)
-        if transformed or self.effname is not None:
-            CheckStr(self.effname, 'effname', NoNewlines, Stripped, NonEmpty, NoSlashes)
-
-        CheckStr(self.version, 'version', NoNewlines, Stripped, NonEmpty)
-        if self.origversion is not None:
-            CheckStr(self.origversion, 'origversion', NoNewlines, Stripped)
-
-        CheckList(self.maintainers, 'maintainers', NoNewlines, Stripped, NoWhitespace, NoSlashes, NonEmpty)
-        if self.category is not None:
-            CheckStr(self.category, 'category', NoNewlines, Stripped, NonEmpty)
-        if self.comment is not None:
-            CheckStr(self.comment, 'comment', NoNewlines, Stripped, NonEmpty)
-        if self.homepage is not None:
-            CheckStr(self.homepage, 'homepage', NoWhitespace, NonEmpty)
-        CheckList(self.licenses, 'licenses', NoNewlines, Stripped, NonEmpty)
-        CheckList(self.downloads, 'downloads', NoWhitespace, NoNewlines, NonEmpty)
-
-        CheckInt(self.flags, 'flags')
-        CheckBool(self.shadow, 'shadow')
-        CheckBool(self.verfixed, 'verfixed')
-
-        CheckList(self.flavors, 'flavors', NoNewlines, Stripped, NonEmpty)
-
-        CheckDict(self.extrafields, 'extrafields', NoWhitespace, NonEmpty)
-
-    def Normalize(self):
-        # normalize homepage (currently adds / to url which points to host)
-        if self.homepage:
-            match = re.fullmatch('(https?://)([^/]+)(/.*)?', self.homepage, re.IGNORECASE)
-
-            if match:
-                schema = match.group(1).lower()
-                hostname = match.group(2).lower()
-                path = match.group(3) or '/'
-
-                self.homepage = schema + hostname + path
-
-        # unicalize and sort maintainers list
-        if len(self.maintainers) > 1:
-            self.maintainers = sorted(set(self.maintainers))
 
     def CheckFormat(self):
         # check
