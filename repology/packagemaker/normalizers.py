@@ -26,6 +26,7 @@ _supported_schemas = [
     'hg',
     'http',
     'https',
+    'irc',
     'mirror',
     'svn',
 ]
