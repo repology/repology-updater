@@ -18,10 +18,37 @@
 import re
 
 
-def require_url(value):
-    if not re.match('(ftp|https?|mirror|git|svn|hg|bzr|cvs)://', value):
+_supported_schemas = [
+    'bzr',
+    'cvs',
+    'ftp',
+    'git',
+    'hg',
+    'http',
+    'https',
+    'mirror',
+    'svn',
+]
+
+
+def url(value):
+    match = re.fullmatch('([a-z][a-z0-9.+-]*)://([^/]+)(/.*)?', value, re.IGNORECASE)
+    if not match and '://' not in value:
+        return None, 'does not look like an URL (schema missing)'
+    elif not match:
         return None, 'does not look like an URL'
-    return value, None
+
+    schema = match.group(1).lower()
+    hostname = match.group(2).lower()
+    path = match.group(3)
+
+    if schema in ['http', 'https'] and not path:
+        path = '/'
+
+    if schema not in _supported_schemas:
+        return None, 'unsupported URL schema'
+
+    return '{}://{}{}'.format(schema, hostname, path), None
 
 
 def strip(value):

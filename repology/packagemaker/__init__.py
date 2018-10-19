@@ -26,6 +26,14 @@ from repology.packagemaker import normalizers as nzs
 __all__ = ['PackageFactory', 'PackageMaker']
 
 
+def _iter_unique(iterable, existing=None):
+    seen = set(existing) if existing else set()
+    for value in iterable:
+        if value not in seen:
+            seen.add(value)
+            yield value
+
+
 class PackageMakerBase:
     def __init__(self, logger):
         self.logger = logger
@@ -158,7 +166,7 @@ class PackageMaker(PackageMakerBase):
 
     @PackageMakerBase._omnivorous_setter('maintainer', str, nzs.strip, nzs.forbid_newlines, nzs.tolower)
     def add_maintainers(self, *args):
-        self.package.maintainers.extend(args)
+        self.package.maintainers.extend(_iter_unique(args, self.package.maintainers))
 
     @PackageMakerBase._omnivorous_setter('category', str, nzs.strip, nzs.forbid_newlines)
     def add_categories(self, *args):
@@ -166,7 +174,7 @@ class PackageMaker(PackageMakerBase):
         if not self.package.category:
             self.package.category = args[0]
 
-    @PackageMakerBase._omnivorous_setter('homepage', str, nzs.strip, nzs.require_url, nzs.warn_whitespace, nzs.forbid_newlines)
+    @PackageMakerBase._omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
     def add_homepages(self, *args):
         # XXX: convert into array
         if not self.package.homepage:
@@ -176,9 +184,9 @@ class PackageMaker(PackageMakerBase):
     def add_licenses(self, *args):
         self.package.licenses.extend(args)
 
-    @PackageMakerBase._omnivorous_setter('download', str, nzs.strip, nzs.require_url, nzs.warn_whitespace, nzs.forbid_newlines)
+    @PackageMakerBase._omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
     def add_downloads(self, *args):
-        self.package.downloads.extend(args)
+        self.package.downloads.extend(_iter_unique(args, self.package.downloads))
 
     def set_flags(self, mask, is_set=True):
         assert(isinstance(mask, int))
