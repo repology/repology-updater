@@ -41,7 +41,7 @@ def _iter_packages(path):
 class OpenIndianaSummaryJsonParser(Parser):
     def iter_parse(self, path, factory):
         for fmri, pkgdata in _iter_packages(path):
-            pkg = factory.begin(fmri)
+            pkg = factory.begin('{} {}'.format(fmri, pkgdata['version']))
 
             pkg.set_extra_field('fmri', fmri)
 
@@ -70,29 +70,27 @@ class OpenIndianaSummaryJsonParser(Parser):
                 if key and value:
                     variables[key] = value
 
-            if 'com.oracle.info.name' in variables:
-                pkg.set_name(variables['com.oracle.info.name'][0])
-
-            if 'com.oracle.info.version' in variables:
-                pkg.set_version(variables['com.oracle.info.version'][0])
-
-            if 'pkg.summary' in variables:
-                pkg.set_summary(variables['pkg.summary'][0])
-
-            if 'info.classification' in variables:
-                for category in variables['info.classification']:
-                    if category.startswith('org.opensolaris.category.2008:'):
-                        pkg.add_categories(category.split(':', 1)[1])
-
-            if 'info.upstream-url' in variables:
-                pkg.add_homepages(variables['info.upstream-url'])
-
-            if 'info.source-url' in variables:
-                pkg.add_downloads(variables['info.source-url'])
+            # these are entries without name, likely not really packages
+            # skip these early to avoid parsing other stuff and polluting logs with warnings
+            if 'com.oracle.info.name' not in variables or 'com.oracle.info.version' not in variables:
+                continue
 
             # Regarding comment requirement: there are some packages which lack it,
             # however for ALL of them have counterparts with comment and some
             # additional fields (category, homepage, downloads). Packages without
             # comment look like legacy, and it's OK and desirable to drop them here
-            if pkg.comment:
-                yield pkg
+            if 'pkg.summary' not in variables:
+                continue
+
+            pkg.set_name(variables['com.oracle.info.name'][0])
+            pkg.set_version(variables['com.oracle.info.version'][0])
+            pkg.set_summary(variables['pkg.summary'][0])
+
+            for category in variables.get('info.classification', []):
+                if category.startswith('org.opensolaris.category.2008:'):
+                    pkg.add_categories(category.split(':', 1)[1])
+
+            pkg.add_homepages(variables.get('info.upstream-url'))
+            pkg.add_downloads(variables.get('info.source-url'))
+
+            yield pkg
