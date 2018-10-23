@@ -41,9 +41,9 @@ def url(value):
 
     schema = match.group(1).lower()
     hostname = match.group(2).lower()
-    path = match.group(3)
+    path = match.group(3) or ''
 
-    if schema in ['http', 'https'] and not path:
+    if schema in ['http', 'https', 'ftp'] and not path:
         path = '/'
 
     if schema not in _supported_schemas:
