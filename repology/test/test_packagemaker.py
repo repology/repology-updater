@@ -35,10 +35,10 @@ class TestPackageMaker(unittest.TestCase):
         maker.add_maintainers('d@com')
         maker.add_categories(None, 'foo', 'bar')
         maker.add_categories('baz')
-        maker.add_homepages('http://foo', 'http://bar')
+        maker.add_homepages('http://foo/', 'http://bar/')
         maker.add_licenses(['GPLv2', 'GPLv3'])
         maker.add_licenses('MIT')
-        maker.add_downloads(None, [None, 'http://baz'], ['ftp://quux'])
+        maker.add_downloads(None, [None, 'http://baz/'], ['ftp://quux/'])
         pkg = maker.unwrap()
 
         self.assertEqual(pkg.name, 'foo')
@@ -46,21 +46,42 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.extrafields['origin'], '/foo')
         self.assertEqual(pkg.maintainers, ['a@com', 'b@com', 'c@com', 'd@com'])
         self.assertEqual(pkg.category, 'foo')  # XXX: convert to array
-        self.assertEqual(pkg.homepage, 'http://foo')  # XXX: convert to array
+        self.assertEqual(pkg.homepage, 'http://foo/')  # XXX: convert to array
         self.assertEqual(pkg.licenses, ['GPLv2', 'GPLv3', 'MIT'])
-        self.assertEqual(pkg.downloads, ['http://baz', 'ftp://quux'])
+        self.assertEqual(pkg.downloads, ['http://baz/', 'ftp://quux/'])
 
     def test_validate_urls(self):
         logger = AccumulatingLogger()
         factory = PackageFactory(logger)
 
         maker = factory.begin()
-        maker.add_downloads('http://www.valid', 'https://www.valid/some', 'ftp://ftp.valid', 'invalid')
+        maker.add_downloads('http://www.valid/', 'https://www.valid/some', 'ftp://ftp.valid/', 'invalid')
         pkg = maker.unwrap()
 
-        self.assertEqual(pkg.downloads, ['http://www.valid', 'https://www.valid/some', 'ftp://ftp.valid'])
+        self.assertEqual(pkg.downloads, ['http://www.valid/', 'https://www.valid/some', 'ftp://ftp.valid/'])
         self.assertEqual(len(logger.get()), 1)
         self.assertTrue('invalid' in logger.get()[0][0])
+
+    def test_normalize_urls(self):
+        factory = PackageFactory(NoopLogger())
+
+        maker = factory.begin()
+        maker.add_homepages('Http://Foo.coM')
+        maker.add_downloads('Http://Foo.coM')
+        pkg = maker.unwrap()
+
+        self.assertEqual(pkg.homepage, 'http://foo.com/')
+        self.assertEqual(pkg.downloads, ['http://foo.com/'])
+
+    def test_unicalization_with_order_preserved(self):
+        factory = PackageFactory(NoopLogger())
+
+        maker = factory.begin()
+        maker.add_maintainers('z@com', 'y@com', 'x@com', 'z@com', 'y@com', 'x@com')
+        maker.add_maintainers('z@com', 'y@com', 'x@com')
+        pkg = maker.unwrap()
+
+        self.assertEqual(pkg.maintainers, ['z@com', 'y@com', 'x@com'])
 
     def test_strip(self):
         factory = PackageFactory(NoopLogger())
@@ -86,6 +107,19 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.name, 'bar')
         self.assertEqual(pkg.version, '1.1')
         self.assertEqual(pkg.comment, 'Bar')
+
+    def test_type_normalization(self):
+        factory = PackageFactory(NoopLogger())
+
+        maker = factory.begin()
+        maker.set_name(0)
+        maker.set_version(0)
+        maker.set_summary(0)
+        pkg = maker.unwrap()
+
+        self.assertEqual(pkg.name, '0')
+        self.assertEqual(pkg.version, '0')
+        self.assertEqual(pkg.comment, '0')
 
     def test_nulls(self):
         factory = PackageFactory(NoopLogger())
@@ -157,6 +191,21 @@ class TestPackageMaker(unittest.TestCase):
 
         self.assertTrue('pkg1pkg3' in logger.get()[2][0])
         self.assertTrue('pkg2' not in logger.get()[2][0])
+
+    def test_sanity(self):
+        factory = PackageFactory(NoopLogger())
+
+        maker = factory.begin()
+
+        self.assertFalse(maker.check_sanity())
+
+        maker.set_name('foo')
+
+        self.assertFalse(maker.check_sanity())
+
+        maker.set_version('1.0')
+
+        self.assertTrue(maker.check_sanity())
 
 
 if __name__ == '__main__':
