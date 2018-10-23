@@ -95,6 +95,8 @@ class PackageMakerBase:
         def inner(method):
             @wraps(method)
             def wrapper(self, arg, *other_args):
+                if arg is not None:
+                    arg = want_type(arg)
                 value = self._apply_normalizers(arg, fieldname, normalizers)
                 if value:
                     return method(self, value, *other_args)
