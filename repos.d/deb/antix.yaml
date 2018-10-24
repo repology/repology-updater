@@ -17,8 +17,8 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: AntiX home
-      url: http://antix.mepis.org/index.php?title=Main_Page
+    - desc: antiX Linux home
+      url: https://antixlinux.com/
   tags: [ all, production, antix ]
 
 - name: antix_17
@@ -36,6 +36,6 @@
       compression: gz
       subrepo: '{source}'
   repolinks:
-    - desc: AntiX home
-      url: http://antix.mepis.org/index.php?title=Main_Page
+    - desc: antiX Linux home
+      url: https://antixlinux.com/
   tags: [ all, production, antix ]
