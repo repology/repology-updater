@@ -27,7 +27,11 @@ flake8:
 	# E501 - Line too long
 	# E722 - Do not use bare except
 	# N802 - Bad function name
-	${FLAKE8} --ignore=D10,E265,E501,E722,N802 --count --application-import-names=repology *.py repology repologyapp test
+	#
+	# New in flake8 3.6.0, fix and reenable
+	# W504 - Line break after binary operator
+	# W605 - Invalid escape sequence
+	${FLAKE8} --ignore=D10,E265,E501,E722,N802,W504,W605 --count --application-import-names=repology *.py repology repologyapp test
 
 flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test
