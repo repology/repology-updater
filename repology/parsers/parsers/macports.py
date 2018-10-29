@@ -61,7 +61,8 @@ class MacPortsParser(Parser):
                             # plain email
                             pkg.add_maintainers(maintainer)
                         elif ':' in maintainer:
-                            # ignore, email is obfuscated
+                            # foo.com:bar means bar@foo.com
+                            # ignore, since it's considered a form of email obfuscation
                             pass
                         elif maintainer == 'openmaintainer':
                             # ignore, this is a flag that minor changes to a port
