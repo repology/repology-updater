@@ -102,7 +102,7 @@
       url: 'https://src.fedoraproject.org/rpms/{name}'
   tags: [ all, production, fedora, rpm ]
 
-  - name: fedora_29
+- name: fedora_29
   type: repository
   desc: Fedora 29
   family: fedora
