@@ -31,10 +31,10 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
   tags: [ all, production, fedora, rpm ]
 
 # Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
@@ -65,10 +65,10 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_28
@@ -96,10 +96,10 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_29
@@ -129,10 +129,10 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
@@ -154,8 +154,8 @@
     - desc: Fedora repository for package maintenance
       url: https://src.fedoraproject.org/
   packagelinks:
-    - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
     - desc: Package details on Fedora Pagure
       url: 'https://src.fedoraproject.org/rpms/{name}'
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
   tags: [ all, production, fedora, rpm ]
