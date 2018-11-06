@@ -1,0 +1,21 @@
+###########################################################################
+# ReactOS Application Manager database (rapps)
+###########################################################################
+- name: reactos
+  type: repository
+  desc: ReactOS rapps
+  family: reactos
+  minpackages: 0
+  sources:
+    - name: rapps-db
+      fetcher: GitFetcher
+      parser: RappsParser
+      url: https://github.com/reactos/rapps-db.git
+  shadow: true
+  repolinks:
+    - desc: GitHub repository
+      url: https://github.com/reactos/rapps-db
+  packagelinks:
+    - desc: Source file
+      url: 'https://github.com/reactos/rapps-db/blob/master/{name}.txt'
+  tags: [ all, experimental ]
