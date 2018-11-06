@@ -78,6 +78,7 @@ version are always parsed.
 | PyPi                             | ✔       |         |       | ✔ (2) |         |          |
 | PLD                              |         |         |       |       |         |          |
 | Ravenports                       | ✔       |         | ✔     | ✔     |         |          |
+| ReactOS rapps                    | ✔       |         |       | ✔     | ✔       | ✔        |
 | RubyGems                         |         |         |       | ✔ (2) |         |          |
 | Rudix                            | ✔       |         |       |       | ✔       |          |
 | Scoop                            |         |         |       | ✔     | ✔       | ✔        |
