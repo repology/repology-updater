@@ -2,6 +2,7 @@
 # Linux Mint
 #
 # See https://www.linuxmint.com/download_all.php
+# Also https://en.wikipedia.org/wiki/Linux_Mint_version_history#Release_history
 ###########################################################################
 - name: linux_mint_17
   type: repository
@@ -158,6 +159,24 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tara/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Linux Mint home
+      url: https://linuxmint.com/
+  tags: [ all, production, mint ]
+
+- name: linux_mint_19_1
+  type: repository
+  desc: Linux Mint 19.1
+  family: debuntu
+  color: '87cf3e'
+  minpackages: 100
+  sources:
+    - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://mirror.yandex.ru/linuxmint-packages/dists/tessa/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
