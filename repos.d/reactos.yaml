@@ -18,4 +18,4 @@
   packagelinks:
     - desc: Source file
       url: 'https://github.com/reactos/rapps-db/blob/master/{name}.txt'
-  tags: [ all, experimental ]
+  tags: [ all, production ]
