@@ -261,6 +261,19 @@ class Rule:
 
             self.matchers.append(matcher)
 
+        if 'summpart' in ruledata:
+            summparts = as_lowercase_list(ruledata['summpart'])
+
+            def matcher(package, package_context, match_context):
+                if not package.comment:
+                    return False
+                for summpart in summparts:
+                    if summpart in package.comment.lower():
+                        return True
+                return False
+
+            self.matchers.append(matcher)
+
         if 'flag' in ruledata:
             flags = as_set(ruledata['flag'])
 

@@ -309,6 +309,14 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p8', 'version': '1.0', 'homepage': 'HOMEPAGE4', 'expect_effname': 'ok4'},
         )
 
+    def test_match_summpart(self):
+        self.check_transformer(
+            '[ { summpart: Browser, setname: match }, { wwwpart: shouldnotmatch, setname: false } ]',
+            {'name': 'p1', 'version': '1.0', 'comment': 'Web browseR', 'expect_effname': 'match'},
+            {'name': 'p2', 'version': '1.0', 'comment': 'Another', 'expect_effname': 'p2'},
+            {'name': 'p3', 'version': '1.0', 'expect_effname': 'p3'},
+        )
+
     def test_match_ruleset(self):
         self.check_transformer(
             '[ { ruleset: foo, setname: quux }, { ruleset: [ baz ], setname: bat } ]',
