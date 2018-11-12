@@ -26,7 +26,8 @@ class PackageFormatter(string.Formatter):
     filters = {
         'lowercase': lambda x: x.lower(),
         'firstletter': lambda x: x.lower()[0],
-        'libfirstletter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0]
+        'libfirstletter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0],
+        'stripdmo': lambda x: x[:-4] if x.endswith('-dmo') else x,
     }
 
     def get_value(self, key, args, kwargs):
