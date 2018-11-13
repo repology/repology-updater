@@ -9,10 +9,11 @@
   color: 'f8e808'
   minpackages: 9000
   sources:
-    - name: INDEX
-      fetcher: FileFetcher
-      parser: OpenBSDIndexParser
-      url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
+    - name: sqlports
+      fetcher: WgetTarFetcher
+      parser: OpenBSDsqlportsParser
+      # using mirror as official site is too slow
+      url: 'https://mirror.yandex.ru/openbsd/snapshots/packages/amd64/sqlports-6.9.tgz'
   repolinks:
     - desc: 'OpenBSD FAQ: Packages and Ports'
       url: https://www.openbsd.org/faq/faq15.html

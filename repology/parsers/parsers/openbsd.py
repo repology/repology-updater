@@ -15,7 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import re
+import sqlite3
 
 from repology.logger import Logger
 from repology.parsers import Parser
@@ -32,6 +34,96 @@ def _normalize_version(version):
         version = match.group(1)
 
     return version
+
+
+def _iter_sqlports(path):
+    columns = [
+        'fullpkgpath',
+        'categories',
+        'comment',
+        'distfiles',
+        'fullpkgname',
+        'homepage',
+        'maintainer',
+        'master_sites',
+        'master_sites0',
+        'master_sites1',
+        'master_sites2',
+        'master_sites3',
+        'master_sites4',
+        'master_sites5',
+        'master_sites6',
+        'master_sites7',
+        'master_sites8',
+        'master_sites9',
+        'pkgname',
+        'pkgpath',
+        'pkgspec',
+        'pkgstem',
+    ]
+
+    db = sqlite3.connect(os.path.join(path + '/share/sqlports'))
+    cur = db.cursor()
+    cur.execute('SELECT {} FROM Ports LEFT JOIN Paths USING(fullpkgpath)'.format(','.join(columns)))
+
+    while True:
+        row = cur.fetchone()
+        if row is None:
+            break
+
+        yield dict(zip(columns, row))
+
+
+class OpenBSDsqlportsParser(Parser):
+    def iter_parse(self, path, factory):
+        for row in _iter_sqlports(path):
+            pkg = factory.begin(row['fullpkgpath'])
+
+            pkgname = row['fullpkgname']
+
+            # cut away string suffixes which come after version
+            match = re.match('(.*?)(-[a-z_]+[0-9]*)+$', pkgname)
+            if match:
+                pkgname = match.group(1)
+
+            pkg.set_name_and_version(pkgname, _normalize_version)
+            pkg.set_summary(row['comment'])
+            pkg.add_homepages(row['homepage'])
+            pkg.add_maintainers(extract_maintainers(row['maintainer']))
+            pkg.add_categories(row['categories'].split())
+
+            pkg.set_extra_field('pkgpath', row['pkgpath'])
+            pkg.set_extra_field('fullpkgpath', row['fullpkgpath'])
+
+            origin = row['fullpkgpath'].split(',', 1)[0]
+            pkg.set_extra_field('origin', origin)
+            pkg.set_extra_field('portname', origin.split('/')[-1])
+
+            if row['distfiles']:
+                for distfile in row['distfiles'].split():
+                    # process distfile renames
+                    # Example: deco-{deco/archive/}1.6.4.tar.gz is downloaded as deco/archive/1.6.4.tar.gz
+                    # but saved as deco-1.6.4.tar.gz
+                    match = re.fullmatch('(.*)\{(.*)\}(.*)', distfile)
+                    if match:
+                        distfile = match.group(2) + match.group(3)
+
+                    # determine master_sites
+                    master_sites = row['master_sites']
+
+                    match = re.fullmatch('(.*):([0-9]+)', distfile)
+                    if match:
+                        distfile = match.group(1)
+                        master_sites = row['master_sites' + match.group(2)]
+
+                    # done
+                    if not master_sites:
+                        pkg.log('distfiles without master_sites'.format(distfile, master_sites), severity=Logger.ERROR)
+                        break
+
+                    pkg.add_downloads((master_site + distfile for master_site in master_sites.split()))
+
+            yield pkg
 
 
 class OpenBSDIndexParser(Parser):
