@@ -79,12 +79,8 @@ class OpenBSDsqlportsParser(Parser):
         for row in _iter_sqlports(path):
             pkg = factory.begin(row['fullpkgpath'])
 
-            pkgname = row['fullpkgname']
-
-            # cut away string suffixes which come after version
-            match = re.match('(.*?)(-[a-z_]+[0-9]*)+$', pkgname)
-            if match:
-                pkgname = match.group(1)
+            # strip flavors (see https://man.openbsd.org/packages-specs)
+            pkgname = re.sub('(-[^0-9][^-]*)+$', '', row['fullpkgname'])
 
             pkg.set_name_and_version(pkgname, _normalize_version)
             pkg.set_summary(row['comment'])
