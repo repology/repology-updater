@@ -190,8 +190,8 @@ class RepositoryProcessor:
 
             flush_packages()
 
-        if self.safety_checks and num_packages < repository['minpackages']:
-            raise TooLittlePackages(num_packages, repository['minpackages'])
+            if self.safety_checks and num_packages < repository['minpackages']:
+                raise TooLittlePackages(num_packages, repository['minpackages'])
 
         logger.log('parsing complete, {} packages'.format(num_packages))
 
