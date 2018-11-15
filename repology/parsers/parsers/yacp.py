@@ -23,27 +23,43 @@ from repology.parsers import Parser
 from repology.parsers.versions import VersionStripper
 
 
+def _iter_cygports(path):
+    for package in os.listdir(path):
+        package_path = os.path.join(path, package)
+        if not os.path.isdir(package_path):
+            continue
+
+        for cygport in os.listdir(package_path):
+            if not cygport.endswith('.cygport'):
+                continue
+
+            yield os.path.join(package_path, cygport), cygport
+
+
 class YACPGitParser(Parser):
     def iter_parse(self, path, factory):
         normalize_version = VersionStripper().strip_right('+')
 
-        for package in os.listdir(path):
-            package_path = os.path.join(path, package)
-            if not os.path.isdir(package_path):
+        for cygport_path, cygport_name in _iter_cygports(path):
+            pkg = factory.begin(cygport_name)
+
+            # XXX: save *bl* to origversion
+            match = re.match('(.*)-[0-9]+bl[0-9]+\.cygport$', cygport_name)
+            if not match:
+                pkg.log('unable to parse cygport name', severity=Logger.ERROR)
                 continue
 
-            for cygport in os.listdir(package_path):
-                if not cygport.endswith('.cygport'):
-                    continue
+            pkg.set_name_and_version(match.group(1), normalize_version)
 
-                pkg = factory.begin(cygport)
+            # these fields not contain variables (for now), so are safe to extract
+            with open(path, 'r') as cygdata:
+                for line in cygdata:
+                    match = re.match('CATEGORY="([^"$]+)"', line)
+                    if match:
+                        pkg.add_categories(match.group(1))
 
-                # XXX: save *bl* to origversion
-                match = re.match('(.*)-[0-9]+bl[0-9]+\.cygport$', cygport)
-                if not match:
-                    pkg.log('unable to parse cygport name: {}'.format(cygport), severity=Logger.ERROR)
-                    continue
+                    match = re.match('SUMMARY="([^"$]+)"', line)
+                    if match:
+                        pkg.set_summary(match.group(1))
 
-                pkg.set_name_and_version(match.group(1), normalize_version)
-
-                yield pkg
+            yield pkg

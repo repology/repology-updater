@@ -89,7 +89,7 @@ version are always parsed.
 | Termux                           | ✔       |         |       | ✔     |         | ✔        |
 | Vcpkg                            | ✔       |         |       |       |         |          |
 | Wikidata                         | ✔       |         |       | ✔     | ✔       |          |
-| YACP                             |         |         |       |       |         |          |
+| YACP                             | ✔       |         | ✔     |       |         |          |
 
 (1) Gentoo support is not complete, complex cases like conditional downloads and licenses
 are ignored for now.
