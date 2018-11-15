@@ -20,18 +20,21 @@ import shutil
 from contextlib import contextmanager
 
 
+def _remove_always(path):
+    if os.path.isdir(path):
+        shutil.rmtree(path)
+    elif os.path.exists(path):
+        os.remove(path)
+
+
 @contextmanager
 def atomic_dir(path):
     new_path = path + '.new'
     old_path = path + '.old'
 
     def cleanup():
-        if os.path.exists(new_path):
-            shutil.rmtree(new_path)
-        if os.path.isfile(old_path):
-            os.remove(old_path)
-        elif os.path.exists(old_path):
-            shutil.rmtree(old_path)
+        _remove_always(new_path)
+        _remove_always(old_path)
 
     cleanup()
 
@@ -49,18 +52,19 @@ def atomic_dir(path):
 @contextmanager
 def atomic_file(path, *args, **kwargs):
     new_path = path + '.new'
+    old_path = path + '.old'
 
     def cleanup():
-        if os.path.exists(new_path):
-            os.remove(new_path)
+        _remove_always(new_path)
+        _remove_always(old_path)
 
     cleanup()
-
-    statefile = open(new_path, *args, **kwargs)
 
     try:
         with open(new_path, *args, **kwargs) as statefile:
             yield statefile
+        if os.path.isdir(path):
+            os.rename(path, old_path)
         os.replace(new_path, path)
     finally:
         cleanup()
