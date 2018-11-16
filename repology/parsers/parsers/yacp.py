@@ -52,7 +52,7 @@ class YACPGitParser(Parser):
             pkg.set_name_and_version(match.group(1), normalize_version)
 
             # these fields not contain variables (for now), so are safe to extract
-            with open(path, 'r') as cygdata:
+            with open(cygport_path, 'r') as cygdata:
                 for line in cygdata:
                     match = re.match('CATEGORY="([^"$]+)"', line)
                     if match:
