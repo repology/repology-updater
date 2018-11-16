@@ -15,6 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import time
+import functools
+
 from json import dumps
 
 import requests
@@ -22,6 +25,19 @@ import requests
 from repology.config import config
 
 USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
+
+
+class PoliteHTTP:
+    def __init__(self, timeout=5, delay=None):
+        self.do_http = functools.partial(do_http, timeout=timeout)
+        self.delay = delay
+        self.first_request = True
+
+    def __call__(self, *args, **kwargs):
+        if not self.first_request and self.delay:
+            time.sleep(self.fetch_delay)
+
+        return self.do_http(*args, **kwargs)
 
 
 # XXX: post argument is a compatibility shim
