@@ -134,7 +134,7 @@ schemas = {
                     'sparse_checkout': [str],
 
                     # some common fetcher args
-                    'fetch_timeout': int,
+                    'fetch_timeout': Any(int, float),
 
                     # arch parser
                     'allowed_archs': [str],
@@ -162,7 +162,7 @@ schemas = {
                     'nocache': bool,
 
                     # crates_io fetcher
-                    'fetch_delay': int,
+                    'fetch_delay': Any(int, float),
 
                     # aur fetcher
                     'max_api_url_length': int,
