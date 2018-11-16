@@ -17,18 +17,16 @@
 
 import json
 import os
-import time
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import fetch
+from repology.fetchers.http import PoliteHTTP
 
 
 class CratesIOFetcher(ScratchDirFetcher):
     def __init__(self, url, per_page=100, fetch_timeout=5, fetch_delay=None):
         self.url = url
         self.per_page = per_page
-        self.fetch_timeout = fetch_timeout
-        self.fetch_delay = fetch_delay
+        self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
     def do_fetch(self, statedir, logger):
         numpage = 1
@@ -36,7 +34,7 @@ class CratesIOFetcher(ScratchDirFetcher):
             url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
             logger.Log('getting ' + url)
 
-            text = fetch(url, timeout=self.fetch_timeout).text
+            text = self.do_http(url).text
             with open(os.path.join(statedir, '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
 
@@ -46,6 +44,3 @@ class CratesIOFetcher(ScratchDirFetcher):
                 return
 
             numpage += 1
-
-            if self.fetch_delay:
-                time.sleep(self.fetch_delay)

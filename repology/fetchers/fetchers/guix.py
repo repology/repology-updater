@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,20 +16,18 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import time
 from string import ascii_uppercase
 
 import lxml.html
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.http import do_http
+from repology.fetchers.http import PoliteHTTP
 
 
 class GuixFetcher(ScratchDirFetcher):
-    def __init__(self, url, fetch_timeout=5, fetch_delay=0):
+    def __init__(self, url, fetch_timeout=5, fetch_delay=None):
         self.url = url
-        self.fetch_timeout = fetch_timeout
-        self.fetch_delay = fetch_delay
+        self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
     def do_fetch(self, statedir, logger):
         for letter in ['0-9'] + [l for l in ascii_uppercase]:
@@ -41,7 +39,7 @@ class GuixFetcher(ScratchDirFetcher):
                 pageurl = '{}/{}/page/{}/'.format(self.url, letter, page)
 
                 # fetch HTML
-                response = do_http(pageurl, timeout=self.fetch_timeout)
+                response = self.do_http(pageurl)
                 response.encoding = 'utf-8'  # is not detected properly
                 text = response.text
 
@@ -60,6 +58,3 @@ class GuixFetcher(ScratchDirFetcher):
 
                 # proceed with the next page
                 page += 1
-
-                if self.fetch_delay:
-                    time.sleep(self.fetch_delay)

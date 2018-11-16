@@ -15,15 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import functools
 import json
 import os
-import time
 
 import requests
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import do_http
+from repology.fetchers.http import PoliteHTTP
 from repology.logger import Logger
 
 
@@ -43,8 +41,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
         if es_size:
             self.request_data['size'] = es_size
 
-        self.do_http = functools.partial(do_http, timeout=fetch_timeout)
-        self.do_delay = functools.partial(time.sleep, fetch_delay) if fetch_delay else lambda: None
+        self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
     def do_fetch_scroll(self, statedir, logger):
         numpage = 0
@@ -57,8 +54,6 @@ class ElasticSearchFetcher(ScratchDirFetcher):
         while response['hits']['hits']:
             with open(os.path.join(statedir, '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 json.dump(response['hits']['hits'], pagefile)
-
-            self.do_delay()
 
             numpage += 1
 

@@ -22,7 +22,7 @@ from libversion import version_compare
 
 from repology.atomic_fs import atomic_file
 from repology.fetchers import Fetcher
-from repology.fetchers.fetch import fetch
+from repology.fetchers.http import do_http
 from repology.logger import NoopLogger
 
 
@@ -44,7 +44,7 @@ class FreshcodeFetcher(Fetcher):
         else:
             logger.Log('starting with empty state')
 
-        newdata = json.loads(fetch(self.url).text)
+        newdata = json.loads(do_http(self.url).text)
 
         if not newdata['releases']:
             raise RuntimeError('Empty freshcode package list received, refusing to go on')

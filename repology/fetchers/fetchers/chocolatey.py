@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -19,13 +19,13 @@ import os
 import xml.etree.ElementTree
 
 from repology.fetchers import ScratchDirFetcher
-from repology.fetchers.fetch import fetch
+from repology.fetchers.http import PoliteHTTP
 
 
 class ChocolateyFetcher(ScratchDirFetcher):
-    def __init__(self, url, fetch_timeout=5):
+    def __init__(self, url, fetch_timeout=5, fetch_delay=None):
         self.url = url
-        self.fetch_timeout = fetch_timeout
+        self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
     def do_fetch(self, statedir, logger):
         numpage = 0
@@ -33,7 +33,7 @@ class ChocolateyFetcher(ScratchDirFetcher):
         while True:
             logger.Log('getting ' + nextpageurl)
 
-            text = fetch(nextpageurl, timeout=self.fetch_timeout).text
+            text = self.do_http(nextpageurl).text
             with open(os.path.join(statedir, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
 
