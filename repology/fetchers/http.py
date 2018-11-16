@@ -31,12 +31,13 @@ class PoliteHTTP:
     def __init__(self, timeout=5, delay=None):
         self.do_http = functools.partial(do_http, timeout=timeout)
         self.delay = delay
-        self.first_request = True
+        self.had_requests = False
 
     def __call__(self, *args, **kwargs):
-        if not self.first_request and self.delay:
-            time.sleep(self.fetch_delay)
+        if self.had_requests and self.delay:
+            time.sleep(self.delay)
 
+        self.had_requests = True
         return self.do_http(*args, **kwargs)
 
 
