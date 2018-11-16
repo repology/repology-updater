@@ -42,25 +42,19 @@
 	</thead>
 	<tbody>
 	{% for repo in repos %}
-		<tr id="{{ repo.name }}"
-				{%- if repo.current_run_id -%}
-					{#- #} class="info"
-				{%- elif repo.last_failed_fetch_ago and (not repo.last_successful_fetch_ago or repo.last_failed_fetch_ago < repo.last_successful_fetch_ago) -%}
-					{#- #} class="danger"
-				{%- elif repo.last_failed_parse_ago and (not repo.last_successful_parse_ago or repo.last_failed_parse_ago < repo.last_successful_parse_ago) -%}
-					{#- #} class="danger"
-				{%- endif -%}
-			>
+		<tr id="{{ repo.name }}"{% if repo.current_run_id %} class="info"{% endif %}>
 			<td class="text-right"><a href="{{ url_for('repository', repo=repo.name) }}">{{ repometadata[repo.name].desc }}</a></td>
 			<td class="text-center">{% if repo.current_run_id %}<b><a href="{{ url_for('log', run_id=repo.current_run_id) }}" rel="noindex,nofollow">{{ repo.current_run_type }}, {{ macros.format_time_interval_short(repo.current_run_duration) }}</a></b>{% else %}-{% endif %}</td>
 
-			<td class="text-center">{{ update_run_info(repo.last_successful_fetch_run_id, repo.last_successful_fetch_ago, repo.last_successful_fetch_errors, repo.last_successful_fetch_warnings) }}</td>
-			<td class="text-center">{{ update_run_info(repo.last_failed_fetch_run_id, repo.last_failed_fetch_ago, repo.last_failed_fetch_errors, repo.last_failed_fetch_warnings) }}</td>
-			<td class="text-center">{% if repo.fetch_failure_rate %}<b>{{ repo.fetch_failure_rate|round }}%</b>{% else %}-{% endif %}</td>
+			{% set fetch_failed = repo.last_failed_fetch_ago and (not repo.last_successful_fetch_ago or repo.last_failed_fetch_ago < repo.last_successful_fetch_ago) %}
+			<td class="text-center{% if fetch_failed %} danger{% endif %}">{{ update_run_info(repo.last_successful_fetch_run_id, repo.last_successful_fetch_ago, repo.last_successful_fetch_errors, repo.last_successful_fetch_warnings) }}</td>
+			<td class="text-center{% if fetch_failed %} danger{% endif %}">{{ update_run_info(repo.last_failed_fetch_run_id, repo.last_failed_fetch_ago, repo.last_failed_fetch_errors, repo.last_failed_fetch_warnings) }}</td>
+			<td class="text-center{% if fetch_failed %} danger{% endif %}">{% if repo.fetch_failure_rate %}<b>{{ repo.fetch_failure_rate|round }}%</b>{% else %}-{% endif %}</td>
 
-			<td class="text-center">{{ update_run_info(repo.last_successful_parse_run_id, repo.last_successful_parse_ago, repo.last_successful_parse_errors, repo.last_successful_parse_warnings) }}</td>
-			<td class="text-center">{{ update_run_info(repo.last_failed_parse_run_id, repo.last_failed_parse_ago, repo.last_failed_parse_errors, repo.last_failed_parse_warnings) }}</td>
-			<td class="text-center">{% if repo.parse_failure_rate %}<b>{{ repo.parse_failure_rate|round }}%</b>{% else %}-{% endif %}</td>
+			{% set parse_failed = repo.last_failed_parse_ago and (not repo.last_successful_parse_ago or repo.last_failed_parse_ago < repo.last_successful_parse_ago) %}
+			<td class="text-center{% if parse_failed %} danger{% endif %}">{{ update_run_info(repo.last_successful_parse_run_id, repo.last_successful_parse_ago, repo.last_successful_parse_errors, repo.last_successful_parse_warnings) }}</td>
+			<td class="text-center{% if parse_failed %} danger{% endif %}">{{ update_run_info(repo.last_failed_parse_run_id, repo.last_failed_parse_ago, repo.last_failed_parse_errors, repo.last_failed_parse_warnings) }}</td>
+			<td class="text-center{% if parse_failed %} danger{% endif %}">{% if repo.parse_failure_rate %}<b>{{ repo.parse_failure_rate|round }}%</b>{% else %}-{% endif %}</td>
 		</tr>
 	{% endfor %}
 	</tbody>
