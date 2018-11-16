@@ -163,6 +163,9 @@ schemas = {
 
                     # crates_io fetcher
                     'fetch_delay': int,
+
+                    # aur fetcher
+                    'max_api_url_length': int,
                 }
             ],
             'shadow': bool,
