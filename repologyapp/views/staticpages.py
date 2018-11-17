@@ -30,6 +30,11 @@ def about():
     return flask.render_template('about.html')
 
 
+@ViewRegistrar('/addrepo')
+def addrepo():
+    return flask.render_template('addrepo.html')
+
+
 @ViewRegistrar('/bots')
 def bots():
     return flask.render_template('bots.html')
