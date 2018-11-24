@@ -20,7 +20,7 @@
   packagelinks:
     - desc: 'Package details'
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
-  tags: [ all, oldstable, bunsenlabs ]
+  tags: [ all, experimental, bunsenlabs ]
 
 - name: bunsenlabs_helium
   type: repository
@@ -41,7 +41,7 @@
   packagelinks:
     - desc: 'Package details'
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
-  tags: [ all, stable, bunsenlabs ]
+  tags: [ all, experimental, bunsenlabs ]
 
 - name: bunsenlabs_jessie_backports
   type: repository
@@ -62,7 +62,7 @@
   packagelinks:
     - desc: 'Package details'
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
-  tags: [ all, oldstable, backports, bunsenlabs ]
+  tags: [ all, experimental, bunsenlabs ]
 
 - name: bunsenlabs_stretch_backports
   type: repository
@@ -83,4 +83,4 @@
   packagelinks:
     - desc: 'Package details'
       url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
-  tags: [ all, stable, backports, bunsenlabs ]
+  tags: [ all, experimental, bunsenlabs ]
