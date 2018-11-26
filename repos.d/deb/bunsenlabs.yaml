@@ -5,6 +5,7 @@
   type: repository
   desc: BunsenLabs Hydrogen
   family: debuntu
+  ruleset: [debuntu,bunsenlabs]
   color: f6b620
   minpackages: 10
   sources:
@@ -26,6 +27,7 @@
   type: repository
   desc: BunsenLabs Helium
   family: debuntu
+  ruleset: [debuntu,bunsenlabs]
   color: f6b620
   minpackages: 10
   sources:
@@ -47,6 +49,7 @@
   type: repository
   desc: BunsenLabs Hydrogen/Jessie Backports
   family: debuntu
+  ruleset: [debuntu,bunsenlabs]
   color: f6b620
   minpackages: 1
   sources:
@@ -68,6 +71,7 @@
   type: repository
   desc: BunsenLabs Helium/Stretch Backports
   family: debuntu
+  ruleset: [debuntu,bunsenlabs]
   color: f6b620
   minpackages: 1
   sources:
