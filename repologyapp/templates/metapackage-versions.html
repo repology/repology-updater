@@ -62,7 +62,7 @@
 	<div class="col-md-3">
 		<ul>
 		{% for reponame in column %}
-			<li><a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a></li>
+			<li>{{ repometadata[reponame].desc }}</li>
 		{% endfor %}
 		</ul>
 	</div>
