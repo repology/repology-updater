@@ -91,6 +91,7 @@ rulesets = families + [
     'antix',
     'aur',
     'blackarch',
+    'bunsenlabs',
     'deb_multimedia',
     'deepin',
     'epel',
