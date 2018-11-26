@@ -2,6 +2,7 @@
 # BunsenLabs
 ###########################################################################
 - name: bunsenlabs_hydrogen
+  sortname: bunsenlabs_8
   type: repository
   desc: BunsenLabs Hydrogen
   family: debuntu
@@ -25,6 +26,7 @@
   tags: [ all, experimental, bunsenlabs ]
 
 - name: bunsenlabs_helium
+  sortname: bunsenlabs_9
   type: repository
   desc: BunsenLabs Helium
   family: debuntu
@@ -48,6 +50,7 @@
   tags: [ all, experimental, bunsenlabs ]
 
 - name: bunsenlabs_jessie_backports
+  sortname: bunsenlabs_8_backports
   type: repository
   desc: BunsenLabs Hydrogen/Jessie Backports
   family: debuntu
@@ -71,6 +74,7 @@
   tags: [ all, experimental, bunsenlabs ]
 
 - name: bunsenlabs_stretch_backports
+  sortname: bunsenlabs_9_backports
   type: repository
   desc: BunsenLabs Helium/Stretch Backports
   family: debuntu
