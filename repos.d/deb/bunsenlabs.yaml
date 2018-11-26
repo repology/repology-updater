@@ -1,0 +1,98 @@
+###########################################################################
+# BunsenLabs
+###########################################################################
+- name: bunsenlabs_hydrogen
+  sortname: bunsenlabs_8
+  type: repository
+  desc: BunsenLabs Hydrogen
+  family: debuntu
+  ruleset: [debuntu,bunsenlabs]
+  color: f6b620
+  minpackages: 10
+  sources:
+    - name: [ 'bunsen-hydrogen/main' ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: BunsenLabs Linux home
+      url: 'https://www.bunsenlabs.org/'
+    - desc: BunsenLabs Repository Index
+      url: 'https://www.bunsenlabs.org/repoidx.html'
+  packagelinks:
+    - desc: 'Package details'
+      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
+  tags: [ all, experimental, bunsenlabs ]
+
+- name: bunsenlabs_helium
+  sortname: bunsenlabs_9
+  type: repository
+  desc: BunsenLabs Helium
+  family: debuntu
+  ruleset: [debuntu,bunsenlabs]
+  color: f6b620
+  minpackages: 10
+  sources:
+    - name: [ 'helium/main' ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: BunsenLabs Linux home
+      url: 'https://www.bunsenlabs.org/'
+    - desc: BunsenLabs Repository Index
+      url: 'https://www.bunsenlabs.org/repoidx.html'
+  packagelinks:
+    - desc: 'Package details'
+      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
+  tags: [ all, experimental, bunsenlabs ]
+
+- name: bunsenlabs_jessie_backports
+  sortname: bunsenlabs_8_backports
+  type: repository
+  desc: BunsenLabs Hydrogen/Jessie Backports
+  family: debuntu
+  ruleset: [debuntu,bunsenlabs]
+  color: f6b620
+  minpackages: 1
+  sources:
+    - name: [ 'jessie-backports/main' ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: BunsenLabs Linux home
+      url: 'https://www.bunsenlabs.org/'
+    - desc: BunsenLabs Repository Index
+      url: 'https://www.bunsenlabs.org/repoidx.html'
+  packagelinks:
+    - desc: 'Package details'
+      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
+  tags: [ all, experimental, bunsenlabs ]
+
+- name: bunsenlabs_stretch_backports
+  sortname: bunsenlabs_9_backports
+  type: repository
+  desc: BunsenLabs Helium/Stretch Backports
+  family: debuntu
+  ruleset: [debuntu,bunsenlabs]
+  color: f6b620
+  minpackages: 1
+  sources:
+    - name: [ 'stretch-backports/main' ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://pkg.bunsenlabs.org/debian/dists/{source}/source/Sources.gz'
+      compression: gz
+  repolinks:
+    - desc: BunsenLabs Linux home
+      url: 'https://www.bunsenlabs.org/'
+    - desc: BunsenLabs Repository Index
+      url: 'https://www.bunsenlabs.org/repoidx.html'
+  packagelinks:
+    - desc: 'Package details'
+      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
+  tags: [ all, experimental, bunsenlabs ]
