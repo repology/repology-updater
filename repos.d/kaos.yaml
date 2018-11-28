@@ -22,6 +22,8 @@
     - desc: GitHub organisation
       url: https://github.com/KaOSx
   packagelinks:
+    - desc: KaOS Package Viewer
+      url: "https://kaosx.us/packages/view.php?repo={subrepo}&name={name}-{origversion}"
     - desc: PKGBUILD
       url: "https://github.com/KaOSx/{subrepo}/blob/master/{name}/PKGBUILD"
   tags: [ all, production ]
@@ -45,4 +47,7 @@
       url: http://kaosx.tk/packages/
     - desc: GitHub organisation
       url: https://github.com/KaOSx
+  packagelinks:
+    - desc: KaOS Package Viewer
+      url: "https://kaosx.us/packages/view.php?repo=build&name={name}-{origversion}"
   tags: [ all, production ]
