@@ -1,0 +1,49 @@
+###########################################################################
+# Pisi
+###########################################################################
+- name: pisi_main
+  type: repository
+  desc: Pisi Linux
+  family: pisi
+  minpackages: 1400
+  sources:
+    - name: main
+      fetcher: GitFetcher
+      parser: PisiParser
+      url: 'https://github.com/pisilinux/main.git'
+      sparse_checkout: [ '**/pspec.xml' ]
+  repolinks:
+    - desc: Pisi Linux home
+      url: https://pisilinux.org/
+    - desc: Pisi Linux GitHub organization
+      url: https://github.com/pisilinux
+  packagelinks:
+    - desc: Git directory
+      url: 'https://github.com/pisilinux/main/tree/master/{pspecdir}'
+    - desc: pspec.xml
+      url: 'https://github.com/pisilinux/main/blob/master/{pspecdir}/pspec.xml'
+  tags: [ all, production, pisi ]
+
+- name: pisi_contrib
+  sortname: pisi_zzz
+  type: repository
+  desc: Pisi Linux Contrib
+  family: pisi
+  minpackages: 200
+  sources:
+    - name: contrib
+      fetcher: GitFetcher
+      parser: PisiParser
+      url: 'https://github.com/pisilinux/contrib.git'
+      sparse_checkout: [ '**/pspec.xml' ]
+  repolinks:
+    - desc: Pisi Linux home
+      url: https://pisilinux.org/
+    - desc: Pisi Linux GitHub organization
+      url: https://github.com/pisilinux
+  packagelinks:
+    - desc: Git directory
+      url: 'https://github.com/pisilinux/contrib/tree/master/{pspecdir}'
+    - desc: pspec.xml
+      url: 'https://github.com/pisilinux/contrib/blob/master/{pspecdir}/pspec.xml'
+  tags: [ all, production, pisi ]
