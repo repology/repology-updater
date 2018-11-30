@@ -74,6 +74,7 @@ version are always parsed.
 | OpenMandriva                     | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | OpenPKG                          | ✔       |         | ✔     | ✔     | ✔       | ✔        |
 | PCLinuxOS                        | ✔       | ✔       | ✔     |       |         |          |
+| Pisi                             | ✔       | ✔       | ✔     | ✔     | ✔       | ✔        |
 | pkgsrc                           | ✔       | ✔       | ✔     |       |         |          |
 | PyPi                             | ✔       |         |       | ✔ (2) |         |          |
 | PLD                              |         |         |       |       |         |          |
