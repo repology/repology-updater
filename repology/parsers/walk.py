@@ -21,11 +21,15 @@ import os
 __all__ = ['walk_tree']
 
 
-def walk_tree(path, filt=None, suffix=None):
+def walk_tree(path, filt=None, suffix=None, name=None):
     if suffix:
         def suffix_filter(filename):
             return filename.endswith(suffix)
         filt = suffix_filter
+    elif name:
+        def name_filter(filename):
+            return filename == name
+        filt = name_filter
 
     for root, _, files in os.walk(path):
         for filename in files:
