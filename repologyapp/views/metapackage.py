@@ -37,15 +37,19 @@ from repology.package import VersionClass
 @ViewRegistrar('/metapackage/<name>/versions')
 def metapackage_versions(name):
     packages_by_repo = defaultdict(list)
-    for package in get_db().get_metapackage_packages(name):
+
+    packages = get_db().get_metapackage_packages(name)
+
+    for package in packages:
         packages_by_repo[package.repo].append(package)
 
-    for repo, packages in packages_by_repo.items():
-        packages_by_repo[repo] = packageset_sort_by_version(packages)
+    for repo, repo_packages in packages_by_repo.items():
+        packages_by_repo[repo] = packageset_sort_by_version(repo_packages)
 
     return flask.render_template(
         'metapackage-versions.html',
         reponames_absent=[reponame for reponame in repometadata.active_names() if reponame not in packages_by_repo],
+        packages=packages,
         packages_by_repo=packages_by_repo,
         metapackage=get_db().get_metapackage(name),
         name=name

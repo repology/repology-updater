@@ -12,6 +12,8 @@
 <div class="alert alert-warning" role="alert">No data found for metapackage <strong>{{ name }}</strong></div>
 {% else %}
 
+<p><b>{{ packages|length }}</b> package(s) known</p>
+
 <table class="table table-striped">
 	<tr>
 		<th class="text-right">Repository</th>
@@ -21,9 +23,7 @@
 		<th class="text-left">Maintainer(s)</th>
 	</tr>
 {% for reponame in repometadata.active_names() %}
-{% set packages = packages_by_repo[reponame] %}
-{% set numpackages = packages|length %}
-{% for package in packages %}
+{% for package in packages_by_repo[reponame] %}
 	<tr{% if loop.first %} id="{{ reponame }}"{% endif %}>
 		<td class="text-right">
 			<a href="{{ url_for('repository', repo=reponame) }}">{{ repometadata[reponame].desc }}</a>

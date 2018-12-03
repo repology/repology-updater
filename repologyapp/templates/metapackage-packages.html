@@ -12,6 +12,8 @@
 <div class="alert alert-warning" role="alert">No packages found for metapackage <strong>{{ name }}</strong></div>
 {% else %}
 
+<p><b>{{ packages|length }}</b> package(s) known</p>
+
 <div class="row">
 {% for package in packages %}
 {% if not loop.first and loop.index0 % 3 == 0 %}
