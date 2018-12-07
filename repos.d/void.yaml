@@ -1,0 +1,31 @@
+###########################################################################
+# Void Linux
+###########################################################################
+#
+# To browse repository contents:
+#
+#   rsync rsync://alpha.de.repo.voidlinux.org/voidmirror/current/
+#
+- name: void_x86_64
+  type: repository
+  desc: Void Linux x86_64
+  family: void
+  color: "478061"
+  minpackages: 9000
+  sources:
+    - name: [ x86_64, nonfree/x86_64 ]
+      fetcher: WgetTarFetcher
+      parser: VoidLinuxPlistParser
+      url: 'https://alpha.de.repo.voidlinux.org/current/{source}-repodata'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Void Linux home
+      url: https://voidlinux.org/
+    - desc: Void Linux package repository
+      url: https://github.com/void-linux/void-packages
+  packagelinks:
+    - desc: Port directory in git repo
+      url: 'https://github.com/void-linux/void-packages/tree/master/srcpkgs/{name}'
+    - desc: Template file
+      url: 'https://github.com/void-linux/void-packages/blob/master/srcpkgs/{name}/template'
+  tags: [ all, production ]

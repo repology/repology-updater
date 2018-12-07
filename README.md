@@ -89,6 +89,7 @@ version are always parsed.
 | Stackage                         | ✔       |         |       |       |         |          |
 | Termux                           | ✔       |         |       | ✔     |         | ✔        |
 | Vcpkg                            | ✔       |         |       |       |         |          |
+| Void                             | ✔       | ✔       |       | ✔     | ✔       |          |
 | Wikidata                         | ✔       |         |       | ✔     | ✔       |          |
 | YACP                             | ✔       |         | ✔     |       |         |          |
 
