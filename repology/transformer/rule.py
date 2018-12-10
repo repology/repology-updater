@@ -116,6 +116,14 @@ class Rule:
 
             self.matchers.append(matcher)
 
+        if 'maintainer' in ruledata:
+            maintainers = as_lowercase_set(ruledata['maintainer'])
+
+            def matcher(package, package_context, match_context):
+                return not maintainers.isdisjoint(set((m.lower() for m in package.maintainers)))
+
+            self.matchers.append(matcher)
+
         if 'name' in ruledata:
             names = as_list(ruledata['name'])
 

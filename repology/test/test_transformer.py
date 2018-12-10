@@ -354,6 +354,15 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p8', 'version': '1.0', 'category': 'CATEG4', 'expect_effname': 'ok4'},
         )
 
+    def test_match_maintainer(self):
+        self.check_transformer(
+            '[ { maintainer: "Foo@bAz.com", setname: quux }, { maintainer: [ "Bar@baZ.com" ], setname: bat } ]',
+            {'name': 'p1', 'version': '1.0', 'maintainers': ['foo@baz.COM', 'bbb'], 'expect_effname': 'quux'},
+            {'name': 'p2', 'version': '2.0', 'maintainers': ['aaa', 'baR@baz.Com'], 'expect_effname': 'bat'},
+            {'name': 'p3', 'version': '3.0', 'maintainers': ['other@foo.com'], 'expect_effname': 'p3'},
+            {'name': 'p4', 'version': '3.0', 'expect_effname': 'p4'}
+        )
+
     def test_addflavor(self):
         self.check_transformer(
             '[ { name: foo, addflavor: fff } ]',
