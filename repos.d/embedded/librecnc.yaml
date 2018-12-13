@@ -1,0 +1,119 @@
+###########################################################################
+# LibreCNC
+###########################################################################
+- name: librecnc_core_ar71xx_generic_packages
+  type: repository
+  desc: libreCNC current/core/ar71xx/generic/packages
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/generic/packages/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled
+
+- name: librecnc_core_ar71xx_nand_packages
+  type: repository
+  desc: libreCNC current/core/ar71xx/nand/packages
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/ar71xx/nand/packages/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled
+
+- name: librecnc_core_packages_mips_24kc_base
+  type: repository
+  desc: libreCNC current/core/packages/mips_24kc/base
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/packages/mips_24kc/base/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled
+
+- name: librecnc_core_packages_mips_24kc_packages
+  type: repository
+  desc: libreCNC current/core/packages/mips_24kc/packages
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/core/packages/mips_24kc/packages/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled
+
+- name: librecnc_legacy_ar71xx_generic_packages
+  type: repository
+  desc: libreCNC current/legacy/ar71xx/generic/packages
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/legacy/ar71xx/generic/packages/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled
+
+- name: librecnc_main_ar71xx_generic_packages
+  type: repository
+  desc: libreCNC current/main/ar71xx/generic/packages
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/generic/packages/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled
+
+- name: librecnc_main_ar71xx_nand_packages
+  type: repository
+  desc: libreCNC current/main/ar71xx/nand/packages
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/ar71xx/nand/packages/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled
+
+- name: librecnc_main_packages_mips_24kc_base
+  type: repository
+  desc: libreCNC current/main/packages/mips_24kc/base
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/packages/mips_24kc/base/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled
+
+- name: librecnc_main_packages_mips_24kc_packages
+  type: repository
+  desc: libreCNC current/main/packages/mips_24kc/packages
+  family: librecnc  # XXX
+  minpackages: 1  # XXX
+  sources:
+    - name: Packages
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://librecmc.org/librecmc/downloads/snapshots/current/main/packages/mips_24kc/packages/Packages.gz'
+      compression: gz
+  tags: [ all, librecnc ] # disabled

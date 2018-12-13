@@ -56,6 +56,7 @@ families = [
     'homebrew',
     'hpux',
     'kaos',
+    'librecnc',
     'libregamewiki',
     'macports',
     'mageia',
