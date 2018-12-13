@@ -36,6 +36,7 @@ families = [
     'buckaroo',
     'centos',
     'chocolatey',
+    'conda',
     'cpan',
     'cran',
     'crates_io',

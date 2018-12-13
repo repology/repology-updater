@@ -1,0 +1,34 @@
+###########################################################################
+# Conda
+###########################################################################
+- name: conda_forge
+  type: repository
+  desc: conda-forge
+  family: conda
+  minpackages: 1
+  sources:
+    - name: [noarch, linux-32, linux-64, osx-64, win-32, win-64]
+      fetcher: FileFetcher
+      parser: CondaRepodataJsonParser
+      url: 'https://conda.anaconda.org/conda-forge/{source}/repodata.json'
+      subrepo: '{source}'
+  repolinks:
+    - desc: conda-forge home
+      url: https://conda-forge.org/
+  tags: [ all, experimental, conda ]
+
+- name: bioconda
+  type: repository
+  desc: Bioconda
+  family: conda
+  minpackages: 1
+  sources:
+    - name: [noarch, linux-32, linux-64, osx-32, osx-64, win-32, win-64]
+      fetcher: FileFetcher
+      parser: CondaRepodataJsonParser
+      url: 'https://conda.anaconda.org/bioconda/{source}/repodata.json'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Bioconda home
+      url: https://bioconda.github.io/
+  tags: [ all, experimental, conda ]
