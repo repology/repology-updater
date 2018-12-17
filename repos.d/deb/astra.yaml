@@ -10,7 +10,7 @@
     - name: [ main, contrib, non-free]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://mirror.yandex.ru/astra/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
+      url: 'https://mirror.yandex.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
