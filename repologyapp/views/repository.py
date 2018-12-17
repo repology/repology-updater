@@ -25,6 +25,8 @@ from repologyapp.view_registry import ViewRegistrar
 
 @ViewRegistrar('/repository/<repo>')
 def repository(repo):
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
+
     if repo not in repometadata.all_names():
         flask.abort(404)
         #return (flask.render_template('repository-404.html', repo=repo), 404)
@@ -35,7 +37,8 @@ def repository(repo):
     return flask.render_template(
         'repository.html',
         repo=repo,
-        repo_info=get_db().get_repository_information(repo)
+        repo_info=get_db().get_repository_information(repo),
+        autorefresh=autorefresh
     )
 
 

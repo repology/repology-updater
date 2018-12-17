@@ -1,8 +1,9 @@
 {% extends "repositories.html" %}
 {% import "macros.html" as macros %}
+{% import "macros/autorefresh.html" as _autorefresh with context %}
 
 {% block extrameta %}
-	<meta http-equiv="refresh" content="{{ 3600 + randrange(60) }}">
+{{ _autorefresh.meta(3600 + randrange(60)) }}
 {% endblock %}
 
 {% block title %}Repository statistics - Repology{% endblock %}
@@ -18,16 +19,18 @@
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="statisticsSortMenu">
-			<li><a href="{{ url_for_self(sorting=None) }}" class="{% if sorting == "alpha" %} active{% endif %}">Name</a></li>
-			<li><a href="{{ url_for_self(sorting="newest") }}" class="{% if sorting == "newest" %} active{% endif %}">Metapackages up to date</a></li>
-			<li><a href="{{ url_for_self(sorting="pnewest") }}" class="{% if sorting == "pnewest" %} active{% endif %}">Percent metapackages up to date</a></li>
-			<li><a href="{{ url_for_self(sorting="outdated") }}" class="{% if sorting == "outdated" %} active{% endif %}">Metapackages outdated</a></li>
-			<li><a href="{{ url_for_self(sorting="poutdated") }}" class="{% if sorting == "poutdated" %} active{% endif %}">Percent metapackages outdated</a></li>
-			<li><a href="{{ url_for_self(sorting="total") }}" class="{% if sorting == "total" %} active{% endif %}">Total metapackages</a></li>
+			<li><a href="{{ url_for_self(sorting=None, autorefresh=autorefresh) }}" class="{% if sorting == "alpha" %} active{% endif %}">Name</a></li>
+			<li><a href="{{ url_for_self(sorting="newest", autorefresh=autorefresh) }}" class="{% if sorting == "newest" %} active{% endif %}">Metapackages up to date</a></li>
+			<li><a href="{{ url_for_self(sorting="pnewest", autorefresh=autorefresh) }}" class="{% if sorting == "pnewest" %} active{% endif %}">Percent metapackages up to date</a></li>
+			<li><a href="{{ url_for_self(sorting="outdated", autorefresh=autorefresh) }}" class="{% if sorting == "outdated" %} active{% endif %}">Metapackages outdated</a></li>
+			<li><a href="{{ url_for_self(sorting="poutdated", autorefresh=autorefresh) }}" class="{% if sorting == "poutdated" %} active{% endif %}">Percent metapackages outdated</a></li>
+			<li><a href="{{ url_for_self(sorting="total", autorefresh=autorefresh) }}" class="{% if sorting == "total" %} active{% endif %}">Total metapackages</a></li>
 		</ul>
 	</div>
 
 	<p>Total metapackages: <b>{{ counts.num_metapackages }}</b>, total individual packages: <b>{{ counts.num_packages }}</b>.</p>
+
+	{{ _autorefresh.toggler() }}
 </div>
 
 <div class="table-responsive">

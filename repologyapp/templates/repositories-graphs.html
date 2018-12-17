@@ -1,7 +1,8 @@
 {% extends "repositories.html" %}
+{% import "macros/autorefresh.html" as _autorefresh with context %}
 
 {% block extrameta %}
-	<meta http-equiv="refresh" content="{{ 3600 + randrange(60) }}">
+{{ _autorefresh.meta(3600 + randrange(60)) }}
 {% endblock %}
 
 {% block title %}Graphs - Repology{% endblock %}
@@ -9,6 +10,8 @@
 
 {% block content %}
 <div class="container">
+
+{{ _autorefresh.toggler() }}
 
 <h3 id="freshness_map">Repository size/freshness map</h3>
 <img src="{{ url_for('graph_map_repo_size_fresh') }}" alt="Repository size/freshness map">

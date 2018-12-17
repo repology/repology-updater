@@ -1,8 +1,9 @@
 {% extends "metapackage.html" %}
 {% import "macros.html" as macros %}
+{% import "macros/autorefresh.html" as _autorefresh with context %}
 
 {% block extrameta %}
-	<meta http-equiv="refresh" content="{{ 3600 + randrange(60) }}">
+{{ _autorefresh.meta(3600 + randrange(60)) }}
 {% endblock %}
 
 {% block title %}{{ name }} packaging history - Repology{% endblock %}
@@ -20,6 +21,8 @@ and repository maintainers, this history may contain artifacts produced
 by repology. For example, if two metapackages are merged it will look
 like one metapackage has appeared in more repositories and another one
 removed from all repositories.</p>
+
+{{ _autorefresh.toggler() }}
 
 <table class="table table-striped">
 	<tr>

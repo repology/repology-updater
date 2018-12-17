@@ -26,6 +26,8 @@ from repologyapp.view_registry import ViewRegistrar
 @ViewRegistrar('/repositories/statistics')
 @ViewRegistrar('/repositories/statistics/<sorting>')
 def repositories_statistics(sorting=None):
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
+
     repostats = {repostat['name']: repostat for repostat in get_db().get_active_repositories()}
     repostats = [repostats[reponame] for reponame in repometadata.active_names() if reponame in repostats]
     showmedals = True
@@ -50,18 +52,27 @@ def repositories_statistics(sorting=None):
         repostats=repostats,
         showmedals=showmedals,
         repostats_old={},  # {repo['name']: repo for repo in get_db().GetRepositoriesHistoryAgo(60 * 60 * 24 * 7)},
-        counts=get_db().get_counts()
+        counts=get_db().get_counts(),
+        autorefresh=autorefresh
     )
 
 
 @ViewRegistrar('/repositories/updates')
 def repositories_updates():
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
+
     return flask.render_template(
         'repositories-updates.html',
-        repos=get_db().get_repositories_update_statistics()
+        repos=get_db().get_repositories_update_statistics(),
+        autorefresh=autorefresh
     )
 
 
 @ViewRegistrar('/repositories/graphs')
 def repositories_graphs():
-    return flask.render_template('repositories-graphs.html')
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
+
+    return flask.render_template(
+        'repositories-graphs.html',
+        autorefresh=autorefresh
+    )

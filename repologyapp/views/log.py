@@ -23,6 +23,8 @@ from repologyapp.view_registry import ViewRegistrar
 
 @ViewRegistrar('/log/<run_id>')
 def log(run_id):
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
+
     run = get_db().get_run(run_id)
 
     if not run:
@@ -31,5 +33,6 @@ def log(run_id):
     return flask.render_template(
         'log.html',
         run=run,
-        lines=get_db().get_log_lines(run_id)
+        lines=get_db().get_log_lines(run_id),
+        autorefresh=autorefresh
     )

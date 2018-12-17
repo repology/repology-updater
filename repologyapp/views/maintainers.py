@@ -109,6 +109,8 @@ def maintainer_problems(maintainer):
 
 @ViewRegistrar('/maintainer/<maintainer>/feed-for-repo/<repo>')
 def maintainer_repo_feed(maintainer, repo):
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
+
     return flask.render_template(
         'maintainer-repo-feed.html',
         maintainer=maintainer,
@@ -119,7 +121,8 @@ def maintainer_repo_feed(maintainer, repo):
                 repo=repo,
                 limit=config['HISTORY_PER_PAGE']
             )
-        )
+        ),
+        autorefresh=autorefresh
     )
 
 

@@ -132,6 +132,8 @@ def metapackage_information(name):
 
 @ViewRegistrar('/metapackage/<name>/history')
 def metapackage_history(name):
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
+
     def prepare_repos(repos):
         if not repos:
             return []
@@ -212,7 +214,8 @@ def metapackage_history(name):
         'metapackage-history.html',
         metapackage=get_db().get_metapackage(name),
         name=name,
-        history=list(postprocess_history(get_db().get_metapackage_history(name, limit=config['HISTORY_PER_PAGE'])))
+        history=list(postprocess_history(get_db().get_metapackage_history(name, limit=config['HISTORY_PER_PAGE']))),
+        autorefresh=autorefresh
     )
 
 

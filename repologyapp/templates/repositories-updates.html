@@ -1,8 +1,9 @@
 {% extends "repositories.html" %}
 {% import "macros.html" as macros %}
+{% import "macros/autorefresh.html" as _autorefresh with context %}
 
 {% block extrameta %}
-    <meta http-equiv="refresh" content="10">
+{{ _autorefresh.meta(10) }}
 {% endblock %}
 
 {% block title %}Update status - Repology{% endblock %}
@@ -22,6 +23,8 @@
 <div class="container">
 
 <p>Note that actual website updates happen some time after repository fetch and parse phases shown on this page.</p>
+
+{{ _autorefresh.toggler() }}
 
 <table class="table table-striped">
 	<thead>
