@@ -2,16 +2,18 @@
 # Pisi
 ###########################################################################
 - name: pisi_main
+  sortname: pisi
   type: repository
   desc: Pisi Linux
   family: pisi
   minpackages: 1400
   sources:
-    - name: main
+    - name: [ core, main ]
       fetcher: GitFetcher
       parser: PisiParser
-      url: 'https://github.com/pisilinux/main.git'
+      url: 'https://github.com/pisilinux/{source}.git'
       sparse_checkout: [ '**/pspec.xml' ]
+      subrepo: '{source}'
   repolinks:
     - desc: Pisi Linux home
       url: https://pisilinux.org/
@@ -19,13 +21,12 @@
       url: https://github.com/pisilinux
   packagelinks:
     - desc: Git directory
-      url: 'https://github.com/pisilinux/main/tree/master/{pspecdir}'
+      url: 'https://github.com/pisilinux/{subrepo}/tree/master/{pspecdir}'
     - desc: pspec.xml
-      url: 'https://github.com/pisilinux/main/blob/master/{pspecdir}/pspec.xml'
+      url: 'https://github.com/pisilinux/{subrepo}/blob/master/{pspecdir}/pspec.xml'
   tags: [ all, production, pisi ]
 
 - name: pisi_contrib
-  sortname: pisi_zzz
   type: repository
   desc: Pisi Linux Contrib
   family: pisi
