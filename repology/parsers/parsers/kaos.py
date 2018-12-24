@@ -29,6 +29,6 @@ class KaOSHTMLParser(Parser):
 
             pkg.set_name(name)
             pkg.set_version(version.split(':', 1)[-1])
-            pkg.set_origversion(version + '-' + revision)
+            pkg.set_rawversion(version + '-' + revision)
 
             yield pkg

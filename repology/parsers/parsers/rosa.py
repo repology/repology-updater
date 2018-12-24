@@ -34,7 +34,7 @@ class RosaInfoXmlParser(Parser):
 
             pkg.set_name(nevra[0])
             pkg.set_version(nevra[2])
-            pkg.set_origversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
+            pkg.set_rawversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
 
             # What we do here is we try to extract prerelease part
             # and mark version as ignored with non-trivial ROSAREV,

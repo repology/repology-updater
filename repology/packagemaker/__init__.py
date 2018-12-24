@@ -132,21 +132,14 @@ class PackageMaker(PackageMakerBase):
 
     @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_version(self, version, version_normalizer=None):
-        if version_normalizer is None:
-            self.package.version = version
-        else:
-            normalized_version = version_normalizer(version)
-
-            if normalized_version == version:
-                self.package.version = version
-            else:
-                self.package.version = normalized_version
-                self.package.origversion = version
+        self.package.rawversion = version
+        self.package.origversion = version if version_normalizer is None else version_normalizer(version)
+        self.package.version = self.package.origversion
 
     @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
-    def set_origversion(self, origversion):
-        if origversion != self.package.version:
-            self.package.origversion = origversion
+    def set_rawversion(self, rawversion):
+        if rawversion != self.package.version:
+            self.package.rawversion = rawversion
 
     def set_name_and_version(self, namever, version_normalizer=None):
         name, version = namever.rsplit('-', 1)

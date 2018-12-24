@@ -48,7 +48,7 @@ class LibreGameWikiParser(Parser):
             match = re.match('(.*) \(.*\)$', version)
             if match:
                 pkg.set_version(match.group(1))
-                pkg.set_origversion(version)
+                pkg.set_rawversion(version)
             else:
                 pkg.set_version(version)
 

@@ -110,6 +110,7 @@ class Package:
 
         'version',
         'origversion',
+        'rawversion',
         'versionclass',
 
         'maintainers',
@@ -130,7 +131,7 @@ class Package:
 
     def __init__(self, repo=None, family=None, subrepo=None,
                  name=None, basename=None, effname=None,
-                 version=None, origversion=None, versionclass=None,
+                 version=None, origversion=None, rawversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
                  flags=0, shadow=False, verfixed=False,
                  flavors=None,
@@ -145,6 +146,7 @@ class Package:
 
         self.version = version
         self.origversion = origversion
+        self.rawversion = rawversion
         self.versionclass = versionclass
 
         self.maintainers = maintainers if maintainers else []

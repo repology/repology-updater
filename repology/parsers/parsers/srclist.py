@@ -37,7 +37,7 @@ class SrcListParser(Parser):
 
             pkg.set_name(fields['name'])
             pkg.set_version(fields['version'])  # XXX: handle release
-            pkg.set_origversion(nevra_construct(None, header['epoch'], fields['version'], fields['release']))
+            pkg.set_rawversion(nevra_construct(None, header['epoch'], fields['version'], fields['release']))
 
             if fields['packager']:
                 pkg.add_maintainers(extract_maintainers(fields['packager']))  # XXX: may have multiple maintainers

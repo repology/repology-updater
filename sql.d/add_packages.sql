@@ -31,6 +31,7 @@ INSERT INTO packages(
 
 	version,
 	origversion,
+	rawversion,
 	versionclass,
 
 	maintainers,
@@ -58,6 +59,7 @@ INSERT INTO packages(
 
 	%(version)s,
 	%(origversion)s,
+	%(rawversion)s,
 	%(versionclass)s,
 
 	%(maintainers)s,

@@ -324,7 +324,8 @@ CREATE TABLE packages (
 	effname text NOT NULL,
 
 	version text NOT NULL,
-	origversion text,
+	origversion text NOT NULL,
+	rawversion text NOT NULL,
 	versionclass smallint,
 
 	maintainers text[],

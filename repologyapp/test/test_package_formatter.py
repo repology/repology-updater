@@ -32,11 +32,6 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(fmt.format('Just A String', pkg), 'Just A String')
         self.assertEqual(fmt.format('{name} {version} {origversion} {category} {subrepo} {foo}', pkg), 'foo 1.0 1.0_1 devel main bar')
 
-    def test_empty_origversion(self):
-        fmt = PackageFormatter()
-
-        self.assertEqual(fmt.format('{origversion}', Package(name='foo', version='1.0')), '1.0')
-
     def test_filter_lowercase(self):
         fmt = PackageFormatter()
 

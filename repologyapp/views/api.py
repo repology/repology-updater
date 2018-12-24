@@ -34,7 +34,7 @@ def api_v1_package_to_json(package):
             'subrepo',
             'name',
             'version',
-            'origversion',
+            #'origversion',
             #'status',
             'maintainers',
             #'category',
@@ -54,6 +54,7 @@ def api_v1_package_to_json(package):
         output['categories'] = [package.category]
 
     output['status'] = VersionClass.ToString(package.versionclass)
+    output['origversion'] = package.rawversion
 
     return output
 

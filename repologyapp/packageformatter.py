@@ -45,7 +45,9 @@ class PackageFormatter(string.Formatter):
         elif key == 'version':
             value = pkgdata['version']
         elif key == 'origversion':
-            value = pkgdata['origversion'] if pkgdata['origversion'] is not None else pkgdata['version']
+            value = pkgdata['origversion']
+        elif key == 'rawversion':
+            value = pkgdata['rawversion']
         elif key == 'category':
             value = pkgdata['category'] if pkgdata['category'] is not None else ''
         elif key == 'archrepo':

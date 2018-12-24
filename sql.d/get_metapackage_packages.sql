@@ -37,6 +37,7 @@ SELECT
 
 	version,
 	origversion,
+	rawversion,
 	versionclass,
 
 	maintainers,

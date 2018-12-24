@@ -38,7 +38,7 @@ class AoscPkgsParser(Parser):
                 if not pkg.check_sanity(verbose=True):
                     continue
 
-                pkg.set_origversion(package['full_version'])
+                pkg.set_rawversion(package['full_version'])
                 pkg.add_categories(package['pkg_section'], package['section'])
                 pkg.set_summary(package['description'])
                 pkg.add_maintainers(extract_maintainers(package['committer']))

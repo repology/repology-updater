@@ -33,9 +33,15 @@
 		</td>
 		<td class="text-center">{{ macros.package_link(package, package.name) }}</td>
 		<td class="text-center">
-			<span class="version version-big version-{{ package.versionclass|css_for_versionclass }}{% if package.verfixed %} version-property-fixed{% endif %}">
+		{% if package.origversion != package.version %}
+			<span class="version version-big version-{{ package.versionclass|css_for_versionclass }} version-property-fixed" title="Version normalized from {{ package.origversion }}">
 				{{- macros.package_link(package, package.version) -}}
 			</span>
+		{% else %}
+			<span class="version version-big version-{{ package.versionclass|css_for_versionclass }}">
+				{{- macros.package_link(package, package.version) -}}
+			</span>
+		{% endif %}
 		</td>
 		<td class="text-center">
 			{{- package.category|default('-', boolean=True) -}}

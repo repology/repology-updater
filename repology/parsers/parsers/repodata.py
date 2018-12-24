@@ -69,7 +69,7 @@ class RepodataParser(Parser):
                 pkg.set_flags(PackageFlags.ignore)
 
             pkg.set_version(version, normalize_version)
-            pkg.set_origversion(nevra_construct(None, epoch, version, release))
+            pkg.set_rawversion(nevra_construct(None, epoch, version, release))
 
             pkg.set_summary(entry.find('{http://linux.duke.edu/metadata/common}summary').text)
             pkg.add_homepages(entry.find('{http://linux.duke.edu/metadata/common}url').text)
