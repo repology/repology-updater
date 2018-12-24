@@ -49,7 +49,6 @@ SELECT
 
 	flags,
 	shadow,
-	verfixed,
 
 	flavors,
 

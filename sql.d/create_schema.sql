@@ -337,7 +337,6 @@ CREATE TABLE packages (
 
 	flags smallint NOT NULL,
 	shadow bool NOT NULL,
-	verfixed bool NOT NULL,
 
 	flavors text[],
 

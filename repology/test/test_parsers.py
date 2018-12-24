@@ -57,7 +57,6 @@ class TestParsers(unittest.TestCase):
 
             'flags': 0,
             'shadow': False,
-            'verfixed': False,
 
             'flavors': [],
 

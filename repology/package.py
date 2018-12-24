@@ -122,7 +122,6 @@ class Package:
 
         'flags',
         'shadow',
-        'verfixed',
 
         'flavors',
 
@@ -133,7 +132,7 @@ class Package:
                  name=None, basename=None, effname=None,
                  version=None, origversion=None, rawversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
-                 flags=0, shadow=False, verfixed=False,
+                 flags=0, shadow=False,
                  flavors=None,
                  extrafields=None):
         self.repo = repo
@@ -158,7 +157,6 @@ class Package:
 
         self.flags = flags
         self.shadow = shadow
-        self.verfixed = verfixed
 
         self.flavors = flavors if flavors else []
 

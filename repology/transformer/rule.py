@@ -490,8 +490,6 @@ class Rule:
             setver = ruledata['setver']
 
             def action(package, package_context, match_context):
-                version_before_fix = package.version
-
                 if package.origversion is None:
                     package.origversion = package.version
 
@@ -499,8 +497,6 @@ class Rule:
                     package.version = DOLLARN.sub(lambda x: match_context.ver_match.group(int(x.group(1))), setver)
                 else:
                     package.version = DOLLAR0.sub(package.version, setver)
-
-                package.verfixed = package.version != version_before_fix
 
             self.actions.append(action)
 

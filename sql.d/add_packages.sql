@@ -43,7 +43,6 @@ INSERT INTO packages(
 
 	flags,
 	shadow,
-	verfixed,
 
 	flavors,
 
@@ -71,7 +70,6 @@ INSERT INTO packages(
 
 	%(flags)s,
 	%(shadow)s,
-	%(verfixed)s,
 
 	%(flavors)s,
 
