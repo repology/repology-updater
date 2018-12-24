@@ -27,7 +27,7 @@ class SliTazJsonParser(Parser):
             for item in json.load(jsonfile)['items']:
                 pkg = factory.begin()
 
-                pkg.set_effname(item['meta'])
+                pkg.set_basename(item['meta'])
                 pkg.set_version(item['ver'])
                 pkg.add_maintainers(item['maintainer'])
                 pkg.add_licenses(item['license'])

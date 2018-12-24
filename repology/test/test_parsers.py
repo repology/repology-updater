@@ -40,6 +40,7 @@ class TestParsers(unittest.TestCase):
             'subrepo': None,
 
             # name must be filled
+            'basename': None,
             'effname': None,
 
             # version must be filled
@@ -177,7 +178,7 @@ class TestParsers(unittest.TestCase):
                 'family': 'arch',
                 'subrepo': 'core',
                 'name': 'zlib',
-                'effname': 'zlib',
+                'basename': 'zlib',
                 'version': '1.2.8',
                 'origversion': '1:1.2.8-7',
                 'comment': 'Compression library implementing the deflate compression method found in gzip and PKZIP',

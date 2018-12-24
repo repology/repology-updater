@@ -36,7 +36,7 @@ class VoidLinuxPlistParser(Parser):
             pkg = factory.begin(pkgname)
 
             if 'source-revisions' in props:
-                pkg.set_effname(props['source-revisions'].split(':', 1)[0])
+                pkg.set_basename(props['source-revisions'].split(':', 1)[0])
             else:
                 pkg.log('cannot parse, no source-revisions field', severity=Logger.ERROR)
                 continue

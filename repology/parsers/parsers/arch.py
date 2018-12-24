@@ -60,7 +60,7 @@ class ArchDBParser(Parser):
                         pkg.add_maintainers(extract_maintainers(line))
                     elif tag == 'BASE':
                         pkg.set_extra_field('base', line)
-                        pkg.set_effname(line)
+                        pkg.set_basename(line)
                     elif line.startswith('%') and line.endswith('%'):
                         tag = line[1:-1]
 

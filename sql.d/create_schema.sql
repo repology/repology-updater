@@ -320,6 +320,7 @@ CREATE TABLE packages (
 	subrepo text,
 
 	name text NOT NULL,
+	basename text NULL,
 	effname text NOT NULL,
 
 	version text NOT NULL,

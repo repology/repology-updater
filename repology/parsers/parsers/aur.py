@@ -46,6 +46,6 @@ class AURParser(Parser):
                         pkg.add_maintainers(extract_maintainers(result['Maintainer'] + '@aur'))
 
                     if 'PackageBase' in result and result['PackageBase']:
-                        pkg.set_effname(result['PackageBase'])
+                        pkg.set_basename(result['PackageBase'])
 
                     yield pkg

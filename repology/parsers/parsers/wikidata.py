@@ -67,7 +67,7 @@ class WikidataJsonParser(Parser):
                     subpkg.set_flags(PackageFlags.devel, is_devel)
 
                     subpkg.set_name(entity)
-                    subpkg.set_effname(name)
+                    subpkg.set_basename(name)
                     subpkg.set_version(version)
 
                     if 'projectDescription' in packagedata:

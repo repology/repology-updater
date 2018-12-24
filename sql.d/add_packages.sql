@@ -26,6 +26,7 @@ INSERT INTO packages(
 	subrepo,
 
 	name,
+	basename,
 	effname,
 
 	version,
@@ -52,6 +53,7 @@ INSERT INTO packages(
 	%(subrepo)s,
 
 	%(name)s,
+	%(basename)s,
 	%(effname)s,
 
 	%(version)s,

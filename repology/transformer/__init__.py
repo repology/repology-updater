@@ -124,9 +124,7 @@ class PackageTransformer:
         if self.packages_processed == 1000 or self.packages_processed == 10000 or self.packages_processed == 100000 or self.packages_processed == 1000000:
             self._recalc_opt_ruleblocks()
 
-        # start with package.name as is, if it was not already set
-        if package.effname is None:
-            package.effname = package.name
+        package.effname = package.basename if package.basename is not None else package.name
 
         package_context = PackageContext()
         if package.repo:

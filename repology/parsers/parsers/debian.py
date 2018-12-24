@@ -100,7 +100,7 @@ class DebianSourcesParser(Parser):
                         # We assume that Source field is a package name or something path-like
                         if self.project_name_from_source:
                             srcname = source.split('/')[-1]
-                            pkg.set_effname(srcname)
+                            pkg.set_basename(srcname)
                             pkg.set_extra_field('srcname', srcname)
 
                     yield pkg

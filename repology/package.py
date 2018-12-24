@@ -105,6 +105,7 @@ class Package:
         'subrepo',
 
         'name',
+        'basename',
         'effname',
 
         'version',
@@ -128,7 +129,7 @@ class Package:
     ]
 
     def __init__(self, repo=None, family=None, subrepo=None,
-                 name=None, effname=None,
+                 name=None, basename=None, effname=None,
                  version=None, origversion=None, versionclass=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
                  flags=0, shadow=False, verfixed=False,
@@ -139,6 +140,7 @@ class Package:
         self.subrepo = subrepo
 
         self.name = name
+        self.basename = basename
         self.effname = effname
 
         self.version = version

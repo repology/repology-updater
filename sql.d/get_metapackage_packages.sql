@@ -32,6 +32,7 @@ SELECT
 	subrepo,
 
 	name,
+	basename,
 	effname,
 
 	version,

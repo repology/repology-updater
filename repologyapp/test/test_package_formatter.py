@@ -54,6 +54,12 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(fmt.format('{name|libfirstletter}', Package(name='FOO', version='1.0')), 'f')
         self.assertEqual(fmt.format('{name|libfirstletter}', Package(name='LIBFOO', version='1.0')), 'libf')
 
+    def test_basename(self):
+        fmt = PackageFormatter()
+
+        self.assertEqual(fmt.format('{basename}', Package(name='foo', basename='bar')), 'bar')
+        self.assertEqual(fmt.format('{basename}', Package(name='foo')), 'foo')
+
 
 if __name__ == '__main__':
     unittest.main()
