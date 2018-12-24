@@ -16,6 +16,8 @@
   repolinks:
     - desc: Chocolatey - the package manager for Windows
       url: https://chocolatey.org/
+    - desc: Chocolatey new package requests
+      url: https://github.com/chocolatey/chocolatey-package-requests
   packagelinks:
     - desc: Chocolatey package page
       url: 'https://chocolatey.org/packages/{name}'
