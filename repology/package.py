@@ -100,18 +100,16 @@ class PackageFlags:
 
 class Package:
     __slots__ = [
+        # parsed, immutable
         'repo',
         'family',
         'subrepo',
 
         'name',
         'basename',
-        'effname',
 
-        'version',
         'origversion',
         'rawversion',
-        'versionclass',
 
         'maintainers',
         'category',
@@ -120,12 +118,18 @@ class Package:
         'licenses',
         'downloads',
 
+        'extrafields',
+
+        # calculated
+        'effname',
+
+        'version',
+        'versionclass',
+
         'flags',
         'shadow',
 
         'flavors',
-
-        'extrafields',
     ]
 
     def __init__(self, repo=None, family=None, subrepo=None,
@@ -135,18 +139,16 @@ class Package:
                  flags=0, shadow=False,
                  flavors=None,
                  extrafields=None):
+        # parsed, immutable
         self.repo = repo
         self.family = family
         self.subrepo = subrepo
 
         self.name = name
         self.basename = basename
-        self.effname = effname
 
-        self.version = version
         self.origversion = origversion
         self.rawversion = rawversion
-        self.versionclass = versionclass
 
         self.maintainers = maintainers if maintainers else []
         self.category = category
@@ -155,12 +157,18 @@ class Package:
         self.licenses = licenses if licenses else []
         self.downloads = downloads if downloads else []
 
+        self.extrafields = extrafields if extrafields else {}
+
+        # calculated
+        self.effname = effname
+
+        self.version = version
+        self.versionclass = versionclass
+
         self.flags = flags
         self.shadow = shadow
 
         self.flavors = flavors if flavors else []
-
-        self.extrafields = extrafields if extrafields else {}
 
     def CheckFormat(self):
         # check

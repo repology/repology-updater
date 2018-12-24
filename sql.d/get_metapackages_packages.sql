@@ -27,18 +27,16 @@ SELECT
 {% if fields %}
 	{{ fields | join(',') }}
 {% else %}
+	-- parsed, immutable
 	repo,
 	family,
 	subrepo,
 
 	name,
 	basename,
-	effname,
 
-	version,
 	origversion,
 	rawversion,
-	versionclass,
 
 	maintainers,
 	category,
@@ -47,12 +45,18 @@ SELECT
 	licenses,
 	downloads,
 
+	extrafields,
+
+	-- calculated
+	effname,
+
+	version,
+	versionclass,
+
 	flags,
 	shadow,
 
-	flavors,
-
-	extrafields
+	flavors
 {% endif %}
 FROM packages
 WHERE effname = ANY(%(effnames)s);

@@ -21,18 +21,16 @@
 --
 --------------------------------------------------------------------------------
 INSERT INTO packages(
+	-- parsed, immutable
 	repo,
 	family,
 	subrepo,
 
 	name,
 	basename,
-	effname,
 
-	version,
 	origversion,
 	rawversion,
-	versionclass,
 
 	maintainers,
 	category,
@@ -41,25 +39,29 @@ INSERT INTO packages(
 	licenses,
 	downloads,
 
+	extrafields,
+
+	-- calculated
+	effname,
+
+	version,
+	versionclass,
+
 	flags,
 	shadow,
 
-	flavors,
-
-	extrafields
+	flavors
 ) VALUES (
+	-- parsed, immutable
 	%(repo)s,
 	%(family)s,
 	%(subrepo)s,
 
 	%(name)s,
 	%(basename)s,
-	%(effname)s,
 
-	%(version)s,
 	%(origversion)s,
 	%(rawversion)s,
-	%(versionclass)s,
 
 	%(maintainers)s,
 	%(category)s,
@@ -68,10 +70,16 @@ INSERT INTO packages(
 	%(licenses)s,
 	%(downloads)s,
 
+	%(extrafields)s,
+
+	-- calculated
+	%(effname)s,
+
+	%(version)s,
+	%(versionclass)s,
+
 	%(flags)s,
 	%(shadow)s,
 
-	%(flavors)s,
-
-	%(extrafields)s
+	%(flavors)s
 )
