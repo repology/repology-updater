@@ -82,7 +82,7 @@ WHERE
 		FROM runs
 		WHERE
 			runs.id = last_failed_fetch_run_id
-			AND runs.finish_ts < now() - INTERVAL '31' DAY
+			AND runs.start_ts < now() - INTERVAL '31' DAY
 	);
 
 UPDATE
@@ -95,7 +95,7 @@ WHERE
 		FROM runs
 		WHERE
 			runs.id = last_failed_parse_run_id
-			AND runs.finish_ts < now() - INTERVAL '31' DAY
+			AND runs.start_ts < now() - INTERVAL '31' DAY
 	);
 
 --------------------------------------------------------------------------------
@@ -117,8 +117,8 @@ WITH removed_runs AS (
 				last_failed_parse_run_id = runs.id
 		)
 		AND (
-			(successful AND finish_ts < now() - INTERVAL '7' DAY) OR
-			(finish_ts < now() - INTERVAL '31' DAY)
+			(successful AND start_ts < now() - INTERVAL '7' DAY) OR
+			(start_ts < now() - INTERVAL '31' DAY)
 		)
 	RETURNING
 		id
