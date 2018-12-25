@@ -22,7 +22,7 @@ from repology.parsers import Parser
 
 
 class FDroidParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         root = xml.etree.ElementTree.parse(path)
 
         for application in root.findall('application'):

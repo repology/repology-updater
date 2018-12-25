@@ -29,7 +29,7 @@ def _force_decode(var):
 
 
 class RubyGemParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path, 'rb') as fd:
             for gem in rubymarshal.reader.load(fd):
                 pkg = factory.begin()

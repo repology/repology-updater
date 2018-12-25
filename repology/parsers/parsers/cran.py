@@ -21,7 +21,7 @@ from repology.parsers import Parser
 
 
 class CRANCheckSummaryParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path, 'r', encoding='utf-8') as htmlfile:
             for match in re.findall('<tr> <td> <a href="[^"]+">([^<>]+)</a> </td> <td>[ ]*([^ <>]+)[ ]*</td>', htmlfile.read()):
                 pkg = factory.begin()

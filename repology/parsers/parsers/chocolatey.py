@@ -22,7 +22,7 @@ from repology.parsers import Parser
 
 
 class ChocolateyParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for pagepath in os.listdir(path):
             if not pagepath.endswith('.xml'):
                 continue

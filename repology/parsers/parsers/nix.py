@@ -56,7 +56,7 @@ def extract_nix_licenses(whatever):
 
 
 class NixJsonParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for key, packagedata in json.load(jsonfile)['packages'].items():
                 pkg = factory.begin(key)

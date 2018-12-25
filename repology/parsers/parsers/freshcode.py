@@ -23,7 +23,7 @@ from repology.parsers import Parser
 
 
 class FreshcodeParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         result = {}
 
         # note that we actually parse database prepared by

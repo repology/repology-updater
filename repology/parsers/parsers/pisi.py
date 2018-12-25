@@ -24,7 +24,7 @@ from repology.parsers.walk import walk_tree
 
 
 class PisiParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for filename in walk_tree(path, suffix='pspec.xml'):
             relpath = os.path.relpath(filename, path)
 

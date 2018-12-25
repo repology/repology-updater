@@ -35,7 +35,7 @@ def _iterate_packages(path):
 
 
 class SlackwarePackagesParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for pkgname, pkglocation in _iterate_packages(path):
             pkg = factory.begin(pkgname)
 

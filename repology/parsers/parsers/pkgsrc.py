@@ -22,7 +22,7 @@ from repology.parsers.versions import VersionStripper
 
 
 class PkgsrcIndexParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_right('nb')
 
         with open(path, encoding='utf-8') as indexfile:

@@ -26,7 +26,7 @@ class SrcListParser(Parser):
     def __init__(self, encoding='utf-8'):
         self.encoding = encoding
 
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for header in rpm.readHeaderListFromFile(path):
             fields = {
                 key: str(header[key], self.encoding) if header[key] is not None else None

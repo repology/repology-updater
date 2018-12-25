@@ -26,7 +26,7 @@ from repology.parsers.versions import VersionStripper
 
 
 class VoidLinuxPlistParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_right_greedy('_')
 
         with open(os.path.join(path, 'index.plist'), 'rb') as plistfile:

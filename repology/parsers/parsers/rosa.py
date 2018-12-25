@@ -24,7 +24,7 @@ from repology.parsers.nevra import nevra_construct, nevra_parse
 
 
 class RosaInfoXmlParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         root = xml.etree.ElementTree.parse(path)
 
         for info in root.findall('./info'):

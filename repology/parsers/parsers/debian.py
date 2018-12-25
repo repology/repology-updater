@@ -55,7 +55,7 @@ class DebianSourcesParser(Parser):
     def __init__(self, project_name_from_source=False):
         self.project_name_from_source = project_name_from_source
 
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path, encoding='utf-8', errors='ignore') as file:
             current_data = {}
             last_key = None

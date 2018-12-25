@@ -22,7 +22,7 @@ from repology.parsers import Parser
 
 
 class LibreGameWikiParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         root = xml.etree.ElementTree.parse(path)
 
         content = root.find('.//div[@id="mw-content-text"]')

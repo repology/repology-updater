@@ -39,7 +39,7 @@ def _iter_packages(path):
 
 
 class OpenIndianaSummaryJsonParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for fmri, pkgdata in _iter_packages(path):
             pkg = factory.begin('{} {}'.format(fmri, pkgdata['version']))
 

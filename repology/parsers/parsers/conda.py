@@ -21,7 +21,7 @@ from repology.parsers import Parser
 
 
 class CondaRepodataJsonParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for pkgfilename, pkgdata in json.load(jsonfile)['packages'].items():
                 pkg = factory.begin(pkgfilename)

@@ -22,7 +22,7 @@ from repology.parsers.nevra import nevra_construct, nevra_parse
 
 
 class SophieHTMLParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for item in lxml.html.parse(path).getroot().xpath('.//div[@id="rpms_list"]/ul/li/a'):
             nevra = nevra_parse(item.text)
 

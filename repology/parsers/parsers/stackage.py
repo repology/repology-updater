@@ -21,7 +21,7 @@ from repology.parsers import Parser
 
 
 class StackageHTMLParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for row in lxml.html.parse(path).getroot().xpath('.//div[@class="packages"]/table/tbody/tr'):
             pkg = factory.begin()
 

@@ -23,7 +23,7 @@ from repology.parsers.maintainers import extract_maintainers
 
 
 class CRUXParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for pkgdir in os.listdir(path):
             pkgpath = os.path.join(path, pkgdir, 'Pkgfile')
             if not os.path.exists(pkgpath):

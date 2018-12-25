@@ -142,7 +142,7 @@ def _parse_md5cache_metadata_xml(path, category, ebuild):
 
 
 class GentooGitParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_right_greedy('-')
 
         for category, package in _iter_packages(path):

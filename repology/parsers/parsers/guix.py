@@ -31,7 +31,7 @@ def normalize_version(version):
 
 
 class GuixParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for filename in os.listdir(path):
             if not filename.endswith('.html'):
                 continue

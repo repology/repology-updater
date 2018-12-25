@@ -19,7 +19,7 @@ from repology.parsers import Parser
 
 
 class HPPADepothelperListParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 pkg = factory.begin()

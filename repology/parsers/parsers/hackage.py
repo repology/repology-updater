@@ -70,7 +70,7 @@ def _parse_cabal_file(path):
 
 
 class HackageParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for moduledir in os.listdir(path):
             pkg = factory.begin()
 

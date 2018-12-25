@@ -24,7 +24,7 @@ from repology.parsers.versions import VersionStripper
 
 
 class TermuxJsonParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_left_greedy(':')
 
         with open(path, 'r', encoding='utf-8') as jsonfile:

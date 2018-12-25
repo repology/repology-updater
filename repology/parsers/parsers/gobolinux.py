@@ -35,7 +35,7 @@ def _expand_mirrors(url):
 
 
 class GoboLinuxGitParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         trunk_path = os.path.join(path, 'trunk')
         for package_name in os.listdir(trunk_path):
             pkg = factory.begin()

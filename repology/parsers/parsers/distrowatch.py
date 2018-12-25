@@ -21,7 +21,7 @@ from repology.parsers import Parser
 
 
 class DistrowatchPackagesParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="Auto"]')[0].xpath('./tr[position()>1]'):
             pkg = factory.begin()
 

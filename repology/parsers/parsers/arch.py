@@ -23,7 +23,7 @@ from repology.parsers.versions import VersionStripper
 
 
 class ArchDBParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_right_greedy('-').strip_left(':').strip_right_greedy('+')
 
         for package in os.listdir(path):

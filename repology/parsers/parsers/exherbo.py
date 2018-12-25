@@ -60,7 +60,7 @@ def _get_repo_maintainers(path):
 
 
 class ExherboGitParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         maintainers = _get_repo_maintainers(path)
 
         for category, package, exheres in _iter_exheres(os.path.join(path, 'packages')):

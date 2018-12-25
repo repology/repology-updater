@@ -23,7 +23,7 @@ from repology.parsers import Parser
 
 
 class HaikuPortsFilenamesParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for category in os.listdir(path):
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):

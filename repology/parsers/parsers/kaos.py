@@ -21,7 +21,7 @@ from repology.parsers import Parser
 
 
 class KaOSHTMLParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="ctable"]')[0].xpath('./form/tr[position()>3 and position()<last()-3]'):
             pkg = factory.begin()
 

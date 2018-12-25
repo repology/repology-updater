@@ -22,7 +22,7 @@ from repology.parsers import Parser
 
 
 class CratesIOParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for pagefilename in os.listdir(path):
             if not pagefilename.endswith('.json'):
                 continue

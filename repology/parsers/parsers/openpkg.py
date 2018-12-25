@@ -22,7 +22,7 @@ from repology.parsers import Parser
 
 
 class OpenPkgRdfParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         root = xml.etree.ElementTree.parse(path)
 
         repository = root.find('{http://www.openpkg.org/xml-rdf-index/0.9}Repository')

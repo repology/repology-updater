@@ -70,7 +70,7 @@ def _parse_infofile(path):
 
 
 class SlackBuildsParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for category, pkgname in _iter_packages(path):
             pkg = factory.begin(category + '/' + pkgname)
 

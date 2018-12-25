@@ -25,7 +25,7 @@ from repology.parsers.versions import VersionStripper
 
 
 class AoscPkgsParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_left(':')
 
         with open(path, 'r', encoding='utf-8') as jsonfile:

@@ -23,7 +23,7 @@ from repology.parsers.walk import walk_tree
 
 
 class BuckarooGitParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for filename in walk_tree(path, suffix='.json'):
             data = json.load(open(filename, encoding='utf-8', errors='ignore'))
 

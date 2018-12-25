@@ -31,7 +31,7 @@ def _iter_packages(path):
 
 
 class WikidataJsonParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for packagedata in _iter_packages(path):
             entity = packagedata['project'].rsplit('/', 1)[-1]  # this is URL, take only the ID from it
 

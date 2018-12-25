@@ -22,7 +22,7 @@ from repology.parsers import Parser
 
 
 class SliTazJsonParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path, encoding='utf-8') as jsonfile:
             for item in json.load(jsonfile)['items']:
                 pkg = factory.begin()

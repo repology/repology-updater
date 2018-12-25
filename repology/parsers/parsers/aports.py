@@ -31,7 +31,7 @@ def normalize_version(version):
 
 
 class ApkIndexParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(os.path.join(path, 'APKINDEX'), 'r', encoding='utf-8') as apkindex:
             state = {}
             for line in apkindex:

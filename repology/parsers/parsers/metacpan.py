@@ -96,7 +96,7 @@ def _parse_devel_packages(packages, latest_versions, factory):
 
 
 class MetacpanAPIParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         latest_versions = {}
 
         yield from _parse_latest_packages(_iter_packages(path), latest_versions, factory)

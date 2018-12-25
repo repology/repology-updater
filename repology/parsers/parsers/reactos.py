@@ -22,7 +22,7 @@ from repology.parsers import Parser
 
 
 class RappsParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for filename in os.listdir(os.path.join(path)):
             if not filename.endswith('.txt'):
                 continue

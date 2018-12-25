@@ -22,7 +22,7 @@ from repology.parsers.versions import VersionStripper
 
 
 class FreeBSDIndexParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_right(',').strip_right('_')
 
         with open(path, encoding='utf-8') as indexfile:

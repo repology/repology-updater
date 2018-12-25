@@ -20,7 +20,7 @@ from repology.parsers.nevra import nevra_construct, nevra_parse
 
 
 class RPMFTPListParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path) as listfile:
             for line in listfile:
                 pkg = factory.begin()

@@ -75,7 +75,7 @@ def _iter_sqlports(path):
 
 
 class OpenBSDsqlportsParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for row in _iter_sqlports(path):
             pkg = factory.begin(row['fullpkgpath'])
 
@@ -123,7 +123,7 @@ class OpenBSDsqlportsParser(Parser):
 
 
 class OpenBSDIndexParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 pkg = factory.begin()

@@ -21,7 +21,7 @@ from repology.parsers import Parser
 
 
 class RavenportsJsonParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         jsondata = None
         with open(path, 'r', encoding='utf-8') as jsonfile:
             jsondata = json.load(jsonfile)

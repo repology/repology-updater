@@ -21,7 +21,7 @@ from repology.parsers import Parser
 
 
 class RudixHTMLParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for row in lxml.html.parse(path).getroot().xpath('.//table')[0].xpath('./tbody/tr'):
             pkg = factory.begin()
 

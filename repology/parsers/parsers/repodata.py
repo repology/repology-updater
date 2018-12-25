@@ -41,7 +41,7 @@ class RepodataParser(Parser):
     def __init__(self, allowed_archs=None):
         self.allowed_archs = allowed_archs
 
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_right_greedy('+')
 
         skipped_archs = {}

@@ -23,7 +23,7 @@ from repology.parsers.maintainers import extract_maintainers
 
 
 class CPANPackagesParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         # Since data we get from CPAN is somewhat lacking, we need
         # somewhat complex parsing. Here's the example of what we get
         # in 02packages.details.txt package index downloaded from CPAN:

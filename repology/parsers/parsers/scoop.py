@@ -23,7 +23,7 @@ from repology.parsers import Parser
 
 
 class ScoopGitParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for root, dirs, files in os.walk(path):
             for filename in files:
                 jsonpath = os.path.join(root, filename)

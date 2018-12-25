@@ -33,7 +33,7 @@ def normalize_version(version):
 
 
 class VcpkgGitParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for pkgdir in os.listdir(os.path.join(path, 'ports')):
             controlpath = os.path.join(path, 'ports', pkgdir, 'CONTROL')
             if not os.path.exists(controlpath):

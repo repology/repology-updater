@@ -21,7 +21,7 @@ from repology.parsers import Parser
 
 
 class SpecParser(Parser):
-    def iter_parse(self, path, factory):
+    def iter_parse(self, path, factory, transformer):
         for root, _, files in os.walk(path):
             for filename in files:
                 if not filename.endswith('.spec'):
