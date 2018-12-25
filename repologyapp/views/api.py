@@ -54,7 +54,7 @@ def api_v1_package_to_json(package):
         output['categories'] = [package.category]
 
     output['status'] = VersionClass.ToString(package.versionclass)
-    output['origversion'] = package.rawversion
+    output['origversion'] = package.rawversion if package.rawversion != package.version else None
 
     return output
 
