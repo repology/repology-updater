@@ -19,7 +19,6 @@ import json
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.package import Package
 from repology.parsers import Parser
 
 
