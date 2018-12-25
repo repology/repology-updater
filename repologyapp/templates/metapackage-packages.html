@@ -34,13 +34,13 @@
 				</h3>
 				<div class="package-version">
 				{%- if package.version != package.origversion -%}
-					<span class="version-property-fixed" title="Normalized from {{ package.origversion }}">
+					<span class="version-property-fixed" title="Normalized from &quot;{{ package.origversion }}&quot;">
 						{{- package.version -}}
 					</span>
 				{%- else -%}
 					{{- package.version -}}
 				{%- endif -%}
-				{%- if package.rawversion != package.origversion %} ({{ package.origversion }}){% endif -%}
+				{%- if package.rawversion != package.version %} ({{ package.rawversion }}){% endif -%}
 				</div>
 			</div>
 			<ul class="list-group">
