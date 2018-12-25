@@ -19,7 +19,14 @@ import json
 
 from repology.logger import Logger
 from repology.package import PackageFlags
+from repology.package import Package
 from repology.parsers import Parser
+
+
+_DONOR_REPOS = [
+    ('arch_packages', 'arch'),
+    ('aur_packages', 'aur'),
+]
 
 
 def _iter_packages(path):
@@ -36,49 +43,62 @@ class WikidataJsonParser(Parser):
             entity = packagedata['project'].rsplit('/', 1)[-1]  # this is URL, take only the ID from it
 
             pkg = factory.begin(entity)
+            pkg.set_extra_field('entity', entity)
 
-            # use Arch and AUR package names as a name, as they are most non-ambigous
-            names = []
-            for field in ['arch_packages', 'aur_packages']:
-                if packagedata[field]:
-                    names = packagedata[field].split(', ')
-                    break
+            # generate a package for each version
+            for version in sorted(packagedata['versions'].split(', ')):
+                version, *flags = version.split('|')
 
-            # generate a package for each package name; these will be merged anyway
-            for name in set(names):
-                # generate a package for each version
-                for version in packagedata['versions'].split(', '):
-                    version, *flags = version.split('|')
+                verpkg = pkg.clone(append_ident=' ' + version)
 
-                    is_devel = 'U' in flags
-                    is_foreign_os_release = 'o' in flags and 'O' not in flags
-                    is_foreign_platform_release = 'p' in flags and 'P' not in flags
+                is_devel = 'U' in flags
+                is_foreign_os_release = 'o' in flags and 'O' not in flags
+                is_foreign_platform_release = 'p' in flags and 'P' not in flags
 
-                    if is_foreign_os_release:
-                        pkg.log('version {} skipped due to bad OS'.format(version), severity=Logger.WARNING)
-                        continue
+                if is_foreign_os_release:
+                    verpkg.log('version {} skipped due to bad OS'.format(version), severity=Logger.NOTICE)
+                    continue
 
-                    if is_foreign_platform_release:
-                        pkg.log('version {} skipped due to bad Platform'.format(version), severity=Logger.WARNING)
-                        continue
+                if is_foreign_platform_release:
+                    verpkg.log('version {} skipped due to bad Platform'.format(version), severity=Logger.NOTICE)
+                    continue
 
-                    subpkg = pkg.clone()
+                verpkg.set_flags(PackageFlags.devel, is_devel)
+                verpkg.set_version(version)
+                verpkg.set_name(packagedata['projectLabel'])
 
-                    subpkg.set_flags(PackageFlags.devel, is_devel)
+                if 'projectDescription' in packagedata:
+                    verpkg.set_summary(packagedata['projectDescription'])
 
-                    subpkg.set_name(entity)
-                    subpkg.set_basename(name)
-                    subpkg.set_version(version)
+                if packagedata['licenses']:
+                    verpkg.add_licenses(packagedata['licenses'].split(', '))
 
-                    if 'projectDescription' in packagedata:
-                        subpkg.set_summary(packagedata['projectDescription'])
-                    else:
-                        subpkg.set_summary(packagedata['projectLabel'])
+                if packagedata['websites']:
+                    verpkg.add_homepages(packagedata['websites'].split(', '))
 
-                    if packagedata['licenses']:
-                        subpkg.add_licenses(packagedata['licenses'].split(', '))
+                # extract project name(s) from packages information
+                names = set()
+                for fieldname, fakerepo in _DONOR_REPOS:
+                    for name in packagedata[fieldname].split(', '):
+                        if name:
+                            fakepkg = verpkg.clone()
+                            fakepkg.set_name(name)
+                            fakepkg = fakepkg.unwrap()
+                            fakepkg.repo = fakerepo
+                            transformer.process(fakepkg)
+                            names.add(fakepkg.effname)
 
-                    if packagedata['websites']:
-                        subpkg.add_homepages(packagedata['websites'].split(', '))
+                    if names:
+                        break
 
-                    yield subpkg
+                if not names:
+                    verpkg.log('could not guess project name (no Arch/AUR packages defined?)', severity=Logger.ERROR)
+
+                if len(names) > 1:
+                    verpkg.log('multiple project names extracted (from {}): {}'.format(fakerepo, ','.join(names)), severity=Logger.WARNING)
+
+                # generate package for each guessed name; it most cases, these will be merged anyway
+                for name in names:
+                    namepkg = verpkg.clone()
+                    namepkg.set_basename(name)
+                    yield namepkg

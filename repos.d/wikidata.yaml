@@ -7,7 +7,7 @@
   type: site
   desc: Wikidata
   family: wikidata
-  ruleset: [ arch, aur, wikidata ]
+  ruleset: [ wikidata ]
   color: "339966"
   minpackages: 11000
   sources:
@@ -185,7 +185,7 @@
       url: "https://wikidata.org/"
   packagelinks:
     - desc: Wikidata entity
-      url: "https://www.wikidata.org/wiki/{name}"
+      url: "https://www.wikidata.org/wiki/{entity}"
   tags: [ all, production ]
 
 # Some additional useful requests
