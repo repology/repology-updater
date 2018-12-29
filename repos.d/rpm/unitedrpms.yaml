@@ -20,7 +20,7 @@
     - desc: GitHub organization
       url: https://github.com/UnitedRPMs
   tags: [ all, production, unitedrpms, rpm ]
-  
+
 - name: unitedrpms_29
   type: repository
   desc: UnitedRPMs Fedora 29
@@ -40,7 +40,7 @@
     - desc: GitHub organization
       url: https://github.com/UnitedRPMs
   tags: [ all, production, unitedrpms, rpm ]
-  
+
 - name: unitedrpms_30
   type: repository
   desc: UnitedRPMs Fedora 30
