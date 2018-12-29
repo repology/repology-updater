@@ -1,5 +1,12 @@
 ###########################################################################
-# GetDeb
+# GetDeb/PlayDeb
+#
+# Note: these repositories are dead since 2018-08-07, however I keep them
+# mainly for playdeb which has some games not present in other repositories
+# and may still suggest a few projects worth packaging.
+#
+# See also discussion regarding getdeb death:
+# https://bugs.launchpad.net/getdeb.net/+bug/1786064
 ###########################################################################
 
 # xenial
