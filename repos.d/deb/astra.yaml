@@ -7,10 +7,10 @@
   family: debuntu
   minpackages: 3500
   sources:
-    - name: [ main, contrib, non-free]
+    - name: [ main, contrib, non-free ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'https://mirror.yandex.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
+      url: 'https://dl.astralinux.ru/astra/current/orel/repository/dists/orel/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
