@@ -1,9 +1,27 @@
 ###########################################################################
 # Astra Linux
 ###########################################################################
-- name: astra
+- name: astra_stable
+  sortname: astra__stable
   type: repository
-  desc: Astra Linux Orel
+  desc: Astra Orel Stable
+  family: debuntu
+  minpackages: 3500
+  sources:
+    - name: [ main, contrib, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://dl.astralinux.ru/astra/stable/orel/repository/dists/orel/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Astra Linux home (in Russian)
+      url: http://astralinux.com/
+  tags: [ all, production, astra ]
+
+- name: astra_current
+  type: repository
+  desc: Astra Orel Current
   family: debuntu
   minpackages: 3500
   sources:
@@ -16,4 +34,4 @@
   repolinks:
     - desc: Astra Linux home (in Russian)
       url: http://astralinux.com/
-  tags: [ all, production ]
+  tags: [ all, production, astra ]
