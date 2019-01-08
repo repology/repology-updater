@@ -18,7 +18,7 @@
     - desc: Package directory on GitHub
       url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{category}/{name}'
     - desc: Ebuild on GitHub
-      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{category}/{name}/{name}-{origversion}.ebuild'
+      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{category}/{name}/{name}-{rawversion}.ebuild'
   tags: [ all, production ]
 
 - name: sabayon_for_gentoo
@@ -38,5 +38,5 @@
     - desc: Package directory on GitHub
       url: 'https://github.com/Sabayon/for-gentoo/tree/master/{category}/{name}'
     - desc: Ebuild on GitHub
-      url: 'https://github.com/Sabayon/for-gentoo/tree/master/{category}/{name}/{name}-{origversion}.ebuild'
+      url: 'https://github.com/Sabayon/for-gentoo/tree/master/{category}/{name}/{name}-{rawversion}.ebuild'
   tags: [ all, production ]

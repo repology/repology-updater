@@ -91,5 +91,5 @@
     - desc: Package repository
       url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{category}/{name}'
     - desc: Exheres file
-      url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{category}/{name}/{name}-{origversion}.exheres-0'
+      url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{category}/{name}/{name}-{rawversion}.exheres-0'
   tags: [ all, production ]

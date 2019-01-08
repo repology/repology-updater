@@ -24,5 +24,5 @@
     - desc: Package details
       url: 'https://packages.gentoo.org/packages/{category}/{name}'
     - desc: View ebuild
-      url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{origversion}.ebuild'
+      url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{rawversion}.ebuild'
   tags: [ all, production, have_testdata ]
