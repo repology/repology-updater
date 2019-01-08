@@ -19,5 +19,5 @@
       url: https://github.com/gobolinux/Recipes
   packagelinks:
     - desc: Git
-      url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{version}'
+      url: 'https://github.com/gobolinux/Recipes/tree/master/trunk/{name}/{origversion}'
   tags: [ all, production, have_testdata ]

@@ -42,7 +42,7 @@
       url: https://www.stackage.org/nightly
   packagelinks:
     - desc: Stackage page
-      url: 'https://www.stackage.org/nightly/package/{name}-{version}'
+      url: 'https://www.stackage.org/nightly/package/{name}-{origversion}'
   tags: [ all, production, stackage ]
 
 - name: stackage_lts
@@ -64,5 +64,5 @@
       url: https://www.stackage.org/lts
   packagelinks:
     - desc: Stackage page
-      url: 'https://www.stackage.org/lts/package/{name}-{version}'
+      url: 'https://www.stackage.org/lts/package/{name}-{origversion}'
   tags: [ all, production, stackage ]
