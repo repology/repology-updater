@@ -76,9 +76,9 @@
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
 
-- name: mx_17
+- name: mx_stretch
   type: repository
-  desc: MX Linux MX-17
+  desc: MX Linux Stretch
   family: debuntu
   color: "6693d6"
   minpackages: 100
@@ -99,9 +99,9 @@
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
 
-- name: mx_17_testing
+- name: mx_stretch_testing
   type: repository
-  desc: MX Linux MX-17 Testing
+  desc: MX Linux Stretch Testing
   family: debuntu
   color: "6693d6"
   minpackages: 100
