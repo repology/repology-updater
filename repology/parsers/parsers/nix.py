@@ -81,7 +81,7 @@ class NixJsonParser(Parser):
                         pkg.set_version(pkg.version[len(prefix) + 1:])
 
                 merged = pkg.name + '-' + pkg.version
-                for pkgname in ['liblqr-1', 'python2.7-3to2', 'python3.6-3to2', 'libretro-4do', 'polkit-qt-1-qt5']:
+                for pkgname in ['liblqr-1', 'python2.7-3to2', 'python3.6-3to2', 'libretro-4do', 'polkit-qt-1-qt5', 'polkit-qt-1-qt4']:
                     if merged.startswith(pkgname):
                         pkg.set_name(pkgname)
                         pkg.set_version(merged[len(pkgname) + 1:])
