@@ -24,12 +24,6 @@ SET SESSION work_mem = '128MB';
 --------------------------------------------------------------------------------
 -- Update aggregate tables: metapackages
 --------------------------------------------------------------------------------
-
---
--- XXX: due to postgresql memory consumption problem which is still investigated
--- this query is split into two, each processing half of metapackages
--- This reduces memory hog from 3G to ~1.6G
---
 INSERT
 INTO metapackages (
 	effname,
@@ -77,7 +71,6 @@ SELECT
 
 	array_agg(DISTINCT repo ORDER BY repo)
 FROM packages
-WHERE effname < 'realsense-sdk2'
 GROUP BY effname
 ON CONFLICT (effname)
 DO UPDATE SET
@@ -108,7 +101,7 @@ DO UPDATE SET
 			WHEN
 				-- trusted update (both should be defined)
 				version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) > 0 AND
-				EXISTS (SELECT unnest(EXCLUDED.devel_repos) INTERSECT SELECT unnest(metapackages.all_repos))
+				EXCLUDED.devel_repos && metapackages.all_repos
 			THEN now()
 			ELSE NULL -- else reset
 		END,
@@ -124,108 +117,7 @@ DO UPDATE SET
 			WHEN
 				-- trusted update (both should be defined)
 				version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) > 0 AND
-				EXISTS (SELECT unnest(EXCLUDED.newest_repos) INTERSECT SELECT unnest(metapackages.all_repos))
-			THEN now()
-			ELSE NULL -- else reset
-		END,
-
-	all_repos = EXCLUDED.all_repos;
-
-INSERT
-INTO metapackages (
-	effname,
-	num_repos,
-	num_repos_nonshadow,
-	num_families,
-	num_repos_newest,
-	num_families_newest,
-	max_repos,
-	max_families,
-	first_seen,
-	last_seen,
-
-	devel_versions,
-	devel_repos,
-	devel_version_update,
-
-	newest_versions,
-	newest_repos,
-	newest_version_update,
-
-	all_repos
-)
-SELECT
-	effname,
-	count(DISTINCT repo),
-	count(DISTINCT repo) FILTER (WHERE NOT shadow),
-	count(DISTINCT family),
-	count(DISTINCT repo) FILTER (WHERE versionclass = 1 OR versionclass = 5),
-	count(DISTINCT family) FILTER (WHERE versionclass = 1 OR versionclass = 5),
-	count(DISTINCT repo),
-	count(DISTINCT family),
-	now(),
-	now(),
-
-	-- XXX: technical dept warning: since we don't distinguish "newest unique" and "newest devel" statuses, we have
-	-- to use flags here. Better solution should be implemented in future
-	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
-	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 5 OR (versionclass = 4 AND (flags & 2)::bool)),
-	NULL,  -- first time we see this metapackage, time of version update is not known yet
-
-	array_agg(DISTINCT version ORDER BY version) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)),
-	array_agg(DISTINCT repo ORDER BY repo) FILTER(WHERE versionclass = 1 OR (versionclass = 4 AND NOT (flags & 2)::bool)),
-	NULL,
-
-	array_agg(DISTINCT repo ORDER BY repo)
-FROM packages
-WHERE effname >= 'realsense-sdk2'
-GROUP BY effname
-ON CONFLICT (effname)
-DO UPDATE SET
-	num_repos = EXCLUDED.num_repos,
-	num_repos_nonshadow = EXCLUDED.num_repos_nonshadow,
-	num_families = EXCLUDED.num_families,
-	num_repos_newest = EXCLUDED.num_repos_newest,
-	num_families_newest = EXCLUDED.num_families_newest,
-	max_repos = greatest(metapackages.max_repos, EXCLUDED.num_repos),
-	max_families = greatest(metapackages.max_families, EXCLUDED.num_families),
-	last_seen = now(),
-
-	devel_versions = EXCLUDED.devel_versions,
-	devel_repos = EXCLUDED.devel_repos,
-	devel_version_update =
-		-- We want version update time to be as reliable as possible so
-		-- the policy is that it's better to have no known last update time
-		-- than to have an incorrect one.
-		--
-		-- For instance, we want to ignore addition of new repo which has
-		-- the greated version than we know and don't record this as an
-		-- update, because actual update could've happened long ago.
-		CASE
-			WHEN
-				-- no change (both defined and equal)
-				version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) = 0
-			THEN metapackages.devel_version_update
-			WHEN
-				-- trusted update (both should be defined)
-				version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) > 0 AND
-				EXISTS (SELECT unnest(EXCLUDED.devel_repos) INTERSECT SELECT unnest(metapackages.all_repos))
-			THEN now()
-			ELSE NULL -- else reset
-		END,
-
-	newest_versions = EXCLUDED.newest_versions,
-	newest_repos = EXCLUDED.newest_repos,
-	newest_version_update =
-		CASE
-			WHEN
-				-- no change (both defined and equal)
-				version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) = 0
-			THEN metapackages.newest_version_update
-			WHEN
-				-- trusted update (both should be defined)
-				version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) > 0 AND
-				EXISTS (SELECT unnest(EXCLUDED.newest_repos) INTERSECT SELECT unnest(metapackages.all_repos))
+				EXCLUDED.newest_repos && metapackages.all_repos
 			THEN now()
 			ELSE NULL -- else reset
 		END,
