@@ -8,7 +8,7 @@
   family: fdroid
   minpackages: 10
   sources:
-    - name: F-Droid
+    - name: index.xml
       fetcher: FileFetcher
       parser: FDroidParser
       url: https://f-droid.org/repo/index.xml
