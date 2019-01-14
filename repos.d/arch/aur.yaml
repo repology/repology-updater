@@ -2,6 +2,7 @@
 # AUR
 ###########################################################################
 - name: aur
+  sortname: arch~aur  # place right after Arch
   type: repository
   desc: AUR
   family: arch
