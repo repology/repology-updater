@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -25,31 +25,37 @@ from repology.parsers import Parser
 class ScoopGitParser(Parser):
     def iter_parse(self, path, factory, transformer):
         for root, dirs, files in os.walk(path):
+            if os.path.basename(root).startswith('.'):
+                continue  # e.g. .vscode
+
             for filename in files:
-                jsonpath = os.path.join(root, filename)
-                if not jsonpath.endswith('.json'):
+                if not filename.endswith('.json'):
                     continue
 
-                jsondata = None
-                with open(jsonpath, 'r', encoding='utf-8') as jsonfile:
-                    jsondata = json.load(jsonfile, strict=False)
+                fullpath = os.path.join(root, filename)
+                relpath = os.path.relpath(fullpath, path)
 
-                pkg = factory.begin()
+                pkg = factory.begin(relpath)
+                print(relpath)
+
+                data = None
+                with open(fullpath, 'r', encoding='utf-8') as jsonfile:
+                    data = json.load(jsonfile, strict=False)
 
                 pkg.set_name(filename[:-5])
-                pkg.set_version(jsondata['version'])
+                pkg.set_version(data['version'])
 
-                pkg.add_downloads(jsondata.get('url'))
-                pkg.add_homepages(jsondata.get('homepage'))
+                pkg.add_downloads(data.get('url'))
+                pkg.add_homepages(data.get('homepage'))
 
-                if 'license' in jsondata:
-                    if isinstance(jsondata['license'], str):
-                        pkg.add_licenses(jsondata['license'])
-                    elif isinstance(jsondata['license'], dict) and 'identifier' in jsondata['license']:
-                        pkg.add_licenses(jsondata['license']['identifier'])
+                if 'license' in data:
+                    if isinstance(data['license'], str):
+                        pkg.add_licenses(data['license'])
+                    elif isinstance(data['license'], dict) and 'identifier' in data['license']:
+                        pkg.add_licenses(data['license']['identifier'])
                     else:
                         pkg.log('unsupported license format for {}'.format(pkg.name), severity=Logger.ERROR)
 
-                pkg.set_extra_field('path', os.path.relpath(jsonpath, path))
+                pkg.set_extra_field('path', relpath)
 
                 yield pkg
