@@ -21,6 +21,7 @@ Needed for fetching/parsing repository data:
 - Python module [rubymarshal](https://github.com/d9pouces/RubyMarshal)
 - Python module [lxml](http://lxml.de/)
 - Python module [rpm](http://rpm.org/) (comes with RPM package manager)
+- Python module [jsonslicer](https://pypi.org/project/jsonslicer/)
 - Python module sqlite3
 - [wget](https://www.gnu.org/software/wget/)
 - [git](https://git-scm.com/)

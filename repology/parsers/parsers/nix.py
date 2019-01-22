@@ -15,8 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
 import re
+
+from jsonslicer import JsonSlicer
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -57,8 +58,8 @@ def extract_nix_licenses(whatever):
 
 class NixJsonParser(Parser):
     def iter_parse(self, path, factory, transformer):
-        with open(path, 'r', encoding='utf-8') as jsonfile:
-            for key, packagedata in json.load(jsonfile)['packages'].items():
+        with open(path, 'rb') as jsonfile:
+            for key, packagedata in JsonSlicer(jsonfile, ('packages', None), encoding='utf-8', path_mode='map_keys'):
                 pkg = factory.begin(key)
 
                 # see how Nix parses 'derivative' names in
