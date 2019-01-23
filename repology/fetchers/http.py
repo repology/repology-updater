@@ -15,7 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import bz2
 import functools
+import gzip
+import lzma
+import tempfile
 import time
 from json import dumps
 
@@ -24,6 +28,7 @@ import requests
 from repology.config import config
 
 USER_AGENT = 'repology-fetcher/0 (+{}/bots)'.format(config['REPOLOGY_HOME'])
+STREAM_CHUNK_SIZE = 10240
 
 
 class PoliteHTTP:
@@ -65,3 +70,40 @@ def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None
         response.raise_for_status()
 
     return response
+
+
+def save_http_stream(url, outfile, compression=None, **kwargs):
+    # TODO: we should really decompress stream on the fly or
+    # (better) store it as is and decompress when reading.
+
+    response = do_http(url, **kwargs, stream=True)
+
+    # no compression, just save to output
+    if compression is None:
+        for chunk in response.iter_content(STREAM_CHUNK_SIZE):
+            outfile.write(chunk)
+        return
+
+    # choose decompressor
+    if compression == 'gz':
+        decompressor_module = gzip
+    elif compression == 'xz':
+        decompressor_module = lzma
+    elif compression == 'bz2':
+        decompressor_module = bz2
+    else:
+        raise ValueError('Unsupported compression {}'.format(compression))
+
+    # read into temp file, then decompress into output
+    with tempfile.NamedTemporaryFile() as temp:
+        for chunk in response.iter_content(STREAM_CHUNK_SIZE):
+            temp.write(chunk)
+
+        temp.seek(0)
+
+        with decompressor_module.open(temp) as decompressor:
+            while True:
+                chunk = decompressor.read(STREAM_CHUNK_SIZE)
+                if not chunk:
+                    break
+                outfile.write(chunk)
