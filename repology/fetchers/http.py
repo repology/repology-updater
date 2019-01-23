@@ -41,7 +41,7 @@ class PoliteHTTP:
 
 
 # XXX: post argument is a compatibility shim
-def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None, post=None, headers=None):
+def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None, post=None, headers=None, stream=False):
     headers = headers.copy() if headers else {}
     headers['User-Agent'] = USER_AGENT
 
@@ -59,7 +59,7 @@ def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None
     elif method == 'PUT':
         request = requests.put
 
-    response = request(url, headers=headers, timeout=timeout, data=data)
+    response = request(url, headers=headers, timeout=timeout, data=data, stream=stream)
 
     if check_status:
         response.raise_for_status()
