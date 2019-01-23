@@ -15,12 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import gzip
-import lzma
 import xml.etree.ElementTree
 
 from repology.fetchers import ScratchFileFetcher
-from repology.fetchers.http import do_http
+from repology.fetchers.http import do_http, save_http_stream
 
 
 class RepodataFetcher(ScratchFileFetcher):
@@ -31,7 +29,7 @@ class RepodataFetcher(ScratchFileFetcher):
         self.fetch_timeout = fetch_timeout
 
     def do_fetch(self, statefile, logger):
-        # Get and parse repomd.xml
+        # fetch and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)
         repomd_content = do_http(repomd_url, check_status=True, timeout=self.fetch_timeout).text
@@ -39,20 +37,15 @@ class RepodataFetcher(ScratchFileFetcher):
 
         repodata_url = self.url + repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location').attrib['href']
 
-        logger.Log('fetching ' + repodata_url)
-        data = do_http(repodata_url, timeout=self.fetch_timeout).content
-
-        logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
-
+        # fetch actual repo data
+        compression = None
         if repodata_url.endswith('gz'):
-            logger.GetIndented().Log('decompressing with gzip')
-            data = gzip.decompress(data)
+            compression = 'gz'
         elif repodata_url.endswith('xz'):
-            logger.GetIndented().Log('decompressing with xz')
-            data = lzma.LZMADecompressor().decompress(data)
+            compression = 'xz'
 
-        logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
+        logger.Log('fetching {}'.format(repodata_url))
 
-        logger.GetIndented().Log('saving')
+        save_http_stream(repodata_url, statefile, compression=compression, timeout=self.fetch_timeout)
 
-        statefile.write(data)
+        logger.Log('size is {} byte(s)'.format(statefile.tell()))
