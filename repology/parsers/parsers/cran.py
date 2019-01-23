@@ -23,11 +23,13 @@ from repology.parsers import Parser
 class CRANCheckSummaryParser(Parser):
     def iter_parse(self, path, factory, transformer):
         with open(path, 'r', encoding='utf-8') as htmlfile:
-            for match in re.findall('<tr> <td> <a href="[^"]+">([^<>]+)</a> </td> <td>[ ]*([^ <>]+)[ ]*</td>', htmlfile.read()):
-                pkg = factory.begin()
+            for nline, line in enumerate(htmlfile, 1):
+                match = re.search('<tr> <td> <a href="[^"]+">([^<>]+)</a> </td> <td>[ ]*([^ <>]+)[ ]*</td>', line)
+                if match:
+                    pkg = factory.begin('line {}'.format(nline))
 
-                pkg.set_name(match[0])
-                pkg.set_version(match[1])
-                pkg.add_homepages('https://cran.r-project.org/web/packages/{}/index.html'.format(match[0]))
+                    pkg.set_name(match[1])
+                    pkg.set_version(match[2])
+                    pkg.add_homepages('https://cran.r-project.org/web/packages/{}/index.html'.format(match[1]))
 
-                yield pkg
+                    yield pkg
