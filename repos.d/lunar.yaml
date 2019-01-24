@@ -1,0 +1,20 @@
+###########################################################################
+# Lunar
+###########################################################################
+- name: lunar
+  type: repository
+  desc: Lunar Linux
+  family: lunar
+  ruleset: lunar
+  minpackages: 3000
+  sources:
+    - name: distrowatch.txt
+      fetcher: FileFetcher
+      parser: LunarDistrowatchParser
+      url: 'http://www.lunar-linux.org/lunar/distrowatch.txt'
+  repolinks:
+    - desc: Lunar Linux home
+      url: http://www.lunar-linux.org/
+    - desc: GitHub ort
+      url: https://github.com/lunar-linux
+  tags: [ all ]  # disabled: does not prefix perl/python modules

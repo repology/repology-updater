@@ -58,6 +58,7 @@ families = [
     'kaos',
     'librecnc',
     'libregamewiki',
+    'lunar',
     'macports',
     'mageia',
     'msys2',
