@@ -45,7 +45,7 @@ class CPANPackagesParser(Parser):
         # (no version, or garbage in version) but these are negligible.
         with open(path) as packagesfile:
             skipping_header = True
-            for line in packagesfile:
+            for nline, line in enumerate(packagesfile, 1):
                 line = line.strip()
 
                 if skipping_header:
@@ -53,7 +53,7 @@ class CPANPackagesParser(Parser):
                         skipping_header = False
                     continue
 
-                pkg = factory.begin(line)
+                pkg = factory.begin('line {}'.format(nline))
 
                 module, version, package = re.split(r'[ \t]+', line)
 
