@@ -15,9 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
 import os
 import subprocess
+
+from jsonslicer import JsonSlicer
 
 from repology.config import config
 from repology.parsers import Parser
@@ -33,11 +34,9 @@ class MacPortsParser(Parser):
 
         with subprocess.Popen(
             [config['TCLSH'], self.helperpath, path],
-            errors='ignore',
-            stdout=subprocess.PIPE,
-            universal_newlines=True
+            stdout=subprocess.PIPE
         ) as macportsjson:
-            for pkgdata in json.load(macportsjson.stdout):
+            for pkgdata in JsonSlicer(macportsjson.stdout, (None,)):
                 pkg = factory.begin()
 
                 pkg.set_name(pkgdata['name'])
