@@ -15,27 +15,24 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
 import shlex
+
+from jsonslicer import JsonSlicer
 
 from repology.logger import Logger
 from repology.parsers import Parser
 
 
 def _iter_packages(path):
-    with open(path, 'r', encoding='utf-8') as jsonfile:
-        summary_json = json.load(jsonfile)
-
-        for summary_key in summary_json.keys():
-            if summary_key.startswith('_'):  # _SIGNATURE
+    with open(path, 'rb') as jsonfile:
+        for summary_key, fmri, _, pkgdata in JsonSlicer(jsonfile, (None, None, None), path_mode='full'):
+            if summary_key.startswith('_'):  # e.g. _SIGNATURE
                 continue
 
             # else summary_key is someting like "openindiana.org"
             # or "hipster-encumbered"
 
-            for fmri, pkgdatas in summary_json[summary_key].items():
-                for pkgdata in pkgdatas:
-                    yield fmri, pkgdata
+            yield fmri, pkgdata
 
 
 class OpenIndianaSummaryJsonParser(Parser):
