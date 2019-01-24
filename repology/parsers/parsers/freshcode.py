@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
+from jsonslicer import JsonSlicer
 
 from libversion import version_compare
 
@@ -28,8 +28,8 @@ class FreshcodeParser(Parser):
 
         # note that we actually parse database prepared by
         # fetcher, not the file we've downloaded
-        with open(path, 'r', encoding='utf-8') as jsonfile:
-            for entry in json.load(jsonfile)['releases']:
+        with open(path, 'rb') as jsonfile:
+            for entry in JsonSlicer(jsonfile, ('releases', None)):
                 pkg = factory.begin()
 
                 pkg.set_name(entry['name'])
