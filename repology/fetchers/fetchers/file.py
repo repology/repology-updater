@@ -15,13 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import bz2
-import gzip
-import lzma
 import time
 
 from repology.fetchers import ScratchFileFetcher
-from repology.fetchers.http import do_http
+from repology.fetchers.http import save_http_stream
 
 
 class FileFetcher(ScratchFileFetcher):
@@ -53,23 +50,6 @@ class FileFetcher(ScratchFileFetcher):
 
         logger.Log('fetching ' + ', with '.join(fetching_what))
 
-        data = do_http(self.url, data=self.post, headers=self.headers, timeout=self.fetch_timeout).content
+        save_http_stream(self.url, statefile, compression=self.compression, data=self.post, headers=self.headers, timeout=self.fetch_timeout)
 
-        logger.GetIndented().Log('size is {} byte(s)'.format(len(data)))
-
-        if self.compression == 'gz':
-            logger.GetIndented().Log('decompressing with gzip')
-            data = gzip.decompress(data)
-        elif self.compression == 'bz2':
-            logger.GetIndented().Log('decompressing with bz2')
-            data = bz2.decompress(data)
-        elif self.compression == 'xz':
-            logger.GetIndented().Log('decompressing with xz')
-            data = lzma.LZMADecompressor().decompress(data)
-
-        if self.compression:
-            logger.GetIndented().Log('size after decompression is {} byte(s)'.format(len(data)))
-
-        logger.GetIndented().Log('saving')
-
-        statefile.write(data)
+        logger.Log('size is {} byte(s)'.format(statefile.tell()))
