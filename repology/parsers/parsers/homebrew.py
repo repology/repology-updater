@@ -15,15 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
+from jsonslicer import JsonSlicer
 
 from repology.parsers import Parser
 
 
 class HomebrewJsonParser(Parser):
     def iter_parse(self, path, factory, transformer):
-        with open(path, 'r', encoding='utf-8') as jsonfile:
-            for package in json.load(jsonfile):
+        with open(path, 'rb') as jsonfile:
+            for package in JsonSlicer(jsonfile, (None,)):
                 pkg = factory.begin()
 
                 pkg.set_name(package['name'].split('@', 1)[0])

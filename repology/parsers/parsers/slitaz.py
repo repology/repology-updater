@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
+from jsonslicer import JsonSlicer
 
 from repology.package import PackageFlags
 from repology.parsers import Parser
@@ -23,8 +23,8 @@ from repology.parsers import Parser
 
 class SliTazJsonParser(Parser):
     def iter_parse(self, path, factory, transformer):
-        with open(path, encoding='utf-8') as jsonfile:
-            for item in json.load(jsonfile)['items']:
+        with open(path, 'rb') as jsonfile:
+            for item in JsonSlicer(jsonfile, ('items', None)):
                 pkg = factory.begin()
 
                 pkg.set_basename(item['meta'])
