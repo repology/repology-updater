@@ -15,7 +15,7 @@
   repolinks:
     - desc: conda-forge home
       url: https://conda-forge.org/
-  tags: [ all, experimental, conda ]
+  tags: [ all, conda ]
 
 - name: bioconda
   type: repository
@@ -31,4 +31,4 @@
   repolinks:
     - desc: Bioconda home
       url: https://bioconda.github.io/
-  tags: [ all, experimental, conda ]
+  tags: [ all, conda ]
