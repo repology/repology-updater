@@ -41,8 +41,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li{% if endpoint_like('news') %} class="active"{% endif %}><a href="{{ url_for('news') }}">News</a></li>
-				<li{% if endpoint_like('about') %} class="active"{% endif %}><a href="{{ url_for('about') }}">About</a></li>
-				<li{% if endpoint_like('api_v1') %} class="active"{% endif %}><a href="{{ url_for('api_v1') }}">API</a></li>
+				<li{% if endpoint_like('docs', 'about', 'addrepo', 'api_v1') %} class="active"{% endif %}><a href="{{ url_for('docs') }}">Docs</a></li>
 			</ul>
 		</div>
 	</div>
