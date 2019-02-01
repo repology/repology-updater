@@ -191,7 +191,7 @@ class TestParsers(unittest.TestCase):
                 'comment': 'Compression library implementing the deflate compression method found in gzip and PKZIP',
                 'homepage': 'http://www.zlib.net/',
                 'licenses': ['custom'],
-                'maintainers': ['pierre@archlinux.de'],
+                'maintainers': ['fallback-mnt-arch@repology'],
                 'extrafields': {'base': 'zlib'},
             }
         )

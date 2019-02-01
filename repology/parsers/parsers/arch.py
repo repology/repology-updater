@@ -18,7 +18,7 @@
 import os
 
 from repology.parsers import Parser
-from repology.parsers.maintainers import extract_maintainers
+#from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
 
 
@@ -56,8 +56,8 @@ class ArchDBParser(Parser):
                         pkg.add_homepages(line)
                     elif tag == 'LICENSE':
                         pkg.add_licenses(line)
-                    elif tag == 'PACKAGER':
-                        pkg.add_maintainers(extract_maintainers(line))
+                    #elif tag == 'PACKAGER':
+                    #    pkg.add_maintainers(extract_maintainers(line))
                     elif tag == 'BASE':
                         pkg.set_extra_field('base', line)
                         pkg.set_basename(line)
