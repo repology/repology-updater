@@ -29,11 +29,11 @@ _DONOR_REPOS = [
 
 
 def _iter_packages(path):
-        with open(path, 'r', encoding='utf-8') as jsonfile:
-            for item in json.load(jsonfile)['results']['bindings']:
-                yield {
-                    key: item[key]['value'] for key in item.keys()
-                }
+    with open(path, 'r', encoding='utf-8') as jsonfile:
+        for item in json.load(jsonfile)['results']['bindings']:
+            yield {
+                key: item[key]['value'] for key in item.keys()
+            }
 
 
 class WikidataJsonParser(Parser):
