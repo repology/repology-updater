@@ -47,14 +47,14 @@ class VcpkgGitParser(Parser):
             with open(controlpath, 'r', encoding='utf-8', errors='ignore') as controlfile:
                 for line in controlfile:
                     line = line.strip()
-                    if line.startswith('Version:'):
+                    if line.startswith('Version:') and not pkg.version:
                         version = line[8:].strip()
                         if re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version):
                             pkg.set_version(version)
                             pkg.set_flags(PackageFlags.ignore)
                         else:
                             pkg.set_version(version, normalize_version)
-                    elif line.startswith('Description:'):
+                    elif line.startswith('Description:') and not pkg.comment:
                         pkg.set_summary(line[12:])
 
             # pretty much a hack to shut a bunch of fake versions up
