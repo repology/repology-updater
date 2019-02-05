@@ -1,0 +1,47 @@
+###########################################################################
+# Fink
+###########################################################################
+- name: fink_repo
+  type: repository
+  desc: Fink
+  family: fink
+  color: 'fdc461'
+  minpackages: 0
+  sources:
+    - name: fink-distributions
+      fetcher: GitFetcher
+      parser: FinkGitParser
+      url: 'https://github.com/fink/fink-distributions.git'
+      sparse_checkout: [ '10.9-libcxx/stable/main/finkinfo/**/*.info' ]
+  repolinks:
+    - desc: Fink home
+      url: http://www.finkproject.org/
+    - desc: Fink package database
+      url: http://pdb.finkproject.org/pdb/
+  packagelinks:
+    - desc: Package information
+      url: 'http://pdb.finkproject.org/pdb/package.php/{name}'
+    - desc: .info file
+      url: 'https://github.com/fink/fink-distributions/blob/master/{infopath}'
+  tags: [ ]  # unusable, too complex parsing required
+
+- name: fink_pdb
+  type: repository
+  desc: Fink
+  family: fink
+  color: 'fdc461'
+  minpackages: 0
+  sources:
+    - name: browse.php.html
+      fetcher: FileFetcher
+      parser: FinkPdbParser
+      url: 'http://pdb.finkproject.org/pdb/browse.php?nochildren=on'
+  repolinks:
+    - desc: Fink home
+      url: http://www.finkproject.org/
+    - desc: Fink package database
+      url: http://pdb.finkproject.org/pdb/
+  packagelinks:
+    - desc: Package information
+      url: 'http://pdb.finkproject.org/pdb/package.php/{name}'
+  tags: [ ]  # unusable, polluted with suffixes

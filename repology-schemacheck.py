@@ -46,6 +46,7 @@ families = [
     'exherbo',
     'fdroid',
     'fedora',
+    'fink',
     'freebsd',
     'freshcode',
     'gentoo',
