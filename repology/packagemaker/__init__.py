@@ -105,11 +105,12 @@ class PackageMakerBase:
 
 
 class PackageMaker(PackageMakerBase):
-    def __init__(self, logger, ident, itemno):
+    def __init__(self, logger, ident, itemno, skipfailed=False):
         super(PackageMaker, self).__init__(logger)
         self.package = Package()
         self.ident = ident
         self.itemno = itemno
+        self.skipfailed = skipfailed
 
     def _get_ident(self):
         return self.ident or self.package.extrafields.get('origin', None) or self.package.name or self.package.basename or 'item #{}'.format(self.itemno)
@@ -215,15 +216,29 @@ class PackageMaker(PackageMakerBase):
     def __getattr__(self, key):
         return getattr(self.package, key)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if exc_type:
+            self.log('parsing failed ({}): {}: {}'.format(
+                'skipped' if self.skipfailed else 'fatal',
+                exc_type.__name__,
+                exc_value
+            ), severity=Logger.ERROR)
+
+            if self.skipfailed:
+                return True
+
 
 class PackageFactory:
     def __init__(self, logger):
         self.logger = logger
         self.itemno = 0
 
-    def begin(self, ident=None):
+    def begin(self, ident=None, skipfailed=False):
         self.itemno += 1
-        return PackageMaker(self.logger, ident, self.itemno)
+        return PackageMaker(self.logger, ident, self.itemno, skipfailed)
 
     def log(self, message, severity=Logger.NOTICE):
         self.logger.log(message, severity)
