@@ -86,6 +86,7 @@ families = [
     'slackware',
     'slitaz',
     'snap',
+    'solus',
     'termux',
     'vcpkg',
     'void',
