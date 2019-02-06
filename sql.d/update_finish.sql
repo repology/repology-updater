@@ -680,7 +680,7 @@ UPDATE statistics SET
 	num_packages = (SELECT count(*) FROM packages),
 	num_metapackages = (SELECT count(*) FROM metapackages WHERE num_repos_nonshadow > 0),
 	num_problems = (SELECT count(*) FROM problems),
-	num_maintainers = (SELECT count(*) FROM maintainers);
+	num_maintainers = (SELECT count(*) FROM maintainers WHERE num_packages > 0);
 
 --------------------------------------------------------------------------------
 -- History snapshot
