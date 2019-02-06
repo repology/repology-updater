@@ -517,7 +517,7 @@ class Rule:
 
         if 'warning' in ruledata:
             def action(package, package_context, match_context):
-                print('Rule warning for {} in {}: {}'.format(package.name, package.repo, ruledata['warning']), file=sys.stderr)
+                print('Rule warning for {} ({}) in {}: {}'.format(package.effname, package.name, package.repo, ruledata['warning']), file=sys.stderr)
 
             self.actions.append(action)
 
