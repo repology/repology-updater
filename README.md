@@ -86,6 +86,7 @@ version are always parsed.
 | SlackBuilds                      |         | ✔ (3)   | ✔     | ✔     |         | ✔        |
 | Slackware                        |         |         |       |       |         |          |
 | SliTaz                           | ✔       |         | ✔     | ✔     |         |          |
+| Solus                            | ✔       | ✔       | ✔     |       | ✔       |          |
 | Stackage                         | ✔       |         |       |       |         |          |
 | Termux                           | ✔       |         |       | ✔     |         | ✔        |
 | Vcpkg                            | ✔       |         |       |       |         |          |
