@@ -3,6 +3,7 @@
 #
 # See https://rpmfusion.org/#Browse_available_packages
 ###########################################################################
+# XXX: add tainted subrepos (see above)
 - name: rpmfusion_fedora_26
   type: repository
   desc: RPM Fusion Fedora 26
