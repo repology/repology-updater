@@ -178,6 +178,10 @@ schemas = {
 
                     # aur fetcher
                     'max_api_url_length': int,
+
+                    # rsync fetcher
+                    'rsync_include': str,
+                    'rsync_exclude': str,
                 }
             ],
             'shadow': bool,
