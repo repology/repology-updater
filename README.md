@@ -67,6 +67,7 @@ version are always parsed.
 | KaOS                             |         |         |       |       |         |          |
 | Linuxbrew                        | ✔       |         |       | ✔     |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
+| MSYS2                            | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | MX Linux                         |         | ✔       | ✔     | ✔     |         |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
@@ -82,6 +83,7 @@ version are always parsed.
 | ReactOS rapps                    | ✔       |         |       | ✔     | ✔       | ✔        |
 | RubyGems                         |         |         |       | ✔ (2) |         |          |
 | Rudix                            | ✔       |         |       |       | ✔       |          |
+| Salix                            | ✔       |         |       |       |         |          |
 | Scoop                            |         |         |       | ✔     | ✔       | ✔        |
 | SlackBuilds                      |         | ✔ (3)   | ✔     | ✔     |         | ✔        |
 | Slackware                        |         |         |       |       |         |          |
