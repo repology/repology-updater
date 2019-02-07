@@ -1,8 +1,12 @@
+###########################################################################
+# MSYS2
+###########################################################################
 - name: msys2_mingw
   type: repository
   desc: MSYS2 mingw
   family: msys2
   ruleset: [msys2, msys2_mingw]
+  color: 'ef7f1a'
   minpackages: 900
   sources:
     - name: mingw64.db
@@ -27,6 +31,7 @@
   desc: MSYS2 msys2
   family: msys2
   ruleset: [msys2, msys2_msys2]
+  color: 'ef7f1a'
   minpackages: 550
   sources:
     # NOTE: no database for source packages
