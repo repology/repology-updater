@@ -36,7 +36,6 @@ class ScoopGitParser(Parser):
                 relpath = os.path.relpath(fullpath, path)
 
                 pkg = factory.begin(relpath)
-                print(relpath)
 
                 data = None
                 with open(fullpath, 'r', encoding='utf-8') as jsonfile:
