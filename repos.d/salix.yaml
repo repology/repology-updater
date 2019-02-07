@@ -1,0 +1,21 @@
+###########################################################################
+# Salix
+###########################################################################
+- name: salix_14_2
+  type: repository
+  desc: Salix 14.2
+  family: salix
+  color: '7ad37a'
+  minpackages: 600
+  sources:
+    - name: x86_64-PACKAGES.json
+      fetcher: FileFetcher
+      parser: SalixPackagesJsonParser
+      url: 'https://download.salixos.org/x86_64/14.2/PACKAGES.json'
+    # XXX: add 32 bit repo
+  repolinks:
+    - desc: Salix home
+      url: https://www.salixos.org/
+    - desc: Salix package search
+      url: https://packages.salixos.org/
+  tags: [ all, production, salix ]

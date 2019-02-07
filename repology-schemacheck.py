@@ -80,6 +80,7 @@ families = [
     'rosa',
     'rubygems',
     'rudix',
+    'salix',
     'scoop',
     'sisyphus',
     'slackbuilds',
