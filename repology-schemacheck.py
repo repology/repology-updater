@@ -84,6 +84,7 @@ families = [
     'scoop',
     'sisyphus',
     'slackbuilds',
+    'tinycore',
     'slackware',
     'slitaz',
     'snap',
