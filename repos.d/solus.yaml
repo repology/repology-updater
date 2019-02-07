@@ -5,6 +5,7 @@
   type: repository
   desc: Solus
   family: solus
+  color: '5294e2'
   minpackages: 8500
   sources:
     - name: eopkg-index.xml
