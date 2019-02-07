@@ -108,6 +108,8 @@ rulesets = families + [
     'maemo',
     'manjaro',
     'mint',
+    'msys2_mingw',
+    'msys2_msys2',
     'packman',
     'parabola',
     'pardus',

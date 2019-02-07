@@ -17,7 +17,6 @@
 
 import os
 
-from repology.logger import Logger
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -39,33 +38,28 @@ def _parse_descfile(path):
             else:
                 value.append(line)
 
+    return data
 
-class MSYS2Parser(Parser):
+
+class MSYS2DescParser(Parser):
     def iter_parse(self, path, factory, transformer):
         normalize_version = VersionStripper().strip_right('-')
 
         for packagedir in os.listdir(path):
-            pkg = factory.begin(packagedir)
+            with factory.begin(packagedir) as pkg:
+                data = _parse_descfile(os.path.join(path, packagedir, 'desc'))
 
-            data = _parse_descfile(os.path.join(path, packagedir, 'desc'))
+                pkg.set_name(data['NAME'][0])
+                if 'BASE' in data:
+                    pkg.set_basename(data['BASE'][0])
+                pkg.set_version(data['VERSION'][0], normalize_version)
 
-            if 'BASE' in data and data['NAME'][0] != data['BASE'][0]:
-                pkg.log('skipped, subpackage', severity=Logger.WARNING)
-                # XXX: include subpackages
-                continue
+                if 'DESC' in data:
+                    pkg.set_summary(data['DESC'][0])
 
-            pkg.set_name(data['NAME'][0])
-            pkg.set_version(data['VERSION'][0], normalize_version)
+                pkg.add_homepages(data.get('URL'))
+                pkg.add_licenses(data.get('LICENSE'))
+                pkg.add_maintainers(map(extract_maintainers, data['PACKAGER']))
+                pkg.add_categories(data.get('GROUPS'))
 
-            if 'DESC' in data:
-                pkg.set_summary(data['DESC'][0])
-
-            pkg.add_homepages(data.get('URL'))
-
-            pkg.add_licenses(data.get('LICENSE'))
-
-            pkg.add_maintainers(map(extract_maintainers, data['PACKAGER']))
-
-            pkg.add_categories(data.get('GROUPS'))
-
-            yield pkg
+                yield pkg
