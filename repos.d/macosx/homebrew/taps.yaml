@@ -1,0 +1,25 @@
+###########################################################################
+# Homebrew taps
+###########################################################################
+- name: homebrew_tap_brewsci_bio
+  type: repository
+  desc: Homebrew tap Brewsci/bio
+  family: homebrew
+  color: 'fdb130'
+  minpackages: 0
+  sources:
+    - name: homebrew.json
+      fetcher: FileFetcher
+      parser: HomebrewJsonParser
+      url: https://github.com/Brewsci/homebrew-bio
+  repolinks:
+    - desc: Brewsci/bio home
+      url: https://brewsci.github.io/homebrew-bio/
+    - desc: Brewsci/bio on GitHub
+      url: https://github.com/brewsci/homebrew-bio
+    - desc: Homebrew home
+      url: https://brew.sh/
+  packagelinks:
+    - desc: Brew formula
+      url: 'https://github.com/brewsci/homebrew-bio/blob/master/Formula/{name}.rb'
+  tags: [ all, experimental ]
