@@ -20,8 +20,8 @@
     - desc: Braumeister - online package browser for Homebrew
       url: http://braumeister.org/
   packagelinks:
-    - desc: Brew formula
+    - desc: Formula page
+      url: 'https://formulae.brew.sh/formula/{name}'
+    - desc: Formula code on GitHub
       url: 'https://github.com/Homebrew/homebrew-core/blob/master/Formula/{name}.rb'
-    - desc: Braumeister page
-      url: 'http://braumeister.org/formula/{name}'
   tags: [ all, production, brew ]
