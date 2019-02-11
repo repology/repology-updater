@@ -17,8 +17,8 @@
       url: https://brew.sh/
     - desc: Homebrew on GitHub
       url: https://github.com/homebrew
-    - desc: Braumeister - online package browser for Homebrew
-      url: http://braumeister.org/
+    - desc: Homebrew Formulae
+      url: https://formulae.brew.sh/
   packagelinks:
     - desc: Formula page
       url: 'https://formulae.brew.sh/formula/{name}'
