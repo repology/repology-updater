@@ -27,20 +27,19 @@ class RappsParser(Parser):
             if not filename.endswith('.txt'):
                 continue
 
-            pkg = factory.begin(filename)
+            with factory.begin(filename) as pkg:
+                config = configparser.ConfigParser(interpolation=None)
+                config.read(os.path.join(path, filename))
 
-            config = configparser.ConfigParser(interpolation=None)
-            config.read(os.path.join(path, filename))
+                config = config['Section']
 
-            config = config['Section']
+                pkg.set_name(filename[:-4])
+                pkg.set_version(config.get('Version'))
+                pkg.set_summary(config['Description'])
+                pkg.add_homepages(config.get('URLSite'))
+                pkg.add_downloads(config['URLDownload'])
+                pkg.add_licenses(config.get('License'))
 
-            pkg.set_name(filename[:-4])
-            pkg.set_version(config.get('Version'))
-            pkg.set_summary(config['Description'])
-            pkg.add_homepages(config.get('URLSite'))
-            pkg.add_downloads(config['URLDownload'])
-            pkg.add_licenses(config.get('License'))
+                pkg.set_extra_field('longname', config['Name'])
 
-            pkg.set_extra_field('longname', config['Name'])
-
-            yield pkg
+                yield pkg
