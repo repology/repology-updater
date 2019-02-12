@@ -108,7 +108,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.version, '1.1')
         self.assertEqual(pkg.comment, 'Bar')
 
-    def test_type_normalization(self):
+    def test_type_normalization1(self):
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -120,6 +120,18 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.name, '0')
         self.assertEqual(pkg.version, '0')
         self.assertEqual(pkg.comment, '0')
+
+    def test_type_normalization2(self):
+        factory = PackageFactory(NoopLogger())
+
+        maker = factory.begin()
+
+        with self.assertRaises(RuntimeError):
+            maker.set_name([123])
+        with self.assertRaises(RuntimeError):
+            maker.set_version([123])
+        with self.assertRaises(RuntimeError):
+            maker.set_summary([123])
 
     def test_nulls(self):
         factory = PackageFactory(NoopLogger())

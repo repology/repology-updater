@@ -95,8 +95,12 @@ class PackageMakerBase:
         def inner(method):
             @wraps(method)
             def wrapper(self, arg, *other_args):
-                if arg is not None:
+                if arg is None:
+                    pass
+                elif isinstance(arg, str) and want_type is int or isinstance(arg, int) and want_type is str:
                     arg = want_type(arg)
+                elif not isinstance(arg, want_type):
+                    raise RuntimeError('unexpected type {} for {} (expected {})'.format(arg.__class__.__name__, fieldname, want_type.__name__))
                 value = self._apply_normalizers(arg, fieldname, normalizers)
                 if value:
                     return method(self, value, *other_args)
