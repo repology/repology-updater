@@ -23,14 +23,19 @@ _supported_schemas = [
     'cvs',
     'ftp',
     'git',
+    'git+http',
+    'git+https',
     'gopher',
     'hg',
+    'hg+http',
     'http',
     'https',
     'irc',
     'mirror',
     'mirrors',
     'svn',
+    'svn+http',
+    'svn+https',
 ]
 
 
