@@ -422,6 +422,15 @@ class Rule:
 
             self.actions.append(action)
 
+        if 'debianism' in ruledata:
+            debianism_flag = ruledata['debianism']
+
+            def action(package, package_context, match_context):
+                # XXX: the same as devel for now
+                package.SetFlag(PackageFlags.devel, debianism_flag)
+
+            self.actions.append(action)
+
         if 'generated' in ruledata:
             generated_flag = ruledata['generated']
 
