@@ -1,0 +1,25 @@
+###########################################################################
+# T2
+###########################################################################
+- name: t2
+  type: repository
+  desc: T2 SDE
+  family: t2
+  ruleset: t2
+  minpackages: 3000
+  sources:
+    - name: packages
+      fetcher: SVNFetcher
+      parser: T2DescParser
+      url: 'http://svn.exactcode.de/t2/trunk/package/'
+  repolinks:
+    - desc: T2 SDE home
+      url: http://t2sde.org/
+    - desc: T2 packages
+      url: http://t2sde.org/packages/
+  packagelinks:
+    - desc: Package page
+      url: 'http://t2sde.org/packages/{name}'
+    - desc: Package SVN directory
+      url: 'http://svn.exactcode.de/t2/trunk/package/{pkgpath}/'
+  tags: [ all, experimental ]
