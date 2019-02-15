@@ -22,4 +22,4 @@
       url: 'http://t2sde.org/packages/{name}'
     - desc: Package SVN directory
       url: 'http://svn.exactcode.de/t2/trunk/package/{pkgpath}/'
-  tags: [ all, experimental ]
+  tags: [ all, production ]
