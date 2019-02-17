@@ -11,7 +11,7 @@
     - name: eopkg-index.xml
       fetcher: FileFetcher
       parser: SolusIndexParser
-      url: https://packages.solus-project.com/unstable/eopkg-index.xml.xz
+      url: https://packages.getsol.us/unstable/eopkg-index.xml.xz
       compression: xz
   repolinks:
     - desc: Solus home
