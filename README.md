@@ -90,6 +90,7 @@ version are always parsed.
 | SliTaz                           | ✔       |         | ✔     | ✔     |         |          |
 | Solus                            | ✔       | ✔       | ✔     |       | ✔       |          |
 | Stackage                         | ✔       |         |       |       |         |          |
+| T2 SDE                           | ✔       | ✔       | ✔     | ✔     | ✔       | ✔        |
 | Termux                           | ✔       |         |       | ✔     |         | ✔        |
 | Vcpkg                            | ✔       |         |       |       |         |          |
 | Void                             | ✔       | ✔       |       | ✔     | ✔       |          |
