@@ -107,3 +107,5 @@ def save_http_stream(url, outfile, compression=None, **kwargs):
                 if not chunk:
                     break
                 outfile.write(chunk)
+
+    return response
