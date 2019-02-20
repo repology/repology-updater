@@ -47,8 +47,10 @@ class PackageTransformer:
 
             for rulefile in sorted(rulefiles):
                 with open(rulefile) as data:
-                    for ruledata in yaml.safe_load(data):
-                        self._add_rule(ruledata)
+                    rules = yaml.safe_load(data)
+                    if rules:  # may be None for empty file
+                        for rule in rules:
+                            self._add_rule(rule)
 
         self.ruleblocks = []
 
