@@ -3,13 +3,13 @@
 
 {% block title %}{{ name }} packages - Repology{% endblock %}
 {% block header %}Packages for <strong>{{ name }}</strong>{% endblock %}
-{% block description %}Information on all packages for metapackage {{ name }}{% endblock %}
+{% block description %}Information on all packages for project {{ name }}{% endblock %}
 
 {% block content %}
 <div class="container">
 
 {% if not packages %}
-<div class="alert alert-warning" role="alert">No packages found for metapackage <strong>{{ name }}</strong></div>
+<div class="alert alert-warning" role="alert">No packages found for project <strong>{{ name }}</strong></div>
 {% else %}
 
 <p><b>{{ packages|length }}</b> package(s) known</p>
