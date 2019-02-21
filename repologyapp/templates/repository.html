@@ -63,13 +63,13 @@
 	</div>
 </div>
 
-<h2>Metapackages</h2>
+<h2>Projects</h2>
 <div class="row">
 	<div class="col-md-3">
 		<div class="panel panel-primary">
 			<div class="panel-heading"><h3>Total</h3></div>
 			<div class="panel-body">
-				<a href="{{ url_for('metapackages', inrepo=repo) }}">
+				<a href="{{ url_for('projects', inrepo=repo) }}">
 					{{ repo_info.num_metapackages|default(0) }}
 				</a>
 			</div>
@@ -79,7 +79,7 @@
 		<div class="panel panel-success">
 			<div class="panel-heading"><h3>Newest</h3></div>
 			<div class="panel-body">
-				<a href="{{ url_for('metapackages', inrepo=repo, newest=1) }}">
+				<a href="{{ url_for('projects', inrepo=repo, newest=1) }}">
 					{{ repo_info.num_metapackages_newest|default(0) }}
 				</a>
 			</div>
@@ -89,7 +89,7 @@
 		<div class="panel panel-danger">
 			<div class="panel-heading"><h3>Outdated</h3></div>
 			<div class="panel-body">
-				<a href="{{ url_for('metapackages', inrepo=repo, outdated=1) }}">
+				<a href="{{ url_for('projects', inrepo=repo, outdated=1) }}">
 					{{ repo_info.num_metapackages_outdated|default(0) }}
 				</a>
 			</div>
@@ -99,7 +99,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading"><h3>Unique</h3></div>
 			<div class="panel-body">
-				<a href="{{ url_for('metapackages', inrepo=repo, families=1) }}">
+				<a href="{{ url_for('projects', inrepo=repo, families=1) }}">
 					{{ repo_info.num_metapackages_unique|default(0) }}
 				</a>
 			</div>
@@ -107,28 +107,28 @@
 	</div>
 </div>
 
-<h2>Metapackage lists</h2>
+<h2>Package lists</h2>
 
-<p>Metapackage filtering in Repology is very flexible, so you can combine all kinds of conditions. But here are some preset queries to start with:</p>
+<p>Package filtering in Repology is very flexible, so you can combine all kinds of conditions. But here are some preset queries to start with:</p>
 
 <ul>
-	<li><a href="{{ url_for('metapackages', inrepo=repo) }}">All metapackages</a> present in this repository.</li>
-	<li>Metapackages which are <a href="{{ url_for('metapackages', inrepo=repo, newest=1) }}">up to date</a> in this repository.</li>
-	<li>Metapackages which are <a href="{{ url_for('metapackages', inrepo=repo, outdated=1) }}">outdated</a> in this repository.</li>
-	<li>Metapackages which are <a href="{{ url_for('metapackages', inrepo=repo, outdated=1, families_newest='2-') }}">outdated</a> in this repository, but newest in 2+ families. Compared to the previous query this has smaller possibility of false positives.</li>
+	<li><a href="{{ url_for('projects', inrepo=repo) }}">All packages</a> present in this repository.</li>
+	<li>Packages which are <a href="{{ url_for('projects', inrepo=repo, newest=1) }}">up to date</a> in this repository.</li>
+	<li>Packages which are <a href="{{ url_for('projects', inrepo=repo, outdated=1) }}">outdated</a> in this repository.</li>
+	<li>Packages which are <a href="{{ url_for('projects', inrepo=repo, outdated=1, families_newest='2-') }}">outdated</a> in this repository, but newest in 2+ families. Compared to the previous query this has smaller possibility of false positives.</li>
 </ul>
 <ul>
-	<li>Metapackages which <a href="{{ url_for('metapackages', inrepo=repo, problematic=1) }}">have ignored versions</a> in this repository. There may be incorrect versions which needs fixing among these.</li>
-	<li>Metapackages which are up to date <a href="{{ url_for('metapackages', inrepo=repo, newest=1, families_newest=1) }}">only in this repository family</a>. There may be incorrect versions which needs fixing among these.</li>
-	<li>Metapackages which <a href="{{ url_for('metapackages', inrepo=repo, has_related=1) }}">have related ones</a> (with the same homepage). There may be metapackages which require merging these.</li>
+	<li>Packages which <a href="{{ url_for('projects', inrepo=repo, problematic=1) }}">have ignored versions</a> in this repository. There may be incorrect versions which needs fixing among these.</li>
+	<li>Packages which are up to date <a href="{{ url_for('projects', inrepo=repo, newest=1, families_newest=1) }}">only in this repository family</a>. There may be incorrect versions which needs fixing among these.</li>
+	<li>Packages which <a href="{{ url_for('projects', inrepo=repo, has_related=1) }}">have related ones</a> (with the same homepage). There may be projects which require merging these.</li>
 </ul>
 <ul>
-	<li>Unique metapackages present <a href="{{ url_for('metapackages', inrepo=repo, families=1) }}">only in this repository family</a>.</li>
-	<li>Unique metapackages present <a href="{{ url_for('metapackages', inrepo=repo, repos=1) }}">only in this repository</a>.</li>
+	<li>Unique projects present <a href="{{ url_for('projects', inrepo=repo, families=1) }}">only in this repository family</a>.</li>
+	<li>Unique projects present <a href="{{ url_for('projects', inrepo=repo, repos=1) }}">only in this repository</a>.</li>
 </ul>
 <ul>
-	<li>Metapackages from other repositories <a href="{{ url_for('metapackages', notinrepo=repo) }}">not present in this one</a>.</li>
-	<li>Popular metapackages <a href="{{ url_for('metapackages', notinrepo=repo, families='5-') }}">present in 5+ repository families</a>, but absent in this one - likely good candidates for inclusion.</li>
+	<li>Project in other repositories <a href="{{ url_for('projects', notinrepo=repo) }}">not present in this one</a>.</li>
+	<li>Popular projects <a href="{{ url_for('projects', notinrepo=repo, families='5-') }}">present in 5+ repository families</a>, but absent in this one - likely good candidates for inclusion.</li>
 </ul>
 
 <h2>Maintainers</h2>
@@ -142,26 +142,26 @@
 {% endif %}
 
 <h2>Graphs</h2>
-<h3>Total metapackages</h3>
-<img src="{{ url_for('graph_repo_metapackages_total', repo=repo) }}" alt="Total metapackages graph">
+<h3>Total projects</h3>
+<img src="{{ url_for('graph_repo_projects_total', repo=repo) }}" alt="Total projects graph">
 
-<h3>Newest metapackages</h3>
-<img src="{{ url_for('graph_repo_metapackages_newest', repo=repo) }}" alt="Newest metapackages graph">
+<h3>Newest projects</h3>
+<img src="{{ url_for('graph_repo_projects_newest', repo=repo) }}" alt="Newest projects graph">
 
-<h3>Newest metapackages percentage</h3>
-<img src="{{ url_for('graph_repo_metapackages_newest_percent', repo=repo) }}" alt="Newest metapackages percentage graph">
+<h3>Newest projects percentage</h3>
+<img src="{{ url_for('graph_repo_projects_newest_percent', repo=repo) }}" alt="Newest projects percentage graph">
 
-<h3>Outdated metapackages</h3>
-<img src="{{ url_for('graph_repo_metapackages_outdated', repo=repo) }}" alt="Outdated metapackages graph">
+<h3>Outdated projects</h3>
+<img src="{{ url_for('graph_repo_projects_outdated', repo=repo) }}" alt="Outdated projects graph">
 
-<h3>Outdated metapackages percentage</h3>
-<img src="{{ url_for('graph_repo_metapackages_outdated_percent', repo=repo) }}" alt="Outdated metapackages percentage graph">
+<h3>Outdated projects percentage</h3>
+<img src="{{ url_for('graph_repo_projects_outdated_percent', repo=repo) }}" alt="Outdated projects percentage graph">
 
-<h3>Unique metapackages</h3>
-<img src="{{ url_for('graph_repo_metapackages_unique', repo=repo) }}" alt="Unique metapackages graph">
+<h3>Unique projects</h3>
+<img src="{{ url_for('graph_repo_projects_unique', repo=repo) }}" alt="Unique projects graph">
 
-<h3>Unique metapackages percentage</h3>
-<img src="{{ url_for('graph_repo_metapackages_unique_percent', repo=repo) }}" alt="Unique metapackages percentage graph">
+<h3>Unique projects percentage</h3>
+<img src="{{ url_for('graph_repo_projects_unique_percent', repo=repo) }}" alt="Unique projects percentage graph">
 
 <h3>Maintainers</h3>
 <img src="{{ url_for('graph_repo_maintainers', repo=repo) }}" alt="Maintainers graph">
