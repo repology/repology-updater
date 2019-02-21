@@ -198,9 +198,9 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/projects/..0/', has=['kiconvtool'])
         self.checkurl_html('/projects/zzzzzz/', has=['kiconvtool'])
 
-    def test_api_v1_metapackage(self):
+    def test_api_v1_project(self):
         self.assertEqual(
-            self.checkurl_json('/api/v1/metapackage/kiconvtool', mimetype='application/json'),
+            self.checkurl_json('/api/v1/project/kiconvtool', mimetype='application/json'),
             [
                 {
                     'repo': 'freebsd',
@@ -215,19 +215,19 @@ class TestFlask(unittest.TestCase):
                 }
             ]
         )
-        self.assertEqual(self.checkurl_json('/api/v1/metapackage/nonexistent', mimetype='application/json'), [])
+        self.assertEqual(self.checkurl_json('/api/v1/project/nonexistent', mimetype='application/json'), [])
 
-    def test_api_v1_metapackages(self):
-        self.checkurl_json('/api/v1/metapackages/', has=['kiconvtool', '0.97', 'chromium-bsu', '0.9.15.1'])
+    def test_api_v1_projects(self):
+        self.checkurl_json('/api/v1/projects/', has=['kiconvtool', '0.97', 'chromium-bsu', '0.9.15.1'])
 
-        self.checkurl_json('/api/v1/metapackages/k/', has=['kiconvtool', 'virtualbox'], hasnot=['chromium-bsu'])
-        self.checkurl_json('/api/v1/metapackages/..l/', has=['kiconvtool', 'chromium-bsu'], hasnot=['virtualbox'])
+        self.checkurl_json('/api/v1/projects/k/', has=['kiconvtool', 'virtualbox'], hasnot=['chromium-bsu'])
+        self.checkurl_json('/api/v1/projects/..l/', has=['kiconvtool', 'chromium-bsu'], hasnot=['virtualbox'])
 
-        self.checkurl_json('/api/v1/metapackages/?search=iconv', has=['kiconvtool'], hasnot=['chromium-bsu'])
-        self.checkurl_json('/api/v1/metapackages/?category=games-action', has=['chromium-bsu'], hasnot=['kiconvtool'])
-        self.checkurl_json('/api/v1/metapackages/?inrepo=freebsd', has=['kiconvtool'], hasnot=['oracle-xe'])
-        self.checkurl_json('/api/v1/metapackages/?notinrepo=freebsd', has=['oracle-xe'], hasnot=['kiconvtool'])
-        self.checkurl_json('/api/v1/metapackages/?maintainer=amdmi3@freebsd.org', has=['kiconvtool'], hasnot=['kforth', 'teamviewer'])
+        self.checkurl_json('/api/v1/projects/?search=iconv', has=['kiconvtool'], hasnot=['chromium-bsu'])
+        self.checkurl_json('/api/v1/projects/?category=games-action', has=['chromium-bsu'], hasnot=['kiconvtool'])
+        self.checkurl_json('/api/v1/projects/?inrepo=freebsd', has=['kiconvtool'], hasnot=['oracle-xe'])
+        self.checkurl_json('/api/v1/projects/?notinrepo=freebsd', has=['oracle-xe'], hasnot=['kiconvtool'])
+        self.checkurl_json('/api/v1/projects/?maintainer=amdmi3@freebsd.org', has=['kiconvtool'], hasnot=['kforth', 'teamviewer'])
 
     def test_api_v1_problems(self):
         # XXX: empty output for now

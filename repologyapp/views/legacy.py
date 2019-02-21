@@ -151,3 +151,68 @@ def metapackage_badges(name):
 @ViewRegistrar('/metapackage/<name>/report', methods=['GET', 'POST'])
 def metapackage_report(name):
     return flask.redirect(flask.url_for('project_report', name=name), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/')
+@ViewRegistrar('/api/v1/metapackages/<bound>/')
+def api_v1_metapackages(bound=None):
+    return flask.redirect(flask.url_for('api_v1_projects', bound=bound), 301)
+
+
+@ViewRegistrar('/api/v1/metapackage/<name>')
+def api_v1_metapackage(name):
+    return flask.redirect(flask.url_for('api_v1_project', name=name), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/all/')
+@ViewRegistrar('/api/v1/metapackages/all/<bound>/')
+def api_v1_metapackages_all(bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/unique/')
+@ViewRegistrar('/api/v1/metapackages/unique/<bound>/')
+def api_v1_metapackages_unique(bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, families=1), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/in-repo/<repo>/<bound>/')
+def api_v1_metapackages_in_repo(repo, bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/outdated-in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/outdated-in-repo/<repo>/<bound>/')
+def api_v1_metapackages_outdated_in_repo(repo, bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, outdated=1), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/not-in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/not-in-repo/<repo>/<bound>/')
+def api_v1_metapackages_not_in_repo(repo, bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, notinrepo=repo), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/candidates-in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/candidates-in-repo/<repo>/<bound>/')
+def api_v1_metapackages_candidates_in_repo(repo, bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, families='5-'), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/unique-in-repo/<repo>/')
+@ViewRegistrar('/api/v1/metapackages/unique-in-repo/<repo>/<bound>/')
+def api_v1_metapackages_unique_in_repo(repo, bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, inrepo=repo, families=1), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/by-maintainer/<maintainer>/')
+@ViewRegistrar('/api/v1/metapackages/by-maintainer/<maintainer>/<bound>/')
+def api_v1_metapackages_by_maintainer(maintainer, bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, maintainer=maintainer), 301)
+
+
+@ViewRegistrar('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/')
+@ViewRegistrar('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
+def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
+    return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, maintainer=maintainer, outdated=1), 301)
