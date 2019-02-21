@@ -47,7 +47,7 @@ def project_versions(name):
         packages_by_repo[repo] = packageset_sort_by_version(repo_packages)
 
     return flask.render_template(
-        'metapackage-versions.html',
+        'project-versions.html',
         reponames_absent=[reponame for reponame in repometadata.active_names() if reponame not in packages_by_repo],
         packages=packages,
         packages_by_repo=packages_by_repo,
@@ -69,7 +69,7 @@ def project_packages(name):
             packages.extend(packageset_sort_by_name_version(packages_by_repo[repo]))
 
     return flask.render_template(
-        'metapackage-packages.html',
+        'project-packages.html',
         packages=packages,
         metapackage=get_db().get_metapackage(name),
         name=name,
@@ -121,7 +121,7 @@ def project_information(name):
     versions = packageset_aggregate_by_version(packages, {VersionClass.legacy: VersionClass.outdated})
 
     return flask.render_template(
-        'metapackage-information.html',
+        'project-information.html',
         information=information,
         versions=versions,
         metapackage=get_db().get_metapackage(name),
@@ -211,7 +211,7 @@ def project_history(name):
                 yield entry
 
     return flask.render_template(
-        'metapackage-history.html',
+        'project-history.html',
         metapackage=get_db().get_metapackage(name),
         name=name,
         history=list(postprocess_history(get_db().get_metapackage_history(name, limit=config['HISTORY_PER_PAGE']))),
@@ -232,7 +232,7 @@ def project_related(name):
         too_many_warning = config['METAPACKAGES_PER_PAGE']
 
     return flask.render_template(
-        'metapackage-related.html',
+        'project-related.html',
         metapackage=get_db().get_metapackage(name),
         name=name,
         metapackages=metapackages,
@@ -246,7 +246,7 @@ def project_badges(name):
     repos_present_in = set([package.repo for package in get_db().get_metapackage_packages(name)])
     repos = [repo for repo in repometadata.active_names() if repo in repos_present_in]
     return flask.render_template(
-        'metapackage-badges.html',
+        'project-badges.html',
         metapackage=get_db().get_metapackage(name),
         name=name,
         repos=repos
@@ -296,7 +296,7 @@ def project_report(name):
         return flask.redirect(flask.url_for('metapackage_report', name=name))
 
     return flask.render_template(
-        'metapackage-report.html',
+        'project-report.html',
         reports=get_db().get_metapackage_reports(name),
         metapackage=get_db().get_metapackage(name),
         name=name,
