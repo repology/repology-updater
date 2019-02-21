@@ -131,29 +131,27 @@ class TestFlask(unittest.TestCase):
         self.checkurl_svg('/graph/repo/freebsd/maintainers.svg')
         self.checkurl_svg('/graph/repo/freebsd/problems.svg')
 
-    def test_metapackage(self):
-        self.checkurl('/metapackage/kiconvtool', status_code=301)
+    def test_project(self):
+        self.checkurl_html('/project/kiconvtool/versions', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl_html('/project/nonexistent/versions', has=['No data found'])
 
-        self.checkurl_html('/metapackage/kiconvtool/versions', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl_html('/metapackage/nonexistent/versions', has=['No data found'])
+        self.checkurl_html('/project/kiconvtool/packages', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl_html('/project/nonexistent/packages', has=['No packages found'])
 
-        self.checkurl_html('/metapackage/kiconvtool/packages', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl_html('/metapackage/nonexistent/packages', has=['No packages found'])
+        self.checkurl_html('/project/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
+        self.checkurl_html('/project/nonexistent/information', has=['No data found'])
 
-        self.checkurl_html('/metapackage/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl_html('/metapackage/nonexistent/information', has=['No data found'])
+        self.checkurl_html('/project/kiconvtool/related')  # , has=['0.97']) # XXX: no related packages in current testdata
+        self.checkurl_html('/project/nonexistent/related', has=['No metapackages found matching the criteria'])
 
-        self.checkurl_html('/metapackage/kiconvtool/related')  # , has=['0.97']) # XXX: no related packages in current testdata
-        self.checkurl_html('/metapackage/nonexistent/related', has=['No metapackages found matching the criteria'])
-
-        self.checkurl_html('/metapackage/kiconvtool/badges', has=[
+        self.checkurl_html('/project/kiconvtool/badges', has=[
             # XXX: agnostic to site home
-            '/metapackage/kiconvtool',
+            '/project/kiconvtool',
             '/badge/vertical-allrepos/kiconvtool.svg',
             '/badge/tiny-repos/kiconvtool.svg',
         ])
 
-        self.checkurl_html('/metapackage/kiconvtool/report', has=[''])
+        self.checkurl_html('/project/kiconvtool/report', has=[''])
 
     def test_maintaners(self):
         self.checkurl_html('/maintainers/a/', has=['amdmi3@freebsd.org'])
@@ -181,24 +179,24 @@ class TestFlask(unittest.TestCase):
     def test_repository_problems(self):
         self.checkurl_html('/repository/freebsd/problems', has=['FreeBSD'])
 
-    def test_metapackages(self):
-        self.checkurl_html('/metapackages/', has=['kiconvtool', '0.97', 'chromium-bsu', '0.9.15.1'])
+    def test_projects(self):
+        self.checkurl_html('/projects/', has=['kiconvtool', '0.97', 'chromium-bsu', '0.9.15.1'])
 
-        self.checkurl_html('/metapackages/k/', has=['kiconvtool', 'virtualbox'], hasnot=['chromium-bsu'])
-        self.checkurl_html('/metapackages/..l/', has=['kiconvtool', 'chromium-bsu'], hasnot=['virtualbox'])
+        self.checkurl_html('/projects/k/', has=['kiconvtool', 'virtualbox'], hasnot=['chromium-bsu'])
+        self.checkurl_html('/projects/..l/', has=['kiconvtool', 'chromium-bsu'], hasnot=['virtualbox'])
 
-        self.checkurl_html('/metapackages/?search=iconv', has=['kiconvtool'], hasnot=['chromium-bsu'])
-        self.checkurl_html('/metapackages/?search=%20ICONV%20', has=['kiconvtool'], hasnot=['chromium-bsu'])
-        self.checkurl_html('/metapackages/?category=games-action', has=['chromium-bsu'], hasnot=['kiconvtool'])
-        self.checkurl_html('/metapackages/?inrepo=freebsd', has=['kiconvtool'], hasnot=['oracle-xe'])
-        self.checkurl_html('/metapackages/?notinrepo=freebsd', has=['oracle-xe'], hasnot=['kiconvtool'])
-        self.checkurl_html('/metapackages/?maintainer=amdmi3@freebsd.org', has=['kiconvtool'], hasnot=['kforth', 'teamviewer'])
+        self.checkurl_html('/projects/?search=iconv', has=['kiconvtool'], hasnot=['chromium-bsu'])
+        self.checkurl_html('/projects/?search=%20ICONV%20', has=['kiconvtool'], hasnot=['chromium-bsu'])
+        self.checkurl_html('/projects/?category=games-action', has=['chromium-bsu'], hasnot=['kiconvtool'])
+        self.checkurl_html('/projects/?inrepo=freebsd', has=['kiconvtool'], hasnot=['oracle-xe'])
+        self.checkurl_html('/projects/?notinrepo=freebsd', has=['oracle-xe'], hasnot=['kiconvtool'])
+        self.checkurl_html('/projects/?maintainer=amdmi3@freebsd.org', has=['kiconvtool'], hasnot=['kforth', 'teamviewer'])
 
         # XXX add some duplicated packages in testdata and add spread and unique tests
 
         # special cases: check fallback code for going before first or after last entry
-        self.checkurl_html('/metapackages/..0/', has=['kiconvtool'])
-        self.checkurl_html('/metapackages/zzzzzz/', has=['kiconvtool'])
+        self.checkurl_html('/projects/..0/', has=['kiconvtool'])
+        self.checkurl_html('/projects/zzzzzz/', has=['kiconvtool'])
 
     def test_api_v1_metapackage(self):
         self.assertEqual(
