@@ -115,19 +115,19 @@ class TestFlask(unittest.TestCase):
         self.checkurl_svg('/badge/latest-versions/nonexistent.svg', has=['<svg', '>-<'])
 
     def test_graphs(self):
-        self.checkurl_svg('/graph/total/metapackages.svg')
+        self.checkurl_svg('/graph/total/projects.svg')
         self.checkurl_svg('/graph/total/maintainers.svg')
         self.checkurl_svg('/graph/total/problems.svg')
 
         self.checkurl_svg('/graph/map_repo_size_fresh.svg')
 
-        self.checkurl_svg('/graph/repo/freebsd/metapackages_total.svg')
-        self.checkurl_svg('/graph/repo/freebsd/metapackages_newest.svg')
-        self.checkurl_svg('/graph/repo/freebsd/metapackages_newest_percent.svg')
-        self.checkurl_svg('/graph/repo/freebsd/metapackages_outdated.svg')
-        self.checkurl_svg('/graph/repo/freebsd/metapackages_outdated_percent.svg')
-        self.checkurl_svg('/graph/repo/freebsd/metapackages_unique.svg')
-        self.checkurl_svg('/graph/repo/freebsd/metapackages_unique_percent.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_total.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_newest.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_newest_percent.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_outdated.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_outdated_percent.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_unique.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_unique_percent.svg')
         self.checkurl_svg('/graph/repo/freebsd/maintainers.svg')
         self.checkurl_svg('/graph/repo/freebsd/problems.svg')
 

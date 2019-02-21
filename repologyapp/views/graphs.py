@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -89,38 +89,38 @@ def graph_total_generic(getvalue, color, suffix=''):
     return graph_generic(get_graph, color, suffix)
 
 
-@ViewRegistrar('/graph/repo/<repo>/metapackages_total.svg')
-def graph_repo_metapackages_total(repo):
+@ViewRegistrar('/graph/repo/<repo>/projects_total.svg')
+def graph_repo_projects_total(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages'], '#000000')
 
 
-@ViewRegistrar('/graph/repo/<repo>/metapackages_newest.svg')
-def graph_repo_metapackages_newest(repo):
+@ViewRegistrar('/graph/repo/<repo>/projects_newest.svg')
+def graph_repo_projects_newest(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_newest'], '#5cb85c')
 
 
-@ViewRegistrar('/graph/repo/<repo>/metapackages_newest_percent.svg')
-def graph_repo_metapackages_newest_percent(repo):
+@ViewRegistrar('/graph/repo/<repo>/projects_newest_percent.svg')
+def graph_repo_projects_newest_percent(repo):
     return graph_repo_generic(repo, lambda s: safe_percent(s['num_metapackages_newest'], s['num_metapackages_newest'] + s['num_metapackages_outdated']), '#5cb85c', '%')
 
 
-@ViewRegistrar('/graph/repo/<repo>/metapackages_outdated.svg')
-def graph_repo_metapackages_outdated(repo):
+@ViewRegistrar('/graph/repo/<repo>/projects_outdated.svg')
+def graph_repo_projects_outdated(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_outdated'], '#d9534f')
 
 
-@ViewRegistrar('/graph/repo/<repo>/metapackages_outdated_percent.svg')
-def graph_repo_metapackages_outdated_percent(repo):
+@ViewRegistrar('/graph/repo/<repo>/projects_outdated_percent.svg')
+def graph_repo_projects_outdated_percent(repo):
     return graph_repo_generic(repo, lambda s: safe_percent(s['num_metapackages_outdated'], s['num_metapackages_newest'] + s['num_metapackages_outdated']), '#d9534f', '%')
 
 
-@ViewRegistrar('/graph/repo/<repo>/metapackages_unique.svg')
-def graph_repo_metapackages_unique(repo):
+@ViewRegistrar('/graph/repo/<repo>/projects_unique.svg')
+def graph_repo_projects_unique(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'], '#5bc0de')
 
 
-@ViewRegistrar('/graph/repo/<repo>/metapackages_unique_percent.svg')
-def graph_repo_metapackages_unique_percent(repo):
+@ViewRegistrar('/graph/repo/<repo>/projects_unique_percent.svg')
+def graph_repo_projects_unique_percent(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0, '#5bc0de', '%')
 
 
@@ -149,8 +149,8 @@ def graph_total_packages():
     return graph_total_generic(lambda s: s['num_packages'], '#000000')
 
 
-@ViewRegistrar('/graph/total/metapackages.svg')
-def graph_total_metapackages():
+@ViewRegistrar('/graph/total/projects.svg')
+def graph_total_projects():
     return graph_total_generic(lambda s: s['num_metapackages'], '#000000')
 
 

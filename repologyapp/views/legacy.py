@@ -216,3 +216,43 @@ def api_v1_metapackages_by_maintainer(maintainer, bound=None):
 @ViewRegistrar('/api/v1/metapackages/outdated-by-maintainer/<maintainer>/<bound>/')
 def api_v1_metapackages_outdated_by_maintainer(maintainer, bound=None):
     return flask.redirect(flask.url_for('api_v1_metapackages', bound=bound, maintainer=maintainer, outdated=1), 301)
+
+
+@ViewRegistrar('/graph/total/metapackages.svg')
+def graph_total_metapackages():
+    return flask.redirect(flask.url_for('graph_total_projects'), 301)
+
+
+@ViewRegistrar('/graph/repo/<repo>/metapackages_total.svg')
+def graph_repo_metapackages_total(repo):
+    return flask.redirect(flask.url_for('graph_repo_projects_total', repo=repo), 301)
+
+
+@ViewRegistrar('/graph/repo/<repo>/metapackages_newest.svg')
+def graph_repo_metapackages_newest(repo):
+    return flask.redirect(flask.url_for('graph_repo_projects_newest', repo=repo), 301)
+
+
+@ViewRegistrar('/graph/repo/<repo>/metapackages_newest_percent.svg')
+def graph_repo_metapackages_newest_percent(repo):
+    return flask.redirect(flask.url_for('graph_repo_projects_newest_percent', repo=repo), 301)
+
+
+@ViewRegistrar('/graph/repo/<repo>/metapackages_outdated.svg')
+def graph_repo_metapackages_outdated(repo):
+    return flask.redirect(flask.url_for('graph_repo_projects_outdated', repo=repo), 301)
+
+
+@ViewRegistrar('/graph/repo/<repo>/metapackages_outdated_percent.svg')
+def graph_repo_metapackages_outdated_percent(repo):
+    return flask.redirect(flask.url_for('graph_repo_projects_outdated_percent', repo=repo), 301)
+
+
+@ViewRegistrar('/graph/repo/<repo>/metapackages_unique.svg')
+def graph_repo_metapackages_unique(repo):
+    return flask.redirect(flask.url_for('graph_repo_projects_unique', repo=repo), 301)
+
+
+@ViewRegistrar('/graph/repo/<repo>/metapackages_unique_percent.svg')
+def graph_repo_metapackages_unique_percent(repo):
+    return flask.redirect(flask.url_for('graph_repo_projects_unique_percent', repo=repo), 301)
