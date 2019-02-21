@@ -23,9 +23,9 @@ from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_r
 from repologyapp.view_registry import ViewRegistrar
 
 
-@ViewRegistrar('/metapackages/')
-@ViewRegistrar('/metapackages/<bound>/')
-def metapackages(bound=None):
+@ViewRegistrar('/projects/')
+@ViewRegistrar('/projects/<bound>/')
+def projects(bound=None):
     # process search
     filterinfo = MetapackagesFilterInfo()
     filterinfo.ParseFlaskArgs()

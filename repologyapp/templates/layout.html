@@ -34,7 +34,7 @@
 
 		<div class="collapse navbar-collapse" id="repology-navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li{% if endpoint_like('metapackages', 'metapackage_*') %} class="active"{% endif %}><a href="{{ url_for('metapackages') }}">Metapackages</a></li>
+				<li{% if endpoint_like('projects', 'project_*') %} class="active"{% endif %}><a href="{{ url_for('projects') }}">Projects</a></li>
 				<li{% if endpoint_like('maintainers', 'maintainer') %} class="active"{% endif %}><a href="{{ url_for('maintainers') }}">Maintainers</a></li>
 				<li{% if endpoint_like('repositories_*', 'repository') %} class="active"{% endif %}><a href="{{ url_for('repositories_statistics') }}">Repositories</a></li>
 				{% if session.admin %}<li{% if endpoint_like('admin', 'admin_*') %} class="active"{% endif %}><a href="{{ url_for('admin') }}">Admin</a></li>{% endif %}

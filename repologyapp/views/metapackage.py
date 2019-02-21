@@ -34,8 +34,8 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.package import VersionClass
 
 
-@ViewRegistrar('/metapackage/<name>/versions')
-def metapackage_versions(name):
+@ViewRegistrar('/project/<name>/versions')
+def project_versions(name):
     packages_by_repo = defaultdict(list)
 
     packages = get_db().get_metapackage_packages(name)
@@ -56,8 +56,8 @@ def metapackage_versions(name):
     )
 
 
-@ViewRegistrar('/metapackage/<name>/packages')
-def metapackage_packages(name):
+@ViewRegistrar('/project/<name>/packages')
+def project_packages(name):
     packages_by_repo = defaultdict(list)
 
     for package in get_db().get_metapackage_packages(name):
@@ -77,8 +77,8 @@ def metapackage_packages(name):
     )
 
 
-@ViewRegistrar('/metapackage/<name>/information')
-def metapackage_information(name):
+@ViewRegistrar('/project/<name>/information')
+def project_information(name):
     packages = get_db().get_metapackage_packages(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
 
@@ -130,8 +130,8 @@ def metapackage_information(name):
     )
 
 
-@ViewRegistrar('/metapackage/<name>/history')
-def metapackage_history(name):
+@ViewRegistrar('/project/<name>/history')
+def project_history(name):
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
     def prepare_repos(repos):
@@ -219,8 +219,8 @@ def metapackage_history(name):
     )
 
 
-@ViewRegistrar('/metapackage/<name>/related')
-def metapackage_related(name):
+@ViewRegistrar('/project/<name>/related')
+def project_related(name):
     metapackages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     packages = get_db().get_metapackages_packages(list(metapackages.keys()), fields=['family', 'effname', 'version', 'versionclass', 'flags'])
@@ -241,8 +241,8 @@ def metapackage_related(name):
     )
 
 
-@ViewRegistrar('/metapackage/<name>/badges')
-def metapackage_badges(name):
+@ViewRegistrar('/project/<name>/badges')
+def project_badges(name):
     repos_present_in = set([package.repo for package in get_db().get_metapackage_packages(name)])
     repos = [repo for repo in repometadata.active_names() if repo in repos_present_in]
     return flask.render_template(
@@ -253,8 +253,8 @@ def metapackage_badges(name):
     )
 
 
-@ViewRegistrar('/metapackage/<name>/report', methods=['GET', 'POST'])
-def metapackage_report(name):
+@ViewRegistrar('/project/<name>/report', methods=['GET', 'POST'])
+def project_report(name):
     reports_disabled = name in config['DISABLED_REPORTS']
 
     if flask.request.method == 'POST':

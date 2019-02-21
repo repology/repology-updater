@@ -110,3 +110,44 @@ def legacy_statistics(sorting=None):
 @ViewRegistrar('/metapackage/<name>')
 def metapackage(name):
     return flask.redirect(flask.url_for('metapackage_versions', name=name), 301)
+
+
+@ViewRegistrar('/metapackages/')
+@ViewRegistrar('/metapackages/<bound>/')
+def metapackages(bound=None):
+    return flask.redirect(flask.url_for('projects', bound=bound), 301)
+
+
+@ViewRegistrar('/metapackage/<name>/versions')
+def metapackage_versions(name):
+    return flask.redirect(flask.url_for('project_versions', name=name), 301)
+
+
+@ViewRegistrar('/metapackage/<name>/packages')
+def metapackage_packages(name):
+    return flask.redirect(flask.url_for('project_packages', name=name), 301)
+
+
+@ViewRegistrar('/metapackage/<name>/information')
+def metapackage_information(name):
+    return flask.redirect(flask.url_for('project_information', name=name), 301)
+
+
+@ViewRegistrar('/metapackage/<name>/history')
+def metapackage_history(name):
+    return flask.redirect(flask.url_for('project_history', name=name), 301)
+
+
+@ViewRegistrar('/metapackage/<name>/related')
+def metapackage_related(name):
+    return flask.redirect(flask.url_for('project_related', name=name), 301)
+
+
+@ViewRegistrar('/metapackage/<name>/badges')
+def metapackage_badges(name):
+    return flask.redirect(flask.url_for('project_badges', name=name), 301)
+
+
+@ViewRegistrar('/metapackage/<name>/report', methods=['GET', 'POST'])
+def metapackage_report(name):
+    return flask.redirect(flask.url_for('project_report', name=name), 301)
