@@ -142,7 +142,7 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/project/nonexistent/information', has=['No data found'])
 
         self.checkurl_html('/project/kiconvtool/related')  # , has=['0.97']) # XXX: no related packages in current testdata
-        self.checkurl_html('/project/nonexistent/related', has=['No metapackages found matching the criteria'])
+        self.checkurl_html('/project/nonexistent/related', has=['No projects found matching the criteria'])
 
         self.checkurl_html('/project/kiconvtool/badges', has=[
             # XXX: agnostic to site home

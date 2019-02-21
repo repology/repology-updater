@@ -9,12 +9,12 @@
 <div class="container">
 
 {% if too_many_warning %}
-<div class="alert alert-warning" role="alert">Too many related metapackages found, only listing first {{ too_many_warning }}!</div>
+<div class="alert alert-warning" role="alert">Too many related projects found, only listing first {{ too_many_warning }}!</div>
 {% endif %}
 
-<p>Related packages are determined by recursively matching package homepage URLs. Note that this list may be incomplete as Repology may not be able to get homepage URLs from some repositories.</p>
+<p>Related projects are determined by recursively matching package homepage URLs. Note that this list may be incomplete as Repology may not be able to get homepage URLs from some repositories.</p>
 
-{% include "metapackages_table.html" %}
+{% include "projects_table.html" %}
 
 {% include "versionclass_legend.html" %}
 
