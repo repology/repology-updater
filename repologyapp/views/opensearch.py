@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,9 +20,9 @@ import flask
 from repologyapp.view_registry import ViewRegistrar
 
 
-@ViewRegistrar('/opensearch/metapackage.xml')
-def opensearch_metapackage():
-    return flask.render_template('opensearch-metapackage.xml'), {'Content-type': 'application/xml'}
+@ViewRegistrar('/opensearch/project.xml')
+def opensearch_project():
+    return flask.render_template('opensearch-project.xml'), {'Content-type': 'application/xml'}
 
 
 @ViewRegistrar('/opensearch/maintainer.xml')
