@@ -8,7 +8,7 @@
 	<linearGradient id="grad" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
 		<stop offset="1" stop-opacity=".1"/>
 	</linearGradient>
-	<a xlink:href="{{ REPOLOGY_HOME }}{{ url_for('metapackage_versions', name=name) }}">
+	<a xlink:href="{{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }}">
 		<g clip-path="url(#clip)">
 			<rect width="{{ leftwidth }}" height="{{ height }}" fill="#555"/>
 			<rect x="{{ leftwidth }}" width="{{ rightwidth }}" height="{{ height }}" fill="#007ec6"/>
