@@ -49,7 +49,7 @@
 			<thead>
 				<tr>
 					<th class="text-right" rowspan="2">Maintainer</th>
-					<th class="text-center" colspan="3">Metapackages</th>
+					<th class="text-center" colspan="3">Projects</th>
 				</tr>
 				<tr>
 					<th class="text-center">Total</th>
@@ -66,12 +66,12 @@
 						</a>
 					</td>
 					<td class="text-center">
-						<a href="{{ url_for('metapackages', maintainer=maintainer.maintainer) }}">
+						<a href="{{ url_for('projects', maintainer=maintainer.maintainer) }}">
 							{{- maintainer.num_metapackages -}}
 						</a>
 					</td>
 					<td class="text-center">
-						<a href="{{ url_for('metapackages', maintainer=maintainer.maintainer, outdated=1) }}">
+						<a href="{{ url_for('projects', maintainer=maintainer.maintainer, outdated=1) }}">
 							{{- maintainer.num_metapackages_outdated -}}
 						</a>
 					</td>
