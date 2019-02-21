@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% import "macros.html" as macros %}
 
-{% block title %}Raising metapackages - Repology{% endblock %}
-{% block header %}Raising metapackages{% endblock %}
+{% block title %}Raising projects - Repology{% endblock %}
+{% block header %}Raising projects{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -14,14 +14,14 @@
 			<thead>
 				<tr>
 					<th>Δspread/week</th>
-					<th>Metapackage</th>
+					<th>Project</th>
 				</tr>
 			</thead>
 			<tbody>
 			{% for package in packages1 %}
 				<tr>
 					<td>{{ package.rate|round(2) }}</td>
-					<td><a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
+					<td><a href="{{ url_for('project_versions', name=package.effname) }}">{{ package.effname }}</a>
 				</tr>
 			{% endfor %}
 			</tbody>
@@ -33,14 +33,14 @@
 			<thead>
 				<tr>
 					<th>Δspread/week</th>
-					<th>Metapackage</th>
+					<th>Project</th>
 				</tr>
 			</thead>
 			<tbody>
 			{% for package in packages2 %}
 				<tr>
 					<td>{{ package.rate|round(2) }}</td>
-					<td><a href="{{ url_for("metapackage_versions", name=package.effname) }}">{{ package.effname }}</a>
+					<td><a href="{{ url_for('project_versions', name=package.effname) }}">{{ package.effname }}</a>
 				</tr>
 			{% endfor %}
 			</tbody>

@@ -7,11 +7,11 @@
 <div class="container">
 
 <ul>
-	<li><a href="{{ url_for('metapackages_turnover') }}">Metapackages turnover</a> - lists of metapackages added and removed recently.
+	<li><a href="{{ url_for('projects_turnover') }}">Metapackages turnover</a> - lists of projects added and removed recently.
 		<ul>
 			<li>More or less usable.</li>
-			<li>Contains links to related metapackages, which it would be nice to add to normal metapackage views first.</li>
-			<li>Needs to gather some history of removed metapackages.</li>
+			<li>Contains links to related projects, which it would be nice to add to normal project views first.</li>
+			<li>Needs to gather some history of removed projects.</li>
 		</ul>
 	</li>
 	<li><a href="{{ url_for('maintainers_turnover') }}">Maintainers turnover</a> - lists of maintainers added and removed recently.
@@ -19,9 +19,9 @@
 			<li>Needs to gather some history of removed maintainers.</li>
 		</ul>
 	</li>
-	<li><a href="{{ url_for('raising') }}">Raising</a> - list of metapackages added to many repositories recently.
+	<li><a href="{{ url_for('raising') }}">Raising</a> - list of projects added to many repositories recently.
 		<ul>
-			<li>Does not work correctly yet, because it treats old (not really raising) metapackages recently merged by the rules as raising.</li>
+			<li>Does not work correctly yet, because it treats old (not really raising) projects recently merged by the rules as raising.</li>
 			<li>Needs <a href="https://github.com/repology/repology/issues/527">#527</a> implemented to work correctly.</li>
 			<li>Needs at least several weeks of history accumulated.</li>
 			<li>Needs optimization.</li>

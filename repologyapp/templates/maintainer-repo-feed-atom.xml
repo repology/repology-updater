@@ -16,7 +16,7 @@ tag:repology.org,2018-04-25:maintainer-repo:{{ maintainer }}:{{ repo }}
 	<entry>
 		<id>{{ feed_id() }}:{{ entry.id }}</id>
 		<updated>{{ entry.ts.astimezone(tz).isoformat('T', 'seconds') }}</updated>
-		<link href="{{ url_for('metapackage_versions', name=entry.effname) }}#{{ repo }}" />
+		<link href="{{ url_for('project_versions', name=entry.effname) }}#{{ repo }}" />
 		{% if entry.type == 'added' %}
 		<title>{{ entry.effname }} is now tracked</title>
 		<content>Package for {{ entry.effname }} was added to {{ repometadata[repo].desc }} and/or assigned to {{ maintainer }}</content>

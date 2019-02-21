@@ -146,7 +146,7 @@
 <article>
 	<h3 id="2018-04-14">2018-04-14</h3>
 	<ul>
-		<li>Per-metapackage history is available. See <a href="{{ url_for('metapackage_history', name='vim') }}">history</a> tab under each metapackage.</li>
+		<li>Per-project history is available. See <a href="{{ url_for('project_history', name='vim') }}">history</a> tab under each project.</li>
 	</ul>
 </article>
 
@@ -160,14 +160,14 @@
 			<a href="{{ url_for('repository', repo='steamos_brewmaster') }}">SteamOS</a>,
 			<a href="{{ url_for('repository', repo='tails_stable') }}">Tails</a>.
 		</li>
-		<li>Extended metapackage filtering capabilities. Filtering by number of repositories, families, up to date repositories and up to date families is now possible. Now you can, for example, get a list of metapackages outdated in your repository, but up to date in 3 or more families, like <a href="{{ url_for('metapackages', inrepo='freebsd', outdated=true, families_newest='3-') }}">this</a>, which lowers the chance of false positive outdated package report.</li>
+		<li>Extended project filtering capabilities. Filtering by number of repositories, families, up to date repositories and up to date families is now possible. Now you can, for example, get a list of projects outdated in your repository, but up to date in 3 or more families, like <a href="{{ url_for('projects', inrepo='freebsd', outdated=true, families_newest='3-') }}">this</a>, which lowers the chance of false positive outdated package report.</li>
 	</ul>
 </article>
 
 <article>
 	<h3 id="2018-03-12">2018-03-12</h3>
 	<ul>
-		<li>Presence of related metapackages is now indicated in the metapackage list.</li>
+		<li>Presence of related projects is now indicated in the projects list.</li>
 	</ul>
 </article>
 
