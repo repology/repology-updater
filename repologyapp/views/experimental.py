@@ -27,10 +27,10 @@ def experimental():
     return flask.render_template('experimental.html')
 
 
-@ViewRegistrar('/experimental/turnover/metapackages')
-def metapackages_turnover():
+@ViewRegistrar('/experimental/turnover/projects')
+def projects_turnover():
     return flask.render_template(
-        'metapackages-turnover.html',
+        'projects-turnover.html',
         added=get_db().get_recently_added_metapackages(config['TURNOVER_PER_PAGE']),
         removed=get_db().get_recently_removed_metapackages(config['TURNOVER_PER_PAGE'])
     )
