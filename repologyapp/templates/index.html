@@ -113,7 +113,7 @@
 						Search <b>packages</b>
 					</div>
 					<div class="panel-body">
-						<form action="{{ url_for('project') }}" method="GET">
+						<form action="{{ url_for('projects') }}" method="GET">
 							<div class="input-group">
 								<input type="text" class="form-control" name="search" placeholder="e.g. &quot;firefox&quot;">
 								<div class="input-group-btn">
@@ -123,7 +123,7 @@
 						</form>
 					</div>
 					<div class="panel-footer">
-						or <a href="{{ url_for('project') }}">browse</a> list of all packages
+						or <a href="{{ url_for('projects') }}">browse</a> list of all packages
 					</div>
 				</div>
 			</div>
