@@ -48,75 +48,75 @@
 Mandatory fields are <b>repo</b>, <b>name</b> and <b>version</b>, all other fields are optional.
 </p>
 
-<p><em>Metapackage</em> is a group of related <em>packages</em> from different repositories (though it may contain multiple <em>packages</em> from the same repository). <em>Metapackage</em> has its own name which is derived from <em>package</em> names. In most cases it's the same, but sometimes different <em>package</em> names are transformed into a single <em>metapackage</em> name to coalesce differently named <em>packages</em> from different repositories.</p>
+<p><em>Project</em> is a group of related <em>packages</em> from different repositories (though it may contain multiple <em>packages</em> from the same repository). <em>Project</em> has its own name which is derived from <em>package</em> names. In most cases it's the same, but sometimes different <em>package</em> names are transformed into a single <em>project</em> name to coalesce differently named <em>packages</em> from different repositories.</p>
 
-<p>API allows to request <em>packages</em> for a single <em>metapackage</em> or for a range of <em>metapackages</em>.</p>
+<p>API allows to request <em>packages</em> for a single <em>project</em> or for a range of <em>projects</em>.</p>
 
-<h3>Single metapackage</h3>
+<h3>Single project</h3>
 
-<p>Get list of <em>packages</em> for specific <em>metapackage</em> (here, firefox):</p>
+<p>Get list of <em>packages</em> for specific <em>project</em> (here, firefox):</p>
 <pre>
-{{ url_for('api_v1_metapackage', name='firefox') }}
+{{ url_for('api_v1_project', name='firefox') }}
 </pre>
 
-<h3>Multiple metapackages</h3>
+<h3>Multiple projects</h3>
 
-<p>The following requests return data for multiple <em>metapackages</em>
-in form of <em>metapackage</em> name → list of <em>packages</em>
-dictionary. API returns no more than {{ per_page }} <em>metapackages</em>
-per request. You may specify a start or an end of <em>metapackage</em> names
+<p>The following requests return data for multiple <em>projects</em>
+in form of <em>project</em> name → list of <em>packages</em>
+dictionary. API returns no more than {{ per_page }} <em>projects</em>
+per request. You may specify a start or an end of <em>project</em> names
 range to request.</p>
 
-<p>Get first {{ per_page }} metapackages:</p>
+<p>Get first {{ per_page }} projects:</p>
 <pre>
-{{ url_for('api_v1_metapackages') }}
+{{ url_for('api_v1_projects') }}
 </pre>
 
-<p>Get first {{ per_page }} metapackages starting with <b>firefox</b> (inclusive):</p>
+<p>Get first {{ per_page }} projects starting with <b>firefox</b> (inclusive):</p>
 <pre>
-{{ url_for('api_v1_metapackages', bound='firefox') }}
+{{ url_for('api_v1_projects', bound='firefox') }}
 </pre>
 
-<p>Get last {{ per_page }} metapackages up to <b>firefox</b> (inclusive):</p>
+<p>Get last {{ per_page }} projects up to <b>firefox</b> (inclusive):</p>
 <pre>
-{{ url_for('api_v1_metapackages', bound='..firefox') }}
+{{ url_for('api_v1_projects', bound='..firefox') }}
 </pre>
 
-<p>You may iterate through all metapackages by using the last metapackage name in the next
+<p>You may iterate through all projects by using the last project name in the next
 request</p>
 <pre>
-{{ url_for('api_v1_metapackages') }}  # returns '010editor' ... 'aaut'
-{{ url_for('api_v1_metapackages', bound='aaut') }}  # returns 'aaut' ... 'acf-snort'
-{{ url_for('api_v1_metapackages', bound='acf-snort') }}  # returns 'acf-snort' ... 'adinatha-fonts'
+{{ url_for('api_v1_projects') }}  # returns '010editor' ... 'aaut'
+{{ url_for('api_v1_projects', bound='aaut') }}  # returns 'aaut' ... 'acf-snort'
+{{ url_for('api_v1_projects', bound='acf-snort') }}  # returns 'acf-snort' ... 'adinatha-fonts'
 # ...
 </pre>
 
-<h3>Filtered metapackages</h3>
+<h3>Filtered projects</h3>
 
 <p>API supports all the filters available on the website, so you can just
-play with filters in the <a href="{{ url_for('metapackages') }}">website</a>
-and then replace <code>{{ url_for('metapackages') }}</code> URL prefix with
-<code>{{ url_for('api_v1_metapackages') }}</code> to get API output.</p>
+play with filters in the <a href="{{ url_for('projects') }}">website</a>
+and then replace <code>{{ url_for('projects') }}</code> URL prefix with
+<code>{{ url_for('api_v1_projects') }}</code> to get API output.</p>
 
 <p>Supported filters are:</p>
 <dl class="dl-horizontal">
-	<dt>search</dt><dd>metapackage name substring to look for</dd>
-	<dt>maintainer</dt><dd>return metapackages maintainer by specified person</dd>
-	<dt>category</dt><dd>return metapackages with specified category</dd>
-	<dt>inrepo</dt><dd>return metapackages present in specified repository</dd>
-	<dt>notinrepo</dt><dd>return metapackages absent in specified repository</dd>
-	<dt>repos</dt><dd>return metapackages present in specified number of repositories (exact values and open/closed ranges are allowed, e.g. <code>1</code>, <code>5-</code>, <code>-5</code>, <code>2-7</code></dd>
-	<dt>families</dt><dd>return metapackages present in specified number of repository families (for instance, use <code>1</code> to get unique metapackages)</dd>
-	<dt>repos_newest</dt><dd>return metapackages which are up to date in specified number of repositories</dd>
-	<dt>families_newest</dt><dd>return metapackages which are up to date in specified number of repository families</dd>
-	<dt>newest</dt><dd>return newest metapackages only</dd>
-	<dt>outdated</dt><dd>return outdated metapackages only</dd>
-	<dt>problematic</dt><dd>return problematic metapackages only</dd>
+	<dt>search</dt><dd>project name substring to look for</dd>
+	<dt>maintainer</dt><dd>return projects maintainer by specified person</dd>
+	<dt>category</dt><dd>return projects with specified category</dd>
+	<dt>inrepo</dt><dd>return projects present in specified repository</dd>
+	<dt>notinrepo</dt><dd>return projects absent in specified repository</dd>
+	<dt>repos</dt><dd>return projects present in specified number of repositories (exact values and open/closed ranges are allowed, e.g. <code>1</code>, <code>5-</code>, <code>-5</code>, <code>2-7</code></dd>
+	<dt>families</dt><dd>return projects present in specified number of repository families (for instance, use <code>1</code> to get unique projects)</dd>
+	<dt>repos_newest</dt><dd>return projects which are up to date in specified number of repositories</dd>
+	<dt>families_newest</dt><dd>return projects which are up to date in specified number of repository families</dd>
+	<dt>newest</dt><dd>return newest projects only</dd>
+	<dt>outdated</dt><dd>return outdated projects only</dd>
+	<dt>problematic</dt><dd>return problematic projects only</dd>
 </dl>
 
-<p>Example: get unique outdated metapackages not present in FreeBSD maintainer by foo@bar.com</p>
+<p>Example: get unique outdated projects not present in FreeBSD maintainer by foo@bar.com</p>
 <pre>
-{{ url_for('api_v1_metapackages', notinrepo='freebsd', maintainer='foo@bar.com', families=1, outdated=1) }}
+{{ url_for('api_v1_projects', notinrepo='freebsd', maintainer='foo@bar.com', families=1, outdated=1) }}
 </pre>
 
 <h3>Problems</h3>
@@ -143,7 +143,7 @@ Output is an array of entries of the following format:
 <dl class="dl-horizontal">
 	<dt>repo</dt><dd>repository name</dd>
 	<dt>name</dt><dd>package name as in repository</dd>
-	<dt>effname</dt><dd>repology metapackage name</dd>
+	<dt>effname</dt><dd>repology project name</dd>
 	<dt>maintainer</dt><dd>package maintainer associated with the problem; may be null; note that if there are multiple package maintainers, problem is duplicated for each one</dd>
 	<dt>problem</dt><dd>textual description of the problem</dd>
 </dl>
