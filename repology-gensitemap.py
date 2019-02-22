@@ -79,15 +79,15 @@ def main():
 
         # get most important packages
         for name in database.get_all_metapackage_names_by_min_spread(num_repos, (options.max_urls - len(urls)) // links_per_metapackage):
-            urls.append('/metapackage/' + name + '/versions')
-            urls.append('/metapackage/' + name + '/packages')
-            urls.append('/metapackage/' + name + '/information')
+            urls.append('/project/' + name + '/versions')
+            urls.append('/project/' + name + '/packages')
+            urls.append('/project/' + name + '/information')
 
         # fill the remaining space with less important packages
         for name in database.get_all_metapackage_names_by_spread(num_repos - 1, (options.max_urls - len(urls)) // links_per_metapackage):
-            urls.append('/metapackage/' + name + '/versions')
-            urls.append('/metapackage/' + name + '/packages')
-            urls.append('/metapackage/' + name + '/information')
+            urls.append('/project/' + name + '/versions')
+            urls.append('/project/' + name + '/packages')
+            urls.append('/project/' + name + '/information')
     else:
         print('Please specify output mode', file=sys.stderr)
 
