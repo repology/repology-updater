@@ -42,6 +42,8 @@ def repositories_statistics(sorting=None):
         repostats = sorted(repostats, key=lambda s: safe_percent(s['num_metapackages_outdated'], s['num_metapackages_comparable']), reverse=True)
     elif sorting == 'total':
         repostats = sorted(repostats, key=lambda s: s['num_metapackages'], reverse=True)
+    elif sorting == 'nonunique':
+        repostats = sorted(repostats, key=lambda s: s['num_metapackages'] - s['num_metapackages_unique'], reverse=True)
     else:
         sorting = 'name'
         showmedals = False

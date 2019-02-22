@@ -25,6 +25,7 @@
 			<li><a href="{{ url_for_self(sorting="outdated", autorefresh=autorefresh) }}" class="{% if sorting == "outdated" %} active{% endif %}">Projects outdated</a></li>
 			<li><a href="{{ url_for_self(sorting="poutdated", autorefresh=autorefresh) }}" class="{% if sorting == "poutdated" %} active{% endif %}">Percent projects outdated</a></li>
 			<li><a href="{{ url_for_self(sorting="total", autorefresh=autorefresh) }}" class="{% if sorting == "total" %} active{% endif %}">Total projects</a></li>
+			<li><a href="{{ url_for_self(sorting="nonunique", autorefresh=autorefresh) }}" class="{% if sorting == "nonunique" %} active{% endif %}">Non-unique projects</a></li>
 		</ul>
 	</div>
 
