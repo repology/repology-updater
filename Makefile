@@ -1,4 +1,5 @@
 FLAKE8?=	flake8
+MYPY?=		mypy
 
 STATICDIR=	repologyapp/static
 
@@ -9,6 +10,8 @@ gzip-static:
 
 clean:
 	rm -f ${STATICDIR}/*.gz
+
+lint:: test flake8 mypy
 
 test::
 	python3 -m unittest discover
@@ -35,6 +38,9 @@ flake8:
 
 flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test
+
+mypy:
+	${MYPY} --ignore-missing-imports repology
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")

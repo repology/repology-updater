@@ -95,6 +95,7 @@ before_install:
   - pip install flake8-quotes
   - pip install pytidylib # uses newer libtidy installed above
   - pip install voluptuous
+  - pip install mypy
 
   # get rules
   - git clone --depth=1 https://github.com/repology/repology-rules.git rules.d
@@ -115,6 +116,9 @@ script:
 
   # check python syntax
   - make flake8
+
+  # check python types
+  - make mypy
 
   # fill database with test data
   - ./repology-update.py --initdb --parse --database --postupdate
