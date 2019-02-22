@@ -167,6 +167,7 @@ class TestFlask(unittest.TestCase):
     def test_repositories(self):
         self.checkurl_html('/repositories/statistics', has=['FreeBSD'])
         self.checkurl_html('/repositories/statistics/newest', has=['FreeBSD'])
+        self.checkurl_html('/repositories/packages', has=['FreeBSD'])
         self.checkurl_html('/repositories/graphs')
         self.checkurl_html('/repositories/updates', has=['FreeBSD'])
 
