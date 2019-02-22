@@ -5,6 +5,7 @@
   type: repository
   desc: Antergos Main
   family: arch
+  ruleset: [arch, antergos]
   minpackages: 150
   sources:
     - name: antergos
@@ -29,6 +30,7 @@
   type: repository
   desc: Antergos Staging
   family: arch
+  ruleset: [arch, antergos]
   minpackages: 1
   sources:
     - name: antergos-staging
