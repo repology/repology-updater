@@ -10,7 +10,7 @@
     - name: main
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/user/dists/xenial/main/source/Sources.gz
+      url: http://archive.neon.kde.org/user/dists/bionic/main/source/Sources.gz
       compression: gz
       subrepo: main
   repolinks:
@@ -31,7 +31,7 @@
     - name: main
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/user/lts/dists/xenial/main/source/Sources.gz
+      url: http://archive.neon.kde.org/user/lts/dists/bionic/main/source/Sources.gz
       compression: gz
       subrepo: main
   repolinks:
@@ -52,7 +52,7 @@
     - name: main
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/dev/stable/dists/xenial/main/source/Sources.gz
+      url: http://archive.neon.kde.org/dev/stable/dists/bionic/main/source/Sources.gz
       compression: gz
       subrepo: main
   repolinks:
@@ -73,7 +73,7 @@
     - name: main
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: http://archive.neon.kde.org/dev/unstable/dists/xenial/main/source/Sources.gz
+      url: http://archive.neon.kde.org/dev/unstable/dists/bionic/main/source/Sources.gz
       compression: gz
       subrepo: main
   repolinks:
