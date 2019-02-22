@@ -42,9 +42,9 @@ def index():
         'by_nonunique': [
             {
                 'name': repo['name'],
-                'value': repo['num_metapackages_newest'] + repo['num_metapackages_outdated'],
+                'value': repo['num_metapackages'] - repo['num_metapackages_unique'],
             }
-            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages_newest'] + repo['num_metapackages_outdated'], reverse=True)
+            for repo in sorted(repostats, key=lambda repo: repo['num_metapackages'] - repo['num_metapackages_unique'], reverse=True)
         ][:10],
         'by_newest': [
             {
