@@ -29,7 +29,9 @@
 		</ul>
 	</div>
 
-	<p>Total projects: <b>{{ counts.num_metapackages }}</b>, total individual packages: <b>{{ counts.num_packages }}</b>.</p>
+	<p>Total projects known to repology: <b>{{ counts.num_metapackages }}</b>, total individual packages: <b>{{ counts.num_packages }}</b>.</p>
+
+	<p>Note that sum of columns does not need to match total count, as there may be packages with different status for a single project in a repository. Percentages are also calculated differently.</p>
 
 	{{ _autorefresh.toggler() }}
 </div>
@@ -39,67 +41,63 @@
 	<thead>
 		<tr>
 			<th class="text-right" rowspan="2">Repository</th>
-			<th class="text-center" colspan="6">Projects</th>
-			<th class="text-center" colspan="11">Packages</th>
-			<th class="text-center" rowspan="2"><abbr title="Number of maintainers">Mnt.</abbr></th>
-			<th class="text-center" rowspan="2"><abbr title="Number of problems">Prb.</abbr></th>
+			<th class="text-center" colspan="10">Projects</th>
+			<th class="text-center" rowspan="2">Maintainers</th>
+			<th class="text-center" rowspan="2">Problems</th>
 		</tr>
 		<tr>
 			<th class="text-center">Total</th>
-			<th class="text-center" colspan="2">Up to date</th>
-			<th class="text-center"><abbr title="Outdated">Outd.</abbr></th>
+			<th class="text-center"><abbr title="Non-unique">N/u</abbr></th>
+			<th class="text-center" colspan="2">Newest</th>
+			<th class="text-center" colspan="2">Outdated</th>
 			<th class="text-center" colspan="2">Unique</th>
-
-			<th class="text-center">Total</th>
-			<th class="text-center"><abbr title="Newest">New.</abbr></th>
-			<th class="text-center"><abbr title="Devel">Dev.</abbr></th>
-			<th class="text-center"><abbr title="Unique">Unq.</abbr></th>
-			<th class="text-center"><abbr title="Outdated">Out.</abbr></th>
-			<th class="text-center"><abbr title="Legacy">Leg.</abbr></th>
-
-			<th class="text-center"><abbr title="Rolling">Rol.</abbr></th>
-			<th class="text-center"><abbr title="No upstream version scheme">Nov.</abbr></th>
-			<th class="text-center"><abbr title="Incorrect">Inc.</abbr></th>
-			<th class="text-center"><abbr title="Untrusted">Unt.</abbr></th>
-			<th class="text-center"><abbr title="Ignored">Ign.</abbr></th>
+			<th class="text-center" colspan="2">Problematic</th>
 		</tr>
 	</thead>
 	<tbody>
 	{% for repostat in repostats %}
-	{% if repostat.name in repostats_old %}{% set old_repostat = repostats_old[repostat.name] %}{% else %}{% set old_repostat = {} %}{% endif %}{# XXX: this does not work due to jinja2 scoping rules; we don't support history for now anyway, but when we do want to bring it back, this will have tobe fixed #}
 		<tr id="{{ repostat.name }}">
 			<th class="text-right">
 				<a href="{{ url_for('repository', repo=repostat.name) }}">{{ repometadata[repostat.name].desc }}</a>
 				{%- if showmedals -%}
 				{% if loop.index == 1 -%}
-				<sup><span class="medal medal-gold" title="1st place by number of metapackages up to date"></span></sup>
+				<sup><span class="medal medal-gold" title="1st place"></span></sup>
 				{% elif loop.index == 2 -%}
-				<sup><span class="medal medal-silver" title="2nd place by number of metapackages up to date"></span></sup>
+				<sup><span class="medal medal-silver" title="2nd place"></span></sup>
 				{% elif loop.index == 3 -%}
-				<sup><span class="medal medal-bronze" title="3rd place by number of metapackages up to date"></span></sup>
+				<sup><span class="medal medal-bronze" title="3rd place"></span></sup>
 				{% endif %}
 				{% endif %}
 			</th>
 
-			<td class="text-center total-cell" title="Total number of metapackages in this repository">
+			<td class="text-center total-cell" title="Total number of projects packaged in this repository">
 				<a href="{{ url_for('projects', inrepo=repostat.name) }}">
-					{{- macros.value_with_delta(repostat.num_metapackages, old_repostat.num_metapackages) -}}
+					{{- repostat.num_metapackages -}}
+				</a>
+			</td>
+
+			<td class="text-center total-cell" title="Number of non-unique projects packaged in this repository">
+				<a href="{{ url_for('projects', inrepo=repostat.name, families='2-') }}">
+					{{- repostat.num_metapackages - repostat.num_metapackages_unique -}}
 				</a>
 			</td>
 
 			<td class="text-center version-cell version-big version-newest">
 				<a href="{{ url_for('projects', inrepo=repostat.name, newest=1) }}">
-					{{- macros.value_with_delta(repostat.num_metapackages_newest, old_repostat.num_metapackages_newest) -}}
+					{{- repostat.num_metapackages_newest -}}
 				</a>
 			</td>
 			<td class="text-center version-cell version-big version-newest">
-				{{- macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages_newest + repostat.num_metapackages_outdated) -}}
+				{{- macros.safe_percent(repostat.num_metapackages_newest, repostat.num_metapackages_comparable) -}}
 			</td>
 
 			<td class="text-center version-cell version-big version-outdated">
 				<a href="{{ url_for('projects', inrepo=repostat.name, outdated=1) }}">
-					{{- macros.value_with_delta(repostat.num_metapackages_outdated, old_repostat.num_metapackages_outdated) -}}
+					{{- repostat.num_metapackages_outdated -}}
 				</a>
+			</td>
+			<td class="text-center version-cell version-big version-outdated">
+				{{- macros.safe_percent(repostat.num_metapackages_outdated, repostat.num_metapackages_comparable) -}}
 			</td>
 
 			<td class="text-center version-cell version-big version-unique">
@@ -107,7 +105,7 @@
 				<span title="This is a shadow repo, e.g. unique packages in it are ignored">n/a</span>
 			{% else %}
 				<a href="{{ url_for('projects', inrepo=repostat.name, families=1) }}">
-					{{- macros.value_with_delta(repostat.num_metapackages_unique, old_repostat.num_metapackages_unique) -}}
+					{{- repostat.num_metapackages_unique -}}
 				</a>
 			{% endif %}
 			</td>
@@ -119,19 +117,14 @@
 			{%- endif -%}
 			</td>
 
-			<td class="text-center">{{ repostat.num_packages }}</td>
-
-			<td class="text-center version-cell version-big version-newest">{{ repostat.num_packages_newest }}</td>
-			<td class="text-center version-cell version-big version-devel">{{ repostat.num_packages_devel }}</td>
-			<td class="text-center version-cell version-big version-unique">{{ repostat.num_packages_unique }}</td>
-			<td class="text-center version-cell version-big version-outdated">{{ repostat.num_packages_outdated }}</td>
-			<td class="text-center version-cell version-big version-legacy">{{ repostat.num_packages_legacy }}</td>
-
-			<td class="text-center version-cell version-big version-rolling">{{ repostat.num_packages_rolling }}</td>
-			<td class="text-center version-cell version-big version-noscheme">{{ repostat.num_packages_noscheme }}</td>
-			<td class="text-center version-cell version-big version-incorrect">{{ repostat.num_packages_incorrect }}</td>
-			<td class="text-center version-cell version-big version-untrusted">{{ repostat.num_packages_untrusted }}</td>
-			<td class="text-center version-cell version-big version-ignored">{{ repostat.num_packages_ignored }}</td>
+			<td class="text-center version-cell version-big version-ignored">
+				<a href="{{ url_for('projects', inrepo=repostat.name, problematic=1) }}">
+					{{- repostat.num_metapackages_problematic -}}
+				</a>
+			</td>
+			<td class="text-center version-cell version-big version-ignored">
+				{{- macros.safe_percent(repostat.num_metapackages_problematic, repostat.num_metapackages) -}}
+			</td>
 
 			<td class="text-center">
 			{%- if repostat.num_maintainers -%}

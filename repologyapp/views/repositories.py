@@ -59,6 +59,21 @@ def repositories_statistics(sorting=None):
     )
 
 
+@ViewRegistrar('/repositories/packages')
+def repositories_packages():
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
+
+    repostats = {repostat['name']: repostat for repostat in get_db().get_active_repositories()}
+    repostats = [repostats[reponame] for reponame in repometadata.active_names() if reponame in repostats]
+
+    return flask.render_template(
+        'repositories-packages.html',
+        repostats=repostats,
+        counts=get_db().get_counts(),
+        autorefresh=autorefresh
+    )
+
+
 @ViewRegistrar('/repositories/updates')
 def repositories_updates():
     autorefresh = flask.request.args.to_dict().get('autorefresh')
