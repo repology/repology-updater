@@ -292,6 +292,7 @@ SET
 	num_metapackages_newest = tmp.num_metapackages_newest,
 	num_metapackages_outdated = tmp.num_metapackages_outdated,
 	num_metapackages_comparable = tmp.num_metapackages_comparable,
+	num_metapackages_problematic = tmp.num_metapackages_problematic,
 
 	last_seen = now()
 FROM (
@@ -321,7 +322,12 @@ FROM (
 			(num_packages_outdated > 0) OR
 			-- problematic subset
 			(num_packages_incorrect > 0)
-		) AS num_metapackages_comparable
+		) AS num_metapackages_comparable,
+		count(*) FILTER (WHERE
+			num_packages_ignored > 0 OR
+			num_packages_incorrect > 0 OR
+			num_packages_untrusted > 0
+		) AS num_metapackages_problematic
 	FROM (
 		SELECT
 			repo,
@@ -380,6 +386,7 @@ SET
 	num_metapackages_newest = 0,
 	num_metapackages_outdated = 0,
 	num_metapackages_comparable = 0,
+	num_metapackages_problematic = 0,
 
 	num_problems = 0,
 

@@ -39,6 +39,7 @@ SELECT
 	num_metapackages_newest,
 	num_metapackages_outdated,
 	num_metapackages_comparable,
+	num_metapackages_problematic,
 	num_problems,
 	num_maintainers,
 	first_seen,

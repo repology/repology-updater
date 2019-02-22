@@ -537,6 +537,7 @@ CREATE TABLE repositories (
 	num_metapackages_newest integer NOT NULL DEFAULT 0,
 	num_metapackages_outdated integer NOT NULL DEFAULT 0,
 	num_metapackages_comparable integer NOT NULL DEFAULT 0,
+	num_metapackages_problematic integer NOT NULL DEFAULT 0,
 
 	num_problems integer NOT NULL DEFAULT 0,
 	num_maintainers integer NOT NULL DEFAULT 0,
