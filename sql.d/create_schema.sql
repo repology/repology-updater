@@ -772,3 +772,13 @@ CREATE TABLE url_relations (
 );
 
 CREATE INDEX ON url_relations(urlhash, metapackage_id);
+
+--------------------------------------------------------------------------------
+-- Updates
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS repository_ruleset_hashes CASCADE;
+
+CREATE TABLE repository_ruleset_hashes (
+	repository text NOT NULL PRIMARY KEY,
+	ruleset_hash text NULL
+);

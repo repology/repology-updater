@@ -92,12 +92,51 @@ class Environment:
 
 
 def process_repositories(env):
+    database = env.get_main_database_connection()
+
     for reponame in env.get_processable_repo_names():
         if env.get_options().fetch:
             env.get_main_logger().log('fetching {}'.format(reponame))
+
+            # make sure hash is reset untill it's known that the update did not untroduce any changes
+            old_hash = database.get_repository_ruleset_hash(reponame)
+            database.update_repository_ruleset_hash(reponame, None)
+            database.commit()
+
+            have_changes = True
+
             try:
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'fetch') as logger:
-                    env.get_repo_processor().fetch([reponame], update=env.get_options().update, logger=logger)
+                    have_changes = env.get_repo_processor().fetch([reponame], update=env.get_options().update, logger=logger)
+
+                env.get_main_logger().get_indented().log('done' + ('' if have_changes else ' (no changes)'))
+            except KeyboardInterrupt:
+                raise
+            except Exception as e:
+                env.get_main_logger().get_indented().log('failed: ' + str(e), severity=Logger.ERROR)
+                if env.get_options().fatal:
+                    raise
+
+            if not have_changes:
+                database.update_repository_ruleset_hash(reponame, old_hash)
+                database.commit()
+
+        if env.get_options().parse:
+            transformer = env.get_package_transformer()
+
+            if transformer.get_ruleset_hash() == database.get_repository_ruleset_hash(reponame):
+                env.get_main_logger().log('not parsing {} due to no data changes since last run'.format(reponame))
+                continue
+
+            # likewise, make sure hash is reset until the source is successfully reparsed
+            database.update_repository_ruleset_hash(reponame, None)
+            database.commit()
+
+            env.get_main_logger().log('parsing {}'.format(reponame))
+            try:
+                with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as logger:
+                    env.get_repo_processor().parse([reponame], transformer=transformer, logger=logger)
+
                 env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:
                 raise
@@ -106,18 +145,8 @@ def process_repositories(env):
                 if env.get_options().fatal:
                     raise
 
-        if env.get_options().parse:
-            env.get_main_logger().log('parsing {}'.format(reponame))
-            try:
-                with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as logger:
-                    env.get_repo_processor().parse([reponame], transformer=env.get_package_transformer(), logger=logger)
-                env.get_main_logger().get_indented().log('done')
-            except KeyboardInterrupt:
-                raise
-            except Exception as e:
-                env.get_main_logger().get_indented().log('failed: ' + str(e), severity=Logger.ERROR)
-                if env.get_options().fatal:
-                    raise
+            database.update_repository_ruleset_hash(reponame, transformer.get_ruleset_hash())
+            database.commit()
 
 
 def database_init(env):
