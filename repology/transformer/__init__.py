@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import hashlib
 import os
 from copy import deepcopy
 
@@ -35,7 +36,10 @@ class PackageTransformer:
         self.repomgr = repomgr
         self.rules = []
 
+        hasher = hashlib.sha256()
+
         if rulestext:
+            hasher.update(rulestext.encode('utf-8'))
             for ruledata in yaml.safe_load(rulestext):
                 self._add_rule(ruledata)
         else:
@@ -47,10 +51,15 @@ class PackageTransformer:
 
             for rulefile in sorted(rulefiles):
                 with open(rulefile) as data:
-                    rules = yaml.safe_load(data)
+                    ruleset_text = data.read()
+                    hasher.update(ruleset_text.encode('utf-8'))
+
+                    rules = yaml.safe_load(ruleset_text)
                     if rules:  # may be None for empty file
                         for rule in rules:
                             self._add_rule(rule)
+
+        self.hash = hasher.hexdigest()
 
         self.ruleblocks = []
 
@@ -148,3 +157,6 @@ class PackageTransformer:
                 result.append(rule.pretty)
 
         return result
+
+    def get_ruleset_hash(self):
+        return self.hash
