@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,54 +17,83 @@
 
 import os
 import shutil
-from contextlib import contextmanager
+from abc import ABC, abstractmethod
 
 
-def _remove_always(path):
-    if os.path.isdir(path):
-        shutil.rmtree(path)
-    elif os.path.exists(path):
-        os.remove(path)
+__all__ = ['AtomicDir', 'AtomicFile']
 
 
-@contextmanager
-def atomic_dir(path):
-    new_path = path + '.new'
-    old_path = path + '.old'
+class _AtomicFSObject(ABC):
+    def __init__(self, path):
+        self.path = path
+        self.canceled = False
 
-    def cleanup():
-        _remove_always(new_path)
-        _remove_always(old_path)
+    def _get_new_path(self):
+        return self.path + '.new'
 
-    cleanup()
+    def _get_old_path(self):
+        return self.path + '.old'
 
-    os.mkdir(new_path)
+    def _cleanup(self):
+        for path in [self._get_new_path(), self._get_old_path()]:
+            if os.path.isdir(path):
+                shutil.rmtree(path)
+            elif os.path.exists(path):
+                os.remove(path)
 
-    try:
-        yield new_path
-        if os.path.exists(path):
-            os.rename(path, old_path)
-        os.rename(new_path, path)
-    finally:
-        cleanup()
+    def _replace(self):
+        if not os.path.exists(self._get_new_path()):
+            raise RuntimeError('no now state')
+
+        # assuming old path was already cleaned up
+        if os.path.exists(self.path):
+            os.rename(self.path, self._get_old_path())
+
+        os.rename(self._get_new_path(), self.path)
+
+    def cancel(self):
+        self.canceled = True
+
+    @abstractmethod
+    def _open(self):
+        pass
+
+    def _close(self):
+        pass
+
+    def __enter__(self):
+        self._cleanup()
+
+        return self._open()
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._close()
+
+        if not exc_type and not self.canceled:
+            self._replace()
+
+        self._cleanup()
 
 
-@contextmanager
-def atomic_file(path, *args, **kwargs):
-    new_path = path + '.new'
-    old_path = path + '.old'
+class AtomicDir(_AtomicFSObject):
+    def __init__(self, path):
+        super(AtomicDir, self).__init__(path)
 
-    def cleanup():
-        _remove_always(new_path)
-        _remove_always(old_path)
+    def _open(self):
+        os.mkdir(self._get_new_path())
+        return self._get_new_path()
 
-    cleanup()
 
-    try:
-        with open(new_path, *args, **kwargs) as statefile:
-            yield statefile
-        if os.path.isdir(path):
-            os.rename(path, old_path)
-        os.replace(new_path, path)
-    finally:
-        cleanup()
+class AtomicFile(_AtomicFSObject):
+    def __init__(self, path, *args, **kwargs):
+        super(AtomicFile, self).__init__(path)
+        self.args = args
+        self.kwargs = kwargs
+
+    def _open(self):
+        self.file = open(self._get_new_path(), *self.args, **self.kwargs)
+        self.file.cancel = self.cancel
+        return self.file
+
+    def _close(self):
+        self.file.close()

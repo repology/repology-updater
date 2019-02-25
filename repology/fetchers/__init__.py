@@ -17,7 +17,7 @@
 
 import os
 
-from repology.atomic_fs import atomic_dir, atomic_file
+from repology.atomic_fs import AtomicDir, AtomicFile
 from repology.logger import NoopLogger
 
 
@@ -34,7 +34,7 @@ class PersistentDirFetcher(Fetcher):
 
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
-            with atomic_dir(statepath) as statedir:
+            with AtomicDir(statepath) as statedir:
                 self.do_fetch(statedir, logger)
         elif update:
             self.do_update(statepath, logger)
@@ -51,7 +51,7 @@ class ScratchDirFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return
 
-        with atomic_dir(statepath) as statedir:
+        with AtomicDir(statepath) as statedir:
             self.do_fetch(statedir, logger)
 
 
@@ -69,5 +69,5 @@ class ScratchFileFetcher(Fetcher):
 
         args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8'}
 
-        with atomic_file(statepath, **args) as statefile:
+        with AtomicFile(statepath, **args) as statefile:
             self.do_fetch(statefile, logger)

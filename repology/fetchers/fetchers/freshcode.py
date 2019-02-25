@@ -20,7 +20,7 @@ import os
 
 from libversion import version_compare
 
-from repology.atomic_fs import atomic_file
+from repology.atomic_fs import AtomicFile
 from repology.fetchers import Fetcher
 from repology.fetchers.http import do_http
 from repology.logger import NoopLogger
@@ -66,7 +66,7 @@ class FreshcodeFetcher(Fetcher):
                 logger.Log('adding entry "{}", version {}'.format(entry['name'], entry['version']))
                 state[entry['name']] = entry
 
-        with atomic_file(statepath, 'w', encoding='utf-8') as statefile:
+        with AtomicFile(statepath, 'w', encoding='utf-8') as statefile:
             json.dump(state, statefile)
 
         logger.Log('saved new state, {} entries'.format(len(state)))

@@ -17,7 +17,7 @@
 
 import os
 
-from repology.atomic_fs import atomic_dir
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import Fetcher
 from repology.logger import Logger, NoopLogger
 from repology.moduleutils import ClassFactory
@@ -181,7 +181,7 @@ class RepositoryProcessor:
                 packages = []
                 chunknum += 1
 
-        with atomic_dir(self._get_parsed_path(repository)) as state_dir:
+        with AtomicDir(self._get_parsed_path(repository)) as state_dir:
             for package in self._iter_parse_all_sources(repository, transformer, logger):
                 packages.append(package)
                 num_packages += 1
