@@ -128,6 +128,8 @@ class TestFlask(unittest.TestCase):
         self.checkurl_svg('/graph/repo/freebsd/projects_outdated_percent.svg')
         self.checkurl_svg('/graph/repo/freebsd/projects_unique.svg')
         self.checkurl_svg('/graph/repo/freebsd/projects_unique_percent.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_problematic.svg')
+        self.checkurl_svg('/graph/repo/freebsd/projects_problematic_percent.svg')
         self.checkurl_svg('/graph/repo/freebsd/maintainers.svg')
         self.checkurl_svg('/graph/repo/freebsd/problems.svg')
 

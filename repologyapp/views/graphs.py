@@ -124,6 +124,16 @@ def graph_repo_projects_unique_percent(repo):
     return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0, '#5bc0de', '%')
 
 
+@ViewRegistrar('/graph/repo/<repo>/projects_problematic.svg')
+def graph_repo_projects_problematic(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_problematic'], '#808080')
+
+
+@ViewRegistrar('/graph/repo/<repo>/projects_problematic_percent.svg')
+def graph_repo_projects_problematic_percent(repo):
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_problematic'] / s['num_metapackages'] * 100.0, '#808080', '%')
+
+
 @ViewRegistrar('/graph/repo/<repo>/problems.svg')
 def graph_repo_problems(repo):
     return graph_repo_generic(repo, lambda s: s['num_problems'], '#c00000')
