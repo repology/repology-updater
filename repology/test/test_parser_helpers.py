@@ -138,7 +138,7 @@ class TestSplitMaintainers(unittest.TestCase):
         self.assertEqual(extract_maintainers('Marakasov, Dmitry <amdmi3@FreeBSD.org>, Guys, Gnome <gnome@FreeBSD.org>'), ['amdmi3@freebsd.org', 'gnome@freebsd.org'])
 
     def test_list_name_ambigous(self):
-        # apart from samples form test_lists above, this is ambigous -
+        # apart from samples form test_lists above, this is ambiguous -
         # words may be a name, or may be an obfuscated email. These
         # should be skipped
         self.assertEqual(extract_maintainers('dmitry marakasov amdmi3@FreeBSD.org, foo dot bar@FreeBSD.org'), [])

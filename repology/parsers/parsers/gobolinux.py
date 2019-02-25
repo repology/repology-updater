@@ -67,7 +67,7 @@ class GoboLinuxGitParser(Parser):
                             if '$' not in download:
                                 pkg.add_downloads(download.strip('"'))
                             else:
-                                factory.log('Recipe for {}/{} skipped, unhandled URL substitude found'.format(package_name, maxversion), severity=Logger.ERROR)
+                                factory.log('Recipe for {}/{} skipped, unhandled URL substitute found'.format(package_name, maxversion), severity=Logger.ERROR)
 
             if os.path.isfile(description_path):
                 with open(description_path, 'r', encoding='utf-8', errors='ignore') as description:

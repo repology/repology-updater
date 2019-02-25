@@ -33,7 +33,7 @@ class SpecParser(Parser):
                     for line in specfile:
                         line = line.strip()
 
-                        if '%' in line:  # substitudes: ignore
+                        if '%' in line:  # substitutes: ignore
                             continue
 
                         if line.startswith('Name:') and not pkg.name:

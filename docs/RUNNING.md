@@ -112,7 +112,7 @@ to just run all of them:
 * `--fetch` tells the utility to fetch raw repository data
 (download files, scrape websites, clone git repos) into state
 directory. Note that it won't refetch (update) data unless
-`--update` is also specified, so it makes sence to specify
+`--update` is also specified, so it makes sense to specify
 it as well in most cases.
 * `--parse` enables parsing downloaded data into internal format
 which is also saved into state directory.

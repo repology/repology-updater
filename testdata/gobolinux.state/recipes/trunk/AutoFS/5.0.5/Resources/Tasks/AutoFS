@@ -18,7 +18,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 export PATH
 
 #
-# load customized configuation settings
+# load customized configuration settings
 #
 if [ -r $confdir/autofs ]; then
 	. $confdir/autofs
