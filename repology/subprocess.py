@@ -18,14 +18,14 @@
 import subprocess
 
 
-def RunSubprocess(command, logger, cwd=None):
-    message = 'running "{}"'.format(' '.join(command)
-                                    if isinstance(command, list)
-                                    else command)
+def run_subprocess(command, logger, cwd=None):
+    message = 'running "{}"'.format(' '.join(command))
     if cwd is not None:
         message += ' in "{}"'.format(cwd)
 
     logger.Log(message)
+
+    res = None
 
     with subprocess.Popen(command,
                           stdout=subprocess.PIPE,
@@ -39,5 +39,37 @@ def RunSubprocess(command, logger, cwd=None):
         proc.wait()
         logger.Log('command finished with code {}'.format(proc.returncode))
         if proc.returncode != 0:
-            raise subprocess.CalledProcessError(cmd=command,
-                                                returncode=proc.returncode)
+            raise subprocess.CalledProcessError(cmd=command, returncode=proc.returncode)
+
+    return res
+
+
+def get_subprocess_output(command, logger, cwd=None):
+    message = 'running "{}"'.format(' '.join(command))
+    if cwd is not None:
+        message += ' in "{}"'.format(cwd)
+
+    logger.Log(message)
+
+    res = ''
+
+    with subprocess.Popen(command,
+                          stdout=subprocess.PIPE,
+                          stderr=subprocess.STDOUT,
+                          universal_newlines=True,
+                          encoding='utf-8',
+                          errors='ignore',
+                          cwd=cwd) as proc:
+        for line in proc.stdout:
+            res += line
+        proc.wait()
+        logger.Log('command finished with code {}'.format(proc.returncode))
+        if proc.returncode != 0:
+            raise subprocess.CalledProcessError(cmd=command, returncode=proc.returncode)
+
+    return res
+
+
+# XXX: legacy shim
+def RunSubprocess(command, logger, cwd=None):
+    return run_subprocess(command, logger, cwd)
