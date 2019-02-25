@@ -96,7 +96,7 @@ def process_repositories(env):
         if env.get_options().fetch:
             env.get_main_logger().log('fetching {}'.format(reponame))
             try:
-                with LogRunManager(env, reponame, 'fetch') as logger:
+                with LogRunManager(env.get_logging_database_connection(), reponame, 'fetch') as logger:
                     env.get_repo_processor().fetch([reponame], update=env.get_options().update, logger=logger)
                 env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:
@@ -109,7 +109,7 @@ def process_repositories(env):
         if env.get_options().parse:
             env.get_main_logger().log('parsing {}'.format(reponame))
             try:
-                with LogRunManager(env, reponame, 'parse') as logger:
+                with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as logger:
                     env.get_repo_processor().parse([reponame], transformer=env.get_package_transformer(), logger=logger)
                 env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:

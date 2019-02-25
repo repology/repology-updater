@@ -98,18 +98,16 @@ class PostponedDatabaseLogger(Logger):
 
 
 class LogRunManager:
-    def __init__(self, env, reponame, run_type):
-        self.env = env
+    def __init__(self, db, reponame, run_type):
+        self.db = db
         self.reponame = reponame
         self.run_type = run_type
 
     def __enter__(self):
-        database = self.env.get_logging_database_connection()
+        self.run_id = self.db.start_run(self.reponame, self.run_type)
+        self.logger = RealtimeDatabaseLogger(self.db, self.run_id)
 
-        self.run_id = database.start_run(self.reponame, self.run_type)
-        self.logger = RealtimeDatabaseLogger(database, self.run_id)
-
-        database.update_repository_run_id(self.reponame, self.run_id, 'current')
+        self.db.update_repository_run_id(self.reponame, self.run_id, 'current')
 
         self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         return self.logger
@@ -117,13 +115,11 @@ class LogRunManager:
     def __exit__(self, exc_type, exc_val, exc_tb):
         end_rusage = resource.getrusage(resource.RUSAGE_SELF)
 
-        database = self.env.get_logging_database_connection()
-
         success = True
         trace = None
 
         if exc_type is KeyboardInterrupt:
-            database.update_repository_run_id(self.reponame, None, 'current')
+            self.db.update_repository_run_id(self.reponame, None, 'current')
             return
 
         if exc_type:
@@ -131,7 +127,7 @@ class LogRunManager:
             success = False
             trace = traceback.format_exception(exc_type, exc_val, exc_tb)
 
-        database.finish_run(
+        self.db.finish_run(
             self.run_id,
             success,
             utime=datetime.timedelta(seconds=end_rusage.ru_utime - self.start_rusage.ru_utime),
@@ -141,5 +137,5 @@ class LogRunManager:
             traceback=trace
         )
 
-        database.update_repository_run_id(self.reponame, None, 'current')
-        database.update_repository_run_id(self.reponame, self.run_id, self.run_type, success)
+        self.db.update_repository_run_id(self.reponame, None, 'current')
+        self.db.update_repository_run_id(self.reponame, self.run_id, self.run_type, success)
