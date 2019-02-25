@@ -134,7 +134,7 @@ def FillPackagesetVersions(packages):
 
     # The idea here is that if package versions are compared only within a single family
     # (so this is calculated after rolling packages are removed, since they do not
-    # participate in comparison), and all versions are ignored, it makes sence to unignore
+    # participate in comparison), and all versions are ignored, it makes sense to unignore
     # them, because unique/latest/outdated versions are more informative than just ignored
     # (the best part is actually a possibility of outdated packages)
     #

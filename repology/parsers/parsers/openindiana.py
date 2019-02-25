@@ -29,7 +29,7 @@ def _iter_packages(path):
             if summary_key.startswith('_'):  # e.g. _SIGNATURE
                 continue
 
-            # else summary_key is someting like "openindiana.org"
+            # else summary_key is something like "openindiana.org"
             # or "hipster-encumbered"
 
             yield fmri, pkgdata

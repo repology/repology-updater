@@ -19,7 +19,7 @@
 	<li>Some packages may use incorrect versions (for instance, picking "next" version number which was not released yet when packaging a git snapshot, or using dates and commit hashes instead of version numbers).</li>
 </ul>
 
-<p>Repology uses a set of manually edited rules to resolve these cases. You may submit a change to the <a href="{{ config['REPOLOGY_RULES_REPO_URL'] }}">ruleset</a> directly or use this form to suggest an improbement to the ruleset. Please only use this for for problems which may be fixed by the ruleset (which are basically problems listed above).</p>
+<p>Repology uses a set of manually edited rules to resolve these cases. You may submit a change to the <a href="{{ config['REPOLOGY_RULES_REPO_URL'] }}">ruleset</a> directly or use this form to suggest an improvement to the ruleset. Please only use this for for problems which may be fixed by the ruleset (which are basically problems listed above).</p>
 
 {% if reports %}
 <h2>Current reports ({{ reports|length }})</h2>

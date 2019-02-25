@@ -28,7 +28,7 @@ def _iterate_packages(path):
                 current_name = line.split(':', 1)[1].strip()
             elif line.startswith('PACKAGE LOCATION:'):
                 if not current_name:
-                    raise RuntimeError('"{}" encountered without preceeding PACKAGE NAME: line'.format(line))
+                    raise RuntimeError('"{}" encountered without preceding PACKAGE NAME: line'.format(line))
                 yield current_name, line.split(':', 1)[1].strip()
             elif not line:
                 current_name = None
