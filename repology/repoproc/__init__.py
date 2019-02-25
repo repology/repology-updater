@@ -79,7 +79,7 @@ class RepositoryProcessor:
 
         logger.log('fetching source {} started'.format(source['name']))
 
-        self.fetcher_factory.SpawnWithKnownArgs(
+        have_changes = self.fetcher_factory.SpawnWithKnownArgs(
             source['fetcher'], source
         ).fetch(
             self._get_state_source_path(repository, source),
@@ -87,7 +87,9 @@ class RepositoryProcessor:
             logger=logger.GetIndented()
         )
 
-        logger.log('fetching source {} complete'.format(source['name']))
+        logger.log('fetching source {} complete'.format(source['name']) + ('' if have_changes else ' (no changes)'))
+
+        return have_changes
 
     def _iter_parse_source(self, repository, source, transformer, logger):
         def postprocess_parsed_packages(packages_iter):
@@ -155,12 +157,15 @@ class RepositoryProcessor:
         if not os.path.isdir(self.statedir):
             os.mkdir(self.statedir)
 
+        have_changes = False
         for source in repository['sources']:
             if not os.path.isdir(self._get_state_path(repository)):
                 os.mkdir(self._get_state_path(repository))
-            self._fetch_source(repository, update, source, logger.GetIndented())
+            have_changes |= self._fetch_source(repository, update, source, logger.GetIndented())
 
-        logger.log('fetching complete')
+        logger.log('fetching complete' + ('' if have_changes else ' (no changes)'))
+
+        return have_changes
 
     def _parse(self, repository, transformer, logger):
         logger.log('parsing started')
@@ -198,8 +203,12 @@ class RepositoryProcessor:
 
     # public methods
     def fetch(self, reponames, update=True, logger=NoopLogger()):
+        have_changes = False
+
         for repository in self.repomgr.GetRepositories(reponames):
-            self._fetch(repository, update, logger)
+            have_changes |= self._fetch(repository, update, logger)
+
+        return have_changes
 
     def parse(self, reponames, transformer=None, logger=NoopLogger()):
         for repository in self.repomgr.GetRepositories(reponames):
