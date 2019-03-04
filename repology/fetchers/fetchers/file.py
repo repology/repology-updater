@@ -18,7 +18,7 @@
 import time
 
 from repology.fetchers import ScratchFileFetcher
-from repology.fetchers.http import save_http_stream
+from repology.fetchers.http import NotModifiedException, save_http_stream
 
 
 class FileFetcher(ScratchFileFetcher):
@@ -40,18 +40,32 @@ class FileFetcher(ScratchFileFetcher):
 
     def _do_fetch(self, statefile, persdata, logger) -> bool:
         fetching_what = [self.url]
+        headers = self.headers.copy() if self.headers else {}
+
         if isinstance(self.post, dict):
             fetching_what.append('{} fields of form data'.format(len(self.post)))
         elif self.post:
             fetching_what.append('{} bytes of post data'.format(len(self.post)))
 
-        if self.headers:
-            fetching_what.append('{} extra headers'.format(len(self.headers)))
+        if headers:
+            fetching_what.append('{} extra headers'.format(len(headers)))
 
         logger.Log('fetching ' + ', with '.join(fetching_what))
 
-        save_http_stream(self.url, statefile, compression=self.compression, data=self.post, headers=self.headers, timeout=self.fetch_timeout)
+        if persdata.get('last-modified'):
+            headers['if-modified-since'] = persdata.get('last-modified')
+            logger.Log('using if-modified-since: {}'.format(headers['if-modified-since']))
+
+        try:
+            response = save_http_stream(self.url, statefile, compression=self.compression, data=self.post, headers=headers, timeout=self.fetch_timeout)
+        except NotModifiedException:
+            logger.Log('not modified')
+            return False
 
         logger.Log('size is {} byte(s)'.format(statefile.tell()))
+
+        if response.headers.get('last-modified'):
+            persdata['last-modified'] = response.headers['last-modified']
+            logger.Log('storing last-modified: {}'.format(persdata['last-modified']))
 
         return True
