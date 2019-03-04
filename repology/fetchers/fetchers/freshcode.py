@@ -33,7 +33,7 @@ class FreshcodeFetcher(Fetcher):
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
-            return
+            return False
 
         state = {}
 
@@ -70,3 +70,5 @@ class FreshcodeFetcher(Fetcher):
             json.dump(state, statefile)
 
         logger.Log('saved new state, {} entries'.format(len(state)))
+
+        return True

@@ -47,3 +47,5 @@ class ChocolateyFetcher(ScratchDirFetcher):
 
             nextpageurl = next_link.attrib['href']
             numpage += 1
+
+        return True

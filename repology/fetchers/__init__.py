@@ -40,11 +40,12 @@ class PersistentDirFetcher(Fetcher):
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
             with AtomicDir(statepath) as statedir:
-                self._do_fetch(statedir, logger)
+                return self._do_fetch(statedir, logger)
         elif update:
-            self._do_update(statepath, logger)
+            return self._do_update(statepath, logger)
         else:
             logger.Log('no update requested, skipping')
+            return False
 
 
 class ScratchDirFetcher(Fetcher):
@@ -55,10 +56,14 @@ class ScratchDirFetcher(Fetcher):
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
             logger.Log('no update requested, skipping')
-            return
+            return False
 
         with AtomicDir(statepath) as statedir:
-            self._do_fetch(statedir, logger)
+            if self._do_fetch(statedir, logger):
+                return True
+
+            statedir.cancel()
+            return False
 
 
 class ScratchFileFetcher(Fetcher):
@@ -72,9 +77,13 @@ class ScratchFileFetcher(Fetcher):
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
-            return
+            return False
 
         args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8'}
 
         with AtomicFile(statepath, **args) as statefile:
-            self._do_fetch(statefile, logger)
+            if self._do_fetch(statefile, logger):
+                return True
+
+            statefile.cancel()
+            return False

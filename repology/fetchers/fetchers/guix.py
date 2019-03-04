@@ -58,3 +58,5 @@ class GuixFetcher(ScratchDirFetcher):
 
                 # proceed with the next page
                 page += 1
+
+        return True

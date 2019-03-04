@@ -77,3 +77,5 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             logger.log('request failed, server reply follows:\n' + e.response.text, severity=Logger.ERROR)
             logger.log(e.response.text, serverity=Logger.ERROR)
             raise
+
+        return True

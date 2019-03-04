@@ -41,6 +41,6 @@ class CratesIOFetcher(ScratchDirFetcher):
             # parse next page
             if not json.loads(text)['crates']:
                 logger.Log('last page detected')
-                return
+                return True
 
             numpage += 1

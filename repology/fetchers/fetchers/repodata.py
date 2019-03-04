@@ -49,3 +49,5 @@ class RepodataFetcher(ScratchFileFetcher):
         save_http_stream(repodata_url, statefile, compression=compression, timeout=self.fetch_timeout)
 
         logger.Log('size is {} byte(s)'.format(statefile.tell()))
+
+        return True

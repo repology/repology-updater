@@ -53,3 +53,5 @@ class FileFetcher(ScratchFileFetcher):
         save_http_stream(self.url, statefile, compression=self.compression, data=self.post, headers=self.headers, timeout=self.fetch_timeout)
 
         logger.Log('size is {} byte(s)'.format(statefile.tell()))
+
+        return True

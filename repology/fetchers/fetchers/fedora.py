@@ -60,3 +60,5 @@ class FedoraFetcher(ScratchDirFetcher):
 
             if page > pagedata['page_total']:
                 break
+
+        return True

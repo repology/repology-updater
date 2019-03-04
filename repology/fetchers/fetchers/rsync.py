@@ -32,7 +32,7 @@ class RsyncFetcher(Fetcher):
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.exists(statepath) and not update:
             logger.Log('no update requested, skipping')
-            return
+            return False
 
         args = [
             '--verbose',
@@ -53,3 +53,5 @@ class RsyncFetcher(Fetcher):
             args += ['--exclude', self.rsync_exclude]
 
         RunSubprocess(['rsync'] + args + [self.url, statepath], logger)
+
+        return True

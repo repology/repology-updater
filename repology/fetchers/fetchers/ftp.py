@@ -44,3 +44,5 @@ class FTPListFetcher(ScratchFileFetcher):
         ftp.retrlines('LIST', callback=lambda line: print(line, file=statefile))
 
         ftp.quit()
+
+        return True

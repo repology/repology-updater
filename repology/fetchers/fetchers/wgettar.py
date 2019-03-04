@@ -31,3 +31,5 @@ class WgetTarFetcher(ScratchDirFetcher):
         RunSubprocess(['wget', '--timeout', str(self.fetch_timeout), '--tries', '1', '-O', tarpath, self.url], logger)
         RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
         os.remove(tarpath)
+
+        return True

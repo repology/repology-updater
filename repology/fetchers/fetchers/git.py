@@ -49,6 +49,8 @@ class GitFetcher(PersistentDirFetcher):
         self._setup_sparse_checkout(statedir, logger)
         RunSubprocess(['git', 'checkout'], cwd=statedir, logger=logger)
 
+        return True
+
     def _do_update(self, statedir, logger):
         RunSubprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statedir, logger=logger)
         RunSubprocess(['git', 'checkout'], cwd=statedir, logger=logger)  # needed for reset to not fail on changed sparse checkout
@@ -56,3 +58,5 @@ class GitFetcher(PersistentDirFetcher):
         RunSubprocess(['git', 'reset', '--hard', 'origin/' + self.branch], cwd=statedir, logger=logger)
         RunSubprocess(['git', 'reflog', 'expire', '--expire=0', '--all'], cwd=statedir, logger=logger)
         RunSubprocess(['git', 'prune'], cwd=statedir, logger=logger)
+
+        return True

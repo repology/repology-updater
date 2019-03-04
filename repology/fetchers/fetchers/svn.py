@@ -27,5 +27,9 @@ class SVNFetcher(PersistentDirFetcher):
     def _do_fetch(self, statedir, logger):
         RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'checkout', self.url, statedir], logger=logger)
 
+        return True
+
     def _do_update(self, statedir, logger):
         RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statedir], logger=logger)
+
+        return True
