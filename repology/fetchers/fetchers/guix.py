@@ -29,7 +29,7 @@ class GuixFetcher(ScratchDirFetcher):
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch(self, statedir, logger) -> bool:
+    def _do_fetch(self, statedir, persdata, logger) -> bool:
         for letter in ['0-9'] + [l for l in ascii_uppercase]:
             page = 1
             numpages = 1

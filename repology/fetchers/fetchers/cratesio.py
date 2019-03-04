@@ -28,7 +28,7 @@ class CratesIOFetcher(ScratchDirFetcher):
         self.per_page = per_page
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch(self, statedir, logger) -> bool:
+    def _do_fetch(self, statedir, persdata, logger) -> bool:
         numpage = 1
         while True:
             url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)

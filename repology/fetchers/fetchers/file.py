@@ -38,7 +38,7 @@ class FileFetcher(ScratchFileFetcher):
             else:
                 self.url += '?nocache=' + str(int(time.time()))
 
-    def _do_fetch(self, statefile, logger) -> bool:
+    def _do_fetch(self, statefile, persdata, logger) -> bool:
         fetching_what = [self.url]
         if isinstance(self.post, dict):
             fetching_what.append('{} fields of form data'.format(len(self.post)))

@@ -16,7 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import pickle
 from abc import ABC, abstractmethod
+from typing import Any, Dict
 
 from repology.atomic_fs import AtomicDir, AtomicFile
 from repology.logger import NoopLogger
@@ -50,7 +52,7 @@ class PersistentDirFetcher(Fetcher):
 
 class ScratchDirFetcher(Fetcher):
     @abstractmethod
-    def _do_fetch(self, statedir, logger) -> bool:
+    def _do_fetch(self, statedir, persdata, logger) -> bool:
         pass
 
     def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
@@ -58,12 +60,25 @@ class ScratchDirFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return False
 
-        with AtomicDir(statepath) as statedir:
-            if self._do_fetch(statedir, logger):
-                return True
+        persdata: Dict[str, Any] = {}
 
-            statedir.cancel()
-            return False
+        perspath = statepath + '.persdata'
+
+        if os.path.exists(perspath):
+            with open(perspath, 'rb') as persfile:
+                persdata = pickle.load(persfile)
+
+        with AtomicDir(statepath) as statedir:
+            have_changes = self._do_fetch(statedir, persdata, logger)
+
+            if persdata:
+                with AtomicFile(perspath, 'wb') as persfile:
+                    pickle.dump(persdata, persfile)
+
+            if not have_changes:
+                statedir.cancel()
+
+            return have_changes
 
 
 class ScratchFileFetcher(Fetcher):
@@ -71,7 +86,7 @@ class ScratchFileFetcher(Fetcher):
         self.binary = binary
 
     @abstractmethod
-    def _do_fetch(self, statefile, logger) -> bool:
+    def _do_fetch(self, statefile, persdata, logger) -> bool:
         pass
 
     def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
@@ -81,9 +96,22 @@ class ScratchFileFetcher(Fetcher):
 
         args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8'}
 
-        with AtomicFile(statepath, **args) as statefile:
-            if self._do_fetch(statefile, logger):
-                return True
+        persdata: Dict[str, Any] = {}
 
-            statefile.cancel()
-            return False
+        perspath = statepath + '.persdata'
+
+        if os.path.exists(perspath):
+            with open(perspath, 'rb') as persfile:
+                persdata = pickle.load(persfile)
+
+        with AtomicFile(statepath, **args) as statefile:
+            have_changes = self._do_fetch(statefile, persdata, logger)
+
+            if persdata:
+                with AtomicFile(perspath, 'wb') as persfile:
+                    pickle.dump(persdata, persfile)
+
+            if not have_changes:
+                statefile.cancel()
+
+            return have_changes

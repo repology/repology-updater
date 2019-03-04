@@ -45,7 +45,7 @@ class FedoraFetcher(ScratchDirFetcher):
         with open(os.path.join(statedir, package + '.spec'), 'wb') as file:
             file.write(r.content)
 
-    def _do_fetch(self, statedir, logger) -> bool:
+    def _do_fetch(self, statedir, persdata, logger) -> bool:
         page = 1
 
         while True:

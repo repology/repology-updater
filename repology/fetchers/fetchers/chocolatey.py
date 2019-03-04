@@ -27,7 +27,7 @@ class ChocolateyFetcher(ScratchDirFetcher):
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch(self, statedir, logger) -> bool:
+    def _do_fetch(self, statedir, persdata, logger) -> bool:
         numpage = 0
         nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
         while True:

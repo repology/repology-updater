@@ -69,7 +69,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             logger.log(e.response.text, severity=Logger.ERROR)
             pass
 
-    def _do_fetch(self, statedir, logger) -> bool:
+    def _do_fetch(self, statedir, persdata, logger) -> bool:
         try:
             self._do_fetch_scroll(statedir, logger)
         except requests.exceptions.HTTPError as e:
