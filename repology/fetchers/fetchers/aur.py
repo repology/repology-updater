@@ -47,7 +47,7 @@ class AURFetcher(ScratchDirFetcher):
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
         self.max_api_url_length = max_api_url_length  # see https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations
 
-    def do_fetch(self, statedir, logger):
+    def _do_fetch(self, statedir, logger):
         packages_url = self.url + 'packages.gz'
         logger.GetIndented().Log('fetching package list from ' + packages_url)
         data = self.do_http(packages_url).text  # autogunzipped?

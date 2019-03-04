@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,35 +16,41 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from abc import ABC, abstractmethod
 
 from repology.atomic_fs import AtomicDir, AtomicFile
 from repology.logger import NoopLogger
 
 
-class Fetcher:
-    pass
+class Fetcher(ABC):
+    @abstractmethod
+    def fetch(self, statepath, update=True, logger=NoopLogger()):
+        pass
 
 
 class PersistentDirFetcher(Fetcher):
-    def do_fetch(self, statedir, logger):
-        raise RuntimeError('pure virtual method called')
+    @abstractmethod
+    def _do_fetch(self, statedir, logger):
+        pass
 
-    def do_update(self, statedir, logger):
-        raise RuntimeError('pure virtual method called')
+    @abstractmethod
+    def _do_update(self, statedir, logger):
+        pass
 
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if not os.path.isdir(statepath):
             with AtomicDir(statepath) as statedir:
-                self.do_fetch(statedir, logger)
+                self._do_fetch(statedir, logger)
         elif update:
-            self.do_update(statepath, logger)
+            self._do_update(statepath, logger)
         else:
             logger.Log('no update requested, skipping')
 
 
 class ScratchDirFetcher(Fetcher):
-    def do_fetch(self, statedir, logger):
-        raise RuntimeError('pure virtual method called')
+    @abstractmethod
+    def _do_fetch(self, statedir, logger):
+        pass
 
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isdir(statepath) and not update:
@@ -52,15 +58,16 @@ class ScratchDirFetcher(Fetcher):
             return
 
         with AtomicDir(statepath) as statedir:
-            self.do_fetch(statedir, logger)
+            self._do_fetch(statedir, logger)
 
 
 class ScratchFileFetcher(Fetcher):
     def __init__(self, binary=False):
         self.binary = binary
 
-    def do_fetch(self, statefile, logger):
-        raise RuntimeError('pure virtual method called')
+    @abstractmethod
+    def _do_fetch(self, statefile, logger):
+        pass
 
     def fetch(self, statepath, update=True, logger=NoopLogger()):
         if os.path.isfile(statepath) and not update:
@@ -70,4 +77,4 @@ class ScratchFileFetcher(Fetcher):
         args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8'}
 
         with AtomicFile(statepath, **args) as statefile:
-            self.do_fetch(statefile, logger)
+            self._do_fetch(statefile, logger)

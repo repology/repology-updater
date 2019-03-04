@@ -29,7 +29,7 @@ class FTPListFetcher(ScratchFileFetcher):
         assert(self.url.scheme == 'ftp')
         self.fetch_timeout = fetch_timeout
 
-    def do_fetch(self, statefile, logger):
+    def _do_fetch(self, statefile, logger):
         ftp = ftplib.FTP(
             host=self.url.hostname,
             user=self.url.username or '',

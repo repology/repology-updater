@@ -43,7 +43,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
 
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def do_fetch_scroll(self, statedir, logger):
+    def _do_fetch_scroll(self, statedir, logger):
         numpage = 0
 
         logger.log('getting page {}'.format(numpage))
@@ -69,9 +69,9 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             logger.log(e.response.text, severity=Logger.ERROR)
             pass
 
-    def do_fetch(self, statedir, logger):
+    def _do_fetch(self, statedir, logger):
         try:
-            self.do_fetch_scroll(statedir, logger)
+            self._do_fetch_scroll(statedir, logger)
         except requests.exceptions.HTTPError as e:
             # show server reply as it contains the failure cause
             logger.log('request failed, server reply follows:\n' + e.response.text, severity=Logger.ERROR)

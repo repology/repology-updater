@@ -28,7 +28,7 @@ class RepodataFetcher(ScratchFileFetcher):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def do_fetch(self, statefile, logger):
+    def _do_fetch(self, statefile, logger):
         # fetch and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)

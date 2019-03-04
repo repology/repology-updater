@@ -44,12 +44,12 @@ class GitFetcher(PersistentDirFetcher):
             else:
                 print('/*', file=sparse_checkout_file)
 
-    def do_fetch(self, statedir, logger):
+    def _do_fetch(self, statedir, logger):
         RunSubprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statedir], logger=logger)
         self._setup_sparse_checkout(statedir, logger)
         RunSubprocess(['git', 'checkout'], cwd=statedir, logger=logger)
 
-    def do_update(self, statedir, logger):
+    def _do_update(self, statedir, logger):
         RunSubprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statedir, logger=logger)
         RunSubprocess(['git', 'checkout'], cwd=statedir, logger=logger)  # needed for reset to not fail on changed sparse checkout
         self._setup_sparse_checkout(statedir, logger)
