@@ -29,7 +29,7 @@ class RsyncFetcher(Fetcher):
         self.rsync_include = rsync_include
         self.rsync_exclude = rsync_exclude
 
-    def fetch(self, statepath, update=True, logger=NoopLogger()):
+    def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
         if os.path.exists(statepath) and not update:
             logger.Log('no update requested, skipping')
             return False

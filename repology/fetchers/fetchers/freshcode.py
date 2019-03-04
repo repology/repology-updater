@@ -30,7 +30,7 @@ class FreshcodeFetcher(Fetcher):
     def __init__(self, url):
         self.url = url
 
-    def fetch(self, statepath, update=True, logger=NoopLogger()):
+    def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
             return False

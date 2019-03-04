@@ -26,7 +26,7 @@ class WgetTarFetcher(ScratchDirFetcher):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def _do_fetch(self, statedir, logger):
+    def _do_fetch(self, statedir, logger) -> bool:
         tarpath = os.path.join(statedir, '.temporary.tar')
         RunSubprocess(['wget', '--timeout', str(self.fetch_timeout), '--tries', '1', '-O', tarpath, self.url], logger)
         RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
