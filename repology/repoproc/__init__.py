@@ -16,12 +16,13 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from typing import Iterator, List
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import Fetcher
 from repology.logger import Logger, NoopLogger
 from repology.moduleutils import ClassFactory
-from repology.package import PackageFlags
+from repology.package import Package, PackageFlags
 from repology.packagemaker import PackageFactory
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Parser
@@ -55,16 +56,16 @@ class RepositoryProcessor:
         self.fetcher_factory = ClassFactory('repology.fetchers.fetchers', superclass=Fetcher)
         self.parser_factory = ClassFactory('repology.parsers.parsers', superclass=Parser)
 
-    def _get_state_path(self, repository):
+    def _get_state_path(self, repository) -> str:
         return os.path.join(self.statedir, repository['name'] + '.state')
 
-    def _get_state_source_path(self, repository, source):
+    def _get_state_source_path(self, repository, source) -> str:
         return os.path.join(self._get_state_path(repository), source['name'].replace('/', '_'))
 
-    def _get_parsed_path(self, repository):
+    def _get_parsed_path(self, repository) -> str:
         return os.path.join(self.parseddir, repository['name'] + '.parsed')
 
-    def _get_parsed_chunk_paths(self, repository):
+    def _get_parsed_chunk_paths(self, repository) -> List[str]:
         dirpath = self._get_parsed_path(repository)
         return [
             os.path.join(dirpath, filename)
@@ -72,7 +73,7 @@ class RepositoryProcessor:
         ] if os.path.isdir(dirpath) else []
 
     # source level private methods
-    def _fetch_source(self, repository, update, source, logger):
+    def _fetch_source(self, repository, update, source, logger) -> bool:
         if 'fetcher' not in source:
             logger.log('fetching source {} not supported'.format(source['name']))
             return
@@ -91,7 +92,7 @@ class RepositoryProcessor:
 
         return have_changes
 
-    def _iter_parse_source(self, repository, source, transformer, logger):
+    def _iter_parse_source(self, repository, source, transformer, logger) -> Iterator[Package]:
         def postprocess_parsed_packages(packages_iter):
             for package in packages_iter:
                 # unwrap packagemaker
@@ -144,14 +145,14 @@ class RepositoryProcessor:
             )
         )
 
-    def _iter_parse_all_sources(self, repository, transformer, logger):
+    def _iter_parse_all_sources(self, repository, transformer, logger) -> Iterator[Package]:
         for source in repository['sources']:
             logger.log('parsing source {} started'.format(source['name']))
             yield from self._iter_parse_source(repository, source, transformer, logger.GetIndented())
             logger.log('parsing source {} complete'.format(source['name']))
 
     # repository level private methods
-    def _fetch(self, repository, update, logger):
+    def _fetch(self, repository, update, logger) -> bool:
         logger.log('fetching started')
 
         if not os.path.isdir(self.statedir):
@@ -167,15 +168,15 @@ class RepositoryProcessor:
 
         return have_changes
 
-    def _parse(self, repository, transformer, logger):
+    def _parse(self, repository, transformer, logger) -> None:
         logger.log('parsing started')
 
         if not os.path.isdir(self.parseddir):
             os.mkdir(self.parseddir)
 
-        packages = []
-        chunknum = 0
-        num_packages = 0
+        packages: List[Package] = []
+        chunknum: int = 0
+        num_packages: int = 0
 
         def flush_packages():
             nonlocal packages, chunknum
@@ -202,7 +203,7 @@ class RepositoryProcessor:
         logger.log('parsing complete, {} packages'.format(num_packages))
 
     # public methods
-    def fetch(self, reponames, update=True, logger=NoopLogger()):
+    def fetch(self, reponames, update=True, logger=NoopLogger()) -> bool:
         have_changes = False
 
         for repository in self.repomgr.GetRepositories(reponames):
@@ -210,15 +211,15 @@ class RepositoryProcessor:
 
         return have_changes
 
-    def parse(self, reponames, transformer=None, logger=NoopLogger()):
+    def parse(self, reponames, transformer=None, logger=NoopLogger()) -> None:
         for repository in self.repomgr.GetRepositories(reponames):
             self._parse(repository, transformer, logger)
 
-    def iter_parse(self, reponames, transformer=None, logger=NoopLogger()):
+    def iter_parse(self, reponames, transformer=None, logger=NoopLogger()) -> Iterator[Package]:
         for repository in self.repomgr.GetRepositories(reponames):
             yield from self._iter_parse_all_sources(repository, transformer, logger)
 
-    def iter_parsed(self, reponames=None, logger=NoopLogger()):
+    def iter_parsed(self, reponames=None, logger=NoopLogger()) -> Iterator[List[Package]]:
         def get_sources():
             for repository in self.repomgr.GetRepositories(reponames):
                 sources = self._get_parsed_chunk_paths(repository)
