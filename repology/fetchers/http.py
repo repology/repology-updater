@@ -22,6 +22,7 @@ import lzma
 import tempfile
 import time
 from json import dumps
+from typing import Any, Tuple
 
 import requests
 
@@ -76,11 +77,14 @@ class NotModifiedException(requests.RequestException):
     pass
 
 
-def save_http_stream(url, outfile, compression=None, **kwargs):
+def save_http_stream(url, outfile, compression=None, **kwargs) -> requests.Response:
     # TODO: we should really decompress stream on the fly or
     # (better) store it as is and decompress when reading.
 
-    response = do_http(url, **kwargs, stream=True)
+    kwargs = kwargs.copy()
+    kwargs.update(stream=True)
+
+    response = do_http(url, **kwargs)
 
     if response.status_code == 304:
         raise NotModifiedException(response=response)
@@ -89,9 +93,10 @@ def save_http_stream(url, outfile, compression=None, **kwargs):
     if compression is None:
         for chunk in response.iter_content(STREAM_CHUNK_SIZE):
             outfile.write(chunk)
-        return
+        return response
 
     # choose decompressor
+    decompressor_module: Any[gzip, lzma, bz2]
     if compression == 'gz':
         decompressor_module = gzip
     elif compression == 'xz':
