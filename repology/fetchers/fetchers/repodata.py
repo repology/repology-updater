@@ -34,8 +34,12 @@ class RepodataFetcher(ScratchFileFetcher):
         logger.Log('fetching metadata from ' + repomd_url)
         repomd_content = do_http(repomd_url, check_status=True, timeout=self.fetch_timeout).text
         repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
+        repomd_xml_primary_location = repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location')
 
-        repodata_url = self.url + repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location').attrib['href']
+        if repomd_xml_primary_location is None:
+            raise RuntimeError('Cannot find primary data location in repomd.xml')
+
+        repodata_url = self.url + repomd_xml_primary_location.attrib['href']
 
         # fetch actual repo data
         compression = None
