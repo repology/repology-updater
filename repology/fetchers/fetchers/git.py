@@ -18,7 +18,7 @@
 import os
 
 from repology.fetchers import PersistentDirFetcher
-from repology.subprocess import RunSubprocess
+from repology.subprocess import run_subprocess
 
 
 class GitFetcher(PersistentDirFetcher):
@@ -36,7 +36,7 @@ class GitFetcher(PersistentDirFetcher):
         # than to leave it enabled with all files whitelisted
         #
         # See https://stackoverflow.com/questions/36190800/how-to-disable-sparse-checkout-after-enabled/36195275
-        RunSubprocess(['git', 'config', 'core.sparsecheckout', 'true'], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'config', 'core.sparsecheckout', 'true'], cwd=statedir, logger=logger)
         with open(sparse_checkout_path, 'w') as sparse_checkout_file:
             if self.sparse_checkout:
                 for item in self.sparse_checkout:
@@ -45,18 +45,18 @@ class GitFetcher(PersistentDirFetcher):
                 print('/*', file=sparse_checkout_file)
 
     def _do_fetch(self, statedir, logger) -> bool:
-        RunSubprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statedir], logger=logger)
+        run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statedir], logger=logger)
         self._setup_sparse_checkout(statedir, logger)
-        RunSubprocess(['git', 'checkout'], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'checkout'], cwd=statedir, logger=logger)
 
         return True
 
     def _do_update(self, statedir, logger) -> bool:
-        RunSubprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statedir, logger=logger)
-        RunSubprocess(['git', 'checkout'], cwd=statedir, logger=logger)  # needed for reset to not fail on changed sparse checkout
+        run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'checkout'], cwd=statedir, logger=logger)  # needed for reset to not fail on changed sparse checkout
         self._setup_sparse_checkout(statedir, logger)
-        RunSubprocess(['git', 'reset', '--hard', 'origin/' + self.branch], cwd=statedir, logger=logger)
-        RunSubprocess(['git', 'reflog', 'expire', '--expire=0', '--all'], cwd=statedir, logger=logger)
-        RunSubprocess(['git', 'prune'], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'reset', '--hard', 'origin/' + self.branch], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'reflog', 'expire', '--expire=0', '--all'], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'prune'], cwd=statedir, logger=logger)
 
         return True
