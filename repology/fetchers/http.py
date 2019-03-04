@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -72,11 +72,18 @@ def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None
     return response
 
 
+class NotModifiedException(requests.RequestException):
+    pass
+
+
 def save_http_stream(url, outfile, compression=None, **kwargs):
     # TODO: we should really decompress stream on the fly or
     # (better) store it as is and decompress when reading.
 
     response = do_http(url, **kwargs, stream=True)
+
+    if response.status_code == 304:
+        raise NotModifiedException(response=response)
 
     # no compression, just save to output
     if compression is None:
