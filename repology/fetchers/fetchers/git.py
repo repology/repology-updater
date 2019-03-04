@@ -18,7 +18,7 @@
 import os
 
 from repology.fetchers import PersistentDirFetcher
-from repology.subprocess import run_subprocess
+from repology.subprocess import get_subprocess_output, run_subprocess
 
 
 class GitFetcher(PersistentDirFetcher):
@@ -52,6 +52,8 @@ class GitFetcher(PersistentDirFetcher):
         return True
 
     def _do_update(self, statedir, logger) -> bool:
+        old_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statedir, logger=logger).strip()
+
         run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statedir, logger=logger)
         run_subprocess(['git', 'checkout'], cwd=statedir, logger=logger)  # needed for reset to not fail on changed sparse checkout
         self._setup_sparse_checkout(statedir, logger)
@@ -59,4 +61,6 @@ class GitFetcher(PersistentDirFetcher):
         run_subprocess(['git', 'reflog', 'expire', '--expire=0', '--all'], cwd=statedir, logger=logger)
         run_subprocess(['git', 'prune'], cwd=statedir, logger=logger)
 
-        return True
+        new_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statedir, logger=logger).strip()
+
+        return old_head != new_head
