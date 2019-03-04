@@ -41,6 +41,9 @@ flake8-all:
 
 mypy:
 	${MYPY} --ignore-missing-imports repology
+	${MYPY} --ignore-missing-imports repology/fetchers/fetchers
+	${MYPY} --ignore-missing-imports repology/parsers/parsers
+	${MYPY} --ignore-missing-imports repologyapp
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")

@@ -35,7 +35,7 @@ class FreshcodeFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return False
 
-        state = {}
+        state = {}  # type: ignore
 
         if os.path.isfile(statepath):
             with open(statepath, 'r', encoding='utf-8') as oldstatefile:

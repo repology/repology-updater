@@ -19,7 +19,7 @@ import os
 
 __all__ = ['config']
 
-config = {}
+config = {}  # type: ignore
 
 
 def _load_config(path):
