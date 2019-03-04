@@ -76,7 +76,7 @@ class RepositoryProcessor:
     def _fetch_source(self, repository, update, source, logger) -> bool:
         if 'fetcher' not in source:
             logger.log('fetching source {} not supported'.format(source['name']))
-            return
+            return False
 
         logger.log('fetching source {} started'.format(source['name']))
 
