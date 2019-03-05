@@ -18,7 +18,8 @@
 import os
 
 from repology.fetchers import ScratchDirFetcher
-from repology.subprocess import RunSubprocess
+from repology.fetchers.http import NotModifiedException, save_http_stream
+from repology.subprocess import run_subprocess
 
 
 class WgetTarFetcher(ScratchDirFetcher):
@@ -28,8 +29,25 @@ class WgetTarFetcher(ScratchDirFetcher):
 
     def _do_fetch(self, statedir, persdata, logger) -> bool:
         tarpath = os.path.join(statedir, '.temporary.tar')
-        RunSubprocess(['wget', '--timeout', str(self.fetch_timeout), '--tries', '1', '-O', tarpath, self.url], logger)
-        RunSubprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
+
+        headers = {}
+
+        if persdata.get('last-modified'):
+            headers['if-modified-since'] = persdata.get('last-modified')
+            logger.Log('using if-modified-since: {}'.format(headers['if-modified-since']))
+
+        try:
+            with open(tarpath, 'wb') as tarfile:
+                response = save_http_stream(self.url, tarfile, headers=headers, timeout=self.fetch_timeout)
+        except NotModifiedException:
+            logger.Log('got 403 not modified')
+            return False
+
+        run_subprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
         os.remove(tarpath)
+
+        if response.headers.get('last-modified'):
+            persdata['last-modified'] = response.headers['last-modified']
+            logger.Log('storing last-modified: {}'.format(persdata['last-modified']))
 
         return True
