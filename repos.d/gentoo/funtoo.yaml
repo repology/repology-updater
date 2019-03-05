@@ -8,7 +8,7 @@
   desc: Funtoo 1.3
   family: gentoo
   color: '4e4e71'
-  minpackages: 30000
+  minpackages: 35000
   sources:
     - name:
         - core-gl-kit
