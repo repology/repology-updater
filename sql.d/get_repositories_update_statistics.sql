@@ -87,5 +87,5 @@ LEFT JOIN (
 	FROM runs
 	WHERE type = 'parse'::run_type AND status != 'interrupted'::run_status
 ) last_parse_subq ON last_parse_subq.repository_id = repositories.id AND last_parse_subq.rn = 1
-WHERE state = 'active'::repository_state
+WHERE state != 'legacy'::repository_state
 ORDER BY sortname;
