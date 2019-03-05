@@ -70,61 +70,34 @@ WHERE
 	last_seen != now();
 
 --------------------------------------------------------------------------------
--- Expire too old failed runs
+-- Clean up old runs and logs
 --------------------------------------------------------------------------------
-UPDATE
-	repositories
-SET
-	last_failed_fetch_run_id = NULL
-WHERE
-	EXISTS (
-		SELECT *
-		FROM runs
-		WHERE
-			runs.id = last_failed_fetch_run_id
-			AND runs.start_ts < now() - INTERVAL '31' DAY
-	);
-
-UPDATE
-	repositories
-SET
-	last_failed_parse_run_id = NULL
-WHERE
-	EXISTS (
-		SELECT *
-		FROM runs
-		WHERE
-			runs.id = last_failed_parse_run_id
-			AND runs.start_ts < now() - INTERVAL '31' DAY
-	);
-
---------------------------------------------------------------------------------
--- Clean up unreferenced runs and logs
---------------------------------------------------------------------------------
-WITH removed_runs AS (
-	DELETE
-	FROM runs
-	WHERE
-		NOT EXISTS (
-			SELECT
-				*
-			FROM repositories
-			WHERE
-				current_run_id = runs.id OR
-				last_successful_fetch_run_id = runs.id OR
-				last_failed_fetch_run_id = runs.id OR
-				last_successful_parse_run_id = runs.id OR
-				last_failed_parse_run_id = runs.id
-		)
-		AND (
-			(successful AND start_ts < now() - INTERVAL '7' DAY) OR
-			(start_ts < now() - INTERVAL '31' DAY)
-		)
-	RETURNING
+WITH preserved_runs AS (
+	SELECT
 		id
+	FROM (
+		SELECT
+			*,
+			row_number() OVER (
+				PARTITION BY repository_id
+				ORDER BY start_ts DESC
+			) AS depth
+		FROM runs
+	) AS tmp
+	WHERE
+		-- keep failed runs for a month
+		(status = 'failed'::run_status AND start_ts > now() - INTERVAL '31' DAY) OR
+		-- keep normal runs for a week
+		(start_ts > now() - INTERVAL '7' DAY) OR
+		-- always keep 20 latest runs
+		(depth <= 20)
 )
-DELETE
-FROM log_lines
-WHERE run_id IN (
-	SELECT id FROM removed_runs
+DELETE FROM runs
+WHERE id NOT IN (
+	SELECT id FROM preserved_runs
+);
+
+DELETE FROM log_lines
+WHERE run_id NOT IN (
+	SELECT id FROM runs
 );
