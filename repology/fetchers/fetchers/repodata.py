@@ -19,6 +19,7 @@ import xml.etree.ElementTree
 
 from repology.fetchers import ScratchFileFetcher
 from repology.fetchers.http import do_http, save_http_stream
+from repology.logger import Logger
 
 
 class RepodataFetcher(ScratchFileFetcher):
@@ -33,13 +34,21 @@ class RepodataFetcher(ScratchFileFetcher):
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)
         repomd_content = do_http(repomd_url, check_status=True, timeout=self.fetch_timeout).text
-        repomd_xml = xml.etree.ElementTree.fromstring(repomd_content)
-        repomd_xml_primary_location = repomd_xml.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]/{http://linux.duke.edu/metadata/repo}location')
+        repomd = xml.etree.ElementTree.fromstring(repomd_content)
+        repomd_elt_primary = repomd.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]')
+        repomd_elt_primary_location = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}location')
+        repomd_elt_primary_checksum = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha256"]')
 
-        if repomd_xml_primary_location is None:
+        if repomd_elt_primary_checksum is None:
+            logger.log('no supported checksum', logger.WARNING)
+        elif repomd_elt_primary_checksum.text == persdata.get('open-checksum-sha256'):
+            logger.log('checksum not changed: {}'.format(repomd_elt_primary_checksum.text))
+            return False
+
+        if repomd_elt_primary_location is None:
             raise RuntimeError('Cannot find primary data location in repomd.xml')
 
-        repodata_url = self.url + repomd_xml_primary_location.attrib['href']
+        repodata_url = self.url + repomd_elt_primary_location.attrib['href']
 
         # fetch actual repo data
         compression = None
@@ -51,6 +60,10 @@ class RepodataFetcher(ScratchFileFetcher):
         logger.Log('fetching {}'.format(repodata_url))
 
         save_http_stream(repodata_url, statefile, compression=compression, timeout=self.fetch_timeout)
+
+        if repomd_elt_primary_checksum is not None and repomd_elt_primary_checksum.text:
+            persdata['open-checksum-sha256'] = repomd_elt_primary_checksum.text
+            logger.log('saving checksum: {}'.format(persdata['open-checksum-sha256']))
 
         logger.Log('size is {} byte(s)'.format(statefile.tell()))
 
