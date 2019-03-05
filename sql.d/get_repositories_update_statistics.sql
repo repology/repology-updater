@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -23,38 +23,58 @@
 SELECT
 	name,
 
-	current_run_id,
-    last_successful_fetch_run_id,
-    last_failed_fetch_run_id,
-    last_successful_parse_run_id,
-    last_failed_parse_run_id,
+	last_fetch_subq.id AS last_fetch_id,
+	now() - last_fetch_subq.start_ts AS last_fetch_ago,
+	last_fetch_subq.successful AS last_fetch_status,
+	last_fetch_subq.num_errors AS last_fetch_errors,
+	last_fetch_subq.num_warnings AS last_fetch_warnings,
 
-	now() - current_run.start_ts AS current_run_duration,
-	current_run.type AS current_run_type,
+	last_parse_subq.id AS last_parse_id,
+	now() - last_parse_subq.start_ts AS last_parse_ago,
+	last_parse_subq.successful AS last_parse_status,
+	last_parse_subq.num_errors AS last_parse_errors,
+	last_parse_subq.num_warnings AS last_parse_warnings,
 
-	now() - last_successful_fetch_run.finish_ts AS last_successful_fetch_ago,
-	last_successful_fetch_run.num_warnings AS last_successful_fetch_warnings,
-	last_successful_fetch_run.num_errors AS last_successful_fetch_errors,
+	last_failed_subq.id AS last_failed_id,
+	now() - last_failed_subq.start_ts AS last_failed_ago,
+	last_failed_subq.successful AS last_failed_status,
+	last_failed_subq.num_errors AS last_failed_errors,
+	last_failed_subq.num_warnings AS last_failed_warnings,
 
-	now() - last_failed_fetch_run.finish_ts AS last_failed_fetch_ago,
-	last_failed_fetch_run.num_warnings AS last_failed_fetch_warnings,
-	last_failed_fetch_run.num_errors AS last_failed_fetch_errors,
-
-	now() - last_successful_parse_run.finish_ts AS last_successful_parse_ago,
-	last_successful_parse_run.num_warnings AS last_successful_parse_warnings,
-	last_successful_parse_run.num_errors AS last_successful_parse_errors,
-
-	now() - last_failed_parse_run.finish_ts AS last_failed_parse_ago,
-	last_failed_parse_run.num_warnings AS last_failed_parse_warnings,
-	last_failed_parse_run.num_errors AS last_failed_parse_errors,
-
-	CASE WHEN length(fetch_history) = 0 THEN 0.0 ELSE 100.0 * length(replace(fetch_history, 's', '')) / length(fetch_history) END AS fetch_failure_rate,
-	CASE WHEN length(parse_history) = 0 THEN 0.0 ELSE 100.0 * length(replace(parse_history, 's', '')) / length(parse_history) END AS parse_failure_rate
+	(
+		SELECT
+			array_agg(json)
+		FROM (
+			SELECT
+				json_build_object('id', id, 'status', successful) AS json
+			FROM
+				runs
+			WHERE repository_id = repositories.id
+			ORDER BY start_ts
+			LIMIT 20
+		) AS tmp
+	) AS history
 FROM repositories
-LEFT JOIN runs AS current_run ON (current_run.id = current_run_id)
-LEFT JOIN runs AS last_successful_fetch_run ON (last_successful_fetch_run.id = last_successful_fetch_run_id)
-LEFT JOIN runs AS last_failed_fetch_run ON (last_failed_fetch_run.id = last_failed_fetch_run_id)
-LEFT JOIN runs AS last_successful_parse_run ON (last_successful_parse_run.id = last_successful_parse_run_id)
-LEFT JOIN runs AS last_failed_parse_run ON (last_failed_parse_run.id = last_failed_parse_run_id)
-WHERE state != 'legacy'::repository_state
+LEFT JOIN (
+	SELECT
+		*,
+		row_number() over(PARTITION BY repository_id ORDER BY start_ts DESC) AS rn
+	FROM runs
+	WHERE NOT successful
+) last_failed_subq ON last_failed_subq.repository_id = repositories.id AND last_failed_subq.rn = 1
+LEFT JOIN (
+	SELECT
+		*,
+		row_number() over(PARTITION BY repository_id ORDER BY start_ts DESC) AS rn
+	FROM runs
+	WHERE type='fetch'::run_type
+) last_fetch_subq ON last_fetch_subq.repository_id = repositories.id AND last_fetch_subq.rn = 1
+LEFT JOIN (
+	SELECT
+		*,
+		row_number() over(PARTITION BY repository_id ORDER BY start_ts DESC) AS rn
+	FROM runs
+	WHERE type='parse'::run_type
+) last_parse_subq ON last_parse_subq.repository_id = repositories.id AND last_parse_subq.rn = 1
+WHERE state = 'active'::repository_state
 ORDER BY sortname;
