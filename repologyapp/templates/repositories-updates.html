@@ -22,7 +22,7 @@
 {% block content %}
 <div class="container">
 
-<p>Note that actual website updates happen some time after repository fetch and parse phases shown on this page.</p>
+<p>A brief explanation of update process: each repository is updated in two phases: <em>fetch</em>, which only involves downloading new data, then <em>parse</em>, which involves converting upstream format into Repology packages and applying transformation rules. Each phase may fail independently. Also, fetch phase may return no new data (e.g. HTTP 403 not modified, no new git commits etc.), in which case parse phase may be skipped as long as the ruleset hasn't changed either. Consequent fetch and parse are grouped in the history, fetch resulting in no new data is indicated with <strong>∅</strong>. Note that actual database update happens only after trying to fetch and parse all the repositories, so there's additional delay between times shown on this page and actual website update.</p>
 
 {{ _autorefresh.toggler() }}
 
