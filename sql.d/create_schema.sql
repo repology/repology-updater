@@ -66,7 +66,7 @@ CREATE TYPE run_status AS enum(
 	'running',
 	'successful',
 	'failed',
-	'interrupted',
+	'interrupted'
 );
 
 DROP TYPE IF EXISTS log_severity CASCADE;
@@ -564,7 +564,7 @@ CREATE TABLE repositories (
 	color text,
 	shadow boolean NOT NULL,
 	repolinks jsonb NOT NULL,
-	packagelinks jsonb NOT NULL,
+	packagelinks jsonb NOT NULL
 );
 
 CREATE UNIQUE INDEX ON repositories(name);
