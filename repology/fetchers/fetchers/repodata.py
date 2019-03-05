@@ -40,7 +40,7 @@ class RepodataFetcher(ScratchFileFetcher):
         repomd_elt_primary_checksum = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha256"]')
 
         if repomd_elt_primary_checksum is None:
-            logger.log('no supported checksum', logger.WARNING)
+            logger.log('no supported checksum', Logger.WARNING)
         elif repomd_elt_primary_checksum.text == persdata.get('open-checksum-sha256'):
             logger.log('checksum not changed: {}'.format(repomd_elt_primary_checksum.text))
             return False
