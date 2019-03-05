@@ -50,7 +50,12 @@ SELECT
 			FROM (
 				SELECT
 					start_ts,
-					json_build_object('id', id, 'status', status, 'type', "type", 'no_changes', no_changes) AS json
+					json_build_object(
+						'id', id,
+						'status', status,
+						'type', "type",
+						'no_changes', no_changes
+					) AS json
 				FROM
 					runs
 				WHERE repository_id = repositories.id
@@ -66,21 +71,21 @@ LEFT JOIN (
 		*,
 		row_number() over(PARTITION BY repository_id ORDER BY start_ts DESC) AS rn
 	FROM runs
-	WHERE status='failed'::run_status
+	WHERE status = 'failed'::run_status
 ) last_failed_subq ON last_failed_subq.repository_id = repositories.id AND last_failed_subq.rn = 1
 LEFT JOIN (
 	SELECT
 		*,
 		row_number() over(PARTITION BY repository_id ORDER BY start_ts DESC) AS rn
 	FROM runs
-	WHERE type='fetch'::run_type AND status!='interrupted'::run_status
+	WHERE type = 'fetch'::run_type AND status != 'interrupted'::run_status
 ) last_fetch_subq ON last_fetch_subq.repository_id = repositories.id AND last_fetch_subq.rn = 1
 LEFT JOIN (
 	SELECT
 		*,
 		row_number() over(PARTITION BY repository_id ORDER BY start_ts DESC) AS rn
 	FROM runs
-	WHERE type='parse'::run_type AND status!='interrupted'::run_status
+	WHERE type = 'parse'::run_type AND status != 'interrupted'::run_status
 ) last_parse_subq ON last_parse_subq.repository_id = repositories.id AND last_parse_subq.rn = 1
 WHERE state = 'active'::repository_state
 ORDER BY sortname;
