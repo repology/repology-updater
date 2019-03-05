@@ -106,8 +106,10 @@ def process_repositories(env):
             have_changes = True
 
             try:
-                with LogRunManager(env.get_logging_database_connection(), reponame, 'fetch') as logger:
-                    have_changes = env.get_repo_processor().fetch([reponame], update=env.get_options().update, logger=logger)
+                with LogRunManager(env.get_logging_database_connection(), reponame, 'fetch') as runlogger:
+                    have_changes = env.get_repo_processor().fetch([reponame], update=env.get_options().update, logger=runlogger)
+                    if not have_changes:
+                        runlogger.set_no_changes()
 
                 env.get_main_logger().get_indented().log('done' + ('' if have_changes else ' (no changes)'))
             except KeyboardInterrupt:
@@ -134,8 +136,8 @@ def process_repositories(env):
 
             env.get_main_logger().log('parsing {}'.format(reponame))
             try:
-                with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as logger:
-                    env.get_repo_processor().parse([reponame], transformer=transformer, logger=logger)
+                with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as runlogger:
+                    env.get_repo_processor().parse([reponame], transformer=transformer, logger=runlogger)
 
                 env.get_main_logger().get_indented().log('done')
             except KeyboardInterrupt:

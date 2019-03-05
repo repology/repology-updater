@@ -102,10 +102,17 @@ class LogRunManager:
         self.db = db
         self.reponame = reponame
         self.run_type = run_type
+        self.target_status = 'successful'
+        self.no_changes = False
 
     def __enter__(self):
         self.run_id = self.db.start_run(self.reponame, self.run_type)
         self.logger = RealtimeDatabaseLogger(self.db, self.run_id)
+
+        def _set_no_changes():
+            self.no_changes = True
+
+        self.logger.set_no_changes = _set_no_changes
 
         self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         return self.logger
@@ -113,21 +120,21 @@ class LogRunManager:
     def __exit__(self, exc_type, exc_val, exc_tb):
         end_rusage = resource.getrusage(resource.RUSAGE_SELF)
 
-        success = True
+        target_status = self.target_status
         trace = None
 
         if exc_type is KeyboardInterrupt:
-            # XXX: mark update as interrupted
-            return
-
-        if exc_type:
+            self.logger.log('interrupted by administrator', severity=Logger.WARNING)
+            target_status = 'interrupted'
+        elif exc_type:
             self.logger.log('{}: {}'.format(exc_type.__name__, exc_val), severity=Logger.ERROR)
-            success = False
+            target_status = 'failed'
             trace = traceback.format_exception(exc_type, exc_val, exc_tb)
 
         self.db.finish_run(
             self.run_id,
-            success,
+            target_status,
+            self.no_changes,
             utime=datetime.timedelta(seconds=end_rusage.ru_utime - self.start_rusage.ru_utime),
             stime=datetime.timedelta(seconds=end_rusage.ru_stime - self.start_rusage.ru_stime),
             maxrss=end_rusage.ru_maxrss,

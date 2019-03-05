@@ -25,7 +25,8 @@ SELECT
 	"type",
 	(SELECT name FROM repositories WHERE id = repository_id) AS reponame,
 
-	"successful",
+	status,
+	no_changes,
 
 	start_ts,
     finish_ts,

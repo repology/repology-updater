@@ -33,21 +33,27 @@
 			<th class="text-center">Last fetch</th>
 			<th class="text-center">Last parse</th>
 			<th class="text-center">Latest failure</th>
-			<th class="text-center">History</th>
+			<th class="text-center">History (oldest→latest)</th>
 		</tr>
 	</thead>
 	<tbody>
 	{% for repo in repos %}
 		<tr id="{{ repo.name }}">
 			<td class="text-right"><a href="{{ url_for('repository', repo=repo.name) }}">{{ repometadata[repo.name].desc }}</a></td>
-			<td class="text-center{% if repo.last_fetch_status == False %} danger{% elif repo.last_fetch_status == None %} info{% endif %}">{{
+			<td class="text-center
+					{%- if repo.last_fetch_status == 'failed' %} danger
+					{%- elif repo.last_fetch_status == 'running' %} info
+					{%- endif -%}">{{
 				update_run_info(
 					repo.last_fetch_id,
 					repo.last_fetch_ago,
 					repo.last_fetch_errors,
 					repo.last_fetch_warnings
 				) }}</td>
-			<td class="text-center{% if repo.last_parse_status == False %} danger{% elif repo.last_parse_status == None %} info{% endif %}">{{
+			<td class="text-center
+					{%- if repo.last_parse_status == 'failed' %} danger
+					{%- elif repo.last_parse_status == 'running' %} info
+					{%- endif %}">{{
 				update_run_info(
 					repo.last_parse_id,
 					repo.last_parse_ago,
@@ -64,13 +70,23 @@
 			<td class="text-center">
 			{%- if repo.history -%}
 			{%- for histitem in repo.history -%}
-			{%- if histitem.status == True -%}
+
+			{%- if not loop.first and histitem.type == 'fetch' %}|{% endif -%}
+
+			{%- if histitem.status == 'running' -%}
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-running">▶</a>
+			{%- elif histitem.status == 'successful' and histitem.no_changes -%}
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-successful">∅</a>
+			{%- elif histitem.status == 'successful' -%}
 				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-successful">✔</a>
-			{%- elif histitem.status == False -%}
+			{%- elif histitem.status == 'failed' -%}
 				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-failed">✘</a>
+			{%- elif histitem.status == 'interrupted' -%}
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-interrupted">◼</a>
 			{%- else -%}
-				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-unfinished">▶</a>
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow">?</a>
 			{%- endif -%}
+
 			{%- endfor -%}
 			{%- else -%}
 				-

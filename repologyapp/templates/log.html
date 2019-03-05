@@ -11,7 +11,15 @@
 
 {% block title %}Log viewer - Repology{% endblock %}
 {% block header %}Log viewer:
-	{% if run.successful == True %}<span class="text-success">successful</span>{% elif run.successful == False %}<span class="text-danger">failed</span>{% else %}ongoing{% endif %}
+	{% if run.status == 'running' %}
+	ongoing
+	{% elif run.status == 'successful' %}
+	<span class="text-success">successful</span>
+	{% elif run.status == 'failed' %}
+	<span class="text-danger">failed</span>
+	{% elif run.status == 'interrupted' %}
+	<span class="text-danger">interrupted</span>
+	{% endif %}
 	{{ run.type }} for {{ repometadata[run.reponame].desc }}
 {% endblock %}
 

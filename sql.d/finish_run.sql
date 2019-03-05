@@ -1,4 +1,4 @@
--- Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -18,7 +18,8 @@
 --------------------------------------------------------------------------------
 --
 -- @param id
--- @param successful
+-- @param status
+-- @param no_changes=False
 -- @param utime=None
 -- @param stime=None
 -- @param maxrss=None
@@ -28,7 +29,8 @@
 --------------------------------------------------------------------------------
 UPDATE runs
 SET
-	"successful" = %(successful)s,
+	status = %(status)s,
+	no_changes = %(no_changes)s,
 	finish_ts = now(),
 
 	num_lines = (SELECT count(*) FROM log_lines WHERE run_id = id),

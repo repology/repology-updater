@@ -42,14 +42,14 @@ LEFT JOIN (
         *,
         row_number() over(PARTITION BY repository_id ORDER BY start_ts DESC) AS rn
     FROM runs
-    WHERE successful AND type='fetch'::run_type
+    WHERE status='successful'::run_status AND type='fetch'::run_type
 ) fetch_run ON fetch_run.repository_id = repositories.id AND fetch_run.rn = 1
 LEFT JOIN (
 	SELECT
         *,
         row_number() over(PARTITION BY repository_id ORDER BY start_ts DESC) AS rn
     FROM runs
-    WHERE successful AND type='parse'::run_type
+    WHERE status='successful'::run_status AND type='parse'::run_type
 ) parse_run ON parse_run.repository_id = repositories.id AND parse_run.rn = 1
 WHERE state != 'legacy'::repository_state
 ORDER BY sortname;

@@ -321,22 +321,22 @@
 
 .update-successful {
 	color: rgb(57, 132, 57);
-	font-weight: bold
+	font-weight: bold;
 }
 
 .update-unfinished {
 	color: rgb(49, 176, 213);
-	font-weight: bold
+	font-weight: bold;
 }
 
 .update-failed {
 	color: rgb(201, 48, 44);
-	font-weight: bold
+	font-weight: bold;
 }
 
-.update-skipped {
-	color: rgb(40, 96, 144);
-	font-weight: bold
+.update-interrupted {
+	color: rgb(201, 48, 44);
+	font-weight: bold;
 }
 
 /* copied from panel-* */

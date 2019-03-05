@@ -60,6 +60,15 @@ CREATE TYPE run_type AS enum(
 	'database_postprocess'
 );
 
+DROP TYPE IF EXISTS run_status CASCADE;
+
+CREATE TYPE run_status AS enum(
+	'running',
+	'successful',
+	'failed',
+	'interrupted',
+);
+
 DROP TYPE IF EXISTS log_severity CASCADE;
 
 CREATE TYPE log_severity AS enum(
@@ -480,7 +489,8 @@ CREATE TABLE runs (
 	"type" run_type NOT NULL,
 	repository_id smallint,
 
-	"successful" boolean NULL,
+	status run_status NOT NULL DEFAULT 'running'::run_status,
+	no_changes boolean NOT NULL DEFAULT false,
 
 	start_ts timestamp with time zone NOT NULL,
 	finish_ts timestamp with time zone NULL,
