@@ -22,7 +22,7 @@ import lzma
 import tempfile
 import time
 from json import dumps
-from typing import Any, Tuple
+from typing import Any
 
 import requests
 
