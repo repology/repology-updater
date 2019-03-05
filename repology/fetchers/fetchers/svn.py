@@ -31,11 +31,14 @@ class SVNFetcher(PersistentDirFetcher):
 
     def _do_update(self, statedir, logger) -> bool:
         old_rev = get_subprocess_output(['svn', 'info', '--show-item', 'revision', statedir], logger=logger).strip()
-        logger.log('Revision before update: {}'.format(old_rev))
 
         run_subprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statedir], logger=logger)
 
         new_rev = get_subprocess_output(['svn', 'info', '--show-item', 'revision', statedir], logger=logger).strip()
-        logger.log('Revision after update: {}'.format(new_rev))
 
-        return old_rev != new_rev
+        if new_rev == old_rev:
+            logger.log('Revision has not changed: {}'.format(new_rev))
+            return False
+
+        logger.log('Revision was updated from {} to {}'.format(old_rev, new_rev))
+        return True
