@@ -53,6 +53,7 @@ class GitFetcher(PersistentDirFetcher):
 
     def _do_update(self, statedir, logger) -> bool:
         old_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statedir, logger=logger).strip()
+        logger.log('HEAD before update: {}'.format(old_head))
 
         run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statedir, logger=logger)
         run_subprocess(['git', 'checkout'], cwd=statedir, logger=logger)  # needed for reset to not fail on changed sparse checkout
@@ -62,5 +63,6 @@ class GitFetcher(PersistentDirFetcher):
         run_subprocess(['git', 'prune'], cwd=statedir, logger=logger)
 
         new_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statedir, logger=logger).strip()
+        logger.log('HEAD after update: {}'.format(new_head))
 
         return old_head != new_head
