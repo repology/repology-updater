@@ -507,6 +507,9 @@ CREATE TABLE runs (
 	traceback text NULL
 );
 
+CREATE INDEX runs_repository_id_start_ts_idx ON runs(repository_id, start_ts DESC);
+CREATE INDEX runs_repository_id_start_ts_idx_failed ON runs(repository_id, start_ts DESC) WHERE(status = 'failed'::run_status);
+
 DROP TABLE IF EXISTS log_lines CASCADE;
 
 CREATE TABLE log_lines (
