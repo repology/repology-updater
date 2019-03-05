@@ -81,7 +81,12 @@ class AtomicDir(_AtomicFSObject):
 
     def _open(self):
         os.mkdir(self._get_new_path())
-        return self._get_new_path()
+
+        class _StrWrapper(str):
+            def cancel(self_):
+                self.cancel()
+
+        return _StrWrapper(self._get_new_path())
 
 
 class AtomicFile(_AtomicFSObject):
