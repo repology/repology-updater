@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from repology.fetchers import PersistentDirFetcher
-from repology.subprocess import RunSubprocess
+from repology.subprocess import get_subprocess_output, run_subprocess
 
 
 class SVNFetcher(PersistentDirFetcher):
@@ -25,11 +25,17 @@ class SVNFetcher(PersistentDirFetcher):
         self.fetch_timeout = fetch_timeout
 
     def _do_fetch(self, statedir, logger) -> bool:
-        RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'checkout', self.url, statedir], logger=logger)
+        run_subprocess(['timeout', str(self.fetch_timeout), 'svn', 'checkout', self.url, statedir], logger=logger)
 
         return True
 
     def _do_update(self, statedir, logger) -> bool:
-        RunSubprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statedir], logger=logger)
+        old_rev = get_subprocess_output(['svn', 'info', '--show-item', 'revision', statedir], logger=logger).strip()
+        logger.log('Revision before update: {}'.format(old_rev))
 
-        return True
+        run_subprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statedir], logger=logger)
+
+        new_rev = get_subprocess_output(['svn', 'info', '--show-item', 'revision', statedir], logger=logger).strip()
+        logger.log('Revision after update: {}'.format(new_rev))
+
+        return old_rev != new_rev
