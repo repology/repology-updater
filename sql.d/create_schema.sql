@@ -555,16 +555,6 @@ CREATE TABLE repositories (
 	shadow boolean NOT NULL,
 	repolinks jsonb NOT NULL,
 	packagelinks jsonb NOT NULL,
-
-	-- runs
-	current_run_id integer NULL,
-	last_successful_fetch_run_id integer NULL,
-	last_failed_fetch_run_id integer NULL,
-	last_successful_parse_run_id integer NULL,
-	last_failed_parse_run_id integer NULL,
-
-	fetch_history text NOT NULL DEFAULT '',
-	parse_history text NOT NULL DEFAULT ''
 );
 
 CREATE UNIQUE INDEX ON repositories(name);

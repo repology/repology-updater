@@ -107,8 +107,6 @@ class LogRunManager:
         self.run_id = self.db.start_run(self.reponame, self.run_type)
         self.logger = RealtimeDatabaseLogger(self.db, self.run_id)
 
-        self.db.update_repository_run_id(self.reponame, self.run_id, 'current')
-
         self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
         return self.logger
 
@@ -119,7 +117,7 @@ class LogRunManager:
         trace = None
 
         if exc_type is KeyboardInterrupt:
-            self.db.update_repository_run_id(self.reponame, None, 'current')
+            # XXX: mark update as interrupted
             return
 
         if exc_type:
@@ -136,6 +134,3 @@ class LogRunManager:
             maxrss_delta=end_rusage.ru_maxrss - self.start_rusage.ru_maxrss,
             traceback=trace
         )
-
-        self.db.update_repository_run_id(self.reponame, None, 'current')
-        self.db.update_repository_run_id(self.reponame, self.run_id, self.run_type, success)
