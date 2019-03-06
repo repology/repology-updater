@@ -10,7 +10,7 @@
   minpackages: 10000
   sources:
     - name: [ community, core, extra ]
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ArchDBParser
       url: 'http://mirror.yandex.ru/mirrors/manjaro/stable/{source}/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
@@ -28,7 +28,7 @@
   minpackages: 10000
   sources:
     - name: [ community, core, extra ]
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ArchDBParser
       url: 'http://mirror.yandex.ru/mirrors/manjaro/testing/{source}/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
@@ -46,7 +46,7 @@
   minpackages: 10000
   sources:
     - name: [ community, core, extra ]
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ArchDBParser
       url: 'http://mirror.yandex.ru/mirrors/manjaro/unstable/{source}/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'
@@ -65,7 +65,7 @@
   minpackages: 1  # XXX: unknown
   sources:
     - name: [ community, core, extra ]
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ArchDBParser
       url: 'http://mirror.yandex.ru/mirrors/manjaro/xperimental/{source}/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'

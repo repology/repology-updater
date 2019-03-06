@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -23,7 +23,7 @@ from repology.fetchers.http import NotModifiedException, save_http_stream
 from repology.subprocess import run_subprocess
 
 
-class WgetTarFetcher(ScratchDirFetcher):
+class TarFetcher(ScratchDirFetcher):
     def __init__(self, url, fetch_timeout=60):
         self.url = url
         self.fetch_timeout = fetch_timeout

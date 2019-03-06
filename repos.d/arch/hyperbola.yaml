@@ -10,7 +10,7 @@
   minpackages: 8500
   sources:
     - name: [ core, extra, community ]
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ArchDBParser
       url: 'https://repo.hyperbola.info:50012/gnu-plus-linux-libre/stable/{source}/os/x86_64/{source}.db.tar.gz'
       subrepo: '{source}'

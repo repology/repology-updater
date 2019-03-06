@@ -8,7 +8,7 @@
   minpackages: 4300
   sources:
     - name: [ community, main, testing ]
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ApkIndexParser
       url: 'http://dl-3.alpinelinux.org/alpine/edge/{source}/x86_64/APKINDEX.tar.gz'
       subrepo: '{source}'

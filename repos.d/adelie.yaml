@@ -10,7 +10,7 @@
   minpackages: 900
   sources:
     - name: [ system, user ]
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ApkIndexParser
       url: 'https://distfiles.adelielinux.org/adelie/current/{source}/ppc64/APKINDEX.tar.gz'
       subrepo: '{source}'

@@ -10,7 +10,7 @@
   minpackages: 900
   sources:
     - name: mingw64.db
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: MSYS2DescParser
       url: http://repo.msys2.org/mingw/sources/mingw32.db.tar.gz
     # XXX: add binary repos
@@ -36,11 +36,11 @@
   sources:
     # NOTE: no database for source packages
     - name: x86_64
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: MSYS2DescParser
       url: http://repo.msys2.org/msys/x86_64/msys.db.tar.gz
     - name: i686
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: MSYS2DescParser
       url: http://repo.msys2.org/msys/i686/msys.db.tar.gz
   repolinks:

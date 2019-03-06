@@ -17,7 +17,7 @@
       #url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/Attic/INDEX?rev=1.481&content-type=text/plain'
 #    - name: sqlports
-#      fetcher: WgetTarFetcher
+#      fetcher: TarFetcher
 #      parser: OpenBSDsqlportsParser
 #      # using mirror as official site is too slow
 #      url: 'https://mirror.yandex.ru/openbsd/snapshots/packages/amd64/sqlports-6.10.tgz'

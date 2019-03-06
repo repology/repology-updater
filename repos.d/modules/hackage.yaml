@@ -9,7 +9,7 @@
   minpackages: 12000
   sources:
     - name: hackage
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: HackageParser
       url: https://hackage.haskell.org/packages/index.tar.gz
   shadow: true

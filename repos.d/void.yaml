@@ -14,7 +14,7 @@
   minpackages: 9000
   sources:
     - name: [ x86_64, nonfree/x86_64 ]
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: VoidLinuxPlistParser
       url: 'https://alpha.de.repo.voidlinux.org/current/{source}-repodata'
       subrepo: '{source}'

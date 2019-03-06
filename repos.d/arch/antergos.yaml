@@ -9,7 +9,7 @@
   minpackages: 150
   sources:
     - name: antergos
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ArchDBParser
       url: 'https://repo.antergos.info/antergos/x86_64/antergos.db.tar.gz'
   repolinks:
@@ -34,7 +34,7 @@
   minpackages: 1
   sources:
     - name: antergos-staging
-      fetcher: WgetTarFetcher
+      fetcher: TarFetcher
       parser: ArchDBParser
       url: 'https://repo.antergos.info/antergos-staging/x86_64/antergos-staging.db.tar.gz'
   repolinks:
