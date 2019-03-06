@@ -36,6 +36,9 @@ class RepodataFetcher(ScratchFileFetcher):
         repomd_content = do_http(repomd_url, check_status=True, timeout=self.fetch_timeout).text
         repomd = xml.etree.ElementTree.fromstring(repomd_content)
         repomd_elt_primary = repomd.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]')
+        if repomd_elt_primary is None:
+            raise RuntimeError('Cannot find <primary> element in repomd.xml')
+
         repomd_elt_primary_location = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}location')
         repomd_elt_primary_checksum = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha256"]')
 
