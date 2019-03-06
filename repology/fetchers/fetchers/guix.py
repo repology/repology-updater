@@ -20,6 +20,7 @@ from string import ascii_uppercase
 
 import lxml.html
 
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.http import PoliteHTTP
 
@@ -29,7 +30,7 @@ class GuixFetcher(ScratchDirFetcher):
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch(self, statedir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
         for letter in ['0-9'] + [l for l in ascii_uppercase]:
             page = 1
             numpages = 1
@@ -49,7 +50,7 @@ class GuixFetcher(ScratchDirFetcher):
                         numpages = max(numpages, int(pagebutton.text))
 
                 # save HTML
-                with open(os.path.join(statedir, '{}-{}.html'.format(letter, page)), 'w', encoding='utf-8') as pagefile:
+                with open(os.path.join(statedir.get_path(), '{}-{}.html'.format(letter, page)), 'w', encoding='utf-8') as pagefile:
                     pagefile.write(text)
 
                 # end if that was last (or only) page

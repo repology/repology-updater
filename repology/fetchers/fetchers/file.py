@@ -15,8 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import time
 
+from repology.atomic_fs import AtomicFile
 from repology.fetchers import ScratchFileFetcher
 from repology.fetchers.http import NotModifiedException, save_http_stream
 
@@ -38,7 +40,7 @@ class FileFetcher(ScratchFileFetcher):
             else:
                 self.url += '?nocache=' + str(int(time.time()))
 
-    def _do_fetch(self, statefile, persdata, logger) -> bool:
+    def _do_fetch(self, statefile: AtomicFile, persdata, logger) -> bool:
         fetching_what = [self.url]
         headers = self.headers.copy() if self.headers else {}
 
@@ -57,12 +59,12 @@ class FileFetcher(ScratchFileFetcher):
             logger.Log('using if-modified-since: {}'.format(headers['if-modified-since']))
 
         try:
-            response = save_http_stream(self.url, statefile, compression=self.compression, data=self.post, headers=headers, timeout=self.fetch_timeout)
+            response = save_http_stream(self.url, statefile.get_file(), compression=self.compression, data=self.post, headers=headers, timeout=self.fetch_timeout)
         except NotModifiedException:
             logger.Log('got 403 not modified')
             return False
 
-        logger.Log('size is {} byte(s)'.format(statefile.tell()))
+        logger.Log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
 
         if response.headers.get('last-modified'):
             persdata['last-modified'] = response.headers['last-modified']

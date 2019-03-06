@@ -17,6 +17,7 @@
 
 import os
 
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import PersistentDirFetcher
 from repology.subprocess import get_subprocess_output, run_subprocess
 
@@ -28,15 +29,15 @@ class GitFetcher(PersistentDirFetcher):
         self.sparse_checkout = sparse_checkout
         self.fetch_timeout = fetch_timeout
 
-    def _setup_sparse_checkout(self, statedir, logger):
-        sparse_checkout_path = os.path.join(statedir, '.git', 'info', 'sparse-checkout')
+    def _setup_sparse_checkout(self, statedir: AtomicDir, logger):
+        sparse_checkout_path = os.path.join(statedir.get_path(), '.git', 'info', 'sparse-checkout')
 
         # We always enable sparse checkout, as it's harder to
         # properly disable sparse checkout and restore all files
         # than to leave it enabled with all files whitelisted
         #
         # See https://stackoverflow.com/questions/36190800/how-to-disable-sparse-checkout-after-enabled/36195275
-        run_subprocess(['git', 'config', 'core.sparsecheckout', 'true'], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'config', 'core.sparsecheckout', 'true'], cwd=statedir.get_path(), logger=logger)
         with open(sparse_checkout_path, 'w') as sparse_checkout_file:
             if self.sparse_checkout:
                 for item in self.sparse_checkout:
@@ -44,24 +45,24 @@ class GitFetcher(PersistentDirFetcher):
             else:
                 print('/*', file=sparse_checkout_file)
 
-    def _do_fetch(self, statedir, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, logger) -> bool:
         run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statedir], logger=logger)
         self._setup_sparse_checkout(statedir, logger)
-        run_subprocess(['git', 'checkout'], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'checkout'], cwd=statedir.get_path(), logger=logger)
 
         return True
 
-    def _do_update(self, statedir, logger) -> bool:
-        old_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statedir, logger=logger).strip()
+    def _do_update(self, statedir: AtomicDir, logger) -> bool:
+        old_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statedir.get_path(), logger=logger).strip()
 
-        run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statedir, logger=logger)
-        run_subprocess(['git', 'checkout'], cwd=statedir, logger=logger)  # needed for reset to not fail on changed sparse checkout
+        run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statedir.get_path(), logger=logger)
+        run_subprocess(['git', 'checkout'], cwd=statedir.get_path(), logger=logger)  # needed for reset to not fail on changed sparse checkout
         self._setup_sparse_checkout(statedir, logger)
-        run_subprocess(['git', 'reset', '--hard', 'origin/' + self.branch], cwd=statedir, logger=logger)
-        run_subprocess(['git', 'reflog', 'expire', '--expire=0', '--all'], cwd=statedir, logger=logger)
-        run_subprocess(['git', 'prune'], cwd=statedir, logger=logger)
+        run_subprocess(['git', 'reset', '--hard', 'origin/' + self.branch], cwd=statedir.get_path(), logger=logger)
+        run_subprocess(['git', 'reflog', 'expire', '--expire=0', '--all'], cwd=statedir.get_path(), logger=logger)
+        run_subprocess(['git', 'prune'], cwd=statedir.get_path(), logger=logger)
 
-        new_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statedir, logger=logger).strip()
+        new_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statedir.get_path(), logger=logger).strip()
 
         if new_head == old_head:
             logger.log('HEAD has not changed: {}'.format(new_head))

@@ -15,8 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import xml.etree.ElementTree
 
+from repology.atomic_fs import AtomicFile
 from repology.fetchers import ScratchFileFetcher
 from repology.fetchers.http import do_http, save_http_stream
 from repology.logger import Logger
@@ -29,7 +31,7 @@ class RepodataFetcher(ScratchFileFetcher):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def _do_fetch(self, statefile, persdata, logger) -> bool:
+    def _do_fetch(self, statefile: AtomicFile, persdata, logger) -> bool:
         # fetch and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)
@@ -62,12 +64,12 @@ class RepodataFetcher(ScratchFileFetcher):
 
         logger.Log('fetching {}'.format(repodata_url))
 
-        save_http_stream(repodata_url, statefile, compression=compression, timeout=self.fetch_timeout)
+        save_http_stream(repodata_url, statefile.get_file(), compression=compression, timeout=self.fetch_timeout)
 
         if repomd_elt_primary_checksum is not None and repomd_elt_primary_checksum.text:
             persdata['open-checksum-sha256'] = repomd_elt_primary_checksum.text
             logger.log('saving checksum: {}'.format(persdata['open-checksum-sha256']))
 
-        logger.Log('size is {} byte(s)'.format(statefile.tell()))
+        logger.Log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
 
         return True

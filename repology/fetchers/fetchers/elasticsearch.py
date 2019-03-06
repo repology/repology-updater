@@ -20,6 +20,7 @@ import os
 
 import requests
 
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.http import PoliteHTTP
 from repology.logger import Logger
@@ -43,7 +44,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
 
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch_scroll(self, statedir, logger):
+    def _do_fetch_scroll(self, statedir: AtomicDir, logger):
         numpage = 0
 
         logger.log('getting page {}'.format(numpage))
@@ -52,7 +53,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
         scroll_id = response['_scroll_id']
 
         while response['hits']['hits']:
-            with open(os.path.join(statedir, '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
+            with open(os.path.join(statedir.get_path(), '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 json.dump(response['hits']['hits'], pagefile)
 
             numpage += 1
@@ -69,7 +70,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             logger.log(e.response.text, severity=Logger.ERROR)
             pass
 
-    def _do_fetch(self, statedir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
         try:
             self._do_fetch_scroll(statedir, logger)
         except requests.exceptions.HTTPError as e:

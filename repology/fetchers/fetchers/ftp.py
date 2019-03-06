@@ -18,6 +18,7 @@
 import ftplib
 import urllib
 
+from repology.atomic_fs import AtomicFile
 from repology.fetchers import ScratchFileFetcher
 
 
@@ -29,7 +30,7 @@ class FTPListFetcher(ScratchFileFetcher):
         assert(self.url.scheme == 'ftp')
         self.fetch_timeout = fetch_timeout
 
-    def _do_fetch(self, statefile, persdata, logger) -> bool:
+    def _do_fetch(self, statefile: AtomicFile, persdata, logger) -> bool:
         ftp = ftplib.FTP(
             host=self.url.hostname,
             user=self.url.username or '',
@@ -41,7 +42,7 @@ class FTPListFetcher(ScratchFileFetcher):
 
         ftp.cwd(self.url.path)
 
-        ftp.retrlines('LIST', callback=lambda line: print(line, file=statefile))
+        ftp.retrlines('LIST', callback=lambda line: print(line, file=statefile.get_file()))
 
         ftp.quit()
 

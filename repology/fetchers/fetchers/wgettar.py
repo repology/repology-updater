@@ -17,6 +17,7 @@
 
 import os
 
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.http import NotModifiedException, save_http_stream
 from repology.subprocess import run_subprocess
@@ -27,8 +28,8 @@ class WgetTarFetcher(ScratchDirFetcher):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def _do_fetch(self, statedir, persdata, logger) -> bool:
-        tarpath = os.path.join(statedir, '.temporary.tar')
+    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
+        tarpath = os.path.join(statedir.get_path(), '.temporary.tar')
 
         headers = {}
 
@@ -47,7 +48,7 @@ class WgetTarFetcher(ScratchDirFetcher):
 
         # XXX: may be unportable, FreeBSD tar automatically handles compression type,
         # may not be the case on linuxes
-        run_subprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
+        run_subprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir.get_path()], logger)
         os.remove(tarpath)
 
         if response.headers.get('last-modified'):

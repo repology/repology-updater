@@ -18,6 +18,7 @@
 import json
 import os
 
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.http import do_http
 
@@ -27,7 +28,7 @@ class FedoraFetcher(ScratchDirFetcher):
         self.apiurl = apiurl
         self.giturl = giturl
 
-    def _load_spec(self, package, statedir, logger):
+    def _load_spec(self, package, statedir: AtomicDir, logger):
         specurl = self.giturl + '/{0}.git/plain/{0}.spec'.format(package)
 
         logger.GetIndented().Log('getting spec from {}'.format(specurl))
@@ -42,10 +43,10 @@ class FedoraFetcher(ScratchDirFetcher):
                 logger.GetIndented(2).Log('failed: {}'.format(r.status_code))  # XXX: check .dead.package, instead throw
             return
 
-        with open(os.path.join(statedir, package + '.spec'), 'wb') as file:
+        with open(os.path.join(statedir.get_path(), package + '.spec'), 'wb') as file:
             file.write(r.content)
 
-    def _do_fetch(self, statedir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
         page = 1
 
         while True:

@@ -18,6 +18,7 @@
 import os
 import xml.etree.ElementTree
 
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.http import PoliteHTTP
 
@@ -27,14 +28,14 @@ class ChocolateyFetcher(ScratchDirFetcher):
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch(self, statedir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
         numpage = 0
         nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
         while True:
             logger.Log('getting ' + nextpageurl)
 
             text = self.do_http(nextpageurl).text
-            with open(os.path.join(statedir, '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
+            with open(os.path.join(statedir.get_path(), '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
 
             # parse next page

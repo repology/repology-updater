@@ -18,6 +18,7 @@
 import os
 import urllib
 
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.http import PoliteHTTP
 
@@ -47,7 +48,7 @@ class AURFetcher(ScratchDirFetcher):
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
         self.max_api_url_length = max_api_url_length  # see https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations
 
-    def _do_fetch(self, statedir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
         packages_url = self.url + 'packages.gz'
         logger.GetIndented().Log('fetching package list from ' + packages_url)
         data = self.do_http(packages_url).text  # autogunzipped?
@@ -68,7 +69,7 @@ class AURFetcher(ScratchDirFetcher):
         for num_page, (url, num_packages) in enumerate(_split_names_into_urls(self.url + '/rpc/?v=5&type=info', package_names, self.max_api_url_length)):
             logger.GetIndented().Log('fetching page {} of {} package(s)'.format(num_page + 1, num_packages))
 
-            with open(os.path.join(statedir, '{}.json'.format(num_page)), 'wb') as statefile:
+            with open(os.path.join(statedir.get_path(), '{}.json'.format(num_page)), 'wb') as statefile:
                 statefile.write(self.do_http(url).content)
 
         return True

@@ -18,6 +18,7 @@
 import json
 import os
 
+from repology.atomic_fs import AtomicDir
 from repology.fetchers import ScratchDirFetcher
 from repology.fetchers.http import PoliteHTTP
 
@@ -28,14 +29,14 @@ class CratesIOFetcher(ScratchDirFetcher):
         self.per_page = per_page
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch(self, statedir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
         numpage = 1
         while True:
             url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
             logger.Log('getting ' + url)
 
             text = self.do_http(url).text
-            with open(os.path.join(statedir, '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
+            with open(os.path.join(statedir.get_path(), '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
 
             # parse next page
