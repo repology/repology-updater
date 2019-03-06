@@ -17,6 +17,7 @@
 
 import json
 import os
+from typing import Any, Dict
 
 from libversion import version_compare
 
@@ -35,7 +36,7 @@ class FreshcodeFetcher(Fetcher):
             logger.Log('no update requested, skipping')
             return False
 
-        state = {}  # type: ignore
+        state: Dict[str, Any] = {}
 
         if os.path.isfile(statepath):
             with open(statepath, 'r', encoding='utf-8') as oldstatefile:

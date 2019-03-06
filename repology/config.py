@@ -16,10 +16,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from typing import Any, Dict
 
 __all__ = ['config']
 
-config = {}  # type: ignore
+config: Dict[str, Any] = {}
 
 
 def _load_config(path):
