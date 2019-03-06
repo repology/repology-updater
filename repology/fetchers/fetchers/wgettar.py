@@ -45,6 +45,8 @@ class WgetTarFetcher(ScratchDirFetcher):
             logger.Log('got 403 not modified')
             return False
 
+        # XXX: may be unportable, FreeBSD tar automatically handles compression type,
+        # may not be the case on linuxes
         run_subprocess(['tar', '-x', '-z', '-f', tarpath, '-C', statedir], logger)
         os.remove(tarpath)
 
