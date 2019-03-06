@@ -21,7 +21,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict
 
 from repology.atomic_fs import AtomicDir, AtomicFile
-from repology.logger import NoopLogger
+from repology.logger import Logger, NoopLogger
 
 
 class Fetcher(ABC):
@@ -39,7 +39,7 @@ class PersistentDirFetcher(Fetcher):
     def _do_update(self, statepath: str, logger) -> bool:
         pass
 
-    def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
+    def fetch(self, statepath: str, update: bool = True, logger: Logger = NoopLogger()) -> bool:
         if not os.path.isdir(statepath):
             with AtomicDir(statepath) as statedir:
                 return self._do_fetch(statedir.get_path(), logger)
@@ -55,7 +55,7 @@ class ScratchDirFetcher(Fetcher):
     def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
         pass
 
-    def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
+    def fetch(self, statepath: str, update: bool = True, logger: Logger = NoopLogger()) -> bool:
         if os.path.isdir(statepath) and not update:
             logger.Log('no update requested, skipping')
             return False
@@ -82,14 +82,14 @@ class ScratchDirFetcher(Fetcher):
 
 
 class ScratchFileFetcher(Fetcher):
-    def __init__(self, binary=False):
+    def __init__(self, binary: bool = False):
         self.binary = binary
 
     @abstractmethod
-    def _do_fetch(self, statefile: AtomicFile, persdata, logger) -> bool:
+    def _do_fetch(self, statefile: AtomicFile, persdata: Dict[str, Any], logger: Logger) -> bool:
         pass
 
-    def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
+    def fetch(self, statepath: str, update: bool = True, logger: Logger = NoopLogger()) -> bool:
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
             return False

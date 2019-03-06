@@ -16,9 +16,12 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import subprocess
+from typing import List, Optional
+
+from repology.logger import Logger
 
 
-def run_subprocess(command, logger, cwd=None):
+def run_subprocess(command: List[str], logger: Logger, cwd: Optional[str] = None) -> None:
     message = 'running "{}"'.format(' '.join(command))
     if cwd is not None:
         message += ' in "{}"'.format(cwd)
@@ -40,7 +43,7 @@ def run_subprocess(command, logger, cwd=None):
             raise subprocess.CalledProcessError(cmd=command, returncode=proc.returncode)
 
 
-def get_subprocess_output(command, logger, cwd=None):
+def get_subprocess_output(command: List[str], logger: Logger, cwd: Optional[str] = None) -> str:
     message = 'running "{}"'.format(' '.join(command))
     if cwd is not None:
         message += ' in "{}"'.format(cwd)
