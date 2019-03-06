@@ -56,8 +56,8 @@ class FileFetcher(ScratchFileFetcher):
 
         logger.Log('fetching ' + ', with '.join(fetching_what))
 
-        if persdata.get('last-modified'):
-            headers['if-modified-since'] = persdata.get('last-modified')
+        if 'last-modified' in persdata:
+            headers['if-modified-since'] = persdata['last-modified']
             logger.Log('using if-modified-since: {}'.format(headers['if-modified-since']))
 
         try:

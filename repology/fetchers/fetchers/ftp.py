@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import ftplib
-import urllib
+from urllib.parse import urlparse
 
 from repology.atomic_fs import AtomicFile
 from repology.fetchers import PersistentData, ScratchFileFetcher
@@ -27,7 +27,7 @@ class FTPListFetcher(ScratchFileFetcher):
     def __init__(self, url: str, fetch_timeout: int = 60) -> None:
         super(FTPListFetcher, self).__init__()
 
-        self.url = urllib.parse.urlparse(url, scheme='ftp', allow_fragments=False)
+        self.url = urlparse(url, scheme='ftp', allow_fragments=False)
         assert(self.url.scheme == 'ftp')
         self.fetch_timeout = fetch_timeout
 

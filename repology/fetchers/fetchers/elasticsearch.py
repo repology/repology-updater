@@ -76,7 +76,7 @@ class ElasticSearchFetcher(ScratchDirFetcher):
         except requests.exceptions.HTTPError as e:
             # show server reply as it contains the failure cause
             logger.log('request failed, server reply follows:\n' + e.response.text, severity=Logger.ERROR)
-            logger.log(e.response.text, serverity=Logger.ERROR)
+            logger.log(e.response.text, severity=Logger.ERROR)
             raise
 
         return True
