@@ -18,6 +18,7 @@
 import pprint
 import re
 import sys
+from typing import AbstractSet, Iterable, Match, MutableSet, Optional
 
 from libversion import version_compare
 
@@ -29,32 +30,39 @@ DOLLARN = re.compile('\$([0-9])', re.ASCII)
 
 
 class PackageContext:
-    __slots__ = ['flags', 'rulesets']
+    __slots__ = ['_flags', '_rulesets']
 
-    def __init__(self):
-        self.flags = set()
-        self.rulesets = set()
+    _flags: MutableSet[str]
+    _rulesets: MutableSet[str]
 
-    def add_flag(self, name):
-        self.flags.add(name)
+    def __init__(self) -> None:
+        self._flags = set()
+        self._rulesets = set()
 
-    def has_flag(self, name):
-        return name in self.flags
+    def add_flag(self, name: str) -> None:
+        self._flags.add(name)
 
-    def has_flags(self, names):
-        return not self.flags.isdisjoint(names)
+    def has_flag(self, name: str) -> bool:
+        return name in self._flags
 
-    def has_rulesets(self, rulesets):
-        return not self.rulesets.isdisjoint(rulesets)
+    def has_flags(self, names: AbstractSet[str]) -> bool:
+        return not self._flags.isdisjoint(names)
 
-    def set_rulesets(self, rulesets):
-        self.rulesets = set(rulesets)
+    def has_rulesets(self, rulesets: AbstractSet[str]) -> bool:
+        return not self._rulesets.isdisjoint(rulesets)
+
+    def set_rulesets(self, rulesets: Iterable[str]) -> None:
+        self._rulesets = set(rulesets)
 
 
 class MatchContext:
     __slots__ = ['name_match', 'ver_match', 'last']
 
-    def __init__(self):
+    name_match: Optional[Match]
+    ver_match: Optional[Match]
+    last: bool
+
+    def __init__(self) -> None:
         self.name_match = None
         self.ver_match = None
         self.last = False
