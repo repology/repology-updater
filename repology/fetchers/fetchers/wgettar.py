@@ -36,6 +36,8 @@ class WgetTarFetcher(ScratchDirFetcher):
             headers['if-modified-since'] = persdata.get('last-modified')
             logger.Log('using if-modified-since: {}'.format(headers['if-modified-since']))
 
+        logger.Log('fetching {}'.format(self.url))
+
         try:
             with open(tarpath, 'wb') as tarfile:
                 response = save_http_stream(self.url, tarfile, headers=headers, timeout=self.fetch_timeout)
