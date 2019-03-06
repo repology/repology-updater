@@ -19,7 +19,6 @@
 
 import argparse
 import html
-import os
 import sys
 from random import shuffle
 
@@ -106,4 +105,4 @@ def main():
 
 
 if __name__ == '__main__':
-    os.sys.exit(main())
+    sys.exit(main())

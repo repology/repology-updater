@@ -18,7 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-import os
+import sys
 from datetime import date
 
 from voluptuous import Any, MultipleInvalid, Required, Schema, Url
@@ -283,4 +283,4 @@ def main():
 
 
 if __name__ == '__main__':
-    os.sys.exit(main())
+    sys.exit(main())

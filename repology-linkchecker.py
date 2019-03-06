@@ -20,9 +20,9 @@
 import argparse
 import datetime
 import multiprocessing
-import os
 import re
 import socket
+import sys
 import time
 import urllib.parse
 
@@ -251,4 +251,4 @@ def Main():
 
 
 if __name__ == '__main__':
-    os.sys.exit(Main())
+    sys.exit(Main())

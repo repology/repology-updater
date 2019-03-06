@@ -18,7 +18,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
-import os
 import pickle
 import sys
 import time
@@ -190,4 +189,4 @@ def main():
 
 
 if __name__ == '__main__':
-    os.sys.exit(main())
+    sys.exit(main())
