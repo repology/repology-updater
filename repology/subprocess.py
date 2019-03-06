@@ -68,8 +68,3 @@ def get_subprocess_output(command, logger, cwd=None):
             raise subprocess.CalledProcessError(cmd=command, returncode=proc.returncode)
 
     return res
-
-
-# XXX: legacy shim
-def RunSubprocess(command, logger, cwd=None):
-    return run_subprocess(command, logger, cwd)

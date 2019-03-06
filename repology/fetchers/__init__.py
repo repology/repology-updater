@@ -26,7 +26,7 @@ from repology.logger import NoopLogger
 
 class Fetcher(ABC):
     @abstractmethod
-    def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
+    def fetch(self, statepath: str, update: bool = True, logger: Logger = NoopLogger()) -> bool:
         pass
 
 

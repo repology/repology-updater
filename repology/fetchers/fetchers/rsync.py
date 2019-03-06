@@ -19,7 +19,7 @@ import os
 
 from repology.fetchers import Fetcher
 from repology.logger import NoopLogger
-from repology.subprocess import RunSubprocess
+from repology.subprocess import run_subprocess
 
 
 class RsyncFetcher(Fetcher):
@@ -52,6 +52,6 @@ class RsyncFetcher(Fetcher):
         if self.rsync_exclude is not None:
             args += ['--exclude', self.rsync_exclude]
 
-        RunSubprocess(['rsync'] + args + [self.url, statepath], logger)
+        run_subprocess(['rsync'] + args + [self.url, statepath], logger)
 
         return True
