@@ -65,15 +65,15 @@ class ScratchDirFetcher(Fetcher):
         perspath = statepath + '.persdata'
 
         if os.path.exists(perspath):
-            with open(perspath, 'rb') as persfile:
-                persdata = pickle.load(persfile)
+            with open(perspath, 'rb') as rpersfile:
+                persdata = pickle.load(rpersfile)
 
         with AtomicDir(statepath) as statedir:
             have_changes = self._do_fetch(statedir, persdata, logger)
 
             if persdata:
-                with AtomicFile(perspath, 'wb') as persfile:
-                    pickle.dump(persdata, persfile)
+                with AtomicFile(perspath, 'wb') as wpersfile:
+                    pickle.dump(persdata, wpersfile.get_file())
 
             if not have_changes:
                 statedir.cancel()
@@ -101,15 +101,15 @@ class ScratchFileFetcher(Fetcher):
         perspath = statepath + '.persdata'
 
         if os.path.exists(perspath):
-            with open(perspath, 'rb') as persfile:
-                persdata = pickle.load(persfile)
+            with open(perspath, 'rb') as rpersfile:
+                persdata = pickle.load(rpersfile)
 
         with AtomicFile(statepath, **args) as statefile:
             have_changes = self._do_fetch(statefile, persdata, logger)
 
             if persdata:
-                with AtomicFile(perspath, 'wb') as persfile:
-                    pickle.dump(persdata, persfile)
+                with AtomicFile(perspath, 'wb') as wpersfile:
+                    pickle.dump(persdata, wpersfile.get_file())
 
             if not have_changes:
                 statefile.cancel()
