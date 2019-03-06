@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -18,14 +18,16 @@
 import fcntl
 import sys
 import time
+from abc import ABC, abstractmethod
+from typing import ClassVar, List, Tuple
 
 
-class Logger():
-    NOTICE = 1
-    WARNING = 2
-    ERROR = 3
+class Logger(ABC):
+    NOTICE: ClassVar = 1
+    WARNING: ClassVar = 2
+    ERROR: ClassVar = 3
 
-    def log(self, message, severity=NOTICE):
+    def log(self, message: str, severity: int = NOTICE) -> None:
         if severity == Logger.ERROR:
             message = 'ERROR: ' + message
         if severity == Logger.WARNING:
@@ -33,51 +35,57 @@ class Logger():
 
         self._write_log(message, severity)
 
-    def get_prefixed(self, prefix):
+    def get_prefixed(self, prefix: str) -> 'Logger':
         return LoggerProxy(self, prefix=prefix)
 
-    def get_indented(self, indent=1):
+    def get_indented(self, indent: int = 1) -> 'Logger':
         return LoggerProxy(self, indent=indent)
 
-    def _write_log(self, message, severity):
+    @abstractmethod
+    def _write_log(self, message: str, severity: int) -> None:
         pass
 
-    # XXX: compatibility shims
-    def Log(self, message):
-        return self.log(message, severity=Logger.NOTICE)
+    # XXX: compatibility shim
+    def Log(self, message: str) -> None:
+        self.log(message, severity=Logger.NOTICE)
 
 
 class LoggerProxy(Logger):
-    def __init__(self, parent, prefix='', indent=0):
-        if isinstance(parent, LoggerProxy):
-            self.parent = parent.parent
-            self.prefix = parent.prefix + prefix
-            self.indent = parent.indent + indent
-        else:
-            self.parent = parent
-            self.prefix = prefix
-            self.indent = indent
+    _parent: Logger
+    _prefix: str
+    _indent: int
 
-    def _write_log(self, message, severity):
-        self.parent._write_log(self.prefix + '  ' * self.indent + message, severity)
+    def __init__(self, parent: Logger, prefix: str = '', indent: int = 0) -> None:
+        if isinstance(parent, LoggerProxy):
+            self._parent = parent._parent
+            self._prefix = parent._prefix + prefix
+            self._indent = parent._indent + indent
+        else:
+            self._parent = parent
+            self._prefix = prefix
+            self._indent = indent
+
+    def _write_log(self, message: str, severity: int) -> None:
+        self._parent._write_log(self._prefix + '  ' * self._indent + message, severity)
 
 
 class NoopLogger(Logger):
-    pass
+    def _write_log(self, message: str, severity: int) -> None:
+        pass
 
 
 class FileLogger(Logger):
-    def __init__(self, path):
+    def __init__(self, path: str) -> None:
         self.path = path
 
-    def _write_log(self, message, severity):
+    def _write_log(self, message: str, severity: int) -> None:
         with open(self.path, 'a', encoding='utf-8') as logfile:
             fcntl.flock(logfile, fcntl.LOCK_EX)
             print(time.strftime('%b %d %T ') + message, file=logfile)
 
 
 class FastFileLogger(Logger):
-    def __init__(self, path):
+    def __init__(self, path: str) -> None:
         self.path = path
 
     def __enter__(self):
@@ -86,7 +94,7 @@ class FastFileLogger(Logger):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.fd.close()
 
-    def _write_log(self, message, severity):
+    def _write_log(self, message: str, severity: int) -> None:
         print(time.strftime('%b %d %T ') + message, file=self.fd)
 
 
@@ -96,15 +104,15 @@ class StderrLogger(Logger):
 
 
 class AccumulatingLogger(Logger):
-    def __init__(self):
-        self.entries = []
+    def __init__(self) -> None:
+        self.entries: List[Tuple[str, int]] = []
 
-    def _write_log(self, message, severity):
+    def _write_log(self, message: str, severity: int) -> None:
         self.entries.append((message, severity))
 
-    def get(self):
+    def get(self) -> List[Tuple[str, int]]:
         return self.entries
 
-    def forward(self, otherlogger):
+    def forward(self, otherlogger: Logger) -> None:
         for message, severity in self.entries:
             otherlogger.log(message, severity)
