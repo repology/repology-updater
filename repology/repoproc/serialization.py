@@ -68,10 +68,10 @@ class ChunkedSerializer:
 
 
 class StreamDeserializer:
-    def __init__(self, path):
+    def __init__(self, path: str):
         self.path = path
 
-    def __enter__(self):
+    def __enter__(self) -> 'StreamDeserializer':
         self.fd = open(self.path, 'rb')
 
         try:
@@ -89,7 +89,7 @@ class StreamDeserializer:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.fd.close()
 
-    def pop(self):
+    def pop(self) -> Optional[Package]:
         current = self.current
 
         if self.remaining > 0:
@@ -101,10 +101,10 @@ class StreamDeserializer:
 
         return current
 
-    def peek(self):
+    def peek(self) -> Optional[Package]:
         return self.current
 
-    def is_eof(self):
+    def is_eof(self) -> bool:
         return self.remaining == -1
 
 
