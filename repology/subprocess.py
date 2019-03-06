@@ -23,9 +23,7 @@ def run_subprocess(command, logger, cwd=None):
     if cwd is not None:
         message += ' in "{}"'.format(cwd)
 
-    logger.Log(message)
-
-    res = None
+    logger.log(message)
 
     with subprocess.Popen(command,
                           stdout=subprocess.PIPE,
@@ -37,11 +35,9 @@ def run_subprocess(command, logger, cwd=None):
         for line in proc.stdout:
             logger.GetIndented().Log(line.strip())
         proc.wait()
-        logger.Log('command finished with code {}'.format(proc.returncode))
+        logger.log('command finished with code {}'.format(proc.returncode), logger.NOTICE if proc.returncode == 0 else logger.ERROR)
         if proc.returncode != 0:
             raise subprocess.CalledProcessError(cmd=command, returncode=proc.returncode)
-
-    return res
 
 
 def get_subprocess_output(command, logger, cwd=None):
@@ -49,7 +45,7 @@ def get_subprocess_output(command, logger, cwd=None):
     if cwd is not None:
         message += ' in "{}"'.format(cwd)
 
-    logger.Log(message)
+    logger.log(message)
 
     res = ''
 
@@ -63,7 +59,7 @@ def get_subprocess_output(command, logger, cwd=None):
         for line in proc.stdout:
             res += line
         proc.wait()
-        logger.Log('command finished with code {}'.format(proc.returncode))
+        logger.log('command finished with code {}'.format(proc.returncode), logger.NOTICE if proc.returncode == 0 else logger.ERROR)
         if proc.returncode != 0:
             raise subprocess.CalledProcessError(cmd=command, returncode=proc.returncode)
 
