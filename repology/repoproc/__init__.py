@@ -26,7 +26,7 @@ from repology.package import Package, PackageFlags
 from repology.packagemaker import PackageFactory
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Parser
-from repology.repoproc.serialization import heap_deserializer, serialize
+from repology.repoproc.serialization import ChunkedSerializer, heap_deserializer
 
 
 MAX_PACKAGES_PER_CHUNK = 10240
@@ -174,33 +174,15 @@ class RepositoryProcessor:
         if not os.path.isdir(self.parseddir):
             os.mkdir(self.parseddir)
 
-        packages: List[Package] = []
-        chunknum: int = 0
-        num_packages: int = 0
-
-        def flush_packages():
-            nonlocal packages, chunknum
-
-            if packages:
-                packages = sorted(packages, key=lambda package: package.effname)
-                serialize(packages, os.path.join(state_dir, str(chunknum)))
-                packages = []
-                chunknum += 1
-
         with AtomicDir(self._get_parsed_path(repository)) as state_dir:
-            for package in self._iter_parse_all_sources(repository, transformer, logger):
-                packages.append(package)
-                num_packages += 1
+            serializer = ChunkedSerializer(state_dir, MAX_PACKAGES_PER_CHUNK)
 
-                if len(packages) >= MAX_PACKAGES_PER_CHUNK:
-                    flush_packages()
+            serializer.serialize(self._iter_parse_all_sources(repository, transformer, logger))
 
-            flush_packages()
+            if self.safety_checks and serializer.get_num_packages() < repository['minpackages']:
+                raise TooLittlePackages(serializer.get_num_packages(), repository['minpackages'])
 
-            if self.safety_checks and num_packages < repository['minpackages']:
-                raise TooLittlePackages(num_packages, repository['minpackages'])
-
-        logger.log('parsing complete, {} packages'.format(num_packages))
+        logger.log('parsing complete, {} packages'.format(serializer.get_num_packages()))
 
     # public methods
     def fetch(self, reponames, update=True, logger=NoopLogger()) -> bool:

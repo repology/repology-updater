@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,17 +15,56 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import pickle
 from contextlib import ExitStack, contextmanager
+from typing import Iterable, List, Optional
+
+from repology.package import Package
 
 
-def serialize(objects, path):
-    with open(path, 'wb') as outfile:
-        pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
-        pickler.fast = True  # deprecated, but I don't see any alternatives
-        pickler.dump(len(objects))
-        for obj in objects:
-            pickler.dump(obj)
+class ChunkedSerializer:
+    path: str
+    next_chunk_number: int
+    chunk_size: int
+    packages: List[Package]
+    total_packages: int
+
+    def __init__(self, path: str, chunk_size: int) -> None:
+        self.path = path
+        self.next_chunk_number = 0
+        self.chunk_size = chunk_size
+        self.packages = []
+        self.total_packages = 0
+
+    def _flush(self) -> None:
+        if not self.packages:
+            return
+
+        packages = sorted(self.packages, key=lambda package: package.effname)
+
+        with open(os.path.join(self.path, str(self.next_chunk_number)), 'wb') as outfile:
+            pickler = pickle.Pickler(outfile, protocol=pickle.HIGHEST_PROTOCOL)
+            pickler.fast = True  # deprecated, but I don't see any alternatives
+            pickler.dump(len(packages))
+            for package in packages:
+                pickler.dump(package)
+
+        self.packages = []
+        self.next_chunk_number += 1
+
+    def serialize(self, packages: Iterable[Package]) -> None:
+        for package in packages:
+            self.packages.append(package)
+            self.total_packages += 1
+
+            if len(self.packages) >= self.chunk_size:
+                self._flush()
+
+        self._flush()
+
+    def get_num_packages(self) -> int:
+        return self.total_packages
 
 
 class StreamDeserializer:
