@@ -103,7 +103,7 @@ def process_repositories(env):
             database.update_repository_ruleset_hash(reponame, None)
             database.commit()
 
-            have_changes = True
+            have_changes = False
 
             try:
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'fetch') as runlogger:
