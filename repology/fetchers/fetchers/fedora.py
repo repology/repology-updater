@@ -32,16 +32,16 @@ class FedoraFetcher(ScratchDirFetcher):
     def _load_spec(self, package: str, statedir: AtomicDir, logger: Logger) -> None:
         specurl = self.giturl + '/{0}.git/plain/{0}.spec'.format(package)
 
-        logger.GetIndented().Log('getting spec from {}'.format(specurl))
+        logger.get_indented().log('getting spec from {}'.format(specurl))
 
         r = do_http(specurl, check_status=False)
         if r.status_code != 200:
             deadurl = self.giturl + '/{0}.git/plain/dead.package'.format(package)
             dr = do_http(deadurl, check_status=False)
             if dr.status_code == 200:
-                logger.GetIndented(2).Log('dead: ' + ';'.join(dr.text.split('\n')))
+                logger.get_indented(2).log('dead: ' + ';'.join(dr.text.split('\n')))
             else:
-                logger.GetIndented(2).Log('failed: {}'.format(r.status_code))  # XXX: check .dead.package, instead throw
+                logger.get_indented(2).log('failed: {}'.format(r.status_code))  # XXX: check .dead.package, instead throw
             return
 
         with open(os.path.join(statedir.get_path(), package + '.spec'), 'wb') as file:
@@ -52,7 +52,7 @@ class FedoraFetcher(ScratchDirFetcher):
 
         while True:
             pageurl = self.apiurl + 'packages/?page={}'.format(page)
-            logger.Log('getting page {} from {}'.format(page, pageurl))
+            logger.log('getting page {} from {}'.format(page, pageurl))
             pagedata = json.loads(do_http(pageurl).text)
 
             for package in pagedata['packages']:

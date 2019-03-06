@@ -36,7 +36,7 @@ def run_subprocess(command: List[str], logger: Logger, cwd: Optional[str] = None
                           errors='ignore',
                           cwd=cwd) as proc:
         for line in proc.stdout:
-            logger.GetIndented().Log(line.strip())
+            logger.get_indented().log(line.strip())
         proc.wait()
         logger.log('command finished with code {}'.format(proc.returncode), logger.NOTICE if proc.returncode == 0 else logger.ERROR)
         if proc.returncode != 0:

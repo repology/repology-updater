@@ -92,7 +92,7 @@ class RepositoryProcessor:
         ).fetch(
             self._get_state_source_path(repository, source),
             update=update,
-            logger=logger.GetIndented()
+            logger=logger.get_indented()
         )
 
         logger.log('fetching source {} complete'.format(source['name']) + ('' if have_changes else ' (no changes)'))
@@ -155,7 +155,7 @@ class RepositoryProcessor:
     def _iter_parse_all_sources(self, repository: Repository, transformer: Optional[PackageTransformer], logger: Logger) -> Iterator[Package]:
         for source in repository['sources']:
             logger.log('parsing source {} started'.format(source['name']))
-            yield from self._iter_parse_source(repository, source, transformer, logger.GetIndented())
+            yield from self._iter_parse_source(repository, source, transformer, logger.get_indented())
             logger.log('parsing source {} complete'.format(source['name']))
 
     # repository level private methods
@@ -169,7 +169,7 @@ class RepositoryProcessor:
         for source in repository['sources']:
             if not os.path.isdir(self._get_state_path(repository)):
                 os.mkdir(self._get_state_path(repository))
-            have_changes |= self._fetch_source(repository, update, source, logger.GetIndented())
+            have_changes |= self._fetch_source(repository, update, source, logger.get_indented())
 
         logger.log('fetching complete' + ('' if have_changes else ' (no changes)'))
 

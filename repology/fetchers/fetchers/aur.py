@@ -51,7 +51,7 @@ class AURFetcher(ScratchDirFetcher):
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         packages_url = self.url + 'packages.gz'
-        logger.GetIndented().Log('fetching package list from ' + packages_url)
+        logger.get_indented().log('fetching package list from ' + packages_url)
         data = self.do_http(packages_url).text  # autogunzipped?
 
         package_names = []
@@ -65,10 +65,10 @@ class AURFetcher(ScratchDirFetcher):
         if not package_names:
             raise RuntimeError('Empty package list received, refusing to continue')
 
-        logger.GetIndented().Log('{} package name(s) parsed'.format(len(package_names)))
+        logger.get_indented().log('{} package name(s) parsed'.format(len(package_names)))
 
         for num_page, (url, num_packages) in enumerate(_split_names_into_urls(self.url + '/rpc/?v=5&type=info', package_names, self.max_api_url_length)):
-            logger.GetIndented().Log('fetching page {} of {} package(s)'.format(num_page + 1, num_packages))
+            logger.get_indented().log('fetching page {} of {} package(s)'.format(num_page + 1, num_packages))
 
             with open(os.path.join(statedir.get_path(), '{}.json'.format(num_page)), 'wb') as statefile:
                 statefile.write(self.do_http(url).content)
