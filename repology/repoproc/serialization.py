@@ -18,7 +18,7 @@
 import os
 import pickle
 from contextlib import ExitStack, contextmanager
-from typing import Iterable, List, Optional
+from typing import BinaryIO, Iterable, List, Optional
 
 from repology.package import Package
 
@@ -68,44 +68,50 @@ class ChunkedSerializer:
 
 
 class StreamDeserializer:
+    _path: str
+    _fd: BinaryIO
+    _unpickler: pickle.Unpickler
+    _remaining: int
+    _current: Optional[Package]
+
     def __init__(self, path: str):
-        self.path = path
+        self._path = path
 
     def __enter__(self) -> 'StreamDeserializer':
-        self.fd = open(self.path, 'rb')
+        self._fd = open(self._path, 'rb')
 
         try:
-            self.unpickler = pickle.Unpickler(self.fd)
-            self.remaining = self.unpickler.load()
-            self.current = None
+            self._unpickler = pickle.Unpickler(self._fd)
+            self._remaining = self._unpickler.load()
+            self._current = None
 
             self.pop()
 
             return self
         except:
-            self.fd.close()
+            self._fd.close()
             raise
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.fd.close()
 
     def pop(self) -> Optional[Package]:
-        current = self.current
+        current = self._current
 
-        if self.remaining > 0:
-            self.current = self.unpickler.load()
-            self.remaining -= 1
+        if self._remaining > 0:
+            self._current = self._unpickler.load()
+            self._remaining -= 1
         else:
-            self.current = None
-            self.remaining = -1
+            self._current = None
+            self._remaining = -1
 
         return current
 
     def peek(self) -> Optional[Package]:
-        return self.current
+        return self._current
 
     def is_eof(self) -> bool:
-        return self.remaining == -1
+        return self._remaining == -1
 
 
 @contextmanager
