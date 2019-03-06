@@ -40,10 +40,9 @@ flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test
 
 mypy:
-	${MYPY} --ignore-missing-imports repology
+	${MYPY} --ignore-missing-imports *.py repology repologyapp
 	${MYPY} --ignore-missing-imports repology/fetchers/fetchers
 	${MYPY} --ignore-missing-imports repology/parsers/parsers
-	${MYPY} --ignore-missing-imports repologyapp
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")
