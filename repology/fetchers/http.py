@@ -22,7 +22,7 @@ import lzma
 import tempfile
 import time
 from json import dumps
-from typing import Any, Callable, Dict, IO, Optional
+from typing import Any, Callable, Dict, IO, Optional, Union
 
 import requests
 
@@ -50,9 +50,9 @@ def do_http(url: str,
             method: Optional[str] = None,
             check_status: bool = True,
             timeout: Optional[int] = 5,
-            data: Any[str, bytes, None] = None,
+            data: Union[str, bytes, None] = None,
             json: Any = None,
-            post: Any[str, bytes, None] = None,  # XXX: compatibility shim
+            post: Union[str, bytes, None] = None,  # XXX: compatibility shim
             headers: Optional[Dict[str, str]] = None,
             stream: bool = False) -> requests.Response:
     headers = headers.copy() if headers else {}
@@ -103,13 +103,13 @@ def save_http_stream(url: str, outfile: IO, compression: Optional[str] = None, *
         return response
 
     # choose decompressor
-    decompressor_module: Any[gzip, lzma, bz2]
+    decompressor_open: Callable[..., IO]
     if compression == 'gz':
-        decompressor_module = gzip
+        decompressor_open = gzip.open
     elif compression == 'xz':
-        decompressor_module = lzma
+        decompressor_open = lzma.open
     elif compression == 'bz2':
-        decompressor_module = bz2
+        decompressor_open = bz2.open
     else:
         raise ValueError('Unsupported compression {}'.format(compression))
 
@@ -120,7 +120,7 @@ def save_http_stream(url: str, outfile: IO, compression: Optional[str] = None, *
 
         temp.seek(0)
 
-        with decompressor_module.open(temp) as decompressor:
+        with decompressor_open(temp) as decompressor:
             while True:
                 chunk = decompressor.read(STREAM_CHUNK_SIZE)
                 if not chunk:

@@ -17,7 +17,7 @@
 
 import os
 import time
-from typing import Any, Dict, Optional
+from typing import Dict, Optional, Union
 
 from repology.atomic_fs import AtomicFile
 from repology.fetchers import PersistentData, ScratchFileFetcher
@@ -26,7 +26,13 @@ from repology.logger import Logger
 
 
 class FileFetcher(ScratchFileFetcher):
-    def __init__(self, url: str, compression: Optional[str] = None, post: Optional[Any[str, bytes]] = None, headers: Optional[Dict[str, str]] = None, nocache: bool = False, fetch_timeout: Optional[int] = 60) -> None:
+    def __init__(self,
+                 url: str,
+                 compression: Optional[str] = None,
+                 post: Optional[Union[str, bytes]] = None,
+                 headers: Optional[Dict[str, str]] = None,
+                 nocache: bool = False,
+                 fetch_timeout: Optional[int] = 60) -> None:
         super(FileFetcher, self).__init__(binary=True)
 
         self.url = url
