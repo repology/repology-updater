@@ -108,7 +108,7 @@ def GetLinkStatuses(urls, delay, timeout):
 
 
 def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
-    logger = logger.GetPrefixed('worker{}: '.format(workerid))
+    logger = logger.get_prefixed('worker{}: '.format(workerid))
 
     logger.Log('Worker spawned')
 
@@ -133,7 +133,7 @@ def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
 def LinkUpdatingWorker(queue, options, querymgr, logger):
     database = Database(options.dsn, querymgr, readonly=False, application_name='repology-linkchecker/writer')
 
-    logger = logger.GetPrefixed('writer: ')
+    logger = logger.get_prefixed('writer: ')
 
     logger.Log('Writer spawned')
 
@@ -190,7 +190,7 @@ def main() -> int:
         process.start()
 
     # base logger already passed to workers, may append prefix here
-    logger = logger.GetPrefixed('master: ')
+    logger = logger.get_prefixed('master: ')
 
     prev_url = None
     while True:

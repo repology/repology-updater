@@ -46,12 +46,6 @@ class Logger():
     def Log(self, message):
         return self.log(message, severity=Logger.NOTICE)
 
-    def GetPrefixed(self, *args, **kwargs):
-        return self.get_prefixed(*args, **kwargs)
-
-    def GetIndented(self, *args, **kwargs):
-        return self.get_indented(*args, **kwargs)
-
 
 class LoggerProxy(Logger):
     def __init__(self, parent, prefix='', indent=0):
