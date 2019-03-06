@@ -49,7 +49,7 @@ class RepodataFetcher(ScratchFileFetcher):
             return False
 
         if repomd_elt_primary_location is None:
-            raise RuntimeError('Cannot find primary data location in repomd.xml')
+            raise RuntimeError('Cannot find <location> element in repomd.xml')
 
         repodata_url = self.url + repomd_elt_primary_location.attrib['href']
 
