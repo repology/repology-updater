@@ -42,9 +42,9 @@ class PersistentDirFetcher(Fetcher):
     def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
         if not os.path.isdir(statepath):
             with AtomicDir(statepath) as statedir:
-                return self._do_fetch(statedir, logger)
+                return self._do_fetch(statedir.get_path(), logger)
         elif update:
-            return self._do_update(statepath, logger)
+            return self._do_update(statedir.get_path(), logger)
         else:
             logger.Log('no update requested, skipping')
             return False
@@ -105,7 +105,7 @@ class ScratchFileFetcher(Fetcher):
                 persdata = pickle.load(rpersfile)
 
         with AtomicFile(statepath, **args) as statefile:
-            have_changes = self._do_fetch(statefile, persdata, logger)
+            have_changes = self._do_fetch(statefile.get_file(), persdata, logger)
 
             if persdata:
                 with AtomicFile(perspath, 'wb') as wpersfile:

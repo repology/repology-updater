@@ -67,7 +67,7 @@ class FreshcodeFetcher(Fetcher):
                 state[entry['name']] = entry
 
         with AtomicFile(statepath, 'w', encoding='utf-8') as statefile:
-            json.dump(state, statefile)
+            json.dump(state, statefile.get_file())
 
         logger.Log('saved new state, {} entries'.format(len(state)))
 

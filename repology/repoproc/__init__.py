@@ -175,7 +175,7 @@ class RepositoryProcessor:
             os.mkdir(self.parseddir)
 
         with AtomicDir(self._get_parsed_path(repository)) as state_dir:
-            serializer = ChunkedSerializer(state_dir, MAX_PACKAGES_PER_CHUNK)
+            serializer = ChunkedSerializer(state_dir.get_path(), MAX_PACKAGES_PER_CHUNK)
 
             serializer.serialize(self._iter_parse_all_sources(repository, transformer, logger))
 

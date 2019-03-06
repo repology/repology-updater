@@ -17,31 +17,31 @@
 
 import os
 import shutil
-from abc import ABC, abstractmethod
+from typing import IO
 
 
 __all__ = ['AtomicDir', 'AtomicFile']
 
 
-class _AtomicFSObject(ABC):
-    def __init__(self, path):
+class _AtomicFSObject:
+    def __init__(self, path) -> None:
         self.path = path
         self.canceled = False
 
-    def _get_new_path(self):
+    def _get_new_path(self) -> str:
         return self.path + '.new'
 
-    def _get_old_path(self):
+    def _get_old_path(self) -> str:
         return self.path + '.old'
 
-    def _cleanup(self):
+    def _cleanup(self) -> None:
         for path in [self._get_new_path(), self._get_old_path()]:
             if os.path.isdir(path):
                 shutil.rmtree(path)
             elif os.path.exists(path):
                 os.remove(path)
 
-    def _replace(self):
+    def _replace(self) -> None:
         if not os.path.exists(self._get_new_path()):
             raise RuntimeError('no now state')
 
@@ -51,54 +51,47 @@ class _AtomicFSObject(ABC):
 
         os.rename(self._get_new_path(), self.path)
 
-    def cancel(self):
+    def get_path(self) -> str:
+        return self._get_new_path()
+
+    def cancel(self) -> None:
         self.canceled = True
 
-    @abstractmethod
-    def _open(self):
-        pass
 
-    def _close(self):
-        pass
+class AtomicDir(_AtomicFSObject):
+    def __init__(self, path) -> None:
+        super(AtomicDir, self).__init__(path)
 
-    def __enter__(self):
+    def __enter__(self) -> 'AtomicDir':
         self._cleanup()
-
-        return self._open()
+        os.mkdir(self._get_new_path())
+        return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._close()
-
         if not exc_type and not self.canceled:
             self._replace()
 
         self._cleanup()
 
 
-class AtomicDir(_AtomicFSObject):
-    def __init__(self, path):
-        super(AtomicDir, self).__init__(path)
-
-    def _open(self):
-        os.mkdir(self._get_new_path())
-
-        class _StrWrapper(str):
-            def cancel(self_):
-                self.cancel()
-
-        return _StrWrapper(self._get_new_path())
-
-
 class AtomicFile(_AtomicFSObject):
-    def __init__(self, path, *args, **kwargs):
+    def __init__(self, path, *args, **kwargs) -> None:
         super(AtomicFile, self).__init__(path)
         self.args = args
         self.kwargs = kwargs
 
-    def _open(self):
+    def __enter__(self) -> 'AtomicFile':
+        self._cleanup()
         self.file = open(self._get_new_path(), *self.args, **self.kwargs)
-        self.file.cancel = self.cancel
-        return self.file
+        return self
 
-    def _close(self):
+    def __exit__(self, exc_type, exc_value, traceback):
         self.file.close()
+
+        if not exc_type and not self.canceled:
+            self._replace()
+
+        self._cleanup()
+
+    def get_file(self) -> IO:
+        return self.file
