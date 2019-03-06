@@ -32,19 +32,19 @@ class Fetcher(ABC):
 
 class PersistentDirFetcher(Fetcher):
     @abstractmethod
-    def _do_fetch(self, statedir: AtomicDir, logger) -> bool:
+    def _do_fetch(self, statepath: str, logger) -> bool:
         pass
 
     @abstractmethod
-    def _do_update(self, statedir: AtomicDir, logger) -> bool:
+    def _do_update(self, statepath: str, logger) -> bool:
         pass
 
     def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
         if not os.path.isdir(statepath):
             with AtomicDir(statepath) as statedir:
-                return self._do_fetch(statedir, logger)
+                return self._do_fetch(statedir.get_path(), logger)
         elif update:
-            return self._do_update(statedir, logger)
+            return self._do_update(statepath, logger)
         else:
             logger.Log('no update requested, skipping')
             return False

@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from repology.atomic_fs import AtomicDir
 from repology.fetchers import PersistentDirFetcher
 from repology.subprocess import get_subprocess_output, run_subprocess
 
@@ -25,17 +24,17 @@ class SVNFetcher(PersistentDirFetcher):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def _do_fetch(self, statedir: AtomicDir, logger) -> bool:
-        run_subprocess(['timeout', str(self.fetch_timeout), 'svn', 'checkout', self.url, statedir.get_path()], logger=logger)
+    def _do_fetch(self, statepath: str, logger) -> bool:
+        run_subprocess(['timeout', str(self.fetch_timeout), 'svn', 'checkout', self.url, statepath], logger=logger)
 
         return True
 
-    def _do_update(self, statedir: AtomicDir, logger) -> bool:
-        old_rev = get_subprocess_output(['svn', 'info', '--show-item', 'revision', statedir.get_path()], logger=logger).strip()
+    def _do_update(self, statepath: str, logger) -> bool:
+        old_rev = get_subprocess_output(['svn', 'info', '--show-item', 'revision', statepath], logger=logger).strip()
 
-        run_subprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statedir.get_path()], logger=logger)
+        run_subprocess(['timeout', str(self.fetch_timeout), 'svn', 'up', statepath], logger=logger)
 
-        new_rev = get_subprocess_output(['svn', 'info', '--show-item', 'revision', statedir.get_path()], logger=logger).strip()
+        new_rev = get_subprocess_output(['svn', 'info', '--show-item', 'revision', statepath], logger=logger).strip()
 
         if new_rev == old_rev:
             logger.log('Revision has not changed: {}'.format(new_rev))
