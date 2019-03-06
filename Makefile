@@ -13,7 +13,7 @@ MYPY_ARGS+=	--disallow-incomplete-defs
 MYPY_ARGS+=	--no-implicit-optional
 MYPY_ARGS+=	--warn-redundant-casts
 MYPY_ARGS+=	--warn-unused-ignores
-#MYPY_ARGS+=	--warn-return-any
+MYPY_ARGS+=	--warn-return-any
 
 MYPY_ARGS+=	--ignore-missing-imports
 
