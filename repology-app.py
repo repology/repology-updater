@@ -26,7 +26,7 @@ from repology.config import config
 
 if __name__ == '__main__':
     if config['PROFILE']:
-        app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])
+        app.wsgi_app = ProfilerMiddleware(app.wsgi_app, restrictions=[30])  # type: ignore
         app.run(debug=True)
     else:
         app.run()
