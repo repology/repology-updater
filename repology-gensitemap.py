@@ -52,8 +52,8 @@ def main() -> int:
     if options.main:
         urls = ['/', '/news', '/statistics', '/about', '/api/v1', '/repositories/']
 
-        urls.extend(map(lambda name: '/maintainer/' + name, database.get_all_maintainer_names()))
-        urls.extend(map(lambda name: '/repository/' + name, database.get_all_repository_names()))
+        urls.extend(('/maintainer/' + name for name in database.get_all_maintainer_names()))
+        urls.extend(('/repository/' + name for name in database.get_all_repository_names()))
     elif options.metapackages:
         links_per_metapackage = 3
 

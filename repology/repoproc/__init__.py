@@ -87,9 +87,12 @@ class RepositoryProcessor:
 
         logger.log('fetching source {} started'.format(source['name']))
 
-        have_changes = self.fetcher_factory.SpawnWithKnownArgs(
-            source['fetcher'], source
-        ).fetch(
+        fetcher: Fetcher = self.fetcher_factory.SpawnWithKnownArgs(
+            source['fetcher'],
+            source
+        )
+
+        have_changes = fetcher.fetch(
             self._get_state_source_path(repository, source),
             update=update,
             logger=logger.get_indented()
