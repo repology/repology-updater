@@ -26,7 +26,7 @@ from repology.package import Package, PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Parser
-from repology.repoman import RepositoryManager
+from repology.repomgr import RepositoryManager
 from repology.repoproc.serialization import ChunkedSerializer, heap_deserializer
 from repology.transformer import PackageTransformer
 
