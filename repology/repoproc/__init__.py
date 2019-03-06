@@ -93,7 +93,7 @@ class RepositoryProcessor:
         return have_changes
 
     def _iter_parse_source(self, repository, source, transformer, logger) -> Iterator[Package]:
-        def postprocess_parsed_packages(packages_iter):
+        def postprocess_parsed_packages(packages_iter) -> Iterator[Package]:
             for package in packages_iter:
                 # unwrap packagemaker
                 if not package.check_sanity(verbose=True):

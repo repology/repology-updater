@@ -172,15 +172,15 @@ def ParseArguments():
     return parser.parse_args()
 
 
-def Main():
+def main() -> int:
     options = ParseArguments()
 
     logger = FileLogger(options.logfile) if options.logfile else StderrLogger()
     querymgr = QueryManager(options.sql_dir)
     database = Database(options.dsn, querymgr, readonly=True, autocommit=True, application_name='repology-linkchecker/reader')
 
-    readqueue = multiprocessing.Queue(10)
-    writequeue = multiprocessing.Queue(10)
+    readqueue: multiprocessing.Queue = multiprocessing.Queue(10)
+    writequeue: multiprocessing.Queue = multiprocessing.Queue(10)
 
     writer = multiprocessing.Process(target=LinkUpdatingWorker, args=(writequeue, options, querymgr, logger))
     writer.start()
@@ -196,7 +196,7 @@ def Main():
     while True:
         # Get pack of links
         logger.Log('Requesting pack of urls')
-        urls = database.get_links_for_check(
+        urls = database.get_links_for_check(  # type: ignore
             after=prev_url,
             prefix=options.prefix,  # no limit by default
             limit=options.packsize,
@@ -214,7 +214,7 @@ def Main():
         # that all urls for one hostname get into a same large pack
         match = re.match('([a-z]+://[^/]+/)', urls[-1])
         if match:
-            urls += database.get_links_for_check(
+            urls += database.get_links_for_check(  # type: ignore
                 after=urls[-1],
                 prefix=match.group(1),
                 recheck_age=datetime.timedelta(seconds=options.age * 60 * 60 * 24),
@@ -251,4 +251,4 @@ def Main():
 
 
 if __name__ == '__main__':
-    sys.exit(Main())
+    sys.exit(main())

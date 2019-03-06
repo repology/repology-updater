@@ -22,7 +22,7 @@ import lzma
 import tempfile
 import time
 from json import dumps
-from typing import Any
+from typing import Any, Callable
 
 import requests
 
@@ -47,7 +47,7 @@ class PoliteHTTP:
 
 
 # XXX: post argument is a compatibility shim
-def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None, post=None, headers=None, stream=False):
+def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None, post=None, headers=None, stream=False) -> requests.Response:
     headers = headers.copy() if headers else {}
     headers['User-Agent'] = USER_AGENT
 
@@ -56,7 +56,7 @@ def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None
     if json and not data:
         data = dumps(json)
 
-    request = requests.get
+    request: Callable[..., requests.Response] = requests.get
 
     if method == 'POST' or (method is None and data):
         request = requests.post

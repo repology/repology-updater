@@ -267,7 +267,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def main():
+def main() -> int:
     options = parse_arguments()
 
     errors = 0

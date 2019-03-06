@@ -21,7 +21,7 @@ import argparse
 import sys
 
 from repology.config import config
-from repology.logger import FileLogger, StderrLogger
+from repology.logger import FileLogger, Logger, StderrLogger
 from repology.package import Package, VersionClass
 from repology.packageproc import FillPackagesetVersions
 from repology.repomgr import RepositoryManager
@@ -61,10 +61,10 @@ def packageset_is_shadow_only(packages):
     return True
 
 
-def main():
+def main() -> int:
     options = parse_arguments()
 
-    logger = StderrLogger()
+    logger: Logger = StderrLogger()
     if options.logfile:
         logger = FileLogger(options.logfile)
 

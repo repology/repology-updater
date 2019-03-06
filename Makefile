@@ -1,6 +1,24 @@
 FLAKE8?=	flake8
 MYPY?=		mypy
 
+# Everything from --strict
+MYPY_ARGS+=	--warn-unused-configs
+MYPY_ARGS+=	--disallow-subclassing-any
+#MYPY_ARGS+=	--disallow-any-generics
+#MYPY_ARGS+=	--disallow-untyped-calls
+#MYPY_ARGS+=	--disallow-untyped-defs
+#MYPY_ARGS+=	--disallow-incomplete-defs
+#MYPY_ARGS+=	--check-untyped-defs
+#MYPY_ARGS+=	--disallow-untyped-defs
+#MYPY_ARGS+=	--check-untyped-defs
+#MYPY_ARGS+=	--disallow-untyped-decorators
+#MYPY_ARGS+=	--no-implicit-optional
+MYPY_ARGS+=	--warn-redundant-casts
+MYPY_ARGS+=	--warn-unused-ignores
+#MYPY_ARGS+=	--warn-return-any
+
+MYPY_ARGS+=	--ignore-missing-imports
+
 STATICDIR=	repologyapp/static
 
 all: gzip-static
@@ -40,9 +58,9 @@ flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test
 
 mypy:
-	${MYPY} --ignore-missing-imports *.py repology repologyapp
-	${MYPY} --ignore-missing-imports repology/fetchers/fetchers
-	${MYPY} --ignore-missing-imports repology/parsers/parsers
+	${MYPY} ${MYPY_ARGS} *.py repology repologyapp
+	${MYPY} ${MYPY_ARGS} repology/fetchers/fetchers
+	${MYPY} ${MYPY_ARGS} repology/parsers/parsers
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")

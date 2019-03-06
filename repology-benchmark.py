@@ -21,6 +21,7 @@ import argparse
 import pickle
 import sys
 import time
+from typing import Dict
 
 from repology.config import config
 from repology.database import Database
@@ -142,13 +143,13 @@ def check_keywords(name, keywords):
     return False
 
 
-def main():
+def main() -> int:
     options = parse_arguments()
 
     querymgr = QueryManager(options.sql_dir)
     database = Database(options.dsn, querymgr, readonly=True, application_name='repology-benchmark')
 
-    reference = {}
+    reference: Dict[str, float] = {}
     if options.load:
         try:
             with open(options.load, 'rb') as reffile:

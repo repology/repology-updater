@@ -24,7 +24,7 @@ __all__ = ['AtomicDir', 'AtomicFile']
 
 
 class _AtomicFSObject:
-    def __init__(self, path) -> None:
+    def __init__(self, path: str) -> None:
         self.path = path
         self.canceled = False
 
@@ -59,7 +59,7 @@ class _AtomicFSObject:
 
 
 class AtomicDir(_AtomicFSObject):
-    def __init__(self, path) -> None:
+    def __init__(self, path: str) -> None:
         super(AtomicDir, self).__init__(path)
 
     def __enter__(self) -> 'AtomicDir':
@@ -75,7 +75,7 @@ class AtomicDir(_AtomicFSObject):
 
 
 class AtomicFile(_AtomicFSObject):
-    def __init__(self, path, *args, **kwargs) -> None:
+    def __init__(self, path: str, *args, **kwargs) -> None:
         super(AtomicFile, self).__init__(path)
         self.args = args
         self.kwargs = kwargs
