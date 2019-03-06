@@ -17,14 +17,16 @@
 
 import os
 import time
+from typing import Any, Dict, Optional
 
 from repology.atomic_fs import AtomicFile
-from repology.fetchers import ScratchFileFetcher
+from repology.fetchers import PersistentData, ScratchFileFetcher
 from repology.fetchers.http import NotModifiedException, save_http_stream
+from repology.logger import Logger
 
 
 class FileFetcher(ScratchFileFetcher):
-    def __init__(self, url, compression=None, post=None, headers=None, nocache=False, fetch_timeout=60):
+    def __init__(self, url: str, compression: Optional[str] = None, post: Optional[Any[str, bytes]] = None, headers: Optional[Dict[str, str]] = None, nocache: bool = False, fetch_timeout: Optional[int] = 60) -> None:
         super(FileFetcher, self).__init__(binary=True)
 
         self.url = url
@@ -40,7 +42,7 @@ class FileFetcher(ScratchFileFetcher):
             else:
                 self.url += '?nocache=' + str(int(time.time()))
 
-    def _do_fetch(self, statefile: AtomicFile, persdata, logger) -> bool:
+    def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
         fetching_what = [self.url]
         headers = self.headers.copy() if self.headers else {}
 

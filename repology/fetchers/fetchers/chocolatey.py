@@ -19,8 +19,9 @@ import os
 import xml.etree.ElementTree
 
 from repology.atomic_fs import AtomicDir
-from repology.fetchers import ScratchDirFetcher
+from repology.fetchers import PersistentData, ScratchDirFetcher
 from repology.fetchers.http import PoliteHTTP
+from repology.logger import Logger
 
 
 class ChocolateyFetcher(ScratchDirFetcher):
@@ -28,7 +29,7 @@ class ChocolateyFetcher(ScratchDirFetcher):
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         numpage = 0
         nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
         while True:

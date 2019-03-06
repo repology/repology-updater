@@ -24,14 +24,14 @@ from libversion import version_compare
 from repology.atomic_fs import AtomicFile
 from repology.fetchers import Fetcher
 from repology.fetchers.http import do_http
-from repology.logger import NoopLogger
+from repology.logger import Logger, NoopLogger
 
 
 class FreshcodeFetcher(Fetcher):
     def __init__(self, url):
         self.url = url
 
-    def fetch(self, statepath, update=True, logger=NoopLogger()) -> bool:
+    def fetch(self, statepath: str, update: bool = True, logger: Logger = NoopLogger()) -> bool:
         if os.path.isfile(statepath) and not update:
             logger.Log('no update requested, skipping')
             return False

@@ -18,8 +18,9 @@
 import os
 
 from repology.atomic_fs import AtomicDir
-from repology.fetchers import ScratchDirFetcher
+from repology.fetchers import PersistentData, ScratchDirFetcher
 from repology.fetchers.http import NotModifiedException, save_http_stream
+from repology.logger import Logger
 from repology.subprocess import run_subprocess
 
 
@@ -28,7 +29,7 @@ class TarFetcher(ScratchDirFetcher):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         tarpath = os.path.join(statedir.get_path(), '.temporary.tar')
 
         headers = {}

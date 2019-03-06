@@ -22,7 +22,7 @@ import lzma
 import tempfile
 import time
 from json import dumps
-from typing import Any, Callable
+from typing import Any, Callable, Dict, IO, Optional
 
 import requests
 
@@ -33,12 +33,12 @@ STREAM_CHUNK_SIZE = 10240
 
 
 class PoliteHTTP:
-    def __init__(self, timeout=5, delay=None):
+    def __init__(self, timeout: int = 5, delay: Optional[int] = None):
         self.do_http = functools.partial(do_http, timeout=timeout)
         self.delay = delay
         self.had_requests = False
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self, *args: Any, **kwargs: Any) -> requests.Response:
         if self.had_requests and self.delay:
             time.sleep(self.delay)
 
@@ -46,8 +46,15 @@ class PoliteHTTP:
         return self.do_http(*args, **kwargs)
 
 
-# XXX: post argument is a compatibility shim
-def do_http(url, method=None, check_status=True, timeout=5, data=None, json=None, post=None, headers=None, stream=False) -> requests.Response:
+def do_http(url: str,
+            method: Optional[str] = None,
+            check_status: bool = True,
+            timeout: Optional[int] = 5,
+            data: Any[str, bytes, None] = None,
+            json: Any = None,
+            post: Any[str, bytes, None] = None,  # XXX: compatibility shim
+            headers: Optional[Dict[str, str]] = None,
+            stream: bool = False) -> requests.Response:
     headers = headers.copy() if headers else {}
     headers['User-Agent'] = USER_AGENT
 
@@ -77,7 +84,7 @@ class NotModifiedException(requests.RequestException):
     pass
 
 
-def save_http_stream(url, outfile, compression=None, **kwargs) -> requests.Response:
+def save_http_stream(url: str, outfile: IO, compression: Optional[str] = None, **kwargs: Any) -> requests.Response:
     # TODO: we should really decompress stream on the fly or
     # (better) store it as is and decompress when reading.
 

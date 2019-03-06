@@ -17,7 +17,7 @@
 
 import os
 import shutil
-from typing import IO
+from typing import Any, IO
 
 
 __all__ = ['AtomicDir', 'AtomicFile']
@@ -75,7 +75,7 @@ class AtomicDir(_AtomicFSObject):
 
 
 class AtomicFile(_AtomicFSObject):
-    def __init__(self, path: str, *args, **kwargs) -> None:
+    def __init__(self, path: str, *args: Any, **kwargs: Any) -> None:
         super(AtomicFile, self).__init__(path)
         self.args = args
         self.kwargs = kwargs

@@ -19,16 +19,17 @@ import json
 import os
 
 from repology.atomic_fs import AtomicDir
-from repology.fetchers import ScratchDirFetcher
+from repology.fetchers import PersistentData, ScratchDirFetcher
 from repology.fetchers.http import do_http
+from repology.logger import Logger
 
 
 class FedoraFetcher(ScratchDirFetcher):
-    def __init__(self, apiurl, giturl):
+    def __init__(self, apiurl: str, giturl: str) -> None:
         self.apiurl = apiurl
         self.giturl = giturl
 
-    def _load_spec(self, package, statedir: AtomicDir, logger):
+    def _load_spec(self, package: str, statedir: AtomicDir, logger: Logger) -> None:
         specurl = self.giturl + '/{0}.git/plain/{0}.spec'.format(package)
 
         logger.GetIndented().Log('getting spec from {}'.format(specurl))
@@ -46,7 +47,7 @@ class FedoraFetcher(ScratchDirFetcher):
         with open(os.path.join(statedir.get_path(), package + '.spec'), 'wb') as file:
             file.write(r.content)
 
-    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         page = 1
 
         while True:

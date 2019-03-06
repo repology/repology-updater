@@ -16,19 +16,21 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from typing import List, Optional
 
 from repology.fetchers import PersistentDirFetcher
+from repology.logger import Logger
 from repology.subprocess import get_subprocess_output, run_subprocess
 
 
 class GitFetcher(PersistentDirFetcher):
-    def __init__(self, url, branch='master', sparse_checkout=None, fetch_timeout=600):
+    def __init__(self, url: str, branch: str = 'master', sparse_checkout: Optional[List[str]] = None, fetch_timeout: int = 600) -> None:
         self.url = url
         self.branch = branch
         self.sparse_checkout = sparse_checkout
         self.fetch_timeout = fetch_timeout
 
-    def _setup_sparse_checkout(self, statepath: str, logger):
+    def _setup_sparse_checkout(self, statepath: str, logger: Logger) -> None:
         sparse_checkout_path = os.path.join(statepath, '.git', 'info', 'sparse-checkout')
 
         # We always enable sparse checkout, as it's harder to
@@ -44,14 +46,14 @@ class GitFetcher(PersistentDirFetcher):
             else:
                 print('/*', file=sparse_checkout_file)
 
-    def _do_fetch(self, statepath: str, logger) -> bool:
+    def _do_fetch(self, statepath: str, logger: Logger) -> bool:
         run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statepath], logger=logger)
         self._setup_sparse_checkout(statepath, logger)
         run_subprocess(['git', 'checkout'], cwd=statepath, logger=logger)
 
         return True
 
-    def _do_update(self, statepath: str, logger) -> bool:
+    def _do_update(self, statepath: str, logger: Logger) -> bool:
         old_head = get_subprocess_output(['git', 'rev-parse', 'HEAD'], cwd=statepath, logger=logger).strip()
 
         run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'fetch', '--progress', '--depth=1'], cwd=statepath, logger=logger)

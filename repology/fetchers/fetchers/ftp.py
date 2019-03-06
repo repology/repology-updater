@@ -19,18 +19,19 @@ import ftplib
 import urllib
 
 from repology.atomic_fs import AtomicFile
-from repology.fetchers import ScratchFileFetcher
+from repology.fetchers import PersistentData, ScratchFileFetcher
+from repology.logger import Logger
 
 
 class FTPListFetcher(ScratchFileFetcher):
-    def __init__(self, url, fetch_timeout=60):
+    def __init__(self, url: str, fetch_timeout: int = 60) -> None:
         super(FTPListFetcher, self).__init__()
 
         self.url = urllib.parse.urlparse(url, scheme='ftp', allow_fragments=False)
         assert(self.url.scheme == 'ftp')
         self.fetch_timeout = fetch_timeout
 
-    def _do_fetch(self, statefile: AtomicFile, persdata, logger) -> bool:
+    def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
         ftp = ftplib.FTP(
             host=self.url.hostname,
             user=self.url.username or '',

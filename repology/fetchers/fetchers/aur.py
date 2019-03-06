@@ -19,8 +19,9 @@ import os
 import urllib
 
 from repology.atomic_fs import AtomicDir
-from repology.fetchers import ScratchDirFetcher
+from repology.fetchers import PersistentData, ScratchDirFetcher
 from repology.fetchers.http import PoliteHTTP
+from repology.logger import Logger
 
 
 def _split_names_into_urls(prefix, package_names, maxlen):
@@ -48,7 +49,7 @@ class AURFetcher(ScratchDirFetcher):
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
         self.max_api_url_length = max_api_url_length  # see https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations
 
-    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         packages_url = self.url + 'packages.gz'
         logger.GetIndented().Log('fetching package list from ' + packages_url)
         data = self.do_http(packages_url).text  # autogunzipped?

@@ -21,8 +21,9 @@ from string import ascii_uppercase
 import lxml.html
 
 from repology.atomic_fs import AtomicDir
-from repology.fetchers import ScratchDirFetcher
+from repology.fetchers import PersistentData, ScratchDirFetcher
 from repology.fetchers.http import PoliteHTTP
+from repology.logger import Logger
 
 
 class GuixFetcher(ScratchDirFetcher):
@@ -30,7 +31,7 @@ class GuixFetcher(ScratchDirFetcher):
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
-    def _do_fetch(self, statedir: AtomicDir, persdata, logger) -> bool:
+    def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         for letter in ['0-9'] + [l for l in ascii_uppercase]:
             page = 1
             numpages = 1

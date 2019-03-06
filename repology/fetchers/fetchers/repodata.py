@@ -19,7 +19,7 @@ import os
 import xml.etree.ElementTree
 
 from repology.atomic_fs import AtomicFile
-from repology.fetchers import ScratchFileFetcher
+from repology.fetchers import PersistentData, ScratchFileFetcher
 from repology.fetchers.http import do_http, save_http_stream
 from repology.logger import Logger
 
@@ -31,7 +31,7 @@ class RepodataFetcher(ScratchFileFetcher):
         self.url = url
         self.fetch_timeout = fetch_timeout
 
-    def _do_fetch(self, statefile: AtomicFile, persdata, logger) -> bool:
+    def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
         # fetch and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.Log('fetching metadata from ' + repomd_url)
