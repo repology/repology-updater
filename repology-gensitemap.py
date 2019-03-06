@@ -52,8 +52,8 @@ def main() -> int:
     if options.main:
         urls = ['/', '/news', '/statistics', '/about', '/api/v1', '/repositories/']
 
-        urls.extend(map(lambda name: '/maintainer/' + name, database.get_all_maintainer_names()))  # type: ignore
-        urls.extend(map(lambda name: '/repository/' + name, database.get_all_repository_names()))  # type: ignore
+        urls.extend(map(lambda name: '/maintainer/' + name, database.get_all_maintainer_names()))
+        urls.extend(map(lambda name: '/repository/' + name, database.get_all_repository_names()))
     elif options.metapackages:
         links_per_metapackage = 3
 
@@ -61,7 +61,7 @@ def main() -> int:
 
         num_repos = 1
         while True:
-            num_metapackages = database.get_all_metapackage_names_by_min_spread_count(num_repos)  # type: ignore
+            num_metapackages = database.get_all_metapackage_names_by_min_spread_count(num_repos)
 
             num_urls_total = len(urls) + num_metapackages * links_per_metapackage
 
@@ -78,13 +78,13 @@ def main() -> int:
             num_repos += 1
 
         # get most important packages
-        for name in database.get_all_metapackage_names_by_min_spread(num_repos, (options.max_urls - len(urls)) // links_per_metapackage):  # type: ignore
+        for name in database.get_all_metapackage_names_by_min_spread(num_repos, (options.max_urls - len(urls)) // links_per_metapackage):
             urls.append('/project/' + name + '/versions')
             urls.append('/project/' + name + '/packages')
             urls.append('/project/' + name + '/information')
 
         # fill the remaining space with less important packages
-        for name in database.get_all_metapackage_names_by_spread(num_repos - 1, (options.max_urls - len(urls)) // links_per_metapackage):  # type: ignore
+        for name in database.get_all_metapackage_names_by_spread(num_repos - 1, (options.max_urls - len(urls)) // links_per_metapackage):
             urls.append('/project/' + name + '/versions')
             urls.append('/project/' + name + '/packages')
             urls.append('/project/' + name + '/information')

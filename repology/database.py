@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any, TYPE_CHECKING
+
 import psycopg2
 
 
@@ -34,3 +36,9 @@ class Database:
     linkcheck_status_cannot_connect = -4
     linkcheck_status_invalid_url = -5
     linkcheck_status_dns_error = -6
+
+    # this class is filled by methods by querymgr
+    # mypy doesn't know about them so we have to silence it this way
+    if TYPE_CHECKING:
+        def __getattr__(self, name: str) -> Any:
+            pass
