@@ -16,12 +16,15 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class SpecParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for root, _, files in os.walk(path):
             for filename in files:
                 if not filename.endswith('.spec'):

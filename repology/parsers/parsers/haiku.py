@@ -17,13 +17,16 @@
 
 import os
 import re
+from typing import Generator
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class HaikuPortsFilenamesParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for category in os.listdir(path):
             category_path = os.path.join(path, category)
             if not os.path.isdir(category_path):

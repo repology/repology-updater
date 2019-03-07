@@ -17,12 +17,15 @@
 
 import os
 import re
+from typing import Generator
 
 from repology.logger import Logger
 from repology.package import PackageFlags
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.walk import walk_tree
+from repology.transformer import PackageTransformer
 
 
 def _parse_descfile(path, logger):
@@ -76,7 +79,7 @@ def _parse_descfile(path, logger):
 
 
 class T2DescParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for filename in walk_tree(path, suffix='.desc'):
             rel_filename = os.path.relpath(filename, path)
             with factory.begin(rel_filename) as pkg:

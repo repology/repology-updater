@@ -16,10 +16,13 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+from typing import Generator
 
 from repology.logger import Logger
 from repology.package import PackageFlags
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 _DONOR_REPOS = [
@@ -37,7 +40,7 @@ def _iter_packages(path):
 
 
 class WikidataJsonParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for packagedata in _iter_packages(path):
             entity = packagedata['project'].rsplit('/', 1)[-1]  # this is URL, take only the ID from it
 

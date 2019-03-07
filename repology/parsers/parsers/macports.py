@@ -17,19 +17,22 @@
 
 import os
 import subprocess
+from typing import Generator
 
 from jsonslicer import JsonSlicer
 
 from repology.config import config
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.versions import VersionStripper
+from repology.transformer import PackageTransformer
 
 
 class MacPortsParser(Parser):
     def __init__(self):
         self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
 
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         normalize_version = VersionStripper().strip_right('+')
 
         with subprocess.Popen(

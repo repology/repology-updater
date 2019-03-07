@@ -18,10 +18,13 @@
 import os
 import re
 import sqlite3
+from typing import Generator
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.transformer import PackageTransformer
 
 
 def _normalize_version(version):
@@ -75,7 +78,7 @@ def _iter_sqlports(path):
 
 
 class OpenBSDsqlportsParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for row in _iter_sqlports(path):
             pkg = factory.begin(row['fullpkgpath'])
 
@@ -123,7 +126,7 @@ class OpenBSDsqlportsParser(Parser):
 
 
 class OpenBSDIndexParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(path, encoding='utf-8') as indexfile:
             for line in indexfile:
                 pkg = factory.begin()

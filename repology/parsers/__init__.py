@@ -15,6 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from abc import ABC, abstractmethod
+from typing import Iterable
 
-class Parser:
-    pass
+from repology.packagemaker import PackageFactory, PackageMaker
+from repology.transformer import PackageTransformer
+
+
+class Parser(ABC):
+    @abstractmethod
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+        pass

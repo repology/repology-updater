@@ -17,11 +17,14 @@
 
 import os
 import re
+from typing import Generator
 
 from libversion import version_compare
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 def _expand_mirrors(url):
@@ -35,7 +38,7 @@ def _expand_mirrors(url):
 
 
 class GoboLinuxGitParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         trunk_path = os.path.join(path, 'trunk')
         for package_name in os.listdir(trunk_path):
             pkg = factory.begin()

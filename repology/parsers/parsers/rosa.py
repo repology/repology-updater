@@ -17,14 +17,17 @@
 
 import re
 import xml.etree.ElementTree
+from typing import Generator
 
 from repology.package import PackageFlags
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.nevra import nevra_construct, nevra_parse
+from repology.transformer import PackageTransformer
 
 
 class RosaInfoXmlParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         root = xml.etree.ElementTree.parse(path)
 
         for info in root.findall('./info'):

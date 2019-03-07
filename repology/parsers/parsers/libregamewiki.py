@@ -17,15 +17,20 @@
 
 import re
 import xml.etree.ElementTree
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class LibreGameWikiParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         root = xml.etree.ElementTree.parse(path)
 
         content = root.find('.//div[@id="mw-content-text"]')
+        if content is None:
+            raise RuntimeError('Cannot find <div id="mw-content-text"> element')
 
         for item in content.findall('.//div[@style="float:left; width:25.3em; height:8.5em; border:1px solid #ccc; padding:0.1em; margin-bottom: 2em; margin-right: 1em; overflow:hidden"]'):
             pkg = factory.begin()

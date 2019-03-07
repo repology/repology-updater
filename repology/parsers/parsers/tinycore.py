@@ -17,8 +17,11 @@
 
 import os
 import re
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 def _parse_infofile(path):
@@ -44,7 +47,7 @@ def _parse_infofile(path):
 
 
 class TczInfoParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for filename in os.listdir(path):
             if not filename.endswith('.tcz.info'):
                 continue

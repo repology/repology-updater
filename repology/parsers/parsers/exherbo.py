@@ -17,10 +17,13 @@
 
 import os
 import re
+from typing import Generator
 
 from repology.package import PackageFlags
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.transformer import PackageTransformer
 
 
 def _normalize_version(version):
@@ -60,7 +63,7 @@ def _get_repo_maintainers(path):
 
 
 class ExherboGitParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         maintainers = _get_repo_maintainers(path)
 
         for category, package, exheres in _iter_exheres(os.path.join(path, 'packages')):

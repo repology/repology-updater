@@ -17,12 +17,15 @@
 
 import configparser
 import os
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class RappsParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for filename in os.listdir(os.path.join(path)):
             if not filename.endswith('.txt'):
                 continue
@@ -31,15 +34,15 @@ class RappsParser(Parser):
                 config = configparser.ConfigParser(interpolation=None)
                 config.read(os.path.join(path, filename))
 
-                config = config['Section']
+                section = config['Section']
 
                 pkg.set_name(filename[:-4])
-                pkg.set_version(config.get('Version'))
-                pkg.set_summary(config['Description'])
-                pkg.add_homepages(config.get('URLSite'))
-                pkg.add_downloads(config['URLDownload'])
-                pkg.add_licenses(config.get('License'))
+                pkg.set_version(section.get('Version'))
+                pkg.set_summary(section['Description'])
+                pkg.add_homepages(section.get('URLSite'))
+                pkg.add_downloads(section['URLDownload'])
+                pkg.add_licenses(section.get('License'))
 
-                pkg.set_extra_field('longname', config['Name'])
+                pkg.set_extra_field('longname', section['Name'])
 
                 yield pkg

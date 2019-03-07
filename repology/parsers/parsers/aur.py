@@ -17,14 +17,17 @@
 
 import json
 import os
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
+from repology.transformer import PackageTransformer
 
 
 class AURParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         normalize_version = VersionStripper().strip_right_greedy('-').strip_left(':').strip_right_greedy('+')
 
         for filename in os.listdir(path):

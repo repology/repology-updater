@@ -16,10 +16,13 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from typing import Dict, Generator, List, Union
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.transformer import PackageTransformer
 
 
 def normalize_version(version):
@@ -55,9 +58,9 @@ class DebianSourcesParser(Parser):
     def __init__(self, project_name_from_source=False):
         self.project_name_from_source = project_name_from_source
 
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(path, encoding='utf-8', errors='ignore') as file:
-            current_data = {}
+            current_data: Dict[str, Union[str, List[str]]] = {}
             last_key = None
 
             for line in file:
@@ -121,10 +124,13 @@ class DebianSourcesParser(Parser):
                 # continuation of previous key
                 match = re.fullmatch(' (.*)', line)
                 if match:
+                    if last_key is None:
+                        raise RuntimeError('unable to parse line: {}'.format(line))
+
                     value = match.group(1).strip()
                     if not isinstance(current_data[last_key], list):
-                        current_data[last_key] = [current_data[last_key]]
-                    current_data[last_key].append(value)
+                        current_data[last_key] = [current_data[last_key]]  # type: ignore
+                    current_data[last_key].append(value)  # type: ignore
                     continue
 
-                factory.log('unable to parse line: {}'.format(line), severity=Logger.ERROR)
+                raise RuntimeError('unable to parse line: {}'.format(line))

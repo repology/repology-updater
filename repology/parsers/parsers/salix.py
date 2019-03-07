@@ -15,13 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Generator
+
 from jsonslicer import JsonSlicer
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class SalixPackagesJsonParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(path, 'rb') as jsonfile:
             for item in JsonSlicer(jsonfile, ('packages', None)):
                 with factory.begin() as pkg:

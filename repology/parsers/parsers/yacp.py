@@ -17,10 +17,13 @@
 
 import os
 import re
+from typing import Generator
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.versions import VersionStripper
+from repology.transformer import PackageTransformer
 
 
 def _iter_cygports(path):
@@ -37,7 +40,7 @@ def _iter_cygports(path):
 
 
 class YACPGitParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         normalize_version = VersionStripper().strip_right('+')
 
         for cygport_path, cygport_name in _iter_cygports(path):

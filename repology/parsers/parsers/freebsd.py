@@ -15,14 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Generator
+
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
+from repology.transformer import PackageTransformer
 
 
 class FreeBSDIndexParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         normalize_version = VersionStripper().strip_right(',').strip_right('_')
 
         with open(path, encoding='utf-8') as indexfile:
@@ -40,9 +44,9 @@ class FreeBSDIndexParser(Parser):
                 pkg.add_categories(fields[6].split())
                 pkg.add_homepages(fields[9])
 
-                path = fields[1].split('/')
+                port_path = fields[1].split('/')
 
-                pkg.set_extra_field('portname', path[-1])
-                pkg.set_origin('/'.join(path[-2:]))
+                pkg.set_extra_field('portname', port_path[-1])
+                pkg.set_origin('/'.join(port_path[-2:]))
 
                 yield pkg

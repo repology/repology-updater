@@ -17,12 +17,15 @@
 
 import re
 import xml.etree.ElementTree
+from typing import Dict, Generator
 
 from repology.package import PackageFlags
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct
 from repology.parsers.versions import VersionStripper
+from repology.transformer import PackageTransformer
 
 
 def _iter_package_entries(path):
@@ -41,10 +44,10 @@ class RepodataParser(Parser):
     def __init__(self, allowed_archs=None):
         self.allowed_archs = allowed_archs
 
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
-        skipped_archs = {}
+        skipped_archs: Dict[str, int] = {}
 
         for entry in _iter_package_entries(path):
             pkg = factory.begin()

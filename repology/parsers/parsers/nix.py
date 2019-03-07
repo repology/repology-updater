@@ -16,13 +16,16 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from typing import Generator
 
 from jsonslicer import JsonSlicer
 
 from repology.logger import Logger
 from repology.package import PackageFlags
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.transformer import PackageTransformer
 
 
 def extract_nix_maintainers(items):
@@ -57,7 +60,7 @@ def extract_nix_licenses(whatever):
 
 
 class NixJsonParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(path, 'rb') as jsonfile:
             for key, packagedata in JsonSlicer(jsonfile, ('packages', None), encoding='utf-8', path_mode='map_keys'):
                 pkg = factory.begin(key)

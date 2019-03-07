@@ -17,14 +17,17 @@
 
 import json
 import re
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
+from repology.transformer import PackageTransformer
 
 
 class TermuxJsonParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         normalize_version = VersionStripper().strip_left_greedy(':')
 
         with open(path, 'r', encoding='utf-8') as jsonfile:

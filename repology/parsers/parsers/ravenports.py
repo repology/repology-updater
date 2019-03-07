@@ -15,13 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Generator
+
 from jsonslicer import JsonSlicer
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class RavenportsJsonParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(path, 'rb') as jsonfile:
             for packagedata in JsonSlicer(jsonfile, ('ravenports', None)):
                 pkg = factory.begin()
@@ -33,7 +37,7 @@ class RavenportsJsonParser(Parser):
 
                 pkg.add_downloads(packagedata['distfile'])
                 pkg.set_summary(packagedata['variants'][0]['sdesc'])
-                pkg.add_maintainers(map(lambda contact: contact.get('email'), packagedata.get('contacts', [])))
+                pkg.add_maintainers(map(lambda contact: contact.get('email'), packagedata.get('contacts', [])))  # type: ignore
 
                 pkg.set_extra_field('bucket', packagedata['bucket'])
                 pkg.set_extra_field('variant', packagedata['variants'][0]['label'])

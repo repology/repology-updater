@@ -17,12 +17,15 @@
 
 import os
 import xml.etree.ElementTree
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class ChocolateyParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for pagepath in os.listdir(path):
             if not pagepath.endswith('.xml'):
                 continue
@@ -32,9 +35,9 @@ class ChocolateyParser(Parser):
             for entry in root.findall('{http://www.w3.org/2005/Atom}entry'):
                 pkg = factory.begin()
 
-                pkg.set_name(entry.find('{http://www.w3.org/2005/Atom}title').text)
-                pkg.set_version(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Version').text)
-                pkg.add_homepages(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}ProjectUrl').text)
+                pkg.set_name(entry.find('{http://www.w3.org/2005/Atom}title').text)  # type: ignore
+                pkg.set_version(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Version').text)  # type: ignore
+                pkg.add_homepages(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}ProjectUrl').text)  # type: ignore
 
                 commentnode = entry.find('{http://www.w3.org/2005/Atom}summary')
                 if commentnode is not None:

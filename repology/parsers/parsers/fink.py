@@ -16,14 +16,17 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from typing import Generator
 
 import lxml
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
 from repology.parsers.walk import walk_tree
+from repology.transformer import PackageTransformer
 
 
 def _parse_info_file(filename):
@@ -66,7 +69,7 @@ def _parse_info(text):
 
 
 class FinkGitParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for filename in walk_tree(path, suffix='.info'):
             rel_filename = os.path.relpath(filename, path)
 
@@ -113,7 +116,7 @@ class FinkGitParser(Parser):
 
 
 class FinkPdbParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         normalize_version = VersionStripper().strip_right('-')
 
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="pdb"]')[0].xpath('./tr[@class="package"]'):

@@ -16,8 +16,11 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import xml.etree.ElementTree
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 def _iter_package_entries(path):
@@ -37,7 +40,7 @@ def _expand_multiline_licenses(text):
 
 
 class SolusIndexParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for entry in _iter_package_entries(path):
             with factory.begin() as pkg:
                 namenode = entry.find('./Name')

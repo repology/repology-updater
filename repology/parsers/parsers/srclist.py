@@ -15,18 +15,22 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Generator
+
 import rpm
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct
+from repology.transformer import PackageTransformer
 
 
 class SrcListParser(Parser):
     def __init__(self, encoding='utf-8'):
         self.encoding = encoding
 
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for header in rpm.readHeaderListFromFile(path):
             fields = {
                 key: str(header[key], self.encoding) if header[key] is not None else None

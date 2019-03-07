@@ -16,9 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Generator
+
 import rubymarshal.reader
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 def _force_decode(var):
@@ -29,7 +33,7 @@ def _force_decode(var):
 
 
 class RubyGemParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(path, 'rb') as fd:
             for gem in rubymarshal.reader.load(fd):
                 pkg = factory.begin()

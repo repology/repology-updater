@@ -18,14 +18,19 @@
 # flake8: noqa
 
 import xml.etree.ElementTree
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
+from repology.transformer import PackageTransformer
 
 
 class NSTPkgInfoXMLParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for filename in walk_tree(path, suffix='pkginfo.xml'):
             root = xml.etree.ElementTree.parse(filename)
             # XXX: fails on unknown entity NST_RELEASE_SUFFIX
             # and dtd is not usable as it needs preprocessing
+
+        yield from []

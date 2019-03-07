@@ -17,14 +17,17 @@
 
 import os
 import xml.etree.ElementTree
+from typing import Generator
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
+from repology.transformer import PackageTransformer
 
 
 class PisiParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for filename in walk_tree(path, suffix='pspec.xml'):
             relpath = os.path.relpath(filename, path)
 
@@ -36,8 +39,8 @@ class PisiParser(Parser):
                 pkg.log('Cannot parse XML: ' + str(e), Logger.ERROR)
                 continue
 
-            pkg.set_name(root.find('./Source/Name').text)
-            pkg.set_summary(root.find('./Source/Summary').text)
+            pkg.set_name(root.find('./Source/Name').text)  # type: ignore
+            pkg.set_summary(root.find('./Source/Summary').text)  # type: ignore
             pkg.add_homepages(map(lambda el: el.text, root.findall('./Source/Homepage')))
             pkg.add_downloads(map(lambda el: el.text, root.findall('./Source/Archive')))
             pkg.add_licenses(map(lambda el: el.text, root.findall('./Source/License')))
@@ -47,6 +50,6 @@ class PisiParser(Parser):
             pkg.set_extra_field('pspecdir', os.path.dirname(relpath))
 
             lastupdate = max(root.findall('./History/Update'), key=lambda el: int(el.attrib['release']))
-            pkg.set_version(lastupdate.find('./Version').text)
+            pkg.set_version(lastupdate.find('./Version').text)  # type: ignore
 
             yield pkg

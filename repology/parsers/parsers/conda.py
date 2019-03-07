@@ -16,12 +16,15 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class CondaRepodataJsonParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(path, 'r', encoding='utf-8') as jsonfile:
             for pkgfilename, pkgdata in json.load(jsonfile)['packages'].items():
                 pkg = factory.begin(pkgfilename)

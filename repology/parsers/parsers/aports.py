@@ -17,9 +17,12 @@
 
 import os
 import re
+from typing import Generator
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.transformer import PackageTransformer
 
 
 def normalize_version(version):
@@ -31,7 +34,7 @@ def normalize_version(version):
 
 
 class ApkIndexParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(os.path.join(path, 'APKINDEX'), 'r', encoding='utf-8') as apkindex:
             state = {}
             for line in apkindex:

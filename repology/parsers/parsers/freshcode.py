@@ -15,16 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Dict, Generator
+
 from jsonslicer import JsonSlicer
 
 from libversion import version_compare
 
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 class FreshcodeParser(Parser):
-    def iter_parse(self, path, factory, transformer):
-        result = {}
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+        result: Dict[str, PackageMaker] = {}
 
         # note that we actually parse database prepared by
         # fetcher, not the file we've downloaded

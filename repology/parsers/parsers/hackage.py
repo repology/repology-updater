@@ -17,12 +17,15 @@
 
 import os
 import re
+from typing import Generator
 
 from libversion import version_compare
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.transformer import PackageTransformer
 
 
 def _parse_cabal_file(path):
@@ -70,7 +73,7 @@ def _parse_cabal_file(path):
 
 
 class HackageParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for moduledir in os.listdir(path):
             pkg = factory.begin()
 

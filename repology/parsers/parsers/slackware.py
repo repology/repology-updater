@@ -15,7 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Generator
+
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.transformer import PackageTransformer
 
 
 def _iterate_packages(path):
@@ -35,7 +39,7 @@ def _iterate_packages(path):
 
 
 class SlackwarePackagesParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for pkgname, pkglocation in _iterate_packages(path):
             pkg = factory.begin(pkgname)
 

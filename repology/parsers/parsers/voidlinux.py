@@ -18,19 +18,22 @@
 
 import os
 import plistlib
+from typing import Dict, Generator
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
+from repology.transformer import PackageTransformer
 
 
 class VoidLinuxPlistParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         normalize_version = VersionStripper().strip_right_greedy('_')
 
         with open(os.path.join(path, 'index.plist'), 'rb') as plistfile:
-            plist_index = plistlib.load(plistfile, fmt=plistlib.FMT_XML)
+            plist_index: Dict[str, Dict[str, str]] = plistlib.load(plistfile, fmt=plistlib.FMT_XML)
 
         for pkgname, props in plist_index.items():
             pkg = factory.begin(pkgname)

@@ -16,10 +16,13 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from typing import Generator
 
 from repology.logger import Logger
+from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
+from repology.transformer import PackageTransformer
 
 
 def _iter_packages(path):
@@ -70,7 +73,7 @@ def _parse_infofile(path):
 
 
 class SlackBuildsParser(Parser):
-    def iter_parse(self, path, factory, transformer):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for category, pkgname in _iter_packages(path):
             pkg = factory.begin(category + '/' + pkgname)
 
