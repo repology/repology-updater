@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,75 +15,99 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any, ClassVar, Dict, List, Optional
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
 
-class VersionClass:
-    newest = 1
-    outdated = 2
-    ignored = 3
-    unique = 4
-    devel = 5
-    legacy = 6
-    incorrect = 7
-    untrusted = 8
-    noscheme = 9
-    rolling = 10
+class PackageStatus:
+    NEWEST: ClassVar[int] = 1
+    OUTDATED: ClassVar[int] = 2
+    IGNORED: ClassVar[int] = 3
+    UNIQUE: ClassVar[int] = 4
+    DEVEL: ClassVar[int] = 5
+    LEGACY: ClassVar[int] = 6
+    INCORRECT: ClassVar[int] = 7
+    UNTRUSTED: ClassVar[int] = 8
+    NOSCHEME: ClassVar[int] = 9
+    ROLLING: ClassVar[int] = 10
 
     @staticmethod
-    def IsIgnored(cl):
-        """Return whether a specified class is equivalent to ignored."""
-        return (cl == VersionClass.ignored or
-                cl == VersionClass.incorrect or
-                cl == VersionClass.untrusted or
-                cl == VersionClass.noscheme or
-                cl == VersionClass.rolling)
+    def is_ignored(val: int) -> bool:
+        """Return whether a specified val is equivalent to ignored."""
+        return (val == PackageStatus.IGNORED or
+                val == PackageStatus.INCORRECT or
+                val == PackageStatus.UNTRUSTED or
+                val == PackageStatus.NOSCHEME or
+                val == PackageStatus.ROLLING)
 
     @staticmethod
-    def ToString(cl):
+    def as_string(val: int) -> str:
         """Return string representation of a version class."""
         return {
-            VersionClass.newest: 'newest',
-            VersionClass.outdated: 'outdated',
-            VersionClass.ignored: 'ignored',
-            VersionClass.unique: 'unique',
-            VersionClass.devel: 'devel',
-            VersionClass.legacy: 'legacy',
-            VersionClass.incorrect: 'incorrect',
-            VersionClass.untrusted: 'untrusted',
-            VersionClass.noscheme: 'noscheme',
-            VersionClass.rolling: 'rolling',
-        }[cl]
+            PackageStatus.NEWEST: 'newest',
+            PackageStatus.OUTDATED: 'outdated',
+            PackageStatus.IGNORED: 'ignored',
+            PackageStatus.UNIQUE: 'unique',
+            PackageStatus.DEVEL: 'devel',
+            PackageStatus.LEGACY: 'legacy',
+            PackageStatus.INCORRECT: 'incorrect',
+            PackageStatus.UNTRUSTED: 'untrusted',
+            PackageStatus.NOSCHEME: 'noscheme',
+            PackageStatus.ROLLING: 'rolling',
+        }[val]
+
+    # Compatibility shims
+    newest: ClassVar[int] = NEWEST
+    outdated: ClassVar[int] = OUTDATED
+    ignored: ClassVar[int] = IGNORED
+    unique: ClassVar[int] = UNIQUE
+    devel: ClassVar[int] = DEVEL
+    legacy: ClassVar[int] = LEGACY
+    incorrect: ClassVar[int] = INCORRECT
+    untrusted: ClassVar[int] = UNTRUSTED
+    noscheme: ClassVar[int] = NOSCHEME
+    rolling: ClassVar[int] = ROLLING
+
+    @staticmethod
+    def IsIgnored(val: int) -> bool:
+        return PackageStatus.is_ignored(val)
+
+    @staticmethod
+    def ToString(val: int) -> str:
+        return PackageStatus.as_string(val)
+
+
+VersionClass = PackageStatus
 
 
 class PackageFlags:
     # remove package
-    remove = 1 << 0
+    REMOVE: ClassVar[int] = 1 << 0
 
     # devel version
-    devel = 1 << 1
+    DEVEL: ClassVar[int] = 1 << 1
 
     # ignored variants
-    ignore = 1 << 2
-    incorrect = 1 << 3
-    untrusted = 1 << 4
-    noscheme = 1 << 5
+    IGNORE: ClassVar[int] = 1 << 2
+    INCORRECT: ClassVar[int] = 1 << 3
+    UNTRUSTED: ClassVar[int] = 1 << 4
+    NOSCHEME: ClassVar[int] = 1 << 5
 
-    any_ignored = ignore | incorrect | untrusted | noscheme
+    ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 
-    rolling = 1 << 7  # is processed differently than other ignoreds
+    ROLLING: ClassVar[int] = 1 << 7  # is processed differently than other ignoreds
 
     # forced classes
-    outdated = 1 << 8
-    legacy = 1 << 9
+    OUTDATED: ClassVar[int] = 1 << 8
+    LEGACY: ClassVar[int] = 1 << 9
 
     # special flags
-    p_is_patch = 1 << 10
-    any_is_patch = 1 << 11
+    P_IS_PATCH: ClassVar[int] = 1 << 10
+    ANY_IS_PATCH: ClassVar[int] = 1 << 11
 
     @staticmethod
-    def GetMetaorder(cl):
+    def get_metaorder(val: int) -> int:
         """Return a higher order version sorting key based on flags.
 
         E.g. rolling versions always precede normal versions,
@@ -91,11 +115,29 @@ class PackageFlags:
 
         Within a specific metaorder versions are compared normally
         """
-        if cl & PackageFlags.rolling:
+        if val & PackageFlags.ROLLING:
             return 1
-        if cl & PackageFlags.outdated:
+        if val & PackageFlags.OUTDATED:
             return -1
         return 0
+
+    # Compatibility shims
+    remove: ClassVar[int] = REMOVE
+    devel: ClassVar[int] = DEVEL
+    ignore: ClassVar[int] = IGNORE
+    incorrect: ClassVar[int] = INCORRECT
+    untrusted: ClassVar[int] = UNTRUSTED
+    noscheme: ClassVar[int] = NOSCHEME
+    any_ignored: ClassVar[int] = ANY_IGNORED
+    rolling: ClassVar[int] = ROLLING
+    outdated: ClassVar[int] = OUTDATED
+    legacy: ClassVar[int] = LEGACY
+    p_is_patch: ClassVar[int] = P_IS_PATCH
+    any_is_patch: ClassVar[int] = ANY_IS_PATCH
+
+    @staticmethod
+    def GetMetaorder(val: int) -> int:
+        return PackageFlags.get_metaorder(val)
 
 
 class Package:
@@ -131,6 +173,34 @@ class Package:
 
         'flavors',
     ]
+
+    repo: str
+    family: str
+    subrepo: Optional[str]
+
+    name: str
+    basename: str
+
+    origversion: str
+    rawwversion: str
+
+    maintainers: List[str]
+    category: Optional[str]
+    comment: Optional[str]
+    homepage: Optional[str]
+    licenses: List[str]
+    downloads: List[str]
+
+    extrafields: Dict[str, str]
+
+    effname: str
+
+    version: str
+    versionclass: int
+
+    flags: int
+    shadow: bool
+    flavors: List[str]
 
     def __init__(self, repo=None, family=None, subrepo=None,
                  name=None, basename=None, effname=None,
@@ -170,7 +240,7 @@ class Package:
 
         self.flavors = flavors if flavors else []
 
-    def CheckFormat(self):
+    def check_format(self) -> bool:
         # check
         for slot in self.__slots__:
             if not hasattr(self, slot):
@@ -179,18 +249,18 @@ class Package:
         return True
 
     # setters
-    def SetFlag(self, flag, isset=True):
+    def set_flag(self, flag: int, isset: bool = True) -> None:
         if isset:
             self.flags |= flag
         else:
             self.flags &= ~flag
 
     # getters
-    def HasFlag(self, flag):
+    def has_flag(self, flag: int) -> bool:
         return bool(self.flags & flag)
 
     # other helper methods
-    def VersionCompare(self, other):
+    def version_compare(self, other: 'Package') -> int:
         self_metaorder = PackageFlags.GetMetaorder(self.flags)
         other_metaorder = PackageFlags.GetMetaorder(other.flags)
 
@@ -208,9 +278,25 @@ class Package:
             ((other.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH)
         )
 
+    # Compatibility shims
+    def CheckFormat(self) -> bool:
+        return self.check_format()
+
+    def SetFlag(self, flag: int, isset: bool = True) -> None:
+        self.set_flag(flag, isset)
+
+    def HasFlag(self, flag: int) -> bool:
+        return self.has_flag(flag)
+
+    def VersionCompare(self, other: 'Package') -> int:
+        return self.version_compare(other)
+
+    # XXX: add signature to this, see https://github.com/python/mypy/issues/6523
     @property
     def __dict__(self):
         return {slot: getattr(self, slot) for slot in self.__slots__}
 
-    def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+    def __eq__(self, other: Any) -> bool:
+        if not isinstance(other, Package):
+            return NotImplemented
+        return all((getattr(self, slot) == getattr(other, slot) for slot in self.__slots__))
