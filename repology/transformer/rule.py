@@ -68,6 +68,25 @@ class MatchContext:
         self.ver_match = None
         self.last = False
 
+    def sub_name_dollars(self, value: str, fullstr: str) -> str:
+        if self.name_match is None:
+            return DOLLAR0.sub(fullstr, value)
+
+        def repl(matchobj: Match) -> str:
+            # mypy is unable to derive that self.name_match is always defined here
+            return self.name_match.group(int(matchobj.group(1)))  # type: ignore
+
+        return DOLLARN.sub(repl, value)
+
+    def sub_ver_dollars(self, value: str, fullstr: str) -> str:
+        if self.ver_match is None:
+            return DOLLAR0.sub(fullstr, value)
+
+        def repl(matchobj: Match) -> str:
+            return self.ver_match.group(int(matchobj.group(1)))  # type: ignore
+
+        return DOLLARN.sub(repl, value)
+
 
 class Rule:
     __slots__ = ['data', 'matchers', 'actions', 'names', 'namepat', 'matches', 'number', 'pretty']
@@ -468,10 +487,7 @@ class Rule:
             def action(package, package_context, match_context):
                 flavors = want_flavors if want_flavors else [package.effname]
 
-                if match_context.name_match:
-                    flavors = [DOLLARN.sub(lambda x: match_context.name_match.group(int(x.group(1))), flavor) for flavor in flavors]
-                else:
-                    flavors = [DOLLAR0.sub(package.effname, flavor) for flavor in flavors]
+                flavors = [match_context.sub_name_dollars(flavor, package.effname) for flavor in flavors]
 
                 flavors = [flavor.strip('-') for flavor in flavors]
 
@@ -498,10 +514,7 @@ class Rule:
             setname: Final = ruledata['setname']
 
             def action(package, package_context, match_context):
-                if match_context.name_match:
-                    package.effname = DOLLARN.sub(lambda x: match_context.name_match.group(int(x.group(1))), setname)
-                else:
-                    package.effname = DOLLAR0.sub(package.effname, setname)
+                package.effname = match_context.sub_name_dollars(setname, package.effname)
 
             self.actions.append(action)
 
@@ -512,10 +525,7 @@ class Rule:
                 if package.origversion is None:
                     package.origversion = package.version
 
-                if match_context.ver_match:
-                    package.version = DOLLARN.sub(lambda x: match_context.ver_match.group(int(x.group(1))), setver)
-                else:
-                    package.version = DOLLAR0.sub(package.version, setver)
+                package.version = match_context.sub_ver_dollars(setver, package.version)
 
             self.actions.append(action)
 
