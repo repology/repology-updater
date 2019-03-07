@@ -16,42 +16,66 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from abc import ABC, abstractmethod
 from collections import defaultdict
+from typing import Dict, Iterable, List, MutableSet, Pattern, Tuple
+
+from repology.package import Package
+from repology.transformer.rule import Rule
 
 
-class SingleRuleBlock:
-    def __init__(self, rule):
-        self.rule = rule
+class RuleBlock(ABC):
+    @abstractmethod
+    def iter_rules(self, package: Package) -> Iterable[Rule]:
+        pass
 
-    def iter_rules(self, package):
-        return [self.rule]
+    @abstractmethod
+    def iter_all_rules(self) -> Iterable[Rule]:
+        pass
 
-    def iter_all_rules(self):
-        return [self.rule]
-
-    def get_rule_range(self):
-        return self.rule.number, self.rule.number
+    @abstractmethod
+    def get_rule_range(self) -> Tuple[int, int]:
+        pass
 
 
-class NameMapRuleBlock:
-    def __init__(self, rules):
-        self.rules = rules
-        self.name_map = defaultdict(list)
+class SingleRuleBlock(RuleBlock):
+    _rule: Rule
+
+    def __init__(self, rule: Rule) -> None:
+        self._rule = rule
+
+    def iter_rules(self, package: Package) -> Iterable[Rule]:
+        return [self._rule]
+
+    def iter_all_rules(self) -> Iterable[Rule]:
+        return [self._rule]
+
+    def get_rule_range(self) -> Tuple[int, int]:
+        return self._rule.number, self._rule.number
+
+
+class NameMapRuleBlock(RuleBlock):
+    _rules: List[Rule]
+    _name_map: Dict[str, List[Rule]]
+
+    def __init__(self, rules: List[Rule]) -> None:
+        self._rules = rules
+        self._name_map = defaultdict(list)
 
         for rule in rules:
             if not rule.names:
                 raise RuntimeError('unexpected rule kind for NameMapRuleBlock')
 
             for name in rule.names:
-                self.name_map[name].append(rule)
+                self._name_map[name].append(rule)
 
-    def iter_rules(self, package):
+    def iter_rules(self, package: Package) -> Iterable[Rule]:
         min_rule_num = 0
         while True:
-            if package.effname not in self.name_map:
+            if package.effname not in self._name_map:
                 return
 
-            rules = self.name_map[package.effname]
+            rules = self._name_map[package.effname]
 
             found = False
             for rule in rules:
@@ -64,39 +88,43 @@ class NameMapRuleBlock:
             if not found:
                 return
 
-    def iter_all_rules(self):
-        yield from self.rules
+    def iter_all_rules(self) -> Iterable[Rule]:
+        yield from self._rules
 
-    def get_rule_range(self):
-        return self.rules[0]['number'], self.rules[-1]['number']
+    def get_rule_range(self) -> Tuple[int, int]:
+        return self._rules[0].number, self._rules[-1].number
 
 
-class CoveringRuleBlock:
-    def __init__(self, blocks):
-        self.names = set()
+class CoveringRuleBlock(RuleBlock):
+    _names: MutableSet[str]
+    _megaregexp: Pattern
+    _sub_blocks: List[RuleBlock]
 
-        megaregexp_parts = []
+    def __init__(self, blocks: List[RuleBlock]) -> None:
+        self._names = set()
+
+        megaregexp_parts: List[str] = []
         for block in blocks:
             for rule in block.iter_all_rules():
                 if rule.names:
                     for name in rule.names:
-                        self.names.add(name)
+                        self._names.add(name)
                 elif rule.namepat:
                     megaregexp_parts.append('(?:' + rule.namepat + ')')
                 else:
                     raise RuntimeError('unexpected rule kind for CoveringRuleBlock')
 
-        self.megaregexp = re.compile('|'.join(megaregexp_parts), re.ASCII)
-        self.blocks = blocks
+        self._megaregexp = re.compile('|'.join(megaregexp_parts), re.ASCII)
+        self._sub_blocks = blocks
 
-    def iter_rules(self, package):
-        if package.effname in self.names or self.megaregexp.fullmatch(package.effname):
-            for block in self.blocks:
+    def iter_rules(self, package: Package) -> Iterable[Rule]:
+        if package.effname in self._names or self._megaregexp.fullmatch(package.effname):
+            for block in self._sub_blocks:
                 yield from block.iter_rules(package)
 
-    def iter_all_rules(self):
-        for block in self.blocks:
+    def iter_all_rules(self) -> Iterable[Rule]:
+        for block in self._sub_blocks:
             yield from block.iter_all_rules()
 
-    def get_rule_range(self):
-        return self.blocks[0].get_rule_range()[0], self.blocks[-1].get_rule_range()[-1]
+    def get_rule_range(self) -> Tuple[int, int]:
+        return self._sub_blocks[0].get_rule_range()[0], self._sub_blocks[-1].get_rule_range()[-1]

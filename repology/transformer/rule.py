@@ -18,12 +18,14 @@
 import pprint
 import re
 import sys
-from typing import AbstractSet, Iterable, Match, MutableSet, Optional
-from typing_extensions import Final
+from typing import AbstractSet, Any, Callable, Iterable, List, Match, MutableSet, Optional, Pattern, Set, TYPE_CHECKING
 
 from libversion import version_compare
 
-from repology.package import PackageFlags
+from repology.package import Package, PackageFlags
+
+if TYPE_CHECKING:
+    from typing_extensions import Final
 
 
 DOLLAR0 = re.compile('\$0', re.ASCII)
@@ -89,7 +91,15 @@ class MatchContext:
 
 
 class Rule:
-    __slots__ = ['data', 'matchers', 'actions', 'names', 'namepat', 'matches', 'number', 'pretty']
+    __slots__ = ['_matchers', '_actions', 'names', 'namepat', 'matches', 'number', 'pretty']
+
+    _matchers: List[Callable[[Package, PackageContext, MatchContext], bool]]
+    _actions: List[Callable[[Package, PackageContext, MatchContext], None]]
+    names: List[str]
+    namepat: Optional[str]
+    matches: int
+    number: int
+    pretty: str
 
     def __init__(self, number, ruledata):
         self.names = None
@@ -99,19 +109,24 @@ class Rule:
 
         self.pretty = pprint.PrettyPrinter(width=10000).pformat(ruledata)
 
-        self.matchers = []
-        self.actions = []
+        self._matchers = []
+        self._actions = []
 
-        def as_list(val):
-            return val if isinstance(val, list) or isinstance(val, set) else [val]
+        def as_list(val: Any) -> List[str]:
+            if isinstance(val, list):
+                return val
+            elif isinstance(val, set):
+                return list(val)
+            else:
+                return [val]
 
-        def as_lowercase_list(val):
+        def as_lowercase_list(val: Any) -> List[str]:
             return [v.lower() for v in as_list(val)]
 
-        def as_set(val):
+        def as_set(val: Any) -> Set[str]:
             return set(as_list(val))
 
-        def as_lowercase_set(val):
+        def as_lowercase_set(val: Any) -> Set[str]:
             return set(as_lowercase_list(val))
 
         # These conditional blocks use local variables which are then captured by
@@ -123,34 +138,34 @@ class Rule:
         if 'ruleset' in ruledata:
             rulesets: Final = as_set(ruledata['ruleset'])
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return package_context.has_rulesets(rulesets)
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'noruleset' in ruledata:
             norulesets: Final = as_set(ruledata['noruleset'])
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return not package_context.has_rulesets(norulesets)
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'category' in ruledata:
             categories: Final = as_lowercase_set(ruledata['category'])
 
-            def matcher(package, package_context, match_context):
-                return package.category and package.category.lower() in categories
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return bool(package.category and package.category.lower() in categories)
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'maintainer' in ruledata:
             maintainers: Final = as_lowercase_set(ruledata['maintainer'])
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return not maintainers.isdisjoint(set((m.lower() for m in package.maintainers)))
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'name' in ruledata:
             names = as_list(ruledata['name'])
@@ -159,20 +174,21 @@ class Rule:
                 names = [DOLLAR0.sub(ruledata['setname'], name) for name in names]
 
             self.names = names
-            names = set(names)
 
             if len(names) == 1:
-                name = names.pop()
+                name_to_check: Final[str] = names[0]
 
-                def matcher(package, package_context, match_context):
-                    return package.effname == name
+                def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                    return package.effname == name_to_check
 
-                self.matchers.append(matcher)
+                self._matchers.append(matcher)
             else:
-                def matcher(package, package_context, match_context):
-                    return package.effname in names
+                names_to_check: Final = set(names)
 
-                self.matchers.append(matcher)
+                def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                    return package.effname in names_to_check
+
+                self._matchers.append(matcher)
 
         if 'namepat' in ruledata:
             namepat = ruledata['namepat'].replace('\n', '')
@@ -181,113 +197,113 @@ class Rule:
                 namepat = DOLLAR0.sub(ruledata['setname'], namepat)
 
             self.namepat = namepat
-            namepat = re.compile(namepat, re.ASCII)
+            namepat_re: Final[Pattern] = re.compile(namepat, re.ASCII)
 
-            def matcher(package, package_context, match_context):
-                match = namepat.fullmatch(package.effname)
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                match = namepat_re.fullmatch(package.effname)
                 if match:
                     match_context.name_match = match
                     return True
                 return False
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'ver' in ruledata:
             versions: Final = as_set(ruledata['ver'])
 
             if len(versions) == 1:
-                version = versions.pop()
+                version: Final[str] = versions.pop()
 
-                def matcher(package, package_context, match_context):
+                def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                     return package.version == version
 
-                self.matchers.append(matcher)
+                self._matchers.append(matcher)
             else:
-                def matcher(package, package_context, match_context):
+                def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                     return package.version in versions
 
-                self.matchers.append(matcher)
+                self._matchers.append(matcher)
 
         if 'verpat' in ruledata:
             verpat: Final = re.compile(ruledata['verpat'].replace('\n', '').lower(), re.ASCII)
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 match = verpat.fullmatch(package.version.lower())
                 if match:
                     match_context.ver_match = match
                     return True
                 return False
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'verlonger' in ruledata:
-            verlonger: Final = ruledata['verlonger']
+            verlonger: Final[int] = ruledata['verlonger']
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return len(re.split('[^a-zA-Z0-9]', package.version)) > verlonger
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'vergt' in ruledata:
-            vergt: Final = ruledata['vergt']
+            vergt: Final[str] = ruledata['vergt']
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return version_compare(package.version, vergt) > 0
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'verge' in ruledata:
-            verge: Final = ruledata['verge']
+            verge: Final[str] = ruledata['verge']
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return version_compare(package.version, verge) >= 0
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'verlt' in ruledata:
-            verlt: Final = ruledata['verlt']
+            verlt: Final[str] = ruledata['verlt']
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return version_compare(package.version, verlt) < 0
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'verle' in ruledata:
-            verle: Final = ruledata['verle']
+            verle: Final[str] = ruledata['verle']
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return version_compare(package.version, verle) <= 0
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'vereq' in ruledata:
-            vereq: Final = ruledata['vereq']
+            vereq: Final[str] = ruledata['vereq']
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return version_compare(package.version, vereq) == 0
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'verne' in ruledata:
-            verne: Final = ruledata['verne']
+            verne: Final[str] = ruledata['verne']
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return version_compare(package.version, verne) != 0
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'wwwpat' in ruledata:
-            wwwpat: Final = re.compile(ruledata['wwwpat'].replace('\n', '').lower(), re.ASCII)
+            wwwpat: Final[Pattern] = re.compile(ruledata['wwwpat'].replace('\n', '').lower(), re.ASCII)
 
-            def matcher(package, package_context, match_context):
-                return package.homepage and wwwpat.fullmatch(package.homepage)
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return bool(package.homepage and wwwpat.fullmatch(package.homepage))
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'wwwpart' in ruledata:
             wwwparts: Final = as_lowercase_list(ruledata['wwwpart'])
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 if not package.homepage:
                     return False
                 for wwwpart in wwwparts:
@@ -295,12 +311,12 @@ class Rule:
                         return True
                 return False
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'summpart' in ruledata:
             summparts: Final = as_lowercase_list(ruledata['summpart'])
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 if not package.comment:
                     return False
                 for summpart in summparts:
@@ -308,171 +324,171 @@ class Rule:
                         return True
                 return False
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'flag' in ruledata:
             flags: Final = as_set(ruledata['flag'])
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return package_context.has_flags(flags)
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'noflag' in ruledata:
             noflags: Final = as_set(ruledata['noflag'])
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return not package_context.has_flags(noflags)
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         if 'is_p_is_patch' in ruledata:
-            is_p_is_patch: Final = ruledata['is_p_is_patch']
+            is_p_is_patch: Final[bool] = ruledata['is_p_is_patch']
 
-            def matcher(package, package_context, match_context):
+            def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return package.HasFlag(PackageFlags.p_is_patch) == is_p_is_patch
 
-            self.matchers.append(matcher)
+            self._matchers.append(matcher)
 
         # actions
         if 'remove' in ruledata:
-            remove_flag: Final = ruledata['remove']
+            remove_flag: Final[bool] = ruledata['remove']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.remove, remove_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'ignore' in ruledata:
-            ignore_flag: Final = ruledata['ignore']
+            ignore_flag: Final[bool] = ruledata['ignore']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.ignore, ignore_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'weak_devel' in ruledata:
             weak_devel_flag: Final = ruledata['weak_devel']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: currently sets ignore; change to set non-viral variant of devel (#654)
                 package.SetFlag(PackageFlags.ignore, weak_devel_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'devel' in ruledata:
             devel_flag: Final = ruledata['devel']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.devel, devel_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'p_is_patch' in ruledata:
             p_is_patch_flag: Final = ruledata['p_is_patch']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.p_is_patch, p_is_patch_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'any_is_patch' in ruledata:
             any_is_patch_flag: Final = ruledata['any_is_patch']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.any_is_patch, any_is_patch_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'outdated' in ruledata:
             outdated_flag: Final = ruledata['outdated']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.outdated, outdated_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'legacy' in ruledata:
             legacy_flag: Final = ruledata['legacy']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.legacy, legacy_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'incorrect' in ruledata:
             incorrect_flag: Final = ruledata['incorrect']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.incorrect, incorrect_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'untrusted' in ruledata:
             untrusted_flag: Final = ruledata['untrusted']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.untrusted, untrusted_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'noscheme' in ruledata:
             noscheme_flag: Final = ruledata['noscheme']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.noscheme, noscheme_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'rolling' in ruledata:
             rolling_flag: Final = ruledata['rolling']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.SetFlag(PackageFlags.rolling, rolling_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'snapshot' in ruledata:
             snapshot_flag: Final = ruledata['snapshot']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: the same as ignored for now
                 package.SetFlag(PackageFlags.ignore, snapshot_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'successor' in ruledata:
             successor_flag: Final = ruledata['successor']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: the same as devel for now
                 package.SetFlag(PackageFlags.devel, successor_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'debianism' in ruledata:
             debianism_flag: Final = ruledata['debianism']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: the same as devel for now
                 package.SetFlag(PackageFlags.devel, debianism_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'generated' in ruledata:
             generated_flag: Final = ruledata['generated']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: the same as rolling for now
                 package.SetFlag(PackageFlags.rolling, generated_flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'last' in ruledata:
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 match_context.last = True
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'addflavor' in ruledata:
             if isinstance(ruledata['addflavor'], str):
@@ -484,8 +500,8 @@ class Rule:
             else:
                 want_flavors: Final = None
 
-            def action(package, package_context, match_context):
-                flavors = want_flavors if want_flavors else [package.effname]
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                flavors: List[str] = want_flavors if want_flavors else [package.effname]
 
                 flavors = [match_context.sub_name_dollars(flavor, package.effname) for flavor in flavors]
 
@@ -493,67 +509,67 @@ class Rule:
 
                 package.flavors += [flavor for flavor in flavors if flavor]
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'resetflavors' in ruledata:
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.flavors = []
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'addflag' in ruledata:
             addflags: Final = as_list(ruledata['addflag'])
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 for flag in addflags:
                     package_context.add_flag(flag)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'setname' in ruledata:
             setname: Final = ruledata['setname']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.effname = match_context.sub_name_dollars(setname, package.effname)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'setver' in ruledata:
             setver: Final = ruledata['setver']
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 if package.origversion is None:
                     package.origversion = package.version
 
                 package.version = match_context.sub_ver_dollars(setver, package.version)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'replaceinname' in ruledata:
             replace_items: Final = list(ruledata['replaceinname'].items())
 
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 for pattern, replacement in replace_items:
                     package.effname = package.effname.replace(pattern, replacement)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'tolowername' in ruledata:
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 package.effname = package.effname.lower()
 
-            self.actions.append(action)
+            self._actions.append(action)
 
         if 'warning' in ruledata:
-            def action(package, package_context, match_context):
+            def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 print('Rule warning for {} ({}) in {}: {}'.format(package.effname, package.name, package.repo, ruledata['warning']), file=sys.stderr)
 
-            self.actions.append(action)
+            self._actions.append(action)
 
-    def match(self, package, package_context):
+    def match(self, package: Package, package_context: PackageContext) -> Optional[MatchContext]:
         match_context = MatchContext()
 
-        for matcher in self.matchers:
+        for matcher in self._matchers:
             if not matcher(package, package_context, match_context):
                 return None
 
@@ -561,6 +577,6 @@ class Rule:
 
         return match_context
 
-    def apply(self, package, package_context, match_context):
-        for action in self.actions:
+    def apply(self, package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+        for action in self._actions:
             action(package, package_context, match_context)
