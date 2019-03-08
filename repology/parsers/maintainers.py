@@ -16,14 +16,15 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from typing import Any, List
 
 
-def extract_maintainers(input_):
+def extract_maintainers(input_: Any) -> List[str]:
     if not input_:
         return []
 
-    def looks_like_email(s):
-        return re.fullmatch('[^<> \t]+@[^<> \t]+', s)
+    def looks_like_email(s: str) -> bool:
+        return bool(re.fullmatch('[^<> \t]+@[^<> \t]+', s))
 
     addresses = set()
     for part in input_.lower().split(','):

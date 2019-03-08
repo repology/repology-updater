@@ -15,18 +15,23 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import ClassVar, Optional, Tuple, Type, Union
 
 __all__ = ['nevra_construct', 'nevra_parse', 'EpochMode']
 
 
 class EpochMode:
-    PRESERVE = 0
-    PROVIDE = 1
-    TRIM = 2
+    PRESERVE: ClassVar[int] = 0
+    PROVIDE: ClassVar[int] = 1
+    TRIM: ClassVar[int] = 2
 
 
-def nevra_parse(nevra, epoch_mode=EpochMode.PRESERVE, epoch_type=str):
-    (name, epoch, version, release, architecture) = (None, None, None, None, None)
+# XXX: use typevar
+# https://github.com/python/mypy/issues/4236
+#EpochType = TypeVar('EpochType', str, int)
+
+def nevra_parse(nevra: str, epoch_mode: int = EpochMode.PRESERVE, epoch_type: Type[Union[str, int]] = str) -> Tuple[str, Union[int, str, None], str, str, str]:
+    epoch: Union[int, str, None] = None
 
     rest = nevra
 
@@ -52,11 +57,11 @@ def nevra_parse(nevra, epoch_mode=EpochMode.PRESERVE, epoch_type=str):
     return (name, epoch, version, release, architecture)
 
 
-def nevra_construct(name, epoch, version, release=None, architecture=None, epoch_mode=EpochMode.TRIM):
+def nevra_construct(name: Optional[str], epoch: Union[str, int, None], version: str, release: Optional[str] = None, architecture: Optional[str] = None, epoch_mode: int = EpochMode.TRIM) -> str:
     result = ''
 
     if version is None:
-        raise RuntimeError('version os required')
+        raise RuntimeError('version is required')
 
     result = version
 

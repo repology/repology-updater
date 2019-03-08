@@ -15,31 +15,34 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Callable, List
 
 __all__ = ['VersionStripper']
 
 
-class VersionStripper():
-    def __init__(self):
-        self.strips = []
+class VersionStripper:
+    _strips: List[Callable[[str], str]]
 
-    def strip_left(self, separator):
-        self.strips.append(lambda s: s.split(separator, 1)[-1])
+    def __init__(self) -> None:
+        self._strips = []
+
+    def strip_left(self, separator: str) -> 'VersionStripper':
+        self._strips.append(lambda s: s.split(separator, 1)[-1])
         return self
 
-    def strip_left_greedy(self, separator):
-        self.strips.append(lambda s: s.rsplit(separator, 1)[-1])
+    def strip_left_greedy(self, separator: str) -> 'VersionStripper':
+        self._strips.append(lambda s: s.rsplit(separator, 1)[-1])
         return self
 
-    def strip_right(self, separator):
-        self.strips.append(lambda s: s.rsplit(separator, 1)[0])
+    def strip_right(self, separator: str) -> 'VersionStripper':
+        self._strips.append(lambda s: s.rsplit(separator, 1)[0])
         return self
 
-    def strip_right_greedy(self, separator):
-        self.strips.append(lambda s: s.split(separator, 1)[0])
+    def strip_right_greedy(self, separator: str) -> 'VersionStripper':
+        self._strips.append(lambda s: s.split(separator, 1)[0])
         return self
 
-    def __call__(self, version):
-        for strip in self.strips:
+    def __call__(self, version: str) -> str:
+        for strip in self._strips:
             version = strip(version)
         return version
