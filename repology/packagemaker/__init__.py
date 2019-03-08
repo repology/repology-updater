@@ -17,6 +17,7 @@
 
 from copy import deepcopy
 from functools import wraps
+from typing import Any, Callable, Generator, Iterable, Optional
 
 from repology.logger import Logger
 from repology.package import Package
@@ -35,17 +36,19 @@ def _iter_unique(iterable, existing=None):
 
 
 class PackageMakerBase:
-    def __init__(self, logger):
-        self.logger = logger
+    _logger: Logger
 
-    def _get_ident(self):
+    def __init__(self, logger: Logger) -> None:
+        self._logger = logger
+
+    def _get_ident(self) -> str:
         return '?'
 
-    def log(self, message, severity=Logger.NOTICE):
-        self.logger.log(self._get_ident() + ': ' + message, severity)
+    def log(self, message: str, severity: int = Logger.NOTICE) -> None:
+        self._logger.log(self._get_ident() + ': ' + message, severity)
 
     @staticmethod
-    def _flatten_args(args):
+    def _flatten_args(args: Iterable[Any]) -> Generator[Any, None, None]:
         for arg in args:
             if arg is None or arg == '':
                 pass  # skip
@@ -109,140 +112,146 @@ class PackageMakerBase:
 
 
 class PackageMaker(PackageMakerBase):
-    def __init__(self, logger, ident, itemno, skipfailed=False):
-        super(PackageMaker, self).__init__(logger)
-        self.package = Package()
-        self.ident = ident
-        self.itemno = itemno
-        self.skipfailed = skipfailed
+    _package: Package
+    _ident: Optional[str]
+    _itemno: int
+    _skipfailed: bool
 
-    def _get_ident(self):
-        return self.ident or self.package.extrafields.get('origin', None) or self.package.name or self.package.basename or 'item #{}'.format(self.itemno)
+    def __init__(self, logger: Logger, ident: Optional[str], itemno: int, skipfailed: bool = False) -> None:
+        super(PackageMaker, self).__init__(logger)
+        self._package = Package()
+        self._ident = ident
+        self._itemno = itemno
+        self._skipfailed = skipfailed
+
+    def _get_ident(self) -> str:
+        return self._ident or self._package.extrafields.get('origin', None) or self._package.name or self._package.basename or 'item #{}'.format(self._itemno)
 
     @PackageMakerBase._simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
-    def set_origin(self, origin):
+    def set_origin(self, origin: str) -> None:
         # XXX: convert to dedicated field
         self.set_extra_field('origin', origin)
 
     @PackageMakerBase._simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
-    def set_name(self, name):
-        self.package.name = name
+    def set_name(self, name: str) -> None:
+        self._package.name = name
 
     @PackageMakerBase._simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
-    def set_basename(self, basename):
-        self.package.basename = basename
+    def set_basename(self, basename: str) -> None:
+        self._package.basename = basename
 
-    def prefix_name(self, prefix):
-        self.package.name = prefix + self.package.name
-
-    @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
-    def set_version(self, version, version_normalizer=None):
-        self.package.rawversion = version
-        self.package.origversion = version if version_normalizer is None else version_normalizer(version)
-        self.package.version = self.package.origversion
+    def prefix_name(self, prefix: str) -> None:
+        self._package.name = prefix + self._package.name
 
     @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
-    def set_rawversion(self, rawversion):
-        if rawversion != self.package.version:
-            self.package.rawversion = rawversion
+    def set_version(self, version: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
+        self._package.rawversion = version
+        self._package.origversion = version if version_normalizer is None else version_normalizer(version)
+        self._package.version = self._package.origversion
 
-    def set_name_and_version(self, namever, version_normalizer=None):
+    @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
+    def set_rawversion(self, rawversion: str) -> None:
+        if rawversion != self._package.version:
+            self._package.rawversion = rawversion
+
+    def set_name_and_version(self, namever: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
         name, version = namever.rsplit('-', 1)
         self.set_name(name)
         self.set_version(version, version_normalizer)
 
     @PackageMakerBase._simple_setter('summary', str, nzs.strip)
-    def set_summary(self, summary):
-        self.package.comment = summary
+    def set_summary(self, summary: str) -> None:
+        self._package.comment = summary
 
     @PackageMakerBase._omnivorous_setter('maintainer', str, nzs.strip, nzs.forbid_newlines, nzs.tolower)
-    def add_maintainers(self, *args):
-        self.package.maintainers.extend(_iter_unique(args, self.package.maintainers))
+    def add_maintainers(self, *args: Any) -> None:
+        self._package.maintainers.extend(_iter_unique(args, self._package.maintainers))
 
     @PackageMakerBase._omnivorous_setter('category', str, nzs.strip, nzs.forbid_newlines)
-    def add_categories(self, *args):
+    def add_categories(self, *args: Any) -> None:
         # XXX: convert into array
-        if not self.package.category:
-            self.package.category = args[0]
+        if not self._package.category:
+            self._package.category = args[0]
 
     @PackageMakerBase._omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
-    def add_homepages(self, *args):
+    def add_homepages(self, *args: Any) -> None:
         # XXX: convert into array
-        if not self.package.homepage:
-            self.package.homepage = args[0]
+        if not self._package.homepage:
+            self._package.homepage = args[0]
 
     @PackageMakerBase._omnivorous_setter('license', str, nzs.strip, nzs.forbid_newlines)
-    def add_licenses(self, *args):
-        self.package.licenses.extend(args)
+    def add_licenses(self, *args: Any) -> None:
+        self._package.licenses.extend(args)
 
     @PackageMakerBase._omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
-    def add_downloads(self, *args):
-        self.package.downloads.extend(_iter_unique(args, self.package.downloads))
+    def add_downloads(self, *args: Any) -> None:
+        self._package.downloads.extend(_iter_unique(args, self._package.downloads))
 
-    def set_flags(self, mask, is_set=True):
-        assert(isinstance(mask, int))
-        assert(isinstance(is_set, bool))
-        self.package.SetFlag(mask, is_set)
+    def set_flags(self, mask: int, is_set: bool = True) -> None:
+        self._package.SetFlag(mask, is_set)
 
-    def set_extra_field(self, key, value):
-        assert(isinstance(key, str))
-        assert(isinstance(value, str))
-        self.package.extrafields[key] = value
+    def set_extra_field(self, key: str, value: str) -> None:
+        self._package.extrafields[key] = value
 
-    def unwrap(self):
-        return self.package
+    def unwrap(self) -> Package:
+        return self._package
 
-    def clone(self, ident=None, append_ident=None):
-        offspring_ident = self.ident
+    def clone(self, ident: Optional[str] = None, append_ident: Optional[str] = None) -> 'PackageMaker':
+        offspring_ident = self._ident
         if ident is not None:
             offspring_ident = ident
         elif append_ident is not None:
-            offspring_ident += append_ident
+            offspring_ident = (offspring_ident or '') + append_ident
 
-        offspring = PackageMaker(self.logger, offspring_ident, self.itemno)
-        offspring.package = deepcopy(self.package)
+        offspring = PackageMaker(self._logger, offspring_ident, self._itemno)
+        offspring._package = deepcopy(self._package)
 
         return offspring
 
-    def check_sanity(self, require_name=True, require_version=True, verbose=False):
-        if require_name and not self.package.name:
+    def check_sanity(self, require_name: bool = True, require_version: bool = True, verbose: bool = False) -> bool:
+        if require_name and not self._package.name:
             if verbose:
                 self.log('package with no name', severity=Logger.ERROR)
             return False
 
-        if require_version and not self.package.version:
+        if require_version and not self._package.version:
             if verbose:
                 self.log('package with no version', severity=Logger.ERROR)
             return False
 
         return True
 
-    def __getattr__(self, key):
-        return getattr(self.package, key)
+    def __getattr__(self, key: str) -> Any:
+        return getattr(self._package, key)
 
-    def __enter__(self):
+    def __enter__(self) -> 'PackageMaker':
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> Optional[bool]:
         if exc_type:
             self.log('parsing failed ({}): {}: {}'.format(
-                'skipped' if self.skipfailed else 'fatal',
+                'skipped' if self._skipfailed else 'fatal',
                 exc_type.__name__,
                 exc_value
             ), severity=Logger.ERROR)
 
-            if self.skipfailed:
+            if self._skipfailed:
                 return True
+
+        return None
 
 
 class PackageFactory:
-    def __init__(self, logger):
-        self.logger = logger
-        self.itemno = 0
+    _logger: Logger
+    _itemno: int
 
-    def begin(self, ident=None, skipfailed=False):
-        self.itemno += 1
-        return PackageMaker(self.logger, ident, self.itemno, skipfailed)
+    def __init__(self, logger: Logger) -> None:
+        self._logger = logger
+        self._itemno = 0
 
-    def log(self, message, severity=Logger.NOTICE):
-        self.logger.log(message, severity)
+    def begin(self, ident: Optional[str] = None, skipfailed: bool = False) -> PackageMaker:
+        self._itemno += 1
+        return PackageMaker(self._logger, ident, self._itemno, skipfailed)
+
+    def log(self, message: str, severity: int = Logger.NOTICE) -> None:
+        self._logger.log(message, severity)
