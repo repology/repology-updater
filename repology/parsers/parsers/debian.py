@@ -113,7 +113,7 @@ class DebianSourcesParser(Parser):
                     continue
 
                 # key - value pair
-                match = re.fullmatch('([A-Za-z0-9-]+):(.*?)', line)
+                match = re.fullmatch('([A-Za-z0-9_-]+):(.*?)', line)
                 if match:
                     key = match.group(1)
                     value = match.group(2).strip()
