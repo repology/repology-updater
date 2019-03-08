@@ -18,7 +18,7 @@
 import os
 import pickle
 from contextlib import ExitStack, contextmanager
-from typing import BinaryIO, Iterable, List, Optional
+from typing import Any, BinaryIO, Iterable, List, Optional
 
 from repology.package import Package
 
@@ -92,8 +92,8 @@ class StreamDeserializer:
             self._fd.close()
             raise
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.fd.close()
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        self._fd.close()
 
     def pop(self) -> Optional[Package]:
         current = self._current
