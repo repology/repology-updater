@@ -84,37 +84,3 @@ def nevra_construct(name: Optional[str], epoch: Union[str, int, None], version: 
         result = result + '.' + architecture
 
     return result
-
-
-def parse_nevra_from_filename(filename):
-    # just drop extension; assumes extension does not contain
-    # extra dots, e.g. .rpm, not .tar.gz
-    return parse_nevra(filename.rsplit('.', 1)[0])
-
-
-def parse_nevra(nevra):
-    rest, architecture = nevra.rsplit('.', 1)
-
-    name, version, revision = rest.rsplit('-', 2)
-
-    epoch = ''
-
-    if ':' in version:
-        epoch, version = version.rsplit(':', 1)
-
-    return (name, epoch, version, revision, architecture)
-
-
-def construct_evr(epoch, version, release):
-    if not version:
-        raise RuntimeError('no version provided`')
-
-    evr = version
-
-    if epoch and str(epoch) != '0':
-        evr = str(epoch) + ':' + evr
-
-    if release:
-        evr = evr + '-' + release
-
-    return evr
