@@ -32,21 +32,24 @@ class SrcListParser(Parser):
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         for header in rpm.readHeaderListFromFile(path):
-            fields = {
-                key: str(header[key], self.encoding) if header[key] is not None else None
-                for key in ['name', 'version', 'release', 'packager', 'group', 'summary']
-            }
+            with factory.begin() as pkg:
+                fields = {
+                    key: str(header[key], self.encoding) if header[key] is not None else None
+                    for key in ['name', 'version', 'release', 'packager', 'group', 'summary']
+                }
 
-            pkg = factory.begin()
+                pkg.set_name(fields['name'])
+                pkg.set_version(fields['version'])  # XXX: handle release
 
-            pkg.set_name(fields['name'])
-            pkg.set_version(fields['version'])  # XXX: handle release
-            pkg.set_rawversion(nevra_construct(None, header['epoch'], fields['version'], fields['release']))
+                if fields['version'] is None:
+                    raise RuntimeError('version not defined')
 
-            if fields['packager']:
-                pkg.add_maintainers(extract_maintainers(fields['packager']))  # XXX: may have multiple maintainers
+                pkg.set_rawversion(nevra_construct(None, header['epoch'], fields['version'], fields['release']))
 
-            pkg.add_categories(fields['group'])
-            pkg.set_summary(fields['summary'])
+                if fields['packager']:
+                    pkg.add_maintainers(extract_maintainers(fields['packager']))  # XXX: may have multiple maintainers
 
-            yield pkg
+                pkg.add_categories(fields['group'])
+                pkg.set_summary(fields['summary'])
+
+                yield pkg
