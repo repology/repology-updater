@@ -105,14 +105,13 @@ update cycle consists of multiple steps, but in most cases you'll need
 to just run all of them:
 
 ```
-./repology-update.py --fetch --update --parse --database --postupdate
+./repology-update.py --fetch --fetch --parse --database --postupdate
 ```
 
 * `--fetch` tells the utility to fetch raw repository data
 (download files, scrape websites, clone git repos) into state
 directory. Note that it won't refetch (update) data unless
-`--update` is also specified, so it makes sense to specify
-it as well in most cases.
+it's specified twice.
 * `--parse` enables parsing downloaded data into internal format
 which is also saved into state directory.
 * `--database` pushes processed package data into the database.

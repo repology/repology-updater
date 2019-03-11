@@ -103,11 +103,13 @@ def process_repositories(env):
             database.update_repository_ruleset_hash(reponame, None)
             database.commit()
 
+            allow_update = env.get_options().fetch >= 1
+
             have_changes = False
 
             try:
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'fetch') as runlogger:
-                    have_changes = env.get_repo_processor().fetch([reponame], update=env.get_options().update, logger=runlogger)
+                    have_changes = env.get_repo_processor().fetch([reponame], update=allow_update, logger=runlogger)
                     if not have_changes:
                         runlogger.set_no_changes()
 
@@ -126,7 +128,13 @@ def process_repositories(env):
         if env.get_options().parse:
             transformer = env.get_package_transformer()
 
-            if transformer.get_ruleset_hash() == database.get_repository_ruleset_hash(reponame):
+            ruleset_hash_changed = transformer.get_ruleset_hash() != database.get_repository_ruleset_hash(reponame)
+
+            if ruleset_hash_changed:
+                env.get_main_logger().log('parsing {}'.format(reponame))
+            elif env.get_options().parse >= 2:
+                env.get_main_logger().log('parsing {} (forced)'.format(reponame))
+            else:
                 env.get_main_logger().log('not parsing {} due to no data changes since last run'.format(reponame))
                 continue
 
@@ -134,7 +142,6 @@ def process_repositories(env):
             database.update_repository_ruleset_hash(reponame, None)
             database.commit()
 
-            env.get_main_logger().log('parsing {}'.format(reponame))
             try:
                 with LogRunManager(env.get_logging_database_connection(), reponame, 'parse') as runlogger:
                     env.get_repo_processor().parse([reponame], transformer=transformer, logger=runlogger)
@@ -243,9 +250,8 @@ def parse_arguments():
     actions_grp = parser.add_argument_group('Actions')
     actions_grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
 
-    actions_grp.add_argument('-f', '--fetch', action='store_true', help='fetching repository data')
-    actions_grp.add_argument('-u', '--update', action='store_true', help='when fetching, allow updating (otherwise, only fetch once)')
-    actions_grp.add_argument('-p', '--parse', action='store_true', help='parse, process and serialize repository data')
+    actions_grp.add_argument('-f', '--fetch', action='count', help='fetch repository data (twice to allow updating)')
+    actions_grp.add_argument('-p', '--parse', action='count', help='parse fetched repository data (specify twice to parse even if the fetched data hasn\'t changed)')
 
     # XXX: this is dangerous as long as ignored packages are removed from dumps
     actions_grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
