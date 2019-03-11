@@ -83,9 +83,9 @@ class WikidataJsonParser(Parser):
                 for fieldname, fakerepo in _DONOR_REPOS:
                     for name in packagedata[fieldname].split(', '):
                         if name:
-                            fakepkg = verpkg.clone()
-                            fakepkg.set_name(name)
-                            fakepkg = fakepkg.unwrap()
+                            fakepkgmaker = verpkg.clone()
+                            fakepkgmaker.set_name(name)
+                            fakepkg = fakepkgmaker.unwrap()
                             fakepkg.repo = fakerepo
                             transformer.process(fakepkg)
                             names.add(fakepkg.effname)
