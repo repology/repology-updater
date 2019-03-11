@@ -61,8 +61,8 @@ class PackageContext:
 class MatchContext:
     __slots__ = ['name_match', 'ver_match', 'last']
 
-    name_match: Optional[Match]
-    ver_match: Optional[Match]
+    name_match: Optional[Match[str]]
+    ver_match: Optional[Match[str]]
     last: bool
 
     def __init__(self) -> None:
@@ -74,7 +74,7 @@ class MatchContext:
         if self.name_match is None:
             return DOLLAR0.sub(fullstr, value)
 
-        def repl(matchobj: Match) -> str:
+        def repl(matchobj: Match[str]) -> str:
             # mypy is unable to derive that self.name_match is always defined here
             return self.name_match.group(int(matchobj.group(1)))  # type: ignore
 
@@ -84,7 +84,7 @@ class MatchContext:
         if self.ver_match is None:
             return DOLLAR0.sub(fullstr, value)
 
-        def repl(matchobj: Match) -> str:
+        def repl(matchobj: Match[str]) -> str:
             return self.ver_match.group(int(matchobj.group(1)))  # type: ignore
 
         return DOLLARN.sub(repl, value)
@@ -197,7 +197,7 @@ class Rule:
                 namepat = DOLLAR0.sub(ruledata['setname'], namepat)
 
             self.namepat = namepat
-            namepat_re: Final[Pattern] = re.compile(namepat, re.ASCII)
+            namepat_re: Final[Pattern[str]] = re.compile(namepat, re.ASCII)
 
             def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 match = namepat_re.fullmatch(package.effname)
@@ -293,7 +293,7 @@ class Rule:
             self._matchers.append(matcher)
 
         if 'wwwpat' in ruledata:
-            wwwpat: Final[Pattern] = re.compile(ruledata['wwwpat'].replace('\n', '').lower(), re.ASCII)
+            wwwpat: Final[Pattern[str]] = re.compile(ruledata['wwwpat'].replace('\n', '').lower(), re.ASCII)
 
             def matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 return bool(package.homepage and wwwpat.fullmatch(package.homepage))

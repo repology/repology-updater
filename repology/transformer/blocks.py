@@ -97,7 +97,7 @@ class NameMapRuleBlock(RuleBlock):
 
 class CoveringRuleBlock(RuleBlock):
     _names: MutableSet[str]
-    _megaregexp: Pattern
+    _megaregexp: Pattern[str]
     _sub_blocks: List[RuleBlock]
 
     def __init__(self, blocks: List[RuleBlock]) -> None:

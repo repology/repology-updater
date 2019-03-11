@@ -23,9 +23,9 @@ from typing import ClassVar, List, Tuple
 
 
 class Logger(ABC):
-    NOTICE: ClassVar = 1
-    WARNING: ClassVar = 2
-    ERROR: ClassVar = 3
+    NOTICE: ClassVar[int] = 1
+    WARNING: ClassVar[int] = 2
+    ERROR: ClassVar[int] = 3
 
     def log(self, message: str, severity: int = NOTICE) -> None:
         if severity == Logger.ERROR:
