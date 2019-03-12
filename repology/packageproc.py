@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,12 +17,13 @@
 
 from collections import defaultdict
 from functools import cmp_to_key
+from typing import Callable, Dict, Generator, Iterable, List, Optional, Sequence, Tuple
 
-from repology.package import PackageFlags, VersionClass
+from repology.package import Package, PackageFlags, VersionClass
 
 
-def PackagesetDeduplicate(packages):
-    aggregated = defaultdict(list)
+def PackagesetDeduplicate(packages: Sequence[Package]) -> List[Package]:
+    aggregated: Dict[Tuple[str, Optional[str], str, str], List[Package]] = defaultdict(list)
 
     # aggregate by subset of fields to make O(n²) merge below faster
     for package in packages:
@@ -43,7 +44,7 @@ def PackagesetDeduplicate(packages):
     return outpkgs
 
 
-def packageset_is_unique(packages):
+def packageset_is_unique(packages: Sequence[Package]) -> bool:
     if len(packages) <= 1:
         return True
 
@@ -54,7 +55,7 @@ def packageset_is_unique(packages):
     return True
 
 
-def packageset_may_be_unignored(packages):
+def packageset_may_be_unignored(packages: Sequence[Package]) -> bool:
     if len(packages) <= 1:
         return True
 
@@ -69,12 +70,13 @@ def packageset_may_be_unignored(packages):
     return True
 
 
-def FillPackagesetVersions(packages):
+def FillPackagesetVersions(packages: Sequence[Package]) -> None:
     # helpers
-    def AggregateBySameVersion(packages):
-        current = None
+    def AggregateBySameVersion(packages: Iterable[Package]) -> Generator[List[Package], None, None]:
+        current: List[Package] = []
+
         for package in packages:
-            if current is None:
+            if not current:
                 current = [package]
             elif current[0].VersionCompare(package) == 0:
                 current.append(package)
@@ -82,38 +84,45 @@ def FillPackagesetVersions(packages):
                 yield current
                 current = [package]
 
-        if current is not None:
+        if current:
             yield current
-
-    class BranchPrototype:
-        __slots__ = ['versionclass', 'check']
-
-        def __init__(self, versionclass, check):
-            self.versionclass = versionclass
-            self.check = check
-
-        def Check(self, package):
-            return self.check(package)
-
-        def CreateBranch(self, bestpackage=None):
-            return Branch(self.versionclass, bestpackage)
 
     class Branch:
         __slots__ = ['versionclass', 'bestpackage', 'lastpackage']
 
-        def __init__(self, versionclass, bestpackage=None):
+        versionclass: int
+        bestpackage: Optional[Package]
+        lastpackage: Optional[Package]
+
+        def __init__(self, versionclass: int, bestpackage: Optional[Package] = None):
             self.versionclass = versionclass
             self.bestpackage = bestpackage
             self.lastpackage = bestpackage
 
-        def SetLastPackage(self, lastpackage):
+        def SetLastPackage(self, lastpackage: Package) -> None:
             self.lastpackage = lastpackage
 
-        def BestPackageCompare(self, package):
+        def BestPackageCompare(self, package: Package) -> int:
             return package.VersionCompare(self.bestpackage) if self.bestpackage is not None else 1
 
-        def IsAfterBranch(self, package):
+        def IsAfterBranch(self, package: Package) -> bool:
             return package.VersionCompare(self.lastpackage) == -1 if self.lastpackage is not None else False
+
+    class BranchPrototype:
+        __slots__ = ['_versionclass', '_check']
+
+        _versionclass: int
+        #_check: Callable[[Package], bool]  # mypy goes mad
+
+        def __init__(self, versionclass: int, check: Callable[[Package], bool]) -> None:
+            self._versionclass = versionclass
+            self._check = check
+
+        def Check(self, package: Package) -> bool:
+            return self._check(package)
+
+        def CreateBranch(self, bestpackage: Optional[Package] = None) -> 'Branch':
+            return Branch(self._versionclass, bestpackage)
 
     # global flags #1
     metapackage_is_unique = packageset_is_unique(packages)
@@ -160,8 +169,8 @@ def FillPackagesetVersions(packages):
     #
     # Pass 1: discover branches
     #
-    branches = []
-    packages_by_repo = defaultdict(list)
+    branches: List[Branch] = []
+    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
     current_branchproto_idx = None
     for verpackages in AggregateBySameVersion(packages):
         version_totally_ignored = True
@@ -201,7 +210,7 @@ def FillPackagesetVersions(packages):
     #
     for repo, repo_packages in packages_by_repo.items():
         current_branch_idx = 0
-        first_package_in_branch_per_flavor = {}
+        first_package_in_branch_per_flavor: Dict[str, Package] = {}
 
         for package in repo_packages:  # these are still sorted by version
             # switch to next branch when the current one is over, but not past the last branch
@@ -244,8 +253,8 @@ def FillPackagesetVersions(packages):
                     first_package_in_branch_per_flavor[flavor] = package
 
 
-def PackagesetSortByVersion(packages):
-    def compare(p1, p2):
+def PackagesetSortByVersion(packages: Sequence[Package]) -> List[Package]:
+    def compare(p1: Package, p2: Package) -> int:
         return p2.VersionCompare(p1)
 
     return sorted(packages, key=cmp_to_key(compare))
