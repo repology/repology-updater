@@ -35,7 +35,7 @@ def _iter_unique(iterable, existing=None):
             yield value
 
 
-class PackageMakerBase:
+class PackageMakerBase(Logger):
     _logger: Logger
 
     def __init__(self, logger: Logger) -> None:
@@ -44,7 +44,7 @@ class PackageMakerBase:
     def _get_ident(self) -> str:
         return '?'
 
-    def log(self, message: str, severity: int = Logger.NOTICE) -> None:
+    def _write_log(self, message: str, severity: int = Logger.NOTICE) -> None:
         self._logger.log(self._get_ident() + ': ' + message, severity)
 
     @staticmethod
@@ -241,7 +241,7 @@ class PackageMaker(PackageMakerBase):
         return None
 
 
-class PackageFactory:
+class PackageFactory(Logger):
     _logger: Logger
     _itemno: int
 
@@ -249,9 +249,9 @@ class PackageFactory:
         self._logger = logger
         self._itemno = 0
 
+    def _write_log(self, message: str, severity: int = Logger.NOTICE) -> None:
+        self._logger.log(message, severity)
+
     def begin(self, ident: Optional[str] = None, skipfailed: bool = False) -> PackageMaker:
         self._itemno += 1
         return PackageMaker(self._logger, ident, self._itemno, skipfailed)
-
-    def log(self, message: str, severity: int = Logger.NOTICE) -> None:
-        self._logger.log(message, severity)
