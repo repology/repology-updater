@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Generator
+from typing import Generator, Tuple
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -26,7 +26,7 @@ from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
 
 
-def _iter_cygports(path):
+def _iter_cygports(path: str) -> Generator[Tuple[str, str], None, None]:
     for package in os.listdir(path):
         package_path = os.path.join(path, package)
         if not os.path.isdir(package_path):

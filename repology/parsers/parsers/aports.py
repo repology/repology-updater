@@ -25,7 +25,7 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def normalize_version(version):
+def normalize_version(version: str) -> str:
     match = re.match('(.*)-r[0-9]+$', version)
     if match is not None:
         version = match.group(1)

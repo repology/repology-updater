@@ -17,15 +17,15 @@
 
 import os
 import re
-from typing import Generator
+from typing import Dict, Generator
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _parse_infofile(path):
-    data = {}
+def _parse_infofile(path: str) -> Dict[str, str]:
+    data: Dict[str, str] = {}
 
     with open(path, 'r', encoding='utf-8', errors='ignore') as infofile:
         key = None

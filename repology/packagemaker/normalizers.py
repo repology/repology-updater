@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from typing import Callable, Optional, Tuple
 
 
 _supported_schemas = [
@@ -39,7 +40,11 @@ _supported_schemas = [
 ]
 
 
-def url(value):
+NormalizerResult = Tuple[Optional[str], Optional[str]]
+NormalizerFunction = Callable[[str], NormalizerResult]
+
+
+def url(value: str) -> NormalizerResult:
     match = re.fullmatch('([a-z][a-z0-9.+-]*)://([^/]+)(/.*)?', value, re.IGNORECASE)
     if not match and '://' not in value:
         return None, 'does not look like an URL (schema missing)'
@@ -59,21 +64,21 @@ def url(value):
     return '{}://{}{}'.format(schema, hostname, path), None
 
 
-def strip(value):
+def strip(value: str) -> Tuple[str, None]:
     return value.strip(), None
 
 
-def tolower(value):
+def tolower(value: str) -> Tuple[str, None]:
     return value.lower(), None
 
 
-def warn_whitespace(value):
+def warn_whitespace(value: str) -> NormalizerResult:
     if ' ' in value or '\t' in value:
         return value, 'contains whitespace'
     return value, None
 
 
-def forbid_newlines(value):
+def forbid_newlines(value: str) -> NormalizerResult:
     if '\n' in value:
         return None, 'contains newlines'
     else:

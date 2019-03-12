@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Generator
+from typing import Generator, Tuple
 
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -26,11 +26,11 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def _normalize_version(version):
+def _normalize_version(version: str) -> str:
     return re.sub('-r[0-9]+$', '', version)
 
 
-def _iter_exheres(path):
+def _iter_exheres(path: str) -> Generator[Tuple[str, str, str], None, None]:
     for category in os.listdir(path):
         category_path = os.path.join(path, category)
         if not os.path.isdir(category_path):

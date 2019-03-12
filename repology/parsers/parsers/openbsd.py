@@ -18,7 +18,7 @@
 import os
 import re
 import sqlite3
-from typing import Generator
+from typing import Dict, Generator
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -27,7 +27,7 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def _normalize_version(version):
+def _normalize_version(version: str) -> str:
     match = re.match('(.*)v[0-9]+$', version)
     if match is not None:
         version = match.group(1)
@@ -39,7 +39,7 @@ def _normalize_version(version):
     return version
 
 
-def _iter_sqlports(path):
+def _iter_sqlports(path: str) -> Generator[Dict[str, str], None, None]:
     columns = [
         'fullpkgpath',
         'categories',

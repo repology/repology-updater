@@ -492,13 +492,13 @@ class Rule:
 
         if 'addflavor' in ruledata:
             if isinstance(ruledata['addflavor'], str):
-                want_flavors: Final = [ruledata['addflavor']]
+                want_flavors: Final[Optional[List[str]]] = [ruledata['addflavor']]
             elif isinstance(ruledata['addflavor'], list):
-                want_flavors: Final = ruledata['addflavor']
+                want_flavors: Final[Optional[List[str]]] = ruledata['addflavor']
             elif not isinstance(ruledata['addflavor'], bool):
                 raise RuntimeError('addflavor must be boolean or str or list')
             else:
-                want_flavors: Final = None
+                want_flavors: Final[Optional[List[str]]] = None
 
             def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 flavors: List[str] = want_flavors if want_flavors else [package.effname]

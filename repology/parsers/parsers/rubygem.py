@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Generator
+from typing import Generator, Union
 
 import rubymarshal.reader
 
@@ -25,7 +25,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _force_decode(var):
+def _force_decode(var: Union[str, bytes]) -> str:
     if isinstance(var, str):
         return var
     else:

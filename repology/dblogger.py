@@ -18,11 +18,13 @@
 import datetime
 import resource
 import traceback
+from typing import Any, List, Tuple
 
+from repology.database import Database
 from repology.logger import Logger
 
 
-def _severity_to_sql(severity):
+def _severity_to_sql(severity: int) -> str:
     if severity == Logger.NOTICE:
         return 'notice'
     elif severity == Logger.WARNING:
@@ -34,61 +36,69 @@ def _severity_to_sql(severity):
 
 
 class RealtimeDatabaseLogger(Logger):
-    def __init__(self, db, run_id, maxlines=2500):
-        self.db = db
-        self.run_id = run_id
-        self.numlines = 0
-        self.maxlines = maxlines
+    _db: Database
+    _run_id: int
+    _numlines: int
+    _maxlines: int
 
-    def _write_log(self, message, severity):
-        if self.numlines == self.maxlines:
-            self.db.add_log_line(
-                self.run_id,
-                self.numlines + 1,
+    def __init__(self, db: Database, run_id: int, maxlines: int = 2500) -> None:
+        self._db = db
+        self._run_id = run_id
+        self._numlines = 0
+        self._maxlines = maxlines
+
+    def _write_log(self, message: str, severity: int) -> None:
+        if self._numlines == self._maxlines:
+            self._db.add_log_line(
+                self._run_id,
+                self._numlines + 1,
                 None,
                 _severity_to_sql(Logger.ERROR),
-                'Log trimmed at {} lines'.format(self.maxlines)
+                'Log trimmed at {} lines'.format(self._maxlines)
             )
-            self.numlines += 1
+            self._numlines += 1
 
-        if self.numlines >= self.maxlines:
+        if self._numlines >= self._maxlines:
             return
 
-        self.db.add_log_line(
-            self.run_id,
-            self.numlines + 1,
+        self._db.add_log_line(
+            self._run_id,
+            self._numlines + 1,
             None,
             _severity_to_sql(severity),
             message
         )
-        self.numlines += 1
+        self._numlines += 1
 
 
 class PostponedDatabaseLogger(Logger):
-    def __init__(self, maxlines=2500):
-        self.lines = []
-        self.maxlines = maxlines
+    _lines: List[Tuple[datetime.datetime, int, str]]
+    _maxlines: int
 
-    def _write_log(self, message, severity):
-        if len(self.lines) == self.maxlines:
-            self.lines.append((
+    def __init__(self, maxlines: int = 2500) -> None:
+        self._lines = []
+        self._maxlines = maxlines
+
+    def _write_log(self, message: str, severity: int) -> None:
+        if len(self._lines) == self._maxlines:
+            self._lines.append((
                 datetime.datetime.now(),
                 Logger.ERROR,
-                'Log trimmed at {} lines'.format(self.maxlines)
+                'Log trimmed at {} lines'.format(self._maxlines)
             ))
 
-        if len(self.lines) >= self.maxlines:
+        if len(self._lines) >= self._maxlines:
             return
 
-        self.lines.append((
+        self._lines.append((
             datetime.datetime.now(),
             severity,
             message
         ))
 
-    def flush(self, db, run_id):
-        for lineno, (timestamp, severity, message) in enumerate(self.lines, 1):
-            self.db.add_log_line(
+    def flush(self, db: Database, run_id: int) -> None:
+        for lineno, (timestamp, severity, message) in enumerate(self._lines, 1):
+            db.add_log_line(
                 run_id,
                 lineno,
                 timestamp,
@@ -98,46 +108,56 @@ class PostponedDatabaseLogger(Logger):
 
 
 class LogRunManager:
-    def __init__(self, db, reponame, run_type):
-        self.db = db
-        self.reponame = reponame
-        self.run_type = run_type
-        self.target_status = 'successful'
-        self.no_changes = False
+    _db: Database
+    _reponame: str
+    _run_type: str
+    _target_status: str
+    _no_changes: bool
+    _start_rusage: Any
+    _logger: Logger
 
-    def __enter__(self):
-        self.run_id = self.db.start_run(self.reponame, self.run_type)
-        self.logger = RealtimeDatabaseLogger(self.db, self.run_id)
+    def __init__(self, db: Database, reponame: str, run_type: str):
+        self._db = db
+        self._reponame = reponame
+        self._run_type = run_type
+        self._target_status = 'successful'
+        self._no_changes = False
 
-        def _set_no_changes():
-            self.no_changes = True
+    def __enter__(self) -> Logger:
+        self._run_id = self._db.start_run(self._reponame, self._run_type)
+        self._start_rusage = resource.getrusage(resource.RUSAGE_SELF)
+        self._logger = RealtimeDatabaseLogger(self._db, self._run_id)
 
-        self.logger.set_no_changes = _set_no_changes
+        class HelperLogger(Logger):
+            def _write_log(dummyself, message: str, severity: int = Logger.NOTICE) -> None:
+                self._logger.log(message, severity)
 
-        self.start_rusage = resource.getrusage(resource.RUSAGE_SELF)
-        return self.logger
+            def _set_no_changes(dummyself) -> None:
+                self._no_changes = True
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+        return HelperLogger()
+
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
         end_rusage = resource.getrusage(resource.RUSAGE_SELF)
 
-        target_status = self.target_status
+        target_status = self._target_status
         trace = None
 
         if exc_type is KeyboardInterrupt:
-            self.logger.log('interrupted by administrator', severity=Logger.WARNING)
+            self._logger.log('interrupted by administrator', severity=Logger.WARNING)
             target_status = 'interrupted'
         elif exc_type:
-            self.logger.log('{}: {}'.format(exc_type.__name__, exc_val), severity=Logger.ERROR)
+            self._logger.log('{}: {}'.format(exc_type.__name__, exc_val), severity=Logger.ERROR)
             target_status = 'failed'
             trace = traceback.format_exception(exc_type, exc_val, exc_tb)
 
-        self.db.finish_run(
-            self.run_id,
+        self._db.finish_run(
+            self._run_id,
             target_status,
-            self.no_changes,
-            utime=datetime.timedelta(seconds=end_rusage.ru_utime - self.start_rusage.ru_utime),
-            stime=datetime.timedelta(seconds=end_rusage.ru_stime - self.start_rusage.ru_stime),
+            self._no_changes,
+            utime=datetime.timedelta(seconds=end_rusage.ru_utime - self._start_rusage.ru_utime),
+            stime=datetime.timedelta(seconds=end_rusage.ru_stime - self._start_rusage.ru_stime),
             maxrss=end_rusage.ru_maxrss,
-            maxrss_delta=end_rusage.ru_maxrss - self.start_rusage.ru_maxrss,
+            maxrss_delta=end_rusage.ru_maxrss - self._start_rusage.ru_maxrss,
             traceback=trace
         )

@@ -25,7 +25,7 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def normalize_version(version):
+def normalize_version(version: str) -> str:
     # epoch
     pos = version.find(':')
     if pos != -1:
@@ -55,7 +55,7 @@ def normalize_version(version):
 
 
 class DebianSourcesParser(Parser):
-    def __init__(self, project_name_from_source=False):
+    def __init__(self, project_name_from_source: bool = False) -> None:
         self.project_name_from_source = project_name_from_source
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:

@@ -67,7 +67,7 @@ class AtomicDir(_AtomicFSObject):
         os.mkdir(self._get_new_path())
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
         if not exc_type and not self.canceled:
             self._replace()
 
@@ -85,7 +85,7 @@ class AtomicFile(_AtomicFSObject):
         self.file = open(self._get_new_path(), *self.args, **self.kwargs)
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
         self.file.close()
 
         if not exc_type and not self.canceled:

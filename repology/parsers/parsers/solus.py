@@ -23,7 +23,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iter_package_entries(path):
+def _iter_package_entries(path: str) -> Generator[xml.etree.ElementTree.Element, None, None]:
     """Return all <Package> elements from XML.
 
     The purpose is to clear the element after processing, so
@@ -35,7 +35,7 @@ def _iter_package_entries(path):
             elem.clear()
 
 
-def _expand_multiline_licenses(text):
+def _expand_multiline_licenses(text: str) -> Generator[str, None, None]:
     return (license.lstrip('- ') for license in text.split('\n'))
 
 
@@ -49,15 +49,15 @@ class SolusIndexParser(Parser):
                     continue
 
                 pkg.set_name(namenode.text)
-                pkg.set_summary(entry.find('Summary').text)
-                pkg.add_licenses((_expand_multiline_licenses(elt.text) for elt in entry.findall('License')))
+                pkg.set_summary(entry.findtext('Summary'))
+                pkg.add_licenses((_expand_multiline_licenses(elt.text) for elt in entry.findall('License') if elt.text))
                 pkg.add_categories((elt.text for elt in entry.findall('PartOf')))
 
-                for update in entry.find('History').findall('Update'):
-                    pkg.set_version(update.find('Version').text)
+                for update in entry.findall('./History/Update'):
+                    pkg.set_version(update.findtext('Version'))
                     break
 
-                pkg.set_basename(entry.find('Source').find('Name').text)
-                pkg.add_maintainers(entry.find('Source').find('Packager').find('Email').text)
+                pkg.set_basename(entry.findtext('./Source/Name'))
+                pkg.add_maintainers(entry.findtext('./Source/Packager/Email'))
 
                 yield pkg

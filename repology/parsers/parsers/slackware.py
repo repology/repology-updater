@@ -15,14 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Generator
+from typing import Generator, Tuple
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iterate_packages(path):
+def _iterate_packages(path: str) -> Generator[Tuple[str, str], None, None]:
     with open(path, encoding='utf-8', errors='ignore') as packagesfile:
         current_name = None
 

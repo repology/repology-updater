@@ -26,7 +26,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def normalize_version(version):
+def normalize_version(version: str) -> str:
     version = re.sub('[^0-9]*vcpkg.*$', '', version)  # vcpkg stuff
     version = re.sub('(alpha|beta|rc|patch)-([0-9]+)$', '\\1\\2', version)  # save from the following rule
     version = re.sub('-[0-9]+$', '', version)  # cut off revision

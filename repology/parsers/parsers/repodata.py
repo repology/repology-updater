@@ -28,7 +28,7 @@ from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
 
 
-def _iter_package_entries(path):
+def _iter_package_entries(path: str) -> Generator[xml.etree.ElementTree.Element, None, None]:
     """Return all <package> elements from XML.
 
     The purpose is to clear the element after processing, so
@@ -50,42 +50,46 @@ class RepodataParser(Parser):
         skipped_archs: Dict[str, int] = {}
 
         for entry in _iter_package_entries(path):
-            pkg = factory.begin()
+            with factory.begin() as pkg:
+                arch = entry.findtext('{http://linux.duke.edu/metadata/common}arch')
+                if self.allowed_archs and arch not in self.allowed_archs:
+                    skipped_archs[arch] = skipped_archs.get(arch, 0) + 1
+                    continue
 
-            arch = entry.find('{http://linux.duke.edu/metadata/common}arch').text
-            if self.allowed_archs and arch not in self.allowed_archs:
-                skipped_archs[arch] = skipped_archs.get(arch, 0) + 1
-                continue
+                pkg.set_name(entry.findtext('{http://linux.duke.edu/metadata/common}name'))
 
-            pkg.set_name(entry.find('{http://linux.duke.edu/metadata/common}name').text)
-            epoch = entry.find('{http://linux.duke.edu/metadata/common}version').attrib['epoch']
-            version = entry.find('{http://linux.duke.edu/metadata/common}version').attrib['ver']
-            release = entry.find('{http://linux.duke.edu/metadata/common}version').attrib['rel']
+                version_elt = entry.find('{http://linux.duke.edu/metadata/common}version')
+                if version_elt is None:
+                    raise RuntimeError('Cannot find <version> element')
 
-            match = re.match('0\\.[0-9]+\\.((?:alpha|beta|rc)[0-9]+)\\.', release)
-            if match:
-                # known pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Prerelease_versions
-                version += '-' + match.group(1)
-            elif release < '1':
-                # unknown pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Some_definitions
-                # most likely a snapshot
-                pkg.set_flags(PackageFlags.ignore)
+                epoch = version_elt.attrib['epoch']
+                version = version_elt.attrib['ver']
+                release = version_elt.attrib['rel']
 
-            pkg.set_version(version, normalize_version)
-            pkg.set_rawversion(nevra_construct(None, epoch, version, release))
+                match = re.match('0\\.[0-9]+\\.((?:alpha|beta|rc)[0-9]+)\\.', release)
+                if match:
+                    # known pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Prerelease_versions
+                    version += '-' + match.group(1)
+                elif release < '1':
+                    # unknown pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Some_definitions
+                    # most likely a snapshot
+                    pkg.set_flags(PackageFlags.ignore)
 
-            pkg.set_summary(entry.find('{http://linux.duke.edu/metadata/common}summary').text)
-            pkg.add_homepages(entry.find('{http://linux.duke.edu/metadata/common}url').text)
-            pkg.add_categories(entry.find('{http://linux.duke.edu/metadata/common}format/'
-                                          '{http://linux.duke.edu/metadata/rpm}group').text)
-            pkg.add_licenses(entry.find('{http://linux.duke.edu/metadata/common}format/'
-                                        '{http://linux.duke.edu/metadata/rpm}license').text)
+                pkg.set_version(version, normalize_version)
+                pkg.set_rawversion(nevra_construct(None, epoch, version, release))
 
-            packager = entry.find('{http://linux.duke.edu/metadata/common}packager').text
-            if packager:
-                pkg.add_maintainers(extract_maintainers(packager))
+                pkg.set_summary(entry.findtext('{http://linux.duke.edu/metadata/common}summary'))
+                pkg.add_homepages(entry.findtext('{http://linux.duke.edu/metadata/common}url'))
+                pkg.add_categories(entry.findtext('{http://linux.duke.edu/metadata/common}format/'
+                                                  '{http://linux.duke.edu/metadata/rpm}group'))
+                pkg.add_licenses(entry.findtext('{http://linux.duke.edu/metadata/common}format/'
+                                                '{http://linux.duke.edu/metadata/rpm}license'))
 
-            yield pkg
+                packager = entry.findtext('{http://linux.duke.edu/metadata/common}packager')
+                if packager:
+                    pkg.add_maintainers(extract_maintainers(packager))
+
+                yield pkg
 
         for arch, numpackages in sorted(skipped_archs.items()):
             factory.log('skipped {} packages(s) with disallowed architecture {}'.format(numpackages, arch))

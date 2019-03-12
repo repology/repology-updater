@@ -19,7 +19,7 @@ import fcntl
 import sys
 import time
 from abc import ABC, abstractmethod
-from typing import ClassVar, List, Tuple
+from typing import Any, ClassVar, List, Tuple
 
 
 class Logger(ABC):
@@ -88,10 +88,10 @@ class FastFileLogger(Logger):
     def __init__(self, path: str) -> None:
         self.path = path
 
-    def __enter__(self):
+    def __enter__(self) -> None:
         self.fd = open(self.path, 'a', encoding='utf-8')
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
         self.fd.close()
 
     def _write_log(self, message: str, severity: int) -> None:
@@ -99,7 +99,7 @@ class FastFileLogger(Logger):
 
 
 class StderrLogger(Logger):
-    def _write_log(self, message, severity):
+    def _write_log(self, message: str, severity: int) -> None:
         print(time.strftime('%b %d %T ') + message, file=sys.stderr)
 
 
