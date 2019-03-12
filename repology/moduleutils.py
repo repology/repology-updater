@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -19,6 +19,7 @@ import importlib
 import importlib.util
 import inspect
 import os
+from typing import Any, Dict, Generator, Optional, Type
 
 
 __all__ = [
@@ -28,8 +29,14 @@ __all__ = [
 
 class ClassFactory:
     @staticmethod
-    def enumerate_all_submodules(module):
-        for location in importlib.util.find_spec(module).submodule_search_locations:
+    def _enumerate_all_submodules(module: str) -> Generator[str, None, None]:
+        spec = importlib.util.find_spec(module)
+        if spec is None:
+            raise RuntimeError('cannot find module {}'.format(module))
+        if spec.submodule_search_locations is None:
+            raise RuntimeError('module {} is not a package'.format(module))
+
+        for location in spec.submodule_search_locations:
             for dirpath, dirnames, filenames in os.walk(location):
                 for filename in filenames:
                     fullpath = os.path.join(dirpath, filename)
@@ -40,10 +47,10 @@ class ClassFactory:
 
                     yield '.'.join([module] + relpath[:-3].split(os.sep))
 
-    def __init__(self, modulename, suffix=None, superclass=None):
-        self.classes = {}
+    def __init__(self, modulename: str, suffix: Optional[str] = None, superclass: Optional[Type[Any]] = None) -> None:
+        self.classes: Dict[str, Any] = {}
 
-        for submodulename in self.enumerate_all_submodules(modulename):
+        for submodulename in ClassFactory._enumerate_all_submodules(modulename):
             submodule = importlib.import_module(submodulename)
             for name, member in inspect.getmembers(submodule):
                 suitable = True
@@ -57,10 +64,10 @@ class ClassFactory:
                 if suitable:
                     self.classes[name] = member
 
-    def Spawn(self, name, *args, **kwargs):
+    def Spawn(self, name: str, *args: Any, **kwargs: Any) -> Any:
         return self.classes[name](*args, **kwargs)
 
-    def SpawnWithKnownArgs(self, name, kwargs):
+    def SpawnWithKnownArgs(self, name: str, kwargs: Dict[str, Any]) -> Any:
         class_ = self.classes[name]
 
         filtered_kwargs = {
