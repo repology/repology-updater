@@ -136,7 +136,7 @@ class PackageMaker(PackageMakerBase):
     def set_name(self, name: str) -> None:
         self._package.name = name
 
-    @PackageMakerBase._simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
+    @PackageMakerBase._simple_setter('basename', str, nzs.strip, nzs.forbid_newlines)
     def set_basename(self, basename: str) -> None:
         self._package.basename = basename
 
