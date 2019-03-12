@@ -18,9 +18,11 @@ env:
   global:
     - REPOLOGY_CONFIG=repology-test.conf.default
 cache: pip
-python:
-  - 3.6
-  - 3.7
+matrix:
+  include:
+    - python: 3.6
+      env: COVERAGE=yes
+    - python: 3.7
 before_install:
   - |-
     mkdir -p dep-rpm
@@ -118,4 +120,4 @@ script:
   - coverage run --source="repology,repologyapp" --omit="repology/fetchers/*" -m unittest discover
 
 after_success:
-  - coveralls
+  - if [ -n "$COVERAGE" ]; then coveralls; fi
