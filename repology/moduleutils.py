@@ -64,10 +64,10 @@ class ClassFactory:
                 if suitable:
                     self.classes[name] = member
 
-    def Spawn(self, name: str, *args: Any, **kwargs: Any) -> Any:
+    def spawn(self, name: str, *args: Any, **kwargs: Any) -> Any:
         return self.classes[name](*args, **kwargs)
 
-    def SpawnWithKnownArgs(self, name: str, kwargs: Dict[str, Any]) -> Any:
+    def spawn_with_known_args(self, name: str, kwargs: Dict[str, Any]) -> Any:
         class_ = self.classes[name]
 
         filtered_kwargs = {

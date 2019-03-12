@@ -87,7 +87,7 @@ class RepositoryProcessor:
 
         logger.log('fetching source {} started'.format(source['name']))
 
-        fetcher: Fetcher = self.fetcher_factory.SpawnWithKnownArgs(
+        fetcher: Fetcher = self.fetcher_factory.spawn_with_known_args(
             source['fetcher'],
             source
         )
@@ -146,7 +146,7 @@ class RepositoryProcessor:
                 yield package
 
         return postprocess_parsed_packages(
-            self.parser_factory.SpawnWithKnownArgs(
+            self.parser_factory.spawn_with_known_args(
                 source['parser'], source
             ).iter_parse(
                 self._get_state_source_path(repository, source),
