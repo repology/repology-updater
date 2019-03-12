@@ -1,65 +1,54 @@
 language: python
-sudo: true
+dist: xenial
+sudo: required
 addons:
   postgresql: "10"
   apt:
     packages:
-      - postgresql-10
-      - postgresql-client-10
-      - postgresql-server-dev-10
-      - libyajl-dev
-      #- python3-rpm  # missing on Trusty
+      - libyajl-dev  # for jsonslicer python module
+      - postgresql-server-dev-10  # for postgresql-libversion
+      #- python3-rpm  # stock package is python3.5, useless for us
+      - libnss3-dev  # for rpm
+      - libnspr4-dev  # for rpm
+      - libmagic-dev  # for rpm
+      - libpopt-dev  # for rpm
+      - libarchive-dev  # for rpm
+      - libdb5.3-dev  # for rpm
 env:
   global:
-    - PGPORT=5433
     - REPOLOGY_CONFIG=repology-test.conf.default
-cache:
-  pip: true
-  directories:
-    - dep-libversion
-    - dep-tidy-html5
-    - dep-postgresql-libversion
+cache: pip
 python:
   - 3.6
+  - 3.7
 before_install:
-  # install dependencies
-  # normally, these are installed from the package manager, but travis uses rotten ubuntu version
-
-  # XXX: building rpm4 is not possible as python3.6 installation in travis is incomplete (no libraries)
-  # So instead, we use this hack:
-  - touch rpm.py
-  #- |-
-  #  mkdir -p dep-rpm
-  #  (
-  #      cd dep-rpm &&
-  #      if [ -z "$(ls -A dep-rpm)" ]; then
-  #          wget -qO- http://ftp.rpm.org/releases/rpm-4.14.x/rpm-4.14.1.tar.bz2 | tar -x -j -f- --strip-components 1 &&
-  #          env PYTHON_CFLAGS="$(python-config --cflags)" PYTHON_LIBS="$(python-config --libs)" ./configure --enable-python --without-lua &&
-  #          make
-  #      fi &&
-  #      sudo make install
-  #  )
+  - |-
+    mkdir -p dep-rpm
+    (
+        cd dep-rpm &&
+        wget -qO- http://ftp.rpm.org/releases/rpm-4.14.x/rpm-4.14.2.1.tar.bz2 | tar -x -j -f- --strip-components 1 &&
+        env PYTHON_CFLAGS="$(python-config --cflags)" PYTHON_LIBS="-L$(python-config --configdir) $(python-config --ldflags)" ./configure --enable-python --without-lua &&
+        make &&
+        sudo make install &&
+        cp -Rfv "/usr/local/lib/python${TRAVIS_PYTHON_VERSION}/site-packages/rpm" "${VIRTUAL_ENV}/lib/python${TRAVIS_PYTHON_VERSION}/site-packages/"
+    )
   - |-
     mkdir -p dep-libversion
     (
         cd dep-libversion &&
-        if [ -z "$(ls -A)" ]; then
-            wget -qO- https://github.com/repology/libversion/archive/master.tar.gz | tar -x -z -f- --strip-components 1 &&
-            cmake . &&
-            make
-        fi &&
+        wget -qO- https://github.com/repology/libversion/archive/master.tar.gz | tar -x -z -f- --strip-components 1 &&
+        cmake . &&
+        make &&
         sudo make install &&
         sudo ldconfig
     )
   - |-
     mkdir -p dep-html5-tidy
     (
-        cd dep-html5-tidy &&
-        if [ -z "$(ls -A)" ]; then
-            wget -qO- https://github.com/htacg/tidy-html5/archive/master.tar.gz | tar -x -z -f- --strip-components 1 &&
-            cmake . &&
-            make
-        fi &&
+        cd dep-html5-tidy
+        wget -qO- https://github.com/htacg/tidy-html5/archive/master.tar.gz | tar -x -z -f- --strip-components 1 &&
+        cmake . &&
+        make &&
         sudo make install &&
         sudo ldconfig
     )
@@ -67,10 +56,8 @@ before_install:
     mkdir -p dep-postgresql-libversion
     (
         cd dep-postgresql-libversion &&
-        if [ -z "$(ls -A)" ]; then
-            wget -qO- https://github.com/repology/postgresql-libversion/archive/master.tar.gz | tar -x -z -f- --strip-components 1 &&
-            make
-        fi &&
+        wget -qO- https://github.com/repology/postgresql-libversion/archive/master.tar.gz | tar -x -z -f- --strip-components 1 &&
+        make &&
         sudo make install
     )
 
@@ -106,7 +93,6 @@ before_script:
   - sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
   - sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS libversion"
   - echo "BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'" >> repology-test.conf.default
-  - sed -i -e 's|dbname=repology_test|& port=5433 host=localhost|' repology-test.conf.default
 script:
   # test all target
   - make
