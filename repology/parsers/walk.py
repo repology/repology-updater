@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,18 +16,23 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from typing import Callable, Generator, Optional
 
 
 __all__ = ['walk_tree']
 
 
-def walk_tree(path, filt=None, suffix=None, name=None):
+WalkTreeFilter = Callable[[str], bool]
+
+
+def walk_tree(path: str, filt: Optional[WalkTreeFilter] = None, suffix: Optional[str] = None, name: Optional[str] = None) -> Generator[str, None, None]:
     if suffix:
-        def suffix_filter(filename):
-            return filename.endswith(suffix)
+        def suffix_filter(filename: str) -> bool:
+            # mypy unable to deduce types of captured values
+            return filename.endswith(suffix)  # type: ignore
         filt = suffix_filter
     elif name:
-        def name_filter(filename):
+        def name_filter(filename: str) -> bool:
             return filename == name
         filt = name_filter
 
