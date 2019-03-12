@@ -45,10 +45,6 @@ class Logger(ABC):
     def _write_log(self, message: str, severity: int) -> None:
         pass
 
-    # XXX: compatibility shim
-    def Log(self, message: str) -> None:
-        self.log(message, severity=Logger.NOTICE)
-
 
 class LoggerProxy(Logger):
     _parent: Logger

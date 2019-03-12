@@ -76,7 +76,7 @@ def main() -> int:
     repomgr = RepositoryManager(options.repos_dir)
     repoproc = RepositoryProcessor(repomgr, options.statedir, options.parseddir)
 
-    logger.Log('dumping...')
+    logger.log('dumping...')
     for packageset in repoproc.iter_parsed(reponames=options.reponames):
         FillPackagesetVersions(packageset)
 

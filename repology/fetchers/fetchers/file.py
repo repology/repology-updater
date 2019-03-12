@@ -60,22 +60,22 @@ class FileFetcher(ScratchFileFetcher):
         if headers:
             fetching_what.append('{} extra headers'.format(len(headers)))
 
-        logger.Log('fetching ' + ', with '.join(fetching_what))
+        logger.log('fetching ' + ', with '.join(fetching_what))
 
         if 'last-modified' in persdata:
             headers['if-modified-since'] = persdata['last-modified']
-            logger.Log('using if-modified-since: {}'.format(headers['if-modified-since']))
+            logger.log('using if-modified-since: {}'.format(headers['if-modified-since']))
 
         try:
             response = save_http_stream(self.url, statefile.get_file(), compression=self.compression, data=self.post, headers=headers, timeout=self.fetch_timeout)
         except NotModifiedException:
-            logger.Log('got 403 not modified')
+            logger.log('got 403 not modified')
             return False
 
-        logger.Log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
+        logger.log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
 
         if response.headers.get('last-modified'):
             persdata['last-modified'] = response.headers['last-modified']
-            logger.Log('storing last-modified: {}'.format(persdata['last-modified']))
+            logger.log('storing last-modified: {}'.format(persdata['last-modified']))
 
         return True

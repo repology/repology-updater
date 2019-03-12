@@ -36,7 +36,7 @@ class GuixFetcher(ScratchDirFetcher):
             page = 1
             numpages = 1
             while True:
-                logger.Log('fetching {} page {}'.format(letter, page))
+                logger.log('fetching {} page {}'.format(letter, page))
 
                 pageurl = '{}/{}/page/{}/'.format(self.url, letter, page)
 

@@ -110,7 +110,7 @@ def GetLinkStatuses(urls, delay, timeout):
 def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
     logger = logger.get_prefixed('worker{}: '.format(workerid))
 
-    logger.Log('Worker spawned')
+    logger.log('Worker spawned')
 
     def Slicer(pack):
         for i in range(0, len(pack), options.packsize):
@@ -119,15 +119,15 @@ def LinkProcessingWorker(readqueue, writequeue, workerid, options, logger):
     while True:
         pack = readqueue.get()
         if pack is None:
-            logger.Log('Worker exiting')
+            logger.log('Worker exiting')
             return
 
-        logger.Log('Processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
+        logger.log('Processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
 
         for subpack in Slicer(pack):
             writequeue.put(GetLinkStatuses(subpack, delay=options.delay, timeout=options.timeout))
 
-        logger.Log('Done processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
+        logger.log('Done processing {} url(s) ({} .. {})'.format(len(pack), pack[0], pack[-1]))
 
 
 def LinkUpdatingWorker(queue, options, querymgr, logger):
@@ -135,19 +135,19 @@ def LinkUpdatingWorker(queue, options, querymgr, logger):
 
     logger = logger.get_prefixed('writer: ')
 
-    logger.Log('Writer spawned')
+    logger.log('Writer spawned')
 
     while True:
         pack = queue.get()
         if pack is None:
-            logger.Log('Writer exiting')
+            logger.log('Writer exiting')
             return
 
         for url, status, redirect, size, location in pack:
             database.update_link_status(url=url, status=status, redirect=redirect, size=size, location=location)
 
         database.commit()
-        logger.Log('Updated {} url(s) ({} .. {})'.format(len(pack), pack[0][0], pack[-1][0]))
+        logger.log('Updated {} url(s) ({} .. {})'.format(len(pack), pack[0][0], pack[-1][0]))
 
 
 def ParseArguments():
@@ -195,7 +195,7 @@ def main() -> int:
     prev_url = None
     while True:
         # Get pack of links
-        logger.Log('Requesting pack of urls')
+        logger.log('Requesting pack of urls')
         urls = database.get_links_for_check(
             after=prev_url,
             prefix=options.prefix,  # no limit by default
@@ -207,7 +207,7 @@ def main() -> int:
             succeeded_only=options.succeeded
         )
         if not urls:
-            logger.Log('  No more urls to process')
+            logger.log('  No more urls to process')
             break
 
         # Get another pack of urls with the last hostname to ensure
@@ -226,14 +226,14 @@ def main() -> int:
 
         # Process
         if options.maxpacksize and len(urls) > options.maxpacksize:
-            logger.Log('Skipping {} urls ({}..{}), exceeds max pack size'.format(len(urls), urls[0], urls[-1]))
+            logger.log('Skipping {} urls ({}..{}), exceeds max pack size'.format(len(urls), urls[0], urls[-1]))
         else:
             readqueue.put(urls)
-            logger.Log('Enqueued {} urls ({}..{})'.format(len(urls), urls[0], urls[-1]))
+            logger.log('Enqueued {} urls ({}..{})'.format(len(urls), urls[0], urls[-1]))
 
         prev_url = urls[-1]
 
-    logger.Log('Waiting for child processes to exit')
+    logger.log('Waiting for child processes to exit')
 
     # close workers
     for process in processpool:
@@ -245,7 +245,7 @@ def main() -> int:
     writequeue.put(None)
     writer.join()
 
-    logger.Log('Done')
+    logger.log('Done')
 
     return 0
 

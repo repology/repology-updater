@@ -49,7 +49,7 @@ class PersistentDirFetcher(Fetcher):
         elif update:
             return self._do_update(statepath, logger)
         else:
-            logger.Log('no update requested, skipping')
+            logger.log('no update requested, skipping')
             return False
 
 
@@ -60,7 +60,7 @@ class ScratchDirFetcher(Fetcher):
 
     def fetch(self, statepath: str, update: bool = True, logger: Logger = NoopLogger()) -> bool:
         if os.path.isdir(statepath) and not update:
-            logger.Log('no update requested, skipping')
+            logger.log('no update requested, skipping')
             return False
 
         persdata: Dict[str, Any] = {}
@@ -94,7 +94,7 @@ class ScratchFileFetcher(Fetcher):
 
     def fetch(self, statepath: str, update: bool = True, logger: Logger = NoopLogger()) -> bool:
         if os.path.isfile(statepath) and not update:
-            logger.Log('no update requested, skipping')
+            logger.log('no update requested, skipping')
             return False
 
         args = {'mode': 'wb'} if self.binary else {'mode': 'w', 'encoding': 'utf-8'}

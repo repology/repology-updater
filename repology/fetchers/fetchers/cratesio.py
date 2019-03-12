@@ -34,7 +34,7 @@ class CratesIOFetcher(ScratchDirFetcher):
         numpage = 1
         while True:
             url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
-            logger.Log('getting ' + url)
+            logger.log('getting ' + url)
 
             text = self.do_http(url).text
             with open(os.path.join(statedir.get_path(), '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
@@ -42,7 +42,7 @@ class CratesIOFetcher(ScratchDirFetcher):
 
             # parse next page
             if not json.loads(text)['crates']:
-                logger.Log('last page detected')
+                logger.log('last page detected')
                 return True
 
             numpage += 1

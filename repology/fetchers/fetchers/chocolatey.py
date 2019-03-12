@@ -33,14 +33,14 @@ class ChocolateyFetcher(ScratchDirFetcher):
         numpage = 0
         nextpageurl = self.url + 'Packages()?$filter=IsLatestVersion'
         while True:
-            logger.Log('getting ' + nextpageurl)
+            logger.log('getting ' + nextpageurl)
 
             text = self.do_http(nextpageurl).text
             with open(os.path.join(statedir.get_path(), '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
 
             # parse next page
-            logger.Log('parsing ' + nextpageurl)
+            logger.log('parsing ' + nextpageurl)
             root = xml.etree.ElementTree.fromstring(text)
 
             next_link = root.find('{http://www.w3.org/2005/Atom}link[@rel="next"]')

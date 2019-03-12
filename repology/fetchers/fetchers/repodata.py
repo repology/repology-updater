@@ -34,7 +34,7 @@ class RepodataFetcher(ScratchFileFetcher):
     def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
         # fetch and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
-        logger.Log('fetching metadata from ' + repomd_url)
+        logger.log('fetching metadata from ' + repomd_url)
         repomd_content = do_http(repomd_url, check_status=True, timeout=self.fetch_timeout).text
         repomd = xml.etree.ElementTree.fromstring(repomd_content)
         repomd_elt_primary = repomd.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]')
@@ -62,7 +62,7 @@ class RepodataFetcher(ScratchFileFetcher):
         elif repodata_url.endswith('xz'):
             compression = 'xz'
 
-        logger.Log('fetching {}'.format(repodata_url))
+        logger.log('fetching {}'.format(repodata_url))
 
         save_http_stream(repodata_url, statefile.get_file(), compression=compression, timeout=self.fetch_timeout)
 
@@ -70,6 +70,6 @@ class RepodataFetcher(ScratchFileFetcher):
             persdata['open-checksum-sha256'] = repomd_elt_primary_checksum.text
             logger.log('saving checksum: {}'.format(persdata['open-checksum-sha256']))
 
-        logger.Log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
+        logger.log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
 
         return True

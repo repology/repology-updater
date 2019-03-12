@@ -36,15 +36,15 @@ class TarFetcher(ScratchDirFetcher):
 
         if persdata.get('last-modified'):
             headers['if-modified-since'] = persdata.get('last-modified')
-            logger.Log('using if-modified-since: {}'.format(headers['if-modified-since']))
+            logger.log('using if-modified-since: {}'.format(headers['if-modified-since']))
 
-        logger.Log('fetching {}'.format(self.url))
+        logger.log('fetching {}'.format(self.url))
 
         try:
             with open(tarpath, 'wb') as tarfile:
                 response = save_http_stream(self.url, tarfile, headers=headers, timeout=self.fetch_timeout)
         except NotModifiedException:
-            logger.Log('got 403 not modified')
+            logger.log('got 403 not modified')
             return False
 
         # XXX: may be unportable, FreeBSD tar automatically handles compression type,
@@ -54,6 +54,6 @@ class TarFetcher(ScratchDirFetcher):
 
         if response.headers.get('last-modified'):
             persdata['last-modified'] = response.headers['last-modified']
-            logger.Log('storing last-modified: {}'.format(persdata['last-modified']))
+            logger.log('storing last-modified: {}'.format(persdata['last-modified']))
 
         return True
