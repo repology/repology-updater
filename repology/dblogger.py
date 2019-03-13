@@ -18,10 +18,10 @@
 import datetime
 import resource
 import traceback
-from typing import Any, List, Tuple
+from typing import Any, List, Optional, Tuple
 
 from repology.database import Database
-from repology.logger import Logger
+from repology.logger import Logger, format_log_entry
 
 
 def _severity_to_sql(severity: int) -> str:
@@ -47,7 +47,7 @@ class RealtimeDatabaseLogger(Logger):
         self._numlines = 0
         self._maxlines = maxlines
 
-    def _write_log(self, message: str, severity: int) -> None:
+    def _log(self, message: str, severity: int, indent: int, prefix: str) -> None:
         if self._numlines == self._maxlines:
             self._db.add_log_line(
                 self._run_id,
@@ -66,25 +66,25 @@ class RealtimeDatabaseLogger(Logger):
             self._numlines + 1,
             None,
             _severity_to_sql(severity),
-            message
+            format_log_entry(message, severity, indent, prefix)
         )
         self._numlines += 1
 
 
 class PostponedDatabaseLogger(Logger):
-    _lines: List[Tuple[datetime.datetime, int, str]]
+    _lines: List[Tuple[datetime.datetime, str, int]]
     _maxlines: int
 
     def __init__(self, maxlines: int = 2500) -> None:
         self._lines = []
         self._maxlines = maxlines
 
-    def _write_log(self, message: str, severity: int) -> None:
+    def _log(self, message: str, severity: int, indent: int, prefix: str) -> None:
         if len(self._lines) == self._maxlines:
             self._lines.append((
                 datetime.datetime.now(),
-                Logger.ERROR,
-                'Log trimmed at {} lines'.format(self._maxlines)
+                'Log trimmed at {} lines'.format(self._maxlines),
+                Logger.ERROR
             ))
 
         if len(self._lines) >= self._maxlines:
@@ -92,72 +92,84 @@ class PostponedDatabaseLogger(Logger):
 
         self._lines.append((
             datetime.datetime.now(),
-            severity,
-            message
+            format_log_entry(message, severity, indent, prefix),
+            severity
         ))
 
     def flush(self, db: Database, run_id: int) -> None:
-        for lineno, (timestamp, severity, message) in enumerate(self._lines, 1):
+        for lineno, (timestamp, formatted_message, severity) in enumerate(self._lines, 1):
             db.add_log_line(
                 run_id,
                 lineno,
                 timestamp,
                 _severity_to_sql(severity),
-                message
+                formatted_message
             )
+
+
+class RunHandler(Logger):
+    _db: Database
+    _run_id: int
+    _start_rusage: Any
+    _logger: Logger
+    _no_changes: bool
+
+    def __init__(self, db: Database, reponame: str, run_type: str) -> None:
+        self._db = db
+        self._run_id = self._db.start_run(reponame, run_type)
+        self._start_rusage = resource.getrusage(resource.RUSAGE_SELF)
+        self._logger = RealtimeDatabaseLogger(self._db, self._run_id)
+        self._no_changes = False
+
+    def _log(self, message: str, severity: int, indent: int, prefix: str) -> None:
+        self._logger._log(message, severity, indent, prefix)
+
+    def set_no_changes(self) -> None:
+        self._no_changes = True
+
+    def finish(self, status: str = 'successful', traceback_text: Optional[str] = None) -> None:
+        end_rusage = resource.getrusage(resource.RUSAGE_SELF)
+
+        self._db.finish_run(
+            self._run_id,
+            status,
+            self._no_changes,
+            utime=datetime.timedelta(seconds=end_rusage.ru_utime - self._start_rusage.ru_utime),
+            stime=datetime.timedelta(seconds=end_rusage.ru_stime - self._start_rusage.ru_stime),
+            maxrss=end_rusage.ru_maxrss,
+            maxrss_delta=end_rusage.ru_maxrss - self._start_rusage.ru_maxrss,
+            traceback=traceback_text
+        )
 
 
 class LogRunManager:
     _db: Database
     _reponame: str
     _run_type: str
-    _target_status: str
-    _no_changes: bool
-    _start_rusage: Any
-    _logger: Logger
+    _run: RunHandler
 
+    # XXX: move everything into RunHandler
     def __init__(self, db: Database, reponame: str, run_type: str):
         self._db = db
         self._reponame = reponame
         self._run_type = run_type
-        self._target_status = 'successful'
-        self._no_changes = False
 
-    def __enter__(self) -> Logger:
-        self._run_id = self._db.start_run(self._reponame, self._run_type)
-        self._start_rusage = resource.getrusage(resource.RUSAGE_SELF)
-        self._logger = RealtimeDatabaseLogger(self._db, self._run_id)
+    def __enter__(self) -> RunHandler:
+        self._run = RunHandler(self._db, self._reponame, self._run_type)
 
-        class HelperLogger(Logger):
-            def _write_log(dummyself, message: str, severity: int = Logger.NOTICE) -> None:
-                self._logger.log(message, severity)
-
-            def _set_no_changes(dummyself) -> None:
-                self._no_changes = True
-
-        return HelperLogger()
+        return self._run
 
     def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
-        end_rusage = resource.getrusage(resource.RUSAGE_SELF)
+        traceback_text = None
 
-        target_status = self._target_status
-        trace = None
+        status = 'successful'
 
         if exc_type is KeyboardInterrupt:
-            self._logger.log('interrupted by administrator', severity=Logger.WARNING)
-            target_status = 'interrupted'
+            self._run.log('interrupted by administrator', severity=Logger.WARNING)
+            status = 'interrupted'
         elif exc_type:
-            self._logger.log('{}: {}'.format(exc_type.__name__, exc_val), severity=Logger.ERROR)
-            target_status = 'failed'
-            trace = traceback.format_exception(exc_type, exc_val, exc_tb)
+            self._run.log('{}: {}'.format(exc_type.__name__, exc_val), severity=Logger.ERROR)
+            status = 'failed'
+            traceback_text = ''.join(traceback.format_exception(exc_type, exc_val, exc_tb))
 
-        self._db.finish_run(
-            self._run_id,
-            target_status,
-            self._no_changes,
-            utime=datetime.timedelta(seconds=end_rusage.ru_utime - self._start_rusage.ru_utime),
-            stime=datetime.timedelta(seconds=end_rusage.ru_stime - self._start_rusage.ru_stime),
-            maxrss=end_rusage.ru_maxrss,
-            maxrss_delta=end_rusage.ru_maxrss - self._start_rusage.ru_maxrss,
-            traceback=trace
-        )
+        self._run.finish(status, traceback_text)

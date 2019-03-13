@@ -60,7 +60,7 @@ class TestPackageMaker(unittest.TestCase):
 
         self.assertEqual(pkg.downloads, ['http://www.valid/', 'https://www.valid/some', 'ftp://ftp.valid/'])
         self.assertEqual(len(logger.get()), 1)
-        self.assertTrue('invalid' in logger.get()[0][0])
+        self.assertTrue('invalid' in logger.get()[0])
 
     def test_normalize_urls(self):
         factory = PackageFactory(NoopLogger())
@@ -196,13 +196,13 @@ class TestPackageMaker(unittest.TestCase):
         pkg3 = pkg1.clone(append_ident='pkg3')
         pkg3.log('')
 
-        self.assertTrue('pkg1' in logger.get()[0][0])
+        self.assertTrue('pkg1:' in logger.get()[0])
 
-        self.assertTrue('pkg2' in logger.get()[1][0])
-        self.assertTrue('pkg1' not in logger.get()[1][0])
+        self.assertTrue('pkg2:' in logger.get()[1])
+        self.assertTrue('pkg1:' not in logger.get()[1])
 
-        self.assertTrue('pkg1pkg3' in logger.get()[2][0])
-        self.assertTrue('pkg2' not in logger.get()[2][0])
+        self.assertTrue('pkg1pkg3:' in logger.get()[2])
+        self.assertTrue('pkg2:' not in logger.get()[2])
 
     def test_sanity(self):
         factory = PackageFactory(NoopLogger())

@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
 from typing import Any, Callable, Generator, Iterable, Optional
@@ -41,11 +42,12 @@ class PackageMakerBase(Logger):
     def __init__(self, logger: Logger) -> None:
         self._logger = logger
 
+    @abstractmethod
     def _get_ident(self) -> str:
-        return '?'
+        pass
 
-    def _write_log(self, message: str, severity: int = Logger.NOTICE) -> None:
-        self._logger.log(self._get_ident() + ': ' + message, severity)
+    def _log(self, message: str, severity: int, indent: int, prefix: str) -> None:
+        self._logger._log(self._get_ident() + ': ' + message, severity, indent, prefix)
 
     @staticmethod
     def _flatten_args(args: Iterable[Any]) -> Generator[Any, None, None]:
@@ -249,8 +251,8 @@ class PackageFactory(Logger):
         self._logger = logger
         self._itemno = 0
 
-    def _write_log(self, message: str, severity: int = Logger.NOTICE) -> None:
-        self._logger.log(message, severity)
+    def _log(self, message: str, severity: int, indent: int, prefix: str) -> None:
+        self._logger._log(message, severity, indent, prefix)
 
     def begin(self, ident: Optional[str] = None, skipfailed: bool = False) -> PackageMaker:
         self._itemno += 1

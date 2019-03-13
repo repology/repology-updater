@@ -91,7 +91,7 @@ class Environment:
         return self.options
 
 
-def process_repositories(env):
+def process_repositories(env: Environment) -> None:
     database = env.get_main_database_connection()
 
     for reponame in env.get_processable_repo_names():
