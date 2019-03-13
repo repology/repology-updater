@@ -49,6 +49,8 @@ class ArchDBParser(Parser):
                         pkg.set_name(line)
                     elif tag == 'VERSION':
                         pkg.set_version(line, normalize_version)
+                    elif tag == 'ARCH':
+                        pkg.set_arch(line)
                     elif tag == 'DESC':
                         if comment is None:
                             comment = ''
