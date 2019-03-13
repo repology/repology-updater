@@ -336,6 +336,8 @@ CREATE TABLE packages (
 	origversion text NOT NULL,
 	rawversion text NOT NULL,
 
+	arch text,
+
 	maintainers text[],
 	category text,
 	comment text,

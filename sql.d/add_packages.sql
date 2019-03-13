@@ -32,6 +32,8 @@ INSERT INTO packages(
 	origversion,
 	rawversion,
 
+	arch,
+
 	maintainers,
 	category,
 	comment,
@@ -62,6 +64,8 @@ INSERT INTO packages(
 
 	%(origversion)s,
 	%(rawversion)s,
+
+	%(arch)s,
 
 	%(maintainers)s,
 	%(category)s,

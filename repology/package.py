@@ -153,6 +153,8 @@ class Package:
         'origversion',
         'rawversion',
 
+        'arch',
+
         'maintainers',
         'category',
         'comment',
@@ -184,6 +186,8 @@ class Package:
     origversion: str
     rawwversion: str
 
+    arch: Optional[str]
+
     maintainers: List[str]
     category: Optional[str]
     comment: Optional[str]
@@ -205,6 +209,7 @@ class Package:
     def __init__(self, repo=None, family=None, subrepo=None,
                  name=None, basename=None, effname=None,
                  version=None, origversion=None, rawversion=None, versionclass=None,
+                 arch=None,
                  maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
                  flags=0, shadow=False,
                  flavors=None,
@@ -219,6 +224,8 @@ class Package:
 
         self.origversion = origversion
         self.rawversion = rawversion
+
+        self.arch = arch
 
         self.maintainers = maintainers if maintainers else []
         self.category = category

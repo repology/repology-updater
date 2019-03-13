@@ -48,6 +48,8 @@ class TestParsers(unittest.TestCase):
             # rawversion must be filled
             'versionclass': None,
 
+            'arch': None,
+
             'maintainers': [],
             'category': None,
             'comment': None,

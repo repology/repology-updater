@@ -38,6 +38,8 @@ SELECT
 	origversion,
 	rawversion,
 
+	arch,
+
 	maintainers,
 	category,
 	comment,

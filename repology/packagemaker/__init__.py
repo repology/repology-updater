@@ -161,6 +161,10 @@ class PackageMaker(PackageMakerBase):
         self.set_name(name)
         self.set_version(version, version_normalizer)
 
+    @PackageMakerBase._simple_setter('arch', str, nzs.strip, nzs.forbid_newlines)
+    def set_arch(self, arch: str) -> None:
+        self._package.arch = arch
+
     @PackageMakerBase._simple_setter('summary', str, nzs.strip)
     def set_summary(self, summary: str) -> None:
         self._package.comment = summary
