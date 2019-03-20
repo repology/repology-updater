@@ -8,7 +8,7 @@
 	{% set metapackage = metapackages[metapackagename] %}
 	{% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
 		<tr>
-			<th>Metapackage</th>
+			<th>Project</th>
 			{% if repo %}
 			<th class="text-nowrap">In {{ repometadata[repo].desc }}</th>
 			{% elif maintainer %}
