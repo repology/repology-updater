@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -20,6 +20,7 @@
 import argparse
 import sys
 from timeit import default_timer as timer
+from typing import Any, Callable, List, TypeVar
 
 from repology.config import config
 from repology.database import Database
@@ -32,8 +33,11 @@ from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
 
 
-def cached_method(method):
-    def wrapper(self, *args, **kwargs):
+T = TypeVar('T')
+
+
+def cached_method(method: Callable[..., T]) -> Callable[..., T]:
+    def wrapper(self: 'Environment', *args: Any, **kwargs: Any) -> Any:
         name = '_' + method.__name__ + '_state'
 
         res = getattr(self, name, None)
@@ -47,47 +51,49 @@ def cached_method(method):
 
 
 class Environment:
-    def __init__(self, options):
+    options: argparse.Namespace
+
+    def __init__(self, options: argparse.Namespace) -> None:
         self.options = options
 
     @cached_method
-    def get_query_manager(self):
+    def get_query_manager(self) -> QueryManager:
         return QueryManager(self.options.sql_dir)
 
     @cached_method
-    def get_main_database_connection(self):
+    def get_main_database_connection(self) -> Database:
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, application_name='repology-update')
 
     @cached_method
-    def get_logging_database_connection(self):
+    def get_logging_database_connection(self) -> Database:
         return Database(self.options.dsn, self.get_query_manager(), readonly=False, autocommit=True, application_name='repology-update-logging')
 
     @cached_method
-    def get_repo_manager(self):
+    def get_repo_manager(self) -> RepositoryManager:
         return RepositoryManager(self.options.repos_dir)
 
     @cached_method
-    def get_repo_processor(self):
+    def get_repo_processor(self) -> RepositoryProcessor:
         return RepositoryProcessor(self.get_repo_manager(), self.options.statedir, self.options.parseddir, safety_checks=self.options.enable_safety_checks)
 
     @cached_method
-    def get_package_transformer(self):
+    def get_package_transformer(self) -> PackageTransformer:
         return PackageTransformer(self.get_repo_manager(), self.options.rules_dir)
 
     @cached_method
-    def get_enabled_repo_names(self):
+    def get_enabled_repo_names(self) -> List[str]:
         return self.get_repo_manager().GetNames(reponames=self.options.enabled_repositories)
 
     @cached_method
-    def get_processable_repo_names(self):
+    def get_processable_repo_names(self) -> List[str]:
         enabled = set(self.get_enabled_repo_names())
         return [reponame for reponame in self.get_repo_manager().GetNames(reponames=self.options.reponames) if reponame in enabled]
 
     @cached_method
-    def get_main_logger(self):
+    def get_main_logger(self) -> Logger:
         return FileLogger(self.options.logfile) if self.options.logfile else StderrLogger()
 
-    def get_options(self):
+    def get_options(self) -> argparse.Namespace:
         return self.options
 
 
@@ -158,7 +164,7 @@ def process_repositories(env: Environment) -> None:
             database.commit()
 
 
-def database_init(env):
+def database_init(env: Environment) -> None:
     logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
@@ -169,7 +175,7 @@ def database_init(env):
     database.commit()
 
 
-def database_update_pre(env):
+def database_update_pre(env: Environment) -> None:
     logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
@@ -181,7 +187,7 @@ def database_update_pre(env):
     database.commit()
 
 
-def database_update(env):
+def database_update(env: Environment) -> None:
     logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
@@ -213,7 +219,7 @@ def database_update(env):
     database.commit()
 
 
-def database_update_post(env):
+def database_update_post(env: Environment) -> None:
     logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
@@ -224,7 +230,7 @@ def database_update_post(env):
     database.commit()
 
 
-def show_unmatched_rules(env):
+def show_unmatched_rules(env: Environment) -> None:
     unmatched = env.get_package_transformer().get_unmatched_rules()
     if not unmatched:
         return
@@ -236,7 +242,7 @@ def show_unmatched_rules(env):
         logger.log(rule, severity=Logger.WARNING)
 
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-P', '--parseddir', default=config['PARSED_DIR'], help='path to directory with parsed repository data')

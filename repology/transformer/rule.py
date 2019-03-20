@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -18,7 +18,7 @@
 import pprint
 import re
 import sys
-from typing import AbstractSet, Any, Callable, Iterable, List, Match, MutableSet, Optional, Pattern, Set, TYPE_CHECKING
+from typing import AbstractSet, Any, Callable, Dict, Iterable, List, Match, MutableSet, Optional, Pattern, Set, TYPE_CHECKING
 
 from libversion import version_compare
 
@@ -95,13 +95,13 @@ class Rule:
 
     _matchers: List[Callable[[Package, PackageContext, MatchContext], bool]]
     _actions: List[Callable[[Package, PackageContext, MatchContext], None]]
-    names: List[str]
+    names: Optional[List[str]]
     namepat: Optional[str]
     matches: int
     number: int
     pretty: str
 
-    def __init__(self, number, ruledata):
+    def __init__(self, number: int, ruledata: Dict[str, Any]) -> None:
         self.names = None
         self.namepat = None
         self.number = number
@@ -491,14 +491,18 @@ class Rule:
             self._actions.append(action)
 
         if 'addflavor' in ruledata:
+            tmp_flavors: Optional[List[str]]
+
             if isinstance(ruledata['addflavor'], str):
-                want_flavors: Final[Optional[List[str]]] = [ruledata['addflavor']]
+                tmp_flavors = [ruledata['addflavor']]
             elif isinstance(ruledata['addflavor'], list):
-                want_flavors: Final[Optional[List[str]]] = ruledata['addflavor']
+                tmp_flavors = ruledata['addflavor']
             elif not isinstance(ruledata['addflavor'], bool):
                 raise RuntimeError('addflavor must be boolean or str or list')
             else:
-                want_flavors: Final[Optional[List[str]]] = None
+                tmp_flavors = None
+
+            want_flavors: Final[Optional[List[str]]] = tmp_flavors
 
             def action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 flavors: List[str] = want_flavors if want_flavors else [package.effname]

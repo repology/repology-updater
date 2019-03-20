@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from typing import List, Optional
 
 import yaml
 
@@ -90,14 +91,8 @@ class RepositoryManager:
 
         return filtered_repositories
 
-    def GetNames(self, reponames=None):
-        def GetName(repo):
-            return repo['name']
-
-        def GetSortName(repo):
-            return repo['sortname']
-
-        return list(map(GetName, sorted(self.GetRepositories(reponames), key=GetSortName)))
+    def GetNames(self, reponames: Optional[List[str]] = None) -> List[str]:
+        return [repo['name'] for repo in sorted(self.GetRepositories(reponames), key=lambda repo: repo['sortname'])]
 
     def GetMetadata(self, reponames=None):
         return {
