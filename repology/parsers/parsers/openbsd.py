@@ -103,7 +103,7 @@ class OpenBSDsqlportsParser(Parser):
                     # process distfile renames
                     # Example: deco-{deco/archive/}1.6.4.tar.gz is downloaded as deco/archive/1.6.4.tar.gz
                     # but saved as deco-1.6.4.tar.gz
-                    match = re.fullmatch('(.*)\{(.*)\}(.*)', distfile)
+                    match = re.fullmatch('(.*)\\{(.*)\\}(.*)', distfile)
                     if match:
                         distfile = match.group(2) + match.group(3)
 

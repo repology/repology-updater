@@ -49,8 +49,7 @@ flake8:
 	#
 	# New in flake8 3.6.0, fix and reenable
 	# W504 - Line break after binary operator
-	# W605 - Invalid escape sequence
-	${FLAKE8} --ignore=D10,E265,E501,E722,N802,W504,W605 --count --application-import-names=repology *.py repology repologyapp test
+	${FLAKE8} --ignore=D10,E265,E501,E722,N802,W504 --count --application-import-names=repology *.py repology repologyapp test
 
 flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test

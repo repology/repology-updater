@@ -63,7 +63,7 @@ class QueryMetadata:
         self.argsmode = QueryMetadata.ARGSMODE_NORMAL
 
         for line in query.split('\n'):
-            match = re.fullmatch('\s*--\s*(@.*?)\s*', line)
+            match = re.fullmatch('\\s*--\\s*(@.*?)\\s*', line)
             if match:
                 self._parse_annotation(match.group(1))
 

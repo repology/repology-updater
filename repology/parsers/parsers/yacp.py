@@ -47,7 +47,7 @@ class YACPGitParser(Parser):
             pkg = factory.begin(cygport_name)
 
             # XXX: save *bl* to rawversion
-            match = re.match('(.*)-[0-9]+bl[0-9]+\.cygport$', cygport_name)
+            match = re.match('(.*)-[0-9]+bl[0-9]+\\.cygport$', cygport_name)
             if not match:
                 pkg.log('unable to parse cygport name', severity=Logger.ERROR)
                 continue

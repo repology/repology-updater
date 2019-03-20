@@ -50,7 +50,7 @@ class LibreGameWikiParser(Parser):
 
             version = cell.text
 
-            match = re.match('(.*) \(.*\)$', version)
+            match = re.match('(.*) \\(.*\\)$', version)
             if match:
                 pkg.set_version(match.group(1))
                 pkg.set_rawversion(version)

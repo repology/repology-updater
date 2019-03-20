@@ -28,8 +28,8 @@ if TYPE_CHECKING:
     from typing_extensions import Final
 
 
-DOLLAR0 = re.compile('\$0', re.ASCII)
-DOLLARN = re.compile('\$([0-9])', re.ASCII)
+DOLLAR0 = re.compile('\\$0', re.ASCII)
+DOLLARN = re.compile('\\$([0-9])', re.ASCII)
 
 
 class PackageContext:
