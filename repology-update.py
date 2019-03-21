@@ -230,16 +230,14 @@ def database_update_post(env: Environment) -> None:
     database.commit()
 
 
-def show_unmatched_rules(env: Environment) -> None:
-    unmatched = env.get_package_transformer().get_unmatched_rules()
-    if not unmatched:
-        return
+def dump_rules(env: Environment) -> None:
+    statistics = env.get_package_transformer().get_statistics()
 
-    logger = env.get_main_logger()
-    logger.log('unmatched rules detected!', severity=Logger.WARNING)
-
-    for rule in unmatched:
-        logger.log(rule, severity=Logger.WARNING)
+    for block in statistics.blocks:
+        print('{')
+        for rule, checks, matches in block:
+            print('    {:7} {:7}  {}'.format(checks, matches, (rule[:80] + '...') if len(rule) > 80 else rule))
+        print('}')
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -264,7 +262,7 @@ def parse_arguments() -> argparse.Namespace:
     actions_grp.add_argument('-d', '--database', action='store_true', help='store in the database')
     actions_grp.add_argument('-o', '--postupdate', action='store_true', help='perform post-update actions')
 
-    actions_grp.add_argument('-r', '--show-unmatched-rules', action='store_true', help='show unmatched rules when parsing')
+    actions_grp.add_argument('-r', '--dump-rules', action='store_true', help='dump rule statistics')
 
     flags_grp = parser.add_argument_group('Flags')
     flags_grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
@@ -309,8 +307,8 @@ def main() -> int:
     if options.postupdate:
         database_update_post(env)
 
-    if options.show_unmatched_rules:
-        show_unmatched_rules(env)
+    if options.dump_rules:
+        dump_rules(env)
 
     env.get_main_logger().log('total time taken: {:.2f} seconds'.format((timer() - start)))
 

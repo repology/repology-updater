@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import pprint
 import re
 import sys
 from typing import AbstractSet, Any, Callable, Dict, Iterable, List, Match, MutableSet, Optional, Pattern, Set, TYPE_CHECKING
@@ -91,12 +90,13 @@ class MatchContext:
 
 
 class Rule:
-    __slots__ = ['_matchers', '_actions', 'names', 'namepat', 'matches', 'number', 'pretty']
+    __slots__ = ['_matchers', '_actions', 'names', 'namepat', 'checks', 'matches', 'number', 'pretty']
 
     _matchers: List[Callable[[Package, PackageContext, MatchContext], bool]]
     _actions: List[Callable[[Package, PackageContext, MatchContext], None]]
     names: Optional[List[str]]
     namepat: Optional[str]
+    checks: int
     matches: int
     number: int
     pretty: str
@@ -105,9 +105,10 @@ class Rule:
         self.names = None
         self.namepat = None
         self.number = number
+        self.checks = 0
         self.matches = 0
 
-        self.pretty = pprint.PrettyPrinter(width=10000).pformat(ruledata)
+        self.pretty = str(ruledata)
 
         self._matchers = []
         self._actions = []
@@ -572,6 +573,8 @@ class Rule:
 
     def match(self, package: Package, package_context: PackageContext) -> Optional[MatchContext]:
         match_context = MatchContext()
+
+        self.checks += 1
 
         for matcher in self._matchers:
             if not matcher(package, package_context, match_context):

@@ -18,6 +18,7 @@
 import hashlib
 import os
 from copy import deepcopy
+from typing import List, Tuple
 
 import yaml
 
@@ -29,6 +30,24 @@ RULE_LOWFREQ_THRESHOLD = 0.001  # best of 0.1, 0.01, 0.001, 0.0001
 COVERING_BLOCK_MIN_SIZE = 2  # covering block over single block impose extra overhead
 NAMEMAP_BLOCK_MIN_SIZE = 1  # XXX: test > 1 after rule optimizations
 SPLIT_MULTI_NAME_RULES = True
+
+
+class RulesetStatistics:
+    RuleStatistics = Tuple[str, int, int]
+
+    blocks: List[List[RuleStatistics]] = []
+
+    def __init__(self) -> None:
+        self.blocks = []
+
+    def begin_block(self) -> None:
+        self.blocks.append([])
+
+    def add_rule(self, rule: Rule) -> None:
+        self.blocks[-1].append((rule.pretty, rule.checks, rule.matches))
+
+    def end_block(self) -> None:
+        pass
 
 
 class PackageTransformer:
@@ -149,14 +168,16 @@ class PackageTransformer:
             if match_context.last:
                 return
 
-    def get_unmatched_rules(self):
-        result = []
+    def get_statistics(self) -> RulesetStatistics:
+        statistics = RulesetStatistics()
 
-        for rule in self.rules:
-            if rule.matches == 0:
-                result.append(rule.pretty)
+        for block in self.optruleblocks:
+            statistics.begin_block()
+            for rule in block.iter_all_rules():
+                statistics.add_rule(rule)
+            statistics.end_block()
 
-        return result
+        return statistics
 
     def get_ruleset_hash(self):
         return self.hash
