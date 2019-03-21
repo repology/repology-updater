@@ -20,6 +20,10 @@
       url: https://gentoo.org/
     - desc: Gentoo Packages
       url: https://packages.gentoo.org/
+    - desc: Official Gentoo ebuild repository
+      url: https://gitweb.gentoo.org/repo/gentoo.git/tree/
+    - desc: Gentoo ebuild repository mirror on GitHub
+      url: https://github.com/gentoo/gentoo
   packagelinks:
     - desc: Package details
       url: 'https://packages.gentoo.org/packages/{category}/{name}'
