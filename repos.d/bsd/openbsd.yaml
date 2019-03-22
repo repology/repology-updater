@@ -10,17 +10,19 @@
   minpackages: 9000
   sources:
     - name: INDEX
+      disabled: false
       fetcher: FileFetcher
       parser: OpenBSDIndexParser
       # Intentionally broken by OpenBSD devs without providing an (easily accessed) alternative, use latest available version
       # See https://github.com/repology/repology/issues/149
       #url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/Attic/INDEX?rev=1.481&content-type=text/plain'
-#    - name: sqlports
-#      fetcher: TarFetcher
-#      parser: OpenBSDsqlportsParser
-#      # using mirror as official site is too slow
-#      url: 'https://mirror.yandex.ru/openbsd/snapshots/packages/amd64/sqlports-6.10.tgz'
+    - name: sqlports
+      disabled: true
+      fetcher: TarFetcher
+      parser: OpenBSDsqlportsParser
+      # using mirror as official site is too slow
+      url: 'https://mirror.yandex.ru/openbsd/snapshots/packages/amd64/sqlports-6.10.tgz'
   repolinks:
     - desc: 'OpenBSD FAQ: Packages and Ports'
       url: https://www.openbsd.org/faq/faq15.html

@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -38,6 +38,9 @@ class RepositoryManager:
         for repo in self.repositories:
             newsources = []
             for source in repo['sources']:
+                if source.get('disabled', False):
+                    continue
+
                 names = source['name'] if isinstance(source['name'], list) else [source['name']]
                 for name in names:
                     newsource = source.copy()

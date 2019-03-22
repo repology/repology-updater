@@ -140,6 +140,7 @@ schemas = {
             Required('sources'): [
                 {
                     Required('name'): Any(str, [str]),
+                    'disabled': bool,
                     Required('fetcher'): str,
                     Required('parser'): str,
                     'url': str,  # not Url(), as there may be rsync or cvs addresses
