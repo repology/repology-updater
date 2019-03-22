@@ -22,7 +22,7 @@
 {% block content %}
 <div class="container">
 
-<p>A brief explanation of update process: each repository is updated in two phases: <em>fetch</em>, which only involves downloading new data, then <em>parse</em>, which involves converting upstream format into Repology packages and applying transformation rules. Each phase may fail independently. Also, fetch phase may return no new data (e.g. HTTP 403 not modified, no new git commits etc.), in which case parse phase may be skipped as long as the ruleset hasn't changed either. Consequent fetch and parse are grouped in the history, fetch resulting in no new data is indicated with <strong>∅</strong>. Note that actual database update happens only after trying to fetch and parse all the repositories, so there's additional delay between times shown on this page and actual website update.</p>
+<p>A brief explanation of update process: each repository is updated in two phases: <em>fetch</em>, which only involves downloading new data, then <em>parse</em>, which involves converting upstream format into Repology packages and applying transformation rules. Each phase may fail independently. Also, fetch phase may return no new data (e.g. HTTP 403 not modified, no new git commits etc.), in which case parse phase may be skipped as long as the ruleset hasn't changed either. Note that actual database update happens only after trying to fetch and parse all the repositories, so there's additional delay between times shown on this page and actual website update.</p>
 
 {{ _autorefresh.toggler() }}
 
@@ -71,18 +71,20 @@
 			{%- if repo.history -%}
 			{%- for histitem in repo.history -%}
 
-			{%- if not loop.first and histitem.type == 'fetch' %}|{% endif -%}
-
 			{%- if histitem.status == 'running' -%}
 				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-running">▶</a>
-			{%- elif histitem.status == 'successful' and histitem.no_changes -%}
-				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-successful">∅</a>
-			{%- elif histitem.status == 'successful' -%}
-				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-successful">✔</a>
-			{%- elif histitem.status == 'failed' -%}
-				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-failed">✘</a>
 			{%- elif histitem.status == 'interrupted' -%}
 				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-interrupted">◼</a>
+			{%- elif histitem.type == 'fetch' and histitem.status == 'successful' and histitem.no_changes -%}
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-successful">⬂</a>
+			{%- elif histitem.type == 'fetch' and histitem.status == 'successful' -%}
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-successful">⬊</a>
+			{%- elif histitem.type == 'fetch' and histitem.status == 'failed' -%}
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-failed">⬂</a>
+			{%- elif histitem.type == 'parse' and histitem.status == 'successful' -%}
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-successful">⬈</a>
+			{%- elif histitem.type == 'parse' and histitem.status == 'failed' -%}
+				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow" class="update-failed">⬀</a>
 			{%- else -%}
 				<a href="{{ url_for('log', run_id=histitem.id) }}" rel="nofollow">?</a>
 			{%- endif -%}
