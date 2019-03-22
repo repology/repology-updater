@@ -60,7 +60,7 @@ SELECT
 					runs
 				WHERE repository_id = repositories.id
 				ORDER BY start_ts DESC
-				LIMIT 20
+				LIMIT 14
 			) AS tmp1
 			ORDER by start_ts
 		) AS tmp
