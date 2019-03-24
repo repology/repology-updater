@@ -18,11 +18,13 @@
 import hashlib
 import os
 from copy import deepcopy
-from typing import List, Tuple
+from typing import Any, Dict, Generator, List, Optional, Tuple
 
 import yaml
 
-from repology.transformer.blocks import CoveringRuleBlock, NameMapRuleBlock, SingleRuleBlock
+from repology.package import Package
+from repology.repomgr import RepositoryManager
+from repology.transformer.blocks import CoveringRuleBlock, NameMapRuleBlock, RuleBlock, SingleRuleBlock
 from repology.transformer.rule import PackageContext, Rule
 
 
@@ -51,18 +53,25 @@ class RulesetStatistics:
 
 
 class PackageTransformer:
-    def __init__(self, repomgr, rulesdir=None, rulestext=None):
-        self.repomgr = repomgr
-        self.rules = []
+    _repomgr: RepositoryManager
+    _rules: List[Rule]
+    _hash: str
+    _ruleblocks: List[RuleBlock]
+    _optruleblocks: List[RuleBlock]
+    _packages_processed: int
+
+    def __init__(self, repomgr: RepositoryManager, rulesdir: Optional[str] = None, rulestext: Optional[str] = None):
+        self._repomgr = repomgr
+        self._rules = []
 
         hasher = hashlib.sha256()
 
-        if rulestext:
+        if isinstance(rulestext, str):
             hasher.update(rulestext.encode('utf-8'))
             for ruledata in yaml.safe_load(rulestext):
                 self._add_rule(ruledata)
-        else:
-            rulefiles = []
+        elif isinstance(rulesdir, str):
+            rulefiles: List[str] = []
 
             for root, dirs, files in os.walk(rulesdir):
                 rulefiles += [os.path.join(root, f) for f in files if f.endswith('.yaml')]
@@ -77,56 +86,58 @@ class PackageTransformer:
                     if rules:  # may be None for empty file
                         for rule in rules:
                             self._add_rule(rule)
+        else:
+            raise RuntimeError('rulesdir or rulestext must be defined')
 
-        self.hash = hasher.hexdigest()
+        self._hash = hasher.hexdigest()
 
-        self.ruleblocks = []
+        self._ruleblocks = []
 
-        current_name_rules = []
+        current_name_rules: List[Rule] = []
 
-        def flush_current_name_rules():
+        def flush_current_name_rules() -> None:
             nonlocal current_name_rules
             if len(current_name_rules) >= NAMEMAP_BLOCK_MIN_SIZE:
-                self.ruleblocks.append(NameMapRuleBlock(current_name_rules))
+                self._ruleblocks.append(NameMapRuleBlock(current_name_rules))
             elif current_name_rules:
-                self.ruleblocks.extend([SingleRuleBlock(rule) for rule in current_name_rules])
+                self._ruleblocks.extend([SingleRuleBlock(rule) for rule in current_name_rules])
             current_name_rules = []
 
-        for rule in self.rules:
+        for rule in self._rules:
             if rule.names:
                 current_name_rules.append(rule)
             else:
                 flush_current_name_rules()
-                self.ruleblocks.append(SingleRuleBlock(rule))
+                self._ruleblocks.append(SingleRuleBlock(rule))
 
         flush_current_name_rules()
 
-        self.optruleblocks = self.ruleblocks
-        self.packages_processed = 0
+        self._optruleblocks = self._ruleblocks
+        self._packages_processed = 0
 
-    def _add_rule(self, ruledata):
+    def _add_rule(self, ruledata: Dict[str, Any]) -> None:
         if SPLIT_MULTI_NAME_RULES and 'name' in ruledata and isinstance(ruledata['name'], list):
             for name in ruledata['name']:
                 modified_ruledata = deepcopy(ruledata)
                 modified_ruledata['name'] = name
-                self.rules.append(Rule(len(self.rules), modified_ruledata))
+                self._rules.append(Rule(len(self._rules), modified_ruledata))
         else:
-            self.rules.append(Rule(len(self.rules), ruledata))
+            self._rules.append(Rule(len(self._rules), ruledata))
 
-    def _recalc_opt_ruleblocks(self):
-        self.optruleblocks = []
+    def _recalc_opt_ruleblocks(self) -> None:
+        self._optruleblocks = []
 
-        current_lowfreq_blocks = []
+        current_lowfreq_blocks: List[RuleBlock] = []
 
-        def flush_current_lowfreq_blocks():
+        def flush_current_lowfreq_blocks() -> None:
             nonlocal current_lowfreq_blocks
             if len(current_lowfreq_blocks) >= COVERING_BLOCK_MIN_SIZE:
-                self.optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
+                self._optruleblocks.append(CoveringRuleBlock(current_lowfreq_blocks))
             elif current_lowfreq_blocks:
-                self.optruleblocks.extend(current_lowfreq_blocks)
+                self._optruleblocks.extend(current_lowfreq_blocks)
             current_lowfreq_blocks = []
 
-        for block in self.ruleblocks:
+        for block in self._ruleblocks:
             max_matches = 0
             has_unconditional = False
             for rule in block.iter_all_rules():
@@ -135,30 +146,30 @@ class PackageTransformer:
                     has_unconditional = True
                     break
 
-            if has_unconditional or max_matches >= self.packages_processed * RULE_LOWFREQ_THRESHOLD:
+            if has_unconditional or max_matches >= self._packages_processed * RULE_LOWFREQ_THRESHOLD:
                 flush_current_lowfreq_blocks()
-                self.optruleblocks.append(block)
+                self._optruleblocks.append(block)
                 continue
 
             current_lowfreq_blocks.append(block)
 
         flush_current_lowfreq_blocks()
 
-    def _iter_package_rules(self, package):
-        for ruleblock in self.optruleblocks:
+    def _iter_package_rules(self, package: Package) -> Generator[Rule, None, None]:
+        for ruleblock in self._optruleblocks:
             yield from ruleblock.iter_rules(package)
 
-    def process(self, package):
-        self.packages_processed += 1
+    def process(self, package: Package) -> None:
+        self._packages_processed += 1
 
-        if self.packages_processed == 1000 or self.packages_processed == 10000 or self.packages_processed == 100000 or self.packages_processed == 1000000:
+        if self._packages_processed == 1000 or self._packages_processed == 10000 or self._packages_processed == 100000 or self._packages_processed == 1000000:
             self._recalc_opt_ruleblocks()
 
         package.effname = package.basename if package.basename is not None else package.name
 
         package_context = PackageContext()
         if package.repo:
-            package_context.set_rulesets(self.repomgr.GetRepository(package.repo)['ruleset'])
+            package_context.set_rulesets(self._repomgr.GetRepository(package.repo)['ruleset'])
 
         for rule in self._iter_package_rules(package):
             match_context = rule.match(package, package_context)
@@ -171,7 +182,7 @@ class PackageTransformer:
     def get_statistics(self) -> RulesetStatistics:
         statistics = RulesetStatistics()
 
-        for block in self.optruleblocks:
+        for block in self._optruleblocks:
             statistics.begin_block()
             for rule in block.iter_all_rules():
                 statistics.add_rule(rule)
@@ -179,5 +190,5 @@ class PackageTransformer:
 
         return statistics
 
-    def get_ruleset_hash(self):
-        return self.hash
+    def get_ruleset_hash(self) -> str:
+        return self._hash
