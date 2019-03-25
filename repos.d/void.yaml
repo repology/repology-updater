@@ -28,4 +28,4 @@
       url: 'https://github.com/void-linux/void-packages/tree/master/srcpkgs/{name}'
     - desc: Template file
       url: 'https://github.com/void-linux/void-packages/blob/master/srcpkgs/{name}/template'
-  tags: [ all, production ]
+  tags: [ all, production, void ]
