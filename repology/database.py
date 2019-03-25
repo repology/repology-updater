@@ -23,12 +23,12 @@ from repology.querymgr import QueryManager
 
 
 class Database:
-    def __init__(self, dsn: str, querymgr: QueryManager, readonly: bool = True, autocommit: bool = False, application_name: Optional[str] = None):
+    def __init__(self, dsn: str, querymgr: QueryManager, readonly: bool = True, autocommit: bool = False, application_name: Optional[str] = None) -> None:
         self._db = psycopg2.connect(dsn, application_name=application_name)
         self._db.set_session(readonly=readonly, autocommit=autocommit)
         querymgr.inject_queries(self, self._db)
 
-    def commit(self):
+    def commit(self) -> None:
         self._db.commit()
 
     # XXX: move these away from here

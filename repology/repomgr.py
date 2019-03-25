@@ -16,23 +16,32 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import List, Optional
+from typing import Any, Collection, Dict, List, Optional
 
 import yaml
 
 
+RepositoryNameList = Optional[Collection[str]]
+RepositoryMetadata = Dict[str, Any]
+
+
 class RepositoryManager:
-    def __init__(self, reposdir=None, repostext=None):
+    repositories: List[RepositoryMetadata]
+    repo_by_name: Dict[str, RepositoryMetadata]
+
+    def __init__(self, reposdir: Optional[str] = None, repostext: Optional[str] = None) -> None:
         self.repositories = []
         self.repo_by_name = {}
 
-        if repostext:
+        if isinstance(repostext, str):
             self.repositories = yaml.safe_load(repostext)
-        else:
+        elif isinstance(reposdir, str):
             for root, dirs, files in os.walk(reposdir):
                 for filename in filter(lambda f: f.endswith('.yaml'), files):
                     with open(os.path.join(root, filename)) as reposfile:
                         self.repositories += yaml.safe_load(reposfile)
+        else:
+            raise RuntimeError('rulesdir or rulestext must be defined')
 
         # process source loops
         for repo in self.repositories:
@@ -72,10 +81,10 @@ class RepositoryManager:
 
             self.repo_by_name[repo['name']] = repo
 
-    def GetRepository(self, reponame):
+    def GetRepository(self, reponame: str) -> RepositoryMetadata:
         return self.repo_by_name[reponame]
 
-    def GetRepositories(self, reponames=None):
+    def GetRepositories(self, reponames: RepositoryNameList = None) -> List[RepositoryMetadata]:
         if reponames is None:
             return []
 
@@ -94,10 +103,10 @@ class RepositoryManager:
 
         return filtered_repositories
 
-    def GetNames(self, reponames: Optional[List[str]] = None) -> List[str]:
+    def GetNames(self, reponames: RepositoryNameList = None) -> List[str]:
         return [repo['name'] for repo in sorted(self.GetRepositories(reponames), key=lambda repo: repo['sortname'])]
 
-    def GetMetadata(self, reponames=None):
+    def GetMetadata(self, reponames: RepositoryNameList = None) -> Dict[str, RepositoryMetadata]:
         return {
             repository['name']: {
                 'shadow': repository.get('shadow', False),
@@ -111,7 +120,7 @@ class RepositoryManager:
             } for repository in self.GetRepositories(reponames)
         }
 
-    def GetMetadatas(self, reponames=None):
+    def GetMetadatas(self, reponames: RepositoryNameList = None) -> List[RepositoryMetadata]:
         return [
             {
                 'name': repository['name'],
