@@ -193,22 +193,22 @@ class RepositoryProcessor:
     def fetch(self, reponames: RepositoryNameList, update: bool = True, logger: Logger = NoopLogger()) -> bool:
         have_changes = False
 
-        for repository in self.repomgr.GetRepositories(reponames):
+        for repository in self.repomgr.get_repositories(reponames):
             have_changes |= self._fetch(repository, update, logger)
 
         return have_changes
 
     def parse(self, reponames: RepositoryNameList, transformer: Optional[PackageTransformer] = None, logger: Logger = NoopLogger()) -> None:
-        for repository in self.repomgr.GetRepositories(reponames):
+        for repository in self.repomgr.get_repositories(reponames):
             self._parse(repository, transformer, logger)
 
     def iter_parse(self, reponames: RepositoryNameList, transformer: Optional[PackageTransformer] = None, logger: Logger = NoopLogger()) -> Iterator[Package]:
-        for repository in self.repomgr.GetRepositories(reponames):
+        for repository in self.repomgr.get_repositories(reponames):
             yield from self._iter_parse_all_sources(repository, transformer, logger)
 
     def iter_parsed(self, reponames: Optional[RepositoryNameList] = None, logger: Logger = NoopLogger()) -> Iterator[List[Package]]:
         def get_sources():
-            for repository in self.repomgr.GetRepositories(reponames):
+            for repository in self.repomgr.get_repositories(reponames):
                 sources = self._get_parsed_chunk_paths(repository)
                 if not sources:
                     logger.log('parsed packages for repository {} are missing, treating repository as empty'.format(repository['desc']), severity=Logger.ERROR)

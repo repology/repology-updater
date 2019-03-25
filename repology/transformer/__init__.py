@@ -169,7 +169,7 @@ class PackageTransformer:
 
         package_context = PackageContext()
         if package.repo:
-            package_context.set_rulesets(self._repomgr.GetRepository(package.repo)['ruleset'])
+            package_context.set_rulesets(self._repomgr.get_repository(package.repo)['ruleset'])
 
         for rule in self._iter_package_rules(package):
             match_context = rule.match(package, package_context)

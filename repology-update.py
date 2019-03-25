@@ -82,12 +82,12 @@ class Environment:
 
     @cached_method
     def get_enabled_repo_names(self) -> List[str]:
-        return self.get_repo_manager().GetNames(reponames=self.options.enabled_repositories)
+        return self.get_repo_manager().get_names(reponames=self.options.enabled_repositories)
 
     @cached_method
     def get_processable_repo_names(self) -> List[str]:
         enabled = set(self.get_enabled_repo_names())
-        return [reponame for reponame in self.get_repo_manager().GetNames(reponames=self.options.reponames) if reponame in enabled]
+        return [reponame for reponame in self.get_repo_manager().get_names(reponames=self.options.reponames) if reponame in enabled]
 
     @cached_method
     def get_main_logger(self) -> Logger:
@@ -181,7 +181,7 @@ def database_update_pre(env: Environment) -> None:
 
     logger.log('updating repositories metadata')
     database.deprecate_repositories()
-    database.add_repositories(env.get_repo_manager().GetMetadatas(env.get_enabled_repo_names()))
+    database.add_repositories(env.get_repo_manager().get_metadatas(env.get_enabled_repo_names()))
 
     logger.get_indented().log('committing changes')
     database.commit()
