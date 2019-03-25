@@ -21,7 +21,7 @@
       url: https://github.com/NixOS/nixpkgs
   packagelinks:
     - desc: Package source (release branch)  # XXX: branch name needs manual maintenance
-      url: 'https://github.com/NixOS/nixpkgs/blob/release-18.09/{posfile}#L{posline}'
+      url: 'https://github.com/NixOS/nixpkgs/blob/release-19.03/{posfile}#L{posline}'
     - desc: Package source (master branch, imprecise link)
       url: 'https://github.com/NixOS/nixpkgs/blob/master/{posfile}#L{posline}'
   tags: [ all, production, nix ]
