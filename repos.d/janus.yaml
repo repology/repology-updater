@@ -1,0 +1,25 @@
+###########################################################################
+# januslinux
+###########################################################################
+
+- name: januslinux
+  type: repository
+  desc: januslinux port repository
+  family: crux
+  minpackages: 1
+  sources:
+    - name: [ packages, bsp ]
+      fetcher: GITFetcher
+      parser: CRUXParser
+      url: 'https://github.com/JanusLinux/janus.git'
+  repolinks:
+    - desc: januslinux
+      url: https://januslinux.github.io/
+    - desc: januslinux port repository
+      url: https://github.com/JanusLinux/janus/tree/master/
+  packagelinks:
+    - desc: januslinux port repository
+      url: 'https://github.com/JanusLinux/janus/tree/master/{subrepo}/{name}'
+    - desc: Pkgfile
+      url: 'https://raw.githubusercontent.com/JanusLinux/janus/master/{subrepo}/{name}/Pkgfile'
+  tags: [ all, production, crux ]
