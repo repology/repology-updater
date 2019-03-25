@@ -54,5 +54,6 @@ class VoidLinuxPlistParser(Parser):
             pkg.set_summary(props['short_desc'])
             pkg.add_homepages(props['homepage'])
             pkg.add_licenses(props['license'].split(','))
+            pkg.set_arch(props['architecture'])
 
             yield pkg
