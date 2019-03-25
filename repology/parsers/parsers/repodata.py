@@ -84,6 +84,7 @@ class RepodataParser(Parser):
                                                   '{http://linux.duke.edu/metadata/rpm}group'))
                 pkg.add_licenses(entry.findtext('{http://linux.duke.edu/metadata/common}format/'
                                                 '{http://linux.duke.edu/metadata/rpm}license'))
+                pkg.set_arch(entry.findtext('{http://linux.duke.edu/metadata/common}arch'))
 
                 packager = entry.findtext('{http://linux.duke.edu/metadata/common}packager')
                 if packager:
