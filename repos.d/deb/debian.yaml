@@ -8,7 +8,7 @@
   color: 'c70036'
   minpackages: 20000
   sources:
-    - name: [ oldstable/main, oldstable/contrib, oldstable/non-free, oldstable-updates/main, oldstable-updates/contrib, oldstable-updates/non-free ]
+    - name: [ oldstable/main, oldstable/contrib, oldstable/non-free ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://ftp.debian.org/debian/dists/{source}/source/Sources.gz'
@@ -28,37 +28,6 @@
       url: 'https://bugs.debian.org/{name}'
     - desc: Package auto-building status
       url: 'https://buildd.debian.org/status/package.php?p={name}&suite=oldstable'
-    - desc: Popularity contest statistics
-      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
-  tags: [ all, production, debian ]
-
-- name: debian_oldstable_backports
-  type: repository
-  desc: Debian Oldstable Backports
-  family: debuntu
-  color: 'c70036'
-  minpackages: 2000
-  sources:
-    - name: [ main, contrib, non-free ]
-      fetcher: FileFetcher
-      parser: DebianSourcesParser
-      url: 'http://ftp.debian.org/debian/dists/oldstable-backports/{source}/source/Sources.gz'
-      compression: gz
-      subrepo: '{source}'
-  repolinks:
-    - desc: Debian packages
-      url: https://www.debian.org/distrib/packages
-    - desc: Debian packages in oldstable-backports
-      url: https://packages.debian.org/oldstable-backports/
-    - desc: Debian package auto-building status
-      url: https://buildd.debian.org/
-  packagelinks:
-    - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/oldstable-backports/source/{name}'
-    - desc: Related bugs in Debian bugzilla
-      url: 'https://bugs.debian.org/{name}'
-    - desc: Package auto-building status
-      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=oldstable-backports'
     - desc: Popularity contest statistics
       url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
   tags: [ all, production, debian ]
