@@ -17,8 +17,8 @@
 
 import os
 import pickle
-from contextlib import ExitStack, contextmanager
-from typing import Any, BinaryIO, Iterable, List, Optional
+from contextlib import ExitStack
+from typing import Any, BinaryIO, Iterable, Iterator, List, Optional
 
 from repology.package import Package
 
@@ -74,7 +74,7 @@ class StreamDeserializer:
     _fd: BinaryIO
     _unpickler: pickle.Unpickler
     _remaining: int
-    _current: Optional[Package]
+    current: Optional[Package]
 
     def __init__(self, path: str):
         self._path = path
@@ -85,7 +85,7 @@ class StreamDeserializer:
         try:
             self._unpickler = pickle.Unpickler(self._fd)
             self._remaining = self._unpickler.load()
-            self._current = None
+            self.current = None
 
             self.pop()
 
@@ -97,43 +97,33 @@ class StreamDeserializer:
     def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
         self._fd.close()
 
-    def pop(self) -> Optional[Package]:
-        current = self._current
-
+    def pop(self) -> None:
         if self._remaining > 0:
-            self._current = self._unpickler.load()
+            self.current = self._unpickler.load()
             self._remaining -= 1
         else:
-            self._current = None
+            self.current = None
             self._remaining = -1
 
-        return current
 
-    def peek(self) -> Optional[Package]:
-        return self._current
-
-    def is_eof(self) -> bool:
-        return self._remaining == -1
-
-
-@contextmanager
-def heap_deserializer(paths, getkey):
+def heap_deserialize(paths: Iterable[str]) -> Iterator[List[Package]]:
     with ExitStack() as stack:
         deserializers = [stack.enter_context(StreamDeserializer(path)) for path in paths]
 
-        def iterate():
-            while True:
-                # find lowest key
-                thiskey = min((getkey(ds.peek()) for ds in deserializers if not ds.is_eof()), default=None)
-                if thiskey is None:
-                    return
+        thiskey = min((ds.current.effname for ds in deserializers if ds.current is not None), default=None)
 
-                # fetch all packages with given key from all deserializers
-                packages = []
-                for ds in deserializers:
-                    while not ds.is_eof() and getkey(ds.peek()) == thiskey:
-                        packages.append(ds.pop())
+        while thiskey is not None:
+            nextkey = None
 
-                yield packages
+            # fetch all packages with given key from all deserializers
+            packages = []
+            for ds in deserializers:
+                while ds.current is not None and ds.current.effname == thiskey:
+                    packages.append(ds.current)
+                    ds.pop()
 
-        yield iterate
+                if ds.current is not None and (nextkey is None or ds.current.effname < nextkey):
+                    nextkey = ds.current.effname
+
+            yield packages
+            thiskey = nextkey

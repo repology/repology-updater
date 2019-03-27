@@ -27,7 +27,7 @@ from repology.packagemaker import PackageFactory, PackageMaker
 from repology.packageproc import PackagesetDeduplicate
 from repology.parsers import Parser
 from repology.repomgr import RepositoryManager, RepositoryMetadata, RepositoryNameList
-from repology.repoproc.serialization import ChunkedSerializer, heap_deserializer
+from repology.repoproc.serialization import ChunkedSerializer, heap_deserialize
 from repology.transformer import PackageTransformer
 
 
@@ -204,15 +204,12 @@ class RepositoryProcessor:
             yield from self._iter_parse_all_sources(repository, transformer, logger)
 
     def iter_parsed(self, reponames: Optional[RepositoryNameList] = None, logger: Logger = NoopLogger()) -> Iterator[List[Package]]:
-        def get_sources():
-            for repository in self.repomgr.get_repositories(reponames):
-                sources = self._get_parsed_chunk_paths(repository)
-                if not sources:
-                    logger.log('parsed packages for repository {} are missing, treating repository as empty'.format(repository['desc']), severity=Logger.ERROR)
-                yield from sources
+        sources: List[str] = []
+        for repository in self.repomgr.get_repositories(reponames):
+            sources.extend(self._get_parsed_chunk_paths(repository))
 
-        with heap_deserializer(get_sources(), lambda package: package.effname) as heap:
-            for packageset in heap():
-                packageset = PackagesetDeduplicate(packageset)
+        if not sources:
+            logger.log('parsed packages for repository {} are missing, treating repository as empty'.format(repository['desc']), severity=Logger.ERROR)
+            return
 
-                yield packageset
+        yield from map(PackagesetDeduplicate, heap_deserialize(sources))
