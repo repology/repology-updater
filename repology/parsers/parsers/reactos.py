@@ -32,7 +32,9 @@ class RappsParser(Parser):
 
             with factory.begin(filename) as pkg:
                 config = configparser.ConfigParser(interpolation=None)
-                config.read(os.path.join(path, filename))
+
+                with open(os.path.join(path, filename), 'r', encoding='utf_8_sig') as f:
+                    config.readfp(f)
 
                 section = config['Section']
 
