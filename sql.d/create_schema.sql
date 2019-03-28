@@ -716,12 +716,27 @@ CREATE TABLE links (
 	first_extracted timestamp with time zone NOT NULL,
 	last_extracted timestamp with time zone NOT NULL,
 	last_checked timestamp with time zone,
+
+	-- old columns, still used by both legacy linkchecker and webapp
 	last_success timestamp with time zone,
 	last_failure timestamp with time zone,
 	status smallint,
 	redirect smallint,
 	size bigint,
-	location text
+	location text,
+
+	-- new columns for nextgen linkchecker
+	ipv4_last_success timestamp with time zone,
+	ipv4_last_failure timestamp with time zone,
+	ipv4_success boolean,
+	ipv4_status_code smallint,
+	ipv4_permanent_redirect_target text,
+
+	ipv6_last_success timestamp with time zone,
+	ipv6_last_failure timestamp with time zone,
+	ipv6_success boolean,
+	ipv6_status_code smallint,
+	ipv6_permanent_redirect_target text
 );
 
 --------------------------------------------------------------------------------
