@@ -117,9 +117,10 @@ class RepositoryProcessor:
                     package.shadow = True
 
                 if not package.maintainers:
-                    if 'default_maintainer' in repository:
+                    default_maintainer = repository.get('default_maintainer', True)
+                    if isinstance(default_maintainer, str):
                         package.maintainers = [repository['default_maintainer']]
-                    else:
+                    elif default_maintainer:
                         package.maintainers = ['fallback-mnt-{}@repology'.format(repository['name'])]
 
                 # transform

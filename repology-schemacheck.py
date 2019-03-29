@@ -21,7 +21,7 @@ import argparse
 import sys
 from datetime import date
 
-from voluptuous import Any, MultipleInvalid, Required, Schema, Url
+from voluptuous import All, Any, Contains, MultipleInvalid, Required, Schema, Url
 
 import yaml
 
@@ -135,7 +135,7 @@ schemas = {
             'ruleset': Any(Any(*rulesets), [Any(*rulesets)]),  # XXX: make required
             'color': str,
             'valid_till': date,
-            'default_maintainer': str,
+            'default_maintainer': Any(bool, 'auto', All(str, Contains('@'))),
             Required('minpackages'): int,
             Required('sources'): [
                 {
