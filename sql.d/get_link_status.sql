@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -17,35 +17,12 @@
 
 --------------------------------------------------------------------------------
 --
--- @param effname
+-- @param url
 --
--- @returns dict of dicts
+-- @returns single dict
 --
 --------------------------------------------------------------------------------
 SELECT
-	url,
-	last_checked,
-	ipv4_success,
-	ipv4_permanent_redirect_target,
-	ipv6_success,
-	ipv6_permanent_redirect_target
+	*
 FROM links
-WHERE url in (
-	-- this additional wrap seem to fix query planner somehow
-	-- to use index scan on links instead of seq scan, which
-	-- makes the query 100x faster; XXX: recheck with postgres 10
-	-- or report this?
-	SELECT DISTINCT
-		url
-	FROM (
-		SELECT
-			unnest(downloads) AS url
-		FROM packages
-		WHERE effname = %(effname)s
-		UNION
-		SELECT
-			homepage AS url
-		FROM packages
-		WHERE homepage IS NOT NULL AND effname = %(effname)s
-	) AS tmp
-);
+WHERE url = %(url)s;

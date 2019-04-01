@@ -228,25 +228,22 @@
     color: green;
 }
 
-.link_status {
+.link-status {
     padding: 0.1em 0.3em;
-    border-radius: 0.5em;
     font-weight: bold;
+    color: white;
 }
 
-.link_status_ok {
-    color: white;
-    background-color: #5cb85c;
+.link-ok {
+    color: #5cb85c;
 }
 
-.link_status_warning {
-    color: white;
-    background-color: #f0ad4e;
+.link-redirect {
+    color: #f0ad4e;
 }
 
-.link_status_error {
-    color: white;
-    background-color: #d9534f;
+.link-error {
+    color: #d9534f;
 }
 
 .non-selectable {
