@@ -552,21 +552,37 @@ SELECT DISTINCT
 		links.url ||
 		'" is dead (' ||
 		CASE
-			WHEN links.status=-1 THEN 'connect timeout'
-			WHEN links.status=-2 THEN 'too many redirects'
-			WHEN links.status=-4 THEN 'cannot connect'
-			WHEN links.status=-5 THEN 'invalid url'
-			WHEN links.status=-6 THEN 'DNS problem'
-			ELSE 'HTTP error ' || links.status
+			WHEN links.ipv4_status_code=-1 THEN 'unknown error'
+			WHEN links.ipv4_status_code=-100 THEN 'connect timeout'
+			WHEN links.ipv4_status_code=-101 THEN 'invalid url'
+			WHEN links.ipv4_status_code=-200 THEN 'DNS problem'
+			WHEN links.ipv4_status_code=-201 THEN 'domain not found'
+			WHEN links.ipv4_status_code=-202 THEN 'no address record'
+			WHEN links.ipv4_status_code=-300 THEN 'connection refused'
+			WHEN links.ipv4_status_code=-301 THEN 'no route to host'
+			WHEN links.ipv4_status_code=-302 THEN 'connection reset by peer'
+			WHEN links.ipv4_status_code=-303 THEN 'network unreackable'
+			WHEN links.ipv4_status_code=-304 THEN 'server disconnected'
+			WHEN links.ipv4_status_code=-306 THEN 'connection aborted'
+			WHEN links.ipv4_status_code=-307 THEN 'address not available'
+			WHEN links.ipv4_status_code=-400 THEN 'too many redirects'
+			WHEN links.ipv4_status_code=-401 THEN 'SSL problem'
+			WHEN links.ipv4_status_code=-402 THEN 'HTTP protocol error'
+			ELSE 'HTTP error ' || links.ipv4_status_code
 		END ||
 		') for more than a month.'
 FROM packages
 INNER JOIN links ON (packages.homepage = links.url)
 WHERE
-	(links.status IN (-1, -2, -4, -5, -6, 400, 404) OR links.status >= 500) AND
+	NOT links.ipv4_success AND
 	(
-		(links.last_success IS NULL AND links.first_extracted < now() - INTERVAL '30' DAY) OR
-		links.last_success < now() - INTERVAL '30' DAY
+		links.ipv4_status_code < 0 OR
+		links.ipv4_status_code >= 500 OR
+		links.ipv4_status_code IN (400, 404)
+	) AND
+	(
+		(links.ipv4_last_success IS NULL AND links.first_extracted < now() - INTERVAL '30' DAY) OR
+		links.ipv4_last_success < now() - INTERVAL '30' DAY
 	);
 
 INSERT INTO problems (
@@ -586,13 +602,12 @@ SELECT DISTINCT
 	'Homepage link "' ||
 		links.url ||
 		'" is a permanent redirect to "' ||
-		links.location ||
+		links.ipv4_permanent_redirect_target ||
 		'" and should be updated'
 FROM packages
 INNER JOIN links ON (packages.homepage = links.url)
 WHERE
-	links.redirect = 301 AND
-	replace(links.url, 'http://', 'https://') = links.location;
+	replace(links.url, 'http://', 'https://') = links.ipv4_permanent_redirect_target;
 
 INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
 SELECT DISTINCT
