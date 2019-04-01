@@ -48,4 +48,7 @@ WHERE url in (
 		FROM packages
 		WHERE homepage IS NOT NULL AND effname = %(effname)s
 	) AS tmp
+) AND (
+	ipv4_success IS NOT NULL OR
+	ipv6_success IS NOT NULL
 );

@@ -73,14 +73,16 @@
 {%- macro link_status(link, link_statuses) -%}
 	{%- if link in link_statuses -%}
 	<sup class="link-status non-selectable"><a href="{{ url_for('link', url=link) }}" rel="nofollow">
-			{%- if link_statuses[link].ipv4_success and link_statuses[link].ipv4_permanent_redirect_target is not none -%}
+			{%- if link_statuses[link].ipv4_success is none -%}
+			{%- elif link_statuses[link].ipv4_success and link_statuses[link].ipv4_permanent_redirect_target is not none -%}
 			<span class="link-redirect">4</span>
 			{%- elif link_statuses[link].ipv4_success -%}
 			<span class="link-ok">4</span>
 			{%- else -%}
 			<span class="link-error">4</span>
 			{%- endif -%}
-			{%- if link_statuses[link].ipv6_success and link_statuses[link].ipv6_permanent_redirect_target is not none -%}
+			{%- if link_statuses[link].ipv6_success is none -%}
+			{%- elif link_statuses[link].ipv6_success and link_statuses[link].ipv6_permanent_redirect_target is not none -%}
 			<span class="link-redirect">6</span>
 			{%- elif link_statuses[link].ipv6_success -%}
 			<span class="link-ok">6</span>
