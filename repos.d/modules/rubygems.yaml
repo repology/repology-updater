@@ -7,6 +7,7 @@
   family: rubygems
   color: 'e9573f'
   minpackages: 130000
+  default_maintainer: no
   sources:
     - name: latest_specs.4.8
       fetcher: FileFetcher
