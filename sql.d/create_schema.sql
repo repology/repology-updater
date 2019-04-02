@@ -739,6 +739,8 @@ CREATE TABLE links (
 	ipv6_permanent_redirect_target text
 );
 
+CREATE INDEX ON links(last_checked NULLS FIRST);
+
 --------------------------------------------------------------------------------
 -- Problems
 --------------------------------------------------------------------------------
