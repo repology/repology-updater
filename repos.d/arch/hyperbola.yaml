@@ -8,6 +8,7 @@
   ruleset: [arch, hyperbola]
   color: 'c0c0c0'
   minpackages: 8500
+  default_maintainer: no
   sources:
     - name: [ core, extra, community ]
       fetcher: TarFetcher

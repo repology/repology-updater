@@ -8,6 +8,7 @@
   ruleset: [ arch, blackarch ]
   color: '000000'
   minpackages: 2300
+  default_maintainer: no
   sources:
     - name: blackarch
       fetcher: TarFetcher

@@ -8,6 +8,7 @@
   ruleset: [arch, frugalware]
   color: '464646'
   minpackages: 0
+  default_maintainer: no
   sources:
     - name: frugalware-current
       fetcher: TarFetcher

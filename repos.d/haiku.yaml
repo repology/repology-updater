@@ -7,6 +7,7 @@
   family: haikuports
   color: "ffc245"
   minpackages: 2000
+  default_maintainer: no
   sources:
     - name: haikuports
       fetcher: GitFetcher

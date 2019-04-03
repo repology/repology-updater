@@ -8,6 +8,7 @@
   ruleset: [ arch, parabola ]
   color: '787dab'
   minpackages: 10000
+  default_maintainer: no
   sources:
     - name: [ core, extra, community, libre, pcr ]
       fetcher: TarFetcher
@@ -32,6 +33,7 @@
   ruleset: [ arch, parabola ]
   color: '787dab'
   minpackages: 1
+  default_maintainer: no
   sources:
     - name: [ testing, libre-testing ]
       fetcher: TarFetcher

@@ -29,6 +29,7 @@
   family: hackage
   color: "293845"
   minpackages: 1500
+  default_maintainer: no
   sources:
     - name: nightly.html
       fetcher: FileFetcher
@@ -51,6 +52,7 @@
   family: hackage
   color: "293845"
   minpackages: 2000
+  default_maintainer: no
   sources:
     - name: lts.html
       fetcher: FileFetcher

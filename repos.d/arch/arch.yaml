@@ -7,6 +7,7 @@
   family: arch
   color: '0088cc'
   minpackages: 9500
+  default_maintainer: no
   sources:
     - name: [ core, extra, community, multilib ]
       fetcher: TarFetcher
@@ -36,6 +37,7 @@
   family: arch
   color: '0088cc'
   minpackages: 1
+  default_maintainer: no
   sources:
     - name: [ testing, community-testing, multilib-testing ]
       fetcher: TarFetcher

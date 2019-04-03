@@ -6,6 +6,7 @@
   desc: GNU Guix
   family: guix
   minpackages: 7000
+  default_maintainer: no
   sources:
     - name: guix
       fetcher: GuixFetcher

@@ -6,6 +6,7 @@
   desc: GoboLinux
   family: gobolinux
   minpackages: 3500
+  default_maintainer: no
   sources:
     - name: recipes
       fetcher: GitFetcher

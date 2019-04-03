@@ -6,6 +6,7 @@
   desc: OpenPKG
   family: openpkg
   minpackages: 0
+  default_maintainer: no
   sources:
     - name: 00INDEX
       fetcher: FileFetcher
