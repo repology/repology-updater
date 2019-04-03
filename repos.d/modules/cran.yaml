@@ -6,6 +6,7 @@
   desc: CRAN
   family: cran
   minpackages: 12000
+  default_maintainer: no
   sources:
     - name: CRAN
       fetcher: FileFetcher

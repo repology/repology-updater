@@ -9,6 +9,7 @@
   color: '6da741'
   valid_till: 2019-01-31
   minpackages: 10000
+  default_maintainer: no  # packager is https://bugs.opensuse.org
   sources:
     - name: oss
       fetcher: RepodataFetcher
@@ -52,6 +53,7 @@
   color: '6da741'
   valid_till: 2019-11-25
   minpackages: 11000
+  default_maintainer: no  # packager is https://bugs.opensuse.org
   sources:
     - name: oss
       fetcher: RepodataFetcher
@@ -96,6 +98,7 @@
   family: opensuse
   color: '6da741'
   minpackages: 10500
+  default_maintainer: no  # packager is https://bugs.opensuse.org
   sources:
     - name: oss
       fetcher: RepodataFetcher
@@ -140,6 +143,7 @@
   family: opensuse
   color: '6da741'
   minpackages: 10000
+  default_maintainer: no  # packager is https://bugs.opensuse.org
   sources:
     # NOTE1: there are two url schemes, apparently with same contents
     # http://download.opensuse.org/source/tumbleweed/repo/oss/

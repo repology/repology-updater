@@ -8,6 +8,7 @@
   ruleset: [arch, manjaro]
   color: '34be5b'
   minpackages: 10000
+  default_maintainer: no
   sources:
     - name: [ community, core, extra ]
       fetcher: TarFetcher
@@ -26,6 +27,7 @@
   ruleset: [arch, manjaro]
   color: '34be5b'
   minpackages: 10000
+  default_maintainer: no
   sources:
     - name: [ community, core, extra ]
       fetcher: TarFetcher
@@ -44,6 +46,7 @@
   ruleset: [arch, manjaro]
   color: '34be5b'
   minpackages: 10000
+  default_maintainer: no
   sources:
     - name: [ community, core, extra ]
       fetcher: TarFetcher
@@ -63,6 +66,7 @@
   ruleset: [arch, manjaro]
   color: '34be5b'
   minpackages: 1  # XXX: unknown
+  default_maintainer: no
   sources:
     - name: [ community, core, extra ]
       fetcher: TarFetcher

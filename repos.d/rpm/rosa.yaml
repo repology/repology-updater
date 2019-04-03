@@ -7,6 +7,7 @@
   family: rosa
   color: '3757a1'
   minpackages: 27000
+  default_maintainer: no
   sources:
     - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
       fetcher: FileFetcher
@@ -25,6 +26,7 @@
   family: rosa
   color: '3757a1'
   minpackages: 21000
+  default_maintainer: no
   sources:
     - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
       fetcher: FileFetcher
