@@ -90,7 +90,7 @@
   type: repository
   desc: RPM Fusion Fedora 28
   family: fedora
-  minpackages: 300
+  minpackages: 400
   sources:
     - name: free-release
       fetcher: RepodataFetcher
@@ -131,27 +131,68 @@
   type: repository
   desc: RPM Fusion Fedora 29
   family: fedora
-  minpackages: 300
+  minpackages: 400
   sources:
-    - name: free-branched
+    - name: free-release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://download1.rpmfusion.org/free/fedora/development/29/Everything/source/SRPMS/
-      subrepo: free/branched
+      url: https://download1.rpmfusion.org/free/fedora/releases/29/Everything/source/SRPMS/
+      subrepo: free/release
+    - name: free-updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/fedora/updates/29/SRPMS/
+      subrepo: free/updates
     - name: free-updates-testing
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/updates/testing/29/SRPMS/
       subrepo: free/updates-testing
-    - name: nonfree-branched
+    - name: nonfree-release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://download1.rpmfusion.org/nonfree/fedora/development/29/Everything/source/SRPMS/
-      subrepo: nonfree/branched
+      url: https://download1.rpmfusion.org/nonfree/fedora/releases/29/Everything/source/SRPMS/
+      subrepo: nonfree/release
+    - name: nonfree-updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/fedora/updates/29/SRPMS/
+      subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/29/SRPMS/
+      subrepo: nonfree/updates-testing
+  repolinks:
+    - desc: RPM Fusion home
+      url: https://rpmfusion.org/
+  tags: [ all, production, rpmfusion ]
+
+- name: rpmfusion_fedora_30
+  type: repository
+  desc: RPM Fusion Fedora 30
+  family: fedora
+  minpackages: 300
+  sources:
+    - name: free-branched
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/fedora/development/30/Everything/source/SRPMS/
+      subrepo: free/branched
+    - name: free-updates-testing
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/fedora/updates/testing/30/SRPMS/
+      subrepo: free/updates-testing
+    - name: nonfree-branched
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/fedora/development/30/Everything/source/SRPMS/
+      subrepo: nonfree/branched
+    - name: nonfree-updates-testing
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/30/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
