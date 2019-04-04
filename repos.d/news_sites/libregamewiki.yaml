@@ -6,6 +6,7 @@
   desc: Libregamewiki
   family: libregamewiki
   minpackages: 200
+  default_maintainer: no
   sources:
     - name: newreleases
       fetcher: FileFetcher

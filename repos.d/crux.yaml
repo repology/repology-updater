@@ -6,6 +6,7 @@
   desc: CRUX 3.2
   family: crux
   minpackages: 1000
+  default_maintainer: no
   sources:
     - name: [ core, opt, xorg, contrib ]
       fetcher: RsyncFetcher
@@ -29,6 +30,7 @@
   desc: CRUX 3.3
   family: crux
   minpackages: 1000
+  default_maintainer: no
   sources:
     - name: [ core, opt, xorg, contrib ]
       fetcher: RsyncFetcher
@@ -52,6 +54,7 @@
   desc: CRUX 3.4
   family: crux
   minpackages: 1000
+  default_maintainer: no
   sources:
     - name: [ core, opt, xorg, contrib ]
       fetcher: RsyncFetcher
@@ -75,6 +78,7 @@
   desc: CRUX 3.5
   family: crux
   minpackages: 1000
+  default_maintainer: no
   sources:
     - name: [ core, opt, xorg, contrib ]
       fetcher: RsyncFetcher

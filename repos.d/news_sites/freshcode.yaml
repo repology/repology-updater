@@ -6,6 +6,7 @@
   desc: freshcode.club
   family: freshcode
   minpackages: 1400
+  default_maintainer: no
   sources:
     - name: feed
       fetcher: FileFetcher

@@ -6,6 +6,7 @@
   desc: Vcpkg
   family: vcpkg
   minpackages: 600
+  default_maintainer: no
   sources:
     - name: vcpkg
       fetcher: GitFetcher

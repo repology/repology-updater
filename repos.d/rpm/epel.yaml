@@ -8,6 +8,7 @@
   ruleset: [fedora, epel]
   color: 'ff0000'
   minpackages: 5000
+  default_maintainer: no
   sources:
     - name: data
       fetcher: RepodataFetcher
@@ -25,6 +26,7 @@
   ruleset: [fedora, epel]
   color: 'ff0000'
   minpackages: 6000
+  default_maintainer: no
   sources:
     - name: data
       fetcher: RepodataFetcher

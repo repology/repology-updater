@@ -6,6 +6,7 @@
   desc: Scoop
   family: scoop
   minpackages: 600
+  default_maintainer: no
   sources:
     - name: scoop
       fetcher: GitFetcher

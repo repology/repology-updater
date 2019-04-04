@@ -6,6 +6,7 @@
   desc: DistroWatch.com
   family: distrowatch
   minpackages: 200
+  default_maintainer: no
   sources:
     - name: packages.php
       fetcher: FileFetcher

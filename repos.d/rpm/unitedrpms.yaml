@@ -8,6 +8,7 @@
   ruleset: [fedora, unitedrpms]
   color: '261d22'
   minpackages: 100
+  default_maintainer: no
   sources:
     - name: repo
       fetcher: RepodataFetcher
@@ -28,6 +29,7 @@
   ruleset: [fedora, unitedrpms]
   color: '261d22'
   minpackages: 100
+  default_maintainer: no
   sources:
     - name: repo
       fetcher: RepodataFetcher
@@ -48,6 +50,7 @@
   ruleset: [fedora, unitedrpms]
   color: '261d22'
   minpackages: 100
+  default_maintainer: no
   sources:
     - name: repo
       fetcher: RepodataFetcher

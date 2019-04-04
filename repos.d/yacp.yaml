@@ -6,6 +6,7 @@
   desc: YACP
   family: yacp
   minpackages: 1850
+  default_maintainer: no
   sources:
     - name: yacp
       fetcher: GitFetcher

@@ -6,6 +6,7 @@
   desc: ReactOS rapps
   family: reactos
   minpackages: 0
+  default_maintainer: no
   sources:
     - name: rapps-db
       fetcher: GitFetcher
