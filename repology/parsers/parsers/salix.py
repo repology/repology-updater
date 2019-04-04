@@ -32,6 +32,7 @@ class SalixPackagesJsonParser(Parser):
                     pkg.set_name(item['name'])
                     pkg.set_version(item['ver'])
                     pkg.set_summary(item['descs'])
+                    pkg.set_arch(item['arch'])
 
                     pkg.set_extra_field('location', item['loc'])
 
