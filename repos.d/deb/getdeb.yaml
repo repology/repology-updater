@@ -1,12 +1,13 @@
 ###########################################################################
 # GetDeb/PlayDeb
 #
-# Note: these repositories are dead since 2018-08-07, however I keep them
+# Note: these repositories are dead since 2018-08-07 [1], however I keep them
 # mainly for playdeb which has some games not present in other repositories
-# and may still suggest a few projects worth packaging.
+# and may still suggest a few projects worth packaging. Urls are scrambled
+# to avoid refetching after possibly malicious resurrection [2]
 #
-# See also discussion regarding getdeb death:
-# https://bugs.launchpad.net/getdeb.net/+bug/1786064
+# [1] https://bugs.launchpad.net/getdeb.net/+bug/1786064
+# [2] https://www.reddit.com/r/linux_gaming/comments/b9a307/psa_getdeb_and_playdeb_repositories_for_ubuntu/
 ###########################################################################
 
 # xenial
@@ -19,7 +20,7 @@
     - name: Sources
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb/apps/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/xenial-getdeb/apps/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: GetDeb home
@@ -38,7 +39,7 @@
     - name: Sources
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb-testing/apps/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/xenial-getdeb-testing/apps/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: GetDeb home
@@ -57,7 +58,7 @@
     - name: apps
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb/games/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/xenial-getdeb/games/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: PlayDeb home
@@ -76,7 +77,7 @@
     - name: apps
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/xenial-getdeb-testing/games/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/xenial-getdeb-testing/games/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: PlayDeb home
@@ -96,7 +97,7 @@
     - name: Sources
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb/apps/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/yakkety-getdeb/apps/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: GetDeb home
@@ -115,7 +116,7 @@
     - name: Sources
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb-testing/apps/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/yakkety-getdeb-testing/apps/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: GetDeb home
@@ -134,7 +135,7 @@
     - name: apps
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb/games/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/yakkety-getdeb/games/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: PlayDeb home
@@ -153,7 +154,7 @@
     - name: apps
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/yakkety-getdeb-testing/games/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/yakkety-getdeb-testing/games/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: PlayDeb home
@@ -173,7 +174,7 @@
     - name: Sources
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb/apps/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/zesty-getdeb/apps/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: GetDeb home
@@ -192,7 +193,7 @@
     - name: Sources
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb-testing/apps/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/zesty-getdeb-testing/apps/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: GetDeb home
@@ -211,7 +212,7 @@
     - name: apps
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb/games/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/zesty-getdeb/games/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: PlayDeb home
@@ -230,7 +231,7 @@
     - name: apps
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://archive.getdeb.net/ubuntu/dists/zesty-getdeb-testing/games/source/Sources.gz'
+      url: 'http://archive.getdeb.netx/ubuntu/dists/zesty-getdeb-testing/games/source/Sources.gz'
       compression: gz
   repolinks:
     - desc: PlayDeb home
