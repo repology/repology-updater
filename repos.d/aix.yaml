@@ -5,7 +5,7 @@
   type: repository
   desc: AIX Open Source Packages
   family: aix
-  minpackages: 0
+  minpackages: 7000
   default_maintainer: no
   sources:
     - name: LIST

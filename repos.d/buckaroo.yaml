@@ -5,7 +5,7 @@
   type: repository
   desc: Buckaroo
   family: buckaroo
-  minpackages: 0
+  minpackages: 300
   default_maintainer: no
   sources:
     - name: buckaroo-recipes

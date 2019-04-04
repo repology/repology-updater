@@ -5,7 +5,7 @@
   type: repository
   desc: ReactOS rapps
   family: reactos
-  minpackages: 0
+  minpackages: 150
   default_maintainer: no
   sources:
     - name: rapps-db
