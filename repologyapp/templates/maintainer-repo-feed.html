@@ -30,16 +30,16 @@ in <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo
 		<td class="minimal-column">{{ macros.format_absolute_time(entry.ts) }}</td>
 		<td>
 		{% if entry.type == 'added' %}
-			Package <a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> was added to <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong> and/or assigned to <strong><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a></strong>
+			<a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> was added to <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong> and/or assigned to <strong><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a></strong>
 		{% elif entry.type == 'removed' %}
-			Package <a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> is no longer maintained by <strong><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a></strong> and/or was removed from <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong>
+			<a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> is no longer maintained by <strong><a href="{{ url_for('maintainer', maintainer=maintainer) }}">{{ maintainer }}</a></strong> and/or was removed from <strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong>
 		{% elif entry.type == 'uptodate' %}
-			Package <a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-newest">{{ entry.data.version }}</span> is up to date
+			<a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> <span class="version version-newest">{{ entry.data.version }}</span> is now up to date
 		{% elif entry.type == 'outdated' %}
-			Package <a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-outdated">{{ entry.data.version }}</span> is outdated
+			<a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> <span class="version version-outdated">{{ entry.data.version }}</span> is outdated
 			{% if entry.data.newest_versions %}by {% for version in entry.data.newest_versions %}<span class="version version-newest">{{ version }}</span>{% endfor %}{% endif %}
 		{% elif entry.type == 'ignored' %}
-			Package <a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> version <span class="version version-ignored">{{ entry.data.version }}</span> is ignored
+			<a href="{{ url_for('project_versions', name=entry.effname) }}">{{ entry.effname }}</a> <span class="version version-ignored">{{ entry.data.version }}</span> is ignored
 		{% endif %}
 		</td>
 	</tr>
