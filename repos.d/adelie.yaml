@@ -8,6 +8,7 @@
   ruleset: adelie
   color: '#880000'
   minpackages: 900
+  default_maintainer: fallback-mnt-adelie@repology
   sources:
     - name: [ system, user ]
       fetcher: TarFetcher
