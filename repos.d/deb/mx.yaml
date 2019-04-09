@@ -7,6 +7,7 @@
   family: debuntu
   color: "6693d6"
   minpackages: 100
+  default_maintainer: no
   sources:
     - name: [ main, non-free ]
       fetcher: FileFetcher
@@ -32,6 +33,7 @@
   family: debuntu
   color: "6693d6"
   minpackages: 100
+  default_maintainer: no
   sources:
     - name: [ test ]
       fetcher: FileFetcher
@@ -57,6 +59,7 @@
   family: debuntu
   color: "6693d6"
   minpackages: 50
+  default_maintainer: no
   sources:
     - name: [ main, non-free ]
       fetcher: FileFetcher
@@ -82,6 +85,7 @@
   family: debuntu
   color: "6693d6"
   minpackages: 100
+  default_maintainer: no
   sources:
     - name: [ main, non-free ]
       fetcher: FileFetcher
@@ -105,6 +109,7 @@
   family: debuntu
   color: "6693d6"
   minpackages: 100
+  default_maintainer: no
   sources:
     - name: [ test ]
       fetcher: FileFetcher
