@@ -11,6 +11,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 100
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -30,6 +31,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 300
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -49,6 +51,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 300
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -68,6 +71,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 300
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -87,6 +91,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 100
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -106,6 +111,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 100
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -125,6 +131,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 100
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -144,6 +151,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 100
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -163,6 +171,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 100
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
@@ -182,6 +191,7 @@
   ruleset: [debuntu,mint]
   color: '87cf3e'
   minpackages: 100
+  default_maintainer: root@linuxmint.com
   sources:
     - name: [ backport, import, main, multiverse, romeo, universe, upstream ]
       fetcher: FileFetcher
