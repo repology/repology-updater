@@ -7,6 +7,7 @@
   family: nix
   color: '7eb2dd'
   minpackages: 12000
+  default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages.json
       fetcher: FileFetcher
@@ -32,6 +33,7 @@
   family: nix
   color: '7eb2dd'
   minpackages: 13000
+  default_maintainer: fallback-mnt-nix@repology
   sources:
     - name: packages-unstable.json
       fetcher: FileFetcher
