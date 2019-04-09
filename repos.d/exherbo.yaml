@@ -7,6 +7,7 @@
   family: exherbo
   color: 'a1da91'
   minpackages: 6000
+  default_maintainer: fallback-mnt-exherbo@repology
   sources:
     # see https://git.exherbo.org/ (Exheres section)
     - name:
