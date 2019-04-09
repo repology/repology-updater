@@ -6,6 +6,7 @@
   desc: Alpine Linux Edge
   family: alpine
   minpackages: 4300
+  default_maintainer: fallback-mnt-alpine@repology
   sources:
     - name: [ community, main, testing ]
       fetcher: TarFetcher
