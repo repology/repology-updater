@@ -41,10 +41,11 @@ class TermuxJsonParser(Parser):
                 pkg.add_homepages(packagedata['homepage'])
                 pkg.add_downloads(packagedata.get('srcurl'))
 
-                match = re.search(' @([^ ]+)$', packagedata['maintainer'])
+                pkg.add_maintainers(extract_maintainers(packagedata['maintainer']))
+
+                # maintainer may also be in '@username' form
+                match = re.search('(?:^| )@([^ ]+)$', packagedata['maintainer'])
                 if match:
                     pkg.add_maintainers(match.group(1).lower() + '@termux')
-                else:
-                    pkg.add_maintainers(extract_maintainers(packagedata['maintainer']))
 
                 yield pkg

@@ -7,6 +7,7 @@
   family: termux
   color: '000000'
   minpackages: 450
+  default_maintainer: no
   sources:
     - name: packages.json
       fetcher: FileFetcher
