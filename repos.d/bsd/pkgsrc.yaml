@@ -8,6 +8,7 @@
   color: 'ff6600'
   valid_till: 2018-10-01
   minpackages: 15000
+  default_maintainer: fallback-mnt-pkgsrc@repology
   sources:
     - name: INDEX
       fetcher: FileFetcher
@@ -40,6 +41,7 @@
   family: pkgsrc
   color: 'ff6600'
   minpackages: 15000
+  default_maintainer: fallback-mnt-pkgsrc@repology
   sources:
     - name: INDEX
       fetcher: FileFetcher
