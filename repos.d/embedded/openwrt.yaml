@@ -7,6 +7,7 @@
   family: openwrt
   color: '5d6993'
   minpackages: 4500
+  default_maintainer: fallback-mnt-openwrt@repology
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
@@ -28,6 +29,7 @@
   family: openwrt
   color: '5d6993'
   minpackages: 0
+  default_maintainer: fallback-mnt-openwrt@repology
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
