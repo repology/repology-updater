@@ -7,6 +7,7 @@
   family: ravenports
   color: "00bcd4"
   minpackages: 1700
+  default_maintainer: fallback-mnt-ravenports@repology
   sources:
     - name: repology.json
       fetcher: FileFetcher
