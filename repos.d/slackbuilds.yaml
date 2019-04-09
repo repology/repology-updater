@@ -7,6 +7,7 @@
   family: slackbuilds
   color: '000000'
   minpackages: 6500
+  default_maintainer: no  # unparsed maintainers, no dedicated no-maintainer
   sources:
     - name: slackbuilds
       fetcher: GitFetcher
