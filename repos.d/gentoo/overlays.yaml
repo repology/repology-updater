@@ -7,6 +7,7 @@
   family: gentoo
   color: '62548f'  # or own color 285c73?
   minpackages: 800
+  default_maintainer: fallback-mnt-pentoo@repology
   sources:
     - name: pentoo-overlay
       fetcher: GitFetcher

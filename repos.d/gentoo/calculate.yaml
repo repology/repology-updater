@@ -6,6 +6,7 @@
   desc: Calculate
   family: gentoo
   minpackages: 100
+  default_maintainer: fallback-mnt-calculate@repology
   sources:
     - name: calculate
       fetcher: GitFetcher
