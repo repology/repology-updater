@@ -8,6 +8,7 @@
   family: debuntu
   ruleset: [ debuntu, antix ]
   minpackages: 100
+  default_maintainer: no
   sources:
     - name: [ dev, main, nosystemd ]
       fetcher: FileFetcher
@@ -27,6 +28,7 @@
   family: debuntu
   ruleset: [ debuntu, antix ]
   minpackages: 200
+  default_maintainer: no
   sources:
     - name: [ dev, main, nosystemd ]
       fetcher: FileFetcher
