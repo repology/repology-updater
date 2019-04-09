@@ -6,6 +6,7 @@
   desc: Sabayon
   family: gentoo
   minpackages: 500
+  default_maintainer: fallback-mnt-sabayon@repology
   sources:
     - name: sabayon
       fetcher: GitFetcher
@@ -26,6 +27,7 @@
   desc: Sabayon for-gentoo
   family: gentoo
   minpackages: 100
+  default_maintainer: fallback-mnt-sabayon@repology
   sources:
     - name: sabayon
       fetcher: GitFetcher
