@@ -9,6 +9,7 @@
   ruleset: [ arch, aur ]
   color: '0088cc'
   minpackages: 48000
+  default_maintainer: fallback-mnt-aur@repology
   sources:
     - name: aur
       fetcher: AURFetcher
