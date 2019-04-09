@@ -7,6 +7,7 @@
   family: hackage
   color: "293845"
   minpackages: 12000
+  default_maintainer: no  # some are obfuscated, maintainer absense is checked in parser
   sources:
     - name: hackage
       fetcher: TarFetcher

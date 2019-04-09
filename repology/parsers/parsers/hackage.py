@@ -102,7 +102,10 @@ class HackageParser(Parser):
 
             if cabaldata['name'] == pkg.name and version_compare(cabaldata['version'], pkg.version) == 0:
                 pkg.set_summary(cabaldata.get('synopsis'))
-                pkg.add_maintainers(extract_maintainers(cabaldata.get('maintainer')))
+                if 'maintainer' not in cabaldata:
+                    pkg.add_maintainers('fallback-mnt-hackage@repology')
+                else:
+                    pkg.add_maintainers(extract_maintainers(cabaldata.get('maintainer')))
                 pkg.add_licenses(cabaldata.get('license'))
                 pkg.add_homepages(cabaldata.get('homepage'))
                 pkg.add_categories(cabaldata.get('category'))
