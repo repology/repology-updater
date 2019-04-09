@@ -8,6 +8,7 @@
   ruleset: [debuntu,maemo]
   color: 'f68500'
   minpackages: 1900
+  default_maintainer: no
   sources:
     - name: free
       fetcher: FileFetcher
