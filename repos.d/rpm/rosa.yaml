@@ -45,6 +45,7 @@
   family: rosa
   color: '3757a1'
   minpackages: 2500
+  default_maintainer: fallback-mnt-rosa@repology
   sources:
     - name: [ base/release, base/updates, contrib/release, contrib/updates, extra/release, extra/updates ]
       fetcher: RepodataFetcher
@@ -62,6 +63,7 @@
   family: rosa
   color: '3757a1'
   minpackages: 2500
+  default_maintainer: fallback-mnt-rosa@repology
   sources:
     - name: [ base/release, extra/release ]
       fetcher: RepodataFetcher
