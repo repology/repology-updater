@@ -158,6 +158,7 @@
   ruleset: [opensuse, packman]
   color: 'dbda04'
   minpackages: 450
+  default_maintainer: no  # single case of empty maintainer
   sources:
     - name: all
       fetcher: RepodataFetcher
