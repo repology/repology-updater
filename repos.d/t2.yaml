@@ -7,6 +7,7 @@
   family: t2
   ruleset: t2
   minpackages: 3000
+  default_maintainer: no  # always maintained, but may be unparsable
   sources:
     - name: packages
       fetcher: SVNFetcher
