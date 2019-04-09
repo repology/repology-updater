@@ -12,6 +12,7 @@
   family: void
   color: "478061"
   minpackages: 9000
+  default_maintainer: fallback-mnt-void@repology
   sources:
     - name: [ x86_64, nonfree/x86_64 ]
       fetcher: TarFetcher
