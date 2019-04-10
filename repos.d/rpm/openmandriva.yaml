@@ -8,7 +8,7 @@
   color: '045e9d'
   minpackages: 1400
   sources:
-    # - name: [ main/release, main/updates, main/testing, contrib/release, contrib/updates, contrib/testing, non-free/release, non-free/updates, non-free/testing, restricted/release, restricted/updates, restricted/testing ]
+    # Note: no repodata for other repositories
     - name: [ main/release, contrib/release ]
       fetcher: RepodataFetcher
       parser: RepodataParser
@@ -27,10 +27,11 @@
   desc: OpenMandriva Cooker
   family: openmandriva
   color: '045e9d'
-  minpackages: 5000
+  minpackages: 9000
   sources:
-    # - name: [ main/release, main/updates, main/testing, contrib/release, contrib/updates, contrib/testing, non-free/release, non-free/updates, non-free/testing, restricted/release, restricted/updates, restricted/testing ]
-    - name: [ main/release, contrib/release ]
+    # all updates subrepos are empty and all testing subrepos contain 5 packages in total,
+    # most of them are quite old. so not including these subrepositories here
+    - name: [ main/release, non-free/release, restricted/release, unsupported/release ]
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: 'http://abf-downloads.openmandriva.org/cooker/repository/SRPMS/{source}/'
