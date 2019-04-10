@@ -176,6 +176,9 @@ class TestFlask(unittest.TestCase):
     def test_log(self):
         self.checkurl_html('/log/1', has=['successful'])
 
+    def test_link(self):
+        self.checkurl_html('/link/http://chromium-bsu.sourceforge.net/', has=['chromium-bsu.sourceforge.net'])
+
     def test_repository(self):
         self.checkurl_html('/repository/freebsd', has=['FreeBSD'])
 
