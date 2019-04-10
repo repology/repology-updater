@@ -7,7 +7,6 @@
   family: centos
   color: '932279'
   minpackages: 2000
-  default_maintainer: no
   sources:
     - name: [ os, updates ]
       fetcher: RepodataFetcher
@@ -30,7 +29,6 @@
   family: centos
   color: '932279'
   minpackages: 2500
-  default_maintainer: no
   sources:
     - name: [ os, updates, extras ]
       fetcher: RepodataFetcher

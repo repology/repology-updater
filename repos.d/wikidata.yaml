@@ -10,7 +10,6 @@
   ruleset: [ wikidata ]
   color: "339966"
   minpackages: 11000
-  default_maintainer: no
   sources:
     - name: result.json
       fetcher: FileFetcher

@@ -7,7 +7,6 @@
   desc: F-Droid
   family: fdroid
   minpackages: 10
-  default_maintainer: no
   sources:
     - name: index.xml
       fetcher: FileFetcher

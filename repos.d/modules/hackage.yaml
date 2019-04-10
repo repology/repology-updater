@@ -7,7 +7,7 @@
   family: hackage
   color: "293845"
   minpackages: 12000
-  default_maintainer: no  # some are obfuscated, maintainer absense is checked in parser
+  # default_maintainer is set from the parser
   sources:
     - name: hackage
       fetcher: TarFetcher
@@ -30,7 +30,6 @@
   family: hackage
   color: "293845"
   minpackages: 1500
-  default_maintainer: no
   sources:
     - name: nightly.html
       fetcher: FileFetcher
@@ -53,7 +52,6 @@
   family: hackage
   color: "293845"
   minpackages: 2000
-  default_maintainer: no
   sources:
     - name: lts.html
       fetcher: FileFetcher

@@ -8,7 +8,6 @@
   family: freebsd
   color: '990000'
   minpackages: 31000
-  default_maintainer: no
   sources:
     - name: INDEX-11
       fetcher: FileFetcher
@@ -48,7 +47,6 @@
   family: freebsd
   color: '9eff11'
   minpackages: 28000
-  default_maintainer: no
   sources:
     - name: INDEX
       fetcher: FileFetcher

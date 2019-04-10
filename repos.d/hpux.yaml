@@ -6,7 +6,6 @@
   desc: HP-UX 11.31
   family: hpux
   minpackages: 1500
-  default_maintainer: no
   sources:
     - name: [ hppa_32, ia64_32, ia64_64 ]
       fetcher: FileFetcher

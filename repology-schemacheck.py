@@ -135,7 +135,7 @@ schemas = {
             'ruleset': Any(Any(*rulesets), [Any(*rulesets)]),  # XXX: make required
             'color': str,
             'valid_till': date,
-            'default_maintainer': Any(bool, 'auto', All(str, Contains('@'))),
+            'default_maintainer': All(str, Contains('@')),
             Required('minpackages'): int,
             Required('sources'): [
                 {

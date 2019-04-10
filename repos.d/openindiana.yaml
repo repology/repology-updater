@@ -7,7 +7,6 @@
   singular: OpenIndiana package
   family: openindiana
   minpackages: 1800
-  default_maintainer: no
   sources:
     - name: [hipster, hipster-encumbered]
       fetcher: FileFetcher

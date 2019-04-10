@@ -7,7 +7,6 @@
   family: macports
   color: '1f79e9'
   minpackages: 15000
-  default_maintainer: no  # always set, but some are obfuscated
   sources:
     - name: PortIndex
       fetcher: RsyncFetcher

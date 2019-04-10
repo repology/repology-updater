@@ -6,7 +6,6 @@
   desc: Buckaroo
   family: buckaroo
   minpackages: 300
-  default_maintainer: no
   sources:
     - name: buckaroo-recipes
       fetcher: GitFetcher

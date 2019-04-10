@@ -7,7 +7,6 @@
   family: pclinuxos
   color: '1c5482'
   minpackages: 10500
-  default_maintainer: no
   sources:
     - name: srpms
       fetcher: FileFetcher

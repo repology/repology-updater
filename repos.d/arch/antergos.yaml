@@ -7,7 +7,6 @@
   family: arch
   ruleset: [arch, antergos]
   minpackages: 150
-  default_maintainer: no
   sources:
     - name: antergos
       fetcher: TarFetcher
@@ -33,7 +32,6 @@
   family: arch
   ruleset: [arch, antergos]
   minpackages: 1
-  default_maintainer: no
   sources:
     - name: antergos-staging
       fetcher: TarFetcher

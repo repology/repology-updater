@@ -7,7 +7,6 @@
   family: pld
   color: '000000'
   minpackages: 11000
-  default_maintainer: no
   sources:
     - name: LIST
       fetcher: FTPListFetcher

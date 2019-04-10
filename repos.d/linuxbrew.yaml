@@ -7,7 +7,6 @@
   family: homebrew
   color: 'fdb130'
   minpackages: 4300
-  default_maintainer: no
   sources:
     - name: homebrew.json
       fetcher: FileFetcher

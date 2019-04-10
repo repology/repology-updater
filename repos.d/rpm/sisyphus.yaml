@@ -7,7 +7,6 @@
   family: sisyphus
   color: 'baccdd'
   minpackages: 17500
-  default_maintainer: no
   sources:
     - name: [ noarch, x86_64 ]
       fetcher: FileFetcher
@@ -32,7 +31,6 @@
   family: sisyphus
   color: 'baccdd'
   minpackages: 1  # XXX: unknown
-  default_maintainer: no
   sources:
     - name: [ noarch, x86_64 ]
       fetcher: FileFetcher

@@ -7,7 +7,6 @@
   family: centos
   color: '000096'
   minpackages: 4000
-  default_maintainer: no
   sources:
     - name: main
       fetcher: RepodataFetcher

@@ -7,7 +7,6 @@
   family: crates_io
   color: "e8ad39"
   minpackages: 14000
-  default_maintainer: no
   sources:
     - name: crates.io
       fetcher: CratesIOFetcher

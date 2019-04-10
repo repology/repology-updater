@@ -7,7 +7,6 @@
   family: debuntu
   color: '88839c'
   minpackages: 20000
-  default_maintainer: no
   sources:
     - name: [ oldstable/main, oldstable/contrib, oldstable/non-free, oldstable-updates/main, oldstable-updates/contrib, oldstable-updates/non-free ]
       fetcher: FileFetcher
@@ -26,7 +25,6 @@
   family: debuntu
   color: '88839c'
   minpackages: 20000
-  default_maintainer: no
   sources:
     - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
       fetcher: FileFetcher
@@ -45,7 +43,6 @@
   family: debuntu
   color: '88839c'
   minpackages: 25000
-  default_maintainer: no
   sources:
     - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
       fetcher: FileFetcher
@@ -64,7 +61,6 @@
   family: debuntu
   color: '88839c'
   minpackages: 25000
-  default_maintainer: no
   sources:
     - name: [ unstable/main, unstable/contrib, unstable/non-free ]
       fetcher: FileFetcher

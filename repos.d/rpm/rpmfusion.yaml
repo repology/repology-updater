@@ -9,7 +9,6 @@
   desc: RPM Fusion Fedora 28
   family: fedora
   minpackages: 400
-  default_maintainer: no
   sources:
     - name: free-release
       fetcher: RepodataFetcher
@@ -51,7 +50,6 @@
   desc: RPM Fusion Fedora 29
   family: fedora
   minpackages: 400
-  default_maintainer: no
   sources:
     - name: free-release
       fetcher: RepodataFetcher
@@ -93,7 +91,6 @@
   desc: RPM Fusion Fedora 30
   family: fedora
   minpackages: 300
-  default_maintainer: no
   sources:
     - name: free-branched
       fetcher: RepodataFetcher
@@ -125,7 +122,6 @@
   desc: RPM Fusion Fedora Rawhide
   family: fedora
   minpackages: 300
-  default_maintainer: no
   sources:
     - name: free-development
       fetcher: RepodataFetcher
@@ -150,7 +146,6 @@
   desc: RPM Fusion EL 6
   family: fedora
   minpackages: 50
-  default_maintainer: no
   sources:
     - name: free-updates
       fetcher: RepodataFetcher
@@ -182,7 +177,6 @@
   desc: RPM Fusion EL 7
   family: fedora
   minpackages: 100
-  default_maintainer: no
   sources:
     - name: free-updates
       fetcher: RepodataFetcher

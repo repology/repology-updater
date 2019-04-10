@@ -6,7 +6,6 @@
   desc: AIX Open Source Packages
   family: aix
   minpackages: 7000
-  default_maintainer: no
   sources:
     - name: LIST
       fetcher: FTPListFetcher

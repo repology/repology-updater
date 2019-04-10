@@ -6,7 +6,6 @@
   desc: Chocolatey
   family: chocolatey
   minpackages: 5000
-  default_maintainer: no
   sources:
     - name: chocolatey
       fetcher: ChocolateyFetcher
@@ -30,7 +29,6 @@
   desc: NuGet
   family: chocolatey
   minpackages: 1  # XXX: unknown
-  default_maintainer: no
   sources:
     - name: nuget
       fetcher: ChocolateyFetcher
