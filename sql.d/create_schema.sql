@@ -717,15 +717,6 @@ CREATE TABLE links (
 	last_extracted timestamp with time zone NOT NULL,
 	last_checked timestamp with time zone,
 
-	-- old columns, still used by both legacy linkchecker and webapp
-	last_success timestamp with time zone,
-	last_failure timestamp with time zone,
-	status smallint,
-	redirect smallint,
-	size bigint,
-	location text,
-
-	-- new columns for nextgen linkchecker
 	ipv4_last_success timestamp with time zone,
 	ipv4_last_failure timestamp with time zone,
 	ipv4_success boolean,
