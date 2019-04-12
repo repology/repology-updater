@@ -100,6 +100,7 @@ families = [
 rulesets = families + [
     'antergos',
     'antix',
+    'astra',
     'aur',
     'blackarch',
     'bunsenlabs',

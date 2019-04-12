@@ -6,6 +6,7 @@
   type: repository
   desc: Astra Orel Stable
   family: debuntu
+  ruleset: [debuntu, astra]
   minpackages: 3500
   sources:
     - name: [ main, contrib, non-free ]
