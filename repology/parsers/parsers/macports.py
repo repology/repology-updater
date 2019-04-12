@@ -40,41 +40,39 @@ class MacPortsParser(Parser):
             stdout=subprocess.PIPE
         ) as macportsjson:
             for pkgdata in JsonSlicer(macportsjson.stdout, (None,)):
-                pkg = factory.begin()
+                with factory.begin() as pkg:
+                    # drop obsolete ports (see #235)
+                    if 'replaced_by' in pkgdata:
+                        continue
 
-                pkg.set_name(pkgdata['name'])
-                pkg.set_version(pkgdata['version'], normalize_version)
+                    pkg.set_name(pkgdata['name'])
+                    pkg.set_version(pkgdata['version'], normalize_version)
+                    pkg.set_summary(pkgdata.get('description'))
+                    pkg.add_homepages(pkgdata.get('homepage'))
+                    pkg.add_categories(pkgdata.get('categories', '').split())
+                    pkg.add_licenses(pkgdata.get('license'))  # XXX: properly handle braces
 
-                # drop obsolete ports (see #235)
-                if 'replaced_by' in pkgdata:
-                    continue
+                    if 'maintainers' in pkgdata:
+                        for maintainer in pkgdata['maintainers'].replace('{', '').replace('}', '').lower().split():
+                            if maintainer.startswith('@'):
+                                # @foo means github user foo
+                                pkg.add_maintainers(maintainer[1:] + '@github')
+                            elif '@' in maintainer:
+                                # plain email
+                                pkg.add_maintainers(maintainer)
+                            elif ':' in maintainer:
+                                # foo.com:bar means bar@foo.com
+                                # ignore, since it's considered a form of email obfuscation
+                                pass
+                            elif maintainer == 'openmaintainer':
+                                # ignore, this is a flag that minor changes to a port
+                                # are allowed without involving the maintainer
+                                pass
+                            else:
+                                # otherwise it's username@macports.org
+                                pkg.add_maintainers(maintainer + '@macports.org')
 
-                pkg.set_summary(pkgdata.get('description'))
-                pkg.add_homepages(pkgdata.get('homepage'))
-                pkg.add_categories(pkgdata.get('categories', '').split())
-                pkg.add_licenses(pkgdata.get('license'))  # XXX: properly handle braces
+                    pkg.set_extra_field('portdir', pkgdata['portdir'])
+                    pkg.set_extra_field('portname', pkgdata['portdir'].split('/')[1])
 
-                if 'maintainers' in pkgdata:
-                    for maintainer in pkgdata['maintainers'].replace('{', '').replace('}', '').lower().split():
-                        if maintainer.startswith('@'):
-                            # @foo means github user foo
-                            pkg.add_maintainers(maintainer[1:] + '@github')
-                        elif '@' in maintainer:
-                            # plain email
-                            pkg.add_maintainers(maintainer)
-                        elif ':' in maintainer:
-                            # foo.com:bar means bar@foo.com
-                            # ignore, since it's considered a form of email obfuscation
-                            pass
-                        elif maintainer == 'openmaintainer':
-                            # ignore, this is a flag that minor changes to a port
-                            # are allowed without involving the maintainer
-                            pass
-                        else:
-                            # otherwise it's username@macports.org
-                            pkg.add_maintainers(maintainer + '@macports.org')
-
-                pkg.set_extra_field('portdir', pkgdata['portdir'])
-                pkg.set_extra_field('portname', pkgdata['portdir'].split('/')[1])
-
-                yield pkg
+                    yield pkg
