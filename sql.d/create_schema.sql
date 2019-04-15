@@ -715,6 +715,7 @@ CREATE TABLE links (
 	url text NOT NULL PRIMARY KEY,
 	first_extracted timestamp with time zone NOT NULL,
 	last_extracted timestamp with time zone NOT NULL,
+	next_check timestamp with time zone NOT NULL,
 	last_checked timestamp with time zone,
 
 	ipv4_last_success timestamp with time zone,
@@ -730,7 +731,7 @@ CREATE TABLE links (
 	ipv6_permanent_redirect_target text
 );
 
-CREATE INDEX ON links(last_checked NULLS FIRST);
+CREATE INDEX ON links(next_check);
 
 --------------------------------------------------------------------------------
 -- Problems

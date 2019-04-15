@@ -675,16 +675,19 @@ WHERE last_extracted < now() - INTERVAL '1' MONTH;
 INSERT INTO links(
 	url,
 	first_extracted,
-	last_extracted
+	last_extracted,
+	next_check
 )
 SELECT
 	unnest(downloads),
+	now(),
 	now(),
 	now()
 FROM packages
 UNION
 SELECT
 	homepage,
+	now(),
 	now(),
 	now()
 FROM packages
