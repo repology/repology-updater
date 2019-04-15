@@ -11,12 +11,14 @@
 {%- macro format_status_code(code, ipver) -%}
 {%- if code == -1 %}Unknown error
 
-{%- elif code == -100 %}Timeout (60 seconds)
+{%- elif code == -100 %}Conect timeout (60 seconds)
 {%- elif code == -101 %}Invaid URL
 
-{%- elif code == -200 %}DNS problem
-{%- elif code == -201 %}Domain not found
+{%- elif code == -200 %}Unknown DNS problem
+{%- elif code == -201 %}Domain name not found
 {%- elif code == -202 %}No address record
+{%- elif code == -203 %}Could not contact DNS servers
+{%- elif code == -204 %}Timeout while contacting DNS servers
 
 {%- elif code == -300 %}Connection refused
 {%- elif code == -301 %}No route to host
