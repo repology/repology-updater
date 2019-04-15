@@ -49,6 +49,8 @@ class ChunkedSerializer:
             pickler.dump(len(packages))
             for package in packages:
                 pickler.dump(package)
+            outfile.flush()
+            os.fsync(outfile.fileno())
 
         self.packages = []
         self.next_chunk_number += 1

@@ -55,6 +55,8 @@ class ElasticSearchFetcher(ScratchDirFetcher):
         while response['hits']['hits']:
             with open(os.path.join(statedir.get_path(), '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 json.dump(response['hits']['hits'], pagefile)
+                pagefile.flush()
+                os.fsync(pagefile.fileno())
 
             numpage += 1
 

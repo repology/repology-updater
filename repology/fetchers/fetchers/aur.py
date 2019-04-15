@@ -72,5 +72,7 @@ class AURFetcher(ScratchDirFetcher):
 
             with open(os.path.join(statedir.get_path(), '{}.json'.format(num_page)), 'wb') as statefile:
                 statefile.write(self.do_http(url).content)
+                statefile.flush()
+                os.fsync(statefile.fileno())
 
         return True

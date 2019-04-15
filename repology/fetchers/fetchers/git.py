@@ -45,6 +45,8 @@ class GitFetcher(PersistentDirFetcher):
                     print(item, file=sparse_checkout_file)
             else:
                 print('/*', file=sparse_checkout_file)
+            sparse_checkout_file.flush()
+            os.fsync(sparse_checkout_file.fileno())
 
     def _do_fetch(self, statepath: str, logger: Logger) -> bool:
         run_subprocess(['timeout', str(self.fetch_timeout), 'git', 'clone', '--progress', '--no-checkout', '--depth=1', '--branch', self.branch, self.url, statepath], logger=logger)

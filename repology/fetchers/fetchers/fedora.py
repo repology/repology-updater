@@ -44,8 +44,10 @@ class FedoraFetcher(ScratchDirFetcher):
                 logger.get_indented(2).log('failed: {}'.format(r.status_code))  # XXX: check .dead.package, instead throw
             return
 
-        with open(os.path.join(statedir.get_path(), package + '.spec'), 'wb') as file:
-            file.write(r.content)
+        with open(os.path.join(statedir.get_path(), package + '.spec'), 'wb') as specfile:
+            specfile.write(r.content)
+            specfile.flush()
+            os.fsync(specfile.fileno())
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         page = 1

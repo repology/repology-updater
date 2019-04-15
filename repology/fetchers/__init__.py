@@ -77,6 +77,8 @@ class ScratchDirFetcher(Fetcher):
             if persdata:
                 with AtomicFile(perspath, 'wb') as wpersfile:
                     pickle.dump(persdata, wpersfile.get_file())
+                    wpersfile.get_file().flush()
+                    os.fsync(wpersfile.get_file().fileno())
 
             if not have_changes:
                 statedir.cancel()
@@ -113,8 +115,13 @@ class ScratchFileFetcher(Fetcher):
             if persdata:
                 with AtomicFile(perspath, 'wb') as wpersfile:
                     pickle.dump(persdata, wpersfile.get_file())
+                    wpersfile.get_file().flush()
+                    os.fsync(wpersfile.get_file().fileno())
 
             if not have_changes:
                 statefile.cancel()
+
+            statefile.get_file().flush()
+            os.fsync(statefile.get_file().fileno())
 
             return have_changes

@@ -53,6 +53,8 @@ class GuixFetcher(ScratchDirFetcher):
                 # save HTML
                 with open(os.path.join(statedir.get_path(), '{}-{}.html'.format(letter, page)), 'w', encoding='utf-8') as pagefile:
                     pagefile.write(text)
+                    pagefile.flush()
+                    os.fsync(pagefile.fileno())
 
                 # end if that was last (or only) page
                 if page >= numpages:

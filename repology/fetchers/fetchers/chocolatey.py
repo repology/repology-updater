@@ -38,6 +38,8 @@ class ChocolateyFetcher(ScratchDirFetcher):
             text = self.do_http(nextpageurl).text
             with open(os.path.join(statedir.get_path(), '{}.xml'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
+                pagefile.flush()
+                os.fsync(pagefile.fileno())
 
             # parse next page
             logger.log('parsing ' + nextpageurl)

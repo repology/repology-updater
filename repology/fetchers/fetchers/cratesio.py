@@ -39,6 +39,8 @@ class CratesIOFetcher(ScratchDirFetcher):
             text = self.do_http(url).text
             with open(os.path.join(statedir.get_path(), '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
+                pagefile.flush()
+                os.fsync(pagefile.fileno())
 
             # parse next page
             if not json.loads(text)['crates']:
