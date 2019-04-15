@@ -673,23 +673,14 @@ WHERE last_extracted < now() - INTERVAL '1' MONTH;
 
 -- extract fresh
 INSERT INTO links(
-	url,
-	first_extracted,
-	last_extracted,
-	next_check
+	url
 )
 SELECT
-	unnest(downloads),
-	now(),
-	now(),
-	now()
+	unnest(downloads)
 FROM packages
 UNION
 SELECT
-	homepage,
-	now(),
-	now(),
-	now()
+	homepage
 FROM packages
 WHERE
 	homepage IS NOT NULL AND

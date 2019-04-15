@@ -713,9 +713,9 @@ DROP TABLE IF EXISTS links CASCADE;
 
 CREATE TABLE links (
 	url text NOT NULL PRIMARY KEY,
-	first_extracted timestamp with time zone NOT NULL,
-	last_extracted timestamp with time zone NOT NULL,
-	next_check timestamp with time zone NOT NULL,
+	first_extracted timestamp with time zone NOT NULL DEFAULT now(),
+	last_extracted timestamp with time zone NOT NULL DEFAULT now(),
+	next_check timestamp with time zone NOT NULL DEFAULT now(),
 	last_checked timestamp with time zone,
 
 	ipv4_last_success timestamp with time zone,
