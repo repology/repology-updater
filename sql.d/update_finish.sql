@@ -568,8 +568,14 @@ SELECT DISTINCT
 			WHEN links.ipv4_status_code=-306 THEN 'connection aborted'
 			WHEN links.ipv4_status_code=-307 THEN 'address not available'
 			WHEN links.ipv4_status_code=-400 THEN 'too many redirects'
-			WHEN links.ipv4_status_code=-401 THEN 'SSL problem'
+			WHEN links.ipv4_status_code=-401 THEN 'SSL problem' -- XXX: legacy
 			WHEN links.ipv4_status_code=-402 THEN 'HTTP protocol error'
+			WHEN links.ipv4_status_code=-500 THEN 'SSL problem'
+			WHEN links.ipv4_status_code=-501 THEN 'SSL certificate has expired'
+			WHEN links.ipv4_status_code=-502 THEN 'SSL certificate issued for different hostname'
+			WHEN links.ipv4_status_code=-503 THEN 'SSL self signed certificate'
+			WHEN links.ipv4_status_code=-504 THEN 'SSL self signed certificate in chain'
+			WHEN links.ipv4_status_code=-505 THEN 'SSL incomplete certificate chain'
 			ELSE 'HTTP error ' || links.ipv4_status_code
 		END ||
 		') for more than a month.'
