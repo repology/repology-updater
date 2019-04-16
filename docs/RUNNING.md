@@ -148,31 +148,4 @@ uwsgi --mount /=repology-app:app --pythonpath=<path-to-repology-checkout>
 
 ### Link checker
 
-A separate utility exists to gather and refresh availability information
-for links (homepages and downloads) extracted by repology. After updating
-the database once, you may run
-
-```
-./repology-linkchecker.py
-```
-
-This will issue a HEAD (and if that fails, a GET) request for each link,
-and save the result (such as HTTP code and redirect information)
-in the database.
-
-Note that typical repology installation would know of hundreds of
-thousands of links so this may take time. Consult `--help` for a list
-of additional options. Typical Repology setup with regular update would
-run something like
-
-```
-./repology-linkchecker.py --unchecked --jobs 10
-```
-
-after each update to handle newly discovered links, and
-
-```
-./repology-linkchecker.py --checked --age 7 --jobs 10
-```
-
-weekly to refresh information of already known links in background.
+See separate repository https://github.com/repology/repology-linkchecker

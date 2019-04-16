@@ -48,7 +48,7 @@ useful data for Repology.</p>
 
 <h4>repology-linkchecker</h4>
 
-<p>Identifies itself as <code>repology-linkchecker/0 (+{{ REPOLOGY_HOME }}/bots)</code></p>
+<p>Identifies itself as <code>repology-linkchecker/1 (+{{ REPOLOGY_HOME }}/bots)</code></p>
 
 <p>This process pokes links retrieved from package metadata to check that they
 are alive. Dead links and links which involve redirects are reported to package
@@ -64,7 +64,7 @@ using only marginal amount of web traffic. Also, there's a delay of 3 seconds be
 consecutive requests to a single hostname, to ensure no excess site load is generated.</p>
 
 <p>You may see the link checker source code
-<a href="{{ config['REPOLOGY_MAIN_REPO_URL'] }}/blob/master/repology-linkchecker.py">here</a>.</p>
+<a href="{{ config['REPOLOGY_LINKCHECKER_REPO_URL'] }}">here</a>.</p>
 
 <h3>robots.txt policy</h3>
 
@@ -73,7 +73,7 @@ try to gather all available URLs from a specific website, so it may be required 
 them through <a href="https://en.wikipedia.org/wiki/Robots_exclusion_standard">robots.txt</a>
 file, Repology only interacts with a <strong>fixed</strong> small set of <strong>man-made</strong>
 links, and needs unconditional access to them to perform its tasks (e.g. retrieving repository
-information and availability checking), so neither of repology robots respect
+information and link availability checking), so neither of repology robots respects
 <a href="https://en.wikipedia.org/wiki/Robots_exclusion_standard">robots.txt</a>.</p>
 
 </div> {#- container #}
