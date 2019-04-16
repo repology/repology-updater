@@ -692,7 +692,7 @@ FROM packages
 WHERE
 	homepage IS NOT NULL AND
 	repo NOT IN('cpan', 'metacpan', 'pypi', 'rubygems', 'cran') AND
-	homepage NOT LIKE '%mran.revolutionanalytics.com/snapshot/20%'  -- nix spawns tons of these, while it should use canonical urls as suggested by CRAN
+	homepage NOT LIKE '%%mran.revolutionanalytics.com/snapshot/20%%'  -- nix spawns tons of these, while it should use canonical urls as suggested by CRAN
 ON CONFLICT (url)
 DO UPDATE SET
 	last_extracted = now();
