@@ -691,7 +691,7 @@ SELECT
 FROM packages
 WHERE
 	homepage IS NOT NULL AND
-	repo NOT IN('cpan', 'pypi', 'rubygems', 'cran')
+	repo NOT IN('cpan', 'metacpan', 'pypi', 'rubygems', 'cran')
 ON CONFLICT (url)
 DO UPDATE SET
 	last_extracted = now();
