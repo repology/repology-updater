@@ -568,7 +568,6 @@ SELECT DISTINCT
 			WHEN links.ipv4_status_code=-306 THEN 'connection aborted'
 			WHEN links.ipv4_status_code=-307 THEN 'address not available'
 			WHEN links.ipv4_status_code=-400 THEN 'too many redirects'
-			WHEN links.ipv4_status_code=-401 THEN 'SSL problem' -- XXX: legacy
 			WHEN links.ipv4_status_code=-402 THEN 'HTTP protocol error'
 			WHEN links.ipv4_status_code=-500 THEN 'SSL problem'
 			WHEN links.ipv4_status_code=-501 THEN 'SSL certificate has expired'
