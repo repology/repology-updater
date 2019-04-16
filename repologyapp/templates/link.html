@@ -11,14 +11,14 @@
 {%- macro format_status_code(code, ipver) -%}
 {%- if code == -1 %}Unknown error
 
-{%- elif code == -100 %}Conect timeout (60 seconds)
-{%- elif code == -101 %}Invaid URL
+{%- elif code == -100 %}Connect timeout (60 seconds)
+{%- elif code == -101 %}Invalid URL
 
-{%- elif code == -200 %}Unknown DNS problem
-{%- elif code == -201 %}Domain name not found
-{%- elif code == -202 %}No address record
-{%- elif code == -203 %}Could not contact DNS servers
-{%- elif code == -204 %}Timeout while contacting DNS servers
+{%- elif code == -200 %}DNS error
+{%- elif code == -201 %}DNS error: domain name not found
+{%- elif code == -202 %}DNS error: no address record
+{%- elif code == -203 %}DNS error: could not contact DNS servers
+{%- elif code == -204 %}DNS error: timeout while contacting DNS servers
 
 {%- elif code == -300 %}Connection refused
 {%- elif code == -301 %}No route to host
@@ -31,13 +31,14 @@
 {%- elif code == -400 %}Too many redirects (possibly, a redirect loop)
 {%- elif code == -402 %}HTTP protocol error
 
-{%- elif code == -500 %}SSL problem
-{%- elif code == -501 %}SSL certificate has expired
-{%- elif code == -502 %}SSL certificate issued for different hostname
-{%- elif code == -503 %}SSL self signed certificate
-{%- elif code == -504 %}SSL self signed certificate in certificate chain
-{%- elif code == -505 %}SSL incomplete certificate chain
+{%- elif code == -500 %}SSL error
+{%- elif code == -501 %}SSL error: certificate has expired
+{%- elif code == -502 %}SSL error: certificate issued for different hostname
+{%- elif code == -503 %}SSL error: self signed certificate
+{%- elif code == -504 %}SSL error: self signed certificate in certificate chain
+{%- elif code == -505 %}SSL error: incomplete certificate chain
 
+{%- elif code >= 0 and code < 1000 %}HTTP {{ code }}
 {%- else %}{{ code }}
 {%- endif -%}
 {%- endmacro -%}
