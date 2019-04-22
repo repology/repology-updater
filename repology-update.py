@@ -255,7 +255,7 @@ def parse_arguments() -> argparse.Namespace:
     actions_grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
 
     actions_grp.add_argument('-f', '--fetch', action='count', help='fetch repository data (twice to allow updating)')
-    actions_grp.add_argument('-p', '--parse', action='count', help='parse fetched repository data (specify twice to parse even if the fetched data hasn\'t changed)')
+    actions_grp.add_argument('-p', '--parse', action='count', help="parse fetched repository data (specify twice to parse even if the fetched data hasn't changed)")
 
     # XXX: this is dangerous as long as ignored packages are removed from dumps
     actions_grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')

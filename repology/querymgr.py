@@ -114,10 +114,10 @@ class QueryMetadata:
             pass
         elif argdefault.isdecimal():
             self.argdefaults[argname] = int(argdefault)
-        elif argdefault.startswith('\''):
-            self.argdefaults[argname] = argdefault.strip('\'')
-        elif argdefault.startswith('\"'):
-            self.argdefaults[argname] = argdefault.strip('\"')
+        elif argdefault.startswith("'"):
+            self.argdefaults[argname] = argdefault.strip("'")
+        elif argdefault.startswith('"'):
+            self.argdefaults[argname] = argdefault.strip('"')
         elif argdefault == 'True':
             self.argdefaults[argname] = True
         elif argdefault == 'False':
