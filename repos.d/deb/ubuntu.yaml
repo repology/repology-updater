@@ -429,3 +429,86 @@
     - desc: Package builds on launchpad
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
+
+- name: ubuntu_19_10
+  type: repository
+  desc: Ubuntu 19.10
+  family: debuntu
+  color: 'e95420'
+  minpackages: 29000
+  sources:
+    - name: [ eoan/main, eoan/multiverse, eoan/restricted, eoan/universe, eoan-updates/main, eoan-updates/multiverse, eoan-updates/restricted, eoan-updates/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in eoan
+      url: https://packages.ubuntu.com/eoan/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'https://packages.ubuntu.com/source/eoan/{name}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_19_10_backports
+  type: repository
+  desc: Ubuntu 19.10 Backports
+  family: debuntu
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ eoan-backports/main, eoan-backports/multiverse, eoan-backports/restricted, eoan-backports/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in eoan
+      url: https://packages.ubuntu.com/eoan/
+  packagelinks:
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_19_10_proposed
+  type: repository
+  desc: Ubuntu 19.10 Proposed
+  family: debuntu
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ eoan-proposed/main, eoan-proposed/multiverse, eoan-proposed/restricted, eoan-proposed/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in eoan
+      url: https://packages.ubuntu.com/eoan/
+  packagelinks:
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
