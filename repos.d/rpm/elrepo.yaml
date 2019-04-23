@@ -1,0 +1,122 @@
+###########################################################################
+# elrepo.org
+###########################################################################
+- name: elrepo_el7
+  type: repository
+  desc: ELRepo el7
+  family: centos
+  color: '1938ad'
+  minpackages: 80
+  sources:
+    - name: elrepo
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://mirrors.coreix.net/elrepo/elrepo/el7/SRPMS/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: ELRepo.org
+      url: http://elrepo.org
+  packagelinks:
+    - desc: Package details on elrepo.org
+      url: 'http://elrepo.org/tiki/{name}'
+  tags: [ all, production, elrepo ]
+
+- name: elrepo_el7_extras
+  type: repository
+  desc: ELRepo el7 Extras
+  family: centos
+  color: '1938ad'
+  minpackages: 0
+  sources:
+    - name: elrepo
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://mirrors.coreix.net/elrepo/extras/el7/SRPMS/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: ELRepo.org
+      url: http://elrepo.org
+  packagelinks:
+    - desc: Package details on elrepo.org
+      url: 'http://elrepo.org/tiki/{name}'
+  tags: [ elrepo ]  # no useful packages
+
+- name: elrepo_el7_testing
+  type: repository
+  desc: ELRepo el7 Testing
+  family: centos
+  color: '1938ad'
+  minpackages: 0
+  sources:
+    - name: elrepo
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://mirrors.coreix.net/elrepo/testing/el7/SRPMS/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: ELRepo.org
+      url: http://elrepo.org
+  packagelinks:
+    - desc: Package details on elrepo.org
+      url: 'http://elrepo.org/tiki/{name}'
+  tags: [ all, production, elrepo ]
+
+- name: elrepo_el8
+  type: repository
+  desc: ELRepo el8
+  family: centos
+  color: '1938ad'
+  minpackages: 0
+  sources:
+    - name: elrepo
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://mirrors.coreix.net/elrepo/elrepo/el8/SRPMS/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: ELRepo.org
+      url: http://elrepo.org
+  packagelinks:
+    - desc: Package details on elrepo.org
+      url: 'http://elrepo.org/tiki/{name}'
+  tags: [ elrepo ]  # no useful packages
+
+- name: elrepo_el8_extras
+  type: repository
+  desc: ELRepo el8 Extras
+  family: centos
+  color: '1938ad'
+  minpackages: 0
+  sources:
+    - name: elrepo
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://mirrors.coreix.net/elrepo/extras/el8/SRPMS/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: ELRepo.org
+      url: http://elrepo.org
+  packagelinks:
+    - desc: Package details on elrepo.org
+      url: 'http://elrepo.org/tiki/{name}'
+  tags: [ elrepo ]  # no useful packages
+
+- name: elrepo_el8_testing
+  type: repository
+  desc: ELRepo el8 Testing
+  family: centos
+  color: '1938ad'
+  minpackages: 0
+  sources:
+    - name: elrepo
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://mirrors.coreix.net/elrepo/testing/el8/SRPMS/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: ELRepo.org
+      url: http://elrepo.org
+  packagelinks:
+    - desc: Package details on elrepo.org
+      url: 'http://elrepo.org/tiki/{name}'
+  tags: [ elrepo ]  # no useful packages
