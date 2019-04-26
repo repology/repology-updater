@@ -2,6 +2,7 @@
 # openSUSE additional repositories
 ###########################################################################
 - name: opensuse_games_tumbleweed
+  sortname: opensusez_games
   type: repository
   desc: openSUSE Games Tumbleweed
   family: opensuse
@@ -19,6 +20,26 @@
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/games/{name}'
+    - desc: Package details on software.opensuse.org
+      url: 'https://software.opensuse.org/package/{name}'
+  tags: [ all, production, opensuse, rpm ]
+
+- name: opensuse_multimedia_apps_tumbleweed
+  sortname: opensusez_multimedia:apps
+  type: repository
+  desc: openSUSE Multimedia:Apps Tumbleweed
+  family: opensuse
+  color: '6da741'
+  minpackages: 1
+  sources:
+    - name: data
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://download.opensuse.org/repositories/multimedia:/apps/openSUSE_Tumbleweed/
+      allowed_archs: ['src']
+  packagelinks:
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/multimedia:apps/{name}'
     - desc: Package details on software.opensuse.org
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]
