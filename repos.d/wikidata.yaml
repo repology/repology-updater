@@ -13,6 +13,7 @@
   sources:
     - name: result.json
       fetcher: FileFetcher
+      fetch_timeout: 300
       parser: WikidataJsonParser
       url: 'https://query.wikidata.org/sparql'
       post:
