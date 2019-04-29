@@ -1,6 +1,26 @@
 ###########################################################################
 # openSUSE additional repositories
 ###########################################################################
+- name: opensuse_education_tumbleweed
+  sortname: opensusez_education
+  type: repository
+  desc: openSUSE Education Tumbleweed
+  family: opensuse
+  color: '6da741'
+  minpackages: 300
+  sources:
+    - name: data
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://download.opensuse.org/repositories/Education/openSUSE_Tumbleweed/
+      allowed_archs: ['src']
+  packagelinks:
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/Education/{name}'
+    - desc: Package details on software.opensuse.org
+      url: 'https://software.opensuse.org/package/{name}'
+  tags: [ all, production, opensuse, rpm ]
+
 - name: opensuse_emulators_tumbleweed
   sortname: opensusez_emulators
   type: repository
@@ -140,6 +160,26 @@
   packagelinks:
     - desc: Package in openSUSE Build Service
       url: 'https://build.opensuse.org/package/show/science/{name}'
+    - desc: Package details on software.opensuse.org
+      url: 'https://software.opensuse.org/package/{name}'
+  tags: [ all, production, opensuse, rpm ]
+
+- name: opensuse_security_tumbleweed
+  sortname: opensusez_security
+  type: repository
+  desc: openSUSE Security Tumbleweed
+  family: opensuse
+  color: '6da741'
+  minpackages: 150
+  sources:
+    - name: data
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/
+      allowed_archs: ['src']
+  packagelinks:
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/security/{name}'
     - desc: Package details on software.opensuse.org
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]
