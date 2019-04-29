@@ -555,6 +555,7 @@ SELECT DISTINCT
 			WHEN links.ipv4_status_code=-1 THEN 'unknown error'
 			WHEN links.ipv4_status_code=-100 THEN 'connect timeout'
 			WHEN links.ipv4_status_code=-101 THEN 'invalid url'
+			WHEN links.ipv4_status_code=-102 THEN 'host blacklisted for being taken over'
 			WHEN links.ipv4_status_code=-200 THEN 'unknown DNS problem'
 			WHEN links.ipv4_status_code=-201 THEN 'domain not found'
 			WHEN links.ipv4_status_code=-202 THEN 'no address record'
