@@ -9,15 +9,17 @@
 	{% if loop.first or (headerevery != 0 and loop.index0 % headerevery == 0) %}
 		<tr>
 			<th>Project</th>
-			{% if repo %}
-			<th class="text-nowrap">In {{ repometadata[repo].desc }}</th>
-			{% elif maintainer %}
-			<th class="text-nowrap">By {{ maintainer }}</th>
+			{% if repo or maintainer %}
+			<th class="text-nowrap" title="Versions for projects
+				{%- if repo %} present in {{ repometadata[repo].desc }}{% endif -%}
+				{%- if repo and maintainer %} and{% endif -%}
+				{%- if maintainer %} maintained by {{ maintainer }}{% endif -%}
+			">Selected</th>
 			{% endif %}
-			<th class="text-center">Spread</th>
-			<th>Newest</th>
-			<th>Outdated</th>
-			<th>Ignored</th>
+			<th class="text-center" title="Spread - number of repository families a project is present in">Spr</th>
+			<th title="Versions considered newest">Newest</th>
+			<th title="Versions considered outdated">Outdated</th>
+			<th title="Versions excluded from comparison">Ignored</th>
 		</tr>
 	{% if loop.first %}</thead><tbody>{% endif %}
 	{% endif %}
