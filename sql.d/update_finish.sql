@@ -584,11 +584,6 @@ INNER JOIN links ON (packages.homepage = links.url)
 WHERE
 	NOT links.ipv4_success AND
 	(
-		links.ipv4_status_code < 0 OR
-		links.ipv4_status_code >= 500 OR
-		links.ipv4_status_code IN (400, 404)
-	) AND
-	(
 		(links.ipv4_last_success IS NULL AND links.first_extracted < now() - INTERVAL '30' DAY) OR
 		links.ipv4_last_success < now() - INTERVAL '30' DAY
 	);
