@@ -5,7 +5,7 @@
   type: repository
   desc: OpenPKG
   family: openpkg
-  minpackages: 0
+  minpackages: 2100
   sources:
     - name: 00INDEX
       fetcher: FileFetcher

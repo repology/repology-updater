@@ -7,7 +7,7 @@
   family: debuntu
   ruleset: [ debuntu, whonix ]
   color: '677d94'
-  minpackages: 0
+  minpackages: 100
   sources:
     - name: main
       fetcher: FileFetcher
@@ -25,7 +25,7 @@
   family: debuntu
   ruleset: [ debuntu, whonix ]
   color: '677d94'
-  minpackages: 0
+  minpackages: 100
   sources:
     - name: main
       fetcher: FileFetcher
