@@ -1,0 +1,44 @@
+###########################################################################
+# Emacs package collections
+###########################################################################
+- name: gnu_elpa
+  type: modules
+  desc: GNU Elpa
+  family: elpa
+  ruleset: [elpa, gnuelpa]
+  color: "c23a62"
+  minpackages: 180
+  sources:
+    - name: archive-contents
+      fetcher: FileFetcher
+      url: https://elpa.gnu.org/packages/archive-contents
+      parser: ArchiveContentsParser
+  shadow: true
+  repolinks:
+    - desc: GNU Emacs Lisp Package Archive
+      url: https://elpa.gnu.org/
+  packagelinks:
+    - desc: Package page
+      url: 'https://elpa.gnu.org/packages/{name}.html'
+  tags: [ all, production, elpa ]
+
+- name: melpa
+  type: modules
+  desc: MELPA
+  family: elpa
+  ruleset: [elpa, melpa]
+  color: "922793"
+  minpackages: 3800
+  sources:
+    - name: archive-contents
+      fetcher: FileFetcher
+      url: https://melpa.org/packages/archive-contents
+      parser: ArchiveContentsParser
+  shadow: true
+  repolinks:
+    - desc: Milkypostman’s Emacs Lisp Package Archive
+      url: https://melpa.org/
+  packagelinks:
+    - desc: Package page
+      url: 'https://melpa.org/#/{name}'
+  tags: [ all, production, elpa ]
