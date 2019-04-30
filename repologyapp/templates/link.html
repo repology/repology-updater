@@ -9,7 +9,7 @@
 {% block header %}Link check status{% endblock %}
 
 {%- macro format_status_code(code, ipver) -%}
-{%- if code == -1 %}Unknown error
+{%- if code == -1 %}Unknown error {{ code }}
 
 {%- elif code == -100 %}Connect timeout (60 seconds)
 {%- elif code == -101 %}Invalid URL
@@ -87,7 +87,7 @@
 	{% elif linkinfo.ipv4_success and linkinfo.ipv4_permanent_redirect_target is not none %}
 		<b class="link-redirect">permanent redirect</b> to <b><a href="{{ linkinfo.ipv4_permanent_redirect_target }}">{{ linkinfo.ipv4_permanent_redirect_target }}</a></b>
 	{% elif linkinfo.ipv4_success %}
-		<b class="link-ok">OK</b>
+		<b class="link-ok">OK ({{ linkinfo.ipv4_status_code }})</b>
 	{% else %}
 		<b class="link-error">{{ format_status_code(linkinfo.ipv4_status_code) }}</b>
 	{% endif %}
@@ -117,9 +117,9 @@
 	{% if linkinfo.ipv6_success is none %}
 		<b>-</b>
 	{% elif linkinfo.ipv6_success and linkinfo.ipv6_permanent_redirect_target is not none %}
-		<b class="link-redirect">permanent redirect to <a href="{{ linkinfo.ipv6_permanent_redirect_target }}">{{ linkinfo.ipv6_permanent_redirect_target }}</a></b>
+		<b class="link-redirect">permanent redirect</b> to <b><a href="{{ linkinfo.ipv6_permanent_redirect_target }}">{{ linkinfo.ipv6_permanent_redirect_target }}</a></b>
 	{% elif linkinfo.ipv6_success %}
-		<b class="link-ok">OK</b>
+		<b class="link-ok">OK ({{ linkinfo.ipv6_status_code }})</b>
 	{% else %}
 		<b class="link-error">{{ format_status_code(linkinfo.ipv6_status_code) }}</b>
 	{% endif %}
