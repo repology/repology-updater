@@ -76,7 +76,7 @@
   desc: Fedora 28
   family: fedora
   color: '294172'
-  minpackages: 20000
+  minpackages: 24000
   sources:
     - name: release
       fetcher: RepodataFetcher
@@ -107,7 +107,7 @@
   desc: Fedora 29
   family: fedora
   color: '294172'
-  minpackages: 20000
+  minpackages: 24000
   sources:
     - name: release
       fetcher: RepodataFetcher
