@@ -6,7 +6,7 @@
 
 Needed for the core:
 
-- [Python](https://www.python.org/) 3.6+
+- [Python](https://www.python.org/) 3.7+
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [Jinja2](http://jinja.pocoo.org/)
 - Python module [libversion](https://pypi.python.org/pypi/libversion) (also requires [libversion](https://github.com/repology/libversion) C library)
