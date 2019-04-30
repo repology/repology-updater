@@ -22,6 +22,7 @@ Needed for fetching/parsing repository data:
 - Python module [lxml](http://lxml.de/)
 - Python module [rpm](http://rpm.org/) (comes with RPM package manager)
 - Python module [jsonslicer](https://pypi.org/project/jsonslicer/)
+- Python module [pyparsing](https://github.com/pyparsing/pyparsing/)
 - Python module sqlite3
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
@@ -46,6 +47,7 @@ Optional, for python code linting:
 - Python module [flake8-builtins](https://pypi.python.org/pypi/flake8-builtins)
 - Python module [flake8-import-order](https://pypi.python.org/pypi/flake8-import-order)
 - Python module [flake8-quotes](https://pypi.python.org/pypi/flake8-quotes)
+- Python module [mypy](http://mypy-lang.org/)
 
 ## Usage
 
