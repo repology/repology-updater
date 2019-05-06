@@ -31,7 +31,7 @@
   sources:
     # all updates subrepos are empty and all testing subrepos contain 5 packages in total,
     # most of them are quite old. so not including these subrepositories here
-    - name: [ main/release, non-free/release, restricted/release, unsupported/release ]
+    - name: [ main/release, non-free/release, restricted/release, unsupported/release, unsupported/contrib/release ]
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: 'http://abf-downloads.openmandriva.org/cooker/repository/SRPMS/{source}/'
