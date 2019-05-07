@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,34 +15,51 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from dataclasses import dataclass
+from typing import Dict, Tuple
+
 import PIL.ImageFont
 
 
+_Dimensions = Tuple[int, int]
+
+
+@dataclass
+class _CacheEntry:
+    dimensions: _Dimensions
+    generation: int
+
+
 class FontMeasurer:
-    def __init__(self, fontpath, fontsize, maxcachesize=1000):
-        self.font = PIL.ImageFont.truetype(fontpath, fontsize)
-        self.cache = {}
-        self.maxcachesize = maxcachesize
-        self.generation = 0
+    _font: PIL.ImageFont
+    _cache: Dict[str, _CacheEntry]
+    _maxcachesize: int
+    _generation: int
 
-    def get_text_dimensions(self, text):
-        self.generation += 1
+    def __init__(self, fontpath: str, fontsize: int, maxcachesize: int = 1000) -> None:
+        self._font = PIL.ImageFont.truetype(fontpath, fontsize)
+        self._cache = {}
+        self._maxcachesize = maxcachesize
+        self._generation = 0
 
-        if text in self.cache:
-            item = self.cache[text]
-            item[1] = self.generation
-            return item[0]
+    def get_text_dimensions(self, text: str) -> Tuple[int, int]:
+        self._generation += 1
 
-        dimensions = self.font.getsize(text)
+        if text in self._cache:
+            item = self._cache[text]
+            item.generation = self._generation
+            return item.dimensions
 
-        if len(self.cache) >= self.maxcachesize:
+        dimensions: _Dimensions = self._font.getsize(text)
+
+        if len(self._cache) >= self._maxcachesize:
             # if cache is full, remove at least 10% LRU entries
-            last_generation = self.generation - len(self.cache) + max(self.maxcachesize // 10, len(self.cache) + 1 - self.maxcachesize)
+            last_generation = self._generation - len(self._cache) + max(self._maxcachesize // 10, len(self._cache) + 1 - self._maxcachesize)
 
-            for key in list(self.cache.keys()):
-                if self.cache[key][1] < last_generation:
-                    del self.cache[key]
+            for key in list(self._cache.keys()):
+                if self._cache[key].generation < last_generation:
+                    del self._cache[key]
 
-        self.cache[text] = [dimensions, self.generation]
+        self._cache[text] = _CacheEntry(dimensions, self._generation)
 
         return dimensions
