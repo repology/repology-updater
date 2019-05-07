@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,15 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Iterable, List, Optional
+
 from repologyapp.packageformatter import PackageFormatter
 
-from repology.package import VersionClass
+from repology.package import Package, PackageStatus
 
 
 __all__ = ['maintainer_to_links', 'maintainers_to_group_mailto', 'pkg_format', 'css_for_versionclass']
 
 
-def maintainer_to_links(maintainer):
+def maintainer_to_links(maintainer: str) -> List[str]:
     links = []
 
     if '@' in maintainer:
@@ -46,7 +48,7 @@ def maintainer_to_links(maintainer):
     return links
 
 
-def maintainers_to_group_mailto(maintainers, subject=None):
+def maintainers_to_group_mailto(maintainers: Iterable[str], subject: Optional[str] = None) -> Optional[str]:
     emails = []
 
     for maintainer in maintainers:
@@ -59,28 +61,30 @@ def maintainers_to_group_mailto(maintainers, subject=None):
     return 'mailto:' + ','.join(sorted(emails)) + ('?subject=' + subject if subject else '')
 
 
-def pkg_format(value, pkg):
+def pkg_format(value: str, pkg: Package) -> str:
     return PackageFormatter().format(value, pkg)
 
 
-def css_for_versionclass(value):
-    if value == VersionClass.ignored:
+def css_for_versionclass(value: int) -> str:
+    if value == PackageStatus.IGNORED:
         return 'ignored'
-    elif value == VersionClass.unique:
+    elif value == PackageStatus.UNIQUE:
         return 'unique'
-    elif value == VersionClass.devel:
+    elif value == PackageStatus.DEVEL:
         return 'devel'
-    elif value == VersionClass.newest:
+    elif value == PackageStatus.NEWEST:
         return 'newest'
-    elif value == VersionClass.legacy:
+    elif value == PackageStatus.LEGACY:
         return 'legacy'
-    elif value == VersionClass.outdated:
+    elif value == PackageStatus.OUTDATED:
         return 'outdated'
-    elif value == VersionClass.incorrect:
+    elif value == PackageStatus.INCORRECT:
         return 'incorrect'
-    elif value == VersionClass.untrusted:
+    elif value == PackageStatus.UNTRUSTED:
         return 'untrusted'
-    elif value == VersionClass.noscheme:
+    elif value == PackageStatus.NOSCHEME:
         return 'noscheme'
-    elif value == VersionClass.rolling:
+    elif value == PackageStatus.ROLLING:
         return 'rolling'
+    else:
+        raise RuntimeError('unknown versionclass {}'.format(value))

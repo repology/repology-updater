@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,23 +15,25 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any
+
 import flask
 
 
 __all__ = ['url_for_self']
 
 
-def url_for_self(**args):
+def url_for_self(**args: Any) -> Any:
     return flask.url_for(flask.request.endpoint, **dict(flask.request.view_args, **args))
 
 
-def endpoint_like(*variants):
+def endpoint_like(*variants: str) -> bool:
     endpoint = flask.request.endpoint
 
     for variant in variants:
         if endpoint == variant:
             return True
-        elif variant.endswith('*') and endpoint.startswith(variant[:-1]):
+        elif variant.endswith('*') and endpoint and endpoint.startswith(variant[:-1]):
             return True
 
     return False

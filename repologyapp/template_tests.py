@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,18 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Optional
+
 
 __all__ = ['is_fallback_maintainer', 'for_page']
 
 
-def is_fallback_maintainer(maintainer):
+def is_fallback_maintainer(maintainer: str) -> bool:
     return maintainer.startswith('fallback-mnt-') and maintainer.endswith('@repology')
 
 
-def for_page(value, letter=None):
+def for_page(value: str, letter: Optional[str] = None) -> bool:
     if letter is None or letter == '0':
         return not value or value < 'a'
     elif letter >= 'z':
-        return value and value >= 'z'
+        return bool(value and value >= 'z')
     else:
-        return value and value >= letter and value < chr(ord(letter) + 1)
+        return bool(value and value >= letter and value < chr(ord(letter) + 1))
