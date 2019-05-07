@@ -43,8 +43,6 @@ class TarFetcher(ScratchDirFetcher):
         try:
             with open(tarpath, 'wb') as tarfile:
                 response = save_http_stream(self.url, tarfile, headers=headers, timeout=self.fetch_timeout)
-                tarfile.flush()
-                os.fsync(tarfile.fileno())
         except NotModifiedException:
             logger.log('got 403 not modified')
             return False
