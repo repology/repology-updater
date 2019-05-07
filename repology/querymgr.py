@@ -18,6 +18,7 @@
 import functools
 import os
 import re
+from typing import Any, Callable, ClassVar, Dict, List, Optional
 
 import jinja2
 
@@ -38,22 +39,30 @@ class QueryLoadingError(RuntimeError):
 
 
 class QueryMetadata:
-    RET_NONE = 0
-    RET_SINGLE_VALUE = 1
-    RET_SINGLE_DICT = 2
-    RET_SINGLE_TUPLE = 3
-    RET_ARRAY_OF_VALUES = 4
-    RET_ARRAY_OF_DICTS = 5
-    RET_ARRAY_OF_TUPLES = 6
-    RET_ARRAY_OF_PACKAGES = 7
-    RET_DICT_AS_DICTS = 8
+    RET_NONE: ClassVar[int] = 0
+    RET_SINGLE_VALUE: ClassVar[int] = 1
+    RET_SINGLE_DICT: ClassVar[int] = 2
+    RET_SINGLE_TUPLE: ClassVar[int] = 3
+    RET_ARRAY_OF_VALUES: ClassVar[int] = 4
+    RET_ARRAY_OF_DICTS: ClassVar[int] = 5
+    RET_ARRAY_OF_TUPLES: ClassVar[int] = 6
+    RET_ARRAY_OF_PACKAGES: ClassVar[int] = 7
+    RET_DICT_AS_DICTS: ClassVar[int] = 8
 
-    ARGSMODE_NORMAL = 0
-    ARGSMODE_MANY_VALUES = 1
-    ARGSMODE_MANY_PACKAGES = 2
-    ARGSMODE_MANY_DICTS = 3
+    ARGSMODE_NORMAL: ClassVar[int] = 0
+    ARGSMODE_MANY_VALUES: ClassVar[int] = 1
+    ARGSMODE_MANY_PACKAGES: ClassVar[int] = 2
+    ARGSMODE_MANY_DICTS: ClassVar[int] = 3
 
-    def __init__(self, name, query):
+    name: str
+    query: str
+    template: Optional[jinja2.Template]
+    args: List[Any]
+    argdefaults: Dict[str, Any]
+    rettype: int
+    argsmode: int
+
+    def __init__(self, name: str, query: str) -> None:
         self.name = name
         self.query = query
         self.template = None
@@ -67,7 +76,7 @@ class QueryMetadata:
             if match:
                 self._parse_annotation(match.group(1))
 
-    def _parse_annotation(self, string):
+    def _parse_annotation(self, string: str) -> None:
         """Parse query metadata from the string definition.
 
         Input examples:
@@ -88,7 +97,7 @@ class QueryMetadata:
         elif annkey == '@returns':
             self._parse_return_type(annvalue)
 
-    def _parse_argument(self, string):
+    def _parse_argument(self, string: str) -> None:
         if string == 'many values':
             self.argsmode = QueryMetadata.ARGSMODE_MANY_VALUES
             return
@@ -101,9 +110,9 @@ class QueryMetadata:
             self.argsmode = QueryMetadata.ARGSMODE_MANY_DICTS
             return
 
-        argname, *argdefault = [s.strip() for s in string.split('=', 1)]
+        argname, *rest = [s.strip() for s in string.split('=', 1)]
 
-        argdefault = argdefault[0] if argdefault else None
+        argdefault = rest[0] if rest else None
 
         if not argname:
             raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad arguments'.format(string))
@@ -127,7 +136,7 @@ class QueryMetadata:
         else:
             raise QueryMetadataParsingError('Cannot parse query metadata "{}": bad default value for argument "{}"'.format(string, argname))
 
-    def _parse_return_type(self, string):
+    def _parse_return_type(self, string: str) -> None:
         if not string:
             self.rettype = QueryMetadata.RET_NONE
         elif string == 'single value':
@@ -151,8 +160,10 @@ class QueryMetadata:
 
 
 class QueryManager:
-    def __init__(self, queriesdir):
-        self.queries = {}
+    _queries: Dict[str, Callable[..., Any]]
+
+    def __init__(self, queriesdir: str) -> None:
+        self._queries = {}
 
         for root, dirs, files in os.walk(queriesdir):
             for filename in files:
@@ -168,7 +179,7 @@ class QueryManager:
                 except QueryMetadataParsingError as e:
                     raise QueryLoadingError('Cannot load SQL query from {}: {}'.format(filename, str(e)))
 
-    def _register_query(self, query):
+    def _register_query(self, query: QueryMetadata) -> None:
         query.template = jinja2.Template(query.query)
 
         def adapt_dict_argument(data):
@@ -272,9 +283,9 @@ class QueryManager:
 
                 return '\n'.join(map(lambda row: row[0], cursor.fetchall()))
 
-        self.queries[query.name] = do_query
-        self.queries['explain_' + query.name] = do_explain_query
+        self._queries[query.name] = do_query
+        self._queries['explain_' + query.name] = do_explain_query
 
     def inject_queries(self, target, db):
-        for name, function in self.queries.items():
+        for name, function in self._queries.items():
             setattr(target, name, functools.partial(function, db))
