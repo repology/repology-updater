@@ -19,6 +19,7 @@
 
 import argparse
 import sys
+from typing import Any, Iterable
 
 from repology.config import config
 from repology.logger import FileLogger, Logger, StderrLogger
@@ -28,7 +29,7 @@ from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
 
-def format_package_field(key, value):
+def format_package_field(key: str, value: Any) -> str:
     if key == 'versionclass':
         return VersionClass.ToString(value)
     if isinstance(value, dict):
@@ -36,7 +37,7 @@ def format_package_field(key, value):
     return str(value)
 
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-S', '--statedir', default=config['STATE_DIR'], help='path to directory with repository state')
     parser.add_argument('-P', '--parseddir', default=config['PARSED_DIR'], help='path to directory with parsed repository data')
@@ -53,7 +54,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def packageset_is_shadow_only(packages):
+def packageset_is_shadow_only(packages: Iterable[Package]) -> bool:
     for package in packages:
         if not package.shadow:
             return False
