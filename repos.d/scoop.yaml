@@ -5,28 +5,49 @@
   type: repository
   desc: Scoop
   family: scoop
-  minpackages: 600
+  minpackages: 1300
   sources:
-    - name: scoop
+  # See https://github.com/lukesampson/scoop/blob/master/buckets.json
+  # Small, not-portable and proprietary repositories are skipped
+    - name: main
       fetcher: GitFetcher
       parser: ScoopGitParser
-      url: https://github.com/lukesampson/scoop.git
+      url: https://github.com/ScoopInstaller/Main
       sparse_checkout: [ 'bucket/*.json' ]
-      subrepo: scoop
-    - name: scoop-extras
+    - name: extras
       fetcher: GitFetcher
       parser: ScoopGitParser
-      url: https://github.com/lukesampson/scoop-extras.git
-      sparse_checkout: [ '*.json' ]
-      subrepo: scoop-extras
+      url: https://github.com/lukesampson/scoop-extras
+      sparse_checkout: [ 'bucket/*.json' ]
+    - name: versions
+      fetcher: GitFetcher
+      parser: ScoopGitParser
+      url: https://github.com/ScoopInstaller/Versions
+      sparse_checkout: [ 'bucket/*.json' ]
+    - name: games
+      fetcher: GitFetcher
+      parser: ScoopGitParser
+      url: https://github.com/Calinou/scoop-games
+      sparse_checkout: [ 'bucket/*.json' ]
   repolinks:
     - desc: Scoop home
       url: http://scoop.sh/
-    - desc: Scoop main repository on GitHub
-      url: https://github.com/lukesampson/scoop
-    - desc: Scoop extras repository on GitHub
+    - desc: Main repository on GitHub
+      url: https://github.com/ScoopInstaller/Main
+    - desc: Extras repository on GitHub
       url: https://github.com/lukesampson/scoop-extras
-  packagelinks:
-    - desc: Package json
-      url: 'https://github.com/lukesampson/{subrepo}/blob/master/{path}'
+    - desc: Versions repository on GitHub
+      url: https://github.com/ScoopInstaller/Versions
+    - desc: Games repository on GitHub
+      url: https://github.com/Calinou/scoop-games
+  # need support for per-source packagelinks
+  #packagelinks:
+  #  - desc: Package json
+  #    url: 'https://github.com/ScoopInstaller/Main/blob/master/{path}'
+  #  - desc: Package json
+  #    url: 'https://github.com/lukesampson/scoop-extras/blob/master/{path}'
+  #  - desc: Package json
+  #    url: 'https://github.com/ScoopInstaller/Versions/blob/master/{path}'
+  #  - desc: Package json
+  #    url: 'https://github.com/Calinou/scoop-games/blob/master/{path}'
   tags: [ all, production ]
