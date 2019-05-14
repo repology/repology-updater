@@ -1,5 +1,7 @@
 ###########################################################################
 # UnitedRPMs
+#
+# See https://sourceforge.net/projects/unitedrpms/files/
 ###########################################################################
 - name: unitedrpms_28
   type: repository
