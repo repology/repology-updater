@@ -42,7 +42,7 @@
   desc: Rosa Server 6.9
   family: rosa
   color: '3757a1'
-  minpackages: 2500
+  minpackages: 3000
   default_maintainer: fallback-mnt-rosa@repology
   sources:
     - name: [ base/release, base/updates, contrib/release, contrib/updates, extra/release, extra/updates ]
@@ -60,13 +60,31 @@
   desc: Rosa Server 7.3
   family: rosa
   color: '3757a1'
-  minpackages: 2500
+  minpackages: 3000
   default_maintainer: fallback-mnt-rosa@repology
   sources:
     - name: [ base/release, extra/release ]
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: 'http://mirror.rosalab.ru/rosa/server/7.3/repository/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rosa Linux home
+      url: http://en.rosalinux.com/
+  tags: [ all, production, rosa ]
+
+- name: rosa_server_7_5
+  type: repository
+  desc: Rosa Server 7.5
+  family: rosa
+  color: '3757a1'
+  minpackages: 4200 # XXX
+  default_maintainer: fallback-mnt-rosa@repology
+  sources:
+    - name: [ base/release, extra/release ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://mirror.rosalab.ru/rosa/server/7.5/repository/SRPMS/{source}/'
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
