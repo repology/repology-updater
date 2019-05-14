@@ -75,6 +75,10 @@ class NixJsonParser(Parser):
                     factory.log('cannot extract version: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
                     continue
 
+                if 'node-_at_webassemblyjs' in packagedata['name']:
+                    factory.log('skipping unparsable name/version: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
+                    continue
+
                 pkg.set_name(match.group(1))
                 pkg.set_version(match.group(2))
 
