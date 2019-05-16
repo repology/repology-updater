@@ -31,6 +31,7 @@
   type: repository
   desc: MX Linux MX-15 Testing
   family: debuntu
+  ruleset: [debuntu,mx]
   color: "6693d6"
   minpackages: 100
   sources:
@@ -56,6 +57,7 @@
   type: repository
   desc: MX Linux MX-16
   family: debuntu
+  ruleset: [debuntu,mx]
   color: "6693d6"
   minpackages: 50
   sources:
@@ -81,6 +83,7 @@
   type: repository
   desc: MX Linux Stretch
   family: debuntu
+  ruleset: [debuntu,mx]
   color: "6693d6"
   minpackages: 100
   sources:
@@ -104,6 +107,7 @@
   type: repository
   desc: MX Linux Stretch Testing
   family: debuntu
+  ruleset: [debuntu,mx]
   color: "6693d6"
   minpackages: 100
   sources:
