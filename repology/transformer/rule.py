@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import sys
 from typing import AbstractSet, Any, Callable, Dict, Iterable, List, Match, MutableSet, Optional, Pattern, Set, TYPE_CHECKING
 
 from libversion import version_compare
@@ -32,14 +31,16 @@ DOLLARN = re.compile('\\$([0-9])', re.ASCII)
 
 
 class PackageContext:
-    __slots__ = ['_flags', '_rulesets']
+    __slots__ = ['_flags', '_rulesets', 'warnings']
 
     _flags: MutableSet[str]
     _rulesets: MutableSet[str]
+    warnings: List[str]
 
     def __init__(self) -> None:
         self._flags = set()
         self._rulesets = set()
+        self.warnings = []
 
     def add_flag(self, name: str) -> None:
         self._flags.add(name)
@@ -55,6 +56,9 @@ class PackageContext:
 
     def set_rulesets(self, rulesets: Iterable[str]) -> None:
         self._rulesets = set(rulesets)
+
+    def add_warning(self, warning: str) -> None:
+        self.warnings.append(warning)
 
 
 class MatchContext:
@@ -567,7 +571,7 @@ class Rule:
 
         if 'warning' in ruledata:
             def warning_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                print('Rule warning for {} ({}) in {}: {}'.format(package.effname, package.name, package.repo, ruledata['warning']), file=sys.stderr)
+                package_context.add_warning(ruledata['warning'])
 
             self._actions.append(warning_action)
 

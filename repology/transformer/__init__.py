@@ -17,12 +17,13 @@
 
 import hashlib
 import os
+import sys
 from copy import deepcopy
 from typing import Any, Dict, Generator, List, Optional, Tuple
 
 import yaml
 
-from repology.package import Package
+from repology.package import Package, PackageFlags
 from repology.repomgr import RepositoryManager
 from repology.transformer.blocks import CoveringRuleBlock, NameMapRuleBlock, RuleBlock, SingleRuleBlock
 from repology.transformer.rule import PackageContext, Rule
@@ -177,7 +178,11 @@ class PackageTransformer:
                 continue
             rule.apply(package, package_context, match_context)
             if match_context.last:
-                return
+                break
+
+        if package_context.warnings and not package.has_flag(PackageFlags.REMOVE):
+            for warning in package_context.warnings:
+                print('Rule warning for {} ({}) in {}: {}'.format(package.effname, package.name, package.repo, warning), file=sys.stderr)
 
     def get_statistics(self) -> RulesetStatistics:
         statistics = RulesetStatistics()
