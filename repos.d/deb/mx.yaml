@@ -5,6 +5,7 @@
   type: repository
   desc: MX Linux MX-15
   family: debuntu
+  ruleset: [debuntu,mx]
   color: "6693d6"
   minpackages: 100
   sources:

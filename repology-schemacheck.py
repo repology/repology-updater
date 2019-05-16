@@ -119,6 +119,7 @@ rulesets = families + [
     'mint',
     'msys2_mingw',
     'msys2_msys2',
+    'mx',
     'packman',
     'parabola',
     'pardus',
