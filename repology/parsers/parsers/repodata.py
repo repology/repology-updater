@@ -19,6 +19,7 @@ import re
 import xml.etree.ElementTree
 from typing import Dict, Generator
 
+from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -57,6 +58,10 @@ class RepodataParser(Parser):
                     continue
 
                 pkg.set_name(entry.findtext('{http://linux.duke.edu/metadata/common}name'))
+
+                if '%{' in pkg.name:
+                    pkg.log('incorrect package name (unexpanded substitution)', severity=Logger.ERROR)
+                    continue
 
                 version_elt = entry.find('{http://linux.duke.edu/metadata/common}version')
                 if version_elt is None:
