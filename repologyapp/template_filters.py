@@ -61,8 +61,8 @@ def maintainers_to_group_mailto(maintainers: Iterable[str], subject: Optional[st
     return 'mailto:' + ','.join(sorted(emails)) + ('?subject=' + subject if subject else '')
 
 
-def pkg_format(value: str, pkg: Package) -> str:
-    return PackageFormatter().format(value, pkg)
+def pkg_format(value: str, pkg: Package, escape_mode: Optional[str] = None) -> str:
+    return PackageFormatter(escape_mode=escape_mode).format(value, pkg, escape_mode=escape_mode)
 
 
 def css_for_versionclass(value: int) -> str:

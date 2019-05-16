@@ -15,7 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import shlex
 import string
+import urllib.parse
+from typing import Any, Callable, ClassVar, Dict, Mapping, Optional, Sequence, Union
 
 from repology.package import Package
 
@@ -23,16 +26,21 @@ __all__ = ['PackageFormatter']
 
 
 class PackageFormatter(string.Formatter):
-    filters = {
+    _all_filters: ClassVar[Dict[str, Callable[[str], str]]] = {
         'lowercase': lambda x: x.lower(),
         'firstletter': lambda x: x.lower()[0],
         'libfirstletter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0],
         'stripdmo': lambda x: x[:-4] if x.endswith('-dmo') else x,
     }
 
-    def get_value(self, key, args, kwargs):
+    _escape_mode: Optional[str]
+
+    def __init__(self, escape_mode: Optional[str] = None):
+        self._escape_mode = escape_mode
+
+    def get_value(self, key: Union[int, str], args: Sequence[Any], kwargs: Mapping[Any, Any]) -> str:
         pkgdata = args[0].__dict__ if isinstance(args[0], Package) else args[0]
-        key, *requested_filters = key.split('|')
+        key, *filters = str(key).split('|')
 
         value = ''
 
@@ -57,9 +65,17 @@ class PackageFormatter(string.Formatter):
         elif key in pkgdata['extrafields']:
             value = pkgdata['extrafields'][key]
 
-        for filtername in requested_filters:
-            if filtername in self.filters:
-                value = self.filters[filtername](value)
+        for filtername in filters:
+            if filtername in PackageFormatter._all_filters:
+                value = PackageFormatter._all_filters[filtername](value)
+
+        if self._escape_mode == 'url':
+            value = urllib.parse.quote(value)
+        elif self._escape_mode == 'shell':
+            # XXX: not entirely readable, but a safe default
+            value = shlex.quote(value)
+        elif self._escape_mode is not None:
+            raise RuntimeError('unknown PackageFormatter escape mode {}'.format(self._escape_mode))
 
         # XXX: we should handle errors here, e.g. unknown fields and unknown filters
         # but that way bebsite users will get errors first. Need some kind of log facility

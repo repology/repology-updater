@@ -55,6 +55,31 @@ class TestVersionComparison(unittest.TestCase):
         self.assertEqual(fmt.format('{basename}', Package(name='foo', basename='bar')), 'bar')
         self.assertEqual(fmt.format('{basename}', Package(name='foo')), 'foo')
 
+    def test_escaping(self):
+        self.assertEqual(
+            PackageFormatter().format(
+                'package name is {name}',
+                Package(name='foo && $(bar) `date` "<>" \'<>\'')
+            ),
+            'package name is foo && $(bar) `date` "<>" \'<>\''
+        )
+        self.assertEqual(
+            PackageFormatter(escape_mode='url').format(
+                'http://example.com/{name}',
+                Package(name='foo && $(bar) `date` "<>" \'<>\'')
+            ),
+            'http://example.com/foo%20%26%26%20%24%28bar%29%20%60date%60%20%22%3C%3E%22%20%27%3C%3E%27'
+        )
+        self.assertEqual(
+            PackageFormatter(escape_mode='shell').format(
+                'echo {name}',
+                Package(name='foo && $(bar) `date` "<>" \'<>\'')
+            ),
+            """echo 'foo && $(bar) `date` "<>" '"'"'<>'"'"''"""
+            # What we'd actually prefer is something more like:
+            # 'echo foo\ \&\& \$\(bar\)\ \`date\`\ \"\<\>\"\ \'\<\>\''
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

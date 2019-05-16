@@ -78,7 +78,7 @@
 				<li class="list-group-item"><b>Package-related links:</b>
 					<ul class="list-package-details">
 					{% for link in repometadata[package.repo].packagelinks %}
-						<li><a href="{{ link.url|pkg_format(package) }}">{{ link.desc }}</a></li>
+						<li><a href="{{ link.url|pkg_format(package, escape_mode='url') }}">{{ link.desc }}</a></li>
 					{% endfor %}
 					</ul>
 				</li>
