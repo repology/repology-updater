@@ -28,7 +28,7 @@ from repology.logger import Logger, NoopLogger
 
 
 class FreshcodeFetcher(Fetcher):
-    def __init__(self, url):
+    def __init__(self, url: str) -> None:
         self.url = url
 
     def fetch(self, statepath: str, update: bool = True, logger: Logger = NoopLogger()) -> bool:

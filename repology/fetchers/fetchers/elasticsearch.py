@@ -17,6 +17,7 @@
 
 import json
 import os
+from typing import Any, Dict, Optional
 
 import requests
 
@@ -27,28 +28,34 @@ from repology.logger import Logger
 
 
 class ElasticSearchFetcher(ScratchDirFetcher):
-    def __init__(self, url, scroll_url=None, es_query=None, es_filter=None, es_fields=None, es_size=5000, es_scroll='1m', fetch_timeout=5, fetch_delay=None):
-        self.url = url
-        self.scroll_url = scroll_url
-        self.scroll = es_scroll
+    _url: str
+    _scroll_url: Optional[str]
+    _scroll: Optional[str]
+    _request_data: Dict[str, Any]
+    _do_http: PoliteHTTP
 
-        self.request_data = {}
+    def __init__(self, url: str, scroll_url: Optional[str] = None, es_query: Optional[str] = None, es_filter: Optional[str] = None, es_fields: Optional[str] = None, es_size: int = 5000, es_scroll: str = '1m', fetch_timeout: int = 5, fetch_delay: Optional[int] = None):
+        self._url = url
+        self._scroll_url = scroll_url
+        self._scroll = es_scroll
+
+        self._request_data = {}
         if es_fields:
-            self.request_data['fields'] = es_fields
+            self._request_data['fields'] = es_fields
         if es_query:
-            self.request_data['query'] = es_query
+            self._request_data['query'] = es_query
         if es_filter:
-            self.request_data['filter'] = es_filter
+            self._request_data['filter'] = es_filter
         if es_size:
-            self.request_data['size'] = es_size
+            self._request_data['size'] = es_size
 
-        self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
+        self._do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
     def _do_fetch_scroll(self, statedir: AtomicDir, logger: Logger) -> None:
         numpage = 0
 
         logger.log('getting page {}'.format(numpage))
-        response = self.do_http('{}?scroll={}'.format(self.url, self.scroll), json=self.request_data).json()
+        response = self._do_http('{}?scroll={}'.format(self._url, self._scroll), json=self._request_data).json()
 
         scroll_id = response['_scroll_id']
 
@@ -61,10 +68,10 @@ class ElasticSearchFetcher(ScratchDirFetcher):
             numpage += 1
 
             logger.log('getting page {}'.format(numpage))
-            response = self.do_http('{}?scroll={}&scroll_id={}'.format(self.scroll_url, self.scroll, scroll_id)).json()
+            response = self._do_http('{}?scroll={}&scroll_id={}'.format(self._scroll_url, self._scroll, scroll_id)).json()
 
         try:
-            self.do_http(self.scroll_url, method='DELETE', json={'scroll_id': scroll_id}).json()
+            self._do_http(self._scroll_url, method='DELETE', json={'scroll_id': scroll_id}).json()
         except requests.exceptions.HTTPError as e:
             # we don't care too much if removing the scroll fails, it'll timeout anyway
             # XXX: but log this

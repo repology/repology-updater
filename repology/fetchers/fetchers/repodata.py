@@ -25,7 +25,7 @@ from repology.logger import Logger
 
 
 class RepodataFetcher(ScratchFileFetcher):
-    def __init__(self, url, fetch_timeout=60):
+    def __init__(self, url: str, fetch_timeout: int = 60):
         super(RepodataFetcher, self).__init__(binary=True)
 
         self.url = url

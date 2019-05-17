@@ -21,7 +21,7 @@ from repology.subprocess import get_subprocess_output, run_subprocess
 
 
 class SVNFetcher(PersistentDirFetcher):
-    def __init__(self, url, fetch_timeout=600):
+    def __init__(self, url: str, fetch_timeout: int = 600) -> None:
         self.url = url
         self.fetch_timeout = fetch_timeout
 

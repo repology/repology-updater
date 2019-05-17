@@ -25,7 +25,7 @@ from repology.subprocess import run_subprocess
 
 
 class TarFetcher(ScratchDirFetcher):
-    def __init__(self, url, fetch_timeout=60):
+    def __init__(self, url: str, fetch_timeout: int = 60) -> None:
         self.url = url
         self.fetch_timeout = fetch_timeout
 

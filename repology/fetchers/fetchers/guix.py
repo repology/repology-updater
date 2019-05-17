@@ -17,6 +17,7 @@
 
 import os
 from string import ascii_uppercase
+from typing import Optional
 
 import lxml.html
 
@@ -27,7 +28,7 @@ from repology.logger import Logger
 
 
 class GuixFetcher(ScratchDirFetcher):
-    def __init__(self, url, fetch_timeout=5, fetch_delay=None):
+    def __init__(self, url: str, fetch_timeout: int = 5, fetch_delay: Optional[int] = None) -> None:
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 

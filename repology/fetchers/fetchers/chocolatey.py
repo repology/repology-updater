@@ -17,6 +17,7 @@
 
 import os
 import xml.etree.ElementTree
+from typing import Optional
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import PersistentData, ScratchDirFetcher
@@ -25,7 +26,7 @@ from repology.logger import Logger
 
 
 class ChocolateyFetcher(ScratchDirFetcher):
-    def __init__(self, url, fetch_timeout=5, fetch_delay=None):
+    def __init__(self, url: str, fetch_timeout: int = 5, fetch_delay: Optional[int] = None) -> None:
         self.url = url
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 

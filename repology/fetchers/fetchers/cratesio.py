@@ -17,6 +17,7 @@
 
 import json
 import os
+from typing import Optional
 
 from repology.atomic_fs import AtomicDir
 from repology.fetchers import PersistentData, ScratchDirFetcher
@@ -25,7 +26,7 @@ from repology.logger import Logger
 
 
 class CratesIOFetcher(ScratchDirFetcher):
-    def __init__(self, url, per_page=100, fetch_timeout=5, fetch_delay=None):
+    def __init__(self, url: str, per_page: int = 100, fetch_timeout: int = 5, fetch_delay: Optional[int] = None):
         self.url = url
         self.per_page = per_page
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
