@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+from typing import Any, Optional
 
 import flask
 
@@ -27,7 +28,7 @@ from repologyapp.view_registry import ViewRegistrar
 
 @ViewRegistrar('/maintainers/')
 @ViewRegistrar('/maintainers/<bound>/')
-def maintainers(bound=None):
+def maintainers(bound: Optional[str] = None) -> Any:
     reverse = False
     if bound and bound.startswith('..'):
         bound = bound[2:]
@@ -61,7 +62,7 @@ def maintainers(bound=None):
 
 
 @ViewRegistrar('/maintainer/<maintainer>')
-def maintainer(maintainer):
+def maintainer(maintainer: str) -> Any:
     maintainer = maintainer.lower()
 
     maintainer_info = get_db().get_maintainer_information(maintainer)
@@ -94,7 +95,7 @@ def maintainer(maintainer):
 
 
 @ViewRegistrar('/maintainer/<maintainer>/problems')
-def maintainer_problems(maintainer):
+def maintainer_problems(maintainer: str) -> Any:
     maintainer = maintainer.lower()
 
     return flask.render_template(
@@ -108,7 +109,7 @@ def maintainer_problems(maintainer):
 
 
 @ViewRegistrar('/maintainer/<maintainer>/feed-for-repo/<repo>')
-def maintainer_repo_feed(maintainer, repo):
+def maintainer_repo_feed(maintainer: str, repo: str) -> Any:
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
     return flask.render_template(
@@ -127,7 +128,7 @@ def maintainer_repo_feed(maintainer, repo):
 
 
 @ViewRegistrar('/maintainer/<maintainer>/feed-for-repo/<repo>/atom')
-def maintainer_repo_feed_atom(maintainer, repo):
+def maintainer_repo_feed_atom(maintainer: str, repo: str) -> Any:
     return (
         flask.render_template(
             'maintainer-repo-feed-atom.xml',

@@ -15,16 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any
+
 import flask
 
 from repologyapp.view_registry import ViewRegistrar
 
 
 @ViewRegistrar('/opensearch/project.xml')
-def opensearch_project():
+def opensearch_project() -> Any:
     return flask.render_template('opensearch-project.xml'), {'Content-type': 'application/xml'}
 
 
 @ViewRegistrar('/opensearch/maintainer.xml')
-def opensearch_maintainer():
+def opensearch_maintainer() -> Any:
     return flask.render_template('opensearch-maintainer.xml'), {'Content-type': 'application/xml'}

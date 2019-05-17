@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any, Callable, Dict
+
 import flask
 
 from repologyapp.config import config
@@ -23,12 +25,12 @@ from repologyapp.template_functions import url_for_self
 from repologyapp.view_registry import ViewRegistrar
 
 
-def unauthorized():
+def unauthorized() -> Any:
     return flask.redirect(flask.url_for('admin'))
 
 
 @ViewRegistrar('/admin', methods=['GET', 'POST'])
-def admin():
+def admin() -> Any:
     if flask.request.method == 'POST':
         if config['ADMIN_PASSWORD'] is None:
             flask.flash('Admin login disabled', 'danger')
@@ -46,7 +48,7 @@ def admin():
     return flask.render_template('admin.html')
 
 
-def admin_reports_generic(report_getter):
+def admin_reports_generic(report_getter: Callable[[], Dict[str, Any]]) -> Any:
     if not flask.session.get('admin'):
         return unauthorized()
 
@@ -74,17 +76,17 @@ def admin_reports_generic(report_getter):
 
 
 @ViewRegistrar('/admin/reports/unprocessed/', methods=['GET', 'POST'])
-def admin_reports_unprocessed():
-    return admin_reports_generic(lambda: get_db().get_unprocessed_reports(limit=config['REPORTS_PER_PAGE']))
+def admin_reports_unprocessed() -> Any:
+    return admin_reports_generic(lambda: get_db().get_unprocessed_reports(limit=config['REPORTS_PER_PAGE']))  # type: ignore
 
 
 @ViewRegistrar('/admin/reports/recent/', methods=['GET', 'POST'])
-def admin_reports_recent():
-    return admin_reports_generic(lambda: get_db().get_recently_updated_reports(limit=config['REPORTS_PER_PAGE']))
+def admin_reports_recent() -> Any:
+    return admin_reports_generic(lambda: get_db().get_recently_updated_reports(limit=config['REPORTS_PER_PAGE']))  # type: ignore
 
 
 @ViewRegistrar('/admin/updates')
-def admin_updates():
+def admin_updates() -> Any:
     if not flask.session.get('admin'):
         return unauthorized()
 

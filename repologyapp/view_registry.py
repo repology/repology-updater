@@ -15,12 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Callable, Dict, Iterator, List, Optional, Union
-from types import ModuleType
-
 import importlib
 import inspect
 import os
+import types
+from typing import Any, Callable, Dict, Iterator, List, Optional, Union
 
 import flask
 
@@ -28,7 +27,7 @@ import flask
 ViewFunc = Callable[..., Any]
 
 
-def _enumerate_modules(pkgname: str, pkgfile: str) -> Iterator[ModuleType]:
+def _enumerate_modules(pkgname: str, pkgfile: str) -> Iterator[types.ModuleType]:
     pkgdir = os.path.dirname(pkgfile)
 
     for modfile in os.listdir(pkgdir):

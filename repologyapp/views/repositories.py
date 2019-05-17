@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any, Optional
+
 import flask
 
 from repologyapp.db import get_db
@@ -25,11 +27,11 @@ from repologyapp.view_registry import ViewRegistrar
 
 @ViewRegistrar('/repositories/statistics')
 @ViewRegistrar('/repositories/statistics/<sorting>')
-def repositories_statistics(sorting=None):
+def repositories_statistics(sorting: Optional[str] = None) -> Any:
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
-    repostats = {repostat['name']: repostat for repostat in get_db().get_active_repositories()}
-    repostats = [repostats[reponame] for reponame in repometadata.active_names() if reponame in repostats]
+    repostats_by_name = {repostat['name']: repostat for repostat in get_db().get_active_repositories()}
+    repostats = [repostats_by_name[reponame] for reponame in repometadata.active_names() if reponame in repostats_by_name]
     showmedals = True
 
     if sorting == 'newest':
@@ -60,11 +62,11 @@ def repositories_statistics(sorting=None):
 
 
 @ViewRegistrar('/repositories/packages')
-def repositories_packages():
+def repositories_packages() -> Any:
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
-    repostats = {repostat['name']: repostat for repostat in get_db().get_active_repositories()}
-    repostats = [repostats[reponame] for reponame in repometadata.active_names() if reponame in repostats]
+    repostats_by_name = {repostat['name']: repostat for repostat in get_db().get_active_repositories()}
+    repostats = [repostats_by_name[reponame] for reponame in repometadata.active_names() if reponame in repostats_by_name]
 
     return flask.render_template(
         'repositories-packages.html',
@@ -75,7 +77,7 @@ def repositories_packages():
 
 
 @ViewRegistrar('/repositories/updates')
-def repositories_updates():
+def repositories_updates() -> Any:
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
     return flask.render_template(
@@ -86,7 +88,7 @@ def repositories_updates():
 
 
 @ViewRegistrar('/repositories/graphs')
-def repositories_graphs():
+def repositories_graphs() -> Any:
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
     return flask.render_template(

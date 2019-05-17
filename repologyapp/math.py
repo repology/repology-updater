@@ -19,7 +19,7 @@
 __all__ = ['safe_percent']
 
 
-def safe_percent(a, b):
+def safe_percent(a: float, b: float) -> float:
     if b <= 0:
         return 0.0
 

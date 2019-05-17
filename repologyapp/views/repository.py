@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any
+
 import flask
 
 from repologyapp.config import config
@@ -24,7 +26,7 @@ from repologyapp.view_registry import ViewRegistrar
 
 
 @ViewRegistrar('/repository/<repo>')
-def repository(repo):
+def repository(repo: str) -> Any:
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
     if repo not in repometadata.all_names():
@@ -43,7 +45,7 @@ def repository(repo):
 
 
 @ViewRegistrar('/repository/<repo>/problems')
-def repository_problems(repo):
+def repository_problems(repo: str) -> Any:
     if repo not in repometadata.active_names():
         flask.abort(404)
 

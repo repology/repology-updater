@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any
+
 import flask
 
 from repologyapp.config import config
@@ -23,12 +25,12 @@ from repologyapp.view_registry import ViewRegistrar
 
 
 @ViewRegistrar('/experimental/')
-def experimental():
+def experimental() -> Any:
     return flask.render_template('experimental.html')
 
 
 @ViewRegistrar('/experimental/turnover/projects')
-def projects_turnover():
+def projects_turnover() -> Any:
     return flask.render_template(
         'projects-turnover.html',
         added=get_db().get_recently_added_metapackages(config['TURNOVER_PER_PAGE']),
@@ -37,7 +39,7 @@ def projects_turnover():
 
 
 @ViewRegistrar('/experimental/turnover/maintainers')
-def maintainers_turnover():
+def maintainers_turnover() -> Any:
     return flask.render_template(
         'maintainers-turnover.html',
         added=get_db().get_recently_added_maintainers(config['TURNOVER_PER_PAGE']),
@@ -46,7 +48,7 @@ def maintainers_turnover():
 
 
 @ViewRegistrar('/experimental/raising')
-def raising():
+def raising() -> Any:
     return flask.render_template(
         'raising.html',
         packages1=get_db().get_raising_metapackages1(config['METAPACKAGES_PER_PAGE']),
@@ -55,5 +57,5 @@ def raising():
 
 
 @ViewRegistrar('/experimental/distromap')
-def distromap():
+def distromap() -> Any:
     return flask.render_template('distromap.html')

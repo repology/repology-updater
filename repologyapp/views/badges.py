@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from functools import cmp_to_key
+from typing import Any
 
 import flask
 
@@ -30,7 +31,7 @@ from repology.package import VersionClass
 
 
 @ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
-def badge_vertical_allrepos(name):
+def badge_vertical_allrepos(name: str) -> Any:
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = packageset_to_best_by_repo(packages)
 
@@ -60,7 +61,7 @@ def badge_vertical_allrepos(name):
 
 
 @ViewRegistrar('/badge/tiny-repos/<name>.svg')
-def badge_tiny_repos(name):
+def badge_tiny_repos(name: str) -> Any:
     return (
         flask.render_template(
             'badge-tiny-blue.svg',
@@ -73,7 +74,7 @@ def badge_tiny_repos(name):
 
 
 @ViewRegistrar('/badge/version-for-repo/<repo>/<name>.svg')
-def badge_version_for_repo(repo, name):
+def badge_version_for_repo(repo: str, name: str) -> Any:
     if repo not in repometadata.all_names():
         flask.abort(404)
 
@@ -106,7 +107,7 @@ def badge_version_for_repo(repo, name):
 
 
 @ViewRegistrar('/badge/version-only-for-repo/<repo>/<name>.svg')
-def badge_version_only_for_repo(repo, name):
+def badge_version_only_for_repo(repo: str, name: str) -> Any:
     if repo not in repometadata.all_names():
         flask.abort(404)
 
@@ -138,31 +139,28 @@ def badge_version_only_for_repo(repo, name):
 
 
 @ViewRegistrar('/badge/latest-versions/<name>.svg')
-def badge_latest_versions(name):
-    def version_compare_rev(v1, v2):
-        return version_compare(v2, v1)
-
-    versions = sorted(set([
+def badge_latest_versions(name: str) -> Any:
+    versions = sorted(set((
         package.version
         for package in get_db().get_metapackage_packages(name, fields=['version', 'versionclass'])
         if package.versionclass in (VersionClass.newest, VersionClass.devel, VersionClass.unique)
-    ]), key=cmp_to_key(version_compare_rev))
+    )), key=cmp_to_key(version_compare), reverse=True)
 
     caption = 'latest packaged version'
 
     if versions:
         if len(versions) > 1:
             caption += 's'
-        versions = ', '.join(versions)
+        text = ', '.join(versions)
     else:
-        versions = '-'
+        text = '-'
 
     return (
         flask.render_template(
             'badge-tiny-blue.svg',
             name=name,
             caption=caption,
-            text=versions
+            text=text
         ),
         {'Content-type': 'image/svg+xml'}
     )

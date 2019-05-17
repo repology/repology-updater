@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+from typing import Any, Dict, Optional
 
 import flask
 
@@ -24,10 +25,10 @@ from repologyapp.db import get_db
 from repologyapp.metapackages import MetapackagesFilterInfo, packages_to_metapackages
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.package import VersionClass
+from repology.package import Package, VersionClass
 
 
-def api_v1_package_to_json(package):
+def api_v1_package_to_json(package: Package) -> Dict[str, Any]:
     output = {
         field: getattr(package, field) for field in (
             'repo',
@@ -59,7 +60,7 @@ def api_v1_package_to_json(package):
     return output
 
 
-def dump_json(data):
+def dump_json(data: Any) -> str:
     if config['PRETTY_JSON']:
         return json.dumps(data, indent=1, sort_keys=True)
     else:
@@ -68,13 +69,13 @@ def dump_json(data):
 
 @ViewRegistrar('/api')
 @ViewRegistrar('/api/v1')
-def api_v1():
+def api_v1() -> Any:
     return flask.render_template('api.html', per_page=config['METAPACKAGES_PER_PAGE'])
 
 
 @ViewRegistrar('/api/v1/projects/')
 @ViewRegistrar('/api/v1/projects/<bound>/')
-def api_v1_projects(bound=None):
+def api_v1_projects(bound: Optional[str] = None) -> Any:
     filterinfo = MetapackagesFilterInfo()
     filterinfo.ParseFlaskArgs()
 
@@ -99,7 +100,7 @@ def api_v1_projects(bound=None):
 
 
 @ViewRegistrar('/api/v1/project/<name>')
-def api_v1_project(name):
+def api_v1_project(name: str) -> Any:
     return (
         dump_json(list(map(
             api_v1_package_to_json,
@@ -110,7 +111,7 @@ def api_v1_project(name):
 
 
 @ViewRegistrar('/api/v1/repository/<repo>/problems')
-def api_v1_repository_problems(repo):
+def api_v1_repository_problems(repo: str) -> Any:
     return (
         dump_json(get_db().get_repository_problems(repo)),
         {'Content-type': 'application/json'}
@@ -118,7 +119,7 @@ def api_v1_repository_problems(repo):
 
 
 @ViewRegistrar('/api/v1/maintainer/<maintainer>/problems')
-def api_v1_maintainer_problems(maintainer):
+def api_v1_maintainer_problems(maintainer: str) -> Any:
     return (
         dump_json(get_db().get_maintainer_problems(maintainer)),
         {'Content-type': 'application/json'}
@@ -126,7 +127,7 @@ def api_v1_maintainer_problems(maintainer):
 
 
 @ViewRegistrar('/api/experimental/distromap')
-def api_experimental_distromap():
+def api_experimental_distromap() -> Any:
     args = flask.request.args.to_dict()
 
     expand = bool(args.get('expand'))

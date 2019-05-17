@@ -58,6 +58,7 @@ mypy:
 	${MYPY} ${MYPY_ARGS} *.py repology repologyapp
 	${MYPY} ${MYPY_ARGS} repology/fetchers/fetchers
 	${MYPY} ${MYPY_ARGS} repology/parsers/parsers
+	${MYPY} ${MYPY_ARGS} repologyapp/views
 
 mypy-all:
 	${MYPY} ${MYPY_ARGS} --strict repology-update.py

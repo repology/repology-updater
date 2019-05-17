@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any
+
 import flask
 
 from repologyapp.db import get_db
@@ -25,7 +27,7 @@ from repologyapp.view_registry import ViewRegistrar
 
 
 @ViewRegistrar('/')
-def index():
+def index() -> Any:
     repostats = [
         repo for repo in get_db().get_active_repositories()
         if repometadata[repo['name']]['type'] == 'repository'

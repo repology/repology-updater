@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any, Dict, List, Optional, Tuple
+
 import flask
 
 from repologyapp.config import config
@@ -22,10 +24,12 @@ from repologyapp.db import get_db
 from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_range, packages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
 
+from repology.package import Package
+
 
 @ViewRegistrar('/projects/')
 @ViewRegistrar('/projects/<bound>/')
-def projects(bound=None):
+def projects(bound: Optional[str] = None) -> Any:
     # process search
     filterinfo = MetapackagesFilterInfo()
     filterinfo.ParseFlaskArgs()
@@ -34,7 +38,7 @@ def projects(bound=None):
     request.Bound(bound)
 
     # get packages
-    def get_packages(request):
+    def get_packages(request) -> Tuple[Dict[str, Dict[str, Any]], List[Package]]:
         metapackages = get_db().query_metapackages(
             **request.__dict__,
             limit=config['METAPACKAGES_PER_PAGE'],

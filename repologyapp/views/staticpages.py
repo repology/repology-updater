@@ -15,36 +15,38 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any
+
 import flask
 
 from repologyapp.view_registry import ViewRegistrar
 
 
 @ViewRegistrar('/news')
-def news():
+def news() -> Any:
     return flask.render_template('news.html')
 
 
 @ViewRegistrar('/about')
-def about():
+def about() -> Any:
     return flask.render_template('about.html')
 
 
 @ViewRegistrar('/docs')
-def docs():
+def docs() -> Any:
     return flask.render_template('docs.html')
 
 
 @ViewRegistrar('/addrepo')
-def addrepo():
+def addrepo() -> Any:
     return flask.render_template('addrepo.html')
 
 
 @ViewRegistrar('/bots')
-def bots():
+def bots() -> Any:
     return flask.render_template('bots.html')
 
 
 @ViewRegistrar('/favicon.ico')
-def favicon():
+def favicon() -> Any:
     return flask.current_app.send_static_file('repology.v1.ico')

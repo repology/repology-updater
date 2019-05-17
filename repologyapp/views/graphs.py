@@ -17,6 +17,7 @@
 
 import datetime
 import math
+from typing import Any, Callable, Dict, List
 
 import flask
 
@@ -27,7 +28,7 @@ from repologyapp.math import safe_percent
 from repologyapp.view_registry import ViewRegistrar
 
 
-def graph_generic(getgraph, color, suffix=''):
+def graph_generic(getgraph: Callable[[int], GraphProcessor], color: str, suffix: str = '') -> Any:
     # use autoscaling until history is filled
     numdays = 21
     width = 1140
@@ -56,11 +57,11 @@ def graph_generic(getgraph, color, suffix=''):
     )
 
 
-def graph_repo_generic(repo, getvalue, color, suffix=''):
+def graph_repo_generic(repo: str, getvalue: Callable[[Any], float], color: str, suffix: str = '') -> Any:
     if repo not in repometadata.active_names():
         flask.abort(404)
 
-    def get_graph(period):
+    def get_graph(period: int) -> GraphProcessor:
         graph = GraphProcessor()
 
         for histentry in get_db().get_repository_history_since(repo, datetime.timedelta(seconds=period)):
@@ -74,8 +75,8 @@ def graph_repo_generic(repo, getvalue, color, suffix=''):
     return graph_generic(get_graph, color, suffix)
 
 
-def graph_total_generic(getvalue, color, suffix=''):
-    def get_graph(period):
+def graph_total_generic(getvalue: Callable[[Any], float], color: str, suffix: str = '') -> Any:
+    def get_graph(period: int) -> GraphProcessor:
         graph = GraphProcessor()
 
         for histentry in get_db().get_statistics_history_since(datetime.timedelta(seconds=period)):
@@ -90,91 +91,91 @@ def graph_total_generic(getvalue, color, suffix=''):
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_total.svg')
-def graph_repo_projects_total(repo):
-    return graph_repo_generic(repo, lambda s: s['num_metapackages'], '#000000')
+def graph_repo_projects_total(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_metapackages'], '#000000')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_newest.svg')
-def graph_repo_projects_newest(repo):
-    return graph_repo_generic(repo, lambda s: s['num_metapackages_newest'], '#5cb85c')
+def graph_repo_projects_newest(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_newest'], '#5cb85c')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_newest_percent.svg')
-def graph_repo_projects_newest_percent(repo):
+def graph_repo_projects_newest_percent(repo: str) -> Any:
     return graph_repo_generic(repo, lambda s: safe_percent(s['num_metapackages_newest'], s['num_metapackages_newest'] + s['num_metapackages_outdated']), '#5cb85c', '%')
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_outdated.svg')
-def graph_repo_projects_outdated(repo):
-    return graph_repo_generic(repo, lambda s: s['num_metapackages_outdated'], '#d9534f')
+def graph_repo_projects_outdated(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_outdated'], '#d9534f')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_outdated_percent.svg')
-def graph_repo_projects_outdated_percent(repo):
+def graph_repo_projects_outdated_percent(repo: str) -> Any:
     return graph_repo_generic(repo, lambda s: safe_percent(s['num_metapackages_outdated'], s['num_metapackages_newest'] + s['num_metapackages_outdated']), '#d9534f', '%')
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_unique.svg')
-def graph_repo_projects_unique(repo):
-    return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'], '#5bc0de')
+def graph_repo_projects_unique(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'], '#5bc0de')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_unique_percent.svg')
-def graph_repo_projects_unique_percent(repo):
-    return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0, '#5bc0de', '%')
+def graph_repo_projects_unique_percent(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_unique'] / s['num_metapackages'] * 100.0, '#5bc0de', '%')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_problematic.svg')
-def graph_repo_projects_problematic(repo):
-    return graph_repo_generic(repo, lambda s: s['num_metapackages_problematic'], '#808080')
+def graph_repo_projects_problematic(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_problematic'], '#808080')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/projects_problematic_percent.svg')
-def graph_repo_projects_problematic_percent(repo):
-    return graph_repo_generic(repo, lambda s: s['num_metapackages_problematic'] / s['num_metapackages'] * 100.0, '#808080', '%')
+def graph_repo_projects_problematic_percent(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_metapackages_problematic'] / s['num_metapackages'] * 100.0, '#808080', '%')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/problems.svg')
-def graph_repo_problems(repo):
-    return graph_repo_generic(repo, lambda s: s['num_problems'], '#c00000')
+def graph_repo_problems(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_problems'], '#c00000')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/problems_per_metapackage.svg')
-def graph_repo_problems_per_metapackage(repo):
-    return graph_repo_generic(repo, lambda s: s['num_problems'] / s['num_metapackages'], '#c00000')
+def graph_repo_problems_per_metapackage(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_problems'] / s['num_metapackages'], '#c00000')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/maintainers.svg')
-def graph_repo_maintainers(repo):
-    return graph_repo_generic(repo, lambda s: s['num_maintainers'], '#c000c0')
+def graph_repo_maintainers(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_maintainers'], '#c000c0')  # type: ignore
 
 
 @ViewRegistrar('/graph/repo/<repo>/packages_per_maintainer.svg')
-def graph_repo_packages_per_maintainer(repo):
-    return graph_repo_generic(repo, lambda s: s['num_packages'] / s['num_maintainers'], '#c000c0')
+def graph_repo_packages_per_maintainer(repo: str) -> Any:
+    return graph_repo_generic(repo, lambda s: s['num_packages'] / s['num_maintainers'], '#c000c0')  # type: ignore
 
 
 @ViewRegistrar('/graph/total/packages.svg')
-def graph_total_packages():
-    return graph_total_generic(lambda s: s['num_packages'], '#000000')
+def graph_total_packages() -> Any:
+    return graph_total_generic(lambda s: s['num_packages'], '#000000')  # type: ignore
 
 
 @ViewRegistrar('/graph/total/projects.svg')
-def graph_total_projects():
-    return graph_total_generic(lambda s: s['num_metapackages'], '#000000')
+def graph_total_projects() -> Any:
+    return graph_total_generic(lambda s: s['num_metapackages'], '#000000')  # type: ignore
 
 
 @ViewRegistrar('/graph/total/maintainers.svg')
-def graph_total_maintainers():
-    return graph_total_generic(lambda s: s['num_maintainers'], '#c000c0')
+def graph_total_maintainers() -> Any:
+    return graph_total_generic(lambda s: s['num_maintainers'], '#c000c0')  # type: ignore
 
 
 @ViewRegistrar('/graph/total/problems.svg')
-def graph_total_problems():
-    return graph_total_generic(lambda s: s['num_problems'], '#c00000')
+def graph_total_problems() -> Any:
+    return graph_total_generic(lambda s: s['num_problems'], '#c00000')  # type: ignore
 
 
-def clever_ceil(value):
+def clever_ceil(value: int) -> int:
     if value == 0:
         return 1
 
@@ -182,8 +183,8 @@ def clever_ceil(value):
     return int(math.ceil(value / tick) * tick)
 
 
-def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
-    snapshots = [
+def map_repo_generic(repo2coords: Callable[[Dict[str, Any]], Dict[str, float]], namex: str = 'X', namey: str = 'Y', unitx: str = '', unity: str = '') -> Any:
+    snapshots: List[Dict[str, Any]] = [
         #get_db().get_repositories_from_past(60 * 60 * 24 * 30)
     ]
 
@@ -209,8 +210,8 @@ def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
             height=height,
             minx=0,
             miny=0,
-            maxx=clever_ceil(max(map(lambda p: p['coords'][0]['x'], points))) if points else 1,
-            maxy=clever_ceil(max(map(lambda p: p['coords'][0]['y'], points))) if points else 1,
+            maxx=clever_ceil(max(map(lambda p: p['coords'][0]['x'], points))) if points else 1,  # type: ignore
+            maxy=clever_ceil(max(map(lambda p: p['coords'][0]['y'], points))) if points else 1,  # type: ignore
             namex=namex,
             namey=namey,
             unitx=unitx,
@@ -222,8 +223,8 @@ def map_repo_generic(repo2coords, namex='X', namey='Y', unitx='', unity=''):
 
 
 @ViewRegistrar('/graph/map_repo_size_fresh.svg')
-def graph_map_repo_size_fresh():
-    def repo2coords(repo):
+def graph_map_repo_size_fresh() -> Any:
+    def repo2coords(repo: Dict[str, Any]) -> Dict[str, float]:
         return {
             'x': repo['num_metapackages'],
             'y': repo['num_metapackages_newest']
@@ -237,8 +238,8 @@ def graph_map_repo_size_fresh():
 
 
 @ViewRegistrar('/graph/map_repo_size_fresh_nonunique.svg')
-def graph_map_repo_size_fresh_nonunique():
-    def repo2coords(repo):
+def graph_map_repo_size_fresh_nonunique() -> Any:
+    def repo2coords(repo: Dict[str, Any]) -> Dict[str, float]:
         return {
             'x': repo['num_metapackages_newest'] + repo['num_metapackages_outdated'],
             'y': repo['num_metapackages_newest']
@@ -252,8 +253,8 @@ def graph_map_repo_size_fresh_nonunique():
 
 
 @ViewRegistrar('/graph/map_repo_size_freshness.svg')
-def graph_map_repo_size_freshness():
-    def repo2coords(repo):
+def graph_map_repo_size_freshness() -> Any:
+    def repo2coords(repo: Dict[str, Any]) -> Dict[str, float]:
         return {
             'x': repo['num_metapackages'],
             'y': 100.0 * repo['num_metapackages_newest'] / repo['num_metapackages'] if repo['num_metapackages'] else 0

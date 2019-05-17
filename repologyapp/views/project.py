@@ -18,6 +18,7 @@
 from collections import defaultdict
 from datetime import timedelta
 from functools import cmp_to_key
+from typing import Any, Callable, Collection, Dict, Iterable, List
 
 import flask
 
@@ -31,12 +32,12 @@ from repologyapp.metapackages import packages_to_summary_items
 from repologyapp.packageproc import packageset_aggregate_by_version, packageset_sort_by_name_version, packageset_sort_by_version
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.package import VersionClass
+from repology.package import Package, VersionClass
 
 
 @ViewRegistrar('/project/<name>/versions')
-def project_versions(name):
-    packages_by_repo = defaultdict(list)
+def project_versions(name: str) -> Any:
+    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
 
     packages = get_db().get_metapackage_packages(name)
 
@@ -57,13 +58,13 @@ def project_versions(name):
 
 
 @ViewRegistrar('/project/<name>/packages')
-def project_packages(name):
-    packages_by_repo = defaultdict(list)
+def project_packages(name: str) -> Any:
+    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
 
     for package in get_db().get_metapackage_packages(name):
         packages_by_repo[package.repo].append(package)
 
-    packages = []
+    packages: List[Package] = []
     for repo in repometadata.active_names():
         if repo in packages_by_repo:
             packages.extend(packageset_sort_by_name_version(packages_by_repo[repo]))
@@ -78,13 +79,13 @@ def project_packages(name):
 
 
 @ViewRegistrar('/project/<name>/information')
-def project_information(name):
+def project_information(name: str) -> Any:
     packages = get_db().get_metapackage_packages(name)
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
 
-    information = {}
+    information: Dict[str, Any] = {}
 
-    def append_info(infokey, infoval, package):
+    def append_info(infokey: str, infoval: str, package: Package) -> None:
         if infokey not in information:
             information[infokey] = {}
 
@@ -131,10 +132,10 @@ def project_information(name):
 
 
 @ViewRegistrar('/project/<name>/history')
-def project_history(name):
+def project_history(name: str) -> Any:
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
-    def prepare_repos(repos):
+    def prepare_repos(repos: Collection[str]) -> List[str]:
         if not repos:
             return []
 
@@ -143,23 +144,20 @@ def project_history(name):
         # ensure correct ordering
         return [name for name in repometadata.all_names() if name in repos]
 
-    def prepare_versions(versions):
+    def prepare_versions(versions: List[str]) -> List[str]:
         if not versions:
             return []
 
-        def version_compare_rev(v1, v2):
-            return version_compare(v2, v1)
+        return sorted(versions, key=cmp_to_key(version_compare), reverse=True)
 
-        return sorted(versions, key=cmp_to_key(version_compare_rev))
-
-    def timedelta_from_seconds(seconds):
+    def timedelta_from_seconds(seconds: int) -> timedelta:
         return timedelta(seconds=seconds)
 
-    def apply_to_field(datadict, key, func):
+    def apply_to_field(datadict: Dict[str, Any], key: str, func: Callable[..., Any]) -> None:
         if key in datadict and datadict[key] is not None:
             datadict[key] = func(datadict[key])
 
-    def postprocess_history(history):
+    def postprocess_history(history: List[Dict[str, Any]]) -> Iterable[Dict[str, Any]]:
         for entry in history:
             data = entry['data']
 
@@ -220,7 +218,7 @@ def project_history(name):
 
 
 @ViewRegistrar('/project/<name>/related')
-def project_related(name):
+def project_related(name: str) -> Any:
     metapackages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     packages = get_db().get_metapackages_packages(list(metapackages.keys()), fields=['family', 'effname', 'version', 'versionclass', 'flags'])
@@ -242,7 +240,7 @@ def project_related(name):
 
 
 @ViewRegistrar('/project/<name>/badges')
-def project_badges(name):
+def project_badges(name: str) -> Any:
     repos_present_in = set([package.repo for package in get_db().get_metapackage_packages(name)])
     repos = [repo for repo in repometadata.active_names() if repo in repos_present_in]
     return flask.render_template(
@@ -254,7 +252,7 @@ def project_badges(name):
 
 
 @ViewRegistrar('/project/<name>/report', methods=['GET', 'POST'])
-def project_report(name):
+def project_report(name: str) -> Any:
     reports_disabled = name in config['DISABLED_REPORTS']
 
     if flask.request.method == 'POST':

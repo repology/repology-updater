@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any
+
 import flask
 
 from repologyapp.db import get_db
@@ -22,10 +24,10 @@ from repologyapp.view_registry import ViewRegistrar
 
 
 @ViewRegistrar('/log/<run_id>')
-def log(run_id):
+def log(run_id: int) -> Any:
     autorefresh = flask.request.args.to_dict().get('autorefresh')
 
-    run = get_db().get_run(run_id)
+    run = get_db().get_run(int(run_id))
 
     if not run:
         flask.abort(404)
