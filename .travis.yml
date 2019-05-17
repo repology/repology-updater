@@ -24,6 +24,9 @@ matrix:
       env: COVERAGE=yes
     - python: 3.8-dev
     - python: nightly
+  allow_failures:  # werkzeug incompatibility
+    - python: 3.8-dev
+    - python: nightly
 before_install:
   - export REAL_PYTHON=$(basename $(dirname $(python-config --configdir)))
   - |-
