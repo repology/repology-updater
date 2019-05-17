@@ -61,7 +61,10 @@ mypy:
 	${MYPY} ${MYPY_ARGS} repologyapp/views
 
 mypy-all:
-	${MYPY} ${MYPY_ARGS} --strict repology-update.py
+	${MYPY} ${MYPY_ARGS} --strict repology-update.py repology-app.py
+	${MYPY} ${MYPY_ARGS} --strict repology/fetchers/fetchers
+	${MYPY} ${MYPY_ARGS} --strict repology/parsers/parsers
+	${MYPY} ${MYPY_ARGS} --strict repologyapp/views
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")
