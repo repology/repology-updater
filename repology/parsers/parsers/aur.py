@@ -51,4 +51,8 @@ class AURParser(Parser):
                     if 'PackageBase' in result and result['PackageBase']:
                         pkg.set_basename(result['PackageBase'])
 
+                    # XXX: enable when we support multiple categories
+                    #if 'Keywords' in result and result['Keywords']:
+                    #    pkg.add_categories(result['Keywords'])
+
                     yield pkg
