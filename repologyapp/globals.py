@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any
+
 from repologyapp.config import config
 from repologyapp.fontmeasurer import FontMeasurer
 from repologyapp.repometadata import RepositoryMetadata
@@ -31,5 +33,5 @@ _fontmeasurer = FontMeasurer(config['BADGE_FONT'], 11)
 repometadata = RepositoryMetadata()
 
 
-def get_text_width(text):
+def get_text_width(text: Any) -> int:
     return _fontmeasurer.get_text_dimensions(str(text))[0]

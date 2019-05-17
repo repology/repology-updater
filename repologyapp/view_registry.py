@@ -15,12 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Any, Callable, Dict, Iterator, List, Optional, Union
+from types import ModuleType
+
 import importlib
 import inspect
 import os
 
+import flask
 
-def _enumerate_modules(pkgname, pkgfile):
+
+ViewFunc = Callable[..., Any]
+
+
+def _enumerate_modules(pkgname: str, pkgfile: str) -> Iterator[ModuleType]:
     pkgdir = os.path.dirname(pkgfile)
 
     for modfile in os.listdir(pkgdir):
@@ -29,45 +37,56 @@ def _enumerate_modules(pkgname, pkgfile):
             yield importlib.import_module(pkgname + '.' + modname)
 
 
+class ViewRegistrant():
+    _f: ViewFunc
+    _next: Optional['ViewRegistrant']
+    _route: str
+    _options: Dict[str, Any]
+
+    def __init__(self, f: Union['ViewRegistrant', ViewFunc], route: str, options: Dict[str, Any]) -> None:
+        if isinstance(f, ViewRegistrant):
+            # allow nesting
+            self._f = f._f  # type: ignore
+            self._next = f
+        else:
+            self._f = f  # type: ignore
+            self._next = None
+
+        self._route = route
+        self._options = options
+
+    def __call__(self, *args: Any, **kwargs: Any) -> Any:
+        return self._f(*args, **kwargs)
+
+    def register_in_flask(self, app: flask.Flask) -> None:
+        app.add_url_rule(self._route, self._f.__name__, self._f, **self._options)
+        if self._next is not None:
+            self._next.register_in_flask(app)
+
+
+class ViewRegistrar():
+    _route: str
+    _options: Dict[str, Any]
+
+    def __init__(self, route: str, **options: Any) -> None:
+        self._route = route
+        self._options = options
+
+    def __call__(self, f: ViewFunc) -> ViewRegistrant:
+        return ViewRegistrant(f, self._route, self._options)
+
+
 class ViewRegistry():
-    def __init__(self, pkgname, pkgfile):
-        self.registrants = []
+    _registrants: List[ViewRegistrant]
+
+    def __init__(self, pkgname: str, pkgfile: str) -> None:
+        self._registrants = []
 
         for module in _enumerate_modules(pkgname, pkgfile):
             for name, member in inspect.getmembers(module):
                 if isinstance(member, ViewRegistrant):
-                    self.registrants.append(member)
+                    self._registrants.append(member)
 
-    def RegisterInFlask(self, app):
-        for registrant in self.registrants:
-            registrant.RegisterInFlask(app)
-
-
-class ViewRegistrar():
-    def __init__(self, route, **options):
-        self.route = route
-        self.options = options
-
-    def __call__(self, f):
-        return ViewRegistrant(f, self.route, self.options)
-
-
-class ViewRegistrant():
-    def __init__(self, f, route, options):
-        if isinstance(f, ViewRegistrant):
-            # allow nesting
-            self.f = f.f
-            self.next = f
-        else:
-            self.f = f
-            self.next = None
-        self.route = route
-        self.options = options
-
-    def __call__(self, *args, **kwargs):
-        return self.f(*args, **kwargs)
-
-    def RegisterInFlask(self, app):
-        app.add_url_rule(self.route, self.f.__name__, self.f, **self.options)
-        if self.next is not None:
-            self.next.RegisterInFlask(app)
+    def register_in_flask(self, app: flask.Flask) -> None:
+        for registrant in self._registrants:
+            registrant.register_in_flask(app)

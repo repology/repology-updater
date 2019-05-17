@@ -23,12 +23,12 @@ __all__ = ['config']
 config: Dict[str, Any] = {}
 
 
-def _load_config(path):
+def _load_config(path: str) -> None:
     with open(path) as f:
         exec(compile(f.read(), path, 'exec'), globals(), config)
 
 
-def _load_configs():
+def _load_configs() -> None:
     default_config_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', 'repology.conf.default'))
     custom_config_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', 'repology.conf'))
     runtime_config_path = os.environ['REPOLOGY_CONFIG'] if 'REPOLOGY_CONFIG' in os.environ else None

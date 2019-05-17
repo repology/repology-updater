@@ -18,4 +18,4 @@
 from repologyapp.view_registry import ViewRegistry
 
 
-Registry = ViewRegistry(__name__, __file__)
+registry = ViewRegistry(__name__, __file__)
