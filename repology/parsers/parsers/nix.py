@@ -76,6 +76,11 @@ class NixJsonParser(Parser):
 
                     # and fallback to old method which splits name-version pair
                     if not pkg.version:
+                        # matches most of exceptions mentioned below
+                        if re.search('-[0-9]+[a-z]', packagedata['name']):
+                            pkg.log('possibly ambiguous package name "{}", consider adding explicit version'.format(packagedata['name']), severity=Logger.WARNING)
+
+                        # useless for now due to too many matches
                         #if re.search('-[^a-zA-Z].*-[^a-zA-Z]', packagedata['name']) and not re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', packagedata['name']):
                         #    pkg.log('possibly ambiguous package name/version pair: {}'.format(packagedata['name']), severity=Logger.WARNING)
 
