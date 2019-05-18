@@ -63,74 +63,88 @@ class NixJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
         with open(path, 'rb') as jsonfile:
             for key, packagedata in JsonSlicer(jsonfile, ('packages', None), encoding='utf-8', path_mode='map_keys'):
-                pkg = factory.begin(key)
+                with factory.begin(key) as pkg:
+                    meta = packagedata['meta']
 
-                # see how Nix parses 'derivative' names in
-                # https://github.com/NixOS src/libexpr/names.cc, DrvName::DrvName
-                # it just splits on dash followed by non-letter
-                #
-                # this doesn't work well on 100% cases, it's an upstream problem
-                match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
-                if not match:
-                    factory.log('cannot extract version: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
-                    continue
+                    # see #854; first, try new mode which relies on dedicated version field
+                    if 'version' in meta:
+                        if not packagedata['name'].endswith('-' + meta['version']):
+                            pkg.log('name "{}" does not end with version "{}"'.format(packagedata['name'], meta['version']), severity=Logger.ERROR)
+                        else:
+                            pkg.set_name(packagedata['name'][:-len(meta['version']) - 1])
+                            pkg.set_version(meta['version'])
 
-                if 'node-_at_webassemblyjs' in packagedata['name']:
-                    factory.log('skipping unparsable name/version: {}/{}'.format(key, packagedata['name']), severity=Logger.ERROR)
-                    continue
+                    # and fallback to old method which splits name-version pair
+                    if not pkg.version:
+                        #if re.search('-[^a-zA-Z].*-[^a-zA-Z]', packagedata['name']) and not re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', packagedata['name']):
+                        #    pkg.log('possibly ambiguous package name/version pair: {}'.format(packagedata['name']), severity=Logger.WARNING)
 
-                pkg.set_name(match.group(1))
-                pkg.set_version(match.group(2))
+                        # see how Nix parses 'derivative' names in
+                        # https://github.com/NixOS src/libexpr/names.cc, DrvName::DrvName
+                        # it just splits on dash followed by non-letter
+                        #
+                        # this doesn't work well on 100% cases, it's an upstream problem
+                        match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
+                        if not match:
+                            pkg.log('cannot extract version from "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                            continue
 
-                # some exceptions
-                for prefix in ('75dpi', '100dpi'):
-                    if pkg.version.startswith(prefix):
-                        pkg.set_name(pkg.name + '-' + prefix)
-                        pkg.set_version(pkg.version[len(prefix) + 1:])
+                        if 'node-_at_webassemblyjs' in packagedata['name']:
+                            pkg.log('skipping garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                            continue
 
-                merged = pkg.name + '-' + pkg.version
-                for pkgname in ['liblqr-1', 'python2.7-3to2', 'python3.6-3to2', 'libretro-4do', 'polkit-qt-1-qt5', 'polkit-qt-1-qt4']:
-                    if merged.startswith(pkgname):
-                        pkg.set_name(pkgname)
-                        pkg.set_version(merged[len(pkgname) + 1:])
+                        pkg.set_name(match.group(1))
+                        pkg.set_version(match.group(2))
 
-                keyparts = key.split('.')
-                if len(keyparts) > 1:
-                    pkg.add_categories(keyparts[0])
+                        # some exceptions
+                        for prefix in ('75dpi', '100dpi'):
+                            if pkg.version.startswith(prefix):
+                                pkg.set_name(pkg.name + '-' + prefix)
+                                pkg.set_version(pkg.version[len(prefix) + 1:])
 
-                if pkg.name.endswith('-git'):
-                    pkg.set_name(pkg.name[:-4])
-                    pkg.set_flags(PackageFlags.ignore)
+                        merged = pkg.name + '-' + pkg.version
+                        for pkgname in ['liblqr-1', 'python2.7-3to2', 'python3.6-3to2', 'libretro-4do', 'polkit-qt-1-qt5', 'polkit-qt-1-qt4']:
+                            if merged.startswith(pkgname):
+                                pkg.set_name(pkgname)
+                                pkg.set_version(merged[len(pkgname) + 1:])
 
-                if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
-                    pkg.set_flags(PackageFlags.ignore)
+                    keyparts = key.split('.')
+                    if len(keyparts) > 1:
+                        pkg.add_categories(keyparts[0])
 
-                if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
-                    pkg.log('ignoring version which looks like commit hash: {}'.format(pkg.version), severity=Logger.ERROR)
-                    pkg.set_flags(PackageFlags.ignore)
+                    # XXX: mode to rules
+                    if pkg.name.endswith('-git'):
+                        pkg.set_name(pkg.name[:-4])
+                        pkg.set_flags(PackageFlags.ignore)
 
-                meta = packagedata['meta']
+                    # XXX: mode to rules
+                    if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
+                        pkg.set_flags(PackageFlags.ignore)
 
-                pkg.add_homepages(meta.get('homepage'))
+                    # XXX: mode to rules
+                    if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
+                        pkg.set_flags(PackageFlags.ignore)
 
-                if 'description' in meta:
-                    pkg.set_summary(meta['description'].replace('\n', ' '))
+                    pkg.add_homepages(meta.get('homepage'))
 
-                if 'maintainers' in meta:
-                    if not isinstance(meta['maintainers'], list):
-                        pkg.log('maintainers is not a list: {}'.format(meta['maintainers']), severity=Logger.ERROR)
-                    else:
-                        pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
+                    if 'description' in meta:
+                        pkg.set_summary(meta['description'].replace('\n', ' '))
 
-                if 'license' in meta:
-                    pkg.add_licenses(extract_nix_licenses(meta['license']))
+                    if 'maintainers' in meta:
+                        if not isinstance(meta['maintainers'], list):
+                            pkg.log('maintainers "{}" is not a list'.format(meta['maintainers']), severity=Logger.ERROR)
+                        else:
+                            pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
 
-                if 'position' in meta:
-                    posfile, posline = meta['position'].rsplit(':', 1)
-                    pkg.set_extra_field('posfile', posfile)
-                    pkg.set_extra_field('posline', posline)
+                    if 'license' in meta:
+                        pkg.add_licenses(extract_nix_licenses(meta['license']))
 
-                    if posfile.startswith('pkgs/development/haskell-modules'):
-                        pkg.set_flags(PackageFlags.rolling)  # XXX: haskell modules are autogenerated in nix: https://github.com/NixOS/nixpkgs/commits/master/pkgs/development/haskell-modules/hackage-packages.nix
+                    if 'position' in meta:
+                        posfile, posline = meta['position'].rsplit(':', 1)
+                        pkg.set_extra_field('posfile', posfile)
+                        pkg.set_extra_field('posline', posline)
 
-                yield pkg
+                        if posfile.startswith('pkgs/development/haskell-modules'):
+                            pkg.set_flags(PackageFlags.rolling)  # XXX: haskell modules are autogenerated in nix: https://github.com/NixOS/nixpkgs/commits/master/pkgs/development/haskell-modules/hackage-packages.nix
+
+                    yield pkg
