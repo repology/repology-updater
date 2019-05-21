@@ -14,21 +14,25 @@
       parser: ScoopGitParser
       url: https://github.com/ScoopInstaller/Main
       sparse_checkout: [ 'bucket/*.json' ]
+      subrepo: '{source}'
     - name: extras
       fetcher: GitFetcher
       parser: ScoopGitParser
       url: https://github.com/lukesampson/scoop-extras
       sparse_checkout: [ 'bucket/*.json' ]
+      subrepo: '{source}'
     - name: versions
       fetcher: GitFetcher
       parser: ScoopGitParser
       url: https://github.com/ScoopInstaller/Versions
       sparse_checkout: [ 'bucket/*.json' ]
+      subrepo: '{source}'
     - name: games
       fetcher: GitFetcher
       parser: ScoopGitParser
       url: https://github.com/Calinou/scoop-games
       sparse_checkout: [ 'bucket/*.json' ]
+      subrepo: '{source}'
   repolinks:
     - desc: Scoop home
       url: http://scoop.sh/
