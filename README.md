@@ -51,6 +51,7 @@ version are always parsed.
 | CRAN                             |         |         |       | ✔ (2) |         |          |
 | crates.io                        | ✔       |         |       | ✔     |         |          |
 | CRUX                             | ✔       | ✔       |       | ✔     |         |          |
+| Cygwin                           | ✔       | ✔       | ✔     |       |         |          |
 | Debian, Ubuntu, other deb-based  |         | ✔       | ✔     | ✔     |         |          |
 | DistroWatch.com                  | ✔       |         |       | ✔     |         | ✔        |
 | Exherbo                          |         |         | ✔     |       |         |          |
