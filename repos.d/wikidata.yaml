@@ -30,157 +30,162 @@
             ?project
             ?projectLabel
             ?projectDescription
-            (
-              # concatenate all versions
-              GROUP_CONCAT(DISTINCT
-                # append flags to each version
-                CONCAT(
-                  $version,
-                  IF(BOUND(?versionTypes), ?versionTypes, ''),
-                  IF(BOUND(?versionOSes), ?versionOSes, ''),
-                  IF(BOUND(?versionPlatforms), ?versionPlatforms, '')
-                ); separator=', '
-              )
-              AS ?versions
-            )
-            (SAMPLE(?websites) as ?websites)
-            #(SAMPLE(?debian_packages) as ?debian_packages)
-            #(SAMPLE(?ubuntu_packages) as ?ubuntu_packages)
-            (SAMPLE(?arch_packages) as ?arch_packages)
-            (SAMPLE(?aur_packages) as ?aur_packages)
-            #(SAMPLE(?gentoo_packages) as ?gentoo_packages)
-            #(SAMPLE(?fedora_packages) as ?fedora_packages)
-            (SAMPLE(?licenses) as ?licenses)
+            ?versions
+            ?websites
+            ?arch_packages
+            ?aur_packages
+            ?licenses
           WHERE {
             {
-              SELECT DISTINCT
+              SELECT
                 ?project
-                ?projectLabel  # produced with wikibase:label SERVICE
-                ?projectDescription  # produced with wikibase:label SERVICE
-                ?version
-                (GROUP_CONCAT(DISTINCT ?versionType; separator='') as ?versionTypes)
-                (GROUP_CONCAT(DISTINCT ?versionOS; separator='') as ?versionOSes)
-                (GROUP_CONCAT(DISTINCT ?versionPlatform; separator='') as ?versionPlatforms)
-                (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
-                # These are not currently used and disable for speed
-                # But you may include them into manual request
-                #(GROUP_CONCAT(DISTINCT ?debian_package; separator=', ') as ?debian_packages)
-                #(GROUP_CONCAT(DISTINCT ?ubuntu_package; separator=', ') as ?ubuntu_packages)
-                (GROUP_CONCAT(DISTINCT ?arch_package; separator=', ') as ?arch_packages)
-                (GROUP_CONCAT(DISTINCT ?aur_package; separator=', ') as ?aur_packages)
-                #(GROUP_CONCAT(DISTINCT ?gentoo_package; separator=', ') as ?gentoo_packages)
-                #(GROUP_CONCAT(DISTINCT ?fedora_package; separator=', ') as ?fedora_packages)
-                (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
-              WHERE {
-                # Versions for specific project
-                ?project p:P348 ?versionItem .
-
-                # Version number
-                ?versionItem ps:P348 $version .
-
-                # Version type (stable, unstable, ...)
-                # we reduce it to just two flags which indicate
-                # whether there's stable or unstable types
-                OPTIONAL {
-                  ?versionItem pq:P548 ?versionTypeItem .
-                  BIND(
-                    IF(
-                      ?versionTypeItem = wd:Q2804309 ||   # stable version
-                      ?versionTypeItem = wd:Q15726348 ||  # long-term support version
-                      ?versionTypeItem = wd:Q18434478 ||  # maintenance version
-                      ?versionTypeItem = wd:Q20631656 ||  # release
-                      ?versionTypeItem = wd:Q48028851,    # patch version
-                      '|S',
-                      '|U'
-                    )
-                    AS ?versionType
-                  )
-                  # You may use this in manual request to get label of actual version type
-                  #?versionTypeItem rdfs:label ?versionType .
-                  #FILTER (LANG(?versionType) = 'en')
-                }
-                # Version os
-                # See VLC package; there's different versioning schemas for different OSes
-                # and we need to filter out e.g. iOS releases
-                # As with version types, we reduct this to just two flags: where there was
-                # Linux release and whether there were non-Linux release. When parsing, we'll
-                # ignore versions with OS defined, but no Linux
-                OPTIONAL {
-                  ?versionItem pq:P306 ?versionOSItem  .
-                  BIND(
-                    IF(
-                      ?versionOSItem = wd:Q388,  # Linux
-                      '|O',
-                      '|o'
-                    )
-                    AS ?versionOS
-                  )
-                  # You may use this in manual request to get label of actual version os
-                  #?versionOSItem rdfs:label ?versionOS .
-                  #FILTER (LANG(?versionOS) = 'en')
-                }
-                # same for platform
-                # we go blacklist way here though as people use too much unrelated stuff
-                # as platform (hardware platforms, operating systems, gui toolkits etc)
-                OPTIONAL {
-                  ?versionItem pq:P400 ?versionPlatformItem  .
-                  BIND(
+                (
+                  # concatenate all versions
+                  GROUP_CONCAT(DISTINCT
+                    # append flags to each version
                     CONCAT(
-                      # blacklist
-                      IF(
-                        ?versionPlatformItem = wd:Q189210 ||   # web application
-                        ?versionPlatformItem = wd:Q4885200 ||  # Windows Phone
-                        ?versionPlatformItem = wd:Q14116 ||    # macOS
-                        ?versionPlatformItem = wd:Q1406 ||     # Microsoft Windows
-                        ?versionPlatformItem = wd:Q94 ||       # Android
-                        ?versionPlatformItem = wd:Q48493 ||    # iOS
-                        ?versionPlatformItem = wd:Q2766 ||     # iPhone
-                        ?versionPlatformItem = wd:Q2796,       # iPad
-                        '|p',
-                        ''
-                      ),
-                      # whitelist
-                      IF(
-                        ?versionPlatformItem = wd:Q388,        # Linux
-                        '|P',
-                        ''
-                      )
-                    )
-                    AS ?versionPlatform
+                      $version,
+                      IF(BOUND(?versionTypes), ?versionTypes, ''),
+                      IF(BOUND(?versionOSes), ?versionOSes, ''),
+                      IF(BOUND(?versionPlatforms), ?versionPlatforms, '')
+                    ); separator=', '
                   )
-                  # You may use this in manual request to get label of actual version os
-                  #?versionPlatformSItem rdfs:label ?versionPlatform .
-                  #FILTER (LANG(?versionPlatform) = 'en')
+                  AS ?versions
+                )
+                (SAMPLE(?websites) as ?websites)
+                (SAMPLE(?arch_packages) as ?arch_packages)
+                (SAMPLE(?aur_packages) as ?aur_packages)
+                (SAMPLE(?licenses) as ?licenses)
+              WHERE {
+                {
+                  SELECT DISTINCT
+                    ?project
+                    ?version
+                    (GROUP_CONCAT(DISTINCT ?versionType; separator='') as ?versionTypes)
+                    (GROUP_CONCAT(DISTINCT ?versionOS; separator='') as ?versionOSes)
+                    (GROUP_CONCAT(DISTINCT ?versionPlatform; separator='') as ?versionPlatforms)
+                    (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
+                    # These are not currently used and disable for speed
+                    # But you may include them into manual request
+                    #(GROUP_CONCAT(DISTINCT ?debian_package; separator=', ') as ?debian_packages)
+                    #(GROUP_CONCAT(DISTINCT ?ubuntu_package; separator=', ') as ?ubuntu_packages)
+                    (GROUP_CONCAT(DISTINCT ?arch_package; separator=', ') as ?arch_packages)
+                    (GROUP_CONCAT(DISTINCT ?aur_package; separator=', ') as ?aur_packages)
+                    #(GROUP_CONCAT(DISTINCT ?gentoo_package; separator=', ') as ?gentoo_packages)
+                    #(GROUP_CONCAT(DISTINCT ?fedora_package; separator=', ') as ?fedora_packages)
+                    (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
+                  WHERE {
+                    # Versions for specific project
+                    ?project p:P348 ?versionItem .
+
+                    # Version number
+                    ?versionItem ps:P348 $version .
+
+                    # Version type (stable, unstable, ...)
+                    # we reduce it to just two flags which indicate
+                    # whether there's stable or unstable types
+                    OPTIONAL {
+                      ?versionItem pq:P548 ?versionTypeItem .
+                      BIND(
+                        IF(
+                          ?versionTypeItem = wd:Q2804309 ||   # stable version
+                          ?versionTypeItem = wd:Q15726348 ||  # long-term support version
+                          ?versionTypeItem = wd:Q18434478 ||  # maintenance version
+                          ?versionTypeItem = wd:Q20631656 ||  # release
+                          ?versionTypeItem = wd:Q48028851,    # patch version
+                          '|S',
+                          '|U'
+                        )
+                        AS ?versionType
+                      )
+                      # You may use this in manual request to get label of actual version type
+                      #?versionTypeItem rdfs:label ?versionType .
+                      #FILTER (LANG(?versionType) = 'en')
+                    }
+                    # Version os
+                    # See VLC package; there's different versioning schemas for different OSes
+                    # and we need to filter out e.g. iOS releases
+                    # As with version types, we reduct this to just two flags: where there was
+                    # Linux release and whether there were non-Linux release. When parsing, we'll
+                    # ignore versions with OS defined, but no Linux
+                    OPTIONAL {
+                      ?versionItem pq:P306 ?versionOSItem  .
+                      BIND(
+                        IF(
+                          ?versionOSItem = wd:Q388,  # Linux
+                          '|O',
+                          '|o'
+                        )
+                        AS ?versionOS
+                      )
+                      # You may use this in manual request to get label of actual version os
+                      #?versionOSItem rdfs:label ?versionOS .
+                      #FILTER (LANG(?versionOS) = 'en')
+                    }
+                    # same for platform
+                    # we go blacklist way here though as people use too much unrelated stuff
+                    # as platform (hardware platforms, operating systems, gui toolkits etc)
+                    OPTIONAL {
+                      ?versionItem pq:P400 ?versionPlatformItem  .
+                      BIND(
+                        CONCAT(
+                          # blacklist
+                          IF(
+                            ?versionPlatformItem = wd:Q189210 ||   # web application
+                            ?versionPlatformItem = wd:Q4885200 ||  # Windows Phone
+                            ?versionPlatformItem = wd:Q14116 ||    # macOS
+                            ?versionPlatformItem = wd:Q1406 ||     # Microsoft Windows
+                            ?versionPlatformItem = wd:Q94 ||       # Android
+                            ?versionPlatformItem = wd:Q48493 ||    # iOS
+                            ?versionPlatformItem = wd:Q2766 ||     # iPhone
+                            ?versionPlatformItem = wd:Q2796,       # iPad
+                            '|p',
+                            ''
+                          ),
+                          # whitelist
+                          IF(
+                            ?versionPlatformItem = wd:Q388,        # Linux
+                            '|P',
+                            ''
+                          )
+                        )
+                        AS ?versionPlatform
+                      )
+                      # You may use this in manual request to get label of actual version os
+                      #?versionPlatformSItem rdfs:label ?versionPlatform .
+                      #FILTER (LANG(?versionPlatform) = 'en')
+                    }
+
+                    # Websites
+                    OPTIONAL { ?project wdt:P856 ?website . }
+
+                    # Licenses, resolved to labels (e.g. human readable names)
+                    OPTIONAL {
+                      ?project wdt:P275 ?licenseItem .
+                      ?licenseItem rdfs:label ?license .
+                      FILTER (LANG(?license) = 'en')
+                    }
+                    #OPTIONAL { ?project wdt:P3442 ?debian_package . }
+                    #OPTIONAL { ?project wdt:P3473 ?ubuntu_package . }
+                    OPTIONAL { ?project wdt:P3454 ?arch_package . }
+                    OPTIONAL { ?project wdt:P4162 ?aur_package . }
+                    #OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
+                    #OPTIONAL { ?project wdt:P3463 ?fedora_package . }
+
+                    # Require Arch package as we take the name from it
+                    # Also, without it the query times out as it has to
+                    # process to much data
+                    FILTER(BOUND(?arch_package) || BOUND(?aur_package))
+                  }
+                  GROUP BY ?project ?version
                 }
-
-                # Websites
-                OPTIONAL { ?project wdt:P856 ?website . }
-
-                # Licenses, resolved to labels (e.g. human readable names)
-                OPTIONAL {
-                  ?project wdt:P275 ?licenseItem .
-                  ?licenseItem rdfs:label ?license .
-                  FILTER (LANG(?license) = 'en')
-                }
-                #OPTIONAL { ?project wdt:P3442 ?debian_package . }
-                #OPTIONAL { ?project wdt:P3473 ?ubuntu_package . }
-                OPTIONAL { ?project wdt:P3454 ?arch_package . }
-                OPTIONAL { ?project wdt:P4162 ?aur_package . }
-                #OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
-                #OPTIONAL { ?project wdt:P3463 ?fedora_package . }
-
-                # Require Arch package as we take the name from it
-                # Also, without it the query times out as it has to
-                # process to much data
-                FILTER(BOUND(?arch_package) || BOUND(?aur_package))
-
-                # Provides projectLabel and projectDescription fields
-                SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. }
               }
-              GROUP BY ?project ?projectLabel ?projectDescription ?version
+              GROUP BY ?project
             }
+
+            # provides ?projectLabel and ?projectDescription
+            SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. }
           }
-          GROUP BY ?project ?projectLabel ?projectDescription
   repolinks:
     - desc: Wikidata home
       url: "https://wikidata.org/"
