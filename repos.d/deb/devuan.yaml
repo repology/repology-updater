@@ -1,14 +1,16 @@
 ###########################################################################
 # Devuan
+#
+# See release info on https://devuan.org/
 ###########################################################################
-- name: devuan_oldstable
+- name: devuan_1_0
   type: repository
-  desc: Devuan Oldstable
+  desc: Devuan 1.0 (Jessie)
   family: debuntu
   color: '88839c'
   minpackages: 20000
   sources:
-    - name: [ oldstable/main, oldstable/contrib, oldstable/non-free, oldstable-updates/main, oldstable-updates/contrib, oldstable-updates/non-free ]
+    - name: [ jessie/main, jessie/contrib, jessie/non-free ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
@@ -19,14 +21,14 @@
       url: https://devuan.org/
   tags: [ all, production, devuan ]
 
-- name: devuan_stable
+- name: devuan_2_0
   type: repository
-  desc: Devuan Stable
+  desc: Devuan 2.0 (ASCII)
   family: debuntu
   color: '88839c'
   minpackages: 20000
   sources:
-    - name: [ stable/main, stable/contrib, stable/non-free, stable-updates/main, stable-updates/contrib, stable-updates/non-free ]
+    - name: [ ascii/main, ascii/contrib, ascii/non-free, ascii-updates/main, ascii-updates/contrib, ascii-updates/non-free ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
@@ -37,14 +39,14 @@
       url: https://devuan.org/
   tags: [ all, production, devuan ]
 
-- name: devuan_testing
+- name: devuan_3_0
   type: repository
-  desc: Devuan Testing
+  desc: Devuan 3.0 (Beowulf)
   family: debuntu
   color: '88839c'
   minpackages: 25000
   sources:
-    - name: [ testing/main, testing/contrib, testing/non-free, testing-updates/main, testing-updates/contrib, testing-updates/non-free ]
+    - name: [ beowulf/main, beowulf/contrib, beowulf/non-free, beowulf-updates/main, beowulf-updates/contrib, beowulf-updates/non-free ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://deb.devuan.org/merged/dists/{source}/source/Sources.gz'
