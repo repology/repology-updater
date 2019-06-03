@@ -41,6 +41,7 @@ families = [
     'cran',
     'crates_io',
     'crux',
+    'cygwin',
     'debuntu',
     'distrowatch',
     'elpa',

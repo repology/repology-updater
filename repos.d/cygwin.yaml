@@ -1,0 +1,25 @@
+###########################################################################
+# Cygwin
+###########################################################################
+- name: cygwin
+  type: repository
+  desc: Cygwin
+  family: cygwin
+  color: '00fb15'
+  minpackages: 7000
+  default_maintainer: orphaned@cygwin
+  sources:
+    - name: packages.json
+      fetcher: FileFetcher
+      parser: CygwinParser
+      url: https://cygwin.com/packages/packages.json.xz
+      compression: xz
+  repolinks:
+    - desc: Cygwin homepage
+      url: https://cygwin.com/
+    - desc: Cygwin package search
+      url: https://cygwin.com/packages/
+  packagelinks:
+    - desc: Package details
+      url: 'https://cygwin.com/packages/summary/{name}.html'
+  tags: [ all, production, cygwin ]
