@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,17 +16,18 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import flask
 
 from repologyapp.metapackage_request import MetapackageRequest
 from repologyapp.version import UserVisibleVersionInfo
 
-from repology.package import VersionClass
+from repology.package import Package, VersionClass
 
 
 class MetapackagesFilterInfo:
-    fields = {
+    fields: Dict[str, Dict[str, Any]] = {
         'search': {
             'type': str,
             'advanced': False,
@@ -94,46 +95,48 @@ class MetapackagesFilterInfo:
         },
     }
 
-    def __init__(self):
-        self.args = {}
+    _args: Dict[str, Any]
 
-    def ParseFlaskArgs(self):
+    def __init__(self) -> None:
+        self._args = {}
+
+    def ParseFlaskArgs(self) -> None:
         flask_args = flask.request.args.to_dict()
 
         for fieldname, fieldinfo in MetapackagesFilterInfo.fields.items():
             if fieldname in flask_args:
                 if fieldinfo['type'] == bool:
-                    self.args[fieldname] = True
+                    self._args[fieldname] = True
                 elif fieldinfo['type'] == int and flask_args[fieldname].isdecimal():
-                    self.args[fieldname] = int(flask_args[fieldname])
+                    self._args[fieldname] = int(flask_args[fieldname])
                 elif fieldinfo['type'] == str and flask_args[fieldname]:
-                    self.args[fieldname] = flask_args[fieldname]
+                    self._args[fieldname] = flask_args[fieldname]
 
-    def GetDict(self):
-        return self.args
+    def GetDict(self) -> Dict[str, Any]:
+        return self._args
 
-    def GetRequest(self):
+    def GetRequest(self) -> MetapackageRequest:
         request = MetapackageRequest()
         for fieldname, fieldinfo in MetapackagesFilterInfo.fields.items():
-            if fieldname in self.args:
-                fieldinfo['action'](request, self.args[fieldname])
+            if fieldname in self._args:
+                fieldinfo['action'](request, self._args[fieldname])
 
         return request
 
-    def GetMaintainer(self):
-        return self.args['maintainer'] if 'maintainer' in self.args else None
+    def GetMaintainer(self) -> Optional[str]:
+        return self._args['maintainer'] if 'maintainer' in self._args else None
 
-    def GetRepo(self):
-        return self.args['inrepo'] if 'inrepo' in self.args else None
+    def GetRepo(self) -> Optional[str]:
+        return self._args['inrepo'] if 'inrepo' in self._args else None
 
-    def IsAdvanced(self):
-        for fieldname in self.args.keys():
+    def IsAdvanced(self) -> bool:
+        for fieldname in self._args.keys():
             if MetapackagesFilterInfo.fields[fieldname]['advanced']:
                 return True
         return False
 
 
-def get_packages_name_range(packages):
+def get_packages_name_range(packages: Sequence[Package]) -> Tuple[Optional[str], Optional[str]]:
     firstname, lastname = None, None
 
     if packages:
@@ -145,7 +148,7 @@ def get_packages_name_range(packages):
     return firstname, lastname
 
 
-def packages_to_summary_items(packages, repo=None, maintainer=None):
+def packages_to_summary_items(packages: Iterable[Package], repo: Optional[str] = None, maintainer: Optional[str] = None) -> Dict[str, Dict[str, Any]]:
     # filter by either repo or maintainer, not both
     if repo is not None:
         maintainer = None
@@ -158,7 +161,7 @@ def packages_to_summary_items(packages, repo=None, maintainer=None):
             for sumtype in sumtypes
         }
 
-    summaries = defaultdict(summary_factory)
+    summaries: Dict[str, Dict[str, Any]] = defaultdict(summary_factory)
 
     # pass 1: gather summaries in the intermediate format:
     # dict by metapackage name -> dict by summary type (e.g. table columns) -> hash by versioninfo of sets of families
@@ -190,8 +193,8 @@ def packages_to_summary_items(packages, repo=None, maintainer=None):
     return summaries
 
 
-def packages_to_metapackages(*packagesets):
-    metapackages = defaultdict(list)
+def packages_to_metapackages(*packagesets: Iterable[Package]) -> Dict[str, List[Package]]:
+    metapackages: Dict[str, List[Package]] = defaultdict(list)
 
     for packages in packagesets:
         for package in packages:
