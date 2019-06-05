@@ -84,3 +84,66 @@
     - desc: KDE neon wiki
       url: https://community.kde.org/Neon/Git
   tags: [ all, production, kde_neon ]
+
+- name: kde_neon_unstable
+  type: repository
+  desc: KDE neon Unstable
+  family: debuntu
+  minpackages: 400
+  sources:
+    - name: main
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: http://archive.neon.kde.org/unstable/dists/bionic/main/source/Sources.gz
+      compression: gz
+      subrepo: main
+  repolinks:
+    - desc: KDE neon home
+      url: https://neon.kde.org/
+    - desc: KDE neon git repositories
+      url: https://packaging.neon.kde.org/
+    - desc: KDE neon wiki
+      url: https://community.kde.org/Neon/Git
+  tags: [ all, kde_neon ] # same as dev unstable
+
+- name: kde_neon_testing
+  type: repository
+  desc: KDE neon Testing
+  family: debuntu
+  minpackages: 400
+  sources:
+    - name: main
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: http://archive.neon.kde.org/testing/dists/bionic/main/source/Sources.gz
+      compression: gz
+      subrepo: main
+  repolinks:
+    - desc: KDE neon home
+      url: https://neon.kde.org/
+    - desc: KDE neon git repositories
+      url: https://packaging.neon.kde.org/
+    - desc: KDE neon wiki
+      url: https://community.kde.org/Neon/Git
+  tags: [ all, kde_neon ] # same as dev stable
+
+- name: kde_neon_experimental
+  type: repository
+  desc: KDE neon Experimental
+  family: debuntu
+  minpackages: 10
+  sources:
+    - name: main
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: http://archive.neon.kde.org/experimental/dists/bionic/main/source/Sources.gz
+      compression: gz
+      subrepo: main
+  repolinks:
+    - desc: KDE neon home
+      url: https://neon.kde.org/
+    - desc: KDE neon git repositories
+      url: https://packaging.neon.kde.org/
+    - desc: KDE neon wiki
+      url: https://community.kde.org/Neon/Git
+  tags: [ all, production, kde_neon ]
