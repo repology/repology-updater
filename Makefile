@@ -1,21 +1,25 @@
 FLAKE8?=	flake8
 MYPY?=		mypy
 
-# Everything from --strict
-MYPY_ARGS+=	--warn-unused-configs
-MYPY_ARGS+=	--disallow-subclassing-any
-#MYPY_ARGS+=	--disallow-any-generics
-#MYPY_ARGS+=	--disallow-untyped-calls
-#MYPY_ARGS+=	--disallow-untyped-defs
-MYPY_ARGS+=	--disallow-incomplete-defs
-#MYPY_ARGS+=	--check-untyped-defs
-#MYPY_ARGS+=	--disallow-untyped-decorators
-MYPY_ARGS+=	--no-implicit-optional
-MYPY_ARGS+=	--warn-redundant-casts
-MYPY_ARGS+=	--warn-unused-ignores
-MYPY_ARGS+=	--warn-return-any
-
 MYPY_ARGS+=	--ignore-missing-imports
+
+MYPY_STRICT_ARGS=	${MYPY_ARGS} --strict
+
+# Lesser strictness, but the target is to enable everything from --strict
+MYPY_WEAK_ARGS=	${MYPY_ARGS}
+
+MYPY_WEAK_ARGS+=	--warn-unused-configs
+MYPY_WEAK_ARGS+=	--disallow-subclassing-any
+#MYPY_WEAK_ARGS+=	--disallow-any-generics
+#MYPY_WEAK_ARGS+=	--disallow-untyped-calls
+#MYPY_WEAK_ARGS+=	--disallow-untyped-defs
+MYPY_WEAK_ARGS+=	--disallow-incomplete-defs
+#MYPY_WEAK_ARGS+=	--check-untyped-defs
+#MYPY_WEAK_ARGS+=	--disallow-untyped-decorators
+MYPY_WEAK_ARGS+=	--no-implicit-optional
+MYPY_WEAK_ARGS+=	--warn-redundant-casts
+MYPY_WEAK_ARGS+=	--warn-unused-ignores
+MYPY_WEAK_ARGS+=	--warn-return-any
 
 STATICDIR=	repologyapp/static
 
@@ -55,16 +59,16 @@ flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test
 
 mypy:
-	${MYPY} ${MYPY_ARGS} *.py repology repologyapp
-	${MYPY} ${MYPY_ARGS} repology/fetchers/fetchers
-	${MYPY} ${MYPY_ARGS} repology/parsers/parsers
-	${MYPY} ${MYPY_ARGS} repologyapp/views
+	${MYPY} ${MYPY_WEAK_ARGS} *.py repology repologyapp
+	${MYPY} ${MYPY_WEAK_ARGS} repology/fetchers/fetchers
+	${MYPY} ${MYPY_WEAK_ARGS} repology/parsers/parsers
+	${MYPY} ${MYPY_WEAK_ARGS} repologyapp/views
 
 mypy-all:
-	-${MYPY} ${MYPY_ARGS} --strict repology-update.py repology-app.py
-	-${MYPY} ${MYPY_ARGS} --strict repology/fetchers/fetchers
-	-${MYPY} ${MYPY_ARGS} --strict repology/parsers/parsers
-	-${MYPY} ${MYPY_ARGS} --strict repologyapp/views
+	-${MYPY} ${MYPY_STRICT_ARGS} repology-update.py repology-app.py
+	-${MYPY} ${MYPY_STRICT_ARGS} repology/fetchers/fetchers
+	-${MYPY} ${MYPY_STRICT_ARGS} repology/parsers/parsers
+	-${MYPY} ${MYPY_STRICT_ARGS} repologyapp/views
 
 check:
 	python3 repology-schemacheck.py -s repos $$(find repos.d -name "*.yaml")
