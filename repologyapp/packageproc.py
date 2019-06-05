@@ -16,8 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
+from dataclasses import dataclass
 from functools import cmp_to_key
-from typing import Any, Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List, Tuple
 
 from repology.package import Package, VersionClass
 
@@ -50,8 +51,15 @@ def packageset_sort_by_name_version(packages: Iterable[Package]) -> List[Package
     return sorted(packages, key=cmp_to_key(compare))
 
 
-def packageset_aggregate_by_version(packages: Iterable[Package], classmap: Dict[int, int] = {}) -> List[Dict[str, Any]]:
-    def create_version_aggregation(packages: Iterable[Package]) -> Iterable[Dict[str, Any]]:
+@dataclass
+class VersionAggregation:
+    version: str
+    versionclass: int
+    numfamilies: int
+
+
+def packageset_aggregate_by_version(packages: Iterable[Package], classmap: Dict[int, int] = {}) -> List[VersionAggregation]:
+    def create_version_aggregation(packages: Iterable[Package]) -> Iterable[VersionAggregation]:
         aggregated: Dict[Tuple[str, int], List[Package]] = defaultdict(list)
 
         for package in packages:
@@ -60,16 +68,12 @@ def packageset_aggregate_by_version(packages: Iterable[Package], classmap: Dict[
             ].append(package)
 
         for (version, versionclass), packages in sorted(aggregated.items()):
-            yield {  # XXX: use dataclass
-                'version': version,
-                'versionclass': versionclass,
-                'numfamilies': len(set([package.family for package in packages]))
-            }
+            yield VersionAggregation(version=version, versionclass=versionclass, numfamilies=len(set([package.family for package in packages])))
 
-    def post_sort_same_version(versions: Iterable[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        return sorted(versions, key=lambda v: (v['numfamilies'], v['version'], v['versionclass']), reverse=True)
+    def post_sort_same_version(versions: Iterable[VersionAggregation]) -> List[VersionAggregation]:
+        return sorted(versions, key=lambda v: (v.numfamilies, v.version, v.versionclass), reverse=True)
 
-    def aggregate_by_version(packages: Iterable[Package]) -> Iterable[List[Dict[str, Any]]]:
+    def aggregate_by_version(packages: Iterable[Package]) -> Iterable[List[VersionAggregation]]:
         current: List[Package] = []
         for package in packageset_sort_by_version(packages):
             if not current or current[0].version_compare(package) == 0:
