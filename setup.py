@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from distutils.core import setup
+from setuptools import setup
 
 
 setup(
@@ -33,5 +33,19 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: C',
+    ],
+    install_requires=[
+        'Jinja2',
+        'PyYAML',
+        'flask',
+        'jsonslicer',
+        'libversion',
+        'lxml',
+        'pillow',
+        'psycopg2',
+        'pyparsing',
+        'pytz',
+        'requests',
+        'rubymarshal',
     ]
 )
