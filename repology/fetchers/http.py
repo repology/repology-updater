@@ -22,7 +22,7 @@ import lzma
 import tempfile
 import time
 from json import dumps
-from typing import Any, Callable, Dict, IO, Optional, Union
+from typing import Any, AnyStr, Callable, Dict, IO, Optional, Union
 
 import requests
 
@@ -84,7 +84,7 @@ class NotModifiedException(requests.RequestException):
     pass
 
 
-def save_http_stream(url: str, outfile: IO, compression: Optional[str] = None, **kwargs: Any) -> requests.Response:
+def save_http_stream(url: str, outfile: IO[AnyStr], compression: Optional[str] = None, **kwargs: Any) -> requests.Response:
     # TODO: we should really decompress stream on the fly or
     # (better) store it as is and decompress when reading.
 
@@ -103,7 +103,7 @@ def save_http_stream(url: str, outfile: IO, compression: Optional[str] = None, *
         return response
 
     # choose decompressor
-    decompressor_open: Callable[..., IO]
+    decompressor_open: Callable[..., IO[AnyStr]]
     if compression == 'gz':
         decompressor_open = gzip.open
     elif compression == 'xz':

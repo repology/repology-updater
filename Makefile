@@ -60,13 +60,12 @@ flake8-all:
 
 mypy:
 	${MYPY} ${MYPY_WEAK_ARGS} *.py repology repologyapp
-	${MYPY} ${MYPY_WEAK_ARGS} repology/fetchers/fetchers
+	${MYPY} ${MYPY_STRICT_ARGS} repology/fetchers/fetchers
 	${MYPY} ${MYPY_WEAK_ARGS} repology/parsers/parsers
 	${MYPY} ${MYPY_WEAK_ARGS} repologyapp/views
 
 mypy-all:
 	-${MYPY} ${MYPY_STRICT_ARGS} repology-update.py repology-app.py
-	-${MYPY} ${MYPY_STRICT_ARGS} repology/fetchers/fetchers
 	-${MYPY} ${MYPY_STRICT_ARGS} repology/parsers/parsers
 	-${MYPY} ${MYPY_STRICT_ARGS} repologyapp/views
 

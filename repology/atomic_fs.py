@@ -17,7 +17,7 @@
 
 import os
 import shutil
-from typing import Any, IO
+from typing import Any, Dict, IO, Tuple
 
 
 __all__ = ['AtomicDir', 'AtomicFile']
@@ -75,23 +75,27 @@ class AtomicDir(_AtomicFSObject):
 
 
 class AtomicFile(_AtomicFSObject):
+    _args: Tuple[Any, ...]
+    _kwargs: Dict[str, Any]
+    _file: IO[Any]
+
     def __init__(self, path: str, *args: Any, **kwargs: Any) -> None:
         super(AtomicFile, self).__init__(path)
-        self.args = args
-        self.kwargs = kwargs
+        self._args = args
+        self._kwargs = kwargs
 
     def __enter__(self) -> 'AtomicFile':
         self._cleanup()
-        self.file = open(self._get_new_path(), *self.args, **self.kwargs)
+        self._file = open(self._get_new_path(), *self._args, **self._kwargs)
         return self
 
     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> None:
-        self.file.close()
+        self._file.close()
 
         if not exc_type and not self.canceled:
             self._replace()
 
         self._cleanup()
 
-    def get_file(self) -> IO:
-        return self.file
+    def get_file(self) -> IO[Any]:
+        return self._file
