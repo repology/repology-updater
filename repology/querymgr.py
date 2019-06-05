@@ -286,6 +286,6 @@ class QueryManager:
         self._queries[query.name] = do_query
         self._queries['explain_' + query.name] = do_explain_query
 
-    def inject_queries(self, target, db):
+    def inject_queries(self, target: Any, db: Any) -> None:
         for name, function in self._queries.items():
             setattr(target, name, functools.partial(function, db))

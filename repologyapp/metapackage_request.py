@@ -15,8 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+from typing import Optional, Tuple
 
-def split_range(s):
+
+def split_range(s: str) -> Tuple[Optional[int], ...]:
     comps = s.split('-', 1)
     if len(comps) == 1:
         comps.append(comps[0])
@@ -24,7 +26,33 @@ def split_range(s):
 
 
 class MetapackageRequest:
-    def __init__(self):
+    pivot: Optional[str]
+    reverse: bool
+
+    search: Optional[str]
+
+    maintainer: Optional[str]
+
+    min_repos: Optional[int]
+    max_repos: Optional[int]
+    min_families: Optional[int]
+    max_families: Optional[int]
+    min_repos_newest: Optional[int]
+    max_repos_newest: Optional[int]
+    min_families_newest: Optional[int]
+    max_families_newest: Optional[int]
+
+    inrepo: Optional[str]
+    notinrepo: Optional[str]
+
+    category: Optional[str]
+
+    newest: bool
+    outdated: bool
+    problematic: bool
+    has_related: bool
+
+    def __init__(self) -> None:
         # effname filtering
         self.pivot = None
         self.reverse = False
@@ -57,7 +85,7 @@ class MetapackageRequest:
         self.problematic = False
         self.has_related = False
 
-    def Bound(self, bound):
+    def Bound(self, bound: Optional[str]) -> None:
         if not bound:
             pass
         elif bound.startswith('..'):
@@ -65,65 +93,65 @@ class MetapackageRequest:
         else:
             self.NameFrom(bound)
 
-    def NameFrom(self, name):
+    def NameFrom(self, name: Optional[str]) -> None:
         if self.pivot:
             raise RuntimeError('duplicate effname condition')
         if name is not None:
             self.pivot = name
             self.reverse = False
 
-    def NameTo(self, name):
+    def NameTo(self, name: Optional[str]) -> None:
         if self.pivot:
             raise RuntimeError('duplicate effname condition')
         if name is not None:
             self.pivot = name
             self.reverse = True
 
-    def NameSubstring(self, substring):
+    def NameSubstring(self, substring: str) -> None:
         if self.search:
             raise RuntimeError('duplicate effname substring condition')
         self.search = substring
 
-    def Maintainer(self, maintainer):
+    def Maintainer(self, maintainer: str) -> None:
         if self.maintainer:
             raise RuntimeError('duplicate maintainer condition')
         self.maintainer = maintainer
 
-    def InRepo(self, repo):
+    def InRepo(self, repo: str) -> None:
         if self.inrepo:
             raise RuntimeError('duplicate repository condition')
         self.inrepo = repo
 
-    def NotInRepo(self, repo):
+    def NotInRepo(self, repo: str) -> None:
         if self.notinrepo:
             raise RuntimeError('duplicate not-in-repository condition')
         self.notinrepo = repo
 
-    def Category(self, category):
+    def Category(self, category: str) -> None:
         if self.category:
             raise RuntimeError('duplicate category condition')
         self.category = category
 
-    def Repos(self, rng):
+    def Repos(self, rng: str) -> None:
         self.min_repos, self.max_repos = split_range(rng)
 
-    def Families(self, rng):
+    def Families(self, rng: str) -> None:
         self.min_families, self.max_families = split_range(rng)
 
-    def ReposNewest(self, rng):
+    def ReposNewest(self, rng: str) -> None:
         self.min_repos_newest, self.max_repos_newest = split_range(rng)
 
-    def FamiliesNewest(self, rng):
+    def FamiliesNewest(self, rng: str) -> None:
         self.min_families_newest, self.max_families_newest = split_range(rng)
 
-    def Newest(self):
+    def Newest(self) -> None:
         self.newest = True
 
-    def Outdated(self):
+    def Outdated(self) -> None:
         self.outdated = True
 
-    def Problematic(self):
+    def Problematic(self) -> None:
         self.problematic = True
 
-    def HasRelated(self):
+    def HasRelated(self) -> None:
         self.has_related = True
