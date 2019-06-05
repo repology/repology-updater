@@ -130,7 +130,7 @@
   desc: Debian Unstable
   family: debuntu
   color: 'c70036'
-  minpackages: 32000
+  minpackages: 30000
   sources:
     - name: [ main, contrib, non-free ]
       fetcher: FileFetcher
