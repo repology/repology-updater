@@ -21,6 +21,7 @@ import flask
 
 from repologyapp.config import config
 from repologyapp.db import get_db
+from repologyapp.metapackage_request import MetapackageRequest
 from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_range, packages_to_summary_items
 from repologyapp.view_registry import ViewRegistrar
 
@@ -38,7 +39,7 @@ def projects(bound: Optional[str] = None) -> Any:
     request.Bound(bound)
 
     # get packages
-    def get_packages(request) -> Tuple[Dict[str, Dict[str, Any]], List[Package]]:
+    def get_packages(request: MetapackageRequest) -> Tuple[Dict[str, Dict[str, Any]], List[Package]]:
         metapackages = get_db().query_metapackages(
             **request.__dict__,
             limit=config['METAPACKAGES_PER_PAGE'],
