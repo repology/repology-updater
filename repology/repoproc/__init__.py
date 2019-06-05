@@ -206,10 +206,14 @@ class RepositoryProcessor:
     def iter_parsed(self, reponames: Optional[RepositoryNameList] = None, logger: Logger = NoopLogger()) -> Iterator[List[Package]]:
         sources: List[str] = []
         for repository in self.repomgr.get_repositories(reponames):
-            sources.extend(self._get_parsed_chunk_paths(repository))
+            repo_sources = self._get_parsed_chunk_paths(repository)
 
-        if not sources:
-            logger.log('parsed packages for repository {} are missing, treating repository as empty'.format(repository['desc']), severity=Logger.ERROR)
-            return
+            if not repo_sources:
+                logger.log('parsed packages for repository {} are missing, treating repository as empty'.format(repository['desc']), severity=Logger.WARNING)
 
-        yield from map(PackagesetDeduplicate, heap_deserialize(sources))
+            sources.extend(repo_sources)
+
+        if sources:
+            yield from map(PackagesetDeduplicate, heap_deserialize(sources))
+        else:
+            logger.log('no parsed packages found', severity=Logger.ERROR)
