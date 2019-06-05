@@ -17,7 +17,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-from typing import Generator
+from typing import Iterable
 
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -28,7 +28,7 @@ from repology.transformer import PackageTransformer
 
 
 class AoscPkgsParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_left(':')
 
         with open(path, 'r', encoding='utf-8') as jsonfile:

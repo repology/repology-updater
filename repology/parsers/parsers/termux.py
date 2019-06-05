@@ -17,7 +17,7 @@
 
 import json
 import re
-from typing import Generator
+from typing import Iterable
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -27,7 +27,7 @@ from repology.transformer import PackageTransformer
 
 
 class TermuxJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_left_greedy(':')
 
         with open(path, 'r', encoding='utf-8') as jsonfile:

@@ -17,7 +17,7 @@
 
 import re
 import xml.etree.ElementTree
-from typing import Generator
+from typing import Iterable
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -25,7 +25,7 @@ from repology.transformer import PackageTransformer
 
 
 class LibreGameWikiParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         root = xml.etree.ElementTree.parse(path)
 
         content = root.find('.//div[@id="mw-content-text"]')

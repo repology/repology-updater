@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Dict, Generator, List
+from typing import Dict, Iterable, List
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -79,7 +79,7 @@ def _parse_descfile(path: str, logger: Logger) -> Dict[str, List[str]]:
 
 
 class T2DescParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for filename in walk_tree(path, suffix='.desc'):
             rel_filename = os.path.relpath(filename, path)
             with factory.begin(rel_filename) as pkg:

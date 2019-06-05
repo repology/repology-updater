@@ -18,7 +18,7 @@
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
-from typing import Any, Callable, Generator, Iterable, Optional
+from typing import Any, Callable, Iterable, Optional
 
 from repology.logger import Logger
 from repology.package import Package
@@ -50,7 +50,7 @@ class PackageMakerBase(Logger):
         self._logger._log(self._get_ident() + ': ' + message, severity, indent, prefix)
 
     @staticmethod
-    def _flatten_args(args: Iterable[Any]) -> Generator[Any, None, None]:
+    def _flatten_args(args: Iterable[Any]) -> Iterable[Any]:
         for arg in args:
             if arg is None or arg == '':
                 pass  # skip

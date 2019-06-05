@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Generator
+from typing import Iterable
 
 import lxml.html
 
@@ -34,7 +34,7 @@ def normalize_version(version):
 
 
 class GuixParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for filename in os.listdir(path):
             if not filename.endswith('.html'):
                 continue

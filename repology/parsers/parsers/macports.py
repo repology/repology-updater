@@ -17,7 +17,7 @@
 
 import os
 import subprocess
-from typing import Generator
+from typing import Iterable
 
 from jsonslicer import JsonSlicer
 
@@ -32,7 +32,7 @@ class MacPortsParser(Parser):
     def __init__(self):
         self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right('+')
 
         with subprocess.Popen(

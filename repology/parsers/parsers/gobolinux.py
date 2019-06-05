@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Generator
+from typing import Iterable
 
 from libversion import version_compare
 
@@ -38,7 +38,7 @@ def _expand_mirrors(url):
 
 
 class GoboLinuxGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         trunk_path = os.path.join(path, 'trunk')
         for package_name in os.listdir(trunk_path):
             pkg = factory.begin()

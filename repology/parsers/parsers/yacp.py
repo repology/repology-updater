@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Generator, Tuple
+from typing import Iterable, Tuple
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -26,7 +26,7 @@ from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
 
 
-def _iter_cygports(path: str) -> Generator[Tuple[str, str], None, None]:
+def _iter_cygports(path: str) -> Iterable[Tuple[str, str]]:
     for package in os.listdir(path):
         package_path = os.path.join(path, package)
         if not os.path.isdir(package_path):
@@ -40,7 +40,7 @@ def _iter_cygports(path: str) -> Generator[Tuple[str, str], None, None]:
 
 
 class YACPGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right('+')
 
         for cygport_path, cygport_name in _iter_cygports(path):

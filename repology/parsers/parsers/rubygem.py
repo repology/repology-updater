@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Generator, Union
+from typing import Iterable, Union
 
 import rubymarshal.reader
 
@@ -33,7 +33,7 @@ def _force_decode(var: Union[str, bytes]) -> str:
 
 
 class RubyGemParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         with open(path, 'rb') as fd:
             for gem in rubymarshal.reader.load(fd):
                 pkg = factory.begin()

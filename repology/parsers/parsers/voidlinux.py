@@ -18,7 +18,7 @@
 
 import os
 import plistlib
-from typing import Dict, Generator
+from typing import Dict, Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -29,7 +29,7 @@ from repology.transformer import PackageTransformer
 
 
 class VoidLinuxPlistParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('_')
 
         with open(os.path.join(path, 'index.plist'), 'rb') as plistfile:

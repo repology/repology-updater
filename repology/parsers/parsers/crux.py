@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Generator
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -26,7 +26,7 @@ from repology.transformer import PackageTransformer
 
 
 class CRUXParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgdir in os.listdir(path):
             pkgpath = os.path.join(path, pkgdir, 'Pkgfile')
             if not os.path.exists(pkgpath):

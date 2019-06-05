@@ -17,7 +17,7 @@
 
 from collections import defaultdict
 from functools import cmp_to_key
-from typing import Callable, Dict, Generator, Iterable, List, Optional, Sequence, Tuple
+from typing import Callable, Dict, Iterable, List, Optional, Sequence, Tuple
 
 from repology.package import Package, PackageFlags, VersionClass
 
@@ -72,7 +72,7 @@ def packageset_may_be_unignored(packages: Sequence[Package]) -> bool:
 
 def FillPackagesetVersions(packages: Sequence[Package]) -> None:
     # helpers
-    def AggregateBySameVersion(packages: Iterable[Package]) -> Generator[List[Package], None, None]:
+    def AggregateBySameVersion(packages: Iterable[Package]) -> Iterable[List[Package]]:
         current: List[Package] = []
 
         for package in packages:

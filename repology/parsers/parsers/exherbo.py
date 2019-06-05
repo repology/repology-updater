@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Generator, Tuple
+from typing import Iterable, Tuple
 
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -30,7 +30,7 @@ def _normalize_version(version: str) -> str:
     return re.sub('-r[0-9]+$', '', version)
 
 
-def _iter_exheres(path: str) -> Generator[Tuple[str, str, str], None, None]:
+def _iter_exheres(path: str) -> Iterable[Tuple[str, str, str]]:
     for category in os.listdir(path):
         category_path = os.path.join(path, category)
         if not os.path.isdir(category_path):
@@ -63,7 +63,7 @@ def _get_repo_maintainers(path):
 
 
 class ExherboGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         maintainers = _get_repo_maintainers(path)
 
         for category, package, exheres in _iter_exheres(os.path.join(path, 'packages')):

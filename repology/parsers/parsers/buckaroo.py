@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Generator
+from typing import Iterable
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -26,7 +26,7 @@ from repology.transformer import PackageTransformer
 
 
 class BuckarooGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for filename in walk_tree(path, suffix='.json'):
             data = json.load(open(filename, encoding='utf-8', errors='ignore'))
 

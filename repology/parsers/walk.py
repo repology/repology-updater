@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Callable, Generator, Optional
+from typing import Callable, Iterable, Optional
 
 
 __all__ = ['walk_tree']
@@ -25,7 +25,7 @@ __all__ = ['walk_tree']
 WalkTreeFilter = Callable[[str], bool]
 
 
-def walk_tree(path: str, filt: Optional[WalkTreeFilter] = None, suffix: Optional[str] = None, name: Optional[str] = None) -> Generator[str, None, None]:
+def walk_tree(path: str, filt: Optional[WalkTreeFilter] = None, suffix: Optional[str] = None, name: Optional[str] = None) -> Iterable[str]:
     if suffix:
         def suffix_filter(filename: str) -> bool:
             # mypy unable to deduce types of captured values

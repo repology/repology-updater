@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Generator
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -26,7 +26,7 @@ from repology.transformer import PackageTransformer
 
 
 class FreeBSDIndexParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right(',').strip_right('_')
 
         with open(path, encoding='utf-8') as indexfile:

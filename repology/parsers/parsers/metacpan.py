@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Dict, Generator
+from typing import Dict, Iterable
 
 from libversion import version_compare
 
@@ -99,7 +99,7 @@ def _parse_devel_packages(packages, latest_versions, factory):
 
 
 class MetacpanAPIParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         latest_versions: Dict[str, str] = {}
 
         yield from _parse_latest_packages(_iter_packages(path), latest_versions, factory)

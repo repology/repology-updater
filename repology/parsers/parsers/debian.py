@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Dict, Generator, List, Union
+from typing import Dict, Iterable, List, Union
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -58,7 +58,7 @@ class DebianSourcesParser(Parser):
     def __init__(self, project_name_from_source: bool = False) -> None:
         self.project_name_from_source = project_name_from_source
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         with open(path, encoding='utf-8', errors='ignore') as file:
             current_data: Dict[str, Union[str, List[str]]] = {}
             last_key = None

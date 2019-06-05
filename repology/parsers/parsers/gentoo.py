@@ -17,7 +17,7 @@
 
 import os
 import xml.etree.ElementTree
-from typing import Generator
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -145,7 +145,7 @@ def _parse_md5cache_metadata_xml(path, category, ebuild):
 
 
 class GentooGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('-')
 
         for category, package in _iter_packages(path):

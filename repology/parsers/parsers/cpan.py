@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Generator
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -26,7 +26,7 @@ from repology.transformer import PackageTransformer
 
 
 class CPANPackagesParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         # Since data we get from CPAN is somewhat lacking, we need
         # somewhat complex parsing. Here's the example of what we get
         # in 02packages.details.txt package index downloaded from CPAN:

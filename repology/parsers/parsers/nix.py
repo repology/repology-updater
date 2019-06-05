@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, Dict, Generator, Iterable, List, Union
+from typing import Any, Dict, Iterable, List, Union
 
 from jsonslicer import JsonSlicer
 
@@ -28,7 +28,7 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def extract_nix_maintainers(items: Iterable[Union[str, Dict[str, str]]]) -> Generator[str, None, None]:
+def extract_nix_maintainers(items: Iterable[Union[str, Dict[str, str]]]) -> Iterable[str]:
     for item in items:
         # old format, currently used in stable; parse email out of 'name <email>' string
         # items without closing '>' are quite common, just skip them
@@ -60,7 +60,7 @@ def extract_nix_licenses(whatever: Any) -> List[str]:
 
 
 class NixJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         with open(path, 'rb') as jsonfile:
             for key, packagedata in JsonSlicer(jsonfile, ('packages', None), encoding='utf-8', path_mode='map_keys'):
                 with factory.begin(key) as pkg:

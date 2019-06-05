@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Generator
+from typing import Iterable
 
 from libversion import version_compare
 
@@ -73,7 +73,7 @@ def _parse_cabal_file(path):
 
 
 class HackageParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for moduledir in os.listdir(path):
             pkg = factory.begin()
 

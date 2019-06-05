@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import xml.etree.ElementTree
-from typing import Generator
+from typing import Iterable
 
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -25,7 +25,7 @@ from repology.transformer import PackageTransformer
 
 
 class OpenPkgRdfParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         root = xml.etree.ElementTree.parse(path)
 
         repository = root.find('{http://www.openpkg.org/xml-rdf-index/0.9}Repository')

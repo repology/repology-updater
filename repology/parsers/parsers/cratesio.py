@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Generator
+from typing import Iterable
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -25,7 +25,7 @@ from repology.transformer import PackageTransformer
 
 
 class CratesIOParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pagefilename in os.listdir(path):
             if not pagefilename.endswith('.json'):
                 continue

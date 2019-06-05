@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import Any, Dict, Generator, List
+from typing import Any, Dict, Iterable, List
 
 from pyparsing import OneOrMore, QuotedString, Regex, Suppress, Word, ZeroOrMore, alphas, printables
 
@@ -68,7 +68,7 @@ def _parse_data(data: str) -> List[_PackageData]:
 
 
 class ArchiveContentsParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         with open(path, encoding='utf-8', errors='ignore') as contents:
             data = contents.read()
 

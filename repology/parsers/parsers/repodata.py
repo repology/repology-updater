@@ -17,7 +17,7 @@
 
 import re
 import xml.etree.ElementTree
-from typing import Dict, Generator
+from typing import Dict, Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -29,7 +29,7 @@ from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
 
 
-def _iter_package_entries(path: str) -> Generator[xml.etree.ElementTree.Element, None, None]:
+def _iter_package_entries(path: str) -> Iterable[xml.etree.ElementTree.Element]:
     """Return all <package> elements from XML.
 
     The purpose is to clear the element after processing, so
@@ -45,7 +45,7 @@ class RepodataParser(Parser):
     def __init__(self, allowed_archs=None):
         self.allowed_archs = allowed_archs
 
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
         skipped_archs: Dict[str, int] = {}

@@ -17,7 +17,7 @@
 
 import os
 import xml.etree.ElementTree
-from typing import Generator
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -27,7 +27,7 @@ from repology.transformer import PackageTransformer
 
 
 class PisiParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for filename in walk_tree(path, suffix='pspec.xml'):
             relpath = os.path.relpath(filename, path)
 

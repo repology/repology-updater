@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Generator
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -26,7 +26,7 @@ from repology.transformer import PackageTransformer
 
 
 class ScoopGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for root, dirs, files in os.walk(path):
             if os.path.basename(root).startswith('.'):
                 continue  # e.g. .vscode

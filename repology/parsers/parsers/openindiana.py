@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import shlex
-from typing import Generator
+from typing import Iterable
 
 from jsonslicer import JsonSlicer
 
@@ -39,7 +39,7 @@ def _iter_packages(path):
 
 
 class OpenIndianaSummaryJsonParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for fmri, pkgdata in _iter_packages(path):
             pkg = factory.begin('{} {}'.format(fmri, pkgdata['version']))
 

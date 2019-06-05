@@ -15,14 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Generator, Tuple
+from typing import Iterable, Tuple
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iterate_packages(path: str) -> Generator[Tuple[str, str], None, None]:
+def _iterate_packages(path: str) -> Iterable[Tuple[str, str]]:
     with open(path, encoding='utf-8', errors='ignore') as packagesfile:
         current_name = None
 
@@ -39,7 +39,7 @@ def _iterate_packages(path: str) -> Generator[Tuple[str, str], None, None]:
 
 
 class SlackwarePackagesParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgname, pkglocation in _iterate_packages(path):
             pkg = factory.begin(pkgname)
 

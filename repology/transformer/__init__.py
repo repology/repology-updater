@@ -19,7 +19,7 @@ import hashlib
 import os
 import sys
 from copy import deepcopy
-from typing import Any, Dict, Generator, List, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 import yaml
 
@@ -156,7 +156,7 @@ class PackageTransformer:
 
         flush_current_lowfreq_blocks()
 
-    def _iter_package_rules(self, package: Package) -> Generator[Rule, None, None]:
+    def _iter_package_rules(self, package: Package) -> Iterable[Rule]:
         for ruleblock in self._optruleblocks:
             yield from ruleblock.iter_rules(package)
 

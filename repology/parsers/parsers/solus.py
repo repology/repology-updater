@@ -16,14 +16,14 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import xml.etree.ElementTree
-from typing import Generator
+from typing import Iterable
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iter_package_entries(path: str) -> Generator[xml.etree.ElementTree.Element, None, None]:
+def _iter_package_entries(path: str) -> Iterable[xml.etree.ElementTree.Element]:
     """Return all <Package> elements from XML.
 
     The purpose is to clear the element after processing, so
@@ -35,12 +35,12 @@ def _iter_package_entries(path: str) -> Generator[xml.etree.ElementTree.Element,
             elem.clear()
 
 
-def _expand_multiline_licenses(text: str) -> Generator[str, None, None]:
+def _expand_multiline_licenses(text: str) -> Iterable[str]:
     return (license.lstrip('- ') for license in text.split('\n'))
 
 
 class SolusIndexParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for entry in _iter_package_entries(path):
             with factory.begin() as pkg:
                 namenode = entry.find('./Name')

@@ -19,7 +19,7 @@ import importlib
 import importlib.util
 import inspect
 import os
-from typing import Any, Dict, Generator, Optional, Type
+from typing import Any, Dict, Iterable, Optional, Type
 
 
 __all__ = [
@@ -29,7 +29,7 @@ __all__ = [
 
 class ClassFactory:
     @staticmethod
-    def _enumerate_all_submodules(module: str) -> Generator[str, None, None]:
+    def _enumerate_all_submodules(module: str) -> Iterable[str]:
         spec = importlib.util.find_spec(module)
         if spec is None:
             raise RuntimeError('cannot find module {}'.format(module))

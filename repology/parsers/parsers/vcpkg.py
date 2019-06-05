@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Generator
+from typing import Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -36,7 +36,7 @@ def normalize_version(version: str) -> str:
 
 
 class VcpkgGitParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgdir in os.listdir(os.path.join(path, 'ports')):
             controlpath = os.path.join(path, 'ports', pkgdir, 'CONTROL')
             if not os.path.exists(controlpath):

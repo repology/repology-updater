@@ -17,7 +17,7 @@
 
 import re
 import xml.etree.ElementTree
-from typing import Generator
+from typing import Iterable
 
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -27,7 +27,7 @@ from repology.transformer import PackageTransformer
 
 
 class RosaInfoXmlParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Generator[PackageMaker, None, None]:
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         root = xml.etree.ElementTree.parse(path)
 
         for info in root.findall('./info'):
