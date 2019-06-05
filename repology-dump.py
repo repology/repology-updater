@@ -78,7 +78,7 @@ def main() -> int:
     repoproc = RepositoryProcessor(repomgr, options.statedir, options.parseddir)
 
     logger.log('dumping...')
-    for packageset in repoproc.iter_parsed(reponames=options.reponames):
+    for packageset in repoproc.iter_parsed(reponames=options.reponames, logger=logger):
         FillPackagesetVersions(packageset)
 
         if not options.all and packageset_is_shadow_only(packageset):
