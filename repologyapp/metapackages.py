@@ -155,7 +155,7 @@ def packages_to_summary_items(packages: Iterable[Package], repo: Optional[str] =
 
     sumtypes = ('explicit', 'newest', 'outdated', 'ignored')
 
-    def summary_factory():
+    def summary_factory() -> Dict[str, Dict[str, Any]]:
         return {
             sumtype: defaultdict(set)
             for sumtype in sumtypes

@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,9 +16,10 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+from typing import Any, Collection, Dict
 
 
-def smear_timestamps(entries):
+def smear_timestamps(entries: Collection[Dict[str, Any]]) -> Collection[Dict[str, Any]]:
     prev_ts = None
 
     for entry in entries:

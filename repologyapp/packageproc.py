@@ -24,7 +24,7 @@ from repology.package import Package, VersionClass
 
 
 def packageset_sort_by_version(packages: Iterable[Package]) -> List[Package]:
-    def compare(p1, p2):
+    def compare(p1: Package, p2: Package) -> int:
         return p2.version_compare(p1)
 
     return sorted(packages, key=cmp_to_key(compare))
@@ -41,7 +41,7 @@ def packageset_to_best_by_repo(packages: Iterable[Package]) -> Dict[str, Package
 
 
 def packageset_sort_by_name_version(packages: Iterable[Package]) -> List[Package]:
-    def compare(p1, p2):
+    def compare(p1: Package, p2: Package) -> int:
         if p1.name < p2.name:
             return -1
         if p1.name > p2.name:

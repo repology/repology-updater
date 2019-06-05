@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -18,39 +18,45 @@
 
 from copy import copy
 from functools import total_ordering
+from typing import Any
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
-from repology.package import PackageFlags
+from repology.package import Package, PackageFlags
 
 
 @total_ordering
 class UserVisibleVersionInfo:
     __slots__ = ['version', 'versionclass', 'metaorder', 'versionflags', 'spread']
 
-    def __init__(self, package, spread=1):
+    version: str
+    versionclass: int
+    metaorder: int
+    spread: int
+
+    def __init__(self, package: Package, spread: int = 1) -> None:
         self.version = package.version
         self.versionclass = package.versionclass
 
-        self.metaorder = PackageFlags.GetMetaorder(package.flags)
+        self.metaorder = PackageFlags.get_metaorder(package.flags)
         self.versionflags = (((package.flags & PackageFlags.p_is_patch) and P_IS_PATCH) |
                              ((package.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH))
 
         self.spread = spread
 
-    def as_with_spread(self, spread):
+    def as_with_spread(self, spread: int) -> 'UserVisibleVersionInfo':
         result = copy(self)
         result.spread = spread
         return result
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         return (self.metaorder == other.metaorder and
                 self.versionclass == other.versionclass and
                 self.version == other.version and
                 version_compare(self.version, other.version, self.versionflags, other.versionflags) == 0 and
                 self.spread == other.spread)
 
-    def __lt__(self, other):
+    def __lt__(self, other: 'UserVisibleVersionInfo') -> bool:
         if self.metaorder < other.metaorder:
             return True
         if self.metaorder > other.metaorder:
@@ -80,5 +86,5 @@ class UserVisibleVersionInfo:
 
         return self.version < other.version
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.metaorder, self.versionclass, self.version, self.spread))
