@@ -59,11 +59,11 @@ class CygwinParser(Parser):
                     # '0', the rest indicates the pre-release version
                     # (as per Fedora/repodata.py)
                     if release.startswith('0') and len(release) > 1:
-                        verpkg.set_flags(PackageFlags.devel)
                         match = re.fullmatch(r'.*((?:alpha|beta|rc)(?:\.?[0-9]+)?|(?<![a-z])[ab]\.?[0-9]+)', release)
                         if match:
                             # known pre-release schema
                             version += '-' + match.group(1)
+                            verpkg.set_flags(PackageFlags.devel)
                         else:
                             # unknown pre-release schema
                             verpkg.set_flags(PackageFlags.ignore)
