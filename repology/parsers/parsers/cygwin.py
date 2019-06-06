@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 from typing import Iterable
 
 from jsonslicer import JsonSlicer
@@ -48,11 +49,27 @@ class CygwinParser(Parser):
                         continue
 
                     verpkg = pkg.clone()
-
-                    version = packagedata['versions'][maturity][-1]
-                    verpkg.set_version(version.rsplit('-', 1)[0])
-                    verpkg.set_rawversion(version)
                     verpkg.set_flags(PackageFlags.devel, maturity == 'test')
+
+                    raw_version = packagedata['versions'][maturity][-1]
+                    (version, release) = raw_version.rsplit('-', 1)
+
+                    # If release is just '0', that means someone
+                    # forgot it counts from 1, but if it starts with
+                    # '0', the rest indicates the pre-release version
+                    # (as per Fedora/repodata.py)
+                    if release.startswith('0') and len(release) > 1:
+                        verpkg.set_flags(PackageFlags.devel)
+                        match = re.fullmatch(r'.*((?:alpha|beta|rc)(?:\.?[0-9]+)?|(?<![a-z])[ab]\.?[0-9]+)', release)
+                        if match:
+                            # known pre-release schema
+                            version += '-' + match.group(1)
+                        else:
+                            # unknown pre-release schema
+                            verpkg.set_flags(PackageFlags.ignore)
+
+                    verpkg.set_version(version)
+                    verpkg.set_rawversion(raw_version)
 
                     for subpackagedata in packagedata['subpackages']:
                         if '_obsolete' in subpackagedata['categories']:
