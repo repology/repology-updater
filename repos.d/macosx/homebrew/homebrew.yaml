@@ -29,7 +29,8 @@
 - name: homebrew_casks
   type: repository
   desc: Homebrew Casks
-  family: homebrew_casks
+  family: homebrew
+  ruleset: homebrew_casks
   color: 'fdb130'
   minpackages: 3000
   sources:
