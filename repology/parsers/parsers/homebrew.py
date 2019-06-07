@@ -36,3 +36,20 @@ class HomebrewJsonParser(Parser):
                 pkg.add_homepages(package['homepage'])
 
                 yield pkg
+
+
+class HomebrewCaskJsonParser(Parser):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+        with open(path, 'rb') as jsonfile:
+            for package in JsonSlicer(jsonfile, (None,)):
+                pkg = factory.begin()
+
+                # XXX: tries to normalize project name from human readable form; not suitable for production
+                pkg.set_name(package['name'][0].replace('.', '').replace(' ', '-'))
+
+                # XXX: comma-separated versions are encountered often, wtf are these, need to handle
+                pkg.set_version(package['version'])
+                pkg.add_homepages(package['homepage'])
+                pkg.add_downloads(package['url'])
+
+                yield pkg

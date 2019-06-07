@@ -25,3 +25,26 @@
     - desc: Formula code on GitHub
       url: 'https://github.com/Homebrew/homebrew-core/blob/master/Formula/{name}.rb'
   tags: [ all, production, brew ]
+
+- name: homebrew_casks
+  type: repository
+  desc: Homebrew Casks
+  family: homebrew_casks
+  color: 'fdb130'
+  minpackages: 3000
+  sources:
+    - name: cask.json
+      fetcher: FileFetcher
+      parser: HomebrewCaskJsonParser
+      url: https://formulae.brew.sh/api/cask.json
+  repolinks:
+    - desc: Homebrew home
+      url: https://brew.sh/
+    - desc: Homebrew Formulae (Casks)
+      url: https://formulae.brew.sh/cask/
+  #packagelinks:  # XXX: fixme after proper name is available
+  #  - desc: Cask page
+  #    url: 'https://formulae.brew.sh/cask/{name}'
+  #  - desc: Cask code on GitHub
+  #    url: 'https://github.com/Homebrew/homebrew-cask/blob/master/Casks/{name}.rb'
+  tags: [ all, brew ]  # not ready for production due to incompatible name and version patterns

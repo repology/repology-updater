@@ -57,6 +57,7 @@ families = [
     'hackage',
     'haikuports',
     'homebrew',
+    'homebrew_casks',
     'hpux',
     'kaos',
     'librecnc',
