@@ -15,24 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import xml.etree.ElementTree
 from typing import Iterable
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.xml import iter_xml_elements_at_level
 from repology.transformer import PackageTransformer
-
-
-def _iter_package_entries(path: str) -> Iterable[xml.etree.ElementTree.Element]:
-    """Return all <Package> elements from XML.
-
-    The purpose is to clear the element after processing, so
-    processed elements don't fill up the memory
-    """
-    for _, elem in xml.etree.ElementTree.iterparse(path):
-        if elem.tag == 'Package':
-            yield elem
-            elem.clear()
 
 
 def _expand_multiline_licenses(text: str) -> Iterable[str]:
@@ -41,14 +29,9 @@ def _expand_multiline_licenses(text: str) -> Iterable[str]:
 
 class SolusIndexParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        for entry in _iter_package_entries(path):
+        for entry in iter_xml_elements_at_level(path, 1, ['Package']):
             with factory.begin() as pkg:
-                namenode = entry.find('./Name')
-
-                if namenode is None:
-                    continue
-
-                pkg.set_name(namenode.text)
+                pkg.set_name(entry.findtext('Name'))
                 pkg.set_summary(entry.findtext('Summary'))
                 pkg.add_licenses((_expand_multiline_licenses(elt.text) for elt in entry.findall('License') if elt.text))
                 pkg.add_categories((elt.text for elt in entry.findall('PartOf')))
