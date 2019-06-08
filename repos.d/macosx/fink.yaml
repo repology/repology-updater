@@ -24,7 +24,7 @@
       url: 'http://pdb.finkproject.org/pdb/package.php/{name}'
     - desc: .info file
       url: 'https://github.com/fink/fink-distributions/blob/master/{infopath}'
-  tags: [ ]  # unusable, too complex parsing required
+  tags: [ all, fink ]  # unusable, too complex parsing required
 
 - name: fink_pdb
   type: repository
@@ -46,4 +46,4 @@
   packagelinks:
     - desc: Package information
       url: 'http://pdb.finkproject.org/pdb/package.php/{name}'
-  tags: [ ]  # unusable, polluted with suffixes
+  tags: [ all, fink ]  # unusable, polluted with suffixes
