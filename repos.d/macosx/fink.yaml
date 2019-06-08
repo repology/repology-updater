@@ -5,6 +5,7 @@
   type: repository
   desc: Fink
   family: fink
+  ruleset: [fink, macosx]
   color: 'fdc461'
   minpackages: 0
   sources:
@@ -29,6 +30,7 @@
   type: repository
   desc: Fink
   family: fink
+  ruleset: [fink, macosx]
   color: 'fdc461'
   minpackages: 0
   sources:

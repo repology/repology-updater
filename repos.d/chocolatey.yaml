@@ -5,6 +5,7 @@
   type: repository
   desc: Chocolatey
   family: chocolatey
+  ruleset: [chocolatey, windows]
   minpackages: 5000
   sources:
     - name: chocolatey
@@ -28,6 +29,7 @@
   type: repository
   desc: NuGet
   family: chocolatey
+  ruleset: [chocolatey, windows]
   minpackages: 1  # XXX: unknown
   sources:
     - name: nuget

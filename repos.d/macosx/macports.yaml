@@ -5,6 +5,7 @@
   type: repository
   desc: MacPorts
   family: macports
+  ruleset: [macports, macosx]
   color: '1f79e9'
   minpackages: 15000
   sources:

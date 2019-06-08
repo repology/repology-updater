@@ -5,6 +5,7 @@
   type: repository
   desc: ReactOS rapps
   family: reactos
+  ruleset: [reactos, windows]
   minpackages: 150
   sources:
     - name: rapps-db

@@ -5,6 +5,7 @@
   type: repository
   desc: Vcpkg
   family: vcpkg
+  ruleset: [vcpkg, windows]
   minpackages: 600
   sources:
     - name: vcpkg

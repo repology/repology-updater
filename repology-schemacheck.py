@@ -115,6 +115,7 @@ rulesets = families + [
     'gnuelpa',
     'homebrew_casks',
     'hyperbola',
+    'macosx',
     'maemo',
     'manjaro',
     'melpa',
@@ -129,6 +130,7 @@ rulesets = families + [
     'slitaz_next',
     'unitedrpms',
     'whonix',
+    'windows',
 ]
 
 schemas = {

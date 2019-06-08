@@ -5,6 +5,7 @@
   type: repository
   desc: Scoop
   family: scoop
+  ruleset: [scoop, windows]
   minpackages: 1300
   sources:
   # See https://github.com/lukesampson/scoop/blob/master/buckets.json

@@ -5,6 +5,7 @@
   type: repository
   desc: Cygwin
   family: cygwin
+  ruleset: [cygwin, windows]
   color: '00fb15'
   minpackages: 7000
   default_maintainer: orphaned@cygwin

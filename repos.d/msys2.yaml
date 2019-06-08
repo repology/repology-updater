@@ -5,7 +5,7 @@
   type: repository
   desc: MSYS2 mingw
   family: msys2
-  ruleset: [msys2, msys2_mingw]
+  ruleset: [msys2, msys2_mingw, windows]
   color: 'ef7f1a'
   minpackages: 900
   sources:
@@ -30,7 +30,7 @@
   type: repository
   desc: MSYS2 msys2
   family: msys2
-  ruleset: [msys2, msys2_msys2]
+  ruleset: [msys2, msys2_msys2, windows]
   color: 'ef7f1a'
   minpackages: 550
   sources:

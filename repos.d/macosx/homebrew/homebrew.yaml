@@ -5,6 +5,7 @@
   type: repository
   desc: Homebrew
   family: homebrew
+  ruleset: [homebrew, macosx]
   color: 'fdb130'
   minpackages: 4300
   sources:
@@ -30,7 +31,7 @@
   type: repository
   desc: Homebrew Casks
   family: homebrew
-  ruleset: homebrew_casks
+  ruleset: [homebrew_casks, macosx]
   color: 'fdb130'
   minpackages: 3000
   sources:

@@ -5,6 +5,7 @@
   type: repository
   desc: YACP
   family: yacp
+  ruleset: [yacp, windows]
   minpackages: 1850
   sources:
     - name: yacp
