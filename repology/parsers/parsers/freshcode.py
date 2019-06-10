@@ -17,12 +17,11 @@
 
 from typing import Dict, Iterable
 
-from jsonslicer import JsonSlicer
-
 from libversion import version_compare
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
@@ -32,10 +31,8 @@ class FreshcodeParser(Parser):
 
         # note that we actually parse database prepared by
         # fetcher, not the file we've downloaded
-        with open(path, 'rb') as jsonfile:
-            for entry in JsonSlicer(jsonfile, ('releases', None)):
-                pkg = factory.begin()
-
+        for entry in iter_json_list(path, ('releases', None)):
+            with factory.begin() as pkg:
                 pkg.set_name(entry['name'])
                 pkg.set_version(entry['version'])
 

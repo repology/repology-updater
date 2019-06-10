@@ -18,25 +18,22 @@
 import re
 from typing import Iterable
 
-from jsonslicer import JsonSlicer
-
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
 class CygwinParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, 'rb') as jsonfile:
-            for packagedata in JsonSlicer(jsonfile, ('packages', None)):
+        for packagedata in iter_json_list(path, ('packages', None)):
+            with factory.begin() as pkg:
                 # packages with names starting with an underscore are
                 # uninteresting as they contain cygwin-specific
                 # installation helper scripts
                 if packagedata['name'].startswith('_'):
                     continue
-
-                pkg = factory.begin()
 
                 pkg.set_basename(packagedata['name'])
                 pkg.set_summary(packagedata['summary'])

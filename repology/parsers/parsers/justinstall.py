@@ -17,31 +17,29 @@
 
 from typing import Iterable
 
-from jsonslicer import JsonSlicer
-
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_dict
 from repology.transformer import PackageTransformer
 
 
 class JustInstallJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, 'rb') as jsonfile:
-            for packagename, packagedata in JsonSlicer(jsonfile, ('packages', None), path_mode='map_keys'):
-                with factory.begin() as pkg:
-                    pkg.set_name(packagename)
-                    pkg.set_version(packagedata['version'])
+        for packagename, packagedata in iter_json_dict(path, ('packages', None)):
+            with factory.begin() as pkg:
+                pkg.set_name(packagename)
+                pkg.set_version(packagedata['version'])
 
-                    for arch in ['x86', 'x86_64']:
-                        if arch in packagedata['installer']:
-                            installer = packagedata['installer'][arch]
+                for arch in ['x86', 'x86_64']:
+                    if arch in packagedata['installer']:
+                        installer = packagedata['installer'][arch]
 
-                            # https://github.com/just-install/registry/blob/master/docs/registry.md#placeholders
-                            installer = installer.replace('{{.version}}', packagedata['version'])
+                        # https://github.com/just-install/registry/blob/master/docs/registry.md#placeholders
+                        installer = installer.replace('{{.version}}', packagedata['version'])
 
-                            if '{{.' in installer:
-                                raise RuntimeError('Unhandled replacement: {}'.format(installer))
+                        if '{{.' in installer:
+                            raise RuntimeError('Unhandled replacement: {}'.format(installer))
 
-                            pkg.add_downloads(installer)
+                        pkg.add_downloads(installer)
 
-                    yield pkg
+                yield pkg

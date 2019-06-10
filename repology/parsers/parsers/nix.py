@@ -18,12 +18,11 @@
 import re
 from typing import Any, Dict, Iterable, List, Union
 
-from jsonslicer import JsonSlicer
-
 from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_dict
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
@@ -61,95 +60,94 @@ def extract_nix_licenses(whatever: Any) -> List[str]:
 
 class NixJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, 'rb') as jsonfile:
-            for key, packagedata in JsonSlicer(jsonfile, ('packages', None), encoding='utf-8', path_mode='map_keys'):
-                with factory.begin(key) as pkg:
-                    meta = packagedata['meta']
+        for key, packagedata in iter_json_dict(path, ('packages', None), encoding='utf-8'):
+            with factory.begin(key) as pkg:
+                meta = packagedata['meta']
 
-                    # see #854; first, try new mode which relies on dedicated version field
-                    if 'version' in meta:
-                        if not packagedata['name'].endswith('-' + meta['version']):
-                            pkg.log('name "{}" does not end with version "{}"'.format(packagedata['name'], meta['version']), severity=Logger.ERROR)
-                        else:
-                            pkg.set_name(packagedata['name'][:-len(meta['version']) - 1])
-                            pkg.set_version(meta['version'])
+                # see #854; first, try new mode which relies on dedicated version field
+                if 'version' in meta:
+                    if not packagedata['name'].endswith('-' + meta['version']):
+                        pkg.log('name "{}" does not end with version "{}"'.format(packagedata['name'], meta['version']), severity=Logger.ERROR)
+                    else:
+                        pkg.set_name(packagedata['name'][:-len(meta['version']) - 1])
+                        pkg.set_version(meta['version'])
 
-                    # and fallback to old method which splits name-version pair
-                    if not pkg.version:
-                        # matches most of exceptions mentioned below
-                        if re.search('-[0-9]+[a-z]', packagedata['name']):
-                            pkg.log('possibly ambiguous package name "{}", consider adding explicit version'.format(packagedata['name']), severity=Logger.WARNING)
+                # and fallback to old method which splits name-version pair
+                if not pkg.version:
+                    # matches most of exceptions mentioned below
+                    if re.search('-[0-9]+[a-z]', packagedata['name']):
+                        pkg.log('possibly ambiguous package name "{}", consider adding explicit version'.format(packagedata['name']), severity=Logger.WARNING)
 
-                        # useless for now due to too many matches
-                        #if re.search('-[^a-zA-Z].*-[^a-zA-Z]', packagedata['name']) and not re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', packagedata['name']):
-                        #    pkg.log('possibly ambiguous package name/version pair: {}'.format(packagedata['name']), severity=Logger.WARNING)
+                    # useless for now due to too many matches
+                    #if re.search('-[^a-zA-Z].*-[^a-zA-Z]', packagedata['name']) and not re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', packagedata['name']):
+                    #    pkg.log('possibly ambiguous package name/version pair: {}'.format(packagedata['name']), severity=Logger.WARNING)
 
-                        # see how Nix parses 'derivative' names in
-                        # https://github.com/NixOS src/libexpr/names.cc, DrvName::DrvName
-                        # it just splits on dash followed by non-letter
-                        #
-                        # this doesn't work well on 100% cases, it's an upstream problem
-                        match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
-                        if not match:
-                            pkg.log('cannot extract version from "{}"'.format(packagedata['name']), severity=Logger.ERROR)
-                            continue
+                    # see how Nix parses 'derivative' names in
+                    # https://github.com/NixOS src/libexpr/names.cc, DrvName::DrvName
+                    # it just splits on dash followed by non-letter
+                    #
+                    # this doesn't work well on 100% cases, it's an upstream problem
+                    match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
+                    if not match:
+                        pkg.log('cannot extract version from "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                        continue
 
-                        if 'node-_at_webassemblyjs' in packagedata['name']:
-                            pkg.log('skipping garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
-                            continue
+                    if 'node-_at_webassemblyjs' in packagedata['name']:
+                        pkg.log('skipping garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                        continue
 
-                        pkg.set_name(match.group(1))
-                        pkg.set_version(match.group(2))
+                    pkg.set_name(match.group(1))
+                    pkg.set_version(match.group(2))
 
-                        # some exceptions
-                        for prefix in ('75dpi', '100dpi'):
-                            if pkg.version.startswith(prefix):
-                                pkg.set_name(pkg.name + '-' + prefix)
-                                pkg.set_version(pkg.version[len(prefix) + 1:])
+                    # some exceptions
+                    for prefix in ('75dpi', '100dpi'):
+                        if pkg.version.startswith(prefix):
+                            pkg.set_name(pkg.name + '-' + prefix)
+                            pkg.set_version(pkg.version[len(prefix) + 1:])
 
-                        merged = pkg.name + '-' + pkg.version
-                        for pkgname in ['liblqr-1', 'python2.7-3to2', 'python3.6-3to2', 'libretro-4do', 'polkit-qt-1-qt5', 'polkit-qt-1-qt4']:
-                            if merged.startswith(pkgname):
-                                pkg.set_name(pkgname)
-                                pkg.set_version(merged[len(pkgname) + 1:])
+                    merged = pkg.name + '-' + pkg.version
+                    for pkgname in ['liblqr-1', 'python2.7-3to2', 'python3.6-3to2', 'libretro-4do', 'polkit-qt-1-qt5', 'polkit-qt-1-qt4']:
+                        if merged.startswith(pkgname):
+                            pkg.set_name(pkgname)
+                            pkg.set_version(merged[len(pkgname) + 1:])
 
-                    keyparts = key.split('.')
-                    if len(keyparts) > 1:
-                        pkg.add_categories(keyparts[0])
+                keyparts = key.split('.')
+                if len(keyparts) > 1:
+                    pkg.add_categories(keyparts[0])
 
-                    # XXX: mode to rules
-                    if pkg.name.endswith('-git'):
-                        pkg.set_name(pkg.name[:-4])
-                        pkg.set_flags(PackageFlags.ignore)
+                # XXX: mode to rules
+                if pkg.name.endswith('-git'):
+                    pkg.set_name(pkg.name[:-4])
+                    pkg.set_flags(PackageFlags.ignore)
 
-                    # XXX: mode to rules
-                    if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
-                        pkg.set_flags(PackageFlags.ignore)
+                # XXX: mode to rules
+                if re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', pkg.version):
+                    pkg.set_flags(PackageFlags.ignore)
 
-                    # XXX: mode to rules
-                    if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
-                        pkg.set_flags(PackageFlags.ignore)
+                # XXX: mode to rules
+                if re.match('[0-9a-f]*[a-f][0-9a-f]*$', pkg.version) and len(pkg.version) >= 7:
+                    pkg.set_flags(PackageFlags.ignore)
 
-                    pkg.add_homepages(meta.get('homepage'))
+                pkg.add_homepages(meta.get('homepage'))
 
-                    if 'description' in meta:
-                        pkg.set_summary(meta['description'].replace('\n', ' '))
+                if 'description' in meta:
+                    pkg.set_summary(meta['description'].replace('\n', ' '))
 
-                    if 'maintainers' in meta:
-                        if not isinstance(meta['maintainers'], list):
-                            pkg.log('maintainers "{}" is not a list'.format(meta['maintainers']), severity=Logger.ERROR)
-                        else:
-                            pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
+                if 'maintainers' in meta:
+                    if not isinstance(meta['maintainers'], list):
+                        pkg.log('maintainers "{}" is not a list'.format(meta['maintainers']), severity=Logger.ERROR)
+                    else:
+                        pkg.add_maintainers(extract_nix_maintainers(meta['maintainers']))
 
-                    if 'license' in meta:
-                        pkg.add_licenses(extract_nix_licenses(meta['license']))
+                if 'license' in meta:
+                    pkg.add_licenses(extract_nix_licenses(meta['license']))
 
-                    if 'position' in meta:
-                        posfile, posline = meta['position'].rsplit(':', 1)
-                        pkg.set_extra_field('posfile', posfile)
-                        pkg.set_extra_field('posline', posline)
+                if 'position' in meta:
+                    posfile, posline = meta['position'].rsplit(':', 1)
+                    pkg.set_extra_field('posfile', posfile)
+                    pkg.set_extra_field('posline', posline)
 
-                        if posfile.startswith('pkgs/development/haskell-modules'):
-                            pkg.set_flags(PackageFlags.rolling)  # XXX: haskell modules are autogenerated in nix: https://github.com/NixOS/nixpkgs/commits/master/pkgs/development/haskell-modules/hackage-packages.nix
+                    if posfile.startswith('pkgs/development/haskell-modules'):
+                        pkg.set_flags(PackageFlags.rolling)  # XXX: haskell modules are autogenerated in nix: https://github.com/NixOS/nixpkgs/commits/master/pkgs/development/haskell-modules/hackage-packages.nix
 
-                    yield pkg
+                yield pkg

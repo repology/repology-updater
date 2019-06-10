@@ -17,39 +17,34 @@
 
 from typing import Iterable
 
-from jsonslicer import JsonSlicer
-
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
 class HomebrewJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, 'rb') as jsonfile:
-            for package in JsonSlicer(jsonfile, (None,)):
-                pkg = factory.begin()
-
-                pkg.set_name(package['name'].split('@', 1)[0])
-                pkg.set_version(package['versions']['stable'])
-                pkg.set_summary(package['desc'])
-                pkg.add_homepages(package['homepage'])
+        for packagedata in iter_json_list(path, (None,)):
+            with factory.begin() as pkg:
+                pkg.set_name(packagedata['name'].split('@', 1)[0])
+                pkg.set_version(packagedata['versions']['stable'])
+                pkg.set_summary(packagedata['desc'])
+                pkg.add_homepages(packagedata['homepage'])
 
                 yield pkg
 
 
 class HomebrewCaskJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, 'rb') as jsonfile:
-            for package in JsonSlicer(jsonfile, (None,)):
-                pkg = factory.begin()
-
+        for packagedata in iter_json_list(path, (None,)):
+            with factory.begin() as pkg:
                 # XXX: tries to normalize project name from human readable form; not suitable for production
-                pkg.set_name(package['name'][0].replace('.', '').replace(' ', '-'))
+                pkg.set_name(packagedata['name'][0].replace('.', '').replace(' ', '-'))
 
                 # XXX: comma-separated versions are encountered often, wtf are these, need to handle
-                pkg.set_version(package['version'])
-                pkg.add_homepages(package['homepage'])
-                pkg.add_downloads(package['url'])
+                pkg.set_version(packagedata['version'])
+                pkg.add_homepages(packagedata['homepage'])
+                pkg.add_downloads(packagedata['url'])
 
                 yield pkg

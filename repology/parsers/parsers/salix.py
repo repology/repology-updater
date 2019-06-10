@@ -17,23 +17,21 @@
 
 from typing import Iterable
 
-from jsonslicer import JsonSlicer
-
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
 class SalixPackagesJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, 'rb') as jsonfile:
-            for item in JsonSlicer(jsonfile, ('packages', None)):
-                with factory.begin() as pkg:
-                    pkg.set_name(item['name'])
-                    pkg.set_version(item['ver'])
-                    pkg.set_summary(item['descs'])
-                    pkg.set_arch(item['arch'])
+        for item in iter_json_list(path, ('packages', None)):
+            with factory.begin() as pkg:
+                pkg.set_name(item['name'])
+                pkg.set_version(item['ver'])
+                pkg.set_summary(item['descs'])
+                pkg.set_arch(item['arch'])
 
-                    pkg.set_extra_field('location', item['loc'])
+                pkg.set_extra_field('location', item['loc'])
 
-                    yield pkg
+                yield pkg

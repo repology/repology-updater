@@ -17,19 +17,16 @@
 
 from typing import Iterable
 
-from jsonslicer import JsonSlicer
-
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
 class RavenportsJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, 'rb') as jsonfile:
-            for packagedata in JsonSlicer(jsonfile, ('ravenports', None)):
-                pkg = factory.begin()
-
+        for packagedata in iter_json_list(path, ('ravenports', None)):
+            with factory.begin() as pkg:
                 pkg.set_name(packagedata['namebase'])
                 pkg.set_version(packagedata['version'])
                 pkg.add_categories(packagedata['keywords'])

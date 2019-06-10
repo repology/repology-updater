@@ -17,20 +17,17 @@
 
 from typing import Iterable
 
-from jsonslicer import JsonSlicer
-
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
 class SliTazJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, 'rb') as jsonfile:
-            for item in JsonSlicer(jsonfile, ('items', None)):
-                pkg = factory.begin()
-
+        for item in iter_json_list(path, ('items', None)):
+            with factory.begin() as pkg:
                 pkg.set_basename(item['meta'])
                 pkg.set_version(item['ver'])
                 pkg.add_maintainers(item['maintainer'])
