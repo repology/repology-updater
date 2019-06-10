@@ -67,6 +67,7 @@ families = [
     'mer',
     'msys2',
     'nix',
+    'npackd',
     'openbsd',
     'openindiana',
     'openmandriva',

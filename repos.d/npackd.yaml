@@ -1,0 +1,92 @@
+###########################################################################
+# Npackd
+#
+# Repositories list: https://npackd.appspot.com/rep
+#
+# XXX: We set shadow flag on these to ignore unknown packages, because
+# repos use both normal names and org.foo.bar scheme which can't
+# be normalized.
+###########################################################################
+- name: npackd_unstable
+  type: repository
+  desc: Npackd Unstable
+  family: npackd
+  ruleset: [npackd, windows]
+  color: 'ddbb84'
+  minpackages: 50
+  sources:
+    - name: rep.xml
+      fetcher: FileFetcher
+      parser: NpackdXmlParser
+      url: https://npackd.appspot.com/rep/xml?tag=unstable
+  shadow: true
+  repolinks:
+    - desc: Npackd home
+      url: https://npackd.appspot.com/
+  packagelinks:
+    - desc: Package page
+      url: 'https://npackd.appspot.com/p/{name}'
+  tags: [ all, npackd ]
+
+- name: npackd_stable
+  type: repository
+  desc: Npackd Stable
+  family: npackd
+  ruleset: [npackd, windows]
+  color: 'ddbb84'
+  minpackages: 6500
+  sources:
+    - name: rep.xml
+      fetcher: FileFetcher
+      parser: NpackdXmlParser
+      url: https://npackd.appspot.com/rep/xml?tag=stable
+  shadow: true
+  repolinks:
+    - desc: Npackd home
+      url: https://npackd.appspot.com/
+  packagelinks:
+    - desc: Package page
+      url: 'https://npackd.appspot.com/p/{name}'
+  tags: [ all, npackd ]
+
+- name: npackd_libs
+  type: repository
+  desc: Npackd Libs
+  family: npackd
+  ruleset: [npackd, windows]
+  color: 'ddbb84'
+  minpackages: 150
+  sources:
+    - name: rep.xml
+      fetcher: FileFetcher
+      parser: NpackdXmlParser
+      url: https://npackd.appspot.com/rep/xml?tag=libs
+  shadow: true
+  repolinks:
+    - desc: Npackd home
+      url: https://npackd.appspot.com/
+  packagelinks:
+    - desc: Package page
+      url: 'https://npackd.appspot.com/p/{name}'
+  tags: [ all, npackd ]
+
+- name: npackd_stable64
+  type: repository
+  desc: Npackd Stable64
+  family: npackd
+  ruleset: [npackd, windows]
+  color: 'ddbb84'
+  minpackages: 2000
+  sources:
+    - name: rep.xml
+      fetcher: FileFetcher
+      parser: NpackdXmlParser
+      url: https://npackd.appspot.com/rep/xml?tag=stable64
+  shadow: true
+  repolinks:
+    - desc: Npackd home
+      url: https://npackd.appspot.com/
+  packagelinks:
+    - desc: Package page
+      url: 'https://npackd.appspot.com/p/{name}'
+  tags: [ all, npackd ]
