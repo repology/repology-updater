@@ -301,7 +301,14 @@ class Rule:
             wwwpat: Final[Pattern[str]] = re.compile(ruledata['wwwpat'].replace('\n', '').lower(), re.ASCII)
 
             def wwwpat_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
-                return bool(package.homepage and wwwpat.fullmatch(package.homepage))
+                if package.homepage and wwwpat.fullmatch(package.homepage):
+                    return True
+
+                for download in package.downloads:
+                    if wwwpat.fullmatch(download):
+                        return True
+
+                return False
 
             self._matchers.append(wwwpat_matcher)
 
@@ -309,11 +316,14 @@ class Rule:
             wwwparts: Final = as_lowercase_list(ruledata['wwwpart'])
 
             def wwwpart_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
-                if not package.homepage:
-                    return False
-                for wwwpart in wwwparts:
-                    if wwwpart in package.homepage.lower():
-                        return True
+                if package.homepage:
+                    for wwwpart in wwwparts:
+                        if wwwpart in package.homepage.lower():
+                            return True
+                for download in package.downloads:
+                    for wwwpart in wwwparts:
+                        if wwwpart in download:
+                            return True
                 return False
 
             self._matchers.append(wwwpart_matcher)
