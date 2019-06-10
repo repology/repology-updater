@@ -58,6 +58,7 @@ families = [
     'haikuports',
     'homebrew',
     'hpux',
+    'justinstall',
     'kaos',
     'librecnc',
     'libregamewiki',
