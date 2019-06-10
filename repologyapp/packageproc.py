@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from functools import cmp_to_key
 from typing import Dict, Iterable, List, Tuple
 
-from repology.package import Package, VersionClass
+from repology.package import Package, PackageStatus
 
 
 def packageset_sort_by_version(packages: Iterable[Package]) -> List[Package]:
@@ -34,7 +34,7 @@ def packageset_to_best_by_repo(packages: Iterable[Package]) -> Dict[str, Package
     state_by_repo: Dict[str, Package] = {}
 
     for package in packageset_sort_by_version(packages):
-        if package.repo not in state_by_repo or (VersionClass.IsIgnored(state_by_repo[package.repo].versionclass) and not VersionClass.IsIgnored(package.versionclass)):
+        if package.repo not in state_by_repo or (PackageStatus.is_ignored(state_by_repo[package.repo].versionclass) and not PackageStatus.is_ignored(package.versionclass)):
             state_by_repo[package.repo] = package
 
     return state_by_repo

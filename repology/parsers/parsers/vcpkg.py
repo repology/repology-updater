@@ -54,7 +54,7 @@ class VcpkgGitParser(Parser):
                         version = line[8:].strip()
                         if re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version):
                             pkg.set_version(version)
-                            pkg.set_flags(PackageFlags.ignore)
+                            pkg.set_flags(PackageFlags.IGNORE)
                         else:
                             pkg.set_version(version, normalize_version)
                     elif line.startswith('Description:') and not pkg.comment:
@@ -67,7 +67,7 @@ class VcpkgGitParser(Parser):
                     for line in portfile:
                         if 'libimobiledevice-win32' in line:
                             pkg.log('marking as untrusted, https://github.com/libimobiledevice-win32 accused of version faking', severity=Logger.WARNING)
-                            pkg.set_flags(PackageFlags.untrusted)
+                            pkg.set_flags(PackageFlags.UNTRUSTED)
                             break
 
             yield pkg

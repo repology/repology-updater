@@ -19,7 +19,7 @@ from collections import defaultdict
 from functools import cmp_to_key
 from typing import Callable, Dict, Iterable, List, Optional, Sequence, Tuple
 
-from repology.package import Package, PackageFlags, VersionClass
+from repology.package import Package, PackageFlags, PackageStatus
 
 
 def PackagesetDeduplicate(packages: Sequence[Package]) -> List[Package]:
@@ -64,7 +64,7 @@ def packageset_may_be_unignored(packages: Sequence[Package]) -> bool:
         if package.family != packages[0].family:
             return False
         # condition 2: must consist of ignored packages only
-        if not package.HasFlag(PackageFlags.any_ignored):
+        if not package.HasFlag(PackageFlags.ANY_IGNORED):
             return False
 
     return True
@@ -131,8 +131,8 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
     packages_to_process = []
 
     for package in packages:
-        if package.HasFlag(PackageFlags.rolling):
-            package.versionclass = VersionClass.rolling
+        if package.HasFlag(PackageFlags.ROLLING):
+            package.versionclass = PackageStatus.ROLLING
         else:
             packages_to_process.append(package)
 
@@ -157,10 +157,10 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
     metapackage_should_unignore = packageset_may_be_unignored(packages)
 
     # branch prototypes
-    default_branchproto = BranchPrototype(VersionClass.newest, lambda package: True)
+    default_branchproto = BranchPrototype(PackageStatus.NEWEST, lambda package: True)
 
     branchprotos = [
-        BranchPrototype(VersionClass.devel, lambda package: package.HasFlag(PackageFlags.devel)),
+        BranchPrototype(PackageStatus.DEVEL, lambda package: package.HasFlag(PackageFlags.DEVEL)),
         default_branchproto,
     ]
 
@@ -182,7 +182,7 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
         for package in verpackages:
             packages_by_repo[package.repo].append(package)
 
-            if not package.HasFlag(PackageFlags.any_ignored):
+            if not package.HasFlag(PackageFlags.ANY_IGNORED):
                 version_totally_ignored = False
 
             for branchproto_idx in range(0, len(branchprotos)):
@@ -228,26 +228,26 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
                 #   it's meaningless to talk about any kind of version correctness
                 # - incorrect beats untrusted as more specific
                 # - everything else is generic ignored
-                if package.HasFlag(PackageFlags.noscheme):
-                    package.versionclass = VersionClass.noscheme
-                elif package.HasFlag(PackageFlags.incorrect):
-                    package.versionclass = VersionClass.incorrect
-                elif package.HasFlag(PackageFlags.untrusted):
-                    package.versionclass = VersionClass.untrusted
+                if package.HasFlag(PackageFlags.NOSCHEME):
+                    package.versionclass = PackageStatus.NOSCHEME
+                elif package.HasFlag(PackageFlags.INCORRECT):
+                    package.versionclass = PackageStatus.INCORRECT
+                elif package.HasFlag(PackageFlags.UNTRUSTED):
+                    package.versionclass = PackageStatus.UNTRUSTED
                 else:
-                    package.versionclass = VersionClass.ignored
+                    package.versionclass = PackageStatus.IGNORED
             else:
                 flavor = '_'.join(package.flavors)  # already sorted and unicalized in RepoProcessor
 
                 if current_comparison == 0:
-                    package.versionclass = VersionClass.unique if metapackage_is_unique else branches[current_branch_idx].versionclass
+                    package.versionclass = PackageStatus.UNIQUE if metapackage_is_unique else branches[current_branch_idx].versionclass
                 else:
                     non_first_in_branch = flavor in first_package_in_branch_per_flavor and first_package_in_branch_per_flavor[flavor].VersionCompare(package) != 0
 
-                    if non_first_in_branch or package.HasFlag(PackageFlags.legacy):
-                        package.versionclass = VersionClass.legacy
+                    if non_first_in_branch or package.HasFlag(PackageFlags.LEGACY):
+                        package.versionclass = PackageStatus.LEGACY
                     else:
-                        package.versionclass = VersionClass.outdated
+                        package.versionclass = PackageStatus.OUTDATED
 
                 if flavor not in first_package_in_branch_per_flavor:
                     first_package_in_branch_per_flavor[flavor] = package

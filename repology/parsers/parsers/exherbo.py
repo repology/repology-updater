@@ -75,6 +75,6 @@ class ExherboGitParser(Parser):
             pkg.add_maintainers(maintainers)
 
             if pkg.version == 'scm' or pkg.version.endswith('-scm'):
-                pkg.set_flags(PackageFlags.rolling)
+                pkg.set_flags(PackageFlags.ROLLING)
 
             yield pkg

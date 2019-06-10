@@ -42,7 +42,7 @@ class RosaInfoXmlParser(Parser):
                 # and mark version as ignored with non-trivial ROSAREV,
                 # as it it likely a snapshot and trus cannot be trusted
                 if not nevra[3].isdecimal():
-                    pkg.set_flags(PackageFlags.ignore)
+                    pkg.set_flags(PackageFlags.IGNORE)
                     match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', nevra[3].lower())
                     if match:
                         pkg._package.version += match.group(0)  # XXX: encapsulation violation

@@ -47,6 +47,6 @@ class OpenPkgRdfParser(Parser):
 
             release = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Release').text  # type: ignore
             if pkg.version.endswith(release):
-                pkg.set_flags(PackageFlags.untrusted)
+                pkg.set_flags(PackageFlags.UNTRUSTED)
 
             yield pkg

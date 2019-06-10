@@ -109,7 +109,7 @@ class T2DescParser(Parser):
 
                     if url.startswith('cvs') or url.startswith('git') or url.startswith('svn') or url.startswith('hg'):
                         # snapshots basically
-                        pkg.set_flags(PackageFlags.untrusted)
+                        pkg.set_flags(PackageFlags.UNTRUSTED)
 
                     pkg.add_downloads(url)
 

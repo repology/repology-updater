@@ -78,7 +78,7 @@ class RepodataParser(Parser):
                 elif release < '1':
                     # unknown pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Some_definitions
                     # most likely a snapshot
-                    pkg.set_flags(PackageFlags.ignore)
+                    pkg.set_flags(PackageFlags.IGNORE)
 
                 pkg.set_version(version, normalize_version)
                 pkg.set_rawversion(nevra_construct(None, epoch, version, release))

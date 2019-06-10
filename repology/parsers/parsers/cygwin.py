@@ -46,7 +46,7 @@ class CygwinParser(Parser):
                         continue
 
                     verpkg = pkg.clone()
-                    verpkg.set_flags(PackageFlags.devel, maturity == 'test')
+                    verpkg.set_flags(PackageFlags.DEVEL, maturity == 'test')
 
                     raw_version = packagedata['versions'][maturity][-1]
                     (version, release) = raw_version.rsplit('-', 1)
@@ -60,10 +60,10 @@ class CygwinParser(Parser):
                         if match:
                             # known pre-release schema
                             version += '-' + match.group(1)
-                            verpkg.set_flags(PackageFlags.devel)
+                            verpkg.set_flags(PackageFlags.DEVEL)
                         else:
                             # unknown pre-release schema
-                            verpkg.set_flags(PackageFlags.ignore)
+                            verpkg.set_flags(PackageFlags.IGNORE)
 
                     verpkg.set_version(version)
                     verpkg.set_rawversion(raw_version)

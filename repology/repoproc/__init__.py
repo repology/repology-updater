@@ -124,7 +124,7 @@ class RepositoryProcessor:
                     transformer.process(package)
 
                 # skip removed packages
-                if package.HasFlag(PackageFlags.remove):
+                if package.HasFlag(PackageFlags.REMOVE):
                     continue
 
                 # postprocess

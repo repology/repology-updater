@@ -25,7 +25,7 @@ from repologyapp.db import get_db
 from repologyapp.metapackages import MetapackagesFilterInfo, packages_to_metapackages
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.package import Package, VersionClass
+from repology.package import Package, PackageStatus
 
 
 def api_v1_package_to_json(package: Package) -> Dict[str, Any]:
@@ -54,7 +54,7 @@ def api_v1_package_to_json(package: Package) -> Dict[str, Any]:
     if package.category:
         output['categories'] = [package.category]
 
-    output['status'] = VersionClass.ToString(package.versionclass)
+    output['status'] = PackageStatus.as_string(package.versionclass)
     output['origversion'] = package.rawversion if package.rawversion != package.version else None
 
     return output

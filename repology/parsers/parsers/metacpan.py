@@ -94,7 +94,7 @@ def _parse_devel_packages(packages, latest_versions, factory):
             continue
 
         if version_compare(pkg.version, latest_versions.get(pkg.name, '0')) > 0:
-            pkg.set_flags(PackageFlags.devel)
+            pkg.set_flags(PackageFlags.DEVEL)
             yield pkg
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -19,7 +19,7 @@
 
 import unittest
 
-from repology.package import Package, PackageFlags, VersionClass
+from repology.package import Package, PackageFlags, PackageStatus
 from repology.packageproc import FillPackagesetVersions, packageset_is_unique
 
 
@@ -40,62 +40,62 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclasses_big(self):
         packages = [
             # Reference repo
-            (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.ignore), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.devel | PackageFlags.ignore), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
+            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.DEVEL | PackageFlags.IGNORE), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
             # see #338. There are multiple possible ways to ignored version between branches,
             # we go with ignored for now
-            (Package(repo='1', family='1', name='a', version='2.1.20990101', flags=PackageFlags.ignore), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.1.20990101', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
+            (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='1', family='1', name='a', version='2.0.20990101', flags=PackageFlags.IGNORE), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.LEGACY),
 
-            (Package(repo='1', family='1', name='a', version='1.2.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.2beta1', flags=PackageFlags.devel), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.2alpha1.20990101', flags=PackageFlags.devel | PackageFlags.ignore), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.1.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.1'), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.0.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='1.2.20990101', flags=PackageFlags.IGNORE), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.2beta1', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.2alpha1.20990101', flags=PackageFlags.DEVEL | PackageFlags.IGNORE), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.2alpha1', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.1.20990101', flags=PackageFlags.IGNORE), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.1'), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.0.20990101', flags=PackageFlags.IGNORE), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.0'), PackageStatus.LEGACY),
 
             # devel + legacy
-            (Package(repo='2', family='2', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.outdated),
+            (Package(repo='2', family='2', name='a', version='2.2beta1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
+            (Package(repo='2', family='2', name='a', version='2.0'), PackageStatus.OUTDATED),
 
             # devel + newest + legacy
-            (Package(repo='3', family='3', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='3', family='3', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='3', family='3', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='3', family='3', name='a', version='2.2beta1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
+            (Package(repo='3', family='3', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='3', family='3', name='a', version='2.0'), PackageStatus.LEGACY),
 
             # newest + legacy
-            (Package(repo='4', family='4', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='4', family='4', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='4', family='4', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='4', family='4', name='a', version='2.0'), PackageStatus.LEGACY),
 
             # outdated + legacy
-            (Package(repo='5', family='5', name='a', version='1.1'), VersionClass.outdated),
-            (Package(repo='5', family='5', name='a', version='1.0'), VersionClass.legacy),
+            (Package(repo='5', family='5', name='a', version='1.1'), PackageStatus.OUTDATED),
+            (Package(repo='5', family='5', name='a', version='1.0'), PackageStatus.LEGACY),
 
             # outdated outdated/ignored + legacy
-            (Package(repo='6', family='6', name='a', version='1.1.20990101', flags=PackageFlags.ignore), VersionClass.outdated),
-            (Package(repo='6', family='6', name='a', version='1.1'), VersionClass.legacy),
-            (Package(repo='6', family='6', name='a', version='1.0'), VersionClass.legacy),
+            (Package(repo='6', family='6', name='a', version='1.1.20990101', flags=PackageFlags.IGNORE), PackageStatus.OUTDATED),
+            (Package(repo='6', family='6', name='a', version='1.1'), PackageStatus.LEGACY),
+            (Package(repo='6', family='6', name='a', version='1.0'), PackageStatus.LEGACY),
 
             # ignored classes are unignored when they are backed with real classes
-            (Package(repo='8', family='8', name='a', version='2.2beta1', flags=PackageFlags.devel | PackageFlags.ignore), VersionClass.devel),
+            (Package(repo='8', family='8', name='a', version='2.2beta1', flags=PackageFlags.DEVEL | PackageFlags.IGNORE), PackageStatus.DEVEL),
 
-            (Package(repo='9', family='9', name='a', version='2.1', flags=PackageFlags.ignore), VersionClass.newest),
+            (Package(repo='9', family='9', name='a', version='2.1', flags=PackageFlags.IGNORE), PackageStatus.NEWEST),
 
-            (Package(repo='10', family='10', name='a', version='2.0', flags=PackageFlags.ignore), VersionClass.outdated),
-            (Package(repo='10', family='10', name='a', version='1.9', flags=PackageFlags.ignore), VersionClass.legacy),
+            (Package(repo='10', family='10', name='a', version='2.0', flags=PackageFlags.IGNORE), PackageStatus.OUTDATED),
+            (Package(repo='10', family='10', name='a', version='1.9', flags=PackageFlags.IGNORE), PackageStatus.LEGACY),
 
             # version between newest and devel should be outdated when there's no devel
-            (Package(repo='11', family='11', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.outdated),
+            (Package(repo='11', family='11', name='a', version='2.2alpha1', flags=PackageFlags.DEVEL), PackageStatus.OUTDATED),
 
             # outdated in devel and normal at the same time
-            (Package(repo='12', family='12', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.outdated),
-            (Package(repo='12', family='12', name='a', version='2.0'), VersionClass.outdated),
+            (Package(repo='12', family='12', name='a', version='2.2alpha1', flags=PackageFlags.DEVEL), PackageStatus.OUTDATED),
+            (Package(repo='12', family='12', name='a', version='2.0'), PackageStatus.OUTDATED),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -106,15 +106,15 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_single_branch1(self):
         packages = [
             # here we only have default branch
-            (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.ignore), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0.20990101', flags=PackageFlags.ignore), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
+            (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='1', family='1', name='a', version='2.0.20990101', flags=PackageFlags.IGNORE), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.LEGACY),
 
-            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
 
-            (Package(repo='3', family='3', name='a', version='2.0'), VersionClass.outdated),
+            (Package(repo='3', family='3', name='a', version='2.0'), PackageStatus.OUTDATED),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -125,15 +125,15 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_single_branch2(self):
         packages = [
             # here we only have devel branch
-            (Package(repo='1', family='1', name='a', version='2.2rc1.20990101', flags=PackageFlags.ignore | PackageFlags.devel), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.ignore | PackageFlags.devel), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2rc1.20990101', flags=PackageFlags.IGNORE | PackageFlags.DEVEL), PackageStatus.IGNORED),
+            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.20990101', flags=PackageFlags.IGNORE | PackageFlags.DEVEL), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
 
-            (Package(repo='2', family='2', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='2', family='2', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.2beta1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
+            (Package(repo='2', family='2', name='a', version='2.2alpha1', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
 
-            (Package(repo='3', family='3', name='a', version='2.2alpha1', flags=PackageFlags.devel), VersionClass.outdated),
+            (Package(repo='3', family='3', name='a', version='2.2alpha1', flags=PackageFlags.DEVEL), PackageStatus.OUTDATED),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -145,11 +145,11 @@ class TestPackageProc(unittest.TestCase):
         packages = [
             # same version is both devel and default in different packages
             # this should be consistently aggregated
-            (Package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
+            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
 
-            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.devel),
-            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.1'), PackageStatus.DEVEL),
+            (Package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -160,11 +160,11 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_devel_lower_than_default(self):
         packages = [
             # devel package < normal package
-            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
 
-            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='2', family='2', name='a', version='2.0', flags=PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='2', family='2', name='a', version='2.0', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -175,11 +175,11 @@ class TestPackageProc(unittest.TestCase):
     def test_versionclass_unignored_really_unignored(self):
         packages = [
             # ignored package should be fully unignored with the same non-ignored version in another repo
-            (Package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.ignore), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.IGNORE), PackageStatus.NEWEST),
+            (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.LEGACY),
 
-            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -189,10 +189,10 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_unique(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.0alpha1', flags=PackageFlags.devel), VersionClass.unique),
-            (Package(repo='2', family='1', name='a', version='1.2'), VersionClass.unique),
-            (Package(repo='3', family='1', name='a', version='1.1'), VersionClass.outdated),
-            (Package(repo='3', family='1', name='a', version='1.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.0alpha1', flags=PackageFlags.DEVEL), PackageStatus.UNIQUE),
+            (Package(repo='2', family='1', name='a', version='1.2'), PackageStatus.UNIQUE),
+            (Package(repo='3', family='1', name='a', version='1.1'), PackageStatus.OUTDATED),
+            (Package(repo='3', family='1', name='a', version='1.0'), PackageStatus.LEGACY),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -202,15 +202,15 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_branch_bounds(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.devel), VersionClass.devel),
-            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', flags=PackageFlags.ignore | PackageFlags.devel), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
+            (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', flags=PackageFlags.IGNORE | PackageFlags.DEVEL), PackageStatus.LEGACY),
             # see #338. There are multiple possible ways to ignored version between branches,
             # we go with ignored for now
-            (Package(repo='1', family='1', name='a', version='2.1.9999', flags=PackageFlags.ignore), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.newest),
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.1.9999', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
+            (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.NEWEST),
+            (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.LEGACY),
 
-            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.newest),
+            (Package(repo='2', family='2', name='a', version='2.1'), PackageStatus.NEWEST),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -220,14 +220,14 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_ignoredignored(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.2.99999999', flags=PackageFlags.ignore), VersionClass.ignored),
-            (Package(repo='1', family='1', name='a', version='2.2.9999', flags=PackageFlags.ignore), VersionClass.ignored),
+            (Package(repo='1', family='1', name='a', version='2.2.99999999', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
+            (Package(repo='1', family='1', name='a', version='2.2.9999', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
             # this one should be outdated, not legacy, e.g. ignored's should not be counted
             # as first packages in the branch
-            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.outdated),
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.OUTDATED),
+            (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.LEGACY),
 
-            (Package(repo='2', family='2', name='a', version='2.2'), VersionClass.newest),
+            (Package(repo='2', family='2', name='a', version='2.2'), PackageStatus.NEWEST),
 
         ]
 
@@ -238,10 +238,10 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_sameversionsamestatus(self):
         packages = [
-            (Package(repo='2', family='2', name='a', version='2.2'), VersionClass.newest),
+            (Package(repo='2', family='2', name='a', version='2.2'), PackageStatus.NEWEST),
             # one of these packages should not make the other one legacy instead of outdated
-            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.outdated),
-            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.outdated),
+            (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.OUTDATED),
+            (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.OUTDATED),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -251,15 +251,15 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_manylegacy(self):
         packages = [
-            (Package(repo='2', family='2', name='a', version='2.2'), VersionClass.newest),
+            (Package(repo='2', family='2', name='a', version='2.2'), PackageStatus.NEWEST),
             # one of these packages should not make the other one legacy instead of outdated
-            (Package(repo='1', family='1', name='a', version='2.1'), VersionClass.outdated),
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.9'), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.9'), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.8'), VersionClass.legacy),
-            (Package(repo='1', family='1', name='a', version='1.8'), VersionClass.legacy),
+            (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.OUTDATED),
+            (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.9'), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.9'), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.8'), PackageStatus.LEGACY),
+            (Package(repo='1', family='1', name='a', version='1.8'), PackageStatus.LEGACY),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -269,19 +269,19 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_flavors(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.2'), VersionClass.newest),
+            (Package(repo='1', family='1', name='a', version='2.2'), PackageStatus.NEWEST),
 
-            (Package(repo='2', family='2', name='a', version='2.1'), VersionClass.outdated),
-            (Package(repo='2', family='2', name='a', version='2.0'), VersionClass.legacy),
+            (Package(repo='2', family='2', name='a', version='2.1'), PackageStatus.OUTDATED),
+            (Package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
 
-            (Package(repo='3', family='3', name='a', version='2.1'), VersionClass.outdated),
-            (Package(repo='3', family='3', name='a', version='2.0', flavors=['foo']), VersionClass.outdated),
+            (Package(repo='3', family='3', name='a', version='2.1'), PackageStatus.OUTDATED),
+            (Package(repo='3', family='3', name='a', version='2.0', flavors=['foo']), PackageStatus.OUTDATED),
 
-            (Package(repo='4', family='4', name='a', version='2.1', flavors=['foo']), VersionClass.outdated),
-            (Package(repo='4', family='4', name='a', version='2.0'), VersionClass.outdated),
+            (Package(repo='4', family='4', name='a', version='2.1', flavors=['foo']), PackageStatus.OUTDATED),
+            (Package(repo='4', family='4', name='a', version='2.0'), PackageStatus.OUTDATED),
 
-            (Package(repo='5', family='5', name='a', version='2.1', flavors=['foo']), VersionClass.outdated),
-            (Package(repo='5', family='5', name='a', version='2.0', flavors=['foo']), VersionClass.legacy),
+            (Package(repo='5', family='5', name='a', version='2.1', flavors=['foo']), PackageStatus.OUTDATED),
+            (Package(repo='5', family='5', name='a', version='2.0', flavors=['foo']), PackageStatus.LEGACY),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -291,9 +291,9 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_outdated(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='1.0'), VersionClass.newest),
+            (Package(repo='1', family='1', name='a', version='1.0'), PackageStatus.NEWEST),
 
-            (Package(repo='2', family='2', name='a', version='1.0', flags=PackageFlags.outdated), VersionClass.outdated),
+            (Package(repo='2', family='2', name='a', version='1.0', flags=PackageFlags.OUTDATED), PackageStatus.OUTDATED),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -303,11 +303,11 @@ class TestPackageProc(unittest.TestCase):
 
     def test_versionclass_legacy(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.0'), VersionClass.newest),
+            (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.NEWEST),
 
-            (Package(repo='2', family='2', name='a', version='1.0'), VersionClass.outdated),
+            (Package(repo='2', family='2', name='a', version='1.0'), PackageStatus.OUTDATED),
 
-            (Package(repo='3', family='3', name='a', version='1.0', flags=PackageFlags.legacy), VersionClass.legacy),
+            (Package(repo='3', family='3', name='a', version='1.0', flags=PackageFlags.LEGACY), PackageStatus.LEGACY),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -317,8 +317,8 @@ class TestPackageProc(unittest.TestCase):
 
     def test_suppress_ignored(self):
         packages = [
-            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.ignore), VersionClass.unique),
-            (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.ignore), VersionClass.outdated),
+            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.IGNORE), PackageStatus.UNIQUE),
+            (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.IGNORE), PackageStatus.OUTDATED),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])
@@ -328,9 +328,9 @@ class TestPackageProc(unittest.TestCase):
 
     def test_suppress_ignored_rolling(self):
         packages = [
-            (Package(repo='0', family='0', name='a', version='3.0', flags=PackageFlags.rolling), VersionClass.rolling),
-            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.ignore), VersionClass.newest),
-            (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.ignore), VersionClass.outdated),
+            (Package(repo='0', family='0', name='a', version='3.0', flags=PackageFlags.ROLLING), PackageStatus.ROLLING),
+            (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.IGNORE), PackageStatus.NEWEST),
+            (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.IGNORE), PackageStatus.OUTDATED),
         ]
 
         FillPackagesetVersions([package for package, _ in packages])

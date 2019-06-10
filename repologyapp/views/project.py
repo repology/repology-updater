@@ -32,7 +32,7 @@ from repologyapp.metapackages import packages_to_summary_items
 from repologyapp.packageproc import packageset_aggregate_by_version, packageset_sort_by_name_version, packageset_sort_by_version
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.package import Package, VersionClass
+from repology.package import Package, PackageStatus
 
 
 @ViewRegistrar('/project/<name>/versions')
@@ -119,7 +119,7 @@ def project_information(name: str) -> Any:
             for reponame in repometadata.active_names() if reponame in information['repos']
         ]
 
-    versions = packageset_aggregate_by_version(packages, {VersionClass.legacy: VersionClass.outdated})
+    versions = packageset_aggregate_by_version(packages, {PackageStatus.LEGACY: PackageStatus.OUTDATED})
 
     return flask.render_template(
         'project-information.html',

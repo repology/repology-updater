@@ -57,29 +57,6 @@ class PackageStatus:
             PackageStatus.ROLLING: 'rolling',
         }[val]
 
-    # Compatibility shims
-    newest: ClassVar[int] = NEWEST
-    outdated: ClassVar[int] = OUTDATED
-    ignored: ClassVar[int] = IGNORED
-    unique: ClassVar[int] = UNIQUE
-    devel: ClassVar[int] = DEVEL
-    legacy: ClassVar[int] = LEGACY
-    incorrect: ClassVar[int] = INCORRECT
-    untrusted: ClassVar[int] = UNTRUSTED
-    noscheme: ClassVar[int] = NOSCHEME
-    rolling: ClassVar[int] = ROLLING
-
-    @staticmethod
-    def IsIgnored(val: int) -> bool:
-        return PackageStatus.is_ignored(val)
-
-    @staticmethod
-    def ToString(val: int) -> str:
-        return PackageStatus.as_string(val)
-
-
-VersionClass = PackageStatus
-
 
 class PackageFlags:
     # remove package
@@ -120,24 +97,6 @@ class PackageFlags:
         if val & PackageFlags.OUTDATED:
             return -1
         return 0
-
-    # Compatibility shims
-    remove: ClassVar[int] = REMOVE
-    devel: ClassVar[int] = DEVEL
-    ignore: ClassVar[int] = IGNORE
-    incorrect: ClassVar[int] = INCORRECT
-    untrusted: ClassVar[int] = UNTRUSTED
-    noscheme: ClassVar[int] = NOSCHEME
-    any_ignored: ClassVar[int] = ANY_IGNORED
-    rolling: ClassVar[int] = ROLLING
-    outdated: ClassVar[int] = OUTDATED
-    legacy: ClassVar[int] = LEGACY
-    p_is_patch: ClassVar[int] = P_IS_PATCH
-    any_is_patch: ClassVar[int] = ANY_IS_PATCH
-
-    @staticmethod
-    def GetMetaorder(val: int) -> int:
-        return PackageFlags.get_metaorder(val)
 
 
 class Package:
@@ -268,8 +227,8 @@ class Package:
 
     # other helper methods
     def version_compare(self, other: 'Package') -> int:
-        self_metaorder = PackageFlags.GetMetaorder(self.flags)
-        other_metaorder = PackageFlags.GetMetaorder(other.flags)
+        self_metaorder = PackageFlags.get_metaorder(self.flags)
+        other_metaorder = PackageFlags.get_metaorder(other.flags)
 
         if self_metaorder < other_metaorder:
             return -1
@@ -279,10 +238,10 @@ class Package:
         return version_compare(
             self.version,
             other.version,
-            ((self.flags & PackageFlags.p_is_patch) and P_IS_PATCH) |
-            ((self.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH),
-            ((other.flags & PackageFlags.p_is_patch) and P_IS_PATCH) |
-            ((other.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH)
+            ((self.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH) |
+            ((self.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH),
+            ((other.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH) |
+            ((other.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH)
         )
 
     # Compatibility shims

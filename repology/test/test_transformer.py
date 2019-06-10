@@ -54,49 +54,49 @@ class TestPackageTransformer(unittest.TestCase):
     def test_remove(self):
         self.check_transformer(
             '[ { name: p1, remove: true } ]',
-            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.remove},
+            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.REMOVE},
             {'name': 'p2', 'version': '1.0', 'expect_flags': 0}
         )
 
     def test_unremove(self):
         self.check_transformer(
             '[ { name: p1, remove: false } ]',
-            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.remove, 'expect_flags': 0},
-            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.remove, 'expect_flags': PackageFlags.remove}
+            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.REMOVE, 'expect_flags': 0},
+            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.REMOVE, 'expect_flags': PackageFlags.REMOVE}
         )
 
     def test_ignore(self):
         self.check_transformer(
             '[ { name: p1, ignore: true } ]',
-            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.ignore},
+            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.IGNORE},
             {'name': 'p2', 'version': '1.0', 'expect_flags': 0}
         )
 
     def test_unignore(self):
         self.check_transformer(
             '[ { name: p1, ignore: false } ]',
-            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.ignore, 'expect_flags': 0},
-            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.ignore, 'expect_flags': PackageFlags.ignore}
+            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.IGNORE, 'expect_flags': 0},
+            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.IGNORE, 'expect_flags': PackageFlags.IGNORE}
         )
 
     def test_devel(self):
         self.check_transformer(
             '[ { name: p1, devel: true } ]',
-            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.devel},
+            {'name': 'p1', 'version': '1.0', 'expect_flags': PackageFlags.DEVEL},
             {'name': 'p2', 'version': '1.0', 'expect_flags': 0}
         )
 
     def test_undevel(self):
         self.check_transformer(
             '[ { name: p1, devel: false } ]',
-            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': 0},
-            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.devel, 'expect_flags': PackageFlags.devel}
+            {'name': 'p1', 'version': '1.0', 'flags': PackageFlags.DEVEL, 'expect_flags': 0},
+            {'name': 'p2', 'version': '1.0', 'flags': PackageFlags.DEVEL, 'expect_flags': PackageFlags.DEVEL}
         )
 
     def test_multiflags(self):
         self.check_transformer(
             '[ { devel: true, ignore: false, noscheme: true }, { ignore: true, noscheme: false } ]',
-            {'name': 'aaa', 'version': '1.0', 'expect_flags': PackageFlags.devel | PackageFlags.ignore}
+            {'name': 'aaa', 'version': '1.0', 'expect_flags': PackageFlags.DEVEL | PackageFlags.IGNORE}
         )
 
     def test_setname(self):

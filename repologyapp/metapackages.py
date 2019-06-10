@@ -23,7 +23,7 @@ import flask
 from repologyapp.metapackage_request import MetapackageRequest
 from repologyapp.version import UserVisibleVersionInfo
 
-from repology.package import Package, VersionClass
+from repology.package import Package, PackageStatus
 
 
 class MetapackagesFilterInfo:
@@ -172,10 +172,10 @@ def packages_to_summary_items(packages: Iterable[Package], repo: Optional[str] =
 
         if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
             target = summaries[package.effname]['explicit']
-        elif package.versionclass in [VersionClass.outdated, VersionClass.legacy]:
+        elif package.versionclass in [PackageStatus.OUTDATED, PackageStatus.LEGACY]:
             target = summaries[package.effname]['outdated']
-            versioninfo.versionclass = VersionClass.outdated  # we don't need to differentiate legacy and outdated here
-        elif package.versionclass in [VersionClass.devel, VersionClass.newest, VersionClass.unique]:
+            versioninfo.versionclass = PackageStatus.OUTDATED  # we don't need to differentiate legacy and outdated here
+        elif package.versionclass in [PackageStatus.DEVEL, PackageStatus.NEWEST, PackageStatus.UNIQUE]:
             target = summaries[package.effname]['newest']
         else:
             target = summaries[package.effname]['ignored']

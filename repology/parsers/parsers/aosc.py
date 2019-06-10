@@ -47,6 +47,6 @@ class AoscPkgsParser(Parser):
                 pkg.add_maintainers(extract_maintainers(package['committer']))
 
                 if pkg.version == '999':
-                    pkg.set_flags(PackageFlags.ignore)  # XXX: rolling? revisit
+                    pkg.set_flags(PackageFlags.IGNORE)  # XXX: rolling? revisit
 
                 yield pkg

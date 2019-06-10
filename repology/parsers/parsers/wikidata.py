@@ -65,7 +65,7 @@ class WikidataJsonParser(Parser):
                     verpkg.log('version {} skipped due to bad Platform'.format(version), severity=Logger.NOTICE)
                     continue
 
-                verpkg.set_flags(PackageFlags.devel, is_devel)
+                verpkg.set_flags(PackageFlags.DEVEL, is_devel)
                 verpkg.set_version(version)
                 verpkg.set_name(packagedata['projectLabel'])
 

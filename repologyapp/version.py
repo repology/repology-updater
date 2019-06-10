@@ -39,8 +39,8 @@ class UserVisibleVersionInfo:
         self.versionclass = package.versionclass
 
         self.metaorder = PackageFlags.get_metaorder(package.flags)
-        self.versionflags = (((package.flags & PackageFlags.p_is_patch) and P_IS_PATCH) |
-                             ((package.flags & PackageFlags.any_is_patch) and ANY_IS_PATCH))
+        self.versionflags = (((package.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH) |
+                             ((package.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH))
 
         self.spread = spread
 

@@ -27,7 +27,7 @@ from repologyapp.globals import repometadata
 from repologyapp.packageproc import packageset_to_best_by_repo
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.package import VersionClass
+from repology.package import PackageStatus
 
 
 @ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
@@ -143,7 +143,7 @@ def badge_latest_versions(name: str) -> Any:
     versions = sorted(set((
         package.version
         for package in get_db().get_metapackage_packages(name, fields=['version', 'versionclass'])
-        if package.versionclass in (VersionClass.newest, VersionClass.devel, VersionClass.unique)
+        if package.versionclass in (PackageStatus.NEWEST, PackageStatus.DEVEL, PackageStatus.UNIQUE)
     )), key=cmp_to_key(version_compare), reverse=True)
 
     caption = 'latest packaged version'

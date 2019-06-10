@@ -33,21 +33,21 @@ class TestParsers(unittest.TestCase):
 
     def test_flag_p_is_patch(self):
         self.assertEqual(Package(version='1.0p1').VersionCompare(Package(version='1.0p1')), 0)
-        self.assertEqual(Package(version='1.0p1', flags=PackageFlags.p_is_patch).VersionCompare(Package(version='1.0p1')), 1)
-        self.assertEqual(Package(version='1.0p1').VersionCompare(Package(version='1.0p1', flags=PackageFlags.p_is_patch)), -1)
-        self.assertEqual(Package(version='1.0p1', flags=PackageFlags.p_is_patch).VersionCompare(Package(version='1.0p1', flags=PackageFlags.p_is_patch)), 0)
+        self.assertEqual(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH).VersionCompare(Package(version='1.0p1')), 1)
+        self.assertEqual(Package(version='1.0p1').VersionCompare(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH)), -1)
+        self.assertEqual(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH).VersionCompare(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH)), 0)
 
     def test_flag_outdated(self):
         self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0')), 0)
-        self.assertEqual(Package(version='1.0', flags=PackageFlags.outdated).VersionCompare(Package(version='1.0')), -1)
-        self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0', flags=PackageFlags.outdated)), 1)
-        self.assertEqual(Package(version='1.0', flags=PackageFlags.outdated).VersionCompare(Package(version='1.0', flags=PackageFlags.outdated)), 0)
+        self.assertEqual(Package(version='1.0', flags=PackageFlags.OUTDATED).VersionCompare(Package(version='1.0')), -1)
+        self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0', flags=PackageFlags.OUTDATED)), 1)
+        self.assertEqual(Package(version='1.0', flags=PackageFlags.OUTDATED).VersionCompare(Package(version='1.0', flags=PackageFlags.OUTDATED)), 0)
 
     def test_flag_rolling(self):
         self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0')), 0)
-        self.assertEqual(Package(version='1.0', flags=PackageFlags.rolling).VersionCompare(Package(version='1.0')), 1)
-        self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0', flags=PackageFlags.rolling)), -1)
-        self.assertEqual(Package(version='1.0', flags=PackageFlags.rolling).VersionCompare(Package(version='1.0', flags=PackageFlags.rolling)), 0)
+        self.assertEqual(Package(version='1.0', flags=PackageFlags.ROLLING).VersionCompare(Package(version='1.0')), 1)
+        self.assertEqual(Package(version='1.0').VersionCompare(Package(version='1.0', flags=PackageFlags.ROLLING)), -1)
+        self.assertEqual(Package(version='1.0', flags=PackageFlags.ROLLING).VersionCompare(Package(version='1.0', flags=PackageFlags.ROLLING)), 0)
 
 
 if __name__ == '__main__':

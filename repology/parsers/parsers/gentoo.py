@@ -163,7 +163,7 @@ class GentooGitParser(Parser):
 
                 subpkg.set_version(ebuild[len(package) + 1:], normalize_version)
                 if subpkg.version.endswith('9999'):
-                    subpkg.set_flags(PackageFlags.rolling)
+                    subpkg.set_flags(PackageFlags.ROLLING)
 
                 metadata = _parse_md5cache_metadata_xml(path, category, ebuild)
 

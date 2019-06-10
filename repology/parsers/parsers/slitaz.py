@@ -36,7 +36,7 @@ class SliTazJsonParser(Parser):
                 pkg.add_downloads(item.get('src'))
 
                 if pkg.version == 'latest':
-                    pkg.set_flags(PackageFlags.rolling)
+                    pkg.set_flags(PackageFlags.ROLLING)
 
                 for subitem in item['pkgs']:
                     subpkg = pkg.clone()
