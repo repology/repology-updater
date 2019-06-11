@@ -26,7 +26,7 @@
   packagelinks:
     - desc: Package page
       url: 'https://npackd.appspot.com/p/{name}'
-  tags: [ all, npackd ]
+  tags: [ all, production, npackd ]
 
 - name: npackd_stable
   type: repository
@@ -47,7 +47,7 @@
   packagelinks:
     - desc: Package page
       url: 'https://npackd.appspot.com/p/{name}'
-  tags: [ all, npackd ]
+  tags: [ all, production, npackd ]
 
 - name: npackd_libs
   type: repository
@@ -68,7 +68,7 @@
   packagelinks:
     - desc: Package page
       url: 'https://npackd.appspot.com/p/{name}'
-  tags: [ all, npackd ]
+  tags: [ all, production, npackd ]
 
 - name: npackd_stable64
   type: repository
@@ -89,4 +89,4 @@
   packagelinks:
     - desc: Package page
       url: 'https://npackd.appspot.com/p/{name}'
-  tags: [ all, npackd ]
+  tags: [ all, production, npackd ]

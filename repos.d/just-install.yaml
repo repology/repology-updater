@@ -23,4 +23,4 @@
       url: https://github.com/just-install
     - desc: just-install application registory
       url: https://github.com/just-install/registry/blob/master/just-install.json
-  tags: [ all, just-install ]
+  tags: [ all, production, just-install ]
