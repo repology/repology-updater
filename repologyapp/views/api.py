@@ -77,10 +77,10 @@ def api_v1() -> Any:
 @ViewRegistrar('/api/v1/projects/<bound>/')
 def api_v1_projects(bound: Optional[str] = None) -> Any:
     filterinfo = MetapackagesFilterInfo()
-    filterinfo.ParseFlaskArgs()
+    filterinfo.parse_flask_args()
 
-    request = filterinfo.GetRequest()
-    request.Bound(bound)
+    request = filterinfo.get_request()
+    request.set_bound(bound)
 
     metapackages = get_db().query_metapackages(**request.__dict__, limit=config['METAPACKAGES_PER_PAGE'])
 

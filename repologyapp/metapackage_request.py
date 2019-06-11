@@ -85,73 +85,73 @@ class MetapackageRequest:
         self.problematic = False
         self.has_related = False
 
-    def Bound(self, bound: Optional[str]) -> None:
+    def set_bound(self, bound: Optional[str]) -> None:
         if not bound:
             pass
         elif bound.startswith('..'):
-            self.NameTo(bound[2:])
+            self.require_name_to(bound[2:])
         else:
-            self.NameFrom(bound)
+            self.require_name_from(bound)
 
-    def NameFrom(self, name: Optional[str]) -> None:
+    def require_name_from(self, name: Optional[str]) -> None:
         if self.pivot:
             raise RuntimeError('duplicate effname condition')
         if name is not None:
             self.pivot = name
             self.reverse = False
 
-    def NameTo(self, name: Optional[str]) -> None:
+    def require_name_to(self, name: Optional[str]) -> None:
         if self.pivot:
             raise RuntimeError('duplicate effname condition')
         if name is not None:
             self.pivot = name
             self.reverse = True
 
-    def NameSubstring(self, substring: str) -> None:
+    def require_name_substring(self, substring: str) -> None:
         if self.search:
             raise RuntimeError('duplicate effname substring condition')
         self.search = substring
 
-    def Maintainer(self, maintainer: str) -> None:
+    def require_maintainer(self, maintainer: str) -> None:
         if self.maintainer:
             raise RuntimeError('duplicate maintainer condition')
         self.maintainer = maintainer
 
-    def InRepo(self, repo: str) -> None:
+    def require_in_repo(self, repo: str) -> None:
         if self.inrepo:
             raise RuntimeError('duplicate repository condition')
         self.inrepo = repo
 
-    def NotInRepo(self, repo: str) -> None:
+    def require_not_in_repo(self, repo: str) -> None:
         if self.notinrepo:
             raise RuntimeError('duplicate not-in-repository condition')
         self.notinrepo = repo
 
-    def Category(self, category: str) -> None:
+    def require_category(self, category: str) -> None:
         if self.category:
             raise RuntimeError('duplicate category condition')
         self.category = category
 
-    def Repos(self, rng: str) -> None:
+    def require_repos(self, rng: str) -> None:
         self.min_repos, self.max_repos = split_range(rng)
 
-    def Families(self, rng: str) -> None:
+    def require_families(self, rng: str) -> None:
         self.min_families, self.max_families = split_range(rng)
 
-    def ReposNewest(self, rng: str) -> None:
+    def require_repos_newest(self, rng: str) -> None:
         self.min_repos_newest, self.max_repos_newest = split_range(rng)
 
-    def FamiliesNewest(self, rng: str) -> None:
+    def require_families_newest(self, rng: str) -> None:
         self.min_families_newest, self.max_families_newest = split_range(rng)
 
-    def Newest(self) -> None:
+    def require_newest(self) -> None:
         self.newest = True
 
-    def Outdated(self) -> None:
+    def require_outdated(self) -> None:
         self.outdated = True
 
-    def Problematic(self) -> None:
+    def require_problematic(self) -> None:
         self.problematic = True
 
-    def HasRelated(self) -> None:
+    def require_has_related(self) -> None:
         self.has_related = True

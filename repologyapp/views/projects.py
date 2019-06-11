@@ -33,10 +33,10 @@ from repology.package import Package
 def projects(bound: Optional[str] = None) -> Any:
     # process search
     filterinfo = MetapackagesFilterInfo()
-    filterinfo.ParseFlaskArgs()
+    filterinfo.parse_flask_args()
 
-    request = filterinfo.GetRequest()
-    request.Bound(bound)
+    request = filterinfo.get_request()
+    request.set_bound(bound)
 
     # get packages
     def get_packages(request: MetapackageRequest) -> Tuple[Dict[str, Dict[str, Any]], List[Package]]:
@@ -56,23 +56,23 @@ def projects(bound: Optional[str] = None) -> Any:
 
     # on empty result, fallback to show first, last set of results
     if not packages:
-        request = filterinfo.GetRequest()
+        request = filterinfo.get_request()
         if bound and bound.startswith('..'):
-            request.NameTo(None)
+            request.require_name_to(None)
         metapackages, packages = get_packages(request)
 
     firstname, lastname = get_packages_name_range(packages)
 
-    metapackagedata = packages_to_summary_items(packages, filterinfo.GetRepo(), filterinfo.GetMaintainer())
+    metapackagedata = packages_to_summary_items(packages, filterinfo.get_repo(), filterinfo.get_maintainer())
 
     return flask.render_template(
         'projects.html',
         firstname=firstname,
         lastname=lastname,
-        search=filterinfo.GetDict(),
-        advanced=filterinfo.IsAdvanced(),
+        search=filterinfo.get_dict(),
+        advanced=filterinfo.is_advanced(),
         metapackages=metapackages,
         metapackagedata=metapackagedata,
-        repo=filterinfo.GetRepo(),
-        maintainer=filterinfo.GetMaintainer()
+        repo=filterinfo.get_repo(),
+        maintainer=filterinfo.get_maintainer()
     )

@@ -20,7 +20,7 @@
 import unittest
 
 from repology.package import Package, PackageFlags, PackageStatus
-from repology.packageproc import FillPackagesetVersions, packageset_is_unique
+from repology.packageproc import fill_packageset_versions, packageset_is_unique
 
 
 class TestPackageProc(unittest.TestCase):
@@ -98,7 +98,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='12', family='12', name='a', version='2.0'), PackageStatus.OUTDATED),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -117,7 +117,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='3', family='3', name='a', version='2.0'), PackageStatus.OUTDATED),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -136,7 +136,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='3', family='3', name='a', version='2.2alpha1', flags=PackageFlags.DEVEL), PackageStatus.OUTDATED),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -152,7 +152,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -167,7 +167,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='2', family='2', name='a', version='2.0', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -182,7 +182,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -195,7 +195,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='3', family='1', name='a', version='1.0'), PackageStatus.LEGACY),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -213,7 +213,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='2', family='2', name='a', version='2.1'), PackageStatus.NEWEST),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -231,7 +231,7 @@ class TestPackageProc(unittest.TestCase):
 
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -244,7 +244,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.OUTDATED),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -262,7 +262,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='1', family='1', name='a', version='1.8'), PackageStatus.LEGACY),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -284,7 +284,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='5', family='5', name='a', version='2.0', flavors=['foo']), PackageStatus.LEGACY),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -296,7 +296,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='2', family='2', name='a', version='1.0', flags=PackageFlags.OUTDATED), PackageStatus.OUTDATED),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -310,7 +310,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='3', family='3', name='a', version='1.0', flags=PackageFlags.LEGACY), PackageStatus.LEGACY),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -321,7 +321,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.IGNORE), PackageStatus.OUTDATED),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
@@ -333,7 +333,7 @@ class TestPackageProc(unittest.TestCase):
             (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.IGNORE), PackageStatus.OUTDATED),
         ]
 
-        FillPackagesetVersions([package for package, _ in packages])
+        fill_packageset_versions([package for package, _ in packages])
 
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))

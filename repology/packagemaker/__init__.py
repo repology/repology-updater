@@ -194,7 +194,7 @@ class PackageMaker(PackageMakerBase):
         self._package.downloads.extend(_iter_unique(args, self._package.downloads))
 
     def set_flags(self, mask: int, is_set: bool = True) -> None:
-        self._package.SetFlag(mask, is_set)
+        self._package.set_flag(mask, is_set)
 
     def set_extra_field(self, key: str, value: str) -> None:
         self._package.extrafields[key] = value

@@ -26,7 +26,7 @@ from repology.config import config
 from repology.database import Database
 from repology.dblogger import LogRunManager
 from repology.logger import FileLogger, Logger, StderrLogger
-from repology.packageproc import FillPackagesetVersions
+from repology.packageproc import fill_packageset_versions
 from repology.querymgr import QueryManager
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
@@ -200,7 +200,7 @@ def database_update(env: Environment) -> None:
 
     logger.log('pushing packages to database')
     for packageset in env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger):
-        FillPackagesetVersions(packageset)
+        fill_packageset_versions(packageset)
         package_queue.extend(packageset)
 
         if len(package_queue) >= 10000:

@@ -24,7 +24,7 @@ from repology.logger import Logger, NoopLogger
 from repology.moduleutils import ClassFactory
 from repology.package import Package, PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
-from repology.packageproc import PackagesetDeduplicate
+from repology.packageproc import packageset_deduplicate
 from repology.parsers import Parser
 from repology.repomgr import RepositoryManager, RepositoryMetadata, RepositoryNameList
 from repology.repoproc.serialization import ChunkedSerializer, heap_deserialize
@@ -124,7 +124,7 @@ class RepositoryProcessor:
                     transformer.process(package)
 
                 # skip removed packages
-                if package.HasFlag(PackageFlags.REMOVE):
+                if package.has_flag(PackageFlags.REMOVE):
                     continue
 
                 # postprocess
@@ -214,6 +214,6 @@ class RepositoryProcessor:
             sources.extend(repo_sources)
 
         if sources:
-            yield from map(PackagesetDeduplicate, heap_deserialize(sources))
+            yield from map(packageset_deduplicate, heap_deserialize(sources))
         else:
             logger.log('no parsed packages found', severity=Logger.ERROR)

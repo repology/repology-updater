@@ -244,19 +244,6 @@ class Package:
             ((other.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH)
         )
 
-    # Compatibility shims
-    def CheckFormat(self) -> bool:
-        return self.check_format()
-
-    def SetFlag(self, flag: int, isset: bool = True) -> None:
-        self.set_flag(flag, isset)
-
-    def HasFlag(self, flag: int) -> bool:
-        return self.has_flag(flag)
-
-    def VersionCompare(self, other: 'Package') -> int:
-        return self.version_compare(other)
-
     # XXX: add signature to this, see https://github.com/python/mypy/issues/6523
     @property
     def __dict__(self):

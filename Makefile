@@ -50,10 +50,8 @@ flake8:
 	# E501 - Line too long
 	# E722 - Do not use bare except
 	# N802 - Bad function name
-	#
-	# New in flake8 3.6.0, fix and reenable
 	# W504 - Line break after binary operator
-	${FLAKE8} --ignore=D10,E265,E501,E722,N802,W504 --count --application-import-names=repology *.py repology repologyapp test
+	${FLAKE8} --ignore=D10,E265,E501,E722,W504 --count --application-import-names=repology *.py repology repologyapp test
 
 flake8-all:
 	${FLAKE8} --application-import-names=repology *.py repology repologyapp test

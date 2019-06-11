@@ -22,7 +22,7 @@ from typing import Callable, Dict, Iterable, List, Optional, Sequence, Tuple
 from repology.package import Package, PackageFlags, PackageStatus
 
 
-def PackagesetDeduplicate(packages: Sequence[Package]) -> List[Package]:
+def packageset_deduplicate(packages: Sequence[Package]) -> List[Package]:
     aggregated: Dict[Tuple[str, Optional[str], str, str], List[Package]] = defaultdict(list)
 
     # aggregate by subset of fields to make O(n²) merge below faster
@@ -64,21 +64,21 @@ def packageset_may_be_unignored(packages: Sequence[Package]) -> bool:
         if package.family != packages[0].family:
             return False
         # condition 2: must consist of ignored packages only
-        if not package.HasFlag(PackageFlags.ANY_IGNORED):
+        if not package.has_flag(PackageFlags.ANY_IGNORED):
             return False
 
     return True
 
 
-def FillPackagesetVersions(packages: Sequence[Package]) -> None:
+def fill_packageset_versions(packages: Sequence[Package]) -> None:
     # helpers
-    def AggregateBySameVersion(packages: Iterable[Package]) -> Iterable[List[Package]]:
+    def aggregate_by_same_version(packages: Iterable[Package]) -> Iterable[List[Package]]:
         current: List[Package] = []
 
         for package in packages:
             if not current:
                 current = [package]
-            elif current[0].VersionCompare(package) == 0:
+            elif current[0].version_compare(package) == 0:
                 current.append(package)
             else:
                 yield current
@@ -99,14 +99,14 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
             self.bestpackage = bestpackage
             self.lastpackage = bestpackage
 
-        def SetLastPackage(self, lastpackage: Package) -> None:
+        def set_last_package(self, lastpackage: Package) -> None:
             self.lastpackage = lastpackage
 
-        def BestPackageCompare(self, package: Package) -> int:
-            return package.VersionCompare(self.bestpackage) if self.bestpackage is not None else 1
+        def best_package_compare(self, package: Package) -> int:
+            return package.version_compare(self.bestpackage) if self.bestpackage is not None else 1
 
-        def IsAfterBranch(self, package: Package) -> bool:
-            return package.VersionCompare(self.lastpackage) == -1 if self.lastpackage is not None else False
+        def is_after_branch(self, package: Package) -> bool:
+            return package.version_compare(self.lastpackage) == -1 if self.lastpackage is not None else False
 
     class BranchPrototype:
         __slots__ = ['_versionclass', '_check']
@@ -118,10 +118,10 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
             self._versionclass = versionclass
             self._check = check
 
-        def Check(self, package: Package) -> bool:
+        def check(self, package: Package) -> bool:
             return self._check(package)
 
-        def CreateBranch(self, bestpackage: Optional[Package] = None) -> 'Branch':
+        def create_branch(self, bestpackage: Optional[Package] = None) -> 'Branch':
             return Branch(self._versionclass, bestpackage)
 
     # global flags #1
@@ -131,13 +131,13 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
     packages_to_process = []
 
     for package in packages:
-        if package.HasFlag(PackageFlags.ROLLING):
+        if package.has_flag(PackageFlags.ROLLING):
             package.versionclass = PackageStatus.ROLLING
         else:
             packages_to_process.append(package)
 
     # we always work on packages sorted by version
-    packages = PackagesetSortByVersion(packages_to_process)
+    packages = packageset_sort_by_version(packages_to_process)
 
     # global flags #2
 
@@ -160,7 +160,7 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
     default_branchproto = BranchPrototype(PackageStatus.NEWEST, lambda package: True)
 
     branchprotos = [
-        BranchPrototype(PackageStatus.DEVEL, lambda package: package.HasFlag(PackageFlags.DEVEL)),
+        BranchPrototype(PackageStatus.DEVEL, lambda package: package.has_flag(PackageFlags.DEVEL)),
         default_branchproto,
     ]
 
@@ -172,7 +172,7 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
     branches: List[Branch] = []
     packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
     current_branchproto_idx = None
-    for verpackages in AggregateBySameVersion(packages):
+    for verpackages in aggregate_by_same_version(packages):
         version_totally_ignored = True
         matching_branchproto_indexes = set()
 
@@ -182,11 +182,11 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
         for package in verpackages:
             packages_by_repo[package.repo].append(package)
 
-            if not package.HasFlag(PackageFlags.ANY_IGNORED):
+            if not package.has_flag(PackageFlags.ANY_IGNORED):
                 version_totally_ignored = False
 
             for branchproto_idx in range(0, len(branchprotos)):
-                if branchprotos[branchproto_idx].Check(package):
+                if branchprotos[branchproto_idx].check(package):
                     matching_branchproto_indexes.add(branchproto_idx)
 
         # if there's at least one package with a non-default branch, that branch is a candidate
@@ -196,14 +196,14 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
         final_branchproto_idx = list(matching_branchproto_indexes)[0] if len(matching_branchproto_indexes) == 1 else default_branchproto_idx
 
         if final_branchproto_idx == current_branchproto_idx:
-            branches[-1].SetLastPackage(verpackages[0])
+            branches[-1].set_last_package(verpackages[0])
         elif (current_branchproto_idx is None or final_branchproto_idx > current_branchproto_idx) and not version_totally_ignored:
-            branches.append(branchprotos[final_branchproto_idx].CreateBranch(verpackages[0]))
+            branches.append(branchprotos[final_branchproto_idx].create_branch(verpackages[0]))
             current_branchproto_idx = final_branchproto_idx
 
     # we should always have at least one branch
     if not branches:
-        branches = [default_branchproto.CreateBranch()]
+        branches = [default_branchproto.create_branch()]
 
     #
     # Pass 2: fill version classes
@@ -214,12 +214,12 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
 
         for package in repo_packages:  # these are still sorted by version
             # switch to next branch when the current one is over, but not past the last branch
-            while current_branch_idx < len(branches) - 1 and branches[current_branch_idx].IsAfterBranch(package):
+            while current_branch_idx < len(branches) - 1 and branches[current_branch_idx].is_after_branch(package):
                 current_branch_idx += 1
                 first_package_in_branch_per_flavor = {}
 
             # chose version class based on comparison to branch best version
-            current_comparison = branches[current_branch_idx].BestPackageCompare(package)
+            current_comparison = branches[current_branch_idx].best_package_compare(package)
 
             if current_comparison > 0:
                 # Note that the order here determines class priority when multiple
@@ -228,11 +228,11 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
                 #   it's meaningless to talk about any kind of version correctness
                 # - incorrect beats untrusted as more specific
                 # - everything else is generic ignored
-                if package.HasFlag(PackageFlags.NOSCHEME):
+                if package.has_flag(PackageFlags.NOSCHEME):
                     package.versionclass = PackageStatus.NOSCHEME
-                elif package.HasFlag(PackageFlags.INCORRECT):
+                elif package.has_flag(PackageFlags.INCORRECT):
                     package.versionclass = PackageStatus.INCORRECT
-                elif package.HasFlag(PackageFlags.UNTRUSTED):
+                elif package.has_flag(PackageFlags.UNTRUSTED):
                     package.versionclass = PackageStatus.UNTRUSTED
                 else:
                     package.versionclass = PackageStatus.IGNORED
@@ -242,9 +242,9 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
                 if current_comparison == 0:
                     package.versionclass = PackageStatus.UNIQUE if metapackage_is_unique else branches[current_branch_idx].versionclass
                 else:
-                    non_first_in_branch = flavor in first_package_in_branch_per_flavor and first_package_in_branch_per_flavor[flavor].VersionCompare(package) != 0
+                    non_first_in_branch = flavor in first_package_in_branch_per_flavor and first_package_in_branch_per_flavor[flavor].version_compare(package) != 0
 
-                    if non_first_in_branch or package.HasFlag(PackageFlags.LEGACY):
+                    if non_first_in_branch or package.has_flag(PackageFlags.LEGACY):
                         package.versionclass = PackageStatus.LEGACY
                     else:
                         package.versionclass = PackageStatus.OUTDATED
@@ -253,8 +253,8 @@ def FillPackagesetVersions(packages: Sequence[Package]) -> None:
                     first_package_in_branch_per_flavor[flavor] = package
 
 
-def PackagesetSortByVersion(packages: Sequence[Package]) -> List[Package]:
+def packageset_sort_by_version(packages: Sequence[Package]) -> List[Package]:
     def compare(p1: Package, p2: Package) -> int:
-        return p2.VersionCompare(p1)
+        return p2.version_compare(p1)
 
     return sorted(packages, key=cmp_to_key(compare))

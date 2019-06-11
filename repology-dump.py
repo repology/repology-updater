@@ -24,7 +24,7 @@ from typing import Any, Iterable
 from repology.config import config
 from repology.logger import FileLogger, Logger, StderrLogger
 from repology.package import Package, PackageStatus
-from repology.packageproc import FillPackagesetVersions
+from repology.packageproc import fill_packageset_versions
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 
@@ -79,7 +79,7 @@ def main() -> int:
 
     logger.log('dumping...')
     for packageset in repoproc.iter_parsed(reponames=options.reponames, logger=logger):
-        FillPackagesetVersions(packageset)
+        fill_packageset_versions(packageset)
 
         if not options.all and packageset_is_shadow_only(packageset):
             continue

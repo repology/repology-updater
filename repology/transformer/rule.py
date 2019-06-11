@@ -361,7 +361,7 @@ class Rule:
             is_p_is_patch: Final[bool] = ruledata['is_p_is_patch']
 
             def is_p_is_patch_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
-                return package.HasFlag(PackageFlags.P_IS_PATCH) == is_p_is_patch
+                return package.has_flag(PackageFlags.P_IS_PATCH) == is_p_is_patch
 
             self._matchers.append(is_p_is_patch_matcher)
 
@@ -370,7 +370,7 @@ class Rule:
             remove_flag: Final[bool] = ruledata['remove']
 
             def remove_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.REMOVE, remove_flag)
+                package.set_flag(PackageFlags.REMOVE, remove_flag)
 
             self._actions.append(remove_action)
 
@@ -378,7 +378,7 @@ class Rule:
             ignore_flag: Final[bool] = ruledata['ignore']
 
             def ignore_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.IGNORE, ignore_flag)
+                package.set_flag(PackageFlags.IGNORE, ignore_flag)
 
             self._actions.append(ignore_action)
 
@@ -387,7 +387,7 @@ class Rule:
 
             def weak_devel_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: currently sets ignore; change to set non-viral variant of devel (#654)
-                package.SetFlag(PackageFlags.IGNORE, weak_devel_flag)
+                package.set_flag(PackageFlags.IGNORE, weak_devel_flag)
 
             self._actions.append(weak_devel_action)
 
@@ -395,7 +395,7 @@ class Rule:
             devel_flag: Final = ruledata['devel']
 
             def devel_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.DEVEL, devel_flag)
+                package.set_flag(PackageFlags.DEVEL, devel_flag)
 
             self._actions.append(devel_action)
 
@@ -403,7 +403,7 @@ class Rule:
             p_is_patch_flag: Final = ruledata['p_is_patch']
 
             def p_is_patch_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.P_IS_PATCH, p_is_patch_flag)
+                package.set_flag(PackageFlags.P_IS_PATCH, p_is_patch_flag)
 
             self._actions.append(p_is_patch_action)
 
@@ -411,7 +411,7 @@ class Rule:
             any_is_patch_flag: Final = ruledata['any_is_patch']
 
             def any_is_patch_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.ANY_IS_PATCH, any_is_patch_flag)
+                package.set_flag(PackageFlags.ANY_IS_PATCH, any_is_patch_flag)
 
             self._actions.append(any_is_patch_action)
 
@@ -419,7 +419,7 @@ class Rule:
             outdated_flag: Final = ruledata['outdated']
 
             def outdated_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.OUTDATED, outdated_flag)
+                package.set_flag(PackageFlags.OUTDATED, outdated_flag)
 
             self._actions.append(outdated_action)
 
@@ -427,7 +427,7 @@ class Rule:
             legacy_flag: Final = ruledata['legacy']
 
             def legacy_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.LEGACY, legacy_flag)
+                package.set_flag(PackageFlags.LEGACY, legacy_flag)
 
             self._actions.append(legacy_action)
 
@@ -435,7 +435,7 @@ class Rule:
             incorrect_flag: Final = ruledata['incorrect']
 
             def incorrect_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.INCORRECT, incorrect_flag)
+                package.set_flag(PackageFlags.INCORRECT, incorrect_flag)
 
             self._actions.append(incorrect_action)
 
@@ -443,7 +443,7 @@ class Rule:
             untrusted_flag: Final = ruledata['untrusted']
 
             def untrusted_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.UNTRUSTED, untrusted_flag)
+                package.set_flag(PackageFlags.UNTRUSTED, untrusted_flag)
 
             self._actions.append(untrusted_action)
 
@@ -451,7 +451,7 @@ class Rule:
             noscheme_flag: Final = ruledata['noscheme']
 
             def noscheme_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.NOSCHEME, noscheme_flag)
+                package.set_flag(PackageFlags.NOSCHEME, noscheme_flag)
 
             self._actions.append(noscheme_action)
 
@@ -459,7 +459,7 @@ class Rule:
             rolling_flag: Final = ruledata['rolling']
 
             def rolling_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                package.SetFlag(PackageFlags.ROLLING, rolling_flag)
+                package.set_flag(PackageFlags.ROLLING, rolling_flag)
 
             self._actions.append(rolling_action)
 
@@ -468,7 +468,7 @@ class Rule:
 
             def snapshot_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: the same as ignored for now
-                package.SetFlag(PackageFlags.IGNORE, snapshot_flag)
+                package.set_flag(PackageFlags.IGNORE, snapshot_flag)
 
             self._actions.append(snapshot_action)
 
@@ -477,7 +477,7 @@ class Rule:
 
             def successor_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: the same as devel for now
-                package.SetFlag(PackageFlags.DEVEL, successor_flag)
+                package.set_flag(PackageFlags.DEVEL, successor_flag)
 
             self._actions.append(successor_action)
 
@@ -486,7 +486,7 @@ class Rule:
 
             def debianism_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: the same as devel for now
-                package.SetFlag(PackageFlags.DEVEL, debianism_flag)
+                package.set_flag(PackageFlags.DEVEL, debianism_flag)
 
             self._actions.append(debianism_action)
 
@@ -495,7 +495,7 @@ class Rule:
 
             def generated_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 # XXX: the same as rolling for now
-                package.SetFlag(PackageFlags.ROLLING, generated_flag)
+                package.set_flag(PackageFlags.ROLLING, generated_flag)
 
             self._actions.append(generated_action)
 

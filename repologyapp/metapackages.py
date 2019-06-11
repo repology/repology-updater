@@ -16,7 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+from dataclasses import dataclass
+from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tuple
 
 import flask
 
@@ -27,72 +28,78 @@ from repology.package import Package, PackageStatus
 
 
 class MetapackagesFilterInfo:
-    fields: Dict[str, Dict[str, Any]] = {
-        'search': {
-            'type': str,
-            'advanced': False,
-            'action': lambda request, value: request.NameSubstring(value.strip().lower()),
-        },
-        'maintainer': {
-            'type': str,
-            'advanced': True,
-            'action': lambda request, value: request.Maintainer(value.strip().lower()),
-        },
-        'category': {
-            'type': str,
-            'advanced': True,
-            'action': lambda request, value: request.Category(value.strip()),  # case sensitive (yet)
-        },
-        'inrepo': {
-            'type': str,
-            'advanced': True,
-            'action': lambda request, value: request.InRepo(value.strip().lower()),
-        },
-        'notinrepo': {
-            'type': str,
-            'advanced': True,
-            'action': lambda request, value: request.NotInRepo(value.strip().lower()),
-        },
-        'repos': {
-            'type': str,
-            'advanced': True,
-            'action': lambda request, value: request.Repos(value),
-        },
-        'families': {
-            'type': str,
-            'advanced': True,
-            'action': lambda request, value: request.Families(value),
-        },
-        'repos_newest': {
-            'type': str,
-            'advanced': True,
-            'action': lambda request, value: request.ReposNewest(value),
-        },
-        'families_newest': {
-            'type': str,
-            'advanced': True,
-            'action': lambda request, value: request.FamiliesNewest(value),
-        },
-        'newest': {
-            'type': bool,
-            'advanced': True,
-            'action': lambda request, value: request.Newest(),
-        },
-        'outdated': {
-            'type': bool,
-            'advanced': True,
-            'action': lambda request, value: request.Outdated(),
-        },
-        'problematic': {
-            'type': bool,
-            'advanced': True,
-            'action': lambda request, value: request.Problematic(),
-        },
-        'has_related': {
-            'type': bool,
-            'advanced': True,
-            'action': lambda request, value: request.HasRelated(),
-        },
+    @dataclass
+    class _FieldDescriptor:
+        argtype: Any
+        advanced: bool
+        action: Callable[[MetapackageRequest, Any], None]
+
+    _fields: Dict[str, _FieldDescriptor] = {
+        'search': _FieldDescriptor(
+            str,
+            False,
+            lambda request, value: request.require_name_substring(value.strip().lower()),
+        ),
+        'maintainer': _FieldDescriptor(
+            str,
+            True,
+            lambda request, value: request.require_maintainer(value.strip().lower()),
+        ),
+        'category': _FieldDescriptor(
+            str,
+            True,
+            lambda request, value: request.require_category(value.strip()),  # case sensitive (yet)
+        ),
+        'inrepo': _FieldDescriptor(
+            str,
+            True,
+            lambda request, value: request.require_in_repo(value.strip().lower()),
+        ),
+        'notinrepo': _FieldDescriptor(
+            str,
+            True,
+            lambda request, value: request.require_not_in_repo(value.strip().lower()),
+        ),
+        'repos': _FieldDescriptor(
+            str,
+            True,
+            lambda request, value: request.require_repos(value),
+        ),
+        'families': _FieldDescriptor(
+            str,
+            True,
+            lambda request, value: request.require_families(value),
+        ),
+        'repos_newest': _FieldDescriptor(
+            str,
+            True,
+            lambda request, value: request.require_repos_newest(value),
+        ),
+        'families_newest': _FieldDescriptor(
+            str,
+            True,
+            lambda request, value: request.require_families_newest(value),
+        ),
+        'newest': _FieldDescriptor(
+            bool,
+            True,
+            lambda request, value: request.require_newest(),
+        ),
+        'outdated': _FieldDescriptor(
+            bool,
+            True,
+            lambda request, value: request.require_outdated(),
+        ),
+        'problematic': _FieldDescriptor(
+            bool,
+            True,
+            lambda request, value: request.require_problematic(),
+        ),
+        'has_related': _FieldDescriptor(
+            bool,
+            True,
+            lambda request, value: request.require_has_related(),
+        ),
     }
 
     _args: Dict[str, Any]
@@ -100,38 +107,38 @@ class MetapackagesFilterInfo:
     def __init__(self) -> None:
         self._args = {}
 
-    def ParseFlaskArgs(self) -> None:
+    def parse_flask_args(self) -> None:
         flask_args = flask.request.args.to_dict()
 
-        for fieldname, fieldinfo in MetapackagesFilterInfo.fields.items():
+        for fieldname, fielddesc in MetapackagesFilterInfo._fields.items():
             if fieldname in flask_args:
-                if fieldinfo['type'] == bool:
+                if fielddesc.argtype is bool:
                     self._args[fieldname] = True
-                elif fieldinfo['type'] == int and flask_args[fieldname].isdecimal():
+                elif fielddesc.argtype is int and flask_args[fieldname].isdecimal():
                     self._args[fieldname] = int(flask_args[fieldname])
-                elif fieldinfo['type'] == str and flask_args[fieldname]:
+                elif fielddesc.argtype is str and flask_args[fieldname]:
                     self._args[fieldname] = flask_args[fieldname]
 
-    def GetDict(self) -> Dict[str, Any]:
+    def get_dict(self) -> Dict[str, Any]:
         return self._args
 
-    def GetRequest(self) -> MetapackageRequest:
+    def get_request(self) -> MetapackageRequest:
         request = MetapackageRequest()
-        for fieldname, fieldinfo in MetapackagesFilterInfo.fields.items():
+        for fieldname, fielddesc in MetapackagesFilterInfo._fields.items():
             if fieldname in self._args:
-                fieldinfo['action'](request, self._args[fieldname])
+                fielddesc.action(request, self._args[fieldname])  # type: ignore
 
         return request
 
-    def GetMaintainer(self) -> Optional[str]:
+    def get_maintainer(self) -> Optional[str]:
         return self._args['maintainer'] if 'maintainer' in self._args else None
 
-    def GetRepo(self) -> Optional[str]:
+    def get_repo(self) -> Optional[str]:
         return self._args['inrepo'] if 'inrepo' in self._args else None
 
-    def IsAdvanced(self) -> bool:
+    def is_advanced(self) -> bool:
         for fieldname in self._args.keys():
-            if MetapackagesFilterInfo.fields[fieldname]['advanced']:
+            if MetapackagesFilterInfo._fields[fieldname].advanced:
                 return True
         return False
 
