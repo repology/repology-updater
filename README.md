@@ -65,12 +65,14 @@ version are always parsed.
 | HaikuPorts                       |         |         | ✔     |       |         |          |
 | Homebrew                         | ✔       |         |       | ✔     |         |          |
 | HP-UX                            |         |         |       |       |         |          |
+| just-install                     |         |         |       |       |         | ✔        |
 | KaOS                             |         |         |       |       |         |          |
 | Linuxbrew                        | ✔       |         |       | ✔     |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | MSYS2                            | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | MX Linux                         |         | ✔       | ✔     | ✔     |         |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
+| Npackd                           | ✔       |         | ✔     |       | ✔       | ✔        |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
 | OpenIndiana                      | ✔       |         | ✔     | ✔     |         | ✔        |
 | OpenMandriva                     | ✔       | ✔       | ✔     | ✔     | ✔       |          |
