@@ -72,7 +72,7 @@ version are always parsed.
 | MSYS2                            | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | MX Linux                         |         | ✔       | ✔     | ✔     |         |          |
 | nixpkgs                          | ✔       | ✔       |       | ✔     | ✔       |          |
-| Npackd                           | ✔       |         | ✔     |       | ✔       | ✔        |
+| Npackd                           | ✔       |         | ✔     | ✔     | ✔       | ✔        |
 | OpenBSD                          | ✔       | ✔       | ✔     |       |         |          |
 | OpenIndiana                      | ✔       |         | ✔     | ✔     |         | ✔        |
 | OpenMandriva                     | ✔       | ✔       | ✔     | ✔     | ✔       |          |

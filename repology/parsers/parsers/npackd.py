@@ -42,7 +42,7 @@ def _filter_categories(categories: Iterable[str]) -> Iterable[str]:
 class NpackdXmlParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         licenses: Dict[str, str] = {}
-        packages: Dict[str, Tuple[str, List[str], List[str]]] = {}
+        packages: Dict[str, Tuple[str, List[str], List[str], List[str]]] = {}
 
         for entry in iter_xml_elements_at_level(path, 1, ['license', 'package', 'version']):
             if entry.tag == 'license':
@@ -52,6 +52,7 @@ class NpackdXmlParser(Parser):
                     entry.findtext('title'),
                     [e.text for e in entry.findall('license') if e.text],
                     [e.text for e in entry.findall('category') if e.text],
+                    [e.text for e in entry.findall('url') if e.text],
                 )
             elif entry.tag == 'version':
                 pkgname = entry.get('package')
@@ -73,5 +74,6 @@ class NpackdXmlParser(Parser):
                     pkg.set_summary(packages[pkgname][0])
                     pkg.add_licenses(licenses[l] for l in packages[pkgname][1])
                     pkg.add_categories(_filter_categories(packages[pkgname][2]))
+                    pkg.add_homepages(_filter_categories(packages[pkgname][3]))
 
                 yield pkg
