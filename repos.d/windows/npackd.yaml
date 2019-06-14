@@ -1,7 +1,7 @@
 ###########################################################################
 # Npackd
 #
-# Repositories list: https://npackd.appspot.com/rep
+# Repositories list: https://www.npackd.org/rep
 #
 # XXX: We set shadow flag on these to ignore unknown packages, because
 # repos use both normal names and org.foo.bar scheme which can't
@@ -18,14 +18,14 @@
     - name: rep.xml
       fetcher: FileFetcher
       parser: NpackdXmlParser
-      url: https://npackd.appspot.com/rep/xml?tag=unstable
+      url: https://www.npackd.org/rep/xml?tag=unstable
   shadow: true
   repolinks:
     - desc: Npackd home
-      url: https://npackd.appspot.com/
+      url: https://www.npackd.org/
   packagelinks:
     - desc: Package page
-      url: 'https://npackd.appspot.com/p/{name}'
+      url: 'https://www.npackd.org/p/{name}'
   tags: [ all, production, npackd ]
 
 - name: npackd_stable
@@ -39,14 +39,14 @@
     - name: rep.xml
       fetcher: FileFetcher
       parser: NpackdXmlParser
-      url: https://npackd.appspot.com/rep/xml?tag=stable
+      url: https://www.npackd.org/rep/xml?tag=stable
   shadow: true
   repolinks:
     - desc: Npackd home
-      url: https://npackd.appspot.com/
+      url: https://www.npackd.org/
   packagelinks:
     - desc: Package page
-      url: 'https://npackd.appspot.com/p/{name}'
+      url: 'https://www.npackd.org/p/{name}'
   tags: [ all, production, npackd ]
 
 - name: npackd_libs
@@ -60,14 +60,14 @@
     - name: rep.xml
       fetcher: FileFetcher
       parser: NpackdXmlParser
-      url: https://npackd.appspot.com/rep/xml?tag=libs
+      url: https://www.npackd.org/rep/xml?tag=libs
   shadow: true
   repolinks:
     - desc: Npackd home
-      url: https://npackd.appspot.com/
+      url: https://www.npackd.org/
   packagelinks:
     - desc: Package page
-      url: 'https://npackd.appspot.com/p/{name}'
+      url: 'https://www.npackd.org/p/{name}'
   tags: [ all, production, npackd ]
 
 - name: npackd_stable64
@@ -81,12 +81,12 @@
     - name: rep.xml
       fetcher: FileFetcher
       parser: NpackdXmlParser
-      url: https://npackd.appspot.com/rep/xml?tag=stable64
+      url: https://www.npackd.org/rep/xml?tag=stable64
   shadow: true
   repolinks:
     - desc: Npackd home
-      url: https://npackd.appspot.com/
+      url: https://www.npackd.org/
   packagelinks:
     - desc: Package page
-      url: 'https://npackd.appspot.com/p/{name}'
+      url: 'https://www.npackd.org/p/{name}'
   tags: [ all, production, npackd ]
