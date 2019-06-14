@@ -25,7 +25,7 @@
       url: https://www.npackd.org/
   packagelinks:
     - desc: Package page
-      url: 'https://www.npackd.org/p/{name}'
+      url: 'https://www.npackd.org/p/{name}/{rawversion}'
   tags: [ all, production, npackd ]
 
 - name: npackd_stable
@@ -46,7 +46,7 @@
       url: https://www.npackd.org/
   packagelinks:
     - desc: Package page
-      url: 'https://www.npackd.org/p/{name}'
+      url: 'https://www.npackd.org/p/{name}/{rawversion}'
   tags: [ all, production, npackd ]
 
 - name: npackd_libs
@@ -67,7 +67,7 @@
       url: https://www.npackd.org/
   packagelinks:
     - desc: Package page
-      url: 'https://www.npackd.org/p/{name}'
+      url: 'https://www.npackd.org/p/{name}/{rawversion}'
   tags: [ all, production, npackd ]
 
 - name: npackd_stable64
@@ -88,5 +88,5 @@
       url: https://www.npackd.org/
   packagelinks:
     - desc: Package page
-      url: 'https://www.npackd.org/p/{name}'
+      url: 'https://www.npackd.org/p/{name}/{rawversion}'
   tags: [ all, production, npackd ]
