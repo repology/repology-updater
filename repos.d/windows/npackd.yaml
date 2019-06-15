@@ -68,7 +68,7 @@
   packagelinks:
     - desc: Package page
       url: 'https://www.npackd.org/p/{name}/{rawversion}'
-  tags: [ all, production, npackd ]
+  tags: [ all, npackd ]  # disabled (experimental), see #863
 
 - name: npackd_stable64
   type: repository
