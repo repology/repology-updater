@@ -22,12 +22,33 @@
       url: 'https://github.com/OpenMandrivaAssociation/{name}'
   tags: [ all, production, openmandriva, rpm ]
 
+- name: openmandriva_4
+  type: repository
+  desc: OpenMandriva 4.x
+  family: openmandriva
+  color: '045e9d'
+  minpackages: 12000
+  sources:
+    # Note: update subrepos are empty
+    - name: [ main/release, non-free/release, restricted/release, unsupported/release, unsupported/contrib/release ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://abf-downloads.openmandriva.org/4.0/repository/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: OpenMandriva home
+      url: https://openmandriva.org/
+  packagelinks:
+    - desc: Package repository
+      url: 'https://github.com/OpenMandrivaAssociation/{name}'
+  tags: [ all, production, openmandriva, rpm ]
+
 - name: openmandriva_cooker
   type: repository
   desc: OpenMandriva Cooker
   family: openmandriva
   color: '045e9d'
-  minpackages: 9000
+  minpackages: 12000
   sources:
     # all updates subrepos are empty and all testing subrepos contain 5 packages in total,
     # most of them are quite old. so not including these subrepositories here
