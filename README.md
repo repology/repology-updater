@@ -68,6 +68,7 @@ version are always parsed.
 | just-install                     |         |         |       |       |         | ✔        |
 | KaOS                             |         |         |       |       |         |          |
 | Linuxbrew                        | ✔       |         |       | ✔     |         |          |
+| LuaRocks                         |         |         |       |       |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | MSYS2                            | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | MX Linux                         |         | ✔       | ✔     | ✔     |         |          |
