@@ -2,10 +2,6 @@
 # Npackd
 #
 # Repositories list: https://www.npackd.org/rep
-#
-# XXX: We set shadow flag on these to ignore unknown packages, because
-# repos use both normal names and org.foo.bar scheme which can't
-# be normalized.
 ###########################################################################
 - name: npackd_unstable
   type: repository
@@ -19,7 +15,6 @@
       fetcher: FileFetcher
       parser: NpackdXmlParser
       url: https://www.npackd.org/rep/xml?tag=unstable
-  shadow: true
   repolinks:
     - desc: Npackd home
       url: https://www.npackd.org/
@@ -40,7 +35,6 @@
       fetcher: FileFetcher
       parser: NpackdXmlParser
       url: https://www.npackd.org/rep/xml?tag=stable
-  shadow: true
   repolinks:
     - desc: Npackd home
       url: https://www.npackd.org/
@@ -61,7 +55,6 @@
       fetcher: FileFetcher
       parser: NpackdXmlParser
       url: https://www.npackd.org/rep/xml?tag=libs
-  shadow: true
   repolinks:
     - desc: Npackd home
       url: https://www.npackd.org/
@@ -82,7 +75,6 @@
       fetcher: FileFetcher
       parser: NpackdXmlParser
       url: https://www.npackd.org/rep/xml?tag=stable64
-  shadow: true
   repolinks:
     - desc: Npackd home
       url: https://www.npackd.org/
