@@ -59,13 +59,11 @@ class NpackdXmlParser(Parser):
                 version = entry.get('name')
 
                 with factory.begin(pkgname + ' ' + version) as pkg:
-                    # XXX: there's discrepancy between naming schemes:
-                    # - kdenlive (plain package name)
-                    # - com.abisource.abiword (domain-based)
-                    # - quazip-dev-i686-w64-dw2-posix-7.4-qt-5.12-static (plain, but broken if we try to split by dot)
-                    # Because of that we can't normalize names, so we just define repos as shadow,
-                    # hiding packages with insane naming schemes
+                    # XXX: package naming is inconsistent (either plain name like kdenlive or
+                    # domain prefixed like com.abisource.abiword), but it's assumed that
+                    # everything up to the last dot may be stripped (#863)
                     pkg.set_name(pkgname)
+                    pkg.set_basename(pkgname.split('.')[-1])
                     pkg.set_version(version)
 
                     pkg.add_downloads((e.text for e in entry.findall('url')))
