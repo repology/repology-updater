@@ -39,6 +39,7 @@ def _normalize_version(version: str) -> str:
     return version
 
 
+# XXX: use repology.parsers.sqlite.iter_sqlite instead
 def _iter_sqlports(path: str) -> Iterable[Dict[str, str]]:
     columns = [
         'fullpkgpath',

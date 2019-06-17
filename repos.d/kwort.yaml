@@ -1,0 +1,49 @@
+###########################################################################
+# Kwort
+#
+# http://europa.fapyd.unr.edu.ar/pub/kwort/
+###########################################################################
+- name: kwort_4_3_2
+  type: repository
+  desc: Kwort 4.3.2
+  family: kwort
+  minpackages: 200
+  sources:
+    - name: europa.kdb
+      fetcher: FileFetcher
+      parser: KwortKdbParser
+      url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.2/europa.kdb'
+  repolinks:
+    - desc: Kwort Linux home
+      url: http://kwort.org/
+  tags: [ all, production, kwort ]
+
+- name: kwort_4_3_3
+  type: repository
+  desc: Kwort 4.3.3
+  family: kwort
+  minpackages: 200
+  sources:
+    - name: europa.kdb
+      fetcher: FileFetcher
+      parser: KwortKdbParser
+      url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.3/europa.kdb'
+  repolinks:
+    - desc: Kwort Linux home
+      url: http://kwort.org/
+  tags: [ all, production, kwort ]
+
+- name: kwort_4_3_4
+  type: repository
+  desc: Kwort 4.3.4
+  family: kwort
+  minpackages: 30  # why so little ???
+  sources:
+    - name: europa.kdb
+      fetcher: FileFetcher
+      parser: KwortKdbParser
+      url: 'http://europa.fapyd.unr.edu.ar/pub/kwort/4.3.4/europa.kdb'
+  repolinks:
+    - desc: Kwort Linux home
+      url: http://kwort.org/
+  tags: [ all, production, kwort ]
