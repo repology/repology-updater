@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Iterable, Union
+from typing import Iterable
 
 import rubymarshal.reader
 
@@ -25,26 +25,21 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _force_decode(var: Union[str, bytes]) -> str:
-    if isinstance(var, str):
-        return var
-    else:
-        return str(var, 'UTF-8')
-
-
 class RubyGemParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         with open(path, 'rb') as fd:
-            for gem in rubymarshal.reader.load(fd):
-                pkg = factory.begin()
+            for gemname, gemversion, gemplat in rubymarshal.reader.load(fd):
+                gemname = str(gemname)
 
-                pkg.set_name(_force_decode(gem[0]))
+                with factory.begin(gemname) as pkg:
+                    if gemplat != 'ruby':
+                        pkg.log('skipped, gemplat != ruby')
+                        continue
 
-                if _force_decode(gem[2]) != 'ruby':
-                    pkg.log('skipped, gemplat != ruby')
-                    continue
+                    gemversion = str(gemversion.marshal_dump()[0])
 
-                pkg.set_version(_force_decode(gem[1].values[0]))
-                pkg.add_homepages('https://rubygems.org/gems/' + pkg.name)
+                    pkg.set_name(gemname)
+                    pkg.set_version(gemversion)
+                    pkg.add_homepages('https://rubygems.org/gems/' + gemname)
 
-                yield pkg
+                    yield pkg

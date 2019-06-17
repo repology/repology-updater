@@ -46,6 +46,6 @@ setup(
         'pyparsing',
         'pytz',
         'requests',
-        'rubymarshal',
+        'rubymarshal>=1.2.6',
     ]
 )
