@@ -1,0 +1,25 @@
+###########################################################################
+# OS4Depot
+#
+# XXX: Due to prevailing amiga-specific software, we set shadow here
+# and also use blacklist in the ruleset to avoid clashes
+###########################################################################
+- name: os4depot
+  type: repository
+  desc: OS4Depot
+  family: os4depot
+  ruleset: os4depot
+  minpackages: 1
+  sources:
+    - name: FULLINDEX.readme
+      fetcher: FileFetcher
+      parser: OS4DepotIndexParser
+      url: 'http://os4depot.net/share/FULLINDEX.readme'
+  shadow: true
+  repolinks:
+    - desc: OS4Depot home
+      url: http://os4depot.net/
+  packagelinks:
+    - desc: Package page
+      url: 'http://os4depot.net/index.php?function=showfile&file={category}/{filename}'
+  tags: [ all, production ]

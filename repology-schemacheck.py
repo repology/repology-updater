@@ -77,6 +77,7 @@ families = [
     'openpkg',
     'opensuse',
     'openwrt',
+    'os4depot',
     'pclinuxos',
     'pisi',
     'pkgsrc',
