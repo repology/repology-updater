@@ -1,0 +1,22 @@
+###########################################################################
+# Luarocks
+###########################################################################
+- name: luarocks
+  type: modules
+  desc: LuaRocks
+  family: luarocks
+  minpackages: 12500  # about 2000 really, but a lot of versions
+  sources:
+    - name: manifest
+      fetcher: FileFetcher
+      parser: LuaRocksParser
+      url: https://luarocks.org/manifest
+  shadow: true
+  repolinks:
+    - desc: LuaRocks home
+      url: https://luarocks.org/
+  # XXX: not usable because uploader name is not known
+  #packagelinks:
+  #  - desc: LuaRocks page
+  #    url: 'https://luarocks.org/modules/{uploader}/{name}/{rawversion}'
+  tags: [ all, production ]
