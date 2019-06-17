@@ -64,7 +64,7 @@ def _parse_data(data: str) -> List[_PackageData]:
 
     root = lpar + Suppress(decimal) + ZeroOrMore(package_entry) + rpar
 
-    return root.parseString(data)  # type: ignore
+    return root.parseString(data, parseAll=True)  # type: ignore
 
 
 class ArchiveContentsParser(Parser):
