@@ -66,7 +66,7 @@ def badge_tiny_repos(name: str) -> Any:
         flask.render_template(
             'badge-tiny-blue.svg',
             name=name,
-            caption='in repositories',
+            caption=flask.request.args.to_dict().get('header', 'in repositories'),
             text=get_db().get_metapackage_families_count(name)
         ),
         {'Content-type': 'image/svg+xml'}
@@ -91,6 +91,7 @@ def badge_version_for_repo(repo: str, name: str) -> Any:
             {'Content-type': 'image/svg+xml'}
         )
 
+    header = flask.request.args.to_dict().get('header', repometadata[repo]['singular'])
     minversion = flask.request.args.to_dict().get('minversion')
     unsatisfying = version_compare(best_pkg_by_repo[repo].version, minversion) < 0 if minversion else False
 
@@ -101,6 +102,7 @@ def badge_version_for_repo(repo: str, name: str) -> Any:
             version=best_pkg_by_repo[repo].version,
             versionclass=best_pkg_by_repo[repo].versionclass,
             unsatisfying=unsatisfying,
+            header=header,
         ),
         {'Content-type': 'image/svg+xml'}
     )
@@ -146,14 +148,16 @@ def badge_latest_versions(name: str) -> Any:
         if package.versionclass in (PackageStatus.NEWEST, PackageStatus.DEVEL, PackageStatus.UNIQUE)
     )), key=cmp_to_key(version_compare), reverse=True)
 
-    caption = 'latest packaged version'
+    default_caption = 'latest packaged version'
 
     if versions:
         if len(versions) > 1:
-            caption += 's'
+            default_caption += 's'
         text = ', '.join(versions)
     else:
         text = '-'
+
+    caption = flask.request.args.to_dict().get('header', default_caption)
 
     return (
         flask.render_template(
