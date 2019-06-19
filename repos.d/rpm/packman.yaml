@@ -87,6 +87,27 @@
       url: 'http://packman.links2linux.org/package/{name}'
   tags: [all, packman]  # 6 packages
 
+- name: packman_fedora_30
+  type: repository
+  desc: PackMan Fedora 30
+  family: fedora
+  ruleset: [fedora, packman]
+  color: 'dbda04'
+  minpackages: 0
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/fedora/30/SRPMS/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, packman]  # 6 packages
+
 - name: packman_factory
   type: repository
   desc: PackMan Factory
@@ -142,6 +163,27 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.0/
+      allowed_archs: [src]
+  repolinks:
+    - desc: PackMan home
+      url: http://packman.links2linux.org/
+  packagelinks:
+    - desc: PackMan package page
+      url: 'http://packman.links2linux.org/package/{name}'
+  tags: [all, production, packman]
+
+- name: packman_opensuse_leap_15_1
+  type: repository
+  desc: PackMan openSUSE Leap 15.1
+  family: opensuse  # XXX: own family?
+  ruleset: [opensuse, packman]
+  color: 'dbda04'
+  minpackages: 500
+  sources:
+    - name: all
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.1/
       allowed_archs: [src]
   repolinks:
     - desc: PackMan home
