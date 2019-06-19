@@ -78,6 +78,7 @@ version are always parsed.
 | OpenIndiana                      | ✔       |         | ✔     | ✔     |         | ✔        |
 | OpenMandriva                     | ✔       | ✔       | ✔     | ✔     | ✔       |          |
 | OpenPKG                          | ✔       |         | ✔     | ✔     | ✔       | ✔        |
+| OS4Depot                         | ✔       |         | ✔     |       |         |          |
 | PCLinuxOS                        | ✔       | ✔       | ✔     |       |         |          |
 | Pisi                             | ✔       | ✔       | ✔     | ✔     | ✔       | ✔        |
 | pkgsrc                           | ✔       | ✔       | ✔     |       |         |          |
