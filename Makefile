@@ -31,7 +31,7 @@ gzip-static:
 clean:
 	rm -f ${STATICDIR}/*.gz
 
-lint:: test flake8 mypy
+lint:: check test flake8 mypy
 
 test::
 	python3 -m unittest discover
