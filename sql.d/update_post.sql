@@ -103,6 +103,10 @@ WHERE id NOT IN (
 	SELECT id FROM preserved_runs
 );
 
+-- delete interrupted unfinished runs
+DELETE FROM runs
+WHERE finish_ts IS NULL AND start_ts < now() - INTERVAL '1' day;
+
 DELETE FROM log_lines
 WHERE run_id NOT IN (
 	SELECT id FROM runs
