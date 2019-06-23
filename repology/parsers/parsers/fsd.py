@@ -41,35 +41,70 @@ class FreeSoftwareDirectoryXMLParser(Parser):
         # alpha, beta, developmental, historical, mature, planning, rolling, stable, testing, unknown, unstable
         _unstable_versions = {'alpha', 'beta', 'developmental', 'planning', 'testing', 'unstable'}
 
+        num_total = 0
+        num_nover = 0
+        num_noneng = 0
+        num_debian = 0
+        num_obsolete = 0
+
+        num_accepted = 0
+        num_devel = 0
+
         for entry in iter_xml_elements_at_level(path, 1, ['{http://semantic-mediawiki.org/swivt/1.0#}Subject']):
-            label = entry.findtext('{http://www.w3.org/2000/01/rdf-schema#}label')
-            with factory.begin(label) as pkg:
+            pages = _get_attrs(entry, '{http://semantic-mediawiki.org/swivt/1.0#}page', '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource')
+            if not pages:
+                continue
+
+            page = pages[0].split('/')[-1]
+
+            with factory.begin(page) as pkg:
+                label = entry.findtext('{http://www.w3.org/2000/01/rdf-schema#}label')
                 name = entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Name')
                 version = entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Version_identifier')
 
-                if name is None or version is None:
+                num_total += 1
+
+                if version is None:
+                    num_nover += 1
+                    continue
+
+                if entry.findtext('{http://semantic-mediawiki.org/swivt/1.0#}wikiPageContentLanguage') != 'en':
+                    num_noneng += 1
                     continue
 
                 if entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Import_source') == 'Debian':  # 'Debian import' seems OK though
+                    num_debian += 1
                     continue
 
                 if entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Decommissioned_or_Obsolete') == 'Yes':
+                    num_obsolete += 1
                     continue
 
                 version_status = entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Version_status')
 
                 if version_status in _unstable_versions:
+                    num_devel += 1
                     pkg.set_flags(PackageFlags.DEVEL)
                 elif version_status == 'rolling':
                     pkg.set_flags(PackageFlags.ROLLING)
 
-                pkg.set_name(name)
+                num_accepted += 1
+
+                pkg.set_name(page)
                 pkg.set_version(version)
                 pkg.set_summary(entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Short_description'))
 
                 pkg.add_homepages(_get_attrs(entry, '{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Homepage_URL', '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource'))
                 pkg.add_downloads(_get_attrs(entry, '{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Version_download', '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource'))
 
-                pkg.set_extra_field('page', _get_attrs(entry, '{http://semantic-mediawiki.org/swivt/1.0#}page', '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource')[0].split('/')[-1])
+                pkg.set_extra_field('name', name)
+                pkg.set_extra_field('label', label)
 
                 yield pkg
+
+        factory.log('Total software entries (with Name and Version): {}'.format(num_total))
+        factory.log('Dropped entries with no version defined: {}'.format(num_nover))
+        factory.log('Dropped non-english pages: {}'.format(num_noneng))
+        factory.log('Dropped entries marked as Import_source=Debian: {}'.format(num_debian))
+        factory.log('Dropped entries marked as Decommissioned_or_Obsolete: {}'.format(num_obsolete))
+        factory.log('Accepted entries: {} ({} unstable)'.format(num_accepted, num_devel))
