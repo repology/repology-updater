@@ -28,6 +28,10 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
+_WHITESPACE_PREFIX_RE = re.compile('([ ]*)[^ ]')
+_KEYVAL_RE = re.compile('([a-zA-Z-]+)[ \t]*:[ \t]*(.*?)')
+
+
 def _parse_cabal_file(path):
     cabaldata = {}
     offset = None
@@ -39,7 +43,7 @@ def _parse_cabal_file(path):
 
             # offset is needed to be calculated first, from first non-whitespace line
             if offset is None:
-                match = re.match('([ ]*)[^ ]', line)
+                match = _WHITESPACE_PREFIX_RE.match(line)
                 if match:
                     offset = len(match.group(1))
                 else:
@@ -60,7 +64,7 @@ def _parse_cabal_file(path):
                     key = None
 
             # process singleline key or start of a multiline key
-            match = re.fullmatch('([a-zA-Z-]+)[ \t]*:[ \t]*(.*?)', line)
+            match = _KEYVAL_RE.fullmatch(line)
             if not match:
                 continue
 
