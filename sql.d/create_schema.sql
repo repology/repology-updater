@@ -81,16 +81,38 @@ CREATE TYPE log_severity AS enum(
 -- functions
 --------------------------------------------------------------------------------
 
--- Simplifies given url so https://www.foo.com and foo.com are the same
--- - Removes schema
--- - Removes www
--- - Removes parameters
--- XXX: should lowercase as well?
-DROP FUNCTION IF EXISTS simplify_url CASCADE;
-
+-- Given an url, computes a digest for it which can be used to compare similar URLs
+-- Rougly, "http://FOO.COM/bar/" and "https://www.foo.com/bar#baz"
+-- both become "foo.com/bar", so the packages using these urls would
+-- be detected as related
 CREATE OR REPLACE FUNCTION simplify_url(url text) RETURNS text AS $$
 BEGIN
-	RETURN regexp_replace(regexp_replace(url, '/?([#?].*)?$', ''), '^https?://(www\.)?', '');
+	RETURN regexp_replace(
+		regexp_replace(
+			regexp_replace(
+				regexp_replace(
+					regexp_replace(
+						regexp_replace(
+							-- lowercase
+							lower(url),
+							-- unwrap archive.org links
+							'^https?://web.archive.org/web/([0-9]{10}[^/]*/|\*/)?', ''
+						),
+						-- drop fragment
+						'#.*$', ''
+					),
+					-- drop parameters
+					'\?.*$', ''
+				),
+				-- drop trailing slash
+				'/$', ''
+			),
+			-- drop schema
+			'^https?://', ''
+		),
+		-- drop www.
+		'^www\.', ''
+	);
 END;
 $$ LANGUAGE plpgsql IMMUTABLE RETURNS NULL ON NULL INPUT;
 
