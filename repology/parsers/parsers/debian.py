@@ -25,6 +25,12 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
+_DEBIAN_VERSION_BAD_SUFFIX_RE = re.compile('[.~+-]?(dfsg|ubuntu|mx).*', re.IGNORECASE)
+_DEBIAN_VERSION_GOOD_SUFFIX_RE = re.compile('((?:a|b|r|alpha|beta|rc|rcgit|pre|patch|git|svn|cvs|hg|bzr|darcs|dev)[.-]?[0-9]+(?:\\.[0-9]+)*|(?:alpha|beta|rc))', re.IGNORECASE)
+_DEBIAN_VERSION_SUFFIX_SEP_RE = re.compile('[~+-]')
+_DEBIAN_KEYVAL_RE = re.compile('([A-Za-z0-9_-]+):(.*?)')
+
+
 def normalize_version(version: str) -> str:
     # epoch
     pos = version.find(':')
@@ -37,15 +43,15 @@ def normalize_version(version: str) -> str:
         version = version[0:pos]
 
     # garbage debian/ubuntu addendums
-    version = re.sub('[.~+-]?(dfsg|ubuntu|mx).*', '', version, re.IGNORECASE)
+    version = _DEBIAN_VERSION_BAD_SUFFIX_RE.sub('', version)
 
     # remove suffixes
-    version, *suffixes = re.split('[~+-]', version)
+    version, *suffixes = _DEBIAN_VERSION_SUFFIX_SEP_RE.split(version)
 
     # append useful suffixes
     good_suffixes = []
     for suffix in suffixes:
-        match = re.match('((?:a|b|r|alpha|beta|rc|rcgit|pre|patch|git|svn|cvs|hg|bzr|darcs|dev)[.-]?[0-9]+(?:\\.[0-9]+)*|(?:alpha|beta|rc))', suffix, re.IGNORECASE)
+        match = _DEBIAN_VERSION_GOOD_SUFFIX_RE.match(suffix)
         if match:
             good_suffixes.append(match.group(1))
 
@@ -113,7 +119,7 @@ class DebianSourcesParser(Parser):
                     continue
 
                 # key - value pair
-                match = re.fullmatch('([A-Za-z0-9_-]+):(.*?)', line)
+                match = _DEBIAN_KEYVAL_RE.fullmatch(line)
                 if match:
                     key = match.group(1)
                     value = match.group(2).strip()
@@ -122,12 +128,11 @@ class DebianSourcesParser(Parser):
                     continue
 
                 # continuation of previous key
-                match = re.fullmatch(' (.*)', line)
-                if match:
+                if line.startswith(' '):
                     if last_key is None:
                         raise RuntimeError('unable to parse line: {}'.format(line))
 
-                    value = match.group(1).strip()
+                    value = line.strip()
                     if not isinstance(current_data[last_key], list):
                         current_data[last_key] = [current_data[last_key]]  # type: ignore
                     current_data[last_key].append(value)  # type: ignore
