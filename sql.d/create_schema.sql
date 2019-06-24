@@ -715,7 +715,8 @@ CREATE TABLE statistics (
 	num_packages integer NOT NULL DEFAULT 0,
 	num_metapackages integer NOT NULL DEFAULT 0,
 	num_problems integer NOT NULL DEFAULT 0,
-	num_maintainers integer NOT NULL DEFAULT 0
+	num_maintainers integer NOT NULL DEFAULT 0,
+	num_urls_checked integer NOT NULL DEFAULT 0
 );
 
 INSERT INTO statistics VALUES(DEFAULT);
