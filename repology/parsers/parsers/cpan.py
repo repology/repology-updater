@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
 from typing import Iterable
 
 from repology.logger import Logger
@@ -58,7 +57,7 @@ class CPANPackagesParser(Parser):
 
                 pkg = factory.begin('line {}'.format(nline))
 
-                module, version, package = re.split(r'[ \t]+', line)
+                module, version, package = line.split(None, 2)
 
                 package_path, package_file = package.rsplit('/', 1)
                 package_name = None
@@ -76,7 +75,7 @@ class CPANPackagesParser(Parser):
                 if package_version.startswith('v') or package_version.startswith('V'):
                     package_version = package_version[1:]
 
-                if not re.match('[0-9]', package_version):
+                if not package_version[0].isdecimal():
                     pkg.log('skipping bad version {}'.format(package_version), Logger.ERROR)
                     continue
 
