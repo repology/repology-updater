@@ -18,5 +18,5 @@
       url: https://directory.fsf.org/wiki/Main_Page
   packagelinks:
     - desc: Free Software Directory page
-      url: 'https://directory.fsf.org/wiki/{name}'
+      url: 'https://directory.fsf.org/wiki/{page}'
   tags: [ all ]  # not enabled due to poor quality and incompatible data (see #530)

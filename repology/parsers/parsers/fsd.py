@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 from typing import Iterable, List
 
 from repology.package import PackageFlags
@@ -33,6 +34,10 @@ def _get_attrs(elt: XmlElement, path: str, attrname: str) -> List[str]:
             res.append(attr)
 
     return res
+
+
+def _unescape(s: str) -> str:
+    return re.sub(b'-([0-9A-F]{2})', lambda m: bytes([int(m.group(1), 16)]), s.encode('ascii')).decode('utf-8')
 
 
 class FreeSoftwareDirectoryXMLParser(Parser):
@@ -55,7 +60,7 @@ class FreeSoftwareDirectoryXMLParser(Parser):
             if not pages:
                 continue
 
-            page = pages[0].split('/')[-1]
+            page = _unescape(pages[0].split('/')[-1])
 
             with factory.begin(page) as pkg:
                 label = entry.findtext('{http://www.w3.org/2000/01/rdf-schema#}label')
@@ -97,6 +102,7 @@ class FreeSoftwareDirectoryXMLParser(Parser):
                 pkg.add_homepages(_get_attrs(entry, '{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Homepage_URL', '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource'))
                 pkg.add_downloads(_get_attrs(entry, '{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Version_download', '{http://www.w3.org/1999/02/22-rdf-syntax-ns#}resource'))
 
+                pkg.set_extra_field('page', page)
                 pkg.set_extra_field('name', name)
                 pkg.set_extra_field('label', label)
 
