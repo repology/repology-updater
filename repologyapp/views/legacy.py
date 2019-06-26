@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,12 +15,38 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Optional
+from typing import Any, Collection, Dict, Optional
 
 import flask
 
 from repologyapp.globals import repometadata
 from repologyapp.view_registry import ViewRegistrar
+
+
+def _get_filtered_args(wanted_args: Collection[str]) -> Dict[str, str]:
+    return {
+        key: val
+        for key, val in flask.request.args.to_dict().items()
+        if key in wanted_args
+    }
+
+
+def _get_projects_args() -> Dict[str, str]:
+    return _get_filtered_args({
+        'category',
+        'families',
+        'families_newest',
+        'has_related',
+        'inrepo',
+        'maintainer',
+        'newest',
+        'notinrepo',
+        'outdated',
+        'problematic',
+        'repos',
+        'repos_newest',
+        'search',
+    })
 
 
 @ViewRegistrar('/metapackages/all/')
@@ -122,7 +148,7 @@ def project(name: str) -> Any:
 @ViewRegistrar('/metapackages/')
 @ViewRegistrar('/metapackages/<bound>/')
 def metapackages(bound: Optional[str] = None) -> Any:
-    return flask.redirect(flask.url_for('projects', bound=bound), 301)
+    return flask.redirect(flask.url_for('projects', bound=bound, **_get_projects_args()), 301)
 
 
 @ViewRegistrar('/metapackage/<name>/versions')
@@ -163,7 +189,7 @@ def metapackage_report(name: str) -> Any:
 @ViewRegistrar('/api/v1/metapackages/')
 @ViewRegistrar('/api/v1/metapackages/<bound>/')
 def api_v1_metapackages(bound: Optional[str] = None) -> Any:
-    return flask.redirect(flask.url_for('api_v1_projects', bound=bound), 301)
+    return flask.redirect(flask.url_for('api_v1_projects', bound=bound, **_get_projects_args()), 301)
 
 
 @ViewRegistrar('/api/v1/metapackage/<name>')
