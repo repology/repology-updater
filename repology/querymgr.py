@@ -18,7 +18,7 @@
 import functools
 import os
 import re
-from typing import Any, Callable, ClassVar, Dict, List, Optional
+from typing import Any, Callable, ClassVar, Dict, List
 
 import jinja2
 
@@ -56,7 +56,7 @@ class QueryMetadata:
 
     name: str
     query: str
-    template: Optional[jinja2.Template]
+    template: jinja2.Template
     args: List[Any]
     argdefaults: Dict[str, Any]
     rettype: int
@@ -65,7 +65,7 @@ class QueryMetadata:
     def __init__(self, name: str, query: str) -> None:
         self.name = name
         self.query = query
-        self.template = None
+        self.template = jinja2.Template(query)
         self.args = []
         self.argdefaults = {}
         self.rettype = QueryMetadata.RET_NONE
@@ -180,8 +180,6 @@ class QueryManager:
                     raise QueryLoadingError('Cannot load SQL query from {}: {}'.format(filename, str(e)))
 
     def _register_query(self, query: QueryMetadata) -> None:
-        query.template = jinja2.Template(query.query)
-
         def adapt_dict_argument(data):
             if isinstance(data, dict):
                 return psycopg2.extras.Json(data)
