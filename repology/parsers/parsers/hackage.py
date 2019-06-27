@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Iterable
+from typing import Dict, Iterable
 
 from libversion import version_compare
 
@@ -32,8 +32,8 @@ _WHITESPACE_PREFIX_RE = re.compile('([ ]*)[^ ]')
 _KEYVAL_RE = re.compile('([a-zA-Z-]+)[ \t]*:[ \t]*(.*?)')
 
 
-def _parse_cabal_file(path):
-    cabaldata = {}
+def _parse_cabal_file(path: str) -> Dict[str, str]:
+    cabaldata: Dict[str, str] = {}
     offset = None
     key = None
 
@@ -102,6 +102,7 @@ class HackageParser(Parser):
 
             pkg.set_version(maxversion)
 
+            assert(cabalpath)
             cabaldata = _parse_cabal_file(cabalpath)
 
             if cabaldata['name'] == pkg.name and version_compare(cabaldata['version'], pkg.version) == 0:

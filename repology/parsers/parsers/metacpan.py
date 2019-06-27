@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Dict, Iterable
+from typing import Any, Dict, Iterable, List, Optional
 
 from libversion import version_compare
 
@@ -28,7 +28,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _as_str(v):
+def _as_str(v: Any) -> Optional[str]:
     if v is None:
         return None
     if isinstance(v, list):
@@ -37,7 +37,7 @@ def _as_str(v):
     return str(v)
 
 
-def _as_list(v):
+def _as_list(v: Any) -> List[Any]:
     if v is None:
         return []
     if not isinstance(v, list):
@@ -45,7 +45,7 @@ def _as_list(v):
     return v
 
 
-def _iter_packages(path):
+def _iter_packages(path: str) -> Iterable[Dict[str, Any]]:
     for filename in os.listdir(path):
         if not filename.endswith('.json'):
             continue
@@ -54,10 +54,14 @@ def _iter_packages(path):
             yield from (hit['fields'] for hit in json.load(jsonfile))
 
 
-def _parse_package(pkg, fields):
+def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> PackageMaker:
     pkg.set_name(_as_str(fields['distribution']))
     pkg.set_version(_as_str(fields['version']))
-    pkg.add_maintainers(_as_str(fields['author']).lower() + '@cpan')
+
+    author = _as_str(fields['author'])
+    if author:
+        pkg.add_maintainers(author.lower() + '@cpan')
+
     pkg.add_licenses(_as_list(fields['license']))
     pkg.set_summary(_as_str(fields.get('abstract')))
     pkg.add_homepages(_as_str(fields.get('resources.homepage')))
@@ -66,7 +70,7 @@ def _parse_package(pkg, fields):
     return pkg
 
 
-def _parse_latest_packages(packages, latest_versions, factory):
+def _parse_latest_packages(packages: Iterable[Dict[str, Any]], latest_versions: Dict[str, str], factory: PackageFactory) -> Iterable[PackageMaker]:
     for fields in packages:
         # only take latest versions (there's only one of them per distribution)
         if _as_str(fields['status']) != 'latest':
@@ -82,7 +86,7 @@ def _parse_latest_packages(packages, latest_versions, factory):
         yield pkg
 
 
-def _parse_devel_packages(packages, latest_versions, factory):
+def _parse_devel_packages(packages: Iterable[Dict[str, Any]], latest_versions: Dict[str, str], factory: PackageFactory) -> Iterable[PackageMaker]:
     for fields in packages:
         if _as_str(fields['maturity']) != 'developer':
             continue

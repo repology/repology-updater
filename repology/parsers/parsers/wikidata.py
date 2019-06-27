@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
-from typing import Iterable
+from typing import Dict, Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -31,7 +31,7 @@ _DONOR_REPOS = [
 ]
 
 
-def _iter_packages(path):
+def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
     with open(path, 'r', encoding='utf-8') as jsonfile:
         for item in json.load(jsonfile)['results']['bindings']:
             yield {

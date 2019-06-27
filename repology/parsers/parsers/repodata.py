@@ -17,7 +17,7 @@
 
 import re
 import xml.etree.ElementTree
-from typing import Dict, Iterable
+from typing import Dict, Iterable, List, Optional
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -42,7 +42,7 @@ def _iter_package_entries(path: str) -> Iterable[xml.etree.ElementTree.Element]:
 
 
 class RepodataParser(Parser):
-    def __init__(self, allowed_archs=None):
+    def __init__(self, allowed_archs: Optional[List[str]] = None) -> None:
         self.allowed_archs = allowed_archs
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:

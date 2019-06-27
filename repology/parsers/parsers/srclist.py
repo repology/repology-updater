@@ -27,7 +27,7 @@ from repology.transformer import PackageTransformer
 
 
 class SrcListParser(Parser):
-    def __init__(self, encoding='utf-8'):
+    def __init__(self, encoding: str = 'utf-8') -> None:
         self.encoding = encoding
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:

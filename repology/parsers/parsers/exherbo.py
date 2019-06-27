@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Iterable, Tuple
+from typing import Iterable, List, Tuple
 
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -50,7 +50,7 @@ def _iter_exheres(path: str) -> Iterable[Tuple[str, str, str]]:
                 yield category, package, exheres
 
 
-def _get_repo_maintainers(path):
+def _get_repo_maintainers(path: str) -> List[str]:
     with open(os.path.join(path, 'metadata/about.conf'), 'r', encoding='utf-8') as metadata:
         for line in metadata:
             if '=' in line:

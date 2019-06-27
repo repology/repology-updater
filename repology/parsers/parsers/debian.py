@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Dict, Iterable, List, Union
+from typing import Any, Dict, Iterable, List, Union
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -79,7 +79,7 @@ class DebianSourcesParser(Parser):
 
                     pkg = factory.begin()
 
-                    def get_field(key, type_=str, default=None):
+                    def get_field(key: str, type_: Any = str, default: Any = None) -> Any:
                         if key in current_data:
                             if type_ is None or isinstance(current_data[key], type_):
                                 return current_data[key]

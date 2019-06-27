@@ -17,7 +17,7 @@
 
 import os
 import xml.etree.ElementTree
-from typing import Iterable
+from typing import Dict, Iterable, List, Optional, Tuple
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -28,7 +28,7 @@ from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
 
 
-def _parse_conditional_expr(string):
+def _parse_conditional_expr(string: str) -> Iterable[str]:
     words = string.split()
 
     nestlevel = 0
@@ -55,7 +55,7 @@ def _parse_conditional_expr(string):
         # XXX: parse ( || foo bar ) construct used with licenses
 
 
-def _iter_packages(path):
+def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
     for category in os.listdir(path):
         category_path = os.path.join(path, category)
         if not os.path.isdir(category_path):
@@ -71,7 +71,7 @@ def _iter_packages(path):
             yield (category, package)
 
 
-def _iter_ebuilds(path, category, package):
+def _iter_ebuilds(path: str, category: str, package: str) -> Iterable[str]:
     for ebuild in os.listdir(os.path.join(path, category, package)):
         if not ebuild.endswith('.ebuild'):
             continue
@@ -79,7 +79,7 @@ def _iter_ebuilds(path, category, package):
         yield ebuild[:-7]  # strip extension
 
 
-def _construct_upstream_link(upstream_type, arg, pkg):
+def _construct_upstream_link(upstream_type: str, arg: str, pkg: PackageMaker) -> Optional[str]:
     if   upstream_type == 'bitbucket':      return 'https://bitbucket.org/{}'.format(arg)  # noqa
     elif upstream_type == 'cpan':           return 'https://metacpan.org/release/{}'.format(arg)  # noqa
     elif upstream_type == 'cpan-module':    return None  # should be handled by cpan  # noqa
@@ -101,11 +101,11 @@ def _construct_upstream_link(upstream_type, arg, pkg):
     return None
 
 
-def _parse_package_metadata_xml(path, category, package, pkg):
+def _parse_package_metadata_xml(path: str, category: str, package: str, pkg: PackageMaker) -> Tuple[List[str], List[str]]:
     metadata_path = os.path.join(path, category, package, 'metadata.xml')
 
-    maintainers = []
-    upstreams = []
+    maintainers: List[str] = []
+    upstreams: List[str] = []
 
     if not os.path.isfile(metadata_path):
         return (maintainers, upstreams)
@@ -121,15 +121,18 @@ def _parse_package_metadata_xml(path, category, package, pkg):
 
     for entry in meta.findall('upstream'):
         for remote_id_node in entry.findall('remote-id'):
-            upstreams.append(_construct_upstream_link(remote_id_node.attrib['type'], remote_id_node.text.strip(), pkg))
+            if remote_id_node.text:
+                link = _construct_upstream_link(remote_id_node.attrib['type'], remote_id_node.text.strip(), pkg)
+                if link:
+                    upstreams.append(link)
 
     return (maintainers, upstreams)
 
 
-def _parse_md5cache_metadata_xml(path, category, ebuild):
+def _parse_md5cache_metadata_xml(path: str, category: str, ebuild: str) -> Dict[str, str]:
     metadata_path = os.path.join(path, 'metadata', 'md5-cache', category, ebuild)
 
-    result = {}
+    result: Dict[str, str] = {}
 
     if not os.path.isfile(metadata_path):
         return result
@@ -182,12 +185,6 @@ class GentooGitParser(Parser):
                     subpkg.add_downloads(filter(lambda s: '/' in s, _parse_conditional_expr(metadata['SRC_URI'])))
 
                 homepages = metadata.get('HOMEPAGE', '').split(' ')
-                subpkg.add_homepages(homepages)
-
-                homepages = set(homepages)
-
-                for upstream in upstreams:
-                    if upstream and upstream not in homepages:
-                        subpkg.add_homepages(upstream)
+                subpkg.add_homepages(homepages, upstreams)
 
                 yield subpkg

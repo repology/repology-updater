@@ -27,7 +27,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _expand_mirrors(url):
+def _expand_mirrors(url: str) -> str:
     http_sourceforge = 'http://downloads.sourceforge.net'
     ftp_gnu = 'ftp://ftp.gnu.org/gnu'
     return url.replace('$httpSourceforge', http_sourceforge) \

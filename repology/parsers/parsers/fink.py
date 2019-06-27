@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable
+from typing import Dict, Iterable
 
 import lxml
 
@@ -29,13 +29,13 @@ from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
 
-def _parse_info_file(filename):
+def _parse_info_file(filename: str) -> Dict[str, str]:
     with open(filename, 'r') as infofile:
         return _parse_info(infofile.read())
 
 
-def _parse_info(text):
-    result = {}
+def _parse_info(text: str) -> Dict[str, str]:
+    result: Dict[str, str] = {}
     current_multiline_key = None
     multiline_depth = 0
 
@@ -51,7 +51,7 @@ def _parse_info(text):
             elif line.endswith('<<'):
                 multiline_depth += 1
 
-            if multiline_depth:
+            if multiline_depth and current_multiline_key:
                 result[current_multiline_key] += line + '\n'
         else:
             key, val = line.split(':', 1)

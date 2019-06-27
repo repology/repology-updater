@@ -29,7 +29,7 @@ from repology.transformer import PackageTransformer
 
 
 class MacPortsParser(Parser):
-    def __init__(self):
+    def __init__(self) -> None:
         self.helperpath = os.path.join(config['HELPERS_DIR'], 'portindex2json', 'portindex2json.tcl')
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:

@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import shlex
-from typing import Iterable
+from typing import Dict, Iterable, Tuple
 
 from jsonslicer import JsonSlicer
 
@@ -26,7 +26,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iter_packages(path):
+def _iter_packages(path: str) -> Iterable[Tuple[str, Dict[str, str]]]:
     with open(path, 'rb') as jsonfile:
         for summary_key, fmri, _, pkgdata in JsonSlicer(jsonfile, (None, None, None), path_mode='full'):
             if summary_key.startswith('_'):  # e.g. _SIGNATURE

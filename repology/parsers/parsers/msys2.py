@@ -16,7 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Iterable
+from collections import defaultdict
+from typing import Dict, Iterable, List
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -25,21 +26,17 @@ from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
 
 
-def _parse_descfile(path):
-    data = {}
-    with open(path, 'r', encoding='utf-8') as descfile:
-        key = None
-        value = []
+def _parse_descfile(path: str) -> Dict[str, List[str]]:
+    data: Dict[str, List[str]] = defaultdict(list)
 
+    with open(path, 'r', encoding='utf-8') as descfile:
+        key = ''
         for line in descfile:
             line = line.strip()
             if line.startswith('%') and line.endswith('%'):
                 key = line[1:-1]
-                value = []
-            elif line == '':
-                data[key] = value
-            else:
-                value.append(line)
+            elif line:
+                data[key].append(line)
 
     return data
 

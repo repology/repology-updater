@@ -26,7 +26,7 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def normalize_version(version):
+def _normalize_version(version: str) -> str:
     match = re.match('(.*)-[0-9]+\\.[0-9a-f]{7,}$', version)
     if match:
         return match.group(1)
@@ -51,7 +51,7 @@ class GuixParser(Parser):
 
                 name, version = cell.text.split(None, 1)
                 pkg.set_name(name)
-                pkg.set_version(version, normalize_version)
+                pkg.set_version(version, _normalize_version)
 
                 pkg.set_summary(cell.xpath('./span[@class="package-synopsis"]')[0].text.strip().strip('—'))
 
