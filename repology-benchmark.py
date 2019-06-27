@@ -21,7 +21,7 @@ import argparse
 import pickle
 import sys
 import time
-from typing import Dict
+from typing import Any, Dict, List
 
 from repology.config import config
 from repology.database import Database
@@ -88,7 +88,7 @@ queries = [
 ]
 
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
@@ -107,7 +107,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def run_single_query(database, method, kwargs, options):
+def run_single_query(database: Database, method: str, kwargs: Any, options: argparse.Namespace) -> float:
     mindelta = None
     totaldelta = 0.0
     iteration = 0
@@ -129,10 +129,11 @@ def run_single_query(database, method, kwargs, options):
         explain_query = getattr(database, 'explain_' + method)
         print(explain_query(**kwargs), file=sys.stderr)
 
+    assert(mindelta is not None)
     return mindelta
 
 
-def check_keywords(name, keywords):
+def check_keywords(name: str, keywords: List[str]) -> bool:
     if not keywords:
         return True
 

@@ -272,12 +272,12 @@ schemas = {
 }
 
 
-def get_yaml(path):
+def get_yaml(path: str) -> Any:
     with open(path) as yamlfile:
         return yaml.safe_load(yamlfile)
 
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-s', '--schema', choices=schemas.keys(), required=True, help='schema to use')
     parser.add_argument('files', metavar='file', nargs='*', help='files to check')

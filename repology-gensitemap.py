@@ -28,7 +28,7 @@ from repology.database import Database
 from repology.querymgr import QueryManager
 
 
-def parse_arguments():
+def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('-Q', '--sql-dir', default=config['SQL_DIR'], help='path to directory with sql queries')
