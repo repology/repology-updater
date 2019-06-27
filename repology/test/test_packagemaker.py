@@ -17,14 +17,17 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+# mypy: no-disallow-untyped-calls
+
 import unittest
+from typing import Any, Iterator
 
 from repology.logger import AccumulatingLogger, NoopLogger
 from repology.packagemaker import PackageFactory
 
 
 class TestPackageMaker(unittest.TestCase):
-    def test_all_fields(self):
+    def test_all_fields(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -50,7 +53,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.licenses, ['GPLv2', 'GPLv3', 'MIT'])
         self.assertEqual(pkg.downloads, ['http://baz/', 'ftp://quux/'])
 
-    def test_validate_urls(self):
+    def test_validate_urls(self) -> None:
         logger = AccumulatingLogger()
         factory = PackageFactory(logger)
 
@@ -62,7 +65,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(len(logger.get()), 1)
         self.assertTrue('invalid' in logger.get()[0])
 
-    def test_normalize_urls(self):
+    def test_normalize_urls(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -73,7 +76,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.homepage, 'http://foo.com/')
         self.assertEqual(pkg.downloads, ['http://foo.com/'])
 
-    def test_unicalization_with_order_preserved(self):
+    def test_unicalization_with_order_preserved(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -83,7 +86,7 @@ class TestPackageMaker(unittest.TestCase):
 
         self.assertEqual(pkg.maintainers, ['z@com', 'y@com', 'x@com'])
 
-    def test_strip(self):
+    def test_strip(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -92,7 +95,7 @@ class TestPackageMaker(unittest.TestCase):
 
         self.assertEqual(pkg.comment, 'some package foo')
 
-    def test_redefine(self):
+    def test_redefine(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -108,7 +111,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.version, '1.1')
         self.assertEqual(pkg.comment, 'Bar')
 
-    def test_type_normalization1(self):
+    def test_type_normalization1(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -121,7 +124,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.version, '0')
         self.assertEqual(pkg.comment, '0')
 
-    def test_type_normalization2(self):
+    def test_type_normalization2(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -133,7 +136,7 @@ class TestPackageMaker(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             maker.set_summary([123])
 
-    def test_nulls(self):
+    def test_nulls(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()
@@ -152,8 +155,8 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg.version, '1.0')
         self.assertEqual(pkg.comment, 'Foo')
 
-    def test_iter(self):
-        def iter_maintainers():
+    def test_iter(self) -> None:
+        def iter_maintainers() -> Iterator[Any]:
             yield 'a@com'
             yield ['b@com', None, '', 'c@com']
             yield None
@@ -168,7 +171,7 @@ class TestPackageMaker(unittest.TestCase):
 
         self.assertEqual(pkg.maintainers, ['a@com', 'b@com', 'c@com', 'd@com'])
 
-    def test_clone(self):
+    def test_clone(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         pkg1 = factory.begin('pkg1')
@@ -184,7 +187,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertEqual(pkg2.maintainers, ['foo', 'bar'])
         self.assertEqual(pkg3.maintainers, ['foo', 'baz'])
 
-    def test_ident(self):
+    def test_ident(self) -> None:
         logger = AccumulatingLogger()
 
         factory = PackageFactory(logger)
@@ -204,7 +207,7 @@ class TestPackageMaker(unittest.TestCase):
         self.assertTrue('pkg1pkg3:' in logger.get()[2])
         self.assertTrue('pkg2:' not in logger.get()[2])
 
-    def test_sanity(self):
+    def test_sanity(self) -> None:
         factory = PackageFactory(NoopLogger())
 
         maker = factory.begin()

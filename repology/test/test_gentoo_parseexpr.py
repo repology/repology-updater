@@ -18,32 +18,33 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
+from typing import List
 
 from repology.parsers.parsers.gentoo import _parse_conditional_expr
 
 
-def parse_conditional_expr(*args, **kwargs):
-    return list(_parse_conditional_expr(*args, **kwargs))
+def parse_conditional_expr(string: str) -> List[str]:
+    return list(_parse_conditional_expr(string))
 
 
 class TestGentooParseExpr(unittest.TestCase):
-    def test_simple(self):
+    def test_simple(self) -> None:
         self.assertEqual(parse_conditional_expr('http://foo'), ['http://foo'])
 
-    def test_multiple(self):
+    def test_multiple(self) -> None:
         self.assertEqual(parse_conditional_expr('http://foo http://bar'), ['http://foo', 'http://bar'])
 
-    def test_rename(self):
+    def test_rename(self) -> None:
         self.assertEqual(parse_conditional_expr('http://foo/file.tgz -> file.tar.gz'), ['http://foo/file.tgz'])
 
-    def test_condition(self):
+    def test_condition(self) -> None:
         self.assertEqual(parse_conditional_expr('!http? ( http://foo )'), ['http://foo'])
         self.assertEqual(parse_conditional_expr('!http? ( http://foo ) !ftp? ( http://bar )'), ['http://foo', 'http://bar'])
 
-    def test_nested_condition(self):
+    def test_nested_condition(self) -> None:
         self.assertEqual(parse_conditional_expr('!http? ( !ftp? ( http://foo ) )'), ['http://foo'])
 
-    def test_realworld(self):
+    def test_realworld(self) -> None:
         self.assertEqual(
             parse_conditional_expr(
                 'mirror://sourceforge/free-doko/FreeDoko_0.7.14.src.zip backgrounds? '

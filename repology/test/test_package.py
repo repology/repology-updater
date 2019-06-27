@@ -17,13 +17,15 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+# mypy: no-disallow-untyped-calls
+
 import unittest
 
 from repology.package import Package, PackageFlags
 
 
 class TestParsers(unittest.TestCase):
-    def test_equality(self):
+    def test_equality(self) -> None:
         self.assertEqual(Package(), Package())
         self.assertEqual(Package(name='a'), Package(name='a'))
 
@@ -31,19 +33,19 @@ class TestParsers(unittest.TestCase):
         self.assertNotEqual(Package(), Package(name='b'))
         self.assertNotEqual(Package(name='a'), Package())
 
-    def test_flag_p_is_patch(self):
+    def test_flag_p_is_patch(self) -> None:
         self.assertEqual(Package(version='1.0p1').version_compare(Package(version='1.0p1')), 0)
         self.assertEqual(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH).version_compare(Package(version='1.0p1')), 1)
         self.assertEqual(Package(version='1.0p1').version_compare(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH)), -1)
         self.assertEqual(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH).version_compare(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH)), 0)
 
-    def test_flag_outdated(self):
+    def test_flag_outdated(self) -> None:
         self.assertEqual(Package(version='1.0').version_compare(Package(version='1.0')), 0)
         self.assertEqual(Package(version='1.0', flags=PackageFlags.OUTDATED).version_compare(Package(version='1.0')), -1)
         self.assertEqual(Package(version='1.0').version_compare(Package(version='1.0', flags=PackageFlags.OUTDATED)), 1)
         self.assertEqual(Package(version='1.0', flags=PackageFlags.OUTDATED).version_compare(Package(version='1.0', flags=PackageFlags.OUTDATED)), 0)
 
-    def test_flag_rolling(self):
+    def test_flag_rolling(self) -> None:
         self.assertEqual(Package(version='1.0').version_compare(Package(version='1.0')), 0)
         self.assertEqual(Package(version='1.0', flags=PackageFlags.ROLLING).version_compare(Package(version='1.0')), 1)
         self.assertEqual(Package(version='1.0').version_compare(Package(version='1.0', flags=PackageFlags.ROLLING)), -1)

@@ -24,20 +24,20 @@ from repologyapp.afk import AFKChecker
 
 
 class TestAFK(unittest.TestCase):
-    def test_empty(self):
+    def test_empty(self) -> None:
         afk = AFKChecker()
 
         self.assertEqual(afk.get_afk_end(), None)
         self.assertEqual(afk.get_afk_end(date(2017, 1, 1)), None)
 
-    def test_day(self):
+    def test_day(self) -> None:
         afk = AFKChecker(['2017-01-02'])
 
         self.assertEqual(afk.get_afk_end(date(2017, 1, 1)), None)
         self.assertEqual(afk.get_afk_end(date(2017, 1, 2)), date(2017, 1, 2))
         self.assertEqual(afk.get_afk_end(date(2017, 1, 3)), None)
 
-    def test_range(self):
+    def test_range(self) -> None:
         afk = AFKChecker(['2017-01-02 2017-01-04'])
 
         self.assertEqual(afk.get_afk_end(date(2017, 1, 1)), None)
@@ -46,7 +46,7 @@ class TestAFK(unittest.TestCase):
         self.assertEqual(afk.get_afk_end(date(2017, 1, 4)), date(2017, 1, 4))
         self.assertEqual(afk.get_afk_end(date(2017, 1, 5)), None)
 
-    def test_multi(self):
+    def test_multi(self) -> None:
         afk = AFKChecker(['2017-01-02', '2017-01-04 2017-01-05'])
 
         self.assertEqual(afk.get_afk_end(date(2017, 1, 1)), None)

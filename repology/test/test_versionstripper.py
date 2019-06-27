@@ -23,16 +23,16 @@ from repology.parsers.versions import VersionStripper
 
 
 class TestVersionStripper(unittest.TestCase):
-    def test_identity(self):
+    def test_identity(self) -> None:
         self.assertEqual(VersionStripper()('1.2.3'), '1.2.3')
 
-    def test_basic(self):
+    def test_basic(self) -> None:
         self.assertEqual(VersionStripper().strip_left('.')('1.2.3'), '2.3')
         self.assertEqual(VersionStripper().strip_left_greedy('.')('1.2.3'), '3')
         self.assertEqual(VersionStripper().strip_right('.')('1.2.3'), '1.2')
         self.assertEqual(VersionStripper().strip_right_greedy('.')('1.2.3'), '1')
 
-    def test_order(self):
+    def test_order(self) -> None:
         self.assertEqual(VersionStripper().strip_right('_').strip_right(',')('1_2,3_4'), '1_2')
         self.assertEqual(VersionStripper().strip_right(',').strip_right('_')('1_2,3_4'), '1')
 

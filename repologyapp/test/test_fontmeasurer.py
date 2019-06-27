@@ -25,7 +25,7 @@ from repologyapp.fontmeasurer import FontMeasurer
 
 @unittest.skipIf('BADGE_FONT' not in config, 'font measurer test requires BADGE_FONT configuration directive defined')
 class FontMeasurerTest(unittest.TestCase):
-    def test_fontmeasurer(self):
+    def test_fontmeasurer(self) -> None:
         fontmeas = FontMeasurer(config['BADGE_FONT'], 11)
 
         first_result = fontmeas.get_text_dimensions('The quick brown fox jumps over the lazy dog')

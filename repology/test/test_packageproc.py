@@ -17,15 +17,18 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+# mypy: no-disallow-untyped-calls
+
 import unittest
+from typing import List
 
 from repology.package import Package, PackageFlags, PackageStatus
 from repology.packageproc import fill_packageset_versions, packageset_is_unique
 
 
 class TestPackageProc(unittest.TestCase):
-    def test_packageset_is_unique(self):
-        packages = []
+    def test_packageset_is_unique(self) -> None:
+        packages: List[Package] = []
         self.assertEqual(packageset_is_unique(packages), True)
 
         packages = [Package(family='foo')]
@@ -37,7 +40,7 @@ class TestPackageProc(unittest.TestCase):
         packages = [Package(family='foo'), Package(family='bar')]
         self.assertEqual(packageset_is_unique(packages), False)
 
-    def test_versionclasses_big(self):
+    def test_versionclasses_big(self) -> None:
         packages = [
             # Reference repo
             (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
@@ -103,7 +106,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_single_branch1(self):
+    def test_versionclass_single_branch1(self) -> None:
         packages = [
             # here we only have default branch
             (Package(repo='1', family='1', name='a', version='2.2.20990101', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
@@ -122,7 +125,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_single_branch2(self):
+    def test_versionclass_single_branch2(self) -> None:
         packages = [
             # here we only have devel branch
             (Package(repo='1', family='1', name='a', version='2.2rc1.20990101', flags=PackageFlags.IGNORE | PackageFlags.DEVEL), PackageStatus.IGNORED),
@@ -141,7 +144,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_branch_confusion(self):
+    def test_versionclass_branch_confusion(self) -> None:
         packages = [
             # same version is both devel and default in different packages
             # this should be consistently aggregated
@@ -157,7 +160,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_devel_lower_than_default(self):
+    def test_versionclass_devel_lower_than_default(self) -> None:
         packages = [
             # devel package < normal package
             (Package(repo='1', family='1', name='a', version='2.1'), PackageStatus.NEWEST),
@@ -172,7 +175,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_unignored_really_unignored(self):
+    def test_versionclass_unignored_really_unignored(self) -> None:
         packages = [
             # ignored package should be fully unignored with the same non-ignored version in another repo
             (Package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.IGNORE), PackageStatus.NEWEST),
@@ -187,7 +190,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_unique(self):
+    def test_versionclass_unique(self) -> None:
         packages = [
             (Package(repo='1', family='1', name='a', version='2.0alpha1', flags=PackageFlags.DEVEL), PackageStatus.UNIQUE),
             (Package(repo='2', family='1', name='a', version='1.2'), PackageStatus.UNIQUE),
@@ -200,7 +203,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_branch_bounds(self):
+    def test_versionclass_branch_bounds(self) -> None:
         packages = [
             (Package(repo='1', family='1', name='a', version='2.2beta1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
             (Package(repo='1', family='1', name='a', version='2.2alpha1.9999', flags=PackageFlags.IGNORE | PackageFlags.DEVEL), PackageStatus.LEGACY),
@@ -218,7 +221,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_ignoredignored(self):
+    def test_versionclass_ignoredignored(self) -> None:
         packages = [
             (Package(repo='1', family='1', name='a', version='2.2.99999999', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
             (Package(repo='1', family='1', name='a', version='2.2.9999', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
@@ -236,7 +239,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_sameversionsamestatus(self):
+    def test_versionclass_sameversionsamestatus(self) -> None:
         packages = [
             (Package(repo='2', family='2', name='a', version='2.2'), PackageStatus.NEWEST),
             # one of these packages should not make the other one legacy instead of outdated
@@ -249,7 +252,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_manylegacy(self):
+    def test_versionclass_manylegacy(self) -> None:
         packages = [
             (Package(repo='2', family='2', name='a', version='2.2'), PackageStatus.NEWEST),
             # one of these packages should not make the other one legacy instead of outdated
@@ -267,7 +270,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_flavors(self):
+    def test_versionclass_flavors(self) -> None:
         packages = [
             (Package(repo='1', family='1', name='a', version='2.2'), PackageStatus.NEWEST),
 
@@ -289,7 +292,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_outdated(self):
+    def test_versionclass_outdated(self) -> None:
         packages = [
             (Package(repo='1', family='1', name='a', version='1.0'), PackageStatus.NEWEST),
 
@@ -301,7 +304,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_legacy(self):
+    def test_versionclass_legacy(self) -> None:
         packages = [
             (Package(repo='1', family='1', name='a', version='2.0'), PackageStatus.NEWEST),
 
@@ -315,7 +318,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_suppress_ignored(self):
+    def test_suppress_ignored(self) -> None:
         packages = [
             (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.IGNORE), PackageStatus.UNIQUE),
             (Package(repo='2', family='1', name='a', version='1.0', flags=PackageFlags.IGNORE), PackageStatus.OUTDATED),
@@ -326,7 +329,7 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_suppress_ignored_rolling(self):
+    def test_suppress_ignored_rolling(self) -> None:
         packages = [
             (Package(repo='0', family='0', name='a', version='3.0', flags=PackageFlags.ROLLING), PackageStatus.ROLLING),
             (Package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.IGNORE), PackageStatus.NEWEST),

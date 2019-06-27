@@ -18,6 +18,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
+from typing import Any, Dict
 
 from repology.config import config
 from repology.repomgr import RepositoryManager
@@ -29,11 +30,11 @@ repoproc = RepositoryProcessor(repomgr, 'testdata', 'testdata', safety_checks=Fa
 
 
 class TestParsers(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.maxDiff = None
         self.packages = list(repoproc.iter_parse(reponames=['have_testdata']))
 
-    def check_package(self, name, reference):
+    def check_package(self, name: str, reference: Dict[str, Any]) -> None:
         reference_with_default = {
             # repo must be filled
             # family must be filled
@@ -67,7 +68,7 @@ class TestParsers(unittest.TestCase):
 
         reference_with_default.update(reference)
 
-        def sort_lists(what):
+        def sort_lists(what: Dict[str, Any]) -> Dict[str, Any]:
             output = {}
             for key, value in what.items():
                 if isinstance(value, list):
@@ -87,7 +88,7 @@ class TestParsers(unittest.TestCase):
 
         self.assertFalse('package not found')
 
-    def test_freebsd(self):
+    def test_freebsd(self) -> None:
         self.check_package(
             'vorbis-tools',
             {
@@ -108,7 +109,7 @@ class TestParsers(unittest.TestCase):
             }
         )
 
-    def test_gentoo(self):
+    def test_gentoo(self) -> None:
         self.check_package(
             'chromium-bsu',
             {
@@ -178,7 +179,7 @@ class TestParsers(unittest.TestCase):
             }
         )
 
-    def test_arch(self):
+    def test_arch(self) -> None:
         self.check_package(
             'zlib',
             {
@@ -199,7 +200,7 @@ class TestParsers(unittest.TestCase):
             }
         )
 
-    def test_cpan(self):
+    def test_cpan(self) -> None:
         self.check_package(
             'Acme-Brainfuck',
             {
@@ -215,7 +216,7 @@ class TestParsers(unittest.TestCase):
             }
         )
 
-    def test_debian(self):
+    def test_debian(self) -> None:
         self.check_package(
             'a52dec',
             {
@@ -237,7 +238,7 @@ class TestParsers(unittest.TestCase):
             }
         )
 
-    def test_gobolinux(self):
+    def test_gobolinux(self) -> None:
         self.check_package(
             'AutoFS',
             {
@@ -257,7 +258,7 @@ class TestParsers(unittest.TestCase):
             }
         )
 
-    def test_slackbuilds(self):
+    def test_slackbuilds(self) -> None:
         # multiline DOWNLOAD
         self.check_package(
             'virtualbox',

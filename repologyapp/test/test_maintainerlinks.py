@@ -23,23 +23,23 @@ from repologyapp.template_filters import maintainer_to_links, maintainers_to_gro
 
 
 class TestMaintainerLinks(unittest.TestCase):
-    def test_email(self):
+    def test_email(self) -> None:
         self.assertEqual(maintainer_to_links('amdmi3@freebsd.org'), ['mailto:amdmi3@freebsd.org'])
 
-    def test_garbage(self):
+    def test_garbage(self) -> None:
         self.assertEqual(maintainer_to_links('foo'), [])
 
-    def test_cpan(self):
+    def test_cpan(self) -> None:
         self.assertEqual(maintainer_to_links('foo@cpan'), ['http://search.cpan.org/~foo'])
 
-    def test_aur(self):
+    def test_aur(self) -> None:
         self.assertEqual(maintainer_to_links('foo@aur'), ['https://aur.archlinux.org/account/foo'])
 
-    def test_alt(self):
+    def test_alt(self) -> None:
         self.assertEqual(maintainer_to_links('foo@altlinux.org'), ['http://sisyphus.ru/en/packager/foo/', 'mailto:foo@altlinux.org'])
         self.assertEqual(maintainer_to_links('foo@altlinux.ru'), ['http://sisyphus.ru/en/packager/foo/', 'mailto:foo@altlinux.ru'])
 
-    def test_group(self):
+    def test_group(self) -> None:
         self.assertEqual(maintainers_to_group_mailto(['some@notemail', 'amdmi3@freebsd.org', 'amdmi3@amdmi3.ru']), 'mailto:amdmi3@amdmi3.ru,amdmi3@freebsd.org')
         self.assertEqual(maintainers_to_group_mailto(['some@notemail', 'amdmi3@freebsd.org', 'amdmi3@amdmi3.ru'], 'Hello, world!'), 'mailto:amdmi3@amdmi3.ru,amdmi3@freebsd.org?subject=Hello, world!')
         self.assertEqual(maintainers_to_group_mailto(['some@notemail'], 'Hello, world!'), None)
