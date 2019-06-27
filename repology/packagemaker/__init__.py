@@ -15,6 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+# mypy: no-disallow-untyped-defs
+# mypy: no-disallow-untyped-calls
+# mypy: no-disallow-untyped-decorators
+
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps

@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+# mypy: no-disallow-untyped-defs
+
 from typing import Any, ClassVar, Dict, List, Optional
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
