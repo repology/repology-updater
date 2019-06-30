@@ -41,6 +41,11 @@ def _unescape(s: str) -> str:
 
 
 class FreeSoftwareDirectoryXMLParser(Parser):
+    _high_priority: bool
+
+    def __init__(self, high_priority: bool = False) -> None:
+        self._high_priority = high_priority
+
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         # All encounered version_status values:
         # alpha, beta, developmental, historical, mature, planning, rolling, stable, testing, unknown, unstable
@@ -83,6 +88,9 @@ class FreeSoftwareDirectoryXMLParser(Parser):
 
                 if entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Decommissioned_or_Obsolete') == 'Yes':
                     num_obsolete += 1
+                    continue
+
+                if self._high_priority and entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Is_High_Priority_Project') != 'true':
                     continue
 
                 version_status = entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Version_status')
