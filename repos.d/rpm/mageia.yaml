@@ -24,6 +24,29 @@
       url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{name}'
   tags: [ all, production, mageia, rpm ]
 
+- name: mageia_7
+  type: repository
+  desc: Mageia 7
+  family: mageia
+  color: '262f45'
+  minpackages: 14000
+  sources:
+      # XXX: */backports_testing and */updates_testing not included, are these needed?
+    - name: [ core/backports, core/release, core/updates, nonfree/backports, nonfree/release, nonfree/updates, tainted/backports, tainted/release, tainted/updates ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'https://mirrors.kernel.org/mageia/distrib/7/SRPMS/{source}/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Mageia home
+      url: https://www.mageia.org/en/
+    - desc: Mageia App Db
+      url: https://madb.mageia.org/
+  packagelinks:
+    - desc: Package details on madb.mageia.org
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{name}'
+  tags: [ all, production, mageia, rpm ]
+
 - name: mageia_cauldron
   type: repository
   desc: Mageia Cauldron
