@@ -81,9 +81,11 @@ class PackageFlags:
     OUTDATED: ClassVar[int] = 1 << 8
     LEGACY: ClassVar[int] = 1 << 9
 
-    # special flags
+    # version special flags
     P_IS_PATCH: ClassVar[int] = 1 << 10
     ANY_IS_PATCH: ClassVar[int] = 1 << 11
+
+    TRACE: ClassVar[int] = 1 << 12
 
     @staticmethod
     def get_metaorder(val: int) -> int:

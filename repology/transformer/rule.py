@@ -31,16 +31,18 @@ DOLLARN = re.compile('\\$([0-9])', re.ASCII)
 
 
 class PackageContext:
-    __slots__ = ['_flags', '_rulesets', 'warnings']
+    __slots__ = ['_flags', '_rulesets', 'warnings', 'matched_rules']
 
     _flags: MutableSet[str]
     _rulesets: MutableSet[str]
     warnings: List[str]
+    matched_rules: List[int]
 
     def __init__(self) -> None:
         self._flags = set()
         self._rulesets = set()
         self.warnings = []
+        self.matched_rules = []
 
     def add_flag(self, name: str) -> None:
         self._flags.add(name)
@@ -59,6 +61,9 @@ class PackageContext:
 
     def add_warning(self, warning: str) -> None:
         self.warnings.append(warning)
+
+    def add_matched_rule(self, ruleid: int) -> None:
+        self.matched_rules.append(ruleid)
 
 
 class MatchContext:
@@ -499,6 +504,14 @@ class Rule:
 
             self._actions.append(generated_action)
 
+        if 'trace' in ruledata:
+            trace_flag: Final = ruledata['trace']
+
+            def trace_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.TRACE, trace_flag)
+
+            self._actions.append(trace_action)
+
         if 'last' in ruledata:
             def last_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 match_context.last = True
@@ -595,6 +608,7 @@ class Rule:
                 return None
 
         self.matches += 1
+        package_context.add_matched_rule(self.number)
 
         return match_context
 

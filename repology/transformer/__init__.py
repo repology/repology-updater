@@ -184,6 +184,11 @@ class PackageTransformer:
             for warning in package_context.warnings:
                 print('Rule warning for {} ({}) in {}: {}'.format(package.effname, package.name, package.repo, warning), file=sys.stderr)
 
+        if package.has_flag(PackageFlags.TRACE):
+            print('Rule trace for {} ({}) {} in {}'.format(package.effname, package.name, package.version, package.repo), file=sys.stderr)
+            for rulenum in package_context.matched_rules:
+                print('{:5d} {}'.format(rulenum, self._rules[rulenum].pretty), file=sys.stderr)
+
     def get_statistics(self) -> RulesetStatistics:
         statistics = RulesetStatistics()
 
