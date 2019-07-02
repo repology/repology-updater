@@ -34,6 +34,7 @@
             ?websites
             ?arch_packages
             ?aur_packages
+            ?repology_projects
             ?licenses
           WHERE {
             {
@@ -55,6 +56,7 @@
                 (SAMPLE(?websites) as ?websites)
                 (SAMPLE(?arch_packages) as ?arch_packages)
                 (SAMPLE(?aur_packages) as ?aur_packages)
+                (SAMPLE(?repology_projects) as ?repology_projects)
                 (SAMPLE(?licenses) as ?licenses)
               WHERE {
                 {
@@ -73,6 +75,7 @@
                     (GROUP_CONCAT(DISTINCT ?aur_package; separator=', ') as ?aur_packages)
                     #(GROUP_CONCAT(DISTINCT ?gentoo_package; separator=', ') as ?gentoo_packages)
                     #(GROUP_CONCAT(DISTINCT ?fedora_package; separator=', ') as ?fedora_packages)
+                    (GROUP_CONCAT(DISTINCT ?repology_project; separator=', ') as ?repology_projects)
                     (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
                   WHERE {
                     # Versions for specific project
@@ -171,11 +174,12 @@
                     OPTIONAL { ?project wdt:P4162 ?aur_package . }
                     #OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
                     #OPTIONAL { ?project wdt:P3463 ?fedora_package . }
+                    OPTIONAL { ?project wdt:P6931 ?repology_project . }
 
                     # Require Arch package as we take the name from it
                     # Also, without it the query times out as it has to
                     # process to much data
-                    FILTER(BOUND(?arch_package) || BOUND(?aur_package))
+                    FILTER(BOUND(?arch_package) || BOUND(?aur_package) || BOUND(?repology_project))
                   }
                   GROUP BY ?project ?version
                 }
