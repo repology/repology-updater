@@ -36,5 +36,7 @@
       url: 'http://openports.se/{origin}'
     - desc: Port CVS directory
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{origin}'
+    - desc: Port directory on GitHub mirror
+      url: 'https://github.com/openbsd/ports/tree/master/{origin}'
     # XXX: no Makefile link is Makefile would just refer to subports
   tags: [ all, production ]
