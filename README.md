@@ -97,7 +97,7 @@ version are always parsed.
 | Stackage                         | ✔       |         |       |       |         |          |
 | T2 SDE                           | ✔       | ✔       | ✔     | ✔     | ✔       | ✔        |
 | Termux                           | ✔       |         |       | ✔     |         | ✔        |
-| Vcpkg                            | ✔       |         |       |       |         |          |
+| Vcpkg                            | ✔       |         |       | ✔     |         |          |
 | Void                             | ✔       | ✔       |       | ✔     | ✔       |          |
 | Wikidata                         | ✔       |         |       | ✔     | ✔       |          |
 | YACP                             | ✔       |         | ✔     |       |         |          |
