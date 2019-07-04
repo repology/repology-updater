@@ -46,6 +46,8 @@ class WikidataJsonParser(Parser):
         entries_with_repology_project = 0
 
         for packagedata in _iter_packages(path):
+            entries_total += 1
+
             entity = packagedata['project'].rsplit('/', 1)[-1]  # this is URL, take only the ID from it
 
             pkg = factory.begin(entity)
@@ -58,15 +60,7 @@ class WikidataJsonParser(Parser):
 
             # there's ongoing effort to fill native repology project names in wikidata,
             # for now just check these and gather some statistics
-            repology_names = set()
-            if packagedata['repology_projects']:
-                repology_names.update(packagedata['repology_projects'].split(', '))
-
-            entries_total += 1
-            if repology_names:
-                entries_with_repology_project += 1
-                if len(repology_names) > 1:
-                    pkg.log('multiple Repology project names: {}'.format(','.join(repology_names)), severity=Logger.WARNING)
+            repology_names = set(packagedata['repology_projects'].split(', ')) if packagedata['repology_projects'] else set()
 
             # but we still use arch/aur package information
             # we have to run it through Transformer when version is defined later
@@ -78,10 +72,20 @@ class WikidataJsonParser(Parser):
                     donor_names = set(packagedata[fieldname].split(', '))
                     break
 
-            if not donor_repo:
-                continue
+            # some statistics
+            if repology_names:
+                entries_with_repology_project += 1
+                if len(repology_names) > 1:
+                    pkg.log('multiple Repology project names: {}'.format(','.join(repology_names)), severity=Logger.WARNING)
+            else:
+                pkg.log('Repology project name property is missing, falling back to Arch/AUR package', severity=Logger.WARNING)
 
-            entries_with_packages += 1
+            if donor_repo:
+                entries_with_packages += 1
+
+            if not donor_repo and not repology_names:
+                pkg.log('how did it get here?', severity=Logger.ERROR)
+                continue
 
             # generate a package for each version
             for version in sorted(packagedata['versions'].split(', ')):
@@ -106,16 +110,20 @@ class WikidataJsonParser(Parser):
 
                 # extract project name(s) from packages information
                 names = set()
-                for name in donor_names:
-                    fakepkgmaker = verpkg.clone()
-                    fakepkgmaker.set_name(name)
-                    fakepkg = fakepkgmaker.unwrap()
-                    fakepkg.repo = donor_repo
-                    transformer.process(fakepkg)
-                    names.add(fakepkg.effname)
 
-                if len(names) > 1:
-                    verpkg.log('multiple project names extracted from {}: {}'.format(donor_repo, ','.join(names)), severity=Logger.WARNING)
+                if repology_names:
+                    names = repology_names
+                else:
+                    for name in donor_names:
+                        fakepkgmaker = verpkg.clone()
+                        fakepkgmaker.set_name(name)
+                        fakepkg = fakepkgmaker.unwrap()
+                        fakepkg.repo = donor_repo
+                        transformer.process(fakepkg)
+                        names.add(fakepkg.effname)
+
+                    if len(names) > 1:
+                        verpkg.log('multiple project names extracted from {}: {}'.format(donor_repo, ','.join(names)), severity=Logger.WARNING)
 
                 # generate package for each guessed name; it most cases, these will be merged anyway
                 for name in names:
@@ -125,4 +133,4 @@ class WikidataJsonParser(Parser):
 
         factory.log('Entries total: {}'.format(entries_total))
         factory.log('Entries with packages: {}'.format(entries_with_packages))
-        factory.log('Entries with Repology project name filled: {}'.format(entries_with_repology_project))
+        factory.log('Entries with Repology project name filled: {} ({} missing)'.format(entries_with_repology_project, entries_total - entries_with_repology_project))
