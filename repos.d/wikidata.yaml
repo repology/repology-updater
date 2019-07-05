@@ -168,18 +168,21 @@
                       ?licenseItem rdfs:label ?license .
                       FILTER (LANG(?license) = 'en')
                     }
+
+                    # Bind entries which have Repology name defined directly
+                    OPTIONAL { ?project wdt:P6931 ?repology_project . }
+
+                    # Otherwise, check if there's any kind of package defined
                     #OPTIONAL { ?project wdt:P3442 ?debian_package . }
                     #OPTIONAL { ?project wdt:P3473 ?ubuntu_package . }
                     OPTIONAL { ?project wdt:P3454 ?arch_package . }
                     OPTIONAL { ?project wdt:P4162 ?aur_package . }
                     #OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
                     #OPTIONAL { ?project wdt:P3463 ?fedora_package . }
-                    OPTIONAL { ?project wdt:P6931 ?repology_project . }
 
-                    # Require Arch package as we take the name from it
-                    # Also, without it the query times out as it has to
-                    # process to much data
-                    FILTER(BOUND(?arch_package) || BOUND(?aur_package) || BOUND(?repology_project))
+                    BIND(COALESCE(?arch_package, ?aur_package) AS ?any_package)
+
+                    FILTER(BOUND(?repology_project) || BOUND(?any_package))
                   }
                   GROUP BY ?project ?version
                 }
