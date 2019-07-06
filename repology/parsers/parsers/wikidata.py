@@ -25,12 +25,6 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-_DONOR_REPOS = [
-    ('arch_packages', 'arch'),
-    ('aur_packages', 'aur'),
-]
-
-
 def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
     with open(path, 'r', encoding='utf-8') as jsonfile:
         for item in json.load(jsonfile)['results']['bindings']:
@@ -41,13 +35,10 @@ def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
 
 class WikidataJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        entries_total = 0
-        entries_with_packages = 0
-        entries_with_repology_project = 0
+        entries_good = 0
+        entries_missed = 0
 
         for packagedata in _iter_packages(path):
-            entries_total += 1
-
             entity = packagedata['project'].rsplit('/', 1)[-1]  # this is URL, take only the ID from it
 
             pkg = factory.begin(entity)
@@ -58,40 +49,22 @@ class WikidataJsonParser(Parser):
             pkg.add_licenses(packagedata.get('licenses', '').split(', '))
             pkg.add_homepages(packagedata.get('websites', '').split(', '))
 
-            # there's ongoing effort to fill native repology project names in wikidata,
-            # for now just check these and gather some statistics
-            repology_names = set(packagedata['repology_projects'].split(', ')) if packagedata['repology_projects'] else set()
+            names = set(packagedata['repology_projects'].split(', ')) if packagedata['repology_projects'] else set()
 
-            # but we still use arch/aur package information
-            # we have to run it through Transformer when version is defined later
-            donor_repo = None
-
-            for fieldname, fakerepo in _DONOR_REPOS:
-                if packagedata[fieldname]:
-                    donor_repo = fakerepo
-                    donor_names = set(packagedata[fieldname].split(', '))
-                    break
-
-            # some statistics
-            if repology_names:
-                entries_with_repology_project += 1
-                if len(repology_names) > 1:
-                    pkg.log('multiple Repology project names: {}'.format(','.join(repology_names)), severity=Logger.WARNING)
-            else:
-                pkg.log('Repology project name property is missing, falling back to Arch/AUR package', severity=Logger.WARNING)
-
-            if donor_repo:
-                entries_with_packages += 1
-
-            if not donor_repo and not repology_names:
-                pkg.log('how did it get here?', severity=Logger.ERROR)
+            if not names:
+                pkg.log('Repology project name property missing', severity=Logger.ERROR)
+                entries_missed += 1
                 continue
+            elif len(names) > 1:
+                pkg.log('multiple Repology project names: {}'.format(','.join(sorted(names))), severity=Logger.WARNING)
+
+            entries_good += 1
 
             # generate a package for each version
             for version in sorted(packagedata['versions'].split(', ')):
                 version, *flags = version.split('|')
 
-                verpkg = pkg.clone(append_ident=' ' + version)
+                verpkg = pkg.clone()
 
                 is_devel = 'U' in flags
                 is_foreign_os_release = 'o' in flags and 'O' not in flags
@@ -108,29 +81,10 @@ class WikidataJsonParser(Parser):
                 verpkg.set_flags(PackageFlags.DEVEL, is_devel)
                 verpkg.set_version(version)
 
-                # extract project name(s) from packages information
-                names = set()
-
-                if repology_names:
-                    names = repology_names
-                else:
-                    for name in donor_names:
-                        fakepkgmaker = verpkg.clone()
-                        fakepkgmaker.set_name(name)
-                        fakepkg = fakepkgmaker.unwrap()
-                        fakepkg.repo = donor_repo
-                        transformer.process(fakepkg)
-                        names.add(fakepkg.effname)
-
-                    if len(names) > 1:
-                        verpkg.log('multiple project names extracted from {}: {}'.format(donor_repo, ','.join(names)), severity=Logger.WARNING)
-
                 # generate package for each guessed name; it most cases, these will be merged anyway
                 for name in names:
                     namepkg = verpkg.clone()
                     namepkg.set_basename(name)
                     yield namepkg
 
-        factory.log('Entries total: {}'.format(entries_total))
-        factory.log('Entries with packages: {}'.format(entries_with_packages))
-        factory.log('Entries with Repology project name filled: {} ({} missing)'.format(entries_with_repology_project, entries_total - entries_with_repology_project))
+        factory.log('{} distinct projects accepted, {} potentially missing "Repology project name" property'.format(entries_good, entries_missed))

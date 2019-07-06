@@ -32,8 +32,6 @@
             ?projectDescription
             ?versions
             ?websites
-            ?arch_packages
-            ?aur_packages
             ?repology_projects
             ?licenses
           WHERE {
@@ -54,8 +52,6 @@
                   AS ?versions
                 )
                 (SAMPLE(?websites) as ?websites)
-                (SAMPLE(?arch_packages) as ?arch_packages)
-                (SAMPLE(?aur_packages) as ?aur_packages)
                 (SAMPLE(?repology_projects) as ?repology_projects)
                 (SAMPLE(?licenses) as ?licenses)
               WHERE {
@@ -67,15 +63,8 @@
                     (GROUP_CONCAT(DISTINCT ?versionOS; separator='') as ?versionOSes)
                     (GROUP_CONCAT(DISTINCT ?versionPlatform; separator='') as ?versionPlatforms)
                     (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
-                    # These are not currently used and disable for speed
-                    # But you may include them into manual request
-                    #(GROUP_CONCAT(DISTINCT ?debian_package; separator=', ') as ?debian_packages)
-                    #(GROUP_CONCAT(DISTINCT ?ubuntu_package; separator=', ') as ?ubuntu_packages)
-                    (GROUP_CONCAT(DISTINCT ?arch_package; separator=', ') as ?arch_packages)
-                    (GROUP_CONCAT(DISTINCT ?aur_package; separator=', ') as ?aur_packages)
-                    #(GROUP_CONCAT(DISTINCT ?gentoo_package; separator=', ') as ?gentoo_packages)
-                    #(GROUP_CONCAT(DISTINCT ?fedora_package; separator=', ') as ?fedora_packages)
                     (GROUP_CONCAT(DISTINCT ?repology_project; separator=', ') as ?repology_projects)
+                    (SAMPLE(?has_packages) as ?has_packages)
                     (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
                   WHERE {
                     # Versions for specific project
@@ -169,20 +158,28 @@
                       FILTER (LANG(?license) = 'en')
                     }
 
-                    # Bind entries which have Repology name defined directly
+                    # Use Repology names specified in wikidata
                     OPTIONAL { ?project wdt:P6931 ?repology_project . }
 
-                    # Otherwise, check if there's any kind of package defined
-                    #OPTIONAL { ?project wdt:P3442 ?debian_package . }
-                    #OPTIONAL { ?project wdt:P3473 ?ubuntu_package . }
+                    # Also gather info on packages to find missing Repology names
                     OPTIONAL { ?project wdt:P3454 ?arch_package . }
                     OPTIONAL { ?project wdt:P4162 ?aur_package . }
-                    #OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
-                    #OPTIONAL { ?project wdt:P3463 ?fedora_package . }
+                    OPTIONAL { ?project wdt:P3442 ?debian_package . }
+                    OPTIONAL { ?project wdt:P3463 ?fedora_package . }
+                    OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
+                    OPTIONAL { ?project wdt:P3473 ?ubuntu_package . }
 
-                    BIND(COALESCE(?arch_package, ?aur_package) AS ?any_package)
+                    BIND(
+                      BOUND(?arch_package) ||
+                      BOUND(?aur_package) ||
+                      BOUND(?debian_package) ||
+                      BOUND(?fedora_package) ||
+                      BOUND(?gentoo_package) ||
+                      BOUND(?ubuntu_package)
+                      AS ?has_packages
+                    )
 
-                    FILTER(BOUND(?repology_project) || BOUND(?any_package))
+                    FILTER(BOUND(?repology_project) || ?has_packages)
                   }
                   GROUP BY ?project ?version
                 }
