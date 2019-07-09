@@ -52,7 +52,7 @@ class WikidataJsonParser(Parser):
             names = set(packagedata['repology_projects'].split(', ')) if packagedata['repology_projects'] else set()
 
             if not names:
-                pkg.log('Repology project name property missing', severity=Logger.ERROR)
+                pkg.log('entry has packages, but not Repology project name', severity=Logger.WARNING)
                 entries_missed += 1
                 continue
             elif len(names) > 1:
