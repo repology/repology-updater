@@ -1,40 +1,6 @@
 ###########################################################################
 # pkgsrc
 ###########################################################################
-- name: pkgsrc_2018_2
-  type: repository
-  desc: pkgsrc-2018Q2
-  family: pkgsrc
-  color: 'ff6600'
-  valid_till: 2018-10-01
-  minpackages: 15000
-  default_maintainer: fallback-mnt-pkgsrc@repology
-  sources:
-    - name: INDEX
-      fetcher: FileFetcher
-      parser: PkgsrcIndexParser
-      url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q2/pkgsrc/INDEX
-      nocache: true
-  repolinks:
-    - desc: pkgsrc home
-      url: https://www.pkgsrc.org/
-    - desc: pkgsrc.se
-      url: http://pkgsrc.se/
-    - desc: pkgsrc CVS repository
-      url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
-  packagelinks:
-    - desc: pkgsrc.se page
-      url: 'http://pkgsrc.se/{origin}'
-    - desc: Port CVS directory
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
-    - desc: Port CVS directory (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}/?only_with_tag=pkgsrc-2018Q2'
-    - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
-    - desc: Port Makefile (quarterly branch)
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain&only_with_tag=pkgsrc-2018Q2'
-  tags: [ all, pkgsrc ]  # disabled due to constantly broken INDEX
-
 - name: pkgsrc_current
   type: repository
   desc: pkgsrc current
@@ -53,13 +19,19 @@
       url: https://www.pkgsrc.org/
     - desc: pkgsrc.se
       url: http://pkgsrc.se/
+    - desc: pkgsrc Mercurial repository
+      url: https://anonhg.netbsd.org/pkgsrc/
     - desc: pkgsrc CVS repository
       url: http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/
+    - desc: pkgsrc Github mirror
+      url: https://github.com/NetBSD/pkgsrc
   packagelinks:
     - desc: pkgsrc.se page
       url: 'http://pkgsrc.se/{origin}'
-    - desc: Port CVS directory
+    - desc: Package Mercurial directory
+      url: 'https://anonhg.netbsd.org/pkgsrc/file/tip/{origin}'
+    - desc: Package CVS directory
       url: 'http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/{origin}'
-    - desc: Port Makefile
-      url: 'http://cvsweb.netbsd.org/bsdweb.cgi/~checkout~/pkgsrc/{origin}/Makefile?content-type=text/plain'
+    - desc: Package Github directory
+      url: 'https://github.com/NetBSD/pkgsrc/tree/trunk/{origin}'
   tags: [ all, production, pkgsrc ]
