@@ -38,12 +38,10 @@ class HomebrewJsonParser(Parser):
 class HomebrewCaskJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for packagedata in iter_json_list(path, (None,)):
-            with factory.begin() as pkg:
-                # XXX: tries to normalize project name from human readable form; not suitable for production
-                pkg.set_name(packagedata['name'][0].replace('.', '').replace(' ', '-'))
+            with factory.begin(packagedata['token']) as pkg:
+                pkg.set_name(packagedata['token'])
 
-                # XXX: comma-separated versions are encountered often, wtf are these, need to handle
-                pkg.set_version(packagedata['version'])
+                pkg.set_version(packagedata['version'].split(',')[0])
                 pkg.add_homepages(packagedata['homepage'])
                 pkg.add_downloads(packagedata['url'])
 
