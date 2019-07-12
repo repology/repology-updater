@@ -52,7 +52,8 @@ class WikidataJsonParser(Parser):
                 names = set(packagedata['repology_projects'].split(', ')) if packagedata['repology_projects'] else set()
 
                 if not names:
-                    pkg.log('entry has packages, but not Repology project name', severity=Logger.WARNING)
+                    isnew = ' (new)' if int(entity.lstrip('Q')) > 65000000 else ''
+                    pkg.log('entry has packages, but not Repology project name{}'.format(isnew), severity=Logger.WARNING)
                     entries_missed += 1
                     continue
                 elif len(names) > 1:
