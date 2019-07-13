@@ -270,7 +270,7 @@ def project_report(name: str) -> Any:
         comment = flask.request.form.get('comment', '').strip().replace('\r', '') or None
 
         if comment and len(comment) > 1024:
-            flask.flash('Could not add report: comment os too long', 'danger')
+            flask.flash('Could not add report: comment is too long', 'danger')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
 
         if not need_verignore and not need_split and not need_merge and not comment:
