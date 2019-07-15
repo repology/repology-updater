@@ -162,12 +162,31 @@
                     OPTIONAL { ?project wdt:P6931 ?repology_project . }
 
                     # Also gather info on packages to find missing Repology names
-                    OPTIONAL { ?project wdt:P3454 ?arch_package . }
-                    OPTIONAL { ?project wdt:P4162 ?aur_package . }
-                    OPTIONAL { ?project wdt:P3442 ?debian_package . }
-                    OPTIONAL { ?project wdt:P3463 ?fedora_package . }
-                    OPTIONAL { ?project wdt:P3499 ?gentoo_package . }
-                    OPTIONAL { ?project wdt:P3473 ?ubuntu_package . }
+                    # (but ignore removed packages marged with 'end time' property)
+                    OPTIONAL {
+                        ?project p:P3454 ?arch_package .
+                        FILTER NOT EXISTS { ?arch_package pq:P582 ?arch_package_end }
+                    }
+                    OPTIONAL {
+                        ?project p:P4162 ?aur_package .
+                        FILTER NOT EXISTS { ?aur_package pq:P582 ?aur_package_end }
+                    }
+                    OPTIONAL {
+                        ?project p:P3442 ?debian_package .
+                        FILTER NOT EXISTS { ?debian_package pq:P582 ?debian_package_end }
+                    }
+                    OPTIONAL {
+                        ?project p:P3463 ?fedora_package .
+                        FILTER NOT EXISTS { ?fedora_package pq:P582 ?fedora_package_end }
+                    }
+                    OPTIONAL {
+                        ?project p:P3499 ?gentoo_package .
+                        FILTER NOT EXISTS { ?gentoo_package pq:P582 ?gentoo_package_end }
+                    }
+                    OPTIONAL {
+                        ?project p:P3473 ?ubuntu_package .
+                        FILTER NOT EXISTS { ?ubuntu_package pq:P582 ?ubuntu_package_end }
+                    }
 
                     BIND(
                       BOUND(?arch_package) ||
