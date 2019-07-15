@@ -44,7 +44,7 @@
       url: https://madb.mageia.org/
   packagelinks:
     - desc: Package details on madb.mageia.org
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{name}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{name}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_cauldron
