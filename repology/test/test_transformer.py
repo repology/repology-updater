@@ -132,23 +132,23 @@ class TestPackageTransformer(unittest.TestCase):
     def test_setver(self) -> None:
         self.check_transformer(
             '[ { setver: "2.0" } ]',
-            {'name': 'foo', 'version': '1.0', 'expect_version': '2.0', 'expect_origversion': '1.0'}
+            {'name': 'foo', 'version': '1.0', 'expect_version': '2.0'}
         )
 
     def test_setver_subst(self) -> None:
         self.check_transformer(
             '[ { setver: "2.$0" } ]',
-            {'name': 'foo', 'version': '1.0', 'expect_version': '2.1.0', 'expect_origversion': '1.0'}
+            {'name': 'foo', 'version': '1.0', 'expect_version': '2.1.0'}
         )
         self.check_transformer(
             '[ { verpat: "([0-9]+)\\\\.([0-9]+)", setver: "$2.$1" } ]',
-            {'name': 'foo', 'version': '1.0', 'expect_version': '0.1', 'expect_origversion': '1.0'}
+            {'name': 'foo', 'version': '1.0', 'expect_version': '0.1'}
         )
 
     def test_setver_setname_subst(self) -> None:
         self.check_transformer(
             '[ { namepat: "f(.*)", verpat: "1(.*)", setname: "$1/$0", setver: "$1/$0" } ]',
-            {'name': 'foo', 'version': '1.0', 'expect_effname': 'oo/foo', 'expect_version': '.0/1.0', 'expect_origversion': '1.0'}
+            {'name': 'foo', 'version': '1.0', 'expect_effname': 'oo/foo', 'expect_version': '.0/1.0'}
         )
 
     def test_tolowername(self) -> None:

@@ -570,9 +570,6 @@ class Rule:
             setver: Final = ruledata['setver']
 
             def setver_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
-                if package.origversion is None:
-                    package.origversion = package.version
-
                 package.version = match_context.sub_ver_dollars(setver, package.version)
 
             self._actions.append(setver_action)
