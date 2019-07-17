@@ -39,3 +39,27 @@ def iter_xml_elements_at_level(path: str, level: int, tags: List[str]) -> Iterab
                 if elem.tag in tags:
                     yield elem
                 elem.clear()
+
+
+def safe_getattr(elt: XmlElement, name: str) -> str:
+    res = elt.get(name)
+    if not res:
+        raise RuntimeError('required attribute {} of {} is missing or empty', name, elt.tag)
+    return res
+
+
+def safe_findtext(elt: XmlElement, match: str) -> str:
+    res = elt.findtext(match)
+    if not res:
+        raise RuntimeError('required subelement {} of {} is missing or empty', match, elt.tag)
+    return res
+
+
+def safe_findalltexts(elt: XmlElement, match: str) -> List[str]:
+    res = []
+
+    for e in elt.findall(match):
+        if e.text:
+            res.append(e.text)
+
+    return res
