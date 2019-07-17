@@ -90,7 +90,7 @@
   desc: openSUSE Multimedia:Apps Tumbleweed
   family: opensuse
   color: '6da741'
-  minpackages: 400
+  minpackages: 200
   sources:
     - name: data
       fetcher: RepodataFetcher
