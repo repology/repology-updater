@@ -144,7 +144,7 @@ class Package:
     subrepo: Optional[str]
 
     name: str
-    basename: str
+    basename: Optional[str]
 
     origversion: str
     rawversion: str
