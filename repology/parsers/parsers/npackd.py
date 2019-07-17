@@ -19,7 +19,7 @@ from typing import Dict, Iterable, List, Tuple
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.parsers.xml import iter_xml_elements_at_level
+from repology.parsers.xml import iter_xml_elements_at_level, safe_findalltexts, safe_findtext, safe_getattr
 from repology.transformer import PackageTransformer
 
 
@@ -46,17 +46,17 @@ class NpackdXmlParser(Parser):
 
         for entry in iter_xml_elements_at_level(path, 1, ['license', 'package', 'version']):
             if entry.tag == 'license':
-                licenses[entry.get('name')] = entry.findtext('title')
+                licenses[safe_getattr(entry, 'name')] = safe_findtext(entry, 'title')
             elif entry.tag == 'package':
-                packages[entry.get('name')] = (
-                    entry.findtext('title'),
-                    [e.text for e in entry.findall('license') if e.text],
-                    [e.text for e in entry.findall('category') if e.text],
-                    [e.text for e in entry.findall('url') if e.text],
+                packages[safe_getattr(entry, 'name')] = (
+                    safe_findtext(entry, 'title'),
+                    safe_findalltexts(entry, 'license'),
+                    safe_findalltexts(entry, 'category'),
+                    safe_findalltexts(entry, 'url'),
                 )
             elif entry.tag == 'version':
-                pkgname = entry.get('package')
-                version = entry.get('name')
+                pkgname = safe_getattr(entry, 'package')
+                version = safe_getattr(entry, 'name')
 
                 with factory.begin(pkgname + ' ' + version) as pkg:
                     # XXX: package naming is inconsistent (either plain name like kdenlive or

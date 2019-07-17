@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import xml.etree.ElementTree
 from typing import Dict, Iterable, List, Optional
 
 from repology.logger import Logger
@@ -26,19 +25,8 @@ from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct
 from repology.parsers.versions import VersionStripper
+from repology.parsers.xml import iter_xml_elements_at_level, safe_findtext
 from repology.transformer import PackageTransformer
-
-
-def _iter_package_entries(path: str) -> Iterable[xml.etree.ElementTree.Element]:
-    """Return all <package> elements from XML.
-
-    The purpose is to clear the element after processing, so
-    processed elements don't fill up the memory
-    """
-    for _, elem in xml.etree.ElementTree.iterparse(path):
-        if elem.tag == '{http://linux.duke.edu/metadata/common}package':
-            yield elem
-            elem.clear()
 
 
 class RepodataParser(Parser):
@@ -50,9 +38,10 @@ class RepodataParser(Parser):
 
         skipped_archs: Dict[str, int] = {}
 
-        for entry in _iter_package_entries(path):
+        for entry in iter_xml_elements_at_level(path, 1, ['{http://linux.duke.edu/metadata/common}package']):
             with factory.begin() as pkg:
-                arch = entry.findtext('{http://linux.duke.edu/metadata/common}arch')
+                arch = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}arch')
+
                 if self.allowed_archs and arch not in self.allowed_archs:
                     skipped_archs[arch] = skipped_archs.get(arch, 0) + 1
                     continue

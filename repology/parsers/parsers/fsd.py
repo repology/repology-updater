@@ -21,7 +21,7 @@ from typing import Iterable, List
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.parsers.xml import XmlElement, iter_xml_elements_at_level
+from repology.parsers.xml import XmlElement, iter_xml_elements_at_level, safe_findtext
 from repology.transformer import PackageTransformer
 
 
@@ -68,8 +68,8 @@ class FreeSoftwareDirectoryXMLParser(Parser):
             page = _unescape(pages[0].split('/')[-1])
 
             with factory.begin(page) as pkg:
-                label = entry.findtext('{http://www.w3.org/2000/01/rdf-schema#}label')
-                name = entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Name')
+                label = safe_findtext(entry, '{http://www.w3.org/2000/01/rdf-schema#}label')
+                name = safe_findtext(entry, '{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Name')
                 version = entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Version_identifier')
 
                 num_total += 1
