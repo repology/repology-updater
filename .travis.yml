@@ -88,7 +88,7 @@ before_install:
   - pip install flake8-builtins!=1.1.0
   - pip install flake8-import-order
   - pip install flake8-quotes
-  - pip install mypy>=0.711
+  - pip install mypy>=0.720
   - pip install pytidylib # uses newer libtidy installed above
   - pip install voluptuous
 
