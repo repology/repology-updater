@@ -147,7 +147,7 @@ class Package:
     basename: str
 
     origversion: str
-    rawwversion: str
+    rawversion: str
 
     arch: Optional[str]
 
