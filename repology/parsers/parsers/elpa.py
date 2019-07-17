@@ -79,7 +79,7 @@ class ArchiveContentsParser(Parser):
                 pkg.set_summary(pkgdata.summary)
 
                 if 'maintainer' in pkgdata.keyvals:
-                    maintainers = sum(map(extract_maintainers, pkgdata.keyvals['maintainer']), [])
+                    maintainers: List[str] = sum(map(extract_maintainers, pkgdata.keyvals['maintainer']), [])
                     pkg.add_maintainers(maintainers)
 
                 pkg.add_homepages(pkgdata.keyvals.get('url'))

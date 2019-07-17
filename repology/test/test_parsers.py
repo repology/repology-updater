@@ -35,7 +35,7 @@ class TestParsers(unittest.TestCase):
         self.packages = list(repoproc.iter_parse(reponames=['have_testdata']))
 
     def check_package(self, name: str, reference: Dict[str, Any]) -> None:
-        reference_with_default = {
+        reference_with_default: Dict[str, Any] = {
             # repo must be filled
             # family must be filled
             'subrepo': None,
