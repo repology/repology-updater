@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
-from typing import Dict, Iterable, Tuple
+from typing import Dict, Iterable, Optional, Tuple
 
 from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
@@ -46,7 +46,7 @@ def _parse_infofile(path: str) -> Dict[str, str]:
     variables: Dict[str, str] = {}
 
     with open(path, encoding='utf-8', errors='ignore') as infofile:
-        key = None
+        key: Optional[str] = None
         total_value = []
 
         for line in infofile:
@@ -54,7 +54,6 @@ def _parse_infofile(path: str) -> Dict[str, str]:
             if not line:
                 continue
 
-            value = None
             if key:  # continued
                 value = line
             else:  # new variable

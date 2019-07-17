@@ -21,7 +21,7 @@ import argparse
 import pickle
 import sys
 import time
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from repology.config import config
 from repology.database import Database
@@ -108,7 +108,7 @@ def parse_arguments() -> argparse.Namespace:
 
 
 def run_single_query(database: Database, method: str, kwargs: Any, options: argparse.Namespace) -> float:
-    mindelta = None
+    mindelta: Optional[float] = None
     totaldelta = 0.0
     iteration = 0
 

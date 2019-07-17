@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Iterable
+from typing import Iterable, Optional
 
 from libversion import version_compare
 
@@ -47,7 +47,7 @@ class GoboLinuxGitParser(Parser):
 
             package_path = os.path.join(trunk_path, package_name)
 
-            maxversion = None
+            maxversion: Optional[str] = None
             for version_name in os.listdir(package_path):
                 if maxversion is None or version_compare(version_name, maxversion) > 0:
                     maxversion = version_name

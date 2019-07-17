@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Dict, Iterable
+from typing import Dict, Iterable, Optional
 
 from libversion import version_compare
 
@@ -34,8 +34,8 @@ _KEYVAL_RE = re.compile('([a-zA-Z-]+)[ \t]*:[ \t]*(.*?)')
 
 def _parse_cabal_file(path: str) -> Dict[str, str]:
     cabaldata: Dict[str, str] = {}
-    offset = None
-    key = None
+    offset: Optional[int] = None
+    key: Optional[str] = None
 
     with open(path, 'r', encoding='utf-8') as cabalfile:
         for line in cabalfile:
@@ -85,8 +85,8 @@ class HackageParser(Parser):
 
             modulepath = os.path.join(path, moduledir)
 
-            cabalpath = None
-            maxversion = None
+            cabalpath: Optional[str] = None
+            maxversion: Optional[str] = None
 
             for versiondir in os.listdir(modulepath):
                 if versiondir == 'preferred-versions':

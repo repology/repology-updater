@@ -113,7 +113,7 @@ def heap_deserialize(paths: Iterable[str]) -> Iterator[List[Package]]:
         thiskey = min((ds.current.effname for ds in deserializers if ds.current is not None), default=None)
 
         while thiskey is not None:
-            nextkey = None
+            nextkey: Optional[str] = None
 
             # fetch all packages with given key from all deserializers
             packages = []

@@ -171,7 +171,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
     #
     branches: List[Branch] = []
     packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
-    current_branchproto_idx = None
+    current_branchproto_idx: Optional[int] = None
     for verpackages in aggregate_by_same_version(packages):
         version_totally_ignored = True
         matching_branchproto_indexes = set()
