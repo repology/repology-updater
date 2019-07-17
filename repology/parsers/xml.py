@@ -35,7 +35,7 @@ def iter_xml_elements_at_level(path: str, level: int, tags: List[str]) -> Iterab
             nestlevel += 1
         elif event == 'end':
             nestlevel -= 1
-            if nestlevel == 1:
+            if nestlevel == level:
                 if elem.tag in tags:
                     yield elem
                 elem.clear()
