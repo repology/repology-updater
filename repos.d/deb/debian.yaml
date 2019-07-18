@@ -68,7 +68,7 @@
   desc: Debian Stable Backports
   family: debuntu
   color: 'c70036'
-  minpackages: 500
+  minpackages: 0
   sources:
     - name: [ main, contrib, non-free ]
       fetcher: FileFetcher
