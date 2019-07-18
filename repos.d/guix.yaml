@@ -16,4 +16,4 @@
       url: https://www.gnu.org/software/guix/
     - desc: GNU Guix packages
       url: https://www.gnu.org/software/guix/packages/
-  tags: [ all, production ]
+  tags: [ all ]
