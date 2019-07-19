@@ -76,30 +76,6 @@ REPOSITORIES = ['production']
 ENABLE_SAFETY_CHECKS = True
 
 ############################################################################
-# UPDATE SETTINGS
-############################################################################
-
-#
-# Path to helpers directory
-#
-# Helpers are small programs or scripts used to parse repository
-# data in different formats which are hard to parse directly from
-# python
-#
-# Used by repology-update
-#
-HELPERS_DIR = "helpers"
-
-#
-# Path to tclsh
-#
-# tclsh is used to parse macports repository
-#
-# Used by repology-update
-#
-TCLSH = "tclsh"
-
-############################################################################
 # WEBAPP SETTINGS
 ############################################################################
 

@@ -11,8 +11,8 @@
   sources:
     - name: PortIndex
       fetcher: RsyncFetcher
-      parser: MacPortsParser
-      url: rsync://rsync.macports.org/macports//trunk/dports/PortIndex_darwin_16_i386/PortIndex
+      parser: MacPortsJsonParser
+      url: rsync://rsync.macports.org/macports/trunk/dports/PortIndex_darwin_16_i386/PortIndex.json
   repolinks:
     - desc: MacPorts home
       url: https://www.macports.org/

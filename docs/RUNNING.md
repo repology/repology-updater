@@ -26,7 +26,6 @@ Needed for fetching/parsing repository data:
 - Python module sqlite3
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
-- [tclsh](https://www.tcl.tk/) and [tcllib](https://www.tcl.tk/)
 
 Needed for web-application:
 
