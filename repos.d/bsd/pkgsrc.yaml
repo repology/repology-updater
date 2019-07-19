@@ -14,6 +14,7 @@
       fetcher: FileFetcher
       parser: PkgsrcIndexParser
       url: https://cdn.netbsd.org/pub/pkgsrc/pkgsrc-2018Q2/pkgsrc/INDEX
+      allow_zero_size: false
       nocache: true
   repolinks:
     - desc: pkgsrc home
@@ -47,6 +48,7 @@
       fetcher: FileFetcher
       parser: PkgsrcIndexParser
       url: https://cdn.netbsd.org/pub/pkgsrc/current/pkgsrc/INDEX
+      allow_zero_size: false
       nocache: true
   repolinks:
     - desc: pkgsrc home

@@ -32,7 +32,8 @@ class FileFetcher(ScratchFileFetcher):
                  post: Optional[Dict[str, str]] = None,
                  headers: Optional[Dict[str, str]] = None,
                  nocache: bool = False,
-                 fetch_timeout: Optional[int] = 60) -> None:
+                 fetch_timeout: Optional[int] = 60,
+                 allow_zero_size: bool = True) -> None:
         super(FileFetcher, self).__init__(binary=True)
 
         self.url = url
@@ -40,6 +41,7 @@ class FileFetcher(ScratchFileFetcher):
         self.post = post
         self.headers = headers
         self.fetch_timeout = fetch_timeout
+        self.allow_zero_size = allow_zero_size
 
         # cache bypass
         if nocache:
@@ -70,7 +72,12 @@ class FileFetcher(ScratchFileFetcher):
             logger.log('got 403 not modified')
             return False
 
-        logger.log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
+        size = os.path.getsize(statefile.get_path())
+
+        logger.log('size is {} byte(s)'.format(size))
+
+        if size == 0 and not self.allow_zero_size:
+            raise RuntimeError('refusing zero size file')
 
         if response.headers.get('last-modified'):
             persdata['last-modified'] = response.headers['last-modified']

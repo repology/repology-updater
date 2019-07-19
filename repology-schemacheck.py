@@ -194,6 +194,7 @@ schemas = {
                     'post': {str: str},
                     'headers': {str: str},
                     'nocache': bool,
+                    'allow_zero_size': bool,
 
                     # crates_io fetcher
                     'fetch_delay': Any(int, float),

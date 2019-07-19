@@ -13,6 +13,7 @@
       fetcher: FileFetcher
       parser: RavenportsJsonParser
       url: https://raw.githubusercontent.com/jrmarino/Ravenports/master/Mk/Misc/repology.json
+      allow_zero_size: false
   repolinks:
     - desc: Ravenports Catalog
       url: http://ravenports.ironwolf.systems/catalog/

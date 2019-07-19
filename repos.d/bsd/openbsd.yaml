@@ -18,12 +18,14 @@
       #url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
       #url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/Attic/INDEX?rev=1.481&content-type=text/plain'
       url: 'http://ftp.fr.openbsd.org/pub/ports-INDEX'
+      allow_zero_size: false
     - name: sqlports
       disabled: true
       fetcher: TarFetcher
       parser: OpenBSDsqlportsParser
       # using mirror as official site is too slow
       url: 'https://mirror.yandex.ru/openbsd/snapshots/packages/amd64/sqlports-6.10.tgz'
+      allow_zero_size: false
   repolinks:
     - desc: 'OpenBSD FAQ: Packages and Ports'
       url: https://www.openbsd.org/faq/faq15.html
