@@ -211,7 +211,7 @@ class Rule:
 
             def namepat_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 match = namepat_re.fullmatch(package.effname)
-                if match:
+                if match is not None:
                     match_context.name_match = match
                     return True
                 return False
@@ -239,7 +239,7 @@ class Rule:
 
             def verpat_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
                 match = verpat.fullmatch(package.version.lower())
-                if match:
+                if match is not None:
                     match_context.ver_match = match
                     return True
                 return False
