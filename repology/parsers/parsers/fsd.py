@@ -69,8 +69,11 @@ class FreeSoftwareDirectoryXMLParser(Parser):
 
             with factory.begin(page) as pkg:
                 label = safe_findtext(entry, '{http://www.w3.org/2000/01/rdf-schema#}label')
-                name = safe_findtext(entry, '{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Name')
+                name = entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Name')
                 version = entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Version_identifier')
+
+                if name is None:
+                    continue
 
                 num_total += 1
 
