@@ -7,13 +7,17 @@
   family: msys2
   ruleset: [msys2, msys2_mingw, windows]
   color: 'ef7f1a'
-  minpackages: 900
+  minpackages: 3300
   sources:
-    - name: mingw64.db
+    # NOTE: no database for source packages
+    - name: x86_64
       fetcher: TarFetcher
       parser: MSYS2DescParser
-      url: http://repo.msys2.org/mingw/sources/mingw32.db.tar.gz
-    # XXX: add binary repos
+      url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.gz
+    - name: i686
+      fetcher: TarFetcher
+      parser: MSYS2DescParser
+      url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.gz
   repolinks:
     - desc: MSYS2 homepage
       url: http://www.msys2.org/
