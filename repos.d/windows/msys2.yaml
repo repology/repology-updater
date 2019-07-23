@@ -14,10 +14,12 @@
       fetcher: TarFetcher
       parser: MSYS2DescParser
       url: http://repo.msys2.org/mingw/x86_64/mingw64.db.tar.gz
+      subrepo: x86_64
     - name: i686
       fetcher: TarFetcher
       parser: MSYS2DescParser
       url: http://repo.msys2.org/mingw/i686/mingw32.db.tar.gz
+      subrepo: i686
   repolinks:
     - desc: MSYS2 homepage
       url: http://www.msys2.org/
@@ -43,10 +45,12 @@
       fetcher: TarFetcher
       parser: MSYS2DescParser
       url: http://repo.msys2.org/msys/x86_64/msys.db.tar.gz
+      subrepo: x86_64
     - name: i686
       fetcher: TarFetcher
       parser: MSYS2DescParser
       url: http://repo.msys2.org/msys/i686/msys.db.tar.gz
+      subrepo: i686
   repolinks:
     - desc: MSYS2 homepage
       url: http://www.msys2.org/
