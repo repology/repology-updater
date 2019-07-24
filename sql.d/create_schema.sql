@@ -819,3 +819,14 @@ CREATE TABLE repository_ruleset_hashes (
 	repository text NOT NULL PRIMARY KEY,
 	ruleset_hash text NULL
 );
+
+--------------------------------------------------------------------------------
+-- Redirects
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS project_redirects CASCADE;
+
+CREATE TABLE project_redirects (
+	oldname text NOT NULL,
+	newname text NOT NULL,
+	PRIMARY KEY(oldname, newname)
+);

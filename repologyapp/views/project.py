@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -35,11 +35,39 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.package import Package, PackageStatus
 
 
+def try_project_redirect(name: str, endpoint: str) -> Any:
+    newprojects = get_db().get_project_redirects(name)
+
+    if len(newprojects) == 0:
+        return None
+    elif len(newprojects) == 1:
+        return flask.redirect(flask.url_for(endpoint, name=newprojects[0]), 301)
+    else:
+        metapackages = get_db().get_metapackages(newprojects)
+        packages = get_db().get_metapackages_packages(newprojects, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
+
+        metapackagedata = packages_to_summary_items(packages)
+
+        return flask.render_template(
+            'project-disambiguation.html',
+            name=name,
+            metapackages=metapackages,
+            metapackagedata=metapackagedata
+        )
+
+
 @ViewRegistrar('/project/<name>/versions')
 def project_versions(name: str) -> Any:
     packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
 
     packages = get_db().get_metapackage_packages(name)
+
+    status_code = 200
+    if not packages:
+        redir = try_project_redirect(name, 'project_versions')
+        if redir is not None:
+            return redir
+        #status_code = 404
 
     for package in packages:
         packages_by_repo[package.repo].append(package)
@@ -47,13 +75,16 @@ def project_versions(name: str) -> Any:
     for repo, repo_packages in packages_by_repo.items():
         packages_by_repo[repo] = packageset_sort_by_version(repo_packages)
 
-    return flask.render_template(
-        'project-versions.html',
-        reponames_absent=[reponame for reponame in repometadata.active_names() if reponame not in packages_by_repo],
-        packages=packages,
-        packages_by_repo=packages_by_repo,
-        metapackage=get_db().get_metapackage(name),
-        name=name
+    return (
+        flask.render_template(
+            'project-versions.html',
+            reponames_absent=[reponame for reponame in repometadata.active_names() if reponame not in packages_by_repo],
+            packages=packages,
+            packages_by_repo=packages_by_repo,
+            metapackage=get_db().get_metapackage(name),
+            name=name
+        ),
+        status_code
     )
 
 
@@ -64,23 +95,41 @@ def project_packages(name: str) -> Any:
     for package in get_db().get_metapackage_packages(name):
         packages_by_repo[package.repo].append(package)
 
+    status_code = 200
+    if not packages_by_repo:
+        redir = try_project_redirect(name, 'project_packages')
+        if redir is not None:
+            return redir
+        #status_code = 404
+
     packages: List[Package] = []
     for repo in repometadata.active_names():
         if repo in packages_by_repo:
             packages.extend(packageset_sort_by_name_version(packages_by_repo[repo]))
 
-    return flask.render_template(
-        'project-packages.html',
-        packages=packages,
-        metapackage=get_db().get_metapackage(name),
-        name=name,
-        link_statuses=get_db().get_metapackage_link_statuses(name)
+    return (
+        flask.render_template(
+            'project-packages.html',
+            packages=packages,
+            metapackage=get_db().get_metapackage(name),
+            name=name,
+            link_statuses=get_db().get_metapackage_link_statuses(name)
+        ),
+        status_code
     )
 
 
 @ViewRegistrar('/project/<name>/information')
 def project_information(name: str) -> Any:
     packages = get_db().get_metapackage_packages(name)
+
+    status_code = 200
+    if not packages:
+        redir = try_project_redirect(name, 'project_information')
+        if redir is not None:
+            return redir
+        #status_code = 404
+
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
 
     information: Dict[str, Any] = {}
@@ -121,13 +170,16 @@ def project_information(name: str) -> Any:
 
     versions = packageset_aggregate_by_version(packages, {PackageStatus.LEGACY: PackageStatus.OUTDATED})
 
-    return flask.render_template(
-        'project-information.html',
-        information=information,
-        versions=versions,
-        metapackage=get_db().get_metapackage(name),
-        name=name,
-        link_statuses=get_db().get_metapackage_link_statuses(name)
+    return (
+        flask.render_template(
+            'project-information.html',
+            information=information,
+            versions=versions,
+            metapackage=get_db().get_metapackage(name),
+            name=name,
+            link_statuses=get_db().get_metapackage_link_statuses(name)
+        ),
+        status_code
     )
 
 
@@ -208,6 +260,8 @@ def project_history(name: str) -> Any:
 
                 yield entry
 
+    # XXX: handle not found project
+
     return flask.render_template(
         'project-history.html',
         metapackage=get_db().get_metapackage(name),
@@ -219,6 +273,7 @@ def project_history(name: str) -> Any:
 
 @ViewRegistrar('/project/<name>/related')
 def project_related(name: str) -> Any:
+    # XXX: handle not found project
     metapackages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
     packages = get_db().get_metapackages_packages(list(metapackages.keys()), fields=['family', 'effname', 'version', 'versionclass', 'flags'])
@@ -241,6 +296,7 @@ def project_related(name: str) -> Any:
 
 @ViewRegistrar('/project/<name>/badges')
 def project_badges(name: str) -> Any:
+    # XXX: handle not found project
     repos_present_in = set([package.repo for package in get_db().get_metapackage_packages(name)])
     repos = [repo for repo in repometadata.active_names() if repo in repos_present_in]
     return flask.render_template(
@@ -253,6 +309,7 @@ def project_badges(name: str) -> Any:
 
 @ViewRegistrar('/project/<name>/report', methods=['GET', 'POST'])
 def project_report(name: str) -> Any:
+    # XXX: handle not found project
     reports_disabled = name in config['DISABLED_REPORTS']
 
     if flask.request.method == 'POST':
