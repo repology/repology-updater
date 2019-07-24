@@ -15,7 +15,7 @@ you're looking for (this may have happened because the project was
 renamed in Repology, possibly to merge different package names of
 a same project, or to split unrelated entities with similar names):</p>
 
-{{ projects_table.projects_table(metapackages, metapackagedata) }}
+{{ projects_table.projects_table(metapackages, metapackagedata, target_project_endpoint=request.endpoint) }}
 
 {% include "versionclass_legend.html" %}
 
