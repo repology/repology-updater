@@ -41,13 +41,13 @@ from repology.package import Package, PackageStatus
 _NOT_FOUND_PROJECT_STATUS_CODE = 200
 
 
-def try_project_redirect(name: str, endpoint: str) -> Any:
+def try_project_redirect(name: str) -> Any:
     newprojects = get_db().get_project_redirects(name)
 
     if len(newprojects) == 0:
         return None
     elif len(newprojects) == 1:
-        return flask.redirect(flask.url_for(endpoint, name=newprojects[0]), 301)
+        return flask.redirect(flask.url_for(flask.request.endpoint, name=newprojects[0]), 301)
     else:
         metapackages = get_db().get_metapackages(newprojects)
         packages = get_db().get_metapackages_packages(newprojects, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
@@ -73,7 +73,7 @@ def project_versions(name: str) -> Any:
 
     status_code = 200
     if not packages:
-        redir = try_project_redirect(name, 'project_versions')
+        redir = try_project_redirect(name)
         if redir is not None:
             return redir
         status_code = _NOT_FOUND_PROJECT_STATUS_CODE
@@ -106,7 +106,7 @@ def project_packages(name: str) -> Any:
 
     status_code = 200
     if not packages_by_repo:
-        redir = try_project_redirect(name, 'project_packages')
+        redir = try_project_redirect(name)
         if redir is not None:
             return redir
         status_code = _NOT_FOUND_PROJECT_STATUS_CODE
@@ -134,7 +134,7 @@ def project_information(name: str) -> Any:
 
     status_code = 200
     if not packages:
-        redir = try_project_redirect(name, 'project_information')
+        redir = try_project_redirect(name)
         if redir is not None:
             return redir
         status_code = _NOT_FOUND_PROJECT_STATUS_CODE
@@ -271,7 +271,7 @@ def project_history(name: str) -> Any:
 
     status_code = 200
     if not get_db().project_exists(name):
-        redir = try_project_redirect(name, 'project_history')
+        redir = try_project_redirect(name)
         if redir is not None:
             return redir
         status_code = _NOT_FOUND_PROJECT_STATUS_CODE
@@ -292,7 +292,7 @@ def project_history(name: str) -> Any:
 def project_related(name: str) -> Any:
     status_code = 200
     if not get_db().project_exists(name):
-        redir = try_project_redirect(name, 'project_related')
+        redir = try_project_redirect(name)
         if redir is not None:
             return redir
         status_code = _NOT_FOUND_PROJECT_STATUS_CODE
@@ -326,7 +326,7 @@ def project_badges(name: str) -> Any:
 
     status_code = 200
     if not packages:
-        redir = try_project_redirect(name, 'project_related')
+        redir = try_project_redirect(name)
         if redir is not None:
             return redir
         status_code = _NOT_FOUND_PROJECT_STATUS_CODE
@@ -349,7 +349,7 @@ def project_badges(name: str) -> Any:
 def project_report(name: str) -> Any:
     status_code = 200
     if not get_db().project_exists(name):
-        redir = try_project_redirect(name, 'project_related')
+        redir = try_project_redirect(name)
         if redir is not None:
             return redir
         status_code = _NOT_FOUND_PROJECT_STATUS_CODE
