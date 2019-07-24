@@ -16,6 +16,7 @@
 	<a href="{{ url_for("admin_reports_unprocessed") }}" class="btn btn-default{% if request.endpoint == "admin_reports_unprocessed" %} active{% endif %}">Unprocessed reports</a>
 	<a href="{{ url_for("admin_reports_recent") }}" class="btn btn-default{% if request.endpoint == "admin_reports_recent" %} active{% endif %}">Recent reports</a>
 	<a href="{{ url_for("admin_updates") }}" class="btn btn-default{% if request.endpoint == "admin_updates" %} active{% endif %}">Updates</a>
+	<a href="{{ url_for("admin_redirects") }}" class="btn btn-default{% if request.endpoint == "admin_redirects" %} active{% endif %}">Redirects</a>
 </div>
 {% endif %}
 {% endblock %}

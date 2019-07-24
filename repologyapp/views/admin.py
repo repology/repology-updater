@@ -15,12 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, List
 
 import flask
 
 from repologyapp.config import config
 from repologyapp.db import get_db
+from repologyapp.metapackages import packages_to_summary_items
 from repologyapp.template_functions import url_for_self
 from repologyapp.view_registry import ViewRegistrar
 
@@ -93,4 +94,40 @@ def admin_updates() -> Any:
     return flask.render_template(
         'admin-updates.html',
         repos=get_db().get_repositories_update_diagnostics()
+    )
+
+
+@ViewRegistrar('/admin/redirects', methods=['GET', 'POST'])
+def admin_redirects() -> Any:
+    if not flask.session.get('admin'):
+        return unauthorized()
+
+    oldname = ''
+    metapackages: List[Any] = []
+    metapackagedata: Dict[str, Any] = {}
+
+    if flask.request.method == 'POST':
+        oldname = flask.request.form.get('oldname', '')
+        newname = flask.request.form.get('newname')
+
+        if oldname and newname:
+            if flask.request.form.get('action') == 'remove':
+                get_db().remove_project_redirect(oldname, newname)
+                flask.flash('Redirect removed succesfully', 'success')
+            else:
+                get_db().add_project_redirect(oldname, newname)
+                flask.flash('Redirect added succesfully', 'success')
+
+        if oldname:
+            newnames = get_db().get_project_redirects(oldname)
+
+            metapackages = get_db().get_metapackages(newnames)
+            packages = get_db().get_metapackages_packages(newnames, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
+            metapackagedata = packages_to_summary_items(packages)
+
+    return flask.render_template(
+        'admin-redirects.html',
+        oldname=oldname,
+        metapackages=metapackages,
+        metapackagedata=metapackagedata,
     )
