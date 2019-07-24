@@ -27,4 +27,5 @@ INSERT INTO project_redirects (
 ) VALUES (
 	%(oldname)s,
 	%(newname)s
-);
+)
+ON CONFLICT(oldname, newname) DO NOTHING;
