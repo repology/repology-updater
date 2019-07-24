@@ -18,6 +18,7 @@
 --------------------------------------------------------------------------------
 --
 -- @param oldname
+-- @param limit=None
 --
 -- @returns array of values
 --
@@ -32,4 +33,5 @@ WHERE
 		SELECT *
 		FROM metapackages
 		WHERE metapackages.effname = project_redirects.newname AND num_repos > 0
-	);
+	)
+LIMIT %(limit)s;

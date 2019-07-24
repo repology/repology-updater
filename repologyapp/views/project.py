@@ -42,7 +42,7 @@ _NOT_FOUND_PROJECT_STATUS_CODE = 200
 
 
 def try_project_redirect(name: str) -> Any:
-    newprojects = get_db().get_project_redirects(name)
+    newprojects = get_db().get_project_redirects(name, limit=config['REDIRECTS_PER_PAGE'])
 
     if len(newprojects) == 0:
         return None
@@ -54,12 +54,17 @@ def try_project_redirect(name: str) -> Any:
 
         metapackagedata = packages_to_summary_items(packages)
 
+        too_many_warning = None
+        if len(metapackagedata) == config['REDIRECTS_PER_PAGE']:
+            too_many_warning = config['REDIRECTS_PER_PAGE']
+
         return (
             flask.render_template(
                 'project-disambiguation.html',
                 name=name,
                 metapackages=metapackages,
-                metapackagedata=metapackagedata
+                metapackagedata=metapackagedata,
+                too_many_warning=too_many_warning
             ),
             _NOT_FOUND_PROJECT_STATUS_CODE
         )

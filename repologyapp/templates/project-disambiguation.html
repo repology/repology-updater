@@ -10,6 +10,10 @@
 
 <div class="alert alert-warning" role="alert">No data found for project <strong>{{ name }}</strong></div>
 
+{% if too_many_warning %}
+<div class="alert alert-warning" role="alert">Too many related projects found, only listing first {{ too_many_warning }}!</div>
+{% endif %}
+
 <p>However, other projects are known which may be related to what
 you're looking for (this may have happened because the project was
 renamed in Repology, possibly to merge different package names of
