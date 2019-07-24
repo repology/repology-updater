@@ -19,13 +19,16 @@
 --
 -- @param oldname
 -- @param newname
+-- @param manual
 --
 --------------------------------------------------------------------------------
 INSERT INTO project_redirects (
 	oldname,
-	newname
+	newname,
+	manual
 ) VALUES (
 	%(oldname)s,
-	%(newname)s
+	%(newname)s,
+	%(manual)s
 )
 ON CONFLICT(oldname, newname) DO NOTHING;

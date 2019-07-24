@@ -115,7 +115,7 @@ def admin_redirects() -> Any:
                 get_db().remove_project_redirect(oldname, newname)
                 flask.flash('Redirect removed succesfully', 'success')
             else:
-                get_db().add_project_redirect(oldname, newname)
+                get_db().add_project_redirect(oldname, newname, True)
                 flask.flash('Redirect added succesfully', 'success')
 
         if oldname:

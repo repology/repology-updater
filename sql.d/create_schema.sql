@@ -828,5 +828,6 @@ DROP TABLE IF EXISTS project_redirects CASCADE;
 CREATE TABLE project_redirects (
 	oldname text NOT NULL,
 	newname text NOT NULL,
+	manual bool NOT NULL DEFAULT FALSE,
 	PRIMARY KEY(oldname, newname)
 );
