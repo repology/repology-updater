@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "macros/projects_table.html" as projects_table %}
 {% import "macros.html" as macros %}
 
 {% block title %}Projects list - Repology{% endblock %}
@@ -148,7 +149,7 @@
 
 {{ pagination() }}
 
-{% include "projects_table.html" %}
+{{ projects_table.projects_table(metapackages, metapackagedata, repo, maintainer) }}
 
 {{ pagination() }}
 

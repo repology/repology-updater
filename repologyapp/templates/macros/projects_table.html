@@ -1,3 +1,5 @@
+{%- macro projects_table(metapackages, metapackagedata, repo=None, maintainer=None, target_project_endpoint='project_versions') -%}
+
 {% if metapackagedata %}
 <p><b>{{ metapackagedata|length }}</b> project(s) on this page</p>
 
@@ -25,7 +27,7 @@
 	{% endif %}
 		<tr>
 			<td class="text-nowrap">
-				<a href="{{ url_for("project_versions", name=metapackagename) }}">{{ metapackagename }}</a>
+				<a href="{{ url_for(target_project_endpoint, name=metapackagename) }}">{{ metapackagename }}</a>
 				{%- if metapackage.has_related -%}
 				<a class="non-selectable" href="{{ url_for("project_related", name=metapackagename) }}">∗</a>
 				{% endif %}
@@ -67,3 +69,5 @@
 {% else %}
 <div class="alert alert-warning" role="alert">No projects found matching the criteria</div>
 {% endif %}
+
+{%- endmacro -%}

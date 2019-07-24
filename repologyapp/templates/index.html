@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{#% import "macros.html" as macros %#}
+{% import "macros/projects_table.html" as projects_table %}
 
 {% block title %}Repology{% endblock %}
 {% block pageheader %}{% endblock %}
@@ -233,7 +233,7 @@
 
 		{% include "versionclass_legend.html" %}
 
-		{% include "projects_table.html" %}
+		{{ projects_table.projects_table(metapackages, metapackagedata) }}
 
 	</section>
 

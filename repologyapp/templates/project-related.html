@@ -1,4 +1,5 @@
 {% extends "project.html" %}
+{% import "macros/projects_table.html" as projects_table %}
 {% import "macros.html" as macros %}
 
 {% block title %}{{ name }} related projects - Repology{% endblock %}
@@ -14,7 +15,7 @@
 
 <p>Related projects are determined by recursively matching package homepage URLs. Note that this list may be incomplete as Repology may not be able to get homepage URLs from some repositories.</p>
 
-{% include "projects_table.html" %}
+{{ projects_table.projects_table(metapackages, metapackagedata) }}
 
 {% include "versionclass_legend.html" %}
 
