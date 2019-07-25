@@ -111,3 +111,30 @@ DELETE FROM log_lines
 WHERE run_id NOT IN (
 	SELECT id FROM runs
 );
+
+--------------------------------------------------------------------------------
+-- Update redirects
+--------------------------------------------------------------------------------
+INSERT
+INTO project_redirects (
+	oldname,
+	newname
+)
+SELECT DISTINCT
+	name,
+	effname
+FROM packages
+WHERE name != effname
+ON CONFLICT (oldname, newname) DO NOTHING;
+
+INSERT
+INTO project_redirects (
+	oldname,
+	newname
+)
+SELECT DISTINCT
+	basename,
+	effname
+FROM packages
+WHERE basename IS NOT NULL AND basename != effname
+ON CONFLICT (oldname, newname) DO NOTHING;
