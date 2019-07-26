@@ -88,4 +88,4 @@
       url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
     - desc: View ebuild
       url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{rawversion}.ebuild'
-  tags: [ all, production ]
+  tags: [ all, production, funtoo ]
