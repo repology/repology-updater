@@ -301,13 +301,16 @@ def project_related(name: str) -> Any:
     if len(metapackagedata) == config['METAPACKAGES_PER_PAGE']:
         too_many_warning = config['METAPACKAGES_PER_PAGE']
 
-    return flask.render_template(
-        'project-related.html',
-        name=name,
-        metapackage=metapackage,
-        metapackages=metapackages,
-        metapackagedata=metapackagedata,
-        too_many_warning=too_many_warning
+    return (
+        flask.render_template(
+            'project-related.html',
+            name=name,
+            metapackage=metapackage,
+            metapackages=metapackages,
+            metapackagedata=metapackagedata,
+            too_many_warning=too_many_warning
+        ),
+        200 if metapackages else 404
     )
 
 
