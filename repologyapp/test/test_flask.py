@@ -139,16 +139,16 @@ class TestFlask(unittest.TestCase):
 
     def test_project(self) -> None:
         self.checkurl_html('/project/kiconvtool/versions', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl_html('/project/nonexistent/versions', has=['No data found'])
+        self.checkurl_html('/project/nonexistent/versions', has=['Unknown project'], status_code=404)
 
         self.checkurl_html('/project/kiconvtool/packages', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl_html('/project/nonexistent/packages', has=['No packages found'])
+        self.checkurl_html('/project/nonexistent/packages', has=['Unknown project'], status_code=404)
 
         self.checkurl_html('/project/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
-        self.checkurl_html('/project/nonexistent/information', has=['No data found'])
+        self.checkurl_html('/project/nonexistent/information', has=['Unknown project'], status_code=404)
 
         self.checkurl_html('/project/kiconvtool/related')  # , has=['0.97']) # XXX: no related packages in current testdata
-        self.checkurl_html('/project/nonexistent/related', has=['No projects found matching the criteria'])
+        self.checkurl_html('/project/nonexistent/related', has=['Unknown project'], status_code=404)
 
         self.checkurl_html('/project/kiconvtool/badges', has=[
             # XXX: agnostic to site home
