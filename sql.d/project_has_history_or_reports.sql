@@ -19,7 +19,17 @@
 --
 -- @param effname
 --
--- @returns single value
+-- @returns single tuple
 --
 --------------------------------------------------------------------------------
-SELECT EXISTS(SELECT * FROM metapackages WHERE effname = %(effname)s AND num_repos > 0);
+SELECT
+	EXISTS (
+		SELECT *
+		FROM metapackages_events
+		WHERE effname = %(effname)s
+	) AS has_history,
+	EXISTS (
+		SELECT *
+		FROM reports
+		WHERE effname = %(effname)s
+	) AS has_reports;

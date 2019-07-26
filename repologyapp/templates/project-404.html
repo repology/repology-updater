@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% import "macros/projects_table.html" as projects_table %}
+
+{% block title %}Unknown project {{ name }} - Repology{% endblock %}
+{% block header %}Unknown project <strong>{{ name }}</strong>{% endblock %}
+
+{% block content %}
+<div class="container">
+
+<div class="alert alert-warning" role="alert">
+	<p>Sorry, but Repology doesn't know project <strong>{{ name }}</strong>.</p>
+	<p>The most likely reason which may have caused this is that you're looking for package name as it's spelled in some repository, while Repology normalizes project names and may spell them differently.</p>
+	{% if metapackages %}
+	<p>There are some projects which may be related to what you're looking for, they are listed below.</p>
+	{% endif %}
+</div>
+
+{% if metapackages %}
+{{ projects_table.projects_table(metapackages, metapackagedata, target_project_endpoint=request.endpoint) }}
+{% endif %}
+
+</div>
+{% endblock %}

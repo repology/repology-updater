@@ -8,9 +8,6 @@
 {% block content %}
 <div class="container">
 
-{% if not information %}
-<div class="alert alert-warning" role="alert">No data found for project <strong>{{ name }}</strong></div>
-{% else %}
 <div class="row">
 	<div class="col-md-4">
 		<section id="Package_names">
@@ -115,7 +112,6 @@
 		{% endif %}
 	</div>
 </div>
-{% endif %}
 
 </div> {#- container #}
 {% endblock %}

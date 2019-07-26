@@ -8,10 +8,6 @@
 {% block content %}
 <div class="container">
 
-{% if not packages %}
-<div class="alert alert-warning" role="alert">No packages found for project <strong>{{ name }}</strong></div>
-{% else %}
-
 <p><b>{{ packages|length }}</b> package(s) known</p>
 
 <div class="row">
@@ -106,8 +102,6 @@
 	</div>
 {% endfor %}
 </div>
-
-{% endif %}
 
 </div> {#- container #}
 {% endblock %}

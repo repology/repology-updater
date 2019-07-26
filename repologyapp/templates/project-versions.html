@@ -8,10 +8,6 @@
 {% block content %}
 <div class="container">
 
-{% if not packages_by_repo %}
-<div class="alert alert-warning" role="alert">No data found for project <strong>{{ name }}</strong></div>
-{% else %}
-
 <p><b>{{ packages|length }}</b> package(s) known</p>
 
 <table class="table table-striped">
@@ -75,8 +71,6 @@
 {% endif %}
 {% endfor %}
 </div>
-{% endif %}
-
 {% endif %}
 
 </div> {#- container #}

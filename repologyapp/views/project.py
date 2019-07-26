@@ -35,115 +35,112 @@ from repologyapp.view_registry import ViewRegistrar
 from repology.package import Package, PackageStatus
 
 
-# XXX: this was 200 historically, but the correct value is obviously 404
-# Change this to 404 as soon as redirects are available for most nonexisting
-# projects
-_NOT_FOUND_PROJECT_STATUS_CODE = 200
+def handle_nonexisting_project(name: str, metapackage: Dict[str, Any]) -> Any:
+    # we don't show anything to user when REDIRECTS_PER_PAGE is reached as
+    # number of redirect targets is natually limited and we don't expect it to be reached
+    redirects = get_db().get_project_redirects(name, limit=config['REDIRECTS_PER_PAGE'])
 
+    if len(redirects) == 1:
+        # single redirect - follow it right away
+        flask.flash('You were redirected from project {}, which is not known by Repology'.format(name), 'info')
+        return flask.redirect(flask.url_for(flask.request.endpoint, name=redirects[0]), 301)
 
-def try_project_redirect(name: str) -> Any:
-    newprojects = get_db().get_project_redirects(name, limit=config['REDIRECTS_PER_PAGE'])
+    metapackages: List[Any] = []
+    metapackagedata: Dict[str, Any] = {}
 
-    if len(newprojects) == 0:
-        return None
-    elif len(newprojects) == 1:
-        return flask.redirect(flask.url_for(flask.request.endpoint, name=newprojects[0]), 301)
-    else:
-        metapackages = get_db().get_metapackages(newprojects)
-        packages = get_db().get_metapackages_packages(newprojects, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
+    if redirects:
+        # show redirects
+        metapackages = get_db().get_metapackages(redirects)
+        packages = get_db().get_metapackages_packages(redirects, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
 
         metapackagedata = packages_to_summary_items(packages)
 
-        too_many_warning = None
-        if len(metapackagedata) == config['REDIRECTS_PER_PAGE']:
-            too_many_warning = config['REDIRECTS_PER_PAGE']
+    if not metapackage:
+        return (
+            flask.render_template(
+                'project-404.html',
+                name=name,
+                metapackages=metapackages,
+                metapackagedata=metapackagedata
+            ),
+            404
+        )
+    else:
+        has_history, has_reports = get_db().project_has_history_or_reports(name)
 
         return (
             flask.render_template(
-                'project-disambiguation.html',
+                'project-410.html',
                 name=name,
+                metapackage=metapackage,
                 metapackages=metapackages,
                 metapackagedata=metapackagedata,
-                too_many_warning=too_many_warning
+                has_history=has_history,
+                has_reports=has_reports
             ),
-            _NOT_FOUND_PROJECT_STATUS_CODE
+            404
         )
 
 
 @ViewRegistrar('/project/<name>/versions')
 def project_versions(name: str) -> Any:
-    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
+    metapackage = get_db().get_metapackage(name)
+
+    if not metapackage or metapackage['num_repos'] == 0:
+        return handle_nonexisting_project(name, metapackage)
 
     packages = get_db().get_metapackage_packages(name)
 
-    status_code = 200
-    if not packages:
-        redir = try_project_redirect(name)
-        if redir is not None:
-            return redir
-        status_code = _NOT_FOUND_PROJECT_STATUS_CODE
-
+    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
     for package in packages:
         packages_by_repo[package.repo].append(package)
 
     for repo, repo_packages in packages_by_repo.items():
         packages_by_repo[repo] = packageset_sort_by_version(repo_packages)
 
-    return (
-        flask.render_template(
-            'project-versions.html',
-            reponames_absent=[reponame for reponame in repometadata.active_names() if reponame not in packages_by_repo],
-            packages=packages,
-            packages_by_repo=packages_by_repo,
-            metapackage=get_db().get_metapackage(name),
-            name=name
-        ),
-        status_code
+    return flask.render_template(
+        'project-versions.html',
+        name=name,
+        metapackage=metapackage,
+        packages=packages,
+        packages_by_repo=packages_by_repo,
+        reponames_absent=[reponame for reponame in repometadata.active_names() if reponame not in packages_by_repo]
     )
 
 
 @ViewRegistrar('/project/<name>/packages')
 def project_packages(name: str) -> Any:
-    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
+    metapackage = get_db().get_metapackage(name)
 
+    if not metapackage or metapackage['num_repos'] == 0:
+        return handle_nonexisting_project(name, metapackage)
+
+    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
     for package in get_db().get_metapackage_packages(name):
         packages_by_repo[package.repo].append(package)
-
-    status_code = 200
-    if not packages_by_repo:
-        redir = try_project_redirect(name)
-        if redir is not None:
-            return redir
-        status_code = _NOT_FOUND_PROJECT_STATUS_CODE
 
     packages: List[Package] = []
     for repo in repometadata.active_names():
         if repo in packages_by_repo:
             packages.extend(packageset_sort_by_name_version(packages_by_repo[repo]))
 
-    return (
-        flask.render_template(
-            'project-packages.html',
-            packages=packages,
-            metapackage=get_db().get_metapackage(name),
-            name=name,
-            link_statuses=get_db().get_metapackage_link_statuses(name)
-        ),
-        status_code
+    return flask.render_template(
+        'project-packages.html',
+        name=name,
+        metapackage=metapackage,
+        packages=packages,
+        link_statuses=get_db().get_metapackage_link_statuses(name)
     )
 
 
 @ViewRegistrar('/project/<name>/information')
 def project_information(name: str) -> Any:
+    metapackage = get_db().get_metapackage(name)
+
+    if not metapackage or metapackage['num_repos'] == 0:
+        return handle_nonexisting_project(name, metapackage)
+
     packages = get_db().get_metapackage_packages(name)
-
-    status_code = 200
-    if not packages:
-        redir = try_project_redirect(name)
-        if redir is not None:
-            return redir
-        status_code = _NOT_FOUND_PROJECT_STATUS_CODE
-
     packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
 
     information: Dict[str, Any] = {}
@@ -184,23 +181,18 @@ def project_information(name: str) -> Any:
 
     versions = packageset_aggregate_by_version(packages, {PackageStatus.LEGACY: PackageStatus.OUTDATED})
 
-    return (
-        flask.render_template(
-            'project-information.html',
-            information=information,
-            versions=versions,
-            metapackage=get_db().get_metapackage(name),
-            name=name,
-            link_statuses=get_db().get_metapackage_link_statuses(name)
-        ),
-        status_code
+    return flask.render_template(
+        'project-information.html',
+        name=name,
+        metapackage=metapackage,
+        information=information,
+        versions=versions,
+        link_statuses=get_db().get_metapackage_link_statuses(name)
     )
 
 
 @ViewRegistrar('/project/<name>/history')
 def project_history(name: str) -> Any:
-    autorefresh = flask.request.args.to_dict().get('autorefresh')
-
     def prepare_repos(repos: Collection[str]) -> List[str]:
         if not repos:
             return []
@@ -274,33 +266,30 @@ def project_history(name: str) -> Any:
 
                 yield entry
 
-    status_code = 200
-    if not get_db().project_exists(name):
-        redir = try_project_redirect(name)
-        if redir is not None:
-            return redir
-        status_code = _NOT_FOUND_PROJECT_STATUS_CODE
+    autorefresh = flask.request.args.to_dict().get('autorefresh')
 
-    return (
-        flask.render_template(
-            'project-history.html',
-            metapackage=get_db().get_metapackage(name),
-            name=name,
-            history=list(postprocess_history(get_db().get_metapackage_history(name, limit=config['HISTORY_PER_PAGE']))),
-            autorefresh=autorefresh
-        ),
-        status_code
+    metapackage = get_db().get_metapackage(name)
+
+    history = list(postprocess_history(get_db().get_metapackage_history(name, limit=config['HISTORY_PER_PAGE'])))
+
+    if (not metapackage or metapackage['num_repos'] == 0) and not history:  # treat specially: allow showing history even for nonexisting projects
+        return handle_nonexisting_project(name, metapackage)
+
+    return flask.render_template(
+        'project-history.html',
+        name=name,
+        metapackage=metapackage,
+        history=history,
+        autorefresh=autorefresh
     )
 
 
 @ViewRegistrar('/project/<name>/related')
 def project_related(name: str) -> Any:
-    status_code = 200
-    if not get_db().project_exists(name):
-        redir = try_project_redirect(name)
-        if redir is not None:
-            return redir
-        status_code = _NOT_FOUND_PROJECT_STATUS_CODE
+    metapackage = get_db().get_metapackage(name)
+
+    if not metapackage or metapackage['num_repos'] == 0:
+        return handle_nonexisting_project(name, metapackage)
 
     metapackages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
@@ -312,52 +301,44 @@ def project_related(name: str) -> Any:
     if len(metapackagedata) == config['METAPACKAGES_PER_PAGE']:
         too_many_warning = config['METAPACKAGES_PER_PAGE']
 
-    return (
-        flask.render_template(
-            'project-related.html',
-            metapackage=get_db().get_metapackage(name),
-            name=name,
-            metapackages=metapackages,
-            metapackagedata=metapackagedata,
-            too_many_warning=too_many_warning
-        ),
-        status_code
+    return flask.render_template(
+        'project-related.html',
+        name=name,
+        metapackage=metapackage,
+        metapackages=metapackages,
+        metapackagedata=metapackagedata,
+        too_many_warning=too_many_warning
     )
 
 
 @ViewRegistrar('/project/<name>/badges')
 def project_badges(name: str) -> Any:
-    packages = get_db().get_metapackage_packages(name)
+    metapackage = get_db().get_metapackage(name)
 
-    status_code = 200
-    if not packages:
-        redir = try_project_redirect(name)
-        if redir is not None:
-            return redir
-        status_code = _NOT_FOUND_PROJECT_STATUS_CODE
+    if not metapackage or metapackage['num_repos'] == 0:
+        return handle_nonexisting_project(name, metapackage)
+
+    packages = get_db().get_metapackage_packages(name)
 
     repos_present_in = set([package.repo for package in packages])
     repos = [repo for repo in repometadata.active_names() if repo in repos_present_in]
 
-    return (
-        flask.render_template(
-            'project-badges.html',
-            metapackage=get_db().get_metapackage(name),
-            name=name,
-            repos=repos
-        ),
-        status_code
+    return flask.render_template(
+        'project-badges.html',
+        name=name,
+        metapackage=metapackage,
+        repos=repos
     )
 
 
 @ViewRegistrar('/project/<name>/report', methods=['GET', 'POST'])
 def project_report(name: str) -> Any:
-    status_code = 200
-    if not get_db().project_exists(name):
-        redir = try_project_redirect(name)
-        if redir is not None:
-            return redir
-        status_code = _NOT_FOUND_PROJECT_STATUS_CODE
+    metapackage = get_db().get_metapackage(name)
+
+    reports = get_db().get_metapackage_reports(name)
+
+    if (not metapackage or metapackage['num_repos'] == 0) and not reports:  # treat specially: allow showing reports even for nonexisting projects
+        return handle_nonexisting_project(name, metapackage)
 
     reports_disabled = name in config['DISABLED_REPORTS']
 
@@ -399,15 +380,12 @@ def project_report(name: str) -> Any:
         flask.flash('Report for {} added successfully and will be processed in a few days, thank you!'.format(name), 'success')
         return flask.redirect(flask.url_for('metapackage_report', name=name))
 
-    return (
-        flask.render_template(
-            'project-report.html',
-            reports=get_db().get_metapackage_reports(name),
-            metapackage=get_db().get_metapackage(name),
-            name=name,
-            afk_till=AFKChecker(config['STAFF_AFK']).get_afk_end(),
-            reports_disabled=reports_disabled,
-            show_invitation=flask.request.remote_addr in config['INVITED_IPS']
-        ),
-        status_code
+    return flask.render_template(
+        'project-report.html',
+        name=name,
+        metapackage=metapackage,
+        reports=reports,
+        afk_till=AFKChecker(config['STAFF_AFK']).get_afk_end(),
+        reports_disabled=reports_disabled,
+        show_invitation=flask.request.remote_addr in config['INVITED_IPS']
     )
