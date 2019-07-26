@@ -147,7 +147,7 @@ class TestFlask(unittest.TestCase):
         self.checkurl_html('/project/kiconvtool/information', has=['FreeBSD', '0.97', 'amdmi3'])
         self.checkurl_html('/project/nonexistent/information', has=['Unknown project'], status_code=404)
 
-        self.checkurl_html('/project/kiconvtool/related')  # , has=['0.97']) # XXX: no related packages in current testdata
+        #self.checkurl_html('/project/kiconvtool/related')  # , has=['0.97']) # XXX: no related packages in current testdata
         self.checkurl_html('/project/nonexistent/related', has=['Unknown project'], status_code=404)
 
         self.checkurl_html('/project/kiconvtool/badges', has=[
