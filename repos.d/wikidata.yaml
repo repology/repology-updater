@@ -188,13 +188,30 @@
                         FILTER NOT EXISTS { ?ubuntu_package pq:P582 ?ubuntu_package_end }
                     }
 
+                    # Also module collections which we import
+                    OPTIONAL {
+                        ?project p:P5779 ?cpan_project .
+                        FILTER NOT EXISTS { ?cpan_project pq:P582 ?cpan_project_end }
+                    }
+                    OPTIONAL {
+                        ?project p:P5568 ?pypi_project .
+                        FILTER NOT EXISTS { ?pypi_project pq:P582 ?pypi_project_end }
+                    }
+                    OPTIONAL {
+                        ?project p:P5566 ?ruby_project .
+                        FILTER NOT EXISTS { ?ruby_project pq:P582 ?ruby_project_end }
+                    }
+
                     BIND(
                       BOUND(?arch_package) ||
                       BOUND(?aur_package) ||
                       BOUND(?debian_package) ||
                       BOUND(?fedora_package) ||
                       BOUND(?gentoo_package) ||
-                      BOUND(?ubuntu_package)
+                      BOUND(?ubuntu_package) ||
+                      BOUND(?cpan_project) ||
+                      BOUND(?pypi_project) ||
+                      BOUND(?ruby_project)
                       AS ?has_packages
                     )
 
