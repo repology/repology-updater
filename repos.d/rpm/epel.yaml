@@ -34,3 +34,20 @@
     - desc: EPEL wiki page
       url: https://fedoraproject.org/wiki/EPEL
   tags: [ all, production, epel ]
+
+- name: epel_8
+  type: repository
+  desc: EPEL 8
+  family: fedora
+  ruleset: [fedora, epel]
+  color: 'ff0000'
+  minpackages: 150
+  sources:
+    - name: data
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://dl.fedoraproject.org/pub/epel/8/Everything/SRPMS/
+  repolinks:
+    - desc: EPEL wiki page
+      url: https://fedoraproject.org/wiki/EPEL
+  tags: [ all, production, epel ]
