@@ -121,6 +121,8 @@ class TestFlask(unittest.TestCase):
         self.checkurl_svg('/badge/latest-versions/kiconvtool.svg', has=['<svg', '>0.97<'])
         self.checkurl_svg('/badge/latest-versions/nonexistent.svg', has=['<svg', '>-<'])
 
+        self.checkurl_svg('/badge/versions-matrix.svg?projects=kiconvtool&header=HEADER', has=['<svg', 'FreeBSD', '>0.97<', 'HEADER'])
+
     def test_graphs(self) -> None:
         self.checkurl_svg('/graph/total/projects.svg')
         self.checkurl_svg('/graph/total/maintainers.svg')

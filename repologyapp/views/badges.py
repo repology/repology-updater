@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
+from collections import defaultdict
 from functools import cmp_to_key
 from typing import Any
 
@@ -120,3 +122,78 @@ def badge_latest_versions(name: str) -> Any:
         BadgeCell(caption, collapsible=True),
         BadgeCell(text, '#007ec6'),
     ]])
+
+
+@ViewRegistrar('/badge/versions-matrix.svg')
+def badge_versions_matrix() -> Any:
+    args = flask.request.args.to_dict()
+
+    header = args.get('header')
+
+    # parse requirements
+    required_projects = {}
+
+    for project in args.get('projects', '').split(','):
+        match = re.fullmatch('(.*?)(>=?|<=?)(.*?)', project)
+        if match is not None:
+            required_projects[match.group(1)] = (match.group(2), match.group(3))
+        else:
+            required_projects[project] = None
+
+    required_repos = set(args.get('repos').split(',')) if 'repos' in args else None
+
+    require_all = args.get('require_all', False)
+
+    # get and process packages
+    packages = get_db().get_metapackages_packages(list(required_projects.keys()), fields=['effname', 'repo', 'version', 'versionclass'])
+
+    packages_by_project = defaultdict(list)
+    repos = set()
+    for package in packages:
+        packages_by_project[package.effname].append(package)
+        repos.add(package.repo)
+
+    best_packages_by_project = {effname: packageset_to_best_by_repo(packages) for effname, packages in packages_by_project.items()}
+
+    if required_repos is not None:
+        repos = repos & required_repos
+
+    # construct table
+    cells = [[BadgeCell()]]
+
+    for name in required_projects.keys():
+        cells[0].append(BadgeCell(name))
+
+    for repo in repometadata.sorted_active_names(repos):
+        row = [BadgeCell(repometadata[repo]['desc'], align='r')]
+
+        for effname, restriction in required_projects.items():
+            if effname not in best_packages_by_project or repo not in best_packages_by_project[effname]:
+                # project not found in repo
+                row.append(BadgeCell('-'))
+
+                if require_all:
+                    break
+                else:
+                    continue
+
+            package = best_packages_by_project[effname][repo]
+            unsatisfying = False
+
+            if restriction is not None:
+                if restriction[0] == '>':
+                    unsatisfying = version_compare(package.version, restriction[1]) <= 0
+                elif restriction[0] == '>=':
+                    unsatisfying = version_compare(package.version, restriction[1]) < 0
+                elif restriction[0] == '<':
+                    unsatisfying = version_compare(package.version, restriction[1]) >= 0
+                elif restriction[0] == '<=':
+                    unsatisfying = version_compare(package.version, restriction[1]) > 0
+
+            color = badge_color(package.versionclass, unsatisfying)
+
+            row.append(BadgeCell(package.version, color=color, truncate=13, minwidth=60))
+        else:
+            cells.append(row)
+
+    return render_generic_badge(cells, header=header)
