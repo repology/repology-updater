@@ -10,7 +10,7 @@ Needed for the core:
 - Python module [pyyaml](http://pyyaml.org/)
 - Python module [Jinja2](http://jinja.pocoo.org/)
 - Python module [libversion](https://pypi.python.org/pypi/libversion) (also requires [libversion](https://github.com/repology/libversion) C library)
-- Python module [psycopg](http://initd.org/psycopg/)
+- Python module [psycopg2](http://initd.org/psycopg/)
 
 - [PostgreSQL](https://www.postgresql.org/) 10.0+
 - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
@@ -23,7 +23,7 @@ Needed for fetching/parsing repository data:
 - Python module [rpm](http://rpm.org/) (comes with RPM package manager)
 - Python module [jsonslicer](https://pypi.org/project/jsonslicer/)
 - Python module [pyparsing](https://github.com/pyparsing/pyparsing/)
-- Python module sqlite3
+- Python module sqlite3 (part of python)
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
 
