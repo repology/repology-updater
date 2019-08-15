@@ -66,7 +66,7 @@ def badge_vertical_allrepos(name: str) -> Any:
 def badge_tiny_repos(name: str) -> Any:
     return render_generic_badge([[
         BadgeCell(flask.request.args.to_dict().get('header', 'in repositories'), collapsible=True),
-        BadgeCell(get_db().get_metapackage_families_count(name), '#007ec6'),
+        BadgeCell(str(get_db().get_metapackage_families_count(name)), '#007ec6'),
     ]])
 
 
