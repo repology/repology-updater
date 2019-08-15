@@ -39,7 +39,7 @@ class BadgeCell:
     align: str
 
     def __init__(self,
-                 text: str,
+                 text: str = '',
                  color: Optional[str] = None,
                  width: Optional[int] = None,
                  truncate: Optional[int] = None,
