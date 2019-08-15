@@ -24,7 +24,7 @@ import flask
 from pytz import timezone, utc
 
 from repologyapp.config import config
-from repologyapp.globals import get_text_width, repometadata
+from repologyapp.globals import repometadata
 from repologyapp.template_filters import css_for_versionclass, maintainer_to_links, maintainers_to_group_mailto, pkg_format
 from repologyapp.template_functions import endpoint_like, url_for_self
 from repologyapp.template_tests import for_page, is_fallback_maintainer
@@ -49,7 +49,6 @@ app.jinja_env.filters['pkg_format'] = pkg_format
 app.jinja_env.filters['css_for_versionclass'] = css_for_versionclass
 app.jinja_env.filters['maintainer_to_links'] = maintainer_to_links
 app.jinja_env.filters['maintainers_to_group_mailto'] = maintainers_to_group_mailto
-app.jinja_env.filters['text_width'] = get_text_width
 
 # templates: custom tests
 app.jinja_env.tests['for_page'] = for_page
