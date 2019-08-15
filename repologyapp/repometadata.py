@@ -16,7 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, Iterable, List, Optional
 
 from repologyapp.db import get_db
 
@@ -69,3 +69,9 @@ class RepositoryMetadata:
         if self.is_stale():
             self.update()
         return [repo['name'] for repo in self._repos if repo['active']]
+
+    def sorted_active_names(self, names: Iterable[str]) -> List[str]:
+        if self.is_stale():
+            self.update()
+        names_set = set(names)
+        return [repo['name'] for repo in self._repos if repo['active'] and repo['name'] in names_set]
