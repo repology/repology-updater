@@ -45,6 +45,9 @@ class TinyBadgeRenderer:
         if truncate is not None:
             text = _truncate(text, truncate)
 
+        if not text:
+            return
+
         if width is None:
             width = get_text_width(text)
 
