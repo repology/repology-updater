@@ -18,9 +18,8 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from markupsafe import escape
-
 from repologyapp.globals import get_text_width
+from repologyapp.xmlwriter import XmlDocument
 
 
 def _truncate(s: str, length: int, end: str = '...') -> str:
@@ -59,56 +58,36 @@ class TinyBadgeRenderer:
     def render(self) -> str:
         total_width = sum(sec.width for sec in self._sections)
 
-        rects = []
-        texts = []
+        doc = XmlDocument('svg', xmlns='http://www.w3.org/2000/svg', width=total_width, height=20)
 
-        left = 0
-        for sec in self._sections:
-            rects.append(
-                '<rect x="{left}" width="{width}" height="20" fill="{color}"/>'.format(
-                    left=left,
-                    width=sec.width,
-                    color=sec.color
-                )
-            )
+        # define clip path for rounded corners
+        with doc.tag('clipPath', id='clip'):
+            doc.tag('rect', rx=3, width='100%', height='100%', fill='#000')
 
-            text = escape(sec.text)
+        # define linear gradient for bevel effect
+        with doc.tag('linearGradient', id='grad', x2=0, y2='100%'):
+            doc.tag('stop', ('offset', 0), ('stop-color', '#bbb'), ('stop-opacity', '.1'))
+            doc.tag('stop', ('offset', 1), ('stop-opacity', '.1'))
 
-            texts.append(
-                '<text x="{textx}" y="15" fill="#010101" fill-opacity=".3">{text}</text>'.format(
-                    textx=left + sec.width / 2,
-                    text=text
-                )
-            )
+        # main data
+        with doc.tag('g', ('clip-path', 'url(#clip)')):
+            # section rectangles
+            left = 0
+            for sec in self._sections:
+                doc.tag('rect', x=left, width=sec.width, height=20, fill=sec.color)
+                left += sec.width
 
-            texts.append(
-                '<text x="{textx}" y="14">{text}</text>'.format(
-                    textx=left + sec.width / 2,
-                    text=text
-                )
-            )
+            # gradient for bevel effect
+            doc.tag('rect', width='100%', height='100%', fill='url(#grad)')
 
-            left += sec.width
+            # texts
+            with doc.tag('g', ('fill', '#fff'), ('text-anchor', 'middle'), ('font-family', 'DejaVu Sans,Verdana,Geneva,sans-serif'), ('font-size', 11)):
+                left = 0
+                for sec in self._sections:
+                    with doc.tag('text', x=left + sec.width / 2, y=15, fill='#010101', **{'fill-opacity': '.3'}):
+                        doc.text(sec.text)
+                    with doc.tag('text', x=left + sec.width / 2, y=14):
+                        doc.text(sec.text)
+                    left += sec.width
 
-        return """
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{total_width}" height="20">
-    <clipPath id="clip">
-        <rect rx="3" width="100%" height="100%" fill="#000"/>
-    </clipPath>
-    <linearGradient id="grad" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-        <stop offset="1" stop-opacity=".1"/>
-    </linearGradient>
-
-    <g clip-path="url(#clip)">
-        {rects}
-        <rect width="100%" height="100%" fill="url(#grad)"/>
-        <g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">
-            {texts}
-        </g>
-    </g>
-</svg>
-        """.strip().format(
-            total_width=total_width,
-            rects=''.join(rects),
-            texts=''.join(texts),
-        )
+        return doc.render()
