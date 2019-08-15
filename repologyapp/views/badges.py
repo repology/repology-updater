@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -22,6 +22,7 @@ import flask
 
 from libversion import version_compare
 
+from repologyapp.badges import TinyBadgeRenderer
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.packageproc import packageset_to_best_by_repo
@@ -62,13 +63,12 @@ def badge_vertical_allrepos(name: str) -> Any:
 
 @ViewRegistrar('/badge/tiny-repos/<name>.svg')
 def badge_tiny_repos(name: str) -> Any:
+    badge = TinyBadgeRenderer()
+    badge.add_section(flask.request.args.to_dict().get('header', 'in repositories'))
+    badge.add_section(get_db().get_metapackage_families_count(name), '#007ec6')
+
     return (
-        flask.render_template(
-            'badge-tiny-blue.svg',
-            name=name,
-            caption=flask.request.args.to_dict().get('header', 'in repositories'),
-            text=get_db().get_metapackage_families_count(name)
-        ),
+        badge.render(),
         {'Content-type': 'image/svg+xml'}
     )
 
@@ -81,29 +81,35 @@ def badge_version_for_repo(repo: str, name: str) -> Any:
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = packageset_to_best_by_repo(packages)
 
+    badge = TinyBadgeRenderer()
+
     if repo not in best_pkg_by_repo:
         # XXX: display this as normal "pill" badge with correct repository name
-        return (
-            flask.render_template('badge-tiny-string.svg', string='No package'),
-            # XXX: it's more correct to return 404 with content
-            # here, but some browsers (e.g. Firefox) won't display
-            # the image in that case
-            {'Content-type': 'image/svg+xml'}
-        )
+        # XXX: it's more correct to return 404 with content
+        # here, but some browsers (e.g. Firefox) won't display
+        # the image in that case
+        badge.add_section('No package')
+    else:
+        version = best_pkg_by_repo[repo].version
+        versionclass = best_pkg_by_repo[repo].versionclass
 
-    header = flask.request.args.to_dict().get('header', repometadata[repo]['singular'])
-    minversion = flask.request.args.to_dict().get('minversion')
-    unsatisfying = version_compare(best_pkg_by_repo[repo].version, minversion) < 0 if minversion else False
+        header = flask.request.args.to_dict().get('header', repometadata[repo]['singular'])
+        minversion = flask.request.args.to_dict().get('minversion')
+
+        if minversion and version_compare(version, minversion) < 0:
+            color = '#e00000'
+        elif versionclass in [PackageStatus.OUTDATED, PackageStatus.LEGACY]:
+            color = '#e05d44'
+        elif versionclass in [PackageStatus.NEWEST, PackageStatus.UNIQUE, PackageStatus.DEVEL]:
+            color = '#4c1'
+        else:
+            color = '#9f9f9f'
+
+        badge.add_section(header)
+        badge.add_section(version, color)
 
     return (
-        flask.render_template(
-            'badge-tiny-version.svg',
-            repo=repo,
-            version=best_pkg_by_repo[repo].version,
-            versionclass=best_pkg_by_repo[repo].versionclass,
-            unsatisfying=unsatisfying,
-            header=header,
-        ),
+        badge.render(),
         {'Content-type': 'image/svg+xml'}
     )
 
@@ -116,26 +122,32 @@ def badge_version_only_for_repo(repo: str, name: str) -> Any:
     packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
     best_pkg_by_repo = packageset_to_best_by_repo(packages)
 
-    if repo not in best_pkg_by_repo:
-        return (
-            flask.render_template('badge-tiny-string.svg', string='-'),
-            # XXX: it's more correct to return 404 with content
-            # here, but some browsers (e.g. Firefox) won't display
-            # the image in that case
-            {'Content-type': 'image/svg+xml'}
-        )
+    badge = TinyBadgeRenderer()
 
-    minversion = flask.request.args.to_dict().get('minversion')
-    unsatisfying = version_compare(best_pkg_by_repo[repo].version, minversion) < 0 if minversion else False
+    if repo not in best_pkg_by_repo:
+        # XXX: it's more correct to return 404 with content
+        # here, but some browsers (e.g. Firefox) won't display
+        # the image in that case
+        badge.add_section('-')
+    else:
+        version = best_pkg_by_repo[repo].version
+        versionclass = best_pkg_by_repo[repo].versionclass
+
+        minversion = flask.request.args.to_dict().get('minversion')
+
+        if minversion and version_compare(version, minversion) < 0:
+            color = '#e00000'
+        elif versionclass in [PackageStatus.OUTDATED, PackageStatus.LEGACY]:
+            color = '#e05d44'
+        elif versionclass in [PackageStatus.NEWEST, PackageStatus.UNIQUE, PackageStatus.DEVEL]:
+            color = '#4c1'
+        else:
+            color = '#9f9f9f'
+
+        badge.add_section(version, color)
 
     return (
-        flask.render_template(
-            'badge-tiny-version-only.svg',
-            repo=repo,
-            version=best_pkg_by_repo[repo].version,
-            versionclass=best_pkg_by_repo[repo].versionclass,
-            unsatisfying=unsatisfying,
-        ),
+        badge.render(),
         {'Content-type': 'image/svg+xml'}
     )
 
@@ -150,21 +162,21 @@ def badge_latest_versions(name: str) -> Any:
 
     default_caption = 'latest packaged version'
 
-    if versions:
-        if len(versions) > 1:
-            default_caption += 's'
+    if len(versions) > 1:
+        default_caption += 's'
         text = ', '.join(versions)
+    elif versions:
+        text = versions[0]
     else:
         text = '-'
 
     caption = flask.request.args.to_dict().get('header', default_caption)
 
+    badge = TinyBadgeRenderer()
+    badge.add_section(caption)
+    badge.add_section(text, '#007ec6')
+
     return (
-        flask.render_template(
-            'badge-tiny-blue.svg',
-            name=name,
-            caption=caption,
-            text=text
-        ),
+        badge.render(),
         {'Content-type': 'image/svg+xml'}
     )
