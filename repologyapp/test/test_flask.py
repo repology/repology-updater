@@ -88,6 +88,9 @@ class TestFlask(unittest.TestCase):
     def checkurl_404(self, url: str) -> str:
         return self.checkurl(url=url, status_code=404, mimetype=None)
 
+    def checkurl_301(self, url: str) -> str:
+        return self.checkurl(url=url, status_code=301, mimetype=None)
+
     def test_static_pages(self) -> None:
         self.checkurl_html('/news', has=['Added', 'repository'])  # assume we always have "Added xxx repository" news there
         self.checkurl_html('/about', has=['maintainers'])
@@ -107,13 +110,13 @@ class TestFlask(unittest.TestCase):
 
         self.checkurl_svg('/badge/version-for-repo/freebsd/kiconvtool.svg', has=['<svg', '>0.97<'])
         self.checkurl_svg('/badge/version-for-repo/freebsd/kiconvtool.svg?minversion=99999999', has=['<svg', '>0.97<', 'e00000'])
-        self.checkurl_svg('/badge/version-for-repo/freebsd/nonexistent.svg', has=['<svg', '>No package<'])
+        self.checkurl_svg('/badge/version-for-repo/freebsd/nonexistent.svg', has=['<svg', '>-<'])
         self.checkurl_404('/badge/version-for-repo/nonexistent/kiconvtool.svg')
 
-        self.checkurl_svg('/badge/version-only-for-repo/freebsd/kiconvtool.svg', has=['<svg', '>0.97<'])
-        self.checkurl_svg('/badge/version-only-for-repo/freebsd/kiconvtool.svg?minversion=99999999', has=['<svg', '>0.97<', 'e00000'])
-        self.checkurl_svg('/badge/version-only-for-repo/freebsd/nonexistent.svg', has=['<svg', '>-<'])
-        self.checkurl_404('/badge/version-only-for-repo/nonexistent/kiconvtool.svg')
+        self.checkurl_301('/badge/version-only-for-repo/freebsd/kiconvtool.svg')
+        self.checkurl_301('/badge/version-only-for-repo/freebsd/kiconvtool.svg?minversion=99999999')
+        self.checkurl_301('/badge/version-only-for-repo/freebsd/nonexistent.svg')
+        self.checkurl_301('/badge/version-only-for-repo/nonexistent/kiconvtool.svg')
 
         self.checkurl_svg('/badge/latest-versions/kiconvtool.svg', has=['<svg', '>0.97<'])
         self.checkurl_svg('/badge/latest-versions/nonexistent.svg', has=['<svg', '>-<'])
