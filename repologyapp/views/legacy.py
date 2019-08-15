@@ -289,3 +289,17 @@ def graph_repo_metapackages_unique(repo: str) -> Any:
 @ViewRegistrar('/graph/repo/<repo>/metapackages_unique_percent.svg')
 def graph_repo_metapackages_unique_percent(repo: str) -> Any:
     return flask.redirect(flask.url_for('graph_repo_projects_unique_percent', repo=repo), 301)
+
+
+@ViewRegistrar('/badge/version-only-for-repo/<repo>/<name>.svg')
+def badge_version_only_for_repo(repo: str, name: str) -> Any:
+    return flask.redirect(
+        flask.url_for(
+            'badge_version_for_repo',
+            repo=repo,
+            name=name,
+            header='',
+            minversion=flask.request.args.to_dict().get('minversion')
+        ),
+        301
+    )
