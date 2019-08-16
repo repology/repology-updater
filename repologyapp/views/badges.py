@@ -18,7 +18,7 @@
 import re
 from collections import defaultdict
 from functools import cmp_to_key
-from typing import Any
+from typing import Any, Dict, List, Optional, Tuple
 
 import flask
 
@@ -30,7 +30,7 @@ from repologyapp.globals import repometadata
 from repologyapp.packageproc import packageset_to_best_by_repo
 from repologyapp.view_registry import ViewRegistrar
 
-from repology.package import PackageStatus
+from repology.package import Package, PackageStatus
 
 
 @ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
@@ -131,7 +131,7 @@ def badge_versions_matrix() -> Any:
     header = args.get('header')
 
     # parse requirements
-    required_projects = {}
+    required_projects: Dict[str, Optional[Tuple[str, str]]] = {}
 
     for project in args.get('projects', '').split(','):
         match = re.fullmatch('(.*?)(>=?|<=?)(.*?)', project)
@@ -147,7 +147,7 @@ def badge_versions_matrix() -> Any:
     # get and process packages
     packages = get_db().get_metapackages_packages(list(required_projects.keys()), fields=['effname', 'repo', 'version', 'versionclass'])
 
-    packages_by_project = defaultdict(list)
+    packages_by_project: Dict[str, List[Package]] = defaultdict(list)
     repos = set()
     for package in packages:
         packages_by_project[package.effname].append(package)
