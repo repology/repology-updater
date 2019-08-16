@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Dict
+from typing import Any, Dict, Tuple
 
 from repologyapp.config import config
 from repologyapp.fontmeasurer import FontMeasurer
@@ -28,12 +28,16 @@ __all__ = [
 ]
 
 
-_fontmeasurers: Dict[int, FontMeasurer] = {}
+_fontmeasurers: Dict[Tuple[int, bool], FontMeasurer] = {}
 
 repometadata = RepositoryMetadata()
 
 
-def get_text_width(text: Any, fontsize: int) -> int:
-    if fontsize not in _fontmeasurers:
-        _fontmeasurers[fontsize] = FontMeasurer(config['BADGE_FONT'], fontsize)
-    return _fontmeasurers[fontsize].get_text_dimensions(str(text))[0]
+def get_text_width(text: Any, fontsize: int, bold: bool = False) -> int:
+    fontpath = config['BADGE_FONT_BOLD'] if bold else config['BADGE_FONT']
+    key = (fontsize, bold)
+
+    if key not in _fontmeasurers:
+        _fontmeasurers[key] = FontMeasurer(fontpath, fontsize)
+
+    return _fontmeasurers[key].get_text_dimensions(str(text))[0]

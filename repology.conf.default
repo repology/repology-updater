@@ -146,7 +146,9 @@ REPOLOGY_LINKCHECKER_REPO_URL = 'https://github.com/repology/repology-linkchecke
 # This is used to calculate SVG badge sizes
 #
 #BADGE_FONT = '/usr/local/share/fonts/dejavu/DejaVuSans.ttf'  # FreeBSD
+#BADGE_FONT_BOLD = '/usr/local/share/fonts/dejavu/DejaVuSans-Bold.ttf'  # FreeBSD
 #BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'  # Ubuntu
+#BADGE_FONT_BOLD = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf'  # Ubuntu
 
 #
 # AFK times when reports cannot be processed, to be reported to users
