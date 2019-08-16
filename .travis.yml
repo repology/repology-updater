@@ -101,6 +101,7 @@ before_script:
   - sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
   - sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS libversion"
   - echo "BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'" >> repology-test.conf.default
+  - echo "BADGE_FONT_BOLD = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf'" >> repology-test.conf.default
 script:
   # test all target
   - make
