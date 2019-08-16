@@ -28,33 +28,20 @@
 
 <section>
 
-<h2>Big badge</h2>
+<h2>Vertical badge</h2>
 
-<p>This shows versions and up to date status of this package in all known repositories.</p>
+<p>This badge shows versions and up to date status of this project in all known repositories.</p>
 
 {{ badge_example('badge_vertical_allrepos') }}
 
-<p>When using HTML code, you can also right-align the big badge by adding <code>align="right"</code> attribute (works on GitHub as well). When the badge is right-aligned, space to the left of it can be occupied by other content, and is not wasted as it would be otherwise, so it's recommended way of embedding the big badge. Note that because of the way the text floating works, this code needs to be placed before most other content (text, smaller badges). You may place it the the very beginning of your README, or right after the first header.</p>
-
-<p>HTML code for right-aligned badge:</p>
+<p>HTML code for right-aligned badge (most useful for README.md as it allows other content to flow around it not leading to space waste):</p>
 <pre>
 &lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }}&quot;&gt;
     &lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name)}}&quot; alt=&quot;Packaging status&quot; <strong>align=&quot;right&quot;</strong>&gt;
 &lt;/a&gt;
 </pre>
 
-<p>You may customize badge header with the <code>header=...</code> HTTP parameter. For instance, you may use localized message or remove the header completely by specifying empty value.</p>
-
-<pre>
-{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name) }}<strong>?header=Packages</strong>
-{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name) }}<strong>?header=</strong>
-</pre>
-
-<p>You may also specify minimal version with the <code>minversion=...</code> HTTP parameter, to make versions lower than that highlighed with bright red.</p>
-
-<pre>
-{{ REPOLOGY_HOME }}{{ url_for('badge_vertical_allrepos', name=name) }}<strong>?minversion=1.0.0</strong>
-</pre>
+<p>May be tweaked with <code>header</code>, <code>minversion</code>, and <code>allow_ignored</code> parameters (see below).</p>
 
 </section>
 
@@ -66,15 +53,19 @@
 
 {{ badge_example('badge_tiny_repos') }}
 
+<p>May be tweaked with <code>header</code> parameter (see below).</p>
+
 </section>
 
 <section>
 
-<h2>Tiny badge with latest packaged versions</h2>
+<h2>Tiny badge with latest packaged version(s)</h2>
 
 <p>This shows latest version(s) known to repology. There may be multiple versions, for example devel and newest, or multiple variations of the same version encountered in some repositories (e.g.<code>1.0.0</code> and <code>1.0</code>). These badges also support <code>minversion=</code> parameter.</p>
 
 {{ badge_example('badge_latest_versions', alt='latest packaged version(s)') }}
+
+<p>May be tweaked with <code>header</code> parameter (see below).</p>
 
 </section>
 
@@ -82,38 +73,77 @@
 
 <h2>Tiny per-repository badges with version</h2>
 
-<p>These show version in specific repository. Pick as many as you want!</p>
+<p>These show version in specific repository. Pick as many as you want! You may add <code>?header=</code> to the URL to leave only the version.</p>
 
 <table class="table">
 	<tr><th>Sample</th><th>Markdown code</th><th>HTML code</th></tr>
 	{% for repo in repos %}
 	<tr>
-		<td><a href="{{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }}"><img src="{{ url_for('badge_version_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}"></a></td>
+		<td>
+			<a href="{{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }}">
+				<img src="{{ url_for('badge_version_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}">
+			</a>
+		</td>
 		<td><code>[![{{ repometadata[repo].singular }}]({{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repo) }})]({{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }})</code></td>
 		<td><code>&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }}&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repo)}}&quot; alt=&quot;{{ repometadata[repo].singular }}&quot;&gt;<br>&lt;/a&gt;</code></td>
 	</tr>
 	{% endfor %}
 </table>
 
+<p>May be tweaked with <code>header</code>, <code>minversion</code>, and <code>allow_ignored</code> parameters (see below).</p>
+
 </section>
 
 <section>
 
-<h2>Tiny per-repository badges with version only</h2>
+<h2>Additional parameters</h2>
 
-<p>These show version in specific repository. Repository name is not included, so these are useful if you already have table or other formatting with repository names. These badges also support <code>minversion=</code> parameter.</p>
+<p>Most badges may be tweaked by specifying additional parameters in the URL.</p>
 
-<table class="table">
-	<tr><th>Repository</th><th>Sample</th><th>Markdown code</th><th>HTML code</th></tr>
-	{% for repo in repos %}
+<h3>header</h3>
+
+<p>Works for all badges. Changes the header/caption of the badge. Specify empty header to remove it completely.</p>
+
+<table class="table table-condensed">
 	<tr>
-		<td>{{ repometadata[repo].desc }}</td>
-		<td><a href="{{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }}"><img src="{{ url_for('badge_version_only_for_repo', name=name, repo=repo) }}" alt="{{ repometadata[repo].singular }}"></a></td>
-		<td><code>[![{{ repometadata[repo].singular }}]({{ REPOLOGY_HOME }}{{ url_for('badge_version_only_for_repo', name=name, repo=repo) }})]({{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }})</code></td>
-		<td><code>&lt;a href=&quot;{{ REPOLOGY_HOME }}{{ url_for('project_versions', name=name) }}&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&lt;img src=&quot;{{ REPOLOGY_HOME }}{{ url_for('badge_version_only_for_repo', name=name, repo=repo)}}&quot; alt=&quot;{{ repometadata[repo].singular }}&quot;&gt;<br>&lt;/a&gt;</code></td>
+		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0]) %}
+		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
 	</tr>
-	{% endfor %}
+	<tr>
+		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0], header='') %}
+		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+	</tr>
+	<tr>
+		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0], header='PACKAGE') %}
+		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+	</tr>
 </table>
+
+<h3>minversion</h3>
+
+<p>Specify "minimal acceptable version" - any versions lesser than it will be marked with crimson color. Useful to mark unacceptable versions based on arbitrary criteria, for instance unsupported dependency versions.</p>
+
+<table class="table table-condensed">
+	<tr>
+		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0]) %}
+		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+	</tr>
+	<tr>
+		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0], minversion='999999999') %}
+		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+	</tr>
+</table>
+
+<h3>allow_ignored</h3>
+
+<p>By default, when picking the version to show on badge, all <span class="version version-rolling">rolling</span>, <span class="version version-noscheme">noscheme</span>, <span class="version version-incorrect">incorrect</span>, <span class="version version-untrusted">untrusted</span>, <span class="version version-ignored">ignored</span> versions are skipped (so, for instance, rolling <code>9999</code> versions in Gentoo do not hide real stable versions). When <code>allow_ignored</code> parameter is specified (with some non-empty value), the greatest version is always picked regardless of status.</p>
+
+<p><code>{{ REPOLOGY_HOME }}{{ url_for('badge_version_for_repo', name=name, repo=repos[0], allow_ignored=1) }}</code></p>
 
 </section>
 
