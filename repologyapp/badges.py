@@ -83,7 +83,7 @@ def render_generic_badge(rows: List[List[BadgeCell]], header: Optional[str] = No
     header_height = 0
     if header:
         header_height = 25
-        min_width = max(min_width, get_text_width(header, 15))
+        min_width = max(min_width, get_text_width(header, 15, bold=True) + 10)
 
     total_height = header_height + 20 * num_rows
     total_width = (column_offsets[-1] + column_widths[-1]) if num_columns else 0
