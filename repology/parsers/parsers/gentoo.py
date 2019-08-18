@@ -60,7 +60,7 @@ def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
         category_path = os.path.join(path, category)
         if not os.path.isdir(category_path):
             continue
-        if category == 'virtual' or category == 'metadata':
+        if category in ['acct-group', 'acct-user', 'metadata', 'virtual']:
             continue
 
         for package in os.listdir(category_path):
