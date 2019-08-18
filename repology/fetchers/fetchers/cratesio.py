@@ -33,8 +33,8 @@ class CratesIOFetcher(ScratchDirFetcher):
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         numpage = 1
-        while True:
-            url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
+        url = self.url + '?per_page={}&sort=alpha'.format(self.per_page)
+        while url:
             logger.log('getting ' + url)
 
             text = self.do_http(url).text
@@ -44,8 +44,9 @@ class CratesIOFetcher(ScratchDirFetcher):
                 os.fsync(pagefile.fileno())
 
             # parse next page
-            if not json.loads(text)['crates']:
-                logger.log('last page detected')
-                return True
+            url = json.loads(text)['meta']['next_page']
 
             numpage += 1
+
+        logger.log('last page detected')
+        return True
