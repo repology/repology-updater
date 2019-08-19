@@ -53,6 +53,7 @@ class ApkIndexParser(Parser):
                     pkg.set_summary(state['T'])
                     pkg.add_homepages(state['U'])  # XXX: split?
                     pkg.add_licenses(state['L'])
+                    pkg.set_arch(state['A'])
 
                     pkg.add_maintainers(extract_maintainers(state.get('m')))
 
