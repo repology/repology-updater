@@ -31,11 +31,12 @@ class RPMFTPListParser(Parser):
 
                 filename = line.strip().split()[-1]
 
-                nevra = nevra_parse(filename)
+                name, epoch, version, release, arch = nevra_parse(filename)
 
-                pkg.set_name(nevra[0])
-                pkg.set_version(nevra[2])
-                pkg.set_rawversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
+                pkg.set_name(name)
+                pkg.set_version(version)
+                pkg.set_rawversion(nevra_construct(None, epoch, version, release))
+                pkg.set_arch(arch)
 
                 pkg.set_extra_field('nevr', filename.rsplit('.', 2)[0])
 
