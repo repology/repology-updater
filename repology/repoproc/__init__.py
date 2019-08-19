@@ -127,7 +127,7 @@ class RepositoryProcessor:
                 if package.has_flag(PackageFlags.REMOVE):
                     continue
 
-                # postprocess
+                # postprocess flavors
                 def strip_flavor(flavor: str) -> str:
                     if flavor.startswith(package.effname + '-'):
                         return flavor[len(package.effname) + 1:]
