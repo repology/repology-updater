@@ -363,7 +363,7 @@ def project_report(name: str) -> Any:
         need_merge = 'need_merge' in flask.request.form
         comment = flask.request.form.get('comment', '').strip().replace('\r', '') or None
 
-        if comment and len(comment) > 1024:
+        if comment and len(comment) > 10240:
             errors.append('Could not add report: comment is too long')
 
         if not need_verignore and not need_split and not need_merge and not comment:
