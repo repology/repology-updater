@@ -54,9 +54,12 @@
 </div>
 {% endblock %}
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
+{% with flashed_messages = get_flashed_messages(with_categories=true) %}
+{% if flashed_messages or messages %}
 <div class="container">
+{% for category, message in flashed_messages %}
+	<div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+{% endfor %}
 {% for category, message in messages %}
 	<div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
 {% endfor %}
