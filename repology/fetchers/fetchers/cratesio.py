@@ -33,7 +33,7 @@ class CratesIOFetcher(ScratchDirFetcher):
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
         numpage = 1
-        query ='?per_page={}&sort=alpha'.format(self.per_page)
+        query = '?per_page={}&sort=alpha'.format(self.per_page)
         while query:
             url = self.url + query
             logger.log('getting ' + url)
