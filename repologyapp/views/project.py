@@ -345,14 +345,18 @@ def project_report(name: str) -> Any:
 
     reports_disabled = name in config['DISABLED_REPORTS']
 
+    need_verignore = False
+    need_split = False
+    need_merge = False
+    comment = None
+    errors = []
+
     if flask.request.method == 'POST':
         if reports_disabled:
-            flask.flash('Could not add report: new reports for this metapackage are disabled', 'warning')
-            return flask.redirect(flask.url_for('metapackage_report', name=name))
+            errors.append('Could not add report: new reports for this metapackage are disabled')
 
         if get_db().get_metapackage_reports_count(name) >= config['MAX_REPORTS']:
-            flask.flash('Could not add report: too many reports for this metapackage', 'danger')
-            return flask.redirect(flask.url_for('metapackage_report', name=name))
+            errors.append('Could not add report: too many reports for this metapackage')
 
         need_verignore = 'need_verignore' in flask.request.form
         need_split = 'need_split' in flask.request.form
@@ -360,28 +364,26 @@ def project_report(name: str) -> Any:
         comment = flask.request.form.get('comment', '').strip().replace('\r', '') or None
 
         if comment and len(comment) > 1024:
-            flask.flash('Could not add report: comment is too long', 'danger')
-            return flask.redirect(flask.url_for('metapackage_report', name=name))
+            errors.append('Could not add report: comment is too long')
 
         if not need_verignore and not need_split and not need_merge and not comment:
-            flask.flash('Could not add report: please fill out the form', 'danger')
-            return flask.redirect(flask.url_for('metapackage_report', name=name))
+            errors.append('Could not add report: please fill out the form')
 
         if comment and '<a href' in comment:
-            flask.flash('Spammers not welcome, HTML not allowed', 'danger')
+            errors.append('Spammers not welcome, HTML not allowed')
+
+        if not errors:
+            get_db().add_report(
+                flask.request.remote_addr,
+                name,
+                need_verignore,
+                need_split,
+                need_merge,
+                comment
+            )
+
+            flask.flash('Report for {} added successfully and will be processed in a few days, thank you!'.format(name), 'success')
             return flask.redirect(flask.url_for('metapackage_report', name=name))
-
-        get_db().add_report(
-            flask.request.remote_addr,
-            name,
-            need_verignore,
-            need_split,
-            need_merge,
-            comment
-        )
-
-        flask.flash('Report for {} added successfully and will be processed in a few days, thank you!'.format(name), 'success')
-        return flask.redirect(flask.url_for('metapackage_report', name=name))
 
     return flask.render_template(
         'project-report.html',
@@ -390,5 +392,10 @@ def project_report(name: str) -> Any:
         reports=reports,
         afk_till=AFKChecker(config['STAFF_AFK']).get_afk_end(),
         reports_disabled=reports_disabled,
-        show_invitation=flask.request.remote_addr in config['INVITED_IPS']
+        show_invitation=flask.request.remote_addr in config['INVITED_IPS'],
+        need_verignore=need_verignore,
+        need_split=need_split,
+        need_merge=need_merge,
+        comment=comment,
+        messages=[('danger', error) for error in errors]
     )
