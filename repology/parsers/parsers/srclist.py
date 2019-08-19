@@ -35,7 +35,7 @@ class SrcListParser(Parser):
             with factory.begin() as pkg:
                 fields = {
                     key: str(header[key], self.encoding) if header[key] is not None else None
-                    for key in ['name', 'version', 'release', 'packager', 'group', 'summary']
+                    for key in ['name', 'version', 'release', 'packager', 'group', 'summary', 'arch']
                 }
 
                 pkg.set_name(fields['name'])
@@ -51,5 +51,6 @@ class SrcListParser(Parser):
 
                 pkg.add_categories(fields['group'])
                 pkg.set_summary(fields['summary'])
+                pkg.set_arch(fields['arch'])
 
                 yield pkg
