@@ -18,7 +18,7 @@
 from collections import defaultdict
 from dataclasses import dataclass
 from functools import cmp_to_key
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
 from repology.package import Package, PackageStatus
 
@@ -28,6 +28,16 @@ def packageset_sort_by_version(packages: Iterable[Package]) -> List[Package]:
         return p2.version_compare(p1)
 
     return sorted(packages, key=cmp_to_key(compare))
+
+
+def packageset_to_best(packages: Iterable[Package]) -> Optional[Package]:
+    sorted_packages = packageset_sort_by_version(packages)
+
+    for package in sorted_packages:
+        if not PackageStatus.is_ignored(package.versionclass):
+            return package
+
+    return None
 
 
 def packageset_to_best_by_repo(packages: Iterable[Package]) -> Dict[str, Package]:

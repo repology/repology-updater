@@ -19,6 +19,7 @@
 --
 -- @param effname
 -- @param fields=None
+-- @param repo=None
 --
 -- @returns array of packages
 --
@@ -61,4 +62,8 @@ SELECT
 	flavors
 {% endif %}
 FROM packages
-WHERE effname = %(effname)s;
+WHERE
+	effname = %(effname)s
+	{% if repo is not none %}
+		AND repo = %(repo)s
+	{% endif %};

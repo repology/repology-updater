@@ -27,7 +27,7 @@ from libversion import version_compare
 from repologyapp.badges import BadgeCell, badge_color, render_generic_badge
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
-from repologyapp.packageproc import packageset_to_best_by_repo
+from repologyapp.packageproc import packageset_to_best, packageset_to_best_by_repo
 from repologyapp.view_registry import ViewRegistrar
 
 from repology.package import Package, PackageStatus
@@ -77,23 +77,23 @@ def badge_version_for_repo(repo: str, name: str) -> Any:
     if repo not in repometadata.all_names():
         flask.abort(404)
 
-    packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
-    best_pkg_by_repo = packageset_to_best_by_repo(packages)
+    args = flask.request.args.to_dict()
+
+    best_package = packageset_to_best(
+        get_db().get_metapackage_packages(name, repo=repo, fields=['repo', 'version', 'versionclass'])
+    )
 
     left_cell = BadgeCell(flask.request.args.to_dict().get('header', repometadata[repo]['singular']), collapsible=True)
 
-    if repo not in best_pkg_by_repo:
+    if best_package is None:
         # Note: it would be more correct to return 404 with content here,
         # but some browsers (e.g. Firefox) won't display the image in that case
         right_cell = BadgeCell('-')
     else:
-        version = best_pkg_by_repo[repo].version
-        versionclass = best_pkg_by_repo[repo].versionclass
-
         minversion = flask.request.args.to_dict().get('minversion')
-        unsatisfying = minversion and version_compare(version, minversion) < 0
+        unsatisfying = minversion and version_compare(best_package.version, minversion) < 0
 
-        right_cell = BadgeCell(version, badge_color(versionclass, unsatisfying), truncate=20)
+        right_cell = BadgeCell(best_package.version, badge_color(best_package.versionclass, unsatisfying), truncate=20)
 
     return render_generic_badge([[left_cell, right_cell]])
 
