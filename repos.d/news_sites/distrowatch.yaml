@@ -4,6 +4,7 @@
 - name: distrowatch
   type: site
   desc: DistroWatch.com
+  singular: DistroWatch.com entry
   family: distrowatch
   minpackages: 200
   sources:

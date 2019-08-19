@@ -4,6 +4,7 @@
 - name: libregamewiki
   type: site
   desc: Libregamewiki
+  singular: Libregamewiki entry
   family: libregamewiki
   minpackages: 200
   sources:

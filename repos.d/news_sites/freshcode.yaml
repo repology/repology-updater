@@ -4,6 +4,7 @@
 - name: freshcode
   type: site
   desc: freshcode.club
+  singular: freshcode.club entry
   family: freshcode
   minpackages: 1400
   sources:
