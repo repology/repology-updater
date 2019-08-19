@@ -30,22 +30,38 @@ def packageset_sort_by_version(packages: Iterable[Package]) -> List[Package]:
     return sorted(packages, key=cmp_to_key(compare))
 
 
-def packageset_to_best(packages: Iterable[Package]) -> Optional[Package]:
+def packageset_to_best(packages: Iterable[Package], allow_ignored: bool = False) -> Optional[Package]:
     sorted_packages = packageset_sort_by_version(packages)
 
+    if not sorted_packages:
+        return None
+
+    # if allowed, return first package regardless of status
+    if allow_ignored:
+        return sorted_packages[0]
+
+    # otherwise, return first non-ignore package
     for package in sorted_packages:
         if not PackageStatus.is_ignored(package.versionclass):
             return package
 
-    return None
+    # fallback to first package
+    return sorted_packages[0]
 
 
-def packageset_to_best_by_repo(packages: Iterable[Package]) -> Dict[str, Package]:
+def packageset_to_best_by_repo(packages: Iterable[Package], allow_ignored: bool = False) -> Dict[str, Package]:
     state_by_repo: Dict[str, Package] = {}
 
     for package in packageset_sort_by_version(packages):
-        if package.repo not in state_by_repo or (PackageStatus.is_ignored(state_by_repo[package.repo].versionclass) and not PackageStatus.is_ignored(package.versionclass)):
+        # start with first package
+        if package.repo not in state_by_repo:
             state_by_repo[package.repo] = package
+            continue
+
+        # replace by non-ignored if needed and possible
+        if not allow_ignored and PackageStatus.is_ignored(state_by_repo[package.repo].versionclass):
+            if not PackageStatus.is_ignored(package.versionclass):
+                state_by_repo[package.repo] = package
 
     return state_by_repo
 

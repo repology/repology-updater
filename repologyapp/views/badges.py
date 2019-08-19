@@ -35,10 +35,10 @@ from repology.package import Package, PackageStatus
 
 @ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
 def badge_vertical_allrepos(name: str) -> Any:
-    packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
-    best_pkg_by_repo = packageset_to_best_by_repo(packages)
-
     args = flask.request.args.to_dict()
+
+    packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
+    best_pkg_by_repo = packageset_to_best_by_repo(packages, allow_ignored=args.get('allow_ignored', False))
 
     header = args.get('header')
     minversion = args.get('minversion')
@@ -80,7 +80,8 @@ def badge_version_for_repo(repo: str, name: str) -> Any:
     args = flask.request.args.to_dict()
 
     best_package = packageset_to_best(
-        get_db().get_metapackage_packages(name, repo=repo, fields=['repo', 'version', 'versionclass'])
+        get_db().get_metapackage_packages(name, repo=repo, fields=['repo', 'version', 'versionclass']),
+        allow_ignored=args.get('allow_ignored', False)
     )
 
     left_cell = BadgeCell(flask.request.args.to_dict().get('header', repometadata[repo]['singular']), collapsible=True)
