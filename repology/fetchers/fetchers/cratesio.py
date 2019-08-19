@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,6 +17,7 @@
 
 import json
 import os
+from itertools import count
 from typing import Optional
 
 from repology.atomic_fs import AtomicDir
@@ -32,20 +33,20 @@ class CratesIOFetcher(ScratchDirFetcher):
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
-        numpage = 1
-        while True:
-            url = self.url + '?page={}&per_page={}&sort=alpha'.format(numpage, self.per_page)
+        page_counter = count()
+        query = '?per_page={}&sort=alpha'.format(self.per_page)
+        while query:
+            url = self.url + query
             logger.log('getting ' + url)
 
             text = self.do_http(url).text
-            with open(os.path.join(statedir.get_path(), '{}.json'.format(numpage)), 'w', encoding='utf-8') as pagefile:
+            with open(os.path.join(statedir.get_path(), '{}.json'.format(next(page_counter))), 'w', encoding='utf-8') as pagefile:
                 pagefile.write(text)
                 pagefile.flush()
                 os.fsync(pagefile.fileno())
 
             # parse next page
-            if not json.loads(text)['crates']:
-                logger.log('last page detected')
-                return True
+            query = json.loads(text)['meta']['next_page']
 
-            numpage += 1
+        logger.log('last page detected')
+        return True
