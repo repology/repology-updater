@@ -47,8 +47,12 @@ class ScoopGitParser(Parser):
                 pkg.set_name(filename[:-5])
                 pkg.set_version(data['version'])
 
-                pkg.add_downloads(data.get('url'))
                 pkg.add_homepages(data.get('homepage'))
+                pkg.add_downloads(data.get('url'))
+
+                if 'architecture' in data:
+                    for archdata in data['architecture'].values():
+                        pkg.add_downloads(archdata.get('url'))
 
                 if 'license' in data:
                     if isinstance(data['license'], str):
