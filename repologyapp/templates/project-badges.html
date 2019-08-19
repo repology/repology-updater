@@ -108,17 +108,17 @@
 	<tr>
 		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0]) %}
 		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
-		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}" alt="Version badge example, with default caption"></td>
 	</tr>
 	<tr>
 		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0], header='') %}
 		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
-		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}" alt="Version badge example, with caption removed"></td>
 	</tr>
 	<tr>
 		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0], header='PACKAGE') %}
 		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
-		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}" alt="Version badge example, with custom caption set to &quot;PACKAGE&quot;"></td>
 	</tr>
 </table>
 
@@ -130,12 +130,12 @@
 	<tr>
 		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0]) %}
 		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
-		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}" alt="Version badge example"></td>
 	</tr>
 	<tr>
 		{% set url = url_for('badge_version_for_repo', name=name, repo=repos[0], minversion='999999999') %}
 		<td><code>{{ REPOLOGY_HOME }}{{ url }}</code></td>
-		<td><img src="{{ REPOLOGY_HOME }}{{ url }}"></td>
+		<td><img src="{{ REPOLOGY_HOME }}{{ url }}" alt="Version badge example, with minimal version set"></td>
 	</tr>
 </table>
 
