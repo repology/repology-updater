@@ -191,7 +191,7 @@ class TestParsers(unittest.TestCase):
                 'version': '1.2.8',
                 'origversion': '1.2.8',
                 'rawversion': '1:1.2.8-7',
-                'arch': 'x86_64',
+                'arch': None,
                 'comment': 'Compression library implementing the deflate compression method found in gzip and PKZIP',
                 'homepage': 'http://www.zlib.net/',
                 'licenses': ['custom'],
