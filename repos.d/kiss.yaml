@@ -1,0 +1,26 @@
+###########################################################################
+# KISS Linux
+###########################################################################
+- name: kiss
+  type: repository
+  desc: KISS Linux
+  family: kiss
+  ruleset: kiss
+  minpackages: 150
+  sources:
+    - name: repo
+      fetcher: GitFetcher
+      parser: KissGitParser
+      url: 'https://github.com/kisslinux/repo.git'
+      sparse_checkout: [ '**/version', '**/sources' ]
+  repolinks:
+    - desc: KISS Linux home
+      url: https://getkiss.org/
+    - desc: KISS Linux - Package System
+      url: https://getkiss.org/pages/package-system/
+    - desc: Package System for KISS - Main Repositories on GitHub
+      url: https://github.com/kisslinux/repo
+  packagelinks:
+    - desc: Package directory on GitHub
+      url: 'https://github.com/kisslinux/repo/tree/master/{path}'
+  tags: [ all, production ]
