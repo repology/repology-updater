@@ -132,7 +132,14 @@ SET
 	num_families = 0,
 	num_repos_newest = 0,
 	num_families_newest = 0,
-	has_related = false
+	has_related = false,
+	devel_versions = NULL,
+	devel_repos = NULL,
+	devel_version_update = NULL,
+	newest_versions = NULL,
+	newest_repos = NULL,
+	newest_version_update = NULL,
+	all_repos = NULL
 WHERE
 	last_seen != now();
 

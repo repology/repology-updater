@@ -158,7 +158,7 @@ DECLARE
 	repos_removed text[];
 BEGIN
 	-- history_start
-	IF (TG_OP = 'INSERT' OR OLD.all_repos IS NULL) THEN
+	IF (NEW.all_repos IS NOT NULL AND (TG_OP = 'INSERT' OR OLD.all_repos IS NULL)) THEN
 		PERFORM metapackage_create_event(NEW.effname, 'history_start'::metapackage_event_type,
 			jsonb_build_object(
 				'devel_versions', NEW.devel_versions,
@@ -166,6 +166,17 @@ BEGIN
 				'devel_repos', NEW.devel_repos,
 				'newest_repos', NEW.newest_repos,
 				'all_repos', NEW.all_repos
+			)
+		);
+
+		RETURN NULL;
+	END IF;
+
+	-- history_end
+	IF (NEW.all_repos IS NULL AND OLD.all_repos IS NOT NULL) THEN
+		PERFORM metapackage_create_event(NEW.effname, 'history_end'::metapackage_event_type,
+			jsonb_build_object(
+				'last_repos', OLD.all_repos
 			)
 		);
 
@@ -260,15 +271,6 @@ BEGIN
 				)
 			);
 		END IF;
-	END IF;
-
-	-- history_end
-	IF (NEW.num_repos = 0) THEN
-		PERFORM metapackage_create_event(NEW.effname, 'history_end'::metapackage_event_type,
-			jsonb_build_object(
-				'last_repos', OLD.all_repos
-			)
-		);
 	END IF;
 
 	RETURN NULL;
@@ -454,8 +456,7 @@ CREATE TRIGGER metapackage_update
 		OLD.devel_repos IS DISTINCT FROM NEW.devel_repos OR
 		OLD.newest_versions IS DISTINCT FROM NEW.newest_versions OR
 		OLD.newest_repos IS DISTINCT FROM NEW.newest_repos OR
-		OLD.all_repos IS DISTINCT FROM NEW.all_repos OR
-		NEW.num_repos = 0
+		OLD.all_repos IS DISTINCT FROM NEW.all_repos
 	)
 EXECUTE PROCEDURE metapackage_create_events_trigger();
 
