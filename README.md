@@ -67,6 +67,7 @@ version are always parsed.
 | HP-UX                            |         |         |       |       |         |          |
 | just-install                     |         |         |       |       |         | ✔        |
 | KaOS                             |         |         |       |       |         |          |
+| KISS                             |         |         |       |       |         | ✔        |
 | Linuxbrew                        | ✔       |         |       | ✔     |         |          |
 | LuaRocks                         |         |         |       |       |         |          |
 | MacPorts                         | ✔       | ✔       | ✔     | ✔     | ✔       |          |
