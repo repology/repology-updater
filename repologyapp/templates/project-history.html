@@ -124,8 +124,12 @@ removed from all repositories.</p>
 			<b>
 			History ends, there are no longer packages for this project in any repositories known to repology
 
-			{%- if entry.data.last_repo -%}
-				, last repository was {{ macros.repository_link(entry.data.last_repo) }}
+			{%- if entry.data.last_repos -%}
+				, last repositor{% if entry.data.last_repos|length==1 %}y was{% else %}ies were{% endif %}
+
+				{% for repo in entry.data.last_repos %}
+					{% if loop.index0 %}, {% endif %}{{ macros.repository_link(repo) }}
+				{%- endfor %}
 			{% endif %}
 			</b>
 		{%- endif -%}
