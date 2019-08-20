@@ -46,7 +46,7 @@ class CygwinParser(Parser):
                         continue
 
                     verpkg = pkg.clone()
-                    verpkg.set_flags(PackageFlags.DEVEL, maturity == 'test')
+                    verpkg.set_flags(PackageFlags.IGNORE, maturity == 'test')  # XXX: weak_devel
 
                     raw_version = packagedata['versions'][maturity][-1]
                     (version, release) = raw_version.rsplit('-', 1)
