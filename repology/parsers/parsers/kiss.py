@@ -25,7 +25,7 @@ from repology.transformer import PackageTransformer
 
 
 def _is_good_download(download: str) -> bool:
-    return not download.startswith('patches/') and not download.startswith('files/') and not download.startswith('./')
+    return '://' in download
 
 
 class KissGitParser(Parser):
