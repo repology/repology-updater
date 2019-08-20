@@ -47,6 +47,13 @@ class KissGitParser(Parser):
                         )
                     )
 
-                pkg.set_extra_field('path', os.path.relpath(rootdir, path))
+                pkgpath = os.path.relpath(rootdir, path)
+
+                subrepo = os.path.split(pkgpath)[0]
+
+                if subrepo == 'testing':
+                    continue
+
+                pkg.set_extra_field('path', pkgpath)
 
                 yield pkg
