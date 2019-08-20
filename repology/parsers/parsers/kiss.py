@@ -55,5 +55,6 @@ class KissGitParser(Parser):
                     continue
 
                 pkg.set_extra_field('path', pkgpath)
+                pkg.set_subrepo(subrepo)
 
                 yield pkg

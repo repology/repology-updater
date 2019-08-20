@@ -169,6 +169,10 @@ class PackageMaker(PackageMakerBase):
     def set_arch(self, arch: str) -> None:
         self._package.arch = arch
 
+    @PackageMakerBase._simple_setter('subrepo', str, nzs.strip, nzs.forbid_newlines)
+    def set_subrepo(self, subrepo: str) -> None:
+        self._package.subrepo = subrepo
+
     @PackageMakerBase._simple_setter('summary', str, nzs.strip)
     def set_summary(self, summary: str) -> None:
         self._package.comment = summary

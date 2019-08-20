@@ -110,7 +110,7 @@ class RepositoryProcessor:
                 package.repo = repository['name']
                 package.family = repository['family']
 
-                if 'subrepo' in source:
+                if package.subrepo is None and 'subrepo' in source:
                     package.subrepo = source['subrepo']
 
                 if repository.get('shadow', False):
