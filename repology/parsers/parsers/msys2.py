@@ -57,6 +57,9 @@ class MSYS2DescParser(Parser):
                 if 'DESC' in data:
                     pkg.set_summary(data['DESC'][0])
 
+                if 'ARCH' in data:
+                    pkg.set_arch(data['ARCH'][0])
+
                 pkg.add_homepages(data.get('URL'))
                 pkg.add_licenses(data.get('LICENSE'))
                 pkg.add_maintainers(map(extract_maintainers, data['PACKAGER']))
