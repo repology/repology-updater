@@ -45,5 +45,6 @@ class SliTazJsonParser(Parser):
                     subpkg.set_summary(subitem['desc'])
                     subpkg.set_name(subitem['name'])
                     subpkg.set_version(subitem.get('ver'))
+                    subpkg.set_arch(subitem.get('arch'))
 
                     yield subpkg
