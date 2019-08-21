@@ -3,7 +3,7 @@
 {% block keywords %}{{ super() }}, {{ name }}{% endblock %}
 
 {% block preheader %}
-{% if metapackage is defined and metapackage.num_repos > 0 %}
+{% if metapackage and metapackage.num_repos > 0 %}
 <div class="btn-group pageheader-right">
 	<a href="{{ url_for("project_versions", name=name) }}" class="btn btn-default{% if request.endpoint == "project_versions" %} active{% endif %}">Versions</a>
 	<a href="{{ url_for("project_packages", name=name) }}" class="btn btn-default{% if request.endpoint == "project_packages" %} active{% endif %}">Packages</a>

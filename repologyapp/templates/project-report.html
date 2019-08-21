@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container">
 
-{% if metapackage is defined and metapackage.num_repos > 0 %}
+{% if metapackage and metapackage.num_repos > 0 %}
 
 {% if afk_till %}
 <div class="alert alert-warning" role="alert">Repology staff is not available till <time datetime="{{ afk_till.strftime("%Y-%m-%d") }}">{{ afk_till.strftime("%Y-%m-%d") }}</time>. Please don't worry, your report will be processed after this date as soon as possible.</div>
@@ -23,9 +23,9 @@
 
 <p>Repology uses a set of manually edited rules to resolve these cases. You may submit a change to the <a href="{{ config['REPOLOGY_RULES_REPO_URL'] }}">ruleset</a> directly or use this form to suggest an improvement to the ruleset. Please only use this for for problems which may be fixed by the ruleset (which are basically problems listed above).</p>
 
-{% else %}{# metapackage is defined and metapackage.num_repos > 0 #}
+{% else %}{# metapackage and metapackage.num_repos > 0 #}
 <div class="alert alert-warning" role="alert">New reports for this project are disabled as it's no longer known by Repology. <a href="{{ url_for('metapackage', name=name) }}">See</a> possible reasons and directions.</div>
-{% endif %}{# metapackage is defined and metapackage.num_repos > 0 #}
+{% endif %}{# metapackage and metapackage.num_repos > 0 #}
 
 {% if reports %}
 <h2>Current reports ({{ reports|length }})</h2>
@@ -64,7 +64,7 @@
 {% endfor %}
 {% endif %}
 
-{% if metapackage is defined and metapackage.num_repos > 0 %}
+{% if metapackage and metapackage.num_repos > 0 %}
 
 <h2>New report</h2>
 
@@ -104,7 +104,7 @@
 
 {% endif %}{# reports_disabled #}
 
-{% endif %}{# metapackage is defined and metapackage.num_repos > 0 #}
+{% endif %}{# metapackage and metapackage.num_repos > 0 #}
 
 </div> {#- container #}
 {% endblock %}
