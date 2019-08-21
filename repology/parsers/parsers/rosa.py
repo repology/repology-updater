@@ -32,18 +32,19 @@ class RosaInfoXmlParser(Parser):
 
         for info in root.findall('./info'):
             with factory.begin() as pkg:
-                nevra = nevra_parse(info.attrib['fn'])
+                name, epoch, version, release, arch = nevra_parse(info.attrib['fn'])
 
-                pkg.set_name(nevra[0])
-                pkg.set_version(nevra[2])
-                pkg.set_rawversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
+                pkg.set_name(name)
+                pkg.set_version(version)
+                pkg.set_rawversion(nevra_construct(None, epoch, version, release))
+                pkg.set_arch(arch)
 
                 # What we do here is we try to extract prerelease part
                 # and mark version as ignored with non-trivial ROSAREV,
                 # as it it likely a snapshot and trus cannot be trusted
-                if not nevra[3].isdecimal():
+                if not version.isdecimal():
                     pkg.set_flags(PackageFlags.IGNORE)
-                    match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', nevra[3].lower())
+                    match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', version.lower())
                     if match:
                         pkg._package.version += match.group(0)  # XXX: encapsulation violation
 
