@@ -5,15 +5,20 @@
   type: repository
   desc: GNU Guix
   family: guix
-  minpackages: 7000
+  minpackages: 9500
   sources:
-    - name: guix
-      fetcher: GuixFetcher
-      parser: GuixParser
-      url: https://www.gnu.org/software/guix/packages/
+    - name: packages.json
+      fetcher: FileFetcher
+      parser: GuixJsonParser
+      url: https://guix.gnu.org/packages.json
   repolinks:
     - desc: GNU Guix home
-      url: https://www.gnu.org/software/guix/
+      url: https://guix.gnu.org/
     - desc: GNU Guix packages
-      url: https://www.gnu.org/software/guix/packages/
-  tags: [ all ]
+      url: https://guix.gnu.org/packages/
+    - desc: git repository
+      url: https://git.savannah.gnu.org/cgit/guix.git/
+  packagelinks:
+    - desc: Package page in Guix site
+      url: 'https://guix.gnu.org/packages/{name}-{rawversion}/'
+  tags: [ all, production ]

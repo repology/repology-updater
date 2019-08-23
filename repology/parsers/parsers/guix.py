@@ -23,6 +23,7 @@ import lxml.html
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
@@ -33,7 +34,20 @@ def _normalize_version(version: str) -> str:
     return version
 
 
-class GuixParser(Parser):
+class GuixJsonParser(Parser):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+        for pkgdata in iter_json_list(path, (None,)):
+            with factory.begin() as pkg:
+                pkg.set_name(pkgdata['name'])
+                pkg.set_version(pkgdata['version'], _normalize_version)
+                pkg.set_summary(pkgdata['synopsis'])
+                if pkgdata.get('homepage'):  # may be boolean False
+                    pkg.add_homepages(pkgdata['homepage'])
+                yield pkg
+
+
+# Legacy website parser, for reference purposes
+class GuixWebsiteParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for filename in os.listdir(path):
             if not filename.endswith('.html'):
