@@ -126,6 +126,7 @@ class OpenWrtSourcesParser(DebianSourcesParser):
     def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
         source = pkgdata.get('Source')
         if source:
-            srcname = source.split('/')[-1]
-            pkg.set_basename(srcname)
-            pkg.set_extra_field('srcname', srcname)
+            pkgpath = source.split('/')
+            pkg.set_basename(pkgpath[-1])
+            pkg.set_extra_field('srcname', pkgpath[-1])
+            pkg.set_extra_field('path', '/'.join(pkgpath[2:]))

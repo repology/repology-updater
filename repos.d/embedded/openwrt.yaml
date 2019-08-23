@@ -22,7 +22,7 @@
     - desc: OpenWrt home
       url: https://openwrt.org/
   packagelinks:
-    - desc: OpenWrt package page
+    - desc: OpenWrt package page (for 18.06)
       url: 'https://openwrt.org/packages/pkgdata/{name}'
   tags: [ all, production, openwrt ]
 
@@ -47,8 +47,14 @@
     - desc: OpenWrt home
       url: https://openwrt.org/
   packagelinks:
-    - desc: OpenWrt package page
+    - desc: OpenWrt package page  # XXX: only available for this branch
       url: 'https://openwrt.org/packages/pkgdata/{name}'
+  # TODO: source-dependent packagelinks
+  # base: https://github.com/openwrt/openwrt/tree/openwrt-18.06/{path}
+  # luci: https://github.com/openwrt/luci/tree/openwrt-18.06/{path}
+  # packages: https://github.com/openwrt/packages/tree/openwrt-18.06/{path}
+  # routing: https://github.com/openwrt-routing/packages/tree/openwrt-18.06/{path}
+  # telephony: https://github.com/openwrt/telephony/tree/openwrt-18.06/{path}
   tags: [ all, production, openwrt ]
 
 - name: openwrt_19_07_x86_64
@@ -68,7 +74,7 @@
     - desc: OpenWrt home
       url: https://openwrt.org/
   packagelinks:
-    - desc: OpenWrt package page
+    - desc: OpenWrt package page (for 18.06)
       url: 'https://openwrt.org/packages/pkgdata/{name}'
   tags: [ all, production, openwrt ]
 
@@ -90,6 +96,6 @@
     - desc: OpenWrt home
       url: https://openwrt.org/
   packagelinks:
-    - desc: OpenWrt package page
+    - desc: OpenWrt package page (for 18.06)
       url: 'https://openwrt.org/packages/pkgdata/{name}'
   tags: [ all, openwrt ]  # disabled: like LEDE, it's too blinky
