@@ -1,18 +1,70 @@
 ###########################################################################
 # OpenWRT
 ###########################################################################
-- name: openwrt_18_06_01_x86
+- name: openwrt_17_01_x86_64
   type: repository
-  desc: OpenWrt 18.06.01 x86
+  desc: OpenWrt 17.01 x86_64
   family: openwrt
   color: '5d6993'
-  minpackages: 4500
+  minpackages: 4000
   default_maintainer: fallback-mnt-openwrt@repology
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'https://downloads.openwrt.org/releases/18.06.1/packages/x86_64/{source}/Packages.manifest'
+      # the official URL is really
+      # 'https://downloads.openwrt.org/releases/17.01.7/packages/x86_64/{source}/Packages.manifest'
+      # but releases/17.01.*/packages is a link to ../packages-17.01 common to all 17.01 releases,
+      # so use it directly
+      url: 'https://downloads.openwrt.org/releases/packages-17.01/x86_64/{source}/Packages.manifest'
+      subrepo: '{source}'
+      project_name_from_source: true
+  repolinks:
+    - desc: OpenWrt home
+      url: https://openwrt.org/
+  packagelinks:
+    - desc: OpenWrt package page
+      url: 'https://openwrt.org/packages/pkgdata/{name}'
+  tags: [ all, production, openwrt ]
+
+- name: openwrt_18_06_x86_64
+  type: repository
+  desc: OpenWrt 18.06 x86_64
+  family: openwrt
+  color: '5d6993'
+  minpackages: 5000
+  default_maintainer: fallback-mnt-openwrt@repology
+  sources:
+    - name: [ base, luci, packages, routing, telephony ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      # the official URL is really
+      # 'https://downloads.openwrt.org/releases/18.06.4/packages/x86_64/{source}/Packages.manifest'
+      # but releases/18.06.*/packages is a link to ../packages-18.06 common to all 18.06 releases,
+      # so use it directly
+      url: 'https://downloads.openwrt.org/releases/packages-18.06/x86_64/{source}/Packages.manifest'
+      subrepo: '{source}'
+      project_name_from_source: true
+  repolinks:
+    - desc: OpenWrt home
+      url: https://openwrt.org/
+  packagelinks:
+    - desc: OpenWrt package page
+      url: 'https://openwrt.org/packages/pkgdata/{name}'
+  tags: [ all, production, openwrt ]
+
+- name: openwrt_19_07_x86_64
+  type: repository
+  desc: OpenWrt 19.07 x86_64
+  family: openwrt
+  color: '5d6993'
+  minpackages: 6000
+  default_maintainer: fallback-mnt-openwrt@repology
+  sources:
+    - name: [ base, luci, packages, routing, telephony ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
       subrepo: '{source}'
       project_name_from_source: true
   repolinks:
