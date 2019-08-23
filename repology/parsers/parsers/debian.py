@@ -16,9 +16,8 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Any, Dict, Iterable, List, Union
+from typing import Dict, Iterable
 
-from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -31,7 +30,7 @@ _DEBIAN_VERSION_SUFFIX_SEP_RE = re.compile('[~+-]')
 _DEBIAN_KEYVAL_RE = re.compile('([A-Za-z0-9_-]+):(.*?)')
 
 
-def normalize_version(version: str) -> str:
+def _normalize_version(version: str) -> str:
     # epoch
     pos = version.find(':')
     if pos != -1:
@@ -60,82 +59,73 @@ def normalize_version(version: str) -> str:
     return version
 
 
+def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
+    with open(path, encoding='utf-8', errors='ignore') as f:
+        current_data: Dict[str, str] = {}
+        last_key = None
+
+        for line in f:
+            line = line.rstrip('\n')
+
+            # empty line, yield ready package
+            if line == '':
+                if not current_data:
+                    continue  # may happen on empty package list
+
+                yield current_data
+
+                current_data = {}
+                last_key = None
+                continue
+
+            # key - value pair
+            match = _DEBIAN_KEYVAL_RE.fullmatch(line)
+            if match:
+                key = match.group(1)
+                value = match.group(2).strip()
+                current_data[key] = value
+                last_key = key
+                continue
+
+            # continuation of previous key
+            if line.startswith(' '):
+                if last_key is None:
+                    raise RuntimeError('unable to parse line: {}'.format(line))
+
+                current_data[last_key] += line.strip()
+                continue
+
+            raise RuntimeError('unable to parse line: {}'.format(line))
+
+
 class DebianSourcesParser(Parser):
-    def __init__(self, project_name_from_source: bool = False) -> None:
-        self.project_name_from_source = project_name_from_source
+    def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
+        pass
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, encoding='utf-8', errors='ignore') as file:
-            current_data: Dict[str, Union[str, List[str]]] = {}
-            last_key = None
+        for pkgdata in _iter_packages(path):
+            pkg = factory.begin()
 
-            for line in file:
-                line = line.rstrip('\n')
+            pkg.set_name(pkgdata['Package'])
+            pkg.set_version(pkgdata['Version'], _normalize_version)
+            pkg.add_maintainers(extract_maintainers(pkgdata.get('Maintainer', '')))
+            pkg.add_maintainers(extract_maintainers(pkgdata.get('Uploaders', '')))
+            pkg.add_categories(pkgdata.get('Section'))
+            pkg.add_homepages(pkgdata.get('Homepage'))
 
-                # empty line, dump package
-                if line == '':
-                    if not current_data:
-                        continue  # may happen on empty package list
+            source = pkgdata.get('Source')
+            if source:
+                pkg.set_extra_field('source', source)
 
-                    pkg = factory.begin()
+            self._extra_handling(pkg, pkgdata)
 
-                    def get_field(key: str, type_: Any = str, default: Any = None) -> Any:
-                        if key in current_data:
-                            if type_ is None or isinstance(current_data[key], type_):
-                                return current_data[key]
-                            else:
-                                pkg.log('unable to parse field {}'.format(key), severity=Logger.ERROR)
-                                return default
-                        else:
-                            return default
+            yield pkg
 
-                    pkg.set_name(get_field('Package'))
-                    pkg.set_version(get_field('Version'), normalize_version)
-                    pkg.add_maintainers(extract_maintainers(get_field('Maintainer')))
-                    pkg.add_maintainers(extract_maintainers(get_field('Uploaders')))
-                    pkg.add_categories(get_field('Section'))
-                    pkg.add_homepages(get_field('Homepage'))
 
-                    # This is long description
-                    #pkg.comment = get_field('Description', type_=None)
-                    #if isinstance(pkg.comment, list):
-                    #    pkg.set_summary(' '.join(pkg.comment))
-
-                    source = get_field('Source')
-                    if source:
-                        pkg.set_extra_field('source', source)
-
-                        # XXX: this is only used in OpenWRT ATM
-                        # We assume that Source field is a package name or something path-like
-                        if self.project_name_from_source:
-                            srcname = source.split('/')[-1]
-                            pkg.set_basename(srcname)
-                            pkg.set_extra_field('srcname', srcname)
-
-                    yield pkg
-
-                    current_data = {}
-                    last_key = None
-                    continue
-
-                # key - value pair
-                match = _DEBIAN_KEYVAL_RE.fullmatch(line)
-                if match:
-                    key = match.group(1)
-                    value = match.group(2).strip()
-                    current_data[key] = value
-                    last_key = key
-                    continue
-
-                # continuation of previous key
-                if line.startswith(' '):
-                    if last_key is None:
-                        raise RuntimeError('unable to parse line: {}'.format(line))
-
-                    value = line.strip()
-                    if not isinstance(current_data[last_key], list):
-                        current_data[last_key] = [current_data[last_key]]  # type: ignore
-                    current_data[last_key].append(value)  # type: ignore
-                    continue
-
-                raise RuntimeError('unable to parse line: {}'.format(line))
+class OpenWrtSourcesParser(DebianSourcesParser):
+    def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
+        source = pkgdata.get('Source')
+        if source:
+            srcname = source.split('/')[-1]
+            pkg.set_basename(srcname)
+            pkg.set_extra_field('srcname', srcname)
