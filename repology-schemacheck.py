@@ -43,6 +43,7 @@ families = [
     'crux',
     'cygwin',
     'debuntu',
+    'distri',
     'distrowatch',
     'elpa',
     'exherbo',

@@ -81,6 +81,7 @@ before_install:
   - pip install pytz
   - pip install requests
   - pip install rubymarshal
+  - pip install protobuf
 
   # install extra python dependencies
   - pip install coveralls

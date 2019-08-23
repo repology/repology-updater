@@ -1,0 +1,272 @@
+// Copyright © 2018, Michael Stapelberg and contributors
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+// 
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+// 
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+// 
+//     * Neither the name of Michael Stapelberg nor the
+//       names of contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+// 
+// THIS SOFTWARE IS PROVIDED BY Michael Stapelberg ''AS IS'' AND ANY
+// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL Michael Stapelberg BE LIABLE FOR ANY
+// DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+// LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+// ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+// https://developers.google.com/protocol-buffers/docs/proto
+syntax = "proto2";
+
+package pb;
+
+message BuildStep {
+  // argv to pass to execve(2)
+  repeated string argv = 1;
+}
+
+message CBuilder {
+  // Additional flag to pass to `configure`.
+  repeated string extra_configure_flag = 1;
+
+  // Enable if this package does not support building from a separate directory
+  // (sometimes called “out-of-tree build”). A bug should be reported with the
+  // package upstream.
+  optional bool copy_to_builddir = 2;
+
+  // Additional flag to pass to `make`.
+  repeated string extra_make_flag = 4;
+
+  // Whether to run autoreconf(1)
+  optional bool autoreconf = 5;
+
+  // Additional flag to append to the `LDFLAGS` environment variable when
+  // building.
+  repeated string extra_ldflag = 3;
+}
+
+message CMakeBuilder {
+  // Additional flag to pass to cmake(1), e.g.:
+  // extra_cmake_flag: "-DKICAD_SCRIPTING_WXPYTHON_PHOENIX:BOOL=true"
+  repeated string extra_cmake_flag = 1;
+}
+
+message MesonBuilder {
+  // Additional flag to pass to meson(1), e.g.:
+  // extra_meson_flag: "-Dsystemdsystemunitdir=${DISTRI_PREFIX}/lib/systemd/system"
+  repeated string extra_meson_flag = 1;
+}
+
+message PerlBuilder {
+  // Extra flags to be specified when running Makefile.PL, e.g.
+  // EXPATLIBPATH=/ro/expat-2.2.6/buildoutput/lib
+  repeated string extra_makefile_flag = 1;
+}
+
+message PythonBuilder {
+}
+
+message GomodBuilder {
+}
+
+message GoBuilder {
+  // Additional flags to pass to “go install”, e.g. “./...” or “cmd/distri”.
+  optional string install = 1;
+
+  // Import path of the package that is being built,
+  // e.g. “github.com/junegunn/fzf”.
+  //
+  // Derived from the source URL by default; should usually not be specified.
+  optional string import_path = 2;
+
+  // Additional go environment variable to set when calling e.g. “go install”.
+  // E.g. go_env: "CGO_ENABLED=0"
+  repeated string go_env = 3;
+}
+
+message Install {
+  repeated string systemd_unit = 1;
+
+  message Symlink {
+    // The symbolic link target.
+    optional string oldname = 1;
+    // The filename of the symbolic link to create.
+    optional string newname = 2; // relative to ${DISTRI_PREFIX}/out
+  }
+  // Create a symbolic link.
+  repeated Symlink symlink = 2;
+
+  // Create an empty directory with the specified name.
+  repeated string empty_dir = 3; // relative to ${DISTRI_PREFIX}/out
+
+  message Chmod {
+    // Whether to set the setuid bit.
+    optional bool setuid = 1;
+    // TODO: rename to filename for consistency
+    // The filename of the file whose mode to change
+    optional string name = 2; // relative to ${DISTRI_PREFIX}/out
+  }
+  // Change the mode of a file.
+  repeated Chmod chmod = 4;
+
+  message Cap {
+    optional string capability = 2; // specified in cap_from_text(3)
+    optional string filename = 1; // relative to ${DISTRI_PREFIX}
+  }
+  // Apply a file-based capability.
+  repeated Cap capability = 5;
+
+  message File {
+    optional string srcpath = 1; // relative to ${DISTRI_SOURCEDIR}
+    optional string destpath = 2; // relative to ${DISTRI_PREFIX}
+  }
+  // Install a file.
+  repeated File file = 6;
+
+  message Rename {
+    optional string oldname = 1; // relative to ${DISTRI_PREFIX}/out
+    optional string newname = 2; // relative to ${DISTRI_PREFIX}/out
+  }
+  // Rename an installed file.
+  repeated Rename rename = 7;
+
+  // Delete a file.
+  repeated string delete = 8; // relative to ${DISTRI_PREFIX}/out
+}
+
+message Claim {
+  // glob pattern, interpreted by Go’s
+  // https://golang.org/pkg/path/filepath/#Glob
+  optional string glob = 1; // required
+
+  // Overwrite the destination directory within the split package.
+  optional string dir = 2;
+}
+
+message SplitPackage {
+  // Name of the split package, e.g. gcc-libs
+  optional string name = 1; // required
+
+  // A claim specifies which files this split package claims for itself.
+  repeated Claim claim = 3; // required
+
+  // Additional run-time dependencies which are not automatically found, for
+  // this split package.
+  repeated string runtime_dep = 2;
+}
+
+message Union {
+  // Directory (within the package) to overlay on top of pkg,
+  // e.g. “out/lib/irssi/modules”
+  optional string dir = 1; // required
+  
+  // distri package on top of which to overlay our files, e.g. “irssi”
+  optional string pkg = 2; // required
+}
+
+message Build {
+
+  // ┌─────────────────────────────────────────────────────────────────────────┐
+  // │ source                                                                  │
+  // └─────────────────────────────────────────────────────────────────────────┘
+
+  // A https URL to the upstream archive that should be built. Currently, only
+  // tar.gz archives are supported.
+  optional string source = 1;
+
+  // A SHA256 hash of the upstream archive, for verifying integrity.
+  optional string hash = 2;
+
+  // The version number of this package, in format
+  // `<upstream-version>-<distri-revision>`, e.g. `2.12-4`. The distri package
+  // revision is a monotonically increasing number (even when the upstream
+  // version changes!).
+  //
+  // The name of the package is the directory which contains `build.textproto`,
+  // and the resulting package will be named `<package-name>-<version>`, so a
+  // full package can be referenced by e.g. `i3status-amd64-2.12-4`.
+  optional string version = 3;
+
+  // The filename of a file (relative to the directory containing `build.textproto`)
+  // to copy into the source directory as-is. Could also be achieved by using
+  // `cherry_pick`, but files are a little bit easier to maintain this way.
+  repeated string extra_file = 17;
+
+  // The filename of a patch (relative to the directory containing
+  // `build.textproto`) to apply after extracting the upstream archive. The
+  // order of directives is the order in which the patches are applied.
+  repeated string cherry_pick = 6;
+
+  // ┌─────────────────────────────────────────────────────────────────────────┐
+  // │ builder                                                                 │
+  // └─────────────────────────────────────────────────────────────────────────┘
+
+  // TODO: rename to build_dep
+  repeated string dep = 5;
+
+  // TODO: move this field into a custom builder
+  // Overwrites the chosen builder’s default build steps.
+  repeated BuildStep build_step = 4;
+
+  oneof builder {
+    // The cbuilder builds autoconf (or compatible) projects.
+    CBuilder cbuilder = 7;
+
+    // The cmakebuilder builds CMake projects.
+    CMakeBuilder cmakebuilder = 14;
+
+    // The meson builder builds meson projects.
+    MesonBuilder mesonbuilder = 16;
+
+    // The perlbuilder builds Perl projects.
+    PerlBuilder perlbuilder = 10;
+
+    // The pythonbuilder builds Python projects.
+    PythonBuilder pythonbuilder = 12;
+
+    // The gomodbuilder captures the module cache of the specified module. The
+    // resulting package is meant to be used as build dependency for gobuilder
+    // packages.
+    GomodBuilder gomodbuilder = 13;
+    
+    // The gobuilder builds Go projects.
+    GoBuilder gobuilder = 18;
+  }
+
+  // ┌─────────────────────────────────────────────────────────────────────────┐
+  // │ package building                                                        │
+  // └─────────────────────────────────────────────────────────────────────────┘
+
+  // Additional run-time dependencies which are not automatically found.
+  repeated string runtime_dep = 9;
+
+  // Additional steps to perform after the build completed.
+  optional Install install = 8;
+
+  // Split files out of the resulting package into separate packages. This
+  // feature should be used sparingly: prefer sticking to the mental model that
+  // one package build instruction file results in one distri package.
+  //
+  // Use cases include fine grained dependencies (e.g. gcc-libs split out of
+  // gcc) or breaking dependency cycles for bootstrap packages (e.g. libudev
+  // split out of systemd).
+  repeated SplitPackage split_package = 11;
+
+  // Runtime union directories are used to implement per-package exchange
+  // directories (as opposed to global exchange directories). This is to be used
+  // for tight coupling situations, e.g. when a plugin mechanism does not
+  // guarantee ABI compatibility across versions.
+  repeated Union runtime_union = 15;
+
+  // NEXT FREE FIELD NUMBER: 19
+}

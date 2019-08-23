@@ -53,6 +53,7 @@ version are always parsed.
 | CRUX                             | ✔       | ✔       |       | ✔     |         |          |
 | Cygwin                           | ✔       | ✔       | ✔     |       |         |          |
 | Debian, Ubuntu, other deb-based  |         | ✔       | ✔     | ✔     |         |          |
+| Distri                           |         |         |       |       |         | ✔        |
 | DistroWatch.com                  | ✔       |         |       | ✔     |         | ✔        |
 | Exherbo                          |         |         | ✔     |       |         |          |
 | F-Droid                          |         |         | ✔     | ✔     | ✔       |          |
