@@ -1,12 +1,12 @@
 ###########################################################################
 # KISS Linux
 ###########################################################################
-- name: kiss
+- name: kiss_main
   type: repository
-  desc: KISS Linux
+  desc: KISS Linux Main
   family: kiss
   ruleset: kiss
-  minpackages: 150
+  minpackages: 130
   sources:
     - name: repo
       fetcher: GitFetcher
@@ -18,9 +18,33 @@
       url: https://getkiss.org/
     - desc: KISS Linux - Package System
       url: https://getkiss.org/pages/package-system/
-    - desc: Package System for KISS - Main Repositories on GitHub
+    - desc: Main Repositories on GitHub
       url: https://github.com/kisslinux/repo
   packagelinks:
     - desc: Package directory on GitHub
       url: 'https://github.com/kisslinux/repo/tree/master/{path}'
-  tags: [ all, production ]
+  tags: [ all, production, kiss ]
+
+- name: kiss_community
+  type: repository
+  desc: KISS Linux Community
+  family: kiss
+  ruleset: kiss
+  minpackages: 20
+  sources:
+    - name: repo
+      fetcher: GitFetcher
+      parser: KissGitParser
+      url: 'https://github.com/kisslinux/community.git'
+      sparse_checkout: [ '**/version', '**/sources' ]
+  repolinks:
+    - desc: KISS Linux home
+      url: https://getkiss.org/
+    - desc: KISS Linux - Package System
+      url: https://getkiss.org/pages/package-system/
+    - desc: Community Repository on GitHub
+      url: https://github.com/kisslinux/community
+  packagelinks:
+    - desc: Package directory on GitHub
+      url: 'https://github.com/kisslinux/community/tree/master/{path}'
+  tags: [ all, production, kiss ]
