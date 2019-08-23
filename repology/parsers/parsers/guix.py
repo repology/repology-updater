@@ -28,7 +28,13 @@ from repology.transformer import PackageTransformer
 
 
 def _normalize_version(version: str) -> str:
-    match = re.match('(.*)-[0-9]+\\.[0-9a-f]{7,}$', version)
+    # https://guix.gnu.org/manual/en/html_node/Version-Numbers.html
+    # Revision is assumed to be -, then number, then commit hash
+    # of reasonable length (usually 7+ chars). However, there are also
+    # a few cases with shorter numbers in the end, presumably SVN revisions
+    # (4.9.4-1.227977, 0.9-rc3-0.2341), so set this to as small as 4
+    #                                        V
+    match = re.match('(.*)-[0-9]+\\.[0-9a-f]{4,}$', version)
     if match:
         return match.group(1)
     return version
