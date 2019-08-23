@@ -10,20 +10,20 @@
 
 <div class="row">
 	<div class="col-md-4">
-		<section id="Package_names">
-			<h2>Package names</h2>
-			<ul>
-			{% for name,families in information.names|dictsort(case_sensitive=True) %}
-				<li>{{ name }}{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
-			{% endfor %}
-			</ul>
-		</section>
-
 		<section id="Versions">
 			<h2>Versions</h2>
 			<ul class="list-sparse">
 			{% for versioninfo in versions %}
 				<li><span class="version version-big version-{{ versioninfo.versionclass|css_for_versionclass }}">{{ versioninfo.version }}</span>{% if versioninfo.numfamilies > 1 %} <b>({{ versioninfo.numfamilies }})</b>{% endif %}</li>
+			{% endfor %}
+			</ul>
+		</section>
+
+		<section id="Package_names">
+			<h2>Package names</h2>
+			<ul>
+			{% for name,families in information.names|dictsort(case_sensitive=True) %}
+				<li>{{ name }}{% if families|length > 1 %} <b>({{ families|length }})</b>{% endif %}</li>
 			{% endfor %}
 			</ul>
 		</section>
