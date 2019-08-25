@@ -18,6 +18,7 @@
 import re
 from typing import Dict, Iterable
 
+from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -130,3 +131,10 @@ class OpenWrtSourcesParser(DebianSourcesParser):
             pkg.set_basename(pkgpath[-1])
             pkg.set_extra_field('srcname', pkgpath[-1])
             pkg.set_extra_field('path', '/'.join(pkgpath[2:]))
+            if pkgpath[2:4] == ['lang', 'python']:
+                # All python modules are in lang/python, but not of lang/python are python modules
+                # some are prefixe by python- or python3-, some are not
+                # as a result, there's no reliable way to detect python modules and there may be
+                # name clashes, (itsdangerous, xmltodict)
+                # Prevent these by marking as untrusted
+                pkg.set_flags(PackageFlags.UNTRUSTED)
