@@ -52,9 +52,9 @@
                   )
                   AS ?versions
                 )
-                (SAMPLE(?websites) as ?websites)
+                (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
                 (SAMPLE(?repology_projects) as ?repology_projects)
-                (SAMPLE(?licenses) as ?licenses)
+                (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
               WHERE {
                 {
                   SELECT DISTINCT
@@ -63,10 +63,8 @@
                     (GROUP_CONCAT(DISTINCT ?versionType; separator='') as ?versionTypes)
                     (GROUP_CONCAT(DISTINCT ?versionOS; separator='') as ?versionOSes)
                     (GROUP_CONCAT(DISTINCT ?versionPlatform; separator='') as ?versionPlatforms)
-                    (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
                     (GROUP_CONCAT(DISTINCT ?repology_project; separator=', ') as ?repology_projects)
                     (SAMPLE(?has_packages) as ?has_packages)
-                    (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
                   WHERE {
                     # Versions for specific project
                     ?project p:P348 ?versionItem .
@@ -151,16 +149,6 @@
                       #FILTER (LANG(?versionPlatform) = 'en')
                     }
 
-                    # Websites
-                    OPTIONAL { ?project wdt:P856 ?website . }
-
-                    # Licenses, resolved to labels (e.g. human readable names)
-                    OPTIONAL {
-                      ?project wdt:P275 ?licenseItem .
-                      ?licenseItem rdfs:label ?license .
-                      FILTER (LANG(?license) = 'en')
-                    }
-
                     # Use Repology names specified in wikidata
                     OPTIONAL { ?project wdt:P6931 ?repology_project . }
 
@@ -222,6 +210,16 @@
                   }
                   GROUP BY ?project ?version
                 }
+
+                # Licenses, resolved to labels (e.g. human readable names)
+                OPTIONAL {
+                  ?project wdt:P275 ?licenseItem .
+                  ?licenseItem rdfs:label ?license .
+                  FILTER (LANG(?license) = 'en')
+                }
+
+                # Websites
+                OPTIONAL { ?project wdt:P856 ?website . }
               }
               GROUP BY ?project
             }
