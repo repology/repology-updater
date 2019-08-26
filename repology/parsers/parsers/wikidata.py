@@ -35,8 +35,7 @@ def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
 
 class WikidataJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        entries_good = 0
-        entries_missed = 0
+        total_entries = 0
 
         for packagedata in _iter_packages(path):
             entity = packagedata['project'].rsplit('/', 1)[-1]  # this is URL, take only the ID from it
@@ -51,15 +50,10 @@ class WikidataJsonParser(Parser):
 
                 names = set(packagedata['repology_projects'].split(', ')) if packagedata['repology_projects'] else set()
 
-                if not names:
-                    isnew = ' (new)' if int(entity.lstrip('Q')) > 65000000 else ''
-                    pkg.log('entry has packages, but not Repology project name{}'.format(isnew), severity=Logger.WARNING)
-                    entries_missed += 1
-                    continue
-                elif len(names) > 1:
+                if len(names) > 1:
                     pkg.log('multiple Repology project names: {}'.format(','.join(sorted(names))), severity=Logger.WARNING)
 
-                entries_good += 1
+                total_entries += 1
 
                 # generate a package for each version
                 for version in sorted(packagedata['versions'].split(', ')):
@@ -88,4 +82,4 @@ class WikidataJsonParser(Parser):
                         namepkg.set_basename(name)
                         yield namepkg
 
-        factory.log('{} distinct projects accepted, {} potentially missing "Repology project name" property'.format(entries_good, entries_missed))
+        factory.log('{} total entries'.format(total_entries))

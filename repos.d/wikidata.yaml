@@ -33,8 +33,8 @@
             ?projectDescription
             ?versions
             ?websites
-            ?repology_projects
             ?licenses
+            ?repology_projects
           WHERE {
             {
               SELECT
@@ -53,8 +53,8 @@
                   AS ?versions
                 )
                 (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
-                (SAMPLE(?repology_projects) as ?repology_projects)
                 (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
+                (SAMPLE(?repology_projects) as ?repology_projects)
               WHERE {
                 {
                   SELECT DISTINCT
@@ -64,8 +64,9 @@
                     (GROUP_CONCAT(DISTINCT ?versionOS; separator='') as ?versionOSes)
                     (GROUP_CONCAT(DISTINCT ?versionPlatform; separator='') as ?versionPlatforms)
                     (GROUP_CONCAT(DISTINCT ?repology_project; separator=', ') as ?repology_projects)
-                    (SAMPLE(?has_packages) as ?has_packages)
                   WHERE {
+                    ?project wdt:P6931 ?repology_project .
+
                     # Versions for specific project
                     ?project p:P348 ?versionItem .
 
@@ -91,9 +92,6 @@
                         )
                         AS ?versionType
                       )
-                      # You may use this in manual request to get label of actual version type
-                      #?versionTypeItem rdfs:label ?versionType .
-                      #FILTER (LANG(?versionType) = 'en')
                     }
                     # Version os
                     # See VLC package; there's different versioning schemas for different OSes
@@ -111,9 +109,6 @@
                         )
                         AS ?versionOS
                       )
-                      # You may use this in manual request to get label of actual version os
-                      #?versionOSItem rdfs:label ?versionOS .
-                      #FILTER (LANG(?versionOS) = 'en')
                     }
                     # same for platform
                     # we go blacklist way here though as people use too much unrelated stuff
@@ -144,69 +139,7 @@
                         )
                         AS ?versionPlatform
                       )
-                      # You may use this in manual request to get label of actual version os
-                      #?versionPlatformSItem rdfs:label ?versionPlatform .
-                      #FILTER (LANG(?versionPlatform) = 'en')
                     }
-
-                    # Use Repology names specified in wikidata
-                    OPTIONAL { ?project wdt:P6931 ?repology_project . }
-
-                    # Also gather info on packages to find missing Repology names
-                    # (but ignore removed packages marged with 'end time' property)
-                    OPTIONAL {
-                        ?project p:P3454 ?arch_package .
-                        FILTER NOT EXISTS { ?arch_package pq:P582 ?arch_package_end }
-                    }
-                    OPTIONAL {
-                        ?project p:P4162 ?aur_package .
-                        FILTER NOT EXISTS { ?aur_package pq:P582 ?aur_package_end }
-                    }
-                    OPTIONAL {
-                        ?project p:P3442 ?debian_package .
-                        FILTER NOT EXISTS { ?debian_package pq:P582 ?debian_package_end }
-                    }
-                    OPTIONAL {
-                        ?project p:P3463 ?fedora_package .
-                        FILTER NOT EXISTS { ?fedora_package pq:P582 ?fedora_package_end }
-                    }
-                    OPTIONAL {
-                        ?project p:P3499 ?gentoo_package .
-                        FILTER NOT EXISTS { ?gentoo_package pq:P582 ?gentoo_package_end }
-                    }
-                    OPTIONAL {
-                        ?project p:P3473 ?ubuntu_package .
-                        FILTER NOT EXISTS { ?ubuntu_package pq:P582 ?ubuntu_package_end }
-                    }
-
-                    # Also module collections which we import
-                    OPTIONAL {
-                        ?project p:P5779 ?cpan_project .
-                        FILTER NOT EXISTS { ?cpan_project pq:P582 ?cpan_project_end }
-                    }
-                    OPTIONAL {
-                        ?project p:P5568 ?pypi_project .
-                        FILTER NOT EXISTS { ?pypi_project pq:P582 ?pypi_project_end }
-                    }
-                    OPTIONAL {
-                        ?project p:P5566 ?ruby_project .
-                        FILTER NOT EXISTS { ?ruby_project pq:P582 ?ruby_project_end }
-                    }
-
-                    BIND(
-                      BOUND(?arch_package) ||
-                      BOUND(?aur_package) ||
-                      BOUND(?debian_package) ||
-                      BOUND(?fedora_package) ||
-                      BOUND(?gentoo_package) ||
-                      BOUND(?ubuntu_package) ||
-                      BOUND(?cpan_project) ||
-                      BOUND(?pypi_project) ||
-                      BOUND(?ruby_project)
-                      AS ?has_packages
-                    )
-
-                    FILTER(BOUND(?repology_project) || ?has_packages)
                   }
                   GROUP BY ?project ?version
                 }
