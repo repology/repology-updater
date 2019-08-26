@@ -74,6 +74,8 @@
                     # Version number
                     ?versionItem ps:P348 $version .
 
+                    FILTER NOT EXISTS { ?versionItem wikibase:rank wikibase:DeprecatedRank }
+
                     # Version type (stable, unstable, ...)
                     # we reduce it to just two flags which indicate
                     # whether there's stable or unstable types
