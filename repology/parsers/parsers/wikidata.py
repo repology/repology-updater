@@ -48,12 +48,15 @@ class WikidataJsonParser(Parser):
                 pkg.add_licenses(packagedata.get('licenses', '').split(', '))
                 pkg.add_homepages(packagedata.get('websites', '').split(', '))
 
-                names = set(packagedata['repology_projects'].split(', ')) if packagedata['repology_projects'] else set()
+                names = sorted(packagedata['repology_projects'].split(', '))
 
                 if len(names) > 1:
-                    pkg.log('multiple Repology project names: {}'.format(','.join(sorted(names))), severity=Logger.WARNING)
+                    pkg.log('multiple Repology project names: {}'.format(','.join(names)), severity=Logger.WARNING)
 
                 total_entries += 1
+
+                pkgs_preferred = []
+                pkgs_normal = []
 
                 # generate a package for each version
                 for version in sorted(packagedata['versions'].split(', ')):
@@ -64,6 +67,7 @@ class WikidataJsonParser(Parser):
                     is_devel = 'U' in flags
                     is_foreign_os_release = 'o' in flags and 'O' not in flags
                     is_foreign_platform_release = 'p' in flags and 'P' not in flags
+                    is_preferred = 'R' in flags
 
                     if is_foreign_os_release:
                         verpkg.log('version {} skipped due to bad OS'.format(version), severity=Logger.NOTICE)
@@ -76,10 +80,20 @@ class WikidataJsonParser(Parser):
                     verpkg.set_flags(PackageFlags.DEVEL, is_devel)
                     verpkg.set_version(version)
 
-                    # generate package for each guessed name; it most cases, these will be merged anyway
+                    # generate package for each repology project
                     for name in names:
                         namepkg = verpkg.clone()
                         namepkg.set_basename(name)
-                        yield namepkg
+                        if is_preferred:
+                            pkgs_preferred.append(namepkg)
+                        else:
+                            pkgs_normal.append(namepkg)
+
+                if pkgs_preferred:
+                    yield from pkgs_preferred
+                else:
+                    if len(pkgs_normal) > 1:
+                        pkg.log('no preferred versions', severity=Logger.WARNING)
+                    yield from pkgs_normal
 
         factory.log('{} total entries'.format(total_entries))

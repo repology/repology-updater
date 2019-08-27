@@ -10,7 +10,7 @@
   family: wikidata
   ruleset: [ wikidata ]
   color: "339966"
-  minpackages: 11000
+  minpackages: 3000
   sources:
     - name: result.json
       fetcher: FileFetcher
