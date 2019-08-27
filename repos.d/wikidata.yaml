@@ -41,13 +41,11 @@
                 ?project
                 (
                   # concatenate all versions
-                  GROUP_CONCAT(DISTINCT
+                  GROUP_CONCAT(
                     # append flags to each version
                     CONCAT(
-                      $version,
-                      IF(BOUND(?versionTypes), ?versionTypes, ''),
-                      IF(BOUND(?versionOSes), ?versionOSes, ''),
-                      IF(BOUND(?versionPlatforms), ?versionPlatforms, '')
+                      ?version,
+                      ?versionSuffixes
                     ); separator=', '
                   )
                   AS ?versions
@@ -57,12 +55,18 @@
                 (SAMPLE(?repology_projects) as ?repology_projects)
               WHERE {
                 {
-                  SELECT DISTINCT
+                  SELECT
                     ?project
                     ?version
-                    (GROUP_CONCAT(DISTINCT ?versionType; separator='') as ?versionTypes)
-                    (GROUP_CONCAT(DISTINCT ?versionOS; separator='') as ?versionOSes)
-                    (GROUP_CONCAT(DISTINCT ?versionPlatform; separator='') as ?versionPlatforms)
+                    (
+                      CONCAT(
+                        GROUP_CONCAT(DISTINCT ?versionRankSuffix; separator=''),
+                        GROUP_CONCAT(DISTINCT ?versionTypeSuffix; separator=''),
+                        GROUP_CONCAT(DISTINCT ?versionOSSuffix; separator=''),
+                        GROUP_CONCAT(DISTINCT ?versionPlatformSuffix; separator='')
+                      )
+                      as ?versionSuffixes
+                    )
                     (GROUP_CONCAT(DISTINCT ?repology_project; separator=', ') as ?repology_projects)
                   WHERE {
                     ?project wdt:P6931 ?repology_project .
@@ -71,9 +75,21 @@
                     ?project p:P348 ?versionItem .
 
                     # Version number
-                    ?versionItem ps:P348 $version .
+                    ?versionItem ps:P348 ?version .
 
-                    FILTER NOT EXISTS { ?versionItem wikibase:rank wikibase:DeprecatedRank }
+                    # Version rank
+                    ?versionItem wikibase:rank ?versionRank .
+
+                    FILTER (?versionRank != wikibase:DeprecatedRank)
+
+                    BIND(
+                      IF(
+                        ?versionRank = wikibase:PreferredRank,
+                        '|R',
+                        ''
+                      )
+                      AS ?versionRankSuffix
+                    )
 
                     # Version type (stable, unstable, ...)
                     # we reduce it to just two flags which indicate
@@ -90,7 +106,7 @@
                           '|S',
                           '|U'
                         )
-                        AS ?versionType
+                        AS ?versionTypeSuffix
                       )
                     }
                     # Version os
@@ -107,7 +123,7 @@
                           '|O',
                           '|o'
                         )
-                        AS ?versionOS
+                        AS ?versionOSSuffix
                       )
                     }
                     # same for platform
@@ -137,7 +153,7 @@
                             ''
                           )
                         )
-                        AS ?versionPlatform
+                        AS ?versionPlatformSuffix
                       )
                     }
                   }
