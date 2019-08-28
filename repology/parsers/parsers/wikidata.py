@@ -16,7 +16,10 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import json
+from functools import cmp_to_key
 from typing import Dict, Iterable
+
+from libversion import version_compare
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -90,10 +93,18 @@ class WikidataJsonParser(Parser):
                             pkgs_normal.append(namepkg)
 
                 if pkgs_preferred:
+                    # temporary diagnostics until Wikidata usage in Wikipedia gains more momentum
+                    # before that, we can/have to help keeping it up to date
+                    max_preferred_version = max((pkg.version for pkg in pkgs_preferred), key=cmp_to_key(version_compare))
+                    max_normal_version = max((pkg.version for pkg in pkgs_normal if not pkg.flags & PackageFlags.DEVEL), key=cmp_to_key(version_compare), default=None)
+
+                    if max_normal_version and version_compare(max_preferred_version, max_normal_version) < 0:
+                        pkg.log('preferred version {} is less than normal {}'.format(max_preferred_version, max_normal_version), severity=Logger.WARNING)
+
                     yield from pkgs_preferred
                 else:
-                    if len(pkgs_normal) > 1:
-                        pkg.log('no preferred versions', severity=Logger.WARNING)
+                    if len(pkgs_normal) > len(names):
+                        pkg.log('no preferred version(s) (out of {})'.format(len(pkgs_normal) // len(names)), severity=Logger.WARNING)
                     yield from pkgs_normal
 
         factory.log('{} total entries'.format(total_entries))
