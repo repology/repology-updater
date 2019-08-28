@@ -38,10 +38,13 @@
           WHERE {
             {
               SELECT
+                # the following query returns (versions) x (websites) x (license) x (repology_projects)
+                # entries which are then grouped by project, and we always need DISTINCT below to remove
+                # duplicates
                 ?project
                 (
                   # concatenate all versions
-                  GROUP_CONCAT(
+                  GROUP_CONCAT(DISTINCT
                     # append flags to each version
                     CONCAT(
                       ?version,
