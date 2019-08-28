@@ -21,6 +21,7 @@ from typing import Iterable
 
 import lxml.html
 
+from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
@@ -47,8 +48,24 @@ class GuixJsonParser(Parser):
                 pkg.set_name(pkgdata['name'])
                 pkg.set_version(pkgdata['version'], _normalize_version)
                 pkg.set_summary(pkgdata['synopsis'])
-                if pkgdata.get('homepage'):  # may be boolean False
-                    pkg.add_homepages(pkgdata['homepage'])
+                pkg.add_homepages(pkgdata.get('homepage'))
+                pkg.set_extra_field('location', pkgdata['location'])
+
+                if 'source' in pkgdata:
+                    source = pkgdata['source']
+                    if source['type'] == 'url':
+                        pkg.add_downloads(source['url'])
+                    elif source['type'] == 'svn':
+                        pkg.add_downloads(source['svn_url'])
+                        if source['svn_revision'] in re.split('[._-]', pkgdata['version']):
+                            # ignore versions which contain SVN revision, e.g. snapshots
+                            pkg.set_flag(PackageFlags.IGNORE)
+                    elif source['type'] == 'git':
+                        pkg.add_downloads(source['git_url'])
+                        if len(source['git_ref']) == 40 and source['git_ref'][:7] in pkgdata['version']:
+                            # versions which contain GIT commit are definitely incorrect
+                            pkg.set_flag(PackageFlags.INCORRECT)
+
                 yield pkg
 
 
