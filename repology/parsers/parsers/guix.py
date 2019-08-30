@@ -26,42 +26,49 @@ from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
 
 
-def _normalize_version(version: str) -> str:
-    # https://guix.gnu.org/manual/en/html_node/Version-Numbers.html
-    # Revision is assumed to be -, then number, then commit hash
-    # of reasonable length (usually 7+ chars). However, there are also
-    # a few cases with shorter numbers in the end, presumably SVN revisions
-    # (4.9.4-1.227977, 0.9-rc3-0.2341), so set this to as small as 4
-    #                                        V
-    match = re.match('(.*)-[0-9]+\\.[0-9a-f]{4,}$', version)
-    if match:
-        return match.group(1)
-    return version
-
-
 class GuixJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgdata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
                 pkg.set_name(pkgdata['name'])
-                pkg.set_version(pkgdata['version'], _normalize_version)
+                pkg.set_version(pkgdata['version'])
                 pkg.set_summary(pkgdata['synopsis'])
                 pkg.add_homepages(pkgdata.get('homepage'))
                 pkg.set_extra_field('location', pkgdata['location'])
 
                 if 'source' in pkgdata:
                     source = pkgdata['source']
+
                     if source['type'] == 'url':
                         pkg.add_downloads(source['url'])
+                        if re.fullmatch('.*-[0-9]+\\.[0-9a-f]{4,}', pkgdata['version']):
+                            # snapshot pattern with plain url
+                            pkg.set_flags(PackageFlags.IGNORE)  # e.g. snapshot
                     elif source['type'] == 'svn':
                         pkg.add_downloads(source['svn_url'])
-                        if source['svn_revision'] in re.split('[._-]', pkgdata['version']):
-                            # ignore versions which contain SVN revision, e.g. snapshots
-                            pkg.set_flag(PackageFlags.IGNORE)
+
+                        if str(source['svn_revision']) in re.split('[._-]', pkgdata['version']):
+                            # svn revision in version
+                            pkg.set_flags(PackageFlags.IGNORE)  # e.g. snapshot
                     elif source['type'] == 'git':
                         pkg.add_downloads(source['git_url'])
-                        if len(source['git_ref']) == 40 and source['git_ref'][:7] in pkgdata['version']:
-                            # versions which contain GIT commit are definitely incorrect
-                            pkg.set_flag(PackageFlags.INCORRECT)
+
+                        if re.fullmatch('[0-9a-f]{7,}', source['git_ref']) and not re.fullmatch('[0-9]{8}', source['git_ref']):
+                            # ref is a commit hash, not a tag
+                            if len(source['git_ref']) != 40:
+                                pkg.log('treating git_ref as trimmed commit hash: {}'.format(source['git_ref']), Logger.WARNING)
+
+                            match = re.fullmatch('(.*)-[0-9]+\\.([0-9a-f]{7,})', pkgdata['version'])
+                            if match is not None and source['git_ref'].startswith(match.group(2)):
+                                # commit hash in version, allowed pattern documented in
+                                # https://guix.gnu.org/manual/en/html_node/Version-Numbers.html
+                                pkg.set_flags(PackageFlags.IGNORE)  # e.g. snapshot
+                            elif source['git_ref'][:7] in pkgdata['version']:
+                                # git commit in version and not a known pattern
+                                pkg.set_flags(PackageFlags.INCORRECT)
+                    else:  # type == 'none'
+                        if re.fullmatch('.*-[0-9]+\\.[0-9a-f]{4,}', pkgdata['version']):
+                            # snapshot pattern anyway
+                            pkg.set_flags(PackageFlags.IGNORE)  # e.g. snapshot
 
                 yield pkg
