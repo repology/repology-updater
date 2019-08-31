@@ -1,0 +1,22 @@
+###########################################################################
+# Ataraxia Linux
+###########################################################################
+- name: ataraxia
+  type: repository
+  desc: Ataraxia Linux
+  family: ataraxia
+  minpackages: 500
+  sources:
+    - name: ataraxia
+      fetcher: GitFetcher
+      parser: AtaraxiaParser
+      url: 'https://github.com/ataraxialinux/ataraxia.git'
+  repolinks:
+    - desc: Ataraxia Linux home
+      url: https://ataraxialinux.github.io/
+    - desc: Code
+      url: https://github.com/ataraxialinux/ataraxia
+  packagelinks:
+    - desc: Package directory on GitHub
+      url: 'https://github.com/ataraxialinux/ataraxia/blob/master/packages/{name}/KagamiBuild'
+  tags: [ all, production ]
