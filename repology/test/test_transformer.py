@@ -212,6 +212,14 @@ class TestPackageTransformer(unittest.TestCase):
             {'name': 'p3', 'version': '3.0', 'expect_effname': 'baz'}
         )
 
+    def test_match_vernot(self) -> None:
+        self.check_transformer(
+            '[ { notver: "1.0", setname: bar }, { notver: ["1.0", "3.0"], setname: baz } ]',
+            {'name': 'p1', 'version': '1.0', 'expect_effname': 'p1'},
+            {'name': 'p2', 'version': '2.0', 'expect_effname': 'baz'},
+            {'name': 'p3', 'version': '3.0', 'expect_effname': 'bar'}
+        )
+
     def test_match_verpat(self) -> None:
         self.check_transformer(
             '[ { verpat: "1.*", setname: bar } ]',

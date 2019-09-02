@@ -234,6 +234,22 @@ class Rule:
 
                 self._matchers.append(vers_matcher)
 
+        if 'notver' in ruledata:
+            notversions: Final = as_set(ruledata['notver'])
+
+            if len(notversions) == 1:
+                notversion: Final[str] = notversions.pop()
+
+                def notver_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                    return package.version != notversion
+
+                self._matchers.append(notver_matcher)
+            else:
+                def notvers_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                    return package.version not in notversions
+
+                self._matchers.append(notvers_matcher)
+
         if 'verpat' in ruledata:
             verpat: Final = re.compile(ruledata['verpat'].replace('\n', '').lower(), re.ASCII)
 
