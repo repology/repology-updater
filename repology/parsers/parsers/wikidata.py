@@ -97,14 +97,30 @@ class WikidataJsonParser(Parser):
                     # before that, we can/have to help keeping it up to date
                     max_preferred_version = max((pkg.version for pkg in pkgs_preferred), key=cmp_to_key(version_compare))
                     max_normal_version = max((pkg.version for pkg in pkgs_normal if not pkg.flags & PackageFlags.DEVEL), key=cmp_to_key(version_compare), default=None)
+                    max_devel_version = max((pkg.version for pkg in pkgs_normal if pkg.flags & PackageFlags.DEVEL), key=cmp_to_key(version_compare), default=None)
 
                     if max_normal_version and version_compare(max_preferred_version, max_normal_version) < 0:
-                        pkg.log('preferred version {} is less than normal {}'.format(max_preferred_version, max_normal_version), severity=Logger.WARNING)
+                        pkg.log('preferred version {} < normal {} (may need rank update)'.format(max_preferred_version, max_normal_version), severity=Logger.WARNING)
+
+                    if max_devel_version and version_compare(max_devel_version, max_preferred_version) > 0:
+                        pkg.log('devel version {} < preferred {} (may need preferred rank for devel version)'.format(max_devel_version, max_preferred_version), severity=Logger.WARNING)
 
                     yield from pkgs_preferred
                 else:
-                    if len(pkgs_normal) > len(names):
-                        pkg.log('no preferred version(s) (out of {})'.format(len(pkgs_normal) // len(names)), severity=Logger.WARNING)
+                    num_devel = 0
+                    num_stable = 0
+                    for pkg in pkgs_normal:
+                        if pkg.flags & PackageFlags.DEVEL:
+                            num_devel += 1
+                        else:
+                            num_stable += 1
+
+                    if num_devel > len(names):
+                        pkg.log('no preferred devel version(s) set (out of {})'.format(num_devel // len(names)), severity=Logger.WARNING)
+
+                    if num_stable > len(names):
+                        pkg.log('no preferred stable version(s) set (out of {})'.format(num_stable // len(names)), severity=Logger.WARNING)
+
                     yield from pkgs_normal
 
         factory.log('{} total entries'.format(total_entries))
