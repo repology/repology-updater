@@ -112,6 +112,9 @@
                         AS ?versionTypeSuffix
                       )
                     }
+                    # remove these (non-)versions completely
+                    FILTER (COALESCE(?versionTypeItem != wd:Q3133388, TRUE))  # trunk
+
                     # Version os
                     # See VLC package; there's different versioning schemas for different OSes
                     # and we need to filter out e.g. iOS releases
