@@ -82,6 +82,7 @@ class WikidataJsonParser(Parser):
 
                     verpkg.set_flags(PackageFlags.DEVEL, is_devel)
                     verpkg.set_version(version)
+                    verpkg.add_downloads(flag for flag in flags if len(flag) > 1)
 
                     # generate package for each repology project
                     for name in names:
