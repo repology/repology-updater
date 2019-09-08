@@ -105,7 +105,8 @@
                           ?versionTypeItem = wd:Q15726348 ||  # long-term support version
                           ?versionTypeItem = wd:Q18434478 ||  # maintenance version
                           ?versionTypeItem = wd:Q20631656 ||  # release
-                          ?versionTypeItem = wd:Q48028851,    # patch version
+                          ?versionTypeItem = wd:Q48028851 ||  # patch version
+                          ?versionTypeItem = wd:Q55567596,    # bug-fix version
                           '|S',
                           '|U'
                         )
