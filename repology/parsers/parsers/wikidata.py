@@ -48,8 +48,8 @@ class WikidataJsonParser(Parser):
                 pkg.set_extra_field('entity', entity)
                 pkg.set_name(label)
                 pkg.set_summary(packagedata.get('projectDescription'))
-                pkg.add_licenses(packagedata.get('licenses', '').split(', '))
-                pkg.add_homepages(packagedata.get('websites', '').split(', '))
+                pkg.add_licenses(sorted(packagedata.get('licenses', '').split(', ')))
+                pkg.add_homepages(sorted(packagedata.get('websites', '').split(', ')))
 
                 names = sorted(packagedata['repology_projects'].split(', '))
 
@@ -82,7 +82,7 @@ class WikidataJsonParser(Parser):
 
                     verpkg.set_flags(PackageFlags.DEVEL, is_devel)
                     verpkg.set_version(version)
-                    verpkg.add_downloads(flag for flag in flags if len(flag) > 1)
+                    verpkg.add_downloads(sorted(flag for flag in flags if len(flag) > 1))
 
                     # generate package for each repology project
                     for name in names:
