@@ -15,12 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import re
 from typing import Iterable
 
-import lxml.html
-
+from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -65,42 +63,5 @@ class GuixJsonParser(Parser):
                         if len(source['git_ref']) == 40 and source['git_ref'][:7] in pkgdata['version']:
                             # versions which contain GIT commit are definitely incorrect
                             pkg.set_flag(PackageFlags.INCORRECT)
-
-                yield pkg
-
-
-# Legacy website parser, for reference purposes
-class GuixWebsiteParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        for filename in os.listdir(path):
-            if not filename.endswith('.html'):
-                continue
-
-            root = None
-            with open(os.path.join(path, filename), encoding='utf-8') as htmlfile:
-                root = lxml.html.document_fromstring(htmlfile.read())
-
-            for row in root.xpath('.//div[@class="package-preview"]'):
-                pkg = factory.begin()
-
-                # header
-                cell = row.xpath('./h3[@class="package-name"]')[0]
-
-                name, version = cell.text.split(None, 1)
-                pkg.set_name(name)
-                pkg.set_version(version, _normalize_version)
-
-                pkg.set_summary(cell.xpath('./span[@class="package-synopsis"]')[0].text.strip().strip('—'))
-
-                # details
-                for cell in row.xpath('./ul[@class="package-info"]/li'):
-                    key = cell.xpath('./b')[0].text
-
-                    if key == 'License:':
-                        pkg.add_licenses([a.text for a in cell.xpath('./a')])
-                    elif key == 'Website:':
-                        pkg.add_homepages(cell.xpath('./a')[0].attrib['href'])
-                    elif key == 'Package source:':
-                        pkg.set_extra_field('source', cell.xpath('./a')[0].text)
 
                 yield pkg
