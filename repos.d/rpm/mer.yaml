@@ -19,4 +19,4 @@
   packagelinks:
     - desc: Package page on SailfishOS OBS
       url: 'https://build.merproject.org/package/show/mer:core/{name}'
-  tags: [ all, production, mer, rpm ]
+  tags: [ all, mer, rpm ]  # most packages gone
