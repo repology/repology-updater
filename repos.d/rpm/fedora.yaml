@@ -85,7 +85,7 @@
     - name: updates
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/28/SRPMS/
+      url: https://archives.fedoraproject.org/pub/archive/fedora/linux/updates/28/Everything/SRPMS/
       subrepo: '{source}'
   repolinks:
     - desc: Fedora home
