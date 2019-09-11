@@ -96,11 +96,11 @@ DO UPDATE SET
 		CASE
 			WHEN
 				-- no change (both defined and equal)
-				version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) = 0
+				version_compare2(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) = 0
 			THEN metapackages.devel_version_update
 			WHEN
 				-- trusted update (both should be defined)
-				version_compare_simple(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) > 0 AND
+				version_compare2(EXCLUDED.devel_versions[1], metapackages.devel_versions[1]) > 0 AND
 				EXCLUDED.devel_repos && metapackages.all_repos
 			THEN now()
 			ELSE NULL -- else reset
@@ -112,11 +112,11 @@ DO UPDATE SET
 		CASE
 			WHEN
 				-- no change (both defined and equal)
-				version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) = 0
+				version_compare2(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) = 0
 			THEN metapackages.newest_version_update
 			WHEN
 				-- trusted update (both should be defined)
-				version_compare_simple(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) > 0 AND
+				version_compare2(EXCLUDED.newest_versions[1], metapackages.newest_versions[1]) > 0 AND
 				EXCLUDED.newest_repos && metapackages.all_repos
 			THEN now()
 			ELSE NULL -- else reset

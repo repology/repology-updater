@@ -123,7 +123,7 @@ BEGIN
 		(
 			old IS NOT NULL AND
 			new IS NOT NULL AND
-			version_compare_simple(old[1], new[1]) != 0
+			version_compare2(old[1], new[1]) != 0
 		) OR (old IS NULL) != (new IS NULL);
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
