@@ -18,7 +18,7 @@
 import re
 from typing import AbstractSet, Any, Callable, Dict, Iterable, List, Match, MutableSet, Optional, Pattern, Set, TYPE_CHECKING
 
-from libversion import version_compare
+from libversion import LOWER_BOUND, UPPER_BOUND, version_compare
 
 from repology.package import Package, PackageFlags
 
@@ -270,6 +270,7 @@ class Rule:
 
             self._matchers.append(verlonger_matcher)
 
+        # ver* matchers
         if 'vergt' in ruledata:
             vergt: Final[str] = ruledata['vergt']
 
@@ -318,6 +319,56 @@ class Rule:
 
             self._matchers.append(verne_matcher)
 
+        # rel* matchers
+        if 'relgt' in ruledata:
+            relgt: Final[str] = ruledata['relgt']
+
+            def relgt_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return version_compare(package.version, relgt, 0, UPPER_BOUND) > 0
+
+            self._matchers.append(relgt_matcher)
+
+        if 'relge' in ruledata:
+            relge: Final[str] = ruledata['relge']
+
+            def relge_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return version_compare(package.version, relge, 0, LOWER_BOUND) > 0
+
+            self._matchers.append(relge_matcher)
+
+        if 'rellt' in ruledata:
+            rellt: Final[str] = ruledata['rellt']
+
+            def rellt_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return version_compare(package.version, rellt, 0, LOWER_BOUND) < 0
+
+            self._matchers.append(rellt_matcher)
+
+        if 'relle' in ruledata:
+            relle: Final[str] = ruledata['relle']
+
+            def relle_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return version_compare(package.version, relle, 0, UPPER_BOUND) < 0
+
+            self._matchers.append(relle_matcher)
+
+        if 'releq' in ruledata:
+            releq: Final[str] = ruledata['releq']
+
+            def releq_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return version_compare(package.version, releq, 0, LOWER_BOUND) > 0 and version_compare(package.version, releq, 0, UPPER_BOUND) < 0
+
+            self._matchers.append(releq_matcher)
+
+        if 'relne' in ruledata:
+            relne: Final[str] = ruledata['relne']
+
+            def relne_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return version_compare(package.version, relne, 0, LOWER_BOUND) < 0 or version_compare(package.version, relne, 0, UPPER_BOUND) > 0
+
+            self._matchers.append(relne_matcher)
+
+        # www* matchers
         if 'wwwpat' in ruledata:
             wwwpat: Final[Pattern[str]] = re.compile(ruledata['wwwpat'].replace('\n', '').lower(), re.ASCII)
 
