@@ -134,6 +134,51 @@
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]
 
+- name: opensuse_leap_15_2
+  type: repository
+  desc: openSUSE Leap 15.2
+  family: opensuse
+  color: '6da741'
+  minpackages: 10500
+  sources:
+    - name: oss
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://download.opensuse.org/source/distribution/leap/15.2/repo/oss/
+      subrepo: main/oss
+      allowed_archs: [ src ]
+    - name: non-oss
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://download.opensuse.org/source/distribution/leap/15.2/repo/non-oss/
+      subrepo: main/non-oss
+      allowed_archs: [ src ]
+    - name: updates-oss
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://download.opensuse.org/update/leap/15.2/oss/
+      subrepo: updates/oss
+      allowed_archs: [ src ]
+    - name: updates-non-oss
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://download.opensuse.org/update/leap/15.2/non-oss/
+      subrepo: updates/non-oss
+      allowed_archs: [ src ]
+      disabled: true # not there yet
+  repolinks:
+    - desc: openSUSE home
+      url: https://www.opensuse.org/
+    - desc: openSUSE package search
+      url: https://software.opensuse.org/
+  packagelinks:
+    # NOTE: openSUSE:Leap:15.2:Update automatically inherits openSUSE:Leap:15.2
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.2:Update/{name}'
+    - desc: Package details on software.opensuse.org
+      url: 'https://software.opensuse.org/package/{name}'
+  tags: [ all, production, opensuse, rpm ]
+
 - name: opensuse_tumbleweed
   type: repository
   desc: openSUSE Tumbleweed
