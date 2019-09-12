@@ -183,3 +183,23 @@
     - desc: Package details on software.opensuse.org
       url: 'https://software.opensuse.org/package/{name}'
   tags: [ all, production, opensuse, rpm ]
+
+- name: opensuse_hardware_sdr_tumbleweed
+  sortname: opensusez_hardware_sdr
+  type: repository
+  desc: openSUSE Hardware:SDR Tumbleweed
+  family: opensuse
+  color: '6da741'
+  minpackages: 120
+  sources:
+    - name: data
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: http://download.opensuse.org/repositories/hardware:/sdr/openSUSE_Tumbleweed/
+      allowed_archs: ['src']
+  packagelinks:
+    - desc: Package in openSUSE Build Service
+      url: 'https://build.opensuse.org/package/show/hardware:/sdr/{name}'
+    - desc: Package details on software.opensuse.org
+      url: 'https://software.opensuse.org/package/{name}'
+  tags: [ all, production, opensuse, rpm ]
