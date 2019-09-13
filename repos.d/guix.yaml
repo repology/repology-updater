@@ -21,7 +21,6 @@
   packagelinks:
     - desc: Package page on Guix site
       url: 'https://guix.gnu.org/packages/{name}-{rawversion}/'
-    # XXX: does not work because of url escaping in packageformatter
-    #- desc: Package source in Git
-    #  url: 'https://git.savannah.gnu.org/cgit/guix.git/tree/{location|guixlocation2github}'
+    - desc: Package source in Git
+      url: 'https://git.savannah.gnu.org/cgit/guix.git/tree/{loc_path}#n{loc_line|dec}'
   tags: [ all, production ]

@@ -34,7 +34,10 @@ class GuixJsonParser(Parser):
                 pkg.set_version(pkgdata['version'])
                 pkg.set_summary(pkgdata['synopsis'])
                 pkg.add_homepages(pkgdata.get('homepage'))
-                pkg.set_extra_field('location', pkgdata['location'])
+
+                path, lineno = pkgdata['location'].split(':')
+                pkg.set_extra_field('loc_path', path)
+                pkg.set_extra_field('loc_line', lineno)
 
                 if 'source' in pkgdata:
                     source = pkgdata['source']
