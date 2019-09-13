@@ -23,9 +23,8 @@ from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.metapackage_request import MetapackageRequest
 from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_range, packages_to_summary_items
+from repologyapp.package import Package
 from repologyapp.view_registry import ViewRegistrar
-
-from repology.package import Package
 
 
 @ViewRegistrar('/projects/')

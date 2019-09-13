@@ -18,9 +18,8 @@
 from typing import Dict, List, Optional, Tuple
 
 from repologyapp.globals import get_text_width
+from repologyapp.package import PackageStatus
 from repologyapp.xmlwriter import XmlDocument
-
-from repology.package import PackageStatus
 
 
 def _truncate(s: str, length: int, end: str = '...') -> str:

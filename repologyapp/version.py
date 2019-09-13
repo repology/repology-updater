@@ -22,7 +22,7 @@ from typing import Any
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
-from repology.package import Package, PackageFlags
+from repologyapp.package import Package, PackageFlags
 
 
 @total_ordering

@@ -23,9 +23,8 @@ import flask
 from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.metapackages import MetapackagesFilterInfo, packages_to_metapackages
+from repologyapp.package import Package, PackageStatus
 from repologyapp.view_registry import ViewRegistrar
-
-from repology.package import Package, PackageStatus
 
 
 def api_v1_package_to_json(package: Package) -> Dict[str, Any]:

@@ -20,7 +20,7 @@ import string
 import urllib.parse
 from typing import Any, Callable, ClassVar, Dict, Mapping, Optional, Sequence, Union
 
-from repology.package import Package
+from repologyapp.package import Package
 
 __all__ = ['PackageFormatter']
 

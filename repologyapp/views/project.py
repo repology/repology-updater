@@ -29,10 +29,9 @@ from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.metapackages import packages_to_summary_items
+from repologyapp.package import Package, PackageStatus
 from repologyapp.packageproc import packageset_aggregate_by_version, packageset_sort_by_name_version, packageset_sort_by_version
 from repologyapp.view_registry import ViewRegistrar
-
-from repology.package import Package, PackageStatus
 
 
 def handle_nonexisting_project(name: str, metapackage: Dict[str, Any]) -> Any:

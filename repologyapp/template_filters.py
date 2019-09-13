@@ -17,9 +17,8 @@
 
 from typing import Iterable, List, Optional
 
+from repologyapp.package import Package, PackageStatus
 from repologyapp.packageformatter import PackageFormatter
-
-from repology.package import Package, PackageStatus
 
 
 __all__ = ['maintainer_to_links', 'maintainers_to_group_mailto', 'pkg_format', 'css_for_versionclass']

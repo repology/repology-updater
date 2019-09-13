@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from functools import cmp_to_key
 from typing import Dict, Iterable, List, Optional, Tuple
 
-from repology.package import Package, PackageStatus
+from repologyapp.package import Package, PackageStatus
 
 
 def packageset_sort_by_version(packages: Iterable[Package]) -> List[Package]:

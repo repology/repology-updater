@@ -22,9 +22,8 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tupl
 import flask
 
 from repologyapp.metapackage_request import MetapackageRequest
+from repologyapp.package import Package, PackageStatus
 from repologyapp.version import UserVisibleVersionInfo
-
-from repology.package import Package, PackageStatus
 
 
 class MetapackagesFilterInfo:

@@ -27,10 +27,9 @@ from libversion import version_compare
 from repologyapp.badges import BadgeCell, badge_color, render_generic_badge
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
+from repologyapp.package import Package, PackageStatus
 from repologyapp.packageproc import packageset_to_best, packageset_to_best_by_repo
 from repologyapp.view_registry import ViewRegistrar
-
-from repology.package import Package, PackageStatus
 
 
 @ViewRegistrar('/badge/vertical-allrepos/<name>.svg')
