@@ -21,13 +21,14 @@
 
 import unittest
 
-from repologyapp.package import Package
 from repologyapp.packageformatter import PackageFormatter
+
+from .package import spawn_package
 
 
 class TestVersionComparison(unittest.TestCase):
     def test_simple(self) -> None:
-        pkg = Package(name='foo', version='1.0', origversion='1.0_1', category='devel', subrepo='main', extrafields={'foo': 'bar'})
+        pkg = spawn_package(name='foo', version='1.0', origversion='1.0_1', category='devel', subrepo='main', extrafields={'foo': 'bar'})
         fmt = PackageFormatter()
 
         self.assertEqual(fmt.format('Just A String', pkg), 'Just A String')
@@ -36,45 +37,45 @@ class TestVersionComparison(unittest.TestCase):
     def test_filter_lowercase(self) -> None:
         fmt = PackageFormatter()
 
-        self.assertEqual(fmt.format('{name|lowercase}', Package(name='FOO', version='1.0')), 'foo')
+        self.assertEqual(fmt.format('{name|lowercase}', spawn_package(name='FOO', version='1.0')), 'foo')
 
     def test_filter_firstletter(self) -> None:
         fmt = PackageFormatter()
 
-        self.assertEqual(fmt.format('{name|firstletter}', Package(name='FOO', version='1.0')), 'f')
-        self.assertEqual(fmt.format('{name|firstletter}', Package(name='LIBFOO', version='1.0')), 'l')
+        self.assertEqual(fmt.format('{name|firstletter}', spawn_package(name='FOO', version='1.0')), 'f')
+        self.assertEqual(fmt.format('{name|firstletter}', spawn_package(name='LIBFOO', version='1.0')), 'l')
 
     def test_filter_libfirstletter(self) -> None:
         fmt = PackageFormatter()
 
-        self.assertEqual(fmt.format('{name|libfirstletter}', Package(name='FOO', version='1.0')), 'f')
-        self.assertEqual(fmt.format('{name|libfirstletter}', Package(name='LIBFOO', version='1.0')), 'libf')
+        self.assertEqual(fmt.format('{name|libfirstletter}', spawn_package(name='FOO', version='1.0')), 'f')
+        self.assertEqual(fmt.format('{name|libfirstletter}', spawn_package(name='LIBFOO', version='1.0')), 'libf')
 
     def test_basename(self) -> None:
         fmt = PackageFormatter()
 
-        self.assertEqual(fmt.format('{basename}', Package(name='foo', basename='bar')), 'bar')
-        self.assertEqual(fmt.format('{basename}', Package(name='foo')), 'foo')
+        self.assertEqual(fmt.format('{basename}', spawn_package(name='foo', basename='bar')), 'bar')
+        self.assertEqual(fmt.format('{basename}', spawn_package(name='foo')), 'foo')
 
     def test_escaping(self) -> None:
         self.assertEqual(
             PackageFormatter().format(
                 'package name is {name}',
-                Package(name='foo && $(bar) `date` "<>" \'<>\'')
+                spawn_package(name='foo && $(bar) `date` "<>" \'<>\'')
             ),
             'package name is foo && $(bar) `date` "<>" \'<>\''
         )
         self.assertEqual(
             PackageFormatter(escape_mode='url').format(
                 'http://example.com/{name}',
-                Package(name='foo && $(bar) `date` "<>" \'<>\'')
+                spawn_package(name='foo && $(bar) `date` "<>" \'<>\'')
             ),
             'http://example.com/foo%20%26%26%20%24%28bar%29%20%60date%60%20%22%3C%3E%22%20%27%3C%3E%27'
         )
         self.assertEqual(
             PackageFormatter(escape_mode='shell').format(
                 'echo {name}',
-                Package(name='foo && $(bar) `date` "<>" \'<>\'')
+                spawn_package(name='foo && $(bar) `date` "<>" \'<>\'')
             ),
             """echo 'foo && $(bar) `date` "<>" '"'"'<>'"'"''"""
             # What we'd actually prefer is something more like:

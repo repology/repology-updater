@@ -23,33 +23,101 @@ import unittest
 
 from repology.package import Package, PackageFlags
 
+from .package import spawn_package
+
 
 class TestParsers(unittest.TestCase):
-    def test_equality(self) -> None:
-        self.assertEqual(Package(), Package())
-        self.assertEqual(Package(name='a'), Package(name='a'))
+    def assert_version_compare(self, a: Package, b: Package, res: int) -> None:
+        self.assertEqual(a.version_compare(b), res)
 
-        self.assertNotEqual(Package(name='a'), Package(name='b'))
-        self.assertNotEqual(Package(), Package(name='b'))
-        self.assertNotEqual(Package(name='a'), Package())
+    def test_equality(self) -> None:
+        self.assertEqual(
+            spawn_package(),
+            spawn_package()
+        )
+        self.assertEqual(
+            spawn_package(name='a'),
+            spawn_package(name='a')
+        )
+
+        self.assertNotEqual(
+            spawn_package(name='a'),
+            spawn_package(name='b')
+        )
+        self.assertNotEqual(
+            spawn_package(),
+            spawn_package(name='b')
+        )
+        self.assertNotEqual(
+            spawn_package(name='a'),
+            spawn_package()
+        )
 
     def test_flag_p_is_patch(self) -> None:
-        self.assertEqual(Package(version='1.0p1').version_compare(Package(version='1.0p1')), 0)
-        self.assertEqual(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH).version_compare(Package(version='1.0p1')), 1)
-        self.assertEqual(Package(version='1.0p1').version_compare(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH)), -1)
-        self.assertEqual(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH).version_compare(Package(version='1.0p1', flags=PackageFlags.P_IS_PATCH)), 0)
+        self.assert_version_compare(
+            spawn_package(version='1.0p1'),
+            spawn_package(version='1.0p1'),
+            0
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0p1', flags=PackageFlags.P_IS_PATCH),
+            spawn_package(version='1.0p1'),
+            1
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0p1'),
+            spawn_package(version='1.0p1', flags=PackageFlags.P_IS_PATCH),
+            -1
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0p1', flags=PackageFlags.P_IS_PATCH),
+            spawn_package(version='1.0p1', flags=PackageFlags.P_IS_PATCH),
+            0
+        )
 
     def test_flag_outdated(self) -> None:
-        self.assertEqual(Package(version='1.0').version_compare(Package(version='1.0')), 0)
-        self.assertEqual(Package(version='1.0', flags=PackageFlags.OUTDATED).version_compare(Package(version='1.0')), -1)
-        self.assertEqual(Package(version='1.0').version_compare(Package(version='1.0', flags=PackageFlags.OUTDATED)), 1)
-        self.assertEqual(Package(version='1.0', flags=PackageFlags.OUTDATED).version_compare(Package(version='1.0', flags=PackageFlags.OUTDATED)), 0)
+        self.assert_version_compare(
+            spawn_package(version='1.0'),
+            spawn_package(version='1.0'),
+            0
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0', flags=PackageFlags.OUTDATED),
+            spawn_package(version='1.0'),
+            -1
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0'),
+            spawn_package(version='1.0', flags=PackageFlags.OUTDATED),
+            1
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0', flags=PackageFlags.OUTDATED),
+            spawn_package(version='1.0', flags=PackageFlags.OUTDATED),
+            0
+        )
 
     def test_flag_rolling(self) -> None:
-        self.assertEqual(Package(version='1.0').version_compare(Package(version='1.0')), 0)
-        self.assertEqual(Package(version='1.0', flags=PackageFlags.ROLLING).version_compare(Package(version='1.0')), 1)
-        self.assertEqual(Package(version='1.0').version_compare(Package(version='1.0', flags=PackageFlags.ROLLING)), -1)
-        self.assertEqual(Package(version='1.0', flags=PackageFlags.ROLLING).version_compare(Package(version='1.0', flags=PackageFlags.ROLLING)), 0)
+        self.assert_version_compare(
+            spawn_package(version='1.0'),
+            spawn_package(version='1.0'),
+            0
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0', flags=PackageFlags.ROLLING),
+            spawn_package(version='1.0'),
+            1
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0'),
+            spawn_package(version='1.0', flags=PackageFlags.ROLLING),
+            -1
+        )
+        self.assert_version_compare(
+            spawn_package(version='1.0', flags=PackageFlags.ROLLING),
+            spawn_package(version='1.0', flags=PackageFlags.ROLLING),
+            0
+        )
 
 
 if __name__ == '__main__':

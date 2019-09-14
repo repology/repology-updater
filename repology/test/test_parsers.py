@@ -42,12 +42,10 @@ class TestParsers(unittest.TestCase):
 
             # name must be filled
             'basename': None,
-            'effname': None,
 
             # version must be filled
             # origversion must be filled
             # rawversion must be filled
-            'versionclass': None,
 
             'arch': None,
 
@@ -66,6 +64,12 @@ class TestParsers(unittest.TestCase):
             'extrafields': {},
         }
 
+        # not relevant here
+        ignored_fields = [
+            'effname',
+            'versionclass',
+        ]
+
         reference_with_default.update(reference)
 
         def sort_lists(what: Dict[str, Any]) -> Dict[str, Any]:
@@ -80,8 +84,12 @@ class TestParsers(unittest.TestCase):
 
         for package in self.packages:
             if package.name == name:
+                actual_fields = package.__dict__
+                for field in ignored_fields:
+                    actual_fields.pop(field, None)
+
                 self.assertEqual(
-                    sort_lists(package.__dict__),
+                    sort_lists(actual_fields),
                     sort_lists(reference_with_default)
                 )
                 return

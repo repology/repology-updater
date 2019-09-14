@@ -72,7 +72,7 @@ def main() -> int:
         logger = FileLogger(options.logfile)
 
     if options.fields == 'all':
-        options.fields = sorted(Package().__dict__.keys())
+        options.fields = sorted(Package.__slots__)
     else:
         options.fields = options.fields.split(',')
 

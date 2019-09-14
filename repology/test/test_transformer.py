@@ -22,13 +22,16 @@
 import unittest
 from typing import Any, Dict
 
-from repology.package import Package, PackageFlags
+from repology.package import PackageFlags
 from repology.repomgr import RepositoryManager
 from repology.transformer import PackageTransformer
+
+from .package import spawn_package
 
 
 repomgr = RepositoryManager(repostext="""
 [
+    { name: dummyrepo, desc: dummyrepo, family: dummyrepo, sources: [] },
     { name: foo, desc: foo, family: foo, sources: [] },
     { name: bar, desc: bar, family: bar, sources: [] },
     { name: baz, desc: baz, family: baz, sources: [] }
@@ -48,7 +51,7 @@ class TestPackageTransformer(unittest.TestCase):
                 else:
                     create_params[field] = value
 
-            package = Package(**create_params)
+            package = spawn_package(**create_params)
             transformer.process(package)
 
             for field, value in expected_params.items():
