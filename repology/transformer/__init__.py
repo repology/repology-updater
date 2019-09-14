@@ -166,6 +166,7 @@ class PackageTransformer:
         if self._packages_processed == 1000 or self._packages_processed == 10000 or self._packages_processed == 100000 or self._packages_processed == 1000000:
             self._recalc_opt_ruleblocks()
 
+        # XXX: duplicate code: PackageMaker does the same
         package.effname = package.basename if package.basename is not None else package.name
 
         package_context = PackageContext()

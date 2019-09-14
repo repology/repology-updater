@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -310,6 +310,11 @@ class PackageMaker(PackageMakerBase):
             shadow=shadow,
 
             extrafields=self._package.extrafields,
+
+            # XXX: see comment for PackageStatus.UNPROCESSED
+            # XXX: duplicate code: PackageTransformer does the same
+            effname=self._package.basename if self._package.basename else self._package.name,
+            versionclass=PackageStatus.UNPROCESSED,
         )
 
     def clone(self, ident: Optional[str] = None, append_ident: Optional[str] = None) -> 'PackageMaker':

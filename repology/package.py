@@ -23,6 +23,11 @@ from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
 
 class PackageStatus:
+    # XXX: better make this state innrepresentable by introducing an intermediate
+    # type for inprocessed package, missing versionclass and other fields which
+    # are filled later
+    UNPROCESSED: ClassVar[int] = 0
+
     NEWEST: ClassVar[int] = 1
     OUTDATED: ClassVar[int] = 2
     IGNORED: ClassVar[int] = 3
@@ -169,14 +174,37 @@ class Package:
     shadow: bool
     flavors: List[str]
 
-    def __init__(self, repo=None, family=None, subrepo=None,
-                 name=None, basename=None, effname=None,
-                 version=None, origversion=None, rawversion=None, versionclass=None,
-                 arch=None,
-                 maintainers=None, category=None, comment=None, homepage=None, licenses=None, downloads=None,
-                 flags=0, shadow=False,
-                 flavors=None,
-                 extrafields=None):
+    def __init__(self, *,
+                 repo: str,
+                 family: str,
+
+                 name: str,
+                 effname: str,
+
+                 version: str,
+                 origversion: str,
+                 rawversion: str,
+
+                 versionclass: int,
+
+                 subrepo: Optional[str] = None,
+
+                 basename: Optional[str] = None,
+
+                 arch: Optional[str] = None,
+
+                 maintainers: Optional[List[str]] = None,
+                 category: Optional[str] = None,
+                 comment: Optional[str] = None,
+                 homepage: Optional[str] = None,
+                 licenses: Optional[List[str]] = None,
+                 downloads: Optional[List[str]] = None,
+
+                 extrafields: Optional[Dict[str, str]] = None,
+
+                 flags: int = 0,
+                 shadow: bool = False,
+                 flavors: Optional[List[str]] = None):
         # parsed, immutable
         self.repo = repo
         self.family = family
