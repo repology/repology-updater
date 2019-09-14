@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-# mypy: no-disallow-untyped-defs
 
 from typing import Any, ClassVar, Dict, List, Optional
 
@@ -278,7 +277,7 @@ class Package:
 
     # XXX: add signature to this, see https://github.com/python/mypy/issues/6523
     @property
-    def __dict__(self):
+    def __dict__(self):  # type: ignore
         return {slot: getattr(self, slot) for slot in self.__slots__}
 
     def __eq__(self, other: Any) -> bool:
