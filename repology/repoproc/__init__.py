@@ -104,20 +104,13 @@ class RepositoryProcessor:
                 if not packagemaker.check_sanity(verbose=True):
                     continue
 
-                package = packagemaker.unwrap()
-
-                # fill repository-specific fields
-                package.repo = repository['name']
-                package.family = repository['family']
-
-                if package.subrepo is None and 'subrepo' in source:
-                    package.subrepo = source['subrepo']
-
-                if repository.get('shadow', False):
-                    package.shadow = True
-
-                if not package.maintainers and 'default_maintainer' in repository:
-                    package.maintainers = [repository['default_maintainer']]
+                package = packagemaker.spawn(
+                    repo=repository['name'],
+                    family=repository['family'],
+                    subrepo=source.get('subrepo'),
+                    shadow=repository.get('shadow', False),
+                    default_maintainer=repository.get('default_maintainer'),
+                )
 
                 # transform
                 if transformer:

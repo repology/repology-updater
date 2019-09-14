@@ -15,29 +15,88 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-# mypy: no-disallow-untyped-defs
 # mypy: no-disallow-untyped-calls
-# mypy: no-disallow-untyped-decorators
 
 from abc import abstractmethod
 from copy import deepcopy
 from functools import wraps
-from typing import Any, Callable, Iterable, Optional
+from typing import Any, Callable, Dict, Iterable, List, Optional, Type
 
 from repology.logger import Logger
-from repology.package import Package
+from repology.package import Package, PackageStatus
 from repology.packagemaker import normalizers as nzs
+from repology.packagemaker.normalizers import NormalizerFunction
 
 
 __all__ = ['PackageFactory', 'PackageMaker']
 
 
-def _iter_unique(iterable, existing=None):
-    seen = set(existing) if existing else set()
-    for value in iterable:
-        if value not in seen:
-            seen.add(value)
-            yield value
+class PackageTemplate:
+    __slots__ = [
+        'subrepo',
+
+        'name',
+        'basename',
+
+        'version',
+        'origversion',
+        'rawversion',
+
+        'arch',
+        'summary',
+        'maintainers',
+        'categories',
+        'homepages',
+        'licenses',
+        'downloads',
+
+        'flags',
+
+        'extrafields',
+    ]
+
+    subrepo: Optional[str]
+
+    name: Optional[str]
+    basename: Optional[str]
+
+    version: Optional[str]
+    origversion: Optional[str]
+    rawversion: Optional[str]
+
+    arch: Optional[str]
+    summary: Optional[str]
+    maintainers: List[str]
+    categories: List[str]
+    homepages: List[str]
+    licenses: List[str]
+    downloads: List[str]
+
+    flags: int
+
+    extrafields: Dict[str, str]
+
+    def __init__(self) -> None:
+        self.subrepo = None
+
+        self.name = None
+        self.basename = None
+
+        self.version = None
+        self.origversion = None
+        self.rawversion = None
+
+        self.arch = None
+        self.summary = None
+        self.maintainers = []
+        self.categories = []
+        self.homepages = []
+        self.licenses = []
+        self.downloads = []
+
+        self.flags = 0
+
+        self.extrafields = {}
 
 
 class PackageMakerBase(Logger):
@@ -63,7 +122,7 @@ class PackageMakerBase(Logger):
             else:  # iterate
                 yield from PackageMakerBase._flatten_args(arg)
 
-    def _apply_normalizers(self, value, fieldname, normalizers):
+    def _apply_normalizers(self, value: Optional[str], fieldname: str, normalizers: Iterable[NormalizerFunction]) -> Optional[str]:
         origvalue = value
 
         for normalizer in normalizers:
@@ -77,7 +136,7 @@ class PackageMakerBase(Logger):
 
         return value
 
-    def _normalize_args(self, args, fieldname, want_type, normalizers):
+    def _normalize_args(self, args: Iterable[Any], fieldname: str, want_type: Any, normalizers: Iterable[NormalizerFunction]) -> Optional[List[Any]]:
         output = []
         for arg in PackageMakerBase._flatten_args(args):
             if not isinstance(arg, want_type):
@@ -90,42 +149,53 @@ class PackageMakerBase(Logger):
 
         return output
 
-    def _omnivorous_setter(fieldname, want_type, *normalizers):  # noqa: N805
-        def inner(method):
-            @wraps(method)
-            def wrapper(self, *args):
-                values = self._normalize_args(args, fieldname, want_type, normalizers)
-                if values:
-                    return method(self, *values)
-            return wrapper
-        return inner
 
-    def _simple_setter(fieldname, want_type, *normalizers):  # noqa: N805
-        def inner(method):
-            @wraps(method)
-            def wrapper(self, arg, *other_args):
-                if arg is None:
-                    pass
-                elif isinstance(arg, str) and want_type is int or isinstance(arg, int) and want_type is str:
-                    arg = want_type(arg)
-                elif not isinstance(arg, want_type):
-                    raise RuntimeError('unexpected type {} for {} (expected {})'.format(arg.__class__.__name__, fieldname, want_type.__name__))
-                value = self._apply_normalizers(arg, fieldname, normalizers)
-                if value:
-                    return method(self, value, *other_args)
-            return wrapper
-        return inner
+def _omnivorous_setter(fieldname: str, want_type: Type[Any], *normalizers: NormalizerFunction) -> Callable[[Callable[..., Any]], Any]:
+    def inner(method: Callable[..., Any]) -> Callable[..., Any]:
+        @wraps(method)
+        def wrapper(self: PackageMakerBase, *args: Any) -> Any:
+            values = self._normalize_args(args, fieldname, want_type, normalizers)
+            if values:
+                return method(self, *values)
+        return wrapper
+    return inner
+
+
+def _simple_setter(fieldname: str, want_type: Type[Any], *normalizers: NormalizerFunction) -> Callable[[Callable[..., Any]], Any]:
+    def inner(method: Callable[..., Any]) -> Callable[..., Any]:
+        @wraps(method)
+        def wrapper(self: PackageMakerBase, arg: Any, *other_args: Any) -> Any:
+            if arg is None:
+                pass
+            elif isinstance(arg, str) and want_type is int or isinstance(arg, int) and want_type is str:
+                arg = want_type(arg)
+            elif not isinstance(arg, want_type):
+                raise RuntimeError('unexpected type {} for {} (expected {})'.format(arg.__class__.__name__, fieldname, want_type.__name__))
+            value = self._apply_normalizers(arg, fieldname, normalizers)
+            if value:
+                return method(self, value, *other_args)
+        return wrapper
+    return inner
+
+
+def _extend_unique(existing: List[str], iterable: Iterable[str]) -> None:
+    seen = set(existing) if existing else set()
+
+    for value in iterable:
+        if value not in seen:
+            seen.add(value)
+            existing.append(value)
 
 
 class PackageMaker(PackageMakerBase):
-    _package: Package
+    _package: PackageTemplate
     _ident: Optional[str]
     _itemno: int
     _skipfailed: bool
 
     def __init__(self, logger: Logger, ident: Optional[str], itemno: int, skipfailed: bool = False) -> None:
         super(PackageMaker, self).__init__(logger)
-        self._package = Package()
+        self._package = PackageTemplate()
         self._ident = ident
         self._itemno = itemno
         self._skipfailed = skipfailed
@@ -133,29 +203,30 @@ class PackageMaker(PackageMakerBase):
     def _get_ident(self) -> str:
         return self._ident or self._package.extrafields.get('origin', None) or self._package.name or self._package.basename or 'item #{}'.format(self._itemno)
 
-    @PackageMakerBase._simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
+    @_simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
     def set_origin(self, origin: str) -> None:
         # XXX: convert to dedicated field
         self.set_extra_field('origin', origin)
 
-    @PackageMakerBase._simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
+    @_simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
     def set_name(self, name: str) -> None:
         self._package.name = name
 
-    @PackageMakerBase._simple_setter('basename', str, nzs.strip, nzs.forbid_newlines)
+    @_simple_setter('basename', str, nzs.strip, nzs.forbid_newlines)
     def set_basename(self, basename: str) -> None:
         self._package.basename = basename
 
     def prefix_name(self, prefix: str) -> None:
+        assert(self._package.name)
         self._package.name = prefix + self._package.name
 
-    @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
+    @_simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_version(self, version: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
         self._package.rawversion = version
         self._package.origversion = version if version_normalizer is None else version_normalizer(version)
         self._package.version = self._package.origversion
 
-    @PackageMakerBase._simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
+    @_simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_rawversion(self, rawversion: str) -> None:
         if rawversion != self._package.version:
             self._package.rawversion = rawversion
@@ -165,50 +236,81 @@ class PackageMaker(PackageMakerBase):
         self.set_name(name)
         self.set_version(version, version_normalizer)
 
-    @PackageMakerBase._simple_setter('arch', str, nzs.strip, nzs.forbid_newlines)
+    @_simple_setter('arch', str, nzs.strip, nzs.forbid_newlines)
     def set_arch(self, arch: str) -> None:
         self._package.arch = arch
 
-    @PackageMakerBase._simple_setter('subrepo', str, nzs.strip, nzs.forbid_newlines)
+    @_simple_setter('subrepo', str, nzs.strip, nzs.forbid_newlines)
     def set_subrepo(self, subrepo: str) -> None:
         self._package.subrepo = subrepo
 
-    @PackageMakerBase._simple_setter('summary', str, nzs.strip)
+    @_simple_setter('summary', str, nzs.strip)
     def set_summary(self, summary: str) -> None:
-        self._package.comment = summary
+        self._package.summary = summary
 
-    @PackageMakerBase._omnivorous_setter('maintainer', str, nzs.strip, nzs.forbid_newlines, nzs.tolower)
+    @_omnivorous_setter('maintainer', str, nzs.strip, nzs.forbid_newlines, nzs.tolower)
     def add_maintainers(self, *args: Any) -> None:
-        self._package.maintainers.extend(_iter_unique(args, self._package.maintainers))
+        _extend_unique(self._package.maintainers, args)
 
-    @PackageMakerBase._omnivorous_setter('category', str, nzs.strip, nzs.forbid_newlines)
+    @_omnivorous_setter('category', str, nzs.strip, nzs.forbid_newlines)
     def add_categories(self, *args: Any) -> None:
-        # XXX: convert into array
-        if not self._package.category:
-            self._package.category = args[0]
+        _extend_unique(self._package.categories, args)
 
-    @PackageMakerBase._omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
+    @_omnivorous_setter('homepage', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
     def add_homepages(self, *args: Any) -> None:
-        # XXX: convert into array
-        if not self._package.homepage:
-            self._package.homepage = args[0]
+        _extend_unique(self._package.homepages, args)
 
-    @PackageMakerBase._omnivorous_setter('license', str, nzs.strip, nzs.forbid_newlines)
+    @_omnivorous_setter('license', str, nzs.strip, nzs.forbid_newlines)
     def add_licenses(self, *args: Any) -> None:
-        self._package.licenses.extend(args)
+        _extend_unique(self._package.licenses, args)
 
-    @PackageMakerBase._omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
+    @_omnivorous_setter('download', str, nzs.strip, nzs.url, nzs.warn_whitespace, nzs.forbid_newlines)
     def add_downloads(self, *args: Any) -> None:
-        self._package.downloads.extend(_iter_unique(args, self._package.downloads))
+        _extend_unique(self._package.downloads, args)
 
     def set_flags(self, mask: int, is_set: bool = True) -> None:
-        self._package.set_flag(mask, is_set)
+        if is_set:
+            self._package.flags |= mask
+        else:
+            self._package.flags &= ~mask
 
     def set_extra_field(self, key: str, value: str) -> None:
         self._package.extrafields[key] = value
 
-    def unwrap(self) -> Package:
-        return self._package
+    def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
+        if self._package.name is None:
+            raise RuntimeError('Attempt to spawn Package with unset name')
+        if self._package.version is None:
+            raise RuntimeError('Attempt to spawn Package with unset version')
+
+        maintainers: List[str] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else []
+
+        return Package(
+            repo=repo,
+            family=family,
+            subrepo=self._package.subrepo or subrepo,
+
+            name=self._package.name,
+            basename=self._package.basename,
+
+            version=self._package.version,
+            origversion=self._package.version,
+            rawversion=self._package.rawversion if self._package.rawversion is not None else self._package.version,
+
+            arch=self._package.arch,
+
+            maintainers=maintainers,
+            category=self._package.categories[0] if self._package.categories else None,  # XXX: convert to array
+            comment=self._package.summary,
+            homepage=self._package.homepages[0] if self._package.homepages else None,  # XXX: convert to array
+            licenses=self._package.licenses,
+            downloads=self._package.downloads,
+
+            flags=self._package.flags,
+            shadow=shadow,
+
+            extrafields=self._package.extrafields,
+        )
 
     def clone(self, ident: Optional[str] = None, append_ident: Optional[str] = None) -> 'PackageMaker':
         offspring_ident = self._ident
