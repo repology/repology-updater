@@ -22,6 +22,7 @@ import flask
 from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.metapackages import packages_to_summary_items
+from repologyapp.package import PackageDataSummarizable
 from repologyapp.template_functions import url_for_self
 from repologyapp.view_registry import ViewRegistrar
 
@@ -122,8 +123,10 @@ def admin_redirects() -> Any:
             newnames = get_db().get_project_redirects(oldname)
 
             metapackages = get_db().get_metapackages(newnames)
-            packages = get_db().get_metapackages_packages(newnames, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
-            metapackagedata = packages_to_summary_items(packages)
+            metapackagedata = packages_to_summary_items(
+                PackageDataSummarizable(**item)
+                for item in get_db().get_metapackages_packages(newnames, summarizable=True)
+            )
 
     return flask.render_template(
         'admin-redirects.html',

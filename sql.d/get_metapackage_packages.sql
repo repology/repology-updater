@@ -19,47 +19,46 @@
 --
 -- @param effname
 -- @param fields=None
+-- @param minimal=False
+-- @param summarizable=False
+-- @param detailed=False
 -- @param repo=None
 --
--- @returns array of packages
+-- @returns array of dicts
 --
 --------------------------------------------------------------------------------
 SELECT
-{% if fields %}
-	{{ fields | join(',') }}
-{% else %}
-	-- parsed, immutable
+{% if minimal or summarizable or detailed %}
 	repo,
-	family,
+    family,
+
+    name,
+    effname,
+
+    version,
+    versionclass,
+
+    flags
+{%  if summarizable or detailed %},
+	maintainers
+{%   if detailed %},
 	subrepo,
 
-	name,
 	basename,
 
 	origversion,
 	rawversion,
 
-	arch,
-
-	maintainers,
 	category,
 	comment,
 	homepage,
 	licenses,
 	downloads,
-
-	extrafields,
-
-	-- calculated
-	effname,
-
-	version,
-	versionclass,
-
-	flags,
-	shadow,
-
-	flavors
+	extrafields
+{%   endif %}
+{%  endif %}
+{% elif fields %}
+	{{ fields | join(',') }}
 {% endif %}
 FROM packages
 WHERE

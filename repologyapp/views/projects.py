@@ -23,7 +23,7 @@ from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.metapackage_request import MetapackageRequest
 from repologyapp.metapackages import MetapackagesFilterInfo, get_packages_name_range, packages_to_summary_items
-from repologyapp.package import Package
+from repologyapp.package import PackageDataSummarizable
 from repologyapp.view_registry import ViewRegistrar
 
 
@@ -38,16 +38,19 @@ def projects(bound: Optional[str] = None) -> Any:
     request.set_bound(bound)
 
     # get packages
-    def get_packages(request: MetapackageRequest) -> Tuple[Dict[str, Dict[str, Any]], List[Package]]:
+    def get_packages(request: MetapackageRequest) -> Tuple[Dict[str, Dict[str, Any]], List[PackageDataSummarizable]]:
         metapackages = get_db().query_metapackages(
             **request.__dict__,
             limit=config['METAPACKAGES_PER_PAGE'],
         )
 
-        packages = get_db().get_metapackages_packages(
-            list(metapackages.keys()),
-            fields=['repo', 'family', 'effname', 'version', 'versionclass', 'maintainers', 'flags']
-        )
+        packages = [
+            PackageDataSummarizable(**item)
+            for item in get_db().get_metapackages_packages(
+                list(metapackages.keys()),
+                summarizable=True
+            )
+        ]
 
         return metapackages, packages
 

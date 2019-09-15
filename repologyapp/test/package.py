@@ -21,24 +21,37 @@
 
 from typing import Any, Dict
 
-from repologyapp.package import Package
+from repologyapp.package import PackageDataDetailed
 
 
-def spawn_package(**custom_args: Any) -> Package:
+def spawn_package(**custom_args: Any) -> PackageDataDetailed:
     args: Dict[str, Any] = {
         'repo': 'dummyrepo',
         'family': 'dummyfamily',
+        'subrepo': None,
 
         'name': 'dummyname',
+        'basename': None,
         'effname': 'dummyname',
 
         'version': '0',
         'origversion': '0',
         'rawversion': '0',
 
+        'maintainers': [],
+        'category': None,
+        'comment': None,
+        'homepage': None,
+        'licenses': [],
+        'downloads': [],
+
+        'extrafields': {},
+
         'versionclass': 0,
+
+        'flags': 0,
     }
 
     args.update(custom_args)
 
-    return Package(**args)
+    return PackageDataDetailed(**args)

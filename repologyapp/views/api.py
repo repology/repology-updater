@@ -23,11 +23,11 @@ import flask
 from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.metapackages import MetapackagesFilterInfo, packages_to_metapackages
-from repologyapp.package import Package, PackageStatus
+from repologyapp.package import PackageDataDetailed, PackageStatus
 from repologyapp.view_registry import ViewRegistrar
 
 
-def api_v1_package_to_json(package: Package) -> Dict[str, Any]:
+def api_v1_package_to_json(package: PackageDataDetailed) -> Dict[str, Any]:
     output = {
         field: getattr(package, field) for field in (
             'repo',
@@ -83,9 +83,11 @@ def api_v1_projects(bound: Optional[str] = None) -> Any:
 
     metapackages = get_db().query_metapackages(**request.__dict__, limit=config['METAPACKAGES_PER_PAGE'])
 
-    packages = get_db().get_metapackages_packages(list(metapackages.keys()))
+    metapackages = packages_to_metapackages(
+        PackageDataDetailed(**item)
+        for item in get_db().get_metapackages_packages(list(metapackages.keys()), detailed=True)
 
-    metapackages = packages_to_metapackages(packages)
+    )
 
     metapackages = {
         metapackage_name: [api_v1_package_to_json(package) for package in packageset]
@@ -101,10 +103,12 @@ def api_v1_projects(bound: Optional[str] = None) -> Any:
 @ViewRegistrar('/api/v1/project/<name>')
 def api_v1_project(name: str) -> Any:
     return (
-        dump_json(list(map(
-            api_v1_package_to_json,
-            get_db().get_metapackage_packages(name)
-        ))),
+        dump_json(
+            list(
+                api_v1_package_to_json(PackageDataDetailed(**item))
+                for item in get_db().get_metapackage_packages(name, detailed=True)
+            )
+        ),
         {'Content-type': 'application/json'}
     )
 

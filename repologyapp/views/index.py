@@ -23,6 +23,7 @@ from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.math import safe_percent
 from repologyapp.metapackages import packages_to_summary_items
+from repologyapp.package import PackageDataSummarizable
 from repologyapp.view_registry import ViewRegistrar
 
 
@@ -182,9 +183,10 @@ def index() -> Any:
 
     metapackages = get_db().get_metapackages(important_packages)
 
-    packages = get_db().get_metapackages_packages(important_packages, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
-
-    metapackagedata = packages_to_summary_items(packages)
+    metapackagedata = packages_to_summary_items(
+        PackageDataSummarizable(**item)
+        for item in get_db().get_metapackages_packages(important_packages, summarizable=True)
+    )
 
     return flask.render_template(
         'index.html',

@@ -29,7 +29,7 @@ from repologyapp.config import config
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
 from repologyapp.metapackages import packages_to_summary_items
-from repologyapp.package import Package, PackageStatus
+from repologyapp.package import PackageDataDetailed, PackageDataSummarizable, PackageStatus
 from repologyapp.packageproc import packageset_aggregate_by_version, packageset_sort_by_name_version, packageset_sort_by_version
 from repologyapp.view_registry import ViewRegistrar
 
@@ -50,9 +50,11 @@ def handle_nonexisting_project(name: str, metapackage: Dict[str, Any]) -> Any:
     if redirects:
         # show redirects
         metapackages = get_db().get_metapackages(redirects)
-        packages = get_db().get_metapackages_packages(redirects, fields=['family', 'effname', 'version', 'versionclass', 'flags'])
 
-        metapackagedata = packages_to_summary_items(packages)
+        metapackagedata = packages_to_summary_items(
+            PackageDataSummarizable(**item)
+            for item in get_db().get_metapackages_packages(redirects, summarizable=True)
+        )
 
     if not metapackage:
         return (
@@ -88,9 +90,12 @@ def project_versions(name: str) -> Any:
     if not metapackage or metapackage['num_repos'] == 0:
         return handle_nonexisting_project(name, metapackage)
 
-    packages = get_db().get_metapackage_packages(name)
+    packages = [
+        PackageDataDetailed(**item)
+        for item in get_db().get_metapackage_packages(name, detailed=True)
+    ]
 
-    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
+    packages_by_repo: Dict[str, List[PackageDataDetailed]] = defaultdict(list)
     for package in packages:
         packages_by_repo[package.repo].append(package)
 
@@ -114,11 +119,11 @@ def project_packages(name: str) -> Any:
     if not metapackage or metapackage['num_repos'] == 0:
         return handle_nonexisting_project(name, metapackage)
 
-    packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
-    for package in get_db().get_metapackage_packages(name):
+    packages_by_repo: Dict[str, List[PackageDataDetailed]] = defaultdict(list)
+    for package in (PackageDataDetailed(**item) for item in get_db().get_metapackage_packages(name, detailed=True)):
         packages_by_repo[package.repo].append(package)
 
-    packages: List[Package] = []
+    packages: List[PackageDataDetailed] = []
     for repo in repometadata.active_names():
         if repo in packages_by_repo:
             packages.extend(packageset_sort_by_name_version(packages_by_repo[repo]))
@@ -139,12 +144,17 @@ def project_information(name: str) -> Any:
     if not metapackage or metapackage['num_repos'] == 0:
         return handle_nonexisting_project(name, metapackage)
 
-    packages = get_db().get_metapackage_packages(name)
-    packages = sorted(packages, key=lambda package: package.repo + package.name + package.version)
+    packages = sorted(
+        (
+            PackageDataDetailed(**item)
+            for item in get_db().get_metapackage_packages(name, detailed=True)
+        ),
+        key=lambda package: package.repo + package.name + package.version
+    )
 
     information: Dict[str, Any] = {}
 
-    def append_info(infokey: str, infoval: str, package: Package) -> None:
+    def append_info(infokey: str, infoval: str, package: PackageDataDetailed) -> None:
         if infokey not in information:
             information[infokey] = {}
 
@@ -292,9 +302,10 @@ def project_related(name: str) -> Any:
 
     metapackages = get_db().get_metapackage_related_metapackages(name, limit=config['METAPACKAGES_PER_PAGE'])
 
-    packages = get_db().get_metapackages_packages(list(metapackages.keys()), fields=['family', 'effname', 'version', 'versionclass', 'flags'])
-
-    metapackagedata = packages_to_summary_items(packages)
+    metapackagedata = packages_to_summary_items(
+        PackageDataSummarizable(**item)
+        for item in get_db().get_metapackages_packages(list(metapackages.keys()), summarizable=True)
+    )
 
     too_many_warning = None
     if len(metapackagedata) == config['METAPACKAGES_PER_PAGE']:
@@ -320,9 +331,10 @@ def project_badges(name: str) -> Any:
     if not metapackage or metapackage['num_repos'] == 0:
         return handle_nonexisting_project(name, metapackage)
 
-    packages = get_db().get_metapackage_packages(name)
-
-    repos_present_in = set([package.repo for package in packages])
+    repos_present_in = set(
+        package['repo']
+        for package in get_db().get_metapackage_packages(name, fields=['repo'])
+    )
     repos = [repo for repo in repometadata.active_names() if repo in repos_present_in]
 
     return flask.render_template(

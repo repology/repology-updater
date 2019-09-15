@@ -20,17 +20,14 @@ from dataclasses import dataclass
 from functools import cmp_to_key
 from typing import Dict, Iterable, List, Optional, Tuple
 
-from repologyapp.package import Package, PackageStatus
+from repologyapp.package import AnyPackageDataMinimal, PackageStatus, package_version_compare
 
 
-def packageset_sort_by_version(packages: Iterable[Package]) -> List[Package]:
-    def compare(p1: Package, p2: Package) -> int:
-        return p2.version_compare(p1)
-
-    return sorted(packages, key=cmp_to_key(compare))
+def packageset_sort_by_version(packages: Iterable[AnyPackageDataMinimal]) -> List[AnyPackageDataMinimal]:
+    return sorted(packages, key=cmp_to_key(package_version_compare), reverse=True)
 
 
-def packageset_to_best(packages: Iterable[Package], allow_ignored: bool = False) -> Optional[Package]:
+def packageset_to_best(packages: Iterable[AnyPackageDataMinimal], allow_ignored: bool = False) -> Optional[AnyPackageDataMinimal]:
     sorted_packages = packageset_sort_by_version(packages)
 
     if not sorted_packages:
@@ -49,8 +46,8 @@ def packageset_to_best(packages: Iterable[Package], allow_ignored: bool = False)
     return sorted_packages[0]
 
 
-def packageset_to_best_by_repo(packages: Iterable[Package], allow_ignored: bool = False) -> Dict[str, Package]:
-    state_by_repo: Dict[str, Package] = {}
+def packageset_to_best_by_repo(packages: Iterable[AnyPackageDataMinimal], allow_ignored: bool = False) -> Dict[str, AnyPackageDataMinimal]:
+    state_by_repo: Dict[str, AnyPackageDataMinimal] = {}
 
     for package in packageset_sort_by_version(packages):
         # start with first package
@@ -66,13 +63,13 @@ def packageset_to_best_by_repo(packages: Iterable[Package], allow_ignored: bool 
     return state_by_repo
 
 
-def packageset_sort_by_name_version(packages: Iterable[Package]) -> List[Package]:
-    def compare(p1: Package, p2: Package) -> int:
+def packageset_sort_by_name_version(packages: Iterable[AnyPackageDataMinimal]) -> List[AnyPackageDataMinimal]:
+    def compare(p1: AnyPackageDataMinimal, p2: AnyPackageDataMinimal) -> int:
         if p1.name < p2.name:
             return -1
         if p1.name > p2.name:
             return 1
-        return p2.version_compare(p1)
+        return -package_version_compare(p1, p2)
 
     return sorted(packages, key=cmp_to_key(compare))
 
@@ -84,9 +81,9 @@ class VersionAggregation:
     numfamilies: int
 
 
-def packageset_aggregate_by_version(packages: Iterable[Package], classmap: Dict[int, int] = {}) -> List[VersionAggregation]:
-    def create_version_aggregation(packages: Iterable[Package]) -> Iterable[VersionAggregation]:
-        aggregated: Dict[Tuple[str, int], List[Package]] = defaultdict(list)
+def packageset_aggregate_by_version(packages: Iterable[AnyPackageDataMinimal], classmap: Dict[int, int] = {}) -> List[VersionAggregation]:
+    def create_version_aggregation(packages: Iterable[AnyPackageDataMinimal]) -> Iterable[VersionAggregation]:
+        aggregated: Dict[Tuple[str, int], List[AnyPackageDataMinimal]] = defaultdict(list)
 
         for package in packages:
             aggregated[
@@ -99,10 +96,10 @@ def packageset_aggregate_by_version(packages: Iterable[Package], classmap: Dict[
     def post_sort_same_version(versions: Iterable[VersionAggregation]) -> List[VersionAggregation]:
         return sorted(versions, key=lambda v: (v.numfamilies, v.version, v.versionclass), reverse=True)
 
-    def aggregate_by_version(packages: Iterable[Package]) -> Iterable[List[VersionAggregation]]:
-        current: List[Package] = []
+    def aggregate_by_version(packages: Iterable[AnyPackageDataMinimal]) -> Iterable[List[VersionAggregation]]:
+        current: List[AnyPackageDataMinimal] = []
         for package in packageset_sort_by_version(packages):
-            if not current or current[0].version_compare(package) == 0:
+            if not current or package_version_compare(current[0], package) == 0:
                 current.append(package)
             else:
                 yield post_sort_same_version(create_version_aggregation(current))

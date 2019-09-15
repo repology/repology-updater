@@ -27,7 +27,7 @@ from libversion import version_compare
 from repologyapp.badges import BadgeCell, badge_color, render_generic_badge
 from repologyapp.db import get_db
 from repologyapp.globals import repometadata
-from repologyapp.package import Package, PackageStatus
+from repologyapp.package import PackageDataMinimal, PackageStatus
 from repologyapp.packageproc import packageset_to_best, packageset_to_best_by_repo
 from repologyapp.view_registry import ViewRegistrar
 
@@ -36,8 +36,13 @@ from repologyapp.view_registry import ViewRegistrar
 def badge_vertical_allrepos(name: str) -> Any:
     args = flask.request.args.to_dict()
 
-    packages = get_db().get_metapackage_packages(name, fields=['repo', 'version', 'versionclass'])
-    best_pkg_by_repo = packageset_to_best_by_repo(packages, allow_ignored=args.get('allow_ignored', False))
+    best_pkg_by_repo = packageset_to_best_by_repo(
+        (
+            PackageDataMinimal(**item)
+            for item in get_db().get_metapackage_packages(name, minimal=True)
+        ),
+        allow_ignored=args.get('allow_ignored', False)
+    )
 
     header = args.get('header')
     minversion = args.get('minversion')
@@ -79,7 +84,10 @@ def badge_version_for_repo(repo: str, name: str) -> Any:
     args = flask.request.args.to_dict()
 
     best_package = packageset_to_best(
-        get_db().get_metapackage_packages(name, repo=repo, fields=['repo', 'version', 'versionclass']),
+        (
+            PackageDataMinimal(**item)
+            for item in get_db().get_metapackage_packages(name, repo=repo, minimal=True)
+        ),
         allow_ignored=args.get('allow_ignored', False)
     )
 
@@ -101,9 +109,9 @@ def badge_version_for_repo(repo: str, name: str) -> Any:
 @ViewRegistrar('/badge/latest-versions/<name>.svg')
 def badge_latest_versions(name: str) -> Any:
     versions = sorted(set((
-        package.version
+        package['version']
         for package in get_db().get_metapackage_packages(name, fields=['version', 'versionclass'])
-        if package.versionclass in (PackageStatus.NEWEST, PackageStatus.DEVEL, PackageStatus.UNIQUE)
+        if package['versionclass'] in (PackageStatus.NEWEST, PackageStatus.DEVEL, PackageStatus.UNIQUE)
     )), key=cmp_to_key(version_compare), reverse=True)
 
     default_caption = 'latest packaged version'
@@ -145,9 +153,15 @@ def badge_versions_matrix() -> Any:
     require_all = args.get('require_all', False)
 
     # get and process packages
-    packages = get_db().get_metapackages_packages(list(required_projects.keys()), fields=['effname', 'repo', 'version', 'versionclass'])
+    packages = [
+        PackageDataMinimal(**item)
+        for item in get_db().get_metapackages_packages(
+            list(required_projects.keys()),
+            minimal=True
+        )
+    ]
 
-    packages_by_project: Dict[str, List[Package]] = defaultdict(list)
+    packages_by_project: Dict[str, List[PackageDataMinimal]] = defaultdict(list)
     repos = set()
     for package in packages:
         packages_by_project[package.effname].append(package)

@@ -20,7 +20,7 @@ import string
 import urllib.parse
 from typing import Any, Callable, ClassVar, Dict, Mapping, Optional, Sequence, Union
 
-from repologyapp.package import Package
+from repologyapp.package import PackageDataDetailed
 
 __all__ = ['PackageFormatter']
 
@@ -39,7 +39,8 @@ class PackageFormatter(string.Formatter):
         self._escape_mode = escape_mode
 
     def get_value(self, key: Union[int, str], args: Sequence[Any], kwargs: Mapping[Any, Any]) -> str:
-        pkgdata = args[0].__dict__ if isinstance(args[0], Package) else args[0]
+        # XXX: after Problems are refactored, switch to strong typing here
+        pkgdata = args[0].__dict__ if isinstance(args[0], PackageDataDetailed) else args[0]
         key, *filters = str(key).split('|')
 
         value = ''

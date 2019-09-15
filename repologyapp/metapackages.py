@@ -22,7 +22,7 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tupl
 import flask
 
 from repologyapp.metapackage_request import MetapackageRequest
-from repologyapp.package import Package, PackageStatus
+from repologyapp.package import AnyPackageDataMinimal, AnyPackageDataSummarizable, PackageStatus
 from repologyapp.version import UserVisibleVersionInfo
 
 
@@ -142,7 +142,7 @@ class MetapackagesFilterInfo:
         return False
 
 
-def get_packages_name_range(packages: Sequence[Package]) -> Tuple[Optional[str], Optional[str]]:
+def get_packages_name_range(packages: Sequence[AnyPackageDataMinimal]) -> Tuple[Optional[str], Optional[str]]:
     firstname, lastname = None, None
 
     if packages:
@@ -154,7 +154,7 @@ def get_packages_name_range(packages: Sequence[Package]) -> Tuple[Optional[str],
     return firstname, lastname
 
 
-def packages_to_summary_items(packages: Iterable[Package], repo: Optional[str] = None, maintainer: Optional[str] = None) -> Dict[str, Dict[str, Any]]:
+def packages_to_summary_items(packages: Iterable[AnyPackageDataSummarizable], repo: Optional[str] = None, maintainer: Optional[str] = None) -> Dict[str, Dict[str, Any]]:
     # filter by either repo or maintainer, not both
     if repo is not None:
         maintainer = None
@@ -199,8 +199,8 @@ def packages_to_summary_items(packages: Iterable[Package], repo: Optional[str] =
     return summaries
 
 
-def packages_to_metapackages(*packagesets: Iterable[Package]) -> Dict[str, List[Package]]:
-    metapackages: Dict[str, List[Package]] = defaultdict(list)
+def packages_to_metapackages(*packagesets: Iterable[AnyPackageDataMinimal]) -> Dict[str, List[AnyPackageDataMinimal]]:
+    metapackages: Dict[str, List[AnyPackageDataMinimal]] = defaultdict(list)
 
     for packages in packagesets:
         for package in packages:

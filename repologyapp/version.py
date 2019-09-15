@@ -22,7 +22,7 @@ from typing import Any
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
 
-from repologyapp.package import Package, PackageFlags
+from repologyapp.package import AnyPackageDataMinimal, PackageFlags
 
 
 @total_ordering
@@ -34,7 +34,7 @@ class UserVisibleVersionInfo:
     metaorder: int
     spread: int
 
-    def __init__(self, package: Package, spread: int = 1) -> None:
+    def __init__(self, package: AnyPackageDataMinimal, spread: int = 1) -> None:
         self.version = package.version
         self.versionclass = package.versionclass
 
