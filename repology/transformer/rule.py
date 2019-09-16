@@ -394,7 +394,7 @@ class Rule:
                             return True
                 for download in package.downloads:
                     for wwwpart in wwwparts:
-                        if wwwpart in download:
+                        if wwwpart in download.lower():
                             return True
                 return False
 
