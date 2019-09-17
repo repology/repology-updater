@@ -65,9 +65,9 @@ def packageset_to_best_by_repo(packages: Iterable[AnyPackageDataMinimal], allow_
 
 def packageset_sort_by_name_version(packages: Iterable[AnyPackageDataMinimal]) -> List[AnyPackageDataMinimal]:
     def compare(p1: AnyPackageDataMinimal, p2: AnyPackageDataMinimal) -> int:
-        if p1.name < p2.name:
+        if p1.visiblename < p2.visiblename:
             return -1
-        if p1.name > p2.name:
+        if p1.visiblename > p2.visiblename:
             return 1
         return -package_version_compare(p1, p2)
 

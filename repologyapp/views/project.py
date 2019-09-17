@@ -149,7 +149,7 @@ def project_information(name: str) -> Any:
             PackageDataDetailed(**item)
             for item in get_db().get_metapackage_packages(name, detailed=True)
         ),
-        key=lambda package: package.repo + package.name + package.version
+        key=lambda package: package.repo + package.visiblename + package.version
     )
 
     information: Dict[str, Any] = {}
@@ -164,7 +164,8 @@ def project_information(name: str) -> Any:
         information[infokey][infoval].add(package.family)
 
     for package in packages:
-        append_info('names', package.name, package)
+        if package.name is not None:
+            append_info('names', package.name, package)
         append_info('versions', package.version, package)
         append_info('repos', package.repo, package)
 

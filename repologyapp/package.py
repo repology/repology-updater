@@ -39,7 +39,7 @@ class PackageDataMinimal:
     repo: str
     family: str
 
-    name: str
+    visiblename: str
     effname: str
 
     version: str
@@ -55,8 +55,11 @@ class PackageDataSummarizable(PackageDataMinimal):
 
 @dataclass
 class PackageDataDetailed(PackageDataSummarizable):
-    basename: Optional[str]
     subrepo: Optional[str]
+
+    name: Optional[str]
+    keyname: Optional[str]
+    basename: Optional[str]
 
     origversion: str
     rawversion: str

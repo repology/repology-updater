@@ -27,7 +27,7 @@
 				<br><sup>{{ package.subrepo }}</sup>
 			{%- endif -%}
 		</td>
-		<td class="text-center">{{ macros.package_link(package, package.name) }}</td>
+		<td class="text-center">{{ macros.package_link(package, package.visiblename) }}</td>
 		<td class="text-center">
 		{% if package.origversion != package.version %}
 			<span class="version version-big version-{{ package.versionclass|css_for_versionclass }} version-property-fixed" title="Normalized from &quot;{{ package.origversion }}&quot;">

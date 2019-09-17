@@ -31,7 +31,7 @@ SELECT
     repo,
     family,
 
-    name,
+    visiblename,
     effname,
 
     version,
@@ -43,6 +43,8 @@ SELECT
 {%   if detailed %},
     subrepo,
 
+	name,
+	keyname,
 	basename,
 
     origversion,
