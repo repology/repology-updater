@@ -47,6 +47,6 @@ class FreeBSDIndexParser(Parser):
                 port_path = fields[1].split('/')
 
                 pkg.set_extra_field('portname', port_path[-1])
-                pkg.set_origin('/'.join(port_path[-2:]))
+                pkg.set_keyname('/'.join(port_path[-2:]))
 
                 yield pkg

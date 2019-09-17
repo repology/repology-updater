@@ -28,15 +28,15 @@
       url: https://pkg-status.freebsd.org/
   packagelinks:
     - desc: FreshPorts page
-      url: 'https://www.freshports.org/{origin}'
+      url: 'https://www.freshports.org/{keyname}'
     - desc: SVNWeb
-      url: 'https://svnweb.freebsd.org/ports/head/{origin}/'
+      url: 'https://svnweb.freebsd.org/ports/head/{keyname}/'
     - desc: Port's Makefile
-      url: 'https://svnweb.freebsd.org/ports/head/{origin}/Makefile?view=co'
+      url: 'https://svnweb.freebsd.org/ports/head/{keyname}/Makefile?view=co'
     - desc: PortsMon
       url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={portname}'
     - desc: Related bugs in FreeBSD bugzilla
-      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={category}/{portname}'
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={keyname}'
   tags: [ all, production, have_testdata ]
 
 ###########################################################################
@@ -64,15 +64,15 @@
       url: https://github.com/DragonFlyBSD/DPorts
   packagelinks:
     - desc: FreshPorts page
-      url: 'https://www.freshports.org/{origin}'
+      url: 'https://www.freshports.org/{keyname}'
     - desc: SVNWeb
-      url: 'https://svnweb.freebsd.org/ports/head/{origin}/'
+      url: 'https://svnweb.freebsd.org/ports/head/{keyname}/'
     - desc: Port's Makefile
-      url: 'https://svnweb.freebsd.org/ports/head/{origin}/Makefile?view=co'
+      url: 'https://svnweb.freebsd.org/ports/head/{keyname}/Makefile?view=co'
     - desc: PortsMon
       url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={portname}'
     - desc: Related bugs in FreeBSD bugzilla
-      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={origin}'
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={keyname}'
     - desc: Synth build log
       url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{portname}.log'
   tags: [ all, production ]

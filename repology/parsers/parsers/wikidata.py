@@ -45,8 +45,8 @@ class WikidataJsonParser(Parser):
             label = packagedata['projectLabel']
 
             with factory.begin('{} ({})'.format(entity, label)) as pkg:
-                pkg.set_extra_field('entity', entity)
-                pkg.set_name(label)
+                pkg.set_keyname(entity)
+                pkg.set_visiblename(label)
                 pkg.set_summary(packagedata.get('projectDescription'))
                 pkg.add_licenses(sorted(packagedata.get('licenses', '').split(', ')))
                 pkg.add_homepages(sorted(packagedata.get('websites', '').split(', ')))
@@ -87,7 +87,7 @@ class WikidataJsonParser(Parser):
                     # generate package for each repology project
                     for name in names:
                         namepkg = verpkg.clone()
-                        namepkg.set_basename(name)
+                        namepkg.set_projectname_seed(name)
                         if is_preferred:
                             pkgs_preferred.append(namepkg)
                         else:
