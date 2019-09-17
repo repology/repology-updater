@@ -43,13 +43,13 @@ class SpecParser(Parser):
                             pkg.set_name(line.split(':', 1)[1])
                         elif line.startswith('Version:') and not pkg.version:
                             pkg.set_version(line.split(':', 1)[1])
-                        elif line.startswith('Url:') and not pkg.homepage:
+                        elif line.startswith('Url:') and not pkg.homepages:
                             pkg.add_homepages(line.split(':', 1)[1])
-                        elif line.startswith('License:') and not pkg.license:
+                        elif line.startswith('License:') and not pkg.licenses:
                             pkg.add_licenses(line.split(':', 1)[1])
-                        elif line.startswith('Group:') and not pkg.category:
+                        elif line.startswith('Group:') and not pkg.categories:
                             pkg.add_categories(line.split(':', 1)[1])
-                        elif line.startswith('Summary:') and not pkg.comment:
+                        elif line.startswith('Summary:') and not pkg.summary:
                             pkg.set_summary(line.split(':', 1)[1])
 
                     yield pkg
