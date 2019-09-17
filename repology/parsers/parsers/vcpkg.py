@@ -57,10 +57,14 @@ class VcpkgGitParser(Parser):
                             pkg.set_flags(PackageFlags.IGNORE)
                         else:
                             pkg.set_version(version, normalize_version)
-                    elif line.startswith('Description:') and not pkg.comment:
+                    elif line.startswith('Description:') and not pkg.summary:
                         pkg.set_summary(line[12:])
                     elif line.startswith('Homepage:'):
                         pkg.add_homepages(line[9:])
+
+                if pkg.version is None:
+                    pkg.log('empty version', Logger.ERROR)
+                    continue
 
             # pretty much a hack to shut a bunch of fake versions up
             portfilepath = os.path.join(path, 'ports', pkgdir, 'portfile.cmake')

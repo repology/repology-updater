@@ -19,6 +19,7 @@ import json
 import re
 from typing import Iterable
 
+from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -35,6 +36,11 @@ class TermuxJsonParser(Parser):
                 pkg = factory.begin()
 
                 pkg.set_name(packagedata['name'])
+
+                if not packagedata['version']:
+                    pkg.log('empty version', Logger.ERROR)
+                    continue
+
                 pkg.set_version(packagedata['version'], normalize_version)
 
                 pkg.set_summary(packagedata['description'])

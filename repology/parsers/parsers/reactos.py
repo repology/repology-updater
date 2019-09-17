@@ -19,6 +19,7 @@ import configparser
 import os
 from typing import Iterable
 
+from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
@@ -39,7 +40,12 @@ class RappsParser(Parser):
                 section = config['Section']
 
                 pkg.set_name(filename[:-4])
-                pkg.set_version(section.get('Version'))
+
+                if section.get('Version') is None:
+                    pkg.log('no version defined', Logger.ERROR)
+                    continue
+
+                pkg.set_version(section['Version'])
                 pkg.set_summary(section['Description'])
                 pkg.add_homepages(section.get('URLSite'))
                 pkg.add_downloads(section['URLDownload'])

@@ -225,21 +225,6 @@ class TestPackageMaker(unittest.TestCase):
         self.assertTrue('pkg1pkg3:' in logger.get()[2])
         self.assertTrue('pkg2:' not in logger.get()[2])
 
-    def test_sanity(self) -> None:
-        factory = PackageFactory(NoopLogger())
-
-        maker = factory.begin()
-
-        self.assertFalse(maker.check_sanity())
-
-        maker.set_name('foo')
-
-        self.assertFalse(maker.check_sanity())
-
-        maker.set_version('1.0')
-
-        self.assertTrue(maker.check_sanity())
-
 
 if __name__ == '__main__':
     unittest.main()

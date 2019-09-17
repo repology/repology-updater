@@ -100,17 +100,17 @@ class RepositoryProcessor:
     def _iter_parse_source(self, repository: RepositoryMetadata, source: RepositoryMetadata, transformer: Optional[PackageTransformer], logger: Logger) -> Iterator[Package]:
         def postprocess_parsed_packages(packages_iter: Iterable[PackageMaker]) -> Iterator[Package]:
             for packagemaker in packages_iter:
-                # unwrap packagemaker
-                if not packagemaker.check_sanity(verbose=True):
-                    continue
-
-                package = packagemaker.spawn(
-                    repo=repository['name'],
-                    family=repository['family'],
-                    subrepo=source.get('subrepo'),
-                    shadow=repository.get('shadow', False),
-                    default_maintainer=repository.get('default_maintainer'),
-                )
+                try:
+                    package = packagemaker.spawn(
+                        repo=repository['name'],
+                        family=repository['family'],
+                        subrepo=source.get('subrepo'),
+                        shadow=repository.get('shadow', False),
+                        default_maintainer=repository.get('default_maintainer'),
+                    )
+                except RuntimeError as e:
+                    packagemaker.log(str(e), Logger.ERROR)
+                    raise
 
                 # transform
                 if transformer:

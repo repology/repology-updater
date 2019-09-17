@@ -19,6 +19,7 @@ from typing import Dict, Iterable
 
 from libversion import version_compare
 
+from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
@@ -34,15 +35,15 @@ class FreshcodeParser(Parser):
         for entry in iter_json_list(path, ('releases', None)):
             with factory.begin() as pkg:
                 pkg.set_name(entry['name'])
-                pkg.set_version(entry['version'])
 
-                if not pkg.check_sanity(verbose=False):
+                if not entry['version']:
+                    pkg.log('empty version', Logger.ERROR)
                     continue
 
+                pkg.set_version(entry['version'])
+
                 pkg.add_homepages(entry.get('homepage'))
-                pkg.set_summary(entry.get('summary'))
-                if not pkg.comment:
-                    pkg.set_summary(entry.get('description'))  # multiline
+                pkg.set_summary(entry.get('summary'))  # cound use `or entry.get('description'))`, but it's long multiline
                 #pkg.add_maintainers(entry.get('submitter') + '@freshcode')  # unfiltered garbage
                 #pkg.add_downloads(entry.get('download'))  # ignore for now, may contain download page urls instead of file urls
                 pkg.add_licenses(entry.get('license'))

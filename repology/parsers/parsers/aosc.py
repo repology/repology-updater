@@ -19,6 +19,7 @@
 import json
 from typing import Iterable
 
+from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -36,10 +37,12 @@ class AoscPkgsParser(Parser):
                 pkg = factory.begin()
 
                 pkg.set_name(package['name'])
-                pkg.set_version(package['version'], normalize_version)
 
-                if not pkg.check_sanity(verbose=True):
+                if package['version'] is None:
+                    pkg.log('no version defined', Logger.ERROR)
                     continue
+
+                pkg.set_version(package['version'], normalize_version)
 
                 pkg.set_rawversion(package['full_version'])
                 pkg.add_categories(package['pkg_section'], package['section'])

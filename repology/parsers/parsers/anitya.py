@@ -32,9 +32,6 @@ class AnityaApiParser(Parser):
                 pkg.set_name(project['name'])
                 pkg.set_version(project['version'])
 
-                if not pkg.check_sanity(verbose=True):
-                    continue
-
                 pkg.add_homepages(project['homepage'])
                 pkg.set_version(pkg.version[1:])
 

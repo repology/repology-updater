@@ -357,19 +357,6 @@ class PackageMaker(PackageMakerBase):
 
         return offspring
 
-    def check_sanity(self, require_name: bool = True, require_version: bool = True, verbose: bool = False) -> bool:
-        if require_name and not self._package.name:
-            if verbose:
-                self.log('package with no name', severity=Logger.ERROR)
-            return False
-
-        if require_version and not self._package.version:
-            if verbose:
-                self.log('package with no version', severity=Logger.ERROR)
-            return False
-
-        return True
-
     def __getattr__(self, key: str) -> Any:
         return getattr(self._package, key)
 
