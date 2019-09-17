@@ -35,6 +35,9 @@ class PackageTemplate:
 
         'name',
         'basename',
+        'keyname',
+        'visiblename',
+        'projectname_seed',
 
         'version',
         'origversion',
@@ -57,6 +60,9 @@ class PackageTemplate:
 
     name: Optional[str]
     basename: Optional[str]
+    keyname: Optional[str]
+    visiblename: Optional[str]
+    projectname_seed: Optional[str]
 
     version: Optional[str]
     origversion: Optional[str]
@@ -79,6 +85,9 @@ class PackageTemplate:
 
         self.name = None
         self.basename = None
+        self.keyname = None
+        self.visiblename = None
+        self.projectname_seed = None
 
         self.version = None
         self.origversion = None
@@ -201,6 +210,7 @@ class PackageMaker(PackageMakerBase):
     def _get_ident(self) -> str:
         return self._ident or self._package.extrafields.get('origin', None) or self._package.name or self._package.basename or 'item #{}'.format(self._itemno)
 
+    # XXX: deprecated
     @_simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
     def set_origin(self, origin: str) -> None:
         # XXX: convert to dedicated field
@@ -213,6 +223,18 @@ class PackageMaker(PackageMakerBase):
     @_simple_setter('basename', str, nzs.strip, nzs.forbid_newlines)
     def set_basename(self, basename: str) -> None:
         self._package.basename = basename
+
+    @_simple_setter('keyname', str, nzs.strip, nzs.forbid_newlines)
+    def set_keyname(self, name: str) -> None:
+        self._package.keyname = name
+
+    @_simple_setter('visiblename', str, nzs.strip, nzs.forbid_newlines)
+    def set_visiblename(self, name: str) -> None:
+        self._package.visiblename = name
+
+    @_simple_setter('projectname_seed', str, nzs.strip, nzs.forbid_newlines)
+    def set_projectname_seed(self, name: str) -> None:
+        self._package.projectname_seed = name
 
     def prefix_name(self, prefix: str) -> None:
         assert(self._package.name)
@@ -276,12 +298,17 @@ class PackageMaker(PackageMakerBase):
         self._package.extrafields[key] = value
 
     def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
-        if self._package.name is None:
-            raise RuntimeError('Attempt to spawn Package with unset name')
+        maintainers: List[str] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else []
+
+        visiblename = self._package.visiblename or self._package.keyname or self._package.name
+        projectname_seed = self._package.projectname_seed or self._package.basename or self._package.name
+
+        if visiblename is None:
+            raise RuntimeError('Attempt to spawn Package with unset visible name')
+        if projectname_seed is None:
+            raise RuntimeError('Attempt to spawn Package with unset project name seed')
         if self._package.version is None:
             raise RuntimeError('Attempt to spawn Package with unset version')
-
-        maintainers: List[str] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else []
 
         return Package(
             repo=repo,
@@ -290,6 +317,9 @@ class PackageMaker(PackageMakerBase):
 
             name=self._package.name,
             basename=self._package.basename,
+            keyname=self._package.keyname,
+            visiblename=visiblename,
+            projectname_seed=projectname_seed,
 
             version=self._package.version,
             origversion=self._package.version,
@@ -311,7 +341,7 @@ class PackageMaker(PackageMakerBase):
 
             # XXX: see comment for PackageStatus.UNPROCESSED
             # XXX: duplicate code: PackageTransformer does the same
-            effname=self._package.basename if self._package.basename else self._package.name,
+            effname=projectname_seed,
             versionclass=PackageStatus.UNPROCESSED,
         )
 

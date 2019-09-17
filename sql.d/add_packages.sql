@@ -28,6 +28,9 @@ INSERT INTO packages(
 
 	name,
 	basename,
+	keyname,
+	visiblename,
+	projectname_seed,
 
 	origversion,
 	rawversion,
@@ -61,6 +64,9 @@ INSERT INTO packages(
 
 	%(name)s,
 	%(basename)s,
+	%(keyname)s,
+	%(visiblename)s,
+	%(projectname_seed)s,
 
 	%(origversion)s,
 	%(rawversion)s,

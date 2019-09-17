@@ -354,8 +354,11 @@ CREATE TABLE packages (
 	family text NOT NULL,
 	subrepo text,
 
-	name text NOT NULL,
+	name text NULL,
 	basename text NULL,
+	keyname text NULL,
+	visiblename text NOT NULL,
+	projectname_seed text NOT NULL,
 
 	origversion text NOT NULL,
 	rawversion text NOT NULL,

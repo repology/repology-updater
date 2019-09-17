@@ -552,7 +552,7 @@ INSERT INTO problems (
 SELECT DISTINCT
 	packages.id,
 	packages.repo,
-	packages.name,
+	packages.visiblename,
 	packages.effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' ||
@@ -606,7 +606,7 @@ INSERT INTO problems (
 SELECT DISTINCT
 	packages.id,
 	packages.repo,
-	packages.name,
+	packages.visiblename,
 	packages.effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' ||
@@ -623,7 +623,7 @@ INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
 SELECT DISTINCT
 	id,
 	repo,
-	name,
+	visiblename,
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' || homepage || '" points to Google Code which was discontinued. The link should be updated (probably along with download URLs). If this link is still alive, it may point to a new project homepage.'
@@ -636,7 +636,7 @@ INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
 SELECT DISTINCT
 	id,
 	repo,
-	name,
+	visiblename,
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' || homepage || '" points to codeplex which was discontinued. The link should be updated (probably along with download URLs).'
@@ -648,7 +648,7 @@ INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
 SELECT DISTINCT
 	id,
 	repo,
-	name,
+	visiblename,
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' || homepage || '" points to Gna which was discontinued. The link should be updated (probably along with download URLs).'
@@ -660,7 +660,7 @@ INSERT INTO problems(package_id, repo, name, effname, maintainer, problem)
 SELECT DISTINCT
 	id,
 	repo,
-	name,
+	visiblename,
 	effname,
 	unnest(CASE WHEN packages.maintainers = '{}' THEN '{null}' ELSE packages.maintainers END),
 	'Homepage link "' || homepage || '" points to CPAN which was discontinued. The link should be updated to https://metacpan.org (probably along with download URLs). See https://www.perl.com/article/saying-goodbye-to-search-cpan-org/ for details.'

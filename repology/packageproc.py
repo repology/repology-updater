@@ -23,7 +23,7 @@ from repology.package import Package, PackageFlags, PackageStatus
 
 
 def packageset_deduplicate(packages: Sequence[Package]) -> List[Package]:
-    aggregated: Dict[Tuple[str, Optional[str], str, str], List[Package]] = defaultdict(list)
+    aggregated: Dict[Tuple[str, Optional[str], Optional[str], str], List[Package]] = defaultdict(list)
 
     # aggregate by subset of fields to make O(n²) merge below faster
     for package in packages:

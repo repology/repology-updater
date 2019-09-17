@@ -116,6 +116,9 @@ class Package:
 
         'name',
         'basename',
+        'keyname',
+        'visiblename',
+        'projectname_seed',
 
         'origversion',
         'rawversion',
@@ -147,8 +150,11 @@ class Package:
     family: str
     subrepo: Optional[str]
 
-    name: str
+    name: Optional[str]
     basename: Optional[str]
+    keyname: Optional[str]
+    visiblename: str
+    projectname_seed: str
 
     origversion: str
     rawversion: str
@@ -177,7 +183,8 @@ class Package:
                  repo: str,
                  family: str,
 
-                 name: str,
+                 visiblename: str,
+                 projectname_seed: str,
                  effname: str,
 
                  version: str,
@@ -188,7 +195,9 @@ class Package:
 
                  subrepo: Optional[str] = None,
 
+                 name: Optional[str] = None,
                  basename: Optional[str] = None,
+                 keyname: Optional[str] = None,
 
                  arch: Optional[str] = None,
 
@@ -211,6 +220,9 @@ class Package:
 
         self.name = name
         self.basename = basename
+        self.keyname = keyname
+        self.visiblename = visiblename
+        self.projectname_seed = projectname_seed
 
         self.origversion = origversion
         self.rawversion = rawversion
