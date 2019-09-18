@@ -166,6 +166,37 @@
       url: 'https://apps.fedoraproject.org/packages/{name}/overview'
   tags: [ all, production, fedora, rpm ]
 
+- name: fedora_31
+  type: repository
+  desc: Fedora 31
+  family: fedora
+  color: '294172'
+  minpackages: 20000
+  sources:
+    - name: development
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://mirror.yandex.ru/fedora/linux/development/31/Everything/source/tree/
+      subrepo: '{source}'
+    - name: updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://mirror.yandex.ru/fedora/linux/updates/31/Everything/SRPMS/
+      subrepo: '{source}'
+  repolinks:
+    - desc: Fedora home
+      url: https://getfedora.org/
+    - desc: Fedora Packages Search
+      url: https://apps.fedoraproject.org/packages/
+    - desc: Fedora repository for package maintenance
+      url: https://src.fedoraproject.org/
+  packagelinks:
+    - desc: Package details on Fedora Pagure
+      url: 'https://src.fedoraproject.org/rpms/{name}'
+    - desc: Package details on Fedora Packages
+      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
+  tags: [ all, production, fedora, rpm ]
+
 - name: fedora_rawhide
   type: repository
   desc: Fedora Rawhide
