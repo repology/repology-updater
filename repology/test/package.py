@@ -19,26 +19,39 @@
 
 # mypy: no-disallow-untyped-calls
 
-from typing import Any, Dict
+from typing import List, Optional
 
 from repology.package import Package
+from repology.packagemaker import PackageFactory
 
 
-def spawn_package(**custom_args: Any) -> Package:
-    args: Dict[str, Any] = {
-        'repo': 'dummyrepo',
-        'family': 'dummyfamily',
+def spawn_package(
+    *,
+    name: str = 'dummyname',
+    version: str = '0',
+    repo: str = 'dummyrepo',
+    family: str = 'dummyfamily',
+    flags: int = 0,
+    homepage: Optional[str] = None,
+    comment: Optional[str] = None,
+    category: Optional[str] = None,
+    maintainers: Optional[List[str]] = None,
+    flavors: Optional[List[str]] = None,
+) -> Package:
+    m = PackageFactory().begin()
 
-        'name': 'dummyname',
-        'effname': 'dummyname',
+    m.set_name(name)
+    m.set_version(version)
 
-        'version': '0',
-        'origversion': '0',
-        'rawversion': '0',
+    m.set_flags(flags)
+    m.set_summary(comment)
+    m.add_homepages(homepage)
+    m.add_categories(category)
+    m.add_maintainers(maintainers)
 
-        'versionclass': 0,
-    }
+    p = m.spawn(repo=repo, family=family)
 
-    args.update(custom_args)
+    if flavors is not None:
+        p.flavors.extend(flavors)
 
-    return Package(**args)
+    return p

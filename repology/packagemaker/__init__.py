@@ -20,7 +20,7 @@ from copy import deepcopy
 from functools import wraps
 from typing import Any, Callable, Dict, Iterable, List, Optional, Type
 
-from repology.logger import Logger
+from repology.logger import Logger, NoopLogger
 from repology.package import Package, PackageStatus
 from repology.packagemaker import normalizers as nzs
 from repology.packagemaker.normalizers import NormalizerFunction
@@ -381,7 +381,7 @@ class PackageFactory(Logger):
     _logger: Logger
     _itemno: int
 
-    def __init__(self, logger: Logger) -> None:
+    def __init__(self, logger: Logger = NoopLogger()) -> None:
         self._logger = logger
         self._itemno = 0
 

@@ -313,14 +313,14 @@ class TestPackageTransformer(unittest.TestCase):
     def test_match_wwwpart_case(self) -> None:
         self.check_transformer(
             '[ { wwwpart: homepage1, setname: ok1 }, { wwwpart: HOMEPAGE2, setname: ok2 }, { wwwpart: homepage3, setname: ok3 }, { wwwpart: HOMEPAGE4, setname: ok4 } ]',
-            {'name': 'p1', 'version': '1.0', 'homepage': 'homepage1', 'expect_effname': 'ok1'},
-            {'name': 'p2', 'version': '1.0', 'homepage': 'HOMEPAGE1', 'expect_effname': 'ok1'},
-            {'name': 'p3', 'version': '1.0', 'homepage': 'homepage2', 'expect_effname': 'ok2'},
-            {'name': 'p4', 'version': '1.0', 'homepage': 'HOMEPAGE2', 'expect_effname': 'ok2'},
-            {'name': 'p5', 'version': '1.0', 'homepage': 'homepage3', 'expect_effname': 'ok3'},
-            {'name': 'p6', 'version': '1.0', 'homepage': 'HOMEPAGE3', 'expect_effname': 'ok3'},
-            {'name': 'p7', 'version': '1.0', 'homepage': 'homepage4', 'expect_effname': 'ok4'},
-            {'name': 'p8', 'version': '1.0', 'homepage': 'HOMEPAGE4', 'expect_effname': 'ok4'},
+            {'name': 'p1', 'version': '1.0', 'homepage': 'http://homepage1', 'expect_effname': 'ok1'},
+            {'name': 'p2', 'version': '1.0', 'homepage': 'http://HOMEPAGE1', 'expect_effname': 'ok1'},
+            {'name': 'p3', 'version': '1.0', 'homepage': 'http://homepage2', 'expect_effname': 'ok2'},
+            {'name': 'p4', 'version': '1.0', 'homepage': 'http://HOMEPAGE2', 'expect_effname': 'ok2'},
+            {'name': 'p5', 'version': '1.0', 'homepage': 'http://homepage3', 'expect_effname': 'ok3'},
+            {'name': 'p6', 'version': '1.0', 'homepage': 'http://HOMEPAGE3', 'expect_effname': 'ok3'},
+            {'name': 'p7', 'version': '1.0', 'homepage': 'http://homepage4', 'expect_effname': 'ok4'},
+            {'name': 'p8', 'version': '1.0', 'homepage': 'http://HOMEPAGE4', 'expect_effname': 'ok4'},
         )
 
     def test_match_summpart(self) -> None:
