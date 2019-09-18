@@ -3,33 +3,13 @@
 #
 # See https://sourceforge.net/projects/unitedrpms/files/
 ###########################################################################
-- name: unitedrpms_28
-  type: repository
-  desc: UnitedRPMs Fedora 28
-  family: fedora
-  ruleset: [fedora, unitedrpms]
-  color: '261d22'
-  minpackages: 100
-  sources:
-    - name: repo
-      fetcher: RepodataFetcher
-      parser: RepodataParser
-      url: https://downloads.sourceforge.net/project/unitedrpms/28/srpm/
-      subrepo: release
-  repolinks:
-    - desc: UnitedRPMs home
-      url: https://unitedrpms.github.io/
-    - desc: GitHub organization
-      url: https://github.com/UnitedRPMs
-  tags: [ all, production, unitedrpms, rpm ]
-
 - name: unitedrpms_29
   type: repository
   desc: UnitedRPMs Fedora 29
   family: fedora
   ruleset: [fedora, unitedrpms]
   color: '261d22'
-  minpackages: 100
+  minpackages: 150
   sources:
     - name: repo
       fetcher: RepodataFetcher
@@ -49,7 +29,7 @@
   family: fedora
   ruleset: [fedora, unitedrpms]
   color: '261d22'
-  minpackages: 100
+  minpackages: 150
   sources:
     - name: repo
       fetcher: RepodataFetcher
@@ -69,12 +49,32 @@
   family: fedora
   ruleset: [fedora, unitedrpms]
   color: '261d22'
-  minpackages: 30
+  minpackages: 100
   sources:
     - name: repo
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: https://downloads.sourceforge.net/project/unitedrpms/31/srpm/
+      subrepo: release
+  repolinks:
+    - desc: UnitedRPMs home
+      url: https://unitedrpms.github.io/
+    - desc: GitHub organization
+      url: https://github.com/UnitedRPMs
+  tags: [ all, production, unitedrpms, rpm ]
+
+- name: unitedrpms_32
+  type: repository
+  desc: UnitedRPMs Fedora 32
+  family: fedora
+  ruleset: [fedora, unitedrpms]
+  color: '261d22'
+  minpackages: 50
+  sources:
+    - name: repo
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://downloads.sourceforge.net/project/unitedrpms/32/srpm/
       subrepo: release
   repolinks:
     - desc: UnitedRPMs home
