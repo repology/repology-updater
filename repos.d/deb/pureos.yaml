@@ -1,9 +1,9 @@
 ###########################################################################
 # PureOS
 ###########################################################################
-- name: pureos_green
+- name: pureos_amber
   type: repository
-  desc: PureOS green
+  desc: PureOS Amber
   family: debuntu
   color: '000000'
   minpackages: 26000
@@ -11,7 +11,7 @@
     - name: main
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://repo.pureos.net/pureos/dists/green/main/source/Sources.xz'
+      url: 'http://repo.pureos.net/pureos/dists/amber/main/source/Sources.xz'
       compression: xz
   repolinks:
     - desc: PureOS home
