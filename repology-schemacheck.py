@@ -136,6 +136,7 @@ rulesets = families + [
     'parabola',
     'pardus',
     'parrot',
+    'pureos',
     'slitaz_next',
     'unitedrpms',
     'whonix',

@@ -5,6 +5,7 @@
   type: repository
   desc: PureOS Amber
   family: debuntu
+  ruleset: [debuntu, pureos]
   color: '000000'
   minpackages: 26000
   sources:
@@ -22,6 +23,7 @@
   type: repository
   desc: PureOS landing
   family: debuntu
+  ruleset: [debuntu, pureos]
   color: '000000'
   minpackages: 26000
   sources:
