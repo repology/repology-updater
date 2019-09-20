@@ -26,13 +26,13 @@ from repologyapp.packageformatter import PackageFormatter
 from .package import spawn_package
 
 
-class TestVersionComparison(unittest.TestCase):
+class TestPackageFormatter(unittest.TestCase):
     def test_simple(self) -> None:
-        pkg = spawn_package(name='foo', version='1.0', origversion='1.0_1', category='devel', subrepo='main', extrafields={'foo': 'bar'})
+        pkg = spawn_package(name='foo', keyname='foo/bar', version='1.0', origversion='1.0_1', category='devel', subrepo='main', extrafields={'foo': 'bar'})
         fmt = PackageFormatter()
 
         self.assertEqual(fmt.format('Just A String', pkg), 'Just A String')
-        self.assertEqual(fmt.format('{name} {version} {origversion} {category} {subrepo} {foo}', pkg), 'foo 1.0 1.0_1 devel main bar')
+        self.assertEqual(fmt.format('{name} {keyname} {version} {origversion} {category} {subrepo} {foo}', pkg), 'foo foo/bar 1.0 1.0_1 devel main bar')
 
     def test_filter_lowercase(self) -> None:
         fmt = PackageFormatter()
@@ -50,6 +50,18 @@ class TestVersionComparison(unittest.TestCase):
 
         self.assertEqual(fmt.format('{name|libfirstletter}', spawn_package(name='FOO', version='1.0')), 'f')
         self.assertEqual(fmt.format('{name|libfirstletter}', spawn_package(name='LIBFOO', version='1.0')), 'libf')
+
+    def test_filter_stripdmo(self) -> None:
+        fmt = PackageFormatter()
+
+        self.assertEqual(fmt.format('{name|stripdmo}', spawn_package(name='mplayer')), 'mplayer')
+        self.assertEqual(fmt.format('{name|stripdmo}', spawn_package(name='mplayer-dmo')), 'mplayer')
+
+    def test_filter_basename(self) -> None:
+        fmt = PackageFormatter()
+
+        self.assertEqual(fmt.format('{keyname|basename}', spawn_package(keyname='foo/bar')), 'bar')
+        self.assertEqual(fmt.format('{keyname|dirname}', spawn_package(keyname='foo/bar')), 'foo')
 
     def test_basename(self) -> None:
         fmt = PackageFormatter()
