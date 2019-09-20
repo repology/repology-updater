@@ -49,6 +49,8 @@ class PackageFormatter(string.Formatter):
             value = pkgdata['name']
         elif key == 'basename':
             value = pkgdata['basename'] if pkgdata['basename'] is not None else pkgdata['name']
+        elif key == 'keyname':
+            value = pkgdata['keyname']
         elif key == 'subrepo':
             value = pkgdata['subrepo']
         elif key == 'version':
