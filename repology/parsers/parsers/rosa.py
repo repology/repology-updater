@@ -46,7 +46,7 @@ class RosaInfoXmlParser(Parser):
                     pkg.set_flags(PackageFlags.IGNORE)
                     match = re.search('\\b(a|alpha|b|beta|pre|rc)[0-9]+', version.lower())
                     if match:
-                        pkg._package.version += match.group(0)  # XXX: encapsulation violation
+                        pkg.set_version(version + match.group(0))
 
                 pkg.add_homepages(info.attrib['url'])
                 pkg.add_licenses(info.attrib['license'])
