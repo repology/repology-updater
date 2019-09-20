@@ -34,7 +34,7 @@
     - desc: Port's Makefile
       url: 'https://svnweb.freebsd.org/ports/head/{keyname}/Makefile?view=co'
     - desc: PortsMon
-      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={portname}'
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={keyname|dirname}&portname={keyname|basename}'
     - desc: Related bugs in FreeBSD bugzilla
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={keyname}'
   tags: [ all, production, have_testdata ]
@@ -70,7 +70,7 @@
     - desc: Port's Makefile
       url: 'https://svnweb.freebsd.org/ports/head/{keyname}/Makefile?view=co'
     - desc: PortsMon
-      url: 'http://portsmon.freebsd.org/portoverview.py?category={category}&portname={portname}'
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={keyname|dirname}&portname={keyname|basename}'
     - desc: Related bugs in FreeBSD bugzilla
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={keyname}'
     - desc: Synth build log

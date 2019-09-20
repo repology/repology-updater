@@ -31,6 +31,8 @@ class PackageFormatter(string.Formatter):
         'firstletter': lambda x: x.lower()[0],
         'libfirstletter': lambda x: x.lower()[:4] if x.lower().startswith('lib') else x.lower()[0],
         'stripdmo': lambda x: x[:-4] if x.endswith('-dmo') else x,
+        'basename': lambda x: x.rsplit('/', 1)[-1],
+        'dirname': lambda x: x.rsplit('/', 1)[0],
     }
 
     _escape_mode: Optional[str]
