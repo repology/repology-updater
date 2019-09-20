@@ -16,6 +16,10 @@ lint:: check test flake8 mypy
 test::
 	python3 -m unittest discover
 
+full-test::
+	env REPOLOGY_CONFIG=./repology-test.conf.default ./repology-update.py -ippd
+	env REPOLOGY_CONFIG=./repology-test.conf.default python3 -m unittest discover
+
 flake8:
 	${FLAKE8} --count --application-import-names=repology *.py repology repologyapp
 
