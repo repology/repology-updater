@@ -33,6 +33,8 @@ def api_v1_package_to_json(package: PackageDataDetailed) -> Dict[str, Any]:
             'repo',
             'subrepo',
             'name',
+            'keyname',
+            'visiblename',
             'version',
             #'origversion',
             #'status',

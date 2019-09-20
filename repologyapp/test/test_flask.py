@@ -220,6 +220,8 @@ class TestFlask(unittest.TestCase):
                 {
                     'repo': 'freebsd',
                     'name': 'kiconvtool',
+                    'keyname': 'sysutils/kiconvtool',
+                    'visiblename': 'sysutils/kiconvtool',
                     'version': '0.97',
                     'origversion': '0.97_1',
                     'status': 'unique',
