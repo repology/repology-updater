@@ -155,6 +155,7 @@ class GentooGitParser(Parser):
             pkg = factory.begin(category + '/' + package)
 
             pkg.set_name(package)
+            pkg.set_keyname(category + '/' + package)
             pkg.add_categories(category)
 
             maintainers, upstreams = _parse_package_metadata_xml(path, category, package, pkg)
