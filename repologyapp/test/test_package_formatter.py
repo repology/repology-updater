@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright (C) 2016 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
