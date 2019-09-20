@@ -42,6 +42,7 @@ class PkgsrcIndexParser(Parser):
                     continue
 
                 pkg.set_name_and_version(fields[0], normalize_version)
+                pkg.set_keyname(fields[1])
                 pkg.set_summary(fields[3])
 
                 # sometimes OWNER variable is used in which case
@@ -50,8 +51,5 @@ class PkgsrcIndexParser(Parser):
 
                 pkg.add_categories(fields[6].split())
                 pkg.add_homepages(fields[11])
-
-                pkg.set_extra_field('portname', fields[1].split('/')[-1])
-                pkg.set_origin(fields[1])
 
                 yield pkg

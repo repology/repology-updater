@@ -87,6 +87,7 @@ class OpenBSDsqlportsParser(Parser):
             pkgname = re.sub('(-[^0-9][^-]*)+$', '', row['fullpkgname'])
 
             pkg.set_name_and_version(pkgname, _normalize_version)
+            pkg.set_keyname(row['fullpkgpath'].split(',', 1)[0])
             pkg.set_summary(row['comment'])
             pkg.add_homepages(row['homepage'])
             pkg.add_maintainers(extract_maintainers(row['maintainer']))
@@ -94,10 +95,6 @@ class OpenBSDsqlportsParser(Parser):
 
             pkg.set_extra_field('pkgpath', row['pkgpath'])
             pkg.set_extra_field('fullpkgpath', row['fullpkgpath'])
-
-            origin = row['fullpkgpath'].split(',', 1)[0]
-            pkg.set_extra_field('origin', origin)
-            pkg.set_extra_field('portname', origin.split('/')[-1])
 
             if row['distfiles']:
                 for distfile in row['distfiles'].split():
@@ -145,12 +142,9 @@ class OpenBSDIndexParser(Parser):
                     pkgname = match.group(1)
 
                 pkg.set_name_and_version(pkgname, _normalize_version)
+                pkg.set_keyname(fields[1].rsplit(',', 1)[0])
                 pkg.set_summary(fields[3])
                 pkg.add_maintainers(extract_maintainers(fields[5]))
                 pkg.add_categories(fields[6].split())
-
-                origin = fields[1].rsplit(',', 1)[0]
-                pkg.set_origin(origin)
-                pkg.set_extra_field('portname', origin.split('/')[1])
 
                 yield pkg

@@ -39,14 +39,10 @@ class DPortsIndexParser(Parser):
                     continue
 
                 pkg.set_name_and_version(fields[0], normalize_version)
+                pkg.set_keyname('/'.join(fields[1].rsplit('/', 2)[1:]))
                 pkg.set_summary(fields[3])
                 pkg.add_maintainers(extract_maintainers(fields[5]))
                 pkg.add_categories(fields[6].split())
                 pkg.add_homepages(fields[12])
-
-                port_path = fields[1].split('/')
-
-                pkg.set_extra_field('portname', port_path[-1])
-                pkg.set_origin('/'.join(port_path[-2:]))
 
                 yield pkg
