@@ -142,7 +142,7 @@ class OpenBSDIndexParser(Parser):
                     pkgname = match.group(1)
 
                 pkg.set_name_and_version(pkgname, _normalize_version)
-                pkg.set_keyname(fields[1].rsplit(',', 1)[0])
+                pkg.set_keyname(fields[1].split(',', 1)[0])
                 pkg.set_summary(fields[3])
                 pkg.add_maintainers(extract_maintainers(fields[5]))
                 pkg.add_categories(fields[6].split())
