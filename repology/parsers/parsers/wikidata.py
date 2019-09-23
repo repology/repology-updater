@@ -48,10 +48,10 @@ class WikidataJsonParser(Parser):
                 pkg.set_keyname(entity)
                 pkg.set_visiblename(label)
                 pkg.set_summary(packagedata.get('projectDescription'))
-                pkg.add_licenses(sorted(packagedata.get('licenses', '').split(', ')))
-                pkg.add_homepages(sorted(packagedata.get('websites', '').split(', ')))
+                pkg.add_licenses(sorted(packagedata.get('licenses', '').split('␞')))
+                pkg.add_homepages(sorted(packagedata.get('websites', '').split('␞')))
 
-                names = sorted(packagedata['repology_projects'].split(', '))
+                names = sorted(packagedata['repology_projects'].split('␞'))
 
                 if len(names) > 1:
                     pkg.log('multiple Repology project names: {}'.format(','.join(names)), severity=Logger.WARNING)
@@ -62,7 +62,7 @@ class WikidataJsonParser(Parser):
                 pkgs_normal = []
 
                 # generate a package for each version
-                for version in sorted(packagedata['versions'].split(', ')):
+                for version in sorted(packagedata['versions'].split('␞')):
                     version, *flags = version.split('|')
 
                     verpkg = pkg.clone()

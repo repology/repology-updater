@@ -49,12 +49,12 @@
                     CONCAT(
                       ?version,
                       ?versionSuffixes
-                    ); separator=', '
+                    ); separator='␞'
                   )
                   AS ?versions
                 )
-                (GROUP_CONCAT(DISTINCT ?website; separator=', ') as ?websites)
-                (GROUP_CONCAT(DISTINCT ?license; separator=', ') as ?licenses)
+                (GROUP_CONCAT(DISTINCT ?website; separator='␞') as ?websites)
+                (GROUP_CONCAT(DISTINCT ?license; separator='␞') as ?licenses)
                 (SAMPLE(?repology_projects) as ?repology_projects)
               WHERE {
                 {
@@ -71,7 +71,7 @@
                       )
                       as ?versionSuffixes
                     )
-                    (GROUP_CONCAT(DISTINCT ?repology_project; separator=', ') as ?repology_projects)
+                    (GROUP_CONCAT(DISTINCT ?repology_project; separator='␞') as ?repology_projects)
                   WHERE {
                     ?project wdt:P6931 ?repology_project .
 
