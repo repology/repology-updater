@@ -167,7 +167,7 @@ class PackageTransformer:
             self._recalc_opt_ruleblocks()
 
         # XXX: duplicate code: PackageMaker does the same
-        package.effname = package.basename if package.basename is not None else package.name
+        package.effname = package.projectname_seed
 
         package_context = PackageContext()
         if package.repo:
