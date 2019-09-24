@@ -10,8 +10,8 @@
   # default_maintainer is set from the parser
   sources:
     - name: hackage
-      fetcher: TarFetcher
-      parser: HackageParser
+      fetcher: FileFetcher
+      parser: HackageTarParser
       url: https://hackage.haskell.org/packages/index.tar.gz
   shadow: true
   repolinks:

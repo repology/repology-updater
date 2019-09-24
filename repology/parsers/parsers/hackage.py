@@ -17,11 +17,13 @@
 
 import os
 import re
+import tarfile
+from abc import abstractmethod
+from io import StringIO
 from typing import Dict, IO, Iterable, Optional
 
 from libversion import version_compare
 
-from repology.logger import Logger
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -90,14 +92,58 @@ def _iter_cabal_hier(path: str) -> Iterable[Dict[str, str]]:
                 maxversion = versiondir
                 cabalpath = os.path.join(path, moduledir, maxversion, moduledir + '.cabal')
 
-        if maxversion is not None:
+        if cabalpath is not None:
             with open(cabalpath) as cabaldata:
                 yield _parse_cabal_file(cabaldata)
 
 
-class HackageParser(Parser):
+def _iter_hackage_tarfile(path: str) -> Iterable[Dict[str, str]]:
+    preferred_versions: Dict[str, str] = {}
+
+    current_name: Optional[str] = None
+    maxversion: Optional[str] = None
+    maxversion_data: Optional[str] = None
+
+    with tarfile.open(path, 'r|*') as tar:
+        for tarinfo in tar:
+            def read_tar() -> str:
+                extracted = tar.extractfile(tarinfo)
+                assert(extracted is not None)
+                return extracted.read().decode('utf-8')
+
+            tarpath = tarinfo.name.split('/')
+
+            if tarpath[-1] == 'preferred-versions':
+                if current_name is not None:
+                    raise RuntimeError('Invariant failed: preferred-versions before all packages in tarfile')
+
+                preferred_versions[tarpath[0]] = read_tar()
+            elif tarpath[-1].endswith('.cabal'):
+                name, version = tarpath[0:2]
+
+                if name != current_name:
+                    if maxversion_data is not None:
+                        yield _parse_cabal_file(StringIO(maxversion_data))
+
+                    current_name = name
+                    maxversion = version
+                    maxversion_data = read_tar()
+                else:
+                    if maxversion is None or version_compare(version, maxversion) > 0:
+                        maxversion = version
+                        maxversion_data = read_tar()
+
+        if maxversion_data is not None:
+            yield _parse_cabal_file(StringIO(maxversion_data))
+
+
+class HackageParserBase(Parser):
+    @abstractmethod
+    def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
+        pass
+
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        for cabaldata in _iter_cabal_hier(path):
+        for cabaldata in self._iterate(path):
             with factory.begin() as pkg:
                 pkg.set_name(cabaldata['name'])
                 pkg.set_version(cabaldata['version'])
@@ -114,3 +160,13 @@ class HackageParser(Parser):
                 pkg.add_homepages('http://hackage.haskell.org/package/' + cabaldata['name'])
 
                 yield pkg
+
+
+class HackageParser(HackageParserBase):
+    def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
+        yield from _iter_cabal_hier(path)
+
+
+class HackageTarParser(HackageParserBase):
+    def _iterate(self, path: str) -> Iterable[Dict[str, str]]:
+        yield from _iter_hackage_tarfile(path)
