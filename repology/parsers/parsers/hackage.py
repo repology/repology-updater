@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Dict, Iterable, Optional
+from typing import Dict, IO, Iterable, Optional
 
 from libversion import version_compare
 
@@ -32,80 +32,76 @@ _WHITESPACE_PREFIX_RE = re.compile('([ ]*)[^ ]')
 _KEYVAL_RE = re.compile('([a-zA-Z-]+)[ \t]*:[ \t]*(.*?)')
 
 
-def _parse_cabal_file(path: str) -> Dict[str, str]:
+def _parse_cabal_file(cabalfile: IO[str]) -> Dict[str, str]:
     cabaldata: Dict[str, str] = {}
     offset: Optional[int] = None
     key: Optional[str] = None
 
-    with open(path, 'r', encoding='utf-8') as cabalfile:
-        for line in cabalfile:
-            line = line.rstrip()
+    for line in cabalfile:
+        line = line.rstrip()
 
-            # offset is needed to be calculated first, from first non-whitespace line
-            if offset is None:
-                match = _WHITESPACE_PREFIX_RE.match(line)
-                if match:
-                    offset = len(match.group(1))
-                else:
-                    continue
-
-            line = line[offset:]
-
-            # ignore comments
-            if line.startswith('--'):
-                continue
-
-            # process multiline keys
-            if key:
-                if line.startswith(' '):
-                    cabaldata[key] = cabaldata[key] + ' ' + line.strip() if key in cabaldata else line.strip()
-                    continue
-                else:
-                    key = None
-
-            # process singleline key or start of a multiline key
-            match = _KEYVAL_RE.fullmatch(line)
-            if not match:
-                continue
-
-            if match.group(2):
-                cabaldata[match.group(1).lower()] = match.group(2)
+        # offset is needed to be calculated first, from first non-whitespace line
+        if offset is None:
+            match = _WHITESPACE_PREFIX_RE.match(line)
+            if match:
+                offset = len(match.group(1))
             else:
-                key = match.group(1).lower()
+                continue
+
+        line = line[offset:]
+
+        # ignore comments
+        if line.startswith('--'):
+            continue
+
+        # process multiline keys
+        if key:
+            if line.startswith(' '):
+                cabaldata[key] = cabaldata[key] + ' ' + line.strip() if key in cabaldata else line.strip()
+                continue
+            else:
+                key = None
+
+        # process singleline key or start of a multiline key
+        match = _KEYVAL_RE.fullmatch(line)
+        if not match:
+            continue
+
+        if match.group(2):
+            cabaldata[match.group(1).lower()] = match.group(2)
+        else:
+            key = match.group(1).lower()
 
     return cabaldata
 
 
-class HackageParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        for moduledir in os.listdir(path):
-            pkg = factory.begin()
+def _iter_cabal_hier(path: str) -> Iterable[Dict[str, str]]:
+    for moduledir in os.listdir(path):
+        modulepath = os.path.join(path, moduledir)
 
-            pkg.set_name(moduledir)
+        cabalpath: Optional[str] = None
+        maxversion: Optional[str] = None
 
-            modulepath = os.path.join(path, moduledir)
-
-            cabalpath: Optional[str] = None
-            maxversion: Optional[str] = None
-
-            for versiondir in os.listdir(modulepath):
-                if versiondir == 'preferred-versions':
-                    continue
-
-                if maxversion is None or version_compare(versiondir, maxversion) > 0:
-                    maxversion = versiondir
-                    cabalpath = os.path.join(path, moduledir, maxversion, moduledir + '.cabal')
-
-            if maxversion is None:
-                pkg.log('cannot determine max version'.format(), severity=Logger.ERROR)
+        for versiondir in os.listdir(modulepath):
+            if versiondir == 'preferred-versions':
                 continue
 
-            pkg.set_version(maxversion)
+            if maxversion is None or version_compare(versiondir, maxversion) > 0:
+                maxversion = versiondir
+                cabalpath = os.path.join(path, moduledir, maxversion, moduledir + '.cabal')
 
-            assert(cabalpath)
-            cabaldata = _parse_cabal_file(cabalpath)
+        if maxversion is not None:
+            with open(cabalpath) as cabaldata:
+                yield _parse_cabal_file(cabaldata)
 
-            if cabaldata['name'] == pkg.name and version_compare(cabaldata['version'], pkg.version) == 0:
+
+class HackageParser(Parser):
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+        for cabaldata in _iter_cabal_hier(path):
+            with factory.begin() as pkg:
+                pkg.set_name(cabaldata['name'])
+                pkg.set_version(cabaldata['version'])
+
                 pkg.set_summary(cabaldata.get('synopsis'))
                 if 'maintainer' not in cabaldata:
                     pkg.add_maintainers('fallback-mnt-hackage@repology')
@@ -114,9 +110,7 @@ class HackageParser(Parser):
                 pkg.add_licenses(cabaldata.get('license'))
                 pkg.add_homepages(cabaldata.get('homepage'))
                 pkg.add_categories(cabaldata.get('category'))
-            else:
-                pkg.log('cabal data sanity check failed ({} {} != {} {}), ignoring cabal data'.format(cabaldata['name'], cabaldata['version'], pkg.name, pkg.version), severity=Logger.ERROR)
 
-            pkg.add_homepages('http://hackage.haskell.org/package/' + moduledir)
+                pkg.add_homepages('http://hackage.haskell.org/package/' + cabaldata['name'])
 
-            yield pkg
+                yield pkg
