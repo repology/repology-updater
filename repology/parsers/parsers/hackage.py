@@ -115,13 +115,16 @@ def _iter_hackage_tarfile(path: str) -> Iterable[Dict[str, str]]:
 
             if tarpath[-1] == 'preferred-versions':
                 if current_name is not None:
-                    raise RuntimeError('Invariant failed: preferred-versions before all packages in tarfile')
+                    raise RuntimeError('format assumption failed: preferred-versions go before all packages')
 
                 preferred_versions[tarpath[0]] = read_tar()
             elif tarpath[-1].endswith('.cabal'):
                 name, version = tarpath[0:2]
 
                 if name != current_name:
+                    if current_name is not None and name < current_name:
+                        raise RuntimeError('format assumption failed: packages are alphabetically ordered')
+
                     if maxversion_data is not None:
                         yield _parse_cabal_file(StringIO(maxversion_data))
 
