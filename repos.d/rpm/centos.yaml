@@ -28,7 +28,7 @@
   desc: CentOS 7
   family: centos
   color: '932279'
-  minpackages: 2500
+  minpackages: 3000
   sources:
     - name: [ os, updates, extras ]
       fetcher: RepodataFetcher
@@ -43,4 +43,26 @@
 #  packagelinks:
 #    - desc: Package details on centos-packages.com
 #      url: 'http://centos-packages.com/7/package/{name}/'
+  tags: [ all, production, centos, rpm ]
+
+- name: centos_8
+  type: repository
+  desc: CentOS 8
+  family: centos
+  color: '932279'
+  minpackages: 2000
+  sources:
+    - name: [ AppStream, BaseOS, extras ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://vault.centos.org/centos/8/{source}/Source/'
+      subrepo: '{source}'
+  repolinks:
+    - desc: CentOS home
+      url: https://www.centos.org/
+    - desc: CentOS packages
+      url: http://centos-packages.com/8/
+#  packagelinks:
+#    - desc: Package details on centos-packages.com
+#      url: 'http://centos-packages.com/8/package/{name}/'
   tags: [ all, production, centos, rpm ]
