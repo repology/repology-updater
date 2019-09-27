@@ -16,8 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
+from dataclasses import dataclass
 from functools import cmp_to_key
-from typing import Callable, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 from repology.package import Package, PackageFlags, PackageStatus
 
@@ -70,62 +71,49 @@ def packageset_may_be_unignored(packages: Sequence[Package]) -> bool:
     return True
 
 
-def fill_packageset_versions(packages: Sequence[Package]) -> None:
-    # helpers
-    def aggregate_by_same_version(packages: Iterable[Package]) -> Iterable[List[Package]]:
-        current: List[Package] = []
+def aggregate_by_same_version(packages: Iterable[Package]) -> Iterable[List[Package]]:
+    current: List[Package] = []
 
-        for package in packages:
-            if not current:
-                current = [package]
-            elif current[0].version_compare(package) == 0:
-                current.append(package)
-            else:
-                yield current
-                current = [package]
-
-        if current:
+    for package in packages:
+        if not current:
+            current = [package]
+        elif current[0].version_compare(package) == 0:
+            current.append(package)
+        else:
             yield current
+            current = [package]
 
-    class Branch:
-        __slots__ = ['versionclass', 'bestpackage', 'lastpackage']
+    if current:
+        yield current
 
-        versionclass: int
-        bestpackage: Optional[Package]
-        lastpackage: Optional[Package]
 
-        def __init__(self, versionclass: int, bestpackage: Optional[Package] = None):
-            self.versionclass = versionclass
-            self.bestpackage = bestpackage
-            self.lastpackage = bestpackage
+@dataclass
+class _Branch:
+    newest_status: int
+    order: int
+    first: Optional[Package] = None
+    last: Optional[Package] = None
 
-        def set_last_package(self, lastpackage: Package) -> None:
-            self.lastpackage = lastpackage
+    def include(self, package: Package) -> None:
+        if self.first is None:
+            self.first = package
+        self.last = package
 
-        def best_package_compare(self, package: Package) -> int:
-            return package.version_compare(self.bestpackage) if self.bestpackage is not None else 1
+    def is_empty(self) -> bool:
+        return self.first is None
 
-        def is_after_branch(self, package: Package) -> bool:
-            return package.version_compare(self.lastpackage) == -1 if self.lastpackage is not None else False
+    def preceeds(self, package: Package) -> int:
+        assert(self.last)
+        return self.last.version_compare(package) > 0
 
-    class BranchPrototype:
-        __slots__ = ['_versionclass', '_check']
+    def compared_to_best(self, package: Package) -> int:
+        assert(self.first)
+        return package.version_compare(self.first)
 
-        _versionclass: int
-        #_check: Callable[[Package], bool]  # mypy goes mad
 
-        def __init__(self, versionclass: int, check: Callable[[Package], bool]) -> None:
-            self._versionclass = versionclass
-            self._check = check
-
-        def check(self, package: Package) -> bool:
-            return self._check(package)
-
-        def create_branch(self, bestpackage: Optional[Package] = None) -> 'Branch':
-            return Branch(self._versionclass, bestpackage)
-
+def fill_packageset_versions(packages: Sequence[Package]) -> None:
     # global flags #1
-    metapackage_is_unique = packageset_is_unique(packages)
+    project_is_unique = packageset_is_unique(packages)
 
     # preprocessing: rolling versions
     packages_to_process = []
@@ -154,30 +142,26 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
     # The proper solution would be to allow rules decide whether they may be unignored. This,
     # however, brings in more complex flag handling, as in `soft` and `hard` ignores, so I'd
     # like to postpone it for now
-    metapackage_should_unignore = packageset_may_be_unignored(packages)
-
-    # branch prototypes
-    default_branchproto = BranchPrototype(PackageStatus.NEWEST, lambda package: True)
-
-    branchprotos = [
-        BranchPrototype(PackageStatus.DEVEL, lambda package: package.has_flag(PackageFlags.DEVEL)),
-        default_branchproto,
-    ]
-
-    default_branchproto_idx = branchprotos.index(default_branchproto)
+    project_should_unignore = packageset_may_be_unignored(packages)
 
     #
-    # Pass 1: discover branches
+    # Pass 1: calculate branch boundaries
     #
-    branches: List[Branch] = []
     packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
-    current_branchproto_idx: Optional[int] = None
+
+    devel_branch = _Branch(newest_status=PackageStatus.DEVEL, order=0)
+    main_branch = _Branch(newest_status=PackageStatus.NEWEST, order=1)
+
+    current_branch = devel_branch
+
     for verpackages in aggregate_by_same_version(packages):
         version_totally_ignored = True
-        matching_branchproto_indexes = set()
 
-        if metapackage_should_unignore:
+        if project_should_unignore:
             version_totally_ignored = False
+
+        # gather flags present for the current version
+        is_devel = False
 
         for package in verpackages:
             packages_by_repo[package.repo].append(package)
@@ -185,41 +169,48 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
             if not package.has_flag(PackageFlags.ANY_IGNORED):
                 version_totally_ignored = False
 
-            for branchproto_idx in range(0, len(branchprotos)):
-                if branchprotos[branchproto_idx].check(package):
-                    matching_branchproto_indexes.add(branchproto_idx)
+            if package.has_flag(PackageFlags.DEVEL):
+                is_devel = True
 
-        # if there's at least one package with a non-default branch, that branch is a candidate
-        # if there's only one such candidate branch (not counting the default branch), choose it
-        # this works when there are 1.0r1 (not devel) and 1.0rc1 (devel) versions
-        matching_branchproto_indexes.discard(default_branchproto_idx)
-        final_branchproto_idx = list(matching_branchproto_indexes)[0] if len(matching_branchproto_indexes) == 1 else default_branchproto_idx
+        #
+        # The important logic of branch bounds handling follows
+        #
 
-        if final_branchproto_idx == current_branchproto_idx:
-            branches[-1].set_last_package(verpackages[0])
-        elif (current_branchproto_idx is None or final_branchproto_idx > current_branchproto_idx) and not version_totally_ignored:
-            branches.append(branchprotos[final_branchproto_idx].create_branch(verpackages[0]))
-            current_branchproto_idx = final_branchproto_idx
+        # 1. Choose suitable branch naively
+        #    The following code may use different branch as it enforces branch order, e.g.
+        #    devel may not follow main
+        target_branch = devel_branch if is_devel else main_branch
 
-    # we should always have at least one branch
-    if not branches:
-        branches = [default_branchproto.create_branch()]
+        # 2. Debase ignored versions
+        #    These may only be added to the bottom of their designated branch, otherwise
+        #    they do not affect branch bounds
+        if version_totally_ignored:
+            if current_branch == target_branch and not current_branch.is_empty():
+                current_branch.include(verpackages[0])
+            continue
+
+        # 3. Switch to the next branch when needed
+        if target_branch.order > current_branch.order:
+            current_branch = target_branch
+
+        # 4. Assign the version to the current branch (effectively update branch bounds)
+        current_branch.include(verpackages[0])
 
     #
     # Pass 2: fill version classes
     #
     for repo, repo_packages in packages_by_repo.items():
-        current_branch_idx = 0
+        current_branch = devel_branch
         first_package_in_branch_per_flavor: Dict[str, Package] = {}
 
         for package in repo_packages:  # these are still sorted by version
-            # switch to next branch when the current one is over, but not past the last branch
-            while current_branch_idx < len(branches) - 1 and branches[current_branch_idx].is_after_branch(package):
-                current_branch_idx += 1
+            if current_branch is devel_branch and (current_branch.is_empty() or current_branch.preceeds(package)) and not main_branch.is_empty():
+                # switch from devel to main branch
+                current_branch = main_branch
                 first_package_in_branch_per_flavor = {}
 
             # chose version class based on comparison to branch best version
-            current_comparison = branches[current_branch_idx].best_package_compare(package)
+            current_comparison = 1 if current_branch.is_empty() else current_branch.compared_to_best(package)
 
             if current_comparison > 0:
                 # Note that the order here determines class priority when multiple
@@ -240,7 +231,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                 flavor = '_'.join(package.flavors)  # already sorted and unicalized in RepoProcessor
 
                 if current_comparison == 0:
-                    package.versionclass = PackageStatus.UNIQUE if metapackage_is_unique else branches[current_branch_idx].versionclass
+                    package.versionclass = PackageStatus.UNIQUE if project_is_unique else current_branch.newest_status
                 else:
                     non_first_in_branch = flavor in first_package_in_branch_per_flavor and first_package_in_branch_per_flavor[flavor].version_compare(package) != 0
 
