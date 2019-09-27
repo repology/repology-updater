@@ -44,8 +44,7 @@ class TestPackageTransformer(unittest.TestCase):
 
         for sample in samples:
             transformer.process(sample.package)
-            for k, v in sample.expectations.items():
-                self.assertEqual(getattr(sample.package, k), v, msg='{} of {}'.format(k, sample.package))
+            sample.check(self)
 
     def test_remove(self) -> None:
         self._check_transformer(

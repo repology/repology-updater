@@ -35,8 +35,7 @@ class TestPackageProc(unittest.TestCase):
         fill_packageset_versions([sample.package for sample in samples])
 
         for sample in samples:
-            for k, v in sample.expectations.items():
-                self.assertEqual(getattr(sample.package, k), v, msg='{} of {}'.format(k, sample.package))
+            sample.check(self)
 
     def test_packageset_is_unique(self) -> None:
         packages: List[Package] = []

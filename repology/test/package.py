@@ -19,6 +19,7 @@
 
 # mypy: no-disallow-untyped-calls
 
+import unittest
 from typing import Any, Dict, List, Optional
 
 from repology.package import Package
@@ -68,3 +69,7 @@ class PackageSample:
     def expect(self, **expectations: Any) -> 'PackageSample':
         self.expectations = expectations
         return self
+
+    def check(self, test: unittest.TestCase) -> None:
+        for k, v in self.expectations.items():
+            test.assertEqual(getattr(self.package, k), v, msg='{} of {}'.format(k, self.package))
