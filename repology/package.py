@@ -65,35 +65,22 @@ class PackageStatus:
 
 
 class PackageFlags:
-    # remove package
     REMOVE: ClassVar[int] = 1 << 0
-
-    # devel version
     DEVEL: ClassVar[int] = 1 << 1
-
-    # ignored variants
     IGNORE: ClassVar[int] = 1 << 2
     INCORRECT: ClassVar[int] = 1 << 3
     UNTRUSTED: ClassVar[int] = 1 << 4
     NOSCHEME: ClassVar[int] = 1 << 5
-
-    ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
-
-    ROLLING: ClassVar[int] = 1 << 7  # is processed differently than other ignoreds
-
-    # forced classes
+    ROLLING: ClassVar[int] = 1 << 7
     OUTDATED: ClassVar[int] = 1 << 8
     LEGACY: ClassVar[int] = 1 << 9
-
-    # version special flags
     P_IS_PATCH: ClassVar[int] = 1 << 10
     ANY_IS_PATCH: ClassVar[int] = 1 << 11
-
     TRACE: ClassVar[int] = 1 << 12
-
     WEAK_DEVEL: ClassVar[int] = 1 << 13
-
     STABLE: ClassVar[int] = 1 << 14
+
+    ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 
     @staticmethod
     def get_metaorder(val: int) -> int:
