@@ -352,6 +352,28 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='1', version='10.0', branch='10.x', flags=Pf.UNTRUSTED).expect(versionclass=Ps.LEGACY),
         )
 
+    def test_branch_devel(self) -> None:
+        # devel versions should be ignored when considering newest package in branch
+        self._check_fill_versions(
+            PackageSample(repo='0', version='11.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='0', version='10.1', branch='10.x').expect(versionclass=Ps.LEGACY),
+
+            PackageSample(repo='1', version='11.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='10.2alpha1', branch='10.x', flags=Pf.DEVEL).expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='1', version='10.0', branch='10.x').expect(versionclass=Ps.LEGACY),
+        )
+
+    def test_branch_multi(self) -> None:
+        # multiple similar versions should have the same status
+        self._check_fill_versions(
+            PackageSample(repo='0', version='11.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='0', version='10.1', branch='10.x').expect(versionclass=Ps.LEGACY),
+
+            PackageSample(repo='1', version='11.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='10.0', branch='10.x').expect(versionclass=Ps.OUTDATED),
+            PackageSample(repo='1', version='10.0', branch='10.x').expect(versionclass=Ps.OUTDATED),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
