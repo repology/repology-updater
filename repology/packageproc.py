@@ -18,7 +18,7 @@
 from collections import defaultdict
 from dataclasses import dataclass
 from functools import cmp_to_key
-from typing import Dict, Iterable, List, MutableSet, Optional, Sequence, Tuple, cast
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple, cast
 
 from repology.package import Package, PackageFlags, PackageStatus
 
@@ -224,7 +224,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
     for repo, repo_packages in packages_by_repo.items():
         current_branch = devel_branch
         first_package_in_branch_per_flavor: Dict[str, Package] = {}
-        seen_legacy_branches: MutableSet[str] = set()
+        first_package_seen_in_legacy_branch: Dict[str, Package] = {}
 
         for package in repo_packages:  # these are still sorted by version
             do_switch_to_devel = (
@@ -271,7 +271,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
 
                     non_first_in_legacy_branch = (
                         package.branch is not None and
-                        package.branch not in seen_legacy_branches and
+                        (package.branch not in first_package_seen_in_legacy_branch or first_package_seen_in_legacy_branch[package.branch].version_compare(package) == 0) and
                         package.branch in first_package_in_legacy_branch and
                         first_package_in_legacy_branch[package.branch].version_compare(package) > 0
                     )
@@ -286,8 +286,8 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                 if flavor not in first_package_in_branch_per_flavor:
                     first_package_in_branch_per_flavor[flavor] = package
 
-            if package.branch is not None:
-                seen_legacy_branches.add(package.branch)
+            if package.branch is not None and package.branch not in first_package_seen_in_legacy_branch:
+                first_package_seen_in_legacy_branch[package.branch] = package
 
 
 def packageset_sort_by_version(packages: Sequence[Package]) -> List[Package]:
