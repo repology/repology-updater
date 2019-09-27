@@ -19,7 +19,7 @@
 
 # mypy: no-disallow-untyped-calls
 
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from repology.package import Package
 from repology.packagemaker import PackageFactory
@@ -30,8 +30,8 @@ def spawn_package(
     name: str = 'dummyname',
     version: str = '0',
     repo: str = 'dummyrepo',
-    family: str = 'dummyfamily',
     flags: int = 0,
+    family: Optional[str] = None,
     homepage: Optional[str] = None,
     comment: Optional[str] = None,
     category: Optional[str] = None,
@@ -49,9 +49,22 @@ def spawn_package(
     m.add_categories(category)
     m.add_maintainers(maintainers)
 
-    p = m.spawn(repo=repo, family=family)
+    p = m.spawn(repo=repo, family=family if family is not None else repo)
 
     if flavors is not None:
         p.flavors.extend(flavors)
 
     return p
+
+
+class PackageSample:
+    package: Package
+    expectations: Dict[str, Any]
+
+    def __init__(self, **pkgargs: Any) -> None:
+        self.package = spawn_package(**pkgargs)
+        self.expectations = {}
+
+    def expect(self, **expectations: Any) -> 'PackageSample':
+        self.expectations = expectations
+        return self
