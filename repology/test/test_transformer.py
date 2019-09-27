@@ -88,6 +88,34 @@ class TestPackageTransformer(unittest.TestCase):
             PackageSample(name='p2', version='1.0', flags=Pf.DEVEL).expect(flags=Pf.DEVEL),
         )
 
+    def test_stable(self) -> None:
+        self._check_transformer(
+            '[ { name: p1, stable: true } ]',
+            PackageSample(name='p1', version='1.0').expect(flags=Pf.STABLE),
+            PackageSample(name='p2', version='1.0').expect(flags=0),
+        )
+
+    def test_un_stable(self) -> None:
+        self._check_transformer(
+            '[ { name: p1, stable: false } ]',
+            PackageSample(name='p1', version='1.0', flags=Pf.STABLE).expect(flags=0),
+            PackageSample(name='p2', version='1.0', flags=Pf.STABLE).expect(flags=Pf.STABLE),
+        )
+
+    def test_altver(self) -> None:
+        self._check_transformer(
+            '[ { name: p1, altver: true } ]',
+            PackageSample(name='p1', version='1.0').expect(flags=Pf.ALTVER),
+            PackageSample(name='p2', version='1.0').expect(flags=0),
+        )
+
+    def test_un_altver(self) -> None:
+        self._check_transformer(
+            '[ { name: p1, altver: false } ]',
+            PackageSample(name='p1', version='1.0', flags=Pf.ALTVER).expect(flags=0),
+            PackageSample(name='p2', version='1.0', flags=Pf.ALTVER).expect(flags=Pf.ALTVER),
+        )
+
     def test_multiflags(self) -> None:
         self._check_transformer(
             '[ { devel: true, ignore: false, noscheme: true }, { ignore: true, noscheme: false } ]',
