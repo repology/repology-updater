@@ -106,6 +106,29 @@ class PackageFlags:
             return -1
         return 0
 
+    @staticmethod
+    def as_string(val: int) -> str:
+        """Return string representation of a flags combination."""
+        if val == 0:
+            return '-'
+
+        return '|'.join(
+            name for var, name in {
+                PackageFlags.REMOVE: 'REMOVE',
+                PackageFlags.DEVEL: 'DEVEL',
+                PackageFlags.IGNORE: 'IGNORE',
+                PackageFlags.INCORRECT: 'INCORRECT',
+                PackageFlags.UNTRUSTED: 'UNTRUSTED',
+                PackageFlags.NOSCHEME: 'NOSCHEME',
+                PackageFlags.ROLLING: 'ROLLING',
+                PackageFlags.OUTDATED: 'OUTDATED',
+                PackageFlags.LEGACY: 'LEGACY',
+                PackageFlags.P_IS_PATCH: 'P_IS_PATCH',
+                PackageFlags.ANY_IS_PATCH: 'ANY_IS_PATCH',
+                PackageFlags.TRACE: 'TRACE',
+            }.items() if val & var
+        )
+
 
 class Package:
     __slots__ = [

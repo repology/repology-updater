@@ -25,7 +25,7 @@ from typing import Any, Iterable
 
 from repology.config import config
 from repology.logger import FileLogger, Logger, StderrLogger
-from repology.package import Package, PackageStatus
+from repology.package import Package, PackageFlags, PackageStatus
 from repology.packageproc import fill_packageset_versions
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
@@ -34,6 +34,8 @@ from repology.repoproc import RepositoryProcessor
 def format_package_field(key: str, value: Any) -> str:
     if key == 'versionclass':
         return PackageStatus.as_string(value)
+    if key == 'flags':
+        return PackageFlags.as_string(value)
     if isinstance(value, dict):
         return str({k: v for k, v in sorted(value.items())})
     return str(value)
