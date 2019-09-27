@@ -228,13 +228,21 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
         seen_legacy_branches: MutableSet[str] = set()
 
         for package in repo_packages:  # these are still sorted by version
-            if current_branch is devel_branch and (current_branch.is_empty() or current_branch.preceeds(package)) and not main_branch.is_empty():
+            do_switch_to_devel = (
+                current_branch is devel_branch and
+                (current_branch.is_empty() or current_branch.preceeds(package)) and
+                not main_branch.is_empty()
+            )
+            if do_switch_to_devel:
                 # switch from devel to main branch
                 current_branch = main_branch
                 first_package_in_branch_per_flavor = {}
 
             # chose version class based on comparison to branch best version
-            current_comparison = 1 if current_branch.is_empty() else current_branch.compared_to_best(package, cast(bool, package.flags & PackageFlags.ALTVER))
+            if current_branch.is_empty():
+                current_comparison = 1
+            else:
+                current_comparison = current_branch.compared_to_best(package, cast(bool, package.flags & PackageFlags.ALTVER))
 
             if current_comparison > 0:
                 # Note that the order here determines class priority when multiple
@@ -257,14 +265,23 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                 if current_comparison == 0:
                     package.versionclass = PackageStatus.UNIQUE if project_is_unique else current_branch.newest_status
                 else:
-                    non_first_in_branch = flavor in first_package_in_branch_per_flavor and first_package_in_branch_per_flavor[flavor].version_compare(package) != 0
+                    non_first_in_branch = (
+                        flavor in first_package_in_branch_per_flavor and
+                        first_package_in_branch_per_flavor[flavor].version_compare(package) != 0
+                    )
 
-                    non_first_in_legacy_branch = package.branch is not None and package.branch not in seen_legacy_branches and first_package_in_legacy_branch[package.branch].version_compare(package) > 0
+                    non_first_in_legacy_branch = (
+                        package.branch is not None and
+                        package.branch not in seen_legacy_branches and
+                        first_package_in_legacy_branch[package.branch].version_compare(package) > 0
+                    )
 
-                    if (non_first_in_branch and not non_first_in_legacy_branch) or package.has_flag(PackageFlags.LEGACY):
-                        package.versionclass = PackageStatus.LEGACY
-                    else:
-                        package.versionclass = PackageStatus.OUTDATED
+                    legacy_allowed = (
+                        (non_first_in_branch and not non_first_in_legacy_branch) or
+                        package.has_flag(PackageFlags.LEGACY)
+                    )
+
+                    package.versionclass = PackageStatus.LEGACY if legacy_allowed else PackageStatus.OUTDATED
 
                 if flavor not in first_package_in_branch_per_flavor:
                     first_package_in_branch_per_flavor[flavor] = package
