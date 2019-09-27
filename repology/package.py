@@ -287,6 +287,9 @@ class Package:
             ((other.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH)
         )
 
+    def __repr__(self) -> str:
+        return 'Package(repo={}, name={}, version={})'.format(self.repo, self.name, self.version)
+
     # XXX: add signature to this, see https://github.com/python/mypy/issues/6523
     @property
     def __dict__(self):  # type: ignore
