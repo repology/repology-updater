@@ -273,6 +273,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                     non_first_in_legacy_branch = (
                         package.branch is not None and
                         package.branch not in seen_legacy_branches and
+                        package.branch in first_package_in_legacy_branch and
                         first_package_in_legacy_branch[package.branch].version_compare(package) > 0
                     )
 

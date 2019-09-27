@@ -320,7 +320,7 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='0', version='1.0').expect(versionclass=Ps.LEGACY),
         )
 
-    def test_branch(self) -> None:
+    def test_branch_off(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='0', version='11.1').expect(versionclass=Ps.NEWEST),
             PackageSample(repo='0', version='10.1').expect(versionclass=Ps.LEGACY),
@@ -330,6 +330,7 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='1', version='10.0').expect(versionclass=Ps.LEGACY),
         )
 
+    def test_branch_on(self) -> None:
         self._check_fill_versions(
             PackageSample(repo='0', version='11.1').expect(versionclass=Ps.NEWEST),
             PackageSample(repo='0', version='10.1', branch='10.x').expect(versionclass=Ps.LEGACY),
@@ -338,6 +339,17 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='1', version='11.1').expect(versionclass=Ps.NEWEST),
             # outdated, because there's no latest 10.1 for 10.x in this repo
             PackageSample(repo='1', version='10.0', branch='10.x').expect(versionclass=Ps.OUTDATED),
+        )
+
+    def test_branch_ignored(self) -> None:
+        # legacy branch not created because older versions are ignored
+        # should fallback to generic behavior as if branch wasn't specified
+        self._check_fill_versions(
+            PackageSample(repo='0', version='11.1').expect(versionclass=Ps.NEWEST),
+
+            PackageSample(repo='1', version='11.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='10.1', branch='10.x', flags=Pf.UNTRUSTED).expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='1', version='10.0', branch='10.x', flags=Pf.UNTRUSTED).expect(versionclass=Ps.LEGACY),
         )
 
 
