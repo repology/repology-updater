@@ -18,7 +18,7 @@
 from collections import defaultdict
 from dataclasses import dataclass
 from functools import cmp_to_key
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple, cast
 
 from repology.package import Package, PackageFlags, PackageStatus
 
@@ -92,23 +92,31 @@ class _Branch:
     newest_status: int
     order: int
     first: Optional[Package] = None
+    altfirst: Optional[Package] = None
     last: Optional[Package] = None
 
-    def include(self, package: Package) -> None:
-        if self.first is None:
+    def include(self, package: Package, alt: bool = False) -> None:
+        if self.first is None and not alt:
             self.first = package
+        if self.altfirst is None:
+            self.altfirst = package
+
         self.last = package
 
     def is_empty(self) -> bool:
-        return self.first is None
+        return self.altfirst is None
 
     def preceeds(self, package: Package) -> int:
         assert(self.last)
         return self.last.version_compare(package) > 0
 
-    def compared_to_best(self, package: Package) -> int:
-        assert(self.first)
-        return package.version_compare(self.first)
+    def compared_to_best(self, package: Package, alt: bool = False) -> int:
+        if alt:
+            assert(self.altfirst)
+            return package.version_compare(self.altfirst)
+        else:
+            assert(self.first)
+            return package.version_compare(self.first)
 
 
 def fill_packageset_versions(packages: Sequence[Package]) -> None:
@@ -155,34 +163,26 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
     current_branch = devel_branch
 
     for verpackages in aggregate_by_same_version(packages):
-        version_totally_ignored = True
-
-        if project_should_unignore:
-            version_totally_ignored = False
-
-        # gather flags present for the current version
-        has_normal = False
-        has_weak_devel = False
-        has_devel = False
-        has_stable = False
+        all_flags = 0
+        has_non_devel = False
+        version_totally_ignored = not project_should_unignore
 
         for package in verpackages:
             packages_by_repo[package.repo].append(package)
 
+            all_flags |= package.flags
+
             if not package.has_flag(PackageFlags.ANY_IGNORED):
                 version_totally_ignored = False
 
-            if package.has_flag(PackageFlags.DEVEL):
-                has_devel = True
-            elif package.has_flag(PackageFlags.WEAK_DEVEL):
-                has_weak_devel = True
-            else:
-                has_normal = True
+            if not package.has_flag(PackageFlags.DEVEL | PackageFlags.WEAK_DEVEL):
+                has_non_devel = True
 
-            if package.has_flag(PackageFlags.STABLE):
-                has_stable = True
-
-        is_devel = (has_devel or (has_weak_devel and not has_normal)) and not has_stable
+        is_devel = (
+            all_flags & PackageFlags.DEVEL or (
+                all_flags & PackageFlags.WEAK_DEVEL and not has_non_devel
+            )
+        ) and not all_flags & PackageFlags.STABLE
 
         #
         # The important logic of branch bounds handling follows
@@ -198,7 +198,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
         #    they do not affect branch bounds
         if version_totally_ignored:
             if current_branch == target_branch and not current_branch.is_empty():
-                current_branch.include(verpackages[0])
+                current_branch.include(verpackages[0], cast(bool, all_flags & PackageFlags.ALTVER))
             continue
 
         # 3. Switch to the next branch when needed
@@ -206,7 +206,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
             current_branch = target_branch
 
         # 4. Assign the version to the current branch (effectively update branch bounds)
-        current_branch.include(verpackages[0])
+        current_branch.include(verpackages[0], cast(bool, all_flags & PackageFlags.ALTVER))
 
     #
     # Pass 2: fill version classes
@@ -222,7 +222,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                 first_package_in_branch_per_flavor = {}
 
             # chose version class based on comparison to branch best version
-            current_comparison = 1 if current_branch.is_empty() else current_branch.compared_to_best(package)
+            current_comparison = 1 if current_branch.is_empty() else current_branch.compared_to_best(package, cast(bool, package.flags & PackageFlags.ALTVER))
 
             if current_comparison > 0:
                 # Note that the order here determines class priority when multiple

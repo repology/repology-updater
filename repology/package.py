@@ -79,6 +79,7 @@ class PackageFlags:
     TRACE: ClassVar[int] = 1 << 12
     WEAK_DEVEL: ClassVar[int] = 1 << 13
     STABLE: ClassVar[int] = 1 << 14
+    ALTVER: ClassVar[int] = 1 << 15
 
     ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
 
@@ -119,6 +120,7 @@ class PackageFlags:
                 PackageFlags.TRACE: 'TRACE',
                 PackageFlags.WEAK_DEVEL: 'WEAK_DEVEL',
                 PackageFlags.STABLE: 'STABLE',
+                PackageFlags.ALTVER: 'ALTVER',
             }.items() if val & var
         )
 

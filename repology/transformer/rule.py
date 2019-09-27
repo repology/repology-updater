@@ -587,6 +587,14 @@ class Rule:
 
             self._actions.append(trace_action)
 
+        if 'altver' in ruledata:
+            altver_flag: Final = ruledata['altver']
+
+            def altver_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.ALTVER, altver_flag)
+
+            self._actions.append(altver_action)
+
         if 'last' in ruledata:
             def last_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
                 match_context.last = True
