@@ -146,15 +146,54 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
-    def test_versionclass_branch_confusion(self) -> None:
+    def test_hard_devel(self) -> None:
         packages = [
-            # same version is both devel and default in different packages
-            # this should be consistently aggregated
             (spawn_package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
             (spawn_package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
 
             (spawn_package(repo='2', family='2', name='a', version='2.1'), PackageStatus.DEVEL),
             (spawn_package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
+        ]
+
+        fill_packageset_versions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_stable(self) -> None:
+        packages = [
+            (spawn_package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.DEVEL), PackageStatus.NEWEST),
+            (spawn_package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.DEVEL), PackageStatus.LEGACY),
+
+            (spawn_package(repo='2', family='2', name='a', version='2.1', flags=PackageFlags.STABLE), PackageStatus.NEWEST),
+            (spawn_package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
+        ]
+
+        fill_packageset_versions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_weak_devel1(self) -> None:
+        packages = [
+            (spawn_package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.WEAK_DEVEL), PackageStatus.NEWEST),
+            (spawn_package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.WEAK_DEVEL), PackageStatus.LEGACY),
+
+            (spawn_package(repo='2', family='2', name='a', version='2.1'), PackageStatus.NEWEST),
+            (spawn_package(repo='2', family='2', name='a', version='2.0'), PackageStatus.LEGACY),
+        ]
+
+        fill_packageset_versions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
+    def test_weak_devel2(self) -> None:
+        packages = [
+            (spawn_package(repo='1', family='1', name='a', version='2.1', flags=PackageFlags.WEAK_DEVEL), PackageStatus.DEVEL),
+            (spawn_package(repo='1', family='1', name='a', version='2.0', flags=PackageFlags.WEAK_DEVEL), PackageStatus.NEWEST),
+
+            (spawn_package(repo='2', family='2', name='a', version='2.0'), PackageStatus.NEWEST),
         ]
 
         fill_packageset_versions([package for package, _ in packages])

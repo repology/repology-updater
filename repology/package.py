@@ -91,6 +91,10 @@ class PackageFlags:
 
     TRACE: ClassVar[int] = 1 << 12
 
+    WEAK_DEVEL: ClassVar[int] = 1 << 13
+
+    STABLE: ClassVar[int] = 1 << 14
+
     @staticmethod
     def get_metaorder(val: int) -> int:
         """Return a higher order version sorting key based on flags.
@@ -126,6 +130,8 @@ class PackageFlags:
                 PackageFlags.P_IS_PATCH: 'P_IS_PATCH',
                 PackageFlags.ANY_IS_PATCH: 'ANY_IS_PATCH',
                 PackageFlags.TRACE: 'TRACE',
+                PackageFlags.WEAK_DEVEL: 'WEAK_DEVEL',
+                PackageFlags.STABLE: 'STABLE',
             }.items() if val & var
         )
 

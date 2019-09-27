@@ -161,7 +161,10 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
             version_totally_ignored = False
 
         # gather flags present for the current version
-        is_devel = False
+        has_normal = False
+        has_weak_devel = False
+        has_devel = False
+        has_stable = False
 
         for package in verpackages:
             packages_by_repo[package.repo].append(package)
@@ -170,7 +173,16 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                 version_totally_ignored = False
 
             if package.has_flag(PackageFlags.DEVEL):
-                is_devel = True
+                has_devel = True
+            elif package.has_flag(PackageFlags.WEAK_DEVEL):
+                has_weak_devel = True
+            else:
+                has_normal = True
+
+            if package.has_flag(PackageFlags.STABLE):
+                has_stable = True
+
+        is_devel = (has_devel or (has_weak_devel and not has_normal)) and not has_stable
 
         #
         # The important logic of branch bounds handling follows
