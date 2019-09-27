@@ -463,6 +463,14 @@ class Rule:
 
             self._actions.append(weak_devel_action)
 
+        if 'stable' in ruledata:
+            stable_flag: Final = ruledata['stable']
+
+            def stable_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.set_flag(PackageFlags.STABLE, stable_flag)
+
+            self._actions.append(stable_action)
+
         if 'devel' in ruledata:
             devel_flag: Final = ruledata['devel']
 
