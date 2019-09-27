@@ -379,7 +379,7 @@ CREATE TABLE packages (
 	version text NOT NULL,
 	versionclass smallint,
 
-	flags smallint NOT NULL,
+	flags integer NOT NULL,
 	shadow bool NOT NULL,
 
 	flavors text[]
