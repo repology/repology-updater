@@ -18,7 +18,7 @@
 from collections import defaultdict
 from dataclasses import dataclass
 from functools import cmp_to_key
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple, cast
+from typing import Dict, Iterable, List, MutableSet, Optional, Sequence, Tuple, cast
 
 from repology.package import Package, PackageFlags, PackageStatus
 
@@ -162,10 +162,13 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
 
     current_branch = devel_branch
 
+    first_package_in_legacy_branch: Dict[str, Package] = {}
+
     for verpackages in aggregate_by_same_version(packages):
         all_flags = 0
         has_non_devel = False
         version_totally_ignored = not project_should_unignore
+        legacy_branch_names = set()
 
         for package in verpackages:
             packages_by_repo[package.repo].append(package)
@@ -177,6 +180,9 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
 
             if not package.has_flag(PackageFlags.DEVEL | PackageFlags.WEAK_DEVEL):
                 has_non_devel = True
+
+            if package.branch is not None:
+                legacy_branch_names.add(package.branch)
 
         is_devel = (
             all_flags & PackageFlags.DEVEL or (
@@ -208,12 +214,18 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
         # 4. Assign the version to the current branch (effectively update branch bounds)
         current_branch.include(verpackages[0], cast(bool, all_flags & PackageFlags.ALTVER))
 
+        # 5. Update legacy branches
+        for legacy_branch_name in legacy_branch_names:
+            if legacy_branch_name not in first_package_in_legacy_branch:
+                first_package_in_legacy_branch[legacy_branch_name] = verpackages[0]
+
     #
     # Pass 2: fill version classes
     #
     for repo, repo_packages in packages_by_repo.items():
         current_branch = devel_branch
         first_package_in_branch_per_flavor: Dict[str, Package] = {}
+        seen_legacy_branches: MutableSet[str] = set()
 
         for package in repo_packages:  # these are still sorted by version
             if current_branch is devel_branch and (current_branch.is_empty() or current_branch.preceeds(package)) and not main_branch.is_empty():
@@ -247,13 +259,18 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                 else:
                     non_first_in_branch = flavor in first_package_in_branch_per_flavor and first_package_in_branch_per_flavor[flavor].version_compare(package) != 0
 
-                    if non_first_in_branch or package.has_flag(PackageFlags.LEGACY):
+                    non_first_in_legacy_branch = package.branch is not None and package.branch not in seen_legacy_branches and first_package_in_legacy_branch[package.branch].version_compare(package) > 0
+
+                    if (non_first_in_branch and not non_first_in_legacy_branch) or package.has_flag(PackageFlags.LEGACY):
                         package.versionclass = PackageStatus.LEGACY
                     else:
                         package.versionclass = PackageStatus.OUTDATED
 
                 if flavor not in first_package_in_branch_per_flavor:
                     first_package_in_branch_per_flavor[flavor] = package
+
+            if package.branch is not None:
+                seen_legacy_branches.add(package.branch)
 
 
 def packageset_sort_by_version(packages: Sequence[Package]) -> List[Package]:

@@ -382,7 +382,8 @@ CREATE TABLE packages (
 	flags integer NOT NULL,
 	shadow bool NOT NULL,
 
-	flavors text[]
+	flavors text[],
+	branch text NULL
 );
 
 CREATE INDEX ON packages(effname);

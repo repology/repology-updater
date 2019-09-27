@@ -116,6 +116,33 @@ class TestPackageTransformer(unittest.TestCase):
             PackageSample(name='p2', version='1.0', flags=Pf.ALTVER).expect(flags=Pf.ALTVER),
         )
 
+    def test_setbranch(self) -> None:
+        self._check_transformer(
+            '[ { setbranch: "9.x" } ]',
+            PackageSample().expect(branch='9.x'),
+        )
+
+    def test_setbranchcomps(self) -> None:
+        self._check_transformer(
+            '[ { setbranchcomps: 1 } ]',
+            PackageSample(version='1.2.3.4').expect(branch='1'),
+        )
+
+        self._check_transformer(
+            '[ { setbranchcomps: 2 } ]',
+            PackageSample(version='1.2.3.4').expect(branch='1.2'),
+        )
+
+        self._check_transformer(
+            '[ { setbranchcomps: 3 } ]',
+            PackageSample(version='1.2.3.4').expect(branch='1.2.3'),
+        )
+
+        self._check_transformer(
+            '[ { setbranchcomps: 5 } ]',
+            PackageSample(version='1.2.3.4').expect(branch='1.2.3.4'),
+        )
+
     def test_multiflags(self) -> None:
         self._check_transformer(
             '[ { devel: true, ignore: false, noscheme: true }, { ignore: true, noscheme: false } ]',

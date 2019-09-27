@@ -38,6 +38,7 @@ def spawn_package(
     category: Optional[str] = None,
     maintainers: Optional[List[str]] = None,
     flavors: Optional[List[str]] = None,
+    branch: Optional[str] = None,
 ) -> Package:
     m = PackageFactory().begin()
 
@@ -54,6 +55,9 @@ def spawn_package(
 
     if flavors is not None:
         p.flavors.extend(flavors)
+
+    if branch is not None:
+        p.branch = branch
 
     return p
 

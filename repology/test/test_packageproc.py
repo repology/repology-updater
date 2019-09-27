@@ -320,6 +320,26 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='0', version='1.0').expect(versionclass=Ps.LEGACY),
         )
 
+    def test_branch(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='0', version='11.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='0', version='10.1').expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='0', version='10.0').expect(versionclass=Ps.LEGACY),
+
+            PackageSample(repo='1', version='11.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='10.0').expect(versionclass=Ps.LEGACY),
+        )
+
+        self._check_fill_versions(
+            PackageSample(repo='0', version='11.1').expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='0', version='10.1', branch='10.x').expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='0', version='10.0', branch='10.x').expect(versionclass=Ps.LEGACY),
+
+            PackageSample(repo='1', version='11.1').expect(versionclass=Ps.NEWEST),
+            # outdated, because there's no latest 10.1 for 10.x in this repo
+            PackageSample(repo='1', version='10.0', branch='10.x').expect(versionclass=Ps.OUTDATED),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

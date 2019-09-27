@@ -162,6 +162,7 @@ class Package:
         'shadow',
 
         'flavors',
+        'branch',
     ]
 
     repo: str
@@ -196,6 +197,7 @@ class Package:
     flags: int
     shadow: bool
     flavors: List[str]
+    branch: Optional[str]
 
     def __init__(self, *,
                  repo: str,
@@ -230,7 +232,8 @@ class Package:
 
                  flags: int = 0,
                  shadow: bool = False,
-                 flavors: Optional[List[str]] = None):
+                 flavors: Optional[List[str]] = None,
+                 branch: Optional[str] = None):
         # parsed, immutable
         self.repo = repo
         self.family = family
@@ -266,6 +269,7 @@ class Package:
         self.shadow = shadow
 
         self.flavors = flavors if flavors else []
+        self.branch = branch
 
     def check_format(self) -> bool:
         # check

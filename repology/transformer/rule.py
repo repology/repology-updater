@@ -632,6 +632,22 @@ class Rule:
 
             self._actions.append(resetflavors_action)
 
+        if 'setbranch' in ruledata:
+            setbranch: Final = ruledata['setbranch']
+
+            def setbranch_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.branch = match_context.sub_ver_dollars(setbranch, package.version)
+
+            self._actions.append(setbranch_action)
+
+        if 'setbranchcomps' in ruledata:
+            setbranchcomps: Final = ruledata['setbranchcomps']
+
+            def setbranchcomps_action(package: Package, package_context: PackageContext, match_context: MatchContext) -> None:
+                package.branch = '.'.join(re.split('[^a-zA-Z0-9]', package.version)[0:setbranchcomps])
+
+            self._actions.append(setbranchcomps_action)
+
         if 'addflag' in ruledata:
             addflags: Final = as_list(ruledata['addflag'])
 

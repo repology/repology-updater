@@ -63,6 +63,7 @@ class TestParsers(unittest.TestCase):
             'shadow': False,
 
             'flavors': [],
+            'branch': None,
 
             'extrafields': {},
         }

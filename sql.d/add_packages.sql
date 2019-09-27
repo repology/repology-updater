@@ -55,7 +55,8 @@ INSERT INTO packages(
 	flags,
 	shadow,
 
-	flavors
+	flavors,
+	branch
 ) VALUES (
 	-- parsed, immutable
 	%(repo)s,
@@ -91,5 +92,6 @@ INSERT INTO packages(
 	%(flags)s,
 	%(shadow)s,
 
-	%(flavors)s
+	%(flavors)s,
+	%(branch)s
 )
