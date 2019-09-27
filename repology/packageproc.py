@@ -90,7 +90,6 @@ def aggregate_by_same_version(packages: Iterable[Package]) -> Iterable[List[Pack
 @dataclass
 class _Branch:
     newest_status: int
-    order: int
     first: Optional[Package] = None
     altfirst: Optional[Package] = None
     last: Optional[Package] = None
@@ -157,8 +156,8 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
     #
     packages_by_repo: Dict[str, List[Package]] = defaultdict(list)
 
-    devel_branch = _Branch(newest_status=PackageStatus.DEVEL, order=0)
-    main_branch = _Branch(newest_status=PackageStatus.NEWEST, order=1)
+    devel_branch = _Branch(newest_status=PackageStatus.DEVEL)
+    main_branch = _Branch(newest_status=PackageStatus.NEWEST)
 
     current_branch = devel_branch
 
@@ -203,12 +202,12 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
         #    These may only be added to the bottom of their designated branch, otherwise
         #    they do not affect branch bounds
         if version_totally_ignored:
-            if current_branch == target_branch and not current_branch.is_empty():
+            if current_branch is target_branch and not current_branch.is_empty():
                 current_branch.include(verpackages[0], cast(bool, all_flags & PackageFlags.ALTVER))
             continue
 
         # 3. Switch to the next branch when needed
-        if target_branch.order > current_branch.order:
+        if target_branch is not current_branch and target_branch is main_branch:
             current_branch = target_branch
 
         # 4. Assign the version to the current branch (effectively update branch bounds)
