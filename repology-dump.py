@@ -53,6 +53,9 @@ def parse_arguments() -> argparse.Namespace:
 
     parser.add_argument('-a', '--all', action='store_true', help='dump all projects including shadow-only')
 
+    parser.add_argument('--from', type=str, default=None, help='dump projects starting from the given name', dest='from_')
+    parser.add_argument('--to', type=str, default=None, help='dump projects up to given name')
+
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name to process')
 
     return parser.parse_args()
@@ -83,6 +86,11 @@ def main() -> int:
 
     logger.log('dumping...')
     for packageset in repoproc.iter_parsed(reponames=options.reponames, logger=logger):
+        if options.from_ is not None and packageset[0].effname < options.from_:
+            continue
+        if options.to is not None and packageset[0].effname > options.to:
+            break
+
         fill_packageset_versions(packageset)
 
         if not options.all and packageset_is_shadow_only(packageset):
