@@ -215,7 +215,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
 
         # 5. Update legacy branches
         for legacy_branch_name in legacy_branch_names:
-            if legacy_branch_name not in first_package_in_legacy_branch:
+            if legacy_branch_name not in first_package_in_legacy_branch and not is_devel:
                 first_package_in_legacy_branch[legacy_branch_name] = verpackages[0]
 
     #
