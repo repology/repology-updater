@@ -278,6 +278,18 @@ class TestPackageProc(unittest.TestCase):
         for package, expectedclass in packages:
             self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
 
+    def test_versionclass_branch_bounds3(self) -> None:
+        packages = [
+            (spawn_package(repo='1', family='1', name='a', version='2.0beta1', flags=PackageFlags.DEVEL), PackageStatus.DEVEL),
+            # in absense of main branch, trailing ingnored versions should be assigned to devel
+            (spawn_package(repo='2', family='2', name='a', version='0.9999', flags=PackageFlags.IGNORE), PackageStatus.OUTDATED),
+        ]
+
+        fill_packageset_versions([package for package, _ in packages])
+
+        for package, expectedclass in packages:
+            self.assertEqual(package.versionclass, expectedclass, msg='repo {}, pkg {}, ver {}'.format(package.repo, package.name, package.version))
+
     def test_versionclass_ignoredignored(self) -> None:
         packages = [
             (spawn_package(repo='1', family='1', name='a', version='2.2.99999999', flags=PackageFlags.IGNORE), PackageStatus.IGNORED),
