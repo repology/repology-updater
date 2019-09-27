@@ -38,30 +38,28 @@ class ScoopGitParser(Parser):
                 fullpath = os.path.join(root, filename)
                 relpath = os.path.relpath(fullpath, path)
 
-                pkg = factory.begin(relpath)
+                with factory.begin(relpath) as pkg:
+                    with open(fullpath, 'r', encoding='utf-8') as jsonfile:
+                        data = json.load(jsonfile, strict=False)
 
-                data = None
-                with open(fullpath, 'r', encoding='utf-8') as jsonfile:
-                    data = json.load(jsonfile, strict=False)
+                    pkg.set_name(filename[:-5])
+                    pkg.set_version(data['version'])
 
-                pkg.set_name(filename[:-5])
-                pkg.set_version(data['version'])
+                    pkg.add_homepages(data.get('homepage'))
+                    pkg.add_downloads(data.get('url'))
 
-                pkg.add_homepages(data.get('homepage'))
-                pkg.add_downloads(data.get('url'))
+                    if 'architecture' in data:
+                        for archdata in data['architecture'].values():
+                            pkg.add_downloads(archdata.get('url'))
 
-                if 'architecture' in data:
-                    for archdata in data['architecture'].values():
-                        pkg.add_downloads(archdata.get('url'))
+                    if 'license' in data:
+                        if isinstance(data['license'], str):
+                            pkg.add_licenses(data['license'])
+                        elif isinstance(data['license'], dict) and 'identifier' in data['license']:
+                            pkg.add_licenses(data['license']['identifier'])
+                        else:
+                            pkg.log('unsupported license format for {}'.format(pkg.name), severity=Logger.ERROR)
 
-                if 'license' in data:
-                    if isinstance(data['license'], str):
-                        pkg.add_licenses(data['license'])
-                    elif isinstance(data['license'], dict) and 'identifier' in data['license']:
-                        pkg.add_licenses(data['license']['identifier'])
-                    else:
-                        pkg.log('unsupported license format for {}'.format(pkg.name), severity=Logger.ERROR)
+                    pkg.set_extra_field('path', relpath)
 
-                pkg.set_extra_field('path', relpath)
-
-                yield pkg
+                    yield pkg
