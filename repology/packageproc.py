@@ -161,13 +161,13 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
 
     current_section = devel_section
 
-    first_package_in_legacy_branch: Dict[str, Package] = {}
+    best_package_in_branch: Dict[str, Package] = {}
 
     for verpackages in aggregate_by_same_version(packages):
         all_flags = 0
         has_non_devel = False
         version_totally_ignored = not project_should_unignore
-        legacy_branch_names = set()
+        branches = set()
 
         for package in verpackages:
             packages_by_repo[package.repo].append(package)
@@ -181,7 +181,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                 has_non_devel = True
 
             if package.branch is not None:
-                legacy_branch_names.add(package.branch)
+                branches.add(package.branch)
 
         is_devel = (
             all_flags & PackageFlags.DEVEL or (
@@ -214,17 +214,17 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
         current_section.include(verpackages[0], cast(bool, all_flags & PackageFlags.ALTVER))
 
         # 5. Update legacy branches
-        for legacy_branch_name in legacy_branch_names:
-            if legacy_branch_name not in first_package_in_legacy_branch and not is_devel:
-                first_package_in_legacy_branch[legacy_branch_name] = verpackages[0]
+        for branch in branches:
+            if branch not in best_package_in_branch and not is_devel:
+                best_package_in_branch[branch] = verpackages[0]
 
     #
     # Pass 2: fill version classes
     #
     for repo, repo_packages in packages_by_repo.items():
         current_section = devel_section
-        first_package_in_section_per_flavor: Dict[str, Package] = {}
-        first_package_seen_in_legacy_branch: Dict[str, Package] = {}
+        first_package_in_section: Dict[str, Package] = {}  # by flavor
+        first_package_in_branch: Dict[Tuple[str, str], Package] = {}  # by branch, flavor
 
         for package in repo_packages:  # these are still sorted by version
             do_switch_to_devel = (
@@ -235,7 +235,7 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
             if do_switch_to_devel:
                 # switch from devel to main section
                 current_section = main_section
-                first_package_in_section_per_flavor = {}
+                first_package_in_section = {}
 
             # chose version class based on comparison to section best version
             if current_section.is_empty():
@@ -260,34 +260,35 @@ def fill_packageset_versions(packages: Sequence[Package]) -> None:
                     package.versionclass = PackageStatus.IGNORED
             else:
                 flavor = '_'.join(package.flavors)  # already sorted and unicalized in RepoProcessor
+                branch_key = None if package.branch is None else (package.branch, flavor)
 
                 if current_comparison == 0:
                     package.versionclass = PackageStatus.UNIQUE if project_is_unique else current_section.newest_status
                 else:
                     non_first_in_section = (
-                        flavor in first_package_in_section_per_flavor and
-                        first_package_in_section_per_flavor[flavor].version_compare(package) != 0
+                        flavor in first_package_in_section and
+                        first_package_in_section[flavor].version_compare(package) != 0
                     )
 
-                    non_first_in_legacy_branch = (
-                        package.branch is not None and
-                        (package.branch not in first_package_seen_in_legacy_branch or first_package_seen_in_legacy_branch[package.branch].version_compare(package) == 0) and
-                        package.branch in first_package_in_legacy_branch and
-                        first_package_in_legacy_branch[package.branch].version_compare(package) > 0
+                    first_but_not_best_in_branch = (
+                        branch_key is not None and
+                        (branch_key not in first_package_in_branch or first_package_in_branch[branch_key].version_compare(package) == 0) and
+                        package.branch in best_package_in_branch and
+                        best_package_in_branch[package.branch].version_compare(package) > 0
                     )
 
                     legacy_allowed = (
-                        (non_first_in_section and not non_first_in_legacy_branch) or
+                        (non_first_in_section and not first_but_not_best_in_branch) or
                         package.has_flag(PackageFlags.LEGACY)
                     )
 
                     package.versionclass = PackageStatus.LEGACY if legacy_allowed else PackageStatus.OUTDATED
 
-                if flavor not in first_package_in_section_per_flavor:
-                    first_package_in_section_per_flavor[flavor] = package
+                if flavor not in first_package_in_section:
+                    first_package_in_section[flavor] = package
 
-            if package.branch is not None and package.branch not in first_package_seen_in_legacy_branch:
-                first_package_seen_in_legacy_branch[package.branch] = package
+                if branch_key is not None and branch_key not in first_package_in_branch:
+                    first_package_in_branch[branch_key] = package
 
 
 def packageset_sort_by_version(packages: Sequence[Package]) -> List[Package]:

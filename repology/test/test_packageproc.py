@@ -374,6 +374,21 @@ class TestPackageProc(unittest.TestCase):
             PackageSample(repo='1', version='10.0', branch='10.x').expect(versionclass=Ps.OUTDATED),
         )
 
+    def test_branch_flavors(self) -> None:
+        self._check_fill_versions(
+            PackageSample(repo='0', version='11.1', flavors=['a']).expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='0', version='11.1', flavors=['b']).expect(versionclass=Ps.NEWEST),
+
+            PackageSample(repo='1', version='11.1', flavors=['a']).expect(versionclass=Ps.NEWEST),
+            PackageSample(repo='1', version='11.1', flavors=['b']).expect(versionclass=Ps.NEWEST),
+
+            PackageSample(repo='1', version='11.0', flavors=['a']).expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='1', version='11.0', flavors=['b']).expect(versionclass=Ps.LEGACY),
+
+            PackageSample(repo='1', version='10.2', flavors=['b'], branch='10.x').expect(versionclass=Ps.LEGACY),
+            PackageSample(repo='1', version='10.1', flavors=['a'], branch='10.x').expect(versionclass=Ps.OUTDATED),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
