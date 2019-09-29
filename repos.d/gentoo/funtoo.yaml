@@ -80,7 +80,108 @@
       subrepo: '{source}'
   repolinks:
     - desc: Funtoo Linux home
-      url: http://www.funtoo.org/Welcome
+      url: https://www.funtoo.org
+    - desc: GitHub organization
+      url: https://github.com/funtoo/
+  packagelinks:
+    - desc: Git directory
+      url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
+    - desc: View ebuild
+      url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{rawversion}.ebuild'
+  tags: [ all, production, funtoo ]
+
+# Funtoo - 1.4 Release (Sept 11 2019)
+- name: funtoo_1.4
+  type: repository
+  desc: Funtoo 1.4
+  family: gentoo
+  ruleset: [gentoo, funtoo]
+  color: '4e4e71'
+  minpackages: 35000
+  default_maintainer: fallback-mnt-funtoo@repology
+  sources:
+    - name:
+        - core-gl-kit
+        - core-hw-kit
+        - core-kit
+        - core-server-kit
+        - core-ui-kit
+        - desktop-kit
+        - dev-kit
+        - editors-kit
+        - games-kit
+        - haskell-kit
+        - java-kit
+        - kde-kit
+        - lang-kit
+        - lisp-scheme-kit
+        - llvm-kit
+        - media-kit
+        - ml-lang-kit
+        - net-kit
+        - nokit
+        - python-modules-kit
+        - science-kit
+        - security-kit
+        - text-kit
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      url: 'https://github.com/funtoo/{source}.git'
+      branch: 1.4-release
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
+    - name: [ gnome-kit ]
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      url: 'https://github.com/funtoo/{source}.git'
+      branch: 3.32-prime
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
+    - name: [ perl-kit ]
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      url: 'https://github.com/funtoo/{source}.git'
+      branch: 5.28-release
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
+    - name: [ python-kit ]
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      url: 'https://github.com/funtoo/{source}.git'
+      branch: 3.7-release
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
+    - name: [ ruby-kit ]
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      url: 'https://github.com/funtoo/{source}.git'
+      branch: 2.6-prime
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
+    - name: [ rust-kit ]
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      url: 'https://github.com/funtoo/{source}.git'
+      branch: 1.37-prime
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
+    - name: [ xfce-kit ]
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      url: 'https://github.com/funtoo/{source}.git'
+      branch: 4.13-release
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
+    - name: [ xorg-kit ]
+      fetcher: GitFetcher
+      parser: GentooGitParser
+      url: 'https://github.com/funtoo/{source}.git'
+      branch: 1.20-release
+      sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
+      subrepo: '{source}'
+  repolinks:
+    - desc: Funtoo Linux home
+      url: https://www.funtoo.org
     - desc: GitHub organization
       url: https://github.com/funtoo/
   packagelinks:
