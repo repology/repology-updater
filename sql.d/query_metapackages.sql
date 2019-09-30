@@ -102,7 +102,7 @@ WHERE
 		has_related
 	{% endif %}
 
-	{% if inrepo %}
+	{% if inrepo and not maintainer %}
 	) AND (
 		-- in repo condition
 		EXISTS (
@@ -140,7 +140,7 @@ WHERE
 		)
 	{% endif %}
 
-	{% if maintainer %}
+	{% if maintainer and not inrepo %}
 	) AND (
 		-- maintainer condition
 		EXISTS (
@@ -150,6 +150,33 @@ WHERE
 				(
 					effname = metapackages.effname AND
 					maintainer_id = (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s)
+				{% if newest %}
+				) AND (
+					newest
+				{% endif %}
+				{% if outdated %}
+				) AND (
+					outdated
+				{% endif %}
+				{% if problematic %}
+				) AND (
+					problematic
+				{% endif %}
+				)
+		)
+	{% endif %}
+
+	{% if maintainer and inrepo %}
+	) AND (
+		-- maintainer and repo condition
+		EXISTS (
+			SELECT *
+			FROM maintainer_and_repo_metapackages
+			WHERE
+				(
+					effname = metapackages.effname AND
+					maintainer_id = (SELECT id FROM maintainers WHERE maintainer = %(maintainer)s) AND
+					repository_id = (SELECT id FROM repositories WHERE name = %(inrepo)s)
 				{% if newest %}
 				) AND (
 					newest

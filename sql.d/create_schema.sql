@@ -658,11 +658,36 @@ CREATE TABLE maintainer_metapackages (
 
 CREATE INDEX ON maintainer_metapackages(effname);
 
+-- per-maintainer AND repo
+
+-- XXX: as it can be guessed by the name, this mostly duplicates
+-- maintainer_repo_metapackages table. I'm residing to this imperfect
+-- solution in order to fix #655 faster and not affect feeds in any
+-- way, since using existing maintainer_repo_metapackages for both
+-- history generation and project queries. After switching to delta
+-- updates, the another table would not be needed, this can be renamed
+-- to maintainer_repo_metapackages and used for queries only.
+DROP TABLE IF EXISTS maintainer_and_repo_metapackages CASCADE;
+
+CREATE TABLE maintainer_and_repo_metapackages (
+	maintainer_id integer NOT NULL,
+	repository_id smallint NOT NULL,
+	effname text NOT NULL,
+
+	newest boolean NOT NULL,
+	outdated boolean NOT NULL,
+	problematic boolean NOT NULL,
+	PRIMARY KEY(maintainer_id, repository_id, effname)
+);
+
+CREATE INDEX ON maintainer_and_repo_metapackages(effname);
+
 --------------------------------------------------------------------------------
 -- Additional derived tables
 --------------------------------------------------------------------------------
 DROP TABLE IF EXISTS maintainer_repo_metapackages CASCADE;
 
+--- XXX: don't mix up with maintainer_and_repo_metapackages, see comment above
 CREATE TABLE maintainer_repo_metapackages (
 	maintainer_id integer NOT NULL,
 	repository_id smallint NOT NULL,

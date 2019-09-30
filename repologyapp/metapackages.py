@@ -155,10 +155,6 @@ def get_packages_name_range(packages: Sequence[AnyPackageDataMinimal]) -> Tuple[
 
 
 def packages_to_summary_items(packages: Iterable[AnyPackageDataSummarizable], repo: Optional[str] = None, maintainer: Optional[str] = None) -> Dict[str, Dict[str, Any]]:
-    # filter by either repo or maintainer, not both
-    if repo is not None:
-        maintainer = None
-
     sumtypes = ('explicit', 'newest', 'outdated', 'ignored')
 
     def summary_factory() -> Dict[str, Dict[str, Any]]:
@@ -169,6 +165,8 @@ def packages_to_summary_items(packages: Iterable[AnyPackageDataSummarizable], re
 
     summaries: Dict[str, Dict[str, Any]] = defaultdict(summary_factory)
 
+    want_selected = repo is not None or maintainer is not None
+
     # pass 1: gather summaries in the intermediate format:
     # dict by metapackage name -> dict by summary type (e.g. table columns) -> hash by versioninfo of sets of families
     for package in packages:
@@ -176,7 +174,7 @@ def packages_to_summary_items(packages: Iterable[AnyPackageDataSummarizable], re
 
         versioninfo = UserVisibleVersionInfo(package)
 
-        if (repo is not None and repo == package.repo) or (maintainer is not None and maintainer in package.maintainers):
+        if want_selected and (repo is None or repo == package.repo) and (maintainer is None or maintainer in package.maintainers):
             target = summaries[package.effname]['explicit']
         elif package.versionclass in [PackageStatus.OUTDATED, PackageStatus.LEGACY]:
             target = summaries[package.effname]['outdated']

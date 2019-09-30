@@ -22,6 +22,8 @@
 --------------------------------------------------------------------------------
 -- Update extra tables
 --------------------------------------------------------------------------------
+
+--- XXX: don't mix up with maintainer_and_repo_metapackages table update from update_finish
 INSERT
 INTO maintainer_repo_metapackages (
 	maintainer_id,
