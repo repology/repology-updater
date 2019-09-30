@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -34,11 +34,21 @@ SELECT
 	num_packages_untrusted,
 	num_packages_noscheme,
 	num_packages_rolling,
-	num_metapackages,
-	num_metapackages_outdated,
-	repository_package_counts,
-	repository_metapackage_counts,
-	category_metapackage_counts,
+
+	num_projects,
+    num_projects_newest,
+    num_projects_outdated,
+    num_projects_problematic,
+
+	num_packages_per_repo,
+
+	num_projects_per_repo,
+	num_projects_newest_per_repo,
+	num_projects_outdated_per_repo,
+	num_projects_problematic_per_repo,
+
+	num_projects_per_category,
+
 	first_seen,
 	last_seen,
 	now() - first_seen AS first_seen_ago,

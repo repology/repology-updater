@@ -30,9 +30,14 @@ SELECT
 FROM (
 	SELECT
 		maintainer,
-		num_packages,
-		num_metapackages,
-		num_metapackages_outdated
+		bestrepo,
+		bestrepo_num_projects,
+		bestrepo_num_projects_newest,
+		bestrepo_num_projects_outdated,
+		bestrepo_num_projects_problematic,
+		num_projects,
+		num_repos,
+		now() - first_seen AS first_seen_ago
 	FROM maintainers
 	WHERE
 		(

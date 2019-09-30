@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "macros.html" as macros %}
 
 {% block title %}{{ maintainer }} maintainer information - Repology{% endblock %}
 {% block header %}Maintainer <strong>{{ maintainer }}</strong>{% endblock %}
@@ -28,82 +29,157 @@
 </ul>
 {% endif %}
 
-<h2>Packages</h2>
-<div class="row">
-	<div class="col-md-3">
-		<div class="panel panel-primary">
-			<div class="panel-heading"><h3>Total</h3></div>
-			<div class="panel-body">
-				<a href="{{ url_for('projects', maintainer=maintainer) }}">
-					{{- maintainer_info.num_packages -}}
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="panel panel-success">
-			<div class="panel-heading"><h3>Newest</h3></div>
-			<div class="panel-body">
-				{{- maintainer_info.num_packages_newest -}}
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="panel panel-danger">
-			<div class="panel-heading"><h3>Outdated</h3></div>
-			<div class="panel-body">
-				<a href="{{ url_for('projects', maintainer=maintainer, outdated=1) }}">
-					{{- maintainer_info.num_packages_outdated -}}
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3">
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3>Ignored</h3></div>
-			<div class="panel-body">
-				{{- maintainer_info.num_packages_ignored -}}
-			</div>
-		</div>
-	</div>
-</div>
+<h2>Repository activity</h2>
 
-<h2>Package lists</h2>
-
-<p>Package filtering in Repology is very flexible, so you can combine all kinds of conditions. But here are some preset queries to start with:</p>
-
-<ul>
-	<li><a href="{{ url_for('projects', maintainer=maintainer) }}">All packages</a> for this maintainer.</li>
-	<li><a href="{{ url_for('projects', maintainer=maintainer, newest=1) }}">Up to date</a> packages for this maintainer.</li>
-	<li><a href="{{ url_for('projects', maintainer=maintainer, outdated=1) }}">Outdated</a> packages for this maintainer.</li>
-	<li><a href="{{ url_for('projects', maintainer=maintainer, outdated=1, families_newest='2-') }}">Outdated</a> packages for this maintainer, newest in 2+ other repository families. Compared to the previous query this has smaller possibility of false positives.</li>
-</ul>
-<ul>
-	<li>Packages for this maintainer which <a href="{{ url_for('projects', maintainer=maintainer, problematic=1) }}">have ignored versions</a>. There may be incorrect versions which needs fixing among these.</li>
-	<li>Packages for this maintainer which are up to date <a href="{{ url_for('projects', maintainer=maintainer, newest=1, families_newest=1) }}">only in a single repository family</a>. There may be incorrect versions which needs fixing among these.</li>
-	<li>Packages for this maintainer which <a href="{{ url_for('projects', maintainer=maintainer, has_related=1) }}">have related ones</a> (with the same homepage). These may require merging into a single project.</li>
-</ul>
-<ul>
-	<li>Unique packages present <a href="{{ url_for('projects', maintainer=maintainer, families=1) }}">only in a single repository family</a>.</li>
-	<li>Unique packages present <a href="{{ url_for('projects', maintainer=maintainer, repos=1) }}">only in a single repository</a>.</li>
-</ul>
-
-{% if maintainer_info.repository_metapackage_counts %}
-<h2>Repositories</h2>
-
-<p>This maintainer is active in the following repositories:</p>
-
-<ul>
-	{% for num,repo in maintainer_info.repository_metapackage_counts|sort(reverse=True) %}
-	<li>
-		<strong><a href="{{ url_for('repository', repo=repo) }}">{{ repometadata[repo].desc }}</a></strong>
-		(<a href="{{ url_for('projects', inrepo=repo, maintainer=maintainer) }}">{{ num }}</a>)
-		(feeds: <a href="{{ url_for('maintainer_repo_feed', repo=repo, maintainer=maintainer) }}">html</a>,
-		<a href="{{ url_for('maintainer_repo_feed_atom', repo=repo, maintainer=maintainer) }}">atom<img src="{{ url_for('static', filename='feed.v1.svg') }}" width="16" height="16" alt="Atom feed"></a>)
-	</li>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th class="text-right" rowspan="2">Repository</th>
+            <th class="text-center" rowspan="2">Packages</th>
+            <th class="text-center" colspan="8">Projects</th>
+            <th class="text-center" rowspan="2">Feeds</th>
+        </tr>
+        <tr>
+            <th class="text-center">Total</th>
+            <th class="text-center" colspan="2">Newest</th>
+            <th class="text-center" colspan="2">Outdated</th>
+            <th class="text-center" colspan="2">Problematic</th>
+            <th class="text-center">See also</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for repoinfo in per_repo_info %}
+        <tr>
+            <td class="text-right break-word">
+                <a href="{{ url_for('repository', repo=repoinfo.repo) }}">
+                    {{- repometadata[repoinfo.repo].desc -}}
+                </a>
+            </td>
+            <td class="text-center total-cell">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo) }}">
+                    {{- repoinfo.num_packages -}}
+                </a>
+            </td>
+            <td class="text-center total-cell">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo) }}">
+                    {{- repoinfo.num_projects -}}
+                </a>
+            </td>
+			{%- if repoinfo.num_projects_newest -%}
+            <td class="text-center version-cell version-big version-newest">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, newest=1) }}">
+                    {{- repoinfo.num_projects_newest -}}
+                </a>
+            </td>
+            <td class="text-center version-cell version-big version-newest">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, newest=1) }}">
+                    {{- macros.safe_percent(repoinfo.num_projects_newest, repoinfo.num_projects) -}}
+                </a>
+            </td>
+			{%- else -%}<td class="text-center" colspan="2">-</td>{%- endif -%}
+			{%- if repoinfo.num_projects_outdated -%}
+            <td class="text-center version-cell version-big version-outdated">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, outdated=1) }}">
+                    {{- repoinfo.num_projects_outdated -}}
+                </a>
+            </td>
+            <td class="text-center version-cell version-big version-outdated">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, outdated=1) }}">
+                    {{- macros.safe_percent(repoinfo.num_projects_outdated, repoinfo.num_projects) -}}
+                </a>
+            </td>
+			{%- else -%}<td class="text-center" colspan="2">-</td>{%- endif -%}
+			{%- if repoinfo.num_projects_problematic -%}
+            <td class="text-center version-cell version-big version-ignored">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, problematic=1) }}">
+                    {{- repoinfo.num_projects_problematic -}}
+                </a>
+            </td>
+            <td class="text-center version-cell version-big version-ignored">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, problematic=1) }}">
+                    {{- macros.safe_percent(repoinfo.num_projects_problematic, repoinfo.num_projects) -}}
+                </a>
+            </td>
+			{%- else -%}<td class="text-center" colspan="2">-</td>{%- endif -%}
+			<td class="text-center">
+				<a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, outdated=1, families_newest='2-') }}"
+					title="High confidence (newest in 2 or more other repository families) outdated packages">HCO</a>
+				<a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, newest=1, families_newest=1) }}"
+					title="Lone (not present in other repository families, so may be either very fresh or incorrect) newest versions">LN</a>
+				<a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, has_related=1) }}"
+					title="Packages which have related ones (may require merging)">∗</a>
+				<a href="{{ url_for('projects', maintainer=maintainer, inrepo=repoinfo.repo, families=1) }}"
+					title="Unique packages (not present in other repository families)">U</a>
+			</td>
+			<td class="text-center">
+				<a href="{{ url_for('maintainer_repo_feed', maintainer=maintainer, repo=repoinfo.repo) }}">html</a>,
+				<a href="{{ url_for('maintainer_repo_feed_atom', maintainer=maintainer, repo=repoinfo.repo) }}">atom<img src="{{ url_for('static', filename='feed.v1.svg') }}" width="16" height="16" alt="Atom feed"></a>
+            </td>
+		</tr>
 	{% endfor %}
-</ul>
-{% endif %}
+		<tr><td colspan="11"></td></tr>
+		<tr>
+			<td class="text-right break-word total-cell">Total</td>
+            <td class="text-center total-cell">
+                <a href="{{ url_for('projects', maintainer=maintainer) }}">
+                    {{- maintainer_info.num_packages -}}
+                </a>
+            </td>
+            <td class="text-center total-cell">
+                <a href="{{ url_for('projects', maintainer=maintainer) }}">
+                    {{- maintainer_info.num_projects -}}
+                </a>
+            </td>
+			{%- if maintainer_info.num_projects_newest -%}
+            <td class="text-center version-cell version-big version-newest">
+                <a href="{{ url_for('projects', maintainer=maintainer, newest=1) }}">
+                    {{- maintainer_info.num_projects_newest -}}
+                </a>
+            </td>
+            <td class="text-center version-cell version-big version-newest">
+                <a href="{{ url_for('projects', maintainer=maintainer, newest=1) }}">
+                    {{- macros.safe_percent(maintainer_info.num_projects_newest, maintainer_info.num_projects) -}}
+                </a>
+            </td>
+			{%- else -%}<td class="text-center" colspan="2">-</td>{%- endif -%}
+			{%- if maintainer_info.num_projects_outdated -%}
+            <td class="text-center version-cell version-big version-outdated">
+                <a href="{{ url_for('projects', maintainer=maintainer, outdated=1) }}">
+                    {{- maintainer_info.num_projects_outdated -}}
+                </a>
+            </td>
+            <td class="text-center version-cell version-big version-outdated">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=maintainer_info.repo, outdated=1) }}">
+                    {{- macros.safe_percent(maintainer_info.num_projects_outdated, maintainer_info.num_projects) -}}
+                </a>
+            </td>
+			{%- else -%}<td class="text-center" colspan="2">-</td>{%- endif -%}
+			{%- if maintainer_info.num_projects_problematic -%}
+            <td class="text-center version-cell version-big version-ignored">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=maintainer_info.repo, problematic=1) }}">
+                    {{- maintainer_info.num_projects_problematic -}}
+                </a>
+            </td>
+            <td class="text-center version-cell version-big version-ignored">
+                <a href="{{ url_for('projects', maintainer=maintainer, inrepo=maintainer_info.repo, problematic=1) }}">
+                    {{- macros.safe_percent(maintainer_info.num_projects_problematic, maintainer_info.num_projects) -}}
+                </a>
+            </td>
+			{%- else -%}<td class="text-center" colspan="2">-</td>{%- endif -%}
+			<td class="text-center">
+				<a href="{{ url_for('projects', maintainer=maintainer, outdated=1, families_newest='2-') }}"
+					title="High confidence (newest in 2 or more other repository families) outdated packages">HCO</a>
+				<a href="{{ url_for('projects', maintainer=maintainer, newest=1, families_newest=1) }}"
+					title="Lone (not present in other repository families) newest versions">LN</a>
+				<a href="{{ url_for('projects', maintainer=maintainer, has_related=1) }}"
+					title="Packages which have related ones (may require merging)">∗</a>
+				<a href="{{ url_for('projects', maintainer=maintainer, families=1) }}"
+					title="Unique packages (not present in other repository families)">U</a>
+			</td>
+			<td class="text-center"></td>
+		</tr>
+	</tbody>
+</table>
 
 {% if numproblems %}
 <h2>Problems</h2>
@@ -111,13 +187,13 @@
 <p>There are <a href="{{ url_for('maintainer_problems', maintainer=maintainer) }}">{{ numproblems }} known problems</a> for packages maintained by <strong>{{ maintainer }}</strong></p>
 {% endif %}
 
-{% if maintainer_info.category_metapackage_counts %}
+{% if maintainer_info.num_projects_per_category %}
 <h2>Categories</h2>
 
 <p>This maintainer is active in the following package categories:</p>
 
 <ul>
-	{% for num,category in maintainer_info.category_metapackage_counts|sort(reverse=True) %}
+	{% for num,category in maintainer_info.num_projects_per_category|sort(reverse=True) %}
 	<li>
 		<strong>{{ category }}</strong> (<a href="{{ url_for('projects', category=category, maintainer=maintainer) }}">{{ num }}</a>)
 	</li>
@@ -125,9 +201,7 @@
 </ul>
 {% endif %}
 
-<h2>Packages</h2>
-
-<p>There are {{ maintainer_info.num_packages }} total package(s) for {{ maintainer_info.num_metapackages }} distinct project(s) known.</p>
+<h2>Projects</h2>
 
 <p>
 {%- for metapackage in metapackages -%}
@@ -136,7 +210,7 @@
 		{{- metapackage -}}
 	</a>
 {%- endfor -%}
-{%- if metapackages|length < maintainer_info.num_metapackages -%}
+{%- if metapackages|length < maintainer_info.num_projects -%}
 	, …
 {%- endif -%}
 </p>

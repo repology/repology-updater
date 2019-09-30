@@ -27,24 +27,24 @@
 -- this obscure request needs some clarification
 --
 -- what we calculate as score here is actually Jaccard index
--- (see wikipedia) for two sets (of metapackages maintained by
+-- (see wikipedia) for two sets (of projects maintained by
 -- two maintainers)
 --
--- let M = set of metapackages for maintainer passed to this function
--- let C = set of metapackages for other maintainer we test for similarity
+-- let M = set of projects for maintainer passed to this function
+-- let C = set of projects for other maintainer we test for similarity
 --
 -- score = |M⋂C| / |M⋃C| = |M⋂C| / (|M| + |C| - |M⋂C|)
 --
--- - num_metapackages_common is |M⋂C|
--- - num_metapackages is |C|
+-- - num_projects_common is |M⋂C|
+-- - num_projects is |C|
 -- - sub-select just gets |M|
 -- - the divisor thus is |M⋃C| = |M| + |C| - |M⋂C|
 SELECT
 	maintainer,
-	num_metapackages_common AS count,
-	100.0 * num_metapackages_common / (
-		num_metapackages - num_metapackages_common + (
-			SELECT num_metapackages
+	num_projects_common AS count,
+	100.0 * num_projects_common / (
+		num_projects - num_projects_common + (
+			SELECT num_projects
 			FROM maintainers
 			WHERE maintainer = %(maintainer)s
 		)
@@ -53,7 +53,7 @@ FROM
 	(
 		SELECT
 			maintainer_id,
-			count(*) AS num_metapackages_common
+			count(*) AS num_projects_common
 		FROM
 			maintainer_metapackages
 		WHERE

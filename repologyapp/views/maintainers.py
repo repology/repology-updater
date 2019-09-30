@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2017 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,6 +16,7 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+from dataclasses import dataclass
 from typing import Any, Optional
 
 import flask
@@ -77,18 +78,41 @@ def maintainer(maintainer: str) -> Any:
     similar_maintainers = get_db().get_maintainer_similar_maintainers(maintainer, 50)
     numproblems = get_db().get_maintainer_problems_count(maintainer)
 
-    for key in ('repository_package_counts', 'repository_metapackage_counts', 'category_metapackage_counts'):
-        if maintainer_info[key]:
-            maintainer_info[key] = [
-                (num, name)
-                for name, num in maintainer_info[key].items()
-            ]
+    @dataclass
+    class RepositoryInfo:
+        repo: str
+        num_packages: int
+        num_projects: int
+        num_projects_newest: int
+        num_projects_outdated: int
+        num_projects_problematic: int
+
+    per_repo_info = [
+        RepositoryInfo(
+            repo=repo,
+            num_packages=maintainer_info['num_packages_per_repo'][repo],
+            num_projects=maintainer_info['num_projects_per_repo'][repo],
+            num_projects_newest=maintainer_info['num_projects_newest_per_repo'][repo],
+            num_projects_outdated=maintainer_info['num_projects_outdated_per_repo'][repo],
+            num_projects_problematic=maintainer_info['num_projects_problematic_per_repo'][repo],
+        )
+        for repo in maintainer_info['num_projects_per_repo'].keys()
+    ]
+
+    per_repo_info = sorted(per_repo_info, key=lambda repoinfo: (repoinfo.num_projects_newest, -repoinfo.num_projects_outdated), reverse=True)
+
+    if maintainer_info['num_projects_per_category']:
+        maintainer_info['num_projects_per_category'] = [
+            (num, name)
+            for name, num in maintainer_info['num_projects_per_category'].items()
+        ]
 
     return flask.render_template(
         'maintainer.html',
         numproblems=numproblems,
         maintainer=maintainer,
         maintainer_info=maintainer_info,
+        per_repo_info=per_repo_info,
         metapackages=metapackages,
         similar_maintainers=similar_maintainers
     )

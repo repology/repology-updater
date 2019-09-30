@@ -41,51 +41,86 @@
 </nav>
 
 {% if maintainers %}
-<div class="row">
-{% for column in maintainers|slice(2) %}
-{% if column %}
-	<div class="col-md-6">
-		<table class="table table-striped table-condensed">
-			<thead>
-				<tr>
-					<th class="text-right" rowspan="2">Maintainer</th>
-					<th class="text-center" colspan="3">Projects</th>
-				</tr>
-				<tr>
-					<th class="text-center">Total</th>
-					<th class="text-center">Outdated</th>
-					<th class="text-center">Up to date</th>
-				</tr>
-			</thead>
-			<tbody>
-			{% for maintainer in column %}
-				<tr>
-					<td class="text-right break-word">
-						<a href="{{ url_for('maintainer', maintainer=maintainer.maintainer) }}">
-							{{- maintainer.maintainer -}}
-						</a>
-					</td>
-					<td class="text-center">
-						<a href="{{ url_for('projects', maintainer=maintainer.maintainer) }}">
-							{{- maintainer.num_metapackages -}}
-						</a>
-					</td>
-					<td class="text-center">
-						<a href="{{ url_for('projects', maintainer=maintainer.maintainer, outdated=1) }}">
-							{{- maintainer.num_metapackages_outdated -}}
-						</a>
-					</td>
-					<td class="text-center">
-						{{- macros.safe_percent(maintainer.num_metapackages - maintainer.num_metapackages_outdated, maintainer.num_metapackages) -}}
-					</td>
-				</tr>
-			{% endfor %}
-			</tbody>
-		</table>
-	</div>
-	{% endif %}
+<table class="table table-striped table-condensed">
+	<thead>
+		<tr>
+			<th class="text-right" rowspan="2">Maintainer</th>
+			<th class="text-center" rowspan="2">Most active in</th>
+			<th class="text-center" colspan="6">Projects in "most active" repo</th>
+			<th class="text-center" rowspan="2">Projects in<br>all repos</th>
+			<th class="text-center" rowspan="2">Known for</th>
+		</tr>
+		<tr>
+			<th class="text-center">Total</th>
+			<th class="text-center" colspan="2">Newest</th>
+			<th class="text-center" colspan="2">Outdated</th>
+			<th class="text-center">Problematic</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for maintainer in maintainers %}
+		<tr>
+			<td class="text-right break-word">
+				<a href="{{ url_for('maintainer', maintainer=maintainer.maintainer) }}">
+					{{- maintainer.maintainer -}}
+				</a>
+			</td>
+			<td class="text-center">
+				<a href="{{ url_for('repository', repo=maintainer.bestrepo) }}">
+					{{- repometadata[maintainer.bestrepo].desc -}}
+				</a>
+				{%- if maintainer.num_repos > 1 -%}
+					<sup>+{{ maintainer.num_repos - 1 }}</sup>
+				{%- endif %}
+			</td>
+			<td class="text-center total-cell">
+				<a href="{{ url_for('projects', maintainer=maintainer.maintainer, inrepo=maintainer.bestrepo) }}">
+					{{- maintainer.bestrepo_num_projects -}}
+				</a>
+			</td>
+			{%- if maintainer.bestrepo_num_projects_newest -%}
+			<td class="text-center version-cell version-big version-newest">
+				<a href="{{ url_for('projects', maintainer=maintainer.maintainer, inrepo=maintainer.bestrepo, newest=1) }}">
+					{{- maintainer.bestrepo_num_projects_newest -}}
+				</a>
+			</td>
+			<td class="text-center version-cell version-big version-newest">
+				<a href="{{ url_for('projects', maintainer=maintainer.maintainer, inrepo=maintainer.bestrepo, newest=1) }}">
+					{{- macros.safe_percent(maintainer.bestrepo_num_projects_newest, maintainer.bestrepo_num_projects) -}}
+				</a>
+			</td>
+			{%- else -%}<td class="text-center" colspan="2"></td>{%- endif -%}
+			{%- if maintainer.bestrepo_num_projects_outdated -%}
+			<td class="text-center version-cell version-big version-outdated">
+				<a href="{{ url_for('projects', maintainer=maintainer.maintainer, inrepo=maintainer.bestrepo, outdated=1) }}">
+					{{- maintainer.bestrepo_num_projects_outdated -}}
+				</a>
+			</td>
+			<td class="text-center version-cell version-big version-outdated">
+				<a href="{{ url_for('projects', maintainer=maintainer.maintainer, inrepo=maintainer.bestrepo, outdated=1) }}">
+					{{- macros.safe_percent(maintainer.bestrepo_num_projects_outdated, maintainer.bestrepo_num_projects) -}}
+				</a>
+			</td>
+			{%- else -%}<td class="text-center" colspan="2"></td>{%- endif -%}
+			{%- if maintainer.bestrepo_num_projects_problematic -%}
+			<td class="text-center version-cell version-big version-ignored">
+				<a href="{{ url_for('projects', maintainer=maintainer.maintainer, inrepo=maintainer.bestrepo, problematic=1) }}">
+					{{- maintainer.bestrepo_num_projects_problematic -}}
+				</a>
+			</td>
+			{%- else -%}<td class="text-center"></td>{%- endif -%}
+			<td class="text-center total-cell">
+				<a href="{{ url_for('projects', maintainer=maintainer.maintainer) }}">
+					{{- maintainer.num_projects -}}
+				</a>
+			</td>
+			<td class="text-center">
+				{{- macros.format_time_interval(maintainer.first_seen_ago) -}}
+			</td>
+		</tr>
 	{% endfor %}
-	</div>
+	</tbody>
+</table>
 {% else %}
 <div class="alert alert-warning" role="alert">
 	<p>No maintainers found matching the criteria. Some of the reasons which may have caused this:</p>
