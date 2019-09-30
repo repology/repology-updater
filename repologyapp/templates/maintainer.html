@@ -88,7 +88,7 @@
 	<li>Unique packages present <a href="{{ url_for('projects', maintainer=maintainer, repos=1) }}">only in a single repository</a>.</li>
 </ul>
 
-{% if maintainer_info.repository_package_counts %}
+{% if maintainer_info.repository_metapackage_counts %}
 <h2>Repositories</h2>
 
 <p>This maintainer is active in the following repositories:</p>
