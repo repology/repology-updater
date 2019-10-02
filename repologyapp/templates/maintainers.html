@@ -89,7 +89,7 @@
 					{{- macros.safe_percent(maintainer.bestrepo_num_projects_newest, maintainer.bestrepo_num_projects) -}}
 				</a>
 			</td>
-			{%- else -%}<td class="text-center" colspan="2"></td>{%- endif -%}
+			{%- else -%}<td class="text-center" colspan="2">-</td>{%- endif -%}
 			{%- if maintainer.bestrepo_num_projects_outdated -%}
 			<td class="text-center version-cell version-big version-outdated">
 				<a href="{{ url_for('projects', maintainer=maintainer.maintainer, inrepo=maintainer.bestrepo, outdated=1) }}">
@@ -101,14 +101,14 @@
 					{{- macros.safe_percent(maintainer.bestrepo_num_projects_outdated, maintainer.bestrepo_num_projects) -}}
 				</a>
 			</td>
-			{%- else -%}<td class="text-center" colspan="2"></td>{%- endif -%}
+			{%- else -%}<td class="text-center" colspan="2">-</td>{%- endif -%}
 			{%- if maintainer.bestrepo_num_projects_problematic -%}
 			<td class="text-center version-cell version-big version-ignored">
 				<a href="{{ url_for('projects', maintainer=maintainer.maintainer, inrepo=maintainer.bestrepo, problematic=1) }}">
 					{{- maintainer.bestrepo_num_projects_problematic -}}
 				</a>
 			</td>
-			{%- else -%}<td class="text-center"></td>{%- endif -%}
+			{%- else -%}<td class="text-center">-</td>{%- endif -%}
 			<td class="text-center total-cell">
 				<a href="{{ url_for('projects', maintainer=maintainer.maintainer) }}">
 					{{- maintainer.num_projects -}}
