@@ -145,7 +145,7 @@ class TestPackageTransformer(unittest.TestCase):
 
     def test_hasbranch(self) -> None:
         self._check_transformer(
-            '[ { hasbranch: true, setname: "hasbranch" }, { nobranch: true, setname: "nobranch" } ]',
+            '[ { hasbranch: true, setname: "hasbranch" }, { hasbranch: false, setname: "nobranch" } ]',
             PackageSample().expect(effname='nobranch'),
             PackageSample(branch='foo').expect(effname='hasbranch'),
         )
