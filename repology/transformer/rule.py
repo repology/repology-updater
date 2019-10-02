@@ -429,6 +429,18 @@ class Rule:
 
             self._matchers.append(noflag_matcher)
 
+        if 'hasbranch' in ruledata:
+            def hasbranch_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return package.branch is not None
+
+            self._matchers.append(hasbranch_matcher)
+
+        if 'nobranch' in ruledata:
+            def nobranch_matcher(package: Package, package_context: PackageContext, match_context: MatchContext) -> bool:
+                return package.branch is None
+
+            self._matchers.append(nobranch_matcher)
+
         if 'is_p_is_patch' in ruledata:
             is_p_is_patch: Final[bool] = ruledata['is_p_is_patch']
 

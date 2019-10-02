@@ -143,6 +143,13 @@ class TestPackageTransformer(unittest.TestCase):
             PackageSample(version='1.2.3.4').expect(branch='1.2.3.4'),
         )
 
+    def test_hasbranch(self) -> None:
+        self._check_transformer(
+            '[ { hasbranch: true, setname: "hasbranch" }, { nobranch: true, setname: "nobranch" } ]',
+            PackageSample().expect(effname='nobranch'),
+            PackageSample(branch='foo').expect(effname='hasbranch'),
+        )
+
     def test_multiflags(self) -> None:
         self._check_transformer(
             '[ { devel: true, ignore: false, noscheme: true }, { ignore: true, noscheme: false } ]',
