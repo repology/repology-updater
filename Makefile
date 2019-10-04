@@ -1,14 +1,20 @@
 FLAKE8?=	flake8
 MYPY?=		mypy
 
+REPOLOGY_TEST_DUMP_PATH?=	.
+
 lint:: check test flake8 mypy
 
 test::
 	python3 -m unittest discover
 
-full-test::
+test-make-dump::
 	env REPOLOGY_CONFIG=./repology-test.conf.default ./repology-update.py -ippd
-	env REPOLOGY_CONFIG=./repology-test.conf.default python3 -m unittest discover
+	pg_dump -U repology_test -c \
+		| grep -v '^CREATE EXTENSION' \
+		| grep -v '^COMMENT ON EXTENSION' \
+		| grep -v '^DROP EXTENSION' \
+		> ${REPOLOGY_TEST_DUMP_PATH}/repology_test.sql
 
 flake8:
 	${FLAKE8} --application-import-names=repology *.py repology
