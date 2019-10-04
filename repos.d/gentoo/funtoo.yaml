@@ -1,8 +1,6 @@
 ###########################################################################
 # Funtoo
 ###########################################################################
-
-# Funtoo - 1.3 Release (Jan 7 2019)
 - name: funtoo_1.3
   type: repository
   desc: Funtoo 1.3
@@ -80,17 +78,16 @@
       subrepo: '{source}'
   repolinks:
     - desc: Funtoo Linux home
-      url: https://www.funtoo.org
+      url: https://www.funtoo.org/
     - desc: GitHub organization
       url: https://github.com/funtoo/
-  packagelinks:
-    - desc: Git directory
-      url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
-    - desc: View ebuild
-      url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{rawversion}.ebuild'
+  #packagelinks:
+  #  - desc: Git directory
+  #    url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
+  #  - desc: View ebuild
+  #    url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{rawversion}.ebuild'
   tags: [ all, production, funtoo ]
 
-# Funtoo - 1.4 Release (Sept 11 2019)
 - name: funtoo_1.4
   type: repository
   desc: Funtoo 1.4
@@ -181,12 +178,12 @@
       subrepo: '{source}'
   repolinks:
     - desc: Funtoo Linux home
-      url: https://www.funtoo.org
+      url: https://www.funtoo.org/
     - desc: GitHub organization
       url: https://github.com/funtoo/
-  packagelinks:
-    - desc: Git directory
-      url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
-    - desc: View ebuild
-      url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{rawversion}.ebuild'
+  #packagelinks:
+  #  - desc: Git directory
+  #    url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
+  #  - desc: View ebuild
+  #    url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{rawversion}.ebuild'
   tags: [ all, production, funtoo ]
