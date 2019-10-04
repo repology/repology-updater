@@ -106,7 +106,7 @@ script:
   - ./repology-gensitemap.py --metapackages > sitemap-metapackages.xml
 
   # run unit tests with coverage
-  - coverage run --source=repology --omit="repology/fetchers/*" -m unittest discover
+  - coverage run --source=repology --omit="repology/test/*,repology/fetchers/*" -m unittest discover
 
 after_success:
   - if [ -n "$COVERAGE" ]; then coveralls; fi
