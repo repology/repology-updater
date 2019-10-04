@@ -50,16 +50,6 @@ before_install:
         sudo ldconfig
     )
   - |-
-    mkdir -p dep-html5-tidy
-    (
-        cd dep-html5-tidy
-        wget -qO- https://github.com/htacg/tidy-html5/archive/master.tar.gz | tar -x -z -f- --strip-components 1 &&
-        cmake . &&
-        make &&
-        sudo make install &&
-        sudo ldconfig
-    )
-  - |-
     mkdir -p dep-postgresql-libversion
     (
         cd dep-postgresql-libversion &&
@@ -71,14 +61,11 @@ before_install:
   # install mandatory python dependencies
   - pip install Jinja2
   - pip install PyYAML
-  - pip install flask
   - pip install jsonslicer
   - pip install libversion
   - pip install lxml
-  - pip install pillow
   - pip install psycopg2
   - pip install pyparsing
-  - pip install pytz
   - pip install requests
   - pip install rubymarshal
   - pip install protobuf
@@ -90,7 +77,6 @@ before_install:
   - pip install flake8-import-order
   - pip install flake8-quotes
   - pip install mypy>=0.720
-  - pip install pytidylib # uses newer libtidy installed above
   - pip install voluptuous
 
   # get rules
@@ -101,12 +87,7 @@ before_script:
   - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test"
   - sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS pg_trgm"
   - sudo -u postgres psql -d repology_test -c "CREATE EXTENSION IF NOT EXISTS libversion"
-  - echo "BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'" >> repology-test.conf.default
-  - echo "BADGE_FONT_BOLD = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf'" >> repology-test.conf.default
 script:
-  # test all target
-  - make
-
   # check yaml schemas
   - make check
 
@@ -125,7 +106,7 @@ script:
   - ./repology-gensitemap.py --metapackages > sitemap-metapackages.xml
 
   # run unit tests with coverage
-  - coverage run --source="repology,repologyapp" --omit="repology/fetchers/*" -m unittest discover
+  - coverage run --source=repology --omit="repology/fetchers/*" -m unittest discover
 
 after_success:
   - if [ -n "$COVERAGE" ]; then coveralls; fi
