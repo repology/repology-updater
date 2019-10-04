@@ -1,15 +1,14 @@
 #
-# Repology default configuration file
+# Repology updater default configuration
 #
-# These settings are used in web application and as defaults
-# for all command line utilities. You may override them in
-# repology.conf file in project root or in any custom file,
-# as long as you set path to it in REPOLOGY_CONF environment
-# variable
-
-############################################################################
-# COMMON SETTINGS
-############################################################################
+# This file contains default values for all Repology updater
+# settings. You may override them in `repology.conf` file,
+# any other file specifying path to it in REPOLOGY_CONF environment
+# variable, or in repology-update.py command line arguments.
+#
+# Since this file is managed by git, you're advised to not
+# change values for your local setup here. Instead, override them
+# in `repology.conf`
 
 #
 # Postgresql database connect string
@@ -74,101 +73,3 @@ REPOSITORIES = ['production']
 # Overridable via free command line args
 #
 ENABLE_SAFETY_CHECKS = True
-
-############################################################################
-# WEBAPP SETTINGS
-############################################################################
-
-#
-# Secret key for flask, see
-# http://flask.pocoo.org/docs/0.12/api/#flask.Flask.secret_key
-#
-# There's no default value, please set it to some random string
-#
-#SECRET_KEY = ''
-
-#
-# Admin password
-#
-# There's no default value, meaning that admin login is disabled
-#
-ADMIN_PASSWORD = None
-
-#
-# Enable webapp profiling
-#
-PROFILE = False
-
-#
-# Enable pretty and deterministic JSON in API
-#
-PRETTY_JSON = False
-
-#
-# Items per page
-#
-METAPACKAGES_PER_PAGE = 200
-MAINTAINERS_PER_PAGE = 500
-PROBLEMS_PER_PAGE = 500
-TURNOVER_PER_PAGE = 350
-HISTORY_PER_PAGE = 500
-REPORTS_PER_PAGE = 100
-REDIRECTS_PER_PAGE = 200
-
-#
-# Max reports for metapackage
-#
-MAX_REPORTS = 20
-
-#
-# Address of repology.org to use in HTML links
-#
-REPOLOGY_HOME = 'https://repology.org'
-
-#
-# Address of Repology main repository
-#
-REPOLOGY_MAIN_REPO_URL = 'https://github.com/repology/repology'
-
-#
-# Address of Repology rules repository
-#
-REPOLOGY_RULES_REPO_URL = 'https://github.com/repology/repology-rules'
-
-#
-# Address of Repology rules repository
-#
-REPOLOGY_LINKCHECKER_REPO_URL = 'https://github.com/repology/repology-linkchecker'
-
-#
-# Path to DejaVuSans.ttf
-#
-# This is used to calculate SVG badge sizes
-#
-#BADGE_FONT = '/usr/local/share/fonts/dejavu/DejaVuSans.ttf'  # FreeBSD
-#BADGE_FONT_BOLD = '/usr/local/share/fonts/dejavu/DejaVuSans-Bold.ttf'  # FreeBSD
-#BADGE_FONT = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf'  # Ubuntu
-#BADGE_FONT_BOLD = '/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf'  # Ubuntu
-
-#
-# AFK times when reports cannot be processed, to be reported to users
-# array of strings in 'YYYY-MM-DD' (single date) or 'YYYY-MM-DD
-# YYYY-MM-DD' (date interval) format
-#
-STAFF_AFK = []
-
-#
-# Metapackages for which reports are disabled to counter spam or inadequate reporters
-#
-DISABLED_REPORTS = []
-
-#
-# IPs to display invitation to join the project to
-#
-INVITED_IPS = []
-
-#
-# Default timezone to use in the web interface
-# The webapp tries to replace this to user's local timezone with javascript
-#
-DEFAULT_TIMEZONE = 'UTC'
