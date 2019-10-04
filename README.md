@@ -14,14 +14,11 @@ which updates the repository information. See also the
 
 ## Dependencies
 
-Needed for the core:
-
 - [Python](https://www.python.org/) 3.7+
-- Python module [pyyaml](http://pyyaml.org/)
 - Python module [Jinja2](http://jinja.pocoo.org/)
 - Python module [libversion](https://pypi.python.org/pypi/libversion) (also requires [libversion](https://github.com/repology/libversion) C library)
 - Python module [psycopg2](http://initd.org/psycopg/)
-
+- Python module [pyyaml](http://pyyaml.org/)
 - [PostgreSQL](https://www.postgresql.org/) 10.0+
 - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 
@@ -38,7 +35,7 @@ Needed for fetching/parsing repository data:
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
 
-### Development
+### Development dependencies
 
 Optional, for doing HTML validation when running tests:
 - Python module [pytidylib](https://pypi.python.org/pypi/pytidylib) and [tidy-html5](http://www.html-tidy.org/) library
@@ -53,7 +50,7 @@ Optional, for python code linting:
 - Python module [flake8-quotes](https://pypi.python.org/pypi/flake8-quotes)
 - Python module [mypy](http://mypy-lang.org/)
 
-## Usage
+## Running
 
 ### Preparing
 
