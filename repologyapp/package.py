@@ -16,12 +16,9 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional, TypeVar
+from typing import ClassVar, Dict, List, Optional, TypeVar
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
-
-from repology.package import PackageFlags as PackageFlags
-from repology.package import PackageStatus as PackageStatus
 
 __all__ = [
     'AnyPackageDataMinimal',
@@ -32,6 +29,110 @@ __all__ = [
     'PackageFlags',
     'PackageStatus',
 ]
+
+
+class PackageStatus:
+    # XXX: better make this state innrepresentable by introducing an intermediate
+    # type for inprocessed package, missing versionclass and other fields which
+    # are filled later
+    UNPROCESSED: ClassVar[int] = 0
+
+    NEWEST: ClassVar[int] = 1
+    OUTDATED: ClassVar[int] = 2
+    IGNORED: ClassVar[int] = 3
+    UNIQUE: ClassVar[int] = 4
+    DEVEL: ClassVar[int] = 5
+    LEGACY: ClassVar[int] = 6
+    INCORRECT: ClassVar[int] = 7
+    UNTRUSTED: ClassVar[int] = 8
+    NOSCHEME: ClassVar[int] = 9
+    ROLLING: ClassVar[int] = 10
+
+    @staticmethod
+    def is_ignored(val: int) -> bool:
+        """Return whether a specified val is equivalent to ignored."""
+        return (val == PackageStatus.IGNORED or
+                val == PackageStatus.INCORRECT or
+                val == PackageStatus.UNTRUSTED or
+                val == PackageStatus.NOSCHEME or
+                val == PackageStatus.ROLLING)
+
+    @staticmethod
+    def as_string(val: int) -> str:
+        """Return string representation of a version class."""
+        return {
+            PackageStatus.NEWEST: 'newest',
+            PackageStatus.OUTDATED: 'outdated',
+            PackageStatus.IGNORED: 'ignored',
+            PackageStatus.UNIQUE: 'unique',
+            PackageStatus.DEVEL: 'devel',
+            PackageStatus.LEGACY: 'legacy',
+            PackageStatus.INCORRECT: 'incorrect',
+            PackageStatus.UNTRUSTED: 'untrusted',
+            PackageStatus.NOSCHEME: 'noscheme',
+            PackageStatus.ROLLING: 'rolling',
+        }[val]
+
+
+class PackageFlags:
+    REMOVE: ClassVar[int] = 1 << 0
+    DEVEL: ClassVar[int] = 1 << 1
+    IGNORE: ClassVar[int] = 1 << 2
+    INCORRECT: ClassVar[int] = 1 << 3
+    UNTRUSTED: ClassVar[int] = 1 << 4
+    NOSCHEME: ClassVar[int] = 1 << 5
+    ROLLING: ClassVar[int] = 1 << 7
+    OUTDATED: ClassVar[int] = 1 << 8
+    LEGACY: ClassVar[int] = 1 << 9
+    P_IS_PATCH: ClassVar[int] = 1 << 10
+    ANY_IS_PATCH: ClassVar[int] = 1 << 11
+    TRACE: ClassVar[int] = 1 << 12
+    WEAK_DEVEL: ClassVar[int] = 1 << 13
+    STABLE: ClassVar[int] = 1 << 14
+    ALTVER: ClassVar[int] = 1 << 15
+
+    ANY_IGNORED: ClassVar[int] = IGNORE | INCORRECT | UNTRUSTED | NOSCHEME
+
+    @staticmethod
+    def get_metaorder(val: int) -> int:
+        """Return a higher order version sorting key based on flags.
+
+        E.g. rolling versions always precede normal versions,
+        and normal versions always precede outdated versions
+
+        Within a specific metaorder versions are compared normally
+        """
+        if val & PackageFlags.ROLLING:
+            return 1
+        if val & PackageFlags.OUTDATED:
+            return -1
+        return 0
+
+    @staticmethod
+    def as_string(val: int) -> str:
+        """Return string representation of a flags combination."""
+        if val == 0:
+            return '-'
+
+        return '|'.join(
+            name for var, name in {
+                PackageFlags.REMOVE: 'REMOVE',
+                PackageFlags.DEVEL: 'DEVEL',
+                PackageFlags.IGNORE: 'IGNORE',
+                PackageFlags.INCORRECT: 'INCORRECT',
+                PackageFlags.UNTRUSTED: 'UNTRUSTED',
+                PackageFlags.NOSCHEME: 'NOSCHEME',
+                PackageFlags.ROLLING: 'ROLLING',
+                PackageFlags.OUTDATED: 'OUTDATED',
+                PackageFlags.LEGACY: 'LEGACY',
+                PackageFlags.P_IS_PATCH: 'P_IS_PATCH',
+                PackageFlags.ANY_IS_PATCH: 'ANY_IS_PATCH',
+                PackageFlags.TRACE: 'TRACE',
+                PackageFlags.WEAK_DEVEL: 'WEAK_DEVEL',
+                PackageFlags.STABLE: 'STABLE',
+                PackageFlags.ALTVER: 'ALTVER',
+            }.items() if val & var
+        )
 
 
 @dataclass

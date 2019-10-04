@@ -22,8 +22,7 @@ import flask
 import psycopg2
 
 from repologyapp.config import config
-
-from repology.querymgr import QueryManager
+from repologyapp.querymgr import QueryManager
 
 
 __all__ = [
