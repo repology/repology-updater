@@ -1,7 +1,0 @@
-{% extends "opensearch.xml" %}
-{% block shortname %}Repology maintainers{% endblock %}
-{% block longname %}Repology maintainer search{% endblock %}
-{% block description %}Search for package maintainers on Repology.org{% endblock %}
-{% block tags %}repology repository package maintainer{% endblock %}
-{% block url %}{{ REPOLOGY_HOME }}{{ url_for('maintainers', search='{searchTerms}')|replace('%7BsearchTerms%7D', '{searchTerms}') }}{% endblock %}
-{% block example %}ubuntu-devel-discuss{% endblock %}

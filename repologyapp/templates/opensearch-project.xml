@@ -1,7 +1,0 @@
-{% extends "opensearch.xml" %}
-{% block shortname %}Repology packages{% endblock %}
-{% block longname %}Repology projects search{% endblock %}
-{% block description %}Search for software packages on Repology.org{% endblock %}
-{% block tags %}repology repository package{% endblock %}
-{% block url %}{{ REPOLOGY_HOME }}{{ url_for('projects', search='{searchTerms}')|replace('%7BsearchTerms%7D', '{searchTerms}') }}{% endblock %}
-{% block example %}firefox{% endblock %}
