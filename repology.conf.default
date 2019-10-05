@@ -73,3 +73,10 @@ REPOSITORIES = ['production']
 # Overridable via free command line args
 #
 ENABLE_SAFETY_CHECKS = True
+
+#
+# Address of repology instance this updater is related to
+#
+# For instance, it's used in repository fetcher User-Agent
+#
+REPOLOGY_HOME = 'https://repology.org'
