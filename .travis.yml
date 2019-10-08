@@ -71,6 +71,7 @@ before_install:
   - pip install protobuf
 
   # install extra python dependencies
+  - pip install codecov
   - pip install coveralls
   - pip install flake8
   - pip install flake8-builtins!=1.1.0
@@ -109,4 +110,4 @@ script:
   - coverage run --source=repology --omit="repology/test/*,repology/fetchers/*" -m unittest discover
 
 after_success:
-  - if [ -n "$COVERAGE" ]; then coveralls; fi
+  - if [ -n "$COVERAGE" ]; then coveralls; codecov; fi
