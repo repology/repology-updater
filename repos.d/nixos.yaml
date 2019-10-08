@@ -12,7 +12,7 @@
     - name: packages.json
       fetcher: FileFetcher
       parser: NixJsonParser
-      url: https://nixos.org/nixpkgs/packages.json.gz
+      url: https://nixos.org/nixpkgs/packages-nixos-19.03.json.gz
   repolinks:
     - desc: NixOS home
       url: http://nixos.org/
@@ -38,7 +38,7 @@
     - name: packages-unstable.json
       fetcher: FileFetcher
       parser: NixJsonParser
-      url: https://nixos.org/nixpkgs/packages-unstable.json.gz
+      url: https://nixos.org/nixpkgs/packages-nixos-unstable.json.gz
   repolinks:
     - desc: NixOS home
       url: http://nixos.org/
