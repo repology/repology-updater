@@ -58,27 +58,10 @@ before_install:
         sudo make install
     )
 
-  # install mandatory python dependencies
-  - pip install Jinja2
-  - pip install PyYAML
-  - pip install jsonslicer
-  - pip install libversion
-  - pip install lxml
-  - pip install psycopg2
-  - pip install pyparsing
-  - pip install requests
-  - pip install rubymarshal
-  - pip install protobuf
-
-  # install extra python dependencies
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
   - pip install codecov
   - pip install coveralls
-  - pip install flake8
-  - pip install flake8-builtins!=1.1.0
-  - pip install flake8-import-order
-  - pip install flake8-quotes
-  - pip install mypy>=0.720
-  - pip install voluptuous
 
   # get rules
   - git clone --depth=1 https://github.com/repology/repology-rules.git rules.d

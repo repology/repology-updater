@@ -1,0 +1,10 @@
+Jinja2
+PyYAML
+jsonslicer
+libversion
+lxml
+protobuf
+psycopg2
+pyparsing
+requests
+rubymarshal>=1.2.6
