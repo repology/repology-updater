@@ -20,7 +20,7 @@ flake8:
 	${FLAKE8} --application-import-names=repology *.py repology
 
 mypy:
-	${MYPY} *.py repology
+	${MYPY} repology-update.py repology-dump.py repology
 	${MYPY} repology/fetchers/fetchers
 	${MYPY} repology/parsers/parsers
 
