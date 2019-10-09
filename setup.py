@@ -16,10 +16,8 @@ setup(
         'repology.parsers',
     ],
     scripts=[
-        'repology-app.py',
         'repology-dump.py',
         'repology-gensitemap.py',
-        'repology-linkchecker.py',
         'repology-update.py',
     ],
     classifiers=[
@@ -27,7 +25,6 @@ setup(
         'Topic :: System :: Software Distribution',
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
-        'Environment :: Web Environment',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.7',
@@ -37,15 +34,13 @@ setup(
     install_requires=[
         'Jinja2',
         'PyYAML',
-        'flask',
         'jsonslicer',
         'libversion',
         'lxml',
-        'pillow',
         'psycopg2',
         'pyparsing',
-        'pytz',
         'requests',
         'rubymarshal>=1.2.6',
+        'protobuf',
     ]
 )
