@@ -27,7 +27,7 @@ matrix:
   allow_failures:  # werkzeug incompatibility
     - python: 3.8-dev
     - python: nightly
-before_install:
+install:
   - export REAL_PYTHON=$(basename $(dirname $(python-config --configdir)))
   - |-
     mkdir -p dep-rpm
@@ -57,15 +57,11 @@ before_install:
         make &&
         sudo make install
     )
-
-  - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
   - pip install codecov
   - pip install coveralls
-
-  # get rules
-  - git clone --depth=1 https://github.com/repology/repology-rules.git rules.d
 before_script:
+  - git clone --depth=1 https://github.com/repology/repology-rules.git rules.d
   - sudo -u postgres psql -c "CREATE DATABASE repology_test;"
   - sudo -u postgres psql -c "CREATE USER repology_test WITH PASSWORD 'repology_test'"
   - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE repology_test TO repology_test"
