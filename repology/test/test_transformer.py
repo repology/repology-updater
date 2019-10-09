@@ -350,6 +350,9 @@ class TestPackageTransformer(unittest.TestCase):
             PackageSample(name='p1', version='1.0', homepage='https://foo.com/xxx').expect(effname='bar'),
             PackageSample(name='p2', version='1.0', homepage='http://foo.com/').expect(effname='bar'),
             PackageSample(name='p3', version='1.0', homepage='http://foo_com/xxx').expect(effname='p3'),
+            PackageSample(name='p1', version='1.0', downloads=['https://foo.com/xxx']).expect(effname='bar'),
+            PackageSample(name='p2', version='1.0', downloads=['http://foo.com/']).expect(effname='bar'),
+            PackageSample(name='p3', version='1.0', downloads=['http://foo_com/xxx']).expect(effname='p3'),
             PackageSample(name='p4', version='2.0').expect(effname='p4'),
         )
 
@@ -358,6 +361,8 @@ class TestPackageTransformer(unittest.TestCase):
             '[ { wwwpart: "foo", setname: bar } ]',
             PackageSample(name='p1', version='1.0', homepage='http://foo/xxx').expect(effname='bar'),
             PackageSample(name='p2', version='1.0', homepage='http://bar.com/yyy').expect(effname='p2'),
+            PackageSample(name='p1', version='1.0', downloads=['http://foo/xxx']).expect(effname='bar'),
+            PackageSample(name='p2', version='1.0', downloads=['http://bar.com/yyy']).expect(effname='p2'),
             PackageSample(name='p3', version='2.0').expect(effname='p3'),
         )
 

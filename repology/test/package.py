@@ -39,6 +39,7 @@ def spawn_package(
     maintainers: Optional[List[str]] = None,
     flavors: Optional[List[str]] = None,
     branch: Optional[str] = None,
+    downloads: Optional[List[str]] = None,
 ) -> Package:
     m = PackageFactory().begin()
 
@@ -50,6 +51,7 @@ def spawn_package(
     m.add_homepages(homepage)
     m.add_categories(category)
     m.add_maintainers(maintainers)
+    m.add_downloads(downloads)
 
     p = m.spawn(repo=repo, family=family if family is not None else repo)
 
