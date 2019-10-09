@@ -27,7 +27,7 @@ matrix:
   allow_failures:  # werkzeug incompatibility
     - python: 3.8-dev
     - python: nightly
-install:
+before_install:
   - export REAL_PYTHON=$(basename $(dirname $(python-config --configdir)))
   - |-
     mkdir -p dep-rpm
