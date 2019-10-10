@@ -19,12 +19,14 @@
 
 import argparse
 import sys
+from collections import defaultdict
 from timeit import default_timer as timer
-from typing import Any, Callable, List, TypeVar
+from typing import Any, Callable, Dict, List, TypeVar
 
 from repology.config import config
 from repology.database import Database
 from repology.dblogger import LogRunManager
+from repology.fieldstats import FieldStatistics
 from repology.logger import FileLogger, Logger, StderrLogger
 from repology.packageproc import fill_packageset_versions
 from repology.querymgr import QueryManager
@@ -199,9 +201,15 @@ def database_update(env: Environment) -> None:
     start_time = timer()
 
     logger.log('pushing packages to database')
+
+    field_stats_per_repo: Dict[str, FieldStatistics] = defaultdict(lambda: FieldStatistics(['comment', 'maintainers', 'category', 'homepage', 'licenses', 'downloads']))
+
     for packageset in env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger):
         fill_packageset_versions(packageset)
         package_queue.extend(packageset)
+
+        for package in packageset:
+            field_stats_per_repo[package.repo].add(package)
 
         if len(package_queue) >= 10000:
             database.add_packages(package_queue)
@@ -211,6 +219,9 @@ def database_update(env: Environment) -> None:
 
     # process what's left in the queue
     database.add_packages(package_queue)
+
+    for repo, field_stats in field_stats_per_repo.items():
+        database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
 
     logger.log('updating views')
     database.update_finish()

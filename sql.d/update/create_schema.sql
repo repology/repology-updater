@@ -602,7 +602,9 @@ CREATE TABLE repositories (
 	first_seen timestamp with time zone NOT NULL,
 	last_seen timestamp with time zone NOT NULL,
 
-	-- metadata
+	used_package_fields text[],
+
+	-- metadata from config
 	sortname text NOT NULL,
 	"type" text NOT NULL,
 	"desc" text NOT NULL,
