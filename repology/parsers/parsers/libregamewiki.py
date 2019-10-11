@@ -18,6 +18,7 @@
 import re
 import xml.etree.ElementTree
 from typing import Iterable
+from urllib.parse import unquote
 
 from repology.packagemaker import PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -42,6 +43,8 @@ class LibreGameWikiParser(Parser):
                 continue
 
             pkg.set_name(cell.text)
+            pkg.set_visiblename(cell.text)
+            pkg.set_keyname(unquote(cell.attrib['href'].rsplit('/', 1)[-1]))
 
             # version
             cell = item.find('./p[2]')
