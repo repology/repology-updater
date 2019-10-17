@@ -115,7 +115,7 @@ class OpenBSDsqlportsParser(Parser):
 
                     # done
                     if not master_sites:
-                        pkg.log('distfiles without master_sites'.format(distfile, master_sites), severity=Logger.ERROR)
+                        pkg.log('distfile "{}" without master_sites'.format(distfile), severity=Logger.ERROR)
                         break
 
                     pkg.add_downloads((master_site + distfile for master_site in master_sites.split()))

@@ -32,6 +32,8 @@ class FTPListFetcher(ScratchFileFetcher):
         self.fetch_timeout = fetch_timeout
 
     def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
+        assert(self.url.hostname is not None)
+
         ftp = ftplib.FTP(
             host=self.url.hostname,
             user=self.url.username or '',
