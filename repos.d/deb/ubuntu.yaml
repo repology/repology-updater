@@ -454,3 +454,86 @@
     - desc: Package builds on launchpad
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
   tags: [ all, production, ubuntu ]
+
+- name: ubuntu_20_04
+  type: repository
+  desc: Ubuntu 20.04
+  family: debuntu
+  color: 'e95420'
+  minpackages: 29000
+  sources:
+    - name: [ focal/main, focal/multiverse, focal/restricted, focal/universe, focal-updates/main, focal-updates/multiverse, focal-updates/restricted, focal-updates/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in focal
+      url: https://packages.ubuntu.com/focal/
+  packagelinks:
+    - desc: Package details on packages.ubuntu.com
+      url: 'https://packages.ubuntu.com/source/focal/{name}'
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_20_04_backports
+  type: repository
+  desc: Ubuntu 20.04 Backports
+  family: debuntu
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ focal-backports/main, focal-backports/multiverse, focal-backports/restricted, focal-backports/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in focal
+      url: https://packages.ubuntu.com/focal/
+  packagelinks:
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
+
+- name: ubuntu_20_04_proposed
+  type: repository
+  desc: Ubuntu 20.04 Proposed
+  family: debuntu
+  color: 'e95420'
+  minpackages: 0
+  sources:
+    - name: [ focal-proposed/main, focal-proposed/multiverse, focal-proposed/restricted, focal-proposed/universe ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.ubuntu.com/ubuntu/dists/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Ubuntu packages
+      url: https://packages.ubuntu.com/
+    - desc: Ubuntu packages in focal
+      url: https://packages.ubuntu.com/focal/
+  packagelinks:
+    - desc: Package on Launchpad.net
+      url: 'https://launchpad.net/ubuntu/+source/{name}'
+    - desc: Related bugs on Launchpad.net
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+    - desc: Package builds on launchpad
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+  tags: [ all, production, ubuntu ]
