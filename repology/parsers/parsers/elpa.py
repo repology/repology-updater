@@ -49,7 +49,7 @@ def _parse_data(data: str) -> List[_PackageData]:
 
     people_list = OneOrMore(qstring | dot | nil)
 
-    keyval_url = (lpar + Suppress(':url') + dot + qstring + rpar).setParseAction(lambda s, l, t: [('url', t[0])])
+    keyval_url = (lpar + (Suppress(':url') | Suppress(':homepage')) + dot + qstring + rpar).setParseAction(lambda s, l, t: [('url', t[0])])
     keyval_keywords = (lpar + Suppress(':keywords') + ZeroOrMore(qstring) + rpar).setParseAction(lambda s, l, t: [('keywords', [str(k) for k in t])])
     keyval_commit = (lpar + Suppress(':commit') + dot + qstring + rpar).setParseAction(lambda s, l, t: [('commit', t[0])])
     keyval_maintainer = (lpar + Suppress(':maintainer') + people_list + rpar).setParseAction(lambda s, l, t: [('maintainer', [str(m) for m in t])])
