@@ -22,10 +22,9 @@ matrix:
   include:
     - python: 3.7
       env: COVERAGE=yes
-    - python: 3.8-dev
+    - python: 3.8
     - python: nightly
-  allow_failures:  # werkzeug incompatibility
-    - python: 3.8-dev
+  allow_failures:
     - python: nightly
 before_install:
   - export REAL_PYTHON=$(basename $(dirname $(python-config --configdir)))
