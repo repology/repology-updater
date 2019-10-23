@@ -7,7 +7,7 @@
   desc: Tails stable
   family: debuntu
   color: '56347c'
-  minpackages: 20
+  minpackages: 10
   sources:
     - name: main
       fetcher: FileFetcher
