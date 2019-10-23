@@ -90,27 +90,68 @@
   type: repository
   desc: RPM Fusion Fedora 30
   family: fedora
-  minpackages: 300
+  minpackages: 400
   sources:
-    - name: free-branched
+    - name: free-release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://download1.rpmfusion.org/free/fedora/development/30/Everything/source/SRPMS/
-      subrepo: free/branched
+      url: https://download1.rpmfusion.org/free/fedora/releases/30/Everything/source/SRPMS/
+      subrepo: free/release
+    - name: free-updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/fedora/updates/30/SRPMS/
+      subrepo: free/updates
     - name: free-updates-testing
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/updates/testing/30/SRPMS/
       subrepo: free/updates-testing
-    - name: nonfree-branched
+    - name: nonfree-release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://download1.rpmfusion.org/nonfree/fedora/development/30/Everything/source/SRPMS/
-      subrepo: nonfree/branched
+      url: https://download1.rpmfusion.org/nonfree/fedora/releases/30/Everything/source/SRPMS/
+      subrepo: nonfree/release
+    - name: nonfree-updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/fedora/updates/30/SRPMS/
+      subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/30/SRPMS/
+      subrepo: nonfree/updates-testing
+  repolinks:
+    - desc: RPM Fusion home
+      url: https://rpmfusion.org/
+  tags: [ all, production, rpmfusion ]
+
+- name: rpmfusion_fedora_31
+  type: repository
+  desc: RPM Fusion Fedora 31
+  family: fedora
+  minpackages: 300
+  sources:
+    - name: free-branched
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/fedora/development/31/Everything/source/SRPMS/
+      subrepo: free/branched
+    - name: free-updates-testing
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/fedora/updates/testing/31/SRPMS/
+      subrepo: free/updates-testing
+    - name: nonfree-branched
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/fedora/development/31/Everything/source/SRPMS/
+      subrepo: nonfree/branched
+    - name: nonfree-updates-testing
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/fedora/updates/testing/31/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
@@ -197,6 +238,37 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: https://download1.rpmfusion.org/nonfree/el/updates/testing/7/SRPMS/
+      subrepo: nonfree/updates-testing
+  repolinks:
+    - desc: RPM Fusion home
+      url: https://rpmfusion.org/
+  tags: [ all, production, rpmfusion ]
+
+- name: rpmfusion_el_8
+  type: repository
+  desc: RPM Fusion EL 8
+  family: fedora
+  minpackages: 50
+  sources:
+    - name: free-updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/el/updates/8/SRPMS/
+      subrepo: free/updates
+    - name: free-updates-testing
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/el/updates/testing/8/SRPMS/
+      subrepo: free/updates-testing
+    - name: nonfree-updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/el/updates/8/SRPMS/
+      subrepo: nonfree/updates
+    - name: nonfree-updates-testing
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/el/updates/testing/8/SRPMS/
       subrepo: nonfree/updates-testing
   repolinks:
     - desc: RPM Fusion home
