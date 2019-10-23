@@ -79,9 +79,9 @@
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
 
-- name: mx_stretch
+- name: mx_17
   type: repository
-  desc: MX Linux Stretch
+  desc: MX Linux MX-17
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
@@ -103,9 +103,9 @@
       url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
   tags: [ all, production, mx ]
 
-- name: mx_stretch_testing
+- name: mx_17_testing
   type: repository
-  desc: MX Linux Stretch Testing
+  desc: MX Linux MX-17 Testing
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
@@ -115,6 +115,54 @@
       fetcher: FileFetcher
       parser: DebianSourcesParser
       url: 'http://mxrepo.com/mx/testrepo/dists/stretch/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
+  packagelinks:
+    - desc: Package directory on mxrepo.com
+      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{name|libfirstletter}/{name}'
+  tags: [ all, production, mx ]
+
+- name: mx_19
+  type: repository
+  desc: MX Linux MX-19
+  family: debuntu
+  ruleset: [debuntu,mx]
+  color: "6693d6"
+  minpackages: 100
+  sources:
+    - name: [ main, non-free ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://mxrepo.com/mx/repo/dists/buster/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: MX Linux
+      url: https://mxlinux.org/
+    - desc: MX and MEPIS Community Repository
+      url: http://mxrepo.com/
+  packagelinks:
+    - desc: Package directory on mxrepo.com
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{name}'
+  tags: [ all, production, mx ]
+
+- name: mx_19_testing
+  type: repository
+  desc: MX Linux MX-19 Testing
+  family: debuntu
+  ruleset: [debuntu,mx]
+  color: "6693d6"
+  minpackages: 100
+  sources:
+    - name: [ test ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://mxrepo.com/mx/testrepo/dists/buster/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
