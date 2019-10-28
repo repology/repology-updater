@@ -17,6 +17,9 @@
   repolinks:
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
+  packagelinks:
+    - desc: Package on abf.io
+      url: 'https://abf.io/import/{name}/tree/rosa2014.1'
   tags: [ all, production, rosa ]
 
 - name: rosa_2016_1
@@ -35,6 +38,9 @@
   repolinks:
     - desc: Rosa Linux home
       url: http://en.rosalinux.com/
+  packagelinks:
+    - desc: Package on abf.io
+      url: 'https://abf.io/import/{name}/tree/rosa2016.1'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_6_9
