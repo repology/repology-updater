@@ -11,6 +11,8 @@
     - name: calculate
       fetcher: GitFetcher
       parser: GentooGitParser
+      require_md5cache_metadata: false
+      require_xml_metadata: false
       url: https://github.com/calculatelinux/calculate.git
   repolinks:
     - desc: Calculate Linux home

@@ -11,6 +11,8 @@
     - name: sabayon
       fetcher: GitFetcher
       parser: GentooGitParser
+      require_md5cache_metadata: false
+      require_xml_metadata: false
       url: https://github.com/Sabayon/sabayon-distro.git
   repolinks:
     - desc: Sabayon Linux home
@@ -32,6 +34,8 @@
     - name: sabayon
       fetcher: GitFetcher
       parser: GentooGitParser
+      require_md5cache_metadata: false
+      require_xml_metadata: false
       url: https://github.com/Sabayon/for-gentoo.git
   repolinks:
     - desc: Sabayon Linux home

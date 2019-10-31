@@ -12,6 +12,8 @@
     - name: pentoo-overlay
       fetcher: GitFetcher
       parser: GentooGitParser
+      require_md5cache_metadata: false
+      require_xml_metadata: false
       url: git://github.com/pentoo/pentoo-overlay.git
   repolinks:
     - desc: Home page

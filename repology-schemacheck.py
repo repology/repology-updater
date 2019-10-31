@@ -205,6 +205,10 @@ schemas = {
                     # rsync fetcher
                     'rsync_include': str,
                     'rsync_exclude': str,
+
+                    # gentoo parser
+                    'require_md5cache_metadata': bool,
+                    'require_xml_metadata': bool,
                 }
             ],
             'shadow': bool,

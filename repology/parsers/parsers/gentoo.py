@@ -17,7 +17,8 @@
 
 import os
 import xml.etree.ElementTree
-from typing import Dict, Iterable, List, Optional, Tuple
+from dataclasses import dataclass, field
+from typing import Dict, Iterable, List, Set, Tuple
 
 from repology.logger import Logger
 from repology.package import PackageFlags
@@ -58,9 +59,7 @@ def _parse_conditional_expr(string: str) -> Iterable[str]:
 def _iter_packages(path: str) -> Iterable[Tuple[str, str]]:
     for category in os.listdir(path):
         category_path = os.path.join(path, category)
-        if not os.path.isdir(category_path):
-            continue
-        if category in ['acct-group', 'acct-user', 'metadata', 'virtual']:
+        if not os.path.isdir(category_path) or category.startswith('.') or category in ['acct-group', 'acct-user', 'metadata', 'virtual']:
             continue
 
         for package in os.listdir(category_path):
@@ -79,65 +78,68 @@ def _iter_ebuilds(path: str, category: str, package: str) -> Iterable[str]:
         yield ebuild[:-7]  # strip extension
 
 
-def _construct_upstream_link(upstream_type: str, arg: str, pkg: PackageMaker) -> Optional[str]:
-    if   upstream_type == 'bitbucket':      return 'https://bitbucket.org/{}'.format(arg)  # noqa
-    elif upstream_type == 'cpan':           return 'https://metacpan.org/release/{}'.format(arg)  # noqa
-    elif upstream_type == 'cpan-module':    return None  # should be handled by cpan  # noqa
-    elif upstream_type == 'cpe':            return None  # ignore  # noqa
-    elif upstream_type == 'ctan':           return 'https://www.ctan.org/pkg/{}'.format(arg)  # noqa
-    elif upstream_type == 'freecode':       return 'http://freecode.com/projects/{}'.format(arg)  # noqa
-    elif upstream_type == 'freshmeat':      return 'http://freshmeat.net/projects/{}/'.format(arg)  # noqa
-    elif upstream_type == 'github':         return 'https://github.com/{}'.format(arg)  # noqa
-    elif upstream_type == 'gitlab':         return 'https://gitlab.com/{}'.format(arg)  # noqa
-    elif upstream_type == 'google-code':    return 'https://code.google.com/p/{}/'.format(arg)  # noqa
-    elif upstream_type == 'launchpad':      return 'https://launchpad.net/{}'.format(arg)  # noqa
-    elif upstream_type == 'pear':           return 'http://pear.php.net/package/{}'.format(arg)  # noqa
-    elif upstream_type == 'pypi':           return 'https://pypi.org/project/{}/'.format(arg)  # noqa
-    elif upstream_type == 'rubygems':       return 'https://rubygems.org/gems/{}'.format(arg)  # noqa
-    elif upstream_type == 'sourceforge':    return 'https://sourceforge.net/projects/{}/'.format(arg)  # noqa
-    elif upstream_type == 'sourceforge-jp': return 'https://osdn.net/projects/{}/'.format(arg)  # noqa
-
-    pkg.log('Unsupported upstream type {}'.format(upstream_type), Logger.ERROR)
-    return None
+_link_templates_by_upstream_type = {
+    'bitbucket': 'https://bitbucket.org/{}',
+    'cpan': 'https://metacpan.org/release/{}',
+    'cpan-module': None,  # should be handled by cpan
+    'cpe': None,  # not an url
+    'ctan': 'https://www.ctan.org/pkg/{}',
+    'freecode': 'http://freecode.com/projects/{}',
+    'freshmeat': 'http://freshmeat.net/projects/{}/',
+    'github': 'https://github.com/{}',
+    'gitlab': 'https://gitlab.com/{}',
+    'google-code': 'https://code.google.com/p/{}/',
+    'launchpad': 'https://launchpad.net/{}',
+    'pear': 'http://pear.php.net/package/{}',
+    'pypi': 'https://pypi.org/project/{}/',
+    'rubygems': 'https://rubygems.org/gems/{}',
+    'sourceforge': 'https://sourceforge.net/projects/{}/',
+    'sourceforge-jp': 'https://osdn.net/projects/{}/',
+}
 
 
-def _parse_package_metadata_xml(path: str, category: str, package: str, pkg: PackageMaker) -> Tuple[List[str], List[str]]:
-    metadata_path = os.path.join(path, category, package, 'metadata.xml')
+@dataclass
+class _ParsedXmlMetadata:
+    maintainers: List[str] = field(default_factory=list)
+    upstreams: List[str] = field(default_factory=list)
+    unsupported_upstream_types: Set[str] = field(default_factory=set)
 
-    maintainers: List[str] = []
-    upstreams: List[str] = []
 
-    if not os.path.isfile(metadata_path):
-        return (maintainers, upstreams)
-
-    with open(metadata_path, 'r', encoding='utf-8') as metafile:
+def _parse_xml_metadata(path: str) -> _ParsedXmlMetadata:
+    with open(path, 'r', encoding='utf-8') as metafile:
         meta = xml.etree.ElementTree.parse(metafile)
+
+    output = _ParsedXmlMetadata()
 
     for entry in meta.findall('maintainer'):
         email_node = entry.find('email')
 
         if email_node is not None and email_node.text is not None:
-            maintainers += extract_maintainers(email_node.text)
+            output.maintainers += extract_maintainers(email_node.text)
 
     for entry in meta.findall('upstream'):
         for remote_id_node in entry.findall('remote-id'):
-            if remote_id_node.text:
-                link = _construct_upstream_link(remote_id_node.attrib['type'], remote_id_node.text.strip(), pkg)
-                if link:
-                    upstreams.append(link)
+            if not remote_id_node.text:
+                continue
 
-    return (maintainers, upstreams)
+            upstream_type = remote_id_node.attrib['type']
+
+            if upstream_type not in _link_templates_by_upstream_type:
+                output.unsupported_upstream_types.add(upstream_type)
+                continue
+
+            link_template = _link_templates_by_upstream_type[upstream_type]
+
+            if link_template:
+                output.upstreams.append(link_template.format(remote_id_node.text.strip()))
+
+    return output
 
 
-def _parse_md5cache_metadata_xml(path: str, category: str, ebuild: str) -> Dict[str, str]:
-    metadata_path = os.path.join(path, 'metadata', 'md5-cache', category, ebuild)
-
+def _parse_md5cache_metadata(path: str) -> Dict[str, str]:
     result: Dict[str, str] = {}
 
-    if not os.path.isfile(metadata_path):
-        return result
-
-    with open(metadata_path, 'r', encoding='utf-8') as metadata_file:
+    with open(path, 'r', encoding='utf-8') as metadata_file:
         for line in metadata_file:
             line = line.strip()
             key, value = line.split('=', 1)
@@ -148,6 +150,13 @@ def _parse_md5cache_metadata_xml(path: str, category: str, ebuild: str) -> Dict[
 
 
 class GentooGitParser(Parser):
+    _require_xml_metadata: bool
+    _require_md5cache_metadata: bool
+
+    def __init__(self, require_md5cache_metadata: bool = True, require_xml_metadata: bool = False) -> None:
+        self._require_xml_metadata = require_xml_metadata
+        self._require_md5cache_metadata = require_md5cache_metadata
+
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('-')
 
@@ -158,9 +167,18 @@ class GentooGitParser(Parser):
             pkg.set_keyname(category + '/' + package)
             pkg.add_categories(category)
 
-            maintainers, upstreams = _parse_package_metadata_xml(path, category, package, pkg)
+            xml_metadata_path = os.path.join(path, category, package, 'metadata.xml')
+            if os.path.isfile(xml_metadata_path):
+                xml_metadata = _parse_xml_metadata(xml_metadata_path)
+                for upstream_type in xml_metadata.unsupported_upstream_types:
+                    pkg.log(f'Unsupported upstream type {upstream_type}', Logger.ERROR)
+            elif self._require_xml_metadata:
+                pkg.log('cannot find metadata ({}), package dropped'.format(os.path.relpath(xml_metadata_path, path)), Logger.ERROR)
+                continue
+            else:
+                xml_metadata = _ParsedXmlMetadata()
 
-            pkg.add_maintainers(maintainers)
+            pkg.add_maintainers(xml_metadata.maintainers)
 
             for ebuild in _iter_ebuilds(path, category, package):
                 subpkg = pkg.clone(append_ident='/' + ebuild)
@@ -169,23 +187,31 @@ class GentooGitParser(Parser):
                 if subpkg.version.endswith('9999'):
                     subpkg.set_flags(PackageFlags.ROLLING)
 
-                metadata = _parse_md5cache_metadata_xml(path, category, ebuild)
+                md5cache_metadata_path = os.path.join(path, 'metadata', 'md5-cache', category, ebuild)
 
-                subpkg.set_summary(metadata.get('DESCRIPTION'))
+                if os.path.isfile(md5cache_metadata_path):
+                    md5cache_metadata = _parse_md5cache_metadata(md5cache_metadata_path)
 
-                if 'LICENSE' in metadata:
-                    if '(' in metadata['LICENSE']:
-                        # XXX: conditionals and OR's: need more
-                        # complex parsing and backend support
-                        subpkg.add_licenses(metadata['LICENSE'])
-                    else:
-                        subpkg.add_licenses(metadata['LICENSE'].split(' '))
+                    subpkg.set_summary(md5cache_metadata.get('DESCRIPTION'))
 
-                if 'SRC_URI' in metadata:
-                    # skip local files
-                    subpkg.add_downloads(filter(lambda s: '/' in s, _parse_conditional_expr(metadata['SRC_URI'])))
+                    if 'LICENSE' in md5cache_metadata:
+                        if '(' in md5cache_metadata['LICENSE']:
+                            # XXX: conditionals and OR's: need more
+                            # complex parsing and backend support
+                            subpkg.add_licenses(md5cache_metadata['LICENSE'])
+                        else:
+                            subpkg.add_licenses(md5cache_metadata['LICENSE'].split(' '))
 
-                homepages = metadata.get('HOMEPAGE', '').split(' ')
-                subpkg.add_homepages(homepages, upstreams)
+                    if 'SRC_URI' in md5cache_metadata:
+                        # skip local files
+                        subpkg.add_downloads(filter(lambda s: '/' in s, _parse_conditional_expr(md5cache_metadata['SRC_URI'])))
+
+                    subpkg.add_homepages(md5cache_metadata.get('HOMEPAGE', '').split(' '))
+                elif self._require_md5cache_metadata:
+                    subpkg.log('cannot find metadata ({}), package dropped'.format(os.path.relpath(md5cache_metadata_path, path)), Logger.ERROR)
+                    continue
+
+                # upstreams should be added after "real" homepages
+                subpkg.add_homepages(xml_metadata.upstreams)
 
                 yield subpkg

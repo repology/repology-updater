@@ -13,6 +13,8 @@
       fetcher: GitFetcher
       parser: GentooGitParser
       url: https://github.com/gentoo-mirror/gentoo.git
+      require_md5cache_metadata: true
+      require_xml_metadata: false
       sparse_checkout: [ '**/*.ebuild', '**/metadata.xml', 'metadata/md5-cache/*' ]
       branch: stable
   repolinks:
