@@ -1,0 +1,17 @@
+###########################################################################
+# RPM Sphere
+###########################################################################
+- name: rpmsphere
+  type: repository
+  desc: RPM Sphere
+  family: fedora
+  minpackages: 2500
+  sources:
+    - name: source
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://raw.githubusercontent.com/rpmsphere/source/master/
+  repolinks:
+    - desc: RPM Sphere home
+      url: https://rpmsphere.github.io/
+  tags: [ all, production ]
