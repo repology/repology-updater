@@ -131,7 +131,7 @@
   type: repository
   desc: KDE neon Experimental
   family: debuntu
-  minpackages: 10
+  minpackages: 0
   sources:
     - name: main
       fetcher: FileFetcher
