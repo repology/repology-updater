@@ -67,7 +67,10 @@ _BLACKLIST1 = {
     'libretro': ['4do'],
     'polkit-qt': ['1-qt4', '1-qt5'],
     'Dell': ['5130cdn-Color-Laser'],
-    'epson-201106w': ['201106w'],
+    'epson': ['201106w'],
+    'MPH': ['2B-Damase'],
+    'x86': ['64bit'],
+    'fuse': ['7z-ng'],
 }
 
 _BLACKLIST2 = {
@@ -80,33 +83,54 @@ class NixJsonParser(Parser):
         for key, packagedata in iter_json_dict(path, ('packages', None), encoding='utf-8'):
             with factory.begin(key) as pkg:
                 # these should eventually go away as soon as these are fixed in nix
+                if 'node-_at_webassemblyjs' in packagedata['name']:
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
+                if packagedata['name'].startswith('luajit-2.1.0-beta3-'):
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
+                if packagedata['name'].startswith('palp-6d'):
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
+                if re.match('cudatoolkit-[0-9.-]+-cudnn', packagedata['name']):
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
+                if re.match('nccl-[0-9.-]+-cuda', packagedata['name']):
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
                 skip = False
                 if packagedata['pname'] in _BLACKLIST1:
                     for verprefix in _BLACKLIST1[packagedata['pname']]:
                         if packagedata['version'].startswith(verprefix):
-                            pkg.log('dropping, {} belongs to name, not version'.format(verprefix), severity=Logger.ERROR)
+                            pkg.log('dropping {}, "{}" does not belong to version'.format(packagedata['name'], verprefix), severity=Logger.ERROR)
                             skip = True
                             break
 
                 if packagedata['pname'] in _BLACKLIST2:
-                    pkg.log('dropping, {} belongs to version, not name'.format(packagedata['pname'].rsplit('-')[-1]), severity=Logger.ERROR)
+                    pkg.log('dropping {}, "{}" does not belong to name'.format(packagedata['name'], packagedata['pname'].rsplit('-')[-1]), severity=Logger.ERROR)
                     skip = True
 
                 for verprefix in ['100dpi', '75dpi']:
                     if packagedata['version'].startswith(verprefix):
-                        pkg.log('dropping, {} belongs to name, not version'.format(verprefix), severity=Logger.ERROR)
+                        pkg.log('dropping "{}", "{}" does not belong to version'.format(packagedata['name'], verprefix), severity=Logger.ERROR)
                         skip = True
                         break
 
                 if skip:
                     continue
 
-                if 'node-_at_webassemblyjs' in packagedata['name']:
-                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
-                    continue
-
                 if not packagedata['version']:
                     continue  # no version - silently ignore
+
+                if re.match('[0-9].*[a-z].*-[0-9]', packagedata['version'].lower()):
+                    letters = ''.join(c for c in packagedata['version'].lower() if c.isalpha())
+                    if letters not in ['alpha', 'beta', 'rc', 'a', 'b', 'pre', 'post', 'rev', 'q', 'u', 'build', 'unstable']:
+                        pkg.log('"{}": suspicious version "{}", worth rechecking'.format(packagedata['name'], packagedata['version']), severity=Logger.WARNING)
 
                 pkg.set_name(packagedata['pname'])
                 pkg.set_version(packagedata['version'])
