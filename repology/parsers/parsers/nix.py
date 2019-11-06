@@ -58,58 +58,60 @@ def extract_nix_licenses(whatever: Any) -> List[str]:
         return []
 
 
+_BLACKLIST1 = {
+    'liblqr': ['1'],
+    'python2.7': ['3to2'],
+    'python3.6': ['3to2'],
+    'python3.7': ['3to2'],
+    'python3.8': ['3to2'],
+    'libretro': ['4do'],
+    'polkit-qt': ['1-qt4', '1-qt5'],
+    'Dell': ['5130cdn-Color-Laser'],
+    'epson-201106w': ['201106w'],
+}
+
+_BLACKLIST2 = {
+    'airstrike-pre',
+}
+
+
 class NixJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for key, packagedata in iter_json_dict(path, ('packages', None), encoding='utf-8'):
             with factory.begin(key) as pkg:
+                # these should eventually go away as soon as these are fixed in nix
+                skip = False
+                if packagedata['pname'] in _BLACKLIST1:
+                    for verprefix in _BLACKLIST1[packagedata['pname']]:
+                        if packagedata['version'].startswith(verprefix):
+                            pkg.log('dropping, {} belongs to name, not version'.format(verprefix), severity=Logger.ERROR)
+                            skip = True
+                            break
+
+                if packagedata['pname'] in _BLACKLIST2:
+                    pkg.log('dropping, {} belongs to version, not name'.format(packagedata['pname'].rsplit('-')[-1]), severity=Logger.ERROR)
+                    skip = True
+
+                for verprefix in ['100dpi', '75dpi']:
+                    if packagedata['version'].startswith(verprefix):
+                        pkg.log('dropping, {} belongs to name, not version'.format(verprefix), severity=Logger.ERROR)
+                        skip = True
+                        break
+
+                if skip:
+                    continue
+
+                if 'node-_at_webassemblyjs' in packagedata['name']:
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
+                if not packagedata['version']:
+                    continue  # no version - silently ignore
+
+                pkg.set_name(packagedata['pname'])
+                pkg.set_version(packagedata['version'])
+
                 meta = packagedata['meta']
-
-                # see #854; first, try new mode which relies on dedicated version field
-                if 'version' in meta:
-                    if not packagedata['name'].endswith('-' + meta['version']):
-                        pkg.log('name "{}" does not end with version "{}"'.format(packagedata['name'], meta['version']), severity=Logger.ERROR)
-                    else:
-                        pkg.set_name(packagedata['name'][:-len(meta['version']) - 1])
-                        pkg.set_version(meta['version'])
-
-                # and fallback to old method which splits name-version pair
-                if not pkg.version:
-                    # matches most of exceptions mentioned below
-                    if re.search('-[0-9]+[a-z]', packagedata['name']):
-                        pkg.log('possibly ambiguous package name "{}", consider adding explicit version'.format(packagedata['name']), severity=Logger.WARNING)
-
-                    # useless for now due to too many matches
-                    #if re.search('-[^a-zA-Z].*-[^a-zA-Z]', packagedata['name']) and not re.match('.*20[0-9]{2}-[0-9]{2}-[0-9]{2}', packagedata['name']):
-                    #    pkg.log('possibly ambiguous package name/version pair: {}'.format(packagedata['name']), severity=Logger.WARNING)
-
-                    # see how Nix parses 'derivative' names in
-                    # https://github.com/NixOS src/libexpr/names.cc, DrvName::DrvName
-                    # it just splits on dash followed by non-letter
-                    #
-                    # this doesn't work well on 100% cases, it's an upstream problem
-                    match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
-                    if not match:
-                        pkg.log('cannot extract version from "{}"'.format(packagedata['name']), severity=Logger.ERROR)
-                        continue
-
-                    if 'node-_at_webassemblyjs' in packagedata['name']:
-                        pkg.log('skipping garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
-                        continue
-
-                    pkg.set_name(match.group(1))
-                    pkg.set_version(match.group(2))
-
-                    # some exceptions
-                    for prefix in ('75dpi', '100dpi'):
-                        if pkg.version.startswith(prefix):
-                            pkg.set_name(pkg.name + '-' + prefix)
-                            pkg.set_version(pkg.version[len(prefix) + 1:])
-
-                    merged = pkg.name + '-' + pkg.version
-                    for pkgname in ['liblqr-1', 'python2.7-3to2', 'python3.6-3to2', 'libretro-4do', 'polkit-qt-1-qt5', 'polkit-qt-1-qt4']:
-                        if merged.startswith(pkgname):
-                            pkg.set_name(pkgname)
-                            pkg.set_version(merged[len(pkgname) + 1:])
 
                 keyparts = key.split('.')
                 if len(keyparts) > 1:
