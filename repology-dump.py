@@ -77,7 +77,7 @@ def main() -> int:
         logger = FileLogger(options.logfile)
 
     if options.fields == 'all':
-        options.fields = sorted(Package.__slots__)
+        options.fields = ['effname', 'repo', 'version'] + [slot for slot in Package.__slots__ if slot not in ['effname', 'repo', 'version']]
     else:
         options.fields = options.fields.split(',')
 
