@@ -30,7 +30,10 @@ class HPPADepothelperListParser(Parser):
 
                 pkgname, pkgpath = line.strip().split('|')[:2]
 
-                pkg.set_name_and_version(pkgname)
+                name, version = pkgname.rsplit('-', 1)
+
+                pkg.set_name(name)
+                pkg.set_version(version)
                 pkg.set_extra_field('path', pkgpath)
 
                 yield pkg

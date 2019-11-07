@@ -41,7 +41,10 @@ class PkgsrcIndexParser(Parser):
                     pkg.log('skipping, empty first field', severity=Logger.ERROR)
                     continue
 
-                pkg.set_name_and_version(fields[0], normalize_version)
+                name, version = fields[0].rsplit('-', 1)
+
+                pkg.set_name(name)
+                pkg.set_version(version, normalize_version)
                 pkg.set_keyname(fields[1])
                 pkg.set_summary(fields[3])
 

@@ -29,7 +29,10 @@ class StackageHTMLParser(Parser):
         for row in lxml.html.parse(path).getroot().xpath('.//div[@class="packages"]/table/tbody/tr'):
             pkg = factory.begin()
 
-            pkg.set_name_and_version(row.xpath('./td[1]/a')[0].text)
+            name, version = row.xpath('./td[1]/a')[0].text.rsplit('-', 1)
+
+            pkg.set_name(name)
+            pkg.set_version(version)
             pkg.set_summary((row.xpath('./td[2]')[0].text or '').replace('\n', ' '))
 
             yield pkg

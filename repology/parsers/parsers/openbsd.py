@@ -86,7 +86,10 @@ class OpenBSDsqlportsParser(Parser):
             # strip flavors (see https://man.openbsd.org/packages-specs)
             pkgname = re.sub('(-[^0-9][^-]*)+$', '', row['fullpkgname'])
 
-            pkg.set_name_and_version(pkgname, _normalize_version)
+            name, version = pkgname.rsplit('-', 1)
+
+            pkg.set_name(name)
+            pkg.set_version(version, _normalize_version)
             pkg.set_keyname(row['fullpkgpath'].split(',', 1)[0])
             pkg.set_summary(row['comment'])
             pkg.add_homepages(row['homepage'])
@@ -141,7 +144,10 @@ class OpenBSDIndexParser(Parser):
                 if match:
                     pkgname = match.group(1)
 
-                pkg.set_name_and_version(pkgname, _normalize_version)
+                name, version = pkgname.rsplit('-', 1)
+
+                pkg.set_name(name)
+                pkg.set_version(version, _normalize_version)
                 pkg.set_keyname(fields[1].split(',', 1)[0])
                 pkg.set_summary(fields[3])
                 pkg.add_maintainers(extract_maintainers(fields[5]))

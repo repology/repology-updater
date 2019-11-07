@@ -52,7 +52,10 @@ class YACPGitParser(Parser):
                 pkg.log('unable to parse cygport name', severity=Logger.ERROR)
                 continue
 
-            pkg.set_name_and_version(match.group(1), normalize_version)
+            name, version = match.group(1).rsplit('-', 1)
+
+            pkg.set_name(name)
+            pkg.set_version(version, normalize_version)
 
             # these fields not contain variables (for now), so are safe to extract
             with open(cygport_path, 'r') as cygdata:

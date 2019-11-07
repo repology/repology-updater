@@ -247,11 +247,6 @@ class PackageMaker(PackageMakerBase):
         if rawversion != self._package.version:
             self._package.rawversion = rawversion
 
-    def set_name_and_version(self, namever: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
-        name, version = namever.rsplit('-', 1)
-        self.set_name(name)
-        self.set_version(version, version_normalizer)
-
     @_simple_setter('arch', str, nzs.strip, nzs.forbid_newlines)
     def set_arch(self, arch: str) -> None:
         self._package.arch = arch

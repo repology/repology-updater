@@ -38,7 +38,10 @@ class DPortsIndexParser(Parser):
                     pkg.log('skipping, unexpected number of fields {}'.format(len(fields)), severity=Logger.ERROR)
                     continue
 
-                pkg.set_name_and_version(fields[0], normalize_version)
+                name, version = fields[0].rsplit('-', 1)
+
+                pkg.set_name(name)
+                pkg.set_version(version, normalize_version)
                 pkg.set_keyname('/'.join(fields[1].rsplit('/', 2)[1:]))
                 pkg.set_summary(fields[3])
                 pkg.add_maintainers(extract_maintainers(fields[5]))

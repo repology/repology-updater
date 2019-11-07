@@ -59,7 +59,8 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.set_name_and_version('foo-1.0')
+            maker.set_name('foo')
+            maker.set_version('1.0')
             maker.set_origin('/foo')
             maker.set_summary('foo package')
             maker.add_maintainers(None, 'a@com', [None, ['b@com']], None, 'c@com')
