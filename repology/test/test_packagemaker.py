@@ -58,7 +58,6 @@ class TestPackageMaker(unittest.TestCase):
         with pkg as maker:
             maker.add_name('foo', NameType.GENERIC_PKGNAME)
             maker.set_version('1.0')
-            maker.set_origin('/foo')
             maker.set_summary('foo package')
             maker.add_maintainers(None, 'a@com', [None, ['b@com']], None, 'c@com')
             maker.add_maintainers('d@com')
@@ -71,7 +70,6 @@ class TestPackageMaker(unittest.TestCase):
 
         self.assertEqual(pkg.name, 'foo')
         self.assertEqual(pkg.version, '1.0')
-        self.assertEqual(pkg.extrafields['origin'], '/foo')
         self.assertEqual(pkg.maintainers, ['a@com', 'b@com', 'c@com', 'd@com'])
         self.assertEqual(pkg.category, 'foo')  # XXX: convert to array
         self.assertEqual(pkg.homepage, 'http://foo/')  # XXX: convert to array

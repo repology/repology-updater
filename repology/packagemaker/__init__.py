@@ -196,12 +196,6 @@ class PackageMaker(PackageMakerBase):
     def _get_ident(self) -> str:
         return self._ident or self._name_mapper.describe() or 'item #{}'.format(self._itemno)
 
-    # XXX: deprecated
-    @_simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
-    def set_origin(self, origin: str) -> None:
-        # XXX: convert to dedicated field
-        self.set_extra_field('origin', origin)
-
     @_simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
     def add_name(self, name: str, name_type: int) -> None:
         self._name_mapper.add_name(name, name_type)
