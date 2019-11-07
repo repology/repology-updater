@@ -17,7 +17,7 @@
 
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_dict
 from repology.transformer import PackageTransformer
@@ -27,7 +27,7 @@ class JustInstallJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for packagename, packagedata in iter_json_dict(path, ('packages', None)):
             with factory.begin() as pkg:
-                pkg.set_name(packagename)
+                pkg.add_name(packagename, NameType.GENERIC_PKGNAME)
                 pkg.set_version(packagedata['version'])
 
                 for arch in ['x86', 'x86_64']:

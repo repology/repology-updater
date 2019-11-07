@@ -18,7 +18,7 @@
 from typing import Iterable, Tuple
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -43,7 +43,7 @@ class OS4DepotIndexParser(Parser):
             with factory.begin(filename) as pkg:
                 pkg.set_extra_field('filename', filename)
 
-                pkg.set_name(filename.rsplit('.', 1)[0])
+                pkg.add_name(filename.rsplit('.', 1)[0], NameType.GENERIC_PKGNAME)
 
                 if not version:
                     pkg.log('skipping, no version', Logger.ERROR)

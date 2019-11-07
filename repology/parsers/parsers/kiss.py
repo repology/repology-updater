@@ -18,7 +18,7 @@
 import os
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
@@ -33,7 +33,7 @@ class KissGitParser(Parser):
         for versionpath in walk_tree(path, name='version'):
             rootdir = os.path.dirname(versionpath)
             with factory.begin(rootdir) as pkg:
-                pkg.set_name(os.path.basename(rootdir))
+                pkg.add_name(os.path.basename(rootdir), NameType.GENERIC_PKGNAME)
 
                 with open(versionpath) as f:
                     version, revision = f.read().strip().split()

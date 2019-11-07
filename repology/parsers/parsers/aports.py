@@ -19,7 +19,7 @@ import os
 import re
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -47,7 +47,7 @@ class ApkIndexParser(Parser):
                 if state and state['P'] == state['o']:
                     pkg = factory.begin()
 
-                    pkg.set_name(state['P'])
+                    pkg.add_name(state['P'], NameType.GENERIC_PKGNAME)
                     pkg.set_version(state['V'], normalize_version)
 
                     pkg.set_summary(state['T'])

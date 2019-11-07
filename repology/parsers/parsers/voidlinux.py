@@ -21,7 +21,7 @@ import plistlib
 from typing import Dict, Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -39,7 +39,7 @@ class VoidLinuxPlistParser(Parser):
             pkg = factory.begin(pkgname)
 
             if 'source-revisions' in props:
-                pkg.set_basename(props['source-revisions'].split(':', 1)[0])
+                pkg.add_name(props['source-revisions'].split(':', 1)[0], NameType.VOID_SOURCE)
             else:
                 pkg.log('cannot parse, no source-revisions field', severity=Logger.ERROR)
                 continue
@@ -48,7 +48,7 @@ class VoidLinuxPlistParser(Parser):
                 pkg.log('pkgver is expected to start with package name', severity=Logger.ERROR)
                 continue
 
-            pkg.set_name(pkgname)
+            pkg.add_name(pkgname, NameType.VOID_NAME)
             pkg.set_version(props['pkgver'][len(pkgname) + 1:], normalize_version)
             pkg.add_maintainers(extract_maintainers(props.get('maintainer', '')))
             pkg.set_summary(props['short_desc'])

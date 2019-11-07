@@ -20,7 +20,7 @@ import xml.etree.ElementTree
 from typing import Iterable
 
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.nevra import nevra_construct, nevra_parse
 from repology.transformer import PackageTransformer
@@ -34,7 +34,7 @@ class RosaInfoXmlParser(Parser):
             with factory.begin() as pkg:
                 name, epoch, version, release, arch = nevra_parse(info.attrib['fn'])
 
-                pkg.set_name(name)
+                pkg.add_name(name, NameType.GENERIC_PKGNAME)
                 pkg.set_version(version)
                 pkg.set_rawversion(nevra_construct(None, epoch, version, release))
                 pkg.set_arch(arch)

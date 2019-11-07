@@ -21,7 +21,7 @@ from typing import Dict, Iterable, Tuple
 from jsonslicer import JsonSlicer
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -82,7 +82,7 @@ class OpenIndianaSummaryJsonParser(Parser):
             if 'pkg.summary' not in variables:
                 continue
 
-            pkg.set_name(variables['com.oracle.info.name'][0])
+            pkg.add_name(variables['com.oracle.info.name'][0], NameType.GENERIC_PKGNAME)
             pkg.set_version(variables['com.oracle.info.version'][0])
             pkg.set_summary(variables['pkg.summary'][0])
 

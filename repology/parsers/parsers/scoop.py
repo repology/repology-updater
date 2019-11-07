@@ -20,7 +20,7 @@ import os
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -42,7 +42,7 @@ class ScoopGitParser(Parser):
                     with open(fullpath, 'r', encoding='utf-8') as jsonfile:
                         data = json.load(jsonfile, strict=False)
 
-                    pkg.set_name(filename[:-5])
+                    pkg.add_name(filename[:-5], NameType.GENERIC_PKGNAME)
                     pkg.set_version(data['version'])
 
                     pkg.add_homepages(data.get('homepage'))

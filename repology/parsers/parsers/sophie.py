@@ -19,7 +19,7 @@ from typing import Iterable
 
 import lxml.html
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.nevra import nevra_construct, nevra_parse
 from repology.transformer import PackageTransformer
@@ -32,7 +32,7 @@ class SophieHTMLParser(Parser):
 
             pkg = factory.begin()
 
-            pkg.set_name(nevra[0])
+            pkg.add_name(nevra[0], NameType.GENERIC_PKGNAME)
             pkg.set_version(nevra[2])
             pkg.set_rawversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
 

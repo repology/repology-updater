@@ -17,7 +17,7 @@
 
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 from repology.parsers.versions import VersionStripper
@@ -34,7 +34,7 @@ class MacPortsJsonParser(Parser):
                 if 'replaced_by' in pkgdata:
                     continue
 
-                pkg.set_name(pkgdata['name'])
+                pkg.add_name(pkgdata['name'], NameType.GENERIC_PKGNAME)
                 pkg.set_version(pkgdata['version'], normalize_version)
                 pkg.set_summary(pkgdata.get('description'))
                 pkg.add_homepages(pkgdata.get('homepage'))

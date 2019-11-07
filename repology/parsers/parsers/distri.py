@@ -20,7 +20,7 @@ from typing import Iterable
 
 from google.protobuf.text_format import Parse as ParseTextFormat
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.pb.distri_pb2 import Build as BuildMessage
 from repology.parsers.walk import walk_tree
@@ -34,7 +34,7 @@ class DistriGitParser(Parser):
             with factory.begin(protofile_rel) as pkg:
                 pkgpath = os.path.dirname(protofile_rel)
 
-                pkg.set_name(os.path.basename(pkgpath))
+                pkg.add_name(os.path.basename(pkgpath), NameType.GENERIC_PKGNAME)
 
                 with open(protofile) as f:
                     build = BuildMessage()

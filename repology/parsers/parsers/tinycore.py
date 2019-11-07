@@ -19,7 +19,7 @@ import os
 import re
 from typing import Dict, Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -55,7 +55,7 @@ class TczInfoParser(Parser):
             with factory.begin(filename) as pkg:
                 data = _parse_infofile(os.path.join(path, filename))
 
-                pkg.set_name(filename[:-9])
+                pkg.add_name(filename[:-9], NameType.GENERIC_PKGNAME)
                 pkg.set_version(data['version'])
                 pkg.set_summary(data['description'])
 

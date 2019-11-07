@@ -19,7 +19,7 @@ from typing import Iterable
 
 import rpm
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct
@@ -38,7 +38,7 @@ class SrcListParser(Parser):
                     for key in ['name', 'version', 'release', 'packager', 'group', 'summary', 'arch']
                 }
 
-                pkg.set_name(fields['name'])
+                pkg.add_name(fields['name'], NameType.GENERIC_PKGNAME)
                 pkg.set_version(fields['version'])  # XXX: handle release
 
                 if fields['version'] is None:

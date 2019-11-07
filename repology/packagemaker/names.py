@@ -32,6 +32,41 @@ class NameType:
     BSD_PKGNAME: ClassVar[int] = 30
     BSD_ORIGIN: ClassVar[int] = 31
 
+    NPACKD_TITLE: ClassVar[int] = 40
+    NPACKD_FULLNAME: ClassVar[int] = 41
+    NPACKD_LASTNAME: ClassVar[int] = 42
+
+    DEBIAN_PACKAGE: ClassVar[int] = 50
+    OPENWRT_SOURCEDIR: ClassVar[int] = 51
+
+    CYGWIN_PACKAGE_NAME: ClassVar[int] = 60
+    CYGWIN_SUBPACKAGE_NAME: ClassVar[int] = 61
+
+    WIKI_TITLE: ClassVar[int] = 70
+    WIKI_PAGE: ClassVar[int] = 71
+
+    GENTOO_NAME: ClassVar[int] = 80
+    GENTOO_FULL_NAME: ClassVar[int] = 81
+
+    # Common pattern "NOBN" = Name + Optional BaseName
+    PATTERN_NOBN_NAME: ClassVar[int] = 200
+    PATTERN_NOBN_BASENAME: ClassVar[int] = 201
+
+    MSYS2_NAME: ClassVar[int] = PATTERN_NOBN_NAME
+    MSYS2_BASENAME: ClassVar[int] = PATTERN_NOBN_BASENAME
+
+    SOLUS_NAME: ClassVar[int] = PATTERN_NOBN_NAME
+    SOLUS_SOURCE_NAME: ClassVar[int] = PATTERN_NOBN_BASENAME
+
+    ARCH_NAME: ClassVar[int] = PATTERN_NOBN_NAME
+    ARCH_BASENAME: ClassVar[int] = PATTERN_NOBN_BASENAME
+
+    SLITAZ_NAME: ClassVar[int] = PATTERN_NOBN_NAME
+    SLITAZ_META: ClassVar[int] = PATTERN_NOBN_BASENAME
+
+    VOID_NAME: ClassVar[int] = PATTERN_NOBN_NAME
+    VOID_SOURCE: ClassVar[int] = PATTERN_NOBN_BASENAME
+
 
 @dataclass
 class _NameMapping:
@@ -71,6 +106,59 @@ _MAPPINGS = [
         keyname=NameType.BSD_ORIGIN,
         visiblename=NameType.BSD_ORIGIN,
         projectname_seed=NameType.BSD_PKGNAME,
+    ),
+    # Npackd
+    _NameMapping(
+        # XXX: add support for NPACKD_TITLE as visible name
+        name=NameType.NPACKD_FULLNAME,
+        basename=NameType.NPACKD_LASTNAME,
+        visiblename=NameType.NPACKD_FULLNAME,
+        projectname_seed=NameType.NPACKD_LASTNAME,
+    ),
+    # Debian
+    _NameMapping(
+        name=NameType.DEBIAN_PACKAGE,
+        visiblename=NameType.DEBIAN_PACKAGE,
+        projectname_seed=NameType.DEBIAN_PACKAGE,
+    ),
+    _NameMapping(
+        name=NameType.DEBIAN_PACKAGE,
+        basename=NameType.OPENWRT_SOURCEDIR,
+        visiblename=NameType.DEBIAN_PACKAGE,
+        projectname_seed=NameType.OPENWRT_SOURCEDIR,
+    ),
+    # Cygwin
+    _NameMapping(
+        name=NameType.CYGWIN_SUBPACKAGE_NAME,
+        basename=NameType.CYGWIN_PACKAGE_NAME,
+        visiblename=NameType.CYGWIN_SUBPACKAGE_NAME,
+        projectname_seed=NameType.CYGWIN_PACKAGE_NAME,
+    ),
+    # Wiki
+    _NameMapping(
+        name=NameType.WIKI_TITLE,
+        keyname=NameType.WIKI_PAGE,
+        visiblename=NameType.WIKI_TITLE,
+        projectname_seed=NameType.WIKI_TITLE,
+    ),
+    # Gentoo
+    _NameMapping(
+        name=NameType.GENTOO_NAME,
+        keyname=NameType.GENTOO_FULL_NAME,
+        visiblename=NameType.GENTOO_FULL_NAME,
+        projectname_seed=NameType.GENTOO_NAME,
+    ),
+    # Pattern NOBN
+    _NameMapping(
+        name=NameType.PATTERN_NOBN_NAME,
+        visiblename=NameType.PATTERN_NOBN_NAME,
+        projectname_seed=NameType.PATTERN_NOBN_NAME,
+    ),
+    _NameMapping(
+        name=NameType.PATTERN_NOBN_NAME,
+        basename=NameType.PATTERN_NOBN_BASENAME,
+        visiblename=NameType.PATTERN_NOBN_NAME,
+        projectname_seed=NameType.PATTERN_NOBN_BASENAME,
     ),
 ]
 

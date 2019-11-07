@@ -20,7 +20,7 @@ from typing import Any, Dict, Iterable, List
 
 from pyparsing import OneOrMore, QuotedString, Regex, Suppress, Word, ZeroOrMore, alphas, printables
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -74,7 +74,7 @@ class ArchiveContentsParser(Parser):
 
         for pkgdata in _parse_data(data):
             with factory.begin() as pkg:
-                pkg.set_name(pkgdata.name)
+                pkg.add_name(pkgdata.name, NameType.GENERIC_PKGNAME)
                 pkg.set_version(pkgdata.version)
                 pkg.set_summary(pkgdata.summary)
 

@@ -19,7 +19,7 @@ from typing import Iterable
 
 import lxml.html
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -29,7 +29,7 @@ class RudixHTMLParser(Parser):
         for row in lxml.html.parse(path).getroot().xpath('.//table')[0].xpath('./tbody/tr'):
             pkg = factory.begin()
 
-            pkg.set_name(row.xpath('./td[1]/a')[0].text)
+            pkg.add_name(row.xpath('./td[1]/a')[0].text, NameType.GENERIC_PKGNAME)
             pkg.set_version(row.xpath('./td[2]')[0].text)
             pkg.set_summary(row.xpath('./td[3]')[0].text)
             pkg.add_licenses(row.xpath('./td[4]')[0].text)

@@ -19,7 +19,7 @@ from typing import Any, Dict, Iterable
 
 from pyparsing import Empty, Forward, QuotedString, Regex, Suppress, ZeroOrMore
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -52,7 +52,7 @@ class LuaRocksParser(Parser):
 
         for pkgname, pkgdata in _parse_data(data)['repository'].items():
             with factory.begin() as pkg:
-                pkg.set_name(pkgname)
+                pkg.add_name(pkgname, NameType.GENERIC_PKGNAME)
 
                 for version, versiondatas in pkgdata.items():
                     for versiondata in versiondatas:

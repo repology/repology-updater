@@ -20,7 +20,7 @@ from typing import Any, Dict, Iterable, List, Union
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_dict
 from repology.parsers.maintainers import extract_maintainers
@@ -153,7 +153,7 @@ class NixJsonParser(Parser):
                     pname = match.group(1)
                     version = match.group(2)
 
-                pkg.set_name(pname)
+                pkg.add_name(pname, NameType.GENERIC_PKGNAME)
                 pkg.set_version(version)
 
                 meta = packagedata['meta']
@@ -164,7 +164,7 @@ class NixJsonParser(Parser):
 
                 # XXX: mode to rules
                 if pkg.name.endswith('-git'):
-                    pkg.set_name(pkg.name[:-4])
+                    pkg.add_name(pkg.name[:-4], NameType.GENERIC_PKGNAME)
                     pkg.set_flags(PackageFlags.IGNORE)
 
                 # XXX: mode to rules

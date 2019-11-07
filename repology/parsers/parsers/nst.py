@@ -20,7 +20,7 @@
 import xml.etree.ElementTree
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer

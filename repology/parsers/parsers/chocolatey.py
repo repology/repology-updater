@@ -19,7 +19,7 @@ import os
 import xml.etree.ElementTree
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -35,7 +35,7 @@ class ChocolateyParser(Parser):
             for entry in root.findall('{http://www.w3.org/2005/Atom}entry'):
                 pkg = factory.begin()
 
-                pkg.set_name(entry.find('{http://www.w3.org/2005/Atom}title').text)  # type: ignore
+                pkg.add_name(entry.find('{http://www.w3.org/2005/Atom}title').text, NameType.GENERIC_PKGNAME)  # type: ignore
                 pkg.set_version(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Version').text)  # type: ignore
                 pkg.add_homepages(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}ProjectUrl').text)  # type: ignore
 

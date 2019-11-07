@@ -20,7 +20,7 @@ from typing import Dict, Iterable
 from libversion import version_compare
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
@@ -34,7 +34,7 @@ class FreshcodeParser(Parser):
         # fetcher, not the file we've downloaded
         for entry in iter_json_list(path, ('releases', None)):
             with factory.begin() as pkg:
-                pkg.set_name(entry['name'])
+                pkg.add_name(entry['name'], NameType.GENERIC_PKGNAME)
 
                 if not entry['version']:
                     pkg.log('empty version', Logger.ERROR)

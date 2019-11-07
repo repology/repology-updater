@@ -18,7 +18,7 @@
 import os
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 #from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -46,7 +46,7 @@ class ArchDBParser(Parser):
                     if line == '':
                         tag = None
                     elif tag == 'NAME':
-                        pkg.set_name(line)
+                        pkg.add_name(line, NameType.ARCH_NAME)
                     elif tag == 'VERSION':
                         pkg.set_version(line, normalize_version)
                     elif tag == 'ARCH':
@@ -65,7 +65,7 @@ class ArchDBParser(Parser):
                     #    pkg.add_maintainers(extract_maintainers(line))
                     elif tag == 'BASE':
                         pkg.set_extra_field('base', line)
-                        pkg.set_basename(line)
+                        pkg.add_name(line, NameType.ARCH_BASENAME)
                     elif line.startswith('%') and line.endswith('%'):
                         tag = line[1:-1]
 

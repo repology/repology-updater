@@ -19,7 +19,7 @@ import re
 from typing import Iterable
 
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
@@ -35,7 +35,7 @@ class CygwinParser(Parser):
                 if packagedata['name'].startswith('_'):
                     continue
 
-                pkg.set_basename(packagedata['name'])
+                pkg.add_name(packagedata['name'], NameType.CYGWIN_PACKAGE_NAME)
                 pkg.set_summary(packagedata['summary'])
 
                 if 'maintainers' in packagedata:
@@ -74,7 +74,7 @@ class CygwinParser(Parser):
 
                         subpkg = verpkg.clone()
 
-                        subpkg.set_name(subpackagedata['name'])
+                        subpkg.add_name(subpackagedata['name'], NameType.CYGWIN_SUBPACKAGE_NAME)
                         subpkg.add_categories(subpackagedata['categories'])
 
                         yield subpkg

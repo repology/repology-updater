@@ -21,7 +21,7 @@ from typing import Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -44,8 +44,7 @@ class VcpkgGitParser(Parser):
 
             pkg = factory.begin()
 
-            pkg.set_origin(pkgdir)
-            pkg.set_name(pkgdir)
+            pkg.add_name(pkgdir, NameType.GENERIC_PKGNAME)
 
             with open(controlpath, 'r', encoding='utf-8', errors='ignore') as controlfile:
                 for line in controlfile:

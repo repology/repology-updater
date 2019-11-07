@@ -19,7 +19,7 @@ import os
 from collections import defaultdict
 from typing import Dict, Iterable, List
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -49,9 +49,9 @@ class MSYS2DescParser(Parser):
             with factory.begin(packagedir) as pkg:
                 data = _parse_descfile(os.path.join(path, packagedir, 'desc'))
 
-                pkg.set_name(data['NAME'][0])
+                pkg.add_name(data['NAME'][0], NameType.MSYS2_NAME)
                 if 'BASE' in data:
-                    pkg.set_basename(data['BASE'][0])
+                    pkg.add_name(data['BASE'][0], NameType.MSYS2_BASENAME)
                 pkg.set_version(data['VERSION'][0], normalize_version)
 
                 if 'DESC' in data:

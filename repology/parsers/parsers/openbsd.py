@@ -21,7 +21,7 @@ import sqlite3
 from typing import Dict, Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -88,9 +88,9 @@ class OpenBSDsqlportsParser(Parser):
 
             name, version = pkgname.rsplit('-', 1)
 
-            pkg.set_name(name)
+            pkg.add_name(name, NameType.BSD_PKGNAME)
+            pkg.add_name(row['fullpkgpath'].split(',', 1)[0], NameType.BSD_ORIGIN)
             pkg.set_version(version, _normalize_version)
-            pkg.set_keyname(row['fullpkgpath'].split(',', 1)[0])
             pkg.set_summary(row['comment'])
             pkg.add_homepages(row['homepage'])
             pkg.add_maintainers(extract_maintainers(row['maintainer']))
@@ -146,9 +146,9 @@ class OpenBSDIndexParser(Parser):
 
                 name, version = pkgname.rsplit('-', 1)
 
-                pkg.set_name(name)
+                pkg.add_name(name, NameType.BSD_PKGNAME)
+                pkg.add_name(fields[1].split(',', 1)[0], NameType.BSD_ORIGIN)
                 pkg.set_version(version, _normalize_version)
-                pkg.set_keyname(fields[1].split(',', 1)[0])
                 pkg.set_summary(fields[3])
                 pkg.add_maintainers(extract_maintainers(fields[5]))
                 pkg.add_categories(fields[6].split())

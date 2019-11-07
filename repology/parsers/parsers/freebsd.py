@@ -18,7 +18,7 @@
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -40,9 +40,9 @@ class FreeBSDIndexParser(Parser):
 
                 name, version = fields[0].rsplit('-', 1)
 
-                pkg.set_name(name)
+                pkg.add_name(name, NameType.BSD_PKGNAME)
+                pkg.add_name('/'.join(fields[1].rsplit('/', 2)[1:]), NameType.BSD_ORIGIN)
                 pkg.set_version(version, normalize_version)
-                pkg.set_keyname('/'.join(fields[1].rsplit('/', 2)[1:]))
                 pkg.set_summary(fields[3])
                 pkg.add_maintainers(extract_maintainers(fields[5]))
                 pkg.add_categories(fields[6].split())

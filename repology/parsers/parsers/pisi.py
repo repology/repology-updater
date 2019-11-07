@@ -20,7 +20,7 @@ import xml.etree.ElementTree
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
@@ -39,7 +39,7 @@ class PisiParser(Parser):
                 pkg.log('Cannot parse XML: ' + str(e), Logger.ERROR)
                 continue
 
-            pkg.set_name(root.find('./Source/Name').text)  # type: ignore
+            pkg.add_name(root.find('./Source/Name').text, NameType.GENERIC_PKGNAME)  # type: ignore
             pkg.set_summary(root.find('./Source/Summary').text)  # type: ignore
             pkg.add_homepages(map(lambda el: el.text, root.findall('./Source/Homepage')))
             pkg.add_downloads(map(lambda el: el.text, root.findall('./Source/Archive')))

@@ -19,7 +19,7 @@ import json
 import os
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -38,7 +38,7 @@ class AURParser(Parser):
                 for result in json.load(jsonfile)['results']:
                     pkg = factory.begin()
 
-                    pkg.set_name(result['Name'])
+                    pkg.add_name(result['Name'], NameType.ARCH_NAME)
 
                     pkg.set_version(result['Version'], normalize_version)
                     pkg.set_summary(result['Description'])
@@ -49,7 +49,7 @@ class AURParser(Parser):
                         pkg.add_maintainers(extract_maintainers(result['Maintainer'] + '@aur'))
 
                     if 'PackageBase' in result and result['PackageBase']:
-                        pkg.set_basename(result['PackageBase'])
+                        pkg.add_name(result['PackageBase'], NameType.ARCH_BASENAME)
 
                     # XXX: enable when we support multiple categories
                     #if 'Keywords' in result and result['Keywords']:

@@ -20,7 +20,7 @@ import os
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -39,7 +39,7 @@ class RappsParser(Parser):
 
                 section = config['Section']
 
-                pkg.set_name(filename[:-4])
+                pkg.add_name(filename[:-4], NameType.GENERIC_PKGNAME)
 
                 if section.get('Version') is None:
                     pkg.log('no version defined', Logger.ERROR)

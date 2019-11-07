@@ -20,7 +20,7 @@ from typing import Dict, Iterable, List, Optional
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct
@@ -46,7 +46,7 @@ class RepodataParser(Parser):
                     skipped_archs[arch] = skipped_archs.get(arch, 0) + 1
                     continue
 
-                pkg.set_name(entry.findtext('{http://linux.duke.edu/metadata/common}name'))
+                pkg.add_name(entry.findtext('{http://linux.duke.edu/metadata/common}name'), NameType.GENERIC_PKGNAME)
 
                 if '%{' in pkg.name:
                     pkg.log('incorrect package name (unexpanded substitution)', severity=Logger.ERROR)

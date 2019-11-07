@@ -18,7 +18,7 @@
 import re
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -31,7 +31,7 @@ class CRANCheckSummaryParser(Parser):
                 if match:
                     pkg = factory.begin('line {}'.format(nline))
 
-                    pkg.set_name(match[1])
+                    pkg.add_name(match[1], NameType.GENERIC_PKGNAME)
                     pkg.set_version(match[2])
                     pkg.add_homepages('https://cran.r-project.org/web/packages/{}/index.html'.format(match[1]))
 

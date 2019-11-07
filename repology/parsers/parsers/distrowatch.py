@@ -19,7 +19,7 @@ from typing import Iterable
 
 import lxml.html
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -31,7 +31,7 @@ class DistrowatchPackagesParser(Parser):
 
             # name + version
             cell = row.xpath('./th[1]/a[@href]')[0]
-            pkg.set_name(cell.text)
+            pkg.add_name(cell.text, NameType.GENERIC_PKGNAME)
             pkg.add_homepages(cell.attrib['href'])
 
             # summary

@@ -22,7 +22,7 @@ from typing import Dict, Iterable, List, Set, Tuple
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -163,8 +163,8 @@ class GentooGitParser(Parser):
         for category, package in _iter_packages(path):
             pkg = factory.begin(category + '/' + package)
 
-            pkg.set_name(package)
-            pkg.set_keyname(category + '/' + package)
+            pkg.add_name(package, NameType.GENTOO_NAME)
+            pkg.add_name(category + '/' + package, NameType.GENTOO_FULL_NAME)
             pkg.add_categories(category)
 
             xml_metadata_path = os.path.join(path, category, package, 'metadata.xml')

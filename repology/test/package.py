@@ -23,7 +23,7 @@ import unittest
 from typing import Any, Dict, List, Optional
 
 from repology.package import Package
-from repology.packagemaker import PackageFactory
+from repology.packagemaker import NameType, PackageFactory
 
 
 def spawn_package(
@@ -43,7 +43,7 @@ def spawn_package(
 ) -> Package:
     m = PackageFactory().begin()
 
-    m.set_name(name)
+    m.add_name(name, NameType.GENERIC_PKGNAME)
     m.set_version(version)
 
     m.set_flags(flags)

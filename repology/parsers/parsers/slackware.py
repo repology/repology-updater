@@ -17,7 +17,7 @@
 
 from typing import Iterable, Tuple
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -45,7 +45,7 @@ class SlackwarePackagesParser(Parser):
 
             name, version, arch, rest = pkgname.rsplit('-', 3)
 
-            pkg.set_name(name)
+            pkg.add_name(name, NameType.GENERIC_PKGNAME)
             pkg.set_version(version)
 
             pkg.set_extra_field('location', pkglocation)

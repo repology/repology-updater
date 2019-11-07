@@ -19,7 +19,7 @@ from typing import Iterable
 
 import lxml.html
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -31,7 +31,7 @@ class StackageHTMLParser(Parser):
 
             name, version = row.xpath('./td[1]/a')[0].text.rsplit('-', 1)
 
-            pkg.set_name(name)
+            pkg.add_name(name, NameType.GENERIC_PKGNAME)
             pkg.set_version(version)
             pkg.set_summary((row.xpath('./td[2]')[0].text or '').replace('\n', ' '))
 

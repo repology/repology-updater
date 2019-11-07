@@ -18,7 +18,7 @@
 import json
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -30,11 +30,11 @@ class AnityaApiParser(Parser):
                 pkg = factory.begin()
 
                 if project['backend'] == 'CPAN (perl)':
-                    pkg.set_name('perl:' + project['name'])
+                    pkg.add_name('perl:' + project['name'], NameType.GENERIC_PKGNAME)
                 elif project['backend'] == 'Rubygems':
-                    pkg.set_name('ruby:' + project['name'])
+                    pkg.add_name('ruby:' + project['name'], NameType.GENERIC_PKGNAME)
                 else:
-                    pkg.set_name(project['name'])
+                    pkg.add_name(project['name'], NameType.GENERIC_PKGNAME)
 
                 pkg.set_version(project['version'])
 

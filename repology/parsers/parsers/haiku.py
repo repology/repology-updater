@@ -20,7 +20,7 @@ import re
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -43,7 +43,7 @@ class HaikuPortsFilenamesParser(Parser):
 
                     pkg = factory.begin()
 
-                    pkg.set_name(package)
+                    pkg.add_name(package, NameType.GENERIC_PKGNAME)
                     pkg.add_categories(category)
 
                     # may want to shadow haiku-only ports

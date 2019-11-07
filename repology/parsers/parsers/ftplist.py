@@ -17,7 +17,7 @@
 
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.nevra import nevra_construct, nevra_parse
 from repology.transformer import PackageTransformer
@@ -33,7 +33,7 @@ class RPMFTPListParser(Parser):
 
                 name, epoch, version, release, arch = nevra_parse(filename)
 
-                pkg.set_name(name)
+                pkg.add_name(name, NameType.GENERIC_PKGNAME)
                 pkg.set_version(version)
                 pkg.set_rawversion(nevra_construct(None, epoch, version, release))
                 pkg.set_arch(arch)

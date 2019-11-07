@@ -18,7 +18,7 @@
 from typing import Iterable
 
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
@@ -28,7 +28,7 @@ class SliTazJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for item in iter_json_list(path, ('items', None)):
             with factory.begin() as pkg:
-                pkg.set_basename(item['meta'])
+                pkg.add_name(item['meta'], NameType.SLITAZ_META)
                 pkg.set_version(item['ver'])
                 pkg.add_maintainers(item['maintainer'])
                 pkg.add_licenses(item['license'])
@@ -43,7 +43,7 @@ class SliTazJsonParser(Parser):
 
                     subpkg.add_categories(subitem['cat'])
                     subpkg.set_summary(subitem['desc'])
-                    subpkg.set_name(subitem['name'])
+                    subpkg.add_name(subitem['name'], NameType.SLITAZ_NAME)
                     subpkg.set_version(subitem.get('ver'))
                     subpkg.set_arch(subitem.get('arch'))
 

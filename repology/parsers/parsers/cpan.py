@@ -18,7 +18,7 @@
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -83,7 +83,7 @@ class CPANPackagesParser(Parser):
                     pkg.log('skipping submodule {}'.format(module), Logger.WARNING)
                     continue
 
-                pkg.set_name(package_name)
+                pkg.add_name(package_name, NameType.GENERIC_PKGNAME)
                 pkg.set_version(package_version)
 
                 pkg.add_maintainers(extract_maintainers(package_path.split('/')[2].lower() + '@cpan'))

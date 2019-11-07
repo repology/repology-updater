@@ -17,7 +17,7 @@
 
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import iter_xml_elements_at_level
 from repology.transformer import PackageTransformer
@@ -31,7 +31,7 @@ class SolusIndexParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for entry in iter_xml_elements_at_level(path, 1, ['Package']):
             with factory.begin() as pkg:
-                pkg.set_name(entry.findtext('Name'))
+                pkg.add_name(entry.findtext('Name'), NameType.SOLUS_NAME)
                 pkg.set_summary(entry.findtext('Summary'))
                 pkg.add_licenses((_expand_multiline_licenses(elt.text) for elt in entry.findall('License') if elt.text))
                 pkg.add_categories((elt.text for elt in entry.findall('PartOf')))
@@ -40,7 +40,7 @@ class SolusIndexParser(Parser):
                     pkg.set_version(update.findtext('Version'))
                     break
 
-                pkg.set_basename(entry.findtext('./Source/Name'))
+                pkg.add_name(entry.findtext('./Source/Name'), NameType.SOLUS_SOURCE_NAME)
                 pkg.add_maintainers(entry.findtext('./Source/Packager/Email'))
                 pkg.set_arch(entry.findtext('./Architecture'))
 

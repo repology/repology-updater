@@ -17,7 +17,7 @@
 
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
 from repology.transformer import PackageTransformer
@@ -27,7 +27,7 @@ class SalixPackagesJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for item in iter_json_list(path, ('packages', None)):
             with factory.begin() as pkg:
-                pkg.set_name(item['name'])
+                pkg.add_name(item['name'], NameType.GENERIC_PKGNAME)
                 pkg.set_version(item['ver'])
                 pkg.set_summary(item['descs'])
                 pkg.set_arch(item['arch'])

@@ -20,7 +20,7 @@ from typing import Iterable
 
 import rubymarshal.reader
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -38,7 +38,7 @@ class RubyGemParser(Parser):
 
                     gemversion = str(gemversion.marshal_dump()[0])
 
-                    pkg.set_name(gemname)
+                    pkg.add_name(gemname, NameType.GENERIC_PKGNAME)
                     pkg.set_version(gemversion)
                     pkg.add_homepages('https://rubygems.org/gems/' + gemname)
 

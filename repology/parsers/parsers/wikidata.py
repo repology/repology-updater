@@ -23,7 +23,7 @@ from libversion import version_compare
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -45,8 +45,8 @@ class WikidataJsonParser(Parser):
             label = packagedata['projectLabel']
 
             with factory.begin('{} ({})'.format(entity, label)) as pkg:
-                pkg.set_keyname(entity)
-                pkg.set_visiblename(label)
+                pkg.add_name(entity, NameType.WIKIDATA_ENTITY)
+                pkg.add_name(label, NameType.WIKIDATA_LABEL)
                 pkg.set_summary(packagedata.get('projectDescription'))
                 pkg.add_licenses(sorted(packagedata.get('licenses', '').split('␞')))
                 pkg.add_homepages(sorted(packagedata.get('websites', '').split('␞')))
@@ -87,7 +87,7 @@ class WikidataJsonParser(Parser):
                     # generate package for each repology project
                     for name in names:
                         namepkg = verpkg.clone()
-                        namepkg.set_projectname_seed(name)
+                        namepkg.add_name(name, NameType.WIKIDATA_REPOLOGY_PROJECT_NAME)
                         if is_preferred:
                             pkgs_preferred.append(namepkg)
                         else:

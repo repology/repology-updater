@@ -20,7 +20,7 @@ import re
 from typing import Iterable, Tuple
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
@@ -54,7 +54,7 @@ class YACPGitParser(Parser):
 
             name, version = match.group(1).rsplit('-', 1)
 
-            pkg.set_name(name)
+            pkg.add_name(name, NameType.GENERIC_PKGNAME)
             pkg.set_version(version, normalize_version)
 
             # these fields not contain variables (for now), so are safe to extract

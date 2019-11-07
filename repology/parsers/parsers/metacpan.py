@@ -23,7 +23,7 @@ from libversion import version_compare
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -55,7 +55,7 @@ def _iter_packages(path: str) -> Iterable[Dict[str, Any]]:
 
 
 def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> PackageMaker:
-    pkg.set_name(_as_str(fields['distribution']))
+    pkg.add_name(_as_str(fields['distribution']), NameType.GENERIC_PKGNAME)
     pkg.set_version(_as_str(fields['version']))
 
     author = _as_str(fields['author'])

@@ -20,7 +20,7 @@ import re
 from typing import Iterable, List, Tuple
 
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -69,7 +69,7 @@ class ExherboGitParser(Parser):
         for category, package, exheres in _iter_exheres(os.path.join(path, 'packages')):
             pkg = factory.begin('/'.join((category, package, exheres)))
 
-            pkg.set_name(package)
+            pkg.add_name(package, NameType.GENERIC_PKGNAME)
             pkg.set_version(exheres[len(package) + 1:-10], _normalize_version)
             pkg.add_categories(category)
             pkg.add_maintainers(maintainers)

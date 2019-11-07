@@ -22,7 +22,7 @@ from typing import Iterable, Optional
 from libversion import version_compare
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -43,7 +43,7 @@ class GoboLinuxGitParser(Parser):
         for package_name in os.listdir(trunk_path):
             pkg = factory.begin()
 
-            pkg.set_name(package_name)
+            pkg.add_name(package_name, NameType.GENERIC_PKGNAME)
 
             package_path = os.path.join(trunk_path, package_name)
 

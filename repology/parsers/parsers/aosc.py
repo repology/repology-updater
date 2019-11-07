@@ -21,7 +21,7 @@ from typing import Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.versions import VersionStripper
@@ -36,7 +36,7 @@ class AoscPkgsParser(Parser):
             for package in json.load(jsonfile)['packages']:
                 pkg = factory.begin()
 
-                pkg.set_name(package['name'])
+                pkg.add_name(package['name'], NameType.GENERIC_PKGNAME)
 
                 if package['version'] is None:
                     pkg.log('no version defined', Logger.ERROR)

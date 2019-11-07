@@ -19,7 +19,7 @@ import re
 from typing import Iterable, List
 
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.xml import XmlElement, iter_xml_elements_at_level, safe_findtext
 from repology.transformer import PackageTransformer
@@ -106,7 +106,7 @@ class FreeSoftwareDirectoryXMLParser(Parser):
 
                 num_accepted += 1
 
-                pkg.set_name(page)
+                pkg.add_name(page, NameType.GENERIC_PKGNAME)
                 pkg.set_version(version)
                 pkg.set_summary(entry.findtext('{http://directory.fsf.org/wiki/Special:URIResolver/Property-3A}Short_description'))
 

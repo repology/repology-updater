@@ -21,7 +21,7 @@ from typing import Dict, Iterable, List
 
 from repology.logger import Logger
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.walk import walk_tree
@@ -91,7 +91,7 @@ class T2DescParser(Parser):
 
                 data = _parse_descfile(filename, pkg)
 
-                pkg.set_name(name)
+                pkg.add_name(name, NameType.GENERIC_PKGNAME)
                 pkg.set_version(data['version'][0])
                 pkg.set_summary(data['title'][0])
 

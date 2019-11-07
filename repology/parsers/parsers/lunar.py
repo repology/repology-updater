@@ -17,7 +17,7 @@
 
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -32,7 +32,7 @@ class LunarDistrowatchParser(Parser):
 
                 name, version = line.rsplit('^', 1)
 
-                pkg.set_name(name)
+                pkg.add_name(name, NameType.GENERIC_PKGNAME)
                 pkg.set_version(version)
 
                 yield pkg

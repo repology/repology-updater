@@ -18,7 +18,7 @@
 import os
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -40,7 +40,7 @@ class SpecParser(Parser):
                             continue
 
                         if line.startswith('Name:') and not pkg.name:
-                            pkg.set_name(line.split(':', 1)[1])
+                            pkg.add_name(line.split(':', 1)[1], NameType.GENERIC_PKGNAME)
                         elif line.startswith('Version:') and not pkg.version:
                             pkg.set_version(line.split(':', 1)[1])
                         elif line.startswith('Url:') and not pkg.homepages:

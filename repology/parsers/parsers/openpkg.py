@@ -19,7 +19,7 @@ import xml.etree.ElementTree
 from typing import Iterable
 
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -33,7 +33,7 @@ class OpenPkgRdfParser(Parser):
         for item in repository.findall('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description'):  # type: ignore
             pkg = factory.begin()
 
-            pkg.set_name(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Name').text)  # type: ignore
+            pkg.add_name(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Name').text, NameType.GENERIC_PKGNAME)  # type: ignore
             pkg.set_version(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Version').text)  # type: ignore
             pkg.add_licenses(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}License').text)  # type: ignore
             pkg.set_summary(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Summary').text)  # type: ignore

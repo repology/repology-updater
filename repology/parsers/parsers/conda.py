@@ -18,7 +18,7 @@
 import json
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -29,7 +29,7 @@ class CondaRepodataJsonParser(Parser):
             for pkgfilename, pkgdata in json.load(jsonfile)['packages'].items():
                 pkg = factory.begin(pkgfilename)
 
-                pkg.set_name(pkgdata['name'])
+                pkg.add_name(pkgdata['name'], NameType.GENERIC_PKGNAME)
                 pkg.set_version(pkgdata['version'])
                 pkg.add_licenses(pkgdata.get('license', ''))
 

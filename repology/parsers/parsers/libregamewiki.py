@@ -20,7 +20,7 @@ import xml.etree.ElementTree
 from typing import Iterable
 from urllib.parse import unquote
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -42,9 +42,8 @@ class LibreGameWikiParser(Parser):
             if cell is None or not cell.text:
                 continue
 
-            pkg.set_name(cell.text)
-            pkg.set_visiblename(cell.text)
-            pkg.set_keyname(unquote(cell.attrib['href'].rsplit('/', 1)[-1]))
+            pkg.add_name(cell.text, NameType.WIKI_TITLE)
+            pkg.add_name(unquote(cell.attrib['href'].rsplit('/', 1)[-1]), NameType.WIKI_PAGE)
 
             # version
             cell = item.find('./p[2]')

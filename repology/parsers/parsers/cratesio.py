@@ -19,7 +19,7 @@ import json
 import os
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -36,7 +36,7 @@ class CratesIOParser(Parser):
                 for crate in json.load(pagedata)['crates']:
                     pkg = factory.begin()
 
-                    pkg.set_name(crate['id'])
+                    pkg.add_name(crate['id'], NameType.GENERIC_PKGNAME)
                     pkg.set_version(crate['max_version'])
 
                     pkg.set_summary(crate['description'])

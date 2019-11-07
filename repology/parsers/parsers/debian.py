@@ -19,7 +19,7 @@ import re
 from typing import Dict, Iterable
 
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -107,7 +107,7 @@ class DebianSourcesParser(Parser):
         for pkgdata in _iter_packages(path):
             pkg = factory.begin()
 
-            pkg.set_name(pkgdata['Package'])
+            pkg.add_name(pkgdata['Package'], NameType.DEBIAN_PACKAGE)
             pkg.set_version(pkgdata['Version'], _normalize_version)
             pkg.add_maintainers(extract_maintainers(pkgdata.get('Maintainer', '')))
             pkg.add_maintainers(extract_maintainers(pkgdata.get('Uploaders', '')))
@@ -128,7 +128,7 @@ class OpenWrtSourcesParser(DebianSourcesParser):
         source = pkgdata.get('Source')
         if source:
             pkgpath = source.split('/')
-            pkg.set_basename(pkgpath[-1])
+            pkg.add_name(pkgpath[-1], NameType.OPENWRT_SOURCEDIR)
             pkg.set_extra_field('srcname', pkgpath[-1])
             pkg.set_extra_field('path', '/'.join(pkgpath[2:]))
             if pkgpath[2:4] == ['lang', 'python']:

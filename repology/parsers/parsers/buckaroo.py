@@ -19,7 +19,7 @@ import json
 import os
 from typing import Iterable
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
@@ -36,7 +36,7 @@ class BuckarooGitParser(Parser):
             for version, versiondata in data['versions'].items():
                 pkg = factory.begin()
 
-                pkg.set_name(data['name'])
+                pkg.add_name(data['name'], NameType.GENERIC_PKGNAME)
                 pkg.set_version(version)
 
                 pkg.add_licenses(data['license'])

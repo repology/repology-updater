@@ -19,7 +19,7 @@ import re
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -30,7 +30,7 @@ class PyPiHTMLParser(Parser):
             for match in re.findall('<td><a href="/pypi/([^"]+)/([^"]+)">[^<>]*</a></td>[ \n]*<td>([^<>]*)</td>', htmlfile.read(), flags=re.MULTILINE):
                 pkg = factory.begin()
 
-                pkg.set_name(match[0])
+                pkg.add_name(match[0], NameType.GENERIC_PKGNAME)
                 pkg.set_version(match[1])
 
                 comment = match[2].strip()

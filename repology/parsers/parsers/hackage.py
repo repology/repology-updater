@@ -24,7 +24,7 @@ from typing import Dict, IO, Iterable, Optional
 
 from libversion import version_compare
 
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -148,7 +148,7 @@ class HackageParserBase(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for cabaldata in self._iterate(path):
             with factory.begin() as pkg:
-                pkg.set_name(cabaldata['name'])
+                pkg.add_name(cabaldata['name'], NameType.GENERIC_PKGNAME)
                 pkg.set_version(cabaldata['version'])
 
                 pkg.set_summary(cabaldata.get('synopsis'))

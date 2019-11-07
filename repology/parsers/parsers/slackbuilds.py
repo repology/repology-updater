@@ -19,7 +19,7 @@ import os
 from typing import Dict, Iterable, Optional, Tuple
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -85,7 +85,7 @@ class SlackBuildsParser(Parser):
 
             variables = _parse_infofile(info_path)
 
-            pkg.set_name(variables['PRGNAM'])
+            pkg.add_name(variables['PRGNAM'], NameType.GENERIC_PKGNAME)
             pkg.set_version(variables['VERSION'])
             pkg.add_homepages(variables['HOMEPAGE'])
             pkg.add_maintainers(extract_maintainers(variables['EMAIL']))

@@ -19,7 +19,7 @@ import os
 from typing import Iterable
 
 from repology.logger import Logger
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
@@ -34,8 +34,6 @@ class CRUXParser(Parser):
 
             with open(pkgpath, 'r', encoding='utf-8', errors='ignore') as pkgfile:
                 pkg = factory.begin()
-
-                pkg.set_origin(pkgdir)
 
                 for line in pkgfile:
                     line = line.strip()
@@ -54,7 +52,9 @@ class CRUXParser(Parser):
                             pkg.log('unexpected Maintainer format "{}"'.format(maintainer), severity=Logger.ERROR)
 
                     if line.startswith('name=') and not pkg.name:
-                        pkg.set_name(line.split('=', 1)[1])
+                        pkg.add_name(line.split('=', 1)[1], NameType.GENERIC_PKGNAME)
+                        if pkg.name != pkgdir:
+                            raise RuntimeError('unexpectedly, package name "{}" != package dir "{}"'.format(pkg.name, pkgdir))
 
                     if line.startswith('version=') and not pkg.version:
                         pkg.set_version(line.split('=', 1)[1])

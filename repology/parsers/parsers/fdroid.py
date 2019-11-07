@@ -19,7 +19,7 @@ import xml.etree.ElementTree
 from typing import Iterable
 
 from repology.package import PackageFlags
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
@@ -31,7 +31,7 @@ class FDroidParser(Parser):
         for application in root.findall('application'):
             app = factory.begin()
 
-            app.set_name(application.find('name').text)  # type: ignore
+            app.add_name(application.find('name').text, NameType.GENERIC_PKGNAME)  # type: ignore
             app.add_licenses(application.find('license').text)  # type: ignore
             app.add_categories(application.find('category').text)  # type: ignore
             app.add_homepages(application.find('web').text)  # type: ignore
