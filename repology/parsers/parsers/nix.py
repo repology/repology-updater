@@ -82,7 +82,8 @@ class NixJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for key, packagedata in iter_json_dict(path, ('packages', None), encoding='utf-8'):
             with factory.begin(key) as pkg:
-                # these should eventually go away as soon as these are fixed in nix
+                # these should eventually go away as soon as the data is fixed
+                # in nix (e.g. via manual pnames) and is properly exposed
                 if 'node-_at_webassemblyjs' in packagedata['name']:
                     pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
                     continue
@@ -132,8 +133,24 @@ class NixJsonParser(Parser):
                     if letters not in ['alpha', 'beta', 'rc', 'a', 'b', 'pre', 'post', 'rev', 'q', 'u', 'build', 'unstable']:
                         pkg.log('"{}": suspicious version "{}", worth rechecking'.format(packagedata['name'], packagedata['version']), severity=Logger.WARNING)
 
-                pkg.set_name(packagedata['pname'])
-                pkg.set_version(packagedata['version'])
+                pname = packagedata['pname']
+                version = packagedata['version']
+
+                # This is temporary solution (see #854) which overrides pname and version with ones
+                # (ambigiously) parsed from name. That's what nix currently does (instead of exposing
+                # explicitly set pname and version), and we do the same instead of using pname/version
+                # provided by them to avoid unexpected change in data when/if they change their logic
+                # As soon as they do and changed data is verified, this block may be removed
+                match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
+                if match is None:
+                    pkg.log('cannot parse name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+                else:
+                    pname = match.group(1)
+                    version = match.group(2)
+
+                pkg.set_name(pname)
+                pkg.set_version(version)
 
                 meta = packagedata['meta']
 
