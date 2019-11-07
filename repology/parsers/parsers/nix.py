@@ -141,7 +141,7 @@ class NixJsonParser(Parser):
                 # explicitly set pname and version), and we do the same instead of using pname/version
                 # provided by them to avoid unexpected change in data when/if they change their logic
                 # As soon as they do and changed data is verified, this block may be removed
-                match = re.match('(.+?)-([^a-zA-Z].*)$', packagedata['name'])
+                match = re.match('(.+?)-([0-9].*)$', packagedata['name'])
                 if match is None:
                     pkg.log('cannot parse name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
                     continue
