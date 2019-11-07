@@ -29,15 +29,16 @@ class AnityaApiParser(Parser):
             for project in json.load(jsonfile)['projects']:
                 pkg = factory.begin()
 
-                pkg.set_name(project['name'])
+                if project['backend'] == 'CPAN (perl)':
+                    pkg.set_name('perl:' + project['name'])
+                elif project['backend'] == 'Rubygems':
+                    pkg.set_name('ruby:' + project['name'])
+                else:
+                    pkg.set_name(project['name'])
+
                 pkg.set_version(project['version'])
 
                 pkg.add_homepages(project['homepage'])
                 pkg.set_version(pkg.version[1:])
-
-                if project['backend'] == 'CPAN (perl)':
-                    pkg.prefix_name('perl:')
-                elif project['backend'] == 'Rubygems':
-                    pkg.prefix_name('ruby:')
 
                 yield pkg

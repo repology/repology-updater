@@ -236,10 +236,6 @@ class PackageMaker(PackageMakerBase):
     def set_projectname_seed(self, name: str) -> None:
         self._package.projectname_seed = name
 
-    def prefix_name(self, prefix: str) -> None:
-        assert(self._package.name)
-        self._package.name = prefix + self._package.name
-
     @_simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_version(self, version: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
         self._package.rawversion = version
