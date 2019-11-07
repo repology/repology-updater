@@ -84,7 +84,11 @@ class NixJsonParser(Parser):
             with factory.begin(key) as pkg:
                 # these should eventually go away as soon as the data is fixed
                 # in nix (e.g. via manual pnames) and is properly exposed
-                if 'node-_at_webassemblyjs' in packagedata['name']:
+                if 'node-_at' in packagedata['name']:
+                    pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
+                    continue
+
+                if '--' in packagedata['name']:
                     pkg.log('dropping, garbage name "{}"'.format(packagedata['name']), severity=Logger.ERROR)
                     continue
 
