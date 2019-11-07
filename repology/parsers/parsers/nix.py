@@ -163,8 +163,8 @@ class NixJsonParser(Parser):
                     pkg.add_categories(keyparts[0])
 
                 # XXX: mode to rules
-                if pkg.name.endswith('-git'):
-                    pkg.add_name(pkg.name[:-4], NameType.GENERIC_PKGNAME)
+                if pname.endswith('-git'):
+                    pkg.add_name(pname[:-4], NameType.GENERIC_PKGNAME)
                     pkg.set_flags(PackageFlags.IGNORE)
 
                 # XXX: mode to rules

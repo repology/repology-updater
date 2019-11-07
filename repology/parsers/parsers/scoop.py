@@ -58,7 +58,7 @@ class ScoopGitParser(Parser):
                         elif isinstance(data['license'], dict) and 'identifier' in data['license']:
                             pkg.add_licenses(data['license']['identifier'])
                         else:
-                            pkg.log('unsupported license format for {}'.format(pkg.name), severity=Logger.ERROR)
+                            pkg.log('unsupported license format', severity=Logger.ERROR)
 
                     pkg.set_extra_field('path', relpath)
 

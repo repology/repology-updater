@@ -35,6 +35,9 @@ class CRUXParser(Parser):
             with open(pkgpath, 'r', encoding='utf-8', errors='ignore') as pkgfile:
                 pkg = factory.begin()
 
+                name = None
+                version = None
+
                 for line in pkgfile:
                     line = line.strip()
                     if line.startswith('# Description:'):
@@ -51,20 +54,29 @@ class CRUXParser(Parser):
                         else:
                             pkg.log('unexpected Maintainer format "{}"'.format(maintainer), severity=Logger.ERROR)
 
-                    if line.startswith('name=') and not pkg.name:
-                        pkg.add_name(line.split('=', 1)[1], NameType.GENERIC_PKGNAME)
-                        if pkg.name != pkgdir:
-                            raise RuntimeError('unexpectedly, package name "{}" != package dir "{}"'.format(pkg.name, pkgdir))
+                    if line.startswith('name=') and name is None:
+                        if name:
+                            raise RuntimeError('duplicate name')
 
-                    if line.startswith('version=') and not pkg.version:
-                        pkg.set_version(line.split('=', 1)[1])
+                        name = line.split('=', 1)[1]
+                        if name != pkgdir:
+                            raise RuntimeError('unexpectedly, package name "{}" != package dir "{}"'.format(name, pkgdir))
 
-                if pkg.name and '$' in pkg.name:
-                    pkg.log('name contains variables, unable to parse: {}'.format(pkg.name), severity=Logger.ERROR)
+                    if line.startswith('version='):
+                        if version:
+                            raise RuntimeError('duplicate version')
+
+                        version = line.split('=', 1)[1]
+
+                if name and '$' in name:
+                    pkg.log('name contains variables, unable to parse: {}'.format(name), severity=Logger.ERROR)
                     continue
 
-                if pkg.version and '$' in pkg.version:
-                    pkg.log('version contains variables, unable to parse: {}'.format(pkg.version), severity=Logger.ERROR)
+                if version and '$' in version:
+                    pkg.log('version contains variables, unable to parse: {}'.format(version), severity=Logger.ERROR)
                     continue
+
+                pkg.add_name(name, NameType.GENERIC_PKGNAME)
+                pkg.set_version(version)
 
                 yield pkg

@@ -46,11 +46,12 @@ class RepodataParser(Parser):
                     skipped_archs[arch] = skipped_archs.get(arch, 0) + 1
                     continue
 
-                pkg.add_name(entry.findtext('{http://linux.duke.edu/metadata/common}name'), NameType.GENERIC_PKGNAME)
-
-                if '%{' in pkg.name:
+                name = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}name')
+                if '%{' in name:
                     pkg.log('incorrect package name (unexpanded substitution)', severity=Logger.ERROR)
                     continue
+
+                pkg.add_name(name, NameType.GENERIC_PKGNAME)
 
                 version_elt = entry.find('{http://linux.duke.edu/metadata/common}version')
                 if version_elt is None:

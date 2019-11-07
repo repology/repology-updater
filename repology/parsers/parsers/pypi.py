@@ -35,7 +35,7 @@ class PyPiHTMLParser(Parser):
 
                 comment = match[2].strip()
                 if '\n' in comment:
-                    pkg.log('{}: summary is multiline'.format(pkg.name), severity=Logger.WARNING)
+                    pkg.log('summary is multiline', severity=Logger.WARNING)
                 else:
                     pkg.set_summary(comment)
 

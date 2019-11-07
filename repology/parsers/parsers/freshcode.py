@@ -49,7 +49,7 @@ class FreshcodeParser(Parser):
                 pkg.add_licenses(entry.get('license'))
 
                 # take latest known versions
-                if pkg.name not in result or version_compare(pkg.version, result[pkg.name].version) > 0:
-                    result[pkg.name] = pkg
+                if entry['name'] not in result or version_compare(pkg.version, result[entry['name']].version) > 0:
+                    result[entry['name']] = pkg
 
         yield from result.values()

@@ -17,7 +17,7 @@
 
 import json
 import os
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from libversion import version_compare
 
@@ -54,8 +54,11 @@ def _iter_packages(path: str) -> Iterable[Dict[str, Any]]:
             yield from (hit['fields'] for hit in json.load(jsonfile))
 
 
-def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> PackageMaker:
-    pkg.add_name(_as_str(fields['distribution']), NameType.GENERIC_PKGNAME)
+def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> Tuple[str, PackageMaker]:
+    distribution = _as_str(fields['distribution'])
+    assert(distribution is not None)
+
+    pkg.add_name(distribution, NameType.GENERIC_PKGNAME)
     pkg.set_version(_as_str(fields['version']))
 
     author = _as_str(fields['author'])
@@ -67,7 +70,7 @@ def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> PackageMaker:
     pkg.add_homepages(_as_str(fields.get('resources.homepage')))
     pkg.add_downloads(_as_list(fields.get('download_url')))
 
-    return pkg
+    return distribution, pkg
 
 
 def _parse_latest_packages(packages: Iterable[Dict[str, Any]], latest_versions: Dict[str, str], factory: PackageFactory) -> Iterable[PackageMaker]:
@@ -76,13 +79,13 @@ def _parse_latest_packages(packages: Iterable[Dict[str, Any]], latest_versions: 
         if _as_str(fields['status']) != 'latest':
             continue
 
-        pkg = _parse_package(factory.begin(), fields)
+        distribution, pkg = _parse_package(factory.begin(), fields)
 
         if not pkg.version:
             pkg.log('empty version', severity=Logger.ERROR)
             continue
 
-        latest_versions[pkg.name] = pkg.version
+        latest_versions[distribution] = pkg.version
         yield pkg
 
 
@@ -91,13 +94,13 @@ def _parse_devel_packages(packages: Iterable[Dict[str, Any]], latest_versions: D
         if _as_str(fields['maturity']) != 'developer':
             continue
 
-        pkg = _parse_package(factory.begin(), fields)
+        distribution, pkg = _parse_package(factory.begin(), fields)
 
         if not pkg.version:
             pkg.log('empty version', severity=Logger.ERROR)
             continue
 
-        if version_compare(pkg.version, latest_versions.get(pkg.name, '0')) > 0:
+        if version_compare(pkg.version, latest_versions.get(distribution, '0')) > 0:
             pkg.set_flags(PackageFlags.DEVEL)
             yield pkg
 
