@@ -22,7 +22,7 @@ from typing import Any, Iterator, Optional
 
 from repology.logger import AccumulatingLogger, Logger, NoopLogger
 from repology.package import Package
-from repology.packagemaker import PackageFactory, PackageMaker
+from repology.packagemaker import NameType, PackageFactory, PackageMaker
 
 
 class TestPackage:
@@ -37,15 +37,12 @@ class TestPackage:
 
     def __enter__(self) -> PackageMaker:
         self._package_maker = self._factory.begin()
+        self._package_maker.add_name('dummy_package', NameType.GENERIC_PKGNAME)
+        self._package_maker.set_version('0dummy0')
         return self._package_maker
 
     def __exit__(self, *rest: Any) -> None:
         assert(self._package_maker)
-
-        if self._package_maker.name is None:
-            self._package_maker.set_name('dummy_package')
-        if self._package_maker.version is None:
-            self._package_maker.set_version('0dummy0')
 
         self._package = self._package_maker.spawn('dummy_repo', 'dummy_family')
 
@@ -59,7 +56,7 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.set_name('foo')
+            maker.add_name('foo', NameType.GENERIC_PKGNAME)
             maker.set_version('1.0')
             maker.set_origin('/foo')
             maker.set_summary('foo package')
@@ -123,8 +120,8 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.set_name('foo')
-            maker.set_name('bar')
+            maker.add_name('foo', NameType.GENERIC_PKGNAME)
+            maker.add_name('bar', NameType.GENERIC_PKGNAME)
             maker.set_version('1.0')
             maker.set_version('1.1')
             maker.set_summary('Foo')
@@ -138,7 +135,7 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.set_name(0)
+            maker.add_name(0, NameType.GENERIC_PKGNAME)
             maker.set_version(0)
             maker.set_summary(0)
 
@@ -151,7 +148,7 @@ class TestPackageMaker(unittest.TestCase):
 
         with pkg as maker:
             with self.assertRaises(RuntimeError):
-                maker.set_name([123])
+                maker.add_name([123], NameType.GENERIC_PKGNAME)
             with self.assertRaises(RuntimeError):
                 maker.set_version([123])
             with self.assertRaises(RuntimeError):
@@ -161,9 +158,9 @@ class TestPackageMaker(unittest.TestCase):
         pkg = TestPackage()
 
         with pkg as maker:
-            maker.set_name('foo')
-            maker.set_name('')
-            maker.set_name(None)
+            maker.add_name('foo', NameType.GENERIC_PKGNAME)
+            maker.add_name('', NameType.GENERIC_PKGNAME)
+            maker.add_name(None, NameType.GENERIC_PKGNAME)
             maker.set_version('1.0')
             maker.set_version('')
             maker.set_version(None)

@@ -23,21 +23,17 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Type
 from repology.logger import Logger, NoopLogger
 from repology.package import Package, PackageStatus
 from repology.packagemaker import normalizers as nzs
+from repology.packagemaker.names import NameMapper
+from repology.packagemaker.names import NameType as NameType
 from repology.packagemaker.normalizers import NormalizerFunction
 
 
-__all__ = ['PackageFactory', 'PackageMaker']
+__all__ = ['NameType', 'PackageFactory', 'PackageMaker']
 
 
 class PackageTemplate:
     __slots__ = [
         'subrepo',
-
-        'name',
-        'basename',
-        'keyname',
-        'visiblename',
-        'projectname_seed',
 
         'version',
         'origversion',
@@ -58,12 +54,6 @@ class PackageTemplate:
 
     subrepo: Optional[str]
 
-    name: Optional[str]
-    basename: Optional[str]
-    keyname: Optional[str]
-    visiblename: Optional[str]
-    projectname_seed: Optional[str]
-
     version: Optional[str]
     origversion: Optional[str]
     rawversion: Optional[str]
@@ -82,12 +72,6 @@ class PackageTemplate:
 
     def __init__(self) -> None:
         self.subrepo = None
-
-        self.name = None
-        self.basename = None
-        self.keyname = None
-        self.visiblename = None
-        self.projectname_seed = None
 
         self.version = None
         self.origversion = None
@@ -196,6 +180,7 @@ def _extend_unique(existing: List[str], iterable: Iterable[str]) -> None:
 
 class PackageMaker(PackageMakerBase):
     _package: PackageTemplate
+    _name_mapper: NameMapper
     _ident: Optional[str]
     _itemno: int
     _skipfailed: bool
@@ -203,12 +188,13 @@ class PackageMaker(PackageMakerBase):
     def __init__(self, logger: Logger, ident: Optional[str], itemno: int, skipfailed: bool = False) -> None:
         super(PackageMaker, self).__init__(logger)
         self._package = PackageTemplate()
+        self._name_mapper = NameMapper()
         self._ident = ident
         self._itemno = itemno
         self._skipfailed = skipfailed
 
     def _get_ident(self) -> str:
-        return self._ident or self._package.extrafields.get('origin', None) or self._package.name or self._package.basename or 'item #{}'.format(self._itemno)
+        return self._ident or self._name_mapper.describe() or 'item #{}'.format(self._itemno)
 
     # XXX: deprecated
     @_simple_setter('origin', str, nzs.strip, nzs.forbid_newlines)
@@ -217,24 +203,8 @@ class PackageMaker(PackageMakerBase):
         self.set_extra_field('origin', origin)
 
     @_simple_setter('name', str, nzs.strip, nzs.forbid_newlines)
-    def set_name(self, name: str) -> None:
-        self._package.name = name
-
-    @_simple_setter('basename', str, nzs.strip, nzs.forbid_newlines)
-    def set_basename(self, basename: str) -> None:
-        self._package.basename = basename
-
-    @_simple_setter('keyname', str, nzs.strip, nzs.forbid_newlines)
-    def set_keyname(self, name: str) -> None:
-        self._package.keyname = name
-
-    @_simple_setter('visiblename', str, nzs.strip, nzs.forbid_newlines)
-    def set_visiblename(self, name: str) -> None:
-        self._package.visiblename = name
-
-    @_simple_setter('projectname_seed', str, nzs.strip, nzs.forbid_newlines)
-    def set_projectname_seed(self, name: str) -> None:
-        self._package.projectname_seed = name
+    def add_name(self, name: str, name_type: int) -> None:
+        self._name_mapper.add_name(name, name_type)
 
     @_simple_setter('version', str, nzs.strip, nzs.forbid_newlines)
     def set_version(self, version: str, version_normalizer: Optional[Callable[[str], str]] = None) -> None:
@@ -291,12 +261,11 @@ class PackageMaker(PackageMakerBase):
     def spawn(self, repo: str, family: str, subrepo: Optional[str] = None, shadow: bool = False, default_maintainer: Optional[str] = None) -> Package:
         maintainers: List[str] = self._package.maintainers if self._package.maintainers else [default_maintainer] if default_maintainer else []
 
-        visiblename = self._package.visiblename or self._package.keyname or self._package.name
-        projectname_seed = self._package.projectname_seed or self._package.basename or self._package.name
+        names = self._name_mapper.get_mapped_names()
 
-        if visiblename is None:
+        if names.visiblename is None:
             raise RuntimeError('Attempt to spawn Package with unset visible name')
-        if projectname_seed is None:
+        if names.projectname_seed is None:
             raise RuntimeError('Attempt to spawn Package with unset project name seed')
         if self._package.version is None:
             raise RuntimeError('Attempt to spawn Package with unset version')
@@ -306,11 +275,11 @@ class PackageMaker(PackageMakerBase):
             family=family,
             subrepo=self._package.subrepo or subrepo,
 
-            name=self._package.name,
-            basename=self._package.basename,
-            keyname=self._package.keyname,
-            visiblename=visiblename,
-            projectname_seed=projectname_seed,
+            name=names.name,
+            basename=names.basename,
+            keyname=names.keyname,
+            visiblename=names.visiblename,
+            projectname_seed=names.projectname_seed,
 
             version=self._package.version,
             origversion=self._package.version,
@@ -332,7 +301,7 @@ class PackageMaker(PackageMakerBase):
 
             # XXX: see comment for PackageStatus.UNPROCESSED
             # XXX: duplicate code: PackageTransformer does the same
-            effname=projectname_seed,
+            effname=names.projectname_seed,
             versionclass=PackageStatus.UNPROCESSED,
         )
 
@@ -345,6 +314,7 @@ class PackageMaker(PackageMakerBase):
 
         offspring = PackageMaker(self._logger, offspring_ident, self._itemno)
         offspring._package = deepcopy(self._package)
+        offspring._name_mapper = deepcopy(self._name_mapper)
 
         return offspring
 
