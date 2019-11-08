@@ -51,9 +51,6 @@ class KissGitParser(Parser):
 
                 subrepo = os.path.split(pkgpath)[0]
 
-                if subrepo == 'testing':
-                    continue
-
                 pkg.set_extra_field('path', pkgpath)
                 pkg.set_subrepo(subrepo)
 
