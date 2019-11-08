@@ -202,7 +202,7 @@ def database_update(env: Environment) -> None:
 
     logger.log('pushing packages to database')
 
-    field_stats_per_repo: Dict[str, FieldStatistics] = defaultdict(lambda: FieldStatistics(['comment', 'maintainers', 'category', 'homepage', 'licenses', 'downloads']))
+    field_stats_per_repo: Dict[str, FieldStatistics] = defaultdict(FieldStatistics)
 
     for packageset in env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger):
         fill_packageset_versions(packageset)

@@ -15,22 +15,24 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-from typing import Any, Iterable, List, Set
+from typing import List, Set
+
+from repology.package import Package
 
 
 class FieldStatistics:
     _interesting_fields: Set[str]
     _used_fields: Set[str]
 
-    def __init__(self, interesting_fields: Iterable[str]) -> None:
-        self._interesting_fields = set(interesting_fields)
+    def __init__(self) -> None:
+        self._interesting_fields = set(Package.__slots__)
         self._used_fields = set()
 
-    def add(self, item: Any) -> None:
+    def add(self, package: Package) -> None:
         new_fields = False
 
         for field in self._interesting_fields:
-            if getattr(item, field, None):
+            if getattr(package, field, None):
                 self._used_fields.add(field)
                 new_fields = True
 
