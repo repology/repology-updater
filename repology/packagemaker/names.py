@@ -23,6 +23,8 @@ __all__ = ['NameType', 'NameMapper']
 
 
 class NameType:
+    IGNORED: ClassVar[int] = 0  # special type which is always ignored
+
     GENERIC_PKGNAME: ClassVar[int] = 10
 
     WIKIDATA_ENTITY: ClassVar[int] = 20
@@ -32,7 +34,7 @@ class NameType:
     BSD_PKGNAME: ClassVar[int] = 30
     BSD_ORIGIN: ClassVar[int] = 31
 
-    NPACKD_TITLE: ClassVar[int] = 40
+    NPACKD_TITLE: ClassVar[int] = IGNORED
     NPACKD_FULLNAME: ClassVar[int] = 41
     NPACKD_LASTNAME: ClassVar[int] = 42
 
@@ -174,7 +176,8 @@ class NameMapper:
         self._names = {}
 
     def add_name(self, name: str, name_type: int) -> None:
-        self._names[name_type] = name
+        if name_type != NameType.IGNORED:
+            self._names[name_type] = name
 
     def get_mapped_names(self) -> MappedNames:
         keys = tuple(sorted(self._names.keys()))
