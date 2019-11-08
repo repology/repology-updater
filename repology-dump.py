@@ -38,7 +38,7 @@ def format_package_field(key: str, value: Any) -> str:
         return PackageFlags.as_string(value)
     if isinstance(value, dict):
         return str({k: v for k, v in sorted(value.items())})
-    return str(value)
+    return str(value).replace('\n', '\\n')
 
 
 def parse_arguments() -> argparse.Namespace:
