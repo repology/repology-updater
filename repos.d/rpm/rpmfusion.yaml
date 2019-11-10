@@ -133,21 +133,31 @@
   family: fedora
   minpackages: 300
   sources:
-    - name: free-branched
+    - name: free-release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://download1.rpmfusion.org/free/fedora/development/31/Everything/source/SRPMS/
-      subrepo: free/branched
+      url: https://download1.rpmfusion.org/free/fedora/releases/31/Everything/source/SRPMS/
+      subrepo: free/release
+    - name: free-updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/free/fedora/updates/31/SRPMS/
+      subrepo: free/updates
     - name: free-updates-testing
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: https://download1.rpmfusion.org/free/fedora/updates/testing/31/SRPMS/
       subrepo: free/updates-testing
-    - name: nonfree-branched
+    - name: nonfree-release
       fetcher: RepodataFetcher
       parser: RepodataParser
-      url: https://download1.rpmfusion.org/nonfree/fedora/development/31/Everything/source/SRPMS/
-      subrepo: nonfree/branched
+      url: https://download1.rpmfusion.org/nonfree/fedora/releases/31/Everything/source/SRPMS/
+      subrepo: nonfree/release
+    - name: nonfree-updates
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: https://download1.rpmfusion.org/nonfree/fedora/updates/31/SRPMS/
+      subrepo: nonfree/updates
     - name: nonfree-updates-testing
       fetcher: RepodataFetcher
       parser: RepodataParser
