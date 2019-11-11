@@ -1,6 +1,10 @@
 ###########################################################################
 # Rosa
 ###########################################################################
+# As per rosalinux Mikhail Novosyolov:
+# abf-downloads.rosalinux.ru is primary repository location
+# mirror.rosalab.ru is secondary mirror which does not contain unreleased repos (ROSA 2019.x ATOW)
+# XXX: check how abf-downloads behave, then switch all repos to it
 - name: rosa_2014_1
   type: repository
   desc: Rosa 2014.1
@@ -41,6 +45,48 @@
   packagelinks:
     - desc: Package on abf.io
       url: 'https://abf.io/import/{name}/tree/rosa2016.1'
+  tags: [ all, production, rosa ]
+
+- name: rosa_2019_0
+  type: repository
+  desc: Rosa 2019.0
+  family: rosa
+  color: '3757a1'
+  minpackages: 6500
+  sources:
+    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
+      fetcher: FileFetcher
+      parser: RosaInfoXmlParser
+      url: 'http://abf-downloads.rosalinux.ru/rosa2019.0/repository/SRPMS/{source}/media_info/info.xml.lzma'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rosa Linux home
+      url: http://en.rosalinux.com/
+  packagelinks:
+    - desc: Package on abf.io
+      url: 'https://abf.io/import/{name}/tree/rosa2019.0'
+  tags: [ all, production, rosa ]
+
+- name: rosa_2019_1
+  type: repository
+  desc: Rosa 2019.1
+  family: rosa
+  color: '3757a1'
+  minpackages: 21000
+  sources:
+    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
+      fetcher: FileFetcher
+      parser: RosaInfoXmlParser
+      url: 'http://abf-downloads.rosalinux.ru/rosa2019.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
+      compression: xz
+      subrepo: '{source}'
+  repolinks:
+    - desc: Rosa Linux home
+      url: http://en.rosalinux.com/
+  packagelinks:
+    - desc: Package on abf.io
+      url: 'https://abf.io/import/{name}/tree/rosa2019.1'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_6_9
