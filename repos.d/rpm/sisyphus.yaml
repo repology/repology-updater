@@ -6,7 +6,7 @@
   desc: ALT Sisyphus
   family: sisyphus
   color: 'baccdd'
-  minpackages: 17500
+  minpackages: 18000
   sources:
     - name: [ noarch, x86_64 ]
       fetcher: FileFetcher
@@ -18,9 +18,9 @@
       url: http://www.sisyphus.ru/en/
   packagelinks:
     - desc: Sisyphus package details
-      url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}'
+      url: 'https://packages.altlinux.org/en/sisyphus/srpms/{name}'
     - desc: Spec file
-      url: 'http://www.sisyphus.ru/en/srpm/Sisyphus/{name}/spec'
+      url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{name}'
   tags: [ all, production ]
 
 # automatically imported packages; duplicate already existing packages and versions,
