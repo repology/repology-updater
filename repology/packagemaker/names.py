@@ -76,17 +76,23 @@ class _NameMapping:
     projectname_seed: int
 
     name: Optional[int] = None
+    srcname: Optional[int] = None
+    binname: Optional[int] = None
     basename: Optional[int] = None
     keyname: Optional[int] = None
+    trackname: Optional[int] = None
 
 
 @dataclass
 class MappedNames:
     name: Optional[str] = None
+    srcname: Optional[str] = None
+    binname: Optional[str] = None
     basename: Optional[str] = None
     keyname: Optional[str] = None
     visiblename: Optional[str] = None
     projectname_seed: Optional[str] = None
+    trackname: Optional[str] = None
 
 
 _MAPPINGS = [

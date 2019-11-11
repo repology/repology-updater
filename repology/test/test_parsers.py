@@ -40,11 +40,14 @@ class TestParsers(unittest.TestCase):
             # family must be filled
             'subrepo': None,
 
-            # name must be filled
+            'name': None,
+            'srcname': None,
+            'binname': None,
             # visiblename must be filled
             # proectname_seed must be filled
             'basename': None,
             'keyname': None,
+            'trackname': None,
 
             # version must be filled
             # origversion must be filled

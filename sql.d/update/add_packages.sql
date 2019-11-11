@@ -27,10 +27,13 @@ INSERT INTO packages(
 	subrepo,
 
 	name,
+	srcname,
+	binname,
 	basename,
 	keyname,
 	visiblename,
 	projectname_seed,
+	trackname,
 
 	origversion,
 	rawversion,
@@ -64,10 +67,13 @@ INSERT INTO packages(
 	%(subrepo)s,
 
 	%(name)s,
+	%(srcname)s,
+	%(binname)s,
 	%(basename)s,
 	%(keyname)s,
 	%(visiblename)s,
 	%(projectname_seed)s,
+	%(trackname)s,
 
 	%(origversion)s,
 	%(rawversion)s,

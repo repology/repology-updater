@@ -270,10 +270,13 @@ class PackageMaker(PackageMakerBase):
             subrepo=self._package.subrepo or subrepo,
 
             name=names.name,
+            srcname=names.srcname,
+            binname=names.binname,
             basename=names.basename,
             keyname=names.keyname,
             visiblename=names.visiblename,
             projectname_seed=names.projectname_seed,
+            trackname=names.trackname,
 
             version=self._package.version,
             origversion=self._package.version,
