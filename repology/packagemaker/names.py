@@ -62,6 +62,9 @@ class NameType:
     FDROID_NAME: ClassVar[int] = 100
     FDROID_ID: ClassVar[int] = 101
 
+    CHOCOLATEY_TITLE: ClassVar[int] = 110
+    CHOCOLATEY_METADATA_TITLE: ClassVar[int] = 111
+
     TERMUX_NAME: ClassVar[int] = GENERIC_SN_NAME
 
     VCPKG_SOURCE: ClassVar[int] = GENERIC_SN_NAME
@@ -205,6 +208,19 @@ _MAPPINGS = [
         trackname=NameType.REACTOS_FILENAME,
         visiblename=NameType.REACTOS_NAME,
         projectname_seed=NameType.REACTOS_FILENAME,
+    ),
+    # Chocolatey
+    _NameMapping(
+        name=NameType.CHOCOLATEY_TITLE,
+        trackname=NameType.CHOCOLATEY_TITLE,
+        visiblename=NameType.CHOCOLATEY_METADATA_TITLE,  # may be empty
+        projectname_seed=NameType.CHOCOLATEY_TITLE,
+    ),
+    _NameMapping(
+        name=NameType.CHOCOLATEY_TITLE,
+        trackname=NameType.CHOCOLATEY_TITLE,
+        visiblename=NameType.CHOCOLATEY_TITLE,
+        projectname_seed=NameType.CHOCOLATEY_TITLE,
     ),
     # Debian
     _NameMapping(

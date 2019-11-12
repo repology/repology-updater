@@ -35,9 +35,10 @@ class ChocolateyParser(Parser):
             for entry in root.findall('{http://www.w3.org/2005/Atom}entry'):
                 pkg = factory.begin()
 
-                pkg.add_name(entry.find('{http://www.w3.org/2005/Atom}title').text, NameType.GENERIC_PKGNAME)  # type: ignore
+                pkg.add_name(entry.find('{http://www.w3.org/2005/Atom}title').text, NameType.CHOCOLATEY_TITLE)  # type: ignore
                 pkg.set_version(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Version').text)  # type: ignore
                 pkg.add_homepages(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}ProjectUrl').text)  # type: ignore
+                pkg.add_name(entry.find('{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties/{http://schemas.microsoft.com/ado/2007/08/dataservices}Title').text, NameType.CHOCOLATEY_METADATA_TITLE)  # type: ignore
 
                 commentnode = entry.find('{http://www.w3.org/2005/Atom}summary')
                 if commentnode is not None:
