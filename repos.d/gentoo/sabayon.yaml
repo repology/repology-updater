@@ -19,7 +19,7 @@
       url: https://www.sabayon.org/
   packagelinks:
     - desc: Package directory on GitHub
-      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{srcnae}'
+      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{srcname}'
     - desc: Ebuild on GitHub
       url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production ]

@@ -64,15 +64,15 @@
       url: https://github.com/DragonFlyBSD/DPorts
   packagelinks:
     - desc: FreshPorts page
-      url: 'https://www.freshports.org/{keyname}'
+      url: 'https://www.freshports.org/{srcname}'
     - desc: SVNWeb
-      url: 'https://svnweb.freebsd.org/ports/head/{keyname}/'
+      url: 'https://svnweb.freebsd.org/ports/head/{srcname}/'
     - desc: Port's Makefile
-      url: 'https://svnweb.freebsd.org/ports/head/{keyname}/Makefile?view=co'
+      url: 'https://svnweb.freebsd.org/ports/head/{srcname}/Makefile?view=co'
     - desc: PortsMon
-      url: 'http://portsmon.freebsd.org/portoverview.py?category={keyname|dirname}&portname={keyname|basename}'
+      url: 'http://portsmon.freebsd.org/portoverview.py?category={srcname|dirname}&portname={srcname|basename}'
     - desc: Related bugs in FreeBSD bugzilla
-      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={keyname}'
+      url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={srcname}'
     - desc: Synth build log
-      url: 'http://muscles.dragonflybsd.org/synth/logs/{category}___{portname}.log'
+      url: 'http://muscles.dragonflybsd.org/synth/logs/{srcname|dirname}___{srcname|basename}.log'
   tags: [ all, production ]
