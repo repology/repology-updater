@@ -62,6 +62,8 @@ class NameType:
 
     GOBOLINUX_RECIPE: ClassVar[int] = 130
 
+    GUIX_NAME: ClassVar[int] = 140
+
     # Common pattern "NOBN" = Name + Optional BaseName
     PATTERN_NOBN_NAME: ClassVar[int] = 200
     PATTERN_NOBN_BASENAME: ClassVar[int] = 201
@@ -110,6 +112,13 @@ _MAPPINGS = [
         name=NameType.GENERIC_PKGNAME,
         visiblename=NameType.GENERIC_PKGNAME,
         projectname_seed=NameType.GENERIC_PKGNAME,
+    ),
+    # GUIX
+    _NameMapping(
+        name=NameType.GUIX_NAME,
+        trackname=NameType.GUIX_NAME,
+        visiblename=NameType.GUIX_NAME,
+        projectname_seed=NameType.GUIX_NAME,
     ),
     # GoboLinux
     _NameMapping(

@@ -30,7 +30,7 @@ class GuixJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgdata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
-                pkg.add_name(pkgdata['name'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(pkgdata['name'], NameType.GUIX_NAME)
                 pkg.set_version(pkgdata['version'])
                 pkg.set_summary(pkgdata['synopsis'])
                 pkg.add_homepages(pkgdata.get('homepage'))
