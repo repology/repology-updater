@@ -32,7 +32,7 @@ class HPPADepothelperListParser(Parser):
 
                 name, version = pkgname.rsplit('-', 1)
 
-                pkg.add_name(name, NameType.GENERIC_PKGNAME)
+                pkg.add_name(name, NameType.HPUX_NAME)
                 pkg.set_version(version)
                 pkg.set_extra_field('path', pkgpath)
 

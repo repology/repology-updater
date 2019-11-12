@@ -86,6 +86,26 @@ class NameType:
 
     STACKAGE_NAME: ClassVar[int] = GENERIC_SN_NAME
 
+    DISTROWATCH_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    FRESHCODE_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    RAVENPORTS_NAMEBASE: ClassVar[int] = GENERIC_SN_NAME
+
+    SCOOP_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    CRUX_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    KISS_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    HPUX_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    OS4DEPOT_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    KWORT_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    JUSTINSTALL_NAME: ClassVar[int] = GENERIC_SN_NAME
+
     MSYS2_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     MSYS2_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
 

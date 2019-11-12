@@ -34,7 +34,7 @@ class FreshcodeParser(Parser):
         # fetcher, not the file we've downloaded
         for entry in iter_json_list(path, ('releases', None)):
             with factory.begin() as pkg:
-                pkg.add_name(entry['name'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(entry['name'], NameType.FRESHCODE_NAME)
 
                 if not entry['version']:
                     pkg.log('empty version', Logger.ERROR)

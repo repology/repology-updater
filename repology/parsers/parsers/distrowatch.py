@@ -31,7 +31,7 @@ class DistrowatchPackagesParser(Parser):
 
             # name + version
             cell = row.xpath('./th[1]/a[@href]')[0]
-            pkg.add_name(cell.text, NameType.GENERIC_PKGNAME)
+            pkg.add_name(cell.text, NameType.DISTROWATCH_NAME)
             pkg.add_homepages(cell.attrib['href'])
 
             # summary

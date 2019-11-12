@@ -27,7 +27,7 @@ class RavenportsJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for packagedata in iter_json_list(path, ('ravenports', None)):
             with factory.begin() as pkg:
-                pkg.add_name(packagedata['namebase'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(packagedata['namebase'], NameType.RAVENPORTS_NAMEBASE)
                 pkg.set_version(packagedata['version'])
                 pkg.add_categories(packagedata['keywords'])
                 pkg.add_homepages(packagedata.get('homepage'))

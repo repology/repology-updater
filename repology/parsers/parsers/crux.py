@@ -76,7 +76,7 @@ class CRUXParser(Parser):
                     pkg.log('version contains variables, unable to parse: {}'.format(version), severity=Logger.ERROR)
                     continue
 
-                pkg.add_name(name, NameType.GENERIC_PKGNAME)
+                pkg.add_name(name, NameType.CRUX_NAME)
                 pkg.set_version(version)
 
                 yield pkg

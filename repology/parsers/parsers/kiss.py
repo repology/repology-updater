@@ -33,7 +33,7 @@ class KissGitParser(Parser):
         for versionpath in walk_tree(path, name='version'):
             rootdir = os.path.dirname(versionpath)
             with factory.begin(rootdir) as pkg:
-                pkg.add_name(os.path.basename(rootdir), NameType.GENERIC_PKGNAME)
+                pkg.add_name(os.path.basename(rootdir), NameType.KISS_NAME)
 
                 with open(versionpath) as f:
                     version, revision = f.read().strip().split()

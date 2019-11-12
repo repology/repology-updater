@@ -42,7 +42,7 @@ class ScoopGitParser(Parser):
                     with open(fullpath, 'r', encoding='utf-8') as jsonfile:
                         data = json.load(jsonfile, strict=False)
 
-                    pkg.add_name(filename[:-5], NameType.GENERIC_PKGNAME)
+                    pkg.add_name(filename[:-5], NameType.SCOOP_NAME)
                     pkg.set_version(data['version'])
 
                     pkg.add_homepages(data.get('homepage'))

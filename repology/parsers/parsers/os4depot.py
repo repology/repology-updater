@@ -43,7 +43,7 @@ class OS4DepotIndexParser(Parser):
             with factory.begin(filename) as pkg:
                 pkg.set_extra_field('filename', filename)
 
-                pkg.add_name(filename.rsplit('.', 1)[0], NameType.GENERIC_PKGNAME)
+                pkg.add_name(filename.rsplit('.', 1)[0], NameType.OS4DEPOT_NAME)
 
                 if not version:
                     pkg.log('skipping, no version', Logger.ERROR)

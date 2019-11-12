@@ -27,7 +27,7 @@ class JustInstallJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for packagename, packagedata in iter_json_dict(path, ('packages', None)):
             with factory.begin() as pkg:
-                pkg.add_name(packagename, NameType.GENERIC_PKGNAME)
+                pkg.add_name(packagename, NameType.JUSTINSTALL_NAME)
                 pkg.set_version(packagedata['version'])
 
                 for arch in ['x86', 'x86_64']:
