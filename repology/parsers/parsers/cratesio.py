@@ -36,7 +36,10 @@ class CratesIOParser(Parser):
                 for crate in json.load(pagedata)['crates']:
                     pkg = factory.begin()
 
-                    pkg.add_name(crate['id'], NameType.GENERIC_PKGNAME)
+                    if crate['id'] != crate['name']:
+                        raise RuntimeError('id != name')
+
+                    pkg.add_name(crate['id'], NameType.CRATESIO_ID)
                     pkg.set_version(crate['max_version'])
 
                     pkg.set_summary(crate['description'])

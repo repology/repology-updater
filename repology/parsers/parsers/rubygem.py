@@ -38,7 +38,7 @@ class RubyGemParser(Parser):
 
                     gemversion = str(gemversion.marshal_dump()[0])
 
-                    pkg.add_name(gemname, NameType.GENERIC_PKGNAME)
+                    pkg.add_name(gemname, NameType.RUBYGEMS_NAME)
                     pkg.set_version(gemversion)
                     pkg.add_homepages('https://rubygems.org/gems/' + gemname)
 

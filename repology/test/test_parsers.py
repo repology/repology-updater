@@ -235,6 +235,7 @@ class TestParsers(unittest.TestCase):
                 'repo': 'cpan',
                 'family': 'cpan',
                 'name': 'Acme-Brainfuck',
+                'trackname': 'Acme-Brainfuck',
                 'visiblename': 'Acme-Brainfuck',
                 'projectname_seed': 'Acme-Brainfuck',
                 'version': '1.1.1',

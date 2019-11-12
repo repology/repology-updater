@@ -83,7 +83,7 @@ class CPANPackagesParser(Parser):
                     pkg.log('skipping submodule {}'.format(module), Logger.WARNING)
                     continue
 
-                pkg.add_name(package_name, NameType.GENERIC_PKGNAME)
+                pkg.add_name(package_name, NameType.CPAN_NAME)
                 pkg.set_version(package_version)
 
                 pkg.add_maintainers(extract_maintainers(package_path.split('/')[2].lower() + '@cpan'))

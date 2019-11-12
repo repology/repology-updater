@@ -74,7 +74,7 @@ class ArchiveContentsParser(Parser):
 
         for pkgdata in _parse_data(data):
             with factory.begin() as pkg:
-                pkg.add_name(pkgdata.name, NameType.GENERIC_PKGNAME)
+                pkg.add_name(pkgdata.name, NameType.ELPA_NAME)
                 pkg.set_version(pkgdata.version)
                 pkg.set_summary(pkgdata.summary)
 

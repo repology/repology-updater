@@ -73,6 +73,22 @@ class NameType:
 
     GUIX_NAME: ClassVar[int] = GENERIC_SN_NAME
 
+    RUBYGEMS_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    CPAN_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    LUAROCKS_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    CRATESIO_ID: ClassVar[int] = GENERIC_SN_NAME
+
+    ELPA_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    CRAN_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    HACKAGE_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    STACKAGE_NAME: ClassVar[int] = GENERIC_SN_NAME
+
     MSYS2_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     MSYS2_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
 

@@ -148,7 +148,7 @@ class HackageParserBase(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for cabaldata in self._iterate(path):
             with factory.begin() as pkg:
-                pkg.add_name(cabaldata['name'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(cabaldata['name'], NameType.HACKAGE_NAME)
                 pkg.set_version(cabaldata['version'])
 
                 pkg.set_summary(cabaldata.get('synopsis'))

@@ -31,7 +31,7 @@ class StackageHTMLParser(Parser):
 
             name, version = row.xpath('./td[1]/a')[0].text.rsplit('-', 1)
 
-            pkg.add_name(name, NameType.GENERIC_PKGNAME)
+            pkg.add_name(name, NameType.STACKAGE_NAME)
             pkg.set_version(version)
             pkg.set_summary((row.xpath('./td[2]')[0].text or '').replace('\n', ' '))
 

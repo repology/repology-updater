@@ -58,7 +58,7 @@ def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> Tuple[str, Pack
     distribution = _as_str(fields['distribution'])
     assert(distribution is not None)
 
-    pkg.add_name(distribution, NameType.GENERIC_PKGNAME)
+    pkg.add_name(distribution, NameType.CPAN_NAME)
     pkg.set_version(_as_str(fields['version']))
 
     author = _as_str(fields['author'])

@@ -52,7 +52,7 @@ class LuaRocksParser(Parser):
 
         for pkgname, pkgdata in _parse_data(data)['repository'].items():
             with factory.begin() as pkg:
-                pkg.add_name(pkgname, NameType.GENERIC_PKGNAME)
+                pkg.add_name(pkgname, NameType.LUAROCKS_NAME)
 
                 for version, versiondatas in pkgdata.items():
                     for versiondata in versiondatas:
