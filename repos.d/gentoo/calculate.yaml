@@ -21,7 +21,7 @@
       url: https://github.com/calculatelinux/calculate
   packagelinks:
     - desc: Package details
-      url: 'http://www.calculate-linux.org/packages/{category}/{name}'
+      url: 'http://www.calculate-linux.org/packages/{srcname}'
     - desc: View ebuild
-      url: 'http://www.calculate-linux.org/packages/{category}/{name}/{name}-{rawversion}.ebuild'
+      url: 'http://www.calculate-linux.org/packages/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production ]

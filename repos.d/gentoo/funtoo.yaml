@@ -95,9 +95,9 @@
       url: https://github.com/funtoo/
   #packagelinks:
   #  - desc: Git directory
-  #    url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
+  #    url: 'https://github.com/funtoo/{subrepo}/tree/master/{srcname}'
   #  - desc: View ebuild
-  #    url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{rawversion}.ebuild'
+  #    url: 'https://github.com/funtoo/{subrepo}/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, funtoo ]
 
 - name: funtoo_1.4
@@ -211,7 +211,7 @@
       url: https://github.com/funtoo/
   #packagelinks:
   #  - desc: Git directory
-  #    url: 'https://github.com/funtoo/{subrepo}/tree/master/{category}/{name}'
+  #    url: 'https://github.com/funtoo/{subrepo}/tree/master/{srcname}'
   #  - desc: View ebuild
-  #    url: 'https://github.com/funtoo/{subrepo}/blob/master/{category}/{name}/{name}-{rawversion}.ebuild'
+  #    url: 'https://github.com/funtoo/{subrepo}/blob/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, funtoo ]

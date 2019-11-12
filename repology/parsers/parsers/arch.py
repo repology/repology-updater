@@ -64,7 +64,6 @@ class ArchDBParser(Parser):
                     #elif tag == 'PACKAGER':
                     #    pkg.add_maintainers(extract_maintainers(line))
                     elif tag == 'BASE':
-                        pkg.set_extra_field('base', line)
                         pkg.add_name(line, NameType.ARCH_BASENAME)
                     elif line.startswith('%') and line.endswith('%'):
                         tag = line[1:-1]

@@ -196,7 +196,7 @@
       url: "https://wikidata.org/"
   packagelinks:
     - desc: Wikidata entity
-      url: "https://www.wikidata.org/wiki/{keyname}"
+      url: "https://www.wikidata.org/wiki/{name}"
   tags: [ all, production ]
 
 # Some additional useful requests

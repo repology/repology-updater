@@ -20,7 +20,7 @@
       url: https://blackarch.org/tools.html
   packagelinks:
     - desc: Git repository
-      url: 'https://github.com/BlackArch/blackarch/tree/master/packages/{name}'
+      url: 'https://github.com/BlackArch/blackarch/tree/master/packages/{srcname}'
     - desc: PKGBUILD
-      url: 'https://github.com/BlackArch/blackarch/blob/master/packages/{name}/PKGBUILD'
+      url: 'https://github.com/BlackArch/blackarch/blob/master/packages/{srcname}/PKGBUILD'
   tags: [ all, production ]

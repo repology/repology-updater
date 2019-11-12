@@ -21,5 +21,5 @@
       url: https://www.hyperbola.info/packages/
   packagelinks:
     - desc: Package search on hyperbola.info.nu
-      url: 'https://hyperbola.info/packages/?q={name}'
+      url: 'https://hyperbola.info/packages/?q={binname}'
   tags: [ all, production ]

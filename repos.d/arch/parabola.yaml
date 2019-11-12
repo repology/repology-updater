@@ -22,7 +22,7 @@
       url: https://www.parabola.nu/packages/
   packagelinks:
     - desc: Package search on parabola.nu
-      url: 'https://www.parabola.nu/packages/?q={name}'
+      url: 'https://www.parabola.nu/packages/?q={binname}'
   tags: [ all, production ]
 
 - name: parabola_testing
@@ -46,5 +46,5 @@
       url: https://www.parabola.nu/packages/
   packagelinks:
     - desc: Package search on parabola.nu
-      url: 'https://www.parabola.nu/packages/?q={name}'
+      url: 'https://www.parabola.nu/packages/?q={binname}'
   tags: [ all, production ]

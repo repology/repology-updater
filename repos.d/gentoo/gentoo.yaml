@@ -28,7 +28,7 @@
       url: https://github.com/gentoo/gentoo
   packagelinks:
     - desc: Package details
-      url: 'https://packages.gentoo.org/packages/{category}/{name}'
+      url: 'https://packages.gentoo.org/packages/{srcname}'
     - desc: View ebuild
-      url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{category}/{name}/{name}-{rawversion}.ebuild'
+      url: 'https://gitweb.gentoo.org/repo/gentoo.git/tree/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, have_testdata ]

@@ -20,14 +20,14 @@
       url: https://www.archlinux.org/packages/
   packagelinks:
     - desc: Package details on www.archlinux.org
-      url: 'https://www.archlinux.org/packages/?q={name}'
+      url: 'https://www.archlinux.org/packages/?q={binname}'
     # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
     - desc: Git repository
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{archbase}'
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{srcname}'
     - desc: PKGBUILD
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{archbase}'
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname}'
     - desc: Package information (x86_64)
-      url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{name}/'
+      url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
   tags: [ all, production, have_testdata ]
 
 - name: arch_testing
@@ -49,12 +49,12 @@
       url: https://www.archlinux.org/packages/
   packagelinks:
     - desc: Package details on www.archlinux.org
-      url: 'https://www.archlinux.org/packages/?q={name}'
+      url: 'https://www.archlinux.org/packages/?q={binname}'
     # note that there are only two git repos: "packages" and "community"; this is handled in repology/packageformatter.py
     - desc: Git repository
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{archbase}'
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk?h=packages/{srcname}'
     - desc: PKGBUILD
-      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{archbase}'
+      url: 'https://git.archlinux.org/svntogit/{archrepo}.git/tree/trunk/PKGBUILD?h=packages/{srcname}'
     - desc: Package information (x86_64)
-      url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{name}/'
+      url: 'https://www.archlinux.org/packages/{subrepo}/x86_64/{binname}/'
   tags: [ all, production ]

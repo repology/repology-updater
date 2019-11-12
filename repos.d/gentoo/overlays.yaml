@@ -22,9 +22,9 @@
       url: https://github.com/pentoo/pentoo-overlay
   packagelinks:
     - desc: Port git directory
-      url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{category}/{name}'
+      url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{srcname}'
     - desc: View ebuild
-      url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{category}/{name}/{name}-{rawversion}.ebuild'
+      url: 'https://github.com/pentoo/pentoo-overlay/tree/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production, gentoo-overlays ]
 
 ###########################################################################

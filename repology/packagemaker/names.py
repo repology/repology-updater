@@ -50,6 +50,9 @@ class NameType:
     GENTOO_NAME: ClassVar[int] = 80
     GENTOO_FULL_NAME: ClassVar[int] = 81
 
+    ARCH_NAME: ClassVar[int] = 90
+    ARCH_BASENAME: ClassVar[int] = 91
+
     # Common pattern "NOBN" = Name + Optional BaseName
     PATTERN_NOBN_NAME: ClassVar[int] = 200
     PATTERN_NOBN_BASENAME: ClassVar[int] = 201
@@ -59,9 +62,6 @@ class NameType:
 
     SOLUS_NAME: ClassVar[int] = PATTERN_NOBN_NAME
     SOLUS_SOURCE_NAME: ClassVar[int] = PATTERN_NOBN_BASENAME
-
-    ARCH_NAME: ClassVar[int] = PATTERN_NOBN_NAME
-    ARCH_BASENAME: ClassVar[int] = PATTERN_NOBN_BASENAME
 
     SLITAZ_NAME: ClassVar[int] = PATTERN_NOBN_NAME
     SLITAZ_META: ClassVar[int] = PATTERN_NOBN_BASENAME
@@ -104,16 +104,18 @@ _MAPPINGS = [
     ),
     # Wikidata
     _NameMapping(
-        keyname=NameType.WIKIDATA_ENTITY,
+        name=NameType.WIKIDATA_ENTITY,
         visiblename=NameType.WIKIDATA_LABEL,
         projectname_seed=NameType.WIKIDATA_REPOLOGY_PROJECT_NAME,
+        trackname=NameType.WIKIDATA_ENTITY,
     ),
     # *BSD
     _NameMapping(
-        name=NameType.BSD_PKGNAME,
-        keyname=NameType.BSD_ORIGIN,
+        srcname=NameType.BSD_ORIGIN,
+        binname=NameType.BSD_PKGNAME,
         visiblename=NameType.BSD_ORIGIN,
         projectname_seed=NameType.BSD_PKGNAME,
+        trackname=NameType.BSD_ORIGIN,
     ),
     # Npackd
     _NameMapping(
@@ -122,6 +124,7 @@ _MAPPINGS = [
         basename=NameType.NPACKD_LASTNAME,
         visiblename=NameType.NPACKD_FULLNAME,
         projectname_seed=NameType.NPACKD_LASTNAME,
+        trackname=NameType.NPACKD_FULLNAME,
     ),
     # Debian
     _NameMapping(
@@ -145,16 +148,31 @@ _MAPPINGS = [
     # Wiki
     _NameMapping(
         name=NameType.WIKI_TITLE,
-        keyname=NameType.WIKI_PAGE,
         visiblename=NameType.WIKI_TITLE,
         projectname_seed=NameType.WIKI_TITLE,
+        trackname=NameType.WIKI_PAGE,
     ),
     # Gentoo
     _NameMapping(
-        name=NameType.GENTOO_NAME,
-        keyname=NameType.GENTOO_FULL_NAME,
+        srcname=NameType.GENTOO_FULL_NAME,
         visiblename=NameType.GENTOO_FULL_NAME,
         projectname_seed=NameType.GENTOO_NAME,
+        trackname=NameType.GENTOO_FULL_NAME,
+    ),
+    # Arch
+    _NameMapping(
+        srcname=NameType.ARCH_NAME,
+        binname=NameType.ARCH_NAME,
+        trackname=NameType.ARCH_NAME,
+        visiblename=NameType.ARCH_NAME,
+        projectname_seed=NameType.ARCH_NAME,
+    ),
+    _NameMapping(
+        srcname=NameType.ARCH_BASENAME,
+        binname=NameType.ARCH_NAME,
+        trackname=NameType.ARCH_BASENAME,
+        visiblename=NameType.ARCH_NAME,
+        projectname_seed=NameType.ARCH_BASENAME,
     ),
     # Pattern NOBN
     _NameMapping(

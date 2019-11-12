@@ -19,9 +19,9 @@
       url: https://www.sabayon.org/
   packagelinks:
     - desc: Package directory on GitHub
-      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{category}/{name}'
+      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{srcnae}'
     - desc: Ebuild on GitHub
-      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{category}/{name}/{name}-{rawversion}.ebuild'
+      url: 'https://github.com/Sabayon/sabayon-distro/tree/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production ]
 
 - name: sabayon_for_gentoo
@@ -42,7 +42,7 @@
       url: https://www.sabayon.org/
   packagelinks:
     - desc: Package directory on GitHub
-      url: 'https://github.com/Sabayon/for-gentoo/tree/master/{category}/{name}'
+      url: 'https://github.com/Sabayon/for-gentoo/tree/master/{srcname}'
     - desc: Ebuild on GitHub
-      url: 'https://github.com/Sabayon/for-gentoo/tree/master/{category}/{name}/{name}-{rawversion}.ebuild'
+      url: 'https://github.com/Sabayon/for-gentoo/tree/master/{srcname}/{srcname|basename}-{rawversion}.ebuild'
   tags: [ all, production ]

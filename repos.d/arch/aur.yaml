@@ -26,9 +26,9 @@
       url: https://aur.archlinux.org/
   packagelinks:
     - desc: AUR package details
-      url: 'https://aur.archlinux.org/packages/{name}'
+      url: 'https://aur.archlinux.org/packages/{binname}'
     - desc: View PKGBUILD
-      url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={name}'
+      url: 'https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h={binname}'
     - desc: ArchWiki search
-      url: 'https://wiki.archlinux.org/index.php/Special:Search?search={name}'
+      url: 'https://wiki.archlinux.org/index.php/Special:Search?search={binname}'
   tags: [ all, production ]
