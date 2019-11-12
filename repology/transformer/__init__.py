@@ -183,10 +183,10 @@ class PackageTransformer:
 
         if package_context.warnings and not package.has_flag(PackageFlags.REMOVE):
             for warning in package_context.warnings:
-                print('Rule warning for {} ({}) in {}: {}'.format(package.effname, package.name, package.repo, warning), file=sys.stderr)
+                print('Rule warning for {} ({}) in {}: {}'.format(package.effname, package.trackname or '???', package.repo, warning), file=sys.stderr)
 
         if package.has_flag(PackageFlags.TRACE):
-            print('Rule trace for {} ({}) {} in {}'.format(package.effname, package.name, package.version, package.repo), file=sys.stderr)
+            print('Rule trace for {} ({}) {} in {}'.format(package.effname, package.trackname or '???', package.version, package.repo), file=sys.stderr)
             for rulenum in package_context.matched_rules:
                 print('{:5d} {}'.format(rulenum, self._rules[rulenum].pretty), file=sys.stderr)
 
