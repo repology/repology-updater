@@ -25,8 +25,17 @@ __all__ = ['NameType', 'NameMapper']
 class NameType:
     IGNORED: ClassVar[int] = 0  # special type which is always ignored
 
+    # Unclassified, process all cases and remove
     GENERIC_PKGNAME: ClassVar[int] = 10
 
+    # Common patterns: single name
+    GENERIC_SN_NAME: ClassVar[int] = 1000
+
+    # Common patterns: name + optional basename
+    GENERIC_NOBN_NAME: ClassVar[int] = 1010
+    GENERIC_NOBN_BASENAME: ClassVar[int] = 1011
+
+    # Individual repos
     WIKIDATA_ENTITY: ClassVar[int] = 20
     WIKIDATA_LABEL: ClassVar[int] = 21
     WIKIDATA_REPOLOGY_PROJECT_NAME: ClassVar[int] = 22
@@ -56,29 +65,25 @@ class NameType:
     FDROID_NAME: ClassVar[int] = 100
     FDROID_ID: ClassVar[int] = 101
 
-    TERMUX_NAME: ClassVar[int] = 110
+    TERMUX_NAME: ClassVar[int] = GENERIC_SN_NAME
 
-    VCPKG_SOURCE: ClassVar[int] = 120
+    VCPKG_SOURCE: ClassVar[int] = GENERIC_SN_NAME
 
-    GOBOLINUX_RECIPE: ClassVar[int] = 130
+    GOBOLINUX_RECIPE: ClassVar[int] = GENERIC_SN_NAME
 
-    GUIX_NAME: ClassVar[int] = 140
+    GUIX_NAME: ClassVar[int] = GENERIC_SN_NAME
 
-    # Common pattern "NOBN" = Name + Optional BaseName
-    PATTERN_NOBN_NAME: ClassVar[int] = 200
-    PATTERN_NOBN_BASENAME: ClassVar[int] = 201
+    MSYS2_NAME: ClassVar[int] = GENERIC_NOBN_NAME
+    MSYS2_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
 
-    MSYS2_NAME: ClassVar[int] = PATTERN_NOBN_NAME
-    MSYS2_BASENAME: ClassVar[int] = PATTERN_NOBN_BASENAME
+    SOLUS_NAME: ClassVar[int] = GENERIC_NOBN_NAME
+    SOLUS_SOURCE_NAME: ClassVar[int] = GENERIC_NOBN_BASENAME
 
-    SOLUS_NAME: ClassVar[int] = PATTERN_NOBN_NAME
-    SOLUS_SOURCE_NAME: ClassVar[int] = PATTERN_NOBN_BASENAME
+    SLITAZ_NAME: ClassVar[int] = GENERIC_NOBN_NAME
+    SLITAZ_META: ClassVar[int] = GENERIC_NOBN_BASENAME
 
-    SLITAZ_NAME: ClassVar[int] = PATTERN_NOBN_NAME
-    SLITAZ_META: ClassVar[int] = PATTERN_NOBN_BASENAME
-
-    VOID_NAME: ClassVar[int] = PATTERN_NOBN_NAME
-    VOID_SOURCE: ClassVar[int] = PATTERN_NOBN_BASENAME
+    VOID_NAME: ClassVar[int] = GENERIC_NOBN_NAME
+    VOID_SOURCE: ClassVar[int] = GENERIC_NOBN_BASENAME
 
 
 @dataclass
@@ -113,33 +118,22 @@ _MAPPINGS = [
         visiblename=NameType.GENERIC_PKGNAME,
         projectname_seed=NameType.GENERIC_PKGNAME,
     ),
-    # GUIX
     _NameMapping(
-        name=NameType.GUIX_NAME,
-        trackname=NameType.GUIX_NAME,
-        visiblename=NameType.GUIX_NAME,
-        projectname_seed=NameType.GUIX_NAME,
+        name=NameType.GENERIC_NOBN_NAME,
+        visiblename=NameType.GENERIC_NOBN_NAME,
+        projectname_seed=NameType.GENERIC_NOBN_NAME,
     ),
-    # GoboLinux
     _NameMapping(
-        name=NameType.GOBOLINUX_RECIPE,
-        trackname=NameType.GOBOLINUX_RECIPE,
-        visiblename=NameType.GOBOLINUX_RECIPE,
-        projectname_seed=NameType.GOBOLINUX_RECIPE,
+        name=NameType.GENERIC_NOBN_NAME,
+        basename=NameType.GENERIC_NOBN_BASENAME,
+        visiblename=NameType.GENERIC_NOBN_NAME,
+        projectname_seed=NameType.GENERIC_NOBN_BASENAME,
     ),
-    # vcpkg
     _NameMapping(
-        name=NameType.VCPKG_SOURCE,
-        trackname=NameType.VCPKG_SOURCE,
-        visiblename=NameType.VCPKG_SOURCE,
-        projectname_seed=NameType.VCPKG_SOURCE,
-    ),
-    # Termux
-    _NameMapping(
-        name=NameType.TERMUX_NAME,
-        trackname=NameType.TERMUX_NAME,
-        visiblename=NameType.TERMUX_NAME,
-        projectname_seed=NameType.TERMUX_NAME,
+        name=NameType.GENERIC_SN_NAME,
+        trackname=NameType.GENERIC_SN_NAME,
+        visiblename=NameType.GENERIC_SN_NAME,
+        projectname_seed=NameType.GENERIC_SN_NAME,
     ),
     # Wikidata
     _NameMapping(
@@ -218,18 +212,6 @@ _MAPPINGS = [
         trackname=NameType.FDROID_ID,
         visiblename=NameType.FDROID_NAME,
         projectname_seed=NameType.FDROID_NAME,
-    ),
-    # Pattern NOBN
-    _NameMapping(
-        name=NameType.PATTERN_NOBN_NAME,
-        visiblename=NameType.PATTERN_NOBN_NAME,
-        projectname_seed=NameType.PATTERN_NOBN_NAME,
-    ),
-    _NameMapping(
-        name=NameType.PATTERN_NOBN_NAME,
-        basename=NameType.PATTERN_NOBN_BASENAME,
-        visiblename=NameType.PATTERN_NOBN_NAME,
-        projectname_seed=NameType.PATTERN_NOBN_BASENAME,
     ),
 ]
 
