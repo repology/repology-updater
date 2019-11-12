@@ -34,7 +34,7 @@ class TestParsers(unittest.TestCase):
         self.maxDiff = None
         self.packages = list(repoproc.iter_parse(reponames=['have_testdata']))
 
-    def check_package(self, name: str, reference: Dict[str, Any]) -> None:
+    def check_package(self, reference: Dict[str, Any]) -> None:
         reference_with_default: Dict[str, Any] = {
             # repo must be filled
             # family must be filled
@@ -77,40 +77,46 @@ class TestParsers(unittest.TestCase):
             'versionclass',
         ]
 
-        reference_with_default.update(reference)
-
-        def sort_lists(what: Dict[str, Any]) -> Dict[str, Any]:
+        def normalize_fields(what: Dict[str, Any]) -> Dict[str, Any]:
             output = {}
             for key, value in what.items():
-                if isinstance(value, list):
+                if key in ignored_fields:
+                    pass
+                elif isinstance(value, list):
                     output[key] = sorted(value)
                 else:
                     output[key] = value
 
             return output
 
+        reference_with_default.update(reference)
+        reference_with_default = normalize_fields(reference_with_default)
+
+        best_match = None
+        best_match_score = 0
+
         for package in self.packages:
-            if package.name == name:
-                actual_fields = package.__dict__
-                for field in ignored_fields:
-                    actual_fields.pop(field, None)
+            actual_fields = normalize_fields(package.__dict__)
 
-                self.assertEqual(
-                    sort_lists(actual_fields),
-                    sort_lists(reference_with_default)
-                )
-                return
+            score = sum(1 for key in actual_fields.keys() if reference_with_default[key] == actual_fields[key])
 
-        self.assertFalse('package not found')
+            if score > best_match_score:
+                best_match_score = score
+                best_match = package
+
+        if best_match is None:
+            self.assertFalse('package not found')
+
+        self.assertEqual(normalize_fields(best_match.__dict__), reference_with_default)
 
     def test_freebsd(self) -> None:
         self.check_package(
-            'vorbis-tools',
             {
                 'repo': 'freebsd',
                 'family': 'freebsd',
-                'name': 'vorbis-tools',
-                'keyname': 'audio/vorbis-tools',
+                'srcname': 'audio/vorbis-tools',
+                'binname': 'vorbis-tools',
+                'trackname': 'audio/vorbis-tools',
                 'visiblename': 'audio/vorbis-tools',
                 'projectname_seed': 'vorbis-tools',
                 'version': '1.4.0',
@@ -125,12 +131,11 @@ class TestParsers(unittest.TestCase):
 
     def test_gentoo(self) -> None:
         self.check_package(
-            'chromium-bsu',
             {
                 'repo': 'gentoo',
                 'family': 'gentoo',
-                'name': 'chromium-bsu',
-                'keyname': 'games-action/chromium-bsu',
+                'srcname': 'games-action/chromium-bsu',
+                'trackname': 'games-action/chromium-bsu',
                 'visiblename': 'games-action/chromium-bsu',
                 'projectname_seed': 'chromium-bsu',
                 'version': '0.9.15.1',
@@ -145,12 +150,11 @@ class TestParsers(unittest.TestCase):
             }
         )
         self.check_package(
-            'asciinema',
             {
                 'repo': 'gentoo',
                 'family': 'gentoo',
-                'name': 'asciinema',
-                'keyname': 'app-misc/asciinema',
+                'srcname': 'app-misc/asciinema',
+                'trackname': 'app-misc/asciinema',
                 'visiblename': 'app-misc/asciinema',
                 'projectname_seed': 'asciinema',
                 'version': '1.3.0',
@@ -165,12 +169,11 @@ class TestParsers(unittest.TestCase):
             }
         )
         self.check_package(
-            'away',
             {
                 'repo': 'gentoo',
                 'family': 'gentoo',
-                'name': 'away',
-                'keyname': 'app-misc/away',
+                'srcname': 'app-misc/away',
+                'trackname': 'app-misc/away',
                 'visiblename': 'app-misc/away',
                 'projectname_seed': 'away',
                 'version': '0.9.5',
@@ -185,12 +188,11 @@ class TestParsers(unittest.TestCase):
             }
         )
         self.check_package(
-            'aspell',
             {
                 'repo': 'gentoo',
                 'family': 'gentoo',
-                'name': 'aspell',
-                'keyname': 'app-test/aspell',
+                'srcname': 'app-test/aspell',
+                'trackname': 'app-test/aspell',
                 'visiblename': 'app-test/aspell',
                 'projectname_seed': 'aspell',
                 'version': '0.60.7_rc1',
@@ -207,13 +209,13 @@ class TestParsers(unittest.TestCase):
 
     def test_arch(self) -> None:
         self.check_package(
-            'zlib',
             {
                 'repo': 'arch',
                 'family': 'arch',
                 'subrepo': 'core',
-                'name': 'zlib',
-                'basename': 'zlib',
+                'srcname': 'zlib',
+                'binname': 'zlib',
+                'trackname': 'zlib',
                 'visiblename': 'zlib',
                 'projectname_seed': 'zlib',
                 'version': '1.2.8',
@@ -224,13 +226,11 @@ class TestParsers(unittest.TestCase):
                 'homepage': 'http://www.zlib.net/',
                 'licenses': ['custom'],
                 'maintainers': [],
-                'extrafields': {'base': 'zlib'},
             }
         )
 
     def test_cpan(self) -> None:
         self.check_package(
-            'Acme-Brainfuck',
             {
                 'repo': 'cpan',
                 'family': 'cpan',
@@ -248,7 +248,6 @@ class TestParsers(unittest.TestCase):
 
     def test_debian(self) -> None:
         self.check_package(
-            'a52dec',
             {
                 'repo': 'debian_unstable',
                 'subrepo': 'main',
@@ -272,7 +271,6 @@ class TestParsers(unittest.TestCase):
 
     def test_gobolinux(self) -> None:
         self.check_package(
-            'AutoFS',
             {
                 'repo': 'gobolinux',
                 'family': 'gobolinux',
@@ -295,7 +293,6 @@ class TestParsers(unittest.TestCase):
     def test_slackbuilds(self) -> None:
         # multiline DOWNLOAD
         self.check_package(
-            'virtualbox',
             {
                 'repo': 'slackbuilds',
                 'family': 'slackbuilds',
@@ -318,7 +315,6 @@ class TestParsers(unittest.TestCase):
         )
         # different DOWNLOAD and DOWNLOAD_x86_64
         self.check_package(
-            'baudline',
             {
                 'repo': 'slackbuilds',
                 'family': 'slackbuilds',
@@ -339,7 +335,6 @@ class TestParsers(unittest.TestCase):
         )
         # DOWNLOAD_x86_64 is UNSUPPORTED
         self.check_package(
-            'teamviewer',
             {
                 'repo': 'slackbuilds',
                 'family': 'slackbuilds',
@@ -359,7 +354,6 @@ class TestParsers(unittest.TestCase):
         )
         # DOWNLOAD is UNSUPPORTED
         self.check_package(
-            'oracle-xe',
             {
                 'repo': 'slackbuilds',
                 'family': 'slackbuilds',
@@ -379,7 +373,6 @@ class TestParsers(unittest.TestCase):
         )
         # DOWNLOAD_x86_64 is UNTESTED
         self.check_package(
-            'kforth',
             {
                 'repo': 'slackbuilds',
                 'family': 'slackbuilds',
