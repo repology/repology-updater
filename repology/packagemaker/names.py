@@ -56,6 +56,8 @@ class NameType:
     FDROID_NAME: ClassVar[int] = 100
     FDROID_ID: ClassVar[int] = 101
 
+    TERMUX_NAME: ClassVar[int] = 110
+
     # Common pattern "NOBN" = Name + Optional BaseName
     PATTERN_NOBN_NAME: ClassVar[int] = 200
     PATTERN_NOBN_BASENAME: ClassVar[int] = 201
@@ -104,6 +106,13 @@ _MAPPINGS = [
         name=NameType.GENERIC_PKGNAME,
         visiblename=NameType.GENERIC_PKGNAME,
         projectname_seed=NameType.GENERIC_PKGNAME,
+    ),
+    # Termux
+    _NameMapping(
+        name=NameType.TERMUX_NAME,
+        trackname=NameType.TERMUX_NAME,
+        visiblename=NameType.TERMUX_NAME,
+        projectname_seed=NameType.TERMUX_NAME,
     ),
     # Wikidata
     _NameMapping(

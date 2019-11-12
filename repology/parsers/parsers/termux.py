@@ -35,7 +35,7 @@ class TermuxJsonParser(Parser):
             for packagedata in json.load(jsonfile):
                 pkg = factory.begin()
 
-                pkg.add_name(packagedata['name'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(packagedata['name'], NameType.TERMUX_NAME)
 
                 if not packagedata['version']:
                     pkg.log('empty version', Logger.ERROR)
