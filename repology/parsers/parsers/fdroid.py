@@ -31,11 +31,12 @@ class FDroidParser(Parser):
         for application in root.findall('application'):
             app = factory.begin()
 
-            app.add_name(application.find('name').text, NameType.GENERIC_PKGNAME)  # type: ignore
+            app.add_name(application.find('name').text, NameType.FDROID_NAME)  # type: ignore
+            app.add_name(application.find('id').text, NameType.FDROID_ID)  # type: ignore
             app.add_licenses(application.find('license').text)  # type: ignore
             app.add_categories(application.find('category').text)  # type: ignore
             app.add_homepages(application.find('web').text)  # type: ignore
-            app.set_extra_field('id', application.find('id').text)  # type: ignore
+            app.set_summary(application.find('summary').text)  # type: ignore
 
             upstream_version_code = int(application.find('marketvercode').text)  # type: ignore
             for package in application.findall('package'):

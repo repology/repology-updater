@@ -53,6 +53,9 @@ class NameType:
     ARCH_NAME: ClassVar[int] = 90
     ARCH_BASENAME: ClassVar[int] = 91
 
+    FDROID_NAME: ClassVar[int] = 100
+    FDROID_ID: ClassVar[int] = 101
+
     # Common pattern "NOBN" = Name + Optional BaseName
     PATTERN_NOBN_NAME: ClassVar[int] = 200
     PATTERN_NOBN_BASENAME: ClassVar[int] = 201
@@ -172,6 +175,13 @@ _MAPPINGS = [
         trackname=NameType.ARCH_BASENAME,
         visiblename=NameType.ARCH_NAME,
         projectname_seed=NameType.ARCH_BASENAME,
+    ),
+    # F-Droid
+    _NameMapping(
+        name=NameType.FDROID_ID,
+        trackname=NameType.FDROID_ID,
+        visiblename=NameType.FDROID_NAME,
+        projectname_seed=NameType.FDROID_NAME,
     ),
     # Pattern NOBN
     _NameMapping(

@@ -18,5 +18,5 @@
       url: https://f-droid.org/
   packagelinks:
     - desc: F-Droid.org page
-      url: 'https://f-droid.org/packages/{id}/'
+      url: 'https://f-droid.org/packages/{name}/'
   tags: [ all, production ]
