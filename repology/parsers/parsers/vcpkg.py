@@ -44,22 +44,26 @@ class VcpkgGitParser(Parser):
 
             pkg = factory.begin()
 
-            pkg.add_name(pkgdir, NameType.GENERIC_PKGNAME)
+            pkg.add_name(pkgdir, NameType.VCPKG_SOURCE)
 
             with open(controlpath, 'r', encoding='utf-8', errors='ignore') as controlfile:
                 for line in controlfile:
                     line = line.strip()
-                    if line.startswith('Version:') and not pkg.version:
-                        version = line[8:].strip()
+                    if line.startswith('Source:'):
+                        source = line.split(':', 1)[1].strip()
+                        if source != pkgdir:
+                            raise RuntimeError(f'sanity check failed: source {source} != directory {pkgdir}')
+                    elif line.startswith('Version:') and not pkg.version:
+                        version = line.split(':', 1)[1].strip()
                         if re.match('[0-9]{4}[.-][0-9]{1,2}[.-][0-9]{1,2}', version):
                             pkg.set_version(version)
                             pkg.set_flags(PackageFlags.IGNORE)
                         else:
                             pkg.set_version(version, normalize_version)
                     elif line.startswith('Description:') and not pkg.summary:
-                        pkg.set_summary(line[12:])
+                        pkg.set_summary(line.split(':', 1)[1].strip())
                     elif line.startswith('Homepage:'):
-                        pkg.add_homepages(line[9:])
+                        pkg.add_homepages(line.split(':', 1)[1].strip())
 
                 if pkg.version is None:
                     pkg.log('empty version', Logger.ERROR)

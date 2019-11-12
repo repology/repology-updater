@@ -58,6 +58,8 @@ class NameType:
 
     TERMUX_NAME: ClassVar[int] = 110
 
+    VCPKG_SOURCE: ClassVar[int] = 120
+
     # Common pattern "NOBN" = Name + Optional BaseName
     PATTERN_NOBN_NAME: ClassVar[int] = 200
     PATTERN_NOBN_BASENAME: ClassVar[int] = 201
@@ -106,6 +108,13 @@ _MAPPINGS = [
         name=NameType.GENERIC_PKGNAME,
         visiblename=NameType.GENERIC_PKGNAME,
         projectname_seed=NameType.GENERIC_PKGNAME,
+    ),
+    # vcpkg
+    _NameMapping(
+        name=NameType.VCPKG_SOURCE,
+        trackname=NameType.VCPKG_SOURCE,
+        visiblename=NameType.VCPKG_SOURCE,
+        projectname_seed=NameType.VCPKG_SOURCE,
     ),
     # Termux
     _NameMapping(
