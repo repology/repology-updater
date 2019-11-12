@@ -59,6 +59,9 @@ class NameType:
     GENTOO_NAME: ClassVar[int] = 80
     GENTOO_FULL_NAME: ClassVar[int] = 81
 
+    REACTOS_FILENAME: ClassVar[int] = 90
+    REACTOS_NAME: ClassVar[int] = 91
+
     FDROID_NAME: ClassVar[int] = 100
     FDROID_ID: ClassVar[int] = 101
 
@@ -160,6 +163,13 @@ _MAPPINGS = [
         visiblename=NameType.NPACKD_TITLE,
         projectname_seed=NameType.NPACKD_LASTNAME,
         trackname=NameType.NPACKD_FULLNAME,
+    ),
+    # ReactOS
+    _NameMapping(
+        name=NameType.REACTOS_FILENAME,
+        trackname=NameType.REACTOS_FILENAME,
+        visiblename=NameType.REACTOS_NAME,
+        projectname_seed=NameType.REACTOS_FILENAME,
     ),
     # Debian
     _NameMapping(

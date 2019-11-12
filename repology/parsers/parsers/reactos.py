@@ -39,7 +39,7 @@ class RappsParser(Parser):
 
                 section = config['Section']
 
-                pkg.add_name(filename[:-4], NameType.GENERIC_PKGNAME)
+                pkg.add_name(filename[:-4], NameType.REACTOS_FILENAME)
 
                 if section.get('Version') is None:
                     pkg.log('no version defined', Logger.ERROR)
@@ -51,6 +51,6 @@ class RappsParser(Parser):
                 pkg.add_downloads(section['URLDownload'])
                 pkg.add_licenses(section.get('License'))
 
-                pkg.set_extra_field('longname', section['Name'])
+                pkg.add_name(section['Name'], NameType.REACTOS_NAME)
 
                 yield pkg
