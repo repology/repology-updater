@@ -50,9 +50,6 @@ class NameType:
     DEBIAN_PACKAGE: ClassVar[int] = 50
     OPENWRT_SOURCEDIR: ClassVar[int] = 51
 
-    CYGWIN_PACKAGE_NAME: ClassVar[int] = 60
-    CYGWIN_SUBPACKAGE_NAME: ClassVar[int] = 61
-
     WIKI_TITLE: ClassVar[int] = 70
     WIKI_PAGE: ClassVar[int] = 71
 
@@ -103,6 +100,9 @@ class NameType:
 
     ARCH_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     ARCH_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
+
+    CYGWIN_PACKAGE_NAME: ClassVar[int] = GENERIC_NOBN_BASENAME
+    CYGWIN_SUBPACKAGE_NAME: ClassVar[int] = GENERIC_NOBN_NAME
 
 
 @dataclass
@@ -198,13 +198,6 @@ _MAPPINGS = [
         basename=NameType.OPENWRT_SOURCEDIR,
         visiblename=NameType.DEBIAN_PACKAGE,
         projectname_seed=NameType.OPENWRT_SOURCEDIR,
-    ),
-    # Cygwin
-    _NameMapping(
-        name=NameType.CYGWIN_SUBPACKAGE_NAME,
-        basename=NameType.CYGWIN_PACKAGE_NAME,
-        visiblename=NameType.CYGWIN_SUBPACKAGE_NAME,
-        projectname_seed=NameType.CYGWIN_PACKAGE_NAME,
     ),
     # Wiki
     _NameMapping(
