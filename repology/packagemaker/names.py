@@ -34,7 +34,7 @@ class NameType:
     BSD_PKGNAME: ClassVar[int] = 30
     BSD_ORIGIN: ClassVar[int] = 31
 
-    NPACKD_TITLE: ClassVar[int] = IGNORED
+    NPACKD_TITLE: ClassVar[int] = 40
     NPACKD_FULLNAME: ClassVar[int] = 41
     NPACKD_LASTNAME: ClassVar[int] = 42
 
@@ -119,10 +119,9 @@ _MAPPINGS = [
     ),
     # Npackd
     _NameMapping(
-        # XXX: add support for NPACKD_TITLE as visible name
         name=NameType.NPACKD_FULLNAME,
         basename=NameType.NPACKD_LASTNAME,
-        visiblename=NameType.NPACKD_FULLNAME,
+        visiblename=NameType.NPACKD_TITLE,
         projectname_seed=NameType.NPACKD_LASTNAME,
         trackname=NameType.NPACKD_FULLNAME,
     ),
