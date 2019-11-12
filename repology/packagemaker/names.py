@@ -147,7 +147,7 @@ _MAPPINGS = [
     ),
     # Wiki
     _NameMapping(
-        name=NameType.WIKI_TITLE,
+        name=NameType.WIKI_PAGE,
         visiblename=NameType.WIKI_TITLE,
         projectname_seed=NameType.WIKI_TITLE,
         trackname=NameType.WIKI_PAGE,
