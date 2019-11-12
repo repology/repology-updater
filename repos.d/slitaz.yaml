@@ -19,9 +19,9 @@
       url: http://pkg.slitaz.org/
   packagelinks:
     - desc: Package information
-      url: 'http://pkg.slitaz.org/?info={name}'
+      url: 'http://pkg.slitaz.org/?info={binname}'
     - desc: Package receipt
-      url: 'http://pkg.slitaz.org/?receipt={name}'
+      url: 'http://pkg.slitaz.org/?receipt={binname}'
   tags: [ all, production, slitaz ]
 
 - name: slitaz_next
@@ -43,9 +43,9 @@
       url: http://pkg.slitaz.org/
   packagelinks:
     - desc: Package information
-      url: 'http://cook.slitaz.org/next/{name}'
+      url: 'http://cook.slitaz.org/next/{binname}'
     - desc: Package receipt
-      url: 'http://cook.slitaz.org/next/{name}/receipt'
+      url: 'http://cook.slitaz.org/next/{srcname}/receipt'
     - desc: Build log
-      url: 'http://cook.slitaz.org/next/{name}/log/'
+      url: 'http://cook.slitaz.org/next/{srcname}/log/'
   tags: [ all, production, slitaz ]

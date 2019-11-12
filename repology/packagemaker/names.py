@@ -59,9 +59,6 @@ class NameType:
     GENTOO_NAME: ClassVar[int] = 80
     GENTOO_FULL_NAME: ClassVar[int] = 81
 
-    ARCH_NAME: ClassVar[int] = 90
-    ARCH_BASENAME: ClassVar[int] = 91
-
     FDROID_NAME: ClassVar[int] = 100
     FDROID_ID: ClassVar[int] = 101
 
@@ -84,6 +81,9 @@ class NameType:
 
     VOID_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     VOID_SOURCE: ClassVar[int] = GENERIC_NOBN_BASENAME
+
+    ARCH_NAME: ClassVar[int] = GENERIC_NOBN_NAME
+    ARCH_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
 
 
 @dataclass
@@ -119,13 +119,16 @@ _MAPPINGS = [
         projectname_seed=NameType.GENERIC_PKGNAME,
     ),
     _NameMapping(
-        name=NameType.GENERIC_NOBN_NAME,
+        srcname=NameType.GENERIC_NOBN_NAME,
+        binname=NameType.GENERIC_NOBN_NAME,
+        trackname=NameType.GENERIC_NOBN_NAME,
         visiblename=NameType.GENERIC_NOBN_NAME,
         projectname_seed=NameType.GENERIC_NOBN_NAME,
     ),
     _NameMapping(
-        name=NameType.GENERIC_NOBN_NAME,
-        basename=NameType.GENERIC_NOBN_BASENAME,
+        srcname=NameType.GENERIC_NOBN_BASENAME,
+        binname=NameType.GENERIC_NOBN_NAME,
+        trackname=NameType.GENERIC_NOBN_BASENAME,
         visiblename=NameType.GENERIC_NOBN_NAME,
         projectname_seed=NameType.GENERIC_NOBN_BASENAME,
     ),
@@ -190,21 +193,6 @@ _MAPPINGS = [
         visiblename=NameType.GENTOO_FULL_NAME,
         projectname_seed=NameType.GENTOO_NAME,
         trackname=NameType.GENTOO_FULL_NAME,
-    ),
-    # Arch
-    _NameMapping(
-        srcname=NameType.ARCH_NAME,
-        binname=NameType.ARCH_NAME,
-        trackname=NameType.ARCH_NAME,
-        visiblename=NameType.ARCH_NAME,
-        projectname_seed=NameType.ARCH_NAME,
-    ),
-    _NameMapping(
-        srcname=NameType.ARCH_BASENAME,
-        binname=NameType.ARCH_NAME,
-        trackname=NameType.ARCH_BASENAME,
-        visiblename=NameType.ARCH_NAME,
-        projectname_seed=NameType.ARCH_BASENAME,
     ),
     # F-Droid
     _NameMapping(

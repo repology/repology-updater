@@ -26,7 +26,7 @@
       url: https://github.com/void-linux/void-packages
   packagelinks:
     - desc: Port directory in git repo
-      url: 'https://github.com/void-linux/void-packages/tree/master/srcpkgs/{name}'
+      url: 'https://github.com/void-linux/void-packages/tree/master/srcpkgs/{srcname}'
     - desc: Template file
-      url: 'https://github.com/void-linux/void-packages/blob/master/srcpkgs/{name}/template'
+      url: 'https://github.com/void-linux/void-packages/blob/master/srcpkgs/{srcname}/template'
   tags: [ all, production, void ]

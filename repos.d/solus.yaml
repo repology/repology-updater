@@ -18,7 +18,7 @@
       url: https://getsol.us/home/
   packagelinks:
     - desc: Git repository
-      url: 'https://dev.getsol.us/source/{basename}/'
+      url: 'https://dev.getsol.us/source/{srcname}/'
     - desc: package.yml
-      url: 'https://dev.getsol.us/source/{basename}/browse/master/package.yml'
+      url: 'https://dev.getsol.us/source/{srcname}/browse/master/package.yml'
   tags: [ all, production ]

@@ -27,9 +27,9 @@
       url: http://repo.msys2.org/mingw/
   packagelinks:
     - desc: Package source
-      url: 'https://github.com/msys2/MINGW-packages/tree/master/{basename}'
+      url: 'https://github.com/msys2/MINGW-packages/tree/master/{srcname}'
     - desc: PKGBUILD
-      url: 'https://github.com/msys2/MINGW-packages/blob/master/{basename}/PKGBUILD'
+      url: 'https://github.com/msys2/MINGW-packages/blob/master/{srcname}/PKGBUILD'
   tags: [ all, production, msys2 ]
 
 - name: msys2_msys2
@@ -58,7 +58,7 @@
       url: http://repo.msys2.org/msys/
   packagelinks:
     - desc: Package source
-      url: 'https://github.com/msys2/MSYS2-packages/tree/master/{basename}'
+      url: 'https://github.com/msys2/MSYS2-packages/tree/master/{srcname}'
     - desc: PKGBUILD
-      url: 'https://github.com/msys2/MSYS2-packages/blob/master/{basename}/PKGBUILD'
+      url: 'https://github.com/msys2/MSYS2-packages/blob/master/{srcname}/PKGBUILD'
   tags: [ all, production, msys2 ]
