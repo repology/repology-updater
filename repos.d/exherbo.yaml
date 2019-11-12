@@ -88,9 +88,9 @@
       url: http://git.exherbo.org/summer/
   packagelinks:
     - desc: Package details
-      url: 'https://git.exherbo.org/summer/packages/{category}/{name}/index.html'
+      url: 'https://git.exherbo.org/summer/packages/{srcname}/index.html'
     - desc: Package repository
-      url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{category}/{name}'
+      url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{srcname}'
     - desc: Exheres file
-      url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{category}/{name}/{name}-{rawversion}.exheres-0'
+      url: 'https://git.exherbo.org/{subrepo}.git/tree/packages/{srcname}/{srcname|basename}-{rawversion}.exheres-0'
   tags: [ all, production ]
