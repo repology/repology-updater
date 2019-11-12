@@ -60,6 +60,8 @@ class NameType:
 
     VCPKG_SOURCE: ClassVar[int] = 120
 
+    GOBOLINUX_RECIPE: ClassVar[int] = 130
+
     # Common pattern "NOBN" = Name + Optional BaseName
     PATTERN_NOBN_NAME: ClassVar[int] = 200
     PATTERN_NOBN_BASENAME: ClassVar[int] = 201
@@ -108,6 +110,13 @@ _MAPPINGS = [
         name=NameType.GENERIC_PKGNAME,
         visiblename=NameType.GENERIC_PKGNAME,
         projectname_seed=NameType.GENERIC_PKGNAME,
+    ),
+    # GoboLinux
+    _NameMapping(
+        name=NameType.GOBOLINUX_RECIPE,
+        trackname=NameType.GOBOLINUX_RECIPE,
+        visiblename=NameType.GOBOLINUX_RECIPE,
+        projectname_seed=NameType.GOBOLINUX_RECIPE,
     ),
     # vcpkg
     _NameMapping(

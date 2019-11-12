@@ -40,12 +40,12 @@ def _expand_mirrors(url: str) -> str:
 class GoboLinuxGitParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         trunk_path = os.path.join(path, 'trunk')
-        for package_name in os.listdir(trunk_path):
+        for recipe_name in os.listdir(trunk_path):
             pkg = factory.begin()
 
-            pkg.add_name(package_name, NameType.GENERIC_PKGNAME)
+            pkg.add_name(recipe_name, NameType.GOBOLINUX_RECIPE)
 
-            package_path = os.path.join(trunk_path, package_name)
+            package_path = os.path.join(trunk_path, recipe_name)
 
             maxversion: Optional[str] = None
             for version_name in os.listdir(package_path):
@@ -70,7 +70,7 @@ class GoboLinuxGitParser(Parser):
                             if '$' not in download:
                                 pkg.add_downloads(download.strip('"'))
                             else:
-                                factory.log('Recipe for {}/{} skipped, unhandled URL substitute found'.format(package_name, maxversion), severity=Logger.ERROR)
+                                factory.log('Recipe for {}/{} skipped, unhandled URL substitute found'.format(recipe_name, maxversion), severity=Logger.ERROR)
 
             if os.path.isfile(description_path):
                 with open(description_path, 'r', encoding='utf-8', errors='ignore') as description:
@@ -83,7 +83,7 @@ class GoboLinuxGitParser(Parser):
                             current_tag = match.group(1)
                             data[current_tag] = match.group(2)
                         elif current_tag is None:
-                            factory.log('Description for {}/{} skipped, dumb format'.format(package_name, maxversion), severity=Logger.ERROR)
+                            factory.log('Description for {}/{} skipped, dumb format'.format(recipe_name, maxversion), severity=Logger.ERROR)
                             break
                         elif line:
                             if data[current_tag]:

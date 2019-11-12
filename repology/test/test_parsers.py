@@ -275,6 +275,7 @@ class TestParsers(unittest.TestCase):
                 'repo': 'gobolinux',
                 'family': 'gobolinux',
                 'name': 'AutoFS',
+                'trackname': 'AutoFS',
                 'visiblename': 'AutoFS',
                 'projectname_seed': 'AutoFS',
                 'version': '5.0.5',
