@@ -175,7 +175,6 @@ _MAPPINGS = [
     # Npackd
     _NameMapping(
         name=NameType.NPACKD_FULLNAME,
-        basename=NameType.NPACKD_LASTNAME,
         visiblename=NameType.NPACKD_TITLE,
         projectname_seed=NameType.NPACKD_LASTNAME,
         trackname=NameType.NPACKD_FULLNAME,
