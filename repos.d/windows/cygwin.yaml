@@ -22,7 +22,7 @@
       url: https://cygwin.com/packages/
   packagelinks:
     - desc: Package details
-      url: 'https://cygwin.com/packages/summary/{name}.html'
+      url: 'https://cygwin.com/packages/summary/{binname}.html'
     # XXX: there's no knowing whether a package is noarch or arch-dependent, so
     # not using the following entries as many of them would be broken;
     # However, if we support link checking for generated links (#722), this
