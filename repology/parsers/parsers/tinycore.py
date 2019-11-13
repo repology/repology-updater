@@ -55,7 +55,7 @@ class TczInfoParser(Parser):
             with factory.begin(filename) as pkg:
                 data = _parse_infofile(os.path.join(path, filename))
 
-                pkg.add_name(filename[:-9], NameType.GENERIC_PKGNAME)
+                pkg.add_name(filename[:-9], NameType.UNSUPPORTED)
                 pkg.set_version(data['version'])
                 pkg.set_summary(data['description'])
 

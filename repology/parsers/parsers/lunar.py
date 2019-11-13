@@ -32,7 +32,7 @@ class LunarDistrowatchParser(Parser):
 
                 name, version = line.rsplit('^', 1)
 
-                pkg.add_name(name, NameType.GENERIC_PKGNAME)
+                pkg.add_name(name, NameType.UNSUPPORTED)
                 pkg.set_version(version)
 
                 yield pkg

@@ -80,7 +80,7 @@ class FinkGitParser(Parser):
                     if nestedkey in info:
                         info.update(_parse_info(info[nestedkey]))
 
-                pkg.add_name(info['package'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(info['package'], NameType.UNSUPPORTED)
                 pkg.set_version(info['version'])
 
                 if '%' in info['package']:
@@ -121,7 +121,7 @@ class FinkPdbParser(Parser):
 
         for row in lxml.html.parse(path).getroot().xpath('.//table[@class="pdb"]')[0].xpath('./tr[@class="package"]'):
             with factory.begin() as pkg:
-                pkg.add_name(row.xpath('./td[1]/a')[0].text, NameType.GENERIC_PKGNAME)
+                pkg.add_name(row.xpath('./td[1]/a')[0].text, NameType.UNSUPPORTED)
                 pkg.set_version(row.xpath('./td[2]')[0].text, normalize_version)
                 pkg.set_summary(row.xpath('./td[3]')[0].text)
 

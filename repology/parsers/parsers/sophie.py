@@ -32,7 +32,7 @@ class SophieHTMLParser(Parser):
 
             pkg = factory.begin()
 
-            pkg.add_name(nevra[0], NameType.GENERIC_PKGNAME)
+            pkg.add_name(nevra[0], NameType.UNSUPPORTED)
             pkg.set_version(nevra[2])
             pkg.set_rawversion(nevra_construct(None, nevra[1], nevra[2], nevra[3]))
 

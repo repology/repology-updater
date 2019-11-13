@@ -30,11 +30,11 @@ class AnityaApiParser(Parser):
                 pkg = factory.begin()
 
                 if project['backend'] == 'CPAN (perl)':
-                    pkg.add_name('perl:' + project['name'], NameType.GENERIC_PKGNAME)
+                    pkg.add_name('perl:' + project['name'], NameType.UNSUPPORTED)
                 elif project['backend'] == 'Rubygems':
-                    pkg.add_name('ruby:' + project['name'], NameType.GENERIC_PKGNAME)
+                    pkg.add_name('ruby:' + project['name'], NameType.UNSUPPORTED)
                 else:
-                    pkg.add_name(project['name'], NameType.GENERIC_PKGNAME)
+                    pkg.add_name(project['name'], NameType.UNSUPPORTED)
 
                 pkg.set_version(project['version'])
 

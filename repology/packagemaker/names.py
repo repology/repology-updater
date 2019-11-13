@@ -24,6 +24,7 @@ __all__ = ['NameType', 'NameMapper']
 
 class NameType:
     IGNORED: ClassVar[int] = 0  # special type which is always ignored
+    UNSUPPORTED: ClassVar[int] = 1  # special type which always fails
 
     # Unclassified, process all cases and remove
     GENERIC_PKGNAME: ClassVar[int] = 10
