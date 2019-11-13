@@ -210,6 +210,9 @@ schemas = {
                     # gentoo parser
                     'require_md5cache_metadata': bool,
                     'require_xml_metadata': bool,
+
+                    # openbsd parser
+                    'path_to_database': Any(None, str),
                 }
             ],
             'shadow': bool,

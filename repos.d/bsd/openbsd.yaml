@@ -10,7 +10,7 @@
   minpackages: 9000
   sources:
     - name: INDEX
-      disabled: false
+      disabled: true
       fetcher: FileFetcher
       parser: OpenBSDIndexParser
       # Intentionally broken by OpenBSD devs without providing an (easily accessed) alternative, use latest available version
@@ -20,11 +20,13 @@
       url: 'http://ftp.fr.openbsd.org/pub/ports-INDEX'
       allow_zero_size: false
     - name: sqlports
-      disabled: true
-      fetcher: TarFetcher
+      disabled: false
+      fetcher: FileFetcher
       parser: OpenBSDsqlportsParser
-      # using mirror as official site is too slow
-      url: 'https://mirror.yandex.ru/openbsd/snapshots/packages/amd64/sqlports-6.10.tgz'
+      # use /share/sqlports for official sqlports-*.tgz and null for immediate sqlite file
+      path_to_database: null
+      # unofficial - kindly provided by Landry Breuil, see https://github.com/repology/repology-updater/issues/149
+      url: 'https://ftp.fr.openbsd.org/pub/sqlports'
       allow_zero_size: false
   repolinks:
     - desc: 'OpenBSD FAQ: Packages and Ports'

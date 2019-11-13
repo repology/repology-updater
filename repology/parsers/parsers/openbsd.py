@@ -18,7 +18,7 @@
 import os
 import re
 import sqlite3
-from typing import Dict, Iterable
+from typing import Any, Dict, Iterable, Optional
 
 from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
@@ -40,7 +40,7 @@ def _normalize_version(version: str) -> str:
 
 
 # XXX: use repology.parsers.sqlite.iter_sqlite instead
-def _iter_sqlports(path: str) -> Iterable[Dict[str, str]]:
+def _iter_sqlports(path: str) -> Iterable[Dict[str, Any]]:
     columns = [
         'fullpkgpath',
         'categories',
@@ -60,15 +60,15 @@ def _iter_sqlports(path: str) -> Iterable[Dict[str, str]]:
         'master_sites7',
         'master_sites8',
         'master_sites9',
-        'pkgname',
-        'pkgpath',
-        'pkgspec',
-        'pkgstem',
+        'gh_account',
+        'gh_project',
+        'dist_subdir',
     ]
 
-    db = sqlite3.connect(os.path.join(path + '/share/sqlports'))
+    db = sqlite3.connect(path)
     cur = db.cursor()
-    cur.execute('SELECT {} FROM Ports LEFT JOIN Paths USING(fullpkgpath)'.format(','.join(columns)))
+    #cur.execute('SELECT {} FROM Ports LEFT JOIN Paths USING(fullpkgpath)'.format(','.join(columns)))
+    cur.execute('SELECT {} FROM Ports'.format(','.join(columns)))
 
     while True:
         row = cur.fetchone()
@@ -78,52 +78,69 @@ def _iter_sqlports(path: str) -> Iterable[Dict[str, str]]:
         yield dict(zip(columns, row))
 
 
+def _iter_distfiles(row: Dict[str, Any]) -> Iterable[str]:
+    if row['distfiles'] is None:
+        return
+
+    for distfile in row['distfiles'].split():
+        # process distfile renames
+        # Example: deco-{deco/archive/}1.6.4.tar.gz is downloaded as deco/archive/1.6.4.tar.gz
+        # but saved as deco-1.6.4.tar.gz
+        match = re.fullmatch('(.*)\\{(.*)\\}(.*)', distfile)
+        if match:
+            distfile = match.group(2) + match.group(3)
+
+        # determine master_sites (1.tgz uses master_sites, 1.gz:0 uses master_sites0 etc.)
+        match = re.fullmatch('(.*):([0-9])', distfile)
+        if match:
+            distfile = match.group(1)
+            master_sites = row['master_sites' + match.group(2)]
+        else:
+            master_sites = row['master_sites']
+
+        # fallback to openbsd distfiles mirror
+        if not master_sites:
+            master_sites = 'http://ftp.openbsd.org/pub/OpenBSD/distfiles/{}/'.format(row['dist_subdir'])
+
+        yield from (master_site + distfile for master_site in master_sites.split())
+
+
 class OpenBSDsqlportsParser(Parser):
+    _path_to_database: str
+
+    def __init__(self, path_to_database: Optional[str] = None) -> None:
+        self._path_to_database = path_to_database or ''
+
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        for row in _iter_sqlports(path):
-            pkg = factory.begin(row['fullpkgpath'])
+        for row in _iter_sqlports(os.path.join(path + self._path_to_database)):
+            with factory.begin(row['fullpkgpath']) as pkg:
+                # there are a lot of potential name sources in sqlports, namely:
+                # fullpkgpath, fullpkgname, pkgname, pkgspec, pkgstem, pkgpath (comes from Paths table)
+                # * pkgname may be NULL, so ignoring it
+                # * pkgpath is the same as fullpkgpath with flavors stripped, so no need to join with Paths
+                # * pkgspec may be complex for our purposes, for it may contain version ranges in form of python-bsddb->=2.7,<2.8
+                # * fullpkgname may be split into stem, version and flavors according to https://man.openbsd.org/packages-specs
+                # * pkgstem is usually equal to the stem got from fullpkgname, but there are currently 12 exceptions
+                #   like php-7.1, php-7.2, php-7.3, polkit-qt-, polkit-qt5-, so it's more reliable to get stem from fullpkgname
+                #
+                # As a result, we're basically left with fullpkgpath (which is path in ports tree + flavors)
+                # and fullpkgname (which is package name aka stem + version + flavors)
 
-            # strip flavors (see https://man.openbsd.org/packages-specs)
-            pkgname = re.sub('(-[^0-9][^-]*)+$', '', row['fullpkgname'])
+                pkgpath = row['fullpkgpath'].split(',')[0]
+                stem, version = re.sub('(-[^0-9][^-]*)+$', '', row['fullpkgname']).rsplit('-', 1)
 
-            name, version = pkgname.rsplit('-', 1)
+                pkg.add_name(stem, NameType.BSD_PKGNAME)
+                pkg.add_name(pkgpath, NameType.BSD_ORIGIN)
+                pkg.set_version(version, _normalize_version)
+                pkg.set_summary(row['comment'])
+                pkg.add_homepages(row['homepage'])
+                if row['gh_account'] and row['gh_project']:
+                    pkg.add_homepages('https://github.com/{}/{}'.format(row['gh_account'], row['gh_project']))
+                pkg.add_maintainers(extract_maintainers(row['maintainer']))
+                pkg.add_categories(row['categories'].split())
+                pkg.add_downloads(_iter_distfiles(row))
 
-            pkg.add_name(name, NameType.BSD_PKGNAME)
-            pkg.add_name(row['fullpkgpath'].split(',', 1)[0], NameType.BSD_ORIGIN)
-            pkg.set_version(version, _normalize_version)
-            pkg.set_summary(row['comment'])
-            pkg.add_homepages(row['homepage'])
-            pkg.add_maintainers(extract_maintainers(row['maintainer']))
-            pkg.add_categories(row['categories'].split())
-
-            pkg.set_extra_field('pkgpath', row['pkgpath'])
-            pkg.set_extra_field('fullpkgpath', row['fullpkgpath'])
-
-            if row['distfiles']:
-                for distfile in row['distfiles'].split():
-                    # process distfile renames
-                    # Example: deco-{deco/archive/}1.6.4.tar.gz is downloaded as deco/archive/1.6.4.tar.gz
-                    # but saved as deco-1.6.4.tar.gz
-                    match = re.fullmatch('(.*)\\{(.*)\\}(.*)', distfile)
-                    if match:
-                        distfile = match.group(2) + match.group(3)
-
-                    # determine master_sites
-                    master_sites = row['master_sites']
-
-                    match = re.fullmatch('(.*):([0-9]+)', distfile)
-                    if match:
-                        distfile = match.group(1)
-                        master_sites = row['master_sites' + match.group(2)]
-
-                    # done
-                    if not master_sites:
-                        pkg.log('distfile "{}" without master_sites'.format(distfile), severity=Logger.ERROR)
-                        break
-
-                    pkg.add_downloads((master_site + distfile for master_site in master_sites.split()))
-
-            yield pkg
+                yield pkg
 
 
 class OpenBSDIndexParser(Parser):
