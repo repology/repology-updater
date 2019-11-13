@@ -71,6 +71,9 @@ class NameType:
 
     KAOS_NAME: ClassVar[int] = 130  # arch-like, but no source/basename info available
 
+    BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
+    BUCKAROO_FILENAME: ClassVar[int] = IGNORED
+
     TERMUX_NAME: ClassVar[int] = GENERIC_SN_NAME
 
     VCPKG_SOURCE: ClassVar[int] = GENERIC_SN_NAME

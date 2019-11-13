@@ -33,21 +33,18 @@ class BuckarooGitParser(Parser):
             if 'versions' not in data:
                 continue
 
-            for version, versiondata in data['versions'].items():
-                pkg = factory.begin()
-
-                pkg.add_name(data['name'], NameType.GENERIC_PKGNAME)
-                pkg.set_version(version)
-
+            with factory.begin(filename) as pkg:
+                pkg.add_name(data['name'], NameType.BUCKAROO_NAME)
+                pkg.add_name(os.path.basename(filename)[:-5], NameType.BUCKAROO_FILENAME)
                 pkg.add_licenses(data['license'])
                 pkg.add_homepages(data['url'])
 
                 pkg.set_extra_field('recipe', os.path.relpath(filename, path))
 
-                # garbage: links to git:// or specific commits
-                #if isinstance(versiondata['source'], str):
-                #    pkg.downloads = [versiondata['source']]
-                #else:
-                #    pkg.downloads = [versiondata['source']['url']]
+                for version, versiondata in data['versions'].items():
+                    verpkg = pkg.clone()
+                    verpkg.set_version(version)
 
-                yield pkg
+                    # not parsing sources as these contain references to specific commit snapshots
+
+                    yield verpkg
