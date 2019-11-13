@@ -43,7 +43,8 @@ class HaikuPortsFilenamesParser(Parser):
 
                     pkg = factory.begin()
 
-                    pkg.add_name(package, NameType.GENERIC_PKGNAME)
+                    pkg.add_name(package, NameType.HAIKUPORTS_NAME)
+                    pkg.add_name(f'{category}/{package}', NameType.HAIKUPORTS_FULL_NAME)
                     pkg.add_categories(category)
 
                     # may want to shadow haiku-only ports

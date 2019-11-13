@@ -35,6 +35,10 @@ class NameType:
     GENERIC_NOBN_NAME: ClassVar[int] = 1010
     GENERIC_NOBN_BASENAME: ClassVar[int] = 1011
 
+    # Common patterns: gentoolike (category/name)
+    GENERIC_GENTOOLIKE_NAME: ClassVar[int] = 1020
+    GENERIC_GENTOOLIKE_FULL_NAME: ClassVar[int] = 1021
+
     # Individual repos
     WIKIDATA_ENTITY: ClassVar[int] = 20
     WIKIDATA_LABEL: ClassVar[int] = 21
@@ -52,9 +56,6 @@ class NameType:
 
     WIKI_TITLE: ClassVar[int] = 70
     WIKI_PAGE: ClassVar[int] = 71
-
-    GENTOO_NAME: ClassVar[int] = 80
-    GENTOO_FULL_NAME: ClassVar[int] = 81
 
     REACTOS_FILENAME: ClassVar[int] = 90
     REACTOS_NAME: ClassVar[int] = 91
@@ -129,6 +130,15 @@ class NameType:
     CYGWIN_PACKAGE_NAME: ClassVar[int] = GENERIC_NOBN_BASENAME
     CYGWIN_SUBPACKAGE_NAME: ClassVar[int] = GENERIC_NOBN_NAME
 
+    GENTOO_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_NAME
+    GENTOO_FULL_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_FULL_NAME
+
+    EXHERBO_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_NAME
+    EXHERBO_FULL_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_FULL_NAME
+
+    HAIKUPORTS_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_NAME
+    HAIKUPORTS_FULL_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_FULL_NAME
+
 
 @dataclass
 class _NameMapping:
@@ -181,6 +191,12 @@ _MAPPINGS = [
         trackname=NameType.GENERIC_SN_NAME,
         visiblename=NameType.GENERIC_SN_NAME,
         projectname_seed=NameType.GENERIC_SN_NAME,
+    ),
+    _NameMapping(
+        srcname=NameType.GENERIC_GENTOOLIKE_FULL_NAME,
+        visiblename=NameType.GENERIC_GENTOOLIKE_FULL_NAME,
+        projectname_seed=NameType.GENERIC_GENTOOLIKE_NAME,
+        trackname=NameType.GENERIC_GENTOOLIKE_FULL_NAME,
     ),
     # YACP
     _NameMapping(
@@ -249,13 +265,6 @@ _MAPPINGS = [
         visiblename=NameType.WIKI_TITLE,
         projectname_seed=NameType.WIKI_TITLE,
         trackname=NameType.WIKI_PAGE,
-    ),
-    # Gentoo
-    _NameMapping(
-        srcname=NameType.GENTOO_FULL_NAME,
-        visiblename=NameType.GENTOO_FULL_NAME,
-        projectname_seed=NameType.GENTOO_NAME,
-        trackname=NameType.GENTOO_FULL_NAME,
     ),
     # F-Droid
     _NameMapping(

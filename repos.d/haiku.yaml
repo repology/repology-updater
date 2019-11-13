@@ -18,5 +18,5 @@
       url: https://github.com/haikuports/haikuports
   packagelinks:
     - desc: Port directory in git repo
-      url: 'https://github.com/haikuports/haikuports/tree/master/{category}/{name}'
+      url: 'https://github.com/haikuports/haikuports/tree/master/{srcname}'
   tags: [ all, production, haiku ]

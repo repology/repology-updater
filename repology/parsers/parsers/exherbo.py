@@ -69,8 +69,8 @@ class ExherboGitParser(Parser):
         for category, package, exheres in _iter_exheres(os.path.join(path, 'packages')):
             pkg = factory.begin('/'.join((category, package, exheres)))
 
-            pkg.add_name(package, NameType.GENTOO_NAME)
-            pkg.add_name(f'{category}/{package}', NameType.GENTOO_FULL_NAME)
+            pkg.add_name(package, NameType.EXHERBO_NAME)
+            pkg.add_name(f'{category}/{package}', NameType.EXHERBO_FULL_NAME)
             pkg.set_version(exheres[len(package) + 1:-10], _normalize_version)
             pkg.add_categories(category)
             pkg.add_maintainers(maintainers)
