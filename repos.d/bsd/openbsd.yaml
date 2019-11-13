@@ -7,7 +7,7 @@
   singular: OpenBSD port
   family: openbsd
   color: 'f8e808'
-  minpackages: 9000
+  minpackages: 11000
   sources:
     - name: INDEX
       disabled: true
