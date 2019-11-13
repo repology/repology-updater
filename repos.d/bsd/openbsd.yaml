@@ -9,21 +9,11 @@
   color: 'f8e808'
   minpackages: 11000
   sources:
-    - name: INDEX
-      disabled: true
-      fetcher: FileFetcher
-      parser: OpenBSDIndexParser
-      # Intentionally broken by OpenBSD devs without providing an (easily accessed) alternative, use latest available version
-      # See https://github.com/repology/repology/issues/149
-      #url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/INDEX?content-type=text/plain'
-      #url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/~checkout~/ports/Attic/INDEX?rev=1.481&content-type=text/plain'
-      url: 'http://ftp.fr.openbsd.org/pub/ports-INDEX'
-      allow_zero_size: false
     - name: sqlports
       disabled: false
       fetcher: FileFetcher
       parser: OpenBSDsqlportsParser
-      # use /share/sqlports for official sqlports-*.tgz and null for immediate sqlite file
+      # use '/share/sqlports' for official sqlports-*.tgz and null for immediate sqlite file
       path_to_database: null
       # unofficial - kindly provided by Landry Breuil, see https://github.com/repology/repology-updater/issues/149
       url: 'https://ftp.fr.openbsd.org/pub/sqlports'
@@ -42,5 +32,5 @@
       url: 'http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/{srcname}'
     - desc: Port directory on GitHub mirror
       url: 'https://github.com/openbsd/ports/tree/master/{srcname}'
-    # XXX: no Makefile link is Makefile would just refer to subports
+    # XXX: no Makefile link as sometimes Makefiles just refer to subports
   tags: [ all, production ]

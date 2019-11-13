@@ -20,7 +20,6 @@ import re
 import sqlite3
 from typing import Any, Dict, Iterable, Optional
 
-from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
@@ -157,35 +156,5 @@ class OpenBSDsqlportsParser(Parser):
                 pkg.add_maintainers(extract_maintainers(row['maintainer']))
                 pkg.add_categories(row['categories'].split())
                 pkg.add_downloads(_iter_distfiles(row))
-
-                yield pkg
-
-
-class OpenBSDIndexParser(Parser):
-    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(path, encoding='utf-8') as indexfile:
-            for line in indexfile:
-                pkg = factory.begin()
-
-                fields = line.strip().split('|')
-                if len(fields) < 7:  # varies
-                    pkg.log('skipping, unexpected number of fields {}'.format(len(fields)), severity=Logger.ERROR)
-                    continue
-
-                pkgname = fields[0]
-
-                # cut away string suffixes which come after version
-                match = re.match('(.*?)(-[a-z_]+[0-9]*)+$', pkgname)
-                if match:
-                    pkgname = match.group(1)
-
-                name, version = pkgname.rsplit('-', 1)
-
-                pkg.add_name(name, NameType.BSD_PKGNAME)
-                pkg.add_name(fields[1].split(',', 1)[0], NameType.BSD_ORIGIN)
-                pkg.set_version(version, _normalize_version)
-                pkg.set_summary(fields[3])
-                pkg.add_maintainers(extract_maintainers(fields[5]))
-                pkg.add_categories(fields[6].split())
 
                 yield pkg
