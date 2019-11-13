@@ -7,7 +7,7 @@
   singular: FreeBSD port
   family: freebsd
   color: '990000'
-  minpackages: 31000
+  minpackages: 32000
   sources:
     - name: INDEX-11
       fetcher: FileFetcher
@@ -47,7 +47,7 @@
   desc: DPorts
   family: freebsd
   color: '9eff11'
-  minpackages: 28000
+  minpackages: 29000
   sources:
     - name: INDEX
       fetcher: FileFetcher
