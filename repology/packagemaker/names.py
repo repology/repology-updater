@@ -65,6 +65,8 @@ class NameType:
     CHOCOLATEY_TITLE: ClassVar[int] = 110
     CHOCOLATEY_METADATA_TITLE: ClassVar[int] = 111
 
+    YACP_NAME: ClassVar[int] = 120  # also has binary packages as PKG_NAMES, but we don't support these
+
     TERMUX_NAME: ClassVar[int] = GENERIC_SN_NAME
 
     VCPKG_SOURCE: ClassVar[int] = GENERIC_SN_NAME
@@ -179,6 +181,13 @@ _MAPPINGS = [
         trackname=NameType.GENERIC_SN_NAME,
         visiblename=NameType.GENERIC_SN_NAME,
         projectname_seed=NameType.GENERIC_SN_NAME,
+    ),
+    # YACP
+    _NameMapping(
+        srcname=NameType.YACP_NAME,
+        trackname=NameType.YACP_NAME,
+        visiblename=NameType.YACP_NAME,
+        projectname_seed=NameType.YACP_NAME,
     ),
     # Wikidata
     _NameMapping(
