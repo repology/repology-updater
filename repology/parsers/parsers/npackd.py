@@ -79,7 +79,6 @@ class NpackdXmlParser(Parser):
                     pkg.add_downloads((e.text for e in entry.findall('url')))
 
                     # from previously parsed <license> and <package> entries
-                    pkg.set_summary(packages[pkgname].title)
                     pkg.add_licenses(licenses[l] for l in packages[pkgname].licenses)
                     pkg.add_categories(_filter_categories(packages[pkgname].categories))
                     pkg.add_homepages(packages[pkgname].urls)
