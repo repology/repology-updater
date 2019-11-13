@@ -50,6 +50,8 @@ class PackageTemplate:
         'flags',
 
         'extrafields',
+
+        'flavors',
     ]
 
     subrepo: Optional[str]
@@ -70,6 +72,8 @@ class PackageTemplate:
 
     extrafields: Dict[str, str]
 
+    flavors: List[str]
+
     def __init__(self) -> None:
         self.subrepo = None
 
@@ -88,6 +92,8 @@ class PackageTemplate:
         self.flags = 0
 
         self.extrafields = {}
+
+        self.flavors = []
 
 
 class PackageMakerBase(Logger):
@@ -243,6 +249,10 @@ class PackageMaker(PackageMakerBase):
     def add_downloads(self, *args: Any) -> None:
         _extend_unique(self._package.downloads, args)
 
+    @_omnivorous_setter('flavor', str, nzs.strip, nzs.warn_whitespace, nzs.forbid_newlines)
+    def add_flavors(self, *args: Any) -> None:
+        _extend_unique(self._package.flavors, args)
+
     def set_flags(self, mask: int, is_set: bool = True) -> None:
         if is_set:
             self._package.flags |= mask
@@ -295,6 +305,8 @@ class PackageMaker(PackageMakerBase):
             shadow=shadow,
 
             extrafields=self._package.extrafields,
+
+            flavors=self._package.flavors,
 
             # XXX: see comment for PackageStatus.UNPROCESSED
             # XXX: duplicate code: PackageTransformer does the same
