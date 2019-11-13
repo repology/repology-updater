@@ -69,6 +69,8 @@ class NameType:
 
     YACP_NAME: ClassVar[int] = 120  # also has binary packages as PKG_NAMES, but we don't support these
 
+    KAOS_NAME: ClassVar[int] = 130  # arch-like, but no source/basename info available
+
     TERMUX_NAME: ClassVar[int] = GENERIC_SN_NAME
 
     VCPKG_SOURCE: ClassVar[int] = GENERIC_SN_NAME
@@ -112,6 +114,8 @@ class NameType:
     KWORT_NAME: ClassVar[int] = GENERIC_SN_NAME
 
     JUSTINSTALL_NAME: ClassVar[int] = GENERIC_SN_NAME
+
+    DISTRI_NAME: ClassVar[int] = GENERIC_SN_NAME
 
     MSYS2_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     MSYS2_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
@@ -198,6 +202,13 @@ _MAPPINGS = [
         visiblename=NameType.GENERIC_GENTOOLIKE_FULL_NAME,
         projectname_seed=NameType.GENERIC_GENTOOLIKE_NAME,
         trackname=NameType.GENERIC_GENTOOLIKE_FULL_NAME,
+    ),
+    # KaOS
+    _NameMapping(
+        binname=NameType.KAOS_NAME,
+        trackname=NameType.KAOS_NAME,
+        visiblename=NameType.KAOS_NAME,
+        projectname_seed=NameType.KAOS_NAME,
     ),
     # YACP
     _NameMapping(

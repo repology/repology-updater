@@ -34,7 +34,7 @@ class DistriGitParser(Parser):
             with factory.begin(protofile_rel) as pkg:
                 pkgpath = os.path.dirname(protofile_rel)
 
-                pkg.add_name(os.path.basename(pkgpath), NameType.GENERIC_PKGNAME)
+                pkg.add_name(os.path.basename(pkgpath), NameType.DISTRI_NAME)
 
                 with open(protofile) as f:
                     build = BuildMessage()

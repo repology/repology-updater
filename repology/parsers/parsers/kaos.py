@@ -31,7 +31,7 @@ class KaOSHTMLParser(Parser):
 
             name, version, revision = row.xpath('./td[1]/a')[0].text.rsplit('-', 2)
 
-            pkg.add_name(name, NameType.GENERIC_PKGNAME)
+            pkg.add_name(name, NameType.KAOS_NAME)
             pkg.set_version(version.split(':', 1)[-1])
             pkg.set_rawversion(version + '-' + revision)
 
