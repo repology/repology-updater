@@ -19,7 +19,6 @@ import os
 import re
 from typing import Iterable, Tuple
 
-from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.versions import VersionStripper
@@ -49,8 +48,7 @@ class YACPGitParser(Parser):
             # XXX: save *bl* to rawversion
             match = re.match('(.*)-[0-9]+bl[0-9]+\\.cygport$', cygport_name)
             if not match:
-                pkg.log('unable to parse cygport name', severity=Logger.ERROR)
-                continue
+                raise RuntimeError('unable to parse cygport name')
 
             name, version = match.group(1).rsplit('-', 1)
 

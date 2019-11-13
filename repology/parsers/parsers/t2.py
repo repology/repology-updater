@@ -87,7 +87,7 @@ class T2DescParser(Parser):
                 name = os.path.basename(pkgpath)
 
                 if name + '.desc' != os.path.basename(rel_filename):
-                    pkg.log('Path inconsistency (expected .../foo/foo.desc)', Logger.WARNING)
+                    raise RuntimeError('Path inconsistency (expected .../foo/foo.desc)')
 
                 data = _parse_descfile(filename, pkg)
 
