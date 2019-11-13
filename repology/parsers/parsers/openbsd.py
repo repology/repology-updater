@@ -105,6 +105,20 @@ def _iter_distfiles(row: Dict[str, Any]) -> Iterable[str]:
         yield from (master_site + distfile for master_site in master_sites.split())
 
 
+def _strip_flavors_from_stem(stem: str, flavors: Iterable[str]) -> str:
+    flavors_set = set(flavor.lstrip('-') for flavor in flavors if flavor.startswith('-'))
+
+    stem_parts = stem.split('-')
+
+    while len(stem_parts) > 1:
+        if stem_parts[-1] in flavors_set:
+            stem_parts.pop()
+        else:
+            break
+
+    return '-'.join(stem_parts)
+
+
 class OpenBSDsqlportsParser(Parser):
     _path_to_database: str
 
@@ -126,11 +140,15 @@ class OpenBSDsqlportsParser(Parser):
                 # As a result, we're basically left with fullpkgpath (which is path in ports tree + flavors)
                 # and fullpkgname (which is package name aka stem + version + flavors)
 
-                pkgpath = row['fullpkgpath'].split(',')[0]
+                pkgpath, *flavors = row['fullpkgpath'].split(',')
                 stem, version = re.sub('(-[^0-9][^-]*)+$', '', row['fullpkgname']).rsplit('-', 1)
 
-                pkg.add_name(stem, NameType.BSD_PKGNAME)
-                pkg.add_name(pkgpath, NameType.BSD_ORIGIN)
+                stripped_stem = _strip_flavors_from_stem(stem, flavors)
+
+                pkg.add_name(stem, NameType.OPENBSD_STEM)
+                pkg.add_name(pkgpath, NameType.OPENBSD_PKGPATH)
+                pkg.add_name(stripped_stem, NameType.OPENBSD_STRIPPED_STEM)
+                pkg.add_flavors(flavors)
                 pkg.set_version(version, _normalize_version)
                 pkg.set_summary(row['comment'])
                 pkg.add_homepages(row['homepage'])

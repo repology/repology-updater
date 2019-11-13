@@ -71,6 +71,10 @@ class NameType:
 
     KAOS_NAME: ClassVar[int] = 130  # arch-like, but no source/basename info available
 
+    OPENBSD_PKGPATH: ClassVar[int] = 140
+    OPENBSD_STEM: ClassVar[int] = 141
+    OPENBSD_STRIPPED_STEM: ClassVar[int] = 142
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -234,6 +238,13 @@ _MAPPINGS = [
         visiblename=NameType.BSD_ORIGIN,
         projectname_seed=NameType.BSD_PKGNAME,
         trackname=NameType.BSD_ORIGIN,
+    ),
+    _NameMapping(
+        srcname=NameType.OPENBSD_PKGPATH,
+        binname=NameType.OPENBSD_STEM,
+        visiblename=NameType.OPENBSD_PKGPATH,
+        projectname_seed=NameType.OPENBSD_STRIPPED_STEM,
+        trackname=NameType.OPENBSD_PKGPATH,
     ),
     # Npackd
     _NameMapping(
