@@ -6,7 +6,7 @@
 - name: wikidata
   type: site
   desc: Wikidata
-  singular: Wikidata entry
+  singular: Wikidata item
   family: wikidata
   ruleset: [ wikidata ]
   color: "339966"
@@ -195,7 +195,7 @@
     - desc: Wikidata home
       url: "https://wikidata.org/"
   packagelinks:
-    - desc: Wikidata entity
+    - desc: Wikidata item
       url: "https://www.wikidata.org/wiki/{name}"
   tags: [ all, production ]
 
