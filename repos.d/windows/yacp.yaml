@@ -17,5 +17,5 @@
       url: https://github.com/fd00/yacp
   packagelinks:
     - desc: Git
-      url: 'https://github.com/fd00/yacp/tree/master/{name}'
+      url: 'https://github.com/fd00/yacp/tree/master/{srcname}'
   tags: [ all, production ]
