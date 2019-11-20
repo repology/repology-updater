@@ -272,6 +272,7 @@ def parse_arguments() -> argparse.Namespace:
     actions_grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
     actions_grp.add_argument('-d', '--database', action='store_true', help='store in the database')
     actions_grp.add_argument('-o', '--postupdate', action='store_true', help='perform post-update actions')
+    actions_grp.add_argument('-R', '--repositories', action='store_true', help='update repositories')
 
     actions_grp.add_argument('-r', '--dump-rules', action='store_true', help='dump rule statistics')
 
@@ -306,7 +307,7 @@ def main() -> int:
         env.get_main_logger().log('loading rules')
         env.get_repo_processor()
 
-    if options.fetch or options.parse or options.database or options.postupdate:
+    if options.fetch or options.parse or options.database or options.postupdate or options.repositories:
         database_update_pre(env)
 
     if options.fetch or options.parse:
