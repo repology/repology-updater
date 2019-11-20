@@ -140,3 +140,9 @@ SELECT DISTINCT
 FROM packages
 WHERE basename IS NOT NULL AND basename != effname
 ON CONFLICT (oldname, newname) DO NOTHING;
+
+--------------------------------------------------------------------------------
+-- Clean up stale links
+--------------------------------------------------------------------------------
+DELETE FROM links
+WHERE last_extracted < now() - INTERVAL '1' MONTH;

@@ -781,10 +781,6 @@ SET
 -- Update links
 --------------------------------------------------------------------------------
 
--- cleanup stale
-DELETE FROM links
-WHERE last_extracted < now() - INTERVAL '1' MONTH;
-
 -- extract fresh
 INSERT INTO links(
 	url
