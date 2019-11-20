@@ -35,6 +35,7 @@ families = [
     'arch',
     'buckaroo',
     'centos',
+    'chakra',
     'chocolatey',
     'conda',
     'cpan',

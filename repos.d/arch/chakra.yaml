@@ -1,0 +1,67 @@
+###########################################################################
+# Chakra
+###########################################################################
+- name: chakra
+  type: repository
+  desc: Chakra
+  family: chakra
+  ruleset: chakra
+  color: '06abbd'
+  minpackages: 4200
+  sources:
+    - name: [ core, desktop, gtk ]
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Chakra home
+      url: https://www.chakralinux.org/
+  packagelinks:
+    - desc: Git repository
+      url: 'https://code.chakralinux.org/chakra/packages/{subrepo}/tree/master/{srcname}'
+    - desc: PKGBUILD in CCR
+      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={srcname}'
+  tags: [ all, production, chakra ]
+
+- name: chakra_staging
+  type: repository
+  desc: Chakra Staging
+  family: chakra
+  ruleset: chakra
+  color: '06abbd'
+  minpackages: 0
+  sources:
+    - name: [ staging ]
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Chakra home
+      url: https://www.chakralinux.org/
+  packagelinks:
+    - desc: PKGBUILD in CCR
+      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={srcname}'
+  tags: [ all, production, chakra ]
+
+- name: chakra_testing
+  type: repository
+  desc: Chakra Testing
+  family: chakra
+  ruleset: chakra
+  color: '06abbd'
+  minpackages: 0
+  sources:
+    - name: [ testing ]
+      fetcher: TarFetcher
+      parser: ArchDBParser
+      url: 'https://rsync.chakralinux.org/packages/{source}/x86_64/{source}.db.tar.gz'
+      subrepo: '{source}'
+  repolinks:
+    - desc: Chakra home
+      url: https://www.chakralinux.org/
+  packagelinks:
+    - desc: PKGBUILD in CCR
+      url: 'https://ccr.chakralinux.org/pkgbuild_view.php?p={srcname}'
+  tags: [ all, production, chakra ]
