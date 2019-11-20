@@ -34,40 +34,39 @@ class ArchDBParser(Parser):
             if not os.path.isfile(desc_path):
                 continue
 
-            with open(desc_path, encoding='utf-8') as file:
-                pkg = factory.begin(package)
+            with open(desc_path, encoding='utf-8', errors='ignore') as file:
+                with factory.begin(package) as pkg:
+                    comment = None
 
-                comment = None
+                    tag = None
+                    for line in file:
+                        line = line.strip()
 
-                tag = None
-                for line in file:
-                    line = line.strip()
+                        if line == '':
+                            tag = None
+                        elif tag == 'NAME':
+                            pkg.add_name(line, NameType.ARCH_NAME)
+                        elif tag == 'VERSION':
+                            pkg.set_version(line, normalize_version)
+                        elif tag == 'ARCH':
+                            pkg.set_arch(line)
+                        elif tag == 'DESC':
+                            if comment is None:
+                                comment = ''
+                            if comment != '':
+                                comment += '\n'
+                            comment += line
+                        elif tag == 'URL':
+                            pkg.add_homepages(line)
+                        elif tag == 'LICENSE':
+                            pkg.add_licenses(line)
+                        #elif tag == 'PACKAGER':
+                        #    pkg.add_maintainers(extract_maintainers(line))
+                        elif tag == 'BASE':
+                            pkg.add_name(line, NameType.ARCH_BASENAME)
+                        elif line.startswith('%') and line.endswith('%'):
+                            tag = line[1:-1]
 
-                    if line == '':
-                        tag = None
-                    elif tag == 'NAME':
-                        pkg.add_name(line, NameType.ARCH_NAME)
-                    elif tag == 'VERSION':
-                        pkg.set_version(line, normalize_version)
-                    elif tag == 'ARCH':
-                        pkg.set_arch(line)
-                    elif tag == 'DESC':
-                        if comment is None:
-                            comment = ''
-                        if comment != '':
-                            comment += '\n'
-                        comment += line
-                    elif tag == 'URL':
-                        pkg.add_homepages(line)
-                    elif tag == 'LICENSE':
-                        pkg.add_licenses(line)
-                    #elif tag == 'PACKAGER':
-                    #    pkg.add_maintainers(extract_maintainers(line))
-                    elif tag == 'BASE':
-                        pkg.add_name(line, NameType.ARCH_BASENAME)
-                    elif line.startswith('%') and line.endswith('%'):
-                        tag = line[1:-1]
+                    pkg.set_summary(comment)
 
-                pkg.set_summary(comment)
-
-                yield pkg
+                    yield pkg
