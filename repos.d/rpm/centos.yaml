@@ -52,7 +52,7 @@
   color: '932279'
   minpackages: 2000
   sources:
-    - name: [ AppStream, BaseOS, extras ]
+    - name: [ AppStream, BaseOS, PowerTools, extras ]
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: 'http://vault.centos.org/centos/8/{source}/Source/'
