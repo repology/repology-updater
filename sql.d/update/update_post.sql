@@ -123,22 +123,10 @@ INTO project_redirects (
 	newname
 )
 SELECT DISTINCT
-	name,
+	projectname_seed,
 	effname
 FROM packages
-WHERE name != effname
-ON CONFLICT (oldname, newname) DO NOTHING;
-
-INSERT
-INTO project_redirects (
-	oldname,
-	newname
-)
-SELECT DISTINCT
-	basename,
-	effname
-FROM packages
-WHERE basename IS NOT NULL AND basename != effname
+WHERE projectname_seed != effname
 ON CONFLICT (oldname, newname) DO NOTHING;
 
 --------------------------------------------------------------------------------
