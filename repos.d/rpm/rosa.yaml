@@ -8,6 +8,7 @@
 - name: rosa_2014_1
   type: repository
   desc: Rosa 2014.1
+  statsgroup: Rosa
   family: rosa
   color: '3757a1'
   minpackages: 27000
@@ -29,6 +30,7 @@
 - name: rosa_2016_1
   type: repository
   desc: Rosa 2016.1
+  statsgroup: Rosa
   family: rosa
   color: '3757a1'
   minpackages: 21000
@@ -50,6 +52,7 @@
 - name: rosa_2019_0
   type: repository
   desc: Rosa 2019.0
+  statsgroup: Rosa
   family: rosa
   color: '3757a1'
   minpackages: 6500
@@ -71,6 +74,7 @@
 - name: rosa_2019_1
   type: repository
   desc: Rosa 2019.1
+  statsgroup: Rosa
   family: rosa
   color: '3757a1'
   minpackages: 21000

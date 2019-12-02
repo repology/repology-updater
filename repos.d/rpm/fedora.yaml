@@ -10,6 +10,7 @@
 - name: fedora_26
   type: repository
   desc: Fedora 26
+  statsgroup: Fedora
   family: fedora
   color: '294172'
   minpackages: 21000
@@ -42,6 +43,7 @@
 - name: fedora_27
   type: repository
   desc: Fedora 27
+  statsgroup: Fedora
   family: fedora
   color: '294172'
   minpackages: 22000
@@ -73,6 +75,7 @@
 - name: fedora_28
   type: repository
   desc: Fedora 28
+  statsgroup: Fedora
   family: fedora
   color: '294172'
   minpackages: 24000
@@ -107,6 +110,7 @@
 - name: fedora_29
   type: repository
   desc: Fedora 29
+  statsgroup: Fedora
   family: fedora
   color: '294172'
   minpackages: 24000
@@ -138,6 +142,7 @@
 - name: fedora_30
   type: repository
   desc: Fedora 30
+  statsgroup: Fedora
   family: fedora
   color: '294172'
   minpackages: 20000
@@ -169,6 +174,7 @@
 - name: fedora_31
   type: repository
   desc: Fedora 31
+  statsgroup: Fedora
   family: fedora
   color: '294172'
   minpackages: 20000
@@ -200,6 +206,7 @@
 - name: fedora_rawhide
   type: repository
   desc: Fedora Rawhide
+  statsgroup: Fedora
   family: fedora
   color: '294172'
   minpackages: 20000

@@ -4,6 +4,7 @@
 - name: hyperbola
   type: repository
   desc: Hyperbola
+  statsgroup: Arch+derivs
   family: arch
   ruleset: [arch, hyperbola]
   color: 'c0c0c0'

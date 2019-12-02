@@ -4,6 +4,7 @@
 - name: openmandriva_3
   type: repository
   desc: OpenMandriva 3.x
+  statsgroup: OpenMandriva
   family: openmandriva
   color: '045e9d'
   minpackages: 1400
@@ -25,6 +26,7 @@
 - name: openmandriva_4
   type: repository
   desc: OpenMandriva 4.x
+  statsgroup: OpenMandriva
   family: openmandriva
   color: '045e9d'
   minpackages: 12000
@@ -46,6 +48,7 @@
 - name: openmandriva_cooker
   type: repository
   desc: OpenMandriva Cooker
+  statsgroup: OpenMandriva
   family: openmandriva
   color: '045e9d'
   minpackages: 12000

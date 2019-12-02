@@ -4,6 +4,7 @@
 - name: manjaro_stable
   type: repository
   desc: Manjaro Stable
+  statsgroup: Arch+derivs
   family: arch
   ruleset: [arch, manjaro]
   color: '34be5b'
@@ -22,6 +23,8 @@
 - name: manjaro_testing
   type: repository
   desc: Manjaro Testing
+  statsgroup: Arch+derivs
+  family: arch
   family: arch
   ruleset: [arch, manjaro]
   color: '34be5b'
@@ -40,6 +43,8 @@
 - name: manjaro_unstable
   type: repository
   desc: Manjaro Unstable
+  statsgroup: Arch+derivs
+  family: arch
   family: arch
   ruleset: [arch, manjaro]
   color: '34be5b'
@@ -59,6 +64,8 @@
 - name: manjaro_xperimental
   type: repository
   desc: Manjaro Xperimental
+  statsgroup: Arch+derivs
+  family: arch
   family: arch
   ruleset: [arch, manjaro]
   color: '34be5b'

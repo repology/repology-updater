@@ -4,6 +4,7 @@
 - name: gentoo
   type: repository
   desc: Gentoo
+  statsgroup: Gentoo
   family: gentoo
   color: '62548f'
   default_maintainer: maintainer-needed@gentoo.org

@@ -6,6 +6,7 @@
 - name: npackd_unstable
   type: repository
   desc: Npackd Unstable
+  statsgroup: Npackd
   family: npackd
   ruleset: [npackd, windows]
   color: 'ddbb84'
@@ -26,6 +27,7 @@
 - name: npackd_stable
   type: repository
   desc: Npackd Stable
+  statsgroup: Npackd
   family: npackd
   ruleset: [npackd, windows]
   color: 'ddbb84'
@@ -46,6 +48,7 @@
 - name: npackd_libs
   type: repository
   desc: Npackd Libs
+  statsgroup: Npackd
   family: npackd
   ruleset: [npackd, windows]
   color: 'ddbb84'
@@ -66,6 +69,7 @@
 - name: npackd_stable64
   type: repository
   desc: Npackd Stable64
+  statsgroup: Npackd
   family: npackd
   ruleset: [npackd, windows]
   color: 'ddbb84'

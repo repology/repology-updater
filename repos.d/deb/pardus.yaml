@@ -4,6 +4,7 @@
 - name: pardus
   type: repository
   desc: Pardus
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, pardus]
   color: 'ffcc00'

@@ -4,6 +4,7 @@
 - name: openwrt_17_01_x86_64
   type: repository
   desc: OpenWrt 17.01 x86_64
+  statsgroup: OpenWrt
   family: openwrt
   color: '5d6993'
   minpackages: 4000
@@ -29,6 +30,7 @@
 - name: openwrt_18_06_x86_64
   type: repository
   desc: OpenWrt 18.06 x86_64
+  statsgroup: OpenWrt
   family: openwrt
   color: '5d6993'
   minpackages: 5000
@@ -60,6 +62,7 @@
 - name: openwrt_19_07_x86_64
   type: repository
   desc: OpenWrt 19.07 x86_64
+  statsgroup: OpenWrt
   family: openwrt
   color: '5d6993'
   minpackages: 6000
@@ -81,6 +84,7 @@
 - name: openwrt_snapshot_x86_64
   type: repository
   desc: OpenWrt snapshot x86_64
+  statsgroup: OpenWrt
   family: openwrt
   color: '5d6993'
   minpackages: 0

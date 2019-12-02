@@ -4,6 +4,7 @@
 - name: raspbian_oldstable
   type: repository
   desc: Raspbian Oldstable
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'd6264f'
   minpackages: 22000
@@ -22,6 +23,7 @@
 - name: raspbian_stable
   type: repository
   desc: Raspbian Stable
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'd6264f'
   minpackages: 28000
@@ -40,6 +42,7 @@
 - name: raspbian_testing
   type: repository
   desc: Raspbian Testing
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'd6264f'
   minpackages: 31000

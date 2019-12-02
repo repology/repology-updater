@@ -4,6 +4,7 @@
 - name: mx_15
   type: repository
   desc: MX Linux MX-15
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
@@ -30,6 +31,7 @@
 - name: mx_15_testing
   type: repository
   desc: MX Linux MX-15 Testing
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
@@ -56,6 +58,7 @@
 - name: mx_16
   type: repository
   desc: MX Linux MX-16
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
@@ -82,6 +85,7 @@
 - name: mx_17
   type: repository
   desc: MX Linux MX-17
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
@@ -106,6 +110,7 @@
 - name: mx_17_testing
   type: repository
   desc: MX Linux MX-17 Testing
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
@@ -130,6 +135,7 @@
 - name: mx_19
   type: repository
   desc: MX Linux MX-19
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"
@@ -154,6 +160,7 @@
 - name: mx_19_testing
   type: repository
   desc: MX Linux MX-19 Testing
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mx]
   color: "6693d6"

@@ -4,6 +4,7 @@
 - name: ubuntu_12_04
   type: repository
   desc: Ubuntu 12.04
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2017-04-26
@@ -32,6 +33,7 @@
 - name: ubuntu_12_04_backports
   type: repository
   desc: Ubuntu 12.04 Backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2017-04-26
@@ -60,6 +62,7 @@
 - name: ubuntu_14_04
   type: repository
   desc: Ubuntu 14.04
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2019-04-01
@@ -90,6 +93,7 @@
 - name: ubuntu_14_04_backports
   type: repository
   desc: Ubuntu 14.04 Backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2019-04-01
@@ -118,6 +122,7 @@
 - name: ubuntu_16_04
   type: repository
   desc: Ubuntu 16.04
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2021-04-01
@@ -148,6 +153,7 @@
 - name: ubuntu_16_04_backports
   type: repository
   desc: Ubuntu 16.04 Backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2021-04-01
@@ -176,6 +182,7 @@
 - name: ubuntu_18_04
   type: repository
   desc: Ubuntu 18.04
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2023-04-01
@@ -206,6 +213,7 @@
 - name: ubuntu_18_04_backports
   type: repository
   desc: Ubuntu 18.04 Backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2023-04-01
@@ -234,6 +242,7 @@
 - name: ubuntu_18_10
   type: repository
   desc: Ubuntu 18.10
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2019-07-01
@@ -264,6 +273,7 @@
 - name: ubuntu_18_10_backports
   type: repository
   desc: Ubuntu 18.10 Backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   valid_till: 2019-07-01
@@ -292,6 +302,7 @@
 - name: ubuntu_19_04
   type: repository
   desc: Ubuntu 19.04
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 29000
@@ -321,6 +332,7 @@
 - name: ubuntu_19_04_backports
   type: repository
   desc: Ubuntu 19.04 Backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 0
@@ -348,6 +360,7 @@
 - name: ubuntu_19_04_proposed
   type: repository
   desc: Ubuntu 19.04 Proposed
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 0
@@ -375,6 +388,7 @@
 - name: ubuntu_19_10
   type: repository
   desc: Ubuntu 19.10
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 29000
@@ -404,6 +418,7 @@
 - name: ubuntu_19_10_backports
   type: repository
   desc: Ubuntu 19.10 Backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 0
@@ -431,6 +446,7 @@
 - name: ubuntu_19_10_proposed
   type: repository
   desc: Ubuntu 19.10 Proposed
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 0
@@ -458,6 +474,7 @@
 - name: ubuntu_20_04
   type: repository
   desc: Ubuntu 20.04
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 29000
@@ -487,6 +504,7 @@
 - name: ubuntu_20_04_backports
   type: repository
   desc: Ubuntu 20.04 Backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 0
@@ -514,6 +532,7 @@
 - name: ubuntu_20_04_proposed
   type: repository
   desc: Ubuntu 20.04 Proposed
+  statsgroup: Debian+derivs
   family: debuntu
   color: 'e95420'
   minpackages: 0

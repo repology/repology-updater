@@ -5,6 +5,7 @@
   sortname: tails_0
   type: repository
   desc: Tails stable
+  statsgroup: Debian+derivs
   family: debuntu
   color: '56347c'
   minpackages: 10
@@ -23,6 +24,7 @@
   sortname: tails_1
   type: repository
   desc: Tails devel
+  statsgroup: Debian+derivs
   family: debuntu
   color: '56347c'
   minpackages: 10

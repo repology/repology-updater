@@ -4,6 +4,7 @@
 - name: homebrew
   type: repository
   desc: Homebrew
+  statsgroup: Homebrew
   family: homebrew
   ruleset: [homebrew, macosx]
   color: 'fdb130'

@@ -4,6 +4,7 @@
 - name: trisquel_6_0
   type: repository
   desc: Trisquel 6.0
+  statsgroup: Debian+derivs
   family: debuntu
   color: '669fe7'
   minpackages: 20000
@@ -22,6 +23,7 @@
 - name: trisquel_6_0_backports
   type: repository
   desc: Trisquel 6.0 backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: '669fe7'
   minpackages: 50
@@ -40,6 +42,7 @@
 - name: trisquel_7_0
   type: repository
   desc: Trisquel 7.0
+  statsgroup: Debian+derivs
   family: debuntu
   color: '669fe7'
   minpackages: 23000
@@ -58,6 +61,7 @@
 - name: trisquel_7_0_backports
   type: repository
   desc: Trisquel 7.0 backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: '669fe7'
   minpackages: 50
@@ -76,6 +80,7 @@
 - name: trisquel_8_0
   type: repository
   desc: Trisquel 8.0
+  statsgroup: Debian+derivs
   family: debuntu
   color: '669fe7'
   minpackages: 26000
@@ -94,6 +99,7 @@
 - name: trisquel_8_0_backports
   type: repository
   desc: Trisquel 8.0 backports
+  statsgroup: Debian+derivs
   family: debuntu
   color: '669fe7'
   minpackages: 20

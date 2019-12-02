@@ -7,6 +7,7 @@
 - name: linux_mint_17
   type: repository
   desc: Linux Mint 17
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -27,6 +28,7 @@
 - name: linux_mint_17_1
   type: repository
   desc: Linux Mint 17.1
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -47,6 +49,7 @@
 - name: linux_mint_17_2
   type: repository
   desc: Linux Mint 17.2
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -67,6 +70,7 @@
 - name: linux_mint_17_3
   type: repository
   desc: Linux Mint 17.3
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -87,6 +91,7 @@
 - name: linux_mint_18
   type: repository
   desc: Linux Mint 18
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -107,6 +112,7 @@
 - name: linux_mint_18_1
   type: repository
   desc: Linux Mint 18.1
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -127,6 +133,7 @@
 - name: linux_mint_18_2
   type: repository
   desc: Linux Mint 18.2
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -147,6 +154,7 @@
 - name: linux_mint_18_3
   type: repository
   desc: Linux Mint 18.3
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -167,6 +175,7 @@
 - name: linux_mint_19
   type: repository
   desc: Linux Mint 19
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -187,6 +196,7 @@
 - name: linux_mint_19_1
   type: repository
   desc: Linux Mint 19.1
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'
@@ -207,6 +217,7 @@
 - name: linux_mint_19_2
   type: repository
   desc: Linux Mint 19.2
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,mint]
   color: '87cf3e'

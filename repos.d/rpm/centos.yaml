@@ -4,6 +4,7 @@
 - name: centos_6
   type: repository
   desc: CentOS 6
+  statsgroup: CentOS
   family: centos
   color: '932279'
   minpackages: 2000
@@ -26,6 +27,7 @@
 - name: centos_7
   type: repository
   desc: CentOS 7
+  statsgroup: CentOS
   family: centos
   color: '932279'
   minpackages: 3000
@@ -48,6 +50,7 @@
 - name: centos_8
   type: repository
   desc: CentOS 8
+  statsgroup: CentOS
   family: centos
   color: '932279'
   minpackages: 2000

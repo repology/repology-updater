@@ -4,6 +4,7 @@
 - name: parabola
   type: repository
   desc: Parabola
+  statsgroup: Arch+derivs
   family: arch
   ruleset: [ arch, parabola ]
   color: '787dab'
@@ -28,6 +29,7 @@
 - name: parabola_testing
   type: repository
   desc: Parabola Testing
+  statsgroup: Arch+derivs
   family: arch
   ruleset: [ arch, parabola ]
   color: '787dab'

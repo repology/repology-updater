@@ -4,6 +4,7 @@
 - name: sabayon
   type: repository
   desc: Sabayon
+  statsgroup: Gentoo
   family: gentoo
   minpackages: 500
   default_maintainer: fallback-mnt-sabayon@repology
@@ -27,6 +28,7 @@
 - name: sabayon_for_gentoo
   type: repository
   desc: Sabayon for-gentoo
+  statsgroup: Gentoo
   family: gentoo
   minpackages: 100
   default_maintainer: fallback-mnt-sabayon@repology

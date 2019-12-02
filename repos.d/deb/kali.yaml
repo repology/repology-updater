@@ -7,6 +7,7 @@
 - name: kali_rolling
   type: repository
   desc: Kali Linux Rolling
+  statsgroup: Debian+derivs
   family: debuntu
   color: '32638f'
   minpackages: 27000

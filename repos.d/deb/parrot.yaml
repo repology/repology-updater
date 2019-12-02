@@ -17,6 +17,7 @@
 - name: parrot
   type: repository
   desc: Parrot
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [ debuntu, parrot ]
   color: '95b8c8'

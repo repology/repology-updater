@@ -5,6 +5,7 @@
   sortname: opensuse_leap_14_0
   type: repository
   desc: openSUSE Leap 42.3
+  statsgroup: openSUSE
   family: opensuse
   color: '6da741'
   valid_till: 2019-01-31
@@ -48,6 +49,7 @@
 - name: opensuse_leap_15_0
   type: repository
   desc: openSUSE Leap 15.0
+  statsgroup: openSUSE
   family: opensuse
   color: '6da741'
   valid_till: 2019-11-25
@@ -93,6 +95,7 @@
 - name: opensuse_leap_15_1
   type: repository
   desc: openSUSE Leap 15.1
+  statsgroup: openSUSE
   family: opensuse
   color: '6da741'
   minpackages: 10500
@@ -137,6 +140,7 @@
 - name: opensuse_leap_15_2
   type: repository
   desc: openSUSE Leap 15.2
+  statsgroup: openSUSE
   family: opensuse
   color: '6da741'
   minpackages: 10500
@@ -182,6 +186,7 @@
 - name: opensuse_tumbleweed
   type: repository
   desc: openSUSE Tumbleweed
+  statsgroup: openSUSE
   family: opensuse
   color: '6da741'
   minpackages: 10000

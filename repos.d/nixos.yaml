@@ -4,6 +4,7 @@
 - name: nix_stable
   type: repository
   desc: nixpkgs stable
+  statsgroup: nix
   family: nix
   color: '7eb2dd'
   minpackages: 12000
@@ -30,6 +31,7 @@
 - name: nix_unstable
   type: repository
   desc: nixpkgs unstable
+  statsgroup: nix
   family: nix
   color: '7eb2dd'
   minpackages: 13000

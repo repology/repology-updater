@@ -7,6 +7,7 @@
 - name: deepin_unstable
   type: repository
   desc: Deepin
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [ debuntu, deepin ]
   color: '949393'

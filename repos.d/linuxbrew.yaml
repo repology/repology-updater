@@ -4,6 +4,7 @@
 - name: linuxbrew
   type: repository
   desc: Linuxbrew
+  statsgroup: Homebrew
   family: homebrew
   color: 'fdb130'
   minpackages: 4300

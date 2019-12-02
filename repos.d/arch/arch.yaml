@@ -4,6 +4,7 @@
 - name: arch
   type: repository
   desc: Arch
+  statsgroup: Arch+derivs
   family: arch
   color: '0088cc'
   minpackages: 9500
@@ -33,6 +34,7 @@
 - name: arch_testing
   type: repository
   desc: Arch Testing
+  statsgroup: Arch+derivs
   family: arch
   color: '0088cc'
   minpackages: 1

@@ -4,6 +4,7 @@
 - name: altsisyphus
   type: repository
   desc: ALT Sisyphus
+  statsgroup: ALT Sisyphus
   family: sisyphus
   color: 'baccdd'
   minpackages: 18000
@@ -28,6 +29,7 @@
 - name: alt_p9
   type: repository
   desc: ALT Linux p9
+  statsgroup: ALT Sisyphus
   family: sisyphus
   color: 'baccdd'
   minpackages: 18000

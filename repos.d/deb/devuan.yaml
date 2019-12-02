@@ -6,6 +6,7 @@
 - name: devuan_1_0
   type: repository
   desc: Devuan 1.0 (Jessie)
+  statsgroup: Debian+derivs
   family: debuntu
   color: '88839c'
   minpackages: 20000
@@ -24,6 +25,7 @@
 - name: devuan_2_0
   type: repository
   desc: Devuan 2.0 (ASCII)
+  statsgroup: Debian+derivs
   family: debuntu
   color: '88839c'
   minpackages: 20000
@@ -42,6 +44,7 @@
 - name: devuan_3_0
   type: repository
   desc: Devuan 3.0 (Beowulf)
+  statsgroup: Debian+derivs
   family: debuntu
   color: '88839c'
   minpackages: 25000
@@ -60,6 +63,7 @@
 - name: devuan_unstable
   type: repository
   desc: Devuan Unstable
+  statsgroup: Debian+derivs
   family: debuntu
   color: '88839c'
   minpackages: 25000

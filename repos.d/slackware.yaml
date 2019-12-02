@@ -5,6 +5,7 @@
   sortname: slackware32_14_2
   type: repository
   desc: Slackware 14.2
+  statsgroup: Slackware
   family: slackware
   color: '0000ff'
   minpackages: 1400
@@ -24,6 +25,7 @@
   sortname: slackware32_current
   type: repository
   desc: Slackware current
+  statsgroup: Slackware
   family: slackware
   color: '0000ff'
   minpackages: 1300
@@ -42,6 +44,7 @@
 - name: slackware64_14_2
   type: repository
   desc: Slackware64 14.2
+  statsgroup: Slackware
   family: slackware
   color: '0000ff'
   minpackages: 1400
@@ -60,6 +63,7 @@
 - name: slackware64_current
   type: repository
   desc: Slackware64 current
+  statsgroup: Slackware
   family: slackware
   color: '0000ff'
   minpackages: 1300
@@ -78,6 +82,7 @@
 - name: slackwarearm_14_2
   type: repository
   desc: Slackwarearm 14.2
+  statsgroup: Slackware
   family: slackware
   color: '0000ff'
   minpackages: 1400
@@ -96,6 +101,7 @@
 - name: slackwarearm_current
   type: repository
   desc: Slackwarearm current
+  statsgroup: Slackware
   family: slackware
   color: '0000ff'
   minpackages: 1300

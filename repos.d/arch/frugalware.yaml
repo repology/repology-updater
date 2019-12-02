@@ -4,6 +4,7 @@
 - name: frugalware_current
   type: repository
   desc: Frugalware Current
+  statsgroup: Arch+derivs
   family: arch
   ruleset: [arch, frugalware]
   color: '464646'

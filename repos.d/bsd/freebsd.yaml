@@ -4,6 +4,7 @@
 - name: freebsd
   type: repository
   desc: FreeBSD Ports
+  statsgroup: FreeBSD Ports
   singular: FreeBSD port
   family: freebsd
   color: '990000'
@@ -45,6 +46,7 @@
 - name: dports
   type: repository
   desc: DPorts
+  statsgroup: FreeBSD Ports
   family: freebsd
   color: '9eff11'
   minpackages: 29000

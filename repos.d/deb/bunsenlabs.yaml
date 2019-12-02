@@ -5,6 +5,7 @@
   sortname: bunsenlabs_8
   type: repository
   desc: BunsenLabs Hydrogen
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,bunsenlabs]
   color: f6b620
@@ -29,6 +30,7 @@
   sortname: bunsenlabs_9
   type: repository
   desc: BunsenLabs Helium
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,bunsenlabs]
   color: f6b620
@@ -53,6 +55,7 @@
   sortname: bunsenlabs_8_backports
   type: repository
   desc: BunsenLabs Hydrogen/Jessie Backports
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,bunsenlabs]
   color: f6b620
@@ -77,6 +80,7 @@
   sortname: bunsenlabs_9_backports
   type: repository
   desc: BunsenLabs Helium/Stretch Backports
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu,bunsenlabs]
   color: f6b620

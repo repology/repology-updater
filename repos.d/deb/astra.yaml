@@ -5,6 +5,7 @@
   sortname: astra__stable
   type: repository
   desc: Astra Orel Stable
+  statsgroup: Debian+derivs
   family: debuntu
   ruleset: [debuntu, astra]
   minpackages: 3500
@@ -23,6 +24,7 @@
 - name: astra_current
   type: repository
   desc: Astra Orel Current
+  statsgroup: Debian+derivs
   family: debuntu
   minpackages: 3500
   sources:

@@ -4,6 +4,7 @@
 - name: mageia_6
   type: repository
   desc: Mageia 6
+  statsgroup: Mageia
   family: mageia
   color: '262f45'
   minpackages: 14000
@@ -27,6 +28,7 @@
 - name: mageia_7
   type: repository
   desc: Mageia 7
+  statsgroup: Mageia
   family: mageia
   color: '262f45'
   minpackages: 14000
@@ -50,6 +52,7 @@
 - name: mageia_cauldron
   type: repository
   desc: Mageia Cauldron
+  statsgroup: Mageia
   family: mageia
   color: '262f45'
   minpackages: 13000

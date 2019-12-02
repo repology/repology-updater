@@ -4,6 +4,7 @@
 - name: calculate
   type: repository
   desc: Calculate
+  statsgroup: Gentoo
   family: gentoo
   minpackages: 100
   default_maintainer: fallback-mnt-calculate@repology
