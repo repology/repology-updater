@@ -14,13 +14,39 @@
       url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/Sisyphus/{source}/base/srclist.classic.xz'
       compression: xz
   repolinks:
-    - desc: Sisyphus repository
-      url: http://www.sisyphus.ru/en/
+    - desc: Sisyphus packages
+      url: https://packages.altlinux.org/en/sisyphus/packages
+    - desc: Sisyphus on ALT Linux Wiki
+      url: https://en.altlinux.org/Sisyphus
   packagelinks:
-    - desc: Sisyphus package details
+    - desc: Package details
       url: 'https://packages.altlinux.org/en/sisyphus/srpms/{name}'
     - desc: Spec file
       url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{name}'
+  tags: [ all, production ]
+
+- name: alt_p9
+  type: repository
+  desc: ALT Linux p9
+  family: sisyphus
+  color: 'baccdd'
+  minpackages: 18000
+  sources:
+    - name: [ noarch, x86_64 ]
+      fetcher: FileFetcher
+      parser: SrcListParser
+      url: 'http://ftp.altlinux.org/pub/distributions/ALTLinux/p9/branch/{source}/base/srclist.classic.xz'
+      compression: xz
+  repolinks:
+    - desc: ALT p9 packages
+      url: https://packages.altlinux.org/en/p9/packages
+    - desc: p9 on ALT Linux Wiki
+      url: http://en.altlinux.org/p9
+  packagelinks:
+    - desc: Package details
+      url: 'https://packages.altlinux.org/en/p9/srpms/{name}'
+    - desc: Spec file
+      url: 'https://packages.altlinux.org/en/p9/specfiles/{name}'
   tags: [ all, production ]
 
 # automatically imported packages; duplicate already existing packages and versions,
