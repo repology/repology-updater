@@ -117,6 +117,7 @@ class RepositoryManager:
                 'singular': repository['singular'],
                 'type': repository['type'],
                 'color': repository.get('color'),
+                'statsgroup': repository.get('statsgroup', repository['desc']),
             } for repository in self.get_repositories(reponames)
         }
 
@@ -133,5 +134,6 @@ class RepositoryManager:
                 'singular': repository['singular'],
                 'type': repository['type'],
                 'color': repository.get('color'),
+                'statsgroup': repository.get('statsgroup', repository['desc']),
             } for repository in self.get_repositories(reponames)
         ]

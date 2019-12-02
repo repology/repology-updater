@@ -153,6 +153,7 @@ schemas = {
             'singular': str,
             Required('type'): Any('repository', 'site', 'modules'),
             Required('desc'): str,
+            'statsgroup': str,
             Required('family'): Any(*families),
             'ruleset': Any(Any(*rulesets), [Any(*rulesets)]),  # XXX: make required
             'color': str,

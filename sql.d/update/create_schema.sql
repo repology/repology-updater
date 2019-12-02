@@ -611,6 +611,7 @@ CREATE TABLE repositories (
 	sortname text NOT NULL,
 	"type" text NOT NULL,
 	"desc" text NOT NULL,
+	statsgroup text NOT NULL,
 	singular text NOT NULL,
 	family text NOT NULL,
 	color text,
