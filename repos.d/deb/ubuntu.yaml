@@ -6,6 +6,7 @@
   desc: Ubuntu 12.04
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2017-04-26
   minpackages: 21000
@@ -35,6 +36,7 @@
   desc: Ubuntu 12.04 Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2017-04-26
   minpackages: 0
@@ -64,6 +66,7 @@
   desc: Ubuntu 14.04
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2019-04-01
   minpackages: 23000
@@ -95,6 +98,7 @@
   desc: Ubuntu 14.04 Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2019-04-01
   minpackages: 0
@@ -124,6 +128,7 @@
   desc: Ubuntu 16.04
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2021-04-01
   minpackages: 26000
@@ -155,6 +160,7 @@
   desc: Ubuntu 16.04 Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2021-04-01
   minpackages: 0
@@ -184,6 +190,7 @@
   desc: Ubuntu 18.04
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2023-04-01
   minpackages: 29000
@@ -215,6 +222,7 @@
   desc: Ubuntu 18.04 Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2023-04-01
   minpackages: 0
@@ -244,6 +252,7 @@
   desc: Ubuntu 18.10
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2019-07-01
   minpackages: 29000
@@ -275,6 +284,7 @@
   desc: Ubuntu 18.10 Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   valid_till: 2019-07-01
   minpackages: 0
@@ -304,6 +314,7 @@
   desc: Ubuntu 19.04
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 29000
   sources:
@@ -334,6 +345,7 @@
   desc: Ubuntu 19.04 Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
   sources:
@@ -362,6 +374,7 @@
   desc: Ubuntu 19.04 Proposed
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
   sources:
@@ -390,6 +403,7 @@
   desc: Ubuntu 19.10
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 29000
   sources:
@@ -420,6 +434,7 @@
   desc: Ubuntu 19.10 Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
   sources:
@@ -448,6 +463,7 @@
   desc: Ubuntu 19.10 Proposed
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
   sources:
@@ -476,6 +492,7 @@
   desc: Ubuntu 20.04
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 29000
   sources:
@@ -506,6 +523,7 @@
   desc: Ubuntu 20.04 Backports
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
   sources:
@@ -534,6 +552,7 @@
   desc: Ubuntu 20.04 Proposed
   statsgroup: Debian+derivs
   family: debuntu
+  ruleset: [debuntu, ubuntu]
   color: 'e95420'
   minpackages: 0
   sources:

@@ -140,6 +140,7 @@ rulesets = families + [
     'pureos',
     'rpmsphere',
     'slitaz_next',
+    'ubuntu',
     'unitedrpms',
     'whonix',
     'windows',
