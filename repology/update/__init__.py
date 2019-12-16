@@ -26,6 +26,23 @@ from repology.package import Package
 from repology.packageproc import fill_packageset_versions
 
 
+def calculate_project_classless_hash(packages: Iterable[Package]) -> int:
+    total_hash = 0
+    seen_hashes: Set[int] = set()
+
+    for package in packages:
+        package_hash = package.get_classless_hash()
+
+        if package_hash in seen_hashes:
+            raise RuntimeError(f'duplicate hash for package {package}')
+        else:
+            seen_hashes.add(package_hash)
+
+        total_hash ^= package_hash
+
+    return total_hash
+
+
 def update_repology(database: Database, projects: Iterable[List[Package]], logger: Logger) -> None:
     logger.log('clearing the database')
     database.update_start()
@@ -44,6 +61,8 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
 
         for package in packageset:
             field_stats_per_repo[package.repo].add(package)
+
+        database.update_project_hash(packageset[0].effname, calculate_project_classless_hash(packageset))
 
         if len(package_queue) >= 10000:
             database.add_packages(package_queue)
