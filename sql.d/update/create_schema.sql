@@ -882,3 +882,13 @@ CREATE TABLE project_redirects (
 	manual bool NOT NULL DEFAULT FALSE,
 	PRIMARY KEY(oldname, newname)
 );
+
+--------------------------------------------------------------------------------
+-- Hashes
+--------------------------------------------------------------------------------
+DROP TABLE IF EXISTS project_hashes CASCADE;
+
+CREATE TABLE project_hashes (
+	effname text NOT NULL PRIMARY KEY,
+	hash bigint NOT NULL
+);
