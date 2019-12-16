@@ -19,6 +19,7 @@ which updates the repository information. See also the
 - Python module [libversion](https://pypi.python.org/pypi/libversion) (also requires [libversion](https://github.com/repology/libversion) C library)
 - Python module [psycopg2](http://initd.org/psycopg/)
 - Python module [pyyaml](http://pyyaml.org/)
+- Python module [xxhash](https://github.com/ifduyue/python-xxhash)
 - [PostgreSQL](https://www.postgresql.org/) 10.0+
 - PostgreSQL extension [libversion](https://github.com/repology/postgresql-libversion)
 

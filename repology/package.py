@@ -15,10 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-
-from typing import Any, ClassVar, Dict, List, Optional
+import json
+from typing import Any, ClassVar, Dict, List, Optional, cast
 
 from libversion import ANY_IS_PATCH, P_IS_PATCH, version_compare
+
+import xxhash
 
 
 class PackageStatus:
@@ -320,6 +322,21 @@ class Package:
             ((other.flags & PackageFlags.P_IS_PATCH) and P_IS_PATCH) |
             ((other.flags & PackageFlags.ANY_IS_PATCH) and ANY_IS_PATCH)
         )
+
+    def get_classless_hash(self) -> int:
+        return cast(
+            int,
+            xxhash.xxh64_intdigest(
+                json.dumps(
+                    {
+                        slot: getattr(self, slot)
+                        for slot in self.__slots__
+                        if slot != 'versionclass'
+                    },
+                    sort_keys=True
+                )
+            )
+        ) & 0x7fffffffffffffff
 
     def __repr__(self) -> str:
         return 'Package(repo={}, name={}, version={})'.format(self.repo, self.name, self.version)
