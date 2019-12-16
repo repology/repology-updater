@@ -57,7 +57,43 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
     for repo, field_stats in field_stats_per_repo.items():
         database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
 
-    logger.log('updating views')
+    logger.log('updating metapackages')
+    database.update_metapackages()
+
+    logger.log('updating repositories')
+    database.update_repositories()
+
+    logger.log('updating maintainers')
+    database.update_maintainers()
+
+    logger.log('updating binding table repo_metapackages')
+    database.update_binding_repo_metapackages()
+
+    logger.log('updating binding table category_metapackages')
+    database.update_binding_category_metapackages()
+
+    logger.log('updating binding table maintainer_metapackages')
+    database.update_binding_maintainer_metapackages()
+
+    logger.log('updating binding table maintainer_and_repo_metapackages')
+    database.update_binding_maintainer_and_repo_metapackages()
+
+    logger.log('updating url relations')
+    database.update_url_relations()
+
+    logger.log('updating problems')
+    database.update_problems()
+
+    logger.log('updating links')
+    database.update_links()
+
+    logger.log('updating statistics')
+    database.update_statistics()
+
+    logger.log('updating histories')
+    database.update_histories()
+
+    logger.log('finalizing the update')
     database.update_finish()
 
     logger.log('committing changes')

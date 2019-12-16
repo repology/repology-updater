@@ -16,11 +16,37 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- Hack: avoid sequence overflows (especially for repositories table)
+-- Update binding tables: per-maintainer
 --------------------------------------------------------------------------------
--- XXX: this one is not really helpful currently as packages are INSERTed, not UPSERTed
--- if packages id overflow becomes problem, we may enable CYCLE on packages id sequence
---SELECT setval(pg_get_serial_sequence('packages', 'id'), (select max(id) + 1 FROM packages));
-SELECT setval(pg_get_serial_sequence('metapackages', 'id'), (select max(id) + 1 FROM metapackages));
-SELECT setval(pg_get_serial_sequence('repositories', 'id'), (select max(id) + 1 FROM repositories));
-SELECT setval(pg_get_serial_sequence('maintainers', 'id'), (select max(id) + 1 FROM maintainers));
+DELETE FROM maintainer_metapackages;
+
+INSERT INTO maintainer_metapackages (
+	maintainer_id,
+	effname,
+
+	newest,
+	outdated,
+	problematic
+)
+SELECT
+	(SELECT id FROM maintainers WHERE maintainer = tmp.maintainer),
+	effname,
+
+	newest,
+	outdated,
+	problematic
+FROM
+(
+	SELECT
+		unnest(maintainers) AS maintainer,
+		effname,
+		count(*) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) > 0 AS newest,
+		count(*) FILTER (WHERE versionclass = 2) > 0 AS outdated,
+		count(*) FILTER (WHERE versionclass = 3 OR versionclass = 7 OR versionclass = 8) > 0 AS problematic
+	FROM packages
+	GROUP BY unnest(maintainers), effname
+) AS tmp
+INNER JOIN metapackages USING(effname)
+WHERE num_repos_nonshadow > 0;
+
+ANALYZE maintainer_metapackages;

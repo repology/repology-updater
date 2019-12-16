@@ -16,11 +16,41 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- Hack: avoid sequence overflows (especially for repositories table)
+-- History snapshot
 --------------------------------------------------------------------------------
--- XXX: this one is not really helpful currently as packages are INSERTed, not UPSERTed
--- if packages id overflow becomes problem, we may enable CYCLE on packages id sequence
---SELECT setval(pg_get_serial_sequence('packages', 'id'), (select max(id) + 1 FROM packages));
-SELECT setval(pg_get_serial_sequence('metapackages', 'id'), (select max(id) + 1 FROM metapackages));
-SELECT setval(pg_get_serial_sequence('repositories', 'id'), (select max(id) + 1 FROM repositories));
-SELECT setval(pg_get_serial_sequence('maintainers', 'id'), (select max(id) + 1 FROM maintainers));
+
+-- per-repository counters
+INSERT INTO repositories_history (
+	ts,
+	snapshot
+)
+SELECT
+	now(),
+	jsonb_object_agg(snapshot.name, to_jsonb(snapshot) - 'name')
+FROM (
+	SELECT
+		name,
+		num_metapackages,
+		num_metapackages_unique,
+		num_metapackages_newest,
+		num_metapackages_outdated,
+		num_metapackages_comparable,
+		num_metapackages_problematic,
+		num_problems,
+		num_maintainers
+	FROM repositories
+) AS snapshot;
+
+-- global statistics
+INSERT INTO statistics_history (
+	ts,
+	snapshot
+)
+SELECT
+	now(),
+	to_jsonb(snapshot)
+FROM (
+	SELECT
+		*
+	FROM statistics
+) AS snapshot;

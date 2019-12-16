@@ -16,11 +16,21 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- Hack: avoid sequence overflows (especially for repositories table)
+-- Update binding tables: per-category
 --------------------------------------------------------------------------------
--- XXX: this one is not really helpful currently as packages are INSERTed, not UPSERTed
--- if packages id overflow becomes problem, we may enable CYCLE on packages id sequence
---SELECT setval(pg_get_serial_sequence('packages', 'id'), (select max(id) + 1 FROM packages));
-SELECT setval(pg_get_serial_sequence('metapackages', 'id'), (select max(id) + 1 FROM metapackages));
-SELECT setval(pg_get_serial_sequence('repositories', 'id'), (select max(id) + 1 FROM repositories));
-SELECT setval(pg_get_serial_sequence('maintainers', 'id'), (select max(id) + 1 FROM maintainers));
+DELETE FROM category_metapackages;
+
+INSERT INTO category_metapackages (
+	category,
+	effname,
+	"unique"
+)
+SELECT
+	category,
+	effname,
+	max(num_families) = 1
+FROM packages INNER JOIN metapackages USING(effname)
+WHERE category IS NOT NULL AND num_repos_nonshadow > 0
+GROUP BY effname, category;
+
+ANALYZE category_metapackages;

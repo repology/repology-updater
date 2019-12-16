@@ -16,11 +16,10 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
--- Hack: avoid sequence overflows (especially for repositories table)
+-- Update global statistics
 --------------------------------------------------------------------------------
--- XXX: this one is not really helpful currently as packages are INSERTed, not UPSERTed
--- if packages id overflow becomes problem, we may enable CYCLE on packages id sequence
---SELECT setval(pg_get_serial_sequence('packages', 'id'), (select max(id) + 1 FROM packages));
-SELECT setval(pg_get_serial_sequence('metapackages', 'id'), (select max(id) + 1 FROM metapackages));
-SELECT setval(pg_get_serial_sequence('repositories', 'id'), (select max(id) + 1 FROM repositories));
-SELECT setval(pg_get_serial_sequence('maintainers', 'id'), (select max(id) + 1 FROM maintainers));
+UPDATE statistics SET
+	num_packages = (SELECT count(*) FROM packages),
+	num_metapackages = (SELECT count(*) FROM metapackages WHERE num_repos_nonshadow > 0),
+	num_problems = (SELECT count(*) FROM problems),
+	num_maintainers = (SELECT count(*) FROM maintainers WHERE num_packages > 0);
