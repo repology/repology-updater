@@ -1,0 +1,64 @@
+# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+#
+# This file is part of repology
+#
+# repology is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# repology is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with repology.  If not, see <http://www.gnu.org/licenses/>.
+
+from collections import defaultdict
+from timeit import default_timer as timer
+from typing import Dict, Iterable, List
+
+from repology.database import Database
+from repology.fieldstats import FieldStatistics
+from repology.logger import Logger
+from repology.package import Package
+from repology.packageproc import fill_packageset_versions
+
+
+def update_repology(database: Database, projects: Iterable[List[Package]], logger: Logger) -> None:
+    logger.log('clearing the database')
+    database.update_start()
+
+    package_queue = []
+    num_pushed = 0
+    start_time = timer()
+
+    logger.log('pushing packages to database')
+
+    field_stats_per_repo: Dict[str, FieldStatistics] = defaultdict(FieldStatistics)
+
+    for packageset in projects:
+        fill_packageset_versions(packageset)
+        package_queue.extend(packageset)
+
+        for package in packageset:
+            field_stats_per_repo[package.repo].add(package)
+
+        if len(package_queue) >= 10000:
+            database.add_packages(package_queue)
+            num_pushed += len(package_queue)
+            package_queue = []
+            logger.get_indented().log('pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
+
+    # process what's left in the queue
+    database.add_packages(package_queue)
+
+    for repo, field_stats in field_stats_per_repo.items():
+        database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
+
+    logger.log('updating views')
+    database.update_finish()
+
+    logger.log('committing changes')
+    database.commit()

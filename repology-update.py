@@ -19,20 +19,18 @@
 
 import argparse
 import sys
-from collections import defaultdict
 from timeit import default_timer as timer
-from typing import Any, Callable, Dict, List, TypeVar
+from typing import Any, Callable, List, TypeVar
 
 from repology.config import config
 from repology.database import Database
 from repology.dblogger import LogRunManager
-from repology.fieldstats import FieldStatistics
 from repology.logger import FileLogger, Logger, StderrLogger
-from repology.packageproc import fill_packageset_versions
 from repology.querymgr import QueryManager
 from repology.repomgr import RepositoryManager
 from repology.repoproc import RepositoryProcessor
 from repology.transformer import PackageTransformer
+from repology.update import update_repology
 
 
 T = TypeVar('T')
@@ -193,41 +191,11 @@ def database_update(env: Environment) -> None:
     logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
-    logger.log('clearing the database')
-    database.update_start()
-
-    package_queue = []
-    num_pushed = 0
-    start_time = timer()
-
-    logger.log('pushing packages to database')
-
-    field_stats_per_repo: Dict[str, FieldStatistics] = defaultdict(FieldStatistics)
-
-    for packageset in env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger):
-        fill_packageset_versions(packageset)
-        package_queue.extend(packageset)
-
-        for package in packageset:
-            field_stats_per_repo[package.repo].add(package)
-
-        if len(package_queue) >= 10000:
-            database.add_packages(package_queue)
-            num_pushed += len(package_queue)
-            package_queue = []
-            logger.get_indented().log('pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
-
-    # process what's left in the queue
-    database.add_packages(package_queue)
-
-    for repo, field_stats in field_stats_per_repo.items():
-        database.update_repository_used_package_fields(repo, field_stats.get_used_fields())
-
-    logger.log('updating views')
-    database.update_finish()
-
-    logger.log('committing changes')
-    database.commit()
+    update_repology(
+        database=database,
+        projects=env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger),
+        logger=logger,
+    )
 
 
 def database_update_post(env: Environment) -> None:
