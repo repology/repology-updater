@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,10 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
+import heapq
 import os
 import pickle
-from contextlib import ExitStack
-from typing import Any, BinaryIO, Iterable, Iterator, List, Optional
+from typing import Iterable, Iterator, List
 
 from repology.package import Package
 
@@ -69,61 +69,22 @@ class ChunkedSerializer:
         return self.total_packages
 
 
-class StreamDeserializer:
-    _path: str
-    _fd: BinaryIO
-    _unpickler: pickle.Unpickler
-    _remaining: int
-    current: Optional[Package]
+def _stream_deserialize(path: str) -> Iterator[Package]:
+    with open(path, 'rb') as fd:
+        unpickler = pickle.Unpickler(fd)
+        count = unpickler.load()
 
-    def __init__(self, path: str):
-        self._path = path
-
-    def __enter__(self) -> 'StreamDeserializer':
-        self._fd = open(self._path, 'rb')
-
-        try:
-            self._unpickler = pickle.Unpickler(self._fd)
-            self._remaining = self._unpickler.load()
-            self.current = None
-
-            self.pop()
-
-            return self
-        except:
-            self._fd.close()
-            raise
-
-    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
-        self._fd.close()
-
-    def pop(self) -> None:
-        if self._remaining > 0:
-            self.current = self._unpickler.load()
-            self._remaining -= 1
-        else:
-            self.current = None
-            self._remaining = -1
+        for _ in range(count):
+            yield unpickler.load()
 
 
 def heap_deserialize(paths: Iterable[str]) -> Iterator[List[Package]]:
-    with ExitStack() as stack:
-        deserializers = [stack.enter_context(StreamDeserializer(path)) for path in paths]
+    packages: List[Package] = []
 
-        thiskey = min((ds.current.effname for ds in deserializers if ds.current is not None), default=None)
-
-        while thiskey is not None:
-            nextkey: Optional[str] = None
-
-            # fetch all packages with given key from all deserializers
-            packages = []
-            for ds in deserializers:
-                while ds.current is not None and ds.current.effname == thiskey:
-                    packages.append(ds.current)
-                    ds.pop()
-
-                if ds.current is not None and (nextkey is None or ds.current.effname < nextkey):
-                    nextkey = ds.current.effname
-
+    for package in heapq.merge(*(_stream_deserialize(path) for path in paths), key=lambda p: p.effname):
+        if packages and packages[0].effname != package.effname:
             yield packages
-            thiskey = nextkey
+            packages = []
+        packages.append(package)
+
+    yield packages
