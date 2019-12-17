@@ -16,7 +16,6 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 from collections import defaultdict
-from timeit import default_timer as timer
 from typing import Dict, Iterable, List
 
 from repology.database import Database
@@ -24,54 +23,56 @@ from repology.fieldstats import FieldStatistics
 from repology.logger import Logger
 from repology.package import Package
 from repology.packageproc import fill_packageset_versions
+from repology.update.changes import ProjectsChangeStatistics, RemovedProject, UpdatedProject, iter_changed_projects
+from repology.update.hashes import iter_project_hashes
 
 
-def calculate_project_classless_hash(packages: Iterable[Package]) -> int:
-    total_hash = 0
-    seen_hashes: Set[int] = set()
+def update_project(database: Database, change: UpdatedProject) -> None:
+    fill_packageset_versions(change.packages)
 
-    for package in packages:
-        package_hash = package.get_classless_hash()
+    database.remove_packages(change.effname)
+    database.add_packages(change.packages)
 
-        if package_hash in seen_hashes:
-            raise RuntimeError(f'duplicate hash for package {package}')
-        else:
-            seen_hashes.add(package_hash)
+    database.update_project_hash(change.effname, change.hash)
 
-        total_hash ^= package_hash
 
-    return total_hash
+def remove_project(database: Database, change: RemovedProject) -> None:
+    database.remove_packages(change.effname)
+    database.remove_project_hash(change.effname)
 
 
 def update_repology(database: Database, projects: Iterable[List[Package]], logger: Logger) -> None:
-    logger.log('clearing the database')
+    logger.log('starting the update')
     database.update_start()
 
-    package_queue = []
-    num_pushed = 0
-    start_time = timer()
-
-    logger.log('pushing packages to database')
+    logger.log('updating projects')
 
     field_stats_per_repo: Dict[str, FieldStatistics] = defaultdict(FieldStatistics)
 
-    for packageset in projects:
-        fill_packageset_versions(packageset)
-        package_queue.extend(packageset)
+    prev_total = 0
+    stats = ProjectsChangeStatistics()
 
-        for package in packageset:
-            field_stats_per_repo[package.repo].add(package)
+    for change in iter_changed_projects(iter_project_hashes(database), projects, stats):
+        if isinstance(change, UpdatedProject):
+            update_project(database, change)
 
-        database.update_project_hash(packageset[0].effname, calculate_project_classless_hash(packageset))
+            for package in change.packages:
+                field_stats_per_repo[package.repo].add(package)
 
-        if len(package_queue) >= 10000:
-            database.add_packages(package_queue)
-            num_pushed += len(package_queue)
-            package_queue = []
-            logger.get_indented().log('pushed {} packages, {:.2f} packages/second'.format(num_pushed, num_pushed / (timer() - start_time)))
+        elif isinstance(change, RemovedProject):
+            remove_project(database, change)
 
-    # process what's left in the queue
-    database.add_packages(package_queue)
+        if stats.total - prev_total >= 10000 or prev_total == 0:
+            logger.log(f'  at "{change.effname}": {stats}')
+            prev_total = stats.total
+
+    logger.log(f'  done: {stats}')
+
+    if stats.change_fraction >= 0.05:
+        logger.log('performing extra actions after huge change')
+        database.update_handle_huge_change()
+
+    logger.log('updating field statistics')
 
     for repo, field_stats in field_stats_per_repo.items():
         database.update_repository_used_package_fields(repo, field_stats.get_used_fields())

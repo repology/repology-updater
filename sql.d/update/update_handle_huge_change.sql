@@ -1,4 +1,4 @@
--- Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -19,4 +19,4 @@
 --
 --------------------------------------------------------------------------------
 
-SET SESSION work_mem = '128MB';
+ANALYZE packages;
