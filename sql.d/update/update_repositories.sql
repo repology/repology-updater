@@ -100,18 +100,23 @@ WHERE name = tmp.repo;
 --------------------------------------------------------------------------------
 -- Update aggregate tables: repositories, pass2
 --------------------------------------------------------------------------------
+WITH new_maintainer_counts AS (
+	SELECT
+		repo,
+		count(DISTINCT maintainer) as num_maintainers
+	FROM (
+		SELECT
+			repo,
+			unnest(maintainers) AS maintainer
+		FROM packages
+	) AS tmp
+	GROUP BY repo
+)
 UPDATE repositories
 SET
-	num_maintainers = (
-		SELECT
-			count(DISTINCT maintainer)
-		FROM (
-			SELECT
-				unnest(maintainers) AS maintainer
-			FROM packages
-			WHERE repo = repositories.name
-		) as TMP
-	);
+	num_maintainers = new_maintainer_counts.num_maintainers
+FROM new_maintainer_counts
+WHERE new_maintainer_counts.repo = repositories.name;
 
 --------------------------------------------------------------------------------
 -- Update aggregate tables: repositories, finalize
