@@ -35,6 +35,7 @@ Needed for fetching/parsing repository data:
 - Python module sqlite3 (part of python)
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
+- [subversion](https://subversion.apache.org/)
 
 ### Development dependencies
 
