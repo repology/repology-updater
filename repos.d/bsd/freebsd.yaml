@@ -76,5 +76,5 @@
     - desc: Related bugs in FreeBSD bugzilla
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={srcname}'
     - desc: Synth build log
-      url: 'http://muscles.dragonflybsd.org/dports/logs/{srcname|dirname}___{srcname|basename}.log'
+      url: 'http://sting.dragonflybsd.org/dports/logs/{srcname|dirname}___{srcname|basename}.log'
   tags: [ all, production ]
