@@ -54,7 +54,7 @@
     - name: INDEX
       fetcher: FileFetcher
       parser: DPortsIndexParser
-      url: http://muscles.dragonflybsd.org/INDEX.bz2
+      url: http://sting.dragonflybsd.org/dports/INDEX.bz2
       allow_zero_size: false
       compression: bz2
   repolinks:
@@ -76,5 +76,5 @@
     - desc: Related bugs in FreeBSD bugzilla
       url: 'https://bugs.freebsd.org/bugzilla/buglist.cgi?quicksearch={srcname}'
     - desc: Synth build log
-      url: 'http://muscles.dragonflybsd.org/synth/logs/{srcname|dirname}___{srcname|basename}.log'
+      url: 'http://muscles.dragonflybsd.org/dports/logs/{srcname|dirname}___{srcname|basename}.log'
   tags: [ all, production ]
