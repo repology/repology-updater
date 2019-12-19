@@ -32,7 +32,7 @@ Needed for fetching/parsing repository data:
 - Python module [jsonslicer](https://pypi.org/project/jsonslicer/)
 - Python module [pyparsing](https://github.com/pyparsing/pyparsing)
 - Python module [protobuf](https://github.com/protocolbuffers/protobuf)
-- Python module sqlite3 (part of python)
+- Python module sqlite3 (part of Python, sometimes packaged separately)
 - [git](https://git-scm.com/)
 - [rsync](https://rsync.samba.org/)
 - [subversion](https://subversion.apache.org/)
