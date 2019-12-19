@@ -17,8 +17,8 @@
       fetch_timeout: 10
       # https://wiki.archlinux.org/index.php/Aurweb_RPC_interface#Limitations
       # says the limit is 4443, but it doesn't seem to be enforced in practice,
-      # so up to 8k allowed by HTTP works
-      max_api_url_length: 8192
+      # so up to the maximum allowed in practice
+      max_api_url_length: 6500
       parser: AURParser
       url: https://aur.archlinux.org/
   repolinks:
