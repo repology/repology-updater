@@ -25,6 +25,8 @@ from repology.logger import Logger
 
 
 class RepodataFetcher(ScratchFileFetcher):
+    primary_key = 'primary'
+
     def __init__(self, url: str, fetch_timeout: int = 60):
         super(RepodataFetcher, self).__init__(binary=True)
 
@@ -32,14 +34,15 @@ class RepodataFetcher(ScratchFileFetcher):
         self.fetch_timeout = fetch_timeout
 
     def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
+
         # fetch and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.log('fetching metadata from ' + repomd_url)
         repomd_content = do_http(repomd_url, check_status=True, timeout=self.fetch_timeout).text
         repomd = xml.etree.ElementTree.fromstring(repomd_content)
-        repomd_elt_primary = repomd.find('{http://linux.duke.edu/metadata/repo}data[@type="primary"]')
+        repomd_elt_primary = repomd.find('{{http://linux.duke.edu/metadata/repo}}data[@type="{}"]'.format(self.primary_key))
         if repomd_elt_primary is None:
-            raise RuntimeError('Cannot find <primary> element in repomd.xml')
+            raise RuntimeError('Cannot find <{}> element in repomd.xml'.format(self.primary_key))
 
         repomd_elt_primary_location = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}location')
         repomd_elt_primary_checksum = repomd_elt_primary.find('./{http://linux.duke.edu/metadata/repo}open-checksum[@type="sha256"]')
@@ -61,6 +64,8 @@ class RepodataFetcher(ScratchFileFetcher):
             compression = 'gz'
         elif repodata_url.endswith('xz'):
             compression = 'xz'
+        elif repodata_url.endswith('bz2'):
+            compression = 'bz2'
 
         logger.log('fetching {}'.format(repodata_url))
 
@@ -73,3 +78,7 @@ class RepodataFetcher(ScratchFileFetcher):
         logger.log('size is {} byte(s)'.format(os.path.getsize(statefile.get_path())))
 
         return True
+
+
+class RepodataSqliteFetcher(RepodataFetcher):
+    primary_key = 'primary_db'
