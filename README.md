@@ -1,7 +1,6 @@
 # Repology
 
 [![Build Status](https://travis-ci.org/repology/repology-updater.svg?branch=master)](https://travis-ci.org/repology/repology-updater)
-[![Coverage Status](https://coveralls.io/repos/github/repology/repology-updater/badge.svg?branch=master)](https://coveralls.io/github/repology/repology-updater?branch=master)
 [![codecov](https://codecov.io/gh/repology/repology-updater/branch/master/graph/badge.svg)](https://codecov.io/gh/repology/repology-updater)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ac95ded5d51f4181bf65dc90b0eb5e12)](https://www.codacy.com/manual/AMDmi3/repology-updater)
 

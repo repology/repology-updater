@@ -58,7 +58,6 @@ before_install:
     )
   - pip install -r requirements-dev.txt
   - pip install codecov
-  - pip install coveralls
 before_script:
   - git clone --depth=1 https://github.com/repology/repology-rules.git rules.d
   - sudo -u postgres psql -c "CREATE DATABASE repology_test;"
@@ -88,4 +87,4 @@ script:
   - coverage run --source=repology --omit="repology/test/*,repology/fetchers/*" -m unittest discover
 
 after_success:
-  - if [ -n "$COVERAGE" ]; then coveralls; codecov; fi
+  - if [ -n "$COVERAGE" ]; then codecov; fi
