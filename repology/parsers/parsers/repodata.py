@@ -103,14 +103,27 @@ class RepodataSqliteParser(Parser):
                                     'rpm_license', 'arch', 'rpm_packager']):
             with factory.begin() as pkg:
                 pkg.add_name(pkgdata['name'], NameType.GENERIC_PKGNAME)
-                pkg.set_version(pkgdata['version'], normalize_version)
-                pkg.set_arch(pkgdata['arch'])
+
+                version = pkgdata['version']
+
+                match = re.match('0\\.[0-9]+\\.((?:alpha|beta|rc)[0-9]+)\\.', pkgdata['release'])
+                if match:
+                    # known pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Prerelease_versions
+                    version += '-' + match.group(1)
+                elif pkgdata['release'] < '1':
+                    # unknown pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Some_definitions
+                    # most likely a snapshot
+                    pkg.set_flags(PackageFlags.IGNORE)
+
+                pkg.set_version(version, normalize_version)
                 pkg.set_rawversion(nevra_construct(None, pkgdata['epoch'], pkgdata['version'], pkgdata['release']))
+
+                pkg.set_arch(pkgdata['arch'])
                 pkg.set_summary(pkgdata['summary'])
                 pkg.add_homepages(pkgdata['url'])
                 pkg.add_categories(pkgdata['rpm_group'])
                 pkg.add_licenses(pkgdata['rpm_license'])
                 pkg.set_arch(pkgdata['arch'])
-                pkg.add_maintainers(pkgdata['rpm_packager'])
+                pkg.add_maintainers(extract_maintainers(pkgdata['rpm_packager']))
 
                 yield pkg
