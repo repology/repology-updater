@@ -62,16 +62,18 @@ class RepodataParser(Parser):
                 version = version_elt.attrib['ver']
                 release = version_elt.attrib['rel']
 
+                fixed_version = version
+
                 match = re.match('0\\.[0-9]+\\.((?:alpha|beta|rc)[0-9]+)\\.', release)
                 if match:
                     # known pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Prerelease_versions
-                    version += '-' + match.group(1)
+                    fixed_version += '-' + match.group(1)
                 elif release < '1':
                     # unknown pre-release schema: https://fedoraproject.org/wiki/Packaging:Versioning#Some_definitions
                     # most likely a snapshot
                     pkg.set_flags(PackageFlags.IGNORE)
 
-                pkg.set_version(version, normalize_version)
+                pkg.set_version(fixed_version, normalize_version)
                 pkg.set_rawversion(nevra_construct(None, epoch, version, release))
 
                 pkg.set_summary(entry.findtext('{http://linux.duke.edu/metadata/common}summary'))
