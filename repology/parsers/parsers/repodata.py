@@ -24,6 +24,7 @@ from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct
+from repology.parsers.sqlite import iter_sqlite
 from repology.parsers.versions import VersionStripper
 from repology.parsers.xml import iter_xml_elements_at_level, safe_findtext
 from repology.transformer import PackageTransformer
@@ -89,3 +90,27 @@ class RepodataParser(Parser):
 
         for arch, numpackages in sorted(skipped_archs.items()):
             factory.log('skipped {} packages(s) with disallowed architecture {}'.format(numpackages, arch))
+
+
+class RepodataSqliteParser(Parser):
+
+    def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
+        normalize_version = VersionStripper().strip_right_greedy('+')
+
+        for pkgdata in iter_sqlite(path, 'packages',
+                                   ['name', 'version', 'arch', 'epoch',
+                                    'release', 'summary', 'url', 'rpm_group',
+                                    'rpm_license', 'arch', 'rpm_packager']):
+            with factory.begin() as pkg:
+                pkg.add_name(pkgdata['name'], NameType.GENERIC_PKGNAME)
+                pkg.set_version(pkgdata['version'], normalize_version)
+                pkg.set_arch(pkgdata['arch'])
+                pkg.set_rawversion(nevra_construct(None, pkgdata['epoch'], pkgdata['version'], pkgdata['release']))
+                pkg.set_summary(pkgdata['summary'])
+                pkg.add_homepages(pkgdata['url'])
+                pkg.add_categories(pkgdata['rpm_group'])
+                pkg.add_licenses(pkgdata['rpm_license'])
+                pkg.set_arch(pkgdata['arch'])
+                pkg.add_maintainers(pkgdata['rpm_packager'])
+
+                yield pkg
