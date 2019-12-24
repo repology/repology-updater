@@ -36,6 +36,7 @@
           - { term: { status: latest } }
           - { term: { maturity: developer } }
       es_fields:
+        # See https://github.com/metacpan/metacpan-api/blob/master/lib/MetaCPAN/Script/Mapping/CPAN/Release.pm
         - abstract
         - author
         - distribution
@@ -45,6 +46,10 @@
         - resources.homepage
         - status
         - version
+        # XXX: resources.repository.url
+        # XXX: resources.repository.web  # in most cases same ashomepage
+        # XXX: resources.bugtracker.web
+        # XXX: main_module  # == Pod?
       fetch_delay: 1
       parser: MetacpanAPIParser
   shadow: true
