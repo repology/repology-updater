@@ -57,6 +57,7 @@ class QueryMetadata:
     ARGSMODE_MANY_VALUES: ClassVar[int] = 1
     ARGSMODE_MANY_OBJECTS: ClassVar[int] = 2
     ARGSMODE_MANY_DICTS: ClassVar[int] = 3
+    ARGSMODE_MANY_TUPLES: ClassVar[int] = 4
 
     name: str
     query: str
@@ -112,6 +113,10 @@ class QueryMetadata:
 
         if string == 'many dicts':
             self.argsmode = QueryMetadata.ARGSMODE_MANY_DICTS
+            return
+
+        if string == 'many tuples':
+            self.argsmode = QueryMetadata.ARGSMODE_MANY_TUPLES
             return
 
         argname, *rest = [s.strip() for s in string.split('=', 1)]
@@ -206,6 +211,9 @@ class QueryManager:
 
             if query.argsmode == QueryMetadata.ARGSMODE_MANY_DICTS:
                 return [adapt_dict_arguments(item) for item in args[0]]
+
+            if query.argsmode == QueryMetadata.ARGSMODE_MANY_TUPLES:
+                return args[0]
 
             assert(query.argsmode == QueryMetadata.ARGSMODE_NORMAL)
 
