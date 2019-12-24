@@ -39,3 +39,25 @@
     - desc: antiX Linux home
       url: https://antixlinux.com/
   tags: [ all, production, antix ]
+
+- name: antix_19
+  type: repository
+  desc: antiX-19
+  family: debuntu
+  ruleset: [ debuntu, antix ]
+  minpackages: 300
+  sources:
+    - name: [ dev, main, nonfree, nosystemd ]
+      fetcher: FileFetcher
+      parser: DebianSourcesParser
+      url: 'http://ftp.cc.uoc.gr/mirrors/linux/mx/antix/buster/dists/buster/{source}/source/Sources.gz'
+      compression: gz
+      subrepo: '{source}'
+  repolinks:
+    - desc: antiX Linux home
+      url: https://antixlinux.com/
+  tags: [ all, production, antix ]
+
+# Probable future releases would be called
+# 21 = bullseye
+# 23 = bookworm
