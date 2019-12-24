@@ -28,7 +28,7 @@
   ruleset: [ debuntu, antix ]
   minpackages: 200
   sources:
-    - name: [ dev, main, nosystemd ]
+    - name: [ dev, main, nonfree, nosystemd ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
       #url: 'http://nl.mxrepo.com/antix/stretch/dists/stretch/{source}/source/Sources.gz'
