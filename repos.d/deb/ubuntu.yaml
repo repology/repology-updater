@@ -545,7 +545,7 @@
       url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
     - desc: Package builds on launchpad
       url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
-  tags: [ all, production, ubuntu ]
+  tags: [ all, ubuntu ]  # empty
 
 - name: ubuntu_20_04_proposed
   type: repository
