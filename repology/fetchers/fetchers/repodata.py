@@ -35,8 +35,17 @@ class RepodataFetcher(ScratchFileFetcher):
 
     def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
 
+        # if given url is a mirror.list, fetch the first baseurl
+        if self.url.endswith('mirror.list'):
+            baseurl = do_http(self.url, check_status=True, timeout=self.fetch_timeout).text.split()[0]
+        else:
+            baseurl = self.url
+
+        if not baseurl.endswith('/'):
+            baseurl = baseurl + '/'
+
         # fetch and parse repomd.xml
-        repomd_url = self.url + 'repodata/repomd.xml'
+        repomd_url = baseurl + 'repodata/repomd.xml'
         logger.log('fetching metadata from ' + repomd_url)
         repomd_content = do_http(repomd_url, check_status=True, timeout=self.fetch_timeout).text
         repomd = xml.etree.ElementTree.fromstring(repomd_content)
@@ -56,7 +65,7 @@ class RepodataFetcher(ScratchFileFetcher):
         if repomd_elt_primary_location is None:
             raise RuntimeError('Cannot find <location> element in repomd.xml')
 
-        repodata_url = self.url + repomd_elt_primary_location.attrib['href']
+        repodata_url = baseurl + repomd_elt_primary_location.attrib['href']
 
         # fetch actual repo data
         compression = None
