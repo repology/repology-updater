@@ -33,7 +33,7 @@ class GuixFetcher(ScratchDirFetcher):
         self.do_http = PoliteHTTP(timeout=fetch_timeout, delay=fetch_delay)
 
     def _do_fetch(self, statedir: AtomicDir, persdata: PersistentData, logger: Logger) -> bool:
-        for letter in ['0-9'] + [l for l in ascii_uppercase]:
+        for letter in ['0-9'] + list(ascii_uppercase):
             page = 1
             numpages = 1
             while True:
