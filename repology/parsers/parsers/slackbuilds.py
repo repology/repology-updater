@@ -74,24 +74,23 @@ def _parse_infofile(path: str) -> Dict[str, str]:
 class SlackBuildsParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for category, pkgname in _iter_packages(path):
-            pkg = factory.begin(category + '/' + pkgname)
+            with factory.begin(category + '/' + pkgname) as pkg:
+                info_path = os.path.join(path, category, pkgname, pkgname + '.info')
+                if not os.path.isfile(info_path):
+                    pkg.log('.info file does not exist', severity=Logger.ERROR)
+                    continue
 
-            info_path = os.path.join(path, category, pkgname, pkgname + '.info')
-            if not os.path.isfile(info_path):
-                pkg.log('.info file does not exist', severity=Logger.ERROR)
-                continue
+                pkg.add_categories(category)
 
-            pkg.add_categories(category)
+                variables = _parse_infofile(info_path)
 
-            variables = _parse_infofile(info_path)
+                pkg.add_name(variables['PRGNAM'], NameType.GENERIC_PKGNAME)
+                pkg.set_version(variables['VERSION'])
+                pkg.add_homepages(variables['HOMEPAGE'])
+                pkg.add_maintainers(extract_maintainers(variables['EMAIL']))
 
-            pkg.add_name(variables['PRGNAM'], NameType.GENERIC_PKGNAME)
-            pkg.set_version(variables['VERSION'])
-            pkg.add_homepages(variables['HOMEPAGE'])
-            pkg.add_maintainers(extract_maintainers(variables['EMAIL']))
+                for key in ['DOWNLOAD', 'DOWNLOAD_x86_64']:
+                    if variables[key] not in ['', 'UNSUPPORTED', 'UNTESTED']:
+                        pkg.add_downloads(variables[key].split())
 
-            for key in ['DOWNLOAD', 'DOWNLOAD_x86_64']:
-                if variables[key] not in ['', 'UNSUPPORTED', 'UNTESTED']:
-                    pkg.add_downloads(variables[key].split())
-
-            yield pkg
+                yield pkg
