@@ -91,7 +91,7 @@
   packagelinks:
     - desc: Package on abf.io
       url: 'https://abf.io/import/{name}/tree/rosa2019.1'
-  tags: [ all, production, rosa ]
+  tags: [ all, rosa ] # disabled due to NEVRA scheme being broken with -disttag
 
 - name: rosa_server_6_9
   type: repository
