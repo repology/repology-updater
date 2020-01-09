@@ -55,7 +55,7 @@ class QueryMetadata:
 
     ARGSMODE_NORMAL: ClassVar[int] = 0
     ARGSMODE_MANY_VALUES: ClassVar[int] = 1
-    ARGSMODE_MANY_PACKAGES: ClassVar[int] = 2
+    ARGSMODE_MANY_OBJECTS: ClassVar[int] = 2
     ARGSMODE_MANY_DICTS: ClassVar[int] = 3
 
     name: str
@@ -106,8 +106,8 @@ class QueryMetadata:
             self.argsmode = QueryMetadata.ARGSMODE_MANY_VALUES
             return
 
-        if string == 'many packages':
-            self.argsmode = QueryMetadata.ARGSMODE_MANY_PACKAGES
+        if string == 'many objects':
+            self.argsmode = QueryMetadata.ARGSMODE_MANY_OBJECTS
             return
 
         if string == 'many dicts':
@@ -201,7 +201,7 @@ class QueryManager:
             if query.argsmode == QueryMetadata.ARGSMODE_MANY_VALUES:
                 return [[value] for value in args[0]]
 
-            if query.argsmode == QueryMetadata.ARGSMODE_MANY_PACKAGES:
+            if query.argsmode == QueryMetadata.ARGSMODE_MANY_OBJECTS:
                 return [adapt_dict_arguments(package.__dict__) for package in args[0]]
 
             if query.argsmode == QueryMetadata.ARGSMODE_MANY_DICTS:
