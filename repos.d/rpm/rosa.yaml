@@ -71,19 +71,20 @@
       url: 'https://abf.io/import/{name}/tree/rosa2019.0'
   tags: [ all, production, rosa ]
 
+# Note: since Rosa 2019.1, use of urpmi metadate (info.xml) is discouraged
 - name: rosa_2019_1
   type: repository
   desc: Rosa 2019.1
   statsgroup: Rosa
   family: rosa
   color: '3757a1'
-  minpackages: 21000
+  minpackages: 11000
   sources:
-    - name: [ main/release, main/testing, main/updates, non-free/release, non-free/testing, non-free/updates, restricted/release, restricted/testing, restricted/updates, contrib/release, contrib/testing, contrib/updates ]
-      fetcher: FileFetcher
-      parser: RosaInfoXmlParser
-      url: 'http://abf-downloads.rosalinux.ru/rosa2019.1/repository/SRPMS/{source}/media_info/info.xml.lzma'
-      compression: xz
+    # note */updates and */testing repositories are empty ATOW
+    - name: [ main/release, non-free/release, restricted/release, contrib/release ]
+      fetcher: RepodataFetcher
+      parser: RepodataParser
+      url: 'http://abf-downloads.rosalinux.ru/rosa2019.1/repository/SRPMS/{source}/'
       subrepo: '{source}'
   repolinks:
     - desc: Rosa Linux home
@@ -91,7 +92,7 @@
   packagelinks:
     - desc: Package on abf.io
       url: 'https://abf.io/import/{name}/tree/rosa2019.1'
-  tags: [ all, rosa ] # disabled due to NEVRA scheme being broken with -disttag
+  tags: [ all, production, rosa ]
 
 - name: rosa_server_6_9
   type: repository
