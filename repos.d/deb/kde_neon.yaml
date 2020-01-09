@@ -5,7 +5,7 @@
   type: repository
   desc: KDE neon User
   family: debuntu
-  minpackages: 1700
+  minpackages: 400  # by unique projects
   sources:
     - name: main
       fetcher: FileFetcher
@@ -26,7 +26,7 @@
   type: repository
   desc: KDE neon User LTS
   family: debuntu
-  minpackages: 1000
+  minpackages: 400  # by unique projects
   sources:
     - name: main
       fetcher: FileFetcher
