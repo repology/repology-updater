@@ -138,3 +138,5 @@ SET
 	all_repos = NULL
 WHERE
 	last_seen != now();
+
+ANALYZE metapackages;

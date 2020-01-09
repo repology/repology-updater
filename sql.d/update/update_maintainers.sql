@@ -206,3 +206,5 @@ SET
 	num_repos = 0
 WHERE
 	last_seen != now();
+
+ANALYZE maintainers;
