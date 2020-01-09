@@ -36,7 +36,8 @@ def extract_nix_maintainers(items: Iterable[Union[str, Dict[str, str]]]) -> Iter
                 if '<' not in maintainer:
                     yield maintainer
         elif isinstance(item, dict):
-            yield item['email'].lower()
+            if 'email' in item:
+                yield item['email'].lower()
             # do we need these?
             #if 'github' in item:
             #    yield item['github'].lower() + '@github'
