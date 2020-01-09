@@ -28,9 +28,18 @@ from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _as_str(v: Any) -> Optional[str]:
+def _as_maybe_str(v: Any) -> Optional[str]:
     if v is None:
         return None
+    if isinstance(v, list):
+        assert(len(v) == 1)
+        return str(v[0])
+    return str(v)
+
+
+def _as_str(v: Any) -> str:
+    if v is None:
+        raise RuntimeError('unexpected empty value')
     if isinstance(v, list):
         assert(len(v) == 1)
         return str(v[0])
@@ -56,19 +65,23 @@ def _iter_packages(path: str) -> Iterable[Dict[str, Any]]:
 
 def _parse_package(pkg: PackageMaker, fields: Dict[str, Any]) -> Tuple[str, PackageMaker]:
     distribution = _as_str(fields['distribution'])
-    assert(distribution is not None)
-
     pkg.add_name(distribution, NameType.CPAN_NAME)
-    pkg.set_version(_as_str(fields['version']))
 
-    author = _as_str(fields['author'])
+    version = _as_str(fields['version'])
+    pkg.set_version(version)
+
+    author = _as_maybe_str(fields['author'])
     if author:
         pkg.add_maintainers(author.lower() + '@cpan')
 
     pkg.add_licenses(_as_list(fields['license']))
-    pkg.set_summary(_as_str(fields.get('abstract')))
-    pkg.add_homepages(_as_str(fields.get('resources.homepage')))
+    pkg.set_summary(_as_maybe_str(fields.get('abstract')))
+    pkg.add_homepages(_as_maybe_str(fields.get('resources.homepage')))
     pkg.add_downloads(_as_list(fields.get('download_url')))
+
+    name = _as_str(fields['name'])
+    if version not in name:
+        pkg.set_flags(PackageFlags.UNTRUSTED)
 
     return distribution, pkg
 

@@ -46,6 +46,7 @@
         - resources.homepage
         - status
         - version
+        - name
         # XXX: resources.repository.url
         # XXX: resources.repository.web  # in most cases same ashomepage
         # XXX: resources.bugtracker.web
