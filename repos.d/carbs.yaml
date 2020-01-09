@@ -1,0 +1,22 @@
+###########################################################################
+# Carbs Linux
+###########################################################################
+- name: carbs
+  type: repository
+  desc: Carbs Linux
+  family: carbs
+  ruleset: carbs
+  minpackages: 150
+  sources:
+    - name: repository
+      fetcher: GitFetcher
+      parser: KissGitParser
+      url: 'https://github.com/CarbsLinux/repository.git'
+      sparse_checkout: [ '**/version', '**/sources' ]
+  repolinks:
+    - desc: Carbs Linux home
+      url: https://carbslinux.org/
+  packagelinks:
+    - desc: Package directory on GitHub
+      url: 'https://github.com/CarbsLinux/repository/tree/master/{path}'
+  tags: [ all, production ]
