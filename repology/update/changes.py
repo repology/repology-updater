@@ -75,23 +75,23 @@ def iter_changed_projects(old_hashes_iter: Iterable[ProjectHash], new_packageset
     while new_packages is not None or old_effname is not None:
         if old_effname is None or (new_packages is not None and new_packages[0].effname < old_effname):
             # only in new (added)
+            statistics.added += 1
             yield UpdatedProject(new_packages[0].effname, calculate_project_classless_hash(new_packages), new_packages)
             new_packages = next(new_packagesets_iter, None)  # type: ignore
-            statistics.added += 1
 
         elif new_packages is None or old_effname < new_packages[0].effname:
             # only in old (removed)
+            statistics.removed += 1
             yield RemovedProject(old_effname)
             old_effname, old_hash = next(old_hashes_iter, (None, None))  # type: ignore
-            statistics.removed += 1
 
         else:
             # in both
             new_hash = calculate_project_classless_hash(new_packages)
 
             if new_hash != old_hash:
-                yield UpdatedProject(old_effname, new_hash, new_packages)
                 statistics.changed += 1
+                yield UpdatedProject(old_effname, new_hash, new_packages)
             else:
                 statistics.unchanged += 1
 
