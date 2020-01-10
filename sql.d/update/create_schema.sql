@@ -646,7 +646,7 @@ CREATE TABLE repo_metapackages (
 	problematic boolean NOT NULL,
 	"unique" boolean NOT NULL,
 
-	PRIMARY KEY(repository_id, effname)
+	PRIMARY KEY(repository_id, effname) -- best performance when clustered by pkey
 );
 
 CREATE INDEX ON repo_metapackages(effname);

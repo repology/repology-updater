@@ -31,7 +31,7 @@ INSERT INTO repo_metapackages(
 	"unique"
 )
 SELECT
-	(SELECT id FROM repositories WHERE name = repo),
+	(SELECT id FROM repositories WHERE name = repo) AS repository_id,
 	effname,
 
 	count(*) FILTER (WHERE versionclass = 1 OR versionclass = 4 OR versionclass = 5) > 0,
@@ -41,6 +41,10 @@ SELECT
 	max(num_families) = 1
 FROM packages INNER JOIN metapackages USING(effname)
 WHERE num_repos_nonshadow > 0
-GROUP BY effname, repo;
+GROUP BY effname, repo
+-- Reorder according to primary key
+-- * Avoids thrashing when HashAggregate is used before data is inserted
+-- * Leads to better query performance (see repology-benchmark)
+ORDER BY repository_id, effname;
 
 ANALYZE repo_metapackages;
