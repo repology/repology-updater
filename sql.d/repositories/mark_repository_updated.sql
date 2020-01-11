@@ -20,6 +20,7 @@
 --------------------------------------------------------------------------------
 UPDATE repositories
 SET
-	state = 'active'::repository_state
+	state = 'active'::repository_state,
+	last_updated = now()
 WHERE
 	name = %(reponame)s;
