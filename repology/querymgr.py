@@ -220,11 +220,11 @@ class QueryManager:
             args_for_query = {}
             for narg, argname in enumerate(query.args):
                 if narg < len(args):
-                    args_for_query[argname] = args[narg]
+                    args_for_query[argname] = adapt_dict_argument(args[narg])
                 elif argname in kwargs:
-                    args_for_query[argname] = kwargs[argname]
+                    args_for_query[argname] = adapt_dict_argument(kwargs[argname])
                 elif argname in query.argdefaults:
-                    args_for_query[argname] = query.argdefaults[argname]
+                    args_for_query[argname] = adapt_dict_argument(query.argdefaults[argname])
                 else:
                     raise RuntimeError('Required argument "{}" for query "{}" not specified'.format(argname, query.name))
 
