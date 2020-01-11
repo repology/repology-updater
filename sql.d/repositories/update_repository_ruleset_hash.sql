@@ -1,4 +1,4 @@
--- Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -18,11 +18,11 @@
 --------------------------------------------------------------------------------
 --
 -- @param repository
--- @returns single value
+-- @param ruleset_hash
 --
 --------------------------------------------------------------------------------
-SELECT
-	ruleset_hash
-FROM repository_ruleset_hashes
+UPDATE repositories
+SET
+	ruleset_hash = %(ruleset_hash)s
 WHERE
-	repository = %(repository)s;
+	name = %(repository)s;

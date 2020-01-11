@@ -1,4 +1,4 @@
--- Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -18,17 +18,11 @@
 --------------------------------------------------------------------------------
 --
 -- @param repository
--- @param ruleset_hash
+-- @returns single value
 --
 --------------------------------------------------------------------------------
-INSERT INTO repository_ruleset_hashes(
-	repository,
+SELECT
 	ruleset_hash
-)
-VALUES (
-	%(repository)s,
-	%(ruleset_hash)s
-)
-ON CONFLICT (repository)
-DO UPDATE SET
-	ruleset_hash = EXCLUDED.ruleset_hash;
+FROM repositories
+WHERE
+	name = %(repository)s;
