@@ -1,4 +1,4 @@
--- Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -16,55 +16,56 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
---
--- @param many dicts
---
+-- @param metadata
 --------------------------------------------------------------------------------
 INSERT INTO repositories(
-    name,
+	id,
+	name,
 	state,
 
-    first_seen,
-    last_seen,
+	first_seen,
+	last_seen,
 
-    sortname,
-    "type",
-    "desc",
-    statsgroup,
-    singular,
-    family,
-    color,
-    shadow,
-    repolinks,
-    packagelinks
+	sortname,
+	"type",
+	"desc",
+	statsgroup,
+	singular,
+	family,
+	color,
+	shadow,
+	repolinks,
+	packagelinks
 ) VALUES (
-	%(name)s,
+	(
+		SELECT min(allids.id)
+		FROM (
+			SELECT
+				generate_series(
+					1,
+					(
+						SELECT coalesce(max(id), 1) + 1
+						FROM repositories
+					)
+				) id
+		) AS allids
+		LEFT OUTER JOIN repositories USING (id)
+		WHERE repositories.id IS NULL
+	),
+	%(metadata)s::json->>'name',
 	'new'::repository_state,
 
 	now(),
 	now(),
 
-	%(sortname)s,
-	%(type)s,
-	%(desc)s,
-	%(statsgroup)s,
-	%(singular)s,
-	%(family)s,
-	%(color)s,
-	%(shadow)s,
-	%(repolinks)s,
-	%(packagelinks)s
-)
-ON CONFLICT (name)
-DO UPDATE SET
-	state = 'active'::repository_state,
-	sortname = EXCLUDED.sortname,
-	"type" = EXCLUDED."type",
-	"desc" = EXCLUDED."desc",
-	statsgroup = EXCLUDED.statsgroup,
-	singular = EXCLUDED.singular,
-	family = EXCLUDED.family,
-	color = EXCLUDED.color,
-	shadow = EXCLUDED.shadow,
-	repolinks = EXCLUDED.repolinks,
-	packagelinks = EXCLUDED.packagelinks;
+	%(metadata)s::json->>'sortname',
+	%(metadata)s::json->>'type',
+	%(metadata)s::json->>'desc',
+	%(metadata)s::json->>'statsgroup',
+	%(metadata)s::json->>'singular',
+	%(metadata)s::json->>'family',
+	%(metadata)s::json->>'color',
+	(%(metadata)s::json->>'shadow')::boolean,
+	%(metadata)s::json->'repolinks',
+	%(metadata)s::json->'packagelinks'
+);

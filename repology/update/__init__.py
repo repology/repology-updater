@@ -115,6 +115,3 @@ def update_repology(database: Database, projects: Iterable[List[Package]], logge
 
     logger.log('finalizing the update')
     database.update_finish()
-
-    logger.log('committing changes')
-    database.commit()

@@ -1,4 +1,4 @@
--- Copyright (C) 2018 Dmitry Marakasov <amdmi3@amdmi3.ru>
+-- Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 --
 -- This file is part of repology
 --
@@ -16,8 +16,22 @@
 -- along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 --------------------------------------------------------------------------------
---
+-- @param metadata
 --------------------------------------------------------------------------------
 UPDATE repositories
 SET
-	state = 'legacy'::repository_state;
+	state = CASE WHEN state = 'legacy' THEN 'readded'::repository_state ELSE state END,
+	last_seen = now(),
+
+	sortname = %(metadata)s::json->>'sortname',
+	"type" = %(metadata)s::json->>'type',
+	"desc" = %(metadata)s::json->>'desc',
+	statsgroup = %(metadata)s::json->>'statsgroup',
+	singular = %(metadata)s::json->>'singular',
+	family = %(metadata)s::json->>'family',
+	color = %(metadata)s::json->>'color',
+	shadow = (%(metadata)s::json->>'shadow')::boolean,
+	repolinks = %(metadata)s::json->'repolinks',
+	packagelinks = %(metadata)s::json->'packagelinks'
+WHERE
+	name = %(metadata)s::json->>'name';

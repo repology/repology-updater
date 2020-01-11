@@ -175,13 +175,26 @@ def database_init(env: Environment) -> None:
     database.commit()
 
 
-def database_update_pre(env: Environment) -> None:
+def update_repositories(env: Environment) -> None:
     logger = env.get_main_logger()
     database = env.get_main_database_connection()
 
     logger.log('updating repositories metadata')
-    database.deprecate_repositories()
-    database.add_repositories(env.get_repo_manager().get_metadatas(env.get_enabled_repo_names()))
+
+    config_repos = env.get_repo_manager().get_metadatas(env.get_enabled_repo_names())
+    db_repos = database.get_repositories_statuses()
+
+    new_reponames = set(repo['name'] for repo in config_repos) - set(repo['name'] for repo in db_repos)
+    deprecated_reponames = set(repo['name'] for repo in db_repos if repo['state'] != 'legacy') - set(repo['name'] for repo in config_repos)
+
+    for repo in config_repos:
+        if repo['name'] in new_reponames:
+            database.add_repository(repo)
+        else:
+            database.update_repository(repo)
+
+    for reponame in deprecated_reponames:
+        database.deprecate_repository(reponame)
 
     logger.get_indented().log('committing changes')
     database.commit()
@@ -196,6 +209,12 @@ def database_update(env: Environment) -> None:
         projects=env.get_repo_processor().iter_parsed(reponames=env.get_enabled_repo_names(), logger=logger),
         logger=logger,
     )
+
+    for reponame in env.get_enabled_repo_names():
+        database.mark_repository_updated(reponame)
+
+    logger.log('committing changes')
+    database.commit()
 
 
 def database_update_post(env: Environment) -> None:
@@ -276,7 +295,7 @@ def main() -> int:
         env.get_repo_processor()
 
     if options.fetch or options.parse or options.database or options.postupdate or options.repositories:
-        database_update_pre(env)
+        update_repositories(env)
 
     if options.fetch or options.parse:
         process_repositories(env)
