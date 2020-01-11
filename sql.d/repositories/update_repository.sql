@@ -23,6 +23,8 @@ SET
 	state = CASE WHEN state = 'legacy' THEN 'readded'::repository_state ELSE state END,
 	last_seen = now(),
 
+	metadata = %(metadata)s,
+
 	sortname = %(metadata)s::json->>'sortname',
 	"type" = %(metadata)s::json->>'type',
 	"desc" = %(metadata)s::json->>'desc',

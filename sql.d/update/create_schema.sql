@@ -609,6 +609,8 @@ CREATE TABLE repositories (
 	used_package_fields text[],
 
 	-- metadata from config
+	metadata jsonb NOT NULL,
+
 	sortname text NOT NULL,
 	"type" text NOT NULL,
 	"desc" text NOT NULL,

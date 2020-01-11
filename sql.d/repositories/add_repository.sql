@@ -26,6 +26,8 @@ INSERT INTO repositories(
 	first_seen,
 	last_seen,
 
+	metadata,
+
 	sortname,
 	"type",
 	"desc",
@@ -57,6 +59,8 @@ INSERT INTO repositories(
 
 	now(),
 	now(),
+
+	%(metadata)s,
 
 	%(metadata)s::json->>'sortname',
 	%(metadata)s::json->>'type',
