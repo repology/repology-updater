@@ -19,6 +19,7 @@
 
 import argparse
 import sys
+from datetime import timedelta
 from timeit import default_timer as timer
 from typing import Any, Callable, List, TypeVar
 
@@ -101,7 +102,14 @@ def process_repositories(env: Environment) -> None:
     database = env.get_main_database_connection()
 
     for reponame in env.get_processable_repo_names():
-        if env.get_options().fetch:
+        update_period = timedelta(seconds=env.get_repo_manager().get_metadatas([reponame])[0]['update_period'])
+        since_last_fetched = database.get_repository_since_last_fetched(reponame)
+
+        skip_fetch = since_last_fetched is not None and since_last_fetched < update_period
+
+        if env.get_options().fetch and skip_fetch:
+            env.get_main_logger().log(f'not fetching {reponame} to honor update period ({update_period-since_last_fetched} left)'.format(reponame))
+        elif env.get_options().fetch:
             env.get_main_logger().log('fetching {}'.format(reponame))
 
             # make sure hash is reset untill it's known that the update did not untroduce any changes
@@ -129,7 +137,9 @@ def process_repositories(env: Environment) -> None:
 
             if not have_changes:
                 database.update_repository_ruleset_hash(reponame, old_hash)
-                database.commit()
+
+            database.mark_repository_fetched(reponame)
+            database.commit()
 
         if env.get_options().parse:
             transformer = env.get_package_transformer()

@@ -6,6 +6,7 @@
   desc: RubyGems
   family: rubygems
   color: 'e9573f'
+  update_period: 3h
   minpackages: 130000
   sources:
     - name: latest_specs.4.8

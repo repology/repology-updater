@@ -77,6 +77,18 @@ class RepositoryManager:
             if 'minpackages' not in repo:
                 repo['minpackages'] = 0
 
+            if 'update_period' not in repo:
+                repo['update_period'] = 3600  # XXX: default update period - move to config?
+            elif isinstance(repo['update_period'], str):
+                if repo['update_period'].endswith('m'):
+                    repo['update_period'] = int(repo['update_period'][:-1]) * 60
+                elif repo['update_period'].endswith('h'):
+                    repo['update_period'] = int(repo['update_period'][:-1]) * 60 * 60
+                elif repo['update_period'].endswith('d'):
+                    repo['update_period'] = int(repo['update_period'][:-1]) * 60 * 60 * 24
+                else:
+                    raise RuntimeError('unexpected update_period format')
+
             repo['ruleset'] = set(repo['ruleset'])
 
             self._repo_by_name[repo['name']] = repo
@@ -118,6 +130,7 @@ class RepositoryManager:
                 'type': repository['type'],
                 'color': repository.get('color'),
                 'statsgroup': repository.get('statsgroup', repository['desc']),
+                'update_period': repository['update_period'],
             } for repository in self.get_repositories(reponames)
         }
 
@@ -135,5 +148,6 @@ class RepositoryManager:
                 'type': repository['type'],
                 'color': repository.get('color'),
                 'statsgroup': repository.get('statsgroup', repository['desc']),
+                'update_period': repository['update_period'],
             } for repository in self.get_repositories(reponames)
         ]

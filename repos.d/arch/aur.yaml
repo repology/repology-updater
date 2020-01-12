@@ -8,6 +8,7 @@
   family: arch
   ruleset: [ arch, aur ]
   color: '0088cc'
+  update_period: 3h
   minpackages: 48000
   default_maintainer: fallback-mnt-aur@repology
   sources:

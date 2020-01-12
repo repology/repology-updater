@@ -162,6 +162,7 @@ schemas = {
             'color': str,
             'valid_till': date,
             'default_maintainer': All(str, Contains('@')),
+            'update_period': Any(int, str),
             Required('minpackages'): int,
             Required('sources'): [
                 {
