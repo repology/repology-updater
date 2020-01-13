@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2017-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -30,6 +30,9 @@ class KaOSHTMLParser(Parser):
             pkg = factory.begin()
 
             name, version, revision = row.xpath('./td[1]/a')[0].text.rsplit('-', 2)
+
+            # entries on kaosx.tk inconsistently have .pkg.tar.zst suffix, get rid of it
+            revision = revision.split('.pkg.')[0]
 
             pkg.add_name(name, NameType.KAOS_NAME)
             pkg.set_version(version.split(':', 1)[-1])
