@@ -6,6 +6,7 @@
   desc: Mageia 6
   statsgroup: Mageia
   family: mageia
+  ruleset: [mageia, rpm]
   color: '262f45'
   minpackages: 14000
   sources:
@@ -30,6 +31,7 @@
   desc: Mageia 7
   statsgroup: Mageia
   family: mageia
+  ruleset: [mageia, rpm]
   color: '262f45'
   minpackages: 14000
   sources:
@@ -54,6 +56,7 @@
   desc: Mageia Cauldron
   statsgroup: Mageia
   family: mageia
+  ruleset: [mageia, rpm]
   color: '262f45'
   minpackages: 13000
   sources:

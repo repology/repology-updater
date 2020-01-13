@@ -5,6 +5,7 @@
   type: repository
   desc: PCLinuxOS
   family: pclinuxos
+  ruleset: [pclinuxos, rpm]
   color: '1c5482'
   minpackages: 10500
   sources:

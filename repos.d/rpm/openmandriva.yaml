@@ -6,6 +6,7 @@
   desc: OpenMandriva 3.x
   statsgroup: OpenMandriva
   family: openmandriva
+  ruleset: [openmandriva, rpm]
   color: '045e9d'
   minpackages: 1400
   sources:
@@ -28,6 +29,7 @@
   desc: OpenMandriva 4.x
   statsgroup: OpenMandriva
   family: openmandriva
+  ruleset: [openmandriva, rpm]
   color: '045e9d'
   minpackages: 12000
   sources:
@@ -50,6 +52,7 @@
   desc: OpenMandriva Cooker
   statsgroup: OpenMandriva
   family: openmandriva
+  ruleset: [openmandriva, rpm]
   color: '045e9d'
   minpackages: 12000
   sources:

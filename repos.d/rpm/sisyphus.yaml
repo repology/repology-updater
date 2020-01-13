@@ -6,6 +6,7 @@
   desc: ALT Sisyphus
   statsgroup: ALT Sisyphus
   family: sisyphus
+  ruleset: [sisyphus, rpm]
   color: 'baccdd'
   minpackages: 18000
   sources:
@@ -31,6 +32,7 @@
   desc: ALT Linux p9
   statsgroup: ALT Sisyphus
   family: sisyphus
+  ruleset: [sisyphus, rpm]
   color: 'baccdd'
   minpackages: 18000
   sources:
@@ -57,6 +59,7 @@
   type: repository
   desc: ALT Sisyphus Autoimports
   family: sisyphus
+  ruleset: [sisyphus, rpm]
   color: 'baccdd'
   minpackages: 1  # XXX: unknown
   sources:

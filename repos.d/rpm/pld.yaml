@@ -5,6 +5,7 @@
   type: repository
   desc: PLD Linux
   family: pld
+  ruleset: [pld, rpm]
   color: '000000'
   minpackages: 11000
   sources:
