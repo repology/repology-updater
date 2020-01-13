@@ -19,7 +19,9 @@
       url: https://www.centos.org/
     - desc: CentOS packages
       url: http://centos-packages.com/6/
-#  packagelinks:
+  packagelinks:
+    - desc: Package sources in CentOS git
+      url: 'https://git.centos.org/rpms/{name}/tree/c6'
 #    - desc: Package details on centos-packages.com
 #      url: 'http://centos-packages.com/6/package/{name}/'
   tags: [ all, production, centos, rpm ]
@@ -42,7 +44,9 @@
       url: https://www.centos.org/
     - desc: CentOS packages
       url: http://centos-packages.com/7/
-#  packagelinks:
+  packagelinks:
+    - desc: Package sources in CentOS git
+      url: 'https://git.centos.org/rpms/{name}/tree/c7'
 #    - desc: Package details on centos-packages.com
 #      url: 'http://centos-packages.com/7/package/{name}/'
   tags: [ all, production, centos, rpm ]
@@ -65,7 +69,9 @@
       url: https://www.centos.org/
     - desc: CentOS packages
       url: http://centos-packages.com/8/
-#  packagelinks:
+  packagelinks:
+    - desc: Package sources in CentOS git
+      url: 'https://git.centos.org/rpms/{name}/tree/c8'
 #    - desc: Package details on centos-packages.com
 #      url: 'http://centos-packages.com/8/package/{name}/'
   tags: [ all, production, centos, rpm ]
