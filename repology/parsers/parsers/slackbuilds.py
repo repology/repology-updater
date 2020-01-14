@@ -84,7 +84,10 @@ class SlackBuildsParser(Parser):
 
                 variables = _parse_infofile(info_path)
 
-                pkg.add_name(variables['PRGNAM'], NameType.GENERIC_PKGNAME)
+                assert(variables['PRGNAM'] == pkgname)
+
+                pkg.add_name(variables['PRGNAM'], NameType.SLACKBUILDS_NAME)
+                pkg.add_name(category + '/' + pkgname, NameType.SLACKBUILDS_FULL_NAME)
                 pkg.set_version(variables['VERSION'])
                 pkg.add_homepages(variables['HOMEPAGE'])
                 pkg.add_maintainers(extract_maintainers(variables['EMAIL']))

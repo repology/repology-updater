@@ -159,6 +159,9 @@ class NameType:
     HAIKUPORTS_NAME: ClassVar[int] = GENERIC_CATNAME_NAME
     HAIKUPORTS_FULL_NAME: ClassVar[int] = GENERIC_CATNAME_FULL_NAME
 
+    SLACKBUILDS_NAME: ClassVar[int] = GENERIC_CATNAME_NAME
+    SLACKBUILDS_FULL_NAME: ClassVar[int] = GENERIC_CATNAME_FULL_NAME
+
 
 @dataclass
 class _NameMapping:

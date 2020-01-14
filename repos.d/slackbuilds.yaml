@@ -18,5 +18,5 @@
       url: https://slackbuilds.org/
   packagelinks:
     - desc: SlackBuilds.org page
-      url: 'https://slackbuilds.org/repository/14.2/{category}/{name}/'
+      url: 'https://slackbuilds.org/repository/14.2/{srcname}/'
   tags: [ all, production, have_testdata ]
