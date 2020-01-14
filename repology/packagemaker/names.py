@@ -36,9 +36,9 @@ class NameType:
     GENERIC_NOBN_NAME: ClassVar[int] = 1010
     GENERIC_NOBN_BASENAME: ClassVar[int] = 1011
 
-    # Common patterns: gentoolike (category/name)
-    GENERIC_GENTOOLIKE_NAME: ClassVar[int] = 1020
-    GENERIC_GENTOOLIKE_FULL_NAME: ClassVar[int] = 1021
+    # Common patterns: category/name hierarchy
+    GENERIC_CATNAME_NAME: ClassVar[int] = 1020
+    GENERIC_CATNAME_FULL_NAME: ClassVar[int] = 1021
 
     # Individual repos
     WIKIDATA_ENTITY: ClassVar[int] = 20
@@ -150,14 +150,14 @@ class NameType:
     CYGWIN_PACKAGE_NAME: ClassVar[int] = GENERIC_NOBN_BASENAME
     CYGWIN_SUBPACKAGE_NAME: ClassVar[int] = GENERIC_NOBN_NAME
 
-    GENTOO_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_NAME
-    GENTOO_FULL_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_FULL_NAME
+    GENTOO_NAME: ClassVar[int] = GENERIC_CATNAME_NAME
+    GENTOO_FULL_NAME: ClassVar[int] = GENERIC_CATNAME_FULL_NAME
 
-    EXHERBO_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_NAME
-    EXHERBO_FULL_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_FULL_NAME
+    EXHERBO_NAME: ClassVar[int] = GENERIC_CATNAME_NAME
+    EXHERBO_FULL_NAME: ClassVar[int] = GENERIC_CATNAME_FULL_NAME
 
-    HAIKUPORTS_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_NAME
-    HAIKUPORTS_FULL_NAME: ClassVar[int] = GENERIC_GENTOOLIKE_FULL_NAME
+    HAIKUPORTS_NAME: ClassVar[int] = GENERIC_CATNAME_NAME
+    HAIKUPORTS_FULL_NAME: ClassVar[int] = GENERIC_CATNAME_FULL_NAME
 
 
 @dataclass
@@ -213,10 +213,10 @@ _MAPPINGS = [
         projectname_seed=NameType.GENERIC_SN_NAME,
     ),
     _NameMapping(
-        srcname=NameType.GENERIC_GENTOOLIKE_FULL_NAME,
-        visiblename=NameType.GENERIC_GENTOOLIKE_FULL_NAME,
-        projectname_seed=NameType.GENERIC_GENTOOLIKE_NAME,
-        trackname=NameType.GENERIC_GENTOOLIKE_FULL_NAME,
+        srcname=NameType.GENERIC_CATNAME_FULL_NAME,
+        visiblename=NameType.GENERIC_CATNAME_FULL_NAME,
+        projectname_seed=NameType.GENERIC_CATNAME_NAME,
+        trackname=NameType.GENERIC_CATNAME_FULL_NAME,
     ),
     # KaOS
     _NameMapping(
