@@ -75,6 +75,14 @@ class NameType:
     OPENBSD_STEM: ClassVar[int] = 141
     OPENBSD_STRIPPED_STEM: ClassVar[int] = 142
 
+    HOMEBREW_NAME: ClassVar[int] = 150
+    HOMEBREW_NAME_PRE_AT: ClassVar[int] = 151
+    HOMEBREW_OLDNAME: ClassVar[int] = IGNORED
+    HOMEBREW_FULL_NAME: ClassVar[int] = IGNORED
+
+    HOMEBREW_CASK_TOKEN: ClassVar[int] = 160
+    HOMEBREW_CASK_FIRST_NAME: ClassVar[int] = 161
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -298,6 +306,19 @@ _MAPPINGS = [
         trackname=NameType.FDROID_ID,
         visiblename=NameType.FDROID_NAME,
         projectname_seed=NameType.FDROID_NAME,
+    ),
+    # Homebrew
+    _NameMapping(
+        srcname=NameType.HOMEBREW_NAME,
+        trackname=NameType.HOMEBREW_NAME,
+        visiblename=NameType.HOMEBREW_NAME,
+        projectname_seed=NameType.HOMEBREW_NAME_PRE_AT,
+    ),
+    _NameMapping(
+        srcname=NameType.HOMEBREW_CASK_TOKEN,
+        trackname=NameType.HOMEBREW_CASK_TOKEN,
+        visiblename=NameType.HOMEBREW_CASK_FIRST_NAME,
+        projectname_seed=NameType.HOMEBREW_CASK_TOKEN,
     ),
 ]
 

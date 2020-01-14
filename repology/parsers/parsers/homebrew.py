@@ -27,7 +27,10 @@ class HomebrewJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for packagedata in iter_json_list(path, (None,)):
             with factory.begin() as pkg:
-                pkg.add_name(packagedata['name'].split('@', 1)[0], NameType.GENERIC_PKGNAME)
+                pkg.add_name(packagedata['name'], NameType.HOMEBREW_NAME)
+                pkg.add_name(packagedata['name'].split('@', 1)[0], NameType.HOMEBREW_NAME_PRE_AT)
+                pkg.add_name(packagedata['oldname'], NameType.HOMEBREW_OLDNAME)
+                pkg.add_name(packagedata['full_name'], NameType.HOMEBREW_FULL_NAME)
                 pkg.set_version(packagedata['versions']['stable'])
                 pkg.set_summary(packagedata['desc'])
                 pkg.add_homepages(packagedata['homepage'])
@@ -39,7 +42,8 @@ class HomebrewCaskJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for packagedata in iter_json_list(path, (None,)):
             with factory.begin(packagedata['token']) as pkg:
-                pkg.add_name(packagedata['token'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(packagedata['token'], NameType.HOMEBREW_CASK_TOKEN)
+                pkg.add_name(packagedata['name'][0], NameType.HOMEBREW_CASK_FIRST_NAME)
 
                 pkg.set_version(packagedata['version'].split(',')[0])
                 pkg.add_homepages(packagedata['homepage'])

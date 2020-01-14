@@ -23,9 +23,9 @@
       url: https://formulae.brew.sh/
   packagelinks:
     - desc: Formula page
-      url: 'https://formulae.brew.sh/formula/{name}'
+      url: 'https://formulae.brew.sh/formula/{srcname}'
     - desc: Formula code on GitHub
-      url: 'https://github.com/Homebrew/homebrew-core/blob/master/Formula/{name}.rb'
+      url: 'https://github.com/Homebrew/homebrew-core/blob/master/Formula/{srcname}.rb'
   tags: [ all, production, brew ]
 
 - name: homebrew_casks
@@ -48,7 +48,7 @@
       url: https://formulae.brew.sh/cask/
   packagelinks:
     - desc: Cask page
-      url: 'https://formulae.brew.sh/cask/{name}'
+      url: 'https://formulae.brew.sh/cask/{srcname}'
     - desc: Cask code on GitHub
-      url: 'https://github.com/Homebrew/homebrew-cask/blob/master/Casks/{name}.rb'
+      url: 'https://github.com/Homebrew/homebrew-cask/blob/master/Casks/{srcname}.rb'
   tags: [ all, production, brew ]

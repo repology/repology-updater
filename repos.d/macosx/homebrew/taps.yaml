@@ -21,5 +21,5 @@
       url: https://brew.sh/
   packagelinks:
     - desc: Brew formula code on GitHub
-      url: 'https://github.com/brewsci/homebrew-bio/blob/master/Formula/{name}.rb'
+      url: 'https://github.com/brewsci/homebrew-bio/blob/master/Formula/{srcname}.rb'
   tags: [ all, production ]
