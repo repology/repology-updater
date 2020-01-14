@@ -83,6 +83,10 @@ class NameType:
     HOMEBREW_CASK_TOKEN: ClassVar[int] = 160
     HOMEBREW_CASK_FIRST_NAME: ClassVar[int] = 161
 
+    SLACKWARE_NAME: ClassVar[int] = 170
+    SLACKWARE_FULL_NAME: ClassVar[int] = IGNORED
+    SLACKWARE_PSEUDO_FULL_NAME: ClassVar[int] = 172
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -322,6 +326,13 @@ _MAPPINGS = [
         trackname=NameType.HOMEBREW_CASK_TOKEN,
         visiblename=NameType.HOMEBREW_CASK_FIRST_NAME,
         projectname_seed=NameType.HOMEBREW_CASK_TOKEN,
+    ),
+    # Slackware
+    _NameMapping(
+        name=NameType.SLACKWARE_NAME,
+        visiblename=NameType.SLACKWARE_NAME,
+        projectname_seed=NameType.SLACKWARE_NAME,
+        trackname=NameType.SLACKWARE_PSEUDO_FULL_NAME,
     ),
 ]
 

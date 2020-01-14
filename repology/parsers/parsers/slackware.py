@@ -45,10 +45,11 @@ class SlackwarePackagesParser(Parser):
 
             name, version, arch, rest = pkgname.rsplit('-', 3)
 
-            pkg.add_name(name, NameType.GENERIC_PKGNAME)
+            pkg.add_name(name, NameType.SLACKWARE_NAME)
+            pkg.add_name(pkglocation + '/' + pkgname, NameType.SLACKWARE_FULL_NAME)
+            pkg.add_name(pkglocation + '/' + name, NameType.SLACKWARE_PSEUDO_FULL_NAME)
             pkg.set_version(version)
-
-            pkg.set_extra_field('location', pkglocation)
+            pkg.set_arch(arch)
 
             # Don't waste cycles: slackware repositories have no structure,
             # so we can't construct links to sources anyway
