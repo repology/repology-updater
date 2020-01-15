@@ -87,6 +87,9 @@ class NameType:
     SLACKWARE_FULL_NAME: ClassVar[int] = IGNORED
     SLACKWARE_PSEUDO_FULL_NAME: ClassVar[int] = 172
 
+    T2_NAME: ClassVar[int] = 180
+    T2_FULL_NAME: ClassVar[int] = 181
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -333,6 +336,14 @@ _MAPPINGS = [
         visiblename=NameType.SLACKWARE_NAME,
         projectname_seed=NameType.SLACKWARE_NAME,
         trackname=NameType.SLACKWARE_PSEUDO_FULL_NAME,
+    ),
+    # T2
+    _NameMapping(
+        name=NameType.T2_NAME,
+        srcname=NameType.T2_FULL_NAME,
+        trackname=NameType.T2_NAME,
+        visiblename=NameType.T2_NAME,
+        projectname_seed=NameType.T2_NAME,
     ),
 ]
 

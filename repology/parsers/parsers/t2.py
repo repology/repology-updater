@@ -91,7 +91,8 @@ class T2DescParser(Parser):
 
                 data = _parse_descfile(filename, pkg)
 
-                pkg.add_name(name, NameType.GENERIC_PKGNAME)
+                pkg.add_name(name, NameType.T2_NAME)
+                pkg.add_name(pkgpath, NameType.T2_FULL_NAME)
                 pkg.set_version(data['version'][0])
                 pkg.set_summary(data['title'][0])
 
@@ -112,7 +113,5 @@ class T2DescParser(Parser):
                         pkg.set_flags(PackageFlags.UNTRUSTED)
 
                     pkg.add_downloads(url)
-
-                pkg.set_extra_field('pkgpath', pkgpath)
 
                 yield pkg

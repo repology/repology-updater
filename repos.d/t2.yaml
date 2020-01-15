@@ -21,5 +21,5 @@
     - desc: Package page
       url: 'http://t2sde.org/packages/{name}'
     - desc: Package SVN directory
-      url: 'http://svn.exactcode.de/t2/trunk/package/{pkgpath}/'
+      url: 'http://svn.exactcode.de/t2/trunk/package/{srcname}/'
   tags: [ all, production ]
