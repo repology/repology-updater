@@ -11,7 +11,7 @@
   minpackages: 1400
   sources:
     # Note: no repodata for other repositories
-    - name: [ main/release, contrib/release ]
+    - name: [ main/release, main/updates, contrib/release ]
       fetcher: RepodataFetcher
       parser: RepodataParser
       arch_from_filename: true  # XXX: hack for incorrect data
@@ -34,8 +34,7 @@
   color: '045e9d'
   minpackages: 12000
   sources:
-    # Note: update subrepos are empty
-    - name: [ main/release, non-free/release, restricted/release, unsupported/release, unsupported/contrib/release ]
+    - name: [ main/release, main/updates, non-free/release, non-free/updates, restricted/release, restricted/updates, unsupported/release, unsupported/contrib/release, unsupported/contrib/updates ]
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: 'http://abf-downloads.openmandriva.org/4.0/repository/SRPMS/{source}/'
