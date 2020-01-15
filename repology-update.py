@@ -171,6 +171,7 @@ def process_repositories(env: Environment) -> None:
                     raise
 
             database.update_repository_ruleset_hash(reponame, transformer.get_ruleset_hash())
+            database.mark_repository_parsed(reponame)
             database.commit()
 
 

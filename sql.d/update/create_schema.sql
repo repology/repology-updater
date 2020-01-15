@@ -605,8 +605,9 @@ CREATE TABLE repositories (
 
 	first_seen timestamp with time zone NOT NULL,
 	last_seen timestamp with time zone NOT NULL,
-	last_updated timestamp with time zone NULL,
 	last_fetched timestamp with time zone NULL,
+	last_parsed timestamp with time zone NULL,
+	last_updated timestamp with time zone NULL,
 
 	used_package_fields text[],
 
