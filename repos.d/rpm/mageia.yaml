@@ -23,7 +23,7 @@
       url: https://madb.mageia.org/
   packagelinks:
     - desc: Package details on madb.mageia.org
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{name}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/6/name/{srcname}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_7
@@ -48,7 +48,7 @@
       url: https://madb.mageia.org/
   packagelinks:
     - desc: Package details on madb.mageia.org
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{name}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/7/name/{srcname}'
   tags: [ all, production, mageia, rpm ]
 
 - name: mageia_cauldron
@@ -79,5 +79,5 @@
       # application=0 (show all packages, not only applications)
       # release=cauldron (select release)
       # name=XXX (package name)
-      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/cauldron/name/{name}'
+      url: 'https://madb.mageia.org/package/show/source/1/application/0/release/cauldron/name/{srcname}'
   tags: [ all, production, mageia, rpm ]

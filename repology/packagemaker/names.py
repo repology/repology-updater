@@ -90,6 +90,11 @@ class NameType:
     T2_NAME: ClassVar[int] = 180
     T2_FULL_NAME: ClassVar[int] = 181
 
+    SRCRPM_NAME: ClassVar[int] = 190
+
+    BINRPM_NAME: ClassVar[int] = 200
+    BINRPM_SRCNAME: ClassVar[int] = 201
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -349,6 +354,20 @@ _MAPPINGS = [
         trackname=NameType.T2_NAME,
         visiblename=NameType.T2_NAME,
         projectname_seed=NameType.T2_NAME,
+    ),
+    # RPM
+    _NameMapping(
+        srcname=NameType.SRCRPM_NAME,
+        trackname=NameType.SRCRPM_NAME,
+        visiblename=NameType.SRCRPM_NAME,
+        projectname_seed=NameType.SRCRPM_NAME,
+    ),
+    _NameMapping(
+        srcname=NameType.BINRPM_SRCNAME,
+        binname=NameType.BINRPM_NAME,
+        trackname=NameType.BINRPM_SRCNAME,
+        visiblename=NameType.BINRPM_NAME,
+        projectname_seed=NameType.BINRPM_SRCNAME,
     ),
 ]
 

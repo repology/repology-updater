@@ -21,7 +21,7 @@
       url: https://openmandriva.org/
   packagelinks:
     - desc: Package repository
-      url: 'https://github.com/OpenMandrivaAssociation/{name}'
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
   tags: [ all, production, openmandriva, rpm ]
 
 - name: openmandriva_4
@@ -44,7 +44,7 @@
       url: https://openmandriva.org/
   packagelinks:
     - desc: Package repository
-      url: 'https://github.com/OpenMandrivaAssociation/{name}'
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
   tags: [ all, production, openmandriva, rpm ]
 
 - name: openmandriva_cooker
@@ -68,5 +68,5 @@
       url: https://www.openmandriva.org/
   packagelinks:
     - desc: Package repository
-      url: 'https://github.com/OpenMandrivaAssociation/{name}'
+      url: 'https://github.com/OpenMandrivaAssociation/{srcname}'
   tags: [ all, production, openmandriva, rpm ]

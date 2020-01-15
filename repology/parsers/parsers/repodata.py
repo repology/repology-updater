@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,14 +16,15 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-from typing import Dict, Iterable, List, Optional
+from collections import Counter
+from typing import Dict, Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.maintainers import extract_maintainers
-from repology.parsers.nevra import nevra_construct
+from repology.parsers.nevra import nevra_construct, nevra_parse
 from repology.parsers.sqlite import iter_sqlite
 from repology.parsers.versions import VersionStripper
 from repology.parsers.xml import iter_xml_elements_at_level, safe_findtext
@@ -31,28 +32,46 @@ from repology.transformer import PackageTransformer
 
 
 class RepodataParser(Parser):
-    def __init__(self, allowed_archs: Optional[List[str]] = None) -> None:
-        self.allowed_archs = allowed_archs
+    _src: bool
+    _binary: bool
+
+    def __init__(self, src: bool = True, binary: bool = False) -> None:
+        if not src and not binary:
+            raise RuntimeError('at least one of "src" and "binary" modes for RepodataParser must be enabled')
+
+        self._src = src
+        self._binary = binary
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
-        skipped_archs: Dict[str, int] = {}
+        skipped_archs: Dict[str, int] = Counter()
 
         for entry in iter_xml_elements_at_level(path, 1, ['{http://linux.duke.edu/metadata/common}package']):
+            arch = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}arch')
+
+            is_src = arch == 'src'
+
+            if (is_src and not self._src) or (not is_src and not self._binary):
+                skipped_archs[arch] += 1
+                continue
+
             with factory.begin() as pkg:
-                arch = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}arch')
-
-                if self.allowed_archs and arch not in self.allowed_archs:
-                    skipped_archs[arch] = skipped_archs.get(arch, 0) + 1
-                    continue
-
                 name = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}name')
                 if '%{' in name:
                     pkg.log('incorrect package name (unexpanded substitution)', severity=Logger.ERROR)
                     continue
 
-                pkg.add_name(name, NameType.GENERIC_PKGNAME)
+                if is_src:
+                    pkg.add_name(name, NameType.SRCRPM_NAME)
+                else:
+                    pkg.add_name(name, NameType.BINRPM_NAME)
+                    sourcerpm = safe_findtext(
+                        entry,
+                        '{http://linux.duke.edu/metadata/common}format/'
+                        '{http://linux.duke.edu/metadata/rpm}sourcerpm'
+                    )
+                    pkg.add_name(nevra_parse(sourcerpm)[0], NameType.BINRPM_SRCNAME)
 
                 version_elt = entry.find('{http://linux.duke.edu/metadata/common}version')
                 if version_elt is None:
@@ -95,16 +114,35 @@ class RepodataParser(Parser):
 
 
 class RepodataSqliteParser(Parser):
+    def __init__(self, src: bool = True, binary: bool = False) -> None:
+        if not src and not binary:
+            raise RuntimeError('at least one of "src" and "binary" modes for RepodataParser must be enabled')
+
+        self._src = src
+        self._binary = binary
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
-        for pkgdata in iter_sqlite(path, 'packages',
-                                   ['name', 'version', 'arch', 'epoch',
-                                    'release', 'summary', 'url', 'rpm_group',
-                                    'rpm_license', 'arch', 'rpm_packager']):
+        skipped_archs: Dict[str, int] = Counter()
+
+        wanted_columns = ['name', 'version', 'arch', 'epoch', 'release',
+                          'summary', 'url', 'rpm_group', 'rpm_license',
+                          'arch', 'rpm_packager', 'rpm_sourcerpm']
+
+        for pkgdata in iter_sqlite(path, 'packages', wanted_columns):
+            is_src = pkgdata['arch'] == 'src'
+
+            if (is_src and not self._src) or (not is_src and not self._binary):
+                skipped_archs[pkgdata['arch']] += 1
+                continue
+
             with factory.begin() as pkg:
-                pkg.add_name(pkgdata['name'], NameType.GENERIC_PKGNAME)
+                if is_src:
+                    pkg.add_name(pkgdata['name'], NameType.SRCRPM_NAME)
+                else:
+                    pkg.add_name(pkgdata['name'], NameType.BINRPM_NAME)
+                    pkg.add_name(nevra_parse(pkgdata['rpm_sourcerpm'])[0], NameType.BINRPM_SRCNAME)
 
                 version = pkgdata['version']
 

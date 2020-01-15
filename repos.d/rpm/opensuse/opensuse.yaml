@@ -26,13 +26,11 @@
       parser: RepodataParser
       url: http://download.opensuse.org/update/leap/42.3/oss/
       subrepo: updates/oss
-      allowed_archs: [ src ]
     - name: updates-non-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/update/leap/42.3/non-oss/
       subrepo: updates/non-oss
-      allowed_archs: [ src ]
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -41,9 +39,9 @@
   packagelinks:
     # NOTE: openSUSE:Leap:42.3:Update automatically inherits openSUSE:Leap:42.3
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:42.3:Update/{name}'
+      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:42.3:Update/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_0
@@ -60,25 +58,21 @@
       parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/15.0/repo/oss/
       subrepo: main/oss
-      allowed_archs: [ src ]
     - name: non-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/15.0/repo/non-oss/
       subrepo: main/non-oss
-      allowed_archs: [ src ]
     - name: updates-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/update/leap/15.0/oss/
       subrepo: updates/oss
-      allowed_archs: [ src ]
     - name: updates-non-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/update/leap/15.0/non-oss/
       subrepo: updates/non-oss
-      allowed_archs: [ src ]
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -87,9 +81,9 @@
   packagelinks:
     # NOTE: openSUSE:Leap:15.0:Update automatically inherits openSUSE:Leap:15.0
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.0:Update/{name}'
+      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.0:Update/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_1
@@ -105,25 +99,21 @@
       parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/15.1/repo/oss/
       subrepo: main/oss
-      allowed_archs: [ src ]
     - name: non-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/15.1/repo/non-oss/
       subrepo: main/non-oss
-      allowed_archs: [ src ]
     - name: updates-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/update/leap/15.1/oss/
       subrepo: updates/oss
-      allowed_archs: [ src ]
     - name: updates-non-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/update/leap/15.1/non-oss/
       subrepo: updates/non-oss
-      allowed_archs: [ src ]
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -132,9 +122,9 @@
   packagelinks:
     # NOTE: openSUSE:Leap:15.1:Update automatically inherits openSUSE:Leap:15.1
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.1:Update/{name}'
+      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.1:Update/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_leap_15_2
@@ -150,25 +140,21 @@
       parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/15.2/repo/oss/
       subrepo: main/oss
-      allowed_archs: [ src ]
     - name: non-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/source/distribution/leap/15.2/repo/non-oss/
       subrepo: main/non-oss
-      allowed_archs: [ src ]
     - name: updates-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/update/leap/15.2/oss/
       subrepo: updates/oss
-      allowed_archs: [ src ]
     - name: updates-non-oss
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/update/leap/15.2/non-oss/
       subrepo: updates/non-oss
-      allowed_archs: [ src ]
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
@@ -177,9 +163,9 @@
   packagelinks:
     # NOTE: openSUSE:Leap:15.2:Update automatically inherits openSUSE:Leap:15.2
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.2:Update/{name}'
+      url: 'https://build.opensuse.org/package/show/openSUSE:Leap:15.2:Update/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_tumbleweed
@@ -208,7 +194,7 @@
       url: https://software.opensuse.org/
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/openSUSE:Factory/{name}'
+      url: 'https://build.opensuse.org/package/show/openSUSE:Factory/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]

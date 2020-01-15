@@ -12,11 +12,10 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://repo.merproject.org/obs/mer:/core/latest_aarch64/
-      allowed_archs: ['src']
   repolinks:
     - desc: Mer Project home
       url: http://merproject.org/
   packagelinks:
     - desc: Package page on SailfishOS OBS
-      url: 'https://build.merproject.org/package/show/mer:core/{name}'
+      url: 'https://build.merproject.org/package/show/mer:core/{srcname}'
   tags: [ all, mer, rpm ]  # most packages gone

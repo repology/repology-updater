@@ -15,13 +15,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/fedora/26/SRPMS/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 7 packages
 
 - name: packman_fedora_27
@@ -36,13 +35,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/fedora/27/SRPMS/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 7 packages
 
 - name: packman_fedora_28
@@ -57,13 +55,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/fedora/28/SRPMS/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 6 packages
 
 - name: packman_fedora_29
@@ -78,13 +75,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/fedora/29/SRPMS/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 6 packages
 
 - name: packman_fedora_30
@@ -99,13 +95,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/fedora/30/SRPMS/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 6 packages
 
 - name: packman_factory
@@ -120,13 +115,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/suse/factory/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, packman]  # 3 packages
 
 - name: packman_opensuse_leap_42_3
@@ -142,13 +136,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_42.3/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
 - name: packman_opensuse_leap_15_0
@@ -163,13 +156,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.0/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
 - name: packman_opensuse_leap_15_1
@@ -184,13 +176,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Leap_15.1/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
 - name: packman_opensuse_tumbleweed
@@ -205,13 +196,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/suse/openSUSE_Tumbleweed/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
 - name: packman_sle_12
@@ -226,13 +216,12 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_12/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]
 
 - name: packman_sle_15
@@ -247,11 +236,10 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://mirror.karneval.cz/pub/linux/packman/suse/SLE_15/
-      allowed_archs: [src]
   repolinks:
     - desc: PackMan home
       url: http://packman.links2linux.org/
   packagelinks:
     - desc: PackMan package page
-      url: 'http://packman.links2linux.org/package/{name}'
+      url: 'http://packman.links2linux.org/package/{srcname}'
   tags: [all, production, packman]

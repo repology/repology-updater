@@ -36,9 +36,9 @@
       url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{name}'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
     - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
+      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_27
@@ -69,9 +69,9 @@
       url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{name}'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
     - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
+      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_28
@@ -102,9 +102,9 @@
       url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{name}'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
     - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
+      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]
 
 # Note that we use https://mirror.yandex.ru/fedora instead of https://download.fedoraproject.org/pub/fedora
@@ -138,9 +138,9 @@
       url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{name}'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
     - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
+      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_30
@@ -171,9 +171,9 @@
       url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{name}'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
     - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
+      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_31
@@ -204,9 +204,9 @@
       url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{name}'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
     - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
+      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]
 
 - name: fedora_rawhide
@@ -231,7 +231,7 @@
       url: https://src.fedoraproject.org/
   packagelinks:
     - desc: Package details on Fedora Pagure
-      url: 'https://src.fedoraproject.org/rpms/{name}'
+      url: 'https://src.fedoraproject.org/rpms/{srcname}'
     - desc: Package details on Fedora Packages
-      url: 'https://apps.fedoraproject.org/packages/{name}/overview'
+      url: 'https://apps.fedoraproject.org/packages/{srcname}/overview'
   tags: [ all, production, fedora, rpm ]

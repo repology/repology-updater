@@ -13,12 +13,11 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/Education/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/Education/{name}'
+      url: 'https://build.opensuse.org/package/show/Education/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_emulators_tumbleweed
@@ -33,12 +32,11 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/Emulators/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/Emulators/{name}'
+      url: 'https://build.opensuse.org/package/show/Emulators/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_games_tumbleweed
@@ -53,15 +51,14 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/games/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   repolinks:
     - desc: openSUSE:Games wiki page
       url: https://en.opensuse.org/openSUSE:Games
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/games/{name}'
+      url: 'https://build.opensuse.org/package/show/games/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_graphics_tumbleweed
@@ -76,12 +73,11 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/graphics/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/graphics/{name}'
+      url: 'https://build.opensuse.org/package/show/graphics/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_multimedia_apps_tumbleweed
@@ -96,12 +92,11 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/multimedia:/apps/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/multimedia:apps/{name}'
+      url: 'https://build.opensuse.org/package/show/multimedia:apps/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_multimedia_libs_tumbleweed
@@ -116,12 +111,11 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/multimedia:/libs/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/multimedia:libs/{name}'
+      url: 'https://build.opensuse.org/package/show/multimedia:libs/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_network_tumbleweed
@@ -136,12 +130,11 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/network/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/network/{name}'
+      url: 'https://build.opensuse.org/package/show/network/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_science_tumbleweed
@@ -156,12 +149,11 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/science/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/science/{name}'
+      url: 'https://build.opensuse.org/package/show/science/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_security_tumbleweed
@@ -176,12 +168,11 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/security/{name}'
+      url: 'https://build.opensuse.org/package/show/security/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]
 
 - name: opensuse_hardware_sdr_tumbleweed
@@ -196,10 +187,9 @@
       fetcher: RepodataFetcher
       parser: RepodataParser
       url: http://download.opensuse.org/repositories/hardware:/sdr/openSUSE_Tumbleweed/
-      allowed_archs: ['src']
   packagelinks:
     - desc: Package in openSUSE Build Service
-      url: 'https://build.opensuse.org/package/show/hardware:/sdr/{name}'
+      url: 'https://build.opensuse.org/package/show/hardware:/sdr/{srcname}'
     - desc: Package details on software.opensuse.org
-      url: 'https://software.opensuse.org/package/{name}'
+      url: 'https://software.opensuse.org/package/{srcname}'
   tags: [ all, production, opensuse, rpm ]

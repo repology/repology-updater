@@ -95,7 +95,7 @@
       url: http://en.rosalinux.com/
   packagelinks:
     - desc: Package on abf.io
-      url: 'https://abf.io/import/{name}/tree/rosa2019.1'
+      url: 'https://abf.io/import/{srcname}/tree/rosa2019.1'
   tags: [ all, production, rosa ]
 
 - name: rosa_server_6_9
