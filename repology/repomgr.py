@@ -45,6 +45,8 @@ class RepositoryManager:
 
         # process source loops
         for repo in self._repositories:
+            extratags = set()
+
             newsources = []
             for source in repo['sources']:
                 if source.get('disabled', False):
@@ -58,6 +60,9 @@ class RepositoryManager:
                             newsource[key] = newsource[key].replace('{source}', name)
                     newsource['name'] = name
                     newsources.append(newsource)
+
+                extratags.add(source['fetcher'])
+                extratags.add(source['parser'])
 
             repo['sources'] = newsources
 
@@ -90,6 +95,8 @@ class RepositoryManager:
                     raise RuntimeError('unexpected update_period format')
 
             repo['ruleset'] = set(repo['ruleset'])
+
+            repo['tags'] += list(extratags)
 
             self._repo_by_name[repo['name']] = repo
 
