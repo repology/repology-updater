@@ -259,25 +259,27 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument('-D', '--dsn', default=config['DSN'], help='database connection params')
     parser.add_argument('--enabled-repositories', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) which are enabled and shown in repology')
 
-    actions_grp = parser.add_argument_group('Actions')
-    actions_grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
+    grp = parser.add_argument_group('Initialization actions (destructive!)')
+    grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
 
-    actions_grp.add_argument('-f', '--fetch', action='count', help='fetch repository data (twice to allow updating)')
-    actions_grp.add_argument('-p', '--parse', action='count', help="parse fetched repository data (specify twice to parse even if the fetched data hasn't changed)")
+    grp = parser.add_argument_group('Update actions')
+    grp.add_argument('-f', '--fetch', action='count', help='fetch repository data (twice to allow updating)')
+    grp.add_argument('-p', '--parse', action='count', help="parse fetched repository data (specify twice to parse even if the fetched data hasn't changed)")
+    grp.add_argument('-d', '--database', action='count', help='store in the database (twice to update even if no package changes)')
+    grp.add_argument('-o', '--postupdate', action='store_true', help='perform post-update actions')
 
-    # XXX: this is dangerous as long as ignored packages are removed from dumps
-    actions_grp.add_argument('-i', '--initdb', action='store_true', help='(re)initialize database schema')
-    actions_grp.add_argument('-d', '--database', action='store_true', help='store in the database')
-    actions_grp.add_argument('-o', '--postupdate', action='store_true', help='perform post-update actions')
-    actions_grp.add_argument('-R', '--repositories', action='store_true', help='update repositories')
+    grp = parser.add_argument_group('Extra update actions')
+    grp.add_argument('-R', '--repositories', action='store_true', help='update repositories')
 
-    actions_grp.add_argument('-r', '--dump-rules', action='store_true', help='dump rule statistics')
+    grp = parser.add_argument_group('Informational queries')
+    grp.add_argument('-l', '--list', action='store_true', help='list repositories repology will work on')
+    grp.add_argument('-r', '--dump-rules', action='store_true', help='dump rule statistics')
 
-    flags_grp = parser.add_argument_group('Flags')
-    flags_grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
-    flags_grp.add_argument('--disable-safety-checks', action='store_false', dest='enable_safety_checks', default=not config['ENABLE_SAFETY_CHECKS'], help='disable safety checks on processed repository data')
+    grp = parser.add_argument_group('Flags')
+    grp.add_argument('--enable-safety-checks', action='store_true', dest='enable_safety_checks', default=config['ENABLE_SAFETY_CHECKS'], help='enable safety checks on processed repository data')
+    grp.add_argument('--disable-safety-checks', action='store_false', dest='enable_safety_checks', default=not config['ENABLE_SAFETY_CHECKS'], help='disable safety checks on processed repository data')
 
-    flags_grp.add_argument('--fatal', action='store_true', help='treat single repository processing failure as fatal')
+    grp.add_argument('--fatal', action='store_true', help='treat single repository processing failure as fatal')
 
     parser.add_argument('reponames', default=config['REPOSITORIES'], metavar='repo|tag', nargs='*', help='repository or tag name(s) to process')
 
