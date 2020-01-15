@@ -12,8 +12,7 @@
     - name: [ dev, main, nosystemd ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      #url: 'http://nl.mxrepo.com/antix/jessie/dists/jessie/{source}/source/Sources.gz'
-      url: 'http://ftp.cc.uoc.gr/mirrors/linux/mx/antix/jessie/dists/jessie/{source}/source/Sources.gz'
+      url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/jessie/dists/jessie/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -31,8 +30,7 @@
     - name: [ dev, main, nonfree, nosystemd ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      #url: 'http://nl.mxrepo.com/antix/stretch/dists/stretch/{source}/source/Sources.gz'
-      url: 'http://ftp.cc.uoc.gr/mirrors/linux/mx/antix/stretch/dists/stretch/{source}/source/Sources.gz'
+      url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/stretch/dists/stretch/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
@@ -50,7 +48,7 @@
     - name: [ dev, main, nonfree, nosystemd ]
       fetcher: FileFetcher
       parser: DebianSourcesParser
-      url: 'http://ftp.cc.uoc.gr/mirrors/linux/mx/antix/buster/dists/buster/{source}/source/Sources.gz'
+      url: 'https://mirror.math.princeton.edu/pub/mxlinux/antix/buster/dists/buster/{source}/source/Sources.gz'
       compression: gz
       subrepo: '{source}'
   repolinks:
