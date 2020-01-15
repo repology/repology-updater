@@ -10,6 +10,7 @@
   minpackages: 900
   default_maintainer: fallback-mnt-adelie@repology
   sources:
+    # XXX: add all arches?
     - name: [ system, user ]
       fetcher: TarFetcher
       parser: ApkIndexParser
@@ -20,5 +21,5 @@
       url: https://adelielinux.org/
   packagelinks:
     - desc: APKBUILD
-      url: 'https://code.foxkit.us/adelie/packages/blob/master/{subrepo}/{name}/APKBUILD'
+      url: 'https://code.foxkit.us/adelie/packages/blob/master/{subrepo}/{srcname}/APKBUILD'
   tags: [ all, production, adelie ]

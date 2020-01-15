@@ -20,5 +20,5 @@
       url: https://pkgs.alpinelinux.org/packages
   packagelinks:
     - desc: Package details
-      url: https://pkgs.alpinelinux.org/packages?name={name}
+      url: https://pkgs.alpinelinux.org/packages?name={binname}
   tags: [ all, production, alpine ]

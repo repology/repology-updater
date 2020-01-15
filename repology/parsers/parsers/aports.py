@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -17,7 +17,7 @@
 
 import os
 import re
-from typing import Iterable
+from typing import Dict, Iterable, Iterator
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
@@ -25,7 +25,7 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.transformer import PackageTransformer
 
 
-def normalize_version(version: str) -> str:
+def _normalize_version(version: str) -> str:
     match = re.match('(.*)-r[0-9]+$', version)
     if match is not None:
         version = match.group(1)
@@ -33,30 +33,31 @@ def normalize_version(version: str) -> str:
     return version
 
 
+def _iter_apkindex(path: str) -> Iterator[Dict[str, str]]:
+    with open(path, 'r', encoding='utf-8') as apkindex:
+        state = {}
+        for line in apkindex:
+            line = line.strip()
+            if line:
+                state[line[0]] = line[2:].strip()
+            elif state:
+                yield state
+                state = {}
+
+
 class ApkIndexParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
-        with open(os.path.join(path, 'APKINDEX'), 'r', encoding='utf-8') as apkindex:
-            state = {}
-            for line in apkindex:
-                line = line.strip()
-                if line:
-                    state[line[0]] = line[2:].strip()
-                    continue
+        for pkgdata in _iter_apkindex(os.path.join(path, 'APKINDEX')):
+            with factory.begin(pkgdata['P']) as pkg:
+                pkg.add_name(pkgdata['P'], NameType.APK_BIG_P)
+                pkg.add_name(pkgdata['o'], NameType.APK_SMALL_O)
+                pkg.set_version(pkgdata['V'], _normalize_version)
 
-                # empty line, we can flush our state
-                if state and state['P'] == state['o']:
-                    pkg = factory.begin()
+                pkg.set_summary(pkgdata['T'])
+                pkg.add_homepages(pkgdata['U'])  # XXX: split?
+                pkg.add_licenses(pkgdata['L'])
+                pkg.set_arch(pkgdata['A'])
 
-                    pkg.add_name(state['P'], NameType.GENERIC_PKGNAME)
-                    pkg.set_version(state['V'], normalize_version)
+                pkg.add_maintainers(extract_maintainers(pkgdata.get('m')))
 
-                    pkg.set_summary(state['T'])
-                    pkg.add_homepages(state['U'])  # XXX: split?
-                    pkg.add_licenses(state['L'])
-                    pkg.set_arch(state['A'])
-
-                    pkg.add_maintainers(extract_maintainers(state.get('m')))
-
-                    yield pkg
-
-                state = {}
+                yield pkg
