@@ -27,7 +27,7 @@ from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.nevra import nevra_construct, nevra_parse
 from repology.parsers.sqlite import iter_sqlite
 from repology.parsers.versions import VersionStripper
-from repology.parsers.xml import iter_xml_elements_at_level, safe_findtext
+from repology.parsers.xml import iter_xml_elements_at_level, safe_findtext, safe_getattr
 from repology.transformer import PackageTransformer
 
 
@@ -35,20 +35,35 @@ class RepodataParser(Parser):
     _src: bool
     _binary: bool
 
-    def __init__(self, src: bool = True, binary: bool = False) -> None:
+    # hack for openmandriva 3 which for some reason specifies binary
+    # architectures in '<arch></arch>' for source packages
+    _arch_from_filename: bool
+
+    def __init__(self, src: bool = True, binary: bool = False, arch_from_filename: bool = False) -> None:
         if not src and not binary:
             raise RuntimeError('at least one of "src" and "binary" modes for RepodataParser must be enabled')
 
         self._src = src
         self._binary = binary
+        self._arch_from_filename = arch_from_filename
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_right_greedy('+')
 
         skipped_archs: Dict[str, int] = Counter()
 
+        if self._arch_from_filename:
+            factory.log('mitigation for incorrect <arch></arch> enabled', severity=Logger.WARNING)
+
         for entry in iter_xml_elements_at_level(path, 1, ['{http://linux.duke.edu/metadata/common}package']):
-            arch = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}arch')
+            if self._arch_from_filename:
+                # XXX: openmandriva 3 hack, to be removed when it EoLs
+                location_elt = entry.find('{http://linux.duke.edu/metadata/common}location')
+                if location_elt is None:
+                    raise RuntimeError('Cannot find <location> element')
+                arch = nevra_parse(safe_getattr(location_elt, 'href'))[4]
+            else:
+                arch = safe_findtext(entry, '{http://linux.duke.edu/metadata/common}arch')
 
             is_src = arch == 'src'
 

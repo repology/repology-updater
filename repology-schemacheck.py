@@ -180,9 +180,10 @@ schemas = {
                     # some common fetcher args
                     'fetch_timeout': Any(int, float),
 
-                    # rpm parser
+                    # rpm parser(s)
                     'src': bool,
                     'binary': bool,
+                    'arch_from_filename': bool,
 
                     # srclist parser
                     'encoding': Any('utf-8', 'cp1251'),

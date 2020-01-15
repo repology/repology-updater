@@ -14,6 +14,7 @@
     - name: [ main/release, contrib/release ]
       fetcher: RepodataFetcher
       parser: RepodataParser
+      arch_from_filename: true  # XXX: hack for incorrect data
       url: 'http://abf-downloads.openmandriva.org/3.0/repository/SRPMS/{source}/'
       subrepo: '{source}'
   repolinks:
