@@ -169,7 +169,6 @@
       url: http://download.opensuse.org/update/leap/15.2/non-oss/
       subrepo: updates/non-oss
       allowed_archs: [ src ]
-      disabled: true # not there yet
   repolinks:
     - desc: openSUSE home
       url: https://www.opensuse.org/
