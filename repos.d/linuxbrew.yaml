@@ -22,5 +22,5 @@
       url: https://github.com/Linuxbrew
   packagelinks:
     - desc: Brew formula
-      url: 'https://github.com/Linuxbrew/homebrew-core/blob/master/Formula/{name}.rb'
+      url: 'https://github.com/Linuxbrew/homebrew-core/blob/master/Formula/{srcname}.rb'
   tags: [ all, production, brew ]
