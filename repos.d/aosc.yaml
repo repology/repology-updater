@@ -6,6 +6,7 @@
   desc: AOSC
   family: aosc
   minpackages: 4500
+  # XXX: remove - there's no maintainer concept, just last committer is tracked
   default_maintainer: fallback-mnt-aosc@repology  # 4 cases of `"committer" : "test <test>"`
   sources:
     - name: staging
@@ -19,5 +20,7 @@
       url: https://packages.aosc.io/
   packagelinks:
     - desc: Package details
-      url: 'https://packages.aosc.io/packages/{name}'
+      url: 'https://packages.aosc.io/packages/{binname}'
+    - desc: Package sources on GitHub
+      url: 'https://github.com/AOSC-Dev/{tree}/tree/{branch}/{srcname}'
   tags: [ all, production ]

@@ -95,6 +95,10 @@ class NameType:
     BINRPM_NAME: ClassVar[int] = 200
     BINRPM_SRCNAME: ClassVar[int] = 201
 
+    AOSC_NAME: ClassVar[int] = 210
+    AOSC_DIRECTORY: ClassVar[int] = IGNORED
+    AOSC_FULLPATH: ClassVar[int] = 212
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -368,6 +372,16 @@ _MAPPINGS = [
         trackname=NameType.BINRPM_SRCNAME,
         visiblename=NameType.BINRPM_NAME,
         projectname_seed=NameType.BINRPM_SRCNAME,
+    ),
+    # AOSC
+    _NameMapping(
+        srcname=NameType.AOSC_FULLPATH,
+        binname=NameType.AOSC_NAME,
+        trackname=NameType.AOSC_FULLPATH,
+        visiblename=NameType.AOSC_NAME,
+        # XXX: we could use AOSC_DIRECTORY here, as in fact it's closer to basename,
+        # however, the difference is very minor and there are some pessimizations
+        projectname_seed=NameType.AOSC_NAME,
     ),
 ]
 

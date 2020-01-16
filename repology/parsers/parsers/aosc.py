@@ -1,5 +1,5 @@
 # Copyright (C) 2017 Dingyuan Wang <gumblex@aosc.io>
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,14 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import json
 from typing import Iterable
 
 from repology.logger import Logger
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
-from repology.parsers.maintainers import extract_maintainers
+from repology.parsers.json import iter_json_list
 from repology.parsers.versions import VersionStripper
 from repology.transformer import PackageTransformer
 
@@ -32,22 +31,34 @@ class AoscPkgsParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         normalize_version = VersionStripper().strip_left(':')
 
-        with open(path, 'r', encoding='utf-8') as jsonfile:
-            for package in json.load(jsonfile)['packages']:
-                pkg = factory.begin()
+        for pkgdata in iter_json_list(path, ('packages', None)):
+            with factory.begin() as pkg:
+                pkg.add_name(pkgdata['name'], NameType.AOSC_NAME)
+                pkg.add_name(pkgdata['directory'], NameType.AOSC_DIRECTORY)
+                pkg.add_name(
+                    '{}-{}/{}'.format(
+                        pkgdata['category'],
+                        pkgdata['section'],
+                        pkgdata['directory'],
+                    ),
+                    NameType.AOSC_FULLPATH
+                )
 
-                pkg.add_name(package['name'], NameType.GENERIC_PKGNAME)
+                pkg.set_extra_field('tree', pkgdata['tree'])
+                pkg.set_extra_field('branch', pkgdata['branch'])
 
-                if package['version'] is None:
+                if pkgdata['version'] is None:
                     pkg.log('no version defined', Logger.ERROR)
                     continue
 
-                pkg.set_version(package['version'], normalize_version)
+                pkg.set_version(pkgdata['version'], normalize_version)
 
-                pkg.set_rawversion(package['full_version'])
-                pkg.add_categories(package['pkg_section'], package['section'])
-                pkg.set_summary(package['description'])
-                pkg.add_maintainers(extract_maintainers(package['committer']))
+                pkg.set_rawversion(pkgdata['full_version'])
+                pkg.add_categories(pkgdata['pkg_section'], pkgdata['section'])
+                pkg.set_summary(pkgdata['description'])
+
+                # just a committer, doesn't seem suitable
+                #pkg.add_maintainers(extract_maintainers(pkgdata['committer']))
 
                 if pkg.version == '999':
                     pkg.set_flags(PackageFlags.IGNORE)  # XXX: rolling? revisit
