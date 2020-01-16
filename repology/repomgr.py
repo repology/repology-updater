@@ -83,7 +83,7 @@ class RepositoryManager:
                 repo['minpackages'] = 0
 
             if 'update_period' not in repo:
-                repo['update_period'] = 3600  # XXX: default update period - move to config?
+                repo['update_period'] = 600  # XXX: default update period - move to config?
             elif isinstance(repo['update_period'], str):
                 if repo['update_period'].endswith('m'):
                     repo['update_period'] = int(repo['update_period'][:-1]) * 60
