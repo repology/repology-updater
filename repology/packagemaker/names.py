@@ -99,6 +99,10 @@ class NameType:
     AOSC_DIRECTORY: ClassVar[int] = IGNORED
     AOSC_FULLPATH: ClassVar[int] = 212
 
+    MACPORTS_NAME: ClassVar[int] = 220
+    MACPORTS_PORTDIR: ClassVar[int] = 221
+    MACPORTS_PORTNAME: ClassVar[int] = IGNORED
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -383,6 +387,17 @@ _MAPPINGS = [
         # XXX: we could use AOSC_DIRECTORY here, as in fact it's closer to basename,
         # however, the difference is very minor and there are some pessimizations
         projectname_seed=NameType.AOSC_NAME,
+    ),
+    # MacPorts
+    _NameMapping(
+        srcname=NameType.MACPORTS_PORTDIR,
+        binname=NameType.MACPORTS_NAME,
+        # Note: generally that'd be PORTDIR, but a port may contain packages of different versions
+        # (example is haskell-platform), and there are no NAME conflict
+        trackname=NameType.MACPORTS_NAME,
+        visiblename=NameType.MACPORTS_NAME,
+        # XXX: may use PORTNAME as well, but this leads to some pessimizations
+        projectname_seed=NameType.MACPORTS_NAME,
     ),
 ]
 

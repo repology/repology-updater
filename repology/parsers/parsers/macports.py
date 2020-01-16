@@ -17,6 +17,7 @@
 
 from typing import Iterable
 
+from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.parsers.json import iter_json_list
@@ -34,7 +35,11 @@ class MacPortsJsonParser(Parser):
                 if 'replaced_by' in pkgdata:
                     continue
 
-                pkg.add_name(pkgdata['name'], NameType.GENERIC_PKGNAME)
+                portname = pkgdata['portdir'].split('/')[1]
+
+                pkg.add_name(pkgdata['name'], NameType.MACPORTS_NAME)
+                pkg.add_name(pkgdata['portdir'], NameType.MACPORTS_PORTDIR)
+                pkg.add_name(portname, NameType.MACPORTS_PORTNAME)
                 pkg.set_version(pkgdata['version'], normalize_version)
                 pkg.set_summary(pkgdata.get('description'))
                 pkg.add_homepages(pkgdata.get('homepage'))
@@ -53,7 +58,8 @@ class MacPortsJsonParser(Parser):
                 if not pkgdata['maintainers']:
                     pkg.add_maintainers('nomaintainer@macports.org')
 
-                pkg.set_extra_field('portdir', pkgdata['portdir'])
-                pkg.set_extra_field('portname', pkgdata['portdir'].split('/')[1])
+                # If portname is used as name
+                if pkgdata['name'] == portname + '-devel':
+                    pkg.set_flags(PackageFlags.IGNORE)
 
                 yield pkg

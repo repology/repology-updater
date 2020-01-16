@@ -19,6 +19,8 @@
     - desc: MacPorts GitHub repository
       url: https://github.com/macports/macports-ports
   packagelinks:
+    - desc: Port page on MacPorts.org
+      url: 'https://ports.macports.org/port/{binname}/summary'
     - desc: Port directory in GitHub repository
-      url: 'https://github.com/macports/macports-ports/blob/master/{portdir}'
+      url: 'https://github.com/macports/macports-ports/blob/master/{srcname}'
   tags: [ all, production ]
