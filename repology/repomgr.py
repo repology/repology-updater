@@ -96,7 +96,7 @@ class RepositoryManager:
 
             repo['ruleset'] = set(repo['ruleset'])
 
-            repo['tags'] += list(extratags)
+            repo.setdefault('tags', []).extend(extratags)
 
             self._repo_by_name[repo['name']] = repo
 
