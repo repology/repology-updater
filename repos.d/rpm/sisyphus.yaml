@@ -22,9 +22,9 @@
       url: https://en.altlinux.org/Sisyphus
   packagelinks:
     - desc: Package details
-      url: 'https://packages.altlinux.org/en/sisyphus/srpms/{name}'
+      url: 'https://packages.altlinux.org/en/sisyphus/srpms/{srcname}'
     - desc: Spec file
-      url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{name}'
+      url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{srcname}'
   tags: [ all, production, sisyphus ]
 
 - name: alt_p9
@@ -48,9 +48,9 @@
       url: http://en.altlinux.org/p9
   packagelinks:
     - desc: Package details
-      url: 'https://packages.altlinux.org/en/p9/srpms/{name}'
+      url: 'https://packages.altlinux.org/en/p9/srpms/{srcname}'
     - desc: Spec file
-      url: 'https://packages.altlinux.org/en/p9/specfiles/{name}'
+      url: 'https://packages.altlinux.org/en/p9/specfiles/{srcname}'
   tags: [ all, production, sisyphus ]
 
 # automatically imported packages; duplicate already existing packages and versions,

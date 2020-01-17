@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -33,24 +33,31 @@ class SrcListParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for header in rpm.readHeaderListFromFile(path):
             with factory.begin() as pkg:
-                fields = {
-                    key: str(header[key], self.encoding) if header[key] is not None else None
-                    for key in ['name', 'version', 'release', 'packager', 'group', 'summary', 'arch']
+                assert(header.isSource())  # binary packages not supported yet
+
+                pkgdata = {
+                    rpm.tagnames[key].lower() if key in rpm.tagnames else key:
+                    value.decode(self.encoding, errors='ignore') if isinstance(value, bytes) else value
+                    for key, value in dict(header).items()
                 }
 
-                pkg.add_name(fields['name'], NameType.GENERIC_PKGNAME)
-                pkg.set_version(fields['version'])  # XXX: handle release
+                # For Sisyphus (but not PCLinuxOS), there is pkgdata[1000011], which contains
+                # a different name (for instance, for GLEW there is libGLEW-devel)
+                # May use is for some other purposes
 
-                if fields['version'] is None:
+                pkg.add_name(pkgdata['name'], NameType.SRCRPM_NAME)
+                pkg.set_version(pkgdata['version'])  # XXX: handle release
+
+                if pkgdata['version'] is None:
                     raise RuntimeError('version not defined')
 
-                pkg.set_rawversion(nevra_construct(None, header['epoch'], fields['version'], fields['release']))
+                pkg.set_rawversion(nevra_construct(None, header['epoch'], pkgdata['version'], pkgdata['release']))
 
-                if fields['packager']:
-                    pkg.add_maintainers(extract_maintainers(fields['packager']))  # XXX: may have multiple maintainers
+                if 'packager' in pkgdata:
+                    pkg.add_maintainers(extract_maintainers(pkgdata['packager']))  # XXX: may have multiple maintainers
 
-                pkg.add_categories(fields['group'])
-                pkg.set_summary(fields['summary'])
-                pkg.set_arch(fields['arch'])
+                pkg.add_categories(pkgdata['group'])
+                pkg.set_summary(pkgdata['summary'])
+                pkg.set_arch(pkgdata['arch'])
 
                 yield pkg
