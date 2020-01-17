@@ -25,7 +25,7 @@
       url: 'https://packages.altlinux.org/en/sisyphus/srpms/{name}'
     - desc: Spec file
       url: 'https://packages.altlinux.org/en/sisyphus/specfiles/{name}'
-  tags: [ all, production ]
+  tags: [ all, production, sisyphus ]
 
 - name: alt_p9
   type: repository
@@ -51,7 +51,7 @@
       url: 'https://packages.altlinux.org/en/p9/srpms/{name}'
     - desc: Spec file
       url: 'https://packages.altlinux.org/en/p9/specfiles/{name}'
-  tags: [ all, production ]
+  tags: [ all, production, sisyphus ]
 
 # automatically imported packages; duplicate already existing packages and versions,
 # and has it's own comparison and garbage problems, so not enabled in production
