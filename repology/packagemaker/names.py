@@ -307,7 +307,8 @@ _MAPPINGS = [
     ),
     # Debian
     _NameMapping(
-        name=NameType.DEBIAN_PACKAGE,
+        srcname=NameType.DEBIAN_PACKAGE,
+        trackname=NameType.DEBIAN_PACKAGE,
         visiblename=NameType.DEBIAN_PACKAGE,
         projectname_seed=NameType.DEBIAN_PACKAGE,
     ),

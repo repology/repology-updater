@@ -20,5 +20,5 @@
       url: http://maemo.org/
   packagelinks:
     - desc: Maemo package entry
-      url: "http://maemo.org/downloads/product/Maemo5/{name}/"
+      url: "http://maemo.org/downloads/product/Maemo5/{srcname}/"
   tags: [ all, production, maemo ]

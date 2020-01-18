@@ -23,7 +23,7 @@
       url: 'https://www.bunsenlabs.org/repoidx.html'
   packagelinks:
     - desc: 'Package details'
-      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
+      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
   tags: [ all, production, bunsenlabs ]
 
 - name: bunsenlabs_helium
@@ -48,7 +48,7 @@
       url: 'https://www.bunsenlabs.org/repoidx.html'
   packagelinks:
     - desc: 'Package details'
-      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
+      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
   tags: [ all, production, bunsenlabs ]
 
 - name: bunsenlabs_jessie_backports
@@ -73,7 +73,7 @@
       url: 'https://www.bunsenlabs.org/repoidx.html'
   packagelinks:
     - desc: 'Package details'
-      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
+      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
   tags: [ all, production, bunsenlabs ]
 
 - name: bunsenlabs_stretch_backports
@@ -98,5 +98,5 @@
       url: 'https://www.bunsenlabs.org/repoidx.html'
   packagelinks:
     - desc: 'Package details'
-      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={name}'
+      url: 'https://www.bunsenlabs.org/repoidx.html?k=name-description&v={srcname}'
   tags: [ all, production, bunsenlabs ]

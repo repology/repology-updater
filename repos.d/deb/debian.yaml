@@ -24,13 +24,13 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/oldstable/source/{name}'
+      url: 'https://packages.debian.org/oldstable/source/{srcname}'
     - desc: Related bugs in Debian bugzilla
-      url: 'https://bugs.debian.org/{name}'
+      url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
-      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=oldstable'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=oldstable'
     - desc: Popularity contest statistics
-      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]
 
 - name: debian_stable
@@ -56,13 +56,13 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/stable/source/{name}'
+      url: 'https://packages.debian.org/stable/source/{srcname}'
     - desc: Related bugs in Debian bugzilla
-      url: 'https://bugs.debian.org/{name}'
+      url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
-      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=stable'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable'
     - desc: Popularity contest statistics
-      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]
 
 - name: debian_stable_backports
@@ -88,13 +88,13 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/stable-backports/source/{name}'
+      url: 'https://packages.debian.org/stable-backports/source/{srcname}'
     - desc: Related bugs in Debian bugzilla
-      url: 'https://bugs.debian.org/{name}'
+      url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
-      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=stable-backports'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=stable-backports'
     - desc: Popularity contest statistics
-      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]
 
 - name: debian_testing
@@ -120,13 +120,13 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/testing/source/{name}'
+      url: 'https://packages.debian.org/testing/source/{srcname}'
     - desc: Related bugs in Debian bugzilla
-      url: 'https://bugs.debian.org/{name}'
+      url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
-      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=testing'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=testing'
     - desc: Popularity contest statistics
-      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]
 
 - name: debian_unstable
@@ -152,13 +152,13 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/unstable/source/{name}'
+      url: 'https://packages.debian.org/unstable/source/{srcname}'
     - desc: Related bugs in Debian bugzilla
-      url: 'https://bugs.debian.org/{name}'
+      url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
-      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=unstable'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=unstable'
     - desc: Popularity contest statistics
-      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian, have_testdata ]
 
 - name: debian_experimental
@@ -185,11 +185,11 @@
       url: https://buildd.debian.org/
   packagelinks:
     - desc: Package details on packages.debian.org
-      url: 'https://packages.debian.org/experimental/source/{name}'
+      url: 'https://packages.debian.org/experimental/source/{srcname}'
     - desc: Related bugs in Debian bugzilla
-      url: 'https://bugs.debian.org/{name}'
+      url: 'https://bugs.debian.org/{srcname}'
     - desc: Package auto-building status
-      url: 'https://buildd.debian.org/status/package.php?p={name}&suite=exprimental'
+      url: 'https://buildd.debian.org/status/package.php?p={srcname}&suite=exprimental'
     - desc: Popularity contest statistics
-      url: 'https://qa.debian.org/popcon-graph.php?packages={name}'
+      url: 'https://qa.debian.org/popcon-graph.php?packages={srcname}'
   tags: [ all, production, debian ]

@@ -24,11 +24,11 @@
       url: https://packages.ubuntu.com/precise/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_12_04_backports
@@ -54,11 +54,11 @@
       url: https://packages.ubuntu.com/precise/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_14_04
@@ -84,13 +84,13 @@
       url: https://packages.ubuntu.com/trusty/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'https://packages.ubuntu.com/source/trusty/{name}'
+      url: 'https://packages.ubuntu.com/source/trusty/{srcname}'
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_14_04_backports
@@ -116,11 +116,11 @@
       url: https://packages.ubuntu.com/trusty/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_16_04
@@ -146,13 +146,13 @@
       url: https://packages.ubuntu.com/xenial/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'https://packages.ubuntu.com/source/xenial/{name}'
+      url: 'https://packages.ubuntu.com/source/xenial/{srcname}'
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_16_04_backports
@@ -178,11 +178,11 @@
       url: https://packages.ubuntu.com/xenial/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_18_04
@@ -208,13 +208,13 @@
       url: https://packages.ubuntu.com/bionic/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'https://packages.ubuntu.com/source/bionic/{name}'
+      url: 'https://packages.ubuntu.com/source/bionic/{srcname}'
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_18_04_backports
@@ -240,11 +240,11 @@
       url: https://packages.ubuntu.com/bionic/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_18_10
@@ -270,13 +270,13 @@
       url: https://packages.ubuntu.com/cosmic/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'https://packages.ubuntu.com/source/cosmic/{name}'
+      url: 'https://packages.ubuntu.com/source/cosmic/{srcname}'
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_18_10_backports
@@ -302,11 +302,11 @@
       url: https://packages.ubuntu.com/cosmic/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_19_04
@@ -331,13 +331,13 @@
       url: https://packages.ubuntu.com/disco/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'https://packages.ubuntu.com/source/disco/{name}'
+      url: 'https://packages.ubuntu.com/source/disco/{srcname}'
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_19_04_backports
@@ -362,11 +362,11 @@
       url: https://packages.ubuntu.com/disco/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_19_04_proposed
@@ -391,11 +391,11 @@
       url: https://packages.ubuntu.com/disco/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_19_10
@@ -420,13 +420,13 @@
       url: https://packages.ubuntu.com/eoan/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'https://packages.ubuntu.com/source/eoan/{name}'
+      url: 'https://packages.ubuntu.com/source/eoan/{srcname}'
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_19_10_backports
@@ -451,11 +451,11 @@
       url: https://packages.ubuntu.com/eoan/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_19_10_proposed
@@ -480,11 +480,11 @@
       url: https://packages.ubuntu.com/eoan/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_20_04
@@ -509,13 +509,13 @@
       url: https://packages.ubuntu.com/focal/
   packagelinks:
     - desc: Package details on packages.ubuntu.com
-      url: 'https://packages.ubuntu.com/source/focal/{name}'
+      url: 'https://packages.ubuntu.com/source/focal/{srcname}'
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]
 
 - name: ubuntu_20_04_backports
@@ -540,11 +540,11 @@
       url: https://packages.ubuntu.com/focal/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, ubuntu ]  # empty
 
 - name: ubuntu_20_04_proposed
@@ -569,9 +569,9 @@
       url: https://packages.ubuntu.com/focal/
   packagelinks:
     - desc: Package on Launchpad.net
-      url: 'https://launchpad.net/ubuntu/+source/{name}'
+      url: 'https://launchpad.net/ubuntu/+source/{srcname}'
     - desc: Related bugs on Launchpad.net
-      url: 'https://bugs.launchpad.net/ubuntu/+source/{name}'
+      url: 'https://bugs.launchpad.net/ubuntu/+source/{srcname}'
     - desc: Package builds on launchpad
-      url: 'https://launchpad.net/ubuntu/+builds?build_text={name}&build_state=all'
+      url: 'https://launchpad.net/ubuntu/+builds?build_text={srcname}&build_state=all'
   tags: [ all, production, ubuntu ]

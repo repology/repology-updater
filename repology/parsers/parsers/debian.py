@@ -126,15 +126,16 @@ class DebianSourcesParser(Parser):
 class OpenWrtSourcesParser(DebianSourcesParser):
     def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
         source = pkgdata.get('Source')
-        if source:
-            pkgpath = source.split('/')
-            pkg.add_name(pkgpath[-1], NameType.OPENWRT_SOURCEDIR)
-            pkg.set_extra_field('srcname', pkgpath[-1])
-            pkg.set_extra_field('path', '/'.join(pkgpath[2:]))
-            if pkgpath[2:4] == ['lang', 'python']:
-                # All python modules are in lang/python, but not of lang/python are python modules
-                # some are prefixe by python- or python3-, some are not
-                # as a result, there's no reliable way to detect python modules and there may be
-                # name clashes, (itsdangerous, xmltodict)
-                # Prevent these by marking as untrusted
-                pkg.set_flags(PackageFlags.UNTRUSTED)
+        assert(source)
+
+        pkgpath = source.split('/')
+        pkg.add_name(pkgpath[-1], NameType.OPENWRT_SOURCEDIR)
+        pkg.set_extra_field('srcname', pkgpath[-1])
+        pkg.set_extra_field('path', '/'.join(pkgpath[2:]))
+        if pkgpath[2:4] == ['lang', 'python']:
+            # All python modules are in lang/python, but not all of lang/python are python modules
+            # some are prefixed by python- or python3-, some are not
+            # as a result, there's no reliable way to detect python modules and there may be
+            # name clashes, (itsdangerous, xmltodict)
+            # Prevent these by marking as untrusted
+            pkg.set_flags(PackageFlags.UNTRUSTED)

@@ -23,5 +23,5 @@
       url: https://www.kali.org/
   packagelinks:
     - desc: Git repository
-      url: 'http://git.kali.org/gitweb/?p=packages/{name}.git'
+      url: 'http://git.kali.org/gitweb/?p=packages/{srcname}.git'
   tags: [ all, production, kali ]
