@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -27,17 +27,18 @@ class RPMFTPListParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         with open(path) as listfile:
             for line in listfile:
-                pkg = factory.begin()
+                with factory.begin() as pkg:
+                    filename = line.strip().split()[-1]
 
-                filename = line.strip().split()[-1]
+                    name, epoch, version, release, arch = nevra_parse(filename)
 
-                name, epoch, version, release, arch = nevra_parse(filename)
+                    assert(arch == 'src')
 
-                pkg.add_name(name, NameType.GENERIC_PKGNAME)
-                pkg.set_version(version)
-                pkg.set_rawversion(nevra_construct(None, epoch, version, release))
-                pkg.set_arch(arch)
+                    pkg.add_name(name, NameType.SRCRPM_NAME)
+                    pkg.set_version(version)
+                    pkg.set_rawversion(nevra_construct(None, epoch, version, release))
+                    pkg.set_arch(arch)
 
-                pkg.set_extra_field('nevr', filename.rsplit('.', 2)[0])
+                    pkg.set_extra_field('nevr', filename.rsplit('.', 2)[0])
 
-                yield pkg
+                    yield pkg
