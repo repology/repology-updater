@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -27,11 +27,14 @@ class SalixPackagesJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for item in iter_json_list(path, ('packages', None)):
             with factory.begin() as pkg:
-                pkg.add_name(item['name'], NameType.GENERIC_PKGNAME)
+                pkg.add_name(item['name'], NameType.SALIX_NAME)
                 pkg.set_version(item['ver'])
                 pkg.set_summary(item['descs'])
                 pkg.set_arch(item['arch'])
 
-                pkg.set_extra_field('location', item['loc'])
+                # May be potentially useful for packagelinks, but not used now
+                # as there's no way to generate package-specific link to
+                # https://packages.salixos.org/#!
+                #pkg.set_extra_field('location', item['loc'])
 
                 yield pkg

@@ -30,7 +30,9 @@ class NameType:
     GENERIC_PKGNAME: ClassVar[int] = 10
 
     # Common patterns: single name
-    GENERIC_SN_NAME: ClassVar[int] = 1000
+    GENERIC_GEN_NAME: ClassVar[int] = 1000
+    GENERIC_SRC_NAME: ClassVar[int] = 1001
+    GENERIC_BIN_NAME: ClassVar[int] = 1002
 
     # Common patterns: name + optional basename
     GENERIC_NOBN_NAME: ClassVar[int] = 1010
@@ -103,56 +105,58 @@ class NameType:
     MACPORTS_PORTDIR: ClassVar[int] = 221
     MACPORTS_PORTNAME: ClassVar[int] = IGNORED
 
-    BUCKAROO_NAME: ClassVar[int] = GENERIC_SN_NAME
+    BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
-    TERMUX_NAME: ClassVar[int] = GENERIC_SN_NAME
+    TERMUX_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    VCPKG_SOURCE: ClassVar[int] = GENERIC_SN_NAME
+    VCPKG_SOURCE: ClassVar[int] = GENERIC_GEN_NAME
 
-    GOBOLINUX_RECIPE: ClassVar[int] = GENERIC_SN_NAME
+    GOBOLINUX_RECIPE: ClassVar[int] = GENERIC_GEN_NAME
 
-    GUIX_NAME: ClassVar[int] = GENERIC_SN_NAME
+    GUIX_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    RUBYGEMS_NAME: ClassVar[int] = GENERIC_SN_NAME
+    RUBYGEMS_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    CPAN_NAME: ClassVar[int] = GENERIC_SN_NAME
+    CPAN_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    LUAROCKS_NAME: ClassVar[int] = GENERIC_SN_NAME
+    LUAROCKS_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    CRATESIO_ID: ClassVar[int] = GENERIC_SN_NAME
+    CRATESIO_ID: ClassVar[int] = GENERIC_GEN_NAME
 
-    ELPA_NAME: ClassVar[int] = GENERIC_SN_NAME
+    ELPA_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    CRAN_NAME: ClassVar[int] = GENERIC_SN_NAME
+    CRAN_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    HACKAGE_NAME: ClassVar[int] = GENERIC_SN_NAME
+    HACKAGE_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    STACKAGE_NAME: ClassVar[int] = GENERIC_SN_NAME
+    STACKAGE_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    DISTROWATCH_NAME: ClassVar[int] = GENERIC_SN_NAME
+    DISTROWATCH_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    FRESHCODE_NAME: ClassVar[int] = GENERIC_SN_NAME
+    FRESHCODE_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    RAVENPORTS_NAMEBASE: ClassVar[int] = GENERIC_SN_NAME
+    RAVENPORTS_NAMEBASE: ClassVar[int] = GENERIC_GEN_NAME
 
-    SCOOP_NAME: ClassVar[int] = GENERIC_SN_NAME
+    SCOOP_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    CRUX_NAME: ClassVar[int] = GENERIC_SN_NAME
+    CRUX_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    KISS_NAME: ClassVar[int] = GENERIC_SN_NAME
+    KISS_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    HPUX_NAME: ClassVar[int] = GENERIC_SN_NAME
+    HPUX_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    OS4DEPOT_NAME: ClassVar[int] = GENERIC_SN_NAME
+    OS4DEPOT_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    KWORT_NAME: ClassVar[int] = GENERIC_SN_NAME
+    KWORT_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    JUSTINSTALL_NAME: ClassVar[int] = GENERIC_SN_NAME
+    JUSTINSTALL_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    DISTRI_NAME: ClassVar[int] = GENERIC_SN_NAME
+    DISTRI_NAME: ClassVar[int] = GENERIC_GEN_NAME
 
-    APK_NAME: ClassVar[int] = GENERIC_SN_NAME
+    APK_NAME: ClassVar[int] = GENERIC_GEN_NAME
+
+    SALIX_NAME: ClassVar[int] = GENERIC_SRC_NAME
 
     MSYS2_NAME: ClassVar[int] = GENERIC_NOBN_NAME
     MSYS2_BASENAME: ClassVar[int] = GENERIC_NOBN_BASENAME
@@ -235,10 +239,22 @@ _MAPPINGS = [
         projectname_seed=NameType.GENERIC_NOBN_BASENAME,
     ),
     _NameMapping(
-        name=NameType.GENERIC_SN_NAME,
-        trackname=NameType.GENERIC_SN_NAME,
-        visiblename=NameType.GENERIC_SN_NAME,
-        projectname_seed=NameType.GENERIC_SN_NAME,
+        name=NameType.GENERIC_GEN_NAME,
+        trackname=NameType.GENERIC_GEN_NAME,
+        visiblename=NameType.GENERIC_GEN_NAME,
+        projectname_seed=NameType.GENERIC_GEN_NAME,
+    ),
+    _NameMapping(
+        srcname=NameType.GENERIC_SRC_NAME,
+        trackname=NameType.GENERIC_SRC_NAME,
+        visiblename=NameType.GENERIC_SRC_NAME,
+        projectname_seed=NameType.GENERIC_SRC_NAME,
+    ),
+    _NameMapping(
+        binname=NameType.GENERIC_BIN_NAME,
+        trackname=NameType.GENERIC_BIN_NAME,
+        visiblename=NameType.GENERIC_BIN_NAME,
+        projectname_seed=NameType.GENERIC_BIN_NAME,
     ),
     _NameMapping(
         srcname=NameType.GENERIC_CATNAME_FULL_NAME,
