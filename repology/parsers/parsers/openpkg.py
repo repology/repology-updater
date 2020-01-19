@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -21,6 +21,7 @@ from typing import Iterable
 from repology.package import PackageFlags
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.xml import safe_findalltexts, safe_findtext
 from repology.transformer import PackageTransformer
 
 
@@ -30,23 +31,23 @@ class OpenPkgRdfParser(Parser):
 
         repository = root.find('{http://www.openpkg.org/xml-rdf-index/0.9}Repository')
 
-        for item in repository.findall('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description'):  # type: ignore
-            pkg = factory.begin()
+        assert(repository is not None)
 
-            pkg.add_name(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Name').text, NameType.GENERIC_PKGNAME)  # type: ignore
-            pkg.set_version(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Version').text)  # type: ignore
-            pkg.add_licenses(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}License').text)  # type: ignore
-            pkg.set_summary(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Summary').text)  # type: ignore
-            pkg.add_categories(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Group').text)  # type: ignore
-            pkg.add_homepages(item.find('{http://www.openpkg.org/xml-rdf-index/0.9}URL').text)  # type: ignore
+        for item in repository.findall('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description'):
+            with factory.begin() as pkg:
+                pkg.add_name(safe_findtext(item, '{http://www.openpkg.org/xml-rdf-index/0.9}Name'), NameType.SRCRPM_NAME)
+                pkg.set_version(safe_findtext(item, '{http://www.openpkg.org/xml-rdf-index/0.9}Version'))
+                pkg.add_licenses(item.findtext('{http://www.openpkg.org/xml-rdf-index/0.9}License'))
+                pkg.set_summary(item.findtext('{http://www.openpkg.org/xml-rdf-index/0.9}Summary'))
+                pkg.add_categories(item.findtext('{http://www.openpkg.org/xml-rdf-index/0.9}Group'))
+                pkg.add_homepages(item.findtext('{http://www.openpkg.org/xml-rdf-index/0.9}URL'))
 
-            for source in item.findall('./{http://www.openpkg.org/xml-rdf-index/0.9}Source/{http://www.w3.org/1999/02/22-rdf-syntax-ns#}bag/{http://www.w3.org/1999/02/22-rdf-syntax-ns#}li'):
-                text = source.text
-                if (text.startswith('https://') or text.startswith('http://') or text.startswith('ftp://')) and 'openpkg.org' not in text:  # type: ignore
-                    pkg.add_downloads(text)
+                for source in safe_findalltexts(item, './{http://www.openpkg.org/xml-rdf-index/0.9}Source/{http://www.w3.org/1999/02/22-rdf-syntax-ns#}bag/{http://www.w3.org/1999/02/22-rdf-syntax-ns#}li'):
+                    if (source.startswith('https://') or source.startswith('http://') or source.startswith('ftp://')) and 'openpkg.org' not in source:
+                        pkg.add_downloads(source)
 
-            release = item.find('{http://www.openpkg.org/xml-rdf-index/0.9}Release').text  # type: ignore
-            if pkg.version.endswith(release):
-                pkg.set_flags(PackageFlags.UNTRUSTED)
+                release = safe_findtext(item, '{http://www.openpkg.org/xml-rdf-index/0.9}Release')
+                if pkg.version.endswith(release):
+                    pkg.set_flags(PackageFlags.UNTRUSTED)
 
-            yield pkg
+                yield pkg
