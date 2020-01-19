@@ -105,6 +105,9 @@ class NameType:
     MACPORTS_PORTDIR: ClassVar[int] = 221
     MACPORTS_PORTNAME: ClassVar[int] = IGNORED
 
+    PISI_NAME: ClassVar[int] = 230
+    PISI_PKGDIR: ClassVar[int] = 231
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -414,6 +417,13 @@ _MAPPINGS = [
         visiblename=NameType.MACPORTS_NAME,
         # XXX: may use PORTNAME as well, but this leads to some pessimizations
         projectname_seed=NameType.MACPORTS_NAME,
+    ),
+    # Pisi
+    _NameMapping(
+        srcname=NameType.PISI_NAME,
+        trackname=NameType.PISI_PKGDIR,
+        visiblename=NameType.PISI_NAME,
+        projectname_seed=NameType.PISI_NAME,
     ),
 ]
 
