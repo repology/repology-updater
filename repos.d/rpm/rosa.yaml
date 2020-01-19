@@ -25,7 +25,7 @@
       url: http://en.rosalinux.com/
   packagelinks:
     - desc: Package on abf.io
-      url: 'https://abf.io/import/{name}/tree/rosa2014.1'
+      url: 'https://abf.io/import/{srcname}/tree/rosa2014.1'
   tags: [ all, production, rosa ]
 
 - name: rosa_2016_1
@@ -48,7 +48,7 @@
       url: http://en.rosalinux.com/
   packagelinks:
     - desc: Package on abf.io
-      url: 'https://abf.io/import/{name}/tree/rosa2016.1'
+      url: 'https://abf.io/import/{srcname}/tree/rosa2016.1'
   tags: [ all, production, rosa ]
 
 - name: rosa_2019_0
@@ -71,7 +71,7 @@
       url: http://en.rosalinux.com/
   packagelinks:
     - desc: Package on abf.io
-      url: 'https://abf.io/import/{name}/tree/rosa2019.0'
+      url: 'https://abf.io/import/{srcname}/tree/rosa2019.0'
   tags: [ all, production, rosa ]
 
 # Note: since Rosa 2019.1, use of urpmi metadate (info.xml) is discouraged

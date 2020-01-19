@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -34,7 +34,9 @@ class RosaInfoXmlParser(Parser):
             with factory.begin() as pkg:
                 name, epoch, version, release, arch = nevra_parse(info.attrib['fn'])
 
-                pkg.add_name(name, NameType.GENERIC_PKGNAME)
+                assert(arch == 'src')
+
+                pkg.add_name(name, NameType.SRCRPM_NAME)
                 pkg.set_version(version)
                 pkg.set_rawversion(nevra_construct(None, epoch, version, release))
                 pkg.set_arch(arch)
