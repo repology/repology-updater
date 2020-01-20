@@ -21,9 +21,9 @@
       url: https://github.com/pisilinux
   packagelinks:
     - desc: Git directory
-      url: 'https://github.com/pisilinux/{subrepo}/tree/master/{pspecdir}'
+      url: 'https://github.com/pisilinux/{subrepo}/tree/master/{srcname}'
     - desc: pspec.xml
-      url: 'https://github.com/pisilinux/{subrepo}/blob/master/{pspecdir}/pspec.xml'
+      url: 'https://github.com/pisilinux/{subrepo}/blob/master/{srcname}/pspec.xml'
   tags: [ all, production, pisi ]
 
 - name: pisi_contrib
@@ -44,7 +44,7 @@
       url: https://github.com/pisilinux
   packagelinks:
     - desc: Git directory
-      url: 'https://github.com/pisilinux/contrib/tree/master/{pspecdir}'
+      url: 'https://github.com/pisilinux/contrib/tree/master/{srcname}'
     - desc: pspec.xml
-      url: 'https://github.com/pisilinux/contrib/blob/master/{pspecdir}/pspec.xml'
+      url: 'https://github.com/pisilinux/contrib/blob/master/{srcname}/pspec.xml'
   tags: [ all, production, pisi ]

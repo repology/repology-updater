@@ -55,8 +55,6 @@ class PisiParser(Parser):
                 pkg.add_categories(map(lambda el: el.text, root.findall('./Source/IsA')))
                 pkg.add_maintainers(map(lambda el: el.text, root.findall('./Source/Packager/Email')))
 
-                pkg.set_extra_field('pspecdir', pkgdir)
-
                 lastupdate = max(root.findall('./History/Update'), key=lambda el: int(el.attrib['release']))
                 pkg.set_version(safe_findtext(lastupdate, './Version'))
 

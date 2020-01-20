@@ -420,9 +420,9 @@ _MAPPINGS = [
     ),
     # Pisi
     _NameMapping(
-        srcname=NameType.PISI_NAME,
+        srcname=NameType.PISI_PKGDIR,
         trackname=NameType.PISI_PKGDIR,
-        visiblename=NameType.PISI_NAME,
+        visiblename=NameType.PISI_NAME,  # PKGDIR is too long and NAMES are unique
         projectname_seed=NameType.PISI_NAME,
     ),
 ]
