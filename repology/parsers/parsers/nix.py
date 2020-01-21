@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2016-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -154,7 +154,8 @@ class NixJsonParser(Parser):
                     pname = match.group(1)
                     version = match.group(2)
 
-                pkg.add_name(pname, NameType.GENERIC_PKGNAME)
+                pkg.add_name(key, NameType.NIX_ATTRIBUTE_PATH)
+                pkg.add_name(pname, NameType.NIX_PNAME)
                 pkg.set_version(version)
 
                 meta = packagedata['meta']
@@ -165,7 +166,7 @@ class NixJsonParser(Parser):
 
                 # XXX: mode to rules
                 if pname.endswith('-git'):
-                    pkg.add_name(pname[:-4], NameType.GENERIC_PKGNAME)
+                    pkg.add_name(pname[:-4], NameType.NIX_PNAME)
                     pkg.set_flags(PackageFlags.IGNORE)
 
                 # XXX: mode to rules

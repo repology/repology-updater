@@ -115,6 +115,9 @@ class NameType:
     OPENINDIANA_FMRI: ClassVar[int] = 240
     OPENINDIANA_NAME: ClassVar[int] = 241
 
+    NIX_PNAME: ClassVar[int] = 250
+    NIX_ATTRIBUTE_PATH: ClassVar[int] = 251
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -439,6 +442,13 @@ _MAPPINGS = [
         trackname=NameType.OPENINDIANA_NAME,
         visiblename=NameType.OPENINDIANA_NAME,  # FRMI is too long
         projectname_seed=NameType.OPENINDIANA_NAME,
+    ),
+    # Nix
+    _NameMapping(
+        name=NameType.NIX_PNAME,  # it's unknown which is src and bin names for nix
+        trackname=NameType.NIX_ATTRIBUTE_PATH,
+        visiblename=NameType.NIX_PNAME,
+        projectname_seed=NameType.NIX_PNAME,
     ),
 ]
 
