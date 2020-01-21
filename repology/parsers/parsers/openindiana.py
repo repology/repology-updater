@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2018-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -15,18 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
-import shlex
-from typing import Dict, Iterable, Tuple
+import re
+from collections import defaultdict
+from typing import Any, Dict, Iterable, List, Tuple
 
 from jsonslicer import JsonSlicer
 
-from repology.logger import Logger
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
 from repology.transformer import PackageTransformer
 
 
-def _iter_packages(path: str) -> Iterable[Tuple[str, Dict[str, str]]]:
+def _iter_packages(path: str) -> Iterable[Tuple[str, Dict[str, Any]]]:
     with open(path, 'rb') as jsonfile:
         for summary_key, fmri, _, pkgdata in JsonSlicer(jsonfile, (None, None, None), path_mode='full'):
             if summary_key.startswith('_'):  # e.g. _SIGNATURE
@@ -38,59 +38,48 @@ def _iter_packages(path: str) -> Iterable[Tuple[str, Dict[str, str]]]:
             yield fmri, pkgdata
 
 
+def _parse_actions(actions: List[str]) -> Dict[str, List[str]]:
+    variables: Dict[str, List[str]] = defaultdict(list)
+
+    for action in actions:
+        match = re.fullmatch('set(?: last-fmri=[^ ]+)? name=([^ ]+)( value=.*)', action)
+        if match is None:
+            raise RuntimeError(f'cannot parse action "{action}"')
+
+        for value in match.group(2).split(' value=')[1:]:
+            if value.startswith('"') and value.endswith('"') or value.startswith("'") and value.endswith("'"):
+                value = value[1:-1]
+            variables[match.group(1)].append(value)
+
+    return variables
+
+
 class OpenIndianaSummaryJsonParser(Parser):
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for fmri, pkgdata in _iter_packages(path):
-            pkg = factory.begin('{} {}'.format(fmri, pkgdata['version']))
+            with factory.begin(f'{fmri} {pkgdata["version"]}') as pkg:
+                variables = _parse_actions(pkgdata['actions'])
 
-            pkg.set_extra_field('fmri', fmri)
-
-            variables = {}
-            for action in pkgdata['actions']:
-                tokens = shlex.split(action)
-
-                if not tokens or tokens.pop(0) != 'set':
-                    factory.log('unrecognized action ' + action, severity=Logger.ERROR)
+                # these are entries without name, likely not really packages
+                # skip these early to avoid parsing other stuff and polluting logs with warnings
+                if 'com.oracle.info.name' not in variables or 'com.oracle.info.version' not in variables:
                     continue
 
-                key = None
-                value = []
+                # Regarding comment requirement: there are some packages which lack it,
+                # however for ALL of them have counterparts with comment and some
+                # additional fields (category, homepage, downloads). Packages without
+                # comment look like legacy, and it's OK and desirable to drop them here
+                if 'pkg.summary' not in variables:
+                    continue
 
-                for token in tokens:
-                    if token.startswith('name='):
-                        key = token[5:]
-                    elif token.startswith('value='):
-                        value.append(token[6:])
-                    elif token.startswith('last-fmri='):
-                        pass
-                    else:
-                        factory.log('unrecognized token ' + token, severity=Logger.ERROR)
-                        continue
+                pkg.add_name(variables['com.oracle.info.name'][0], NameType.OPENINDIANA_NAME)
+                pkg.add_name(fmri, NameType.OPENINDIANA_FMRI)
 
-                if key and value:
-                    variables[key] = value
+                pkg.set_version(variables['com.oracle.info.version'][0])
+                pkg.set_summary(variables['pkg.summary'][0])
+                pkg.add_categories(cat.rsplit(':', 1)[-1] for cat in variables.get('info.classification', []))
 
-            # these are entries without name, likely not really packages
-            # skip these early to avoid parsing other stuff and polluting logs with warnings
-            if 'com.oracle.info.name' not in variables or 'com.oracle.info.version' not in variables:
-                continue
+                pkg.add_homepages(variables.get('info.upstream-url'))
+                pkg.add_downloads(variables.get('info.source-url'))
 
-            # Regarding comment requirement: there are some packages which lack it,
-            # however for ALL of them have counterparts with comment and some
-            # additional fields (category, homepage, downloads). Packages without
-            # comment look like legacy, and it's OK and desirable to drop them here
-            if 'pkg.summary' not in variables:
-                continue
-
-            pkg.add_name(variables['com.oracle.info.name'][0], NameType.GENERIC_PKGNAME)
-            pkg.set_version(variables['com.oracle.info.version'][0])
-            pkg.set_summary(variables['pkg.summary'][0])
-
-            for category in variables.get('info.classification', []):
-                if category.startswith('org.opensolaris.category.2008:'):
-                    pkg.add_categories(category.split(':', 1)[1])
-
-            pkg.add_homepages(variables.get('info.upstream-url'))
-            pkg.add_downloads(variables.get('info.source-url'))
-
-            yield pkg
+                yield pkg

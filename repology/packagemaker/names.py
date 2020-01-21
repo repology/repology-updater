@@ -112,6 +112,9 @@ class NameType:
     PISI_NAME: ClassVar[int] = 230
     PISI_PKGDIR: ClassVar[int] = 231
 
+    OPENINDIANA_FMRI: ClassVar[int] = 240
+    OPENINDIANA_NAME: ClassVar[int] = 241
+
     BUCKAROO_NAME: ClassVar[int] = GENERIC_GEN_NAME
     BUCKAROO_FILENAME: ClassVar[int] = IGNORED
 
@@ -428,6 +431,14 @@ _MAPPINGS = [
         trackname=NameType.PISI_PKGDIR,
         visiblename=NameType.PISI_NAME,  # PKGDIR is too long and NAMES are unique
         projectname_seed=NameType.PISI_NAME,
+    ),
+    # OpenIndiana
+    _NameMapping(
+        srcname=NameType.OPENINDIANA_NAME,
+        binname=NameType.OPENINDIANA_FMRI,
+        trackname=NameType.OPENINDIANA_NAME,
+        visiblename=NameType.OPENINDIANA_NAME,  # FRMI is too long
+        projectname_seed=NameType.OPENINDIANA_NAME,
     ),
 ]
 

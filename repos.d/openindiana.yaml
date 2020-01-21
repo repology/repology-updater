@@ -32,5 +32,5 @@
   # but we can fallback to github search
   packagelinks:
     - desc: GitHub search in the source repository
-      url: 'https://github.com/OpenIndiana/oi-userland/search?q={name}+filename%3AMakefile&type=Code'
+      url: 'https://github.com/OpenIndiana/oi-userland/search?q={srcname}+filename%3AMakefile&type=Code'
   tags: [ all, production ]
