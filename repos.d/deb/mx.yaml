@@ -25,7 +25,7 @@
       url: http://mxrepo.com/MX15packages.html
   packagelinks:
     - desc: Package directory on mxrepo.com
-      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{srcname}'
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
 - name: mx_15_testing
@@ -52,7 +52,7 @@
       url: http://mxrepo.com/MX15packages.html
   packagelinks:
     - desc: Package directory on mxrepo.com
-      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{name|libfirstletter}/{srcname}'
+      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
 - name: mx_16
@@ -79,7 +79,7 @@
       url: http://mxrepo.com/MX16packages.html
   packagelinks:
     - desc: Package directory on mxrepo.com
-      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{srcname}'
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
 - name: mx_17
@@ -104,7 +104,7 @@
       url: http://mxrepo.com/
   packagelinks:
     - desc: Package directory on mxrepo.com
-      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{srcname}'
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
 - name: mx_17_testing
@@ -129,7 +129,7 @@
       url: http://mxrepo.com/
   packagelinks:
     - desc: Package directory on mxrepo.com
-      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{name|libfirstletter}/{srcname}'
+      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
 - name: mx_19
@@ -154,7 +154,7 @@
       url: http://mxrepo.com/
   packagelinks:
     - desc: Package directory on mxrepo.com
-      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{name|libfirstletter}/{srcname}'
+      url: 'http://mxrepo.com/mx/repo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
 
 - name: mx_19_testing
@@ -179,5 +179,5 @@
       url: http://mxrepo.com/
   packagelinks:
     - desc: Package directory on mxrepo.com
-      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{name|libfirstletter}/{srcname}'
+      url: 'http://mxrepo.com/mx/testrepo/pool/{subrepo}/{srcname|libfirstletter}/{srcname}'
   tags: [ all, production, mx ]
