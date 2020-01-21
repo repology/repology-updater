@@ -18,5 +18,5 @@
       url: https://pld-linux.org/
   packagelinks:
     - desc: Package git repository
-      url: https://git.pld-linux.org/?p=packages/{name}.git;a=summary
+      url: https://git.pld-linux.org/?p=packages/{srcname}.git;a=summary
   tags: [ all, production ]
