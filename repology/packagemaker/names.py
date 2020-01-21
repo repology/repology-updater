@@ -58,7 +58,8 @@ class NameType:
 
     OPENWRT_PACKAGE: ClassVar[int] = 60
     OPENWRT_SOURCE: ClassVar[int] = 61
-    OPENWRT_SOURCEDIR: ClassVar[int] = 62
+    OPENWRT_SOURCENAME: ClassVar[int] = IGNORED
+    OPENWRT_SOURCEDIR: ClassVar[int] = 63
 
     WIKI_TITLE: ClassVar[int] = 70
     WIKI_PAGE: ClassVar[int] = 71

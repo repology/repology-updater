@@ -125,12 +125,17 @@ class OpenWrtPackagesParser(DebianSourcesParser):
         pkg.add_name(pkgdata['Package'], NameType.OPENWRT_PACKAGE)
         pkg.add_name(pkgpath[-1], NameType.OPENWRT_SOURCEDIR)
         pkg.add_name(pkgdata['Source'], NameType.OPENWRT_SOURCE)
-        pkg.set_extra_field('srcname', pkgpath[-1])
-        pkg.set_extra_field('path', '/'.join(pkgpath[2:]))
+        pkg.add_name(pkgdata['SourceName'], NameType.OPENWRT_SOURCENAME)
+        pkg.set_arch(pkgdata['Architecture'])
+
         if pkgpath[2:4] == ['lang', 'python']:
             # All python modules are in lang/python, but not all of lang/python are python modules
             # some are prefixed by python- or python3-, some are not
             # as a result, there's no reliable way to detect python modules and there may be
             # name clashes, (itsdangerous, xmltodict)
             # Prevent these by marking as untrusted
+            pkg.set_flags(PackageFlags.UNTRUSTED)
+
+        if pkgpath[2:4] == ['lang' 'erlang']:
+            # modules with their own versions packages as a single entity
             pkg.set_flags(PackageFlags.UNTRUSTED)
