@@ -54,8 +54,11 @@ class NameType:
     NPACKD_FULLNAME: ClassVar[int] = 41
     NPACKD_LASTNAME: ClassVar[int] = 42
 
-    DEBIAN_PACKAGE: ClassVar[int] = 50
-    OPENWRT_SOURCEDIR: ClassVar[int] = 51
+    DEBIAN_SOURCE_PACKAGE: ClassVar[int] = 50
+
+    OPENWRT_PACKAGE: ClassVar[int] = 60
+    OPENWRT_SOURCE: ClassVar[int] = 61
+    OPENWRT_SOURCEDIR: ClassVar[int] = 62
 
     WIKI_TITLE: ClassVar[int] = 70
     WIKI_PAGE: ClassVar[int] = 71
@@ -330,15 +333,15 @@ _MAPPINGS = [
     ),
     # Debian
     _NameMapping(
-        srcname=NameType.DEBIAN_PACKAGE,
-        trackname=NameType.DEBIAN_PACKAGE,
-        visiblename=NameType.DEBIAN_PACKAGE,
-        projectname_seed=NameType.DEBIAN_PACKAGE,
+        srcname=NameType.DEBIAN_SOURCE_PACKAGE,
+        trackname=NameType.DEBIAN_SOURCE_PACKAGE,
+        visiblename=NameType.DEBIAN_SOURCE_PACKAGE,
+        projectname_seed=NameType.DEBIAN_SOURCE_PACKAGE,
     ),
     _NameMapping(
-        name=NameType.DEBIAN_PACKAGE,
-        basename=NameType.OPENWRT_SOURCEDIR,
-        visiblename=NameType.DEBIAN_PACKAGE,
+        binname=NameType.OPENWRT_PACKAGE,
+        srcname=NameType.OPENWRT_SOURCE,
+        visiblename=NameType.OPENWRT_PACKAGE,
         projectname_seed=NameType.OPENWRT_SOURCEDIR,
     ),
     # Wiki

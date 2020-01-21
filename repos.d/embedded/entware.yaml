@@ -10,7 +10,7 @@
   sources:
     - name: [ aarch64-k3.10, armv5sf-k3.2, armv7sf-k2.6, armv7sf-k3.2, mipselsf-k3.4, mipssf-k3.4, x64-k3.2 ]
       fetcher: FileFetcher
-      parser: OpenWrtSourcesParser
+      parser: OpenWrtPackagesParser
       url: 'https://bin.entware.net/{source}/Packages.manifest'
       subrepo: '{source}'
   repolinks:

@@ -12,7 +12,7 @@
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
-      parser: OpenWrtSourcesParser
+      parser: OpenWrtPackagesParser
       # the official URL is really
       # 'https://downloads.openwrt.org/releases/17.01.7/packages/x86_64/{source}/Packages.manifest'
       # but releases/17.01.*/packages is a link to ../packages-17.01 common to all 17.01 releases,
@@ -24,7 +24,7 @@
       url: https://openwrt.org/
   packagelinks:
     - desc: OpenWrt package page (for 18.06)
-      url: 'https://openwrt.org/packages/pkgdata/{name}'
+      url: 'https://openwrt.org/packages/pkgdata/{binname}'
   tags: [ all, production, openwrt ]
 
 - name: openwrt_18_06_x86_64
@@ -38,7 +38,7 @@
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
-      parser: OpenWrtSourcesParser
+      parser: OpenWrtPackagesParser
       # the official URL is really
       # 'https://downloads.openwrt.org/releases/18.06.4/packages/x86_64/{source}/Packages.manifest'
       # but releases/18.06.*/packages is a link to ../packages-18.06 common to all 18.06 releases,
@@ -50,7 +50,7 @@
       url: https://openwrt.org/
   packagelinks:
     - desc: OpenWrt package page  # XXX: only available for this branch
-      url: 'https://openwrt.org/packages/pkgdata/{name}'
+      url: 'https://openwrt.org/packages/pkgdata/{binname}'
   # TODO: source-dependent packagelinks
   # base: https://github.com/openwrt/openwrt/tree/openwrt-18.06/{path}
   # luci: https://github.com/openwrt/luci/tree/openwrt-18.06/{path}
@@ -70,7 +70,7 @@
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
-      parser: OpenWrtSourcesParser
+      parser: OpenWrtPackagesParser
       url: 'https://downloads.openwrt.org/releases/packages-19.07/x86_64/{source}/Packages.manifest'
       subrepo: '{source}'
   repolinks:
@@ -78,7 +78,7 @@
       url: https://openwrt.org/
   packagelinks:
     - desc: OpenWrt package page (for 18.06)
-      url: 'https://openwrt.org/packages/pkgdata/{name}'
+      url: 'https://openwrt.org/packages/pkgdata/{binname}'
   tags: [ all, production, openwrt ]
 
 - name: openwrt_snapshot_x86_64
@@ -92,7 +92,7 @@
   sources:
     - name: [ base, luci, packages, routing, telephony ]
       fetcher: FileFetcher
-      parser: OpenWrtSourcesParser
+      parser: OpenWrtPackagesParser
       url: 'https://downloads.openwrt.org/snapshots/packages/x86_64/{source}/Packages.manifest'
       subrepo: '{source}'
   shadow: true
@@ -101,5 +101,5 @@
       url: https://openwrt.org/
   packagelinks:
     - desc: OpenWrt package page (for 18.06)
-      url: 'https://openwrt.org/packages/pkgdata/{name}'
+      url: 'https://openwrt.org/packages/pkgdata/{binname}'
   tags: [ all, openwrt ]  # disabled: like LEDE, it's too blinky

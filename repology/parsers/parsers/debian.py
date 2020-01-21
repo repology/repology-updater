@@ -101,35 +101,30 @@ def _iter_packages(path: str) -> Iterable[Dict[str, str]]:
 
 class DebianSourcesParser(Parser):
     def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
-        pass
+        assert('Binary' in pkgdata)
+        assert('Source' not in pkgdata)
+        pkg.add_name(pkgdata['Package'], NameType.DEBIAN_SOURCE_PACKAGE)
 
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for pkgdata in _iter_packages(path):
-            pkg = factory.begin()
+            with factory.begin(pkgdata['Package']) as pkg:
+                pkg.set_version(pkgdata['Version'], _normalize_version)
+                pkg.add_maintainers(extract_maintainers(pkgdata.get('Maintainer', '')))
+                pkg.add_maintainers(extract_maintainers(pkgdata.get('Uploaders', '')))
+                pkg.add_categories(pkgdata.get('Section'))
+                pkg.add_homepages(pkgdata.get('Homepage'))
 
-            pkg.add_name(pkgdata['Package'], NameType.DEBIAN_PACKAGE)
-            pkg.set_version(pkgdata['Version'], _normalize_version)
-            pkg.add_maintainers(extract_maintainers(pkgdata.get('Maintainer', '')))
-            pkg.add_maintainers(extract_maintainers(pkgdata.get('Uploaders', '')))
-            pkg.add_categories(pkgdata.get('Section'))
-            pkg.add_homepages(pkgdata.get('Homepage'))
+                self._extra_handling(pkg, pkgdata)
 
-            source = pkgdata.get('Source')
-            if source:
-                pkg.set_extra_field('source', source)
-
-            self._extra_handling(pkg, pkgdata)
-
-            yield pkg
+                yield pkg
 
 
-class OpenWrtSourcesParser(DebianSourcesParser):
+class OpenWrtPackagesParser(DebianSourcesParser):
     def _extra_handling(self, pkg: PackageMaker, pkgdata: Dict[str, str]) -> None:
-        source = pkgdata.get('Source')
-        assert(source)
-
-        pkgpath = source.split('/')
+        pkgpath = pkgdata['Source'].split('/')
+        pkg.add_name(pkgdata['Package'], NameType.OPENWRT_PACKAGE)
         pkg.add_name(pkgpath[-1], NameType.OPENWRT_SOURCEDIR)
+        pkg.add_name(pkgdata['Source'], NameType.OPENWRT_SOURCE)
         pkg.set_extra_field('srcname', pkgpath[-1])
         pkg.set_extra_field('path', '/'.join(pkgpath[2:]))
         if pkgpath[2:4] == ['lang', 'python']:
