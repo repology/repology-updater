@@ -125,7 +125,8 @@ class OpenWrtPackagesParser(DebianSourcesParser):
         pkg.add_name(pkgdata['Package'], NameType.OPENWRT_PACKAGE)
         pkg.add_name(pkgpath[-1], NameType.OPENWRT_SOURCEDIR)
         pkg.add_name(pkgdata['Source'], NameType.OPENWRT_SOURCE)
-        pkg.add_name(pkgdata['SourceName'], NameType.OPENWRT_SOURCENAME)
+        if 'SourceName' in pkgdata:  # not present in openwrt < 19_07
+            pkg.add_name(pkgdata['SourceName'], NameType.OPENWRT_SOURCENAME)
         pkg.set_arch(pkgdata['Architecture'])
 
         if pkgpath[2:4] == ['lang', 'python']:
