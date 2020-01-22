@@ -221,6 +221,9 @@ schemas = {
 
                     # openbsd parser
                     'path_to_database': Any(None, str),
+
+                    # kiss parser
+                    'maintainer_from_git': bool,
                 }
             ],
             'shadow': bool,

@@ -1,4 +1,4 @@
-# Copyright (C) 2019 Dmitry Marakasov <amdmi3@amdmi3.ru>
+# Copyright (C) 2019-2020 Dmitry Marakasov <amdmi3@amdmi3.ru>
 #
 # This file is part of repology
 #
@@ -16,10 +16,12 @@
 # along with repology.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import subprocess
 from typing import Iterable
 
 from repology.packagemaker import NameType, PackageFactory, PackageMaker
 from repology.parsers import Parser
+from repology.parsers.maintainers import extract_maintainers
 from repology.parsers.walk import walk_tree
 from repology.transformer import PackageTransformer
 
@@ -29,6 +31,11 @@ def _is_good_download(download: str) -> bool:
 
 
 class KissGitParser(Parser):
+    _maintainer_from_git: bool
+
+    def __init__(self, maintainer_from_git: bool = False):
+        self._maintainer_from_git = maintainer_from_git
+
     def iter_parse(self, path: str, factory: PackageFactory, transformer: PackageTransformer) -> Iterable[PackageMaker]:
         for versionpath in walk_tree(path, name='version'):
             rootdir = os.path.dirname(versionpath)
@@ -53,5 +60,16 @@ class KissGitParser(Parser):
 
                 pkg.set_extra_field('path', pkgpath)
                 pkg.set_subrepo(subrepo)
+
+                if self._maintainer_from_git:
+                    command = ['git', 'log', '-1', '--format=tformat:%ae', os.path.relpath(versionpath, path)]
+                    with subprocess.Popen(command,
+                                          stdout=subprocess.PIPE,
+                                          encoding='utf-8',
+                                          errors='ignore',
+                                          cwd=path) as git:
+                        lastauthor, _ = git.communicate()
+
+                    pkg.add_maintainers(extract_maintainers(lastauthor))
 
                 yield pkg

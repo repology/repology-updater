@@ -11,6 +11,7 @@
     - name: repository
       fetcher: GitFetcher
       parser: KissGitParser
+      maintainer_from_git: true
       url: 'https://github.com/CarbsLinux/repository.git'
       sparse_checkout: [ '**/version', '**/sources' ]
   repolinks:
