@@ -267,10 +267,12 @@ class PackageMaker(PackageMakerBase):
 
         names = self._name_mapper.get_mapped_names()
 
+        if names.trackname is None:
+            raise RuntimeError('Attempt to spawn Package with unset trackname')
         if names.visiblename is None:
-            raise RuntimeError('Attempt to spawn Package with unset visible name')
+            raise RuntimeError('Attempt to spawn Package with unset visiblename')
         if names.projectname_seed is None:
-            raise RuntimeError('Attempt to spawn Package with unset project name seed')
+            raise RuntimeError('Attempt to spawn Package with unset projectname_seed')
         if self._package.version is None:
             raise RuntimeError('Attempt to spawn Package with unset version')
 
