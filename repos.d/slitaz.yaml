@@ -4,6 +4,7 @@
 - name: slitaz_cooking
   type: repository
   desc: SliTaz Cooking
+  statsgroup: SliTaz
   family: slitaz
   minpackages: 5200
   sources:
@@ -27,6 +28,7 @@
 - name: slitaz_next
   type: repository
   desc: SliTaz Next
+  statsgroup: SliTaz
   family: slitaz
   ruleset: [slitaz,slitaz_next]
   minpackages: 5200

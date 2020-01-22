@@ -6,6 +6,7 @@
 - name: crux_32
   type: repository
   desc: CRUX 3.2
+  statsgroup: CRUX
   family: crux
   minpackages: 1000
   sources:
@@ -29,6 +30,7 @@
 - name: crux_33
   type: repository
   desc: CRUX 3.3
+  statsgroup: CRUX
   family: crux
   minpackages: 1000
   sources:
@@ -52,6 +54,7 @@
 - name: crux_34
   type: repository
   desc: CRUX 3.4
+  statsgroup: CRUX
   family: crux
   minpackages: 1000
   sources:
@@ -75,6 +78,7 @@
 - name: crux_35
   type: repository
   desc: CRUX 3.5
+  statsgroup: CRUX
   family: crux
   minpackages: 1000
   sources:

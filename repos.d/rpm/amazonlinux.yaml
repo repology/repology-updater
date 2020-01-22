@@ -4,6 +4,7 @@
 - name: amazon_1
   type: repository
   desc: Amazon Linux 1
+  statsgroup: Amazon
   family: fedora
   minpackages: 2000
   sources:
@@ -20,6 +21,7 @@
 - name: amazon_2
   type: repository
   desc: Amazon Linux 2
+  statsgroup: Amazon
   family: fedora
   minpackages: 2000
   sources:

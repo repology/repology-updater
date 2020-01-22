@@ -101,6 +101,7 @@
 - name: rosa_server_6_9
   type: repository
   desc: Rosa Server 6.9
+  statsgroup: Rosa Server
   family: rosa
   ruleset: [rosa, rpm]
   color: '3757a1'
@@ -120,6 +121,7 @@
 - name: rosa_server_7_3
   type: repository
   desc: Rosa Server 7.3
+  statsgroup: Rosa Server
   family: rosa
   ruleset: [rosa, rpm]
   color: '3757a1'
@@ -139,6 +141,7 @@
 - name: rosa_server_7_5
   type: repository
   desc: Rosa Server 7.5
+  statsgroup: Rosa Server
   family: rosa
   ruleset: [rosa, rpm]
   color: '3757a1'
